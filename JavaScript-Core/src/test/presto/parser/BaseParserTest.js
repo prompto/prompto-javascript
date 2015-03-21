@@ -9,7 +9,7 @@ function getResourcesFolder() {
 	while(path.basename(presto)!=="Presto") {
 		presto = path.dirname(presto);
 	}
-	return path.normalize(presto + path.sep + "Test" + path.sep + "resources");
+	return path.normalize(presto + path.sep + "presto-tests" + path.sep + "Tests" + path.sep + "resources");
 }
 
 var resourcesFolder = getResourcesFolder();

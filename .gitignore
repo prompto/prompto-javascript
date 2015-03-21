@@ -1,4 +1,3 @@
-
-JavaScript-Core/.project
-
+**/.idea/*
 **/.settings/*
+**/node_modules/*
