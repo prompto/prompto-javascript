@@ -1,0 +1,61 @@
+var Variable = require("../runtime/Variable").Variable;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var DocumentType = require("../type/DocumentType").DocumentType;
+
+function VariableInstance(name) {
+	this.name = name;
+	return this;
+}
+
+VariableInstance.prototype.toDialect = function(writer) {
+    writer.append(this.name);
+};
+
+VariableInstance.prototype.toString = function() {
+    return this.name;
+};
+
+VariableInstance.prototype.checkAssignValue = function(context, expression) {
+	var type = expression.check(context);
+	var actual = context.getRegisteredValue(this.name);
+	if(actual==null) {
+		expression.check(context);
+		context.registerValue(new Variable(this.name, type));
+	} else {
+		// need to check type compatibility
+		type.checkAssignableTo(context,actual.type);
+	}
+};
+
+VariableInstance.prototype.checkAssignMember = function(context, memberName) {
+	var actual = context.getRegisteredValue(this.name);
+	if(actual==null) {
+		throw new SyntaxError("Unknown variable:" + this.name);
+	}
+	if(actual.getType(context)!=DocumentType.instance) {
+		throw new SyntaxError(this.name + " is not a document. Cannot assign member!");
+	}
+};
+
+/*
+
+@Override
+public void checkAssignElement(Context context) throws SyntaxError {
+	// TODO Auto-generated method stub
+	
+}
+
+*/
+VariableInstance.prototype.assign = function(context, expression) {
+	var value = expression.interpret(context);
+	if(context.getRegisteredValue(this.name)==null) {
+		context.registerValue(new Variable(this.name, value.type));
+	}
+	context.setValue(this.name, value);
+};
+
+VariableInstance.prototype.interpret = function(context) {
+	return context.getValue(this.name);
+};
+
+exports.VariableInstance = VariableInstance;
