@@ -7,7 +7,10 @@ var fs = require("fs");
 function getResourcesFolder() {
 	var presto = module.filename;
 	while(path.basename(presto).indexOf("presto-")!=0) {
-		presto = path.dirname(presto);
+		var parent = path.dirname(presto);
+        if(parent==presto)
+            throw "Could not find presto root!";
+        presto = parent;
 	}
     presto = path.dirname(presto);
 	return path.normalize(presto + path.sep + "presto-tests" + path.sep + "Tests" + path.sep + "resources");
