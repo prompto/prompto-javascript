@@ -6,6 +6,7 @@ Out.output = null;
 Out.wasNL = true;
 
 Out.init = function() {
+    return;
 	Out.oldWrite = process.stdout.write;
 	Out.output = [];
 	process.stdout.write = function(s) {
@@ -30,6 +31,7 @@ Out.reset = function() {
 };
 
 Out.restore = function() {
+    return;
 	process.stdout.write = Out.oldWrite;
 	Out.oldWrite = null;
 	Out.output = [];
