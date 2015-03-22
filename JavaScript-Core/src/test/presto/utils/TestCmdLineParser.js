@@ -6,11 +6,13 @@ var assert = require("assert");
 exports.testNull = function(test) {
 	var options = CmdLineParser.parse(null);
 	test.ok(options);
+    test.done();
 }
 
 exports.testEmpty = function(test) {
 	var options = CmdLineParser.parse("");
 	test.ok(options);
+    test.done();
 }
 
 exports.testKVP1 = function(test) {
