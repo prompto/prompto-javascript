@@ -19,6 +19,10 @@ Dialect.E.getParserFactory = function() {
 Dialect.E.toDialect = function(w, o) {
     o.toEDialect(w);
 };
+Dialect.E.toString = function(o) {
+    return o.toEString();
+};
+
 
 Dialect.O = new Dialect();
 Dialect.O.getParserFactory = function() {
@@ -27,6 +31,9 @@ Dialect.O.getParserFactory = function() {
 Dialect.O.toDialect = function(w, o) {
     o.toODialect(w);
 };
+Dialect.O.toString = function(o) {
+    return o.toOString();
+};
 
 Dialect.P = new Dialect();
 Dialect.P.getParserFactory = function() {
@@ -34,6 +41,9 @@ Dialect.P.getParserFactory = function() {
 };
 Dialect.P.toDialect = function(w, o) {
     o.toPDialect(w);
+};
+Dialect.P.toString = function(o) {
+    return o.toPString();
 };
 
 exports.Dialect = Dialect;

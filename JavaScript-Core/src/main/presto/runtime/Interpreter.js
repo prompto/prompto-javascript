@@ -125,6 +125,15 @@ Interpreter.interpret = function(context, methodName, cmdLineArgs) {
 	}
 };
 
+
+Interpreter.interpretTests = function(context) {
+    for(var name in context.tests) {
+        var test = context.tests[name];
+        var local = context.newLocalContext();
+        test.interpret(local);
+    }
+};
+
 exports.Interpreter = Interpreter;
 
 

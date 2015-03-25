@@ -23,9 +23,13 @@ exports.runResource = function(fileName, methodName, args) {
     var context = presto.runtime.Context.newGlobalContext();
     decls.register(context);
     decls.check(context);
-    methodName = methodName || "main";
-    args = args || "";
-    presto.runtime.Interpreter.interpret(context, methodName, args);
+    if(context.hasTests())
+        presto.runtime.Interpreter.interpretTests(context);
+    else {
+        methodName = methodName || "main";
+        args = args || "";
+        presto.runtime.Interpreter.interpret(context, methodName, args);
+    }
 };
 
 exports.checkOutput = function(test, fileName) {

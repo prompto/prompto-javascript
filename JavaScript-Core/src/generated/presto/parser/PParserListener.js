@@ -200,6 +200,24 @@ PParserListener.prototype.exitNative_method_declaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by PParser#test_method_declaration.
+PParserListener.prototype.enterTest_method_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by PParser#test_method_declaration.
+PParserListener.prototype.exitTest_method_declaration = function(ctx) {
+};
+
+
+// Enter a parse tree produced by PParser#assertion.
+PParserListener.prototype.enterAssertion = function(ctx) {
+};
+
+// Exit a parse tree produced by PParser#assertion.
+PParserListener.prototype.exitAssertion = function(ctx) {
+};
+
+
 // Enter a parse tree produced by PParser#typed_argument.
 PParserListener.prototype.enterTyped_argument = function(ctx) {
 };
@@ -1964,6 +1982,15 @@ PParserListener.prototype.exitNativeMethod = function(ctx) {
 };
 
 
+// Enter a parse tree produced by PParser#TestMethod.
+PParserListener.prototype.enterTestMethod = function(ctx) {
+};
+
+// Exit a parse tree produced by PParser#TestMethod.
+PParserListener.prototype.exitTestMethod = function(ctx) {
+};
+
+
 // Enter a parse tree produced by PParser#NativeStatementList.
 PParserListener.prototype.enterNativeStatementList = function(ctx) {
 };
@@ -2060,6 +2087,24 @@ PParserListener.prototype.enterStatementList = function(ctx) {
 
 // Exit a parse tree produced by PParser#StatementList.
 PParserListener.prototype.exitStatementList = function(ctx) {
+};
+
+
+// Enter a parse tree produced by PParser#AssertionListItem.
+PParserListener.prototype.enterAssertionListItem = function(ctx) {
+};
+
+// Exit a parse tree produced by PParser#AssertionListItem.
+PParserListener.prototype.exitAssertionListItem = function(ctx) {
+};
+
+
+// Enter a parse tree produced by PParser#AssertionList.
+PParserListener.prototype.enterAssertionList = function(ctx) {
+};
+
+// Exit a parse tree produced by PParser#AssertionList.
+PParserListener.prototype.exitAssertionList = function(ctx) {
 };
 
 

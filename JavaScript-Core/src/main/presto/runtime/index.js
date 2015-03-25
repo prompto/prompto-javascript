@@ -4,3 +4,4 @@ exports.MethodDeclarationMap  = require('./Context').MethodDeclarationMap;
 exports.Interpreter = require('./Interpreter').Interpreter;
 
 require('./MethodFinder').resolve();
+require('./ErrorVariable').resolve();

@@ -16,6 +16,7 @@ function Context() {
 	this.parent = null; // for inner methods
 	this.debugger = null;
 	this.declarations = {};
+    this.tests = {};
 	this.instances = {};
 	this.values = {};
 	return this;
@@ -165,19 +166,33 @@ Context.prototype.registerDeclaration = function(declaration) {
 		throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
 	}
 	this.declarations[declaration.name] = declaration;
-}
+};
 
 Context.prototype.registerMethodDeclaration = function(declaration) {
 	var actual = this.getRegistered(declaration.name);
 	if(actual!==null && !(actual instanceof MethodDeclarationMap)) {
-		throw new SyntaxError("Duplicate name: \"" + declaration.getName() + "\"");
+		throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
 	}
-	if(actual===null) {
-		actual = new MethodDeclarationMap(declaration.name);
-		this.declarations[declaration.name] = actual;
-	}
+    if(actual===null) {
+        actual = new MethodDeclarationMap(declaration.name);
+        this.declarations[declaration.name] = actual;
+    }
 	actual.register(declaration,this);
-}
+};
+
+Context.prototype.registerTestDeclaration = function(declaration) {
+    var actual = this.tests[declaration.name] || null;
+    if(actual!==null) {
+        throw new SyntaxError("Duplicate test: \"" + declaration.name + "\"");
+    }
+    this.tests[declaration.name] = declaration;
+};
+
+Context.prototype.hasTests = function() {
+    for(var test in this.tests)
+        return true;
+    return false;
+};
 
 function MethodDeclarationMap(name) {
 	this.name = name;

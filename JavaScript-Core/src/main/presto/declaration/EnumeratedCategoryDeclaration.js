@@ -74,9 +74,9 @@ EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
             writer.append(" with attributes: ");
         this.attributes.toDialect(writer, true);
         if(this.symbols!=null && this.symbols.length>0)
-            writer.append(",");
-    }
-    writer.append(" with symbols:\n");
+            writer.append(", and symbols:\n");
+    } else
+        writer.append(" with symbols:\n");
     writer.indent();
     for(var i=0;i<this.symbols.length;i++) {
         this.symbols[i].toDialect(writer);

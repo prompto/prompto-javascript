@@ -1,5 +1,9 @@
 var Variable = require("./Variable").Variable;
-var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
+var EnumeratedCategoryType = null;
+
+exports.resolve = function() {
+    EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
+};
 
 function ErrorVariable(name) {
 	Variable.call(this, name, new EnumeratedCategoryType("Error"));

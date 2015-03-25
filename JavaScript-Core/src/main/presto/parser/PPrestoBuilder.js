@@ -132,6 +132,19 @@ PPrestoBuilder.prototype.exitTernaryExpression = function(ctx) {
     this.setNodeValue(ctx, exp);
 };
 
+PPrestoBuilder.prototype.exitTest_method_declaration = function(ctx) {
+    var name = ctx.name.text;
+    var stmts = this.getNodeValue(ctx.stmts);
+    var exps = this.getNodeValue(ctx.exps);
+    var errorName = this.getNodeValue(ctx.error);
+    var error = errorName==null ? null : new expression.SymbolExpression(errorName);
+    this.setNodeValue(ctx, new declaration.TestMethodDeclaration(name, stmts, exps, error));
+};
+
+PPrestoBuilder.prototype.exitTestMethod = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
 
 PPrestoBuilder.prototype.exitTextLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.TextLiteral(ctx.t.text));
@@ -709,6 +722,23 @@ PPrestoBuilder.prototype.exitConstructor_expression = function(ctx) {
 	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
 };
 
+PPrestoBuilder.prototype.exitAssertion = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+PPrestoBuilder.prototype.exitAssertionList = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var items = new utils.ExpressionList(null, item);
+    this.setNodeValue(ctx, items);
+};
+
+PPrestoBuilder.prototype.exitAssertionListItem = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
+};
 
 PPrestoBuilder.prototype.exitAssign_instance_statement = function(ctx) {
 	var inst = this.getNodeValue(ctx.inst);
@@ -1117,8 +1147,8 @@ PPrestoBuilder.prototype.exitJavascript_category_mapping = function(ctx) {
 
 PPrestoBuilder.prototype.exitJavascript_module = function(ctx) {
 	ids = [];
-	for(var i=0;i<ctx.identifier().length;i++) {
-		ids.push(ctx.identifier(i).getText());
+	for(var i=0;i<ctx.javascript_identifier().length;i++) {
+		ids.push(ctx.javascript_identifier(i).getText());
 	}
 	var module = new javascript.JavaScriptModule(ids);
 	this.setNodeValue(ctx, module);
@@ -2210,7 +2240,7 @@ PPrestoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
 PPrestoBuilder.prototype.buildSection = function(node, section) {
 	var first = this.findFirstValidToken(node.start.tokenIndex);
 	var last = this.findLastValidToken(node.stop.tokenIndex);
-	section.setFrom(this.path, first, last);
+    section.setFrom(this.path, first, last, parser.Dialect.P);
 };
 
 PPrestoBuilder.prototype.findFirstValidToken = function(idx) {

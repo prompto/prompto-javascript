@@ -145,6 +145,20 @@ EPrestoBuilder.prototype.exitTernaryExpression = function(ctx) {
     this.setNodeValue(ctx, exp);
 };
 
+EPrestoBuilder.prototype.exitTest_method_declaration = function(ctx) {
+    var name = ctx.name.text;
+    var stmts = this.getNodeValue(ctx.stmts);
+    var exps = this.getNodeValue(ctx.exps);
+    var errorName = this.getNodeValue(ctx.error);
+    var error = errorName==null ? null : new expression.SymbolExpression(errorName);
+    this.setNodeValue(ctx, new declaration.TestMethodDeclaration(name, stmts, exps, error));
+};
+
+EPrestoBuilder.prototype.exitTestMethod = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
+
 
 EPrestoBuilder.prototype.exitTextLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.TextLiteral(ctx.t.text));
@@ -742,6 +756,24 @@ EPrestoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
 };
 
+EPrestoBuilder.prototype.exitAssertion = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+EPrestoBuilder.prototype.exitAssertionList = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var items = new utils.ExpressionList(null, item);
+    this.setNodeValue(ctx, items);
+};
+
+EPrestoBuilder.prototype.exitAssertionListItem = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
+};
+
 
 EPrestoBuilder.prototype.exitAssignInstanceStatement = function(ctx) {
 	var stmt = this.getNodeValue(ctx.stmt);
@@ -1164,7 +1196,7 @@ EPrestoBuilder.prototype.exitJavascript_category_mapping = function(ctx) {
 
 EPrestoBuilder.prototype.exitJavascript_module = function(ctx) {
 	var ids = []
-	var ctxs = ctx.identifier();
+	var ctxs = ctx.javascript_identifier();
 	for(var i=0;i<ctxs.length;i++) {
 		ids.push(ctxs[i].getText());
 	}
@@ -2282,7 +2314,7 @@ EPrestoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
 EPrestoBuilder.prototype.buildSection = function(node, section) {
 	var first = this.findFirstValidToken(node.start.tokenIndex);
 	var last = this.findLastValidToken(node.stop.tokenIndex);
-	section.setFrom(this.path, first, last);
+	section.setFrom(this.path, first, last, parser.Dialect.E);
 };
 
 EPrestoBuilder.prototype.findFirstValidToken = function(idx) {

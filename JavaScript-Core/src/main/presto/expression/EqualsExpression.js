@@ -4,6 +4,7 @@ var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var TypeValue = require("../value/TypeValue").TypeValue;
+var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
 var EqOp = require("../grammar/EqOp").EqOp;
@@ -44,9 +45,13 @@ EqualsExpression.prototype.check = function(context) {
 };
 
 EqualsExpression.prototype.interpret = function(context) {
+    var lval = this.left.interpret(context);
+    var rval = this.right.interpret(context);
+    return this.interpretValues(context, lval, rval);
+};
+
+EqualsExpression.prototype.interpretValues = function(context, lval, rval) {
     var equal = false;
-	var lval = this.left.interpret(context);
-	var rval = this.right.interpret(context);
     switch(this.operator) {
         case EqOp.IS:
             equal = lval==rval;
@@ -125,6 +130,20 @@ EqualsExpression.prototype.readLeftName = function() {
         return this.left.name;
     else
         return null;
+};
+
+EqualsExpression.prototype.interpretAssert = function(context, test) {
+    var lval = this.left.interpret(context);
+    var rval = this.right.interpret(context);
+    var result = this.interpretValues(context, lval, rval);
+    if(result==Bool.TRUE)
+        return true;
+    var writer = new CodeWriter(test.dialect, context);
+    this.toDialect(writer);
+    var expected = writer.toString();
+    var actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
+    test.printFailure(context, expected, actual);
+    return false;
 };
 
 exports.EqualsExpression = EqualsExpression;
