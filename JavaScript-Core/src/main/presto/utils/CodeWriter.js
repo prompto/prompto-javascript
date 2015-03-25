@@ -41,6 +41,10 @@ function CodeWriter(dialect, context, indenter) {
     return this;
 }
 
+CodeWriter.prototype.isGlobalContext = function() {
+    return this.context.isGlobalContext();
+};
+
 CodeWriter.prototype.append = function(s) {
     this.indenter.appendTabsIfRequired(s);
     this.indenter.append(s);
