@@ -97,22 +97,12 @@ TestMethodDeclaration.prototype.interpretError = function(context, ex)
     }
 }
 
-TestMethodDeclaration.prototype.ToDialect = function(writer)
+TestMethodDeclaration.prototype.toDialect = function(writer)
 {
     if (writer.isGlobalContext ())
         writer = writer.newLocalWriter ();
-    switch (writer.getDialect ()) {
-        case Dialect.E:
-            toEDialect (writer);
-            break;
-        case Dialect.O:
-            toODialect (writer);
-            break;
-        case Dialect.P:
-            toPDialect (writer);
-            break;
-    }
-}
+    writer.toDialect(this);
+};
 
 TestMethodDeclaration.prototype.toPDialect = function(writer)
 {
@@ -136,7 +126,7 @@ TestMethodDeclaration.prototype.toPDialect = function(writer)
         }
         writer.dedent ();
     }
-}
+};
 
 TestMethodDeclaration.prototype.toEDialect = function(writer)
 {
@@ -160,7 +150,7 @@ TestMethodDeclaration.prototype.toEDialect = function(writer)
         }
         writer.dedent ();
     }
-}
+};
 
 TestMethodDeclaration.prototype.toODialect = function(writer)
 {
@@ -184,7 +174,7 @@ TestMethodDeclaration.prototype.toODialect = function(writer)
         writer.dedent ();
         writer.append ("}\n");
     }
-}
+};
 
 
 exports.TestMethodDeclaration = TestMethodDeclaration;
