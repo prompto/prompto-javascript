@@ -784,7 +784,7 @@ exports.testMethodUnresolved = function (test) {
     var statement = "print";
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
-    test.ok(stmt instanceof presto.grammar.UnresolvedCall);
+    test.ok(stmt instanceof presto.statement.UnresolvedCall);
     writer = new presto.utils.CodeWriter(presto.parser.Dialect.E)
     stmt.toDialect(writer);
     test.equal(statement, writer.toString());
@@ -796,7 +796,7 @@ exports.testMethodExpression = function (test) {
     var statement = "print a";
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
-    test.ok(stmt instanceof presto.grammar.UnresolvedCall);
+    test.ok(stmt instanceof presto.statement.UnresolvedCall);
     writer = new presto.utils.CodeWriter(presto.parser.Dialect.E)
     stmt.toDialect(writer);
     test.equal(statement, writer.toString());

@@ -251,7 +251,7 @@ exports.testMethodCallWith = function(test) {
 	var parser = new OTestParser(statement);
 	var mc = parser.parse_method_call();
 	test.ok(mc);
-	test.equal("print",mc.method.name);
+	test.equal("print",mc.callable.name);
 	test.ok(mc.assignments);
 	var as = mc.assignments[0];
 	test.equal("value",as.name);
@@ -365,7 +365,7 @@ exports.testAssignmentConstructor = function(test) {
 	var parser = new OTestParser(statement);
 	var a = parser.parse_assign_instance_statement();
 	test.ok(a);
-	test.ok(a.expression instanceof presto.expression.ConstructorExpression);
+	test.ok(a.expression instanceof presto.statement.UnresolvedCall);
 	test.done();
 };
 
