@@ -40,6 +40,10 @@ ContainsExpression.prototype.check = function(context) {
 ContainsExpression.prototype.interpret = function(context) {
     var lval = this.left.interpret(context);
     var rval = this.right.interpret(context);
+    return this.interpretValues(context, lval, rval);
+};
+
+ContainsExpression.prototype.interpretValues = function(context, lval, rval) {
     var result = null;
     switch (this.operator) {
     case ContOp.IN:
@@ -112,6 +116,20 @@ ContainsExpression.prototype.containsAny = function(context, container, items) {
             throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
         }
     }
+    return false;
+};
+
+ContainsExpression.prototype.interpretAssert = function(context, test) {
+    var lval = this.left.interpret(context);
+    var rval = this.right.interpret(context);
+    var result = this.interpretValues(context, lval, rval);
+    if(result==Bool.TRUE)
+        return true;
+    var writer = new CodeWriter(test.dialect, context);
+    this.toDialect(writer);
+    var expected = writer.toString();
+    var actual = lval.toString() + this.operator.toString() + rval.toString();
+    test.printFailure(context, expected, actual);
     return false;
 };
 

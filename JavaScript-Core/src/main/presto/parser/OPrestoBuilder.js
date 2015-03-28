@@ -572,7 +572,7 @@ OPrestoBuilder.prototype.exitMethodVariableIdentifier = function(ctx) {
 
 OPrestoBuilder.prototype.exitMethodName = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.MethodSelector(null, name));
+	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
 };
 
 
@@ -616,7 +616,7 @@ OPrestoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 OPrestoBuilder.prototype.exitMethod_call = function(ctx) {
 	var method = this.getNodeValue(ctx.method);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new statement.MethodCall(method, args));
+	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args));
 };
 
 

@@ -24,3 +24,4 @@ exports.DeclarationInstruction = require("./DeclarationInstruction").Declaration
 exports.WithResourceStatement = require("./WithResourceStatement").WithResourceStatement;
 exports.WithSingletonStatement = require("./WithSingletonStatement").WithSingletonStatement;
 exports.WriteStatement = require("./WriteStatement").WriteStatement;
+exports.UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;

@@ -7,6 +7,7 @@ var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDec
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var PrestoError = require("../error/PrestoError").PrestoError;
 var Dialect = require("../parser/Dialect").Dialect;
+var Bool = require("../value/Bool").Bool;
 
 function MethodCall(method, assignments) {
 	SimpleStatement.call(this);
@@ -108,6 +109,17 @@ MethodCall.prototype.interpret = function(context) {
 		local.setValue(assignment.name, value);
 	}
 	return declaration.interpret(local, true);
+};
+
+MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
+    var value = this.interpret(context);
+    if(value instanceof Bool)
+        return value.value;
+    else {
+        var writer = new CodeWriter(this.dialect, context);
+        this.toDialect(writer);
+        throw new SyntaxError("Cannot test '" + writer.toString() + "'");
+    }
 };
 
 MethodCall.prototype.findDeclaration = function(context) {

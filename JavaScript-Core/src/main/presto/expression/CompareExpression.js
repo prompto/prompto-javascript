@@ -50,4 +50,19 @@ CompareExpression.prototype.compare = function(context, lval, rval) {
 	}
 };
 
+
+CompareExpression.prototype.interpretAssert = function(context, test) {
+    var lval = this.left.interpret(context);
+    var rval = this.right.interpret(context);
+    var result = this.compare(context, lval, rval);
+    if(result==Bool.TRUE)
+        return true;
+    var writer = new CodeWriter(test.dialect, context);
+    this.toDialect(writer);
+    var expected = writer.toString();
+    var actual = lval.toString() + this.operator.toString() + rval.toString();
+    test.printFailure(context, expected, actual);
+    return false;
+};
+
 exports.CompareExpression = CompareExpression;

@@ -8,7 +8,6 @@ exports.ContOp = require("./ContOp").ContOp;
 exports.CmpOp = require("./CmpOp").CmpOp;
 exports.EqOp = require("./EqOp").EqOp;
 exports.Operator = require("./Operator").Operator;
-exports.UnresolvedCall = require("./../statement/UnresolvedCall").UnresolvedCall;
 exports.UnresolvedArgument = require("./UnresolvedArgument").UnresolvedArgument;
 exports.ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
 exports.ArgumentAssignmentList = require("./ArgumentAssignmentList").ArgumentAssignmentList;

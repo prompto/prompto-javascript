@@ -31,7 +31,7 @@ Bool.prototype.getValue = function() {
 
 Bool.prototype.And = function(value) {
 	if(value instanceof Bool) {
-		return new Bool(this.value && value.value);
+		return Bool.ValueOf(this.value && value.value);
 	} else {
 		throw new SyntaxError("Illegal: Boolean and " + typeof(value));
 	}
@@ -40,7 +40,7 @@ Bool.prototype.And = function(value) {
 
 Bool.prototype.Or = function(value) {
 	if(value instanceof Bool) {
-		return new Bool(this.value || value.value);
+		return Bool.ValueOf(this.value || value.value);
 	} else {
 		throw new SyntaxError("Illegal: Boolean or " + typeof(value));
 	}

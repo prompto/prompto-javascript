@@ -6,6 +6,7 @@ var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 
 function UnresolvedCall(callable, assignments) {
 	SimpleStatement.call(this);
@@ -37,6 +38,17 @@ UnresolvedCall.prototype.check = function(context) {
 UnresolvedCall.prototype.interpret = function(context) {
 	this.resolve(context);
 	return this.resolved.interpret(context);
+};
+
+UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
+    this.resolve(context);
+    if (this.resolved.interpretAssert)
+        return this.resolved.interpretAssert(context, testMethodDeclaration);
+    else {
+        var writer = new CodeWriter(this.dialect, context);
+        this.resolved.toDialect(writer);
+        throw new SyntaxError("Cannot test '" + writer.toString() + "'");
+    }
 };
 
 UnresolvedCall.prototype.resolve = function(context) {

@@ -442,8 +442,8 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\b/\1\2\u03e2\u03e3\5\u00e6t\2\u03e3\u03e8\3\2\2\2\u03e4\u03e5\f\3\2",
     "\2\u03e5\u03e7\5j\66\2\u03e6\u03e4\3\2\2\2\u03e7\u03ea\3\2\2\2\u03e8",
     "\u03e6\3\2\2\2\u03e8\u03e9\3\2\2\2\u03e9]\3\2\2\2\u03ea\u03e8\3\2\2",
-    "\2\u03eb\u03f2\5`\61\2\u03ec\u03f2\5l\67\2\u03ed\u03f2\5f\64\2\u03ee",
-    "\u03f2\5b\62\2\u03ef\u03f2\5h\65\2\u03f0\u03f2\5P)\2\u03f1\u03eb\3\2",
+    "\2\u03eb\u03f2\5`\61\2\u03ec\u03f2\5f\64\2\u03ed\u03f2\5b\62\2\u03ee",
+    "\u03f2\5h\65\2\u03ef\u03f2\5P)\2\u03f0\u03f2\5l\67\2\u03f1\u03eb\3\2",
     "\2\2\u03f1\u03ec\3\2\2\2\u03f1\u03ed\3\2\2\2\u03f1\u03ee\3\2\2\2\u03f1",
     "\u03ef\3\2\2\2\u03f1\u03f0\3\2\2\2\u03f2_\3\2\2\2\u03f3\u03f4\5\u009e",
     "P\2\u03f4\u03f5\7\21\2\2\u03f5\u03f6\7\22\2\2\u03f6a\3\2\2\2\u03f7\u03f8",
@@ -8893,32 +8893,6 @@ ReadExpressionContext.prototype.exitRule = function(listener) {
 };
 
 
-function FetchExpressionContext(parser, ctx) {
-	Method_expressionContext.call(this, parser);
-    this.exp = null; // Fetch_expressionContext;
-    Method_expressionContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-FetchExpressionContext.prototype = Object.create(Method_expressionContext.prototype);
-FetchExpressionContext.prototype.constructor = FetchExpressionContext;
-
-FetchExpressionContext.prototype.fetch_expression = function() {
-    return this.getTypedRuleContext(Fetch_expressionContext,0);
-};
-FetchExpressionContext.prototype.enterRule = function(listener) {
-    if(listener instanceof OParserListener ) {
-        listener.enterFetchExpression(this);
-	}
-};
-
-FetchExpressionContext.prototype.exitRule = function(listener) {
-    if(listener instanceof OParserListener ) {
-        listener.exitFetchExpression(this);
-	}
-};
-
-
 function ConstructorExpressionContext(parser, ctx) {
 	Method_expressionContext.call(this, parser);
     this.exp = null; // Constructor_expressionContext;
@@ -8941,6 +8915,32 @@ ConstructorExpressionContext.prototype.enterRule = function(listener) {
 ConstructorExpressionContext.prototype.exitRule = function(listener) {
     if(listener instanceof OParserListener ) {
         listener.exitConstructorExpression(this);
+	}
+};
+
+
+function FetchExpressionContext(parser, ctx) {
+	Method_expressionContext.call(this, parser);
+    this.exp = null; // Fetch_expressionContext;
+    Method_expressionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+FetchExpressionContext.prototype = Object.create(Method_expressionContext.prototype);
+FetchExpressionContext.prototype.constructor = FetchExpressionContext;
+
+FetchExpressionContext.prototype.fetch_expression = function() {
+    return this.getTypedRuleContext(Fetch_expressionContext,0);
+};
+FetchExpressionContext.prototype.enterRule = function(listener) {
+    if(listener instanceof OParserListener ) {
+        listener.enterFetchExpression(this);
+	}
+};
+
+FetchExpressionContext.prototype.exitRule = function(listener) {
+    if(listener instanceof OParserListener ) {
+        listener.exitFetchExpression(this);
 	}
 };
 
@@ -8988,38 +8988,38 @@ OParser.prototype.method_expression = function() {
             break;
 
         case 2:
-            localctx = new ConstructorExpressionContext(this, localctx);
+            localctx = new FetchExpressionContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
             this.state = 1002; 
-            localctx.exp = this.constructor_expression();
-            break;
-
-        case 3:
-            localctx = new FetchExpressionContext(this, localctx);
-            this.enterOuterAlt(localctx, 3);
-            this.state = 1003; 
             localctx.exp = this.fetch_expression();
             break;
 
-        case 4:
+        case 3:
             localctx = new ReadExpressionContext(this, localctx);
-            this.enterOuterAlt(localctx, 4);
-            this.state = 1004; 
+            this.enterOuterAlt(localctx, 3);
+            this.state = 1003; 
             localctx.exp = this.read_expression();
             break;
 
-        case 5:
+        case 4:
             localctx = new SortedExpressionContext(this, localctx);
-            this.enterOuterAlt(localctx, 5);
-            this.state = 1005; 
+            this.enterOuterAlt(localctx, 4);
+            this.state = 1004; 
             localctx.exp = this.sorted_expression();
             break;
 
-        case 6:
+        case 5:
             localctx = new MethodCallExpressionContext(this, localctx);
+            this.enterOuterAlt(localctx, 5);
+            this.state = 1005; 
+            localctx.exp = this.method_call();
+            break;
+
+        case 6:
+            localctx = new ConstructorExpressionContext(this, localctx);
             this.enterOuterAlt(localctx, 6);
             this.state = 1006; 
-            localctx.exp = this.method_call();
+            localctx.exp = this.constructor_expression();
             break;
 
         }

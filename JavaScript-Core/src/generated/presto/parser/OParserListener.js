@@ -956,15 +956,6 @@ OParserListener.prototype.exitDocumentExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#ConstructorExpression.
-OParserListener.prototype.enterConstructorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#ConstructorExpression.
-OParserListener.prototype.exitConstructorExpression = function(ctx) {
-};
-
-
 // Enter a parse tree produced by OParser#FetchExpression.
 OParserListener.prototype.enterFetchExpression = function(ctx) {
 };
@@ -998,6 +989,15 @@ OParserListener.prototype.enterMethodCallExpression = function(ctx) {
 
 // Exit a parse tree produced by OParser#MethodCallExpression.
 OParserListener.prototype.exitMethodCallExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#ConstructorExpression.
+OParserListener.prototype.enterConstructorExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#ConstructorExpression.
+OParserListener.prototype.exitConstructorExpression = function(ctx) {
 };
 
 

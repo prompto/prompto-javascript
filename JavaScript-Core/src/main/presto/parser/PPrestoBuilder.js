@@ -556,7 +556,7 @@ PPrestoBuilder.prototype.exitMethodVariableIdentifier = function(ctx) {
 
 PPrestoBuilder.prototype.exitMethodName = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.MethodSelector(null, name));
+	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
 };
 
 
@@ -600,7 +600,7 @@ PPrestoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 PPrestoBuilder.prototype.exitMethod_call = function(ctx) {
 	var method = this.getNodeValue(ctx.method);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new statement.MethodCall(method, args));
+	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args));
 };
 
 

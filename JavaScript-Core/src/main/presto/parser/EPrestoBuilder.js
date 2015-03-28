@@ -49,7 +49,7 @@ EPrestoBuilder.prototype.exitTypeIdentifier = function(ctx) {
 EPrestoBuilder.prototype.exitMethodCallExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	var args = this.getNodeValue(ctx.args);
-	var call = new grammar.UnresolvedCall(exp,args);
+	var call = new statement.UnresolvedCall(exp,args);
 	this.setNodeValue(ctx, call);
 };
 
