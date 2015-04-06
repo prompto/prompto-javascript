@@ -14,26 +14,26 @@ exports.tearDown = function(done) {
 };
 
 exports.testMultCharacter = function(test) {
-	checkOutput(test, "mult/multCharacter.o");
+	checkOutput(test, "mult/multCharacter.poc");
 };
 
 exports.testMultDecimal = function(test) {
-	checkOutput(test, "mult/multDecimal.o");
+	checkOutput(test, "mult/multDecimal.poc");
 };
 
 exports.testMultInteger = function(test) {
-	checkOutput(test, "mult/multInteger.o");
+	checkOutput(test, "mult/multInteger.poc");
 };
 
 exports.testMultList = function(test) {
-	checkOutput(test, "mult/multList.o");
+	checkOutput(test, "mult/multList.poc");
 };
 
 exports.testMultPeriod = function(test) {
-	checkOutput(test, "mult/multPeriod.o");
+	checkOutput(test, "mult/multPeriod.poc");
 };
 
 exports.testMultText = function(test) {
-	checkOutput(test, "mult/multText.o");
+	checkOutput(test, "mult/multText.poc");
 };
 

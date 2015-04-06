@@ -14,18 +14,18 @@ exports.tearDown = function(done) {
 };
 
 exports.testAutoDowncast = function(test) {
-	checkOutput(test, "cast/autoDowncast.e");
+	checkOutput(test, "cast/autoDowncast.pec");
 };
 
 exports.testCastChild = function(test) {
-	checkOutput(test, "cast/castChild.e");
+	checkOutput(test, "cast/castChild.pec");
 };
 
 exports.testIsAChild = function(test) {
-	checkOutput(test, "cast/isAChild.e");
+	checkOutput(test, "cast/isAChild.pec");
 };
 
 exports.testIsAText = function(test) {
-	checkOutput(test, "cast/isAText.e");
+	checkOutput(test, "cast/isAText.pec");
 };
 

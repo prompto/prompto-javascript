@@ -105,7 +105,7 @@ SwitchErrorStatement.prototype.toODialect = function(writer) {
     writer.newLine();
 }
 
-SwitchErrorStatement.prototype.toPDialect = function(writer) {
+SwitchErrorStatement.prototype.toSDialect = function(writer) {
     writer.append("try ");
     writer.append(this.errorName);
     writer.append(":\n");

@@ -28,7 +28,7 @@ NativeSymbol.prototype.toDialect = function(writer) {
             writer.append(" = ");
             this.expression.toDialect(writer);
             break;
-        case Dialect.P:
+        case Dialect.S:
             writer.append(" = ");
             this.expression.toDialect(writer);
             break;

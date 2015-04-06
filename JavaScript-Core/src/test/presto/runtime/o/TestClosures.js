@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testGlobalClosureNoArg = function(test) {
-	checkOutput(test, "closures/globalClosureNoArg.o");
+	checkOutput(test, "closures/globalClosureNoArg.poc");
 };
 
 exports.testGlobalClosureWithArg = function(test) {
-	checkOutput(test, "closures/globalClosureWithArg.o");
+	checkOutput(test, "closures/globalClosureWithArg.poc");
 };
 
 exports.testInstanceClosureNoArg = function(test) {
-	checkOutput(test, "closures/instanceClosureNoArg.o");
+	checkOutput(test, "closures/instanceClosureNoArg.poc");
 };
 

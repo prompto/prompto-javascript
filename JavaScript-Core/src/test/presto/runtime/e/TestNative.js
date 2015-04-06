@@ -14,10 +14,10 @@ exports.tearDown = function(done) {
 };
 
 exports.testCategory = function(test) {
-	checkOutput(test, "native/category.e");
+	checkOutput(test, "native/category.pec");
 };
 
 exports.testMethod = function(test) {
-	checkOutput(test, "native/method.e");
+	checkOutput(test, "native/method.pec");
 };
 

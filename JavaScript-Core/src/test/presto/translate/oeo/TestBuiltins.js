@@ -3,98 +3,98 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testDateDayOfMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateDayOfMonth.o");
+	compareResourceOEO(test, "builtins/dateDayOfMonth.poc");
 };
 
 exports.testDateDayOfYear = function(test) {
-	compareResourceOEO(test, "builtins/dateDayOfYear.o");
+	compareResourceOEO(test, "builtins/dateDayOfYear.poc");
 };
 
 exports.testDateMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateMonth.o");
+	compareResourceOEO(test, "builtins/dateMonth.poc");
 };
 
 exports.testDateTimeDayOfMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeDayOfMonth.o");
+	compareResourceOEO(test, "builtins/dateTimeDayOfMonth.poc");
 };
 
 exports.testDateTimeDayOfYear = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeDayOfYear.o");
+	compareResourceOEO(test, "builtins/dateTimeDayOfYear.poc");
 };
 
 exports.testDateTimeHour = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeHour.o");
+	compareResourceOEO(test, "builtins/dateTimeHour.poc");
 };
 
 exports.testDateTimeMinute = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeMinute.o");
+	compareResourceOEO(test, "builtins/dateTimeMinute.poc");
 };
 
 exports.testDateTimeMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeMonth.o");
+	compareResourceOEO(test, "builtins/dateTimeMonth.poc");
 };
 
 exports.testDateTimeSecond = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeSecond.o");
+	compareResourceOEO(test, "builtins/dateTimeSecond.poc");
 };
 
 exports.testDateTimeTZName = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeTZName.o");
+	compareResourceOEO(test, "builtins/dateTimeTZName.poc");
 };
 
 exports.testDateTimeTZOffset = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeTZOffset.o");
+	compareResourceOEO(test, "builtins/dateTimeTZOffset.poc");
 };
 
 exports.testDateTimeYear = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeYear.o");
+	compareResourceOEO(test, "builtins/dateTimeYear.poc");
 };
 
 exports.testDateYear = function(test) {
-	compareResourceOEO(test, "builtins/dateYear.o");
+	compareResourceOEO(test, "builtins/dateYear.poc");
 };
 
 exports.testDictLength = function(test) {
-	compareResourceOEO(test, "builtins/dictLength.o");
+	compareResourceOEO(test, "builtins/dictLength.poc");
 };
 
 exports.testEnumName = function(test) {
-	compareResourceOEO(test, "builtins/enumName.o");
+	compareResourceOEO(test, "builtins/enumName.poc");
 };
 
 exports.testEnumSymbols = function(test) {
-	compareResourceOEO(test, "builtins/enumSymbols.o");
+	compareResourceOEO(test, "builtins/enumSymbols.poc");
 };
 
 exports.testEnumValue = function(test) {
-	compareResourceOEO(test, "builtins/enumValue.o");
+	compareResourceOEO(test, "builtins/enumValue.poc");
 };
 
 exports.testListLength = function(test) {
-	compareResourceOEO(test, "builtins/listLength.o");
+	compareResourceOEO(test, "builtins/listLength.poc");
 };
 
 exports.testSetLength = function(test) {
-	compareResourceOEO(test, "builtins/setLength.o");
+	compareResourceOEO(test, "builtins/setLength.poc");
 };
 
 exports.testTextLength = function(test) {
-	compareResourceOEO(test, "builtins/textLength.o");
+	compareResourceOEO(test, "builtins/textLength.poc");
 };
 
 exports.testTimeHour = function(test) {
-	compareResourceOEO(test, "builtins/timeHour.o");
+	compareResourceOEO(test, "builtins/timeHour.poc");
 };
 
 exports.testTimeMinute = function(test) {
-	compareResourceOEO(test, "builtins/timeMinute.o");
+	compareResourceOEO(test, "builtins/timeMinute.poc");
 };
 
 exports.testTimeSecond = function(test) {
-	compareResourceOEO(test, "builtins/timeSecond.o");
+	compareResourceOEO(test, "builtins/timeSecond.poc");
 };
 
 exports.testTupleLength = function(test) {
-	compareResourceOEO(test, "builtins/tupleLength.o");
+	compareResourceOEO(test, "builtins/tupleLength.poc");
 };
 

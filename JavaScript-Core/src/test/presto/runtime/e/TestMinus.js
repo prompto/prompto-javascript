@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testMinusDecimal = function(test) {
-	checkOutput(test, "minus/minusDecimal.e");
+	checkOutput(test, "minus/minusDecimal.pec");
 };
 
 exports.testMinusInteger = function(test) {
-	checkOutput(test, "minus/minusInteger.e");
+	checkOutput(test, "minus/minusInteger.pec");
 };
 
 exports.testMinusPeriod = function(test) {
-	checkOutput(test, "minus/minusPeriod.e");
+	checkOutput(test, "minus/minusPeriod.pec");
 };
 

@@ -3,14 +3,14 @@ require("../../../../exploded");
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 exports.testSliceList = function(test) {
-	compareResourceEOE(test, "slice/sliceList.e");
+	compareResourceEOE(test, "slice/sliceList.pec");
 };
 
 exports.testSliceRange = function(test) {
-	compareResourceEOE(test, "slice/sliceRange.e");
+	compareResourceEOE(test, "slice/sliceRange.pec");
 };
 
 exports.testSliceText = function(test) {
-	compareResourceEOE(test, "slice/sliceText.e");
+	compareResourceEOE(test, "slice/sliceText.pec");
 };
 

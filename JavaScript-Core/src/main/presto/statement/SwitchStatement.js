@@ -48,7 +48,7 @@ SwitchStatement.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-SwitchStatement.prototype.toPDialect = function(writer) {
+SwitchStatement.prototype.toSDialect = function(writer) {
     writer.append("switch on ");
     this.expression.toDialect(writer);
     writer.append(":\n");

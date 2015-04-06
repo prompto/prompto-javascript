@@ -123,7 +123,7 @@ ForEachStatement.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-ForEachStatement.prototype.toPDialect = function(writer) {
+ForEachStatement.prototype.toSDialect = function(writer) {
     writer.append("for ");
     writer.append(this.v1);
     if(this.v2!=null) {

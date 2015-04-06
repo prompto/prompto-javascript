@@ -14,58 +14,58 @@ exports.tearDown = function(done) {
 };
 
 exports.testLtCharacter = function(test) {
-	checkOutput(test, "less/ltCharacter.e");
+	checkOutput(test, "less/ltCharacter.pec");
 };
 
 exports.testLtDate = function(test) {
-	checkOutput(test, "less/ltDate.e");
+	checkOutput(test, "less/ltDate.pec");
 };
 
 exports.testLtDateTime = function(test) {
-	checkOutput(test, "less/ltDateTime.e");
+	checkOutput(test, "less/ltDateTime.pec");
 };
 
 exports.testLtDecimal = function(test) {
-	checkOutput(test, "less/ltDecimal.e");
+	checkOutput(test, "less/ltDecimal.pec");
 };
 
 exports.testLteCharacter = function(test) {
-	checkOutput(test, "less/lteCharacter.e");
+	checkOutput(test, "less/lteCharacter.pec");
 };
 
 exports.testLteDate = function(test) {
-	checkOutput(test, "less/lteDate.e");
+	checkOutput(test, "less/lteDate.pec");
 };
 
 exports.testLteDateTime = function(test) {
-	checkOutput(test, "less/lteDateTime.e");
+	checkOutput(test, "less/lteDateTime.pec");
 };
 
 exports.testLteDecimal = function(test) {
-	checkOutput(test, "less/lteDecimal.e");
+	checkOutput(test, "less/lteDecimal.pec");
 };
 
 exports.testLteInteger = function(test) {
-	checkOutput(test, "less/lteInteger.e");
+	checkOutput(test, "less/lteInteger.pec");
 };
 
 exports.testLteText = function(test) {
-	checkOutput(test, "less/lteText.e");
+	checkOutput(test, "less/lteText.pec");
 };
 
 exports.testLteTime = function(test) {
-	checkOutput(test, "less/lteTime.e");
+	checkOutput(test, "less/lteTime.pec");
 };
 
 exports.testLtInteger = function(test) {
-	checkOutput(test, "less/ltInteger.e");
+	checkOutput(test, "less/ltInteger.pec");
 };
 
 exports.testLtText = function(test) {
-	checkOutput(test, "less/ltText.e");
+	checkOutput(test, "less/ltText.pec");
 };
 
 exports.testLtTime = function(test) {
-	checkOutput(test, "less/ltTime.e");
+	checkOutput(test, "less/ltTime.pec");
 };
 

@@ -14,26 +14,26 @@ exports.tearDown = function(done) {
 };
 
 exports.testComplexIf = function(test) {
-	checkOutput(test, "condition/complexIf.e");
+	checkOutput(test, "condition/complexIf.pec");
 };
 
 exports.testElseIf = function(test) {
-	checkOutput(test, "condition/elseIf.e");
+	checkOutput(test, "condition/elseIf.pec");
 };
 
 exports.testReturnIf = function(test) {
-	checkOutput(test, "condition/returnIf.e");
+	checkOutput(test, "condition/returnIf.pec");
 };
 
 exports.testSimpleIf = function(test) {
-	checkOutput(test, "condition/simpleIf.e");
+	checkOutput(test, "condition/simpleIf.pec");
 };
 
 exports.testSwitch = function(test) {
-	checkOutput(test, "condition/switch.e");
+	checkOutput(test, "condition/switch.pec");
 };
 
 exports.testTernary = function(test) {
-	checkOutput(test, "condition/ternary.e");
+	checkOutput(test, "condition/ternary.pec");
 };
 

@@ -3,58 +3,58 @@ require("../../../../exploded");
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 exports.testLtCharacter = function(test) {
-	compareResourceEOE(test, "less/ltCharacter.e");
+	compareResourceEOE(test, "less/ltCharacter.pec");
 };
 
 exports.testLtDate = function(test) {
-	compareResourceEOE(test, "less/ltDate.e");
+	compareResourceEOE(test, "less/ltDate.pec");
 };
 
 exports.testLtDateTime = function(test) {
-	compareResourceEOE(test, "less/ltDateTime.e");
+	compareResourceEOE(test, "less/ltDateTime.pec");
 };
 
 exports.testLtDecimal = function(test) {
-	compareResourceEOE(test, "less/ltDecimal.e");
+	compareResourceEOE(test, "less/ltDecimal.pec");
 };
 
 exports.testLteCharacter = function(test) {
-	compareResourceEOE(test, "less/lteCharacter.e");
+	compareResourceEOE(test, "less/lteCharacter.pec");
 };
 
 exports.testLteDate = function(test) {
-	compareResourceEOE(test, "less/lteDate.e");
+	compareResourceEOE(test, "less/lteDate.pec");
 };
 
 exports.testLteDateTime = function(test) {
-	compareResourceEOE(test, "less/lteDateTime.e");
+	compareResourceEOE(test, "less/lteDateTime.pec");
 };
 
 exports.testLteDecimal = function(test) {
-	compareResourceEOE(test, "less/lteDecimal.e");
+	compareResourceEOE(test, "less/lteDecimal.pec");
 };
 
 exports.testLteInteger = function(test) {
-	compareResourceEOE(test, "less/lteInteger.e");
+	compareResourceEOE(test, "less/lteInteger.pec");
 };
 
 exports.testLteText = function(test) {
-	compareResourceEOE(test, "less/lteText.e");
+	compareResourceEOE(test, "less/lteText.pec");
 };
 
 exports.testLteTime = function(test) {
-	compareResourceEOE(test, "less/lteTime.e");
+	compareResourceEOE(test, "less/lteTime.pec");
 };
 
 exports.testLtInteger = function(test) {
-	compareResourceEOE(test, "less/ltInteger.e");
+	compareResourceEOE(test, "less/ltInteger.pec");
 };
 
 exports.testLtText = function(test) {
-	compareResourceEOE(test, "less/ltText.e");
+	compareResourceEOE(test, "less/ltText.pec");
 };
 
 exports.testLtTime = function(test) {
-	compareResourceEOE(test, "less/ltTime.e");
+	compareResourceEOE(test, "less/ltTime.pec");
 };
 

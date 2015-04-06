@@ -14,102 +14,102 @@ exports.tearDown = function(done) {
 };
 
 exports.testContainsAllList = function(test) {
-	checkOutput(test, "contains/containsAllList.e");
+	checkOutput(test, "contains/containsAllList.pec");
 };
 
 exports.testContainsAllSet = function(test) {
-	checkOutput(test, "contains/containsAllSet.e");
+	checkOutput(test, "contains/containsAllSet.pec");
 };
 
 exports.testContainsAllText = function(test) {
-	checkOutput(test, "contains/containsAllText.e");
+	checkOutput(test, "contains/containsAllText.pec");
 };
 
 exports.testContainsAllTuple = function(test) {
-	checkOutput(test, "contains/containsAllTuple.e");
+	checkOutput(test, "contains/containsAllTuple.pec");
 };
 
 exports.testContainsAnyList = function(test) {
-	checkOutput(test, "contains/containsAnyList.e");
+	checkOutput(test, "contains/containsAnyList.pec");
 };
 
 exports.testContainsAnySet = function(test) {
-	checkOutput(test, "contains/containsAnySet.e");
+	checkOutput(test, "contains/containsAnySet.pec");
 };
 
 exports.testContainsAnyText = function(test) {
-	checkOutput(test, "contains/containsAnyText.e");
+	checkOutput(test, "contains/containsAnyText.pec");
 };
 
 exports.testContainsAnyTuple = function(test) {
-	checkOutput(test, "contains/containsAnyTuple.e");
+	checkOutput(test, "contains/containsAnyTuple.pec");
 };
 
 exports.testInCharacterRange = function(test) {
-	checkOutput(test, "contains/inCharacterRange.e");
+	checkOutput(test, "contains/inCharacterRange.pec");
 };
 
 exports.testInDateRange = function(test) {
-	checkOutput(test, "contains/inDateRange.e");
+	checkOutput(test, "contains/inDateRange.pec");
 };
 
 exports.testInDict = function(test) {
-	checkOutput(test, "contains/inDict.e");
+	checkOutput(test, "contains/inDict.pec");
 };
 
 exports.testInIntegerRange = function(test) {
-	checkOutput(test, "contains/inIntegerRange.e");
+	checkOutput(test, "contains/inIntegerRange.pec");
 };
 
 exports.testInList = function(test) {
-	checkOutput(test, "contains/inList.e");
+	checkOutput(test, "contains/inList.pec");
 };
 
 exports.testInSet = function(test) {
-	checkOutput(test, "contains/inSet.e");
+	checkOutput(test, "contains/inSet.pec");
 };
 
 exports.testInText = function(test) {
-	checkOutput(test, "contains/inText.e");
+	checkOutput(test, "contains/inText.pec");
 };
 
 exports.testInTimeRange = function(test) {
-	checkOutput(test, "contains/inTimeRange.e");
+	checkOutput(test, "contains/inTimeRange.pec");
 };
 
 exports.testInTuple = function(test) {
-	checkOutput(test, "contains/inTuple.e");
+	checkOutput(test, "contains/inTuple.pec");
 };
 
 exports.testNinCharacterRange = function(test) {
-	checkOutput(test, "contains/ninCharacterRange.e");
+	checkOutput(test, "contains/ninCharacterRange.pec");
 };
 
 exports.testNinDateRange = function(test) {
-	checkOutput(test, "contains/ninDateRange.e");
+	checkOutput(test, "contains/ninDateRange.pec");
 };
 
 exports.testNinDict = function(test) {
-	checkOutput(test, "contains/ninDict.e");
+	checkOutput(test, "contains/ninDict.pec");
 };
 
 exports.testNinIntegerRange = function(test) {
-	checkOutput(test, "contains/ninIntegerRange.e");
+	checkOutput(test, "contains/ninIntegerRange.pec");
 };
 
 exports.testNinList = function(test) {
-	checkOutput(test, "contains/ninList.e");
+	checkOutput(test, "contains/ninList.pec");
 };
 
 exports.testNinSet = function(test) {
-	checkOutput(test, "contains/ninSet.e");
+	checkOutput(test, "contains/ninSet.pec");
 };
 
 exports.testNinText = function(test) {
-	checkOutput(test, "contains/ninText.e");
+	checkOutput(test, "contains/ninText.pec");
 };
 
 exports.testNinTimeRange = function(test) {
-	checkOutput(test, "contains/ninTimeRange.e");
+	checkOutput(test, "contains/ninTimeRange.pec");
 };
 

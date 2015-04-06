@@ -3,46 +3,46 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testDivideByZero = function(test) {
-	compareResourceOEO(test, "errors/divideByZero.o");
+	compareResourceOEO(test, "errors/divideByZero.poc");
 };
 
 exports.testIndexOutOfRange_listItem = function(test) {
-	compareResourceOEO(test, "errors/indexOutOfRange-listItem.o");
+	compareResourceOEO(test, "errors/indexOutOfRange-listItem.poc");
 };
 
 exports.testIndexOutOfRange_sliceList = function(test) {
-	compareResourceOEO(test, "errors/indexOutOfRange-sliceList.o");
+	compareResourceOEO(test, "errors/indexOutOfRange-sliceList.poc");
 };
 
 exports.testIndexOutOfRange_sliceRange = function(test) {
-	compareResourceOEO(test, "errors/indexOutOfRange-sliceRange.o");
+	compareResourceOEO(test, "errors/indexOutOfRange-sliceRange.poc");
 };
 
 exports.testIndexOutOfRange_sliceText = function(test) {
-	compareResourceOEO(test, "errors/indexOutOfRange-sliceText.o");
+	compareResourceOEO(test, "errors/indexOutOfRange-sliceText.poc");
 };
 
 exports.testNullDict = function(test) {
-	compareResourceOEO(test, "errors/nullDict.o");
+	compareResourceOEO(test, "errors/nullDict.poc");
 };
 
 exports.testNullItem = function(test) {
-	compareResourceOEO(test, "errors/nullItem.o");
+	compareResourceOEO(test, "errors/nullItem.poc");
 };
 
 exports.testNullKey = function(test) {
-	compareResourceOEO(test, "errors/nullKey.o");
+	compareResourceOEO(test, "errors/nullKey.poc");
 };
 
 exports.testNullMember = function(test) {
-	compareResourceOEO(test, "errors/nullMember.o");
+	compareResourceOEO(test, "errors/nullMember.poc");
 };
 
 exports.testNullMethod = function(test) {
-	compareResourceOEO(test, "errors/nullMethod.o");
+	compareResourceOEO(test, "errors/nullMethod.poc");
 };
 
 exports.testUserException = function(test) {
-	compareResourceOEO(test, "errors/userException.o");
+	compareResourceOEO(test, "errors/userException.poc");
 };
 

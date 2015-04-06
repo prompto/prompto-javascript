@@ -14,26 +14,26 @@ exports.tearDown = function(done) {
 };
 
 exports.testIntegerEnumeration = function(test) {
-	checkOutput(test, "patterns/integerEnumeration.e");
+	checkOutput(test, "patterns/integerEnumeration.pec");
 };
 
 exports.testIntegerPattern = function(test) {
-	checkOutput(test, "patterns/integerPattern.e");
+	checkOutput(test, "patterns/integerPattern.pec");
 };
 
 exports.testNegativeIntegerRange = function(test) {
-	checkOutput(test, "patterns/negativeIntegerRange.e");
+	checkOutput(test, "patterns/negativeIntegerRange.pec");
 };
 
 exports.testPositiveIntegerRange = function(test) {
-	checkOutput(test, "patterns/positiveIntegerRange.e");
+	checkOutput(test, "patterns/positiveIntegerRange.pec");
 };
 
 exports.testTextEnumeration = function(test) {
-	checkOutput(test, "patterns/textEnumeration.e");
+	checkOutput(test, "patterns/textEnumeration.pec");
 };
 
 exports.testTextPattern = function(test) {
-	checkOutput(test, "patterns/textPattern.e");
+	checkOutput(test, "patterns/textPattern.pec");
 };
 

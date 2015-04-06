@@ -14,26 +14,26 @@ exports.tearDown = function(done) {
 };
 
 exports.testAddAmount = function(test) {
-	checkOutput(test, "operators/addAmount.o");
+	checkOutput(test, "operators/addAmount.poc");
 };
 
 exports.testDivAmount = function(test) {
-	checkOutput(test, "operators/divAmount.o");
+	checkOutput(test, "operators/divAmount.poc");
 };
 
 exports.testIdivAmount = function(test) {
-	checkOutput(test, "operators/idivAmount.o");
+	checkOutput(test, "operators/idivAmount.poc");
 };
 
 exports.testModAmount = function(test) {
-	checkOutput(test, "operators/modAmount.o");
+	checkOutput(test, "operators/modAmount.poc");
 };
 
 exports.testMultAmount = function(test) {
-	checkOutput(test, "operators/multAmount.o");
+	checkOutput(test, "operators/multAmount.poc");
 };
 
 exports.testSubAmount = function(test) {
-	checkOutput(test, "operators/subAmount.o");
+	checkOutput(test, "operators/subAmount.poc");
 };
 

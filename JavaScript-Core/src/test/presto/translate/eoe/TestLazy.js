@@ -3,22 +3,22 @@ require("../../../../exploded");
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 exports.testCyclic = function(test) {
-	compareResourceEOE(test, "lazy/cyclic.e");
+	compareResourceEOE(test, "lazy/cyclic.pec");
 };
 
 exports.testDict = function(test) {
-	compareResourceEOE(test, "lazy/dict.e");
+	compareResourceEOE(test, "lazy/dict.pec");
 };
 
 exports.testList = function(test) {
-	compareResourceEOE(test, "lazy/list.e");
+	compareResourceEOE(test, "lazy/list.pec");
 };
 
 exports.testSet = function(test) {
-	compareResourceEOE(test, "lazy/set.e");
+	compareResourceEOE(test, "lazy/set.pec");
 };
 
 exports.testTransient = function(test) {
-	compareResourceEOE(test, "lazy/transient.e");
+	compareResourceEOE(test, "lazy/transient.pec");
 };
 

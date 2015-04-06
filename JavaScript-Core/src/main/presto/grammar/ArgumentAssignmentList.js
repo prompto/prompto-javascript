@@ -81,7 +81,7 @@ ArgumentAssignmentList.prototype.toODialect = function(writer) {
     writer.append(")");
 };
 
-ArgumentAssignmentList.prototype.toPDialect = function(writer) {
+ArgumentAssignmentList.prototype.toSDialect = function(writer) {
     this.toODialect(writer);
 };
 

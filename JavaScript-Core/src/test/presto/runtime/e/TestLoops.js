@@ -14,114 +14,114 @@ exports.tearDown = function(done) {
 };
 
 exports.testDoWhile = function(test) {
-	checkOutput(test, "loops/doWhile.e");
+	checkOutput(test, "loops/doWhile.pec");
 };
 
 exports.testForEachCharacterRange = function(test) {
-	checkOutput(test, "loops/forEachCharacterRange.e");
+	checkOutput(test, "loops/forEachCharacterRange.pec");
 };
 
 exports.testForEachCharacterRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachCharacterRangeWithIndex.e");
+	checkOutput(test, "loops/forEachCharacterRangeWithIndex.pec");
 };
 
 exports.testForEachDateRange = function(test) {
-	checkOutput(test, "loops/forEachDateRange.e");
+	checkOutput(test, "loops/forEachDateRange.pec");
 };
 
 exports.testForEachDateRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDateRangeWithIndex.e");
+	checkOutput(test, "loops/forEachDateRangeWithIndex.pec");
 };
 
 exports.testForEachDictionaryItem = function(test) {
-	checkOutput(test, "loops/forEachDictionaryItem.e");
+	checkOutput(test, "loops/forEachDictionaryItem.pec");
 };
 
 exports.testForEachDictionaryItemWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDictionaryItemWithIndex.e");
+	checkOutput(test, "loops/forEachDictionaryItemWithIndex.pec");
 };
 
 exports.testForEachDictionaryKey = function(test) {
-	checkOutput(test, "loops/forEachDictionaryKey.e");
+	checkOutput(test, "loops/forEachDictionaryKey.pec");
 };
 
 exports.testForEachDictionaryKeyWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDictionaryKeyWithIndex.e");
+	checkOutput(test, "loops/forEachDictionaryKeyWithIndex.pec");
 };
 
 exports.testForEachDictionaryValue = function(test) {
-	checkOutput(test, "loops/forEachDictionaryValue.e");
+	checkOutput(test, "loops/forEachDictionaryValue.pec");
 };
 
 exports.testForEachDictionaryValueWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDictionaryValueWithIndex.e");
+	checkOutput(test, "loops/forEachDictionaryValueWithIndex.pec");
 };
 
 exports.testForEachInstanceList = function(test) {
-	checkOutput(test, "loops/forEachInstanceList.e");
+	checkOutput(test, "loops/forEachInstanceList.pec");
 };
 
 exports.testForEachInstanceListWithIndex = function(test) {
-	checkOutput(test, "loops/forEachInstanceListWithIndex.e");
+	checkOutput(test, "loops/forEachInstanceListWithIndex.pec");
 };
 
 exports.testForEachInstanceSet = function(test) {
-	checkOutput(test, "loops/forEachInstanceSet.e");
+	checkOutput(test, "loops/forEachInstanceSet.pec");
 };
 
 exports.testForEachInstanceSetWithIndex = function(test) {
-	checkOutput(test, "loops/forEachInstanceSetWithIndex.e");
+	checkOutput(test, "loops/forEachInstanceSetWithIndex.pec");
 };
 
 exports.testForEachIntegerList = function(test) {
-	checkOutput(test, "loops/forEachIntegerList.e");
+	checkOutput(test, "loops/forEachIntegerList.pec");
 };
 
 exports.testForEachIntegerListWithIndex = function(test) {
-	checkOutput(test, "loops/forEachIntegerListWithIndex.e");
+	checkOutput(test, "loops/forEachIntegerListWithIndex.pec");
 };
 
 exports.testForEachIntegerRange = function(test) {
-	checkOutput(test, "loops/forEachIntegerRange.e");
+	checkOutput(test, "loops/forEachIntegerRange.pec");
 };
 
 exports.testForEachIntegerRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachIntegerRangeWithIndex.e");
+	checkOutput(test, "loops/forEachIntegerRangeWithIndex.pec");
 };
 
 exports.testForEachIntegerSet = function(test) {
-	checkOutput(test, "loops/forEachIntegerSet.e");
+	checkOutput(test, "loops/forEachIntegerSet.pec");
 };
 
 exports.testForEachIntegerSetWithIndex = function(test) {
-	checkOutput(test, "loops/forEachIntegerSetWithIndex.e");
+	checkOutput(test, "loops/forEachIntegerSetWithIndex.pec");
 };
 
 exports.testForEachTimeRange = function(test) {
-	checkOutput(test, "loops/forEachTimeRange.e");
+	checkOutput(test, "loops/forEachTimeRange.pec");
 };
 
 exports.testForEachTimeRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachTimeRangeWithIndex.e");
+	checkOutput(test, "loops/forEachTimeRangeWithIndex.pec");
 };
 
 exports.testForEachTupleList = function(test) {
-	checkOutput(test, "loops/forEachTupleList.e");
+	checkOutput(test, "loops/forEachTupleList.pec");
 };
 
 exports.testForEachTupleListWithIndex = function(test) {
-	checkOutput(test, "loops/forEachTupleListWithIndex.e");
+	checkOutput(test, "loops/forEachTupleListWithIndex.pec");
 };
 
 exports.testForEachTupleSet = function(test) {
-	checkOutput(test, "loops/forEachTupleSet.e");
+	checkOutput(test, "loops/forEachTupleSet.pec");
 };
 
 exports.testForEachTupleSetWithIndex = function(test) {
-	checkOutput(test, "loops/forEachTupleSetWithIndex.e");
+	checkOutput(test, "loops/forEachTupleSetWithIndex.pec");
 };
 
 exports.testWhile = function(test) {
-	checkOutput(test, "loops/while.e");
+	checkOutput(test, "loops/while.pec");
 };
 

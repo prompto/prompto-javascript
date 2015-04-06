@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testSliceList = function(test) {
-	checkOutput(test, "slice/sliceList.o");
+	checkOutput(test, "slice/sliceList.poc");
 };
 
 exports.testSliceRange = function(test) {
-	checkOutput(test, "slice/sliceRange.o");
+	checkOutput(test, "slice/sliceRange.poc");
 };
 
 exports.testSliceText = function(test) {
-	checkOutput(test, "slice/sliceText.o");
+	checkOutput(test, "slice/sliceText.poc");
 };
 

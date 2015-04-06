@@ -40,13 +40,13 @@ exports.testSystemOutPrint = function(test) {
 };
 
 exports.testReturn = function(test) {
-	runResource("native/return.e");
+	runResource("native/return.pec");
 	test.equal(Out.read(), os.type());
 	test.done();
 };
 
 exports.testDateTimeTZName = function(test) {
-    runResource("builtins/dateTimeTZName.e");
+    runResource("builtins/dateTimeTZName.pec");
     var tzName = "UTC"; // TimeZone.getTimeZone("UTC").getDisplayName(Locale.ENGLISH);
     // test.equal(Out.read(), "tzName=" + tzName);
     test.done();

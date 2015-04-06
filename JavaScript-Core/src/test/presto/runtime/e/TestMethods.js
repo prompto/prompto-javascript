@@ -14,50 +14,50 @@ exports.tearDown = function(done) {
 };
 
 exports.testAnonymous = function(test) {
-	checkOutput(test, "methods/anonymous.e");
+	checkOutput(test, "methods/anonymous.pec");
 };
 
 exports.testAttribute = function(test) {
-	checkOutput(test, "methods/attribute.e");
+	checkOutput(test, "methods/attribute.pec");
 };
 
 exports.testDefault = function(test) {
-	checkOutput(test, "methods/default.e");
+	checkOutput(test, "methods/default.pec");
 };
 
 exports.testE_as_e_bug = function(test) {
-	checkOutput(test, "methods/e_as_e_bug.e");
+	checkOutput(test, "methods/e_as_e_bug.pec");
 };
 
 exports.testExpressionWith = function(test) {
-	checkOutput(test, "methods/expressionWith.e");
+	checkOutput(test, "methods/expressionWith.pec");
 };
 
 exports.testImplicit = function(test) {
-	checkOutput(test, "methods/implicit.e");
+	checkOutput(test, "methods/implicit.pec");
 };
 
 exports.testMember = function(test) {
-	checkOutput(test, "methods/member.e");
+	checkOutput(test, "methods/member.pec");
 };
 
 exports.testPolymorphic_abstract = function(test) {
-	checkOutput(test, "methods/polymorphic_abstract.e");
+	checkOutput(test, "methods/polymorphic_abstract.pec");
 };
 
 exports.testPolymorphic_implicit = function(test) {
-	checkOutput(test, "methods/polymorphic_implicit.e");
+	checkOutput(test, "methods/polymorphic_implicit.pec");
 };
 
 exports.testPolymorphic_named = function(test) {
-	checkOutput(test, "methods/polymorphic_named.e");
+	checkOutput(test, "methods/polymorphic_named.pec");
 };
 
 exports.testPolymorphic_runtime = function(test) {
-	checkOutput(test, "methods/polymorphic_runtime.e");
+	checkOutput(test, "methods/polymorphic_runtime.pec");
 };
 
 exports.testSpecified = function(test) {
-	checkOutput(test, "methods/specified.e");
+	checkOutput(test, "methods/specified.pec");
 };
 

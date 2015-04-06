@@ -63,7 +63,7 @@ WriteStatement.prototype.toODialect = function(writer) {
     this.resource.toDialect(writer);
 };
 
-WriteStatement.prototype.toPDialect = function(writer) {
+WriteStatement.prototype.toSDialect = function(writer) {
     this.toEDialect(writer);
 };
 

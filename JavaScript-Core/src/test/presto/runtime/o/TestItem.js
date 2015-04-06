@@ -14,22 +14,22 @@ exports.tearDown = function(done) {
 };
 
 exports.testItemDict = function(test) {
-	checkOutput(test, "item/itemDict.o");
+	checkOutput(test, "item/itemDict.poc");
 };
 
 exports.testItemList = function(test) {
-	checkOutput(test, "item/itemList.o");
+	checkOutput(test, "item/itemList.poc");
 };
 
 exports.testItemRange = function(test) {
-	checkOutput(test, "item/itemRange.o");
+	checkOutput(test, "item/itemRange.poc");
 };
 
 exports.testItemSet = function(test) {
-	checkOutput(test, "item/itemSet.o");
+	checkOutput(test, "item/itemSet.poc");
 };
 
 exports.testItemText = function(test) {
-	checkOutput(test, "item/itemText.o");
+	checkOutput(test, "item/itemText.poc");
 };
 

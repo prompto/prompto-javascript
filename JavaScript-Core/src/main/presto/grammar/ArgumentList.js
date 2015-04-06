@@ -63,7 +63,7 @@ ArgumentList.prototype.toODialect = function(writer) {
     }
 };
 
-ArgumentList.prototype.toPDialect = function(writer) {
+ArgumentList.prototype.toSDialect = function(writer) {
     this.toODialect(writer);
 };
 

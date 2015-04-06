@@ -3,26 +3,26 @@ require("../../../../exploded");
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 exports.testMultCharacter = function(test) {
-	compareResourceEOE(test, "mult/multCharacter.e");
+	compareResourceEOE(test, "mult/multCharacter.pec");
 };
 
 exports.testMultDecimal = function(test) {
-	compareResourceEOE(test, "mult/multDecimal.e");
+	compareResourceEOE(test, "mult/multDecimal.pec");
 };
 
 exports.testMultInteger = function(test) {
-	compareResourceEOE(test, "mult/multInteger.e");
+	compareResourceEOE(test, "mult/multInteger.pec");
 };
 
 exports.testMultList = function(test) {
-	compareResourceEOE(test, "mult/multList.e");
+	compareResourceEOE(test, "mult/multList.pec");
 };
 
 exports.testMultPeriod = function(test) {
-	compareResourceEOE(test, "mult/multPeriod.e");
+	compareResourceEOE(test, "mult/multPeriod.pec");
 };
 
 exports.testMultText = function(test) {
-	compareResourceEOE(test, "mult/multText.e");
+	compareResourceEOE(test, "mult/multText.pec");
 };
 

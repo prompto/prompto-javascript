@@ -14,46 +14,46 @@ exports.tearDown = function(done) {
 };
 
 exports.testSortBooleans = function(test) {
-	checkOutput(test, "sortSet/sortBooleans.e");
+	checkOutput(test, "sortSet/sortBooleans.pec");
 };
 
 exports.testSortDates = function(test) {
-	checkOutput(test, "sortSet/sortDates.e");
+	checkOutput(test, "sortSet/sortDates.pec");
 };
 
 exports.testSortDateTimes = function(test) {
-	checkOutput(test, "sortSet/sortDateTimes.e");
+	checkOutput(test, "sortSet/sortDateTimes.pec");
 };
 
 exports.testSortDecimals = function(test) {
-	checkOutput(test, "sortSet/sortDecimals.e");
+	checkOutput(test, "sortSet/sortDecimals.pec");
 };
 
 exports.testSortExpressions = function(test) {
-	checkOutput(test, "sortSet/sortExpressions.e");
+	checkOutput(test, "sortSet/sortExpressions.pec");
 };
 
 exports.testSortIntegers = function(test) {
-	checkOutput(test, "sortSet/sortIntegers.e");
+	checkOutput(test, "sortSet/sortIntegers.pec");
 };
 
 exports.testSortKeys = function(test) {
-	checkOutput(test, "sortSet/sortKeys.e");
+	checkOutput(test, "sortSet/sortKeys.pec");
 };
 
 exports.testSortMethods = function(test) {
-	checkOutput(test, "sortSet/sortMethods.e");
+	checkOutput(test, "sortSet/sortMethods.pec");
 };
 
 exports.testSortNames = function(test) {
-	checkOutput(test, "sortSet/sortNames.e");
+	checkOutput(test, "sortSet/sortNames.pec");
 };
 
 exports.testSortTexts = function(test) {
-	checkOutput(test, "sortSet/sortTexts.e");
+	checkOutput(test, "sortSet/sortTexts.pec");
 };
 
 exports.testSortTimes = function(test) {
-	checkOutput(test, "sortSet/sortTimes.e");
+	checkOutput(test, "sortSet/sortTimes.pec");
 };
 

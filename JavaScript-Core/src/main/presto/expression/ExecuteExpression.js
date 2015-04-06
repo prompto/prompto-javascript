@@ -32,7 +32,7 @@ ExecuteExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 };
 
-ExecuteExpression.prototype.toPDialect = function(writer) {
+ExecuteExpression.prototype.toSDialect = function(writer) {
     this.toODialect(writer);
 };
 

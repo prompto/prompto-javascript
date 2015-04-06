@@ -14,22 +14,22 @@ exports.tearDown = function(done) {
 };
 
 exports.testCyclic = function(test) {
-	checkOutput(test, "lazy/cyclic.o");
+	checkOutput(test, "lazy/cyclic.poc");
 };
 
 exports.testDict = function(test) {
-	checkOutput(test, "lazy/dict.o");
+	checkOutput(test, "lazy/dict.poc");
 };
 
 exports.testList = function(test) {
-	checkOutput(test, "lazy/list.o");
+	checkOutput(test, "lazy/list.poc");
 };
 
 exports.testSet = function(test) {
-	checkOutput(test, "lazy/set.o");
+	checkOutput(test, "lazy/set.poc");
 };
 
 exports.testTransient = function(test) {
-	checkOutput(test, "lazy/transient.o");
+	checkOutput(test, "lazy/transient.poc");
 };
 

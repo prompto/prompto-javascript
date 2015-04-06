@@ -14,58 +14,58 @@ exports.tearDown = function(done) {
 };
 
 exports.testGtCharacter = function(test) {
-	checkOutput(test, "greater/gtCharacter.o");
+	checkOutput(test, "greater/gtCharacter.poc");
 };
 
 exports.testGtDate = function(test) {
-	checkOutput(test, "greater/gtDate.o");
+	checkOutput(test, "greater/gtDate.poc");
 };
 
 exports.testGtDateTime = function(test) {
-	checkOutput(test, "greater/gtDateTime.o");
+	checkOutput(test, "greater/gtDateTime.poc");
 };
 
 exports.testGtDecimal = function(test) {
-	checkOutput(test, "greater/gtDecimal.o");
+	checkOutput(test, "greater/gtDecimal.poc");
 };
 
 exports.testGteCharacter = function(test) {
-	checkOutput(test, "greater/gteCharacter.o");
+	checkOutput(test, "greater/gteCharacter.poc");
 };
 
 exports.testGteDate = function(test) {
-	checkOutput(test, "greater/gteDate.o");
+	checkOutput(test, "greater/gteDate.poc");
 };
 
 exports.testGteDateTime = function(test) {
-	checkOutput(test, "greater/gteDateTime.o");
+	checkOutput(test, "greater/gteDateTime.poc");
 };
 
 exports.testGteDecimal = function(test) {
-	checkOutput(test, "greater/gteDecimal.o");
+	checkOutput(test, "greater/gteDecimal.poc");
 };
 
 exports.testGteInteger = function(test) {
-	checkOutput(test, "greater/gteInteger.o");
+	checkOutput(test, "greater/gteInteger.poc");
 };
 
 exports.testGteText = function(test) {
-	checkOutput(test, "greater/gteText.o");
+	checkOutput(test, "greater/gteText.poc");
 };
 
 exports.testGteTime = function(test) {
-	checkOutput(test, "greater/gteTime.o");
+	checkOutput(test, "greater/gteTime.poc");
 };
 
 exports.testGtInteger = function(test) {
-	checkOutput(test, "greater/gtInteger.o");
+	checkOutput(test, "greater/gtInteger.poc");
 };
 
 exports.testGtText = function(test) {
-	checkOutput(test, "greater/gtText.o");
+	checkOutput(test, "greater/gtText.poc");
 };
 
 exports.testGtTime = function(test) {
-	checkOutput(test, "greater/gtTime.o");
+	checkOutput(test, "greater/gtTime.poc");
 };
 

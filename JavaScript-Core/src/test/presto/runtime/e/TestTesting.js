@@ -14,42 +14,42 @@ exports.tearDown = function(done) {
 };
 
 exports.testAnd = function(test) {
-	checkOutput(test, "testing/and.e");
+	checkOutput(test, "testing/and.pec");
 };
 
 exports.testContains = function(test) {
-	checkOutput(test, "testing/contains.e");
+	checkOutput(test, "testing/contains.pec");
 };
 
 exports.testGreater = function(test) {
-	checkOutput(test, "testing/greater.e");
+	checkOutput(test, "testing/greater.pec");
 };
 
 exports.testMethod = function(test) {
-	checkOutput(test, "testing/method.e");
+	checkOutput(test, "testing/method.pec");
 };
 
 exports.testNegative = function(test) {
-	checkOutput(test, "testing/negative.e");
+	checkOutput(test, "testing/negative.pec");
 };
 
 exports.testNegativeError = function(test) {
-	checkOutput(test, "testing/negativeError.e");
+	checkOutput(test, "testing/negativeError.pec");
 };
 
 exports.testNot = function(test) {
-	checkOutput(test, "testing/not.e");
+	checkOutput(test, "testing/not.pec");
 };
 
 exports.testOr = function(test) {
-	checkOutput(test, "testing/or.e");
+	checkOutput(test, "testing/or.pec");
 };
 
 exports.testPositive = function(test) {
-	checkOutput(test, "testing/positive.e");
+	checkOutput(test, "testing/positive.pec");
 };
 
 exports.testPositiveError = function(test) {
-	checkOutput(test, "testing/positiveError.e");
+	checkOutput(test, "testing/positiveError.pec");
 };
 

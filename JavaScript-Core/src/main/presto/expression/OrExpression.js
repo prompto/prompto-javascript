@@ -21,7 +21,7 @@ OrExpression.prototype.toDialect = function(writer) {
 OrExpression.prototype.operatorToDialect = function(dialect) {
     switch(dialect) {
         case Dialect.E:
-        case Dialect.P:
+        case Dialect.S:
             return " or ";
         case Dialect.O:
             return " || ";
@@ -42,7 +42,7 @@ OrExpression.prototype.toODialect = function(writer) {
     this.right.toDialect(writer);
 };
 
-OrExpression.prototype.toPDialect = function(writer) {
+OrExpression.prototype.toSDialect = function(writer) {
     this.left.toDialect(writer);
     writer.append(this.operatorToDialect(writer.dialect));
     this.right.toDialect(writer);

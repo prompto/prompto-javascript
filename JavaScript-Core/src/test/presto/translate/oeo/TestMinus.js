@@ -3,14 +3,14 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testMinusDecimal = function(test) {
-	compareResourceOEO(test, "minus/minusDecimal.o");
+	compareResourceOEO(test, "minus/minusDecimal.poc");
 };
 
 exports.testMinusInteger = function(test) {
-	compareResourceOEO(test, "minus/minusInteger.o");
+	compareResourceOEO(test, "minus/minusInteger.poc");
 };
 
 exports.testMinusPeriod = function(test) {
-	compareResourceOEO(test, "minus/minusPeriod.o");
+	compareResourceOEO(test, "minus/minusPeriod.poc");
 };
 

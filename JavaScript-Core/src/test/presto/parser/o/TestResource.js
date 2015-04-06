@@ -20,7 +20,7 @@ exports.tearDown = function(done) {
 
 exports.testBadRead = function(test) {
 	test.throws( function() {
-		runResource("resource/badRead.o");
+		runResource("resource/badRead.poc");
 	}, presto.error.SyntaxError);
 	test.done();
 };
@@ -29,7 +29,7 @@ exports.testBadRead = function(test) {
 
 exports.testBadWrite = function(test) {
 	test.throws( function() {
-		runResource("resource/badWrite.o");
+		runResource("resource/badWrite.poc");
 	}, presto.error.SyntaxError);
 	test.done();
 };
@@ -37,25 +37,25 @@ exports.testBadWrite = function(test) {
 
 exports.testBadResource = function(test) {
 	test.throws( function() {
-		runResource("resource/badResource.o");
+		runResource("resource/badResource.poc");
 	}, presto.error.SyntaxError);
 	test.done();
 };
 
 exports.testReadResource = function(test) {
-	checkOutput(test, "resource/readResource.o");
+	checkOutput(test, "resource/readResource.poc");
 }
 
 
 exports.testWriteResource = function(test) {
-	checkOutput(test, "resource/writeResource.o");
+	checkOutput(test, "resource/writeResource.poc");
 }
 
 exports.testReadWithResource = function(test) {
-	checkOutput(test, "resource/readWithResource.o");
+	checkOutput(test, "resource/readWithResource.poc");
 }
 
 exports.testWriteWithResource = function(test) {
-	checkOutput(test, "resource/writeWithResource.o");
+	checkOutput(test, "resource/writeWithResource.poc");
 }
 

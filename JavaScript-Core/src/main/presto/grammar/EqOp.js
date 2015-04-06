@@ -53,7 +53,7 @@ EqOp.EQUALS.toEDialect = function(writer) {
 EqOp.EQUALS.toODialect = function(writer) {
     writer.append('==');
 };
-EqOp.EQUALS.toPDialect = function(writer) {
+EqOp.EQUALS.toSDialect = function(writer) {
     writer.append('==');
 };
 EqOp.EQUALS.toEString = function() {
@@ -62,7 +62,7 @@ EqOp.EQUALS.toEString = function() {
 EqOp.EQUALS.toOString = function() {
     return '==';
 };
-EqOp.EQUALS.toPString = function() {
+EqOp.EQUALS.toSString = function() {
     return '==';
 };
 
@@ -73,7 +73,7 @@ EqOp.NOT_EQUALS.toEDialect = function(writer) {
 EqOp.NOT_EQUALS.toODialect = function(writer) {
     writer.append('!=');
 };
-EqOp.NOT_EQUALS.toPDialect = function(writer) {
+EqOp.NOT_EQUALS.toSDialect = function(writer) {
     writer.append('!=');
 };
 EqOp.NOT_EQUALS.toEString = function() {
@@ -82,7 +82,7 @@ EqOp.NOT_EQUALS.toEString = function() {
 EqOp.NOT_EQUALS.toOString = function() {
     return '!=';
 };
-EqOp.NOT_EQUALS.toPString = function() {
+EqOp.NOT_EQUALS.toSString = function() {
     return '!=';
 };
 
@@ -93,7 +93,7 @@ EqOp.ROUGHLY.toEDialect = function(writer) {
 EqOp.ROUGHLY.toODialect = function(writer) {
     writer.append('~=');
 };
-EqOp.ROUGHLY.toPDialect = function(writer) {
+EqOp.ROUGHLY.toSDialect = function(writer) {
     writer.append('~=');
 };
 EqOp.ROUGHLY.toEString = function() {
@@ -102,7 +102,7 @@ EqOp.ROUGHLY.toEString = function() {
 EqOp.ROUGHLY.toOString = function() {
     return '~=';
 };
-EqOp.ROUGHLY.toPString = function() {
+EqOp.ROUGHLY.toSString = function() {
     return '~=';
 };
 

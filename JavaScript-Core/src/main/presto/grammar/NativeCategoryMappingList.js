@@ -26,7 +26,7 @@ NativeCategoryMappingList.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-NativeCategoryMappingList.prototype.toPDialect = function(writer) {
+NativeCategoryMappingList.prototype.toSDialect = function(writer) {
     writer.append("mappings:\n");
     writer.indent();
     for(var i = 0;i<this.length;i++) {

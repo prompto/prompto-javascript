@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testCategoryEnum = function(test) {
-	checkOutput(test, "enums/categoryEnum.e");
+	checkOutput(test, "enums/categoryEnum.pec");
 };
 
 exports.testIntegerEnum = function(test) {
-	checkOutput(test, "enums/integerEnum.e");
+	checkOutput(test, "enums/integerEnum.pec");
 };
 
 exports.testTextEnum = function(test) {
-	checkOutput(test, "enums/textEnum.e");
+	checkOutput(test, "enums/textEnum.pec");
 };
 

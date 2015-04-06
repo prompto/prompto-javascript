@@ -43,7 +43,7 @@ NativeCategoryDeclaration.prototype.bodyToODialect = function(writer) {
     this.categoryMappings.toDialect(writer);
 };
 
-NativeCategoryDeclaration.prototype.toPDialect = function(writer) {
+NativeCategoryDeclaration.prototype.toSDialect = function(writer) {
     this.protoToPDialect(writer, null);
     writer.indent();
     writer.newLine();

@@ -62,7 +62,7 @@ ConcreteCategoryDeclaration.prototype.bodyToODialect = function(writer) {
 };
 
 
-ConcreteCategoryDeclaration.prototype.toPDialect = function(writer) {
+ConcreteCategoryDeclaration.prototype.toSDialect = function(writer) {
     this.protoToPDialect(writer, this.derivedFrom);
     this.methodsToPDialect(writer);
 };

@@ -27,7 +27,7 @@ CastExpression.prototype.toEDialect = function(writer) {
     this.type.toDialect(writer);
 };
 
-CastExpression.prototype.toPDialect = function(writer) {
+CastExpression.prototype.toSDialect = function(writer) {
     this.toEDialect(writer);
 };
 

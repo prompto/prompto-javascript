@@ -19,7 +19,7 @@ AbstractMethodDeclaration.prototype.check = function(context) {
 	return this.returnType;
 };
 
-AbstractMethodDeclaration.prototype.toPDialect = function(writer) {
+AbstractMethodDeclaration.prototype.toSDialect = function(writer) {
     writer.append("abstract def ");
     writer.append(this.name);
     writer.append(" (");

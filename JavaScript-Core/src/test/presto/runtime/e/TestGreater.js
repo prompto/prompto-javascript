@@ -14,58 +14,58 @@ exports.tearDown = function(done) {
 };
 
 exports.testGtCharacter = function(test) {
-	checkOutput(test, "greater/gtCharacter.e");
+	checkOutput(test, "greater/gtCharacter.pec");
 };
 
 exports.testGtDate = function(test) {
-	checkOutput(test, "greater/gtDate.e");
+	checkOutput(test, "greater/gtDate.pec");
 };
 
 exports.testGtDateTime = function(test) {
-	checkOutput(test, "greater/gtDateTime.e");
+	checkOutput(test, "greater/gtDateTime.pec");
 };
 
 exports.testGtDecimal = function(test) {
-	checkOutput(test, "greater/gtDecimal.e");
+	checkOutput(test, "greater/gtDecimal.pec");
 };
 
 exports.testGteCharacter = function(test) {
-	checkOutput(test, "greater/gteCharacter.e");
+	checkOutput(test, "greater/gteCharacter.pec");
 };
 
 exports.testGteDate = function(test) {
-	checkOutput(test, "greater/gteDate.e");
+	checkOutput(test, "greater/gteDate.pec");
 };
 
 exports.testGteDateTime = function(test) {
-	checkOutput(test, "greater/gteDateTime.e");
+	checkOutput(test, "greater/gteDateTime.pec");
 };
 
 exports.testGteDecimal = function(test) {
-	checkOutput(test, "greater/gteDecimal.e");
+	checkOutput(test, "greater/gteDecimal.pec");
 };
 
 exports.testGteInteger = function(test) {
-	checkOutput(test, "greater/gteInteger.e");
+	checkOutput(test, "greater/gteInteger.pec");
 };
 
 exports.testGteText = function(test) {
-	checkOutput(test, "greater/gteText.e");
+	checkOutput(test, "greater/gteText.pec");
 };
 
 exports.testGteTime = function(test) {
-	checkOutput(test, "greater/gteTime.e");
+	checkOutput(test, "greater/gteTime.pec");
 };
 
 exports.testGtInteger = function(test) {
-	checkOutput(test, "greater/gtInteger.e");
+	checkOutput(test, "greater/gtInteger.pec");
 };
 
 exports.testGtText = function(test) {
-	checkOutput(test, "greater/gtText.e");
+	checkOutput(test, "greater/gtText.pec");
 };
 
 exports.testGtTime = function(test) {
-	checkOutput(test, "greater/gtTime.e");
+	checkOutput(test, "greater/gtTime.pec");
 };
 

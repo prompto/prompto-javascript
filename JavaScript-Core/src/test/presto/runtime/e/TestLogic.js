@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testAndBoolean = function(test) {
-	checkOutput(test, "logic/andBoolean.e");
+	checkOutput(test, "logic/andBoolean.pec");
 };
 
 exports.testNotBoolean = function(test) {
-	checkOutput(test, "logic/notBoolean.e");
+	checkOutput(test, "logic/notBoolean.pec");
 };
 
 exports.testOrBoolean = function(test) {
-	checkOutput(test, "logic/orBoolean.e");
+	checkOutput(test, "logic/orBoolean.pec");
 };
 

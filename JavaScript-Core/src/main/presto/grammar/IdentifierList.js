@@ -31,8 +31,8 @@ IdentifierList.prototype.toDialect = function(writer, finalAnd) {
         case Dialect.O:
             this.toODialect(writer);
             break;
-        case Dialect.P:
-            this.toPDialect(writer);
+        case Dialect.S:
+            this.toSDialect(writer);
             break;
     }
 };
@@ -69,7 +69,7 @@ IdentifierList.prototype.toODialect = function(writer) {
     }
 };
 
-IdentifierList.prototype.toPDialect = function(writer) {
+IdentifierList.prototype.toSDialect = function(writer) {
     this.toODialect(writer);
 };
 

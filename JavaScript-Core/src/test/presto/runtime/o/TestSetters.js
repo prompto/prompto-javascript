@@ -14,10 +14,10 @@ exports.tearDown = function(done) {
 };
 
 exports.testGetter = function(test) {
-	checkOutput(test, "setters/getter.o");
+	checkOutput(test, "setters/getter.poc");
 };
 
 exports.testSetter = function(test) {
-	checkOutput(test, "setters/setter.o");
+	checkOutput(test, "setters/setter.poc");
 };
 

@@ -14,46 +14,46 @@ exports.tearDown = function(done) {
 };
 
 exports.testSortBooleans = function(test) {
-	checkOutput(test, "sortList/sortBooleans.o");
+	checkOutput(test, "sortList/sortBooleans.poc");
 };
 
 exports.testSortDates = function(test) {
-	checkOutput(test, "sortList/sortDates.o");
+	checkOutput(test, "sortList/sortDates.poc");
 };
 
 exports.testSortDateTimes = function(test) {
-	checkOutput(test, "sortList/sortDateTimes.o");
+	checkOutput(test, "sortList/sortDateTimes.poc");
 };
 
 exports.testSortDecimals = function(test) {
-	checkOutput(test, "sortList/sortDecimals.o");
+	checkOutput(test, "sortList/sortDecimals.poc");
 };
 
 exports.testSortExpressions = function(test) {
-	checkOutput(test, "sortList/sortExpressions.o");
+	checkOutput(test, "sortList/sortExpressions.poc");
 };
 
 exports.testSortIntegers = function(test) {
-	checkOutput(test, "sortList/sortIntegers.o");
+	checkOutput(test, "sortList/sortIntegers.poc");
 };
 
 exports.testSortKeys = function(test) {
-	checkOutput(test, "sortList/sortKeys.o");
+	checkOutput(test, "sortList/sortKeys.poc");
 };
 
 exports.testSortMethods = function(test) {
-	checkOutput(test, "sortList/sortMethods.o");
+	checkOutput(test, "sortList/sortMethods.poc");
 };
 
 exports.testSortNames = function(test) {
-	checkOutput(test, "sortList/sortNames.o");
+	checkOutput(test, "sortList/sortNames.poc");
 };
 
 exports.testSortTexts = function(test) {
-	checkOutput(test, "sortList/sortTexts.o");
+	checkOutput(test, "sortList/sortTexts.poc");
 };
 
 exports.testSortTimes = function(test) {
-	checkOutput(test, "sortList/sortTimes.o");
+	checkOutput(test, "sortList/sortTimes.poc");
 };
 

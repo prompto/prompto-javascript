@@ -14,46 +14,46 @@ exports.tearDown = function(done) {
 };
 
 exports.testDivideByZero = function(test) {
-	checkOutput(test, "errors/divideByZero.e");
+	checkOutput(test, "errors/divideByZero.pec");
 };
 
 exports.testIndexOutOfRange_listItem = function(test) {
-	checkOutput(test, "errors/indexOutOfRange-listItem.e");
+	checkOutput(test, "errors/indexOutOfRange-listItem.pec");
 };
 
 exports.testIndexOutOfRange_sliceList = function(test) {
-	checkOutput(test, "errors/indexOutOfRange-sliceList.e");
+	checkOutput(test, "errors/indexOutOfRange-sliceList.pec");
 };
 
 exports.testIndexOutOfRange_sliceRange = function(test) {
-	checkOutput(test, "errors/indexOutOfRange-sliceRange.e");
+	checkOutput(test, "errors/indexOutOfRange-sliceRange.pec");
 };
 
 exports.testIndexOutOfRange_sliceText = function(test) {
-	checkOutput(test, "errors/indexOutOfRange-sliceText.e");
+	checkOutput(test, "errors/indexOutOfRange-sliceText.pec");
 };
 
 exports.testNullDict = function(test) {
-	checkOutput(test, "errors/nullDict.e");
+	checkOutput(test, "errors/nullDict.pec");
 };
 
 exports.testNullItem = function(test) {
-	checkOutput(test, "errors/nullItem.e");
+	checkOutput(test, "errors/nullItem.pec");
 };
 
 exports.testNullKey = function(test) {
-	checkOutput(test, "errors/nullKey.e");
+	checkOutput(test, "errors/nullKey.pec");
 };
 
 exports.testNullMember = function(test) {
-	checkOutput(test, "errors/nullMember.e");
+	checkOutput(test, "errors/nullMember.pec");
 };
 
 exports.testNullMethod = function(test) {
-	checkOutput(test, "errors/nullMethod.e");
+	checkOutput(test, "errors/nullMethod.pec");
 };
 
 exports.testUserException = function(test) {
-	checkOutput(test, "errors/userException.e");
+	checkOutput(test, "errors/userException.pec");
 };
 

@@ -94,7 +94,7 @@ ConcreteMethodDeclaration.prototype.toDialect = function(writer) {
 
 */
 
-ConcreteMethodDeclaration.prototype.toPDialect = function(writer) {
+ConcreteMethodDeclaration.prototype.toSDialect = function(writer) {
     writer.append("def ");
     writer.append(this.name);
     writer.append(" (");

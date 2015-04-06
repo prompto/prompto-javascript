@@ -97,7 +97,7 @@ FetchExpression.prototype.toODialect = function(writer) {
     this.filter.toDialect(writer);
 };
 
-FetchExpression.prototype.toPDialect = function(writer) {
+FetchExpression.prototype.toSDialect = function(writer) {
     writer.append("fetch ");
     writer.append(this.itemName);
     writer.append(" from ");

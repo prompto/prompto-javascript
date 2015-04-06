@@ -16,7 +16,7 @@ OperatorMethodDeclaration.prototype.memberCheck = function(declaration, context)
     // TODO Auto-generated method stub
 };
 
-OperatorMethodDeclaration.prototype.toPDialect = function(writer) {
+OperatorMethodDeclaration.prototype.toSDialect = function(writer) {
     writer.append("def operator ");
     writer.append(this.operator.token);
     writer.append(" (");

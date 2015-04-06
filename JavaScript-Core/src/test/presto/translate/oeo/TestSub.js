@@ -3,26 +3,26 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testSubDate = function(test) {
-	compareResourceOEO(test, "sub/subDate.o");
+	compareResourceOEO(test, "sub/subDate.poc");
 };
 
 exports.testSubDateTime = function(test) {
-	compareResourceOEO(test, "sub/subDateTime.o");
+	compareResourceOEO(test, "sub/subDateTime.poc");
 };
 
 exports.testSubDecimal = function(test) {
-	compareResourceOEO(test, "sub/subDecimal.o");
+	compareResourceOEO(test, "sub/subDecimal.poc");
 };
 
 exports.testSubInteger = function(test) {
-	compareResourceOEO(test, "sub/subInteger.o");
+	compareResourceOEO(test, "sub/subInteger.poc");
 };
 
 exports.testSubPeriod = function(test) {
-	compareResourceOEO(test, "sub/subPeriod.o");
+	compareResourceOEO(test, "sub/subPeriod.poc");
 };
 
 exports.testSubTime = function(test) {
-	compareResourceOEO(test, "sub/subTime.o");
+	compareResourceOEO(test, "sub/subTime.poc");
 };
 

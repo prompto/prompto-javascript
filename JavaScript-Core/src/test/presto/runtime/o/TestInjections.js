@@ -14,6 +14,6 @@ exports.tearDown = function(done) {
 };
 
 exports.testExpressionInjection = function(test) {
-	checkOutput(test, "injections/expressionInjection.o");
+	checkOutput(test, "injections/expressionInjection.poc");
 };
 

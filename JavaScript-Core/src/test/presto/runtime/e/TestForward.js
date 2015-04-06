@@ -14,6 +14,6 @@ exports.tearDown = function(done) {
 };
 
 exports.testForward = function(test) {
-	checkOutput(test, "forward/forward.e");
+	checkOutput(test, "forward/forward.pec");
 };
 

@@ -14,6 +14,6 @@ exports.tearDown = function(done) {
 };
 
 exports.testMinimal = function(test) {
-	runResource("issues/minimal.e","mainNoCmdLine",null);
+	runResource("issues/minimal.pec","mainNoCmdLine",null);
 	test.done();
 };

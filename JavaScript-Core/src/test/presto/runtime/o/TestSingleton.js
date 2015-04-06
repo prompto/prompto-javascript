@@ -14,10 +14,10 @@ exports.tearDown = function(done) {
 };
 
 exports.testAttribute = function(test) {
-	checkOutput(test, "singleton/attribute.o");
+	checkOutput(test, "singleton/attribute.poc");
 };
 
 exports.testMember = function(test) {
-	checkOutput(test, "singleton/member.o");
+	checkOutput(test, "singleton/member.poc");
 };
 

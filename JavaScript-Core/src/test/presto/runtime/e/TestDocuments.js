@@ -14,18 +14,18 @@ exports.tearDown = function(done) {
 };
 
 exports.testDeepItem = function(test) {
-	checkOutput(test, "documents/deepItem.e");
+	checkOutput(test, "documents/deepItem.pec");
 };
 
 exports.testDeepVariable = function(test) {
-	checkOutput(test, "documents/deepVariable.e");
+	checkOutput(test, "documents/deepVariable.pec");
 };
 
 exports.testItem = function(test) {
-	checkOutput(test, "documents/item.e");
+	checkOutput(test, "documents/item.pec");
 };
 
 exports.testVariable = function(test) {
-	checkOutput(test, "documents/variable.e");
+	checkOutput(test, "documents/variable.pec");
 };
 

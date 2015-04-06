@@ -1,11 +1,11 @@
 var EParserFactory = null;
 var OParserFactory = null;
-var PParserFactory = null;
+var SParserFactory = null;
 
 exports.resolve = function() {
     EParserFactory = require("./EParserFactory").EParserFactory;
     OParserFactory = require("./OParserFactory").OParserFactory;
-    PParserFactory = require("./PParserFactory").PParserFactory;
+    SParserFactory = require("./SParserFactory").SParserFactory;
 }
 
 function Dialect() {
@@ -35,15 +35,15 @@ Dialect.O.toString = function(o) {
     return o.toOString();
 };
 
-Dialect.P = new Dialect();
-Dialect.P.getParserFactory = function() {
-    return new PParserFactory();
+Dialect.S = new Dialect();
+Dialect.S.getParserFactory = function() {
+    return new SParserFactory();
 };
-Dialect.P.toDialect = function(w, o) {
-    o.toPDialect(w);
+Dialect.S.toDialect = function(w, o) {
+    o.toSDialect(w);
 };
-Dialect.P.toString = function(o) {
-    return o.toPString();
+Dialect.S.toString = function(o) {
+    return o.toSString();
 };
 
 exports.Dialect = Dialect;

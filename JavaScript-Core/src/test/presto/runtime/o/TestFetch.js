@@ -14,10 +14,10 @@ exports.tearDown = function(done) {
 };
 
 exports.testFetchFromList = function(test) {
-	checkOutput(test, "fetch/fetchFromList.o");
+	checkOutput(test, "fetch/fetchFromList.poc");
 };
 
 exports.testFetchFromSet = function(test) {
-	checkOutput(test, "fetch/fetchFromSet.o");
+	checkOutput(test, "fetch/fetchFromSet.poc");
 };
 

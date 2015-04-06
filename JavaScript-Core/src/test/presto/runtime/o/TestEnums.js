@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testCategoryEnum = function(test) {
-	checkOutput(test, "enums/categoryEnum.o");
+	checkOutput(test, "enums/categoryEnum.poc");
 };
 
 exports.testIntegerEnum = function(test) {
-	checkOutput(test, "enums/integerEnum.o");
+	checkOutput(test, "enums/integerEnum.poc");
 };
 
 exports.testTextEnum = function(test) {
-	checkOutput(test, "enums/textEnum.o");
+	checkOutput(test, "enums/textEnum.poc");
 };
 

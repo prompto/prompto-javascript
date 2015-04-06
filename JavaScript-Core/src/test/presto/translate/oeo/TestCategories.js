@@ -3,18 +3,18 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testCopyFromAscendant = function(test) {
-	compareResourceOEO(test, "categories/copyFromAscendant.o");
+	compareResourceOEO(test, "categories/copyFromAscendant.poc");
 };
 
 exports.testCopyFromAscendantWithOverride = function(test) {
-	compareResourceOEO(test, "categories/copyFromAscendantWithOverride.o");
+	compareResourceOEO(test, "categories/copyFromAscendantWithOverride.poc");
 };
 
 exports.testCopyFromDescendant = function(test) {
-	compareResourceOEO(test, "categories/copyFromDescendant.o");
+	compareResourceOEO(test, "categories/copyFromDescendant.poc");
 };
 
 exports.testCopyFromDescendantWithOverride = function(test) {
-	compareResourceOEO(test, "categories/copyFromDescendantWithOverride.o");
+	compareResourceOEO(test, "categories/copyFromDescendantWithOverride.poc");
 };
 

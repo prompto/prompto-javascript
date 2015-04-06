@@ -14,14 +14,14 @@ exports.tearDown = function(done) {
 };
 
 exports.testMultiAssignment = function(test) {
-	checkOutput(test, "tuples/multiAssignment.o");
+	checkOutput(test, "tuples/multiAssignment.poc");
 };
 
 exports.testSingleAssignment = function(test) {
-	checkOutput(test, "tuples/singleAssignment.o");
+	checkOutput(test, "tuples/singleAssignment.poc");
 };
 
 exports.testTupleElement = function(test) {
-	checkOutput(test, "tuples/tupleElement.o");
+	checkOutput(test, "tuples/tupleElement.poc");
 };
 

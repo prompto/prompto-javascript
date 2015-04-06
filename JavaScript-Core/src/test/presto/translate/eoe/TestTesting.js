@@ -3,42 +3,42 @@ require("../../../../exploded");
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 exports.testAnd = function(test) {
-	compareResourceEOE(test, "testing/and.e");
+	compareResourceEOE(test, "testing/and.pec");
 };
 
 exports.testContains = function(test) {
-	compareResourceEOE(test, "testing/contains.e");
+	compareResourceEOE(test, "testing/contains.pec");
 };
 
 exports.testGreater = function(test) {
-	compareResourceEOE(test, "testing/greater.e");
+	compareResourceEOE(test, "testing/greater.pec");
 };
 
 exports.testMethod = function(test) {
-	compareResourceEOE(test, "testing/method.e");
+	compareResourceEOE(test, "testing/method.pec");
 };
 
 exports.testNegative = function(test) {
-	compareResourceEOE(test, "testing/negative.e");
+	compareResourceEOE(test, "testing/negative.pec");
 };
 
 exports.testNegativeError = function(test) {
-	compareResourceEOE(test, "testing/negativeError.e");
+	compareResourceEOE(test, "testing/negativeError.pec");
 };
 
 exports.testNot = function(test) {
-	compareResourceEOE(test, "testing/not.e");
+	compareResourceEOE(test, "testing/not.pec");
 };
 
 exports.testOr = function(test) {
-	compareResourceEOE(test, "testing/or.e");
+	compareResourceEOE(test, "testing/or.pec");
 };
 
 exports.testPositive = function(test) {
-	compareResourceEOE(test, "testing/positive.e");
+	compareResourceEOE(test, "testing/positive.pec");
 };
 
 exports.testPositiveError = function(test) {
-	compareResourceEOE(test, "testing/positiveError.e");
+	compareResourceEOE(test, "testing/positiveError.pec");
 };
 

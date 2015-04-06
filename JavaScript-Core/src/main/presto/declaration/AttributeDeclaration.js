@@ -44,7 +44,7 @@ AttributeDeclaration.prototype.toODialect = function(writer) {
     writer.append(';');
 };
 
-AttributeDeclaration.prototype.toPDialect = function(writer) {
+AttributeDeclaration.prototype.toSDialect = function(writer) {
     writer.append("attr ");
     writer.append(this.name);
     writer.append(" ( ");

@@ -14,10 +14,10 @@ exports.tearDown = function(done) {
 };
 
 exports.testSelfAsParameter = function(test) {
-	checkOutput(test, "self/selfAsParameter.o");
+	checkOutput(test, "self/selfAsParameter.poc");
 };
 
 exports.testSelfMember = function(test) {
-	checkOutput(test, "self/selfMember.o");
+	checkOutput(test, "self/selfMember.poc");
 };
 

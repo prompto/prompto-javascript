@@ -14,18 +14,18 @@ exports.tearDown = function(done) {
 };
 
 exports.testCopyFromAscendant = function(test) {
-	checkOutput(test, "categories/copyFromAscendant.e");
+	checkOutput(test, "categories/copyFromAscendant.pec");
 };
 
 exports.testCopyFromAscendantWithOverride = function(test) {
-	checkOutput(test, "categories/copyFromAscendantWithOverride.e");
+	checkOutput(test, "categories/copyFromAscendantWithOverride.pec");
 };
 
 exports.testCopyFromDescendant = function(test) {
-	checkOutput(test, "categories/copyFromDescendant.e");
+	checkOutput(test, "categories/copyFromDescendant.pec");
 };
 
 exports.testCopyFromDescendantWithOverride = function(test) {
-	checkOutput(test, "categories/copyFromDescendantWithOverride.e");
+	checkOutput(test, "categories/copyFromDescendantWithOverride.pec");
 };
 

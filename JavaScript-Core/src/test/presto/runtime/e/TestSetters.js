@@ -14,10 +14,10 @@ exports.tearDown = function(done) {
 };
 
 exports.testGetter = function(test) {
-	checkOutput(test, "setters/getter.e");
+	checkOutput(test, "setters/getter.pec");
 };
 
 exports.testSetter = function(test) {
-	checkOutput(test, "setters/setter.e");
+	checkOutput(test, "setters/setter.pec");
 };
 

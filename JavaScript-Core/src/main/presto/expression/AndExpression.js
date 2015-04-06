@@ -21,7 +21,7 @@ AndExpression.prototype.toDialect = function(writer) {
 AndExpression.prototype.operatorToDialect = function(dialect) {
     switch(dialect) {
         case Dialect.E:
-        case Dialect.P:
+        case Dialect.S:
             return " and ";
         case Dialect.O:
             return " && ";
@@ -42,7 +42,7 @@ AndExpression.prototype.toODialect = function(writer) {
     this.right.toDialect(writer);
 };
 
-AndExpression.prototype.toPDialect = function(writer) {
+AndExpression.prototype.toSDialect = function(writer) {
     this.left.toDialect(writer);
     writer.append(" and ");
     this.right.toDialect(writer);

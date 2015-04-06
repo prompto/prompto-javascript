@@ -3,6 +3,6 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testExpressionInjection = function(test) {
-	compareResourceOEO(test, "injections/expressionInjection.o");
+	compareResourceOEO(test, "injections/expressionInjection.poc");
 };
 

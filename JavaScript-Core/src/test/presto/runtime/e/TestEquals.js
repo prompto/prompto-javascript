@@ -14,126 +14,126 @@ exports.tearDown = function(done) {
 };
 
 exports.testEqBoolean = function(test) {
-	checkOutput(test, "equals/eqBoolean.e");
+	checkOutput(test, "equals/eqBoolean.pec");
 };
 
 exports.testEqCharacter = function(test) {
-	checkOutput(test, "equals/eqCharacter.e");
+	checkOutput(test, "equals/eqCharacter.pec");
 };
 
 exports.testEqDate = function(test) {
-	checkOutput(test, "equals/eqDate.e");
+	checkOutput(test, "equals/eqDate.pec");
 };
 
 exports.testEqDateTime = function(test) {
-	checkOutput(test, "equals/eqDateTime.e");
+	checkOutput(test, "equals/eqDateTime.pec");
 };
 
 exports.testEqDecimal = function(test) {
-	checkOutput(test, "equals/eqDecimal.e");
+	checkOutput(test, "equals/eqDecimal.pec");
 };
 
 exports.testEqDict = function(test) {
-	checkOutput(test, "equals/eqDict.e");
+	checkOutput(test, "equals/eqDict.pec");
 };
 
 exports.testEqInteger = function(test) {
-	checkOutput(test, "equals/eqInteger.e");
+	checkOutput(test, "equals/eqInteger.pec");
 };
 
 exports.testEqList = function(test) {
-	checkOutput(test, "equals/eqList.e");
+	checkOutput(test, "equals/eqList.pec");
 };
 
 exports.testEqPeriod = function(test) {
-	checkOutput(test, "equals/eqPeriod.e");
+	checkOutput(test, "equals/eqPeriod.pec");
 };
 
 exports.testEqRange = function(test) {
-	checkOutput(test, "equals/eqRange.e");
+	checkOutput(test, "equals/eqRange.pec");
 };
 
 exports.testEqSet = function(test) {
-	checkOutput(test, "equals/eqSet.e");
+	checkOutput(test, "equals/eqSet.pec");
 };
 
 exports.testEqText = function(test) {
-	checkOutput(test, "equals/eqText.e");
+	checkOutput(test, "equals/eqText.pec");
 };
 
 exports.testEqTime = function(test) {
-	checkOutput(test, "equals/eqTime.e");
+	checkOutput(test, "equals/eqTime.pec");
 };
 
 exports.testIsBoolean = function(test) {
-	checkOutput(test, "equals/isBoolean.e");
+	checkOutput(test, "equals/isBoolean.pec");
 };
 
 exports.testIsInstance = function(test) {
-	checkOutput(test, "equals/isInstance.e");
+	checkOutput(test, "equals/isInstance.pec");
 };
 
 exports.testIsNotBoolean = function(test) {
-	checkOutput(test, "equals/isNotBoolean.e");
+	checkOutput(test, "equals/isNotBoolean.pec");
 };
 
 exports.testIsNotInstance = function(test) {
-	checkOutput(test, "equals/isNotInstance.e");
+	checkOutput(test, "equals/isNotInstance.pec");
 };
 
 exports.testNeqBoolean = function(test) {
-	checkOutput(test, "equals/neqBoolean.e");
+	checkOutput(test, "equals/neqBoolean.pec");
 };
 
 exports.testNeqCharacter = function(test) {
-	checkOutput(test, "equals/neqCharacter.e");
+	checkOutput(test, "equals/neqCharacter.pec");
 };
 
 exports.testNeqDate = function(test) {
-	checkOutput(test, "equals/neqDate.e");
+	checkOutput(test, "equals/neqDate.pec");
 };
 
 exports.testNeqDateTime = function(test) {
-	checkOutput(test, "equals/neqDateTime.e");
+	checkOutput(test, "equals/neqDateTime.pec");
 };
 
 exports.testNeqDecimal = function(test) {
-	checkOutput(test, "equals/neqDecimal.e");
+	checkOutput(test, "equals/neqDecimal.pec");
 };
 
 exports.testNeqDict = function(test) {
-	checkOutput(test, "equals/neqDict.e");
+	checkOutput(test, "equals/neqDict.pec");
 };
 
 exports.testNeqInteger = function(test) {
-	checkOutput(test, "equals/neqInteger.e");
+	checkOutput(test, "equals/neqInteger.pec");
 };
 
 exports.testNeqList = function(test) {
-	checkOutput(test, "equals/neqList.e");
+	checkOutput(test, "equals/neqList.pec");
 };
 
 exports.testNeqPeriod = function(test) {
-	checkOutput(test, "equals/neqPeriod.e");
+	checkOutput(test, "equals/neqPeriod.pec");
 };
 
 exports.testNeqRange = function(test) {
-	checkOutput(test, "equals/neqRange.e");
+	checkOutput(test, "equals/neqRange.pec");
 };
 
 exports.testNeqSet = function(test) {
-	checkOutput(test, "equals/neqSet.e");
+	checkOutput(test, "equals/neqSet.pec");
 };
 
 exports.testNeqText = function(test) {
-	checkOutput(test, "equals/neqText.e");
+	checkOutput(test, "equals/neqText.pec");
 };
 
 exports.testNeqTime = function(test) {
-	checkOutput(test, "equals/neqTime.e");
+	checkOutput(test, "equals/neqTime.pec");
 };
 
 exports.testReqText = function(test) {
-	checkOutput(test, "equals/reqText.e");
+	checkOutput(test, "equals/reqText.pec");
 };
 

@@ -14,62 +14,62 @@ exports.tearDown = function(done) {
 };
 
 exports.testCategory = function(test) {
-	checkOutput(test, "native/category.o");
+	checkOutput(test, "native/category.poc");
 };
 
 exports.testMethod = function(test) {
-	checkOutput(test, "native/method.o");
+	checkOutput(test, "native/method.poc");
 };
 
 exports.testReturnBooleanLiteral = function(test) {
-	checkOutput(test, "native/returnBooleanLiteral.o");
+	checkOutput(test, "native/returnBooleanLiteral.poc");
 };
 
 exports.testReturnBooleanObject = function(test) {
-	checkOutput(test, "native/returnBooleanObject.o");
+	checkOutput(test, "native/returnBooleanObject.poc");
 };
 
 exports.testReturnBooleanValue = function(test) {
-	checkOutput(test, "native/returnBooleanValue.o");
+	checkOutput(test, "native/returnBooleanValue.poc");
 };
 
 exports.testReturnCharacterLiteral = function(test) {
-	checkOutput(test, "native/returnCharacterLiteral.o");
+	checkOutput(test, "native/returnCharacterLiteral.poc");
 };
 
 exports.testReturnCharacterObject = function(test) {
-	checkOutput(test, "native/returnCharacterObject.o");
+	checkOutput(test, "native/returnCharacterObject.poc");
 };
 
 exports.testReturnCharacterValue = function(test) {
-	checkOutput(test, "native/returnCharacterValue.o");
+	checkOutput(test, "native/returnCharacterValue.poc");
 };
 
 exports.testReturnDecimalLiteral = function(test) {
-	checkOutput(test, "native/returnDecimalLiteral.o");
+	checkOutput(test, "native/returnDecimalLiteral.poc");
 };
 
 exports.testReturnIntegerLiteral = function(test) {
-	checkOutput(test, "native/returnIntegerLiteral.o");
+	checkOutput(test, "native/returnIntegerLiteral.poc");
 };
 
 exports.testReturnIntegerObject = function(test) {
-	checkOutput(test, "native/returnIntegerObject.o");
+	checkOutput(test, "native/returnIntegerObject.poc");
 };
 
 exports.testReturnIntegerValue = function(test) {
-	checkOutput(test, "native/returnIntegerValue.o");
+	checkOutput(test, "native/returnIntegerValue.poc");
 };
 
 exports.testReturnLongObject = function(test) {
-	checkOutput(test, "native/returnLongObject.o");
+	checkOutput(test, "native/returnLongObject.poc");
 };
 
 exports.testReturnLongValue = function(test) {
-	checkOutput(test, "native/returnLongValue.o");
+	checkOutput(test, "native/returnLongValue.poc");
 };
 
 exports.testReturnStringLiteral = function(test) {
-	checkOutput(test, "native/returnStringLiteral.o");
+	checkOutput(test, "native/returnStringLiteral.poc");
 };
 

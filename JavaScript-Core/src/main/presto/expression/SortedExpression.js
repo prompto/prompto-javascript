@@ -55,7 +55,7 @@ SortedExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 }
 
-SortedExpression.prototype.toPDialect = function(writer) {
+SortedExpression.prototype.toSDialect = function(writer) {
     this.toODialect(writer);
 }
 

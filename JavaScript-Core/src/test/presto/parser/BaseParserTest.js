@@ -63,8 +63,8 @@ function parseOString(input) {
     return parser.parse();
 }
 
-function parsePString(input) {
-    var parser = new presto.parser.PCleverParser(input);
+function parseSString(input) {
+    var parser = new presto.parser.SCleverParser(input);
     return parser.parse();
 }
 
@@ -111,7 +111,7 @@ exports.compareResourceEOE = function(test, resourceName) {
     test.done();
 };
 
-exports.compareResourceEPE = function(test, resourceName) {
+exports.compareResourceESE = function(test, resourceName) {
     var expected = getResourceAsString(resourceName);
     // console.log(expected);
     // parse e source code
@@ -119,12 +119,12 @@ exports.compareResourceEPE = function(test, resourceName) {
     var context = presto.runtime.Context.newGlobalContext();
     dle.register(context);
     // rewrite as o
-    var writer = new presto.utils.CodeWriter(presto.parser.Dialect.P, context);
+    var writer = new presto.utils.CodeWriter(presto.parser.Dialect.S, context);
     dle.toDialect(writer);
     var p = writer.toString();
     // console.log(p);
     // parse p source code
-    var dlp = parsePString(p);
+    var dlp = parseSString(p);
     context = presto.runtime.Context.newGlobalContext();
     dlp.register(context);
     // rewrite as e
@@ -164,7 +164,7 @@ exports.compareResourceOEO = function(test, resourceName) {
 };
 
 
-exports.compareResourceOPO = function(test, resourceName) {
+exports.compareResourceOSO = function(test, resourceName) {
     var expected = getResourceAsString(resourceName);
     // console.log(expected);
     // parse o source code
@@ -172,12 +172,12 @@ exports.compareResourceOPO = function(test, resourceName) {
     var context = presto.runtime.Context.newGlobalContext();
     dlo.register(context);
     // rewrite as p
-    var writer = new presto.utils.CodeWriter(presto.parser.Dialect.P, context);
+    var writer = new presto.utils.CodeWriter(presto.parser.Dialect.S, context);
     dlo.toDialect(writer);
     var p = writer.toString();
     // console.log(p);
     // parse p source code
-    var dlp = parsePString(p);
+    var dlp = parseSString(p);
     context = presto.runtime.Context.newGlobalContext();
     dlp.register(context);
     // rewrite as o

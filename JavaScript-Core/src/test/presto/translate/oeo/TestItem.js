@@ -3,22 +3,22 @@ require("../../../../exploded");
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 exports.testItemDict = function(test) {
-	compareResourceOEO(test, "item/itemDict.o");
+	compareResourceOEO(test, "item/itemDict.poc");
 };
 
 exports.testItemList = function(test) {
-	compareResourceOEO(test, "item/itemList.o");
+	compareResourceOEO(test, "item/itemList.poc");
 };
 
 exports.testItemRange = function(test) {
-	compareResourceOEO(test, "item/itemRange.o");
+	compareResourceOEO(test, "item/itemRange.poc");
 };
 
 exports.testItemSet = function(test) {
-	compareResourceOEO(test, "item/itemSet.o");
+	compareResourceOEO(test, "item/itemSet.poc");
 };
 
 exports.testItemText = function(test) {
-	compareResourceOEO(test, "item/itemText.o");
+	compareResourceOEO(test, "item/itemText.poc");
 };
 

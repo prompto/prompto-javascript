@@ -14,50 +14,50 @@ exports.tearDown = function(done) {
 };
 
 exports.testAddCharacter = function(test) {
-	checkOutput(test, "add/addCharacter.o");
+	checkOutput(test, "add/addCharacter.poc");
 };
 
 exports.testAddDate = function(test) {
-	checkOutput(test, "add/addDate.o");
+	checkOutput(test, "add/addDate.poc");
 };
 
 exports.testAddDateTime = function(test) {
-	checkOutput(test, "add/addDateTime.o");
+	checkOutput(test, "add/addDateTime.poc");
 };
 
 exports.testAddDecimal = function(test) {
-	checkOutput(test, "add/addDecimal.o");
+	checkOutput(test, "add/addDecimal.poc");
 };
 
 exports.testAddDict = function(test) {
-	checkOutput(test, "add/addDict.o");
+	checkOutput(test, "add/addDict.poc");
 };
 
 exports.testAddInteger = function(test) {
-	checkOutput(test, "add/addInteger.o");
+	checkOutput(test, "add/addInteger.poc");
 };
 
 exports.testAddList = function(test) {
-	checkOutput(test, "add/addList.o");
+	checkOutput(test, "add/addList.poc");
 };
 
 exports.testAddPeriod = function(test) {
-	checkOutput(test, "add/addPeriod.o");
+	checkOutput(test, "add/addPeriod.poc");
 };
 
 exports.testAddSet = function(test) {
-	checkOutput(test, "add/addSet.o");
+	checkOutput(test, "add/addSet.poc");
 };
 
 exports.testAddText = function(test) {
-	checkOutput(test, "add/addText.o");
+	checkOutput(test, "add/addText.poc");
 };
 
 exports.testAddTime = function(test) {
-	checkOutput(test, "add/addTime.o");
+	checkOutput(test, "add/addTime.poc");
 };
 
 exports.testAddTuple = function(test) {
-	checkOutput(test, "add/addTuple.o");
+	checkOutput(test, "add/addTuple.poc");
 };
 

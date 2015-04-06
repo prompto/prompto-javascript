@@ -3,50 +3,50 @@ require("../../../../exploded");
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 exports.testAddCharacter = function(test) {
-	compareResourceEOE(test, "add/addCharacter.e");
+	compareResourceEOE(test, "add/addCharacter.pec");
 };
 
 exports.testAddDate = function(test) {
-	compareResourceEOE(test, "add/addDate.e");
+	compareResourceEOE(test, "add/addDate.pec");
 };
 
 exports.testAddDateTime = function(test) {
-	compareResourceEOE(test, "add/addDateTime.e");
+	compareResourceEOE(test, "add/addDateTime.pec");
 };
 
 exports.testAddDecimal = function(test) {
-	compareResourceEOE(test, "add/addDecimal.e");
+	compareResourceEOE(test, "add/addDecimal.pec");
 };
 
 exports.testAddDict = function(test) {
-	compareResourceEOE(test, "add/addDict.e");
+	compareResourceEOE(test, "add/addDict.pec");
 };
 
 exports.testAddInteger = function(test) {
-	compareResourceEOE(test, "add/addInteger.e");
+	compareResourceEOE(test, "add/addInteger.pec");
 };
 
 exports.testAddList = function(test) {
-	compareResourceEOE(test, "add/addList.e");
+	compareResourceEOE(test, "add/addList.pec");
 };
 
 exports.testAddPeriod = function(test) {
-	compareResourceEOE(test, "add/addPeriod.e");
+	compareResourceEOE(test, "add/addPeriod.pec");
 };
 
 exports.testAddSet = function(test) {
-	compareResourceEOE(test, "add/addSet.e");
+	compareResourceEOE(test, "add/addSet.pec");
 };
 
 exports.testAddText = function(test) {
-	compareResourceEOE(test, "add/addText.e");
+	compareResourceEOE(test, "add/addText.pec");
 };
 
 exports.testAddTime = function(test) {
-	compareResourceEOE(test, "add/addTime.e");
+	compareResourceEOE(test, "add/addTime.pec");
 };
 
 exports.testAddTuple = function(test) {
-	compareResourceEOE(test, "add/addTuple.e");
+	compareResourceEOE(test, "add/addTuple.pec");
 };
 

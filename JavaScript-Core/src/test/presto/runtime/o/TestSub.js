@@ -14,26 +14,26 @@ exports.tearDown = function(done) {
 };
 
 exports.testSubDate = function(test) {
-	checkOutput(test, "sub/subDate.o");
+	checkOutput(test, "sub/subDate.poc");
 };
 
 exports.testSubDateTime = function(test) {
-	checkOutput(test, "sub/subDateTime.o");
+	checkOutput(test, "sub/subDateTime.poc");
 };
 
 exports.testSubDecimal = function(test) {
-	checkOutput(test, "sub/subDecimal.o");
+	checkOutput(test, "sub/subDecimal.poc");
 };
 
 exports.testSubInteger = function(test) {
-	checkOutput(test, "sub/subInteger.o");
+	checkOutput(test, "sub/subInteger.poc");
 };
 
 exports.testSubPeriod = function(test) {
-	checkOutput(test, "sub/subPeriod.o");
+	checkOutput(test, "sub/subPeriod.poc");
 };
 
 exports.testSubTime = function(test) {
-	checkOutput(test, "sub/subTime.o");
+	checkOutput(test, "sub/subTime.poc");
 };
 

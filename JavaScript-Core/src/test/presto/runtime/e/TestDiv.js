@@ -14,18 +14,18 @@ exports.tearDown = function(done) {
 };
 
 exports.testDivDecimal = function(test) {
-	checkOutput(test, "div/divDecimal.e");
+	checkOutput(test, "div/divDecimal.pec");
 };
 
 exports.testDivInteger = function(test) {
-	checkOutput(test, "div/divInteger.e");
+	checkOutput(test, "div/divInteger.pec");
 };
 
 exports.testIdivInteger = function(test) {
-	checkOutput(test, "div/idivInteger.e");
+	checkOutput(test, "div/idivInteger.pec");
 };
 
 exports.testModInteger = function(test) {
-	checkOutput(test, "div/modInteger.e");
+	checkOutput(test, "div/modInteger.pec");
 };
 
