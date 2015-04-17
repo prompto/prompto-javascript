@@ -83,15 +83,6 @@ SParserListener.prototype.exitDerived_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#member_method_declaration.
-SParserListener.prototype.enterMember_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#member_method_declaration.
-SParserListener.prototype.exitMember_method_declaration = function(ctx) {
-};
-
-
 // Enter a parse tree produced by SParser#operator_method_declaration.
 SParserListener.prototype.enterOperator_method_declaration = function(ctx) {
 };
@@ -1811,39 +1802,48 @@ SParserListener.prototype.exitCategoryMethodList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#SetterMethod.
-SParserListener.prototype.enterSetterMethod = function(ctx) {
+// Enter a parse tree produced by SParser#SetterMemberMethod.
+SParserListener.prototype.enterSetterMemberMethod = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#SetterMethod.
-SParserListener.prototype.exitSetterMethod = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#GetterMethod.
-SParserListener.prototype.enterGetterMethod = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#GetterMethod.
-SParserListener.prototype.exitGetterMethod = function(ctx) {
+// Exit a parse tree produced by SParser#SetterMemberMethod.
+SParserListener.prototype.exitSetterMemberMethod = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#MemberMethod.
-SParserListener.prototype.enterMemberMethod = function(ctx) {
+// Enter a parse tree produced by SParser#GetterMemberMethod.
+SParserListener.prototype.enterGetterMemberMethod = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#MemberMethod.
-SParserListener.prototype.exitMemberMethod = function(ctx) {
+// Exit a parse tree produced by SParser#GetterMemberMethod.
+SParserListener.prototype.exitGetterMemberMethod = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#OperatorMethod.
-SParserListener.prototype.enterOperatorMethod = function(ctx) {
+// Enter a parse tree produced by SParser#ConcreteMemberMethod.
+SParserListener.prototype.enterConcreteMemberMethod = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#OperatorMethod.
-SParserListener.prototype.exitOperatorMethod = function(ctx) {
+// Exit a parse tree produced by SParser#ConcreteMemberMethod.
+SParserListener.prototype.exitConcreteMemberMethod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#AbstractMemberMethod.
+SParserListener.prototype.enterAbstractMemberMethod = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#AbstractMemberMethod.
+SParserListener.prototype.exitAbstractMemberMethod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#OperatorMemberMethod.
+SParserListener.prototype.enterOperatorMemberMethod = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#OperatorMemberMethod.
+SParserListener.prototype.exitOperatorMemberMethod = function(ctx) {
 };
 
 

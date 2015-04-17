@@ -13,6 +13,7 @@ exports.PythonMethodExpression = require('./PythonMethodExpression').PythonMetho
 exports.PythonTextLiteral = require('./PythonTextLiteral').PythonTextLiteral;
 exports.PythonModule = require('./PythonModule').PythonModule;
 exports.PythonNamedArgument = require('./PythonNamedArgument').PythonNamedArgument;
+exports.PythonOrdinalArgument = require('./PythonOrdinalArgument').PythonOrdinalArgument;
 exports.PythonArgumentList = require('./PythonArgumentList').PythonArgumentList;
 exports.PythonNativeCategoryMapping = require("./PythonNativeCategoryMapping").PythonNativeCategoryMapping;
 exports.Python2NativeCategoryMapping = require("./Python2NativeCategoryMapping").Python2NativeCategoryMapping;

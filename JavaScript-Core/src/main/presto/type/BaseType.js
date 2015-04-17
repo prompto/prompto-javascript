@@ -162,12 +162,9 @@ BaseType.prototype.sort = function(context, list, cmp) {
 	return new ListValue(list.type.itemType, items);
 };
 
-/*
-public IValue convertSystemValueToPrestoValue(Object value) {
-	return (IValue) value; // TODO for now
+BaseType.prototype.convertJavaScriptValueToPrestoValue = function(value) {
+	return value; // TODO for now
 };
-
-*/
 
 BaseType.prototype.getMember = function(context, name) {
 	throw new SyntaxError("Cannot read member from " + this.name);

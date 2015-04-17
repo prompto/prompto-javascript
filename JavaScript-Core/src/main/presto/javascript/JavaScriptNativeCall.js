@@ -17,8 +17,8 @@ JavaScriptNativeCall.prototype.check = function(context) {
 	return this.statement.check(context);
 };
 
-JavaScriptNativeCall.prototype.interpret = function(context) {
-	return this.statement.interpret(context);
+JavaScriptNativeCall.prototype.interpret = function(context, returnType) {
+	return this.statement.interpret(context, returnType);
 };
 
 JavaScriptNativeCall.prototype.toDialect = function(writer) {

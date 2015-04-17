@@ -8,8 +8,9 @@ exports.resolve = function() {
 };
 
 
-function ConstructorExpression(type, assignments) {
+function ConstructorExpression(type, mutable, assignments) {
 	this.type = type;
+    this.mutable = mutable;
 	this.copyFrom = null;
 	this.assignments = null;
 	this.setAssignments(assignments);
@@ -34,6 +35,8 @@ ConstructorExpression.prototype.toSDialect = function(writer) {
 }
 
 ConstructorExpression.prototype.toODialect = function(writer) {
+    if(this.mutable)
+        writer.append("mutable ");
     writer.append(this.type.name);
     var assignments = new ArgumentAssignmentList();
     if (this.copyFrom != null)
@@ -44,6 +47,8 @@ ConstructorExpression.prototype.toODialect = function(writer) {
 };
 
 ConstructorExpression.prototype.toEDialect = function(writer) {
+    if(this.mutable)
+        writer.append("mutable ");
     writer.append(this.type.name);
     if (this.copyFrom != null) {
         writer.append(" from ");
@@ -83,6 +88,7 @@ ConstructorExpression.prototype.check = function(context) {
 
 ConstructorExpression.prototype.interpret = function(context) {
 	var instance = this.type.newInstance(context);
+    instance.mutable = true;
 	if(this.copyFrom!=null) {
 		var copyObj = this.copyFrom.interpret(context);
 		if((copyObj.getMember || null)!=null) {
@@ -103,6 +109,7 @@ ConstructorExpression.prototype.interpret = function(context) {
 			instance.set(context, assignment.name, value);
 		}
 	}
+    instance.mutable = this.mutable;
 	return instance;
 };
 

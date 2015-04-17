@@ -69,7 +69,7 @@ UnresolvedCall.prototype.resolveGlobal = function(context) {
 		throw new SyntaxError("Unknown name:" + name);
 	}
 	if(decl instanceof CategoryDeclaration) {
-		this.resolved = new ConstructorExpression(new CategoryType(name), this.assignments);
+		this.resolved = new ConstructorExpression(new CategoryType(name), false, this.assignments);
 	} else {
 		this.resolved = new MethodCall(new MethodSelector(null, name), this.assignments);
 	}

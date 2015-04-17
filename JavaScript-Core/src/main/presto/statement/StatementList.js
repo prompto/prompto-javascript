@@ -31,9 +31,9 @@ StatementList.prototype.check = function(context, nativeOnly) {
 	return types.inferType(context);
 };
 
-StatementList.prototype.interpret = function(context, nativeOnly) {
+StatementList.prototype.interpret = function(context) {
 	try {
-		return this.doInterpret(context, nativeOnly);
+		return this.doInterpret(context);
 	} catch(e) {
 		if(e instanceof ReferenceError) {
 			throw e; // new NullReferenceError();
@@ -43,12 +43,21 @@ StatementList.prototype.interpret = function(context, nativeOnly) {
 	}
 };
 
-StatementList.prototype.doInterpret = function(context, nativeOnly) {
-	nativeOnly = nativeOnly || false;
+StatementList.prototype.interpretNative = function(context, returnType) {
+    try {
+        return this.doInterpretNative(context, returnType);
+    } catch(e) {
+        if(e instanceof ReferenceError) {
+            throw e; // new NullReferenceError();
+        } else {
+            throw e;
+        }
+    }
+};
+
+StatementList.prototype.doInterpret = function(context) {
 	for(var i=0;i<this.length;i++) {
     	var stmt = this[i];
-		if(nativeOnly && !(stmt instanceof JavaScriptNativeCall))
-			continue;
 		context.enterStatement(stmt);
 		try {
 			var result = stmt.interpret(context);
@@ -59,6 +68,23 @@ StatementList.prototype.doInterpret = function(context, nativeOnly) {
 		}
 	}
 	return null;
+};
+
+StatementList.prototype.doInterpretNative = function(context, returnType) {
+    for(var i=0;i<this.length;i++) {
+        var stmt = this[i];
+        if(!(stmt instanceof JavaScriptNativeCall))
+            continue;
+        context.enterStatement(stmt);
+        try {
+            var result = stmt.interpret(context, returnType);
+            if(result!=null)
+                return result;
+        } finally {
+            context.leaveStatement(stmt);
+        }
+    }
+    return null;
 };
 
 StatementList.prototype.toDialect = function(writer) {

@@ -682,15 +682,6 @@ OPrestoBuilder.prototype.exitCurlyCategoryMethodList = function(ctx) {
 };
 
 
-OPrestoBuilder.prototype.exitMember_method_declaration = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new declaration.MemberMethodDeclaration(name, args, type, stmts));
-};
-
-
 OPrestoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var stmts = this.getNodeValue(ctx.stmts);
@@ -705,19 +696,23 @@ OPrestoBuilder.prototype.exitGetter_method_declaration = function(ctx) {
 };
 
 
-OPrestoBuilder.prototype.exitMemberMethod = function(ctx) {
+OPrestoBuilder.prototype.exitConcreteMemberMethod = function(ctx) {
+	var decl = this.getNodeValue(ctx.decl);
+	this.setNodeValue(ctx, decl);
+};
+
+OPrestoBuilder.prototype.exitAbstractMemberMethod = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
+
+OPrestoBuilder.prototype.exitSetterMemberMethod = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
 
 
-OPrestoBuilder.prototype.exitSetterMethod = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-OPrestoBuilder.prototype.exitGetterMethod = function(ctx) {
+OPrestoBuilder.prototype.exitGetterMemberMethod = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
@@ -779,9 +774,10 @@ OPrestoBuilder.prototype.exitMethodCallExpression = function(ctx) {
 
 
 OPrestoBuilder.prototype.exitConstructor_expression = function(ctx) {
+    var mutable = ctx.MUTABLE()!=null;
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, mutable, args));
 };
 
 OPrestoBuilder.prototype.exitAssertion = function(ctx) {
@@ -1720,7 +1716,7 @@ OPrestoBuilder.prototype.exitOperator_method_declaration= function(ctx) {
 }
 
 
-OPrestoBuilder.prototype.exitOperatorMethod= function(ctx) {
+OPrestoBuilder.prototype.exitOperatorMemberMethod= function(ctx) {
     var decl = this.getNodeValue(ctx.decl);
     this.setNodeValue(ctx, decl);
 }
@@ -2290,7 +2286,24 @@ OPrestoBuilder.prototype.exitPythonNamedArgumentListItem = function(ctx) {
     var items = this.getNodeValue(ctx.items);
     items.add(arg);
     this.setNodeValue(ctx, items);
-}
+};
+
+OPrestoBuilder.prototype.exitPythonOrdinalOnlyArgumentList = function(ctx) {
+    var ordinal = this.getNodeValue(ctx.ordinal);
+    this.setNodeValue(ctx, ordinal);
+};
+
+OPrestoBuilder.prototype.exitPythonOrdinalArgumentList = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var arg = new python.PythonOrdinalArgument(item);
+    this.setNodeValue(ctx, new python.PythonArgumentList(arg));
+};
+
+OPrestoBuilder.prototype.exitPythonOrdinalOnlyArgumentList = function(ctx) {
+    var ordinal = this.getNodeValue(ctx.ordinal);
+    this.setNodeValue(ctx, ordinal);
+};
+
 
 OPrestoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
     var parent = this.getNodeValue(ctx.parent);

@@ -47,7 +47,8 @@ CategorySymbol.prototype.check = function(context) {
 };
 
 CategorySymbol.prototype.interpret = function(context) {
-	var instance =this.type.newInstance(context);
+	var instance = this.type.newInstance(context);
+    instance.mutable = true;
 	if(this.assignments!=null) {
 		for(var i=0;i<this.assignments.length;i++) {
 			var assignment = this.assignments[i];
@@ -56,6 +57,7 @@ CategorySymbol.prototype.interpret = function(context) {
 		}
 	}
     instance.set(context, "name", new Text(this.name));
+    instance.mutable = false;
     return instance;
 };
 

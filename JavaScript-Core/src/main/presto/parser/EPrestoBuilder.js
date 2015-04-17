@@ -651,15 +651,6 @@ EPrestoBuilder.prototype.exitCategoryMethodListItem = function(ctx) {
 };
 
 
-EPrestoBuilder.prototype.exitMember_method_declaration = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new declaration.MemberMethodDeclaration(name, args, type, stmts));
-};
-
-
 EPrestoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var stmts = this.getNodeValue(ctx.stmts);
@@ -674,19 +665,24 @@ EPrestoBuilder.prototype.exitGetter_method_declaration = function(ctx) {
 };
 
 
-EPrestoBuilder.prototype.exitMemberMethod = function(ctx) {
+EPrestoBuilder.prototype.exitConcreteMemberMethod = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
 
 
-EPrestoBuilder.prototype.exitSetterMethod = function(ctx) {
+EPrestoBuilder.prototype.exitAbstractMemberMethod = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
+
+EPrestoBuilder.prototype.exitSetterMemberMethod = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
 
 
-EPrestoBuilder.prototype.exitGetterMethod = function(ctx) {
+EPrestoBuilder.prototype.exitGetterMemberMethod = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
@@ -728,6 +724,7 @@ EPrestoBuilder.prototype.exitMethodCallStatement = function(ctx) {
 };
 
 EPrestoBuilder.prototype.exitConstructorFrom = function(ctx) {
+    var mutable = ctx.MUTABLE()!=null;
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
 	if(args===null) {
@@ -739,11 +736,12 @@ EPrestoBuilder.prototype.exitConstructorFrom = function(ctx) {
 	if(arg!==null) {
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, mutable, args));
 };
 
 
 EPrestoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
+    var mutable = ctx.MUTABLE()!=null;
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
 	if(args===null) {
@@ -753,7 +751,7 @@ EPrestoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 	if(arg!==null) {
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, mutable, args));
 };
 
 EPrestoBuilder.prototype.exitAssertion = function(ctx) {
@@ -1706,7 +1704,7 @@ EPrestoBuilder.prototype.exitOperator_method_declaration= function(ctx) {
 }
 
 
-EPrestoBuilder.prototype.exitOperatorMethod= function(ctx) {
+EPrestoBuilder.prototype.exitOperatorMemberMethod= function(ctx) {
     var decl = this.getNodeValue(ctx.decl);
     this.setNodeValue(ctx, decl);
 }
@@ -2302,7 +2300,26 @@ EPrestoBuilder.prototype.exitPythonNamedArgumentListItem = function(ctx) {
     var items = this.getNodeValue(ctx.items);
     items.add(arg);
     this.setNodeValue(ctx, items);
-}
+};
+
+EPrestoBuilder.prototype.exitPythonOrdinalOnlyArgumentList = function(ctx) {
+    var ordinal = this.getNodeValue(ctx.ordinal);
+    this.setNodeValue(ctx, ordinal);
+};
+
+EPrestoBuilder.prototype.exitPythonOrdinalArgumentList = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var arg = new python.PythonOrdinalArgument(item);
+    this.setNodeValue(ctx, new python.PythonArgumentList(arg));
+};
+
+EPrestoBuilder.prototype.exitPythonOrdinalArgumentListItem = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var arg = new python.PythonOrdinalArgument(item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(arg);
+    this.setNodeValue(ctx, items);
+};
 
 EPrestoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
     var parent = this.getNodeValue(ctx.parent);

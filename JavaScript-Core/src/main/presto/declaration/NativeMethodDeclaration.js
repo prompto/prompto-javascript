@@ -17,7 +17,7 @@ NativeMethodDeclaration.prototype.check = function(context) {
 NativeMethodDeclaration.prototype.interpret = function(context) {
 	context.enterMethod(this);
 	try {
-		var result = this.statements.interpret(context, true);
+		var result = this.statements.interpretNative(context, this.returnType);
         return this.castToReturnType(context, result);
 	} finally {
 		context.leaveMethod(this);
@@ -26,7 +26,7 @@ NativeMethodDeclaration.prototype.interpret = function(context) {
 
 NativeMethodDeclaration.prototype.castToReturnType = function(context, value) {
     // can only cast to specified type, and if required
-    if(this.returnType!=null && !(value.type.isAssignableTo(this.returnType))) {
+    if(this.returnType!=null && !(value.type.isAssignableTo(context, this.returnType))) {
         // only cast if implemented, on a per type basis
         if(this.returnType.nativeCast)
             value = this.returnType.nativeCast(context, value);

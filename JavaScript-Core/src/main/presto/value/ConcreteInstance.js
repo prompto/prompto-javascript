@@ -1,5 +1,6 @@
 var CategoryType = null;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Variable = require("../runtime/Variable").Variable;
@@ -15,6 +16,7 @@ exports.resolve = function() {
 function ConcreteInstance(declaration) {
 	Value.call(this, new CategoryType(declaration.name));
 	this.declaration = declaration;
+    this.mutable = false;
 	this.values = {};
 	return this;
 }
@@ -72,6 +74,8 @@ function getActiveSetters() {
 }
 
 ConcreteInstance.prototype.set = function(context, attrName, value) {
+    if(!this.mutable)
+        throw new NotMutableError();
 	var stacked = getActiveSetters()[attrName] || null;
 	try {
 		this.doSet(context, attrName, value, stacked==null);

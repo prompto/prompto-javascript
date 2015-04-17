@@ -10,6 +10,10 @@ function AbstractMethodDeclaration(name, args, returnType) {
 AbstractMethodDeclaration.prototype = Object.create(BaseMethodDeclaration.prototype);
 AbstractMethodDeclaration.prototype.constructor = AbstractMethodDeclaration;
 
+AbstractMethodDeclaration.prototype.memberCheck = function(declaration, context) {
+    // TODO Auto-generated method stub
+};
+
 AbstractMethodDeclaration.prototype.check = function(context) {
 	if(this.arguments!=null) {
 		this.arguments.check(context);

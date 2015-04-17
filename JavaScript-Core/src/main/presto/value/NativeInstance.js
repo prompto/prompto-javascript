@@ -1,10 +1,10 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
 var Value = require("./Value").Value;
 
-function NativeInstance(declaration) {
+function NativeInstance(declaration, instance) {
 	Value.call(this,new CategoryType(declaration.name));
 	this.declaration = declaration;
-	this.instance = this.makeInstance();
+	this.instance = instance || this.makeInstance();
 	return this;
 }
 

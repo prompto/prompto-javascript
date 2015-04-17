@@ -10,7 +10,6 @@ exports.SingletonCategoryDeclaration = require('./SingletonCategoryDeclaration')
 exports.NativeCategoryDeclaration = require('./NativeCategoryDeclaration').NativeCategoryDeclaration;
 exports.NativeResourceDeclaration = require('./NativeResourceDeclaration').NativeResourceDeclaration;
 exports.EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-exports.MemberMethodDeclaration = require("./MemberMethodDeclaration").MemberMethodDeclaration;
 exports.OperatorMethodDeclaration = require("./OperatorMethodDeclaration").OperatorMethodDeclaration;
 exports.GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
 exports.SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;

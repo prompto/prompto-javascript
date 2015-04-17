@@ -17,14 +17,14 @@ JavaScriptStatement.prototype.check = function(context) {
 	return this.isReturn ? AnyType.instance : VoidType.instance;
 };
 
-JavaScriptStatement.prototype.interpret = function(context) {
+JavaScriptStatement.prototype.interpret = function(context, returnType) {
 	var result = this.expression.interpret(context, this.module);
 	if (!this.isReturn) {
 		return null;
 	}
 	if(result !== null) {
 		var type = new JavaScriptType(typeof(result));
-		result = type.convertJavaScriptValueToPrestoValue(result);
+		result = type.convertJavaScriptValueToPrestoValue(result, returnType);
 	}
 	return result;
 };
