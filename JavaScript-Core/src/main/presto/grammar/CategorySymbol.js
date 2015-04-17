@@ -53,10 +53,10 @@ CategorySymbol.prototype.interpret = function(context) {
 		for(var i=0;i<this.assignments.length;i++) {
 			var assignment = this.assignments[i];
 			var value = assignment.expression.interpret(context);
-			instance.set(context, assignment.name, value);
+			instance.setMember(context, assignment.name, value);
 		}
 	}
-    instance.set(context, "name", new Text(this.name));
+    instance.setMember(context, "name", new Text(this.name));
     instance.mutable = false;
     return instance;
 };

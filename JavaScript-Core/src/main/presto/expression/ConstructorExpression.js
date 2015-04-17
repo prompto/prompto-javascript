@@ -1,5 +1,6 @@
 var CategoryType = null;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 
@@ -97,7 +98,10 @@ ConstructorExpression.prototype.interpret = function(context) {
 			for(var i=0;i<names.length;i++) {
 				var name = names[i]
 				if(cd.hasAttribute(context, name)) {
-					instance.set(context, name, copyObj.getMember(context, name));
+                    var value = copyObj.getMember(context, name);
+                    if(value!=null && value.mutable && !this.mutable)
+                        throw new NotMutableError();
+					instance.setMember(context, name, value);
 				}
 			}
 		}
@@ -106,7 +110,9 @@ ConstructorExpression.prototype.interpret = function(context) {
 		for(var i=0;i<this.assignments.length;i++) {
 			var assignment = this.assignments[i];
 			var value = assignment.expression.interpret(context);
-			instance.set(context, assignment.name, value);
+            if(value!=null && value.mutable && !this.mutable)
+                throw new NotMutableError();
+			instance.setMember(context, assignment.name, value);
 		}
 	}
     instance.mutable = this.mutable;

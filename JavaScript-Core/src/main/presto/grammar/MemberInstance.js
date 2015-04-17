@@ -1,5 +1,5 @@
 var Document = require("../value/Document").Document;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
 
 function MemberInstance(name) {
 	this.parent = null;
@@ -33,22 +33,16 @@ MemberInstance.prototype.checkAssignElement = function(context) {
 
 
 MemberInstance.prototype.assign = function(context, expression) {
+    var root = this.parent.interpret(context);
+    if(!root.mutable)
+        throw new NotMutableError();
 	var value = expression.interpret(context);
-	var doc = this.parent.interpret(context);
-	if(doc instanceof Document) {
-		doc.SetMember(this.name, value);
-	} else {
-		throw new InvalidDataError("Expecting a document, got:" + typeof(doc));
-	}
+    root.setMember(context, this.name, value);
 };
 
 MemberInstance.prototype.interpret = function(context) {
-	var doc = this.parent.interpret(context);
-	if(doc instanceof Document) {
-		return doc.getMember(context, this.name);
-	} else {
-		throw new InvalidDataError("Expecting a document, got:" + typeof(doc));
-	}
+	var root = this.parent.interpret(context);
+	return root.getMember(context, this.name);
 };
 
 exports.MemberInstance = MemberInstance;

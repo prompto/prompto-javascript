@@ -17,7 +17,15 @@ exports.testImmutable = function(test) {
 	checkOutput(test, "mutability/immutable.pec");
 };
 
+exports.testImmutableMember = function(test) {
+	checkOutput(test, "mutability/immutableMember.pec");
+};
+
 exports.testMutable = function(test) {
 	checkOutput(test, "mutability/mutable.pec");
+};
+
+exports.testMutableMember = function(test) {
+	checkOutput(test, "mutability/mutableMember.pec");
 };
 

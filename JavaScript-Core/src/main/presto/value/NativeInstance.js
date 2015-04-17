@@ -36,7 +36,7 @@ NativeInstance.prototype.getMember = function(context, attrName) {
 };
 
 
-NativeInstance.prototype.set = function(context, attrName, value) {
+NativeInstance.prototype.setMember = function(context, attrName, value) {
 	value = value.convertToJavaScript();
 	this.instance[attrName] = value;
 };

@@ -3,6 +3,7 @@ var DocumentType = require("../type/DocumentType").DocumentType;
 
 function Document(value) {
     Value.call(this, DocumentType.instance);
+    this.mutable = true;
     this.members = {};
     return this;
 }
@@ -19,7 +20,7 @@ Document.prototype.getMember = function(context, name) {
     return result;
 };
 
-Document.prototype.SetMember = function(name, value) {
+Document.prototype.setMember = function(context, name, value) {
     this.members[name] = value;
 };
 

@@ -17,7 +17,15 @@ exports.testImmutable = function(test) {
 	checkOutput(test, "mutability/immutable.poc");
 };
 
+exports.testImmutableMember = function(test) {
+	checkOutput(test, "mutability/immutableMember.poc");
+};
+
 exports.testMutable = function(test) {
 	checkOutput(test, "mutability/mutable.poc");
+};
+
+exports.testMutableMember = function(test) {
+	checkOutput(test, "mutability/mutableMember.poc");
 };
 

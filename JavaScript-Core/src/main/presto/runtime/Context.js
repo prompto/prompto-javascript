@@ -360,7 +360,7 @@ InstanceContext.prototype.readValue = function(name) {
 };
 
 InstanceContext.prototype.writeValue = function(name, value) {
-	this.instance.set(this.calling, name, value);
+	this.instance.setMember(this.calling, name, value);
 };
 
 

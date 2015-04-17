@@ -32,9 +32,6 @@ VariableInstance.prototype.checkAssignMember = function(context, memberName) {
 	if(actual==null) {
 		throw new SyntaxError("Unknown variable:" + this.name);
 	}
-	if(actual.getType(context)!=DocumentType.instance) {
-		throw new SyntaxError(this.name + " is not a document. Cannot assign member!");
-	}
 };
 
 /*

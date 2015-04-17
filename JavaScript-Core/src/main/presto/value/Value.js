@@ -3,6 +3,7 @@ var Text = null;
 
 function Value (type) {
     this.type = type;
+    this.mutable = false;
 	return this;
 }
 

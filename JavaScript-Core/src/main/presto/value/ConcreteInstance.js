@@ -73,7 +73,7 @@ function getActiveSetters() {
 	return activeSetters;
 }
 
-ConcreteInstance.prototype.set = function(context, attrName, value) {
+ConcreteInstance.prototype.setMember = function(context, attrName, value) {
     if(!this.mutable)
         throw new NotMutableError();
 	var stacked = getActiveSetters()[attrName] || null;
