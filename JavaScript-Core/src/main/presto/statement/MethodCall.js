@@ -5,6 +5,7 @@ var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaratio
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var PrestoError = require("../error/PrestoError").PrestoError;
 var Dialect = require("../parser/Dialect").Dialect;
 var Bool = require("../value/Bool").Bool;
@@ -105,7 +106,10 @@ MethodCall.prototype.interpret = function(context) {
 	for(var i=0;i<assignments.length;i++) {
 		var assignment = assignments[i];
 		var expression = assignment.resolve(local, declaration, true);
-		var value = assignment.argument.checkValue(context,expression);
+        var argument = assignment.argument;
+		var value = argument.checkValue(context,expression);
+        if(value!=null && value.mutable && !argument.mutable)
+            throw new NotMutableError();
 		local.setValue(assignment.name, value);
 	}
 	return declaration.interpret(local, true);
