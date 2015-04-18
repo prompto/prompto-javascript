@@ -42,6 +42,10 @@ exports.testNullMethod = function(test) {
 	compareResourceESE(test, "errors/nullMethod.pec");
 };
 
+exports.testUnexpected = function(test) {
+	compareResourceESE(test, "errors/unexpected.pec");
+};
+
 exports.testUserException = function(test) {
 	compareResourceESE(test, "errors/userException.pec");
 };

@@ -87,15 +87,16 @@ TestMethodDeclaration.prototype.interpretBody = function(context)
 
 TestMethodDeclaration.prototype.interpretError = function(context, ex)
 {
-    var expected = this.error.interpret (context);
+    var expectedError = this.error == null ? null : this.error.interpret (context);
     var actual = ex.interpret (context, "__test_error__");
-    if (expected.equals (actual))
+    if (expectedError!=null && expectedError.equals (actual))
         this.printSuccess (context);
     else {
         var actualName = actual.getMember (context, "name").toString ();
-        this.printFailure (context, this.error.name, actualName);
+        var expectedName = this.error == null ? "SUCCESS" : this.error.name;
+        this.printFailure (context, expectedName, actualName);
     }
-}
+};
 
 TestMethodDeclaration.prototype.toDialect = function(writer)
 {
