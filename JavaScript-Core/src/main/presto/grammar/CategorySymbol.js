@@ -35,6 +35,7 @@ CategorySymbol.prototype.check = function(context) {
 		throw new SyntaxError("Unknown category " + this.type.name);
 	}
 	if(this.assignments!=null) {
+        context = context.newLocalContext();
 		for(var i=0;i<this.assignments.length;i++) {
 			var assignment = this.assignments[i];
 			if(!cd.hasAttribute(context, assignment.name)) {
@@ -50,6 +51,7 @@ CategorySymbol.prototype.interpret = function(context) {
 	var instance = this.type.newInstance(context);
     instance.mutable = true;
 	if(this.assignments!=null) {
+        context = context.newLocalContext();
 		for(var i=0;i<this.assignments.length;i++) {
 			var assignment = this.assignments[i];
 			var value = assignment.expression.interpret(context);
