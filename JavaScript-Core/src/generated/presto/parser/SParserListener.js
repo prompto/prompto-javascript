@@ -3071,6 +3071,15 @@ SParserListener.prototype.exitPythonIdentifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#PythonPrestoIdentifier.
+SParserListener.prototype.enterPythonPrestoIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#PythonPrestoIdentifier.
+SParserListener.prototype.exitPythonPrestoIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#PythonIntegerLiteral.
 SParserListener.prototype.enterPythonIntegerLiteral = function(ctx) {
 };

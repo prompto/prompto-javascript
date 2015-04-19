@@ -2274,6 +2274,11 @@ EPrestoBuilder.prototype.exitPythonLiteralExpression = function(ctx) {
     this.setNodeValue(ctx, exp);
 };
 
+EPrestoBuilder.prototype.exitPythonPrestoIdentifier = function(ctx) {
+    var name = ctx.DOLLAR_IDENTIFIER().getText();
+    this.setNodeValue(ctx, new python.PythonIdentifierExpression(null, name));
+};
+
 EPrestoBuilder.prototype.exitPythonPrimaryExpression = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);

@@ -2200,6 +2200,12 @@ SPrestoBuilder.prototype.exitPythonLiteralExpression = function(ctx) {
     this.setNodeValue(ctx, exp);
 };
 
+SPrestoBuilder.prototype.exitPythonPrestoIdentifier = function(ctx) {
+    var name = ctx.DOLLAR_IDENTIFIER().getText();
+    this.setNodeValue(ctx, new python.PythonIdentifierExpression(null, name));
+};
+
+
 SPrestoBuilder.prototype.exitPythonPrimaryExpression = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);

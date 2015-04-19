@@ -3107,6 +3107,15 @@ OParserListener.prototype.exitPythonIdentifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#PythonPrestoIdentifier.
+OParserListener.prototype.enterPythonPrestoIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#PythonPrestoIdentifier.
+OParserListener.prototype.exitPythonPrestoIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#PythonIntegerLiteral.
 OParserListener.prototype.enterPythonIntegerLiteral = function(ctx) {
 };

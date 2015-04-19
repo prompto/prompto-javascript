@@ -3134,6 +3134,15 @@ EParserListener.prototype.exitPythonIdentifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#PythonPrestoIdentifier.
+EParserListener.prototype.enterPythonPrestoIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#PythonPrestoIdentifier.
+EParserListener.prototype.exitPythonPrestoIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#PythonIntegerLiteral.
 EParserListener.prototype.enterPythonIntegerLiteral = function(ctx) {
 };
