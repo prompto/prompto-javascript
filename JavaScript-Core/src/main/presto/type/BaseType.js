@@ -162,7 +162,7 @@ BaseType.prototype.sort = function(context, list, cmp) {
 	return new ListValue(list.type.itemType, items);
 };
 
-BaseType.prototype.convertJavaScriptValueToPrestoValue = function(value) {
+BaseType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
 	return value; // TODO for now
 };
 

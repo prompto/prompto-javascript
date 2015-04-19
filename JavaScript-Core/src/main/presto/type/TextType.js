@@ -92,7 +92,7 @@ TextType.prototype.sort = function(context, list) {
 	return NativeType.prototype.sort(context,list, cmp);
 };
 
-TextType.prototype.convertJavaScriptValueToPrestoValue = function(value) {
+TextType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
 	if (typeof(value) == 'string') {
 		return new Text(value);
 	} else {

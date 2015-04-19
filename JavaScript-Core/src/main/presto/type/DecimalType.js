@@ -86,7 +86,7 @@ DecimalType.prototype.checkCompare = function(context, other) {
 	}
 };
 
-DecimalType.prototype.convertJavaScriptValueToPrestoValue = function(value) {
+DecimalType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
     if (typeof(value)=='number') {
         return new Decimal(value);
     } else {

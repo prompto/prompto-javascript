@@ -3503,6 +3503,15 @@ OParserListener.prototype.exitCsharp_parenthesis_expression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#CSharpPrestoIdentifier.
+OParserListener.prototype.enterCSharpPrestoIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CSharpPrestoIdentifier.
+OParserListener.prototype.exitCSharpPrestoIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#CSharpIdentifier.
 OParserListener.prototype.enterCSharpIdentifier = function(ctx) {
 };

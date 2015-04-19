@@ -48,7 +48,7 @@ BooleanType.prototype.checkNot = function(context) {
 };
 
 
-BooleanType.prototype.convertJavaScriptValueToPrestoValue = function(value) {
+BooleanType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
 	if (typeof(value)=='boolean') {
 		return Bool.ValueOf(value);
 	} else {

@@ -46,7 +46,11 @@ JavaScriptIdentifierExpression.prototype.interpret = function(context, module) {
 };
 
 JavaScriptIdentifierExpression.prototype.interpret_root = function(context, module) {
-	var o = this.interpret_instance(context);
+    var o = this.interpret_presto(context);
+    if(o!=null) {
+        return o;
+    }
+	o = this.interpret_instance(context);
 	if(o!=null) {
 		return o;
 	}
@@ -61,6 +65,12 @@ JavaScriptIdentifierExpression.prototype.interpret_root = function(context, modu
 	return null;
 };
 
+JavaScriptIdentifierExpression.prototype.interpret_presto = function(context) {
+    if ("$context" == this.identifier)
+        return context;
+    else
+        return null;
+};
 
 JavaScriptIdentifierExpression.prototype.interpret_instance = function(context) {
 	if(context==null) {

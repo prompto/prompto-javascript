@@ -19,6 +19,7 @@ function Context() {
     this.tests = {};
 	this.instances = {};
 	this.values = {};
+    this.nativeMappings = {};
 	return this;
 }
 
@@ -127,6 +128,12 @@ Context.prototype.newChildContext = function() {
 	return context;
 };
 
+Context.prototype.findAttribute = function(name) {
+    if(this==this.globals)
+        return this.declarations[name] || null;
+    else
+        return this.globals.findAttribute(name);
+};
 
 Context.prototype.getRegistered = function(name) {
 	// resolve upwards, since local names override global ones
@@ -192,6 +199,20 @@ Context.prototype.hasTests = function() {
     for(var test in this.tests)
         return true;
     return false;
+};
+
+Context.prototype.registerNativeMapping = function(type, declaration) {
+    if(this==this.globals)
+        this.nativeMappings[type] = declaration;
+    else
+        this.globals.registerNativeMapping(type, declaration);
+};
+
+Context.prototype.getNativeMapping = function(type) {
+    if(this==this.globals)
+        return this.nativeMappings[type] || null;
+    else
+        return this.globals.getNativeMapping(type);
 };
 
 function MethodDeclarationMap(name) {

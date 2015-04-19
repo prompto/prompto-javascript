@@ -3530,6 +3530,15 @@ EParserListener.prototype.exitCsharp_parenthesis_expression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#CSharpPrestoIdentifier.
+EParserListener.prototype.enterCSharpPrestoIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#CSharpPrestoIdentifier.
+EParserListener.prototype.exitCSharpPrestoIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#CSharpIdentifier.
 EParserListener.prototype.enterCSharpIdentifier = function(ctx) {
 };

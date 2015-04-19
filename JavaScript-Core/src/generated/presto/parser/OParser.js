@@ -7,7 +7,7 @@ var AbstractParser = require('./AbstractParser').AbstractParser;
 var grammarFileName = "OParser.g4";
 
 var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
-    "\3\u0097\u07c1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t",
+    "\3\u0097\u07c3\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t",
     "\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20",
     "\t\20\4\21\t\21\4\22\t\22\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4",
     "\27\t\27\4\30\t\30\4\31\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35",
@@ -158,89 +158,90 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\3\u00b3\3\u00b3\5\u00b3\u0796\n\u00b3\3\u00b3\3\u00b3\3\u00b4\3\u00b4",
     "\3\u00b4\3\u00b4\3\u00b4\3\u00b4\7\u00b4\u07a0\n\u00b4\f\u00b4\16\u00b4",
     "\u07a3\13\u00b4\3\u00b5\3\u00b5\3\u00b5\3\u00b5\3\u00b6\3\u00b6\3\u00b6",
-    "\3\u00b6\3\u00b7\3\u00b7\3\u00b7\3\u00b7\3\u00b7\3\u00b7\7\u00b7\u07b3",
-    "\n\u00b7\f\u00b7\16\u00b7\u07b6\13\u00b7\3\u00b8\3\u00b8\3\u00b8\3\u00b8",
-    "\3\u00b8\5\u00b8\u07bd\n\u00b8\3\u00b9\3\u00b9\3\u00b9\2,\20 \"DRVZ",
-    "lz\u0082\u0084\u0086\u008e\u0092\u00a0\u00ac\u00b8\u00ba\u00ca\u00ce",
-    "\u00d6\u00d8\u00da\u00dc\u00e2\u00f2\u00f4\u00fc\u0118\u0120\u0126\u012e",
-    "\u0138\u013a\u013e\u0146\u014e\u0154\u0156\u015e\u0166\u016c\u00ba\2",
-    "\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFH",
-    "JLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088\u008a\u008c",
-    "\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c\u009e\u00a0\u00a2\u00a4",
-    "\u00a6\u00a8\u00aa\u00ac\u00ae\u00b0\u00b2\u00b4\u00b6\u00b8\u00ba\u00bc",
-    "\u00be\u00c0\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce\u00d0\u00d2\u00d4",
-    "\u00d6\u00d8\u00da\u00dc\u00de\u00e0\u00e2\u00e4\u00e6\u00e8\u00ea\u00ec",
-    "\u00ee\u00f0\u00f2\u00f4\u00f6\u00f8\u00fa\u00fc\u00fe\u0100\u0102\u0104",
-    "\u0106\u0108\u010a\u010c\u010e\u0110\u0112\u0114\u0116\u0118\u011a\u011c",
-    "\u011e\u0120\u0122\u0124\u0126\u0128\u012a\u012c\u012e\u0130\u0132\u0134",
-    "\u0136\u0138\u013a\u013c\u013e\u0140\u0142\u0144\u0146\u0148\u014a\u014c",
-    "\u014e\u0150\u0152\u0154\u0156\u0158\u015a\u015c\u015e\u0160\u0162\u0164",
-    "\u0166\u0168\u016a\u016c\u016e\u0170\2\7\3\2\35\36\4\2ww}}\4\2\"\"d",
-    "d\7\2/\67rr||\u0085\u0085\u008a\u008c\7\2/\67rr||\u0085\u0085\u008a",
-    "\u008e\u081e\2\u0172\3\2\2\2\4\u0183\3\2\2\2\6\u018c\3\2\2\2\b\u0192",
-    "\3\2\2\2\n\u0197\3\2\2\2\f\u01a0\3\2\2\2\16\u01ae\3\2\2\2\20\u01b8\3",
-    "\2\2\2\22\u01c9\3\2\2\2\24\u01cc\3\2\2\2\26\u01d9\3\2\2\2\30\u01e1\3",
-    "\2\2\2\32\u01e9\3\2\2\2\34\u01f6\3\2\2\2\36\u0203\3\2\2\2 \u0209\3\2",
-    "\2\2\"\u0216\3\2\2\2$\u0221\3\2\2\2&\u022f\3\2\2\2(\u023f\3\2\2\2*\u024d",
-    "\3\2\2\2,\u025f\3\2\2\2.\u0262\3\2\2\2\60\u0275\3\2\2\2\62\u0288\3\2",
-    "\2\2\64\u028a\3\2\2\2\66\u0290\3\2\2\28\u0296\3\2\2\2:\u02b2\3\2\2\2",
-    "<\u02b4\3\2\2\2>\u02c1\3\2\2\2@\u02cd\3\2\2\2B\u02d3\3\2\2\2D\u02df",
-    "\3\2\2\2F\u02f4\3\2\2\2H\u02f8\3\2\2\2J\u032c\3\2\2\2L\u032e\3\2\2\2",
-    "N\u0334\3\2\2\2P\u0340\3\2\2\2R\u0342\3\2\2\2T\u0352\3\2\2\2V\u036b",
-    "\3\2\2\2X\u03cd\3\2\2\2Z\u03cf\3\2\2\2\\\u03df\3\2\2\2^\u03e1\3\2\2",
-    "\2`\u03e5\3\2\2\2b\u03e9\3\2\2\2d\u03f1\3\2\2\2f\u03fa\3\2\2\2h\u0410",
-    "\3\2\2\2j\u0413\3\2\2\2l\u0421\3\2\2\2n\u042b\3\2\2\2p\u042f\3\2\2\2",
-    "r\u043a\3\2\2\2t\u043c\3\2\2\2v\u0441\3\2\2\2x\u0444\3\2\2\2z\u0449",
-    "\3\2\2\2|\u045a\3\2\2\2~\u045c\3\2\2\2\u0080\u0460\3\2\2\2\u0082\u0462",
-    "\3\2\2\2\u0084\u046e\3\2\2\2\u0086\u047a\3\2\2\2\u0088\u048f\3\2\2\2",
-    "\u008a\u0491\3\2\2\2\u008c\u0497\3\2\2\2\u008e\u049d\3\2\2\2\u0090\u04a8",
-    "\3\2\2\2\u0092\u04ae\3\2\2\2\u0094\u04c0\3\2\2\2\u0096\u04cc\3\2\2\2",
-    "\u0098\u04ce\3\2\2\2\u009a\u04d0\3\2\2\2\u009c\u04d2\3\2\2\2\u009e\u04d7",
-    "\3\2\2\2\u00a0\u04d9\3\2\2\2\u00a2\u04e6\3\2\2\2\u00a4\u04eb\3\2\2\2",
-    "\u00a6\u04ed\3\2\2\2\u00a8\u04ef\3\2\2\2\u00aa\u04f1\3\2\2\2\u00ac\u04f3",
-    "\3\2\2\2\u00ae\u0503\3\2\2\2\u00b0\u0507\3\2\2\2\u00b2\u0509\3\2\2\2",
-    "\u00b4\u050e\3\2\2\2\u00b6\u0513\3\2\2\2\u00b8\u0515\3\2\2\2\u00ba\u0523",
-    "\3\2\2\2\u00bc\u0534\3\2\2\2\u00be\u0540\3\2\2\2\u00c0\u0542\3\2\2\2",
-    "\u00c2\u0546\3\2\2\2\u00c4\u0551\3\2\2\2\u00c6\u0554\3\2\2\2\u00c8\u0558",
-    "\3\2\2\2\u00ca\u056a\3\2\2\2\u00cc\u0579\3\2\2\2\u00ce\u057b\3\2\2\2",
-    "\u00d0\u0591\3\2\2\2\u00d2\u0593\3\2\2\2\u00d4\u059a\3\2\2\2\u00d6\u05a1",
-    "\3\2\2\2\u00d8\u05ad\3\2\2\2\u00da\u05b9\3\2\2\2\u00dc\u05c5\3\2\2\2",
-    "\u00de\u05df\3\2\2\2\u00e0\u05ee\3\2\2\2\u00e2\u05f0\3\2\2\2\u00e4\u05ff",
-    "\3\2\2\2\u00e6\u0601\3\2\2\2\u00e8\u0603\3\2\2\2\u00ea\u0609\3\2\2\2",
-    "\u00ec\u0610\3\2\2\2\u00ee\u0612\3\2\2\2\u00f0\u0618\3\2\2\2\u00f2\u061e",
-    "\3\2\2\2\u00f4\u0629\3\2\2\2\u00f6\u0634\3\2\2\2\u00f8\u0641\3\2\2\2",
-    "\u00fa\u0643\3\2\2\2\u00fc\u0647\3\2\2\2\u00fe\u0655\3\2\2\2\u0100\u065d",
-    "\3\2\2\2\u0102\u065f\3\2\2\2\u0104\u0662\3\2\2\2\u0106\u0665\3\2\2\2",
-    "\u0108\u0668\3\2\2\2\u010a\u066a\3\2\2\2\u010c\u066c\3\2\2\2\u010e\u066e",
-    "\3\2\2\2\u0110\u0670\3\2\2\2\u0112\u0672\3\2\2\2\u0114\u0674\3\2\2\2",
-    "\u0116\u067d\3\2\2\2\u0118\u067f\3\2\2\2\u011a\u068c\3\2\2\2\u011c\u0691",
-    "\3\2\2\2\u011e\u0693\3\2\2\2\u0120\u069a\3\2\2\2\u0122\u06a5\3\2\2\2",
-    "\u0124\u06a9\3\2\2\2\u0126\u06ad\3\2\2\2\u0128\u06bd\3\2\2\2\u012a\u06bf",
-    "\3\2\2\2\u012c\u06c4\3\2\2\2\u012e\u06c6\3\2\2\2\u0130\u06d4\3\2\2\2",
-    "\u0132\u06dc\3\2\2\2\u0134\u06de\3\2\2\2\u0136\u06eb\3\2\2\2\u0138\u06ed",
-    "\3\2\2\2\u013a\u06f8\3\2\2\2\u013c\u0708\3\2\2\2\u013e\u070c\3\2\2\2",
-    "\u0140\u071c\3\2\2\2\u0142\u071e\3\2\2\2\u0144\u0727\3\2\2\2\u0146\u0729",
-    "\3\2\2\2\u0148\u0736\3\2\2\2\u014a\u073b\3\2\2\2\u014c\u073d\3\2\2\2",
-    "\u014e\u0744\3\2\2\2\u0150\u074f\3\2\2\2\u0152\u0753\3\2\2\2\u0154\u0757",
-    "\3\2\2\2\u0156\u0762\3\2\2\2\u0158\u0771\3\2\2\2\u015a\u0773\3\2\2\2",
-    "\u015c\u077c\3\2\2\2\u015e\u077e\3\2\2\2\u0160\u078b\3\2\2\2\u0162\u0790",
-    "\3\2\2\2\u0164\u0792\3\2\2\2\u0166\u0799\3\2\2\2\u0168\u07a4\3\2\2\2",
-    "\u016a\u07a8\3\2\2\2\u016c\u07ac\3\2\2\2\u016e\u07bc\3\2\2\2\u0170\u07be",
-    "\3\2\2\2\u0172\u0173\7R\2\2\u0173\u0174\7F\2\2\u0174\u0179\5\u00a8U",
-    "\2\u0175\u0176\7\21\2\2\u0176\u0177\5\"\22\2\u0177\u0178\7\22\2\2\u0178",
-    "\u017a\3\2\2\2\u0179\u0175\3\2\2\2\u0179\u017a\3\2\2\2\u017a\u017d\3",
-    "\2\2\2\u017b\u017c\7V\2\2\u017c\u017e\5\u00a8U\2\u017d\u017b\3\2\2\2",
-    "\u017d\u017e\3\2\2\2\u017e\u017f\3\2\2\2\u017f\u0180\7\25\2\2\u0180",
-    "\u0181\5\u0084C\2\u0181\u0182\7\26\2\2\u0182\3\3\2\2\2\u0183\u0184\7",
-    "R\2\2\u0184\u0185\5\u00a8U\2\u0185\u0186\7\21\2\2\u0186\u0187\5\u0096",
-    "L\2\u0187\u0188\7\22\2\2\u0188\u0189\7\25\2\2\u0189\u018a\5\u0082B\2",
-    "\u018a\u018b\7\26\2\2\u018b\5\3\2\2\2\u018c\u018d\5\u00aaV\2\u018d\u018e",
-    "\7\21\2\2\u018e\u018f\5l\67\2\u018f\u0190\7\22\2\2\u0190\u0191\7\r\2",
-    "\2\u0191\7\3\2\2\2\u0192\u0193\5\u00aaV\2\u0193\u0194\7(\2\2\u0194\u0195",
-    "\5V,\2\u0195\u0196\7\r\2\2\u0196\t\3\2\2\2\u0197\u0198\7B\2\2\u0198",
-    "\u0199\5\u00a6T\2\u0199\u019a\7\f\2\2\u019a\u019c\5\u0092J\2\u019b\u019d",
-    "\5\u0088E\2\u019c\u019b\3\2\2\2\u019c\u019d\3\2\2\2\u019d\u019e\3\2",
-    "\2\2\u019e\u019f\7\r\2\2\u019f\13\3\2\2\2\u01a0\u01a1\7F\2\2\u01a1\u01a6",
+    "\3\u00b6\3\u00b7\3\u00b7\3\u00b7\5\u00b7\u07b0\n\u00b7\3\u00b7\3\u00b7",
+    "\3\u00b7\7\u00b7\u07b5\n\u00b7\f\u00b7\16\u00b7\u07b8\13\u00b7\3\u00b8",
+    "\3\u00b8\3\u00b8\3\u00b8\3\u00b8\5\u00b8\u07bf\n\u00b8\3\u00b9\3\u00b9",
+    "\3\u00b9\2,\20 \"DRVZlz\u0082\u0084\u0086\u008e\u0092\u00a0\u00ac\u00b8",
+    "\u00ba\u00ca\u00ce\u00d6\u00d8\u00da\u00dc\u00e2\u00f2\u00f4\u00fc\u0118",
+    "\u0120\u0126\u012e\u0138\u013a\u013e\u0146\u014e\u0154\u0156\u015e\u0166",
+    "\u016c\u00ba\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64",
+    "\668:<>@BDFHJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088",
+    "\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098\u009a\u009c\u009e\u00a0",
+    "\u00a2\u00a4\u00a6\u00a8\u00aa\u00ac\u00ae\u00b0\u00b2\u00b4\u00b6\u00b8",
+    "\u00ba\u00bc\u00be\u00c0\u00c2\u00c4\u00c6\u00c8\u00ca\u00cc\u00ce\u00d0",
+    "\u00d2\u00d4\u00d6\u00d8\u00da\u00dc\u00de\u00e0\u00e2\u00e4\u00e6\u00e8",
+    "\u00ea\u00ec\u00ee\u00f0\u00f2\u00f4\u00f6\u00f8\u00fa\u00fc\u00fe\u0100",
+    "\u0102\u0104\u0106\u0108\u010a\u010c\u010e\u0110\u0112\u0114\u0116\u0118",
+    "\u011a\u011c\u011e\u0120\u0122\u0124\u0126\u0128\u012a\u012c\u012e\u0130",
+    "\u0132\u0134\u0136\u0138\u013a\u013c\u013e\u0140\u0142\u0144\u0146\u0148",
+    "\u014a\u014c\u014e\u0150\u0152\u0154\u0156\u0158\u015a\u015c\u015e\u0160",
+    "\u0162\u0164\u0166\u0168\u016a\u016c\u016e\u0170\2\b\3\2\35\36\4\2w",
+    "w}}\4\2\"\"dd\b\2/\67rr||\u0085\u0085\u008a\u008c\u008e\u008e\7\2/\67",
+    "rr||\u0085\u0085\u008a\u008c\7\2/\67rr||\u0085\u0085\u008a\u008e\u0821",
+    "\2\u0172\3\2\2\2\4\u0183\3\2\2\2\6\u018c\3\2\2\2\b\u0192\3\2\2\2\n\u0197",
+    "\3\2\2\2\f\u01a0\3\2\2\2\16\u01ae\3\2\2\2\20\u01b8\3\2\2\2\22\u01c9",
+    "\3\2\2\2\24\u01cc\3\2\2\2\26\u01d9\3\2\2\2\30\u01e1\3\2\2\2\32\u01e9",
+    "\3\2\2\2\34\u01f6\3\2\2\2\36\u0203\3\2\2\2 \u0209\3\2\2\2\"\u0216\3",
+    "\2\2\2$\u0221\3\2\2\2&\u022f\3\2\2\2(\u023f\3\2\2\2*\u024d\3\2\2\2,",
+    "\u025f\3\2\2\2.\u0262\3\2\2\2\60\u0275\3\2\2\2\62\u0288\3\2\2\2\64\u028a",
+    "\3\2\2\2\66\u0290\3\2\2\28\u0296\3\2\2\2:\u02b2\3\2\2\2<\u02b4\3\2\2",
+    "\2>\u02c1\3\2\2\2@\u02cd\3\2\2\2B\u02d3\3\2\2\2D\u02df\3\2\2\2F\u02f4",
+    "\3\2\2\2H\u02f8\3\2\2\2J\u032c\3\2\2\2L\u032e\3\2\2\2N\u0334\3\2\2\2",
+    "P\u0340\3\2\2\2R\u0342\3\2\2\2T\u0352\3\2\2\2V\u036b\3\2\2\2X\u03cd",
+    "\3\2\2\2Z\u03cf\3\2\2\2\\\u03df\3\2\2\2^\u03e1\3\2\2\2`\u03e5\3\2\2",
+    "\2b\u03e9\3\2\2\2d\u03f1\3\2\2\2f\u03fa\3\2\2\2h\u0410\3\2\2\2j\u0413",
+    "\3\2\2\2l\u0421\3\2\2\2n\u042b\3\2\2\2p\u042f\3\2\2\2r\u043a\3\2\2\2",
+    "t\u043c\3\2\2\2v\u0441\3\2\2\2x\u0444\3\2\2\2z\u0449\3\2\2\2|\u045a",
+    "\3\2\2\2~\u045c\3\2\2\2\u0080\u0460\3\2\2\2\u0082\u0462\3\2\2\2\u0084",
+    "\u046e\3\2\2\2\u0086\u047a\3\2\2\2\u0088\u048f\3\2\2\2\u008a\u0491\3",
+    "\2\2\2\u008c\u0497\3\2\2\2\u008e\u049d\3\2\2\2\u0090\u04a8\3\2\2\2\u0092",
+    "\u04ae\3\2\2\2\u0094\u04c0\3\2\2\2\u0096\u04cc\3\2\2\2\u0098\u04ce\3",
+    "\2\2\2\u009a\u04d0\3\2\2\2\u009c\u04d2\3\2\2\2\u009e\u04d7\3\2\2\2\u00a0",
+    "\u04d9\3\2\2\2\u00a2\u04e6\3\2\2\2\u00a4\u04eb\3\2\2\2\u00a6\u04ed\3",
+    "\2\2\2\u00a8\u04ef\3\2\2\2\u00aa\u04f1\3\2\2\2\u00ac\u04f3\3\2\2\2\u00ae",
+    "\u0503\3\2\2\2\u00b0\u0507\3\2\2\2\u00b2\u0509\3\2\2\2\u00b4\u050e\3",
+    "\2\2\2\u00b6\u0513\3\2\2\2\u00b8\u0515\3\2\2\2\u00ba\u0523\3\2\2\2\u00bc",
+    "\u0534\3\2\2\2\u00be\u0540\3\2\2\2\u00c0\u0542\3\2\2\2\u00c2\u0546\3",
+    "\2\2\2\u00c4\u0551\3\2\2\2\u00c6\u0554\3\2\2\2\u00c8\u0558\3\2\2\2\u00ca",
+    "\u056a\3\2\2\2\u00cc\u0579\3\2\2\2\u00ce\u057b\3\2\2\2\u00d0\u0591\3",
+    "\2\2\2\u00d2\u0593\3\2\2\2\u00d4\u059a\3\2\2\2\u00d6\u05a1\3\2\2\2\u00d8",
+    "\u05ad\3\2\2\2\u00da\u05b9\3\2\2\2\u00dc\u05c5\3\2\2\2\u00de\u05df\3",
+    "\2\2\2\u00e0\u05ee\3\2\2\2\u00e2\u05f0\3\2\2\2\u00e4\u05ff\3\2\2\2\u00e6",
+    "\u0601\3\2\2\2\u00e8\u0603\3\2\2\2\u00ea\u0609\3\2\2\2\u00ec\u0610\3",
+    "\2\2\2\u00ee\u0612\3\2\2\2\u00f0\u0618\3\2\2\2\u00f2\u061e\3\2\2\2\u00f4",
+    "\u0629\3\2\2\2\u00f6\u0634\3\2\2\2\u00f8\u0641\3\2\2\2\u00fa\u0643\3",
+    "\2\2\2\u00fc\u0647\3\2\2\2\u00fe\u0655\3\2\2\2\u0100\u065d\3\2\2\2\u0102",
+    "\u065f\3\2\2\2\u0104\u0662\3\2\2\2\u0106\u0665\3\2\2\2\u0108\u0668\3",
+    "\2\2\2\u010a\u066a\3\2\2\2\u010c\u066c\3\2\2\2\u010e\u066e\3\2\2\2\u0110",
+    "\u0670\3\2\2\2\u0112\u0672\3\2\2\2\u0114\u0674\3\2\2\2\u0116\u067d\3",
+    "\2\2\2\u0118\u067f\3\2\2\2\u011a\u068c\3\2\2\2\u011c\u0691\3\2\2\2\u011e",
+    "\u0693\3\2\2\2\u0120\u069a\3\2\2\2\u0122\u06a5\3\2\2\2\u0124\u06a9\3",
+    "\2\2\2\u0126\u06ad\3\2\2\2\u0128\u06bd\3\2\2\2\u012a\u06bf\3\2\2\2\u012c",
+    "\u06c4\3\2\2\2\u012e\u06c6\3\2\2\2\u0130\u06d4\3\2\2\2\u0132\u06dc\3",
+    "\2\2\2\u0134\u06de\3\2\2\2\u0136\u06eb\3\2\2\2\u0138\u06ed\3\2\2\2\u013a",
+    "\u06f8\3\2\2\2\u013c\u0708\3\2\2\2\u013e\u070c\3\2\2\2\u0140\u071c\3",
+    "\2\2\2\u0142\u071e\3\2\2\2\u0144\u0727\3\2\2\2\u0146\u0729\3\2\2\2\u0148",
+    "\u0736\3\2\2\2\u014a\u073b\3\2\2\2\u014c\u073d\3\2\2\2\u014e\u0744\3",
+    "\2\2\2\u0150\u074f\3\2\2\2\u0152\u0753\3\2\2\2\u0154\u0757\3\2\2\2\u0156",
+    "\u0762\3\2\2\2\u0158\u0771\3\2\2\2\u015a\u0773\3\2\2\2\u015c\u077c\3",
+    "\2\2\2\u015e\u077e\3\2\2\2\u0160\u078b\3\2\2\2\u0162\u0790\3\2\2\2\u0164",
+    "\u0792\3\2\2\2\u0166\u0799\3\2\2\2\u0168\u07a4\3\2\2\2\u016a\u07a8\3",
+    "\2\2\2\u016c\u07af\3\2\2\2\u016e\u07be\3\2\2\2\u0170\u07c0\3\2\2\2\u0172",
+    "\u0173\7R\2\2\u0173\u0174\7F\2\2\u0174\u0179\5\u00a8U\2\u0175\u0176",
+    "\7\21\2\2\u0176\u0177\5\"\22\2\u0177\u0178\7\22\2\2\u0178\u017a\3\2",
+    "\2\2\u0179\u0175\3\2\2\2\u0179\u017a\3\2\2\2\u017a\u017d\3\2\2\2\u017b",
+    "\u017c\7V\2\2\u017c\u017e\5\u00a8U\2\u017d\u017b\3\2\2\2\u017d\u017e",
+    "\3\2\2\2\u017e\u017f\3\2\2\2\u017f\u0180\7\25\2\2\u0180\u0181\5\u0084",
+    "C\2\u0181\u0182\7\26\2\2\u0182\3\3\2\2\2\u0183\u0184\7R\2\2\u0184\u0185",
+    "\5\u00a8U\2\u0185\u0186\7\21\2\2\u0186\u0187\5\u0096L\2\u0187\u0188",
+    "\7\22\2\2\u0188\u0189\7\25\2\2\u0189\u018a\5\u0082B\2\u018a\u018b\7",
+    "\26\2\2\u018b\5\3\2\2\2\u018c\u018d\5\u00aaV\2\u018d\u018e\7\21\2\2",
+    "\u018e\u018f\5l\67\2\u018f\u0190\7\22\2\2\u0190\u0191\7\r\2\2\u0191",
+    "\7\3\2\2\2\u0192\u0193\5\u00aaV\2\u0193\u0194\7(\2\2\u0194\u0195\5V",
+    ",\2\u0195\u0196\7\r\2\2\u0196\t\3\2\2\2\u0197\u0198\7B\2\2\u0198\u0199",
+    "\5\u00a6T\2\u0199\u019a\7\f\2\2\u019a\u019c\5\u0092J\2\u019b\u019d\5",
+    "\u0088E\2\u019c\u019b\3\2\2\2\u019c\u019d\3\2\2\2\u019d\u019e\3\2\2",
+    "\2\u019e\u019f\7\r\2\2\u019f\13\3\2\2\2\u01a0\u01a1\7F\2\2\u01a1\u01a6",
     "\5\u00a8U\2\u01a2\u01a3\7\21\2\2\u01a3\u01a4\5\"\22\2\u01a4\u01a5\7",
     "\22\2\2\u01a5\u01a7\3\2\2\2\u01a6\u01a2\3\2\2\2\u01a6\u01a7\3\2\2\2",
     "\u01a7\u01aa\3\2\2\2\u01a8\u01a9\7V\2\2\u01a9\u01ab\5\20\t\2\u01aa\u01a8",
@@ -736,7 +737,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\7\u0092\2\2\u0719\u071d\7\u008f\2\2\u071a\u071d\7\u0086\2\2\u071b\u071d",
     "\7\u0087\2\2\u071c\u0717\3\2\2\2\u071c\u0718\3\2\2\2\u071c\u0719\3\2",
     "\2\2\u071c\u071a\3\2\2\2\u071c\u071b\3\2\2\2\u071d\u0141\3\2\2\2\u071e",
-    "\u071f\t\5\2\2\u071f\u0143\3\2\2\2\u0720\u0721\7u\2\2\u0721\u0722\5",
+    "\u071f\t\6\2\2\u071f\u0143\3\2\2\2\u0720\u0721\7u\2\2\u0721\u0722\5",
     "\u0146\u00a4\2\u0722\u0723\7\r\2\2\u0723\u0728\3\2\2\2\u0724\u0725\5",
     "\u0146\u00a4\2\u0725\u0726\7\r\2\2\u0726\u0728\3\2\2\2\u0727\u0720\3",
     "\2\2\2\u0727\u0724\3\2\2\2\u0728\u0145\3\2\2\2\u0729\u072a\b\u00a4\1",
@@ -767,7 +768,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0772\7\u0090\2\2\u076d\u0772\7\u0092\2\2\u076e\u0772\7\u008f\2\2\u076f",
     "\u0772\7\u0086\2\2\u0770\u0772\7\u0087\2\2\u0771\u076c\3\2\2\2\u0771",
     "\u076d\3\2\2\2\u0771\u076e\3\2\2\2\u0771\u076f\3\2\2\2\u0771\u0770\3",
-    "\2\2\2\u0772\u0159\3\2\2\2\u0773\u0774\t\6\2\2\u0774\u015b\3\2\2\2\u0775",
+    "\2\2\2\u0772\u0159\3\2\2\2\u0773\u0774\t\7\2\2\u0774\u015b\3\2\2\2\u0775",
     "\u0776\7u\2\2\u0776\u0777\5\u015e\u00b0\2\u0777\u0778\7\r\2\2\u0778",
     "\u077d\3\2\2\2\u0779\u077a\5\u015e\u00b0\2\u077a\u077b\7\r\2\2\u077b",
     "\u077d\3\2\2\2\u077c\u0775\3\2\2\2\u077c\u0779\3\2\2\2\u077d\u015d\3",
@@ -788,14 +789,15 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\2\2\2\u07a3\u07a1\3\2\2\2\u07a4\u07a5\7\23\2\2\u07a5\u07a6\5\u015e",
     "\u00b0\2\u07a6\u07a7\7\24\2\2\u07a7\u0169\3\2\2\2\u07a8\u07a9\7\21\2",
     "\2\u07a9\u07aa\5\u015e\u00b0\2\u07aa\u07ab\7\22\2\2\u07ab\u016b\3\2",
-    "\2\2\u07ac\u07ad\b\u00b7\1\2\u07ad\u07ae\5\u0170\u00b9\2\u07ae\u07b4",
-    "\3\2\2\2\u07af\u07b0\f\3\2\2\u07b0\u07b1\7\20\2\2\u07b1\u07b3\5\u0170",
-    "\u00b9\2\u07b2\u07af\3\2\2\2\u07b3\u07b6\3\2\2\2\u07b4\u07b2\3\2\2\2",
-    "\u07b4\u07b5\3\2\2\2\u07b5\u016d\3\2\2\2\u07b6\u07b4\3\2\2\2\u07b7\u07bd",
-    "\7\u0090\2\2\u07b8\u07bd\7\u0092\2\2\u07b9\u07bd\7\u008f\2\2\u07ba\u07bd",
-    "\7\u0086\2\2\u07bb\u07bd\7\u0087\2\2\u07bc\u07b7\3\2\2\2\u07bc\u07b8",
-    "\3\2\2\2\u07bc\u07b9\3\2\2\2\u07bc\u07ba\3\2\2\2\u07bc\u07bb\3\2\2\2",
-    "\u07bd\u016f\3\2\2\2\u07be\u07bf\t\5\2\2\u07bf\u0171\3\2\2\2\u00a5\u0179",
+    "\2\2\u07ac\u07ad\b\u00b7\1\2\u07ad\u07b0\7\u008e\2\2\u07ae\u07b0\5\u0170",
+    "\u00b9\2\u07af\u07ac\3\2\2\2\u07af\u07ae\3\2\2\2\u07b0\u07b6\3\2\2\2",
+    "\u07b1\u07b2\f\3\2\2\u07b2\u07b3\7\20\2\2\u07b3\u07b5\5\u0170\u00b9",
+    "\2\u07b4\u07b1\3\2\2\2\u07b5\u07b8\3\2\2\2\u07b6\u07b4\3\2\2\2\u07b6",
+    "\u07b7\3\2\2\2\u07b7\u016d\3\2\2\2\u07b8\u07b6\3\2\2\2\u07b9\u07bf\7",
+    "\u0090\2\2\u07ba\u07bf\7\u0092\2\2\u07bb\u07bf\7\u008f\2\2\u07bc\u07bf",
+    "\7\u0086\2\2\u07bd\u07bf\7\u0087\2\2\u07be\u07b9\3\2\2\2\u07be\u07ba",
+    "\3\2\2\2\u07be\u07bb\3\2\2\2\u07be\u07bc\3\2\2\2\u07be\u07bd\3\2\2\2",
+    "\u07bf\u016f\3\2\2\2\u07c0\u07c1\t\6\2\2\u07c1\u0171\3\2\2\2\u00a6\u0179",
     "\u017d\u019c\u01a6\u01aa\u01b4\u01c0\u01c6\u01c9\u01cc\u01d5\u01dd\u01e5",
     "\u01f0\u01fd\u0213\u021e\u0223\u0229\u022f\u0235\u023a\u023f\u0246\u025d",
     "\u0267\u026c\u0273\u0275\u0288\u029f\u02a1\u02a9\u02b0\u02b2\u02ba\u02c4",
@@ -809,7 +811,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u061a\u0626\u0631\u0641\u064e\u0655\u065d\u067d\u0686\u068c\u0691\u0696",
     "\u06a2\u06b5\u06bd\u06c4\u06cd\u06d4\u06dc\u06e1\u06eb\u06f5\u0705\u0714",
     "\u071c\u0727\u0730\u0736\u073b\u0740\u074c\u075f\u0769\u0771\u077c\u0785",
-    "\u078b\u0790\u0795\u07a1\u07b4\u07bc"].join("");
+    "\u078b\u0790\u0795\u07a1\u07af\u07b6\u07be"].join("");
 		
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -20260,6 +20262,7 @@ OParser.prototype.javascript_statement = function() {
         case OParser.SYMBOL_IDENTIFIER:
         case OParser.TYPE_IDENTIFIER:
         case OParser.VARIABLE_IDENTIFIER:
+        case OParser.DOLLAR_IDENTIFIER:
         case OParser.TEXT_LITERAL:
         case OParser.INTEGER_LITERAL:
         case OParser.DECIMAL_LITERAL:
@@ -20554,6 +20557,7 @@ OParser.prototype.javascript_primary_expression = function() {
         case OParser.SYMBOL_IDENTIFIER:
         case OParser.TYPE_IDENTIFIER:
         case OParser.VARIABLE_IDENTIFIER:
+        case OParser.DOLLAR_IDENTIFIER:
             localctx = new JavascriptIdentifierExpressionContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
             this.state = 1672; 
@@ -20766,7 +20770,7 @@ OParser.prototype.javascript_method_expression = function() {
         this.match(OParser.LPAR);
         this.state = 1684;
         _la = this._input.LA(1);
-        if(_la===OParser.LPAR || ((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.BOOLEAN_LITERAL - 112)) | (1 << (OParser.CHAR_LITERAL - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)) | (1 << (OParser.TEXT_LITERAL - 112)) | (1 << (OParser.INTEGER_LITERAL - 112)))) !== 0) || _la===OParser.DECIMAL_LITERAL) {
+        if(_la===OParser.LPAR || ((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.BOOLEAN_LITERAL - 112)) | (1 << (OParser.CHAR_LITERAL - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)) | (1 << (OParser.DOLLAR_IDENTIFIER - 112)) | (1 << (OParser.TEXT_LITERAL - 112)) | (1 << (OParser.INTEGER_LITERAL - 112)))) !== 0) || _la===OParser.DECIMAL_LITERAL) {
             this.state = 1683; 
             localctx.args = this.javascript_arguments(0);
         }
@@ -21445,6 +21449,10 @@ Javascript_identifierContext.prototype.SYMBOL_IDENTIFIER = function() {
     return this.getToken(OParser.SYMBOL_IDENTIFIER, 0);
 };
 
+Javascript_identifierContext.prototype.DOLLAR_IDENTIFIER = function() {
+    return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
+};
+
 Javascript_identifierContext.prototype.TYPE_IDENTIFIER = function() {
     return this.getToken(OParser.TYPE_IDENTIFIER, 0);
 };
@@ -21521,7 +21529,7 @@ OParser.prototype.javascript_identifier = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 1725;
         _la = this._input.LA(1);
-        if(!(((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)))) !== 0))) {
+        if(!(((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)) | (1 << (OParser.DOLLAR_IDENTIFIER - 112)))) !== 0))) {
         this._errHandler.recoverInline(this);
         }
         this.consume();
@@ -24890,6 +24898,7 @@ OParser.prototype.csharp_statement = function() {
         case OParser.SYMBOL_IDENTIFIER:
         case OParser.TYPE_IDENTIFIER:
         case OParser.VARIABLE_IDENTIFIER:
+        case OParser.DOLLAR_IDENTIFIER:
         case OParser.TEXT_LITERAL:
         case OParser.INTEGER_LITERAL:
         case OParser.DECIMAL_LITERAL:
@@ -25184,6 +25193,7 @@ OParser.prototype.csharp_primary_expression = function() {
         case OParser.SYMBOL_IDENTIFIER:
         case OParser.TYPE_IDENTIFIER:
         case OParser.VARIABLE_IDENTIFIER:
+        case OParser.DOLLAR_IDENTIFIER:
             localctx = new CSharpIdentifierExpressionContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
             this.state = 1927; 
@@ -25396,7 +25406,7 @@ OParser.prototype.csharp_method_expression = function() {
         this.match(OParser.LPAR);
         this.state = 1939;
         _la = this._input.LA(1);
-        if(_la===OParser.LPAR || ((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.BOOLEAN_LITERAL - 112)) | (1 << (OParser.CHAR_LITERAL - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)) | (1 << (OParser.TEXT_LITERAL - 112)) | (1 << (OParser.INTEGER_LITERAL - 112)))) !== 0) || _la===OParser.DECIMAL_LITERAL) {
+        if(_la===OParser.LPAR || ((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.BOOLEAN_LITERAL - 112)) | (1 << (OParser.CHAR_LITERAL - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)) | (1 << (OParser.DOLLAR_IDENTIFIER - 112)) | (1 << (OParser.TEXT_LITERAL - 112)) | (1 << (OParser.INTEGER_LITERAL - 112)))) !== 0) || _la===OParser.DECIMAL_LITERAL) {
             this.state = 1938; 
             localctx.args = this.csharp_arguments(0);
         }
@@ -25722,6 +25732,31 @@ Csharp_identifier_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
 
+function CSharpPrestoIdentifierContext(parser, ctx) {
+	Csharp_identifier_expressionContext.call(this, parser);
+    Csharp_identifier_expressionContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+CSharpPrestoIdentifierContext.prototype = Object.create(Csharp_identifier_expressionContext.prototype);
+CSharpPrestoIdentifierContext.prototype.constructor = CSharpPrestoIdentifierContext;
+
+CSharpPrestoIdentifierContext.prototype.DOLLAR_IDENTIFIER = function() {
+    return this.getToken(OParser.DOLLAR_IDENTIFIER, 0);
+};
+CSharpPrestoIdentifierContext.prototype.enterRule = function(listener) {
+    if(listener instanceof OParserListener ) {
+        listener.enterCSharpPrestoIdentifier(this);
+	}
+};
+
+CSharpPrestoIdentifierContext.prototype.exitRule = function(listener) {
+    if(listener instanceof OParserListener ) {
+        listener.exitCSharpPrestoIdentifier(this);
+	}
+};
+
+
 function CSharpIdentifierContext(parser, ctx) {
 	Csharp_identifier_expressionContext.call(this, parser);
     this.name = null; // Csharp_identifierContext;
@@ -25796,16 +25831,44 @@ OParser.prototype.csharp_identifier_expression = function(_p) {
     this.enterRecursionRule(localctx, 362, OParser.RULE_csharp_identifier_expression, _p);
     try {
         this.enterOuterAlt(localctx, 1);
-        localctx = new CSharpIdentifierContext(this, localctx);
-        this._ctx = localctx;
-        _prevctx = localctx;
+        this.state = 1965;
+        switch(this._input.LA(1)) {
+        case OParser.DOLLAR_IDENTIFIER:
+            localctx = new CSharpPrestoIdentifierContext(this, localctx);
+            this._ctx = localctx;
+            _prevctx = localctx;
 
-        this.state = 1963; 
-        localctx.name = this.csharp_identifier();
+            this.state = 1963;
+            this.match(OParser.DOLLAR_IDENTIFIER);
+            break;
+        case OParser.BOOLEAN:
+        case OParser.CHARACTER:
+        case OParser.TEXT:
+        case OParser.INTEGER:
+        case OParser.DECIMAL:
+        case OParser.DATE:
+        case OParser.TIME:
+        case OParser.DATETIME:
+        case OParser.PERIOD:
+        case OParser.READ:
+        case OParser.TEST:
+        case OParser.WRITE:
+        case OParser.SYMBOL_IDENTIFIER:
+        case OParser.TYPE_IDENTIFIER:
+        case OParser.VARIABLE_IDENTIFIER:
+            localctx = new CSharpIdentifierContext(this, localctx);
+            this._ctx = localctx;
+            _prevctx = localctx;
+            this.state = 1964; 
+            localctx.name = this.csharp_identifier();
+            break;
+        default:
+            throw new antlr4.error.NoViableAltException(this);
+        }
         this._ctx.stop = this._input.LT(-1);
-        this.state = 1970;
+        this.state = 1972;
         this._errHandler.sync(this);
-        var _alt = this._interp.adaptivePredict(this._input,161,this._ctx)
+        var _alt = this._interp.adaptivePredict(this._input,162,this._ctx)
         while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
             if(_alt===1) {
                 if(this._parseListeners!==null) {
@@ -25815,18 +25878,18 @@ OParser.prototype.csharp_identifier_expression = function(_p) {
                 localctx = new CSharpChildIdentifierContext(this, new Csharp_identifier_expressionContext(this, _parentctx, _parentState));
                 localctx.parent = _prevctx;
                 this.pushNewRecursionContext(localctx, _startState, OParser.RULE_csharp_identifier_expression);
-                this.state = 1965;
+                this.state = 1967;
                 if (!( this.precpred(this._ctx, 1))) {
                     throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
                 }
-                this.state = 1966;
+                this.state = 1968;
                 this.match(OParser.DOT);
-                this.state = 1967; 
+                this.state = 1969; 
                 localctx.name = this.csharp_identifier(); 
             }
-            this.state = 1972;
+            this.state = 1974;
             this._errHandler.sync(this);
-            _alt = this._interp.adaptivePredict(this._input,161,this._ctx);
+            _alt = this._interp.adaptivePredict(this._input,162,this._ctx);
         }
 
     } catch( error) {
@@ -25997,36 +26060,36 @@ OParser.prototype.csharp_literal_expression = function() {
     var localctx = new Csharp_literal_expressionContext(this, this._ctx, this.state);
     this.enterRule(localctx, 364, OParser.RULE_csharp_literal_expression);
     try {
-        this.state = 1978;
+        this.state = 1980;
         switch(this._input.LA(1)) {
         case OParser.INTEGER_LITERAL:
             localctx = new CSharpIntegerLiteralContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
-            this.state = 1973;
+            this.state = 1975;
             this.match(OParser.INTEGER_LITERAL);
             break;
         case OParser.DECIMAL_LITERAL:
             localctx = new CSharpDecimalLiteralContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
-            this.state = 1974;
+            this.state = 1976;
             this.match(OParser.DECIMAL_LITERAL);
             break;
         case OParser.TEXT_LITERAL:
             localctx = new CSharpTextLiteralContext(this, localctx);
             this.enterOuterAlt(localctx, 3);
-            this.state = 1975;
+            this.state = 1977;
             this.match(OParser.TEXT_LITERAL);
             break;
         case OParser.BOOLEAN_LITERAL:
             localctx = new CSharpBooleanLiteralContext(this, localctx);
             this.enterOuterAlt(localctx, 4);
-            this.state = 1976;
+            this.state = 1978;
             this.match(OParser.BOOLEAN_LITERAL);
             break;
         case OParser.CHAR_LITERAL:
             localctx = new CSharpCharacterLiteralContext(this, localctx);
             this.enterOuterAlt(localctx, 5);
-            this.state = 1977;
+            this.state = 1979;
             this.match(OParser.CHAR_LITERAL);
             break;
         default:
@@ -26144,7 +26207,7 @@ OParser.prototype.csharp_identifier = function() {
     var _la = 0; // Token type
     try {
         this.enterOuterAlt(localctx, 1);
-        this.state = 1980;
+        this.state = 1982;
         _la = this._input.LA(1);
         if(!(((((_la - 45)) & ~0x1f) == 0 && ((1 << (_la - 45)) & ((1 << (OParser.BOOLEAN - 45)) | (1 << (OParser.CHARACTER - 45)) | (1 << (OParser.TEXT - 45)) | (1 << (OParser.INTEGER - 45)) | (1 << (OParser.DECIMAL - 45)) | (1 << (OParser.DATE - 45)) | (1 << (OParser.TIME - 45)) | (1 << (OParser.DATETIME - 45)) | (1 << (OParser.PERIOD - 45)))) !== 0) || ((((_la - 112)) & ~0x1f) == 0 && ((1 << (_la - 112)) & ((1 << (OParser.READ - 112)) | (1 << (OParser.TEST - 112)) | (1 << (OParser.WRITE - 112)) | (1 << (OParser.SYMBOL_IDENTIFIER - 112)) | (1 << (OParser.TYPE_IDENTIFIER - 112)) | (1 << (OParser.VARIABLE_IDENTIFIER - 112)))) !== 0))) {
         this._errHandler.recoverInline(this);

@@ -2047,6 +2047,13 @@ SPrestoBuilder.prototype.exitCSharpNativeStatement = function(ctx) {
     this.setNodeValue(ctx, call);
 };
 
+
+SPrestoBuilder.prototype.exitCSharpPrestoIdentifier = function(ctx) {
+    var name = ctx.DOLLAR_IDENTIFIER().getText();
+    this.setNodeValue(ctx, new csharp.CSharpIdentifierExpression(null, name));
+};
+
+
 SPrestoBuilder.prototype.exitCSharpPrimaryExpression = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);

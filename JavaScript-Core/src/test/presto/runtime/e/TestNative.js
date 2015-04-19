@@ -13,11 +13,20 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testAttribute = function(test) {
+	checkOutput(test, "native/attribute.pec");
+};
+
+
 exports.testCategory = function(test) {
 	checkOutput(test, "native/category.pec");
 };
 
 exports.testMethod = function(test) {
 	checkOutput(test, "native/method.pec");
+};
+
+exports.testPrinter = function(test) {
+	checkOutput(test, "native/printer.pec");
 };
 

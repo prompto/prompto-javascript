@@ -12,7 +12,7 @@ NativeInstance.prototype = Object.create(Value.prototype);
 NativeInstance.prototype.constructor = NativeInstance;
 
 NativeInstance.prototype.makeInstance = function() {
-	var mapped = this.declaration.getMapped();
+	var mapped = this.declaration.getMapped(true);
 	return mapped.prototype.constructor();
 };
 

@@ -3467,6 +3467,15 @@ SParserListener.prototype.exitCsharp_parenthesis_expression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#CSharpPrestoIdentifier.
+SParserListener.prototype.enterCSharpPrestoIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#CSharpPrestoIdentifier.
+SParserListener.prototype.exitCSharpPrestoIdentifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#CSharpIdentifier.
 SParserListener.prototype.enterCSharpIdentifier = function(ctx) {
 };

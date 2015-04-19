@@ -152,7 +152,7 @@ IntegerType.prototype.newRange = function(left, right) {
 	}
 };
 
-IntegerType.prototype.convertJavaScriptValueToPrestoValue = function(value) {
+IntegerType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
 	if (typeof(value)=='number') {
 		return new Integer(value);
 	} else {

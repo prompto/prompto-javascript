@@ -72,7 +72,7 @@ JavaScriptMethodExpression.prototype.interpretMember = function(context, module,
 	if(!m) {
 		throw new SyntaxError(this.name + " is not a member of " + p.toString());
 	}
-	return m.call(p, args);
+	return m.apply(p, args);
 };
 
 JavaScriptMethodExpression.prototype.toDialect = function(writer) {
