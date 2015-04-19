@@ -175,7 +175,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u011a\u011c\u011e\u0120\u0122\u0124\u0126\u0128\u012a\u012c\u012e\u0130",
     "\u0132\u0134\u0136\u0138\u013a\u013c\u013e\u0140\u0142\u0144\u0146\u0148",
     "\u014a\u014c\u014e\u0150\u0152\u0154\u0156\u0158\u015a\u015c\u015e\u0160",
-    "\u0162\u0164\u0166\u0168\u016a\u016c\u016e\u0170\2\t\3\2JK\3\2!\"\4",
+    "\u0162\u0164\u0166\u0168\u016a\u016c\u016e\u0170\2\t\3\2KL\3\2!\"\4",
     "\2{{\u0081\u0081\4\2&&hh\b\2\63;vv\u0080\u0080\u0089\u0089\u008e\u0090",
     "\u0092\u0092\7\2\63;vv\u0080\u0080\u0089\u0089\u008e\u0090\7\2\63;v",
     "v\u0080\u0080\u0089\u0089\u008e\u0092\u081f\2\u0172\3\2\2\2\4\u0183",
@@ -227,13 +227,13 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0158\u077b\3\2\2\2\u015a\u077d\3\2\2\2\u015c\u0786\3\2\2\2\u015e\u0788",
     "\3\2\2\2\u0160\u0795\3\2\2\2\u0162\u079a\3\2\2\2\u0164\u079c\3\2\2\2",
     "\u0166\u07a3\3\2\2\2\u0168\u07ae\3\2\2\2\u016a\u07b2\3\2\2\2\u016c\u07b9",
-    "\3\2\2\2\u016e\u07c8\3\2\2\2\u0170\u07ca\3\2\2\2\u0172\u0173\7U\2\2",
+    "\3\2\2\2\u016e\u07c8\3\2\2\2\u0170\u07ca\3\2\2\2\u0172\u0173\7V\2\2",
     "\u0173\u0174\5\u00acW\2\u0174\u017b\7\25\2\2\u0175\u0178\5\u00acW\2",
     "\u0176\u0177\7\22\2\2\u0177\u0179\5 \21\2\u0178\u0176\3\2\2\2\u0178",
     "\u0179\3\2\2\2\u0179\u017c\3\2\2\2\u017a\u017c\5 \21\2\u017b\u0175\3",
     "\2\2\2\u017b\u017a\3\2\2\2\u017c\u017d\3\2\2\2\u017d\u017e\7\26\2\2",
     "\u017e\u017f\7\20\2\2\u017f\u0180\5v<\2\u0180\u0181\5\u0088E\2\u0181",
-    "\u0182\5x=\2\u0182\3\3\2\2\2\u0183\u0184\7U\2\2\u0184\u0185\5\u00ac",
+    "\u0182\5x=\2\u0182\3\3\2\2\2\u0183\u0184\7V\2\2\u0184\u0185\5\u00ac",
     "W\2\u0185\u0186\7\25\2\2\u0186\u0187\5\u009aN\2\u0187\u0188\7\26\2\2",
     "\u0188\u0189\7\20\2\2\u0189\u018a\5v<\2\u018a\u018b\5\u0086D\2\u018b",
     "\u018c\5x=\2\u018c\5\3\2\2\2\u018d\u018e\5\u00aeX\2\u018e\u018f\7,\2",
@@ -255,15 +255,15 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u01be\7\26\2\2\u01be\u01bf\7\20\2\2\u01bf\u01c2\5v<\2\u01c0\u01c3\5",
     "\u00be`\2\u01c1\u01c3\7t\2\2\u01c2\u01c0\3\2\2\2\u01c2\u01c1\3\2\2\2",
     "\u01c3\u01c4\3\2\2\2\u01c4\u01c5\5x=\2\u01c5\17\3\2\2\2\u01c6\u01c7",
-    "\5\u00a4S\2\u01c7\21\3\2\2\2\u01c8\u01c9\7N\2\2\u01c9\u01ca\7q\2\2\u01ca",
+    "\5\u00a4S\2\u01c7\21\3\2\2\2\u01c8\u01c9\7O\2\2\u01c9\u01ca\7q\2\2\u01ca",
     "\u01cb\5\u0104\u0083\2\u01cb\u01cc\7\25\2\2\u01cc\u01cd\5\u00b4[\2\u01cd",
     "\u01d0\7\26\2\2\u01ce\u01cf\7\62\2\2\u01cf\u01d1\5\u0096L\2\u01d0\u01ce",
     "\3\2\2\2\u01d0\u01d1\3\2\2\2\u01d1\u01d2\3\2\2\2\u01d2\u01d3\7\20\2",
     "\2\u01d3\u01d4\5v<\2\u01d4\u01d5\5\u00dan\2\u01d5\u01d6\5x=\2\u01d6",
-    "\23\3\2\2\2\u01d7\u01d8\7N\2\2\u01d8\u01d9\5\u00aaV\2\u01d9\u01da\7",
+    "\23\3\2\2\2\u01d7\u01d8\7O\2\2\u01d8\u01d9\5\u00aaV\2\u01d9\u01da\7",
     "|\2\2\u01da\u01db\7\25\2\2\u01db\u01dc\7\26\2\2\u01dc\u01dd\7\20\2\2",
     "\u01dd\u01de\5v<\2\u01de\u01df\5\u00dan\2\u01df\u01e0\5x=\2\u01e0\25",
-    "\3\2\2\2\u01e1\u01e2\7N\2\2\u01e2\u01e3\5\u00aaV\2\u01e3\u01e4\7_\2",
+    "\3\2\2\2\u01e1\u01e2\7O\2\2\u01e2\u01e3\5\u00aaV\2\u01e3\u01e4\7`\2",
     "\2\u01e4\u01e5\7\25\2\2\u01e5\u01e6\7\26\2\2\u01e6\u01e7\7\20\2\2\u01e7",
     "\u01e8\5v<\2\u01e8\u01e9\5\u00dan\2\u01e9\u01ea\5x=\2\u01ea\27\3\2\2",
     "\2\u01eb\u01ec\7j\2\2\u01ec\u01ed\t\2\2\2\u01ed\u01ee\5\u00acW\2\u01ee",
@@ -274,31 +274,31 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\2\u01fb\u01fd\7\25\2\2\u01fc\u01fe\5 \21\2\u01fd\u01fc\3\2\2\2\u01fd",
     "\u01fe\3\2\2\2\u01fe\u01ff\3\2\2\2\u01ff\u0200\7\26\2\2\u0200\u0201",
     "\7\20\2\2\u0201\u0202\5v<\2\u0202\u0203\5\34\17\2\u0203\u0204\5x=\2",
-    "\u0204\33\3\2\2\2\u0205\u0206\7d\2\2\u0206\u0207\7\20\2\2\u0207\u0208",
+    "\u0204\33\3\2\2\2\u0205\u0206\7H\2\2\u0206\u0207\7\20\2\2\u0207\u0208",
     "\5v<\2\u0208\u0209\5\36\20\2\u0209\u020a\5x=\2\u020a\35\3\2\2\2\u020b",
     "\u020c\b\20\1\2\u020c\u020d\5\u00c2b\2\u020d\u0214\3\2\2\2\u020e\u020f",
     "\f\3\2\2\u020f\u0210\5t;\2\u0210\u0211\5\u00c2b\2\u0211\u0213\3\2\2",
     "\2\u0212\u020e\3\2\2\2\u0213\u0216\3\2\2\2\u0214\u0212\3\2\2\2\u0214",
     "\u0215\3\2\2\2\u0215\37\3\2\2\2\u0216\u0214\3\2\2\2\u0217\u0218\5\u00ce",
-    "h\2\u0218!\3\2\2\2\u0219\u021a\7?\2\2\u021a\u021b\7N\2\2\u021b\u021c",
+    "h\2\u0218!\3\2\2\2\u0219\u021a\7?\2\2\u021a\u021b\7O\2\2\u021b\u021c",
     "\5\u00a6T\2\u021c\u021e\7\25\2\2\u021d\u021f\5\u00b0Y\2\u021e\u021d",
     "\3\2\2\2\u021e\u021f\3\2\2\2\u021f\u0220\3\2\2\2\u0220\u0223\7\26\2",
     "\2\u0221\u0222\7\62\2\2\u0222\u0224\5\u0096L\2\u0223\u0221\3\2\2\2\u0223",
-    "\u0224\3\2\2\2\u0224#\3\2\2\2\u0225\u0226\7N\2\2\u0226\u0227\5\u00a6",
+    "\u0224\3\2\2\2\u0224#\3\2\2\2\u0225\u0226\7O\2\2\u0226\u0227\5\u00a6",
     "T\2\u0227\u0229\7\25\2\2\u0228\u022a\5\u00b0Y\2\u0229\u0228\3\2\2\2",
     "\u0229\u022a\3\2\2\2\u022a\u022b\3\2\2\2\u022b\u022e\7\26\2\2\u022c",
     "\u022d\7\62\2\2\u022d\u022f\5\u0096L\2\u022e\u022c\3\2\2\2\u022e\u022f",
     "\3\2\2\2\u022f\u0230\3\2\2\2\u0230\u0231\7\20\2\2\u0231\u0232\5v<\2",
     "\u0232\u0233\5\u00dan\2\u0233\u0234\5x=\2\u0234%\3\2\2\2\u0235\u0236",
-    "\7N\2\2\u0236\u0237\7j\2\2\u0237\u0238\5\u00a6T\2\u0238\u023a\7\25\2",
+    "\7O\2\2\u0236\u0237\7j\2\2\u0237\u0238\5\u00a6T\2\u0238\u023a\7\25\2",
     "\2\u0239\u023b\5\u00b0Y\2\u023a\u0239\3\2\2\2\u023a\u023b\3\2\2\2\u023b",
     "\u023c\3\2\2\2\u023c\u023f\7\26\2\2\u023d\u023e\7\62\2\2\u023e\u0240",
     "\5\u00ba^\2\u023f\u023d\3\2\2\2\u023f\u0240\3\2\2\2\u0240\u0241\3\2",
     "\2\2\u0241\u0242\7\20\2\2\u0242\u0243\5v<\2\u0243\u0244\5\u00d2j\2\u0244",
-    "\u0245\5x=\2\u0245\'\3\2\2\2\u0246\u0247\7N\2\2\u0247\u0248\7\u0080",
+    "\u0245\5x=\2\u0245\'\3\2\2\2\u0246\u0247\7O\2\2\u0247\u0248\7\u0080",
     "\2\2\u0248\u0249\7\u0093\2\2\u0249\u024a\7\25\2\2\u024a\u024b\7\26\2",
     "\2\u024b\u024c\7\20\2\2\u024c\u024d\5v<\2\u024d\u024e\5\u00dan\2\u024e",
-    "\u024f\5x=\2\u024f\u0250\5t;\2\u0250\u0251\7Y\2\2\u0251\u0257\7\20\2",
+    "\u024f\5x=\2\u024f\u0250\5t;\2\u0250\u0251\7Z\2\2\u0251\u0257\7\20\2",
     "\2\u0252\u0253\5v<\2\u0253\u0254\5\u00dco\2\u0254\u0255\5x=\2\u0255",
     "\u0258\3\2\2\2\u0256\u0258\5\u00aeX\2\u0257\u0252\3\2\2\2\u0257\u0256",
     "\3\2\2\2\u0258)\3\2\2\2\u0259\u025a\5R*\2\u025a+\3\2\2\2\u025b\u025c",
@@ -337,28 +337,28 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u02b5\3\2\2\2\u02b5\u02b6\3\2\2\2\u02b6\u02b7\5x=\2\u02b7=\3\2\2\2",
     "\u02b8\u02b9\7\u0086\2\2\u02b9\u02ba\5\u00e4s\2\u02ba\u02bb\7\20\2\2",
     "\u02bb\u02bc\5v<\2\u02bc\u02bd\5\u00dan\2\u02bd\u02be\5x=\2\u02be\u02c8",
-    "\3\2\2\2\u02bf\u02c0\7\u0086\2\2\u02c0\u02c1\7a\2\2\u02c1\u02c2\5\u00e2",
+    "\3\2\2\2\u02bf\u02c0\7\u0086\2\2\u02c0\u02c1\7b\2\2\u02c1\u02c2\5\u00e2",
     "r\2\u02c2\u02c3\7\20\2\2\u02c3\u02c4\5v<\2\u02c4\u02c5\5\u00dan\2\u02c5",
     "\u02c6\5x=\2\u02c6\u02c8\3\2\2\2\u02c7\u02b8\3\2\2\2\u02c7\u02bf\3\2",
-    "\2\2\u02c8?\3\2\2\2\u02c9\u02ca\7]\2\2\u02ca\u02cd\5\u00aaV\2\u02cb",
+    "\2\2\u02c8?\3\2\2\2\u02c9\u02ca\7^\2\2\u02ca\u02cd\5\u00aaV\2\u02cb",
     "\u02cc\7\22\2\2\u02cc\u02ce\5\u00aaV\2\u02cd\u02cb\3\2\2\2\u02cd\u02ce",
-    "\3\2\2\2\u02ce\u02cf\3\2\2\2\u02cf\u02d0\7a\2\2\u02d0\u02d1\5R*\2\u02d1",
+    "\3\2\2\2\u02ce\u02cf\3\2\2\2\u02cf\u02d0\7b\2\2\u02d0\u02d1\5R*\2\u02d1",
     "\u02d2\7\20\2\2\u02d2\u02d3\5v<\2\u02d3\u02d4\5\u00dan\2\u02d4\u02d5",
-    "\5x=\2\u02d5A\3\2\2\2\u02d6\u02d7\7Q\2\2\u02d7\u02d8\7\20\2\2\u02d8",
+    "\5x=\2\u02d5A\3\2\2\2\u02d6\u02d7\7R\2\2\u02d7\u02d8\7\20\2\2\u02d8",
     "\u02d9\5v<\2\u02d9\u02da\5\u00dan\2\u02da\u02db\5x=\2\u02db\u02dc\5",
     "t;\2\u02dc\u02dd\7\u0088\2\2\u02dd\u02de\5R*\2\u02deC\3\2\2\2\u02df",
     "\u02e0\7\u0088\2\2\u02e0\u02e1\5R*\2\u02e1\u02e2\7\20\2\2\u02e2\u02e3",
     "\5v<\2\u02e3\u02e4\5\u00dan\2\u02e4\u02e5\5x=\2\u02e5E\3\2\2\2\u02e6",
-    "\u02e7\7`\2\2\u02e7\u02e8\5R*\2\u02e8\u02e9\7\20\2\2\u02e9\u02ea\5v",
+    "\u02e7\7a\2\2\u02e7\u02e8\5R*\2\u02e8\u02e9\7\20\2\2\u02e9\u02ea\5v",
     "<\2\u02ea\u02eb\5\u00dan\2\u02eb\u02ef\5x=\2\u02ec\u02ed\5t;\2\u02ed",
     "\u02ee\5H%\2\u02ee\u02f0\3\2\2\2\u02ef\u02ec\3\2\2\2\u02ef\u02f0\3\2",
-    "\2\2\u02f0\u02f8\3\2\2\2\u02f1\u02f2\5t;\2\u02f2\u02f3\7T\2\2\u02f3",
+    "\2\2\u02f0\u02f8\3\2\2\2\u02f1\u02f2\5t;\2\u02f2\u02f3\7U\2\2\u02f3",
     "\u02f4\7\20\2\2\u02f4\u02f5\5v<\2\u02f5\u02f6\5\u00dan\2\u02f6\u02f7",
     "\5x=\2\u02f7\u02f9\3\2\2\2\u02f8\u02f1\3\2\2\2\u02f8\u02f9\3\2\2\2\u02f9",
-    "G\3\2\2\2\u02fa\u02fb\b%\1\2\u02fb\u02fc\7T\2\2\u02fc\u02fd\7`\2\2\u02fd",
+    "G\3\2\2\2\u02fa\u02fb\b%\1\2\u02fb\u02fc\7U\2\2\u02fc\u02fd\7a\2\2\u02fd",
     "\u02fe\5R*\2\u02fe\u02ff\7\20\2\2\u02ff\u0300\5v<\2\u0300\u0301\5\u00da",
     "n\2\u0301\u0302\5x=\2\u0302\u030f\3\2\2\2\u0303\u0304\f\3\2\2\u0304",
-    "\u0305\5t;\2\u0305\u0306\7T\2\2\u0306\u0307\7`\2\2\u0307\u0308\5R*\2",
+    "\u0305\5t;\2\u0305\u0306\7U\2\2\u0306\u0307\7a\2\2\u0307\u0308\5R*\2",
     "\u0308\u0309\7\20\2\2\u0309\u030a\5v<\2\u030a\u030b\5\u00dan\2\u030b",
     "\u030c\5x=\2\u030c\u030e\3\2\2\2\u030d\u0303\3\2\2\2\u030e\u0311\3\2",
     "\2\2\u030f\u030d\3\2\2\2\u030f\u0310\3\2\2\2\u0310I\3\2\2\2\u0311\u030f",
@@ -366,24 +366,24 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\7\u0084\2\2\u0316\u0317\5\u00aaV\2\u0317\u0318\7\20\2\2\u0318\u0319",
     "\5v<\2\u0319\u031a\5\u00dan\2\u031a\u031b\5x=\2\u031b\u031d\5r:\2\u031c",
     "\u031e\5\u00e0q\2\u031d\u031c\3\2\2\2\u031d\u031e\3\2\2\2\u031e\u0326",
-    "\3\2\2\2\u031f\u0320\7W\2\2\u0320\u0321\7\20\2\2\u0321\u0322\5v<\2\u0322",
+    "\3\2\2\2\u031f\u0320\7X\2\2\u0320\u0321\7\20\2\2\u0321\u0322\5v<\2\u0322",
     "\u0323\5\u00dan\2\u0323\u0324\5x=\2\u0324\u0325\5r:\2\u0325\u0327\3",
     "\2\2\2\u0326\u031f\3\2\2\2\u0326\u0327\3\2\2\2\u0327\u032f\3\2\2\2\u0328",
-    "\u0329\7\\\2\2\u0329\u032a\7\20\2\2\u032a\u032b\5v<\2\u032b\u032c\5",
-    "\u00dan\2\u032c\u032d\5x=\2\u032d\u032e\5r:\2\u032e\u0330\3\2\2\2\u032f",
-    "\u0328\3\2\2\2\u032f\u0330\3\2\2\2\u0330\u0331\3\2\2\2\u0331\u0332\5",
-    "r:\2\u0332M\3\2\2\2\u0333\u0334\7W\2\2\u0334\u0335\5\u00aeX\2\u0335",
-    "\u0336\7\20\2\2\u0336\u0337\5v<\2\u0337\u0338\5\u00dan\2\u0338\u0339",
-    "\5x=\2\u0339\u033a\5r:\2\u033a\u0347\3\2\2\2\u033b\u033c\7W\2\2\u033c",
-    "\u033d\7a\2\2\u033d\u033e\7\27\2\2\u033e\u033f\5\u008aF\2\u033f\u0340",
-    "\7\30\2\2\u0340\u0341\7\20\2\2\u0341\u0342\5v<\2\u0342\u0343\5\u00da",
-    "n\2\u0343\u0344\5x=\2\u0344\u0345\5r:\2\u0345\u0347\3\2\2\2\u0346\u0333",
-    "\3\2\2\2\u0346\u033b\3\2\2\2\u0347O\3\2\2\2\u0348\u034a\7y\2\2\u0349",
-    "\u034b\5R*\2\u034a\u0349\3\2\2\2\u034a\u034b\3\2\2\2\u034bQ\3\2\2\2",
-    "\u034c\u034d\b*\1\2\u034d\u034e\7\"\2\2\u034e\u035f\5R*!\u034f\u0350",
-    "\7l\2\2\u0350\u035f\5R* \u0351\u035f\5V,\2\u0352\u035f\5X-\2\u0353\u0354",
+    "\u0329\7]\2\2\u0329\u032a\7\20\2\2\u032a\u032b\5v<\2\u032b\u032c\5\u00da",
+    "n\2\u032c\u032d\5x=\2\u032d\u032e\5r:\2\u032e\u0330\3\2\2\2\u032f\u0328",
+    "\3\2\2\2\u032f\u0330\3\2\2\2\u0330\u0331\3\2\2\2\u0331\u0332\5r:\2\u0332",
+    "M\3\2\2\2\u0333\u0334\7X\2\2\u0334\u0335\5\u00aeX\2\u0335\u0336\7\20",
+    "\2\2\u0336\u0337\5v<\2\u0337\u0338\5\u00dan\2\u0338\u0339\5x=\2\u0339",
+    "\u033a\5r:\2\u033a\u0347\3\2\2\2\u033b\u033c\7X\2\2\u033c\u033d\7b\2",
+    "\2\u033d\u033e\7\27\2\2\u033e\u033f\5\u008aF\2\u033f\u0340\7\30\2\2",
+    "\u0340\u0341\7\20\2\2\u0341\u0342\5v<\2\u0342\u0343\5\u00dan\2\u0343",
+    "\u0344\5x=\2\u0344\u0345\5r:\2\u0345\u0347\3\2\2\2\u0346\u0333\3\2\2",
+    "\2\u0346\u033b\3\2\2\2\u0347O\3\2\2\2\u0348\u034a\7y\2\2\u0349\u034b",
+    "\5R*\2\u034a\u0349\3\2\2\2\u034a\u034b\3\2\2\2\u034bQ\3\2\2\2\u034c",
+    "\u034d\b*\1\2\u034d\u034e\7\"\2\2\u034e\u035f\5R*!\u034f\u0350\7l\2",
+    "\2\u0350\u035f\5R* \u0351\u035f\5V,\2\u0352\u035f\5X-\2\u0353\u0354",
     "\7=\2\2\u0354\u0355\7\25\2\2\u0355\u0356\5R*\2\u0356\u0357\7\26\2\2",
-    "\u0357\u035f\3\2\2\2\u0358\u0359\7X\2\2\u0359\u035a\7\25\2\2\u035a\u035b",
+    "\u0357\u035f\3\2\2\2\u0358\u0359\7Y\2\2\u0359\u035a\7\25\2\2\u035a\u035b",
     "\5\u00aaV\2\u035b\u035c\7\26\2\2\u035c\u035f\3\2\2\2\u035d\u035f\5T",
     "+\2\u035e\u034c\3\2\2\2\u035e\u034f\3\2\2\2\u035e\u0351\3\2\2\2\u035e",
     "\u0352\3\2\2\2\u035e\u0353\3\2\2\2\u035e\u0358\3\2\2\2\u035e\u035d\3",
@@ -401,19 +401,19 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0384\7-\2\2\u0384\u03bf\5R*\24\u0385\u0386\f\22\2\2\u0386\u0387\7",
     "/\2\2\u0387\u03bf\5R*\23\u0388\u0389\f\21\2\2\u0389\u038a\7r\2\2\u038a",
     "\u03bf\5R*\22\u038b\u038c\f\20\2\2\u038c\u038d\7B\2\2\u038d\u03bf\5",
-    "R*\21\u038e\u038f\f\17\2\2\u038f\u0390\7`\2\2\u0390\u0391\5R*\2\u0391",
-    "\u0392\7T\2\2\u0392\u0393\5R*\20\u0393\u03bf\3\2\2\2\u0394\u0395\f\r",
-    "\2\2\u0395\u0396\7a\2\2\u0396\u03bf\5R*\16\u0397\u0398\f\f\2\2\u0398",
-    "\u0399\7M\2\2\u0399\u03bf\5R*\r\u039a\u039b\f\13\2\2\u039b\u039c\7M",
+    "R*\21\u038e\u038f\f\17\2\2\u038f\u0390\7a\2\2\u0390\u0391\5R*\2\u0391",
+    "\u0392\7U\2\2\u0392\u0393\5R*\20\u0393\u03bf\3\2\2\2\u0394\u0395\f\r",
+    "\2\2\u0395\u0396\7b\2\2\u0396\u03bf\5R*\16\u0397\u0398\f\f\2\2\u0398",
+    "\u0399\7N\2\2\u0399\u03bf\5R*\r\u039a\u039b\f\13\2\2\u039b\u039c\7N",
     "\2\2\u039c\u039d\7@\2\2\u039d\u03bf\5R*\f\u039e\u039f\f\n\2\2\u039f",
-    "\u03a0\7M\2\2\u03a0\u03a1\7C\2\2\u03a1\u03bf\5R*\13\u03a2\u03a3\f\t",
-    "\2\2\u03a3\u03a4\7l\2\2\u03a4\u03a5\7a\2\2\u03a5\u03bf\5R*\n\u03a6\u03a7",
-    "\f\b\2\2\u03a7\u03a8\7l\2\2\u03a8\u03a9\7M\2\2\u03a9\u03bf\5R*\t\u03aa",
-    "\u03ab\f\7\2\2\u03ab\u03ac\7l\2\2\u03ac\u03ad\7M\2\2\u03ad\u03ae\7@",
+    "\u03a0\7N\2\2\u03a0\u03a1\7C\2\2\u03a1\u03bf\5R*\13\u03a2\u03a3\f\t",
+    "\2\2\u03a3\u03a4\7l\2\2\u03a4\u03a5\7b\2\2\u03a5\u03bf\5R*\n\u03a6\u03a7",
+    "\f\b\2\2\u03a7\u03a8\7l\2\2\u03a8\u03a9\7N\2\2\u03a9\u03bf\5R*\t\u03aa",
+    "\u03ab\f\7\2\2\u03ab\u03ac\7l\2\2\u03ac\u03ad\7N\2\2\u03ad\u03ae\7@",
     "\2\2\u03ae\u03bf\5R*\b\u03af\u03b0\f\6\2\2\u03b0\u03b1\7l\2\2\u03b1",
-    "\u03b2\7M\2\2\u03b2\u03b3\7C\2\2\u03b3\u03bf\5R*\7\u03b4\u03b5\f\26",
-    "\2\2\u03b5\u03b6\7c\2\2\u03b6\u03b7\7l\2\2\u03b7\u03bf\5\u0102\u0082",
-    "\2\u03b8\u03b9\f\25\2\2\u03b9\u03ba\7c\2\2\u03ba\u03bf\5\u0102\u0082",
+    "\u03b2\7N\2\2\u03b2\u03b3\7C\2\2\u03b3\u03bf\5R*\7\u03b4\u03b5\f\26",
+    "\2\2\u03b5\u03b6\7d\2\2\u03b6\u03b7\7l\2\2\u03b7\u03bf\5\u0102\u0082",
+    "\2\u03b8\u03b9\f\25\2\2\u03b9\u03ba\7d\2\2\u03ba\u03bf\5\u0102\u0082",
     "\2\u03bb\u03bc\f\16\2\2\u03bc\u03bd\7D\2\2\u03bd\u03bf\5\u00ba^\2\u03be",
     "\u0360\3\2\2\2\u03be\u0364\3\2\2\2\u03be\u0368\3\2\2\2\u03be\u036c\3",
     "\2\2\2\u03be\u0370\3\2\2\2\u03be\u0373\3\2\2\2\u03be\u0376\3\2\2\2\u03be",
@@ -446,10 +446,10 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\2\u03fb\u03fd\5b\62\2\u03fc\u03f9\3\2\2\2\u03fd\u0400\3\2\2\2\u03fe",
     "\u03fc\3\2\2\2\u03fe\u03ff\3\2\2\2\u03ffa\3\2\2\2\u0400\u03fe\3\2\2",
     "\2\u0401\u0402\5\u00aaV\2\u0402\u0403\5\u010c\u0087\2\u0403\u0404\5",
-    "R*\2\u0404c\3\2\2\2\u0405\u0406\7v\2\2\u0406\u0407\7^\2\2\u0407\u0408",
+    "R*\2\u0404c\3\2\2\2\u0405\u0406\7v\2\2\u0406\u0407\7_\2\2\u0407\u0408",
     "\5R*\2\u0408e\3\2\2\2\u0409\u040a\7\u0089\2\2\u040a\u040b\5R*\2\u040b",
-    "\u040c\7\u0083\2\2\u040c\u040d\5R*\2\u040dg\3\2\2\2\u040e\u040f\7[\2",
-    "\2\u040f\u0410\5\u00aaV\2\u0410\u0411\7^\2\2\u0411\u0412\5R*\2\u0412",
+    "\u040c\7\u0083\2\2\u040c\u040d\5R*\2\u040dg\3\2\2\2\u040e\u040f\7\\",
+    "\2\2\u040f\u0410\5\u00aaV\2\u0410\u0411\7_\2\2\u0411\u0412\5R*\2\u0412",
     "\u0413\7\u0087\2\2\u0413\u0414\5R*\2\u0414i\3\2\2\2\u0415\u0416\7~\2",
     "\2\u0416\u0417\7\25\2\2\u0417\u041d\5V,\2\u0418\u0419\7\22\2\2\u0419",
     "\u041a\5\u0106\u0084\2\u041a\u041b\7,\2\2\u041b\u041c\5V,\2\u041c\u041e",
@@ -491,8 +491,8 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0488\5\u00aeX\2\u0488\u048e\3\2\2\2\u0489\u048a\f\3\2\2\u048a\u048b",
     "\7\22\2\2\u048b\u048d\5\u00aeX\2\u048c\u0489\3\2\2\2\u048d\u0490\3\2",
     "\2\2\u048e\u048c\3\2\2\2\u048e\u048f\3\2\2\2\u048f\u008b\3\2\2\2\u0490",
-    "\u048e\3\2\2\2\u0491\u0492\7a\2\2\u0492\u049c\5\u008eH\2\u0493\u0494",
-    "\7a\2\2\u0494\u049c\5\u0090I\2\u0495\u0496\7a\2\2\u0496\u049c\5\u0094",
+    "\u048e\3\2\2\2\u0491\u0492\7b\2\2\u0492\u049c\5\u008eH\2\u0493\u0494",
+    "\7b\2\2\u0494\u049c\5\u0090I\2\u0495\u0496\7b\2\2\u0496\u049c\5\u0094",
     "K\2\u0497\u0498\7e\2\2\u0498\u049c\7\u0093\2\2\u0499\u049a\7e\2\2\u049a",
     "\u049c\5R*\2\u049b\u0491\3\2\2\2\u049b\u0493\3\2\2\2\u049b\u0495\3\2",
     "\2\2\u049b\u0497\3\2\2\2\u049b\u0499\3\2\2\2\u049c\u008d\3\2\2\2\u049d",
@@ -561,14 +561,14 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\7\16\2\2\u054b\u054d\5\u00caf\2\u054c\u0542\3\2\2\2\u054c\u0544\3\2",
     "\2\2\u054c\u0546\3\2\2\2\u054c\u0548\3\2\2\2\u054c\u054a\3\2\2\2\u054d",
     "\u00c3\3\2\2\2\u054e\u0550\5\u00a8U\2\u054f\u0551\5\u00c6d\2\u0550\u054f",
-    "\3\2\2\2\u0550\u0551\3\2\2\2\u0551\u00c5\3\2\2\2\u0552\u0553\7^\2\2",
+    "\3\2\2\2\u0550\u0551\3\2\2\2\u0551\u00c5\3\2\2\2\u0552\u0553\7_\2\2",
     "\u0553\u0554\5\u00c8e\2\u0554\u0555\7\20\2\2\u0555\u055a\5\u00a8U\2",
     "\u0556\u0557\7\24\2\2\u0557\u0559\5\u00a8U\2\u0558\u0556\3\2\2\2\u0559",
     "\u055c\3\2\2\2\u055a\u0558\3\2\2\2\u055a\u055b\3\2\2\2\u055b\u00c7\3",
     "\2\2\2\u055c\u055a\3\2\2\2\u055d\u055e\7\u0090\2\2\u055e\u055f\6e\64",
     "\3\u055f\u00c9\3\2\2\2\u0560\u0562\5\u00a8U\2\u0561\u0563\5\u00ccg\2",
     "\u0562\u0561\3\2\2\2\u0562\u0563\3\2\2\2\u0563\u00cb\3\2\2\2\u0564\u0565",
-    "\7^\2\2\u0565\u0566\5\u00c8e\2\u0566\u0568\7\20\2\2\u0567\u0569\7$\2",
+    "\7_\2\2\u0565\u0566\5\u00c8e\2\u0566\u0568\7\20\2\2\u0567\u0569\7$\2",
     "\2\u0568\u0567\3\2\2\2\u0568\u0569\3\2\2\2\u0569\u056a\3\2\2\2\u056a",
     "\u056f\5\u012a\u0096\2\u056b\u056c\7$\2\2\u056c\u056e\5\u012a\u0096",
     "\2\u056d\u056b\3\2\2\2\u056e\u0571\3\2\2\2\u056f\u056d\3\2\2\2\u056f",
@@ -827,18 +827,18 @@ var literalNames = [ 'null', 'null', 'null', 'null', 'null', 'null', "'\t'",
                      "'Integer'", "'Decimal'", "'Date'", "'Time'", "'DateTime'", 
                      "'Period'", "'Method'", "'Code'", "'Document'", "'abstract'", 
                      "'all'", "'always'", "'and'", "'any'", "'as'", "'attr'", 
-                     "'attribute'", "'attributes'", "'case'", "'catch'", 
-                     "'category'", "'class'", "'close'", "'contains'", "'def'", 
-                     "'default'", "'define'", "'do'", "'doing'", "'each'", 
-                     "'else'", "'enum'", "'enumerated'", "'except'", "'execute'", 
-                     "'expecting'", "'extends'", "'fetch'", "'finally'", 
-                     "'for'", "'from'", "'getter'", "'if'", "'in'", "'invoke'", 
-                     "'is'", "'mappings'", "'matching'", "'method'", "'methods'", 
-                     "'modulo'", "'mutable'", "'native'", "'None'", "'not'", 
-                     'null', "'null'", "'on'", "'open'", "'operator'", "'or'", 
-                     "'otherwise'", "'pass'", "'raise'", "'read'", "'receiving'", 
-                     "'resource'", "'return'", "'returning'", "'self'", 
-                     "'setter'", "'singleton'", "'sorted'", "'switch'", 
+                     "'attribute'", "'attributes'", "'bindings'", "'case'", 
+                     "'catch'", "'category'", "'class'", "'close'", "'contains'", 
+                     "'def'", "'default'", "'define'", "'do'", "'doing'", 
+                     "'each'", "'else'", "'enum'", "'enumerated'", "'except'", 
+                     "'execute'", "'expecting'", "'extends'", "'fetch'", 
+                     "'finally'", "'for'", "'from'", "'getter'", "'if'", 
+                     "'in'", "'invoke'", "'is'", "'matching'", "'method'", 
+                     "'methods'", "'modulo'", "'mutable'", "'native'", "'None'", 
+                     "'not'", 'null', "'null'", "'on'", "'open'", "'operator'", 
+                     "'or'", "'otherwise'", "'pass'", "'raise'", "'read'", 
+                     "'receiving'", "'resource'", "'return'", "'returning'", 
+                     "'self'", "'setter'", "'singleton'", "'sorted'", "'switch'", 
                      "'test'", "'this'", "'throw'", "'to'", "'try'", "'with'", 
                      "'when'", "'where'", "'while'", "'write'", 'null', 
                      'null', "'MIN_INTEGER'", "'MAX_INTEGER'" ];
@@ -854,33 +854,32 @@ var symbolicNames = [ 'null', "INDENT", "DEDENT", "LF_TAB", "LF_MORE", "LF",
                       "BOOLEAN", "CHARACTER", "TEXT", "INTEGER", "DECIMAL", 
                       "DATE", "TIME", "DATETIME", "PERIOD", "METHOD_T", 
                       "CODE", "DOCUMENT", "ABSTRACT", "ALL", "ALWAYS", "AND", 
-                      "ANY", "AS", "ATTR", "ATTRIBUTE", "ATTRIBUTES", "CASE", 
-                      "CATCH", "CATEGORY", "CLASS", "CLOSE", "CONTAINS", 
+                      "ANY", "AS", "ATTR", "ATTRIBUTE", "ATTRIBUTES", "BINDINGS", 
+                      "CASE", "CATCH", "CATEGORY", "CLASS", "CLOSE", "CONTAINS", 
                       "DEF", "DEFAULT", "DEFINE", "DO", "DOING", "EACH", 
                       "ELSE", "ENUM", "ENUMERATED", "EXCEPT", "EXECUTE", 
                       "EXPECTING", "EXTENDS", "FETCH", "FINALLY", "FOR", 
-                      "FROM", "GETTER", "IF", "IN", "INVOKE", "IS", "MAPPINGS", 
-                      "MATCHING", "METHOD", "METHODS", "MODULO", "MUTABLE", 
-                      "NATIVE", "NONE", "NOT", "NOTHING", "NULL", "ON", 
-                      "OPEN", "OPERATOR", "OR", "OTHERWISE", "PASS", "RAISE", 
-                      "READ", "RECEIVING", "RESOURCE", "RETURN", "RETURNING", 
-                      "SELF", "SETTER", "SINGLETON", "SORTED", "SWITCH", 
-                      "TEST", "THIS", "THROW", "TO", "TRY", "WITH", "WHEN", 
-                      "WHERE", "WHILE", "WRITE", "BOOLEAN_LITERAL", "CHAR_LITERAL", 
-                      "MIN_INTEGER", "MAX_INTEGER", "SYMBOL_IDENTIFIER", 
-                      "TYPE_IDENTIFIER", "VARIABLE_IDENTIFIER", "NATIVE_IDENTIFIER", 
-                      "DOLLAR_IDENTIFIER", "TEXT_LITERAL", "INTEGER_LITERAL", 
-                      "HEXA_LITERAL", "DECIMAL_LITERAL", "DATETIME_LITERAL", 
-                      "TIME_LITERAL", "DATE_LITERAL", "PERIOD_LITERAL", 
-                      "COMMENT" ];
+                      "FROM", "GETTER", "IF", "IN", "INVOKE", "IS", "MATCHING", 
+                      "METHOD", "METHODS", "MODULO", "MUTABLE", "NATIVE", 
+                      "NONE", "NOT", "NOTHING", "NULL", "ON", "OPEN", "OPERATOR", 
+                      "OR", "OTHERWISE", "PASS", "RAISE", "READ", "RECEIVING", 
+                      "RESOURCE", "RETURN", "RETURNING", "SELF", "SETTER", 
+                      "SINGLETON", "SORTED", "SWITCH", "TEST", "THIS", "THROW", 
+                      "TO", "TRY", "WITH", "WHEN", "WHERE", "WHILE", "WRITE", 
+                      "BOOLEAN_LITERAL", "CHAR_LITERAL", "MIN_INTEGER", 
+                      "MAX_INTEGER", "SYMBOL_IDENTIFIER", "TYPE_IDENTIFIER", 
+                      "VARIABLE_IDENTIFIER", "NATIVE_IDENTIFIER", "DOLLAR_IDENTIFIER", 
+                      "TEXT_LITERAL", "INTEGER_LITERAL", "HEXA_LITERAL", 
+                      "DECIMAL_LITERAL", "DATETIME_LITERAL", "TIME_LITERAL", 
+                      "DATE_LITERAL", "PERIOD_LITERAL", "COMMENT" ];
 
 var ruleNames =  [ "enum_category_declaration", "enum_native_declaration", 
                    "native_symbol", "category_symbol", "attribute_declaration", 
                    "concrete_category_declaration", "singleton_category_declaration", 
                    "derived_list", "operator_method_declaration", "setter_method_declaration", 
                    "getter_method_declaration", "native_category_declaration", 
-                   "native_resource_declaration", "native_category_mappings", 
-                   "native_category_mapping_list", "attribute_list", "abstract_method_declaration", 
+                   "native_resource_declaration", "native_category_bindings", 
+                   "native_category_binding_list", "attribute_list", "abstract_method_declaration", 
                    "concrete_method_declaration", "native_method_declaration", 
                    "test_method_declaration", "assertion", "typed_argument", 
                    "statement", "method_call", "method_selector", "callable_parent", 
@@ -905,9 +904,9 @@ var ruleNames =  [ "enum_category_declaration", "enum_native_declaration",
                    "type_identifier", "symbol_identifier", "argument_list", 
                    "argument", "operator_argument", "named_argument", "code_argument", 
                    "category_or_any_type", "any_type", "member_method_declaration_list", 
-                   "member_method_declaration", "native_category_mapping", 
-                   "python_category_mapping", "python_module", "module_token", 
-                   "javascript_category_mapping", "javascript_module", "variable_identifier_list", 
+                   "member_method_declaration", "native_category_binding", 
+                   "python_category_binding", "python_module", "module_token", 
+                   "javascript_category_binding", "javascript_module", "variable_identifier_list", 
                    "method_declaration", "native_statement_list", "native_statement", 
                    "python_native_statement", "javascript_native_statement", 
                    "statement_list", "assertion_list", "switch_case_statement_list", 
@@ -1028,35 +1027,35 @@ SParser.AS = 66;
 SParser.ATTR = 67;
 SParser.ATTRIBUTE = 68;
 SParser.ATTRIBUTES = 69;
-SParser.CASE = 70;
-SParser.CATCH = 71;
-SParser.CATEGORY = 72;
-SParser.CLASS = 73;
-SParser.CLOSE = 74;
-SParser.CONTAINS = 75;
-SParser.DEF = 76;
-SParser.DEFAULT = 77;
-SParser.DEFINE = 78;
-SParser.DO = 79;
-SParser.DOING = 80;
-SParser.EACH = 81;
-SParser.ELSE = 82;
-SParser.ENUM = 83;
-SParser.ENUMERATED = 84;
-SParser.EXCEPT = 85;
-SParser.EXECUTE = 86;
-SParser.EXPECTING = 87;
-SParser.EXTENDS = 88;
-SParser.FETCH = 89;
-SParser.FINALLY = 90;
-SParser.FOR = 91;
-SParser.FROM = 92;
-SParser.GETTER = 93;
-SParser.IF = 94;
-SParser.IN = 95;
-SParser.INVOKE = 96;
-SParser.IS = 97;
-SParser.MAPPINGS = 98;
+SParser.BINDINGS = 70;
+SParser.CASE = 71;
+SParser.CATCH = 72;
+SParser.CATEGORY = 73;
+SParser.CLASS = 74;
+SParser.CLOSE = 75;
+SParser.CONTAINS = 76;
+SParser.DEF = 77;
+SParser.DEFAULT = 78;
+SParser.DEFINE = 79;
+SParser.DO = 80;
+SParser.DOING = 81;
+SParser.EACH = 82;
+SParser.ELSE = 83;
+SParser.ENUM = 84;
+SParser.ENUMERATED = 85;
+SParser.EXCEPT = 86;
+SParser.EXECUTE = 87;
+SParser.EXPECTING = 88;
+SParser.EXTENDS = 89;
+SParser.FETCH = 90;
+SParser.FINALLY = 91;
+SParser.FOR = 92;
+SParser.FROM = 93;
+SParser.GETTER = 94;
+SParser.IF = 95;
+SParser.IN = 96;
+SParser.INVOKE = 97;
+SParser.IS = 98;
 SParser.MATCHING = 99;
 SParser.METHOD = 100;
 SParser.METHODS = 101;
@@ -1126,8 +1125,8 @@ SParser.RULE_setter_method_declaration = 9;
 SParser.RULE_getter_method_declaration = 10;
 SParser.RULE_native_category_declaration = 11;
 SParser.RULE_native_resource_declaration = 12;
-SParser.RULE_native_category_mappings = 13;
-SParser.RULE_native_category_mapping_list = 14;
+SParser.RULE_native_category_bindings = 13;
+SParser.RULE_native_category_binding_list = 14;
 SParser.RULE_attribute_list = 15;
 SParser.RULE_abstract_method_declaration = 16;
 SParser.RULE_concrete_method_declaration = 17;
@@ -1209,11 +1208,11 @@ SParser.RULE_category_or_any_type = 92;
 SParser.RULE_any_type = 93;
 SParser.RULE_member_method_declaration_list = 94;
 SParser.RULE_member_method_declaration = 95;
-SParser.RULE_native_category_mapping = 96;
-SParser.RULE_python_category_mapping = 97;
+SParser.RULE_native_category_binding = 96;
+SParser.RULE_python_category_binding = 97;
 SParser.RULE_python_module = 98;
 SParser.RULE_module_token = 99;
-SParser.RULE_javascript_category_mapping = 100;
+SParser.RULE_javascript_category_binding = 100;
 SParser.RULE_javascript_module = 101;
 SParser.RULE_variable_identifier_list = 102;
 SParser.RULE_method_declaration = 103;
@@ -1680,7 +1679,7 @@ SParser.prototype.category_symbol = function() {
         this.match(SParser.LPAR);
         this.state = 402;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 401; 
             localctx.args = this.argument_assignment_list(0);
         }
@@ -2529,7 +2528,7 @@ function Native_category_declarationContext(parser, parent, invokingState) {
     this.ruleIndex = SParser.RULE_native_category_declaration;
     this.name = null; // Type_identifierContext
     this.attrs = null; // Attribute_listContext
-    this.mappings = null; // Native_category_mappingsContext
+    this.bindings = null; // Native_category_bindingsContext
     return this;
 }
 
@@ -2572,8 +2571,8 @@ Native_category_declarationContext.prototype.type_identifier = function() {
     return this.getTypedRuleContext(Type_identifierContext,0);
 };
 
-Native_category_declarationContext.prototype.native_category_mappings = function() {
-    return this.getTypedRuleContext(Native_category_mappingsContext,0);
+Native_category_declarationContext.prototype.native_category_bindings = function() {
+    return this.getTypedRuleContext(Native_category_bindingsContext,0);
 };
 
 Native_category_declarationContext.prototype.attribute_list = function() {
@@ -2628,7 +2627,7 @@ SParser.prototype.native_category_declaration = function() {
         this.state = 498; 
         this.indent();
         this.state = 499; 
-        localctx.mappings = this.native_category_mappings();
+        localctx.bindings = this.native_category_bindings();
         this.state = 500; 
         this.dedent();
     } catch (re) {
@@ -2657,7 +2656,7 @@ function Native_resource_declarationContext(parser, parent, invokingState) {
     this.ruleIndex = SParser.RULE_native_resource_declaration;
     this.name = null; // Type_identifierContext
     this.attrs = null; // Attribute_listContext
-    this.mappings = null; // Native_category_mappingsContext
+    this.bindings = null; // Native_category_bindingsContext
     return this;
 }
 
@@ -2696,8 +2695,8 @@ Native_resource_declarationContext.prototype.type_identifier = function() {
     return this.getTypedRuleContext(Type_identifierContext,0);
 };
 
-Native_resource_declarationContext.prototype.native_category_mappings = function() {
-    return this.getTypedRuleContext(Native_category_mappingsContext,0);
+Native_resource_declarationContext.prototype.native_category_bindings = function() {
+    return this.getTypedRuleContext(Native_category_bindingsContext,0);
 };
 
 Native_resource_declarationContext.prototype.attribute_list = function() {
@@ -2748,7 +2747,7 @@ SParser.prototype.native_resource_declaration = function() {
         this.state = 511; 
         this.indent();
         this.state = 512; 
-        localctx.mappings = this.native_category_mappings();
+        localctx.bindings = this.native_category_bindings();
         this.state = 513; 
         this.dedent();
     } catch (re) {
@@ -2765,7 +2764,7 @@ SParser.prototype.native_resource_declaration = function() {
     return localctx;
 };
 
-function Native_category_mappingsContext(parser, parent, invokingState) {
+function Native_category_bindingsContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -2774,63 +2773,63 @@ function Native_category_mappingsContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = SParser.RULE_native_category_mappings;
-    this.items = null; // Native_category_mapping_listContext
+    this.ruleIndex = SParser.RULE_native_category_bindings;
+    this.items = null; // Native_category_binding_listContext
     return this;
 }
 
-Native_category_mappingsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Native_category_mappingsContext.prototype.constructor = Native_category_mappingsContext;
+Native_category_bindingsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Native_category_bindingsContext.prototype.constructor = Native_category_bindingsContext;
 
-Native_category_mappingsContext.prototype.MAPPINGS = function() {
-    return this.getToken(SParser.MAPPINGS, 0);
+Native_category_bindingsContext.prototype.BINDINGS = function() {
+    return this.getToken(SParser.BINDINGS, 0);
 };
 
-Native_category_mappingsContext.prototype.COLON = function() {
+Native_category_bindingsContext.prototype.COLON = function() {
     return this.getToken(SParser.COLON, 0);
 };
 
-Native_category_mappingsContext.prototype.indent = function() {
+Native_category_bindingsContext.prototype.indent = function() {
     return this.getTypedRuleContext(IndentContext,0);
 };
 
-Native_category_mappingsContext.prototype.dedent = function() {
+Native_category_bindingsContext.prototype.dedent = function() {
     return this.getTypedRuleContext(DedentContext,0);
 };
 
-Native_category_mappingsContext.prototype.native_category_mapping_list = function() {
-    return this.getTypedRuleContext(Native_category_mapping_listContext,0);
+Native_category_bindingsContext.prototype.native_category_binding_list = function() {
+    return this.getTypedRuleContext(Native_category_binding_listContext,0);
 };
 
-Native_category_mappingsContext.prototype.enterRule = function(listener) {
+Native_category_bindingsContext.prototype.enterRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.enterNative_category_mappings(this);
+        listener.enterNative_category_bindings(this);
 	}
 };
 
-Native_category_mappingsContext.prototype.exitRule = function(listener) {
+Native_category_bindingsContext.prototype.exitRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.exitNative_category_mappings(this);
+        listener.exitNative_category_bindings(this);
 	}
 };
 
 
 
 
-SParser.prototype.native_category_mappings = function() {
+SParser.prototype.native_category_bindings = function() {
 
-    var localctx = new Native_category_mappingsContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 26, SParser.RULE_native_category_mappings);
+    var localctx = new Native_category_bindingsContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 26, SParser.RULE_native_category_bindings);
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 515;
-        this.match(SParser.MAPPINGS);
+        this.match(SParser.BINDINGS);
         this.state = 516;
         this.match(SParser.COLON);
         this.state = 517; 
         this.indent();
         this.state = 518; 
-        localctx.items = this.native_category_mapping_list(0);
+        localctx.items = this.native_category_binding_list(0);
         this.state = 519; 
         this.dedent();
     } catch (re) {
@@ -2847,7 +2846,7 @@ SParser.prototype.native_category_mappings = function() {
     return localctx;
 };
 
-function Native_category_mapping_listContext(parser, parent, invokingState) {
+function Native_category_binding_listContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -2856,99 +2855,99 @@ function Native_category_mapping_listContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = SParser.RULE_native_category_mapping_list;
+    this.ruleIndex = SParser.RULE_native_category_binding_list;
     return this;
 }
 
-Native_category_mapping_listContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Native_category_mapping_listContext.prototype.constructor = Native_category_mapping_listContext;
+Native_category_binding_listContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Native_category_binding_listContext.prototype.constructor = Native_category_binding_listContext;
 
 
  
-Native_category_mapping_listContext.prototype.copyFrom = function(ctx) {
+Native_category_binding_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
 
-function NativeCategoryMappingListContext(parser, ctx) {
-	Native_category_mapping_listContext.call(this, parser);
-    this.item = null; // Native_category_mappingContext;
-    Native_category_mapping_listContext.prototype.copyFrom.call(this, ctx);
+function NativeCategoryBindingListContext(parser, ctx) {
+	Native_category_binding_listContext.call(this, parser);
+    this.item = null; // Native_category_bindingContext;
+    Native_category_binding_listContext.prototype.copyFrom.call(this, ctx);
     return this;
 }
 
-NativeCategoryMappingListContext.prototype = Object.create(Native_category_mapping_listContext.prototype);
-NativeCategoryMappingListContext.prototype.constructor = NativeCategoryMappingListContext;
+NativeCategoryBindingListContext.prototype = Object.create(Native_category_binding_listContext.prototype);
+NativeCategoryBindingListContext.prototype.constructor = NativeCategoryBindingListContext;
 
-NativeCategoryMappingListContext.prototype.native_category_mapping = function() {
-    return this.getTypedRuleContext(Native_category_mappingContext,0);
+NativeCategoryBindingListContext.prototype.native_category_binding = function() {
+    return this.getTypedRuleContext(Native_category_bindingContext,0);
 };
-NativeCategoryMappingListContext.prototype.enterRule = function(listener) {
+NativeCategoryBindingListContext.prototype.enterRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.enterNativeCategoryMappingList(this);
+        listener.enterNativeCategoryBindingList(this);
 	}
 };
 
-NativeCategoryMappingListContext.prototype.exitRule = function(listener) {
+NativeCategoryBindingListContext.prototype.exitRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.exitNativeCategoryMappingList(this);
+        listener.exitNativeCategoryBindingList(this);
 	}
 };
 
 
-function NativeCategoryMappingListItemContext(parser, ctx) {
-	Native_category_mapping_listContext.call(this, parser);
-    this.items = null; // Native_category_mapping_listContext;
-    this.item = null; // Native_category_mappingContext;
-    Native_category_mapping_listContext.prototype.copyFrom.call(this, ctx);
+function NativeCategoryBindingListItemContext(parser, ctx) {
+	Native_category_binding_listContext.call(this, parser);
+    this.items = null; // Native_category_binding_listContext;
+    this.item = null; // Native_category_bindingContext;
+    Native_category_binding_listContext.prototype.copyFrom.call(this, ctx);
     return this;
 }
 
-NativeCategoryMappingListItemContext.prototype = Object.create(Native_category_mapping_listContext.prototype);
-NativeCategoryMappingListItemContext.prototype.constructor = NativeCategoryMappingListItemContext;
+NativeCategoryBindingListItemContext.prototype = Object.create(Native_category_binding_listContext.prototype);
+NativeCategoryBindingListItemContext.prototype.constructor = NativeCategoryBindingListItemContext;
 
-NativeCategoryMappingListItemContext.prototype.lfp = function() {
+NativeCategoryBindingListItemContext.prototype.lfp = function() {
     return this.getTypedRuleContext(LfpContext,0);
 };
 
-NativeCategoryMappingListItemContext.prototype.native_category_mapping_list = function() {
-    return this.getTypedRuleContext(Native_category_mapping_listContext,0);
+NativeCategoryBindingListItemContext.prototype.native_category_binding_list = function() {
+    return this.getTypedRuleContext(Native_category_binding_listContext,0);
 };
 
-NativeCategoryMappingListItemContext.prototype.native_category_mapping = function() {
-    return this.getTypedRuleContext(Native_category_mappingContext,0);
+NativeCategoryBindingListItemContext.prototype.native_category_binding = function() {
+    return this.getTypedRuleContext(Native_category_bindingContext,0);
 };
-NativeCategoryMappingListItemContext.prototype.enterRule = function(listener) {
+NativeCategoryBindingListItemContext.prototype.enterRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.enterNativeCategoryMappingListItem(this);
+        listener.enterNativeCategoryBindingListItem(this);
 	}
 };
 
-NativeCategoryMappingListItemContext.prototype.exitRule = function(listener) {
+NativeCategoryBindingListItemContext.prototype.exitRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.exitNativeCategoryMappingListItem(this);
+        listener.exitNativeCategoryBindingListItem(this);
 	}
 };
 
 
 
-SParser.prototype.native_category_mapping_list = function(_p) {
+SParser.prototype.native_category_binding_list = function(_p) {
 	if(_p===undefined) {
 	    _p = 0;
 	}
     var _parentctx = this._ctx;
     var _parentState = this.state;
-    var localctx = new Native_category_mapping_listContext(this, this._ctx, _parentState);
+    var localctx = new Native_category_binding_listContext(this, this._ctx, _parentState);
     var _prevctx = localctx;
     var _startState = 28;
-    this.enterRecursionRule(localctx, 28, SParser.RULE_native_category_mapping_list, _p);
+    this.enterRecursionRule(localctx, 28, SParser.RULE_native_category_binding_list, _p);
     try {
         this.enterOuterAlt(localctx, 1);
-        localctx = new NativeCategoryMappingListContext(this, localctx);
+        localctx = new NativeCategoryBindingListContext(this, localctx);
         this._ctx = localctx;
         _prevctx = localctx;
 
         this.state = 522; 
-        localctx.item = this.native_category_mapping();
+        localctx.item = this.native_category_binding();
         this._ctx.stop = this._input.LT(-1);
         this.state = 530;
         this._errHandler.sync(this);
@@ -2959,9 +2958,9 @@ SParser.prototype.native_category_mapping_list = function(_p) {
                     this.triggerExitRuleEvent();
                 }
                 _prevctx = localctx;
-                localctx = new NativeCategoryMappingListItemContext(this, new Native_category_mapping_listContext(this, _parentctx, _parentState));
+                localctx = new NativeCategoryBindingListItemContext(this, new Native_category_binding_listContext(this, _parentctx, _parentState));
                 localctx.items = _prevctx;
-                this.pushNewRecursionContext(localctx, _startState, SParser.RULE_native_category_mapping_list);
+                this.pushNewRecursionContext(localctx, _startState, SParser.RULE_native_category_binding_list);
                 this.state = 524;
                 if (!( this.precpred(this._ctx, 1))) {
                     throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
@@ -2969,7 +2968,7 @@ SParser.prototype.native_category_mapping_list = function(_p) {
                 this.state = 525; 
                 this.lfp();
                 this.state = 526; 
-                localctx.item = this.native_category_mapping(); 
+                localctx.item = this.native_category_binding(); 
             }
             this.state = 532;
             this._errHandler.sync(this);
@@ -4376,7 +4375,7 @@ SParser.prototype.method_call = function() {
         this.match(SParser.LPAR);
         this.state = 634;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 633; 
             localctx.args = this.argument_assignment_list(0);
         }
@@ -9054,7 +9053,7 @@ SParser.prototype.constructor_expression = function() {
         this.match(SParser.LPAR);
         this.state = 1004;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 1003; 
             localctx.args = this.argument_assignment_list(0);
         }
@@ -11678,7 +11677,7 @@ SParser.prototype.list_literal = function() {
         this.match(SParser.LBRAK);
         this.state = 1181;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 1180; 
             localctx.items = this.expression_list(0);
         }
@@ -11754,7 +11753,7 @@ SParser.prototype.set_literal = function() {
         this.match(SParser.LT);
         this.state = 1187;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 1186; 
             localctx.items = this.expression_list(0);
         }
@@ -14815,7 +14814,7 @@ SParser.prototype.member_method_declaration = function() {
     return localctx;
 };
 
-function Native_category_mappingContext(parser, parent, invokingState) {
+function Native_category_bindingContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -14824,217 +14823,217 @@ function Native_category_mappingContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = SParser.RULE_native_category_mapping;
+    this.ruleIndex = SParser.RULE_native_category_binding;
     return this;
 }
 
-Native_category_mappingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Native_category_mappingContext.prototype.constructor = Native_category_mappingContext;
+Native_category_bindingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Native_category_bindingContext.prototype.constructor = Native_category_bindingContext;
 
 
  
-Native_category_mappingContext.prototype.copyFrom = function(ctx) {
+Native_category_bindingContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
 
 
-function CSharpCategoryMappingContext(parser, ctx) {
-	Native_category_mappingContext.call(this, parser);
-    this.mapping = null; // Csharp_identifier_expressionContext;
-    Native_category_mappingContext.prototype.copyFrom.call(this, ctx);
+function Python2CategoryBindingContext(parser, ctx) {
+	Native_category_bindingContext.call(this, parser);
+    this.binding = null; // Python_category_bindingContext;
+    Native_category_bindingContext.prototype.copyFrom.call(this, ctx);
     return this;
 }
 
-CSharpCategoryMappingContext.prototype = Object.create(Native_category_mappingContext.prototype);
-CSharpCategoryMappingContext.prototype.constructor = CSharpCategoryMappingContext;
+Python2CategoryBindingContext.prototype = Object.create(Native_category_bindingContext.prototype);
+Python2CategoryBindingContext.prototype.constructor = Python2CategoryBindingContext;
 
-CSharpCategoryMappingContext.prototype.CSHARP = function() {
-    return this.getToken(SParser.CSHARP, 0);
-};
-
-CSharpCategoryMappingContext.prototype.csharp_identifier_expression = function() {
-    return this.getTypedRuleContext(Csharp_identifier_expressionContext,0);
-};
-CSharpCategoryMappingContext.prototype.enterRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.enterCSharpCategoryMapping(this);
-	}
-};
-
-CSharpCategoryMappingContext.prototype.exitRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.exitCSharpCategoryMapping(this);
-	}
-};
-
-
-function JavaCategoryMappingContext(parser, ctx) {
-	Native_category_mappingContext.call(this, parser);
-    this.mapping = null; // Java_class_identifier_expressionContext;
-    Native_category_mappingContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-JavaCategoryMappingContext.prototype = Object.create(Native_category_mappingContext.prototype);
-JavaCategoryMappingContext.prototype.constructor = JavaCategoryMappingContext;
-
-JavaCategoryMappingContext.prototype.JAVA = function() {
-    return this.getToken(SParser.JAVA, 0);
-};
-
-JavaCategoryMappingContext.prototype.java_class_identifier_expression = function() {
-    return this.getTypedRuleContext(Java_class_identifier_expressionContext,0);
-};
-JavaCategoryMappingContext.prototype.enterRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.enterJavaCategoryMapping(this);
-	}
-};
-
-JavaCategoryMappingContext.prototype.exitRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.exitJavaCategoryMapping(this);
-	}
-};
-
-
-function JavaScriptCategoryMappingContext(parser, ctx) {
-	Native_category_mappingContext.call(this, parser);
-    this.mapping = null; // Javascript_category_mappingContext;
-    Native_category_mappingContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-JavaScriptCategoryMappingContext.prototype = Object.create(Native_category_mappingContext.prototype);
-JavaScriptCategoryMappingContext.prototype.constructor = JavaScriptCategoryMappingContext;
-
-JavaScriptCategoryMappingContext.prototype.JAVASCRIPT = function() {
-    return this.getToken(SParser.JAVASCRIPT, 0);
-};
-
-JavaScriptCategoryMappingContext.prototype.javascript_category_mapping = function() {
-    return this.getTypedRuleContext(Javascript_category_mappingContext,0);
-};
-JavaScriptCategoryMappingContext.prototype.enterRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.enterJavaScriptCategoryMapping(this);
-	}
-};
-
-JavaScriptCategoryMappingContext.prototype.exitRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.exitJavaScriptCategoryMapping(this);
-	}
-};
-
-
-function Python3CategoryMappingContext(parser, ctx) {
-	Native_category_mappingContext.call(this, parser);
-    this.mapping = null; // Python_category_mappingContext;
-    Native_category_mappingContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-Python3CategoryMappingContext.prototype = Object.create(Native_category_mappingContext.prototype);
-Python3CategoryMappingContext.prototype.constructor = Python3CategoryMappingContext;
-
-Python3CategoryMappingContext.prototype.PYTHON3 = function() {
-    return this.getToken(SParser.PYTHON3, 0);
-};
-
-Python3CategoryMappingContext.prototype.python_category_mapping = function() {
-    return this.getTypedRuleContext(Python_category_mappingContext,0);
-};
-Python3CategoryMappingContext.prototype.enterRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.enterPython3CategoryMapping(this);
-	}
-};
-
-Python3CategoryMappingContext.prototype.exitRule = function(listener) {
-    if(listener instanceof SParserListener ) {
-        listener.exitPython3CategoryMapping(this);
-	}
-};
-
-
-function Python2CategoryMappingContext(parser, ctx) {
-	Native_category_mappingContext.call(this, parser);
-    this.mapping = null; // Python_category_mappingContext;
-    Native_category_mappingContext.prototype.copyFrom.call(this, ctx);
-    return this;
-}
-
-Python2CategoryMappingContext.prototype = Object.create(Native_category_mappingContext.prototype);
-Python2CategoryMappingContext.prototype.constructor = Python2CategoryMappingContext;
-
-Python2CategoryMappingContext.prototype.PYTHON2 = function() {
+Python2CategoryBindingContext.prototype.PYTHON2 = function() {
     return this.getToken(SParser.PYTHON2, 0);
 };
 
-Python2CategoryMappingContext.prototype.python_category_mapping = function() {
-    return this.getTypedRuleContext(Python_category_mappingContext,0);
+Python2CategoryBindingContext.prototype.python_category_binding = function() {
+    return this.getTypedRuleContext(Python_category_bindingContext,0);
 };
-Python2CategoryMappingContext.prototype.enterRule = function(listener) {
+Python2CategoryBindingContext.prototype.enterRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.enterPython2CategoryMapping(this);
+        listener.enterPython2CategoryBinding(this);
 	}
 };
 
-Python2CategoryMappingContext.prototype.exitRule = function(listener) {
+Python2CategoryBindingContext.prototype.exitRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.exitPython2CategoryMapping(this);
+        listener.exitPython2CategoryBinding(this);
+	}
+};
+
+
+function CSharpCategoryBindingContext(parser, ctx) {
+	Native_category_bindingContext.call(this, parser);
+    this.binding = null; // Csharp_identifier_expressionContext;
+    Native_category_bindingContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+CSharpCategoryBindingContext.prototype = Object.create(Native_category_bindingContext.prototype);
+CSharpCategoryBindingContext.prototype.constructor = CSharpCategoryBindingContext;
+
+CSharpCategoryBindingContext.prototype.CSHARP = function() {
+    return this.getToken(SParser.CSHARP, 0);
+};
+
+CSharpCategoryBindingContext.prototype.csharp_identifier_expression = function() {
+    return this.getTypedRuleContext(Csharp_identifier_expressionContext,0);
+};
+CSharpCategoryBindingContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.enterCSharpCategoryBinding(this);
+	}
+};
+
+CSharpCategoryBindingContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.exitCSharpCategoryBinding(this);
+	}
+};
+
+
+function JavaScriptCategoryBindingContext(parser, ctx) {
+	Native_category_bindingContext.call(this, parser);
+    this.binding = null; // Javascript_category_bindingContext;
+    Native_category_bindingContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+JavaScriptCategoryBindingContext.prototype = Object.create(Native_category_bindingContext.prototype);
+JavaScriptCategoryBindingContext.prototype.constructor = JavaScriptCategoryBindingContext;
+
+JavaScriptCategoryBindingContext.prototype.JAVASCRIPT = function() {
+    return this.getToken(SParser.JAVASCRIPT, 0);
+};
+
+JavaScriptCategoryBindingContext.prototype.javascript_category_binding = function() {
+    return this.getTypedRuleContext(Javascript_category_bindingContext,0);
+};
+JavaScriptCategoryBindingContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.enterJavaScriptCategoryBinding(this);
+	}
+};
+
+JavaScriptCategoryBindingContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.exitJavaScriptCategoryBinding(this);
+	}
+};
+
+
+function JavaCategoryBindingContext(parser, ctx) {
+	Native_category_bindingContext.call(this, parser);
+    this.binding = null; // Java_class_identifier_expressionContext;
+    Native_category_bindingContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+JavaCategoryBindingContext.prototype = Object.create(Native_category_bindingContext.prototype);
+JavaCategoryBindingContext.prototype.constructor = JavaCategoryBindingContext;
+
+JavaCategoryBindingContext.prototype.JAVA = function() {
+    return this.getToken(SParser.JAVA, 0);
+};
+
+JavaCategoryBindingContext.prototype.java_class_identifier_expression = function() {
+    return this.getTypedRuleContext(Java_class_identifier_expressionContext,0);
+};
+JavaCategoryBindingContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.enterJavaCategoryBinding(this);
+	}
+};
+
+JavaCategoryBindingContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.exitJavaCategoryBinding(this);
+	}
+};
+
+
+function Python3CategoryBindingContext(parser, ctx) {
+	Native_category_bindingContext.call(this, parser);
+    this.binding = null; // Python_category_bindingContext;
+    Native_category_bindingContext.prototype.copyFrom.call(this, ctx);
+    return this;
+}
+
+Python3CategoryBindingContext.prototype = Object.create(Native_category_bindingContext.prototype);
+Python3CategoryBindingContext.prototype.constructor = Python3CategoryBindingContext;
+
+Python3CategoryBindingContext.prototype.PYTHON3 = function() {
+    return this.getToken(SParser.PYTHON3, 0);
+};
+
+Python3CategoryBindingContext.prototype.python_category_binding = function() {
+    return this.getTypedRuleContext(Python_category_bindingContext,0);
+};
+Python3CategoryBindingContext.prototype.enterRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.enterPython3CategoryBinding(this);
+	}
+};
+
+Python3CategoryBindingContext.prototype.exitRule = function(listener) {
+    if(listener instanceof SParserListener ) {
+        listener.exitPython3CategoryBinding(this);
 	}
 };
 
 
 
-SParser.prototype.native_category_mapping = function() {
+SParser.prototype.native_category_binding = function() {
 
-    var localctx = new Native_category_mappingContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 192, SParser.RULE_native_category_mapping);
+    var localctx = new Native_category_bindingContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 192, SParser.RULE_native_category_binding);
     try {
         this.state = 1354;
         switch(this._input.LA(1)) {
         case SParser.JAVA:
-            localctx = new JavaCategoryMappingContext(this, localctx);
+            localctx = new JavaCategoryBindingContext(this, localctx);
             this.enterOuterAlt(localctx, 1);
             this.state = 1344;
             this.match(SParser.JAVA);
             this.state = 1345; 
-            localctx.mapping = this.java_class_identifier_expression(0);
+            localctx.binding = this.java_class_identifier_expression(0);
             break;
         case SParser.CSHARP:
-            localctx = new CSharpCategoryMappingContext(this, localctx);
+            localctx = new CSharpCategoryBindingContext(this, localctx);
             this.enterOuterAlt(localctx, 2);
             this.state = 1346;
             this.match(SParser.CSHARP);
             this.state = 1347; 
-            localctx.mapping = this.csharp_identifier_expression(0);
+            localctx.binding = this.csharp_identifier_expression(0);
             break;
         case SParser.PYTHON2:
-            localctx = new Python2CategoryMappingContext(this, localctx);
+            localctx = new Python2CategoryBindingContext(this, localctx);
             this.enterOuterAlt(localctx, 3);
             this.state = 1348;
             this.match(SParser.PYTHON2);
             this.state = 1349; 
-            localctx.mapping = this.python_category_mapping();
+            localctx.binding = this.python_category_binding();
             break;
         case SParser.PYTHON3:
-            localctx = new Python3CategoryMappingContext(this, localctx);
+            localctx = new Python3CategoryBindingContext(this, localctx);
             this.enterOuterAlt(localctx, 4);
             this.state = 1350;
             this.match(SParser.PYTHON3);
             this.state = 1351; 
-            localctx.mapping = this.python_category_mapping();
+            localctx.binding = this.python_category_binding();
             break;
         case SParser.JAVASCRIPT:
-            localctx = new JavaScriptCategoryMappingContext(this, localctx);
+            localctx = new JavaScriptCategoryBindingContext(this, localctx);
             this.enterOuterAlt(localctx, 5);
             this.state = 1352;
             this.match(SParser.JAVASCRIPT);
             this.state = 1353; 
-            localctx.mapping = this.javascript_category_mapping();
+            localctx.binding = this.javascript_category_binding();
             break;
         default:
             throw new antlr4.error.NoViableAltException(this);
@@ -15053,7 +15052,7 @@ SParser.prototype.native_category_mapping = function() {
     return localctx;
 };
 
-function Python_category_mappingContext(parser, parent, invokingState) {
+function Python_category_bindingContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -15062,42 +15061,42 @@ function Python_category_mappingContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = SParser.RULE_python_category_mapping;
+    this.ruleIndex = SParser.RULE_python_category_binding;
     this.id_ = null; // IdentifierContext
     this.module = null; // Python_moduleContext
     return this;
 }
 
-Python_category_mappingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Python_category_mappingContext.prototype.constructor = Python_category_mappingContext;
+Python_category_bindingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Python_category_bindingContext.prototype.constructor = Python_category_bindingContext;
 
-Python_category_mappingContext.prototype.identifier = function() {
+Python_category_bindingContext.prototype.identifier = function() {
     return this.getTypedRuleContext(IdentifierContext,0);
 };
 
-Python_category_mappingContext.prototype.python_module = function() {
+Python_category_bindingContext.prototype.python_module = function() {
     return this.getTypedRuleContext(Python_moduleContext,0);
 };
 
-Python_category_mappingContext.prototype.enterRule = function(listener) {
+Python_category_bindingContext.prototype.enterRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.enterPython_category_mapping(this);
+        listener.enterPython_category_binding(this);
 	}
 };
 
-Python_category_mappingContext.prototype.exitRule = function(listener) {
+Python_category_bindingContext.prototype.exitRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.exitPython_category_mapping(this);
+        listener.exitPython_category_binding(this);
 	}
 };
 
 
 
 
-SParser.prototype.python_category_mapping = function() {
+SParser.prototype.python_category_binding = function() {
 
-    var localctx = new Python_category_mappingContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 194, SParser.RULE_python_category_mapping);
+    var localctx = new Python_category_bindingContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 194, SParser.RULE_python_category_binding);
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 1356; 
@@ -15294,7 +15293,7 @@ SParser.prototype.module_token = function() {
     return localctx;
 };
 
-function Javascript_category_mappingContext(parser, parent, invokingState) {
+function Javascript_category_bindingContext(parser, parent, invokingState) {
 	if(parent===undefined) {
 	    parent = null;
 	}
@@ -15303,42 +15302,42 @@ function Javascript_category_mappingContext(parser, parent, invokingState) {
 	}
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
-    this.ruleIndex = SParser.RULE_javascript_category_mapping;
+    this.ruleIndex = SParser.RULE_javascript_category_binding;
     this.id_ = null; // IdentifierContext
     this.module = null; // Javascript_moduleContext
     return this;
 }
 
-Javascript_category_mappingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-Javascript_category_mappingContext.prototype.constructor = Javascript_category_mappingContext;
+Javascript_category_bindingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
+Javascript_category_bindingContext.prototype.constructor = Javascript_category_bindingContext;
 
-Javascript_category_mappingContext.prototype.identifier = function() {
+Javascript_category_bindingContext.prototype.identifier = function() {
     return this.getTypedRuleContext(IdentifierContext,0);
 };
 
-Javascript_category_mappingContext.prototype.javascript_module = function() {
+Javascript_category_bindingContext.prototype.javascript_module = function() {
     return this.getTypedRuleContext(Javascript_moduleContext,0);
 };
 
-Javascript_category_mappingContext.prototype.enterRule = function(listener) {
+Javascript_category_bindingContext.prototype.enterRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.enterJavascript_category_mapping(this);
+        listener.enterJavascript_category_binding(this);
 	}
 };
 
-Javascript_category_mappingContext.prototype.exitRule = function(listener) {
+Javascript_category_bindingContext.prototype.exitRule = function(listener) {
     if(listener instanceof SParserListener ) {
-        listener.exitJavascript_category_mapping(this);
+        listener.exitJavascript_category_binding(this);
 	}
 };
 
 
 
 
-SParser.prototype.javascript_category_mapping = function() {
+SParser.prototype.javascript_category_binding = function() {
 
-    var localctx = new Javascript_category_mappingContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 200, SParser.RULE_javascript_category_mapping);
+    var localctx = new Javascript_category_bindingContext(this, this._ctx, this.state);
+    this.enterRule(localctx, 200, SParser.RULE_javascript_category_binding);
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 1374; 
@@ -18445,7 +18444,7 @@ SParser.prototype.tuple_literal = function() {
         this.match(SParser.LPAR);
         this.state = 1566;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 1565; 
             localctx.items = this.expression_tuple(0);
         }
@@ -18521,7 +18520,7 @@ SParser.prototype.dict_literal = function() {
         this.match(SParser.LCURL);
         this.state = 1572;
         _la = this._input.LA(1);
-        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (SParser.EXECUTE - 86)) | (1 << (SParser.FETCH - 86)) | (1 << (SParser.MUTABLE - 86)) | (1 << (SParser.NONE - 86)) | (1 << (SParser.NOT - 86)) | (1 << (SParser.READ - 86)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
+        if((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << SParser.LPAR) | (1 << SParser.LBRAK) | (1 << SParser.LCURL))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (SParser.MINUS - 32)) | (1 << (SParser.LT - 32)) | (1 << (SParser.CODE - 32)) | (1 << (SParser.DOCUMENT - 32)))) !== 0) || ((((_la - 87)) & ~0x1f) == 0 && ((1 << (_la - 87)) & ((1 << (SParser.EXECUTE - 87)) | (1 << (SParser.FETCH - 87)) | (1 << (SParser.MUTABLE - 87)) | (1 << (SParser.NONE - 87)) | (1 << (SParser.NOT - 87)) | (1 << (SParser.READ - 87)))) !== 0) || ((((_la - 121)) & ~0x1f) == 0 && ((1 << (_la - 121)) & ((1 << (SParser.SELF - 121)) | (1 << (SParser.SORTED - 121)) | (1 << (SParser.THIS - 121)) | (1 << (SParser.BOOLEAN_LITERAL - 121)) | (1 << (SParser.CHAR_LITERAL - 121)) | (1 << (SParser.MIN_INTEGER - 121)) | (1 << (SParser.MAX_INTEGER - 121)) | (1 << (SParser.SYMBOL_IDENTIFIER - 121)) | (1 << (SParser.TYPE_IDENTIFIER - 121)) | (1 << (SParser.VARIABLE_IDENTIFIER - 121)) | (1 << (SParser.TEXT_LITERAL - 121)) | (1 << (SParser.INTEGER_LITERAL - 121)) | (1 << (SParser.HEXA_LITERAL - 121)) | (1 << (SParser.DECIMAL_LITERAL - 121)) | (1 << (SParser.DATETIME_LITERAL - 121)) | (1 << (SParser.TIME_LITERAL - 121)) | (1 << (SParser.DATE_LITERAL - 121)) | (1 << (SParser.PERIOD_LITERAL - 121)))) !== 0)) {
             this.state = 1571; 
             localctx.items = this.dict_entry_list(0);
         }
@@ -26268,7 +26267,7 @@ SParser.prototype.csharp_identifier = function() {
 SParser.prototype.sempred = function(localctx, ruleIndex, predIndex) {
 	switch(ruleIndex) {
 	case 14:
-			return this.native_category_mapping_list_sempred(localctx, predIndex);
+			return this.native_category_binding_list_sempred(localctx, predIndex);
 	case 25:
 			return this.callable_parent_sempred(localctx, predIndex);
 	case 35:
@@ -26366,7 +26365,7 @@ SParser.prototype.sempred = function(localctx, ruleIndex, predIndex) {
    }
 };
 
-SParser.prototype.native_category_mapping_list_sempred = function(localctx, predIndex) {
+SParser.prototype.native_category_binding_list_sempred = function(localctx, predIndex) {
 	switch(predIndex) {
 		case 0:
 			return this.precpred(this._ctx, 1);

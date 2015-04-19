@@ -19,7 +19,7 @@ function Context() {
     this.tests = {};
 	this.instances = {};
 	this.values = {};
-    this.nativeMappings = {};
+    this.nativeBindings = {};
 	return this;
 }
 
@@ -201,18 +201,18 @@ Context.prototype.hasTests = function() {
     return false;
 };
 
-Context.prototype.registerNativeMapping = function(type, declaration) {
+Context.prototype.registerNativeBinding = function(type, declaration) {
     if(this==this.globals)
-        this.nativeMappings[type] = declaration;
+        this.nativeBindings[type] = declaration;
     else
-        this.globals.registerNativeMapping(type, declaration);
+        this.globals.registerNativeBinding(type, declaration);
 };
 
-Context.prototype.getNativeMapping = function(type) {
+Context.prototype.getNativeBinding = function(type) {
     if(this==this.globals)
-        return this.nativeMappings[type] || null;
+        return this.nativeBindings[type] || null;
     else
-        return this.globals.getNativeMapping(type);
+        return this.globals.getNativeBinding(type);
 };
 
 function MethodDeclarationMap(name) {

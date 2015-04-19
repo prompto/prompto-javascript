@@ -5,8 +5,8 @@ var ResourceContext = require("../runtime/Context").ResourceContext;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 
-function NativeResourceDeclaration(name, attributes, categoryMappings, attributeMappings) {
-	NativeCategoryDeclaration.call(this, name, attributes, categoryMappings, attributeMappings);
+function NativeResourceDeclaration(name, attributes, categoryBindings, attributeBindings) {
+	NativeCategoryDeclaration.call(this, name, attributes, categoryBindings, attributeBindings);
 	return this;
 }
 

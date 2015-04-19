@@ -9,4 +9,4 @@ exports.CSharpMethodExpression = require('./CSharpMethodExpression').CSharpMetho
 exports.CSharpSelectorExpression = require('./CSharpSelectorExpression').CSharpSelectorExpression;
 exports.CSharpExpressionList = require('./CSharpExpressionList').CSharpExpressionList;
 exports.CSharpIdentifierExpression  = require('./CSharpIdentifierExpression').CSharpIdentifierExpression;
-exports.CSharpNativeCategoryMapping = require("./CSharpNativeCategoryMapping").CSharpNativeCategoryMapping;
+exports.CSharpNativeCategoryBinding = require("./CSharpNativeCategoryBinding").CSharpNativeCategoryBinding;

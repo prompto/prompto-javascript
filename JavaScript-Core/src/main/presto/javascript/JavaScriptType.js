@@ -36,7 +36,7 @@ JavaScriptType.prototype.convertJavaScriptValueToPrestoValue = function(context,
             return type.DecimalType.instance.convertJavaScriptValueToPrestoValue(context, value, returnType);
         }
     }
-    var decl = context.getNativeMapping(typeName);
+    var decl = context.getNativeBinding(typeName);
     if(decl!=null) {
         return new NativeInstance(decl, value);
     } else if(returnType==type.AnyType.instance) {

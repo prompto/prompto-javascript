@@ -15,7 +15,7 @@ exports.PythonModule = require('./PythonModule').PythonModule;
 exports.PythonNamedArgument = require('./PythonNamedArgument').PythonNamedArgument;
 exports.PythonOrdinalArgument = require('./PythonOrdinalArgument').PythonOrdinalArgument;
 exports.PythonArgumentList = require('./PythonArgumentList').PythonArgumentList;
-exports.PythonNativeCategoryMapping = require("./PythonNativeCategoryMapping").PythonNativeCategoryMapping;
-exports.Python2NativeCategoryMapping = require("./Python2NativeCategoryMapping").Python2NativeCategoryMapping;
-exports.Python3NativeCategoryMapping = require("./Python3NativeCategoryMapping").Python3NativeCategoryMapping;
+exports.PythonNativeCategoryBinding = require("./PythonNativeCategoryBinding").PythonNativeCategoryBinding;
+exports.Python2NativeCategoryBinding = require("./Python2NativeCategoryBinding").Python2NativeCategoryBinding;
+exports.Python3NativeCategoryBinding = require("./Python3NativeCategoryBinding").Python3NativeCategoryBinding;
 

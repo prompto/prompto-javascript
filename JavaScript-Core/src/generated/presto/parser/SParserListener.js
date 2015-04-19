@@ -128,30 +128,30 @@ SParserListener.prototype.exitNative_resource_declaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#native_category_mappings.
-SParserListener.prototype.enterNative_category_mappings = function(ctx) {
+// Enter a parse tree produced by SParser#native_category_bindings.
+SParserListener.prototype.enterNative_category_bindings = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#native_category_mappings.
-SParserListener.prototype.exitNative_category_mappings = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#NativeCategoryMappingList.
-SParserListener.prototype.enterNativeCategoryMappingList = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#NativeCategoryMappingList.
-SParserListener.prototype.exitNativeCategoryMappingList = function(ctx) {
+// Exit a parse tree produced by SParser#native_category_bindings.
+SParserListener.prototype.exitNative_category_bindings = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#NativeCategoryMappingListItem.
-SParserListener.prototype.enterNativeCategoryMappingListItem = function(ctx) {
+// Enter a parse tree produced by SParser#NativeCategoryBindingListItem.
+SParserListener.prototype.enterNativeCategoryBindingListItem = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#NativeCategoryMappingListItem.
-SParserListener.prototype.exitNativeCategoryMappingListItem = function(ctx) {
+// Exit a parse tree produced by SParser#NativeCategoryBindingListItem.
+SParserListener.prototype.exitNativeCategoryBindingListItem = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#NativeCategoryBindingList.
+SParserListener.prototype.enterNativeCategoryBindingList = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#NativeCategoryBindingList.
+SParserListener.prototype.exitNativeCategoryBindingList = function(ctx) {
 };
 
 
@@ -1847,57 +1847,57 @@ SParserListener.prototype.exitOperatorMemberMethod = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#JavaCategoryMapping.
-SParserListener.prototype.enterJavaCategoryMapping = function(ctx) {
+// Enter a parse tree produced by SParser#JavaCategoryBinding.
+SParserListener.prototype.enterJavaCategoryBinding = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#JavaCategoryMapping.
-SParserListener.prototype.exitJavaCategoryMapping = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#CSharpCategoryMapping.
-SParserListener.prototype.enterCSharpCategoryMapping = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#CSharpCategoryMapping.
-SParserListener.prototype.exitCSharpCategoryMapping = function(ctx) {
+// Exit a parse tree produced by SParser#JavaCategoryBinding.
+SParserListener.prototype.exitJavaCategoryBinding = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#Python2CategoryMapping.
-SParserListener.prototype.enterPython2CategoryMapping = function(ctx) {
+// Enter a parse tree produced by SParser#CSharpCategoryBinding.
+SParserListener.prototype.enterCSharpCategoryBinding = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#Python2CategoryMapping.
-SParserListener.prototype.exitPython2CategoryMapping = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#Python3CategoryMapping.
-SParserListener.prototype.enterPython3CategoryMapping = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#Python3CategoryMapping.
-SParserListener.prototype.exitPython3CategoryMapping = function(ctx) {
+// Exit a parse tree produced by SParser#CSharpCategoryBinding.
+SParserListener.prototype.exitCSharpCategoryBinding = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#JavaScriptCategoryMapping.
-SParserListener.prototype.enterJavaScriptCategoryMapping = function(ctx) {
+// Enter a parse tree produced by SParser#Python2CategoryBinding.
+SParserListener.prototype.enterPython2CategoryBinding = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#JavaScriptCategoryMapping.
-SParserListener.prototype.exitJavaScriptCategoryMapping = function(ctx) {
+// Exit a parse tree produced by SParser#Python2CategoryBinding.
+SParserListener.prototype.exitPython2CategoryBinding = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#python_category_mapping.
-SParserListener.prototype.enterPython_category_mapping = function(ctx) {
+// Enter a parse tree produced by SParser#Python3CategoryBinding.
+SParserListener.prototype.enterPython3CategoryBinding = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#python_category_mapping.
-SParserListener.prototype.exitPython_category_mapping = function(ctx) {
+// Exit a parse tree produced by SParser#Python3CategoryBinding.
+SParserListener.prototype.exitPython3CategoryBinding = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#JavaScriptCategoryBinding.
+SParserListener.prototype.enterJavaScriptCategoryBinding = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#JavaScriptCategoryBinding.
+SParserListener.prototype.exitJavaScriptCategoryBinding = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#python_category_binding.
+SParserListener.prototype.enterPython_category_binding = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#python_category_binding.
+SParserListener.prototype.exitPython_category_binding = function(ctx) {
 };
 
 
@@ -1919,12 +1919,12 @@ SParserListener.prototype.exitModule_token = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#javascript_category_mapping.
-SParserListener.prototype.enterJavascript_category_mapping = function(ctx) {
+// Enter a parse tree produced by SParser#javascript_category_binding.
+SParserListener.prototype.enterJavascript_category_binding = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#javascript_category_mapping.
-SParserListener.prototype.exitJavascript_category_mapping = function(ctx) {
+// Exit a parse tree produced by SParser#javascript_category_binding.
+SParserListener.prototype.exitJavascript_category_binding = function(ctx) {
 };
 
 

@@ -49,7 +49,7 @@ CategoryDeclaration.prototype.checkConstructorContext = function(context) {
 	// nothing to do
 };
 
-CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, hasMappings) {
+CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, hasBindings) {
     var hasAttributes = this.attributes!=null && this.attributes.length>0;
     writer.append("define ");
     writer.append(this.name);
@@ -67,11 +67,11 @@ CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, has
             writer.append(", and methods:");
         else
             writer.append(" with methods:");
-    } else if (hasMappings) {
+    } else if (hasBindings) {
         if(hasAttributes)
-            writer.append(", and mappings:");
+            writer.append(", and bindings:");
         else
-            writer.append(" with mappings:");
+            writer.append(" with bindings:");
     }
     writer.newLine();
 };

@@ -1176,19 +1176,19 @@ EPrestoBuilder.prototype.exitJavascriptLiteralExpression = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
-EPrestoBuilder.prototype.exitJavaCategoryMapping = function(ctx) {
-	var map = this.getNodeValue(ctx.mapping);
-	this.setNodeValue(ctx, new java.JavaNativeCategoryMapping(map));
+EPrestoBuilder.prototype.exitJavaCategoryBinding = function(ctx) {
+	var map = this.getNodeValue(ctx.binding);
+	this.setNodeValue(ctx, new java.JavaNativeCategoryBinding(map));
 };
 
-EPrestoBuilder.prototype.exitJavaScriptCategoryMapping = function(ctx) {
-	this.setNodeValue(ctx, this.getNodeValue(ctx.mapping));
+EPrestoBuilder.prototype.exitJavaScriptCategoryBinding = function(ctx) {
+	this.setNodeValue(ctx, this.getNodeValue(ctx.binding));
 };
 
-EPrestoBuilder.prototype.exitJavascript_category_mapping = function(ctx) {
+EPrestoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
 	var identifier = ctx.id_.getText();
 	var module = this.getNodeValue(ctx.module) || null;
-	var map = new javascript.JavaScriptNativeCategoryMapping(identifier, module);
+	var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
 	this.setNodeValue(ctx, map);
 };
 
@@ -1202,14 +1202,14 @@ EPrestoBuilder.prototype.exitJavascript_module = function(ctx) {
 	this.setNodeValue(ctx, module);
 };
 
-EPrestoBuilder.prototype.exitNativeCategoryMappingList = function(ctx) {
+EPrestoBuilder.prototype.exitNativeCategoryBindingList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.NativeCategoryMappingList(item);
+	var items = new grammar.NativeCategoryBindingList(item);
 	this.setNodeValue(ctx, items);
 };
 
 
-EPrestoBuilder.prototype.exitNativeCategoryMappingListItem = function(ctx) {
+EPrestoBuilder.prototype.exitNativeCategoryBindingListItem = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
@@ -1217,7 +1217,7 @@ EPrestoBuilder.prototype.exitNativeCategoryMappingListItem = function(ctx) {
 };
 
 
-EPrestoBuilder.prototype.exitNative_category_mappings = function(ctx) {
+EPrestoBuilder.prototype.exitNative_category_bindings = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	this.setNodeValue(ctx, items);
 };
@@ -1226,8 +1226,8 @@ EPrestoBuilder.prototype.exitNative_category_mappings = function(ctx) {
 EPrestoBuilder.prototype.exitNative_category_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
-	var mappings = this.getNodeValue(ctx.mappings);
-	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, mappings, null));
+	var bindings = this.getNodeValue(ctx.bindings);
+	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, bindings, null));
 };
 
 
@@ -1240,8 +1240,8 @@ EPrestoBuilder.prototype.exitNativeCategoryDeclaration = function(ctx) {
 EPrestoBuilder.prototype.exitNative_resource_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
-	var mappings = this.getNodeValue(ctx.mappings);
-	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, mappings, null));
+	var bindings = this.getNodeValue(ctx.bindings);
+	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, bindings, null));
 };
 
 
@@ -2082,9 +2082,9 @@ EPrestoBuilder.prototype.exitCSharpTextLiteral = function(ctx) {
 };
 
 
-EPrestoBuilder.prototype.exitCSharpCategoryMapping = function(ctx) {
-    var map = this.getNodeValue(ctx.mapping);
-    this.setNodeValue(ctx, new csharp.CSharpNativeCategoryMapping(map));
+EPrestoBuilder.prototype.exitCSharpCategoryBinding = function(ctx) {
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new csharp.CSharpNativeCategoryBinding(map));
 };
 
 EPrestoBuilder.prototype.exitCSharpLiteralExpression = function(ctx) {
@@ -2160,22 +2160,22 @@ EPrestoBuilder.prototype.exitPythonReturnStatement = function(ctx) {
     this.setNodeValue(ctx, new python.PythonStatement(exp,true));
 };
 
-EPrestoBuilder.prototype.exitPython2CategoryMapping = function(ctx) {
-    var map = this.getNodeValue(ctx.mapping);
-    this.setNodeValue(ctx, new python.Python2NativeCategoryMapping(map));
+EPrestoBuilder.prototype.exitPython2CategoryBinding = function(ctx) {
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new python.Python2NativeCategoryBinding(map));
 };
 
 
-EPrestoBuilder.prototype.exitPython3CategoryMapping = function(ctx) {
-    var map = this.getNodeValue(ctx.mapping);
-    this.setNodeValue(ctx, new python.Python3NativeCategoryMapping(map));
+EPrestoBuilder.prototype.exitPython3CategoryBinding = function(ctx) {
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new python.Python3NativeCategoryBinding(map));
 };
 
 
-EPrestoBuilder.prototype.exitPython_category_mapping = function(ctx) {
+EPrestoBuilder.prototype.exitPython_category_binding = function(ctx) {
     var identifier = ctx.id_.getText();
     var module = this.getNodeValue(ctx.python_module()) || null;
-    var map = new python.PythonNativeCategoryMapping(identifier, module);
+    var map = new python.PythonNativeCategoryBinding(identifier, module);
     this.setNodeValue(ctx, map);
 };
 

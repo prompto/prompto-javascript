@@ -23,7 +23,7 @@ ConcreteCategoryDeclaration.prototype.constructor = ConcreteCategoryDeclaration;
 
 ConcreteCategoryDeclaration.prototype.toEDialect = function(writer) {
     var hasMethods = this.methods!=null && this.methods.length>0;
-    this.protoToEDialect(writer, hasMethods, false); // no mappings
+    this.protoToEDialect(writer, hasMethods, false); // no bindings
     if(hasMethods)
         this.methodsToEDialect(writer, this.methods);
 }

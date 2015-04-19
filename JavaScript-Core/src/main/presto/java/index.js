@@ -9,5 +9,5 @@ exports.JavaIntegerLiteral = require('./JavaIntegerLiteral').JavaIntegerLiteral;
 exports.JavaDecimalLiteral = require('./JavaDecimalLiteral').JavaDecimalLiteral;
 exports.JavaExpressionList = require('./JavaExpressionList').JavaExpressionList;
 exports.JavaMethodExpression = require('./JavaMethodExpression').JavaMethodExpression;
-exports.JavaNativeCategoryMapping = require("./../java/JavaNativeCategoryMapping").JavaNativeCategoryMapping;
+exports.JavaNativeCategoryBinding = require("./JavaNativeCategoryBinding").JavaNativeCategoryBinding;
 

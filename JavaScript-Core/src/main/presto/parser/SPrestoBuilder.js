@@ -1124,20 +1124,20 @@ SPrestoBuilder.prototype.exitJavascriptLiteralExpression = function(ctx) {
 };
 
 
-SPrestoBuilder.prototype.exitJavaCategoryMapping = function(ctx) {
-	var map = this.getNodeValue(ctx.mapping);
-	this.setNodeValue(ctx, new java.JavaNativeCategoryMapping(map));
+SPrestoBuilder.prototype.exitJavaCategoryBinding = function(ctx) {
+	var map = this.getNodeValue(ctx.binding);
+	this.setNodeValue(ctx, new java.JavaNativeCategoryBinding(map));
 };
 
-SPrestoBuilder.prototype.exitJavaScriptCategoryMapping = function(ctx) {
-	this.setNodeValue(ctx, this.getNodeValue(ctx.mapping));
+SPrestoBuilder.prototype.exitJavaScriptCategoryBinding = function(ctx) {
+	this.setNodeValue(ctx, this.getNodeValue(ctx.binding));
 };
 
 
-SPrestoBuilder.prototype.exitJavascript_category_mapping = function(ctx) {
+SPrestoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
 	var identifier = ctx.identifier().getText();
 	var module = this.getNodeValue(ctx.javascript_module());
-	var map = new javascript.JavaScriptNativeCategoryMapping(identifier, module);
+	var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
 	this.setNodeValue(ctx, map);
 };
 
@@ -1152,14 +1152,14 @@ SPrestoBuilder.prototype.exitJavascript_module = function(ctx) {
 };
 
 
-SPrestoBuilder.prototype.exitNativeCategoryMappingList = function(ctx) {
+SPrestoBuilder.prototype.exitNativeCategoryBindingList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.NativeCategoryMappingList(item);
+	var items = new grammar.NativeCategoryBindingList(item);
 	this.setNodeValue(ctx, items);
 };
 
 
-SPrestoBuilder.prototype.exitNativeCategoryMappingListItem = function(ctx) {
+SPrestoBuilder.prototype.exitNativeCategoryBindingListItem = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
@@ -1167,7 +1167,7 @@ SPrestoBuilder.prototype.exitNativeCategoryMappingListItem = function(ctx) {
 };
 
 
-SPrestoBuilder.prototype.exitNative_category_mappings = function(ctx) {
+SPrestoBuilder.prototype.exitNative_category_bindings = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	this.setNodeValue(ctx, items);
 };
@@ -1176,8 +1176,8 @@ SPrestoBuilder.prototype.exitNative_category_mappings = function(ctx) {
 SPrestoBuilder.prototype.exitNative_category_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
-	var mappings = this.getNodeValue(ctx.mappings);
-	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, mappings, null));
+	var bindings = this.getNodeValue(ctx.bindings);
+	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, bindings, null));
 };
 
 
@@ -1190,8 +1190,8 @@ SPrestoBuilder.prototype.exitNativeCategoryDeclaration = function(ctx) {
 SPrestoBuilder.prototype.exitNative_resource_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
-	var mappings = this.getNodeValue(ctx.mappings);
-	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, mappings, null));
+	var bindings = this.getNodeValue(ctx.bindings);
+	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, bindings, null));
 };
 
 
@@ -2008,9 +2008,9 @@ SPrestoBuilder.prototype.exitCSharpTextLiteral = function(ctx) {
 };
 
 
-SPrestoBuilder.prototype.exitCSharpCategoryMapping = function(ctx) {
-    var map = this.getNodeValue(ctx.mapping);
-    this.setNodeValue(ctx, new csharp.CSharpNativeCategoryMapping(map));
+SPrestoBuilder.prototype.exitCSharpCategoryBinding = function(ctx) {
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new csharp.CSharpNativeCategoryBinding(map));
 };
 
 SPrestoBuilder.prototype.exitCSharpLiteralExpression = function(ctx) {
@@ -2088,22 +2088,22 @@ SPrestoBuilder.prototype.exitPythonReturnStatement = function(ctx) {
     this.setNodeValue(ctx, new python.PythonStatement(exp,true));
 };
 
-SPrestoBuilder.prototype.exitPython2CategoryMapping = function(ctx) {
-    var map = this.getNodeValue(ctx.mapping);
-    this.setNodeValue(ctx, new python.Python2NativeCategoryMapping(map));
+SPrestoBuilder.prototype.exitPython2CategoryBinding = function(ctx) {
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new python.Python2NativeCategoryBinding(map));
 };
 
 
-SPrestoBuilder.prototype.exitPython3CategoryMapping = function(ctx) {
-    var map = this.getNodeValue(ctx.mapping);
-    this.setNodeValue(ctx, new python.Python3NativeCategoryMapping(map));
+SPrestoBuilder.prototype.exitPython3CategoryBinding = function(ctx) {
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new python.Python3NativeCategoryBinding(map));
 };
 
 
-SPrestoBuilder.prototype.exitPython_category_mapping = function(ctx) {
+SPrestoBuilder.prototype.exitPython_category_binding = function(ctx) {
     var identifier = ctx.id_.getText();
     var module = this.getNodeValue(ctx.python_module());
-    var map = new python.PythonNativeCategoryMapping(identifier, module);
+    var map = new python.PythonNativeCategoryBinding(identifier, module);
     this.setNodeValue(ctx, map);
 };
 
