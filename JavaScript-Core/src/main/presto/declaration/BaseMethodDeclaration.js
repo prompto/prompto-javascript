@@ -14,6 +14,7 @@ exports.resolve = function() {
 
 function BaseMethodDeclaration(name, args, returnType) {
 	BaseDeclaration.call(this, name);
+    this.memberOf = null;
 	this.args = args || new ArgumentList();
 	this.returnType = returnType || VoidType.instance;
 	return this;
@@ -21,29 +22,6 @@ function BaseMethodDeclaration(name, args, returnType) {
 
 BaseMethodDeclaration.prototype  = Object.create(BaseDeclaration.prototype);
 BaseMethodDeclaration.prototype.constructor = BaseMethodDeclaration;
-
-/*
-
-@Override
-public String getSignature(Dialect dialect) {
-	StringBuilder sb = new StringBuilder(getName());
-	sb.append('(');
-	for(IArgument arg : arguments) {
-		sb.append(arg.getSignature(dialect));
-		sb.append(", ");
-	}
-	if(arguments.size()>0)
-		sb.setLength(sb.length()-2); // strip ", "
-	sb.append(')');
-	return toString();
-}
-
-@Override
-public String toDialect(Dialect dialect) {
-	return getName() + ":(" + arguments.toString() +')';
-}
-
-*/
 
 BaseMethodDeclaration.prototype.getProto = function(context) {
 	var s = "";
@@ -67,17 +45,6 @@ BaseMethodDeclaration.prototype.registerArguments = function(context) {
 		this.args.register(context);
 	}
 };
-
-/*
-@Override
-public IType getType(Context context) {
-	try {
-		return check(context);
-	} catch (SyntaxError e) {
-		throw new RuntimeException(e);
-	}
-}
-*/
 
 BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, checkInstance) {
 	try {

@@ -30,6 +30,10 @@ exports.testMember = function(test) {
 	compareResourceESE(test, "methods/member.pec");
 };
 
+exports.testMemberCall = function(test) {
+	compareResourceESE(test, "methods/memberCall.pec");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	compareResourceESE(test, "methods/polymorphic_abstract.pec");
 };

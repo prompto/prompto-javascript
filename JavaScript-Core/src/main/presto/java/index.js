@@ -8,6 +8,7 @@ exports.JavaTextLiteral = require('./JavaTextLiteral').JavaTextLiteral;
 exports.JavaIntegerLiteral = require('./JavaIntegerLiteral').JavaIntegerLiteral;
 exports.JavaDecimalLiteral = require('./JavaDecimalLiteral').JavaDecimalLiteral;
 exports.JavaExpressionList = require('./JavaExpressionList').JavaExpressionList;
+exports.JavaThisExpression = require('./JavaThisExpression').JavaThisExpression;
 exports.JavaMethodExpression = require('./JavaMethodExpression').JavaMethodExpression;
 exports.JavaNativeCategoryBinding = require("./JavaNativeCategoryBinding").JavaNativeCategoryBinding;
 

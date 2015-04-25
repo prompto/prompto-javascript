@@ -13,7 +13,6 @@ exports.EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").E
 exports.OperatorMethodDeclaration = require("./OperatorMethodDeclaration").OperatorMethodDeclaration;
 exports.GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
 exports.SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
-exports.CategoryMethodList = require("./CategoryMethodList").CategoryMethodList;
 
 require('./BaseMethodDeclaration').resolve();
 require('./ConcreteCategoryDeclaration').resolve();

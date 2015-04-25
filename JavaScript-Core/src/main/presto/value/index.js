@@ -1,3 +1,5 @@
+exports.Value = require('./Value').Value;
+exports.Any = require('./Any').Any;
 exports.Bool = require('./Bool').Bool;
 exports.Integer = require('./Integer').Integer;
 exports.Decimal = require('./Decimal').Decimal;
@@ -26,3 +28,4 @@ require('./Time').resolve();
 require('./ListValue').resolve();
 require('./TupleValue').resolve();
 require('./LocalDate').resolve();
+require('./Value').resolve();

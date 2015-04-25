@@ -4,11 +4,13 @@ var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
+var InstanceContext = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var CategoryType = null;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
+    InstanceContext = require("../runtime/Context").InstanceContext;
 };
 
 function MethodSelector(parent, name) {
@@ -44,16 +46,29 @@ MethodSelector.prototype.getCandidates = function(context) {
 };
 
 MethodSelector.prototype.getGlobalCandidates = function(context) {
-	var actual = context.getRegisteredDeclaration(this.name);
-	if(actual===null) {
-		throw new SyntaxError("Unknown method: \"" + this.name + "\"");
-	}
-	var methods = actual.methods || null;
-	if(methods!=null) {
-		return Object.keys(methods).map(function(key) {return methods[key]});
-	} else {
-		throw new SyntaxError("Not a method: \"" + this.name + "\"");
-	}
+    var methods = []
+    // if called from a member method, could be a member method called without this/self
+    if(context.parent instanceof InstanceContext) {
+        var type = context.parent.instanceType;
+        var cd = context.getRegisteredDeclaration(type.name);
+        if(cd!=null) {
+            var members = cd.findMemberMethods(context, this.name);
+            if(members!=null) {
+                Object.keys(members).map(function (key) {
+                    methods.push(members[key])
+                });
+            }
+        }
+    }
+    var decl = context.getRegisteredDeclaration(this.name);
+    if(decl!=null) {
+        var globals = decl.methods;
+        if (globals != null)
+            Object.keys(globals).map(function (key) {
+                methods.push(globals[key])
+            });
+    }
+    return methods;
 };
 
 MethodSelector.prototype.getCategoryCandidates = function(context) {
@@ -68,19 +83,33 @@ MethodSelector.prototype.getCategoryCandidates = function(context) {
 	return cd.findMemberMethods(context, this.name);
 };
 
-MethodSelector.prototype.newLocalContext = function(context) {
-	if(this.parent==null) {
-		return context.newLocalContext();
-	} else {
-		return this.newInstanceContext(context);
+MethodSelector.prototype.newLocalContext = function(context, decl) {
+	if(this.parent!=null) {
+        return this.newInstanceContext(context);
+    } else if(decl.memberOf!=null) {
+        return this.newLocalInstanceContext(context);
+    } else {
+        return context.newLocalContext();
 	}
 };
 
-MethodSelector.prototype.newLocalCheckContext = function(context) {
-    if (this.parent == null) {
-        return context.newLocalContext();
-    } else {
+MethodSelector.prototype.newLocalInstanceContext = function(context) {
+    var parent = context.parent;
+    if(!(parent instanceof InstanceContext))
+        throw new SyntaxError("Not in instance context !");
+    context = context.newLocalContext();
+    context.parent = parent; // make local context child of the existing instance
+    return context;
+};
+
+
+MethodSelector.prototype.newLocalCheckContext = function(context, decl) {
+    if (this.parent != null) {
         return this.newInstanceCheckContext(context);
+    } else if(decl.memberOf!=null) {
+        return this.newLocalInstanceContext(context);
+    } else {
+        return context.newLocalContext();
     }
 };
 

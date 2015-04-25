@@ -123,7 +123,7 @@ CategoryType.prototype.checkOperator = function(context, other, tryReverse, oper
         if(method==null)
             return null;
         context = context.newInstanceContext(null, this);
-        var local = context.newChildContext();
+        var local = context.newLocalContext();
         method.registerArguments(local);
         return method.check(local);
     } catch(e) {

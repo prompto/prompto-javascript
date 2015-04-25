@@ -2,6 +2,14 @@ require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+exports.testAnyId = function(test) {
+	compareResourceEOE(test, "native/anyId.pec");
+};
+
+exports.testAnyText = function(test) {
+	compareResourceEOE(test, "native/anyText.pec");
+};
+
 exports.testAttribute = function(test) {
 	compareResourceEOE(test, "native/attribute.pec");
 };

@@ -55,7 +55,7 @@ MethodCall.prototype.toString = function() {
 MethodCall.prototype.check = function(context) {
 	var finder = new MethodFinder(context,this);
 	var declaration = finder.findMethod(false);
-    var local = this.method.newLocalCheckContext(context);
+    var local = this.method.newLocalCheckContext(context, declaration);
     return this.checkDeclaration(declaration, context, local);
 };
 
@@ -100,7 +100,7 @@ MethodCall.prototype.makeAssignments = function(context, declaration) {
 
 MethodCall.prototype.interpret = function(context) {
 	var declaration = this.findDeclaration(context);
-	var local = this.method.newLocalContext(context);
+	var local = this.method.newLocalContext(context, declaration);
 	declaration.registerArguments(local);
 	var assignments = this.makeAssignments(context,declaration);
 	for(var i=0;i<assignments.length;i++) {

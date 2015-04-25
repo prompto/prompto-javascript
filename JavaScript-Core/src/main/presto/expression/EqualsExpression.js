@@ -11,8 +11,6 @@ var EqOp = require("../grammar/EqOp").EqOp;
 
 function EqualsExpression(left, operator, right) {
 	this.left = left;
-    if(!(operator instanceof EqOp))
-        return;
 	this.operator = operator;
 	this.right = right;
 	return this;

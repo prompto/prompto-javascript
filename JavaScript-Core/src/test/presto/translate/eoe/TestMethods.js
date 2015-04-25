@@ -30,6 +30,10 @@ exports.testMember = function(test) {
 	compareResourceEOE(test, "methods/member.pec");
 };
 
+exports.testMemberCall = function(test) {
+	compareResourceEOE(test, "methods/memberCall.pec");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	compareResourceEOE(test, "methods/polymorphic_abstract.pec");
 };

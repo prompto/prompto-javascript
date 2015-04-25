@@ -15,7 +15,8 @@ JavaExpressionList.prototype.constructor = JavaExpressionList;
 JavaExpressionList.prototype.toDialect = function(writer) {
     if(this.length>0) {
         for(var i=0;i<this.length;i++) {
-            this[i].toDialect(writer);
+            var exp = this[i];
+            exp.toDialect(writer);
             writer.append(", ");
         }
         writer.trimLast(2);

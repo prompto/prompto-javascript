@@ -1,26 +1,26 @@
-var CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
+var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var getTypeName = require("../JavaScript/JavaScriptUtils").getTypeName;
 var getFunctionName = require("../JavaScript/JavaScriptUtils").getFunctionName;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
 
-function NativeCategoryDeclaration(name, attributes, categoryBindings, attributeBindings) {
-	CategoryDeclaration.call(this, name, attributes);
+function NativeCategoryDeclaration(name, attributes, categoryBindings, attributeBindings, methods) {
+    ConcreteCategoryDeclaration.call(this, name, attributes, null, methods);
 	this.categoryBindings = categoryBindings;
 	this.attributeBindings = attributeBindings;
-	this.mapped = null;
+	this.bound = null;
 	return this;
 }
 
-NativeCategoryDeclaration.prototype = Object.create(CategoryDeclaration.prototype);
+NativeCategoryDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.prototype);
 NativeCategoryDeclaration.prototype.constructor = NativeCategoryDeclaration;
 
 NativeCategoryDeclaration.prototype.register = function(context) {
     context.registerDeclaration(this);
-    var mapped = this.getMapped(false);
-    if(mapped!=null) {
-        var name = getFunctionName(mapped);
+    var bound = this.getBoundFunction(false);
+    if(bound!=null) {
+        var name = getFunctionName(bound);
         context.registerNativeBinding(name, this);
     }
 };
@@ -28,6 +28,11 @@ NativeCategoryDeclaration.prototype.register = function(context) {
 NativeCategoryDeclaration.prototype.toEDialect = function(writer) {
     this.protoToEDialect(writer, false, true);
     this.bindingsToEDialect(writer);
+    if(this.methods!=null && this.methods.length>0) {
+        writer.append("and methods:");
+        writer.newLine();
+        this.methodsToEDialect(writer, this.methods);
+    }
 };
 
 NativeCategoryDeclaration.prototype.categoryTypeToEDialect = function(writer) {
@@ -52,18 +57,30 @@ NativeCategoryDeclaration.prototype.categoryTypeToODialect = function(writer) {
 
 NativeCategoryDeclaration.prototype.bodyToODialect = function(writer) {
     this.categoryBindings.toDialect(writer);
+    if(this.methods!=null && this.methods.length>0) {
+        writer.newLine();
+        writer.newLine();
+        this.methodsToODialect(writer, this.methods);
+    }
 };
 
 NativeCategoryDeclaration.prototype.toSDialect = function(writer) {
-    this.protoToPDialect(writer, null);
+    this.protoToSDialect(writer, null);
     writer.indent();
     writer.newLine();
     this.categoryBindings.toDialect(writer);
+    if(this.methods!=null && this.methods.length>0) {
+        for(var i=0;i<this.methods.length;i++) {
+            var w = writer.newMemberWriter();
+            this.methods[i].toDialect(w);
+            writer.newLine();
+        }
+    }
     writer.dedent();
     writer.newLine();
 };
 
-NativeCategoryDeclaration.prototype.categoryTypeToPDialect = function(writer) {
+NativeCategoryDeclaration.prototype.categoryTypeToSDialect = function(writer) {
     writer.append("native category");
 };
 
@@ -71,16 +88,16 @@ NativeCategoryDeclaration.prototype.newInstance = function() {
 	return new NativeInstance(this);
 };
 
-NativeCategoryDeclaration.prototype.getMapped = function(fail) {
-	if(this.mapped==null) {
+NativeCategoryDeclaration.prototype.getBoundFunction = function(fail) {
+	if(this.bound==null) {
 		var binding = this.getBinding(fail);
         if(binding!=null) {
-            this.mapped = binding.resolve();
-            if(fail && this.mapped==null)
+            this.bound = binding.resolve();
+            if(fail && this.bound==null)
                 throw new SyntaxError("No JavaScript function:" + binding.toString());
 		}
 	}
-	return this.mapped;
+	return this.bound;
 };
 
 NativeCategoryDeclaration.prototype.getBinding = function(fail) {

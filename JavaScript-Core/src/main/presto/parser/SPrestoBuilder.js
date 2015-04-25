@@ -621,7 +621,7 @@ SPrestoBuilder.prototype.exitAddExpression = function(ctx) {
 
 SPrestoBuilder.prototype.exitCategoryMethodList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new declaration.CategoryMethodList(item);
+	var items = new grammar.MethodDeclarationList(item);
 	this.setNodeValue(ctx, items);
 };
 
@@ -631,6 +631,20 @@ SPrestoBuilder.prototype.exitCategoryMethodListItem = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
 	this.setNodeValue(ctx, items);
+};
+
+SPrestoBuilder.prototype.exitNativeCategoryMethodList = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var items = new grammar.MethodDeclarationList(item);
+    this.setNodeValue(ctx, items);
+};
+
+
+SPrestoBuilder.prototype.exitNativeCategoryMethodListItem = function(ctx) {
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 SPrestoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
@@ -646,27 +660,9 @@ SPrestoBuilder.prototype.exitGetter_method_declaration = function(ctx) {
 	this.setNodeValue(ctx, new declaration.GetterMethodDeclaration(name, stmts));
 };
 
-
-SPrestoBuilder.prototype.exitConcreteMemberMethod = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-SPrestoBuilder.prototype.exitAbstractMemberMethod = function(ctx) {
-    var decl = this.getNodeValue(ctx.decl);
+SPrestoBuilder.prototype.exitMember_method_declaration = function(ctx) {
+    var decl = this.getNodeValue(ctx.getChild(0));
     this.setNodeValue(ctx, decl);
-};
-
-
-SPrestoBuilder.prototype.exitSetterMemberMethod = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-SPrestoBuilder.prototype.exitGetterMemberMethod = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
 };
 
 SPrestoBuilder.prototype.exitStatementList = function(ctx) {
@@ -840,9 +836,27 @@ SPrestoBuilder.prototype.exitJava_identifier = function(ctx) {
 	this.setNodeValue(ctx, ctx.getText());
 };
 
-
 SPrestoBuilder.prototype.exitJavascript_identifier = function(ctx) {
 	this.setNodeValue(ctx, ctx.getText());
+};
+
+SPrestoBuilder.prototype.exitJavascript_member_expression = function(ctx) {
+    var name = ctx.name.getText ();
+    this.setNodeValue (ctx, new javascript.JavaScriptMemberExpression(name));
+};
+
+SPrestoBuilder.prototype.exitJavascript_primary_expression = function(ctx) {
+    var exp = this.getNodeValue (ctx.getChild(0));
+    this.setNodeValue (ctx, exp);
+};
+
+SPrestoBuilder.prototype.exitJavascript_selector_expression = function(ctx) {
+    var exp = this.getNodeValue (ctx.getChild(1)); // 0 is DOT
+    this.setNodeValue (ctx, exp);
+};
+
+SPrestoBuilder.prototype.exitJavascript_this_expression = function(ctx) {
+    this.setNodeValue (ctx, new javascript.JavaScriptThisExpression ());
 };
 
 SPrestoBuilder.prototype.exitJavaIdentifier = function(ctx) {
@@ -860,15 +874,6 @@ SPrestoBuilder.prototype.exitJavaIdentifierExpression = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
-SPrestoBuilder.prototype.exitJavascriptIdentifierExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
-SPrestoBuilder.prototype.exitJavascriptIntegerLiteral = function(ctx) {
-    this.setNodeValue(ctx, new javascript.JavaScriptIntegerLiteral(ctx.getText()));
-};
-
 
 SPrestoBuilder.prototype.exitJavaChildIdentifier = function(ctx) {
 	var parent = this.getNodeValue(ctx.parent);
@@ -877,12 +882,27 @@ SPrestoBuilder.prototype.exitJavaChildIdentifier = function(ctx) {
 	this.setNodeValue(ctx, child);
 };
 
-SPrestoBuilder.prototype.exitJavascriptChildIdentifier = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var name = this.getNodeValue(ctx.name);
-	var child = new javascript.JavaScriptIdentifierExpression(parent, name);
-	this.setNodeValue(ctx, child);
+SPrestoBuilder.prototype.exitJavascriptBooleanLiteral = function(ctx) {
+    this.setNodeValue(ctx, new javascript.JavaScriptBooleanLiteral(ctx.getText()));
 };
+
+SPrestoBuilder.prototype.exitJavascriptCharacterLiteral = function(ctx) {
+    this.setNodeValue(ctx, new javascript.JavaScriptCharacterLiteral(ctx.getText()));
+};
+
+SPrestoBuilder.prototype.exitJavascriptTextLiteral = function(ctx) {
+    this.setNodeValue(ctx, new javascript.JavaScriptTextLiteral(ctx.getText()));
+};
+
+SPrestoBuilder.prototype.exitJavascriptIntegerLiteral = function(ctx) {
+    this.setNodeValue(ctx, new javascript.JavaScriptIntegerLiteral(ctx.getText()));
+};
+
+
+SPrestoBuilder.prototype.exitJavascriptDecimalLiteral = function(ctx) {
+    this.setNodeValue(ctx, new javascript.JavaScriptDecimalLiteral(ctx.getText()));
+};
+
 
 
 SPrestoBuilder.prototype.exitJavaClassIdentifier = function(ctx) {
@@ -909,6 +929,10 @@ SPrestoBuilder.prototype.exitJavascriptPrimaryExpression = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
+SPrestoBuilder.prototype.exitJavascript_identifier_expression = function(ctx) {
+    var name = ctx.name.getText();
+    this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(name));
+};
 
 SPrestoBuilder.prototype.exitJavaSelectorExpression = function(ctx) {
 	var parent = this.getNodeValue(ctx.parent);
@@ -924,12 +948,36 @@ SPrestoBuilder.prototype.exitJavascriptSelectorExpression = function(ctx) {
 	this.setNodeValue(ctx, child);
 };
 
-
-SPrestoBuilder.prototype.exitJavaStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new java.JavaStatement(exp,false));
+SPrestoBuilder.prototype.exitJavaScriptMemberExpression = function(ctx) {
+    var name = ctx.name.getText();
+    this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(name));
 };
 
+SPrestoBuilder.prototype.exitJava_primary_expression = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
+};
+
+SPrestoBuilder.prototype.exitJava_item_expression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new java.JavaItemExpression(exp));
+};
+
+SPrestoBuilder.prototype.exitJavascript_item_expression = function(ctx) {
+	var exp = this.getNodeValue(ctx.exp);
+	this.setNodeValue(ctx, new javascript.JavaScriptItemExpression(exp));
+};
+
+SPrestoBuilder.prototype.exitJavascriptItemExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+SPrestoBuilder.prototype.exitJavaStatement = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    var stmt = new java.JavaStatement(exp,false);
+    this.setNodeValue(ctx, stmt);
+};
 
 SPrestoBuilder.prototype.exitJavascriptStatement = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
@@ -1008,6 +1056,15 @@ SPrestoBuilder.prototype.exitJava_method_expression = function(ctx) {
 	this.setNodeValue(ctx, new java.JavaMethodExpression(name, args));
 };
 
+SPrestoBuilder.prototype.exitJava_this_expression = function(ctx) {
+    this.setNodeValue(ctx, new java.JavaThisExpression());
+};
+
+SPrestoBuilder.prototype.exitJavaScriptMethodExpression = function(ctx) {
+    var method = this.getNodeValue(ctx.method);
+    this.setNodeValue(ctx, method);
+};
+
 SPrestoBuilder.prototype.exitJavascript_method_expression = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var args = this.getNodeValue(ctx.args);
@@ -1019,15 +1076,8 @@ SPrestoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
-SPrestoBuilder.prototype.exitJavascriptMethodExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
 SPrestoBuilder.prototype.exitFullDeclarationList = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	if(items==null)
-		items = new grammar.DeclarationList();
+	var items = this.getNodeValue(ctx.items) || new grammar.DeclarationList();
 	this.setNodeValue(ctx, items);
 };
 
@@ -1076,10 +1126,6 @@ SPrestoBuilder.prototype.exitJavaBooleanLiteral = function(ctx) {
 };
 
 
-SPrestoBuilder.prototype.exitJavascriptBooleanLiteral = function(ctx) {
-	this.setNodeValue(ctx, new javascript.JavaScriptBooleanLiteral(ctx.getText()));
-};
-
 SPrestoBuilder.prototype.exitJavaIntegerLiteral = function(ctx) {
 	this.setNodeValue(ctx, new java.JavaIntegerLiteral(ctx.getText()));
 };
@@ -1095,32 +1141,8 @@ SPrestoBuilder.prototype.exitJavaCharacterLiteral = function(ctx) {
 };
 
 
-SPrestoBuilder.prototype.exitJavascriptCharacterLiteral = function(ctx) {
-	this.setNodeValue(ctx, new javascript.JavaScriptCharacterLiteral(ctx.getText()));
-};
-
-SPrestoBuilder.prototype.exitJavascriptTextLiteral = function(ctx) {
-    this.setNodeValue(ctx, new javascript.JavaScriptTextLiteral(ctx.getText()));
-};
-
-SPrestoBuilder.prototype.exitJavascriptDecimalLiteral = function(ctx) {
-    this.setNodeValue(ctx, new javascript.JavaScriptDecimalLiteral(ctx.getText()));
-};
-
-
 SPrestoBuilder.prototype.exitJavaTextLiteral = function(ctx) {
 	this.setNodeValue(ctx, new java.JavaTextLiteral(ctx.getText()));
-};
-
-
-SPrestoBuilder.prototype.exitJavaLiteralExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
-SPrestoBuilder.prototype.exitJavascriptLiteralExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
 };
 
 
@@ -1177,7 +1199,8 @@ SPrestoBuilder.prototype.exitNative_category_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
 	var bindings = this.getNodeValue(ctx.bindings);
-	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, bindings, null));
+    var methods = this.getNodeValue(ctx.methods);
+	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods));
 };
 
 
@@ -1191,7 +1214,8 @@ SPrestoBuilder.prototype.exitNative_resource_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
 	var bindings = this.getNodeValue(ctx.bindings);
-	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, bindings, null));
+    var methods = this.getNodeValue(ctx.methods);
+	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, bindings, null, methods));
 };
 
 
@@ -1646,6 +1670,10 @@ SPrestoBuilder.prototype.exitOperatorModulo = function(ctx) {
     this.setNodeValue(ctx, grammar.Operator.MODULO);
 };
 
+SPrestoBuilder.prototype.exitNative_member_method_declaration = function(ctx) {
+    var decl = this.getNodeValue (ctx.getChild (0));
+    this.setNodeValue (ctx, decl);
+};
 
 SPrestoBuilder.prototype.exitOperator_method_declaration= function(ctx) {
     var op = this.getNodeValue(ctx.op);
@@ -1654,13 +1682,8 @@ SPrestoBuilder.prototype.exitOperator_method_declaration= function(ctx) {
     var stmts = this.getNodeValue(ctx.stmts);
     var decl = new declaration.OperatorMethodDeclaration(op, arg, typ, stmts);
     this.setNodeValue(ctx, decl);
-}
+};
 
-
-SPrestoBuilder.prototype.exitOperatorMemberMethod= function(ctx) {
-    var decl = this.getNodeValue(ctx.decl);
-    this.setNodeValue(ctx, decl);
-}
 
 SPrestoBuilder.prototype.exitOrExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);
@@ -1971,11 +1994,6 @@ SPrestoBuilder.prototype.exitCSharpIdentifier = function(ctx) {
     this.setNodeValue(ctx, new csharp.CSharpIdentifierExpression(null, name));
 };
 
-SPrestoBuilder.prototype.exitCSharpIdentifierExpression = function(ctx) {
-    var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, exp);
-};
-
 SPrestoBuilder.prototype.exitCSharpChildIdentifier = function(ctx) {
     var parent = this.getNodeValue(ctx.parent);
     var name = this.getNodeValue(ctx.name);
@@ -2013,9 +2031,13 @@ SPrestoBuilder.prototype.exitCSharpCategoryBinding = function(ctx) {
     this.setNodeValue(ctx, new csharp.CSharpNativeCategoryBinding(map));
 };
 
-SPrestoBuilder.prototype.exitCSharpLiteralExpression = function(ctx) {
-    var exp = this.getNodeValue(ctx.exp);
+SPrestoBuilder.prototype.exitCsharp_primary_expression = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
     this.setNodeValue(ctx, exp);
+};
+
+SPrestoBuilder.prototype.exitCsharp_this_expression = function(ctx) {
+    this.setNodeValue(ctx, new csharp.CSharpThisExpression());
 };
 
 SPrestoBuilder.prototype.exitCsharp_method_expression = function(ctx) {

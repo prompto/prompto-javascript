@@ -5,8 +5,8 @@ var ResourceContext = require("../runtime/Context").ResourceContext;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 
-function NativeResourceDeclaration(name, attributes, categoryBindings, attributeBindings) {
-	NativeCategoryDeclaration.call(this, name, attributes, categoryBindings, attributeBindings);
+function NativeResourceDeclaration(name, attributes, categoryBindings, attributeBindings, methods) {
+	NativeCategoryDeclaration.call(this, name, attributes, categoryBindings, attributeBindings, methods);
 	return this;
 }
 
@@ -37,7 +37,7 @@ NativeResourceDeclaration.prototype.categoryTypeToODialect = function(writer) {
     writer.append("native resource");
 };
 
-NativeResourceDeclaration.prototype.categoryTypeToPDialect = function(writer) {
+NativeResourceDeclaration.prototype.categoryTypeToSDialect = function(writer) {
     writer.append("native resource");
 };
 

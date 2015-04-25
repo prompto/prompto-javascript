@@ -41,6 +41,10 @@ exports.testMember = function(test) {
 	checkOutput(test, "methods/member.pec");
 };
 
+exports.testMemberCall = function(test) {
+	checkOutput(test, "methods/memberCall.pec");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	checkOutput(test, "methods/polymorphic_abstract.pec");
 };

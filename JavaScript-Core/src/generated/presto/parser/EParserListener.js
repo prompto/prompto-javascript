@@ -1865,48 +1865,39 @@ EParserListener.prototype.exitCategoryMethodList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#SetterMemberMethod.
-EParserListener.prototype.enterSetterMemberMethod = function(ctx) {
+// Enter a parse tree produced by EParser#member_method_declaration.
+EParserListener.prototype.enterMember_method_declaration = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#SetterMemberMethod.
-EParserListener.prototype.exitSetterMemberMethod = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#GetterMemberMethod.
-EParserListener.prototype.enterGetterMemberMethod = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#GetterMemberMethod.
-EParserListener.prototype.exitGetterMemberMethod = function(ctx) {
+// Exit a parse tree produced by EParser#member_method_declaration.
+EParserListener.prototype.exitMember_method_declaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#ConcreteMemberMethod.
-EParserListener.prototype.enterConcreteMemberMethod = function(ctx) {
+// Enter a parse tree produced by EParser#NativeCategoryMethodList.
+EParserListener.prototype.enterNativeCategoryMethodList = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#ConcreteMemberMethod.
-EParserListener.prototype.exitConcreteMemberMethod = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#AbstractMemberMethod.
-EParserListener.prototype.enterAbstractMemberMethod = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#AbstractMemberMethod.
-EParserListener.prototype.exitAbstractMemberMethod = function(ctx) {
+// Exit a parse tree produced by EParser#NativeCategoryMethodList.
+EParserListener.prototype.exitNativeCategoryMethodList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#OperatorMemberMethod.
-EParserListener.prototype.enterOperatorMemberMethod = function(ctx) {
+// Enter a parse tree produced by EParser#NativeCategoryMethodListItem.
+EParserListener.prototype.enterNativeCategoryMethodListItem = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#OperatorMemberMethod.
-EParserListener.prototype.exitOperatorMemberMethod = function(ctx) {
+// Exit a parse tree produced by EParser#NativeCategoryMethodListItem.
+EParserListener.prototype.exitNativeCategoryMethodListItem = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#native_member_method_declaration.
+EParserListener.prototype.enterNative_member_method_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#native_member_method_declaration.
+EParserListener.prototype.exitNative_member_method_declaration = function(ctx) {
 };
 
 
@@ -2783,48 +2774,48 @@ EParserListener.prototype.exitJavascriptSelectorExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#JavascriptParenthesisExpression.
-EParserListener.prototype.enterJavascriptParenthesisExpression = function(ctx) {
+// Enter a parse tree produced by EParser#javascript_primary_expression.
+EParserListener.prototype.enterJavascript_primary_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#JavascriptParenthesisExpression.
-EParserListener.prototype.exitJavascriptParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#JavascriptIdentifierExpression.
-EParserListener.prototype.enterJavascriptIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#JavascriptIdentifierExpression.
-EParserListener.prototype.exitJavascriptIdentifierExpression = function(ctx) {
+// Exit a parse tree produced by EParser#javascript_primary_expression.
+EParserListener.prototype.exitJavascript_primary_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#JavascriptLiteralExpression.
-EParserListener.prototype.enterJavascriptLiteralExpression = function(ctx) {
+// Enter a parse tree produced by EParser#javascript_this_expression.
+EParserListener.prototype.enterJavascript_this_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#JavascriptLiteralExpression.
-EParserListener.prototype.exitJavascriptLiteralExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#JavascriptMethodExpression.
-EParserListener.prototype.enterJavascriptMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#JavascriptMethodExpression.
-EParserListener.prototype.exitJavascriptMethodExpression = function(ctx) {
+// Exit a parse tree produced by EParser#javascript_this_expression.
+EParserListener.prototype.exitJavascript_this_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#JavascriptItemExpression.
-EParserListener.prototype.enterJavascriptItemExpression = function(ctx) {
+// Enter a parse tree produced by EParser#JavaScriptMethodExpression.
+EParserListener.prototype.enterJavaScriptMethodExpression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#JavascriptItemExpression.
-EParserListener.prototype.exitJavascriptItemExpression = function(ctx) {
+// Exit a parse tree produced by EParser#JavaScriptMethodExpression.
+EParserListener.prototype.exitJavaScriptMethodExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JavaScriptMemberExpression.
+EParserListener.prototype.enterJavaScriptMemberExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JavaScriptMemberExpression.
+EParserListener.prototype.exitJavaScriptMemberExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JavaScriptItemExpression.
+EParserListener.prototype.enterJavaScriptItemExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JavaScriptItemExpression.
+EParserListener.prototype.exitJavaScriptItemExpression = function(ctx) {
 };
 
 
@@ -2873,21 +2864,12 @@ EParserListener.prototype.exitJavascript_parenthesis_expression = function(ctx) 
 };
 
 
-// Enter a parse tree produced by EParser#JavascriptChildIdentifier.
-EParserListener.prototype.enterJavascriptChildIdentifier = function(ctx) {
+// Enter a parse tree produced by EParser#javascript_identifier_expression.
+EParserListener.prototype.enterJavascript_identifier_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#JavascriptChildIdentifier.
-EParserListener.prototype.exitJavascriptChildIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#JavascriptIdentifier.
-EParserListener.prototype.enterJavascriptIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#JavascriptIdentifier.
-EParserListener.prototype.exitJavascriptIdentifier = function(ctx) {
+// Exit a parse tree produced by EParser#javascript_identifier_expression.
+EParserListener.prototype.exitJavascript_identifier_expression = function(ctx) {
 };
 
 
@@ -3233,30 +3215,21 @@ EParserListener.prototype.exitJavaSelectorExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#JavaParenthesisExpression.
-EParserListener.prototype.enterJavaParenthesisExpression = function(ctx) {
+// Enter a parse tree produced by EParser#java_primary_expression.
+EParserListener.prototype.enterJava_primary_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#JavaParenthesisExpression.
-EParserListener.prototype.exitJavaParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#JavaIdentifierExpression.
-EParserListener.prototype.enterJavaIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#JavaIdentifierExpression.
-EParserListener.prototype.exitJavaIdentifierExpression = function(ctx) {
+// Exit a parse tree produced by EParser#java_primary_expression.
+EParserListener.prototype.exitJava_primary_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#JavaLiteralExpression.
-EParserListener.prototype.enterJavaLiteralExpression = function(ctx) {
+// Enter a parse tree produced by EParser#java_this_expression.
+EParserListener.prototype.enterJava_this_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#JavaLiteralExpression.
-EParserListener.prototype.exitJavaLiteralExpression = function(ctx) {
+// Exit a parse tree produced by EParser#java_this_expression.
+EParserListener.prototype.exitJava_this_expression = function(ctx) {
 };
 
 
@@ -3449,30 +3422,21 @@ EParserListener.prototype.exitCSharpSelectorExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#CSharpParenthesisExpression.
-EParserListener.prototype.enterCSharpParenthesisExpression = function(ctx) {
+// Enter a parse tree produced by EParser#csharp_primary_expression.
+EParserListener.prototype.enterCsharp_primary_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#CSharpParenthesisExpression.
-EParserListener.prototype.exitCSharpParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#CSharpIdentifierExpression.
-EParserListener.prototype.enterCSharpIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#CSharpIdentifierExpression.
-EParserListener.prototype.exitCSharpIdentifierExpression = function(ctx) {
+// Exit a parse tree produced by EParser#csharp_primary_expression.
+EParserListener.prototype.exitCsharp_primary_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#CSharpLiteralExpression.
-EParserListener.prototype.enterCSharpLiteralExpression = function(ctx) {
+// Enter a parse tree produced by EParser#csharp_this_expression.
+EParserListener.prototype.enterCsharp_this_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#CSharpLiteralExpression.
-EParserListener.prototype.exitCSharpLiteralExpression = function(ctx) {
+// Exit a parse tree produced by EParser#csharp_this_expression.
+EParserListener.prototype.exitCsharp_this_expression = function(ctx) {
 };
 
 

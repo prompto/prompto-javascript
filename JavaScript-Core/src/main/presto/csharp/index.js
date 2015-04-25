@@ -8,5 +8,6 @@ exports.CSharpTextLiteral = require('./CSharpTextLiteral').CSharpTextLiteral;
 exports.CSharpMethodExpression = require('./CSharpMethodExpression').CSharpMethodExpression;
 exports.CSharpSelectorExpression = require('./CSharpSelectorExpression').CSharpSelectorExpression;
 exports.CSharpExpressionList = require('./CSharpExpressionList').CSharpExpressionList;
+exports.CSharpThisExpression = require('./CSharpThisExpression').CSharpThisExpression;
 exports.CSharpIdentifierExpression  = require('./CSharpIdentifierExpression').CSharpIdentifierExpression;
 exports.CSharpNativeCategoryBinding = require("./CSharpNativeCategoryBinding").CSharpNativeCategoryBinding;

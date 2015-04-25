@@ -1,7 +1,18 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Text = null;
+var Integer = null;
+var Decimal = null;
+
+exports.resolve = function() {
+    Text = require("./Text").Text;
+    Integer = require("./Integer").Integer;
+    Decimal = require("./Decimal").Decimal;
+};
+
+var id = 0;
 
 function Value (type) {
+    this.id = ++id;
     this.type = type;
     this.mutable = false;
 	return this;
@@ -65,13 +76,15 @@ Value.prototype.Roughly = function(context, value) {
 
 Value.convertFromJavaScript = function(value) {
 	if(value==null) {
-		return null;
+		return NullValue.instance;
 	} else if(typeof(value)=='string') {
-		if(Text==null) {
-			Text = require("./Text").Text;
-		}
 		return new Text(value);
-	} else {
+	} else if(typeof(value)=='number') {
+        if(value == (value | 0))
+            return new Integer(value);
+        else
+            return new Decimal(value);
+    } else {
 		throw "Not implemented yet convertFromJavaScript:" + typeof(value);
 	}
 };

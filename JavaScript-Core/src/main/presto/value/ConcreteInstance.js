@@ -43,21 +43,23 @@ function getActiveGetters() {
 
 ConcreteInstance.prototype.getMember = function(context, attrName) {
 	var stacked = getActiveGetters()[attrName] || null;
+    var first = stacked==null;
+    if(first)
+        getActiveGetters()[attrName] = context;
 	try {
-		return this.get(context, attrName, stacked==null);
+		return this.doGetMember(context, attrName, first);
 	} finally {
-		if(stacked==context) {
+		if(first) {
 			delete getActiveGetters()[attrName];
 		}
 	}
-}
+};
 
-ConcreteInstance.prototype.get = function(context, attrName, allowGetter) {
+ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter) {
 	var getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
 	if(getter!=null) {
-		getActiveGetters()[attrName] = context;
-		context = context.newInstanceContext(this, null);
-		return new ContextualExpression(context,getter);
+		context = context.newInstanceContext(this, null).newChildContext();
+		return getter.interpret(context);
 	} else {
 		return this.values[attrName];
 	}
@@ -77,22 +79,24 @@ ConcreteInstance.prototype.setMember = function(context, attrName, value) {
     if(!this.mutable)
         throw new NotMutableError();
 	var stacked = getActiveSetters()[attrName] || null;
+    var first = stacked==null;
+    if(first)
+        getActiveSetters()[attrName] = context;
 	try {
-		this.doSet(context, attrName, value, stacked==null);
+		this.doSetMember(context, attrName, value, first);
 	} finally {
-		if(stacked==context) {
+		if(first) {
 			delete getActiveSetters()[attrName];
 		}
 	}
 };
 
-ConcreteInstance.prototype.doSet = function(context, attrName, value, allowSetter) {
+ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allowSetter) {
     var decl = context.getRegisteredDeclaration(attrName);
 	var setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
 	if(setter!=null) {
-		getActiveSetters()[attrName] = context;
 		// use attribute name as parameter name for incoming value
-		context = context.newInstanceContext(this, null);
+		context = context.newInstanceContext(this, null).newChildContext();
 		context.registerValue(new Variable(attrName, decl.getType()));
 		context.setValue(attrName, value);
 		value = setter.interpret(context);

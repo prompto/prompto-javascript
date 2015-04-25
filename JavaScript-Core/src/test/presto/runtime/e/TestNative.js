@@ -13,10 +13,17 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testAnyId = function(test) {
+	checkOutput(test, "native/anyId.pec");
+};
+/*
+exports.testAnyText = function(test) {
+	checkOutput(test, "native/anyText.pec");
+};
+
 exports.testAttribute = function(test) {
 	checkOutput(test, "native/attribute.pec");
 };
-
 
 exports.testCategory = function(test) {
 	checkOutput(test, "native/category.pec");
@@ -30,3 +37,4 @@ exports.testPrinter = function(test) {
 	checkOutput(test, "native/printer.pec");
 };
 
+*/

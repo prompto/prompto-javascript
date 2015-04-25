@@ -9,5 +9,7 @@ exports.JavaScriptIntegerLiteral = require('./JavaScriptIntegerLiteral').JavaScr
 exports.JavaScriptDecimalLiteral = require('./JavaScriptDecimalLiteral').JavaScriptDecimalLiteral;
 exports.JavaScriptExpressionList = require('./JavaScriptExpressionList').JavaScriptExpressionList;
 exports.JavaScriptMethodExpression = require('./JavaScriptMethodExpression').JavaScriptMethodExpression;
+exports.JavaScriptMemberExpression = require('./JavaScriptMemberExpression').JavaScriptMemberExpression;
+exports.JavaScriptThisExpression = require('./JavaScriptThisExpression').JavaScriptThisExpression;
 exports.JavaScriptNativeCategoryBinding = require("./JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
 exports.JavaScriptModule = require("./JavaScriptModule").JavaScriptModule;

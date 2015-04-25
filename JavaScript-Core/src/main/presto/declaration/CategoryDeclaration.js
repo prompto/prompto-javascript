@@ -49,6 +49,13 @@ CategoryDeclaration.prototype.checkConstructorContext = function(context) {
 	// nothing to do
 };
 
+CategoryDeclaration.prototype.toDialect = function(writer) {
+    var type = this.getType(writer.context);
+    writer = writer.newInstanceWriter(type);
+    writer.toDialect(this);
+};
+
+
 CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, hasBindings) {
     var hasAttributes = this.attributes!=null && this.attributes.length>0;
     writer.append("define ");
@@ -79,12 +86,21 @@ CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, has
 
 CategoryDeclaration.prototype.methodsToEDialect = function(writer, methods) {
     writer.indent();
-    for(var i =0; i<this.methods.length; i++) {
+    for(var i=0; i<methods.length; i++) {
         writer.newLine();
-        this.methods[i].toDialect(writer);
+        var w = writer.newMemberWriter();
+        methods[i].toDialect(w);
     }
     writer.dedent();
 };
+
+CategoryDeclaration.prototype.methodsToODialect = function(writer, methods) {
+    for(var i =0; i<methods.length; i++) {
+        var w = writer.newMemberWriter();
+        methods[i].toDialect(w);
+        w.newLine();
+    }
+}
 
 
 CategoryDeclaration.prototype.allToODialect = function(writer, hasBody) {
@@ -114,8 +130,8 @@ CategoryDeclaration.prototype.categoryExtensionToODialect = function(writer) {
 };
 
 
-CategoryDeclaration.prototype.protoToPDialect = function(writer, derivedFrom) {
-    this.categoryTypeToPDialect(writer);
+CategoryDeclaration.prototype.protoToSDialect = function(writer, derivedFrom) {
+    this.categoryTypeToSDialect(writer);
     writer.append(" ");
     writer.append(this.name);
     writer.append("(");

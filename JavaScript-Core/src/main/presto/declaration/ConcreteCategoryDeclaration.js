@@ -55,30 +55,28 @@ ConcreteCategoryDeclaration.prototype.categoryExtensionToODialect = function(wri
 
 
 ConcreteCategoryDeclaration.prototype.bodyToODialect = function(writer) {
-    for(var i=0;i<this.methods.length; i++) {
-        this.methods[i].toDialect(writer);
-        writer.newLine();
-    }
+    this.methodsToODialect (writer, this.methods);
 };
 
 
 ConcreteCategoryDeclaration.prototype.toSDialect = function(writer) {
-    this.protoToPDialect(writer, this.derivedFrom);
-    this.methodsToPDialect(writer);
+    this.protoToSDialect(writer, this.derivedFrom);
+    this.methodsToSDialect(writer);
 };
 
 
-ConcreteCategoryDeclaration.prototype.categoryTypeToPDialect = function(writer) {
+ConcreteCategoryDeclaration.prototype.categoryTypeToSDialect = function(writer) {
     writer.append("class");
 };
 
 
-ConcreteCategoryDeclaration.prototype.methodsToPDialect = function(writer) {
+ConcreteCategoryDeclaration.prototype.methodsToSDialect = function(writer) {
     writer.indent();
     if(this.methods==null || this.methods.length==0)
         writer.append("pass\n");
     else for(var i=0;i<this.methods.length;i++) {
-        this.methods[i].toDialect(writer);
+        var w = writer.newMemberWriter();
+        this.methods[i].toDialect(w);
         writer.newLine();
     }
     writer.dedent();
@@ -119,9 +117,17 @@ ConcreteCategoryDeclaration.prototype.check = function(context) {
 }
 
 ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
+    this.registerMethods(context);
+    for (var i = 0; i < this.methods.length; i++) {
+        this.methods[i].memberCheck(this, context);
+    }
+};
+
+ConcreteCategoryDeclaration.prototype.registerMethods = function(context) {
 	if(this.methodsMap==null) {
         this.methodsMap = {};
 		for(var i=0;i<this.methods.length;i++) {
+            this.methods[i].memberOf = this;
 			this.registerMethod(this.methods[i], context);
 		}
 	}
@@ -153,7 +159,6 @@ ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context)
 		}
 		actual.register(method, context);
 	}
-	method.memberCheck(this,context);
 };
 
 ConcreteCategoryDeclaration.prototype.checkDerived = function(context) {
@@ -279,6 +284,7 @@ ConcreteCategoryDeclaration.prototype.findMemberMethods = function(context, name
 
 
 ConcreteCategoryDeclaration.prototype.registerMemberMethods = function(context, result) {
+    this.registerMethods(context);
 	this.registerThisMemberMethods(context,result);
 	this.registerDerivedMemberMethods(context,result);
 };

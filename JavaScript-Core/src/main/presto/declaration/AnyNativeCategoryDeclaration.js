@@ -1,7 +1,7 @@
 var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
 
 function AnyNativeCategoryDeclaration() {
-    NativeCategoryDeclaration.call(this, "Any", [], [], []);
+    NativeCategoryDeclaration.call(this, "Any", [], [], [], []);
     return this;
 }
 
