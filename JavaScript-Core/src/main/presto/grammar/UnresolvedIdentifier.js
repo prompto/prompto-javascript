@@ -30,10 +30,12 @@ UnresolvedIdentifier.prototype.toString = function() {
 UnresolvedIdentifier.prototype.toDialect = function(writer) {
     try {
         this.resolve(writer.context, false);
-        this.resolved.toDialect(writer);
     } catch(e) {
-        writer.append(this.name);
     }
+    if(this.resolved!=null)
+        this.resolved.toDialect(writer);
+    else
+        writer.append(this.name);
 };
 
 UnresolvedIdentifier.prototype.check = function(context) {

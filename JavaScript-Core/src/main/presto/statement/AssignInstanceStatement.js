@@ -12,7 +12,7 @@ AssignInstanceStatement.prototype = Object.create(SimpleStatement.prototype);
 AssignInstanceStatement.prototype.constructor = AssignInstanceStatement;
 
 AssignInstanceStatement.prototype.toDialect = function(writer) {
-    this.instance.toDialect(writer);
+    this.instance.toDialect(writer, this.expression);
     writer.append(" = ");
     this.expression.toDialect(writer);
 };

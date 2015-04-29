@@ -7,7 +7,15 @@ function VariableInstance(name) {
 	return this;
 }
 
-VariableInstance.prototype.toDialect = function(writer) {
+VariableInstance.prototype.toDialect = function(writer, expression) {
+    if(expression!=null) try {
+        var type = expression.check(writer.context);
+        var actual = writer.context.getRegisteredValue(name);
+        if(actual==null)
+            writer.context.registerValue(new Variable(name, type));
+    } catch(e) {
+        // TODO warning
+    }
     writer.append(this.name);
 };
 

@@ -1,5 +1,4 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var Attribute = require("../runtime/Attribute").Attribute;
 var Variable = require("../runtime/Variable").Variable;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var Argument = require("../grammar/Argument").Argument;
@@ -44,8 +43,6 @@ InstanceExpression.prototype.check = function(context) {
 	var named = context.getRegistered(this.name);
 	if (named == null) {
 		throw new SyntaxError("Unknown identifier:" + this.name);
-	} else if (named instanceof Attribute) { // instance member
-		return named.getType(context);
 	} else if (named instanceof Variable) { // local variable
         return named.getType(context);
     } else if(named instanceof LinkedVariable) { // local variable
