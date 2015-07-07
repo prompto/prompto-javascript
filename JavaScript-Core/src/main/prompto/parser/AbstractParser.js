@@ -1,4 +1,4 @@
-var Parser = require("antlr4").Parser;
+var Parser = require("antlr4/index").Parser;
 
 function AbstractParser(input) {
 	Parser.call(this, input);

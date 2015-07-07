@@ -3,7 +3,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var utils = require("../utils");
+var utils = require("../utils/index");
 
 function CategoryArgument(type, name, attributes) {
 	Argument.call(this, name);

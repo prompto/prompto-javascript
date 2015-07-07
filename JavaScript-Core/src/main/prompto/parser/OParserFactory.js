@@ -1,4 +1,4 @@
-var antlr4 = require("antlr4");
+var antlr4 = require("antlr4/index");
 var ONamingLexer = require("./ONamingLexer").ONamingLexer;
 var OCleverParser = require("./OCleverParser").OCleverParser;
 

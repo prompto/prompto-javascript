@@ -1,4 +1,4 @@
-var antlr4 = require("antlr4");
+var antlr4 = require("antlr4/index");
 var OLexer = require("./OLexer").OLexer;
 var Dialect = null;
 

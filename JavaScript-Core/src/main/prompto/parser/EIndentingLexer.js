@@ -1,4 +1,4 @@
-var antlr4 = require("antlr4");
+var antlr4 = require("antlr4/index");
 var ELexer = require("./ELexer").ELexer;
 var Dialect = require("./Dialect").Dialect;
 

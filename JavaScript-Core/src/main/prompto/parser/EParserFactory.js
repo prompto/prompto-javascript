@@ -1,4 +1,4 @@
-var antlr4 = require("antlr4");
+var antlr4 = require("antlr4/index");
 var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
 var ECleverParser = require("./ECleverParser").ECleverParser;
 

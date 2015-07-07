@@ -1,5 +1,6 @@
-var mod = require("module");
-var path = require('path');
+var isNodeJs = typeof window === 'undefined';
+var mod = isNodeJs ? require("module") : null;
+var path = isNodeJs ? require('path') : null;
 
 function JavaScriptModule(ids) {
     this.ids = ids;

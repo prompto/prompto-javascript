@@ -1,4 +1,4 @@
-var antlr4 = require("antlr4");
+var antlr4 = require("antlr4/index");
 var al = require("./ArgsLexer");
 var ap = require("./ArgsParser");
 var ArgsParserListener = require("./ArgsParserListener").ArgsParserListener;

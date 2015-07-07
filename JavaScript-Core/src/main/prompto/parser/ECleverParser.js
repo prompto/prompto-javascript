@@ -1,12 +1,13 @@
-var fs = require("fs");
-var antlr4 = require("antlr4");
+var isNodeJs = typeof window === 'undefined';
+var fs = isNodeJs ? require("fs") : {}; // nodejs only
+var antlr4 = require("antlr4/index");
 var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
 var EParser = require("./EParser").EParser;
 var EPrestoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
-		if(fs.existsSync(input)) {
+		if(isNodeJs && fs.existsSync(input)) {
 			input = new antlr4.FileStream(input);
 		} else {
 			input = new antlr4.InputStream(input);

@@ -1,16 +1,16 @@
-var declaration = require("../declaration");
-var expression = require("../expression");
-var javascript = require("../javascript");
-var statement = require("../statement");
-var literal = require("../literal");
-var grammar = require("../grammar");
-var value = require("../value");
-var utils = require("../utils");
-var parser = require("../parser");
-var type = require("../type");
-var java = require("../java");
-var csharp = require("../csharp");
-var python = require("../python");
+var declaration = require("../declaration/index");
+var expression = require("../expression/index");
+var javascript = require("../javascript/index");
+var statement = require("../statement/index");
+var literal = require("../literal/index");
+var grammar = require("../grammar/index");
+var value = require("../value/index");
+var utils = require("../utils/index");
+var parser = require("../parser/index");
+var type = require("../type/index");
+var java = require("../java/index");
+var csharp = require("../csharp/index");
+var python = require("../python/index");
 
 function EPromptoBuilder(eparser) {
 	parser.EParserListener.call(this);
