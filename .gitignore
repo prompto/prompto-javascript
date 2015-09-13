@@ -2,3 +2,15 @@
 **/.settings/*
 **/node_modules/*
 **/xnode_modules/*
+**/parser/ELexer.js
+**/parser/EParser.js
+**/parser/EParserListener.js
+**/parser/OLexer.js
+**/parser/OParser.js
+**/parser/OParserListener.js
+**/parser/SLexer.js
+**/parser/SParser.js
+**/parser/SParserListener.js
+**/utils/ArgsLexer.js
+**/utils/ArgsParser.js
+**/utils/ArgsParserListener.js

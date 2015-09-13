@@ -1,4 +1,5 @@
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
@@ -129,15 +130,30 @@ Context.prototype.newChildContext = function() {
 	return context;
 };
 
-Context.prototype.getAllAttributes = function() {
+Context.prototype.getCatalog = function() {
     if(this!=this.globals)
-        return this.globals.getAllAttributes();
-    var list = [];
-    for(name in this.declarations) {
-        if(this.declarations[name] instanceof AttributeDeclaration)
-            list.push(name);
+        return this.globals.getCatalog();
+    var catalog = { attributes : [], methods : [], categories : [], tests : []};
+    for(var name in this.declarations) {
+        var decl = this.declarations[name];
+        if(decl instanceof AttributeDeclaration)
+            catalog.attributes.push(name);
+        else if(decl instanceof CategoryDeclaration)
+            catalog.categories.push(name);
+        else if(decl instanceof MethodDeclarationMap) {
+            var method = {};
+            method.name = decl.name;
+            var protos = [];
+            for (var proto in decl.methods)
+                protos.push(proto);
+            if(protos.length>1)
+                method.protos = protos;
+            catalog.methods.push(method);
+        }
     }
-    return list;
+    for(var name in this.tests)
+        catalog.tests.push(name)
+    return catalog;
 };
 
 Context.prototype.findAttribute = function(name) {
@@ -205,6 +221,20 @@ Context.prototype.registerTestDeclaration = function(declaration) {
         throw new SyntaxError("Duplicate test: \"" + declaration.name + "\"");
     }
     this.tests[declaration.name] = declaration;
+};
+
+Context.prototype.getRegisteredTest = function(name) {
+    // resolve upwards, since local names override global ones
+    var actual = this.tests[name] || null;
+    if(actual!==null) {
+        return actual;
+    } else if(this.parent!==null) {
+        return this.parent.getRegisteredTest(name);
+    } else if(this.globals!==this) {
+        return this.globals.getRegisteredTest(name);
+    } else {
+        return null;
+    }
 };
 
 Context.prototype.hasTests = function() {
