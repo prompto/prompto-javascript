@@ -1,4 +1,5 @@
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
@@ -128,6 +129,17 @@ Context.prototype.newChildContext = function() {
 	return context;
 };
 
+Context.prototype.getAllAttributes = function() {
+    if(this!=this.globals)
+        return this.globals.getAllAttributes();
+    var list = [];
+    for(name in this.declarations) {
+        if(this.declarations[name] instanceof AttributeDeclaration)
+            list.push(name);
+    }
+    return list;
+};
+
 Context.prototype.findAttribute = function(name) {
     if(this==this.globals)
         return this.declarations[name] || null;
@@ -151,7 +163,7 @@ Context.prototype.getRegistered = function(name) {
 	} else {
 		return null;
 	}
-}
+};
 
 Context.prototype.getRegisteredDeclaration = function(name) {
 	// resolve upwards, since local names override global ones
