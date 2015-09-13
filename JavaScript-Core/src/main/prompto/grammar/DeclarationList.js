@@ -19,6 +19,12 @@ DeclarationList.prototype.register = function(context) {
 	}
 };
 
+DeclarationList.prototype.unregister = function(context) {
+    for(var i=0;i<this.length;i++) {
+        context.unregisterDeclaration(this[i]);
+    }
+};
+
 DeclarationList.prototype.check = function(context) {
 	for(var i=0;i<this.length;i++) {
 		this[i].check(context);

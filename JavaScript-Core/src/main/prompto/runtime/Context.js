@@ -1,4 +1,6 @@
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+var BaseMethodDeclaration = require("../declaration/BaseMethodDeclaration").BaseMethodDeclaration;
+var TestMethodDeclaration = require("../declaration/TestMethodDeclaration").TestMethodDeclaration;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
@@ -131,8 +133,13 @@ Context.prototype.newChildContext = function() {
 };
 
 Context.prototype.getCatalog = function() {
-    if(this!=this.globals)
+    if (this != this.globals)
         return this.globals.getCatalog();
+    else
+        return this.getLocalCatalog();
+};
+
+Context.prototype.getLocalCatalog = function() {
     var catalog = { attributes : [], methods : [], categories : [], tests : []};
     for(var name in this.declarations) {
         var decl = this.declarations[name];
@@ -152,7 +159,16 @@ Context.prototype.getCatalog = function() {
         }
     }
     for(var name in this.tests)
-        catalog.tests.push(name)
+        catalog.tests.push(name);
+    // minimize for UI optimization
+    if(!catalog.attributes.length)
+        delete catalog.attributes;
+    if(!catalog.methods.length)
+        delete catalog.methods;
+    if(!catalog.categories.length)
+        delete catalog.categories;
+    if(!catalog.tests.length)
+        delete catalog.tests;
     return catalog;
 };
 
@@ -201,6 +217,18 @@ Context.prototype.registerDeclaration = function(declaration) {
 		throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
 	}
 	this.declarations[declaration.name] = declaration;
+};
+
+Context.prototype.unregisterDeclaration = function(declaration) {
+    var name = declaration.name;
+    if(declaration instanceof TestMethodDeclaration)
+        delete this.tests[name];
+    else if(declaration instanceof BaseMethodDeclaration) {
+        var map = this.declarations[name];
+        if(map.unregister(declaration))
+            delete this.declarations[name];
+    } else
+        delete this.declarations[name];
 };
 
 Context.prototype.registerMethodDeclaration = function(declaration) {
@@ -270,6 +298,17 @@ MethodDeclarationMap.prototype.register = function(declaration, context) {
 		throw new SyntaxError("Duplicate prototype for name: \"" + declaration.name + "\"");
 	}
 	this.methods[proto] = declaration;
+};
+
+MethodDeclarationMap.prototype.unregister = function(declaration) {
+    // don't have a context, so need to iterate
+    for(var proto in this.methods) {
+        if(this.methods[proto]===declaration) {
+            delete this.methods[proto];
+            break;
+        }
+    }
+    return this.methods.length===0;
 };
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context) {
