@@ -32,6 +32,22 @@ exports.runResource = function(fileName, methodName, args) {
     }
 };
 
+exports.checkProblems = function(test, code, expected) {
+    var listener = new prompto.parser.ProblemCollector();
+    var parser = new prompto.parser.ECleverParser(code);
+    parser.removeErrorListeners();
+    parser.addErrorListener(listener);
+    var decls = parser.parse();
+    var context = prompto.runtime.Context.newGlobalContext();
+    context.problemListener = listener;
+    decls.register(context);
+    decls.check(context);
+    test.equal(listener.problems.length, 1 - (expected==undefined));
+    if(expected!=undefined)
+        test.equal(listener.problems[0].message, expected);
+    test.done();
+};
+
 exports.checkOutput = function(test, fileName) {
     exports.runResource(fileName);
     checkSameOutput(test, fileName);

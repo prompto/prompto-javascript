@@ -24,6 +24,7 @@ function Context() {
 	this.instances = {};
 	this.values = {};
     this.nativeBindings = {};
+    this.problemListener = null;
 	return this;
 }
 
@@ -101,7 +102,8 @@ Context.prototype.newResourceContext = function() {
 	context.calling = this.calling;
 	context.parent = this;
 	context.debugger = this.debugger;
-	return context;
+    context.problemListener = this.problemListener;
+    return context;
 };
 
 Context.prototype.newLocalContext = function() {
@@ -110,6 +112,7 @@ Context.prototype.newLocalContext = function() {
 	context.calling = this;
 	context.parent = null;
 	context.debugger = this.debugger;
+    context.problemListener = this.problemListener;
 	return context;
 };
 
@@ -119,6 +122,7 @@ Context.prototype.newInstanceContext = function(instance, type) {
 	context.calling = this;
 	context.parent = null;
 	context.debugger = this.debugger;
+    context.problemListener = this.problemListener;
 	return context;
 };
 
@@ -129,6 +133,7 @@ Context.prototype.newChildContext = function() {
 	context.calling = this.calling;
 	context.parent = this;
 	context.debugger = this.debugger;
+    context.problemListener = this.problemListener;
 	return context;
 };
 
@@ -212,12 +217,21 @@ Context.prototype.getRegisteredDeclaration = function(name) {
 }
 
 Context.prototype.registerDeclaration = function(declaration) {
-	var actual = this.getRegistered(declaration.name) || null;
-	if(actual!=null) {
-		throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
-	}
-	this.declarations[declaration.name] = declaration;
+    if(this.checkDuplicate(declaration))
+    	this.declarations[declaration.name] = declaration;
 };
+
+Context.prototype.checkDuplicate = function(declaration) {
+    var actual = this.getRegistered(declaration.name) || null;
+    if (actual != null) {
+        if(this.problemListener)
+            this.problemListener.reportDuplicate(declaration.name, declaration);
+        else
+            throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
+    }
+    return actual == null;
+}
+
 
 Context.prototype.unregisterDeclaration = function(declaration) {
     var name = declaration.name;
@@ -232,21 +246,32 @@ Context.prototype.unregisterDeclaration = function(declaration) {
 };
 
 Context.prototype.registerMethodDeclaration = function(declaration) {
-	var actual = this.getRegistered(declaration.name);
-	if(actual!==null && !(actual instanceof MethodDeclarationMap)) {
-		throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
-	}
-    if(actual===null) {
+    var actual = this.checkDuplicateMethod(declaration);
+    if (actual === null) {
         actual = new MethodDeclarationMap(declaration.name);
         this.declarations[declaration.name] = actual;
     }
-	actual.register(declaration,this);
+    actual.register(declaration, this);
+};
+
+Context.prototype.checkDuplicateMethod = function(declaration) {
+    var actual = this.getRegistered(declaration.name) || null;
+    if (actual !== null && !(actual instanceof MethodDeclarationMap)) {
+        if (this.problemListener)
+            this.problemListener.reportDuplicate(declaration.name, declaration);
+        else
+            throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
+    }
+    return actual;
 };
 
 Context.prototype.registerTestDeclaration = function(declaration) {
     var actual = this.tests[declaration.name] || null;
     if(actual!==null) {
-        throw new SyntaxError("Duplicate test: \"" + declaration.name + "\"");
+        if (this.problemListener)
+            this.problemListener.reportDuplicate(declaration.name, declaration);
+        else
+            throw new SyntaxError("Duplicate test: \"" + declaration.name + "\"");
     }
     this.tests[declaration.name] = declaration;
 };
@@ -295,7 +320,10 @@ MethodDeclarationMap.prototype.register = function(declaration, context) {
 	var proto = declaration.getProto(context);
 	var current = this.methods[proto] || null;
 	if(current!==null) {
-		throw new SyntaxError("Duplicate prototype for name: \"" + declaration.name + "\"");
+        if(context.problemListener)
+            context.problemListener.reportDuplicate(declaration.name, declaration);
+		else
+            throw new SyntaxError("Duplicate prototype for name: \"" + declaration.name + "\"");
 	}
 	this.methods[proto] = declaration;
 };
