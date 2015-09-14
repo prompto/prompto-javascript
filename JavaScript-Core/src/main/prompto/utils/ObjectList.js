@@ -19,7 +19,8 @@ ObjectList.prototype.addAll = function(items) {
 };
 
 ObjectList.prototype.add = function(item) {
-	this.push(item);
+	if(item)
+        this.push(item);
 };
 
 ObjectList.prototype.insert = function(before, item) {
