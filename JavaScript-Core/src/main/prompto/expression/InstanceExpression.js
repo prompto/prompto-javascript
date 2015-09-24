@@ -1,6 +1,7 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Variable = require("../runtime/Variable").Variable;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
+var Identifier = require("../grammar/Identifier").Identifier;
 var Argument = require("../grammar/Argument").Argument;
 var Dialect = require("../parser/Dialect").Dialect;
 var CategoryDeclaration = null;
@@ -14,6 +15,8 @@ exports.resolve = function() {
 }
 
 function InstanceExpression(name) {
+    if(name.name)
+        throw "abc";
 	this.name = name;
 	return this;
 }
@@ -54,7 +57,7 @@ InstanceExpression.prototype.check = function(context) {
 	} else if(named instanceof AttributeDeclaration) { // in category method
 		return named.getType(context);
 	} else if(named instanceof MethodDeclarationMap) { // global method or closure
-		return new MethodType(context, this.name);
+		return new MethodType(context, new Identifier(this.name));
 	} else {
 		throw new SyntaxError(this.name + "  is not an instance:" + typeof(named));
 	}

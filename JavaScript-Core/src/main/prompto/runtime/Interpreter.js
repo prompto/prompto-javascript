@@ -4,6 +4,7 @@ var TextType = require("../type/TextType").TextType;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var UnresolvedArgument = require("../grammar/UnresolvedArgument").UnresolvedArgument;
+var Identifier = require("../grammar/Identifier").Identifier;
 var DictLiteral = require("../literal/DictLiteral").DictLiteral;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
@@ -31,9 +32,9 @@ function parseCmdLineArgs(cmdLineArgs) {
 function buildAssignments(method, cmdLineArgs) {
 	var assignments = new ArgumentAssignmentList();
 	if(method.args.length==1) {
-		var name = method.args[0].name;
+		var id = method.args[0].id;
 		var value = parseCmdLineArgs(cmdLineArgs);
-		assignments.add(new ArgumentAssignment(new UnresolvedArgument(name), value));
+		assignments.add(new ArgumentAssignment(new UnresolvedArgument(id), value));
 	}
 	return assignments;
 }
@@ -118,7 +119,7 @@ Interpreter.interpret = function(context, methodName, cmdLineArgs) {
 	try {
 		var method = locateMethod(context, methodName, cmdLineArgs);
 		var assignments = buildAssignments(method, cmdLineArgs);
-		var call = new MethodCall(new MethodSelector(null, methodName),assignments);
+		var call = new MethodCall(new MethodSelector(null, new Identifier(methodName)),assignments);
 		call.interpret(context);
 	} finally {
 		context.terminated();

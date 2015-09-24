@@ -3,6 +3,7 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var UserError = require("../error/UserError").UserError;
 var Dialect = require("../parser/Dialect").Dialect;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function RaiseStatement(expression) {
 	SimpleStatement.call(this);
@@ -29,7 +30,7 @@ RaiseStatement.prototype.equals = function(obj) {
 
 RaiseStatement.prototype.check = function(context) {
 	var type = this.expression.check(context);
-	if(!type.isAssignableTo(context, new CategoryType("Error"))) {
+	if(!type.isAssignableTo(context, new CategoryType(new Identifier("Error")))) {
 		throw new SyntaxError(type.name + " does not extend Error");
 	}
 	return type;

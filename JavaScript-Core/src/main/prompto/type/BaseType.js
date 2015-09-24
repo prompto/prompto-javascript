@@ -9,13 +9,19 @@ exports.resolve = function() {
     ListValue = require("../value/ListValue").ListValue;
 };
 
-function BaseType(name) {
-	this.name = name;
-	if(this.name!=name) {
-		console.log(this.name);
-	}
+function BaseType(id) {
+    if(!id.name)
+        throw "abc";
+	this.id = id;
 	return this;
 };
+
+Object.defineProperty(BaseType.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
+
 
 /*
 

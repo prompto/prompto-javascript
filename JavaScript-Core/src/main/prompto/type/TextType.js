@@ -3,6 +3,7 @@ var CharacterType = null;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var AnyType = require("./AnyType").AnyType;
+var Identifier = require("../grammar/Identifier").Identifier;
 var Text = null; // circular dependency
 
 exports.resolve = function() {
@@ -11,7 +12,7 @@ exports.resolve = function() {
 }
 
 function TextType()  {
-	NativeType.call(this, "Text");
+	NativeType.call(this, new Identifier("Text"));
 	return this;
 }
 

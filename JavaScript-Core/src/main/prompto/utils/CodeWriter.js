@@ -8,6 +8,8 @@ function Indenter() {
 }
 
 Indenter.prototype.appendTabsIfRequired = function(s) {
+    if(!s || !s.charAt)
+        throw "abc";
     if(this.isStartOfLine) {
         this.value += this.indents;
     }

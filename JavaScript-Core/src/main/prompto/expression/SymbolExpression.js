@@ -1,9 +1,17 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-function SymbolExpression(name) {
-	this.name = name;
+function SymbolExpression(id) {
+	if(!id.name)
+        throw "abc";
+    this.id = id;
 	return this;
 }
+
+Object.defineProperty(SymbolExpression.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 SymbolExpression.prototype.toDialect = function(writer) {
     writer.append(this.name);

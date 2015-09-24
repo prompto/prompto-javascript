@@ -3,9 +3,10 @@ var BooleanType = require("./BooleanType").BooleanType;
 var ListType = require("./ListType").ListType;
 var IntegerType = require("./IntegerType").IntegerType;
 var AnyType = require("./AnyType").AnyType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function TupleType()  {
-	NativeType.call(this, "Tuple");
+	NativeType.call(this, new Identifier("Tuple"));
 	return this;
 }
 

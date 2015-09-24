@@ -1,9 +1,10 @@
 var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var Identifier = require("../grammar/Identifier").Identifier;
 var VoidType = require("../type/VoidType").VoidType;
 
 function OperatorMethodDeclaration(op, arg, returnType, stmts) {
-    ConcreteMethodDeclaration.call(this, "operator_" + op.name, new ArgumentList(arg), returnType, stmts);
+    ConcreteMethodDeclaration.call(this, new Identifier("operator_" + op.name), new ArgumentList(arg), returnType, stmts);
     this.operator = op;
     return this;
 }

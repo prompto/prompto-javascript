@@ -1,9 +1,17 @@
-function Argument(name) {
-	this.name = name;
+function Argument(id) {
+    if(!id || !id.name)
+        throw "abc";
+	this.id = id;
     this.mutable = false;
     this.defaultExpression = null;
 	return this;
 }
+
+Object.defineProperty(Argument.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 Argument.prototype.checkValue = function(context, expression) {
 	return expression.interpret(context);

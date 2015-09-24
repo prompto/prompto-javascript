@@ -2,7 +2,9 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 
 function IdentifierList(item) {
-	ObjectList.call(this);
+	if(!item || !item.name)
+        throw "abc";
+    ObjectList.call(this);
 	item = item || null;
 	if(item!==null) {
 		this.add(item);
@@ -42,19 +44,19 @@ IdentifierList.prototype.toEDialect = function(writer, finalAnd) {
         case 0:
             return;
         case 1:
-            writer.append(this[0]);
+            writer.append(this[0].name);
             break;
         default:
             for(var i=0;i<this.length;i++) {
                 if(finalAnd && i==this.length-1)
                     break;
-                writer.append(this[i]);
+                writer.append(this[i].name);
                 writer.append(", ");
             }
             writer.trimLast(2);
             if(finalAnd) {
                 writer.append(" and ");
-                writer.append(this[this.length-1]);
+                writer.append(this[this.length-1].name);
             }
     }
 };
@@ -62,7 +64,7 @@ IdentifierList.prototype.toEDialect = function(writer, finalAnd) {
 IdentifierList.prototype.toODialect = function(writer) {
     if(this.length>0) {
         for(var i=0;i<this.length;i++) {
-            writer.append(this[i]);
+            writer.append(this[i].name);
             writer.append(", ");
         }
         writer.trimLast(2);

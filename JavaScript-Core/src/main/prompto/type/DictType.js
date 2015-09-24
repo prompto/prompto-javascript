@@ -1,3 +1,4 @@
+var Identifier = require("../grammar/Identifier").Identifier;
 var CollectionType = require("./CollectionType").CollectionType;
 var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = require("./IntegerType").IntegerType;
@@ -6,7 +7,7 @@ var ListType = require("./ListType").ListType;
 var EntryType = require("./EntryType").EntryType;
 
 function DictType(itemType) {
-	CollectionType.call(this, itemType.name+"{}", itemType);
+	CollectionType.call(this, new Identifier(itemType.name+"{}"), itemType);
 	this.itemType = itemType;
 	return this;
 }

@@ -2,8 +2,8 @@ var Argument = require("./Argument").Argument;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodType = require("../type/MethodType").MethodType;
 
-function MethodArgument(name) {
-	Argument.call(this, name);
+function MethodArgument(id) {
+	Argument.call(this, id);
 	return this;
 }
 
@@ -53,7 +53,7 @@ MethodArgument.prototype.check = function(context) {
 };
 
 MethodArgument.prototype.getType = function(context) {
-	return new MethodType(context,this.name);
+	return new MethodType(context,this.id);
 };
 
 exports.MethodArgument = MethodArgument;

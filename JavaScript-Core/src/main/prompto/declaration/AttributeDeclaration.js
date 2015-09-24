@@ -2,8 +2,8 @@ var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var InternalError = require("../error/InternalError").InternalError;
 var Value = require("../value/Value").Value;
 
-function AttributeDeclaration(name, type, constraint) {
-	BaseDeclaration.call(this, name);
+function AttributeDeclaration(id, type, constraint) {
+	BaseDeclaration.call(this, id);
 	this.type = type;
 	this.constraint = constraint;
 	return this;

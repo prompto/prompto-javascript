@@ -1,9 +1,9 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var EnumeratedNativeType = require("../type/EnumeratedNativeType").EnumeratedNativeType;
 
-function EnumeratedNativeDeclaration(name, derivedFrom, symbols) {
-	BaseDeclaration.call(this, name);
-	this.type = new EnumeratedNativeType(name, derivedFrom);
+function EnumeratedNativeDeclaration(id, derivedFrom, symbols) {
+	BaseDeclaration.call(this, id);
+	this.type = new EnumeratedNativeType(id, derivedFrom);
 	this.symbols = symbols;
 	for(var i=0;i<symbols.length;i++) {
 		symbols[i].type = this.type;

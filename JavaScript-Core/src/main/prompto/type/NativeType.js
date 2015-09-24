@@ -1,7 +1,7 @@
 var BaseType = require("./BaseType").BaseType;
 
-function NativeType(name) {
-	BaseType.call(this, name);
+function NativeType(id) {
+	BaseType.call(this, id);
 	return this;
 }
 

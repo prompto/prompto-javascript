@@ -2,6 +2,7 @@ var VoidType = require("../type/VoidType").VoidType;
 var AnyType = require("../type/AnyType").AnyType;
 var JavaScriptType = require("./JavaScriptType").JavaScriptType;
 var getTypeName = require("./JavaScriptUtils").getTypeName;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function JavaScriptStatement(expression, isReturn) {
 	this.expression = expression;
@@ -24,7 +25,8 @@ JavaScriptStatement.prototype.interpret = function(context, returnType) {
 		return null;
 	}
 	if(result !== null) {
-		var type = new JavaScriptType(getTypeName(result));
+        var id = new Identifier(getTypeName(result));
+		var type = new JavaScriptType(id);
 		result = type.convertJavaScriptValueToPrestoValue(context, result, returnType);
 	}
 	return result;

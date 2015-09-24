@@ -133,7 +133,7 @@ SPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
-    var name = ctx.name.text;
+    var name = new grammar.Identifier(ctx.name.text);
     var stmts = this.getNodeValue(ctx.stmts);
     var exps = this.getNodeValue(ctx.exps);
     var errorName = this.getNodeValue(ctx.error);
@@ -162,7 +162,8 @@ SPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitVariable_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 
@@ -289,7 +290,8 @@ SPromptoBuilder.prototype.exitValueTupleItem = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+	this.setNodeValue(ctx, name);
 };
 
 
@@ -396,7 +398,7 @@ SPromptoBuilder.prototype.exitCategoryType = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitCategory_type = function(ctx) {
-	var name = ctx.getText();
+    var name = new grammar.Identifier(ctx.getText());
 	this.setNodeValue(ctx, new type.CategoryType(name));
 };
 
@@ -433,7 +435,8 @@ SPromptoBuilder.prototype.exitDerived_list = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitType_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+	this.setNodeValue(ctx, name);
 };
 
 

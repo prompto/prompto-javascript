@@ -74,7 +74,7 @@ ArgumentAssignment.prototype.check = function(context) {
 	var actual = context.getRegisteredValue(this.argument.name);
 	if(actual==null) {
         var actualType = this.expression.check(context);
-		context.registerValue(new Variable(this.argument.name, actualType));
+		context.registerValue(new Variable(this.argument.id, actualType));
 	} else {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
@@ -106,7 +106,7 @@ ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, chec
 		}
 	}
 	if(!actual.isAssignableTo(context, required) && (actual instanceof CategoryType)) {
-		expression = new MemberSelector(expression, name);
+		expression = new MemberSelector(expression, this.argument.id);
 	}
 	return expression;
 };

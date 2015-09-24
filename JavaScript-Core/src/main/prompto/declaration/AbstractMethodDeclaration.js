@@ -2,8 +2,8 @@ var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclara
 var VoidType = require("../type/VoidType").VoidType;
 var CodeArgument = require("../grammar/CodeArgument").CodeArgument;
 
-function AbstractMethodDeclaration(name, args, returnType) {
-	BaseMethodDeclaration.call(this, name, args, returnType);
+function AbstractMethodDeclaration(id, args, returnType) {
+	BaseMethodDeclaration.call(this, id, args, returnType);
 	return this;
 }
 

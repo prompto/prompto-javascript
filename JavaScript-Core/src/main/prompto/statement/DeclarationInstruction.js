@@ -41,7 +41,7 @@ DeclarationInstruction.prototype.interpret = function(context) {
 		var method = this.declaration;
 		context.registerMethodDeclaration(method);
 		var type = new MethodType(context,method);
-		context.registerValue(new Variable(method.name, type));
+		context.registerValue(new Variable(method.id, type));
 		context.setValue(method.name, new ClosureValue(context, method));
 		return null;
 	} else {

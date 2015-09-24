@@ -1,6 +1,6 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var TransientVariable = require("../runtime/TransientVariable").TransientVariable;
+var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var Integer = require("../value/Integer").Integer;
 
@@ -25,9 +25,9 @@ ForEachStatement.prototype.check = function(context) {
 ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 	var child = context.newChildContext();
 	var itemName = this.v2 == null ? this.v1 : this.v2;
-	context.registerValue(new TransientVariable(itemName, elemType));
+	context.registerValue(new Variable(itemName, elemType));
 	if (this.v2 != null) {
-		context.registerValue(new TransientVariable(this.v1, IntegerType.instance));
+		context.registerValue(new Variable(this.v1, IntegerType.instance));
 	}
 	return this.instructions.check(child);
 };
@@ -51,9 +51,9 @@ ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, cont
 	var iterator = src.getIterator(context);
 	while (iterator.hasNext()) {
 		var child = context.newChildContext();
-		child.registerValue(new TransientVariable(this.v1, elemType));
+		child.registerValue(new Variable(this.v1, elemType));
         var value = iterator.next();
-		child.setValue(this.v1, value);
+		child.setValue(this.v1.name, value);
 		value = this.instructions.interpret(child);
 		if (value != null) {
 			return value;
@@ -68,10 +68,10 @@ ForEachStatement.prototype.evaluateItemIteratorWithIndex = function(elemType, co
 	var index = 0;
 	while (iterator.hasNext()) {
 		var child = context.newChildContext();
-		child.registerValue(new TransientVariable(this.v2, elemType));
-		child.setValue(this.v2, iterator.next());
-		child.registerValue(new TransientVariable(this.v1, IntegerType.instance));
-		child.setValue(this.v1, new Integer(++index));
+		child.registerValue(new Variable(this.v2, elemType));
+		child.setValue(this.v2.name, iterator.next());
+		child.registerValue(new Variable(this.v1, IntegerType.instance));
+		child.setValue(this.v1.name, new Integer(++index));
 		var value = this.instructions.interpret(child);
 		if (value != null) {
 			return value;
@@ -86,10 +86,10 @@ ForEachStatement.prototype.toDialect = function(writer) {
 
 ForEachStatement.prototype.toODialect = function(writer) {
     writer.append("for each (");
-    writer.append(this.v1);
+    writer.append(this.v1.name);
     if(this.v2!=null) {
         writer.append(", ");
-        writer.append(this.v2);
+        writer.append(this.v2.name);
     }
     writer.append(" in ");
     this.source.toDialect(writer);
@@ -109,10 +109,10 @@ ForEachStatement.prototype.toODialect = function(writer) {
 
 ForEachStatement.prototype.toEDialect = function(writer) {
     writer.append("for each ");
-    writer.append(this.v1);
+    writer.append(this.v1.name);
     if(this.v2!=null) {
         writer.append(", ");
-        writer.append(this.v2);
+        writer.append(this.v2.name);
     }
     writer.append(" in ");
     this.source.toDialect(writer);
@@ -125,10 +125,10 @@ ForEachStatement.prototype.toEDialect = function(writer) {
 
 ForEachStatement.prototype.toSDialect = function(writer) {
     writer.append("for ");
-    writer.append(this.v1);
+    writer.append(this.v1.name);
     if(this.v2!=null) {
         writer.append(", ");
-        writer.append(this.v2);
+        writer.append(this.v2.name);
     }
     writer.append(" in ");
     this.source.toDialect(writer);

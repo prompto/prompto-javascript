@@ -12,8 +12,8 @@ exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
 }
 
-function BaseMethodDeclaration(name, args, returnType) {
-	BaseDeclaration.call(this, name);
+function BaseMethodDeclaration(id, args, returnType) {
+	BaseDeclaration.call(this, id);
     this.memberOf = null;
 	this.args = args || new ArgumentList();
 	this.returnType = returnType || VoidType.instance;

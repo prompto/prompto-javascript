@@ -146,7 +146,7 @@ EPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
-    var name = ctx.name.text;
+    var name = new grammar.Identifier(ctx.name.text);
     var stmts = this.getNodeValue(ctx.stmts);
     var exps = this.getNodeValue(ctx.exps);
     var errorName = this.getNodeValue(ctx.error);
@@ -174,7 +174,8 @@ EPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitVariable_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 EPromptoBuilder.prototype.exitList_literal = function(ctx) {
@@ -281,7 +282,8 @@ EPromptoBuilder.prototype.exitValueTupleItem = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 EPromptoBuilder.prototype.exitNative_symbol = function(ctx) {
@@ -349,10 +351,10 @@ EPromptoBuilder.prototype.exitPrimaryType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
+	var id = this.getNodeValue(ctx.name);
 	var type = this.getNodeValue(ctx.typ);
 	var match = this.getNodeValue(ctx.match);
-	this.setNodeValue(ctx, new declaration.AttributeDeclaration(name, type, match));
+	this.setNodeValue(ctx, new declaration.AttributeDeclaration(id, type, match));
 };
 
 EPromptoBuilder.prototype.exitNativeType = function(ctx) {
@@ -367,7 +369,7 @@ EPromptoBuilder.prototype.exitCategoryType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCategory_type = function(ctx) {
-	var name = ctx.getText();
+	var name = new grammar.Identifier(ctx.getText());
 	this.setNodeValue(ctx, new type.CategoryType(name));
 };
 
@@ -439,7 +441,8 @@ EPromptoBuilder.prototype.exitDerivedListItem = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitType_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 

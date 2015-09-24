@@ -14,14 +14,22 @@ exports.resolve = function() {
     CategoryType = require("../type/CategoryType").CategoryType;
 }
 
-function MemberSelector(parent, name) {
+function MemberSelector(parent, id) {
+    if(!id || !id.name)
+        throw "abc";
 	SelectorExpression.call(this, parent);
-	this.name = name;
+	this.id = id;
 	return this;
 }
 
 MemberSelector.prototype = Object.create(SelectorExpression.prototype);
 MemberSelector.prototype.constructor = MemberSelector;
+
+Object.defineProperty(MemberSelector.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 MemberSelector.prototype.toDialect = function(writer) {
     // ensure singletons are not treated as constructors

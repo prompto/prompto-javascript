@@ -1,4 +1,5 @@
 var NativeType = require("./NativeType").NativeType;
+var Identifier = require("../grammar/Identifier").Identifier;
 var AnyType = require("./AnyType").AnyType;
 var Bool = null;
 
@@ -7,7 +8,7 @@ exports.resolve = function() {
 }
 
 function BooleanType()  {
-	NativeType.call(this, "Boolean");
+	NativeType.call(this, new Identifier("Boolean"));
 	return this;
 }
 

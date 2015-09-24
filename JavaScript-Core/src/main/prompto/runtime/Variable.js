@@ -1,12 +1,18 @@
 var BaseType = require("../type/BaseType").BaseType;
 
-function Variable (name, type) {
+function Variable (id, type) {
     if(!(type instanceof BaseType))
         throw new Exception();
-    this.name = name;
+    this.id = id;
 	this.type = type;
 	return this;
 }
+
+Object.defineProperty(Variable.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 Variable.prototype.toString = function() {
 	return this.name;

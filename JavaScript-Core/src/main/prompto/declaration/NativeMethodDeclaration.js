@@ -1,8 +1,8 @@
 var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var VoidType = require("../type/VoidType").VoidType;
 
-function NativeMethodDeclaration(name, args, returnType, stmts) {
-	ConcreteMethodDeclaration.call(this, name, args,returnType, stmts);
+function NativeMethodDeclaration(id, args, returnType, stmts) {
+	ConcreteMethodDeclaration.call(this, id, args,returnType, stmts);
 	return this;
 }
 

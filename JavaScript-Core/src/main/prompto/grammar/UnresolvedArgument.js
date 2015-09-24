@@ -4,11 +4,17 @@ var AttributeArgument = require("./AttributeArgument").AttributeArgument;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 var MethodArgument = require("./MethodArgument").MethodArgument;
 
-function UnresolvedArgument(name) {
-	this.name = name;
+function UnresolvedArgument(id) {
+	this.id = id;
 	this.resolved = null;
 	return this;
 }
+
+Object.defineProperty(UnresolvedArgument.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 /*
 @Override
@@ -63,9 +69,9 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
 	}
 	var named = context.getRegisteredDeclaration(this.name);
 	if(named instanceof AttributeDeclaration) {
-		this.resolved = new AttributeArgument(this.name);
+		this.resolved = new AttributeArgument(this.id);
 	} else if(named instanceof MethodDeclarationMap) {
-		this.resolved = new MethodArgument(this.name);
+		this.resolved = new MethodArgument(this.id);
 	} else {
 		throw new SyntaxError("Unknown identifier:" + this.name);
 	}

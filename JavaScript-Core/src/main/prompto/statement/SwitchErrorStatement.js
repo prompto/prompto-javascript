@@ -1,12 +1,13 @@
 var BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
 var ErrorVariable = require("../runtime/ErrorVariable").ErrorVariable;
+var Identifier = require("../grammar/Identifier").Identifier;
 var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 var VoidType = require("../type/VoidType").VoidType;
 var ExecutionError = require("../error/ExecutionError").ExecutionError;
 
-function SwitchErrorStatement(errorName, instructions, handlers, anyStmts, alwaysStmts) {
+function SwitchErrorStatement(errorId, instructions, handlers, anyStmts, alwaysStmts) {
 	BaseSwitchStatement.call(this, handlers, anyStmts);
-	this.errorName = errorName;
+	this.errorId = errorId;
 	this.instructions = instructions || null;
 	this.alwaysInstructions = alwaysStmts || null;
 	return null;
@@ -17,12 +18,12 @@ SwitchErrorStatement.prototype.constructor = SwitchErrorStatement;
 
 SwitchErrorStatement.prototype.checkSwitchCasesType = function(context) {
 	var local = context.newLocalContext();
-	local.registerValue(new ErrorVariable(this.errorName));
+	local.registerValue(new ErrorVariable(this.errorId));
 	BaseSwitchStatement.prototype.checkSwitchCasesType.call(this, local);
 };
 
 SwitchErrorStatement.prototype.checkSwitchType = function(context) {
-	return new EnumeratedCategoryType("Error");
+	return new EnumeratedCategoryType(new Identifier("Error"));
 };
 
 SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
@@ -31,7 +32,7 @@ SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
 		types[type.name] = type;
 	}
 	var local = context.newLocalContext();
-	local.registerValue(new ErrorVariable(this.errorName));
+	local.registerValue(new ErrorVariable(this.errorId));
 	BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
 	if(this.alwaysInstructions!=null) {
 		type = this.alwaysInstructions.check(context);
@@ -68,19 +69,19 @@ SwitchErrorStatement.prototype.populateError = function(e, context) {
 		args.add(new ArgumentAssignment(new UnresolvedArgument("text"), new TextLiteral(e.message)));
 		error = new ConstructorExpression(new CategoryType("Error"), args);
 	}
-	if(context.getRegisteredValue(this.errorName)==null) {
-		context.registerValue(new ErrorVariable(this.errorName));
+	if(context.getRegisteredValue(this.errorId)==null) {
+		context.registerValue(new ErrorVariable(this.errorId));
 	}
 	if(error.interpret) {
 		error = error.interpret(context);
 	}
-	context.setValue(this.errorName, error);
+	context.setValue(this.errorId, error);
 	return error;
 };
 
 SwitchErrorStatement.prototype.toODialect = function(writer) {
     writer.append("try (");
-    writer.append(this.errorName);
+    writer.append(this.errorId.name);
     writer.append(") {\n");
     writer.indent();
     this.instructions.toDialect(writer);
@@ -107,7 +108,7 @@ SwitchErrorStatement.prototype.toODialect = function(writer) {
 
 SwitchErrorStatement.prototype.toSDialect = function(writer) {
     writer.append("try ");
-    writer.append(this.errorName);
+    writer.append(this.errorId.name);
     writer.append(":\n");
     writer.indent();
     this.instructions.toDialect(writer);
@@ -131,7 +132,7 @@ SwitchErrorStatement.prototype.toSDialect = function(writer) {
 
 SwitchErrorStatement.prototype.toEDialect = function(writer) {
     writer.append("switch on ");
-    writer.append(this.errorName);
+    writer.append(this.errorId.name);
     writer.append(" doing:\n");
     writer.indent();
     this.instructions.toDialect(writer);

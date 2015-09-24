@@ -65,22 +65,22 @@ UnresolvedCall.prototype.resolve = function(context) {
 
 
 UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
-	var name = this.callable.name;
+	var id = this.callable.id;
     var decl = null;
     // if this happens in the context of a member method, then we need to check for category members first
     if(context.parent instanceof InstanceContext) {
-        decl = this.resolveUnresolvedMember(context.parent, name);
+        decl = this.resolveUnresolvedMember(context.parent, id.name);
         if(decl!=null)
-            return new MethodCall(new MethodSelector(null, name), this.assignments);
+            return new MethodCall(new MethodSelector(null, id), this.assignments);
     }
-	decl = context.getRegisteredDeclaration(name);
+	decl = context.getRegisteredDeclaration(id.name);
 	if(decl===null) {
-		throw new SyntaxError("Unknown name:" + name);
+		throw new SyntaxError("Unknown name:" + id.name);
 	}
 	if(decl instanceof CategoryDeclaration) {
-		return new ConstructorExpression(new CategoryType(name), false, this.assignments);
+		return new ConstructorExpression(new CategoryType(id), false, this.assignments);
 	} else {
-		return new MethodCall(new MethodSelector(null, name), this.assignments);
+		return new MethodCall(new MethodSelector(null, id), this.assignments);
 	}
 };
 
@@ -95,7 +95,7 @@ UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
 
 
 UnresolvedCall.prototype.resolveMember = function(context) {
-	return new MethodCall(new MethodSelector(this.callable.parent, this.callable.name), this.assignments);
+	return new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.assignments);
 };
 
 

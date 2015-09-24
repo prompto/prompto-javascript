@@ -1,8 +1,8 @@
 var Symbol = require("./Symbol").Symbol;
 var Text = require("../value/Text").Text;
 
-function CategorySymbol(name, assignments) {
-	Symbol.call(this, name);
+function CategorySymbol(id, assignments) {
+	Symbol.call(this, id);
 	this.assignments = assignments;
 	this.type = null;
 	return this;
@@ -12,7 +12,7 @@ CategorySymbol.prototype = Object.create(Symbol.prototype);
 CategorySymbol.prototype.constructor = CategorySymbol;
 
 CategorySymbol.prototype.toDialect = function(writer) {
-    writer.append(this.symbol);
+    writer.append(this.name);
     writer.append(" ");
     this.assignments.toDialect(writer);
 };

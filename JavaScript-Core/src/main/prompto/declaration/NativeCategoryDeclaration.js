@@ -5,8 +5,8 @@ var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
 
-function NativeCategoryDeclaration(name, attributes, categoryBindings, attributeBindings, methods) {
-    ConcreteCategoryDeclaration.call(this, name, attributes, null, methods);
+function NativeCategoryDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
+    ConcreteCategoryDeclaration.call(this, id, attributes, null, methods);
 	this.categoryBindings = categoryBindings;
 	this.attributeBindings = attributeBindings;
 	this.bound = null;

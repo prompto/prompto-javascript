@@ -9,8 +9,8 @@ exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 }
 
-function ConcreteCategoryDeclaration(name, attributes, derivedFrom, methods) {
-	CategoryDeclaration.call(this, name, attributes);
+function ConcreteCategoryDeclaration(id, attributes, derivedFrom, methods) {
+	CategoryDeclaration.call(this, id, attributes);
 	this.derivedFrom = derivedFrom || null;
 	this.methodsMap = null;
 	this.methods = methods || [];
@@ -95,7 +95,8 @@ ConcreteCategoryDeclaration.prototype.hasDerivedAttribute = function(context, na
 		return false;
 	}
 	for(var i=0;i<this.derivedFrom.length;i++) {
-		if(ConcreteCategoryDeclaration.ancestorHasAttribute(this.derivedFrom[i],context,name)) {
+        var ancestor = this.derivedFrom[i].name;
+		if(ConcreteCategoryDeclaration.ancestorHasAttribute(ancestor, context, name)) {
 			return true;
 		}
 	}
@@ -164,9 +165,10 @@ ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context)
 ConcreteCategoryDeclaration.prototype.checkDerived = function(context) {
 	if(this.derivedFrom!=null) {
 		for(var i=0;i<this.derivedFrom.length;i++) {
-			var cd = context.getRegisteredDeclaration(this.derivedFrom[i]) || null;
+            var name = this.derivedFrom[i].name
+			var cd = context.getRegisteredDeclaration(name) || null;
 			if (cd == null) {
-				throw new SyntaxError("Unknown category: \"" + this.derivedFrom[i] + "\"");
+				throw new SyntaxError("Unknown category: \"" + name + "\"");
 			}
 		}
 	}
@@ -177,7 +179,7 @@ ConcreteCategoryDeclaration.prototype.isDerivedFrom = function(context, category
 		return false;
 	}
 	for(var i=0;i<this.derivedFrom.length;i++) {
-		var ancestor = this.derivedFrom[i];
+		var ancestor = this.derivedFrom[i].name;
 		if(ancestor==categoryType.name) {
 			return true;
 		}

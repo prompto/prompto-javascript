@@ -1,7 +1,7 @@
 var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 
-function GetterMethodDeclaration(name, statements) {
-    ConcreteMethodDeclaration.call(this, name, null, null, statements);
+function GetterMethodDeclaration(id, statements) {
+    ConcreteMethodDeclaration.call(this, id, null, null, statements);
 	return this;
 }
 

@@ -1,4 +1,5 @@
 var CollectionType = require("./CollectionType").CollectionType;
+var Identifier = require("../grammar/Identifier").Identifier;
 var IntegerType = null;
 
 exports.resolve = function() {
@@ -6,7 +7,7 @@ exports.resolve = function() {
 };
 
 function RangeType(itemType) {
-    CollectionType.call(this, itemType.name+"[..]",itemType);
+    CollectionType.call(this, new Identifier(itemType.name+"[..]"),itemType);
 	return this;
 }
 

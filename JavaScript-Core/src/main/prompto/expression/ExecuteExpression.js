@@ -3,15 +3,23 @@ var CodeExpression = require("../expression/CodeExpression").CodeExpression;
 var PrestoError = require("../error/PrestoError").PrestoError;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-function ExecuteExpression(name) {
+function ExecuteExpression(id) {
+    if(!id || !id.name)
+        throw "abc";
 	Section.call(this);
-	this.name = name;
+	this.id = id;
 	return this;
 }
 
 
 ExecuteExpression.prototype  = Object.create(Section.prototype);
 ExecuteExpression.prototype.constructor = ExecuteExpression;
+
+Object.defineProperty(ExecuteExpression.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 ExecuteExpression.prototype.toString = function() {
 	return "execute: " + this.name;

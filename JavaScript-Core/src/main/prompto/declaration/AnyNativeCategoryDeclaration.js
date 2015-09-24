@@ -1,7 +1,8 @@
 var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function AnyNativeCategoryDeclaration() {
-    NativeCategoryDeclaration.call(this, "Any", [], [], [], []);
+    NativeCategoryDeclaration.call(this, new Identifier("Any"), [], [], [], []);
     return this;
 }
 

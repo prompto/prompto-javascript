@@ -5,8 +5,8 @@ var ResourceContext = require("../runtime/Context").ResourceContext;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 
-function NativeResourceDeclaration(name, attributes, categoryBindings, attributeBindings, methods) {
-	NativeCategoryDeclaration.call(this, name, attributes, categoryBindings, attributeBindings, methods);
+function NativeResourceDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
+	NativeCategoryDeclaration.call(this, id, attributes, categoryBindings, attributeBindings, methods);
 	return this;
 }
 
@@ -15,7 +15,7 @@ NativeResourceDeclaration.prototype.constructor = NativeResourceDeclaration;
 
 
 NativeResourceDeclaration.prototype.getType = function(context) {
-	return new ResourceType(this.name);
+	return new ResourceType(this.id);
 };
 
 

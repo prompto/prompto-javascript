@@ -16,11 +16,19 @@ exports.resolve = function() {
 	ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
 }
 
-function UnresolvedIdentifier(name) {
-	this.name = name;
+function UnresolvedIdentifier(id) {
+    if(!id.name)
+        throw "abc";
+	this.id = id;
 	this.resolved = null;
 	return this;
 }
+
+Object.defineProperty(UnresolvedIdentifier.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 UnresolvedIdentifier.prototype.toString = function() {
 	return this.name;
@@ -102,7 +110,7 @@ UnresolvedIdentifier.prototype.resolveInstance = function(context) {
 
 UnresolvedIdentifier.prototype.resolveMethod = function(context) {
 	try {
-		var method = new MethodCall(new MethodSelector(null, this.name));
+		var method = new MethodCall(new MethodSelector(null, this.id));
 		method.check(context);
 		return method;
 	} catch(e) {
@@ -116,7 +124,7 @@ UnresolvedIdentifier.prototype.resolveMethod = function(context) {
 
 UnresolvedIdentifier.prototype.resolveConstructor = function(context) {
 	try {
-		var method = new ConstructorExpression(new CategoryType(this.name), false, null);
+		var method = new ConstructorExpression(new CategoryType(this.id), false, null);
 		method.check(context);
 		return method;
 	} catch(e) {
@@ -131,7 +139,7 @@ UnresolvedIdentifier.prototype.resolveConstructor = function(context) {
 UnresolvedIdentifier.prototype.resolveType = function(context) {
 	var decl = context.getRegisteredDeclaration(this.name);
 	if(decl instanceof CategoryDeclaration) {
-		return new TypeExpression(new CategoryType(this.name));
+		return new TypeExpression(new CategoryType(this.id));
 	} else if(decl instanceof EnumeratedNativeDeclaration) {
 		return new TypeExpression(decl.getType(context));
 	} else {
@@ -147,7 +155,7 @@ UnresolvedIdentifier.prototype.resolveType = function(context) {
 
 UnresolvedIdentifier.prototype.resolveSymbol = function(context) {
 	if(this.name==this.name.toUpperCase()) {
-		return new SymbolExpression(this.name);
+		return new SymbolExpression(this.id);
 	} else {
 		return null;
 	}

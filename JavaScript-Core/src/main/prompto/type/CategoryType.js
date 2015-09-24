@@ -1,4 +1,5 @@
 var UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
+var Identifier = require("../grammar/Identifier").Identifier;
 var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;
 var ConcreteCategoryDeclaration = null;
@@ -18,8 +19,8 @@ exports.resolve = function() {
 	ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 }
-function CategoryType(name) {
-	BaseType.call(this, name);
+function CategoryType(id) {
+	BaseType.call(this, id);
 	return this;
 }
 
@@ -217,12 +218,13 @@ CategoryType.prototype.isAnonymous = function() {
 
 CategoryType.prototype.isAssignableToAnonymousCategoryDeclaration = function(context, decl, other) {
 	// an anonymous category extends 1 and only 1 category
-	var baseName = other.derivedFrom[0];
+	var baseId = other.derivedFrom[0];
 	// check we derive from root category (if not extending 'Any')
-	if("any"!=baseName && !decl.isDerivedFrom(context,new CategoryType(baseName)))
+	if("any"!=baseId.name && !decl.isDerivedFrom(context,new CategoryType(baseId)))
 		return false;
 	for(var i=0;i<other.attributes.length;i++) {
-		if(!decl.hasAttribute(context,other.attributes[i])) {
+        var name = other.attributes[i].name;
+		if(!decl.hasAttribute(context, name)) {
 			return false;
 		}
 	}
@@ -275,7 +277,7 @@ CategoryType.prototype.sort = function(context, list, key) {
 	}
 	key = key || null;
 	if (key == null) {
-		key = new UnresolvedIdentifier("key");
+		key = new UnresolvedIdentifier(new Identifier("key"));
 	}
 	var keyname = key.toString();
 	var decl = this.getDeclaration(context);
@@ -329,7 +331,7 @@ CategoryType.prototype.findGlobalMethod = function(context, list, name) {
 		var exp = new ExpressionValue(this, this.newInstance(context));
 		var arg = new ArgumentAssignment(null, exp);
 		var args = new ArgumentAssignmentList(null, arg);
-		var proto = new MethodCall(new MethodSelector(null, name), args);
+		var proto = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
 		var finder = new MethodFinder(context, proto);
 		var decl = finder.findMethod(true);
 		return decl==null ? null : proto;

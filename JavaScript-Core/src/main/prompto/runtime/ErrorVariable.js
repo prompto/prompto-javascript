@@ -1,12 +1,13 @@
 var Variable = require("./Variable").Variable;
+var Identifier = require("../grammar/Identifier").Identifier;
 var EnumeratedCategoryType = null;
 
 exports.resolve = function() {
     EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 };
 
-function ErrorVariable(name) {
-	Variable.call(this, name, new EnumeratedCategoryType("Error"));
+function ErrorVariable(id) {
+	Variable.call(this, id, new EnumeratedCategoryType(new Identifier("Error")));
 	return this;
 }
 
@@ -18,7 +19,7 @@ ErrorVariable.prototype.toString = function() {
 };
 
 ErrorVariable.prototype.getType = function(context) {
-	return new EnumeratedCategoryType("Error");
+	return new EnumeratedCategoryType(new Identifier("Error"));
 };
 
 exports.ErrorVariable = ErrorVariable;

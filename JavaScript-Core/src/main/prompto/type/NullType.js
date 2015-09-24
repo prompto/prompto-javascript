@@ -1,7 +1,8 @@
 var BaseType = require("./BaseType").BaseType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function NullType() {
-    BaseType.call(this, "Null");
+    BaseType.call(this, new Identifier("Null"));
     return this;
 }
 

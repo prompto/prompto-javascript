@@ -2,8 +2,8 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CodeType = require("../type/CodeType").CodeType;
 var Argument = require("./Argument").Argument;
 
-function CodeArgument(name) {
-	Argument.call(this, name);
+function CodeArgument(id) {
+	Argument.call(this, id);
 	return this;
 }
 

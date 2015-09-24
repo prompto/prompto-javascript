@@ -1,8 +1,8 @@
 var CategoryType = require("./CategoryType").CategoryType;
 
 
-function EnumeratedCategoryType(name) {
-	CategoryType.call(this, name);
+function EnumeratedCategoryType(id) {
+	CategoryType.call(this, id);
 	return this;
 }
 

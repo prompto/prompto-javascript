@@ -131,7 +131,7 @@ OPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
 };
 
 OPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
-    var name = ctx.name.text;
+    var name = new grammar.Identifier(ctx.name.text);
     var stmts = this.getNodeValue(ctx.stmts);
     var exps = this.getNodeValue(ctx.exps);
     var errorName = this.getNodeValue(ctx.error);
@@ -161,7 +161,8 @@ OPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitVariable_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 
@@ -247,8 +248,8 @@ OPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitVariableIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.InstanceExpression(name));
+	var id = this.getNodeValue(ctx.name);
+	this.setNodeValue(ctx, new expression.InstanceExpression(id.name));
 };
 
 
@@ -287,7 +288,8 @@ OPromptoBuilder.prototype.exitValueTupleItem = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 
@@ -386,7 +388,7 @@ OPromptoBuilder.prototype.exitCategoryType = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitCategory_type = function(ctx) {
-	var name = ctx.getText();
+    var name = new grammar.Identifier(ctx.getText());
 	this.setNodeValue(ctx, new type.CategoryType(name));
 };
 
@@ -447,7 +449,8 @@ OPromptoBuilder.prototype.exitDerivedListItem = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitType_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 

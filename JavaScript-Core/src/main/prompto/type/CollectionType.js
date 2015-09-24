@@ -1,8 +1,8 @@
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 
-function CollectionType(name, itemType) {
-	NativeType.call(this, name);
+function CollectionType(id, itemType) {
+	NativeType.call(this, id);
 	this.itemType = itemType;
 	return this;
 }

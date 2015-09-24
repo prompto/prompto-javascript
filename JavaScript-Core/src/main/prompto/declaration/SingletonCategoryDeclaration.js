@@ -1,7 +1,7 @@
 var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 
-function SingletonCategoryDeclaration(name, attributes, methods) {
-    ConcreteCategoryDeclaration.call(this, name, attributes, null, methods);
+function SingletonCategoryDeclaration(id, attributes, methods) {
+    ConcreteCategoryDeclaration.call(this, id, attributes, null, methods);
     return this;
 }
 

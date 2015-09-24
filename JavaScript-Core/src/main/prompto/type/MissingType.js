@@ -1,7 +1,8 @@
 var NativeType = require("./NativeType").NativeType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function MissingType() {
-	NativeType.call(this, "*");
+	NativeType.call(this, new Identifier("*"));
 	return this;
 }
 

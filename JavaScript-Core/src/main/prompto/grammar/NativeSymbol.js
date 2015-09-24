@@ -2,8 +2,8 @@ var Symbol = require("./Symbol").Symbol;
 var Dialect = require("../parser/Dialect").Dialect;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-function NativeSymbol(name, expression) {
-	Symbol.call(this, name);
+function NativeSymbol(id, expression) {
+	Symbol.call(this, id);
 	this.expression = expression;
 	this.type = null;
 	return this;
@@ -17,7 +17,7 @@ NativeSymbol.prototype.toString = function() {
 };
 
 NativeSymbol.prototype.toDialect = function(writer) {
-    writer.append(this.symbol);
+    writer.append(this.name);
     switch(writer.dialect) {
         case Dialect.E:
             writer.append(" with ");

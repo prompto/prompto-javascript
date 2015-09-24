@@ -6,9 +6,10 @@ var RangeType = require("./RangeType").RangeType;
 var AnyType = require("./AnyType").AnyType;
 var DateRange = require("../value/DateRange").DateRange;
 var LocalDate = require("../value/LocalDate").LocalDate;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function DateType()  {
-	NativeType.call(this, "Date");
+	NativeType.call(this, new Identifier("Date"));
 	return this;
 }
 

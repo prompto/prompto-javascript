@@ -2,7 +2,7 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 var Value = require("./Value").Value;
 
 function NativeInstance(declaration, instance) {
-	Value.call(this,new CategoryType(declaration.name));
+	Value.call(this,new CategoryType(declaration.id));
 	this.declaration = declaration;
 	this.instance = instance || this.makeInstance();
 	return this;
@@ -17,7 +17,7 @@ NativeInstance.prototype.makeInstance = function() {
 };
 
 NativeInstance.prototype.getType = function() {
-	return new CategoryType(this.declaration.name);
+	return new CategoryType(this.declaration.id);
 };
 
 // don't call getters from getters, so register them

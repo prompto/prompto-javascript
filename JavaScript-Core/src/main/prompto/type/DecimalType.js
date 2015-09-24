@@ -3,13 +3,14 @@ var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = null; // circular dependency
 var AnyType = require("./AnyType").AnyType;
 var Decimal = require("../value/Decimal").Decimal;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
 	IntegerType = require("./IntegerType").IntegerType;
 }
 
 function DecimalType()  {
-	NativeType.call(this, "Decimal");
+	NativeType.call(this, new Identifier("Decimal"));
 	return this;
 }
 

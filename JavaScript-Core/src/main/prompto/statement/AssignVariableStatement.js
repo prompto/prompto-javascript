@@ -4,16 +4,24 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
 
-function AssignVariableStatement(name, expression) {
+function AssignVariableStatement(id, expression) {
+    if(!id || !id.name)
+        throw "abc";
 	SimpleStatement.call(this);
-	this.name = name;
+	this.id = id;
 	this.expression = expression;
 	return this;
 }
 
+
 AssignVariableStatement.prototype = Object.create(SimpleStatement.prototype);
 AssignVariableStatement.prototype.constructor = AssignVariableStatement;
 
+Object.defineProperty(AssignVariableStatement.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 AssignVariableStatement.prototype.toDialect = function(writer) {
     writer.append(this.name);

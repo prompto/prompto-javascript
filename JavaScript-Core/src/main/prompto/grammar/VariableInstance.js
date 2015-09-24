@@ -2,10 +2,16 @@ var Variable = require("../runtime/Variable").Variable;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
-function VariableInstance(name) {
-	this.name = name;
+function VariableInstance(id) {
+	this.id = id;
 	return this;
 }
+
+Object.defineProperty(VariableInstance.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 VariableInstance.prototype.toDialect = function(writer, expression) {
     if(expression!=null) try {
@@ -28,7 +34,7 @@ VariableInstance.prototype.checkAssignValue = function(context, expression) {
 	var actual = context.getRegisteredValue(this.name);
 	if(actual==null) {
 		expression.check(context);
-		context.registerValue(new Variable(this.name, type));
+		context.registerValue(new Variable(this.id, type));
 	} else {
 		// need to check type compatibility
 		type.checkAssignableTo(context,actual.type);
@@ -54,7 +60,7 @@ public void checkAssignElement(Context context) throws SyntaxError {
 VariableInstance.prototype.assign = function(context, expression) {
 	var value = expression.interpret(context);
 	if(context.getRegisteredValue(this.name)==null) {
-		context.registerValue(new Variable(this.name, value.type));
+		context.registerValue(new Variable(this.id, value.type));
 	}
 	context.setValue(this.name, value);
 };

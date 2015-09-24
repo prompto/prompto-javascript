@@ -4,16 +4,16 @@ var BooleanType = require("../type/BooleanType").BooleanType;
 var ListType = require("../type/ListType").ListType;
 var TupleType = require("../type/TupleType").TupleType;
 var SetType = require("../type/SetType").SetType;
-var TransientVariable = require("../runtime/TransientVariable").TransientVariable;
+var Variable = require("../runtime/Variable").Variable;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var ListValue = require("../value/ListValue").ListValue;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var SetValue = require("../value/SetValue").SetValue;
 var Bool = require("../value/Bool").Bool;
 
-function FetchExpression(itemName, source, filter) {
+function FetchExpression(itemId, source, filter) {
 	Section.call(this);
-	this.itemName = itemName;
+	this.itemId = itemId;
 	this.source = source;
 	this.filter = filter;
 	return this;
@@ -24,7 +24,7 @@ FetchExpression.prototype.constructor = FetchExpression;
 
 
 FetchExpression.prototype.toDialect = function(dialect) {
-	return "fetch any " + this.itemName + " from " + this.source.toString() + " where " + this.filter.toString();
+	return "fetch any " + this.itemId + " from " + this.source.toString() + " where " + this.filter.toString();
 };
 
 FetchExpression.prototype.check = function(context) {
@@ -33,7 +33,7 @@ FetchExpression.prototype.check = function(context) {
 		throw new SyntaxError("Expecting a list type as data source !");
 	}
 	var local = context.newLocalContext();
-	local.registerValue(new TransientVariable(this.itemName,listType.itemType));
+	local.registerValue(new Variable(this.itemId,listType.itemType));
 	var filterType = this.filter.check(local);
 	if(filterType!=BooleanType.instance) {
 		throw new SyntaxError("Filtering expresion must return a boolean !");
@@ -56,12 +56,12 @@ FetchExpression.prototype.interpret = function(context) {
 	var itemType = listType.itemType;
 	var result = new ListValue(itemType);
 	var local = context.newLocalContext();
-	var item = new TransientVariable(this.itemName, itemType);
+	var item = new Variable(this.itemId, itemType);
 	local.registerValue(item);
 	var iter = list.getIterator(context);
 	while(iter.hasNext()) {
 		var o = iter.next();
-		local.setValue(this.itemName, o);
+		local.setValue(this.itemId, o);
 		var test = this.filter.interpret(local);
 		if(!(test instanceof Bool)) {
 			throw new InternalError("Illegal test result: " + test);
@@ -79,7 +79,7 @@ FetchExpression.prototype.toDialect = function(writer) {
 
 FetchExpression.prototype.toEDialect = function(writer) {
     writer.append("fetch any ");
-    writer.append(this.itemName);
+    writer.append(this.itemId.name);
     writer.append(" from ");
     this.source.toDialect(writer);
     writer.append(" where ");
@@ -89,7 +89,7 @@ FetchExpression.prototype.toEDialect = function(writer) {
 
 FetchExpression.prototype.toODialect = function(writer) {
     writer.append("fetch (");
-    writer.append(this.itemName);
+    writer.append(this.itemId.name);
     writer.append(")");
     writer.append(" from ");
     this.source.toDialect(writer);
@@ -99,7 +99,7 @@ FetchExpression.prototype.toODialect = function(writer) {
 
 FetchExpression.prototype.toSDialect = function(writer) {
     writer.append("fetch ");
-    writer.append(this.itemName);
+    writer.append(this.itemId.name);
     writer.append(" from ");
     this.source.toDialect(writer);
     writer.append(" where ");

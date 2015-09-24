@@ -1,9 +1,10 @@
 var BaseType = require("./BaseType").BaseType;
 var BooleanType = require("./BooleanType").BooleanType;
 var TextType = require("./TextType").TextType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function EntryType(itemType) {
-	BaseType.call(this, itemType.name + "{}[]");
+	BaseType.call(this, new Identifier(itemType.name + "{}[]"));
 	this.itemType = itemType;
 	return this;
 }

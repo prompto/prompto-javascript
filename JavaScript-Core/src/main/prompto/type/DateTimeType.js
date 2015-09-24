@@ -6,9 +6,10 @@ var TextType = require("./TextType").TextType;
 var DateType = require("./DateType").DateType;
 var TimeType = require("./TimeType").TimeType;
 var AnyType = require("./AnyType").AnyType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function DateTimeType()  {
-	NativeType.call(this, "DateTime");
+	NativeType.call(this, new Identifier("DateTime"));
 	return this;
 }
 

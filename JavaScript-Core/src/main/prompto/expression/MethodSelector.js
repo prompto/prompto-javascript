@@ -13,8 +13,8 @@ exports.resolve = function() {
     InstanceContext = require("../runtime/Context").InstanceContext;
 };
 
-function MethodSelector(parent, name) {
-	MemberSelector.call(this, parent,name);
+function MethodSelector(parent, id) {
+	MemberSelector.call(this, parent, id);
 	return this;
 }
 

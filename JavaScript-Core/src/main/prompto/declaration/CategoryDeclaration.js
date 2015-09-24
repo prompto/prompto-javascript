@@ -2,8 +2,8 @@ var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CategoryType = require("../type/CategoryType").CategoryType;
 
-function CategoryDeclaration(name, attributes) {
-	BaseDeclaration.call(this, name);
+function CategoryDeclaration(id, attributes) {
+	BaseDeclaration.call(this, id);
 	this.attributes = attributes || null;
 	this.derivedFrom = null;
 }
@@ -19,21 +19,25 @@ CategoryDeclaration.prototype.register = function(context) {
 CategoryDeclaration.prototype.check = function(context) {
 	if(this.attributes!=null) {
 		for(var i=0;i<this.attributes.length;i++) {
-			var ad = context.getRegisteredDeclaration(this.attributes[i]);
+            var name = this.attributes[i].name;
+			var ad = context.getRegisteredDeclaration(name);
 			if (ad == null) {
-				throw new SyntaxError("Unknown attribute: \"" + this.attributes[i] + "\"");
+				throw new SyntaxError("Unknown attribute: \"" + name + "\"");
 			}
 		}
 	}
-	return new CategoryType(this.name);
+	return new CategoryType(this.id);
 }
 
 CategoryDeclaration.prototype.getType = function(context) {
-	return new CategoryType(this.name);
+	return new CategoryType(this.id);
 };
 
 CategoryDeclaration.prototype.hasAttribute = function(context, name) {
-	 return this.attributes!=null && this.attributes.indexOf(name)>=0;
+	if(this.attributes==null)
+        return false;
+    var names = this.attributes.map(function(attr) { return attr.name; });
+    return names.indexOf(name)>=0;
 };
 
 CategoryDeclaration.prototype.hasMethod = function(context, key, object) {

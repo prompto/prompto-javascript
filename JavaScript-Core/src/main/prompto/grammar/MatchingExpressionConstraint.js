@@ -1,5 +1,6 @@
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var TransientVariable = require("../runtime/TransientVariable").TransientVariable;
+var Identifier = require("../grammar/Identifier").Identifier;
+var Variable = require("../runtime/Variable").Variable;
 var AnyType = require("../type/AnyType").AnyType;
 
 function MatchingExpressionConstraint(expression) {
@@ -9,7 +10,7 @@ function MatchingExpressionConstraint(expression) {
 
 MatchingExpressionConstraint.prototype.checkValue = function(context, value) {
 	var child = context.newChildContext();
-	child.registerValue(new TransientVariable("value", AnyType.instance));
+	child.registerValue(new Variable(new Identifier("value"), AnyType.instance));
 	child.setValue("value", value);
 	var test = this.expression.interpret(child);
 	if(!test.value) {

@@ -1,9 +1,10 @@
 var CollectionType = require("./CollectionType").CollectionType;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function SetType(itemType) {
-	CollectionType.call(this, itemType.name+"<>", itemType);
+	CollectionType.call(this, new Identifier(itemType.name+"<>"), itemType);
 	this.itemType = itemType;
 	return this;
 }

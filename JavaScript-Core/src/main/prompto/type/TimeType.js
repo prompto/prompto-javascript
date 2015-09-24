@@ -5,9 +5,10 @@ var IntegerType = require("./IntegerType").IntegerType;
 var RangeType = require("./RangeType").RangeType;
 var TimeRange = require("../value/TimeRange").TimeRange;
 var Time = require("../value/Time").Time;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function TimeType()  {
-	NativeType.call(this, "Time");
+	NativeType.call(this, new Identifier("Time"));
 	return this;
 }
 

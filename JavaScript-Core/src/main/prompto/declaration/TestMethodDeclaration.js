@@ -1,8 +1,9 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
+var Identifier = require("../grammar/Identifier").Identifier;
 var VoidType = require("../type/VoidType").VoidType;
 
-function TestMethodDeclaration(name, stmts, exps, error) {
-    BaseDeclaration.call(this, name);
+function TestMethodDeclaration(id, stmts, exps, error) {
+    BaseDeclaration.call(this, id);
     this.statements = stmts;
     this.assertions = exps;
     this.error = error;
@@ -88,7 +89,7 @@ TestMethodDeclaration.prototype.interpretBody = function(context)
 TestMethodDeclaration.prototype.interpretError = function(context, ex)
 {
     var expectedError = this.error == null ? null : this.error.interpret (context);
-    var actual = ex.interpret (context, "__test_error__");
+    var actual = ex.interpret (context, new Identifier("__test_error__"));
     if (expectedError!=null && expectedError.equals (actual))
         this.printSuccess (context);
     else {

@@ -4,6 +4,7 @@ var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Variable = require("../runtime/Variable").Variable;
+var Identifier = require("../grammar/Identifier").Identifier;
 var Operator = require("../grammar/Operator").Operator;
 var Decimal = require("./Decimal").Decimal;
 var Integer = require("./Integer").Integer;
@@ -14,7 +15,7 @@ exports.resolve = function() {
 };
 
 function ConcreteInstance(declaration) {
-	Value.call(this, new CategoryType(declaration.name));
+	Value.call(this, new CategoryType(declaration.id));
 	this.declaration = declaration;
     this.mutable = false;
 	this.values = {};
@@ -97,7 +98,7 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 	if(setter!=null) {
 		// use attribute name as parameter name for incoming value
 		context = context.newInstanceContext(this, null).newChildContext();
-		context.registerValue(new Variable(attrName, decl.getType()));
+		context.registerValue(new Variable(new Identifier(attrName), decl.getType()));
 		context.setValue(attrName, value);
 		value = setter.interpret(context);
 	}

@@ -8,6 +8,7 @@ var TextType = null;
 var AnyType = require("./AnyType").AnyType;
 var Integer = require("../value/Integer").Integer;
 var IntegerRange = require("../value/IntegerRange").IntegerRange;
+var Identifier = require("../grammar/Identifier").Identifier;
 var PeriodType = null;
 
 exports.resolve = function() {
@@ -17,7 +18,7 @@ exports.resolve = function() {
 }
 
 function IntegerType()  {
-	NativeType.call(this, "Integer");
+	NativeType.call(this, new Identifier("Integer"));
 	return this;
 }
 

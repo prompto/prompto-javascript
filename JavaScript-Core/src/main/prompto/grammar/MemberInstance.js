@@ -1,12 +1,20 @@
 var Document = require("../value/Document").Document;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 
-function MemberInstance(name) {
+function MemberInstance(id) {
+    if(!id || !id.name)
+        throw "abc";
 	this.parent = null;
-	this.name = name;
+	this.id = id;
 	return this;
 }
-	
+
+Object.defineProperty(MemberInstance.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
+
 
 MemberInstance.prototype.toString = function() {
 	return this.parent.toString() + "." + this.name;

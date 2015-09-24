@@ -6,13 +6,14 @@ var AnyType = require("./AnyType").AnyType;
 var Character = null;
 var RangeType = require("./RangeType").RangeType;
 var CharacterRange = require("../value/CharacterRange").CharacterRange;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
     Character = require("../value/Character").Character;
 };
 
 function CharacterType()  {
-	NativeType.call(this, "Character");
+	NativeType.call(this, new Identifier("Character"));
 	return this;
 }
 

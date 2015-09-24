@@ -5,8 +5,8 @@ var AttributeDeclaration = require("../declaration/AttributeDeclaration").Attrib
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var utils = require("../utils/index");
 
-function CategoryArgument(type, name, attributes) {
-	Argument.call(this, name);
+function CategoryArgument(type, id, attributes) {
+	Argument.call(this, id);
 	this.type = type;
 	this.attributes = attributes || null;
 	return this;
@@ -78,10 +78,10 @@ CategoryArgument.prototype.equals = function(obj) {
 CategoryArgument.prototype.register = function(context) {
 	var actual = context.getRegisteredValue(this.name);
 	if(actual!==null) {
-		throw new SyntaxError("Duplicate argument: \"" + name + "\"");
+		throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
 	}
 	if(this.attributes!=null) {
-		var declaration = new ConcreteCategoryDeclaration(this.name, this.attributes, new IdentifierList(this.type.name), null);
+		var declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(this.type.id), null);
 		context.registerDeclaration(declaration);
 	}
 	context.registerValue(this);

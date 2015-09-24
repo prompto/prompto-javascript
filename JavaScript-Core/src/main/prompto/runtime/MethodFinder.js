@@ -20,6 +20,7 @@ MethodFinder.prototype.findMethod = function(checkInstance) {
 	switch(compatibles.length) {
 	case 0:
 		// TODO refine
+        var compatibles = this.filterCompatible(candidates, checkInstance);
 		throw new SyntaxError("No matching prototype for:" + this.methodCall.toString());
 	case 1:
 		return compatibles[0];

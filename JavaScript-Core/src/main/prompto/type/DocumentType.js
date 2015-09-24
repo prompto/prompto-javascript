@@ -1,8 +1,9 @@
 var NativeType = require("./NativeType").NativeType;
 var AnyType = require("./AnyType").AnyType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function DocumentType() {
-	NativeType.call(this, "Document");
+	NativeType.call(this, new Identifier("Document"));
 	return this;
 }
 

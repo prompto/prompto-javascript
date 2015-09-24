@@ -1,8 +1,8 @@
 var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 
-function EnumeratedCategoryDeclaration(name, attrs, derived, symbols) {
-	ConcreteCategoryDeclaration.call(this, name, attrs, derived, null);
+function EnumeratedCategoryDeclaration(id, attrs, derived, symbols) {
+	ConcreteCategoryDeclaration.call(this, id, attrs, derived, null);
 	this.setSymbols(symbols);
 	return this;
 }
@@ -12,7 +12,7 @@ EnumeratedCategoryDeclaration.prototype.constructor = EnumeratedCategoryDeclarat
 
 EnumeratedCategoryDeclaration.prototype.setSymbols = function(symbols) {
 	this.symbols = symbols;
-	var type = new EnumeratedCategoryType(this.name);
+	var type = new EnumeratedCategoryType(this.id);
 	for(var i=0;i<this.symbols.length;i++) {
         this.symbols[i].type = type;
 	}
@@ -34,7 +34,7 @@ EnumeratedCategoryDeclaration.prototype.check = function(context) {
 };
 
 EnumeratedCategoryDeclaration.prototype.getType = function(context) {
-	return new EnumeratedCategoryType(this.name);
+	return new EnumeratedCategoryType(this.id);
 };
 
 EnumeratedCategoryDeclaration.prototype.toODialect = function(writer) {

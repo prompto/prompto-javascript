@@ -1,15 +1,19 @@
 var Section = require("../parser/Section").Section;
 
-function Symbol(symbol) {
+function Symbol(id) {
     Section.call(this);
-    this.symbol = symbol;
+    this.id = id;
     return this;
 }
 
 Symbol.prototype = Object.create(Section.prototype);
 Symbol.prototype.constructor = Symbol;
 
-Object.defineProperty(Symbol.prototype, "name", { get: function () { return this.symbol; } } );
+Object.defineProperty(Symbol.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 Symbol.prototype.register = function (context) {
     context.registerValue(this);
