@@ -15,8 +15,6 @@ exports.resolve = function() {
 }
 
 function MemberSelector(parent, id) {
-    if(!id || !id.name)
-        throw "abc";
 	SelectorExpression.call(this, parent);
 	this.id = id;
 	return this;

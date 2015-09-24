@@ -1,6 +1,4 @@
 function Argument(id) {
-    if(!id || !id.name)
-        throw "abc";
 	this.id = id;
     this.mutable = false;
     this.defaultExpression = null;

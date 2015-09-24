@@ -8,8 +8,6 @@ exports.resolve = function() {
 };
 
 function MethodExpression(id) {
-    if(!id || !id.name)
-        throw "abc";
 	this.id = id;
 	return this;
 }

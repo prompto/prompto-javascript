@@ -2,8 +2,6 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 
 function IdentifierList(item) {
-	if(!item || !item.name)
-        throw "abc";
     ObjectList.call(this);
 	item = item || null;
 	if(item!==null) {

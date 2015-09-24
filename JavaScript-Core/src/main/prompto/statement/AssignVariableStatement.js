@@ -5,8 +5,6 @@ var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
 
 function AssignVariableStatement(id, expression) {
-    if(!id || !id.name)
-        throw "abc";
 	SimpleStatement.call(this);
 	this.id = id;
 	this.expression = expression;

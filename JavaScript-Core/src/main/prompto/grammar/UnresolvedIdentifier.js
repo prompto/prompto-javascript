@@ -17,8 +17,6 @@ exports.resolve = function() {
 }
 
 function UnresolvedIdentifier(id) {
-    if(!id.name)
-        throw "abc";
 	this.id = id;
 	this.resolved = null;
 	return this;

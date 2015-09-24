@@ -4,8 +4,6 @@ var PrestoError = require("../error/PrestoError").PrestoError;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function ExecuteExpression(id) {
-    if(!id || !id.name)
-        throw "abc";
 	Section.call(this);
 	this.id = id;
 	return this;

@@ -1,8 +1,6 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function SymbolExpression(id) {
-	if(!id.name)
-        throw "abc";
     this.id = id;
 	return this;
 }

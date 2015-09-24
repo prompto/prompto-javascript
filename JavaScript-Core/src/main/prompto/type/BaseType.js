@@ -10,8 +10,6 @@ exports.resolve = function() {
 };
 
 function BaseType(id) {
-    if(!id.name)
-        throw "abc";
 	this.id = id;
 	return this;
 };

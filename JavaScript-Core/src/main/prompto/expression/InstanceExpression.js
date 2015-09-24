@@ -15,8 +15,6 @@ exports.resolve = function() {
 }
 
 function InstanceExpression(name) {
-    if(name.name)
-        throw "abc";
 	this.name = name;
 	return this;
 }

@@ -2,8 +2,6 @@ var Document = require("../value/Document").Document;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 
 function MemberInstance(id) {
-    if(!id || !id.name)
-        throw "abc";
 	this.parent = null;
 	this.id = id;
 	return this;

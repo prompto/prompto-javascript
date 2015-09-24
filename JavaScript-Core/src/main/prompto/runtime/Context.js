@@ -361,8 +361,6 @@ Context.prototype.readRegisteredValue = function(name) {
 
 
 Context.prototype.registerValue = function(value, checkDuplicate) {
-    if(!value || !value.name)
-        throw "abc";
     if(checkDuplicate === undefined)
         checkDuplicate = true;
 	if(checkDuplicate) {

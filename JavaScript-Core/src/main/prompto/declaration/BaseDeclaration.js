@@ -1,8 +1,6 @@
 var Section = require("../parser/Section").Section;
 
 function BaseDeclaration(id) {
-    if(!id || !id.name)
-        throw "abc";
 	Section.call(this);
 	this.id = id;
 	return this;
