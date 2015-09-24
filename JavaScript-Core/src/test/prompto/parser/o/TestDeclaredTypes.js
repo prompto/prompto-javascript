@@ -12,6 +12,7 @@ var DateType = prompto.type.DateType;
 var DateTimeType = prompto.type.DateTimeType
 var MissingType = prompto.type.MissingType;
 var AnyType = prompto.type.AnyType;
+var Identifier = prompto.grammar.Identifier;
 
 var context;
 
@@ -38,9 +39,9 @@ exports.testBooleanType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
@@ -56,9 +57,9 @@ exports.testIntegerType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
@@ -74,9 +75,9 @@ exports.testDecimalType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
@@ -92,9 +93,9 @@ exports.testStringType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
@@ -110,9 +111,9 @@ exports.testDateType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
@@ -128,9 +129,9 @@ exports.testInstantType = function(test) {
 	test.ok(st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
@@ -146,15 +147,15 @@ exports.testMissingType = function(test) {
 	test.ok(st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
 
 exports.testRootCategoryType = function(test) {
-	var st = new CategoryType("Root");
+	var st = new CategoryType(new Identifier("Root"));
 	test.ok(!st.isAssignableTo(context, BooleanType.instance));
 	test.ok(!st.isAssignableTo(context, IntegerType.instance));
 	test.ok(!st.isAssignableTo(context, DecimalType.instance));
@@ -163,15 +164,15 @@ exports.testRootCategoryType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
 
 exports.testDerivedCategoryType = function(test) {
-	var st = new CategoryType("Derived");
+	var st = new CategoryType(new Identifier("Derived"));
 	test.ok(!st.isAssignableTo(context, BooleanType.instance));
 	test.ok(!st.isAssignableTo(context, IntegerType.instance));
 	test.ok(!st.isAssignableTo(context, DecimalType.instance));
@@ -180,15 +181,15 @@ exports.testDerivedCategoryType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };
 
 
 exports.testUnrelatedCategoryType = function(test) {
-	var st = new CategoryType("Unrelated");
+	var st = new CategoryType(new Identifier("Unrelated"));
 	test.ok(!st.isAssignableTo(context, BooleanType.instance));
 	test.ok(!st.isAssignableTo(context, IntegerType.instance));
 	test.ok(!st.isAssignableTo(context, DecimalType.instance));
@@ -197,8 +198,8 @@ exports.testUnrelatedCategoryType = function(test) {
 	test.ok(!st.isAssignableTo(context, DateTimeType.instance));
 	test.ok(!st.isAssignableTo(context, MissingType.instance));
 	test.ok(st.isAssignableTo(context, AnyType.instance));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Root")));
-	test.ok(!st.isAssignableTo(context, new CategoryType("Derived")));
-	test.ok(st.isAssignableTo(context, new CategoryType("Unrelated")));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Root"))));
+	test.ok(!st.isAssignableTo(context, new CategoryType(new Identifier("Derived"))));
+	test.ok(st.isAssignableTo(context, new CategoryType(new Identifier("Unrelated"))));
 	test.done();
 };

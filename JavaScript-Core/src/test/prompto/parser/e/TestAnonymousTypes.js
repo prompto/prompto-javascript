@@ -3,6 +3,7 @@ require("../../../../exploded");
 var prompto = require("../../../../main/prompto/index");
 var parseString = require("../../parser/BaseEParserTest").parseString;
 
+var Identifier = prompto.grammar.Identifier;
 var IdentifierList = prompto.grammar.IdentifierList;
 var CategoryArgument = prompto.grammar.CategoryArgument;
 var AnyType = prompto.type.AnyType;
@@ -38,7 +39,7 @@ exports.tearDown = function(done) {
 
 exports.testAnonymousAnyType = function(test) {
 	// any x
-	var argument = new CategoryArgument(AnyType.instance, "x", null);
+	var argument = new CategoryArgument(AnyType.instance, new Identifier("x"), null);
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof AnyType);
@@ -50,18 +51,18 @@ exports.testAnonymousAnyType = function(test) {
 	test.ok(DateTimeType.instance.isAssignableTo(context,st));
 	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(AnyType.instance.isAssignableTo(context,st)); 
-	test.ok(new CategoryType("Simple").isAssignableTo(context,st));
-	test.ok(new CategoryType("Root").isAssignableTo(context,st));
-	test.ok(new CategoryType("DerivedWithOther").isAssignableTo(context,st));
-	test.ok(new CategoryType("DerivedWithName").isAssignableTo(context,st));
+	test.ok(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st));
+	test.ok(new CategoryType(new Identifier("Root")).isAssignableTo(context,st));
+	test.ok(new CategoryType(new Identifier("DerivedWithOther")).isAssignableTo(context,st));
+	test.ok(new CategoryType(new Identifier("DerivedWithName")).isAssignableTo(context,st));
 	test.done();
 }
 
 
 exports.testAnonymousAnyTypeWithAttribute = function(test) {
 	// any x with attribute: name
-	var list = new IdentifierList("name");
-	var argument = new CategoryArgument(AnyType.instance, "x", list);
+	var list = new IdentifierList(new Identifier("name"));
+	var argument = new CategoryArgument(AnyType.instance, new Identifier("x"), list);
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof CategoryType);
@@ -73,17 +74,17 @@ exports.testAnonymousAnyTypeWithAttribute = function(test) {
 	test.ok(!DateTimeType.instance.isAssignableTo(context,st));
 	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(!AnyType.instance.isAssignableTo(context,st)); // any type never compatible
-	test.ok(new CategoryType("Simple").isAssignableTo(context,st)); // since Simple has a name
-	test.ok(!new CategoryType("Root").isAssignableTo(context,st)); // since Root has no name
-	test.ok(!new CategoryType("DerivedWithOther").isAssignableTo(context,st)); // since DerivedWithOther has no name
-	test.ok(new CategoryType("DerivedWithName").isAssignableTo(context,st)); // since DerivedWithName has a name
+	test.ok(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st)); // since Simple has a name
+	test.ok(!new CategoryType(new Identifier("Root")).isAssignableTo(context,st)); // since Root has no name
+	test.ok(!new CategoryType(new Identifier("DerivedWithOther")).isAssignableTo(context,st)); // since DerivedWithOther has no name
+	test.ok(new CategoryType(new Identifier("DerivedWithName")).isAssignableTo(context,st)); // since DerivedWithName has a name
 	test.done();
 }
 
 
 exports.testAnonymousCategoryType = function(test) {
 	// Root x
-	var argument = new CategoryArgument(new CategoryType("Root"), "x", null);
+	var argument = new CategoryArgument(new CategoryType(new Identifier("Root")), new Identifier("x"), null);
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof CategoryType);
@@ -95,18 +96,18 @@ exports.testAnonymousCategoryType = function(test) {
 	test.ok(!DateTimeType.instance.isAssignableTo(context,st));
 	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(!AnyType.instance.isAssignableTo(context,st)); // any type never compatible
-	test.ok(!(new CategoryType("Simple").isAssignableTo(context,st)));  // since Simple does not extend Root
-	test.ok(new CategoryType("Root").isAssignableTo(context,st)); // since Root is Root
-	test.ok(new CategoryType("DerivedWithOther").isAssignableTo(context,st)); // since DerivedWithOther extends Root
-	test.ok(new CategoryType("DerivedWithName").isAssignableTo(context,st)); // since DerivedWithName extends Root
+	test.ok(!(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st)));  // since Simple does not extend Root
+	test.ok(new CategoryType(new Identifier("Root")).isAssignableTo(context,st)); // since Root is Root
+	test.ok(new CategoryType(new Identifier("DerivedWithOther")).isAssignableTo(context,st)); // since DerivedWithOther extends Root
+	test.ok(new CategoryType(new Identifier("DerivedWithName")).isAssignableTo(context,st)); // since DerivedWithName extends Root
 	test.done();
 }
 
 
 exports.testAnonymousCategoryTypeWithAttribute = function(test) {
 	// Root x with attribute: name
-	var list = new IdentifierList("name");
-	var argument = new CategoryArgument(new CategoryType("Root"), "test", list);
+	var list = new IdentifierList(new Identifier("name"));
+	var argument = new CategoryArgument(new CategoryType(new Identifier("Root")), new Identifier("test"), list);
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof CategoryType);
@@ -118,10 +119,10 @@ exports.testAnonymousCategoryTypeWithAttribute = function(test) {
 	test.ok(!DateTimeType.instance.isAssignableTo(context,st));
 	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(!AnyType.instance.isAssignableTo(context,st)); // any type never compatible
-	test.ok(!(new CategoryType("Simple").isAssignableTo(context,st)));  // since Simple does not extend Root
-	test.ok(!(new CategoryType("Root").isAssignableTo(context,st))); // since Root has no name
-	test.ok(!(new CategoryType("DerivedWithOther").isAssignableTo(context,st))); // since DerivedWithOther has no name
-	test.ok(new CategoryType("DerivedWithName").isAssignableTo(context,st)); // since DerivedWithName has a name
+	test.ok(!(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st)));  // since Simple does not extend Root
+	test.ok(!(new CategoryType(new Identifier("Root")).isAssignableTo(context,st))); // since Root has no name
+	test.ok(!(new CategoryType(new Identifier("DerivedWithOther")).isAssignableTo(context,st))); // since DerivedWithOther has no name
+	test.ok(new CategoryType(new Identifier("DerivedWithName")).isAssignableTo(context,st)); // since DerivedWithName has a name
 	test.done();
 }
 	

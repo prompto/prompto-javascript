@@ -24,6 +24,10 @@ IdentifierList.parse = function(ids) {
 	return result;
 };
 
+IdentifierList.prototype.names = function() {
+    return this.map(function(id) { return id.name; } );
+};
+
 IdentifierList.prototype.toDialect = function(writer, finalAnd) {
     finalAnd = finalAnd || false;
     switch(writer.dialect) {

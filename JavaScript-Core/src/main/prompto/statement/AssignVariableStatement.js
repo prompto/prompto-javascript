@@ -36,7 +36,7 @@ AssignVariableStatement.prototype.checkResource = function(context) {
 	}
 	var actual = context.getRegisteredValue(this.name);
 	if(actual==null) {
-		context.registerValue(new Variable(this.name, type));
+		context.registerValue(new Variable(this.id, type));
 	} else {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
@@ -72,7 +72,7 @@ AssignVariableStatement.prototype.check = function(context) {
 AssignVariableStatement.prototype.interpret = function(context) {
 	if(context.getRegisteredValue(this.name)==null) {
         var actualType = this.expression.check(context);
-		context.registerValue(new Variable(this.name, actualType));
+		context.registerValue(new Variable(this.id, actualType));
 	}
 	context.setValue(this.name, this.expression.interpret(context));
 	return null;

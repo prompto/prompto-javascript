@@ -209,7 +209,7 @@ exports.testCategory1Attribute = function (test) {
     test.equal("Person", cd.name);
     test.ok(!cd.derivedFrom);
     test.ok(cd.attributes);
-    test.ok(cd.attributes.indexOf("id") >= 0);
+    test.ok(cd.attributes.names().indexOf("id") >= 0);
     test.done();
 };
 
@@ -222,8 +222,8 @@ exports.testCategory2Attributes = function (test) {
     test.equal("Person", cd.name);
     test.ok(!cd.derivedFrom);
     test.ok(cd.attributes);
-    test.ok(cd.attributes.indexOf("id") >= 0);
-    test.ok(cd.attributes.indexOf("name") >= 0);
+    test.ok(cd.attributes.names().indexOf("id") >= 0);
+    test.ok(cd.attributes.names().indexOf("name") >= 0);
     test.done();
 };
 
@@ -235,9 +235,9 @@ exports.testCategory1Derived1Attribute = function (test) {
     test.ok(cd);
     test.equal("Employee", cd.name);
     test.ok(cd.derivedFrom);
-    test.ok(cd.derivedFrom.indexOf("Person") >= 0);
+    test.ok(cd.derivedFrom.names().indexOf("Person") >= 0);
     test.ok(cd.attributes);
-    test.ok(cd.attributes.indexOf("company") >= 0);
+    test.ok(cd.attributes.names().indexOf("company") >= 0);
     test.done();
 };
 
@@ -249,8 +249,8 @@ exports.testCategory2DerivedNoAttribute = function (test) {
     test.ok(cd);
     test.equal("Entrepreneur", cd.name);
     test.ok(cd.derivedFrom);
-    test.ok(cd.derivedFrom.indexOf("Person") >= 0);
-    test.ok(cd.derivedFrom.indexOf("Company") >= 0);
+    test.ok(cd.derivedFrom.names().indexOf("Person") >= 0);
+    test.ok(cd.derivedFrom.names().indexOf("Company") >= 0);
     test.ok(!cd.attributes);
     test.done();
 };
@@ -387,7 +387,8 @@ exports.testMethod1Parameter1Statement = function (test) {
     test.ok(ad);
     test.equal("printName", ad.name);
     test.ok(ad.args);
-    var expected = new prompto.grammar.CategoryArgument(new prompto.type.CategoryType("Person"), "p", null);
+    var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Person"));
+    var expected = new prompto.grammar.CategoryArgument(type, new prompto.grammar.Identifier("p"), null);
     test.ok(prompto.utils.arrayContains(ad.args, expected));
     test.ok(ad.statements);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
@@ -405,7 +406,10 @@ exports.testMethod1Extended1Statement = function (test) {
     test.ok(ad);
     test.equal("printName", ad.name);
     test.ok(ad.args);
-    var expected = new prompto.grammar.CategoryArgument(new prompto.type.CategoryType("Object"), "o", new prompto.grammar.IdentifierList("name"));
+    var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Object"));
+    var expected = new prompto.grammar.CategoryArgument(type,
+        new prompto.grammar.Identifier("o"),
+        new prompto.grammar.IdentifierList(new prompto.grammar.Identifier("name")));
     test.ok(prompto.utils.arrayContains(ad.args, expected));
     test.ok(ad.statements);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
@@ -423,9 +427,10 @@ exports.testMethod1Array1Statement = function (test) {
     test.ok(ad);
     test.equal("printName", ad.name);
     test.ok(ad.args);
+    var category = new prompto.type.CategoryType(new prompto.grammar.Identifier("Option"));
     var expected = new prompto.grammar.CategoryArgument(
-        new prompto.type.ListType(
-            new prompto.type.CategoryType("Option")), "options", null);
+        new prompto.type.ListType(category),
+        new prompto.grammar.Identifier("options"), null);
     test.ok(prompto.utils.arrayContains(ad.args, expected));
     test.ok(ad.statements);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
