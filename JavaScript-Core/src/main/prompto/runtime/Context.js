@@ -239,7 +239,7 @@ Context.prototype.unregisterDeclaration = function(declaration) {
         delete this.tests[name];
     else if(declaration instanceof BaseMethodDeclaration) {
         var map = this.declarations[name];
-        if(map.unregister(declaration))
+        if(map && map.unregister(declaration))
             delete this.declarations[name];
     } else
         delete this.declarations[name];
