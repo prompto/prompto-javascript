@@ -31,7 +31,7 @@ ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, l
 };
 
 ProblemCollector.prototype.reportDuplicate = function(name, declaration) {
-    var problem = this.readSection(declaration);
+    var problem = this.readSection(declaration.id);
     problem.type = "error";
     problem.message = "Duplicate name: " + name;
     this.collectProblem(problem);
