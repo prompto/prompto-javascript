@@ -147,6 +147,7 @@ EPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
     var name = new grammar.Identifier(ctx.name.text);
+    name.setFrom(this.path, ctx.name, ctx.name, parser.Dialect.E);
     var stmts = this.getNodeValue(ctx.stmts);
     var exps = this.getNodeValue(ctx.exps);
     var errorName = this.getNodeValue(ctx.error);

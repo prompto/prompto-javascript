@@ -10,8 +10,6 @@ function Section() {
 }
 
 Section.prototype.setFrom = function(path, start, end, dialect) {
-    if(!dialect)
-        throw "dialect!";
 	this.path = path;
 	this.start = new Location(start);
 	this.end = new Location(end, true);
