@@ -19,10 +19,13 @@ CategoryDeclaration.prototype.register = function(context) {
 CategoryDeclaration.prototype.check = function(context) {
 	if(this.attributes!=null) {
 		for(var i=0;i<this.attributes.length;i++) {
-            var name = this.attributes[i].name;
-			var ad = context.getRegisteredDeclaration(name);
+            var id = this.attributes[i];
+			var ad = context.getRegisteredDeclaration(id.name);
 			if (ad == null) {
-				throw new SyntaxError("Unknown attribute: \"" + name + "\"");
+                if(context.problemListener)
+                    context.problemListener.reportUnknownAttribute(id)
+				else
+                    throw new SyntaxError("Unknown attribute: \"" + id.name + "\"");
 			}
 		}
 	}

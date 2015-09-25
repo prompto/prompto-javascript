@@ -390,6 +390,7 @@ OPromptoBuilder.prototype.exitCategoryType = function(ctx) {
 
 OPromptoBuilder.prototype.exitCategory_type = function(ctx) {
     var name = new grammar.Identifier(ctx.getText());
+    this.buildSection(ctx, name);
 	this.setNodeValue(ctx, new type.CategoryType(name));
 };
 

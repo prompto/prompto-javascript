@@ -37,6 +37,22 @@ ProblemCollector.prototype.reportDuplicate = function(name, declaration) {
     this.collectProblem(problem);
 };
 
+ProblemCollector.prototype.reportUnknownAttribute = function(id) {
+    this.reportUnknownIdentifier(id, "attribute");
+};
+
+ProblemCollector.prototype.reportUnknownCategory = function(id) {
+    this.reportUnknownIdentifier(id, "category");
+};
+
+ProblemCollector.prototype.reportUnknownIdentifier = function(id, type) {
+    var problem = this.readSection(id);
+    problem.type = "error";
+    problem.message = "Unknown " + type + ": " + id.name;
+    this.collectProblem(problem);
+};
+
+
 ProblemCollector.prototype.readSection = function(section) {
     return {
             path : section.path,

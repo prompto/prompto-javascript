@@ -54,3 +54,25 @@ exports.testNonDuplicateMethod = function(test) {
         "\treturn 0\n";
     checkProblems(test, code);
 };
+
+exports.testUnknownCategory = function(test) {
+    var code = "define customer as: Customer attribute\n";
+    checkProblems(test, code, "Unknown category: Customer");
+};
+
+exports.testKnownCategory = function(test) {
+    var code = "define customer as: Text attribute\n";
+    checkProblems(test, code);
+};
+
+exports.testUnknownAttribute = function(test) {
+    var code = "define Customer as: category with attribute: cool\n";
+    checkProblems(test, code, "Unknown attribute: cool");
+};
+
+exports.testKnownAttribute = function(test) {
+    var code = "define name as: Text attribute\n" +
+        "define Customer as: category with attribute: name\n";
+    checkProblems(test, code);
+};
+

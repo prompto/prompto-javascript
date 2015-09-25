@@ -58,7 +58,10 @@ CategoryType.prototype.checkUnique = function(context) {
 CategoryType.prototype.getDeclaration = function(context) {
 	var actual = context.getRegisteredDeclaration(this.name) || null;
 	if(actual==null) {
-		throw new SyntaxError("Unknown category: \"" + this.name + "\"");
+        if(context.problemListener)
+            context.problemListener.reportUnknownCategory(this.id);
+        else
+		    throw new SyntaxError("Unknown category: \"" + this.name + "\"");
 	}
 	return actual;
 };
