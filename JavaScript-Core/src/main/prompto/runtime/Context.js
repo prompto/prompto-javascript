@@ -155,11 +155,9 @@ Context.prototype.getLocalCatalog = function() {
         else if(decl instanceof MethodDeclarationMap) {
             var method = {};
             method.name = decl.name;
-            var protos = [];
-            for (var proto in decl.methods)
-                protos.push(proto);
-            if(protos.length>1)
-                method.protos = protos;
+            method.protos = [];
+            for (var proto in decl.protos)
+                method.protos.push(proto);
             catalog.methods.push(method);
         }
     }
@@ -312,37 +310,37 @@ Context.prototype.getNativeBinding = function(type) {
 
 function MethodDeclarationMap(name) {
 	this.name = name;
-	this.methods = {};
+	this.protos = {};
 	return this;
 }
 
 MethodDeclarationMap.prototype.register = function(declaration, context) {
 	var proto = declaration.getProto(context);
-	var current = this.methods[proto] || null;
+	var current = this.protos[proto] || null;
 	if(current!==null) {
         if(context.problemListener)
             context.problemListener.reportDuplicate(declaration.name, declaration);
 		else
             throw new SyntaxError("Duplicate prototype for name: \"" + declaration.name + "\"");
 	}
-	this.methods[proto] = declaration;
+	this.protos[proto] = declaration;
 };
 
 MethodDeclarationMap.prototype.unregister = function(declaration) {
     // don't have a context, so need to iterate
-    for(var proto in this.methods) {
-        if(this.methods[proto]===declaration) {
-            delete this.methods[proto];
+    for(var proto in this.protos) {
+        if(this.protos[proto]===declaration) {
+            delete this.protos[proto];
             break;
         }
     }
-    return this.methods.length===0;
+    return this.protos.length===0;
 };
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context) {
 	var proto = declaration.getProto(context);
-	if(!(proto in this.methods)) {
-		this.methods[proto] = declaration;
+	if(!(proto in this.protos)) {
+		this.protos[proto] = declaration;
 	}
 };
 
