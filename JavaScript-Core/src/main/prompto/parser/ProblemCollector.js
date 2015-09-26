@@ -52,6 +52,12 @@ ProblemCollector.prototype.reportUnknownIdentifier = function(id, type) {
     this.collectProblem(problem);
 };
 
+ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
+    var problem = this.readSection(method.getSection());
+    problem.type = "error";
+    problem.message = "No matching prototype for: " + method.toString();
+    this.collectProblem(problem);
+};
 
 ProblemCollector.prototype.readSection = function(section) {
     return {

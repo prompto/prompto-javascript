@@ -1,11 +1,13 @@
 var Location = require("./Location").Location;
 
-function Section() {
-	this.path = "";
-	this.start = null;
-	this.end = null;
-    this.dialect = null;
-	this.breakpoint = false;
+function Section(copyFrom) {
+    if(!copyFrom)
+        copyFrom = { path : "", start : null, end : null, dialect : null, breakpoint : null };
+	this.path = copyFrom.path;
+	this.start = copyFrom.start;
+	this.end = copyFrom.end;
+    this.dialect = copyFrom.dialect;
+	this.breakpoint = copyFrom.breakpoint;
 	return this;
 }
 

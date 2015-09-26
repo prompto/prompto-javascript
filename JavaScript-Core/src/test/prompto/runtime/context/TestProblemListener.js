@@ -76,3 +76,18 @@ exports.testKnownAttribute = function(test) {
     checkProblems(test, code);
 };
 
+exports.testNoMatchingPrototype = function(test) {
+    var code = "define print as: method receiving: Text value doing:\n" +
+        "\ta = 3\n" +
+        "define m2 as: method doing:\n" +
+        "\tprint 22\n";
+    checkProblems(test, code, "No matching prototype for: print 22");
+};
+
+exports.testMatchingPrototype = function(test) {
+    var code = "define print as: method receiving: Text value doing:\n" +
+        "\ta = 3\n" +
+        "define m2 as: method doing:\n" +
+        "\tprint \"abc\"\n";
+    checkProblems(test, code);
+};

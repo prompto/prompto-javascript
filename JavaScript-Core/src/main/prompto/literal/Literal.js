@@ -1,9 +1,15 @@
+var Section = require("../parser/Section").Section;
+
 function Literal(text, value) {
+    Section.call(this);
 	this.text = text;
 	this.value = value;
 	return this;
 }
-	
+
+Literal.prototype = Object.create(Section.prototype);
+Literal.prototype.constructor = Section;
+
 Literal.prototype.toDialect = function(writer) {
     writer.append(this.text);
 };

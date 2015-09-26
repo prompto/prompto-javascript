@@ -7,6 +7,8 @@ var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDec
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var PrestoError = require("../error/PrestoError").PrestoError;
+var VoidType = require("../type/VoidType").VoidType;
+var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
 var Bool = require("../value/Bool").Bool;
 
@@ -19,6 +21,14 @@ function MethodCall(method, assignments) {
 
 MethodCall.prototype = Object.create(SimpleStatement.prototype);
 MethodCall.prototype.constructor = MethodCall;
+
+MethodCall.prototype.getSection = function() {
+    var section = new Section(this.method.id);
+    if(this.assignments && this.assignments.length) {
+        section.end = this.assignments[this.assignments.length-1].getSectionEnd();
+    }
+    return section;
+};
 
 MethodCall.prototype.toDialect = function(writer) {
     if (this.requiresInvoke(writer))
@@ -55,6 +65,8 @@ MethodCall.prototype.toString = function() {
 MethodCall.prototype.check = function(context) {
 	var finder = new MethodFinder(context,this);
 	var declaration = finder.findMethod(false);
+    if(!declaration)
+        return VoidType.instance;
     var local = this.method.newLocalCheckContext(context, declaration);
     return this.checkDeclaration(declaration, context, local);
 };

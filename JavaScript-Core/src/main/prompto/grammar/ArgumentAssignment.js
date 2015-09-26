@@ -21,6 +21,10 @@ Object.defineProperty(ArgumentAssignment.prototype, "name", {
 	}
 });
 
+ArgumentAssignment.prototype.getSectionEnd = function() {
+    return this.expression.end;
+};
+
 ArgumentAssignment.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
