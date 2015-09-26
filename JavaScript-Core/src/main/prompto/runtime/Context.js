@@ -433,6 +433,20 @@ Context.prototype.contextForValue = function(name) {
 	}
 };
 
+Context.prototype.contextForDeclaration = function(name) {
+    // resolve upwards, since local names override global ones
+    var actual = this.declarations[name] || null;
+    if(actual!==null) {
+        return this;
+    } else if(this.parent!==null) {
+        return this.parent.contextForDeclaration(name);
+    } else if(this.globals!==this) {
+        return this.globals.contextForDeclaration(name);
+    } else {
+        return null;
+    }
+};
+
 function ResourceContext() {
 	Context.call(this);
 	return this;
