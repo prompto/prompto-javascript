@@ -15,6 +15,9 @@ Object.defineProperty(BaseDeclaration.prototype, "name", {
     }
 });
 
+BaseDeclaration.prototype.unregister = function(context) {
+    context.unregisterDeclaration (this);
+};
 
 BaseDeclaration.prototype.toDialect = function(writer) {
     writer.toDialect(this);

@@ -31,6 +31,10 @@ BaseMethodDeclaration.prototype.getProto = function(context) {
     return "(" + s.join(", ") + ")";
 };
 
+BaseMethodDeclaration.prototype.unregister = function(context) {
+    context.unregisterMethodDeclaration (this, this.getProto(context));
+};
+
 BaseMethodDeclaration.prototype.register = function(context) {
 	context.registerMethodDeclaration(this);
 };

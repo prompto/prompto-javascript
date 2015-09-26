@@ -13,15 +13,17 @@ function TestMethodDeclaration(id, stmts, exps, error) {
 TestMethodDeclaration.prototype = Object.create(BaseDeclaration.prototype);
 TestMethodDeclaration.prototype.constructor = TestMethodDeclaration;
 
-TestMethodDeclaration.prototype.check = function(context)
-{
+TestMethodDeclaration.prototype.check = function(context) {
     // TODO
     return VoidType.instance;
 };
 
-TestMethodDeclaration.prototype.register = function(context)
-{
+TestMethodDeclaration.prototype.register = function(context) {
     context.registerTestDeclaration (this);
+};
+
+TestMethodDeclaration.prototype.unregister = function(context) {
+    context.unregisterTestDeclaration (this);
 };
 
 TestMethodDeclaration.prototype.getType = function(context)

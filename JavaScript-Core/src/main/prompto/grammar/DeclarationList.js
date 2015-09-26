@@ -14,28 +14,22 @@ DeclarationList.prototype = Object.create(ObjectList.prototype);
 DeclarationList.prototype.constructor = DeclarationList;
 
 DeclarationList.prototype.register = function(context) {
-	for(var i=0;i<this.length;i++) {
-		this[i].register(context);
-	}
+    this.map(function(decl) { decl.register(context); });
 };
 
 DeclarationList.prototype.unregister = function(context) {
-    for(var i=0;i<this.length;i++) {
-        context.unregisterDeclaration(this[i]);
-    }
+    this.map(function(decl) { decl.unregister(context); });
 };
 
 DeclarationList.prototype.check = function(context) {
-	for(var i=0;i<this.length;i++) {
-		this[i].check(context);
-	}
+    this.map(function(decl) { decl.check(context); });
 };
 
 DeclarationList.prototype.toDialect = function(writer) {
-    for(var i=0;i<this.length;i++) {
-        this[i].toDialect(writer);
+    this.map(function(decl) {
+        decl.toDialect(writer);
         writer.append("\n");
-    }
+    });
 };
 
 /*

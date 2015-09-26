@@ -231,16 +231,18 @@ Context.prototype.checkDuplicate = function(declaration) {
 }
 
 
+Context.prototype.unregisterTestDeclaration = function(declaration) {
+    delete this.tests[declaration.name];
+};
+
+Context.prototype.unregisterMethodDeclaration = function(declaration, proto) {
+    var map = this.declarations[declaration.name];
+    if(map && map.unregister(proto))
+        delete this.declarations[declaration.name];
+};
+
 Context.prototype.unregisterDeclaration = function(declaration) {
-    var name = declaration.name;
-    if(declaration instanceof TestMethodDeclaration)
-        delete this.tests[name];
-    else if(declaration instanceof BaseMethodDeclaration) {
-        var map = this.declarations[name];
-        if(map && map.unregister(declaration))
-            delete this.declarations[name];
-    } else
-        delete this.declarations[name];
+    delete this.declarations[declaration.name];
 };
 
 Context.prototype.registerMethodDeclaration = function(declaration) {
@@ -326,15 +328,9 @@ MethodDeclarationMap.prototype.register = function(declaration, context) {
 	this.protos[proto] = declaration;
 };
 
-MethodDeclarationMap.prototype.unregister = function(declaration) {
-    // don't have a context, so need to iterate
-    for(var proto in this.protos) {
-        if(this.protos[proto]===declaration) {
-            delete this.protos[proto];
-            break;
-        }
-    }
-    return this.protos.length===0;
+MethodDeclarationMap.prototype.unregister = function(proto) {
+    delete this.protos[proto];
+    return Object.getOwnPropertyNames(this.protos).length == 0;
 };
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context) {
