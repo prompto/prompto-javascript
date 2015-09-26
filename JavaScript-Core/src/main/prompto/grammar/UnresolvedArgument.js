@@ -64,17 +64,22 @@ UnresolvedArgument.prototype.checkValue = function(context, value) {
 }
 
 UnresolvedArgument.prototype.resolveAndCheck = function(context) {
-	if(this.resolved!=null) {
+	if(this.resolved!=null)
 		return;
-	}
+    // don't collect problems during resolution
+    var listener = context.problemListener;
+    context.problemListener = null;
+    // try out various solutions
 	var named = context.getRegisteredDeclaration(this.name);
 	if(named instanceof AttributeDeclaration) {
 		this.resolved = new AttributeArgument(this.id);
 	} else if(named instanceof MethodDeclarationMap) {
 		this.resolved = new MethodArgument(this.id);
-	} else {
-		throw new SyntaxError("Unknown identifier:" + this.name);
 	}
+    // restore listener
+    context.problemListener = listener;
+    if(this.resolved==null)
+		throw new SyntaxError("Unknown identifier:" + this.name);
 };
 
 exports.UnresolvedArgument = UnresolvedArgument;

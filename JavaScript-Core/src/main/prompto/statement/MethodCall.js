@@ -25,7 +25,7 @@ MethodCall.prototype.constructor = MethodCall;
 MethodCall.prototype.getSection = function() {
     var section = new Section(this.method.id);
     if(this.assignments && this.assignments.length) {
-        section.end = this.assignments[this.assignments.length-1].getSectionEnd();
+        section.end = this.assignments[this.assignments.length-1].end;
     }
     return section;
 };

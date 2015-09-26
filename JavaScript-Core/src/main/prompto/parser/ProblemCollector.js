@@ -64,6 +64,8 @@ ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
 };
 
 ProblemCollector.prototype.readSection = function(section) {
+    /*if(!section.end)
+        return null;*/
     return {
             path : section.path,
             startLine : section.start.line,

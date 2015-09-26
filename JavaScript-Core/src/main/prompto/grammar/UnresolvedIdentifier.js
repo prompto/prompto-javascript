@@ -6,6 +6,7 @@ var ConstructorExpression = null;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var SymbolExpression = require("../expression/SymbolExpression").SymbolExpression;
 var TypeExpression = require("../expression/TypeExpression").TypeExpression;
+var Section = require("../parser/Section").Section;
 var CategoryType = null;
 var MethodSelector = null;
 
@@ -17,10 +18,14 @@ exports.resolve = function() {
 }
 
 function UnresolvedIdentifier(id) {
+    Section.call(this);
 	this.id = id;
 	this.resolved = null;
 	return this;
 }
+
+UnresolvedIdentifier.prototype = Object.create(Section.prototype);
+UnresolvedIdentifier.prototype.constructor = UnresolvedIdentifier;
 
 Object.defineProperty(UnresolvedIdentifier.prototype, "name", {
     get : function() {
@@ -67,6 +72,10 @@ UnresolvedIdentifier.prototype.resolveAndCheck = function(context, forMember) {
 
 UnresolvedIdentifier.prototype.resolve = function(context, forMember) {
 	if(this.resolved==null) {
+        // don't collect problems during resolution
+        var listener = context.problemListener;
+        context.problemListener = null;
+        // try out various solutions
         this.resolved = this.resolveSymbol(context);
         if (this.resolved == null) {
             // is first char uppercase?
@@ -84,6 +93,8 @@ UnresolvedIdentifier.prototype.resolve = function(context, forMember) {
                 }
             }
         }
+        // restore listener
+        context.problemListener = listener;
     }
 	if(this.resolved==null) {
 		throw new SyntaxError("Unknown identifier:" + this.name);

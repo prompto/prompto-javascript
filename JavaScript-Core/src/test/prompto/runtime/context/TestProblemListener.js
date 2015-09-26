@@ -25,7 +25,6 @@ exports.testDuplicateCategory = function(test) {
     checkProblems(test, code, "Duplicate name: Person");
 };
 
-
 exports.testDuplicateTest = function(test) {
     var code = "define \"find id\" as: test method doing:\n" +
                 "\ta = 0\n" +
@@ -96,6 +95,16 @@ exports.testNoMatchingPrototype = function(test) {
         "define m2 as: method doing:\n" +
         "\tprint 22\n";
     checkProblems(test, code, "No matching prototype for: print 22");
+};
+
+exports.testNoMatchingPrototype2 = function(test) {
+    var code = "define name as: Text attribute\n" +
+        "define Customer as: category with attribute: name\n" +
+        "define print as: method receiving: Text value doing:\n" +
+        "\ta = 3\n" +
+        "define printCustomer as: method receiving: Customer c doing:\n" +
+        "\tprint c\n";
+    checkProblems(test, code, "No matching prototype for: print c");
 };
 
 exports.testMatchingPrototype = function(test) {
