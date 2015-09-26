@@ -75,7 +75,10 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
     }
 	decl = context.getRegisteredDeclaration(id.name);
 	if(decl===null) {
-		throw new SyntaxError("Unknown name:" + id.name);
+        if(context.problemListener)
+            context.problemListener.reportUnknownMethod(id);
+        else
+		    throw new SyntaxError("Unknown name:" + id.name);
 	}
 	if(decl instanceof CategoryDeclaration) {
 		return new ConstructorExpression(new CategoryType(id), false, this.assignments);

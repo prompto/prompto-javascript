@@ -42,9 +42,11 @@ exports.checkProblems = function(test, code, expected) {
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
-    test.equal(listener.problems.length, 1 - (expected==undefined));
-    if(expected!=undefined)
+    if(expected) {
+        test.ok(listener.problems.length > 0);
         test.equal(listener.problems[0].message, expected);
+    } else
+        test.equal(listener.problems.length, 0);
     test.done();
 };
 

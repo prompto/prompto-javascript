@@ -76,6 +76,20 @@ exports.testKnownAttribute = function(test) {
     checkProblems(test, code);
 };
 
+exports.testUnknownMethod = function(test) {
+    var code = "define m as: method doing:\n" +
+        "\tprint \"abc\"\n";
+    checkProblems(test, code, "Unknown method: print");
+};
+
+exports.testKnownMethod = function(test) {
+    var code = "define print as: method receiving: Text value doing:\n" +
+        "\ta = 3\n" +
+        "define m as: method doing:\n" +
+        "\tprint \"abc\"\n";
+    checkProblems(test, code);
+};
+
 exports.testNoMatchingPrototype = function(test) {
     var code = "define print as: method receiving: Text value doing:\n" +
         "\ta = 3\n" +

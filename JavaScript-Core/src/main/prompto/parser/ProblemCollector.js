@@ -45,6 +45,10 @@ ProblemCollector.prototype.reportUnknownCategory = function(id) {
     this.reportUnknownIdentifier(id, "category");
 };
 
+ProblemCollector.prototype.reportUnknownMethod = function(id) {
+    this.reportUnknownIdentifier(id, "method");
+};
+
 ProblemCollector.prototype.reportUnknownIdentifier = function(id, type) {
     var problem = this.readSection(id);
     problem.type = "error";
