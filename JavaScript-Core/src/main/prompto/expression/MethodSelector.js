@@ -60,14 +60,11 @@ MethodSelector.prototype.getGlobalCandidates = function(context) {
             }
         }
     }
-    var decl = context.getRegisteredDeclaration(this.name);
-    if(decl!=null) {
-        var globals = decl.methods;
-        if (globals != null)
-            Object.keys(globals).map(function (key) {
-                methods.push(globals[key])
+    var map = context.getRegisteredDeclaration(this.name);
+    if(map!=null && map.protos != null)
+        Object.keys(map.protos).map(function (proto) {
+                methods.push(map.protos[proto])
             });
-    }
     return methods;
 };
 

@@ -24,17 +24,12 @@ BaseMethodDeclaration.prototype  = Object.create(BaseDeclaration.prototype);
 BaseMethodDeclaration.prototype.constructor = BaseMethodDeclaration;
 
 BaseMethodDeclaration.prototype.getProto = function(context) {
-	var s = "";
-	for(var i=0;i<this.args.length;i++) {
-		if(i>0) {
-			s += "/";
-		}
-		s += this.args[i].getProto(context);
-	}
-	return s;
+	var s = [];
+    this.args.map(function(arg) {
+        s.push(arg.getProto(context));
+    });
+    return "(" + s.join(", ") + ")";
 };
-
-
 
 BaseMethodDeclaration.prototype.register = function(context) {
 	context.registerMethodDeclaration(this);

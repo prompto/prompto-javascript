@@ -274,12 +274,12 @@ ConcreteCategoryDeclaration.findAncestorSetter = function(ancestor, context, att
 
 
 ConcreteCategoryDeclaration.prototype.findMemberMethods = function(context, name) {
-	var result = new MethodDeclarationMap(name);
-	this.registerMemberMethods(context,result);
-	var names = Object.getOwnPropertyNames(result.methods);
+	var map = new MethodDeclarationMap(name);
+	this.registerMemberMethods(context,map);
+	var names = Object.getOwnPropertyNames(map.protos);
 	var list = [];
 	for(var i=0;i<names.length;i++) {
-		list.push(result.methods[names[i]]);
+		list.push(map.protos[names[i]]);
 	}
 	return list;
 };
@@ -303,9 +303,9 @@ ConcreteCategoryDeclaration.prototype.registerThisMemberMethods = function(conte
 	if(!(actual instanceof MethodDeclarationMap)) {
 		throw new SyntaxError("Not a member method!");
 	}
-	var names = Object.getOwnPropertyNames(actual.methods);
-	for(var i=0;i<names.length;i++) {
-		var method = actual.methods[names[i]];
+	var protos = Object.getOwnPropertyNames(actual.protos);
+	for(var i=0;i<protos.length;i++) {
+		var method = actual.protos[protos[i]];
 		result.registerIfMissing(method, context);
 	}
 };

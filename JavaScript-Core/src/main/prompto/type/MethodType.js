@@ -1,5 +1,5 @@
 var BaseType = require("./BaseType").BaseType;
-var SyntaxError = require("../error/SyntaxError");
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function MethodType(context, id) {
 	BaseType.call(this, id);
@@ -42,8 +42,8 @@ MethodType.prototype.getDeclaration = function(context) {
 	if(map==null) {
 		throw new SyntaxError("Unknown method: \"" + this.name + "\"");
 	}
-	var props = Object.getOwnPropertyNames(map.methods);
-	return map.methods[props[0]];
+	var protos = Object.getOwnPropertyNames(map.protos);
+	return map.protos[protos[0]];
 };
 
 /*

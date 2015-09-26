@@ -57,30 +57,28 @@ function locateMethodInMap(map, cmdLineArgs) {
 }
 
 function locateMethodWithArgs(map) {
+    var protos = Object.keys(map.protos);
 	// try exact match first
-	var keys = Object.keys(map.methods);
-	for(var i=0;i<keys.length;i++) {
-		var method = map.methods[keys[i]];
-		if(identicalArguments(method.args, arguments)) {
-			return method;
-		}
-	}
+    for(var i=0;i<protos.length;i++) {
+        var method = map.protos[protos[i]];
+        if(identicalArguments(method.args, arguments))
+            return method;
+    };
 	// match Text{} argument, will pass null
 	if(arguments.length==1) {
-		for (var i = 0; i < keys.length; i++) {
-			var method = map.methods[keys[i]];
-			if (isSingleTextDictArgument(method.args)) {
-				return method;
-			}
-		}
+        for(var i=0;i<protos.length;i++) {
+            var method = map.protos[protos[i]];
+            if (isSingleTextDictArgument(method.args))
+                return method;
+
+        };
 	}
 	// match no argument, will ignore options
-	for (var i = 0; i < keys.length; i++) {
-		var method = map.methods[keys[i]];
-		if(method.args.length==0) {
+    for(var i=0;i<protos.length;i++) {
+        var method = map.protos[protos[i]];
+		if(method.args.length==0)
 			return method;
-		}
-	}
+	};
 	throw new SyntaxError("Could not find a compatible \"" + map.name + "\" method.");
 }
 
