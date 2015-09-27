@@ -71,7 +71,7 @@ exports.testKnownCategory = function(test) {
 
 exports.testUnknownAttribute = function(test) {
     var code = "define Customer as category with attribute cool\n";
-    checkProblems(test, code, "Unknown attribute cool");
+    checkProblems(test, code, "Unknown attribute: cool");
 };
 
 exports.testKnownAttribute = function(test) {
