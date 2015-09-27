@@ -2,15 +2,15 @@
  * Created by ericvergnaud on 14/09/15.
  */
 
-var antlr4 = require('antlr4/index');
+var ProblemListener = require('./ProblemListener').ProblemListener;
 
 function ProblemCollector() {
-    antlr4.error.ErrorListener.call(this);
+    ProblemListener.call(this);
     this.problems = [];
     return this;
 }
 
-ProblemCollector.prototype = Object.create(antlr4.error.ErrorListener.prototype);
+ProblemCollector.prototype = Object.create(ProblemListener.prototype);
 ProblemCollector.prototype.constructor = ProblemCollector;
 
 ProblemCollector.prototype.collectProblem = function(problem) {
@@ -38,18 +38,18 @@ ProblemCollector.prototype.reportDuplicate = function(name, declaration) {
 };
 
 ProblemCollector.prototype.reportUnknownAttribute = function(id) {
-    this.reportUnknownIdentifier(id, "attribute");
+    this.reportUnknown(id, "attribute");
 };
 
 ProblemCollector.prototype.reportUnknownCategory = function(id) {
-    this.reportUnknownIdentifier(id, "category");
+    this.reportUnknown(id, "category");
 };
 
 ProblemCollector.prototype.reportUnknownMethod = function(id) {
-    this.reportUnknownIdentifier(id, "method");
+    this.reportUnknown(id, "method");
 };
 
-ProblemCollector.prototype.reportUnknownIdentifier = function(id, type) {
+ProblemCollector.prototype.reportUnknown = function(id, type) {
     var problem = this.readSection(id);
     problem.type = "error";
     problem.message = "Unknown " + type + ": " + id.name;
