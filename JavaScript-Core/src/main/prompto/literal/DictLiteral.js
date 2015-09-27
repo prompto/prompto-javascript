@@ -1,7 +1,6 @@
 var Literal = require("./Literal").Literal;
 var DictEntryList = require("./DictEntryList").DictEntryList;
 var Dictionary = require("../value/Dictionary").Dictionary;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MissingType = require("../type/MissingType").MissingType;
 var DictType = require("../type/DictType").DictType;
 var TextType = require("../type/TextType").TextType;

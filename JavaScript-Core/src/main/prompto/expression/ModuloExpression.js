@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Value = require("../value/Value").Value;
 
 function ModuloExpression(left, right) {

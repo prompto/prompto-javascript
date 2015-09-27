@@ -8,7 +8,6 @@ var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
 var AnyType = require("./AnyType").AnyType;
 var PrestoError = require("../error/PrestoError").PrestoError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;

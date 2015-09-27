@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var DictType = require("../type/DictType").DictType;
 var TextType = require("../type/TextType").TextType;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;

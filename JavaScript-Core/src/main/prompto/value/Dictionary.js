@@ -2,7 +2,6 @@ var Value = require("./Value").Value;
 var ListValue = require("./ListValue").ListValue;
 var Text = require("./Text").Text;
 var Integer = require("./Integer").Integer;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var InternalError = require("../error/InternalError").InternalError;
 var BaseType = require("../type/BaseType").BaseType;
 var DictType = require("../type/DictType").DictType;

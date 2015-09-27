@@ -2,7 +2,6 @@ var Literal = require("./Literal").Literal;
 var ListValue = require("../value/ListValue").ListValue;
 var ListType = require("../type/ListType").ListType;
 var MissingType = require("../type/MissingType").MissingType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var ExpressionList = require("../utils/ExpressionList").ExpressionList;
 
 function ListLiteral(expressions) {

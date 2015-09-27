@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var Value = require("../value/Value").Value;

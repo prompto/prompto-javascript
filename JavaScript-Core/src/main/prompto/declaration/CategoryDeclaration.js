@@ -1,5 +1,4 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CategoryType = require("../type/CategoryType").CategoryType;
 
 function CategoryDeclaration(id, attributes) {
@@ -21,12 +20,8 @@ CategoryDeclaration.prototype.check = function(context) {
 		for(var i=0;i<this.attributes.length;i++) {
             var id = this.attributes[i];
 			var ad = context.getRegisteredDeclaration(id.name);
-			if (ad == null) {
-                if(context.problemListener)
-                    context.problemListener.reportUnknownAttribute(id)
-				else
-                    throw new SyntaxError("Unknown attribute: \"" + id.name + "\"");
-			}
+			if (ad == null)
+                context.problemListener.reportUnknownAttribute(id)
 		}
 	}
 	return new CategoryType(this.id);

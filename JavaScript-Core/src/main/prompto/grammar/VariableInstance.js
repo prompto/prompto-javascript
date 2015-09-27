@@ -1,5 +1,4 @@
 var Variable = require("../runtime/Variable").Variable;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
 function VariableInstance(id) {
@@ -62,11 +61,11 @@ VariableInstance.prototype.assign = function(context, expression) {
 	if(context.getRegisteredValue(this.name)==null) {
 		context.registerValue(new Variable(this.id, value.type));
 	}
-	context.setValue(this.name, value);
+	context.setValue(this.id, value);
 };
 
 VariableInstance.prototype.interpret = function(context) {
-	return context.getValue(this.name);
+	return context.getValue(this.id);
 };
 
 exports.VariableInstance = VariableInstance;

@@ -1,6 +1,5 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var CategoryType = require("../type/CategoryType").CategoryType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var UserError = require("../error/UserError").UserError;
 var Dialect = require("../parser/Dialect").Dialect;
 var Identifier = require("../grammar/Identifier").Identifier;

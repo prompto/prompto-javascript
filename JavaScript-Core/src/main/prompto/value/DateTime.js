@@ -4,7 +4,6 @@ var LocalDate = require("./LocalDate").LocalDate;
 var Time = require("./Time").Time;
 var Integer = require("./Integer").Integer;
 var Text = require("./Text").Text;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var DateTimeType = require("../type/DateTimeType").DateTimeType;
 
 function parseOffset(text) {

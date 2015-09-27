@@ -1,8 +1,8 @@
 var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 
-function JavaScriptMemberExpression(name) {
+function JavaScriptMemberExpression(id) {
 	JavaScriptSelectorExpression.call(this);
-	this.name = name;
+	this.id = id;
 	return this;
 }
 
@@ -10,7 +10,7 @@ JavaScriptMemberExpression.prototype = Object.create(JavaScriptSelectorExpressio
 JavaScriptMemberExpression.prototype.constructor = JavaScriptMemberExpression;
 
 JavaScriptMemberExpression.prototype.toString = function() {
-	return this.parent.toString() + "." + this.name;
+	return this.parent.toString() + "." + this.id.name;
 };
 
 JavaScriptMemberExpression.prototype.interpret = function(context) {
@@ -27,11 +27,11 @@ JavaScriptMemberExpression.prototype.toDialect = function(writer) {
         this.parent.toDialect(writer);
         writer.append('.');
     }
-    writer.append(this.name);
+    writer.append(this.id.name);
 };
 
 JavaScriptMemberExpression.prototype.interpret_field = function(o) {
-    return o[this.name];
+    return o[this.id.name];
 };
 
 exports.JavaScriptMemberExpression = JavaScriptMemberExpression;

@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Value = require("./Value").Value;
 

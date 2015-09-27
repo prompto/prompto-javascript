@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodType = require("../type/MethodType").MethodType;
 var Value = require("./Value").Value;
 

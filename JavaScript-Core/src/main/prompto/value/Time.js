@@ -1,7 +1,6 @@
 var Value = require("./Value").Value;
 var Period = require("./Period").Period;
 var Integer = require("./Integer").Integer;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var TimeType = null;
 
 exports.resolve = function() {

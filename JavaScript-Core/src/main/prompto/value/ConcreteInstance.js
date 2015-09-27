@@ -98,8 +98,9 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 	if(setter!=null) {
 		// use attribute name as parameter name for incoming value
 		context = context.newInstanceContext(this, null).newChildContext();
-		context.registerValue(new Variable(new Identifier(attrName), decl.getType()));
-		context.setValue(attrName, value);
+        var id = new Identifier(attrName);
+		context.registerValue(new Variable(id, decl.getType()));
+		context.setValue(id, value);
 		value = setter.interpret(context);
 	}
     value = this.autocast(decl, value);
@@ -218,7 +219,7 @@ ConcreteInstance.prototype.interpretOperator = function(context, value, operator
     var local = context.newChildContext();
     decl.registerArguments(local);
     var arg = decl.args[0];
-    local.setValue(arg.name, value);
+    local.setValue(arg.id, value);
     return decl.interpret(local);
 };
 

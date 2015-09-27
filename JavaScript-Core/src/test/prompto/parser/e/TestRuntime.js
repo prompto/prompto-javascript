@@ -30,9 +30,10 @@ exports.testSystemOutPrint = function(test) {
 	walker.walk(builder, tree);
 	var statement = builder.getNodeValue(tree);
 	var context = prompto.runtime.Context.newGlobalContext();
-	var arg = new prompto.grammar.CategoryArgument(prompto.type.TextType.instance, new prompto.grammar.Identifier("value"));
+    var id = new prompto.grammar.Identifier("value");
+	var arg = new prompto.grammar.CategoryArgument(prompto.type.TextType.instance, id);
 	arg.register(context);
-	context.setValue("value", new prompto.literal.TextLiteral("\"test\"")); // TextLiteral trims enclosing quotes
+	context.setValue(id, new prompto.literal.TextLiteral("\"test\"")); // TextLiteral trims enclosing quotes
 	var result = statement.interpret(context);
 	test.ok(result===null);
 	test.equal("test", Out.read());

@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = null; // circular dependency
 var Dialect = require("../parser/Dialect").Dialect;
@@ -38,7 +37,7 @@ MethodExpression.prototype.check = function(context) {
 };
 
 MethodExpression.prototype.interpret = function(context, asMethod) {
-	return context.getValue(this.name);
+	return context.getValue(this.id);
 };
 	
 exports.MethodExpression = MethodExpression;

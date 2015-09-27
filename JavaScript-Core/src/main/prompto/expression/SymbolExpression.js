@@ -1,5 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-
 function SymbolExpression(id) {
     this.id = id;
 	return this;

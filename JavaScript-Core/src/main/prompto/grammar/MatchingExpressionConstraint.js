@@ -10,8 +10,9 @@ function MatchingExpressionConstraint(expression) {
 
 MatchingExpressionConstraint.prototype.checkValue = function(context, value) {
 	var child = context.newChildContext();
-	child.registerValue(new Variable(new Identifier("value"), AnyType.instance));
-	child.setValue("value", value);
+    var id = new Identifier("value");
+	child.registerValue(new Variable(id, AnyType.instance));
+	child.setValue(id, value);
 	var test = this.expression.interpret(child);
 	if(!test.value) {
 		throw new InvalidDataError((value == null ? "null" : value.toString()) + " does not match:" + this.expression.toString());

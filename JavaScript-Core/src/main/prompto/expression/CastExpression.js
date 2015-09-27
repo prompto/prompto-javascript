@@ -1,5 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-
 function CastExpression(expression, type) {
     this.expression = expression;
     this.type = type;
@@ -9,7 +7,8 @@ function CastExpression(expression, type) {
 CastExpression.prototype.check = function(context) {
     var actual = this.expression.check(context);
     if(!this.type.isAssignableTo(context, actual))
-        throw new SyntaxError("Cannot cast " + actual.toString() + " to " + type.toString());
+        context.problemListener.reportInvalidCast();
+    //    throw new SyntaxError("Cannot cast " + actual.toString() + " to " + type.toString());
     return this.type;
 };
 

@@ -1,5 +1,4 @@
 var Section = require("../parser/Section").Section;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var ListType = require("../type/ListType").ListType;
 var TupleType = require("../type/TupleType").TupleType;

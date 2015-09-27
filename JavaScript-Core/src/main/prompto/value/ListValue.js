@@ -1,5 +1,4 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Integer = require("./Integer").Integer;
 var ListType = null;
 

@@ -22,14 +22,6 @@ function MethodCall(method, assignments) {
 MethodCall.prototype = Object.create(SimpleStatement.prototype);
 MethodCall.prototype.constructor = MethodCall;
 
-MethodCall.prototype.getSection = function() {
-    var section = new Section(this.method.id);
-    if(this.assignments && this.assignments.length) {
-        section.end = this.assignments[this.assignments.length-1].end;
-    }
-    return section;
-};
-
 MethodCall.prototype.toDialect = function(writer) {
     if (this.requiresInvoke(writer))
         writer.append("invoke: ");
@@ -92,7 +84,7 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 			var assignment = assignments[i];
 			var expression = assignment.resolve(local,declaration,true);
 			var value = assignment.argument.checkValue(parent,expression);
-			local.setValue(assignment.name, value);
+			local.setValue(assignment.id, value);
 		}
 		return declaration.check(local);
 	} catch (e) {
@@ -122,7 +114,7 @@ MethodCall.prototype.interpret = function(context) {
 		var value = argument.checkValue(context,expression);
         if(value!=null && value.mutable && !argument.mutable)
             throw new NotMutableError();
-		local.setValue(assignment.name, value);
+		local.setValue(assignment.id, value);
 	}
 	return declaration.interpret(local, true);
 };
@@ -141,7 +133,7 @@ MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) 
 MethodCall.prototype.findDeclaration = function(context) {
 	// look for method as value
 	try {
-		var o = context.getValue(this.method.name);
+		var o = context.getValue(this.method.id);
 		if(o instanceof ClosureValue) {
 			return new ClosureDeclaration(o);
 		}

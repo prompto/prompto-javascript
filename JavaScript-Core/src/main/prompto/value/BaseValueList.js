@@ -1,7 +1,6 @@
 var Value = require("./Value").Value;
 var Integer = require("./Integer").Integer;
 var PrestoError = require("../error/PrestoError").PrestoError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var InternalError = require("../error/InternalError").InternalError;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 

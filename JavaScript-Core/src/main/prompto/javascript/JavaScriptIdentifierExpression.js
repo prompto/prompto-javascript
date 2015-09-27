@@ -1,9 +1,9 @@
 var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
 var PrestoError = require("../error/PrestoError").PrestoError;
 
-function JavaScriptIdentifierExpression(identifier) {
+function JavaScriptIdentifierExpression(id) {
 	JavaScriptExpression.call(this);
-	this.identifier = identifier;
+	this.id = id;
 	return this;
 }
 
@@ -12,9 +12,9 @@ JavaScriptIdentifierExpression.prototype.constructor = JavaScriptIdentifierExpre
 
 JavaScriptIdentifierExpression.prototype.toString = function() {
 	if(this.parent==null) {
-		return this.identifier;
+		return this.id.name;
 	} else {
-		return this.parent.toString() + '.' + this.identifier;
+		return this.parent.toString() + '.' + this.id.name;
 	}
 };
 
@@ -23,7 +23,7 @@ JavaScriptIdentifierExpression.prototype.toDialect = function(writer) {
         this.parent.toDialect(writer);
         writer.append('.');
     }
-    writer.append(this.identifier);
+    writer.append(this.id.name);
 };
 
 
@@ -48,7 +48,7 @@ JavaScriptIdentifierExpression.prototype.interpret = function(context, module) {
 };
 
 JavaScriptIdentifierExpression.prototype.interpret_presto = function(context) {
-    if ("$context" == this.identifier)
+    if ("$context" == this.id.name)
         return context;
     else
         return null;
@@ -59,7 +59,7 @@ JavaScriptIdentifierExpression.prototype.interpret_instance = function(context) 
 		return null;
 	} else {
 		try {
-			return context.getValue(this.identifier);
+			return context.getValue(this.id);
 		} catch (e) {
 			if (e instanceof PrestoError) {
 				return null;
@@ -76,7 +76,7 @@ JavaScriptIdentifierExpression.prototype.interpret_module = function(module) {
 	} else {
 		try {
 			m = module.resolve();
-			o = m[this.identifier]
+			o = m[this.id.name]
 			if(o) {
 				return o;
 			} else {
@@ -91,7 +91,7 @@ JavaScriptIdentifierExpression.prototype.interpret_module = function(module) {
 
 JavaScriptIdentifierExpression.prototype.interpret_global = function() {
 	try {
-		return eval(this.identifier);
+		return eval(this.id.name);
 	} catch (e) {
 		return null;
 	}

@@ -1,6 +1,5 @@
 var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var Integer = require("../value/Integer").Integer;
 

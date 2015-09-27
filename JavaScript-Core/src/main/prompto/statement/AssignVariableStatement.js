@@ -1,6 +1,5 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var ResourceType = require("../type/ResourceType").ResourceType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
 
@@ -72,7 +71,7 @@ AssignVariableStatement.prototype.interpret = function(context) {
         var actualType = this.expression.check(context);
 		context.registerValue(new Variable(this.id, actualType));
 	}
-	context.setValue(this.name, this.expression.interpret(context));
+	context.setValue(this.id, this.expression.interpret(context));
 	return null;
 };
 

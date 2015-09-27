@@ -1,7 +1,6 @@
 var Value = require("./Value").Value;
 var Integer = require("./Integer").Integer;
 var PeriodType = require("../type/PeriodType").PeriodType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function Period(data) {
     Value.call(this, PeriodType.instance);

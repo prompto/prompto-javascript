@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Text = null;
 var Integer = null;
 var Decimal = null;

@@ -2,7 +2,6 @@ var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").Concr
 var getTypeName = require("../JavaScript/JavaScriptUtils").getTypeName;
 var getFunctionName = require("../JavaScript/JavaScriptUtils").getFunctionName;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
 
 function NativeCategoryDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {

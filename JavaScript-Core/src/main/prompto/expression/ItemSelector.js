@@ -1,7 +1,6 @@
 var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var Value = require("../value/Value").Value;
 var NullValue = require("../value/NullValue").NullValue;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 
 function ItemSelector(parent, item) {

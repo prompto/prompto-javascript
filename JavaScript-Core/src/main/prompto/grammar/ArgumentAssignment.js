@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var CategoryType = null;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
@@ -14,6 +13,12 @@ function ArgumentAssignment(argument, expression) {
 	this.expression = expression;
 	return this;
 }
+
+Object.defineProperty(ArgumentAssignment.prototype, "id", {
+    get : function() {
+        return this.argument.id;
+    }
+});
 
 Object.defineProperty(ArgumentAssignment.prototype, "name", {
 	get : function() {

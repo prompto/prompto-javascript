@@ -1,5 +1,4 @@
 var Argument = require("./Argument").Argument;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function AttributeArgument(id) {
 	Argument.call(this, id);

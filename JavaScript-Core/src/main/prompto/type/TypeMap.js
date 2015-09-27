@@ -1,5 +1,4 @@
 var VoidType = require("./VoidType").VoidType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function TypeMap() {
 	return this;

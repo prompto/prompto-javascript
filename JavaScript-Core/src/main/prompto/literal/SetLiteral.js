@@ -2,7 +2,6 @@ var Literal = require("./Literal").Literal;
 var SetValue = require("../value/SetValue").SetValue;
 var SetType = require("../type/SetType").SetType;
 var MissingType = require("../type/MissingType").MissingType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function SetLiteral(expressions) {
     expressions = expressions || new ExpressionList();

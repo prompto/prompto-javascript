@@ -26,7 +26,6 @@ exports.testBadRead = function(test) {
 };
 
 
-
 exports.testBadWrite = function(test) {
 	test.throws( function() {
 		runResource("resource/badWrite.pec");

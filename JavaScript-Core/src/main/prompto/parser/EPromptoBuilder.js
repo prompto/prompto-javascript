@@ -147,7 +147,7 @@ EPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
     var name = new grammar.Identifier(ctx.name.text);
-    name.setFrom(this.path, ctx.name, ctx.name, parser.Dialect.E);
+    name.setSectionFrom(this.path, ctx.name, ctx.name, parser.Dialect.E);
     var stmts = this.getNodeValue(ctx.stmts);
     var exps = this.getNodeValue(ctx.exps);
     var errorName = this.getNodeValue(ctx.error);
@@ -880,7 +880,8 @@ EPromptoBuilder.prototype.exitJava_identifier = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJavascript_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+	var id = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, id);
 };
 
 EPromptoBuilder.prototype.exitJavascript_member_expression = function(ctx) {
@@ -906,11 +907,6 @@ EPromptoBuilder.prototype.exitJavascript_this_expression = function(ctx) {
 EPromptoBuilder.prototype.exitJavaIdentifier = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	this.setNodeValue(ctx, new java.JavaIdentifierExpression(null, name));
-};
-
-EPromptoBuilder.prototype.exitJavascriptIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(null, name));
 };
 
 EPromptoBuilder.prototype.exitJavaIdentifierExpression = function(ctx) {
@@ -970,8 +966,8 @@ EPromptoBuilder.prototype.exitJavascriptPrimaryExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJavascript_identifier_expression = function(ctx) {
-    var name = ctx.name.getText();
-    this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(name));
+    var id = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(id));
 };
 
 EPromptoBuilder.prototype.exitJavaSelectorExpression = function(ctx) {
@@ -989,8 +985,8 @@ EPromptoBuilder.prototype.exitJavascriptSelectorExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJavaScriptMemberExpression = function(ctx) {
-    var name = ctx.name.getText();
-    this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(name));
+    var id = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(id));
 };
 
 EPromptoBuilder.prototype.exitJava_primary_expression = function(ctx) {
@@ -1112,9 +1108,9 @@ EPromptoBuilder.prototype.exitJavaScriptMethodExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitJavascript_method_expression = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
+	var id = this.getNodeValue(ctx.name);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(name, args));
+	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
 };
 
 EPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
@@ -2357,7 +2353,7 @@ EPromptoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
 EPromptoBuilder.prototype.buildSection = function(node, section) {
 	var first = this.findFirstValidToken(node.start.tokenIndex);
 	var last = this.findLastValidToken(node.stop.tokenIndex);
-	section.setFrom(this.path, first, last, parser.Dialect.E);
+	section.setSectionFrom(this.path, first, last, parser.Dialect.E);
 };
 
 EPromptoBuilder.prototype.findFirstValidToken = function(idx) {

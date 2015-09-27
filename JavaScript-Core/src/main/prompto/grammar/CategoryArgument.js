@@ -1,5 +1,4 @@
 var Argument = require("./Argument").Argument;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
@@ -76,7 +75,7 @@ CategoryArgument.prototype.equals = function(obj) {
 };
 
 CategoryArgument.prototype.register = function(context) {
-	var actual = context.getRegisteredValue(this.name);
+	var actual = context.getRegisteredValue(this.id.name);
 	if(actual!==null) {
 		throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
 	}
@@ -86,7 +85,7 @@ CategoryArgument.prototype.register = function(context) {
 	}
 	context.registerValue(this);
     if(this.defaultExpression!=null)
-        context.setValue(this.name, this.defaultExpression.interpret(context));
+        context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
 CategoryArgument.prototype.check = function(context) {

@@ -2,7 +2,6 @@ var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var VoidType = require("../type/VoidType").VoidType;
 var CategoryType = null;;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var PrestoError = require("../error/PrestoError").PrestoError;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
@@ -52,7 +51,7 @@ BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, 
 		var assignmentsList = new ArgumentAssignmentList(assignments);
 		for(var i=0;i<this.args.length;i++) {
 			var argument = this.args[i];
-			var idx = assignmentsList.findIndex(argument.name);
+			var idx = assignmentsList.findIndex(argument.id.name);
             var assignment = idx>=0 ? assignmentsList[idx] : null;
             if(assignment==null) { // missing argument
                 if(argument.defaultExpression!=null)

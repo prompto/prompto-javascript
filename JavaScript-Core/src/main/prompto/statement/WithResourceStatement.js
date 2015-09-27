@@ -22,7 +22,7 @@ WithResourceStatement.prototype.interpret = function(context) {
 		this.resource.interpret(context);
 		return this.instructions.interpret(context);
 	} finally {
-		var res = context.getValue(this.resource.name);
+		var res = context.getValue(this.resource.id);
 		if(res.close) {
 			res.close();
 		}

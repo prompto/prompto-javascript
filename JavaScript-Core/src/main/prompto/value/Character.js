@@ -1,7 +1,6 @@
 var Value = require("./Value").Value;
 var Integer = require("./Integer").Integer;
 var CharacterType = require("../type/CharacterType").CharacterType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Text = null; // circular dependency
 var removeAccents = require("../utils/Utils").removeAccents;
 

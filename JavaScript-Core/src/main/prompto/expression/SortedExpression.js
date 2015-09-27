@@ -2,7 +2,6 @@ var NullReferenceError = require("../error/NullReferenceError").NullReferenceErr
 var UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var InternalError = require("../error/InternalError").InternalError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var ListValue = require("../value/ListValue").ListValue;
 var TupleValue = require("../value/TupleValue").TupleValue;

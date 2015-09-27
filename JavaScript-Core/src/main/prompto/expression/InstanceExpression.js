@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Variable = require("../runtime/Variable").Variable;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -14,10 +13,16 @@ exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 }
 
-function InstanceExpression(name) {
-	this.name = name;
+function InstanceExpression(id) {
+	this.id = id;
 	return this;
 }
+
+Object.defineProperty(InstanceExpression.prototype, "name", {
+    get : function() {
+        return this.id.name;
+    }
+});
 
 InstanceExpression.prototype.toString = function() {
 	return this.name;
@@ -41,9 +46,9 @@ InstanceExpression.prototype.requiresMethod = function(writer) {
 };
 
 InstanceExpression.prototype.check = function(context) {
-	var named = context.getRegistered(this.name);
+	var named = context.getRegistered(this.id.name);
 	if (named == null) {
-		throw new SyntaxError("Unknown identifier:" + this.name);
+		throw new SyntaxError("Unknown identifier:" + this.id.name);
 	} else if (named instanceof Variable) { // local variable
         return named.getType(context);
     } else if(named instanceof LinkedVariable) { // local variable
@@ -55,14 +60,13 @@ InstanceExpression.prototype.check = function(context) {
 	} else if(named instanceof AttributeDeclaration) { // in category method
 		return named.getType(context);
 	} else if(named instanceof MethodDeclarationMap) { // global method or closure
-		return new MethodType(context, new Identifier(this.name));
-	} else {
-		throw new SyntaxError(this.name + "  is not an instance:" + typeof(named));
-	}
+		return new MethodType(context, new Identifier(this.id));
+	} else
+        context.problemListener.reportUnknownVariable(this.id);
 };
 
 InstanceExpression.prototype.interpret = function(context) {
-	return context.getValue(this.name);
+	return context.getValue(this.id);
 };
 
 exports.InstanceExpression = InstanceExpression;

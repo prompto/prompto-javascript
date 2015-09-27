@@ -2,12 +2,9 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 
 function ArgumentAssignmentList(items, item) {
-	items = items || [];
-	ObjectList.call(this, items);
-	item = item || null;
-	if(item!==null) {
+	ObjectList.call(this, items || []);
+	if(item)
 		this.add(item);
-	}
 	return this;
 }
 
@@ -35,9 +32,9 @@ ArgumentAssignmentList.prototype.find = function(name) {
 
 ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration) {
 	var assignments = new ArgumentAssignmentList();
-	for(var i=0;i<this.length;i++) {
-		assignments.push(this[i].makeAssignment(context, declaration));
-	}
+    this.map(function(assignment) {
+        assignments.push(assignment.makeAssignment(context, declaration));
+    });
 	return assignments;
 };
 

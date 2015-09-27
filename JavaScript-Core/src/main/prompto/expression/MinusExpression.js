@@ -1,5 +1,4 @@
 var Value = require("../value/Value").Value;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function MinusExpression(expression) {
 	this.expression = expression;

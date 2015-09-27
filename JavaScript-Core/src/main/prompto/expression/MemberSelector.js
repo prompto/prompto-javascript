@@ -2,7 +2,6 @@ var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var UnresolvedIdentifier = null;
 var SymbolExpression = require("../expression/SymbolExpression").SymbolExpression;
 var TypeExpression = require("../expression/TypeExpression").TypeExpression;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var CategoryType = null;
 var NullValue = require("../value/NullValue").NullValue;

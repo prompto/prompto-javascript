@@ -1,7 +1,6 @@
 var Section = require("../parser/Section").Section;
 var CodeExpression = require("../expression/CodeExpression").CodeExpression;
 var PrestoError = require("../error/PrestoError").PrestoError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function ExecuteExpression(id) {
 	Section.call(this);
@@ -44,7 +43,7 @@ ExecuteExpression.prototype.toSDialect = function(writer) {
 
 ExecuteExpression.prototype.check = function(context) {
 	try {
-		var value = context.getValue(this.name);
+		var value = context.getValue(this.id);
 		if(value instanceof CodeExpression) {
 			return value.checkCode(context);
 		} else {
@@ -58,7 +57,7 @@ ExecuteExpression.prototype.check = function(context) {
 };
 
 ExecuteExpression.prototype.interpret = function(context) {
-	var value = context.getValue(this.name);
+	var value = context.getValue(this.id);
 	if(value instanceof CodeExpression) {
 		return value.interpretCode(context);
 	} else {

@@ -2,7 +2,6 @@ var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaratio
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var BaseStatement = require("./BaseStatement").BaseStatement;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
@@ -42,7 +41,7 @@ DeclarationInstruction.prototype.interpret = function(context) {
 		context.registerMethodDeclaration(method);
 		var type = new MethodType(context,method);
 		context.registerValue(new Variable(method.id, type));
-		context.setValue(method.name, new ClosureValue(context, method));
+		context.setValue(method.id, new ClosureValue(context, method));
 		return null;
 	} else {
 		throw new SyntaxError("Unsupported:" + typeof(this.declaration));

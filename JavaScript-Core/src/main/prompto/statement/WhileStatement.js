@@ -1,6 +1,5 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Bool = require("../value/Bool").Bool;
 

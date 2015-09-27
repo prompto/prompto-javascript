@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var TupleValue = null;
 var SetValue = null;
 var ListValue = null;

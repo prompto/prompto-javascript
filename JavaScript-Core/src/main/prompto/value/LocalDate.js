@@ -2,7 +2,6 @@ var Value = require("./Value").Value;
 var Period = require("./Period").Period;
 var Integer = require("./Integer").Integer;
 var DateType = null;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 exports.resolve = function() {
     DateType = require("../type/DateType").DateType;

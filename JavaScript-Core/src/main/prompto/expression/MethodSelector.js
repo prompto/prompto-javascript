@@ -1,5 +1,4 @@
 var MemberSelector = require("./MemberSelector").MemberSelector;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var NullValue = require("../value/NullValue").NullValue;

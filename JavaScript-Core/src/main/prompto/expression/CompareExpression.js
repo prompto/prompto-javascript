@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
 var CmpOp = require("../grammar/CmpOp").CmpOp;
@@ -46,7 +45,8 @@ CompareExpression.prototype.compare = function(context, lval, rval) {
 		case CmpOp.LTE:
 			return Bool.ValueOf(cmp <= 0);
 		default:
-			throw new SyntaxError("Illegal operand: " + this.operator.toString());
+            context.problemListener.reportIllegalOperand();
+			// throw new SyntaxError("Illegal operand: " + this.operator.toString());
 	}
 };
 

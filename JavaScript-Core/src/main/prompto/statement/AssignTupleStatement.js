@@ -5,7 +5,6 @@ var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var Integer = require("../value/Integer").Integer;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 
 function AssignTupleStatement(names, expression) {

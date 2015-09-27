@@ -1,17 +1,21 @@
 var Location = require("./Location").Location;
 
-function Section(copyFrom) {
-    if(!copyFrom)
-        copyFrom = { path : "", start : null, end : null, dialect : null, breakpoint : null };
-	this.path = copyFrom.path;
-	this.start = copyFrom.start;
-	this.end = copyFrom.end;
-    this.dialect = copyFrom.dialect;
-	this.breakpoint = copyFrom.breakpoint;
+function Section(section) {
+    if(!section)
+        section = { path : "", start : null, end : null, dialect : null, breakpoint : null };
+    this.copySectionFrom(section);
 	return this;
 }
 
-Section.prototype.setFrom = function(path, start, end, dialect) {
+Section.prototype.copySectionFrom = function(section) {
+    this.path = section.path;
+    this.start = section.start;
+    this.end = section.end;
+    this.dialect = section.dialect;
+    this.breakpoint = section.breakpoint;
+};
+
+Section.prototype.setSectionFrom = function(path, start, end, dialect) {
 	this.path = path;
 	this.start = new Location(start);
 	this.end = new Location(end, true);

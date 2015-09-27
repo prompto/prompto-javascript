@@ -1,7 +1,6 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var ResourceType = require("../type/ResourceType").ResourceType;
 var VoidType = require("../type/VoidType").VoidType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
@@ -24,7 +23,7 @@ WriteStatement.prototype.check = function(context) {
 	context = context.newResourceContext();
 	var resourceType = this.resource.check(context);
 	if(!(resourceType instanceof ResourceType))
-		throw new SyntaxError("Not a resource!");
+        context.problemListener.reportNotAResource(this.resource);
 	return VoidType.instance;
 }
 

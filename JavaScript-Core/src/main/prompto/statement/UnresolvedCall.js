@@ -1,5 +1,4 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
 var MethodCall = require("./MethodCall").MethodCall;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
@@ -66,25 +65,29 @@ UnresolvedCall.prototype.resolve = function(context) {
 
 UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
 	var id = this.callable.id;
-    var decl = null;
+    var call, decl = null;
     // if this happens in the context of a member method, then we need to check for category members first
     if(context.parent instanceof InstanceContext) {
         decl = this.resolveUnresolvedMember(context.parent, id.name);
         if(decl!=null)
-            return new MethodCall(new MethodSelector(null, id), this.assignments);
+            call = new MethodCall(new MethodSelector(null, id), this.assignments);
     }
-	decl = context.getRegisteredDeclaration(id.name);
-	if(decl===null) {
-        if(context.problemListener)
-            context.problemListener.reportUnknownMethod(id);
-        else
-		    throw new SyntaxError("Unknown name:" + id.name);
-	}
-	if(decl instanceof CategoryDeclaration) {
-		return new ConstructorExpression(new CategoryType(id), false, this.assignments);
-	} else {
-		return new MethodCall(new MethodSelector(null, id), this.assignments);
-	}
+    if(call==null) {
+        decl = context.getRegisteredDeclaration(id.name);
+        if (decl === null) {
+            if (context.problemListener)
+                context.problemListener.reportUnknownMethod(id);
+            else
+                throw new SyntaxError("Unknown name:" + id.name);
+        }
+        if (decl instanceof CategoryDeclaration) {
+            call = new ConstructorExpression(new CategoryType(id), false, this.assignments);
+        } else {
+            call = new MethodCall(new MethodSelector(null, id), this.assignments);
+        }
+    }
+    call.copySectionFrom(this);
+    return call;
 };
 
 UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {

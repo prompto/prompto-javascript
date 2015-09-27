@@ -1,11 +1,10 @@
 var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 var JavaScriptExpressionList = require("./JavaScriptExpressionList").JavaScriptExpressionList;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-function JavaScriptMethodExpression(name, args) {
+function JavaScriptMethodExpression(id, args) {
 	JavaScriptSelectorExpression.call(this);
-	this.name = name;
+	this.id = id;
 	this.args = args || new JavaScriptExpressionList();
 	return this;
 }
@@ -15,7 +14,7 @@ JavaScriptMethodExpression.prototype.constructor = JavaScriptMethodExpression;
 
 
 JavaScriptMethodExpression.prototype.toString = function() {
-	return this.parent.toString() + "." + this.name + "(" + this.args.toString() + ")";
+	return this.parent.toString() + "." + this.id.name + "(" + this.args.toString() + ")";
 };
 
 /*
@@ -68,9 +67,9 @@ JavaScriptMethodExpression.prototype.interpretMember = function(context, module,
 	if(p instanceof NativeInstance) {
 		p = p.instance;
 	}
-	var m = p[this.name];
+	var m = p[this.id.name];
 	if(!m) {
-		throw new SyntaxError(this.name + " is not a member of " + p.toString());
+		throw new SyntaxError(this.id.name + " is not a member of " + p.toString());
 	}
 	return m.apply(p, args);
 };
@@ -80,7 +79,7 @@ JavaScriptMethodExpression.prototype.toDialect = function(writer) {
         this.parent.toDialect(writer);
         writer.append('.');
     }
-    writer.append(this.name);
+    writer.append(this.id.name);
     writer.append('(');
     if(this.args!=null)
         this.args.toDialect(writer);

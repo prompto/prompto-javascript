@@ -1,5 +1,5 @@
+var Section = require("../parser/Section").Section;
 var CategoryType = null;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
@@ -10,6 +10,7 @@ exports.resolve = function() {
 
 
 function ConstructorExpression(type, mutable, assignments) {
+    Section.call(this);
 	this.type = type;
     this.mutable = mutable;
 	this.copyFrom = null;
@@ -17,6 +18,9 @@ function ConstructorExpression(type, mutable, assignments) {
 	this.setAssignments(assignments);
 	return this;
 }
+
+ConstructorExpression.prototype  = Object.create(Section.prototype);
+ConstructorExpression.prototype.constructor = ConstructorExpression;
 
 ConstructorExpression.prototype.setAssignments = function(assignments) {
 	this.assignments = assignments;
@@ -64,23 +68,22 @@ ConstructorExpression.prototype.toEDialect = function(writer) {
 ConstructorExpression.prototype.check = function(context) {
 	// need to update type, since it was arbitrarily set to CategoryType
 	var cd = context.getRegisteredDeclaration(this.type.name);
-	if(cd==null) {
-		throw new SyntaxError("Unknown category " + this.type.name);
-	}
+	if(cd==null)
+        context.problemenListener.reportUnknownCategory(this.type.id);
 	this.type = cd.getType();
 	cd.checkConstructorContext(context);
 	if(this.copyFrom!=null) {
 		var cft = this.copyFrom.check(context);
-		if(!(cft instanceof CategoryType)) {
-			throw new SyntaxError("Cannot copy from " + cft.getName());
-		}
+		if(!(cft instanceof CategoryType))
+            context.problemenListener.reportInvalidCopySource();
+            // throw new SyntaxError("Cannot copy from " + cft.getName());
 	}
 	if(this.assignments!=null) {
 		for(var i=0; i<this.assignments.length; i++) {
 			var assignment = this.assignments[i];
-			if(!cd.hasAttribute(context, assignment.name)) {
-				throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + this.type.name);
-			}
+			if(!cd.hasAttribute(context, assignment.name))
+                context.problemListener.reportUnknownMemberAttribute();
+                //	throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + this.type.name);
 			assignment.check(context);
 		}
 	}

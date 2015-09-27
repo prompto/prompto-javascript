@@ -7,10 +7,10 @@ var ContextualExpression = require("../value/ContextualExpression").ContextualEx
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var ProblemListener = require("../parser/ProblemListener").ProblemListener;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Decimal = require("../value/Decimal").Decimal;
 var Integer = require("../value/Integer").Integer;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Variable = require("./Variable").Variable;
 var LinkedValue = require("./LinkedValue").LinkedValue;
 
@@ -24,7 +24,7 @@ function Context() {
 	this.instances = {};
 	this.values = {};
     this.nativeBindings = {};
-    this.problemListener = null;
+    this.problemListener = new ProblemListener();
 	return this;
 }
 
@@ -221,12 +221,8 @@ Context.prototype.registerDeclaration = function(declaration) {
 
 Context.prototype.checkDuplicate = function(declaration) {
     var actual = this.getRegistered(declaration.name) || null;
-    if (actual != null) {
-        if(this.problemListener)
-            this.problemListener.reportDuplicate(declaration.name, declaration);
-        else
-            throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
-    }
+    if (actual != null)
+        this.problemListener.reportDuplicate(declaration.name, declaration);
     return actual == null;
 }
 
@@ -256,23 +252,15 @@ Context.prototype.registerMethodDeclaration = function(declaration) {
 
 Context.prototype.checkDuplicateMethod = function(declaration) {
     var actual = this.getRegistered(declaration.name) || null;
-    if (actual !== null && !(actual instanceof MethodDeclarationMap)) {
-        if (this.problemListener)
-            this.problemListener.reportDuplicate(declaration.name, declaration);
-        else
-            throw new SyntaxError("Duplicate name: \"" + declaration.name + "\"");
-    }
+    if (actual !== null && !(actual instanceof MethodDeclarationMap))
+        this.problemListener.reportDuplicate(declaration.name, declaration);
     return actual;
 };
 
 Context.prototype.registerTestDeclaration = function(declaration) {
     var actual = this.tests[declaration.name] || null;
-    if(actual!==null) {
-        if (this.problemListener)
-            this.problemListener.reportDuplicate(declaration.name, declaration);
-        else
-            throw new SyntaxError("Duplicate test: \"" + declaration.name + "\"");
-    }
+    if(actual!==null)
+        this.problemListener.reportDuplicate(declaration.name, declaration);
     this.tests[declaration.name] = declaration;
 };
 
@@ -319,12 +307,8 @@ function MethodDeclarationMap(name) {
 MethodDeclarationMap.prototype.register = function(declaration, context) {
 	var proto = declaration.getProto(context);
 	var current = this.protos[proto] || null;
-	if(current!==null) {
-        if(context.problemListener)
-            context.problemListener.reportDuplicate(declaration.name, declaration);
-		else
-            throw new SyntaxError("Duplicate prototype for name: \"" + declaration.name + "\"");
-	}
+	if(current!==null)
+        context.problemListener.reportDuplicate(declaration.name, declaration);
 	this.protos[proto] = declaration;
 };
 
@@ -360,48 +344,44 @@ Context.prototype.registerValue = function(value, checkDuplicate) {
 	if(checkDuplicate) {
         // only explore current context
         var actual = this.instances[value.name] || null;
-        if(actual!==null) {
-            throw new SyntaxError("Duplicate name: \"" + value.name + "\"");
-        }
+        if(actual!==null)
+            this.problemListener.reportDuplicateVariable(value.id);
     }
 	this.instances[value.name] = value;
 }
 
-Context.prototype.getValue = function(name) {
-	var context = this.contextForValue(name);
-	if(context===null) {
-		throw new SyntaxError(name + " is not defined");
-	}
-	return context.readValue(name);
+Context.prototype.getValue = function(id) {
+	var context = this.contextForValue(id.name);
+	if(context===null)
+        this.problemListener.reportUnknownVariable(id);
+	return context.readValue(id);
 };
 
-Context.prototype.readValue = function(name) {
-	var value = this.values[name] || null;
-	if(value===null) {
-		throw new SyntaxError(name + " has no value");
-	}
+Context.prototype.readValue = function(id) {
+	var value = this.values[id.name] || null;
+	if(value===null)
+        this.problemListener.reportEmptyVariable(id);
     if(value instanceof LinkedValue)
-        return value.context.getValue(name);
+        return value.context.getValue(id);
     else
         return value;
 };
 
-Context.prototype.setValue = function(name, value) {
-	var context = this.contextForValue(name);
-	if(context===null) {
-		throw new SyntaxError(name + " is not defined");
-	}
-	context.writeValue(name,value);
+Context.prototype.setValue = function(id, value) {
+	var context = this.contextForValue(id.name);
+	if(context===null)
+        this.problemListener.reportUnknownVariable(id);
+	context.writeValue(id, value);
 };
 
 
-Context.prototype.writeValue = function(name, value) {
-    value = this.autocast(name, value);
-    var current = this.values[name];
+Context.prototype.writeValue = function(id, value) {
+    value = this.autocast(id.name, value);
+    var current = this.values[id.name];
     if(current instanceof LinkedValue)
-        current.context.setValue(name, value);
+        current.context.setValue(id, value);
     else
-    	this.values[name] = value;
+    	this.values[id.name] = value;
 };
 
 Context.prototype.autocast = function(name, value) {

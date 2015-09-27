@@ -1,5 +1,4 @@
 var ResourceType = require("../type/ResourceType").ResourceType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
@@ -23,9 +22,8 @@ ReadExpression.prototype.toDialect = function(writer) {
 ReadExpression.prototype.check = function(context) {
 	context = context.newResourceContext();
 	var sourceType = this.resource.check(context);
-	if(!(sourceType instanceof ResourceType)) {
-		throw new SyntaxError("Not a readable resource!");
-	}
+	if(!(sourceType instanceof ResourceType))
+        context.problemListener.reportNotAResource(this.resource);
 	return TextType.instance;
 };
 

@@ -1,5 +1,4 @@
 var Argument = require("./Argument").Argument;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodType = require("../type/MethodType").MethodType;
 
 function MethodArgument(id) {

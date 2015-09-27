@@ -5,7 +5,6 @@ function BaseStatement() {
 	return this;
 }
 
-
 BaseStatement.prototype  = Object.create(Section.prototype);
 BaseStatement.prototype.constructor = BaseStatement;
 

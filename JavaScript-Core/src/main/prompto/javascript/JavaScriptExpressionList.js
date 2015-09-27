@@ -25,11 +25,10 @@ JavaScriptExpressionList.prototype.toDialect = function(writer) {
 
 
 JavaScriptExpressionList.prototype.computeArguments = function(context) {
-	var values = [];
-	for (var idx = 0; idx < this.length; idx++) {
-		values[idx] = this.computeArgument(this[idx], context);
-	}
-	return values;
+	var list = this;
+    return this.map(function(arg) {
+        return list.computeArgument(arg, context);
+	});
 };
 
 

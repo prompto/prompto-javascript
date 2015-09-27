@@ -2,8 +2,6 @@ var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCat
 var ResourceType = require("../type/ResourceType").ResourceType;
 var NativeResource = require("../value/NativeResource").NativeResource;
 var ResourceContext = require("../runtime/Context").ResourceContext;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-
 
 function NativeResourceDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
 	NativeCategoryDeclaration.call(this, id, attributes, categoryBindings, attributeBindings, methods);
@@ -24,9 +22,8 @@ NativeResourceDeclaration.prototype.newInstance = function() {
 };
 
 NativeResourceDeclaration.prototype.checkConstructorContext = function(context) {
-	if(!(context instanceof ResourceContext)) {
-		throw new SyntaxError("Not a resource context!");
-	}
+	if(!(context instanceof ResourceContext))
+        context.problemListener.reportNotAResourceContext(this);
 };
 
 NativeResourceDeclaration.prototype.categoryTypeToEDialect = function(writer) {

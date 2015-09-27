@@ -53,7 +53,7 @@ ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, cont
 		var child = context.newChildContext();
 		child.registerValue(new Variable(this.v1, elemType));
         var value = iterator.next();
-		child.setValue(this.v1.name, value);
+		child.setValue(this.v1, value);
 		value = this.instructions.interpret(child);
 		if (value != null) {
 			return value;
@@ -69,9 +69,9 @@ ForEachStatement.prototype.evaluateItemIteratorWithIndex = function(elemType, co
 	while (iterator.hasNext()) {
 		var child = context.newChildContext();
 		child.registerValue(new Variable(this.v2, elemType));
-		child.setValue(this.v2.name, iterator.next());
+		child.setValue(this.v2, iterator.next());
 		child.registerValue(new Variable(this.v1, IntegerType.instance));
-		child.setValue(this.v1.name, new Integer(++index));
+		child.setValue(this.v1, new Integer(++index));
 		var value = this.instructions.interpret(child);
 		if (value != null) {
 			return value;

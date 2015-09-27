@@ -1,7 +1,6 @@
 var ContOp = require("../grammar/ContOp").ContOp;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function ContainsExpression(left, operator, right) {
     this.left = left;
@@ -96,9 +95,9 @@ ContainsExpression.prototype.containsAll = function(context, container, items) {
             if (!container.hasItem(context, item)) {
                 return false;
             }
-        } else {
-            throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
-        }
+        } else
+            context.problemListener.reportIllegalContains();
+            // throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
     }
     return true;
 };
@@ -112,9 +111,9 @@ ContainsExpression.prototype.containsAny = function(context, container, items) {
             if (container.hasItem(context, item)) {
                 return true;
             }
-        } else {
-            throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
-        }
+        } else
+            context.problemListener.reportIllegalContains();
+            // throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
     }
     return false;
 };

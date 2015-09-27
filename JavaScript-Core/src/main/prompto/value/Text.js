@@ -2,7 +2,6 @@ var Value = require("./Value").Value;
 var Character = require("./Character").Character;
 var Integer = require("./Integer").Integer;
 var TextType = require("../type/TextType").TextType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var removeAccents = require("../utils/Utils").removeAccents;
 

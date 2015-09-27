@@ -1,6 +1,5 @@
 var Symbol = require("./Symbol").Symbol;
 var Dialect = require("../parser/Dialect").Dialect;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function NativeSymbol(id, expression) {
 	Symbol.call(this, id);

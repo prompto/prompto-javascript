@@ -134,7 +134,7 @@ SPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
 
 SPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
     var name = new grammar.Identifier(ctx.name.text);
-    name.setFrom(this.path, ctx.name, ctx.name, parser.Dialect.S);
+    name.setSectionFrom(this.path, ctx.name, ctx.name, parser.Dialect.S);
     var stmts = this.getNodeValue(ctx.stmts);
     var exps = this.getNodeValue(ctx.exps);
     var errorName = this.getNodeValue(ctx.error);
@@ -842,7 +842,8 @@ SPromptoBuilder.prototype.exitJava_identifier = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitJavascript_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    var id = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, id);
 };
 
 SPromptoBuilder.prototype.exitJavascript_member_expression = function(ctx) {
@@ -867,11 +868,6 @@ SPromptoBuilder.prototype.exitJavascript_this_expression = function(ctx) {
 SPromptoBuilder.prototype.exitJavaIdentifier = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	this.setNodeValue(ctx, new java.JavaIdentifierExpression(null, name));
-};
-
-SPromptoBuilder.prototype.exitJavascriptIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(null, name));
 };
 
 SPromptoBuilder.prototype.exitJavaIdentifierExpression = function(ctx) {
@@ -935,8 +931,8 @@ SPromptoBuilder.prototype.exitJavascriptPrimaryExpression = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitJavascript_identifier_expression = function(ctx) {
-    var name = ctx.name.getText();
-    this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(name));
+    var id = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new javascript.JavaScriptIdentifierExpression(id));
 };
 
 SPromptoBuilder.prototype.exitJavaSelectorExpression = function(ctx) {
@@ -954,8 +950,8 @@ SPromptoBuilder.prototype.exitJavascriptSelectorExpression = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitJavaScriptMemberExpression = function(ctx) {
-    var name = ctx.name.getText();
-    this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(name));
+    var id = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(id));
 };
 
 SPromptoBuilder.prototype.exitJava_primary_expression = function(ctx) {
@@ -1071,9 +1067,9 @@ SPromptoBuilder.prototype.exitJavaScriptMethodExpression = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitJavascript_method_expression = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
+	var id = this.getNodeValue(ctx.name);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(name, args));
+	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
 };
 
 SPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
@@ -2295,7 +2291,7 @@ SPromptoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
 SPromptoBuilder.prototype.buildSection = function(node, section) {
 	var first = this.findFirstValidToken(node.start.tokenIndex);
 	var last = this.findLastValidToken(node.stop.tokenIndex);
-    section.setFrom(this.path, first, last, parser.Dialect.S);
+    section.setSectionFrom(this.path, first, last, parser.Dialect.S);
 };
 
 SPromptoBuilder.prototype.findFirstValidToken = function(idx) {

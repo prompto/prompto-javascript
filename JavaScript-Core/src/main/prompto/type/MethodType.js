@@ -1,5 +1,4 @@
 var BaseType = require("./BaseType").BaseType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function MethodType(context, id) {
 	BaseType.call(this, id);

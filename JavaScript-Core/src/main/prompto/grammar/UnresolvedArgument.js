@@ -1,4 +1,4 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var ProblemListener = require("../parser/ProblemListener").ProblemListener;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var AttributeArgument = require("./AttributeArgument").AttributeArgument;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -68,7 +68,7 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
 		return;
     // don't collect problems during resolution
     var listener = context.problemListener;
-    context.problemListener = null;
+    context.problemListener = new ProblemListener();
     // try out various solutions
 	var named = context.getRegisteredDeclaration(this.name);
 	if(named instanceof AttributeDeclaration) {
@@ -79,7 +79,7 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
     // restore listener
     context.problemListener = listener;
     if(this.resolved==null)
-		throw new SyntaxError("Unknown identifier:" + this.name);
+        context.problemListener.reportUnknownVariable(this.id);
 };
 
 exports.UnresolvedArgument = UnresolvedArgument;

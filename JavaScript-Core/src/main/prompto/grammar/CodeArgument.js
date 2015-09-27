@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CodeType = require("../type/CodeType").CodeType;
 var Argument = require("./Argument").Argument;
 

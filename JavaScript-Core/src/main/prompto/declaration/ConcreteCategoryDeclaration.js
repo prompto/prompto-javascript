@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
 var SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
 var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
@@ -138,18 +137,16 @@ ConcreteCategoryDeclaration.prototype.registerMethods = function(context) {
 ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context) {
 	var actual;
 	if(method instanceof SetterMethodDeclaration) {
-		var key = "setter:"+method.name;
+		var key = "setter:" + method.name;
 		actual = this.methodsMap[key] || null;
-		if(actual!=null) {
-			throw new SyntaxError("Duplicate setter: \"" + method.name + "\"");
-		}
+		if(actual!=null)
+            context.problemListener.reportDuplicateSetter(method.id);
 		this.methodsMap[key] = method;
 	} else if(method instanceof GetterMethodDeclaration) {
 		var key = "getter:"+method.name;
 		actual = this.methodsMap[key] || null;
-		if(actual!=null) {
-			throw new SyntaxError("Duplicate getter: \"" + method.name + "\"");
-		}
+		if(actual!=null)
+            context.problemListener.reportDuplicateGetter(method.id);
 		this.methodsMap[key] = method;
 	} else {
 		var key = method.name;
@@ -164,13 +161,11 @@ ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context)
 
 ConcreteCategoryDeclaration.prototype.checkDerived = function(context) {
 	if(this.derivedFrom!=null) {
-		for(var i=0;i<this.derivedFrom.length;i++) {
-            var name = this.derivedFrom[i].name
-			var cd = context.getRegisteredDeclaration(name) || null;
-			if (cd == null) {
-				throw new SyntaxError("Unknown category: \"" + name + "\"");
-			}
-		}
+        this.derivedFrom.map( function(id) {
+            var cd = context.getRegisteredDeclaration(id.name) || null;
+			if (cd == null)
+                context.problemListener.reportUnknownCategory(id);
+		});
 	}
 };
 
@@ -210,9 +205,8 @@ ConcreteCategoryDeclaration.prototype.findGetter = function(context, attrName) {
 	if(method instanceof GetterMethodDeclaration) {
 		return method;
 	}
-	if(method!=null) {
-		throw new SyntaxError("Not a getter method!");
-	}
+	if(method!=null)
+        context.problemListener.reportBadGetter(method.id);
 	return this.findDerivedGetter(context, attrName);
 };
 
@@ -245,9 +239,8 @@ ConcreteCategoryDeclaration.prototype.findSetter = function(context, attrName) {
 	if(method instanceof SetterMethodDeclaration) {
 		return method;
 	}
-	if(method!=null) {
-		throw new SyntaxError("Not a setter method!");
-	}
+	if(method!=null)
+        context.problemListener.reportBadSetter(method.id);
 	return this.findDerivedSetter(context,attrName);
 };
 
@@ -300,14 +293,13 @@ ConcreteCategoryDeclaration.prototype.registerThisMemberMethods = function(conte
 	if(actual==null) {
 		return;
 	}
-	if(!(actual instanceof MethodDeclarationMap)) {
-		throw new SyntaxError("Not a member method!");
-	}
+	if(!(actual instanceof MethodDeclarationMap))
+        context.problemListener.reportBadMember(actual.id);
 	var protos = Object.getOwnPropertyNames(actual.protos);
-	for(var i=0;i<protos.length;i++) {
-		var method = actual.protos[protos[i]];
+    protos.map(function(proto) {
+        var method = actual.protos[proto];
 		result.registerIfMissing(method, context);
-	}
+	});
 };
 
 ConcreteCategoryDeclaration.prototype.registerDerivedMemberMethods = function(context, result) {

@@ -1,5 +1,4 @@
 var InstanceContext = require("../runtime/Context").InstanceContext;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function ThisExpression() {
     return this;

@@ -1,6 +1,5 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var ObjectList = require("../utils/ObjectList").ObjectList;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
 var Bool = require("../value/Bool").Bool;

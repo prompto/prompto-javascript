@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var PrestoError = require("../error/PrestoError").PrestoError;
 var CategoryType = null;
 var Score = require("./Score").Score;
@@ -16,13 +15,12 @@ function MethodFinder(context, methodCall) {
 MethodFinder.prototype.findMethod = function(checkInstance) {
 	var selector = this.methodCall.method;
 	var candidates = selector.getCandidates(this.context);
+    if(candidates.length==0)
+        this.context.problemListener.reportUnknownMethod(this.methodCall.method.id);
 	var compatibles = this.filterCompatible(candidates, checkInstance);
 	switch(compatibles.length) {
 	case 0:
-		if(this.context.problemListener)
-            this.context.problemListener.reportNoMatchingPrototype(this.methodCall);
-        else
-    		throw new SyntaxError("No matching prototype for:" + this.methodCall.toString());
+		this.context.problemListener.reportNoMatchingPrototype(this.methodCall);
 	case 1:
 		return compatibles[0];
 	default:

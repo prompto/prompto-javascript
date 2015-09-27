@@ -1,5 +1,4 @@
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var BaseValueList = require("../value/BaseValueList").BaseValueList;
 var Integer = require("../value/Integer").Integer;

@@ -1,4 +1,3 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Dialect = require("../parser/Dialect").Dialect;
 var Bool = require("../value/Bool").Bool;

@@ -106,26 +106,26 @@ EqualsExpression.prototype.isA = function(context, lval, rval) {
 
 EqualsExpression.prototype.downCast = function(context, setValue) {
     if(this.operator==EqOp.IS_A) {
-        var name = this.readLeftName();
-        if(name!=null) {
-            var value = context.getRegisteredValue(name);
+        var id = this.readLeftId();
+        if(id!=null) {
+            var value = context.getRegisteredValue(id.name);
             var type = this.right.value;
             var local = context.newChildContext();
             value = new LinkedVariable(type, value);
             local.registerValue(value, false);
             if(setValue)
-                local.setValue(name, new LinkedValue(context));
+                local.setValue(id, new LinkedValue(context));
             context = local;
         }
     }
     return context;
 };
 
-EqualsExpression.prototype.readLeftName = function() {
+EqualsExpression.prototype.readLeftId = function() {
     if(this.left instanceof InstanceExpression)
-        return this.left.name;
+        return this.left.id;
     else if(this.left instanceof UnresolvedIdentifier)
-        return this.left.name;
+        return this.left.id;
     else
         return null;
 };

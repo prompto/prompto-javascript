@@ -13,15 +13,15 @@ ArgumentList.prototype = Object.create(ObjectList.prototype);
 ArgumentList.prototype.constructor = ArgumentList;
 
 ArgumentList.prototype.register = function(context) {
-	for(var i=0;i<this.length;i++) {
-		this[i].register(context);
-	}
+    this.map(function(arg) {
+        arg.register(context);
+    });
 };
 
 ArgumentList.prototype.check = function(context) {
-	for(var i=0;i<this.length;i++) {
-		this[i].check(context);
-	}
+    this.map(function(arg) {
+        arg.check(context);
+    });
 };
 
 ArgumentList.prototype.find = function(name) {
