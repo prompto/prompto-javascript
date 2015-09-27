@@ -339,9 +339,9 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\7\u0093\2\2\u029e\u029f\7D\2\2\u029f\u02a0\7\u0080\2\2\u02a0\u02a1",
     "\7f\2\2\u02a1\u02a2\7S\2\2\u02a2\u02a3\7\20\2\2\u02a3\u02a4\5z>\2\u02a4",
     "\u02a5\5\u00e2r\2\u02a5\u02a6\5|?\2\u02a6\u02a7\5x=\2\u02a7\u02a8\7",
-    "B\2\2\u02a8\u02a9\7Z\2\2\u02a9\u02af\7\20\2\2\u02aa\u02ab\5z>\2\u02ab",
+    "B\2\2\u02a8\u02af\7Z\2\2\u02a9\u02aa\7\20\2\2\u02aa\u02ab\5z>\2\u02ab",
     "\u02ac\5\u00e4s\2\u02ac\u02ad\5|?\2\u02ad\u02b0\3\2\2\2\u02ae\u02b0",
-    "\5\u00b2Z\2\u02af\u02aa\3\2\2\2\u02af\u02ae\3\2\2\2\u02b0)\3\2\2\2\u02b1",
+    "\5\u00b2Z\2\u02af\u02a9\3\2\2\2\u02af\u02ae\3\2\2\2\u02b0)\3\2\2\2\u02b1",
     "\u02b2\5N(\2\u02b2+\3\2\2\2\u02b3\u02b6\5\u00b4[\2\u02b4\u02b5\7B\2",
     "\2\u02b5\u02b7\5\u00b6\\\2\u02b6\u02b4\3\2\2\2\u02b6\u02b7\3\2\2\2\u02b7",
     "-\3\2\2\2\u02b8\u02b9\5\u00be`\2\u02b9\u02bb\5\u00aeX\2\u02ba\u02bc",
@@ -4095,11 +4095,11 @@ EParser.prototype.test_method_declaration = function() {
         this.match(EParser.AND);
         this.state = 678;
         this.match(EParser.EXPECTING);
-        this.state = 679;
-        this.match(EParser.COLON);
         this.state = 685;
         switch(this._input.LA(1)) {
-        case EParser.LF:
+        case EParser.COLON:
+            this.state = 679;
+            this.match(EParser.COLON);
             this.state = 680; 
             this.indent();
             this.state = 681; 

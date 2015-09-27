@@ -140,13 +140,13 @@ TestMethodDeclaration.prototype.toEDialect = function(writer)
     writer.indent ();
     this.statements.toDialect (writer);
     writer.dedent ();
-    writer.append ("and expecting:");
+    writer.append ("and expecting");
     if (this.error != null) {
         writer.append (" ");
         this.error.toDialect (writer);
         writer.append ("\n");
     } else {
-        writer.append ("\n");
+        writer.append (":\n");
         writer.indent ();
         for(var i=0;i<this.assertions.length;i++) {
             this.assertions[i].toDialect (writer);
