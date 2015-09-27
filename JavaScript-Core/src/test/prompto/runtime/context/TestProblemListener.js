@@ -6,6 +6,11 @@ exports.testNoError = function(test) {
     checkProblems(test, code);
 };
 
+exports.testLexerError = function(test) {
+    var code = "\"abc";
+    checkProblems(test, code, "token recognition error at: '\"abc'");
+};
+
 exports.testSyntaxError = function(test) {
     var code = "define id as: Text attribute\n" +
                "define name as";

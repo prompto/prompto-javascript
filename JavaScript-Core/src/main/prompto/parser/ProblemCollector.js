@@ -22,7 +22,7 @@ ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, l
             startLine: line,
             startColumn: column,
             endLine: line,
-            endColumn: column + offendingSymbol.text.length,
+            endColumn: column + ( offendingSymbol ? offendingSymbol.text.length : 0 ),
             type: "error",
             message: msg
         };

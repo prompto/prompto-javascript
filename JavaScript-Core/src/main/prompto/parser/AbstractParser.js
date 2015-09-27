@@ -56,4 +56,14 @@ AbstractParser.prototype.lastHiddenTokenType = function() {
 	}
 };
 
+AbstractParser.prototype.removeErrorListeners = function() {
+    Parser.prototype.removeErrorListeners.call(this);
+    this._input.tokenSource.removeErrorListeners(); // lexer
+};
+
+AbstractParser.prototype.addErrorListener = function(listener) {
+    Parser.prototype.addErrorListener.call(this, listener);
+    this._input.tokenSource.addErrorListener(listener); // lexer
+};
+
 exports.AbstractParser = AbstractParser;
