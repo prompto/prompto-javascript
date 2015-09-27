@@ -136,7 +136,7 @@ TestMethodDeclaration.prototype.toEDialect = function(writer)
 {
     writer.append ("define ");
     writer.append (this.name);
-    writer.append (" as: test method doing:\n");
+    writer.append (" as test method doing:\n");
     writer.indent ();
     this.statements.toDialect (writer);
     writer.dedent ();

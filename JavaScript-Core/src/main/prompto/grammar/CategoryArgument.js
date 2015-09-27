@@ -120,11 +120,11 @@ CategoryArgument.prototype.toEDialect = function(writer) {
             case 0:
                 break;
             case 1:
-                writer.append(" with attribute: ");
+                writer.append(" with attribute ");
                 this.attributes.toDialect(writer, false);
                 break;
             default:
-                writer.append(" with attributes: ");
+                writer.append(" with attributes ");
                 this.attributes.toDialect(writer, true);
                 break;
         }

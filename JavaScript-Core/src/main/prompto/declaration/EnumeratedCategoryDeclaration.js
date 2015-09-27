@@ -62,16 +62,16 @@ EnumeratedCategoryDeclaration.prototype.toODialect = function(writer) {
 EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as: enumerated ");
+    writer.append(" as enumerated ");
     if(this.derivedFrom!=null)
         this.derivedFrom.toDialect(writer, true);
     else
         writer.append("category");
     if(this.attributes!=null && this.attributes.length>0) {
         if(this.attributes.length==1)
-            writer.append(" with attribute: ");
+            writer.append(" with attribute ");
         else
-            writer.append(" with attributes: ");
+            writer.append(" with attributes ");
         this.attributes.toDialect(writer, true);
         if(this.symbols!=null && this.symbols.length>0)
             writer.append(", and symbols:\n");

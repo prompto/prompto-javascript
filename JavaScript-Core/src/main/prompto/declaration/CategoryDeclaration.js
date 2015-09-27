@@ -62,13 +62,13 @@ CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, has
     var hasAttributes = this.attributes!=null && this.attributes.length>0;
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as: ");
+    writer.append(" as ");
     this.categoryTypeToEDialect(writer);
     if(hasAttributes) {
         if(this.attributes.length==1)
-            writer.append(" with attribute: ");
+            writer.append(" with attribute ");
         else
-            writer.append(" with attributes: ");
+            writer.append(" with attributes ");
         this.attributes.toDialect(writer, true);
     }
     if(hasMethods) {

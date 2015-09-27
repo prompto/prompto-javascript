@@ -40,7 +40,7 @@ ArgumentList.prototype.toDialect = function(writer) {
 };
 
 ArgumentList.prototype.toEDialect = function(writer) {
-    writer.append("receiving: ");
+    writer.append("receiving ");
     for(var i=0;i<this.length-1;i++) {
         this[i].toDialect(writer);
         writer.append(", ");

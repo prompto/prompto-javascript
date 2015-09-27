@@ -20,7 +20,7 @@ exports.tearDown = function(done) {
 	
 
 exports.testNativeAttribute = function(test) {
-	var stmts = parseString("define id as: Integer attribute");
+	var stmts = parseString("define id as Integer attribute");
 	stmts.register(context);
 	stmts.check(context);
 	test.done();
@@ -28,7 +28,7 @@ exports.testNativeAttribute = function(test) {
 
 
 exports.testUndeclaredCategoryAttribute = function(test) {
-	var stmts = parseString("define person as: Person attribute");
+	var stmts = parseString("define person as Person attribute");
 	stmts.register(context);
 	test.throws(function() { stmts.check(context); }, SyntaxError, "Should fail since Person is not declared !");
 	test.done();
@@ -36,10 +36,10 @@ exports.testUndeclaredCategoryAttribute = function(test) {
 
 
 exports.testMethodAttribute = function(test) {
-	var stmts = parseString("define name as: Text attribute\r\n" +
-			"define printName as: method receiving: name doing:\r\n" +
+	var stmts = parseString("define name as Text attribute\r\n" +
+			"define printName as method receiving name doing:\r\n" +
 			"\tprint with \"name\" + name as value\r\n" +
-			"define Person as: category with attribute: printName");
+			"define Person as category with attribute printName");
 	stmts.register(context);
 	test.throws(function() { stmts.check(context); }, SyntaxError, "Should fail since printName is not a category !");
 	test.done();
@@ -47,9 +47,9 @@ exports.testMethodAttribute = function(test) {
 
 
 exports.testCategoryAttribute = function(test) {
-	var stmts = parseString("define id as: Integer attribute\r\n" +
-			"define Person as: category with attribute: id\r\n" +
-			"define person as: Person attribute");
+	var stmts = parseString("define id as Integer attribute\r\n" +
+			"define Person as category with attribute id\r\n" +
+			"define person as Person attribute");
 	stmts.register(context);
 	stmts.check(context);
 	test.done();
@@ -58,7 +58,7 @@ exports.testCategoryAttribute = function(test) {
 
 
 exports.testCategoryWithUndeclaredDerived = function(test) {
-	var stmts = parseString("define Employee as: Person");
+	var stmts = parseString("define Employee as Person");
 	stmts.register(context);
 	test.throws(function() { stmts.check(context); }, SyntaxError, "Should fail since Person not declared !");
 	test.done();
@@ -66,7 +66,7 @@ exports.testCategoryWithUndeclaredDerived = function(test) {
 
 
 exports.testCategoryWithUndeclaredAttribute = function(test) {
-	var stmts = parseString("define Person as: category with attribute: id");
+	var stmts = parseString("define Person as category with attribute id");
 	stmts.register(context);
 	test.throws(function() { stmts.check(context); }, SyntaxError, "Should fail since id not declared !");
 	test.done();
@@ -74,9 +74,9 @@ exports.testCategoryWithUndeclaredAttribute = function(test) {
 
 
 exports.testCategory = function(test) {
-	var stmts = parseString("define id as: Integer attribute\r\n" +
-			"define Person as: category with attribute: id\r\n" +
-			"define Employee as: Person");
+	var stmts = parseString("define id as Integer attribute\r\n" +
+			"define Person as category with attribute id\r\n" +
+			"define Employee as Person");
 	stmts.register(context);
 	stmts.check(context);
 	test.done();
@@ -84,7 +84,7 @@ exports.testCategory = function(test) {
 
 
 exports.testMethodWithUndeclaredAttribute = function(test) {
-	var stmts = parseString("define printName as: method receiving: name doing:\r\n" +
+	var stmts = parseString("define printName as method receiving name doing:\r\n" +
 			"\tprint with \"name\" + name as value");
 	test.throws(function() { stmts.register(context); }, SyntaxError, "Should fail since name not declared !");
 	test.done();
@@ -92,10 +92,10 @@ exports.testMethodWithUndeclaredAttribute = function(test) {
 
 
 exports.testMethod = function(test) {
-	var stmts = parseString("define print as: native method receiving: Text value doing:\r\n" +
+	var stmts = parseString("define print as native method receiving Text value doing:\r\n" +
 				"\tJava: System.out.println(value);\r\n" +
-				"define name as: Text attribute\r\n" +
-				"define printName as: method receiving: name doing:\r\n" +
+				"define name as Text attribute\r\n" +
+				"define printName as method receiving name doing:\r\n" +
 				"\tprint with \"name\" + name as value" );
 	stmts.register(context);
 	stmts.check(context);
@@ -105,7 +105,7 @@ exports.testMethod = function(test) {
 
 
 exports.testList = function(test) {
-	var stmts = parseString("define testMethod as: method receiving: Text value doing:\r\n" +
+	var stmts = parseString("define testMethod as method receiving Text value doing:\r\n" +
 				"\tlist = [ \"john\" , \"jim\" ]\r\n" +
 				"\telem = list[1]\r\n");
 	stmts.register(context);
@@ -115,7 +115,7 @@ exports.testList = function(test) {
 
 
 exports.testDict = function(test) {
-	var stmts = parseString("define testMethod as: method receiving: Text value doing:\r\n" +
+	var stmts = parseString("define testMethod as method receiving Text value doing:\r\n" +
 				"\tdict = { \"john\":123, \"jim\":345 }\r\n" +
 				"\telem = dict[\"john\"]\r\n");
 	stmts.register(context);

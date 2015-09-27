@@ -27,7 +27,7 @@ AttributeDeclaration.prototype.toDialect = function(writer) {
 AttributeDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as: ");
+    writer.append(" as ");
     this.type.toDialect(writer);
     writer.append(" attribute");
     if (this.constraint != null)

@@ -36,10 +36,10 @@ OperatorMethodDeclaration.prototype.toSDialect = function(writer) {
 OperatorMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.operator.token);
-    writer.append(" as: operator ");
+    writer.append(" as operator ");
     this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
-        writer.append("returning: ");
+        writer.append("returning ");
         this.returnType.toDialect(writer);
         writer.append(" ");
     }

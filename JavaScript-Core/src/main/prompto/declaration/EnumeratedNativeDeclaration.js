@@ -51,7 +51,7 @@ EnumeratedNativeDeclaration.prototype.toODialect = function(writer) {
 EnumeratedNativeDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as: enumerated ");
+    writer.append(" as enumerated ");
     this.type.derivedFrom.toDialect(writer);
     writer.append(" with symbols:\n");
     writer.indent();

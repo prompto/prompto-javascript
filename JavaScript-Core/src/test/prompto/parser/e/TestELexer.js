@@ -6,38 +6,38 @@ var tokenNamesAsString = require("../BaseELexerTest").tokenNamesAsString;
 var parseTokenNamesFromString = require("../BaseELexerTest").parseTokenNamesFromString;
 
 exports.testIntegerAttribute= function(test) {
-	var actual = parseTokenNamesFromString("define id as: Integer attribute");
+	var actual = parseTokenNamesFromString("define id as Integer attribute");
 	var expected = tokenNamesAsString([ ELexer.DEFINE, ELexer.VARIABLE_IDENTIFIER,
-			ELexer.AS, ELexer.COLON, ELexer.INTEGER, ELexer.ATTRIBUTE, ELexer.LF ]);
+			ELexer.AS, ELexer.INTEGER, ELexer.ATTRIBUTE, ELexer.LF ]);
 	test.equal(expected,actual);
 	test.done();
 };
 
 
 exports.testStringAttribute= function(test) {
-	var actual = parseTokenNamesFromString("define name as: Text attribute");
+	var actual = parseTokenNamesFromString("define name as Text attribute");
 	var expected = tokenNamesAsString([ ELexer.DEFINE, ELexer.VARIABLE_IDENTIFIER,
-			ELexer.AS, ELexer.COLON, ELexer.TEXT, ELexer.ATTRIBUTE, ELexer.LF ]);
+			ELexer.AS, ELexer.TEXT, ELexer.ATTRIBUTE, ELexer.LF ]);
 	test.equal(expected,actual);
 	test.done();
 };
 
 
 exports.testPersonCategory= function(test) {
-	var actual = parseTokenNamesFromString("define Person as: category with attributes: id, name");
+	var actual = parseTokenNamesFromString("define Person as category with attributes id, name");
 	var expected = tokenNamesAsString([ ELexer.DEFINE, ELexer.TYPE_IDENTIFIER,
-			ELexer.AS, ELexer.COLON, ELexer.CATEGORY, ELexer.WITH, ELexer.ATTRIBUTES,
-			ELexer.COLON, ELexer.VARIABLE_IDENTIFIER, ELexer.COMMA, ELexer.VARIABLE_IDENTIFIER, ELexer.LF ]);
+			ELexer.AS, ELexer.CATEGORY, ELexer.WITH, ELexer.ATTRIBUTES,
+			ELexer.VARIABLE_IDENTIFIER, ELexer.COMMA, ELexer.VARIABLE_IDENTIFIER, ELexer.LF ]);
 	test.equal(expected,actual);
 	test.done();
 };
 
 
 exports.testEmployeeCategoryExtendsPerson= function(test) {
-	var actual = parseTokenNamesFromString("define Employee as: Person with attribute: company");
+	var actual = parseTokenNamesFromString("define Employee as Person with attribute company");
 	var expected = tokenNamesAsString([ ELexer.DEFINE, ELexer.TYPE_IDENTIFIER,
-			ELexer.AS, ELexer.COLON, ELexer.TYPE_IDENTIFIER, ELexer.WITH, ELexer.ATTRIBUTE,
-			ELexer.COLON, ELexer.VARIABLE_IDENTIFIER, ELexer.LF ]);
+			ELexer.AS, ELexer.TYPE_IDENTIFIER, ELexer.WITH, ELexer.ATTRIBUTE,
+			ELexer.VARIABLE_IDENTIFIER, ELexer.LF ]);
 	test.equal(expected,actual);
 	test.done();
 };

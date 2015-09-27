@@ -72,10 +72,10 @@ NativeMethodDeclaration.prototype.toODialect = function(writer) {
 NativeMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as: native method ");
+    writer.append(" as native method ");
     this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
-        writer.append("returning: ");
+        writer.append("returning ");
         this.returnType.toDialect(writer);
         writer.append(" ");
     }

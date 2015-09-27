@@ -20,13 +20,13 @@ var ConcreteCategoryDeclaration = prompto.declaration.ConcreteCategoryDeclaratio
 var context;
 
 exports.setUp = function(done) {
-	var stmts = parseString("define id as: Integer attribute\r\n" +
-			"define name as: String attribute\r\n" +
-			"define other as: String attribute\r\n" +
-			"define Simple as: category with attribute: name\r\n" +
-			"define Root as: category with attribute: id\r\n" +
-			"define DerivedWithOther as: Root with attribute: other\r\n" +
-			"define DerivedWithName as: Root with attribute: name\r\n");
+	var stmts = parseString("define id as Integer attribute\r\n" +
+			"define name as String attribute\r\n" +
+			"define other as String attribute\r\n" +
+			"define Simple as category with attribute name\r\n" +
+			"define Root as category with attribute id\r\n" +
+			"define DerivedWithOther as Root with attribute other\r\n" +
+			"define DerivedWithName as Root with attribute name\r\n");
 	context = prompto.runtime.Context.newGlobalContext();
 	stmts.register(context);
 	done();

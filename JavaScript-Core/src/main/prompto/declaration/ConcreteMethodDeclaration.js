@@ -117,10 +117,10 @@ ConcreteMethodDeclaration.prototype.toSDialect = function(writer) {
 ConcreteMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as: method ");
+    writer.append(" as method ");
     this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance()) {
-        writer.append("returning: ");
+        writer.append("returning ");
         this.returnType.toDialect(writer);
         writer.append(" ");
     }

@@ -180,7 +180,7 @@ exports.testRange = function (test) {
 
 
 exports.testAttribute = function (test) {
-    var statement = "define id as : Integer attribute\n";
+    var statement = "define id as Integer attribute\n";
     var parser = new ETestParser(statement, true);
     var ad = parser.parse_attribute_declaration();
     test.ok(ad);
@@ -191,7 +191,7 @@ exports.testAttribute = function (test) {
 
 
 exports.testArrayAttribute = function (test) {
-    var statement = "define id as : Integer[] attribute\n";
+    var statement = "define id as Integer[] attribute\n";
     var parser = new ETestParser(statement, true);
     var ad = parser.parse_attribute_declaration();
     test.ok(ad);
@@ -202,7 +202,7 @@ exports.testArrayAttribute = function (test) {
 
 
 exports.testCategory1Attribute = function (test) {
-    var statement = "define Person as: category with attribute: id\n";
+    var statement = "define Person as category with attribute id\n";
     var parser = new ETestParser(statement, true);
     var cd = parser.parse_category_declaration();
     test.ok(cd);
@@ -215,7 +215,7 @@ exports.testCategory1Attribute = function (test) {
 
 
 exports.testCategory2Attributes = function (test) {
-    var statement = "define Person as: category with attributes: id, name";
+    var statement = "define Person as category with attributes id, name";
     var parser = new ETestParser(statement, false);
     var cd = parser.parse_category_declaration();
     test.ok(cd);
@@ -229,7 +229,7 @@ exports.testCategory2Attributes = function (test) {
 
 
 exports.testCategory1Derived1Attribute = function (test) {
-    var statement = "define Employee as: Person with attribute: company";
+    var statement = "define Employee as Person with attribute company";
     var parser = new ETestParser(statement, false);
     var cd = parser.parse_category_declaration();
     test.ok(cd);
@@ -243,7 +243,7 @@ exports.testCategory1Derived1Attribute = function (test) {
 
 
 exports.testCategory2DerivedNoAttribute = function (test) {
-    var statement = "define Entrepreneur as: Person and Company\n";
+    var statement = "define Entrepreneur as Person and Company\n";
     var parser = new ETestParser(statement, true);
     var cd = parser.parse_category_declaration();
     test.ok(cd);
@@ -380,7 +380,7 @@ exports.testMethodCallWith = function (test) {
 
 
 exports.testMethod1Parameter1Statement = function (test) {
-    var statement = "define printName as: method receiving: Person p doing:\n" +
+    var statement = "define printName as method receiving Person p doing:\n" +
         "\tprint with \"person\" + p.name as value\n";
     var parser = new ETestParser(statement, true);
     var ad = parser.parse_concrete_method_declaration();
@@ -399,7 +399,7 @@ exports.testMethod1Parameter1Statement = function (test) {
 
 
 exports.testMethod1Extended1Statement = function (test) {
-    var statement = "define printName as: method receiving: Object o with attribute: name doing:\n" +
+    var statement = "define printName as method receiving Object o with attribute name doing:\n" +
         "\tprint with \"object\" + o.name as value\n";
     var parser = new ETestParser(statement, true);
     var ad = parser.parse_concrete_method_declaration();
@@ -420,7 +420,7 @@ exports.testMethod1Extended1Statement = function (test) {
 
 
 exports.testMethod1Array1Statement = function (test) {
-    var statement = "define printName as: method receiving: Option[] options doing:\n" +
+    var statement = "define printName as method receiving Option[] options doing:\n" +
         "\tprint with \"array\" + args as value\n";
     var parser = new ETestParser(statement, true);
     var ad = parser.parse_concrete_method_declaration();
@@ -537,7 +537,7 @@ exports.testNativeCSharp = function (test) {
 
 
 exports.testNativeMethod = function (test) {
-    var statement = "define print as: native method receiving: String value doing:\n" +
+    var statement = "define print as native method receiving String value doing:\n" +
         "\tJava: System.out.println(value);\n" +
         "\tC#: Console.println(value);\n";
 
