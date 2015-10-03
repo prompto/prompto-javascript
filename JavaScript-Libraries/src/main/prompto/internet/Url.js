@@ -1,4 +1,4 @@
-var ReadWriteError = require("../error/ReadWriteError").ReeadWriteError;
+var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 
 function Url(path, encoding) {
     this.path = path;
