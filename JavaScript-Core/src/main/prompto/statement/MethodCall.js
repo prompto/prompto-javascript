@@ -112,7 +112,7 @@ MethodCall.prototype.interpret = function(context) {
 		var expression = assignment.resolve(local, declaration, true);
         var argument = assignment.argument;
 		var value = argument.checkValue(context,expression);
-        if(value!=null && value.mutable && !argument.mutable)
+        if(value!=null && argument.mutable && !value.mutable)
             throw new NotMutableError();
 		local.setValue(assignment.id, value);
 	}
