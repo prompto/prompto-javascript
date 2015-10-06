@@ -12,7 +12,7 @@ exports.testMissingType = function(test) {
     checkCompletion(test, code, ["Text", "Integer", "Date"]);
 };
 
-
+/*
 exports.testOverride1 = function(test) {
     var code = "define name as Text attribute\ndefine name as Text attribute";
     checkCompletionAt(test, code, 2, 16, ["Text"]);
@@ -33,3 +33,4 @@ exports.testOverride4 = function(test) {
     var code = "define name as ";
     checkCompletionAt(test, code, 1, code.length - 1, ["Text", "Integer", "Date"]);
 };
+*/
