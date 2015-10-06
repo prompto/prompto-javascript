@@ -1,3 +1,4 @@
+var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var ContOp = require("../grammar/ContOp").ContOp;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
@@ -127,7 +128,7 @@ ContainsExpression.prototype.interpretAssert = function(context, test) {
     var writer = new CodeWriter(test.dialect, context);
     this.toDialect(writer);
     var expected = writer.toString();
-    var actual = lval.toString() + this.operator.toString() + rval.toString();
+    var actual = lval.toString() + " " + this.operator.toString() +  " " + rval.toString();
     test.printFailure(context, expected, actual);
     return false;
 };

@@ -1,3 +1,4 @@
+require("../../exploded");
 exports.utils = require('./utils/index');
 exports.literal = require('./literal/index');
 exports.parser = require('./parser/index');
@@ -11,4 +12,3 @@ exports.csharp = require('./csharp/index');
 exports.runtime = require('./runtime/index');
 exports.error = require("./error/index");
 exports.value = require("./value/index");
-exports.internet = require('./internet/index');

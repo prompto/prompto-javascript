@@ -1,41 +1,60 @@
 var path = require("path");
+var fs = require("fs");
+
 var prompto = require("../index"); // prompto
 var antlr4 = require("antlr4");
 var Out = require("../runtime/utils/Out").Out;
-var fs = require("fs");
 
-function getResourcesFolder() {
-	var prompto = module.filename;
-	while(path.basename(prompto).indexOf("prompto-")!=0) {
-		var parent = path.dirname(prompto);
-        if(parent==prompto)
+function getPromptoFolder() {
+    var prompto = module.filename;
+    while (path.basename(prompto).indexOf("prompto-") != 0) {
+        var parent = path.dirname(prompto);
+        if (parent == prompto)
             throw "Could not find prompto root!";
         prompto = parent;
-	}
-    prompto = path.dirname(prompto);
+    }
+    return path.dirname(prompto);
+};
+
+function getResourcesFolder() {
+    var prompto = getPromptoFolder();
 	return path.normalize(prompto + path.sep + "prompto-tests" + path.sep + "Tests" + path.sep + "resources");
 }
 
+function getLibrariesFolder() {
+    var prompto = getPromptoFolder();
+    return path.normalize(prompto + path.sep + "prompto-libraries");
+}
+
 var resourcesFolder = getResourcesFolder();
+var librariesFolder = getLibrariesFolder();
+
+exports.coreContext = null;
 
 exports.getResource = function(fileName) {
 	fileName = fileName.replace("/", path.sep);
-	fileName = path.normalize(resourcesFolder + path.sep + fileName);
-	return new antlr4.FileStream(fileName);
+	var fullPath = path.normalize(resourcesFolder + path.sep + fileName);
+    if(!fs.existsSync(fullPath))
+        fullPath = path.normalize(librariesFolder + path.sep + fileName);
+	return new antlr4.FileStream(fullPath);
 };
 
 function getResourceAsString(fileName) {
     fileName = fileName.replace("/", path.sep);
-    fileName = path.normalize(resourcesFolder + path.sep + fileName);
-    return fs.readFileSync(fileName).toString();
+    var fullPath = path.normalize(resourcesFolder + path.sep + fileName);
+    if(!fs.existsSync(fullPath))
+        fullPath = path.normalize(librariesFolder + path.sep + fileName);
+    return fs.readFileSync(fullPath).toString();
 }
 
 function readExpected(fileName) {
 	var idx = fileName.lastIndexOf('.');
 	fileName = fileName.substring(0, idx) + ".txt";
 	fileName = fileName.replace("/", path.sep);
-	fileName = path.normalize(resourcesFolder + path.sep + fileName);
-	var all = fs.readFileSync(fileName).toString();
+    var fullPath = path.normalize(resourcesFolder + path.sep + fileName);
+    if(!fs.existsSync(fullPath))
+        fullPath = path.normalize(librariesFolder + path.sep + fileName);
+	var all = fs.readFileSync(fullPath).toString();
 	return all.split("\n");
 }
 

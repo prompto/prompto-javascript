@@ -62,7 +62,7 @@ ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter
 		context = context.newInstanceContext(this, null).newChildContext();
 		return getter.interpret(context);
 	} else {
-		return this.values[attrName];
+		return this.values[attrName] || null;
 	}
 };
 

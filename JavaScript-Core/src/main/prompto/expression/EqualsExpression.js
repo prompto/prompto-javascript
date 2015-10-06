@@ -4,6 +4,7 @@ var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var TypeValue = require("../value/TypeValue").TypeValue;
+var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
@@ -43,8 +44,8 @@ EqualsExpression.prototype.check = function(context) {
 };
 
 EqualsExpression.prototype.interpret = function(context) {
-    var lval = this.left.interpret(context);
-    var rval = this.right.interpret(context);
+    var lval = this.left.interpret(context) || NullValue.instance;
+    var rval = this.right.interpret(context) || NullValue.instance;
     return this.interpretValues(context, lval, rval);
 };
 
@@ -87,7 +88,7 @@ EqualsExpression.prototype.roughly = function(context, lval, rval) {
 EqualsExpression.prototype.areEqual = function(context, lval, rval) {
 	if(lval==rval) {
 		return true;
-	} else if(lval==null || rval==null) {
+	} else if(lval==NullValue.instance || rval==NullValue.instance) {
         return false;
     } else {
 		return lval.equals(rval);
@@ -131,8 +132,8 @@ EqualsExpression.prototype.readLeftId = function() {
 };
 
 EqualsExpression.prototype.interpretAssert = function(context, test) {
-    var lval = this.left.interpret(context);
-    var rval = this.right.interpret(context);
+    var lval = this.left.interpret(context) || NullValue.instance;
+    var rval = this.right.interpret(context) || NullValue.instance;
     var result = this.interpretValues(context, lval, rval);
     if(result==Bool.TRUE)
         return true;

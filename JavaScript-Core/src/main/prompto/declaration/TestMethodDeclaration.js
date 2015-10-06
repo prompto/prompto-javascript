@@ -1,5 +1,6 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var Identifier = require("../grammar/Identifier").Identifier;
+var PrestoError = require("../error/PrestoError").PrestoError;
 var VoidType = require("../type/VoidType").VoidType;
 
 function TestMethodDeclaration(id, stmts, exps, error) {
@@ -80,9 +81,13 @@ TestMethodDeclaration.prototype.interpretBody = function(context)
         this.statements.interpret (context);
         return true;
     } catch (e) {
-        this.interpretError (context, e);
-        // no more to execute
-        return false;
+        if(e instanceof PrestoError) {
+            this.interpretError(context, e);
+            // no more to execute
+            return false;
+        } else
+            throw e;
+
     } finally {
         context.leaveMethod (this);
     }

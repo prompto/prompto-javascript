@@ -19,6 +19,10 @@ JavaScriptModule.prototype.resolve = function() {
     if(o!=null) {
         return o;
     }
+    var o = this.resolve_runtime();
+    if(o!=null) {
+        return o;
+    }
     var o = this.resolve_path("prompto");
     if(o!=null) {
         return o;
@@ -34,6 +38,19 @@ JavaScriptModule.prototype.resolve_module = function() {
     try {
         var path = this.toString();
         return require(path);
+    } catch (e) {
+        return null;
+    }
+};
+
+JavaScriptModule.prototype.resolve_runtime = function() {
+    try {
+        var folder = path.sep + "JavaScript-Core" + path.sep;
+        var idx = module.filename.lastIndexOf(folder);
+        var rootpath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
+        // for now let's assume prompto and the required module are at the same level
+        var modulepath = rootpath + this.toString();
+        return require(modulepath);
     } catch (e) {
         return null;
     }

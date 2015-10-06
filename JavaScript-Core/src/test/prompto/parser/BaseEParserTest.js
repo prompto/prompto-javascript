@@ -1,7 +1,12 @@
-var prompto = require("../index"); // prompto
+var path = require("path");
+var fs = require("fs");
+
 var antlr4 = require("antlr4");
-var getResource = require("./BaseParserTest").getResource;
-var checkSameOutput = require("./BaseParserTest").checkSameOutput;
+var prompto = require("../index"); // prompto
+var BaseParserTest = require("./BaseParserTest");
+var getResource = BaseParserTest.getResource;
+var checkSameOutput = BaseParserTest.checkSameOutput;
+var Out = require("../runtime/utils/Out").Out;
 
 function parse(input) {
     var parser = new prompto.parser.ECleverParser(input);
@@ -70,17 +75,27 @@ exports.checkCompletion = function(test, code, expected) {
     test.done();
 };
 
-function findTreeAt(tree, line, column) {
+function findTerminalAt(tree, line, column) {
     if(!tree.getChildCount())
         return tree;
-    for (var i = 0; i < tree.getChildCount(); i++) {
+    for (var i = 0, count = tree.getChildCount(); i < count; i++) {
         var child = tree.getChild(i);
-        var startLine = child.symbol ? child.symbol.line : child.start.line;
-        if(startLine<line)
-            continue;
-        var stopColumn = child.symbol ? child.symbol.stop : child.stop.stop;
-        if(stopColumn>=column)
-            return findTreeAt(child, line, column);
+        if(child.symbol) {
+            if (i < count - 1 && (child.symbol.line<line))
+                continue;
+            if ( i == count - 1 || child.symbol.column + child.symbol.stop - child.symbol.start >= column)
+                return child;
+        } else {
+            var startLine = child.start.line;
+            var stopLine = child.stop.line;
+            if (i < count - 1 && (line < startLine || line > stopLine))
+                continue;
+            var startColumn = line == startLine ? child.start.column : 1;
+            var stopColumn = line == stopLine ? child.stop.column + child.stop.stop - child.stop.start : 2 ^ 31;
+            if (i < count - 1 && (column < startColumn || column > stopColumn))
+                continue;
+            return findTerminalAt(child, line, column);
+        }
     }
 };
 
@@ -93,11 +108,12 @@ function findEnclosingRuleFor(node) {
 exports.checkCompletionAt = function(test, code, line, column, expected) {
     var listener = new prompto.parser.CodeCompleter();
     var parser = new prompto.parser.ECleverParser(code);
+    parser._input.tokenSource.addLF = false;
     var tree = parser.declaration_list();
-    var tokenNode = findTreeAt(tree, line, column);
+    var tokenNode = findTerminalAt(tree, line, column);
     var ruleNode = findEnclosingRuleFor(tokenNode);
     var suggestions = []
-    var intervals = parser._interp.atn.getExpectedTokens(tokenNode.parentCtx.invokingState, ruleNode);
+    var intervals = parser._interp.atn.getExpectedTokens(tokenNode.invokingState, ruleNode);
     intervals.intervals.map(function(interval) {
         for (var t = interval.start; t < interval.stop; t++) {
             var literal = parser.literalNames[t];
@@ -123,4 +139,42 @@ exports.checkOutput = function(test, fileName) {
     test.done();
 };
 
+
+exports.loadDependency = function(libraryName) {
+    if (BaseParserTest.coreContext == null)
+        BaseParserTest.coreContext = prompto.runtime.Context.newGlobalContext();
+    var files = exports.listLibraryFiles(libraryName);
+    if (files) files.map(function (file) {
+        var resourceName = libraryName + path.sep + file;
+        decls = exports.parseResource(resourceName);
+        decls.register(BaseParserTest.coreContext);
+    });
+};
+
+exports.listLibraryFiles = function(libraryName) {
+    var idx = __filename.indexOf(path.sep + "prompto-javascript" + path.sep + "JavaScript-Core" + path.sep);
+    var dir = __filename.substring(0, idx) + path.sep + "prompto-libraries" + path.sep + libraryName;
+    if (fs.existsSync(dir)) {
+        var files = fs.readdirSync(dir);
+        return files.filter(function (file) {
+            return file.indexOf(".pec")>=0 || file.indexOf(".poc")>=0 || file.indexOf(".psc")>=0;
+        });
+    } else
+        return null;
+};
+
+
+exports.runTests = function(test, fileName) {
+    decls = exports.parseResource(fileName)
+    decls.map(function(decl) {
+        if (!(decl instanceof prompto.declaration.TestMethodDeclaration))
+            return;
+        Out.reset()
+        prompto.runtime.Interpreter.interpretTest(BaseParserTest.coreContext, decl.name);
+        var expected = decl.name + " test successful";
+        var read = Out.read();
+        test.equal(read, expected);
+    });
+    test.done();
+};
 

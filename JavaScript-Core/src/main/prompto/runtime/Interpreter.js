@@ -132,6 +132,12 @@ Interpreter.interpretTests = function(context) {
     }
 };
 
+Interpreter.interpretTest = function(context, name) {
+    var test = context.tests[name];
+    var local = context.newLocalContext();
+    test.interpret(local);
+};
+
 exports.Interpreter = Interpreter;
 
 
