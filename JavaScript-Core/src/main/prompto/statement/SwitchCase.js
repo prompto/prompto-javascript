@@ -12,7 +12,7 @@ SwitchCase.prototype  = Object.create(Section.prototype);
 SwitchCase.prototype.constructor = SwitchCase;
 
 SwitchCase.prototype.checkReturnType = function(context) {
-	return this.statements.check(context);
+	return this.statements.check(context, null);
 };
 
 SwitchCase.prototype.interpret = function(context) {

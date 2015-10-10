@@ -1,7 +1,6 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var VoidType = require("../type/VoidType").VoidType;
-var CategoryType = null;;
+var CategoryType = null;
 var PrestoError = require("../error/PrestoError").PrestoError;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
@@ -15,7 +14,7 @@ function BaseMethodDeclaration(id, args, returnType) {
 	BaseDeclaration.call(this, id);
     this.memberOf = null;
 	this.args = args || new ArgumentList();
-	this.returnType = returnType || VoidType.instance;
+	this.returnType = returnType || null;
 	return this;
 }
 

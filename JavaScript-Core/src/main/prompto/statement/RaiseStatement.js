@@ -1,5 +1,7 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var VoidType = require("../type/VoidType").VoidType;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var UserError = require("../error/UserError").UserError;
 var Dialect = require("../parser/Dialect").Dialect;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -32,7 +34,7 @@ RaiseStatement.prototype.check = function(context) {
 	if(!type.isAssignableTo(context, new CategoryType(new Identifier("Error")))) {
 		throw new SyntaxError(type.name + " does not extend Error");
 	}
-	return type;
+	return VoidType.instance;
 };
 
 RaiseStatement.prototype.interpret = function(context) {

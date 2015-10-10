@@ -27,7 +27,7 @@ SwitchErrorStatement.prototype.checkSwitchType = function(context) {
 };
 
 SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
-	var type = this.instructions.check(context);
+	var type = this.instructions.check(context, null);
 	if(type!=VoidType.instance) {
 		types[type.name] = type;
 	}
@@ -35,7 +35,7 @@ SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
 	local.registerValue(new ErrorVariable(this.errorId));
 	BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
 	if(this.alwaysInstructions!=null) {
-		type = this.alwaysInstructions.check(context);
+		type = this.alwaysInstructions.check(context, null);
 		if(type!=VoidType.instance) {
 			types[type.name] = type;
 		}

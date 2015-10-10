@@ -1,5 +1,6 @@
 var type = require("../type/index.js");
 var Value = require("../value/Value").Value;
+var ListValue = require("../value/ListValue").ListValue;
 var getTypeName = require("./JavaScriptUtils").getTypeName;
 var InternalError = require("../error/InternalError").InternalError;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
@@ -21,20 +22,28 @@ JavaScriptType.scriptToTypeMap = {
 };
 
 
-JavaScriptType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
+JavaScriptType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if(value instanceof Value) {
 		return value;
 	}
     var typeName = getTypeName(value);
-    var prestoType = JavaScriptType.scriptToTypeMap[typeName] || null;
-	if (prestoType != null) {
-		return prestoType.convertJavaScriptValueToPrestoValue(context, value, returnType);
+    var promptoType = JavaScriptType.scriptToTypeMap[typeName] || null;
+	if (promptoType != null) {
+		return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
 	} else if(typeName=='number') {
         if (value == (value | 0)) {
-            return type.IntegerType.instance.convertJavaScriptValueToPrestoValue(context, value, returnType);
+            return type.IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
         } else {
-            return type.DecimalType.instance.convertJavaScriptValueToPrestoValue(context, value, returnType);
+            return type.DecimalType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
+    }
+    if(typeName==="Array" && returnType instanceof type.ListType) {
+        var self = this;
+        var itemType = returnType.itemType;
+        var items = value.map(function(item) {
+            return self.convertJavaScriptValueToPromptoValue(context, item, itemType);
+        });
+        return new ListValue(itemType, items);
     }
     var decl = context.getNativeBinding(typeName);
     if(decl!=null) {

@@ -21,12 +21,11 @@ ListType.prototype.constructor = ListType;
 	public Class<?> toJavaClass() {
 		return List.class;
 	}
-	
-	@Override
-	public boolean isAssignableTo(Context context, IType other) {
-		return (other instanceof ListType) && itemType.isAssignableTo(context, ((ListType)other).getItemType());
-	}
 */
+
+ListType.prototype.isAssignableTo = function(context, other) {
+    return (other instanceof ListType) && this.itemType.isAssignableTo(context, other.itemType);
+};
 
 ListType.prototype.equals = function(obj) {
 	if(obj===this) {

@@ -14,7 +14,7 @@ WithSingletonStatement.prototype.constructor = WithSingletonStatement;
 WithSingletonStatement.prototype.check = function(context) {
     var instanceContext = context.newInstanceContext(null, this.type);
     var childContext = instanceContext.newChildContext();
-    return this.instructions.check(childContext);
+    return this.instructions.check(childContext, null);
 };
 
 WithSingletonStatement.prototype.interpret = function(context) {

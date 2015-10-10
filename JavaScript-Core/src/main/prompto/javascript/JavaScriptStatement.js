@@ -27,7 +27,7 @@ JavaScriptStatement.prototype.interpret = function(context, returnType) {
 	if(result !== null) {
         var id = new Identifier(getTypeName(result));
 		var type = new JavaScriptType(id);
-		result = type.convertJavaScriptValueToPrestoValue(context, result, returnType);
+		result = type.convertJavaScriptValueToPromptoValue(context, result, returnType);
 	}
 	return result;
 };

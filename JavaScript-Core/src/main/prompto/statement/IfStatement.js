@@ -115,7 +115,7 @@ IfElement.prototype.check = function(context) {
 		throw new SyntaxError("Expected a boolean condition!");
 	}
     context = this.downCast(context, false);
-	return this.instructions.check(context);
+	return this.instructions.check(context, null);
 };
 
 IfElement.prototype.downCast = function(context, setValue) {

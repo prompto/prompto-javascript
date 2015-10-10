@@ -15,20 +15,41 @@ function StatementList(statement) {
 StatementList.prototype = Object.create(ObjectList.prototype);
 StatementList.prototype.constructor = StatementList;
 
-StatementList.prototype.check = function(context, nativeOnly) {
+StatementList.prototype.check = function(context, returnType, nativeOnly) {
 	nativeOnly = nativeOnly || false;
-	var types = new TypeMap();
-	for(var i=0;i<this.length;i++) {
-		var stmt = this[i];
-		if(nativeOnly && !(stmt instanceof JavaScriptNativeCall)) {
-			continue;
-		}
-		var type = stmt.check(context);
-		if(type!==VoidType.instance) {
-			types[type.name] = type;
-		}
-	}
-	return types.inferType(context);
+    if(returnType==VoidType.instance) {
+        if(nativeOnly) {
+            this.map(function (stmt) {
+                if(stmt instanceof JavaScriptNativeCall)
+                    stmt.check(context);
+            });
+        } else {
+            this.map(function (stmt) {
+                stmt.check(context);
+            });
+        }
+        return VoidType.instance;
+    } else {
+	    var types = new TypeMap();
+        if(nativeOnly) {
+            this.map(function (stmt) {
+                if(stmt instanceof JavaScriptNativeCall) {
+                    var type = stmt.check(context);
+                    if(type!==VoidType.instance) {
+                        types[type.name] = type;
+                    }
+                }
+            });
+        } else {
+            this.map(function (stmt) {
+                var type = stmt.check(context);
+                if(type!==VoidType.instance) {
+                    types[type.name] = type;
+                }
+            });
+        }
+    	return types.inferType(context);
+    }
 };
 
 StatementList.prototype.interpret = function(context) {

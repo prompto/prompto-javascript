@@ -52,7 +52,7 @@ BaseSwitchStatement.prototype.collectReturnTypes = function(context, types) {
 		}
 	}
 	if(this.defaultCase!=null) {
-		var type = this.defaultCase.check(context);
+		var type = this.defaultCase.check(context, null);
 		if(type!=VoidType.instance) {
 			types[type.name] = type;
 		}

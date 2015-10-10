@@ -182,6 +182,18 @@ Context.prototype.findAttribute = function(name) {
         return this.globals.findAttribute(name);
 };
 
+Context.prototype.getAllAttributes = function() {
+    if(this==this.globals) {
+        var list = [];
+        for(var name in this.declarations) {
+            if(this.declarations[name] instanceof AttributeDeclaration)
+                list.push(this.declarations[name]);
+        }
+        return list;
+    } else
+        return this.globals.getAllAttributes();
+};
+
 Context.prototype.getRegistered = function(name) {
 	// resolve upwards, since local names override global ones
 	var actual = this.declarations[name] || null;

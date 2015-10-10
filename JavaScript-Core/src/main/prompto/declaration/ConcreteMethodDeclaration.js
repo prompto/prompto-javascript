@@ -53,7 +53,7 @@ ConcreteMethodDeclaration.prototype.fullCheck = function(context, nativeOnly) {
 	if(this.args!==null) {
 		this.args.check(context);
 	}
-	return this.statements.check(context, nativeOnly);
+	return this.statements.check(context, this.returnType, nativeOnly);
 };
 
 ConcreteMethodDeclaration.prototype.checkChild = function(context) {
@@ -62,7 +62,7 @@ ConcreteMethodDeclaration.prototype.checkChild = function(context) {
 	}
 	var child = context.newChildContext();
 	this.registerArguments(child);
-	return this.statements.check(child);
+	return this.statements.check(child, this.returnType);
 };
 
 ConcreteMethodDeclaration.prototype.interpret = function(context) {

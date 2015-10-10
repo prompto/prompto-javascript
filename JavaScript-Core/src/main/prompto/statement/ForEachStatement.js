@@ -29,7 +29,7 @@ ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 	if (this.v2 != null) {
 		context.registerValue(new Variable(this.v1, IntegerType.instance));
 	}
-	return this.instructions.check(child);
+	return this.instructions.check(child, null);
 };
 
 ForEachStatement.prototype.interpret = function(context) {

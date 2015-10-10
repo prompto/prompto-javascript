@@ -20,7 +20,7 @@ WhileStatement.prototype.check = function(context) {
 		throw new SyntaxError("Expected a Boolean condition!");
 	}
 	var child = context.newChildContext();
-	return this.instructions.check(child);
+	return this.instructions.check(child, null);
 };
 
 WhileStatement.prototype.interpret = function(context) {

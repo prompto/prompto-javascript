@@ -4,6 +4,7 @@ var CodeArgument = require("../grammar/CodeArgument").CodeArgument;
 
 function AbstractMethodDeclaration(id, args, returnType) {
 	BaseMethodDeclaration.call(this, id, args, returnType);
+    this.returnType = returnType || VoidType.instance;
 	return this;
 }
 

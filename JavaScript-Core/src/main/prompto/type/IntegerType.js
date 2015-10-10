@@ -149,11 +149,11 @@ IntegerType.prototype.newRange = function(left, right) {
 	if(left instanceof Integer && right instanceof Integer) {
 		return new IntegerRange(left, right);
 	} else {
-		return NativeType.prototype.checkCompare.newRange(this, left, right);
+		return NativeType.prototype.newRange.call(this, left, right);
 	}
 };
 
-IntegerType.prototype.convertJavaScriptValueToPrestoValue = function(context, value, returnType) {
+IntegerType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if (typeof(value)=='number') {
 		return new Integer(value);
 	} else {
