@@ -1156,7 +1156,7 @@ OPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 
 OPromptoBuilder.prototype.exitDeclarationList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.DeclarationList(null, item);
+	var items = new declaration.DeclarationList(null, item);
 	this.setNodeValue(ctx, items);
 };
 

@@ -1119,14 +1119,14 @@ EPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
-	var items = this.getNodeValue(ctx.items) || new grammar.DeclarationList();
+	var items = this.getNodeValue(ctx.items) || new declaration.DeclarationList();
 	this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitDeclarationList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.DeclarationList(null, item);
+	var items = new declaration.DeclarationList(null, item);
 	this.setNodeValue(ctx, items);
 };
 

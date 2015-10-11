@@ -143,12 +143,17 @@ exports.checkOutput = function(test, fileName) {
 exports.loadDependency = function(libraryName) {
     if (BaseParserTest.coreContext == null)
         BaseParserTest.coreContext = prompto.runtime.Context.newGlobalContext();
+    var allDecls = null;
     var files = exports.listLibraryFiles(libraryName);
     if (files) files.map(function (file) {
         var resourceName = libraryName + path.sep + file;
         decls = exports.parseResource(resourceName);
-        decls.register(BaseParserTest.coreContext);
+        if(!allDecls)
+            allDecls = decls;
+        else
+            allDecls.addAll(decls);
     });
+    allDecls.register(BaseParserTest.coreContext);
 };
 
 exports.listLibraryFiles = function(libraryName) {
