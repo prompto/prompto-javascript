@@ -245,6 +245,15 @@ SParserListener.prototype.exitAssignTupleStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#StoreStatement.
+SParserListener.prototype.enterStoreStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#StoreStatement.
+SParserListener.prototype.exitStoreStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#ReturnStatement.
 SParserListener.prototype.enterReturnStatement = function(ctx) {
 };
@@ -350,6 +359,24 @@ SParserListener.prototype.enterClosureStatement = function(ctx) {
 
 // Exit a parse tree produced by SParser#ClosureStatement.
 SParserListener.prototype.exitClosureStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#StoreOne.
+SParserListener.prototype.enterStoreOne = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#StoreOne.
+SParserListener.prototype.exitStoreOne = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#StoreMany.
+SParserListener.prototype.enterStoreMany = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#StoreMany.
+SParserListener.prototype.exitStoreMany = function(ctx) {
 };
 
 
@@ -1037,12 +1064,30 @@ SParserListener.prototype.exitWrite_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#fetch_expression.
-SParserListener.prototype.enterFetch_expression = function(ctx) {
+// Enter a parse tree produced by SParser#FetchList.
+SParserListener.prototype.enterFetchList = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#fetch_expression.
-SParserListener.prototype.exitFetch_expression = function(ctx) {
+// Exit a parse tree produced by SParser#FetchList.
+SParserListener.prototype.exitFetchList = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#FetchOne.
+SParserListener.prototype.enterFetchOne = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#FetchOne.
+SParserListener.prototype.exitFetchOne = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#FetchAll.
+SParserListener.prototype.enterFetchAll = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#FetchAll.
+SParserListener.prototype.exitFetchAll = function(ctx) {
 };
 
 

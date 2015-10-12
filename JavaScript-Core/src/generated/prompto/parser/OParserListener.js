@@ -299,6 +299,15 @@ OParserListener.prototype.exitAssignTupleStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#StoreStatement.
+OParserListener.prototype.enterStoreStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#StoreStatement.
+OParserListener.prototype.exitStoreStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#ReturnStatement.
 OParserListener.prototype.enterReturnStatement = function(ctx) {
 };
@@ -404,6 +413,24 @@ OParserListener.prototype.enterClosureStatement = function(ctx) {
 
 // Exit a parse tree produced by OParser#ClosureStatement.
 OParserListener.prototype.exitClosureStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#StoreOne.
+OParserListener.prototype.enterStoreOne = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#StoreOne.
+OParserListener.prototype.exitStoreOne = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#StoreMany.
+OParserListener.prototype.enterStoreMany = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#StoreMany.
+OParserListener.prototype.exitStoreMany = function(ctx) {
 };
 
 
@@ -1046,12 +1073,30 @@ OParserListener.prototype.exitWrite_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#fetch_expression.
-OParserListener.prototype.enterFetch_expression = function(ctx) {
+// Enter a parse tree produced by OParser#FetchList.
+OParserListener.prototype.enterFetchList = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#fetch_expression.
-OParserListener.prototype.exitFetch_expression = function(ctx) {
+// Exit a parse tree produced by OParser#FetchList.
+OParserListener.prototype.exitFetchList = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#FetchOne.
+OParserListener.prototype.enterFetchOne = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#FetchOne.
+OParserListener.prototype.exitFetchOne = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#FetchAll.
+OParserListener.prototype.enterFetchAll = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#FetchAll.
+OParserListener.prototype.exitFetchAll = function(ctx) {
 };
 
 
