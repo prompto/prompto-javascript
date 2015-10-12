@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.007
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testGlobalClosureNoArg = function(test) {
 	compareResourceEOE(test, "closures/globalClosureNoArg.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testGlobalClosureWithArg = function(test) {
 	compareResourceEOE(test, "closures/globalClosureWithArg.pec");

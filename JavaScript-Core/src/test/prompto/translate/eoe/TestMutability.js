@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.136
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testImmutable = function(test) {
 	compareResourceEOE(test, "mutability/immutable.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testImmutableArgument = function(test) {
 	compareResourceEOE(test, "mutability/immutableArgument.pec");

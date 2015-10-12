@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.137
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testImmutable = function(test) {
 	compareResourceESE(test, "mutability/immutable.pec");
 };

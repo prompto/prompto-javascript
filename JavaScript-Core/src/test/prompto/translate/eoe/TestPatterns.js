@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.154
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testIntegerEnumeration = function(test) {
 	compareResourceEOE(test, "patterns/integerEnumeration.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testIntegerPattern = function(test) {
 	compareResourceEOE(test, "patterns/integerPattern.pec");

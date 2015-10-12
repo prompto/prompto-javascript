@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.020
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testContainsAllList = function(test) {
 	compareResourceESE(test, "contains/containsAllList.pec");
 };

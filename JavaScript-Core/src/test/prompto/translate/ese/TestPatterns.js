@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.155
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testIntegerEnumeration = function(test) {
 	compareResourceESE(test, "patterns/integerEnumeration.pec");
 };

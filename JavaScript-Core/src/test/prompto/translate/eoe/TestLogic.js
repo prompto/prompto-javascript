@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.106
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testAndBoolean = function(test) {
 	compareResourceEOE(test, "logic/andBoolean.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testNotBoolean = function(test) {
 	compareResourceEOE(test, "logic/notBoolean.pec");

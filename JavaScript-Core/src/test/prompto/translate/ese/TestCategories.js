@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.002
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testCopyFromAscendant = function(test) {
 	compareResourceESE(test, "categories/copyFromAscendant.pec");
 };

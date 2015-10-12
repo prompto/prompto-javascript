@@ -1,4 +1,3 @@
-// generated: 2015-10-06T23:17:33.367
 var prompto = require("../../../../../JavaScript-Core/src/main/prompto/index.js");
 var Out = require("../../../../../JavaScript-Core/src/test/prompto/runtime/utils/Out").Out;
 var BaseParserTest = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseParserTest");

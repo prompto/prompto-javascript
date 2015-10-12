@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.055
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testDivideByZero = function(test) {
 	compareResourceEOE(test, "errors/divideByZero.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testIndexOutOfRange_listItem = function(test) {
 	compareResourceEOE(test, "errors/indexOutOfRange-listItem.pec");

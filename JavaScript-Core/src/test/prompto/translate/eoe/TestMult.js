@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.130
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testMultCharacter = function(test) {
 	compareResourceEOE(test, "mult/multCharacter.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testMultDecimal = function(test) {
 	compareResourceEOE(test, "mult/multDecimal.pec");

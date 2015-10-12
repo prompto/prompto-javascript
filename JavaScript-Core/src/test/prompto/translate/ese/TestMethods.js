@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.119
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testAnonymous = function(test) {
 	compareResourceESE(test, "methods/anonymous.pec");
 };

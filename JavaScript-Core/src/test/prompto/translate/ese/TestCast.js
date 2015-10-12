@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:01.996
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testAutoDowncast = function(test) {
 	compareResourceESE(test, "cast/autoDowncast.pec");
 };

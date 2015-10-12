@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:01.990
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testDateDayOfMonth = function(test) {
 	compareResourceEOE(test, "builtins/dateDayOfMonth.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testDateDayOfYear = function(test) {
 	compareResourceEOE(test, "builtins/dateDayOfYear.pec");

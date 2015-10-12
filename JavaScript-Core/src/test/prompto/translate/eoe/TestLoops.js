@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.111
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testDoWhile = function(test) {
 	compareResourceEOE(test, "loops/doWhile.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testForEachCharacterRange = function(test) {
 	compareResourceEOE(test, "loops/forEachCharacterRange.pec");

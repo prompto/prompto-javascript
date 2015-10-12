@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:01.999
 require("../../../../exploded");
 
 var compareResourceOSO = require("../../parser/BaseParserTest").compareResourceOSO;

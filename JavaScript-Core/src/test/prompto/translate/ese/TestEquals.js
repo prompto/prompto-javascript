@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.049
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testEqBoolean = function(test) {
 	compareResourceESE(test, "equals/eqBoolean.pec");
 };

@@ -1,8 +1,3 @@
-// generated: 2015-07-05T23:01:02.088
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testItemDict = function(test) {
 	compareResourceESE(test, "item/itemDict.pec");
 };

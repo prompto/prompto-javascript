@@ -1,4 +1,3 @@
-// generated: 2015-10-06T23:17:33.326
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;

@@ -1,4 +1,3 @@
-// generated: 2015-07-05T23:01:02.148
 require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
@@ -6,6 +5,10 @@ var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceE
 exports.testAddAmount = function(test) {
 	compareResourceEOE(test, "operators/addAmount.pec");
 };
+
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
 exports.testDivAmount = function(test) {
 	compareResourceEOE(test, "operators/divAmount.pec");
