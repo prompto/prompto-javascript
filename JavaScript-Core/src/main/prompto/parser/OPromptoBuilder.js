@@ -61,6 +61,18 @@ OPromptoBuilder.prototype.exitSetLiteral = function(ctx) {
     this.setNodeValue(ctx, exp);
 };
 
+OPromptoBuilder.prototype.exitStoreStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
+};
+
+OPromptoBuilder.prototype.exitStore_statement = function(ctx) {
+    var exps = this.getNodeValue(ctx.exps);
+    var stmt = new statement.StoreStatement(exps);
+    this.setNodeValue(ctx, stmt);
+};
+
+
+
 OPromptoBuilder.prototype.exitAtomicLiteral = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);
@@ -369,10 +381,12 @@ OPromptoBuilder.prototype.exitPrimaryType = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
+	var id = this.getNodeValue(ctx.name);
 	var type = this.getNodeValue(ctx.typ);
 	var match = this.getNodeValue(ctx.match);
-	this.setNodeValue(ctx, new declaration.AttributeDeclaration(name, type, match));
+    var decl = new declaration.AttributeDeclaration(id, type, match);
+    decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
 };
 
 
@@ -426,7 +440,9 @@ OPromptoBuilder.prototype.exitConcrete_category_declaration = function(ctx) {
 	var attrs = this.getNodeValue(ctx.attrs);
 	var derived = this.getNodeValue(ctx.derived);
 	var methods = this.getNodeValue(ctx.methods);
-	this.setNodeValue(ctx, new declaration.ConcreteCategoryDeclaration(name, attrs, derived, methods));
+    var decl = new declaration.ConcreteCategoryDeclaration(name, attrs, derived, methods);
+    decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
 };
 
 
@@ -1272,7 +1288,9 @@ OPromptoBuilder.prototype.exitNative_category_declaration = function(ctx) {
 	var attrs = this.getNodeValue(ctx.attrs);
 	var bindings = this.getNodeValue(ctx.bindings);
     var methods = this.getNodeValue(ctx.methods);
-	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods));
+    var decl = new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods);
+    decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
 };
 
 
@@ -1864,11 +1882,25 @@ OPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitFetch_expression = function(ctx) {
-	var itemName = this.getNodeValue(ctx.name);
-	var source = this.getNodeValue(ctx.source);
-	var filter = this.getNodeValue(ctx.xfilter);
-	this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, filter));
+OPromptoBuilder.prototype.exitFetchList = function(ctx) {
+    var itemName = this.getNodeValue(ctx.name);
+    var source = this.getNodeValue(ctx.source);
+    var filter = this.getNodeValue(ctx.xfilter);
+    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, filter));
+};
+
+OPromptoBuilder.prototype.exitFetchOne = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var xfilter = this.getNodeValue(ctx.xfilter);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, xfilter));
+};
+
+OPromptoBuilder.prototype.exitFetchAll = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var xfilter = this.getNodeValue(ctx.xfilter);
+    var start = this.getNodeValue(ctx.start);
+    var end = this.getNodeValue(ctx.end);
+    this.setNodeValue(ctx, new expression.FetchAllExpression(category, xfilter, start, end));
 };
 
 

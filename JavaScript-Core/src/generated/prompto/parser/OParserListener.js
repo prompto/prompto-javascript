@@ -416,21 +416,12 @@ OParserListener.prototype.exitClosureStatement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#StoreOne.
-OParserListener.prototype.enterStoreOne = function(ctx) {
+// Enter a parse tree produced by OParser#store_statement.
+OParserListener.prototype.enterStore_statement = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#StoreOne.
-OParserListener.prototype.exitStoreOne = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#StoreMany.
-OParserListener.prototype.enterStoreMany = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#StoreMany.
-OParserListener.prototype.exitStoreMany = function(ctx) {
+// Exit a parse tree produced by OParser#store_statement.
+OParserListener.prototype.exitStore_statement = function(ctx) {
 };
 
 

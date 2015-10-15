@@ -6,10 +6,6 @@ exports.testSliceList = function(test) {
 	compareResourceEOE(test, "slice/sliceList.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testSliceRange = function(test) {
 	compareResourceEOE(test, "slice/sliceRange.pec");
 };

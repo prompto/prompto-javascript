@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testDivDecimal = function(test) {
 	compareResourceESE(test, "div/divDecimal.pec");
 };

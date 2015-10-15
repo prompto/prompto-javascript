@@ -6,7 +6,3 @@ exports.testExpressionInjection = function(test) {
 	compareResourceEOE(test, "injections/expressionInjection.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-

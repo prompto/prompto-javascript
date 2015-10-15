@@ -6,10 +6,6 @@ exports.testDeepItem = function(test) {
 	compareResourceEOE(test, "documents/deepItem.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testDeepVariable = function(test) {
 	compareResourceEOE(test, "documents/deepVariable.pec");
 };

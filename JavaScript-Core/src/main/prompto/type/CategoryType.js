@@ -34,6 +34,11 @@ CategoryType.prototype.constructor =  CategoryType;
 	}
 */
 
+CategoryType.prototype.newInstanceFromDocument = function(context, document) {
+    var decl = this.getDeclaration(context);
+    return decl.newInstanceFromDocument(context, document);
+};
+
 CategoryType.prototype.equals = function(obj) {
 	if(obj===this) {
 		return true;
@@ -55,14 +60,14 @@ CategoryType.prototype.checkUnique = function(context) {
 };
 
 CategoryType.prototype.getDeclaration = function(context) {
-	var actual = context.getRegisteredDeclaration(this.name) || null;
-	if(actual==null) {
+	var decl = context.getRegisteredDeclaration(this.name) || null;
+	if(decl==null) {
         if(context.problemListener)
             context.problemListener.reportUnknownCategory(this.id);
         else
 		    throw new SyntaxError("Unknown category: \"" + this.name + "\"");
 	}
-	return actual;
+	return decl;
 };
 
 

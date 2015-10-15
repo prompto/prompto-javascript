@@ -6,10 +6,6 @@ exports.testDivDecimal = function(test) {
 	compareResourceEOE(test, "div/divDecimal.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testDivInteger = function(test) {
 	compareResourceEOE(test, "div/divInteger.pec");
 };

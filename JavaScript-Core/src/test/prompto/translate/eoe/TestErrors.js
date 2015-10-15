@@ -6,10 +6,6 @@ exports.testDivideByZero = function(test) {
 	compareResourceEOE(test, "errors/divideByZero.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testIndexOutOfRange_listItem = function(test) {
 	compareResourceEOE(test, "errors/indexOutOfRange-listItem.pec");
 };

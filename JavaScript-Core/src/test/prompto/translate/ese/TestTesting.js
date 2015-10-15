@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testAnd = function(test) {
 	compareResourceESE(test, "testing/and.pec");
 };

@@ -6,10 +6,6 @@ exports.testEqBoolean = function(test) {
 	compareResourceEOE(test, "equals/eqBoolean.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testEqCharacter = function(test) {
 	compareResourceEOE(test, "equals/eqCharacter.pec");
 };

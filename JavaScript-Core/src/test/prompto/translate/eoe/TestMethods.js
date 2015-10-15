@@ -6,10 +6,6 @@ exports.testAnonymous = function(test) {
 	compareResourceEOE(test, "methods/anonymous.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testAttribute = function(test) {
 	compareResourceEOE(test, "methods/attribute.pec");
 };

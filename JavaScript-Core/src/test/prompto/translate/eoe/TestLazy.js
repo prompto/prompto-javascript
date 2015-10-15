@@ -6,10 +6,6 @@ exports.testCyclic = function(test) {
 	compareResourceEOE(test, "lazy/cyclic.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testDict = function(test) {
 	compareResourceEOE(test, "lazy/dict.pec");
 };

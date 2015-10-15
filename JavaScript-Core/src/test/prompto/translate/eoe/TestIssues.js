@@ -6,7 +6,3 @@ exports.testMinimal = function(test) {
 	compareResourceEOE(test, "issues/minimal.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-

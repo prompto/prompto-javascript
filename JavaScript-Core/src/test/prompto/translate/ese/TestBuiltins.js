@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testDateDayOfMonth = function(test) {
 	compareResourceESE(test, "builtins/dateDayOfMonth.pec");
 };

@@ -6,10 +6,6 @@ exports.testDateDayOfMonth = function(test) {
 	compareResourceEOE(test, "builtins/dateDayOfMonth.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testDateDayOfYear = function(test) {
 	compareResourceEOE(test, "builtins/dateDayOfYear.pec");
 };

@@ -1,6 +1,7 @@
 var CategoryType = null;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
+var StorableDocument = require("../store/StorableDocument").StorableDocument;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Variable = require("../runtime/Variable").Variable;
@@ -17,6 +18,7 @@ exports.resolve = function() {
 function ConcreteInstance(declaration) {
 	Value.call(this, new CategoryType(declaration.id));
 	this.declaration = declaration;
+    this.storable = declaration.storable ? new StorableDocument() : null;
     this.mutable = false;
 	this.values = {};
 	return this;
@@ -105,6 +107,8 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 	}
     value = this.autocast(decl, value);
 	this.values[attrName] = value;
+    if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
+        this.storable.SetMember(context, attrName, value);
 };
 
 ConcreteInstance.prototype.autocast = function(decl, value) {

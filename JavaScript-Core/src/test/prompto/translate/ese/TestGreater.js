@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testGtCharacter = function(test) {
 	compareResourceESE(test, "greater/gtCharacter.pec");
 };

@@ -6,10 +6,6 @@ exports.testMultCharacter = function(test) {
 	compareResourceEOE(test, "mult/multCharacter.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testMultDecimal = function(test) {
 	compareResourceEOE(test, "mult/multDecimal.pec");
 };

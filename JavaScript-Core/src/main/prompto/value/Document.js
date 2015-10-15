@@ -11,6 +11,10 @@ function Document(value) {
 Document.prototype = Object.create(Value.prototype);
 Document.prototype.constructor = Document;
 
+Document.prototype.hasMember = function(name) {
+    return this.members.hasOwnProperty(name);
+}
+
 Document.prototype.getMember = function(context, name) {
     var result = this.members[name] || null;
     if(result==null) {

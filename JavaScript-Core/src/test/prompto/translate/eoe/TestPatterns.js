@@ -6,10 +6,6 @@ exports.testIntegerEnumeration = function(test) {
 	compareResourceEOE(test, "patterns/integerEnumeration.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testIntegerPattern = function(test) {
 	compareResourceEOE(test, "patterns/integerPattern.pec");
 };

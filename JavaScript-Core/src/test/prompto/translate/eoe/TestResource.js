@@ -6,10 +6,6 @@ exports.testBadRead = function(test) {
 	compareResourceEOE(test, "resource/badRead.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testBadResource = function(test) {
 	compareResourceEOE(test, "resource/badResource.pec");
 };

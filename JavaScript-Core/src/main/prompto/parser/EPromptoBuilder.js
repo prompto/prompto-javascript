@@ -355,7 +355,9 @@ EPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
 	var id = this.getNodeValue(ctx.name);
 	var type = this.getNodeValue(ctx.typ);
 	var match = this.getNodeValue(ctx.match);
-	this.setNodeValue(ctx, new declaration.AttributeDeclaration(id, type, match));
+	var decl = new declaration.AttributeDeclaration(id, type, match);
+    decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
 };
 
 EPromptoBuilder.prototype.exitNativeType = function(ctx) {
@@ -418,7 +420,9 @@ EPromptoBuilder.prototype.exitConcrete_category_declaration = function(ctx) {
 	var attrs = this.getNodeValue(ctx.attrs) || null;
 	var derived = this.getNodeValue(ctx.derived) || null;
 	var methods = this.getNodeValue(ctx.methods) || null;
-	this.setNodeValue(ctx, new declaration.ConcreteCategoryDeclaration(name, attrs, derived, methods));
+	var decl = new declaration.ConcreteCategoryDeclaration(name, attrs, derived, methods);
+    decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
 };
 
 
@@ -491,6 +495,17 @@ EPromptoBuilder.prototype.exitSetLiteral = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);
 };
+
+EPromptoBuilder.prototype.exitStoreStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
+};
+
+EPromptoBuilder.prototype.exitStore_statement = function(ctx) {
+    var exps = this.getNodeValue(ctx.exps);
+    var stmt = new statement.StoreStatement(exps);
+    this.setNodeValue(ctx, stmt);
+};
+
 
 EPromptoBuilder.prototype.exitMemberSelector = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
@@ -1239,7 +1254,9 @@ EPromptoBuilder.prototype.exitNative_category_declaration = function(ctx) {
 	var attrs = this.getNodeValue(ctx.attrs);
 	var bindings = this.getNodeValue(ctx.bindings);
     var methods = this.getNodeValue(ctx.methods);
-	this.setNodeValue(ctx, new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods));
+    var decl = new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods);
+    decl.storable = ctx.STORABLE()!=null;
+	this.setNodeValue(ctx, decl);
 };
 
 
@@ -1827,11 +1844,25 @@ EPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
 };
 
 
-EPromptoBuilder.prototype.exitFetch_expression = function(ctx) {
+EPromptoBuilder.prototype.exitFetchList = function(ctx) {
 	var itemName = this.getNodeValue(ctx.name);
 	var source = this.getNodeValue(ctx.source);
 	var filter = this.getNodeValue(ctx.xfilter);
 	this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, filter));
+};
+
+EPromptoBuilder.prototype.exitFetchOne = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var xfilter = this.getNodeValue(ctx.xfilter);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, xfilter));
+};
+
+EPromptoBuilder.prototype.exitFetchAll = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var xfilter = this.getNodeValue(ctx.xfilter);
+    var start = this.getNodeValue(ctx.start);
+    var end = this.getNodeValue(ctx.end);
+    this.setNodeValue(ctx, new expression.FetchAllExpression(category, xfilter, start, end));
 };
 
 

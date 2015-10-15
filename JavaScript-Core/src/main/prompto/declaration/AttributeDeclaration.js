@@ -6,7 +6,8 @@ function AttributeDeclaration(id, type, constraint) {
 	BaseDeclaration.call(this, id);
 	this.type = type;
 	this.constraint = constraint;
-	return this;
+    this.storable = false;
+    return this;
 }
 
 AttributeDeclaration.prototype = Object.create(BaseDeclaration.prototype);
@@ -28,6 +29,8 @@ AttributeDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
     writer.append(" as ");
+    if(this.storable)
+        writer.append("storable ");
     this.type.toDialect(writer);
     writer.append(" attribute");
     if (this.constraint != null)
@@ -35,6 +38,8 @@ AttributeDeclaration.prototype.toEDialect = function(writer) {
 };
 
 AttributeDeclaration.prototype.toODialect = function(writer) {
+    if(this.storable)
+        writer.append("storable ");
     writer.append("attribute ");
     writer.append(this.name);
     writer.append(" : ");
@@ -45,6 +50,8 @@ AttributeDeclaration.prototype.toODialect = function(writer) {
 };
 
 AttributeDeclaration.prototype.toSDialect = function(writer) {
+    if(this.storable)
+        writer.append("storable ");
     writer.append("attr ");
     writer.append(this.name);
     writer.append(" ( ");

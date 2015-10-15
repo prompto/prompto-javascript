@@ -6,10 +6,6 @@ exports.testComplexIf = function(test) {
 	compareResourceEOE(test, "condition/complexIf.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testElseIf = function(test) {
 	compareResourceEOE(test, "condition/elseIf.pec");
 };

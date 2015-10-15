@@ -6,10 +6,6 @@ exports.testLtCharacter = function(test) {
 	compareResourceEOE(test, "less/ltCharacter.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testLtDate = function(test) {
 	compareResourceEOE(test, "less/ltDate.pec");
 };

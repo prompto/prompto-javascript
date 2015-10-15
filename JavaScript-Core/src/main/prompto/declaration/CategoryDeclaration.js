@@ -1,14 +1,42 @@
+var AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var Document = require("../value/Document").Document;
 
 function CategoryDeclaration(id, attributes) {
 	BaseDeclaration.call(this, id);
 	this.attributes = attributes || null;
 	this.derivedFrom = null;
+    this.storable = false;
+    return this;
 }
 
 CategoryDeclaration.prototype = Object.create(BaseDeclaration.prototype);
 CategoryDeclaration.prototype.constructor = CategoryDeclaration;
+
+CategoryDeclaration.prototype.newInstanceFromDocument = function(context, document) {
+    var instance = this.newInstance();
+    instance.mutable = true;
+    try {
+        this.attributes.map(function(attr) {
+            var name = attr.name;
+            var decl = context.getRegisteredDeclaration(name);
+            if (decl.storable) {
+                var value = document.getMember(context, name, false);
+                if (value instanceof Document) {
+                    var typ = decl.GetType(context);
+                    if (!(typ instanceof CategoryType))
+                        throw new InternalError("How did we get there?");
+                    value = typ.newInstanceFromDocument(context, document);
+                }
+                instance.setMember(context, name, value);
+            }
+        });
+    } finally {
+        instance.mutable = false;
+    }
+    return instance;
+};
 
 
 CategoryDeclaration.prototype.register = function(context) {
@@ -63,6 +91,8 @@ CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, has
     writer.append("define ");
     writer.append(this.name);
     writer.append(" as ");
+    if(this.storable)
+        writer.append("storable ");
     this.categoryTypeToEDialect(writer);
     if(hasAttributes) {
         if(this.attributes.length==1)
@@ -106,6 +136,8 @@ CategoryDeclaration.prototype.methodsToODialect = function(writer, methods) {
 
 
 CategoryDeclaration.prototype.allToODialect = function(writer, hasBody) {
+    if(this.storable)
+        writer.append("storable ");
     this.categoryTypeToODialect(writer);
     writer.append(" ");
     writer.append(this.name);
@@ -133,6 +165,8 @@ CategoryDeclaration.prototype.categoryExtensionToODialect = function(writer) {
 
 
 CategoryDeclaration.prototype.protoToSDialect = function(writer, derivedFrom) {
+    if(this.storable)
+        writer.append("storable ");
     this.categoryTypeToSDialect(writer);
     writer.append(" ");
     writer.append(this.name);

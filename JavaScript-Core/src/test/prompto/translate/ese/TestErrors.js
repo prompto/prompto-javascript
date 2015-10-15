@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testDivideByZero = function(test) {
 	compareResourceESE(test, "errors/divideByZero.pec");
 };

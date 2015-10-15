@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testAndBoolean = function(test) {
 	compareResourceESE(test, "logic/andBoolean.pec");
 };

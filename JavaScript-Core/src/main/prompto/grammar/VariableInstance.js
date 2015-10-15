@@ -32,7 +32,6 @@ VariableInstance.prototype.checkAssignValue = function(context, expression) {
 	var type = expression.check(context);
 	var actual = context.getRegisteredValue(this.name);
 	if(actual==null) {
-		expression.check(context);
 		context.registerValue(new Variable(this.id, type));
 	} else {
 		// need to check type compatibility

@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testGlobalClosureNoArg = function(test) {
 	compareResourceESE(test, "closures/globalClosureNoArg.pec");
 };

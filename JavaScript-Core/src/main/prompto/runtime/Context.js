@@ -116,8 +116,8 @@ Context.prototype.newLocalContext = function() {
 	return context;
 };
 
-Context.prototype.newInstanceContext = function(instance, type) {
-	var context = new InstanceContext(instance, type);
+Context.prototype.newDocumentContext = function(doc) {
+	var context = new DocumentContext(doc);
 	context.globals = this.globals;
 	context.calling = this;
 	context.parent = null;
@@ -126,6 +126,16 @@ Context.prototype.newInstanceContext = function(instance, type) {
 	return context;
 };
 
+
+Context.prototype.newInstanceContext = function(instance, type) {
+    var context = new InstanceContext(instance, type);
+    context.globals = this.globals;
+    context.calling = this;
+    context.parent = null;
+    context.debugger = this.debugger;
+    context.problemListener = this.problemListener;
+    return context;
+};
 
 Context.prototype.newChildContext = function() {
 	var context = new Context();
@@ -468,7 +478,7 @@ InstanceContext.prototype.readRegisteredValue = function(name) {
 InstanceContext.prototype.contextForValue = function(name) {
 	// params and variables have precedence over members
 	// so first look in context values
-	var context = Context.prototype.contextForValue.call(this,name);
+	var context = Context.prototype.contextForValue.call(this, name);
 	if(context!=null) {
 		return context;
 	} else if(this.getDeclaration().hasAttribute(this, name)) {
@@ -493,6 +503,37 @@ InstanceContext.prototype.writeValue = function(name, value) {
 	this.instance.setMember(this.calling, name, value);
 };
 
+
+function DocumentContext(document) {
+    Context.call(this);
+    this.document = document;
+    return this;
+}
+
+DocumentContext.prototype = Object.create(Context.prototype);
+DocumentContext.prototype.constructor = DocumentContext;
+
+
+DocumentContext.prototype.contextForValue = function(name) {
+    // params and variables have precedence over members
+    // so first look in context values
+    var context = Context.prototype.contextForValue.call(this, name);
+    if (context != null)
+        return context;
+    else if(this.document.hasMember(name))
+        return this;
+    else
+        return null;
+};
+
+DocumentContext.prototype.readValue = function(name) {
+    return this.document.getMember(this.calling, name);
+};
+
+
+DocumentContext.prototype.writeValue = function(name) {
+    this.document.setMember(this.calling, name, value);
+};
 
 
 Context.prototype.enterMethod = function(method) {

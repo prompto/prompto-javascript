@@ -6,10 +6,6 @@ exports.testAnd = function(test) {
 	compareResourceEOE(test, "testing/and.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testContains = function(test) {
 	compareResourceEOE(test, "testing/contains.pec");
 };

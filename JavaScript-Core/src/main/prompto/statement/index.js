@@ -14,6 +14,7 @@ exports.CollectionSwitchCase = require("./CollectionSwitchCase").CollectionSwitc
 exports.SwitchStatement = require("./SwitchStatement").SwitchStatement;
 exports.SwitchErrorStatement = require("./SwitchErrorStatement").SwitchErrorStatement;
 exports.RaiseStatement = require("./RaiseStatement").RaiseStatement;
+exports.StoreStatement = require("./StoreStatement").StoreStatement;
 exports.ForEachStatement = require("./ForEachStatement").ForEachStatement;
 exports.DoWhileStatement = require("./DoWhileStatement").DoWhileStatement;
 exports.WhileStatement = require("./WhileStatement").WhileStatement;

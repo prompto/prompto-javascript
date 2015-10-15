@@ -6,10 +6,6 @@ exports.testImmutable = function(test) {
 	compareResourceEOE(test, "mutability/immutable.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testImmutableArgument = function(test) {
 	compareResourceEOE(test, "mutability/immutableArgument.pec");
 };

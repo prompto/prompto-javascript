@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testSortBooleans = function(test) {
 	compareResourceESE(test, "sortList/sortBooleans.pec");
 };

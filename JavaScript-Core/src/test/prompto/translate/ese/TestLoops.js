@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testDoWhile = function(test) {
 	compareResourceESE(test, "loops/doWhile.pec");
 };

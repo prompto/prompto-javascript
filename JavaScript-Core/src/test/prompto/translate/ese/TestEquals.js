@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testEqBoolean = function(test) {
 	compareResourceESE(test, "equals/eqBoolean.pec");
 };

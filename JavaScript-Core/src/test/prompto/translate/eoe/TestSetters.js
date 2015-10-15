@@ -6,10 +6,6 @@ exports.testGetter = function(test) {
 	compareResourceEOE(test, "setters/getter.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testGetterCall = function(test) {
 	compareResourceEOE(test, "setters/getterCall.pec");
 };

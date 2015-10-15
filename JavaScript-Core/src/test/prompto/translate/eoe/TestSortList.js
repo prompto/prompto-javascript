@@ -6,10 +6,6 @@ exports.testSortBooleans = function(test) {
 	compareResourceEOE(test, "sortList/sortBooleans.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testSortDates = function(test) {
 	compareResourceEOE(test, "sortList/sortDates.pec");
 };

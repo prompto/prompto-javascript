@@ -6,10 +6,6 @@ exports.testAutoDowncast = function(test) {
 	compareResourceEOE(test, "cast/autoDowncast.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testCastChild = function(test) {
 	compareResourceEOE(test, "cast/castChild.pec");
 };

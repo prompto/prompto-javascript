@@ -6,7 +6,3 @@ exports.testStack = function(test) {
 	compareResourceEOE(test, "debug/stack.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-

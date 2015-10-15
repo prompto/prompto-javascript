@@ -6,10 +6,6 @@ exports.testCopyFromAscendant = function(test) {
 	compareResourceEOE(test, "categories/copyFromAscendant.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testCopyFromAscendantWithOverride = function(test) {
 	compareResourceEOE(test, "categories/copyFromAscendantWithOverride.pec");
 };

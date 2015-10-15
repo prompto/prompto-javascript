@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testMultiAssignment = function(test) {
 	compareResourceESE(test, "tuples/multiAssignment.pec");
 };

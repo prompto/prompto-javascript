@@ -389,21 +389,12 @@ EParserListener.prototype.exitClosureStatement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#StoreOne.
-EParserListener.prototype.enterStoreOne = function(ctx) {
+// Enter a parse tree produced by EParser#store_statement.
+EParserListener.prototype.enterStore_statement = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#StoreOne.
-EParserListener.prototype.exitStoreOne = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#StoreMany.
-EParserListener.prototype.enterStoreMany = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#StoreMany.
-EParserListener.prototype.exitStoreMany = function(ctx) {
+// Exit a parse tree produced by EParser#store_statement.
+EParserListener.prototype.exitStore_statement = function(ctx) {
 };
 
 

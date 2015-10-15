@@ -6,10 +6,6 @@ exports.testGtCharacter = function(test) {
 	compareResourceEOE(test, "greater/gtCharacter.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testGtDate = function(test) {
 	compareResourceEOE(test, "greater/gtDate.pec");
 };

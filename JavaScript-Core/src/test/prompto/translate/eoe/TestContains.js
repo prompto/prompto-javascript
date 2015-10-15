@@ -6,10 +6,6 @@ exports.testContainsAllList = function(test) {
 	compareResourceEOE(test, "contains/containsAllList.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testContainsAllSet = function(test) {
 	compareResourceEOE(test, "contains/containsAllSet.pec");
 };

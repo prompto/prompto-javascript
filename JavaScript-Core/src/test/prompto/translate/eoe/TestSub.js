@@ -6,10 +6,6 @@ exports.testSubDate = function(test) {
 	compareResourceEOE(test, "sub/subDate.pec");
 };
 
-require("../../../../exploded");
-
-var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
-
 exports.testSubDateTime = function(test) {
 	compareResourceEOE(test, "sub/subDateTime.pec");
 };

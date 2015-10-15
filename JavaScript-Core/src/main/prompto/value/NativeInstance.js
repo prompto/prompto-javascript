@@ -4,6 +4,7 @@ var Value = require("./Value").Value;
 function NativeInstance(declaration, instance) {
 	Value.call(this,new CategoryType(declaration.id));
 	this.declaration = declaration;
+    this.storable = declaration.storable ? new StorableDocument() : null;
 	this.instance = instance || this.makeInstance();
 	return this;
 }
@@ -89,6 +90,8 @@ NativeInstance.prototype.doSetMember = function(context, attrName, value, allowS
         context.setValue(attrName, value);
         value = setter.interpret(context);
     }
+    if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
+        this.storable.SetMember(context, attrName, value);
 	value = value.convertToJavaScript();
 	this.instance[attrName] = value;
 };

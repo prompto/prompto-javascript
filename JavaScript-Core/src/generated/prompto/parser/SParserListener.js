@@ -362,21 +362,12 @@ SParserListener.prototype.exitClosureStatement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#StoreOne.
-SParserListener.prototype.enterStoreOne = function(ctx) {
+// Enter a parse tree produced by SParser#store_statement.
+SParserListener.prototype.enterStore_statement = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#StoreOne.
-SParserListener.prototype.exitStoreOne = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#StoreMany.
-SParserListener.prototype.enterStoreMany = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#StoreMany.
-SParserListener.prototype.exitStoreMany = function(ctx) {
+// Exit a parse tree produced by SParser#store_statement.
+SParserListener.prototype.exitStore_statement = function(ctx) {
 };
 
 

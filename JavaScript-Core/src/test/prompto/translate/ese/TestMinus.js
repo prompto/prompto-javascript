@@ -1,3 +1,7 @@
+require("../../../../exploded");
+
+var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
+
 exports.testMinusDecimal = function(test) {
 	compareResourceESE(test, "minus/minusDecimal.pec");
 };
