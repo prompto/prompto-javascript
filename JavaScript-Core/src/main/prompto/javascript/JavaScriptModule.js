@@ -1,4 +1,4 @@
-var isNodeJs = typeof window === 'undefined';
+var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 var mod = isNodeJs ? require("module") : null;
 var path = isNodeJs ? require('path') : null;
 

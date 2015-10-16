@@ -1,3 +1,4 @@
+require("../../../../../JavaScript-Core/src/exploded.js");
 var prompto = require("../../../../../JavaScript-Core/src/main/prompto/index.js");
 var Out = require("../../../../../JavaScript-Core/src/test/prompto/runtime/utils/Out").Out;
 var BaseParserTest = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseParserTest");

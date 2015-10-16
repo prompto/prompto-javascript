@@ -1,6 +1,6 @@
 var path = require("path");
 var roots = [path.dirname(module.filename)];
-roots.push(roots[0].replace("JavaScript-Core", "JavaScript-Libraries"));
+roots.push(roots[0].replace("JavaScript-Core", "JavaScript-Runtime"));
 var fs = require("fs");
 
 function readSubDirs() {
@@ -30,7 +30,7 @@ var old_resolveLookupPaths = m._resolveLookupPaths;
 function new_resolveLookupPaths(request, parent) {
 	var resolved = old_resolveLookupPaths(request, parent);
     var start = request.substring(0, 2);
-    if (start === './' || start === '..') {
+    if (start === './' || start === '..' || request.indexOf("prompto/")==0) {
     	// is the calling module in the same hierarchy as the 'exploded' module?
         for(var r=0;r<roots.length;r++) {
             var root = roots[r];
