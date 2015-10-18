@@ -1586,6 +1586,15 @@ EParserListener.prototype.exitDecimalType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#DocumentType.
+EParserListener.prototype.enterDocumentType = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#DocumentType.
+EParserListener.prototype.exitDocumentType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#DateType.
 EParserListener.prototype.enterDateType = function(ctx) {
 };
@@ -1646,15 +1655,6 @@ EParserListener.prototype.enterCode_type = function(ctx) {
 
 // Exit a parse tree produced by EParser#code_type.
 EParserListener.prototype.exitCode_type = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#document_type.
-EParserListener.prototype.enterDocument_type = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#document_type.
-EParserListener.prototype.exitDocument_type = function(ctx) {
 };
 
 

@@ -21,7 +21,7 @@ DocumentExpression.prototype.toDialect = function(dialect) {
 
 DocumentExpression.prototype.toDialect = function(writer) {
     writer.append("Document");
-    if(writer.dialect==Dialect.O)
+    if(writer.dialect!=Dialect.E)
         writer.append("()");
 }
 

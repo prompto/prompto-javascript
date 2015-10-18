@@ -1568,6 +1568,15 @@ OParserListener.prototype.exitDecimalType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#DocumentType.
+OParserListener.prototype.enterDocumentType = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#DocumentType.
+OParserListener.prototype.exitDocumentType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#DateType.
 OParserListener.prototype.enterDateType = function(ctx) {
 };
@@ -1628,15 +1637,6 @@ OParserListener.prototype.enterCode_type = function(ctx) {
 
 // Exit a parse tree produced by OParser#code_type.
 OParserListener.prototype.exitCode_type = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#document_type.
-OParserListener.prototype.enterDocument_type = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#document_type.
-OParserListener.prototype.exitDocument_type = function(ctx) {
 };
 
 

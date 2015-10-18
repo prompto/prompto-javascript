@@ -1842,7 +1842,7 @@ EPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
 };
 
 
-EPromptoBuilder.prototype.exitDocument_type = function(ctx) {
+EPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 	this.setNodeValue(ctx, type.DocumentType.instance);
 };
 
