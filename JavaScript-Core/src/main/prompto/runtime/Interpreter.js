@@ -133,7 +133,7 @@ Interpreter.interpretTests = function(context) {
 };
 
 Interpreter.interpretTest = function(context, name) {
-    var test = context.tests[name];
+    var test = context.getRegisteredTest(name);
     var local = context.newLocalContext();
     test.interpret(local);
 };

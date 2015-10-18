@@ -1,3 +1,4 @@
+var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var Identifier = require("../grammar/Identifier").Identifier;
 var PrestoError = require("../error/PrestoError").PrestoError;
@@ -64,14 +65,23 @@ TestMethodDeclaration.prototype.interpretAsserts = function(context)
     }
 };
 
+TestMethodDeclaration.print = function(msg) {
+    if(isNodeJs)
+        process.stdout.write(msg);
+    else
+        console.log(msg);
+};
+
 TestMethodDeclaration.prototype.printFailure = function(context, expected, actual)
 {
-    process.stdout.write (this.name + " test failed, expected: " + expected + ", actual: " + actual);
+    var msg = this.name + " test failed, expected: " + expected + ", actual: " + actual
+    TestMethodDeclaration.print(msg);
 };
 
 TestMethodDeclaration.prototype.printSuccess = function(context)
 {
-    process.stdout.write (this.name + " test successful");
+    var msg = this.name + " test successful";
+    TestMethodDeclaration.print(msg);
 };
 
 TestMethodDeclaration.prototype.interpretBody = function(context)
