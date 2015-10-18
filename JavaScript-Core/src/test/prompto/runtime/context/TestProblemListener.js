@@ -33,11 +33,11 @@ exports.testDuplicateCategory = function(test) {
 exports.testDuplicateTest = function(test) {
     var code = "define \"find id\" as test method doing:\n" +
                 "\ta = 0\n" +
-                "and expecting:\n" +
+                "and verifying:\n" +
                 "\ta = 0\n" +
                 "define \"find id\" as test method doing:\n" +
                 "\ta = 0\n" +
-                "and expecting:\n" +
+                "and verifying:\n" +
                 "\ta = 0\n";
     checkProblems(test, code, "Duplicate name: \"find id\"");
 };
