@@ -7,7 +7,7 @@ var AbstractParser = require('./AbstractParser').AbstractParser;
 var grammarFileName = "SParser.g4";
 
 var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
-    "\3\u009f\u0825\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t",
+    "\3\u00a0\u0825\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t",
     "\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20",
     "\t\20\4\21\t\21\4\22\t\22\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4",
     "\27\t\27\4\30\t\30\4\31\t\31\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35",
@@ -185,10 +185,10 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u013e\u0140\u0142\u0144\u0146\u0148\u014a\u014c\u014e\u0150\u0152\u0154",
     "\u0156\u0158\u015a\u015c\u015e\u0160\u0162\u0164\u0166\u0168\u016a\u016c",
     "\u016e\u0170\u0172\u0174\u0176\u0178\u017a\u017c\u017e\2\n\3\2LM\3\2",
-    "\"#\4\2~~\u0086\u0086\4\2\'\'ii\b\2\64<xx\u0085\u0085\u008e\u008e\u0093",
-    "\u0095\u0097\u0097\b\2\64<xx~~\u0085\u0086\u008e\u008e\u0093\u0095\7",
-    "\2\64<xx\u0085\u0085\u008e\u008e\u0093\u0097\7\2\64<xx\u0085\u0085\u008e",
-    "\u008e\u0093\u0095\u0882\2\u0180\3\2\2\2\4\u0191\3\2\2\2\6\u019b\3\2",
+    "\"#\4\2~~\u0086\u0086\4\2\'\'ii\b\2\64<xx\u0085\u0085\u008f\u008f\u0094",
+    "\u0096\u0098\u0098\b\2\64<xx~~\u0085\u0086\u008f\u008f\u0094\u0096\7",
+    "\2\64<xx\u0085\u0085\u008f\u008f\u0094\u0098\7\2\64<xx\u0085\u0085\u008f",
+    "\u008f\u0094\u0096\u0882\2\u0180\3\2\2\2\4\u0191\3\2\2\2\6\u019b\3\2",
     "\2\2\b\u019f\3\2\2\2\n\u01a7\3\2\2\2\f\u01b7\3\2\2\2\16\u01cd\3\2\2",
     "\2\20\u01da\3\2\2\2\22\u01dc\3\2\2\2\24\u01eb\3\2\2\2\26\u01f5\3\2\2",
     "\2\30\u0200\3\2\2\2\32\u0214\3\2\2\2\34\u0226\3\2\2\2\36\u022e\3\2\2",
@@ -315,23 +315,23 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0261\7\63\2\2\u0261\u0263\5\u00bc_\2\u0262\u0260\3\2\2\2\u0262\u0263",
     "\3\2\2\2\u0263\u0264\3\2\2\2\u0264\u0265\7\21\2\2\u0265\u0266\5x=\2",
     "\u0266\u0267\5\u00dan\2\u0267\u0268\5z>\2\u0268\'\3\2\2\2\u0269\u026a",
-    "\7P\2\2\u026a\u026b\7\u0085\2\2\u026b\u026c\7\u0098\2\2\u026c\u026d",
+    "\7P\2\2\u026a\u026b\7\u0085\2\2\u026b\u026c\7\u0099\2\2\u026c\u026d",
     "\7\26\2\2\u026d\u026e\7\27\2\2\u026e\u026f\7\21\2\2\u026f\u0270\5x=",
     "\2\u0270\u0271\5\u00e2r\2\u0271\u0272\5z>\2\u0272\u0273\5v<\2\u0273",
-    "\u0274\7[\2\2\u0274\u027a\7\21\2\2\u0275\u0276\5x=\2\u0276\u0277\5\u00e4",
-    "s\2\u0277\u0278\5z>\2\u0278\u027b\3\2\2\2\u0279\u027b\5\u00b0Y\2\u027a",
-    "\u0275\3\2\2\2\u027a\u0279\3\2\2\2\u027b)\3\2\2\2\u027c\u027d\5T+\2",
-    "\u027d+\3\2\2\2\u027e\u027f\5\u00acW\2\u027f\u0280\7\21\2\2\u0280\u0285",
-    "\5\u00bc_\2\u0281\u0282\7\26\2\2\u0282\u0283\5 \21\2\u0283\u0284\7\27",
-    "\2\2\u0284\u0286\3\2\2\2\u0285\u0281\3\2\2\2\u0285\u0286\3\2\2\2\u0286",
-    "\u0289\3\2\2\2\u0287\u0288\7-\2\2\u0288\u028a\5\u00f6|\2\u0289\u0287",
-    "\3\2\2\2\u0289\u028a\3\2\2\2\u028a-\3\2\2\2\u028b\u029d\5\62\32\2\u028c",
-    "\u029d\5n8\2\u028d\u029d\5r:\2\u028e\u029d\5\60\31\2\u028f\u029d\5R",
-    "*\2\u0290\u029d\5H%\2\u0291\u029d\5> \2\u0292\u029d\5B\"\2\u0293\u029d",
-    "\5F$\2\u0294\u029d\5D#\2\u0295\u029d\5L\'\2\u0296\u029d\5N(\2\u0297",
-    "\u029d\5h\65\2\u0298\u029d\5:\36\2\u0299\u029d\5<\37\2\u029a\u029d\5",
-    "$\23\2\u029b\u029d\5\u00d8m\2\u029c\u028b\3\2\2\2\u029c\u028c\3\2\2",
-    "\2\u029c\u028d\3\2\2\2\u029c\u028e\3\2\2\2\u029c\u028f\3\2\2\2\u029c",
+    "\u0274\7\u008a\2\2\u0274\u027a\7\21\2\2\u0275\u0276\5x=\2\u0276\u0277",
+    "\5\u00e4s\2\u0277\u0278\5z>\2\u0278\u027b\3\2\2\2\u0279\u027b\5\u00b0",
+    "Y\2\u027a\u0275\3\2\2\2\u027a\u0279\3\2\2\2\u027b)\3\2\2\2\u027c\u027d",
+    "\5T+\2\u027d+\3\2\2\2\u027e\u027f\5\u00acW\2\u027f\u0280\7\21\2\2\u0280",
+    "\u0285\5\u00bc_\2\u0281\u0282\7\26\2\2\u0282\u0283\5 \21\2\u0283\u0284",
+    "\7\27\2\2\u0284\u0286\3\2\2\2\u0285\u0281\3\2\2\2\u0285\u0286\3\2\2",
+    "\2\u0286\u0289\3\2\2\2\u0287\u0288\7-\2\2\u0288\u028a\5\u00f6|\2\u0289",
+    "\u0287\3\2\2\2\u0289\u028a\3\2\2\2\u028a-\3\2\2\2\u028b\u029d\5\62\32",
+    "\2\u028c\u029d\5n8\2\u028d\u029d\5r:\2\u028e\u029d\5\60\31\2\u028f\u029d",
+    "\5R*\2\u0290\u029d\5H%\2\u0291\u029d\5> \2\u0292\u029d\5B\"\2\u0293",
+    "\u029d\5F$\2\u0294\u029d\5D#\2\u0295\u029d\5L\'\2\u0296\u029d\5N(\2",
+    "\u0297\u029d\5h\65\2\u0298\u029d\5:\36\2\u0299\u029d\5<\37\2\u029a\u029d",
+    "\5$\23\2\u029b\u029d\5\u00d8m\2\u029c\u028b\3\2\2\2\u029c\u028c\3\2",
+    "\2\2\u029c\u028d\3\2\2\2\u029c\u028e\3\2\2\2\u029c\u028f\3\2\2\2\u029c",
     "\u0290\3\2\2\2\u029c\u0291\3\2\2\2\u029c\u0292\3\2\2\2\u029c\u0293\3",
     "\2\2\2\u029c\u0294\3\2\2\2\u029c\u0295\3\2\2\2\u029c\u0296\3\2\2\2\u029c",
     "\u0297\3\2\2\2\u029c\u0298\3\2\2\2\u029c\u0299\3\2\2\2\u029c\u029a\3",
@@ -347,19 +347,19 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u02b8\u02b6\3\2\2\2\u02b8\u02b9\3\2\2\2\u02b9\67\3\2\2\2\u02ba\u02b8",
     "\3\2\2\2\u02bb\u02bc\7\25\2\2\u02bc\u02c2\5\u00acW\2\u02bd\u02be\7\30",
     "\2\2\u02be\u02bf\5T+\2\u02bf\u02c0\7\31\2\2\u02c0\u02c2\3\2\2\2\u02c1",
-    "\u02bb\3\2\2\2\u02c1\u02bd\3\2\2\2\u02c29\3\2\2\2\u02c3\u02c4\7\u008a",
+    "\u02bb\3\2\2\2\u02c1\u02bd\3\2\2\2\u02c29\3\2\2\2\u02c3\u02c4\7\u008b",
     "\2\2\u02c4\u02c5\5\u0106\u0084\2\u02c5\u02c6\7\21\2\2\u02c6\u02c7\5",
     "x=\2\u02c7\u02c8\5\u00e2r\2\u02c8\u02c9\5z>\2\u02c9;\3\2\2\2\u02ca\u02cb",
-    "\7\u008a\2\2\u02cb\u02cc\5\u00aeX\2\u02cc\u02cd\7\21\2\2\u02cd\u02ce",
+    "\7\u008b\2\2\u02cb\u02cc\5\u00aeX\2\u02cc\u02cd\7\21\2\2\u02cd\u02ce",
     "\5x=\2\u02ce\u02cf\5\u00e2r\2\u02cf\u02d0\5z>\2\u02d0=\3\2\2\2\u02d1",
     "\u02d2\7\u0084\2\2\u02d2\u02d3\7p\2\2\u02d3\u02d4\5T+\2\u02d4\u02d5",
     "\7\21\2\2\u02d5\u02d6\5x=\2\u02d6\u02de\5\u00e6t\2\u02d7\u02d8\5v<\2",
     "\u02d8\u02d9\7u\2\2\u02d9\u02da\7\21\2\2\u02da\u02db\5x=\2\u02db\u02dc",
     "\5\u00e2r\2\u02dc\u02dd\5z>\2\u02dd\u02df\3\2\2\2\u02de\u02d7\3\2\2",
     "\2\u02de\u02df\3\2\2\2\u02df\u02e0\3\2\2\2\u02e0\u02e1\5z>\2\u02e1?",
-    "\3\2\2\2\u02e2\u02e3\7\u008b\2\2\u02e3\u02e4\5\u00ecw\2\u02e4\u02e5",
+    "\3\2\2\2\u02e2\u02e3\7\u008c\2\2\u02e3\u02e4\5\u00ecw\2\u02e4\u02e5",
     "\7\21\2\2\u02e5\u02e6\5x=\2\u02e6\u02e7\5\u00e2r\2\u02e7\u02e8\5z>\2",
-    "\u02e8\u02f2\3\2\2\2\u02e9\u02ea\7\u008b\2\2\u02ea\u02eb\7c\2\2\u02eb",
+    "\u02e8\u02f2\3\2\2\2\u02e9\u02ea\7\u008c\2\2\u02ea\u02eb\7c\2\2\u02eb",
     "\u02ec\5\u00eav\2\u02ec\u02ed\7\21\2\2\u02ed\u02ee\5x=\2\u02ee\u02ef",
     "\5\u00e2r\2\u02ef\u02f0\5z>\2\u02f0\u02f2\3\2\2\2\u02f1\u02e2\3\2\2",
     "\2\u02f1\u02e9\3\2\2\2\u02f2A\3\2\2\2\u02f3\u02f4\7_\2\2\u02f4\u02f7",
@@ -368,8 +368,8 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u02fa\u02fb\5T+\2\u02fb\u02fc\7\21\2\2\u02fc\u02fd\5x=\2\u02fd\u02fe",
     "\5\u00e2r\2\u02fe\u02ff\5z>\2\u02ffC\3\2\2\2\u0300\u0301\7S\2\2\u0301",
     "\u0302\7\21\2\2\u0302\u0303\5x=\2\u0303\u0304\5\u00e2r\2\u0304\u0305",
-    "\5z>\2\u0305\u0306\5v<\2\u0306\u0307\7\u008d\2\2\u0307\u0308\5T+\2\u0308",
-    "E\3\2\2\2\u0309\u030a\7\u008d\2\2\u030a\u030b\5T+\2\u030b\u030c\7\21",
+    "\5z>\2\u0305\u0306\5v<\2\u0306\u0307\7\u008e\2\2\u0307\u0308\5T+\2\u0308",
+    "E\3\2\2\2\u0309\u030a\7\u008e\2\2\u030a\u030b\5T+\2\u030b\u030c\7\21",
     "\2\2\u030c\u030d\5x=\2\u030d\u030e\5\u00e2r\2\u030e\u030f\5z>\2\u030f",
     "G\3\2\2\2\u0310\u0311\7b\2\2\u0311\u0312\5T+\2\u0312\u0313\7\21\2\2",
     "\u0313\u0314\5x=\2\u0314\u0315\5\u00e2r\2\u0315\u0319\5z>\2\u0316\u0317",
@@ -469,16 +469,16 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0427\u042a\3\2\2\2\u0428\u0426\3\2\2\2\u0428\u0429\3\2\2\2\u0429c",
     "\3\2\2\2\u042a\u0428\3\2\2\2\u042b\u042c\5\u00acW\2\u042c\u042d\5\u0114",
     "\u008b\2\u042d\u042e\5T+\2\u042ee\3\2\2\2\u042f\u0430\7x\2\2\u0430\u0431",
-    "\7`\2\2\u0431\u0432\5T+\2\u0432g\3\2\2\2\u0433\u0434\7\u008e\2\2\u0434",
+    "\7`\2\2\u0431\u0432\5T+\2\u0432g\3\2\2\2\u0433\u0434\7\u008f\2\2\u0434",
     "\u0435\5T+\2\u0435\u0436\7\u0088\2\2\u0436\u0437\5T+\2\u0437i\3\2\2",
     "\2\u0438\u0439\7]\2\2\u0439\u043a\5\u00acW\2\u043a\u043b\7`\2\2\u043b",
-    "\u043c\5T+\2\u043c\u043d\7\u008c\2\2\u043d\u043e\5T+\2\u043e\u0456\3",
+    "\u043c\5T+\2\u043c\u043d\7\u008d\2\2\u043d\u043e\5T+\2\u043e\u0456\3",
     "\2\2\2\u043f\u0440\7]\2\2\u0440\u0441\7q\2\2\u0441\u0442\5\u009eP\2",
-    "\u0442\u0443\7\u008c\2\2\u0443\u0444\5T+\2\u0444\u0456\3\2\2\2\u0445",
+    "\u0442\u0443\7\u008d\2\2\u0443\u0444\5T+\2\u0444\u0456\3\2\2\2\u0445",
     "\u044c\7]\2\2\u0446\u044d\7A\2\2\u0447\u0448\7}\2\2\u0448\u0449\5T+",
     "\2\u0449\u044a\7\u0088\2\2\u044a\u044b\5T+\2\u044b\u044d\3\2\2\2\u044c",
     "\u0446\3\2\2\2\u044c\u0447\3\2\2\2\u044d\u044e\3\2\2\2\u044e\u044f\7",
-    "\26\2\2\u044f\u0450\5\u009eP\2\u0450\u0453\7\27\2\2\u0451\u0452\7\u008c",
+    "\26\2\2\u044f\u0450\5\u009eP\2\u0450\u0453\7\27\2\2\u0451\u0452\7\u008d",
     "\2\2\u0452\u0454\5T+\2\u0453\u0451\3\2\2\2\u0453\u0454\3\2\2\2\u0454",
     "\u0456\3\2\2\2\u0455\u0438\3\2\2\2\u0455\u043f\3\2\2\2\u0455\u0445\3",
     "\2\2\2\u0456k\3\2\2\2\u0457\u0458\7\u0081\2\2\u0458\u0459\7\26\2\2\u0459",
@@ -524,7 +524,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u04ce\3\2\2\2\u04d0\u04d1\3\2\2\2\u04d1\u008d\3\2\2\2\u04d2\u04d0\3",
     "\2\2\2\u04d3\u04d4\7c\2\2\u04d4\u04de\5\u0090I\2\u04d5\u04d6\7c\2\2",
     "\u04d6\u04de\5\u0092J\2\u04d7\u04d8\7c\2\2\u04d8\u04de\5\u0096L\2\u04d9",
-    "\u04da\7f\2\2\u04da\u04de\7\u0098\2\2\u04db\u04dc\7f\2\2\u04dc\u04de",
+    "\u04da\7f\2\2\u04da\u04de\7\u0099\2\2\u04db\u04dc\7f\2\2\u04dc\u04de",
     "\5T+\2\u04dd\u04d3\3\2\2\2\u04dd\u04d5\3\2\2\2\u04dd\u04d7\3\2\2\2\u04dd",
     "\u04d9\3\2\2\2\u04dd\u04db\3\2\2\2\u04de\u008f\3\2\2\2\u04df\u04e1\7",
     "\30\2\2\u04e0\u04e2\5\u0094K\2\u04e1\u04e0\3\2\2\2\u04e1\u04e2\3\2\2",
@@ -549,7 +549,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u051b\7>\2\2\u051a\u0510\3\2\2\2\u051a\u0511\3\2\2\2\u051a\u0512\3",
     "\2\2\2\u051a\u0513\3\2\2\2\u051a\u0514\3\2\2\2\u051a\u0515\3\2\2\2\u051a",
     "\u0516\3\2\2\2\u051a\u0517\3\2\2\2\u051a\u0518\3\2\2\2\u051a\u0519\3",
-    "\2\2\2\u051b\u009d\3\2\2\2\u051c\u051d\7\u0094\2\2\u051d\u009f\3\2\2",
+    "\2\2\2\u051b\u009d\3\2\2\2\u051c\u051d\7\u0095\2\2\u051d\u009f\3\2\2",
     "\2\u051e\u051f\7>\2\2\u051f\u00a1\3\2\2\2\u0520\u0521\7?\2\2\u0521\u00a3",
     "\3\2\2\2\u0522\u0526\5\f\7\2\u0523\u0526\5\30\r\2\u0524\u0526\5\16\b",
     "\2\u0525\u0522\3\2\2\2\u0525\u0523\3\2\2\2\u0525\u0524\3\2\2\2\u0526",
@@ -560,8 +560,8 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u00acW\2\u0533\u0535\5\u00aeX\2\u0534\u0532\3\2\2\2\u0534\u0533\3\2",
     "\2\2\u0535\u00a9\3\2\2\2\u0536\u053a\5\u00acW\2\u0537\u053a\5\u00ae",
     "X\2\u0538\u053a\5\u00b0Y\2\u0539\u0536\3\2\2\2\u0539\u0537\3\2\2\2\u0539",
-    "\u0538\3\2\2\2\u053a\u00ab\3\2\2\2\u053b\u053c\7\u0095\2\2\u053c\u00ad",
-    "\3\2\2\2\u053d\u053e\7\u0094\2\2\u053e\u00af\3\2\2\2\u053f\u0540\7\u0093",
+    "\u0538\3\2\2\2\u053a\u00ab\3\2\2\2\u053b\u053c\7\u0096\2\2\u053c\u00ad",
+    "\3\2\2\2\u053d\u053e\7\u0095\2\2\u053e\u00af\3\2\2\2\u053f\u0540\7\u0094",
     "\2\2\u0540\u00b1\3\2\2\2\u0541\u0542\bZ\1\2\u0542\u0543\5\u00b4[\2\u0543",
     "\u0549\3\2\2\2\u0544\u0545\f\3\2\2\u0545\u0546\7\23\2\2\u0546\u0548",
     "\5\u00b4[\2\u0547\u0544\3\2\2\2\u0548\u054b\3\2\2\2\u0549\u0547\3\2",
@@ -602,7 +602,7 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\7\21\2\2\u05a7\u05ac\5\u00aaV\2\u05a8\u05a9\7\25\2\2\u05a9\u05ab\5",
     "\u00aaV\2\u05aa\u05a8\3\2\2\2\u05ab\u05ae\3\2\2\2\u05ac\u05aa\3\2\2",
     "\2\u05ac\u05ad\3\2\2\2\u05ad\u00cd\3\2\2\2\u05ae\u05ac\3\2\2\2\u05af",
-    "\u05b0\7\u0095\2\2\u05b0\u05b1\6h\65\3\u05b1\u00cf\3\2\2\2\u05b2\u05b4",
+    "\u05b0\7\u0096\2\2\u05b0\u05b1\6h\65\3\u05b1\u00cf\3\2\2\2\u05b2\u05b4",
     "\5\u00aaV\2\u05b3\u05b5\5\u00d2j\2\u05b4\u05b3\3\2\2\2\u05b4\u05b5\3",
     "\2\2\2\u05b5\u00d1\3\2\2\2\u05b6\u05b7\7`\2\2\u05b7\u05b8\5\u00ceh\2",
     "\u05b8\u05ba\7\21\2\2\u05b9\u05bb\7%\2\2\u05ba\u05b9\3\2\2\2\u05ba\u05bb",
@@ -652,11 +652,11 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0637\u0638\7\30\2\2\u0638\u0639\5\u00eex\2\u0639\u063a\7\31\2\2\u063a",
     "\u0640\3\2\2\2\u063b\u063c\7*\2\2\u063c\u063d\5\u00eex\2\u063d\u063e",
     "\7(\2\2\u063e\u0640\3\2\2\2\u063f\u0631\3\2\2\2\u063f\u0637\3\2\2\2",
-    "\u063f\u063b\3\2\2\2\u0640\u00eb\3\2\2\2\u0641\u064f\7\u0091\2\2\u0642",
-    "\u064f\7\u0092\2\2\u0643\u064f\7\u0099\2\2\u0644\u064f\7\u009a\2\2\u0645",
-    "\u064f\7\u0090\2\2\u0646\u064f\7\u009e\2\2\u0647\u064f\7\u009d\2\2\u0648",
-    "\u064f\7\u0098\2\2\u0649\u064f\7\u009b\2\2\u064a\u064f\7\u009c\2\2\u064b",
-    "\u064f\7\u008f\2\2\u064c\u064f\7\u009f\2\2\u064d\u064f\5|?\2\u064e\u0641",
+    "\u063f\u063b\3\2\2\2\u0640\u00eb\3\2\2\2\u0641\u064f\7\u0092\2\2\u0642",
+    "\u064f\7\u0093\2\2\u0643\u064f\7\u009a\2\2\u0644\u064f\7\u009b\2\2\u0645",
+    "\u064f\7\u0091\2\2\u0646\u064f\7\u009f\2\2\u0647\u064f\7\u009e\2\2\u0648",
+    "\u064f\7\u0099\2\2\u0649\u064f\7\u009c\2\2\u064a\u064f\7\u009d\2\2\u064b",
+    "\u064f\7\u0090\2\2\u064c\u064f\7\u00a0\2\2\u064d\u064f\5|?\2\u064e\u0641",
     "\3\2\2\2\u064e\u0642\3\2\2\2\u064e\u0643\3\2\2\2\u064e\u0644\3\2\2\2",
     "\u064e\u0645\3\2\2\2\u064e\u0646\3\2\2\2\u064e\u0647\3\2\2\2\u064e\u0648",
     "\3\2\2\2\u064e\u0649\3\2\2\2\u064e\u064a\3\2\2\2\u064e\u064b\3\2\2\2",
@@ -695,15 +695,15 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\5\u00acW\2\u06a9\u06ae\3\2\2\2\u06aa\u06ab\f\3\2\2\u06ab\u06ad\5p9",
     "\2\u06ac\u06aa\3\2\2\2\u06ad\u06b0\3\2\2\2\u06ae\u06ac\3\2\2\2\u06ae",
     "\u06af\3\2\2\2\u06af\u0109\3\2\2\2\u06b0\u06ae\3\2\2\2\u06b1\u06b2\6",
-    "\u0086@\3\u06b2\u06b3\7\u0095\2\2\u06b3\u06b6\5\u00bc_\2\u06b4\u06b6",
+    "\u0086@\3\u06b2\u06b3\7\u0096\2\2\u06b3\u06b6\5\u00bc_\2\u06b4\u06b6",
     "\5T+\2\u06b5\u06b1\3\2\2\2\u06b5\u06b4\3\2\2\2\u06b6\u010b\3\2\2\2\u06b7",
     "\u06be\7\"\2\2\u06b8\u06be\7#\2\2\u06b9\u06be\5\u0116\u008c\2\u06ba",
     "\u06be\5\u0118\u008d\2\u06bb\u06be\5\u011a\u008e\2\u06bc\u06be\5\u011c",
     "\u008f\2\u06bd\u06b7\3\2\2\2\u06bd\u06b8\3\2\2\2\u06bd\u06b9\3\2\2\2",
     "\u06bd\u06ba\3\2\2\2\u06bd\u06bb\3\2\2\2\u06bd\u06bc\3\2\2\2\u06be\u010d",
-    "\3\2\2\2\u06bf\u06c0\7\u0095\2\2\u06c0\u06c1\6\u0088A\3\u06c1\u010f",
-    "\3\2\2\2\u06c2\u06c3\7\u0095\2\2\u06c3\u06c4\6\u0089B\3\u06c4\u0111",
-    "\3\2\2\2\u06c5\u06c6\7\u0095\2\2\u06c6\u06c7\6\u008aC\3\u06c7\u0113",
+    "\3\2\2\2\u06bf\u06c0\7\u0096\2\2\u06c0\u06c1\6\u0088A\3\u06c1\u010f",
+    "\3\2\2\2\u06c2\u06c3\7\u0096\2\2\u06c3\u06c4\6\u0089B\3\u06c4\u0111",
+    "\3\2\2\2\u06c5\u06c6\7\u0096\2\2\u06c6\u06c7\6\u008aC\3\u06c7\u0113",
     "\3\2\2\2\u06c8\u06c9\7-\2\2\u06c9\u0115\3\2\2\2\u06ca\u06cb\7$\2\2\u06cb",
     "\u0117\3\2\2\2\u06cc\u06cd\7%\2\2\u06cd\u0119\3\2\2\2\u06ce\u06cf\7",
     "&\2\2\u06cf\u011b\3\2\2\2\u06d0\u06d1\t\5\2\2\u06d1\u011d\3\2\2\2\u06d2",
@@ -731,8 +731,8 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\2\2\2\u0708\u0709\7\30\2\2\u0709\u070a\5\u0120\u0091\2\u070a\u070b",
     "\7\31\2\2\u070b\u012d\3\2\2\2\u070c\u070d\7\26\2\2\u070d\u070e\5\u0120",
     "\u0091\2\u070e\u070f\7\27\2\2\u070f\u012f\3\2\2\2\u0710\u0711\5\u0134",
-    "\u009b\2\u0711\u0131\3\2\2\2\u0712\u0718\7\u0099\2\2\u0713\u0718\7\u009b",
-    "\2\2\u0714\u0718\7\u0098\2\2\u0715\u0718\7\u008f\2\2\u0716\u0718\7\u0090",
+    "\u009b\2\u0711\u0131\3\2\2\2\u0712\u0718\7\u009a\2\2\u0713\u0718\7\u009c",
+    "\2\2\u0714\u0718\7\u0099\2\2\u0715\u0718\7\u0090\2\2\u0716\u0718\7\u0091",
     "\2\2\u0717\u0712\3\2\2\2\u0717\u0713\3\2\2\2\u0717\u0714\3\2\2\2\u0717",
     "\u0715\3\2\2\2\u0717\u0716\3\2\2\2\u0718\u0133\3\2\2\2\u0719\u071a\t",
     "\6\2\2\u071a\u0135\3\2\2\2\u071b\u071c\7{\2\2\u071c\u071f\5\u0138\u009d",
@@ -764,12 +764,12 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u075d\3\2\2\2\u075f\u0760\3\2\2\2\u0760\u0145\3\2\2\2\u0761\u075f\3",
     "\2\2\2\u0762\u0763\7\26\2\2\u0763\u0764\5\u0138\u009d\2\u0764\u0765",
     "\7\27\2\2\u0765\u0147\3\2\2\2\u0766\u0767\b\u00a5\1\2\u0767\u076a\7",
-    "\u0097\2\2\u0768\u076a\5\u014c\u00a7\2\u0769\u0766\3\2\2\2\u0769\u0768",
+    "\u0098\2\2\u0768\u076a\5\u014c\u00a7\2\u0769\u0766\3\2\2\2\u0769\u0768",
     "\3\2\2\2\u076a\u0770\3\2\2\2\u076b\u076c\f\3\2\2\u076c\u076d\7\25\2",
     "\2\u076d\u076f\5\u014c\u00a7\2\u076e\u076b\3\2\2\2\u076f\u0772\3\2\2",
     "\2\u0770\u076e\3\2\2\2\u0770\u0771\3\2\2\2\u0771\u0149\3\2\2\2\u0772",
-    "\u0770\3\2\2\2\u0773\u0779\7\u0099\2\2\u0774\u0779\7\u009b\2\2\u0775",
-    "\u0779\7\u0098\2\2\u0776\u0779\7\u008f\2\2\u0777\u0779\7\u0090\2\2\u0778",
+    "\u0770\3\2\2\2\u0773\u0779\7\u009a\2\2\u0774\u0779\7\u009c\2\2\u0775",
+    "\u0779\7\u0099\2\2\u0776\u0779\7\u0090\2\2\u0777\u0779\7\u0091\2\2\u0778",
     "\u0773\3\2\2\2\u0778\u0774\3\2\2\2\u0778\u0775\3\2\2\2\u0778\u0776\3",
     "\2\2\2\u0778\u0777\3\2\2\2\u0779\u014b\3\2\2\2\u077a\u077b\t\7\2\2\u077b",
     "\u014d\3\2\2\2\u077c\u077d\7{\2\2\u077d\u077e\5\u0150\u00a9\2\u077e",
@@ -798,11 +798,11 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\25\2\2\u07bb\u07bd\5\u0166\u00b4\2\u07bc\u07b9\3\2\2\2\u07bd\u07c0",
     "\3\2\2\2\u07be\u07bc\3\2\2\2\u07be\u07bf\3\2\2\2\u07bf\u0161\3\2\2\2",
     "\u07c0\u07be\3\2\2\2\u07c1\u07c2\b\u00b2\1\2\u07c2\u07c3\5\u0160\u00b1",
-    "\2\u07c3\u07c8\3\2\2\2\u07c4\u07c5\f\3\2\2\u07c5\u07c7\7\u0097\2\2\u07c6",
+    "\2\u07c3\u07c8\3\2\2\2\u07c4\u07c5\f\3\2\2\u07c5\u07c7\7\u0098\2\2\u07c6",
     "\u07c4\3\2\2\2\u07c7\u07ca\3\2\2\2\u07c8\u07c6\3\2\2\2\u07c8\u07c9\3",
-    "\2\2\2\u07c9\u0163\3\2\2\2\u07ca\u07c8\3\2\2\2\u07cb\u07d1\7\u0099\2",
-    "\2\u07cc\u07d1\7\u009b\2\2\u07cd\u07d1\7\u0098\2\2\u07ce\u07d1\7\u008f",
-    "\2\2\u07cf\u07d1\7\u0090\2\2\u07d0\u07cb\3\2\2\2\u07d0\u07cc\3\2\2\2",
+    "\2\2\2\u07c9\u0163\3\2\2\2\u07ca\u07c8\3\2\2\2\u07cb\u07d1\7\u009a\2",
+    "\2\u07cc\u07d1\7\u009c\2\2\u07cd\u07d1\7\u0099\2\2\u07ce\u07d1\7\u0090",
+    "\2\2\u07cf\u07d1\7\u0091\2\2\u07d0\u07cb\3\2\2\2\u07d0\u07cc\3\2\2\2",
     "\u07d0\u07cd\3\2\2\2\u07d0\u07ce\3\2\2\2\u07d0\u07cf\3\2\2\2\u07d1\u0165",
     "\3\2\2\2\u07d2\u07d3\t\b\2\2\u07d3\u0167\3\2\2\2\u07d4\u07d5\7{\2\2",
     "\u07d5\u07d6\5\u016a\u00b6\2\u07d6\u07d7\7\22\2\2\u07d7\u07dc\3\2\2",
@@ -826,13 +826,13 @@ var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
     "\u0175\3\2\2\2\u0805\u0803\3\2\2\2\u0806\u0807\7\30\2\2\u0807\u0808",
     "\5\u016a\u00b6\2\u0808\u0809\7\31\2\2\u0809\u0177\3\2\2\2\u080a\u080b",
     "\7\26\2\2\u080b\u080c\5\u016a\u00b6\2\u080c\u080d\7\27\2\2\u080d\u0179",
-    "\3\2\2\2\u080e\u080f\b\u00be\1\2\u080f\u0812\7\u0097\2\2\u0810\u0812",
+    "\3\2\2\2\u080e\u080f\b\u00be\1\2\u080f\u0812\7\u0098\2\2\u0810\u0812",
     "\5\u017e\u00c0\2\u0811\u080e\3\2\2\2\u0811\u0810\3\2\2\2\u0812\u0818",
     "\3\2\2\2\u0813\u0814\f\3\2\2\u0814\u0815\7\25\2\2\u0815\u0817\5\u017e",
     "\u00c0\2\u0816\u0813\3\2\2\2\u0817\u081a\3\2\2\2\u0818\u0816\3\2\2\2",
     "\u0818\u0819\3\2\2\2\u0819\u017b\3\2\2\2\u081a\u0818\3\2\2\2\u081b\u0821",
-    "\7\u0099\2\2\u081c\u0821\7\u009b\2\2\u081d\u0821\7\u0098\2\2\u081e\u0821",
-    "\7\u008f\2\2\u081f\u0821\7\u0090\2\2\u0820\u081b\3\2\2\2\u0820\u081c",
+    "\7\u009a\2\2\u081c\u0821\7\u009c\2\2\u081d\u0821\7\u0099\2\2\u081e\u0821",
+    "\7\u0090\2\2\u081f\u0821\7\u0091\2\2\u0820\u081b\3\2\2\2\u0820\u081c",
     "\3\2\2\2\u0820\u081d\3\2\2\2\u0820\u081e\3\2\2\2\u0820\u081f\3\2\2\2",
     "\u0821\u017d\3\2\2\2\u0822\u0823\t\t\2\2\u0823\u017f\3\2\2\2\u00a2\u0186",
     "\u0189\u01a2\u01a7\u01b2\u01b7\u01c2\u01c9\u01d6\u01e4\u0200\u0207\u0210",
@@ -881,9 +881,9 @@ var literalNames = [ 'null', 'null', 'null', 'null', 'null', 'null', "'\t'",
                      "'read'", "'receiving'", "'resource'", "'return'", 
                      "'returning'", "'rows'", "'self'", "'setter'", "'singleton'", 
                      "'sorted'", "'storable'", "'store'", "'switch'", "'test'", 
-                     "'this'", "'throw'", "'to'", "'try'", "'with'", "'when'", 
-                     "'where'", "'while'", "'write'", 'null', 'null', "'MIN_INTEGER'", 
-                     "'MAX_INTEGER'" ];
+                     "'this'", "'throw'", "'to'", "'try'", "'verifying'", 
+                     "'with'", "'when'", "'where'", "'while'", "'write'", 
+                     'null', 'null', "'MIN_INTEGER'", "'MAX_INTEGER'" ];
 
 var symbolicNames = [ 'null', "INDENT", "DEDENT", "LF_TAB", "LF_MORE", "LF", 
                       "TAB", "WS", "COMMENT", "JAVA", "CSHARP", "PYTHON2", 
@@ -908,8 +908,8 @@ var symbolicNames = [ 'null', "INDENT", "DEDENT", "LF_TAB", "LF_MORE", "LF",
                       "RECEIVING", "RESOURCE", "RETURN", "RETURNING", "ROWS", 
                       "SELF", "SETTER", "SINGLETON", "SORTED", "STORABLE", 
                       "STORE", "SWITCH", "TEST", "THIS", "THROW", "TO", 
-                      "TRY", "WITH", "WHEN", "WHERE", "WHILE", "WRITE", 
-                      "BOOLEAN_LITERAL", "CHAR_LITERAL", "MIN_INTEGER", 
+                      "TRY", "VERIFYING", "WITH", "WHEN", "WHERE", "WHILE", 
+                      "WRITE", "BOOLEAN_LITERAL", "CHAR_LITERAL", "MIN_INTEGER", 
                       "MAX_INTEGER", "SYMBOL_IDENTIFIER", "TYPE_IDENTIFIER", 
                       "VARIABLE_IDENTIFIER", "NATIVE_IDENTIFIER", "DOLLAR_IDENTIFIER", 
                       "TEXT_LITERAL", "INTEGER_LITERAL", "HEXA_LITERAL", 
@@ -1139,28 +1139,29 @@ SParser.THIS = 132;
 SParser.THROW = 133;
 SParser.TO = 134;
 SParser.TRY = 135;
-SParser.WITH = 136;
-SParser.WHEN = 137;
-SParser.WHERE = 138;
-SParser.WHILE = 139;
-SParser.WRITE = 140;
-SParser.BOOLEAN_LITERAL = 141;
-SParser.CHAR_LITERAL = 142;
-SParser.MIN_INTEGER = 143;
-SParser.MAX_INTEGER = 144;
-SParser.SYMBOL_IDENTIFIER = 145;
-SParser.TYPE_IDENTIFIER = 146;
-SParser.VARIABLE_IDENTIFIER = 147;
-SParser.NATIVE_IDENTIFIER = 148;
-SParser.DOLLAR_IDENTIFIER = 149;
-SParser.TEXT_LITERAL = 150;
-SParser.INTEGER_LITERAL = 151;
-SParser.HEXA_LITERAL = 152;
-SParser.DECIMAL_LITERAL = 153;
-SParser.DATETIME_LITERAL = 154;
-SParser.TIME_LITERAL = 155;
-SParser.DATE_LITERAL = 156;
-SParser.PERIOD_LITERAL = 157;
+SParser.VERIFYING = 136;
+SParser.WITH = 137;
+SParser.WHEN = 138;
+SParser.WHERE = 139;
+SParser.WHILE = 140;
+SParser.WRITE = 141;
+SParser.BOOLEAN_LITERAL = 142;
+SParser.CHAR_LITERAL = 143;
+SParser.MIN_INTEGER = 144;
+SParser.MAX_INTEGER = 145;
+SParser.SYMBOL_IDENTIFIER = 146;
+SParser.TYPE_IDENTIFIER = 147;
+SParser.VARIABLE_IDENTIFIER = 148;
+SParser.NATIVE_IDENTIFIER = 149;
+SParser.DOLLAR_IDENTIFIER = 150;
+SParser.TEXT_LITERAL = 151;
+SParser.INTEGER_LITERAL = 152;
+SParser.HEXA_LITERAL = 153;
+SParser.DECIMAL_LITERAL = 154;
+SParser.DATETIME_LITERAL = 155;
+SParser.TIME_LITERAL = 156;
+SParser.DATE_LITERAL = 157;
+SParser.PERIOD_LITERAL = 158;
 
 SParser.RULE_enum_category_declaration = 0;
 SParser.RULE_enum_native_declaration = 1;
@@ -1736,7 +1737,7 @@ SParser.prototype.category_symbol = function() {
         this.match(SParser.LPAR);
         this.state = 416;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 415; 
             localctx.args = this.argument_assignment_list(0);
         }
@@ -3652,8 +3653,8 @@ Test_method_declarationContext.prototype.lfp = function() {
     return this.getTypedRuleContext(LfpContext,0);
 };
 
-Test_method_declarationContext.prototype.EXPECTING = function() {
-    return this.getToken(SParser.EXPECTING, 0);
+Test_method_declarationContext.prototype.VERIFYING = function() {
+    return this.getToken(SParser.VERIFYING, 0);
 };
 
 Test_method_declarationContext.prototype.TEXT_LITERAL = function() {
@@ -3714,7 +3715,7 @@ SParser.prototype.test_method_declaration = function() {
         this.state = 624; 
         this.lfp();
         this.state = 625;
-        this.match(SParser.EXPECTING);
+        this.match(SParser.VERIFYING);
         this.state = 626;
         this.match(SParser.COLON);
         this.state = 632;
@@ -4665,7 +4666,7 @@ SParser.prototype.method_call = function() {
         this.match(SParser.LPAR);
         this.state = 676;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 675; 
             localctx.args = this.argument_assignment_list(0);
         }
@@ -9343,7 +9344,7 @@ SParser.prototype.constructor_expression = function() {
         this.match(SParser.LPAR);
         this.state = 1046;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 1045; 
             localctx.args = this.argument_assignment_list(0);
         }
@@ -12156,7 +12157,7 @@ SParser.prototype.list_literal = function() {
         this.match(SParser.LBRAK);
         this.state = 1247;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 1246; 
             localctx.items = this.expression_list(0);
         }
@@ -12232,7 +12233,7 @@ SParser.prototype.set_literal = function() {
         this.match(SParser.LT);
         this.state = 1253;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 1252; 
             localctx.items = this.expression_list(0);
         }
@@ -19090,7 +19091,7 @@ SParser.prototype.tuple_literal = function() {
         this.match(SParser.LPAR);
         this.state = 1650;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 1649; 
             localctx.items = this.expression_tuple(0);
         }
@@ -19166,7 +19167,7 @@ SParser.prototype.dict_literal = function() {
         this.match(SParser.LCURL);
         this.state = 1656;
         _la = this._input.LA(1);
-        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 141)) & ~0x1f) == 0 && ((1 << (_la - 141)) & ((1 << (SParser.BOOLEAN_LITERAL - 141)) | (1 << (SParser.CHAR_LITERAL - 141)) | (1 << (SParser.MIN_INTEGER - 141)) | (1 << (SParser.MAX_INTEGER - 141)) | (1 << (SParser.SYMBOL_IDENTIFIER - 141)) | (1 << (SParser.TYPE_IDENTIFIER - 141)) | (1 << (SParser.VARIABLE_IDENTIFIER - 141)) | (1 << (SParser.TEXT_LITERAL - 141)) | (1 << (SParser.INTEGER_LITERAL - 141)) | (1 << (SParser.HEXA_LITERAL - 141)) | (1 << (SParser.DECIMAL_LITERAL - 141)) | (1 << (SParser.DATETIME_LITERAL - 141)) | (1 << (SParser.TIME_LITERAL - 141)) | (1 << (SParser.DATE_LITERAL - 141)) | (1 << (SParser.PERIOD_LITERAL - 141)))) !== 0)) {
+        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (SParser.LPAR - 20)) | (1 << (SParser.LBRAK - 20)) | (1 << (SParser.LCURL - 20)) | (1 << (SParser.MINUS - 20)) | (1 << (SParser.LT - 20)))) !== 0) || ((((_la - 60)) & ~0x1f) == 0 && ((1 << (_la - 60)) & ((1 << (SParser.CODE - 60)) | (1 << (SParser.DOCUMENT - 60)) | (1 << (SParser.EXECUTE - 60)) | (1 << (SParser.FETCH - 60)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (SParser.MUTABLE - 104)) | (1 << (SParser.NONE - 104)) | (1 << (SParser.NOT - 104)) | (1 << (SParser.READ - 104)) | (1 << (SParser.SELF - 104)) | (1 << (SParser.SORTED - 104)) | (1 << (SParser.THIS - 104)))) !== 0) || ((((_la - 142)) & ~0x1f) == 0 && ((1 << (_la - 142)) & ((1 << (SParser.BOOLEAN_LITERAL - 142)) | (1 << (SParser.CHAR_LITERAL - 142)) | (1 << (SParser.MIN_INTEGER - 142)) | (1 << (SParser.MAX_INTEGER - 142)) | (1 << (SParser.SYMBOL_IDENTIFIER - 142)) | (1 << (SParser.TYPE_IDENTIFIER - 142)) | (1 << (SParser.VARIABLE_IDENTIFIER - 142)) | (1 << (SParser.TEXT_LITERAL - 142)) | (1 << (SParser.INTEGER_LITERAL - 142)) | (1 << (SParser.HEXA_LITERAL - 142)) | (1 << (SParser.DECIMAL_LITERAL - 142)) | (1 << (SParser.DATETIME_LITERAL - 142)) | (1 << (SParser.TIME_LITERAL - 142)) | (1 << (SParser.DATE_LITERAL - 142)) | (1 << (SParser.PERIOD_LITERAL - 142)))) !== 0)) {
             this.state = 1655; 
             localctx.items = this.dict_entry_list(0);
         }
@@ -21449,7 +21450,7 @@ SParser.prototype.javascript_method_expression = function() {
         this.match(SParser.LPAR);
         this.state = 1783;
         _la = this._input.LA(1);
-        if(_la===SParser.LPAR || _la===SParser.LBRAK || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.DOLLAR_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
+        if(_la===SParser.LPAR || _la===SParser.LBRAK || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.DOLLAR_IDENTIFIER - 150)) | (1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
             this.state = 1782; 
             localctx.args = this.javascript_arguments(0);
         }
@@ -22123,7 +22124,7 @@ SParser.prototype.javascript_identifier = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 1815;
         _la = this._input.LA(1);
-        if(!(((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.DOLLAR_IDENTIFIER - 118)))) !== 0))) {
+        if(!(((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)))) !== 0) || _la===SParser.DOLLAR_IDENTIFIER)) {
         this._errHandler.recoverInline(this);
         }
         this.consume();
@@ -22790,7 +22791,7 @@ SParser.prototype.python_method_expression = function() {
         this.match(SParser.LPAR);
         this.state = 1849;
         _la = this._input.LA(1);
-        if(_la===SParser.LPAR || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.DOLLAR_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
+        if(_la===SParser.LPAR || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.DOLLAR_IDENTIFIER - 150)) | (1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
             this.state = 1848; 
             localctx.args = this.python_argument_list();
         }
@@ -24524,7 +24525,7 @@ SParser.prototype.java_method_expression = function() {
         this.match(SParser.LPAR);
         this.state = 1949;
         _la = this._input.LA(1);
-        if(_la===SParser.LPAR || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.NATIVE_IDENTIFIER - 118)) | (1 << (SParser.DOLLAR_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
+        if(_la===SParser.LPAR || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.NATIVE_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.DOLLAR_IDENTIFIER - 150)) | (1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
             this.state = 1948; 
             localctx.args = this.java_arguments(0);
         }
@@ -25424,7 +25425,7 @@ SParser.prototype.java_identifier = function() {
         this.enterOuterAlt(localctx, 1);
         this.state = 2000;
         _la = this._input.LA(1);
-        if(!(((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.NATIVE_IDENTIFIER - 118)) | (1 << (SParser.DOLLAR_IDENTIFIER - 118)))) !== 0))) {
+        if(!(((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.NATIVE_IDENTIFIER - 118)))) !== 0) || _la===SParser.DOLLAR_IDENTIFIER)) {
         this._errHandler.recoverInline(this);
         }
         this.consume();
@@ -26080,7 +26081,7 @@ SParser.prototype.csharp_method_expression = function() {
         this.match(SParser.LPAR);
         this.state = 2037;
         _la = this._input.LA(1);
-        if(_la===SParser.LPAR || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)) | (1 << (SParser.DOLLAR_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
+        if(_la===SParser.LPAR || ((((_la - 50)) & ~0x1f) == 0 && ((1 << (_la - 50)) & ((1 << (SParser.BOOLEAN - 50)) | (1 << (SParser.CHARACTER - 50)) | (1 << (SParser.TEXT - 50)) | (1 << (SParser.INTEGER - 50)) | (1 << (SParser.DECIMAL - 50)) | (1 << (SParser.DATE - 50)) | (1 << (SParser.TIME - 50)) | (1 << (SParser.DATETIME - 50)) | (1 << (SParser.PERIOD - 50)))) !== 0) || ((((_la - 118)) & ~0x1f) == 0 && ((1 << (_la - 118)) & ((1 << (SParser.READ - 118)) | (1 << (SParser.SELF - 118)) | (1 << (SParser.TEST - 118)) | (1 << (SParser.THIS - 118)) | (1 << (SParser.WRITE - 118)) | (1 << (SParser.BOOLEAN_LITERAL - 118)) | (1 << (SParser.CHAR_LITERAL - 118)) | (1 << (SParser.SYMBOL_IDENTIFIER - 118)) | (1 << (SParser.TYPE_IDENTIFIER - 118)) | (1 << (SParser.VARIABLE_IDENTIFIER - 118)))) !== 0) || ((((_la - 150)) & ~0x1f) == 0 && ((1 << (_la - 150)) & ((1 << (SParser.DOLLAR_IDENTIFIER - 150)) | (1 << (SParser.TEXT_LITERAL - 150)) | (1 << (SParser.INTEGER_LITERAL - 150)) | (1 << (SParser.DECIMAL_LITERAL - 150)))) !== 0)) {
             this.state = 2036; 
             localctx.args = this.csharp_arguments(0);
         }

@@ -131,7 +131,7 @@ TestMethodDeclaration.prototype.toSDialect = function(writer)
     writer.indent ();
     this.statements.toDialect (writer);
     writer.dedent ();
-    writer.append ("expecting:");
+    writer.append ("verifying:");
     if (this.error != null) {
         writer.append (" ");
         this.error.toDialect (writer);
@@ -155,7 +155,7 @@ TestMethodDeclaration.prototype.toEDialect = function(writer)
     writer.indent ();
     this.statements.toDialect (writer);
     writer.dedent ();
-    writer.append ("and expecting");
+    writer.append ("and verifying");
     if (this.error != null) {
         writer.append (" ");
         this.error.toDialect (writer);
@@ -179,7 +179,7 @@ TestMethodDeclaration.prototype.toODialect = function(writer)
     writer.indent ();
     this.statements.toDialect (writer);
     writer.dedent ();
-    writer.append ("} expecting ");
+    writer.append ("} verifying ");
     if (this.error != null) {
         this.error.toDialect (writer);
         writer.append (";\n");

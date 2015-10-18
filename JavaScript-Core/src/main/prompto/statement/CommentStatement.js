@@ -1,5 +1,6 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var Dialect = require("../parser/Dialect").Dialect;
+var VoidType = require("../type/VoidType").VoidType;
 
 function CommentStatement(text) {
     BaseStatement.call(this);
@@ -11,7 +12,7 @@ CommentStatement.prototype = Object.create(BaseStatement.prototype);
 CommentStatement.prototype.constructor = CommentStatement;
 
 CommentStatement.prototype.check = function(context) {
-    return null;
+    return VoidType.instance;
 };
 
 CommentStatement.prototype.interpret = function(context) {
