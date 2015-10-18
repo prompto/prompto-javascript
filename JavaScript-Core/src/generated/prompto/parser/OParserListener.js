@@ -416,6 +416,15 @@ OParserListener.prototype.exitClosureStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#CommentStatement.
+OParserListener.prototype.enterCommentStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CommentStatement.
+OParserListener.prototype.exitCommentStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#store_statement.
 OParserListener.prototype.enterStore_statement = function(ctx) {
 };
@@ -2060,6 +2069,15 @@ OParserListener.prototype.enterTestMethod = function(ctx) {
 
 // Exit a parse tree produced by OParser#TestMethod.
 OParserListener.prototype.exitTestMethod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#comment_statement.
+OParserListener.prototype.enterComment_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#comment_statement.
+OParserListener.prototype.exitComment_statement = function(ctx) {
 };
 
 

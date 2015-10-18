@@ -89,6 +89,15 @@ EPromptoBuilder.prototype.exitCollectionLiteral = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
+EPromptoBuilder.prototype.exitCommentStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.comment_statement()));
+};
+
+
+EPromptoBuilder.prototype.exitComment_statement = function(ctx) {
+    this.setNodeValue(ctx, new statement.CommentStatement(ctx.getText()));
+};
+
 EPromptoBuilder.prototype.exitListLiteral = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);

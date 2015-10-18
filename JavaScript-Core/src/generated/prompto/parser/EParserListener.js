@@ -389,6 +389,15 @@ EParserListener.prototype.exitClosureStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#CommentStatement.
+EParserListener.prototype.enterCommentStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#CommentStatement.
+EParserListener.prototype.exitCommentStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#store_statement.
 EParserListener.prototype.enterStore_statement = function(ctx) {
 };
@@ -2078,6 +2087,15 @@ EParserListener.prototype.enterTestMethod = function(ctx) {
 
 // Exit a parse tree produced by EParser#TestMethod.
 EParserListener.prototype.exitTestMethod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#comment_statement.
+EParserListener.prototype.enterComment_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#comment_statement.
+EParserListener.prototype.exitComment_statement = function(ctx) {
 };
 
 

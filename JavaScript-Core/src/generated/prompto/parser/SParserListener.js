@@ -362,6 +362,15 @@ SParserListener.prototype.exitClosureStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#CommentStatement.
+SParserListener.prototype.enterCommentStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#CommentStatement.
+SParserListener.prototype.exitCommentStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#store_statement.
 SParserListener.prototype.enterStore_statement = function(ctx) {
 };
@@ -2015,6 +2024,15 @@ SParserListener.prototype.enterTestMethod = function(ctx) {
 
 // Exit a parse tree produced by SParser#TestMethod.
 SParserListener.prototype.exitTestMethod = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#comment_statement.
+SParserListener.prototype.enterComment_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#comment_statement.
+SParserListener.prototype.exitComment_statement = function(ctx) {
 };
 
 
