@@ -2603,6 +2603,24 @@ SParserListener.prototype.exitIsOtherExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#order_by_list.
+SParserListener.prototype.enterOrder_by_list = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#order_by_list.
+SParserListener.prototype.exitOrder_by_list = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#order_by.
+SParserListener.prototype.enterOrder_by = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#order_by.
+SParserListener.prototype.exitOrder_by = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#OperatorPlus.
 SParserListener.prototype.enterOperatorPlus = function(ctx) {
 };

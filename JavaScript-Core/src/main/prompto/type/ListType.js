@@ -1,4 +1,4 @@
-var CollectionType = require("./CollectionType").CollectionType;
+var ContainerType = require("./ContainerType").ContainerType;
 var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -8,12 +8,11 @@ exports.resolve = function() {
 };
 
 function ListType(itemType) {
-	CollectionType.call(this, new Identifier(itemType.name+"[]"), itemType);
-	this.itemType = itemType;
+    ContainerType.call(this, new Identifier(itemType.name+"[]"), itemType);
 	return this;
 }
 	
-ListType.prototype = Object.create(CollectionType.prototype);
+ListType.prototype = Object.create(ContainerType.prototype);
 ListType.prototype.constructor = ListType;
 
 /*
@@ -44,7 +43,7 @@ ListType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof ListType && this.itemType.equals(other.itemType)) {
 		return this;
 	} else {
-		return CollectionType.prototype.checkAdd.call(this, context, other, tryReverse);
+		return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
 	}
 };
 
@@ -52,7 +51,7 @@ ListType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return CollectionType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other);
 	}
 };
 
@@ -60,7 +59,7 @@ ListType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return this;
 	} else {
-		return CollectionType.prototype.checkMultiply.call(this, context, other, tryReverse);
+		return ContainerType.prototype.checkMultiply.call(this, context, other, tryReverse);
 	}
 };
 
@@ -80,7 +79,7 @@ ListType.prototype.checkMember = function(context, name) {
 	if ("length" == name) {
 		return IntegerType.instance;
 	} else {
-		return CollectionType.prototype.checkMember.call(this, context, name);
+		return ContainerType.prototype.checkMember.call(this, context, name);
 	}
 };
 

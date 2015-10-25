@@ -11,3 +11,4 @@ exports.csharp = require('./csharp/index');
 exports.runtime = require('./runtime/index');
 exports.error = require("./error/index");
 exports.value = require("./value/index");
+exports.store = require("./store/index");

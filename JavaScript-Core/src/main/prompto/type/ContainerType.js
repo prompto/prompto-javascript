@@ -1,14 +1,14 @@
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 
-function CollectionType(id, itemType) {
+function ContainerType(id, itemType) {
 	NativeType.call(this, id);
 	this.itemType = itemType;
 	return this;
 }
 
-CollectionType.prototype = Object.create(NativeType.prototype);
-CollectionType.prototype.constructor = CollectionType;
+ContainerType.prototype = Object.create(NativeType.prototype);
+ContainerType.prototype.constructor = ContainerType;
 
 /*
 public IType getItemType() {
@@ -21,7 +21,7 @@ public void checkExists(Context context) throws SyntaxError {
 }
 */
 
-CollectionType.prototype.checkContains = function(context, other) {
+ContainerType.prototype.checkContains = function(context, other) {
 	if(this.itemType.isAssignableTo(context, other)) {
 		return BooleanType.instance;
 	} else {
@@ -29,5 +29,5 @@ CollectionType.prototype.checkContains = function(context, other) {
 	}
 };
 
-exports.CollectionType = CollectionType;
+exports.ContainerType = ContainerType;
 

@@ -134,6 +134,7 @@ exports.checkCompletionAt = function(test, code, line, column, expected) {
 };
 
 exports.checkOutput = function(test, fileName) {
+    prompto.store.Store.instance = new prompto.store.MemStore();
     exports.runResource(fileName);
     checkSameOutput(test, fileName);
     test.done();

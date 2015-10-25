@@ -19,6 +19,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testServer = function(test) {
+	runTests(test, "internet/server.pec");
+};
+
 exports.testUrl = function(test) {
 	runTests(test, "internet/url.pec");
 };

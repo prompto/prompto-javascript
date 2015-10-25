@@ -13,7 +13,23 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testRecord = function(test) {
-	checkOutput(test, "store/record.pec");
+exports.testManyRecords = function(test) {
+	checkOutput(test, "store/manyRecords.pec");
+};
+
+exports.testSimpleRecord = function(test) {
+	checkOutput(test, "store/simpleRecord.pec");
+};
+
+exports.testSlicedRecords = function(test) {
+	checkOutput(test, "store/slicedRecords.pec");
+};
+
+exports.testSortedRecords = function(test) {
+	checkOutput(test, "store/sortedRecords.pec");
+};
+
+exports.testSubRecord = function(test) {
+	checkOutput(test, "store/subRecord.pec");
 };
 

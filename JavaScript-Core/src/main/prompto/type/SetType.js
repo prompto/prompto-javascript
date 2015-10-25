@@ -1,15 +1,15 @@
-var CollectionType = require("./CollectionType").CollectionType;
+var ContainerType = require("./ContainerType").ContainerType;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 function SetType(itemType) {
-	CollectionType.call(this, new Identifier(itemType.name+"<>"), itemType);
+	ContainerType.call(this, new Identifier(itemType.name+"<>"), itemType);
 	this.itemType = itemType;
 	return this;
 }
 
-SetType.prototype = Object.create(CollectionType.prototype);
+SetType.prototype = Object.create(ContainerType.prototype);
 SetType.prototype.constructor = SetType;
 
 
@@ -30,7 +30,7 @@ SetType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof SetType && this.itemType.equals(other.itemType, tryReverse)) {
 		return this;
 	} else {
-		return CollectionType.prototype.checkAdd.call(this, context, other);
+		return ContainerType.prototype.checkAdd.call(this, context, other);
 	}
 };
 
@@ -38,7 +38,7 @@ SetType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return CollectionType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other);
 	}
 };
 
@@ -54,7 +54,7 @@ SetType.prototype.checkMember = function(context, name) {
 	if ("length" == name) {
 		return IntegerType.instance;
 	} else {
-		return CollectionType.prototype.checkMember.call(this, context, name);
+		return ContainerType.prototype.checkMember.call(this, context, name);
 	}
 };
 

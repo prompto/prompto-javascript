@@ -1,8 +1,10 @@
+var MemStore = require("./MemStore").MemStore;
+
 function Store() {
 
 }
 
-Store.instance = null;
+Store.instance = new MemStore();
 
 exports.Store = Store;
 

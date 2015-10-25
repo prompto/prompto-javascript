@@ -1,5 +1,5 @@
 var Identifier = require("../grammar/Identifier").Identifier;
-var CollectionType = require("./CollectionType").CollectionType;
+var ContainerType = require("./ContainerType").ContainerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
@@ -7,12 +7,12 @@ var ListType = require("./ListType").ListType;
 var EntryType = require("./EntryType").EntryType;
 
 function DictType(itemType) {
-	CollectionType.call(this, new Identifier(itemType.name+"{}"), itemType);
+	ContainerType.call(this, new Identifier(itemType.name+"{}"), itemType);
 	this.itemType = itemType;
 	return this;
 }
 
-DictType.prototype = Object.create(CollectionType.prototype);
+DictType.prototype = Object.create(ContainerType.prototype);
 DictType.prototype.constructor = DictType;
 
 
@@ -43,7 +43,7 @@ DictType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof DictType && this.itemType.equals(other.itemType)) {
 		return this;
 	} else {
-		return CollectionType.prototype.checkAdd.call(this, context, other, tryReverse);
+		return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
 	}
 };
 
@@ -51,7 +51,7 @@ DictType.prototype.checkContains = function(context, other) {
 	if(other==TextType.instance) {
 		return BooleanType.instance;
 	} else {
-		return CollectionType.prototype.checkContains.call(this, context, other);
+		return ContainerType.prototype.checkContains.call(this, context, other);
 	}
 };
 
@@ -60,7 +60,7 @@ DictType.prototype.checkItem = function(context, other) {
 	if(other==TextType.instance) {
 		return this.itemType;
 	} else {
-		return CollectionType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other);
 	}
 };
 
@@ -77,7 +77,7 @@ DictType.prototype.checkMember = function(context, name) {
 	} else if ("values"==name) {
 		return new ListType(this.itemType);
 	} else {
-		return CollectionType.prototype.checkMember.call(this, context, name);
+		return ContainerType.prototype.checkMember.call(this, context, name);
 	}
 };
 

@@ -11,6 +11,7 @@ exports.SetValue = require('./SetValue').SetValue;
 exports.Dictionary = require('./Dictionary').Dictionary;
 exports.LocalDate = require('./LocalDate').LocalDate;
 exports.Time = require('./Time').Time;
+exports.Cursor = require('./Cursor').Cursor;
 exports.DateTime = require('./DateTime').DateTime;
 exports.Document = require('./Document').Document;
 exports.TypeValue = require('./TypeValue').TypeValue;

@@ -1,4 +1,4 @@
-var CollectionType = require("./CollectionType").CollectionType;
+var ContainerType = require("./ContainerType").ContainerType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var IntegerType = null;
 
@@ -7,11 +7,11 @@ exports.resolve = function() {
 };
 
 function RangeType(itemType) {
-    CollectionType.call(this, new Identifier(itemType.name+"[..]"),itemType);
+    ContainerType.call(this, new Identifier(itemType.name+"[..]"),itemType);
 	return this;
 }
 
-RangeType.prototype = Object.create(CollectionType.prototype);
+RangeType.prototype = Object.create(ContainerType.prototype);
 RangeType.prototype.constructor = RangeType;
 
 /*
@@ -44,7 +44,7 @@ RangeType.prototype.checkItem = function(context, other) {
 	if (other == IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return CollectionType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other);
 	}
 };
 

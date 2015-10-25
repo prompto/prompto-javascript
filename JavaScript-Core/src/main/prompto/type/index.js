@@ -10,6 +10,7 @@ exports.DictType = require('./DictType').DictType;
 exports.CategoryType = require('./CategoryType').CategoryType;
 exports.ResourceType = require('./ResourceType').ResourceType;
 exports.TextType = require('./TextType').TextType;
+exports.CursorType = require('./CursorType').CursorType;
 exports.RangeType = require('./RangeType').RangeType;
 exports.MissingType = require('./MissingType').MissingType;
 exports.AnyType = require('./AnyType').AnyType;

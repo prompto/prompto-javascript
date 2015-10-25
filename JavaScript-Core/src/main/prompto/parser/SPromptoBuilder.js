@@ -1712,6 +1712,25 @@ SPromptoBuilder.prototype.exitOperator_method_declaration= function(ctx) {
 };
 
 
+SPromptoBuilder.prototype.exitOrder_by = function(ctx) {
+    var self = this;
+    var names = new grammar.IdentifierList();
+    ctx.variable_identifier().map( function(ctx_) {
+        names.push(self.getNodeValue(ctx_));
+    });
+    var clause = new grammar.OrderByClause(names, ctx.DESC()!=null);
+    this.setNodeValue(ctx, clause);
+};
+
+SPromptoBuilder.prototype.exitOrder_by_list = function(ctx) {
+    var self = this;
+    var list = new grammar.OrderByClauseList();
+    ctx.order_by().map( function(ctx_) {
+        list.add(self.getNodeValue(ctx_));
+    });
+    this.setNodeValue(ctx, list);
+};
+
 SPromptoBuilder.prototype.exitOrExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);
 	var right = this.getNodeValue(ctx.right);
@@ -1833,9 +1852,10 @@ SPromptoBuilder.prototype.exitFetchOne = function(ctx) {
 SPromptoBuilder.prototype.exitFetchAll = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
     var xfilter = this.getNodeValue(ctx.xfilter);
-    var start = this.getNodeValue(ctx.start);
-    var end = this.getNodeValue(ctx.end);
-    this.setNodeValue(ctx, new expression.FetchAllExpression(category, xfilter, start, end));
+    var start = this.getNodeValue(ctx.xstart);
+    var stop = this.getNodeValue(ctx.xstop);
+    var orderBy = this.getNodeValue(ctx.xorder);
+    this.setNodeValue(ctx, new expression.FetchAllExpression(category, start, stop, xfilter, orderBy));
 };
 
 

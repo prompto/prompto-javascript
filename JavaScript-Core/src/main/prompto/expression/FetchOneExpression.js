@@ -53,10 +53,7 @@ FetchOneExpression.prototype.check = function(context) {
 };
 
 FetchOneExpression.prototype.interpret = function(context) {
-    var store = Store.instance;
-    if (store == null)
-        store = MemStore.instance;
-    var doc = store.fetchOne(context, this.filter);
+    var doc = Store.instance.fetchOne(context, this.filter);
     if (doc == null)
         return NullValue.instance;
     else

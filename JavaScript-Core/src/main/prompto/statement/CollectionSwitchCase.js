@@ -1,4 +1,4 @@
-var CollectionType = require("../type/CollectionType").CollectionType;
+var CollectionType = require("../type/ContainerType").ContainerType;
 var SwitchCase = require("./SwitchCase").SwitchCase;
 
 function CollectionSwitchCase(expression, instructions) {
