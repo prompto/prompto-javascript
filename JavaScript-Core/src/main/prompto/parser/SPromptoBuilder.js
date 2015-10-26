@@ -1107,6 +1107,33 @@ SPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 };
 
 
+SPromptoBuilder.prototype.exitDeclaration = function(ctx) {
+    var self = this;
+    var stmts = null;
+    ctx.comment_statement().map(function(csc) {
+        if(csc) {
+            if (!stmts)
+                stmts = [];
+            stmts.push(self.getNodeValue(csc));
+        }
+    });
+    var ctx_ = ctx.attribute_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.category_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.enum_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.method_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.resource_declaration();
+    decl = this.getNodeValue(ctx_);
+    if(decl!=null) {
+        decl.comments = stmts;
+        this.setNodeValue(ctx, decl);
+    }
+};
+
+
 SPromptoBuilder.prototype.exitDeclarationList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
 	var items = new declaration.DeclarationList(null, item);
@@ -1119,12 +1146,6 @@ SPromptoBuilder.prototype.exitDeclarationListItem = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
 	this.setNodeValue(ctx, items);
-};
-
-
-SPromptoBuilder.prototype.exitMethodDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
 };
 
 
@@ -1252,24 +1273,6 @@ SPromptoBuilder.prototype.exitResource_declaration = function(ctx) {
 };
 
 
-SPromptoBuilder.prototype.exitResourceDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-SPromptoBuilder.prototype.exitCategoryDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-SPromptoBuilder.prototype.exitAttributeDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
 SPromptoBuilder.prototype.exitEnumCategoryDeclaration = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
@@ -1277,12 +1280,6 @@ SPromptoBuilder.prototype.exitEnumCategoryDeclaration = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitEnumNativeDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-SPromptoBuilder.prototype.exitEnumDeclaration = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };

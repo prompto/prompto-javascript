@@ -1208,48 +1208,12 @@ SParserListener.prototype.exitDeclarationList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#AttributeDeclaration.
-SParserListener.prototype.enterAttributeDeclaration = function(ctx) {
+// Enter a parse tree produced by SParser#declaration.
+SParserListener.prototype.enterDeclaration = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#AttributeDeclaration.
-SParserListener.prototype.exitAttributeDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#CategoryDeclaration.
-SParserListener.prototype.enterCategoryDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#CategoryDeclaration.
-SParserListener.prototype.exitCategoryDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#ResourceDeclaration.
-SParserListener.prototype.enterResourceDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#ResourceDeclaration.
-SParserListener.prototype.exitResourceDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#EnumDeclaration.
-SParserListener.prototype.enterEnumDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#EnumDeclaration.
-SParserListener.prototype.exitEnumDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#MethodDeclaration.
-SParserListener.prototype.enterMethodDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#MethodDeclaration.
-SParserListener.prototype.exitMethodDeclaration = function(ctx) {
+// Exit a parse tree produced by SParser#declaration.
+SParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 

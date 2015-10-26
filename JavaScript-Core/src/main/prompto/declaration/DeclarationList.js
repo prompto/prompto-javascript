@@ -71,6 +71,10 @@ DeclarationList.prototype.check = function(context) {
 
 DeclarationList.prototype.toDialect = function(writer) {
     this.map(function(decl) {
+        if(decl.comments)
+            decl.comments.map(function(cmt) {
+                cmt.toDialect(writer);
+            });
         decl.toDialect(writer);
         writer.append("\n");
     });

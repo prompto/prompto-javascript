@@ -3,6 +3,7 @@ var Section = require("../parser/Section").Section;
 function BaseDeclaration(id) {
 	Section.call(this);
 	this.id = id;
+    this.comments = null;
 	return this;
 }
 

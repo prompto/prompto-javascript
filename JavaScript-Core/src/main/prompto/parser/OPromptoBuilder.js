@@ -1179,6 +1179,32 @@ OPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitDeclaration = function(ctx) {
+    var self = this;
+    var stmts = null;
+    ctx.comment_statement().map(function(csc) {
+        if(csc) {
+            if (!stmts)
+                stmts = [];
+            stmts.push(self.getNodeValue(csc));
+        }
+    });
+    var ctx_ = ctx.attribute_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.category_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.enum_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.method_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.resource_declaration();
+    decl = this.getNodeValue(ctx_);
+    if(decl!=null) {
+        decl.comments = stmts;
+        this.setNodeValue(ctx, decl);
+    }
+};
+
 OPromptoBuilder.prototype.exitDeclarationList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
 	var items = new declaration.DeclarationList(null, item);
@@ -1191,12 +1217,6 @@ OPromptoBuilder.prototype.exitDeclarationListItem = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
 	this.setNodeValue(ctx, items);
-};
-
-
-OPromptoBuilder.prototype.exitMethodDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
 };
 
 
@@ -1324,24 +1344,6 @@ OPromptoBuilder.prototype.exitResource_declaration = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitResourceDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-OPromptoBuilder.prototype.exitCategoryDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-OPromptoBuilder.prototype.exitAttributeDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
 OPromptoBuilder.prototype.exitEnumCategoryDeclaration = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
@@ -1349,12 +1351,6 @@ OPromptoBuilder.prototype.exitEnumCategoryDeclaration = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitEnumNativeDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
-};
-
-
-OPromptoBuilder.prototype.exitEnumDeclaration = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
