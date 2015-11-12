@@ -520,10 +520,10 @@ DocumentContext.prototype.contextForValue = function(name) {
     var context = Context.prototype.contextForValue.call(this, name);
     if (context != null)
         return context;
-    else if(this.document.hasMember(name))
-        return this;
+    // since any name is valid in the context of a document
+    // simply return this document context
     else
-        return null;
+        return this;
 };
 
 DocumentContext.prototype.readValue = function(name) {

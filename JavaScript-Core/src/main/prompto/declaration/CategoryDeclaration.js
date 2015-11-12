@@ -22,7 +22,7 @@ CategoryDeclaration.prototype.newInstanceFromDocument = function(context, docume
             var name = attr.name;
             var decl = context.getRegisteredDeclaration(name);
             if (decl.storable) {
-                var value = document.getMember(context, name, false);
+                var value = document.getMember(context, name);
                 if (value instanceof Document) {
                     var typ = decl.GetType(context);
                     if (!(typ instanceof CategoryType))

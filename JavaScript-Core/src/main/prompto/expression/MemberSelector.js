@@ -73,7 +73,7 @@ MemberSelector.prototype.interpretInstanceMember = function(context, parent) {
     if (instance == null || instance == NullValue.instance)
         throw new NullReferenceError();
     else
-        return instance.getMember(context, this.name);
+        return instance.getMember(context, this.name, true);
 };
 
 MemberSelector.prototype.interpretTypeMember = function(context, parent) {

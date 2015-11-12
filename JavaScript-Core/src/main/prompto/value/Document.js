@@ -15,9 +15,9 @@ Document.prototype.hasMember = function(name) {
     return this.members.hasOwnProperty(name);
 }
 
-Document.prototype.getMember = function(context, name) {
+Document.prototype.getMember = function(context, name, autoCreate) {
     var result = this.members[name] || null;
-    if(result==null) {
+    if(autoCreate && result==null) {
         result = new Document();
         this.members[name] = result;
     }
