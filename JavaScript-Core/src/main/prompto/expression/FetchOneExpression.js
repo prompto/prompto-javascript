@@ -1,6 +1,6 @@
 var Section = require("../parser/Section").Section;
 var BooleanType = require("../type/BooleanType").BooleanType;
-var MemStore = require("../store/MemStore").MemStore;
+var NullValue = require("../value/NullValue").NullValue;
 var Store = require("../store/Store").Store;
 
 function FetchOneExpression(typ, filter, start, end) {
@@ -45,8 +45,7 @@ FetchOneExpression.prototype.check = function(context) {
     var decl = context.getRegisteredDeclaration(this.typ.name);
     if (decl == null)
         throw new SyntaxError("Unknown category: " + this.typ.name);
-    var local = context.newLocalContext();
-    var filterType = this.filter.check(local);
+    var filterType = this.filter.check(context);
     if (filterType != BooleanType.instance)
         throw new SyntaxError("Filtering expression must return a boolean !");
     return this.typ;

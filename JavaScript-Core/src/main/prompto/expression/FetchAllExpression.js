@@ -96,8 +96,7 @@ FetchAllExpression.prototype.check = function(context) {
 FetchAllExpression.prototype.checkFilter = function(context) {
     if(!this.filter)
         return;
-    var local = context.newLocalContext();
-    var filterType = this.filter.check(local);
+    var filterType = this.filter.check(context);
     if (filterType != BooleanType.instance)
         throw new SyntaxError("Filtering expression must return a boolean !");
 };
