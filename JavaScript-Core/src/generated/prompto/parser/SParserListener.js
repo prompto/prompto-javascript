@@ -1469,6 +1469,15 @@ SParserListener.prototype.exitTextType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#ImageType.
+SParserListener.prototype.enterImageType = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#ImageType.
+SParserListener.prototype.exitImageType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#IntegerType.
 SParserListener.prototype.enterIntegerType = function(ctx) {
 };
@@ -1538,6 +1547,15 @@ SParserListener.prototype.enterCodeType = function(ctx) {
 
 // Exit a parse tree produced by SParser#CodeType.
 SParserListener.prototype.exitCodeType = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#BlobType.
+SParserListener.prototype.enterBlobType = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#BlobType.
+SParserListener.prototype.exitBlobType = function(ctx) {
 };
 
 
