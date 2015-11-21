@@ -45,7 +45,7 @@ IteratorExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 }
 
-IteratorExpression.prototype.toPDialect = function(writer) {
+IteratorExpression.prototype.toSDialect = function(writer) {
     this.expression.toDialect(writer);
     writer.append(" for ");
     writer.append(this.name.toString());
