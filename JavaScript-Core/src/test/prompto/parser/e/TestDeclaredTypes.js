@@ -5,7 +5,9 @@ var parseString = require("../../parser/BaseEParserTest").parseString;
 
 var Identifier = prompto.grammar.Identifier;
 var CategoryType = prompto.type.CategoryType;
+var BlobType = prompto.type.BlobType;
 var BooleanType = prompto.type.BooleanType;
+var ImageType = prompto.type.ImageType
 var IntegerType = prompto.type.IntegerType
 var DecimalType = prompto.type.DecimalType
 var TextType = prompto.type.TextType;
@@ -29,6 +31,25 @@ exports.setUp = function(done) {
 
 exports.tearDown = function(done) {
 	done();
+};
+
+exports.testBlobType = function(test) {
+    var st = BlobType.instance;
+    test.ok(st,BlobType.instance);
+    test.ok(st.isAssignableTo(context, BlobType.instance));
+    test.ok(!(st.isAssignableTo(context, ImageType.instance)));
+    test.ok(!(st.isAssignableTo(context, TextType.instance)));
+    test.done();
+};
+
+
+exports.testImageType = function(test) {
+    var st = ImageType.instance;
+    test.ok(st,ImageType.instance);
+    test.ok(st.isAssignableTo(context, ImageType.instance));
+    test.ok(!(st.isAssignableTo(context, BlobType.instance)));
+    test.ok(!(st.isAssignableTo(context, TextType.instance)));
+    test.done();
 };
 
 

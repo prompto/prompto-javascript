@@ -339,6 +339,11 @@ SPromptoBuilder.prototype.exitSymbols_token = function(ctx) {
 };
 
 
+SPromptoBuilder.prototype.exitBlobType = function(ctx) {
+    this.setNodeValue(ctx, type.BlobType.instance);
+};
+
+
 SPromptoBuilder.prototype.exitBooleanType = function(ctx) {
 	this.setNodeValue(ctx, type.BooleanType.instance);
 };
@@ -346,6 +351,11 @@ SPromptoBuilder.prototype.exitBooleanType = function(ctx) {
 
 SPromptoBuilder.prototype.exitCharacterType = function(ctx) {
 	this.setNodeValue(ctx, type.CharacterType.instance);
+};
+
+
+SPromptoBuilder.prototype.exitImageType = function(ctx) {
+    this.setNodeValue(ctx, type.ImageType.instance);
 };
 
 

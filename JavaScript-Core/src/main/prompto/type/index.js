@@ -1,6 +1,8 @@
 exports.DocumentType = require('./DocumentType').DocumentType;
+exports.BlobType = require('./BlobType').BlobType;
 exports.BooleanType = require('./BooleanType').BooleanType;
 exports.CharacterType = require('./CharacterType').CharacterType;
+exports.ImageType = require('./ImageType').ImageType;
 exports.IntegerType = require('./IntegerType').IntegerType;
 exports.DecimalType = require('./DecimalType').DecimalType;
 exports.DateTimeType = require('./DateTimeType').DateTimeType;

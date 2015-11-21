@@ -307,6 +307,10 @@ EPromptoBuilder.prototype.exitSymbolIdentifier = function(ctx) {
 	this.setNodeValue(ctx, name);
 };
 
+EPromptoBuilder.prototype.exitBlobType = function(ctx) {
+    this.setNodeValue(ctx, type.BlobType.instance);
+};
+
 EPromptoBuilder.prototype.exitBooleanType = function(ctx) {
 	this.setNodeValue(ctx, type.BooleanType.instance);
 };
@@ -314,6 +318,10 @@ EPromptoBuilder.prototype.exitBooleanType = function(ctx) {
 
 EPromptoBuilder.prototype.exitCharacterType = function(ctx) {
 	this.setNodeValue(ctx, type.CharacterType.instance);
+};
+
+EPromptoBuilder.prototype.exitImageType = function(ctx) {
+    this.setNodeValue(ctx, type.ImageType.instance);
 };
 
 

@@ -335,6 +335,11 @@ OPromptoBuilder.prototype.exitSymbolIdentifier = function(ctx) {
 
 
 
+OPromptoBuilder.prototype.exitBlobType = function(ctx) {
+    this.setNodeValue(ctx, type.BlobType.instance);
+};
+
+
 OPromptoBuilder.prototype.exitBooleanType = function(ctx) {
 	this.setNodeValue(ctx, type.BooleanType.instance);
 };
@@ -342,6 +347,11 @@ OPromptoBuilder.prototype.exitBooleanType = function(ctx) {
 
 OPromptoBuilder.prototype.exitCharacterType = function(ctx) {
 	this.setNodeValue(ctx, type.CharacterType.instance);
+};
+
+
+OPromptoBuilder.prototype.exitImageType = function(ctx) {
+    this.setNodeValue(ctx, type.ImageType.instance);
 };
 
 
