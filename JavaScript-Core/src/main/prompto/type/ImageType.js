@@ -1,7 +1,8 @@
 var BinaryType = require("./BinaryType").BinaryType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function ImageType() {
-    BinaryType.call(this, "Image");
+    BinaryType.call(this, new Identifier("Image"));
     return this;
 }
 

@@ -1,7 +1,8 @@
 var BinaryType = require("./BinaryType").BinaryType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function BlobType() {
-    BinaryType.call(this, "Blob");
+    BinaryType.call(this, new Identifier("Blob"));
     return this;
 }
 
