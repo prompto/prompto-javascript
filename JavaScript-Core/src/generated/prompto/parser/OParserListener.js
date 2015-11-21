@@ -848,6 +848,15 @@ OParserListener.prototype.exitNotInExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#IteratorExpression.
+OParserListener.prototype.enterIteratorExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#IteratorExpression.
+OParserListener.prototype.exitIteratorExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#IsNotExpression.
 OParserListener.prototype.enterIsNotExpression = function(ctx) {
 };

@@ -776,6 +776,15 @@ SParserListener.prototype.exitNotInExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#IteratorExpression.
+SParserListener.prototype.enterIteratorExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#IteratorExpression.
+SParserListener.prototype.exitIteratorExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#IsNotExpression.
 SParserListener.prototype.enterIsNotExpression = function(ctx) {
 };

@@ -1238,6 +1238,14 @@ OPromptoBuilder.prototype.exitAbstractMethod = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitIteratorExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    var name = this.getNodeValue(ctx.name);
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.IteratorExpression(name, source, exp));
+};
+
+
 OPromptoBuilder.prototype.exitJavaBooleanLiteral = function(ctx) {
 	this.setNodeValue(ctx, new java.JavaBooleanLiteral(ctx.getText()));
 };

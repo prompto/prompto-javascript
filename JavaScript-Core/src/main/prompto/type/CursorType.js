@@ -1,16 +1,16 @@
-var ContainerType = require("./ContainerType").ContainerType;
+var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
 
 function CursorType(itemType) {
-    ContainerType.call(this, itemType.name + "[]", itemType);
+    IterableType.call(this, "Cursor<" + itemType.name + ">", itemType);
     return this;
 }
 
-CursorType.prototype = Object.create(ContainerType.prototype);
+CursorType.prototype = Object.create(IterableType.prototype);
 CursorType.prototype.constructor = CursorType;
 
 CursorType.prototype.isAssignableTo = function(context, other) {
-    return (other instanceof CursorType) && itemType.isAssignableTo(context, other.itemType);
+    return (other instanceof CursorType) && this.itemType.isAssignableTo(context, other.itemType);
 };
 
 CursorType.prototype.equals = function(obj) {
@@ -29,7 +29,7 @@ CursorType.prototype.checkMember = function(context, name) {
     if ("length"===name)
         return IntegerType.instance;
     else
-        return ContainerType.prototype.checkMember.call(this, context, name);
+        return IterableType.prototype.checkMember.call(this, context, name);
 };
 
 exports.CursorType = CursorType;

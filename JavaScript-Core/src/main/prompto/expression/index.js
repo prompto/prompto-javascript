@@ -27,6 +27,7 @@ exports.InstanceExpression = require('./InstanceExpression').InstanceExpression;
 exports.DocumentExpression = require('./DocumentExpression').DocumentExpression;
 exports.ConstructorExpression = require('./ConstructorExpression').ConstructorExpression;
 exports.ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
+exports.IteratorExpression = require("./IteratorExpression").IteratorExpression;
 exports.SortedExpression = require("./SortedExpression").SortedExpression;
 exports.TernaryExpression = require("./TernaryExpression").TernaryExpression;
 exports.ReadExpression = require("./ReadExpression").ReadExpression;
