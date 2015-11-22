@@ -1112,7 +1112,7 @@ SPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
-	var items = this.getNodeValue(ctx.items) || new grammar.DeclarationList();
+	var items = this.getNodeValue(ctx.items) || new declaration.DeclarationList();
 	this.setNodeValue(ctx, items);
 };
 
