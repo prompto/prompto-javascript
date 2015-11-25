@@ -379,7 +379,7 @@ OPromptoBuilder.prototype.exitDateType = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitDateTimeType = function(ctx) {
-	this.setNodeValue(ctx, type.TextType.instance);
+	this.setNodeValue(ctx, type.DateTimeType.instance);
 };
 
 

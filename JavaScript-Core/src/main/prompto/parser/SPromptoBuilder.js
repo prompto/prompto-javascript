@@ -384,7 +384,7 @@ SPromptoBuilder.prototype.exitDateType = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitDateTimeType = function(ctx) {
-	this.setNodeValue(ctx, type.TextType.instance);
+	this.setNodeValue(ctx, type.DateTimeType.instance);
 };
 
 
