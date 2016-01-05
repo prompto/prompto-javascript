@@ -1,3 +1,4 @@
+var declaration = require("../declaration/index");
 var expression = require("../expression/index");
 var javascript = require("../javascript/index");
 var statement = require("../statement/index");
