@@ -2729,6 +2729,15 @@ EParserListener.prototype.exitOperatorModulo = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#new_token.
+EParserListener.prototype.enterNew_token = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#new_token.
+EParserListener.prototype.exitNew_token = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#key_token.
 EParserListener.prototype.enterKey_token = function(ctx) {
 };
@@ -2852,6 +2861,15 @@ EParserListener.prototype.enterJavascript_this_expression = function(ctx) {
 
 // Exit a parse tree produced by EParser#javascript_this_expression.
 EParserListener.prototype.exitJavascript_this_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#javascript_new_expression.
+EParserListener.prototype.enterJavascript_new_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#javascript_new_expression.
+EParserListener.prototype.exitJavascript_new_expression = function(ctx) {
 };
 
 
@@ -3296,6 +3314,15 @@ EParserListener.prototype.exitJava_this_expression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#java_new_expression.
+EParserListener.prototype.enterJava_new_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#java_new_expression.
+EParserListener.prototype.exitJava_new_expression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#JavaMethodExpression.
 EParserListener.prototype.enterJavaMethodExpression = function(ctx) {
 };
@@ -3500,6 +3527,15 @@ EParserListener.prototype.enterCsharp_this_expression = function(ctx) {
 
 // Exit a parse tree produced by EParser#csharp_this_expression.
 EParserListener.prototype.exitCsharp_this_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#csharp_new_expression.
+EParserListener.prototype.enterCsharp_new_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#csharp_new_expression.
+EParserListener.prototype.exitCsharp_new_expression = function(ctx) {
 };
 
 

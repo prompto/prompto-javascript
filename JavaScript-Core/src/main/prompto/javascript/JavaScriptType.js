@@ -18,6 +18,7 @@ JavaScriptType.prototype.constructor = JavaScriptType;
 JavaScriptType.scriptToTypeMap = {
 	'string' : type.TextType.instance,
 	'boolean' : type.BooleanType.instance,
+    'Date' : type.DateTimeType.instance,
 	'object' : type.AnyType.instance
 };
 

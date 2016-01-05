@@ -921,13 +921,13 @@ EPromptoBuilder.prototype.exitJavascript_member_expression = function(ctx) {
     this.setNodeValue (ctx, new javascript.JavaScriptMemberExpression(name));
 };
 
-EPromptoBuilder.prototype.exitJavascript_primary_expression = function(ctx) {
-    var exp = this.getNodeValue (ctx.getChild(0));
-    this.setNodeValue (ctx, exp);
+EPromptoBuilder.prototype.exitJavascript_new_expression = function(ctx) {
+    var method = this.getNodeValue(ctx.javascript_method_expression());
+    this.setNodeValue (ctx, new javascript.JavaScriptNewExpression(method));
 };
 
-EPromptoBuilder.prototype.exitJavascript_selector_expression = function(ctx) {
-    var exp = this.getNodeValue (ctx.getChild(1)); // 0 is DOT
+EPromptoBuilder.prototype.exitJavascript_primary_expression = function(ctx) {
+    var exp = this.getNodeValue (ctx.getChild(0));
     this.setNodeValue (ctx, exp);
 };
 

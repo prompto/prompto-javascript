@@ -4,7 +4,11 @@ var LocalDate = require("./LocalDate").LocalDate;
 var Time = require("./Time").Time;
 var Integer = require("./Integer").Integer;
 var Text = require("./Text").Text;
-var DateTimeType = require("../type/DateTimeType").DateTimeType;
+var DateTimeType = null;
+
+exports.resolve = function() {
+    DateTimeType = require("../type/DateTimeType").DateTimeType;
+};
 
 function parseOffset(text) {
     var hours = parseInt(text.substring(0,2));

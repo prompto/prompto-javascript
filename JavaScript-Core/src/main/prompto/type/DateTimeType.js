@@ -6,7 +6,9 @@ var TextType = require("./TextType").TextType;
 var DateType = require("./DateType").DateType;
 var TimeType = require("./TimeType").TimeType;
 var AnyType = require("./AnyType").AnyType;
+var DateTime = require("../value/DateTime").DateTime;
 var Identifier = require("../grammar/Identifier").Identifier;
+var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 function DateTimeType()  {
 	NativeType.call(this, new Identifier("DateTime"));
@@ -18,13 +20,14 @@ DateTimeType.prototype.constructor = DateTimeType;
 
 DateTimeType.instance = new DateTimeType();
 
-/*
-@Override
-public Class<?> toJavaClass() {
-	return DateTime.class;
-}
+DateTimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    if (getTypeName(value)=='Date') {
+        return new DateTime(value, 0);
+    } else {
+        return value; // TODO for now
+    }
+};
 
-*/
 DateTimeType.prototype.isAssignableTo = function(context, other) {
 	return (other instanceof DateTimeType || other instanceof DateType ||  other instanceof TimeType || other instanceof AnyType);
 };

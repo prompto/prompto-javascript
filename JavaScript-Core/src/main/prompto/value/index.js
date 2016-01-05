@@ -25,6 +25,7 @@ require('./TimeRange').resolve();
 require('./Character').resolve();
 require('./Integer').resolve();
 require('./Decimal').resolve();
+require('./DateTime').resolve();
 require('./Time').resolve();
 require('./ListValue').resolve();
 require('./TupleValue').resolve();

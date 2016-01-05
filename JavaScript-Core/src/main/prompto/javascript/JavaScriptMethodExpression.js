@@ -1,5 +1,7 @@
+var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 var JavaScriptExpressionList = require("./JavaScriptExpressionList").JavaScriptExpressionList;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
 
 function JavaScriptMethodExpression(id, args) {
@@ -38,24 +40,30 @@ JavaScriptMethodExpression.prototype.interpret = function(context, module) {
 	}
 };
 
+var stringToFunction = function(str) {
+    var arr = str.split(".");
+    var fn = isNodeJs ? this : window;
+    for (var i = 0, len = arr.length; i < len; i++) {
+        fn = fn[arr[i]];
+    }
+    return fn;
+};
+
+JavaScriptMethodExpression.prototype.interpretNew = function(context, module) {
+    var m = stringToFunction(this.id.name);
+    if(!m) {
+        throw new SyntaxError(this.id.name + " is not a function");
+    }
+    var args = this.args.computeArguments(context);
+    return args.length ? new m(args) : new m();
+};
+
 JavaScriptMethodExpression.prototype.interpretGlobal = function(context, module, args) {
-	/*var m = rewritten.get(self.name, None)
-	if m is
-	None:
-		m = globals().get(self.name, None)
-	if m is
-	None:
-		m = globals()["__builtins__"].get(self.name, None)
-	if isinstance(args, tuple):
-	return m( * args
-	)
-	elif
-	isinstance(args, dict)
-	:
-	return m( * * args
-	)
-	else:
-	return m()*/
+    var m = stringToFunction(this.id.name);
+    if(!m) {
+        throw new SyntaxError(this.id.name + " is not a function");
+    }
+    return m.apply(args);
 };
 
 

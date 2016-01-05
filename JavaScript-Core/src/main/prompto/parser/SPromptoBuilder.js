@@ -890,9 +890,9 @@ SPromptoBuilder.prototype.exitJavascript_primary_expression = function(ctx) {
     this.setNodeValue (ctx, exp);
 };
 
-SPromptoBuilder.prototype.exitJavascript_selector_expression = function(ctx) {
-    var exp = this.getNodeValue (ctx.getChild(1)); // 0 is DOT
-    this.setNodeValue (ctx, exp);
+SPromptoBuilder.prototype.exitJavascript_new_expression = function(ctx) {
+    var method = this.getNodeValue(ctx.javascript_method_expression());
+    this.setNodeValue (ctx, new javascript.JavaScriptNewExpression(method));
 };
 
 SPromptoBuilder.prototype.exitJavascript_this_expression = function(ctx) {
