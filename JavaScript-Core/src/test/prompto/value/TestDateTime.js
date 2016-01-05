@@ -1,5 +1,6 @@
 require("../../../exploded");
 var DateTime = require("./DateTime").DateTime;
+require("./DateTime").resolve();
 
 exports.testDateWithTZWithNoTZ = function(test) {
     var s = "2014-10-10T13:18:22.000";
