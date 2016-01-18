@@ -1631,6 +1631,15 @@ EParserListener.prototype.exitBlobType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#UUIDType.
+EParserListener.prototype.enterUUIDType = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#UUIDType.
+EParserListener.prototype.exitUUIDType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#category_type.
 EParserListener.prototype.enterCategory_type = function(ctx) {
 };

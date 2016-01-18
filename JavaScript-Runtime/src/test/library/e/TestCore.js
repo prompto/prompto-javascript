@@ -16,7 +16,7 @@ exports.tearDown = function(done) {
 	Out.restore();
 	done();
 };
-/*
+
 exports.testAny = function(test) {
 	runTests(test, "core/any.pec");
 };
@@ -32,7 +32,7 @@ exports.testAttributes = function(test) {
 exports.testError = function(test) {
 	runTests(test, "core/error.pec");
 };
-*/
+
 exports.testTime = function(test) {
 	runTests(test, "core/time.pec");
 };

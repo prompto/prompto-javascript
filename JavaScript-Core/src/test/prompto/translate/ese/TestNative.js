@@ -22,6 +22,10 @@ exports.testMethod = function(test) {
 	compareResourceESE(test, "native/method.pec");
 };
 
+exports.testNow = function(test) {
+	compareResourceESE(test, "native/now.pec");
+};
+
 exports.testPrinter = function(test) {
 	compareResourceESE(test, "native/printer.pec");
 };

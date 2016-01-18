@@ -33,6 +33,10 @@ exports.testMethod = function(test) {
 	checkOutput(test, "native/method.pec");
 };
 
+exports.testNow = function(test) {
+	checkOutput(test, "native/now.pec");
+};
+
 exports.testPrinter = function(test) {
 	checkOutput(test, "native/printer.pec");
 };

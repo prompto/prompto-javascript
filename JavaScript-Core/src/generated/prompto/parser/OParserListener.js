@@ -1613,6 +1613,15 @@ OParserListener.prototype.exitBlobType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#UUIDType.
+OParserListener.prototype.enterUUIDType = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#UUIDType.
+OParserListener.prototype.exitUUIDType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#category_type.
 OParserListener.prototype.enterCategory_type = function(ctx) {
 };
