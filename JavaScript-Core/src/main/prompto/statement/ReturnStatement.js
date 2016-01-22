@@ -1,4 +1,5 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
+var NullValue = require("../value/NullValue").NullValue;
 var VoidResult = require("../runtime/VoidResult").VoidResult;
 var VoidType = require("../type/VoidType").VoidType;
 
@@ -50,7 +51,7 @@ ReturnStatement.prototype.interpret= function(context) {
     if(this.expression==null)
         return VoidResult.instance;
     else
-        return this.expression.interpret(context);
+        return this.expression.interpret(context) || NullValue.instance;
 };
 
 exports.ReturnStatement = ReturnStatement;
