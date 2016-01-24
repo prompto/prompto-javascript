@@ -1649,6 +1649,15 @@ EParserListener.prototype.exitCategory_type = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#mutable_category_type.
+EParserListener.prototype.enterMutable_category_type = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#mutable_category_type.
+EParserListener.prototype.exitMutable_category_type = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#code_type.
 EParserListener.prototype.enterCode_type = function(ctx) {
 };

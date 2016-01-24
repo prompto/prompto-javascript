@@ -9,10 +9,9 @@ exports.resolve = function() {
 };
 
 
-function ConstructorExpression(type, mutable, assignments) {
+function ConstructorExpression(type, assignments) {
     Section.call(this);
 	this.type = type;
-    this.mutable = mutable;
 	this.copyFrom = null;
 	this.assignments = null;
 	this.setAssignments(assignments);
@@ -40,9 +39,7 @@ ConstructorExpression.prototype.toSDialect = function(writer) {
 }
 
 ConstructorExpression.prototype.toODialect = function(writer) {
-    if(this.mutable)
-        writer.append("mutable ");
-    writer.append(this.type.name);
+    this.type.toDialect(writer);
     var assignments = new ArgumentAssignmentList();
     if (this.copyFrom != null)
         assignments.add(new ArgumentAssignment(null, this.copyFrom));
@@ -52,9 +49,7 @@ ConstructorExpression.prototype.toODialect = function(writer) {
 };
 
 ConstructorExpression.prototype.toEDialect = function(writer) {
-    if(this.mutable)
-        writer.append("mutable ");
-    writer.append(this.type.name);
+    this.type.toDialect(writer);
     if (this.copyFrom != null) {
         writer.append(" from ");
         writer.append(this.copyFrom.toString());
@@ -70,7 +65,7 @@ ConstructorExpression.prototype.check = function(context) {
 	var cd = context.getRegisteredDeclaration(this.type.name);
 	if(cd==null)
         context.problemenListener.reportUnknownCategory(this.type.id);
-	this.type = cd.getType();
+	var type = cd.getType();
 	cd.checkConstructorContext(context);
 	if(this.copyFrom!=null) {
 		var cft = this.copyFrom.check(context);
@@ -87,7 +82,7 @@ ConstructorExpression.prototype.check = function(context) {
 			assignment.check(context);
 		}
 	}
-	return this.type;
+	return type;
 };
 
 ConstructorExpression.prototype.interpret = function(context) {
@@ -102,7 +97,7 @@ ConstructorExpression.prototype.interpret = function(context) {
 				var name = names[i]
 				if(cd.hasAttribute(context, name)) {
                     var value = copyObj.getMember(context, name);
-                    if(value!=null && value.mutable && !this.mutable)
+                    if(value!=null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
 					instance.setMember(context, name, value);
 				}
@@ -113,12 +108,12 @@ ConstructorExpression.prototype.interpret = function(context) {
 		for(var i=0;i<this.assignments.length;i++) {
 			var assignment = this.assignments[i];
 			var value = assignment.expression.interpret(context);
-            if(value!=null && value.mutable && !this.mutable)
+            if(value!=null && value.mutable && !this.type.mutable)
                 throw new NotMutableError();
 			instance.setMember(context, assignment.name, value);
 		}
 	}
-    instance.mutable = this.mutable;
+    instance.mutable = this.type.mutable;
 	return instance;
 };
 

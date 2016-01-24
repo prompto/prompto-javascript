@@ -1631,6 +1631,15 @@ OParserListener.prototype.exitCategory_type = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#mutable_category_type.
+OParserListener.prototype.enterMutable_category_type = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#mutable_category_type.
+OParserListener.prototype.exitMutable_category_type = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#code_type.
 OParserListener.prototype.enterCode_type = function(ctx) {
 };

@@ -758,7 +758,6 @@ EPromptoBuilder.prototype.exitMethodCallStatement = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
-    var mutable = ctx.MUTABLE()!=null;
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
 	if(args===null) {
@@ -770,12 +769,11 @@ EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
 	if(arg!==null) {
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, mutable, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
 };
 
 
 EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
-    var mutable = ctx.MUTABLE()!=null;
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
 	if(args===null) {
@@ -785,7 +783,7 @@ EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 	if(arg!==null) {
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, mutable, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
 };
 
 EPromptoBuilder.prototype.exitAssertion = function(ctx) {
@@ -1793,6 +1791,13 @@ EPromptoBuilder.prototype.exitMultiplyExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);
 	var right = this.getNodeValue(ctx.right);
 	this.setNodeValue(ctx, new expression.MultiplyExpression(left, right));
+};
+
+
+EPromptoBuilder.prototype.exitMutable_category_type = function(ctx) {
+    var typ = this.getNodeValue (ctx.category_type());
+    typ.mutable = ctx.MUTABLE()!=null;
+    this.setNodeValue(ctx, typ);
 };
 
 

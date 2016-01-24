@@ -132,7 +132,7 @@ UnresolvedIdentifier.prototype.resolveMethod = function(context) {
 
 UnresolvedIdentifier.prototype.resolveConstructor = function(context) {
 	try {
-		var method = new ConstructorExpression(new CategoryType(this.id), false, null);
+		var method = new ConstructorExpression(new CategoryType(this.id), null);
 		method.check(context);
 		return method;
 	} catch(e) {

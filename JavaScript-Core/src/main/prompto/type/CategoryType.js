@@ -20,6 +20,7 @@ exports.resolve = function() {
 }
 function CategoryType(id) {
 	BaseType.call(this, id);
+    this.mutable = false;
 	return this;
 }
 
@@ -34,9 +35,17 @@ CategoryType.prototype.constructor =  CategoryType;
 	}
 */
 
+CategoryType.prototype.toDialect = function(writer) {
+    if (this.mutable)
+        writer.append("mutable ");
+    writer.append(this.name);
+};
+
 CategoryType.prototype.newInstanceFromDocument = function(context, document) {
     var decl = this.getDeclaration(context);
-    return decl.newInstanceFromDocument(context, document);
+    var inst = decl.newInstanceFromDocument(context, document);
+    inst.mutable = this.mutable;
+    return inst;
 };
 
 CategoryType.prototype.equals = function(obj) {
