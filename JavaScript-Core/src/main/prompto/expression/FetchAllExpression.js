@@ -28,6 +28,7 @@ FetchAllExpression.prototype.toEDialect = function(writer) {
         writer.append("all ");
     writer.append(this.typ.name);
     if(this.xstart!=null) {
+        writer.append(" ");
         this.xstart.toDialect(writer);
         writer.append(" to ");
         this.xend.toDialect(writer);
@@ -36,8 +37,10 @@ FetchAllExpression.prototype.toEDialect = function(writer) {
         writer.append(" where ");
         this.filter.toDialect(writer);
     }
-    if(this.orderBy!=null)
+    if(this.orderBy!=null) {
+        writer.append(" ");
         this.orderBy.toDialect(writer);
+    }
 };
 
 FetchAllExpression.prototype.toODialect = function(writer) {
