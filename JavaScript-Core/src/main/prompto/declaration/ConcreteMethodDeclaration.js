@@ -1,6 +1,9 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var VoidType = require("../type/VoidType").VoidType;
+var DictType = require("../type/DictType").DictType;
+var TextType = require("../type/TextType").TextType;
 var CodeArgument = require("../grammar/CodeArgument").CodeArgument;
+var CategoryArgument = require("../grammar/CategoryArgument").CategoryArgument;
 
 function ConcreteMethodDeclaration(id, args, returnType, statements) {
 	BaseMethodDeclaration.call(this, id, args, returnType);
@@ -80,23 +83,20 @@ ConcreteMethodDeclaration.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
 
-/*
-	@Override
-	public boolean isEligibleAsMain() {
-		if(arguments.size()==0)
-			return true;
-		if(arguments.size()==1) {
-			IArgument arg = arguments.getFirst();
-			if(arg instanceof CategoryArgument) {
-				IType type = ((CategoryArgument)arg).getType();
-				if(type instanceof DictType)
-					return ((DictType)type).getItemType()==TextType.instance();
-			}
-		}
-		return super.isEligibleAsMain();
-	}
 
-*/
+ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
+    if(this.args.length==0)
+        return true;
+    else if(this.args.length==1) {
+        var arg = this.args[0];
+        if( arg instanceof CategoryArgument
+            && arg.type instanceof DictType
+            && arg.type.itemType==TextType.instance )
+                return true;
+    }
+    return false;
+};
+
 
 ConcreteMethodDeclaration.prototype.toSDialect = function(writer) {
     writer.append("def ");

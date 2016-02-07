@@ -166,8 +166,10 @@ Context.prototype.getLocalCatalog = function() {
             var method = {};
             method.name = decl.name;
             method.protos = [];
-            for (var proto in decl.protos)
-                method.protos.push(proto);
+            for (var proto in decl.protos) {
+                var main = decl.protos[proto].isEligibleAsMain();
+                method.protos.push({proto: proto, main: main});
+            }
             catalog.methods.push(method);
         }
     }
