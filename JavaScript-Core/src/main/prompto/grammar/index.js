@@ -28,3 +28,4 @@ exports.MatchingExpressionConstraint = require("./MatchingExpressionConstraint")
 
 require('./ArgumentAssignment').resolve();
 require('./UnresolvedIdentifier').resolve();
+require('./CategoryArgument').resolve();

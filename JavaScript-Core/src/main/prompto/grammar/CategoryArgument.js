@@ -1,8 +1,12 @@
 var Argument = require("./Argument").Argument;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+var ConcreteCategoryDeclaration = null;
 var utils = require("../utils/index");
+
+exports.resolve = function() {
+    ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+}
 
 function CategoryArgument(type, id, attributes) {
 	Argument.call(this, id);
