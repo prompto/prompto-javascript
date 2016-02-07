@@ -6,6 +6,9 @@ exports.getTypeName = function(value) {
     var t = typeof(value);
     switch(t) {
         case "function":
+            if(value.name)
+                return value.name;
+            // don't break
         case "object":
             if (value.constructor) {
                 if (value.constructor.name) {
@@ -28,6 +31,3 @@ exports.getTypeName = function(value) {
 }
 
 
-exports.getFunctionName = function(func) {
-    return func.name;
-};

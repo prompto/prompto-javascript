@@ -1,6 +1,5 @@
 var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
-var getFunctionName = require("../javascript/JavaScriptUtils").getFunctionName;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
 
@@ -19,7 +18,7 @@ NativeCategoryDeclaration.prototype.register = function(context) {
     context.registerDeclaration(this);
     var bound = this.getBoundFunction(false);
     if(bound!=null) {
-        var name = getFunctionName(bound);
+        var name = getTypeName(bound);
         context.registerNativeBinding(name, this);
     }
 };
