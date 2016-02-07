@@ -326,7 +326,7 @@ Period.prototype.equals = function(obj) {
 
 
  @Override
- public IValue Add(Context context, IValue value) throws PrestoError
+ public IValue Add(Context context, IValue value) throws PromptoError
  {
  if (value instanceof Period)
  return this.plus((Period)value);
@@ -335,7 +335,7 @@ Period.prototype.equals = function(obj) {
  }
 
  @Override
- public IValue Subtract(Context context, IValue value) throws PrestoError
+ public IValue Subtract(Context context, IValue value) throws PromptoError
  {
  if (value instanceof Period)
  return this.minus((Period)value);
@@ -344,7 +344,7 @@ Period.prototype.equals = function(obj) {
  }
 
  @Override
- public IValue Multiply(Context context, IValue value) throws PrestoError
+ public IValue Multiply(Context context, IValue value) throws PromptoError
  {
  if (value instanceof Integer)
  {

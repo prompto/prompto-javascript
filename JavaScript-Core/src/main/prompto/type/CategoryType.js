@@ -7,7 +7,7 @@ var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
 var AnyType = require("./AnyType").AnyType;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
@@ -352,7 +352,7 @@ CategoryType.prototype.findGlobalMethod = function(context, list, name) {
 		var decl = finder.findMethod(true);
 		return decl==null ? null : proto;
 	} catch (e) {
-		if(e instanceof PrestoError) {
+		if(e instanceof PromptoError) {
 			return null;
 		} else {
 			throw e;

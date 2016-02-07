@@ -1,6 +1,6 @@
 var Value = require("./Value").Value;
 var Integer = require("./Integer").Integer;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var InternalError = require("../error/InternalError").InternalError;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
@@ -101,7 +101,7 @@ BaseValueList.prototype.getItemInContext = function(context, index) {
 				throw new InternalError("Item not a value!");
 			}
 		} catch (e) {
-			if(e instanceof PrestoError) {
+			if(e instanceof PromptoError) {
 				throw e;
 			} else {
 				throw new InternalError(e.toString());

@@ -3,7 +3,7 @@ var fs = isNodeJs ? require("fs") : {}; // nodejs only
 var antlr4 = require("antlr4/index");
 var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
 var EParser = require("./EParser").EParser;
-var EPrestoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
+var EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -37,7 +37,7 @@ ECleverParser.prototype.parse = function() {
 	
 ECleverParser.prototype.parse_declaration_list = function() {
 	var tree = this.declaration_list();
-	var builder = new EPrestoBuilder(this);
+	var builder = new EPromptoBuilder(this);
 	var walker = new antlr4.tree.ParseTreeWalker();
 	walker.walk(builder, tree);
 	return builder.getNodeValue(tree);

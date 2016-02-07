@@ -6,7 +6,7 @@ var InstanceExpression = require("../expression/InstanceExpression").InstanceExp
 var SymbolExpression = require("../expression/SymbolExpression").SymbolExpression;
 var TypeExpression = require("../expression/TypeExpression").TypeExpression;
 var ProblemListener = require("../parser/ProblemListener").ProblemListener;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var Section = require("../parser/Section").Section;
 var CategoryType = null;
 var MethodSelector = null;
@@ -122,7 +122,7 @@ UnresolvedIdentifier.prototype.resolveMethod = function(context) {
 		method.check(context);
 		return method;
 	} catch(e) {
-		if(e instanceof PrestoError) {
+		if(e instanceof PromptoError) {
 			return null;
 		} else {
 			throw e;

@@ -1,7 +1,7 @@
-function PrestoError() {
+function PromptoError() {
     var tmp = Error.apply(this, arguments);
     this.message = tmp.message
-    tmp.name = this.name = 'PrestoError'
+    tmp.name = this.name = 'PromptoError'
     Object.defineProperty(this, "stack", {
         get: function () {
             return tmp.stack
@@ -11,4 +11,4 @@ function PrestoError() {
 }
 
 
-exports.PrestoError = PrestoError;
+exports.PromptoError = PromptoError;

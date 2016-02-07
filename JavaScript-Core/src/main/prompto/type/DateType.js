@@ -91,7 +91,7 @@ DateType.prototype.newRange = function(left, right) {
 
 /*
 @Override
-public ListValue sort(Context context, ListValue list) throws PrestoError {
+public ListValue sort(Context context, ListValue list) throws PromptoError {
 	return this.<Date> doSort(context, list);
 }
 

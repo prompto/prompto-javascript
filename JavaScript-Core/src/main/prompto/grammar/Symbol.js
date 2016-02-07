@@ -25,7 +25,7 @@ Symbol.prototype.register = function (context) {
 
  public abstract IType check(Context context) throws SyntaxError;
 
- public abstract Object interpret(Context context) throws PrestoError;
+ public abstract Object interpret(Context context) throws PromptoError;
 
  */
 

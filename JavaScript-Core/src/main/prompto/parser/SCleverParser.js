@@ -3,7 +3,7 @@ var fs = isNodeJs ? require("fs") : {}; // nodejs only
 var antlr4 = require("antlr4/index");
 var SIndentingLexer = require("./SIndentingLexer").SIndentingLexer;
 var SParser = require("./SParser").SParser;
-var SPrestoBuilder = require("./SPromptoBuilder").SPromptoBuilder;
+var SPromptoBuilder = require("./SPromptoBuilder").SPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -37,7 +37,7 @@ SCleverParser.prototype.parse = function() {
 	
 SCleverParser.prototype.parse_declaration_list = function() {
 	var tree = this.declaration_list();
-	var builder = new SPrestoBuilder(this);
+	var builder = new SPromptoBuilder(this);
 	var walker = new antlr4.tree.ParseTreeWalker();
 	walker.walk(builder, tree);
 	return builder.getNodeValue(tree);

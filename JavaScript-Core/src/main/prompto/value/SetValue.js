@@ -61,7 +61,7 @@ SetValue.prototype.getItemInContext = function(context, index) {
             }
             throw new IndexOutOfRangeError();
         } catch (e) {
-            if(e instanceof PrestoError) {
+            if(e instanceof PromptoError) {
                 throw e;
             } else {
                 throw new InternalError(e.toString());

@@ -1,7 +1,7 @@
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var Identifier = require("../grammar/Identifier").Identifier;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var VoidType = require("../type/VoidType").VoidType;
 
 function TestMethodDeclaration(id, stmts, exps, error) {
@@ -91,7 +91,7 @@ TestMethodDeclaration.prototype.interpretBody = function(context)
         this.statements.interpret (context);
         return true;
     } catch (e) {
-        if(e instanceof PrestoError) {
+        if(e instanceof PromptoError) {
             this.interpretError(context, e);
             // no more to execute
             return false;

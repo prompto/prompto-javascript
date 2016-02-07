@@ -1,12 +1,12 @@
-var PrestoError = require("./PrestoError").PrestoError;
+var PromptoError = require("./PromptoError").PromptoError;
 var ErrorVariable = require("../runtime/ErrorVariable").ErrorVariable;
 
 function ExecutionError(message) {
-	PrestoError.call(this, message);
+	PromptoError.call(this, message);
 	return this;
 }
 
-ExecutionError.prototype = Object.create(PrestoError.prototype);
+ExecutionError.prototype = Object.create(PromptoError.prototype);
 ExecutionError.prototype.constructor = ExecutionError;
 
 ExecutionError.prototype.interpret = function(context, errorName) {

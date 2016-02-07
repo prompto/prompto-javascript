@@ -1,6 +1,6 @@
 package prompto.error;
 
-public class TerminatedError extends PrestoError {
+public class TerminatedError extends PromptoError {
 
 	private static final long serialVersionUID = 1L;
 

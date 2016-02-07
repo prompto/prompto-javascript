@@ -3,7 +3,7 @@ var fs = isNodeJs ? require("fs") : {}; // nodejs only
 var antlr4 = require("antlr4/index");
 var ONamingLexer = require("./ONamingLexer").ONamingLexer;
 var OParser = require("./OParser").OParser;
-var OopsPrestoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
+var OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -37,7 +37,7 @@ OCleverParser.prototype.parse = function() {
 
 OCleverParser.prototype.parse_declaration_list = function() {
 	var tree = this.declaration_list();
-	var builder = new OopsPrestoBuilder(this);
+	var builder = new OPromptoBuilder(this);
 	var walker = new antlr4.tree.ParseTreeWalker();
 	walker.walk(builder, tree);
 	return builder.getNodeValue(tree);

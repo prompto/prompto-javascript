@@ -116,7 +116,7 @@ public IType checkMember(Context context, String name) throws SyntaxError {
 }
 
 @Override
-public IValue getMember(Context context, String name) throws PrestoError {
+public IValue getMember(Context context, String name) throws PromptoError {
 	if(name.equals("min"))
 		return new Integer(java.lang.Integer.MIN_VALUE);
 	else if(name.equals("max"))

@@ -6,7 +6,7 @@ var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaratio
 var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var VoidType = require("../type/VoidType").VoidType;
 var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
@@ -88,7 +88,7 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 		}
 		return declaration.check(local);
 	} catch (e) {
-		if(e instanceof PrestoError) {
+		if(e instanceof PromptoError) {
 			throw new SyntaxError(e.message);
 		}
 	}
@@ -138,7 +138,7 @@ MethodCall.prototype.findDeclaration = function(context) {
 			return new ClosureDeclaration(o);
 		}
 	} catch (e) {
-		if(!(e instanceof PrestoError)) {
+		if(!(e instanceof PromptoError)) {
 			throw e;
 		}
 	}

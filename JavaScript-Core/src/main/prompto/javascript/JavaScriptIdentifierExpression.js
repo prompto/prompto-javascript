@@ -1,5 +1,5 @@
 var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 
 function JavaScriptIdentifierExpression(id) {
 	JavaScriptExpression.call(this);
@@ -28,7 +28,7 @@ JavaScriptIdentifierExpression.prototype.toDialect = function(writer) {
 
 
 JavaScriptIdentifierExpression.prototype.interpret = function(context, module) {
-    var o = this.interpret_presto(context);
+    var o = this.interpret_prompto(context);
     if(o!=null) {
         return o;
     }
@@ -47,7 +47,7 @@ JavaScriptIdentifierExpression.prototype.interpret = function(context, module) {
 	return null;
 };
 
-JavaScriptIdentifierExpression.prototype.interpret_presto = function(context) {
+JavaScriptIdentifierExpression.prototype.interpret_prompto = function(context) {
     if ("$context" == this.id.name)
         return context;
     else
@@ -61,7 +61,7 @@ JavaScriptIdentifierExpression.prototype.interpret_instance = function(context) 
 		try {
 			return context.getValue(this.id);
 		} catch (e) {
-			if (e instanceof PrestoError) {
+			if (e instanceof PromptoError) {
 				return null;
 			} else {
 				throw e;

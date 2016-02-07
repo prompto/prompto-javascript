@@ -89,7 +89,7 @@ Time.prototype.subPeriod = function(value) {
 
 /*
 @Override
-public IValue Subtract(Context context, IValue value) throws PrestoError {
+public IValue Subtract(Context context, IValue value) throws PromptoError {
 	if (value instanceof Time) {
 		LocalTime other = ((Time) value).value;
 		org.joda.time.Period res = new org.joda.time.Period(0, 0, 0, 0, this.value.getHourOfDay() - other.getHourOfDay(), this.value.getMinuteOfHour() - other.getMinuteOfHour(), this.value.getSecondOfMinute() - other.getSecondOfMinute(), this.value.getMillisOfSecond()

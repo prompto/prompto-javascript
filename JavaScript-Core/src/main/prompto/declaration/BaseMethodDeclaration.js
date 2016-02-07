@@ -1,7 +1,7 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var CategoryType = null;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var Specificity = require("../grammar/Specificity").Specificity;
@@ -99,7 +99,7 @@ BaseMethodDeclaration.prototype.computeSpecificity = function(context, argument,
 			return Specificity.RESOLVED;
 		}
 	} catch(error) {
-		if(!(error instanceof PrestoError )) {
+		if(!(error instanceof PromptoError )) {
 			throw error;
 		}
 	}

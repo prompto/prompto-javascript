@@ -1,7 +1,7 @@
-var PrestoError = require("./PrestoError").PrestoError;
+var PromptoError = require("./PromptoError").PromptoError;
 
 function InternalError(message) {
-	PrestoError.call(this, message);
+	PromptoError.call(this, message);
 	return this;
 }
 

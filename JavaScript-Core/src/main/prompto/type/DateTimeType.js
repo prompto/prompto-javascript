@@ -88,7 +88,7 @@ DateTimeType.prototype.checkMember = function(context, name) {
 /*
 
 @Override
-public ListValue sort(Context context, ListValue list) throws PrestoError {
+public ListValue sort(Context context, ListValue list) throws PromptoError {
 	return this.<DateTime> doSort(context, list);
 }
 

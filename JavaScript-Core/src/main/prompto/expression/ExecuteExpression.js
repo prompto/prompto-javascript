@@ -1,6 +1,6 @@
 var Section = require("../parser/Section").Section;
 var CodeExpression = require("../expression/CodeExpression").CodeExpression;
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 
 function ExecuteExpression(id) {
 	Section.call(this);
@@ -50,7 +50,7 @@ ExecuteExpression.prototype.check = function(context) {
 			throw new SyntaxError("Expected code, got:" + value.toString());
 		}
 	} catch(e) {
-		if(e instanceof PrestoError) {
+		if(e instanceof PromptoError) {
 			throw new SyntaxError(e.message);
 		}
 	}

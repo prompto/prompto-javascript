@@ -1,11 +1,11 @@
-var PrestoError = require("./PrestoError").PrestoError;
+var PromptoError = require("./PromptoError").PromptoError;
 
 function SyntaxError(message) {
-	PrestoError.call(this, message);
+	PromptoError.call(this, message);
 	return this;
 }
 
-SyntaxError.prototype = Object.create(PrestoError.prototype);
+SyntaxError.prototype = Object.create(PromptoError.prototype);
 SyntaxError.prototype.constructor = SyntaxError;
 
 exports.SyntaxError = SyntaxError;

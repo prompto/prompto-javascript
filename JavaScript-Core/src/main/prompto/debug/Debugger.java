@@ -1,7 +1,7 @@
 package prompto.debug;
 
 import prompto.declaration.IMethodDeclaration;
-import prompto.error.PrestoError;
+import prompto.error.PromptoError;
 import prompto.error.TerminatedError;
 import prompto.parser.ISection;
 import prompto.runtime.Context;
@@ -61,7 +61,7 @@ public class Debugger {
 		this.listener = listener;
 	}
 	
-	public void enterMethod(Context context, IMethodDeclaration method) throws PrestoError {
+	public void enterMethod(Context context, IMethodDeclaration method) throws PromptoError {
 		terminateIfRequested();
 		stack.push(new StackFrame(context, method.getName(), method));
 		if(stack.size()>0 && stack.size()<=stepDepth)
@@ -73,7 +73,7 @@ public class Debugger {
 		terminateIfRequested();
 	}
 
-	public void leaveMethod(Context context, ISection section) throws PrestoError {
+	public void leaveMethod(Context context, ISection section) throws PromptoError {
 		terminateIfRequested();
 		if(stack.size()>0 && stack.size()==-stepDepth)
 			suspend(SuspendReason.STEPPING, context, section);
@@ -83,7 +83,7 @@ public class Debugger {
 		terminateIfRequested();
 	}
 	
-	public void enterStatement(Context context, ISection section) throws PrestoError {
+	public void enterStatement(Context context, ISection section) throws PromptoError {
 		terminateIfRequested();
 		StackFrame previous = stack.pop();
 		stack.push(new StackFrame(context, previous.getMethodName(), section));
@@ -96,7 +96,7 @@ public class Debugger {
 		terminateIfRequested();
 	}
 
-	public void leaveStatement(Context context, ISection section) throws PrestoError {
+	public void leaveStatement(Context context, ISection section) throws PromptoError {
 		terminateIfRequested();
 		if(stack.size()>0 && stack.size()==-stepDepth)
 			suspend(SuspendReason.STEPPING, context, section);

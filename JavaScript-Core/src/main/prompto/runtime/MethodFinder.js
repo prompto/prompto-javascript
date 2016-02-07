@@ -1,4 +1,4 @@
-var PrestoError = require("../error/PrestoError").PrestoError;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var CategoryType = null;
 var Score = require("./Score").Score;
 
@@ -102,7 +102,7 @@ MethodFinder.prototype.scoreMostSpecific = function(d1, d2, checkInstance) {
 			}
 		}
 	} catch(error) {
-		if(!(error instanceof PrestoError)) {
+		if(!(error instanceof PromptoError)) {
 			throw error;
 		}
 	}
