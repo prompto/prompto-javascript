@@ -6,7 +6,16 @@ if(isNodeJs) {
     exports.stdout = process.stdout;
     exports.stderr = process.stderr;
 } else {
-    exports.writer = console;
-    exports.stdout = { write : function(t) { console.log(t); }};
-    exports.stderr = { write : function(t) { console.error(t); }};
+    // need a named wrapper around console for situations where console is anonymous (such as in ace.js)
+    function writer(m) {
+        this.write = m || console.log;
+    };
+
+    exports.writer = new writer();
+    exports.stdout = new writer(function(t) {
+        console.log(t);
+    });
+    exports.stderr = new writer(function(t) {
+        console.error(t);
+    });
 }
