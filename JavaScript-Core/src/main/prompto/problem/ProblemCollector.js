@@ -49,6 +49,11 @@ ProblemCollector.prototype.reportUnknownMethod = function(id) {
     this.reportUnknown(id, "method");
 };
 
+ProblemCollector.prototype.reportUnknownVariable = function(id) {
+    this.reportUnknown(id, "variable");
+};
+
+
 ProblemCollector.prototype.reportUnknown = function(id, type) {
     var problem = this.readSection(id);
     problem.type = "error";

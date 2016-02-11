@@ -10,8 +10,6 @@ exports.SCleverParser = require('./SCleverParser').SCleverParser;
 exports.EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
 exports.OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
 exports.SPromptoBuilder = require("./SPromptoBuilder").SPromptoBuilder;
-exports.ProblemCollector = require("./ProblemCollector").ProblemCollector;
-exports.CodeCompleter = require("./CodeCompleter").CodeCompleter;
 exports.Dialect = require("./Dialect").Dialect;
 exports.Section = require("./Section").Section;
 

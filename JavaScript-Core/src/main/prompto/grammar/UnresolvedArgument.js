@@ -1,4 +1,4 @@
-var ProblemListener = require("../parser/ProblemListener").ProblemListener;
+var ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var AttributeArgument = require("./AttributeArgument").AttributeArgument;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -42,8 +42,7 @@ UnresolvedArgument.prototype.check = function(context) {
 };
 
 UnresolvedArgument.prototype.getProto = function(context) {
-	this.resolveAndCheck(context);
-	return this.resolved.getProto(context);
+	return this.name;
 };
 
 UnresolvedArgument.prototype.getType = function(context) {
@@ -66,9 +65,9 @@ UnresolvedArgument.prototype.checkValue = function(context, value) {
 UnresolvedArgument.prototype.resolveAndCheck = function(context) {
 	if(this.resolved!=null)
 		return;
-    // don't collect problems during resolution
+    // ignore problems during resolution
     var listener = context.problemListener;
-    context.problemListener = new ProblemListener();
+    context.problemListener = new ProblemCollector();
     // try out various solutions
 	var named = context.getRegisteredDeclaration(this.name);
 	if(named instanceof AttributeDeclaration) {

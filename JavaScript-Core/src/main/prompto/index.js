@@ -1,6 +1,7 @@
 exports.utils = require('./utils/index');
 exports.literal = require('./literal/index');
 exports.parser = require('./parser/index');
+exports.problem = require('./problem/index');
 exports.type = require('./type/index');
 exports.grammar = require('./grammar/index');
 exports.declaration = require('./declaration/index');
