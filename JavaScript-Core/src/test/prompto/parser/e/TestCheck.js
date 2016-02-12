@@ -86,7 +86,8 @@ exports.testCategory = function(test) {
 exports.testMethodWithUndeclaredAttribute = function(test) {
 	var stmts = parseString("define printName as method receiving name doing:\r\n" +
 			"\tprint with \"name\" + name as value");
-	test.throws(function() { stmts.register(context); }, SyntaxError, "Should fail since name not declared !");
+    stmts.register(context);
+    test.throws(function() { stmts.check(context); }, SyntaxError, "Should fail since name not declared !");
 	test.done();
 };
 

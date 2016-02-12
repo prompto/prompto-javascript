@@ -38,7 +38,7 @@ exports.runResource = function(fileName, methodName, args) {
 };
 
 exports.checkProblems = function(test, code, expected) {
-    var listener = new prompto.parser.ProblemCollector();
+    var listener = new prompto.problem.ProblemCollector();
     var parser = new prompto.parser.ECleverParser(code);
     parser.removeErrorListeners();
     parser.addErrorListener(listener);
@@ -56,7 +56,7 @@ exports.checkProblems = function(test, code, expected) {
 };
 
 exports.checkCompletion = function(test, code, expected) {
-    var listener = new prompto.parser.CodeCompleter();
+    var listener = new prompto.problem.CodeCompleter();
     var parser = new prompto.parser.ECleverParser(code);
     parser.removeErrorListeners();
     parser.addErrorListener(listener);
