@@ -2,6 +2,7 @@ exports.UnresolvedIdentifier = require('./UnresolvedIdentifier').UnresolvedIdent
 exports.IdentifierList = require('./IdentifierList').IdentifierList;
 exports.Identifier = require('./Identifier').Identifier;
 exports.MethodDeclarationList = require("./MethodDeclarationList").MethodDeclarationList;
+exports.AttributeArgument = require("./AttributeArgument").AttributeArgument;
 exports.CategoryArgument = require("./CategoryArgument").CategoryArgument;
 exports.CodeArgument = require("./CodeArgument").CodeArgument;
 exports.ArgumentList = require("./ArgumentList").ArgumentList;
