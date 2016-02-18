@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testForEachCategoryList = function(test) {
+	checkOutput(test, "iterate/forEachCategoryList.pec");
+};
+
 exports.testForEachIntegerList = function(test) {
 	checkOutput(test, "iterate/forEachIntegerList.pec");
 };
