@@ -66,8 +66,8 @@ OPromptoBuilder.prototype.exitStoreStatement = function(ctx) {
 };
 
 OPromptoBuilder.prototype.exitStore_statement = function(ctx) {
-    var del = this.getNodeValue(ctx.del);
-    var add = this.getNodeValue(ctx.add);
+    var del = this.getNodeValue(ctx.to_del);
+    var add = this.getNodeValue(ctx.to_add);
     var stmt = new statement.StoreStatement(del, add);
     this.setNodeValue(ctx, stmt);
 };

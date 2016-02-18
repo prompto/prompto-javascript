@@ -5150,8 +5150,8 @@ function Store_statementContext(parser, parent, invokingState) {
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
     this.ruleIndex = EParser.RULE_store_statement;
-    this.del = null; // Expression_listContext
-    this.add = null; // Expression_listContext
+    this.to_del = null; // Expression_listContext
+    this.to_add = null; // Expression_listContext
     return this;
 }
 
@@ -5209,7 +5209,7 @@ EParser.prototype.store_statement = function() {
             this.state = 757;
             this.match(EParser.DELETE);
             this.state = 758; 
-            localctx.del = this.expression_list(0);
+            localctx.to_del = this.expression_list(0);
             break;
 
         case 2:
@@ -5217,7 +5217,7 @@ EParser.prototype.store_statement = function() {
             this.state = 759;
             this.match(EParser.STORE);
             this.state = 760; 
-            localctx.add = this.expression_list(0);
+            localctx.to_add = this.expression_list(0);
             break;
 
         case 3:
@@ -5225,13 +5225,13 @@ EParser.prototype.store_statement = function() {
             this.state = 761;
             this.match(EParser.DELETE);
             this.state = 762; 
-            localctx.del = this.expression_list(0);
+            localctx.to_del = this.expression_list(0);
             this.state = 763;
             this.match(EParser.AND);
             this.state = 764;
             this.match(EParser.STORE);
             this.state = 765; 
-            localctx.add = this.expression_list(0);
+            localctx.to_add = this.expression_list(0);
             break;
 
         }

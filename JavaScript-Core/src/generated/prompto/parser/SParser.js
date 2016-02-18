@@ -4600,8 +4600,8 @@ function Store_statementContext(parser, parent, invokingState) {
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
     this.ruleIndex = SParser.RULE_store_statement;
-    this.del = null; // Expression_listContext
-    this.add = null; // Expression_listContext
+    this.to_del = null; // Expression_listContext
+    this.to_add = null; // Expression_listContext
     return this;
 }
 
@@ -4685,7 +4685,7 @@ SParser.prototype.store_statement = function() {
             this.state = 681;
             this.match(SParser.LPAR);
             this.state = 682; 
-            localctx.del = this.expression_list(0);
+            localctx.to_del = this.expression_list(0);
             this.state = 683;
             this.match(SParser.RPAR);
             break;
@@ -4697,7 +4697,7 @@ SParser.prototype.store_statement = function() {
             this.state = 686;
             this.match(SParser.LPAR);
             this.state = 687; 
-            localctx.add = this.expression_list(0);
+            localctx.to_add = this.expression_list(0);
             this.state = 688;
             this.match(SParser.RPAR);
             break;
@@ -4709,7 +4709,7 @@ SParser.prototype.store_statement = function() {
             this.state = 691;
             this.match(SParser.LPAR);
             this.state = 692; 
-            localctx.del = this.expression_list(0);
+            localctx.to_del = this.expression_list(0);
             this.state = 693;
             this.match(SParser.RPAR);
             this.state = 694;
@@ -4719,7 +4719,7 @@ SParser.prototype.store_statement = function() {
             this.state = 696;
             this.match(SParser.LPAR);
             this.state = 697; 
-            localctx.add = this.expression_list(0);
+            localctx.to_add = this.expression_list(0);
             this.state = 698;
             this.match(SParser.RPAR);
             break;
