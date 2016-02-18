@@ -21,12 +21,25 @@ function BaseMethodDeclaration(id, args, returnType) {
 BaseMethodDeclaration.prototype  = Object.create(BaseDeclaration.prototype);
 BaseMethodDeclaration.prototype.constructor = BaseMethodDeclaration;
 
-BaseMethodDeclaration.prototype.getProto = function(context) {
+
+BaseMethodDeclaration.prototype.getDeclarationType = function() {
+    return "Method";
+};
+
+BaseMethodDeclaration.prototype.getSignature = function(context) {
 	var s = [];
     this.args.map(function(arg) {
         s.push(arg.getProto(context));
     });
     return "(" + s.join(", ") + ")";
+};
+
+BaseMethodDeclaration.prototype.getProto = function(context) {
+    var s = [];
+    this.args.map(function(arg) {
+        s.push(arg.getProto(context));
+    });
+    return s.join("/");
 };
 
 BaseMethodDeclaration.prototype.unregister = function(context) {

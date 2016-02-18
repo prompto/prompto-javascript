@@ -14,6 +14,10 @@ function CategoryDeclaration(id, attributes) {
 CategoryDeclaration.prototype = Object.create(BaseDeclaration.prototype);
 CategoryDeclaration.prototype.constructor = CategoryDeclaration;
 
+CategoryDeclaration.prototype.getDeclarationType = function() {
+    return "Category";
+};
+
 CategoryDeclaration.prototype.newInstanceFromDocument = function(context, document) {
     var instance = this.newInstance();
     instance.mutable = true;

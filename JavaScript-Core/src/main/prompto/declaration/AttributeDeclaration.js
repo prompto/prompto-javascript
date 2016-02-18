@@ -12,7 +12,11 @@ function AttributeDeclaration(id, type, constraint) {
 
 AttributeDeclaration.prototype = Object.create(BaseDeclaration.prototype);
 AttributeDeclaration.prototype.constructor = AttributeDeclaration;
-	
+
+AttributeDeclaration.prototype.getDeclarationType = function() {
+    return "Attribute";
+};
+
 AttributeDeclaration.prototype.getType = function() {
 	return this.type;
 };
