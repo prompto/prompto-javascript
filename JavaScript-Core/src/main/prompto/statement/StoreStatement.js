@@ -4,9 +4,10 @@ var MemStore = require("../store/MemStore").MemStore;
 var Store = require("../store/Store").Store;
 var Dialect = require("../parser/Dialect").Dialect;
 
-function StoreStatement(expressions) {
+function StoreStatement(del, add) {
     SimpleStatement.call(this);
-    this.expressions = expressions;
+    this.del = del;
+    this.add = add;
     return this;
 }
 
@@ -17,14 +18,14 @@ StoreStatement.prototype.constructor = StoreStatement;
 StoreStatement.prototype.toDialect = function(writer) {
     writer.append ("store ");
     if(writer.dialect == Dialect.E) {
-        this.expressions.map( function(exp) {
+        this.add.map( function(exp) {
             exp.toDialect(writer);
             writer.append(",");
         });
         writer.trimLast(1);
     } else {
         writer.append ('(');
-        this.expressions.map( function(exp) {
+        this.add.map( function(exp) {
             exp.toDialect(writer);
             writer.append(",");
         });
@@ -34,7 +35,7 @@ StoreStatement.prototype.toDialect = function(writer) {
 };
 
 StoreStatement.prototype.toString = function() {
-    return "store " + this.expressions.toString();
+    return "store " + this.add.toString();
 };
 
 StoreStatement.prototype.equals = function(other) {
@@ -45,7 +46,7 @@ StoreStatement.prototype.equals = function(other) {
     else if (!(obj instanceof StoreStatement))
         return false
     else
-        return this.expressions.equals(other.expressions);
+        return this.add.equals(other.add);
 };
 
 
@@ -58,7 +59,7 @@ StoreStatement.prototype.interpret = function( context) {
     var store = Store.instance;
     if (store == null)
         store = MemStore.instance;
-    this.expressions.map(function (exp) {
+    this.add.map(function (exp) {
         var value = exp.interpret(context);
         var storable = value.storable;
         if (!storable)

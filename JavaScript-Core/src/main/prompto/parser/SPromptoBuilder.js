@@ -66,8 +66,9 @@ SPromptoBuilder.prototype.exitStoreStatement = function(ctx) {
 };
 
 SPromptoBuilder.prototype.exitStore_statement = function(ctx) {
-    var exps = this.getNodeValue(ctx.exps);
-    var stmt = new statement.StoreStatement(exps);
+    var del = this.getNodeValue(ctx.del);
+    var add = this.getNodeValue(ctx.add);
+    var stmt = new statement.StoreStatement(del, add);
     this.setNodeValue(ctx, stmt);
 };
 
