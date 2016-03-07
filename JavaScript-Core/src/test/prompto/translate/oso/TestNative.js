@@ -54,6 +54,10 @@ exports.testReturnIntegerValue = function(test) {
 	compareResourceOSO(test, "native/returnIntegerValue.poc");
 };
 
+exports.testReturnLongLiteral = function(test) {
+	compareResourceOSO(test, "native/returnLongLiteral.poc");
+};
+
 exports.testReturnLongObject = function(test) {
 	compareResourceOSO(test, "native/returnLongObject.poc");
 };

@@ -61,6 +61,10 @@ exports.testReturnIntegerValue = function(test) {
 	checkOutput(test, "native/returnIntegerValue.poc");
 };
 
+exports.testReturnLongLiteral = function(test) {
+	checkOutput(test, "native/returnLongLiteral.poc");
+};
+
 exports.testReturnLongObject = function(test) {
 	checkOutput(test, "native/returnLongObject.poc");
 };
