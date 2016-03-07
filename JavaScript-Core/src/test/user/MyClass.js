@@ -46,11 +46,11 @@ MyClass.intObject = function() {
 };
 
 MyClass.longValue = function() {
-	return 123;
+	return 9876543210;
 };
 
 MyClass.longObject = function() {
-	return 123;
+	return 9876543210;
 };
 
 MyClass.characterValue = function() {
