@@ -38,6 +38,10 @@ exports.testAddSet = function(test) {
 	compareResourceESE(test, "add/addSet.pec");
 };
 
+exports.testAddTextCharacter = function(test) {
+	compareResourceESE(test, "add/addTextCharacter.pec");
+};
+
 exports.testAddTextDecimal = function(test) {
 	compareResourceESE(test, "add/addTextDecimal.pec");
 };

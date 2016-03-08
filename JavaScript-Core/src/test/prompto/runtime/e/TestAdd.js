@@ -49,6 +49,10 @@ exports.testAddSet = function(test) {
 	checkOutput(test, "add/addSet.pec");
 };
 
+exports.testAddTextCharacter = function(test) {
+	checkOutput(test, "add/addTextCharacter.pec");
+};
+
 exports.testAddTextDecimal = function(test) {
 	checkOutput(test, "add/addTextDecimal.pec");
 };
