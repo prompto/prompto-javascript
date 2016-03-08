@@ -38,8 +38,16 @@ exports.testAddSet = function(test) {
 	compareResourceOEO(test, "add/addSet.poc");
 };
 
-exports.testAddText = function(test) {
-	compareResourceOEO(test, "add/addText.poc");
+exports.testAddTextDecimal = function(test) {
+	compareResourceOEO(test, "add/addTextDecimal.poc");
+};
+
+exports.testAddTextInteger = function(test) {
+	compareResourceOEO(test, "add/addTextInteger.poc");
+};
+
+exports.testAddTextText = function(test) {
+	compareResourceOEO(test, "add/addTextText.poc");
 };
 
 exports.testAddTime = function(test) {

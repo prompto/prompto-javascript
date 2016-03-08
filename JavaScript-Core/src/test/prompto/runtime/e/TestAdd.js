@@ -49,8 +49,16 @@ exports.testAddSet = function(test) {
 	checkOutput(test, "add/addSet.pec");
 };
 
-exports.testAddText = function(test) {
-	checkOutput(test, "add/addText.pec");
+exports.testAddTextDecimal = function(test) {
+	checkOutput(test, "add/addTextDecimal.pec");
+};
+
+exports.testAddTextInteger = function(test) {
+	checkOutput(test, "add/addTextInteger.pec");
+};
+
+exports.testAddTextText = function(test) {
+	checkOutput(test, "add/addTextText.pec");
 };
 
 exports.testAddTime = function(test) {
