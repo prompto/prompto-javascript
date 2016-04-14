@@ -21,7 +21,7 @@ SetterMethodDeclaration.prototype.toODialect = function(writer) {
 SetterMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" setter doing:\n");
+    writer.append(" as setter doing:\n");
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();

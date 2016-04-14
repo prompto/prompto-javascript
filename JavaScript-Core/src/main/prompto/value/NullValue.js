@@ -8,6 +8,10 @@ function NullValue() {
 NullValue.prototype = Object.create(Value.prototype);
 NullValue.prototype.constructor = NullValue;
 
+NullValue.prototype.toString = function() {
+    return "null";
+};
+
 NullValue.instance = new NullValue();
 
 exports.NullValue = NullValue;

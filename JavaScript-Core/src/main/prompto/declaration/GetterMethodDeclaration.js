@@ -21,7 +21,7 @@ GetterMethodDeclaration.prototype.toODialect = function(writer) {
 GetterMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" getter doing:\n");
+    writer.append(" as getter doing:\n");
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();

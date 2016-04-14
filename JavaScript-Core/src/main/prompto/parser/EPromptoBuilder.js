@@ -1,3 +1,4 @@
+var argument = require("../argument/index");
 var declaration = require("../declaration/index");
 var expression = require("../expression/index");
 var javascript = require("../javascript/index");
@@ -547,7 +548,9 @@ EPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
 	var typ = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
-    var arg = new grammar.CategoryArgument(typ, name, attrs);
+    var arg = attrs ?
+        new argument.ExtendedArgument(typ, name, attrs) :
+        new argument.CategoryArgument(typ, name);
     var exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -615,7 +618,7 @@ EPromptoBuilder.prototype.exitMethodVariableIdentifier = function(ctx) {
 EPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	var arg = new grammar.UnresolvedArgument(name);
+	var arg = new argument.UnresolvedArgument(name);
 	this.setNodeValue(ctx, new grammar.ArgumentAssignment(arg, exp));
 };
 
@@ -709,6 +712,18 @@ EPromptoBuilder.prototype.exitGetter_method_declaration = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitNative_setter_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new declaration.NativeSetterMethodDeclaration(name, stmts));
+};
+
+
+EPromptoBuilder.prototype.exitNative_getter_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new declaration.NativeGetterMethodDeclaration(name, stmts));
+};
 
 EPromptoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
@@ -1405,7 +1420,7 @@ EPromptoBuilder.prototype.exitValue_token = function(ctx) {
 
 EPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-    var arg = new grammar.UnresolvedArgument(name);
+    var arg = new argument.UnresolvedArgument(name);
     var exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
 	this.setNodeValue(ctx, arg);
@@ -1414,7 +1429,7 @@ EPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
 
 EPromptoBuilder.prototype.exitClosureStatement = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, new statement.DeclarationInstruction(decl));
+	this.setNodeValue(ctx, new statement.DeclarationStatement(decl));
 };
 
 
@@ -1935,7 +1950,7 @@ EPromptoBuilder.prototype.exitCodeExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.CodeArgument(name));
+	this.setNodeValue(ctx, new argument.CodeArgument(name));
 };
 
 

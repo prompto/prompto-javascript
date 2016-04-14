@@ -2,9 +2,6 @@ exports.UnresolvedIdentifier = require('./UnresolvedIdentifier').UnresolvedIdent
 exports.IdentifierList = require('./IdentifierList').IdentifierList;
 exports.Identifier = require('./Identifier').Identifier;
 exports.MethodDeclarationList = require("./MethodDeclarationList").MethodDeclarationList;
-exports.AttributeArgument = require("./AttributeArgument").AttributeArgument;
-exports.CategoryArgument = require("./CategoryArgument").CategoryArgument;
-exports.CodeArgument = require("./CodeArgument").CodeArgument;
 exports.ArgumentList = require("./ArgumentList").ArgumentList;
 exports.ContOp = require("./ContOp").ContOp;
 exports.CmpOp = require("./CmpOp").CmpOp;
@@ -12,7 +9,6 @@ exports.EqOp = require("./EqOp").EqOp;
 exports.OrderByClause = require("./OrderByClause").OrderByClause;
 exports.OrderByClauseList = require("./OrderByClauseList").OrderByClauseList;
 exports.Operator = require("./Operator").Operator;
-exports.UnresolvedArgument = require("./UnresolvedArgument").UnresolvedArgument;
 exports.ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
 exports.ArgumentAssignmentList = require("./ArgumentAssignmentList").ArgumentAssignmentList;
 exports.VariableInstance = require("./VariableInstance").VariableInstance;
@@ -29,4 +25,3 @@ exports.MatchingExpressionConstraint = require("./MatchingExpressionConstraint")
 
 require('./ArgumentAssignment').resolve();
 require('./UnresolvedIdentifier').resolve();
-require('./CategoryArgument').resolve();

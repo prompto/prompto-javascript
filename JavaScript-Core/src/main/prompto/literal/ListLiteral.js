@@ -3,6 +3,12 @@ var ListValue = require("../value/ListValue").ListValue;
 var ListType = require("../type/ListType").ListType;
 var MissingType = require("../type/MissingType").MissingType;
 var ExpressionList = require("../utils/ExpressionList").ExpressionList;
+var DecimalType = require("../type/DecimalType").DecimalType;
+var IntegerType = require("../type/IntegerType").IntegerType;
+var CharacterType = require("../type/CharacterType").CharacterType;
+var TextType = require("../type/TextType").TextType;
+var Decimal = require("../value/Decimal").Decimal;
+var Text = require("../value/Text").Text;
 
 function ListLiteral(expressions) {
     expressions = expressions || new ExpressionList();
@@ -51,12 +57,24 @@ ListLiteral.prototype.interpret = function(context) {
 		var list = new ListValue(this.itemType);
 		for(var i=0; i<this.expressions.length;i++) {
 			var item = this.expressions[i].interpret(context);
+            item = this.interpretPromotion(item);
 			list.add(item);
 		}
 		this.value = list;
         // don't dispose of expressions, they are required by translation
 	}
 	return this.value;
+};
+
+ListLiteral.prototype.interpretPromotion = function(item) {
+    if (item == null)
+        return item;
+    if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
+        return new Decimal(item.DecimalValue());
+    else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
+        return new Text(item.value);
+    else
+        return item;
 };
 
 ListLiteral.prototype.toDialect = function(writer) {

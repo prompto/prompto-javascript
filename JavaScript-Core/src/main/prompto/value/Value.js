@@ -1,8 +1,10 @@
+var NullValue = null;
 var Text = null;
 var Integer = null;
 var Decimal = null;
 
 exports.resolve = function() {
+    NullValue = require("./NullValue").NullValue;
     Text = require("./Text").Text;
     Integer = require("./Integer").Integer;
     Decimal = require("./Decimal").Decimal;

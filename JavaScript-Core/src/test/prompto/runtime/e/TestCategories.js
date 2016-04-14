@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testComposed = function(test) {
+	checkOutput(test, "categories/composed.pec");
+};
+
 exports.testCopyFromAscendant = function(test) {
 	checkOutput(test, "categories/copyFromAscendant.pec");
 };

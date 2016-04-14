@@ -32,7 +32,7 @@ exports.testSystemOutPrint = function(test) {
 	var statement = builder.getNodeValue(tree);
 	var context = prompto.runtime.Context.newGlobalContext();
     var id = new prompto.grammar.Identifier("value")
-	var arg = new prompto.grammar.CategoryArgument(
+	var arg = new prompto.argument.CategoryArgument(
         prompto.type.TextType.instance, id);
 	arg.register(context);
 	context.setValue(id, new prompto.literal.TextLiteral("\"test\"")); // StringLiteral trims enclosing quotes

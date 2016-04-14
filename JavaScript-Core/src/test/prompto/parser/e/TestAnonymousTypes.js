@@ -5,7 +5,8 @@ var parseString = require("../../parser/BaseEParserTest").parseString;
 
 var Identifier = prompto.grammar.Identifier;
 var IdentifierList = prompto.grammar.IdentifierList;
-var CategoryArgument = prompto.grammar.CategoryArgument;
+var CategoryArgument = prompto.argument.CategoryArgument;
+var ExtendedArgument = prompto.argument.ExtendedArgument;
 var AnyType = prompto.type.AnyType;
 var TextType = prompto.type.TextType;
 var DateType = prompto.type.DateType;
@@ -39,7 +40,7 @@ exports.tearDown = function(done) {
 
 exports.testAnonymousAnyType = function(test) {
 	// any x
-	var argument = new CategoryArgument(AnyType.instance, new Identifier("x"), null);
+	var argument = new CategoryArgument(AnyType.instance, new Identifier("x"));
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof AnyType);
@@ -62,7 +63,7 @@ exports.testAnonymousAnyType = function(test) {
 exports.testAnonymousAnyTypeWithAttribute = function(test) {
 	// any x with attribute: name
 	var list = new IdentifierList(new Identifier("name"));
-	var argument = new CategoryArgument(AnyType.instance, new Identifier("x"), list);
+	var argument = new ExtendedArgument(AnyType.instance, new Identifier("x"), list);
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof CategoryType);
@@ -84,7 +85,7 @@ exports.testAnonymousAnyTypeWithAttribute = function(test) {
 
 exports.testAnonymousCategoryType = function(test) {
 	// Root x
-	var argument = new CategoryArgument(new CategoryType(new Identifier("Root")), new Identifier("x"), null);
+	var argument = new CategoryArgument(new CategoryType(new Identifier("Root")), new Identifier("x"));
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof CategoryType);
@@ -107,7 +108,7 @@ exports.testAnonymousCategoryType = function(test) {
 exports.testAnonymousCategoryTypeWithAttribute = function(test) {
 	// Root x with attribute: name
 	var list = new IdentifierList(new Identifier("name"));
-	var argument = new CategoryArgument(new CategoryType(new Identifier("Root")), new Identifier("test"), list);
+	var argument = new ExtendedArgument(new CategoryType(new Identifier("Root")), new Identifier("test"), list);
 	argument.register(context);
 	var st = argument.getType(context);
 	test.ok(st instanceof CategoryType);

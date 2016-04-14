@@ -1,4 +1,5 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
+var Bool = require("./Bool").Bool;
 var Integer = require("./Integer").Integer;
 var ListType = null;
 
@@ -56,6 +57,23 @@ ListValue.prototype.toDialect = function(writer) {
     BaseValueList.prototype.toDialect.call(this, writer);
     writer.append(']');
 };
+
+ListValue.prototype.filter = function(context, itemId, filter) {
+    var result = new ListValue(this.type.itemType);
+    var iter = this.getIterator(context);
+    while(iter.hasNext()) {
+        var o = iter.next();
+        context.setValue(itemId, o);
+        var test = filter.interpret(context);
+        if(!(test instanceof Bool)) {
+            throw new InternalError("Illegal test result: " + test);
+        }
+        if(test.value) {
+            result.add(o);
+        }
+    }
+    return result;
+}
 
 exports.ListValue = ListValue;
 

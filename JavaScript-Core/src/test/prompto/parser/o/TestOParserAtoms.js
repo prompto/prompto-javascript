@@ -271,10 +271,9 @@ exports.testMethod1Parameter1Statement = function(test) {
 	test.ok(ad);
 	test.equal("printName",ad.name);
 	test.ok(ad.args);
-	var arg = new prompto.grammar.CategoryArgument(
-        new prompto.type.CategoryType(
-            new prompto.grammar.Identifier("Person")),
-        new prompto.grammar.Identifier("p"),null);
+	var arg = new prompto.argument.CategoryArgument(
+        new prompto.type.CategoryType( new prompto.grammar.Identifier("Person")),
+        new prompto.grammar.Identifier("p"));
 	test.ok(ad.args[0].equals(arg));
 	test.ok(ad.statements);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
@@ -293,7 +292,7 @@ exports.testMethod1Extended1Statement = function(test) {
 	test.ok(ad.args);
 	var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Object"))
 	var idlist = new prompto.grammar.IdentifierList(new prompto.grammar.Identifier("name"));
-	var expected = new prompto.grammar.CategoryArgument(type,
+	var expected = new prompto.argument.ExtendedArgument(type,
         new prompto.grammar.Identifier("o"), idlist);
 	test.ok(ad.args[0].equals(expected));
 	test.ok(ad.statements);
@@ -312,8 +311,7 @@ exports.testMethod1Array1Statement = function(test) {
 	test.equal("printName",ad.name);
 	test.ok(ad.args);
 	var type = new prompto.type.ListType(new prompto.type.CategoryType(new prompto.grammar.Identifier("Option")))
-	var expected = new prompto.grammar.CategoryArgument(type,
-        new prompto.grammar.Identifier("options"), null);
+	var expected = new prompto.argument.CategoryArgument(type, new prompto.grammar.Identifier("options"));
 	test.ok(ad.args[0].equals(expected));
 	test.ok(ad.statements);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)

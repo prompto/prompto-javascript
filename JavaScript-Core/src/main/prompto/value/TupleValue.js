@@ -41,4 +41,21 @@ TupleValue.prototype.Add = function(context, value) {
 	}
 };
 
+TupleValue.prototype.filter = function(context, itemId, filter) {
+    var result = new TupleValue();
+    var iter = this.getIterator(context);
+    while(iter.hasNext()) {
+        var o = iter.next();
+        context.setValue(itemId, o);
+        var test = filter.interpret(context);
+        if(!(test instanceof Bool)) {
+            throw new InternalError("Illegal test result: " + test);
+        }
+        if(test.value) {
+            result.add(o);
+        }
+    }
+    return result;
+}
+
 exports.TupleValue = TupleValue;

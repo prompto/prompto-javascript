@@ -1,3 +1,4 @@
+var Bool = require("./Bool").Bool;
 var Value = require("./Value").Value;
 var Integer = require("./Integer").Integer;
 var SetType = require("../type/SetType").SetType;
@@ -37,6 +38,14 @@ SetValue.prototype.size = function() {
         n += 1;
     }
     return n;
+};
+
+SetValue.prototype.getMember = function(context, name) {
+    if ("length"==name) {
+        return new Integer(this.size());
+    } else {
+        return Value.prototype.getMember.apply(this, context, name);
+    }
 };
 
 SetValue.prototype.isEmpty = function() {
@@ -80,6 +89,24 @@ SetValue.prototype.Add = function(context, value) {
         return Value.prototype.Add.apply(this, context, value);
     }
 };
+
+
+SetValue.prototype.filter = function(context, itemId, filter) {
+    var result = new SetValue(this.type.itemType);
+    var iter = this.getIterator(context);
+    while(iter.hasNext()) {
+        var o = iter.next();
+        context.setValue(itemId, o);
+        var test = filter.interpret(context);
+        if(!(test instanceof Bool)) {
+            throw new InternalError("Illegal test result: " + test);
+        }
+        if(test.value) {
+            result.add(o);
+        }
+    }
+    return result;
+}
 
 SetValue.prototype.getIterator = function(context) {
     return new SetIterator(this.items, context);

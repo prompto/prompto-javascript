@@ -6,16 +6,16 @@ var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
 
-function DeclarationInstruction(declaration) {
+function DeclarationStatement(declaration) {
 	BaseStatement.call(this);
 	this.declaration = declaration;
 	return this;
 }
 
-DeclarationInstruction.prototype = Object.create(BaseStatement.prototype);
-DeclarationInstruction.prototype.constructor = DeclarationInstruction;
+DeclarationStatement.prototype = Object.create(BaseStatement.prototype);
+DeclarationStatement.prototype.constructor = DeclarationStatement;
 
-DeclarationInstruction.prototype.toDialect = function(writer) {
+DeclarationStatement.prototype.toDialect = function(writer) {
     if(this.declaration instanceof ConcreteMethodDeclaration) try {
         writer.context.registerMethodDeclaration(this.declaration);
      } catch(e) {
@@ -25,7 +25,7 @@ DeclarationInstruction.prototype.toDialect = function(writer) {
 };
 
 
-DeclarationInstruction.prototype.check = function(context) {
+DeclarationStatement.prototype.check = function(context) {
 	if(this.declaration instanceof ConcreteMethodDeclaration) {
 		this.declaration.checkChild(context);
 		context.registerMethodDeclaration(this.declaration);
@@ -35,7 +35,7 @@ DeclarationInstruction.prototype.check = function(context) {
 	return VoidType.instance;
 };
 
-DeclarationInstruction.prototype.interpret = function(context) {
+DeclarationStatement.prototype.interpret = function(context) {
 	if(this.declaration instanceof ConcreteMethodDeclaration) {
 		var method = this.declaration;
 		context.registerMethodDeclaration(method);
@@ -49,4 +49,4 @@ DeclarationInstruction.prototype.interpret = function(context) {
 };
 
 
-exports.DeclarationInstruction = DeclarationInstruction;
+exports.DeclarationStatement = DeclarationStatement;

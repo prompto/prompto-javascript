@@ -101,12 +101,30 @@ SParserListener.prototype.exitSetter_method_declaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#native_setter_declaration.
+SParserListener.prototype.enterNative_setter_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#native_setter_declaration.
+SParserListener.prototype.exitNative_setter_declaration = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#getter_method_declaration.
 SParserListener.prototype.enterGetter_method_declaration = function(ctx) {
 };
 
 // Exit a parse tree produced by SParser#getter_method_declaration.
 SParserListener.prototype.exitGetter_method_declaration = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#native_getter_declaration.
+SParserListener.prototype.enterNative_getter_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#native_getter_declaration.
+SParserListener.prototype.exitNative_getter_declaration = function(ctx) {
 };
 
 

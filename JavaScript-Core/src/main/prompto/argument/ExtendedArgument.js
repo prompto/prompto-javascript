@@ -1,4 +1,4 @@
-var Argument = require("./Argument").Argument;
+var CategoryArgument = require("./CategoryArgument").CategoryArgument;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ConcreteCategoryDeclaration = null;
@@ -8,18 +8,17 @@ exports.resolve = function() {
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 }
 
-function CategoryArgument(type, id, attributes) {
-	Argument.call(this, id);
-	this.type = type;
-	this.attributes = attributes || null;
+function ExtendedArgument(type, id, attributes) {
+    CategoryArgument.call(this, type, id);
+	this.attributes = attributes;
 	return this;
 }
 
-CategoryArgument.prototype = Object.create(Argument.prototype);
-CategoryArgument.prototype.constructor = CategoryArgument;
+ExtendedArgument.prototype = Object.create(CategoryArgument.prototype);
+ExtendedArgument.prototype.constructor = ExtendedArgument;
 
 /*
-	public CategoryArgument(IType type, String name) {
+	public ExtendedArgument(IType type, String name) {
 		super(name);
 		this.type = type;
 	}
@@ -40,12 +39,8 @@ CategoryArgument.prototype.constructor = CategoryArgument;
 
 */
 
-CategoryArgument.prototype.getProto = function(context) {
-	if(this.attributes==null) {
-		return this.type.name;
-	} else {
-		return this.type.name + '(' + this.attributes.toString() + ')';
-	}
+ExtendedArgument.prototype.getProto = function(context) {
+	return this.type.name + '(' + this.attributes.toString() + ')';
 };
 	
 /*
@@ -63,14 +58,14 @@ CategoryArgument.prototype.getProto = function(context) {
 	}
 */
 
-CategoryArgument.prototype.equals = function(obj) {
+ExtendedArgument.prototype.equals = function(obj) {
 	if(obj===this) {
 		return true;
 	} 
 	if(obj===null || obj===undefined) {
 		return false;
 	}
-	if(!(obj instanceof CategoryArgument)) {
+	if(!(obj instanceof ExtendedArgument)) {
 		return false;
 	}
 	return utils.equalObjects(this.type, obj.type) && 
@@ -78,21 +73,19 @@ CategoryArgument.prototype.equals = function(obj) {
 		utils.equalArrays(this.attributes, obj.attributes);
 };
 
-CategoryArgument.prototype.register = function(context) {
-	var actual = context.getRegisteredValue(this.id.name);
+ExtendedArgument.prototype.register = function(context) {
+	var actual = context.getRegisteredValue(this.name);
 	if(actual!==null) {
 		throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
 	}
-	if(this.attributes!=null) {
-		var declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(this.type.id), null);
-		context.registerDeclaration(declaration);
-	}
+    var declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(this.type.id), null);
+    context.registerDeclaration(declaration);
 	context.registerValue(this);
     if(this.defaultExpression!=null)
         context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
-CategoryArgument.prototype.check = function(context) {
+ExtendedArgument.prototype.check = function(context) {
 	this.type.checkExists(context);
 	if(this.attributes!==null) {
 		for(var i=0;i<this.attributes.length;i++) {
@@ -104,34 +97,28 @@ CategoryArgument.prototype.check = function(context) {
 	}
 };
 
-CategoryArgument.prototype.getType = function(context) {
-	if(this.attributes==null) {
-		return this.type;
-	} else {
-		return context.getRegisteredDeclaration(this.name).getType(context);
-	}
+ExtendedArgument.prototype.getType = function(context) {
+	return context.getRegisteredDeclaration(this.name).getType(context);
 };
 
-CategoryArgument.prototype.toEDialect = function(writer) {
+ExtendedArgument.prototype.toEDialect = function(writer) {
     var anonymous = "any"==this.type.name;
     this.type.toDialect(writer);
     if(anonymous) {
         writer.append(' ');
         writer.append(this.name);
     }
-    if(this.attributes!=null) {
-        switch(this.attributes.length) {
-            case 0:
-                break;
-            case 1:
-                writer.append(" with attribute ");
-                this.attributes.toDialect(writer, false);
-                break;
-            default:
-                writer.append(" with attributes ");
-                this.attributes.toDialect(writer, true);
-                break;
-        }
+    switch(this.attributes.length) {
+        case 0:
+            break;
+        case 1:
+            writer.append(" with attribute ");
+            this.attributes.toDialect(writer, false);
+            break;
+        default:
+            writer.append(" with attributes ");
+            this.attributes.toDialect(writer, true);
+            break;
     }
     if(!anonymous) {
         writer.append(' ');
@@ -139,26 +126,22 @@ CategoryArgument.prototype.toEDialect = function(writer) {
     }
 };
 
-CategoryArgument.prototype.toODialect = function(writer) {
+ExtendedArgument.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
-    if(this.attributes!=null) {
-        writer.append('(');
-        this.attributes.toDialect(writer, false);
-        writer.append(')');
-    }
+    writer.append('(');
+    this.attributes.toDialect(writer, false);
+    writer.append(')');
     writer.append(' ');
     writer.append(this.name);
 };
 
-CategoryArgument.prototype.toSDialect = function(writer) {
+ExtendedArgument.prototype.toSDialect = function(writer) {
     writer.append(this.name);
     writer.append(':');
     this.type.toDialect(writer);
-    if(this.attributes!=null) {
-        writer.append('(');
-        this.attributes.toDialect(writer, false);
-        writer.append(')');
-    }
+    writer.append('(');
+    this.attributes.toDialect(writer, false);
+    writer.append(')');
 };
 
-exports.CategoryArgument = CategoryArgument;
+exports.ExtendedArgument = ExtendedArgument;

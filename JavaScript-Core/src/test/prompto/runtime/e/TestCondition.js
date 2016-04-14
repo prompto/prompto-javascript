@@ -17,10 +17,6 @@ exports.testComplexIf = function(test) {
 	checkOutput(test, "condition/complexIf.pec");
 };
 
-exports.testElseIf = function(test) {
-	checkOutput(test, "condition/elseIf.pec");
-};
-
 exports.testReturnIf = function(test) {
 	checkOutput(test, "condition/returnIf.pec");
 };

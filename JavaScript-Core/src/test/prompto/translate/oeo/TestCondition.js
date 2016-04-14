@@ -6,10 +6,6 @@ exports.testComplexIf = function(test) {
 	compareResourceOEO(test, "condition/complexIf.poc");
 };
 
-exports.testElseIf = function(test) {
-	compareResourceOEO(test, "condition/elseIf.poc");
-};
-
 exports.testReturnIf = function(test) {
 	compareResourceOEO(test, "condition/returnIf.poc");
 };

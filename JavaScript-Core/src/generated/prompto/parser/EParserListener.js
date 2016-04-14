@@ -110,12 +110,30 @@ EParserListener.prototype.exitSetter_method_declaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#native_setter_declaration.
+EParserListener.prototype.enterNative_setter_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#native_setter_declaration.
+EParserListener.prototype.exitNative_setter_declaration = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#getter_method_declaration.
 EParserListener.prototype.enterGetter_method_declaration = function(ctx) {
 };
 
 // Exit a parse tree produced by EParser#getter_method_declaration.
 EParserListener.prototype.exitGetter_method_declaration = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#native_getter_declaration.
+EParserListener.prototype.enterNative_getter_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#native_getter_declaration.
+EParserListener.prototype.exitNative_getter_declaration = function(ctx) {
 };
 
 

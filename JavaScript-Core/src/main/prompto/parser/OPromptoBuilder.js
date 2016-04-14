@@ -1,3 +1,4 @@
+var argument = require("../argument/index");
 var declaration = require("../declaration/index");
 var expression = require("../expression/index");
 var javascript = require("../javascript/index");
@@ -560,7 +561,9 @@ OPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
 	var typ = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
-    var arg = new grammar.CategoryArgument(typ, name, attrs);
+    var arg = attrs ?
+        new argument.ExtendedArgument(typ, name, attrs) :
+        new argument.CategoryArgument(typ, name);
     var exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -641,7 +644,7 @@ OPromptoBuilder.prototype.exitExpressionAssignmentList = function(ctx) {
 OPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	var arg = new grammar.UnresolvedArgument(name);
+	var arg = new argument.UnresolvedArgument(name);
 	this.setNodeValue(ctx, new grammar.ArgumentAssignment(arg, exp));
 };
 
@@ -754,6 +757,20 @@ OPromptoBuilder.prototype.exitGetter_method_declaration = function(ctx) {
 	var stmts = this.getNodeValue(ctx.stmts);
 	this.setNodeValue(ctx, new declaration.GetterMethodDeclaration(name, stmts));
 };
+
+OPromptoBuilder.prototype.exitNative_setter_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new declaration.NativeSetterMethodDeclaration(name, stmts));
+};
+
+
+OPromptoBuilder.prototype.exitNative_getter_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new declaration.NativeGetterMethodDeclaration(name, stmts));
+};
+
 
 OPromptoBuilder.prototype.exitMember_method_declaration = function(ctx) {
     var decl = this.getNodeValue(ctx.getChild(0));
@@ -1436,7 +1453,7 @@ OPromptoBuilder.prototype.exitValue_token = function(ctx) {
 
 OPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-    var arg = new grammar.UnresolvedArgument(name);
+    var arg = new argument.UnresolvedArgument(name);
     var exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -1445,7 +1462,7 @@ OPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
 
 OPromptoBuilder.prototype.exitClosureStatement = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, new statement.DeclarationInstruction(decl));
+	this.setNodeValue(ctx, new statement.DeclarationStatement(decl));
 };
 
 
@@ -1973,7 +1990,7 @@ OPromptoBuilder.prototype.exitCodeExpression = function(ctx) {
 
 OPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.CodeArgument(name));
+	this.setNodeValue(ctx, new argument.CodeArgument(name));
 };
 
 

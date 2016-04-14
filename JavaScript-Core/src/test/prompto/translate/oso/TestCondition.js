@@ -6,10 +6,6 @@ exports.testComplexIf = function(test) {
 	compareResourceOSO(test, "condition/complexIf.poc");
 };
 
-exports.testElseIf = function(test) {
-	compareResourceOSO(test, "condition/elseIf.poc");
-};
-
 exports.testReturnIf = function(test) {
 	compareResourceOSO(test, "condition/returnIf.poc");
 };

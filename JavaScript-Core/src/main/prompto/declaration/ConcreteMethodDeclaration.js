@@ -2,8 +2,8 @@ var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclara
 var VoidType = require("../type/VoidType").VoidType;
 var DictType = require("../type/DictType").DictType;
 var TextType = require("../type/TextType").TextType;
-var CodeArgument = require("../grammar/CodeArgument").CodeArgument;
-var CategoryArgument = require("../grammar/CategoryArgument").CategoryArgument;
+var CodeArgument = require("../argument/CodeArgument").CodeArgument;
+var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 
 function ConcreteMethodDeclaration(id, args, returnType, statements) {
 	BaseMethodDeclaration.call(this, id, args, returnType);

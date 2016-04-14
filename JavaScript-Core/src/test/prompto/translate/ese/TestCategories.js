@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
+exports.testComposed = function(test) {
+	compareResourceESE(test, "categories/composed.pec");
+};
+
 exports.testCopyFromAscendant = function(test) {
 	compareResourceESE(test, "categories/copyFromAscendant.pec");
 };

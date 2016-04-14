@@ -53,23 +53,10 @@ FetchExpression.prototype.interpret = function(context) {
 		throw new InternalError("Illegal fetch source: " + this.source);
 	}
 	var itemType = listType.itemType;
-	var result = new ListValue(itemType);
-	var local = context.newLocalContext();
-	var item = new Variable(this.itemId, itemType);
-	local.registerValue(item);
-	var iter = list.getIterator(context);
-	while(iter.hasNext()) {
-		var o = iter.next();
-		local.setValue(this.itemId, o);
-		var test = this.filter.interpret(local);
-		if(!(test instanceof Bool)) {
-			throw new InternalError("Illegal test result: " + test);
-		}
-		if(test.value) {
-			result.add(o);
-		}
-	}
-	return result;
+    var local = context.newLocalContext();
+    var item = new Variable(this.itemId, itemType);
+    local.registerValue(item);
+    return list.filter(local, this.itemId, this.filter)
 };
 
 FetchExpression.prototype.toDialect = function(writer) {
