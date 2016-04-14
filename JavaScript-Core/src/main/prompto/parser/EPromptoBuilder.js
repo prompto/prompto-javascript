@@ -1,4 +1,6 @@
 var argument = require("../argument/index");
+var constraint = require("../constraint/index");
+var instance = require("../instance/index");
 var declaration = require("../declaration/index");
 var expression = require("../expression/index");
 var javascript = require("../javascript/index");
@@ -39,7 +41,7 @@ EPromptoBuilder.prototype.setNodeValue = function(node, value) {
 
 EPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(exp));
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(exp));
 };
 
 EPromptoBuilder.prototype.exitTypeIdentifier = function(ctx) {
@@ -63,7 +65,7 @@ EPromptoBuilder.prototype.exitUnresolvedExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitUnresolvedIdentifier = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 EPromptoBuilder.prototype.exitUnresolvedSelector = function(ctx) {
@@ -300,7 +302,7 @@ EPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
 EPromptoBuilder.prototype.exitNative_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.NativeSymbol(name, exp));
+	this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
 };
 
 EPromptoBuilder.prototype.exitSymbolIdentifier = function(ctx) {
@@ -849,7 +851,7 @@ EPromptoBuilder.prototype.exitAssign_tuple_statement = function(ctx) {
 
 EPromptoBuilder.prototype.exitRootInstance = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.VariableInstance(name));
+	this.setNodeValue(ctx, new instance.VariableInstance(name));
 };
 
 EPromptoBuilder.prototype.exitRoughlyEqualsExpression = function(ctx) {
@@ -869,7 +871,7 @@ EPromptoBuilder.prototype.exitChildInstance = function(ctx) {
 
 EPromptoBuilder.prototype.exitMemberInstance = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.MemberInstance(name));
+	this.setNodeValue(ctx, new instance.MemberInstance(name));
 };
 
 EPromptoBuilder.prototype.exitIsATypeExpression = function(ctx) {
@@ -899,7 +901,7 @@ EPromptoBuilder.prototype.exitIsNotExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitItemInstance = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.ItemInstance(exp));
+	this.setNodeValue(ctx, new instance.ItemInstance(exp));
 };
 
 EPromptoBuilder.prototype.exitConstructorExpression = function(ctx) {
@@ -1961,7 +1963,7 @@ EPromptoBuilder.prototype.exitCategory_symbol = function(ctx) {
 	if(arg!==null) {
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new grammar.CategorySymbol(name, args));
+	this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
 };
 
 
@@ -2101,21 +2103,21 @@ EPromptoBuilder.prototype.exitRaise_statement = function(ctx) {
 
 EPromptoBuilder.prototype.exitMatchingList = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new grammar.MatchingCollectionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingRange = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new grammar.MatchingCollectionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.MatchingExpressionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingPattern = function(ctx) {
-	this.setNodeValue(ctx, new grammar.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
+	this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
 };
 
 EPromptoBuilder.prototype.exitLiteralSetLiteral = function(ctx) {

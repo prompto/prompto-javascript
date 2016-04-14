@@ -1,7 +1,7 @@
 var UnresolvedIdentifier;
 
 exports.resolve = function() {
-    UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
+    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 }
 
 function SelectorExpression(parent) {

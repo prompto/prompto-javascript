@@ -1,7 +1,7 @@
 var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var UnresolvedIdentifier = null;
-var SymbolExpression = require("../expression/SymbolExpression").SymbolExpression;
-var TypeExpression = require("../expression/TypeExpression").TypeExpression;
+var SymbolExpression = require("./SymbolExpression").SymbolExpression;
+var TypeExpression = require("./TypeExpression").TypeExpression;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var CategoryType = null;
 var NullValue = require("../value/NullValue").NullValue;
@@ -9,7 +9,7 @@ var Value = require("../value/Value").Value;
 var Text = require("../value/Text").Text;
 
 exports.resolve = function() {
-    UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
+    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
     CategoryType = require("../type/CategoryType").CategoryType;
 }
 

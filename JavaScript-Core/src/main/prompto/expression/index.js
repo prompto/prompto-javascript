@@ -1,3 +1,4 @@
+exports.UnresolvedIdentifier = require('./UnresolvedIdentifier').UnresolvedIdentifier;
 exports.ItemSelector = require('./ItemSelector').ItemSelector;
 exports.SliceSelector = require('./SliceSelector').SliceSelector;
 exports.MemberSelector = require('./MemberSelector').MemberSelector;
@@ -34,6 +35,8 @@ exports.ReadExpression = require("./ReadExpression").ReadExpression;
 exports.TypeExpression = require("./TypeExpression").TypeExpression;
 exports.CastExpression = require("./CastExpression").CastExpression;
 exports.ThisExpression = require("./ThisExpression").ThisExpression;
+exports.NativeSymbol = require("./NativeSymbol").NativeSymbol;
+exports.CategorySymbol = require("./CategorySymbol").CategorySymbol;
 
 require('./MethodSelector').resolve();
 require('./MemberSelector').resolve();

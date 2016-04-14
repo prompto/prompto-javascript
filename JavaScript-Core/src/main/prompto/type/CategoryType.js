@@ -1,4 +1,4 @@
-var UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
+var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var Identifier = require("../grammar/Identifier").Identifier;
 var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;

@@ -262,7 +262,7 @@ exports.testMemberExpression = function (test) {
     var me = parser.parse_instance_expression();
     test.ok(me instanceof prompto.expression.MemberSelector);
     test.equal("name", me.name);
-    test.ok(me.parent instanceof prompto.grammar.UnresolvedIdentifier);
+    test.ok(me.parent instanceof prompto.expression.UnresolvedIdentifier);
     test.equal("p", me.parent.name);
     test.done();
 };
@@ -642,7 +642,7 @@ exports.testSimpleListLiteral = function (test) {
     test.equal("[john, 123]", literal.toString());
     test.ok(literal instanceof prompto.literal.ListLiteral);
     test.equal(2, literal.expressions.length);
-    test.ok(literal.expressions[0] instanceof prompto.grammar.UnresolvedIdentifier);
+    test.ok(literal.expressions[0] instanceof prompto.expression.UnresolvedIdentifier);
     test.ok(literal.expressions[1] instanceof prompto.literal.IntegerLiteral);
     test.done();
 };
@@ -765,7 +765,7 @@ exports.testNativeSymbol = function (test) {
     var parser = new ETestParser(statement, true);
     var symbol = parser.parse_native_symbol();
     test.ok(symbol);
-    test.ok(symbol instanceof prompto.grammar.NativeSymbol);
+    test.ok(symbol instanceof prompto.expression.NativeSymbol);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     symbol.toDialect(writer);
     test.equal(statement, writer.toString());

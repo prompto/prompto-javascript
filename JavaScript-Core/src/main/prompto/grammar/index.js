@@ -1,4 +1,3 @@
-exports.UnresolvedIdentifier = require('./UnresolvedIdentifier').UnresolvedIdentifier;
 exports.IdentifierList = require('./IdentifierList').IdentifierList;
 exports.Identifier = require('./Identifier').Identifier;
 exports.MethodDeclarationList = require("./MethodDeclarationList").MethodDeclarationList;
@@ -11,17 +10,9 @@ exports.OrderByClauseList = require("./OrderByClauseList").OrderByClauseList;
 exports.Operator = require("./Operator").Operator;
 exports.ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
 exports.ArgumentAssignmentList = require("./ArgumentAssignmentList").ArgumentAssignmentList;
-exports.VariableInstance = require("./VariableInstance").VariableInstance;
-exports.MemberInstance = require("./MemberInstance").MemberInstance;
-exports.ItemInstance = require("./ItemInstance").ItemInstance;
-exports.NativeSymbol = require("./NativeSymbol").NativeSymbol;
 exports.NativeSymbolList = require("./NativeSymbolList").NativeSymbolList;
-exports.CategorySymbol = require("./CategorySymbol").CategorySymbol;
 exports.CategorySymbolList = require("./CategorySymbolList").CategorySymbolList;
 exports.NativeCategoryBindingList = require("./NativeCategoryBindingList").NativeCategoryBindingList;
-exports.MatchingPatternConstraint = require("./MatchingPatternConstraint").MatchingPatternConstraint;
-exports.MatchingCollectionConstraint = require("./MatchingCollectionConstraint").MatchingCollectionConstraint;
-exports.MatchingExpressionConstraint = require("./MatchingExpressionConstraint").MatchingExpressionConstraint;
 
 require('./ArgumentAssignment').resolve();
-require('./UnresolvedIdentifier').resolve();
+require('./../expression/UnresolvedIdentifier').resolve();

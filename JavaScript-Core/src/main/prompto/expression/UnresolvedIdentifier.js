@@ -2,9 +2,9 @@ var MethodCall = require("../statement/MethodCall").MethodCall;
 var CategoryDeclaration = null;
 var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConstructorExpression = null;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-var SymbolExpression = require("../expression/SymbolExpression").SymbolExpression;
-var TypeExpression = require("../expression/TypeExpression").TypeExpression;
+var InstanceExpression = require("./InstanceExpression").InstanceExpression;
+var SymbolExpression = require("./SymbolExpression").SymbolExpression;
+var TypeExpression = require("./TypeExpression").TypeExpression;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Section = require("../parser/Section").Section;
@@ -13,9 +13,9 @@ var MethodSelector = null;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
-	MethodSelector = require("../expression/MethodSelector").MethodSelector;
+	MethodSelector = require("./MethodSelector").MethodSelector;
 	CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-	ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
+	ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
 }
 
 function UnresolvedIdentifier(id) {

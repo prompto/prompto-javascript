@@ -1,5 +1,5 @@
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
-var UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
+var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
 var BooleanType = require("../type/BooleanType").BooleanType;

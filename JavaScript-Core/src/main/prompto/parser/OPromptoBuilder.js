@@ -1,4 +1,6 @@
 var argument = require("../argument/index");
+var constraint = require("../constraint/index");
+var instance = require("../instance/index");
 var declaration = require("../declaration/index");
 var expression = require("../expression/index");
 var javascript = require("../javascript/index");
@@ -320,13 +322,13 @@ OPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
 OPromptoBuilder.prototype.exitNative_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.NativeSymbol(name, exp));
+	this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
 };
 
 
 OPromptoBuilder.prototype.exitTypeIdentifier = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 
@@ -622,7 +624,7 @@ OPromptoBuilder.prototype.exitMethodVariableIdentifier = function(ctx) {
 
 OPromptoBuilder.prototype.exitMethodName = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 
@@ -905,7 +907,7 @@ OPromptoBuilder.prototype.exitVariableListItem = function(ctx) {
 
 OPromptoBuilder.prototype.exitRootInstance = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.VariableInstance(name));
+	this.setNodeValue(ctx, new instance.VariableInstance(name));
 };
 
 OPromptoBuilder.prototype.exitRoughlyEqualsExpression = function(ctx) {
@@ -925,13 +927,13 @@ OPromptoBuilder.prototype.exitChildInstance = function(ctx) {
 
 OPromptoBuilder.prototype.exitMemberInstance = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.MemberInstance(name));
+	this.setNodeValue(ctx, new instance.MemberInstance(name));
 };
 
 
 OPromptoBuilder.prototype.exitItemInstance = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.ItemInstance(exp));
+	this.setNodeValue(ctx, new instance.ItemInstance(exp));
 };
 
 
@@ -1997,7 +1999,7 @@ OPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 OPromptoBuilder.prototype.exitCategory_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new grammar.CategorySymbol(name, args));
+	this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
 };
 
 
@@ -2137,21 +2139,21 @@ OPromptoBuilder.prototype.exitRaise_statement = function(ctx) {
 
 OPromptoBuilder.prototype.exitMatchingList = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new grammar.MatchingCollectionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 OPromptoBuilder.prototype.exitMatchingRange = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new grammar.MatchingCollectionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 OPromptoBuilder.prototype.exitMatchingExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.MatchingExpressionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
 };
 
 OPromptoBuilder.prototype.exitMatchingPattern = function(ctx) {
-	this.setNodeValue(ctx, new grammar.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
+	this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
 };
 
 OPromptoBuilder.prototype.exitLiteralSetLiteral = function(ctx) {

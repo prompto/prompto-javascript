@@ -1,4 +1,6 @@
 var argument = require("../argument/index");
+var constraint = require("../constraint/index");
+var instance = require("../instance/index");
 var declaration = require("../declaration/index");
 var expression = require("../expression/index");
 var javascript = require("../javascript/index");
@@ -267,7 +269,7 @@ SPromptoBuilder.prototype.exitLiteralExpression = function(ctx) {
 
 SPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 	var name = this.getNodeValue(ctx.exp);
-    var exp = new grammar.UnresolvedIdentifier(name);
+    var exp = new expression.UnresolvedIdentifier(name);
 	this.setNodeValue(ctx, exp);
 };
 
@@ -321,7 +323,7 @@ SPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
 SPromptoBuilder.prototype.exitNative_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.NativeSymbol(name, exp));
+	this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
 };
 
 
@@ -599,7 +601,7 @@ SPromptoBuilder.prototype.exitMethodVariableIdentifier = function(ctx) {
 
 SPromptoBuilder.prototype.exitMethodName = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 
@@ -649,7 +651,7 @@ SPromptoBuilder.prototype.exitMethod_call = function(ctx) {
 
 SPromptoBuilder.prototype.exitCallableRoot = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.UnresolvedIdentifier(name));
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 SPromptoBuilder.prototype.exitAddExpression = function(ctx) {
@@ -831,7 +833,7 @@ SPromptoBuilder.prototype.exitVariableListItem = function(ctx) {
 
 SPromptoBuilder.prototype.exitRootInstance = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.VariableInstance(name));
+	this.setNodeValue(ctx, new instance.VariableInstance(name));
 };
 
 SPromptoBuilder.prototype.exitRoughlyEqualsExpression = function(ctx) {
@@ -850,13 +852,13 @@ SPromptoBuilder.prototype.exitChildInstance = function(ctx) {
 
 SPromptoBuilder.prototype.exitMemberInstance = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new grammar.MemberInstance(name));
+	this.setNodeValue(ctx, new instance.MemberInstance(name));
 };
 
 
 SPromptoBuilder.prototype.exitItemInstance = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.ItemInstance(exp));
+	this.setNodeValue(ctx, new instance.ItemInstance(exp));
 };
 
 
@@ -1923,7 +1925,7 @@ SPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 SPromptoBuilder.prototype.exitCategory_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new grammar.CategorySymbol(name, args));
+	this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
 };
 
 
@@ -2062,21 +2064,21 @@ SPromptoBuilder.prototype.exitRaise_statement = function(ctx) {
 
 SPromptoBuilder.prototype.exitMatchingList = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new grammar.MatchingCollectionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 SPromptoBuilder.prototype.exitMatchingRange = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new grammar.MatchingCollectionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 SPromptoBuilder.prototype.exitMatchingExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new grammar.MatchingExpressionConstraint(exp));
+	this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
 };
 
 SPromptoBuilder.prototype.exitMatchingPattern = function(ctx) {
-	this.setNodeValue(ctx, new grammar.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
+	this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
 };
 
 SPromptoBuilder.prototype.exitLiteralSetLiteral = function(ctx) {

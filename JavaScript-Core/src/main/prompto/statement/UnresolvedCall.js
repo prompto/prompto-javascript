@@ -1,5 +1,5 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var UnresolvedIdentifier = require("../grammar/UnresolvedIdentifier").UnresolvedIdentifier;
+var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var MethodCall = require("./MethodCall").MethodCall;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
