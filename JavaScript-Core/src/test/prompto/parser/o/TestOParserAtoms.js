@@ -628,7 +628,7 @@ exports.testNativeSymbol = function(test) {
 	var parser = new OTestParser(statement);
 	var symbol = parser.parse_native_symbol();
 	test.ok(symbol);
-	test.ok(symbol instanceof prompto.grammar.NativeSymbol);
+	test.ok(symbol instanceof prompto.expression.NativeSymbol);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     symbol.expression.toDialect(writer);
 	test.equal( "\"1\"", writer.toString());
