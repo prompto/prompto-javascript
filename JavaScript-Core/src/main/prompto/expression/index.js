@@ -44,3 +44,4 @@ require('./MethodExpression').resolve();
 require("./InstanceExpression").resolve();
 require('./SelectorExpression').resolve();
 require('./ConstructorExpression').resolve();
+require('./UnresolvedIdentifier').resolve();
