@@ -4,6 +4,7 @@ var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
+var NativeCall = require("./NativeCall").NativeCall;
 var JavaScriptNativeCall = require("../javascript/JavaScriptNativeCall").JavaScriptNativeCall;
 
 function StatementList(statement) {
@@ -113,7 +114,7 @@ StatementList.prototype.toDialect = function(writer) {
         var stmt = this[i];
         stmt.toDialect(writer);
         if(stmt instanceof SimpleStatement) {
-            if(writer.dialect==Dialect.O)
+            if(writer.dialect==Dialect.O && !(stmt instanceof NativeCall))
                 writer.append(';');
             writer.newLine();
         }

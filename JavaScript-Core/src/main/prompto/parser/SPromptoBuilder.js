@@ -112,12 +112,12 @@ SPromptoBuilder.prototype.exitBlobExpression = function(ctx) {
 
 SPromptoBuilder.prototype.exitBlob_expression = function(ctx) {
     var exp = this.getNodeValue(ctx.expression());
-    this.setNodeValue(ctx, BlobExpression(exp));
+    this.setNodeValue(ctx, new expression.BlobExpression(exp));
 };
 
 
 SPromptoBuilder.prototype.exitBlobType = function(ctx) {
-    this.setNodeValue(ctx, BlobType.instance);
+    this.setNodeValue(ctx, type.BlobType.instance);
 };
 
 

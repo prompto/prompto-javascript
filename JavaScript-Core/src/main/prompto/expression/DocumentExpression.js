@@ -1,3 +1,4 @@
+var Section = require("../parser/Section").Section;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var Document = require("../value/Document").Document;
 var Blob = require("../value/Blob").Blob;
@@ -6,10 +7,13 @@ var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
 
 function DocumentExpression(source) {
+    Section.call(this);
     this.source = source;
 	return this;
 }
 
+DocumentExpression.prototype  = Object.create(Section.prototype);
+DocumentExpression.prototype.constructor = DocumentExpression;
 
 DocumentExpression.prototype.check = function(context) {
 	return DocumentType.instance;
@@ -77,6 +81,10 @@ DocumentExpression.prototype.readValue = function(parts) {
         throw new Error("Expecting a 'value' part!");
     var json = utf8BufferToString(data);
     return JSON.parse(json);
+};
+
+DocumentExpression.prototype.toDialect = function(writer) {
+    writer.toDialect(this);
 };
 
 DocumentExpression.prototype.toEDialect = function(writer) {

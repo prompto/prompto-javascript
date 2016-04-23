@@ -56,6 +56,11 @@ BlobExpression.zipDatas = function(datas) {
     });
 };
 
+BlobExpression.prototype.toDialect = function(writer) {
+    writer.toDialect(this);
+};
+
+
 BlobExpression.prototype.toEDialect = function(writer) {
     writer.append("Blob from ");
     this.source.toDialect(writer);
