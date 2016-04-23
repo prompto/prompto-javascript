@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+exports.testBlob = function(test) {
+	compareResourceEOE(test, "documents/blob.pec");
+};
+
 exports.testDeepItem = function(test) {
 	compareResourceEOE(test, "documents/deepItem.pec");
 };

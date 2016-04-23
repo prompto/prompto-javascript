@@ -43,5 +43,13 @@ ECleverParser.prototype.parse_declaration_list = function() {
 	return builder.getNodeValue(tree);
 };
 
+ECleverParser.prototype.parse_standalone_type = function() {
+    this.getTokenStream().tokenSource.addLF = false;
+    var tree = this.category_or_any_type();
+    var builder = new EPromptoBuilder(this);
+    var walker = new antlr4.tree.ParseTreeWalker();
+    walker.walk(builder, tree);
+    return builder.getNodeValue(tree);
+};
 
 exports.ECleverParser = ECleverParser;

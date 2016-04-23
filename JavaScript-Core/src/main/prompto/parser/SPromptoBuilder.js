@@ -104,6 +104,23 @@ SPromptoBuilder.prototype.exitListLiteral = function(ctx) {
 };
 
 
+SPromptoBuilder.prototype.exitBlobExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+
+SPromptoBuilder.prototype.exitBlob_expression = function(ctx) {
+    var exp = this.getNodeValue(ctx.expression());
+    this.setNodeValue(ctx, BlobExpression(exp));
+};
+
+
+SPromptoBuilder.prototype.exitBlobType = function(ctx) {
+    this.setNodeValue(ctx, BlobType.instance);
+};
+
+
 SPromptoBuilder.prototype.exitBooleanLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.t.text));
 };
@@ -1861,7 +1878,8 @@ SPromptoBuilder.prototype.exitDocumentExpression = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
-	this.setNodeValue(ctx, new expression.DocumentExpression());
+    var exp = this.getNodeValue(ctx.expression());
+    this.setNodeValue(ctx, new expression.DocumentExpression(exp));
 };
 
 

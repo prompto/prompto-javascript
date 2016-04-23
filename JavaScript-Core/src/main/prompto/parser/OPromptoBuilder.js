@@ -104,6 +104,23 @@ OPromptoBuilder.prototype.exitListLiteral = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitBlobExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+
+OPromptoBuilder.prototype.exitBlob_expression = function(ctx) {
+    var exp = this.getNodeValue(ctx.expression());
+    this.setNodeValue(ctx, BlobExpression(exp));
+};
+
+
+OPromptoBuilder.prototype.exitBlobType = function(ctx) {
+    this.setNodeValue(ctx, BlobType.instance);
+};
+
+
 OPromptoBuilder.prototype.exitBooleanLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.t.text));
 };
@@ -1935,7 +1952,8 @@ OPromptoBuilder.prototype.exitDocumentExpression = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
-	this.setNodeValue(ctx, new expression.DocumentExpression());
+    var exp = this.getNodeValue(ctx.expression());
+    this.setNodeValue(ctx, new expression.DocumentExpression(exp));
 };
 
 

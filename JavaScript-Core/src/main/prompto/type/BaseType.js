@@ -134,19 +134,15 @@ BaseType.prototype.checkNot = function(context) {
 	throw new SyntaxError("Cannot logically negate " + this.name);
 };
 
-/*
-
-
- public Range<?> newRange(Object left, Object right) {
-	throw new SyntaxError("Cannot create range of " + this.name);
+BaseType.prototype.getMember = function(context, name) {
+    throw new SyntaxError("Cannot read member from " + this.name);
 };
 
 
-public String toString(Object value) {
-	return value.toString();
+BaseType.prototype.readJSONValue = function(context, node, parts) {
+    throw new Error("Unsupported!")
 };
 
-*/
 
 BaseType.prototype.sort = function(context, list, cmp) {
 	// only sort if required
@@ -167,10 +163,6 @@ BaseType.prototype.sort = function(context, list, cmp) {
 
 BaseType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	return value; // TODO for now
-};
-
-BaseType.prototype.getMember = function(context, name) {
-	throw new SyntaxError("Cannot read member from " + this.name);
 };
 
 BaseType.prototype.toDialect = function(writer) {

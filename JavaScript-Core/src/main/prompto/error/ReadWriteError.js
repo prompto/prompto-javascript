@@ -1,7 +1,7 @@
 var ExecutionError = require("./ExecutionError").ExecutionError;
 
-function ReadWriteError() {
-    ExecutionError.call(this);
+function ReadWriteError(message) {
+    ExecutionError.call(this, message);
     return this;
 }
 

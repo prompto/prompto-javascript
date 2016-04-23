@@ -758,6 +758,15 @@ EParserListener.prototype.exitSortedExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#BlobExpression.
+EParserListener.prototype.enterBlobExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#BlobExpression.
+EParserListener.prototype.exitBlobExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#NotContainsAnyExpression.
 EParserListener.prototype.enterNotContainsAnyExpression = function(ctx) {
 };
@@ -1061,6 +1070,15 @@ EParserListener.prototype.enterDocument_expression = function(ctx) {
 
 // Exit a parse tree produced by EParser#document_expression.
 EParserListener.prototype.exitDocument_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#blob_expression.
+EParserListener.prototype.enterBlob_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#blob_expression.
+EParserListener.prototype.exitBlob_expression = function(ctx) {
 };
 
 

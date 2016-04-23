@@ -938,6 +938,15 @@ SParserListener.prototype.exitSelectableExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#BlobExpression.
+SParserListener.prototype.enterBlobExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#BlobExpression.
+SParserListener.prototype.exitBlobExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#DocumentExpression.
 SParserListener.prototype.enterDocumentExpression = function(ctx) {
 };
@@ -1016,6 +1025,15 @@ SParserListener.prototype.enterItemSelector = function(ctx) {
 
 // Exit a parse tree produced by SParser#ItemSelector.
 SParserListener.prototype.exitItemSelector = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#blob_expression.
+SParserListener.prototype.enterBlob_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#blob_expression.
+SParserListener.prototype.exitBlob_expression = function(ctx) {
 };
 
 

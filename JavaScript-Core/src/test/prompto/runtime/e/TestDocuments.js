@@ -13,6 +13,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testBlob = function(test) {
+	checkOutput(test, "documents/blob.pec");
+};
+
+/*
 exports.testDeepItem = function(test) {
 	checkOutput(test, "documents/deepItem.pec");
 };
@@ -29,3 +34,4 @@ exports.testVariable = function(test) {
 	checkOutput(test, "documents/variable.pec");
 };
 
+*/

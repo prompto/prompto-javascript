@@ -1019,6 +1019,15 @@ OParserListener.prototype.exitSelectableExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#BlobExpression.
+OParserListener.prototype.enterBlobExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#BlobExpression.
+OParserListener.prototype.exitBlobExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#DocumentExpression.
 OParserListener.prototype.enterDocumentExpression = function(ctx) {
 };
@@ -1070,6 +1079,15 @@ OParserListener.prototype.enterConstructorExpression = function(ctx) {
 
 // Exit a parse tree produced by OParser#ConstructorExpression.
 OParserListener.prototype.exitConstructorExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#blob_expression.
+OParserListener.prototype.enterBlob_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#blob_expression.
+OParserListener.prototype.exitBlob_expression = function(ctx) {
 };
 
 

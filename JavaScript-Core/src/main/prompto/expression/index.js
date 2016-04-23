@@ -25,6 +25,7 @@ exports.FetchExpression = require('./FetchExpression').FetchExpression;
 exports.CodeExpression = require('./CodeExpression').CodeExpression;
 exports.ExecuteExpression = require('./ExecuteExpression').ExecuteExpression;
 exports.InstanceExpression = require('./InstanceExpression').InstanceExpression;
+exports.BlobExpression = require('./BlobExpression').BlobExpression;
 exports.DocumentExpression = require('./DocumentExpression').DocumentExpression;
 exports.ConstructorExpression = require('./ConstructorExpression').ConstructorExpression;
 exports.ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;

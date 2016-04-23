@@ -169,16 +169,12 @@ Text.prototype.Roughly = function(context, obj) {
     }
 };
 
-
-/*
-
-@Override
-public int hashCode() {
-	return value.hashCode();
-}
-}
-
-*/
+Text.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
+    if(Array.isArray(json))
+        json.push(this.value);
+    else
+        json[fieldName] = this.value;
+};
 
 exports.Text = Text;
 

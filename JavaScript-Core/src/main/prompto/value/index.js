@@ -1,6 +1,8 @@
 exports.Value = require('./Value').Value;
 exports.Any = require('./Any').Any;
 exports.Bool = require('./Bool').Bool;
+exports.Blob = require('./Blob').Blob;
+exports.Image = require('./Image').Image;
 exports.Integer = require('./Integer').Integer;
 exports.Decimal = require('./Decimal').Decimal;
 exports.Character = require('./Character').Character;

@@ -119,13 +119,6 @@ Integer.prototype.CompareTo = function(context, value) {
 	}
 };
 
-/*
-@Override
-public Object ConvertTo(Class<?> type) {
-	return value;
-}
-
-*/
 
 Integer.prototype.equals = function(obj) {
 	if (obj instanceof Integer) {
@@ -135,6 +128,13 @@ Integer.prototype.equals = function(obj) {
 	} else {
 		return false;
 	}
+};
+
+Integer.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
+    if(Array.isArray(json))
+        json.push(this.value);
+    else
+        json[fieldName] = this.value;
 };
 
 exports.Integer = Integer;
