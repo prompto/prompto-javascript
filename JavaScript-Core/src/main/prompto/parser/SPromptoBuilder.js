@@ -2421,7 +2421,7 @@ SPromptoBuilder.prototype.findFirstValidToken = function(idx) {
 		if(token!==null) {
 			return token;
 		};
-	} while(idx<this.input.size());
+	} while(idx<this.input.tokenSource.size);
 	return null;
 };
 
