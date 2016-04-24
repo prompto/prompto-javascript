@@ -6,6 +6,7 @@ var ConcreteCategoryDeclaration = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
+var NullType = require("./NullType").NullType;
 var AnyType = require("./AnyType").AnyType;
 var MissingType = require("./MissingType").MissingType;
 var PromptoError = require("../error/PromptoError").PromptoError;
@@ -175,7 +176,7 @@ CategoryType.prototype.checkMember = function(context, name) {
 CategoryType.prototype.isAssignableTo = function(context, other) {
 	if(this.name==other.name) {
 		return true;
-	} else if(other instanceof AnyType || other instanceof MissingType) {
+	} else if(other instanceof NullType || other instanceof AnyType || other instanceof MissingType) {
 		return true;
 	} else if(!(other instanceof CategoryType)) {
 		return false;
@@ -249,6 +250,8 @@ CategoryType.prototype.isAssignableToAnonymousCategoryDeclaration = function(con
 };
 
 CategoryType.prototype.isMoreSpecificThan = function(context, other) {
+    if(other instanceof NullType || other instanceof AnyType || other instanceof MissingType)
+        return true;
 	if(!(other instanceof CategoryType)) {
 		return false;
 	}

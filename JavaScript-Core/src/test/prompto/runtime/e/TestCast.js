@@ -25,6 +25,10 @@ exports.testCastMissing = function(test) {
 	checkOutput(test, "cast/castMissing.pec");
 };
 
+exports.testCastNull = function(test) {
+	checkOutput(test, "cast/castNull.pec");
+};
+
 exports.testIsAChild = function(test) {
 	checkOutput(test, "cast/isAChild.pec");
 };

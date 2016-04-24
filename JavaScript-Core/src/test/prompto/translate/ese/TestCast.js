@@ -14,6 +14,10 @@ exports.testCastMissing = function(test) {
 	compareResourceESE(test, "cast/castMissing.pec");
 };
 
+exports.testCastNull = function(test) {
+	compareResourceESE(test, "cast/castNull.pec");
+};
+
 exports.testIsAChild = function(test) {
 	compareResourceESE(test, "cast/isAChild.pec");
 };

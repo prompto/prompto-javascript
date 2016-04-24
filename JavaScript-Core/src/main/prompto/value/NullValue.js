@@ -1,7 +1,8 @@
 var Value = require("./Value").Value;
+var NullType = require("../type/NullType").NullType;
 
 function NullValue() {
-    Value.call(this, null);
+    Value.call(this, NullType.instance);
     return this;
 }
 

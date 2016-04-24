@@ -1,4 +1,3 @@
-var ContainerType = require("../type/ContainerType").ContainerType;
 
 function CastExpression(expression, type) {
     this.expression = expression;
@@ -15,8 +14,8 @@ CastExpression.prototype.check = function(context) {
 
 CastExpression.prototype.interpret = function(context) {
     var value = this.expression.interpret(context);
-    if(value && this.type instanceof ContainerType && value.type instanceof ContainerType)
-        value.type.itemType = this.type.itemType;
+    if(value && this.type.isMoreSpecificThan(context, value.type))
+        value.type = this.type;
     return value;
 };
 
