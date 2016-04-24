@@ -10,6 +10,10 @@ exports.testCastChild = function(test) {
 	compareResourceEOE(test, "cast/castChild.pec");
 };
 
+exports.testCastMissing = function(test) {
+	compareResourceEOE(test, "cast/castMissing.pec");
+};
+
 exports.testIsAChild = function(test) {
 	compareResourceEOE(test, "cast/isAChild.pec");
 };

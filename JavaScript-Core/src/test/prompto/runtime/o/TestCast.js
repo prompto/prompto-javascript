@@ -21,6 +21,10 @@ exports.testCastChild = function(test) {
 	checkOutput(test, "cast/castChild.poc");
 };
 
+exports.testCastMissing = function(test) {
+	checkOutput(test, "cast/castMissing.poc");
+};
+
 exports.testIsAChild = function(test) {
 	checkOutput(test, "cast/isAChild.poc");
 };

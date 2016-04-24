@@ -10,6 +10,10 @@ exports.testCastChild = function(test) {
 	compareResourceOSO(test, "cast/castChild.poc");
 };
 
+exports.testCastMissing = function(test) {
+	compareResourceOSO(test, "cast/castMissing.poc");
+};
+
 exports.testIsAChild = function(test) {
 	compareResourceOSO(test, "cast/isAChild.poc");
 };

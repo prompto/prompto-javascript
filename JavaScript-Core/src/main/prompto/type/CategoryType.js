@@ -7,6 +7,7 @@ var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
 var AnyType = require("./AnyType").AnyType;
+var MissingType = require("./MissingType").MissingType;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
@@ -174,7 +175,7 @@ CategoryType.prototype.checkMember = function(context, name) {
 CategoryType.prototype.isAssignableTo = function(context, other) {
 	if(this.name==other.name) {
 		return true;
-	} else if(other instanceof AnyType) {
+	} else if(other instanceof AnyType || other instanceof MissingType) {
 		return true;
 	} else if(!(other instanceof CategoryType)) {
 		return false;

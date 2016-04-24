@@ -68,6 +68,13 @@ ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
     this.collectProblem(problem);
 };
 
+ProblemCollector.prototype.reportInvalidCast = function(expression, target, actual) {
+    var problem = this.readSection(expression);
+    problem.type = "error";
+    problem.message = "Cannot cast " + actual.toString() + " to " + target.toString();
+    this.collectProblem(problem);
+};
+
 ProblemCollector.prototype.readSection = function(section) {
     /*if(!section.end)
         return null;*/

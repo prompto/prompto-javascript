@@ -1,3 +1,5 @@
+var ContainerType = require("../type/ContainerType").ContainerType;
+
 function CastExpression(expression, type) {
     this.expression = expression;
     this.type = type;
@@ -7,13 +9,15 @@ function CastExpression(expression, type) {
 CastExpression.prototype.check = function(context) {
     var actual = this.expression.check(context);
     if(!this.type.isAssignableTo(context, actual))
-        context.problemListener.reportInvalidCast();
-    //    throw new SyntaxError("Cannot cast " + actual.toString() + " to " + type.toString());
+        context.problemListener.reportInvalidCast(this, this.type, actual);
     return this.type;
 };
 
 CastExpression.prototype.interpret = function(context) {
-    return this.expression.interpret(context);
+    var value = this.expression.interpret(context);
+    if(value && this.type instanceof ContainerType && value.type instanceof ContainerType)
+        value.type.itemType = this.type.itemType;
+    return value;
 };
 
 CastExpression.prototype.toDialect = function(writer) {

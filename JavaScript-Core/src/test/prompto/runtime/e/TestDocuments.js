@@ -17,7 +17,6 @@ exports.testBlob = function(test) {
 	checkOutput(test, "documents/blob.pec");
 };
 
-
 exports.testDeepItem = function(test) {
 	checkOutput(test, "documents/deepItem.pec");
 };

@@ -49,5 +49,9 @@ ProblemListener.prototype.reportNotAResourceContext = function(method) {
     throw new SyntaxError("Not a resource context");
 };
 
+ProblemListener.prototype.reportInvalidCast = function(expression, target, actual) {
+    throw new SyntaxError("Cannot cast " + actual.toString() + " to " + target.toString());
+};
+
 
 exports.ProblemListener = ProblemListener;
