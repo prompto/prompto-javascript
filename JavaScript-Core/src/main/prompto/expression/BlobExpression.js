@@ -36,7 +36,7 @@ BlobExpression.collectDatas = function(context, value) {
     value.toJson(context, values, null, "value", binaries);
     var json = JSON.stringify(values["value"]);
     // add it
-    binaries["value"] = stringToUtf8Buffer(json);
+    binaries["value.json"] = stringToUtf8Buffer(json);
     return binaries;
 };
 

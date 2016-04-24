@@ -76,9 +76,9 @@ DocumentExpression.prototype.readParts = function(data) {
 
 
 DocumentExpression.prototype.readValue = function(parts) {
-    var data = parts["value"] || null;
+    var data = parts["value.json"] || null;
     if (data == null)
-        throw new Error("Expecting a 'value' part!");
+        throw new Error("Expecting a 'value.json' part!");
     var json = utf8BufferToString(data);
     return JSON.parse(json);
 };
