@@ -200,24 +200,6 @@ OParserListener.prototype.exitNativeCategoryBindingList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#AttributeList.
-OParserListener.prototype.enterAttributeList = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#AttributeList.
-OParserListener.prototype.exitAttributeList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#AttributeListItem.
-OParserListener.prototype.enterAttributeListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#AttributeListItem.
-OParserListener.prototype.exitAttributeListItem = function(ctx) {
-};
-
-
 // Enter a parse tree produced by OParser#abstract_method_declaration.
 OParserListener.prototype.enterAbstract_method_declaration = function(ctx) {
 };
@@ -1784,6 +1766,15 @@ OParserListener.prototype.exitVariable_identifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#attribute_identifier.
+OParserListener.prototype.enterAttribute_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#attribute_identifier.
+OParserListener.prototype.exitAttribute_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#type_identifier.
 OParserListener.prototype.enterType_identifier = function(ctx) {
 };
@@ -2063,21 +2054,21 @@ OParserListener.prototype.exitJavascript_module = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#VariableList.
-OParserListener.prototype.enterVariableList = function(ctx) {
+// Enter a parse tree produced by OParser#variable_identifier_list.
+OParserListener.prototype.enterVariable_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#VariableList.
-OParserListener.prototype.exitVariableList = function(ctx) {
+// Exit a parse tree produced by OParser#variable_identifier_list.
+OParserListener.prototype.exitVariable_identifier_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#VariableListItem.
-OParserListener.prototype.enterVariableListItem = function(ctx) {
+// Enter a parse tree produced by OParser#attribute_identifier_list.
+OParserListener.prototype.enterAttribute_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#VariableListItem.
-OParserListener.prototype.exitVariableListItem = function(ctx) {
+// Exit a parse tree produced by OParser#attribute_identifier_list.
+OParserListener.prototype.exitAttribute_identifier_list = function(ctx) {
 };
 
 

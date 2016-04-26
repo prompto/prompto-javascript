@@ -20,6 +20,7 @@ function SPromptoBuilder(pparser) {
 	this.input = pparser.getTokenStream();
 	this.path = pparser.path;
 	this.nodeValues = {};
+    this.nextNodeId = 0;
 	return this;
 };
 
@@ -27,17 +28,22 @@ SPromptoBuilder.prototype = Object.create(parser.SParserListener.prototype);
 SPromptoBuilder.prototype.constructor = SPromptoBuilder;
 
 
-SPromptoBuilder.prototype.getNodeValue = function(node) {
-	return this.nodeValues[node];
-};
-
 SPromptoBuilder.prototype.setNodeValue = function(node, value) {
-	this.nodeValues[node] = value;
-	if(value instanceof parser.Section) {
-		this.buildSection(node, value);
-	};
+    if(node["%id"]===undefined)
+        node["%id"] = this.nextNodeId++;
+    this.nodeValues[node["%id"]] = value;
+    if(value instanceof parser.Section) {
+        this.buildSection(node, value);
+    };
 };
 
+
+SPromptoBuilder.prototype.getNodeValue = function(node) {
+    if(node==null || node===undefined || node["%id"]===null || node["%id"]===undefined)
+        return null;
+    else
+        return this.nodeValues[node["%id"]];
+};
 
 
 SPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
@@ -200,6 +206,12 @@ SPromptoBuilder.prototype.exitTimeLiteral = function(ctx) {
 
 SPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.t.text));
+};
+
+
+SPromptoBuilder.prototype.exitAttribute_identifier = function(ctx) {
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 
@@ -433,12 +445,6 @@ SPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
     this.setNodeValue(ctx, decl);
 };
 
-SPromptoBuilder.prototype.exitAttribute_list = function(ctx) {
-    var items = this.getNodeValue(ctx.items);
-    this.setNodeValue(ctx, items);
-};
-
-
 SPromptoBuilder.prototype.exitNativeType = function(ctx) {
 	var type = this.getNodeValue(ctx.n);
 	this.setNodeValue(ctx, type);
@@ -467,6 +473,29 @@ SPromptoBuilder.prototype.exitListType = function(ctx) {
 SPromptoBuilder.prototype.exitDictType = function(ctx) {
 	var typ = this.getNodeValue(ctx.d);
 	this.setNodeValue(ctx, new type.DictType(typ));
+};
+
+
+SPromptoBuilder.prototype.exitAttribute_identifier_list = function(ctx) {
+    var list = new grammar.IdentifierList();
+    var items = ctx.attribute_identifier();
+    for(var i=0;i<items.length;i++) {
+        var item = this.getNodeValue(items[i]);
+        list.add(item);
+    }
+    this.setNodeValue(ctx, list);
+};
+
+
+
+SPromptoBuilder.prototype.exitVariable_identifier_list = function(ctx) {
+    var list = new grammar.IdentifierList();
+    var items = ctx.variable_identifier();
+    for(var i=0;i<items.length;i++) {
+        var item = this.getNodeValue(items[i]);
+        list.add(item);
+    }
+    this.setNodeValue(ctx, list);
 };
 
 
@@ -831,20 +860,6 @@ SPromptoBuilder.prototype.exitAssign_tuple_statement = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, new statement.AssignTupleStatement(items, exp));
-};
-
-
-SPromptoBuilder.prototype.exitVariableList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	this.setNodeValue(ctx, new grammar.IdentifierList(item));
-};
-
-
-SPromptoBuilder.prototype.exitVariableListItem = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = this.getNodeValue(ctx.items);
-	items.add(item);
-	this.setNodeValue(ctx, items);
 };
 
 

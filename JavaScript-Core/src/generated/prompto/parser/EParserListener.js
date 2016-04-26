@@ -1802,6 +1802,15 @@ EParserListener.prototype.exitVariable_identifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#attribute_identifier.
+EParserListener.prototype.enterAttribute_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#attribute_identifier.
+EParserListener.prototype.exitAttribute_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#type_identifier.
 EParserListener.prototype.enterType_identifier = function(ctx) {
 };
@@ -2081,21 +2090,21 @@ EParserListener.prototype.exitJavascript_module = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#VariableList.
-EParserListener.prototype.enterVariableList = function(ctx) {
+// Enter a parse tree produced by EParser#variable_identifier_list.
+EParserListener.prototype.enterVariable_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#VariableList.
-EParserListener.prototype.exitVariableList = function(ctx) {
+// Exit a parse tree produced by EParser#variable_identifier_list.
+EParserListener.prototype.exitVariable_identifier_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#VariableListItem.
-EParserListener.prototype.enterVariableListItem = function(ctx) {
+// Enter a parse tree produced by EParser#attribute_identifier_list.
+EParserListener.prototype.enterAttribute_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#VariableListItem.
-EParserListener.prototype.exitVariableListItem = function(ctx) {
+// Exit a parse tree produced by EParser#attribute_identifier_list.
+EParserListener.prototype.exitAttribute_identifier_list = function(ctx) {
 };
 
 

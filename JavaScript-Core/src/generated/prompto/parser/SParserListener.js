@@ -173,15 +173,6 @@ SParserListener.prototype.exitNativeCategoryBindingList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#attribute_list.
-SParserListener.prototype.enterAttribute_list = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#attribute_list.
-SParserListener.prototype.exitAttribute_list = function(ctx) {
-};
-
-
 // Enter a parse tree produced by SParser#abstract_method_declaration.
 SParserListener.prototype.enterAbstract_method_declaration = function(ctx) {
 };
@@ -1739,6 +1730,15 @@ SParserListener.prototype.exitVariable_identifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#attribute_identifier.
+SParserListener.prototype.enterAttribute_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#attribute_identifier.
+SParserListener.prototype.exitAttribute_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#type_identifier.
 SParserListener.prototype.enterType_identifier = function(ctx) {
 };
@@ -2018,21 +2018,21 @@ SParserListener.prototype.exitJavascript_module = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#VariableList.
-SParserListener.prototype.enterVariableList = function(ctx) {
+// Enter a parse tree produced by SParser#variable_identifier_list.
+SParserListener.prototype.enterVariable_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#VariableList.
-SParserListener.prototype.exitVariableList = function(ctx) {
+// Exit a parse tree produced by SParser#variable_identifier_list.
+SParserListener.prototype.exitVariable_identifier_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#VariableListItem.
-SParserListener.prototype.enterVariableListItem = function(ctx) {
+// Enter a parse tree produced by SParser#attribute_identifier_list.
+SParserListener.prototype.enterAttribute_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#VariableListItem.
-SParserListener.prototype.exitVariableListItem = function(ctx) {
+// Exit a parse tree produced by SParser#attribute_identifier_list.
+SParserListener.prototype.exitAttribute_identifier_list = function(ctx) {
 };
 
 

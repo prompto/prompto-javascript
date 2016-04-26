@@ -20,6 +20,7 @@ function EPromptoBuilder(eparser) {
 	this.input = eparser.getTokenStream();
 	this.path = eparser.path;
 	this.nodeValues = {};
+    this.nextNodeId = 0;
 	return this;
 }
 
@@ -27,17 +28,22 @@ EPromptoBuilder.prototype = Object.create(parser.EParserListener.prototype);
 EPromptoBuilder.prototype.constructor = EPromptoBuilder;
 
  
-EPromptoBuilder.prototype.getNodeValue = function(node) {
-	return this.nodeValues[node];
-};
-	
 EPromptoBuilder.prototype.setNodeValue = function(node, value) {
-	this.nodeValues[node] = value;
+    if(node["%id"]===undefined)
+        node["%id"] = this.nextNodeId++;
+	this.nodeValues[node["%id"]] = value;
 	if(value instanceof parser.Section) {
 		this.buildSection(node, value);
 	}
 };
-	
+
+EPromptoBuilder.prototype.getNodeValue = function(node) {
+    if(node==null || node===undefined || node["%id"]===null || node["%id"]===undefined)
+        return null;
+    else
+        return this.nodeValues[node["%id"]];
+};
+
 
 EPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
@@ -201,6 +207,11 @@ EPromptoBuilder.prototype.exitTimeLiteral = function(ctx) {
 
 EPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.t.text));
+};
+
+EPromptoBuilder.prototype.exitAttribute_identifier = function(ctx) {
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
 };
 
 EPromptoBuilder.prototype.exitVariable_identifier = function(ctx) {
@@ -424,32 +435,42 @@ EPromptoBuilder.prototype.exitDictType = function(ctx) {
 	this.setNodeValue(ctx, new type.DictType(typ));
 };
 
-
 EPromptoBuilder.prototype.exitAttributeList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	this.setNodeValue(ctx, new grammar.IdentifierList(item));
+    var item = this.getNodeValue(ctx.item);
+    this.setNodeValue(ctx, new grammar.IdentifierList(item));
 };
 
 
 EPromptoBuilder.prototype.exitAttributeListItem = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	var item = this.getNodeValue(ctx.item);
-	items.add(item);
-	this.setNodeValue(ctx, items);
-};
-
-EPromptoBuilder.prototype.exitVariableList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	this.setNodeValue(ctx, new grammar.IdentifierList(item));
+    var items = this.getNodeValue(ctx.items);
+    var item = this.getNodeValue(ctx.item);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 
-EPromptoBuilder.prototype.exitVariableListItem = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	var item = this.getNodeValue(ctx.item);
-	items.add(item);
-	this.setNodeValue(ctx, items);
+EPromptoBuilder.prototype.exitAttribute_identifier_list = function(ctx) {
+    var list = new grammar.IdentifierList();
+    var items = ctx.attribute_identifier();
+    for(var i=0;i<items.length;i++) {
+        var item = this.getNodeValue(items[i]);
+        list.add(item);
+    }
+    this.setNodeValue(ctx, list);
 };
+
+
+EPromptoBuilder.prototype.exitVariable_identifier_list = function(ctx) {
+    var list = new grammar.IdentifierList();
+    var items = ctx.variable_identifier();
+    for(var i=0;i<items.length;i++) {
+        var item = this.getNodeValue(items[i]);
+        list.add(item);
+    }
+	this.setNodeValue(ctx, list);
+};
+
+
 
 
 EPromptoBuilder.prototype.exitConcrete_category_declaration = function(ctx) {
