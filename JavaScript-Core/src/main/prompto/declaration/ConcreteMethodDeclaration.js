@@ -119,7 +119,7 @@ ConcreteMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append(this.name);
     writer.append(" as method ");
     this.args.toDialect(writer);
-    if(this.returnType!=null && this.returnType!=VoidType.instance()) {
+    if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
         writer.append(" ");
@@ -131,7 +131,7 @@ ConcreteMethodDeclaration.prototype.toEDialect = function(writer) {
 };
 
 ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
-    if(this.returnType!=null && this.returnType!=VoidType.instance()) {
+    if(this.returnType!=null && this.returnType!=VoidType.instance) {
         this.returnType.toDialect(writer);
         writer.append(" ");
     }

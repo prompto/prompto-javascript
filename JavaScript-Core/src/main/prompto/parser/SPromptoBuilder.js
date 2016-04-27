@@ -1235,6 +1235,12 @@ SPromptoBuilder.prototype.exitIteratorExpression = function(ctx) {
 };
 
 
+SPromptoBuilder.prototype.exitIteratorType = function(ctx) {
+    var typ = this.getNodeValue(ctx.i);
+    this.setNodeValue(ctx, new type.IteratorType(typ));
+};
+
+
 SPromptoBuilder.prototype.exitJavaBooleanLiteral = function(ctx) {
 	this.setNodeValue(ctx, new java.JavaBooleanLiteral(ctx.getText()));
 };

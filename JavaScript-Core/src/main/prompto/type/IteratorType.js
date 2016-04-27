@@ -1,8 +1,9 @@
 var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function IteratorType(itemType) {
-    IterableType.call(this, "Iterator<" + itemType.name + ">", itemType);
+    IterableType.call(this, new Identifier("Iterator<" + itemType.name + ">"), itemType);
     return this;
 }
 

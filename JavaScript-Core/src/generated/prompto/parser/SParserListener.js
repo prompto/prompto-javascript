@@ -1424,6 +1424,15 @@ SParserListener.prototype.exitRange_literal = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#IteratorType.
+SParserListener.prototype.enterIteratorType = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#IteratorType.
+SParserListener.prototype.exitIteratorType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#SetType.
 SParserListener.prototype.enterSetType = function(ctx) {
 };
@@ -1448,6 +1457,15 @@ SParserListener.prototype.enterDictType = function(ctx) {
 
 // Exit a parse tree produced by SParser#DictType.
 SParserListener.prototype.exitDictType = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#CursorType.
+SParserListener.prototype.enterCursorType = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#CursorType.
+SParserListener.prototype.exitCursorType = function(ctx) {
 };
 
 

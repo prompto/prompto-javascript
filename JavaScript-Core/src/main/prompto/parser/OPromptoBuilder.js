@@ -1302,6 +1302,12 @@ OPromptoBuilder.prototype.exitIteratorExpression = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitIteratorType = function(ctx) {
+    var typ = this.getNodeValue(ctx.i);
+    this.setNodeValue(ctx, new type.IteratorType(typ));
+};
+
+
 OPromptoBuilder.prototype.exitJavaBooleanLiteral = function(ctx) {
 	this.setNodeValue(ctx, new java.JavaBooleanLiteral(ctx.getText()));
 };

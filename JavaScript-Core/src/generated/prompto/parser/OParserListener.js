@@ -1460,6 +1460,15 @@ OParserListener.prototype.exitRange_literal = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#IteratorType.
+OParserListener.prototype.enterIteratorType = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#IteratorType.
+OParserListener.prototype.exitIteratorType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#SetType.
 OParserListener.prototype.enterSetType = function(ctx) {
 };
@@ -1484,6 +1493,15 @@ OParserListener.prototype.enterDictType = function(ctx) {
 
 // Exit a parse tree produced by OParser#DictType.
 OParserListener.prototype.exitDictType = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#CursorType.
+OParserListener.prototype.enterCursorType = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CursorType.
+OParserListener.prototype.exitCursorType = function(ctx) {
 };
 
 

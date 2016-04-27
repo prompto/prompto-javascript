@@ -1,8 +1,9 @@
 var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function CursorType(itemType) {
-    IterableType.call(this, "Cursor<" + itemType.name + ">", itemType);
+    IterableType.call(this, new Identifier("Cursor<" + itemType.name + ">"), itemType);
     return this;
 }
 
