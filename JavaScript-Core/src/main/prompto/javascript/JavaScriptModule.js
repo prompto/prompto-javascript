@@ -50,6 +50,7 @@ JavaScriptModule.prototype.resolve_runtime = function() {
         var rootpath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
         // for now let's assume prompto and the required module are at the same level
         var modulepath = rootpath + this.toString();
+        process.stderr.write("Requiring " + modulepath);
         return require(modulepath);
     } catch (e) {
         return null;
