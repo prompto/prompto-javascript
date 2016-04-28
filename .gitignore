@@ -14,5 +14,6 @@
 **/utils/ArgsLexer.js
 **/utils/ArgsParser.js
 **/utils/ArgsParserListener.js
-internet
-io
+**/JavaScript-Core/src/main/prompto/internet/*
+**/JavaScript-Core/src/main/prompto/io/*
+**/JavaScript-Core/src/main/prompto/reader/*

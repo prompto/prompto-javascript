@@ -52,7 +52,7 @@ JavaScriptModule.prototype.resolve_runtime = function() {
         var modulepath = rootpath + this.toString();
         return require(modulepath);
     } catch (e) {
-        process.stderr.write("Failed requiring " + modulepath + "\n");
+        // process.stderr.write("Failed requiring " + modulepath + "\n");
         return null;
     }
 };
