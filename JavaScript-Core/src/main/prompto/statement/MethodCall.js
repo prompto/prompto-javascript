@@ -107,15 +107,14 @@ MethodCall.prototype.interpret = function(context) {
 	var local = this.method.newLocalContext(context, declaration);
 	declaration.registerArguments(local);
 	var assignments = this.makeAssignments(context,declaration);
-	for(var i=0;i<assignments.length;i++) {
-		var assignment = assignments[i];
+	assignments.map(function(assignment) {
 		var expression = assignment.resolve(local, declaration, true);
         var argument = assignment.argument;
 		var value = argument.checkValue(context,expression);
         if(value!=null && argument.mutable && !value.mutable)
             throw new NotMutableError();
 		local.setValue(assignment.id, value);
-	}
+	});
 	return declaration.interpret(local, true);
 };
 
