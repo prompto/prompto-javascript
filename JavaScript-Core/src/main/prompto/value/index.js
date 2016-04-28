@@ -18,6 +18,7 @@ exports.DateTime = require('./DateTime').DateTime;
 exports.Document = require('./Document').Document;
 exports.TypeValue = require('./TypeValue').TypeValue;
 exports.ClosureValue = require('./ClosureValue').ClosureValue;
+exports.IteratorValue = require('./IteratorValue').IteratorValue;
 
 require('./ConcreteInstance').resolve();
 require('./CharacterRange').resolve();
