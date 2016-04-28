@@ -83,7 +83,7 @@ JavaScriptIdentifierExpression.prototype.interpret_module = function(module) {
 				return m;
 			}
 		} catch (e) {
-			return null;
+			throw new SyntaxError("Could not resolve module: " + module.toString());
 		}
 	}
 };
