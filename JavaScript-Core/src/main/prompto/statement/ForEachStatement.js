@@ -3,6 +3,7 @@ var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var Integer = require("../value/Integer").Integer;
+var InternalError = require("../error/InternalError").InternalError;
 
 function ForEachStatement(v1, v2, source, instructions) {
 	BaseStatement.call(this);
@@ -48,7 +49,7 @@ ForEachStatement.prototype.evaluateItemIterator = function(elemType, context) {
 
 ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, context) {
 	var src = this.source.interpret(context);
-	var iterator = src.getIterator(context);
+	var iterator = this.getIterator(context, src);
 	while (iterator.hasNext()) {
 		var child = context.newChildContext();
 		child.registerValue(new Variable(this.v1, elemType));
@@ -60,6 +61,15 @@ ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, cont
 		}
 	}
 	return null;
+};
+
+ForEachStatement.prototype.getIterator = function(context, src) {
+    if(src.getIterator)
+        return src.getIterator();
+    else if(src.hasNext && src.next)
+        return src;
+    else
+        throw new InternalError("Should never end up here!");
 };
 
 ForEachStatement.prototype.evaluateItemIteratorWithIndex = function(elemType, context) {
