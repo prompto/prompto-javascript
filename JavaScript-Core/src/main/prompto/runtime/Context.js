@@ -560,7 +560,7 @@ Context.prototype.leaveStatement = function(statement) {
 	if(this.debugger!=null) {
 		this.debugger.leaveStatement(this, statement);
 	}
-}
+};
 
 Context.prototype.terminated = function() {
 	if (this.debugger != null) {
