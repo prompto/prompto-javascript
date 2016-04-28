@@ -154,7 +154,8 @@ exports.loadDependency = function(libraryName) {
         else
             allDecls.addAll(decls);
     });
-    allDecls.register(BaseParserTest.coreContext);
+    if(allDecls)
+        allDecls.register(BaseParserTest.coreContext);
 };
 
 exports.listLibraryFiles = function(libraryName) {
