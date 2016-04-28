@@ -1,7 +1,8 @@
 var Value = require("./Value").Value;
+var AnyType = require("../type/AnyType").AnyType;
 
 function Any() {
-    Value.call(this);
+    Value.call(this, AnyType.instance);
     this.text = null;
     return this;
 }
