@@ -1,8 +1,11 @@
 var Literal = require("./Literal").Literal;
 var DictEntryList = require("./DictEntryList").DictEntryList;
 var Dictionary = require("../value/Dictionary").Dictionary;
+var IntegerType = require("../type/IntegerType").IntegerType;
+var DecimalType = require("../type/DecimalType").DecimalType;
 var MissingType = require("../type/MissingType").MissingType;
 var DictType = require("../type/DictType").DictType;
+var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 
 // we can only compute keys by evaluating key expressions in context
@@ -56,19 +59,31 @@ DictLiteral.prototype.inferElementType = function(context) {
 };
 
 DictLiteral.prototype.interpret = function(context) {
-	if(!this.value.isEmpty() || this.entries.items.length==0) {
-		return this.value;
-	}
-    this.check(context); /// force computation of itemType
-	var dict = {};
-	for(var i=0;i<this.entries.items.length;i++) {
-		var entry = this.entries.items[i];
-		var key = entry.key.interpret(context);
-		var val = entry.value.interpret(context);
-		dict[key] = val;
-	}
-	this.value = new Dictionary(this.itemType, dict);
-	return this.value;
-}
+	if(this.entries.items.length>0) {
+        var self = this;
+        this.check(context); /// force computation of itemType
+        var dict = {};
+        this.entries.items.forEach(function(entry) {
+            var key = entry.key.interpret(context);
+            var val = entry.value.interpret(context);
+            val = self.interpretPromotion(val);
+            dict[key] = val;
+        });
+        return new Dictionary(this.itemType, dict);
+    } else
+	    return this.value;
+};
+
+
+DictLiteral.prototype.interpretPromotion = function(item) {
+    if (item == null)
+        return item;
+    if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
+        return new Decimal(item.DecimalValue());
+    else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
+        return new Text(item.value);
+    else
+        return item;
+};
 
 exports.DictLiteral = DictLiteral;

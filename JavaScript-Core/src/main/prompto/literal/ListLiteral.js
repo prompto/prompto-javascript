@@ -52,18 +52,18 @@ ListLiteral.prototype.inferElementType = function(context) {
 };
 
 ListLiteral.prototype.interpret = function(context) {
-	if(this.value.isEmpty()) {
+	if(this.expressions.length) {
+        var self = this;
         this.check(context); // force computation of itemType
 		var list = new ListValue(this.itemType);
-		for(var i=0; i<this.expressions.length;i++) {
-			var item = this.expressions[i].interpret(context);
-            item = this.interpretPromotion(item);
+		this.expressions.forEach(function(expression) {
+			var item = expression.interpret(context);
+            item = self.interpretPromotion(item);
 			list.add(item);
-		}
-		this.value = list;
-        // don't dispose of expressions, they are required by translation
-	}
-	return this.value;
+		});
+		return list;
+	} else
+	    return this.value;
 };
 
 ListLiteral.prototype.interpretPromotion = function(item) {
