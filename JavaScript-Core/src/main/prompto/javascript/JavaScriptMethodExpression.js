@@ -19,25 +19,21 @@ JavaScriptMethodExpression.prototype.toString = function() {
 	return this.parent.toString() + "." + this.id.name + "(" + this.args.toString() + ")";
 };
 
-/*
-	
-@Override
-public IType check(Context context) throws SyntaxError {
-	Method method = findMethod(context);
-	if(method==null)
-		return null;
-	else
-		return new JavaScriptClassType(method.getReturnType());
-}
 
-*/
 JavaScriptMethodExpression.prototype.interpret = function(context, module) {
+    var m = this.findInstanceAndMethod(context, module);
+    if(!m)
+        throw new SyntaxError("Could not find function: "+ this.id.name + (module ? " in module: " + module.toString() : ""));
 	var args = this.args.computeArguments(context);
-	if (this.parent === null) {
-		return this.interpretGlobal(context, module, args);
-	} else {
-		return this.interpretMember(context, module, args);
-	}
+    return m.method.apply(m.instance, args);
+};
+
+JavaScriptMethodExpression.prototype.findInstanceAndMethod = function(context, module) {
+    if (this.parent === null) {
+        return this.findGlobal(context, module);
+    } else {
+        return this.findMember(context, module);
+    }
 };
 
 var stringToFunction = function(str) {
@@ -50,36 +46,44 @@ var stringToFunction = function(str) {
 };
 
 JavaScriptMethodExpression.prototype.interpretNew = function(context, module) {
-    var m = stringToFunction(this.id.name);
-    if(!m) {
-        throw new SyntaxError(this.id.name + " is not a function");
-    }
+    var m = this.findInstanceAndMethod(context, module);
+    if(!m)
+        throw new SyntaxError("Could not find function: "+ this.id.name);
     var args = this.args.computeArguments(context);
-    return args.length ? new m(args) : new m();
+    return args.length ? new m.method(args) : new m.method();
 };
 
-JavaScriptMethodExpression.prototype.interpretGlobal = function(context, module, args) {
-    var m = stringToFunction(this.id.name);
-    if(!m) {
-        throw new SyntaxError(this.id.name + " is not a function");
+JavaScriptMethodExpression.prototype.findGlobal = function(context, module) {
+    if(module!=null)
+        return this.findInModule(context, module);
+    else
+        return { instance: null, method: stringToFunction(this.id.name) };
+};
+
+JavaScriptMethodExpression.prototype.findInModule = function(context, module) {
+    try {
+        m = module.resolve();
+        if(m[this.id.name])
+            return { instance: null, method: m[this.id.name] };
+        else
+            throw true;
+    } catch (e) {
+        throw new SyntaxError("Could not resolve module method: " + module.toString() + " " + this.id.name);
     }
-    return m.apply(args);
 };
 
-
-JavaScriptMethodExpression.prototype.interpretMember = function(context, module, args) {
-	var p = this.parent.interpret(context, module)
-	if(p===null) {
+JavaScriptMethodExpression.prototype.findMember = function(context, module) {
+	var i = this.parent.interpret(context, module)
+	if(i===null) {
 		throw "Null reference";
 	}
-	if(p instanceof NativeInstance) {
-		p = p.instance;
+	if(i instanceof NativeInstance) {
+		i = i.instance;
 	}
-	var m = p[this.id.name];
-	if(!m) {
-		throw new SyntaxError(this.id.name + " is not a member of " + p.toString());
-	}
-	return m.apply(p, args);
+    if(i[this.id.name])
+        return { instance:i, method: i[this.id.name] };
+    else
+        throw new SyntaxError("Could not resolve member method: " + this.toString());
 };
 
 JavaScriptMethodExpression.prototype.toDialect = function(writer) {
