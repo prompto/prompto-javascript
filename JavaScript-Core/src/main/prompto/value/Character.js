@@ -64,15 +64,10 @@ Character.prototype.CompareTo = function(context, value) {
         throw new SyntaxError("Illegal: Compare Character with " + typeof(value));
     }
 };
-/*
 
-@Override
-public Object ConvertTo(Class<?> type)
-{
-    return value;
-}
-
-*/
+Character.prototype.convertToJavaScript = function() {
+    return this.value;
+};
 
 Character.prototype.toString = function() {
     return "" + this.value;
