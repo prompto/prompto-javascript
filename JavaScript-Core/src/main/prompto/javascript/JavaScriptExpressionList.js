@@ -25,9 +25,9 @@ JavaScriptExpressionList.prototype.toDialect = function(writer) {
 
 
 JavaScriptExpressionList.prototype.computeArguments = function(context) {
-	var list = this;
+	var self = this;
     return this.map(function(arg) {
-        return list.computeArgument(arg, context);
+        return self.computeArgument(arg, context);
 	});
 };
 
