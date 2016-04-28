@@ -2,7 +2,7 @@ var IteratorType = require("../type/IteratorType").IteratorType;
 var Variable = require("../runtime/Variable").Variable;
 var Value = require("./Value").Value;
 
-function Iterator(itemType, context, length, name, source, expression) {
+function IterableValue(itemType, context, length, name, source, expression) {
     Value.call(this, new IteratorType(itemType));
     this.itemType = itemType;
     this.context = context;
@@ -13,39 +13,39 @@ function Iterator(itemType, context, length, name, source, expression) {
     return this;
 };
 
-Iterator.prototype = Object.create(Value.prototype);
-Iterator.prototype.constructor = Iterator;
+IterableValue.prototype = Object.create(Value.prototype);
+IterableValue.prototype.constructor = IterableValue;
 
 
-Iterator.prototype.isEmpty = function() {
+IterableValue.prototype.isEmpty = function() {
     return this.length()==0;
 };
 
-Iterator.prototype.length = function() {
+IterableValue.prototype.length = function() {
     return this.documents.length();
 };
 
-Iterator.prototype.getIterator = function() {
+IterableValue.prototype.getIterator = function() {
     return this;
 };
 
 
-Iterator.prototype.hasNext = function() {
+IterableValue.prototype.hasNext = function() {
     return this.source.hasNext();
 };
 
-Iterator.prototype.next = function() {
+IterableValue.prototype.next = function() {
     var child = this.context.newChildContext();
     child.registerValue(new Variable(this.name, this.itemType));
     child.setValue(this.name, this.source.next());
     return this.expression.interpret(child);
 };
 
-Iterator.prototype.getMember = function(context, name) {
+IterableValue.prototype.getMember = function(context, name) {
     if ("length" == name)
         return new Integer(this.length());
     else
         throw new InvalidDataError("No such member:" + name);
 };
 
-exports.Iterator = Iterator;
+exports.IterableValue = IterableValue;

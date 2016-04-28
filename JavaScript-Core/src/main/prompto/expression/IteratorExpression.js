@@ -2,7 +2,7 @@ var Section = require("../parser/Section").Section;
 var Variable = require("../runtime/Variable").Variable;
 var Identifier = require("../grammar/Identifier").Identifier;
 var IteratorType = require("../type/IteratorType").IteratorType;
-var Iterator = require("../value/Iterator").Iterator;
+var IterableValue = require("../value/IterableValue").IterableValue;
 
 function IteratorExpression(name, source, expression) {
     Section.call(this);
@@ -31,7 +31,7 @@ IteratorExpression.prototype.interpret = function(context) {
     var items = this.source.interpret(context);
     var length = items.getMember(context, new Identifier("length"), false);
     var iterator = this.getIterator(context, items);
-    return new Iterator(itemType, context, length, this.name, iterator, this.expression);
+    return new IterableValue(itemType, context, length, this.name, iterator, this.expression);
 };
 
 IteratorExpression.prototype.getIterator = function(context, src) {
