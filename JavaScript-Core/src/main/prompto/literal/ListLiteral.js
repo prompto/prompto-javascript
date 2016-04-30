@@ -10,10 +10,13 @@ var TextType = require("../type/TextType").TextType;
 var Decimal = require("../value/Decimal").Decimal;
 var Text = require("../value/Text").Text;
 
-function ListLiteral(expressions) {
+function ListLiteral(mutable, expressions) {
+    if(typeof(mutable)!=typeof(true))
+        throw "mutable!";
     expressions = expressions || new ExpressionList();
 	Literal.call(this, "[" + expressions.toString() + "]", new ListValue(MissingType.instance));
 	this.itemType = null;
+    this.mutable = mutable;
     this.expressions = expressions;
 	return this;
 }
@@ -55,7 +58,7 @@ ListLiteral.prototype.interpret = function(context) {
 	if(this.expressions.length) {
         var self = this;
         this.check(context); // force computation of itemType
-		var list = new ListValue(this.itemType);
+		var list = new ListValue(this.itemType, null, null, this.mutable);
 		this.expressions.forEach(function(expression) {
 			var item = expression.interpret(context);
             item = self.interpretPromotion(item);
@@ -78,6 +81,8 @@ ListLiteral.prototype.interpretPromotion = function(item) {
 };
 
 ListLiteral.prototype.toDialect = function(writer) {
+    if(this.mutable)
+        writer.append("mutable ");
     if(this.expressions!=null) {
         writer.append('[');
         this.expressions.toDialect(writer);

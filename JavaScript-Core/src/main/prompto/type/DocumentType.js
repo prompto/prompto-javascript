@@ -1,8 +1,11 @@
 var NativeType = require("./NativeType").NativeType;
+var TextType = require("./TextType").TextType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Text = require("../value/Text").Text;
 var Integer = require("../value/Integer").Integer;
+
+
 
 function DocumentType() {
 	NativeType.call(this, new Identifier("Document"));
@@ -16,6 +19,14 @@ DocumentType.instance = new DocumentType();
 
 DocumentType.prototype.checkMember = function(context, name) {
 	return AnyType.instance;
+};
+
+
+DocumentType.prototype.checkItem = function(context, itemType) {
+    if(itemType===TextType.instance)
+        return AnyType.instance;
+    else
+        throw ("text");
 };
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {

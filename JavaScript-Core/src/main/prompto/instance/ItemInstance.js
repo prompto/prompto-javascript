@@ -1,5 +1,7 @@
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var IntegerType = require("../type/IntegerType").IntegerType;
+var AnyType = require("../type/AnyType").AnyType;
 var BaseValueList = require("../value/BaseValueList").BaseValueList;
 var Integer = require("../value/Integer").Integer;
 var Value = require("../value/Value").Value;
@@ -21,49 +23,37 @@ ItemInstance.prototype.toDialect = function(writer) {
     writer.append(']');
 }
 
-ItemInstance.prototype.checkAssignValue = function(context, expression) {
-	this.parent.checkAssignElement(context);
-	var itemType = this.item.check(context);
-	if(itemType!=IntegerType.instance) {
-		throw new SyntaxError("Expecting an Integer, got:" + itemType.toString());
-	}
+ItemInstance.prototype.checkAssignValue = function(context, valueType) {
+    var itemType = this.item.check(context);
+	return this.parent.checkAssignItem(context, itemType, valueType);
 };
 
-ItemInstance.prototype.checkAssignMember = function(context, memberName) {
-	// TODO Auto-generated method stub
+ItemInstance.prototype.checkAssignMember = function(context, name, valueType) {
+    return AnyType.instance
 };
 
-/*
-
-@Override
-public void checkAssignElement(Context context) throws SyntaxError {
-	// TODO Auto-generated method stub
-	
-}
-
-*/
+ItemInstance.prototype.checkAssignItem = function(context, itemType, valueType) {
+    return AnyType.instance
+};
 
 ItemInstance.prototype.assign = function(context, expression) {
-	var obj = this.parent.interpret(context);
-	if(!(obj instanceof BaseValueList)) {
-		throw new InvalidDataError("Expected a List, got:" + typeof(obj));
-	}
-	var idx = this.item.interpret(context);
-	if(!(idx instanceof Integer)) {
-		throw new InvalidDataError("Expected an Integer, got:" + idx.getClass().getName());
-	}
-	var index = idx.IntegerValue();
-	if(index<1 || index>obj.size()) {
-		throw new IndexOutOfRangeError();
-	}
-	obj.setItem(index-1, expression.interpret(context));
+	var root = this.parent.interpret(context);
+	if(!root.mutable)
+		throw new NotMutableError();
+	var item = this.item.interpret(context);
+    var value = expression.interpret(context);
+    if (root.setItemInContext) {
+        root.setItemInContext(context, item, value);
+    } else {
+        throw new SyntaxError("Unknown item/key: " + typeof(item));
+    }
 };
 
 ItemInstance.prototype.interpret = function(context) {
-    var parent = this.parent.interpret(context);
+    var root = this.parent.interpret(context);
     var item = this.item.interpret(context);
-    if (parent.getItemInContext && item instanceof Value) {
-		return parent.getItemInContext(context, item);
+    if (root.getItemInContext) {
+		return root.getItemInContext(context, item);
 	} else {
 		throw new SyntaxError("Unknown item/key: " + typeof(item));
 	}

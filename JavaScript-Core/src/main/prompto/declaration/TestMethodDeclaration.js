@@ -58,10 +58,11 @@ TestMethodDeclaration.prototype.interpretAsserts = function(context)
         return;
     context.enterMethod (this);
     try {
+        var self = this;
         var success = true;
-        for(var i=0;i<this.assertions.length;i++) {
-            success &= this.assertions[i].interpretAssert (context, this);
-        }
+        this.assertions.forEach(function(a) {
+            success &= a.interpretAssert (context, self);
+        });
         if (success)
             this.printSuccess (context);
     } finally {
@@ -133,20 +134,21 @@ TestMethodDeclaration.prototype.toSDialect = function(writer)
     writer.append (this.name);
     writer.append (" ():\n");
     writer.indent ();
-    this.statements.toDialect (writer);
+    if(this.statements!=null)
+        this.statements.toDialect (writer);
     writer.dedent ();
     writer.append ("verifying:");
     if (this.error != null) {
         writer.append (" ");
         this.error.toDialect (writer);
         writer.append ("\n");
-    } else {
+    } else if(this.assertions!=null) {
         writer.append ("\n");
         writer.indent ();
-        for(var i=0;i<this.assertions.length;i++) {
-            this.assertions[i].toDialect (writer);
+        this.assertions.forEach(function(a) {
+            a.toDialect (writer);
             writer.append ("\n");
-        }
+        });
         writer.dedent ();
     }
 };
@@ -157,20 +159,21 @@ TestMethodDeclaration.prototype.toEDialect = function(writer)
     writer.append (this.name);
     writer.append (" as test method doing:\n");
     writer.indent ();
-    this.statements.toDialect (writer);
+    if(this.statements!=null)
+        this.statements.toDialect (writer);
     writer.dedent ();
     writer.append ("and verifying");
     if (this.error != null) {
         writer.append (" ");
         this.error.toDialect (writer);
         writer.append ("\n");
-    } else {
+    } else if(this.assertions!=null) {
         writer.append (":\n");
         writer.indent ();
-        for(var i=0;i<this.assertions.length;i++) {
-            this.assertions[i].toDialect (writer);
+        this.assertions.forEach(function(a) {
+            a.toDialect (writer);
             writer.append ("\n");
-        }
+        });
         writer.dedent ();
     }
 };
@@ -181,19 +184,20 @@ TestMethodDeclaration.prototype.toODialect = function(writer)
     writer.append (this.name);
     writer.append (" () {\n");
     writer.indent ();
-    this.statements.toDialect (writer);
+    if(this.statements!=null)
+        this.statements.toDialect (writer);
     writer.dedent ();
     writer.append ("} verifying ");
     if (this.error != null) {
         this.error.toDialect (writer);
         writer.append (";\n");
-    } else {
+    } else if(this.assertions!=null) {
         writer.append ("{\n");
         writer.indent ();
-        for(var i=0;i<this.assertions.length;i++) {
-            this.assertions[i].toDialect (writer);
+        this.assertions.forEach(function(a) {
+            a.toDialect (writer);
             writer.append (";\n");
-        }
+        });
         writer.dedent ();
         writer.append ("}\n");
     }

@@ -1298,21 +1298,12 @@ EParserListener.prototype.exitFullDeclarationList = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#DeclarationListItem.
-EParserListener.prototype.enterDeclarationListItem = function(ctx) {
+// Enter a parse tree produced by EParser#declarations.
+EParserListener.prototype.enterDeclarations = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#DeclarationListItem.
-EParserListener.prototype.exitDeclarationListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#DeclarationList.
-EParserListener.prototype.enterDeclarationList = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#DeclarationList.
-EParserListener.prototype.exitDeclarationList = function(ctx) {
+// Exit a parse tree produced by EParser#declarations.
+EParserListener.prototype.exitDeclarations = function(ctx) {
 };
 
 
@@ -1334,75 +1325,39 @@ EParserListener.prototype.exitResource_declaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#EnumCategoryDeclaration.
-EParserListener.prototype.enterEnumCategoryDeclaration = function(ctx) {
+// Enter a parse tree produced by EParser#enum_declaration.
+EParserListener.prototype.enterEnum_declaration = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#EnumCategoryDeclaration.
-EParserListener.prototype.exitEnumCategoryDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#EnumNativeDeclaration.
-EParserListener.prototype.enterEnumNativeDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#EnumNativeDeclaration.
-EParserListener.prototype.exitEnumNativeDeclaration = function(ctx) {
+// Exit a parse tree produced by EParser#enum_declaration.
+EParserListener.prototype.exitEnum_declaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#NativeSymbolList.
-EParserListener.prototype.enterNativeSymbolList = function(ctx) {
+// Enter a parse tree produced by EParser#native_symbol_list.
+EParserListener.prototype.enterNative_symbol_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#NativeSymbolList.
-EParserListener.prototype.exitNativeSymbolList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#NativeSymbolListItem.
-EParserListener.prototype.enterNativeSymbolListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#NativeSymbolListItem.
-EParserListener.prototype.exitNativeSymbolListItem = function(ctx) {
+// Exit a parse tree produced by EParser#native_symbol_list.
+EParserListener.prototype.exitNative_symbol_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#CategorySymbolListItem.
-EParserListener.prototype.enterCategorySymbolListItem = function(ctx) {
+// Enter a parse tree produced by EParser#category_symbol_list.
+EParserListener.prototype.enterCategory_symbol_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#CategorySymbolListItem.
-EParserListener.prototype.exitCategorySymbolListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#CategorySymbolList.
-EParserListener.prototype.enterCategorySymbolList = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#CategorySymbolList.
-EParserListener.prototype.exitCategorySymbolList = function(ctx) {
+// Exit a parse tree produced by EParser#category_symbol_list.
+EParserListener.prototype.exitCategory_symbol_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#SymbolList.
-EParserListener.prototype.enterSymbolList = function(ctx) {
+// Enter a parse tree produced by EParser#symbol_list.
+EParserListener.prototype.enterSymbol_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#SymbolList.
-EParserListener.prototype.exitSymbolList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#SymbolListItem.
-EParserListener.prototype.enterSymbolListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#SymbolListItem.
-EParserListener.prototype.exitSymbolListItem = function(ctx) {
+// Exit a parse tree produced by EParser#symbol_list.
+EParserListener.prototype.exitSymbol_list = function(ctx) {
 };
 
 
@@ -1469,21 +1424,12 @@ EParserListener.prototype.exitSet_literal = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#ValueList.
-EParserListener.prototype.enterValueList = function(ctx) {
+// Enter a parse tree produced by EParser#expression_list.
+EParserListener.prototype.enterExpression_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#ValueList.
-EParserListener.prototype.exitValueList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ValueListItem.
-EParserListener.prototype.enterValueListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ValueListItem.
-EParserListener.prototype.exitValueListItem = function(ctx) {
+// Exit a parse tree produced by EParser#expression_list.
+EParserListener.prototype.exitExpression_list = function(ctx) {
 };
 
 
@@ -1748,39 +1694,21 @@ EParserListener.prototype.exitSingletonCategoryDeclaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#TypeIdentifierList.
-EParserListener.prototype.enterTypeIdentifierList = function(ctx) {
+// Enter a parse tree produced by EParser#type_identifier_list.
+EParserListener.prototype.enterType_identifier_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#TypeIdentifierList.
-EParserListener.prototype.exitTypeIdentifierList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#TypeIdentifierListItem.
-EParserListener.prototype.enterTypeIdentifierListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#TypeIdentifierListItem.
-EParserListener.prototype.exitTypeIdentifierListItem = function(ctx) {
+// Exit a parse tree produced by EParser#type_identifier_list.
+EParserListener.prototype.exitType_identifier_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#MethodVariableIdentifier.
-EParserListener.prototype.enterMethodVariableIdentifier = function(ctx) {
+// Enter a parse tree produced by EParser#method_identifier.
+EParserListener.prototype.enterMethod_identifier = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#MethodVariableIdentifier.
-EParserListener.prototype.exitMethodVariableIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#MethodTypeIdentifier.
-EParserListener.prototype.enterMethodTypeIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#MethodTypeIdentifier.
-EParserListener.prototype.exitMethodTypeIdentifier = function(ctx) {
+// Exit a parse tree produced by EParser#method_identifier.
+EParserListener.prototype.exitMethod_identifier = function(ctx) {
 };
 
 
@@ -1847,21 +1775,12 @@ EParserListener.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#ArgumentListItem.
-EParserListener.prototype.enterArgumentListItem = function(ctx) {
+// Enter a parse tree produced by EParser#argument_list.
+EParserListener.prototype.enterArgument_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#ArgumentListItem.
-EParserListener.prototype.exitArgumentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ArgumentList.
-EParserListener.prototype.enterArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ArgumentList.
-EParserListener.prototype.exitArgumentList = function(ctx) {
+// Exit a parse tree produced by EParser#argument_list.
+EParserListener.prototype.exitArgument_list = function(ctx) {
 };
 
 
@@ -1883,21 +1802,12 @@ EParserListener.prototype.exitOperatorArgument = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#NamedArgument.
-EParserListener.prototype.enterNamedArgument = function(ctx) {
+// Enter a parse tree produced by EParser#operator_argument.
+EParserListener.prototype.enterOperator_argument = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#NamedArgument.
-EParserListener.prototype.exitNamedArgument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#TypedArgument.
-EParserListener.prototype.enterTypedArgument = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#TypedArgument.
-EParserListener.prototype.exitTypedArgument = function(ctx) {
+// Exit a parse tree produced by EParser#operator_argument.
+EParserListener.prototype.exitOperator_argument = function(ctx) {
 };
 
 
@@ -1919,21 +1829,12 @@ EParserListener.prototype.exitCode_argument = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#CategoryArgumentType.
-EParserListener.prototype.enterCategoryArgumentType = function(ctx) {
+// Enter a parse tree produced by EParser#category_or_any_type.
+EParserListener.prototype.enterCategory_or_any_type = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#CategoryArgumentType.
-EParserListener.prototype.exitCategoryArgumentType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#AnyArgumentType.
-EParserListener.prototype.enterAnyArgumentType = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#AnyArgumentType.
-EParserListener.prototype.exitAnyArgumentType = function(ctx) {
+// Exit a parse tree produced by EParser#category_or_any_type.
+EParserListener.prototype.exitCategory_or_any_type = function(ctx) {
 };
 
 
@@ -1964,21 +1865,12 @@ EParserListener.prototype.exitAnyDictType = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#CategoryMethodListItem.
-EParserListener.prototype.enterCategoryMethodListItem = function(ctx) {
+// Enter a parse tree produced by EParser#member_method_declaration_list.
+EParserListener.prototype.enterMember_method_declaration_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#CategoryMethodListItem.
-EParserListener.prototype.exitCategoryMethodListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#CategoryMethodList.
-EParserListener.prototype.enterCategoryMethodList = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#CategoryMethodList.
-EParserListener.prototype.exitCategoryMethodList = function(ctx) {
+// Exit a parse tree produced by EParser#member_method_declaration_list.
+EParserListener.prototype.exitMember_method_declaration_list = function(ctx) {
 };
 
 
@@ -1991,21 +1883,12 @@ EParserListener.prototype.exitMember_method_declaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#NativeCategoryMethodList.
-EParserListener.prototype.enterNativeCategoryMethodList = function(ctx) {
+// Enter a parse tree produced by EParser#native_member_method_declaration_list.
+EParserListener.prototype.enterNative_member_method_declaration_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#NativeCategoryMethodList.
-EParserListener.prototype.exitNativeCategoryMethodList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#NativeCategoryMethodListItem.
-EParserListener.prototype.enterNativeCategoryMethodListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#NativeCategoryMethodListItem.
-EParserListener.prototype.exitNativeCategoryMethodListItem = function(ctx) {
+// Exit a parse tree produced by EParser#native_member_method_declaration_list.
+EParserListener.prototype.exitNative_member_method_declaration_list = function(ctx) {
 };
 
 
@@ -2081,15 +1964,6 @@ EParserListener.prototype.exitPython_module = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#module_token.
-EParserListener.prototype.enterModule_token = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#module_token.
-EParserListener.prototype.exitModule_token = function(ctx) {
-};
-
-
 // Enter a parse tree produced by EParser#javascript_category_binding.
 EParserListener.prototype.enterJavascript_category_binding = function(ctx) {
 };
@@ -2126,39 +2000,12 @@ EParserListener.prototype.exitAttribute_identifier_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#AbstractMethod.
-EParserListener.prototype.enterAbstractMethod = function(ctx) {
+// Enter a parse tree produced by EParser#method_declaration.
+EParserListener.prototype.enterMethod_declaration = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#AbstractMethod.
-EParserListener.prototype.exitAbstractMethod = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ConcreteMethod.
-EParserListener.prototype.enterConcreteMethod = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ConcreteMethod.
-EParserListener.prototype.exitConcreteMethod = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#NativeMethod.
-EParserListener.prototype.enterNativeMethod = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#NativeMethod.
-EParserListener.prototype.exitNativeMethod = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#TestMethod.
-EParserListener.prototype.enterTestMethod = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#TestMethod.
-EParserListener.prototype.exitTestMethod = function(ctx) {
+// Exit a parse tree produced by EParser#method_declaration.
+EParserListener.prototype.exitMethod_declaration = function(ctx) {
 };
 
 
@@ -2171,21 +2018,12 @@ EParserListener.prototype.exitComment_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#NativeStatementListItem.
-EParserListener.prototype.enterNativeStatementListItem = function(ctx) {
+// Enter a parse tree produced by EParser#native_statement_list.
+EParserListener.prototype.enterNative_statement_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#NativeStatementListItem.
-EParserListener.prototype.exitNativeStatementListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#NativeStatementList.
-EParserListener.prototype.enterNativeStatementList = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#NativeStatementList.
-EParserListener.prototype.exitNativeStatementList = function(ctx) {
+// Exit a parse tree produced by EParser#native_statement_list.
+EParserListener.prototype.exitNative_statement_list = function(ctx) {
 };
 
 
@@ -2252,75 +2090,39 @@ EParserListener.prototype.exitJavascript_native_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#StatementList.
-EParserListener.prototype.enterStatementList = function(ctx) {
+// Enter a parse tree produced by EParser#statement_list.
+EParserListener.prototype.enterStatement_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#StatementList.
-EParserListener.prototype.exitStatementList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#StatementListItem.
-EParserListener.prototype.enterStatementListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#StatementListItem.
-EParserListener.prototype.exitStatementListItem = function(ctx) {
+// Exit a parse tree produced by EParser#statement_list.
+EParserListener.prototype.exitStatement_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#AssertionList.
-EParserListener.prototype.enterAssertionList = function(ctx) {
+// Enter a parse tree produced by EParser#assertion_list.
+EParserListener.prototype.enterAssertion_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#AssertionList.
-EParserListener.prototype.exitAssertionList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#AssertionListItem.
-EParserListener.prototype.enterAssertionListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#AssertionListItem.
-EParserListener.prototype.exitAssertionListItem = function(ctx) {
+// Exit a parse tree produced by EParser#assertion_list.
+EParserListener.prototype.exitAssertion_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#SwitchCaseStatementList.
-EParserListener.prototype.enterSwitchCaseStatementList = function(ctx) {
+// Enter a parse tree produced by EParser#switch_case_statement_list.
+EParserListener.prototype.enterSwitch_case_statement_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#SwitchCaseStatementList.
-EParserListener.prototype.exitSwitchCaseStatementList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#SwitchCaseStatementListItem.
-EParserListener.prototype.enterSwitchCaseStatementListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#SwitchCaseStatementListItem.
-EParserListener.prototype.exitSwitchCaseStatementListItem = function(ctx) {
+// Exit a parse tree produced by EParser#switch_case_statement_list.
+EParserListener.prototype.exitSwitch_case_statement_list = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#CatchStatementList.
-EParserListener.prototype.enterCatchStatementList = function(ctx) {
+// Enter a parse tree produced by EParser#catch_statement_list.
+EParserListener.prototype.enterCatch_statement_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#CatchStatementList.
-EParserListener.prototype.exitCatchStatementList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#CatchStatementListItem.
-EParserListener.prototype.enterCatchStatementListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#CatchStatementListItem.
-EParserListener.prototype.exitCatchStatementListItem = function(ctx) {
+// Exit a parse tree produced by EParser#catch_statement_list.
+EParserListener.prototype.exitCatch_statement_list = function(ctx) {
 };
 
 
@@ -2468,21 +2270,12 @@ EParserListener.prototype.exitNullLiteral = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#LiteralList.
-EParserListener.prototype.enterLiteralList = function(ctx) {
+// Enter a parse tree produced by EParser#literal_list_literal.
+EParserListener.prototype.enterLiteral_list_literal = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#LiteralList.
-EParserListener.prototype.exitLiteralList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#LiteralListItem.
-EParserListener.prototype.enterLiteralListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#LiteralListItem.
-EParserListener.prototype.exitLiteralListItem = function(ctx) {
+// Exit a parse tree produced by EParser#literal_list_literal.
+EParserListener.prototype.exitLiteral_list_literal = function(ctx) {
 };
 
 
@@ -2540,66 +2333,21 @@ EParserListener.prototype.exitParenthesis_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#AtomicLiteral.
-EParserListener.prototype.enterAtomicLiteral = function(ctx) {
+// Enter a parse tree produced by EParser#literal_expression.
+EParserListener.prototype.enterLiteral_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#AtomicLiteral.
-EParserListener.prototype.exitAtomicLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#CollectionLiteral.
-EParserListener.prototype.enterCollectionLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#CollectionLiteral.
-EParserListener.prototype.exitCollectionLiteral = function(ctx) {
+// Exit a parse tree produced by EParser#literal_expression.
+EParserListener.prototype.exitLiteral_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#RangeLiteral.
-EParserListener.prototype.enterRangeLiteral = function(ctx) {
+// Enter a parse tree produced by EParser#collection_literal.
+EParserListener.prototype.enterCollection_literal = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#RangeLiteral.
-EParserListener.prototype.exitRangeLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ListLiteral.
-EParserListener.prototype.enterListLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ListLiteral.
-EParserListener.prototype.exitListLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#SetLiteral.
-EParserListener.prototype.enterSetLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#SetLiteral.
-EParserListener.prototype.exitSetLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#DictLiteral.
-EParserListener.prototype.enterDictLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#DictLiteral.
-EParserListener.prototype.exitDictLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#TupleLiteral.
-EParserListener.prototype.enterTupleLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#TupleLiteral.
-EParserListener.prototype.exitTupleLiteral = function(ctx) {
+// Exit a parse tree produced by EParser#collection_literal.
+EParserListener.prototype.exitCollection_literal = function(ctx) {
 };
 
 
@@ -2621,39 +2369,21 @@ EParserListener.prototype.exitDict_literal = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#ValueTuple.
-EParserListener.prototype.enterValueTuple = function(ctx) {
+// Enter a parse tree produced by EParser#expression_tuple.
+EParserListener.prototype.enterExpression_tuple = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#ValueTuple.
-EParserListener.prototype.exitValueTuple = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ValueTupleItem.
-EParserListener.prototype.enterValueTupleItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ValueTupleItem.
-EParserListener.prototype.exitValueTupleItem = function(ctx) {
+// Exit a parse tree produced by EParser#expression_tuple.
+EParserListener.prototype.exitExpression_tuple = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#DictEntryList.
-EParserListener.prototype.enterDictEntryList = function(ctx) {
+// Enter a parse tree produced by EParser#dict_entry_list.
+EParserListener.prototype.enterDict_entry_list = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#DictEntryList.
-EParserListener.prototype.exitDictEntryList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#DictEntryListItem.
-EParserListener.prototype.enterDictEntryListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#DictEntryListItem.
-EParserListener.prototype.exitDictEntryListItem = function(ctx) {
+// Exit a parse tree produced by EParser#dict_entry_list.
+EParserListener.prototype.exitDict_entry_list = function(ctx) {
 };
 
 
@@ -2825,6 +2555,15 @@ EParserListener.prototype.enterKey_token = function(ctx) {
 
 // Exit a parse tree produced by EParser#key_token.
 EParserListener.prototype.exitKey_token = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#module_token.
+EParserListener.prototype.enterModule_token = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#module_token.
+EParserListener.prototype.exitModule_token = function(ctx) {
 };
 
 

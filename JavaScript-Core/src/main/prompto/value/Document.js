@@ -1,4 +1,5 @@
 var Value = require("./Value").Value;
+var Text = require("./Text").Text;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
 function Document(value) {
@@ -27,6 +28,27 @@ Document.prototype.getMember = function(context, name, autoCreate) {
 Document.prototype.setMember = function(context, name, value) {
     this.values[name] = value;
 };
+
+
+Document.prototype.getItemInContext = function(context, index) {
+    if (index instanceof Text) {
+        // TODO autocreate
+        return this.values[index.value] || null;
+    } else {
+        throw new SyntaxError("No such item:" + index.toString())
+    }
+};
+
+
+
+Document.prototype.setItemInContext = function(context, index, value) {
+    if (index instanceof Text) {
+        this.values[index.value] = value
+    } else {
+        throw new SyntaxError("No such item:" + index.toString());
+    }
+};
+
 
 Document.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
     var doc = {};

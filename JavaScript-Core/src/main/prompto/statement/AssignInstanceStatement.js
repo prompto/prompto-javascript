@@ -22,7 +22,8 @@ AssignInstanceStatement.prototype.toString = function() {
 };
 
 AssignInstanceStatement.prototype.check = function(context) {
-	this.instance.checkAssignValue(context, this.expression);
+    var valueType = this.expression.check(context);
+	this.instance.checkAssignValue(context, valueType);
 	return VoidType.instance;
 };
 

@@ -3,7 +3,8 @@ var MissingType = require("../type/MissingType").MissingType;
 
 function SymbolList(symbol) {
     ExpressionList.call(this, MissingType.instance);
-	this.add(symbol);
+	if(symbol)
+        this.add(symbol);
 	return this;
 }
 

@@ -27,28 +27,28 @@ DeclarationList.prototype.register = function(context) {
 };
 
 DeclarationList.prototype.registerAttributes = function(context) {
-    this.map(function (decl) {
+    this.forEach(function (decl) {
         if(decl instanceof AttributeDeclaration)
             decl.register(context);
     });
 };
 
 DeclarationList.prototype.registerCategories = function(context) {
-    this.map(function (decl) {
+    this.forEach(function (decl) {
         if(decl instanceof CategoryDeclaration)
             decl.register(context);
     });
 };
 
 DeclarationList.prototype.registerEnumerated = function(context) {
-    this.map(function (decl) {
+    this.forEach(function (decl) {
         if(decl instanceof EnumeratedNativeDeclaration)
             decl.register(context);
     });
 };
 
 DeclarationList.prototype.registerMethods = function(context) {
-    this.map(function (decl) {
+    this.forEach(function (decl) {
         if(decl instanceof BaseMethodDeclaration)
             decl.register(context);
     });
@@ -62,15 +62,19 @@ DeclarationList.prototype.registerTests = function(context) {
 };
 
 DeclarationList.prototype.unregister = function(context) {
-    this.map(function(decl) { decl.unregister(context); });
+    this.forEach(function(decl) {
+        decl.unregister(context);
+    });
 };
 
 DeclarationList.prototype.check = function(context) {
-    this.map(function(decl) { decl.check(context); });
+    this.forEach(function(decl) {
+        decl.check(context);
+    });
 };
 
 DeclarationList.prototype.toDialect = function(writer) {
-    this.map(function(decl) {
+    this.forEach(function(decl) {
         if(decl.comments)
             decl.comments.map(function(cmt) {
                 cmt.toDialect(writer);
@@ -80,21 +84,5 @@ DeclarationList.prototype.toDialect = function(writer) {
     });
 };
 
-/*
-
-public ConcreteMethodDeclaration findMain() {
-	for(IDeclaration declaration : this) {
-		if(!(declaration instanceof ConcreteMethodDeclaration))
-			continue;
-		ConcreteMethodDeclaration method = (ConcreteMethodDeclaration)declaration;
-		if(!(method.getName().equals("main")))
-			continue;
-		// TODO check proto
-		return method;
-	}
-	return null;
-}
-	
-*/
 
 exports.DeclarationList = DeclarationList;

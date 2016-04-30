@@ -7,8 +7,8 @@ exports.resolve = function() {
     ListType = require("../type/ListType").ListType;
 };
 
-function ListValue(itemType, items, item) {
-	BaseValueList.call(this, new ListType(itemType), items, item);
+function ListValue(itemType, items, item, mutable) {
+	BaseValueList.call(this, new ListType(itemType), items, item, mutable);
 	return this;
 }
 
@@ -19,12 +19,8 @@ ListValue.prototype.newInstance = function(items) {
 	return new ListValue(this.type.itemType, items);
 };
 
-ListValue.prototype.setItem = function(index, value) {
-	this.items[index] = value;
-};
-
 ListValue.prototype.Add = function(context, value) {
-	if (value instanceof ListValue) {
+	if (value instanceof ListValue || value instanceof TupleValue || value instanceof SetValue) {
 		return new ListValue(this.type.itemType, this.items.concat(value.items));
 	} else {
 		return BaseValueList.prototype.Add.apply(this, context, value);

@@ -77,7 +77,7 @@ ConstructorExpression.prototype.check = function(context) {
 		for(var i=0; i<this.assignments.length; i++) {
 			var assignment = this.assignments[i];
 			if(!cd.hasAttribute(context, assignment.name))
-                context.problemListener.reportUnknownMemberAttribute();
+                context.problemListener.reportUnknownAttribute(assignment.name);
                 //	throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + this.type.name);
 			assignment.check(context);
 		}

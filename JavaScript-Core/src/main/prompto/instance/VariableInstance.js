@@ -15,9 +15,9 @@ Object.defineProperty(VariableInstance.prototype, "name", {
 VariableInstance.prototype.toDialect = function(writer, expression) {
     if(expression!=null) try {
         var type = expression.check(writer.context);
-        var actual = writer.context.getRegisteredValue(name);
+        var actual = writer.context.getRegisteredValue(this.name);
         if(actual==null)
-            writer.context.registerValue(new Variable(name, type));
+            writer.context.registerValue(new Variable(this.name, type));
     } catch(e) {
         // TODO warning
     }
@@ -28,33 +28,37 @@ VariableInstance.prototype.toString = function() {
     return this.name;
 };
 
-VariableInstance.prototype.checkAssignValue = function(context, expression) {
-	var type = expression.check(context);
-	var actual = context.getRegisteredValue(this.name);
+VariableInstance.prototype.checkAssignValue = function(context, valueType) {
+	var actual = context.getRegisteredValue(this.id);
 	if(actual==null) {
-		context.registerValue(new Variable(this.id, type));
+		context.registerValue(new Variable(this.id, valueType));
+        return valueType;
 	} else {
 		// need to check type compatibility
-		type.checkAssignableTo(context,actual.type);
+        valueType.checkAssignableTo(context,actual.type);
+        return actual.type;
 	}
 };
 
-VariableInstance.prototype.checkAssignMember = function(context, memberName) {
-	var actual = context.getRegisteredValue(this.name);
+VariableInstance.prototype.checkAssignMember = function(context, name, valueType) {
+	var actual = context.getRegisteredValue(this.id);
 	if(actual==null) {
-		throw new SyntaxError("Unknown variable:" + this.name);
+		throw new SyntaxError("Unknown variable:" + this.id);
 	}
+    return valueType;
 };
 
-/*
 
-@Override
-public void checkAssignElement(Context context) throws SyntaxError {
-	// TODO Auto-generated method stub
-	
-}
+VariableInstance.prototype.checkAssignItem = function(context, itemType, valueType) {
+    var actual = context.getRegisteredValue(this.id);
+    if(actual==null) {
+        throw new SyntaxError("Unknown variable:" + this.id);
+    }
+    var parentType = actual.getType(context);
+    return parentType.checkItem(context, itemType);
+};
 
-*/
+
 VariableInstance.prototype.assign = function(context, expression) {
 	var value = expression.interpret(context);
 	if(context.getRegisteredValue(this.name)==null) {

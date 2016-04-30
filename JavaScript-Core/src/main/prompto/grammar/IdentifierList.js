@@ -13,6 +13,7 @@ function IdentifierList(item) {
 IdentifierList.prototype = Object.create(ObjectList.prototype);
 IdentifierList.prototype.constructor = IdentifierList;
 
+
 IdentifierList.parse = function(ids) {
 	var parts = ids.split(",");
 	var result = new IdentifierList();

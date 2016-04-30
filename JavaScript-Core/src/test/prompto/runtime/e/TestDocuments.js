@@ -29,6 +29,10 @@ exports.testItem = function(test) {
 	checkOutput(test, "documents/item.pec");
 };
 
+exports.testNamedItem = function(test) {
+	checkOutput(test, "documents/namedItem.pec");
+};
+
 exports.testVariable = function(test) {
 	checkOutput(test, "documents/variable.pec");
 };

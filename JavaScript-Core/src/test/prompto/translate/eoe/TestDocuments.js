@@ -18,6 +18,10 @@ exports.testItem = function(test) {
 	compareResourceEOE(test, "documents/item.pec");
 };
 
+exports.testNamedItem = function(test) {
+	compareResourceEOE(test, "documents/namedItem.pec");
+};
+
 exports.testVariable = function(test) {
 	compareResourceEOE(test, "documents/variable.pec");
 };

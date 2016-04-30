@@ -8,6 +8,7 @@ var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var Decimal = require("../value/Decimal").Decimal;
 var Text = require("../value/Text").Text;
+var ExpressionList = require("../utils/ExpressionList").ExpressionList;
 
 function SetLiteral(expressions) {
     expressions = expressions || new ExpressionList();

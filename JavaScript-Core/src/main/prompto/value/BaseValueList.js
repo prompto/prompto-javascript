@@ -5,13 +5,14 @@ var InternalError = require("../error/InternalError").InternalError;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
 /* an abstract list of values, common to ListValue and TupleValue */
-function BaseValueList(type, items, item) {
+function BaseValueList(type, items, item, mutable) {
 	Value.call(this, type);
 	this.items = items || [];
     item = item || null;
     if(item!==null) {
         this.add(item);
     }
+    this.mutable = mutable || false;
     return this;
 }
 
@@ -26,16 +27,23 @@ BaseValueList.prototype.add = function(o) {
 	this.items.push(o);
 };
 
-/*
-public Iterable<Object> getItems() {
-	return items;
-}
+
+BaseValueList.prototype.setItem = function(index, value) {
+    this.items[index] = value;
+};
 
 
-public void addAll(Collection<Object> values) {
-	items.addAll(values);
-}
-*/
+BaseValueList.prototype.setItemInContext = function(context, index, value) {
+    if (index instanceof Integer) {
+        var idx = index.IntegerValue() - 1;
+        if (idx > this.items.length) {
+            throw new IndexOutOfRangeError();
+        }
+        this.items[idx] = value;
+    } else
+        throw new SyntaxError("No such item:" + index.toString())
+};
+
 
 BaseValueList.prototype.get = function(index) {
 	return this.items[index];

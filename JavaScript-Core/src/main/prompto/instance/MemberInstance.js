@@ -24,17 +24,17 @@ MemberInstance.prototype.toDialect = function(writer) {
     writer.append(this.name);
 };
 
-MemberInstance.prototype.checkAssignValue = function(context, expression) {
-	this.parent.checkAssignMember(context, this.name);
-	expression.check(context);
+MemberInstance.prototype.checkAssignValue = function(context, valueType) {
+	return this.parent.checkAssignMember(context, this.name, valueType);
 };
 
-MemberInstance.prototype.checkAssignMember = function(context, memberName) {
+MemberInstance.prototype.checkAssignMember = function(context, name, valueType) {
 	this.parent.checkAssignMember(context, this.name);
+    return valueType; // TODO
 };
 
-MemberInstance.prototype.checkAssignElement = function(context) {
-	// TODO Auto-generated method stub
+MemberInstance.prototype.checkAssignItem = function(context, itemType, valueType) {
+    return valueType; // TODO
 };
 
 
