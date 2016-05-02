@@ -85,7 +85,7 @@ AttributeDeclaration.prototype.toSDialect = function(writer) {
         this.indexTypes.toDialect(writer, false);
         writer.append(')');
     }
-    if (this.constraint !=null && this.indexTypes !=null)
+    if (this.constraint ==null && this.indexTypes ==null)
         writer.append("pass");
     writer.dedent();
 };
