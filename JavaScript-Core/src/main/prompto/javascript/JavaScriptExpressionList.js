@@ -33,22 +33,12 @@ JavaScriptExpressionList.prototype.computeArguments = function(context) {
 
 
 JavaScriptExpressionList.prototype.computeArgument = function(arg, context) {
-	// interpret expression
-	var interpret = arg.interpret || null;
-	if (interpret!=null) {
-		arg = arg.interpret(context);
-	}
-	// expression might be a wrapper
-	interpret = arg.interpret || null;
-	if (interpret!=null) {
+	// interpret expression in a loop (might be a wrapper)
+	while(arg.interpret) {
 		arg = arg.interpret(context);
 	}
 	// convert value to JavaScript
-	var convert = arg.convertToJavaScript || null;
-	if (convert!=null) {
-		arg = arg.convertToJavaScript();
-	}
-	return arg;
+	return arg.convertToJavaScript();
 };
 
 exports.JavaScriptExpressionList = JavaScriptExpressionList;

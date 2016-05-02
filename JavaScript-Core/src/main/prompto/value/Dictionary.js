@@ -103,13 +103,13 @@ Dictionary.prototype.getItemInContext = function(context, index) {
     }
 };
 
-/*
-public Object ConvertTo(Class<?> type)
-{
-    return this;
-}
-
-*/
+Dictionary.prototype.convertToJavaScript = function() {
+    var dict = {};
+    for(var key in this.dict) {
+        dict[key] = this.dict[key].convertToJavaScript();
+    }
+    return dict;
+};
 
 Dictionary.prototype.equals = function(obj) {
     if(obj instanceof Dictionary) {

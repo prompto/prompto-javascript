@@ -13,6 +13,10 @@ NullValue.prototype.toString = function() {
     return "null";
 };
 
+NullValue.prototype.convertToJavaScript = function() {
+    return null; // <- YES!
+};
+
 NullValue.instance = new NullValue();
 
 exports.NullValue = NullValue;

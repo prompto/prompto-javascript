@@ -50,6 +50,12 @@ CSVIterator.prototype.parseHeaders = function() {
             var line = this.nextLine;
             this.nextLine = null;
             this.headers = this.parseLine(line);
+            if(this.columns!=null) {
+                var self = this;
+                this.headers = this.headers.map(function(header) {
+                    return self.columns[header] || header;
+                });
+            }
         }
     }
 };
