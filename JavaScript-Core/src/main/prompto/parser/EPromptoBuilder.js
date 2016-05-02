@@ -344,9 +344,11 @@ EPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
 	var id = this.getNodeValue(ctx.name);
 	var type = this.getNodeValue(ctx.typ);
 	var match = this.getNodeValue(ctx.match);
-    var indices = ctx.INDEX()==null ? null : new grammar.IdentifierList();
+    var indices = null;
     if (ctx.indices !=null)
-        indices = indices.concat(this.getNodeValue(ctx.indices));
+        indices = indices = this.getNodeValue(ctx.indices);
+    else if(ctx.INDEX()!=null)
+        indices =  new grammar.IdentifierList();
     if (ctx.index !=null)
         indices.push(this.getNodeValue(ctx.index))
 	var decl = new declaration.AttributeDeclaration(id, type, match, indices);
