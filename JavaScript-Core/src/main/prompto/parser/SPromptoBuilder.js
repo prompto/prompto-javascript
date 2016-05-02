@@ -397,10 +397,18 @@ SPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
 	var id = this.getNodeValue(ctx.name);
 	var type = this.getNodeValue(ctx.typ);
 	var match = this.getNodeValue(ctx.match);
-    var decl = new declaration.AttributeDeclaration(id, type, match);
+    var indices = ctx.index_clause()==null ? null : this.getNodeValue(ctx.index_clause());
+    var decl = new declaration.AttributeDeclaration(id, type, match, indices);
     decl.storable = ctx.STORABLE()!=null;
     this.setNodeValue(ctx, decl);
 };
+
+
+SPromptoBuilder.prototype.exitIndex_clause = function(ctx) {
+    var indices = ctx.indices()==null ? new IdentifierList() : self.getNodeValue(ctx.indices());
+    this.setNodeValue(ctx, indices);
+};
+
 
 
 SPromptoBuilder.prototype.exitNativeType = function(ctx) {

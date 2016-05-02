@@ -2,10 +2,11 @@ var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var InternalError = require("../error/InternalError").InternalError;
 var Value = require("../value/Value").Value;
 
-function AttributeDeclaration(id, type, constraint) {
+function AttributeDeclaration(id, type, constraint, indexTypes) {
 	BaseDeclaration.call(this, id);
 	this.type = type;
 	this.constraint = constraint;
+    this.indexTypes = indexTypes;
     this.storable = false;
     return this;
 }
@@ -39,6 +40,11 @@ AttributeDeclaration.prototype.toEDialect = function(writer) {
     writer.append(" attribute");
     if (this.constraint != null)
         this.constraint.toDialect(writer);
+    if (this.indexTypes != null) {
+        writer.append(" with ");
+        this.indexTypes.toDialect(writer, true);
+        writer.append(" index");
+    }
 };
 
 AttributeDeclaration.prototype.toODialect = function(writer) {
@@ -50,6 +56,14 @@ AttributeDeclaration.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
     if (this.constraint != null)
         this.constraint.toDialect(writer);
+    if (this.indexTypes != null) {
+        writer.append(" with index")
+        if (this.indexTypes.length > 0) {
+            writer.append(" (");
+            this.indexTypes.toDialect(writer, false);
+            writer.append(')');
+        }
+    }
     writer.append(';');
 };
 
@@ -64,7 +78,14 @@ AttributeDeclaration.prototype.toSDialect = function(writer) {
     writer.indent();
     if (this.constraint != null)
         this.constraint.toDialect(writer);
-    else
+    if (this.indexTypes != null) {
+        if (this.constraint != null)
+            writer.newLine();
+        writer.append("index (");
+        this.indexTypes.toDialect(writer, false);
+        writer.append(')');
+    }
+    if (this.constraint !=null && this.indexTypes !=null)
         writer.append("pass");
     writer.dedent();
 };

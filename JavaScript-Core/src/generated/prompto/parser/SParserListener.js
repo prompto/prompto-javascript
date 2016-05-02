@@ -56,6 +56,15 @@ SParserListener.prototype.exitAttribute_declaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#index_clause.
+SParserListener.prototype.enterIndex_clause = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#index_clause.
+SParserListener.prototype.exitIndex_clause = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#concrete_category_declaration.
 SParserListener.prototype.enterConcrete_category_declaration = function(ctx) {
 };
