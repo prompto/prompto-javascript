@@ -1,3 +1,5 @@
+var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+
 function Url(path, encoding) {
     this.path = path;
     this.encoding = encoding || "utf-8";
@@ -16,7 +18,6 @@ Url.prototype.close = function() {
 };
 
 Url.prototype.readFully = function() {
-    var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
     if(isNodeJs) {
         // need a synchronous call here, highly discouraged in main thread
         var request = require('sync-request');
