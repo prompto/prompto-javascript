@@ -31,6 +31,10 @@ ConcreteInstance.prototype.getType = function() {
 	return this.type;
 };
 
+ConcreteInstance.prototype.convertToJavaScript = function() {
+    return this; // TODO, until we have a translator
+};
+
 ConcreteInstance.prototype.getAttributeNames = function() {
 	return Object.getOwnPropertyNames(this.values);
 };
