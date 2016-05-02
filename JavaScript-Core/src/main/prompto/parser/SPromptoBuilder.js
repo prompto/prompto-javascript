@@ -405,7 +405,7 @@ SPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
 
 
 SPromptoBuilder.prototype.exitIndex_clause = function(ctx) {
-    var indices = ctx.indices()==null ? new IdentifierList() : self.getNodeValue(ctx.indices());
+    var indices = ctx.indices()==null ? new grammar.IdentifierList() : self.getNodeValue(ctx.indices());
     this.setNodeValue(ctx, indices);
 };
 

@@ -396,7 +396,7 @@ OPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
 	var id = this.getNodeValue(ctx.name);
 	var type = this.getNodeValue(ctx.typ);
 	var match = this.getNodeValue(ctx.match);
-    var indices = ctx.INDEX()==null ? null : new IdentifierList();
+    var indices = ctx.INDEX()==null ? null : new grammar.IdentifierList();
     if (ctx.indices !=null)
         indices = indices.concat(this.getNodeValue(ctx.indices));
     var decl = new declaration.AttributeDeclaration(id, type, match, indices);
