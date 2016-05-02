@@ -49,6 +49,9 @@ Document.prototype.setItemInContext = function(context, index, value) {
     }
 };
 
+Document.prototype.equals = function(other) {
+    return other==this;
+};
 
 Document.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
     var doc = {};

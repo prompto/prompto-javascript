@@ -3,12 +3,21 @@
 /* ideally we would use generators, but support with browsers is poor so far */
 /* so we use our own stuff until ES6 becomes widespread */
 
-function csvIterate(text, separator, encloser) {
-    return new CSVIterator(text, separator, encloser);
+function csvIterate(text, columns, separator, encloser) {
+    return new CSVIterator(text, columns, separator, encloser);
 }
 
-function CSVIterator(text, separator, encloser) {
+function csvRead(text, columns, separator, encloser) {
+    var list = [];
+    var iter = new CSVIterator(text, columns, separator, encloser);
+    while(iter.hasNext())
+        list.push(iter.next());
+    return list;
+}
+
+function CSVIterator(text, columns, separator, encloser) {
     this.lines = text ? text.split(/\r?\n/) : null;
+    this.columns = columns;
     this.separator = separator || ',';
     this.encloser = encloser || '"';
     this.headers = null;
@@ -128,3 +137,4 @@ CSVIterator.prototype.next = function(value, startIdx, endIdx) {
 };
 
 exports.csvIterate = csvIterate;
+exports.csvRead = csvRead;

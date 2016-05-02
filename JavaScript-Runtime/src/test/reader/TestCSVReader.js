@@ -16,7 +16,7 @@ exports.testEmptyRetursnEmptyIterator = function(test) {
 
 exports.testSimpleNoQuotes = function(test) {
     var csv = "id,name\n1,John\n2,Sylvie\n";
-    var iter = csvIterate(csv, ',', '"');
+    var iter = csvIterate(csv, null, ',', '"');
     var doc = iter.next();
     test.ok(doc);
     test.equal("1", doc["id"]);
@@ -31,7 +31,7 @@ exports.testSimpleNoQuotes = function(test) {
 
 exports.testEscapeNoQuotes = function(test) {
     var csv = "id,name\n1,John\n2,Riou\\, Sylvie\n";
-    var iter = csvIterate(csv, ',', '"');
+    var iter = csvIterate(csv, null, ',', '"');
     var doc = iter.next();
     test.ok(doc);
     test.equal("1", doc["id"]);
@@ -46,7 +46,7 @@ exports.testEscapeNoQuotes = function(test) {
 
 exports.testSimpleQuotes = function(test) {
     var csv = "\"id\",\"name\"\n1,\"John\"\n2,\"Sylvie\"\n";
-    var iter = csvIterate(csv, ',', '"');
+    var iter = csvIterate(csv, null, ',', '"');
     var doc = iter.next();
     test.ok(doc);
     test.equal("1", doc["id"]);
@@ -61,7 +61,7 @@ exports.testSimpleQuotes = function(test) {
 
 exports.testEmptyValue = function(test) {
     var csv = "\"id\",\"name\"\n,\"John\"\n2,\n";
-    var iter = csvIterate(csv, ',', '"');
+    var iter = csvIterate(csv, null, ',', '"');
     var doc = iter.next();
     test.ok(doc);
     test.ok(!doc["id"]);
@@ -76,7 +76,7 @@ exports.testEmptyValue = function(test) {
 
 exports.testMissingValue = function(test) {
     var csv = "\"id\",\"name\"\n1\n2,\"Sylvie\"\n";
-    var iter = csvIterate(csv, ',', '"');
+    var iter = csvIterate(csv, null, ',', '"');
     var doc = iter.next();
     test.ok(doc);
     test.equal("1", doc["id"]);
@@ -91,7 +91,7 @@ exports.testMissingValue = function(test) {
 
 exports.testExtraValue = function(test) {
     var csv = "\"id\",\"name\"\n1,\"John\",Doe\n2,\"Sylvie\"\n";
-    var iter = csvIterate(csv, ',', '"');
+    var iter = csvIterate(csv, null, ',', '"');
     var doc = iter.next();
     test.ok(doc);
     test.equal("1", doc["id"]);

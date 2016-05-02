@@ -27,4 +27,9 @@ NullType.prototype.isMoreSpecificThan = function(self, context, other) {
     return false;
 };
 
+
+NullType.prototype.equals = function(self, other) {
+    return other==this;
+};
+
 exports.NullType = NullType;
