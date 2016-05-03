@@ -296,7 +296,7 @@ ConcreteCategoryDeclaration.prototype.registerThisMemberMethods = function(conte
 	if(!(actual instanceof MethodDeclarationMap))
         context.problemListener.reportBadMember(actual.id);
 	var protos = Object.getOwnPropertyNames(actual.protos);
-    protos.map(function(proto) {
+    protos.forEach(function(proto) {
         var method = actual.protos[proto];
 		result.registerIfMissing(method, context);
 	});

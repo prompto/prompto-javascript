@@ -1164,14 +1164,11 @@ OPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 
 OPromptoBuilder.prototype.exitDeclaration = function(ctx) {
     var self = this;
-    var stmts = null;
-    ctx.comment_statement().map(function(csc) {
-        if(csc) {
-            if (!stmts)
-                stmts = [];
-            stmts.push(self.getNodeValue(csc));
-        }
+    var stmts = ctx.comment_statement().map(function(csc) {
+        return self.getNodeValue(csc);
     });
+    if(stmts.length==0)
+        stmts = null;
     var ctx_ = ctx.attribute_declaration();
     if(ctx_==null)
         ctx_ = ctx.category_declaration();

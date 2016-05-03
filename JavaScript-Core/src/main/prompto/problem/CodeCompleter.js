@@ -12,9 +12,9 @@ CodeCompleter.prototype.constructor = CodeCompleter;
 CodeCompleter.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
     var self = this;
     var parser = recognizer._ctx.parser;
-    e.deadEndConfigs.configs.map(function(cfg) {
+    e.deadEndConfigs.configs.forEach(function(cfg) {
         var intervals = cfg.state.atn.getExpectedTokens(cfg.state.stateNumber, e.ctx);
-        intervals.intervals.map(function(interval) {
+        intervals.intervals.forEach(function(interval) {
             for(var t=interval.start;t<interval.stop;t++) {
                 var literal = parser.literalNames[t];
                 if(literal)

@@ -53,16 +53,16 @@ MethodSelector.prototype.getGlobalCandidates = function(context) {
         if(cd!=null) {
             var members = cd.findMemberMethods(context, this.name);
             if(members!=null) {
-                Object.keys(members).map(function (key) {
+                Object.keys(members).forEach(function (key) {
                     methods.push(members[key])
                 });
             }
         }
     }
-    var map = context.getRegisteredDeclaration(this.name);
-    if(map!=null && map.protos != null)
-        Object.keys(map.protos).map(function (proto) {
-                methods.push(map.protos[proto])
+    var methodsMap = context.getRegisteredDeclaration(this.name);
+    if(methodsMap!=null && methodsMap.protos != null)
+        Object.keys(methodsMap.protos).forEach(function (proto) {
+                methods.push(methodsMap.protos[proto])
             });
     return methods;
 };

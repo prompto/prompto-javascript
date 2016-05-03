@@ -107,7 +107,7 @@ MethodCall.prototype.interpret = function(context) {
 	var local = this.method.newLocalContext(context, declaration);
 	declaration.registerArguments(local);
 	var assignments = this.makeAssignments(context,declaration);
-	assignments.map(function(assignment) {
+	assignments.forEach(function(assignment) {
 		var expression = assignment.resolve(local, declaration, true);
         var argument = assignment.argument;
 		var value = argument.checkValue(context,expression);

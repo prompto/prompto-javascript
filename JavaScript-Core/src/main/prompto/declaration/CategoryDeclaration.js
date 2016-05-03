@@ -22,7 +22,7 @@ CategoryDeclaration.prototype.newInstanceFromDocument = function(context, docume
     var instance = this.newInstance();
     instance.mutable = true;
     try {
-        this.attributes.map(function(attr) {
+        this.attributes.forEach(function(attr) {
             var name = attr.name;
             var decl = context.getRegisteredDeclaration(name);
             if (decl.storable) {

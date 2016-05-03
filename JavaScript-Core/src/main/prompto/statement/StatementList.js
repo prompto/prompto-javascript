@@ -20,12 +20,12 @@ StatementList.prototype.check = function(context, returnType, nativeOnly) {
 	nativeOnly = nativeOnly || false;
     if(returnType==VoidType.instance) {
         if(nativeOnly) {
-            this.map(function (stmt) {
+            this.forEach(function (stmt) {
                 if(stmt instanceof JavaScriptNativeCall)
                     stmt.check(context);
             });
         } else {
-            this.map(function (stmt) {
+            this.forEach(function (stmt) {
                 stmt.check(context);
             });
         }
@@ -33,7 +33,7 @@ StatementList.prototype.check = function(context, returnType, nativeOnly) {
     } else {
 	    var types = new TypeMap();
         if(nativeOnly) {
-            this.map(function (stmt) {
+            this.forEach(function (stmt) {
                 if(stmt instanceof JavaScriptNativeCall) {
                     var type = stmt.check(context);
                     if(type!==VoidType.instance) {
@@ -42,7 +42,7 @@ StatementList.prototype.check = function(context, returnType, nativeOnly) {
                 }
             });
         } else {
-            this.map(function (stmt) {
+            this.forEach(function (stmt) {
                 var type = stmt.check(context);
                 if(type!==VoidType.instance) {
                     types[type.name] = type;
@@ -110,15 +110,14 @@ StatementList.prototype.doInterpretNative = function(context, returnType) {
 };
 
 StatementList.prototype.toDialect = function(writer) {
-    for(var i=0;i<this.length;i++) {
-        var stmt = this[i];
+    this.forEach(function(stmt) {
         stmt.toDialect(writer);
         if(stmt instanceof SimpleStatement) {
             if(writer.dialect==Dialect.O && !(stmt instanceof NativeCall))
                 writer.append(';');
             writer.newLine();
         }
-    }
+    });
 };
 
 exports.StatementList = StatementList;

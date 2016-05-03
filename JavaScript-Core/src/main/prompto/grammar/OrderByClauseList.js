@@ -15,7 +15,7 @@ OrderByClauseList.prototype.toDialect = function(writer) {
     writer.append("order by ");
     if(writer.dialect==Dialect.O)
         writer.append("( ");
-    this.map(function(clause) {
+    this.forEach(function(clause) {
         clause.toDialect(writer);
         writer.append(", ");
     });

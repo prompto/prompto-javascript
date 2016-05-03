@@ -55,7 +55,7 @@ DeclarationList.prototype.registerMethods = function(context) {
 };
 
 DeclarationList.prototype.registerTests = function(context) {
-    this.map(function (decl) {
+    this.forEach(function (decl) {
         if(decl instanceof TestMethodDeclaration)
             decl.register(context);
     });
@@ -75,10 +75,11 @@ DeclarationList.prototype.check = function(context) {
 
 DeclarationList.prototype.toDialect = function(writer) {
     this.forEach(function(decl) {
-        if(decl.comments)
-            decl.comments.map(function(cmt) {
+        if(decl.comments) {
+            decl.comments.forEach(function (cmt) {
                 cmt.toDialect(writer);
             });
+        }
         decl.toDialect(writer);
         writer.append("\n");
     });

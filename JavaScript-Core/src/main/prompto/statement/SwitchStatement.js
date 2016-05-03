@@ -21,8 +21,9 @@ SwitchStatement.prototype.toODialect = function(writer) {
     writer.append("switch(");
     this.expression.toDialect(writer);
     writer.append(") {\n");
-    for(var i=0;i<this.switchCases.length;i++)
-        this.switchCases[i].caseToODialect(writer);
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.caseToODialect(writer);
+    });
     if(this.defaultCase!=null) {
         writer.append("default:\n");
         writer.indent();
@@ -37,8 +38,9 @@ SwitchStatement.prototype.toEDialect = function(writer) {
     this.expression.toDialect(writer);
     writer.append(":\n");
     writer.indent();
-    for(var i=0;i<this.switchCases.length;i++)
-        this.switchCases[i].caseToEDialect(writer);
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.caseToEDialect(writer);
+    });
     if(this.defaultCase!=null) {
         writer.append("otherwise:\n");
         writer.indent();
@@ -53,8 +55,9 @@ SwitchStatement.prototype.toSDialect = function(writer) {
     this.expression.toDialect(writer);
     writer.append(":\n");
     writer.indent();
-    for(var i=0;i<this.switchCases.length;i++)
-        this.switchCases[i].caseToPDialect(writer);
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.caseToPDialect(writer);
+    });
     if(this.defaultCase!=null) {
         writer.append("otherwise:\n");
         writer.indent();

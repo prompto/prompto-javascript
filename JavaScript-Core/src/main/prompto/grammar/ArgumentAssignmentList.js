@@ -32,7 +32,7 @@ ArgumentAssignmentList.prototype.find = function(name) {
 
 ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration) {
 	var assignments = new ArgumentAssignmentList();
-    this.map(function(assignment) {
+    this.forEach(function(assignment) {
         assignments.push(assignment.makeAssignment(context, declaration));
     });
 	return assignments;

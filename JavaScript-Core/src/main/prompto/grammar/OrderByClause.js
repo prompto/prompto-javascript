@@ -11,7 +11,7 @@ OrderByClause.prototype = Object.create(Section.prototype);
 OrderByClause.prototype.constructor = OrderByClause;
 
 OrderByClause.prototype.toDialect = function(writer) {
-    this.names.map(function(name) {
+    this.names.forEach(function(name) {
         writer.append(name.toString());
         writer.append(".");
     });

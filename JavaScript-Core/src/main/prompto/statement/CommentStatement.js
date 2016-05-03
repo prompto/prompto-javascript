@@ -38,7 +38,7 @@ CommentStatement.prototype.toDialect = function(writer) {
         case Dialect.O:
             if (lines.length > 1) {
                 writer.append("/*");
-                lines.map(function (line) {
+                lines.forEach(function (line) {
                     writer.append(line)
                     writer.newLine();
                 });
@@ -52,7 +52,7 @@ CommentStatement.prototype.toDialect = function(writer) {
             }
             break;
         case Dialect.S:
-            lines.map(function (line) {
+            lines.forEach(function (line) {
                 writer.append("#")
                 writer.append(line)
                 writer.newLine()

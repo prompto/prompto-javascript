@@ -59,7 +59,7 @@ StoreStatement.prototype.interpret = function( context) {
     var store = Store.instance;
     if (store == null)
         store = MemStore.instance;
-    this.add.map(function (exp) {
+    this.add.forEach(function (exp) {
         var value = exp.interpret(context);
         var storable = value.storable;
         if (!storable)

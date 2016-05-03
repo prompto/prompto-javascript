@@ -35,11 +35,9 @@ BaseMethodDeclaration.prototype.getSignature = function(context) {
 };
 
 BaseMethodDeclaration.prototype.getProto = function(context) {
-    var s = [];
-    this.args.map(function(arg) {
-        s.push(arg.getProto(context));
-    });
-    return s.join("/");
+    return this.args.map(function(arg) {
+        return arg.getProto(context);
+    }).join("/");
 };
 
 BaseMethodDeclaration.prototype.unregister = function(context) {

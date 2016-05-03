@@ -13,13 +13,13 @@ ArgumentList.prototype = Object.create(ObjectList.prototype);
 ArgumentList.prototype.constructor = ArgumentList;
 
 ArgumentList.prototype.register = function(context) {
-    this.map(function(arg) {
+    this.forEach(function(arg) {
         arg.register(context);
     });
 };
 
 ArgumentList.prototype.check = function(context) {
-    this.map(function(arg) {
+    this.forEach(function(arg) {
         arg.check(context);
     });
 };
@@ -41,10 +41,10 @@ ArgumentList.prototype.toDialect = function(writer) {
 
 ArgumentList.prototype.toEDialect = function(writer) {
     writer.append("receiving ");
-    for(var i=0;i<this.length-1;i++) {
-        this[i].toDialect(writer);
+    this.forEach(function(arg) {
+        arg.toDialect(writer);
         writer.append(", ");
-    }
+    });
     if(this.length>1) {
         writer.trimLast(2);
         writer.append(" and ");
@@ -55,10 +55,10 @@ ArgumentList.prototype.toEDialect = function(writer) {
 
 ArgumentList.prototype.toODialect = function(writer) {
     if(this.length>0) {
-        for (var i = 0; i < this.length; i++) {
-            this[i].toDialect(writer);
+        this.forEach(function(arg) {
+            arg.toDialect(writer);
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
     }
 };
