@@ -33,9 +33,9 @@ BaseSwitchStatement.prototype.check = function(context) {
 
 BaseSwitchStatement.prototype.checkSwitchCasesType = function(context) {
 	var type = this.checkSwitchType(context);
-	for(var i=0;i<this.switchCases.length;i++) {
-		this.switchCases[i].checkSwitchType(context, type);
-	}
+	this.switchCases.forEach(function(switchCase) {
+        switchCase.checkSwitchType(context, type);
+	});
 };
 
 BaseSwitchStatement.prototype.checkReturnType = function(context) {
@@ -45,12 +45,12 @@ BaseSwitchStatement.prototype.checkReturnType = function(context) {
 };
 
 BaseSwitchStatement.prototype.collectReturnTypes = function(context, types) {
-	for(var i=0;i<this.switchCases.length;i++) {
-		var type = this.switchCases[i].checkReturnType(context);
+    this.switchCases.forEach(function(switchCase) {
+		var type = switchCase.checkReturnType(context);
 		if(type!=VoidType.instance) {
 			types[type.name] = type;
 		}
-	}
+	});
 	if(this.defaultCase!=null) {
 		var type = this.defaultCase.check(context, null);
 		if(type!=VoidType.instance) {

@@ -31,24 +31,24 @@ MethodFinder.prototype.findMethod = function(checkInstance) {
 MethodFinder.prototype.findMostSpecific = function(candidates, checkInstance) {
 	var candidate = null;
 	var ambiguous = [];
-	for(var i=0;i<candidates.length;i++) {
+	candidates.forEach(function(c) {
 		if(candidate==null)
-			candidate = candidates[i];
+			candidate = c;
 		else {
-			var score = this.scoreMostSpecific(candidate, candidates[i], checkInstance);
+			var score = this.scoreMostSpecific(candidate, c, checkInstance);
 			switch(score) {
 			case Score.WORSE:
-				candidate = candidates[i];
+				candidate = c;
 				ambiguous = [];
 				break;
 			case Score.BETTER:
 				break;
 			case Score.SIMILAR:
-				ambiguous.push(candidates[i]);
+				ambiguous.push(c);
 				break;
 			}
 		}
-	}
+	}, this);
 	if(ambiguous.length>0) {
 		throw new SyntaxError("Too many prototypes!"); // TODO refine
 	}
@@ -111,9 +111,8 @@ MethodFinder.prototype.scoreMostSpecific = function(d1, d2, checkInstance) {
 
 MethodFinder.prototype.filterCompatible = function(candidates, checkInstance) {
 	var compatibles = [];
-	for(var i=0;i<candidates.length;i++) {
-		var declaration = candidates[i];
-		try {
+	candidates.forEach(function(declaration) {
+        try {
 			var assignments = this.methodCall.makeAssignments(this.context,declaration);
 			if(declaration.isAssignableTo(this.context, assignments, checkInstance)) {
 				compatibles.push(declaration);
@@ -124,7 +123,7 @@ MethodFinder.prototype.filterCompatible = function(candidates, checkInstance) {
 			}
 			// else OK
 		}
-	}
+	}, this);
 	return compatibles;
 }
 

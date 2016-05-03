@@ -87,8 +87,9 @@ SwitchErrorStatement.prototype.toODialect = function(writer) {
     this.instructions.toDialect(writer);
     writer.dedent();
     writer.append("} ");
-    for(var i=0;i<this.switchCases.length;i++)
-        this.switchCases[i].catchToODialect(writer);
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.catchToODialect(writer);
+    });
     if(this.defaultCase!=null) {
         writer.append("catch(any) {\n");
         writer.indent();
@@ -113,8 +114,9 @@ SwitchErrorStatement.prototype.toSDialect = function(writer) {
     writer.indent();
     this.instructions.toDialect(writer);
     writer.dedent();
-    for(var i=0;i<this.switchCases.length;i++)
-        this.switchCases[i].catchToPDialect(writer);
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.catchToPDialect(writer);
+    });
     if(this.defaultCase!=null) {
         writer.append("except:\n");
         writer.indent();
@@ -137,8 +139,9 @@ SwitchErrorStatement.prototype.toEDialect = function(writer) {
     writer.indent();
     this.instructions.toDialect(writer);
     writer.dedent();
-    for(var i=0;i<this.switchCases.length;i++)
-        this.switchCases[i].catchToEDialect(writer);
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.catchToEDialect(writer);
+    });
     if(this.defaultCase!=null) {
         writer.append("when any:\n");
         writer.indent();

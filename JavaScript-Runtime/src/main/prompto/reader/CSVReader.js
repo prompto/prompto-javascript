@@ -133,12 +133,12 @@ CSVIterator.prototype.next = function(value, startIdx, endIdx) {
     this.nextLine = null;
     var values = this.parseLine(line);
     var doc = {};
-    for(var i=0;i<this.headers.length;i++) {
+    this.headers.forEach(function(header) {
         if(i<values.length)
-            doc[this.headers[i]] = values[i];
+            doc[header] = values[i];
         else
-            doc[this.headers[i]] = null;
-    }
+            doc[header] = null;
+    });
     return doc;
 };
 

@@ -24,12 +24,12 @@ TypeMap.prototype.inferType = function(context) {
 		}
 	}
 	// second pass: check compatible
-	for(var i=0;i<keys.length;i++) {
-		var t = this[keys[i]];
+	keys.forEach(function(k) {
+        var t = this[k];
 		if(!t.isAssignableTo(context, type)) {
 			throw new SyntaxError("Incompatible types: " + type.name + " and " + t.name);
 		}
-	}
+	}, this);
 	return type;
 };
 

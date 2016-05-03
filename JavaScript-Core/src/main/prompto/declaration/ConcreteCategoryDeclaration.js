@@ -73,11 +73,11 @@ ConcreteCategoryDeclaration.prototype.methodsToSDialect = function(writer) {
     writer.indent();
     if(this.methods==null || this.methods.length==0)
         writer.append("pass\n");
-    else for(var i=0;i<this.methods.length;i++) {
+    else this.methods.forEach(function(method) {
         var w = writer.newMemberWriter();
-        this.methods[i].toDialect(w);
+        method.toDialect(w);
         writer.newLine();
-    }
+    });
     writer.dedent();
 };
 
@@ -126,10 +126,10 @@ ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
 ConcreteCategoryDeclaration.prototype.registerMethods = function(context) {
 	if(this.methodsMap==null) {
         this.methodsMap = {};
-		for(var i=0;i<this.methods.length;i++) {
-            this.methods[i].memberOf = this;
-			this.registerMethod(this.methods[i], context);
-		}
+		this.methods.forEach(function(method) {
+            method.memberOf = this;
+			this.registerMethod(method, context);
+		}, this);
 	}
 };
 
@@ -267,14 +267,12 @@ ConcreteCategoryDeclaration.findAncestorSetter = function(ancestor, context, att
 
 
 ConcreteCategoryDeclaration.prototype.findMemberMethods = function(context, name) {
-	var map = new MethodDeclarationMap(name);
-	this.registerMemberMethods(context,map);
-	var names = Object.getOwnPropertyNames(map.protos);
-	var list = [];
-	for(var i=0;i<names.length;i++) {
-		list.push(map.protos[names[i]]);
-	}
-	return list;
+	var methodsMap = new MethodDeclarationMap(name);
+	this.registerMemberMethods(context,methodsMap);
+	var names = Object.getOwnPropertyNames(methodsMap.protos);
+	return names.map(function(name) {
+        return methodsMap.protos[name];
+	});
 };
 
 
@@ -303,13 +301,10 @@ ConcreteCategoryDeclaration.prototype.registerThisMemberMethods = function(conte
 };
 
 ConcreteCategoryDeclaration.prototype.registerDerivedMemberMethods = function(context, result) {
-	if(this.derivedFrom==null) {
-		return;
-	}
-	for(var i=0;i<this.derivedFrom.length;i++) {
-		var ancestor = this.derivedFrom[i];
-		this.registerAncestorMemberMethods(ancestor, context, result);
-	}
+	if(this.derivedFrom!=null)
+        this.derivedFrom.forEach(function(ancestor) {
+		    this.registerAncestorMemberMethods(ancestor, context, result);
+	    }, this);
 };
 
 ConcreteCategoryDeclaration.prototype.registerAncestorMemberMethods = function(ancestor, context, result) {
@@ -328,11 +323,10 @@ ConcreteCategoryDeclaration.prototype.findOperator = function(context, operator,
         return null;
     // find best candidate
     var candidate = null;
-    for(var i=0;i<methods.length;i++) {
-        var method  = methods[i];
+    methods.forEach(function(method) {
         var potential = method.args[0].getType(context);
         if(!type.isAssignableTo(context, potential))
-            continue;
+            return;
         if(candidate==null)
             candidate = method;
         else {
@@ -340,7 +334,7 @@ ConcreteCategoryDeclaration.prototype.findOperator = function(context, operator,
             if(currentBest.isAssignableTo(context, potential))
                 candidate = method;
         }
-    }
+    });
     return candidate;
 };
 

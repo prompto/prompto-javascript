@@ -69,10 +69,10 @@ ArgumentAssignmentList.prototype.toEDialect = function(writer) {
 
 ArgumentAssignmentList.prototype.toODialect = function(writer) {
     writer.append("(");
-    for(var i=0; i<this.length; i++) {
-        this[i].toDialect(writer);
+    this.forEach(function(arg) {
+        arg.toDialect(writer);
         writer.append(", ");
-    }
+    });
     if(this.length>0)
         writer.trimLast(2);
     writer.append(")");

@@ -13,23 +13,23 @@ EnumeratedCategoryDeclaration.prototype.constructor = EnumeratedCategoryDeclarat
 EnumeratedCategoryDeclaration.prototype.setSymbols = function(symbols) {
 	this.symbols = symbols;
 	var type = new EnumeratedCategoryType(this.id);
-	for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].type = type;
-	}
+	this.symbols.forEach(function(symbol) {
+        symbol.type = type;
+	});
 };
 
 EnumeratedCategoryDeclaration.prototype.register = function(context) {
 	context.registerDeclaration(this);
-	for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].register(context);
-	}
+    this.symbols.forEach(function(symbol) {
+        symbol.register(context);
+	});
 };
 
 EnumeratedCategoryDeclaration.prototype.check = function(context) {
 	ConcreteCategoryDeclaration.prototype.check.call(this, context);
-	for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].check(context);
-	}
+    this.symbols.forEach(function(symbol) {
+        symbol.check(context);
+	});
 	return this.getType(context);
 };
 
@@ -51,10 +51,10 @@ EnumeratedCategoryDeclaration.prototype.toODialect = function(writer) {
     }
     writer.append(" {\n");
     writer.indent();
-    for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].toDialect(writer);
+    this.symbols.forEach(function(symbol) {
+        symbol.toDialect(writer);
         writer.append(";\n");
-    }
+    });
     writer.dedent();
     writer.append("}\n");
 }
@@ -78,10 +78,10 @@ EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
     } else
         writer.append(" with symbols:\n");
     writer.indent();
-    for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].toDialect(writer);
+    this.symbols.forEach(function(symbol) {
+        symbol.toDialect(writer);
         writer.append("\n");
-    }
+    });
     writer.dedent();
 }
 
@@ -98,10 +98,10 @@ EnumeratedCategoryDeclaration.prototype.toSDialect = function(writer) {
         this.attributes.toDialect(writer, false);
     writer.append("):\n");
     writer.indent();
-    for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].toDialect(writer);
+    this.symbols.forEach(function(symbol) {
+        symbol.toDialect(writer);
         writer.append("\n");
-    }
+    });
     writer.dedent();
 }
 

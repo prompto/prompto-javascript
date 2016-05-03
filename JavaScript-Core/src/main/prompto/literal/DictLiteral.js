@@ -36,9 +36,8 @@ DictLiteral.prototype.inferElementType = function(context) {
 		return MissingType.instance;
 	}
 	var lastType = null;
-	for(var i=0;i<items.length;i++) {
-		var entry = items[i];
-		var keyType = entry.key.check(context);
+	items.forEach(function(entry) {
+        var keyType = entry.key.check(context);
 		if(keyType!=TextType.instance) {
 			throw new SyntaxError("Illegal key type: " + keyType.toString());
 		}
@@ -54,7 +53,7 @@ DictLiteral.prototype.inferElementType = function(context) {
 				throw new SyntaxError("Incompatible value types: " + elemType.toString() + " and " + lastType.toString());
 			}
 		}
-	}
+	});
 	return lastType;
 };
 

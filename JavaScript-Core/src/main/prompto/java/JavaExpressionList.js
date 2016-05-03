@@ -14,11 +14,10 @@ JavaExpressionList.prototype.constructor = JavaExpressionList;
 
 JavaExpressionList.prototype.toDialect = function(writer) {
     if(this.length>0) {
-        for(var i=0;i<this.length;i++) {
-            var exp = this[i];
+        this.forEach(function(exp) {
             exp.toDialect(writer);
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
     }
 };

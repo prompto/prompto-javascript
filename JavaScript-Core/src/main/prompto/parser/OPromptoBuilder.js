@@ -440,11 +440,11 @@ OPromptoBuilder.prototype.exitDictType = function(ctx) {
 
 OPromptoBuilder.prototype.exitAttribute_identifier_list = function(ctx) {
     var list = new grammar.IdentifierList();
-    var items = ctx.attribute_identifier();
-    for(var i=0;i<items.length;i++) {
-        var item = this.getNodeValue(items[i]);
+    var rules = ctx.attribute_identifier();
+    rules.forEach(function(rule) {
+        var item = this.getNodeValue(rule);
         list.add(item);
-    }
+    }, this);
     this.setNodeValue(ctx, list);
 };
 
@@ -452,11 +452,11 @@ OPromptoBuilder.prototype.exitAttribute_identifier_list = function(ctx) {
 
 OPromptoBuilder.prototype.exitVariable_identifier_list = function(ctx) {
     var list = new grammar.IdentifierList();
-    var items = ctx.variable_identifier();
-    for(var i=0;i<items.length;i++) {
-        var item = this.getNodeValue(items[i]);
+    var rules = ctx.variable_identifier();
+    rules.forEach(function(rule) {
+        var item = this.getNodeValue(rule);
         list.add(item);
-    }
+    }, this);
     this.setNodeValue(ctx, list);
 };
 
@@ -1255,10 +1255,9 @@ OPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitJavascript_module = function(ctx) {
-	ids = [];
-	for(var i=0;i<ctx.javascript_identifier().length;i++) {
-		ids.push(ctx.javascript_identifier(i).getText());
-	}
+	ids = ctx.javascript_identifier().map(function(rule) {
+        return rule.getText();
+	});
 	var module = new javascript.JavaScriptModule(ids);
 	this.setNodeValue(ctx, module);
 };
@@ -2274,11 +2273,9 @@ OPromptoBuilder.prototype.exitPythonMethodExpression = function(ctx) {
 };
 
 OPromptoBuilder.prototype.exitPython_module = function(ctx) {
-    var ids = []
-    var ctxs = ctx.identifier();
-    for(var i=0;i<ctxs.length;i++) {
-        ids.push(ctxs[i].getText());
-    }
+    var ids = ctx.identifier().map(function(rule) {
+        return rule.getText();
+    });
     var module = new python.PythonModule(ids);
     this.setNodeValue(ctx, module);
 };

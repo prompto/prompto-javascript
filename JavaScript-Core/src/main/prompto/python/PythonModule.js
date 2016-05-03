@@ -4,10 +4,10 @@ function PythonModule(ids) {
 
 PythonModule.prototype.toDialect = function(writer) {
     writer.append(" from module: ");
-    for(var i=0;i<this.ids.length;i++) {
-        writer.append(this.ids[i]);
+    this.ids.forEach(function(id) {
+        writer.append(id);
         writer.append('.');
-    }
+    });
     writer.trimLast(1);
 }
 

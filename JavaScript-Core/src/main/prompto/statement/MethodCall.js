@@ -80,12 +80,11 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 	try {
 		var assignments = this.makeAssignments(parent,declaration);
 		declaration.registerArguments(local);
-		for(var i=0;i<assignments.length;i++) {
-			var assignment = assignments[i];
+		assignments.forEach(function(assignment) {
 			var expression = assignment.resolve(local,declaration,true);
 			var value = assignment.argument.checkValue(parent,expression);
 			local.setValue(assignment.id, value);
-		}
+		});
 		return declaration.check(local);
 	} catch (e) {
 		if(e instanceof PromptoError) {

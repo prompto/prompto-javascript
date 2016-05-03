@@ -88,12 +88,12 @@ ExtendedArgument.prototype.register = function(context) {
 ExtendedArgument.prototype.check = function(context) {
 	this.type.checkExists(context);
 	if(this.attributes!==null) {
-		for(var i=0;i<this.attributes.length;i++) {
-			var actual = context.getRegisteredDeclaration(this.attributes[i]);
+		this.attributes.forEach(function(attr) {
+			var actual = context.getRegisteredDeclaration(attr);
 			if (!actual instanceof AttributeDeclaration) {
-				throw new SyntaxError("Unknown attribute: \"" + attribute + "\"");
+				throw new SyntaxError("Unknown attribute: \"" + attr + "\"");
 			}
-		}
+		});
 	}
 };
 

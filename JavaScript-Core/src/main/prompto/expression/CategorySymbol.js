@@ -36,13 +36,12 @@ CategorySymbol.prototype.check = function(context) {
 	}
 	if(this.assignments!=null) {
         context = context.newLocalContext();
-		for(var i=0;i<this.assignments.length;i++) {
-			var assignment = this.assignments[i];
-			if(!cd.hasAttribute(context, assignment.name)) {
+		this.assignments.forEach(function(assignment) {
+            if(!cd.hasAttribute(context, assignment.name)) {
 				throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + type.name);
 			}
 			assignment.check(context);
-		}
+		});
 	}
 	return this.type;
 };
@@ -52,11 +51,10 @@ CategorySymbol.prototype.interpret = function(context) {
     instance.mutable = true;
 	if(this.assignments!=null) {
         context = context.newLocalContext();
-		for(var i=0;i<this.assignments.length;i++) {
-			var assignment = this.assignments[i];
+        this.assignments.forEach(function(assignment) {
 			var value = assignment.expression.interpret(context);
 			instance.setMember(context, assignment.name, value);
-		}
+		});
 	}
     instance.setMember(context, "name", new Text(this.name));
     instance.mutable = false;

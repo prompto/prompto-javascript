@@ -5,9 +5,9 @@ function EnumeratedNativeDeclaration(id, derivedFrom, symbols) {
 	BaseDeclaration.call(this, id);
 	this.type = new EnumeratedNativeType(id, derivedFrom);
 	this.symbols = symbols;
-	for(var i=0;i<symbols.length;i++) {
-		symbols[i].type = this.type;
-	}
+    this.symbols.forEach(function(symbol) {
+		symbol.type = this.type;
+	}, this);
 	return this;
 }
 
@@ -26,10 +26,10 @@ EnumeratedNativeDeclaration.prototype.toSDialect = function(writer) {
     this.type.derivedFrom.toDialect(writer);
     writer.append("):\n");
     writer.indent();
-    for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].toDialect(writer);
+    this.symbols.forEach(function(symbol) {
+        symbol.toDialect(writer);
         writer.append("\n");
-    }
+    });
     writer.dedent();
 }
 
@@ -40,10 +40,10 @@ EnumeratedNativeDeclaration.prototype.toODialect = function(writer) {
     this.type.derivedFrom.toDialect(writer);
     writer.append(") {\n");
     writer.indent();
-    for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].toDialect(writer);
+    this.symbols.forEach(function(symbol) {
+        symbol.toDialect(writer);
         writer.append(";\n");
-    }
+    });
     writer.dedent();
     writer.append("}\n");
 }
@@ -55,24 +55,24 @@ EnumeratedNativeDeclaration.prototype.toEDialect = function(writer) {
     this.type.derivedFrom.toDialect(writer);
     writer.append(" with symbols:\n");
     writer.indent();
-    for(var i=0;i<this.symbols.length;i++) {
-        this.symbols[i].toDialect(writer);
+    this.symbols.forEach(function(symbol) {
+        symbol.toDialect(writer);
         writer.append("\n");
-    }
+    });
     writer.dedent();
 };
 
 EnumeratedNativeDeclaration.prototype.register = function(context) {
 	context.registerDeclaration(this);
-	for(var i=0;i<this.symbols.length;i++) {
-		this.symbols[i].register(context);
-	}
+    this.symbols.forEach(function(symbol) {
+		symbol.register(context);
+	});
 };
 
 EnumeratedNativeDeclaration.prototype.check = function(context) {
-	for(var i=0;i<this.symbols.length;i++) {
-		this.symbols[i].check(context);
-	}
+    this.symbols.forEach(function(symbol) {
+		symbol.check(context);
+	});
 	return this.type;
 };
 

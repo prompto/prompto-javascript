@@ -41,10 +41,10 @@ ArgumentList.prototype.toDialect = function(writer) {
 
 ArgumentList.prototype.toEDialect = function(writer) {
     writer.append("receiving ");
-    this.forEach(function(arg) {
-        arg.toDialect(writer);
+    for(var i=0;i<this.length-1;i++) {
+        this[i].toDialect(writer);
         writer.append(", ");
-    });
+    }
     if(this.length>1) {
         writer.trimLast(2);
         writer.append(" and ");

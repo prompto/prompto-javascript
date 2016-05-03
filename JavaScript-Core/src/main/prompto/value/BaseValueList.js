@@ -182,14 +182,13 @@ ListIterator.prototype.next = function() {
 
 BaseValueList.prototype.toDialect = function(writer) {
     if(this.items.length>0) {
-        for(var i=0;i<this.items.length; i++) {
-            var o = this.items[i];
+        this.items.forEach(function(o) {
             if(o.toDialect)
                 o.toDialect(writer);
             else
                 writer.append(o.toString());
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
     }
 };

@@ -107,12 +107,9 @@ MemStore.prototype.compareValues = function(context, tuple1, tuple2, orderBy) {
 };
 
 MemStore.prototype.readTuple = function(context, doc, orderBy) {
-    var tuple = [];
-    for(var i=0;i<orderBy.length;i++) {
-        var value = this.readValue(context, doc, orderBy[i]);
-        tuple.push(value);
-    }
-    return tuple;
+    return orderBy.map(function(ob) {
+        return this.readValue(context, doc, ob);
+    }, this);
 };
 
 MemStore.prototype.readValue = function(context, doc, clause) {

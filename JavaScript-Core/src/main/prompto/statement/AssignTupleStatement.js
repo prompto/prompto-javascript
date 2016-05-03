@@ -38,8 +38,7 @@ AssignTupleStatement.prototype.check = function(context) {
 	if(type!=TupleType.instance) {
 		throw new SyntaxError("Expecting a tuple expression, got " + type.getName());
 	}
-	for(var i=0;i<this.names.length;i++) {
-		var name = this.names[i];
+	this.names.forEach(function(name) {
 		var actual = context.getRegistered(name);
 		if(actual==null) {
             var actualType = this.expression.check(context);
@@ -50,7 +49,7 @@ AssignTupleStatement.prototype.check = function(context) {
 			var newType = this.expression.check(context);
 			newType.checkAssignableTo(context,actualType);
 		}
-	}
+	}, this);
 	return VoidType.instance;
 };
 

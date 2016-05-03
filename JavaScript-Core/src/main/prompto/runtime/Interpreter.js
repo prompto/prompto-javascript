@@ -14,12 +14,11 @@ function parseCmdLineArgs(cmdLineArgs) {
 	try {
 		var args = CmdLineParser.parse(cmdLineArgs);
 		var valueArgs = {};
-		var keys = Object.keys(args);
-		for(var i=0;i<keys.length;i++) {
-			var key = new Text(keys[i]);
-			var value = new Text(args[keys[i]]);
+		Object.keys(args).forEach(function(s) {
+            var key = new Text(s);
+			var value = new Text(args[s]);
 			valueArgs[key] = value;
-		}
+		});
 		var dict = new Dictionary(valueArgs);
 		return new ExpressionValue(argsType, dict);
 	} catch(e) {

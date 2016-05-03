@@ -61,10 +61,10 @@ NativeMethodDeclaration.prototype.toODialect = function(writer) {
     this.args.toDialect(writer);
     writer.append(") {\n");
     writer.indent();
-    for(var i=0; i<this.statements.length; i++) {
-        this.statements[i].toDialect(writer);
+    this.statements.forEach(function(stmt) {
+        stmt.toDialect(writer);
         writer.newLine();
-    }
+    });
     writer.dedent();
     writer.append("}\n");
 };

@@ -49,12 +49,11 @@ CategoryDeclaration.prototype.register = function(context) {
 
 CategoryDeclaration.prototype.check = function(context) {
 	if(this.attributes!=null) {
-		for(var i=0;i<this.attributes.length;i++) {
-            var id = this.attributes[i];
+		this.attributes.forEach(function(id) {
 			var ad = context.getRegisteredDeclaration(id.name);
 			if (ad == null)
                 context.problemListener.reportUnknownAttribute(id)
-		}
+		});
 	}
 	return new CategoryType(this.id);
 }
@@ -122,20 +121,20 @@ CategoryDeclaration.prototype.protoToEDialect = function(writer, hasMethods, has
 
 CategoryDeclaration.prototype.methodsToEDialect = function(writer, methods) {
     writer.indent();
-    for(var i=0; i<methods.length; i++) {
+    methods.forEach(function(method) {
         writer.newLine();
         var w = writer.newMemberWriter();
-        methods[i].toDialect(w);
-    }
+        method.toDialect(w);
+    });
     writer.dedent();
 };
 
 CategoryDeclaration.prototype.methodsToODialect = function(writer, methods) {
-    for(var i =0; i<methods.length; i++) {
+    methods.forEach(function(method) {
         var w = writer.newMemberWriter();
-        methods[i].toDialect(w);
+        method.toDialect(w);
         w.newLine();
-    }
+    });
 }
 
 

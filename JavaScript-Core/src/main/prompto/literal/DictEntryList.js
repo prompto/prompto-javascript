@@ -10,10 +10,10 @@ function DictEntryList(entries, entry) {
 DictEntryList.prototype.toDialect = function(writer) {
     writer.append('{');
     if(this.items.length>0) {
-        for(var i=0;i<this.items.length;i++) {
-            this.items[i].toDialect(writer);
+        this.items.forEach(function(item) {
+            item.toDialect(writer);
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
     }
     writer.append('}');

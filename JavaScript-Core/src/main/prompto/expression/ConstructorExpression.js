@@ -74,13 +74,12 @@ ConstructorExpression.prototype.check = function(context) {
             // throw new SyntaxError("Cannot copy from " + cft.getName());
 	}
 	if(this.assignments!=null) {
-		for(var i=0; i<this.assignments.length; i++) {
-			var assignment = this.assignments[i];
+        this.assignments.forEach(function(assignment) {
 			if(!cd.hasAttribute(context, assignment.name))
                 context.problemListener.reportUnknownAttribute(assignment.name);
                 //	throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + this.type.name);
 			assignment.check(context);
-		}
+		});
 	}
 	return type;
 };
@@ -93,25 +92,23 @@ ConstructorExpression.prototype.interpret = function(context) {
 		if((copyObj.getMember || null)!=null) {
 			var cd = context.getRegisteredDeclaration(this.type.name);
 			var names = copyObj.getAttributeNames();
-			for(var i=0;i<names.length;i++) {
-				var name = names[i]
+			names.forEach(function(name) {
 				if(cd.hasAttribute(context, name)) {
                     var value = copyObj.getMember(context, name);
                     if(value!=null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
 					instance.setMember(context, name, value);
 				}
-			}
+			}, this);
 		}
 	}
 	if(this.assignments!=null) {
-		for(var i=0;i<this.assignments.length;i++) {
-			var assignment = this.assignments[i];
+        this.assignments.forEach(function(assignment) {
 			var value = assignment.expression.interpret(context);
             if(value!=null && value.mutable && !this.type.mutable)
                 throw new NotMutableError();
 			instance.setMember(context, assignment.name, value);
-		}
+		}, this);
 	}
     instance.mutable = this.type.mutable;
 	return instance;

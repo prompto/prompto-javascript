@@ -19,31 +19,31 @@ NativeCategoryBindingList.prototype.toDialect = function(writer) {
 NativeCategoryBindingList.prototype.toEDialect = function(writer) {
     writer.append("define category bindings as:\n");
     writer.indent();
-    for(var i = 0;i<this.length;i++) {
-        this[i].toDialect(writer);
+    this.forEach(function(binding) {
+        binding.toDialect(writer);
         writer.newLine();
-    }
+    });
     writer.dedent();
 }
 
 NativeCategoryBindingList.prototype.toSDialect = function(writer) {
     writer.append("def category bindings:\n");
     writer.indent();
-    for(var i = 0;i<this.length;i++) {
-        this[i].toDialect(writer);
+    this.forEach(function(binding) {
+        binding.toDialect(writer);
         writer.newLine();
-    }
+    });
     writer.dedent();
 }
 
 NativeCategoryBindingList.prototype.toODialect = function(writer) {
     writer.append("category bindings {\n");
     writer.indent();
-    for(var i = 0;i<this.length;i++) {
-        this[i].toDialect(writer);
+    this.forEach(function(binding) {
+        binding.toDialect(writer);
         writer.append(';');
         writer.newLine();
-    }
+    });
     writer.dedent();
     writer.append("}");
 }

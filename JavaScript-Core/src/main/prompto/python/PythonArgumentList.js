@@ -14,10 +14,10 @@ PythonArgumentList.prototype.constructor = PythonArgumentList;
 
 PythonArgumentList.prototype.toDialect = function(writer) {
     if(this.length>0) {
-        for(var i=0;i<this.length;i++) {
-            this[i].toDialect(writer);
+        this.forEach(function(arg) {
+            arg.toDialect(writer);
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
     }
 };

@@ -17,11 +17,10 @@ Dictionary.prototype = Object.create(Value.prototype);
 Dictionary.prototype.constructor = Dictionary;
 
 Dictionary.prototype.toString = function() {
-	var vals = [];
 	var names = Object.getOwnPropertyNames(this.dict);
-	for(var i=0;i<names.length;i++) {
-		vals[i] = names[i] + ":" + this.dict[names[i]];
-	}
+    var vals = names.map(function(name) {
+        return name + ":" + this.dict[name];
+	}, this);
 	return "{" + vals.join(", ") + "}";
 };
 

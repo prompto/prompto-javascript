@@ -72,15 +72,14 @@ JavaScriptModule.prototype.resolve_path = function(part) {
 
 JavaScriptModule.prototype.toDialect = function(writer) {
     writer.append(" from module: ");
-    for(var i=0;i<this.ids.length;i++) {
-        var id = this.ids[i];
+    this.ids.forEach(function(id) {
         if("js"==id) {
             writer.trimLast(1);
             writer.append('.');
         }
         writer.append(id);
         writer.append('/');
-    }
+    });
     writer.trimLast(1);
 }
 

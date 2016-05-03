@@ -15,11 +15,10 @@ IdentifierList.prototype.constructor = IdentifierList;
 
 
 IdentifierList.parse = function(ids) {
-	var parts = ids.split(",");
-	var result = new IdentifierList();
-	for(var i=0;i<parts.length;i++) {
-		result.add(parts[i]);
-	}
+    var result = new IdentifierList();
+	ids.split(",").forEach(function(part) {
+        result.add(part);
+    });
 	return result;
 };
 
@@ -66,10 +65,10 @@ IdentifierList.prototype.toEDialect = function(writer, finalAnd) {
 
 IdentifierList.prototype.toODialect = function(writer) {
     if(this.length>0) {
-        for(var i=0;i<this.length;i++) {
-            writer.append(this[i].name);
+        this.forEach(function(id) {
+            writer.append(id.name);
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
     }
 };

@@ -68,11 +68,11 @@ NativeCategoryDeclaration.prototype.toSDialect = function(writer) {
     writer.newLine();
     this.categoryBindings.toDialect(writer);
     if(this.methods!=null && this.methods.length>0) {
-        for(var i=0;i<this.methods.length;i++) {
+        this.methods.forEach(function(method) {
             var w = writer.newMemberWriter();
-            this.methods[i].toDialect(w);
+            method.toDialect(w);
             writer.newLine();
-        }
+        });
     }
     writer.dedent();
     writer.newLine();
