@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testListRecords = function(test) {
+	checkOutput(test, "store/listRecords.pec");
+};
+
 exports.testManyRecords = function(test) {
 	checkOutput(test, "store/manyRecords.pec");
 };
