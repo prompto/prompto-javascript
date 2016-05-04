@@ -18,3 +18,7 @@ exports.testCopyFromDescendantWithOverride = function(test) {
 	compareResourceOEO(test, "categories/copyFromDescendantWithOverride.poc");
 };
 
+exports.testCopyFromDocument = function(test) {
+	compareResourceOEO(test, "categories/copyFromDocument.poc");
+};
+

@@ -29,3 +29,7 @@ exports.testCopyFromDescendantWithOverride = function(test) {
 	checkOutput(test, "categories/copyFromDescendantWithOverride.poc");
 };
 
+exports.testCopyFromDocument = function(test) {
+	checkOutput(test, "categories/copyFromDocument.poc");
+};
+

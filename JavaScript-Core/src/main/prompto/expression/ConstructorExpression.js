@@ -1,5 +1,6 @@
 var Section = require("../parser/Section").Section;
 var CategoryType = null;
+var DocumentType = require("../type/DocumentType").DocumentType;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
@@ -69,7 +70,7 @@ ConstructorExpression.prototype.check = function(context) {
 	cd.checkConstructorContext(context);
 	if(this.copyFrom!=null) {
 		var cft = this.copyFrom.check(context);
-		if(!(cft instanceof CategoryType))
+		if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
             context.problemenListener.reportInvalidCopySource();
             // throw new SyntaxError("Cannot copy from " + cft.getName());
 	}
@@ -91,12 +92,13 @@ ConstructorExpression.prototype.interpret = function(context) {
 		var copyObj = this.copyFrom.interpret(context);
 		if((copyObj.getMember || null)!=null) {
 			var cd = context.getRegisteredDeclaration(this.type.name);
-			var names = copyObj.getAttributeNames();
+			var names = copyObj.getMemberNames();
 			names.forEach(function(name) {
 				if(cd.hasAttribute(context, name)) {
                     var value = copyObj.getMember(context, name);
                     if(value!=null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
+                    // TODO convert Document member to attribute type
 					instance.setMember(context, name, value);
 				}
 			}, this);

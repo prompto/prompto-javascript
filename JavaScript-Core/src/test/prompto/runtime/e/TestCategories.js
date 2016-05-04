@@ -33,3 +33,7 @@ exports.testCopyFromDescendantWithOverride = function(test) {
 	checkOutput(test, "categories/copyFromDescendantWithOverride.pec");
 };
 
+exports.testCopyFromDocument = function(test) {
+	checkOutput(test, "categories/copyFromDocument.pec");
+};
+
