@@ -16,21 +16,27 @@ StoreStatement.prototype.constructor = StoreStatement;
 
 
 StoreStatement.prototype.toDialect = function(writer) {
-    writer.append ("store ");
-    if(writer.dialect == Dialect.E) {
-        this.add.map( function(exp) {
-            exp.toDialect(writer);
-            writer.append(",");
-        });
-        writer.trimLast(1);
-    } else {
-        writer.append ('(');
-        this.add.map( function(exp) {
-            exp.toDialect(writer);
-            writer.append(",");
-        });
-        writer.trimLast(1);
-        writer.append (')');
+    if(this.del) {
+        writer.append("delete ");
+        if (writer.dialect == Dialect.E)
+            this.del.toDialect(writer);
+        else {
+            writer.append('(');
+            this.del.toDialect(writer);
+            writer.append(')');
+        }
+        if (this.add)
+            writer.append(" and ");
+    }
+    if (this.add) {
+        writer.append ("store ");
+        if (writer.dialect == Dialect.E)
+            this.add.toDialect(writer);
+        else {
+            writer.append('(');
+            this.add.toDialect(writer);
+            writer.append(')');
+        }
     }
 };
 

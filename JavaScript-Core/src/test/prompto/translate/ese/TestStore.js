@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
+exports.testDeleteRecords = function(test) {
+	compareResourceESE(test, "store/deleteRecords.pec");
+};
+
 exports.testListRecords = function(test) {
 	compareResourceESE(test, "store/listRecords.pec");
 };
