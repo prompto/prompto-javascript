@@ -116,11 +116,11 @@ Context.prototype.newLocalContext = function() {
 	return context;
 };
 
-Context.prototype.newDocumentContext = function(doc) {
+Context.prototype.newDocumentContext = function(doc, isChild) {
 	var context = new DocumentContext(doc);
 	context.globals = this.globals;
-	context.calling = this;
-	context.parent = null;
+	context.calling = isChild ? this.calling : this;
+	context.parent = isChild ? this : null;
 	context.debugger = this.debugger;
     context.problemListener = this.problemListener;
 	return context;

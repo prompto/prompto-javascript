@@ -18,27 +18,27 @@ MemStore.prototype.store = function(document) {
 };
 
 
-MemStore.prototype.fetchOne = function(context, xfilter) {
+MemStore.prototype.fetchOne = function(context, predicate) {
     for (dbId in this.documents) {
         doc = this.documents[dbId];
-        if(this.matches(context, doc, xfilter))
+        if(this.matches(context, doc, predicate))
             return doc;
     }
     return null;
 };
 
-MemStore.prototype.matches = function(context, doc, xfilter) {
-    if(!xfilter)
+MemStore.prototype.matches = function(context, doc, predicate) {
+    if(!predicate)
         return true;
-    var local = context.newDocumentContext(doc);
-    var test = xfilter.interpret(local);
+    var local = context.newDocumentContext(doc, true);
+    var test = predicate.interpret(local);
     if (!(test instanceof Bool))
         throw new InternalError("Illegal test result: " + test);
     return test.value;
 };
 
-MemStore.prototype.fetchMany = function(context, start, end, xfilter, orderBy) {
-    docs = this.fetchMatching(context, xfilter);
+MemStore.prototype.fetchMany = function(context, start, end, predicate, orderBy) {
+    docs = this.fetchMatching(context, predicate);
     docs = this.sort(context, docs, orderBy);
     docs = this.slice(context, docs, start, end);
     return new DocumentIterator(docs);
@@ -124,11 +124,11 @@ MemStore.prototype.readValue = function(context, doc, clause) {
     return value;
 }
 
-MemStore.prototype.fetchMatching = function(context, xfilter) {
+MemStore.prototype.fetchMatching = function(context, predicate) {
     var docs = [];
     for (dbId in this.documents) {
         doc = this.documents[dbId];
-        if (this.matches(context, doc, xfilter))
+        if (this.matches(context, doc, predicate))
             docs.push(doc);
     }
     return docs;
