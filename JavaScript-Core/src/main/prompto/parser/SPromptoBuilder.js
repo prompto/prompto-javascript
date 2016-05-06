@@ -1833,7 +1833,7 @@ SPromptoBuilder.prototype.exitFetchAll = function(ctx) {
     var start = this.getNodeValue(ctx.xstart);
     var stop = this.getNodeValue(ctx.xstop);
     var orderBy = this.getNodeValue(ctx.xorder);
-    this.setNodeValue(ctx, new expression.FetchAllExpression(category, start, stop, xfilter, orderBy));
+    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, xfilter, orderBy));
 };
 
 
