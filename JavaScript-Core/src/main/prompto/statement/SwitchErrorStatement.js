@@ -5,10 +5,10 @@ var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").Enumerate
 var VoidType = require("../type/VoidType").VoidType;
 var ExecutionError = require("../error/ExecutionError").ExecutionError;
 
-function SwitchErrorStatement(errorId, instructions, handlers, anyStmts, alwaysStmts) {
+function SwitchErrorStatement(errorId, statements, handlers, anyStmts, alwaysStmts) {
 	BaseSwitchStatement.call(this, handlers, anyStmts);
 	this.errorId = errorId;
-	this.instructions = instructions || null;
+	this.statements = statements || null;
 	this.alwaysInstructions = alwaysStmts || null;
 	return null;
 }
@@ -27,7 +27,7 @@ SwitchErrorStatement.prototype.checkSwitchType = function(context) {
 };
 
 SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
-	var type = this.instructions.check(context, null);
+	var type = this.statements.check(context, null);
 	if(type!=VoidType.instance) {
 		types[type.name] = type;
 	}
@@ -45,7 +45,7 @@ SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
 SwitchErrorStatement.prototype.interpret = function(context) {
 	var result = null;
 	try {
-		result = this.instructions.interpret(context);
+		result = this.statements.interpret(context);
 	} catch ( e) {
 		if(e instanceof ExecutionError) {
 			var switchValue = this.populateError(e, context);
@@ -84,7 +84,7 @@ SwitchErrorStatement.prototype.toODialect = function(writer) {
     writer.append(this.errorId.name);
     writer.append(") {\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     writer.append("} ");
     this.switchCases.forEach(function(switchCase) {
@@ -112,7 +112,7 @@ SwitchErrorStatement.prototype.toSDialect = function(writer) {
     writer.append(this.errorId.name);
     writer.append(":\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     this.switchCases.forEach(function(switchCase) {
         switchCase.catchToPDialect(writer);
@@ -137,7 +137,7 @@ SwitchErrorStatement.prototype.toEDialect = function(writer) {
     writer.append(this.errorId.name);
     writer.append(" doing:\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     this.switchCases.forEach(function(switchCase) {
         switchCase.catchToEDialect(writer);

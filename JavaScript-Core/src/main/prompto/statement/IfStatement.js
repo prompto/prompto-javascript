@@ -4,10 +4,10 @@ var BooleanType = require("../type/BooleanType").BooleanType;
 var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
 var Bool = require("../value/Bool").Bool;
 
-function IfStatement(condition, instructions, elseIfs, elseStmts) {
+function IfStatement(condition, statements, elseIfs, elseStmts) {
 	BaseStatement.call(this);
 	this.elements = new IfElementList();
-	this.elements.add(new IfElement(condition,instructions));
+	this.elements.add(new IfElement(condition, statements));
 	elseIfs = elseIfs || null;
 	if(elseIfs!=null) {
 		this.elements.addAll(elseIfs);
@@ -23,12 +23,12 @@ IfStatement.prototype = Object.create(BaseStatement.prototype);
 IfStatement.prototype.constructor = IfStatement;
 
 
-IfStatement.prototype.addAdditional = function(condition, instructions) {
-	this.elements.add(new IfElement(condition,instructions));
+IfStatement.prototype.addAdditional = function(condition, statements) {
+	this.elements.add(new IfElement(condition, statements));
 };
 
-IfStatement.prototype.setFinal = function(instructions) {
-	this.elements.add(new IfElement(null,instructions));
+IfStatement.prototype.setFinal = function(statements) {
+	this.elements.add(new IfElement(null, statements));
 };
 
 IfStatement.prototype.check = function(context) {
@@ -67,7 +67,7 @@ IfStatement.prototype.toODialect = function(writer) {
             writer.append("else ");
         }
         this.elements[i].toODialect(writer);
-        curly = this.elements[i].instructions.length>1;
+        curly = this.elements[i].statements.length>1;
     }
     writer.newLine();
 };
@@ -98,10 +98,10 @@ IfElementList.prototype.constructor = IfElementList;
 
 exports.IfElementList = IfElementList;
 
-function IfElement(condition, instructions) {
+function IfElement(condition, statements) {
 	BaseStatement.call(this);
 	this.condition = condition;
-	this.instructions = instructions;
+	this.statements = statements;
 	return this;
 }
 
@@ -115,7 +115,7 @@ IfElement.prototype.check = function(context) {
 		throw new SyntaxError("Expected a boolean condition!");
 	}
     context = this.downCast(context, false);
-	return this.instructions.check(context, null);
+	return this.statements.check(context, null);
 };
 
 IfElement.prototype.downCast = function(context, setValue) {
@@ -128,7 +128,7 @@ IfElement.prototype.downCast = function(context, setValue) {
 
 IfElement.prototype.interpret = function(context) {
     context = this.downCast(context, true);
-    return this.instructions.interpret(context);
+    return this.statements.interpret(context);
 };
 
 IfElement.prototype.toSDialect = function(writer) {
@@ -142,7 +142,7 @@ IfElement.prototype.toEDialect = function(writer) {
     }
     writer.append(":\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 };
 
@@ -153,13 +153,13 @@ IfElement.prototype.toODialect = function(writer) {
         this.condition.toDialect(writer);
         writer.append(") ");
     }
-    var curly = this.instructions!=null && this.instructions.length>1;
+    var curly = this.statements!=null && this.statements.length>1;
     if(curly)
         writer.append("{\n");
     else
         writer.newLine();
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     if(curly)
         writer.append("}");

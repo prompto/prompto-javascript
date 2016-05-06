@@ -3,10 +3,10 @@ var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Bool = require("../value/Bool").Bool;
 
-function WhileStatement(condition, instructions) {
+function WhileStatement(condition, statements) {
 	BaseStatement.call(this);
 	this.condition = condition;
-	this.instructions = instructions;
+	this.statements = statements;
 	return this;
 }
 
@@ -20,13 +20,13 @@ WhileStatement.prototype.check = function(context) {
 		throw new SyntaxError("Expected a Boolean condition!");
 	}
 	var child = context.newChildContext();
-	return this.instructions.check(child, null);
+	return this.statements.check(child, null);
 };
 
 WhileStatement.prototype.interpret = function(context) {
 	while(this.interpretCondition(context)) {
 		var child = context.newChildContext();
-		var value = this.instructions.interpret(child);
+		var value = this.statements.interpret(child);
 		if(value!=null)
 			return value;
 	}
@@ -54,7 +54,7 @@ WhileStatement.prototype.toEDialect = function(writer) {
     this.condition.toDialect(writer);
     writer.append(" :\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 }
 
@@ -63,7 +63,7 @@ WhileStatement.prototype.toODialect = function(writer) {
     this.condition.toDialect(writer);
     writer.append(") {\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     writer.append("}\n");
 }

@@ -3,10 +3,10 @@ var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Bool = require("../value/Bool").Bool;
 
-function DoWhileStatement(condition, instructions) {
+function DoWhileStatement(condition, statements) {
 	BaseStatement.call(this);
 	this.condition = condition;
-	this.instructions = instructions;
+	this.statements = statements;
 	return this;
 }
 
@@ -20,13 +20,13 @@ DoWhileStatement.prototype.check = function(context) {
 		throw new SyntaxError("Expected a Boolean condition!");
 	}
 	var child = context.newChildContext();
-	return this.instructions.check(child, null);
+	return this.statements.check(child, null);
 };
 
 DoWhileStatement.prototype.interpret = function(context) {
 	do {
 		var child = context.newChildContext();
-		var value = this.instructions.interpret(child);
+		var value = this.statements.interpret(child);
 		if(value!=null)
 			return value;
 	} while(this.interpretCondition(context));
@@ -52,7 +52,7 @@ DoWhileStatement.prototype.toSDialect = function(writer) {
 DoWhileStatement.prototype.toEDialect = function(writer) {
     writer.append("do:\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     writer.append("while ");
     this.condition.toDialect(writer);
@@ -62,7 +62,7 @@ DoWhileStatement.prototype.toEDialect = function(writer) {
 DoWhileStatement.prototype.toODialect = function(writer) {
     writer.append("do {\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     writer.append("} while (");
     this.condition.toDialect(writer);

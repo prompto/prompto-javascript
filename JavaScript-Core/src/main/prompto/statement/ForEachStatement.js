@@ -5,12 +5,12 @@ var IntegerType = require("../type/IntegerType").IntegerType;
 var Integer = require("../value/Integer").Integer;
 var InternalError = require("../error/InternalError").InternalError;
 
-function ForEachStatement(v1, v2, source, instructions) {
+function ForEachStatement(v1, v2, source, statements) {
 	BaseStatement.call(this);
 	this.v1 = v1 || null;
 	this.v2 = v2 || null;
 	this.source = source;
-	this.instructions = instructions;
+	this.statements = statements;
 	return this;
 }
 
@@ -30,7 +30,7 @@ ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 	if (this.v2 != null) {
 		context.registerValue(new Variable(this.v1, IntegerType.instance));
 	}
-	return this.instructions.check(child, null);
+	return this.statements.check(child, null);
 };
 
 ForEachStatement.prototype.interpret = function(context) {
@@ -55,7 +55,7 @@ ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, cont
 		child.registerValue(new Variable(this.v1, elemType));
         var value = iterator.next();
 		child.setValue(this.v1, value);
-		value = this.instructions.interpret(child);
+		value = this.statements.interpret(child);
 		if (value != null) {
 			return value;
 		}
@@ -82,7 +82,7 @@ ForEachStatement.prototype.evaluateItemIteratorWithIndex = function(elemType, co
 		child.setValue(this.v2, iterator.next());
 		child.registerValue(new Variable(this.v1, IntegerType.instance));
 		child.setValue(this.v1, new Integer(++index));
-		var value = this.instructions.interpret(child);
+		var value = this.statements.interpret(child);
 		if (value != null) {
 			return value;
 		}
@@ -104,12 +104,12 @@ ForEachStatement.prototype.toODialect = function(writer) {
     writer.append(" in ");
     this.source.toDialect(writer);
     writer.append(")");
-    var oneLine = this.instructions.length==1 && (this.instructions[0] instanceof SimpleStatement);
+    var oneLine = this.statements.length==1 && (this.statements[0] instanceof SimpleStatement);
     if(!oneLine)
         writer.append(" {");
     writer.newLine();
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     if(!oneLine) {
         writer.append("}");
@@ -129,7 +129,7 @@ ForEachStatement.prototype.toEDialect = function(writer) {
     writer.append(":");
     writer.newLine();
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 }
 
@@ -145,7 +145,7 @@ ForEachStatement.prototype.toSDialect = function(writer) {
     writer.append(":");
     writer.newLine();
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 }
 

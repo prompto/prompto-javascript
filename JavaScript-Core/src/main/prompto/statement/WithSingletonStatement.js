@@ -1,10 +1,10 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 
-function WithSingletonStatement(type, instructions) {
+function WithSingletonStatement(type, statements) {
     BaseStatement.call(this);
     this.type = type;
-    this.instructions = instructions;
+    this.statements = statements;
     return this;
 };
 
@@ -14,7 +14,7 @@ WithSingletonStatement.prototype.constructor = WithSingletonStatement;
 WithSingletonStatement.prototype.check = function(context) {
     var instanceContext = context.newInstanceContext(null, this.type);
     var childContext = instanceContext.newChildContext();
-    return this.instructions.check(childContext, null);
+    return this.statements.check(childContext, null);
 };
 
 WithSingletonStatement.prototype.interpret = function(context) {
@@ -22,7 +22,7 @@ WithSingletonStatement.prototype.interpret = function(context) {
     var instance = context.loadSingleton(this.type);
     var instanceContext = context.newInstanceContext(instance);
     var childContext = instanceContext.newChildContext();
-    return this.instructions.interpret(childContext);
+    return this.statements.interpret(childContext);
 };
 
 
@@ -35,7 +35,7 @@ WithSingletonStatement.prototype.toEDialect = function(writer) {
     this.type.toDialect(writer);
     writer.append(", do:\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 };
 
@@ -43,12 +43,12 @@ WithSingletonStatement.prototype.toODialect = function(writer) {
     writer.append("with (");
     this.type.toDialect(writer);
     writer.append(")");
-    var oneLine = this.instructions.length==1 && (this.instructions[0] instanceof SimpleStatement);
+    var oneLine = this.statements.length==1 && (this.statements[0] instanceof SimpleStatement);
     if(!oneLine)
         writer.append(" {");
     writer.newLine();
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     if(!oneLine) {
         writer.append("}");
@@ -61,7 +61,7 @@ WithSingletonStatement.prototype.toSDialect = function(writer) {
     this.type.toDialect(writer);
     writer.append(":\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 };
 

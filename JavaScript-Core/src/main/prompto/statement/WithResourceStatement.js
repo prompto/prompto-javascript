@@ -1,10 +1,10 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 
-function WithResourceStatement(resource, instructions) {
+function WithResourceStatement(resource, statements) {
 	BaseStatement.call(this);
 	this.resource = resource;
-	this.instructions = instructions;
+	this.statements = statements;
 }
 
 WithResourceStatement.prototype = Object.create(BaseStatement.prototype);
@@ -13,14 +13,14 @@ WithResourceStatement.prototype.constructor = WithResourceStatement;
 WithResourceStatement.prototype.check = function(context) {
 	context = context.newResourceContext();
 	this.resource.checkResource(context);
-	return this.instructions.check(context);
+	return this.statements.check(context);
 };
 
 WithResourceStatement.prototype.interpret = function(context) {
 	context = context.newResourceContext();
 	try {
 		this.resource.interpret(context);
-		return this.instructions.interpret(context);
+		return this.statements.interpret(context);
 	} finally {
 		var res = context.getValue(this.resource.id);
 		if(res.close) {
@@ -38,7 +38,7 @@ WithResourceStatement.prototype.toEDialect = function(writer) {
     this.resource.toDialect(writer);
     writer.append(", do:\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 }
 
@@ -46,12 +46,12 @@ WithResourceStatement.prototype.toODialect = function(writer) {
     writer.append("with (");
     this.resource.toDialect(writer);
     writer.append(")");
-    var oneLine = this.instructions.length==1 && (this.instructions[0] instanceof SimpleStatement);
+    var oneLine = this.statements.length==1 && (this.statements[0] instanceof SimpleStatement);
     if(!oneLine)
         writer.append(" {");
     writer.newLine();
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
     if(!oneLine) {
         writer.append("}");
@@ -64,7 +64,7 @@ WithResourceStatement.prototype.toSDialect = function(writer) {
     this.resource.toDialect(writer);
     writer.append(":\n");
     writer.indent();
-    this.instructions.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 }
 
