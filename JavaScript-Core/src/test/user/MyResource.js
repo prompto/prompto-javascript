@@ -1,4 +1,4 @@
-var content = "readFullyOk";
+var contents = {};
 
 function MyResource() {
 	this.path = null;
@@ -17,11 +17,18 @@ MyResource.prototype.close = function() {
 };
 
 MyResource.prototype.readFully = function() {
-	return content;
+	return contents[this.path];
 };
 
 MyResource.prototype.writeFully = function(data) {
-	content = data;
+    contents[this.path] = data;
 };
+
+
+Object.defineProperty(MyResource.prototype, "content", {
+    set: function(value) {
+        contents[this.path] = value;
+    }
+});
 
 exports.MyResource = MyResource;
