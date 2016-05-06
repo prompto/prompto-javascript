@@ -1,4 +1,5 @@
 var ResourceType = require("../type/ResourceType").ResourceType;
+var ResourceContext = require("../runtime/Context").ResourceContext;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
@@ -20,27 +21,32 @@ ReadExpression.prototype.toDialect = function(writer) {
 };
 
 ReadExpression.prototype.check = function(context) {
-	context = context.newResourceContext();
-	var sourceType = this.resource.check(context);
+    context = context instanceof ResourceContext ? context : context.newResourceContext();
+    var sourceType = this.resource.check(context);
 	if(!(sourceType instanceof ResourceType))
         context.problemListener.reportNotAResource(this.resource);
 	return TextType.instance;
 };
 
 ReadExpression.prototype.interpret = function(context) {
-	context = context.newResourceContext();
-	var o = this.resource.interpret(context);
-	if(o==null) {
+    var resContext = context instanceof ResourceContext ? context : context.newResourceContext();
+    var res = this.resource.interpret(resContext);
+	if(res==null) {
 		throw new NullReferenceError();
 	}
-	if(!(o.isReadable)) {
+	if(!(res.isReadable)) {
 		throw new InternalError("Illegal read source: " + o);
 	}
-	if(!o.isReadable()) {
+	if(!res.isReadable()) {
 		throw new InvalidResourceError("Not readable");
 	}
-	var s = o.readFully();
-    return new Text(s);
+    try {
+        var s = res.readFully();
+        return new Text(s);
+    } finally {
+        if(resContext!=context)
+            res.close();
+    }
 };
 
 exports.ReadExpression = ReadExpression;

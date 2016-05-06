@@ -1,3 +1,4 @@
+var ResourceContext = require("../runtime/Context").ResourceContext;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var ResourceType = require("../type/ResourceType").ResourceType;
 var VoidType = require("../type/VoidType").VoidType;
@@ -20,7 +21,7 @@ WriteStatement.prototype.toString = function() {
 };
 
 WriteStatement.prototype.check = function(context) {
-	context = context.newResourceContext();
+	context = context instanceof ResourceContext ? context : context.newResourceContext();
 	var resourceType = this.resource.check(context);
 	if(!(resourceType instanceof ResourceType))
         context.problemListener.reportNotAResource(this.resource);
@@ -28,20 +29,25 @@ WriteStatement.prototype.check = function(context) {
 }
 
 WriteStatement.prototype.interpret = function(context) {
-	context = context.newResourceContext();
-	var o = this.resource.interpret(context);
-	if(o==null) {
+    var resContext = context instanceof ResourceContext ? context : context.newResourceContext();
+	var res = this.resource.interpret(resContext);
+	if(res==null) {
 		throw new NullReferenceError();
 	}
-	if(!(o.isWritable)) {
+	if(!(res.isWritable)) {
 		throw new InternalError("Illegal write source: " + o);
 	}
-	if(!o.isWritable()) {
+	if(!res.isWritable()) {
 		throw new InvalidResourceError("Not writable");
 	}
-	var str = this.content.interpret(context).toString();
-	o.writeFully(str);
-	return null;
+	var str = this.content.interpret(resContext).toString();
+	try {
+        res.writeFully(str);
+        return null;
+    } finally {
+        if(resContext!=context)
+            res.close();
+    }
 };
 
 WriteStatement.prototype.toDialect = function(writer) {

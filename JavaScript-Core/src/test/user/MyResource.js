@@ -1,4 +1,4 @@
-var content = null;
+var content = "readFullyOk";
 
 function MyResource() {
 	this.path = null;
@@ -25,6 +25,3 @@ MyResource.prototype.writeFully = function(data) {
 };
 
 exports.MyResource = MyResource;
-exports.setContent = function(data) {
-	content = data;
-}

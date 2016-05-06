@@ -2,18 +2,6 @@ require("../../../../exploded");
 
 var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
-exports.testBadRead = function(test) {
-	compareResourceESE(test, "resource/badRead.pec");
-};
-
-exports.testBadResource = function(test) {
-	compareResourceESE(test, "resource/badResource.pec");
-};
-
-exports.testBadWrite = function(test) {
-	compareResourceESE(test, "resource/badWrite.pec");
-};
-
 exports.testReadResource = function(test) {
 	compareResourceESE(test, "resource/readResource.pec");
 };

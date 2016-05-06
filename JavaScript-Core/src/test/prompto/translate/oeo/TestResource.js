@@ -2,18 +2,6 @@ require("../../../../exploded");
 
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testBadRead = function(test) {
-	compareResourceOEO(test, "resource/badRead.poc");
-};
-
-exports.testBadResource = function(test) {
-	compareResourceOEO(test, "resource/badResource.poc");
-};
-
-exports.testBadWrite = function(test) {
-	compareResourceOEO(test, "resource/badWrite.poc");
-};
-
 exports.testReadResource = function(test) {
 	compareResourceOEO(test, "resource/readResource.poc");
 };
