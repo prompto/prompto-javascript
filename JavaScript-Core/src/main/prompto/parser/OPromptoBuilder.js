@@ -115,11 +115,6 @@ OPromptoBuilder.prototype.exitBlob_expression = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitBlobExpression = function(ctx) {
-    var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, exp);
-};
-
 
 OPromptoBuilder.prototype.exitBlobType = function(ctx) {
     this.setNodeValue(ctx, type.BlobType.instance);
@@ -803,17 +798,14 @@ OPromptoBuilder.prototype.exitMethod_identifier = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitMethodCallExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
 
 OPromptoBuilder.prototype.exitConstructor_expression = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
 	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
 };
+
+
 
 OPromptoBuilder.prototype.exitAssertion = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
@@ -885,22 +877,27 @@ OPromptoBuilder.prototype.exitMemberInstance = function(ctx) {
 };
 
 
+
 OPromptoBuilder.prototype.exitItemInstance = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, new instance.ItemInstance(exp));
 };
 
 
+
+OPromptoBuilder.prototype.exitMethod_expression = function(ctx) {
+	var exp = this.getNodeValue(ctx.getChild(0));
+	this.setNodeValue(ctx, exp);
+};
+
+
+
 OPromptoBuilder.prototype.exitMethodExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
-OPromptoBuilder.prototype.exitConstructorExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
 
 
 OPromptoBuilder.prototype.exitNative_statement_list = function(ctx) {
@@ -1835,10 +1832,12 @@ OPromptoBuilder.prototype.exitSliceFirstOnly = function(ctx) {
 };
 
 
+
 OPromptoBuilder.prototype.exitSliceLastOnly = function(ctx) {
 	var last = this.getNodeValue(ctx.last);
 	this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
 };
+
 
 
 OPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
@@ -1847,17 +1846,6 @@ OPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
 	this.setNodeValue(ctx, new expression.SortedExpression(source, key));
 };
 
-
-OPromptoBuilder.prototype.exitSortedExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
-
-OPromptoBuilder.prototype.exitDocumentExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
 
 
 OPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
@@ -1871,32 +1859,31 @@ OPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
 
-
-OPromptoBuilder.prototype.exitFetchList = function(ctx) {
+OPromptoBuilder.prototype.exitFetch_list_expression = function(ctx) {
     var itemName = this.getNodeValue(ctx.name);
     var source = this.getNodeValue(ctx.source);
-    var filter = this.getNodeValue(ctx.xfilter);
-    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, filter));
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, predicate));
 };
+
+
 
 OPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
-    var xfilter = this.getNodeValue(ctx.xfilter);
-    this.setNodeValue(ctx, new expression.FetchOneExpression(category, xfilter));
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
 };
 
-OPromptoBuilder.prototype.exitFetchAll = function(ctx) {
+
+
+OPromptoBuilder.prototype.exitFetchMany = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
-    var xfilter = this.getNodeValue(ctx.xfilter);
+    var predicate = this.getNodeValue(ctx.predicate);
     var start = this.getNodeValue(ctx.xstart);
     var stop = this.getNodeValue(ctx.xstop);
-    var orderBy = this.getNodeValue(ctx.xorder);
-    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, xfilter, orderBy));
+    var orderBy = this.getNodeValue(ctx.orderby);
+    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
 };
 
 
@@ -1990,11 +1977,6 @@ OPromptoBuilder.prototype.exitRead_expression = function(ctx) {
 	this.setNodeValue(ctx, new expression.ReadExpression(source));
 };
 
-
-OPromptoBuilder.prototype.exitReadExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
 
 
 OPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {

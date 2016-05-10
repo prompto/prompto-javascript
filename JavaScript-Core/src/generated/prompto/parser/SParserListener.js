@@ -938,66 +938,12 @@ SParserListener.prototype.exitSelectableExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#BlobExpression.
-SParserListener.prototype.enterBlobExpression = function(ctx) {
+// Enter a parse tree produced by SParser#method_expression.
+SParserListener.prototype.enterMethod_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#BlobExpression.
-SParserListener.prototype.exitBlobExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#DocumentExpression.
-SParserListener.prototype.enterDocumentExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#DocumentExpression.
-SParserListener.prototype.exitDocumentExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#FetchExpression.
-SParserListener.prototype.enterFetchExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#FetchExpression.
-SParserListener.prototype.exitFetchExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#ReadExpression.
-SParserListener.prototype.enterReadExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#ReadExpression.
-SParserListener.prototype.exitReadExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#SortedExpression.
-SParserListener.prototype.enterSortedExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#SortedExpression.
-SParserListener.prototype.exitSortedExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#MethodCallExpression.
-SParserListener.prototype.enterMethodCallExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#MethodCallExpression.
-SParserListener.prototype.exitMethodCallExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by SParser#ConstructorExpression.
-SParserListener.prototype.enterConstructorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#ConstructorExpression.
-SParserListener.prototype.exitConstructorExpression = function(ctx) {
+// Exit a parse tree produced by SParser#method_expression.
+SParserListener.prototype.exitMethod_expression = function(ctx) {
 };
 
 
@@ -1109,12 +1055,12 @@ SParserListener.prototype.exitWrite_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#FetchList.
-SParserListener.prototype.enterFetchList = function(ctx) {
+// Enter a parse tree produced by SParser#fetch_list_expression.
+SParserListener.prototype.enterFetch_list_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#FetchList.
-SParserListener.prototype.exitFetchList = function(ctx) {
+// Exit a parse tree produced by SParser#fetch_list_expression.
+SParserListener.prototype.exitFetch_list_expression = function(ctx) {
 };
 
 
@@ -1127,12 +1073,12 @@ SParserListener.prototype.exitFetchOne = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#FetchAll.
-SParserListener.prototype.enterFetchAll = function(ctx) {
+// Enter a parse tree produced by SParser#FetchMany.
+SParserListener.prototype.enterFetchMany = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#FetchAll.
-SParserListener.prototype.exitFetchAll = function(ctx) {
+// Exit a parse tree produced by SParser#FetchMany.
+SParserListener.prototype.exitFetchMany = function(ctx) {
 };
 
 

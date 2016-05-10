@@ -1818,33 +1818,44 @@ EPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 };
 
 
-EPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
-
-EPromptoBuilder.prototype.exitFetchList = function(ctx) {
+EPromptoBuilder.prototype.exitFetch_list_expression = function(ctx) {
 	var itemName = this.getNodeValue(ctx.name);
 	var source = this.getNodeValue(ctx.source);
-	var filter = this.getNodeValue(ctx.xfilter);
-	this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, filter));
+	var predicate = this.getNodeValue(ctx.predicate);
+	this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, predicate));
 };
+
 
 EPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
-    var xfilter = this.getNodeValue(ctx.xfilter);
-    this.setNodeValue(ctx, new expression.FetchOneExpression(category, xfilter));
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
 };
 
-EPromptoBuilder.prototype.exitFetchAll = function(ctx) {
+
+EPromptoBuilder.prototype.exitFetchListExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
+};
+
+
+
+EPromptoBuilder.prototype.exitFetchMany = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
-    var xfilter = this.getNodeValue(ctx.xfilter);
+    var predicate = this.getNodeValue(ctx.predicate);
     var start = this.getNodeValue(ctx.xstart);
     var stop = this.getNodeValue(ctx.xstop);
-    var orderBy = this.getNodeValue(ctx.xorder);
-    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, xfilter, orderBy));
+    var orderBy = this.getNodeValue(ctx.orderby);
+    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
 };
+
+
+
+EPromptoBuilder.prototype.exitFetchStoreExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
+};
+
 
 
 EPromptoBuilder.prototype.exitCode_type = function(ctx) {

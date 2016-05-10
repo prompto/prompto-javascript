@@ -614,6 +614,15 @@ EParserListener.prototype.exitTernaryExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#FetchStoreExpression.
+EParserListener.prototype.enterFetchStoreExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#FetchStoreExpression.
+EParserListener.prototype.exitFetchStoreExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#ContainsAllExpression.
 EParserListener.prototype.enterContainsAllExpression = function(ctx) {
 };
@@ -731,15 +740,6 @@ EParserListener.prototype.exitMethodCallExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#FetchExpression.
-EParserListener.prototype.enterFetchExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#FetchExpression.
-EParserListener.prototype.exitFetchExpression = function(ctx) {
-};
-
-
 // Enter a parse tree produced by EParser#ClosureExpression.
 EParserListener.prototype.enterClosureExpression = function(ctx) {
 };
@@ -827,6 +827,15 @@ EParserListener.prototype.enterExecuteExpression = function(ctx) {
 
 // Exit a parse tree produced by EParser#ExecuteExpression.
 EParserListener.prototype.exitExecuteExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#FetchListExpression.
+EParserListener.prototype.enterFetchListExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#FetchListExpression.
+EParserListener.prototype.exitFetchListExpression = function(ctx) {
 };
 
 
@@ -1127,12 +1136,12 @@ EParserListener.prototype.exitAmbiguous_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#FetchList.
-EParserListener.prototype.enterFetchList = function(ctx) {
+// Enter a parse tree produced by EParser#fetch_list_expression.
+EParserListener.prototype.enterFetch_list_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#FetchList.
-EParserListener.prototype.exitFetchList = function(ctx) {
+// Exit a parse tree produced by EParser#fetch_list_expression.
+EParserListener.prototype.exitFetch_list_expression = function(ctx) {
 };
 
 
@@ -1145,12 +1154,12 @@ EParserListener.prototype.exitFetchOne = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#FetchAll.
-EParserListener.prototype.enterFetchAll = function(ctx) {
+// Enter a parse tree produced by EParser#FetchMany.
+EParserListener.prototype.enterFetchMany = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#FetchAll.
-EParserListener.prototype.exitFetchAll = function(ctx) {
+// Exit a parse tree produced by EParser#FetchMany.
+EParserListener.prototype.exitFetchMany = function(ctx) {
 };
 
 

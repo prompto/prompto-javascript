@@ -115,11 +115,6 @@ SPromptoBuilder.prototype.exitBlob_expression = function(ctx) {
 };
 
 
-SPromptoBuilder.prototype.exitBlobExpression = function(ctx) {
-    var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, exp);
-};
-
 
 SPromptoBuilder.prototype.exitBlobType = function(ctx) {
     this.setNodeValue(ctx, type.BlobType.instance);
@@ -740,7 +735,7 @@ SPromptoBuilder.prototype.exitMethod_identifier = function(ctx) {
 };
 
 
-SPromptoBuilder.prototype.exitMethodCallExpression = function(ctx) {
+SPromptoBuilder.prototype.exitMethod_Expression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);
 };
@@ -826,6 +821,14 @@ SPromptoBuilder.prototype.exitItemInstance = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, new instance.ItemInstance(exp));
 };
+
+
+
+SPromptoBuilder.prototype.exitMethod_expression = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
+};
+
 
 
 SPromptoBuilder.prototype.exitMethodExpression = function(ctx) {
@@ -1785,17 +1788,6 @@ SPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
 };
 
 
-SPromptoBuilder.prototype.exitSortedExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
-
-SPromptoBuilder.prototype.exitDocumentExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
 
 SPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
     var exp = this.getNodeValue(ctx.expression());
@@ -1808,32 +1800,38 @@ SPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 };
 
 
+
 SPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);
 };
 
 
-SPromptoBuilder.prototype.exitFetchList = function(ctx) {
+
+SPromptoBuilder.prototype.exitFetch_list_expression = function(ctx) {
     var itemName = this.getNodeValue(ctx.name);
     var source = this.getNodeValue(ctx.source);
-    var filter = this.getNodeValue(ctx.xfilter);
-    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, filter));
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, predicate));
 };
+
+
 
 SPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
-    var xfilter = this.getNodeValue(ctx.xfilter);
-    this.setNodeValue(ctx, new expression.FetchOneExpression(category, xfilter));
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
 };
 
-SPromptoBuilder.prototype.exitFetchAll = function(ctx) {
+
+
+SPromptoBuilder.prototype.exitFetchMany = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
-    var xfilter = this.getNodeValue(ctx.xfilter);
+    var predicate = this.getNodeValue(ctx.predicate);
     var start = this.getNodeValue(ctx.xstart);
     var stop = this.getNodeValue(ctx.xstop);
-    var orderBy = this.getNodeValue(ctx.xorder);
-    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, xfilter, orderBy));
+    var orderBy = this.getNodeValue(ctx.orderby);
+    this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
 };
 
 
@@ -1927,11 +1925,6 @@ SPromptoBuilder.prototype.exitRead_expression = function(ctx) {
 	this.setNodeValue(ctx, new expression.ReadExpression(source));
 };
 
-
-SPromptoBuilder.prototype.exitReadExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
 
 
 SPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
