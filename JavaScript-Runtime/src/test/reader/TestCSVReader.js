@@ -131,3 +131,17 @@ exports.testQuotedInnerQuote = function(test) {
     test.equal("Sylvie", doc["name"]);
     test.done();
 };
+
+exports.testQuotedInnerNewLine = function(test) {
+    var csv = "id,name\n1,\"Jo\nhn\"\n2,Sylvie\n";
+    var iter = csvIterate(csv, null, ',', '"');
+    var doc = iter.next();
+    test.ok(doc);
+    test.equal("1", doc["id"]);
+    test.equal("Jo\nhn", doc["name"]);
+    doc = iter.next();
+    test.ok(doc);
+    test.equal("2", doc["id"]);
+    test.equal("Sylvie", doc["name"]);
+    test.done();
+};

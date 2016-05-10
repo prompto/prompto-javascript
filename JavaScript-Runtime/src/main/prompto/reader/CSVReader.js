@@ -16,129 +16,186 @@ function csvRead(text, columns, separator, encloser) {
 }
 
 function CSVIterator(text, columns, separator, encloser) {
-    this.lines = text ? text.split(/\r?\n/) : null;
+    this.text = text || null;
+    this.index = 0;
     this.columns = columns;
-    this.separator = separator || ',';
-    this.encloser = encloser || '"';
+    this.separator = (separator || ',').charCodeAt(0);
+    this.encloser = (encloser || '"').charCodeAt(0);
     this.headers = null;
-    this.nextLine = null;
+    this.peekedChar = null;
+    this.nextChar = 0;
     return this;
 }
 
+var DQ = '"'.charCodeAt(0);
+var CR = '\r'.charCodeAt(0);
+var LF = '\n'.charCodeAt(0);
+var ESC = '\\'.charCodeAt(0);
+
 CSVIterator.prototype.hasNext = function() {
-    this.parseHeaders();
-    this.readNextLine();
-    return this.nextLine!=null;
+    if(this.nextChar==0)
+        this.fetchChar(true);
+    if(this.headers==null)
+        this.parseHeaders();
+    return this.nextChar>0;
 };
 
-CSVIterator.prototype.readNextLine = function() {
-    if(this.lines==null || this.nextLine!=null)
-        return;
-    this.nextLine = this.lines.shift();
-    if(this.lines.length==0)
-        this.lines = null;
-    if(this.nextLine.length==0) {
-        this.nextLine = null;
-        this.readNextLine();
+
+
+CSVIterator.prototype.fetchChar = function(eatNewLine) {
+    eatNewLine = eatNewLine || false;
+    if(this.text==null)
+        this.nextChar = -1; // EOF
+    else if(this.peekedChar!=null) {
+        var c = this.peekedChar;
+        this.peekedChar = null;
+        this.nextChar = c;
+    } else {
+        var c = this.index < this.text.length ? this.text.charCodeAt(this.index++) : -1;
+        if(c==CR)
+            this.fetchChar(eatNewLine);
+        else if(eatNewLine && (c==LF))
+            this.fetchChar(eatNewLine);
+        else
+            this.nextChar = c;
     }
 };
+
+CSVIterator.prototype.peekChar = function() {
+    if(this.peekedChar==null) {
+        var oldChar = this.nextChar;
+        this.fetchChar();
+        this.peekedChar = this.nextChar;
+        this.nextChar = oldChar;
+    }
+    return this.peekedChar;
+}
+
 
 CSVIterator.prototype.parseHeaders = function() {
-    if (this.headers == null) {
-        this.readNextLine();
-        if(this.nextLine) {
-            var line = this.nextLine;
-            this.nextLine = null;
-            this.headers = this.parseLine(line);
-            if(this.columns!=null) {
-                var self = this;
-                this.headers = this.headers.map(function(header) {
-                    return self.columns[header] || header;
-                });
-            }
-        }
-    }
+    this.headers = this.parseLine();
+    if(this.columns!=null)
+        this.headers = this.headers.map(function(header) {
+            return this.columns[header] || header;
+        }, this);
 };
 
-CSVIterator.prototype.parseLine = function(line) {
+CSVIterator.prototype.parseLine = function() {
     var list = [];
-    var nextIdx = 0;
-    while(nextIdx<line.length)
-        nextIdx = this.parseValue(line, nextIdx, list);
+    while(this.parseValue(list))
+        ;
+    if(this.nextChar==LF)
+        this.fetchChar();
     return list;
 };
 
-CSVIterator.prototype.parseValue = function(line, startIdx, list) {
-    if(line[startIdx]==this.separator) {
-        list.push(null);
-        return startIdx + 1;
-    } else if(line[startIdx]==this.encloser)
-        return this.parseQuotedValue(line, startIdx + 1, list);
+CSVIterator.prototype.parseValue = function(list) {
+    if(this.nextChar==this.separator)
+        this.parseEmptyValue(list);
+    else if(this.nextChar==this.encloser)
+        this.parseQuotedValue(list);
     else
-        return this.parseUnquotedValue(line, startIdx, list);
-};
-
-CSVIterator.prototype.parseQuotedValue = function(line, startIdx, list) {
-    var endIdx = this.parseValueUpTo(line, startIdx, this.encloser, list);
-    // consume next separator
-    while(endIdx<line.length && line[endIdx]!=this.separator)
-        endIdx++;
-    return endIdx + 1;
-};
-
-CSVIterator.prototype.parseUnquotedValue = function(line, startIdx, list) {
-    return this.parseValueUpTo(line, startIdx, this.separator, list);
-};
-
-CSVIterator.prototype.parseValueUpTo = function(line, startIdx, endChar, list) {
-    var escape = false;
-    var found = false;
-    var endIdx = startIdx;
-    while(endIdx<line.length) {
-        if (line[endIdx] == endChar) {
-            if (endIdx < line.length && line[endIdx + 1] == endChar) {
-                escape = true;
-                endIdx++;
-            } else {
-                found = true;
-                break;
-            }
-        }
-        if(line[endIdx]=='\\') {
-            escape = true;
-            endIdx++;
-        }
-        if(endIdx<=line.length)
-            endIdx++;
-    }
-    var value = escape ?
-        this.unescape(line, startIdx, endIdx, endChar) :
-        line.substring(startIdx, endIdx);
-    list.push(value);
-    return endIdx + (found ? 1 : 0);
+        this.parseUnquotedValue(list);
+    return this.nextChar!=-1 && this.nextChar!=LF;
 };
 
 
-CSVIterator.prototype.unescape = function(value, startIdx, endIdx, endChar) {
+CSVIterator.prototype.parseEmptyValue = function(list) {
+    list.push(null);
+    this.fetchChar();
+};
+
+
+CSVIterator.prototype.parseQuotedValue = function(list) {
+    this.fetchChar(); // consume the leading double quote
+    this.parseValueUpTo(this.encloser, list);
+    // look for next sep
+    while(this.nextChar!=this.separator && this.nextChar!=-1 && this.nextChar!=LF)
+        this.fetchChar();
+    if(this.nextChar==this.separator)
+        this.fetchChar();
+};
+
+CSVIterator.prototype.parseUnquotedValue = function(list) {
+    return this.parseValueUpTo(this.separator, list);
+};
+
+CSVIterator.prototype.parseValueUpTo = function(endChar, list) {
     var chars = [];
-    while(startIdx<endIdx) {
-        if(value[startIdx]=='\\')
-            startIdx++;
-        else if(value[startIdx]==endChar && startIdx<endIdx-1 && value[startIdx+1]==endChar)
-            startIdx++;
-        if(startIdx<endIdx)
-            chars.push(value[startIdx++]);
+    var exit = false;
+    for(;;) {
+        if(this.nextChar==-1)
+            exit = this.handleEOF(chars, endChar, list);
+        else if(this.nextChar==LF)
+            exit = this.handleNewLine(chars, endChar, list);
+        else if(this.nextChar==endChar)
+            exit = this.handleEndChar(chars, endChar, list);
+        else if(this.nextChar==ESC)
+            exit = this.handleEscape(chars, endChar, list);
+        else
+            exit = this.handleOtherChar(chars, endChar, list);
+        if(exit) {
+            if(chars.length>0) {
+                chars = chars.map(function(c) {
+                    return String.fromCharCode(c);
+                });
+                list.push(chars.join(""));
+            }
+            return;
+        }
     }
-    return chars.join("");
 };
 
 
-CSVIterator.prototype.next = function(value, startIdx, endIdx) {
+CSVIterator.prototype.handleOtherChar = function(chars, endChar, list) {
+    chars.push(this.nextChar);
+    this.fetchChar();
+    return false;
+};
+
+
+CSVIterator.prototype.handleEscape = function(chars, endChar, list) {
+    if(this.peekChar()!=-1) {
+        chars.push(this.peekChar());
+        this.fetchChar();
+    }
+    this.fetchChar();
+    return false;
+};
+
+
+CSVIterator.prototype.handleEOF = function(chars, endChar, list) {
+    return true;
+}
+
+CSVIterator.prototype.handleEndChar = function(chars, endChar, list) {
+    if(endChar==DQ && this.peekChar()==endChar) {
+        chars.push(this.nextChar);
+        this.fetchChar();
+        this.fetchChar();
+        return false;
+    } else {
+        this.fetchChar();
+        return true;
+    }
+};
+
+
+CSVIterator.prototype.handleNewLine = function(chars, endChar, list) {
+    if(endChar==DQ) {
+        chars.push(this.nextChar);
+        this.fetchChar();
+        return false;
+    } else {
+        return true;
+    }
+}
+
+
+CSVIterator.prototype.next = function() {
     if(!this.hasNext()) // will parse headers
         return null;
-    var line = this.nextLine;
-    this.nextLine = null;
-    var values = this.parseLine(line);
+    var values = this.parseLine();
     var doc = {};
     for(var i=0;i<this.headers.length;i++) {
         if(i<values.length)
