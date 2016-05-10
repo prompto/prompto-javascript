@@ -95,9 +95,14 @@ CSVIterator.prototype.parseValueUpTo = function(line, startIdx, endChar, list) {
     var found = false;
     var endIdx = startIdx;
     while(endIdx<line.length) {
-        if(line[endIdx]==endChar) {
-            found = true;
-            break;
+        if (line[endIdx] == endChar) {
+            if (endIdx < line.length && line[endIdx + 1] == endChar) {
+                escape = true;
+                endIdx++;
+            } else {
+                found = true;
+                break;
+            }
         }
         if(line[endIdx]=='\\') {
             escape = true;
@@ -107,17 +112,19 @@ CSVIterator.prototype.parseValueUpTo = function(line, startIdx, endChar, list) {
             endIdx++;
     }
     var value = escape ?
-        this.unescape(line, startIdx, endIdx) :
+        this.unescape(line, startIdx, endIdx, endChar) :
         line.substring(startIdx, endIdx);
     list.push(value);
     return endIdx + (found ? 1 : 0);
 };
 
 
-CSVIterator.prototype.unescape = function(value, startIdx, endIdx) {
+CSVIterator.prototype.unescape = function(value, startIdx, endIdx, endChar) {
     var chars = [];
     while(startIdx<endIdx) {
         if(value[startIdx]=='\\')
+            startIdx++;
+        else if(value[startIdx]==endChar && startIdx<endIdx-1 && value[startIdx+1]==endChar)
             startIdx++;
         if(startIdx<endIdx)
             chars.push(value[startIdx++]);

@@ -100,6 +100,34 @@ exports.testExtraValue = function(test) {
     test.ok(doc);
     test.equal("2", doc["id"]);
     test.equal("Sylvie", doc["name"]);
- test.done();
+    test.done();
 };
 
+
+exports.testInnerQuote = function(test) {
+    var csv = "id,name\n1,Jo\"hn\n2,Sylvie\n";
+    var iter = csvIterate(csv, null, ',', '"');
+    var doc = iter.next();
+    test.ok(doc);
+    test.equal("1", doc["id"]);
+    test.equal("Jo\"hn", doc["name"]);
+    doc = iter.next();
+    test.ok(doc);
+    test.equal("2", doc["id"]);
+    test.equal("Sylvie", doc["name"]);
+    test.done();
+};
+
+exports.testQuotedInnerQuote = function(test) {
+    var csv = "id,name\n1,\"Jo\"\"hn\"\n2,Sylvie\n";
+    var iter = csvIterate(csv, null, ',', '"');
+    var doc = iter.next();
+    test.ok(doc);
+    test.equal("1", doc["id"]);
+    test.equal("Jo\"hn", doc["name"]);
+    doc = iter.next();
+    test.ok(doc);
+    test.equal("2", doc["id"]);
+    test.equal("Sylvie", doc["name"]);
+    test.done();
+};
