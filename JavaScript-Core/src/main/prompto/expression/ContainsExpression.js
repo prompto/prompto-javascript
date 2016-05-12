@@ -1,3 +1,4 @@
+var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var ContOp = require("../grammar/ContOp").ContOp;
 var Value = require("../value/Value").Value;
@@ -48,27 +49,31 @@ ContainsExpression.prototype.interpretValues = function(context, lval, rval) {
     switch (this.operator) {
     case ContOp.IN:
     case ContOp.NOT_IN:
-        if(rval.hasItem) {
+        if(rval==NullValue.instance)
+            result = false;
+        else if(rval.hasItem)
             result = rval.hasItem(context, lval);
-        }
         break;
     case ContOp.CONTAINS:
     case ContOp.NOT_CONTAINS:
-        if(lval.hasItem) {
+        if(lval==NullValue.instance)
+            result = false;
+        else if(lval.hasItem)
             result = lval.hasItem(context, rval);
-        }
         break;
     case ContOp.CONTAINS_ALL:
     case ContOp.NOT_CONTAINS_ALL:
-        if (lval.hasItem && rval.hasItem) {
+        if(lval==NullValue.instance || rval==NullValue.instance)
+            result = false;
+        else if (lval.hasItem && rval.hasItem)
             result = this.containsAll(context, lval, rval);
-        }
         break;
     case ContOp.CONTAINS_ANY:
     case ContOp.NOT_CONTAINS_ANY:
-        if (lval.hasItem && rval.hasItem) {
+        if(lval==NullValue.instance || rval==NullValue.instance)
+            result = false;
+        else if (lval.hasItem && rval.hasItem)
             result = this.containsAny(context, lval, rval);
-        }
         break;
     }
     if (result != null)
@@ -79,13 +84,13 @@ ContainsExpression.prototype.interpretValues = function(context, lval, rval) {
         return Bool.ValueOf(result);
     }
     // error management
-    if (this.operator.name.lastIndexOf("IN")==operator.name.length-"IN".length) {
+    if (this.operator.name.lastIndexOf("IN")==this.operator.name.length-"IN".length) {
         var tmp = lval;
         lval = rval;
         rval = tmp;
     }
     var lowerName = this.operator.name.toLowerCase().replace('_', ' ');
-    throw new SyntaxError("Illegal comparison: " + typeof(lval) + " " + lowerName + " " + typeof(rval));
+    throw new SyntaxError("Illegal comparison: " + lval.type.toString() + " " + lowerName + " " + rval.type.toString());
 };
 
 ContainsExpression.prototype.containsAll = function(context, container, items) {

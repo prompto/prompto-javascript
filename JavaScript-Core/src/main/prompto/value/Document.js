@@ -1,3 +1,4 @@
+var NullValue = require("./NullValue").NullValue;
 var Value = require("./Value").Value;
 var Text = require("./Text").Text;
 var DocumentType = require("../type/DocumentType").DocumentType;
@@ -23,8 +24,8 @@ Document.prototype.hasMember = function(name) {
 }
 
 Document.prototype.getMember = function(context, name, autoCreate) {
-    var result = this.values[name] || null;
-    if(autoCreate && result==null) {
+    var result = this.values[name] || NullValue.instance;
+    if(autoCreate && result==NullValue.instance) {
         result = new Document();
         this.values[name] = result;
     }
