@@ -5,8 +5,8 @@ exports.resolve = function() {
     TupleType = require("../type/TupleType").TupleType;
 };
 
-function TupleValue(items, item) {
-	BaseValueList.call(this, TupleType.instance, items, item);
+function TupleValue(items, item, mutable) {
+	BaseValueList.call(this, TupleType.instance, items, item, mutable);
 	return this;
 }
 

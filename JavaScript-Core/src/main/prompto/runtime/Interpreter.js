@@ -23,7 +23,7 @@ function parseCmdLineArgs(cmdLineArgs) {
 		return new ExpressionValue(argsType, dict);
 	} catch(e) {
 		// TODO
-		return new DictLiteral();
+		return new DictLiteral(false);
 	}
 }
 

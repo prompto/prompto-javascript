@@ -7,9 +7,10 @@ var BaseType = require("../type/BaseType").BaseType;
 var DictType = require("../type/DictType").DictType;
 var TextType = require("../type/TextType").TextType;
 
-function Dictionary(itemType, dict) {
+function Dictionary(itemType, dict, mutable) {
     Value.call(this, new DictType(itemType));
 	this.dict = dict || {};
+    this.mutable = mutable || false;
 	return this;
 }
 
@@ -86,6 +87,14 @@ Dictionary.prototype.getMember = function(context, name) {
     } else {
         throw new SyntaxError("No such member:" + name);
     }
+};
+
+
+Dictionary.prototype.setItemInContext = function(context, index, value) {
+    if (index instanceof Text) {
+        this.dict[index] = value;
+    } else
+        throw new SyntaxError("No such item:" + index.toString())
 };
 
 Dictionary.prototype.getItemInContext = function(context, index) {

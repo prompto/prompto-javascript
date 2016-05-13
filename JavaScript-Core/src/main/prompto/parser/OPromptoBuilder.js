@@ -220,15 +220,17 @@ OPromptoBuilder.prototype.exitList_literal = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitDict_literal = function(ctx) {
+    var mutable = ctx.MUTABLE() !== null;
 	var items = this.getNodeValue(ctx.dict_entry_list()) || null;
-	var value = items==null ? new literal.DictLiteral() : new literal.DictLiteral(items);
+	var value = new literal.DictLiteral(mutable, items);
 	this.setNodeValue(ctx, value);
 };
 
 
 OPromptoBuilder.prototype.exitTuple_literal = function(ctx) {
+    var mutable = ctx.MUTABLE() !== null;
 	var items = this.getNodeValue(ctx.expression_tuple()) || null;
-	var value = items==null ? new literal.TupleLiteral() : new literal.TupleLiteral(items);
+	var value = new literal.TupleLiteral(mutable, items);
 	this.setNodeValue(ctx, value);
 };
 

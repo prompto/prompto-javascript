@@ -10,7 +10,10 @@ var TextType = require("../type/TextType").TextType;
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
-function DictLiteral(entries) {
+function DictLiteral(mutable, entries) {
+    if(typeof(mutable)!=typeof(true))
+        throw "mutable!";
+    this.mutable = mutable;
 	this.entries = entries || new DictEntryList();
     this.itemType = null;
 	Literal.call(this, this.entries.toString(), new Dictionary(MissingType.instance));
@@ -21,6 +24,8 @@ DictLiteral.prototype = Object.create(Literal.prototype);
 DictLiteral.prototype.constructor = DictLiteral;
 
 DictLiteral.prototype.toDialect = function(writer) {
+    if(this.mutable)
+        writer.append("mutable ");
     this.entries.toDialect(writer);
 };
 
@@ -68,7 +73,7 @@ DictLiteral.prototype.interpret = function(context) {
             val = self.interpretPromotion(val);
             dict[key] = val;
         });
-        return new Dictionary(this.itemType, dict);
+        return new Dictionary(this.itemType, dict, this.mutable);
     } else
 	    return this.value;
 };
