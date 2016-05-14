@@ -1,4 +1,5 @@
 var Value = require("./Value").Value;
+var NullValue = require("./NullValue").NullValue;
 var ListValue = require("./ListValue").ListValue;
 var Text = require("./Text").Text;
 var Integer = require("./Integer").Integer;
@@ -100,7 +101,7 @@ Dictionary.prototype.setItemInContext = function(context, index, value) {
 Dictionary.prototype.getItemInContext = function(context, index) {
     if (index instanceof Text)
     {
-        var value = this.dict[index];
+        var value = this.dict[index] || NullValue.instance;
         if (value instanceof Value) {
             return value;
         } else {
