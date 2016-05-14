@@ -29,8 +29,9 @@ MethodExpression.prototype.toDialect = function(writer) {
 
 MethodExpression.prototype.check = function(context) {
 	var named = context.getRegistered(this.name);
-	if(named instanceof MethodDeclarationMap) {
-		return new MethodType(context, this.id);
+	if(named instanceof MethodDeclarationMap) { // global method or closure
+        var decl = named.getFirst();
+		return new MethodType(context, decl);
 	} else {
 		throw new SyntaxError("No method with name:" + this.name);
 	}

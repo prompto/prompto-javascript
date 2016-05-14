@@ -23,10 +23,6 @@ CharacterType.prototype.constructor = CharacterType;
 CharacterType.instance = new CharacterType();
 
 
-CharacterType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof CharacterType) || (other instanceof TextType) || (other instanceof AnyType);
-};
-
 CharacterType.prototype.nativeCast = function(context, value) {
     if(value.type instanceof TextType && value.value.length>=1)
         return new Character(value.value.substring(0, 1));

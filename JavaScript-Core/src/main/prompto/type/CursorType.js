@@ -10,8 +10,9 @@ function CursorType(itemType) {
 CursorType.prototype = Object.create(IterableType.prototype);
 CursorType.prototype.constructor = CursorType;
 
-CursorType.prototype.isAssignableTo = function(context, other) {
-    return (other instanceof CursorType) && this.itemType.isAssignableTo(context, other.itemType);
+CursorType.prototype.isAssignableFrom = function(context, other) {
+    return IterableType.prototype.isAssignableFrom.call(this, context, other)
+        || ((other instanceof CursorType) && this.itemType.isAssignableFrom(context, other.itemType));
 };
 
 CursorType.prototype.equals = function(obj) {

@@ -7,6 +7,7 @@ var AnyType = require("./AnyType").AnyType;
 var DateRange = require("../value/DateRange").DateRange;
 var LocalDate = require("../value/LocalDate").LocalDate;
 var Identifier = require("../grammar/Identifier").Identifier;
+var DateTimeType = require("./DateTimeType").DateTimeType;
 
 function DateType()  {
 	NativeType.call(this, new Identifier("Date"));
@@ -18,15 +19,10 @@ DateType.prototype.constructor = DateType;
 
 DateType.instance = new DateType();
 
-/*
-@Override
-public Class<?> toJavaClass() {
-	return Date.class;
-}
-*/
 
-DateType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof DateType) || (other instanceof AnyType);
+DateType.prototype.isAssignableFrom = function(context, other) {
+	return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        || (other instanceof DateTimeType);
 };
 
 DateType.prototype.checkAdd = function(context, other, tryReverse) {

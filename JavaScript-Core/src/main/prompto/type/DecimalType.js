@@ -20,8 +20,9 @@ DecimalType.prototype.constructor = DecimalType;
 DecimalType.instance = new DecimalType();
 
 
-DecimalType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof IntegerType) || (other instanceof DecimalType) || (other instanceof AnyType);
+DecimalType.prototype.isAssignableFrom = function(context, other) {
+    return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        || (other instanceof IntegerType);
 };
 
 

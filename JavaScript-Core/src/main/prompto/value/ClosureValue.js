@@ -2,7 +2,7 @@ var MethodType = require("../type/MethodType").MethodType;
 var Value = require("./Value").Value;
 
 function ClosureValue(context, method) {
-    Value.call(this, new MethodType(context, method.id));
+    Value.call(this, new MethodType(context, method));
     this.context = context;
     this.method = method;
     return this;

@@ -20,10 +20,6 @@ NativeType.prototype.isMoreSpecificThan = function(context, other) {
 	return false;
 };
 
-NativeType.prototype.isAssignableTo = function(context, other) {
-	return other===this;
-};
-
 NativeType.prototype.equals = function(obj) {
 	return obj===this;
 };

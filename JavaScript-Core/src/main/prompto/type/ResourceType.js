@@ -18,8 +18,5 @@ ResourceType.prototype.equals = function(obj) {
 	return this.name==objname;
 };
 
-ResourceType.prototype.isAssignableTo = function(context, other) {
-	return this.equals(other);
-};
-	
+
 exports.ResourceType = ResourceType;

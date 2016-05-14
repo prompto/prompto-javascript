@@ -11,8 +11,4 @@ ImageType.prototype.constructor = ImageType;
 
 ImageType.instance = new ImageType();
 
-ImageType.prototype.isAssignableTo = function(context, other) {
-    return (other instanceof ImageType);
-};
-
 exports.ImageType = ImageType;

@@ -11,15 +11,7 @@ MissingType.prototype.constructor = MissingType;
 
 MissingType.instance = new MissingType();
 	
-/*
-	
-	@Override
-	public Class<?> toJavaClass() {
-		return Object.class;
-	}
-*/
-
-MissingType.prototype.isAssignableTo = function(context, other) {
+MissingType.prototype.isAssignableFrom = function(context, other) {
 	return true;
 };
 

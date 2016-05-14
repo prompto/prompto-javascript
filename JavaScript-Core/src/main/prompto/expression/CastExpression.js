@@ -7,7 +7,7 @@ function CastExpression(expression, type) {
 
 CastExpression.prototype.check = function(context) {
     var actual = this.expression.check(context);
-    if(!this.type.isAssignableTo(context, actual))
+    if(!actual.isAssignableFrom(context, this.type))
         context.problemListener.reportInvalidCast(this, this.type, actual);
     return this.type;
 };

@@ -35,7 +35,7 @@ VariableInstance.prototype.checkAssignValue = function(context, valueType) {
         return valueType;
 	} else {
 		// need to check type compatibility
-        valueType.checkAssignableTo(context,actual.type);
+        actual.type.checkAssignableFrom(context, valueType);
         return actual.type;
 	}
 };

@@ -91,7 +91,7 @@ ArgumentAssignment.prototype.check = function(context) {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
 		var newType = this.expression.check(context);
-		newType.checkAssignableTo(context,actualType);
+        actualType.checkAssignableFrom(context, newType);
 	}
 	return VoidType.instance;
 };

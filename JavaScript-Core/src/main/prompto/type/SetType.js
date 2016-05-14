@@ -58,4 +58,11 @@ SetType.prototype.checkMember = function(context, name) {
 	}
 };
 
+
+SetType.prototype.isAssignableFrom = function(context, other) {
+    return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+        || ((other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType));
+};
+
+
 exports.SetType = SetType;

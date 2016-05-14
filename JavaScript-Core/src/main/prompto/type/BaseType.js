@@ -1,8 +1,11 @@
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var NullType = null;
 var TupleValue = null;
 var SetValue = null;
 var ListValue = null;
 
 exports.resolve = function() {
+    NullType = require("./NullType").NullType;
     TupleValue = require("../value/TupleValue").TupleValue;
     SetValue = require("../value/SetValue").SetValue;
     ListValue = require("../value/ListValue").ListValue;
@@ -20,25 +23,23 @@ Object.defineProperty(BaseType.prototype, "name", {
 });
 
 
-/*
-
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (!(obj instanceof IType))
-		return false;
-	IType type = (IType) obj;
-	return this.name.equals(type.name);
-};
-
-*/
-
 BaseType.prototype.toString = function() {
 	return this.name;
 };
 
+
+BaseType.prototype.equals = function(other) {
+    return (other instanceof IType) && this.name==other.name;
+};
+
+
+BaseType.prototype.isAssignableFrom = function(context, other) {
+    return this==other || this.equals(other) || other.equals(NullType.instance);
+};
+
+BaseType.prototype.isAssignableTo = function(context, other) {
+    return other.isAssignableFrom(context, this);
+};
 
 BaseType.prototype.checkAdd = function(context, other, tryReverse) {
     if(tryReverse)
@@ -112,8 +113,8 @@ BaseType.prototype.checkIterator = function(context) {
 };
 
 
-BaseType.prototype.checkAssignableTo = function(context, other) {
-	if (!this.isAssignableTo(context, other)) {
+BaseType.prototype.checkAssignableFrom = function(context, other) {
+	if (!this.isAssignableFrom(context, other)) {
 		throw new SyntaxError("Type: " + this.name + " is not compatible with: " + other.name);
 	};
 };

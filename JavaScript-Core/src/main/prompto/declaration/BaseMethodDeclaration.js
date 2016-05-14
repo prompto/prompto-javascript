@@ -102,11 +102,11 @@ BaseMethodDeclaration.prototype.computeSpecificity = function(context, argument,
 		}
 		if(actual.equals(required)) {
 			return Specificity.EXACT;
-		} else if(actual.isAssignableTo(context, required)) {
+		} else if(required.isAssignableFrom(context, actual)) {
 			return Specificity.INHERITED;
 		}
 		actual = assignment.resolve(context,this,checkInstance).check(context);
-		if(actual.isAssignableTo(context, required)) {
+		if(required.isAssignableFrom(context, actual)) {
 			return Specificity.RESOLVED;
 		}
 	} catch(error) {

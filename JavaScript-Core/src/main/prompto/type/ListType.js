@@ -22,8 +22,9 @@ ListType.prototype.constructor = ListType;
 	}
 */
 
-ListType.prototype.isAssignableTo = function(context, other) {
-    return (other instanceof ListType) && this.itemType.isAssignableTo(context, other.itemType);
+ListType.prototype.isAssignableFrom = function(context, other) {
+    return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+        || ((other instanceof ListType) && this.itemType.isAssignableFrom(context, other.itemType));
 };
 
 ListType.prototype.equals = function(obj) {

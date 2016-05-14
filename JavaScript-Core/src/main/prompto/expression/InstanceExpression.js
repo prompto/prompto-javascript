@@ -60,7 +60,7 @@ InstanceExpression.prototype.check = function(context) {
 	} else if(named instanceof AttributeDeclaration) { // in category method
 		return named.getType(context);
 	} else if(named instanceof MethodDeclarationMap) { // global method or closure
-		return new MethodType(context, new Identifier(this.id));
+		return new MethodType(context, named.getFirst());
 	} else
         context.problemListener.reportUnknownVariable(this.id);
 };

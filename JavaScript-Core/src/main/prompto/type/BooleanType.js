@@ -17,17 +17,6 @@ BooleanType.prototype.constructor = BooleanType;
 
 BooleanType.instance = new BooleanType();
 
-/*
-@Override
-public Class<?> toJavaClass() {
-	return java.lang.Boolean.class;
-}
-*/
-
-BooleanType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof BooleanType) || (other instanceof AnyType);
-};
-
 BooleanType.prototype.checkAnd = function(context, other) {
 	if(other instanceof BooleanType) {
 		return BooleanType.instance;

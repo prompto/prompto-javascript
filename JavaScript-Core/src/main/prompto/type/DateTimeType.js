@@ -28,11 +28,6 @@ DateTimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, 
     }
 };
 
-DateTimeType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof DateTimeType || other instanceof DateType ||  other instanceof TimeType || other instanceof AnyType);
-};
-
-
 DateTimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	if (other instanceof PeriodType) {
 		return this;

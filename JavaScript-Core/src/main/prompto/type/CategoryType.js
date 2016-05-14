@@ -173,16 +173,10 @@ CategoryType.prototype.checkMember = function(context, name) {
 	return ad.getType(context);
 };
 
-CategoryType.prototype.isAssignableTo = function(context, other) {
-	if(this.name==other.name) {
-		return true;
-	} else if(other instanceof NullType || other instanceof AnyType || other instanceof MissingType) {
-		return true;
-	} else if(!(other instanceof CategoryType)) {
-		return false;
-	} else {
-		return this.isAssignableToCategory(context,other);
-	}
+CategoryType.prototype.isAssignableFrom = function(context, other) {
+    return BaseType.prototype.isAssignableFrom.call(this, context, other)
+        || (this.name==other.name)
+        || ((other instanceof CategoryType) && other.isAssignableToCategory(context,this));
 };
 
 CategoryType.prototype.isAssignableToCategory = function(context, other) {
@@ -191,7 +185,8 @@ CategoryType.prototype.isAssignableToCategory = function(context, other) {
 	}
 	try {
 		var	cd = this.getDeclaration(context);
-		return this.isDerivedFromCompatibleCategory(context,cd,other) || this.isAssignableToAnonymousCategory(context,cd,other);
+		return this.isDerivedFromCompatibleCategory(context,cd,other)
+            || this.isAssignableToAnonymousCategory(context,cd,other);
 	} catch (e) {
 		if(e instanceof SyntaxError ) {
 			return false;

@@ -10,8 +10,10 @@ function IteratorType(itemType) {
 IteratorType.prototype = Object.create(IterableType.prototype);
 IteratorType.prototype.constructor = IteratorType;
 
-IteratorType.prototype.isAssignableTo = function(context, other) {
-    return (other instanceof IteratorType) && this.itemType.isAssignableTo(context, other.itemType);
+
+IteratorType.prototype.isAssignableFrom = function(context, other) {
+    return IterableType.prototype.isAssignableFrom.call(this, context, other)
+        || ((other instanceof IteratorType) && this.itemType.isAssignableFrom(context, other.itemType));
 };
 
 IteratorType.prototype.equals = function(obj) {

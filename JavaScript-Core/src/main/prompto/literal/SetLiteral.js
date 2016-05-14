@@ -39,9 +39,9 @@ SetLiteral.prototype.inferElementType = function(context) {
         if (lastType == null) {
             lastType = elemType;
         } else if (!lastType.equals(elemType)) {
-            if (elemType.isAssignableTo(context, lastType)) {
+            if (lastType.isAssignableFrom(context, elemType)) {
                 ; // lastType is less specific
-            } else if (lastType.isAssignableTo(context, elemType)) {
+            } else if (elemType.isAssignableFrom(context, lastType)) {
                 lastType = elemType; // elemType is less specific
             } else {
                 throw new SyntaxError("Incompatible types: " + elemType.toString() + " and " + lastType.toString());

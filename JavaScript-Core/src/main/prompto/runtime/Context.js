@@ -348,6 +348,12 @@ MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context)
 	}
 };
 
+MethodDeclarationMap.prototype.getFirst = function() {
+    for(var proto in this.protos) {
+        return this.protos[proto];
+    }
+};
+
 
 Context.prototype.getRegisteredValue = function(name) {
     var context = this.contextForValue(name);

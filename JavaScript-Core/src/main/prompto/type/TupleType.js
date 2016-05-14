@@ -1,5 +1,6 @@
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
+var SetType = require("./SetType").SetType;
 var ListType = require("./ListType").ListType;
 var IntegerType = require("./IntegerType").IntegerType;
 var AnyType = require("./AnyType").AnyType;
@@ -15,18 +16,11 @@ TupleType.prototype.constructor = TupleType;
 
 TupleType.instance = new TupleType();
 
-/*
+TupleType.prototype.isAssignableFrom = function(context, other) {
+    return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+        || (other instanceof ListType) || (other instanceof SetType);
+};
 
-@Override
-public Class<?> toJavaClass() {
-	return null; // no equivalent
-}
-
-@Override
-public boolean isAssignableTo(Context context, IType other) {
-	return (other instanceof TupleType) || (other instanceof AnyType);
-}
-*/
 TupleType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {
 		return AnyType.instance;

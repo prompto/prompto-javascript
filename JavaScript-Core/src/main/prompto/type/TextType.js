@@ -21,16 +21,9 @@ TextType.prototype.constructor = TextType;
 
 TextType.instance = new TextType();
 
-/*
-	@Override
-	public Class<?> toJavaClass() {
-		return String.class;
-	}
-	
-*/
-
-TextType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof TextType) || (other instanceof AnyType);
+TextType.prototype.isAssignableFrom = function(context, other) {
+	return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        || (other instanceof CharacterType);
 };
 
 TextType.prototype.checkAdd = function(context, other, tryReverse) {

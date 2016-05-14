@@ -146,7 +146,7 @@ exports.testEmptyTuple = function (test) {
 
 
 exports.testSimpleTuple = function (test) {
-    var statement = "(1)";
+    var statement = "(1,)";
     var parser = new ETestParser(statement, false);
     var tl = parser.parse_literal_expression();
     test.ok(tl instanceof prompto.literal.TupleLiteral);

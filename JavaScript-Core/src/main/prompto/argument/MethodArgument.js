@@ -52,7 +52,8 @@ MethodArgument.prototype.check = function(context) {
 };
 
 MethodArgument.prototype.getType = function(context) {
-	return new MethodType(context,this.id);
+    var actual = context.getRegisteredDeclaration(this.name).getFirst();
+	return new MethodType(context, actual);
 };
 
 exports.MethodArgument = MethodArgument;

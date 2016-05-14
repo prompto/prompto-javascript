@@ -26,16 +26,13 @@ IntegerType.prototype = Object.create(NativeType.prototype);
 IntegerType.prototype.constructor = IntegerType;
 
 IntegerType.instance = new IntegerType();
-	
-/*
-public Class<?> toJavaClass() {
-	return Long.class;
-}
-*/
 
-IntegerType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof IntegerType) || (other instanceof DecimalType) || (other instanceof AnyType);
+
+IntegerType.prototype.isAssignableFrom = function(context, other) {
+    return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        || (other instanceof DecimalType);
 };
+
 
 IntegerType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {

@@ -6,6 +6,7 @@ var RangeType = require("./RangeType").RangeType;
 var TimeRange = require("../value/TimeRange").TimeRange;
 var Time = require("../value/Time").Time;
 var Identifier = require("../grammar/Identifier").Identifier;
+var DateTimeType = require("./DateTimeType").DateTimeType;
 
 function TimeType()  {
 	NativeType.call(this, new Identifier("Time"));
@@ -17,18 +18,10 @@ TimeType.prototype.constructor = TimeType;
 
 TimeType.instance = new TimeType();
 
-/*
-@Override
-public Class<?> toJavaClass() {
-	return LocalTime.class;
-}
-
-@Override
-public boolean isAssignableTo(Context context, IType other) {
-	return (other instanceof TimeType) || (other instanceof AnyType);
-}
-
-*/
+TimeType.prototype.isAssignableFrom = function(context, other) {
+    return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        || (other instanceof DateTimeType);
+};
 
 TimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	if (other instanceof PeriodType) {
@@ -86,14 +79,6 @@ TimeType.prototype.newRange = function(left, right) {
 	}
 };
 
-/*
-
-@Override
-public ListValue sort(Context context, ListValue list) throws PromptoError {
-	return this.<LocalTime> doSort(context, list);
-}
-
-*/
 
 TimeType.prototype.toString = function(value) {
 	return "'" + value.toString() + "'";

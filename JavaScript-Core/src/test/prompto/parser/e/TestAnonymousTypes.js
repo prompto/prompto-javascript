@@ -73,7 +73,7 @@ exports.testAnonymousAnyTypeWithAttribute = function(test) {
 	test.ok(!TextType.instance.isAssignableTo(context,st));
 	test.ok(!DateType.instance.isAssignableTo(context,st));
 	test.ok(!DateTimeType.instance.isAssignableTo(context,st));
-	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
+	test.ok(!MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(!AnyType.instance.isAssignableTo(context,st)); // any type never compatible
 	test.ok(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st)); // since Simple has a name
 	test.ok(!new CategoryType(new Identifier("Root")).isAssignableTo(context,st)); // since Root has no name
@@ -95,7 +95,7 @@ exports.testAnonymousCategoryType = function(test) {
 	test.ok(!TextType.instance.isAssignableTo(context,st));
 	test.ok(!DateType.instance.isAssignableTo(context,st));
 	test.ok(!DateTimeType.instance.isAssignableTo(context,st));
-	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
+	test.ok(!MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(!AnyType.instance.isAssignableTo(context,st)); // any type never compatible
 	test.ok(!(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st)));  // since Simple does not extend Root
 	test.ok(new CategoryType(new Identifier("Root")).isAssignableTo(context,st)); // since Root is Root
@@ -118,7 +118,7 @@ exports.testAnonymousCategoryTypeWithAttribute = function(test) {
 	test.ok(!TextType.instance.isAssignableTo(context,st));
 	test.ok(!DateType.instance.isAssignableTo(context,st));
 	test.ok(!DateTimeType.instance.isAssignableTo(context,st));
-	test.ok(MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
+	test.ok(!MissingType.instance.isAssignableTo(context,st)); // missing type always compatible
 	test.ok(!AnyType.instance.isAssignableTo(context,st)); // any type never compatible
 	test.ok(!(new CategoryType(new Identifier("Simple")).isAssignableTo(context,st)));  // since Simple does not extend Root
 	test.ok(!(new CategoryType(new Identifier("Root")).isAssignableTo(context,st))); // since Root has no name

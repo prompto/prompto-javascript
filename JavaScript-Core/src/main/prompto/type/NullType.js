@@ -11,24 +11,24 @@ NullType.prototype.constructor = NullType;
 
 NullType.instance = new NullType();
 
-NullType.prototype.checkUnique = function(self, context) {
+NullType.prototype.checkUnique = function(context) {
     // ok
 };
 
-NullType.prototype.checkExists = function(self, context) {
+NullType.prototype.checkExists = function(context) {
     // ok
 };
 
-NullType.prototype.isAssignableTo = function(self, context, other) {
+NullType.prototype.isAssignableFrom = function(context, other) {
     return true;
 };
 
-NullType.prototype.isMoreSpecificThan = function(self, context, other) {
+NullType.prototype.isMoreSpecificThan = function(context, other) {
     return false;
 };
 
 
-NullType.prototype.equals = function(self, other) {
+NullType.prototype.equals = function(other) {
     return other==this;
 };
 

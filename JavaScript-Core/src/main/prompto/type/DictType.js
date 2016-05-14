@@ -16,16 +16,11 @@ DictType.prototype = Object.create(ContainerType.prototype);
 DictType.prototype.constructor = DictType;
 
 
-DictType.prototype.isAssignableTo = function(context, other) {
-	return (other instanceof DictType) && this.itemType.isAssignableTo(context, other.itemType);
+DictType.prototype.isAssignableFrom = function(context, other) {
+    return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+	    || ((other instanceof DictType) && this.itemType.isAssignableFrom(context, other.itemType));
 };
 
-/*
-	@Override
-	public Class<?> toJavaClass() {
-		return Map.class;
-	}
-*/
 
 DictType.prototype.equals = function(obj) {
 	if (obj == null) {
