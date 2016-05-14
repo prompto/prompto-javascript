@@ -11,12 +11,10 @@ var TextType = require("../type/TextType").TextType;
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
 function DictLiteral(mutable, entries) {
-    if(typeof(mutable)!=typeof(true))
-        throw "mutable!";
     this.mutable = mutable;
 	this.entries = entries || new DictEntryList();
     this.itemType = null;
-	Literal.call(this, this.entries.toString(), new Dictionary(MissingType.instance));
+	Literal.call(this, this.entries.toString(), new Dictionary(MissingType.instance, {}, mutable));
 	return this;
 }
 
