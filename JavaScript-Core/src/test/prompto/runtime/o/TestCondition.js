@@ -17,6 +17,10 @@ exports.testComplexIf = function(test) {
 	checkOutput(test, "condition/complexIf.poc");
 };
 
+exports.testEmbeddedIf = function(test) {
+	checkOutput(test, "condition/embeddedIf.poc");
+};
+
 exports.testReturnIf = function(test) {
 	checkOutput(test, "condition/returnIf.poc");
 };

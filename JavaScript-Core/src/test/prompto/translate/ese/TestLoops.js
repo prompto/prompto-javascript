@@ -6,6 +6,10 @@ exports.testDoWhile = function(test) {
 	compareResourceESE(test, "loops/doWhile.pec");
 };
 
+exports.testEmbeddedForEach = function(test) {
+	compareResourceESE(test, "loops/embeddedForEach.pec");
+};
+
 exports.testForEachCharacterRange = function(test) {
 	compareResourceESE(test, "loops/forEachCharacterRange.pec");
 };

@@ -6,6 +6,10 @@ exports.testComplexIf = function(test) {
 	compareResourceESE(test, "condition/complexIf.pec");
 };
 
+exports.testEmbeddedIf = function(test) {
+	compareResourceESE(test, "condition/embeddedIf.pec");
+};
+
 exports.testReturnIf = function(test) {
 	compareResourceESE(test, "condition/returnIf.pec");
 };

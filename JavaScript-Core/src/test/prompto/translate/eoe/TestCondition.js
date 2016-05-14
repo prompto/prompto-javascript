@@ -6,6 +6,10 @@ exports.testComplexIf = function(test) {
 	compareResourceEOE(test, "condition/complexIf.pec");
 };
 
+exports.testEmbeddedIf = function(test) {
+	compareResourceEOE(test, "condition/embeddedIf.pec");
+};
+
 exports.testReturnIf = function(test) {
 	compareResourceEOE(test, "condition/returnIf.pec");
 };

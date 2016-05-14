@@ -17,6 +17,10 @@ exports.testDoWhile = function(test) {
 	checkOutput(test, "loops/doWhile.pec");
 };
 
+exports.testEmbeddedForEach = function(test) {
+	checkOutput(test, "loops/embeddedForEach.pec");
+};
+
 exports.testForEachCharacterRange = function(test) {
 	checkOutput(test, "loops/forEachCharacterRange.pec");
 };

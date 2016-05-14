@@ -6,6 +6,10 @@ exports.testDoWhile = function(test) {
 	compareResourceOEO(test, "loops/doWhile.poc");
 };
 
+exports.testEmbeddedForEach = function(test) {
+	compareResourceOEO(test, "loops/embeddedForEach.poc");
+};
+
 exports.testForEachCharacterRange = function(test) {
 	compareResourceOEO(test, "loops/forEachCharacterRange.poc");
 };
