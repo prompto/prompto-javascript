@@ -16,10 +16,10 @@ IteratorType.prototype.isAssignableFrom = function(context, other) {
         || ((other instanceof IteratorType) && this.itemType.isAssignableFrom(context, other.itemType));
 };
 
-IteratorType.prototype.equals = function(obj) {
-    if(obj==this)
+IteratorType.prototype.equals = function(other) {
+    if(other==this)
         return true;
-    if(!(obj instanceof IteratorType))
+    if(!(other instanceof IteratorType))
         return false;
     return this.itemType.equals(other.itemType);
 };
