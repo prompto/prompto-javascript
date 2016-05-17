@@ -42,39 +42,6 @@ Context.prototype.isGlobalContext = function() {
 	return this===this.globals;
 };
 
-/*
-
-public void setDebugger(Debugger debugger) {
-	this.debugger = debugger;
-}
-
-public Debugger getDebugger() {
-	return debugger;
-}
-
-@Override
-public String toString() {
-	StringBuilder sb = new StringBuilder();
-	sb.append("{");
-	if(this!=globals) {
-		sb.append("globals:");
-		sb.append(globals);
-	}
-	sb.append(",calling:");
-	sb.append(calling);
-	sb.append(",parent:");
-	sb.append(parent);
-	sb.append(",declarations:");
-	sb.append(declarations);
-	sb.append(",instances:");
-	sb.append(instances);
-	sb.append(",values:");
-	sb.append(values);
-	sb.append("}");
-	return sb.toString();
-}
-
-*/
 
 Context.prototype.getCallingContext = function() {
 	return this.calling;

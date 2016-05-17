@@ -1,5 +1,6 @@
 var Argument = require("./Argument").Argument;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var utils = require("../utils/index");
 
 function CategoryArgument(type, id) {
@@ -11,46 +12,10 @@ function CategoryArgument(type, id) {
 CategoryArgument.prototype = Object.create(Argument.prototype);
 CategoryArgument.prototype.constructor = CategoryArgument;
 
-/*
-	public CategoryArgument(IType type, String name) {
-		super(name);
-		this.type = type;
-	}
-
-	public void setAttributes(IdentifierList attributes) {
-		this.attributes = attributes;
-	}
-	
-	@Override
-	public IType getType() {
-		return type;
-	}
-	
-	@Override
-	public String getSignature(Dialect dialect) {
-		return getProto();
-	}
-
-*/
-
 CategoryArgument.prototype.getProto = function(context) {
 	return this.type.name;
 };
 	
-/*
-	@Override
-	public String toString() {
-		return name + ':' + getProto();
-	}
-	
-	public boolean hasAttributes() {
-		return attributes!=null;
-	}
-
-	public IdentifierList getAttributes() {
-		return attributes;
-	}
-*/
 
 CategoryArgument.prototype.equals = function(obj) {
 	if(obj===this) {

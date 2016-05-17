@@ -17,46 +17,13 @@ function ExtendedArgument(type, id, attributes) {
 ExtendedArgument.prototype = Object.create(CategoryArgument.prototype);
 ExtendedArgument.prototype.constructor = ExtendedArgument;
 
-/*
-	public ExtendedArgument(IType type, String name) {
-		super(name);
-		this.type = type;
-	}
 
-	public void setAttributes(IdentifierList attributes) {
-		this.attributes = attributes;
-	}
-	
-	@Override
-	public IType getType() {
-		return type;
-	}
-	
-	@Override
-	public String getSignature(Dialect dialect) {
-		return getProto();
-	}
-
-*/
 
 ExtendedArgument.prototype.getProto = function(context) {
 	return this.type.name + '(' + this.attributes.toString() + ')';
 };
 	
-/*
-	@Override
-	public String toString() {
-		return name + ':' + getProto();
-	}
-	
-	public boolean hasAttributes() {
-		return attributes!=null;
-	}
 
-	public IdentifierList getAttributes() {
-		return attributes;
-	}
-*/
 
 ExtendedArgument.prototype.equals = function(obj) {
 	if(obj===this) {

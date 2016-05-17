@@ -16,22 +16,6 @@ Object.defineProperty(UnresolvedArgument.prototype, "name", {
     }
 });
 
-/*
-@Override
-public String getSignature(Dialect dialect) {
-	return getName();
-}
-
-@Override
-public String getName() {
-	return name;
-}
-
-@Override
-public String toString() {
-	return name;
-}
-*/
 
 UnresolvedArgument.prototype.toDialect = function(writer) {
     writer.append(this.name);

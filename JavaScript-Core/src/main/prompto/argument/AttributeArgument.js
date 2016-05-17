@@ -8,12 +8,6 @@ function AttributeArgument(id) {
 AttributeArgument.prototype = Object.create(Argument.prototype);
 AttributeArgument.prototype.constructor = AttributeArgument;
 
-/*
-@Override
-public String getSignature(Dialect dialect) {
-	return getName();
-}
-*/
 
 AttributeArgument.prototype.toString = function() {
 	return this.id.name;
@@ -23,20 +17,6 @@ AttributeArgument.prototype.getProto = function(context) {
 	return this.id.name;
 };
 
-/*
-@Override
-public boolean equals(Object obj) {
-	if(obj==this)
-		return true;
-	if(obj==null)
-		return false;
-	if(!(obj instanceof AttributeArgument))
-		return false;
-	AttributeArgument other = (AttributeArgument)obj;
-	return Utils.equal(this.getName(),other.getName());
-}
-
-*/
 
 AttributeArgument.prototype.register = function(context) {
 	context.registerValue(this, true);

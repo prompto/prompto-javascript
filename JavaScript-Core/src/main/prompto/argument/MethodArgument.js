@@ -21,20 +21,6 @@ MethodArgument.prototype.getProto = function(context) {
 	return this.name;
 };
 
-/*
-@Override
-public boolean equals(Object obj) {
-	if(obj==this)
-		return true;
-	if(obj==null)
-		return false;
-	if(!(obj instanceof MethodArgument))
-		return false;
-	MethodArgument other = (MethodArgument)obj;
-	return Utils.equal(this.getName(),other.getName());
-}
-
-*/
 
 MethodArgument.prototype.register = function(context) {
 	var actual = context.getRegisteredValue(this.name);
