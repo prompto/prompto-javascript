@@ -1155,6 +1155,18 @@ OPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
+
+
+OPromptoBuilder.prototype.exitFlush_statement = function(ctx) {
+    this.setNodeValue(ctx, new statement.FlushStatement());
+};
+
+
+OPromptoBuilder.prototype.exitFlushStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
+};
+
+
 OPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 	var items = this.getNodeValue(ctx.declarations()) || new declaration.DeclarationList();
 	this.setNodeValue(ctx, items);

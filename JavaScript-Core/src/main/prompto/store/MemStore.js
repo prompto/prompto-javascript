@@ -10,6 +10,12 @@ function MemStore(object) {
     return this;
 }
 
+
+MemStore.prototype.flush = function() {
+    // nothing to do
+};
+
+
 MemStore.prototype.store = function(document) {
     if(document.dbId)
         return;

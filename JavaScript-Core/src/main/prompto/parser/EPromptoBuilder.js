@@ -557,6 +557,16 @@ EPromptoBuilder.prototype.exitArgument_list = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitFlush_statement = function(ctx) {
+    this.setNodeValue(ctx, new statement.FlushStatement());
+};
+
+
+EPromptoBuilder.prototype.exitFlushStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
+};
+
+
 EPromptoBuilder.prototype.exitFull_argument_list = function(ctx) {
 	var items = this.getNodeValue(ctx.items); 
 	var item = this.getNodeValue(ctx.item) || null; 

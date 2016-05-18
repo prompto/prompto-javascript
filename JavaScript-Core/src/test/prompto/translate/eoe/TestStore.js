@@ -6,6 +6,10 @@ exports.testDeleteRecords = function(test) {
 	compareResourceEOE(test, "store/deleteRecords.pec");
 };
 
+exports.testFlush = function(test) {
+	compareResourceEOE(test, "store/flush.pec");
+};
+
 exports.testListRecords = function(test) {
 	compareResourceEOE(test, "store/listRecords.pec");
 };

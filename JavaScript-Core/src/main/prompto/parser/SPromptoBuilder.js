@@ -1098,6 +1098,18 @@ SPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
 	this.setNodeValue(ctx, exp);
 };
 
+
+
+SPromptoBuilder.prototype.exitFlush_statement = function(ctx) {
+    this.setNodeValue(ctx, new statement.FlushStatement());
+};
+
+
+SPromptoBuilder.prototype.exitFlushStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
+};
+
+
 SPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 	var items = this.getNodeValue(ctx.declarations()) || new declaration.DeclarationList();
 	this.setNodeValue(ctx, items);

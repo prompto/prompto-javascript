@@ -272,6 +272,15 @@ SParserListener.prototype.exitStoreStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#FlushStatement.
+SParserListener.prototype.enterFlushStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#FlushStatement.
+SParserListener.prototype.exitFlushStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#ReturnStatement.
 SParserListener.prototype.enterReturnStatement = function(ctx) {
 };
@@ -386,6 +395,15 @@ SParserListener.prototype.enterCommentStatement = function(ctx) {
 
 // Exit a parse tree produced by SParser#CommentStatement.
 SParserListener.prototype.exitCommentStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#flush_statement.
+SParserListener.prototype.enterFlush_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#flush_statement.
+SParserListener.prototype.exitFlush_statement = function(ctx) {
 };
 
 
