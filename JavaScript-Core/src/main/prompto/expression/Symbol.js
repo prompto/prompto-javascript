@@ -19,6 +19,11 @@ Symbol.prototype.register = function (context) {
     context.registerValue(this);
 };
 
+
+Symbol.prototype.unregister = function (context) {
+    context.unregisterValue(this);
+};
+
 /*
  @Override
  public abstract IType getType(Context context) throws SyntaxError;

@@ -10,6 +10,19 @@ function EnumeratedCategoryDeclaration(id, attrs, derived, symbols) {
 EnumeratedCategoryDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.prototype);
 EnumeratedCategoryDeclaration.prototype.constructor = EnumeratedCategoryDeclaration;
 
+
+EnumeratedCategoryDeclaration.prototype.getDeclarationType = function() {
+    return "Enumerated";
+};
+
+
+EnumeratedCategoryDeclaration.prototype.unregister = function(context) {
+    context.unregisterDeclaration (this);
+    this.symbols.forEach(function(symbol) {
+        symbol.unregister(context);
+    });
+};
+
 EnumeratedCategoryDeclaration.prototype.setSymbols = function(symbols) {
 	this.symbols = symbols;
 	var type = new EnumeratedCategoryType(this.id);

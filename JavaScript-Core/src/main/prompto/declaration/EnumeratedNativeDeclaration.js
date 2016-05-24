@@ -14,6 +14,19 @@ function EnumeratedNativeDeclaration(id, derivedFrom, symbols) {
 EnumeratedNativeDeclaration.prototype = Object.create(BaseDeclaration.prototype);
 EnumeratedNativeDeclaration.prototype.constructor = EnumeratedNativeDeclaration;
 
+
+EnumeratedNativeDeclaration.prototype.getDeclarationType = function() {
+    return "Enumerated";
+};
+
+
+EnumeratedNativeDeclaration.prototype.unregister = function(context) {
+    context.unregisterDeclaration (this);
+    this.symbols.forEach(function(symbol) {
+        symbol.unregister(context);
+    });
+};
+
 EnumeratedNativeDeclaration.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
