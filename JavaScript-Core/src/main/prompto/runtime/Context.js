@@ -1,3 +1,5 @@
+var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var BaseMethodDeclaration = require("../declaration/BaseMethodDeclaration").BaseMethodDeclaration;
 var TestMethodDeclaration = require("../declaration/TestMethodDeclaration").TestMethodDeclaration;
@@ -122,11 +124,15 @@ Context.prototype.getCatalog = function() {
 };
 
 Context.prototype.getLocalCatalog = function() {
-    var catalog = { attributes : [], methods : [], categories : [], tests : []};
+    var catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : []};
     for(var name in this.declarations) {
         var decl = this.declarations[name];
         if(decl instanceof AttributeDeclaration)
             catalog.attributes.push(name);
+        else if(decl instanceof EnumeratedCategoryDeclaration)
+            catalog.enumerations.push(name);
+        else if(decl instanceof EnumeratedNativeDeclaration)
+            catalog.enumerations.push(name);
         else if(decl instanceof CategoryDeclaration)
             catalog.categories.push(name);
         else if(decl instanceof MethodDeclarationMap) {
@@ -330,6 +336,8 @@ Context.prototype.getRegisteredValue = function(name) {
         return context.readRegisteredValue(name);
 };
 
+
+
 Context.prototype.readRegisteredValue = function(name) {
 	return this.instances[name] || null;
 };
@@ -345,7 +353,14 @@ Context.prototype.registerValue = function(value, checkDuplicate) {
             this.problemListener.reportDuplicateVariable(value.id);
     }
 	this.instances[value.name] = value;
-}
+};
+
+
+Context.prototype.unregisterValue = function(value) {
+    delete this.instances[value.name];
+};
+
+
 
 Context.prototype.getValue = function(id) {
 	var context = this.contextForValue(id.name);
@@ -353,6 +368,8 @@ Context.prototype.getValue = function(id) {
         this.problemListener.reportUnknownVariable(id);
 	return context.readValue(id);
 };
+
+
 
 Context.prototype.readValue = function(id) {
 	var value = this.values[id.name] || null;
@@ -363,6 +380,8 @@ Context.prototype.readValue = function(id) {
     else
         return value;
 };
+
+
 
 Context.prototype.setValue = function(id, value) {
 	var context = this.contextForValue(id.name);
