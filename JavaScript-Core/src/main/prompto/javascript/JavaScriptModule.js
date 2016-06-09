@@ -37,7 +37,7 @@ JavaScriptModule.prototype.resolve = function() {
 JavaScriptModule.prototype.resolve_module = function() {
     try {
         var path = this.toString();
-        return require(path);
+        return eval("require('" + path + "')");
     } catch (e) {
         return null;
     }
@@ -50,7 +50,7 @@ JavaScriptModule.prototype.resolve_runtime = function() {
         var rootpath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
         // for now let's assume prompto and the required module are at the same level
         var modulepath = rootpath + this.toString();
-        return require(modulepath);
+        return eval("require('" + modulepath + "')");
     } catch (e) {
         // process.stderr.write("Failed requiring " + modulepath + "\n");
         return null;
@@ -64,7 +64,7 @@ JavaScriptModule.prototype.resolve_path = function(part) {
         var rootpath = module.filename.substring(0, idx + 1);
         // for now let's assume prompto and the required module are at the same level
         var modulepath = rootpath + this.toString();
-        return require(modulepath);
+        return eval("require('" + modulepath + "')");
     } catch (e) {
         return null;
     }
