@@ -1,0 +1,15 @@
+{
+  "name": "prompto",
+  "version": "1.0.0",
+  "description": "prompto runtime for javascript",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "webpack": "^1.13.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

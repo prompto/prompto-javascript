@@ -1,0 +1,1 @@
+exports.prompto = require('./prompto');

@@ -1,7 +1,7 @@
 **/.idea/*
 **/.settings/*
 **/node_modules/*
-**/xnode_modules/*
+**/parser/AbstractParser.js
 **/parser/ELexer.js
 **/parser/EParser.js
 **/parser/EParserListener.js
