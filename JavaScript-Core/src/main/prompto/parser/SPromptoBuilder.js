@@ -1321,6 +1321,18 @@ SPromptoBuilder.prototype.exitKey_token = function(ctx) {
 };
 
 
+SPromptoBuilder.prototype.exitUUIDLiteral = function(ctx) {
+    this.setNodeValue(ctx, new literal.UUIDLiteral(ctx.t.text));
+};
+
+
+
+SPromptoBuilder.prototype.exitUUIDType = function(ctx) {
+    this.setNodeValue(ctx, type.UUIDType.instance);
+};
+
+
+
 SPromptoBuilder.prototype.exitValue_token = function(ctx) {
 	this.setNodeValue(ctx, ctx.getText());
 };

@@ -2162,6 +2162,15 @@ SParserListener.prototype.exitPeriodLiteral = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#UUIDLiteral.
+SParserListener.prototype.enterUUIDLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#UUIDLiteral.
+SParserListener.prototype.exitUUIDLiteral = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#NullLiteral.
 SParserListener.prototype.enterNullLiteral = function(ctx) {
 };

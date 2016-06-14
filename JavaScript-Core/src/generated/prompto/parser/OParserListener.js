@@ -2189,6 +2189,15 @@ OParserListener.prototype.exitPeriodLiteral = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#UUIDLiteral.
+OParserListener.prototype.enterUUIDLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#UUIDLiteral.
+OParserListener.prototype.exitUUIDLiteral = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#NullLiteral.
 OParserListener.prototype.enterNullLiteral = function(ctx) {
 };

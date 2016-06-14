@@ -18,6 +18,7 @@ exports.RangeType = require('./RangeType').RangeType;
 exports.MissingType = require('./MissingType').MissingType;
 exports.AnyType = require('./AnyType').AnyType;
 exports.CodeType = require('./CodeType').CodeType;
+exports.UUIDType = require('./UUIDType').UUIDType;
 
 require('./BaseType').resolve();
 require('./TextType').resolve();

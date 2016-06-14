@@ -2288,6 +2288,15 @@ EParserListener.prototype.exitPeriodLiteral = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#UUIDLiteral.
+EParserListener.prototype.enterUUIDLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#UUIDLiteral.
+EParserListener.prototype.exitUUIDLiteral = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#NullLiteral.
 EParserListener.prototype.enterNullLiteral = function(ctx) {
 };

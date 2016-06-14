@@ -1378,6 +1378,18 @@ OPromptoBuilder.prototype.exitKey_token = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitUUIDLiteral = function(ctx) {
+    this.setNodeValue(ctx, new literal.UUIDLiteral(ctx.t.text));
+};
+
+
+
+OPromptoBuilder.prototype.exitUUIDType = function(ctx) {
+    this.setNodeValue(ctx, type.UUIDType.instance);
+};
+
+
+
 OPromptoBuilder.prototype.exitValue_token = function(ctx) {
 	this.setNodeValue(ctx, ctx.getText());
 };

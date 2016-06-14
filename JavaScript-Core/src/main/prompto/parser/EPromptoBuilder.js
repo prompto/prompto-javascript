@@ -86,7 +86,18 @@ EPromptoBuilder.prototype.exitUnresolved_selector = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	this.setNodeValue(ctx, new expression.MemberSelector(null, name));
 };
-	
+
+
+
+EPromptoBuilder.prototype.exitUUIDLiteral = function(ctx) {
+    this.setNodeValue(ctx, new literal.UUIDLiteral(ctx.t.text));
+};
+
+
+
+EPromptoBuilder.prototype.exitUUIDType = function(ctx) {
+    this.setNodeValue(ctx, type.UUIDType.instance);
+};
 
 
 EPromptoBuilder.prototype.exitCommentStatement = function(ctx) {

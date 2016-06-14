@@ -19,3 +19,4 @@ exports.DateLiteral = require('./DateLiteral').DateLiteral;
 exports.TimeLiteral = require('./TimeLiteral').TimeLiteral;
 exports.DateTimeLiteral = require('./DateTimeLiteral').DateTimeLiteral;
 exports.PeriodLiteral = require('./PeriodLiteral').PeriodLiteral;
+exports.UUIDLiteral = require('./UUIDLiteral').UUIDLiteral;
