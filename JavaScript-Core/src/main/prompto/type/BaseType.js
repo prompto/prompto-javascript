@@ -29,7 +29,7 @@ BaseType.prototype.toString = function() {
 
 
 BaseType.prototype.equals = function(other) {
-    return (other instanceof IType) && this.name==other.name;
+    return (other instanceof BaseType) && this.name==other.name;
 };
 
 
