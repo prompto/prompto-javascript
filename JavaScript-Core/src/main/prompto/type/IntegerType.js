@@ -101,29 +101,6 @@ IntegerType.prototype.checkMinus = function(context) {
 	return this;
 };
 
-/*
-@Override
-public IType checkMember(Context context, String name) throws SyntaxError {
-	if(name.equals("min"))
-		return this;
-	else if(name.equals("max"))
-		return this;
-	else
-		return super.checkMember(context, name);
-}
-
-@Override
-public IValue getMember(Context context, String name) throws PromptoError {
-	if(name.equals("min"))
-		return new Integer(java.lang.Integer.MIN_VALUE);
-	else if(name.equals("max"))
-		return new Integer(java.lang.Integer.MAX_VALUE);
-	else
-		return super.getMember(context, name);
-}
-
-*/
-
 IntegerType.prototype.checkCompare = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return BooleanType.instance;

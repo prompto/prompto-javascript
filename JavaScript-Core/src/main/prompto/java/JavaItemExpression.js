@@ -9,20 +9,6 @@ function JavaItemExpression(item) {
 JavaItemExpression.prototype = Object.create(JavaSelectorExpression.prototype);
 JavaItemExpression.prototype.constructor = JavaItemExpression;
 
-/*
-	@Override
-	public IType check(Context context) throws SyntaxError {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public Object evaluate(Context context) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-*/
-
 JavaItemExpression.prototype.toString = function() {
 	return this.parent.toString() + "[" + this.item.toString() + "]";
 };

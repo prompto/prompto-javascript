@@ -12,20 +12,6 @@ PeriodType.prototype.constructor = PeriodType;
 
 PeriodType.instance = new PeriodType();
 
-/*
-@Override
-public Class<?> toJavaClass() {
-	return Period.class;
-}
-
-
-@Override
-public boolean isAssignableTo(Context context, IType other) {
-	return (other instanceof PeriodType) || (other instanceof AnyType);
-}
-
-*/
-
 PeriodType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof PeriodType) {
 		return this;
@@ -54,14 +40,5 @@ PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
 PeriodType.prototype.checkMinus = function(context) {
 	return this;
 };
-
-/*
-@Override
-public IType checkCompare(Context context, IType other) throws SyntaxError {
-	if(other instanceof PeriodType)
-		return BooleanType.instance();
-	return super.checkCompare(context, other);
-}
-*/
 
 exports.PeriodType = PeriodType;

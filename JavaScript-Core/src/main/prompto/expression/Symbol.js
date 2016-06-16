@@ -24,14 +24,5 @@ Symbol.prototype.unregister = function (context) {
     context.unregisterValue(this);
 };
 
-/*
- @Override
- public abstract IType getType(Context context) throws SyntaxError;
-
- public abstract IType check(Context context) throws SyntaxError;
-
- public abstract Object interpret(Context context) throws PromptoError;
-
- */
 
 exports.Symbol = Symbol;
