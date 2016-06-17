@@ -1,10 +1,12 @@
 var ContainerType = require("./ContainerType").ContainerType;
+var SetType = null;
 var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
     IntegerType = require("./IntegerType").IntegerType;
+    SetType = require("./SetType").SetType;
 };
 
 function ListType(itemType) {
@@ -41,7 +43,7 @@ ListType.prototype.equals = function(obj) {
 };
 
 ListType.prototype.checkAdd = function(context, other, tryReverse) {
-	if(other instanceof ListType && this.itemType.equals(other.itemType)) {
+	if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
 		return this;
 	} else {
 		return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
