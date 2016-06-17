@@ -38,7 +38,7 @@ TupleType.prototype.checkMember = function(context, name) {
 };
 
 TupleType.prototype.checkAdd = function(context, other, tryReverse) {
-	if(other instanceof TupleType || other instanceof ListType) {
+	if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
 		return this;
 	} else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);

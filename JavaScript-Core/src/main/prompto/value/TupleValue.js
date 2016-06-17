@@ -1,8 +1,10 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
 var TupleType = null;
+var SetValue = null;
 
 exports.resolve = function() {
     TupleType = require("../type/TupleType").TupleType;
+    SetValue = require("./SetValue").SetValue;
 };
 
 function TupleValue(items, item, mutable) {
@@ -34,9 +36,15 @@ protected TupleValue newInstance(List<Object> items) {
 
 TupleValue.prototype.Add = function(context, value) {
 	if (value instanceof BaseValueList) {
-		var items = this.items.concat(value.items);
-		return new TupleValue(items);
-	} else {
+        var items = this.items.concat(value.items);
+        return new TupleValue(items);
+    } else if(value instanceof SetValue) {
+        var items = this.items.concat([]);
+        for(var name in value.items) {
+            items.push(value.items[name]);
+        }
+        return new TupleValue(items);
+    } else {
 		throw new SyntaxError("Illegal: Tuple + " + typeof(value));
 	}
 };
