@@ -23,13 +23,14 @@ ListValue.prototype.newInstance = function(items) {
 
 ListValue.prototype.Add = function(context, value) {
 	if (value instanceof ListValue) {
-        return new ListValue(this.type.itemType, this.items.concat(value.items));
+        var items = this.items.concat(value.items);
+        return new ListValue(this.type.itemType, items);
     } else if(value instanceof SetValue) {
-        var list = this.items.concat([]);
+        var items = this.items.concat([]);
         for(var name in value.items) {
-            list.push(value.items[name]);
+            items.push(value.items[name]);
         }
-        return new ListValue(this.type.itemType, list);
+        return new ListValue(this.type.itemType, items);
     } else {
 		return BaseValueList.prototype.Add.apply(this, context, value);
 	}
