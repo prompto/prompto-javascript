@@ -38,10 +38,6 @@ DateType.prototype.checkSubstract = function(context, other) {
 		return this; // ignore time section
 	} else if (other instanceof DateType) {
 		return PeriodType.instance;
-	} else if (other instanceof TimeType) {
-		return PeriodType.instance;
-	} else if (other instanceof DateTimeType) {
-		return PeriodType.instance;
 	} else {
 		return NativeType.prototype.checkSubstract.call(this, context, other);
 	}

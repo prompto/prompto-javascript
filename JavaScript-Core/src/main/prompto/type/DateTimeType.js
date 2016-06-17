@@ -39,7 +39,7 @@ DateTimeType.prototype.checkAdd = function(context, other, tryReverse) {
 DateTimeType.prototype.checkSubstract = function(context, other) {
 	if (other instanceof PeriodType) {
 		return this;
-	} else if(other instanceof DateTimeType || other instanceof DateType || other instanceof TimeType) {
+	} else if(other instanceof DateTimeType) {
 		return PeriodType.instance;
 	} else {
 		return NativeType.prototype.checkSubstract.call(this, context, other);
