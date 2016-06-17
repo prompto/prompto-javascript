@@ -2,9 +2,11 @@ var BaseValueList = require("./BaseValueList").BaseValueList;
 var Bool = require("./Bool").Bool;
 var Integer = require("./Integer").Integer;
 var ListType = null;
+var SetValue = null;
 
 exports.resolve = function() {
     ListType = require("../type/ListType").ListType;
+    SetValue = require("./SetValue").SetValue;
 };
 
 function ListValue(itemType, items, item, mutable) {
@@ -20,9 +22,15 @@ ListValue.prototype.newInstance = function(items) {
 };
 
 ListValue.prototype.Add = function(context, value) {
-	if (value instanceof ListValue || value instanceof TupleValue || value instanceof SetValue) {
-		return new ListValue(this.type.itemType, this.items.concat(value.items));
-	} else {
+	if (value instanceof ListValue) {
+        return new ListValue(this.type.itemType, this.items.concat(value.items));
+    } else if(value instanceof SetValue) {
+        var list = this.items.concat([]);
+        for(var name in value.items) {
+            list.push(value.items[name]);
+        }
+        return new ListValue(this.type.itemType, list);
+    } else {
 		return BaseValueList.prototype.Add.apply(this, context, value);
 	}
 };
