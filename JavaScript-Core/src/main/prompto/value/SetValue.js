@@ -2,9 +2,11 @@ var Bool = require("./Bool").Bool;
 var Value = require("./Value").Value;
 var Integer = require("./Integer").Integer;
 var SetType = require("../type/SetType").SetType;
+var ListValue = null;
 
 exports.resolve = function() {
     SetType = require("../type/SetType").SetType;
+    ListValue = require("./ListValue").ListValue;
 };
 
 function SetValue(itemType, items) {
@@ -81,7 +83,7 @@ SetValue.prototype.getItemInContext = function(context, index) {
 };
 
 SetValue.prototype.Add = function(context, value) {
-    if (value instanceof SetValue) {
+    if (value instanceof SetValue || value instanceof ListValue) {
         var result = new SetValue(this.type.itemType, this.items);
         result.addAll(value.items);
         return result;

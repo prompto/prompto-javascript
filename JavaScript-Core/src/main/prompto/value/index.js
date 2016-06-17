@@ -32,6 +32,7 @@ require('./Decimal').resolve();
 require('./DateTime').resolve();
 require('./Time').resolve();
 require('./ListValue').resolve();
+require('./SetValue').resolve();
 require('./TupleValue').resolve();
 require('./LocalDate').resolve();
 require('./Value').resolve();
