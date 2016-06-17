@@ -84,7 +84,8 @@ SetValue.prototype.getItemInContext = function(context, index) {
 
 SetValue.prototype.Add = function(context, value) {
     if (value instanceof SetValue || value instanceof ListValue) {
-        var result = new SetValue(this.type.itemType, this.items);
+        var result = new SetValue(this.type.itemType);
+        result.addAll(this.items);
         result.addAll(value.items);
         return result;
     } else {
