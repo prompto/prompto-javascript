@@ -109,22 +109,9 @@ LocalDate.prototype.getDayOfYear = function() {
     first.setMonth(0);
     first.setDate(1);
     var numDays = (this.value - first) / (1000 * 60 * 60 * 24);
-    return 1 + numDays | 0;
+    return 1 + Math.floor(numDays);
 }
 
-/*
-
-public Object ConvertTo(Class<?> type)
-{
-    return value;
-}
-
-public Date toDateMidnight()
-{
-    return this;
-}
-
-*/
 
 
 LocalDate.prototype.equals = function(obj) {
@@ -135,13 +122,6 @@ LocalDate.prototype.equals = function(obj) {
     }
 };
 
-/*
-public int hashCode()
-{
-    return value.hashCode();
-}
-
-*/
 
 exports.LocalDate = LocalDate;
 

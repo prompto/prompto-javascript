@@ -31,7 +31,7 @@ Integer.prototype.IntegerValue = function() {
 };
 
 Integer.prototype.DecimalValue = function() {
-	return this.value;
+	return this.value * 1.0;
 };
 
 Integer.prototype.Add = function(context, value) {

@@ -17,7 +17,7 @@ Object.defineProperty(Argument.prototype, "name", {
 });
 
 Argument.prototype.checkValue = function(context, expression) {
-    value = expression.interpret(context);
+    var value = expression.interpret(context);
     if (value instanceof Integer && this.getType(context)==DecimalType.instance) {
         return new Decimal(value.DecimalValue());
     } else if (value instanceof Decimal && this.getType(context)==IntegerType.instance) {

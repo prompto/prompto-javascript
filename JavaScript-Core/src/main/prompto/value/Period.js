@@ -154,9 +154,9 @@ Period.prototype.plus = function(period) {
     data[4] = this.hours + period.hours;
     data[5] = this.minutes + period.minutes;
     var seconds = (this.seconds + period.seconds) + ((this.millis + period.millis)/1000.0);
-    data[6] = seconds | 0;
+    data[6] = Math.floor(seconds);
     var millis = Math.round(( seconds * 1000 ) % 1000);
-    data[7] = Math.abs(millis) | 0;
+    data[7] = Math.floor(Math.abs(millis));
     return new Period(data);
 };
 
@@ -191,9 +191,9 @@ Period.prototype.minus = function(period) {
     data[4] = this.hours - period.hours;
     data[5] = this.minutes - period.minutes;
     var seconds = (this.seconds + this.millis/1000.0) - (period.seconds + period.millis/1000.0);
-    data[6] = seconds | 0;
+    data[6] = Math.floor(seconds);
     var millis = Math.round(( seconds * 1000 ) % 1000);
-    data[7] = Math.abs(millis) | 0;
+    data[7] = Math.floor(Math.abs(millis));
     return new Period(data);
 };
 
@@ -220,9 +220,9 @@ Period.prototype.multiply = function(value) {
         data[4] = this.hours * count;
         data[5] = this.minutes * count;
         var seconds = (this.seconds + this.millis/1000.0) * count;
-        data[6] = seconds | 0;
+        data[6] = Math.floor(seconds);
         var millis = Math.round(( seconds * 1000 ) % 1000);
-        data[7] = Math.abs(millis) | 0;
+        data[7] = Math.floor(Math.abs(millis));
         return new Period(data);
      }
  };

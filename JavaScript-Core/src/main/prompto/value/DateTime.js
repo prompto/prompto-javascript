@@ -139,7 +139,7 @@ DateTime.prototype.subDateTime = function(other) {
     var otherValue = other.date.valueOf() + other.tzOffset*1000;
 	var numDays = ( thisValue - otherValue)/(24*60*60*1000);
 	var data = [];
-	data[3] = numDays | 0;
+	data[3] = Math.floor(numDays);
 	data[4] = this.date.getUTCHours() - other.date.getUTCHours();
 	data[5] = this.date.getUTCMinutes() - other.date.getUTCMinutes();
 	data[6] = this.date.getUTCSeconds() - other.date.getUTCSeconds();
@@ -150,7 +150,7 @@ DateTime.prototype.subDateTime = function(other) {
 DateTime.prototype.subDate = function(value) {
 	var numDays = (this.date.valueOf() - value.value.valueOf())/(24*60*60*1000);
 	var data = [];
-	data[3] = numDays | 0;
+	data[3] = Math.floor(numDays);
 	data[4] = this.date.getUTCHours();
 	data[5] = this.date.getUTCMinutes();
 	data[6] = this.date.getUTCSeconds();
@@ -237,16 +237,9 @@ DateTime.prototype.getDayOfYear = function() {
 	first.setMonth(0);
 	first.setDate(1);
 	var numDays = (this.date - first) / (1000 * 60 * 60 * 24);
-	return 1 + numDays | 0;
+	return 1 + Math.floor(numDays);
 }
 
-/*
-@Override
-public Object ConvertTo(Class<?> type) {
-	return value;
-}
-
-*/
 
 DateTime.prototype.equals = function(obj) {
 	if (obj instanceof DateTime) {
@@ -255,18 +248,5 @@ DateTime.prototype.equals = function(obj) {
 		return false;
 	}
 };
-
-/*
-@Override
-public int hashCode() {
-	return value.hashCode();
-}
-
-@Override
-public String toString() {
-	return value.toString();
-}
-
-*/
 
 exports.DateTime = DateTime;

@@ -81,7 +81,7 @@ Value.convertFromJavaScript = function(value) {
 	} else if(typeof(value)=='string') {
 		return new Text(value);
 	} else if(typeof(value)=='number') {
-        if(value == (value | 0))
+        if(value == Math.floor(value))
             return new Integer(value);
         else
             return new Decimal(value);

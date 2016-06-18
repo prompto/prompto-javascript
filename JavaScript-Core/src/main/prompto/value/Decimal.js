@@ -22,7 +22,7 @@ Decimal.Parse = function(text) {
 
 Decimal.prototype.toString = function() {
 	// mimic 0.0######
-	if(this.value == (this.value | 0)) {
+	if(this.value == Math.floor(this.value)) {
 		return Number(this.value).toFixed(1);
 	} else {
 		return this.value;
@@ -31,7 +31,7 @@ Decimal.prototype.toString = function() {
 
 /*jshint bitwise:false*/
 Decimal.prototype.IntegerValue = function() {
-	return this.value | 0;
+	return Math.floor(this.value);
 };
 
 Decimal.prototype.DecimalValue = function() {
