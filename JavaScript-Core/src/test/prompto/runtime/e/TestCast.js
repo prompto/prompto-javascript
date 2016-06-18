@@ -13,12 +13,28 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testAutoDecimalCast = function(test) {
+	checkOutput(test, "cast/autoDecimalCast.pec");
+};
+
 exports.testAutoDowncast = function(test) {
 	checkOutput(test, "cast/autoDowncast.pec");
 };
 
+exports.testAutoIntegerCast = function(test) {
+	checkOutput(test, "cast/autoIntegerCast.pec");
+};
+
 exports.testCastChild = function(test) {
 	checkOutput(test, "cast/castChild.pec");
+};
+
+exports.testCastDecimal = function(test) {
+	checkOutput(test, "cast/castDecimal.pec");
+};
+
+exports.testCastInteger = function(test) {
+	checkOutput(test, "cast/castInteger.pec");
 };
 
 exports.testCastMissing = function(test) {

@@ -33,6 +33,10 @@ exports.testError = function(test) {
 	runTests(test, "core/error.pec");
 };
 
+exports.testMath = function(test) {
+	runTests(test, "core/math.pec");
+};
+
 exports.testTime = function(test) {
 	runTests(test, "core/time.pec");
 };
