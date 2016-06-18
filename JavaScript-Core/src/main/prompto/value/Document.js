@@ -40,7 +40,7 @@ Document.prototype.setMember = function(context, name, value) {
 Document.prototype.getItemInContext = function(context, index) {
     if (index instanceof Text) {
         // TODO autocreate
-        return this.values[index.value] || null;
+        return this.values[index.value] || NullValue.instance;
     } else {
         throw new SyntaxError("No such item:" + index.toString())
     }
