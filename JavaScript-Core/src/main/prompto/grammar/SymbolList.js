@@ -1,18 +1,23 @@
-var ExpressionList = require("../utils/ExpressionList").ExpressionList;
+var ObjectList = require("../utils/ObjectList").ObjectList;
 var MissingType = require("../type/MissingType").MissingType;
 
 function SymbolList(symbol) {
-    ExpressionList.call(this, MissingType.instance);
+    ObjectList.call(this, MissingType.instance);
 	if(symbol)
         this.add(symbol);
 	return this;
 }
 
-SymbolList.prototype = Object.create(ExpressionList.prototype);
+SymbolList.prototype = Object.create(ObjectList.prototype);
 SymbolList.prototype.constructor = SymbolList;
 
 SymbolList.prototype.getIterator = function(context) {
     return new SymbolListIterator(this, context);
+};
+
+
+SymbolList.prototype.toString = function() {
+    return "[" + ObjectList.prototype.toString.call(this) + "]";
 };
 
 function SymbolListIterator(symbols, context) {
@@ -29,5 +34,6 @@ SymbolListIterator.prototype.hasNext = function() {
 SymbolListIterator.prototype.next = function() {
     return this.symbols[this.idx++].interpret(this.context);
 };
+
 
 exports.SymbolList = SymbolList;

@@ -12,7 +12,7 @@ NativeSymbol.prototype = Object.create(Symbol.prototype);
 NativeSymbol.prototype.constructor = NativeSymbol;
 
 NativeSymbol.prototype.toString = function() {
-	return this.symbol + " with " + this.expression.toString() + " as value";
+	return this.name;
 };
 
 NativeSymbol.prototype.toDialect = function(writer) {
