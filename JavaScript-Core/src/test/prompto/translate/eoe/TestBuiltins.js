@@ -66,6 +66,14 @@ exports.testDictCount = function(test) {
 	compareResourceEOE(test, "builtins/dictCount.pec");
 };
 
+exports.testDictKeys = function(test) {
+	compareResourceEOE(test, "builtins/dictKeys.pec");
+};
+
+exports.testDictValues = function(test) {
+	compareResourceEOE(test, "builtins/dictValues.pec");
+};
+
 exports.testEnumName = function(test) {
 	compareResourceEOE(test, "builtins/enumName.pec");
 };

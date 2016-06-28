@@ -49,10 +49,6 @@ exports.testDateTimeSecond = function(test) {
 	checkOutput(test, "builtins/dateTimeSecond.poc");
 };
 
-exports.testDateTimeTZOffset = function(test) {
-	checkOutput(test, "builtins/dateTimeTZOffset.poc");
-};
-
 exports.testDateTimeYear = function(test) {
 	checkOutput(test, "builtins/dateTimeYear.poc");
 };

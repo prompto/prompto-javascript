@@ -57,10 +57,6 @@ exports.testDateTimeSecond = function(test) {
 	checkOutput(test, "builtins/dateTimeSecond.pec");
 };
 
-exports.testDateTimeTZOffset = function(test) {
-	checkOutput(test, "builtins/dateTimeTZOffset.pec");
-};
-
 exports.testDateTimeYear = function(test) {
 	checkOutput(test, "builtins/dateTimeYear.pec");
 };
@@ -71,6 +67,14 @@ exports.testDateYear = function(test) {
 
 exports.testDictCount = function(test) {
 	checkOutput(test, "builtins/dictCount.pec");
+};
+
+exports.testDictKeys = function(test) {
+	checkOutput(test, "builtins/dictKeys.pec");
+};
+
+exports.testDictValues = function(test) {
+	checkOutput(test, "builtins/dictValues.pec");
 };
 
 exports.testEnumName = function(test) {

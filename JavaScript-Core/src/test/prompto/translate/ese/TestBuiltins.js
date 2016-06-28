@@ -66,6 +66,14 @@ exports.testDictCount = function(test) {
 	compareResourceESE(test, "builtins/dictCount.pec");
 };
 
+exports.testDictKeys = function(test) {
+	compareResourceESE(test, "builtins/dictKeys.pec");
+};
+
+exports.testDictValues = function(test) {
+	compareResourceESE(test, "builtins/dictValues.pec");
+};
+
 exports.testEnumName = function(test) {
 	compareResourceESE(test, "builtins/enumName.pec");
 };
