@@ -3,6 +3,7 @@ var ContainerType = require("./ContainerType").ContainerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
+var SetType = require("./SetType").SetType;
 var ListType = require("./ListType").ListType;
 var EntryType = require("./EntryType").EntryType;
 
@@ -68,7 +69,7 @@ DictType.prototype.checkMember = function(context, name) {
 	if ("count"==name) {
 		return IntegerType.instance;
 	} else if("keys"==name) {
-		return new ListType(TextType.instance);
+		return new SetType(TextType.instance);
 	} else if ("values"==name) {
 		return new ListType(this.itemType);
 	} else {
