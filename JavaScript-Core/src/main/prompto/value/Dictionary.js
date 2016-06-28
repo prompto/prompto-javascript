@@ -1,5 +1,6 @@
 var Value = require("./Value").Value;
 var NullValue = require("./NullValue").NullValue;
+var SetValue = require("./SetValue").SetValue;
 var ListValue = require("./ListValue").ListValue;
 var Text = require("./Text").Text;
 var Integer = require("./Integer").Integer;
@@ -74,11 +75,11 @@ Dictionary.prototype.getMember = function(context, name) {
     if ("count"==name) {
         return new Integer(this.size());
     } else if ("keys"==name) {
-        var list = [];
+        var set_ = new SetValue(TextType.instance);
         for(p in this.dict) {
-            list.push(new Text(p));
+            set_.add(new Text(p));
         }
-        return new ListValue(TextType.instance, list);
+        return set_;
     } else if ("values"==name) {
         var list = []
         for(p in this.dict) {
