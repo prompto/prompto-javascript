@@ -226,7 +226,7 @@ DateTime.prototype.getMember = function(context, name) {
 	} else if ("tzOffset"==name) {
 		return new Integer(this.tzOffset);
 	} else if ("tzName"==name) {
-		return new Text("TO DO");
+		return new Text("Z");
 	} else {
 		throw new SyntaxError("No such member:" + name);
 	}
