@@ -36,7 +36,7 @@ Cursor.prototype.next = function() {
 };
 
 Cursor.prototype.getMember = function(context, name) {
-    if ("length" == name)
+    if ("count" == name)
         return new Integer(this.length());
     else
         throw new InvalidDataError("No such member:" + name);

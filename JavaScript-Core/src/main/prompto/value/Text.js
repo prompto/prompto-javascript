@@ -67,7 +67,7 @@ Text.prototype.hasItem = function(context, value) {
 
 
 Text.prototype.getMember = function(context, name) {
-	if ("length"==name) {
+	if ("count"==name) {
 		return new Integer(this.value.length);
 	} else {
 		throw new InvalidDataError("No such member:" + name);

@@ -65,8 +65,8 @@ exports.testDateYear = function(test) {
 	checkOutput(test, "builtins/dateYear.pec");
 };
 
-exports.testDictLength = function(test) {
-	checkOutput(test, "builtins/dictLength.pec");
+exports.testDictCount = function(test) {
+	checkOutput(test, "builtins/dictCount.pec");
 };
 
 exports.testEnumName = function(test) {
@@ -81,16 +81,16 @@ exports.testEnumValue = function(test) {
 	checkOutput(test, "builtins/enumValue.pec");
 };
 
-exports.testListLength = function(test) {
-	checkOutput(test, "builtins/listLength.pec");
+exports.testListCount = function(test) {
+	checkOutput(test, "builtins/listCount.pec");
 };
 
-exports.testSetLength = function(test) {
-	checkOutput(test, "builtins/setLength.pec");
+exports.testSetCount = function(test) {
+	checkOutput(test, "builtins/setCount.pec");
 };
 
-exports.testTextLength = function(test) {
-	checkOutput(test, "builtins/textLength.pec");
+exports.testTextCount = function(test) {
+	checkOutput(test, "builtins/textCount.pec");
 };
 
 exports.testTimeHour = function(test) {
@@ -105,7 +105,7 @@ exports.testTimeSecond = function(test) {
 	checkOutput(test, "builtins/timeSecond.pec");
 };
 
-exports.testTupleLength = function(test) {
-	checkOutput(test, "builtins/tupleLength.pec");
+exports.testTupleCount = function(test) {
+	checkOutput(test, "builtins/tupleCount.pec");
 };
 

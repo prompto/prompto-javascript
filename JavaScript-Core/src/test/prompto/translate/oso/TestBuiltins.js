@@ -54,8 +54,8 @@ exports.testDateYear = function(test) {
 	compareResourceOSO(test, "builtins/dateYear.poc");
 };
 
-exports.testDictLength = function(test) {
-	compareResourceOSO(test, "builtins/dictLength.poc");
+exports.testDictCount = function(test) {
+	compareResourceOSO(test, "builtins/dictCount.poc");
 };
 
 exports.testEnumName = function(test) {
@@ -70,16 +70,16 @@ exports.testEnumValue = function(test) {
 	compareResourceOSO(test, "builtins/enumValue.poc");
 };
 
-exports.testListLength = function(test) {
-	compareResourceOSO(test, "builtins/listLength.poc");
+exports.testListCount = function(test) {
+	compareResourceOSO(test, "builtins/listCount.poc");
 };
 
-exports.testSetLength = function(test) {
-	compareResourceOSO(test, "builtins/setLength.poc");
+exports.testSetCount = function(test) {
+	compareResourceOSO(test, "builtins/setCount.poc");
 };
 
-exports.testTextLength = function(test) {
-	compareResourceOSO(test, "builtins/textLength.poc");
+exports.testTextCount = function(test) {
+	compareResourceOSO(test, "builtins/textCount.poc");
 };
 
 exports.testTimeHour = function(test) {
@@ -94,7 +94,7 @@ exports.testTimeSecond = function(test) {
 	compareResourceOSO(test, "builtins/timeSecond.poc");
 };
 
-exports.testTupleLength = function(test) {
-	compareResourceOSO(test, "builtins/tupleLength.poc");
+exports.testTupleCount = function(test) {
+	compareResourceOSO(test, "builtins/tupleCount.poc");
 };
 

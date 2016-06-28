@@ -65,7 +65,7 @@ DictType.prototype.checkIterator = function(context) {
 };
 
 DictType.prototype.checkMember = function(context, name) {
-	if ("length"==name) {
+	if ("count"==name) {
 		return IntegerType.instance;
 	} else if("keys"==name) {
 		return new ListType(TextType.instance);

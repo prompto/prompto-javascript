@@ -154,7 +154,7 @@ BaseValueList.prototype.equals = function(obj) {
 
 
 BaseValueList.prototype.getMember = function(context, name) {
-	if ("length"==name) {
+	if ("count"==name) {
 		return new Integer(this.items.length);
 	} else {
 		return Value.prototype.getMember.apply(this, context, name);

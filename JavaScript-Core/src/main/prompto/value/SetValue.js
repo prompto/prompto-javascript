@@ -43,7 +43,7 @@ SetValue.prototype.size = function() {
 };
 
 SetValue.prototype.getMember = function(context, name) {
-    if ("length"==name) {
+    if ("count"==name) {
         return new Integer(this.size());
     } else {
         return Value.prototype.getMember.apply(this, context, name);

@@ -71,7 +71,7 @@ Dictionary.prototype.hasItem = function(context, value) {
 
 
 Dictionary.prototype.getMember = function(context, name) {
-    if ("length"==name) {
+    if ("count"==name) {
         return new Integer(this.size());
     } else if ("keys"==name) {
         var list = [];

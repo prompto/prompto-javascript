@@ -79,7 +79,7 @@ ListType.prototype.checkIterator = function(context) {
 }
 
 ListType.prototype.checkMember = function(context, name) {
-	if ("length" == name) {
+	if ("count" == name) {
 		return IntegerType.instance;
 	} else {
 		return ContainerType.prototype.checkMember.call(this, context, name);

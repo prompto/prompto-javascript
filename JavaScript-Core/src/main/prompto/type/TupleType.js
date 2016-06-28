@@ -30,7 +30,7 @@ TupleType.prototype.checkItem = function(context, other) {
 };
 
 TupleType.prototype.checkMember = function(context, name) {
-	if ("length"==name) {
+	if ("count"==name) {
 		return IntegerType.instance;
 	} else {
 		return NativeType.prototype.checkMember.call(this, context, name);
