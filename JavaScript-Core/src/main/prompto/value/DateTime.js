@@ -221,7 +221,7 @@ DateTime.prototype.getMember = function(context, name) {
 		return new Integer(this.date.getUTCMinutes());
 	} else if ("second"==name) {
 		return new Integer(this.date.getUTCSeconds());
-	} else if ("millis"==name) {
+	} else if ("millisecond"==name) {
 		return new Integer(this.date.getUTCMilliseconds());
 	} else if ("tzOffset"==name) {
 		return new Integer(this.tzOffset);

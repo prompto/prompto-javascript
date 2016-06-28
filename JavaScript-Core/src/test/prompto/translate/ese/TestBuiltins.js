@@ -30,6 +30,10 @@ exports.testDateTimeHour = function(test) {
 	compareResourceESE(test, "builtins/dateTimeHour.pec");
 };
 
+exports.testDateTimeMilli = function(test) {
+	compareResourceESE(test, "builtins/dateTimeMilli.pec");
+};
+
 exports.testDateTimeMinute = function(test) {
 	compareResourceESE(test, "builtins/dateTimeMinute.pec");
 };
@@ -88,6 +92,10 @@ exports.testTextCount = function(test) {
 
 exports.testTimeHour = function(test) {
 	compareResourceESE(test, "builtins/timeHour.pec");
+};
+
+exports.testTimeMilli = function(test) {
+	compareResourceESE(test, "builtins/timeMilli.pec");
 };
 
 exports.testTimeMinute = function(test) {

@@ -69,7 +69,7 @@ DateTimeType.prototype.checkMember = function(context, name) {
 		return IntegerType.instance;
 	} else if ("second"==name) {
 		return IntegerType.instance;
-	} else if ("millis"==name) {
+	} else if ("millisecond"==name) {
 		return IntegerType.instance;
 	} else if ("tzOffset"==name) {
 		return IntegerType.instance;

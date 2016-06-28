@@ -64,7 +64,7 @@ TimeType.prototype.checkMember = function (context, name) {
 		return IntegerType.instance;
 	} else if ("second" == name) {
 		return IntegerType.instance;
-	} else if ("millis" == name) {
+	} else if ("millisecond" == name) {
 		return IntegerType.instance;
 	} else {
 		return NativeType.prototype.checkMember.call(this, context, name);

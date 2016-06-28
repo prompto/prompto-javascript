@@ -41,6 +41,10 @@ exports.testDateTimeHour = function(test) {
 	checkOutput(test, "builtins/dateTimeHour.pec");
 };
 
+exports.testDateTimeMilli = function(test) {
+	checkOutput(test, "builtins/dateTimeMilli.pec");
+};
+
 exports.testDateTimeMinute = function(test) {
 	checkOutput(test, "builtins/dateTimeMinute.pec");
 };
@@ -95,6 +99,10 @@ exports.testTextCount = function(test) {
 
 exports.testTimeHour = function(test) {
 	checkOutput(test, "builtins/timeHour.pec");
+};
+
+exports.testTimeMilli = function(test) {
+	checkOutput(test, "builtins/timeMilli.pec");
 };
 
 exports.testTimeMinute = function(test) {
