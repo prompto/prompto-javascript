@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testCharCodePoint = function(test) {
+	checkOutput(test, "builtins/charCodePoint.pec");
+};
+
 exports.testDateDayOfMonth = function(test) {
 	checkOutput(test, "builtins/dateDayOfMonth.pec");
 };

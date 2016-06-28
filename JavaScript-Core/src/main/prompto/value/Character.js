@@ -27,6 +27,16 @@ Character.isWhitespace = function(c) {
 	return !!whitespace[c.charCodeAt(0)];
 };
 
+
+Character.prototype.getMember = function(context, name) {
+    if ("codePoint"==name) {
+        return new Integer(this.value.charCodeAt(0));
+    } else {
+        throw new InvalidDataError("No such member:" + name);
+    }
+};
+
+
 Character.prototype.Add = function(context, value) {
     return new Text(this.value + value.toString());
 }

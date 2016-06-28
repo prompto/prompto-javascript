@@ -23,20 +23,6 @@ Text.prototype.toString = function() {
 	return this.value;
 };
 
-
-/*
-@Override
-public long size() {
-	return value.length();
-}
-
-@Override
-public boolean isEmpty() {
-	return value.isEmpty();
-}
-
-*/
-
 Text.prototype.Add = function(context, value) {
 	return new Text(this.value + value.toString());
 };

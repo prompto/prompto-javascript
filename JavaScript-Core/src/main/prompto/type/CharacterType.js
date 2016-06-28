@@ -30,6 +30,16 @@ CharacterType.prototype.nativeCast = function(context, value) {
         throw new InvalidDataError("Cannot convert " + value.toString() + " to Character");
 };
 
+
+CharacterType.prototype.checkMember = function(context, name) {
+    if ("codePoint"==name) {
+        return IntegerType.instance;
+    } else {
+        return NativeType.prototype.checkMember.call(this, context, name);
+    }
+};
+
+
 CharacterType.prototype.checkAdd = function(context, other, tryReverse) {
 	return TextType.instance;
 };
