@@ -182,7 +182,6 @@ CategoryDeclaration.prototype.protoToSDialect = function(writer, derivedFrom) {
     if(this.attributes!=null)
         this.attributes.toDialect(writer, false);
     writer.append("):\n");
-    writer.newLine();
 };
 
 

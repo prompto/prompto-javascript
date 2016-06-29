@@ -73,11 +73,14 @@ ConcreteCategoryDeclaration.prototype.methodsToSDialect = function(writer) {
     writer.indent();
     if(this.methods==null || this.methods.length==0)
         writer.append("pass\n");
-    else this.methods.forEach(function(method) {
-        var w = writer.newMemberWriter();
-        method.toDialect(w);
+    else {
         writer.newLine();
-    });
+        this.methods.forEach(function(method) {
+            var w = writer.newMemberWriter();
+            method.toDialect(w);
+            writer.newLine();
+        });
+    }
     writer.dedent();
 };
 
