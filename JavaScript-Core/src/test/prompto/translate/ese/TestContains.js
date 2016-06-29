@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceESE = require("../../parser/BaseParserTest").compareResourceESE;
 
+exports.testContainsAllDict = function(test) {
+	compareResourceESE(test, "contains/containsAllDict.pec");
+};
+
 exports.testContainsAllList = function(test) {
 	compareResourceESE(test, "contains/containsAllList.pec");
 };
@@ -20,6 +24,10 @@ exports.testContainsAllText = function(test) {
 
 exports.testContainsAllTuple = function(test) {
 	compareResourceESE(test, "contains/containsAllTuple.pec");
+};
+
+exports.testContainsAnyDict = function(test) {
+	compareResourceESE(test, "contains/containsAnyDict.pec");
 };
 
 exports.testContainsAnyList = function(test) {

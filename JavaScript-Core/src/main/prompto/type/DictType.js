@@ -43,13 +43,22 @@ DictType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+
 DictType.prototype.checkContains = function(context, other) {
-	if(other==TextType.instance) {
-		return BooleanType.instance;
-	} else {
-		return ContainerType.prototype.checkContains.call(this, context, other);
-	}
+    if(other==TextType.instance) {
+        return BooleanType.instance;
+    } else {
+        return ContainerType.prototype.checkContains.call(this, context, other);
+    }
 };
+
+
+
+DictType.prototype.checkContainsAllOrAny = function(context, other) {
+    return BooleanType.instance;
+};
+
 
 
 DictType.prototype.checkItem = function(context, other) {

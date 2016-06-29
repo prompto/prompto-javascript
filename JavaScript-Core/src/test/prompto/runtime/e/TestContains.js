@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testContainsAllDict = function(test) {
+	checkOutput(test, "contains/containsAllDict.pec");
+};
+
 exports.testContainsAllList = function(test) {
 	checkOutput(test, "contains/containsAllList.pec");
 };
@@ -31,6 +35,10 @@ exports.testContainsAllText = function(test) {
 
 exports.testContainsAllTuple = function(test) {
 	checkOutput(test, "contains/containsAllTuple.pec");
+};
+
+exports.testContainsAnyDict = function(test) {
+	checkOutput(test, "contains/containsAnyDict.pec");
 };
 
 exports.testContainsAnyList = function(test) {

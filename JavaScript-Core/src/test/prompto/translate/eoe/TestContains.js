@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+exports.testContainsAllDict = function(test) {
+	compareResourceEOE(test, "contains/containsAllDict.pec");
+};
+
 exports.testContainsAllList = function(test) {
 	compareResourceEOE(test, "contains/containsAllList.pec");
 };
@@ -20,6 +24,10 @@ exports.testContainsAllText = function(test) {
 
 exports.testContainsAllTuple = function(test) {
 	compareResourceEOE(test, "contains/containsAllTuple.pec");
+};
+
+exports.testContainsAnyDict = function(test) {
+	compareResourceEOE(test, "contains/containsAnyDict.pec");
 };
 
 exports.testContainsAnyList = function(test) {
