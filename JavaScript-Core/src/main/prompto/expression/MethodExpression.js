@@ -1,6 +1,7 @@
 var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = null; // circular dependency
 var Dialect = require("../parser/Dialect").Dialect;
+var ClosureValue = require("../value/ClosureValue").ClosureValue;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -38,7 +39,18 @@ MethodExpression.prototype.check = function(context) {
 };
 
 MethodExpression.prototype.interpret = function(context, asMethod) {
-	return context.getValue(this.id);
+	if(context.hasValue(this.id)) {
+        return context.getValue(this.id);
+    } else {
+        var named = context.getRegistered(this.id);
+        if (named instanceof MethodDeclarationMap) {
+            for (var proto in named.protos) {
+                return new ClosureValue(context, named.protos[proto])
+            }
+        } else {
+            throw new SyntaxError("No method with name:" + this.name);
+        }
+    }
 };
 	
 exports.MethodExpression = MethodExpression;

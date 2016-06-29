@@ -362,6 +362,12 @@ Context.prototype.unregisterValue = function(value) {
 
 
 
+Context.prototype.hasValue = function(id) {
+    return this.contextForValue(id.name)!=null;
+};
+
+
+
 Context.prototype.getValue = function(id) {
 	var context = this.contextForValue(id.name);
 	if(context===null)

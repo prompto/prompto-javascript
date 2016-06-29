@@ -18,6 +18,10 @@ exports.testE_as_e_bug = function(test) {
 	compareResourceESE(test, "methods/e_as_e_bug.pec");
 };
 
+exports.testExplicit = function(test) {
+	compareResourceESE(test, "methods/explicit.pec");
+};
+
 exports.testExpressionWith = function(test) {
 	compareResourceESE(test, "methods/expressionWith.pec");
 };
