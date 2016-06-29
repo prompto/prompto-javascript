@@ -1,9 +1,11 @@
 var ContainerType = require("./ContainerType").ContainerType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var IntegerType = null;
+var BooleanType = null;
 
 exports.resolve = function() {
 	IntegerType = require("./IntegerType").IntegerType;
+    BooleanType = require("./BooleanType").BooleanType;
 };
 
 function RangeType(itemType) {
@@ -29,5 +31,11 @@ RangeType.prototype.checkSlice = function(context) {
 RangeType.prototype.checkIterator = function(context) {
 	return this.itemType;
 };
+
+
+RangeType.prototype.checkContainsAllOrAny = function(context, other) {
+    return BooleanType.instance;
+};
+
 
 exports.RangeType = RangeType;
