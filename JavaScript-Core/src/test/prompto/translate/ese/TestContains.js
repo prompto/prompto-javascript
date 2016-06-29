@@ -6,6 +6,10 @@ exports.testContainsAllList = function(test) {
 	compareResourceESE(test, "contains/containsAllList.pec");
 };
 
+exports.testContainsAllRange = function(test) {
+	compareResourceESE(test, "contains/containsAllRange.pec");
+};
+
 exports.testContainsAllSet = function(test) {
 	compareResourceESE(test, "contains/containsAllSet.pec");
 };
@@ -20,6 +24,10 @@ exports.testContainsAllTuple = function(test) {
 
 exports.testContainsAnyList = function(test) {
 	compareResourceESE(test, "contains/containsAnyList.pec");
+};
+
+exports.testContainsAnyRange = function(test) {
+	compareResourceESE(test, "contains/containsAnyRange.pec");
 };
 
 exports.testContainsAnySet = function(test) {

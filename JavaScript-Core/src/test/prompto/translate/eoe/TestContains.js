@@ -6,6 +6,10 @@ exports.testContainsAllList = function(test) {
 	compareResourceEOE(test, "contains/containsAllList.pec");
 };
 
+exports.testContainsAllRange = function(test) {
+	compareResourceEOE(test, "contains/containsAllRange.pec");
+};
+
 exports.testContainsAllSet = function(test) {
 	compareResourceEOE(test, "contains/containsAllSet.pec");
 };
@@ -20,6 +24,10 @@ exports.testContainsAllTuple = function(test) {
 
 exports.testContainsAnyList = function(test) {
 	compareResourceEOE(test, "contains/containsAnyList.pec");
+};
+
+exports.testContainsAnyRange = function(test) {
+	compareResourceEOE(test, "contains/containsAnyRange.pec");
 };
 
 exports.testContainsAnySet = function(test) {

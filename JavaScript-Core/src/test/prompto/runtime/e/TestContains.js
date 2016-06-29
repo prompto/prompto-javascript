@@ -17,6 +17,10 @@ exports.testContainsAllList = function(test) {
 	checkOutput(test, "contains/containsAllList.pec");
 };
 
+exports.testContainsAllRange = function(test) {
+	checkOutput(test, "contains/containsAllRange.pec");
+};
+
 exports.testContainsAllSet = function(test) {
 	checkOutput(test, "contains/containsAllSet.pec");
 };
@@ -31,6 +35,10 @@ exports.testContainsAllTuple = function(test) {
 
 exports.testContainsAnyList = function(test) {
 	checkOutput(test, "contains/containsAnyList.pec");
+};
+
+exports.testContainsAnyRange = function(test) {
+	checkOutput(test, "contains/containsAnyRange.pec");
 };
 
 exports.testContainsAnySet = function(test) {
