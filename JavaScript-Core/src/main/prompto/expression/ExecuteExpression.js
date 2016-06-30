@@ -1,5 +1,5 @@
 var Section = require("../parser/Section").Section;
-var CodeExpression = require("../expression/CodeExpression").CodeExpression;
+var CodeValue = require("../value/CodeValue").CodeValue;
 var PromptoError = require("../error/PromptoError").PromptoError;
 
 function ExecuteExpression(id) {
@@ -44,7 +44,7 @@ ExecuteExpression.prototype.toSDialect = function(writer) {
 ExecuteExpression.prototype.check = function(context) {
 	try {
 		var value = context.getValue(this.id);
-		if(value instanceof CodeExpression) {
+		if(value instanceof CodeValue) {
 			return value.checkCode(context);
 		} else {
 			throw new SyntaxError("Expected code, got:" + value.toString());
@@ -58,8 +58,8 @@ ExecuteExpression.prototype.check = function(context) {
 
 ExecuteExpression.prototype.interpret = function(context) {
 	var value = context.getValue(this.id);
-	if(value instanceof CodeExpression) {
-		return value.interpretCode(context);
+	if(value instanceof CodeValue) {
+		return value.interpret(context);
 	} else {
 		throw new SyntaxError("Expected code, got:" + value.toString());
 	}

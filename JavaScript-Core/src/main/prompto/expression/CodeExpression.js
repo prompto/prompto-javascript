@@ -1,3 +1,4 @@
+var CodeValue = require("../value/CodeValue").CodeValue;
 var CodeType = require("../type/CodeType").CodeType;
 
 function CodeExpression(expression) {
@@ -33,7 +34,7 @@ CodeExpression.prototype.check = function(context) {
 };
 
 CodeExpression.prototype.interpret = function(context) {
-	return this;
+	return new CodeValue(this);
 };
 
 // expression can only be checked and evaluated in the context of an execute:
