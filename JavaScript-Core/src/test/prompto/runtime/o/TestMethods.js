@@ -33,6 +33,10 @@ exports.testExpressionWith = function(test) {
 	checkOutput(test, "methods/expressionWith.poc");
 };
 
+exports.testExtended = function(test) {
+	checkOutput(test, "methods/extended.poc");
+};
+
 exports.testImplicit = function(test) {
 	checkOutput(test, "methods/implicit.poc");
 };

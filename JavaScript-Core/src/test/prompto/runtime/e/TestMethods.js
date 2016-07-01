@@ -37,6 +37,10 @@ exports.testExpressionWith = function(test) {
 	checkOutput(test, "methods/expressionWith.pec");
 };
 
+exports.testExtended = function(test) {
+	checkOutput(test, "methods/extended.pec");
+};
+
 exports.testImplicit = function(test) {
 	checkOutput(test, "methods/implicit.pec");
 };

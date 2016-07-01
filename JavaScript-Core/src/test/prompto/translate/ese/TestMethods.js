@@ -26,6 +26,10 @@ exports.testExpressionWith = function(test) {
 	compareResourceESE(test, "methods/expressionWith.pec");
 };
 
+exports.testExtended = function(test) {
+	compareResourceESE(test, "methods/extended.pec");
+};
+
 exports.testImplicit = function(test) {
 	compareResourceESE(test, "methods/implicit.pec");
 };

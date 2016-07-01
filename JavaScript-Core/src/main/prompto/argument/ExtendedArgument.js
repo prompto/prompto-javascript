@@ -69,12 +69,9 @@ ExtendedArgument.prototype.getType = function(context) {
 };
 
 ExtendedArgument.prototype.toEDialect = function(writer) {
-    var anonymous = "any"==this.type.name;
     this.type.toDialect(writer);
-    if(anonymous) {
-        writer.append(' ');
-        writer.append(this.name);
-    }
+    writer.append(' ');
+    writer.append(this.name);
     switch(this.attributes.length) {
         case 0:
             break;
@@ -86,10 +83,6 @@ ExtendedArgument.prototype.toEDialect = function(writer) {
             writer.append(" with attributes ");
             this.attributes.toDialect(writer, true);
             break;
-    }
-    if(!anonymous) {
-        writer.append(' ');
-        writer.append(this.name);
     }
 };
 

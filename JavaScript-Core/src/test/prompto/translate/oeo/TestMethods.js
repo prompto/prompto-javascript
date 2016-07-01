@@ -22,6 +22,10 @@ exports.testExpressionWith = function(test) {
 	compareResourceOEO(test, "methods/expressionWith.poc");
 };
 
+exports.testExtended = function(test) {
+	compareResourceOEO(test, "methods/extended.poc");
+};
+
 exports.testImplicit = function(test) {
 	compareResourceOEO(test, "methods/implicit.poc");
 };
