@@ -15,24 +15,51 @@ JavaScriptModule.prototype.toString = function() {
 }
 
 JavaScriptModule.prototype.resolve = function() {
-    var o = this.resolve_module();
+    var o = this.resolve_webpack();
     if(o!=null) {
         return o;
     }
-    var o = this.resolve_runtime();
+    o = this.resolve_module();
     if(o!=null) {
         return o;
     }
-    var o = this.resolve_path("prompto");
+    o = this.resolve_runtime();
     if(o!=null) {
         return o;
     }
-    var o = this.resolve_path("main");
+    o = this.resolve_path("prompto");
+    if(o!=null) {
+        return o;
+    }
+    o = this.resolve_path("main");
     if(o!=null) {
         return o;
     }
     return null;
 };
+
+
+JavaScriptModule.prototype.resolve_webpack = function() {
+    try {
+        // get a copy of the path identifiers
+        var ids = [].concat(this.ids);
+        // drop the 'js' extension
+        if(ids[ids.length-1]=="js")
+            ids.pop();
+        // last id is the function, forget it
+        ids.pop();
+        // eval root module
+        var m = eval(ids.shift());
+        // drill down
+        ids.map(function(id) {
+            m = m[id];
+        })
+        return m || null;
+    } catch (e) {
+        return null;
+    }
+};
+
 
 JavaScriptModule.prototype.resolve_module = function() {
     try {

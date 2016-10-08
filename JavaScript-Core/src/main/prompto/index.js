@@ -16,3 +16,7 @@ exports.runtime = require('./runtime/index');
 exports.error = require("./error/index");
 exports.value = require("./value/index");
 exports.store = require("./store/index");
+
+exports.internet = require("./internet/index");
+exports.io = require("./io/index");
+exports.reader = require("./reader/index");
