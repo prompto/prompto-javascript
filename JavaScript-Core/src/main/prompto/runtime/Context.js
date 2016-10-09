@@ -190,8 +190,6 @@ Context.prototype.getRegistered = function(name) {
 		return actual;
 	} else if(this.parent!==null) {
 		return this.parent.getRegistered(name);
-    } else if(this.calling!==null) {
-        return this.calling.getRegistered(name);
 	} else if(this.globals!==this) {
 		return this.globals.getRegistered(name);
 	} else {
@@ -206,8 +204,6 @@ Context.prototype.getRegisteredDeclaration = function(name) {
 		return actual;
 	} else if(this.parent!==null) {
 		return this.parent.getRegisteredDeclaration(name);
-    } else if(this.calling!==null) {
-        return this.calling.getRegisteredDeclaration(name);
 	} else if(this.globals!==this) {
 		return this.globals.getRegisteredDeclaration(name);
 	} else {
