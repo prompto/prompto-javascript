@@ -116,6 +116,22 @@ Context.prototype.newChildContext = function() {
 	return context;
 };
 
+
+Context.prototype.clone = function() {
+    var context = new Context();
+    context.globals = context;
+    context.calling = null;
+    context.parent = null;
+    context.debugger = null;
+    // copy from
+    context.declarations = Object.create(this.declarations);
+    context.tests = Object.create(this.tests);
+    context.instances = Object.create(this.instances);
+    context.values = Object.create(this.values);
+    context.nativeBindings = Object.create(this.nativeBindings);
+    return context;
+};
+
 Context.prototype.getCatalog = function() {
     if (this != this.globals)
         return this.globals.getCatalog();
