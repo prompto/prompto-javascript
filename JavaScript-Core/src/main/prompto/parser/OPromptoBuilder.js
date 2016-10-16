@@ -126,6 +126,12 @@ OPromptoBuilder.prototype.exitBooleanLiteral = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitBreakStatement = function(ctx) {
+    this.setNodeValue(ctx, new statement.BreakStatement());
+};
+
+
+
 OPromptoBuilder.prototype.exitMinIntegerLiteral = function(ctx) {
     this.setNodeValue(ctx, new literal.MinIntegerLiteral());
 };

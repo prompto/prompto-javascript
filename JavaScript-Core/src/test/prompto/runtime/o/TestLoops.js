@@ -17,8 +17,16 @@ exports.testDoWhile = function(test) {
 	checkOutput(test, "loops/doWhile.poc");
 };
 
+exports.testDoWhileBreak = function(test) {
+	checkOutput(test, "loops/doWhileBreak.poc");
+};
+
 exports.testEmbeddedForEach = function(test) {
 	checkOutput(test, "loops/embeddedForEach.poc");
+};
+
+exports.testForEachBreak = function(test) {
+	checkOutput(test, "loops/forEachBreak.poc");
 };
 
 exports.testForEachCharacterRange = function(test) {
@@ -127,5 +135,9 @@ exports.testForEachTupleSetWithIndex = function(test) {
 
 exports.testWhile = function(test) {
 	checkOutput(test, "loops/while.poc");
+};
+
+exports.testWhileBreak = function(test) {
+	checkOutput(test, "loops/whileBreak.poc");
 };
 

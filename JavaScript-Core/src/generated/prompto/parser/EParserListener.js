@@ -308,6 +308,15 @@ EParserListener.prototype.exitFlushStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#BreakStatement.
+EParserListener.prototype.enterBreakStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#BreakStatement.
+EParserListener.prototype.exitBreakStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#ReturnStatement.
 EParserListener.prototype.enterReturnStatement = function(ctx) {
 };
@@ -593,6 +602,15 @@ EParserListener.prototype.enterCatchCollectionStatement = function(ctx) {
 
 // Exit a parse tree produced by EParser#CatchCollectionStatement.
 EParserListener.prototype.exitCatchCollectionStatement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#break_statement.
+EParserListener.prototype.enterBreak_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#break_statement.
+EParserListener.prototype.exitBreak_statement = function(ctx) {
 };
 
 

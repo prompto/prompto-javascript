@@ -132,6 +132,11 @@ EPromptoBuilder.prototype.exitBooleanLiteral = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitBreakStatement = function(ctx) {
+    this.setNodeValue(ctx, new statement.BreakStatement());
+};
+
+
 EPromptoBuilder.prototype.exitMinIntegerLiteral = function(ctx) {
 	this.setNodeValue(ctx, new literal.MinIntegerLiteral());
 };

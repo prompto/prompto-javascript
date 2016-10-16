@@ -4,6 +4,7 @@ exports.CommentStatement = require("./CommentStatement").CommentStatement;
 exports.StatementList = require("./StatementList").StatementList;
 exports.MethodCall = require("./MethodCall").MethodCall;
 exports.NativeCall = require("./NativeCall").NativeCall;
+exports.BreakStatement = require("./BreakStatement").BreakStatement;
 exports.ReturnStatement = require("./ReturnStatement").ReturnStatement;
 exports.IfStatement = require("./IfStatement").IfStatement;
 exports.IfElement = require("./IfStatement").IfElement;

@@ -6,8 +6,16 @@ exports.testDoWhile = function(test) {
 	compareResourceESE(test, "loops/doWhile.pec");
 };
 
+exports.testDoWhileBreak = function(test) {
+	compareResourceESE(test, "loops/doWhileBreak.pec");
+};
+
 exports.testEmbeddedForEach = function(test) {
 	compareResourceESE(test, "loops/embeddedForEach.pec");
+};
+
+exports.testForEachBreak = function(test) {
+	compareResourceESE(test, "loops/forEachBreak.pec");
 };
 
 exports.testForEachCharacterRange = function(test) {
@@ -116,5 +124,9 @@ exports.testForEachTupleSetWithIndex = function(test) {
 
 exports.testWhile = function(test) {
 	compareResourceESE(test, "loops/while.pec");
+};
+
+exports.testWhileBreak = function(test) {
+	compareResourceESE(test, "loops/whileBreak.pec");
 };
 

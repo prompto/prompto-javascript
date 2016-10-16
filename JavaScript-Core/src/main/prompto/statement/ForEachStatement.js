@@ -4,6 +4,7 @@ var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var Integer = require("../value/Integer").Integer;
 var InternalError = require("../error/InternalError").InternalError;
+var BreakResult = require("../runtime/BreakResult").BreakResult;
 
 function ForEachStatement(v1, v2, source, statements) {
 	BaseStatement.call(this);
@@ -56,6 +57,8 @@ ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, cont
         var value = iterator.next();
 		child.setValue(this.v1, value);
 		value = this.statements.interpret(child);
+        if(value==BreakResult.instance)
+            break;
 		if (value != null) {
 			return value;
 		}

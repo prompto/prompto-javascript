@@ -2,6 +2,7 @@ var BaseStatement = require("./BaseStatement").BaseStatement;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Bool = require("../value/Bool").Bool;
+var BreakResult = require("../runtime/BreakResult").BreakResult;
 
 function WhileStatement(condition, statements) {
 	BaseStatement.call(this);
@@ -27,6 +28,8 @@ WhileStatement.prototype.interpret = function(context) {
 	while(this.interpretCondition(context)) {
 		var child = context.newChildContext();
 		var value = this.statements.interpret(child);
+        if(value==BreakResult.instance)
+            break;
 		if(value!=null)
 			return value;
 	}
