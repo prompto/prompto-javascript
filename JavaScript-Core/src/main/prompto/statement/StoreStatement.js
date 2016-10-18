@@ -1,9 +1,10 @@
+var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var VoidType = require("../type/VoidType").VoidType;
 var MemStore = require("../store/MemStore").MemStore;
 var Store = require("../store/Store").Store;
+var NullValue = require("../value/NullValue").NullValue;
 var Dialect = require("../parser/Dialect").Dialect;
-var NotStorableError = require("../error/NotStorableError").NotStorableError;
 
 function StoreStatement(del, add) {
     SimpleStatement.call(this);
@@ -71,9 +72,11 @@ StoreStatement.prototype.interpret = function( context) {
         todel = [];
         this.del.forEach(function (exp) {
             var value = exp.interpret(context);
-            if (!value.storable)
-                throw new NotStorableError();
-            todel.push(value.dbId);
+            if(value!=NullValue.instance) {
+                if (!value.storable)
+                    throw new NotStorableError();
+                todel.push(value.dbId);
+            }
         });
     }
     var toadd = null;
