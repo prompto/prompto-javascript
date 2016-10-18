@@ -22,6 +22,7 @@ CategoryDeclaration.prototype.newInstanceFromDocument = function(context, docume
     var instance = this.newInstance();
     instance.mutable = true;
     try {
+        instance.dbId = document.dbId;
         this.attributes.forEach(function(attr) {
             var name = attr.name;
             var decl = context.getRegisteredDeclaration(name);

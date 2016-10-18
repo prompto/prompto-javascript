@@ -1,4 +1,5 @@
 var Document = require("../value/Document").Document;
+var Store = require("./Store").Store;
 
 function StorableDocument() {
     this.document = null;
@@ -11,8 +12,11 @@ Object.defineProperty(StorableDocument.prototype, "dirty", {
     },
     set : function(value) {
         if (value) {
-            if(!this.document)
+            if(!this.document) {
                 this.document = new Document();
+                this.document.dbId = Store.instance.nextDbId++; // only MemStore supported for now
+
+            }
         } else
             this.document = null;
     }
@@ -24,8 +28,7 @@ StorableDocument.prototype.asDocument = function () {
 };
 
 StorableDocument.prototype.SetMember = function(context, name, value) {
-    if (this.document == null)
-        this.document = new Document();
+    this.dirty = true;
     this.document.setMember(context, name, value);
 };
 

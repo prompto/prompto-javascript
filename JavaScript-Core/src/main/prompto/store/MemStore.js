@@ -16,11 +16,18 @@ MemStore.prototype.flush = function() {
 };
 
 
-MemStore.prototype.store = function(document) {
-    if(document.dbId)
-        return;
-    document.dbId = this.nextDbId++;
-    this.documents[document.dbId] = document;
+MemStore.prototype.store = function(todel, toadd) {
+    if(todel) {
+        todel.forEach(function(dbId) {
+            delete this.documents[dbId];
+        }, this);
+    }
+    if(toadd) {
+        toadd.forEach(function(doc) {
+            if(doc.dbId)
+                this.documents[doc.dbId] = doc;
+        }, this);
+    }
 };
 
 

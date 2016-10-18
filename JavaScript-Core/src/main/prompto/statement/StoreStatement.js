@@ -3,6 +3,7 @@ var VoidType = require("../type/VoidType").VoidType;
 var MemStore = require("../store/MemStore").MemStore;
 var Store = require("../store/Store").Store;
 var Dialect = require("../parser/Dialect").Dialect;
+var NotStorableError = require("../error/NotStorableError").NotStorableError;
 
 function StoreStatement(del, add) {
     SimpleStatement.call(this);
@@ -65,16 +66,32 @@ StoreStatement.prototype.interpret = function( context) {
     var store = Store.instance;
     if (store == null)
         store = MemStore.instance;
-    this.add.forEach(function (exp) {
-        var value = exp.interpret(context);
-        var storable = value.storable;
-        if (!storable)
-            throw new NotStorableError();
-        if (storable.dirty) {
-            var document = storable.asDocument();
-            store.store(document);
-        }
-    });
+    var todel = null;
+    if(this.del) {
+        todel = [];
+        this.del.forEach(function (exp) {
+            var value = exp.interpret(context);
+            if (!value.storable)
+                throw new NotStorableError();
+            todel.push(value.dbId);
+        });
+    }
+    var toadd = null;
+    if(this.add) {
+        toadd = [];
+        this.add.forEach(function (exp) {
+            var value = exp.interpret(context);
+            var storable = value.storable;
+            if (!storable)
+                throw new NotStorableError();
+            if (storable.dirty) {
+                var doc = storable.asDocument();
+                toadd.push(doc);
+                value.dbId = doc.dbId;
+            }
+        });
+    }
+    store.store(todel, toadd);
     return null;
 };
 
