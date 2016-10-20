@@ -36,7 +36,22 @@ Url.prototype.readFully = function() {
     }
 };
 
+Url.prototype.readLine = function() {
+    if(!this.lines) {
+        var full = this.readFully() || "";
+        this.lines = full.split("\n");
+    }
+    if(this.lines.length>0)
+        return this.lines.pop(0);
+    else
+        return null;
+}
+
 Url.prototype.writeFully = function(data) {
+
+};
+
+Url.prototype.writeLine = function(data) {
 
 };
 

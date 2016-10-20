@@ -24,6 +24,14 @@ NativeResource.prototype.writeFully = function(data) {
 	this.instance.writeFully(data);
 };
 
+NativeResource.prototype.readLine = function() {
+    return this.instance.readLine();
+};
+
+NativeResource.prototype.writeLine = function(data) {
+    this.instance.writeLine(data);
+};
+
 NativeResource.prototype.close = function() {
 	this.instance.close();
 };

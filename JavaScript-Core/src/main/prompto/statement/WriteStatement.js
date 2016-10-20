@@ -42,7 +42,11 @@ WriteStatement.prototype.interpret = function(context) {
 	}
 	var str = this.content.interpret(resContext).toString();
 	try {
-        res.writeFully(str);
+        if(context==resContext) {
+            res.writeLine(str);
+        } else {
+            res.writeFully(str);
+        }
         return null;
     } finally {
         if(resContext!=context)

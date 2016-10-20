@@ -41,7 +41,12 @@ ReadExpression.prototype.interpret = function(context) {
 		throw new InvalidResourceError("Not readable");
 	}
     try {
-        var s = res.readFully();
+        var s;
+        if(context==resContext) {
+            s = res.readLine();
+        } else {
+            s = res.readFully();
+        }
         return new Text(s);
     } finally {
         if(resContext!=context)

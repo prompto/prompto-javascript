@@ -18,6 +18,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testBuffer = function(test) {
+	runTests(test, "console/buffer.pec");
+};
+
 exports.testPrint = function(test) {
 	runTests(test, "console/print.pec");
 };
