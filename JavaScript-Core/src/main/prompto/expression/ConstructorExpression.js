@@ -65,13 +65,13 @@ ConstructorExpression.prototype.check = function(context) {
 	// need to update type, since it was arbitrarily set to CategoryType
 	var cd = context.getRegisteredDeclaration(this.type.name);
 	if(cd==null)
-        context.problemenListener.reportUnknownCategory(this.type.id);
+        context.problemListener.reportUnknownCategory(this.type.id);
 	var type = cd.getType();
 	cd.checkConstructorContext(context);
 	if(this.copyFrom!=null) {
 		var cft = this.copyFrom.check(context);
 		if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
-            context.problemenListener.reportInvalidCopySource();
+            context.problemListener.reportInvalidCopySource();
             // throw new SyntaxError("Cannot copy from " + cft.getName());
 	}
 	if(this.assignments!=null) {
