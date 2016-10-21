@@ -27,10 +27,13 @@ Buffer.prototype.readFully = function() {
 Buffer.prototype.readLine = function() {
     if(!this.lines) {
         var full = this.readFully() || "";
-        this.lines = full.split("\n");
+        // remove trailing LF
+        if(full.endsWith("\n"))
+            full = full.substring(0,full.length-1);
+        this.lines = full.split(/\n/);
     }
     if(this.lines.length>0)
-        return this.lines.pop(0);
+        return this.lines.shift();
     else
         return null;
 }
