@@ -14,7 +14,7 @@ NativeInstance.prototype.constructor = NativeInstance;
 
 NativeInstance.prototype.makeInstance = function() {
 	var bound = this.declaration.getBoundFunction(true);
-	return bound.prototype.constructor();
+	return new bound();
 };
 
 NativeInstance.prototype.getType = function() {
