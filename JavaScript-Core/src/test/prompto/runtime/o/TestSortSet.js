@@ -29,6 +29,50 @@ exports.testSortDecimals = function(test) {
 	checkOutput(test, "sortSet/sortDecimals.poc");
 };
 
+exports.testSortDescBooleans = function(test) {
+	checkOutput(test, "sortSet/sortDescBooleans.poc");
+};
+
+exports.testSortDescDates = function(test) {
+	checkOutput(test, "sortSet/sortDescDates.poc");
+};
+
+exports.testSortDescDateTimes = function(test) {
+	checkOutput(test, "sortSet/sortDescDateTimes.poc");
+};
+
+exports.testSortDescDecimals = function(test) {
+	checkOutput(test, "sortSet/sortDescDecimals.poc");
+};
+
+exports.testSortDescExpressions = function(test) {
+	checkOutput(test, "sortSet/sortDescExpressions.poc");
+};
+
+exports.testSortDescIntegers = function(test) {
+	checkOutput(test, "sortSet/sortDescIntegers.poc");
+};
+
+exports.testSortDescKeys = function(test) {
+	checkOutput(test, "sortSet/sortDescKeys.poc");
+};
+
+exports.testSortDescMethods = function(test) {
+	checkOutput(test, "sortSet/sortDescMethods.poc");
+};
+
+exports.testSortDescNames = function(test) {
+	checkOutput(test, "sortSet/sortDescNames.poc");
+};
+
+exports.testSortDescTexts = function(test) {
+	checkOutput(test, "sortSet/sortDescTexts.poc");
+};
+
+exports.testSortDescTimes = function(test) {
+	checkOutput(test, "sortSet/sortDescTimes.poc");
+};
+
 exports.testSortExpressions = function(test) {
 	checkOutput(test, "sortSet/sortExpressions.poc");
 };

@@ -18,6 +18,50 @@ exports.testSortDecimals = function(test) {
 	compareResourceESE(test, "sortSet/sortDecimals.pec");
 };
 
+exports.testSortDescBooleans = function(test) {
+	compareResourceESE(test, "sortSet/sortDescBooleans.pec");
+};
+
+exports.testSortDescDates = function(test) {
+	compareResourceESE(test, "sortSet/sortDescDates.pec");
+};
+
+exports.testSortDescDateTimes = function(test) {
+	compareResourceESE(test, "sortSet/sortDescDateTimes.pec");
+};
+
+exports.testSortDescDecimals = function(test) {
+	compareResourceESE(test, "sortSet/sortDescDecimals.pec");
+};
+
+exports.testSortDescExpressions = function(test) {
+	compareResourceESE(test, "sortSet/sortDescExpressions.pec");
+};
+
+exports.testSortDescIntegers = function(test) {
+	compareResourceESE(test, "sortSet/sortDescIntegers.pec");
+};
+
+exports.testSortDescKeys = function(test) {
+	compareResourceESE(test, "sortSet/sortDescKeys.pec");
+};
+
+exports.testSortDescMethods = function(test) {
+	compareResourceESE(test, "sortSet/sortDescMethods.pec");
+};
+
+exports.testSortDescNames = function(test) {
+	compareResourceESE(test, "sortSet/sortDescNames.pec");
+};
+
+exports.testSortDescTexts = function(test) {
+	compareResourceESE(test, "sortSet/sortDescTexts.pec");
+};
+
+exports.testSortDescTimes = function(test) {
+	compareResourceESE(test, "sortSet/sortDescTimes.pec");
+};
+
 exports.testSortExpressions = function(test) {
 	compareResourceESE(test, "sortSet/sortExpressions.pec");
 };

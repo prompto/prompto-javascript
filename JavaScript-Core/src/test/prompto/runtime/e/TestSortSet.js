@@ -29,6 +29,50 @@ exports.testSortDecimals = function(test) {
 	checkOutput(test, "sortSet/sortDecimals.pec");
 };
 
+exports.testSortDescBooleans = function(test) {
+	checkOutput(test, "sortSet/sortDescBooleans.pec");
+};
+
+exports.testSortDescDates = function(test) {
+	checkOutput(test, "sortSet/sortDescDates.pec");
+};
+
+exports.testSortDescDateTimes = function(test) {
+	checkOutput(test, "sortSet/sortDescDateTimes.pec");
+};
+
+exports.testSortDescDecimals = function(test) {
+	checkOutput(test, "sortSet/sortDescDecimals.pec");
+};
+
+exports.testSortDescExpressions = function(test) {
+	checkOutput(test, "sortSet/sortDescExpressions.pec");
+};
+
+exports.testSortDescIntegers = function(test) {
+	checkOutput(test, "sortSet/sortDescIntegers.pec");
+};
+
+exports.testSortDescKeys = function(test) {
+	checkOutput(test, "sortSet/sortDescKeys.pec");
+};
+
+exports.testSortDescMethods = function(test) {
+	checkOutput(test, "sortSet/sortDescMethods.pec");
+};
+
+exports.testSortDescNames = function(test) {
+	checkOutput(test, "sortSet/sortDescNames.pec");
+};
+
+exports.testSortDescTexts = function(test) {
+	checkOutput(test, "sortSet/sortDescTexts.pec");
+};
+
+exports.testSortDescTimes = function(test) {
+	checkOutput(test, "sortSet/sortDescTimes.pec");
+};
+
 exports.testSortExpressions = function(test) {
 	checkOutput(test, "sortSet/sortExpressions.pec");
 };
