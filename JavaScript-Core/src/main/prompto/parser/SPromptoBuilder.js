@@ -1815,8 +1815,9 @@ SPromptoBuilder.prototype.exitSliceLastOnly = function(ctx) {
 
 SPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
 	var source = this.getNodeValue(ctx.source);
-	var key = this.getNodeValue(ctx.key);
-	this.setNodeValue(ctx, new expression.SortedExpression(source, key));
+    var desc = ctx.DESC()!=null;
+    var key = this.getNodeValue(ctx.key);
+	this.setNodeValue(ctx, new expression.SortedExpression(source, desc, key));
 };
 
 

@@ -76,16 +76,6 @@ TextType.prototype.checkSlice = function(context) {
 	return this;
 };
 
-TextType.prototype.sort = function(context, list) {
-
-	function cmp(o1, o2) {
-		o1 = o1.toString();
-		o2 = o2.toString();
-		return o1 > o2 ? 1 : o1 == o2 ? 0 : -1;
-	}
-	return NativeType.prototype.sort(context,list, cmp);
-};
-
 TextType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if (typeof(value) == 'string') {
 		return new Text(value);

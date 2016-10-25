@@ -24,30 +24,15 @@ NativeType.prototype.equals = function(obj) {
 	return obj===this;
 };
 
-/*
-private static NativeType[] all = null;
+NativeType.prototype.sort = function(context, list, desc) {
 
-public static NativeType[] getAll() {
-	if(all==null) {
-		all = new NativeType[] {
-				AnyType.instance(),
-				BooleanType.instance(),
-				IntegerType.instance(),
-				DecimalType.instance(),
-				CharacterType.instance(),
-				TextType.instance(),
-				CodeType.instance(),
-				DateType.instance(),
-				TimeType.instance(),
-				DateTimeType.instance(),
-				PeriodType.instance(),
-				DocumentType.instance(),
-				TupleType.instance()
-			};
-	}
-	return all;
-}
-*/
+    function cmp(o1, o2) {
+        o1 = o1.value;
+        o2 = o2.value;
+        return o1 > o2 ? 1 : o1 == o2 ? 0 : -1;
+    }
+    return this.doSort(context, list, cmp, desc);
+};
 
 exports.NativeType = NativeType;
 

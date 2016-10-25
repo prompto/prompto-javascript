@@ -81,17 +81,5 @@ DateType.prototype.newRange = function(left, right) {
 	}
 };
 
-/*
-@Override
-public ListValue sort(Context context, ListValue list) throws PromptoError {
-	return this.<Date> doSort(context, list);
-}
-
-@Override
-public String toString(Object value) {
-	return "'" + value.toString() + "'";
-}
-
-*/
 
 exports.DateType = DateType;

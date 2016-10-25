@@ -145,7 +145,12 @@ BaseType.prototype.readJSONValue = function(context, node, parts) {
 };
 
 
-BaseType.prototype.sort = function(context, list, cmp) {
+BaseType.prototype.sort = function(context, list, desc) {
+    throw new Error("Unsupported!")
+};
+
+
+BaseType.prototype.doSort = function(context, list, cmp, desc) {
 	// only sort if required
 	if(list.size()<=1) {
 		return list;
@@ -158,7 +163,9 @@ BaseType.prototype.sort = function(context, list, cmp) {
         for(var name in list.items)
             items.push(list.items[name]);
     }
-	items.sort(cmp);
+    items.sort(cmp);
+    if(desc)
+        items.reverse(); // TODO optimize
 	return new ListValue(list.type.itemType, items);
 };
 

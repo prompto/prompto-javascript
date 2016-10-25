@@ -80,18 +80,15 @@ DateTimeType.prototype.checkMember = function(context, name) {
 	}
 };
 
-/*
 
-@Override
-public ListValue sort(Context context, ListValue list) throws PromptoError {
-	return this.<DateTime> doSort(context, list);
-}
 
-@Override
-public String toString(Object value) {
-	return "'" + value.toString() + "'";
-}
+DateTimeType.prototype.sort = function(context, list, desc) {
 
-*/
+    function cmp(o1, o2) {
+        return o1.CompareTo(context, o2);
+    }
+
+    return this.doSort(context, list, cmp, desc);
+};
 
 exports.DateTimeType = DateTimeType;

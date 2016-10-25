@@ -10,14 +10,15 @@ var ListType = require("../type/ListType").ListType;
 var TupleType = require("../type/TupleType").TupleType;
 var SetType = require("../type/SetType").SetType;
 
-function SortedExpression(source, key) {
+function SortedExpression(source, desc, key) {
 	this.source = source;
+    this.desc = desc;
 	this.key = key || null;
 	return this;
 }
 
 SortedExpression.prototype.toString = function() {
-	return "sorted " + this.source.toString() +
+	return "sorted " + (this.desc ? "descending " : "") + this.source.toString() +
 		(this.key==null ? "" : " with " + this.key.toString() + " as key");
 };
 
@@ -27,6 +28,8 @@ SortedExpression.prototype.toDialect = function(writer) {
 
 SortedExpression.prototype.toEDialect = function(writer) {
     writer.append("sorted ");
+    if(this.desc)
+        writer.append("descending ");
     this.source.toDialect(writer);
     if(this.key!=null) {
         writer.append(" with ");
@@ -45,7 +48,10 @@ SortedExpression.prototype.toEDialect = function(writer) {
 }
 
 SortedExpression.prototype.toODialect = function(writer) {
-    writer.append("sorted (");
+    writer.append("sorted ");
+    if(this.desc)
+        writer.append("desc ");
+    writer.append("(");
     this.source.toDialect(writer);
     if(this.key!=null) {
         writer.append(", key = ");
@@ -71,18 +77,18 @@ SortedExpression.prototype.interpret = function(context) {
 	if(!(type instanceof ListType || type instanceof TupleType || type instanceof SetType)) {
 		throw new SyntaxError("Unsupported type: " + type);
 	}
-	var o = this.source.interpret(context);
-	if(o==null) {
+	var coll = this.source.interpret(context);
+	if(coll==null) {
 		throw new NullReferenceError();
 	}
-	if(!(o instanceof ListValue || o instanceof TupleValue || o instanceof SetValue)) {
-		throw new InternalError("Unexpected type:" + typeof(o));
+	if(!(coll instanceof ListValue || coll instanceof TupleValue || coll instanceof SetValue)) {
+		throw new InternalError("Unexpected type:" + typeof(coll));
 	}
 	var itemType = type.itemType;
 	if(itemType instanceof CategoryType) {
-		return itemType.sort(context, o, this.key);
+		return itemType.sort(context, coll, this.desc, this.key);
 	} else {
-		return itemType.sort(context, o);
+		return itemType.sort(context, coll, this.desc);
 	}
 };
 

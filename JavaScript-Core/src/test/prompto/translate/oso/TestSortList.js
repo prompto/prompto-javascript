@@ -18,6 +18,50 @@ exports.testSortDecimals = function(test) {
 	compareResourceOSO(test, "sortList/sortDecimals.poc");
 };
 
+exports.testSortDescBooleans = function(test) {
+	compareResourceOSO(test, "sortList/sortDescBooleans.poc");
+};
+
+exports.testSortDescDates = function(test) {
+	compareResourceOSO(test, "sortList/sortDescDates.poc");
+};
+
+exports.testSortDescDateTimes = function(test) {
+	compareResourceOSO(test, "sortList/sortDescDateTimes.poc");
+};
+
+exports.testSortDescDecimals = function(test) {
+	compareResourceOSO(test, "sortList/sortDescDecimals.poc");
+};
+
+exports.testSortDescExpressions = function(test) {
+	compareResourceOSO(test, "sortList/sortDescExpressions.poc");
+};
+
+exports.testSortDescIntegers = function(test) {
+	compareResourceOSO(test, "sortList/sortDescIntegers.poc");
+};
+
+exports.testSortDescKeys = function(test) {
+	compareResourceOSO(test, "sortList/sortDescKeys.poc");
+};
+
+exports.testSortDescMethods = function(test) {
+	compareResourceOSO(test, "sortList/sortDescMethods.poc");
+};
+
+exports.testSortDescNames = function(test) {
+	compareResourceOSO(test, "sortList/sortDescNames.poc");
+};
+
+exports.testSortDescTexts = function(test) {
+	compareResourceOSO(test, "sortList/sortDescTexts.poc");
+};
+
+exports.testSortDescTimes = function(test) {
+	compareResourceOSO(test, "sortList/sortDescTimes.poc");
+};
+
 exports.testSortExpressions = function(test) {
 	compareResourceOSO(test, "sortList/sortExpressions.poc");
 };

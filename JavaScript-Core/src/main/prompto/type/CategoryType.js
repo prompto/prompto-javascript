@@ -286,7 +286,7 @@ CategoryType.prototype.newInstance = function(context) {
 };
 
 
-CategoryType.prototype.sort = function(context, list, key) {
+CategoryType.prototype.sort = function(context, list, desc, key) {
 	if (list.size() <= 1) {
 		return list;
 	}
@@ -297,20 +297,20 @@ CategoryType.prototype.sort = function(context, list, key) {
 	var keyname = key.toString();
 	var decl = this.getDeclaration(context);
 	if (decl.hasAttribute(context, keyname)) {
-		return this.sortByAttribute(context, list, keyname);
+		return this.sortByAttribute(context, list, desc, keyname);
 	} else if (decl.hasMethod(context, keyname, null)) {
-		return this.sortByClassMethod(context, list, keyname);
+		return this.sortByClassMethod(context, list, desc, keyname);
 	} else {
 		var method = this.findGlobalMethod(context, list, keyname);
 		if(method!=null) {
-			return this.sortByGlobalMethod(context, list, method);
+			return this.sortByGlobalMethod(context, list, desc, method);
 		} else {
-			return this.sortByExpression(context, list, key);
+			return this.sortByExpression(context, list, desc, key);
 		}
 	}
 };
 
-CategoryType.prototype.sortByExpression = function(context, list, key) {
+CategoryType.prototype.sortByExpression = function(context, list, desc, key) {
 
 	function cmp(o1, o2) {
 		var co = context.newInstanceContext(o1, null);
@@ -319,10 +319,10 @@ CategoryType.prototype.sortByExpression = function(context, list, key) {
 		var key2 = key.interpret(co);
 		return compareKeys(key1, key2);
 	}
-	return BaseType.prototype.sort(context, list, cmp);
+	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
 
-CategoryType.prototype.sortByAttribute = function(context, list, name) {
+CategoryType.prototype.sortByAttribute = function(context, list, desc, name) {
 
 	function cmp(o1, o2) {
 		var key1 = o1.getMember(context, name);
@@ -330,15 +330,9 @@ CategoryType.prototype.sortByAttribute = function(context, list, name) {
 		return compareKeys(key1,key2);
 	}
 
-	return BaseType.prototype.sort(context, list, cmp);
+	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
 
-/*
-private ListValue sortByClassMethod = function(context, ListValue list, final String name) {
-	return null;
-}
-
-*/
 
 /* look for a method which takes this category as sole parameter */
 CategoryType.prototype.findGlobalMethod = function(context, list, name) {
@@ -359,7 +353,7 @@ CategoryType.prototype.findGlobalMethod = function(context, list, name) {
 	}
 };
 
-CategoryType.prototype.sortByGlobalMethod = function(context, list, method) {
+CategoryType.prototype.sortByGlobalMethod = function(context, list, desc, method) {
 	var type = this;
 	function cmp(o1, o2) {
 		var assignment = method.assignments[0];
@@ -370,7 +364,7 @@ CategoryType.prototype.sortByGlobalMethod = function(context, list, method) {
 		return compareKeys(key1, key2);
 	}
 
-	return BaseType.prototype.sort(context, list, cmp);
+	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
 
 
