@@ -32,7 +32,7 @@ Cursor.prototype.hasNext = function() {
 
 Cursor.prototype.next = function() {
     var doc = this.documents.next();
-    return this.type.itemType.newInstanceFromDocument(this.context, doc);
+    return this.type.itemType.newInstanceFromStored(this.context, doc);
 };
 
 Cursor.prototype.getMember = function(context, name) {

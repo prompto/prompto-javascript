@@ -1,4 +1,5 @@
 var Variable = require("../runtime/Variable").Variable;
+var NullValue = require("../value/NullValue").NullValue;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
 function VariableInstance(id) {
@@ -62,7 +63,8 @@ VariableInstance.prototype.checkAssignItem = function(context, itemType, valueTy
 VariableInstance.prototype.assign = function(context, expression) {
 	var value = expression.interpret(context);
 	if(context.getRegisteredValue(this.name)==null) {
-		context.registerValue(new Variable(this.id, value.type));
+        var type = value!=NullValue.instance ? value.type : expression.check(context);
+		context.registerValue(new Variable(this.id, type));
 	}
 	context.setValue(this.id, value);
 };

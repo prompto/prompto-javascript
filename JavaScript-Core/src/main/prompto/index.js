@@ -15,6 +15,7 @@ exports.csharp = require('./csharp/index');
 exports.runtime = require('./runtime/index');
 exports.error = require("./error/index");
 exports.value = require("./value/index");
+exports.memstore = require("./memstore/index");
 exports.store = require("./store/index");
 
 exports.internet = require("./internet/index");

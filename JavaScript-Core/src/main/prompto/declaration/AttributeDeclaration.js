@@ -1,5 +1,7 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var InternalError = require("../error/InternalError").InternalError;
+var ContainerType = require("../type/ContainerType").ContainerType;
+var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 var Value = require("../value/Value").Value;
 
 function AttributeDeclaration(id, type, constraint, indexTypes) {
@@ -106,6 +108,11 @@ AttributeDeclaration.prototype.checkValue = function(context, expression) {
 	}
 	this.constraint.checkValue(context, value);
 	return value;
+};
+AttributeDeclaration.prototype.getAttributeInfo = function() {
+    var collection = this.type instanceof ContainerType;
+    var family = collection ? this.type.itemType.family : this.type.family;
+    return new AttributeInfo(this.name, family, collection, this.indexTypes);
 };
 
 exports.AttributeDeclaration = AttributeDeclaration;

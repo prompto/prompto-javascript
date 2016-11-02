@@ -34,3 +34,7 @@ exports.testSubRecord = function(test) {
 	compareResourceEOE(test, "store/subRecord.pec");
 };
 
+exports.testUntypedRecord = function(test) {
+	compareResourceEOE(test, "store/untypedRecord.pec");
+};
+

@@ -1,4 +1,5 @@
-function EqOp() {
+function EqOp(name) {
+    this.name = name
     return this;
 }
 
@@ -10,43 +11,51 @@ EqOp.prototype.toString = function(dialect) {
     if(dialect)
         return dialect.toString(this);
     else
-        return Object.prototype.toString.call(this);
+        return this.name;
 };
 
-EqOp.IS = new EqOp();
+EqOp.IS = new EqOp("IS");
 EqOp.IS.toDialect = function(writer) {
     writer.append('is');
 };
-EqOp.IS.toString = function(dialect) {
+EqOp.IS.toEString = function(dialect) {
     return 'is';
 };
+EqOp.IS.toOString = EqOp.IS.toEString;
+EqOp.IS.toSString = EqOp.IS.toEString;
 
-EqOp.IS_NOT = new EqOp();
+EqOp.IS_NOT = new EqOp("IS_NOT");
 EqOp.IS_NOT.toDialect = function(writer) {
     writer.append('is not');
 };
-EqOp.IS_NOT.toString = function(dialect) {
+EqOp.IS_NOT.toEString = function(dialect) {
     return 'is not';
 };
+EqOp.IS_NOT.toOString = EqOp.IS_NOT.toEString;
+EqOp.IS_NOT.toSString = EqOp.IS_NOT.toEString;
 
 
-EqOp.IS_A = new EqOp();
+EqOp.IS_A = new EqOp("IS_A");
 EqOp.IS_A.toDialect = function(writer) {
     writer.append('is a');
 };
-EqOp.IS_A.toString = function(dialect) {
+EqOp.IS_A.toEString = function(dialect) {
     return 'is a';
 };
+EqOp.IS_A.toOString = EqOp.IS_A.toEString;
+EqOp.IS_A.toSString = EqOp.IS_A.toEString;
 
-EqOp.IS_NOT_A = new EqOp();
+EqOp.IS_NOT_A = new EqOp("IS_NOT_A");
 EqOp.IS_NOT_A.toDialect = function(writer) {
     writer.append('is not a');
 };
-EqOp.IS_NOT_A.toString = function(dialect) {
+EqOp.IS_NOT_A.toEString = function(dialect) {
     return 'is not a';
 };
+EqOp.IS_NOT_A.toOString = EqOp.IS_NOT_A.toEString;
+EqOp.IS_NOT_A.toSString = EqOp.IS_NOT_A.toEString;
 
-EqOp.EQUALS = new EqOp();
+EqOp.EQUALS = new EqOp("EQUALS");
 EqOp.EQUALS.toEDialect = function(writer) {
     writer.append('=');
 };
@@ -66,7 +75,7 @@ EqOp.EQUALS.toSString = function() {
     return '==';
 };
 
-EqOp.NOT_EQUALS = new EqOp();
+EqOp.NOT_EQUALS = new EqOp("NOT_EQUALS");
 EqOp.NOT_EQUALS.toEDialect = function(writer) {
     writer.append('<>');
 };
@@ -86,7 +95,7 @@ EqOp.NOT_EQUALS.toSString = function() {
     return '!=';
 };
 
-EqOp.ROUGHLY = new EqOp();
+EqOp.ROUGHLY = new EqOp("ROUGHLY");
 EqOp.ROUGHLY.toEDialect = function(writer) {
     writer.append('~');
 };

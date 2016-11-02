@@ -1,4 +1,5 @@
 var Value = require("./Value").Value;
+var Container = require("./Value").Container;
 var Integer = require("./Integer").Integer;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var InternalError = require("../error/InternalError").InternalError;
@@ -6,7 +7,7 @@ var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRa
 
 /* an abstract list of values, common to ListValue and TupleValue */
 function BaseValueList(type, items, item, mutable) {
-	Value.call(this, type);
+    Container.call(this, type);
 	this.items = items || [];
     item = item || null;
     if(item!==null) {
@@ -16,7 +17,7 @@ function BaseValueList(type, items, item, mutable) {
     return this;
 }
 
-BaseValueList.prototype = Object.create(Value.prototype);
+BaseValueList.prototype = Object.create(Container.prototype);
 BaseValueList.prototype.constructor = BaseValueList;
 
 BaseValueList.prototype.toString = function() {
@@ -157,7 +158,7 @@ BaseValueList.prototype.getMember = function(context, name) {
 	if ("count"==name) {
 		return new Integer(this.items.length);
 	} else {
-		return Value.prototype.getMember.apply(this, context, name);
+		return Container.prototype.getMember.apply(this, context, name);
 	}
 };
 

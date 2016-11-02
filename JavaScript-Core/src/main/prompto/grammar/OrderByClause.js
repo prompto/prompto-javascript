@@ -20,4 +20,10 @@ OrderByClause.prototype.toDialect = function(writer) {
         writer.append(" descending");
 };
 
+OrderByClause.prototype.interpretQuery = function(context, query) {
+    var name = this.names[0];
+    var info = context.findAttribute(name).getAttributeInfo();
+    query.addOrderByClause(info, this.descending);
+};
+
 exports.OrderByClause = OrderByClause;

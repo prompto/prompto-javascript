@@ -14,6 +14,9 @@ function Text(value) {
 Text.prototype = Object.create(Value.prototype);
 Text.prototype.constructor = Text;
 
+Text.prototype.getStorableData = function() {
+    return this.value;
+};
 
 Text.prototype.getValue = function() {
 	return this.value;

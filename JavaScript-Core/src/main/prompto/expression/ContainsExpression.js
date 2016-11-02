@@ -1,6 +1,14 @@
+var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+var MemberSelector = require("../expression/MemberSelector").MemberSelector;
+var CharacterType = require("../type/CharacterType").CharacterType;
+var ContainerType = require("../type/ContainerType").ContainerType;
+var TextType = require("../type/TextType").TextType;
 var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
+var MatchOp = require("../store/MatchOp").MatchOp;
 var ContOp = require("../grammar/ContOp").ContOp;
+var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
 
@@ -137,5 +145,66 @@ ContainsExpression.prototype.interpretAssert = function(context, test) {
     test.printFailure(context, expected, actual);
     return false;
 };
+
+ContainsExpression.prototype.interpretQuery = function(context, query) {
+    var value = null;
+    var name = this.readFieldName(this.left);
+    var reverse = name == null;
+    if ( name != null )
+        value = this.right.interpret(context);
+    else {
+        name = this.readFieldName(this.right);
+        if (name != null)
+            value = this.left.interpret(context);
+        else
+            throw new SyntaxError("Unable to interpret predicate");
+    }
+    var matchOp = this.getMatchOp(context, this.getAttributeType(context, name), value.type, this.operator, reverse);
+    if (value instanceof Instance)
+        value = value.getMember(context, "dbId", false);
+    var info = context.findAttribute(name).getAttributeInfo();
+    var data = value == null ? null : value.getStorableData();
+    query.verify(info, matchOp, data);
+    if (this.operator.name.indexOf("NOT_")==0)
+        query.not();
+};
+
+ContainsExpression.prototype.getAttributeType = function(context, name) {
+    return context.getRegisteredDeclaration(name).getType();
+};
+
+ContainsExpression.prototype.getMatchOp = function(context, fieldType, valueType, operator, reverse) {
+    if (reverse) {
+        var reversed = operator.reverse();
+        if (reversed == null)
+            throw new SyntaxError("Cannot reverse " + this.operator.toString());
+        else
+            return this.getMatchOp(context, valueType, fieldType, reversed, false);
+    }
+    if ((fieldType == TextType.instance || valueType == CharacterType.instance) &&
+        (valueType == TextType.instance || valueType == CharacterType.instance)) {
+        if (operator == ContOp.CONTAINS || operator == ContOp.NOT_CONTAINS)
+            return MatchOp.CONTAINS;
+    }
+    if (valueType instanceof ContainerType) {
+        if (operator == ContOp.IN || operator == ContOp.NOT_IN)
+            return MatchOp.CONTAINED;
+    }
+    if (fieldType instanceof ContainerType) {
+        if (operator == ContOp.CONTAINS || operator == ContOp.NOT_CONTAINS)
+            return MatchOp.CONTAINS;
+    }
+    throw new SyntaxError("Unsupported operator: " + operator.toString());
+};
+
+
+
+ContainsExpression.prototype.readFieldName = function(exp) {
+    if (exp instanceof UnresolvedIdentifier || exp instanceof InstanceExpression || exp instanceof MemberSelector)
+        return exp.toString();
+    else
+        return null;
+};
+
 
 exports.ContainsExpression = ContainsExpression;

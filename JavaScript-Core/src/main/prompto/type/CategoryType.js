@@ -13,6 +13,7 @@ var PromptoError = require("../error/PromptoError").PromptoError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
+var DataStore = require("../store/DataStore").DataStore;
 var Score = require("../runtime/Score").Score;
 
 exports.resolve = function() {
@@ -43,9 +44,9 @@ CategoryType.prototype.toDialect = function(writer) {
     writer.append(this.name);
 };
 
-CategoryType.prototype.newInstanceFromDocument = function(context, document) {
+CategoryType.prototype.newInstanceFromStored = function(context, stored) {
     var decl = this.getDeclaration(context);
-    var inst = decl.newInstanceFromDocument(context, document);
+    var inst = decl.newInstanceFromStored(context, stored);
     inst.mutable = this.mutable;
     return inst;
 };
@@ -384,6 +385,15 @@ function compareKeys(key1, key2) {
 		var s2 = key2.toString();
 		return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
 	}
+};
+
+CategoryType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    var decl = this.getDeclaration(context)
+    if (decl == null)
+        return BaseType.prototype.convertPythonValueToPromptoValue(context, value, returnType);
+    if (DataStore.instance.isDbIdType(typeof(value)))
+        value = DataStore.instance.fetchUnique(value);
+    return decl.newInstanceFromStored(context, value);
 };
 
 

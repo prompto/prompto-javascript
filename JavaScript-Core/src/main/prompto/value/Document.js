@@ -19,6 +19,10 @@ Document.prototype.getMemberNames = function() {
 };
 
 
+Document.prototype.getStorableData = function() {
+    return this.values;
+};
+
 Document.prototype.hasMember = function(name) {
     return this.values.hasOwnProperty(name);
 }

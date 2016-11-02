@@ -13,6 +13,10 @@ NullValue.prototype.toString = function() {
     return "null";
 };
 
+NullValue.prototype.getStorableData = function() {
+    return null; // <- YES!
+};
+
 NullValue.prototype.convertToJavaScript = function() {
     return null; // <- YES!
 };

@@ -12,7 +12,7 @@ exports.tearDown = function(done) {
 	Out.restore();
 	done();
 };
-
+/*
 exports.testContainsItem = function(test) {
 	checkOutput(test, "predicate/containsItem.pec");
 };
@@ -40,8 +40,7 @@ exports.testNotEquals = function(test) {
 exports.testPartial = function(test) {
 	checkOutput(test, "predicate/partial.pec");
 };
-
+*/
 exports.testRoughly = function(test) {
 	checkOutput(test, "predicate/roughly.pec");
 };
-

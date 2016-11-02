@@ -1,15 +1,16 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
 var Value = require("./Value").Value;
+var Instance = require("./Value").Instance;
 
 function NativeInstance(declaration, instance) {
-	Value.call(this,new CategoryType(declaration.id));
+    Instance.call(this,new CategoryType(declaration.id));
 	this.declaration = declaration;
     this.storable = declaration.storable ? new StorableDocument() : null;
 	this.instance = instance || this.makeInstance();
 	return this;
 }
 
-NativeInstance.prototype = Object.create(Value.prototype);
+NativeInstance.prototype = Object.create(Instance.prototype);
 NativeInstance.prototype.constructor = NativeInstance;
 
 NativeInstance.prototype.makeInstance = function() {

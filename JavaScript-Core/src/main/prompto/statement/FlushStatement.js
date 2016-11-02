@@ -1,5 +1,5 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var Store = require("../store/Store").Store;
+var DataStore = require("../store/DataStore").DataStore;
 var VoidType = require("../type/VoidType").VoidType;
 
 
@@ -18,7 +18,7 @@ FlushStatement.prototype.check = function(context) {
 
 
 FlushStatement.prototype.interpret = function(context) {
-    Store.instance.flush();
+    DataStore.instance.flush();
 };
 
 

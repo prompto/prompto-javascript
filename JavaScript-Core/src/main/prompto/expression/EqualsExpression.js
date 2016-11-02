@@ -6,7 +6,9 @@ var BooleanType = require("../type/BooleanType").BooleanType;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
+var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
+var MatchOp = require("../store/MatchOp").MatchOp;
 var Bool = require("../value/Bool").Bool;
 var EqOp = require("../grammar/EqOp").EqOp;
 
@@ -143,6 +145,51 @@ EqualsExpression.prototype.interpretAssert = function(context, test) {
     var actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
     test.printFailure(context, expected, actual);
     return false;
+};
+
+EqualsExpression.prototype.interpretQuery = function(context, query) {
+    var value = null;
+    var name = this.readFieldName(this.left);
+    if (name != null)
+        value = this.right.interpret(context);
+    else {
+        name = this.readFieldName(this.right);
+        if (name != null)
+            value = this.left.interpret(context);
+        else
+            throw new SyntaxError("Unable to interpret predicate");
+    }
+    if (value instanceof Instance)
+        value = value.getMember(context, "dbId", false);
+    var decl = context.findAttribute(name);
+    var info = decl == null ? null : decl.getAttributeInfo();
+    var data = value == null ? null : value.getStorableData();
+    var match = this.getMatchOp();
+    query.verify(info, match, data);
+    if (this.operator == EqOp.NOT_EQUALS)
+        query.not();
+};
+
+
+EqualsExpression.prototype.getMatchOp = function() {
+    switch (this.operator) {
+        case EqOp.EQUALS:
+            return MatchOp.EQUALS;
+        case EqOp.ROUGHLY:
+            return MatchOp.ROUGHLY;
+        case EqOp.NOT_EQUALS:
+            return MatchOp.EQUALS
+        default:
+            throw new Exception("Not supported:" + this.operator.toString());
+    }
+};
+
+
+EqualsExpression.prototype.readFieldName = function(exp) {
+    if (exp instanceof UnresolvedIdentifier || exp instanceof InstanceExpression || exp instanceof MemberSelector)
+        return exp.toString();
+    else
+        return null;
 };
 
 exports.EqualsExpression = EqualsExpression;

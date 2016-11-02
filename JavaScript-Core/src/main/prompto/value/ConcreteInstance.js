@@ -1,7 +1,7 @@
 var CategoryType = null;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var StorableDocument = require("../store/StorableDocument").StorableDocument;
+var StorableDocument = require("../memstore/StorableDocument").StorableDocument;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Variable = require("../runtime/Variable").Variable;
@@ -9,22 +9,28 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var Operator = require("../grammar/Operator").Operator;
 var Decimal = require("./Decimal").Decimal;
 var Integer = require("./Integer").Integer;
-var Value = require("./Value").Value;
+var Instance = require("./Value").Instance;
+var DataStore = require("../store/DataStore").DataStore;
+
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
 };
 
 function ConcreteInstance(declaration) {
-	Value.call(this, new CategoryType(declaration.id));
+    Instance.call(this, new CategoryType(declaration.id));
 	this.declaration = declaration;
-    this.storable = declaration.storable ? new StorableDocument() : null;
+    this.storable = false;
+    if(declaration.storable) {
+        var categories = declaration.collectCategories();
+        this.storable = DataStore.instance.newStorableDocument(categories);
+    }
     this.mutable = false;
 	this.values = {};
 	return this;
 }
 
-ConcreteInstance.prototype = Object.create(Value.prototype);
+ConcreteInstance.prototype = Object.create(Instance.prototype);
 ConcreteInstance.prototype.constructor = ConcreteInstance;
 
 ConcreteInstance.prototype.getType = function() {
@@ -35,8 +41,39 @@ ConcreteInstance.prototype.convertToJavaScript = function() {
     return this; // TODO, until we have a translator
 };
 
+ConcreteInstance.prototype.getDbId = function() {
+    var dbId = this.values["dbId"] || null;
+    return dbId == null ? null : dbId.getStorableData();
+};
+
+
+ConcreteInstance.prototype.getOrCreateDbId = function() {
+    var dbId = this.getDbId();
+    return dbId != null ? dbId : this.storable.getOrCreateDbId();
+};
+
+
+ConcreteInstance.prototype.getStorableData = function() {
+    // this is called when storing the instance as a field value, so we just return the dbId
+    // the instance data itself will be collected as part of collectStorables
+    if (this.storable == null)
+        throw new NotStorableError();
+    else
+        return this.getOrCreateDbId();
+};
+
 ConcreteInstance.prototype.getMemberNames = function() {
 	return Object.getOwnPropertyNames(this.values);
+};
+
+ConcreteInstance.prototype.collectStorables = function(list) {
+    if (this.storable==null)
+        throw new NotStorableError();
+    if (this.storable.dirty)
+        list.push(this.storable);
+    for(var field in this.values) {
+        this.values[field].collectStorables(list);
+    }
 };
 
 // don't call getters from getters, so register them
@@ -111,8 +148,10 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 	}
     value = this.autocast(decl, value);
 	this.values[attrName] = value;
+    if (this.storable && decl.storable && !value.getStorableData)
+        value.getStorableData = null;
     if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-        this.storable.SetMember(context, attrName, value);
+        this.storable.setData(attrName, value.getStorableData());
 };
 
 ConcreteInstance.prototype.autocast = function(decl, value) {

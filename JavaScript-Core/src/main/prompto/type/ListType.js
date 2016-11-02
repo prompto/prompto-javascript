@@ -3,6 +3,7 @@ var SetType = null;
 var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var ListValue = require("../value/ListValue").ListValue;
 
 exports.resolve = function() {
     IntegerType = require("./IntegerType").IntegerType;
@@ -17,12 +18,12 @@ function ListType(itemType) {
 ListType.prototype = Object.create(ContainerType.prototype);
 ListType.prototype.constructor = ListType;
 
-/*
-	@Override
-	public Class<?> toJavaClass() {
-		return List.class;
-	}
-*/
+ListType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    var values = value.map(function(item) {
+        return this.itemType.convertJavaScriptValueToPromptoValue(context, item, null);
+    }, this);
+    return new ListValue(this.itemType, values);
+};
 
 ListType.prototype.isAssignableFrom = function(context, other) {
     return ContainerType.prototype.isAssignableFrom.call(this, context, other)

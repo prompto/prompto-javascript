@@ -341,4 +341,25 @@ ConcreteCategoryDeclaration.prototype.findOperator = function(context, operator,
     return candidate;
 };
 
+ConcreteCategoryDeclaration.prototype.collectCategories = function(context) {
+    var cat_set = {};
+    var cat_list = [];
+    this.doCollectCategories(context, cat_set, cat_list);
+    return cat_list;
+};
+
+ConcreteCategoryDeclaration.prototype.doCollectCategories = function(context, cat_set, cat_list) {
+    if (this.derivedFrom != null) {
+        derivedFrom.forEach(function (cat) {
+            var decl = context.getRegisteredDeclaration(cat);
+            decl.doCollectCategories(context, cat_set, cat_list);
+        });
+    }
+    if(!(this.name in cat_set)) {
+        cat_set[this.name] = this.name;
+        cat_list.push(this.name);
+    }
+};
+
+
 exports.ConcreteCategoryDeclaration = ConcreteCategoryDeclaration;

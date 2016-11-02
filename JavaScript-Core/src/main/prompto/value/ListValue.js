@@ -11,6 +11,7 @@ exports.resolve = function() {
 
 function ListValue(itemType, items, item, mutable) {
 	BaseValueList.call(this, new ListType(itemType), items, item, mutable);
+    this.storables = null;
 	return this;
 }
 
@@ -20,6 +21,21 @@ ListValue.prototype.constructor = ListValue;
 ListValue.prototype.newInstance = function(items) {
 	return new ListValue(this.type.itemType, items);
 };
+
+ListValue.prototype.getStorableData = function() {
+    if(this.storables == null)
+        this.storables = this.items.map(function(item) {
+            return item.getStorableData();
+        });
+    return this.storables;
+};
+
+ListValue.prototype.collectStorables = function(list) {
+    this.items.map(function(item) {
+        item.collectStorables(list);
+    });
+};
+
 
 ListValue.prototype.Add = function(context, value) {
 	if (value instanceof ListValue) {

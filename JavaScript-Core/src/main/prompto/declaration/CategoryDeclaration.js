@@ -18,22 +18,17 @@ CategoryDeclaration.prototype.getDeclarationType = function() {
     return "Category";
 };
 
-CategoryDeclaration.prototype.newInstanceFromDocument = function(context, document) {
+CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) {
     var instance = this.newInstance();
     instance.mutable = true;
     try {
-        instance.dbId = document.dbId;
+        instance.dbId = stored.dbId;
         this.attributes.forEach(function(attr) {
             var name = attr.name;
             var decl = context.getRegisteredDeclaration(name);
             if (decl.storable) {
-                var value = document.getMember(context, name);
-                if (value instanceof Document) {
-                    var typ = decl.GetType(context);
-                    if (!(typ instanceof CategoryType))
-                        throw new InternalError("How did we get there?");
-                    value = typ.newInstanceFromDocument(context, document);
-                }
+                var data = stored.getData(name);
+                var value = data==null ? NullValue.instance : decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null)
                 instance.setMember(context, name, value);
             }
         });

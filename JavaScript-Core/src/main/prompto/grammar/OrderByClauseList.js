@@ -24,4 +24,11 @@ OrderByClauseList.prototype.toDialect = function(writer) {
         writer.append(" )");
 }
 
+OrderByClauseList.prototype.interpretQuery = function(context, query) {
+    this.map(function (clause) {
+        clause.interpretQuery(context, query);
+    });
+};
+
+
 exports.OrderByClauseList = OrderByClauseList;

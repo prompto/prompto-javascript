@@ -25,6 +25,9 @@ Integer.prototype.toString = function() {
 	return this.value.toString();
 };
 
+Integer.prototype.getStorableData = function() {
+    return this.value;
+};
 
 Integer.prototype.IntegerValue = function() {
 	return this.value;

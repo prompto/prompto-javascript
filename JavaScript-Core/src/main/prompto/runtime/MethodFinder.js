@@ -26,7 +26,7 @@ MethodFinder.prototype.findMethod = function(checkInstance) {
 	default:
 		return this.findMostSpecific(compatibles, checkInstance);
 	}
-}
+};
 
 MethodFinder.prototype.findMostSpecific = function(candidates, checkInstance) {
 	var candidate = null;
@@ -125,7 +125,7 @@ MethodFinder.prototype.filterCompatible = function(candidates, checkInstance) {
 		}
 	}, this);
 	return compatibles;
-}
+};
 
 
 exports.MethodFinder = MethodFinder;

@@ -73,5 +73,16 @@ OrExpression.prototype.interpretAssert = function(context, test) {
     return false;
 };
 
+OrExpression.prototype.interpretQuery = function(context, query) {
+    if (!this.left["interpretQuery"])
+        throw new SyntaxError("Not a predicate: " + this.left.toString());
+    this.left.interpretQuery(context, query);
+    if (!this.right["interpretQuery"])
+        throw new SyntaxError("Not a predicate: " + this.right.toString());
+    this.right.interpretQuery(context, query);
+    query.or();
+};
+
+
 exports.OrExpression = OrExpression;
 

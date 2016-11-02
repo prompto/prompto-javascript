@@ -1,9 +1,9 @@
 var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var VoidType = require("../type/VoidType").VoidType;
-var MemStore = require("../store/MemStore").MemStore;
-var Store = require("../store/Store").Store;
+var DataStore = require("../store/DataStore").DataStore;
 var NullValue = require("../value/NullValue").NullValue;
+var Container = require("../value/Value").Container;
 var Dialect = require("../parser/Dialect").Dialect;
 
 function StoreStatement(del, add) {
@@ -64,38 +64,55 @@ StoreStatement.prototype.check = function(context) {
 };
 
 StoreStatement.prototype.interpret = function( context) {
-    var store = Store.instance;
-    if (store == null)
-        store = MemStore.instance;
-    var todel = null;
-    if(this.del) {
-        todel = [];
-        this.del.forEach(function (exp) {
-            var value = exp.interpret(context);
-            if(value!=NullValue.instance) {
-                if (!value.storable)
-                    throw new NotStorableError();
-                todel.push(value.dbId);
-            }
-        });
-    }
-    var toadd = null;
-    if(this.add) {
-        toadd = [];
-        this.add.forEach(function (exp) {
-            var value = exp.interpret(context);
-            var storable = value.storable;
-            if (!storable)
-                throw new NotStorableError();
-            if (storable.dirty) {
-                var doc = storable.asDocument();
-                toadd.push(doc);
-                value.dbId = doc.dbId;
-            }
-        });
-    }
-    store.store(todel, toadd);
-    return null;
+    var idsToDelete = this.getIdsToDelete(context);
+    var storablesToAdd = this.getStorablesToAdd(context);
+    if (idsToDelete || storablesToAdd)
+        DataStore.instance.store(idsToDelete, storablesToAdd);
 };
+
+StoreStatement.prototype.getIdsToDelete = function( context) {
+    if(!this.del)
+        return null;
+    var idsToDel = [];
+    this.del.forEach(function (exp) {
+        var value = exp.interpret(context);
+        if (value == NullValue.instance)
+            return;
+        else if(value instanceof Instance) {
+            var dbId = value.getMember("dbId");
+            if (dbId !=null && dbId!=NullValue.instance)
+                idsToDel.push(dbId.getStorableData());
+        } else if(value instanceof Container) {
+            value.items.map(function (item) {
+                if (value == NullValue.instance)
+                    return;
+                else if (value instanceof Instance) {
+                    var dbId = value.getMember("dbId");
+                    if (dbId != null && dbId != NullValue.instance)
+                        idsToDel.push(dbId.getStorableData());
+                }
+            });
+        }
+    });
+    if(idsToDel.length==0)
+        return null;
+    else
+        return idsToDel;
+};
+
+StoreStatement.prototype.getStorablesToAdd = function(context) {
+    if (!this.add)
+        return null;
+    var storablesToAdd = []
+    this.add.forEach(function (exp) {
+        var value = exp.interpret(context);
+        value.collectStorables(storablesToAdd)
+    });
+    if (storablesToAdd.length == 0)
+        return null;
+    else
+        return storablesToAdd;
+};
+
 
 exports.StoreStatement = StoreStatement;

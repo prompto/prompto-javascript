@@ -1,5 +1,10 @@
+var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+var InstanceExpression = require("./InstanceExpression").InstanceExpression;
+var MemberSelector = require("./MemberSelector").MemberSelector;
+var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
+var MatchOp = require("../store/MatchOp").MatchOp;
 var CmpOp = require("../grammar/CmpOp").CmpOp;
 
 function CompareExpression(left, operator, right) {
@@ -64,5 +69,39 @@ CompareExpression.prototype.interpretAssert = function(context, test) {
     test.printFailure(context, expected, actual);
     return false;
 };
+
+CompareExpression.prototype.interpretQuery = function(context, query) {
+    var name = null;
+    var value = null;
+    if (this.left instanceof UnresolvedIdentifier || this.left instanceof InstanceExpression || this.left instanceof MemberSelector) {
+        name = this.left.name;
+        value = this.right.interpret(context);
+    } else if (this.right instanceof UnresolvedIdentifier || this.right instanceof InstanceExpression || this.right instanceof MemberSelector) {
+        name = this.right.name;
+        value = this.left.interpret(context);
+    }
+    if (name == null)
+        throw new SyntaxError("Unable to interpret predicate");
+    else {
+        var decl = context.findAttribute(name);
+        var info = decl == null ? null : decl.getAttributeInfo();
+        if (value instanceof Instance)
+            value = value.getMember(context, "dbId", False)
+        var matchOp = this.getMatchOp();
+        query.verify(info, matchOp, value == null ? null : value.getStorableData());
+        if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
+            query.not();
+    }
+};
+
+CompareExpression.prototype.getMatchOp = function() {
+    if (this.operator == CmpOp.GT || this.operator == CmpOp.LTE)
+        return MatchOp.GREATER;
+    else if (this.operator == CmpOp.GTE || this.operator == CmpOp.LT)
+        return MatchOp.LESSER;
+    else
+        throw new InvalidValueError(this.operator.toString());
+};
+
 
 exports.CompareExpression = CompareExpression;

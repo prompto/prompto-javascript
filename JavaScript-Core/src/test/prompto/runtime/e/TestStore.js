@@ -41,3 +41,7 @@ exports.testSubRecord = function(test) {
 	checkOutput(test, "store/subRecord.pec");
 };
 
+exports.testUntypedRecord = function(test) {
+	checkOutput(test, "store/untypedRecord.pec");
+};
+

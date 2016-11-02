@@ -19,6 +19,10 @@ function Value (type) {
 	return this;
 }
 
+Value.prototype.collectStorables = function(list) {
+    // do nothing
+};
+
 Value.prototype.And = function(context, value) {
 	throw new SyntaxError("Logical and not supported by " + this.constructor.name);
 };
@@ -86,8 +90,28 @@ Value.convertFromJavaScript = function(value) {
         else
             return new Decimal(value);
     } else {
-		throw "Not implemented yet convertFromJavaScript:" + typeof(value);
+		throw "Not implemented yet in convertFromJavaScript:" + typeof(value);
 	}
 };
 
+function Instance(type) {
+    Value.call(this, type);
+    return this;
+}
+
+Instance.prototype = Object.create(Value.prototype);
+Instance.prototype.constructor = Instance;
+
+
+function Container(type) {
+    Value.call(this, type);
+    return this;
+}
+
+Container.prototype = Object.create(Value.prototype);
+Container.prototype.constructor = Container;
+
+
 exports.Value = Value;
+exports.Instance = Instance;
+exports.Container = Container;
