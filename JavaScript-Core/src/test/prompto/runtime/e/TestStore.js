@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testDeleteRecords = function(test) {
+	checkOutput(test, "store/deleteRecords.pec");
+};
+
 exports.testFlush = function(test) {
 	checkOutput(test, "store/flush.pec");
 };

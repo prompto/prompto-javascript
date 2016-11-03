@@ -1,8 +1,10 @@
 var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
+var Identifier = require("../grammar/Identifier").Identifier;
 var VoidType = require("../type/VoidType").VoidType;
 var DataStore = require("../store/DataStore").DataStore;
 var NullValue = require("../value/NullValue").NullValue;
+var Instance = require("../value/Value").Instance;
 var Container = require("../value/Value").Container;
 var Dialect = require("../parser/Dialect").Dialect;
 
@@ -70,7 +72,7 @@ StoreStatement.prototype.interpret = function( context) {
         DataStore.instance.store(idsToDelete, storablesToAdd);
 };
 
-StoreStatement.prototype.getIdsToDelete = function( context) {
+StoreStatement.prototype.getIdsToDelete = function(context) {
     if(!this.del)
         return null;
     var idsToDel = [];
@@ -79,7 +81,7 @@ StoreStatement.prototype.getIdsToDelete = function( context) {
         if (value == NullValue.instance)
             return;
         else if(value instanceof Instance) {
-            var dbId = value.getMember("dbId");
+            var dbId = value.getMember(context, "dbId");
             if (dbId !=null && dbId!=NullValue.instance)
                 idsToDel.push(dbId.getStorableData());
         } else if(value instanceof Container) {
@@ -87,7 +89,7 @@ StoreStatement.prototype.getIdsToDelete = function( context) {
                 if (value == NullValue.instance)
                     return;
                 else if (value instanceof Instance) {
-                    var dbId = value.getMember("dbId");
+                    var dbId = value.getMember(context, "dbId");
                     if (dbId != null && dbId != NullValue.instance)
                         idsToDel.push(dbId.getStorableData());
                 }

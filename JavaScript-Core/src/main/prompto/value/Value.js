@@ -79,21 +79,6 @@ Value.prototype.Roughly = function(context, value) {
     return this.equals(value);
 };
 
-Value.convertFromJavaScript = function(value) {
-	if(value==null) {
-		return NullValue.instance;
-	} else if(typeof(value)=='string') {
-		return new Text(value);
-	} else if(typeof(value)=='number') {
-        if(value == Math.floor(value))
-            return new Integer(value);
-        else
-            return new Decimal(value);
-    } else {
-		throw "Not implemented yet in convertFromJavaScript:" + typeof(value);
-	}
-};
-
 function Instance(type) {
     Value.call(this, type);
     return this;

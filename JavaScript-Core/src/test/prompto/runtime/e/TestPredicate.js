@@ -44,3 +44,4 @@ exports.testPartial = function(test) {
 exports.testRoughly = function(test) {
 	checkOutput(test, "predicate/roughly.pec");
 };
+

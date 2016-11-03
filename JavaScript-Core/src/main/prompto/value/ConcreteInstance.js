@@ -11,6 +11,7 @@ var Decimal = require("./Decimal").Decimal;
 var Integer = require("./Integer").Integer;
 var Instance = require("./Value").Instance;
 var DataStore = require("../store/DataStore").DataStore;
+var TypeUtils = require("../utils/TypeUtils");
 
 
 exports.resolve = function() {
@@ -49,7 +50,12 @@ ConcreteInstance.prototype.getDbId = function() {
 
 ConcreteInstance.prototype.getOrCreateDbId = function() {
     var dbId = this.getDbId();
-    return dbId != null ? dbId : this.storable.getOrCreateDbId();
+    if(dbId==null) {
+        dbId = this.storable.getOrCreateDbId();
+        var value = TypeUtils.convertFromJavaScript(dbId);
+        this.values["dbId"] = value;
+    }
+    return dbId;
 };
 
 
@@ -69,8 +75,10 @@ ConcreteInstance.prototype.getMemberNames = function() {
 ConcreteInstance.prototype.collectStorables = function(list) {
     if (this.storable==null)
         throw new NotStorableError();
-    if (this.storable.dirty)
+    if (this.storable.dirty) {
+        this.getOrCreateDbId();
         list.push(this.storable);
+    }
     for(var field in this.values) {
         this.values[field].collectStorables(list);
     }
@@ -148,8 +156,6 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 	}
     value = this.autocast(decl, value);
 	this.values[attrName] = value;
-    if (this.storable && decl.storable && !value.getStorableData)
-        value.getStorableData = null;
     if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
         this.storable.setData(attrName, value.getStorableData());
 };
@@ -199,7 +205,8 @@ ConcreteInstance.prototype.equals = function(obj) {
 ConcreteInstance.prototype.toString = function() {
 	var props = [];
 	for(p in this.values) {
-		props.push(p + ":" + this.values[p].toString())
+        if("dbId"!=p)
+		    props.push(p + ":" + this.values[p].toString())
 	}
 	return "{" + props.join(", ") + "}";
 };

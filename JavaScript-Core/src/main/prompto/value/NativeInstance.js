@@ -1,5 +1,5 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
-var Value = require("./Value").Value;
+var TypeUtils = require("../utils/TypeUtils");
 var Instance = require("./Value").Instance;
 
 function NativeInstance(declaration, instance) {
@@ -52,7 +52,7 @@ NativeInstance.prototype.doGetMember = function(context, attrName, allowGetter) 
         return getter.interpret(context);
     } else {
         var value = this.instance[attrName];
-        return Value.convertFromJavaScript(value);
+        return TypeUtils.convertFromJavaScript(value);
     }
 };
 

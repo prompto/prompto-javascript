@@ -1,6 +1,8 @@
 var AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var TypeUtils = require("../utils/TypeUtils");
+var Identifier = require("../grammar/Identifier").Identifier;
 var Document = require("../value/Document").Document;
 
 function CategoryDeclaration(id, attributes) {
@@ -22,7 +24,9 @@ CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) 
     var instance = this.newInstance();
     instance.mutable = true;
     try {
-        instance.dbId = stored.dbId;
+        var dbId = stored.dbId;
+        var value = TypeUtils.convertFromJavaScript(dbId);
+        instance.setMember(context, "dbId", value);
         this.attributes.forEach(function(attr) {
             var name = attr.name;
             var decl = context.getRegisteredDeclaration(name);
