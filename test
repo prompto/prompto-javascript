@@ -1,6 +1,3 @@
-ln -sf JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
-ln -sf JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
-ln -sf JavaScript-Runtime/src/main/prompto/reader JavaScript-Core/src/main/prompto/reader
 export TESTS=Javascript-Core/src/test
 export OUTPUT=Javascript-Core/test-results
 export NODEUNIT="nodeunit --reporter junit --output"
@@ -18,3 +15,4 @@ $NODEUNIT $OUTPUT/value $TESTS/prompto/value/ || true
 export TESTS=Javascript-Runtime/src/test
 $NODEUNIT $OUTPUT/library-e $TESTS/library/e/ || true
 $NODEUNIT $OUTPUT/reader $TESTS/reader || true
+exit 1
