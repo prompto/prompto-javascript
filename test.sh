@@ -1,4 +1,9 @@
-cd Javascript-Core/src/test/prompto/runtime/context/
+cd Javascript-Core/
+cd src/
+cd test/
+cd prompto/
+cd runtime/
+cd context/
 nodeunit ./
 cd $TRAVIS_BUILD_DIR
 cd Javascript-Core/src/test/prompto/runtime/e/
