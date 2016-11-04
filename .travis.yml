@@ -12,6 +12,7 @@ before_install:
   - unzip prompto-libraries.zip -d prompto-libraries
 before_script:
   - ln -sf JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
+  - ls -all JavaScript-Core/src/main/prompto/internet
   - ln -sf JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
   - ln -sf JavaScript-Runtime/src/main/prompto/reader JavaScript-Core/src/main/prompto/reader
   - chmod 777 ./test.sh
