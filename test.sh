@@ -1,3 +1,10 @@
+ls -all Javascript-Core/
+ls -all Javascript-Core/src/
+ls -all Javascript-Core/src/test/
+ls -all Javascript-Core/src/test/prompto/
+ls -all Javascript-Core/src/test/prompto/runtime/
+ls -all Javascript-Core/src/test/prompto/runtime/context/
+
 cd Javascript-Core/src/test/prompto/runtime/context/
 nodeunit ./
 cd $TRAVIS_BUILD_DIR
