@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - "0.10"
 before_install:
-# - npm install antlr4
+  - npm install antlr4
   - npm install nodeunit
   - curl https://codeload.github.com/prompto/prompto-tests/zip/master > prompto-tests.zip
   - sudo apt-get install unzip
@@ -13,3 +13,7 @@ before_script:
   - ln -sf JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
   - ln -sf JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
   - ln -sf JavaScript-Runtime/src/main/prompto/reader JavaScript-Core/src/main/prompto/reader
+script:
+  - make test
+after_script:
+  - ls -all
