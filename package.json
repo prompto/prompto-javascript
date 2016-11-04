@@ -2,13 +2,16 @@
   "name": "prompto",
   "version": "1.0.0",
   "description": "prompto runtime for javascript",
-  "main": "index.js",
-  "dependencies": {},
+  "main": "./JavaScript-Core/src/main/index.js",
+  "dependencies": {
+    "antlr4" : "4.5.3"
+  },
   "devDependencies": {
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "test": "echo"
   },
   "author": "",
   "license": "ISC"
