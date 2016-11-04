@@ -7,9 +7,11 @@ before_install:
   - npm install nodeunit
   - sudo apt-get install unzip
   - curl https://codeload.github.com/prompto/prompto-tests/zip/master > prompto-tests.zip
-  - unzip prompto-tests.zip -d prompto-tests
+  - unzip prompto-tests.zip
+  - mv prompto-tests-master prompto-tests
   - curl https://codeload.github.com/prompto/prompto-libraries/zip/master > prompto-libraries.zip
-  - unzip prompto-libraries.zip -d prompto-libraries
+  - unzip prompto-libraries.zip
+  - mv prompto-libraries-master prompto-libraries
 before_script:
   - cp -r JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
   - cp -r JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
