@@ -1,2 +1,1 @@
 curl https://codeload.github.com/prompto/prompto-tests/zip/master > prompto-tests.zip
-ls -all
