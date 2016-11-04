@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "nodeunit tests/*"
+    "test": "./test.sh"
   },
   "author": "",
   "license": "ISC"
