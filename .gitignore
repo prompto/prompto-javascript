@@ -18,3 +18,4 @@
 **/JavaScript-Core/src/main/prompto/io/*
 **/JavaScript-Core/src/main/prompto/reader/*
 travis.yml
+JavaScript-Core/test-results
