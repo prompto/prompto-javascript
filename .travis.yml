@@ -15,6 +15,8 @@ before_script:
   - ln -sf JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
   - ln -sf JavaScript-Runtime/src/main/prompto/reader JavaScript-Core/src/main/prompto/reader
   - chmod 777 ./test.sh
+  - chmod 777 -R JavaScript-Core/
+  - chmod 777 -R JavaScript-Runtime/
   - ls -all
 after_script:
   - ls -all
