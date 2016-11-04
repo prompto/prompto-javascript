@@ -5,3 +5,4 @@ node_js:
 before_install:
   - npm install antlr4
   - npm install nodeunit
+  - ls -all
