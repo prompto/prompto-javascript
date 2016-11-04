@@ -11,7 +11,7 @@
   },
   "scripts": {
     "build": "webpack",
-    "test": "test.sh"
+    "test": "./test.sh"
   },
   "author": "",
   "license": "ISC"
