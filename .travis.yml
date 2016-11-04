@@ -5,6 +5,10 @@ node_js:
 before_install:
   - npm install antlr4
   - npm install nodeunit
+  - curl https://codeload.github.com/prompto/prompto-tests/zip/master > prompto-tests.zip
+  - sudo apt-get install unzip
+  - unzip prompto-tests.zip
+  - ls
+
 script:
-  - ls -all
   - make test
