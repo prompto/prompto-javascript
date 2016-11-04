@@ -1,25 +1,28 @@
-export ROOT_DIR=$PWD
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/runtime/context/
+if [ -z "$TRAVIS_BUILD_DIR" ]; then
+    set TRAVIS_BUILD_DIR=$PWD
+fi
+
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/runtime/context/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/runtime/e/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/runtime/e/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/runtime/o/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/runtime/o/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/parser/e/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/parser/e/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/parser/o/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/parser/o/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/translate/eoe/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/translate/eoe/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/translate/ese/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/translate/ese/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/translate/oeo/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/translate/oeo/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Core/src/test/prompto/translate/oso/
+cd $TRAVIS_BUILD_DIR/Javascript-Core/src/test/prompto/translate/oso/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Runtime/src/test/library/e/
+cd $TRAVIS_BUILD_DIR/Javascript-Runtime/src/test/library/e/
 nodeunit ./
-cd $ROOT_DIR/Javascript-Runtime/src/test/library/reader/
+cd $TRAVIS_BUILD_DIR/Javascript-Runtime/src/test/library/reader/
 nodeunit ./
 
 # to debug a failing test:
