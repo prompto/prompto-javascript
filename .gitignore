@@ -19,3 +19,6 @@
 **/JavaScript-Core/src/main/prompto/reader/*
 travis.yml
 JavaScript-Core/test-results
+*.log
+prompto-libraries
+prompto-tests

@@ -13,7 +13,7 @@ function getPromptoFolder() {
             throw "Could not find prompto root!";
         prompto = parent;
     }
-    return path.dirname(prompto);
+    return prompto;
 };
 
 function getResourcesFolder() {

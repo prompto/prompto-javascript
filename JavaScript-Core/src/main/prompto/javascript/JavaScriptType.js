@@ -68,6 +68,13 @@ JavaScriptType.prototype.doConvertJavaScriptValueToPromptoValue = function(conte
     else if(returnType==type.AnyType.instance) {
         return new NativeInstance(AnyNativeCategoryDeclaration.instance, value);
 	} else {
+        // when running under nodeunit, process.stdout is sometimes a WriteStream rather than a Socket
+        // so need to adjust accordingly to prevent TestNative.testPrinter to fail
+        if(klass=='WriteStream') {
+            res = this.convertCategory(context, value, "Socket", returnType);
+            if(res)
+                return res;
+        }
 		throw new InternalError("Unable to convert:" + getTypeName(value));
 	}
 };
