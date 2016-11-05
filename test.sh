@@ -18,7 +18,7 @@
 #echo "Testing framework libraries ..."
 #nodeunit JavaScript-Core/src/test/internet/
 #nodeunit JavaScript-Core/src/test/library/e/
-nodeunit JavaScript-Core/src/test/library/reader/
+nodeunit JavaScript-Core/src/test/reader/
 
 # to debug a failing test:
 # place a 'debugger' instruction where you want to break
