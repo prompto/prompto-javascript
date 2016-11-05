@@ -159,7 +159,7 @@ exports.loadDependency = function(libraryName) {
 };
 
 exports.listLibraryFiles = function(libraryName) {
-    var idx = __filename.indexOf(path.sep + "prompto-javascript" + path.sep + "JavaScript-Core" + path.sep);
+    var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
     var dir = __filename.substring(0, idx) + path.sep + "prompto-libraries" + path.sep + libraryName;
     if (fs.existsSync(dir)) {
         var files = fs.readdirSync(dir);

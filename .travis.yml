@@ -22,4 +22,4 @@ before_script:
   - mkdir JavaScript-Core/src/test/library
   - cp -r JavaScript-Runtime/src/test/library/e JavaScript-Core/src/test/library/e
   - chmod 777 ./test.sh
-  - ls -all -R
+#  - ls -all -R
