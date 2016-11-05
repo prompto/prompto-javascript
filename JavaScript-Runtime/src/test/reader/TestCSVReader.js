@@ -70,6 +70,7 @@ exports.testEmptyValue = function(test) {
     test.ok(doc);
     test.equal("2", doc["id"]);
     test.ok(!doc["name"]);
+    test.ok(false);
     test.done();
 };
 
