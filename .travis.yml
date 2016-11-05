@@ -1,12 +1,12 @@
 sudo: true
 language: node_js
 node_js:
-  - "0.10"
+  - "0.12"
 before_install:
   - npm install antlr4@4.5.3
-  - npm install nodeunit
+  - npm install nodeunit@0.10.2
   - npm install jszip-sync
-  - npm install sync-request@2.2.0
+  - npm install sync-request@3.0.1
   - sudo apt-get install unzip
   - curl https://codeload.github.com/prompto/prompto-tests/zip/master > prompto-tests.zip
   - unzip prompto-tests.zip
