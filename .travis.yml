@@ -6,6 +6,7 @@ before_install:
   - npm install antlr4
   - npm install nodeunit
   - npm install jszip-sync
+  - npm install sync-request
   - sudo apt-get install unzip
   - curl https://codeload.github.com/prompto/prompto-tests/zip/master > prompto-tests.zip
   - unzip prompto-tests.zip
