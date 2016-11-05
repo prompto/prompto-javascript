@@ -42,7 +42,7 @@ BlobExpression.collectDatas = function(context, value) {
 
 
 BlobExpression.zipDatas = function(datas) {
-    var JSZip = require("jszip");
+    var JSZip = require("jszip-sync");
     var zip = new JSZip();
     return zip.sync(function() {
         for (var key in datas)

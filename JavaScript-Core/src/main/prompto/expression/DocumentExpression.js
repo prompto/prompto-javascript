@@ -58,7 +58,7 @@ DocumentExpression.prototype.documentFromBlob = function(context, blob) {
 };
 
 DocumentExpression.prototype.readParts = function(data) {
-    var JSZip = require("jszip");
+    var JSZip = require("jszip-sync");
     var zip = new JSZip();
     return zip.sync(function() {
         var parts = {};
