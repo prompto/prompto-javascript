@@ -14,9 +14,7 @@ before_install:
   - unzip prompto-libraries.zip
   - mv prompto-libraries-master prompto-libraries
 before_script:
-  - cp -r JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
-  - cp -r JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
-  - cp -r JavaScript-Runtime/src/main/prompto/reader JavaScript-Core/src/main/prompto/reader
+  - cp -r JavaScript-Runtime/src JavaScript-Core/src/
   - chmod 777 ./test.sh
   - ls -all
 after_script:
