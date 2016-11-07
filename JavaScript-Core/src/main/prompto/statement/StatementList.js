@@ -58,7 +58,8 @@ StatementList.prototype.interpret = function(context) {
 		return this.doInterpret(context);
 	} catch(e) {
 		if(e instanceof ReferenceError) {
-			throw e; // new NullReferenceError();
+            console.trace();
+			throw new NullReferenceError();
 		} else {
 			throw e;
 		}
@@ -70,7 +71,8 @@ StatementList.prototype.interpretNative = function(context, returnType) {
         return this.doInterpretNative(context, returnType);
     } catch(e) {
         if(e instanceof ReferenceError) {
-            throw e; // new NullReferenceError();
+            console.trace();
+            throw new NullReferenceError();
         } else {
             throw e;
         }
