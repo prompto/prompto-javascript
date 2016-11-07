@@ -1082,12 +1082,12 @@ OParserListener.prototype.exitWrite_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#fetch_list_expression.
-OParserListener.prototype.enterFetch_list_expression = function(ctx) {
+// Enter a parse tree produced by OParser#filtered_list_expression.
+OParserListener.prototype.enterFiltered_list_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#fetch_list_expression.
-OParserListener.prototype.exitFetch_list_expression = function(ctx) {
+// Exit a parse tree produced by OParser#filtered_list_expression.
+OParserListener.prototype.exitFiltered_list_expression = function(ctx) {
 };
 
 

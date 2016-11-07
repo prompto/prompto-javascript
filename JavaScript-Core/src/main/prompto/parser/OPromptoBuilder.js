@@ -1893,15 +1893,6 @@ OPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 
 
 
-OPromptoBuilder.prototype.exitFetch_list_expression = function(ctx) {
-    var itemName = this.getNodeValue(ctx.name);
-    var source = this.getNodeValue(ctx.source);
-    var predicate = this.getNodeValue(ctx.predicate);
-    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, predicate));
-};
-
-
-
 OPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
     var predicate = this.getNodeValue(ctx.predicate);
@@ -1918,6 +1909,16 @@ OPromptoBuilder.prototype.exitFetchMany = function(ctx) {
     var orderBy = this.getNodeValue(ctx.orderby);
     this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
 };
+
+
+
+OPromptoBuilder.prototype.exitFiltered_list_expression = function(ctx) {
+    var itemName = this.getNodeValue(ctx.name);
+    var source = this.getNodeValue(ctx.source);
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FilteredExpression(itemName, source, predicate));
+};
+
 
 
 OPromptoBuilder.prototype.exitCode_type = function(ctx) {

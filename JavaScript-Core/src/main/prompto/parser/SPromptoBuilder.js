@@ -1834,22 +1834,6 @@ SPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 
 
 
-SPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
-};
-
-
-
-SPromptoBuilder.prototype.exitFetch_list_expression = function(ctx) {
-    var itemName = this.getNodeValue(ctx.name);
-    var source = this.getNodeValue(ctx.source);
-    var predicate = this.getNodeValue(ctx.predicate);
-    this.setNodeValue(ctx, new expression.FetchExpression(itemName, source, predicate));
-};
-
-
-
 SPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
     var predicate = this.getNodeValue(ctx.predicate);
@@ -1865,6 +1849,21 @@ SPromptoBuilder.prototype.exitFetchMany = function(ctx) {
     var stop = this.getNodeValue(ctx.xstop);
     var orderBy = this.getNodeValue(ctx.orderby);
     this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
+};
+
+
+SPromptoBuilder.prototype.exitFilteredListExpression = function(ctx) {
+    var filtered = this.getNodeValue(ctx.filtered_list_suffix());
+    var source = this.getNodeValue(ctx.src);
+    filtered.source = source;
+    this.setNodeValue(ctx, filtered);
+};
+
+
+SPromptoBuilder.prototype.exitFiltered_list_suffix = function(ctx) {
+    var itemName = this.getNodeValue(ctx.name);
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FilteredExpression(itemName, null, predicate));
 };
 
 

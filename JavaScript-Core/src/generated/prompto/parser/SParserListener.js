@@ -767,6 +767,15 @@ SParserListener.prototype.exitContainsExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by SParser#FilteredListExpression.
+SParserListener.prototype.enterFilteredListExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#FilteredListExpression.
+SParserListener.prototype.exitFilteredListExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by SParser#NotContainsExpression.
 SParserListener.prototype.enterNotContainsExpression = function(ctx) {
 };
@@ -1091,12 +1100,12 @@ SParserListener.prototype.exitWrite_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#fetch_list_expression.
-SParserListener.prototype.enterFetch_list_expression = function(ctx) {
+// Enter a parse tree produced by SParser#filtered_list_suffix.
+SParserListener.prototype.enterFiltered_list_suffix = function(ctx) {
 };
 
-// Exit a parse tree produced by SParser#fetch_list_expression.
-SParserListener.prototype.exitFetch_list_expression = function(ctx) {
+// Exit a parse tree produced by SParser#filtered_list_suffix.
+SParserListener.prototype.exitFiltered_list_suffix = function(ctx) {
 };
 
 

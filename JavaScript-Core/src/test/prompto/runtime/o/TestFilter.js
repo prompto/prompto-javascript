@@ -13,11 +13,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testFetchFromList = function(test) {
-	checkOutput(test, "fetch/fetchFromList.poc");
+exports.testFilterFromList = function(test) {
+	checkOutput(test, "filter/filterFromList.poc");
 };
 
-exports.testFetchFromSet = function(test) {
-	checkOutput(test, "fetch/fetchFromSet.poc");
+exports.testFilterFromSet = function(test) {
+	checkOutput(test, "filter/filterFromSet.poc");
 };
 

@@ -13,11 +13,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testFetchFromList = function(test) {
-	checkOutput(test, "fetch/fetchFromList.pec");
+exports.testFilterFromList = function(test) {
+	checkOutput(test, "filter/filterFromList.pec");
 };
 
-exports.testFetchFromSet = function(test) {
-	checkOutput(test, "fetch/fetchFromSet.pec");
+exports.testFilterFromSet = function(test) {
+	checkOutput(test, "filter/filterFromSet.pec");
 };
 
