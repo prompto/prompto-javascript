@@ -22,3 +22,8 @@ JavaScript-Core/test-results
 *.log
 prompto-libraries
 prompto-tests
+**/.DS_Store
+*.tokens
+internet
+io
+reader
