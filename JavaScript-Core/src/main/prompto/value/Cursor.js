@@ -1,4 +1,6 @@
+var CategoryType = require("../type/CategoryType").CategoryType;
 var CursorType = require("../type/CursorType").CursorType;
+var Identifier = require("../grammar/Identifier").Identifier;
 var Integer = require("./Integer").Integer;
 var Value = require("./Value").Value;
 
@@ -6,6 +8,7 @@ function Cursor(context, itemType, docs) {
     Value.call(this, new CursorType(itemType));
     this.context = context;
     this.documents = docs;
+    this.mutable = itemType.mutable || false;
     return this;
 };
 
@@ -31,9 +34,19 @@ Cursor.prototype.hasNext = function() {
 };
 
 Cursor.prototype.next = function() {
-    var doc = this.documents.next();
-    return this.type.itemType.newInstanceFromStored(this.context, doc);
+    var stored = this.documents.next();
+    var itemType = this.readItemType(stored);
+    return itemType.newInstanceFromStored(this.context, stored);
 };
+
+Cursor.prototype.readItemType = function(stored) {
+    var categories = stored["category"] || null;
+    var category = categories[categories.length-1];
+    var typ = new CategoryType(new Identifier(category));
+    typ.mutable = this.mutable;
+    return typ;
+};
+
 
 Cursor.prototype.getMember = function(context, name) {
     if ("count" == name)

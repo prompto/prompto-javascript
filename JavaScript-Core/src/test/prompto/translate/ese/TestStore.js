@@ -18,6 +18,10 @@ exports.testManyRecords = function(test) {
 	compareResourceESE(test, "store/manyRecords.pec");
 };
 
+exports.testManyUntypedRecords = function(test) {
+	compareResourceESE(test, "store/manyUntypedRecords.pec");
+};
+
 exports.testSimpleRecord = function(test) {
 	compareResourceESE(test, "store/simpleRecord.pec");
 };

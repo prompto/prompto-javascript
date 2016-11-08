@@ -29,6 +29,10 @@ exports.testManyRecords = function(test) {
 	checkOutput(test, "store/manyRecords.pec");
 };
 
+exports.testManyUntypedRecords = function(test) {
+	checkOutput(test, "store/manyUntypedRecords.pec");
+};
+
 exports.testSimpleRecord = function(test) {
 	checkOutput(test, "store/simpleRecord.pec");
 };

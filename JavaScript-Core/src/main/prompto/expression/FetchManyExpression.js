@@ -1,5 +1,6 @@
 var IntegerType = require("../type/IntegerType").IntegerType;
 var BooleanType = require("../type/BooleanType").BooleanType;
+var AnyType = require("../type/AnyType").AnyType;
 var CursorType = require("../type/CursorType").CursorType;
 var Section = require("../parser/Section").Section;
 var DataStore = require("../store/DataStore").DataStore;
@@ -30,19 +31,22 @@ FetchManyExpression.prototype.toEDialect = function(writer) {
     writer.append("fetch ");
     if(this.first==null)
         writer.append("all ");
-    writer.append(this.typ.name);
-    if(this.first!=null) {
+    if(this.typ!=null) {
+        writer.append(this.typ.name);
         writer.append(" ");
+    }
+    if(this.first!=null) {
         this.first.toDialect(writer);
         writer.append(" to ");
         this.last.toDialect(writer);
+        writer.append(" ");
     }
     if(this.predicate!=null) {
-        writer.append(" where ");
+        writer.append("where ");
         this.predicate.toDialect(writer);
+        writer.append(" ");
     }
     if(this.orderBy!=null) {
-        writer.append(" ");
         this.orderBy.toDialect(writer);
     }
 };
@@ -51,9 +55,11 @@ FetchManyExpression.prototype.toODialect = function(writer) {
     writer.append("fetch ");
     if(this.first==null)
         writer.append("all ");
-    writer.append("( ");
-    writer.append(this.typ.name);
-    writer.append(" ) ");
+    if(this.typ!=null) {
+        writer.append("( ");
+        writer.append(this.typ.name);
+        writer.append(" ) ");
+    }
     if(this.first!=null) {
         writer.append("rows ( ");
         this.first.toDialect(writer);
@@ -62,7 +68,7 @@ FetchManyExpression.prototype.toODialect = function(writer) {
         writer.append(") ");
     }
     if(this.predicate!=null) {
-        writer.append(" where ( ");
+        writer.append("where ( ");
         this.predicate.toDialect(writer);
         writer.append(") ");
     }
@@ -77,27 +83,37 @@ FetchManyExpression.prototype.toSDialect = function(writer) {
         this.first.toDialect(writer);
         writer.append(" to ");
         this.last.toDialect(writer);
+        writer.append(" ");
     } else
         writer.append("all ");
-    writer.append(" ( ");
-    writer.append(this.typ.name);
-    writer.append(" ) ");
+    writer.append("( ");
+    if(this.typ!=null) {
+        writer.append(this.typ.name);
+        writer.append(" ");
+    }
+    writer.append(") ");
     if(this.predicate!=null) {
         writer.append(" where ");
         this.predicate.toDialect(writer);
+        writer.append(" ");
     }
     if(this.orderBy!=null)
         this.orderBy.toDialect(writer);
 };
 
 FetchManyExpression.prototype.check = function(context) {
-    var decl = context.getRegisteredDeclaration(this.typ.name);
-    if (decl == null)
-        throw new SyntaxError("Unknown category: " + this.typ.name);
+    var typ = this.typ
+    if (typ==null)
+        typ = AnyType.instance;
+    else {
+        var decl = context.getRegisteredDeclaration(this.typ.name);
+        if (decl == null)
+            throw new SyntaxError("Unknown category: " + this.typ.name);
+    }
     this.checkFilter(context);
     this.checkOrderBy(context);
     this.checkSlice(context);
-    return new CursorType(this.typ);
+    return new CursorType(typ);
 };
 
 FetchManyExpression.prototype.checkFilter = function(context) {
@@ -119,7 +135,8 @@ FetchManyExpression.prototype.interpret = function(context) {
     var store = DataStore.instance;
     var query = this.buildFetchManyQuery(context, store);
     var docs = store.fetchMany(query);
-    return new Cursor(context, this.typ, docs);
+    typ = this.typ==null ? AnyType.instance : this.typ;
+    return new Cursor(context, typ, docs);
 };
 
 

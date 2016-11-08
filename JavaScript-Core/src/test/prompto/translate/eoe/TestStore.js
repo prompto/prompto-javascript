@@ -18,6 +18,10 @@ exports.testManyRecords = function(test) {
 	compareResourceEOE(test, "store/manyRecords.pec");
 };
 
+exports.testManyUntypedRecords = function(test) {
+	compareResourceEOE(test, "store/manyUntypedRecords.pec");
+};
+
 exports.testSimpleRecord = function(test) {
 	compareResourceEOE(test, "store/simpleRecord.pec");
 };
