@@ -22,7 +22,7 @@ DateType.instance = new DateType();
 
 DateType.prototype.isAssignableFrom = function(context, other) {
 	return NativeType.prototype.isAssignableFrom.call(this, context, other)
-        || (other instanceof DateTimeType);
+        || (other == DateTimeType.instance);
 };
 
 DateType.prototype.checkAdd = function(context, other, tryReverse) {

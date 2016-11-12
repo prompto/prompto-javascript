@@ -19,7 +19,7 @@ ExtendedArgument.prototype.constructor = ExtendedArgument;
 
 
 
-ExtendedArgument.prototype.getProto = function(context) {
+ExtendedArgument.prototype.getProto = function() {
 	return this.type.name + '(' + this.attributes.toString() + ')';
 };
 	

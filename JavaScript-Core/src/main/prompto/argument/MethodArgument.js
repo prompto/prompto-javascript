@@ -17,7 +17,7 @@ MethodArgument.prototype.toString = function() {
 	return this.name;
 };
 
-MethodArgument.prototype.getProto = function(context) {
+MethodArgument.prototype.getProto = function() {
 	return this.name;
 };
 
@@ -38,8 +38,17 @@ MethodArgument.prototype.check = function(context) {
 };
 
 MethodArgument.prototype.getType = function(context) {
-    var actual = context.getRegisteredDeclaration(this.name).getFirst();
-	return new MethodType(context, actual);
+    var method = this.getDeclaration(context);
+    return new MethodType(method);
 };
+
+MethodArgument.prototype.getDeclaration = function(context) {
+    var methods = context.getRegisteredDeclaration(this.name);
+    if (methods)
+        return methods.getFirst();
+    else
+        return null;
+};
+
 
 exports.MethodArgument = MethodArgument;

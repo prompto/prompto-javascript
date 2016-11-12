@@ -1,10 +1,9 @@
 var MethodType = require("../type/MethodType").MethodType;
 var Value = require("./Value").Value;
 
-function ClosureValue(context, method) {
-    Value.call(this, new MethodType(context, method));
+function ClosureValue(context, type) {
+    Value.call(this, type);
     this.context = context;
-    this.method = method;
     return this;
 }
 
@@ -12,12 +11,11 @@ ClosureValue.prototype = Object.create(Value.prototype);
 ClosureValue.prototype.constructor = ClosureValue;
 
 ClosureValue.prototype.interpret = function(context) {
-    var thisContext = this.type.context;
-    var parentMost = thisContext.getParentMostContext();
+    var parentMost = this.context.getParentMostContext();
     parentMost.setParentContext(context);
-    var result = this.method.interpret(thisContext);
+    var result = this.type.method.interpret(this.context);
     parentMost.setParentContext(null);
     return result;
-}
+};
 
 exports.ClosureValue = ClosureValue;

@@ -29,7 +29,7 @@ BaseMethodDeclaration.prototype.getDeclarationType = function() {
 BaseMethodDeclaration.prototype.getSignature = function(context) {
 	var s = [];
     this.args.map(function(arg) {
-        s.push(arg.getProto(context));
+        s.push(arg.getProto());
     });
     return "(" + s.join(", ") + ")";
 };

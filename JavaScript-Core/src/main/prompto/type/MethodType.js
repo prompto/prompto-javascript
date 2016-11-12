@@ -1,8 +1,7 @@
 var BaseType = require("./BaseType").BaseType;
 
-function MethodType(context, method) {
+function MethodType(method) {
 	BaseType.call(this, method.id);
-    this.context = context;
     this.method = method;
 	return this;
 }

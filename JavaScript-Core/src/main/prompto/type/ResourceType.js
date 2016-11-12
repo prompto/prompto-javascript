@@ -15,7 +15,7 @@ ResourceType.prototype.equals = function(obj) {
 	if(!(obj instanceof ResourceType)) {
 		return false;
 	}
-	return this.name==objname;
+	return this.name==obj.name;
 };
 
 

@@ -30,7 +30,7 @@ IntegerType.instance = new IntegerType();
 
 IntegerType.prototype.isAssignableFrom = function(context, other) {
     return NativeType.prototype.isAssignableFrom.call(this, context, other)
-        || (other instanceof DecimalType);
+        || (other == DecimalType.instance);
 };
 
 

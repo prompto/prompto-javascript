@@ -11,9 +11,13 @@ function CastExpression(expression, type) {
 
 CastExpression.prototype.check = function(context) {
     var actual = this.expression.check(context);
-    if(!actual.isAssignableFrom(context, this.type))
-        context.problemListener.reportInvalidCast(this, this.type, actual);
-    return this.type;
+    // check upcast
+    if(this.type.isAssignableFrom(context, actual))
+        return this.type;
+    // check downcast
+    if(actual.isAssignableFrom(context, this.type))
+        return this.type;
+    context.problemListener.reportInvalidCast(this, this.type, actual);
 };
 
 CastExpression.prototype.interpret = function(context) {

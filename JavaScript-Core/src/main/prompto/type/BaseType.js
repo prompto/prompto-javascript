@@ -37,9 +37,6 @@ BaseType.prototype.isAssignableFrom = function(context, other) {
     return this==other || this.equals(other) || other.equals(NullType.instance);
 };
 
-BaseType.prototype.isAssignableTo = function(context, other) {
-    return other.isAssignableFrom(context, this);
-};
 
 BaseType.prototype.checkAdd = function(context, other, tryReverse) {
     if(tryReverse)

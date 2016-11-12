@@ -22,7 +22,7 @@ DecimalType.instance = new DecimalType();
 
 DecimalType.prototype.isAssignableFrom = function(context, other) {
     return NativeType.prototype.isAssignableFrom.call(this, context, other)
-        || (other instanceof IntegerType);
+        || (other == IntegerType.instance);
 };
 
 

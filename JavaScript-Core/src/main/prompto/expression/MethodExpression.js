@@ -32,7 +32,7 @@ MethodExpression.prototype.check = function(context) {
 	var named = context.getRegistered(this.name);
 	if(named instanceof MethodDeclarationMap) { // global method or closure
         var decl = named.getFirst();
-		return new MethodType(context, decl);
+		return new MethodType(decl);
 	} else {
 		throw new SyntaxError("No method with name:" + this.name);
 	}
@@ -44,9 +44,8 @@ MethodExpression.prototype.interpret = function(context, asMethod) {
     } else {
         var named = context.getRegistered(this.id);
         if (named instanceof MethodDeclarationMap) {
-            for (var proto in named.protos) {
-                return new ClosureValue(context, named.protos[proto])
-            }
+            var decl = named.getFirst();
+            return new ClosureValue(context, new MethodType(decl))
         } else {
             throw new SyntaxError("No method with name:" + this.name);
         }

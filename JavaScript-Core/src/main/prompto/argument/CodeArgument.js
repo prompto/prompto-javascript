@@ -10,7 +10,7 @@ CodeArgument.prototype = Object.create(Argument.prototype);
 CodeArgument.prototype.constructor = CodeArgument;
 
 
-CodeArgument.prototype.getProto = function(context) {
+CodeArgument.prototype.getProto = function() {
 	return CodeType.instance.name;
 };
 

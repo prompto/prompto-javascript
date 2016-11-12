@@ -14,7 +14,7 @@ CollectionSwitchCase.prototype.checkSwitchType = function(context, type) {
 	if(thisType instanceof CollectionType) {
 		thisType = thisType.itemType;
 	}
-	if(!thisType.isAssignableTo(context, type)) {
+	if(!type.isAssignableFrom(context, thisType)) {
 		throw new SyntaxError("Cannot assign:" + thisType.name + " to:" + type.name);
 	}
 };

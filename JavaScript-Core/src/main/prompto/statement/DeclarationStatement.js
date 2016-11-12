@@ -39,9 +39,9 @@ DeclarationStatement.prototype.interpret = function(context) {
 	if(this.declaration instanceof ConcreteMethodDeclaration) {
 		var method = this.declaration;
 		context.registerMethodDeclaration(method);
-		var type = new MethodType(context,method);
+		var type = new MethodType(method);
 		context.registerValue(new Variable(method.id, type));
-		context.setValue(method.id, new ClosureValue(context, method));
+		context.setValue(method.id, new ClosureValue(context, type));
 		return null;
 	} else {
 		throw new SyntaxError("Unsupported:" + typeof(this.declaration));

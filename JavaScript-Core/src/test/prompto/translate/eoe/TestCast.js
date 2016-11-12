@@ -34,6 +34,10 @@ exports.testCastNull = function(test) {
 	compareResourceEOE(test, "cast/castNull.pec");
 };
 
+exports.testCastRoot = function(test) {
+	compareResourceEOE(test, "cast/castRoot.pec");
+};
+
 exports.testIsAChild = function(test) {
 	compareResourceEOE(test, "cast/isAChild.pec");
 };

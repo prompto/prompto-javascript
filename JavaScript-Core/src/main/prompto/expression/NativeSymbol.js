@@ -51,8 +51,8 @@ public boolean equals(Object obj) {
 
 NativeSymbol.prototype.check = function(context) {
 	var actual = this.expression.check(context);
-	if(!actual.isAssignableTo(context, this.type.derivedFrom)) {
-		throw new SyntaxError("Cannot assign " + actual.name + " to " + type.derivedFrom.name);
+	if(!this.type.derivedFrom.isAssignableFrom(context, actual)) {
+		throw new SyntaxError("Cannot assign " + actual.name + " to " + this.type.derivedFrom.name);
 	}
 	return this.type;
 };

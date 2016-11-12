@@ -23,7 +23,7 @@ TextType.instance = new TextType();
 
 TextType.prototype.isAssignableFrom = function(context, other) {
 	return NativeType.prototype.isAssignableFrom.call(this, context, other)
-        || (other instanceof CharacterType);
+        || (other == CharacterType.instance);
 };
 
 TextType.prototype.checkAdd = function(context, other, tryReverse) {

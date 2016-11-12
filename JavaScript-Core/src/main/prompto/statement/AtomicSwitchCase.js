@@ -10,7 +10,7 @@ AtomicSwitchCase.prototype.constructor = AtomicSwitchCase;
 
 AtomicSwitchCase.prototype.checkSwitchType = function(context, type) {
 	var thisType = this.expression.check(context);
-	if(!thisType.isAssignableTo(context, type)) {
+	if(!type.isAssignableFrom(context, thisType)) {
 		throw new SyntaxError("Cannot assign:" + thisType.name + " to:" + type.name);
 	}
 };

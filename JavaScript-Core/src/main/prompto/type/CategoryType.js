@@ -2,6 +2,7 @@ var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").Unresol
 var Identifier = require("../grammar/Identifier").Identifier;
 var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;
+var CategoryDeclaration = null;
 var ConcreteCategoryDeclaration = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
@@ -19,6 +20,7 @@ var Score = require("../runtime/Score").Score;
 exports.resolve = function() {
 	ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 	ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 }
 function CategoryType(id) {
@@ -176,74 +178,75 @@ CategoryType.prototype.checkMember = function(context, name) {
 
 CategoryType.prototype.isAssignableFrom = function(context, other) {
     return BaseType.prototype.isAssignableFrom.call(this, context, other)
-        || (this.name==other.name)
-        || ((other instanceof CategoryType) && other.isAssignableToCategory(context,this));
+        || ((other instanceof CategoryType) && this.isAssignableFromCategory(context, other));
 };
 
-CategoryType.prototype.isAssignableToCategory = function(context, other) {
-	if(this.name == other.name) {
-		return true;
-	}
-	try {
-		var	cd = this.getDeclaration(context);
-		return this.isDerivedFromCompatibleCategory(context,cd,other)
-            || this.isAssignableToAnonymousCategory(context,cd,other);
-	} catch (e) {
-		if(e instanceof SyntaxError ) {
-			return false;
-		} else {
-			throw e;
-		}
-	}
+CategoryType.prototype.isAssignableFromCategory = function(context, other) {
+    return other.isDerivedFrom(context, this)
+        || other.isDerivedFromAnonymous(context, this);
 };
 
-CategoryType.prototype.isDerivedFromCompatibleCategory = function(context, decl, other) {
-	if(decl.derivedFrom==null) {
-		return false;
-	}
-	for(var i=0;i<decl.derivedFrom.length; i++) {
-		var ct = new CategoryType(decl.derivedFrom[i]);
-		if (ct.isAssignableTo(context, other)) {
-			return true;
-		}
-	}
-	return false;
-}
+CategoryType.prototype.isDerivedFrom = function(context, other) {
+    try {
+        var thisDecl = this.getDeclaration(context);
+        if (thisDecl instanceof CategoryDeclaration)
+            return this.isDerivedFromCategory(context, thisDecl, other);
+    } catch (e) {
+    }
+    return false; // TODO
+};
 
-CategoryType.prototype.isAssignableToAnonymousCategory = function(context, decl, other) {
-	if(!other.isAnonymous()) {
-		return false;
-	}
-	try {
-		var	cd = other.getDeclaration(context);
-		return this.isAssignableToAnonymousCategoryDeclaration(context, decl, cd);
-	} catch (e) {
-		if(e instanceof SyntaxError ) {
-			return false;
-		} else {
-			throw e;
-		}
-	}
+CategoryType.prototype.isDerivedFromCategory = function(context, decl, other) {
+    if(decl.derivedFrom==null) {
+        return false;
+    }
+    for(var i=0;i<decl.derivedFrom.length; i++) {
+        var ct = new CategoryType(decl.derivedFrom[i]);
+        if (ct.equals(other) || ct.isDerivedFrom(context, other)) {
+            return true;
+        }
+    }
+    return false;
+};
+
+
+CategoryType.prototype.isDerivedFromAnonymous = function(context, other) {
+    if (!(other instanceof CategoryType) || !other.isAnonymous())
+        return false;
+    try {
+        var thisDecl = this.getDeclaration(context);
+        if (thisDecl instanceof CategoryDeclaration) {
+            var otherDecl = other.getDeclaration(context);
+            if (otherDecl instanceof CategoryDeclaration)
+                return this.isDerivedFromAnonymousCategory(context, thisDecl, otherDecl);
+        }
+    } catch (e) {
+        if (e instanceof SyntaxError) {
+            return false;
+        } else {
+            throw e;
+        }
+    }
+};
+
+CategoryType.prototype.isDerivedFromAnonymousCategory = function(context, thisDecl, otherDecl) {
+    // an anonymous category extends 1 and only 1 category
+    var baseId = otherDecl.derivedFrom[0];
+    // check we derive from root category (if not extending 'Any')
+    if("any"!=baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
+        return false;
+    for(var i=0;i<otherDecl.attributes.length;i++) {
+        var id = otherDecl.attributes[i];
+        if(!thisDecl.hasAttribute(context, id.name)) {
+            return false;
+        }
+    }
+    return true;
 };
 
 CategoryType.prototype.isAnonymous = function() {
 	return this.name[0]==this.name[0].toLowerCase(); // since it's the name of the argument
 }
-
-CategoryType.prototype.isAssignableToAnonymousCategoryDeclaration = function(context, decl, other) {
-	// an anonymous category extends 1 and only 1 category
-	var baseId = other.derivedFrom[0];
-	// check we derive from root category (if not extending 'Any')
-	if("any"!=baseId.name && !decl.isDerivedFrom(context,new CategoryType(baseId)))
-		return false;
-	for(var i=0;i<other.attributes.length;i++) {
-        var name = other.attributes[i].name;
-		if(!decl.hasAttribute(context, name)) {
-			return false;
-		}
-	}
-	return true;
-};
 
 CategoryType.prototype.isMoreSpecificThan = function(context, other) {
     if(other instanceof NullType || other instanceof AnyType || other instanceof MissingType)

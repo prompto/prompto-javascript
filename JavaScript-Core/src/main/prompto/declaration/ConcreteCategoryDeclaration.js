@@ -328,13 +328,13 @@ ConcreteCategoryDeclaration.prototype.findOperator = function(context, operator,
     var candidate = null;
     methods.forEach(function(method) {
         var potential = method.args[0].getType(context);
-        if(!type.isAssignableTo(context, potential))
+        if(!potential.isAssignableFrom(context, type))
             return;
         if(candidate==null)
             candidate = method;
         else {
             var currentBest = candidate.args[0].getType(context);
-            if(currentBest.isAssignableTo(context, potential))
+            if(potential.isAssignableFrom(context, currentBest))
                 candidate = method;
         }
     });

@@ -318,7 +318,7 @@ function MethodDeclarationMap(name) {
 }
 
 MethodDeclarationMap.prototype.register = function(declaration, context) {
-	var proto = declaration.getProto(context);
+	var proto = declaration.getProto();
 	var current = this.protos[proto] || null;
 	if(current!==null)
         context.problemListener.reportDuplicate(declaration.name, declaration);
@@ -331,7 +331,7 @@ MethodDeclarationMap.prototype.unregister = function(proto) {
 };
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context) {
-	var proto = declaration.getProto(context);
+	var proto = declaration.getProto();
 	if(!(proto in this.protos)) {
 		this.protos[proto] = declaration;
 	}

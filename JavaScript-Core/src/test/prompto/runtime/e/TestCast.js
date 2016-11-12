@@ -45,6 +45,10 @@ exports.testCastNull = function(test) {
 	checkOutput(test, "cast/castNull.pec");
 };
 
+exports.testCastRoot = function(test) {
+	checkOutput(test, "cast/castRoot.pec");
+};
+
 exports.testIsAChild = function(test) {
 	checkOutput(test, "cast/isAChild.pec");
 };

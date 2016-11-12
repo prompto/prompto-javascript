@@ -13,7 +13,7 @@ AttributeArgument.prototype.toString = function() {
 	return this.id.name;
 };
 
-AttributeArgument.prototype.getProto = function(context) {
+AttributeArgument.prototype.getProto = function() {
 	return this.id.name;
 };
 

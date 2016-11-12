@@ -20,7 +20,7 @@ NativeGetterMethodDeclaration.prototype.interpret = function(context) {
 
 NativeGetterMethodDeclaration.prototype.castToReturnType = function(context, value) {
     // can only cast to specified type, and if required
-    if(this.returnType!=null && !(value.type.isAssignableTo(context, this.returnType))) {
+    if(this.returnType!=null && !(this.returnType.isAssignableFrom(context, value.type))) {
         // only cast if implemented, on a per type basis
         if(this.returnType.nativeCast)
             value = this.returnType.nativeCast(context, value);

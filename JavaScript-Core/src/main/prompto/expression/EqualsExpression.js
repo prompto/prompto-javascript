@@ -101,7 +101,7 @@ EqualsExpression.prototype.isA = function(context, lval, rval) {
     if(lval instanceof Value && rval instanceof TypeValue) {
         var actual = lval.type;
         var toCheck = rval.value;
-        return actual.isAssignableTo(context, toCheck);
+        return toCheck.isAssignableFrom(context, actual);
     } else
         return false;
 };

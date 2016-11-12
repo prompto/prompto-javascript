@@ -117,7 +117,7 @@ ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, chec
 			actual = value.getType();
 		}
 	}
-	if(!actual.isAssignableTo(context, required) && (actual instanceof CategoryType)) {
+	if(!required.isAssignableFrom(context, actual) && (actual instanceof CategoryType)) {
 		expression = new MemberSelector(expression, this.argument.id);
 	}
 	return expression;

@@ -1,7 +1,7 @@
 var AbstractMethodDeclaration = require("./AbstractMethodDeclaration").AbstractMethodDeclaration;
 
 function ClosureDeclaration(closure) {
-    AbstractMethodDeclaration.call(this, closure.method.id, closure.method.args, closure.method.returnType);
+    AbstractMethodDeclaration.call(this, closure.type.method.id, closure.type.method.args, closure.type.method.returnType);
 	this.closure = closure;
 	return this;
 }

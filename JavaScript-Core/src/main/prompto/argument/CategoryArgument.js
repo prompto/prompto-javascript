@@ -12,7 +12,7 @@ function CategoryArgument(type, id) {
 CategoryArgument.prototype = Object.create(Argument.prototype);
 CategoryArgument.prototype.constructor = CategoryArgument;
 
-CategoryArgument.prototype.getProto = function(context) {
+CategoryArgument.prototype.getProto = function() {
 	return this.type.name;
 };
 	

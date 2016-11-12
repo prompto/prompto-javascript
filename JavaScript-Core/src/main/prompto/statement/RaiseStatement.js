@@ -31,7 +31,7 @@ RaiseStatement.prototype.equals = function(obj) {
 
 RaiseStatement.prototype.check = function(context) {
 	var type = this.expression.check(context);
-	if(!type.isAssignableTo(context, new CategoryType(new Identifier("Error")))) {
+	if(!new CategoryType(new Identifier("Error")).isAssignableFrom(context, type)) {
 		throw new SyntaxError(type.name + " does not extend Error");
 	}
 	return VoidType.instance;

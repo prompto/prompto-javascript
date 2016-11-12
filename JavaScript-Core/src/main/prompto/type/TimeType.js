@@ -20,7 +20,7 @@ TimeType.instance = new TimeType();
 
 TimeType.prototype.isAssignableFrom = function(context, other) {
     return NativeType.prototype.isAssignableFrom.call(this, context, other)
-        || (other instanceof DateTimeType);
+        || (other == DateTimeType.instance);
 };
 
 TimeType.prototype.checkAdd = function(context, other, tryReverse) {

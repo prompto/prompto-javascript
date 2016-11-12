@@ -25,7 +25,7 @@ UnresolvedArgument.prototype.check = function(context) {
 	this.resolveAndCheck(context);
 };
 
-UnresolvedArgument.prototype.getProto = function(context) {
+UnresolvedArgument.prototype.getProto = function() {
 	return this.name;
 };
 
