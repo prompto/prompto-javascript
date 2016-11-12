@@ -31,7 +31,8 @@ SetValue.prototype.toString = function() {
 };
 
 SetValue.prototype.add = function(item) {
-    this.items[item.toString()] = item;
+    var key = item.type.id.name + ":" + item.toString();
+    this.items[key] = item;
 };
 
 SetValue.prototype.size = function() {
