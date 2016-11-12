@@ -7,6 +7,8 @@ var MissingType = require("../type/MissingType").MissingType;
 var DictType = require("../type/DictType").DictType;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
+var inferElementType = require("../utils/TypeUtils").inferElementType;
+
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
@@ -38,26 +40,16 @@ DictLiteral.prototype.inferElementType = function(context) {
 	if(items.length==0) {
 		return MissingType.instance;
 	}
-	var lastType = null;
+	var types = [];
 	items.forEach(function(entry) {
         var keyType = entry.key.check(context);
 		if(keyType!=TextType.instance) {
 			throw new SyntaxError("Illegal key type: " + keyType.toString());
 		}
 		var elemType = entry.value.check(context);
-		if(lastType==null) {
-			lastType = elemType;
-		} else if(!lastType.equals(elemType)) {
-			if(lastType.isAssignableFrom(context, elemType)) {
-				; // lastType is less specific
-			} else if(elemType.isAssignableFrom(context, lastType)) {
-				lastType = elemType; // elemType is less specific
-			} else {
-				throw new SyntaxError("Incompatible value types: " + elemType.toString() + " and " + lastType.toString());
-			}
-		}
+        types.push(elemType);
 	});
-	return lastType;
+	return inferElementType(context, types);
 };
 
 DictLiteral.prototype.interpret = function(context) {

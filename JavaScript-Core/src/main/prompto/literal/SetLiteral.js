@@ -9,6 +9,7 @@ var TextType = require("../type/TextType").TextType;
 var Decimal = require("../value/Decimal").Decimal;
 var Text = require("../value/Text").Text;
 var ExpressionList = require("../utils/ExpressionList").ExpressionList;
+var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
 
 function SetLiteral(expressions) {
     expressions = expressions || new ExpressionList();
@@ -24,46 +25,23 @@ SetLiteral.prototype.constructor = SetLiteral;
 
 SetLiteral.prototype.check = function(context) {
 	if(this.itemType==null) {
-		this.itemType = this.inferElementType(context);
+		this.itemType = inferExpressionsType(context, this.expressions);
         this.type = new SetType(this.itemType);
 	}
 	return this.type;
 };
 
-SetLiteral.prototype.inferElementType = function(context) {
-    if (this.expressions.length == 0)
-        return MissingType.instance;
-    var lastType = null;
-    for (var i = 0; i < this.expressions.length; i++) {
-        var elemType = this.expressions[i].check(context);
-        if (lastType == null) {
-            lastType = elemType;
-        } else if (!lastType.equals(elemType)) {
-            if (lastType.isAssignableFrom(context, elemType)) {
-                ; // lastType is less specific
-            } else if (elemType.isAssignableFrom(context, lastType)) {
-                lastType = elemType; // elemType is less specific
-            } else {
-                throw new SyntaxError("Incompatible types: " + elemType.toString() + " and " + lastType.toString());
-            }
-        }
-    }
-    return lastType;
-};
 
 SetLiteral.prototype.interpret = function(context) {
-	if(this.expressions.length>0) {
-        var self = this;
-        this.check(context); // force computation of itemType
-		var list = new SetValue(this.itemType);
-		this.expressions.forEach(function(expression) {
-			var item = expression.interpret(context);
-            item = self.interpretPromotion(item);
-			list.add(item);
-		});
-		return list;
-	} else
-	    return this.value;
+    var self = this;
+    this.check(context); // force computation of itemType
+    var value = new SetValue(this.itemType);
+    this.expressions.forEach(function(expression) {
+        var item = expression.interpret(context);
+        item = self.interpretPromotion(item);
+        value.add(item);
+    });
+    return value;
 };
 
 SetLiteral.prototype.interpretPromotion = function(item) {

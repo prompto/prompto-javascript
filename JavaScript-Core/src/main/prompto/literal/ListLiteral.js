@@ -9,6 +9,7 @@ var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var Decimal = require("../value/Decimal").Decimal;
 var Text = require("../value/Text").Text;
+var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
 
 function ListLiteral(mutable, expressions) {
     if(typeof(mutable)!=typeof(true))
@@ -27,32 +28,12 @@ ListLiteral.prototype.constructor = ListLiteral;
 
 ListLiteral.prototype.check = function(context) {
 	if(this.itemType==null) {
-		this.itemType = this.inferElementType(context);
+		this.itemType = inferExpressionsType(context, this.expressions);
         this.type = new ListType(this.itemType);
 	}
 	return this.type;
 };
 
-ListLiteral.prototype.inferElementType = function(context) {
-    if (this.expressions.length == 0)
-        return MissingType.instance;
-    var lastType = null;
-    for (var i = 0; i < this.expressions.length; i++) {
-        var elemType = this.expressions[i].check(context);
-        if (lastType == null) {
-            lastType = elemType;
-        } else if (!lastType.equals(elemType)) {
-            if (lastType.isAssignableFrom(context, elemType)) {
-                ; // lastType is less specific
-            } else if (elemType.isAssignableFrom(context, lastType)) {
-                lastType = elemType; // elemType is less specific
-            } else {
-                throw new SyntaxError("Incompatible types: " + elemType.toString() + " and " + lastType.toString());
-            }
-        }
-    }
-    return lastType;
-};
 
 ListLiteral.prototype.interpret = function(context) {
 	if(this.expressions.length) {
