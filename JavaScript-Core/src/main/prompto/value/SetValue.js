@@ -27,7 +27,8 @@ SetValue.prototype.addAll = function(items) {
 
 SetValue.prototype.toString = function() {
     var names = Object.getOwnPropertyNames(this.items);
-    return "<" + names.join(", ") + ">";
+    var values = names.map(function(name) { return this.items[name]; }, this);
+    return "<" + values.join(", ") + ">";
 };
 
 SetValue.prototype.add = function(item) {
@@ -59,7 +60,8 @@ SetValue.prototype.isEmpty = function() {
 };
 
 SetValue.prototype.hasItem = function(context, item) {
-    return item.toString() in this.items;
+    var key = item.type.id.name + ":" + item.toString();
+    return key in this.items;
 };
 
 

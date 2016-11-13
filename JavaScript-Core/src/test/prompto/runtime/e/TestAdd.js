@@ -29,12 +29,20 @@ exports.testAddDecimal = function(test) {
 	checkOutput(test, "add/addDecimal.pec");
 };
 
+exports.testAddDecimalEnum = function(test) {
+	checkOutput(test, "add/addDecimalEnum.pec");
+};
+
 exports.testAddDict = function(test) {
 	checkOutput(test, "add/addDict.pec");
 };
 
 exports.testAddInteger = function(test) {
 	checkOutput(test, "add/addInteger.pec");
+};
+
+exports.testAddIntegerEnum = function(test) {
+	checkOutput(test, "add/addIntegerEnum.pec");
 };
 
 exports.testAddList = function(test) {
@@ -55,6 +63,10 @@ exports.testAddTextCharacter = function(test) {
 
 exports.testAddTextDecimal = function(test) {
 	checkOutput(test, "add/addTextDecimal.pec");
+};
+
+exports.testAddTextEnum = function(test) {
+	checkOutput(test, "add/addTextEnum.pec");
 };
 
 exports.testAddTextInteger = function(test) {

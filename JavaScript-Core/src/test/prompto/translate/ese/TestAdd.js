@@ -18,12 +18,20 @@ exports.testAddDecimal = function(test) {
 	compareResourceESE(test, "add/addDecimal.pec");
 };
 
+exports.testAddDecimalEnum = function(test) {
+	compareResourceESE(test, "add/addDecimalEnum.pec");
+};
+
 exports.testAddDict = function(test) {
 	compareResourceESE(test, "add/addDict.pec");
 };
 
 exports.testAddInteger = function(test) {
 	compareResourceESE(test, "add/addInteger.pec");
+};
+
+exports.testAddIntegerEnum = function(test) {
+	compareResourceESE(test, "add/addIntegerEnum.pec");
 };
 
 exports.testAddList = function(test) {
@@ -44,6 +52,10 @@ exports.testAddTextCharacter = function(test) {
 
 exports.testAddTextDecimal = function(test) {
 	compareResourceESE(test, "add/addTextDecimal.pec");
+};
+
+exports.testAddTextEnum = function(test) {
+	compareResourceESE(test, "add/addTextEnum.pec");
 };
 
 exports.testAddTextInteger = function(test) {

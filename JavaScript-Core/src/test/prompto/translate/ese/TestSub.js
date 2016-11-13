@@ -14,8 +14,16 @@ exports.testSubDecimal = function(test) {
 	compareResourceESE(test, "sub/subDecimal.pec");
 };
 
+exports.testSubDecimalEnum = function(test) {
+	compareResourceESE(test, "sub/subDecimalEnum.pec");
+};
+
 exports.testSubInteger = function(test) {
 	compareResourceESE(test, "sub/subInteger.pec");
+};
+
+exports.testSubIntegerEnum = function(test) {
+	compareResourceESE(test, "sub/subIntegerEnum.pec");
 };
 
 exports.testSubPeriod = function(test) {

@@ -18,12 +18,20 @@ exports.testAddDecimal = function(test) {
 	compareResourceEOE(test, "add/addDecimal.pec");
 };
 
+exports.testAddDecimalEnum = function(test) {
+	compareResourceEOE(test, "add/addDecimalEnum.pec");
+};
+
 exports.testAddDict = function(test) {
 	compareResourceEOE(test, "add/addDict.pec");
 };
 
 exports.testAddInteger = function(test) {
 	compareResourceEOE(test, "add/addInteger.pec");
+};
+
+exports.testAddIntegerEnum = function(test) {
+	compareResourceEOE(test, "add/addIntegerEnum.pec");
 };
 
 exports.testAddList = function(test) {
@@ -44,6 +52,10 @@ exports.testAddTextCharacter = function(test) {
 
 exports.testAddTextDecimal = function(test) {
 	compareResourceEOE(test, "add/addTextDecimal.pec");
+};
+
+exports.testAddTextEnum = function(test) {
+	compareResourceEOE(test, "add/addTextEnum.pec");
 };
 
 exports.testAddTextInteger = function(test) {

@@ -25,8 +25,16 @@ exports.testSubDecimal = function(test) {
 	checkOutput(test, "sub/subDecimal.pec");
 };
 
+exports.testSubDecimalEnum = function(test) {
+	checkOutput(test, "sub/subDecimalEnum.pec");
+};
+
 exports.testSubInteger = function(test) {
 	checkOutput(test, "sub/subInteger.pec");
+};
+
+exports.testSubIntegerEnum = function(test) {
+	checkOutput(test, "sub/subIntegerEnum.pec");
 };
 
 exports.testSubPeriod = function(test) {

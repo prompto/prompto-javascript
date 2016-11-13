@@ -1,10 +1,12 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var EnumeratedNativeType = null;
 var NullType = null;
 var TupleValue = null;
 var SetValue = null;
 var ListValue = null;
 
 exports.resolve = function() {
+    EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
     NullType = require("./NullType").NullType;
     TupleValue = require("../value/TupleValue").TupleValue;
     SetValue = require("../value/SetValue").SetValue;
@@ -39,7 +41,9 @@ BaseType.prototype.isAssignableFrom = function(context, other) {
 
 
 BaseType.prototype.checkAdd = function(context, other, tryReverse) {
-    if(tryReverse)
+    if(other instanceof EnumeratedNativeType)
+        return this.checkAdd(context, other.derivedFrom, tryReverse);
+    else if(tryReverse)
         return other.checkAdd(context, this, false);
     else
 	    throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
@@ -47,25 +51,39 @@ BaseType.prototype.checkAdd = function(context, other, tryReverse) {
 
 
 BaseType.prototype.checkSubstract = function(context, other) {
-	throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkSubstract(context, other.derivedFrom);
+    else
+        throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
 };
 
 
 BaseType.prototype.checkDivide = function(context, other) {
-	throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkDivide(context, other.derivedFrom);
+    else
+        throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
 };
 
 
 BaseType.prototype.checkIntDivide = function(context, other) {
-	throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkIntDivide(context, other.derivedFrom);
+    else
+    	throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
 };
 
 BaseType.prototype.checkModulo = function(context, other) {
-	throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkModulo(context, other.derivedFrom);
+    else
+    	throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
 };
 
 BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
-    if(tryReverse)
+    if(other instanceof EnumeratedNativeType)
+        return this.checkMultiply(context, other.derivedFrom, tryReverse);
+    else if(tryReverse)
         return other.checkMultiply(context, this, false);
     else
 	    throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
@@ -76,22 +94,34 @@ BaseType.prototype.checkMinus = function(context) {
 };
 
 BaseType.prototype.checkCompare = function(context, other) {
-	throw new SyntaxError("Cannot compare " + this.name + " to " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkCompare(context, other.derivedFrom);
+    else
+    	throw new SyntaxError("Cannot compare " + this.name + " to " + other.name);
 };
 
 
 BaseType.prototype.checkContains = function(context, other) {
-	throw new SyntaxError(this.name + " cannot contain " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkContains(context, other.derivedFrom);
+    else
+    	throw new SyntaxError(this.name + " cannot contain " + other.name);
 };
 
 
 BaseType.prototype.checkContainsAllOrAny = function(context, other) {
-	throw new SyntaxError(this.name + " cannot contain " + other.name);
+    if(other instanceof EnumeratedNativeType)
+        return this.checkContainsAllOrAny(context, other.derivedFrom);
+    else
+    	throw new SyntaxError(this.name + " cannot contain " + other.name);
 };
 
 
 BaseType.prototype.checkItem = function(context, itemType) {
-	throw new SyntaxError("Cannot read item from " + this.name);
+    if(itemType instanceof EnumeratedNativeType)
+        return this.checkItem(context, itemType.derivedFrom);
+    else
+    	throw new SyntaxError("Cannot read item from " + this.name);
 };
 
 
