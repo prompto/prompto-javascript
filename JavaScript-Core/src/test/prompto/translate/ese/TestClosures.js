@@ -14,3 +14,7 @@ exports.testInstanceClosureNoArg = function(test) {
 	compareResourceESE(test, "closures/instanceClosureNoArg.pec");
 };
 
+exports.testParameterClosure = function(test) {
+	compareResourceESE(test, "closures/parameterClosure.pec");
+};
+

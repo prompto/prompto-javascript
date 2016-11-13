@@ -255,6 +255,14 @@ exports.testCategory2DerivedNoAttribute = function (test) {
     test.done();
 };
 
+exports.testMethodWith3Arguments = function (test) {
+    var statement = "myMethod with 3 as x, 7 as y and 22 as 7\n";
+    var parser = new ETestParser(statement, true);
+    var cd = parser.parse_statement();
+    test.ok(cd);
+    test.done();
+};
+
 
 exports.testMemberExpression = function (test) {
     var statement = "p.name";

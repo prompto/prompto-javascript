@@ -14,3 +14,7 @@ exports.testInstanceClosureNoArg = function(test) {
 	compareResourceEOE(test, "closures/instanceClosureNoArg.pec");
 };
 
+exports.testParameterClosure = function(test) {
+	compareResourceEOE(test, "closures/parameterClosure.pec");
+};
+

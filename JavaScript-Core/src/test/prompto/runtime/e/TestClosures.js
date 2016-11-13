@@ -25,3 +25,7 @@ exports.testInstanceClosureNoArg = function(test) {
 	checkOutput(test, "closures/instanceClosureNoArg.pec");
 };
 
+exports.testParameterClosure = function(test) {
+	checkOutput(test, "closures/parameterClosure.pec");
+};
+
