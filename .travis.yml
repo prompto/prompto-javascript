@@ -17,3 +17,5 @@ before_script:
   - cp -r JavaScript-Runtime/src/test/library/e JavaScript-Core/src/test/library/e
   - chmod 777 ./test.sh
 #  - ls -all -R
+script:
+  - bash ./test.sh
