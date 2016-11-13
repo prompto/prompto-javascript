@@ -42,7 +42,7 @@ echo "Testing framework libraries ..."
 nodeunit JavaScript-Core/src/test/library/e/
 RESULT+=$?
 echo ""
-echo $RESULT
+exit $RESULT
 
 # to debug a failing test:
 # place a 'debugger' instruction where you want to break
