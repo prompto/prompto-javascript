@@ -589,7 +589,7 @@ Context.prototype.loadSingleton = function(type) {
             var decl = this.declarations[type.name] || null;
             if(!(decl instanceof ConcreteCategoryDeclaration))
                 throw new InternalError("No such singleton:" + type.name);
-            value = new ConcreteInstance(decl);
+            value = new ConcreteInstance(this, decl);
             value.mutable = true; // a singleton is protected by "with x do", so always mutable in that context
             this.values[type.name] = value;
         }

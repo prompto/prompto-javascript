@@ -21,25 +21,34 @@ CategoryDeclaration.prototype.getDeclarationType = function() {
 };
 
 CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) {
-    var instance = this.newInstance();
+    var instance = this.newInstance(context);
     instance.mutable = true;
     try {
         var dbId = stored.dbId;
         var value = TypeUtils.convertFromJavaScript(dbId);
         instance.setMember(context, "dbId", value);
-        this.attributes.forEach(function(attr) {
-            var name = attr.name;
+        var allAttributes = this.getAllAttributes(context);
+        for(var name in allAttributes) {
             var decl = context.getRegisteredDeclaration(name);
             if (decl.storable) {
                 var data = stored.getData(name);
                 var value = data==null ? NullValue.instance : decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null)
                 instance.setMember(context, name, value);
             }
-        });
+        }
     } finally {
         instance.mutable = false;
     }
     return instance;
+};
+
+CategoryDeclaration.prototype.getAllAttributes = function(context) {
+    if(this.attributes) {
+        var result = {};
+        this.attributes.map(function(id) { result[id] = id; });
+        return result;
+    } else
+        return null;
 };
 
 

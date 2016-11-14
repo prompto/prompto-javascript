@@ -18,12 +18,12 @@ exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
 };
 
-function ConcreteInstance(declaration) {
+function ConcreteInstance(context, declaration) {
     Instance.call(this, new CategoryType(declaration.id));
 	this.declaration = declaration;
     this.storable = false;
     if(declaration.storable) {
-        var categories = declaration.collectCategories();
+        var categories = declaration.collectCategories(context);
         this.storable = DataStore.instance.newStorableDocument(categories);
     }
     this.mutable = false;

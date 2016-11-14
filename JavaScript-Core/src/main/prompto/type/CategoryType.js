@@ -235,8 +235,8 @@ CategoryType.prototype.isDerivedFromAnonymousCategory = function(context, thisDe
     // check we derive from root category (if not extending 'Any')
     if("any"!=baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
         return false;
-    for(var i=0;i<otherDecl.attributes.length;i++) {
-        var id = otherDecl.attributes[i];
+    var allAttributes = otherDecl.getAllAttributes(context);
+    for(var id in allAttributes.length) {
         if(!thisDecl.hasAttribute(context, id.name)) {
             return false;
         }
@@ -286,7 +286,7 @@ CategoryType.prototype.scoreMostSpecific = function(context, t1, t2) {
 
 CategoryType.prototype.newInstance = function(context) {
 	var decl = context.getRegisteredDeclaration(this.name);
-	return decl.newInstance();
+	return decl.newInstance(context);
 };
 
 

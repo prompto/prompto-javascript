@@ -3,6 +3,8 @@ var SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodD
 var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
 var MethodDeclarationMap = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+var mergeObjects = require("../utils/Utils").mergeObjects;
+
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -196,9 +198,30 @@ ConcreteCategoryDeclaration.isAncestorDerivedFrom = function(ancestor, context, 
 	return actual.isDerivedFrom(context, categoryType);
 };
 
-ConcreteCategoryDeclaration.prototype.newInstance = function() {
-	return new ConcreteInstance(this);
+ConcreteCategoryDeclaration.prototype.newInstance = function(context) {
+	return new ConcreteInstance(context, this);
 };
+
+ConcreteCategoryDeclaration.prototype.getAllAttributes = function(context) {
+    var result = CategoryDeclaration.prototype.getAllAttributes.call(this, context) || {};
+    if(this.derivedFrom!=null) {
+        this.derivedFrom.map(function (id) {
+            var more = this.getAncestorAttributes(context, id);
+            if (more != null)
+                result = mergeObjects(result, more);
+        }, this);
+    }
+    return Object.getOwnPropertyNames(result).length==0 ? null : result;
+};
+
+ConcreteCategoryDeclaration.prototype.getAncestorAttributes = function(context, id) {
+    var decl = context.getRegisteredDeclaration(id.name);
+    if(decl==null)
+        return null;
+    else
+        return decl.getAllAttributes(context);
+};
+
 
 ConcreteCategoryDeclaration.prototype.findGetter = function(context, attrName) {
 	if(this.methodsMap==null) {
@@ -350,7 +373,7 @@ ConcreteCategoryDeclaration.prototype.collectCategories = function(context) {
 
 ConcreteCategoryDeclaration.prototype.doCollectCategories = function(context, cat_set, cat_list) {
     if (this.derivedFrom != null) {
-        derivedFrom.forEach(function (cat) {
+        this.derivedFrom.forEach(function (cat) {
             var decl = context.getRegisteredDeclaration(cat);
             decl.doCollectCategories(context, cat_set, cat_list);
         });
