@@ -167,6 +167,17 @@ function utf8BufferToString(buffer) {
     return chars.join("");
 };
 
+function mergeObjects() {
+    var res = {};
+    [].map.call(arguments, function(o) {
+        Object.getOwnPropertyNames(o).map(function(n) {
+            res[n] = o[n];
+        });
+    });
+    return res;
+}
+
+exports.mergeObjects = mergeObjects;
 exports.equalObjects = equalObjects;
 exports.equalArrays = equalArrays;
 exports.arrayContains = arrayContains;
