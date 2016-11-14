@@ -236,8 +236,8 @@ CategoryType.prototype.isDerivedFromAnonymousCategory = function(context, thisDe
     if("any"!=baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
         return false;
     var allAttributes = otherDecl.getAllAttributes(context);
-    for(var id in allAttributes.length) {
-        if(!thisDecl.hasAttribute(context, id.name)) {
+    for(var name in allAttributes) {
+        if(!thisDecl.hasAttribute(context, name)) {
             return false;
         }
     }
