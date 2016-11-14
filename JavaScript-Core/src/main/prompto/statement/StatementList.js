@@ -2,6 +2,7 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var TypeMap = require("../type/TypeMap").TypeMap;
 var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
+var PromptoError = require("../error/PromptoError").PromptoError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var NativeCall = require("./NativeCall").NativeCall;
@@ -60,7 +61,8 @@ StatementList.prototype.interpret = function(context) {
 		if(e instanceof ReferenceError) {
 			throw new NullReferenceError();
 		} else {
-            console.trace();
+            if(!(e instanceof PromptoError))
+                console.trace();
 			throw e;
 		}
 	}
@@ -73,7 +75,8 @@ StatementList.prototype.interpretNative = function(context, returnType) {
         if(e instanceof ReferenceError) {
             throw new NullReferenceError();
         } else {
-            console.trace();
+            if(!(e instanceof PromptoError))
+                console.trace();
             throw e;
         }
     }
