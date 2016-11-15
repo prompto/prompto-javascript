@@ -6,7 +6,7 @@ var StorableDocument = null;
 // a utility class for running unit tests only
 function MemStore() {
     Store.call(this);
-    this.documents = {};
+    this.iterDocuments = {};
     this.nextDbId = 1;
     return this;
 }
@@ -27,26 +27,26 @@ MemStore.prototype.isDbIdType = function(type) {
 MemStore.prototype.store = function(todel, toadd) {
     if(todel) {
         todel.forEach(function(dbId) {
-            delete this.documents[dbId];
+            delete this.iterDocuments[dbId];
         }, this);
     }
     if(toadd) {
         toadd.forEach(function(doc) {
             var data = doc.document;
             if(data.dbId)
-                this.documents[data.dbId] = data;
+                this.iterDocuments[data.dbId] = data;
         }, this);
     }
 };
 
 MemStore.prototype.fetchUnique = function(dbId) {
-    return this.documents[dbId] || null;
+    return this.iterDocuments[dbId] || null;
 };
 
 
 MemStore.prototype.fetchOne = function(query) {
-    for (dbId in this.documents) {
-        doc = this.documents[dbId];
+    for (dbId in this.iterDocuments) {
+        doc = this.iterDocuments[dbId];
         if(doc.matches(query.predicate))
             return doc;
     }
@@ -55,10 +55,11 @@ MemStore.prototype.fetchOne = function(query) {
 
 
 MemStore.prototype.fetchMany = function(query) {
-    docs = this.fetchMatching(query);
+    var docs = this.fetchMatching(query);
+    var totalCount = docs.length;
     docs = this.sort(query, docs);
     docs = this.slice(query, docs);
-    return new StoredIterator(docs);
+    return new StoredIterator(docs, totalCount);
 };
 
 MemStore.prototype.slice = function(query, docs) {
@@ -120,8 +121,8 @@ MemStore.prototype.readValue = function(doc, orderBy) {
 
 MemStore.prototype.fetchMatching = function(query) {
     var docs = [];
-    for (dbId in this.documents) {
-        doc = this.documents[dbId];
+    for (dbId in this.iterDocuments) {
+        doc = this.iterDocuments[dbId];
         if(doc.matches(query.predicate))
             docs.push(doc);
     }
@@ -139,9 +140,10 @@ MemStore.prototype.newStorableDocument = function(categories) {
     return new StorableDocument(categories);
 };
 
-function StoredIterator(docs) {
+function StoredIterator(docs, totalCount) {
     this.index = 0;
-    this.length = function() { return docs.length; };
+    this.count = function() { return docs.length; };
+    this.totalCount = function() { return totalCount; };
     this.hasNext = function() { return this.index < docs.length; };
     this.next = function() { return docs[this.index++]; };
     return this;

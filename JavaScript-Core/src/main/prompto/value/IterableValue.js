@@ -22,7 +22,7 @@ IterableValue.prototype.isEmpty = function() {
 };
 
 IterableValue.prototype.length = function() {
-    return this.documents.length();
+    return this.iterDocuments.length();
 };
 
 IterableValue.prototype.getIterator = function() {

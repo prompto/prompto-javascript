@@ -134,9 +134,9 @@ FetchManyExpression.prototype.checkSlice = function(context) {
 FetchManyExpression.prototype.interpret = function(context) {
     var store = DataStore.instance;
     var query = this.buildFetchManyQuery(context, store);
-    var docs = store.fetchMany(query);
+    var results = store.fetchMany(query);
     typ = this.typ==null ? AnyType.instance : this.typ;
-    return new Cursor(context, typ, docs);
+    return new Cursor(context, typ, results);
 };
 
 

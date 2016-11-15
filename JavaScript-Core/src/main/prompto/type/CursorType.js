@@ -30,6 +30,8 @@ CursorType.prototype.checkIterator = function(context) {
 CursorType.prototype.checkMember = function(context, name) {
     if ("count"===name)
         return IntegerType.instance;
+    else if ("totalCount"===name)
+        return IntegerType.instance;
     else
         return IterableType.prototype.checkMember.call(this, context, name);
 };

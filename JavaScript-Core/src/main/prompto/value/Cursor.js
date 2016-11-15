@@ -4,10 +4,10 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var Integer = require("./Integer").Integer;
 var Value = require("./Value").Value;
 
-function Cursor(context, itemType, docs) {
+function Cursor(context, itemType, iterDocs) {
     Value.call(this, new CursorType(itemType));
     this.context = context;
-    this.documents = docs;
+    this.iterDocuments = iterDocs;
     this.mutable = itemType.mutable || false;
     return this;
 };
@@ -20,9 +20,15 @@ Cursor.prototype.isEmpty = function() {
     return this.length()==0;
 };
 
-Cursor.prototype.length = function() {
-    return this.documents.length();
+Cursor.prototype.count = function() {
+    return this.iterDocuments.count();
 };
+
+
+Cursor.prototype.totalCount = function() {
+    return this.iterDocuments.totalCount();
+};
+
 
 Cursor.prototype.getIterator = function() {
     return this;
@@ -30,11 +36,11 @@ Cursor.prototype.getIterator = function() {
 
 
 Cursor.prototype.hasNext = function() {
-    return this.documents.hasNext();
+    return this.iterDocuments.hasNext();
 };
 
 Cursor.prototype.next = function() {
-    var stored = this.documents.next();
+    var stored = this.iterDocuments.next();
     var itemType = this.readItemType(stored);
     return itemType.newInstanceFromStored(this.context, stored);
 };
@@ -50,7 +56,9 @@ Cursor.prototype.readItemType = function(stored) {
 
 Cursor.prototype.getMember = function(context, name) {
     if ("count" == name)
-        return new Integer(this.length());
+        return new Integer(this.count());
+    else if ("totalCount" == name)
+        return new Integer(this.totalCount());
     else
         throw new InvalidDataError("No such member:" + name);
 };
