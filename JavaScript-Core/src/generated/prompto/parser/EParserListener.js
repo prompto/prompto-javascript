@@ -632,15 +632,6 @@ EParserListener.prototype.exitIntDivideExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#ReadExpression.
-EParserListener.prototype.enterReadExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ReadExpression.
-EParserListener.prototype.exitReadExpression = function(ctx) {
-};
-
-
 // Enter a parse tree produced by EParser#TernaryExpression.
 EParserListener.prototype.enterTernaryExpression = function(ctx) {
 };
@@ -755,6 +746,15 @@ EParserListener.prototype.enterLessThanOrEqualExpression = function(ctx) {
 
 // Exit a parse tree produced by EParser#LessThanOrEqualExpression.
 EParserListener.prototype.exitLessThanOrEqualExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#ReadOneExpression.
+EParserListener.prototype.enterReadOneExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ReadOneExpression.
+EParserListener.prototype.exitReadOneExpression = function(ctx) {
 };
 
 
@@ -974,6 +974,15 @@ EParserListener.prototype.exitInstanceExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#ReadAllExpression.
+EParserListener.prototype.enterReadAllExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ReadAllExpression.
+EParserListener.prototype.exitReadAllExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#ContainsAnyExpression.
 EParserListener.prototype.enterContainsAnyExpression = function(ctx) {
 };
@@ -1142,15 +1151,6 @@ EParserListener.prototype.enterConstructorNoFrom = function(ctx) {
 
 // Exit a parse tree produced by EParser#ConstructorNoFrom.
 EParserListener.prototype.exitConstructorNoFrom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#read_expression.
-EParserListener.prototype.enterRead_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#read_expression.
-EParserListener.prototype.exitRead_expression = function(ctx) {
 };
 
 
@@ -2519,6 +2519,24 @@ EParserListener.prototype.enterIsOtherExpression = function(ctx) {
 
 // Exit a parse tree produced by EParser#IsOtherExpression.
 EParserListener.prototype.exitIsOtherExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#read_all_expression.
+EParserListener.prototype.enterRead_all_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#read_all_expression.
+EParserListener.prototype.exitRead_all_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#read_one_expression.
+EParserListener.prototype.enterRead_one_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#read_one_expression.
+EParserListener.prototype.exitRead_one_expression = function(ctx) {
 };
 
 

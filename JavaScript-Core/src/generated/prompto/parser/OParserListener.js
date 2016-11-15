@@ -1064,15 +1064,6 @@ OParserListener.prototype.exitDocument_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#read_expression.
-OParserListener.prototype.enterRead_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#read_expression.
-OParserListener.prototype.exitRead_expression = function(ctx) {
-};
-
-
 // Enter a parse tree produced by OParser#write_statement.
 OParserListener.prototype.enterWrite_statement = function(ctx) {
 };
@@ -2420,6 +2411,24 @@ OParserListener.prototype.enterIsOtherExpression = function(ctx) {
 
 // Exit a parse tree produced by OParser#IsOtherExpression.
 OParserListener.prototype.exitIsOtherExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#read_all_expression.
+OParserListener.prototype.enterRead_all_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#read_all_expression.
+OParserListener.prototype.exitRead_all_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#read_one_expression.
+OParserListener.prototype.enterRead_one_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#read_one_expression.
+OParserListener.prototype.exitRead_one_expression = function(ctx) {
 };
 
 

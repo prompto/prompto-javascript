@@ -2006,9 +2006,16 @@ OPromptoBuilder.prototype.exitEnum_declaration = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitRead_expression = function(ctx) {
+OPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 	var source = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new expression.ReadExpression(source));
+	this.setNodeValue(ctx, new expression.ReadAllExpression(source));
+};
+
+
+
+OPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadOneExpression(source));
 };
 
 

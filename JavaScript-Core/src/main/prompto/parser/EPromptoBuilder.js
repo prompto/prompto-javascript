@@ -1979,16 +1979,32 @@ EPromptoBuilder.prototype.exitEnum_declaration = function(ctx) {
 };
 
 
-EPromptoBuilder.prototype.exitRead_expression = function(ctx) {
+EPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 	var source = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new expression.ReadExpression(source));
+	this.setNodeValue(ctx, new expression.ReadAllExpression(source));
 };
 
 
-EPromptoBuilder.prototype.exitReadExpression = function(ctx) {
+EPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadOneExpression(source));
+};
+
+
+
+EPromptoBuilder.prototype.exitReadAllExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);
 };
+
+
+
+EPromptoBuilder.prototype.exitReadOneExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+
 
 EPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
     var name = this.getNodeValue(ctx.typ);
@@ -1997,16 +2013,21 @@ EPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
     this.setNodeValue(ctx, new statement.WithSingletonStatement(typ, stmts));
 };
 
+
+
 EPromptoBuilder.prototype.exitWithSingletonStatement = function(ctx) {
     var stmt = this.getNodeValue(ctx.stmt);
     this.setNodeValue(ctx, stmt);
 };
+
+
 
 EPromptoBuilder.prototype.exitWrite_statement = function(ctx) {
 	var what = this.getNodeValue(ctx.what);
 	var target = this.getNodeValue(ctx.target);
 	this.setNodeValue(ctx, new statement.WriteStatement(what, target));
 };
+
 
 
 EPromptoBuilder.prototype.exitWith_resource_statement = function(ctx) {
@@ -2016,15 +2037,18 @@ EPromptoBuilder.prototype.exitWith_resource_statement = function(ctx) {
 };
 
 
+
 EPromptoBuilder.prototype.exitAnyType = function(ctx) {
 	this.setNodeValue(ctx, type.AnyType.instance);
 };
+
 
 
 EPromptoBuilder.prototype.exitAnyListType = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	this.setNodeValue(ctx, new type.ListType(type));
 };
+
 
 
 EPromptoBuilder.prototype.exitAnyDictType = function(ctx) {

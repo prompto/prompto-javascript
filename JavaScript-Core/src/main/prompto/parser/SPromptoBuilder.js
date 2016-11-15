@@ -1952,10 +1952,19 @@ SPromptoBuilder.prototype.exitEnum_declaration = function(ctx) {
 };
 
 
-SPromptoBuilder.prototype.exitRead_expression = function(ctx) {
+
+SPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 	var source = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new expression.ReadExpression(source));
+	this.setNodeValue(ctx, new expression.ReadAllExpression(source));
 };
+
+
+
+SPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadOneExpression(source));
+};
+
 
 
 

@@ -1082,15 +1082,6 @@ SParserListener.prototype.exitArgument_assignment = function(ctx) {
 };
 
 
-// Enter a parse tree produced by SParser#read_expression.
-SParserListener.prototype.enterRead_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by SParser#read_expression.
-SParserListener.prototype.exitRead_expression = function(ctx) {
-};
-
-
 // Enter a parse tree produced by SParser#write_statement.
 SParserListener.prototype.enterWrite_statement = function(ctx) {
 };
@@ -2402,6 +2393,24 @@ SParserListener.prototype.enterIsOtherExpression = function(ctx) {
 
 // Exit a parse tree produced by SParser#IsOtherExpression.
 SParserListener.prototype.exitIsOtherExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#read_all_expression.
+SParserListener.prototype.enterRead_all_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#read_all_expression.
+SParserListener.prototype.exitRead_all_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by SParser#read_one_expression.
+SParserListener.prototype.enterRead_one_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by SParser#read_one_expression.
+SParserListener.prototype.exitRead_one_expression = function(ctx) {
 };
 
 
