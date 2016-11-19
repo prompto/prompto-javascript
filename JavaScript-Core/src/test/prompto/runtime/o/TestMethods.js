@@ -29,6 +29,10 @@ exports.testE_as_e_bug = function(test) {
 	checkOutput(test, "methods/e_as_e_bug.poc");
 };
 
+exports.testExplicit = function(test) {
+	checkOutput(test, "methods/explicit.poc");
+};
+
 exports.testExpressionWith = function(test) {
 	checkOutput(test, "methods/expressionWith.poc");
 };

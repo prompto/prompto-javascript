@@ -18,6 +18,10 @@ exports.testE_as_e_bug = function(test) {
 	compareResourceOEO(test, "methods/e_as_e_bug.poc");
 };
 
+exports.testExplicit = function(test) {
+	compareResourceOEO(test, "methods/explicit.poc");
+};
+
 exports.testExpressionWith = function(test) {
 	compareResourceOEO(test, "methods/expressionWith.poc");
 };

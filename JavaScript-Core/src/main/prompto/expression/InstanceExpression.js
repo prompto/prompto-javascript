@@ -5,6 +5,7 @@ var Argument = require("../argument/Argument").Argument;
 var Dialect = require("../parser/Dialect").Dialect;
 var CategoryDeclaration = null;
 var MethodType = require("../type/MethodType").MethodType;
+var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var MethodDeclarationMap = null;
 
@@ -66,7 +67,17 @@ InstanceExpression.prototype.check = function(context) {
 };
 
 InstanceExpression.prototype.interpret = function(context) {
-	return context.getValue(this.id);
+    if(context.hasValue(this.id)) {
+        return context.getValue(this.id);
+    } else {
+        var named = context.getRegistered(this.id);
+        if (named instanceof MethodDeclarationMap) {
+            var decl = named.getFirst();
+            return new ClosureValue(context, new MethodType(decl))
+        } else {
+            throw new SyntaxError("No method with name:" + this.name);
+        }
+    }
 };
 
 exports.InstanceExpression = InstanceExpression;
