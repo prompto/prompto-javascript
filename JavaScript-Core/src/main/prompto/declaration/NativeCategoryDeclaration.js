@@ -62,8 +62,8 @@ NativeCategoryDeclaration.prototype.bodyToODialect = function(writer) {
     }
 };
 
-NativeCategoryDeclaration.prototype.toSDialect = function(writer) {
-    this.protoToSDialect(writer, null);
+NativeCategoryDeclaration.prototype.toMDialect = function(writer) {
+    this.protoToMDialect(writer, null);
     writer.indent();
     writer.newLine();
     this.categoryBindings.toDialect(writer);
@@ -78,7 +78,7 @@ NativeCategoryDeclaration.prototype.toSDialect = function(writer) {
     writer.newLine();
 };
 
-NativeCategoryDeclaration.prototype.categoryTypeToSDialect = function(writer) {
+NativeCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) {
     writer.append("native category");
 };
 

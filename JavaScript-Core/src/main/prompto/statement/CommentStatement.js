@@ -51,7 +51,7 @@ CommentStatement.prototype.toDialect = function(writer) {
                 writer.newLine();
             }
             break;
-        case Dialect.S:
+        case Dialect.M:
             lines.forEach(function (line) {
                 writer.append("#")
                 writer.append(line)

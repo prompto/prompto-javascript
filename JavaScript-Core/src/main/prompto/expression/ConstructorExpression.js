@@ -35,7 +35,7 @@ ConstructorExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 }
 
-ConstructorExpression.prototype.toSDialect = function(writer) {
+ConstructorExpression.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 }
 

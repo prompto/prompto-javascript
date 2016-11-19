@@ -48,7 +48,7 @@ WhileStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
 
-WhileStatement.prototype.toSDialect = function(writer) {
+WhileStatement.prototype.toMDialect = function(writer) {
     this.toEDialect(writer);
 }
 

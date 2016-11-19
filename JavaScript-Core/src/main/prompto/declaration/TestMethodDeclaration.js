@@ -128,7 +128,7 @@ TestMethodDeclaration.prototype.toDialect = function(writer)
     writer.toDialect(this);
 };
 
-TestMethodDeclaration.prototype.toSDialect = function(writer)
+TestMethodDeclaration.prototype.toMDialect = function(writer)
 {
     writer.append ("def test ");
     writer.append (this.name);

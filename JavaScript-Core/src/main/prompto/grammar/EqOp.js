@@ -22,7 +22,7 @@ EqOp.IS.toEString = function(dialect) {
     return 'is';
 };
 EqOp.IS.toOString = EqOp.IS.toEString;
-EqOp.IS.toSString = EqOp.IS.toEString;
+EqOp.IS.toMString = EqOp.IS.toEString;
 
 EqOp.IS_NOT = new EqOp("IS_NOT");
 EqOp.IS_NOT.toDialect = function(writer) {
@@ -32,7 +32,7 @@ EqOp.IS_NOT.toEString = function(dialect) {
     return 'is not';
 };
 EqOp.IS_NOT.toOString = EqOp.IS_NOT.toEString;
-EqOp.IS_NOT.toSString = EqOp.IS_NOT.toEString;
+EqOp.IS_NOT.toMString = EqOp.IS_NOT.toEString;
 
 
 EqOp.IS_A = new EqOp("IS_A");
@@ -43,7 +43,7 @@ EqOp.IS_A.toEString = function(dialect) {
     return 'is a';
 };
 EqOp.IS_A.toOString = EqOp.IS_A.toEString;
-EqOp.IS_A.toSString = EqOp.IS_A.toEString;
+EqOp.IS_A.toMString = EqOp.IS_A.toEString;
 
 EqOp.IS_NOT_A = new EqOp("IS_NOT_A");
 EqOp.IS_NOT_A.toDialect = function(writer) {
@@ -53,7 +53,7 @@ EqOp.IS_NOT_A.toEString = function(dialect) {
     return 'is not a';
 };
 EqOp.IS_NOT_A.toOString = EqOp.IS_NOT_A.toEString;
-EqOp.IS_NOT_A.toSString = EqOp.IS_NOT_A.toEString;
+EqOp.IS_NOT_A.toMString = EqOp.IS_NOT_A.toEString;
 
 EqOp.EQUALS = new EqOp("EQUALS");
 EqOp.EQUALS.toEDialect = function(writer) {
@@ -62,7 +62,7 @@ EqOp.EQUALS.toEDialect = function(writer) {
 EqOp.EQUALS.toODialect = function(writer) {
     writer.append('==');
 };
-EqOp.EQUALS.toSDialect = function(writer) {
+EqOp.EQUALS.toMDialect = function(writer) {
     writer.append('==');
 };
 EqOp.EQUALS.toEString = function() {
@@ -71,7 +71,7 @@ EqOp.EQUALS.toEString = function() {
 EqOp.EQUALS.toOString = function() {
     return '==';
 };
-EqOp.EQUALS.toSString = function() {
+EqOp.EQUALS.toMString = function() {
     return '==';
 };
 
@@ -82,7 +82,7 @@ EqOp.NOT_EQUALS.toEDialect = function(writer) {
 EqOp.NOT_EQUALS.toODialect = function(writer) {
     writer.append('!=');
 };
-EqOp.NOT_EQUALS.toSDialect = function(writer) {
+EqOp.NOT_EQUALS.toMDialect = function(writer) {
     writer.append('!=');
 };
 EqOp.NOT_EQUALS.toEString = function() {
@@ -91,7 +91,7 @@ EqOp.NOT_EQUALS.toEString = function() {
 EqOp.NOT_EQUALS.toOString = function() {
     return '!=';
 };
-EqOp.NOT_EQUALS.toSString = function() {
+EqOp.NOT_EQUALS.toMString = function() {
     return '!=';
 };
 
@@ -102,7 +102,7 @@ EqOp.ROUGHLY.toEDialect = function(writer) {
 EqOp.ROUGHLY.toODialect = function(writer) {
     writer.append('~=');
 };
-EqOp.ROUGHLY.toSDialect = function(writer) {
+EqOp.ROUGHLY.toMDialect = function(writer) {
     writer.append('~=');
 };
 EqOp.ROUGHLY.toEString = function() {
@@ -111,7 +111,7 @@ EqOp.ROUGHLY.toEString = function() {
 EqOp.ROUGHLY.toOString = function() {
     return '~=';
 };
-EqOp.ROUGHLY.toSString = function() {
+EqOp.ROUGHLY.toMString = function() {
     return '~=';
 };
 

@@ -59,7 +59,7 @@ WithResourceStatement.prototype.toODialect = function(writer) {
     }
 }
 
-WithResourceStatement.prototype.toSDialect = function(writer) {
+WithResourceStatement.prototype.toMDialect = function(writer) {
     writer.append("with ");
     this.resource.toDialect(writer);
     writer.append(":\n");

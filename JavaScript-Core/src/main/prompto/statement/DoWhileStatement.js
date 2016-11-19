@@ -48,7 +48,7 @@ DoWhileStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
 
-DoWhileStatement.prototype.toSDialect = function(writer) {
+DoWhileStatement.prototype.toMDialect = function(writer) {
     this.toEDialect(writer);
 };
 

@@ -34,7 +34,7 @@ NativeResourceDeclaration.prototype.categoryTypeToODialect = function(writer) {
     writer.append("native resource");
 };
 
-NativeResourceDeclaration.prototype.categoryTypeToSDialect = function(writer) {
+NativeResourceDeclaration.prototype.categoryTypeToMDialect = function(writer) {
     writer.append("native resource");
 };
 

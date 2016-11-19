@@ -32,7 +32,7 @@ EnumeratedNativeDeclaration.prototype.toDialect = function(writer) {
 };
 
 
-EnumeratedNativeDeclaration.prototype.toSDialect = function(writer) {
+EnumeratedNativeDeclaration.prototype.toMDialect = function(writer) {
     writer.append("enum ");
     writer.append(this.name);
     writer.append('(');

@@ -44,7 +44,7 @@ RaiseStatement.prototype.interpret = function(context) {
 RaiseStatement.prototype.toDialect = function(writer) {
     switch(writer.dialect) {
         case Dialect.E:
-        case Dialect.S:
+        case Dialect.M:
             writer.append("raise ");
             break;
         case Dialect.O:

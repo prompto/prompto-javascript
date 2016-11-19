@@ -176,10 +176,10 @@ CategoryDeclaration.prototype.categoryExtensionToODialect = function(writer) {
 };
 
 
-CategoryDeclaration.prototype.protoToSDialect = function(writer, derivedFrom) {
+CategoryDeclaration.prototype.protoToMDialect = function(writer, derivedFrom) {
     if(this.storable)
         writer.append("storable ");
-    this.categoryTypeToSDialect(writer);
+    this.categoryTypeToMDialect(writer);
     writer.append(" ");
     writer.append(this.name);
     writer.append("(");

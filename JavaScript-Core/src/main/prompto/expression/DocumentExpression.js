@@ -95,7 +95,7 @@ DocumentExpression.prototype.toEDialect = function(writer) {
     }
 };
 
-DocumentExpression.prototype.toSDialect = function(writer) {
+DocumentExpression.prototype.toMDialect = function(writer) {
     writer.append("Document(");
     if (this.source)
         this.source.toDialect(writer);

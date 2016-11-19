@@ -1,15 +1,15 @@
 exports.EParserListener = require("./EParserListener").EParserListener;
 exports.OParserListener = require("./OParserListener").OParserListener;
-exports.SParserListener = require("./SParserListener").SParserListener;
+exports.MParserListener = require("./MParserListener").MParserListener;
 exports.EParser = require("./EParser").EParser;
 exports.OParser = require("./OParser").OParser;
-exports.SParser = require("./SParser").SParser;
+exports.MParser = require("./MParser").MParser;
 exports.ECleverParser = require('./ECleverParser').ECleverParser;
 exports.OCleverParser = require('./OCleverParser').OCleverParser;
-exports.SCleverParser = require('./SCleverParser').SCleverParser;
+exports.MCleverParser = require('./MCleverParser').MCleverParser;
 exports.EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
 exports.OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
-exports.SPromptoBuilder = require("./SPromptoBuilder").SPromptoBuilder;
+exports.MPromptoBuilder = require("./MPromptoBuilder").MPromptoBuilder;
 exports.Dialect = require("./Dialect").Dialect;
 exports.Section = require("./Section").Section;
 

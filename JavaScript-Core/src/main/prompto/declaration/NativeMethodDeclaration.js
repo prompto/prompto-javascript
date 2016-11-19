@@ -42,7 +42,7 @@ NativeMethodDeclaration.prototype.castToReturnType = function(context, value) {
     return value;
 };
 
-NativeMethodDeclaration.prototype.toSDialect = function(writer) {
+NativeMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def native ");
     writer.append(this.name);
     writer.append(" (");

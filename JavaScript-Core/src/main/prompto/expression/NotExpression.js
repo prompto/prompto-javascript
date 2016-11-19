@@ -15,7 +15,7 @@ NotExpression.prototype.toString = function() {
 NotExpression.prototype.operatorToDialect = function(dialect) {
     switch(dialect) {
         case Dialect.E:
-        case Dialect.S:
+        case Dialect.M:
             return "not ";
         case Dialect.O:
             return "! ";
@@ -33,7 +33,7 @@ NotExpression.prototype.toEDialect = function(writer) {
     writer.append("not ");
 };
 
-NotExpression.prototype.toSDialect = function(writer) {
+NotExpression.prototype.toMDialect = function(writer) {
     writer.append("not ");
 };
 

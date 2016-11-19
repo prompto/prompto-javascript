@@ -16,7 +16,7 @@ SingletonCategoryDeclaration.prototype.categoryTypeToODialect = function(writer)
     writer.append("singleton");
 };
 
-SingletonCategoryDeclaration.prototype.categoryTypeToSDialect = function(writer) {
+SingletonCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) {
     writer.append("singleton");
 };
 

@@ -60,18 +60,18 @@ ConcreteCategoryDeclaration.prototype.bodyToODialect = function(writer) {
 };
 
 
-ConcreteCategoryDeclaration.prototype.toSDialect = function(writer) {
-    this.protoToSDialect(writer, this.derivedFrom);
-    this.methodsToSDialect(writer);
+ConcreteCategoryDeclaration.prototype.toMDialect = function(writer) {
+    this.protoToMDialect(writer, this.derivedFrom);
+    this.methodsToMDialect(writer);
 };
 
 
-ConcreteCategoryDeclaration.prototype.categoryTypeToSDialect = function(writer) {
+ConcreteCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) {
     writer.append("class");
 };
 
 
-ConcreteCategoryDeclaration.prototype.methodsToSDialect = function(writer) {
+ConcreteCategoryDeclaration.prototype.methodsToMDialect = function(writer) {
     writer.indent();
     if(this.methods==null || this.methods.length==0)
         writer.append("pass\n");

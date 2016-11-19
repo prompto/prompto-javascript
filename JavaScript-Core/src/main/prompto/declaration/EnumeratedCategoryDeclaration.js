@@ -98,7 +98,7 @@ EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-EnumeratedCategoryDeclaration.prototype.toSDialect = function(writer) {
+EnumeratedCategoryDeclaration.prototype.toMDialect = function(writer) {
     writer.append("enum ");
     writer.append(this.name);
     writer.append("(");

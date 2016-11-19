@@ -136,7 +136,7 @@ ForEachStatement.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-ForEachStatement.prototype.toSDialect = function(writer) {
+ForEachStatement.prototype.toMDialect = function(writer) {
     writer.append("for ");
     writer.append(this.v1.name);
     if(this.v2!=null) {

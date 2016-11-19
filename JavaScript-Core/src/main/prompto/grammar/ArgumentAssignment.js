@@ -45,7 +45,7 @@ ArgumentAssignment.prototype.toODialect = function(writer) {
     this.expression.toDialect(writer);
 };
 
-ArgumentAssignment.prototype.toSDialect = function(writer) {
+ArgumentAssignment.prototype.toMDialect = function(writer) {
     if(this.argument!=null) {
         writer.append(this.argument.name);
         writer.append(" = ");

@@ -31,7 +31,7 @@ FlushStatement.prototype.toEDialect = function(writer) {
 };
 
 
-FlushStatement.prototype.toSDialect = function(writer) {
+FlushStatement.prototype.toMDialect = function(writer) {
     writer.append("flush()");
 };
 

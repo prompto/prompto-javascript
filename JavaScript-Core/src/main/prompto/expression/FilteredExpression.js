@@ -82,7 +82,7 @@ FilteredExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 };
 
-FilteredExpression.prototype.toSDialect = function(writer) {
+FilteredExpression.prototype.toMDialect = function(writer) {
     this.toEDialect(writer);
 };
 

@@ -69,7 +69,7 @@ AttributeDeclaration.prototype.toODialect = function(writer) {
     writer.append(';');
 };
 
-AttributeDeclaration.prototype.toSDialect = function(writer) {
+AttributeDeclaration.prototype.toMDialect = function(writer) {
     if(this.storable)
         writer.append("storable ");
     writer.append("attr ");

@@ -26,7 +26,7 @@ NativeCategoryBindingList.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-NativeCategoryBindingList.prototype.toSDialect = function(writer) {
+NativeCategoryBindingList.prototype.toMDialect = function(writer) {
     writer.append("def category bindings:\n");
     writer.indent();
     this.forEach(function(binding) {

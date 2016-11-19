@@ -72,7 +72,7 @@ BlobExpression.prototype.toODialect = function(writer) {
     writer.append(')');
 };
 
-BlobExpression.prototype.toSDialect = function(writer) {
+BlobExpression.prototype.toMDialect = function(writer) {
     writer.append("Blob(");
     this.source.toDialect(writer);
     writer.append(')');

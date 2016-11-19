@@ -60,7 +60,7 @@ SortedExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 }
 
-SortedExpression.prototype.toSDialect = function(writer) {
+SortedExpression.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 }
 

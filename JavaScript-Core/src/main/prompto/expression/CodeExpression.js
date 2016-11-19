@@ -25,7 +25,7 @@ CodeExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 };
 
-CodeExpression.prototype.toSDialect = function(writer) {
+CodeExpression.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 };
 

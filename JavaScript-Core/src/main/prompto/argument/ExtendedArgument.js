@@ -95,7 +95,7 @@ ExtendedArgument.prototype.toODialect = function(writer) {
     writer.append(this.name);
 };
 
-ExtendedArgument.prototype.toSDialect = function(writer) {
+ExtendedArgument.prototype.toMDialect = function(writer) {
     writer.append(this.name);
     writer.append(':');
     this.type.toDialect(writer);

@@ -53,7 +53,7 @@ IfStatement.prototype.toDialect = function(writer) {
 }
 
 
-IfStatement.prototype.toSDialect = function(writer) {
+IfStatement.prototype.toMDialect = function(writer) {
     this.toEDialect(writer);
 };
 
@@ -131,7 +131,7 @@ IfElement.prototype.interpret = function(context) {
     return this.statements.interpret(context);
 };
 
-IfElement.prototype.toSDialect = function(writer) {
+IfElement.prototype.toMDialect = function(writer) {
     this.toEDialect(writer);
 }
 

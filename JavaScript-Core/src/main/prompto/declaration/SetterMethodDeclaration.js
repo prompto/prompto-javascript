@@ -27,7 +27,7 @@ SetterMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-SetterMethodDeclaration.prototype.toSDialect = function(writer) {
+SetterMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def ");
     writer.append(this.name);
     writer.append(" setter():\n");

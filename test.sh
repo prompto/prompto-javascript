@@ -16,20 +16,24 @@ echo "Testing runtime with O dialect..."
 nodeunit JavaScript-Core/src/test/prompto/runtime/o/
 RESULT+=$?
 echo ""
+echo "Testing runtime with M dialect..."
+nodeunit JavaScript-Core/src/test/prompto/runtime/m/
+RESULT+=$?
+echo ""
 echo "Testing translations E -> O -> E ..."
 nodeunit JavaScript-Core/src/test/prompto/translate/eoe/
 RESULT+=$?
 echo ""
-echo "Testing translations E -> S -> E ..."
-nodeunit JavaScript-Core/src/test/prompto/translate/ese/
+echo "Testing translations E -> M -> E ..."
+nodeunit JavaScript-Core/src/test/prompto/translate/eme/
 RESULT+=$?
 echo ""
 echo "Testing translations O -> E -> O ..."
 nodeunit JavaScript-Core/src/test/prompto/translate/oeo/
 RESULT+=$?
 echo ""
-echo "Testing translations O -> S -> O ..."
-nodeunit JavaScript-Core/src/test/prompto/translate/oso/
+echo "Testing translations O -> M -> O ..."
+nodeunit JavaScript-Core/src/test/prompto/translate/omo/
 RESULT+=$?
 echo ""
 echo "Testing native framework components ..."

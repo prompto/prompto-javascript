@@ -50,7 +50,7 @@ SwitchStatement.prototype.toEDialect = function(writer) {
     writer.dedent();
 }
 
-SwitchStatement.prototype.toSDialect = function(writer) {
+SwitchStatement.prototype.toMDialect = function(writer) {
     writer.append("switch on ");
     this.expression.toDialect(writer);
     writer.append(":\n");

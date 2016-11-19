@@ -82,8 +82,8 @@ function parseOString(input) {
     return parser.parse();
 }
 
-function parseSString(input) {
-    var parser = new prompto.parser.SCleverParser(input);
+function parseMString(input) {
+    var parser = new prompto.parser.MCleverParser(input);
     return parser.parse();
 }
 
@@ -130,7 +130,7 @@ exports.compareResourceEOE = function(test, resourceName) {
     test.done();
 };
 
-exports.compareResourceESE = function(test, resourceName) {
+exports.compareResourceEME = function(test, resourceName) {
     var expected = getResourceAsString(resourceName);
     // console.log(expected);
     // parse e source code
@@ -138,12 +138,12 @@ exports.compareResourceESE = function(test, resourceName) {
     var context = prompto.runtime.Context.newGlobalContext();
     dle.register(context);
     // rewrite as o
-    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.S, context);
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, context);
     dle.toDialect(writer);
     var p = writer.toString();
     // console.log(p);
     // parse p source code
-    var dlp = parseSString(p);
+    var dlp = parseMString(p);
     context = prompto.runtime.Context.newGlobalContext();
     dlp.register(context);
     // rewrite as e
@@ -183,7 +183,7 @@ exports.compareResourceOEO = function(test, resourceName) {
 };
 
 
-exports.compareResourceOSO = function(test, resourceName) {
+exports.compareResourceOMO = function(test, resourceName) {
     var expected = getResourceAsString(resourceName);
     // console.log(expected);
     // parse o source code
@@ -191,12 +191,12 @@ exports.compareResourceOSO = function(test, resourceName) {
     var context = prompto.runtime.Context.newGlobalContext();
     dlo.register(context);
     // rewrite as p
-    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.S, context);
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, context);
     dlo.toDialect(writer);
     var p = writer.toString();
     // console.log(p);
     // parse p source code
-    var dlp = parseSString(p);
+    var dlp = parseMString(p);
     context = prompto.runtime.Context.newGlobalContext();
     dlp.register(context);
     // rewrite as o

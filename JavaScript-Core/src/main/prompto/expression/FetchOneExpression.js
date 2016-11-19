@@ -47,7 +47,7 @@ FetchOneExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 };
 
-FetchOneExpression.prototype.toSDialect = function(writer) {
+FetchOneExpression.prototype.toMDialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
         writer.append(this.typ.name);

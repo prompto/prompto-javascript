@@ -28,7 +28,7 @@ NullLiteral.prototype.toODialect = function(writer)
     writer.append("null");
 };
 
-NullLiteral.prototype.toSDialect = function(writer)
+NullLiteral.prototype.toMDialect = function(writer)
 {
     writer.append("None");
 }

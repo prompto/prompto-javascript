@@ -67,7 +67,7 @@ CategoryArgument.prototype.toODialect = function(writer) {
     writer.append(this.name);
 };
 
-CategoryArgument.prototype.toSDialect = function(writer) {
+CategoryArgument.prototype.toMDialect = function(writer) {
     writer.append(this.name);
     writer.append(':');
     this.type.toDialect(writer);

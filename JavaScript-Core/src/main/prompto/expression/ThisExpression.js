@@ -35,7 +35,7 @@ ThisExpression.prototype.toODialect = function(writer) {
     writer.append("this");
 };
 
-ThisExpression.prototype.toSDialect = function(writer) {
+ThisExpression.prototype.toMDialect = function(writer) {
     writer.append("self");
 };
 

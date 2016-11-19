@@ -56,7 +56,7 @@ WithSingletonStatement.prototype.toODialect = function(writer) {
     }
 };
 
-WithSingletonStatement.prototype.toSDialect = function(writer) {
+WithSingletonStatement.prototype.toMDialect = function(writer) {
     writer.append("with ");
     this.type.toDialect(writer);
     writer.append(":\n");

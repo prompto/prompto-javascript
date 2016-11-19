@@ -27,7 +27,7 @@ GetterMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.dedent();
 };
 
-GetterMethodDeclaration.prototype.toSDialect = function(writer) {
+GetterMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def ");
     writer.append(this.name);
     writer.append(" getter():\n");

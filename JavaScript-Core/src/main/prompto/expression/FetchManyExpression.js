@@ -76,7 +76,7 @@ FetchManyExpression.prototype.toODialect = function(writer) {
         this.orderBy.toDialect(writer);
 };
 
-FetchManyExpression.prototype.toSDialect = function(writer) {
+FetchManyExpression.prototype.toMDialect = function(writer) {
     writer.append("fetch ");
     if(this.first!=null) {
         writer.append("rows ");

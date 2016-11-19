@@ -98,7 +98,7 @@ ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
 };
 
 
-ConcreteMethodDeclaration.prototype.toSDialect = function(writer) {
+ConcreteMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def ");
     writer.append(this.name);
     writer.append(" (");
