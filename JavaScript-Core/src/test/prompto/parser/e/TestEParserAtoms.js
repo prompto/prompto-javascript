@@ -268,7 +268,7 @@ exports.testMemberExpression = function (test) {
     var statement = "p.name";
     var parser = new ETestParser(statement, false);
     var me = parser.parse_instance_expression();
-    test.ok(me instanceof prompto.expression.MemberSelector);
+    test.ok(me instanceof prompto.expression.UnresolvedSelector);
     test.equal("name", me.name);
     test.ok(me.parent instanceof prompto.expression.UnresolvedIdentifier);
     test.equal("p", me.parent.name);

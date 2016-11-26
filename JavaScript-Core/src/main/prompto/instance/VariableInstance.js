@@ -18,7 +18,7 @@ VariableInstance.prototype.toDialect = function(writer, expression) {
         var type = expression.check(writer.context);
         var actual = writer.context.getRegisteredValue(this.name);
         if(actual==null)
-            writer.context.registerValue(new Variable(this.name, type));
+            writer.context.registerValue(new Variable(this.id, type));
     } catch(e) {
         // TODO warning
     }
