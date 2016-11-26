@@ -161,7 +161,7 @@ ContainsExpression.prototype.interpretQuery = function(context, query) {
     }
     var matchOp = this.getMatchOp(context, this.getAttributeType(context, name), value.type, this.operator, reverse);
     if (value instanceof Instance)
-        value = value.getMember(context, "dbId", false);
+        value = value.getMemberValue(context, "dbId", false);
     var info = context.findAttribute(name).getAttributeInfo();
     var data = value == null ? null : value.getStorableData();
     query.verify(info, matchOp, data);

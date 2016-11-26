@@ -41,7 +41,7 @@ IterableValue.prototype.next = function() {
     return this.expression.interpret(child);
 };
 
-IterableValue.prototype.getMember = function(context, name) {
+IterableValue.prototype.getMemberValue = function(context, name) {
     if ("count" == name)
         return new Integer(this.length());
     else

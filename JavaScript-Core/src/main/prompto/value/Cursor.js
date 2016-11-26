@@ -54,7 +54,7 @@ Cursor.prototype.readItemType = function(stored) {
 };
 
 
-Cursor.prototype.getMember = function(context, name) {
+Cursor.prototype.getMemberValue = function(context, name) {
     if ("count" == name)
         return new Integer(this.count());
     else if ("totalCount" == name)

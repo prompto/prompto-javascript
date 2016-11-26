@@ -527,7 +527,7 @@ EPromptoBuilder.prototype.exitStore_statement = function(ctx) {
 
 EPromptoBuilder.prototype.exitMemberSelector = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.MemberSelector(null, name));
+	this.setNodeValue(ctx, new expression.UnresolvedSelector(null, name));
 };
 
 

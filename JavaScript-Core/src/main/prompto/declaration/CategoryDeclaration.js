@@ -54,6 +54,7 @@ CategoryDeclaration.prototype.getAllAttributes = function(context) {
 
 CategoryDeclaration.prototype.register = function(context) {
 	context.registerDeclaration(this);
+    this.registerMethods(context);
 };
 
 CategoryDeclaration.prototype.check = function(context) {

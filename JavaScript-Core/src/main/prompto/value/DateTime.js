@@ -206,7 +206,7 @@ DateTime.prototype.cmp = function(date, tzOffset) {
 };
 
 
-DateTime.prototype.getMember = function(context, name) {
+DateTime.prototype.getMemberValue = function(context, name) {
 	if ("year"==name) {
 		return new Integer(this.date.getUTCFullYear());
 	} else if ("month"==name) {

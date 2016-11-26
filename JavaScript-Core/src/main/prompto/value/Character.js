@@ -28,7 +28,7 @@ Character.isWhitespace = function(c) {
 };
 
 
-Character.prototype.getMember = function(context, name) {
+Character.prototype.getMemberValue = function(context, name) {
     if ("codePoint"==name) {
         return new Integer(this.value.charCodeAt(0));
     } else {

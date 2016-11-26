@@ -94,8 +94,24 @@ exports.testSetCount = function(test) {
 	compareResourceEME(test, "builtins/setCount.pec");
 };
 
+exports.testTextCapitalize = function(test) {
+	compareResourceEME(test, "builtins/textCapitalize.pec");
+};
+
 exports.testTextCount = function(test) {
 	compareResourceEME(test, "builtins/textCount.pec");
+};
+
+exports.testTextLowercase = function(test) {
+	compareResourceEME(test, "builtins/textLowercase.pec");
+};
+
+exports.testTextSplit = function(test) {
+	compareResourceEME(test, "builtins/textSplit.pec");
+};
+
+exports.testTextUppercase = function(test) {
+	compareResourceEME(test, "builtins/textUppercase.pec");
 };
 
 exports.testTimeHour = function(test) {

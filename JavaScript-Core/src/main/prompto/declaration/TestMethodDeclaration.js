@@ -115,7 +115,7 @@ TestMethodDeclaration.prototype.interpretError = function(context, ex)
     if (expectedError!=null && expectedError.equals (actual))
         this.printSuccess (context);
     else {
-        var actualName = actual.getMember (context, "name").toString ();
+        var actualName = actual.getMemberValue (context, "name").toString ();
         var expectedName = this.error == null ? "SUCCESS" : this.error.name;
         this.printFailure (context, expectedName, actualName);
     }

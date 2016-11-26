@@ -67,7 +67,7 @@ Value.prototype.CompareTo = function(context, value) {
 	throw new SyntaxError("Compare not supported by " + this.constructor.name);
 };
 
-Value.prototype.getMember = function(context, name) {
+Value.prototype.getMemberValue = function(context, name) {
 	throw new SyntaxError("No member support for " + this.constructor.name);
 };
 

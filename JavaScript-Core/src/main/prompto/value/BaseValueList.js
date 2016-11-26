@@ -154,11 +154,11 @@ BaseValueList.prototype.equals = function(obj) {
 };
 
 
-BaseValueList.prototype.getMember = function(context, name) {
+BaseValueList.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
 		return new Integer(this.items.length);
 	} else {
-		return Container.prototype.getMember.apply(this, context, name);
+		return Container.prototype.getMemberValue.apply(this, context, name);
 	}
 };
 

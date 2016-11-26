@@ -23,7 +23,7 @@ EnumeratedNativeType.prototype.checkMember = function(context, name) {
 	}
 };
 
-EnumeratedNativeType.prototype.getMember = function(context, name) {
+EnumeratedNativeType.prototype.getMemberValue = function(context, name) {
 	var decl = context.getRegisteredDeclaration(this.name);
 	if(!decl || !decl.symbols) {
 		throw new SyntaxError(name + " is not an enumerated type!");

@@ -160,7 +160,7 @@ EqualsExpression.prototype.interpretQuery = function(context, query) {
             throw new SyntaxError("Unable to interpret predicate");
     }
     if (value instanceof Instance)
-        value = value.getMember(context, "dbId", false);
+        value = value.getMemberValue(context, "dbId", false);
     var decl = context.findAttribute(name);
     var info = decl == null ? null : decl.getAttributeInfo();
     var data = value == null ? null : value.getStorableData();

@@ -12,7 +12,7 @@ exports.tearDown = function(done) {
 	Out.restore();
 	done();
 };
-
+/*
 exports.testCharCodePoint = function(test) {
 	checkOutput(test, "builtins/charCodePoint.pec");
 };
@@ -96,11 +96,27 @@ exports.testListCount = function(test) {
 exports.testSetCount = function(test) {
 	checkOutput(test, "builtins/setCount.pec");
 };
+*/
+exports.testTextCapitalize = function(test) {
+	checkOutput(test, "builtins/textCapitalize.pec");
+};
 
 exports.testTextCount = function(test) {
 	checkOutput(test, "builtins/textCount.pec");
 };
 
+exports.testTextLowercase = function(test) {
+	checkOutput(test, "builtins/textLowercase.pec");
+};
+
+exports.testTextSplit = function(test) {
+	checkOutput(test, "builtins/textSplit.pec");
+};
+
+exports.testTextUppercase = function(test) {
+	checkOutput(test, "builtins/textUppercase.pec");
+};
+/*
 exports.testTimeHour = function(test) {
 	checkOutput(test, "builtins/timeHour.pec");
 };
@@ -121,3 +137,4 @@ exports.testTupleCount = function(test) {
 	checkOutput(test, "builtins/tupleCount.pec");
 };
 
+*/

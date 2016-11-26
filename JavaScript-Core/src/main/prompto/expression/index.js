@@ -39,6 +39,7 @@ exports.CastExpression = require("./CastExpression").CastExpression;
 exports.ThisExpression = require("./ThisExpression").ThisExpression;
 exports.NativeSymbol = require("./NativeSymbol").NativeSymbol;
 exports.CategorySymbol = require("./CategorySymbol").CategorySymbol;
+exports.UnresolvedSelector = require("./UnresolvedSelector").UnresolvedSelector;
 
 require('./MethodSelector').resolve();
 require('./MemberSelector').resolve();
@@ -47,3 +48,4 @@ require("./InstanceExpression").resolve();
 require('./SelectorExpression').resolve();
 require('./ConstructorExpression').resolve();
 require('./UnresolvedIdentifier').resolve();
+require('./UnresolvedSelector').resolve();

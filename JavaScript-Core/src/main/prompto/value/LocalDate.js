@@ -90,7 +90,7 @@ LocalDate.prototype.cmp = function(value) {
     return a > b ? 1 : (a == b ? 0 : -1);
 };
 
-LocalDate.prototype.getMember = function(context, name) {
+LocalDate.prototype.getMemberValue = function(context, name) {
     if ("year"==name) {
         return new Integer(this.value.getUTCFullYear());
     } else if ("month"==name) {

@@ -40,6 +40,11 @@ BaseType.prototype.isAssignableFrom = function(context, other) {
 };
 
 
+BaseType.prototype.getMemberMethods = function(context, name) {
+    return [];
+};
+
+
 BaseType.prototype.checkAdd = function(context, other, tryReverse) {
     if(other instanceof EnumeratedNativeType)
         return this.checkAdd(context, other.derivedFrom, tryReverse);

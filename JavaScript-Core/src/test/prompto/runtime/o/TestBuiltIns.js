@@ -81,8 +81,24 @@ exports.testSetCount = function(test) {
 	checkOutput(test, "builtins/setCount.poc");
 };
 
+exports.testTextCapitalize = function(test) {
+	checkOutput(test, "builtins/textCapitalize.poc");
+};
+
 exports.testTextCount = function(test) {
 	checkOutput(test, "builtins/textCount.poc");
+};
+
+exports.testTextLowercase = function(test) {
+	checkOutput(test, "builtins/textLowercase.poc");
+};
+
+exports.testTextSplit = function(test) {
+	checkOutput(test, "builtins/textSplit.poc");
+};
+
+exports.testTextUppercase = function(test) {
+	checkOutput(test, "builtins/textUppercase.poc");
 };
 
 exports.testTimeHour = function(test) {

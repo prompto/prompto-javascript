@@ -141,7 +141,7 @@ CategoryType.prototype.checkSubstract = function(context, other) {
 CategoryType.prototype.checkOperator = function(context, other, tryReverse, operator) {
     var actual = this.getDeclaration(context);
     if(actual instanceof ConcreteCategoryDeclaration) try {
-        var method = actual.findOperator(context, operator, other);
+        var method = actual.getOperatorMethod(context, operator, other);
         if(method==null)
             return null;
         context = context.newInstanceContext(null, this);
@@ -329,13 +329,24 @@ CategoryType.prototype.sortByExpression = function(context, list, desc, key) {
 CategoryType.prototype.sortByAttribute = function(context, list, desc, name) {
 
 	function cmp(o1, o2) {
-		var key1 = o1.getMember(context, name);
-		var key2 = o2.getMember(context, name);
+		var key1 = o1.getMemberValue(context, name);
+		var key2 = o2.getMemberValue(context, name);
 		return compareKeys(key1,key2);
 	}
 
 	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
+
+
+
+CategoryType.prototype.getMemberMethods = function(context, name) {
+    var cd = this.getDeclaration(context);
+    if (!(cd instanceof ConcreteCategoryDeclaration))
+        throw new SyntaxError("Unknown category:" + this.name);
+    else
+        return cd.getMemberMethods(context, name)
+};
+
 
 
 /* look for a method which takes this category as sole parameter */

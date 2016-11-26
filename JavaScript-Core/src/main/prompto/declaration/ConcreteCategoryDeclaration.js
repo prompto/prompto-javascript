@@ -292,7 +292,7 @@ ConcreteCategoryDeclaration.findAncestorSetter = function(ancestor, context, att
 };
 
 
-ConcreteCategoryDeclaration.prototype.findMemberMethods = function(context, name) {
+ConcreteCategoryDeclaration.prototype.getMemberMethods = function(context, name) {
 	var methodsMap = new MethodDeclarationMap(name);
 	this.registerMemberMethods(context,methodsMap);
 	var names = Object.getOwnPropertyNames(methodsMap.protos);
@@ -342,9 +342,9 @@ ConcreteCategoryDeclaration.prototype.registerAncestorMemberMethods = function(a
 };
 
 
-ConcreteCategoryDeclaration.prototype.findOperator = function(context, operator, type) {
+ConcreteCategoryDeclaration.prototype.getOperatorMethod = function(context, operator, type) {
     var methodName = "operator_" + operator.name;
-    var methods = this.findMemberMethods(context, methodName);
+    var methods = this.getMemberMethods(context, methodName);
     if(methods==null)
         return null;
     // find best candidate

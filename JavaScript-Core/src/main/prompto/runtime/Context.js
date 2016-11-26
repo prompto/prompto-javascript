@@ -96,6 +96,17 @@ Context.prototype.newDocumentContext = function(doc, isChild) {
 };
 
 
+Context.prototype.newBuiltInContext = function(value) {
+    var context = new BuiltInContext(value);
+    context.globals = this.globals;
+    context.calling = this;
+    context.parent = null;
+    context.debugger = this.debugger;
+    context.problemListener = this.problemListener;
+    return context;
+};
+
+
 Context.prototype.newInstanceContext = function(instance, type) {
     var context = new InstanceContext(instance, type);
     context.globals = this.globals;
@@ -512,12 +523,24 @@ InstanceContext.prototype.getDeclaration = function() {
 };
 
 InstanceContext.prototype.readValue = function(name) {
-	return this.instance.getMember(this.calling, name);
+	return this.instance.getMemberValue(this.calling, name);
 };
 
 InstanceContext.prototype.writeValue = function(name, value) {
 	this.instance.setMember(this.calling, name, value);
 };
+
+
+function BuiltInContext(value) {
+    Context.call(this);
+    this.value = value;
+    return this;
+}
+
+
+BuiltInContext.prototype = Object.create(Context.prototype);
+BuiltInContext.prototype.constructor = BuiltInContext;
+
 
 
 function DocumentContext(document) {
@@ -543,7 +566,7 @@ DocumentContext.prototype.contextForValue = function(name) {
 };
 
 DocumentContext.prototype.readValue = function(name) {
-    return this.document.getMember(this.calling, name);
+    return this.document.getMemberValue(this.calling, name);
 };
 
 
@@ -603,6 +626,7 @@ Context.prototype.loadSingleton = function(type) {
 
 
 exports.Context = Context;
+exports.BuiltInContext = BuiltInContext;
 exports.InstanceContext = InstanceContext;
 exports.ResourceContext = ResourceContext;
 exports.MethodDeclarationMap = MethodDeclarationMap;

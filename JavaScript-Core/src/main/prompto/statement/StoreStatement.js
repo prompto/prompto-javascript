@@ -81,7 +81,7 @@ StoreStatement.prototype.getIdsToDelete = function(context) {
         if (value == NullValue.instance)
             return;
         else if(value instanceof Instance) {
-            var dbId = value.getMember(context, "dbId");
+            var dbId = value.getMemberValue(context, "dbId");
             if (dbId !=null && dbId!=NullValue.instance)
                 idsToDel.push(dbId.getStorableData());
         } else if(value instanceof Container) {
@@ -89,7 +89,7 @@ StoreStatement.prototype.getIdsToDelete = function(context) {
                 if (value == NullValue.instance)
                     return;
                 else if (value instanceof Instance) {
-                    var dbId = value.getMember(context, "dbId");
+                    var dbId = value.getMemberValue(context, "dbId");
                     if (dbId != null && dbId != NullValue.instance)
                         idsToDel.push(dbId.getStorableData());
                 }

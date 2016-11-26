@@ -111,7 +111,7 @@ Time.prototype.CompareTo = function(context, value) {
 	}
 };
 
-Time.prototype.getMember = function(context, name) {
+Time.prototype.getMemberValue = function(context, name) {
 	if ("hour"==name) {
 		return new Integer(this.value.getUTCHours());
 	} else if ("minute"==name) {

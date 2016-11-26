@@ -90,12 +90,12 @@ ConstructorExpression.prototype.interpret = function(context) {
     instance.mutable = true;
 	if(this.copyFrom!=null) {
 		var copyObj = this.copyFrom.interpret(context);
-		if((copyObj.getMember || null)!=null) {
+		if((copyObj.getMemberValue || null)!=null) {
 			var cd = context.getRegisteredDeclaration(this.type.name);
 			var names = copyObj.getMemberNames();
 			names.forEach(function(name) {
 				if(cd.hasAttribute(context, name)) {
-                    var value = copyObj.getMember(context, name);
+                    var value = copyObj.getMemberValue(context, name);
                     if(value!=null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
                     // TODO convert Document member to attribute type

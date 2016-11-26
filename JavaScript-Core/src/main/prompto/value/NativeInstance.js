@@ -31,7 +31,7 @@ function getActiveGetters() {
     return activeGetters;
 }
 
-NativeInstance.prototype.getMember = function(context, attrName) {
+NativeInstance.prototype.getMemberValue = function(context, attrName) {
     var stacked = getActiveGetters()[attrName] || null;
     var first = stacked==null;
     if(first)

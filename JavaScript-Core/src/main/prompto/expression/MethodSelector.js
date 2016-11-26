@@ -40,7 +40,7 @@ MethodSelector.prototype.getCandidates = function(context) {
 	if(this.parent===null) {
 		return this.getGlobalCandidates(context);
 	} else {
-		return this.getCategoryCandidates(context);
+		return this.getMemberCandidates(context);
 	}
 };
 
@@ -51,7 +51,7 @@ MethodSelector.prototype.getGlobalCandidates = function(context) {
         var type = context.parent.instanceType;
         var cd = context.getRegisteredDeclaration(type.name);
         if(cd!=null) {
-            var members = cd.findMemberMethods(context, this.name);
+            var members = cd.getMemberMethods(context, this.name);
             if(members!=null) {
                 Object.keys(members).forEach(function (key) {
                     methods.push(members[key])
@@ -67,6 +67,14 @@ MethodSelector.prototype.getGlobalCandidates = function(context) {
     return methods;
 };
 
+
+MethodSelector.prototype.getMemberCandidates = function(context) {
+    var parentType = this.checkParent(context);
+    return parentType.getMemberMethods(context, this.name);
+};
+
+
+
 MethodSelector.prototype.getCategoryCandidates = function(context) {
 	var parentType = this.checkParent(context);
 	if(!(parentType instanceof CategoryType)) {
@@ -76,7 +84,7 @@ MethodSelector.prototype.getCategoryCandidates = function(context) {
 	if(cd===null) {
 		throw new SyntaxError("Unknown category:" + parentType.name);
 	}
-	return cd.findMemberMethods(context, this.name);
+	return cd.getMemberMethods(context, this.name);
 };
 
 MethodSelector.prototype.newLocalContext = function(context, decl) {
@@ -111,10 +119,11 @@ MethodSelector.prototype.newLocalCheckContext = function(context, decl) {
 
 MethodSelector.prototype.newInstanceCheckContext = function(context) {
     var type = this.parent.check (context);
-    if (!(type instanceof CategoryType))
-        throw new SyntaxError ("Not an instance !");
-    context = context.newInstanceContext (null, type);
-    return context.newChildContext ();
+    if (type instanceof CategoryType) {
+        context = context.newInstanceContext(null, type);
+        return context.newChildContext();
+    } else
+        return context.newChildContext();
 };
 
 
@@ -125,11 +134,14 @@ MethodSelector.prototype.newInstanceContext = function(context) {
 	}
     if(value instanceof TypeValue && value.value instanceof CategoryType)
         value = context.loadSingleton(value.value);
-	if(!(value instanceof ConcreteInstance)) {
-		throw new InvalidDataError("Not an instance !");
-	}
-	context = context.newInstanceContext(value, null);
-	return context.newChildContext();
+	if(value instanceof ConcreteInstance) {
+        context = context.newInstanceContext(value, null);
+        return context.newChildContext();
+    } else {
+        context = context.newBuiltInContext(value);
+        return context.newChildContext();
+
+    }
 };
 
 

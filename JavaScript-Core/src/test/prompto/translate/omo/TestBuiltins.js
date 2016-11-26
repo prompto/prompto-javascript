@@ -78,8 +78,24 @@ exports.testSetCount = function(test) {
 	compareResourceOMO(test, "builtins/setCount.poc");
 };
 
+exports.testTextCapitalize = function(test) {
+	compareResourceOMO(test, "builtins/textCapitalize.poc");
+};
+
 exports.testTextCount = function(test) {
 	compareResourceOMO(test, "builtins/textCount.poc");
+};
+
+exports.testTextLowercase = function(test) {
+	compareResourceOMO(test, "builtins/textLowercase.poc");
+};
+
+exports.testTextSplit = function(test) {
+	compareResourceOMO(test, "builtins/textSplit.poc");
+};
+
+exports.testTextUppercase = function(test) {
+	compareResourceOMO(test, "builtins/textUppercase.poc");
 };
 
 exports.testTimeHour = function(test) {

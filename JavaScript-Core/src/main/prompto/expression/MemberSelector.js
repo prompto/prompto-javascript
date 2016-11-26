@@ -73,12 +73,12 @@ MemberSelector.prototype.interpretInstanceMember = function(context, parent) {
     if (instance == null || instance == NullValue.instance)
         throw new NullReferenceError();
     else
-        return instance.getMember(context, this.name, true);
+        return instance.getMemberValue(context, this.name, true);
 };
 
 MemberSelector.prototype.interpretTypeMember = function(context, parent) {
     if(parent instanceof TypeExpression)
-        return parent.getMember(context, this.name);
+        return parent.getMemberValue(context, this.name);
     else
         return null;
 };
@@ -87,7 +87,7 @@ MemberSelector.prototype.interpretSingleton = function(context, parent) {
     if(parent instanceof TypeExpression && parent.value instanceof CategoryType) {
         var instance = context.loadSingleton(parent.value);
         if(instance!=null)
-            return instance.getMember(context, this.name);
+            return instance.getMemberValue(context, this.name);
     }
     return null;
 };

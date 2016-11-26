@@ -3,9 +3,10 @@ var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var utils = require("../utils/index");
 
-function CategoryArgument(type, id) {
+function CategoryArgument(type, id, defaultExpression) {
 	Argument.call(this, id);
 	this.type = type;
+    this.defaultExpression = defaultExpression || null;
 	return this;
 }
 

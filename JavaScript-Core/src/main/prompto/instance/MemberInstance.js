@@ -48,7 +48,7 @@ MemberInstance.prototype.assign = function(context, expression) {
 
 MemberInstance.prototype.interpret = function(context) {
 	var root = this.parent.interpret(context);
-	return root.getMember(context, this.name, true);
+	return root.getMemberValue(context, this.name, true);
 };
 
 exports.MemberInstance = MemberInstance;

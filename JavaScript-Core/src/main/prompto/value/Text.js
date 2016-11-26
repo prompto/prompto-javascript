@@ -69,7 +69,7 @@ Text.prototype.hasItem = function(context, value) {
 };
 
 
-Text.prototype.getMember = function(context, name) {
+Text.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
 		return new Integer(this.value.length);
 	} else {

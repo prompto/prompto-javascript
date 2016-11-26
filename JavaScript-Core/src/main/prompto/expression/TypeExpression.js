@@ -21,8 +21,8 @@ TypeExpression.prototype.interpret = function(context) {
 	return new TypeValue(this.value);
 };
 
-TypeExpression.prototype.getMember = function(context, name) {
-	return this.value.getMember(context, name);
+TypeExpression.prototype.getMemberValue = function(context, name) {
+	return this.value.getMemberValue(context, name);
 };
 
 exports.TypeExpression = TypeExpression;

@@ -93,7 +93,7 @@ function getActiveGetters() {
 	return activeGetters;
 }
 
-ConcreteInstance.prototype.getMember = function(context, attrName) {
+ConcreteInstance.prototype.getMemberValue = function(context, attrName) {
 	var stacked = getActiveGetters()[attrName] || null;
     var first = stacked==null;
     if(first)
@@ -268,7 +268,7 @@ ConcreteInstance.prototype.Subtract = function(context, value) {
 
 
 ConcreteInstance.prototype.interpretOperator = function(context, value, operator) {
-    var decl = this.declaration.findOperator(context, operator, value.type);
+    var decl = this.declaration.getOperatorMethod(context, operator, value.type);
     context = context.newInstanceContext(this);
     var local = context.newChildContext();
     decl.registerArguments(local);

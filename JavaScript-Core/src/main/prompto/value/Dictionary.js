@@ -71,7 +71,7 @@ Dictionary.prototype.hasItem = function(context, value) {
 };
 
 
-Dictionary.prototype.getMember = function(context, name) {
+Dictionary.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
         return new Integer(this.size());
     } else if ("keys"==name) {
@@ -187,7 +187,7 @@ function KVPValue(key, value) {
 KVPValue.prototype = Object.create(Value.prototype);
 KVPValue.prototype.constructor = KVPValue;
 
-KVPValue.prototype.getMember = function(context, name) {
+KVPValue.prototype.getMemberValue = function(context, name) {
     if ("key"==name) {
         return new Text(this.key);
     } else if ("value"==name) {

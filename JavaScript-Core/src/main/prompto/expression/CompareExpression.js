@@ -86,7 +86,7 @@ CompareExpression.prototype.interpretQuery = function(context, query) {
         var decl = context.findAttribute(name);
         var info = decl == null ? null : decl.getAttributeInfo();
         if (value instanceof Instance)
-            value = value.getMember(context, "dbId", False)
+            value = value.getMemberValue(context, "dbId", False)
         var matchOp = this.getMatchOp();
         query.verify(info, matchOp, value == null ? null : value.getStorableData());
         if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)

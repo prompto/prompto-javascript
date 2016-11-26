@@ -17,6 +17,15 @@ DocumentType.prototype.constructor = DocumentType;
 
 DocumentType.instance = new DocumentType();
 
+
+DocumentType.prototype.isMoreSpecificThan = function(context, other) {
+    if ((other instanceof NullType) || (other instanceof AnyType) || (other instanceof MissingType))
+        return true;
+    else
+        return NativeType.isMoreSpecificThan.call(this, context, other);
+};
+
+
 DocumentType.prototype.checkMember = function(context, name) {
 	return AnyType.instance;
 };
