@@ -1,5 +1,6 @@
 var BuiltInMethodDeclaration = null;
 var NativeType = require("./NativeType").NativeType;
+var Identifier = require("../grammar/Identifier").Identifier;
 var CharacterType = null;
 var ListType = null;
 var IntegerType = require("./IntegerType").IntegerType;
@@ -101,6 +102,8 @@ TextType.prototype.getMemberMethods = function(context, name) {
             return [new ToUpperCaseMethodDeclaration()];
         case "toCapitalized":
             return [new ToCapitalizedMethodDeclaration()];
+        case "trim":
+            return [new TrimMethodDeclaration()];
         case "split":
             return [new SplitMethodDeclaration()];
         default:
@@ -118,13 +121,18 @@ function ToUpperCaseMethodDeclaration() {
     return this;
 }
 
+function TrimMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "trim");
+    return this;
+}
+
 function ToCapitalizedMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "toCapitalized");
     return this;
 }
 
 function SplitMethodDeclaration() {
-    BuiltInMethodDeclaration.call(this, "split", new CategoryArgument(TextType.instance, "separator", new TextLiteral('" "')));
+    BuiltInMethodDeclaration.call(this, "split", new CategoryArgument(TextType.instance, new Identifier("separator"), new TextLiteral('" "')));
     return this;
 }
 
@@ -168,12 +176,25 @@ function resolveBuiltInMethodDeclaration() {
         return TextType.instance;
     };
 
+    TrimMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    TrimMethodDeclaration.prototype.constructor = TrimMethodDeclaration;
+
+    TrimMethodDeclaration.prototype.interpret = function(context) {
+        var value = this.getValue(context).getStorableData();
+        value = value.trim();
+        return new Text(value);
+    };
+
+    TrimMethodDeclaration.prototype.check = function(context) {
+        return TextType.instance;
+    };
+
     SplitMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     SplitMethodDeclaration.prototype.constructor = SplitMethodDeclaration;
 
     SplitMethodDeclaration.prototype.interpret = function(context) {
         var value = this.getValue(context).getStorableData();
-        var sep = context.getValue("separator").getStorableData();
+        var sep = context.getValue(new Identifier("separator")).getStorableData();
         var list = value.split(sep);
         var texts = list.map(function(s) { return new Text(s); });
         return new ListValue(TextType.instance, texts);

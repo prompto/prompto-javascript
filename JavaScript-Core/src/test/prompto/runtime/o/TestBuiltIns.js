@@ -97,6 +97,10 @@ exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.poc");
 };
 
+exports.testTextTrim = function(test) {
+	checkOutput(test, "builtins/textTrim.poc");
+};
+
 exports.testTextUppercase = function(test) {
 	checkOutput(test, "builtins/textUppercase.poc");
 };

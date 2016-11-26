@@ -94,6 +94,10 @@ exports.testTextSplit = function(test) {
 	compareResourceOEO(test, "builtins/textSplit.poc");
 };
 
+exports.testTextTrim = function(test) {
+	compareResourceOEO(test, "builtins/textTrim.poc");
+};
+
 exports.testTextUppercase = function(test) {
 	compareResourceOEO(test, "builtins/textUppercase.poc");
 };

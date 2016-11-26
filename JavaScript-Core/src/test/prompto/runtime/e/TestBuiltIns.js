@@ -113,6 +113,10 @@ exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.pec");
 };
 
+exports.testTextTrim = function(test) {
+	checkOutput(test, "builtins/textTrim.pec");
+};
+
 exports.testTextUppercase = function(test) {
 	checkOutput(test, "builtins/textUppercase.pec");
 };

@@ -110,6 +110,10 @@ exports.testTextSplit = function(test) {
 	compareResourceEME(test, "builtins/textSplit.pec");
 };
 
+exports.testTextTrim = function(test) {
+	compareResourceEME(test, "builtins/textTrim.pec");
+};
+
 exports.testTextUppercase = function(test) {
 	compareResourceEME(test, "builtins/textUppercase.pec");
 };
