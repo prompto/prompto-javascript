@@ -1,5 +1,7 @@
+var MissingType = require("./MissingType").MissingType;
 var NativeType = require("./NativeType").NativeType;
 var TextType = require("./TextType").TextType;
+var NullType = require("./NullType").NullType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Text = require("../value/Text").Text;
