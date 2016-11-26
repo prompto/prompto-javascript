@@ -1,6 +1,7 @@
 var BuiltInMethodDeclaration = null;
 var NativeType = require("./NativeType").NativeType;
 var CharacterType = null;
+var ListType = null;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var AnyType = require("./AnyType").AnyType;
@@ -12,6 +13,7 @@ var ListValue = null;
 
 exports.resolve = function() {
 	CharacterType = require("./CharacterType").CharacterType;
+    ListType = require("./ListType").ListType;
     TextLiteral = require("../literal/TextLiteral").TextLiteral;
     ListValue = require("../value/ListValue").ListValue;
 	Text = require("../value/Text").Text;
@@ -178,7 +180,7 @@ function resolveBuiltInMethodDeclaration() {
     };
 
     SplitMethodDeclaration.prototype.check = function(context) {
-        return TextType.instance;
+        return new ListType(TextType.instance);
     };
 }
 
