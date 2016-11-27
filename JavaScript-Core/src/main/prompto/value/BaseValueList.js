@@ -194,4 +194,17 @@ BaseValueList.prototype.toDialect = function(writer) {
     }
 };
 
+BaseValueList.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
+    var values = [];
+    this.items.map(function(item) {
+        item.toJson(context, values, instanceId, fieldName, withType, binaries);
+    });
+    if(Array.isArray(json))
+        json.push(values);
+    else
+        json[fieldName] = values;
+
+};
+
+
 exports.BaseValueList = BaseValueList;
