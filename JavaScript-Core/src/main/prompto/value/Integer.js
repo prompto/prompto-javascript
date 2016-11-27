@@ -133,7 +133,7 @@ Integer.prototype.equals = function(obj) {
 	}
 };
 
-Integer.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
+Integer.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     if(Array.isArray(json))
         json.push(this.value);
     else

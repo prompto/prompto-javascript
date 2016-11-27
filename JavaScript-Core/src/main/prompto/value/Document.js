@@ -80,15 +80,13 @@ Document.prototype.toString = function() {
             values[key] = null;
         else {
             var id = this; // TODO create identifier
-            value.toJson(null, values, id, key, binaries);
+            value.toJson(null, values, id, key, false, binaries);
         }
     }
     return JSON.stringify(values);
 };
 
-Document.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
-    var doc = {};
-    doc["type"] = DocumentType.instance.name;
+Document.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     var values = {};
     for (var key in this.values) {
         var value = this.values[key];
@@ -96,10 +94,10 @@ Document.prototype.toJson = function(context, json, instanceId, fieldName, binar
             values[key] = null;
         else {
             var id = this; // TODO create identifier
-            value.toJson(context, values, id, key, binaries);
+            value.toJson(context, values, id, key, withType, binaries);
         }
     }
-    doc["value"] = values;
+    var doc = withType ? { type: DocumentType.instance.name, value: values} : values;
     if(Array.isArray(json))
         json.push(doc);
     else

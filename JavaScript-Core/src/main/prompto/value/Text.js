@@ -158,7 +158,7 @@ Text.prototype.Roughly = function(context, obj) {
     }
 };
 
-Text.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {
+Text.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     if(Array.isArray(json))
         json.push(this.value);
     else
