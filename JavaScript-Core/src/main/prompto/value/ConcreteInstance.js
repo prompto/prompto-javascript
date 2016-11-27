@@ -7,6 +7,7 @@ var DecimalType = require("../type/DecimalType").DecimalType;
 var Variable = require("../runtime/Variable").Variable;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Operator = require("../grammar/Operator").Operator;
+var NullValue = require("./NullValue").NullValue;
 var Decimal = require("./Decimal").Decimal;
 var Integer = require("./Integer").Integer;
 var Text = require("./Text").Text;
@@ -95,6 +96,8 @@ function getActiveGetters() {
 }
 
 ConcreteInstance.prototype.getMemberValue = function(context, attrName) {
+    /* if(typeof(attrName) != typeof(""))
+        throw "What?"; */
 	var stacked = getActiveGetters()[attrName] || null;
     var first = stacked==null;
     if(first)
@@ -131,6 +134,8 @@ function getActiveSetters() {
 }
 
 ConcreteInstance.prototype.setMember = function(context, attrName, value) {
+    /* if(typeof(attrName) != typeof(""))
+        throw "What?"; */
     if(!this.mutable)
         throw new NotMutableError();
 	var stacked = getActiveSetters()[attrName] || null;

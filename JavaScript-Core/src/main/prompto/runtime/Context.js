@@ -522,12 +522,12 @@ InstanceContext.prototype.getDeclaration = function() {
         return this.getRegisteredDeclaration(this.instanceType.name);
 };
 
-InstanceContext.prototype.readValue = function(name) {
-	return this.instance.getMemberValue(this.calling, name);
+InstanceContext.prototype.readValue = function(id) {
+	return this.instance.getMemberValue(this.calling, id.name);
 };
 
-InstanceContext.prototype.writeValue = function(name, value) {
-	this.instance.setMember(this.calling, name, value);
+InstanceContext.prototype.writeValue = function(id, value) {
+	this.instance.setMember(this.calling, id.name, value);
 };
 
 
