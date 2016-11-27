@@ -8,6 +8,7 @@ var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
 var NullType = require("./NullType").NullType;
+var TextType = require("./TextType").TextType;
 var AnyType = require("./AnyType").AnyType;
 var MissingType = require("./MissingType").MissingType;
 var PromptoError = require("../error/PromptoError").PromptoError;
@@ -155,7 +156,9 @@ CategoryType.prototype.checkOperator = function(context, other, tryReverse, oper
         return null;
     else
         throw new SyntaxError("Unsupported operation: " + this.name + " " + operator.token + " " + other.name);
-}
+};
+
+
 
 CategoryType.prototype.checkExists = function(context) {
 	this.getDeclaration(context);
@@ -166,25 +169,34 @@ CategoryType.prototype.checkMember = function(context, name) {
 	if (cd == null) {
 		throw new SyntaxError("Unknown category:" + this.name);
 	}
-	if (!cd.hasAttribute(context, name)) {
+	if (cd.hasAttribute(context, name)) {
+        var ad = context.getRegisteredDeclaration(name);
+        if (ad == null) {
+            throw new SyntaxError("Unknown atttribute:" + name);
+        }
+        return ad.getType(context);
+    } else if("text" == name.toString()) {
+        return TextType.instance
+    } else {
 		throw new SyntaxError("No attribute:" + name + " in category:" + this.name);
 	}
-	var ad = context.getRegisteredDeclaration(name);
-	if (ad == null) {
-		throw new SyntaxError("Unknown atttribute:" + name);
-	}
-	return ad.getType(context);
 };
+
+
 
 CategoryType.prototype.isAssignableFrom = function(context, other) {
     return BaseType.prototype.isAssignableFrom.call(this, context, other)
         || ((other instanceof CategoryType) && this.isAssignableFromCategory(context, other));
 };
 
+
+
 CategoryType.prototype.isAssignableFromCategory = function(context, other) {
     return other.isDerivedFrom(context, this)
         || other.isDerivedFromAnonymous(context, this);
 };
+
+
 
 CategoryType.prototype.isDerivedFrom = function(context, other) {
     try {
@@ -195,6 +207,8 @@ CategoryType.prototype.isDerivedFrom = function(context, other) {
     }
     return false; // TODO
 };
+
+
 
 CategoryType.prototype.isDerivedFromCategory = function(context, decl, other) {
     if(decl.derivedFrom==null) {

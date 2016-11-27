@@ -121,7 +121,7 @@ Time.prototype.getMemberValue = function(context, name) {
 	} else if ("millisecond"==name) {
 		return new Integer(this.value.getUTCMilliseconds());
 	} else {
-		throw new SyntaxError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
 	}
 };
 

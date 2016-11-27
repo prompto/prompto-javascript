@@ -228,7 +228,7 @@ DateTime.prototype.getMemberValue = function(context, name) {
 	} else if ("tzName"==name) {
 		return new Text("Z");
 	} else {
-		throw new SyntaxError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
 	}
 };
 

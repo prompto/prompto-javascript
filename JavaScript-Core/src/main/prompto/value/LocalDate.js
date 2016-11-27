@@ -36,6 +36,8 @@ LocalDate.prototype.Add = function(context, value) {
     }
 };
 
+
+
 LocalDate.prototype.addPeriod = function(value) {
     var date = new Date();
     var year = this.value.getUTCFullYear() + (value.years || 0);
@@ -47,6 +49,8 @@ LocalDate.prototype.addPeriod = function(value) {
     return new LocalDate(date);
 };
 
+
+
 LocalDate.prototype.Subtract = function(context, value)  {
     if (value instanceof LocalDate) {
         return this.minusDate(value);
@@ -57,6 +61,8 @@ LocalDate.prototype.Subtract = function(context, value)  {
     }
 };
 
+
+
 LocalDate.prototype.minusDate = function(value) {
     var data = [];
     data[0] = this.value.getUTCFullYear() - value.value.getUTCFullYear();
@@ -64,6 +70,8 @@ LocalDate.prototype.minusDate = function(value) {
     data[3] = this.value.getUTCDate() - value.value.getUTCDate();
     return new Period(data);
 };
+
+
 
 LocalDate.prototype.minusPeriod = function(value) {
     var date = new Date();
@@ -76,6 +84,8 @@ LocalDate.prototype.minusPeriod = function(value) {
     return new LocalDate(date);
 };
 
+
+
 LocalDate.prototype.CompareTo = function(context, value) {
     if (value instanceof LocalDate || value instanceof DateTime) {
         return this.cmp(value);
@@ -84,11 +94,15 @@ LocalDate.prototype.CompareTo = function(context, value) {
     }
 };
 
+
+
 LocalDate.prototype.cmp = function(value) {
     var a = this.value.valueOf();
     var b = value.value.valueOf();
     return a > b ? 1 : (a == b ? 0 : -1);
 };
+
+
 
 LocalDate.prototype.getMemberValue = function(context, name) {
     if ("year"==name) {
@@ -100,9 +114,11 @@ LocalDate.prototype.getMemberValue = function(context, name) {
     } else if ("dayOfYear"==name) {
         return new Integer(this.getDayOfYear());
     } else {
-        throw new SyntaxError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
     }
 };
+
+
 
 LocalDate.prototype.getDayOfYear = function() {
     var first = new Date(this.value);
@@ -110,7 +126,7 @@ LocalDate.prototype.getDayOfYear = function() {
     first.setDate(1);
     var numDays = (this.value - first) / (1000 * 60 * 60 * 24);
     return 1 + Math.floor(numDays);
-}
+};
 
 
 

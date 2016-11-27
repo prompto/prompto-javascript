@@ -13,8 +13,20 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testBooleanText = function(test) {
+	checkOutput(test, "builtins/booleanText.pec");
+};
+
+exports.testCategoryText = function(test) {
+	checkOutput(test, "builtins/categoryText.pec");
+};
+
 exports.testCharCodePoint = function(test) {
 	checkOutput(test, "builtins/charCodePoint.pec");
+};
+
+exports.testCharText = function(test) {
+	checkOutput(test, "builtins/charText.pec");
 };
 
 exports.testDateDayOfMonth = function(test) {
@@ -27,6 +39,10 @@ exports.testDateDayOfYear = function(test) {
 
 exports.testDateMonth = function(test) {
 	checkOutput(test, "builtins/dateMonth.pec");
+};
+
+exports.testDateText = function(test) {
+	checkOutput(test, "builtins/dateText.pec");
 };
 
 exports.testDateTimeDayOfMonth = function(test) {
@@ -57,12 +73,20 @@ exports.testDateTimeSecond = function(test) {
 	checkOutput(test, "builtins/dateTimeSecond.pec");
 };
 
+exports.testDateTimeText = function(test) {
+	checkOutput(test, "builtins/dateTimeText.pec");
+};
+
 exports.testDateTimeYear = function(test) {
 	checkOutput(test, "builtins/dateTimeYear.pec");
 };
 
 exports.testDateYear = function(test) {
 	checkOutput(test, "builtins/dateYear.pec");
+};
+
+exports.testDecimalText = function(test) {
+	checkOutput(test, "builtins/decimalText.pec");
 };
 
 exports.testDictCount = function(test) {
@@ -73,8 +97,16 @@ exports.testDictKeys = function(test) {
 	checkOutput(test, "builtins/dictKeys.pec");
 };
 
+exports.testDictText = function(test) {
+	checkOutput(test, "builtins/dictText.pec");
+};
+
 exports.testDictValues = function(test) {
 	checkOutput(test, "builtins/dictValues.pec");
+};
+
+exports.testDocumentText = function(test) {
+	checkOutput(test, "builtins/documentText.pec");
 };
 
 exports.testEnumName = function(test) {
@@ -89,12 +121,28 @@ exports.testEnumValue = function(test) {
 	checkOutput(test, "builtins/enumValue.pec");
 };
 
+exports.testIntegerText = function(test) {
+	checkOutput(test, "builtins/integerText.pec");
+};
+
 exports.testListCount = function(test) {
 	checkOutput(test, "builtins/listCount.pec");
 };
 
+exports.testListText = function(test) {
+	checkOutput(test, "builtins/listText.pec");
+};
+
+exports.testPeriodText = function(test) {
+	checkOutput(test, "builtins/periodText.pec");
+};
+
 exports.testSetCount = function(test) {
 	checkOutput(test, "builtins/setCount.pec");
+};
+
+exports.testSetText = function(test) {
+	checkOutput(test, "builtins/setText.pec");
 };
 
 exports.testTextCapitalize = function(test) {
@@ -111,6 +159,10 @@ exports.testTextLowercase = function(test) {
 
 exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.pec");
+};
+
+exports.testTextText = function(test) {
+	checkOutput(test, "builtins/textText.pec");
 };
 
 exports.testTextTrim = function(test) {
@@ -137,7 +189,19 @@ exports.testTimeSecond = function(test) {
 	checkOutput(test, "builtins/timeSecond.pec");
 };
 
+exports.testTimeText = function(test) {
+	checkOutput(test, "builtins/timeText.pec");
+};
+
 exports.testTupleCount = function(test) {
 	checkOutput(test, "builtins/tupleCount.pec");
+};
+
+exports.testTupleText = function(test) {
+	checkOutput(test, "builtins/tupleText.pec");
+};
+
+exports.testUuidText = function(test) {
+	checkOutput(test, "builtins/uuidText.pec");
 };
 

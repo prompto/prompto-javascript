@@ -28,12 +28,17 @@ Document.prototype.hasMember = function(name) {
 }
 
 Document.prototype.getMemberValue = function(context, name, autoCreate) {
-    var result = this.values[name] || NullValue.instance;
-    if(autoCreate && result==NullValue.instance) {
+    var result = this.values[name] || null;
+    if(result)
+        return result;
+    else if("text" == name)
+        return new Text(this.toString());
+    else if(autoCreate) {
         result = new Document();
         this.values[name] = result;
-    }
-    return result;
+        return result;
+    } else
+        return NullValue.instance;
 };
 
 Document.prototype.setMember = function(context, name, value) {
@@ -62,6 +67,23 @@ Document.prototype.setItemInContext = function(context, index, value) {
 
 Document.prototype.equals = function(other) {
     return other==this;
+};
+
+
+Document.prototype.toString = function() {
+    var binaries = {};
+    // create json type-aware object graph and collect binaries
+    var values = {}; // need a temporary parent
+    for (var key in this.values) {
+        var value = this.values[key];
+        if (value == null || value == undefined)
+            values[key] = null;
+        else {
+            var id = this; // TODO create identifier
+            value.toJson(null, values, id, key, binaries);
+        }
+    }
+    return JSON.stringify(values);
 };
 
 Document.prototype.toJson = function(context, json, instanceId, fieldName, binaries) {

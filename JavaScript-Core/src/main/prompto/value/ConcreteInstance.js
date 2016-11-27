@@ -9,6 +9,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var Operator = require("../grammar/Operator").Operator;
 var Decimal = require("./Decimal").Decimal;
 var Integer = require("./Integer").Integer;
+var Text = require("./Text").Text;
 var Instance = require("./Value").Instance;
 var DataStore = require("../store/DataStore").DataStore;
 var TypeUtils = require("../utils/TypeUtils");
@@ -108,18 +109,20 @@ ConcreteInstance.prototype.getMemberValue = function(context, attrName) {
 };
 
 ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter) {
-	var getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
-	if(getter!=null) {
-		context = context.newInstanceContext(this, null).newChildContext();
-		return getter.interpret(context);
-	} else {
-		return this.values[attrName] || null;
-	}
+    var getter = allowGetter ? this.declaration.findGetter(context, attrName) : null;
+    if (getter != null) {
+        context = context.newInstanceContext(this, null).newChildContext();
+        return getter.interpret(context);
+    } else if (this.declaration.hasAttribute(context, attrName) || "dbId" == attrName) {
+        return this.values[attrName] || NullValue.instance;
+    } else if ("text" == attrName) {
+        return new Text(this.toString());
+    } else
+        return NullValue.instance;
 };
 
 
 // don't call setters from setters, so register them
-// TODO: thread local storage
 
 var activeSetters = {};
 

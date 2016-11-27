@@ -32,7 +32,7 @@ Character.prototype.getMemberValue = function(context, name) {
     if ("codePoint"==name) {
         return new Integer(this.value.charCodeAt(0));
     } else {
-        throw new InvalidDataError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
     }
 };
 
@@ -80,7 +80,7 @@ Character.prototype.convertToJavaScript = function() {
 };
 
 Character.prototype.toString = function() {
-    return "" + this.value;
+    return this.value;
 };
 
 Character.prototype.equals = function(obj) {

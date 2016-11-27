@@ -1,5 +1,6 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var EnumeratedNativeType = null;
+var TextType = null;
 var NullType = null;
 var TupleValue = null;
 var SetValue = null;
@@ -7,6 +8,7 @@ var ListValue = null;
 
 exports.resolve = function() {
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
+    TextType = require("./TextType").TextType;
     NullType = require("./NullType").NullType;
     TupleValue = require("../value/TupleValue").TupleValue;
     SetValue = require("../value/SetValue").SetValue;
@@ -131,7 +133,10 @@ BaseType.prototype.checkItem = function(context, itemType) {
 
 
 BaseType.prototype.checkMember = function(context, name) {
-	throw new SyntaxError("Cannot read member from " + this.name);
+    if("text" == name)
+        return TextType.instance;
+    else
+    	throw new SyntaxError("Cannot read member from " + this.name);
 };
 
 

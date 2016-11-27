@@ -48,7 +48,7 @@ SetValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
         return new Integer(this.size());
     } else {
-        return Value.prototype.getMemberValue.apply(this, context, name);
+        return Value.prototype.getMemberValue.call(this, context, name);
     }
 };
 

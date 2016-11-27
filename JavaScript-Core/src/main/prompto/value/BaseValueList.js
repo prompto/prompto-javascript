@@ -158,7 +158,7 @@ BaseValueList.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
 		return new Integer(this.items.length);
 	} else {
-		return Container.prototype.getMemberValue.apply(this, context, name);
+		return Container.prototype.getMemberValue.call(this, context, name);
 	}
 };
 

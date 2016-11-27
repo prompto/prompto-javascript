@@ -22,7 +22,7 @@ Dictionary.prototype.constructor = Dictionary;
 Dictionary.prototype.toString = function() {
 	var names = Object.getOwnPropertyNames(this.dict);
     var vals = names.map(function(name) {
-        return name + ":" + this.dict[name];
+        return '"' + name + '":' + this.dict[name];
 	}, this);
 	return "{" + vals.join(", ") + "}";
 };
@@ -87,7 +87,7 @@ Dictionary.prototype.getMemberValue = function(context, name) {
         }
         return new ListValue(this.type.itemType, list);
     } else {
-        throw new SyntaxError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
     }
 };
 

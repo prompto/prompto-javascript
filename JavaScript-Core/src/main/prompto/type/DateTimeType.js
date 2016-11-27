@@ -76,7 +76,7 @@ DateTimeType.prototype.checkMember = function(context, name) {
 	} else if ("tzName"==name) {
 		return TextType.instance;
 	} else {
-		return NativeType.prototype.checkMember.apply(this, context, name);
+		return NativeType.prototype.checkMember.call(this, context, name);
 	}
 };
 

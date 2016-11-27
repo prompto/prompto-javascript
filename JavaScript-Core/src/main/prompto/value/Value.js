@@ -68,7 +68,11 @@ Value.prototype.CompareTo = function(context, value) {
 };
 
 Value.prototype.getMemberValue = function(context, name) {
-	throw new SyntaxError("No member support for " + this.constructor.name);
+    if("text" == name) {
+        return new Text(this.toString());
+    }
+    else
+	    throw new SyntaxError("No member support for " + this.constructor.name);
 };
 
 Value.prototype.ConvertTo = function(type) {

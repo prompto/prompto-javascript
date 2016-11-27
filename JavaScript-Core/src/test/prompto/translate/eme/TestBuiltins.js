@@ -2,8 +2,20 @@ require("../../../../exploded");
 
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
+exports.testBooleanText = function(test) {
+	compareResourceEME(test, "builtins/booleanText.pec");
+};
+
+exports.testCategoryText = function(test) {
+	compareResourceEME(test, "builtins/categoryText.pec");
+};
+
 exports.testCharCodePoint = function(test) {
 	compareResourceEME(test, "builtins/charCodePoint.pec");
+};
+
+exports.testCharText = function(test) {
+	compareResourceEME(test, "builtins/charText.pec");
 };
 
 exports.testDateDayOfMonth = function(test) {
@@ -16,6 +28,10 @@ exports.testDateDayOfYear = function(test) {
 
 exports.testDateMonth = function(test) {
 	compareResourceEME(test, "builtins/dateMonth.pec");
+};
+
+exports.testDateText = function(test) {
+	compareResourceEME(test, "builtins/dateText.pec");
 };
 
 exports.testDateTimeDayOfMonth = function(test) {
@@ -46,6 +62,10 @@ exports.testDateTimeSecond = function(test) {
 	compareResourceEME(test, "builtins/dateTimeSecond.pec");
 };
 
+exports.testDateTimeText = function(test) {
+	compareResourceEME(test, "builtins/dateTimeText.pec");
+};
+
 exports.testDateTimeTZName = function(test) {
 	compareResourceEME(test, "builtins/dateTimeTZName.pec");
 };
@@ -62,6 +82,10 @@ exports.testDateYear = function(test) {
 	compareResourceEME(test, "builtins/dateYear.pec");
 };
 
+exports.testDecimalText = function(test) {
+	compareResourceEME(test, "builtins/decimalText.pec");
+};
+
 exports.testDictCount = function(test) {
 	compareResourceEME(test, "builtins/dictCount.pec");
 };
@@ -70,8 +94,16 @@ exports.testDictKeys = function(test) {
 	compareResourceEME(test, "builtins/dictKeys.pec");
 };
 
+exports.testDictText = function(test) {
+	compareResourceEME(test, "builtins/dictText.pec");
+};
+
 exports.testDictValues = function(test) {
 	compareResourceEME(test, "builtins/dictValues.pec");
+};
+
+exports.testDocumentText = function(test) {
+	compareResourceEME(test, "builtins/documentText.pec");
 };
 
 exports.testEnumName = function(test) {
@@ -86,12 +118,28 @@ exports.testEnumValue = function(test) {
 	compareResourceEME(test, "builtins/enumValue.pec");
 };
 
+exports.testIntegerText = function(test) {
+	compareResourceEME(test, "builtins/integerText.pec");
+};
+
 exports.testListCount = function(test) {
 	compareResourceEME(test, "builtins/listCount.pec");
 };
 
+exports.testListText = function(test) {
+	compareResourceEME(test, "builtins/listText.pec");
+};
+
+exports.testPeriodText = function(test) {
+	compareResourceEME(test, "builtins/periodText.pec");
+};
+
 exports.testSetCount = function(test) {
 	compareResourceEME(test, "builtins/setCount.pec");
+};
+
+exports.testSetText = function(test) {
+	compareResourceEME(test, "builtins/setText.pec");
 };
 
 exports.testTextCapitalize = function(test) {
@@ -108,6 +156,10 @@ exports.testTextLowercase = function(test) {
 
 exports.testTextSplit = function(test) {
 	compareResourceEME(test, "builtins/textSplit.pec");
+};
+
+exports.testTextText = function(test) {
+	compareResourceEME(test, "builtins/textText.pec");
 };
 
 exports.testTextTrim = function(test) {
@@ -134,7 +186,19 @@ exports.testTimeSecond = function(test) {
 	compareResourceEME(test, "builtins/timeSecond.pec");
 };
 
+exports.testTimeText = function(test) {
+	compareResourceEME(test, "builtins/timeText.pec");
+};
+
 exports.testTupleCount = function(test) {
 	compareResourceEME(test, "builtins/tupleCount.pec");
+};
+
+exports.testTupleText = function(test) {
+	compareResourceEME(test, "builtins/tupleText.pec");
+};
+
+exports.testUuidText = function(test) {
+	compareResourceEME(test, "builtins/uuidText.pec");
 };
 

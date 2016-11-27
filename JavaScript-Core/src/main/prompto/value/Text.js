@@ -73,7 +73,7 @@ Text.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
 		return new Integer(this.value.length);
 	} else {
-		throw new InvalidDataError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
 	}
 };
 

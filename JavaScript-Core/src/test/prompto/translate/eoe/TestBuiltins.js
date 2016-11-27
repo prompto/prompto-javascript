@@ -2,8 +2,20 @@ require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+exports.testBooleanText = function(test) {
+	compareResourceEOE(test, "builtins/booleanText.pec");
+};
+
+exports.testCategoryText = function(test) {
+	compareResourceEOE(test, "builtins/categoryText.pec");
+};
+
 exports.testCharCodePoint = function(test) {
 	compareResourceEOE(test, "builtins/charCodePoint.pec");
+};
+
+exports.testCharText = function(test) {
+	compareResourceEOE(test, "builtins/charText.pec");
 };
 
 exports.testDateDayOfMonth = function(test) {
@@ -16,6 +28,10 @@ exports.testDateDayOfYear = function(test) {
 
 exports.testDateMonth = function(test) {
 	compareResourceEOE(test, "builtins/dateMonth.pec");
+};
+
+exports.testDateText = function(test) {
+	compareResourceEOE(test, "builtins/dateText.pec");
 };
 
 exports.testDateTimeDayOfMonth = function(test) {
@@ -46,6 +62,10 @@ exports.testDateTimeSecond = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeSecond.pec");
 };
 
+exports.testDateTimeText = function(test) {
+	compareResourceEOE(test, "builtins/dateTimeText.pec");
+};
+
 exports.testDateTimeTZName = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeTZName.pec");
 };
@@ -62,6 +82,10 @@ exports.testDateYear = function(test) {
 	compareResourceEOE(test, "builtins/dateYear.pec");
 };
 
+exports.testDecimalText = function(test) {
+	compareResourceEOE(test, "builtins/decimalText.pec");
+};
+
 exports.testDictCount = function(test) {
 	compareResourceEOE(test, "builtins/dictCount.pec");
 };
@@ -70,8 +94,16 @@ exports.testDictKeys = function(test) {
 	compareResourceEOE(test, "builtins/dictKeys.pec");
 };
 
+exports.testDictText = function(test) {
+	compareResourceEOE(test, "builtins/dictText.pec");
+};
+
 exports.testDictValues = function(test) {
 	compareResourceEOE(test, "builtins/dictValues.pec");
+};
+
+exports.testDocumentText = function(test) {
+	compareResourceEOE(test, "builtins/documentText.pec");
 };
 
 exports.testEnumName = function(test) {
@@ -86,12 +118,28 @@ exports.testEnumValue = function(test) {
 	compareResourceEOE(test, "builtins/enumValue.pec");
 };
 
+exports.testIntegerText = function(test) {
+	compareResourceEOE(test, "builtins/integerText.pec");
+};
+
 exports.testListCount = function(test) {
 	compareResourceEOE(test, "builtins/listCount.pec");
 };
 
+exports.testListText = function(test) {
+	compareResourceEOE(test, "builtins/listText.pec");
+};
+
+exports.testPeriodText = function(test) {
+	compareResourceEOE(test, "builtins/periodText.pec");
+};
+
 exports.testSetCount = function(test) {
 	compareResourceEOE(test, "builtins/setCount.pec");
+};
+
+exports.testSetText = function(test) {
+	compareResourceEOE(test, "builtins/setText.pec");
 };
 
 exports.testTextCapitalize = function(test) {
@@ -108,6 +156,10 @@ exports.testTextLowercase = function(test) {
 
 exports.testTextSplit = function(test) {
 	compareResourceEOE(test, "builtins/textSplit.pec");
+};
+
+exports.testTextText = function(test) {
+	compareResourceEOE(test, "builtins/textText.pec");
 };
 
 exports.testTextTrim = function(test) {
@@ -134,7 +186,19 @@ exports.testTimeSecond = function(test) {
 	compareResourceEOE(test, "builtins/timeSecond.pec");
 };
 
+exports.testTimeText = function(test) {
+	compareResourceEOE(test, "builtins/timeText.pec");
+};
+
 exports.testTupleCount = function(test) {
 	compareResourceEOE(test, "builtins/tupleCount.pec");
+};
+
+exports.testTupleText = function(test) {
+	compareResourceEOE(test, "builtins/tupleText.pec");
+};
+
+exports.testUuidText = function(test) {
+	compareResourceEOE(test, "builtins/uuidText.pec");
 };
 
