@@ -42,6 +42,10 @@ exports.testMemberCall = function(test) {
 	compareResourceEME(test, "methods/memberCall.pec");
 };
 
+exports.testOverride = function(test) {
+	compareResourceEME(test, "methods/override.pec");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	compareResourceEME(test, "methods/polymorphic_abstract.pec");
 };

@@ -1,6 +1,7 @@
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var InstanceContext = null;
@@ -36,11 +37,11 @@ MethodSelector.prototype.toString = function() {
 	}
 };
 
-MethodSelector.prototype.getCandidates = function(context) {
+MethodSelector.prototype.getCandidates = function(context, checkInstance) {
 	if(this.parent===null) {
 		return this.getGlobalCandidates(context);
 	} else {
-		return this.getMemberCandidates(context);
+		return this.getMemberCandidates(context, checkInstance);
 	}
 };
 
@@ -68,11 +69,36 @@ MethodSelector.prototype.getGlobalCandidates = function(context) {
 };
 
 
-MethodSelector.prototype.getMemberCandidates = function(context) {
-    var parentType = this.checkParent(context);
+MethodSelector.prototype.getMemberCandidates = function(context, checkInstance) {
+    var parentType = this.checkParentType(context, checkInstance);
     return parentType.getMemberMethods(context, this.name);
 };
 
+
+
+MethodSelector.prototype.checkParentType = function(context, checkInstance) {
+    if(checkInstance)
+        return this.checkParentInstance(context);
+    else
+        return this.checkParent(context);
+};
+
+
+
+MethodSelector.prototype.checkParentInstance = function(context) {
+    if(this.parent instanceof UnresolvedIdentifier) {
+        var id = this.parent.id;
+        // don't get Singleton values
+        var first = id.name.substring(0, 1);
+        if(first.toLowerCase()==first) {
+            var value = context.getValue(id);
+            if(value!=null && value!=NullValue.instance)
+                return value.getType();
+        }
+    }
+    // TODO check result instance
+    return this.checkParent(context);
+};
 
 
 MethodSelector.prototype.getCategoryCandidates = function(context) {

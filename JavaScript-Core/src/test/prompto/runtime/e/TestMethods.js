@@ -53,6 +53,10 @@ exports.testMemberCall = function(test) {
 	checkOutput(test, "methods/memberCall.pec");
 };
 
+exports.testOverride = function(test) {
+	checkOutput(test, "methods/override.pec");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	checkOutput(test, "methods/polymorphic_abstract.pec");
 };
