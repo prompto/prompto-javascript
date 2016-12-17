@@ -346,7 +346,7 @@ exports.testComplexArgumentAssignment = function (test) {
     var as = parser.parse_argument_assignment();
     test.equal("value", as.name);
     var exp = as.expression;
-    test.ok(exp instanceof prompto.expression.AddExpression);
+    test.ok(exp instanceof prompto.expression.PlusExpression);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     as.toDialect(writer);
     test.equal("\"person\" + p.name as value", writer.toString());
@@ -361,7 +361,7 @@ exports.testArgumentAssignmentList1Arg = function (test) {
     var as = ls[0];
     test.equal("value", as.name);
     var exp = as.expression;
-    test.ok(exp instanceof prompto.expression.AddExpression);
+    test.ok(exp instanceof prompto.expression.PlusExpression);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     as.toDialect(writer);
     test.equal("\"person\" + p.name as value", writer.toString());
@@ -379,7 +379,7 @@ exports.testMethodCallWith = function (test) {
     var as = mc.assignments[0];
     test.equal("value", as.name);
     var exp = as.expression;
-    test.ok(exp instanceof prompto.expression.AddExpression);
+    test.ok(exp instanceof prompto.expression.PlusExpression);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     mc.toDialect(writer);
     test.equal("print with \"person\" + p.name as value", writer.toString());

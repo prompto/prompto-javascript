@@ -673,7 +673,7 @@ OPromptoBuilder.prototype.exitAddExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);
 	var right = this.getNodeValue(ctx.right);
 	var exp = ctx.op.type==parser.OParser.PLUS ?
-		new expression.AddExpression(left, right) :
+		new expression.PlusExpression(left, right) :
 		new expression.SubtractExpression(left, right);
 	this.setNodeValue(ctx, exp);
 };

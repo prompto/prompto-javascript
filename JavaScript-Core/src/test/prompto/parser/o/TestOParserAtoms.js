@@ -256,7 +256,7 @@ exports.testMethodCallWith = function(test) {
 	var as = mc.assignments[0];
 	test.equal("value",as.name);
 	var exp = as.expression;
-	test.ok(exp instanceof prompto.expression.AddExpression);
+	test.ok(exp instanceof prompto.expression.PlusExpression);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     mc.toDialect(writer);
 	test.equal("print(value = \"person\" + p.name)", writer.toString());

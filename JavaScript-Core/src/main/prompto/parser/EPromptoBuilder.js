@@ -650,7 +650,7 @@ EPromptoBuilder.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
 EPromptoBuilder.prototype.exitAddExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);
 	var right = this.getNodeValue(ctx.right);
-	var exp = ctx.op.type===parser.EParser.PLUS ? new expression.AddExpression(left, right) : new expression.SubtractExpression(left, right);
+	var exp = ctx.op.type===parser.EParser.PLUS ? new expression.PlusExpression(left, right) : new expression.SubtractExpression(left, right);
 	this.setNodeValue(ctx, exp);
 };
 
