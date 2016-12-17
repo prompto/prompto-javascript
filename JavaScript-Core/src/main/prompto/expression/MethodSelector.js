@@ -98,7 +98,7 @@ MethodSelector.prototype.checkParentInstance = function(context) {
         if(first.toLowerCase()==first) {
             var value = context.getValue(id);
             if(value!=null && value!=NullValue.instance)
-                return value.getType();
+                return value.type;
         }
     }
     // TODO check result instance
