@@ -2,6 +2,7 @@ var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var InstanceContext = null;
@@ -86,8 +87,12 @@ MethodSelector.prototype.checkParentType = function(context, checkInstance) {
 
 
 MethodSelector.prototype.checkParentInstance = function(context) {
-    if(this.parent instanceof UnresolvedIdentifier) {
-        var id = this.parent.id;
+    var id = null;
+    if(this.parent instanceof UnresolvedIdentifier)
+        id = this.parent.id;
+    else if(this.parent instanceof InstanceExpression)
+        id = this.parent.id;
+    if(id!=null) {
         // don't get Singleton values
         var first = id.name.substring(0, 1);
         if(first.toLowerCase()==first) {

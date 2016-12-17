@@ -38,6 +38,10 @@ exports.testMember = function(test) {
 	compareResourceOEO(test, "methods/member.poc");
 };
 
+exports.testOverride = function(test) {
+	compareResourceOEO(test, "methods/override.poc");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	compareResourceOEO(test, "methods/polymorphic_abstract.poc");
 };

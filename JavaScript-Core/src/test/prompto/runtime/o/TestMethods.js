@@ -49,6 +49,10 @@ exports.testMember = function(test) {
 	checkOutput(test, "methods/member.poc");
 };
 
+exports.testOverride = function(test) {
+	checkOutput(test, "methods/override.poc");
+};
+
 exports.testPolymorphic_abstract = function(test) {
 	checkOutput(test, "methods/polymorphic_abstract.poc");
 };
