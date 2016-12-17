@@ -23,6 +23,14 @@ EnumeratedCategoryDeclaration.prototype.unregister = function(context) {
     });
 };
 
+EnumeratedCategoryDeclaration.prototype.hasAttribute = function(context, name) {
+    if("name"==name)
+        return true;
+    else
+        return ConcreteCategoryDeclaration.prototype.hasAttribute.call(this, context, name);
+};
+
+
 EnumeratedCategoryDeclaration.prototype.setSymbols = function(symbols) {
 	this.symbols = symbols;
 	var type = new EnumeratedCategoryType(this.id);

@@ -3,6 +3,7 @@ var UnresolvedIdentifier = null;
 var SymbolExpression = require("./SymbolExpression").SymbolExpression;
 var TypeExpression = require("./TypeExpression").TypeExpression;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+var EnumeratedCategoryType = null;
 var CategoryType = null;
 var NullValue = require("../value/NullValue").NullValue;
 var Value = require("../value/Value").Value;
@@ -10,7 +11,9 @@ var Text = require("../value/Text").Text;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+    EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
     CategoryType = require("../type/CategoryType").CategoryType;
+
 }
 
 function MemberSelector(parent, id) {
@@ -84,7 +87,7 @@ MemberSelector.prototype.interpretTypeMember = function(context, parent) {
 };
 
 MemberSelector.prototype.interpretSingleton = function(context, parent) {
-    if(parent instanceof TypeExpression && parent.value instanceof CategoryType) {
+    if(parent instanceof TypeExpression && parent.value instanceof CategoryType && !(parent.value instanceof EnumeratedCategoryType)) {
         var instance = context.loadSingleton(parent.value);
         if(instance!=null)
             return instance.getMemberValue(context, this.name);

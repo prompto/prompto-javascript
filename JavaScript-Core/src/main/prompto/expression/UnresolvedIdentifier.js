@@ -1,4 +1,5 @@
 var MethodCall = require("../statement/MethodCall").MethodCall;
+var EnumeratedCategoryDeclaration = null;
 var CategoryDeclaration = null;
 var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConstructorExpression = null;
@@ -8,12 +9,15 @@ var TypeExpression = require("./TypeExpression").TypeExpression;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Section = require("../parser/Section").Section;
+var EnumeratedCategoryType = null;
 var CategoryType = null;
 var MethodSelector = null;
 
 exports.resolve = function() {
-	CategoryType = require("../type/CategoryType").CategoryType;
+    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+    EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 	MethodSelector = require("./MethodSelector").MethodSelector;
+    CategoryType = require("../type/CategoryType").CategoryType;
 	CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 	ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
 }
@@ -146,7 +150,9 @@ UnresolvedIdentifier.prototype.resolveConstructor = function(context) {
 
 UnresolvedIdentifier.prototype.resolveType = function(context) {
 	var decl = context.getRegisteredDeclaration(this.name);
-	if(decl instanceof CategoryDeclaration) {
+    if(decl instanceof EnumeratedCategoryDeclaration) {
+        return new TypeExpression(new EnumeratedCategoryType(this.id));
+    } else if(decl instanceof CategoryDeclaration) {
 		return new TypeExpression(new CategoryType(this.id));
 	} else if(decl instanceof EnumeratedNativeDeclaration) {
 		return new TypeExpression(decl.getType(context));

@@ -1,6 +1,7 @@
 var BaseType = require("./BaseType").BaseType;
 var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function EnumeratedNativeType(name, derivedFrom) {
 	BaseType.call(this, name);
@@ -19,7 +20,7 @@ EnumeratedNativeType.prototype.checkMember = function(context, name) {
 	} else if ("name"==name) {
 		return TextType.instance;
 	} else {
-		return BaseType.prototype.checkMember.apply(this, context, name);
+		return BaseType.prototype.checkMember.call(this, context, name);
 	}
 };
 

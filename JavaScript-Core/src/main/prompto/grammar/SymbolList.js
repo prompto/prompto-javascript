@@ -17,7 +17,8 @@ SymbolList.prototype.getIterator = function(context) {
 
 
 SymbolList.prototype.toString = function() {
-    return "[" + ObjectList.prototype.toString.call(this) + "]";
+    var names = this.map(function(s) { return s.name;});
+    return "[" + names.join(", ") + "]";
 };
 
 function SymbolListIterator(symbols, context) {
