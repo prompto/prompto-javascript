@@ -42,7 +42,7 @@ Url.prototype.readLine = function() {
         this.lines = full.split("\n");
     }
     if(this.lines.length>0)
-        return this.lines.pop(0);
+        return this.lines.shift();
     else
         return null;
 }
