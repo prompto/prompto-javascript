@@ -6,4 +6,8 @@ function TypeValue(value) {
     return this;
 };
 
+TypeValue.prototype.toString = function() {
+    return this.value.toString();
+};
+
 exports.TypeValue = TypeValue;
