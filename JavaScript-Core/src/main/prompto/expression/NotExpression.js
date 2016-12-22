@@ -60,7 +60,7 @@ NotExpression.prototype.interpretAssert = function(context, test) {
     this.toDialect(writer);
     var expected = writer.toString();
     var actual = this.operatorToDialect(test.dialect) + val.toString();
-    test.printFailure(context, expected, actual);
+    test.printFailedAssertion(context, expected, actual);
     return false;
 };
 

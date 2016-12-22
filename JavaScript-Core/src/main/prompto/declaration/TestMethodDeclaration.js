@@ -49,7 +49,7 @@ TestMethodDeclaration.prototype.interpretNoError = function(context)
 {
     // we land here only if no error was raised
     if (this.error != null)
-        this.printFailure (context, this.error.name, "no error");
+        this.printMissingError (context, this.error.name, "no error");
 };
 
 TestMethodDeclaration.prototype.interpretAsserts = function(context)
@@ -77,9 +77,16 @@ TestMethodDeclaration.print = function(msg) {
         console.log(msg);
 };
 
-TestMethodDeclaration.prototype.printFailure = function(context, expected, actual)
+TestMethodDeclaration.prototype.printMissingError = function(context, expected, actual)
 {
-    var msg = this.name + " test failed, expected: " + expected + ", actual: " + actual
+    var msg = this.name + " test failed while expecting: " + expected + ", found: " + actual
+    TestMethodDeclaration.print(msg);
+};
+
+
+TestMethodDeclaration.prototype.printFailedAssertion = function(context, expected, actual)
+{
+    var msg = this.name + " test failed while verifying: " + expected + ", found: " + actual
     TestMethodDeclaration.print(msg);
 };
 
@@ -117,7 +124,7 @@ TestMethodDeclaration.prototype.interpretError = function(context, ex)
     else {
         var actualName = actual.getMemberValue (context, "name").toString ();
         var expectedName = this.error == null ? "SUCCESS" : this.error.name;
-        this.printFailure (context, expectedName, actualName);
+        this.printMissingError (context, expectedName, actualName);
     }
 };
 

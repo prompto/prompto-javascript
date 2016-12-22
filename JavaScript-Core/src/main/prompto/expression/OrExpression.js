@@ -69,7 +69,7 @@ OrExpression.prototype.interpretAssert = function(context, test) {
     this.toDialect(writer);
     var expected = writer.toString();
     var actual = lval.toString() + this.operatorToDialect(test.dialect) + rval.toString();
-    test.printFailure(context, expected, actual);
+    test.printFailedAssertion(context, expected, actual);
     return false;
 };
 
