@@ -18,6 +18,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testJson = function(test) {
+	runTests(test, "reader/json.pec");
+};
+
 exports.testReader = function(test) {
 	runTests(test, "reader/reader.pec");
 };

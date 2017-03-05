@@ -3,10 +3,10 @@ var Value = require("./Value").Value;
 var Text = require("./Text").Text;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
-function Document(value) {
+function Document(values) {
     Value.call(this, DocumentType.instance);
     this.mutable = true;
-    this.values = {};
+    this.values = values || {};
     return this;
 }
 

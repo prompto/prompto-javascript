@@ -2045,15 +2045,15 @@ EPromptoBuilder.prototype.exitAnyType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitAnyListType = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	this.setNodeValue(ctx, new type.ListType(type));
+	var typ = this.getNodeValue(ctx.any_type());
+	this.setNodeValue(ctx, new type.ListType(typ));
 };
 
 
 
 EPromptoBuilder.prototype.exitAnyDictType = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	this.setNodeValue(ctx, new type.DictType(type));
+	var typ = this.getNodeValue(ctx.typ);
+	this.setNodeValue(ctx, new type.DictType(typ));
 };
 
 

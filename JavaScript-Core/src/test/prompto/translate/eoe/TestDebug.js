@@ -6,3 +6,7 @@ exports.testStack = function(test) {
 	compareResourceEOE(test, "debug/stack.pec");
 };
 
+exports.testVariables = function(test) {
+	compareResourceEOE(test, "debug/variables.pec");
+};
+

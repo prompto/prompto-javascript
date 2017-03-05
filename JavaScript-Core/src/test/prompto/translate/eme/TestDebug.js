@@ -6,3 +6,7 @@ exports.testStack = function(test) {
 	compareResourceEME(test, "debug/stack.pec");
 };
 
+exports.testVariables = function(test) {
+	compareResourceEME(test, "debug/variables.pec");
+};
+
