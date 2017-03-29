@@ -22,6 +22,10 @@ exports.testCastDecimal = function(test) {
 	compareResourceEME(test, "cast/castDecimal.pec");
 };
 
+exports.testCastDocument = function(test) {
+	compareResourceEME(test, "cast/castDocument.pec");
+};
+
 exports.testCastInteger = function(test) {
 	compareResourceEME(test, "cast/castInteger.pec");
 };

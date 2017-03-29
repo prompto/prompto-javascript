@@ -33,6 +33,10 @@ exports.testCastDecimal = function(test) {
 	checkOutput(test, "cast/castDecimal.pec");
 };
 
+exports.testCastDocument = function(test) {
+	checkOutput(test, "cast/castDocument.pec");
+};
+
 exports.testCastInteger = function(test) {
 	checkOutput(test, "cast/castInteger.pec");
 };

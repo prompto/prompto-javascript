@@ -24,7 +24,7 @@ DocumentType.prototype.isMoreSpecificThan = function(context, other) {
     if ((other instanceof NullType) || (other instanceof AnyType) || (other instanceof MissingType))
         return true;
     else
-        return NativeType.isMoreSpecificThan.call(this, context, other);
+        return NativeType.prototype.isMoreSpecificThan.call(this, context, other);
 };
 
 
