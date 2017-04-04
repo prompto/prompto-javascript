@@ -2447,7 +2447,12 @@ EPromptoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
     var selector = this.getNodeValue(ctx.child);
     selector.parent = parent;
     this.setNodeValue(ctx, selector);
-}
+};
+
+EPromptoBuilder.prototype.exitPythonSelfExpression = function(ctx) {
+    this.setNodeValue(ctx, new python.PythonSelfExpression());
+};
+
 
 EPromptoBuilder.prototype.buildSection = function(node, section) {
 	var first = this.findFirstValidToken(node.start.tokenIndex);

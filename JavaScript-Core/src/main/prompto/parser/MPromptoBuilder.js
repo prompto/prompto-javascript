@@ -2381,7 +2381,11 @@ MPromptoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
     var selector = this.getNodeValue(ctx.child);
     selector.parent = parent;
     this.setNodeValue(ctx, selector);
-}
+};
+
+MPromptoBuilder.prototype.exitPythonSelfExpression = function(ctx) {
+    this.setNodeValue(ctx, new python.PythonSelfExpression());
+};
 
 
 MPromptoBuilder.prototype.buildSection = function(node, section) {

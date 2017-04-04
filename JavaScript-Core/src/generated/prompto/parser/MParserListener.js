@@ -2810,6 +2810,15 @@ MParserListener.prototype.exitPythonPrimaryExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#PythonSelfExpression.
+MParserListener.prototype.enterPythonSelfExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#PythonSelfExpression.
+MParserListener.prototype.exitPythonSelfExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#PythonParenthesisExpression.
 MParserListener.prototype.enterPythonParenthesisExpression = function(ctx) {
 };
@@ -2843,6 +2852,15 @@ MParserListener.prototype.enterPythonGlobalMethodExpression = function(ctx) {
 
 // Exit a parse tree produced by MParser#PythonGlobalMethodExpression.
 MParserListener.prototype.exitPythonGlobalMethodExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#python_self_expression.
+MParserListener.prototype.enterPython_self_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#python_self_expression.
+MParserListener.prototype.exitPython_self_expression = function(ctx) {
 };
 
 

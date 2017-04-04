@@ -15,11 +15,11 @@ JavaScriptThisExpression.prototype.interpret = function(context) {
 };
 
 JavaScriptThisExpression.prototype.toDialect = function(writer) {
-    return this.expression.toDialect(writer);
+    return writer.append("this");
 };
 
 JavaScriptThisExpression.prototype.toString = function() {
-	return this.expression.toString();
+	return "this";
 };
 
 exports.JavaScriptThisExpression = JavaScriptThisExpression;

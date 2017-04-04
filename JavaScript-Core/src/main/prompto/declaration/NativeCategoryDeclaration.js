@@ -15,7 +15,7 @@ NativeCategoryDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.
 NativeCategoryDeclaration.prototype.constructor = NativeCategoryDeclaration;
 
 NativeCategoryDeclaration.prototype.register = function(context) {
-    context.registerDeclaration(this);
+    ConcreteCategoryDeclaration.prototype.register.call(this, context);
     var bound = this.getBoundFunction(false);
     if(bound!=null) {
         var name = getTypeName(bound);

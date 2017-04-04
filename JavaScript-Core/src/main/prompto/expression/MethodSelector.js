@@ -7,11 +7,13 @@ var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var InstanceContext = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+var NativeInstance = null;
 var CategoryType = null;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
     InstanceContext = require("../runtime/Context").InstanceContext;
+    NativeInstance = require("../value/NativeInstance.js").NativeInstance;
 };
 
 function MethodSelector(parent, id) {
@@ -165,7 +167,7 @@ MethodSelector.prototype.newInstanceContext = function(context) {
 	}
     if(value instanceof TypeValue && value.value instanceof CategoryType)
         value = context.loadSingleton(value.value);
-	if(value instanceof ConcreteInstance) {
+	if(value instanceof ConcreteInstance || value instanceof NativeInstance) {
         context = context.newInstanceContext(value, null);
         return context.newChildContext();
     } else {

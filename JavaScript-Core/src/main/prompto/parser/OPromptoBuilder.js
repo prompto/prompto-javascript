@@ -2433,7 +2433,13 @@ OPromptoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
     var selector = this.getNodeValue(ctx.child);
     selector.parent = parent;
     this.setNodeValue(ctx, selector);
-}
+};
+
+
+OPromptoBuilder.prototype.exitPythonSelfExpression = function(ctx) {
+    this.setNodeValue(ctx, new python.PythonSelfExpression());
+};
+
 
 
 OPromptoBuilder.prototype.buildSection = function(node, section) {

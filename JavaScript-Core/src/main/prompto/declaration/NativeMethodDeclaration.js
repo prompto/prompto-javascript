@@ -43,7 +43,9 @@ NativeMethodDeclaration.prototype.castToReturnType = function(context, value) {
 };
 
 NativeMethodDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("def native ");
+    writer.append("def ");
+    if(this.memberOf==null)
+        writer.append("native ");
     writer.append(this.name);
     writer.append(" (");
     this.args.toDialect(writer);
@@ -63,7 +65,9 @@ NativeMethodDeclaration.prototype.toODialect = function(writer) {
         this.returnType.toDialect(writer);
         writer.append(" ");
     }
-    writer.append("native method ");
+    if(this.memberOf==null)
+        writer.append("native ");
+    writer.append("method ");
     writer.append(this.name);
     writer.append(" (");
     this.args.toDialect(writer);
@@ -80,7 +84,10 @@ NativeMethodDeclaration.prototype.toODialect = function(writer) {
 NativeMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
-    writer.append(" as native method ");
+    writer.append(" as ");
+    if(this.memberOf==null)
+        writer.append("native ");
+    writer.append("method ");
     this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
