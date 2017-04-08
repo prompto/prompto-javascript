@@ -2,8 +2,14 @@ var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclara
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var BuiltInContext = require("../runtime/Context").BuiltInContext;
 
-function BuiltInMethodDeclaration(name, arg) {
-    var args = arg ? new ArgumentList(arg) : null;
+function BuiltInMethodDeclaration(name) {
+    var args = null;
+    if ( arguments.length > 1 ) {
+        args = new ArgumentList();
+        for(var i = 1;i<arguments.length; i++) {
+            args.add(arguments[i]);
+        }
+    }
     BaseMethodDeclaration.call(this, name, args);
     return this;
 }

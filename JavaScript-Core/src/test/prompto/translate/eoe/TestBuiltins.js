@@ -154,6 +154,10 @@ exports.testTextLowercase = function(test) {
 	compareResourceEOE(test, "builtins/textLowercase.pec");
 };
 
+exports.testTextReplace = function(test) {
+	compareResourceEOE(test, "builtins/textReplace.pec");
+};
+
 exports.testTextSplit = function(test) {
 	compareResourceEOE(test, "builtins/textSplit.pec");
 };

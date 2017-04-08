@@ -157,6 +157,10 @@ exports.testTextLowercase = function(test) {
 	checkOutput(test, "builtins/textLowercase.pec");
 };
 
+exports.testTextReplace = function(test) {
+	checkOutput(test, "builtins/textReplace.pec");
+};
+
 exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.pec");
 };

@@ -1,10 +1,9 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
 
-function ArgumentList(item) {
+function ArgumentList() {
 	ObjectList.call(this);
-	item = item || null;
-	if(item!==null) {
-		this.add(item);
+    for (var i=0; i < arguments.length; i++) {
+		this.add(arguments[i]);
 	}
 	return this;
 }

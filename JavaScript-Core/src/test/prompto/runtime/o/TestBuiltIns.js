@@ -93,6 +93,10 @@ exports.testTextLowercase = function(test) {
 	checkOutput(test, "builtins/textLowercase.poc");
 };
 
+exports.testTextReplace = function(test) {
+	checkOutput(test, "builtins/textReplace.poc");
+};
+
 exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.poc");
 };

@@ -90,6 +90,10 @@ exports.testTextLowercase = function(test) {
 	compareResourceOMO(test, "builtins/textLowercase.poc");
 };
 
+exports.testTextReplace = function(test) {
+	compareResourceOMO(test, "builtins/textReplace.poc");
+};
+
 exports.testTextSplit = function(test) {
 	compareResourceOMO(test, "builtins/textSplit.poc");
 };
