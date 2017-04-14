@@ -118,6 +118,10 @@ exports.testEnumValue = function(test) {
 	compareResourceEOE(test, "builtins/enumValue.pec");
 };
 
+exports.testIntegerFormat = function(test) {
+	compareResourceEOE(test, "builtins/integerFormat.pec");
+};
+
 exports.testIntegerText = function(test) {
 	compareResourceEOE(test, "builtins/integerText.pec");
 };

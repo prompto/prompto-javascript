@@ -121,6 +121,10 @@ exports.testEnumValue = function(test) {
 	checkOutput(test, "builtins/enumValue.pec");
 };
 
+exports.testIntegerFormat = function(test) {
+	checkOutput(test, "builtins/integerFormat.pec");
+};
+
 exports.testIntegerText = function(test) {
 	checkOutput(test, "builtins/integerText.pec");
 };

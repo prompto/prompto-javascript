@@ -1,3 +1,4 @@
+var CategoryArgument = require("../argument/CategoryArgument.js").CategoryArgument;
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var DecimalType = require("./DecimalType").DecimalType;
@@ -6,6 +7,7 @@ var ListType = require("./ListType").ListType;
 var RangeType = require("./RangeType").RangeType;
 var TextType = null;
 var AnyType = require("./AnyType").AnyType;
+var Text = null;
 var Integer = require("../value/Integer").Integer;
 var IntegerRange = require("../value/IntegerRange").IntegerRange;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -15,6 +17,8 @@ exports.resolve = function() {
 	CharacterType = require("./CharacterType").CharacterType;
 	TextType = require("./TextType").TextType;
 	PeriodType = require("./PeriodType").PeriodType;
+	Text = require("../value/Text").Text;
+    resolveBuiltInMethodDeclaration();
 }
 
 function IntegerType()  {
@@ -135,5 +139,43 @@ IntegerType.prototype.convertJavaScriptValueToPromptoValue = function(context, v
 	}
 };
 
+IntegerType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "format":
+            return [new FormatMethodDeclaration()];
+		default:
+            return NativeType.prototype.getMemberMethods.call(context, name);
+    }
+};
 
 exports.IntegerType = IntegerType;
+
+function FormatMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "format",
+        new CategoryArgument(TextType.instance, new Identifier("format")));
+    return this;
+}
+
+function resolveBuiltInMethodDeclaration() {
+    BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+
+    FormatMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    FormatMethodDeclaration.prototype.constructor = FormatMethodDeclaration;
+
+    FormatMethodDeclaration.prototype.interpret = function(context) {
+        var value = this.getValue(context).getStorableData();
+        var format = context.getValue(new Identifier("format")).getStorableData();
+        value = this.format(value, format);
+        return new Text(value);
+    };
+
+    FormatMethodDeclaration.prototype.check = function(context) {
+        return TextType.instance;
+    };
+
+    FormatMethodDeclaration.prototype.format = function(value, format) {
+        // TODO support more than leading 0's
+        value = "000000000000" + value;
+        return value.substr(value.length - format.length);
+    };
+}

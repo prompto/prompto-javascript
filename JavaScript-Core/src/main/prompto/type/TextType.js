@@ -229,6 +229,4 @@ function resolveBuiltInMethodDeclaration() {
     };
 }
 
-
-
-    exports.TextType = TextType;
+exports.TextType = TextType;

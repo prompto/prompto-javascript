@@ -73,6 +73,10 @@ exports.testEnumValue = function(test) {
 	checkOutput(test, "builtins/enumValue.poc");
 };
 
+exports.testIntegerFormat = function(test) {
+	checkOutput(test, "builtins/integerFormat.poc");
+};
+
 exports.testListCount = function(test) {
 	checkOutput(test, "builtins/listCount.poc");
 };

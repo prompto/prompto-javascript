@@ -70,6 +70,10 @@ exports.testEnumValue = function(test) {
 	compareResourceOEO(test, "builtins/enumValue.poc");
 };
 
+exports.testIntegerFormat = function(test) {
+	compareResourceOEO(test, "builtins/integerFormat.poc");
+};
+
 exports.testListCount = function(test) {
 	compareResourceOEO(test, "builtins/listCount.poc");
 };
