@@ -31,7 +31,7 @@ FilteredExpression.prototype.check = function(context) {
 	if(!(listType instanceof ListType || listType instanceof TupleType || listType instanceof SetType)) {
 		throw new SyntaxError("Expecting a list type as data source !");
 	}
-	var local = context.newLocalContext();
+	var local = context.newChildContext();
 	local.registerValue(new Variable(this.itemId,listType.itemType));
 	var filterType = this.predicate.check(local);
 	if(filterType!=BooleanType.instance) {
@@ -53,7 +53,7 @@ FilteredExpression.prototype.interpret = function(context) {
 		throw new InternalError("Illegal fetch source: " + this.source);
 	}
 	var itemType = listType.itemType;
-    var local = context.newLocalContext();
+    var local = context.newChildContext();
     var item = new Variable(this.itemId, itemType);
     local.registerValue(item);
     return list.filter(local, this.itemId, this.predicate)
