@@ -37,6 +37,10 @@ exports.testMath = function(test) {
 	runTests(test, "core/math.pec");
 };
 
+exports.testParse = function(test) {
+	runTests(test, "core/parse.pec");
+};
+
 exports.testTime = function(test) {
 	runTests(test, "core/time.pec");
 };
