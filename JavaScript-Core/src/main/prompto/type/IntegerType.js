@@ -1,4 +1,4 @@
-var CategoryArgument = require("../argument/CategoryArgument.js").CategoryArgument;
+var CategoryArgument = null;
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var DecimalType = require("./DecimalType").DecimalType;
@@ -14,6 +14,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var PeriodType = null;
 
 exports.resolve = function() {
+    CategoryArgument = require("../argument/CategoryArgument.js").CategoryArgument;
 	CharacterType = require("./CharacterType").CharacterType;
 	TextType = require("./TextType").TextType;
 	PeriodType = require("./PeriodType").PeriodType;
