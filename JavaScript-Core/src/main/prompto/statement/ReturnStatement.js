@@ -54,4 +54,9 @@ ReturnStatement.prototype.interpret= function(context) {
         return this.expression.interpret(context) || NullValue.instance;
 };
 
+
+ReturnStatement.prototype.canReturn = function() {
+    return true;
+};
+
 exports.ReturnStatement = ReturnStatement;

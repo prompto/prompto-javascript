@@ -26,9 +26,9 @@ ForEachStatement.prototype.check = function(context) {
 
 ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 	var child = context.newChildContext();
-	var itemName = this.v2 == null ? this.v1 : this.v2;
+	var itemName = this.v2 === null ? this.v1 : this.v2;
 	context.registerValue(new Variable(itemName, elemType));
-	if (this.v2 != null) {
+	if (this.v2 !== null) {
 		context.registerValue(new Variable(this.v1, IntegerType.instance));
 	}
 	return this.statements.check(child, null);
@@ -41,7 +41,7 @@ ForEachStatement.prototype.interpret = function(context) {
 };
 
 ForEachStatement.prototype.evaluateItemIterator = function(elemType, context) {
-	if (this.v2 == null) {
+	if (this.v2 === null) {
 		return this.evaluateItemIteratorNoIndex(elemType, context);
 	} else {
 		return this.evaluateItemIteratorWithIndex(elemType, context);
@@ -100,14 +100,14 @@ ForEachStatement.prototype.toDialect = function(writer) {
 ForEachStatement.prototype.toODialect = function(writer) {
     writer.append("for each (");
     writer.append(this.v1.name);
-    if(this.v2!=null) {
+    if(this.v2 !== null) {
         writer.append(", ");
         writer.append(this.v2.name);
     }
     writer.append(" in ");
     this.source.toDialect(writer);
     writer.append(")");
-    var oneLine = this.statements.length==1 && (this.statements[0] instanceof SimpleStatement);
+    var oneLine = this.statements.length === 1 && (this.statements[0] instanceof SimpleStatement);
     if(!oneLine)
         writer.append(" {");
     writer.newLine();
@@ -118,12 +118,12 @@ ForEachStatement.prototype.toODialect = function(writer) {
         writer.append("}");
         writer.newLine();
     }
-}
+};
 
 ForEachStatement.prototype.toEDialect = function(writer) {
     writer.append("for each ");
     writer.append(this.v1.name);
-    if(this.v2!=null) {
+    if(this.v2 !== null) {
         writer.append(", ");
         writer.append(this.v2.name);
     }
@@ -134,7 +134,7 @@ ForEachStatement.prototype.toEDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
 
 ForEachStatement.prototype.toMDialect = function(writer) {
     writer.append("for ");
@@ -150,6 +150,11 @@ ForEachStatement.prototype.toMDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
+
+ForEachStatement.prototype.canReturn = function() {
+    return true;
+};
+
 
 exports.ForEachStatement = ForEachStatement;

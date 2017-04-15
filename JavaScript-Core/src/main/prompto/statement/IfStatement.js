@@ -82,6 +82,11 @@ IfStatement.prototype.toEDialect = function(writer) {
     writer.newLine();
 };
 
+
+IfStatement.prototype.canReturn = function() {
+    return true;
+};
+
 exports.IfStatement = IfStatement;
 
 function IfElementList(item) {

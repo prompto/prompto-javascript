@@ -60,7 +60,7 @@ DoWhileStatement.prototype.toEDialect = function(writer) {
     writer.append("while ");
     this.condition.toDialect(writer);
     writer.newLine();
-}
+};
 
 DoWhileStatement.prototype.toODialect = function(writer) {
     writer.append("do {\n");
@@ -70,7 +70,14 @@ DoWhileStatement.prototype.toODialect = function(writer) {
     writer.append("} while (");
     this.condition.toDialect(writer);
     writer.append(");\n");
-}
+};
+
+
+
+DoWhileStatement.prototype.canReturn = function() {
+    return true;
+};
+
 
 exports.DoWhileStatement = DoWhileStatement;
 

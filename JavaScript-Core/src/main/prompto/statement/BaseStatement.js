@@ -8,5 +8,8 @@ function BaseStatement() {
 BaseStatement.prototype  = Object.create(Section.prototype);
 BaseStatement.prototype.constructor = BaseStatement;
 
+BaseStatement.prototype.canReturn = function() {
+	return false;
+};
 
 exports.BaseStatement = BaseStatement;

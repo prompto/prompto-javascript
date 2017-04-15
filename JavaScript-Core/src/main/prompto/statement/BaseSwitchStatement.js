@@ -79,6 +79,11 @@ BaseSwitchStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
 
+
+BaseSwitchStatement.prototype.canReturn = function() {
+    return true;
+};
+
 exports.BaseSwitchStatement = BaseSwitchStatement;
 
 function SwitchCaseList(item) {

@@ -50,7 +50,7 @@ WhileStatement.prototype.toDialect = function(writer) {
 
 WhileStatement.prototype.toMDialect = function(writer) {
     this.toEDialect(writer);
-}
+};
 
 WhileStatement.prototype.toEDialect = function(writer) {
     writer.append("while ");
@@ -59,7 +59,7 @@ WhileStatement.prototype.toEDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
 
 WhileStatement.prototype.toODialect = function(writer) {
     writer.append("while (");
@@ -69,6 +69,11 @@ WhileStatement.prototype.toODialect = function(writer) {
     this.statements.toDialect(writer);
     writer.dedent();
     writer.append("}\n");
-}
+};
+
+
+WhileStatement.prototype.canReturn = function() {
+    return true;
+};
 
 exports.WhileStatement = WhileStatement;

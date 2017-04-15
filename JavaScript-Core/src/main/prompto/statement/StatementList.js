@@ -37,6 +37,8 @@ StatementList.prototype.check = function(context, returnType, nativeOnly) {
             this.forEach(function (stmt) {
                 if(stmt instanceof JavaScriptNativeCall) {
                     var type = stmt.check(context);
+                    if(!stmt.canReturn())
+                        type = VoidType.instance;
                     if(type!==VoidType.instance) {
                         types[type.name] = type;
                     }
@@ -88,6 +90,8 @@ StatementList.prototype.doInterpret = function(context) {
 		context.enterStatement(stmt);
 		try {
 			var result = stmt.interpret(context);
+			if(!stmt.canReturn())
+			    result = null;
 			if(result!=null)
 				return result;
 		} finally {

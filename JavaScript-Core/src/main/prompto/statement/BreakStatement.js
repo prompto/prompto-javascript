@@ -31,4 +31,9 @@ BreakStatement.prototype.interpret= function(context) {
     return BreakResult.instance;
 };
 
+
+BreakStatement.prototype.canReturn = function() {
+    return true;
+};
+
 exports.BreakStatement = BreakStatement;
