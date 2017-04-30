@@ -1,8 +1,8 @@
 module.exports = {
     entry: './index.js',
     output: {
-        path: './',
-        filename: 'prompto.bundle.js'
+        path: '../../../../prompto-platform/Server/src/main/resources/js/lib/',
+        filename: 'prompto.core.bundle.js'
     },
     node: {
         module: "empty",
