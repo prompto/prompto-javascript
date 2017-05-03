@@ -2,27 +2,27 @@ var IteratorType = require("../type/IteratorType").IteratorType;
 var Variable = require("../runtime/Variable").Variable;
 var Value = require("./Value").Value;
 
-function IterableValue(itemType, context, length, name, source, expression) {
+function IterableValue(context, name, itemType, source, length, expression) {
     Value.call(this, new IteratorType(itemType));
-    this.itemType = itemType;
     this.context = context;
-    this.length = length;
     this.name = name;
+    this.itemType = itemType;
     this.source = source;
+    this.count = length;
     this.expression = expression;
     return this;
-};
+}
 
 IterableValue.prototype = Object.create(Value.prototype);
 IterableValue.prototype.constructor = IterableValue;
 
 
 IterableValue.prototype.isEmpty = function() {
-    return this.length()==0;
+    return this.count===0;
 };
 
 IterableValue.prototype.length = function() {
-    return this.iterDocuments.length();
+    return this.count;
 };
 
 IterableValue.prototype.getIterator = function() {
@@ -42,8 +42,8 @@ IterableValue.prototype.next = function() {
 };
 
 IterableValue.prototype.getMemberValue = function(context, name) {
-    if ("count" == name)
-        return new Integer(this.length());
+    if ("count" === name)
+        return new Integer(this.count);
     else
         throw new InvalidDataError("No such member:" + name);
 };

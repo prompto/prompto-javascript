@@ -17,8 +17,7 @@ IteratorExpression.prototype.constructor = IteratorExpression;
 
 
 IteratorExpression.prototype.check = function(context) {
-    var srcType = this.source.check(context);
-    var elemType = srcType.checkIterator(context);
+    var elemType = this.source.check(context).checkIterator(context);
     var child = context.newChildContext();
     context.registerValue(new Variable(this.name, elemType));
     var itemType = this.expression.check(child);
@@ -26,12 +25,11 @@ IteratorExpression.prototype.check = function(context) {
 };
 
 IteratorExpression.prototype.interpret = function(context) {
-    var iterType = this.check(context);
-    var itemType = iterType.itemType;
+    var elemType = this.source.check(context).checkIterator(context);
     var items = this.source.interpret(context);
     var length = items.getMemberValue(context, new Identifier("count"), false);
     var iterator = this.getIterator(context, items);
-    return new IterableValue(itemType, context, length, this.name, iterator, this.expression);
+    return new IterableValue(context, this.name, elemType, iterator, length, this.expression);
 };
 
 IteratorExpression.prototype.getIterator = function(context, src) {
@@ -43,7 +41,7 @@ IteratorExpression.prototype.getIterator = function(context, src) {
 
 IteratorExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);
-}
+};
 
 IteratorExpression.prototype.toMDialect = function(writer) {
     this.expression.toDialect(writer);
@@ -51,7 +49,7 @@ IteratorExpression.prototype.toMDialect = function(writer) {
     writer.append(this.name.toString());
     writer.append(" in ");
     this.source.toDialect(writer);
-}
+};
 
 IteratorExpression.prototype.toODialect = function(writer) {
     this.expression.toDialect(writer);
@@ -60,7 +58,7 @@ IteratorExpression.prototype.toODialect = function(writer) {
     writer.append(" in ");
     this.source.toDialect(writer);
     writer.append(" )");
-}
+};
 
 IteratorExpression.prototype.toEDialect = function(writer) {
     this.expression.toDialect(writer);
@@ -68,6 +66,6 @@ IteratorExpression.prototype.toEDialect = function(writer) {
     writer.append(this.name.toString());
     writer.append(" in ");
     this.source.toDialect(writer);
-}
+};
 
 exports.IteratorExpression = IteratorExpression;
