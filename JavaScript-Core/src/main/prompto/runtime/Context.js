@@ -105,11 +105,11 @@ Context.prototype.newBuiltInContext = function(value) {
 };
 
 
-Context.prototype.newInstanceContext = function(instance, type) {
+Context.prototype.newInstanceContext = function(instance, type, isChild) {
     var context = new InstanceContext(instance, type);
     context.globals = this.globals;
-    context.calling = this;
-    context.parent = null;
+    context.calling = isChild ? this.calling : this;
+    context.parent = isChild ? this : null;
     context.debugger = this.debugger;
     context.problemListener = this.problemListener;
     return context;

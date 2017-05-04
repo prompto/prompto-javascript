@@ -12,7 +12,7 @@ WithSingletonStatement.prototype = Object.create(BaseStatement.prototype);
 WithSingletonStatement.prototype.constructor = WithSingletonStatement;
 
 WithSingletonStatement.prototype.check = function(context) {
-    var instanceContext = context.newInstanceContext(null, this.type);
+    var instanceContext = context.newInstanceContext(null, this.type, true);
     var childContext = instanceContext.newChildContext();
     return this.statements.check(childContext, null);
 };
@@ -20,7 +20,7 @@ WithSingletonStatement.prototype.check = function(context) {
 WithSingletonStatement.prototype.interpret = function(context) {
     // TODO synchronize
     var instance = context.loadSingleton(this.type);
-    var instanceContext = context.newInstanceContext(instance);
+    var instanceContext = context.newInstanceContext(instance, null, true);
     var childContext = instanceContext.newChildContext();
     return this.statements.interpret(childContext);
 };
