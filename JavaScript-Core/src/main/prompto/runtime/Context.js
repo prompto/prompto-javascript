@@ -494,7 +494,7 @@ InstanceContext.prototype.constructor = InstanceContext;
 
 
 InstanceContext.prototype.readRegisteredValue = function(name) {
-    var actual = this.instances[name];
+    var actual = this.instances[name] || null;
     // not very pure, but avoids a lot of complexity when registering a value
     if(actual === null) {
         var attr = this.getRegisteredDeclaration(name);

@@ -1,3 +1,4 @@
+var SingletonCategoryDeclaration = null;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
@@ -14,6 +15,7 @@ exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
     InstanceContext = require("../runtime/Context").InstanceContext;
     NativeInstance = require("../value/NativeInstance.js").NativeInstance;
+    SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration.js").SingletonCategoryDeclaration;
 };
 
 function MethodSelector(parent, id) {
@@ -153,7 +155,8 @@ MethodSelector.prototype.newLocalCheckContext = function(context, decl) {
 MethodSelector.prototype.newInstanceCheckContext = function(context) {
     var type = this.parent.check (context);
     if (type instanceof CategoryType) {
-        context = context.newInstanceContext(null, type);
+        var decl = context.getRegisteredDeclaration(type.name);
+        context = context.newInstanceContext(null, type, decl instanceof SingletonCategoryDeclaration);
         return context.newChildContext();
     } else
         return context.newChildContext();
