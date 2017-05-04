@@ -2,10 +2,8 @@ var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDe
 var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var BaseMethodDeclaration = require("../declaration/BaseMethodDeclaration").BaseMethodDeclaration;
-var TestMethodDeclaration = require("../declaration/TestMethodDeclaration").TestMethodDeclaration;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
@@ -50,7 +48,7 @@ Context.prototype.getCallingContext = function() {
 };
 
 Context.prototype.getParentMostContext = function() {
-	if(this.parent==null) {
+	if(this.parent === null) {
 		return this;
 	} else {
 		return this.parent.getParentMostContext();
@@ -188,14 +186,14 @@ Context.prototype.getLocalCatalog = function() {
 };
 
 Context.prototype.findAttribute = function(name) {
-    if(this==this.globals)
+    if(this===this.globals)
         return this.declarations[name] || null;
     else
         return this.globals.findAttribute(name);
 };
 
 Context.prototype.getAllAttributes = function() {
-    if(this==this.globals) {
+    if(this===this.globals) {
         var list = [];
         for(var name in this.declarations) {
             if(this.declarations[name] instanceof AttributeDeclaration)
@@ -236,7 +234,7 @@ Context.prototype.getRegisteredDeclaration = function(name) {
 	} else {
 		return null;
 	}
-}
+};
 
 Context.prototype.registerDeclaration = function(declaration) {
     if(this.checkDuplicate(declaration))
@@ -245,10 +243,10 @@ Context.prototype.registerDeclaration = function(declaration) {
 
 Context.prototype.checkDuplicate = function(declaration) {
     var actual = this.getRegistered(declaration.name) || null;
-    if (actual != null)
+    if (actual !== null)
         this.problemListener.reportDuplicate(declaration.name, declaration);
-    return actual == null;
-}
+    return actual === null;
+};
 
 
 Context.prototype.unregisterTestDeclaration = function(declaration) {
@@ -309,16 +307,22 @@ Context.prototype.hasTests = function() {
 };
 
 Context.prototype.registerNativeBinding = function(type, declaration) {
-    if(this==this.globals)
+    if(this === this.globals)
         this.nativeBindings[type] = declaration;
     else
         this.globals.registerNativeBinding(type, declaration);
 };
 
 Context.prototype.getNativeBinding = function(type) {
-    if(this==this.globals)
-        return this.nativeBindings[type] || null;
-    else
+    if(this===this.globals) {
+        var binding = this.nativeBindings[type] || null;
+        if (binding !== null)
+            return binding;
+        else if (this.parent !== null)
+            return this.parent.getNativeBinding(type);
+        else
+            return null;
+    } else
         return this.globals.getNativeBinding(type);
 };
 
@@ -338,7 +342,7 @@ MethodDeclarationMap.prototype.register = function(declaration, context) {
 
 MethodDeclarationMap.prototype.unregister = function(proto) {
     delete this.protos[proto];
-    return Object.getOwnPropertyNames(this.protos).length == 0;
+    return Object.getOwnPropertyNames(this.protos).length === 0;
 };
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context) {
@@ -357,7 +361,7 @@ MethodDeclarationMap.prototype.getFirst = function() {
 
 Context.prototype.getRegisteredValue = function(name) {
     var context = this.contextForValue(name);
-    if (context == null)
+    if (context === null)
         return null;
     else
         return context.readRegisteredValue(name);
@@ -390,7 +394,7 @@ Context.prototype.unregisterValue = function(value) {
 
 
 Context.prototype.hasValue = function(id) {
-    return this.contextForValue(id.name)!=null;
+    return this.contextForValue(id.name) !== null;
 };
 
 
@@ -434,9 +438,9 @@ Context.prototype.writeValue = function(id, value) {
 };
 
 Context.prototype.autocast = function(name, value) {
-    if(value!=null && value instanceof Integer) {
+    if(value !== null && value instanceof Integer) {
         var actual = this.instances[name];
-        if(actual.getType(this)==DecimalType.instance)
+        if(actual.getType(this) === DecimalType.instance)
             value = new Decimal(value.DecimalValue());
     }
     return value;
@@ -481,7 +485,7 @@ ResourceContext.prototype.constructor = ResourceContext;
 function InstanceContext(instance, type) {
 	Context.call(this);
 	this.instance = instance || null;
-    this.instanceType = type!=null ? type : instance.type;
+    this.instanceType = type !== null ? type : instance.type;
 	return this;
 }
 
@@ -492,7 +496,7 @@ InstanceContext.prototype.constructor = InstanceContext;
 InstanceContext.prototype.readRegisteredValue = function(name) {
     var actual = this.instances[name];
     // not very pure, but avoids a lot of complexity when registering a value
-    if(actual==null) {
+    if(actual === null) {
         var attr = this.getRegisteredDeclaration(name);
         var type = attr.getType();
         actual = new Variable(name, type);
@@ -506,7 +510,7 @@ InstanceContext.prototype.contextForValue = function(name) {
 	// params and variables have precedence over members
 	// so first look in context values
 	var context = Context.prototype.contextForValue.call(this, name);
-	if(context!=null) {
+	if(context !== null) {
 		return context;
 	} else if(this.getDeclaration().hasAttribute(this, name)) {
 		return this;
@@ -516,7 +520,7 @@ InstanceContext.prototype.contextForValue = function(name) {
 };
 
 InstanceContext.prototype.getDeclaration = function() {
-    if(this.instance!=null)
+    if(this.instance !== null)
         return this.instance.declaration;
     else
         return this.getRegisteredDeclaration(this.instanceType.name);
@@ -557,7 +561,7 @@ DocumentContext.prototype.contextForValue = function(name) {
     // params and variables have precedence over members
     // so first look in context values
     var context = Context.prototype.contextForValue.call(this, name);
-    if (context != null)
+    if (context !== null)
         return context;
     // since any name is valid in the context of a document
     // simply return this document context
@@ -576,39 +580,39 @@ DocumentContext.prototype.writeValue = function(name) {
 
 
 Context.prototype.enterMethod = function(method) {
-	if(this.debugger!=null) {
+	if(this.debugger !== null) {
 		this.debugger.enterMethod(this, method);
 	}
 };
 
 Context.prototype.leaveMethod = function(method) {
-	if(this.debugger!=null) {
+	if(this.debugger !== null) {
 		this.debugger.leaveMethod(this, method);
 	}
 };
 
 Context.prototype.enterStatement = function(statement) {
-	if(this.debugger!=null) {
+	if(this.debugger !== null) {
 		this.debugger.enterStatement(this, statement);
 	}
 };
 
 Context.prototype.leaveStatement = function(statement) {
-	if(this.debugger!=null) {
+	if(this.debugger !== null) {
 		this.debugger.leaveStatement(this, statement);
 	}
 };
 
 Context.prototype.terminated = function() {
-	if (this.debugger != null) {
+	if (this.debugger !== null) {
 		this.debugger.terminated();
 	}
 };
 
 Context.prototype.loadSingleton = function(type) {
-    if(this==this.globals) {
+    if(this === this.globals) {
         var value = this.values[type.name] || null;
-        if(value==null) {
+        if(value === null) {
             var decl = this.declarations[type.name] || null;
             if(!(decl instanceof ConcreteCategoryDeclaration))
                 throw new InternalError("No such singleton:" + type.name);
