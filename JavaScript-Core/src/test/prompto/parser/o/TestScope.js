@@ -13,6 +13,7 @@ exports.testAttribute = function(test) {
 		var actual = context.getRegisteredDeclaration("id");
 		test.ok(actual);
 		test.ok(actual instanceof prompto.declaration.AttributeDeclaration);
+        stmts = parseString("attribute id: Integer;");
 		stmts.register(context);
 	}, prompto.error.SyntaxError);
 	test.done();
@@ -28,6 +29,7 @@ exports.testCategory = function(test) {
 		var actual = context.getRegisteredDeclaration("Person");
 		test.ok(actual);
 		test.ok(actual instanceof prompto.declaration.CategoryDeclaration);
+        stmts = parseString("category Person(id, name);");
 		stmts.register(context);
 	}, prompto.error.SyntaxError);
 	test.done();
