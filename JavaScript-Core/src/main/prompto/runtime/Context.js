@@ -243,7 +243,7 @@ Context.prototype.registerDeclaration = function(declaration) {
 
 Context.prototype.checkDuplicate = function(declaration) {
     var actual = this.getRegistered(declaration.name) || null;
-    if (actual !== null)
+    if (actual !== null && actual !== declaration)
         this.problemListener.reportDuplicate(declaration.name, declaration);
     return actual === null;
 };
