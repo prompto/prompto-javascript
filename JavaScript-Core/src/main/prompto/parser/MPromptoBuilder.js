@@ -205,6 +205,20 @@ MPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitPeriodType = function(ctx) {
+    this.setNodeValue(ctx, type.PeriodType.instance);
+};
+
+
+MPromptoBuilder.prototype.exitVersionLiteral = function(ctx) {
+    this.setNodeValue(ctx, new literal.VersionLiteral(ctx.t.text));
+};
+
+
+MPromptoBuilder.prototype.exitVersionType = function(ctx) {
+    this.setNodeValue(ctx, type.VersionType.instance);
+};
+
 MPromptoBuilder.prototype.exitAttribute_identifier = function(ctx) {
     var name = new grammar.Identifier(ctx.getText());
     this.setNodeValue(ctx, name);

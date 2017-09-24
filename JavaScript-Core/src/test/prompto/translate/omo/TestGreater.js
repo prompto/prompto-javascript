@@ -58,3 +58,7 @@ exports.testGtTime = function(test) {
 	compareResourceOMO(test, "greater/gtTime.poc");
 };
 
+exports.testGtVersion = function(test) {
+	compareResourceOMO(test, "greater/gtVersion.poc");
+};
+

@@ -69,3 +69,7 @@ exports.testGtTime = function(test) {
 	checkOutput(test, "greater/gtTime.pec");
 };
 
+exports.testGtVersion = function(test) {
+	checkOutput(test, "greater/gtVersion.pec");
+};
+

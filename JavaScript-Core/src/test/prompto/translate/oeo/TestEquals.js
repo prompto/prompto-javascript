@@ -54,6 +54,10 @@ exports.testEqTime = function(test) {
 	compareResourceOEO(test, "equals/eqTime.poc");
 };
 
+exports.testEqVersion = function(test) {
+	compareResourceOEO(test, "equals/eqVersion.poc");
+};
+
 exports.testIsBoolean = function(test) {
 	compareResourceOEO(test, "equals/isBoolean.poc");
 };

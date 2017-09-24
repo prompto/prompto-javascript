@@ -65,6 +65,10 @@ exports.testEqTime = function(test) {
 	checkOutput(test, "equals/eqTime.pec");
 };
 
+exports.testEqVersion = function(test) {
+	checkOutput(test, "equals/eqVersion.pec");
+};
+
 exports.testIsBoolean = function(test) {
 	checkOutput(test, "equals/isBoolean.pec");
 };

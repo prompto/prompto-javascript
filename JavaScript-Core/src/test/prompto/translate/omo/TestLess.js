@@ -58,3 +58,7 @@ exports.testLtTime = function(test) {
 	compareResourceOMO(test, "less/ltTime.poc");
 };
 
+exports.testLtVersion = function(test) {
+	compareResourceOMO(test, "less/ltVersion.poc");
+};
+

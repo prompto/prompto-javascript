@@ -58,3 +58,7 @@ exports.testLtTime = function(test) {
 	compareResourceEME(test, "less/ltTime.pec");
 };
 
+exports.testLtVersion = function(test) {
+	compareResourceEME(test, "less/ltVersion.pec");
+};
+

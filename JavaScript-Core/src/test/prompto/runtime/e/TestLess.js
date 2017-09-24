@@ -69,3 +69,7 @@ exports.testLtTime = function(test) {
 	checkOutput(test, "less/ltTime.pec");
 };
 
+exports.testLtVersion = function(test) {
+	checkOutput(test, "less/ltVersion.pec");
+};
+

@@ -65,6 +65,10 @@ exports.testEqTime = function(test) {
 	checkOutput(test, "equals/eqTime.poc");
 };
 
+exports.testEqVersion = function(test) {
+	checkOutput(test, "equals/eqVersion.poc");
+};
+
 exports.testIsBoolean = function(test) {
 	checkOutput(test, "equals/isBoolean.poc");
 };

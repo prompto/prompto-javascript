@@ -58,3 +58,7 @@ exports.testGtTime = function(test) {
 	compareResourceOEO(test, "greater/gtTime.poc");
 };
 
+exports.testGtVersion = function(test) {
+	compareResourceOEO(test, "greater/gtVersion.poc");
+};
+

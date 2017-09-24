@@ -58,3 +58,7 @@ exports.testGtTime = function(test) {
 	compareResourceEME(test, "greater/gtTime.pec");
 };
 
+exports.testGtVersion = function(test) {
+	compareResourceEME(test, "greater/gtVersion.pec");
+};
+

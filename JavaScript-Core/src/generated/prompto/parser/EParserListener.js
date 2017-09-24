@@ -1658,6 +1658,15 @@ EParserListener.prototype.exitPeriodType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#VersionType.
+EParserListener.prototype.enterVersionType = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#VersionType.
+EParserListener.prototype.exitVersionType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#CodeType.
 EParserListener.prototype.enterCodeType = function(ctx) {
 };
@@ -2303,6 +2312,15 @@ EParserListener.prototype.enterPeriodLiteral = function(ctx) {
 
 // Exit a parse tree produced by EParser#PeriodLiteral.
 EParserListener.prototype.exitPeriodLiteral = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#VersionLiteral.
+EParserListener.prototype.enterVersionLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#VersionLiteral.
+EParserListener.prototype.exitVersionLiteral = function(ctx) {
 };
 
 
