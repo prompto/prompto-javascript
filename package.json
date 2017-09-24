@@ -12,7 +12,7 @@
     "sync-request": "3.0.1"
   },
   "devDependencies": {
-    "webpack": "^1.13.1"
+    "webpack": "^1.15.0"
   },
   "scripts": {
     "build": "webpack",

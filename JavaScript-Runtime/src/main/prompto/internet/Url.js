@@ -20,7 +20,7 @@ Url.prototype.close = function() {
 Url.prototype.readFully = function() {
     if(isNodeJs) {
         // need a synchronous call here, highly discouraged in main thread
-        var request = require('sync-request');
+        var request = eval("require('sync-request')");
         var res = request('GET', this.path);
         return res.getBody().toString();
     } else {

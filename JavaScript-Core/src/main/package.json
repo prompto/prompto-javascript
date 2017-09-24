@@ -10,6 +10,6 @@
   "scripts": {
     "build": "webpack"
   },
-  "author": "",
-  "license": "ISC"
+  "author": "Eric Vergnaud",
+  "license": "TO-BE-DONE"
 }
