@@ -187,7 +187,7 @@ Context.prototype.getLocalCatalog = function() {
 
 Context.prototype.findAttribute = function(name) {
     if(this===this.globals)
-        return this.declarations[name] || null;
+        return this.declarations[name] || (this.parent ? this.parent.findAttribute(name) : null);
     else
         return this.globals.findAttribute(name);
 };
@@ -199,6 +199,8 @@ Context.prototype.getAllAttributes = function() {
             if(this.declarations[name] instanceof AttributeDeclaration)
                 list.push(this.declarations[name]);
         }
+        if(this.parent)
+            list = list.concat(this.parent.getAllAttributes());
         return list;
     } else
         return this.globals.getAllAttributes();
