@@ -117,6 +117,9 @@ TestMethodDeclaration.prototype.interpretBody = function(context)
 
 TestMethodDeclaration.prototype.interpretError = function(context, ex)
 {
+    // help fix runtime issues by rethrowing non PromptoErrors
+    if(!ex.interpret)
+        throw ex;
     var expectedError = this.error == null ? null : this.error.interpret (context);
     var actual = ex.interpret (context, new Identifier("__test_error__"));
     if (expectedError!=null && expectedError.equals (actual))
