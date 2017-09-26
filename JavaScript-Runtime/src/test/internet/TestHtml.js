@@ -1,4 +1,4 @@
-var Encoder = require("../../main/prompto/internet/Html").Encoder;
+var Encoder = require("../../main/prompto/internet/Html");
 
 exports.testEncode = function(test) {
     var encoded = Encoder.htmlEncode("a<b");
