@@ -2,6 +2,7 @@ var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifie
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var Instance = require("../value/Value").Instance;
+var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Value = require("../value/Value").Value;
 var Bool = require("../value/Bool").Bool;
 var MatchOp = require("../store/MatchOp").MatchOp;
