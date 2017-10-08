@@ -98,6 +98,10 @@ exports.testTextReplace = function(test) {
 	compareResourceOMO(test, "builtins/textReplace.poc");
 };
 
+exports.testTextReplaceAll = function(test) {
+	compareResourceOMO(test, "builtins/textReplaceAll.poc");
+};
+
 exports.testTextSplit = function(test) {
 	compareResourceOMO(test, "builtins/textSplit.poc");
 };

@@ -165,6 +165,10 @@ exports.testTextReplace = function(test) {
 	checkOutput(test, "builtins/textReplace.pec");
 };
 
+exports.testTextReplaceAll = function(test) {
+	checkOutput(test, "builtins/textReplaceAll.pec");
+};
+
 exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.pec");
 };

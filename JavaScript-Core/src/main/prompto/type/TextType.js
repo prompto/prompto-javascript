@@ -106,6 +106,8 @@ TextType.prototype.getMemberMethods = function(context, name) {
             return [new TrimMethodDeclaration()];
         case "replace":
             return [new ReplaceMethodDeclaration()];
+        case "replaceAll":
+            return [new ReplaceAllMethodDeclaration()];
         case "split":
             return [new SplitMethodDeclaration()];
         default:
@@ -140,6 +142,13 @@ function SplitMethodDeclaration() {
 
 function ReplaceMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "replace",
+        new CategoryArgument(TextType.instance, new Identifier("toReplace")),
+        new CategoryArgument(TextType.instance, new Identifier("replaceWith")));
+    return this;
+}
+
+function ReplaceAllMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "replaceAll",
         new CategoryArgument(TextType.instance, new Identifier("toReplace")),
         new CategoryArgument(TextType.instance, new Identifier("replaceWith")));
     return this;
@@ -210,6 +219,22 @@ function resolveBuiltInMethodDeclaration() {
     };
 
     ReplaceMethodDeclaration.prototype.check = function(context) {
+        return TextType.instance;
+    };
+
+
+    ReplaceAllMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    ReplaceAllMethodDeclaration.prototype.constructor = ReplaceAllMethodDeclaration;
+
+    ReplaceAllMethodDeclaration.prototype.interpret = function(context) {
+        var value = this.getValue(context).getStorableData();
+        var toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
+        var replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
+        value = value.replace(new RegExp(toReplace, 'g'), replaceWith);
+        return new Text(value);
+    };
+
+    ReplaceAllMethodDeclaration.prototype.check = function(context) {
         return TextType.instance;
     };
 

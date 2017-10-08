@@ -101,6 +101,10 @@ exports.testTextReplace = function(test) {
 	checkOutput(test, "builtins/textReplace.poc");
 };
 
+exports.testTextReplaceAll = function(test) {
+	checkOutput(test, "builtins/textReplaceAll.poc");
+};
+
 exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.poc");
 };

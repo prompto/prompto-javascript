@@ -162,6 +162,10 @@ exports.testTextReplace = function(test) {
 	compareResourceEOE(test, "builtins/textReplace.pec");
 };
 
+exports.testTextReplaceAll = function(test) {
+	compareResourceEOE(test, "builtins/textReplaceAll.pec");
+};
+
 exports.testTextSplit = function(test) {
 	compareResourceEOE(test, "builtins/textSplit.pec");
 };
