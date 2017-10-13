@@ -14,3 +14,11 @@ exports.testTextEnum = function(test) {
 	compareResourceEOE(test, "enums/textEnum.pec");
 };
 
+exports.testTextEnumArg = function(test) {
+	compareResourceEOE(test, "enums/textEnumArg.pec");
+};
+
+exports.testTextEnumVar = function(test) {
+	compareResourceEOE(test, "enums/textEnumVar.pec");
+};
+

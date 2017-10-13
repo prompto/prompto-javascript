@@ -4,6 +4,7 @@ var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;
 var CategoryDeclaration = null;
 var ConcreteCategoryDeclaration = null;
+var EnumeratedNativeDeclaration = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
@@ -12,6 +13,7 @@ var TextType = require("./TextType").TextType;
 var AnyType = require("./AnyType").AnyType;
 var MissingType = require("./MissingType").MissingType;
 var PromptoError = require("../error/PromptoError").PromptoError;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
@@ -23,6 +25,7 @@ exports.resolve = function() {
 	ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+    EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 }
 function CategoryType(id) {
 	BaseType.call(this, id);
@@ -165,21 +168,27 @@ CategoryType.prototype.checkExists = function(context) {
 };
 
 CategoryType.prototype.checkMember = function(context, name) {
-	var cd = context.getRegisteredDeclaration(this.name);
-	if (cd == null) {
-		throw new SyntaxError("Unknown category:" + this.name);
-	}
-	if (cd.hasAttribute(context, name)) {
-        var ad = context.getRegisteredDeclaration(name);
-        if (ad == null) {
-            throw new SyntaxError("Unknown atttribute:" + name);
+    var cd = context.getRegisteredDeclaration(this.name);
+    if (cd == null) {
+        throw new SyntaxError("Unknown category:" + this.name);
+    }
+    if (cd instanceof EnumeratedNativeDeclaration) {
+        cd.getType(context).checkMember(context, name);
+    } else if (cd instanceof CategoryDeclaration) {
+        if (cd.hasAttribute(context, name)) {
+            var ad = context.getRegisteredDeclaration(name);
+            if (ad == null) {
+                throw new SyntaxError("Unknown attribute:" + name);
+            }
+            return ad.getType(context);
+        } else if ("text" == name.toString()) {
+            return TextType.instance
+        } else {
+            throw new SyntaxError("No attribute:" + name + " in category:" + this.name);
         }
-        return ad.getType(context);
-    } else if("text" == name.toString()) {
-        return TextType.instance
-    } else {
-		throw new SyntaxError("No attribute:" + name + " in category:" + this.name);
-	}
+	} else {
+        throw new SyntaxError("Not a category:" + this.name);
+    }
 };
 
 

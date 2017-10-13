@@ -25,3 +25,11 @@ exports.testTextEnum = function(test) {
 	checkOutput(test, "enums/textEnum.poc");
 };
 
+exports.testTextEnumArg = function(test) {
+	checkOutput(test, "enums/textEnumArg.poc");
+};
+
+exports.testTextEnumVar = function(test) {
+	checkOutput(test, "enums/textEnumVar.poc");
+};
+

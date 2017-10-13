@@ -14,9 +14,9 @@ EnumeratedNativeType.prototype.constructor = EnumeratedNativeType;
 
 EnumeratedNativeType.prototype.checkMember = function(context, name) {
 	if ("symbols"==name) {
-		return new ListType(this.derivedFrom);
+		return new ListType(this);
 	} else if ("value"==name) {
-		return this;
+		return this.derivedFrom;
 	} else if ("name"==name) {
 		return TextType.instance;
 	} else {
@@ -36,5 +36,9 @@ EnumeratedNativeType.prototype.getMemberValue = function(context, name) {
 	}
 };
 
+
+EnumeratedNativeType.prototype.isAssignableFrom = function(context, other) {
+	return this.id.name === other.id.name;
+};
 
 exports.EnumeratedNativeType = EnumeratedNativeType;

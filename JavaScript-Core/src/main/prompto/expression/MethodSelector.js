@@ -1,4 +1,5 @@
 var SingletonCategoryDeclaration = null;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;

@@ -55,12 +55,8 @@ MemberSelector.prototype.check = function(context) {
 MemberSelector.prototype.interpret = function(context) {
     // resolve parent to keep clarity
     var parent = this.resolveParent(context);
-    // special case for Symbol which evaluates as value
-    var value = this.interpretSymbol(context, parent);
-    if(value!=null)
-        return value;
     // special case for singletons
-    value = this.interpretSingleton(context, parent);
+    var value = this.interpretSingleton(context, parent);
     if(value!=null)
         return value;
     // special case for 'static' type members (like Enum.symbols, Type.name etc...)
@@ -91,17 +87,6 @@ MemberSelector.prototype.interpretSingleton = function(context, parent) {
         var instance = context.loadSingleton(parent.value);
         if(instance!=null)
             return instance.getMemberValue(context, this.name);
-    }
-    return null;
-};
-
-MemberSelector.prototype.interpretSymbol = function(context, parent) {
-    if (parent instanceof SymbolExpression)
-    {
-        if ("name"==this.name)
-            return new Text(parent.name);
-        else if("value"==this.name)
-            return parent.interpret(context);
     }
     return null;
 };

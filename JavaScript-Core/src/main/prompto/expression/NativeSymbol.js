@@ -1,5 +1,6 @@
 var Symbol = require("./Symbol").Symbol;
 var Dialect = require("../parser/Dialect").Dialect;
+var Text = require("../value/Text").Text;
 
 function NativeSymbol(id, expression) {
 	Symbol.call(this, id);
@@ -34,20 +35,7 @@ NativeSymbol.prototype.toDialect = function(writer) {
     }
 };
 
-/*
-@Override
-public boolean equals(Object obj) {
-	if(obj==this)
-		return true;
-	if(obj==null)
-		return false;
-	if(!(obj instanceof NativeSymbol))
-		return false;
-	NativeSymbol other = (NativeSymbol)obj;
-	return this.getName().equals(other.getName())
-			&& this.getExpression().equals(other.getExpression());
-}
-*/
+
 
 NativeSymbol.prototype.check = function(context) {
 	var actual = this.expression.check(context);
@@ -58,7 +46,18 @@ NativeSymbol.prototype.check = function(context) {
 };
 
 NativeSymbol.prototype.interpret = function(context) {
-	return this.expression.interpret(context);
+	return this;
 }
+
+
+NativeSymbol.prototype.getMemberValue = function(context, name, autoCreate) {
+    if("name" === name)
+        return new Text(this.name);
+    else if("value" === name)
+        return this.expression.interpret(context);
+    else
+        return Symbol.prototype.getMemberValue.call(context, name, autoCreate);
+}
+
 
 exports.NativeSymbol = NativeSymbol;

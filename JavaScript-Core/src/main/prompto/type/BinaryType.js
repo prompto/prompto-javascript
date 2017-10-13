@@ -15,7 +15,7 @@ BinaryType.prototype.checkMember = function(context, id) {
     } else if ("format" === name ) {
         return TextType.instance;
     } else
-        return BinaryType.prototype.checkMember.call(context, id);
+        return NativeType.prototype.checkMember.call(context, id);
 };
 
 exports.BinaryType = BinaryType;
