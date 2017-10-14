@@ -154,11 +154,12 @@ Context.prototype.getLocalCatalog = function() {
         var decl = this.declarations[name];
         if(decl instanceof AttributeDeclaration)
             catalog.attributes.push(name);
-        else if(decl instanceof EnumeratedCategoryDeclaration)
-            catalog.enumerations.push(name);
-        else if(decl instanceof EnumeratedNativeDeclaration)
-            catalog.enumerations.push(name);
-        else if(decl instanceof CategoryDeclaration)
+        else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
+            var info = {};
+            info.name = decl.name;
+            info.symbols = decl.symbols.map(function(s){return s.name;});
+            catalog.enumerations.push(info);
+        } else if(decl instanceof CategoryDeclaration)
             catalog.categories.push(name);
         else if(decl instanceof MethodDeclarationMap) {
             var method = {};
@@ -174,13 +175,15 @@ Context.prototype.getLocalCatalog = function() {
     for(var name in this.tests)
         catalog.tests.push(name);
     // minimize for UI optimization
-    if(!catalog.attributes.length)
+    if(catalog.attributes.length <= 0)
         delete catalog.attributes;
-    if(!catalog.methods.length)
-        delete catalog.methods;
-    if(!catalog.categories.length)
+    if(catalog.categories.length  <= 0)
         delete catalog.categories;
-    if(!catalog.tests.length)
+    if(catalog.enumerations.length  <= 0)
+        delete catalog.enumerations;
+    if(catalog.methods.length  <= 0)
+        delete catalog.methods;
+    if(catalog.tests.length <= 0)
         delete catalog.tests;
     return catalog;
 };
