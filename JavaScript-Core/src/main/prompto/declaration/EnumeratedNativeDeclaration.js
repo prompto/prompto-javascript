@@ -4,10 +4,10 @@ var EnumeratedNativeType = require("../type/EnumeratedNativeType").EnumeratedNat
 function EnumeratedNativeDeclaration(id, derivedFrom, symbols) {
 	BaseDeclaration.call(this, id);
 	this.type = new EnumeratedNativeType(id, derivedFrom);
-	this.symbols = symbols;
-    this.symbols.forEach(function(symbol) {
-		symbol.type = this.type;
-	}, this);
+	this.symbols = symbols || [];
+    this.symbols.forEach(function (symbol) {
+        symbol.type = this.type;
+    }, this);
 	return this;
 }
 

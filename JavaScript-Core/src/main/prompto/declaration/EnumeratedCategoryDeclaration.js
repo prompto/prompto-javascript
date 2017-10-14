@@ -32,11 +32,11 @@ EnumeratedCategoryDeclaration.prototype.hasAttribute = function(context, name) {
 
 
 EnumeratedCategoryDeclaration.prototype.setSymbols = function(symbols) {
-	this.symbols = symbols;
-	var type = new EnumeratedCategoryType(this.id);
-	this.symbols.forEach(function(symbol) {
+	this.symbols = symbols || [];
+    var type = new EnumeratedCategoryType(this.id);
+    this.symbols.forEach(function(symbol) {
         symbol.type = type;
-	});
+    });
 };
 
 EnumeratedCategoryDeclaration.prototype.register = function(context) {
