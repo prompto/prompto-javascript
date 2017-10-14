@@ -3,6 +3,7 @@ var Section = require("../parser/Section").Section;
 function Symbol(id) {
     Section.call(this);
     this.id = id;
+    this.mutable = false;
     return this;
 }
 
@@ -22,6 +23,16 @@ Symbol.prototype.register = function (context) {
 
 Symbol.prototype.unregister = function (context) {
     context.unregisterValue(this);
+};
+
+
+Symbol.prototype.getStorableData = function () {
+    return this.id.name;
+};
+
+
+Symbol.prototype.collectStorables = function (storables) {
+    // nothing to do
 };
 
 

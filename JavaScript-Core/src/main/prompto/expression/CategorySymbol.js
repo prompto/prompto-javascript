@@ -4,6 +4,7 @@ var Text = require("../value/Text").Text;
 function CategorySymbol(id, assignments) {
 	Symbol.call(this, id);
 	this.assignments = assignments;
+	this.instance = null;
 	this.type = null;
 	return this;
 }
@@ -47,19 +48,35 @@ CategorySymbol.prototype.check = function(context) {
 };
 
 CategorySymbol.prototype.interpret = function(context) {
-	var instance = this.type.newInstance(context);
-    instance.mutable = true;
-	if(this.assignments!=null) {
-        context = context.newLocalContext();
-        this.assignments.forEach(function(assignment) {
-			var value = assignment.expression.interpret(context);
-			instance.setMember(context, assignment.name, value);
-		});
-	}
-    instance.setMember(context, "name", new Text(this.name));
-    instance.mutable = false;
-    return instance;
+    return this.makeInstance(context);
 };
+
+
+CategorySymbol.prototype.makeInstance = function(context) {
+	if(this.instance===null) {
+		var instance = this.type.newInstance(context);
+        instance.mutable = true;
+        if(this.assignments!=null) {
+            context = context.newLocalContext();
+            this.assignments.forEach(function(assignment) {
+                var value = assignment.expression.interpret(context);
+                instance.setMember(context, assignment.name, value);
+            });
+        }
+        instance.setMember(context, "name", new Text(this.name));
+        instance.mutable = false;
+        this.instance = instance;
+    }
+    return this.instance;
+};
+
+
+
+CategorySymbol.prototype.getMemberValue = function(context, name, autoCreate) {
+	var instance = this.makeInstance(context);
+	return instance.getMemberValue(context, name, autoCreate);
+}
+
 
 
 exports.CategorySymbol = CategorySymbol;

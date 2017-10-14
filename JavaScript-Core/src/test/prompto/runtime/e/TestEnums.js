@@ -21,6 +21,18 @@ exports.testIntegerEnum = function(test) {
 	checkOutput(test, "enums/integerEnum.pec");
 };
 
+exports.testStoreCategoryEnum = function(test) {
+	checkOutput(test, "enums/storeCategoryEnum.pec");
+};
+
+exports.testStoreIntegerEnum = function(test) {
+	checkOutput(test, "enums/storeIntegerEnum.pec");
+};
+
+exports.testStoreTextEnum = function(test) {
+	checkOutput(test, "enums/storeTextEnum.pec");
+};
+
 exports.testTextEnum = function(test) {
 	checkOutput(test, "enums/textEnum.pec");
 };

@@ -14,10 +14,13 @@ var Text = require("./Text").Text;
 var Instance = require("./Value").Instance;
 var DataStore = require("../store/DataStore").DataStore;
 var TypeUtils = require("../utils/TypeUtils");
-
+var EnumeratedNativeDeclaration = null;
+var EnumeratedCategoryDeclaration = null;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
+    EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
+    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
 };
 
 function ConcreteInstance(context, declaration) {
@@ -62,8 +65,11 @@ ConcreteInstance.prototype.getOrCreateDbId = function() {
 
 
 ConcreteInstance.prototype.getStorableData = function() {
-    // this is called when storing the instance as a field value, so we just return the dbId
-    // the instance data itself will be collected as part of collectStorables
+    // this is called when storing the instance as a field value
+    // if this is an enum then we simply store the symbol name
+    if(this.declaration instanceof EnumeratedNativeDeclaration || this.declaration instanceof EnumeratedCategoryDeclaration)
+        return this.values["name"].getStorableData()
+    // otherwise we just return the dbId, the instance data itself will be collected as part of collectStorables
     if (this.storable == null)
         throw new NotStorableError();
     else

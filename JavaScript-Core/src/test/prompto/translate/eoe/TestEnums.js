@@ -10,6 +10,18 @@ exports.testIntegerEnum = function(test) {
 	compareResourceEOE(test, "enums/integerEnum.pec");
 };
 
+exports.testStoreCategoryEnum = function(test) {
+	compareResourceEOE(test, "enums/storeCategoryEnum.pec");
+};
+
+exports.testStoreIntegerEnum = function(test) {
+	compareResourceEOE(test, "enums/storeIntegerEnum.pec");
+};
+
+exports.testStoreTextEnum = function(test) {
+	compareResourceEOE(test, "enums/storeTextEnum.pec");
+};
+
 exports.testTextEnum = function(test) {
 	compareResourceEOE(test, "enums/textEnum.pec");
 };

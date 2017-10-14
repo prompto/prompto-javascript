@@ -13,6 +13,7 @@ exports.resolve = function() {
 function ConstructorExpression(type, assignments) {
     Section.call(this);
 	this.type = type;
+	this.mutable = false;
 	this.copyFrom = null;
 	this.assignments = null;
 	this.setAssignments(assignments);

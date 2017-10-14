@@ -5,6 +5,7 @@ var ArgumentAssignment = null;
 var CategoryDeclaration = null;
 var ConcreteCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
+var EnumeratedCategoryDeclaration = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
@@ -26,7 +27,10 @@ exports.resolve = function() {
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-}
+    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+};
+
+
 function CategoryType(id) {
 	BaseType.call(this, id);
     this.mutable = false;
@@ -428,9 +432,16 @@ CategoryType.prototype.convertJavaScriptValueToPromptoValue = function(context, 
     var decl = this.getDeclaration(context)
     if (decl == null)
         return BaseType.prototype.convertPythonValueToPromptoValue(context, value, returnType);
+    if(decl instanceof EnumeratedNativeDeclaration || decl instanceof EnumeratedCategoryDeclaration)
+        return this.loadEnumValue(context, decl, value);
     if (DataStore.instance.isDbIdType(typeof(value)))
         value = DataStore.instance.fetchUnique(value);
     return decl.newInstanceFromStored(context, value);
+};
+
+
+CategoryType.prototype.loadEnumValue = function(context, value, name) {
+    return context.getRegisteredValue(name);
 };
 
 
