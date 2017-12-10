@@ -27,7 +27,7 @@ exports.parseTokenNames = function(lexer) {
 	var tokens = exports.parseTokens(lexer);
 	var s = "";
 	for(var i=0; i<tokens.length; i++) {
-		s += ELexer.symbolicNames[tokens[i].type] + " ";
+		s += ELexer.prototype.symbolicNames[tokens[i].type] + " ";
 	}
 	return s.substring(0,s.length-1);
 };
@@ -55,7 +55,7 @@ exports.parseTokenNamesFromResource = function(input) {
 exports.tokenNamesAsString = function(tokenTypes) {
 	var s = "";
 	for(var i=0;i<tokenTypes.length;i++) {
-		s += ELexer.symbolicNames[tokenTypes[i]]  + " ";
+		s += ELexer.prototype.symbolicNames[tokenTypes[i]]  + " ";
 	}
 	return s.substring(0,s.length-1);
 };
