@@ -1,24 +1,43 @@
-// Generated from ArgsLexer.g4 by ANTLR 4.5
+// Generated from ArgsLexer.g4 by ANTLR 4.7.1
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 
 
-var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
-    "\2\7\60\b\1\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\3\2\3\2",
-    "\3\2\7\2\23\n\2\f\2\16\2\26\13\2\3\2\3\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3",
-    "\3\3\5\3\"\n\3\3\4\3\4\3\5\3\5\3\6\3\6\3\6\3\6\3\7\6\7-\n\7\r\7\16\7",
-    ".\2\2\b\3\3\5\2\7\4\t\5\13\6\r\7\3\2\5\6\2\f\f\17\17$$^^\n\2$$))^^d",
-    "dhhppttvv\b\2\13\f\17\17\"\"$$//??\64\2\3\3\2\2\2\2\7\3\2\2\2\2\t\3",
-    "\2\2\2\2\13\3\2\2\2\2\r\3\2\2\2\3\17\3\2\2\2\5\31\3\2\2\2\7#\3\2\2\2",
-    "\t%\3\2\2\2\13\'\3\2\2\2\r,\3\2\2\2\17\24\7$\2\2\20\23\5\5\3\2\21\23",
-    "\n\2\2\2\22\20\3\2\2\2\22\21\3\2\2\2\23\26\3\2\2\2\24\22\3\2\2\2\24",
-    "\25\3\2\2\2\25\27\3\2\2\2\26\24\3\2\2\2\27\30\7$\2\2\30\4\3\2\2\2\31",
-    "!\7^\2\2\32\"\t\3\2\2\33\34\4\62\65\2\34\35\4\629\2\35\"\4\629\2\36",
-    "\37\4\629\2\37\"\4\629\2 \"\4\629\2!\32\3\2\2\2!\33\3\2\2\2!\36\3\2",
-    "\2\2! \3\2\2\2\"\6\3\2\2\2#$\7?\2\2$\b\3\2\2\2%&\7/\2\2&\n\3\2\2\2\'",
-    "(\7\"\2\2()\3\2\2\2)*\b\6\2\2*\f\3\2\2\2+-\n\4\2\2,+\3\2\2\2-.\3\2\2",
-    "\2.,\3\2\2\2./\3\2\2\2/\16\3\2\2\2\7\2\22\24!.\3\b\2\2"].join("");
-		
+var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
+    "\u0002\u00070\b\u0001\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004",
+    "\u0004\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t",
+    "\u0007\u0003\u0002\u0003\u0002\u0003\u0002\u0007\u0002\u0013\n\u0002",
+    "\f\u0002\u000e\u0002\u0016\u000b\u0002\u0003\u0002\u0003\u0002\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003",
+    "\u0003\u0003\u0003\u0005\u0003\"\n\u0003\u0003\u0004\u0003\u0004\u0003",
+    "\u0005\u0003\u0005\u0003\u0006\u0003\u0006\u0003\u0006\u0003\u0006\u0003",
+    "\u0007\u0006\u0007-\n\u0007\r\u0007\u000e\u0007.\u0002\u0002\b\u0003",
+    "\u0003\u0005\u0002\u0007\u0004\t\u0005\u000b\u0006\r\u0007\u0003\u0002",
+    "\u0005\u0006\u0002\f\f\u000f\u000f$$^^\n\u0002$$))^^ddhhppttvv\b\u0002",
+    "\u000b\f\u000f\u000f\"\"$$//??\u00024\u0002\u0003\u0003\u0002\u0002",
+    "\u0002\u0002\u0007\u0003\u0002\u0002\u0002\u0002\t\u0003\u0002\u0002",
+    "\u0002\u0002\u000b\u0003\u0002\u0002\u0002\u0002\r\u0003\u0002\u0002",
+    "\u0002\u0003\u000f\u0003\u0002\u0002\u0002\u0005\u0019\u0003\u0002\u0002",
+    "\u0002\u0007#\u0003\u0002\u0002\u0002\t%\u0003\u0002\u0002\u0002\u000b",
+    "\'\u0003\u0002\u0002\u0002\r,\u0003\u0002\u0002\u0002\u000f\u0014\u0007",
+    "$\u0002\u0002\u0010\u0013\u0005\u0005\u0003\u0002\u0011\u0013\n\u0002",
+    "\u0002\u0002\u0012\u0010\u0003\u0002\u0002\u0002\u0012\u0011\u0003\u0002",
+    "\u0002\u0002\u0013\u0016\u0003\u0002\u0002\u0002\u0014\u0012\u0003\u0002",
+    "\u0002\u0002\u0014\u0015\u0003\u0002\u0002\u0002\u0015\u0017\u0003\u0002",
+    "\u0002\u0002\u0016\u0014\u0003\u0002\u0002\u0002\u0017\u0018\u0007$",
+    "\u0002\u0002\u0018\u0004\u0003\u0002\u0002\u0002\u0019!\u0007^\u0002",
+    "\u0002\u001a\"\t\u0003\u0002\u0002\u001b\u001c\u000425\u0002\u001c\u001d",
+    "\u000429\u0002\u001d\"\u000429\u0002\u001e\u001f\u000429\u0002\u001f",
+    "\"\u000429\u0002 \"\u000429\u0002!\u001a\u0003\u0002\u0002\u0002!\u001b",
+    "\u0003\u0002\u0002\u0002!\u001e\u0003\u0002\u0002\u0002! \u0003\u0002",
+    "\u0002\u0002\"\u0006\u0003\u0002\u0002\u0002#$\u0007?\u0002\u0002$\b",
+    "\u0003\u0002\u0002\u0002%&\u0007/\u0002\u0002&\n\u0003\u0002\u0002\u0002",
+    "\'(\u0007\"\u0002\u0002()\u0003\u0002\u0002\u0002)*\b\u0006\u0002\u0002",
+    "*\f\u0003\u0002\u0002\u0002+-\n\u0004\u0002\u0002,+\u0003\u0002\u0002",
+    "\u0002-.\u0003\u0002\u0002\u0002.,\u0003\u0002\u0002\u0002./\u0003\u0002",
+    "\u0002\u0002/\u000e\u0003\u0002\u0002\u0002\u0007\u0002\u0012\u0014",
+    "!.\u0003\b\u0002\u0002"].join("");
+
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
@@ -33,6 +52,12 @@ function ArgsLexer(input) {
 ArgsLexer.prototype = Object.create(antlr4.Lexer.prototype);
 ArgsLexer.prototype.constructor = ArgsLexer;
 
+Object.defineProperty(ArgsLexer.prototype, "atn", {
+        get : function() {
+                return atn;
+        }
+});
+
 ArgsLexer.EOF = antlr4.Token.EOF;
 ArgsLexer.STRING = 1;
 ArgsLexer.EQUALS = 2;
@@ -40,17 +65,19 @@ ArgsLexer.DASH = 3;
 ArgsLexer.WS = 4;
 ArgsLexer.ELEMENT = 5;
 
+ArgsLexer.prototype.channelNames = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
 
-ArgsLexer.modeNames = [ "DEFAULT_MODE" ];
+ArgsLexer.prototype.modeNames = [ "DEFAULT_MODE" ];
 
-ArgsLexer.literalNames = [ 'null', 'null', "'='", "'-'", "' '" ];
+ArgsLexer.prototype.literalNames = [ null, null, "'='", "'-'", "' '" ];
 
-ArgsLexer.symbolicNames = [ 'null', "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
+ArgsLexer.prototype.symbolicNames = [ null, "STRING", "EQUALS", "DASH", 
+                                      "WS", "ELEMENT" ];
 
-ArgsLexer.ruleNames = [ "STRING", "EscapeSequence", "EQUALS", "DASH", "WS", 
-                        "ELEMENT" ];
+ArgsLexer.prototype.ruleNames = [ "STRING", "EscapeSequence", "EQUALS", 
+                                  "DASH", "WS", "ELEMENT" ];
 
-ArgsLexer.grammarFileName = "ArgsLexer.g4";
+ArgsLexer.prototype.grammarFileName = "ArgsLexer.g4";
 
 
 

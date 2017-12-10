@@ -3,7 +3,7 @@ language: node_js
 node_js:
   - "0.12"
 before_install:
-  - npm install antlr4@4.5.3
+  - npm install antlr4@4.7
   - npm install nodeunit@0.10.2
   - npm install jszip-sync
   - npm install sync-request@3.0.1

@@ -1,19 +1,30 @@
-// Generated from ArgsParser.g4 by ANTLR 4.5
+// Generated from ArgsParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
 var antlr4 = require('antlr4/index');
 var ArgsParserListener = require('./ArgsParserListener').ArgsParserListener;
 var grammarFileName = "ArgsParser.g4";
 
-var serializedATN = ["\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd",
-    "\3\7\36\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\3\2\7\2\f\n\2\f\2\16\2\17\13",
-    "\2\3\3\5\3\22\n\3\3\3\3\3\3\3\3\3\3\4\3\4\3\5\3\5\5\5\34\n\5\3\5\2\2",
-    "\6\2\4\6\b\2\2\34\2\r\3\2\2\2\4\21\3\2\2\2\6\27\3\2\2\2\b\33\3\2\2\2",
-    "\n\f\5\4\3\2\13\n\3\2\2\2\f\17\3\2\2\2\r\13\3\2\2\2\r\16\3\2\2\2\16",
-    "\3\3\2\2\2\17\r\3\2\2\2\20\22\7\5\2\2\21\20\3\2\2\2\21\22\3\2\2\2\22",
-    "\23\3\2\2\2\23\24\5\6\4\2\24\25\7\4\2\2\25\26\5\b\5\2\26\5\3\2\2\2\27",
-    "\30\7\7\2\2\30\7\3\2\2\2\31\34\7\7\2\2\32\34\7\3\2\2\33\31\3\2\2\2\33",
-    "\32\3\2\2\2\34\t\3\2\2\2\5\r\21\33"].join("");
-		
+var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
+    "\u0003\u0007\u001e\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
+    "\t\u0004\u0004\u0005\t\u0005\u0003\u0002\u0007\u0002\f\n\u0002\f\u0002",
+    "\u000e\u0002\u000f\u000b\u0002\u0003\u0003\u0005\u0003\u0012\n\u0003",
+    "\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0003\u0004\u0003\u0004",
+    "\u0003\u0005\u0003\u0005\u0005\u0005\u001c\n\u0005\u0003\u0005\u0002",
+    "\u0002\u0006\u0002\u0004\u0006\b\u0002\u0002\u0002\u001c\u0002\r\u0003",
+    "\u0002\u0002\u0002\u0004\u0011\u0003\u0002\u0002\u0002\u0006\u0017\u0003",
+    "\u0002\u0002\u0002\b\u001b\u0003\u0002\u0002\u0002\n\f\u0005\u0004\u0003",
+    "\u0002\u000b\n\u0003\u0002\u0002\u0002\f\u000f\u0003\u0002\u0002\u0002",
+    "\r\u000b\u0003\u0002\u0002\u0002\r\u000e\u0003\u0002\u0002\u0002\u000e",
+    "\u0003\u0003\u0002\u0002\u0002\u000f\r\u0003\u0002\u0002\u0002\u0010",
+    "\u0012\u0007\u0005\u0002\u0002\u0011\u0010\u0003\u0002\u0002\u0002\u0011",
+    "\u0012\u0003\u0002\u0002\u0002\u0012\u0013\u0003\u0002\u0002\u0002\u0013",
+    "\u0014\u0005\u0006\u0004\u0002\u0014\u0015\u0007\u0004\u0002\u0002\u0015",
+    "\u0016\u0005\b\u0005\u0002\u0016\u0005\u0003\u0002\u0002\u0002\u0017",
+    "\u0018\u0007\u0007\u0002\u0002\u0018\u0007\u0003\u0002\u0002\u0002\u0019",
+    "\u001c\u0007\u0007\u0002\u0002\u001a\u001c\u0007\u0003\u0002\u0002\u001b",
+    "\u0019\u0003\u0002\u0002\u0002\u001b\u001a\u0003\u0002\u0002\u0002\u001c",
+    "\t\u0003\u0002\u0002\u0002\u0005\r\u0011\u001b"].join("");
+
 
 var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
@@ -21,9 +32,9 @@ var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new a
 
 var sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ 'null', 'null', "'='", "'-'", "' '" ];
+var literalNames = [ null, null, "'='", "'-'", "' '" ];
 
-var symbolicNames = [ 'null', "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
+var symbolicNames = [ null, "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
 
 var ruleNames =  [ "parse", "entry", "key", "value" ];
 
@@ -100,6 +111,8 @@ ParseContext.prototype.exitRule = function(listener) {
 
 
 
+ArgsParser.ParseContext = ParseContext;
+
 ArgsParser.prototype.parse = function() {
 
     var localctx = new ParseContext(this, this._ctx, this.state);
@@ -111,7 +124,7 @@ ArgsParser.prototype.parse = function() {
         this._errHandler.sync(this);
         _la = this._input.LA(1);
         while(_la===ArgsParser.DASH || _la===ArgsParser.ELEMENT) {
-            this.state = 8; 
+            this.state = 8;
             localctx.e = this.entry();
             this.state = 13;
             this._errHandler.sync(this);
@@ -180,6 +193,8 @@ EntryContext.prototype.exitRule = function(listener) {
 
 
 
+ArgsParser.EntryContext = EntryContext;
+
 ArgsParser.prototype.entry = function() {
 
     var localctx = new EntryContext(this, this._ctx, this.state);
@@ -188,17 +203,18 @@ ArgsParser.prototype.entry = function() {
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 15;
+        this._errHandler.sync(this);
         _la = this._input.LA(1);
         if(_la===ArgsParser.DASH) {
             this.state = 14;
             this.match(ArgsParser.DASH);
         }
 
-        this.state = 17; 
+        this.state = 17;
         localctx.k = this.key();
         this.state = 18;
         this.match(ArgsParser.EQUALS);
-        this.state = 19; 
+        this.state = 19;
         localctx.v = this.value();
     } catch (re) {
     	if(re instanceof antlr4.error.RecognitionException) {
@@ -248,6 +264,8 @@ KeyContext.prototype.exitRule = function(listener) {
 
 
 
+
+ArgsParser.KeyContext = KeyContext;
 
 ArgsParser.prototype.key = function() {
 
@@ -303,6 +321,8 @@ function ELEMENTContext(parser, ctx) {
 ELEMENTContext.prototype = Object.create(ValueContext.prototype);
 ELEMENTContext.prototype.constructor = ELEMENTContext;
 
+ArgsParser.ELEMENTContext = ELEMENTContext;
+
 ELEMENTContext.prototype.ELEMENT = function() {
     return this.getToken(ArgsParser.ELEMENT, 0);
 };
@@ -328,6 +348,8 @@ function STRINGContext(parser, ctx) {
 STRINGContext.prototype = Object.create(ValueContext.prototype);
 STRINGContext.prototype.constructor = STRINGContext;
 
+ArgsParser.STRINGContext = STRINGContext;
+
 STRINGContext.prototype.STRING = function() {
     return this.getToken(ArgsParser.STRING, 0);
 };
@@ -345,12 +367,15 @@ STRINGContext.prototype.exitRule = function(listener) {
 
 
 
+ArgsParser.ValueContext = ValueContext;
+
 ArgsParser.prototype.value = function() {
 
     var localctx = new ValueContext(this, this._ctx, this.state);
     this.enterRule(localctx, 6, ArgsParser.RULE_value);
     try {
         this.state = 25;
+        this._errHandler.sync(this);
         switch(this._input.LA(1)) {
         case ArgsParser.ELEMENT:
             localctx = new ELEMENTContext(this, localctx);
