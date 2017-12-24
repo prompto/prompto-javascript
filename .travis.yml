@@ -3,10 +3,7 @@ language: node_js
 node_js:
   - "0.12"
 before_install:
-  - npm install antlr4@4.7.1
-  - npm install jszip-sync@3.1.3-sync
-  - npm install sync-request@3.0.1
-  - npm install nodeunit@0.10.2
+  - npm install
 before_script:
   - cp -r JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
   - cp -r JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
