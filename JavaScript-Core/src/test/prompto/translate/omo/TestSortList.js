@@ -6,12 +6,12 @@ exports.testSortBooleans = function(test) {
 	compareResourceOMO(test, "sortList/sortBooleans.poc");
 };
 
-exports.testSortDates = function(test) {
-	compareResourceOMO(test, "sortList/sortDates.poc");
-};
-
 exports.testSortDateTimes = function(test) {
 	compareResourceOMO(test, "sortList/sortDateTimes.poc");
+};
+
+exports.testSortDates = function(test) {
+	compareResourceOMO(test, "sortList/sortDates.poc");
 };
 
 exports.testSortDecimals = function(test) {
@@ -22,12 +22,12 @@ exports.testSortDescBooleans = function(test) {
 	compareResourceOMO(test, "sortList/sortDescBooleans.poc");
 };
 
-exports.testSortDescDates = function(test) {
-	compareResourceOMO(test, "sortList/sortDescDates.poc");
-};
-
 exports.testSortDescDateTimes = function(test) {
 	compareResourceOMO(test, "sortList/sortDescDateTimes.poc");
+};
+
+exports.testSortDescDates = function(test) {
+	compareResourceOMO(test, "sortList/sortDescDates.poc");
 };
 
 exports.testSortDescDecimals = function(test) {

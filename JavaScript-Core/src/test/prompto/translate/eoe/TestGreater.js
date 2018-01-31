@@ -18,6 +18,22 @@ exports.testGtDecimal = function(test) {
 	compareResourceEOE(test, "greater/gtDecimal.pec");
 };
 
+exports.testGtInteger = function(test) {
+	compareResourceEOE(test, "greater/gtInteger.pec");
+};
+
+exports.testGtText = function(test) {
+	compareResourceEOE(test, "greater/gtText.pec");
+};
+
+exports.testGtTime = function(test) {
+	compareResourceEOE(test, "greater/gtTime.pec");
+};
+
+exports.testGtVersion = function(test) {
+	compareResourceEOE(test, "greater/gtVersion.pec");
+};
+
 exports.testGteCharacter = function(test) {
 	compareResourceEOE(test, "greater/gteCharacter.pec");
 };
@@ -44,21 +60,5 @@ exports.testGteText = function(test) {
 
 exports.testGteTime = function(test) {
 	compareResourceEOE(test, "greater/gteTime.pec");
-};
-
-exports.testGtInteger = function(test) {
-	compareResourceEOE(test, "greater/gtInteger.pec");
-};
-
-exports.testGtText = function(test) {
-	compareResourceEOE(test, "greater/gtText.pec");
-};
-
-exports.testGtTime = function(test) {
-	compareResourceEOE(test, "greater/gtTime.pec");
-};
-
-exports.testGtVersion = function(test) {
-	compareResourceEOE(test, "greater/gtVersion.pec");
 };
 

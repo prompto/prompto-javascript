@@ -6,12 +6,12 @@ exports.testSortBooleans = function(test) {
 	compareResourceEME(test, "sortList/sortBooleans.pec");
 };
 
-exports.testSortDates = function(test) {
-	compareResourceEME(test, "sortList/sortDates.pec");
-};
-
 exports.testSortDateTimes = function(test) {
 	compareResourceEME(test, "sortList/sortDateTimes.pec");
+};
+
+exports.testSortDates = function(test) {
+	compareResourceEME(test, "sortList/sortDates.pec");
 };
 
 exports.testSortDecimals = function(test) {
@@ -22,12 +22,12 @@ exports.testSortDescBooleans = function(test) {
 	compareResourceEME(test, "sortList/sortDescBooleans.pec");
 };
 
-exports.testSortDescDates = function(test) {
-	compareResourceEME(test, "sortList/sortDescDates.pec");
-};
-
 exports.testSortDescDateTimes = function(test) {
 	compareResourceEME(test, "sortList/sortDescDateTimes.pec");
+};
+
+exports.testSortDescDates = function(test) {
+	compareResourceEME(test, "sortList/sortDescDates.pec");
 };
 
 exports.testSortDescDecimals = function(test) {

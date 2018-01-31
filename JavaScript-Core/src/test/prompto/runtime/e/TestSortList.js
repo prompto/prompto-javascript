@@ -17,12 +17,12 @@ exports.testSortBooleans = function(test) {
 	checkOutput(test, "sortList/sortBooleans.pec");
 };
 
-exports.testSortDates = function(test) {
-	checkOutput(test, "sortList/sortDates.pec");
-};
-
 exports.testSortDateTimes = function(test) {
 	checkOutput(test, "sortList/sortDateTimes.pec");
+};
+
+exports.testSortDates = function(test) {
+	checkOutput(test, "sortList/sortDates.pec");
 };
 
 exports.testSortDecimals = function(test) {
@@ -33,12 +33,12 @@ exports.testSortDescBooleans = function(test) {
 	checkOutput(test, "sortList/sortDescBooleans.pec");
 };
 
-exports.testSortDescDates = function(test) {
-	checkOutput(test, "sortList/sortDescDates.pec");
-};
-
 exports.testSortDescDateTimes = function(test) {
 	checkOutput(test, "sortList/sortDescDateTimes.pec");
+};
+
+exports.testSortDescDates = function(test) {
+	checkOutput(test, "sortList/sortDescDates.pec");
 };
 
 exports.testSortDescDecimals = function(test) {

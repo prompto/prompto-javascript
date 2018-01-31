@@ -18,6 +18,22 @@ exports.testGtDecimal = function(test) {
 	compareResourceOMO(test, "greater/gtDecimal.poc");
 };
 
+exports.testGtInteger = function(test) {
+	compareResourceOMO(test, "greater/gtInteger.poc");
+};
+
+exports.testGtText = function(test) {
+	compareResourceOMO(test, "greater/gtText.poc");
+};
+
+exports.testGtTime = function(test) {
+	compareResourceOMO(test, "greater/gtTime.poc");
+};
+
+exports.testGtVersion = function(test) {
+	compareResourceOMO(test, "greater/gtVersion.poc");
+};
+
 exports.testGteCharacter = function(test) {
 	compareResourceOMO(test, "greater/gteCharacter.poc");
 };
@@ -44,21 +60,5 @@ exports.testGteText = function(test) {
 
 exports.testGteTime = function(test) {
 	compareResourceOMO(test, "greater/gteTime.poc");
-};
-
-exports.testGtInteger = function(test) {
-	compareResourceOMO(test, "greater/gtInteger.poc");
-};
-
-exports.testGtText = function(test) {
-	compareResourceOMO(test, "greater/gtText.poc");
-};
-
-exports.testGtTime = function(test) {
-	compareResourceOMO(test, "greater/gtTime.poc");
-};
-
-exports.testGtVersion = function(test) {
-	compareResourceOMO(test, "greater/gtVersion.poc");
 };
 

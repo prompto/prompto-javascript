@@ -29,6 +29,22 @@ exports.testLtDecimal = function(test) {
 	checkOutput(test, "less/ltDecimal.pec");
 };
 
+exports.testLtInteger = function(test) {
+	checkOutput(test, "less/ltInteger.pec");
+};
+
+exports.testLtText = function(test) {
+	checkOutput(test, "less/ltText.pec");
+};
+
+exports.testLtTime = function(test) {
+	checkOutput(test, "less/ltTime.pec");
+};
+
+exports.testLtVersion = function(test) {
+	checkOutput(test, "less/ltVersion.pec");
+};
+
 exports.testLteCharacter = function(test) {
 	checkOutput(test, "less/lteCharacter.pec");
 };
@@ -55,21 +71,5 @@ exports.testLteText = function(test) {
 
 exports.testLteTime = function(test) {
 	checkOutput(test, "less/lteTime.pec");
-};
-
-exports.testLtInteger = function(test) {
-	checkOutput(test, "less/ltInteger.pec");
-};
-
-exports.testLtText = function(test) {
-	checkOutput(test, "less/ltText.pec");
-};
-
-exports.testLtTime = function(test) {
-	checkOutput(test, "less/ltTime.pec");
-};
-
-exports.testLtVersion = function(test) {
-	checkOutput(test, "less/ltVersion.pec");
 };
 

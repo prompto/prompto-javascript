@@ -18,6 +18,22 @@ exports.testLtDecimal = function(test) {
 	compareResourceOMO(test, "less/ltDecimal.poc");
 };
 
+exports.testLtInteger = function(test) {
+	compareResourceOMO(test, "less/ltInteger.poc");
+};
+
+exports.testLtText = function(test) {
+	compareResourceOMO(test, "less/ltText.poc");
+};
+
+exports.testLtTime = function(test) {
+	compareResourceOMO(test, "less/ltTime.poc");
+};
+
+exports.testLtVersion = function(test) {
+	compareResourceOMO(test, "less/ltVersion.poc");
+};
+
 exports.testLteCharacter = function(test) {
 	compareResourceOMO(test, "less/lteCharacter.poc");
 };
@@ -44,21 +60,5 @@ exports.testLteText = function(test) {
 
 exports.testLteTime = function(test) {
 	compareResourceOMO(test, "less/lteTime.poc");
-};
-
-exports.testLtInteger = function(test) {
-	compareResourceOMO(test, "less/ltInteger.poc");
-};
-
-exports.testLtText = function(test) {
-	compareResourceOMO(test, "less/ltText.poc");
-};
-
-exports.testLtTime = function(test) {
-	compareResourceOMO(test, "less/ltTime.poc");
-};
-
-exports.testLtVersion = function(test) {
-	compareResourceOMO(test, "less/ltVersion.poc");
 };
 

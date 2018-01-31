@@ -18,6 +18,22 @@ exports.testLtDecimal = function(test) {
 	compareResourceEME(test, "less/ltDecimal.pec");
 };
 
+exports.testLtInteger = function(test) {
+	compareResourceEME(test, "less/ltInteger.pec");
+};
+
+exports.testLtText = function(test) {
+	compareResourceEME(test, "less/ltText.pec");
+};
+
+exports.testLtTime = function(test) {
+	compareResourceEME(test, "less/ltTime.pec");
+};
+
+exports.testLtVersion = function(test) {
+	compareResourceEME(test, "less/ltVersion.pec");
+};
+
 exports.testLteCharacter = function(test) {
 	compareResourceEME(test, "less/lteCharacter.pec");
 };
@@ -44,21 +60,5 @@ exports.testLteText = function(test) {
 
 exports.testLteTime = function(test) {
 	compareResourceEME(test, "less/lteTime.pec");
-};
-
-exports.testLtInteger = function(test) {
-	compareResourceEME(test, "less/ltInteger.pec");
-};
-
-exports.testLtText = function(test) {
-	compareResourceEME(test, "less/ltText.pec");
-};
-
-exports.testLtTime = function(test) {
-	compareResourceEME(test, "less/ltTime.pec");
-};
-
-exports.testLtVersion = function(test) {
-	compareResourceEME(test, "less/ltVersion.pec");
 };
 

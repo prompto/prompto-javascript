@@ -45,3 +45,7 @@ exports.testTime = function(test) {
 	runTests(test, "core/time.pec");
 };
 
+exports.testUtils = function(test) {
+	runTests(test, "core/utils.pec");
+};
+

@@ -62,16 +62,16 @@ exports.testDateTimeSecond = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeSecond.pec");
 };
 
-exports.testDateTimeText = function(test) {
-	compareResourceEOE(test, "builtins/dateTimeText.pec");
-};
-
 exports.testDateTimeTZName = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeTZName.pec");
 };
 
 exports.testDateTimeTZOffset = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeTZOffset.pec");
+};
+
+exports.testDateTimeText = function(test) {
+	compareResourceEOE(test, "builtins/dateTimeText.pec");
 };
 
 exports.testDateTimeYear = function(test) {

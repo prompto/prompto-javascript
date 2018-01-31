@@ -29,6 +29,22 @@ exports.testLtDecimal = function(test) {
 	checkOutput(test, "less/ltDecimal.poc");
 };
 
+exports.testLtInteger = function(test) {
+	checkOutput(test, "less/ltInteger.poc");
+};
+
+exports.testLtText = function(test) {
+	checkOutput(test, "less/ltText.poc");
+};
+
+exports.testLtTime = function(test) {
+	checkOutput(test, "less/ltTime.poc");
+};
+
+exports.testLtVersion = function(test) {
+	checkOutput(test, "less/ltVersion.poc");
+};
+
 exports.testLteCharacter = function(test) {
 	checkOutput(test, "less/lteCharacter.poc");
 };
@@ -55,21 +71,5 @@ exports.testLteText = function(test) {
 
 exports.testLteTime = function(test) {
 	checkOutput(test, "less/lteTime.poc");
-};
-
-exports.testLtInteger = function(test) {
-	checkOutput(test, "less/ltInteger.poc");
-};
-
-exports.testLtText = function(test) {
-	checkOutput(test, "less/ltText.poc");
-};
-
-exports.testLtTime = function(test) {
-	checkOutput(test, "less/ltTime.poc");
-};
-
-exports.testLtVersion = function(test) {
-	checkOutput(test, "less/ltVersion.poc");
 };
 

@@ -29,6 +29,22 @@ exports.testGtDecimal = function(test) {
 	checkOutput(test, "greater/gtDecimal.poc");
 };
 
+exports.testGtInteger = function(test) {
+	checkOutput(test, "greater/gtInteger.poc");
+};
+
+exports.testGtText = function(test) {
+	checkOutput(test, "greater/gtText.poc");
+};
+
+exports.testGtTime = function(test) {
+	checkOutput(test, "greater/gtTime.poc");
+};
+
+exports.testGtVersion = function(test) {
+	checkOutput(test, "greater/gtVersion.poc");
+};
+
 exports.testGteCharacter = function(test) {
 	checkOutput(test, "greater/gteCharacter.poc");
 };
@@ -55,21 +71,5 @@ exports.testGteText = function(test) {
 
 exports.testGteTime = function(test) {
 	checkOutput(test, "greater/gteTime.poc");
-};
-
-exports.testGtInteger = function(test) {
-	checkOutput(test, "greater/gtInteger.poc");
-};
-
-exports.testGtText = function(test) {
-	checkOutput(test, "greater/gtText.poc");
-};
-
-exports.testGtTime = function(test) {
-	checkOutput(test, "greater/gtTime.poc");
-};
-
-exports.testGtVersion = function(test) {
-	checkOutput(test, "greater/gtVersion.poc");
 };
 
