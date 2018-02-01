@@ -4,6 +4,7 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 var TypeUtils = require("../utils/TypeUtils");
 var Identifier = require("../grammar/Identifier").Identifier;
 var Document = require("../value/Document").Document;
+var NullValue = require("../value/NullValue").NullValue;
 
 function CategoryDeclaration(id, attributes) {
 	BaseDeclaration.call(this, id);
