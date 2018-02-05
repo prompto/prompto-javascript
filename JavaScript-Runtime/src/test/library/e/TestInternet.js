@@ -23,10 +23,6 @@ exports.testHtml = function(test) {
 	runTests(test, "internet/html.pec");
 };
 
-exports.testServer = function(test) {
-	runTests(test, "internet/server.pec");
-};
-
 exports.testUrl = function(test) {
 	runTests(test, "internet/url.pec");
 };
