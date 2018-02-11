@@ -668,7 +668,7 @@ OPromptoBuilder.prototype.exitCallableRoot = function(ctx) {
 OPromptoBuilder.prototype.exitCallableSelector = function(ctx) {
 	var parent = this.getNodeValue(ctx.parent);
 	var select = this.getNodeValue(ctx.select);
-	select.setParent(parent);
+	select.parent = parent;
 	this.setNodeValue(ctx, select);
 };
 
