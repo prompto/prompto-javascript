@@ -3,6 +3,7 @@ var CursorType = require("../type/CursorType").CursorType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Integer = require("./Integer").Integer;
 var Value = require("./Value").Value;
+var Bool = require("./Bool").Bool;
 
 function Cursor(context, itemType, iterDocs) {
     Value.call(this, new CursorType(itemType));
@@ -27,6 +28,14 @@ Cursor.prototype.count = function() {
 
 Cursor.prototype.totalCount = function() {
     return this.iterDocuments.totalCount();
+};
+
+
+Cursor.prototype.toString = function() {
+    var list = [];
+    while(this.hasNext())
+        list.push(this.next().toString());
+    return '[' + list.join(", ") + ']';
 };
 
 
@@ -61,6 +70,31 @@ Cursor.prototype.getMemberValue = function(context, name) {
         return new Integer(this.totalCount());
     else
         throw new InvalidDataError("No such member:" + name);
+};
+
+Cursor.prototype.filter = function(context, itemId, filter) {
+    var cursor = new Cursor(this.context, this.type.itemType, this.iterDocuments);
+    cursor.superHasNext = cursor.hasNext;
+    cursor.hasNext = function() {
+        this.current = null;
+        while(this.superHasNext()) {
+            this.current = this.superNext();
+            context.setValue(itemId, this.current);
+            var test = filter.interpret(context);
+            if(!(test instanceof Bool)) {
+                throw new InternalError("Illegal test result: " + test);
+            }
+            if(test.value)
+                return true;
+        }
+        this.current = null;
+        return false;
+    };
+    cursor.superNext = cursor.next;
+    cursor.next = function() {
+        return this.current;
+    };
+    return cursor;
 };
 
 exports.Cursor = Cursor;

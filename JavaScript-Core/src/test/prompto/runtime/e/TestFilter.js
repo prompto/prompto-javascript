@@ -13,6 +13,10 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testFilterFromCursor = function(test) {
+	checkOutput(test, "filter/filterFromCursor.pec");
+};
+
 exports.testFilterFromList = function(test) {
 	checkOutput(test, "filter/filterFromList.pec");
 };

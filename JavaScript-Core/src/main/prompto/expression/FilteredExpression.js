@@ -1,5 +1,6 @@
 var Section = require("../parser/Section").Section;
 var BooleanType = require("../type/BooleanType").BooleanType;
+var IterableType = require("../type/IterableType").IterableType;
 var ListType = require("../type/ListType").ListType;
 var TupleType = require("../type/TupleType").TupleType;
 var SetType = require("../type/SetType").SetType;
@@ -28,8 +29,8 @@ FilteredExpression.prototype.toDialect = function(dialect) {
 
 FilteredExpression.prototype.check = function(context) {
 	var listType = this.source.check(context);
-	if(!(listType instanceof ListType || listType instanceof TupleType || listType instanceof SetType)) {
-		throw new SyntaxError("Expecting a list type as data source !");
+	if(!(listType instanceof IterableType)) {
+		throw new SyntaxError("Expecting an iterable type as data source !");
 	}
 	var local = context.newChildContext();
 	local.registerValue(new Variable(this.itemId,listType.itemType));
@@ -42,14 +43,14 @@ FilteredExpression.prototype.check = function(context) {
 
 FilteredExpression.prototype.interpret = function(context) {
 	var listType = this.source.check(context);
-	if(!(listType instanceof ListType || listType instanceof TupleType || listType instanceof SetType)) {
-		throw new InternalError("Illegal source type: " + listType.getName());
+	if(!(listType instanceof IterableType)) {
+		throw new InternalError("Illegal source type: " + listType.name);
 	}
 	var list = this.source.interpret(context);
 	if(list==null) {
 		throw new NullReferenceError();
 	}
-	if(!(list instanceof ListValue || list instanceof TupleValue || list instanceof SetValue)) {
+	if(!list.filter) {
 		throw new InternalError("Illegal fetch source: " + this.source);
 	}
 	var itemType = listType.itemType;
