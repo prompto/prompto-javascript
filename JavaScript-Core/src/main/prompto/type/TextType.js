@@ -8,6 +8,7 @@ var BooleanType = require("./BooleanType").BooleanType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Text = null; // circular dependency
+var Bool = require("../value/Bool").Bool;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var TextLiteral = null;
 var ListValue = null;
@@ -96,6 +97,10 @@ TextType.prototype.convertJavaScriptValueToPromptoValue = function(context, valu
 
 TextType.prototype.getMemberMethods = function(context, name) {
     switch (name) {
+        case "startsWith":
+            return [new StartsWithMethodDeclaration()];
+        case "endsWith":
+            return [new EndsWithMethodDeclaration()];
         case "toLowerCase":
             return [new ToLowerCaseMethodDeclaration()];
         case "toUpperCase":
@@ -137,6 +142,16 @@ function ToCapitalizedMethodDeclaration() {
 
 function SplitMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "split", new CategoryArgument(TextType.instance, new Identifier("separator"), new TextLiteral('" "')));
+    return this;
+}
+
+function StartsWithMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "startsWith", new CategoryArgument(TextType.instance, new Identifier("value")));
+    return this;
+}
+
+function EndsWithMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "endsWith", new CategoryArgument(TextType.instance, new Identifier("value")));
     return this;
 }
 
@@ -252,6 +267,35 @@ function resolveBuiltInMethodDeclaration() {
     SplitMethodDeclaration.prototype.check = function(context) {
         return new ListType(TextType.instance);
     };
+
+    StartsWithMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    StartsWithMethodDeclaration.prototype.constructor = StartsWithMethodDeclaration;
+
+    StartsWithMethodDeclaration.prototype.interpret = function(context) {
+        var value = this.getValue(context).getStorableData();
+        var find = context.getValue(new Identifier("value")).getStorableData();
+        var startsWith = value.indexOf(find)===0;
+        return Bool.ValueOf(startsWith);
+    };
+
+    StartsWithMethodDeclaration.prototype.check = function(context) {
+        return BooleanType.instance;
+    };
+
+    EndsWithMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    EndsWithMethodDeclaration.prototype.constructor = EndsWithMethodDeclaration;
+
+    EndsWithMethodDeclaration.prototype.interpret = function(context) {
+        var value = this.getValue(context).getStorableData();
+        var find = context.getValue(new Identifier("value")).getStorableData();
+        var endsWith = value.indexOf(find)===value.length-find.length;
+        return Bool.ValueOf(endsWith);
+    };
+
+    EndsWithMethodDeclaration.prototype.check = function(context) {
+        return BooleanType.instance;
+    };
+
 }
 
 exports.TextType = TextType;

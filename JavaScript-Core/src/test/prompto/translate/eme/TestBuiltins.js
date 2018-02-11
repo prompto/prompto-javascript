@@ -154,6 +154,10 @@ exports.testTextCount = function(test) {
 	compareResourceEME(test, "builtins/textCount.pec");
 };
 
+exports.testTextEndsWith = function(test) {
+	compareResourceEME(test, "builtins/textEndsWith.pec");
+};
+
 exports.testTextLowercase = function(test) {
 	compareResourceEME(test, "builtins/textLowercase.pec");
 };
@@ -168,6 +172,10 @@ exports.testTextReplaceAll = function(test) {
 
 exports.testTextSplit = function(test) {
 	compareResourceEME(test, "builtins/textSplit.pec");
+};
+
+exports.testTextStartsWith = function(test) {
+	compareResourceEME(test, "builtins/textStartsWith.pec");
 };
 
 exports.testTextText = function(test) {

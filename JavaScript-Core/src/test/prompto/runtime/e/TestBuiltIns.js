@@ -157,6 +157,10 @@ exports.testTextCount = function(test) {
 	checkOutput(test, "builtins/textCount.pec");
 };
 
+exports.testTextEndsWith = function(test) {
+	checkOutput(test, "builtins/textEndsWith.pec");
+};
+
 exports.testTextLowercase = function(test) {
 	checkOutput(test, "builtins/textLowercase.pec");
 };
@@ -171,6 +175,10 @@ exports.testTextReplaceAll = function(test) {
 
 exports.testTextSplit = function(test) {
 	checkOutput(test, "builtins/textSplit.pec");
+};
+
+exports.testTextStartsWith = function(test) {
+	checkOutput(test, "builtins/textStartsWith.pec");
 };
 
 exports.testTextText = function(test) {
