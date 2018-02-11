@@ -645,8 +645,29 @@ MPromptoBuilder.prototype.exitMethod_call = function(ctx) {
 
 MPromptoBuilder.prototype.exitCallableRoot = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
+    this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
+
+
+MPromptoBuilder.prototype.exitCallableSelector = function(ctx) {
+    var parent = this.getNodeValue(ctx.parent);
+    var select = this.getNodeValue(ctx.select);
+    select.parent = parent;
+    this.setNodeValue(ctx, select);
+};
+
+
+MPromptoBuilder.prototype.exitCallableMemberSelector = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new expression.MemberSelector(null, name));
+};
+
+
+MPromptoBuilder.prototype.exitCallableItemSelector = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.ItemSelector(null, exp));
+};
+
 
 MPromptoBuilder.prototype.exitAddExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);

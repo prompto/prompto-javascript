@@ -661,7 +661,7 @@ OPromptoBuilder.prototype.exitMethod_call = function(ctx) {
 
 OPromptoBuilder.prototype.exitCallableRoot = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, name);
+	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 
@@ -675,13 +675,13 @@ OPromptoBuilder.prototype.exitCallableSelector = function(ctx) {
 
 OPromptoBuilder.prototype.exitCallableMemberSelector = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new MemberSelector(name));
+	this.setNodeValue(ctx, new expression.MemberSelector(null, name));
 };
 
 
 OPromptoBuilder.prototype.exitCallableItemSelector = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new ItemSelector(exp));
+	this.setNodeValue(ctx, new expression.ItemSelector(null, exp));
 };
 
 
