@@ -790,73 +790,73 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0418\u0003\u0002\u0002\u0002\u041d\u0419\u0003\u0002\u0002\u0002\u041d",
     "\u041a\u0003\u0002\u0002\u0002\u041d\u041b\u0003\u0002\u0002\u0002\u041d",
     "\u041c\u0003\u0002\u0002\u0002\u041e\u0488\u0003\u0002\u0002\u0002\u041f",
-    "\u0420\f*\u0002\u0002\u0420\u0421\u0005\u0132\u009a\u0002\u0421\u0422",
-    "\u0005X-+\u0422\u0487\u0003\u0002\u0002\u0002\u0423\u0424\f)\u0002\u0002",
-    "\u0424\u0425\u0005\u0134\u009b\u0002\u0425\u0426\u0005X-*\u0426\u0487",
-    "\u0003\u0002\u0002\u0002\u0427\u0428\f(\u0002\u0002\u0428\u0429\u0005",
-    "\u0138\u009d\u0002\u0429\u042a\u0005X-)\u042a\u0487\u0003\u0002\u0002",
-    "\u0002\u042b\u042c\f\'\u0002\u0002\u042c\u042d\u0005\u0136\u009c\u0002",
-    "\u042d\u042e\u0005X-(\u042e\u0487\u0003\u0002\u0002\u0002\u042f\u0430",
-    "\f&\u0002\u0002\u0430\u0431\t\u0002\u0002\u0002\u0431\u0487\u0005X-",
-    "\'\u0432\u0433\f%\u0002\u0002\u0433\u0434\u0007*\u0002\u0002\u0434\u0487",
-    "\u0005X-&\u0435\u0436\f$\u0002\u0002\u0436\u0437\u0007+\u0002\u0002",
-    "\u0437\u0487\u0005X-%\u0438\u0439\f#\u0002\u0002\u0439\u043a\u0007(",
-    "\u0002\u0002\u043a\u0487\u0005X-$\u043b\u043c\f\"\u0002\u0002\u043c",
-    "\u043d\u0007)\u0002\u0002\u043d\u0487\u0005X-#\u043e\u043f\f\u001f\u0002",
-    "\u0002\u043f\u0440\u0007-\u0002\u0002\u0440\u0487\u0005X- \u0441\u0442",
-    "\f\u001e\u0002\u0002\u0442\u0443\u0007,\u0002\u0002\u0443\u0487\u0005",
-    "X-\u001f\u0444\u0445\f\u001d\u0002\u0002\u0445\u0446\u00071\u0002\u0002",
-    "\u0446\u0487\u0005X-\u001e\u0447\u0448\f\u001c\u0002\u0002\u0448\u0449",
-    "\u0007\u0082\u0002\u0002\u0449\u0487\u0005X-\u001d\u044a\u044b\f\u001b",
-    "\u0002\u0002\u044b\u044c\u0007I\u0002\u0002\u044c\u0487\u0005X-\u001c",
-    "\u044d\u044e\f\u001a\u0002\u0002\u044e\u044f\u0007o\u0002\u0002\u044f",
-    "\u0450\u0005X-\u0002\u0450\u0451\u0007a\u0002\u0002\u0451\u0452\u0005",
-    "X-\u001b\u0452\u0487\u0003\u0002\u0002\u0002\u0453\u0454\f\u0018\u0002",
-    "\u0002\u0454\u0455\u0007p\u0002\u0002\u0455\u0487\u0005X-\u0019\u0456",
-    "\u0457\f\u0017\u0002\u0002\u0457\u0458\u0007X\u0002\u0002\u0458\u0487",
-    "\u0005X-\u0018\u0459\u045a\f\u0016\u0002\u0002\u045a\u045b\u0007X\u0002",
-    "\u0002\u045b\u045c\u0007G\u0002\u0002\u045c\u0487\u0005X-\u0017\u045d",
-    "\u045e\f\u0015\u0002\u0002\u045e\u045f\u0007X\u0002\u0002\u045f\u0460",
-    "\u0007J\u0002\u0002\u0460\u0487\u0005X-\u0016\u0461\u0462\f\u0014\u0002",
-    "\u0002\u0462\u0463\u0007{\u0002\u0002\u0463\u0464\u0007p\u0002\u0002",
-    "\u0464\u0487\u0005X-\u0015\u0465\u0466\f\u0013\u0002\u0002\u0466\u0467",
-    "\u0007{\u0002\u0002\u0467\u0468\u0007X\u0002\u0002\u0468\u0487\u0005",
-    "X-\u0014\u0469\u046a\f\u0012\u0002\u0002\u046a\u046b\u0007{\u0002\u0002",
-    "\u046b\u046c\u0007X\u0002\u0002\u046c\u046d\u0007G\u0002\u0002\u046d",
-    "\u0487\u0005X-\u0013\u046e\u046f\f\u0011\u0002\u0002\u046f\u0470\u0007",
-    "{\u0002\u0002\u0470\u0471\u0007X\u0002\u0002\u0471\u0472\u0007J\u0002",
-    "\u0002\u0472\u0487\u0005X-\u0012\u0473\u0474\f\u0003\u0002\u0002\u0474",
-    "\u0475\u0007l\u0002\u0002\u0475\u0476\u0007`\u0002\u0002\u0476\u0477",
-    "\u0005\u00ba^\u0002\u0477\u0478\u0007p\u0002\u0002\u0478\u0479\u0005",
-    "X-\u0004\u0479\u0487\u0003\u0002\u0002\u0002\u047a\u047b\f!\u0002\u0002",
-    "\u047b\u047c\u0007s\u0002\u0002\u047c\u047d\u0007{\u0002\u0002\u047d",
-    "\u0487\u0005\u011a\u008e\u0002\u047e\u047f\f \u0002\u0002\u047f\u0480",
-    "\u0007s\u0002\u0002\u0480\u0487\u0005\u011a\u008e\u0002\u0481\u0482",
-    "\f\u0019\u0002\u0002\u0482\u0483\u0007K\u0002\u0002\u0483\u0487\u0005",
-    "\u00ccg\u0002\u0484\u0485\f\n\u0002\u0002\u0485\u0487\u0005p9\u0002",
-    "\u0486\u041f\u0003\u0002\u0002\u0002\u0486\u0423\u0003\u0002\u0002\u0002",
-    "\u0486\u0427\u0003\u0002\u0002\u0002\u0486\u042b\u0003\u0002\u0002\u0002",
-    "\u0486\u042f\u0003\u0002\u0002\u0002\u0486\u0432\u0003\u0002\u0002\u0002",
-    "\u0486\u0435\u0003\u0002\u0002\u0002\u0486\u0438\u0003\u0002\u0002\u0002",
-    "\u0486\u043b\u0003\u0002\u0002\u0002\u0486\u043e\u0003\u0002\u0002\u0002",
-    "\u0486\u0441\u0003\u0002\u0002\u0002\u0486\u0444\u0003\u0002\u0002\u0002",
-    "\u0486\u0447\u0003\u0002\u0002\u0002\u0486\u044a\u0003\u0002\u0002\u0002",
-    "\u0486\u044d\u0003\u0002\u0002\u0002\u0486\u0453\u0003\u0002\u0002\u0002",
-    "\u0486\u0456\u0003\u0002\u0002\u0002\u0486\u0459\u0003\u0002\u0002\u0002",
-    "\u0486\u045d\u0003\u0002\u0002\u0002\u0486\u0461\u0003\u0002\u0002\u0002",
-    "\u0486\u0465\u0003\u0002\u0002\u0002\u0486\u0469\u0003\u0002\u0002\u0002",
-    "\u0486\u046e\u0003\u0002\u0002\u0002\u0486\u0473\u0003\u0002\u0002\u0002",
-    "\u0486\u047a\u0003\u0002\u0002\u0002\u0486\u047e\u0003\u0002\u0002\u0002",
-    "\u0486\u0481\u0003\u0002\u0002\u0002\u0486\u0484\u0003\u0002\u0002\u0002",
-    "\u0487\u048a\u0003\u0002\u0002\u0002\u0488\u0486\u0003\u0002\u0002\u0002",
-    "\u0488\u0489\u0003\u0002\u0002\u0002\u0489Y\u0003\u0002\u0002\u0002",
-    "\u048a\u0488\u0003\u0002\u0002\u0002\u048b\u048c\b.\u0001\u0002\u048c",
-    "\u048d\u0005\u00b8]\u0002\u048d\u0492\u0003\u0002\u0002\u0002\u048e",
-    "\u048f\f\u0003\u0002\u0002\u048f\u0491\u0005\\/\u0002\u0490\u048e\u0003",
-    "\u0002\u0002\u0002\u0491\u0494\u0003\u0002\u0002\u0002\u0492\u0490\u0003",
-    "\u0002\u0002\u0002\u0492\u0493\u0003\u0002\u0002\u0002\u0493[\u0003",
-    "\u0002\u0002\u0002\u0494\u0492\u0003\u0002\u0002\u0002\u0495\u0496\u0006",
-    "/!\u0003\u0496\u0497\u0007\u0015\u0002\u0002\u0497\u0498\u0005\u00b8",
+    "\u0420\f*\u0002\u0002\u0420\u0421\u0007I\u0002\u0002\u0421\u0487\u0005",
+    "X-+\u0422\u0423\f)\u0002\u0002\u0423\u0424\u0007\u0082\u0002\u0002\u0424",
+    "\u0487\u0005X-*\u0425\u0426\f(\u0002\u0002\u0426\u0427\u0005\u0132\u009a",
+    "\u0002\u0427\u0428\u0005X-)\u0428\u0487\u0003\u0002\u0002\u0002\u0429",
+    "\u042a\f\'\u0002\u0002\u042a\u042b\u0005\u0134\u009b\u0002\u042b\u042c",
+    "\u0005X-(\u042c\u0487\u0003\u0002\u0002\u0002\u042d\u042e\f&\u0002\u0002",
+    "\u042e\u042f\u0005\u0138\u009d\u0002\u042f\u0430\u0005X-\'\u0430\u0487",
+    "\u0003\u0002\u0002\u0002\u0431\u0432\f%\u0002\u0002\u0432\u0433\u0005",
+    "\u0136\u009c\u0002\u0433\u0434\u0005X-&\u0434\u0487\u0003\u0002\u0002",
+    "\u0002\u0435\u0436\f$\u0002\u0002\u0436\u0437\t\u0002\u0002\u0002\u0437",
+    "\u0487\u0005X-%\u0438\u0439\f#\u0002\u0002\u0439\u043a\u0007*\u0002",
+    "\u0002\u043a\u0487\u0005X-$\u043b\u043c\f\"\u0002\u0002\u043c\u043d",
+    "\u0007+\u0002\u0002\u043d\u0487\u0005X-#\u043e\u043f\f!\u0002\u0002",
+    "\u043f\u0440\u0007(\u0002\u0002\u0440\u0487\u0005X-\"\u0441\u0442\f",
+    " \u0002\u0002\u0442\u0443\u0007)\u0002\u0002\u0443\u0487\u0005X-!\u0444",
+    "\u0445\f\u001d\u0002\u0002\u0445\u0446\u0007-\u0002\u0002\u0446\u0487",
+    "\u0005X-\u001e\u0447\u0448\f\u001c\u0002\u0002\u0448\u0449\u0007,\u0002",
+    "\u0002\u0449\u0487\u0005X-\u001d\u044a\u044b\f\u001b\u0002\u0002\u044b",
+    "\u044c\u00071\u0002\u0002\u044c\u0487\u0005X-\u001c\u044d\u044e\f\u001a",
+    "\u0002\u0002\u044e\u044f\u0007o\u0002\u0002\u044f\u0450\u0005X-\u0002",
+    "\u0450\u0451\u0007a\u0002\u0002\u0451\u0452\u0005X-\u001b\u0452\u0487",
+    "\u0003\u0002\u0002\u0002\u0453\u0454\f\u0018\u0002\u0002\u0454\u0455",
+    "\u0007p\u0002\u0002\u0455\u0487\u0005X-\u0019\u0456\u0457\f\u0017\u0002",
+    "\u0002\u0457\u0458\u0007X\u0002\u0002\u0458\u0487\u0005X-\u0018\u0459",
+    "\u045a\f\u0016\u0002\u0002\u045a\u045b\u0007X\u0002\u0002\u045b\u045c",
+    "\u0007G\u0002\u0002\u045c\u0487\u0005X-\u0017\u045d\u045e\f\u0015\u0002",
+    "\u0002\u045e\u045f\u0007X\u0002\u0002\u045f\u0460\u0007J\u0002\u0002",
+    "\u0460\u0487\u0005X-\u0016\u0461\u0462\f\u0014\u0002\u0002\u0462\u0463",
+    "\u0007{\u0002\u0002\u0463\u0464\u0007p\u0002\u0002\u0464\u0487\u0005",
+    "X-\u0015\u0465\u0466\f\u0013\u0002\u0002\u0466\u0467\u0007{\u0002\u0002",
+    "\u0467\u0468\u0007X\u0002\u0002\u0468\u0487\u0005X-\u0014\u0469\u046a",
+    "\f\u0012\u0002\u0002\u046a\u046b\u0007{\u0002\u0002\u046b\u046c\u0007",
+    "X\u0002\u0002\u046c\u046d\u0007G\u0002\u0002\u046d\u0487\u0005X-\u0013",
+    "\u046e\u046f\f\u0011\u0002\u0002\u046f\u0470\u0007{\u0002\u0002\u0470",
+    "\u0471\u0007X\u0002\u0002\u0471\u0472\u0007J\u0002\u0002\u0472\u0487",
+    "\u0005X-\u0012\u0473\u0474\f\u0003\u0002\u0002\u0474\u0475\u0007l\u0002",
+    "\u0002\u0475\u0476\u0007`\u0002\u0002\u0476\u0477\u0005\u00ba^\u0002",
+    "\u0477\u0478\u0007p\u0002\u0002\u0478\u0479\u0005X-\u0004\u0479\u0487",
+    "\u0003\u0002\u0002\u0002\u047a\u047b\f\u001f\u0002\u0002\u047b\u047c",
+    "\u0007s\u0002\u0002\u047c\u047d\u0007{\u0002\u0002\u047d\u0487\u0005",
+    "\u011a\u008e\u0002\u047e\u047f\f\u001e\u0002\u0002\u047f\u0480\u0007",
+    "s\u0002\u0002\u0480\u0487\u0005\u011a\u008e\u0002\u0481\u0482\f\u0019",
+    "\u0002\u0002\u0482\u0483\u0007K\u0002\u0002\u0483\u0487\u0005\u00cc",
+    "g\u0002\u0484\u0485\f\n\u0002\u0002\u0485\u0487\u0005p9\u0002\u0486",
+    "\u041f\u0003\u0002\u0002\u0002\u0486\u0422\u0003\u0002\u0002\u0002\u0486",
+    "\u0425\u0003\u0002\u0002\u0002\u0486\u0429\u0003\u0002\u0002\u0002\u0486",
+    "\u042d\u0003\u0002\u0002\u0002\u0486\u0431\u0003\u0002\u0002\u0002\u0486",
+    "\u0435\u0003\u0002\u0002\u0002\u0486\u0438\u0003\u0002\u0002\u0002\u0486",
+    "\u043b\u0003\u0002\u0002\u0002\u0486\u043e\u0003\u0002\u0002\u0002\u0486",
+    "\u0441\u0003\u0002\u0002\u0002\u0486\u0444\u0003\u0002\u0002\u0002\u0486",
+    "\u0447\u0003\u0002\u0002\u0002\u0486\u044a\u0003\u0002\u0002\u0002\u0486",
+    "\u044d\u0003\u0002\u0002\u0002\u0486\u0453\u0003\u0002\u0002\u0002\u0486",
+    "\u0456\u0003\u0002\u0002\u0002\u0486\u0459\u0003\u0002\u0002\u0002\u0486",
+    "\u045d\u0003\u0002\u0002\u0002\u0486\u0461\u0003\u0002\u0002\u0002\u0486",
+    "\u0465\u0003\u0002\u0002\u0002\u0486\u0469\u0003\u0002\u0002\u0002\u0486",
+    "\u046e\u0003\u0002\u0002\u0002\u0486\u0473\u0003\u0002\u0002\u0002\u0486",
+    "\u047a\u0003\u0002\u0002\u0002\u0486\u047e\u0003\u0002\u0002\u0002\u0486",
+    "\u0481\u0003\u0002\u0002\u0002\u0486\u0484\u0003\u0002\u0002\u0002\u0487",
+    "\u048a\u0003\u0002\u0002\u0002\u0488\u0486\u0003\u0002\u0002\u0002\u0488",
+    "\u0489\u0003\u0002\u0002\u0002\u0489Y\u0003\u0002\u0002\u0002\u048a",
+    "\u0488\u0003\u0002\u0002\u0002\u048b\u048c\b.\u0001\u0002\u048c\u048d",
+    "\u0005\u00b8]\u0002\u048d\u0492\u0003\u0002\u0002\u0002\u048e\u048f",
+    "\f\u0003\u0002\u0002\u048f\u0491\u0005\\/\u0002\u0490\u048e\u0003\u0002",
+    "\u0002\u0002\u0491\u0494\u0003\u0002\u0002\u0002\u0492\u0490\u0003\u0002",
+    "\u0002\u0002\u0492\u0493\u0003\u0002\u0002\u0002\u0493[\u0003\u0002",
+    "\u0002\u0002\u0494\u0492\u0003\u0002\u0002\u0002\u0495\u0496\u0006/",
+    "!\u0003\u0496\u0497\u0007\u0015\u0002\u0002\u0497\u0498\u0005\u00b8",
     "]\u0002\u0498]\u0003\u0002\u0002\u0002\u0499\u049a\u0007r\u0002\u0002",
     "\u049a\u049b\u0007\u0011\u0002\u0002\u049b\u049c\u0005\u00ba^\u0002",
     "\u049c\u049d\u0005`1\u0002\u049d_\u0003\u0002\u0002\u0002\u049e\u049f",
@@ -10344,7 +10344,7 @@ EParser.prototype.expression = function(_p) {
                 var la_ = this._interp.adaptivePredict(this._input,54,this._ctx);
                 switch(la_) {
                 case 1:
-                    localctx = new MultiplyExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new AndExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1053;
@@ -10352,62 +10352,90 @@ EParser.prototype.expression = function(_p) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 40)");
                     }
                     this.state = 1054;
-                    this.multiply();
+                    this.match(EParser.AND);
                     this.state = 1055;
                     localctx.right = this.expression(41);
                     break;
 
                 case 2:
-                    localctx = new DivideExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new OrExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
-                    this.state = 1057;
+                    this.state = 1056;
                     if (!( this.precpred(this._ctx, 39))) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 39)");
                     }
+                    this.state = 1057;
+                    this.match(EParser.OR);
                     this.state = 1058;
-                    this.divide();
-                    this.state = 1059;
                     localctx.right = this.expression(40);
                     break;
 
                 case 3:
-                    localctx = new ModuloExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new MultiplyExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
-                    this.state = 1061;
+                    this.state = 1059;
                     if (!( this.precpred(this._ctx, 38))) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 38)");
                     }
-                    this.state = 1062;
-                    this.modulo();
-                    this.state = 1063;
+                    this.state = 1060;
+                    this.multiply();
+                    this.state = 1061;
                     localctx.right = this.expression(39);
                     break;
 
                 case 4:
-                    localctx = new IntDivideExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new DivideExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
-                    this.state = 1065;
+                    this.state = 1063;
                     if (!( this.precpred(this._ctx, 37))) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 37)");
                     }
-                    this.state = 1066;
-                    this.idivide();
-                    this.state = 1067;
+                    this.state = 1064;
+                    this.divide();
+                    this.state = 1065;
                     localctx.right = this.expression(38);
                     break;
 
                 case 5:
-                    localctx = new AddExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new ModuloExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
-                    this.state = 1069;
+                    this.state = 1067;
                     if (!( this.precpred(this._ctx, 36))) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 36)");
                     }
-                    this.state = 1070;
+                    this.state = 1068;
+                    this.modulo();
+                    this.state = 1069;
+                    localctx.right = this.expression(37);
+                    break;
+
+                case 6:
+                    localctx = new IntDivideExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx.left = _prevctx;
+                    this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
+                    this.state = 1071;
+                    if (!( this.precpred(this._ctx, 35))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 35)");
+                    }
+                    this.state = 1072;
+                    this.idivide();
+                    this.state = 1073;
+                    localctx.right = this.expression(36);
+                    break;
+
+                case 7:
+                    localctx = new AddExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx.left = _prevctx;
+                    this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
+                    this.state = 1075;
+                    if (!( this.precpred(this._ctx, 34))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 34)");
+                    }
+                    this.state = 1076;
                     localctx.op = this._input.LT(1);
                     _la = this._input.LA(1);
                     if(!(_la===EParser.PLUS || _la===EParser.MINUS)) {
@@ -10417,40 +10445,12 @@ EParser.prototype.expression = function(_p) {
                     	this._errHandler.reportMatch(this);
                         this.consume();
                     }
-                    this.state = 1071;
-                    localctx.right = this.expression(37);
-                    break;
-
-                case 6:
-                    localctx = new LessThanExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
-                    localctx.left = _prevctx;
-                    this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
-                    this.state = 1072;
-                    if (!( this.precpred(this._ctx, 35))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 35)");
-                    }
-                    this.state = 1073;
-                    this.match(EParser.LT);
-                    this.state = 1074;
-                    localctx.right = this.expression(36);
-                    break;
-
-                case 7:
-                    localctx = new LessThanOrEqualExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
-                    localctx.left = _prevctx;
-                    this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
-                    this.state = 1075;
-                    if (!( this.precpred(this._ctx, 34))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 34)");
-                    }
-                    this.state = 1076;
-                    this.match(EParser.LTE);
                     this.state = 1077;
                     localctx.right = this.expression(35);
                     break;
 
                 case 8:
-                    localctx = new GreaterThanExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new LessThanExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1078;
@@ -10458,13 +10458,13 @@ EParser.prototype.expression = function(_p) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 33)");
                     }
                     this.state = 1079;
-                    this.match(EParser.GT);
+                    this.match(EParser.LT);
                     this.state = 1080;
                     localctx.right = this.expression(34);
                     break;
 
                 case 9:
-                    localctx = new GreaterThanOrEqualExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new LessThanOrEqualExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1081;
@@ -10472,41 +10472,41 @@ EParser.prototype.expression = function(_p) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 32)");
                     }
                     this.state = 1082;
-                    this.match(EParser.GTE);
+                    this.match(EParser.LTE);
                     this.state = 1083;
                     localctx.right = this.expression(33);
                     break;
 
                 case 10:
-                    localctx = new EqualsExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new GreaterThanExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1084;
-                    if (!( this.precpred(this._ctx, 29))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 29)");
+                    if (!( this.precpred(this._ctx, 31))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 31)");
                     }
                     this.state = 1085;
-                    this.match(EParser.EQ);
+                    this.match(EParser.GT);
                     this.state = 1086;
-                    localctx.right = this.expression(30);
+                    localctx.right = this.expression(32);
                     break;
 
                 case 11:
-                    localctx = new NotEqualsExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new GreaterThanOrEqualExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1087;
-                    if (!( this.precpred(this._ctx, 28))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 28)");
+                    if (!( this.precpred(this._ctx, 30))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 30)");
                     }
                     this.state = 1088;
-                    this.match(EParser.LTGT);
+                    this.match(EParser.GTE);
                     this.state = 1089;
-                    localctx.right = this.expression(29);
+                    localctx.right = this.expression(31);
                     break;
 
                 case 12:
-                    localctx = new RoughlyEqualsExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new EqualsExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1090;
@@ -10514,13 +10514,13 @@ EParser.prototype.expression = function(_p) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 27)");
                     }
                     this.state = 1091;
-                    this.match(EParser.TILDE);
+                    this.match(EParser.EQ);
                     this.state = 1092;
                     localctx.right = this.expression(28);
                     break;
 
                 case 13:
-                    localctx = new OrExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new NotEqualsExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1093;
@@ -10528,13 +10528,13 @@ EParser.prototype.expression = function(_p) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 26)");
                     }
                     this.state = 1094;
-                    this.match(EParser.OR);
+                    this.match(EParser.LTGT);
                     this.state = 1095;
                     localctx.right = this.expression(27);
                     break;
 
                 case 14:
-                    localctx = new AndExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
+                    localctx = new RoughlyEqualsExpressionContext(this, new ExpressionContext(this, _parentctx, _parentState));
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1096;
@@ -10542,7 +10542,7 @@ EParser.prototype.expression = function(_p) {
                         throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 25)");
                     }
                     this.state = 1097;
-                    this.match(EParser.AND);
+                    this.match(EParser.TILDE);
                     this.state = 1098;
                     localctx.right = this.expression(26);
                     break;
@@ -10718,8 +10718,8 @@ EParser.prototype.expression = function(_p) {
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1144;
-                    if (!( this.precpred(this._ctx, 31))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 31)");
+                    if (!( this.precpred(this._ctx, 29))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 29)");
                     }
                     this.state = 1145;
                     this.match(EParser.IS);
@@ -10734,8 +10734,8 @@ EParser.prototype.expression = function(_p) {
                     localctx.left = _prevctx;
                     this.pushNewRecursionContext(localctx, _startState, EParser.RULE_expression);
                     this.state = 1148;
-                    if (!( this.precpred(this._ctx, 30))) {
-                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 30)");
+                    if (!( this.precpred(this._ctx, 28))) {
+                        throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 28)");
                     }
                     this.state = 1149;
                     this.match(EParser.IS);
@@ -30305,9 +30305,9 @@ EParser.prototype.expression_sempred = function(localctx, predIndex) {
 		case 10:
 			return this.precpred(this._ctx, 32);
 		case 11:
-			return this.precpred(this._ctx, 29);
+			return this.precpred(this._ctx, 31);
 		case 12:
-			return this.precpred(this._ctx, 28);
+			return this.precpred(this._ctx, 30);
 		case 13:
 			return this.precpred(this._ctx, 27);
 		case 14:
@@ -30335,9 +30335,9 @@ EParser.prototype.expression_sempred = function(localctx, predIndex) {
 		case 25:
 			return this.precpred(this._ctx, 1);
 		case 26:
-			return this.precpred(this._ctx, 31);
+			return this.precpred(this._ctx, 29);
 		case 27:
-			return this.precpred(this._ctx, 30);
+			return this.precpred(this._ctx, 28);
 		case 28:
 			return this.precpred(this._ctx, 23);
 		case 29:
