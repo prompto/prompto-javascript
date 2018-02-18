@@ -1339,7 +1339,9 @@ OPromptoBuilder.prototype.exitNative_resource_declaration = function(ctx) {
 	var attrs = this.getNodeValue(ctx.attrs);
 	var bindings = this.getNodeValue(ctx.bindings);
     var methods = this.getNodeValue(ctx.methods);
-	this.setNodeValue(ctx, new declaration.NativeResourceDeclaration(name, attrs, bindings, null, methods));
+    var decl = new declaration.NativeResourceDeclaration(name, attrs, bindings, null, methods);
+    decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
 };
 
 
