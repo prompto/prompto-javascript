@@ -82,7 +82,7 @@ JavaScriptType.prototype.doConvertJavaScriptValueToPromptoValue = function(conte
 JavaScriptType.prototype.convertCategory = function(context, value, klass, returnType) {
     var decl = context.getNativeBinding(klass);
     if(decl!=null)
-        return new NativeInstance(decl, value);
+        return new NativeInstance(context, decl, value);
     else
         return null;
 };
