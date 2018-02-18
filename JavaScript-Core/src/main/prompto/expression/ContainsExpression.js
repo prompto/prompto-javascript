@@ -38,8 +38,8 @@ ContainsExpression.prototype.check = function(context) {
     case ContOp.IN:
     case ContOp.NOT_IN:
         return rt.checkContains(context,lt);
-    case ContOp.CONTAINS:
-    case ContOp.NOT_CONTAINS:
+    case ContOp.HAS:
+    case ContOp.NOT_HAS:
         return lt.checkContains(context, rt);
     default:
         return lt.checkContainsAllOrAny(context, rt);
@@ -62,22 +62,22 @@ ContainsExpression.prototype.interpretValues = function(context, lval, rval) {
         else if(rval.hasItem)
             result = rval.hasItem(context, lval);
         break;
-    case ContOp.CONTAINS:
-    case ContOp.NOT_CONTAINS:
+    case ContOp.HAS:
+    case ContOp.NOT_HAS:
         if(lval==NullValue.instance)
             result = false;
         else if(lval.hasItem)
             result = lval.hasItem(context, rval);
         break;
-    case ContOp.CONTAINS_ALL:
-    case ContOp.NOT_CONTAINS_ALL:
+    case ContOp.HAS_ALL:
+    case ContOp.NOT_HAS_ALL:
         if(lval==NullValue.instance || rval==NullValue.instance)
             result = false;
         else if (lval.hasItem && rval.hasItem)
             result = this.containsAll(context, lval, rval);
         break;
-    case ContOp.CONTAINS_ANY:
-    case ContOp.NOT_CONTAINS_ANY:
+    case ContOp.HAS_ANY:
+    case ContOp.NOT_HAS_ANY:
         if(lval==NullValue.instance || rval==NullValue.instance)
             result = false;
         else if (lval.hasItem && rval.hasItem)
@@ -181,20 +181,12 @@ ContainsExpression.prototype.getMatchOp = function(context, fieldType, valueType
         else
             return this.getMatchOp(context, valueType, fieldType, reversed, false);
     }
-    if ((fieldType == TextType.instance || valueType == CharacterType.instance) &&
-        (valueType == TextType.instance || valueType == CharacterType.instance)) {
-        if (operator == ContOp.CONTAINS || operator == ContOp.NOT_CONTAINS)
-            return MatchOp.CONTAINS;
-    }
-    if (valueType instanceof ContainerType) {
-        if (operator == ContOp.IN || operator == ContOp.NOT_IN)
-            return MatchOp.CONTAINED;
-    }
-    if (fieldType instanceof ContainerType) {
-        if (operator == ContOp.CONTAINS || operator == ContOp.NOT_CONTAINS)
-            return MatchOp.CONTAINS;
-    }
-    throw new SyntaxError("Unsupported operator: " + operator.toString());
+    if (operator == ContOp.HAS || operator == ContOp.NOT_HAS)
+        return MatchOp.HAS;
+    else if (operator == ContOp.IN || operator == ContOp.NOT_IN)
+        return MatchOp.IN;
+    else
+        throw new SyntaxError("Unsupported operator: " + operator.toString());
 };
 
 

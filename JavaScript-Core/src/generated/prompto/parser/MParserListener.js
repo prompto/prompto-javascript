@@ -650,21 +650,30 @@ MParserListener.prototype.exitIntDivideExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#HasAnyExpression.
+MParserListener.prototype.enterHasAnyExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#HasAnyExpression.
+MParserListener.prototype.exitHasAnyExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#HasExpression.
+MParserListener.prototype.enterHasExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#HasExpression.
+MParserListener.prototype.exitHasExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#TernaryExpression.
 MParserListener.prototype.enterTernaryExpression = function(ctx) {
 };
 
 // Exit a parse tree produced by MParser#TernaryExpression.
 MParserListener.prototype.exitTernaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ContainsAllExpression.
-MParserListener.prototype.enterContainsAllExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ContainsAllExpression.
-MParserListener.prototype.exitContainsAllExpression = function(ctx) {
 };
 
 
@@ -731,12 +740,30 @@ MParserListener.prototype.exitLessThanOrEqualExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#NotHasAnyExpression.
+MParserListener.prototype.enterNotHasAnyExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#NotHasAnyExpression.
+MParserListener.prototype.exitNotHasAnyExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#AndExpression.
 MParserListener.prototype.enterAndExpression = function(ctx) {
 };
 
 // Exit a parse tree produced by MParser#AndExpression.
 MParserListener.prototype.exitAndExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#NotHasExpression.
+MParserListener.prototype.enterNotHasExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#NotHasExpression.
+MParserListener.prototype.exitNotHasExpression = function(ctx) {
 };
 
 
@@ -749,12 +776,12 @@ MParserListener.prototype.exitClosureExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MParser#NotContainsAnyExpression.
-MParserListener.prototype.enterNotContainsAnyExpression = function(ctx) {
+// Enter a parse tree produced by MParser#NotHasAllExpression.
+MParserListener.prototype.enterNotHasAllExpression = function(ctx) {
 };
 
-// Exit a parse tree produced by MParser#NotContainsAnyExpression.
-MParserListener.prototype.exitNotContainsAnyExpression = function(ctx) {
+// Exit a parse tree produced by MParser#NotHasAllExpression.
+MParserListener.prototype.exitNotHasAllExpression = function(ctx) {
 };
 
 
@@ -893,12 +920,12 @@ MParserListener.prototype.exitAddExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MParser#NotContainsAllExpression.
-MParserListener.prototype.enterNotContainsAllExpression = function(ctx) {
+// Enter a parse tree produced by MParser#HasAllExpression.
+MParserListener.prototype.enterHasAllExpression = function(ctx) {
 };
 
-// Exit a parse tree produced by MParser#NotContainsAllExpression.
-MParserListener.prototype.exitNotContainsAllExpression = function(ctx) {
+// Exit a parse tree produced by MParser#HasAllExpression.
+MParserListener.prototype.exitHasAllExpression = function(ctx) {
 };
 
 
@@ -908,15 +935,6 @@ MParserListener.prototype.enterInstanceExpression = function(ctx) {
 
 // Exit a parse tree produced by MParser#InstanceExpression.
 MParserListener.prototype.exitInstanceExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ContainsAnyExpression.
-MParserListener.prototype.enterContainsAnyExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ContainsAnyExpression.
-MParserListener.prototype.exitContainsAnyExpression = function(ctx) {
 };
 
 

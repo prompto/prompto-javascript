@@ -1657,45 +1657,59 @@ OPromptoBuilder.prototype.exitNotInExpression = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitContainsAllExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.CONTAINS_ALL, right));
+OPromptoBuilder.prototype.exitHasExpression = function(ctx) {
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS, right));
 };
 
 
-OPromptoBuilder.prototype.exitNotContainsAllExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_CONTAINS_ALL, right));
+OPromptoBuilder.prototype.exitNotHasExpression = function(ctx) {
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS, right));
 };
 
 
-OPromptoBuilder.prototype.exitContainsAnyExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.CONTAINS_ANY, right));
+OPromptoBuilder.prototype.exitHasAllExpression = function(ctx) {
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ALL, right));
 };
 
 
-OPromptoBuilder.prototype.exitNotContainsAnyExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_CONTAINS_ANY, right));
+OPromptoBuilder.prototype.exitNotHasAllExpression = function(ctx) {
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ALL, right));
+};
+
+
+OPromptoBuilder.prototype.exitHasAnyExpression = function(ctx) {
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ANY, right));
+};
+
+
+OPromptoBuilder.prototype.exitNotHasAnyExpression = function(ctx) {
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ANY, right));
 };
 
 
 OPromptoBuilder.prototype.exitContainsExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.CONTAINS, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.CONTAINS, right));
 };
 
 
 OPromptoBuilder.prototype.exitNotContainsExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_CONTAINS, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_CONTAINS, right));
 };
 
 

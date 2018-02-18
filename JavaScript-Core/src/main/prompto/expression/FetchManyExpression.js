@@ -147,7 +147,7 @@ FetchManyExpression.prototype.buildFetchManyQuery = function(context, store) {
     builder.setLast(this.interpretLimit(context, this.last));
     if (this.typ != null) {
         var info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
-        builder.verify(info, MatchOp.CONTAINS, this.typ.name);
+        builder.verify(info, MatchOp.HAS, this.typ.name);
     }
     if (this.predicate != null)
         this.predicate.interpretQuery(context, builder);

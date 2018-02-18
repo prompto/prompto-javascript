@@ -115,4 +115,28 @@ EqOp.ROUGHLY.toMString = function() {
     return '~=';
 };
 
+EqOp.CONTAINS = new EqOp("CONTAINS");
+EqOp.CONTAINS.toEDialect = function(writer) {
+    writer.append('contains');
+};
+EqOp.CONTAINS.toODialect = EqOp.CONTAINS.toEDialect;
+EqOp.CONTAINS.toMDialect = EqOp.CONTAINS.toEDialect;
+EqOp.CONTAINS.toEString = function() {
+    return 'contains';
+};
+EqOp.CONTAINS.toOString = EqOp.CONTAINS.toEString;
+EqOp.CONTAINS.toMString = EqOp.CONTAINS.toEString;
+
+EqOp.NOT_CONTAINS = new EqOp("NOT_CONTAINS");
+EqOp.NOT_CONTAINS.toEDialect = function(writer) {
+    writer.append('not contains');
+};
+EqOp.NOT_CONTAINS.toODialect = EqOp.NOT_CONTAINS.toEDialect;
+EqOp.NOT_CONTAINS.toMDialect = EqOp.NOT_CONTAINS.toEDialect;
+EqOp.NOT_CONTAINS.toEString = function() {
+    return 'not contains';
+};
+EqOp.NOT_CONTAINS.toOString = EqOp.NOT_CONTAINS.toEString;
+EqOp.NOT_CONTAINS.toMString = EqOp.NOT_CONTAINS.toEString;
+
 exports.EqOp = EqOp;

@@ -158,6 +158,16 @@ Text.prototype.Roughly = function(context, obj) {
     }
 };
 
+
+Text.prototype.Contains = function(context, obj) {
+    if (obj instanceof Text || obj instanceof Character) {
+        return this.value.indexOf(obj.value) >= 0;
+    } else {
+        return false;
+    }
+};
+
+
 Text.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     if(Array.isArray(json))
         json.push(this.value);

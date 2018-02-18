@@ -83,6 +83,11 @@ Value.prototype.Roughly = function(context, value) {
     return this.equals(value);
 };
 
+
+Value.prototype.Contains = function(context, value) {
+    throw new SyntaxError("Contains not supported by " + this.constructor.name);
+};
+
 function Instance(type) {
     Value.call(this, type);
     return this;

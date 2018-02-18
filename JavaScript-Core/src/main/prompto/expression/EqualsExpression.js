@@ -2,10 +2,14 @@ var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
+var ContainerType = require("../type/ContainerType").ContainerType;
+var CharacterType = require("../type/CharacterType").CharacterType;
+var TextType = require("../type/TextType").TextType;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
 var MatchOp = require("../store/MatchOp").MatchOp;
@@ -40,8 +44,16 @@ EqualsExpression.prototype.toDialect = function(writer) {
 };
 
 EqualsExpression.prototype.check = function(context) {
-	this.left.check(context);
-	this.right.check(context);
+	var lt = this.left.check(context);
+	var rt = this.right.check(context);
+	if(this.operator==EqOp.CONTAINS || this.operator==EqOp.NOT_CONTAINS) {
+	    if(lt instanceof ContainerType)
+            lt = lt.itemType;
+        if(rt instanceof ContainerType)
+            rt = rt.itemType;
+        if(lt!=TextType.instance || !(rt==TextType.instance || rt==CharacterType.instance))
+            throw new SyntaxError("'contains' only operates on textual value!");
+    }
 	return BooleanType.instance; // can compare all objects
 };
 
@@ -75,9 +87,24 @@ EqualsExpression.prototype.interpretValues = function(context, lval, rval) {
         case EqOp.ROUGHLY:
             equal = this.roughly(context,lval,rval);
             break;
+        case EqOp.CONTAINS:
+            equal = this.contains(context,lval,rval);
+            break;
+        case EqOp.NOT_CONTAINS:
+            equal = !this.contains(context,lval,rval);
+            break;
     }
     return Bool.ValueOf(equal);
 };
+
+EqualsExpression.prototype.contains = function(context, lval, rval) {
+    if(lval!=null && rval!=null && lval.Contains) {
+        return lval.Contains(context, rval);
+    } else {
+        return false;
+    }
+};
+
 
 EqualsExpression.prototype.roughly = function(context, lval, rval) {
     if(lval!=null && rval!=null && lval.Roughly) {
@@ -174,11 +201,13 @@ EqualsExpression.prototype.interpretQuery = function(context, query) {
 EqualsExpression.prototype.getMatchOp = function() {
     switch (this.operator) {
         case EqOp.EQUALS:
+        case EqOp.NOT_EQUALS:
             return MatchOp.EQUALS;
         case EqOp.ROUGHLY:
             return MatchOp.ROUGHLY;
-        case EqOp.NOT_EQUALS:
-            return MatchOp.EQUALS
+        case EqOp.CONTAINS:
+        case EqOp.NOT_CONTAINS:
+            return MatchOp.CONTAINS
         default:
             throw new Exception("Not supported:" + this.operator.toString());
     }
