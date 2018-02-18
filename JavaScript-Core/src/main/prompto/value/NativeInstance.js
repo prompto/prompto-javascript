@@ -1,11 +1,16 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
 var TypeUtils = require("../utils/TypeUtils");
 var Instance = require("./Value").Instance;
+var DataStore = require("../store/DataStore").DataStore;
 
-function NativeInstance(declaration, instance) {
+function NativeInstance(context, declaration, instance) {
     Instance.call(this,new CategoryType(declaration.id));
 	this.declaration = declaration;
-    this.storable = declaration.storable ? new StorableDocument() : null;
+    this.storable = false;
+    if(declaration.storable) {
+        var categories = declaration.collectCategories(context);
+        this.storable = DataStore.instance.newStorableDocument(categories);
+    }
 	this.instance = instance || this.makeInstance();
 	return this;
 }
@@ -92,9 +97,8 @@ NativeInstance.prototype.doSetMember = function(context, attrName, value, allowS
         value = setter.interpret(context);
     }
     if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-        this.storable.SetMember(context, attrName, value);
-	value = value.convertToJavaScript();
-	this.instance[attrName] = value;
+        this.storable.setData(attrName, value.getStorableData());
+	this.instance[attrName] = value.convertToJavaScript();
 };
 
 

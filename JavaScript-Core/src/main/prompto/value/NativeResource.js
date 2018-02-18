@@ -1,7 +1,7 @@
 var NativeInstance = require("./NativeInstance").NativeInstance;
 
-function NativeResource(declaration) {
-	NativeInstance.call(this, declaration);
+function NativeResource(context, declaration) {
+	NativeInstance.call(this, context, declaration);
 	return this;
 }
 

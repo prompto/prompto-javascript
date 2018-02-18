@@ -16,7 +16,7 @@ exports.tearDown = function(done) {
 exports.testContainsItem = function(test) {
 	checkOutput(test, "predicate/containsItem.pec");
 };
-/*
+
 exports.testEquals = function(test) {
 	checkOutput(test, "predicate/equals.pec");
 };
@@ -45,4 +45,3 @@ exports.testRoughly = function(test) {
 	checkOutput(test, "predicate/roughly.pec");
 };
 
-*/

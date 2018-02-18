@@ -17,8 +17,8 @@ NativeResourceDeclaration.prototype.getType = function(context) {
 };
 
 
-NativeResourceDeclaration.prototype.newInstance = function() {
-	return new NativeResource(this);
+NativeResourceDeclaration.prototype.newInstance = function(context) {
+	return new NativeResource(context, this);
 };
 
 NativeResourceDeclaration.prototype.checkConstructorContext = function(context) {
