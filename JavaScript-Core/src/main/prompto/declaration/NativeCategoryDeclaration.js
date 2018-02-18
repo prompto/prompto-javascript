@@ -82,8 +82,8 @@ NativeCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) {
     writer.append("native category");
 };
 
-NativeCategoryDeclaration.prototype.newInstance = function() {
-	return new NativeInstance(this);
+NativeCategoryDeclaration.prototype.newInstance = function(context) {
+	return new NativeInstance(context, this);
 };
 
 NativeCategoryDeclaration.prototype.getBoundFunction = function(fail) {
