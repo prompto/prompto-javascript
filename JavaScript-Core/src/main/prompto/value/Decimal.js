@@ -38,6 +38,11 @@ Decimal.prototype.DecimalValue = function() {
 	return this.value;
 };
 
+
+Decimal.prototype.getStorableData = function() {
+    return this.value;
+};
+
 Decimal.prototype.Add = function(context, value) {
 	if (value instanceof Integer) {
 		return new Decimal(this.value + value.IntegerValue());
