@@ -399,9 +399,9 @@ CategoryType.prototype.sortByGlobalMethod = function(context, list, desc, method
 	var type = this;
 	function cmp(o1, o2) {
 		var assignment = method.assignments[0];
-		assignment.expression = new ExpressionValue(type, o1);
+		assignment._expression = new ExpressionValue(type, o1);
 		var key1 = method.interpret(context);
-		assignment.expression = new ExpressionValue(type, o2);
+		assignment._expression = new ExpressionValue(type, o2);
 		var key2 = method.interpret(context);
 		return compareKeys(key1, key2);
 	}

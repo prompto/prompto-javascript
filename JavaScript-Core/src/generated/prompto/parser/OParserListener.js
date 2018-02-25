@@ -1154,12 +1154,30 @@ OParserListener.prototype.exitSliceSelector = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#constructor_expression.
-OParserListener.prototype.enterConstructor_expression = function(ctx) {
+// Enter a parse tree produced by OParser#ConstructorFrom.
+OParserListener.prototype.enterConstructorFrom = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#constructor_expression.
-OParserListener.prototype.exitConstructor_expression = function(ctx) {
+// Exit a parse tree produced by OParser#ConstructorFrom.
+OParserListener.prototype.exitConstructorFrom = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#ConstructorNoFrom.
+OParserListener.prototype.enterConstructorNoFrom = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#ConstructorNoFrom.
+OParserListener.prototype.exitConstructorNoFrom = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#copy_from.
+OParserListener.prototype.enterCopy_from = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#copy_from.
+OParserListener.prototype.exitCopy_from = function(ctx) {
 };
 
 

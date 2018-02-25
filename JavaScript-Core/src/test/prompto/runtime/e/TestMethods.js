@@ -41,8 +41,12 @@ exports.testExtended = function(test) {
 	checkOutput(test, "methods/extended.pec");
 };
 
-exports.testImplicit = function(test) {
-	checkOutput(test, "methods/implicit.pec");
+exports.testHomonym = function(test) {
+	checkOutput(test, "methods/homonym.pec");
+};
+
+exports.testImplicitMember = function(test) {
+	checkOutput(test, "methods/implicitMember.pec");
 };
 
 exports.testMember = function(test) {

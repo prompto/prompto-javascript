@@ -25,6 +25,10 @@ exports.testGreater = function(test) {
 	checkOutput(test, "predicate/greater.pec");
 };
 
+exports.testHasItem = function(test) {
+	checkOutput(test, "predicate/hasItem.pec");
+};
+
 exports.testInList = function(test) {
 	checkOutput(test, "predicate/inList.pec");
 };

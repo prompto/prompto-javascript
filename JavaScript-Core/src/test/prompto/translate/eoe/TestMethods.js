@@ -30,8 +30,12 @@ exports.testExtended = function(test) {
 	compareResourceEOE(test, "methods/extended.pec");
 };
 
-exports.testImplicit = function(test) {
-	compareResourceEOE(test, "methods/implicit.pec");
+exports.testHomonym = function(test) {
+	compareResourceEOE(test, "methods/homonym.pec");
+};
+
+exports.testImplicitMember = function(test) {
+	compareResourceEOE(test, "methods/implicitMember.pec");
 };
 
 exports.testMember = function(test) {

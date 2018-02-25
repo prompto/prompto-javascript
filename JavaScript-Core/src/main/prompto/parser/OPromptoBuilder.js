@@ -823,11 +823,25 @@ OPromptoBuilder.prototype.exitMethod_identifier = function(ctx) {
 
 
 
-OPromptoBuilder.prototype.exitConstructor_expression = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var args = this.getNodeValue(ctx.args) || null;
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
+OPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
+    var type = this.getNodeValue(ctx.typ);
+    var copyFrom = this.getNodeValue(ctx.copyExp) || null;
+    var args = this.getNodeValue(ctx.args) || null;
+    this.setNodeValue(ctx, new expression.ConstructorExpression(type, copyFrom, args, true));
 };
+
+
+OPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
+    var type = this.getNodeValue(ctx.typ);
+    var args = this.getNodeValue(ctx.args) || null;
+    this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
+};
+
+
+OPromptoBuilder.prototype.exitCopy_from = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+};
+
 
 
 

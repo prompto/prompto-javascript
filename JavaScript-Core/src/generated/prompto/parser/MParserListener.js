@@ -1055,12 +1055,30 @@ MParserListener.prototype.exitDocument_expression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MParser#constructor_expression.
-MParserListener.prototype.enterConstructor_expression = function(ctx) {
+// Enter a parse tree produced by MParser#ConstructorFrom.
+MParserListener.prototype.enterConstructorFrom = function(ctx) {
 };
 
-// Exit a parse tree produced by MParser#constructor_expression.
-MParserListener.prototype.exitConstructor_expression = function(ctx) {
+// Exit a parse tree produced by MParser#ConstructorFrom.
+MParserListener.prototype.exitConstructorFrom = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#ConstructorNoFrom.
+MParserListener.prototype.enterConstructorNoFrom = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#ConstructorNoFrom.
+MParserListener.prototype.exitConstructorNoFrom = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#copy_from.
+MParserListener.prototype.enterCopy_from = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#copy_from.
+MParserListener.prototype.exitCopy_from = function(ctx) {
 };
 
 

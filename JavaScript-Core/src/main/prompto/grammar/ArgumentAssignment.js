@@ -1,5 +1,6 @@
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var CategoryType = null;
+var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
@@ -10,7 +11,7 @@ exports.resolve = function() {
 
 function ArgumentAssignment(argument, expression) {
 	this.argument = argument;
-	this.expression = expression;
+	this._expression = expression;
 	return this;
 }
 
@@ -26,6 +27,12 @@ Object.defineProperty(ArgumentAssignment.prototype, "name", {
 	}
 });
 
+Object.defineProperty(ArgumentAssignment.prototype, "expression", {
+    get : function() {
+        return this._expression ? this._expression : new InstanceExpression(this.id);
+    }
+});
+
 // needed for error reporting
 Object.defineProperty(ArgumentAssignment.prototype, "end", {
     get : function() {
@@ -38,34 +45,50 @@ ArgumentAssignment.prototype.toDialect = function(writer) {
 };
 
 ArgumentAssignment.prototype.toODialect = function(writer) {
-    if(this.argument!=null) {
+	if(!this._expression) {
         writer.append(this.argument.name);
-        writer.append(" = ");
+	} else {
+        if (this.argument != null) {
+            writer.append(this.argument.name);
+            writer.append(" = ");
+        }
+        this._expression.toDialect(writer);
     }
-    this.expression.toDialect(writer);
 };
 
 ArgumentAssignment.prototype.toMDialect = function(writer) {
-    if(this.argument!=null) {
+    if(!this._expression) {
         writer.append(this.argument.name);
-        writer.append(" = ");
+    } else {
+        if (this.argument != null) {
+            writer.append(this.argument.name);
+            writer.append(" = ");
+        }
+        this._expression.toDialect(writer);
     }
-    this.expression.toDialect(writer);
 };
 
 ArgumentAssignment.prototype.toEDialect = function(writer) {
-    this.expression.toDialect(writer);
-    if(this.argument!=null) {
-        writer.append(" as ");
+    if(!this._expression) {
         writer.append(this.argument.name);
+    } else {
+        this._expression.toDialect(writer);
+        if (this.argument != null) {
+            writer.append(" as ");
+            writer.append(this.argument.name);
+        }
     }
 };
 
 ArgumentAssignment.prototype.toString = function() {
-    if(this.argument===null) {
-        return this.expression.toString();
+    if(!this._expression) {
+        return this.argument.name;
     } else {
-        return this.name + " = " + this.expression.toString();
+        if (this.argument === null) {
+            return this._expression.toString();
+        } else {
+            return this.name + " = " + this._expression.toString();
+        }
     }
 };
 

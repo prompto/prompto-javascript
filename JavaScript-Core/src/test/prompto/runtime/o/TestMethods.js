@@ -41,8 +41,8 @@ exports.testExtended = function(test) {
 	checkOutput(test, "methods/extended.poc");
 };
 
-exports.testImplicit = function(test) {
-	checkOutput(test, "methods/implicit.poc");
+exports.testImplicitMember = function(test) {
+	checkOutput(test, "methods/implicitMember.poc");
 };
 
 exports.testMember = function(test) {

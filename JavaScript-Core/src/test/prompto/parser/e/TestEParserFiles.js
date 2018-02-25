@@ -35,8 +35,8 @@ exports.testAttribute = function(test) {
 };
 
 
-exports.testImplicit = function(test) {
-	var stmts = parseResource("methods/implicit.pec");
+exports.testImplicitMember = function(test) {
+	var stmts = parseResource("methods/implicitMember.pec");
 	test.ok(stmts);
 	test.equal(6, stmts.length);
 	test.done();

@@ -14,6 +14,10 @@ exports.testGreater = function(test) {
 	compareResourceEME(test, "predicate/greater.pec");
 };
 
+exports.testHasItem = function(test) {
+	compareResourceEME(test, "predicate/hasItem.pec");
+};
+
 exports.testInList = function(test) {
 	compareResourceEME(test, "predicate/inList.pec");
 };

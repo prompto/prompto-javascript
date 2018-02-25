@@ -30,8 +30,12 @@ exports.testExtended = function(test) {
 	compareResourceEME(test, "methods/extended.pec");
 };
 
-exports.testImplicit = function(test) {
-	compareResourceEME(test, "methods/implicit.pec");
+exports.testHomonym = function(test) {
+	compareResourceEME(test, "methods/homonym.pec");
+};
+
+exports.testImplicitMember = function(test) {
+	compareResourceEME(test, "methods/implicitMember.pec");
 };
 
 exports.testMember = function(test) {

@@ -14,6 +14,10 @@ exports.testGreater = function(test) {
 	compareResourceEOE(test, "predicate/greater.pec");
 };
 
+exports.testHasItem = function(test) {
+	compareResourceEOE(test, "predicate/hasItem.pec");
+};
+
 exports.testInList = function(test) {
 	compareResourceEOE(test, "predicate/inList.pec");
 };

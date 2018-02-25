@@ -769,31 +769,30 @@ EPromptoBuilder.prototype.exitMethod_identifier = function(ctx) {
 
 EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
+    var copyFrom = this.getNodeValue(ctx.copyExp) || null;
 	var args = this.getNodeValue(ctx.args) || null;
-	if(args===null) {
-		args = new grammar.ArgumentAssignmentList();
-	}
-	var firstArg = this.getNodeValue(ctx.firstArg);
-	args.insert(0, new grammar.ArgumentAssignment(null, firstArg));
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
+        if(args===null) {
+            args = new grammar.ArgumentAssignmentList();
+        }
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, copyFrom, args, true));
 };
 
 
 EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var args = this.getNodeValue(ctx.args) || null;
-	if(args===null) {
-		args = new grammar.ArgumentAssignmentList();
-	}
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
+        if(args===null) {
+            args = new grammar.ArgumentAssignmentList();
+        }
 		args.add(arg);
 	}
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, args));
+	this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
 };
 
 EPromptoBuilder.prototype.exitAssertion = function(ctx) {

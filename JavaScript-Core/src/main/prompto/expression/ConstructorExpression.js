@@ -1,50 +1,69 @@
 var Section = require("../parser/Section").Section;
 var CategoryType = null;
+var Identifier = require("../grammar/Identifier").Identifier;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
+var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
+var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
 };
 
 
-function ConstructorExpression(type, assignments) {
+function ConstructorExpression(type, copyFrom, assignments, checked) {
     Section.call(this);
 	this.type = type;
 	this.mutable = false;
-	this.copyFrom = null;
-	this.assignments = null;
-	this.setAssignments(assignments);
+	this.copyFrom = copyFrom;
+	this.assignments = assignments;
+	this.checked = checked;
 	return this;
 }
 
 ConstructorExpression.prototype  = Object.create(Section.prototype);
 ConstructorExpression.prototype.constructor = ConstructorExpression;
 
-ConstructorExpression.prototype.setAssignments = function(assignments) {
-	this.assignments = assignments;
-	// first anonymous argument is copyFrom
-	if(assignments!==null && assignments.length>0 && assignments[0].argument===null) {
-		this.copyFrom = assignments[0].expression;
-		this.assignments.remove(0);
-	}
+
+ConstructorExpression.prototype.checkFirstHomonym = function(context, decl) {
+    if(this.checked)
+        return;
+    if(this.assignments && this.assignments.length>0) {
+        var assign = this.assignments[0];
+        if(!assign.argument) {
+            var id = null;
+            if (assign.expression instanceof UnresolvedIdentifier || assign.expression instanceof InstanceExpression)
+                id = assign.expression.id;
+            if (id && decl.hasAttribute(context, id.name)) {
+                assign.argument = new AttributeArgument(id);
+                assign._expression = null;
+            }
+        }
+    }
+    this.checked = true;
+
 };
 
 ConstructorExpression.prototype.toDialect = function(writer) {
+    var cd = writer.context.getRegisteredDeclaration(this.type.name);
+    if(cd==null)
+        writer.context.problemListener.reportUnknownCategory(this.type.id);
+    this.checkFirstHomonym(writer.context, cd);
     writer.toDialect(this);
-}
+};
 
 ConstructorExpression.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
-}
+};
 
 ConstructorExpression.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
     var assignments = new ArgumentAssignmentList();
     if (this.copyFrom != null)
-        assignments.add(new ArgumentAssignment(null, this.copyFrom));
+        assignments.add(new ArgumentAssignment(new AttributeArgument(new Identifier("from")), this.copyFrom));
     if(this.assignments!=null)
         assignments.addAll(this.assignments);
     assignments.toDialect(writer);
@@ -67,7 +86,7 @@ ConstructorExpression.prototype.check = function(context) {
 	var cd = context.getRegisteredDeclaration(this.type.name);
 	if(cd==null)
         context.problemListener.reportUnknownCategory(this.type.id);
-	var type = cd.getType();
+	this.checkFirstHomonym(context, cd);
 	cd.checkConstructorContext(context);
 	if(this.copyFrom!=null) {
 		var cft = this.copyFrom.check(context);
@@ -83,16 +102,17 @@ ConstructorExpression.prototype.check = function(context) {
 			assignment.check(context);
 		});
 	}
-	return type;
+	return cd.getType();
 };
 
 ConstructorExpression.prototype.interpret = function(context) {
+    var cd = context.getRegisteredDeclaration(this.type.name);
+    this.checkFirstHomonym(context, cd);
 	var instance = this.type.newInstance(context);
     instance.mutable = true;
 	if(this.copyFrom!=null) {
 		var copyObj = this.copyFrom.interpret(context);
 		if((copyObj.getMemberValue || null)!=null) {
-			var cd = context.getRegisteredDeclaration(this.type.name);
 			var names = copyObj.getMemberNames();
 			names.forEach(function(name) {
 				if(cd.hasAttribute(context, name)) {
