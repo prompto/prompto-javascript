@@ -178,13 +178,17 @@ UUIDjs.lastFromTime = function(time) {
 };
 
 UUIDjs.fromString = function(strId) {
-    var p = new RegExp("([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})");
+    var p = new RegExp("([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})");
     var r = p.exec(strId);
-    if (r.length==6)
-        return new UUIDjs().fromParts(parseInt(r[0], 16), parseInt(r[1], 16),
-            parseInt(r[2], 16), parseInt(r[3], 16),
-            parseInt(r[4], 16), parseInt(r[5], 16));
-    return null;
+    if (r.length==7) {
+        r.splice(0, 1);
+        var ints = r.map(function (s) {
+            return parseInt(s, 16);
+        });
+        var uuid = new UUIDjs();
+        return uuid.fromParts.apply(uuid, ints);
+    } else
+        throw new Error("Not a valid uuid: " + strId);
 };
 
 UUIDjs.fromBytes = function(ints) {
