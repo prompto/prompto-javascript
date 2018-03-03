@@ -18,7 +18,7 @@ UUIDType.prototype = Object.create(NativeType.prototype);
 UUIDType.prototype.constructor = UUIDType;
 
 UUIDType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-    if(value instanceof UUIDjs) {
+    if(value instanceof UUIDjs || typeof(value) == 'string') {
         return new UUIDValue(value);
     } else {
         return value; // TODO for now

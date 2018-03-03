@@ -79,9 +79,6 @@ UUIDjs.prototype.fromParts = function(timeLow, timeMid, timeHiAndVersion, clockS
 UUIDjs.prototype.toString = function() {
     return this.hex;
 };
-UUIDjs.prototype.toURN = function() {
-    return 'urn:uuid:' + this.hex;
-};
 
 UUIDjs.prototype.toBytes = function() {
     var parts = this.hex.split('-');
@@ -180,13 +177,13 @@ UUIDjs.lastFromTime = function(time) {
     return UUIDjs.fromTime(time, true);
 };
 
-UUIDjs.fromURN = function(strId) {
-    var r, p = /^(?:urn:uuid:|\{)?([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})(?:\})?$/i;
-    if ((r === p.exec(strId))) {
-        return new UUIDjs().fromParts(parseInt(r[1], 16), parseInt(r[2], 16),
-            parseInt(r[3], 16), parseInt(r[4], 16),
-            parseInt(r[5], 16), parseInt(r[6], 16));
-    }
+UUIDjs.fromString = function(strId) {
+    var p = new RegExp("([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{12})");
+    var r = p.exec(strId);
+    if (r.length==6)
+        return new UUIDjs().fromParts(parseInt(r[0], 16), parseInt(r[1], 16),
+            parseInt(r[2], 16), parseInt(r[3], 16),
+            parseInt(r[4], 16), parseInt(r[5], 16));
     return null;
 };
 
