@@ -21,7 +21,9 @@ DateTimeType.prototype.constructor = DateTimeType;
 DateTimeType.instance = new DateTimeType();
 
 DateTimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-    if (getTypeName(value)=='Date') {
+	if(value.date!=undefined && value.tzOffset!=undefined) {
+        return new DateTime(value.date, value.tzOffset);
+    } else if (getTypeName(value)=='Date') {
         return new DateTime(value, 0);
     } else {
         return value; // TODO for now

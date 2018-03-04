@@ -55,6 +55,11 @@ function DateTime(date, tzOffset) {
 DateTime.prototype = Object.create(Value.prototype);
 DateTime.prototype.constructor = DateTime;
 
+DateTime.prototype.getStorableData = function() {
+    return { date: this.date, tzOffset: this.tzOffset };
+};
+
+
 DateTime.Parse = function(text) {
     var date = parseUTCDate(text);
     var tzOffset = parseTZOffset(text);
