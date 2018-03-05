@@ -10,7 +10,7 @@ exports.resolve = function() {
 
 
 function UUIDType()  {
-	NativeType.call(this, new Identifier("UUID"));
+	NativeType.call(this, new Identifier("Uuid"));
 	return this;
 }
 
