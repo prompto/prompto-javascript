@@ -30,6 +30,10 @@ exports.testExtended = function(test) {
 	compareResourceOMO(test, "methods/extended.poc");
 };
 
+exports.testGlobal = function(test) {
+	compareResourceOMO(test, "methods/global.poc");
+};
+
 exports.testImplicitMember = function(test) {
 	compareResourceOMO(test, "methods/implicitMember.poc");
 };

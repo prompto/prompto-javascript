@@ -30,6 +30,10 @@ exports.testExtended = function(test) {
 	compareResourceOEO(test, "methods/extended.poc");
 };
 
+exports.testGlobal = function(test) {
+	compareResourceOEO(test, "methods/global.poc");
+};
+
 exports.testImplicitMember = function(test) {
 	compareResourceOEO(test, "methods/implicitMember.poc");
 };

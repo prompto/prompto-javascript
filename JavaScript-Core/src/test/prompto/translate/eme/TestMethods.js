@@ -30,6 +30,10 @@ exports.testExtended = function(test) {
 	compareResourceEME(test, "methods/extended.pec");
 };
 
+exports.testGlobal = function(test) {
+	compareResourceEME(test, "methods/global.pec");
+};
+
 exports.testHomonym = function(test) {
 	compareResourceEME(test, "methods/homonym.pec");
 };
