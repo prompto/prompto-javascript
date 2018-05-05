@@ -29,6 +29,12 @@ InstanceExpression.prototype.toString = function() {
 	return this.name;
 };
 
+
+InstanceExpression.prototype.transpile = function(transpiler) {
+    transpiler.append(this.name);
+};
+
+
 InstanceExpression.prototype.toDialect = function(writer, requireMethod) {
     if(requireMethod === undefined)
         requireMethod = true;

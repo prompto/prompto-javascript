@@ -37,4 +37,8 @@ Argument.prototype.toDialect = function(writer) {
     }
 };
 
+Argument.prototype.transpile = function(transpiler) {
+    transpiler.append(this.name);
+};
+
 exports.Argument = Argument;

@@ -32,6 +32,15 @@ MethodCall.prototype.toDialect = function(writer) {
         writer.append("()");
 };
 
+MethodCall.prototype.transpile = function(transpiler) {
+    this.method.transpile(transpiler);
+    if (this.assignments != null)
+        this.assignments.transpile(transpiler);
+    else
+        transpiler.append("()");
+};
+
+
 MethodCall.prototype.requiresInvoke = function(writer) {
     if (writer.dialect != Dialect.E)
         return false;

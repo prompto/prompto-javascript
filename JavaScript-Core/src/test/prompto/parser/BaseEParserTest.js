@@ -37,6 +37,24 @@ exports.interpretResource = function(fileName, methodName, args) {
     }
 };
 
+
+exports.executeResource = function(fileName, methodName, args) {
+    var input = getResource(fileName);
+    var decls = parse(input);
+    var context = prompto.runtime.Context.newGlobalContext();
+    decls.register(context);
+    decls.check(context);
+    if(context.hasTests())
+        throw new Exception("prompto.runtime.Interpreter.interpretTests(context);");
+    else {
+        methodName = methodName || "main";
+        var js = prompto.runtime.Transpiler.transpile(context, methodName);
+        var fn = eval(js);
+        args = args || "";
+        fn(args);
+    }
+};
+
 exports.checkProblems = function(test, code, expected) {
     var listener = new prompto.problem.ProblemCollector();
     var parser = new prompto.parser.ECleverParser(code);
@@ -140,7 +158,12 @@ exports.checkInterpretedOutput = function(test, fileName) {
     test.done();
 };
 
-exports.checkTranspiledOutput = exports.checkInterpretedOutput;
+exports.checkTranspiledOutput = function(test, fileName) {
+    prompto.store.DataStore.instance = new prompto.memstore.MemStore();
+    exports.executeResource(fileName);
+    checkSameOutput(test, fileName);
+    test.done();
+};
 
 exports.loadDependency = function(libraryName) {
     if (BaseParserTest.coreContext == null)

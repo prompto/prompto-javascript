@@ -146,4 +146,12 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
     writer.append("}\n");
 };
 
+ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
+    transpiler.append("function ").append(this.name).append(" (");
+    this.args.transpile(transpiler);
+    transpiler.append(") {").indent();
+    this.statements.transpile(transpiler);
+    transpiler.dedent().append("}");
+};
+
 exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

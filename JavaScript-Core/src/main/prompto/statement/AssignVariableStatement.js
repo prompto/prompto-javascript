@@ -75,4 +75,13 @@ AssignVariableStatement.prototype.interpret = function(context) {
 	return null;
 };
 
+
+AssignVariableStatement.prototype.transpile = function(transpiler) {
+    if(transpiler.context.getRegisteredValue(this.name)==null)
+        transpiler.append("var ");
+    transpiler.append(this.name).append(" = ");
+    this.expression.transpile(transpiler);
+};
+
+
 exports.AssignVariableStatement = AssignVariableStatement;

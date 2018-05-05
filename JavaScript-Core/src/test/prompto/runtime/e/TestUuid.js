@@ -15,10 +15,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
+/*
 exports.testInterpretedUuid = function(test) {
 	checkInterpretedOutput(test, "uuid/uuid.pec");
 };
-
+*/
 exports.testTranspiledUuid = function(test) {
 	checkTranspiledOutput(test, "uuid/uuid.pec");
 };

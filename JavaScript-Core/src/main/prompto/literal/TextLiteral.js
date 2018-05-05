@@ -20,4 +20,8 @@ TextLiteral.prototype.check = function(context) {
 	return TextType.instance;
 };
 
+TextLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
+
 exports.TextLiteral = TextLiteral;

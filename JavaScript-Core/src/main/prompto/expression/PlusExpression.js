@@ -29,5 +29,11 @@ PlusExpression.prototype.interpret = function(context) {
 	return lval.Add(context, rval);
 };
 
+PlusExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.transpileAdd(transpiler, rt, true, this.left, this.right);
+};
+
 exports.PlusExpression = PlusExpression;
 

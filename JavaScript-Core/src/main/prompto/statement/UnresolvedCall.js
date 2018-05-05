@@ -27,7 +27,7 @@ UnresolvedCall.prototype.toDialect = function(writer) {
     } catch(error) {
         this.callable.toDialect(writer);
         if(this.assignments!=null)
-           this. assignments.toDialect(writer);
+           this.assignments.toDialect(writer);
     }
 };
 	
@@ -102,6 +102,18 @@ UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
 
 UnresolvedCall.prototype.resolveMember = function(context) {
 	return new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.assignments);
+};
+
+UnresolvedCall.prototype.transpile = function(transpiler) {
+    try {
+        this.resolve(transpiler.context);
+        this.resolved.transpile(transpiler);
+    } catch(error) {
+        throw error;
+        this.callable.transpile(transpiler);
+        if(this.assignments!=null)
+            this.assignments.transpile(transpiler);
+    }
 };
 
 

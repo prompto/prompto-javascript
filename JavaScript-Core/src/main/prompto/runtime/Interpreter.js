@@ -140,6 +140,7 @@ Interpreter.interpretTest = function(context, name) {
     test.interpret(local);
 };
 
+exports.locateMethod = locateMethod;
 exports.Interpreter = Interpreter;
 
 

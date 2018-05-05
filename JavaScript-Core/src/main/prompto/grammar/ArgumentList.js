@@ -66,4 +66,13 @@ ArgumentList.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 };
 
+ArgumentList.prototype.transpile = function(transpiler) {
+    this.forEach(function(arg) {
+        arg.transpile(transpiler);
+        transpiler.append(", ");
+    });
+    if(this.length>0)
+        transpiler.trimLast(2);
+};
+
 exports.ArgumentList = ArgumentList;

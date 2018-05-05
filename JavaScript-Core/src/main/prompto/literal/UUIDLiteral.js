@@ -20,4 +20,9 @@ UUIDLiteral.prototype.check = function(context) {
 	return UUIDType.instance;
 };
 
+UUIDLiteral.prototype.transpile = function(transpiler) {
+    transpiler.require("../utils/UUIDjs");
+    transpiler.append("UUIDjs.fromString(").append(this.text).append(")");
+};
+
 exports.UUIDLiteral = UUIDLiteral;

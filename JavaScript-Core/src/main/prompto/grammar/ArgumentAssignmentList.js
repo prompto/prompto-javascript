@@ -83,5 +83,16 @@ ArgumentAssignmentList.prototype.toMDialect = function(writer) {
 };
 
 
+ArgumentAssignmentList.prototype.transpile = function(transpiler) {
+    transpiler.append("(");
+    this.forEach(function(arg) {
+        arg.transpile(transpiler);
+        transpiler.append(", ");
+    });
+    if(this.length>0)
+        transpiler.trimLast(2);
+    transpiler.append(")");
+};
+
 exports.ArgumentAssignmentList = ArgumentAssignmentList;
 

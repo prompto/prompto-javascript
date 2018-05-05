@@ -34,6 +34,13 @@ MethodSelector.prototype.toDialect = function(writer) {
         MemberSelector.prototype.toDialect.call(this, writer);
 };
 
+MethodSelector.prototype.transpile = function(transpiler) {
+    if(this.parent==null)
+        transpiler.append(this.name);
+    else
+        MemberSelector.prototype.transpile.call(this, transpiler);
+};
+
 
 MethodSelector.prototype.toString = function() {
 	if(this.parent==null) {
