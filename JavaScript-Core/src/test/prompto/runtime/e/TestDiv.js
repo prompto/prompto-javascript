@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,19 +15,35 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testDivDecimal = function(test) {
-	checkOutput(test, "div/divDecimal.pec");
+exports.testInterpretedDivDecimal = function(test) {
+	checkInterpretedOutput(test, "div/divDecimal.pec");
 };
 
-exports.testDivInteger = function(test) {
-	checkOutput(test, "div/divInteger.pec");
+exports.testTranspiledDivDecimal = function(test) {
+	checkTranspiledOutput(test, "div/divDecimal.pec");
 };
 
-exports.testIdivInteger = function(test) {
-	checkOutput(test, "div/idivInteger.pec");
+exports.testInterpretedDivInteger = function(test) {
+	checkInterpretedOutput(test, "div/divInteger.pec");
 };
 
-exports.testModInteger = function(test) {
-	checkOutput(test, "div/modInteger.pec");
+exports.testTranspiledDivInteger = function(test) {
+	checkTranspiledOutput(test, "div/divInteger.pec");
+};
+
+exports.testInterpretedIdivInteger = function(test) {
+	checkInterpretedOutput(test, "div/idivInteger.pec");
+};
+
+exports.testTranspiledIdivInteger = function(test) {
+	checkTranspiledOutput(test, "div/idivInteger.pec");
+};
+
+exports.testInterpretedModInteger = function(test) {
+	checkInterpretedOutput(test, "div/modInteger.pec");
+};
+
+exports.testTranspiledModInteger = function(test) {
+	checkTranspiledOutput(test, "div/modInteger.pec");
 };
 

@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,123 +15,243 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testDateDayOfMonth = function(test) {
-	checkOutput(test, "builtins/dateDayOfMonth.poc");
+exports.testInterpretedDateDayOfMonth = function(test) {
+	checkInterpretedOutput(test, "builtins/dateDayOfMonth.poc");
 };
 
-exports.testDateDayOfYear = function(test) {
-	checkOutput(test, "builtins/dateDayOfYear.poc");
+exports.testTranspiledDateDayOfMonth = function(test) {
+	checkTranspiledOutput(test, "builtins/dateDayOfMonth.poc");
 };
 
-exports.testDateMonth = function(test) {
-	checkOutput(test, "builtins/dateMonth.poc");
+exports.testInterpretedDateDayOfYear = function(test) {
+	checkInterpretedOutput(test, "builtins/dateDayOfYear.poc");
 };
 
-exports.testDateTimeDayOfMonth = function(test) {
-	checkOutput(test, "builtins/dateTimeDayOfMonth.poc");
+exports.testTranspiledDateDayOfYear = function(test) {
+	checkTranspiledOutput(test, "builtins/dateDayOfYear.poc");
 };
 
-exports.testDateTimeDayOfYear = function(test) {
-	checkOutput(test, "builtins/dateTimeDayOfYear.poc");
+exports.testInterpretedDateMonth = function(test) {
+	checkInterpretedOutput(test, "builtins/dateMonth.poc");
 };
 
-exports.testDateTimeHour = function(test) {
-	checkOutput(test, "builtins/dateTimeHour.poc");
+exports.testTranspiledDateMonth = function(test) {
+	checkTranspiledOutput(test, "builtins/dateMonth.poc");
 };
 
-exports.testDateTimeMinute = function(test) {
-	checkOutput(test, "builtins/dateTimeMinute.poc");
+exports.testInterpretedDateTimeDayOfMonth = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeDayOfMonth.poc");
 };
 
-exports.testDateTimeMonth = function(test) {
-	checkOutput(test, "builtins/dateTimeMonth.poc");
+exports.testTranspiledDateTimeDayOfMonth = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeDayOfMonth.poc");
 };
 
-exports.testDateTimeSecond = function(test) {
-	checkOutput(test, "builtins/dateTimeSecond.poc");
+exports.testInterpretedDateTimeDayOfYear = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeDayOfYear.poc");
 };
 
-exports.testDateTimeYear = function(test) {
-	checkOutput(test, "builtins/dateTimeYear.poc");
+exports.testTranspiledDateTimeDayOfYear = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeDayOfYear.poc");
 };
 
-exports.testDateYear = function(test) {
-	checkOutput(test, "builtins/dateYear.poc");
+exports.testInterpretedDateTimeHour = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeHour.poc");
 };
 
-exports.testDictCount = function(test) {
-	checkOutput(test, "builtins/dictCount.poc");
+exports.testTranspiledDateTimeHour = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeHour.poc");
 };
 
-exports.testEnumName = function(test) {
-	checkOutput(test, "builtins/enumName.poc");
+exports.testInterpretedDateTimeMinute = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeMinute.poc");
 };
 
-exports.testEnumSymbols = function(test) {
-	checkOutput(test, "builtins/enumSymbols.poc");
+exports.testTranspiledDateTimeMinute = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeMinute.poc");
 };
 
-exports.testEnumValue = function(test) {
-	checkOutput(test, "builtins/enumValue.poc");
+exports.testInterpretedDateTimeMonth = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeMonth.poc");
 };
 
-exports.testIntegerFormat = function(test) {
-	checkOutput(test, "builtins/integerFormat.poc");
+exports.testTranspiledDateTimeMonth = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeMonth.poc");
 };
 
-exports.testListCount = function(test) {
-	checkOutput(test, "builtins/listCount.poc");
+exports.testInterpretedDateTimeSecond = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeSecond.poc");
 };
 
-exports.testSetCount = function(test) {
-	checkOutput(test, "builtins/setCount.poc");
+exports.testTranspiledDateTimeSecond = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeSecond.poc");
 };
 
-exports.testTextCapitalize = function(test) {
-	checkOutput(test, "builtins/textCapitalize.poc");
+exports.testInterpretedDateTimeYear = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeYear.poc");
 };
 
-exports.testTextCount = function(test) {
-	checkOutput(test, "builtins/textCount.poc");
+exports.testTranspiledDateTimeYear = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeYear.poc");
 };
 
-exports.testTextLowercase = function(test) {
-	checkOutput(test, "builtins/textLowercase.poc");
+exports.testInterpretedDateYear = function(test) {
+	checkInterpretedOutput(test, "builtins/dateYear.poc");
 };
 
-exports.testTextReplace = function(test) {
-	checkOutput(test, "builtins/textReplace.poc");
+exports.testTranspiledDateYear = function(test) {
+	checkTranspiledOutput(test, "builtins/dateYear.poc");
 };
 
-exports.testTextReplaceAll = function(test) {
-	checkOutput(test, "builtins/textReplaceAll.poc");
+exports.testInterpretedDictCount = function(test) {
+	checkInterpretedOutput(test, "builtins/dictCount.poc");
 };
 
-exports.testTextSplit = function(test) {
-	checkOutput(test, "builtins/textSplit.poc");
+exports.testTranspiledDictCount = function(test) {
+	checkTranspiledOutput(test, "builtins/dictCount.poc");
 };
 
-exports.testTextTrim = function(test) {
-	checkOutput(test, "builtins/textTrim.poc");
+exports.testInterpretedEnumName = function(test) {
+	checkInterpretedOutput(test, "builtins/enumName.poc");
 };
 
-exports.testTextUppercase = function(test) {
-	checkOutput(test, "builtins/textUppercase.poc");
+exports.testTranspiledEnumName = function(test) {
+	checkTranspiledOutput(test, "builtins/enumName.poc");
 };
 
-exports.testTimeHour = function(test) {
-	checkOutput(test, "builtins/timeHour.poc");
+exports.testInterpretedEnumSymbols = function(test) {
+	checkInterpretedOutput(test, "builtins/enumSymbols.poc");
 };
 
-exports.testTimeMinute = function(test) {
-	checkOutput(test, "builtins/timeMinute.poc");
+exports.testTranspiledEnumSymbols = function(test) {
+	checkTranspiledOutput(test, "builtins/enumSymbols.poc");
 };
 
-exports.testTimeSecond = function(test) {
-	checkOutput(test, "builtins/timeSecond.poc");
+exports.testInterpretedEnumValue = function(test) {
+	checkInterpretedOutput(test, "builtins/enumValue.poc");
 };
 
-exports.testTupleCount = function(test) {
-	checkOutput(test, "builtins/tupleCount.poc");
+exports.testTranspiledEnumValue = function(test) {
+	checkTranspiledOutput(test, "builtins/enumValue.poc");
+};
+
+exports.testInterpretedIntegerFormat = function(test) {
+	checkInterpretedOutput(test, "builtins/integerFormat.poc");
+};
+
+exports.testTranspiledIntegerFormat = function(test) {
+	checkTranspiledOutput(test, "builtins/integerFormat.poc");
+};
+
+exports.testInterpretedListCount = function(test) {
+	checkInterpretedOutput(test, "builtins/listCount.poc");
+};
+
+exports.testTranspiledListCount = function(test) {
+	checkTranspiledOutput(test, "builtins/listCount.poc");
+};
+
+exports.testInterpretedSetCount = function(test) {
+	checkInterpretedOutput(test, "builtins/setCount.poc");
+};
+
+exports.testTranspiledSetCount = function(test) {
+	checkTranspiledOutput(test, "builtins/setCount.poc");
+};
+
+exports.testInterpretedTextCapitalize = function(test) {
+	checkInterpretedOutput(test, "builtins/textCapitalize.poc");
+};
+
+exports.testTranspiledTextCapitalize = function(test) {
+	checkTranspiledOutput(test, "builtins/textCapitalize.poc");
+};
+
+exports.testInterpretedTextCount = function(test) {
+	checkInterpretedOutput(test, "builtins/textCount.poc");
+};
+
+exports.testTranspiledTextCount = function(test) {
+	checkTranspiledOutput(test, "builtins/textCount.poc");
+};
+
+exports.testInterpretedTextLowercase = function(test) {
+	checkInterpretedOutput(test, "builtins/textLowercase.poc");
+};
+
+exports.testTranspiledTextLowercase = function(test) {
+	checkTranspiledOutput(test, "builtins/textLowercase.poc");
+};
+
+exports.testInterpretedTextReplace = function(test) {
+	checkInterpretedOutput(test, "builtins/textReplace.poc");
+};
+
+exports.testTranspiledTextReplace = function(test) {
+	checkTranspiledOutput(test, "builtins/textReplace.poc");
+};
+
+exports.testInterpretedTextReplaceAll = function(test) {
+	checkInterpretedOutput(test, "builtins/textReplaceAll.poc");
+};
+
+exports.testTranspiledTextReplaceAll = function(test) {
+	checkTranspiledOutput(test, "builtins/textReplaceAll.poc");
+};
+
+exports.testInterpretedTextSplit = function(test) {
+	checkInterpretedOutput(test, "builtins/textSplit.poc");
+};
+
+exports.testTranspiledTextSplit = function(test) {
+	checkTranspiledOutput(test, "builtins/textSplit.poc");
+};
+
+exports.testInterpretedTextTrim = function(test) {
+	checkInterpretedOutput(test, "builtins/textTrim.poc");
+};
+
+exports.testTranspiledTextTrim = function(test) {
+	checkTranspiledOutput(test, "builtins/textTrim.poc");
+};
+
+exports.testInterpretedTextUppercase = function(test) {
+	checkInterpretedOutput(test, "builtins/textUppercase.poc");
+};
+
+exports.testTranspiledTextUppercase = function(test) {
+	checkTranspiledOutput(test, "builtins/textUppercase.poc");
+};
+
+exports.testInterpretedTimeHour = function(test) {
+	checkInterpretedOutput(test, "builtins/timeHour.poc");
+};
+
+exports.testTranspiledTimeHour = function(test) {
+	checkTranspiledOutput(test, "builtins/timeHour.poc");
+};
+
+exports.testInterpretedTimeMinute = function(test) {
+	checkInterpretedOutput(test, "builtins/timeMinute.poc");
+};
+
+exports.testTranspiledTimeMinute = function(test) {
+	checkTranspiledOutput(test, "builtins/timeMinute.poc");
+};
+
+exports.testInterpretedTimeSecond = function(test) {
+	checkInterpretedOutput(test, "builtins/timeSecond.poc");
+};
+
+exports.testTranspiledTimeSecond = function(test) {
+	checkTranspiledOutput(test, "builtins/timeSecond.poc");
+};
+
+exports.testInterpretedTupleCount = function(test) {
+	checkInterpretedOutput(test, "builtins/tupleCount.poc");
+};
+
+exports.testTranspiledTupleCount = function(test) {
+	checkTranspiledOutput(test, "builtins/tupleCount.poc");
 };
 

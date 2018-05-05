@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,19 +15,35 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testGlobalClosureNoArg = function(test) {
-	checkOutput(test, "closures/globalClosureNoArg.pec");
+exports.testInterpretedGlobalClosureNoArg = function(test) {
+	checkInterpretedOutput(test, "closures/globalClosureNoArg.pec");
 };
 
-exports.testGlobalClosureWithArg = function(test) {
-	checkOutput(test, "closures/globalClosureWithArg.pec");
+exports.testTranspiledGlobalClosureNoArg = function(test) {
+	checkTranspiledOutput(test, "closures/globalClosureNoArg.pec");
 };
 
-exports.testInstanceClosureNoArg = function(test) {
-	checkOutput(test, "closures/instanceClosureNoArg.pec");
+exports.testInterpretedGlobalClosureWithArg = function(test) {
+	checkInterpretedOutput(test, "closures/globalClosureWithArg.pec");
 };
 
-exports.testParameterClosure = function(test) {
-	checkOutput(test, "closures/parameterClosure.pec");
+exports.testTranspiledGlobalClosureWithArg = function(test) {
+	checkTranspiledOutput(test, "closures/globalClosureWithArg.pec");
+};
+
+exports.testInterpretedInstanceClosureNoArg = function(test) {
+	checkInterpretedOutput(test, "closures/instanceClosureNoArg.pec");
+};
+
+exports.testTranspiledInstanceClosureNoArg = function(test) {
+	checkTranspiledOutput(test, "closures/instanceClosureNoArg.pec");
+};
+
+exports.testInterpretedParameterClosure = function(test) {
+	checkInterpretedOutput(test, "closures/parameterClosure.pec");
+};
+
+exports.testTranspiledParameterClosure = function(test) {
+	checkTranspiledOutput(test, "closures/parameterClosure.pec");
 };
 

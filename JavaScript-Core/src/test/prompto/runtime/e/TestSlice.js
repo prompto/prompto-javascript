@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,15 +15,27 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testSliceList = function(test) {
-	checkOutput(test, "slice/sliceList.pec");
+exports.testInterpretedSliceList = function(test) {
+	checkInterpretedOutput(test, "slice/sliceList.pec");
 };
 
-exports.testSliceRange = function(test) {
-	checkOutput(test, "slice/sliceRange.pec");
+exports.testTranspiledSliceList = function(test) {
+	checkTranspiledOutput(test, "slice/sliceList.pec");
 };
 
-exports.testSliceText = function(test) {
-	checkOutput(test, "slice/sliceText.pec");
+exports.testInterpretedSliceRange = function(test) {
+	checkInterpretedOutput(test, "slice/sliceRange.pec");
+};
+
+exports.testTranspiledSliceRange = function(test) {
+	checkTranspiledOutput(test, "slice/sliceRange.pec");
+};
+
+exports.testInterpretedSliceText = function(test) {
+	checkInterpretedOutput(test, "slice/sliceText.pec");
+};
+
+exports.testTranspiledSliceText = function(test) {
+	checkTranspiledOutput(test, "slice/sliceText.pec");
 };
 

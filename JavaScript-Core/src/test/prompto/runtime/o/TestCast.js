@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,27 +15,51 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAutoDowncast = function(test) {
-	checkOutput(test, "cast/autoDowncast.poc");
+exports.testInterpretedAutoDowncast = function(test) {
+	checkInterpretedOutput(test, "cast/autoDowncast.poc");
 };
 
-exports.testCastChild = function(test) {
-	checkOutput(test, "cast/castChild.poc");
+exports.testTranspiledAutoDowncast = function(test) {
+	checkTranspiledOutput(test, "cast/autoDowncast.poc");
 };
 
-exports.testCastMissing = function(test) {
-	checkOutput(test, "cast/castMissing.poc");
+exports.testInterpretedCastChild = function(test) {
+	checkInterpretedOutput(test, "cast/castChild.poc");
 };
 
-exports.testCastNull = function(test) {
-	checkOutput(test, "cast/castNull.poc");
+exports.testTranspiledCastChild = function(test) {
+	checkTranspiledOutput(test, "cast/castChild.poc");
 };
 
-exports.testIsAChild = function(test) {
-	checkOutput(test, "cast/isAChild.poc");
+exports.testInterpretedCastMissing = function(test) {
+	checkInterpretedOutput(test, "cast/castMissing.poc");
 };
 
-exports.testIsAText = function(test) {
-	checkOutput(test, "cast/isAText.poc");
+exports.testTranspiledCastMissing = function(test) {
+	checkTranspiledOutput(test, "cast/castMissing.poc");
+};
+
+exports.testInterpretedCastNull = function(test) {
+	checkInterpretedOutput(test, "cast/castNull.poc");
+};
+
+exports.testTranspiledCastNull = function(test) {
+	checkTranspiledOutput(test, "cast/castNull.poc");
+};
+
+exports.testInterpretedIsAChild = function(test) {
+	checkInterpretedOutput(test, "cast/isAChild.poc");
+};
+
+exports.testTranspiledIsAChild = function(test) {
+	checkTranspiledOutput(test, "cast/isAChild.poc");
+};
+
+exports.testInterpretedIsAText = function(test) {
+	checkInterpretedOutput(test, "cast/isAText.poc");
+};
+
+exports.testTranspiledIsAText = function(test) {
+	checkTranspiledOutput(test, "cast/isAText.poc");
 };
 

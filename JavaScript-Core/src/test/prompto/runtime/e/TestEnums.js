@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,35 +15,67 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testCategoryEnum = function(test) {
-	checkOutput(test, "enums/categoryEnum.pec");
+exports.testInterpretedCategoryEnum = function(test) {
+	checkInterpretedOutput(test, "enums/categoryEnum.pec");
 };
 
-exports.testIntegerEnum = function(test) {
-	checkOutput(test, "enums/integerEnum.pec");
+exports.testTranspiledCategoryEnum = function(test) {
+	checkTranspiledOutput(test, "enums/categoryEnum.pec");
 };
 
-exports.testStoreCategoryEnum = function(test) {
-	checkOutput(test, "enums/storeCategoryEnum.pec");
+exports.testInterpretedIntegerEnum = function(test) {
+	checkInterpretedOutput(test, "enums/integerEnum.pec");
 };
 
-exports.testStoreIntegerEnum = function(test) {
-	checkOutput(test, "enums/storeIntegerEnum.pec");
+exports.testTranspiledIntegerEnum = function(test) {
+	checkTranspiledOutput(test, "enums/integerEnum.pec");
 };
 
-exports.testStoreTextEnum = function(test) {
-	checkOutput(test, "enums/storeTextEnum.pec");
+exports.testInterpretedStoreCategoryEnum = function(test) {
+	checkInterpretedOutput(test, "enums/storeCategoryEnum.pec");
 };
 
-exports.testTextEnum = function(test) {
-	checkOutput(test, "enums/textEnum.pec");
+exports.testTranspiledStoreCategoryEnum = function(test) {
+	checkTranspiledOutput(test, "enums/storeCategoryEnum.pec");
 };
 
-exports.testTextEnumArg = function(test) {
-	checkOutput(test, "enums/textEnumArg.pec");
+exports.testInterpretedStoreIntegerEnum = function(test) {
+	checkInterpretedOutput(test, "enums/storeIntegerEnum.pec");
 };
 
-exports.testTextEnumVar = function(test) {
-	checkOutput(test, "enums/textEnumVar.pec");
+exports.testTranspiledStoreIntegerEnum = function(test) {
+	checkTranspiledOutput(test, "enums/storeIntegerEnum.pec");
+};
+
+exports.testInterpretedStoreTextEnum = function(test) {
+	checkInterpretedOutput(test, "enums/storeTextEnum.pec");
+};
+
+exports.testTranspiledStoreTextEnum = function(test) {
+	checkTranspiledOutput(test, "enums/storeTextEnum.pec");
+};
+
+exports.testInterpretedTextEnum = function(test) {
+	checkInterpretedOutput(test, "enums/textEnum.pec");
+};
+
+exports.testTranspiledTextEnum = function(test) {
+	checkTranspiledOutput(test, "enums/textEnum.pec");
+};
+
+exports.testInterpretedTextEnumArg = function(test) {
+	checkInterpretedOutput(test, "enums/textEnumArg.pec");
+};
+
+exports.testTranspiledTextEnumArg = function(test) {
+	checkTranspiledOutput(test, "enums/textEnumArg.pec");
+};
+
+exports.testInterpretedTextEnumVar = function(test) {
+	checkInterpretedOutput(test, "enums/textEnumVar.pec");
+};
+
+exports.testTranspiledTextEnumVar = function(test) {
+	checkTranspiledOutput(test, "enums/textEnumVar.pec");
 };
 

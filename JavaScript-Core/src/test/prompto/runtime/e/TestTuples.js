@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,15 +15,27 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testMultiAssignment = function(test) {
-	checkOutput(test, "tuples/multiAssignment.pec");
+exports.testInterpretedMultiAssignment = function(test) {
+	checkInterpretedOutput(test, "tuples/multiAssignment.pec");
 };
 
-exports.testSingleAssignment = function(test) {
-	checkOutput(test, "tuples/singleAssignment.pec");
+exports.testTranspiledMultiAssignment = function(test) {
+	checkTranspiledOutput(test, "tuples/multiAssignment.pec");
 };
 
-exports.testTupleElement = function(test) {
-	checkOutput(test, "tuples/tupleElement.pec");
+exports.testInterpretedSingleAssignment = function(test) {
+	checkInterpretedOutput(test, "tuples/singleAssignment.pec");
+};
+
+exports.testTranspiledSingleAssignment = function(test) {
+	checkTranspiledOutput(test, "tuples/singleAssignment.pec");
+};
+
+exports.testInterpretedTupleElement = function(test) {
+	checkInterpretedOutput(test, "tuples/tupleElement.pec");
+};
+
+exports.testTranspiledTupleElement = function(test) {
+	checkTranspiledOutput(test, "tuples/tupleElement.pec");
 };
 

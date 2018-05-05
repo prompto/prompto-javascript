@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,7 +15,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testUuid = function(test) {
-	checkOutput(test, "uuid/uuid.poc");
+exports.testInterpretedUuid = function(test) {
+	checkInterpretedOutput(test, "uuid/uuid.poc");
+};
+
+exports.testTranspiledUuid = function(test) {
+	checkTranspiledOutput(test, "uuid/uuid.poc");
 };
 

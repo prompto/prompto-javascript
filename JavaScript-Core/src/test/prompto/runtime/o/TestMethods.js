@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,63 +15,123 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAnonymous = function(test) {
-	checkOutput(test, "methods/anonymous.poc");
+exports.testInterpretedAnonymous = function(test) {
+	checkInterpretedOutput(test, "methods/anonymous.poc");
 };
 
-exports.testAttribute = function(test) {
-	checkOutput(test, "methods/attribute.poc");
+exports.testTranspiledAnonymous = function(test) {
+	checkTranspiledOutput(test, "methods/anonymous.poc");
 };
 
-exports.testDefault = function(test) {
-	checkOutput(test, "methods/default.poc");
+exports.testInterpretedAttribute = function(test) {
+	checkInterpretedOutput(test, "methods/attribute.poc");
 };
 
-exports.testE_as_e_bug = function(test) {
-	checkOutput(test, "methods/e_as_e_bug.poc");
+exports.testTranspiledAttribute = function(test) {
+	checkTranspiledOutput(test, "methods/attribute.poc");
 };
 
-exports.testExplicit = function(test) {
-	checkOutput(test, "methods/explicit.poc");
+exports.testInterpretedDefault = function(test) {
+	checkInterpretedOutput(test, "methods/default.poc");
 };
 
-exports.testExpressionWith = function(test) {
-	checkOutput(test, "methods/expressionWith.poc");
+exports.testTranspiledDefault = function(test) {
+	checkTranspiledOutput(test, "methods/default.poc");
 };
 
-exports.testExtended = function(test) {
-	checkOutput(test, "methods/extended.poc");
+exports.testInterpretedE_as_e_bug = function(test) {
+	checkInterpretedOutput(test, "methods/e_as_e_bug.poc");
 };
 
-exports.testImplicitMember = function(test) {
-	checkOutput(test, "methods/implicitMember.poc");
+exports.testTranspiledE_as_e_bug = function(test) {
+	checkTranspiledOutput(test, "methods/e_as_e_bug.poc");
 };
 
-exports.testMember = function(test) {
-	checkOutput(test, "methods/member.poc");
+exports.testInterpretedExplicit = function(test) {
+	checkInterpretedOutput(test, "methods/explicit.poc");
 };
 
-exports.testOverride = function(test) {
-	checkOutput(test, "methods/override.poc");
+exports.testTranspiledExplicit = function(test) {
+	checkTranspiledOutput(test, "methods/explicit.poc");
 };
 
-exports.testPolymorphic_abstract = function(test) {
-	checkOutput(test, "methods/polymorphic_abstract.poc");
+exports.testInterpretedExpressionWith = function(test) {
+	checkInterpretedOutput(test, "methods/expressionWith.poc");
 };
 
-exports.testPolymorphic_implicit = function(test) {
-	checkOutput(test, "methods/polymorphic_implicit.poc");
+exports.testTranspiledExpressionWith = function(test) {
+	checkTranspiledOutput(test, "methods/expressionWith.poc");
 };
 
-exports.testPolymorphic_named = function(test) {
-	checkOutput(test, "methods/polymorphic_named.poc");
+exports.testInterpretedExtended = function(test) {
+	checkInterpretedOutput(test, "methods/extended.poc");
 };
 
-exports.testPolymorphic_runtime = function(test) {
-	checkOutput(test, "methods/polymorphic_runtime.poc");
+exports.testTranspiledExtended = function(test) {
+	checkTranspiledOutput(test, "methods/extended.poc");
 };
 
-exports.testSpecified = function(test) {
-	checkOutput(test, "methods/specified.poc");
+exports.testInterpretedImplicitMember = function(test) {
+	checkInterpretedOutput(test, "methods/implicitMember.poc");
+};
+
+exports.testTranspiledImplicitMember = function(test) {
+	checkTranspiledOutput(test, "methods/implicitMember.poc");
+};
+
+exports.testInterpretedMember = function(test) {
+	checkInterpretedOutput(test, "methods/member.poc");
+};
+
+exports.testTranspiledMember = function(test) {
+	checkTranspiledOutput(test, "methods/member.poc");
+};
+
+exports.testInterpretedOverride = function(test) {
+	checkInterpretedOutput(test, "methods/override.poc");
+};
+
+exports.testTranspiledOverride = function(test) {
+	checkTranspiledOutput(test, "methods/override.poc");
+};
+
+exports.testInterpretedPolymorphic_abstract = function(test) {
+	checkInterpretedOutput(test, "methods/polymorphic_abstract.poc");
+};
+
+exports.testTranspiledPolymorphic_abstract = function(test) {
+	checkTranspiledOutput(test, "methods/polymorphic_abstract.poc");
+};
+
+exports.testInterpretedPolymorphic_implicit = function(test) {
+	checkInterpretedOutput(test, "methods/polymorphic_implicit.poc");
+};
+
+exports.testTranspiledPolymorphic_implicit = function(test) {
+	checkTranspiledOutput(test, "methods/polymorphic_implicit.poc");
+};
+
+exports.testInterpretedPolymorphic_named = function(test) {
+	checkInterpretedOutput(test, "methods/polymorphic_named.poc");
+};
+
+exports.testTranspiledPolymorphic_named = function(test) {
+	checkTranspiledOutput(test, "methods/polymorphic_named.poc");
+};
+
+exports.testInterpretedPolymorphic_runtime = function(test) {
+	checkInterpretedOutput(test, "methods/polymorphic_runtime.poc");
+};
+
+exports.testTranspiledPolymorphic_runtime = function(test) {
+	checkTranspiledOutput(test, "methods/polymorphic_runtime.poc");
+};
+
+exports.testInterpretedSpecified = function(test) {
+	checkInterpretedOutput(test, "methods/specified.poc");
+};
+
+exports.testTranspiledSpecified = function(test) {
+	checkTranspiledOutput(test, "methods/specified.poc");
 };
 

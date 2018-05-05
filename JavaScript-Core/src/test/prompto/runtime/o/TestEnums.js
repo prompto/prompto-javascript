@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,23 +15,43 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testCategoryEnum = function(test) {
-	checkOutput(test, "enums/categoryEnum.poc");
+exports.testInterpretedCategoryEnum = function(test) {
+	checkInterpretedOutput(test, "enums/categoryEnum.poc");
 };
 
-exports.testIntegerEnum = function(test) {
-	checkOutput(test, "enums/integerEnum.poc");
+exports.testTranspiledCategoryEnum = function(test) {
+	checkTranspiledOutput(test, "enums/categoryEnum.poc");
 };
 
-exports.testTextEnum = function(test) {
-	checkOutput(test, "enums/textEnum.poc");
+exports.testInterpretedIntegerEnum = function(test) {
+	checkInterpretedOutput(test, "enums/integerEnum.poc");
 };
 
-exports.testTextEnumArg = function(test) {
-	checkOutput(test, "enums/textEnumArg.poc");
+exports.testTranspiledIntegerEnum = function(test) {
+	checkTranspiledOutput(test, "enums/integerEnum.poc");
 };
 
-exports.testTextEnumVar = function(test) {
-	checkOutput(test, "enums/textEnumVar.poc");
+exports.testInterpretedTextEnum = function(test) {
+	checkInterpretedOutput(test, "enums/textEnum.poc");
+};
+
+exports.testTranspiledTextEnum = function(test) {
+	checkTranspiledOutput(test, "enums/textEnum.poc");
+};
+
+exports.testInterpretedTextEnumArg = function(test) {
+	checkInterpretedOutput(test, "enums/textEnumArg.poc");
+};
+
+exports.testTranspiledTextEnumArg = function(test) {
+	checkTranspiledOutput(test, "enums/textEnumArg.poc");
+};
+
+exports.testInterpretedTextEnumVar = function(test) {
+	checkInterpretedOutput(test, "enums/textEnumVar.poc");
+};
+
+exports.testTranspiledTextEnumVar = function(test) {
+	checkTranspiledOutput(test, "enums/textEnumVar.poc");
 };
 

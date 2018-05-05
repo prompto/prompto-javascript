@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,27 +15,51 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testMultCharacter = function(test) {
-	checkOutput(test, "mult/multCharacter.poc");
+exports.testInterpretedMultCharacter = function(test) {
+	checkInterpretedOutput(test, "mult/multCharacter.poc");
 };
 
-exports.testMultDecimal = function(test) {
-	checkOutput(test, "mult/multDecimal.poc");
+exports.testTranspiledMultCharacter = function(test) {
+	checkTranspiledOutput(test, "mult/multCharacter.poc");
 };
 
-exports.testMultInteger = function(test) {
-	checkOutput(test, "mult/multInteger.poc");
+exports.testInterpretedMultDecimal = function(test) {
+	checkInterpretedOutput(test, "mult/multDecimal.poc");
 };
 
-exports.testMultList = function(test) {
-	checkOutput(test, "mult/multList.poc");
+exports.testTranspiledMultDecimal = function(test) {
+	checkTranspiledOutput(test, "mult/multDecimal.poc");
 };
 
-exports.testMultPeriod = function(test) {
-	checkOutput(test, "mult/multPeriod.poc");
+exports.testInterpretedMultInteger = function(test) {
+	checkInterpretedOutput(test, "mult/multInteger.poc");
 };
 
-exports.testMultText = function(test) {
-	checkOutput(test, "mult/multText.poc");
+exports.testTranspiledMultInteger = function(test) {
+	checkTranspiledOutput(test, "mult/multInteger.poc");
+};
+
+exports.testInterpretedMultList = function(test) {
+	checkInterpretedOutput(test, "mult/multList.poc");
+};
+
+exports.testTranspiledMultList = function(test) {
+	checkTranspiledOutput(test, "mult/multList.poc");
+};
+
+exports.testInterpretedMultPeriod = function(test) {
+	checkInterpretedOutput(test, "mult/multPeriod.poc");
+};
+
+exports.testTranspiledMultPeriod = function(test) {
+	checkTranspiledOutput(test, "mult/multPeriod.poc");
+};
+
+exports.testInterpretedMultText = function(test) {
+	checkInterpretedOutput(test, "mult/multText.poc");
+};
+
+exports.testTranspiledMultText = function(test) {
+	checkTranspiledOutput(test, "mult/multText.poc");
 };
 

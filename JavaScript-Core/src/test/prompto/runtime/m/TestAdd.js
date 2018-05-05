@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseMParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseMParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseMParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,7 +15,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAddInteger = function(test) {
-	checkOutput(test, "add/addInteger.pmc");
+exports.testInterpretedAddInteger = function(test) {
+	checkInterpretedOutput(test, "add/addInteger.pmc");
+};
+
+exports.testTranspiledAddInteger = function(test) {
+	checkTranspiledOutput(test, "add/addInteger.pmc");
 };
 

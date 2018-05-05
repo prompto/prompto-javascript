@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,11 +15,19 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testFilterFromList = function(test) {
-	checkOutput(test, "filter/filterFromList.poc");
+exports.testInterpretedFilterFromList = function(test) {
+	checkInterpretedOutput(test, "filter/filterFromList.poc");
 };
 
-exports.testFilterFromSet = function(test) {
-	checkOutput(test, "filter/filterFromSet.poc");
+exports.testTranspiledFilterFromList = function(test) {
+	checkTranspiledOutput(test, "filter/filterFromList.poc");
+};
+
+exports.testInterpretedFilterFromSet = function(test) {
+	checkInterpretedOutput(test, "filter/filterFromSet.poc");
+};
+
+exports.testTranspiledFilterFromSet = function(test) {
+	checkTranspiledOutput(test, "filter/filterFromSet.poc");
 };
 

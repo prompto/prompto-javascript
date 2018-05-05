@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,11 +15,19 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAttribute = function(test) {
-	checkOutput(test, "singleton/attribute.poc");
+exports.testInterpretedAttribute = function(test) {
+	checkInterpretedOutput(test, "singleton/attribute.poc");
 };
 
-exports.testMember = function(test) {
-	checkOutput(test, "singleton/member.poc");
+exports.testTranspiledAttribute = function(test) {
+	checkTranspiledOutput(test, "singleton/attribute.poc");
+};
+
+exports.testInterpretedMember = function(test) {
+	checkInterpretedOutput(test, "singleton/member.poc");
+};
+
+exports.testTranspiledMember = function(test) {
+	checkTranspiledOutput(test, "singleton/member.poc");
 };
 

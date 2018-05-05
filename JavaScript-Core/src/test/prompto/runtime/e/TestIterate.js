@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,11 +15,19 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testForEachCategoryList = function(test) {
-	checkOutput(test, "iterate/forEachCategoryList.pec");
+exports.testInterpretedForEachCategoryList = function(test) {
+	checkInterpretedOutput(test, "iterate/forEachCategoryList.pec");
 };
 
-exports.testForEachIntegerList = function(test) {
-	checkOutput(test, "iterate/forEachIntegerList.pec");
+exports.testTranspiledForEachCategoryList = function(test) {
+	checkTranspiledOutput(test, "iterate/forEachCategoryList.pec");
+};
+
+exports.testInterpretedForEachIntegerList = function(test) {
+	checkInterpretedOutput(test, "iterate/forEachIntegerList.pec");
+};
+
+exports.testTranspiledForEachIntegerList = function(test) {
+	checkTranspiledOutput(test, "iterate/forEachIntegerList.pec");
 };
 

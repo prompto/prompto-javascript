@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,15 +15,27 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testMinusDecimal = function(test) {
-	checkOutput(test, "minus/minusDecimal.poc");
+exports.testInterpretedMinusDecimal = function(test) {
+	checkInterpretedOutput(test, "minus/minusDecimal.poc");
 };
 
-exports.testMinusInteger = function(test) {
-	checkOutput(test, "minus/minusInteger.poc");
+exports.testTranspiledMinusDecimal = function(test) {
+	checkTranspiledOutput(test, "minus/minusDecimal.poc");
 };
 
-exports.testMinusPeriod = function(test) {
-	checkOutput(test, "minus/minusPeriod.poc");
+exports.testInterpretedMinusInteger = function(test) {
+	checkInterpretedOutput(test, "minus/minusInteger.poc");
+};
+
+exports.testTranspiledMinusInteger = function(test) {
+	checkTranspiledOutput(test, "minus/minusInteger.poc");
+};
+
+exports.testInterpretedMinusPeriod = function(test) {
+	checkInterpretedOutput(test, "minus/minusPeriod.poc");
+};
+
+exports.testTranspiledMinusPeriod = function(test) {
+	checkTranspiledOutput(test, "minus/minusPeriod.poc");
 };
 

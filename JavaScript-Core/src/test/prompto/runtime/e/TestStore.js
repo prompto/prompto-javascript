@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,43 +15,83 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testDeleteRecords = function(test) {
-	checkOutput(test, "store/deleteRecords.pec");
+exports.testInterpretedDeleteRecords = function(test) {
+	checkInterpretedOutput(test, "store/deleteRecords.pec");
 };
 
-exports.testFlush = function(test) {
-	checkOutput(test, "store/flush.pec");
+exports.testTranspiledDeleteRecords = function(test) {
+	checkTranspiledOutput(test, "store/deleteRecords.pec");
 };
 
-exports.testListRecords = function(test) {
-	checkOutput(test, "store/listRecords.pec");
+exports.testInterpretedFlush = function(test) {
+	checkInterpretedOutput(test, "store/flush.pec");
 };
 
-exports.testManyRecords = function(test) {
-	checkOutput(test, "store/manyRecords.pec");
+exports.testTranspiledFlush = function(test) {
+	checkTranspiledOutput(test, "store/flush.pec");
 };
 
-exports.testManyUntypedRecords = function(test) {
-	checkOutput(test, "store/manyUntypedRecords.pec");
+exports.testInterpretedListRecords = function(test) {
+	checkInterpretedOutput(test, "store/listRecords.pec");
 };
 
-exports.testSimpleRecord = function(test) {
-	checkOutput(test, "store/simpleRecord.pec");
+exports.testTranspiledListRecords = function(test) {
+	checkTranspiledOutput(test, "store/listRecords.pec");
 };
 
-exports.testSlicedRecords = function(test) {
-	checkOutput(test, "store/slicedRecords.pec");
+exports.testInterpretedManyRecords = function(test) {
+	checkInterpretedOutput(test, "store/manyRecords.pec");
 };
 
-exports.testSortedRecords = function(test) {
-	checkOutput(test, "store/sortedRecords.pec");
+exports.testTranspiledManyRecords = function(test) {
+	checkTranspiledOutput(test, "store/manyRecords.pec");
 };
 
-exports.testSubRecord = function(test) {
-	checkOutput(test, "store/subRecord.pec");
+exports.testInterpretedManyUntypedRecords = function(test) {
+	checkInterpretedOutput(test, "store/manyUntypedRecords.pec");
 };
 
-exports.testUntypedRecord = function(test) {
-	checkOutput(test, "store/untypedRecord.pec");
+exports.testTranspiledManyUntypedRecords = function(test) {
+	checkTranspiledOutput(test, "store/manyUntypedRecords.pec");
+};
+
+exports.testInterpretedSimpleRecord = function(test) {
+	checkInterpretedOutput(test, "store/simpleRecord.pec");
+};
+
+exports.testTranspiledSimpleRecord = function(test) {
+	checkTranspiledOutput(test, "store/simpleRecord.pec");
+};
+
+exports.testInterpretedSlicedRecords = function(test) {
+	checkInterpretedOutput(test, "store/slicedRecords.pec");
+};
+
+exports.testTranspiledSlicedRecords = function(test) {
+	checkTranspiledOutput(test, "store/slicedRecords.pec");
+};
+
+exports.testInterpretedSortedRecords = function(test) {
+	checkInterpretedOutput(test, "store/sortedRecords.pec");
+};
+
+exports.testTranspiledSortedRecords = function(test) {
+	checkTranspiledOutput(test, "store/sortedRecords.pec");
+};
+
+exports.testInterpretedSubRecord = function(test) {
+	checkInterpretedOutput(test, "store/subRecord.pec");
+};
+
+exports.testTranspiledSubRecord = function(test) {
+	checkTranspiledOutput(test, "store/subRecord.pec");
+};
+
+exports.testInterpretedUntypedRecord = function(test) {
+	checkInterpretedOutput(test, "store/untypedRecord.pec");
+};
+
+exports.testTranspiledUntypedRecord = function(test) {
+	checkTranspiledOutput(test, "store/untypedRecord.pec");
 };
 

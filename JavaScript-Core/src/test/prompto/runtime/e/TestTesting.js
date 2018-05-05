@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,43 +15,83 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAnd = function(test) {
-	checkOutput(test, "testing/and.pec");
+exports.testInterpretedAnd = function(test) {
+	checkInterpretedOutput(test, "testing/and.pec");
 };
 
-exports.testContains = function(test) {
-	checkOutput(test, "testing/contains.pec");
+exports.testTranspiledAnd = function(test) {
+	checkTranspiledOutput(test, "testing/and.pec");
 };
 
-exports.testGreater = function(test) {
-	checkOutput(test, "testing/greater.pec");
+exports.testInterpretedContains = function(test) {
+	checkInterpretedOutput(test, "testing/contains.pec");
 };
 
-exports.testMethod = function(test) {
-	checkOutput(test, "testing/method.pec");
+exports.testTranspiledContains = function(test) {
+	checkTranspiledOutput(test, "testing/contains.pec");
 };
 
-exports.testNegative = function(test) {
-	checkOutput(test, "testing/negative.pec");
+exports.testInterpretedGreater = function(test) {
+	checkInterpretedOutput(test, "testing/greater.pec");
 };
 
-exports.testNegativeError = function(test) {
-	checkOutput(test, "testing/negativeError.pec");
+exports.testTranspiledGreater = function(test) {
+	checkTranspiledOutput(test, "testing/greater.pec");
 };
 
-exports.testNot = function(test) {
-	checkOutput(test, "testing/not.pec");
+exports.testInterpretedMethod = function(test) {
+	checkInterpretedOutput(test, "testing/method.pec");
 };
 
-exports.testOr = function(test) {
-	checkOutput(test, "testing/or.pec");
+exports.testTranspiledMethod = function(test) {
+	checkTranspiledOutput(test, "testing/method.pec");
 };
 
-exports.testPositive = function(test) {
-	checkOutput(test, "testing/positive.pec");
+exports.testInterpretedNegative = function(test) {
+	checkInterpretedOutput(test, "testing/negative.pec");
 };
 
-exports.testPositiveError = function(test) {
-	checkOutput(test, "testing/positiveError.pec");
+exports.testTranspiledNegative = function(test) {
+	checkTranspiledOutput(test, "testing/negative.pec");
+};
+
+exports.testInterpretedNegativeError = function(test) {
+	checkInterpretedOutput(test, "testing/negativeError.pec");
+};
+
+exports.testTranspiledNegativeError = function(test) {
+	checkTranspiledOutput(test, "testing/negativeError.pec");
+};
+
+exports.testInterpretedNot = function(test) {
+	checkInterpretedOutput(test, "testing/not.pec");
+};
+
+exports.testTranspiledNot = function(test) {
+	checkTranspiledOutput(test, "testing/not.pec");
+};
+
+exports.testInterpretedOr = function(test) {
+	checkInterpretedOutput(test, "testing/or.pec");
+};
+
+exports.testTranspiledOr = function(test) {
+	checkTranspiledOutput(test, "testing/or.pec");
+};
+
+exports.testInterpretedPositive = function(test) {
+	checkInterpretedOutput(test, "testing/positive.pec");
+};
+
+exports.testTranspiledPositive = function(test) {
+	checkTranspiledOutput(test, "testing/positive.pec");
+};
+
+exports.testInterpretedPositiveError = function(test) {
+	checkInterpretedOutput(test, "testing/positiveError.pec");
+};
+
+exports.testTranspiledPositiveError = function(test) {
+	checkTranspiledOutput(test, "testing/positiveError.pec");
 };
 

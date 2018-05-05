@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,7 +15,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testExpressionInjection = function(test) {
-	checkOutput(test, "injections/expressionInjection.pec");
+exports.testInterpretedExpressionInjection = function(test) {
+	checkInterpretedOutput(test, "injections/expressionInjection.pec");
+};
+
+exports.testTranspiledExpressionInjection = function(test) {
+	checkTranspiledOutput(test, "injections/expressionInjection.pec");
 };
 

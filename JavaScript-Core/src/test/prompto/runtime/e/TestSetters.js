@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,15 +15,27 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testGetter = function(test) {
-	checkOutput(test, "setters/getter.pec");
+exports.testInterpretedGetter = function(test) {
+	checkInterpretedOutput(test, "setters/getter.pec");
 };
 
-exports.testGetterCall = function(test) {
-	checkOutput(test, "setters/getterCall.pec");
+exports.testTranspiledGetter = function(test) {
+	checkTranspiledOutput(test, "setters/getter.pec");
 };
 
-exports.testSetter = function(test) {
-	checkOutput(test, "setters/setter.pec");
+exports.testInterpretedGetterCall = function(test) {
+	checkInterpretedOutput(test, "setters/getterCall.pec");
+};
+
+exports.testTranspiledGetterCall = function(test) {
+	checkTranspiledOutput(test, "setters/getterCall.pec");
+};
+
+exports.testInterpretedSetter = function(test) {
+	checkInterpretedOutput(test, "setters/setter.pec");
+};
+
+exports.testTranspiledSetter = function(test) {
+	checkTranspiledOutput(test, "setters/setter.pec");
 };
 

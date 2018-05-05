@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,131 +15,259 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testDoWhile = function(test) {
-	checkOutput(test, "loops/doWhile.pec");
+exports.testInterpretedDoWhile = function(test) {
+	checkInterpretedOutput(test, "loops/doWhile.pec");
 };
 
-exports.testDoWhileBreak = function(test) {
-	checkOutput(test, "loops/doWhileBreak.pec");
+exports.testTranspiledDoWhile = function(test) {
+	checkTranspiledOutput(test, "loops/doWhile.pec");
 };
 
-exports.testEmbeddedForEach = function(test) {
-	checkOutput(test, "loops/embeddedForEach.pec");
+exports.testInterpretedDoWhileBreak = function(test) {
+	checkInterpretedOutput(test, "loops/doWhileBreak.pec");
 };
 
-exports.testForEachBreak = function(test) {
-	checkOutput(test, "loops/forEachBreak.pec");
+exports.testTranspiledDoWhileBreak = function(test) {
+	checkTranspiledOutput(test, "loops/doWhileBreak.pec");
 };
 
-exports.testForEachCharacterRange = function(test) {
-	checkOutput(test, "loops/forEachCharacterRange.pec");
+exports.testInterpretedEmbeddedForEach = function(test) {
+	checkInterpretedOutput(test, "loops/embeddedForEach.pec");
 };
 
-exports.testForEachCharacterRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachCharacterRangeWithIndex.pec");
+exports.testTranspiledEmbeddedForEach = function(test) {
+	checkTranspiledOutput(test, "loops/embeddedForEach.pec");
 };
 
-exports.testForEachDateRange = function(test) {
-	checkOutput(test, "loops/forEachDateRange.pec");
+exports.testInterpretedForEachBreak = function(test) {
+	checkInterpretedOutput(test, "loops/forEachBreak.pec");
 };
 
-exports.testForEachDateRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDateRangeWithIndex.pec");
+exports.testTranspiledForEachBreak = function(test) {
+	checkTranspiledOutput(test, "loops/forEachBreak.pec");
 };
 
-exports.testForEachDictionaryItem = function(test) {
-	checkOutput(test, "loops/forEachDictionaryItem.pec");
+exports.testInterpretedForEachCharacterRange = function(test) {
+	checkInterpretedOutput(test, "loops/forEachCharacterRange.pec");
 };
 
-exports.testForEachDictionaryItemWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDictionaryItemWithIndex.pec");
+exports.testTranspiledForEachCharacterRange = function(test) {
+	checkTranspiledOutput(test, "loops/forEachCharacterRange.pec");
 };
 
-exports.testForEachDictionaryKey = function(test) {
-	checkOutput(test, "loops/forEachDictionaryKey.pec");
+exports.testInterpretedForEachCharacterRangeWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachCharacterRangeWithIndex.pec");
 };
 
-exports.testForEachDictionaryKeyWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDictionaryKeyWithIndex.pec");
+exports.testTranspiledForEachCharacterRangeWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachCharacterRangeWithIndex.pec");
 };
 
-exports.testForEachDictionaryValue = function(test) {
-	checkOutput(test, "loops/forEachDictionaryValue.pec");
+exports.testInterpretedForEachDateRange = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDateRange.pec");
 };
 
-exports.testForEachDictionaryValueWithIndex = function(test) {
-	checkOutput(test, "loops/forEachDictionaryValueWithIndex.pec");
+exports.testTranspiledForEachDateRange = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDateRange.pec");
 };
 
-exports.testForEachInstanceList = function(test) {
-	checkOutput(test, "loops/forEachInstanceList.pec");
+exports.testInterpretedForEachDateRangeWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDateRangeWithIndex.pec");
 };
 
-exports.testForEachInstanceListWithIndex = function(test) {
-	checkOutput(test, "loops/forEachInstanceListWithIndex.pec");
+exports.testTranspiledForEachDateRangeWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDateRangeWithIndex.pec");
 };
 
-exports.testForEachInstanceSet = function(test) {
-	checkOutput(test, "loops/forEachInstanceSet.pec");
+exports.testInterpretedForEachDictionaryItem = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDictionaryItem.pec");
 };
 
-exports.testForEachInstanceSetWithIndex = function(test) {
-	checkOutput(test, "loops/forEachInstanceSetWithIndex.pec");
+exports.testTranspiledForEachDictionaryItem = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDictionaryItem.pec");
 };
 
-exports.testForEachIntegerList = function(test) {
-	checkOutput(test, "loops/forEachIntegerList.pec");
+exports.testInterpretedForEachDictionaryItemWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDictionaryItemWithIndex.pec");
 };
 
-exports.testForEachIntegerListWithIndex = function(test) {
-	checkOutput(test, "loops/forEachIntegerListWithIndex.pec");
+exports.testTranspiledForEachDictionaryItemWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDictionaryItemWithIndex.pec");
 };
 
-exports.testForEachIntegerRange = function(test) {
-	checkOutput(test, "loops/forEachIntegerRange.pec");
+exports.testInterpretedForEachDictionaryKey = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDictionaryKey.pec");
 };
 
-exports.testForEachIntegerRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachIntegerRangeWithIndex.pec");
+exports.testTranspiledForEachDictionaryKey = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDictionaryKey.pec");
 };
 
-exports.testForEachIntegerSet = function(test) {
-	checkOutput(test, "loops/forEachIntegerSet.pec");
+exports.testInterpretedForEachDictionaryKeyWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDictionaryKeyWithIndex.pec");
 };
 
-exports.testForEachIntegerSetWithIndex = function(test) {
-	checkOutput(test, "loops/forEachIntegerSetWithIndex.pec");
+exports.testTranspiledForEachDictionaryKeyWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDictionaryKeyWithIndex.pec");
 };
 
-exports.testForEachTimeRange = function(test) {
-	checkOutput(test, "loops/forEachTimeRange.pec");
+exports.testInterpretedForEachDictionaryValue = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDictionaryValue.pec");
 };
 
-exports.testForEachTimeRangeWithIndex = function(test) {
-	checkOutput(test, "loops/forEachTimeRangeWithIndex.pec");
+exports.testTranspiledForEachDictionaryValue = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDictionaryValue.pec");
 };
 
-exports.testForEachTupleList = function(test) {
-	checkOutput(test, "loops/forEachTupleList.pec");
+exports.testInterpretedForEachDictionaryValueWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachDictionaryValueWithIndex.pec");
 };
 
-exports.testForEachTupleListWithIndex = function(test) {
-	checkOutput(test, "loops/forEachTupleListWithIndex.pec");
+exports.testTranspiledForEachDictionaryValueWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachDictionaryValueWithIndex.pec");
 };
 
-exports.testForEachTupleSet = function(test) {
-	checkOutput(test, "loops/forEachTupleSet.pec");
+exports.testInterpretedForEachInstanceList = function(test) {
+	checkInterpretedOutput(test, "loops/forEachInstanceList.pec");
 };
 
-exports.testForEachTupleSetWithIndex = function(test) {
-	checkOutput(test, "loops/forEachTupleSetWithIndex.pec");
+exports.testTranspiledForEachInstanceList = function(test) {
+	checkTranspiledOutput(test, "loops/forEachInstanceList.pec");
 };
 
-exports.testWhile = function(test) {
-	checkOutput(test, "loops/while.pec");
+exports.testInterpretedForEachInstanceListWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachInstanceListWithIndex.pec");
 };
 
-exports.testWhileBreak = function(test) {
-	checkOutput(test, "loops/whileBreak.pec");
+exports.testTranspiledForEachInstanceListWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachInstanceListWithIndex.pec");
+};
+
+exports.testInterpretedForEachInstanceSet = function(test) {
+	checkInterpretedOutput(test, "loops/forEachInstanceSet.pec");
+};
+
+exports.testTranspiledForEachInstanceSet = function(test) {
+	checkTranspiledOutput(test, "loops/forEachInstanceSet.pec");
+};
+
+exports.testInterpretedForEachInstanceSetWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachInstanceSetWithIndex.pec");
+};
+
+exports.testTranspiledForEachInstanceSetWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachInstanceSetWithIndex.pec");
+};
+
+exports.testInterpretedForEachIntegerList = function(test) {
+	checkInterpretedOutput(test, "loops/forEachIntegerList.pec");
+};
+
+exports.testTranspiledForEachIntegerList = function(test) {
+	checkTranspiledOutput(test, "loops/forEachIntegerList.pec");
+};
+
+exports.testInterpretedForEachIntegerListWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachIntegerListWithIndex.pec");
+};
+
+exports.testTranspiledForEachIntegerListWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachIntegerListWithIndex.pec");
+};
+
+exports.testInterpretedForEachIntegerRange = function(test) {
+	checkInterpretedOutput(test, "loops/forEachIntegerRange.pec");
+};
+
+exports.testTranspiledForEachIntegerRange = function(test) {
+	checkTranspiledOutput(test, "loops/forEachIntegerRange.pec");
+};
+
+exports.testInterpretedForEachIntegerRangeWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachIntegerRangeWithIndex.pec");
+};
+
+exports.testTranspiledForEachIntegerRangeWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachIntegerRangeWithIndex.pec");
+};
+
+exports.testInterpretedForEachIntegerSet = function(test) {
+	checkInterpretedOutput(test, "loops/forEachIntegerSet.pec");
+};
+
+exports.testTranspiledForEachIntegerSet = function(test) {
+	checkTranspiledOutput(test, "loops/forEachIntegerSet.pec");
+};
+
+exports.testInterpretedForEachIntegerSetWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachIntegerSetWithIndex.pec");
+};
+
+exports.testTranspiledForEachIntegerSetWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachIntegerSetWithIndex.pec");
+};
+
+exports.testInterpretedForEachTimeRange = function(test) {
+	checkInterpretedOutput(test, "loops/forEachTimeRange.pec");
+};
+
+exports.testTranspiledForEachTimeRange = function(test) {
+	checkTranspiledOutput(test, "loops/forEachTimeRange.pec");
+};
+
+exports.testInterpretedForEachTimeRangeWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachTimeRangeWithIndex.pec");
+};
+
+exports.testTranspiledForEachTimeRangeWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachTimeRangeWithIndex.pec");
+};
+
+exports.testInterpretedForEachTupleList = function(test) {
+	checkInterpretedOutput(test, "loops/forEachTupleList.pec");
+};
+
+exports.testTranspiledForEachTupleList = function(test) {
+	checkTranspiledOutput(test, "loops/forEachTupleList.pec");
+};
+
+exports.testInterpretedForEachTupleListWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachTupleListWithIndex.pec");
+};
+
+exports.testTranspiledForEachTupleListWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachTupleListWithIndex.pec");
+};
+
+exports.testInterpretedForEachTupleSet = function(test) {
+	checkInterpretedOutput(test, "loops/forEachTupleSet.pec");
+};
+
+exports.testTranspiledForEachTupleSet = function(test) {
+	checkTranspiledOutput(test, "loops/forEachTupleSet.pec");
+};
+
+exports.testInterpretedForEachTupleSetWithIndex = function(test) {
+	checkInterpretedOutput(test, "loops/forEachTupleSetWithIndex.pec");
+};
+
+exports.testTranspiledForEachTupleSetWithIndex = function(test) {
+	checkTranspiledOutput(test, "loops/forEachTupleSetWithIndex.pec");
+};
+
+exports.testInterpretedWhile = function(test) {
+	checkInterpretedOutput(test, "loops/while.pec");
+};
+
+exports.testTranspiledWhile = function(test) {
+	checkTranspiledOutput(test, "loops/while.pec");
+};
+
+exports.testInterpretedWhileBreak = function(test) {
+	checkInterpretedOutput(test, "loops/whileBreak.pec");
+};
+
+exports.testTranspiledWhileBreak = function(test) {
+	checkTranspiledOutput(test, "loops/whileBreak.pec");
 };
 

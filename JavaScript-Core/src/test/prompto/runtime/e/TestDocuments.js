@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,27 +15,51 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testBlob = function(test) {
-	checkOutput(test, "documents/blob.pec");
+exports.testInterpretedBlob = function(test) {
+	checkInterpretedOutput(test, "documents/blob.pec");
 };
 
-exports.testDeepItem = function(test) {
-	checkOutput(test, "documents/deepItem.pec");
+exports.testTranspiledBlob = function(test) {
+	checkTranspiledOutput(test, "documents/blob.pec");
 };
 
-exports.testDeepVariable = function(test) {
-	checkOutput(test, "documents/deepVariable.pec");
+exports.testInterpretedDeepItem = function(test) {
+	checkInterpretedOutput(test, "documents/deepItem.pec");
 };
 
-exports.testItem = function(test) {
-	checkOutput(test, "documents/item.pec");
+exports.testTranspiledDeepItem = function(test) {
+	checkTranspiledOutput(test, "documents/deepItem.pec");
 };
 
-exports.testNamedItem = function(test) {
-	checkOutput(test, "documents/namedItem.pec");
+exports.testInterpretedDeepVariable = function(test) {
+	checkInterpretedOutput(test, "documents/deepVariable.pec");
 };
 
-exports.testVariable = function(test) {
-	checkOutput(test, "documents/variable.pec");
+exports.testTranspiledDeepVariable = function(test) {
+	checkTranspiledOutput(test, "documents/deepVariable.pec");
+};
+
+exports.testInterpretedItem = function(test) {
+	checkInterpretedOutput(test, "documents/item.pec");
+};
+
+exports.testTranspiledItem = function(test) {
+	checkTranspiledOutput(test, "documents/item.pec");
+};
+
+exports.testInterpretedNamedItem = function(test) {
+	checkInterpretedOutput(test, "documents/namedItem.pec");
+};
+
+exports.testTranspiledNamedItem = function(test) {
+	checkTranspiledOutput(test, "documents/namedItem.pec");
+};
+
+exports.testInterpretedVariable = function(test) {
+	checkInterpretedOutput(test, "documents/variable.pec");
+};
+
+exports.testTranspiledVariable = function(test) {
+	checkTranspiledOutput(test, "documents/variable.pec");
 };
 

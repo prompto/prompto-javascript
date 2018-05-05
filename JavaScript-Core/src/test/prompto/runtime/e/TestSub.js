@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,35 +15,67 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testSubDate = function(test) {
-	checkOutput(test, "sub/subDate.pec");
+exports.testInterpretedSubDate = function(test) {
+	checkInterpretedOutput(test, "sub/subDate.pec");
 };
 
-exports.testSubDateTime = function(test) {
-	checkOutput(test, "sub/subDateTime.pec");
+exports.testTranspiledSubDate = function(test) {
+	checkTranspiledOutput(test, "sub/subDate.pec");
 };
 
-exports.testSubDecimal = function(test) {
-	checkOutput(test, "sub/subDecimal.pec");
+exports.testInterpretedSubDateTime = function(test) {
+	checkInterpretedOutput(test, "sub/subDateTime.pec");
 };
 
-exports.testSubDecimalEnum = function(test) {
-	checkOutput(test, "sub/subDecimalEnum.pec");
+exports.testTranspiledSubDateTime = function(test) {
+	checkTranspiledOutput(test, "sub/subDateTime.pec");
 };
 
-exports.testSubInteger = function(test) {
-	checkOutput(test, "sub/subInteger.pec");
+exports.testInterpretedSubDecimal = function(test) {
+	checkInterpretedOutput(test, "sub/subDecimal.pec");
 };
 
-exports.testSubIntegerEnum = function(test) {
-	checkOutput(test, "sub/subIntegerEnum.pec");
+exports.testTranspiledSubDecimal = function(test) {
+	checkTranspiledOutput(test, "sub/subDecimal.pec");
 };
 
-exports.testSubPeriod = function(test) {
-	checkOutput(test, "sub/subPeriod.pec");
+exports.testInterpretedSubDecimalEnum = function(test) {
+	checkInterpretedOutput(test, "sub/subDecimalEnum.pec");
 };
 
-exports.testSubTime = function(test) {
-	checkOutput(test, "sub/subTime.pec");
+exports.testTranspiledSubDecimalEnum = function(test) {
+	checkTranspiledOutput(test, "sub/subDecimalEnum.pec");
+};
+
+exports.testInterpretedSubInteger = function(test) {
+	checkInterpretedOutput(test, "sub/subInteger.pec");
+};
+
+exports.testTranspiledSubInteger = function(test) {
+	checkTranspiledOutput(test, "sub/subInteger.pec");
+};
+
+exports.testInterpretedSubIntegerEnum = function(test) {
+	checkInterpretedOutput(test, "sub/subIntegerEnum.pec");
+};
+
+exports.testTranspiledSubIntegerEnum = function(test) {
+	checkTranspiledOutput(test, "sub/subIntegerEnum.pec");
+};
+
+exports.testInterpretedSubPeriod = function(test) {
+	checkInterpretedOutput(test, "sub/subPeriod.pec");
+};
+
+exports.testTranspiledSubPeriod = function(test) {
+	checkTranspiledOutput(test, "sub/subPeriod.pec");
+};
+
+exports.testInterpretedSubTime = function(test) {
+	checkInterpretedOutput(test, "sub/subTime.pec");
+};
+
+exports.testTranspiledSubTime = function(test) {
+	checkTranspiledOutput(test, "sub/subTime.pec");
 };
 

@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,51 +15,99 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAutoDecimalCast = function(test) {
-	checkOutput(test, "cast/autoDecimalCast.pec");
+exports.testInterpretedAutoDecimalCast = function(test) {
+	checkInterpretedOutput(test, "cast/autoDecimalCast.pec");
 };
 
-exports.testAutoDowncast = function(test) {
-	checkOutput(test, "cast/autoDowncast.pec");
+exports.testTranspiledAutoDecimalCast = function(test) {
+	checkTranspiledOutput(test, "cast/autoDecimalCast.pec");
 };
 
-exports.testAutoIntegerCast = function(test) {
-	checkOutput(test, "cast/autoIntegerCast.pec");
+exports.testInterpretedAutoDowncast = function(test) {
+	checkInterpretedOutput(test, "cast/autoDowncast.pec");
 };
 
-exports.testCastChild = function(test) {
-	checkOutput(test, "cast/castChild.pec");
+exports.testTranspiledAutoDowncast = function(test) {
+	checkTranspiledOutput(test, "cast/autoDowncast.pec");
 };
 
-exports.testCastDecimal = function(test) {
-	checkOutput(test, "cast/castDecimal.pec");
+exports.testInterpretedAutoIntegerCast = function(test) {
+	checkInterpretedOutput(test, "cast/autoIntegerCast.pec");
 };
 
-exports.testCastDocument = function(test) {
-	checkOutput(test, "cast/castDocument.pec");
+exports.testTranspiledAutoIntegerCast = function(test) {
+	checkTranspiledOutput(test, "cast/autoIntegerCast.pec");
 };
 
-exports.testCastInteger = function(test) {
-	checkOutput(test, "cast/castInteger.pec");
+exports.testInterpretedCastChild = function(test) {
+	checkInterpretedOutput(test, "cast/castChild.pec");
 };
 
-exports.testCastMissing = function(test) {
-	checkOutput(test, "cast/castMissing.pec");
+exports.testTranspiledCastChild = function(test) {
+	checkTranspiledOutput(test, "cast/castChild.pec");
 };
 
-exports.testCastNull = function(test) {
-	checkOutput(test, "cast/castNull.pec");
+exports.testInterpretedCastDecimal = function(test) {
+	checkInterpretedOutput(test, "cast/castDecimal.pec");
 };
 
-exports.testCastRoot = function(test) {
-	checkOutput(test, "cast/castRoot.pec");
+exports.testTranspiledCastDecimal = function(test) {
+	checkTranspiledOutput(test, "cast/castDecimal.pec");
 };
 
-exports.testIsAChild = function(test) {
-	checkOutput(test, "cast/isAChild.pec");
+exports.testInterpretedCastDocument = function(test) {
+	checkInterpretedOutput(test, "cast/castDocument.pec");
 };
 
-exports.testIsAText = function(test) {
-	checkOutput(test, "cast/isAText.pec");
+exports.testTranspiledCastDocument = function(test) {
+	checkTranspiledOutput(test, "cast/castDocument.pec");
+};
+
+exports.testInterpretedCastInteger = function(test) {
+	checkInterpretedOutput(test, "cast/castInteger.pec");
+};
+
+exports.testTranspiledCastInteger = function(test) {
+	checkTranspiledOutput(test, "cast/castInteger.pec");
+};
+
+exports.testInterpretedCastMissing = function(test) {
+	checkInterpretedOutput(test, "cast/castMissing.pec");
+};
+
+exports.testTranspiledCastMissing = function(test) {
+	checkTranspiledOutput(test, "cast/castMissing.pec");
+};
+
+exports.testInterpretedCastNull = function(test) {
+	checkInterpretedOutput(test, "cast/castNull.pec");
+};
+
+exports.testTranspiledCastNull = function(test) {
+	checkTranspiledOutput(test, "cast/castNull.pec");
+};
+
+exports.testInterpretedCastRoot = function(test) {
+	checkInterpretedOutput(test, "cast/castRoot.pec");
+};
+
+exports.testTranspiledCastRoot = function(test) {
+	checkTranspiledOutput(test, "cast/castRoot.pec");
+};
+
+exports.testInterpretedIsAChild = function(test) {
+	checkInterpretedOutput(test, "cast/isAChild.pec");
+};
+
+exports.testTranspiledIsAChild = function(test) {
+	checkTranspiledOutput(test, "cast/isAChild.pec");
+};
+
+exports.testInterpretedIsAText = function(test) {
+	checkInterpretedOutput(test, "cast/isAText.pec");
+};
+
+exports.testTranspiledIsAText = function(test) {
+	checkTranspiledOutput(test, "cast/isAText.pec");
 };
 

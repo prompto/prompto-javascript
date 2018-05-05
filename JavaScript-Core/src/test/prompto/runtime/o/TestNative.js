@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,67 +15,131 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testCategory = function(test) {
-	checkOutput(test, "native/category.poc");
+exports.testInterpretedCategory = function(test) {
+	checkInterpretedOutput(test, "native/category.poc");
 };
 
-exports.testMethod = function(test) {
-	checkOutput(test, "native/method.poc");
+exports.testTranspiledCategory = function(test) {
+	checkTranspiledOutput(test, "native/category.poc");
 };
 
-exports.testReturnBooleanLiteral = function(test) {
-	checkOutput(test, "native/returnBooleanLiteral.poc");
+exports.testInterpretedMethod = function(test) {
+	checkInterpretedOutput(test, "native/method.poc");
 };
 
-exports.testReturnBooleanObject = function(test) {
-	checkOutput(test, "native/returnBooleanObject.poc");
+exports.testTranspiledMethod = function(test) {
+	checkTranspiledOutput(test, "native/method.poc");
 };
 
-exports.testReturnBooleanValue = function(test) {
-	checkOutput(test, "native/returnBooleanValue.poc");
+exports.testInterpretedReturnBooleanLiteral = function(test) {
+	checkInterpretedOutput(test, "native/returnBooleanLiteral.poc");
 };
 
-exports.testReturnCharacterLiteral = function(test) {
-	checkOutput(test, "native/returnCharacterLiteral.poc");
+exports.testTranspiledReturnBooleanLiteral = function(test) {
+	checkTranspiledOutput(test, "native/returnBooleanLiteral.poc");
 };
 
-exports.testReturnCharacterObject = function(test) {
-	checkOutput(test, "native/returnCharacterObject.poc");
+exports.testInterpretedReturnBooleanObject = function(test) {
+	checkInterpretedOutput(test, "native/returnBooleanObject.poc");
 };
 
-exports.testReturnCharacterValue = function(test) {
-	checkOutput(test, "native/returnCharacterValue.poc");
+exports.testTranspiledReturnBooleanObject = function(test) {
+	checkTranspiledOutput(test, "native/returnBooleanObject.poc");
 };
 
-exports.testReturnDecimalLiteral = function(test) {
-	checkOutput(test, "native/returnDecimalLiteral.poc");
+exports.testInterpretedReturnBooleanValue = function(test) {
+	checkInterpretedOutput(test, "native/returnBooleanValue.poc");
 };
 
-exports.testReturnIntegerLiteral = function(test) {
-	checkOutput(test, "native/returnIntegerLiteral.poc");
+exports.testTranspiledReturnBooleanValue = function(test) {
+	checkTranspiledOutput(test, "native/returnBooleanValue.poc");
 };
 
-exports.testReturnIntegerObject = function(test) {
-	checkOutput(test, "native/returnIntegerObject.poc");
+exports.testInterpretedReturnCharacterLiteral = function(test) {
+	checkInterpretedOutput(test, "native/returnCharacterLiteral.poc");
 };
 
-exports.testReturnIntegerValue = function(test) {
-	checkOutput(test, "native/returnIntegerValue.poc");
+exports.testTranspiledReturnCharacterLiteral = function(test) {
+	checkTranspiledOutput(test, "native/returnCharacterLiteral.poc");
 };
 
-exports.testReturnLongLiteral = function(test) {
-	checkOutput(test, "native/returnLongLiteral.poc");
+exports.testInterpretedReturnCharacterObject = function(test) {
+	checkInterpretedOutput(test, "native/returnCharacterObject.poc");
 };
 
-exports.testReturnLongObject = function(test) {
-	checkOutput(test, "native/returnLongObject.poc");
+exports.testTranspiledReturnCharacterObject = function(test) {
+	checkTranspiledOutput(test, "native/returnCharacterObject.poc");
 };
 
-exports.testReturnLongValue = function(test) {
-	checkOutput(test, "native/returnLongValue.poc");
+exports.testInterpretedReturnCharacterValue = function(test) {
+	checkInterpretedOutput(test, "native/returnCharacterValue.poc");
 };
 
-exports.testReturnStringLiteral = function(test) {
-	checkOutput(test, "native/returnStringLiteral.poc");
+exports.testTranspiledReturnCharacterValue = function(test) {
+	checkTranspiledOutput(test, "native/returnCharacterValue.poc");
+};
+
+exports.testInterpretedReturnDecimalLiteral = function(test) {
+	checkInterpretedOutput(test, "native/returnDecimalLiteral.poc");
+};
+
+exports.testTranspiledReturnDecimalLiteral = function(test) {
+	checkTranspiledOutput(test, "native/returnDecimalLiteral.poc");
+};
+
+exports.testInterpretedReturnIntegerLiteral = function(test) {
+	checkInterpretedOutput(test, "native/returnIntegerLiteral.poc");
+};
+
+exports.testTranspiledReturnIntegerLiteral = function(test) {
+	checkTranspiledOutput(test, "native/returnIntegerLiteral.poc");
+};
+
+exports.testInterpretedReturnIntegerObject = function(test) {
+	checkInterpretedOutput(test, "native/returnIntegerObject.poc");
+};
+
+exports.testTranspiledReturnIntegerObject = function(test) {
+	checkTranspiledOutput(test, "native/returnIntegerObject.poc");
+};
+
+exports.testInterpretedReturnIntegerValue = function(test) {
+	checkInterpretedOutput(test, "native/returnIntegerValue.poc");
+};
+
+exports.testTranspiledReturnIntegerValue = function(test) {
+	checkTranspiledOutput(test, "native/returnIntegerValue.poc");
+};
+
+exports.testInterpretedReturnLongLiteral = function(test) {
+	checkInterpretedOutput(test, "native/returnLongLiteral.poc");
+};
+
+exports.testTranspiledReturnLongLiteral = function(test) {
+	checkTranspiledOutput(test, "native/returnLongLiteral.poc");
+};
+
+exports.testInterpretedReturnLongObject = function(test) {
+	checkInterpretedOutput(test, "native/returnLongObject.poc");
+};
+
+exports.testTranspiledReturnLongObject = function(test) {
+	checkTranspiledOutput(test, "native/returnLongObject.poc");
+};
+
+exports.testInterpretedReturnLongValue = function(test) {
+	checkInterpretedOutput(test, "native/returnLongValue.poc");
+};
+
+exports.testTranspiledReturnLongValue = function(test) {
+	checkTranspiledOutput(test, "native/returnLongValue.poc");
+};
+
+exports.testInterpretedReturnStringLiteral = function(test) {
+	checkInterpretedOutput(test, "native/returnStringLiteral.poc");
+};
+
+exports.testTranspiledReturnStringLiteral = function(test) {
+	checkTranspiledOutput(test, "native/returnStringLiteral.poc");
 };
 

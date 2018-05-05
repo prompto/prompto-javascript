@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,27 +15,51 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testComplexIf = function(test) {
-	checkOutput(test, "condition/complexIf.pec");
+exports.testInterpretedComplexIf = function(test) {
+	checkInterpretedOutput(test, "condition/complexIf.pec");
 };
 
-exports.testEmbeddedIf = function(test) {
-	checkOutput(test, "condition/embeddedIf.pec");
+exports.testTranspiledComplexIf = function(test) {
+	checkTranspiledOutput(test, "condition/complexIf.pec");
 };
 
-exports.testReturnIf = function(test) {
-	checkOutput(test, "condition/returnIf.pec");
+exports.testInterpretedEmbeddedIf = function(test) {
+	checkInterpretedOutput(test, "condition/embeddedIf.pec");
 };
 
-exports.testSimpleIf = function(test) {
-	checkOutput(test, "condition/simpleIf.pec");
+exports.testTranspiledEmbeddedIf = function(test) {
+	checkTranspiledOutput(test, "condition/embeddedIf.pec");
 };
 
-exports.testSwitch = function(test) {
-	checkOutput(test, "condition/switch.pec");
+exports.testInterpretedReturnIf = function(test) {
+	checkInterpretedOutput(test, "condition/returnIf.pec");
 };
 
-exports.testTernary = function(test) {
-	checkOutput(test, "condition/ternary.pec");
+exports.testTranspiledReturnIf = function(test) {
+	checkTranspiledOutput(test, "condition/returnIf.pec");
+};
+
+exports.testInterpretedSimpleIf = function(test) {
+	checkInterpretedOutput(test, "condition/simpleIf.pec");
+};
+
+exports.testTranspiledSimpleIf = function(test) {
+	checkTranspiledOutput(test, "condition/simpleIf.pec");
+};
+
+exports.testInterpretedSwitch = function(test) {
+	checkInterpretedOutput(test, "condition/switch.pec");
+};
+
+exports.testTranspiledSwitch = function(test) {
+	checkTranspiledOutput(test, "condition/switch.pec");
+};
+
+exports.testInterpretedTernary = function(test) {
+	checkInterpretedOutput(test, "condition/ternary.pec");
+};
+
+exports.testTranspiledTernary = function(test) {
+	checkTranspiledOutput(test, "condition/ternary.pec");
 };
 

@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,131 +15,259 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testEqBoolean = function(test) {
-	checkOutput(test, "equals/eqBoolean.pec");
+exports.testInterpretedEqBoolean = function(test) {
+	checkInterpretedOutput(test, "equals/eqBoolean.pec");
 };
 
-exports.testEqCharacter = function(test) {
-	checkOutput(test, "equals/eqCharacter.pec");
+exports.testTranspiledEqBoolean = function(test) {
+	checkTranspiledOutput(test, "equals/eqBoolean.pec");
 };
 
-exports.testEqDate = function(test) {
-	checkOutput(test, "equals/eqDate.pec");
+exports.testInterpretedEqCharacter = function(test) {
+	checkInterpretedOutput(test, "equals/eqCharacter.pec");
 };
 
-exports.testEqDateTime = function(test) {
-	checkOutput(test, "equals/eqDateTime.pec");
+exports.testTranspiledEqCharacter = function(test) {
+	checkTranspiledOutput(test, "equals/eqCharacter.pec");
 };
 
-exports.testEqDecimal = function(test) {
-	checkOutput(test, "equals/eqDecimal.pec");
+exports.testInterpretedEqDate = function(test) {
+	checkInterpretedOutput(test, "equals/eqDate.pec");
 };
 
-exports.testEqDict = function(test) {
-	checkOutput(test, "equals/eqDict.pec");
+exports.testTranspiledEqDate = function(test) {
+	checkTranspiledOutput(test, "equals/eqDate.pec");
 };
 
-exports.testEqInteger = function(test) {
-	checkOutput(test, "equals/eqInteger.pec");
+exports.testInterpretedEqDateTime = function(test) {
+	checkInterpretedOutput(test, "equals/eqDateTime.pec");
 };
 
-exports.testEqList = function(test) {
-	checkOutput(test, "equals/eqList.pec");
+exports.testTranspiledEqDateTime = function(test) {
+	checkTranspiledOutput(test, "equals/eqDateTime.pec");
 };
 
-exports.testEqPeriod = function(test) {
-	checkOutput(test, "equals/eqPeriod.pec");
+exports.testInterpretedEqDecimal = function(test) {
+	checkInterpretedOutput(test, "equals/eqDecimal.pec");
 };
 
-exports.testEqRange = function(test) {
-	checkOutput(test, "equals/eqRange.pec");
+exports.testTranspiledEqDecimal = function(test) {
+	checkTranspiledOutput(test, "equals/eqDecimal.pec");
 };
 
-exports.testEqSet = function(test) {
-	checkOutput(test, "equals/eqSet.pec");
+exports.testInterpretedEqDict = function(test) {
+	checkInterpretedOutput(test, "equals/eqDict.pec");
 };
 
-exports.testEqText = function(test) {
-	checkOutput(test, "equals/eqText.pec");
+exports.testTranspiledEqDict = function(test) {
+	checkTranspiledOutput(test, "equals/eqDict.pec");
 };
 
-exports.testEqTime = function(test) {
-	checkOutput(test, "equals/eqTime.pec");
+exports.testInterpretedEqInteger = function(test) {
+	checkInterpretedOutput(test, "equals/eqInteger.pec");
 };
 
-exports.testEqVersion = function(test) {
-	checkOutput(test, "equals/eqVersion.pec");
+exports.testTranspiledEqInteger = function(test) {
+	checkTranspiledOutput(test, "equals/eqInteger.pec");
 };
 
-exports.testIsBoolean = function(test) {
-	checkOutput(test, "equals/isBoolean.pec");
+exports.testInterpretedEqList = function(test) {
+	checkInterpretedOutput(test, "equals/eqList.pec");
 };
 
-exports.testIsInstance = function(test) {
-	checkOutput(test, "equals/isInstance.pec");
+exports.testTranspiledEqList = function(test) {
+	checkTranspiledOutput(test, "equals/eqList.pec");
 };
 
-exports.testIsNotBoolean = function(test) {
-	checkOutput(test, "equals/isNotBoolean.pec");
+exports.testInterpretedEqPeriod = function(test) {
+	checkInterpretedOutput(test, "equals/eqPeriod.pec");
 };
 
-exports.testIsNotInstance = function(test) {
-	checkOutput(test, "equals/isNotInstance.pec");
+exports.testTranspiledEqPeriod = function(test) {
+	checkTranspiledOutput(test, "equals/eqPeriod.pec");
 };
 
-exports.testNeqBoolean = function(test) {
-	checkOutput(test, "equals/neqBoolean.pec");
+exports.testInterpretedEqRange = function(test) {
+	checkInterpretedOutput(test, "equals/eqRange.pec");
 };
 
-exports.testNeqCharacter = function(test) {
-	checkOutput(test, "equals/neqCharacter.pec");
+exports.testTranspiledEqRange = function(test) {
+	checkTranspiledOutput(test, "equals/eqRange.pec");
 };
 
-exports.testNeqDate = function(test) {
-	checkOutput(test, "equals/neqDate.pec");
+exports.testInterpretedEqSet = function(test) {
+	checkInterpretedOutput(test, "equals/eqSet.pec");
 };
 
-exports.testNeqDateTime = function(test) {
-	checkOutput(test, "equals/neqDateTime.pec");
+exports.testTranspiledEqSet = function(test) {
+	checkTranspiledOutput(test, "equals/eqSet.pec");
 };
 
-exports.testNeqDecimal = function(test) {
-	checkOutput(test, "equals/neqDecimal.pec");
+exports.testInterpretedEqText = function(test) {
+	checkInterpretedOutput(test, "equals/eqText.pec");
 };
 
-exports.testNeqDict = function(test) {
-	checkOutput(test, "equals/neqDict.pec");
+exports.testTranspiledEqText = function(test) {
+	checkTranspiledOutput(test, "equals/eqText.pec");
 };
 
-exports.testNeqInteger = function(test) {
-	checkOutput(test, "equals/neqInteger.pec");
+exports.testInterpretedEqTime = function(test) {
+	checkInterpretedOutput(test, "equals/eqTime.pec");
 };
 
-exports.testNeqList = function(test) {
-	checkOutput(test, "equals/neqList.pec");
+exports.testTranspiledEqTime = function(test) {
+	checkTranspiledOutput(test, "equals/eqTime.pec");
 };
 
-exports.testNeqPeriod = function(test) {
-	checkOutput(test, "equals/neqPeriod.pec");
+exports.testInterpretedEqVersion = function(test) {
+	checkInterpretedOutput(test, "equals/eqVersion.pec");
 };
 
-exports.testNeqRange = function(test) {
-	checkOutput(test, "equals/neqRange.pec");
+exports.testTranspiledEqVersion = function(test) {
+	checkTranspiledOutput(test, "equals/eqVersion.pec");
 };
 
-exports.testNeqSet = function(test) {
-	checkOutput(test, "equals/neqSet.pec");
+exports.testInterpretedIsBoolean = function(test) {
+	checkInterpretedOutput(test, "equals/isBoolean.pec");
 };
 
-exports.testNeqText = function(test) {
-	checkOutput(test, "equals/neqText.pec");
+exports.testTranspiledIsBoolean = function(test) {
+	checkTranspiledOutput(test, "equals/isBoolean.pec");
 };
 
-exports.testNeqTime = function(test) {
-	checkOutput(test, "equals/neqTime.pec");
+exports.testInterpretedIsInstance = function(test) {
+	checkInterpretedOutput(test, "equals/isInstance.pec");
 };
 
-exports.testReqText = function(test) {
-	checkOutput(test, "equals/reqText.pec");
+exports.testTranspiledIsInstance = function(test) {
+	checkTranspiledOutput(test, "equals/isInstance.pec");
+};
+
+exports.testInterpretedIsNotBoolean = function(test) {
+	checkInterpretedOutput(test, "equals/isNotBoolean.pec");
+};
+
+exports.testTranspiledIsNotBoolean = function(test) {
+	checkTranspiledOutput(test, "equals/isNotBoolean.pec");
+};
+
+exports.testInterpretedIsNotInstance = function(test) {
+	checkInterpretedOutput(test, "equals/isNotInstance.pec");
+};
+
+exports.testTranspiledIsNotInstance = function(test) {
+	checkTranspiledOutput(test, "equals/isNotInstance.pec");
+};
+
+exports.testInterpretedNeqBoolean = function(test) {
+	checkInterpretedOutput(test, "equals/neqBoolean.pec");
+};
+
+exports.testTranspiledNeqBoolean = function(test) {
+	checkTranspiledOutput(test, "equals/neqBoolean.pec");
+};
+
+exports.testInterpretedNeqCharacter = function(test) {
+	checkInterpretedOutput(test, "equals/neqCharacter.pec");
+};
+
+exports.testTranspiledNeqCharacter = function(test) {
+	checkTranspiledOutput(test, "equals/neqCharacter.pec");
+};
+
+exports.testInterpretedNeqDate = function(test) {
+	checkInterpretedOutput(test, "equals/neqDate.pec");
+};
+
+exports.testTranspiledNeqDate = function(test) {
+	checkTranspiledOutput(test, "equals/neqDate.pec");
+};
+
+exports.testInterpretedNeqDateTime = function(test) {
+	checkInterpretedOutput(test, "equals/neqDateTime.pec");
+};
+
+exports.testTranspiledNeqDateTime = function(test) {
+	checkTranspiledOutput(test, "equals/neqDateTime.pec");
+};
+
+exports.testInterpretedNeqDecimal = function(test) {
+	checkInterpretedOutput(test, "equals/neqDecimal.pec");
+};
+
+exports.testTranspiledNeqDecimal = function(test) {
+	checkTranspiledOutput(test, "equals/neqDecimal.pec");
+};
+
+exports.testInterpretedNeqDict = function(test) {
+	checkInterpretedOutput(test, "equals/neqDict.pec");
+};
+
+exports.testTranspiledNeqDict = function(test) {
+	checkTranspiledOutput(test, "equals/neqDict.pec");
+};
+
+exports.testInterpretedNeqInteger = function(test) {
+	checkInterpretedOutput(test, "equals/neqInteger.pec");
+};
+
+exports.testTranspiledNeqInteger = function(test) {
+	checkTranspiledOutput(test, "equals/neqInteger.pec");
+};
+
+exports.testInterpretedNeqList = function(test) {
+	checkInterpretedOutput(test, "equals/neqList.pec");
+};
+
+exports.testTranspiledNeqList = function(test) {
+	checkTranspiledOutput(test, "equals/neqList.pec");
+};
+
+exports.testInterpretedNeqPeriod = function(test) {
+	checkInterpretedOutput(test, "equals/neqPeriod.pec");
+};
+
+exports.testTranspiledNeqPeriod = function(test) {
+	checkTranspiledOutput(test, "equals/neqPeriod.pec");
+};
+
+exports.testInterpretedNeqRange = function(test) {
+	checkInterpretedOutput(test, "equals/neqRange.pec");
+};
+
+exports.testTranspiledNeqRange = function(test) {
+	checkTranspiledOutput(test, "equals/neqRange.pec");
+};
+
+exports.testInterpretedNeqSet = function(test) {
+	checkInterpretedOutput(test, "equals/neqSet.pec");
+};
+
+exports.testTranspiledNeqSet = function(test) {
+	checkTranspiledOutput(test, "equals/neqSet.pec");
+};
+
+exports.testInterpretedNeqText = function(test) {
+	checkInterpretedOutput(test, "equals/neqText.pec");
+};
+
+exports.testTranspiledNeqText = function(test) {
+	checkTranspiledOutput(test, "equals/neqText.pec");
+};
+
+exports.testInterpretedNeqTime = function(test) {
+	checkInterpretedOutput(test, "equals/neqTime.pec");
+};
+
+exports.testTranspiledNeqTime = function(test) {
+	checkTranspiledOutput(test, "equals/neqTime.pec");
+};
+
+exports.testInterpretedReqText = function(test) {
+	checkInterpretedOutput(test, "equals/reqText.pec");
+};
+
+exports.testTranspiledReqText = function(test) {
+	checkTranspiledOutput(test, "equals/reqText.pec");
 };
 

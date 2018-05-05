@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,43 +15,83 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAssignedReturn = function(test) {
-	checkOutput(test, "exit/assignedReturn.pec");
+exports.testInterpretedAssignedReturn = function(test) {
+	checkInterpretedOutput(test, "exit/assignedReturn.pec");
 };
 
-exports.testAssignedReturnInDoWhile = function(test) {
-	checkOutput(test, "exit/assignedReturnInDoWhile.pec");
+exports.testTranspiledAssignedReturn = function(test) {
+	checkTranspiledOutput(test, "exit/assignedReturn.pec");
 };
 
-exports.testAssignedReturnInForEach = function(test) {
-	checkOutput(test, "exit/assignedReturnInForEach.pec");
+exports.testInterpretedAssignedReturnInDoWhile = function(test) {
+	checkInterpretedOutput(test, "exit/assignedReturnInDoWhile.pec");
 };
 
-exports.testAssignedReturnInIf = function(test) {
-	checkOutput(test, "exit/assignedReturnInIf.pec");
+exports.testTranspiledAssignedReturnInDoWhile = function(test) {
+	checkTranspiledOutput(test, "exit/assignedReturnInDoWhile.pec");
 };
 
-exports.testAssignedReturnInWhile = function(test) {
-	checkOutput(test, "exit/assignedReturnInWhile.pec");
+exports.testInterpretedAssignedReturnInForEach = function(test) {
+	checkInterpretedOutput(test, "exit/assignedReturnInForEach.pec");
 };
 
-exports.testUnassignedReturn = function(test) {
-	checkOutput(test, "exit/unassignedReturn.pec");
+exports.testTranspiledAssignedReturnInForEach = function(test) {
+	checkTranspiledOutput(test, "exit/assignedReturnInForEach.pec");
 };
 
-exports.testUnassignedReturnInDoWhile = function(test) {
-	checkOutput(test, "exit/unassignedReturnInDoWhile.pec");
+exports.testInterpretedAssignedReturnInIf = function(test) {
+	checkInterpretedOutput(test, "exit/assignedReturnInIf.pec");
 };
 
-exports.testUnassignedReturnInForEach = function(test) {
-	checkOutput(test, "exit/unassignedReturnInForEach.pec");
+exports.testTranspiledAssignedReturnInIf = function(test) {
+	checkTranspiledOutput(test, "exit/assignedReturnInIf.pec");
 };
 
-exports.testUnassignedReturnInIf = function(test) {
-	checkOutput(test, "exit/unassignedReturnInIf.pec");
+exports.testInterpretedAssignedReturnInWhile = function(test) {
+	checkInterpretedOutput(test, "exit/assignedReturnInWhile.pec");
 };
 
-exports.testUnassignedReturnInWhile = function(test) {
-	checkOutput(test, "exit/unassignedReturnInWhile.pec");
+exports.testTranspiledAssignedReturnInWhile = function(test) {
+	checkTranspiledOutput(test, "exit/assignedReturnInWhile.pec");
+};
+
+exports.testInterpretedUnassignedReturn = function(test) {
+	checkInterpretedOutput(test, "exit/unassignedReturn.pec");
+};
+
+exports.testTranspiledUnassignedReturn = function(test) {
+	checkTranspiledOutput(test, "exit/unassignedReturn.pec");
+};
+
+exports.testInterpretedUnassignedReturnInDoWhile = function(test) {
+	checkInterpretedOutput(test, "exit/unassignedReturnInDoWhile.pec");
+};
+
+exports.testTranspiledUnassignedReturnInDoWhile = function(test) {
+	checkTranspiledOutput(test, "exit/unassignedReturnInDoWhile.pec");
+};
+
+exports.testInterpretedUnassignedReturnInForEach = function(test) {
+	checkInterpretedOutput(test, "exit/unassignedReturnInForEach.pec");
+};
+
+exports.testTranspiledUnassignedReturnInForEach = function(test) {
+	checkTranspiledOutput(test, "exit/unassignedReturnInForEach.pec");
+};
+
+exports.testInterpretedUnassignedReturnInIf = function(test) {
+	checkInterpretedOutput(test, "exit/unassignedReturnInIf.pec");
+};
+
+exports.testTranspiledUnassignedReturnInIf = function(test) {
+	checkTranspiledOutput(test, "exit/unassignedReturnInIf.pec");
+};
+
+exports.testInterpretedUnassignedReturnInWhile = function(test) {
+	checkInterpretedOutput(test, "exit/unassignedReturnInWhile.pec");
+};
+
+exports.testTranspiledUnassignedReturnInWhile = function(test) {
+	checkTranspiledOutput(test, "exit/unassignedReturnInWhile.pec");
 };
 

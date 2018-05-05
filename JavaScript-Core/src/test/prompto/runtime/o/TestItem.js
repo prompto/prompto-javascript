@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,23 +15,43 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testItemDict = function(test) {
-	checkOutput(test, "item/itemDict.poc");
+exports.testInterpretedItemDict = function(test) {
+	checkInterpretedOutput(test, "item/itemDict.poc");
 };
 
-exports.testItemList = function(test) {
-	checkOutput(test, "item/itemList.poc");
+exports.testTranspiledItemDict = function(test) {
+	checkTranspiledOutput(test, "item/itemDict.poc");
 };
 
-exports.testItemRange = function(test) {
-	checkOutput(test, "item/itemRange.poc");
+exports.testInterpretedItemList = function(test) {
+	checkInterpretedOutput(test, "item/itemList.poc");
 };
 
-exports.testItemSet = function(test) {
-	checkOutput(test, "item/itemSet.poc");
+exports.testTranspiledItemList = function(test) {
+	checkTranspiledOutput(test, "item/itemList.poc");
 };
 
-exports.testItemText = function(test) {
-	checkOutput(test, "item/itemText.poc");
+exports.testInterpretedItemRange = function(test) {
+	checkInterpretedOutput(test, "item/itemRange.poc");
+};
+
+exports.testTranspiledItemRange = function(test) {
+	checkTranspiledOutput(test, "item/itemRange.poc");
+};
+
+exports.testInterpretedItemSet = function(test) {
+	checkInterpretedOutput(test, "item/itemSet.poc");
+};
+
+exports.testTranspiledItemSet = function(test) {
+	checkTranspiledOutput(test, "item/itemSet.poc");
+};
+
+exports.testInterpretedItemText = function(test) {
+	checkInterpretedOutput(test, "item/itemText.poc");
+};
+
+exports.testTranspiledItemText = function(test) {
+	checkTranspiledOutput(test, "item/itemText.poc");
 };
 

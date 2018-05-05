@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,27 +15,51 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testIntegerEnumeration = function(test) {
-	checkOutput(test, "patterns/integerEnumeration.pec");
+exports.testInterpretedIntegerEnumeration = function(test) {
+	checkInterpretedOutput(test, "patterns/integerEnumeration.pec");
 };
 
-exports.testIntegerPattern = function(test) {
-	checkOutput(test, "patterns/integerPattern.pec");
+exports.testTranspiledIntegerEnumeration = function(test) {
+	checkTranspiledOutput(test, "patterns/integerEnumeration.pec");
 };
 
-exports.testNegativeIntegerRange = function(test) {
-	checkOutput(test, "patterns/negativeIntegerRange.pec");
+exports.testInterpretedIntegerPattern = function(test) {
+	checkInterpretedOutput(test, "patterns/integerPattern.pec");
 };
 
-exports.testPositiveIntegerRange = function(test) {
-	checkOutput(test, "patterns/positiveIntegerRange.pec");
+exports.testTranspiledIntegerPattern = function(test) {
+	checkTranspiledOutput(test, "patterns/integerPattern.pec");
 };
 
-exports.testTextEnumeration = function(test) {
-	checkOutput(test, "patterns/textEnumeration.pec");
+exports.testInterpretedNegativeIntegerRange = function(test) {
+	checkInterpretedOutput(test, "patterns/negativeIntegerRange.pec");
 };
 
-exports.testTextPattern = function(test) {
-	checkOutput(test, "patterns/textPattern.pec");
+exports.testTranspiledNegativeIntegerRange = function(test) {
+	checkTranspiledOutput(test, "patterns/negativeIntegerRange.pec");
+};
+
+exports.testInterpretedPositiveIntegerRange = function(test) {
+	checkInterpretedOutput(test, "patterns/positiveIntegerRange.pec");
+};
+
+exports.testTranspiledPositiveIntegerRange = function(test) {
+	checkTranspiledOutput(test, "patterns/positiveIntegerRange.pec");
+};
+
+exports.testInterpretedTextEnumeration = function(test) {
+	checkInterpretedOutput(test, "patterns/textEnumeration.pec");
+};
+
+exports.testTranspiledTextEnumeration = function(test) {
+	checkTranspiledOutput(test, "patterns/textEnumeration.pec");
+};
+
+exports.testInterpretedTextPattern = function(test) {
+	checkInterpretedOutput(test, "patterns/textPattern.pec");
+};
+
+exports.testTranspiledTextPattern = function(test) {
+	checkTranspiledOutput(test, "patterns/textPattern.pec");
 };
 

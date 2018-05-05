@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,27 +15,51 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testSubDate = function(test) {
-	checkOutput(test, "sub/subDate.poc");
+exports.testInterpretedSubDate = function(test) {
+	checkInterpretedOutput(test, "sub/subDate.poc");
 };
 
-exports.testSubDateTime = function(test) {
-	checkOutput(test, "sub/subDateTime.poc");
+exports.testTranspiledSubDate = function(test) {
+	checkTranspiledOutput(test, "sub/subDate.poc");
 };
 
-exports.testSubDecimal = function(test) {
-	checkOutput(test, "sub/subDecimal.poc");
+exports.testInterpretedSubDateTime = function(test) {
+	checkInterpretedOutput(test, "sub/subDateTime.poc");
 };
 
-exports.testSubInteger = function(test) {
-	checkOutput(test, "sub/subInteger.poc");
+exports.testTranspiledSubDateTime = function(test) {
+	checkTranspiledOutput(test, "sub/subDateTime.poc");
 };
 
-exports.testSubPeriod = function(test) {
-	checkOutput(test, "sub/subPeriod.poc");
+exports.testInterpretedSubDecimal = function(test) {
+	checkInterpretedOutput(test, "sub/subDecimal.poc");
 };
 
-exports.testSubTime = function(test) {
-	checkOutput(test, "sub/subTime.poc");
+exports.testTranspiledSubDecimal = function(test) {
+	checkTranspiledOutput(test, "sub/subDecimal.poc");
+};
+
+exports.testInterpretedSubInteger = function(test) {
+	checkInterpretedOutput(test, "sub/subInteger.poc");
+};
+
+exports.testTranspiledSubInteger = function(test) {
+	checkTranspiledOutput(test, "sub/subInteger.poc");
+};
+
+exports.testInterpretedSubPeriod = function(test) {
+	checkInterpretedOutput(test, "sub/subPeriod.poc");
+};
+
+exports.testTranspiledSubPeriod = function(test) {
+	checkTranspiledOutput(test, "sub/subPeriod.poc");
+};
+
+exports.testInterpretedSubTime = function(test) {
+	checkInterpretedOutput(test, "sub/subTime.poc");
+};
+
+exports.testTranspiledSubTime = function(test) {
+	checkTranspiledOutput(test, "sub/subTime.poc");
 };
 

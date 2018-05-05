@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,7 +15,11 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testForward = function(test) {
-	checkOutput(test, "forward/forward.pec");
+exports.testInterpretedForward = function(test) {
+	checkInterpretedOutput(test, "forward/forward.pec");
+};
+
+exports.testTranspiledForward = function(test) {
+	checkTranspiledOutput(test, "forward/forward.pec");
 };
 

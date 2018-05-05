@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,15 +15,27 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testFilterFromCursor = function(test) {
-	checkOutput(test, "filter/filterFromCursor.pec");
+exports.testInterpretedFilterFromCursor = function(test) {
+	checkInterpretedOutput(test, "filter/filterFromCursor.pec");
 };
 
-exports.testFilterFromList = function(test) {
-	checkOutput(test, "filter/filterFromList.pec");
+exports.testTranspiledFilterFromCursor = function(test) {
+	checkTranspiledOutput(test, "filter/filterFromCursor.pec");
 };
 
-exports.testFilterFromSet = function(test) {
-	checkOutput(test, "filter/filterFromSet.pec");
+exports.testInterpretedFilterFromList = function(test) {
+	checkInterpretedOutput(test, "filter/filterFromList.pec");
+};
+
+exports.testTranspiledFilterFromList = function(test) {
+	checkTranspiledOutput(test, "filter/filterFromList.pec");
+};
+
+exports.testInterpretedFilterFromSet = function(test) {
+	checkInterpretedOutput(test, "filter/filterFromSet.pec");
+};
+
+exports.testTranspiledFilterFromSet = function(test) {
+	checkTranspiledOutput(test, "filter/filterFromSet.pec");
 };
 

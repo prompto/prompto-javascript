@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,19 +15,35 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testDeepItem = function(test) {
-	checkOutput(test, "documents/deepItem.poc");
+exports.testInterpretedDeepItem = function(test) {
+	checkInterpretedOutput(test, "documents/deepItem.poc");
 };
 
-exports.testDeepVariable = function(test) {
-	checkOutput(test, "documents/deepVariable.poc");
+exports.testTranspiledDeepItem = function(test) {
+	checkTranspiledOutput(test, "documents/deepItem.poc");
 };
 
-exports.testItem = function(test) {
-	checkOutput(test, "documents/item.poc");
+exports.testInterpretedDeepVariable = function(test) {
+	checkInterpretedOutput(test, "documents/deepVariable.poc");
 };
 
-exports.testVariable = function(test) {
-	checkOutput(test, "documents/variable.poc");
+exports.testTranspiledDeepVariable = function(test) {
+	checkTranspiledOutput(test, "documents/deepVariable.poc");
+};
+
+exports.testInterpretedItem = function(test) {
+	checkInterpretedOutput(test, "documents/item.poc");
+};
+
+exports.testTranspiledItem = function(test) {
+	checkTranspiledOutput(test, "documents/item.poc");
+};
+
+exports.testInterpretedVariable = function(test) {
+	checkInterpretedOutput(test, "documents/variable.poc");
+};
+
+exports.testTranspiledVariable = function(test) {
+	checkTranspiledOutput(test, "documents/variable.poc");
 };
 

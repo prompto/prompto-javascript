@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,11 +15,19 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testGetter = function(test) {
-	checkOutput(test, "setters/getter.poc");
+exports.testInterpretedGetter = function(test) {
+	checkInterpretedOutput(test, "setters/getter.poc");
 };
 
-exports.testSetter = function(test) {
-	checkOutput(test, "setters/setter.poc");
+exports.testTranspiledGetter = function(test) {
+	checkTranspiledOutput(test, "setters/getter.poc");
+};
+
+exports.testInterpretedSetter = function(test) {
+	checkInterpretedOutput(test, "setters/setter.poc");
+};
+
+exports.testTranspiledSetter = function(test) {
+	checkTranspiledOutput(test, "setters/setter.poc");
 };
 

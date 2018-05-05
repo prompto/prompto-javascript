@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,63 +15,123 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testLtCharacter = function(test) {
-	checkOutput(test, "less/ltCharacter.pec");
+exports.testInterpretedLtCharacter = function(test) {
+	checkInterpretedOutput(test, "less/ltCharacter.pec");
 };
 
-exports.testLtDate = function(test) {
-	checkOutput(test, "less/ltDate.pec");
+exports.testTranspiledLtCharacter = function(test) {
+	checkTranspiledOutput(test, "less/ltCharacter.pec");
 };
 
-exports.testLtDateTime = function(test) {
-	checkOutput(test, "less/ltDateTime.pec");
+exports.testInterpretedLtDate = function(test) {
+	checkInterpretedOutput(test, "less/ltDate.pec");
 };
 
-exports.testLtDecimal = function(test) {
-	checkOutput(test, "less/ltDecimal.pec");
+exports.testTranspiledLtDate = function(test) {
+	checkTranspiledOutput(test, "less/ltDate.pec");
 };
 
-exports.testLtInteger = function(test) {
-	checkOutput(test, "less/ltInteger.pec");
+exports.testInterpretedLtDateTime = function(test) {
+	checkInterpretedOutput(test, "less/ltDateTime.pec");
 };
 
-exports.testLtText = function(test) {
-	checkOutput(test, "less/ltText.pec");
+exports.testTranspiledLtDateTime = function(test) {
+	checkTranspiledOutput(test, "less/ltDateTime.pec");
 };
 
-exports.testLtTime = function(test) {
-	checkOutput(test, "less/ltTime.pec");
+exports.testInterpretedLtDecimal = function(test) {
+	checkInterpretedOutput(test, "less/ltDecimal.pec");
 };
 
-exports.testLtVersion = function(test) {
-	checkOutput(test, "less/ltVersion.pec");
+exports.testTranspiledLtDecimal = function(test) {
+	checkTranspiledOutput(test, "less/ltDecimal.pec");
 };
 
-exports.testLteCharacter = function(test) {
-	checkOutput(test, "less/lteCharacter.pec");
+exports.testInterpretedLtInteger = function(test) {
+	checkInterpretedOutput(test, "less/ltInteger.pec");
 };
 
-exports.testLteDate = function(test) {
-	checkOutput(test, "less/lteDate.pec");
+exports.testTranspiledLtInteger = function(test) {
+	checkTranspiledOutput(test, "less/ltInteger.pec");
 };
 
-exports.testLteDateTime = function(test) {
-	checkOutput(test, "less/lteDateTime.pec");
+exports.testInterpretedLtText = function(test) {
+	checkInterpretedOutput(test, "less/ltText.pec");
 };
 
-exports.testLteDecimal = function(test) {
-	checkOutput(test, "less/lteDecimal.pec");
+exports.testTranspiledLtText = function(test) {
+	checkTranspiledOutput(test, "less/ltText.pec");
 };
 
-exports.testLteInteger = function(test) {
-	checkOutput(test, "less/lteInteger.pec");
+exports.testInterpretedLtTime = function(test) {
+	checkInterpretedOutput(test, "less/ltTime.pec");
 };
 
-exports.testLteText = function(test) {
-	checkOutput(test, "less/lteText.pec");
+exports.testTranspiledLtTime = function(test) {
+	checkTranspiledOutput(test, "less/ltTime.pec");
 };
 
-exports.testLteTime = function(test) {
-	checkOutput(test, "less/lteTime.pec");
+exports.testInterpretedLtVersion = function(test) {
+	checkInterpretedOutput(test, "less/ltVersion.pec");
+};
+
+exports.testTranspiledLtVersion = function(test) {
+	checkTranspiledOutput(test, "less/ltVersion.pec");
+};
+
+exports.testInterpretedLteCharacter = function(test) {
+	checkInterpretedOutput(test, "less/lteCharacter.pec");
+};
+
+exports.testTranspiledLteCharacter = function(test) {
+	checkTranspiledOutput(test, "less/lteCharacter.pec");
+};
+
+exports.testInterpretedLteDate = function(test) {
+	checkInterpretedOutput(test, "less/lteDate.pec");
+};
+
+exports.testTranspiledLteDate = function(test) {
+	checkTranspiledOutput(test, "less/lteDate.pec");
+};
+
+exports.testInterpretedLteDateTime = function(test) {
+	checkInterpretedOutput(test, "less/lteDateTime.pec");
+};
+
+exports.testTranspiledLteDateTime = function(test) {
+	checkTranspiledOutput(test, "less/lteDateTime.pec");
+};
+
+exports.testInterpretedLteDecimal = function(test) {
+	checkInterpretedOutput(test, "less/lteDecimal.pec");
+};
+
+exports.testTranspiledLteDecimal = function(test) {
+	checkTranspiledOutput(test, "less/lteDecimal.pec");
+};
+
+exports.testInterpretedLteInteger = function(test) {
+	checkInterpretedOutput(test, "less/lteInteger.pec");
+};
+
+exports.testTranspiledLteInteger = function(test) {
+	checkTranspiledOutput(test, "less/lteInteger.pec");
+};
+
+exports.testInterpretedLteText = function(test) {
+	checkInterpretedOutput(test, "less/lteText.pec");
+};
+
+exports.testTranspiledLteText = function(test) {
+	checkTranspiledOutput(test, "less/lteText.pec");
+};
+
+exports.testInterpretedLteTime = function(test) {
+	checkInterpretedOutput(test, "less/lteTime.pec");
+};
+
+exports.testTranspiledLteTime = function(test) {
+	checkTranspiledOutput(test, "less/lteTime.pec");
 };
 

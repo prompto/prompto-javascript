@@ -17,7 +17,7 @@ exports.parseResource = function(fileName) {
 	return parse(input);
 };
 
-exports.runResource = function(fileName, methodName, args) {
+exports.interpretResource = function(fileName, methodName, args) {
 	var input = getResource(fileName);
 	var decls = parse(input);
 	var context = prompto.runtime.Context.newGlobalContext();
@@ -32,9 +32,11 @@ exports.runResource = function(fileName, methodName, args) {
     }
 };
 
-exports.checkOutput = function(test, fileName) {
-	exports.runResource(fileName);
+exports.checkInterpretedOutput = function(test, fileName) {
+	exports.interpretResource(fileName);
 	checkSameOutput(test, fileName);
 	test.done();
 };
 
+
+exports.checkTranspiledOutput = exports.checkInterpretedOutput;

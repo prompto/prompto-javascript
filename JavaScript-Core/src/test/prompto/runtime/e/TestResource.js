@@ -1,7 +1,9 @@
 require("../../../../exploded");
 
 var Out = require("../utils/Out").Out;
-var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
+var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
+
+var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -13,19 +15,35 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testReadResource = function(test) {
-	checkOutput(test, "resource/readResource.pec");
+exports.testInterpretedReadResource = function(test) {
+	checkInterpretedOutput(test, "resource/readResource.pec");
 };
 
-exports.testReadWithResource = function(test) {
-	checkOutput(test, "resource/readWithResource.pec");
+exports.testTranspiledReadResource = function(test) {
+	checkTranspiledOutput(test, "resource/readResource.pec");
 };
 
-exports.testWriteResource = function(test) {
-	checkOutput(test, "resource/writeResource.pec");
+exports.testInterpretedReadWithResource = function(test) {
+	checkInterpretedOutput(test, "resource/readWithResource.pec");
 };
 
-exports.testWriteWithResource = function(test) {
-	checkOutput(test, "resource/writeWithResource.pec");
+exports.testTranspiledReadWithResource = function(test) {
+	checkTranspiledOutput(test, "resource/readWithResource.pec");
+};
+
+exports.testInterpretedWriteResource = function(test) {
+	checkInterpretedOutput(test, "resource/writeResource.pec");
+};
+
+exports.testTranspiledWriteResource = function(test) {
+	checkTranspiledOutput(test, "resource/writeResource.pec");
+};
+
+exports.testInterpretedWriteWithResource = function(test) {
+	checkInterpretedOutput(test, "resource/writeWithResource.pec");
+};
+
+exports.testTranspiledWriteWithResource = function(test) {
+	checkTranspiledOutput(test, "resource/writeWithResource.pec");
 };
 

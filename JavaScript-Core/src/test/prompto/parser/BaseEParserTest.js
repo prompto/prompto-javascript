@@ -22,7 +22,7 @@ exports.parseResource = function(fileName) {
     return parse(input);
 };
 
-exports.runResource = function(fileName, methodName, args) {
+exports.interpretResource = function(fileName, methodName, args) {
     var input = getResource(fileName);
     var decls = parse(input);
     var context = prompto.runtime.Context.newGlobalContext();
@@ -133,13 +133,14 @@ exports.checkCompletionAt = function(test, code, line, column, expected) {
     test.done();
 };
 
-exports.checkOutput = function(test, fileName) {
+exports.checkInterpretedOutput = function(test, fileName) {
     prompto.store.DataStore.instance = new prompto.memstore.MemStore();
-    exports.runResource(fileName);
+    exports.interpretResource(fileName);
     checkSameOutput(test, fileName);
     test.done();
 };
 
+exports.checkTranspiledOutput = exports.checkInterpretedOutput;
 
 exports.loadDependency = function(libraryName) {
     if (BaseParserTest.coreContext == null)
