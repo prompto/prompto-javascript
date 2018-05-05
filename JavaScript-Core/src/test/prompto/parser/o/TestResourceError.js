@@ -1,7 +1,7 @@
 require("../../../../exploded");
 
 var Out = require("../../runtime/utils/Out").Out;
-var runResource = require("../../parser/BaseOParserTest").runResource;
+var interpretResource = require("../../parser/BaseOParserTest").interpretResource;
 var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
 var prompto = require("../../../../main/prompto/index");
 
@@ -18,7 +18,7 @@ exports.tearDown = function(done) {
 
 exports.testBadRead = function(test) {
 	test.throws( function() {
-		runResource("resourceError/badRead.poc");
+		interpretResource("resourceError/badRead.poc");
 	}, prompto.error.SyntaxError);
 	test.done();
 };
@@ -27,7 +27,7 @@ exports.testBadRead = function(test) {
 
 exports.testBadWrite = function(test) {
 	test.throws( function() {
-		runResource("resourceError/badWrite.poc");
+		interpretResource("resourceError/badWrite.poc");
 	}, prompto.error.SyntaxError);
 	test.done();
 };
@@ -35,7 +35,7 @@ exports.testBadWrite = function(test) {
 
 exports.testBadResource = function(test) {
 	test.throws( function() {
-		runResource("resourceError/badResource.poc");
+		interpretResource("resourceError/badResource.poc");
 	}, prompto.error.SyntaxError);
 	test.done();
 };

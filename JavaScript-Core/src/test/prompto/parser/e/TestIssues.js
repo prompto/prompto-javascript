@@ -1,7 +1,7 @@
 require("../../../../exploded");
 
 var Out = require("../../runtime/utils/Out").Out;
-var runResource = require("../../parser/BaseEParserTest").runResource;
+var interpretResource = require("../../parser/BaseEParserTest").interpretResource;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -14,6 +14,6 @@ exports.tearDown = function(done) {
 };
 
 exports.testMinimal = function(test) {
-	runResource("issues/minimal.pec","main",null);
+	interpretResource("issues/minimal.pec","main",null);
 	test.done();
 };

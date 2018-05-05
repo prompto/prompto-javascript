@@ -7,7 +7,7 @@ var antlr4 = require("antlr4");
 var prompto = require("../../../../main/prompto/index");
 var parseString = require("../../parser/BaseEParserTest").parseString;
 var parseResource = require("../../parser/BaseEParserTest").parseResource;
-var runResource = require("../../parser/BaseEParserTest").runResource;
+var interpretResource = require("../../parser/BaseEParserTest").interpretResource;
 var checkOutput = require("../../parser/BaseEParserTest").checkOutput;
 
 exports.setUp = function(done) {
@@ -41,13 +41,13 @@ exports.testSystemOutPrint = function(test) {
 };
 
 exports.testReturn = function(test) {
-	runResource("native/return.pec");
+	interpretResource("native/return.pec");
 	test.equal(Out.read(), os.type());
 	test.done();
 };
 
 exports.testDateTimeTZName = function(test) {
-    runResource("builtins/dateTimeTZName.pec");
+    interpretResource("builtins/dateTimeTZName.pec");
     var tzName = "UTC"; // TimeZone.getTimeZone("UTC").getDisplayName(Locale.ENGLISH);
     // test.equal(Out.read(), "tzName=" + tzName);
     test.done();
