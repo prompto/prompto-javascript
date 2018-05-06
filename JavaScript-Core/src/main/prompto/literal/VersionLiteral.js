@@ -1,9 +1,9 @@
 var Literal = require("./Literal").Literal;
 var VersionType = require("../type/VersionType").VersionType;
-var Version = require("../value/Version").Version;
+var VersionValue = require("../value/VersionValue").VersionValue;
 
 function VersionLiteral(text) {
-	Literal.call(this, text, Version.Parse(text.substring(2,text.length-1)));
+	Literal.call(this, text, VersionValue.Parse(text.substring(2,text.length-1)));
 	return this;
 }
 
