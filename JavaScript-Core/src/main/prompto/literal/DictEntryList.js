@@ -19,6 +19,18 @@ DictEntryList.prototype.toDialect = function(writer) {
     writer.append('}');
 };
 
+DictEntryList.prototype.transpile = function(transpiler) {
+    transpiler.append('{');
+    if(this.items.length>0) {
+        this.items.forEach(function(item) {
+            item.transpile(transpiler);
+            transpiler.append(",");
+        });
+        transpiler.trimLast(1);
+    }
+    transpiler.append('}');
+};
+
 DictEntryList.prototype.toString = function() {
 	return "{" + this.items.join(", ") + "}";
 };

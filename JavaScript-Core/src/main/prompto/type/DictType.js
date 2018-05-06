@@ -44,6 +44,19 @@ DictType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 
+DictType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof DictType && this.itemType.equals(other.itemType)) {
+        transpiler.append("Object.assign({},");
+        left.transpile(transpiler);
+        transpiler.append(",");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+    }
+};
+
+
 
 DictType.prototype.checkContains = function(context, other) {
     if(other==TextType.instance) {

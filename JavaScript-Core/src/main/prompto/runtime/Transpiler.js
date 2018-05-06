@@ -115,10 +115,19 @@ Transpiler.prototype.dedent = function() {
     return this;
 };
 
+function ObjectToString() {
+
+}
+
+ObjectToString.prototype.toString = function() {
+    return '{' +  Object.keys(this).map(function(key) { return '"' + key + '":' + this[key]; }, this). join(", ") + '}';
+};
+
 Transpiler.transpile = function(context, methodName, cmdLineArgs) {
     try {
         var method = locateMethod(context, methodName, cmdLineArgs);
         var transpiler = new Transpiler(context);
+        transpiler.lines.push("Object.prototype.toString = " + ObjectToString.prototype.toString.toString() + ";");
         method.transpile(transpiler);
         if(transpiler.line!==transpiler.indents) {
             transpiler.lines.push(transpiler.line);

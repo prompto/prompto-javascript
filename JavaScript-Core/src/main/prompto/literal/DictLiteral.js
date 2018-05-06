@@ -29,6 +29,11 @@ DictLiteral.prototype.toDialect = function(writer) {
     this.entries.toDialect(writer);
 };
 
+DictLiteral.prototype.transpile = function(transpiler) {
+    this.entries.transpile(transpiler);
+};
+
+
 DictLiteral.prototype.check = function(context) {
 	if(this.itemType==null)
         this.itemType = this.inferElementType(context);
