@@ -13,7 +13,7 @@ exports.resolve = function() {
 };
 
 function CharacterType()  {
-	NativeType.call(this, new Identifier("CharacterValue"));
+	NativeType.call(this, new Identifier("Character"));
 	return this;
 }
 
