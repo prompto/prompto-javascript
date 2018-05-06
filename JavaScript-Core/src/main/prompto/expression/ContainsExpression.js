@@ -10,7 +10,7 @@ var MatchOp = require("../store/MatchOp").MatchOp;
 var ContOp = require("../grammar/ContOp").ContOp;
 var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function ContainsExpression(left, operator, right) {
     this.left = left;
@@ -89,7 +89,7 @@ ContainsExpression.prototype.interpretValues = function(context, lval, rval) {
         if (this.operator.name.indexOf("NOT_")==0) {
             result = !result;
         }
-        return Bool.ValueOf(result);
+        return BooleanValue.ValueOf(result);
     }
     // error management
     if (this.operator.name.lastIndexOf("IN")==this.operator.name.length-"IN".length) {
@@ -136,7 +136,7 @@ ContainsExpression.prototype.interpretAssert = function(context, test) {
     var lval = this.left.interpret(context);
     var rval = this.right.interpret(context);
     var result = this.interpretValues(context, lval, rval);
-    if(result==Bool.TRUE)
+    if(result==BooleanValue.TRUE)
         return true;
     var writer = new CodeWriter(test.dialect, context);
     this.toDialect(writer);

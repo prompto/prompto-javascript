@@ -2,7 +2,7 @@ var BaseStatement = require("./BaseStatement").BaseStatement;
 var ObjectList = require("../utils/ObjectList").ObjectList;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function IfStatement(condition, statements, elseIfs, elseStmts) {
 	BaseStatement.call(this);
@@ -40,8 +40,8 @@ IfStatement.prototype.interpret = function(context) {
 	for(var i=0;i<this.elements.length;i++) {
 		var element = this.elements[i];
 		var condition = element.condition || null;
-		var test = condition==null ? Bool.TRUE : condition.interpret(context);
-		if(test instanceof Bool && Bool.TRUE.equals(test)) {
+		var test = condition==null ? BooleanValue.TRUE : condition.interpret(context);
+		if(test instanceof BooleanValue && BooleanValue.TRUE.equals(test)) {
 			return element.interpret(context);
 		}
 	}

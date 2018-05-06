@@ -1,7 +1,7 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var BooleanType = require("../type/BooleanType").BooleanType;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var BreakResult = require("../runtime/BreakResult").BreakResult;
 
 function DoWhileStatement(condition, statements) {
@@ -38,7 +38,7 @@ DoWhileStatement.prototype.interpret = function(context) {
 
 DoWhileStatement.prototype.interpretCondition = function(context) {
 	var value = this.condition.interpret(context);
-	if(!(value instanceof Bool)) {
+	if(!(value instanceof BooleanValue)) {
 		throw new InvalidDataError("Expected a Boolean, got:" + typeof(value));
 	}
 	return value.value;

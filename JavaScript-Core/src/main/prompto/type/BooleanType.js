@@ -1,10 +1,10 @@
 var NativeType = require("./NativeType").NativeType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var AnyType = require("./AnyType").AnyType;
-var Bool = null;
+var BooleanValue = null;
 
 exports.resolve = function() {
-    Bool = require("../value/Bool").Bool;
+    BooleanValue = require("../value/BooleanValue").BooleanValue;
 }
 
 function BooleanType()  {
@@ -40,7 +40,7 @@ BooleanType.prototype.checkNot = function(context) {
 
 BooleanType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if (typeof(value)=='boolean') {
-		return Bool.ValueOf(value);
+		return BooleanValue.ValueOf(value);
 	} else {
 		return value; // TODO for now
 	}

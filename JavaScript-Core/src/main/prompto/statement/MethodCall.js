@@ -10,7 +10,7 @@ var PromptoError = require("../error/PromptoError").PromptoError;
 var VoidType = require("../type/VoidType").VoidType;
 var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function MethodCall(method, assignments) {
 	SimpleStatement.call(this);
@@ -130,7 +130,7 @@ MethodCall.prototype.interpret = function(context) {
 
 MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
     var value = this.interpret(context);
-    if(value instanceof Bool)
+    if(value instanceof BooleanValue)
         return value.value;
     else {
         var writer = new CodeWriter(this.dialect, context);

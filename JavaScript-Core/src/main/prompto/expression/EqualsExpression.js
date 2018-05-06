@@ -13,7 +13,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
 var MatchOp = require("../store/MatchOp").MatchOp;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var EqOp = require("../grammar/EqOp").EqOp;
 
 function EqualsExpression(left, operator, right) {
@@ -94,7 +94,7 @@ EqualsExpression.prototype.interpretValues = function(context, lval, rval) {
             equal = !this.contains(context,lval,rval);
             break;
     }
-    return Bool.ValueOf(equal);
+    return BooleanValue.ValueOf(equal);
 };
 
 EqualsExpression.prototype.contains = function(context, lval, rval) {
@@ -164,7 +164,7 @@ EqualsExpression.prototype.interpretAssert = function(context, test) {
     var lval = this.left.interpret(context) || NullValue.instance;
     var rval = this.right.interpret(context) || NullValue.instance;
     var result = this.interpretValues(context, lval, rval);
-    if(result==Bool.TRUE)
+    if(result==BooleanValue.TRUE)
         return true;
     var writer = new CodeWriter(test.dialect, context);
     this.toDialect(writer);

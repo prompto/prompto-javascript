@@ -1,7 +1,7 @@
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var Value = require("../value/Value").Value;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function NotExpression(expression) {
 	this.expression = expression;
@@ -54,7 +54,7 @@ NotExpression.prototype.interpret = function(context) {
 
 NotExpression.prototype.interpretAssert = function(context, test) {
     var result = this.interpret(context);
-    if(result==Bool.TRUE)
+    if(result==BooleanValue.TRUE)
         return true;
     var writer = new CodeWriter(test.dialect, context);
     this.toDialect(writer);

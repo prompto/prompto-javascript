@@ -1,6 +1,6 @@
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Dialect = require("../parser/Dialect").Dialect;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function TernaryExpression(condition, ifTrue, ifFalse) {
     this.condition = condition;
@@ -37,7 +37,7 @@ TernaryExpression.prototype.check = function(context) {
 
 TernaryExpression.prototype.interpret = function(context) {
     var test = this.condition.interpret(context);
-    if(test == Bool.TRUE)
+    if(test == BooleanValue.TRUE)
         return this.ifTrue.interpret(context);
     else
         return this.ifFalse.interpret(context);

@@ -9,7 +9,7 @@ var NullReferenceError = require("../error/NullReferenceError").NullReferenceErr
 var ListValue = require("../value/ListValue").ListValue;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var SetValue = require("../value/SetValue").SetValue;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function FilteredExpression(itemId, source, predicate) {
 	Section.call(this);

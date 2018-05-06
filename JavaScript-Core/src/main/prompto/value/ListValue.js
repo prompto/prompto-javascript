@@ -1,5 +1,5 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
-var Bool = require("./Bool").Bool;
+var BooleanValue = require("./BooleanValue").BooleanValue;
 var Integer = require("./Integer").Integer;
 var ListType = null;
 var SetValue = null;
@@ -86,7 +86,7 @@ ListValue.prototype.filter = function(context, itemId, filter) {
         var o = iter.next();
         context.setValue(itemId, o);
         var test = filter.interpret(context);
-        if(!(test instanceof Bool)) {
+        if(!(test instanceof BooleanValue)) {
             throw new InternalError("Illegal test result: " + test);
         }
         if(test.value) {

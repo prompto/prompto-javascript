@@ -3,7 +3,7 @@ var CursorType = require("../type/CursorType").CursorType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Integer = require("./Integer").Integer;
 var Value = require("./Value").Value;
-var Bool = require("./Bool").Bool;
+var BooleanValue = require("./BooleanValue").BooleanValue;
 
 function Cursor(context, itemType, iterDocs) {
     Value.call(this, new CursorType(itemType));
@@ -81,7 +81,7 @@ Cursor.prototype.filter = function(context, itemId, filter) {
             this.current = this.superNext();
             context.setValue(itemId, this.current);
             var test = filter.interpret(context);
-            if(!(test instanceof Bool)) {
+            if(!(test instanceof BooleanValue)) {
                 throw new InternalError("Illegal test result: " + test);
             }
             if(test.value)

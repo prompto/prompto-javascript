@@ -8,7 +8,7 @@ var BooleanType = require("./BooleanType").BooleanType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var TextValue = null; // circular dependency
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var TextLiteral = null;
 var ListValue = null;
@@ -282,7 +282,7 @@ function resolveBuiltInMethodDeclaration() {
         var value = this.getValue(context).getStorableData();
         var find = context.getValue(new Identifier("value")).getStorableData();
         var startsWith = value.indexOf(find)===0;
-        return Bool.ValueOf(startsWith);
+        return BooleanValue.ValueOf(startsWith);
     };
 
     StartsWithMethodDeclaration.prototype.check = function(context) {
@@ -296,7 +296,7 @@ function resolveBuiltInMethodDeclaration() {
         var value = this.getValue(context).getStorableData();
         var find = context.getValue(new Identifier("value")).getStorableData();
         var endsWith = value.indexOf(find)===value.length-find.length;
-        return Bool.ValueOf(endsWith);
+        return BooleanValue.ValueOf(endsWith);
     };
 
     EndsWithMethodDeclaration.prototype.check = function(context) {

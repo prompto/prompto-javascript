@@ -1,9 +1,9 @@
 var Literal = require("./Literal").Literal;
 var BooleanType = require("../type/BooleanType").BooleanType;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function BooleanLiteral(text) {
-	Literal.call(this, text, Bool.Parse(text));
+	Literal.call(this, text, BooleanValue.Parse(text));
 	return this;
 }
 

@@ -1,7 +1,7 @@
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var Value = require("../value/Value").Value;
-var Bool = require("../value/Bool").Bool;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function AndExpression(left, right) {
 	this.left = left;
@@ -64,7 +64,7 @@ AndExpression.prototype.interpretAssert = function(context, test) {
     var lval = this.left.interpret(context);
     var rval = this.right.interpret(context);
     var result = lval.And(rval);
-    if(result==Bool.TRUE)
+    if(result==BooleanValue.TRUE)
         return true;
     var writer = new CodeWriter(test.dialect, context);
     this.toDialect(writer);
