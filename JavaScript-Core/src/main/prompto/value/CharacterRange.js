@@ -1,4 +1,4 @@
-var Range = require("./Range").Range;
+var RangeValue = require("./RangeValue").RangeValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var CharacterValue = null;
 var CharacterType = null;
@@ -9,11 +9,11 @@ exports.resolve = function() {
 }
 
 function CharacterRange(left, right) {
-	Range.call(this, CharacterType.instance, left, right);
+	RangeValue.call(this, CharacterType.instance, left, right);
 	return this;
 }
 
-CharacterRange.prototype = Object.create(Range.prototype);
+CharacterRange.prototype = Object.create(RangeValue.prototype);
 CharacterRange.prototype.constructor = CharacterRange;
 
 
@@ -33,7 +33,7 @@ CharacterRange.prototype.getItem = function(index) {
 
 /*
 @Override
-public Range<CharacterValue> newInstance(CharacterValue left, CharacterValue right) {
+public RangeValue<CharacterValue> newInstance(CharacterValue left, CharacterValue right) {
 	return new CharacterRange(left, right);
 }
 

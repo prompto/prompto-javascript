@@ -4,7 +4,7 @@ var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRa
 var BaseType = require("../type/BaseType").BaseType;
 var RangeType = require("../type/RangeType").RangeType;
 
-function Range(itemType, left, right) {
+function RangeValue(itemType, left, right) {
     if(!(itemType instanceof BaseType))
         return;
 	Value.call(this, new RangeType(itemType));
@@ -19,16 +19,16 @@ function Range(itemType, left, right) {
 	return this;
 }
 
-Range.prototype = Object.create(Value.prototype);
-Range.prototype.constructor = Range;
+RangeValue.prototype = Object.create(Value.prototype);
+RangeValue.prototype.constructor = RangeValue;
 
-Range.prototype.toString = function() {
+RangeValue.prototype.toString = function() {
 	return "[" + (this.low==null?"":this.low.toString()) + ".."
 			+ (this.high==null?"":this.high.toString()) + "]";
 };
 
-Range.prototype.equals = function(obj) {
-	if(obj instanceof Range) {
+RangeValue.prototype.equals = function(obj) {
+	if(obj instanceof RangeValue) {
 		return this.low.equals(obj.low) && this.high.equals(obj.high);
 	} else {
 		return false;
@@ -36,13 +36,13 @@ Range.prototype.equals = function(obj) {
 };
 
 
-Range.prototype.hasItem = function(context, lval) {
+RangeValue.prototype.hasItem = function(context, lval) {
 	var a = lval.cmp(this.low);
 	var b = this.high.cmp(lval);
 	return a>=0 && b>=0;
 };
 
-Range.prototype.getItemInContext = function(context, index) {
+RangeValue.prototype.getItemInContext = function(context, index) {
 	if (index instanceof IntegerValue) {
 		try {
 			var value = this.getItem(index.IntegerValue());
@@ -60,14 +60,14 @@ Range.prototype.getItemInContext = function(context, index) {
 	}
 };
 
-Range.prototype.slice = function(fi, li) {
+RangeValue.prototype.slice = function(fi, li) {
 	var size = this.size();
 	var first = this.checkFirst(fi, size);
 	var last = this.checkLast(li, size);
 	return this.newInstance(this.getItem(first),this.getItem(last));
 }
 
-Range.prototype.checkFirst = function(fi, size) {
+RangeValue.prototype.checkFirst = function(fi, size) {
 	var value = (fi == null) ? 1 : fi.IntegerValue();
 	if (value < 1 || value > size) {
 		throw new IndexOutOfRangeError();
@@ -75,7 +75,7 @@ Range.prototype.checkFirst = function(fi, size) {
 	return value;
 };
 
-Range.prototype.checkLast = function(li, size) {
+RangeValue.prototype.checkLast = function(li, size) {
 	var value = (li == null) ? size : li.IntegerValue();
 	if (value < 0) {
 		value = size + 1 + li.IntegerValue();
@@ -95,7 +95,7 @@ Range.prototype.checkLast = function(li, size) {
 */
 
 
-Range.prototype.getIterator = function(context) {
+RangeValue.prototype.getIterator = function(context) {
 	return new RangeIterator(context, this);
 };
 
@@ -123,8 +123,8 @@ public boolean isEmpty() {
 public abstract long size();
 public abstract int compare(T o1,T o2);
 public abstract T getItem(long index);
-public abstract Range<T> newInstance(T left,T right);
+public abstract RangeValue<T> newInstance(T left,T right);
 
 */
 
-exports.Range = Range;
+exports.RangeValue = RangeValue;

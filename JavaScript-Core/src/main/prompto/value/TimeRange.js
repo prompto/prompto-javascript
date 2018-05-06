@@ -1,4 +1,4 @@
-var Range = require("./Range").Range;
+var RangeValue = require("./RangeValue").RangeValue;
 var Time = require("./Time").Time;
 var TimeType = null;
 
@@ -7,11 +7,11 @@ exports.resolve = function() {
 };
 
 function TimeRange(left, right) {
-	Range.call(this, TimeType.instance, left, right);
+	RangeValue.call(this, TimeType.instance, left, right);
 	return this;
 }
 
-TimeRange.prototype = Object.create(Range.prototype);
+TimeRange.prototype = Object.create(RangeValue.prototype);
 TimeRange.prototype.constructor = TimeRange;
 
 
@@ -33,7 +33,7 @@ TimeRange.prototype.getItem = function(index) {
 
 /*
 @Override
-public Range<Time> newInstance(Time left, Time right) {
+public RangeValue<Time> newInstance(Time left, Time right) {
 	return new TimeRange(left, right);
 }
 */

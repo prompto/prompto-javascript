@@ -1,4 +1,4 @@
-var Range = require("./Range").Range;
+var RangeValue = require("./RangeValue").RangeValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var IntegerType = null;
 
@@ -7,11 +7,11 @@ exports.resolve =function() {
 };
 
 function IntegerRange(left, right) {
-	Range.call(this, IntegerType.instance, left, right);
+	RangeValue.call(this, IntegerType.instance, left, right);
 	return this;
 }
 
-IntegerRange.prototype = Object.create(Range.prototype);
+IntegerRange.prototype = Object.create(RangeValue.prototype);
 IntegerRange.prototype.constructor = IntegerRange;
 
 IntegerRange.prototype.size = function() {
