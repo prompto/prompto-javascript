@@ -10,7 +10,7 @@ var Operator = require("../grammar/Operator").Operator;
 var NullValue = require("./NullValue").NullValue;
 var Decimal = require("./Decimal").Decimal;
 var Integer = require("./Integer").Integer;
-var Text = require("./Text").Text;
+var TextValue = require("./TextValue").TextValue;
 var Instance = require("./Value").Instance;
 var DataStore = require("../store/DataStore").DataStore;
 var TypeUtils = require("../utils/TypeUtils");
@@ -125,7 +125,7 @@ ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter
     } else if (this.declaration.hasAttribute(context, attrName) || "dbId" == attrName) {
         return this.values[attrName] || NullValue.instance;
     } else if ("text" == attrName) {
-        return new Text(this.toString());
+        return new TextValue(this.toString());
     } else
         return NullValue.instance;
 };

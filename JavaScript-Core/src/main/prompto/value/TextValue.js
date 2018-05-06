@@ -5,71 +5,71 @@ var TextType = require("../type/TextType").TextType;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var removeAccents = require("../utils/Utils").removeAccents;
 
-function Text(value) {
+function TextValue(value) {
 	Value.call(this, TextType.instance);
 	this.value = value;
 	return this;
 }
 
-Text.prototype = Object.create(Value.prototype);
-Text.prototype.constructor = Text;
+TextValue.prototype = Object.create(Value.prototype);
+TextValue.prototype.constructor = TextValue;
 
-Text.prototype.getStorableData = function() {
+TextValue.prototype.getStorableData = function() {
     return this.value;
 };
 
-Text.prototype.getValue = function() {
+TextValue.prototype.getValue = function() {
 	return this.value;
 };
 
-Text.prototype.toString = function() {
+TextValue.prototype.toString = function() {
 	return this.value;
 };
 
-Text.prototype.Add = function(context, value) {
-	return new Text(this.value + value.toString());
+TextValue.prototype.Add = function(context, value) {
+	return new TextValue(this.value + value.toString());
 };
 
-Text.prototype.Multiply = function(context, value) {
+TextValue.prototype.Multiply = function(context, value) {
 	if (value instanceof Integer) {
 		var count = value.IntegerValue();
 		if (count < 0) {
 			throw new SyntaxError("Negative repeat count:" + count);
 		} else if (count == 0) {
-			return new Text("");
+			return new TextValue("");
 		} else if (count == 1) {
-			return new Text(this.value);
+			return new TextValue(this.value);
 		} else {
 			var all = [];
 			while (--count >= 0) {
 				all[count] = this.value;
 			}
 			var value = all.join("");
-			return new Text(value);
+			return new TextValue(value);
 		}
 	} else {
 		throw new SyntaxError("Illegal: Chararacter * " + typeof(value));
 	}
 };
 
-Text.prototype.CompareTo = function(context, value) {
-	if(value instanceof Text || value instanceof Character) {
+TextValue.prototype.CompareTo = function(context, value) {
+	if(value instanceof TextValue || value instanceof Character) {
 		return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
 	} else {
-		throw new SyntaxError("Illegal: Compare Text with " + typeof(value));
+		throw new SyntaxError("Illegal: Compare TextValue with " + typeof(value));
 	}
 };
 
-Text.prototype.hasItem = function(context, value) {
-	if (value instanceof Character || value instanceof Text) {
+TextValue.prototype.hasItem = function(context, value) {
+	if (value instanceof Character || value instanceof TextValue) {
 		return this.value.indexOf(value.value) >= 0;
 	} else {
-		throw new SyntaxError("Illegal contains: Text + " + typeof(value));
+		throw new SyntaxError("Illegal contains: TextValue + " + typeof(value));
 	}
 };
 
 
-Text.prototype.getMemberValue = function(context, name) {
+TextValue.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
 		return new Integer(this.value.length);
 	} else {
@@ -77,7 +77,7 @@ Text.prototype.getMemberValue = function(context, name) {
 	}
 };
 
-Text.prototype.getItemInContext = function(context, index) {
+TextValue.prototype.getItemInContext = function(context, index) {
 	try {
 		if (index instanceof Integer) {
 			return new Character(this.value[index.IntegerValue() - 1]);
@@ -94,7 +94,7 @@ Text.prototype.getItemInContext = function(context, index) {
 
 }
 
-Text.prototype.getIterator = function(context) {
+TextValue.prototype.getIterator = function(context) {
 	return new TextIterator(this.value);
 };
 
@@ -113,17 +113,17 @@ TextIterator.prototype.next = function() {
 };
 
 
-Text.prototype.convertToJavaScript = function() {
+TextValue.prototype.convertToJavaScript = function() {
 	return this.value;
 };
 
-Text.prototype.slice = function(fi, li) {
+TextValue.prototype.slice = function(fi, li) {
 	var first = this.checkFirst(fi);
 	var last = this.checkLast(li);
-	return new Text(this.value.slice(first - 1, last));
+	return new TextValue(this.value.slice(first - 1, last));
 };
 
-Text.prototype.checkFirst = function(fi) {
+TextValue.prototype.checkFirst = function(fi) {
 	var value = (fi == null) ? 1 : fi.IntegerValue();
 	if (value < 1 || value > this.value.length) {
 		throw new IndexOutOfRangeError();
@@ -131,7 +131,7 @@ Text.prototype.checkFirst = function(fi) {
 	return value;
 };
 
-Text.prototype.checkLast = function(li) {
+TextValue.prototype.checkLast = function(li) {
 	var value = (li == null) ? this.value.length : li.IntegerValue();
 	if (value < 0) {
 		value = this.value.length + 1 + li.IntegerValue();
@@ -142,16 +142,16 @@ Text.prototype.checkLast = function(li) {
 	return value;
 };
 
-Text.prototype.equals = function(obj) {
-	if (obj instanceof Text) {
+TextValue.prototype.equals = function(obj) {
+	if (obj instanceof TextValue) {
 		return this.value == obj.value;
 	} else {
 		return false;
 	}
 };
 
-Text.prototype.Roughly = function(context, obj) {
-    if (obj instanceof Text || obj instanceof Character) {
+TextValue.prototype.Roughly = function(context, obj) {
+    if (obj instanceof TextValue || obj instanceof Character) {
         return removeAccents(this.value.toLowerCase()) == removeAccents(obj.value.toLowerCase());
     } else {
         return false;
@@ -159,8 +159,8 @@ Text.prototype.Roughly = function(context, obj) {
 };
 
 
-Text.prototype.Contains = function(context, obj) {
-    if (obj instanceof Text || obj instanceof Character) {
+TextValue.prototype.Contains = function(context, obj) {
+    if (obj instanceof TextValue || obj instanceof Character) {
         return this.value.indexOf(obj.value) >= 0;
     } else {
         return false;
@@ -168,13 +168,13 @@ Text.prototype.Contains = function(context, obj) {
 };
 
 
-Text.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
+TextValue.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     if(Array.isArray(json))
         json.push(this.value);
     else
         json[fieldName] = this.value;
 };
 
-exports.Text = Text;
+exports.TextValue = TextValue;
 
 

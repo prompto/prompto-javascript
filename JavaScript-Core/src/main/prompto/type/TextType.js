@@ -7,7 +7,7 @@ var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
-var Text = null; // circular dependency
+var TextValue = null; // circular dependency
 var Bool = require("../value/Bool").Bool;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var TextLiteral = null;
@@ -18,12 +18,12 @@ exports.resolve = function() {
     ListType = require("./ListType").ListType;
     TextLiteral = require("../literal/TextLiteral").TextLiteral;
     ListValue = require("../value/ListValue").ListValue;
-	Text = require("../value/Text").Text;
+	TextValue = require("../value/TextValue").TextValue;
     resolveBuiltInMethodDeclaration();
 }
 
 function TextType()  {
-	NativeType.call(this, new Identifier("Text"));
+	NativeType.call(this, new Identifier("TextValue"));
 	return this;
 }
 
@@ -96,7 +96,7 @@ TextType.prototype.checkSlice = function(context) {
 
 TextType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if (typeof(value) == 'string') {
-		return new Text(value);
+		return new TextValue(value);
 	} else {
 		return value; // TODO for now
 	}
@@ -184,7 +184,7 @@ function resolveBuiltInMethodDeclaration() {
 
     ToLowerCaseMethodDeclaration.prototype.interpret = function(context) {
         var value = this.getValue(context).getStorableData();
-        return new Text(value.toLowerCase());
+        return new TextValue(value.toLowerCase());
     };
 
     ToLowerCaseMethodDeclaration.prototype.check = function(context) {
@@ -196,7 +196,7 @@ function resolveBuiltInMethodDeclaration() {
 
     ToUpperCaseMethodDeclaration.prototype.interpret = function(context) {
         var value = this.getValue(context).getStorableData();
-        return new Text(value.toUpperCase());
+        return new TextValue(value.toUpperCase());
     };
 
     ToUpperCaseMethodDeclaration.prototype.check = function(context) {
@@ -209,7 +209,7 @@ function resolveBuiltInMethodDeclaration() {
     ToCapitalizedMethodDeclaration.prototype.interpret = function(context) {
         var value = this.getValue(context).getStorableData();
         value = value.replace( /(^|\s)([a-z])/g , function(m, p1, p2){ return p1 + p2.toUpperCase(); } );
-        return new Text(value);
+        return new TextValue(value);
     };
 
     ToCapitalizedMethodDeclaration.prototype.check = function(context) {
@@ -222,7 +222,7 @@ function resolveBuiltInMethodDeclaration() {
     TrimMethodDeclaration.prototype.interpret = function(context) {
         var value = this.getValue(context).getStorableData();
         value = value.trim();
-        return new Text(value);
+        return new TextValue(value);
     };
 
     TrimMethodDeclaration.prototype.check = function(context) {
@@ -237,7 +237,7 @@ function resolveBuiltInMethodDeclaration() {
         var toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
         var replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
         value = value.replace(toReplace, replaceWith);
-        return new Text(value);
+        return new TextValue(value);
     };
 
     ReplaceMethodDeclaration.prototype.check = function(context) {
@@ -253,7 +253,7 @@ function resolveBuiltInMethodDeclaration() {
         var toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
         var replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
         value = value.replace(new RegExp(toReplace, 'g'), replaceWith);
-        return new Text(value);
+        return new TextValue(value);
     };
 
     ReplaceAllMethodDeclaration.prototype.check = function(context) {
@@ -267,7 +267,7 @@ function resolveBuiltInMethodDeclaration() {
         var value = this.getValue(context).getStorableData();
         var sep = context.getValue(new Identifier("separator")).getStorableData();
         var list = value.split(sep);
-        var texts = list.map(function(s) { return new Text(s); });
+        var texts = list.map(function(s) { return new TextValue(s); });
         return new ListValue(TextType.instance, texts);
     };
 

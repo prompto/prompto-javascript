@@ -1,5 +1,5 @@
 var Symbol = require("./Symbol").Symbol;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 
 function CategorySymbol(id, assignments) {
 	Symbol.call(this, id);
@@ -63,7 +63,7 @@ CategorySymbol.prototype.makeInstance = function(context) {
                 instance.setMember(context, assignment.name, value);
             });
         }
-        instance.setMember(context, "name", new Text(this.name));
+        instance.setMember(context, "name", new TextValue(this.name));
         instance.mutable = false;
         this.instance = instance;
     }

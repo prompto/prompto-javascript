@@ -3,7 +3,7 @@ var Period = require("./Period").Period;
 var LocalDate = require("./LocalDate").LocalDate;
 var Time = require("./Time").Time;
 var Integer = require("./Integer").Integer;
-var Text = require("./Text").Text;
+var TextValue = require("./TextValue").TextValue;
 var DateTimeType = null;
 
 exports.resolve = function() {
@@ -231,7 +231,7 @@ DateTime.prototype.getMemberValue = function(context, name) {
 	} else if ("tzOffset"==name) {
 		return new Integer(this.tzOffset);
 	} else if ("tzName"==name) {
-		return new Text("Z");
+		return new TextValue("Z");
 	} else {
         return Value.prototype.getMemberValue.call(this, context, name);
 	}

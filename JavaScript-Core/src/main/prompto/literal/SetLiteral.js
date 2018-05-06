@@ -7,7 +7,7 @@ var IntegerType = require("../type/IntegerType").IntegerType;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var Decimal = require("../value/Decimal").Decimal;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 var ExpressionList = require("../utils/ExpressionList").ExpressionList;
 var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
 
@@ -50,7 +50,7 @@ SetLiteral.prototype.interpretPromotion = function(item) {
     if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
         return new Decimal(item.DecimalValue());
     else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
-        return new Text(item.value);
+        return new TextValue(item.value);
     else
         return item;
 };

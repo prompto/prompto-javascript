@@ -1,11 +1,11 @@
 var NullValue = null;
-var Text = null;
+var TextValue = null;
 var Integer = null;
 var Decimal = null;
 
 exports.resolve = function() {
     NullValue = require("./NullValue").NullValue;
-    Text = require("./Text").Text;
+    TextValue = require("./TextValue").TextValue;
     Integer = require("./Integer").Integer;
     Decimal = require("./Decimal").Decimal;
 };
@@ -74,7 +74,7 @@ Value.prototype.CompareTo = function(context, value) {
 
 Value.prototype.getMemberValue = function(context, name) {
     if("text" == name) {
-        return new Text(this.toString());
+        return new TextValue(this.toString());
     }
     else
 	    throw new SyntaxError("No member support for " + this.constructor.name);

@@ -4,7 +4,7 @@ var NullReferenceError = require("../error/NullReferenceError").NullReferenceErr
 var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
 var TextType = require("../type/TextType").TextType;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 
 function ReadAllExpression(resource) {
 	this.resource = resource;
@@ -42,7 +42,7 @@ ReadAllExpression.prototype.interpret = function(context) {
 	}
     try {
         var s = res.readFully();
-        return new Text(s);
+        return new TextValue(s);
     } finally {
         res.close();
     }

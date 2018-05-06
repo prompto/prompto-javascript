@@ -7,7 +7,7 @@ var EnumeratedCategoryType = null;
 var CategoryType = null;
 var NullValue = require("../value/NullValue").NullValue;
 var Value = require("../value/Value").Value;
-var Text = require("../value/Text").Text;
+var Text = require("../value/TextValue").Text;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;

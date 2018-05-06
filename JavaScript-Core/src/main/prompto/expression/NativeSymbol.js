@@ -1,6 +1,6 @@
 var Symbol = require("./Symbol").Symbol;
 var Dialect = require("../parser/Dialect").Dialect;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 
 function NativeSymbol(id, expression) {
 	Symbol.call(this, id);
@@ -52,7 +52,7 @@ NativeSymbol.prototype.interpret = function(context) {
 
 NativeSymbol.prototype.getMemberValue = function(context, name, autoCreate) {
     if("name" === name)
-        return new Text(this.name);
+        return new TextValue(this.name);
     else if("value" === name)
         return this.expression.interpret(context);
     else

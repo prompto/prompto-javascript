@@ -2,13 +2,13 @@ var MissingType = require("../type/MissingType").MissingType;
 var NullValue = require("../value/NullValue").NullValue;
 var Integer = require("../value/Integer").Integer;
 var Decimal = require("../value/Decimal").Decimal;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 
 convertFromJavaScript = function(value) {
     if(value==null) {
         return NullValue.instance;
     } else if(typeof(value)=='string') {
-        return new Text(value);
+        return new TextValue(value);
     } else if(typeof(value)=='number') {
         if(value == Math.floor(value))
             return new Integer(value);

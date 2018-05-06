@@ -2,7 +2,7 @@ var Value = require("./Value").Value;
 var NullValue = require("./NullValue").NullValue;
 var SetValue = require("./SetValue").SetValue;
 var ListValue = require("./ListValue").ListValue;
-var Text = require("./Text").Text;
+var TextValue = require("./TextValue").TextValue;
 var Integer = require("./Integer").Integer;
 var InternalError = require("../error/InternalError").InternalError;
 var BaseType = require("../type/BaseType").BaseType;
@@ -63,10 +63,10 @@ Dictionary.prototype.Add = function(context, value) {
 };
 
 Dictionary.prototype.hasItem = function(context, value) {
-    if (value instanceof Text) {
+    if (value instanceof TextValue) {
         return value.value in this.dict;
     } else {
-        throw new SyntaxError("Only Text key type supported by Dictionary");
+        throw new SyntaxError("Only TextValue key type supported by Dictionary");
     }
 };
 
@@ -77,7 +77,7 @@ Dictionary.prototype.getMemberValue = function(context, name) {
     } else if ("keys"==name) {
         var set_ = new SetValue(TextType.instance);
         for(p in this.dict) {
-            set_.add(new Text(p));
+            set_.add(new TextValue(p));
         }
         return set_;
     } else if ("values"==name) {
@@ -93,14 +93,14 @@ Dictionary.prototype.getMemberValue = function(context, name) {
 
 
 Dictionary.prototype.setItemInContext = function(context, index, value) {
-    if (index instanceof Text) {
+    if (index instanceof TextValue) {
         this.dict[index] = value;
     } else
         throw new SyntaxError("No such item:" + index.toString())
 };
 
 Dictionary.prototype.getItemInContext = function(context, index) {
-    if (index instanceof Text)
+    if (index instanceof TextValue)
     {
         var value = this.dict[index] || NullValue.instance;
         if (value instanceof Value) {
@@ -189,7 +189,7 @@ KVPValue.prototype.constructor = KVPValue;
 
 KVPValue.prototype.getMemberValue = function(context, name) {
     if ("key"==name) {
-        return new Text(this.key);
+        return new TextValue(this.key);
     } else if ("value"==name) {
         if (this.value.interpret) {
             this.value = this.value.interpret(context);

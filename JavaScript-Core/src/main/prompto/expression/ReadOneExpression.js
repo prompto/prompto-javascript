@@ -4,7 +4,7 @@ var NullReferenceError = require("../error/NullReferenceError").NullReferenceErr
 var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
 var TextType = require("../type/TextType").TextType;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 
 function ReadOneExpression(resource) {
 	this.resource = resource;
@@ -43,7 +43,7 @@ ReadOneExpression.prototype.interpret = function(context) {
 		throw new InvalidResourceError("Not readable");
 	}
     var s = res.readLine();
-    return new Text(s);
+    return new TextValue(s);
 };
 
 exports.ReadOneExpression = ReadOneExpression;

@@ -7,7 +7,7 @@ var ListType = require("./ListType").ListType;
 var RangeType = require("./RangeType").RangeType;
 var TextType = null;
 var AnyType = require("./AnyType").AnyType;
-var Text = null;
+var TextValue = null;
 var Integer = require("../value/Integer").Integer;
 var IntegerRange = require("../value/IntegerRange").IntegerRange;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -18,7 +18,7 @@ exports.resolve = function() {
 	CharacterType = require("./CharacterType").CharacterType;
 	TextType = require("./TextType").TextType;
 	PeriodType = require("./PeriodType").PeriodType;
-	Text = require("../value/Text").Text;
+	TextValue = require("../value/TextValue").TextValue;
     resolveBuiltInMethodDeclaration();
 }
 
@@ -167,7 +167,7 @@ function resolveBuiltInMethodDeclaration() {
         var value = this.getValue(context).getStorableData();
         var format = context.getValue(new Identifier("format")).getStorableData();
         value = this.format(value, format);
-        return new Text(value);
+        return new TextValue(value);
     };
 
     FormatMethodDeclaration.prototype.check = function(context) {

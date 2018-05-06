@@ -1,5 +1,5 @@
 var Literal = require("./Literal").Literal;
-var Text = require("../value/Text").Text;
+var TextValue = require("../value/TextValue").TextValue;
 var TextType = require("../type/TextType").TextType;
 
 /*jshint evil:true*/
@@ -8,7 +8,7 @@ function unescape(text) {
 }
 
 function TextLiteral(text) {
-	Literal.call(this, text, new Text(unescape(text)));
+	Literal.call(this, text, new TextValue(unescape(text)));
 	return this;
 }
 

@@ -1,6 +1,6 @@
 var NullValue = require("./NullValue").NullValue;
 var Value = require("./Value").Value;
-var Text = require("./Text").Text;
+var TextValue = require("./TextValue").TextValue;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
 function Document(values) {
@@ -32,7 +32,7 @@ Document.prototype.getMemberValue = function(context, name, autoCreate) {
     if(result)
         return result;
     else if("text" == name)
-        return new Text(this.toString());
+        return new TextValue(this.toString());
     else if(autoCreate) {
         result = new Document();
         this.values[name] = result;
@@ -47,7 +47,7 @@ Document.prototype.setMember = function(context, name, value) {
 
 
 Document.prototype.getItemInContext = function(context, index) {
-    if (index instanceof Text) {
+    if (index instanceof TextValue) {
         // TODO autocreate
         return this.values[index.value] || NullValue.instance;
     } else {
@@ -58,7 +58,7 @@ Document.prototype.getItemInContext = function(context, index) {
 
 
 Document.prototype.setItemInContext = function(context, index, value) {
-    if (index instanceof Text) {
+    if (index instanceof TextValue) {
         this.values[index.value] = value
     } else {
         throw new SyntaxError("No such item:" + index.toString());
