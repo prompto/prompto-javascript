@@ -3,17 +3,17 @@ var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
 var AnyType = require("./AnyType").AnyType;
-var Character = null;
+var CharacterValue = null;
 var RangeType = require("./RangeType").RangeType;
 var CharacterRange = require("../value/CharacterRange").CharacterRange;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
-    Character = require("../value/Character").Character;
+    CharacterValue = require("../value/CharacterValue").CharacterValue;
 };
 
 function CharacterType()  {
-	NativeType.call(this, new Identifier("Character"));
+	NativeType.call(this, new Identifier("CharacterValue"));
 	return this;
 }
 
@@ -25,9 +25,9 @@ CharacterType.instance = new CharacterType();
 
 CharacterType.prototype.nativeCast = function(context, value) {
     if(value.type instanceof TextType && value.value.length>=1)
-        return new Character(value.value.substring(0, 1));
+        return new CharacterValue(value.value.substring(0, 1));
     else
-        throw new InvalidDataError("Cannot convert " + value.toString() + " to Character");
+        throw new InvalidDataError("Cannot convert " + value.toString() + " to CharacterValue");
 };
 
 
@@ -76,7 +76,7 @@ CharacterType.prototype.checkRange = function(context, other) {
 };
 
 CharacterType.prototype.newRange = function(left, right) {
-	if(left instanceof Character && right instanceof Character) {
+	if(left instanceof CharacterValue && right instanceof CharacterValue) {
 		return new CharacterRange(left, right);
 	} else {
 		return CharacterType.prototype.newRange.call(this, left, right);

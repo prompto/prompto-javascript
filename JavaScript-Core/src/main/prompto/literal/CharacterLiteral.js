@@ -1,5 +1,5 @@
 var Literal = require("./Literal").Literal;
-var Character = require("../value/Character").Character;
+var CharacterValue = require("../value/CharacterValue").CharacterValue;
 var CharacterType = require("../type/CharacterType").CharacterType;
 
 /*jshint evil:true*/
@@ -8,7 +8,7 @@ function unescape(text) {
 }
 
 function CharacterLiteral(text) {
-	Literal.call(this, text, new Character(unescape(text)));
+	Literal.call(this, text, new CharacterValue(unescape(text)));
 	return this;
 }
 

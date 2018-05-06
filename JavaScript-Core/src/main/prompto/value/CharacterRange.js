@@ -1,10 +1,10 @@
 var Range = require("./Range").Range;
 var Integer = require("./Integer").Integer;
-var Character = null;
+var CharacterValue = null;
 var CharacterType = null;
 
 exports.resolve = function() {
-    Character = require("./Character").Character;
+    CharacterValue = require("./CharacterValue").CharacterValue;
     CharacterType = require("../type/CharacterType").CharacterType;
 }
 
@@ -27,13 +27,13 @@ CharacterRange.prototype.getItem = function(index) {
 	if(result>this.high.value.charCodeAt(0)) {
 		throw new IndexOutOfBoundsException();
 	} else {
-		return new Character(String.fromCharCode(result));
+		return new CharacterValue(String.fromCharCode(result));
 	}
 };
 
 /*
 @Override
-public Range<Character> newInstance(Character left, Character right) {
+public Range<CharacterValue> newInstance(CharacterValue left, CharacterValue right) {
 	return new CharacterRange(left, right);
 }
 

@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Character = require("./Character").Character;
+var CharacterValue = require("./CharacterValue").CharacterValue;
 var Integer = require("./Integer").Integer;
 var TextType = require("../type/TextType").TextType;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
@@ -53,7 +53,7 @@ TextValue.prototype.Multiply = function(context, value) {
 };
 
 TextValue.prototype.CompareTo = function(context, value) {
-	if(value instanceof TextValue || value instanceof Character) {
+	if(value instanceof TextValue || value instanceof CharacterValue) {
 		return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
 	} else {
 		throw new SyntaxError("Illegal: Compare TextValue with " + typeof(value));
@@ -61,7 +61,7 @@ TextValue.prototype.CompareTo = function(context, value) {
 };
 
 TextValue.prototype.hasItem = function(context, value) {
-	if (value instanceof Character || value instanceof TextValue) {
+	if (value instanceof CharacterValue || value instanceof TextValue) {
 		return this.value.indexOf(value.value) >= 0;
 	} else {
 		throw new SyntaxError("Illegal contains: TextValue + " + typeof(value));
@@ -80,7 +80,7 @@ TextValue.prototype.getMemberValue = function(context, name) {
 TextValue.prototype.getItemInContext = function(context, index) {
 	try {
 		if (index instanceof Integer) {
-			return new Character(this.value[index.IntegerValue() - 1]);
+			return new CharacterValue(this.value[index.IntegerValue() - 1]);
 		} else {
 			throw new InvalidDataError("No such item:" + index.toString());
 		}
@@ -109,7 +109,7 @@ TextIterator.prototype.hasNext = function() {
 };
 
 TextIterator.prototype.next = function() {
-	return new Character(this.value[++this.index]);
+	return new CharacterValue(this.value[++this.index]);
 };
 
 
@@ -151,7 +151,7 @@ TextValue.prototype.equals = function(obj) {
 };
 
 TextValue.prototype.Roughly = function(context, obj) {
-    if (obj instanceof TextValue || obj instanceof Character) {
+    if (obj instanceof TextValue || obj instanceof CharacterValue) {
         return removeAccents(this.value.toLowerCase()) == removeAccents(obj.value.toLowerCase());
     } else {
         return false;
@@ -160,7 +160,7 @@ TextValue.prototype.Roughly = function(context, obj) {
 
 
 TextValue.prototype.Contains = function(context, obj) {
-    if (obj instanceof TextValue || obj instanceof Character) {
+    if (obj instanceof TextValue || obj instanceof CharacterValue) {
         return this.value.indexOf(obj.value) >= 0;
     } else {
         return false;
