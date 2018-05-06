@@ -22,6 +22,9 @@ IntegerLiteral.prototype.check = function(context) {
 	return IntegerType.instance;
 };
 
+IntegerLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
 
 function MinIntegerLiteral() {
     IntegerLiteral.call(this, "MIN_INTEGER", -0x20000000000000);

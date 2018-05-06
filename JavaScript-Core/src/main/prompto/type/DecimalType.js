@@ -36,6 +36,17 @@ DecimalType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+DecimalType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" + ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+};
+
+
 DecimalType.prototype.checkSubstract = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return this;

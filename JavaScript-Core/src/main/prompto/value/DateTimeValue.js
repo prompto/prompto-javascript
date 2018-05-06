@@ -10,45 +10,9 @@ exports.resolve = function() {
     DateTimeType = require("../type/DateTimeType").DateTimeType;
 };
 
-function parseOffset(text) {
-    var hours = parseInt(text.substring(0,2));
-    var i = text[2]==':' ? 3 : 2;
-    var minutes = parseInt(text.substring(i,i+2));
-    return ((hours * 60) + minutes) * 60;
-}
-
-function parseTZOffset(text) {
-    var i = text.indexOf('Z');
-    if(i>0)
-        return 0;
-    i = text.indexOf('+');
-    if(i>0)
-        return parseOffset(text.substring(i+1));
-    i = text.lastIndexOf('-');
-    if(i>10) // skip date separator
-        return -parseOffset(text.substring(i+1));
-    return 0;
-}
-
-function parseUTCDate(text) {
-    var i = text.indexOf('Z');
-    if(i<0) {
-        i = text.indexOf('+');
-        if(i>0)
-            text = text.substring(0, i);
-        else {
-            i = text.lastIndexOf('-');
-            if(i>10) // skip date separator
-                text = text.substring(0, i);
-        }
-    }
-    return new Date(text);
-}
-
-function DateTimeValue(date, tzOffset) {
+function DateTimeValue(value) {
 	Value.call(this, DateTimeType.instance);
-	this.date = date;
-    this.tzOffset = tzOffset;
+	this.value = value;
 	return this;
 }
 
@@ -56,74 +20,23 @@ DateTimeValue.prototype = Object.create(Value.prototype);
 DateTimeValue.prototype.constructor = DateTimeValue;
 
 DateTimeValue.prototype.getStorableData = function() {
-    return { date: this.date, tzOffset: this.tzOffset };
+    return this.value;
 };
 
-
-DateTimeValue.Parse = function(text) {
-    var date = parseUTCDate(text);
-    var tzOffset = parseTZOffset(text);
-	return new DateTimeValue(date, tzOffset);
-};
 
 DateTimeValue.prototype.toString = function() {
-    var s = "" +
-    ("0000" + this.date.getUTCFullYear()).slice(-4) +
-    "-" +
-    ("00" + (1 + this.date.getUTCMonth())).slice(-2) +
-    "-" +
-    ("00" + this.date.getUTCDate()).slice(-2) +
-    "T" +
-    ("00" + this.date.getUTCHours()).slice(-2) +
-    ":" +
-    ("00" + this.date.getUTCMinutes()).slice(-2) +
-    ":" +
-    ("00" + this.date.getUTCSeconds()).slice(-2) +
-    "." +
-    ("000" + this.date.getUTCMilliseconds()).slice(-3);
-    var offset = this.tzOffset;
-    if(offset==0)
-        s += "Z";
-    else {
-        if(offset>0)
-            s += "+";
-        else {
-            offset = -offset;
-            s += "-";
-        }
-        s += ("00" + Math.floor(offset/3600)).slice(-2);
-        s += ":";
-        s += ("00" + Math.floor((offset%3600)/60)).slice(-2);
-    }
-	return s;
+    return this.value.toString();
 };
 
 DateTimeValue.prototype.Add = function(context, value) {
 	if (value instanceof PeriodValue) {
-		return this.addPeriod(value);
+        var result = this.value.addPeriod(value.value);
+        return new DateTimeValue(result);
 	} else {
 		throw new SyntaxError("Illegal: DateTimeValue + " + typeof(value));
 	}
 };
 
-DateTimeValue.prototype.addPeriod = function(value) {
-	var date = new Date();
-	var year = this.date.getUTCFullYear() + (value.years || 0);
-	date.setUTCFullYear(year);
-	var month = this.date.getUTCMonth() + (value.months || 0);
-	date.setUTCMonth(month);
-	var day = this.date.getUTCDate() + ((value.weeks || 0) * 7) + (value.days || 0);
-	date.setUTCDate(day);
-	var hour = this.date.getUTCHours() + (value.hours || 0);
-	date.setUTCHours(hour);
-	var minute = this.date.getUTCMinutes() + (value.minutes || 0);
-	date.setUTCMinutes(minute);
-	var second = this.date.getUTCSeconds() + (value.seconds || 0);
-	date.setUTCSeconds(second);
-	var millis = this.date.getUTCMilliseconds() + (value.millis || 0);
-	date.setUTCMilliseconds(millis);
-	return new DateTimeValue(date, this.tzOffset);
-};
 
 DateTimeValue.prototype.Subtract = function(context, value) {
 	if (value instanceof DateTimeValue) {
