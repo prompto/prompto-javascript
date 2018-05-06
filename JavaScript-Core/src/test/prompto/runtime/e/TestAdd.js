@@ -15,7 +15,7 @@ exports.tearDown = function(done) {
 	done();
 };
 
-/*
+
 exports.testInterpretedAddCharacter = function(test) {
 	checkInterpretedOutput(test, "add/addCharacter.pec");
 };
@@ -27,11 +27,11 @@ exports.testTranspiledAddCharacter = function(test) {
 exports.testInterpretedAddDate = function(test) {
 	checkInterpretedOutput(test, "add/addDate.pec");
 };
-*/
+
 exports.testTranspiledAddDate = function(test) {
 	checkTranspiledOutput(test, "add/addDate.pec");
 };
-/*
+
 exports.testInterpretedAddDateTime = function(test) {
 	checkInterpretedOutput(test, "add/addDateTime.pec");
 };
@@ -160,4 +160,3 @@ exports.testTranspiledAddTuple = function(test) {
 	checkTranspiledOutput(test, "add/addTuple.pec");
 };
 
-*/

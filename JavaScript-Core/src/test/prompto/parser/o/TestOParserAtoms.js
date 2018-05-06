@@ -567,7 +567,7 @@ exports.testDateTime = function(test) {
 	test.ok(literal);
 	test.ok(literal instanceof prompto.literal.DateTimeLiteral);
 	test.equal("'2012-10-09T15:18:17'", literal.text);
-	var date = literal.getValue().date
+	var date = literal.getValue().value.date
 	test.equal(date.getUTCFullYear(), 2012);
 	test.equal(date.getUTCMonth(), 9);
 	test.equal(date.getUTCDate(), 9);
@@ -585,7 +585,7 @@ exports.testDateTimeWithMillis = function(test) {
 	test.ok(literal);
 	test.ok(literal instanceof prompto.literal.DateTimeLiteral);
 	test.equal("'2012-10-09T15:18:17.487'", literal.text);
-	test.equal(literal.getValue().date.getUTCMilliseconds(), 487);
+	test.equal(literal.getValue().value.date.getUTCMilliseconds(), 487);
 	test.done();
 };
 
@@ -605,7 +605,7 @@ exports.testDateTimeWithTZ = function(test) {
 	expected.setUTCMinutes(18);
 	expected.setUTCSeconds(17);
 	expected.setUTCMilliseconds(0);
-	var actual = literal.getValue().date.valueOf() + literal.getValue().tzOffset*1000;
+	var actual = literal.getValue().value.date.valueOf() + literal.getValue().value.tzOffset*1000;
 	test.equal(expected.valueOf(), actual);
 	test.done();
 };

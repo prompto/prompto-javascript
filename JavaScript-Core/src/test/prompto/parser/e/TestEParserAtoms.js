@@ -731,7 +731,7 @@ exports.testDateTime = function (test) {
     expected.setUTCMinutes(18);
     expected.setUTCSeconds(17);
     expected.setUTCMilliseconds(0);
-    test.equal(expected.toISOString(), literal.getValue().date.toISOString());
+    test.equal(expected.toISOString(), literal.getValue().value.date.toISOString());
     test.done();
 };
 
@@ -751,7 +751,7 @@ exports.testDateTimeWithMillis = function (test) {
     expected.setUTCMinutes(18);
     expected.setUTCSeconds(17);
     expected.setUTCMilliseconds(487);
-    test.equal(expected.toISOString(), literal.getValue().date.toISOString());
+    test.equal(expected.toISOString(), literal.getValue().value.date.toISOString());
     test.done();
 };
 
