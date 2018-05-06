@@ -88,7 +88,7 @@ DocumentExpression.prototype.toDialect = function(writer) {
 };
 
 DocumentExpression.prototype.toEDialect = function(writer) {
-    writer.append("DocumentValue");
+    writer.append("Document");
     if (this.source) {
         writer.append(" from ");
         this.source.toDialect(writer);
@@ -96,14 +96,14 @@ DocumentExpression.prototype.toEDialect = function(writer) {
 };
 
 DocumentExpression.prototype.toMDialect = function(writer) {
-    writer.append("DocumentValue(");
+    writer.append("Document(");
     if (this.source)
         this.source.toDialect(writer);
     writer.append(")");
 };
 
 DocumentExpression.prototype.toODialect = function(writer) {
-    writer.append("DocumentValue(");
+    writer.append("Document(");
     if (this.source)
         this.source.toDialect(writer);
     writer.append(")");

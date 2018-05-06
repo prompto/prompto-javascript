@@ -20,10 +20,10 @@ DateTime.parseTZOffset = function(text) {
         return 0;
     i = text.indexOf('+');
     if(i>0)
-        return parseOffset(text.substring(i+1));
+        return DateTime.parseOffset(text.substring(i+1));
     i = text.lastIndexOf('-');
     if(i>10) // skip date separator
-        return -parseOffset(text.substring(i+1));
+        return -DateTime.parseOffset(text.substring(i+1));
     return 0;
 };
 

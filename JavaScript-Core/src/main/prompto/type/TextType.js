@@ -23,7 +23,7 @@ exports.resolve = function() {
 }
 
 function TextType()  {
-	NativeType.call(this, new Identifier("TextValue"));
+	NativeType.call(this, new Identifier("Text"));
 	return this;
 }
 

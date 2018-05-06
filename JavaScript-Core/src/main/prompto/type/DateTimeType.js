@@ -11,7 +11,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 function DateTimeType()  {
-	NativeType.call(this, new Identifier("DateTimeValue"));
+	NativeType.call(this, new Identifier("DateTime"));
 	return this;
 }
 

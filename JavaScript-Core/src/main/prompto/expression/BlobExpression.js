@@ -62,18 +62,18 @@ BlobExpression.prototype.toDialect = function(writer) {
 
 
 BlobExpression.prototype.toEDialect = function(writer) {
-    writer.append("BlobValue from ");
+    writer.append("Blob from ");
     this.source.toDialect(writer);
 };
 
 BlobExpression.prototype.toODialect = function(writer) {
-    writer.append("BlobValue(");
+    writer.append("Blob(");
     this.source.toDialect(writer);
     writer.append(')');
 };
 
 BlobExpression.prototype.toMDialect = function(writer) {
-    writer.append("BlobValue(");
+    writer.append("Blob(");
     this.source.toDialect(writer);
     writer.append(')');
 };

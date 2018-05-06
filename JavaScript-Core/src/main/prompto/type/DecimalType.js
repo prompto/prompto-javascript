@@ -10,7 +10,7 @@ exports.resolve = function() {
 }
 
 function DecimalType()  {
-	NativeType.call(this, new Identifier("DecimalValue"));
+	NativeType.call(this, new Identifier("Decimal"));
 	return this;
 }
 
