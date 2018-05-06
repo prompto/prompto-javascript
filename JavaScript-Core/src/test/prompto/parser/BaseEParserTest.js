@@ -45,7 +45,7 @@ exports.executeResource = function(fileName, methodName, args) {
     decls.register(context);
     decls.check(context);
     if(context.hasTests())
-        throw new Exception("prompto.runtime.Interpreter.interpretTests(context);");
+        throw new Error("Not implemented yet!");
     else {
         methodName = methodName || "main";
         var js = prompto.runtime.Transpiler.transpile(context, methodName);
@@ -159,9 +159,9 @@ exports.checkInterpretedOutput = function(test, fileName) {
 };
 
 exports.checkTranspiledOutput = function(test, fileName) {
-    // prompto.store.DataStore.instance = new prompto.memstore.MemStore();
-    // exports.executeResource(fileName);
-    // checkSameOutput(test, fileName);
+    prompto.store.DataStore.instance = new prompto.memstore.MemStore();
+    exports.executeResource(fileName);
+    checkSameOutput(test, fileName);
     test.done();
 };
 

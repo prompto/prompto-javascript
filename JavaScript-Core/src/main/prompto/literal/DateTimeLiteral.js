@@ -1,9 +1,11 @@
 var Literal = require("./Literal").Literal;
 var DateTimeType = require("../type/DateTimeType").DateTimeType;
 var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
+var DateTime = require("../intrinsic/DateTime").DateTime;
 
 function DateTimeLiteral(text) {
-	Literal.call(this, text, DateTimeValue.Parse(text.substring(1,text.length-1)));
+    var dt = DateTime.parse(text.substring(1,text.length-1));
+	Literal.call(this, text, new DateTimeValue(dt));
 	return this;
 }
 
@@ -12,6 +14,11 @@ DateTimeLiteral.prototype.constructor = DateTimeLiteral;
 
 DateTimeLiteral.prototype.check = function(context) {
 	return DateTimeType.instance;
+};
+
+DateTimeLiteral.prototype.transpile = function(transpiler) {
+    transpiler.require(DateTime);
+    transpiler.append("DateTime.parse(").append(this.text).append(")");
 };
 
 exports.DateTimeLiteral = DateTimeLiteral;

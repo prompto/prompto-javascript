@@ -41,7 +41,7 @@ DateType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
         transpiler.append(")");
     } else
         return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
-}
+};
 
 DateType.prototype.checkSubstract = function(context, other) {
 	if (other instanceof PeriodType) {
