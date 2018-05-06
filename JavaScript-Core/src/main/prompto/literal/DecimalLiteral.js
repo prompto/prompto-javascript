@@ -1,9 +1,9 @@
 var Literal = require("./Literal").Literal;
-var Decimal = require("../value/Decimal").Decimal;
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
 function DecimalLiteral(text) {
-	Literal.call(this, text, Decimal.Parse(text));
+	Literal.call(this, text, DecimalValue.Parse(text));
 	return this;
 }
 

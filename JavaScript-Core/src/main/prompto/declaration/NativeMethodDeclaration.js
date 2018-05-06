@@ -2,7 +2,7 @@ var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteM
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var VoidType = require("../type/VoidType").VoidType;
-var Decimal = require("../value/Decimal").Decimal;
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var Integer = require("../value/Integer").Integer;
 var NullValue = require("../value/NullValue").NullValue;
 
@@ -33,10 +33,10 @@ NativeMethodDeclaration.prototype.castToReturnType = function(context, value) {
     // can only cast to specified type, and if required
     if(value==null)
         value = NullValue.instance;
-    else if(this.returnType==IntegerType.instance && value instanceof Decimal)
+    else if(this.returnType==IntegerType.instance && value instanceof DecimalValue)
         value = new Integer(value.IntegerValue());
     else if(this.returnType==DecimalType.instance && value instanceof Integer)
-        value = new Decimal(value.DecimalValue());
+        value = new DecimalValue(value.DecimalValue());
     else if(this.returnType!=null && !(this.returnType.isAssignableFrom(context, value.type))) {
         // only cast if implemented, on a per type basis
         if(this.returnType.nativeCast)

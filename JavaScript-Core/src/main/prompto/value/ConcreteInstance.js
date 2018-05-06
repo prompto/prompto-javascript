@@ -8,7 +8,7 @@ var Variable = require("../runtime/Variable").Variable;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Operator = require("../grammar/Operator").Operator;
 var NullValue = require("./NullValue").NullValue;
-var Decimal = require("./Decimal").Decimal;
+var DecimalValue = require("./DecimalValue").DecimalValue;
 var Integer = require("./Integer").Integer;
 var TextValue = require("./TextValue").TextValue;
 var Instance = require("./Value").Instance;
@@ -176,7 +176,7 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 
 ConcreteInstance.prototype.autocast = function(decl, value) {
     if(value instanceof Integer && decl.getType()==DecimalType.instance)
-        value = new Decimal(value.DecimalValue());
+        value = new DecimalValue(value.DecimalValue());
     return value;
 };
 

@@ -1,5 +1,5 @@
 var Integer = require("../value/Integer").Integer;
-var Decimal = require("../value/Decimal").Decimal;
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
@@ -24,8 +24,8 @@ CastExpression.prototype.interpret = function(context) {
     var value = this.expression.interpret(context);
     if(value) {
         if (value instanceof Integer && this.type==DecimalType.instance) {
-            value = new Decimal(value.DecimalValue());
-        } else if (value instanceof Decimal && this.type==IntegerType.instance) {
+            value = new DecimalValue(value.DecimalValue());
+        } else if (value instanceof DecimalValue && this.type==IntegerType.instance) {
             value = new Integer(value.IntegerValue());
         } else if (this.type.isMoreSpecificThan(context, value.type)) {
             value.type = this.type;

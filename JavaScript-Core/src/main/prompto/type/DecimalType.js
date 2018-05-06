@@ -2,7 +2,7 @@ var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = null; // circular dependency
 var AnyType = require("./AnyType").AnyType;
-var Decimal = require("../value/Decimal").Decimal;
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
@@ -10,7 +10,7 @@ exports.resolve = function() {
 }
 
 function DecimalType()  {
-	NativeType.call(this, new Identifier("Decimal"));
+	NativeType.call(this, new Identifier("DecimalValue"));
 	return this;
 }
 
@@ -90,7 +90,7 @@ DecimalType.prototype.checkCompare = function(context, other) {
 
 DecimalType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     if (typeof(value)=='number') {
-        return new Decimal(value);
+        return new DecimalValue(value);
     } else {
         return value; // TODO for now
     }

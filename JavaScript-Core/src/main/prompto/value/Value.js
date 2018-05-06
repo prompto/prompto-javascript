@@ -1,13 +1,11 @@
 var NullValue = null;
 var TextValue = null;
 var Integer = null;
-var Decimal = null;
 
 exports.resolve = function() {
     NullValue = require("./NullValue").NullValue;
     TextValue = require("./TextValue").TextValue;
     Integer = require("./Integer").Integer;
-    Decimal = require("./Decimal").Decimal;
 };
 
 var id = 0;

@@ -9,7 +9,7 @@ var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var DecimalType = require("../type/DecimalType").DecimalType;
-var Decimal = require("../value/Decimal").Decimal;
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var Integer = require("../value/Integer").Integer;
 var Variable = require("./Variable").Variable;
 var LinkedValue = require("./LinkedValue").LinkedValue;
@@ -446,7 +446,7 @@ Context.prototype.autocast = function(name, value) {
     if(value !== null && value instanceof Integer) {
         var actual = this.instances[name];
         if(actual.getType(this) === DecimalType.instance)
-            value = new Decimal(value.DecimalValue());
+            value = new DecimalValue(value.DecimalValue());
     }
     return value;
 };

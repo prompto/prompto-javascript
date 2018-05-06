@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Decimal = require("./Decimal").Decimal;
+var DecimalValue = require("./DecimalValue").DecimalValue;
 var IntegerType = null;
 var DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
 
@@ -40,8 +40,8 @@ Integer.prototype.DecimalValue = function() {
 Integer.prototype.Add = function(context, value) {
 	if (value instanceof Integer) {
 		return new Integer(this.value + value.value);
-	} else if (value instanceof Decimal) {
-		return new Decimal(value.DecimalValue() + this.value);
+	} else if (value instanceof DecimalValue) {
+		return new DecimalValue(value.DecimalValue() + this.value);
 	} else {
 		throw new SyntaxError("Illegal: Integer + " + typeof(value));
 	}
@@ -50,8 +50,8 @@ Integer.prototype.Add = function(context, value) {
 Integer.prototype.Subtract = function(context, value) {
 	if (value instanceof Integer) {
 		return new Integer(this.value - value.value);
-	} else if (value instanceof Decimal) {
-		return new Decimal(this.value - value.DecimalValue());
+	} else if (value instanceof DecimalValue) {
+		return new DecimalValue(this.value - value.DecimalValue());
 	} else {
 		throw new SyntaxError("Illegal: Integer - " + typeof(value));
 	}
@@ -60,8 +60,8 @@ Integer.prototype.Subtract = function(context, value) {
 Integer.prototype.Multiply = function(context, value) {
 	if (value instanceof Integer) {
 		return new Integer(this.value * value.value);
-	} else if (value instanceof Decimal) {
-		return new Decimal(value.value * this.value);
+	} else if (value instanceof DecimalValue) {
+		return new DecimalValue(value.value * this.value);
 	} else if (value.Multiply) {
 		return value.Multiply(context, this);
 	} else {
@@ -71,11 +71,11 @@ Integer.prototype.Multiply = function(context, value) {
 
 
 Integer.prototype.Divide = function(context, value) {
-	if (value instanceof Integer || value instanceof Decimal) {
+	if (value instanceof Integer || value instanceof DecimalValue) {
 		if (value.DecimalValue() == 0.0) {
 			throw new DivideByZeroError();
 		} else {
-			return new Decimal(this.DecimalValue() / value.DecimalValue());
+			return new DecimalValue(this.DecimalValue() / value.DecimalValue());
 		}
 	} else {
 		throw new SyntaxError("Illegal: Integer / " + typeof(value));
@@ -115,7 +115,7 @@ Integer.prototype.cmp = function(obj) {
 };
 
 Integer.prototype.CompareTo = function(context, value) {
-	if (value instanceof Integer || value instanceof Decimal) {
+	if (value instanceof Integer || value instanceof DecimalValue) {
 		return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
 	} else {
 		throw new SyntaxError("Illegal comparison: Integer and " + typeof(value));
@@ -126,7 +126,7 @@ Integer.prototype.CompareTo = function(context, value) {
 Integer.prototype.equals = function(obj) {
 	if (obj instanceof Integer) {
 		return this.value == obj.value;
-	} else if (obj instanceof Decimal) {
+	} else if (obj instanceof DecimalValue) {
 		return this.value == obj.value;
 	} else {
 		return false;
