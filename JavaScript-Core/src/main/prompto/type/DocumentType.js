@@ -41,8 +41,8 @@ DocumentType.prototype.checkItem = function(context, itemType) {
 };
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {
-    var Document = require("../value/Document").Document;
-    var instance = new Document();
+    var DocumentValue = require("../value/DocumentValue").DocumentValue;
+    var instance = new DocumentValue();
     for(key in node) {
         var value = this.readJSONField(context, node[key], parts);
         instance.setMember(context, key, value);
