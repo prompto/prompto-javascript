@@ -8,7 +8,7 @@ var DictLiteral = require("../literal/DictLiteral").DictLiteral;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var CmdLineParser = require("../utils/CmdLineParser").CmdLineParser;
-var Dictionary = require("../value/Dictionary").Dictionary;
+var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 
 var argsType = new DictType(TextType.instance);
@@ -22,7 +22,7 @@ function parseCmdLineArgs(cmdLineArgs) {
 			var value = new Text(args[s]);
 			valueArgs[key] = value;
 		});
-		var dict = new Dictionary(TextType.instance, valueArgs, false);
+		var dict = new DictionaryValue(TextType.instance, valueArgs, false);
 		return new ExpressionValue(argsType, dict);
 	} catch(e) {
 		// TODO

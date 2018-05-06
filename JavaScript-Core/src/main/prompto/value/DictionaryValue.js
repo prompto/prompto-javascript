@@ -9,17 +9,17 @@ var BaseType = require("../type/BaseType").BaseType;
 var DictType = require("../type/DictType").DictType;
 var TextType = require("../type/TextType").TextType;
 
-function Dictionary(itemType, dict, mutable) {
+function DictionaryValue(itemType, dict, mutable) {
     Value.call(this, new DictType(itemType));
 	this.dict = dict || {};
     this.mutable = mutable || false;
 	return this;
 }
 
-Dictionary.prototype = Object.create(Value.prototype);
-Dictionary.prototype.constructor = Dictionary;
+DictionaryValue.prototype = Object.create(Value.prototype);
+DictionaryValue.prototype.constructor = DictionaryValue;
 
-Dictionary.prototype.toString = function() {
+DictionaryValue.prototype.toString = function() {
 	var names = Object.getOwnPropertyNames(this.dict);
     var vals = names.map(function(name) {
         return '"' + name + '":' + this.dict[name];
@@ -28,7 +28,7 @@ Dictionary.prototype.toString = function() {
 };
 
 
-Dictionary.merge = function(dict1, dict2) {
+DictionaryValue.merge = function(dict1, dict2) {
     var dict = {};
     for(var p in dict1.dict) {
         dict[p] = dict1.dict[p];
@@ -36,10 +36,10 @@ Dictionary.merge = function(dict1, dict2) {
     for(var p in dict2.dict) {
         dict[p] = dict2.dict[p];
     }
-    return new Dictionary(dict1.type.itemType, dict);
+    return new DictionaryValue(dict1.type.itemType, dict);
 };
 
-Dictionary.prototype.size = function() {
+DictionaryValue.prototype.size = function() {
     var n = 0;
     for(p in this.dict) {
         n += 1;
@@ -47,31 +47,31 @@ Dictionary.prototype.size = function() {
     return n;
 };
 
-Dictionary.prototype.isEmpty = function() {
+DictionaryValue.prototype.isEmpty = function() {
     for(var p in this.dict) {
         return false;
     }
     return true;
 };
 
-Dictionary.prototype.Add = function(context, value) {
-    if (value instanceof Dictionary) {
-        return Dictionary.merge(this, value);
+DictionaryValue.prototype.Add = function(context, value) {
+    if (value instanceof DictionaryValue) {
+        return DictionaryValue.merge(this, value);
     } else {
         throw new SyntaxError("Illegal: Dict + " + typeof(value));
     }
 };
 
-Dictionary.prototype.hasItem = function(context, value) {
+DictionaryValue.prototype.hasItem = function(context, value) {
     if (value instanceof TextValue) {
         return value.value in this.dict;
     } else {
-        throw new SyntaxError("Only TextValue key type supported by Dictionary");
+        throw new SyntaxError("Only TextValue key type supported by DictionaryValue");
     }
 };
 
 
-Dictionary.prototype.getMemberValue = function(context, name) {
+DictionaryValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
         return new Integer(this.size());
     } else if ("keys"==name) {
@@ -92,14 +92,14 @@ Dictionary.prototype.getMemberValue = function(context, name) {
 };
 
 
-Dictionary.prototype.setItemInContext = function(context, index, value) {
+DictionaryValue.prototype.setItemInContext = function(context, index, value) {
     if (index instanceof TextValue) {
         this.dict[index] = value;
     } else
         throw new SyntaxError("No such item:" + index.toString())
 };
 
-Dictionary.prototype.getItemInContext = function(context, index) {
+DictionaryValue.prototype.getItemInContext = function(context, index) {
     if (index instanceof TextValue)
     {
         var value = this.dict[index] || NullValue.instance;
@@ -113,7 +113,7 @@ Dictionary.prototype.getItemInContext = function(context, index) {
     }
 };
 
-Dictionary.prototype.convertToJavaScript = function() {
+DictionaryValue.prototype.convertToJavaScript = function() {
     var dict = {};
     for(var key in this.dict) {
         dict[key] = this.dict[key].convertToJavaScript();
@@ -121,8 +121,8 @@ Dictionary.prototype.convertToJavaScript = function() {
     return dict;
 };
 
-Dictionary.prototype.equals = function(obj) {
-    if(obj instanceof Dictionary) {
+DictionaryValue.prototype.equals = function(obj) {
+    if(obj instanceof DictionaryValue) {
         var keys = Object.getOwnPropertyNames(this.dict);
         if(keys.length!=Object.getOwnPropertyNames(obj.dict).length) {
             return false;
@@ -154,7 +154,7 @@ Dictionary.prototype.equals = function(obj) {
     }
 };
 
-Dictionary.prototype.getIterator = function(context) {
+DictionaryValue.prototype.getIterator = function(context) {
     return new KVPIterator(context, this.dict);
 }
 
@@ -200,4 +200,4 @@ KVPValue.prototype.getMemberValue = function(context, name) {
     }
 };
 
-exports.Dictionary = Dictionary;
+exports.DictionaryValue = DictionaryValue;

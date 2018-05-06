@@ -1,6 +1,6 @@
 var Literal = require("./Literal").Literal;
 var DictEntryList = require("./DictEntryList").DictEntryList;
-var Dictionary = require("../value/Dictionary").Dictionary;
+var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var MissingType = require("../type/MissingType").MissingType;
@@ -16,7 +16,7 @@ function DictLiteral(mutable, entries) {
     this.mutable = mutable;
 	this.entries = entries || new DictEntryList();
     this.itemType = null;
-	Literal.call(this, this.entries.toString(), new Dictionary(MissingType.instance, {}, mutable));
+	Literal.call(this, this.entries.toString(), new DictionaryValue(MissingType.instance, {}, mutable));
 	return this;
 }
 
@@ -63,7 +63,7 @@ DictLiteral.prototype.interpret = function(context) {
             val = self.interpretPromotion(val);
             dict[key] = val;
         });
-        return new Dictionary(this.itemType, dict, this.mutable);
+        return new DictionaryValue(this.itemType, dict, this.mutable);
     } else
 	    return this.value;
 };
