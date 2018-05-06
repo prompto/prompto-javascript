@@ -1,6 +1,7 @@
 var Value = require("./Value").Value;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
+var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 var TimeType = null;
 
 exports.resolve = function() {
@@ -16,17 +17,8 @@ function TimeValue(value) {
 TimeValue.prototype = Object.create(Value.prototype);
 TimeValue.prototype.constructor = TimeValue;
 
-TimeValue.Parse = function(text) {
-	var date = new Date();
-	date.setUTCHours(parseInt(text.substring(0,2)));
-	date.setUTCMinutes(parseInt(text.substring(3,5)));
-	date.setUTCSeconds(parseInt(text.length>6 ? text.substring(6,8) : 0));
-	date.setUTCMilliseconds(text.length>9 ? parseInt(text.substring(9,13)) : 0);
-	return new TimeValue(date);
-};
-
 TimeValue.prototype.toString = function() {
-    return this.value.toISOString().substring(11, 23);
+    return this.value.toString();
 };
 
 TimeValue.prototype.getValue = function() {
@@ -35,55 +27,21 @@ TimeValue.prototype.getValue = function() {
 
 TimeValue.prototype.Add = function(context, value) {
 	if (value instanceof PeriodValue) {
-		return this.addPeriod(value);
+		return new TimeValue(this.value.addPeriod(value));
 	} else {
 		throw new SyntaxError("Illegal: TimeValue + " + typeof(value));
 	}
 };
 
-TimeValue.prototype.addPeriod = function(value) {
-	var date = new Date();
-	var hour = this.value.getUTCHours() + (value.hours || 0);
-	date.setUTCHours(hour);
-	var minute = this.value.getUTCMinutes() + (value.minutes || 0);
-	date.setUTCMinutes(minute);
-	var second = this.value.getUTCSeconds() + (value.seconds || 0);
-	date.setUTCSeconds(second);
-	var millis = this.value.getUTCMilliseconds() + (value.millis || 0);
-	date.setUTCMilliseconds(millis);
-	return new TimeValue(date);
-};
 
 TimeValue.prototype.Subtract = function(context, value) {
 	if (value instanceof PeriodValue) {
-		return this.subPeriod(value);
+		return new TimeValue(this.value.subtractPeriod(value.value));
 	} else if (value instanceof TimeValue) {
-			return this.subTime(value);
+        return new PeriodValue(this.value.subtractTime(value.value));
 	} else {
 		throw new SyntaxError("Illegal: TimeValue - " + typeof(value));
 	}
-};
-
-TimeValue.prototype.subTime = function(value) {
-	var data = [];
-	data[4] = this.value.getUTCHours() - value.value.getUTCHours();
-	data[5] = this.value.getUTCMinutes() - value.value.getUTCMinutes();
-	data[6] = this.value.getUTCSeconds() - value.value.getUTCSeconds();
-	data[7] = this.value.getUTCMilliseconds() - value.value.getUTCMilliseconds();
-	return new PeriodValue(data);
-};
-
-TimeValue.prototype.subPeriod = function(value) {
-	var date = new Date();
-	var hour = this.value.getUTCHours() - (value.hours || 0);
-	date.setUTCHours(hour);
-	var minute = this.value.getUTCMinutes() - (value.minutes || 0);
-	date.setUTCMinutes(minute);
-	var second = this.value.getUTCSeconds() - (value.seconds || 0);
-	date.setUTCSeconds(second);
-	var millis = this.value.getUTCMilliseconds() - (value.millis || 0);
-	date.setUTCMilliseconds(millis);
-	return new TimeValue(date);
 };
 
 

@@ -37,35 +37,12 @@ DateValue.prototype.Add = function(context, value) {
 
 DateValue.prototype.Subtract = function(context, value)  {
     if (value instanceof DateValue) {
-        return this.minusDate(value);
+        return this.value.subtractDate(value.value);
     } else if (value instanceof PeriodValue) {
-        return this.minusPeriod(value);
+        return this.value.subtractPeriod(value.value);
     } else {
         throw new SyntaxError("Illegal: Date - " + typeof(value));
     }
-};
-
-
-
-DateValue.prototype.minusDate = function(value) {
-    var data = [];
-    data[0] = this.value.getUTCFullYear() - value.value.getUTCFullYear();
-    data[1] = this.value.getUTCMonth() - value.value.getUTCMonth();
-    data[3] = this.value.getUTCDate() - value.value.getUTCDate();
-    return new PeriodValue(data);
-};
-
-
-
-DateValue.prototype.minusPeriod = function(value) {
-    var date = new Date();
-    var year = this.value.getUTCFullYear() - (value.years || 0);
-    date.setUTCFullYear(year);
-    var month = this.value.getUTCMonth() - (value.months || 0);
-    date.setUTCMonth(month);
-    var day = this.value.getUTCDate() - ((value.weeks || 0) * 7) - (value.days || 0);
-    date.setUTCDate(day);
-    return new DateValue(date);
 };
 
 

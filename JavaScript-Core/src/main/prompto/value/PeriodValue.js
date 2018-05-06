@@ -12,17 +12,6 @@ function PeriodValue(value) {
             }
         });
     }, this)
-
-    /*
-    this.years = data[0] || null;
-    this.months = data[1] || null;
-    this.weeks = data[2] || null;
-    this.days = data[3] || null;
-    this.hours = data[4] || null;
-    this.minutes = data[5] || null;
-    this.seconds = data[6] || null;
-    this.millis = data[7] || null;
-    */
     return this;
 }
 
@@ -33,93 +22,32 @@ PeriodValue.prototype.constructor = PeriodValue;
 
 PeriodValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {
-        return this.plus(value);
+        return new PeriodValue(this.value.add(value.value));
     } else {
         throw new SyntaxError("Illegal: PeriodValue + " + typeof(value));
     }
 };
 
-PeriodValue.prototype.plus = function(period) {
-    var data = [];
-    data[0] = this.years + period.years;
-    data[1] = this.months + period.months;
-    data[2] = this.weeks + period.weeks;
-    data[3] = this.days + period.days;
-    data[4] = this.hours + period.hours;
-    data[5] = this.minutes + period.minutes;
-    var seconds = (this.seconds + period.seconds) + ((this.millis + period.millis)/1000.0);
-    data[6] = Math.floor(seconds);
-    var millis = Math.round(( seconds * 1000 ) % 1000);
-    data[7] = Math.floor(Math.abs(millis));
-    return new PeriodValue(data);
-};
-
-
 PeriodValue.prototype.Minus = function(context) {
-    var data = [];
-    data[0] = -this.years;
-    data[1] = -this.months;
-    data[2] = -this.weeks;
-    data[3] = -this.days;
-    data[4] = -this.hours;
-    data[5] = -this.minutes;
-    data[6] = -this.seconds;
-    data[7] = -this.millis;
-    return new PeriodValue(data);
+    return new PeriodValue(this.value.minus());
 };
 
 PeriodValue.prototype.Subtract = function(context, value) {
     if (value instanceof PeriodValue) {
-        return this.minus(value);
+        return new PeriodValue(this.value.subtract(value.value));
     } else {
         throw new SyntaxError("Illegal: PeriodValue + " + typeof(value));
     }
 };
 
-PeriodValue.prototype.minus = function(period) {
-    var data = [];
-    data[0] = this.years - period.years;
-    data[1] = this.months - period.months;
-    data[2] = this.weeks - period.weeks;
-    data[3] = this.days - period.days;
-    data[4] = this.hours - period.hours;
-    data[5] = this.minutes - period.minutes;
-    var seconds = (this.seconds + this.millis/1000.0) - (period.seconds + period.millis/1000.0);
-    data[6] = Math.floor(seconds);
-    var millis = Math.round(( seconds * 1000 ) % 1000);
-    data[7] = Math.floor(Math.abs(millis));
-    return new PeriodValue(data);
-};
 
 PeriodValue.prototype.Multiply = function(context, value) {
     if (value instanceof IntegerValue) {
-        return this.multiply(value);
+        return new PeriodValue(this.value.multiply(value.value));
     } else {
         throw new SyntaxError("Illegal: PeriodValue * " + typeof(value));
     }
 };
-
-PeriodValue.prototype.multiply = function(value) {
-    var count = value.value;
-    if (count == 0) {
-        return new PeriodValue([]);
-    } else if (count == 1) {
-        return this;
-    } else {
-        var data = [];
-        data[0] = this.years * count;
-        data[1] = this.months * count;
-        data[2] = this.weeks * count;
-        data[3] = this.days * count;
-        data[4] = this.hours * count;
-        data[5] = this.minutes * count;
-        var seconds = (this.seconds + this.millis/1000.0) * count;
-        data[6] = Math.floor(seconds);
-        var millis = Math.round(( seconds * 1000 ) % 1000);
-        data[7] = Math.floor(Math.abs(millis));
-        return new PeriodValue(data);
-     }
- };
 
 /*
  override
@@ -131,44 +59,8 @@ PeriodValue.prototype.multiply = function(value) {
 */
 
 PeriodValue.prototype.toString = function() {
-    var s = "P";
-    if(this.years) {
-        s += this.years;
-        s += "Y";
-    }
-    if (this.months) {
-        s += this.months;
-        s += "M";
-    }
-    if (this.weeks) {
-        s += this.weeks;
-        s += "W";
-    }
-    if (this.days) {
-        s += this.days;
-        s += "D";
-    }
-    if (this.hours || this.minutes || this.seconds || this.millis) {
-        s += "T";
-        if (this.hours) {
-            s += this.hours;
-            s += "H";
-        }
-        if (this.minutes) {
-            s += this.minutes;
-            s += "M";
-        }
-        if (this.seconds || this.millis) {
-            s += this.seconds;
-            if (this.millis) {
-                s += ".";
-                s += ("000" + this.millis).slice(-3);
-            }
-            s += "S";
-        }
-    }
-    return s;
- };
+    return this.value.toString();
+};
 
 PeriodValue.prototype.equals = function(obj) {
     if (obj instanceof PeriodValue) {

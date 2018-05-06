@@ -1,9 +1,11 @@
 var Literal = require("./Literal").Literal;
 var TimeType = require("../type/TimeType").TimeType;
 var TimeValue = require("../value/TimeValue").TimeValue;
+var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
 function TimeLiteral(text) {
-	Literal.call(this, text, TimeValue.Parse(text.substring(1,text.length-1)));
+	var lt = LocalTime.parse(text.substring(1,text.length-1));
+	Literal.call(this, text, new TimeValue(lt));
 	return this;
 }
 
