@@ -1,5 +1,5 @@
 var BlobType = require("../type/BlobType").BlobType;
-var Document = require("../value/Document").Document;
+var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;

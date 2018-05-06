@@ -1,6 +1,6 @@
 var Section = require("../parser/Section").Section;
 var DocumentType = require("../type/DocumentType").DocumentType;
-var Document = require("../value/Document").Document;
+var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
@@ -21,7 +21,7 @@ DocumentExpression.prototype.check = function(context) {
 
 DocumentExpression.prototype.interpret = function(context) {
     if(!this.source)
-        return new Document();
+        return new DocumentValue();
     else {
         var value = this.source.interpret(context);
         return this.documentFromValue(context, value);
@@ -47,7 +47,7 @@ DocumentExpression.prototype.documentFromBlob = function(context, blob) {
         var ECleverParser = require("../parser/ECleverParser").ECleverParser;
         var itype = new ECleverParser(field).parse_standalone_type();
         if (itype != DocumentType.instance)
-            throw new Error("Expecting a Document type!");
+            throw new Error("Expecting a DocumentValue type!");
         field = value["value"] || null;
         if (field == null)
             throw new Error("Expecting a 'value' field!");
@@ -88,7 +88,7 @@ DocumentExpression.prototype.toDialect = function(writer) {
 };
 
 DocumentExpression.prototype.toEDialect = function(writer) {
-    writer.append("Document");
+    writer.append("DocumentValue");
     if (this.source) {
         writer.append(" from ");
         this.source.toDialect(writer);
@@ -96,14 +96,14 @@ DocumentExpression.prototype.toEDialect = function(writer) {
 };
 
 DocumentExpression.prototype.toMDialect = function(writer) {
-    writer.append("Document(");
+    writer.append("DocumentValue(");
     if (this.source)
         this.source.toDialect(writer);
     writer.append(")");
 };
 
 DocumentExpression.prototype.toODialect = function(writer) {
-    writer.append("Document(");
+    writer.append("DocumentValue(");
     if (this.source)
         this.source.toDialect(writer);
     writer.append(")");

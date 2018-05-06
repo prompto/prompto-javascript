@@ -1,6 +1,6 @@
 var type = require("../type/index.js");
 var Value = require("../value/Value").Value;
-var Document = require("../value/Document").Document;
+var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var NullValue = require("../value/NullValue").NullValue;
 var ListValue = require("../value/ListValue").ListValue;
 var IteratorValue = require("../value/IteratorValue").IteratorValue;
@@ -129,7 +129,7 @@ JavaScriptType.prototype.convertDocument = function(context, value, klass, retur
     if(returnType instanceof type.DocumentType && klass=="Object") {
         var self = this;
         var itemType = returnType.itemType;
-        var doc = new Document();
+        var doc = new DocumentValue();
         for(var key in value) {
             var item = value[key];
             klass = getTypeName(item);

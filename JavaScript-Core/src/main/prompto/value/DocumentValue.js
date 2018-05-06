@@ -3,50 +3,50 @@ var Value = require("./Value").Value;
 var TextValue = require("./TextValue").TextValue;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
-function Document(values) {
+function DocumentValue(values) {
     Value.call(this, DocumentType.instance);
     this.mutable = true;
     this.values = values || {};
     return this;
 }
 
-Document.prototype = Object.create(Value.prototype);
-Document.prototype.constructor = Document;
+DocumentValue.prototype = Object.create(Value.prototype);
+DocumentValue.prototype.constructor = DocumentValue;
 
 
-Document.prototype.getMemberNames = function() {
+DocumentValue.prototype.getMemberNames = function() {
     return Object.getOwnPropertyNames(this.values);
 };
 
 
-Document.prototype.getStorableData = function() {
+DocumentValue.prototype.getStorableData = function() {
     return this.values;
 };
 
-Document.prototype.hasMember = function(name) {
+DocumentValue.prototype.hasMember = function(name) {
     return this.values.hasOwnProperty(name);
 }
 
-Document.prototype.getMemberValue = function(context, name, autoCreate) {
+DocumentValue.prototype.getMemberValue = function(context, name, autoCreate) {
     var result = this.values[name] || null;
     if(result)
         return result;
     else if("text" == name)
         return new TextValue(this.toString());
     else if(autoCreate) {
-        result = new Document();
+        result = new DocumentValue();
         this.values[name] = result;
         return result;
     } else
         return NullValue.instance;
 };
 
-Document.prototype.setMember = function(context, name, value) {
+DocumentValue.prototype.setMember = function(context, name, value) {
     this.values[name] = value;
 };
 
 
-Document.prototype.getItemInContext = function(context, index) {
+DocumentValue.prototype.getItemInContext = function(context, index) {
     if (index instanceof TextValue) {
         // TODO autocreate
         return this.values[index.value] || NullValue.instance;
@@ -57,7 +57,7 @@ Document.prototype.getItemInContext = function(context, index) {
 
 
 
-Document.prototype.setItemInContext = function(context, index, value) {
+DocumentValue.prototype.setItemInContext = function(context, index, value) {
     if (index instanceof TextValue) {
         this.values[index.value] = value
     } else {
@@ -65,12 +65,12 @@ Document.prototype.setItemInContext = function(context, index, value) {
     }
 };
 
-Document.prototype.equals = function(other) {
+DocumentValue.prototype.equals = function(other) {
     return other==this;
 };
 
 
-Document.prototype.toString = function() {
+DocumentValue.prototype.toString = function() {
     var binaries = {};
     // create json type-aware object graph and collect binaries
     var values = {}; // need a temporary parent
@@ -86,7 +86,7 @@ Document.prototype.toString = function() {
     return JSON.stringify(values);
 };
 
-Document.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
+DocumentValue.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     var values = {};
     for (var key in this.values) {
         var value = this.values[key];
@@ -105,6 +105,6 @@ Document.prototype.toJson = function(context, json, instanceId, fieldName, withT
 
 };
 
-exports.Document = Document;
+exports.DocumentValue = DocumentValue;
 
 

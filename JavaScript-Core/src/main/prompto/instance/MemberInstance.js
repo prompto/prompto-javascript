@@ -1,4 +1,4 @@
-var Document = require("../value/Document").Document;
+var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 
 function MemberInstance(id) {
