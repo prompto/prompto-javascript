@@ -2,6 +2,7 @@ var locateMethod = require('./Interpreter').locateMethod;
 
 function Transpiler(context) {
     this.context = context;
+    this.initialized = {};
     this.declared = new Set();
     this.required = new Set();
     this.lines = [];
@@ -9,6 +10,26 @@ function Transpiler(context) {
     this.indents = "";
     return this;
 }
+
+Transpiler.prototype.initialize = function(name, value) {
+    this.initialized[name] = value;
+};
+
+
+Transpiler.prototype.appendAllInitialized = function() {
+    Object.keys(this.initialized).forEach(function(name) {
+        this.appendOneInitialized(name, this.initialized[name]);
+    }, this);
+
+};
+
+
+Transpiler.prototype.appendOneInitialized = function(name, exp) {
+    this.append(name).append(" = { name: '").append(name).append("', value: ");
+    exp.transpile(this);
+    this.append("};");
+    this.newLine();
+};
 
 
 Transpiler.prototype.declare = function(decl) {
@@ -105,6 +126,7 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         }
         transpiler.lines.push("");
         transpiler.appendAllRequired();
+        transpiler.appendAllInitialized();
         transpiler.appendAllDeclared();
         transpiler.lines.push(methodName); // return the method to call
         return transpiler.lines.join("\n");

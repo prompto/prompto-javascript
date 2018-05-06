@@ -43,6 +43,19 @@ MemberSelector.prototype.toDialect = function(writer) {
     writer.append(this.name);
 };
 
+MemberSelector.prototype.transpile = function(transpiler) {
+    // ensure singletons are not treated as constructors
+    try {
+        this.resolveParent(transpiler.context);
+    } catch(e) {
+        // ignore
+    }
+    this.parent.transpile(transpiler);
+    transpiler.append(".");
+    transpiler.append(this.name);
+};
+
+
 MemberSelector.prototype.toString = function() {
 	return this.parent.toString() + "." + this.name;
 };

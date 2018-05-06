@@ -177,7 +177,7 @@ UnresolvedIdentifier.prototype.resolveSymbol = function(context) {
 
 UnresolvedIdentifier.prototype.transpile = function(transpiler) {
     if(this.resolved==null)
-        this.resolveAndCheck(transpiler.context, false);
+        this.resolve(transpiler.context, false);
     this.resolved.transpile(transpiler);
 };
 

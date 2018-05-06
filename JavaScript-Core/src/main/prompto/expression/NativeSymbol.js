@@ -49,6 +49,11 @@ NativeSymbol.prototype.interpret = function(context) {
 	return this;
 }
 
+NativeSymbol.prototype.transpile = function(transpiler) {
+    transpiler.initialize(this.name, this.expression);
+    transpiler.append(this.name);
+};
+
 
 NativeSymbol.prototype.getMemberValue = function(context, name, autoCreate) {
     if("name" === name)

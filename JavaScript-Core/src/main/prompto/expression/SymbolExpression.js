@@ -1,4 +1,4 @@
-var SyntaxError =require("../error/SyntaxError").SyntaxError;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function SymbolExpression(id) {
     this.id = id;
@@ -30,5 +30,14 @@ SymbolExpression.prototype.interpret = function(context) {
 	}
 	return symbol.interpret(context);
 };
+
+SymbolExpression.prototype.transpile = function(transpiler) {
+    var symbol = transpiler.context.getRegisteredValue(this.name);
+    if(symbol==null) {
+        throw new SyntaxError("Unknown symbol:" + this.name);
+    }
+    symbol.transpile(transpiler);
+};
+
 
 exports.SymbolExpression = SymbolExpression;
