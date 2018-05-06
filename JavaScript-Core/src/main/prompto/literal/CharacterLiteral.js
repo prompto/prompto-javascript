@@ -20,4 +20,10 @@ CharacterLiteral.prototype.check = function(context) {
 	return CharacterType.instance;
 };
 
+
+CharacterLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
+
+
 exports.CharacterLiteral = CharacterLiteral;

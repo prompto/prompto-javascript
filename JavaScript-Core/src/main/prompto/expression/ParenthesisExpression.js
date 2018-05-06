@@ -13,6 +13,13 @@ ParenthesisExpression.prototype.toDialect = function(writer) {
     writer.append(")");
 };
 
+ParenthesisExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("(");
+    this.expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 ParenthesisExpression.prototype.check = function(context) {
 	return this.expression.check(context);
 };

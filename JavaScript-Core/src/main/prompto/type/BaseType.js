@@ -47,6 +47,11 @@ BaseType.prototype.getMemberMethods = function(context, name) {
 };
 
 
+BaseType.prototype.transpile = function(transpiler) {
+    throw new Error("Transpile not implemented by " + this.constructor.name);
+};
+
+
 BaseType.prototype.checkAdd = function(context, other, tryReverse) {
     if(other instanceof EnumeratedNativeType)
         return this.checkAdd(context, other.derivedFrom, tryReverse);
@@ -54,6 +59,16 @@ BaseType.prototype.checkAdd = function(context, other, tryReverse) {
         return other.checkAdd(context, this, false);
     else
 	    throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
+};
+
+
+BaseType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileAdd(transpiler, other.derivedFrom, tryReverse, left, right);
+    else if(tryReverse)
+        return other.transpileAdd(transpiler, this, false, right, left);
+    else
+        throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
 };
 
 

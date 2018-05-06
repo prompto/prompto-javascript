@@ -1,6 +1,7 @@
 var Value = require("./Value").Value;
 var Period = require("./Period").Period;
 var Integer = require("./Integer").Integer;
+var addPeriodToDate = require("../utils/Utils").addPeriodToDate;
 var DateType = null;
 
 exports.resolve = function() {
@@ -16,10 +17,6 @@ function LocalDate(value) {
 LocalDate.prototype = Object.create(Value.prototype);
 LocalDate.prototype.constructor = LocalDate;
 
-LocalDate.Parse = function(text) {
-	return new LocalDate(new Date(text));
-};
-
 LocalDate.prototype.toString = function() {
     return this.value.toISOString().substring(0, 10);
 };
@@ -30,25 +27,12 @@ LocalDate.prototype.getValue = function() {
 
 LocalDate.prototype.Add = function(context, value) {
     if (value instanceof Period) {
-        return this.addPeriod(value);
+        var date = addPeriodToDate(this.value, value);
+        return new LocalDate(date);
     } else {
         throw new SyntaxError("Illegal: Date + " + typeof(value));
     }
 };
-
-
-
-LocalDate.prototype.addPeriod = function(value) {
-    var date = new Date();
-    var year = this.value.getUTCFullYear() + (value.years || 0);
-    date.setUTCFullYear(year);
-    var month = this.value.getUTCMonth() + (value.months || 0);
-    date.setUTCMonth(month);
-    var day = this.value.getUTCDate() + ((value.weeks || 0) * 7) + (value.days || 0);
-    date.setUTCDate(day);
-    return new LocalDate(date);
-};
-
 
 
 LocalDate.prototype.Subtract = function(context, value)  {

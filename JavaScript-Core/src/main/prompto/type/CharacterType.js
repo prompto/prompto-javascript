@@ -44,6 +44,15 @@ CharacterType.prototype.checkAdd = function(context, other, tryReverse) {
 	return TextType.instance;
 };
 
+
+CharacterType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    // can add anything to text
+    left.transpile(transpiler);
+    transpiler.append(" + ");
+    right.transpile(transpiler);
+};
+
+
 CharacterType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return TextType.instance;

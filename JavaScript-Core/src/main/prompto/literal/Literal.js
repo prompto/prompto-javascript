@@ -18,6 +18,10 @@ Literal.prototype.toString = function() {
 	return this.text;
 };
 
+Literal.prototype.transpile = function(transpiler) {
+    throw new Error("Transpile not implemented by " + this.constructor.name);
+};
+
 Literal.prototype.getValue = function() {
 	return this.value;
 };

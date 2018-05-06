@@ -3,7 +3,7 @@ var IntegerType = require("./IntegerType").IntegerType;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 function PeriodType()  {
-	NativeType.call(this, new Identifier("Duration"));
+	NativeType.call(this, new Identifier("Period"));
 	return this;
 }
 

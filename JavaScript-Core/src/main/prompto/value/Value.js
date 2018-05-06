@@ -39,6 +39,11 @@ Value.prototype.Add = function(context, value) {
 	throw new SyntaxError("Add not supported by " + this.constructor.name);
 };
 
+Value.prototype.transpile = function(transpiler) {
+    throw new Error("Transpile not implemented by " + this.constructor.name);
+};
+
+
 Value.prototype.Subtract = function(context, value) {
 	throw new SyntaxError("Subtract not supported by " + this.constructor.name);
 };
