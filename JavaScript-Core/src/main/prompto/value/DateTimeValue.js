@@ -45,28 +45,28 @@ function parseUTCDate(text) {
     return new Date(text);
 }
 
-function DateTime(date, tzOffset) {
+function DateTimeValue(date, tzOffset) {
 	Value.call(this, DateTimeType.instance);
 	this.date = date;
     this.tzOffset = tzOffset;
 	return this;
 }
 
-DateTime.prototype = Object.create(Value.prototype);
-DateTime.prototype.constructor = DateTime;
+DateTimeValue.prototype = Object.create(Value.prototype);
+DateTimeValue.prototype.constructor = DateTimeValue;
 
-DateTime.prototype.getStorableData = function() {
+DateTimeValue.prototype.getStorableData = function() {
     return { date: this.date, tzOffset: this.tzOffset };
 };
 
 
-DateTime.Parse = function(text) {
+DateTimeValue.Parse = function(text) {
     var date = parseUTCDate(text);
     var tzOffset = parseTZOffset(text);
-	return new DateTime(date, tzOffset);
+	return new DateTimeValue(date, tzOffset);
 };
 
-DateTime.prototype.toString = function() {
+DateTimeValue.prototype.toString = function() {
     var s = "" +
     ("0000" + this.date.getUTCFullYear()).slice(-4) +
     "-" +
@@ -98,15 +98,15 @@ DateTime.prototype.toString = function() {
 	return s;
 };
 
-DateTime.prototype.Add = function(context, value) {
+DateTimeValue.prototype.Add = function(context, value) {
 	if (value instanceof Period) {
 		return this.addPeriod(value);
 	} else {
-		throw new SyntaxError("Illegal: DateTime + " + typeof(value));
+		throw new SyntaxError("Illegal: DateTimeValue + " + typeof(value));
 	}
 };
 
-DateTime.prototype.addPeriod = function(value) {
+DateTimeValue.prototype.addPeriod = function(value) {
 	var date = new Date();
 	var year = this.date.getUTCFullYear() + (value.years || 0);
 	date.setUTCFullYear(year);
@@ -122,11 +122,11 @@ DateTime.prototype.addPeriod = function(value) {
 	date.setUTCSeconds(second);
 	var millis = this.date.getUTCMilliseconds() + (value.millis || 0);
 	date.setUTCMilliseconds(millis);
-	return new DateTime(date, this.tzOffset);
+	return new DateTimeValue(date, this.tzOffset);
 };
 
-DateTime.prototype.Subtract = function(context, value) {
-	if (value instanceof DateTime) {
+DateTimeValue.prototype.Subtract = function(context, value) {
+	if (value instanceof DateTimeValue) {
 		return this.subDateTime(value)
 	} else if (value instanceof DateValue) {
 		return this.subDate(value)
@@ -135,11 +135,11 @@ DateTime.prototype.Subtract = function(context, value) {
 	} else if (value instanceof Period) {
 		return this.subPeriod(value)
 	} else {
-		throw new SyntaxError("Illegal: DateTime - " + typeof(value));
+		throw new SyntaxError("Illegal: DateTimeValue - " + typeof(value));
 	}
 };
 
-DateTime.prototype.subDateTime = function(other) {
+DateTimeValue.prototype.subDateTime = function(other) {
     var thisValue = this.date.valueOf() + this.tzOffset*1000;
     var otherValue = other.date.valueOf() + other.tzOffset*1000;
 	var numDays = ( thisValue - otherValue)/(24*60*60*1000);
@@ -152,7 +152,7 @@ DateTime.prototype.subDateTime = function(other) {
 	return new Period(data);
 }
 
-DateTime.prototype.subDate = function(value) {
+DateTimeValue.prototype.subDate = function(value) {
 	var numDays = (this.date.valueOf() - value.value.valueOf())/(24*60*60*1000);
 	var data = [];
 	data[3] = Math.floor(numDays);
@@ -163,7 +163,7 @@ DateTime.prototype.subDate = function(value) {
 	return new Period(data);
 }
 
-DateTime.prototype.subTime = function(value) {
+DateTimeValue.prototype.subTime = function(value) {
 	var data = [];
 	data[0] = this.date.getUTCFullYear();
 	data[1] = this.date.getUTCMonth();
@@ -175,7 +175,7 @@ DateTime.prototype.subTime = function(value) {
 	return new Period(data);
 }
 
-DateTime.prototype.subPeriod = function(value) {
+DateTimeValue.prototype.subPeriod = function(value) {
 	var date = new Date();
 	var year = this.date.getUTCFullYear() - (value.years || 0);
 	date.setUTCFullYear(year);
@@ -191,27 +191,27 @@ DateTime.prototype.subPeriod = function(value) {
 	date.setUTCSeconds(second);
 	var millis = this.date.getUTCMilliseconds() - (value.millis || 0);
 	date.setUTCMilliseconds(millis);
-	return new DateTime(date, this.tzOffset);
+	return new DateTimeValue(date, this.tzOffset);
 };
 
-DateTime.prototype.CompareTo = function(context, value) {
-    if (value instanceof DateTime) {
+DateTimeValue.prototype.CompareTo = function(context, value) {
+    if (value instanceof DateTimeValue) {
         return this.cmp(value.date, value.tzOffset);
     } else if (value instanceof DateValue) {
 		return this.cmp(value.value, 0);
 	} else {
-		throw new SyntaxError("Illegal comparison: DateTime and " + typeof(value));
+		throw new SyntaxError("Illegal comparison: DateTimeValue and " + typeof(value));
 	}
 };
 
-DateTime.prototype.cmp = function(date, tzOffset) {
+DateTimeValue.prototype.cmp = function(date, tzOffset) {
 	var a = this.date.valueOf() + this.tzOffset*60000;
 	var b = date.valueOf() + tzOffset*60000;
 	return a > b ? 1 : (a == b ? 0 : -1);
 };
 
 
-DateTime.prototype.getMemberValue = function(context, name) {
+DateTimeValue.prototype.getMemberValue = function(context, name) {
 	if ("year"==name) {
 		return new Integer(this.date.getUTCFullYear());
 	} else if ("month"==name) {
@@ -237,7 +237,7 @@ DateTime.prototype.getMemberValue = function(context, name) {
 	}
 };
 
-DateTime.prototype.getDayOfYear = function() {
+DateTimeValue.prototype.getDayOfYear = function() {
 	var first = new Date(this.date);
 	first.setMonth(0);
 	first.setDate(1);
@@ -246,12 +246,12 @@ DateTime.prototype.getDayOfYear = function() {
 }
 
 
-DateTime.prototype.equals = function(obj) {
-	if (obj instanceof DateTime) {
+DateTimeValue.prototype.equals = function(obj) {
+	if (obj instanceof DateTimeValue) {
 		return this.date.valueOf() == obj.date.valueOf() && this.tzOffset==obj.tzOffset;
 	} else {
 		return false;
 	}
 };
 
-exports.DateTime = DateTime;
+exports.DateTimeValue = DateTimeValue;

@@ -1,9 +1,9 @@
 var Literal = require("./Literal").Literal;
 var DateTimeType = require("../type/DateTimeType").DateTimeType;
-var DateTime = require("../value/DateTime").DateTime;
+var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
 
 function DateTimeLiteral(text) {
-	Literal.call(this, text, DateTime.Parse(text.substring(1,text.length-1)));
+	Literal.call(this, text, DateTimeValue.Parse(text.substring(1,text.length-1)));
 	return this;
 }
 

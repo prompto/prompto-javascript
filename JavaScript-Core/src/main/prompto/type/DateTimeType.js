@@ -6,12 +6,12 @@ var TextType = require("./TextType").TextType;
 var DateType = require("./DateType").DateType;
 var TimeType = require("./TimeType").TimeType;
 var AnyType = require("./AnyType").AnyType;
-var DateTime = require("../value/DateTime").DateTime;
+var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 function DateTimeType()  {
-	NativeType.call(this, new Identifier("DateTime"));
+	NativeType.call(this, new Identifier("DateTimeValue"));
 	return this;
 }
 
@@ -22,9 +22,9 @@ DateTimeType.instance = new DateTimeType();
 
 DateTimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if(value.date!=undefined && value.tzOffset!=undefined) {
-        return new DateTime(value.date, value.tzOffset);
+        return new DateTimeValue(value.date, value.tzOffset);
     } else if (getTypeName(value)=='Date') {
-        return new DateTime(value, 0);
+        return new DateTimeValue(value, 0);
     } else {
         return value; // TODO for now
     }
