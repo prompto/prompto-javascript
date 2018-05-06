@@ -11,21 +11,17 @@ JavaScriptIdentifierExpression.prototype = Object.create(JavaScriptExpression.pr
 JavaScriptIdentifierExpression.prototype.constructor = JavaScriptIdentifierExpression;
 
 JavaScriptIdentifierExpression.prototype.toString = function() {
-	if(this.parent==null) {
-		return this.id.name;
-	} else {
-		return this.parent.toString() + '.' + this.id.name;
-	}
+    return this.id.name;
 };
 
 JavaScriptIdentifierExpression.prototype.toDialect = function(writer) {
-    if(this.parent!=null) {
-        this.parent.toDialect(writer);
-        writer.append('.');
-    }
     writer.append(this.id.name);
 };
 
+
+JavaScriptIdentifierExpression.prototype.transpile = function(transpiler) {
+    transpiler.append(this.id.name);
+};
 
 JavaScriptIdentifierExpression.prototype.interpret = function(context, module) {
     var o = this.interpret_prompto(context);

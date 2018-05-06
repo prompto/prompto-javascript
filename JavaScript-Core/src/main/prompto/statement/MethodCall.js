@@ -33,6 +33,8 @@ MethodCall.prototype.toDialect = function(writer) {
 };
 
 MethodCall.prototype.transpile = function(transpiler) {
+    var declaration = this.findDeclaration(transpiler.context);
+    transpiler.declare(declaration);
     this.method.transpile(transpiler);
     if (this.assignments != null)
         this.assignments.transpile(transpiler);

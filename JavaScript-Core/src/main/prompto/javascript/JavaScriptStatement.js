@@ -41,4 +41,14 @@ JavaScriptStatement.prototype.toDialect = function(writer) {
         this.module.toDialect(writer);
 };
 
+JavaScriptStatement.prototype.transpile = function(transpiler) {
+    if(this.isReturn)
+        transpiler.append("return ");
+    if(!this.expression.transpile)
+        throw new Error(this.expression.toString());
+    this.expression.transpile(transpiler);
+    if(this.module!=null)
+        throw new Error(this.module.toString());
+};
+
 exports.JavaScriptStatement = JavaScriptStatement;

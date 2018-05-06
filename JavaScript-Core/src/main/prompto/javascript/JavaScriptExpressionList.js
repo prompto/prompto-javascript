@@ -14,12 +14,23 @@ JavaScriptExpressionList.prototype = Object.create(ObjectList.prototype);
 JavaScriptExpressionList.prototype.constructor = JavaScriptExpressionList;
 
 JavaScriptExpressionList.prototype.toDialect = function(writer) {
-    if(this.length>0) {
-        for (var idx = 0; idx < this.length; idx++) {
-            this[idx].toDialect(writer);
+    if(this.length > 0) {
+        this.forEach(function(exp) {
+            exp.toDialect(writer);
             writer.append(", ");
-        }
+        });
         writer.trimLast(2);
+    }
+};
+
+
+JavaScriptExpressionList.prototype.transpile = function(transpiler) {
+    if(this.length > 0) {
+        this.forEach(function(exp) {
+            exp.transpile(transpiler);
+            transpiler.append(", ");
+        });
+        transpiler.trimLast(2);
     }
 };
 

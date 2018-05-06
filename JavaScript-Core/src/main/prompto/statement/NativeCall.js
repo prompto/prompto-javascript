@@ -17,4 +17,8 @@ NativeCall.prototype.check = function(context) {
 	return VoidType.instance;
 };
 
+NativeCall.prototype.transpile = function(transpiler) {
+    return true;
+};
+
 exports.NativeCall = NativeCall;

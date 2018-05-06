@@ -2,14 +2,58 @@ var locateMethod = require('./Interpreter').locateMethod;
 
 function Transpiler(context) {
     this.context = context;
-    this.requires = new Set();
+    this.declared = new Set();
+    this.required = new Set();
     this.lines = [];
     this.line = "";
     this.indents = "";
     return this;
 }
 
-Transpiler.prototype.require = function(key, path) {
+
+Transpiler.prototype.declare = function(decl) {
+    this.declared.add(decl);
+};
+
+
+Transpiler.prototype.appendAllDeclared = function() {
+    this.declared.forEach(function(decl) {
+        this.appendOneDeclared(decl);
+    }, this);
+};
+
+
+Transpiler.prototype.appendOneDeclared = function(decl) {
+    decl.transpile(this);
+    if(this.line!==this.indents) {
+        this.lines.push(this.line);
+        this.line = this.indents;
+    }
+    this.lines.push("");
+};
+
+
+Transpiler.prototype.require = function(fn) {
+    this.required.add(fn);
+};
+
+
+
+Transpiler.prototype.appendAllRequired = function() {
+    this.required.forEach(function(fn) {
+        this.appendOneRequired(fn);
+    }, this);
+};
+
+Transpiler.prototype.appendOneRequired = function(fn) {
+    this.lines.push(fn.toString());
+    Object.keys(fn).forEach(function (key) {
+        this.lines.push(fn.name + "." + key + " = " + fn[key].toString() + ";");
+    }, this);
+    Object.keys(fn.prototype).forEach(function (key) {
+        this.lines.push(fn.name + ".prototype." + key + " = " + fn.prototype[key].toString() + ";");
+    }, this);
+
 };
 
 Transpiler.prototype.append = function(text) {
@@ -51,11 +95,15 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         var method = locateMethod(context, methodName, cmdLineArgs);
         var transpiler = new Transpiler(context);
         method.transpile(transpiler);
-        if(transpiler.line!==transpiler.indents)
+        if(transpiler.line!==transpiler.indents) {
             transpiler.lines.push(transpiler.line);
+            transpiler.line = transpiler.indents;
+        }
         transpiler.lines.push("");
+        transpiler.appendAllRequired();
+        transpiler.appendAllDeclared();
         transpiler.lines.push(methodName); // return the method to call
-        return transpiler.lines.join("");
+        return transpiler.lines.join("\n");
     } finally {
         context.terminated();
     }

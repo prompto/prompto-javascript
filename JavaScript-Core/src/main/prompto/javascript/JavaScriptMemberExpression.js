@@ -22,8 +22,16 @@ JavaScriptMemberExpression.prototype.interpret = function(context) {
     }
 };
 
+JavaScriptMemberExpression.prototype.transpile = function(transpiler) {
+    if (this.parent !== null) {
+        this.parent.transpile(transpiler);
+        transpiler.append(".");
+    }
+    transpiler.append(this.id.name);
+};
+
 JavaScriptMemberExpression.prototype.toDialect = function(writer) {
-    if (this.parent != null) {
+    if (this.parent !== null) {
         this.parent.toDialect(writer);
         writer.append('.');
     }

@@ -26,5 +26,10 @@ JavaScriptNativeCall.prototype.toDialect = function(writer) {
     this.statement.toDialect(writer);
 };
 
+JavaScriptNativeCall.prototype.transpile = function(transpiler) {
+    this.statement.transpile(transpiler);
+};
+
+
 exports.JavaScriptNativeCall = JavaScriptNativeCall;
 

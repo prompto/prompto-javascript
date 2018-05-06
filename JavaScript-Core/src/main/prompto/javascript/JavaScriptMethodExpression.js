@@ -16,7 +16,7 @@ JavaScriptMethodExpression.prototype.constructor = JavaScriptMethodExpression;
 
 
 JavaScriptMethodExpression.prototype.toString = function() {
-	return this.parent.toString() + "." + this.id.name + "(" + this.args.toString() + ")";
+	return (this.parent === null ? "" : (this.parent.toString() + ".")) + this.id.name + "(" + this.args.toString() + ")";
 };
 
 
@@ -27,6 +27,18 @@ JavaScriptMethodExpression.prototype.interpret = function(context, module) {
 	var args = this.args.computeArguments(context);
     return m.method.apply(m.instance, args);
 };
+
+
+JavaScriptMethodExpression.prototype.transpile = function(transpiler) {
+    if (this.parent !== null) {
+        this.parent.transpile(transpiler);
+        transpiler.append(".");
+    }
+    transpiler.append(this.id.name).append("(");
+    this.args.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 JavaScriptMethodExpression.prototype.findInstanceAndMethod = function(context, module) {
     if (this.parent === null) {

@@ -132,8 +132,11 @@ StatementList.prototype.toDialect = function(writer) {
 
 StatementList.prototype.transpile = function(transpiler) {
     this.forEach(function(stmt) {
-        stmt.transpile(transpiler);
-        transpiler.append(";").newLine();
+        if(!stmt.transpile)
+            throw new Error(stmt.toString());
+        var skip = stmt.transpile(transpiler);
+        if(!skip)
+            transpiler.append(";").newLine();
     });
 };
 
