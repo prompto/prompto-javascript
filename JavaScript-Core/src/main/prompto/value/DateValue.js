@@ -8,35 +8,35 @@ exports.resolve = function() {
     DateType = require("../type/DateType").DateType;
 };
 
-function LocalDate(value) {
+function DateValue(value) {
     Value.call(this, DateType.instance);
 	this.value = value;
 	return this;
 }
 
-LocalDate.prototype = Object.create(Value.prototype);
-LocalDate.prototype.constructor = LocalDate;
+DateValue.prototype = Object.create(Value.prototype);
+DateValue.prototype.constructor = DateValue;
 
-LocalDate.prototype.toString = function() {
+DateValue.prototype.toString = function() {
     return this.value.toISOString().substring(0, 10);
 };
 
-LocalDate.prototype.getValue = function() { 
+DateValue.prototype.getValue = function() {
 	return this.value; 
 };
 
-LocalDate.prototype.Add = function(context, value) {
+DateValue.prototype.Add = function(context, value) {
     if (value instanceof Period) {
         var date = addPeriodToDate(this.value, value);
-        return new LocalDate(date);
+        return new DateValue(date);
     } else {
         throw new SyntaxError("Illegal: Date + " + typeof(value));
     }
 };
 
 
-LocalDate.prototype.Subtract = function(context, value)  {
-    if (value instanceof LocalDate) {
+DateValue.prototype.Subtract = function(context, value)  {
+    if (value instanceof DateValue) {
         return this.minusDate(value);
     } else if (value instanceof Period) {
         return this.minusPeriod(value);
@@ -47,7 +47,7 @@ LocalDate.prototype.Subtract = function(context, value)  {
 
 
 
-LocalDate.prototype.minusDate = function(value) {
+DateValue.prototype.minusDate = function(value) {
     var data = [];
     data[0] = this.value.getUTCFullYear() - value.value.getUTCFullYear();
     data[1] = this.value.getUTCMonth() - value.value.getUTCMonth();
@@ -57,7 +57,7 @@ LocalDate.prototype.minusDate = function(value) {
 
 
 
-LocalDate.prototype.minusPeriod = function(value) {
+DateValue.prototype.minusPeriod = function(value) {
     var date = new Date();
     var year = this.value.getUTCFullYear() - (value.years || 0);
     date.setUTCFullYear(year);
@@ -65,13 +65,13 @@ LocalDate.prototype.minusPeriod = function(value) {
     date.setUTCMonth(month);
     var day = this.value.getUTCDate() - ((value.weeks || 0) * 7) - (value.days || 0);
     date.setUTCDate(day);
-    return new LocalDate(date);
+    return new DateValue(date);
 };
 
 
 
-LocalDate.prototype.CompareTo = function(context, value) {
-    if (value instanceof LocalDate || value instanceof DateTime) {
+DateValue.prototype.CompareTo = function(context, value) {
+    if (value instanceof DateValue || value instanceof DateTime) {
         return this.cmp(value);
     } else {
         throw new SyntaxError("Illegal comparison: Date and " + typeof(value));
@@ -80,7 +80,7 @@ LocalDate.prototype.CompareTo = function(context, value) {
 
 
 
-LocalDate.prototype.cmp = function(value) {
+DateValue.prototype.cmp = function(value) {
     var a = this.value.valueOf();
     var b = value.value.valueOf();
     return a > b ? 1 : (a == b ? 0 : -1);
@@ -88,7 +88,7 @@ LocalDate.prototype.cmp = function(value) {
 
 
 
-LocalDate.prototype.getMemberValue = function(context, name) {
+DateValue.prototype.getMemberValue = function(context, name) {
     if ("year"==name) {
         return new Integer(this.value.getUTCFullYear());
     } else if ("month"==name) {
@@ -104,7 +104,7 @@ LocalDate.prototype.getMemberValue = function(context, name) {
 
 
 
-LocalDate.prototype.getDayOfYear = function() {
+DateValue.prototype.getDayOfYear = function() {
     var first = new Date(this.value);
     first.setMonth(0);
     first.setDate(1);
@@ -114,8 +114,8 @@ LocalDate.prototype.getDayOfYear = function() {
 
 
 
-LocalDate.prototype.equals = function(obj) {
-    if (obj instanceof LocalDate) {
+DateValue.prototype.equals = function(obj) {
+    if (obj instanceof DateValue) {
         return this.value.valueOf() == obj.value.valueOf();
     } else {
         return false;
@@ -123,6 +123,6 @@ LocalDate.prototype.equals = function(obj) {
 };
 
 
-exports.LocalDate = LocalDate;
+exports.DateValue = DateValue;
 
 

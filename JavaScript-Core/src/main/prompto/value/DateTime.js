@@ -1,6 +1,6 @@
 var Value = require("./Value").Value;
 var Period = require("./Period").Period;
-var LocalDate = require("./LocalDate").LocalDate;
+var DateValue = require("./DateValue").DateValue;
 var Time = require("./Time").Time;
 var Integer = require("./Integer").Integer;
 var TextValue = require("./TextValue").TextValue;
@@ -128,7 +128,7 @@ DateTime.prototype.addPeriod = function(value) {
 DateTime.prototype.Subtract = function(context, value) {
 	if (value instanceof DateTime) {
 		return this.subDateTime(value)
-	} else if (value instanceof LocalDate) {
+	} else if (value instanceof DateValue) {
 		return this.subDate(value)
 	} else if (value instanceof Time) {
 		return this.subTime(value)
@@ -197,7 +197,7 @@ DateTime.prototype.subPeriod = function(value) {
 DateTime.prototype.CompareTo = function(context, value) {
     if (value instanceof DateTime) {
         return this.cmp(value.date, value.tzOffset);
-    } else if (value instanceof LocalDate) {
+    } else if (value instanceof DateValue) {
 		return this.cmp(value.value, 0);
 	} else {
 		throw new SyntaxError("Illegal comparison: DateTime and " + typeof(value));

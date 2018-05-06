@@ -5,7 +5,7 @@ var IntegerType = require("./IntegerType").IntegerType;
 var RangeType = require("./RangeType").RangeType;
 var AnyType = require("./AnyType").AnyType;
 var DateRange = require("../value/DateRange").DateRange;
-var LocalDate = require("../value/LocalDate").LocalDate;
+var DateValue = require("../value/DateValue").DateValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
 
@@ -87,7 +87,7 @@ DateType.prototype.checkMember = function(context, name) {
 };
 
 DateType.prototype.newRange = function(left, right) {
-	if (left instanceof LocalDate && right instanceof LocalDate) {
+	if (left instanceof DateValue && right instanceof DateValue) {
 		return new DateRange(left, right);
 	} else {
 		return NativeType.prototype.newRange.call(this, left, right);

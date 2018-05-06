@@ -1,10 +1,10 @@
 var Literal = require("./Literal").Literal;
 var DateType = require("../type/DateType").DateType;
-var LocalDate = require("../value/LocalDate").LocalDate;
+var DateValue = require("../value/DateValue").DateValue;
 
 
 function DateLiteral(text) {
-	Literal.call(this, text, new LocalDate(new Date(text.substring(1,text.length-1))));
+	Literal.call(this, text, new DateValue(new Date(text.substring(1,text.length-1))));
 	return this;
 }
 
