@@ -3,7 +3,7 @@ var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var AnyType = require("../type/AnyType").AnyType;
 var BaseValueList = require("../value/BaseValueList").BaseValueList;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var Value = require("../value/Value").Value;
 
 function ItemInstance(item) {

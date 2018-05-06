@@ -5,7 +5,7 @@ var NullType = require("./NullType").NullType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var TextValue = require("../value/TextValue").TextValue;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 
 
 
@@ -56,7 +56,7 @@ DocumentType.prototype.readJSONField = function(context, node, parts) {
     else if(typeof(node)===typeof(true))
         return Boolean.ValueOf(node);
     else if(typeof(node)===typeof(1))
-        return new Integer(node);
+        return new IntegerValue(node);
     else if(typeof(node)===typeof(1.0))
         return new Decimal(node)
     else if(typeof(node)===typeof(""))

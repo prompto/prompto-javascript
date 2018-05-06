@@ -3,7 +3,7 @@ var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var VoidType = require("../type/VoidType").VoidType;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var NullValue = require("../value/NullValue").NullValue;
 
 function NativeMethodDeclaration(id, args, returnType, statements) {
@@ -34,8 +34,8 @@ NativeMethodDeclaration.prototype.castToReturnType = function(context, value) {
     if(value==null)
         value = NullValue.instance;
     else if(this.returnType==IntegerType.instance && value instanceof DecimalValue)
-        value = new Integer(value.IntegerValue());
-    else if(this.returnType==DecimalType.instance && value instanceof Integer)
+        value = new IntegerValue(value.IntegerValue());
+    else if(this.returnType==DecimalType.instance && value instanceof IntegerValue)
         value = new DecimalValue(value.DecimalValue());
     else if(this.returnType!=null && !(this.returnType.isAssignableFrom(context, value.type))) {
         // only cast if implemented, on a per type basis

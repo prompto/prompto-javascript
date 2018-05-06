@@ -3,7 +3,7 @@ var NullValue = require("./NullValue").NullValue;
 var SetValue = require("./SetValue").SetValue;
 var ListValue = require("./ListValue").ListValue;
 var TextValue = require("./TextValue").TextValue;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var InternalError = require("../error/InternalError").InternalError;
 var BaseType = require("../type/BaseType").BaseType;
 var DictType = require("../type/DictType").DictType;
@@ -73,7 +73,7 @@ DictionaryValue.prototype.hasItem = function(context, value) {
 
 DictionaryValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
-        return new Integer(this.size());
+        return new IntegerValue(this.size());
     } else if ("keys"==name) {
         var set_ = new SetValue(TextType.instance);
         for(p in this.dict) {

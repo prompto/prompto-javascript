@@ -1,6 +1,6 @@
 var Value = require("./Value").Value;
 var Period = require("./Period").Period;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var addPeriodToDate = require("../utils/Utils").addPeriodToDate;
 var DateType = null;
 
@@ -90,13 +90,13 @@ DateValue.prototype.cmp = function(value) {
 
 DateValue.prototype.getMemberValue = function(context, name) {
     if ("year"==name) {
-        return new Integer(this.value.getUTCFullYear());
+        return new IntegerValue(this.value.getUTCFullYear());
     } else if ("month"==name) {
-        return new Integer(this.value.getUTCMonth() + 1);
+        return new IntegerValue(this.value.getUTCMonth() + 1);
     } else if ("dayOfMonth"==name) {
-        return new Integer(this.value.getUTCDate());
+        return new IntegerValue(this.value.getUTCDate());
     } else if ("dayOfYear"==name) {
-        return new Integer(this.getDayOfYear());
+        return new IntegerValue(this.getDayOfYear());
     } else {
         return Value.prototype.getMemberValue.call(this, context, name);
     }

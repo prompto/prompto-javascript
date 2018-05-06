@@ -1,7 +1,7 @@
 var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var IntegerType = require("../type/IntegerType").IntegerType;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 
 function SliceSelector(parent, first, last) {
 	SelectorExpression.call(this, parent);
@@ -51,11 +51,11 @@ SliceSelector.prototype.interpret = function(context) {
         o = o.sliceable;
 	if (o.slice) {
 		var fi = this.first != null ? this.first.interpret(context) : null;
-		if (fi != null && !(fi instanceof Integer)) {
+		if (fi != null && !(fi instanceof IntegerValue)) {
 			throw new SyntaxError("Illegal slice value type: " + fi);
 		}
 		var li = this.last != null ? this.last.interpret(context) : null;
-		if (li != null && !(li instanceof Integer)) {
+		if (li != null && !(li instanceof IntegerValue)) {
 			throw new SyntaxError("Illegal slice value type: " + li);
 		}
 		return o.slice(fi, li);

@@ -8,7 +8,7 @@ var RangeType = require("./RangeType").RangeType;
 var TextType = null;
 var AnyType = require("./AnyType").AnyType;
 var TextValue = null;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var IntegerRange = require("../value/IntegerRange").IntegerRange;
 var Identifier = require("../grammar/Identifier").Identifier;
 var PeriodType = null;
@@ -125,7 +125,7 @@ IntegerType.prototype.checkRange = function(context, other) {
 
 
 IntegerType.prototype.newRange = function(left, right) {
-	if(left instanceof Integer && right instanceof Integer) {
+	if(left instanceof IntegerValue && right instanceof IntegerValue) {
 		return new IntegerRange(left, right);
 	} else {
 		return NativeType.prototype.newRange.call(this, left, right);
@@ -134,7 +134,7 @@ IntegerType.prototype.newRange = function(left, right) {
 
 IntegerType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	if (typeof(value)=='number') {
-		return new Integer(value);
+		return new IntegerValue(value);
 	} else {
 		return value; // TODO for now
 	}

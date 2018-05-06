@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var BaseType = require("../type/BaseType").BaseType;
 var RangeType = require("../type/RangeType").RangeType;
@@ -43,7 +43,7 @@ Range.prototype.hasItem = function(context, lval) {
 };
 
 Range.prototype.getItemInContext = function(context, index) {
-	if (index instanceof Integer) {
+	if (index instanceof IntegerValue) {
 		try {
 			var value = this.getItem(index.IntegerValue());
 			if (value instanceof Value) {
@@ -111,7 +111,7 @@ RangeIterator.prototype.hasNext = function() {
 };
 
 RangeIterator.prototype.next = function() {
-	return this.range.getItemInContext(this.context, new Integer(++this.index));
+	return this.range.getItemInContext(this.context, new IntegerValue(++this.index));
 };
 
 /*

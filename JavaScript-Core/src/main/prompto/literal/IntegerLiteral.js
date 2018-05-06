@@ -1,4 +1,4 @@
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var Literal = require("./Literal").Literal;
 var IntegerType = require("../type/IntegerType").IntegerType;
 
@@ -11,7 +11,7 @@ function parse(value) {
 }
 
 function IntegerLiteral(text, value) {
-	Literal.call(this, text, new Integer(parse(value)));
+	Literal.call(this, text, new IntegerValue(parse(value)));
 	return this;
 }
 

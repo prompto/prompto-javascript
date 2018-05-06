@@ -1,6 +1,6 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
 var BooleanValue = require("./BooleanValue").BooleanValue;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var ListType = null;
 var SetValue = null;
 
@@ -53,7 +53,7 @@ ListValue.prototype.Add = function(context, value) {
 };
 
 ListValue.prototype.Multiply = function(context, value) {
-	if (value instanceof Integer) {
+	if (value instanceof IntegerValue) {
 		var count = value.value;
 		if (count < 0) {
 			throw new SyntaxError("Negative repeat count:" + count);

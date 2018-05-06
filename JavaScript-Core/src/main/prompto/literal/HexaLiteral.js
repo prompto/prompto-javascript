@@ -1,5 +1,5 @@
 var Literal = require("./Literal").Literal;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 
 /* jshint bitwise:false*/
@@ -18,7 +18,7 @@ function parseHexa(text) {
 			throw (text + " is not a valid hexadecimal number");
 		}
 	}
-	return new Integer(value);
+	return new IntegerValue(value);
 }
 
 function HexaLiteral(text) {

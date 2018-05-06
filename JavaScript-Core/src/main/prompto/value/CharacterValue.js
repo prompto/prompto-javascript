@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextValue = null; // circular dependency
 var removeAccents = require("../utils/Utils").removeAccents;
@@ -30,7 +30,7 @@ CharacterValue.isWhitespace = function(c) {
 
 CharacterValue.prototype.getMemberValue = function(context, name) {
     if ("codePoint"==name) {
-        return new Integer(this.value.charCodeAt(0));
+        return new IntegerValue(this.value.charCodeAt(0));
     } else {
         return Value.prototype.getMemberValue.call(this, context, name);
     }
@@ -42,7 +42,7 @@ CharacterValue.prototype.Add = function(context, value) {
 }
 
 CharacterValue.prototype.Multiply = function(context, value) {
-    if (value instanceof Integer) {
+    if (value instanceof IntegerValue) {
         var count = value.value;
         if (count < 0) {
             throw new SyntaxError("Negative repeat count:" + count);

@@ -1,6 +1,6 @@
 var BooleanValue = require("./BooleanValue").BooleanValue;
 var Value = require("./Value").Value;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var SetType = require("../type/SetType").SetType;
 var ListValue = null;
 
@@ -46,7 +46,7 @@ SetValue.prototype.size = function() {
 
 SetValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
-        return new Integer(this.size());
+        return new IntegerValue(this.size());
     } else {
         return Value.prototype.getMemberValue.call(this, context, name);
     }
@@ -66,7 +66,7 @@ SetValue.prototype.hasItem = function(context, item) {
 
 
 SetValue.prototype.getItemInContext = function(context, index) {
-    if (index instanceof Integer) {
+    if (index instanceof IntegerValue) {
         try {
             var idx = index.IntegerValue();
             for(var p in this.items) {

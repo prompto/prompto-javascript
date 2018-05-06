@@ -1,5 +1,5 @@
 var Range = require("./Range").Range;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var IntegerType = null;
 
 exports.resolve =function() {
@@ -24,7 +24,7 @@ IntegerRange.prototype.getItem = function(index) {
 	if(result>this.high.IntegerValue()) {
 		throw new IndexOutOfBoundsException();
 	}
-	return new Integer(result);
+	return new IntegerValue(result);
 };
 
 IntegerRange.prototype.newInstance = function(left, right) {

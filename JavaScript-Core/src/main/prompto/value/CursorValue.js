@@ -1,7 +1,7 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
 var CursorType = require("../type/CursorType").CursorType;
 var Identifier = require("../grammar/Identifier").Identifier;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var Value = require("./Value").Value;
 var BooleanValue = require("./BooleanValue").BooleanValue;
 
@@ -65,9 +65,9 @@ CursorValue.prototype.readItemType = function(stored) {
 
 CursorValue.prototype.getMemberValue = function(context, name) {
     if ("count" == name)
-        return new Integer(this.count());
+        return new IntegerValue(this.count());
     else if ("totalCount" == name)
-        return new Integer(this.totalCount());
+        return new IntegerValue(this.totalCount());
     else
         throw new InvalidDataError("No such member:" + name);
 };

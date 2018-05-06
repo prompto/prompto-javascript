@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var PeriodType = require("../type/PeriodType").PeriodType;
 
 function Period(data) {
@@ -116,7 +116,7 @@ Period.prototype.minus = function(period) {
 };
 
 Period.prototype.Multiply = function(context, value) {
-    if (value instanceof Integer) {
+    if (value instanceof IntegerValue) {
         return this.multiply(value);
     } else {
         throw new SyntaxError("Illegal: Period * " + typeof(value));
@@ -264,9 +264,9 @@ Period.prototype.equals = function(obj) {
  @Override
  public IValue Multiply(Context context, IValue value) throws PromptoError
  {
- if (value instanceof Integer)
+ if (value instanceof IntegerValue)
  {
- int count = (int)((Integer)value).IntegerValue();
+ int count = (int)((IntegerValue)value).IntegerValue();
  if (count < 0)
  throw new SyntaxError("Negative repeat count:" + count);
  if (count == 0)

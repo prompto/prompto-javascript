@@ -1,5 +1,5 @@
 var Range = require("./Range").Range;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var CharacterValue = null;
 var CharacterType = null;
 

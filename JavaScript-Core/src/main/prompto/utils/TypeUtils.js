@@ -1,6 +1,6 @@
 var MissingType = require("../type/MissingType").MissingType;
 var NullValue = require("../value/NullValue").NullValue;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var TextValue = require("../value/TextValue").TextValue;
 
@@ -11,7 +11,7 @@ convertFromJavaScript = function(value) {
         return new TextValue(value);
     } else if(typeof(value)=='number') {
         if(value == Math.floor(value))
-            return new Integer(value);
+            return new IntegerValue(value);
         else
             return new DecimalValue(value);
     } else {

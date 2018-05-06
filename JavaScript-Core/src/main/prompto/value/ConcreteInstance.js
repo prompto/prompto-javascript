@@ -9,7 +9,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var Operator = require("../grammar/Operator").Operator;
 var NullValue = require("./NullValue").NullValue;
 var DecimalValue = require("./DecimalValue").DecimalValue;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var Instance = require("./Value").Instance;
 var DataStore = require("../store/DataStore").DataStore;
@@ -175,7 +175,7 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
 };
 
 ConcreteInstance.prototype.autocast = function(decl, value) {
-    if(value instanceof Integer && decl.getType()==DecimalType.instance)
+    if(value instanceof IntegerValue && decl.getType()==DecimalType.instance)
         value = new DecimalValue(value.DecimalValue());
     return value;
 };

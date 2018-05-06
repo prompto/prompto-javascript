@@ -1,11 +1,7 @@
-var NullValue = null;
 var TextValue = null;
-var Integer = null;
 
 exports.resolve = function() {
-    NullValue = require("./NullValue").NullValue;
     TextValue = require("./TextValue").TextValue;
-    Integer = require("./Integer").Integer;
 };
 
 var id = 0;

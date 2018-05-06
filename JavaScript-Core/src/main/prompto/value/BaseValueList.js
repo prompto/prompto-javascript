@@ -1,6 +1,6 @@
 var Value = require("./Value").Value;
 var Container = require("./Value").Container;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var InternalError = require("../error/InternalError").InternalError;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
@@ -35,7 +35,7 @@ BaseValueList.prototype.setItem = function(index, value) {
 
 
 BaseValueList.prototype.setItemInContext = function(context, index, value) {
-    if (index instanceof Integer) {
+    if (index instanceof IntegerValue) {
         var idx = index.IntegerValue() - 1;
         if (idx > this.items.length) {
             throw new IndexOutOfRangeError();
@@ -94,7 +94,7 @@ BaseValueList.prototype.hasItem = function(context, lval) {
 };
 
 BaseValueList.prototype.getItemInContext = function(context, index) {
-	if (index instanceof Integer) {
+	if (index instanceof IntegerValue) {
 		try {
 			var idx = index.IntegerValue() - 1;
 			if(idx>this.items.length) {
@@ -156,7 +156,7 @@ BaseValueList.prototype.equals = function(obj) {
 
 BaseValueList.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
-		return new Integer(this.items.length);
+		return new IntegerValue(this.items.length);
 	} else {
 		return Container.prototype.getMemberValue.call(this, context, name);
 	}

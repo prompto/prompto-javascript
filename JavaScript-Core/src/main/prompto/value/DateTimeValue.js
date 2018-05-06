@@ -2,7 +2,7 @@ var Value = require("./Value").Value;
 var Period = require("./Period").Period;
 var DateValue = require("./DateValue").DateValue;
 var Time = require("./Time").Time;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var DateTimeType = null;
 
@@ -213,23 +213,23 @@ DateTimeValue.prototype.cmp = function(date, tzOffset) {
 
 DateTimeValue.prototype.getMemberValue = function(context, name) {
 	if ("year"==name) {
-		return new Integer(this.date.getUTCFullYear());
+		return new IntegerValue(this.date.getUTCFullYear());
 	} else if ("month"==name) {
-		return new Integer(this.date.getUTCMonth() + 1);
+		return new IntegerValue(this.date.getUTCMonth() + 1);
 	} else if ("dayOfMonth"==name) {
-		return new Integer(this.date.getUTCDate());
+		return new IntegerValue(this.date.getUTCDate());
 	} else if ("dayOfYear"==name) {
-		return new Integer(this.getDayOfYear());
+		return new IntegerValue(this.getDayOfYear());
 	} else if ("hour"==name) {
-		return new Integer(this.date.getUTCHours());
+		return new IntegerValue(this.date.getUTCHours());
 	} else if ("minute"==name) {
-		return new Integer(this.date.getUTCMinutes());
+		return new IntegerValue(this.date.getUTCMinutes());
 	} else if ("second"==name) {
-		return new Integer(this.date.getUTCSeconds());
+		return new IntegerValue(this.date.getUTCSeconds());
 	} else if ("millisecond"==name) {
-		return new Integer(this.date.getUTCMilliseconds());
+		return new IntegerValue(this.date.getUTCMilliseconds());
 	} else if ("tzOffset"==name) {
-		return new Integer(this.tzOffset);
+		return new IntegerValue(this.tzOffset);
 	} else if ("tzName"==name) {
 		return new TextValue("Z");
 	} else {

@@ -1,6 +1,6 @@
 var Value = require("./Value").Value;
 var CharacterValue = require("./CharacterValue").CharacterValue;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextType = require("../type/TextType").TextType;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var removeAccents = require("../utils/Utils").removeAccents;
@@ -31,7 +31,7 @@ TextValue.prototype.Add = function(context, value) {
 };
 
 TextValue.prototype.Multiply = function(context, value) {
-	if (value instanceof Integer) {
+	if (value instanceof IntegerValue) {
 		var count = value.IntegerValue();
 		if (count < 0) {
 			throw new SyntaxError("Negative repeat count:" + count);
@@ -71,7 +71,7 @@ TextValue.prototype.hasItem = function(context, value) {
 
 TextValue.prototype.getMemberValue = function(context, name) {
 	if ("count"==name) {
-		return new Integer(this.value.length);
+		return new IntegerValue(this.value.length);
 	} else {
         return Value.prototype.getMemberValue.call(this, context, name);
 	}
@@ -79,7 +79,7 @@ TextValue.prototype.getMemberValue = function(context, name) {
 
 TextValue.prototype.getItemInContext = function(context, index) {
 	try {
-		if (index instanceof Integer) {
+		if (index instanceof IntegerValue) {
 			return new CharacterValue(this.value[index.IntegerValue() - 1]);
 		} else {
 			throw new InvalidDataError("No such item:" + index.toString());

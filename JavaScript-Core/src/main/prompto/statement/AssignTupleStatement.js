@@ -4,7 +4,7 @@ var AnyType = require("../type/AnyType").AnyType;
 var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
 var TupleValue = require("../value/TupleValue").TupleValue;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 
 function AssignTupleStatement(names, expression) {
@@ -60,7 +60,7 @@ AssignTupleStatement.prototype.interpret = function(context) {
 	}
 	for(var i=0;i<this.names.length;i++) {
 		var name = this.names[i];
-		var value = object.getItemInContext(context, new Integer(i+1)); // since getItemInContext is 1 based
+		var value = object.getItemInContext(context, new IntegerValue(i+1)); // since getItemInContext is 1 based
 		if(context.getRegisteredValue(name)==null) {
 			context.registerValue(new Variable(name, AnyType.instance));
 		}

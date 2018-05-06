@@ -1,6 +1,6 @@
 var Value = require("./Value").Value;
 var Period = require("./Period").Period;
-var Integer = require("./Integer").Integer;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var TimeType = null;
 
 exports.resolve = function() {
@@ -113,13 +113,13 @@ Time.prototype.CompareTo = function(context, value) {
 
 Time.prototype.getMemberValue = function(context, name) {
 	if ("hour"==name) {
-		return new Integer(this.value.getUTCHours());
+		return new IntegerValue(this.value.getUTCHours());
 	} else if ("minute"==name) {
-		return new Integer(this.value.getUTCMinutes());
+		return new IntegerValue(this.value.getUTCMinutes());
 	} else if ("second"==name) {
-		return new Integer(this.value.getUTCSeconds());
+		return new IntegerValue(this.value.getUTCSeconds());
 	} else if ("millisecond"==name) {
-		return new Integer(this.value.getUTCMilliseconds());
+		return new IntegerValue(this.value.getUTCMilliseconds());
 	} else {
         return Value.prototype.getMemberValue.call(this, context, name);
 	}

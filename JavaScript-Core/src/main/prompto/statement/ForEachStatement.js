@@ -2,7 +2,7 @@ var BaseStatement = require("./BaseStatement").BaseStatement;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
-var Integer = require("../value/Integer").Integer;
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var InternalError = require("../error/InternalError").InternalError;
 var BreakResult = require("../runtime/BreakResult").BreakResult;
 
@@ -84,7 +84,7 @@ ForEachStatement.prototype.evaluateItemIteratorWithIndex = function(elemType, co
 		child.registerValue(new Variable(this.v2, elemType));
 		child.setValue(this.v2, iterator.next());
 		child.registerValue(new Variable(this.v1, IntegerType.instance));
-		child.setValue(this.v1, new Integer(++index));
+		child.setValue(this.v1, new IntegerValue(++index));
 		var value = this.statements.interpret(child);
 		if (value != null) {
 			return value;
