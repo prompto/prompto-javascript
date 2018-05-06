@@ -17,11 +17,11 @@ function toValue(node) {
 }
 
 function toBoolean(node) {
-    return prompto.value.Bool.ValueOf(node);
+    return prompto.value.BooleanValue.ValueOf(node);
 }
 
 function toText(node) {
-    return new prompto.value.Text(node);
+    return new prompto.value.TextValue(node);
 }
 
 function toDocument(node) {
@@ -30,7 +30,7 @@ function toDocument(node) {
         if(node.hasOwnProperty(name))
             values[name] = toValue(node[name]);
     }
-    return new prompto.value.Document(values);
+    return new prompto.value.DocumentValue(values);
 }
 
 
@@ -41,9 +41,9 @@ function toList(node) {
 
 function fromNumber(node) {
     if (node == Math.floor(node))
-        return new prompto.value.Integer(node);
+        return new prompto.value.IntegerValue(node);
     else
-        return new prompto.value.Decimal(node);
+        return new prompto.value.DecimalValue(node);
 }
 
 var converters = {
