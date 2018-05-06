@@ -21,9 +21,9 @@ UUIDLiteral.prototype.check = function(context) {
 };
 
 UUIDLiteral.prototype.transpile = function(transpiler) {
-    var UUIDjs = require("../utils/UUIDjs").UUIDjs;
-    transpiler.require(UUIDjs);
-    transpiler.append("UUIDjs.fromString(").append(this.text).append(")");
+    var UUID = require("../intrinsic/UUID").UUID;
+    transpiler.require(UUID);
+    transpiler.append("UUID.fromString(").append(this.text).append(")");
 };
 
 exports.UUIDLiteral = UUIDLiteral;
