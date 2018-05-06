@@ -1,5 +1,5 @@
 var RangeValue = require("./RangeValue").RangeValue;
-var Time = require("./Time").Time;
+var TimeValue = require("./TimeValue").TimeValue;
 var TimeType = null;
 
 exports.resolve = function() {
@@ -28,12 +28,12 @@ TimeRange.prototype.getItem = function(index) {
 	if(result>this.high.value.valueOf()) {
 		throw new IndexOutOfBoundsException();
 	}
-	return new Time(new Date(result));
+	return new TimeValue(new Date(result));
 };
 
 /*
 @Override
-public RangeValue<Time> newInstance(Time left, Time right) {
+public RangeValue<TimeValue> newInstance(TimeValue left, TimeValue right) {
 	return new TimeRange(left, right);
 }
 */

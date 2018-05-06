@@ -1,9 +1,9 @@
 var Literal = require("./Literal").Literal;
 var TimeType = require("../type/TimeType").TimeType;
-var Time = require("../value/Time").Time;
+var TimeValue = require("../value/TimeValue").TimeValue;
 
 function TimeLiteral(text) {
-	Literal.call(this, text, Time.Parse(text.substring(1,text.length-1)));
+	Literal.call(this, text, TimeValue.Parse(text.substring(1,text.length-1)));
 	return this;
 }
 

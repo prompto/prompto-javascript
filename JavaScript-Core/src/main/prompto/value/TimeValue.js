@@ -7,41 +7,41 @@ exports.resolve = function() {
     TimeType = require("../type/TimeType").TimeType;
 };
 
-function Time(value) {
+function TimeValue(value) {
 	Value.call(this, TimeType.instance);
 	this.value = value;
 	return this;
 }
 
-Time.prototype = Object.create(Value.prototype);
-Time.prototype.constructor = Time;
+TimeValue.prototype = Object.create(Value.prototype);
+TimeValue.prototype.constructor = TimeValue;
 
-Time.Parse = function(text) {
+TimeValue.Parse = function(text) {
 	var date = new Date();
 	date.setUTCHours(parseInt(text.substring(0,2)));
 	date.setUTCMinutes(parseInt(text.substring(3,5)));
 	date.setUTCSeconds(parseInt(text.length>6 ? text.substring(6,8) : 0));
 	date.setUTCMilliseconds(text.length>9 ? parseInt(text.substring(9,13)) : 0);
-	return new Time(date);
+	return new TimeValue(date);
 };
 
-Time.prototype.toString = function() {
+TimeValue.prototype.toString = function() {
     return this.value.toISOString().substring(11, 23);
 };
 
-Time.prototype.getValue = function() {
+TimeValue.prototype.getValue = function() {
 	return this.value;
 };
 
-Time.prototype.Add = function(context, value) {
+TimeValue.prototype.Add = function(context, value) {
 	if (value instanceof PeriodValue) {
 		return this.addPeriod(value);
 	} else {
-		throw new SyntaxError("Illegal: Time + " + typeof(value));
+		throw new SyntaxError("Illegal: TimeValue + " + typeof(value));
 	}
 };
 
-Time.prototype.addPeriod = function(value) {
+TimeValue.prototype.addPeriod = function(value) {
 	var date = new Date();
 	var hour = this.value.getUTCHours() + (value.hours || 0);
 	date.setUTCHours(hour);
@@ -51,20 +51,20 @@ Time.prototype.addPeriod = function(value) {
 	date.setUTCSeconds(second);
 	var millis = this.value.getUTCMilliseconds() + (value.millis || 0);
 	date.setUTCMilliseconds(millis);
-	return new Time(date);
+	return new TimeValue(date);
 };
 
-Time.prototype.Subtract = function(context, value) {
+TimeValue.prototype.Subtract = function(context, value) {
 	if (value instanceof PeriodValue) {
 		return this.subPeriod(value);
-	} else if (value instanceof Time) {
+	} else if (value instanceof TimeValue) {
 			return this.subTime(value);
 	} else {
-		throw new SyntaxError("Illegal: Time - " + typeof(value));
+		throw new SyntaxError("Illegal: TimeValue - " + typeof(value));
 	}
 };
 
-Time.prototype.subTime = function(value) {
+TimeValue.prototype.subTime = function(value) {
 	var data = [];
 	data[4] = this.value.getUTCHours() - value.value.getUTCHours();
 	data[5] = this.value.getUTCMinutes() - value.value.getUTCMinutes();
@@ -73,7 +73,7 @@ Time.prototype.subTime = function(value) {
 	return new PeriodValue(data);
 };
 
-Time.prototype.subPeriod = function(value) {
+TimeValue.prototype.subPeriod = function(value) {
 	var date = new Date();
 	var hour = this.value.getUTCHours() - (value.hours || 0);
 	date.setUTCHours(hour);
@@ -83,35 +83,35 @@ Time.prototype.subPeriod = function(value) {
 	date.setUTCSeconds(second);
 	var millis = this.value.getUTCMilliseconds() - (value.millis || 0);
 	date.setUTCMilliseconds(millis);
-	return new Time(date);
+	return new TimeValue(date);
 };
 
 
 /*
 @Override
 public IValue Subtract(Context context, IValue value) throws PromptoError {
-	if (value instanceof Time) {
-		LocalTime other = ((Time) value).value;
+	if (value instanceof TimeValue) {
+		LocalTime other = ((TimeValue) value).value;
 		org.joda.time.PeriodValue res = new org.joda.time.PeriodValue(0, 0, 0, 0, this.value.getHourOfDay() - other.getHourOfDay(), this.value.getMinuteOfHour() - other.getMinuteOfHour(), this.value.getSecondOfMinute() - other.getSecondOfMinute(), this.value.getMillisOfSecond()
 				- other.getMillisOfSecond());
 		return new PeriodValue(res);
 	} else if (value instanceof PeriodValue)
 		return this.minus((PeriodValue) value);
 	else
-		throw new SyntaxError("Illegal: Time - " + value.getClass().getSimpleName());
+		throw new SyntaxError("Illegal: TimeValue - " + value.getClass().getSimpleName());
 }
 
 */
 
-Time.prototype.CompareTo = function(context, value) {
-	if (value instanceof Time) {
+TimeValue.prototype.CompareTo = function(context, value) {
+	if (value instanceof TimeValue) {
 		return this.cmp(value);
 	} else {
-		throw new SyntaxError("Illegal comparison: Time and " + typeof(value));
+		throw new SyntaxError("Illegal comparison: TimeValue and " + typeof(value));
 	}
 };
 
-Time.prototype.getMemberValue = function(context, name) {
+TimeValue.prototype.getMemberValue = function(context, name) {
 	if ("hour"==name) {
 		return new IntegerValue(this.value.getUTCHours());
 	} else if ("minute"==name) {
@@ -137,14 +137,14 @@ public long getMillisOfDay() {
 
 */
 
-Time.prototype.cmp = function(obj) {
+TimeValue.prototype.cmp = function(obj) {
 	var a = this.value.valueOf();
 	var b = obj.value.valueOf();
 	return a > b ? 1 : (a == b ? 0 : -1) ;
 };
 
-Time.prototype.equals = function(obj) {
-	if (obj instanceof Time) {
+TimeValue.prototype.equals = function(obj) {
+	if (obj instanceof TimeValue) {
 		return this.value.valueOf() == obj.value.valueOf();
 	} else {
 		return false;
@@ -164,4 +164,4 @@ public String toString() {
 
 */
 
-exports.Time = Time;
+exports.TimeValue = TimeValue;

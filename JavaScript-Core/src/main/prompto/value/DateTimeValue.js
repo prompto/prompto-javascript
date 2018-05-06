@@ -1,7 +1,7 @@
 var Value = require("./Value").Value;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var DateValue = require("./DateValue").DateValue;
-var Time = require("./Time").Time;
+var TimeValue = require("./TimeValue").TimeValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var DateTimeType = null;
@@ -130,7 +130,7 @@ DateTimeValue.prototype.Subtract = function(context, value) {
 		return this.subDateTime(value)
 	} else if (value instanceof DateValue) {
 		return this.subDate(value)
-	} else if (value instanceof Time) {
+	} else if (value instanceof TimeValue) {
 		return this.subTime(value)
 	} else if (value instanceof PeriodValue) {
 		return this.subPeriod(value)

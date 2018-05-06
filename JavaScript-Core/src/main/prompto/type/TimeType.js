@@ -4,12 +4,12 @@ var PeriodType = require("./PeriodType").PeriodType;
 var IntegerType = require("./IntegerType").IntegerType;
 var RangeType = require("./RangeType").RangeType;
 var TimeRange = require("../value/TimeRange").TimeRange;
-var Time = require("../value/Time").Time;
+var TimeValue = require("../value/TimeValue").TimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
 
 function TimeType()  {
-	NativeType.call(this, new Identifier("Time"));
+	NativeType.call(this, new Identifier("TimeValue"));
 	return this;
 }
 
@@ -72,7 +72,7 @@ TimeType.prototype.checkMember = function (context, name) {
 };
 
 TimeType.prototype.newRange = function(left, right) {
-	if (left instanceof Time && right instanceof Time) {
+	if (left instanceof TimeValue && right instanceof TimeValue) {
 		return new TimeRange(left, right);
 	} else {
 		return NativeType.prototype.newRange.call(this, left, right);
