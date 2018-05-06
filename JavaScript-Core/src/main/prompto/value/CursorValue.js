@@ -5,7 +5,7 @@ var Integer = require("./Integer").Integer;
 var Value = require("./Value").Value;
 var BooleanValue = require("./BooleanValue").BooleanValue;
 
-function Cursor(context, itemType, iterDocs) {
+function CursorValue(context, itemType, iterDocs) {
     Value.call(this, new CursorType(itemType));
     this.context = context;
     this.iterDocuments = iterDocs;
@@ -13,25 +13,25 @@ function Cursor(context, itemType, iterDocs) {
     return this;
 };
 
-Cursor.prototype = Object.create(Value.prototype);
-Cursor.prototype.constructor = Cursor;
+CursorValue.prototype = Object.create(Value.prototype);
+CursorValue.prototype.constructor = CursorValue;
 
 
-Cursor.prototype.isEmpty = function() {
+CursorValue.prototype.isEmpty = function() {
     return this.length()==0;
 };
 
-Cursor.prototype.count = function() {
+CursorValue.prototype.count = function() {
     return this.iterDocuments.count();
 };
 
 
-Cursor.prototype.totalCount = function() {
+CursorValue.prototype.totalCount = function() {
     return this.iterDocuments.totalCount();
 };
 
 
-Cursor.prototype.toString = function() {
+CursorValue.prototype.toString = function() {
     var list = [];
     while(this.hasNext())
         list.push(this.next().toString());
@@ -39,22 +39,22 @@ Cursor.prototype.toString = function() {
 };
 
 
-Cursor.prototype.getIterator = function() {
+CursorValue.prototype.getIterator = function() {
     return this;
 };
 
 
-Cursor.prototype.hasNext = function() {
+CursorValue.prototype.hasNext = function() {
     return this.iterDocuments.hasNext();
 };
 
-Cursor.prototype.next = function() {
+CursorValue.prototype.next = function() {
     var stored = this.iterDocuments.next();
     var itemType = this.readItemType(stored);
     return itemType.newInstanceFromStored(this.context, stored);
 };
 
-Cursor.prototype.readItemType = function(stored) {
+CursorValue.prototype.readItemType = function(stored) {
     var categories = stored["category"] || null;
     var category = categories[categories.length-1];
     var typ = new CategoryType(new Identifier(category));
@@ -63,7 +63,7 @@ Cursor.prototype.readItemType = function(stored) {
 };
 
 
-Cursor.prototype.getMemberValue = function(context, name) {
+CursorValue.prototype.getMemberValue = function(context, name) {
     if ("count" == name)
         return new Integer(this.count());
     else if ("totalCount" == name)
@@ -72,8 +72,8 @@ Cursor.prototype.getMemberValue = function(context, name) {
         throw new InvalidDataError("No such member:" + name);
 };
 
-Cursor.prototype.filter = function(context, itemId, filter) {
-    var cursor = new Cursor(this.context, this.type.itemType, this.iterDocuments);
+CursorValue.prototype.filter = function(context, itemId, filter) {
+    var cursor = new CursorValue(this.context, this.type.itemType, this.iterDocuments);
     cursor.superHasNext = cursor.hasNext;
     cursor.hasNext = function() {
         this.current = null;
@@ -97,4 +97,4 @@ Cursor.prototype.filter = function(context, itemId, filter) {
     return cursor;
 };
 
-exports.Cursor = Cursor;
+exports.CursorValue = CursorValue;

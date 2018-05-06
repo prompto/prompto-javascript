@@ -7,7 +7,7 @@ var DataStore = require("../store/DataStore").DataStore;
 var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var MatchOp = require("../store/MatchOp").MatchOp;
-var Cursor = require("../value/Cursor").Cursor;
+var CursorValue = require("../value/CursorValue").CursorValue;
 var Store = require("../store/Store").Store;
 
 function FetchManyExpression(typ, first, last, predicate, orderBy) {
@@ -136,7 +136,7 @@ FetchManyExpression.prototype.interpret = function(context) {
     var query = this.buildFetchManyQuery(context, store);
     var results = store.fetchMany(query);
     typ = this.typ==null ? AnyType.instance : this.typ;
-    return new Cursor(context, typ, results);
+    return new CursorValue(context, typ, results);
 };
 
 
