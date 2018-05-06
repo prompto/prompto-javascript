@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Period = require("./Period").Period;
+var PeriodValue = require("./PeriodValue").PeriodValue;
 var DateValue = require("./DateValue").DateValue;
 var Time = require("./Time").Time;
 var IntegerValue = require("./IntegerValue").IntegerValue;
@@ -99,7 +99,7 @@ DateTimeValue.prototype.toString = function() {
 };
 
 DateTimeValue.prototype.Add = function(context, value) {
-	if (value instanceof Period) {
+	if (value instanceof PeriodValue) {
 		return this.addPeriod(value);
 	} else {
 		throw new SyntaxError("Illegal: DateTimeValue + " + typeof(value));
@@ -132,7 +132,7 @@ DateTimeValue.prototype.Subtract = function(context, value) {
 		return this.subDate(value)
 	} else if (value instanceof Time) {
 		return this.subTime(value)
-	} else if (value instanceof Period) {
+	} else if (value instanceof PeriodValue) {
 		return this.subPeriod(value)
 	} else {
 		throw new SyntaxError("Illegal: DateTimeValue - " + typeof(value));
@@ -149,7 +149,7 @@ DateTimeValue.prototype.subDateTime = function(other) {
 	data[5] = this.date.getUTCMinutes() - other.date.getUTCMinutes();
 	data[6] = this.date.getUTCSeconds() - other.date.getUTCSeconds();
 	data[7] = this.date.getUTCMilliseconds() - other.date.getUTCMilliseconds();
-	return new Period(data);
+	return new PeriodValue(data);
 }
 
 DateTimeValue.prototype.subDate = function(value) {
@@ -160,7 +160,7 @@ DateTimeValue.prototype.subDate = function(value) {
 	data[5] = this.date.getUTCMinutes();
 	data[6] = this.date.getUTCSeconds();
 	data[7] = this.date.getUTCMilliseconds();
-	return new Period(data);
+	return new PeriodValue(data);
 }
 
 DateTimeValue.prototype.subTime = function(value) {
@@ -172,7 +172,7 @@ DateTimeValue.prototype.subTime = function(value) {
 	data[5] = this.date.getUTCMinutes() - value.value.getUTCMinutes();
 	data[6] = this.date.getUTCSeconds() - value.value.getUTCSeconds();
 	data[7] = this.date.getUTCMilliseconds() - value.value.getUTCMilliseconds();
-	return new Period(data);
+	return new PeriodValue(data);
 }
 
 DateTimeValue.prototype.subPeriod = function(value) {

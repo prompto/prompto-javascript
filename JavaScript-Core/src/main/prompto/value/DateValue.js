@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Period = require("./Period").Period;
+var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var addPeriodToDate = require("../utils/Utils").addPeriodToDate;
 var DateType = null;
@@ -26,7 +26,7 @@ DateValue.prototype.getValue = function() {
 };
 
 DateValue.prototype.Add = function(context, value) {
-    if (value instanceof Period) {
+    if (value instanceof PeriodValue) {
         var date = addPeriodToDate(this.value, value);
         return new DateValue(date);
     } else {
@@ -38,7 +38,7 @@ DateValue.prototype.Add = function(context, value) {
 DateValue.prototype.Subtract = function(context, value)  {
     if (value instanceof DateValue) {
         return this.minusDate(value);
-    } else if (value instanceof Period) {
+    } else if (value instanceof PeriodValue) {
         return this.minusPeriod(value);
     } else {
         throw new SyntaxError("Illegal: Date - " + typeof(value));
@@ -52,7 +52,7 @@ DateValue.prototype.minusDate = function(value) {
     data[0] = this.value.getUTCFullYear() - value.value.getUTCFullYear();
     data[1] = this.value.getUTCMonth() - value.value.getUTCMonth();
     data[3] = this.value.getUTCDate() - value.value.getUTCDate();
-    return new Period(data);
+    return new PeriodValue(data);
 };
 
 

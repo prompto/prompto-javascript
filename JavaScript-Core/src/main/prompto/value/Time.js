@@ -1,5 +1,5 @@
 var Value = require("./Value").Value;
-var Period = require("./Period").Period;
+var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var TimeType = null;
 
@@ -34,7 +34,7 @@ Time.prototype.getValue = function() {
 };
 
 Time.prototype.Add = function(context, value) {
-	if (value instanceof Period) {
+	if (value instanceof PeriodValue) {
 		return this.addPeriod(value);
 	} else {
 		throw new SyntaxError("Illegal: Time + " + typeof(value));
@@ -55,7 +55,7 @@ Time.prototype.addPeriod = function(value) {
 };
 
 Time.prototype.Subtract = function(context, value) {
-	if (value instanceof Period) {
+	if (value instanceof PeriodValue) {
 		return this.subPeriod(value);
 	} else if (value instanceof Time) {
 			return this.subTime(value);
@@ -70,7 +70,7 @@ Time.prototype.subTime = function(value) {
 	data[5] = this.value.getUTCMinutes() - value.value.getUTCMinutes();
 	data[6] = this.value.getUTCSeconds() - value.value.getUTCSeconds();
 	data[7] = this.value.getUTCMilliseconds() - value.value.getUTCMilliseconds();
-	return new Period(data);
+	return new PeriodValue(data);
 };
 
 Time.prototype.subPeriod = function(value) {
@@ -92,11 +92,11 @@ Time.prototype.subPeriod = function(value) {
 public IValue Subtract(Context context, IValue value) throws PromptoError {
 	if (value instanceof Time) {
 		LocalTime other = ((Time) value).value;
-		org.joda.time.Period res = new org.joda.time.Period(0, 0, 0, 0, this.value.getHourOfDay() - other.getHourOfDay(), this.value.getMinuteOfHour() - other.getMinuteOfHour(), this.value.getSecondOfMinute() - other.getSecondOfMinute(), this.value.getMillisOfSecond()
+		org.joda.time.PeriodValue res = new org.joda.time.PeriodValue(0, 0, 0, 0, this.value.getHourOfDay() - other.getHourOfDay(), this.value.getMinuteOfHour() - other.getMinuteOfHour(), this.value.getSecondOfMinute() - other.getSecondOfMinute(), this.value.getMillisOfSecond()
 				- other.getMillisOfSecond());
-		return new Period(res);
-	} else if (value instanceof Period)
-		return this.minus((Period) value);
+		return new PeriodValue(res);
+	} else if (value instanceof PeriodValue)
+		return this.minus((PeriodValue) value);
 	else
 		throw new SyntaxError("Illegal: Time - " + value.getClass().getSimpleName());
 }

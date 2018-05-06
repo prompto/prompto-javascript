@@ -2,7 +2,7 @@ var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var PeriodType = require("../type/PeriodType").PeriodType;
 
-function Period(data) {
+function PeriodValue(data) {
     Value.call(this, PeriodType.instance);
     this.years = data[0] || null;
     this.months = data[1] || null;
@@ -15,12 +15,12 @@ function Period(data) {
     return this;
 }
 
-Period.prototype = Object.create(Value.prototype);
-Period.prototype.constructor = Period;
+PeriodValue.prototype = Object.create(Value.prototype);
+PeriodValue.prototype.constructor = PeriodValue;
 
 
 /*
- public Period(int years, int months, int weeks, int days, int hours, int minutes, int seconds, int millis)
+ public PeriodValue(int years, int months, int weeks, int days, int hours, int minutes, int seconds, int millis)
  {
  this.Years = years;
  this.Months = months;
@@ -32,7 +32,7 @@ Period.prototype.constructor = Period;
  this.Millis = millis;
  }
 
- private Period(int[] data)
+ private PeriodValue(int[] data)
  : this(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7])
  {
  }
@@ -55,15 +55,15 @@ Period.prototype.constructor = Period;
 
 */
 
-Period.prototype.Add = function(context, value) {
-    if (value instanceof Period) {
+PeriodValue.prototype.Add = function(context, value) {
+    if (value instanceof PeriodValue) {
         return this.plus(value);
     } else {
-        throw new SyntaxError("Illegal: Period + " + typeof(value));
+        throw new SyntaxError("Illegal: PeriodValue + " + typeof(value));
     }
 };
 
-Period.prototype.plus = function(period) {
+PeriodValue.prototype.plus = function(period) {
     var data = [];
     data[0] = this.years + period.years;
     data[1] = this.months + period.months;
@@ -75,11 +75,11 @@ Period.prototype.plus = function(period) {
     data[6] = Math.floor(seconds);
     var millis = Math.round(( seconds * 1000 ) % 1000);
     data[7] = Math.floor(Math.abs(millis));
-    return new Period(data);
+    return new PeriodValue(data);
 };
 
 
-Period.prototype.Minus = function(context) {
+PeriodValue.prototype.Minus = function(context) {
     var data = [];
     data[0] = -this.years;
     data[1] = -this.months;
@@ -89,18 +89,18 @@ Period.prototype.Minus = function(context) {
     data[5] = -this.minutes;
     data[6] = -this.seconds;
     data[7] = -this.millis;
-    return new Period(data);
+    return new PeriodValue(data);
 };
 
-Period.prototype.Subtract = function(context, value) {
-    if (value instanceof Period) {
+PeriodValue.prototype.Subtract = function(context, value) {
+    if (value instanceof PeriodValue) {
         return this.minus(value);
     } else {
-        throw new SyntaxError("Illegal: Period + " + typeof(value));
+        throw new SyntaxError("Illegal: PeriodValue + " + typeof(value));
     }
 };
 
-Period.prototype.minus = function(period) {
+PeriodValue.prototype.minus = function(period) {
     var data = [];
     data[0] = this.years - period.years;
     data[1] = this.months - period.months;
@@ -112,21 +112,21 @@ Period.prototype.minus = function(period) {
     data[6] = Math.floor(seconds);
     var millis = Math.round(( seconds * 1000 ) % 1000);
     data[7] = Math.floor(Math.abs(millis));
-    return new Period(data);
+    return new PeriodValue(data);
 };
 
-Period.prototype.Multiply = function(context, value) {
+PeriodValue.prototype.Multiply = function(context, value) {
     if (value instanceof IntegerValue) {
         return this.multiply(value);
     } else {
-        throw new SyntaxError("Illegal: Period * " + typeof(value));
+        throw new SyntaxError("Illegal: PeriodValue * " + typeof(value));
     }
 };
 
-Period.prototype.multiply = function(value) {
+PeriodValue.prototype.multiply = function(value) {
     var count = value.value;
     if (count == 0) {
-        return new Period([]);
+        return new PeriodValue([]);
     } else if (count == 1) {
         return this;
     } else {
@@ -141,7 +141,7 @@ Period.prototype.multiply = function(value) {
         data[6] = Math.floor(seconds);
         var millis = Math.round(( seconds * 1000 ) % 1000);
         data[7] = Math.floor(Math.abs(millis));
-        return new Period(data);
+        return new PeriodValue(data);
      }
  };
 
@@ -154,7 +154,7 @@ Period.prototype.multiply = function(value) {
 
 */
 
-Period.prototype.toString = function() {
+PeriodValue.prototype.toString = function() {
     var s = "P";
     if(this.years) {
         s += this.years;
@@ -194,8 +194,8 @@ Period.prototype.toString = function() {
     return s;
  };
 
-Period.prototype.equals = function(obj) {
-    if (obj instanceof Period) {
+PeriodValue.prototype.equals = function(obj) {
+    if (obj instanceof PeriodValue) {
         return this.years == obj.years &&
             this.months == obj.months &&
             this.weeks == obj.weeks &&
@@ -224,21 +224,21 @@ Period.prototype.equals = function(obj) {
 
  */
 /*
- public static final Period ZERO = new Period(0, 0, 0, 0, 0, 0, 0, 0);
+ public static final PeriodValue ZERO = new PeriodValue(0, 0, 0, 0, 0, 0, 0, 0);
 
- org.joda.time.Period value;
+ org.joda.time.PeriodValue value;
 
- public Period(int years, int months, int weeks, int days, int hours, int minutes, int seconds, int millis)
+ public PeriodValue(int years, int months, int weeks, int days, int hours, int minutes, int seconds, int millis)
  {
- value = new org.joda.time.Period(years, months, weeks, days, hours, minutes, seconds, millis);
+ value = new org.joda.time.PeriodValue(years, months, weeks, days, hours, minutes, seconds, millis);
  }
 
- public Period(org.joda.time.Period value)
+ public PeriodValue(org.joda.time.PeriodValue value)
  {
  this.value = value;
  }
 
- public org.joda.time.Period getValue() {
+ public org.joda.time.PeriodValue getValue() {
  return value;
  }
 
@@ -246,19 +246,19 @@ Period.prototype.equals = function(obj) {
  @Override
  public IValue Add(Context context, IValue value) throws PromptoError
  {
- if (value instanceof Period)
- return this.plus((Period)value);
+ if (value instanceof PeriodValue)
+ return this.plus((PeriodValue)value);
  else
- throw new SyntaxError("Illegal: Period + " + value.getClass().getSimpleName());
+ throw new SyntaxError("Illegal: PeriodValue + " + value.getClass().getSimpleName());
  }
 
  @Override
  public IValue Subtract(Context context, IValue value) throws PromptoError
  {
- if (value instanceof Period)
- return this.minus((Period)value);
+ if (value instanceof PeriodValue)
+ return this.minus((PeriodValue)value);
  else
- throw new SyntaxError("Illegal: Period - " + value.getClass().getSimpleName());
+ throw new SyntaxError("Illegal: PeriodValue - " + value.getClass().getSimpleName());
  }
 
  @Override
@@ -270,13 +270,13 @@ Period.prototype.equals = function(obj) {
  if (count < 0)
  throw new SyntaxError("Negative repeat count:" + count);
  if (count == 0)
- return Period.ZERO;
+ return PeriodValue.ZERO;
  if (count == 1)
  return this;
  return this.times(count);
  }
  else
- throw new SyntaxError("Illegal: Period * " + value.getClass().getSimpleName());
+ throw new SyntaxError("Illegal: PeriodValue * " + value.getClass().getSimpleName());
  }
 
  @Override
@@ -285,21 +285,21 @@ Period.prototype.equals = function(obj) {
  return value;
  }
 
- public Period minus(Period period)
+ public PeriodValue minus(PeriodValue period)
  {
- return new Period( this.value.minus(period.value));
+ return new PeriodValue( this.value.minus(period.value));
  }
 
 
 
- public Period plus(Period period)
+ public PeriodValue plus(PeriodValue period)
  {
- return new Period(this.value.plus(period.value));
+ return new PeriodValue(this.value.plus(period.value));
  }
 
- public Period times(int count)
+ public PeriodValue times(int count)
  {
- return new Period(
+ return new PeriodValue(
  this.value.getYears() * count,
  this.value.getMonths() * count,
  this.value.getWeeks() * count,
@@ -319,8 +319,8 @@ Period.prototype.equals = function(obj) {
  @Override
  public boolean equals(Object obj)
  {
- if (obj instanceof Period)
- return this.value.equals(((Period)obj).value);
+ if (obj instanceof PeriodValue)
+ return this.value.equals(((PeriodValue)obj).value);
  else
  return false;
  }
@@ -335,4 +335,4 @@ Period.prototype.equals = function(obj) {
  }
  */
 
-exports.Period = Period;
+exports.PeriodValue = PeriodValue;
