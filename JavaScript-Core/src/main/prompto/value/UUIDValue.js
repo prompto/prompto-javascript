@@ -1,13 +1,13 @@
 var Value = require("./Value").Value;
 var UUIDType = require("../type/UUIDType").UUIDType;
-var UUIDjs = require("../utils/UUIDjs").UUIDjs;
+var UUID = require("../intrinsic/UUID").UUID;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 function UUIDValue(value) {
     if(typeof(value) == 'string') {
-        value = UUIDjs.fromString(value);
+        value = UUID.fromString(value);
     }
-    if(!(value instanceof UUIDjs))
+    if(!(value instanceof UUID))
         throw new InvalidDataError("Not a UUID: " + typeof(value));
     Value.call(this, UUIDType.instance);
 	this.value = value;

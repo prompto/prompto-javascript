@@ -4,52 +4,52 @@
 * @see http://www.ietf.org/rfc/rfc4122.txt
 **/
 
-function UUIDjs() {
+function UUID() {
 }
 
-UUIDjs.maxFromBits = function(bits) {
+UUID.maxFromBits = function(bits) {
     return Math.pow(2, bits);
 };
 
-UUIDjs.limitUI04 = UUIDjs.maxFromBits(4);
-UUIDjs.limitUI06 = UUIDjs.maxFromBits(6);
-UUIDjs.limitUI08 = UUIDjs.maxFromBits(8);
-UUIDjs.limitUI12 = UUIDjs.maxFromBits(12);
-UUIDjs.limitUI14 = UUIDjs.maxFromBits(14);
-UUIDjs.limitUI16 = UUIDjs.maxFromBits(16);
-UUIDjs.limitUI32 = UUIDjs.maxFromBits(32);
-UUIDjs.limitUI40 = UUIDjs.maxFromBits(40);
-UUIDjs.limitUI48 = UUIDjs.maxFromBits(48);
+UUID.limitUI04 = UUID.maxFromBits(4);
+UUID.limitUI06 = UUID.maxFromBits(6);
+UUID.limitUI08 = UUID.maxFromBits(8);
+UUID.limitUI12 = UUID.maxFromBits(12);
+UUID.limitUI14 = UUID.maxFromBits(14);
+UUID.limitUI16 = UUID.maxFromBits(16);
+UUID.limitUI32 = UUID.maxFromBits(32);
+UUID.limitUI40 = UUID.maxFromBits(40);
+UUID.limitUI48 = UUID.maxFromBits(48);
 
-UUIDjs.randomUI04 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI04);
+UUID.randomUI04 = function() {
+    return Math.round(Math.random() * UUID.limitUI04);
 };
-UUIDjs.randomUI06 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI06);
+UUID.randomUI06 = function() {
+    return Math.round(Math.random() * UUID.limitUI06);
 };
-UUIDjs.randomUI08 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI08);
+UUID.randomUI08 = function() {
+    return Math.round(Math.random() * UUID.limitUI08);
 };
-UUIDjs.randomUI12 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI12);
+UUID.randomUI12 = function() {
+    return Math.round(Math.random() * UUID.limitUI12);
 };
-UUIDjs.randomUI14 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI14);
+UUID.randomUI14 = function() {
+    return Math.round(Math.random() * UUID.limitUI14);
 };
-UUIDjs.randomUI16 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI16);
+UUID.randomUI16 = function() {
+    return Math.round(Math.random() * UUID.limitUI16);
 };
-UUIDjs.randomUI32 = function() {
-    return Math.round(Math.random() * UUIDjs.limitUI32);
+UUID.randomUI32 = function() {
+    return Math.round(Math.random() * UUID.limitUI32);
 };
-UUIDjs.randomUI40 = function() {
+UUID.randomUI40 = function() {
     return (0 | Math.random() * (1 << 30)) + (0 | Math.random() * (1 << 40 - 30)) * (1 << 30);
 };
-UUIDjs.randomUI48 = function() {
+UUID.randomUI48 = function() {
     return (0 | Math.random() * (1 << 30)) + (0 | Math.random() * (1 << 48 - 30)) * (1 << 30);
 };
 
-UUIDjs.paddedString = function(string, length, z) {
+UUID.paddedString = function(string, length, z) {
     string = String(string);
     z = (!z) ? '0' : z;
     var i = length - string.length;
@@ -61,26 +61,26 @@ UUIDjs.paddedString = function(string, length, z) {
     return string;
 };
 
-UUIDjs.prototype.fromParts = function(timeLow, timeMid, timeHiAndVersion, clockSeqHiAndReserved, clockSeqLow, node) {
+UUID.prototype.fromParts = function(timeLow, timeMid, timeHiAndVersion, clockSeqHiAndReserved, clockSeqLow, node) {
     this.version = (timeHiAndVersion >> 12) & 0xF;
-    this.hex = UUIDjs.paddedString(timeLow.toString(16), 8)
+    this.hex = UUID.paddedString(timeLow.toString(16), 8)
         + '-'
-        + UUIDjs.paddedString(timeMid.toString(16), 4)
+        + UUID.paddedString(timeMid.toString(16), 4)
         + '-'
-        + UUIDjs.paddedString(timeHiAndVersion.toString(16), 4)
+        + UUID.paddedString(timeHiAndVersion.toString(16), 4)
         + '-'
-        + UUIDjs.paddedString(clockSeqHiAndReserved.toString(16), 2)
-        + UUIDjs.paddedString(clockSeqLow.toString(16), 2)
+        + UUID.paddedString(clockSeqHiAndReserved.toString(16), 2)
+        + UUID.paddedString(clockSeqLow.toString(16), 2)
         + '-'
-        + UUIDjs.paddedString(node.toString(16), 12);
+        + UUID.paddedString(node.toString(16), 12);
     return this;
 };
 
-UUIDjs.prototype.toString = function() {
+UUID.prototype.toString = function() {
     return this.hex;
 };
 
-UUIDjs.prototype.toBytes = function() {
+UUID.prototype.toBytes = function() {
     var parts = this.hex.split('-');
     var ints = [];
     var intPos = 0;
@@ -94,8 +94,8 @@ UUIDjs.prototype.toBytes = function() {
     return ints;
 };
 
-UUIDjs.prototype.equals = function(uuid) {
-    if (!(uuid instanceof UUIDjs)) {
+UUID.prototype.equals = function(uuid) {
+    if (!(uuid instanceof UUID)) {
         return false;
     }
     if (this.hex !== uuid.hex) {
@@ -104,29 +104,29 @@ UUIDjs.prototype.equals = function(uuid) {
     return true;
 };
 
-UUIDjs.getTimeFieldValues = function(time) {
+UUID.getTimeFieldValues = function(time) {
     var ts = time - Date.UTC(1582, 9, 15);
     var hm = ((ts / 0x100000000) * 10000) & 0xFFFFFFF;
     return { low: ((ts & 0xFFFFFFF) * 10000) % 0x100000000,
         mid: hm & 0xFFFF, hi: hm >>> 16, timestamp: ts };
 };
 
-UUIDjs._create4 = function() {
-    return new UUIDjs().fromParts(
-        UUIDjs.randomUI32(),
-        UUIDjs.randomUI16(),
-        0x4000 | UUIDjs.randomUI12(),
-        0x80   | UUIDjs.randomUI06(),
-        UUIDjs.randomUI08(),
-        UUIDjs.randomUI48()
+UUID._create4 = function() {
+    return new UUID().fromParts(
+        UUID.randomUI32(),
+        UUID.randomUI16(),
+        0x4000 | UUID.randomUI12(),
+        0x80   | UUID.randomUI06(),
+        UUID.randomUI08(),
+        UUID.randomUI48()
     );
 };
 
-UUIDjs._create1 = function() {
+UUID._create1 = function() {
     var now = new Date().getTime();
-    var sequence = UUIDjs.randomUI14();
-    var node = (UUIDjs.randomUI08() | 1) * 0x10000000000 + UUIDjs.randomUI40();
-    var tick = UUIDjs.randomUI04();
+    var sequence = UUID.randomUI14();
+    var node = (UUID.randomUI08() | 1) * 0x10000000000 + UUID.randomUI40();
+    var tick = UUID.randomUI04();
     var timestamp = 0;
     var timestampRatio = 1/4;
 
@@ -135,14 +135,14 @@ UUIDjs._create1 = function() {
             sequence++;
         }
         timestamp = now;
-        tick = UUIDjs.randomUI04();
+        tick = UUID.randomUI04();
     } else if (Math.random() < timestampRatio && tick < 9984) {
-        tick += 1 + UUIDjs.randomUI04();
+        tick += 1 + UUID.randomUI04();
     } else {
         sequence++;
     }
 
-    var tf = UUIDjs.getTimeFieldValues(timestamp);
+    var tf = UUID.getTimeFieldValues(timestamp);
     var tl = tf.low + tick;
     var thav = (tf.hi & 0xFFF) | 0x1000;
 
@@ -150,34 +150,34 @@ UUIDjs._create1 = function() {
     var cshar = (sequence >>> 8) | 0x80;
     var csl = sequence & 0xFF;
 
-    return new UUIDjs().fromParts(tl, tf.mid, thav, cshar, csl, node);
+    return new UUID().fromParts(tl, tf.mid, thav, cshar, csl, node);
 };
 
-UUIDjs.create = function(version) {
+UUID.create = function(version) {
     version = version || 4;
     return this['_create' + version]();
 };
 
-UUIDjs.fromTime = function(time, last) {
+UUID.fromTime = function(time, last) {
     last = (!last) ? false : last;
-    var tf = UUIDjs.getTimeFieldValues(time);
+    var tf = UUID.getTimeFieldValues(time);
     var tl = tf.low;
     var thav = (tf.hi & 0xFFF) | 0x1000;  // set version '0001'
     if (last === false) {
-        return new UUIDjs().fromParts(tl, tf.mid, thav, 0, 0, 0);
+        return new UUID().fromParts(tl, tf.mid, thav, 0, 0, 0);
     }
-    return new UUIDjs().fromParts(tl, tf.mid, thav, 0x80 | UUIDjs.limitUI06, UUIDjs.limitUI08 - 1, UUIDjs.limitUI48 - 1);
+    return new UUID().fromParts(tl, tf.mid, thav, 0x80 | UUID.limitUI06, UUID.limitUI08 - 1, UUID.limitUI48 - 1);
 
 };
 
-UUIDjs.firstFromTime = function(time) {
-    return UUIDjs.fromTime(time, false);
+UUID.firstFromTime = function(time) {
+    return UUID.fromTime(time, false);
 };
-UUIDjs.lastFromTime = function(time) {
-    return UUIDjs.fromTime(time, true);
+UUID.lastFromTime = function(time) {
+    return UUID.fromTime(time, true);
 };
 
-UUIDjs.fromString = function(strId) {
+UUID.fromString = function(strId) {
     var p = new RegExp("([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})");
     var r = p.exec(strId);
     if (r.length==7) {
@@ -185,13 +185,13 @@ UUIDjs.fromString = function(strId) {
         var ints = r.map(function (s) {
             return parseInt(s, 16);
         });
-        var uuid = new UUIDjs();
+        var uuid = new UUID();
         return uuid.fromParts.apply(uuid, ints);
     } else
         throw new Error("Not a valid uuid: " + strId);
 };
 
-UUIDjs.fromBytes = function(ints) {
+UUID.fromBytes = function(ints) {
     var str = '';
     var pos = 0;
     var parts = [4, 2, 2, 2, 6];
@@ -213,10 +213,10 @@ UUIDjs.fromBytes = function(ints) {
             str += '-';
         }
     }
-    return UUIDjs.fromURN(str);
+    return UUID.fromURN(str);
 };
 
-UUIDjs.fromBinary = function(binary) {
+UUID.fromBinary = function(binary) {
     var ints = [];
     var i = 0;
     for (i; i < binary.length; i++) {
@@ -225,7 +225,7 @@ UUIDjs.fromBinary = function(binary) {
             throw new Error('Unexpected byte in binary data.');
         }
     }
-    return UUIDjs.fromBytes(ints);
+    return UUID.fromBytes(ints);
 };
 
-exports.UUIDjs = UUIDjs;
+exports.UUID = UUID;
