@@ -1,6 +1,6 @@
 var BlobType = require("../type/BlobType").BlobType;
 var Document = require("../value/Document").Document;
-var Blob = require("../value/Blob").Blob;
+var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
@@ -22,7 +22,7 @@ BlobExpression.prototype.interpret = function(context) {
     // try {
         var datas = BlobExpression.collectDatas(context, value);
         var zipped = BlobExpression.zipDatas(datas);
-        return new Blob("application/zip", zipped);
+        return new BlobValue("application/zip", zipped);
     // } catch (e) {
     //     throw new ReadWriteError(e.message);
     // }
@@ -62,18 +62,18 @@ BlobExpression.prototype.toDialect = function(writer) {
 
 
 BlobExpression.prototype.toEDialect = function(writer) {
-    writer.append("Blob from ");
+    writer.append("BlobValue from ");
     this.source.toDialect(writer);
 };
 
 BlobExpression.prototype.toODialect = function(writer) {
-    writer.append("Blob(");
+    writer.append("BlobValue(");
     this.source.toDialect(writer);
     writer.append(')');
 };
 
 BlobExpression.prototype.toMDialect = function(writer) {
-    writer.append("Blob(");
+    writer.append("BlobValue(");
     this.source.toDialect(writer);
     writer.append(')');
 };

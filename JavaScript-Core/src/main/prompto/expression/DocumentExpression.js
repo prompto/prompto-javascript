@@ -1,7 +1,7 @@
 var Section = require("../parser/Section").Section;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var Document = require("../value/Document").Document;
-var Blob = require("../value/Blob").Blob;
+var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
@@ -29,7 +29,7 @@ DocumentExpression.prototype.interpret = function(context) {
 };
 
 DocumentExpression.prototype.documentFromValue = function(context, value) {
-    if (value instanceof Blob)
+    if (value instanceof BlobValue)
         return this.documentFromBlob(context, value);
     else
         throw new Error("documentFromValue not supported for " + typeof(value));
