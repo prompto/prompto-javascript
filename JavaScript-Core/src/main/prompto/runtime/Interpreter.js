@@ -1,4 +1,4 @@
-var DictType = require("../type/DictType").DictType;
+var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
@@ -11,7 +11,7 @@ var CmdLineParser = require("../utils/CmdLineParser").CmdLineParser;
 var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 
-var argsType = new DictType(TextType.instance);
+var argsType = new DictionaryType(TextType.instance);
 
 function parseCmdLineArgs(cmdLineArgs) {
 	try {
@@ -53,7 +53,7 @@ function locateMethodInMap(map, cmdLineArgs) {
 	if(cmdLineArgs==null || cmdLineArgs.length==0) {
 		return locateMethodWithArgs(map);
 	} else {
-		return locateMethodWithArgs(map, new DictType(TextType.instance));
+		return locateMethodWithArgs(map, new DictionaryType(TextType.instance));
 	}
 }
 

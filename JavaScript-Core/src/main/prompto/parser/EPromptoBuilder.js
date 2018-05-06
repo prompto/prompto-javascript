@@ -414,7 +414,7 @@ EPromptoBuilder.prototype.exitListType = function(ctx) {
 
 EPromptoBuilder.prototype.exitDictType = function(ctx) {
 	var typ = this.getNodeValue(ctx.d);
-	this.setNodeValue(ctx, new type.DictType(typ));
+	this.setNodeValue(ctx, new type.DictionaryType(typ));
 };
 
 EPromptoBuilder.prototype.exitAttributeList = function(ctx) {

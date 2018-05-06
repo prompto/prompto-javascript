@@ -6,11 +6,11 @@ var TextValue = require("./TextValue").TextValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var InternalError = require("../error/InternalError").InternalError;
 var BaseType = require("../type/BaseType").BaseType;
-var DictType = require("../type/DictType").DictType;
+var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
 
 function DictionaryValue(itemType, dict, mutable) {
-    Value.call(this, new DictType(itemType));
+    Value.call(this, new DictionaryType(itemType));
 	this.dict = dict || {};
     this.mutable = mutable || false;
 	return this;

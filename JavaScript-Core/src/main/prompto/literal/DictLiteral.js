@@ -4,7 +4,7 @@ var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var MissingType = require("../type/MissingType").MissingType;
-var DictType = require("../type/DictType").DictType;
+var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var inferElementType = require("../utils/TypeUtils").inferElementType;
@@ -37,7 +37,7 @@ DictLiteral.prototype.transpile = function(transpiler) {
 DictLiteral.prototype.check = function(context) {
 	if(this.itemType==null)
         this.itemType = this.inferElementType(context);
-	return new DictType(this.itemType);
+	return new DictionaryType(this.itemType);
 };
 
 DictLiteral.prototype.inferElementType = function(context) {

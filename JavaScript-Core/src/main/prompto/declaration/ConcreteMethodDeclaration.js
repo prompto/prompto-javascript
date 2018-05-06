@@ -1,6 +1,6 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var VoidType = require("../type/VoidType").VoidType;
-var DictType = require("../type/DictType").DictType;
+var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
 var CodeArgument = require("../argument/CodeArgument").CodeArgument;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
@@ -90,7 +90,7 @@ ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
     else if(this.args.length==1) {
         var arg = this.args[0];
         if( arg instanceof CategoryArgument
-            && arg.type instanceof DictType
+            && arg.type instanceof DictionaryType
             && arg.type.itemType==TextType.instance )
                 return true;
     }

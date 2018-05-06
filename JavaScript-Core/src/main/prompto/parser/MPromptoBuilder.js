@@ -455,7 +455,7 @@ MPromptoBuilder.prototype.exitListType = function(ctx) {
 
 MPromptoBuilder.prototype.exitDictType = function(ctx) {
 	var typ = this.getNodeValue(ctx.d);
-	this.setNodeValue(ctx, new type.DictType(typ));
+	this.setNodeValue(ctx, new type.DictionaryType(typ));
 };
 
 
