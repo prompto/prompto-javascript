@@ -50,6 +50,10 @@ Transpiler.prototype.appendOneRequired = function(fn) {
     Object.keys(fn).forEach(function (key) {
         this.lines.push(fn.name + "." + key + " = " + fn[key].toString() + ";");
     }, this);
+    if(fn.prototype.__proto__) {
+        var proto = fn.prototype.__proto__;
+        this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
+    }
     Object.keys(fn.prototype).forEach(function (key) {
         this.lines.push(fn.name + ".prototype." + key + " = " + fn.prototype[key].toString() + ";");
     }, this);

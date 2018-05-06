@@ -2,8 +2,18 @@ var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var PeriodType = require("../type/PeriodType").PeriodType;
 
-function PeriodValue(data) {
+function PeriodValue(value) {
     Value.call(this, PeriodType.instance);
+    this.value = value;
+    ["years", "months", "weeks", "days", "hours", "minutes", "seconds", "millis"].forEach(function(name) {
+        Object.defineProperty(this, name, {
+            get: function () {
+                return this.value[name];
+            }
+        });
+    }, this)
+
+    /*
     this.years = data[0] || null;
     this.months = data[1] || null;
     this.weeks = data[2] || null;
@@ -12,6 +22,7 @@ function PeriodValue(data) {
     this.minutes = data[5] || null;
     this.seconds = data[6] || null;
     this.millis = data[7] || null;
+    */
     return this;
 }
 
@@ -19,41 +30,6 @@ PeriodValue.prototype = Object.create(Value.prototype);
 PeriodValue.prototype.constructor = PeriodValue;
 
 
-/*
- public PeriodValue(int years, int months, int weeks, int days, int hours, int minutes, int seconds, int millis)
- {
- this.Years = years;
- this.Months = months;
- this.Weeks = weeks;
- this.Days = days;
- this.Hours = hours;
- this.Minutes = minutes;
- this.Seconds = seconds;
- this.Millis = millis;
- }
-
- private PeriodValue(int[] data)
- : this(data[0], data[1], data[2], data[3], data[4], data[5], data[6], data[7])
- {
- }
-
- public int Years { get; set; }
-
- public int Months { get; set; }
-
- public int Days { get; set; }
-
- public int Weeks { get; set; }
-
- public int Hours { get; set; }
-
- public int Minutes { get; set; }
-
- public int Seconds { get; set; }
-
- public int Millis { get; set; }
-
-*/
 
 PeriodValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {

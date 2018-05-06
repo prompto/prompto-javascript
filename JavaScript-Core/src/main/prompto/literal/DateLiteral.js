@@ -1,10 +1,10 @@
 var Literal = require("./Literal").Literal;
 var DateType = require("../type/DateType").DateType;
 var DateValue = require("../value/DateValue").DateValue;
-
+var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 
 function DateLiteral(text) {
-	Literal.call(this, text, new DateValue(new Date(text.substring(1,text.length-1))));
+	Literal.call(this, text, new DateValue(LocalDate.parse(text.substring(1,text.length-1))));
 	return this;
 }
 
@@ -16,7 +16,8 @@ DateLiteral.prototype.check = function(context) {
 };
 
 DateLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("new Date(").append(this.text).append(")");
+    transpiler.require(LocalDate);
+    transpiler.append("LocalDate.parse(").append(this.text).append(")");
 };
 
 exports.DateLiteral = DateLiteral;

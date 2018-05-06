@@ -1,10 +1,10 @@
 var Literal = require("./Literal").Literal;
 var PeriodType = require("../type/PeriodType").PeriodType;
 var PeriodValue = require("../value/PeriodValue").PeriodValue;
-var parsePeriodLiteral = require("../utils/Utils").parsePeriodLiteral;
+var Period = require("../intrinsic/Period").Period;
 
 function PeriodLiteral(text) {
-	Literal.call(this, text, new PeriodValue(parsePeriodLiteral(text.substring(1,text.length-1))));
+	Literal.call(this, text, new PeriodValue(Period.parse(text.substring(1,text.length-1))));
 	return this;
 }
 
@@ -16,8 +16,8 @@ PeriodLiteral.prototype.check = function(context) {
 };
 
 PeriodLiteral.prototype.transpile = function(transpiler) {
-    transpiler.require(parsePeriodLiteral);
-    transpiler.append("parsePeriodLiteral(").append(this.text).append(")");
+    transpiler.require(Period);
+    transpiler.append("Period.parse(").append(this.text).append(")");
 };
 
 exports.PeriodLiteral = PeriodLiteral;

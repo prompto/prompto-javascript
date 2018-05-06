@@ -35,11 +35,8 @@ DateType.prototype.checkAdd = function(context, other, tryReverse) {
 
 DateType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if (other instanceof PeriodType) {
-        var addPeriodToDate = require("../utils/Utils").addPeriodToDate;
-        transpiler.require(addPeriodToDate);
-        transpiler.append("addPeriodToDate(");
         left.transpile(transpiler);
-        transpiler.append(",");
+        transpiler.append(".addPeriod(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else

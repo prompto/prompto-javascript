@@ -1,7 +1,7 @@
 var Value = require("./Value").Value;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
-var addPeriodToDate = require("../utils/Utils").addPeriodToDate;
+var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 var DateType = null;
 
 exports.resolve = function() {
@@ -18,7 +18,7 @@ DateValue.prototype = Object.create(Value.prototype);
 DateValue.prototype.constructor = DateValue;
 
 DateValue.prototype.toString = function() {
-    return this.value.toISOString().substring(0, 10);
+    return this.value.toString();
 };
 
 DateValue.prototype.getValue = function() {
@@ -27,7 +27,7 @@ DateValue.prototype.getValue = function() {
 
 DateValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {
-        var date = addPeriodToDate(this.value, value);
+        var date = this.value.addPeriod(value.value);
         return new DateValue(date);
     } else {
         throw new SyntaxError("Illegal: Date + " + typeof(value));

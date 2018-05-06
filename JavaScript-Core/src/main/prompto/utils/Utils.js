@@ -177,96 +177,7 @@ function mergeObjects() {
     return res;
 }
 
-function addPeriodToDate(date, period) {
-    var result = new Date();
-    var year = date.getUTCFullYear() + (period.years || 0);
-    result.setUTCFullYear(year);
-    var month = date.getUTCMonth() + (period.months || 0);
-    result.setUTCMonth(month);
-    var day = date.getUTCDate() + ((period.weeks || 0) * 7) + (period.days || 0);
-    result.setUTCDate(day);
-    return result;
 
-}
-
-function parsePeriodLiteral(text) {
-    var data = [];
-    var steps = "YMWDHM.S";
-    var value = null;
-    var lastStep = -1;
-    var isNeg = false;
-    var inPeriod = false;
-    var inTime = false;
-    var inMillis = false;
-
-    for(var i=0;i<text.length;i++) {
-        var c = text[i];
-        // leading 'P' is mandatory
-        if (!inPeriod) {
-            if (c == 'P') {
-                inPeriod = true;
-                continue;
-            } else {
-                throw new Exception();
-            }
-        }
-        // check for time section
-        if (c == 'T') {
-            if (!inTime) {
-                inTime = true;
-                continue;
-            } else {
-                throw new Exception();
-            }
-        }
-        // check for value type
-        var step = inTime ? steps.indexOf(c, 4) : steps.indexOf(c);
-        if (step >= 0) {
-            if (step <= lastStep) {
-                throw new Exception();
-            } else if (step > 3 && !inTime) {
-                throw new Exception();
-            } else if (value == null) {
-                throw new Exception();
-            } else if (step == 6) { // millis '.'
-                inMillis = true;
-            } else if (step == 7 && !inMillis) {
-                step = 6;
-            }
-            data[step] = value;
-            lastStep = step;
-            value = null;
-            continue;
-        }
-        if (c == '-') {
-            if (value!=null) {
-                throw new Exception();
-            }
-            if (isNeg || inMillis) {
-                throw new Exception();
-            }
-            isNeg = true;
-        }
-        if (c < '0' || c > '9') {
-            throw new Exception();
-        }
-        if (value!=null) {
-            value *= 10;
-            value += c - '0';
-        } else {
-            value = c - '0';
-            if (isNeg) {
-                value = -value;
-                isNeg = false;
-            }
-        }
-    }
-    // must terminate by a value type
-    if (value != null) {
-        throw new Error();
-    }
-    return data;
-}
 
 exports.mergeObjects = mergeObjects;
 exports.equalObjects = equalObjects;
@@ -277,5 +188,3 @@ exports.getUtf8StringLength = getUtf8StringLength;
 exports.getUtf8CharLength = getUtf8CharLength;
 exports.stringToUtf8Buffer = stringToUtf8Buffer;
 exports.utf8BufferToString = utf8BufferToString;
-exports.addPeriodToDate = addPeriodToDate;
-exports.parsePeriodLiteral = parsePeriodLiteral;
