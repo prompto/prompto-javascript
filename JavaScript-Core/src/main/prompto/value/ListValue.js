@@ -42,11 +42,9 @@ ListValue.prototype.Add = function(context, value) {
         var items = this.items.concat(value.items);
         return new ListValue(this.type.itemType, items);
     } else if(value instanceof SetValue) {
-        var items = this.items.concat([]);
-        for(var name in value.items) {
-            items.push(value.items[name]);
-        }
-        return new ListValue(this.type.itemType, items);
+	    var items1 = Array.from(value.items.values());
+        var items2 = this.items.concat(items1);
+        return new ListValue(this.type.itemType, items2);
     } else {
 		return BaseValueList.prototype.Add.apply(this, context, value);
 	}

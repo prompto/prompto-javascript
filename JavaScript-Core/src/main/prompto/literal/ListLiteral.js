@@ -72,4 +72,14 @@ ListLiteral.prototype.toDialect = function(writer) {
         writer.append("[]");
 };
 
+ListLiteral.prototype.transpile = function(transpiler) {
+    if(this.expressions!=null) {
+        transpiler.append('[');
+        this.expressions.transpile(transpiler);
+        transpiler.append(']');
+    } else
+        transpiler.append("[]");
+};
+
+
 exports.ListLiteral = ListLiteral;

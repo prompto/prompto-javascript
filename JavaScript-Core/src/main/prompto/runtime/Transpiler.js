@@ -115,19 +115,27 @@ Transpiler.prototype.dedent = function() {
     return this;
 };
 
-function ObjectToString() {
+function ObjectUtils() {
 
 }
 
-ObjectToString.prototype.toString = function() {
+ObjectUtils.prototype.toString = function() {
     return '{' +  Object.keys(this).map(function(key) { return '"' + key + '":' + this[key]; }, this). join(", ") + '}';
+};
+
+ObjectUtils.values = function(o) {
+    var values = [];
+    for(name in o) { values.push(o[name]); }
+    return values;
 };
 
 Transpiler.transpile = function(context, methodName, cmdLineArgs) {
     try {
         var method = locateMethod(context, methodName, cmdLineArgs);
         var transpiler = new Transpiler(context);
-        transpiler.lines.push("Object.prototype.toString = " + ObjectToString.prototype.toString.toString() + ";");
+        transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.prototype.toString.toString() + ";");
+        if(!Object.values)
+            transpiler.lines.push("Object.values = " + ObjectUtils.values.toString() + ";");
         method.transpile(transpiler);
         if(transpiler.line!==transpiler.indents) {
             transpiler.lines.push(transpiler.line);

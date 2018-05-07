@@ -18,4 +18,14 @@ ExpressionList.prototype.toDialect = function(writer) {
     }
 };
 
+ExpressionList.prototype.transpile = function(transpiler) {
+    if (this.length > 0) {
+        for (var i = 0; i < this.length; i++) {
+            this[i].transpile(transpiler);
+            transpiler.append(", ");
+        }
+        transpiler.trimLast(2);
+    }
+};
+
 exports.ExpressionList = ExpressionList;

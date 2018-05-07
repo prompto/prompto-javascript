@@ -208,12 +208,11 @@ BaseType.prototype.doSort = function(context, list, cmp, desc) {
 		return list;
 	}
     // create result list we can sort in place
-    var items = [];
+    var items = null;
     if( list instanceof ListValue || list instanceof TupleValue) {
-        items = items.concat(list.items);
+        items = [].concat(list.items);
     } else if ( list instanceof SetValue) {
-        for(var name in list.items)
-            items.push(list.items[name]);
+        items = Array.from(list.items.values());
     }
     items.sort(cmp);
     if(desc)

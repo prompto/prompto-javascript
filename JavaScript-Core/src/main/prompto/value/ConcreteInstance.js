@@ -184,7 +184,9 @@ ConcreteInstance.prototype.equals = function(obj) {
 	if(obj==this) {
 		return true;
 	} else if(!(obj instanceof ConcreteInstance)) {
-		return false;
+        return false;
+    } else if(this.declaration!==obj.declaration) {
+	    return false;
 	} else {
 		var names = Object.getOwnPropertyNames(this.values);
 		var otherNames = Object.getOwnPropertyNames(obj.values);

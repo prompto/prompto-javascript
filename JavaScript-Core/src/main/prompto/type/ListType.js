@@ -51,6 +51,25 @@ ListType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+
+ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof ListType && this.itemType.equals(other.itemType)) {
+        left.transpile(transpiler);
+        transpiler.append(".concat(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else if(other instanceof SetType && this.itemType.equals(other.itemType)) {
+        left.transpile(transpiler);
+        transpiler.append(".concat(Array.from(Object.values(");
+        right.transpile(transpiler);
+        transpiler.append(")))");
+    } else {
+        return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+    }
+};
+
+
 ListType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {
 		return this.itemType;

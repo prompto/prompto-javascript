@@ -2,6 +2,7 @@ var BooleanValue = require("./BooleanValue").BooleanValue;
 var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var SetType = require("../type/SetType").SetType;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var ListValue = null;
 
 exports.resolve = function() {
@@ -12,7 +13,7 @@ exports.resolve = function() {
 function SetValue(itemType, items) {
     Value.call(this, new SetType(itemType));
     this.itemType = null;
-    this.items = items || {};
+    this.items = items || new StrictSet();
     return this;
 }
 
@@ -20,28 +21,24 @@ SetValue.prototype = Object.create(Value.prototype);
 SetValue.prototype.constructor = SetValue;
 
 SetValue.prototype.addAll = function(items) {
-    for(var p in items) {
-        this.add(items[p]);
-    }
-};
-
-SetValue.prototype.toString = function() {
-    var names = Object.getOwnPropertyNames(this.items);
-    var values = names.map(function(name) { return this.items[name]; }, this);
-    return "<" + values.join(", ") + ">";
+    if(items instanceof StrictSet)
+        items = Array.from(items.values());
+    items.forEach(function(item){
+        this.items.add(item);
+    }, this);
 };
 
 SetValue.prototype.add = function(item) {
-    var key = item.type.id.name + ":" + item.toString();
-    this.items[key] = item;
+    this.items.add(item);
+};
+
+
+SetValue.prototype.toString = function() {
+    return this.items.toString();
 };
 
 SetValue.prototype.size = function() {
-    var n = 0;
-    for(var p in this.items) {
-        n += 1;
-    }
-    return n;
+    return this.items.size();
 };
 
 SetValue.prototype.getMemberValue = function(context, name) {
@@ -53,37 +50,25 @@ SetValue.prototype.getMemberValue = function(context, name) {
 };
 
 SetValue.prototype.isEmpty = function() {
-    for(var p in this.items) {
-        return false;
-    }
-    return true;
+    return this.items.size() === 0;
 };
 
 SetValue.prototype.hasItem = function(context, item) {
-    var key = item.type.id.name + ":" + item.toString();
-    return key in this.items;
+    return this.items.has(item);
 };
 
 
 SetValue.prototype.getItemInContext = function(context, index) {
     if (index instanceof IntegerValue) {
-        try {
-            var idx = index.IntegerValue();
-            for(var p in this.items) {
-                if(--idx==0)
-                    return this.items[p];
-            }
+        var idx = index.IntegerValue();
+        var items = Array.from(this.items.values());
+        if(idx<1 || idx>items.length)
             throw new IndexOutOfRangeError();
-        } catch (e) {
-            if(e instanceof PromptoError) {
-                throw e;
-            } else {
-                throw new InternalError(e.toString());
-            }
-        }
+        return items[idx-1];
     } else
         throw new SyntaxError("No such item:" + index.toString());
 };
+
 
 SetValue.prototype.Add = function(context, value) {
     if (value instanceof SetValue || value instanceof ListValue) {
@@ -121,28 +106,7 @@ SetValue.prototype.getIterator = function(context) {
 
 SetValue.prototype.equals = function(obj) {
     if(obj instanceof SetValue) {
-        for(var p in this.items) {
-            var v1 = this.items[p];
-            var v2 = obj.items[p];
-            if(v1==v2) {
-                continue;
-            } else if(v1==null || v2==null) {
-                return false;
-            } else {
-                if(v1.equals) {
-                    if(!v1.equals(v2)) {
-                        return false;
-                    }
-                } else if(v2.equals) {
-                    if(!v2.equals(v1)) {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return this.items.equals(obj.items);
     } else {
         return false;
     }
@@ -150,19 +114,24 @@ SetValue.prototype.equals = function(obj) {
 
 
 function SetIterator(items, context) {
-    this.items = items;
-    this.names = Object.getOwnPropertyNames(items);
+    this.values = items.values();
     this.context = context;
-    this.index = -1;
+    this.item = this.values.next();
     return this;
 }
 
 SetIterator.prototype.hasNext = function () {
-    return this.index < this.names.length - 1;
+    return !this.item.done;
 }
 
 SetIterator.prototype.next = function() {
-    return this.items[this.names[++this.index]];
+    if (this.item == null || this.item.done)
+        return null;
+    else {
+        var value = this.item.value;
+        this.item = this.values.next();
+        return value;
+    }
 };
 
 exports.SetValue = SetValue;
