@@ -177,8 +177,6 @@ function mergeObjects() {
     return res;
 }
 
-
-
 exports.mergeObjects = mergeObjects;
 exports.equalObjects = equalObjects;
 exports.equalArrays = equalArrays;

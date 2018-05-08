@@ -61,9 +61,9 @@ ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
         transpiler.append(")");
     } else if(other instanceof SetType && this.itemType.equals(other.itemType)) {
         left.transpile(transpiler);
-        transpiler.append(".concat(Array.from(Object.values(");
+        transpiler.append(".concat(Array.from(");
         right.transpile(transpiler);
-        transpiler.append(")))");
+        transpiler.append(".values()))");
     } else {
         return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
     }

@@ -145,7 +145,6 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         transpiler.appendAllRequired();
         transpiler.appendAllInitialized();
         transpiler.appendAllDeclared();
-        transpiler.lines.push(methodName); // return the method to call
         return transpiler.lines.join("\n");
     } finally {
         context.terminated();

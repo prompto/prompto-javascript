@@ -46,7 +46,12 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
     // can add anything to text
     left.transpile(transpiler);
     transpiler.append(" + ");
-    right.transpile(transpiler);
+    if(other instanceof ListType) {
+        transpiler.append("'[' + ");
+        right.transpile(transpiler);
+        transpiler.append(".map(function(o){return o.toString();}).join(', ') + ']'");
+    } else
+        right.transpile(transpiler);
 };
 
 TextType.prototype.checkMultiply = function(context, other, tryReverse) {

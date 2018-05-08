@@ -31,6 +31,13 @@ SetLiteral.prototype.check = function(context) {
 	return this.type;
 };
 
+SetLiteral.prototype.transpile = function(transpiler) {
+    var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+    transpiler.require(StrictSet);
+    transpiler.append("new StrictSet([");
+    this.expressions.transpile(transpiler);
+    transpiler.append("])");
+};
 
 SetLiteral.prototype.interpret = function(context) {
     var self = this;
