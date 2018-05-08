@@ -4,10 +4,7 @@ function StrictSet(values) {
 }
 
 StrictSet.prototype.toString = function() {
-    var values = Array.from(this.set.values()).map(function (item) {
-        return item.toString();
-    });
-    return "<" + values.join(", ") + ">";
+    return "<" + Array.from(this.set.values()).join(", ") + ">";
 };
 
 StrictSet.prototype.size = function() {

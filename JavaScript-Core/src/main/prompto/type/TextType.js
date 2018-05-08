@@ -49,7 +49,7 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
     if(other instanceof ListType) {
         transpiler.append("'[' + ");
         right.transpile(transpiler);
-        transpiler.append(".map(function(o){return o.toString();}).join(', ') + ']'");
+        transpiler.append(".join(', ') + ']'");
     } else
         right.transpile(transpiler);
 };
