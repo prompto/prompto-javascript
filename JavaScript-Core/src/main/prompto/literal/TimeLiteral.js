@@ -16,5 +16,10 @@ TimeLiteral.prototype.check = function(context) {
 	return TimeType.instance;
 };
 
+TimeLiteral.prototype.transpile = function(transpiler) {
+    transpiler.require(LocalTime);
+    transpiler.append("LocalTime.parse(").append(this.text).append(")");
+};
+
 exports.TimeLiteral = TimeLiteral;
 

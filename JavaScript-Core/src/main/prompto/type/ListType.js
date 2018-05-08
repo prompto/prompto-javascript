@@ -65,7 +65,7 @@ ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
         right.transpile(transpiler);
         transpiler.append(".values()))");
     } else {
-        return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+        return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
     }
 };
 

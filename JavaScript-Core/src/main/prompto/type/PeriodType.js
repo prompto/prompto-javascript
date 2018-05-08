@@ -20,6 +20,17 @@ PeriodType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+PeriodType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof PeriodType) {
+        left.transpile(transpiler);
+        transpiler.append(".add(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
 PeriodType.prototype.checkSubstract = function(context, other) {
 	if(other instanceof PeriodType) {
 		return this;

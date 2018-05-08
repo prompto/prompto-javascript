@@ -31,6 +31,18 @@ TimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+TimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof PeriodType) {
+        left.transpile(transpiler);
+        transpiler.append(".addPeriod(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
 TimeType.prototype.checkSubstract = function(context, other) {
 	if (other instanceof TimeType) {
 		return PeriodType.instance; // ignore date section

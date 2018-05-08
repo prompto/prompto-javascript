@@ -42,7 +42,7 @@ SetType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, r
         right.transpile(transpiler);
         transpiler.append(")");
     } else {
-        return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+        return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
     }
 };
 
