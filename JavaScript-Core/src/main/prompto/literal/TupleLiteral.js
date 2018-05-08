@@ -20,6 +20,15 @@ TupleLiteral.prototype.check = function(context) {
 	return TupleType.instance;
 };
 
+TupleLiteral.prototype.transpile = function(transpiler) {
+    var Tuple = require("../intrinsic/Tuple").Tuple;
+    transpiler.require(Tuple);
+    transpiler.append("new Tuple([");
+    this.expressions.transpile(transpiler);
+    transpiler.append("])");
+};
+
+
 TupleLiteral.prototype.interpret = function(context) {
     if(this.expressions.length>0) {
         var tuple = new TupleValue();

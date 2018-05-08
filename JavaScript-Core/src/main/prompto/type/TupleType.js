@@ -45,6 +45,18 @@ TupleType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+TupleType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
+        left.transpile(transpiler);
+        transpiler.append(".addAll(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
 TupleType.prototype.checkContains = function(context, other) {
 	return BooleanType.instance;
 };
