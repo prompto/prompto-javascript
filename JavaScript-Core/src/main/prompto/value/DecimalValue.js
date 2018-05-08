@@ -25,7 +25,7 @@ DecimalValue.prototype.toString = function() {
 	if(this.value == Math.floor(this.value)) {
 		return Number(this.value).toFixed(1);
 	} else {
-		return this.value;
+		return this.value.toFixed(1);
 	}
 };
 

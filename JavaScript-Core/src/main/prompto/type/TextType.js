@@ -43,6 +43,7 @@ TextType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    var DecimalType = require("./DecimalType").DecimalType;
     // can add anything to text
     left.transpile(transpiler);
     transpiler.append(" + ");
@@ -50,6 +51,9 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
         transpiler.append("'[' + ");
         right.transpile(transpiler);
         transpiler.append(".join(', ') + ']'");
+    } else if(other instanceof DecimalType) {
+        right.transpile(transpiler);
+        transpiler.append(".toFixed(1)");
     } else
         right.transpile(transpiler);
 };
