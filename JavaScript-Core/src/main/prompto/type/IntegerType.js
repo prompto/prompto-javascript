@@ -68,6 +68,16 @@ IntegerType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+IntegerType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" - ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+};
+
+
 IntegerType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return this;

@@ -69,7 +69,7 @@ DateTime.prototype.addPeriod = function (period) {
 };
 
 
-DateTime.prototype.subDateTime = function(other) {
+DateTime.prototype.subtractDateTime = function(other) {
     var thisValue = this.date.valueOf() + this.tzOffset*1000;
     var otherValue = other.date.valueOf() + other.tzOffset*1000;
     var numDays = ( thisValue - otherValue)/(24*60*60*1000);
@@ -81,8 +81,8 @@ DateTime.prototype.subDateTime = function(other) {
     data[7] = this.date.getUTCMilliseconds() - other.date.getUTCMilliseconds();
     return new Period(data);
 };
-
-DateTime.prototype.subDate = function(value) {
+/*
+DateTime.prototype.subtractDate = function(value) {
     var numDays = (this.date.valueOf() - value.valueOf())/(24*60*60*1000);
     var data = [];
     data[3] = Math.floor(numDays);
@@ -93,19 +93,19 @@ DateTime.prototype.subDate = function(value) {
     return new Period(data);
 };
 
-DateTime.prototype.subTime = function(value) {
+DateTime.prototype.subtractTime = function(value) {
     var data = [];
     data[0] = this.date.getUTCFullYear();
     data[1] = this.date.getUTCMonth();
     data[3] = this.date.getUTCDate();
-    data[4] = this.date.getUTCHours() - value.value.getUTCHours();
-    data[5] = this.date.getUTCMinutes() - value.value.getUTCMinutes();
-    data[6] = this.date.getUTCSeconds() - value.value.getUTCSeconds();
-    data[7] = this.date.getUTCMilliseconds() - value.value.getUTCMilliseconds();
+    data[4] = this.date.getUTCHours() - value.getUTCHours();
+    data[5] = this.date.getUTCMinutes() - value.getUTCMinutes();
+    data[6] = this.date.getUTCSeconds() - value.getUTCSeconds();
+    data[7] = this.date.getUTCMilliseconds() - value.getUTCMilliseconds();
     return new Period(data);
 };
-
-DateTime.prototype.subPeriod = function(value) {
+*/
+DateTime.prototype.subtractPeriod = function(value) {
     var date = new Date();
     var year = this.date.getUTCFullYear() - (value.years || 0);
     date.setUTCFullYear(year);

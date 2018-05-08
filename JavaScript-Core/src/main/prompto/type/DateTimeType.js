@@ -58,6 +58,21 @@ DateTimeType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+DateTimeType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    if (other instanceof PeriodType) {
+        left.transpile(transpiler);
+        transpiler.append(".subtractPeriod(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else if (other instanceof DateTimeType) {
+        left.transpile(transpiler);
+        transpiler.append(".subtractDateTime(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+};
+
 DateTimeType.prototype.checkCompare = function(context, other) {
 	if(other instanceof DateTimeType || other instanceof DateType) {
 		return BooleanType.instance;

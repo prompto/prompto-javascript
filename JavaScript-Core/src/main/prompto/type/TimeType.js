@@ -53,6 +53,21 @@ TimeType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    if (other instanceof TimeType) {
+        left.transpile(transpiler);
+        transpiler.append(".subtractTime(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else if (other instanceof PeriodType) {
+        left.transpile(transpiler);
+        transpiler.append(".subtractPeriod(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+};
+
 TimeType.prototype.checkCompare = function(context, other) {
 	if (other instanceof TimeType) {
 		return BooleanType.instance;

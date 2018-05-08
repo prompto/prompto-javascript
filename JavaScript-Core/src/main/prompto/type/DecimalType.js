@@ -55,6 +55,17 @@ DecimalType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+
+DecimalType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" - ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+};
+
+
 DecimalType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return this;

@@ -40,13 +40,13 @@ DateTimeValue.prototype.Add = function(context, value) {
 
 DateTimeValue.prototype.Subtract = function(context, value) {
 	if (value instanceof DateTimeValue) {
-		return new PeriodValue(this.value.subDateTime(value.value));
-	} else if (value instanceof DateValue) {
-		return new PeriodValue(this.value.subDate(value.value));
+		return new PeriodValue(this.value.subtractDateTime(value.value));
+	} /* else if (value instanceof DateValue) {
+		return new PeriodValue(this.value.subtractDate(value.value));
 	} else if (value instanceof TimeValue) {
-		return new PeriodValue(this.value.subTime(value.value));
-	} else if (value instanceof PeriodValue) {
-		return new DateTimeValue(this.value.subPeriod(value.value));
+		return new PeriodValue(this.value.subtractTime(value.value));
+	} */ else if (value instanceof PeriodValue) {
+		return new DateTimeValue(this.value.subtractPeriod(value.value));
 	} else {
 		throw new SyntaxError("Illegal: DateTimeValue - " + typeof(value));
 	}

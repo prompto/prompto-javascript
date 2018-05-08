@@ -39,6 +39,17 @@ PeriodType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+
+PeriodType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    if (other instanceof PeriodType) {
+        left.transpile(transpiler);
+        transpiler.append(".subtract(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+};
+
 PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return this;
