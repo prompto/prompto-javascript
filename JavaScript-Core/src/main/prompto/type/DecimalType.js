@@ -47,11 +47,11 @@ DecimalType.prototype.transpileAdd = function(transpiler, other, tryReverse, lef
 };
 
 
-DecimalType.prototype.checkSubstract = function(context, other) {
+DecimalType.prototype.checkSubtract = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return this;
 	} else {
-		return NativeType.prototype.checkSubstract.call(this, context, other);
+		return NativeType.prototype.checkSubtract.call(this, context, other);
 	}
 };
 

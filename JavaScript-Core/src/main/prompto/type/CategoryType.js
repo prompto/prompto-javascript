@@ -138,12 +138,12 @@ CategoryType.prototype.checkAdd = function(context, other, tryReverse) {
 }
 
 
-CategoryType.prototype.checkSubstract = function(context, other) {
+CategoryType.prototype.checkSubtract = function(context, other) {
     var type = this.checkOperator(context, other, false, Operator.MINUS);
     if(type!=null)
         return type;
     else
-        return BaseType.prototype.checkSubstract.call(this, context, other);
+        return BaseType.prototype.checkSubtract.call(this, context, other);
 }
 
 CategoryType.prototype.checkOperator = function(context, other, tryReverse, operator) {

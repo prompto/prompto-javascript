@@ -48,13 +48,13 @@ DateTimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, le
         return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
 };
 
-DateTimeType.prototype.checkSubstract = function(context, other) {
+DateTimeType.prototype.checkSubtract = function(context, other) {
 	if (other instanceof PeriodType) {
 		return this;
 	} else if(other instanceof DateTimeType) {
 		return PeriodType.instance;
 	} else {
-		return NativeType.prototype.checkSubstract.call(this, context, other);
+		return NativeType.prototype.checkSubtract.call(this, context, other);
 	}
 };
 

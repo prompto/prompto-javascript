@@ -31,11 +31,11 @@ PeriodType.prototype.transpileAdd = function(transpiler, other, tryReverse, left
     }
 };
 
-PeriodType.prototype.checkSubstract = function(context, other) {
+PeriodType.prototype.checkSubtract = function(context, other) {
 	if(other instanceof PeriodType) {
 		return this;
 	} else {
-		return NativeType.prototype.checkSubstract(this, context, other);
+		return NativeType.prototype.checkSubtract(this, context, other);
 	}
 };
 

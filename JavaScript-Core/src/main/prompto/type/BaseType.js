@@ -68,15 +68,23 @@ BaseType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
     else if(tryReverse)
         return other.transpileAdd(transpiler, this, false, right, left);
     else
-        throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
+        throw new SyntaxError("Cannot transpile add " + this.name + " to " + other.name);
 };
 
 
-BaseType.prototype.checkSubstract = function(context, other) {
+BaseType.prototype.checkSubtract = function(context, other) {
     if(other instanceof EnumeratedNativeType)
-        return this.checkSubstract(context, other.derivedFrom);
+        return this.checkSubtract(context, other.derivedFrom);
     else
         throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
+};
+
+
+BaseType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileSubtract(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot transpile substract " + this.name + " to " + other.name);
 };
 
 

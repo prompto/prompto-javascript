@@ -58,13 +58,13 @@ IntegerType.prototype.transpileAdd = function(transpiler, other, tryReverse, lef
         return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
 };
 
-IntegerType.prototype.checkSubstract = function(context, other) {
+IntegerType.prototype.checkSubtract = function(context, other) {
 	if(other instanceof IntegerType) {
 		return this;
 	} else if(other instanceof DecimalType) {
 		return other;
 	} else {
-		return NativeType.prototype.checkSubstract.call(this, context, other);
+		return NativeType.prototype.checkSubtract.call(this, context, other);
 	}
 };
 
