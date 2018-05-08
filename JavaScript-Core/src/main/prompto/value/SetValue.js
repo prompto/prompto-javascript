@@ -20,13 +20,6 @@ function SetValue(itemType, items) {
 SetValue.prototype = Object.create(Value.prototype);
 SetValue.prototype.constructor = SetValue;
 
-SetValue.prototype.addAll = function(items) {
-    if(items instanceof StrictSet)
-        items = Array.from(items.values());
-    items.forEach(function(item){
-        this.items.add(item);
-    }, this);
-};
 
 SetValue.prototype.add = function(item) {
     this.items.add(item);
@@ -72,10 +65,10 @@ SetValue.prototype.getItemInContext = function(context, index) {
 
 SetValue.prototype.Add = function(context, value) {
     if (value instanceof SetValue || value instanceof ListValue) {
-        var result = new SetValue(this.type.itemType);
-        result.addAll(this.items);
-        result.addAll(value.items);
-        return result;
+        var set = new StrictSet();
+        set.addAll(this.items);
+        set.addAll(value.items);
+        return new SetValue(this.type.itemType, set);
     } else {
         return Value.prototype.Add.apply(this, context, value);
     }

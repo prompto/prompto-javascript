@@ -28,13 +28,24 @@ SetType.prototype.equals = function(obj) {
 };
 
 SetType.prototype.checkAdd = function(context, other, tryReverse) {
-	if((other instanceof SetType || other instanceof ListType)
-        && this.itemType.equals(other.itemType, tryReverse)) {
+	if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
 		return this;
 	} else {
 		return ContainerType.prototype.checkAdd.call(this, context, other);
 	}
 };
+
+SetType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
+        left.transpile(transpiler);
+        transpiler.append(".addAll(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+    }
+};
+
 
 SetType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {

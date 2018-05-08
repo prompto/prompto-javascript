@@ -14,9 +14,21 @@ StrictSet.prototype.size = function() {
     return this.set.size;
 };
 
+
 StrictSet.prototype.values = function() {
     return this.set.values();
 };
+
+
+StrictSet.prototype.addAll = function(items) {
+    if(items instanceof StrictSet)
+        items = Array.from(items.values());
+    items.forEach(function(item){
+        this.add(item);
+    }, this);
+    return this; // enable fluid API
+};
+
 
 StrictSet.prototype.add = function(value) {
     if(this.has(value))
