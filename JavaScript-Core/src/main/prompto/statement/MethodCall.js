@@ -64,7 +64,7 @@ MethodCall.prototype.check = function(context) {
 };
 
 MethodCall.prototype.checkDeclaration = function(declaration, parent, local) {
-	if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeBeCheckedInCallContext(parent)) {
+	if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(parent)) {
 		return this.fullCheck(declaration, parent, local);
 	} else {
 		return this.lightCheck(declaration, parent, local);

@@ -29,13 +29,13 @@ ConcreteMethodDeclaration.prototype.check = function(context) {
 
 ConcreteMethodDeclaration.prototype.canBeChecked = function(context) {
 	if(context.isGlobalContext()) {
-		return !this.mustBeBeCheckedInCallContext(context);
+		return !this.mustBeCheckedInCallContext(context);
 	} else {
 		return true;
 	}
 };
 
-ConcreteMethodDeclaration.prototype.mustBeBeCheckedInCallContext = function(context) {
+ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(context) {
 	// if at least one argument is 'Code'
 	if(this.args===null) {
 		return false;
@@ -147,11 +147,18 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
 };
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
+    var global = transpiler.context.isGlobalContext();
+    if(global) {
+        transpiler = transpiler.newLocalTranspiler();
+        this.registerArguments(transpiler.context);
+    }
     transpiler.append("function ").append(this.name).append(" (");
     this.args.transpile(transpiler);
     transpiler.append(") {").indent();
     this.statements.transpile(transpiler);
     transpiler.dedent().append("}");
+    if(global)
+        transpiler.flush();
 };
 
 exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

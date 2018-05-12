@@ -49,7 +49,11 @@ exports.executeResource = function(fileName, methodName, args) {
     else {
         methodName = methodName || "main";
         var js = prompto.runtime.Transpiler.transpile(context, methodName);
-        var fn = eval(js);
+        var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
+        var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
+        fs.writeFile(transpiled, js);
+        eval(js);
+        var fn = eval(methodName);
         args = args || "";
         fn(args);
     }

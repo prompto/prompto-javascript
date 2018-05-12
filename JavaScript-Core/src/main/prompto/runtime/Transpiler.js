@@ -10,6 +10,26 @@ function Transpiler(context) {
     return this;
 }
 
+Transpiler.prototype.newLocalTranspiler = function() {
+    var transpiler = new Transpiler(this.context.newLocalContext());
+    transpiler.declared = this.declared;
+    transpiler.required = this.required;
+    transpiler.lines = this.lines;
+    transpiler.line = this.line;
+    transpiler.indents = this.indents;
+    transpiler.parent = this;
+    return transpiler;
+
+};
+
+
+Transpiler.prototype.flush = function() {
+    if(this.parent) {
+        this.parent.line = this.line;
+        this.parent.indents = this.indents;
+    }
+};
+
 Transpiler.prototype.declare = function(decl) {
     this.declared.add(decl);
 };
@@ -130,6 +150,15 @@ ObjectUtils.formatInteger = function(format) {
     return value.substr(value.length - format.length);
 };
 
+ObjectUtils.decimalToString = function() {
+    // mimic 0.0######
+    var s = this.toString();
+    if(s.indexOf('.')>=0)
+        return s;
+    else
+        return s + ".0";
+};
+
 Transpiler.transpile = function(context, methodName, cmdLineArgs) {
     try {
         var method = locateMethod(context, methodName, cmdLineArgs);
@@ -138,6 +167,7 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
         transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
         transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
+        transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
         method.transpile(transpiler);
         if(transpiler.line!==transpiler.indents) {
             transpiler.lines.push(transpiler.line);

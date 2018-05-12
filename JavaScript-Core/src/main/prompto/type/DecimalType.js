@@ -152,6 +152,15 @@ DecimalType.prototype.transpileMinus = function(transpiler, value) {
     value.transpile(transpiler);
 };
 
+
+DecimalType.prototype.transpileMember = function(transpiler, name) {
+    if("text" == name)
+        transpiler.append("toDecimalString()");
+    else
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
+};
+
+
 DecimalType.prototype.checkCompare = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return BooleanType.instance;

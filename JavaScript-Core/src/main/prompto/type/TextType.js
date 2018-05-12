@@ -48,6 +48,8 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
     left.transpile(transpiler);
     transpiler.append(" + ");
     right.transpile(transpiler);
+    if(other === DecimalType.instance)
+        transpiler.append(".toDecimalString()");
 };
 
 TextType.prototype.checkMultiply = function(context, other, tryReverse) {
