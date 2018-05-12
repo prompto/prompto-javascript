@@ -31,6 +31,10 @@ SetValue.prototype.toString = function() {
 };
 
 
+SetValue.prototype.size = function() {
+    return this.items.length;
+};
+
 SetValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
         return new IntegerValue(this.items.length);

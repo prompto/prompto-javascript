@@ -101,7 +101,8 @@ MethodCall.prototype.transpile = function(transpiler) {
         this.method.transpileParent(transpiler);
         declaration.transpileCall(transpiler, this.assignments);
     } else {
-        transpiler.declare(declaration);
+    	if(!declaration.memberOf)
+            transpiler.declare(declaration);
         this.method.transpile(transpiler);
         if (this.assignments != null)
             this.assignments.transpile(transpiler);

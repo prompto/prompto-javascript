@@ -1,5 +1,6 @@
 var RangeValue = require("./RangeValue").RangeValue;
 var TimeValue = require("./TimeValue").TimeValue;
+var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 var TimeType = null;
 
 exports.resolve = function() {
@@ -28,7 +29,7 @@ TimeRange.prototype.getItem = function(index) {
 	if(result>this.high.value.valueOf()) {
 		throw new IndexOutOfBoundsException();
 	}
-	return new TimeValue(new Date(result));
+	return new TimeValue(new LocalTime(result));
 };
 
 /*

@@ -1,7 +1,7 @@
 var Period = require("./Period").Period;
 
-function LocalTime() {
-    var time = new Date();
+function LocalTime(value) {
+    var time = value ? new Date(value) : new Date();
     time.__proto__ = LocalTime.prototype;
     return time;
 }

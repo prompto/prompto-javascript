@@ -48,6 +48,25 @@ IfStatement.prototype.interpret = function(context) {
 	return null;
 };
 
+IfStatement.prototype.transpile = function(transpiler) {
+    for(var i=0;i<this.elements.length;i++) {
+        var element = this.elements[i];
+        if (i > 0)
+            transpiler.append(" else ");
+        if (element.condition) {
+            transpiler.append("if (");
+            element.condition.transpile(transpiler);
+            transpiler.append(") ");
+        }
+        transpiler.append("{");
+        transpiler.newLine();
+        element.transpile(transpiler);
+        transpiler.append("}");
+    }
+    transpiler.newLine();
+};
+
+
 IfStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 }
@@ -121,6 +140,18 @@ IfElement.prototype.check = function(context) {
 	}
     context = this.downCast(context, false);
 	return this.statements.check(context, null);
+};
+
+
+IfElement.prototype.transpile = function(transpiler) {
+    var context = transpiler.context;
+    if(this.condition instanceof EqualsExpression)
+        context = this.condition.downCast(transpiler.context, false);
+    if(context!=transpiler.context)
+        transpiler = transpiler.newChildTranspiler(context);
+    else
+        transpiler = transpiler.newChildTranspiler();
+    this.statements.transpile(transpiler);
 };
 
 IfElement.prototype.downCast = function(context, setValue) {

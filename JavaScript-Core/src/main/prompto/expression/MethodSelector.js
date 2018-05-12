@@ -35,10 +35,9 @@ MethodSelector.prototype.toDialect = function(writer) {
 };
 
 MethodSelector.prototype.transpile = function(transpiler) {
-    if(this.parent==null)
-        transpiler.append(this.name);
-    else
-        MemberSelector.prototype.transpile.call(this, transpiler);
+    if(this.parent!=null)
+        this.transpileParent(transpiler);
+    transpiler.append(this.name);
 };
 
 

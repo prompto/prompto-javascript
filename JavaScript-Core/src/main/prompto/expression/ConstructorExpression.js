@@ -137,4 +137,8 @@ ConstructorExpression.prototype.interpret = function(context) {
 	return instance;
 };
 
+ConstructorExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("new ").append(this.type.name).append("()");
+};
+
 exports.ConstructorExpression = ConstructorExpression;

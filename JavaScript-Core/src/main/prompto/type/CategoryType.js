@@ -54,6 +54,11 @@ CategoryType.prototype.toDialect = function(writer) {
     writer.append(this.name);
 };
 
+
+CategoryType.prototype.transpile = function(transpiler) {
+    transpiler.append(this.name);
+};
+
 CategoryType.prototype.newInstanceFromStored = function(context, stored) {
     var decl = this.getDeclaration(context);
     var inst = decl.newInstanceFromStored(context, stored);

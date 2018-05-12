@@ -22,6 +22,20 @@ Transpiler.prototype.newLocalTranspiler = function() {
 
 };
 
+Transpiler.prototype.newChildTranspiler = function(context) {
+    if(!context)
+        context = this.context.newChildContext();
+    var transpiler = new Transpiler(context);
+    transpiler.declared = this.declared;
+    transpiler.required = this.required;
+    transpiler.lines = this.lines;
+    transpiler.line = this.line;
+    transpiler.indents = this.indents;
+    transpiler.parent = this;
+    return transpiler;
+
+};
+
 
 Transpiler.prototype.flush = function() {
     if(this.parent) {
@@ -149,9 +163,15 @@ ObjectUtils.formatInteger = function(format) {
 ObjectUtils.decimalToString = function() {
     // mimic 0.0######
     var s = this.toString();
-    if(s.indexOf('.')>=0)
-        return s;
-    else
+    var i = s.indexOf('.');
+    if(i>=0) {
+        // fix IEEE issue
+        i = s.indexOf('000000', i);
+        if( i < 0)
+            return s;
+        else
+            return s.substr(0, i);
+    } else
         return s + ".0";
 };
 

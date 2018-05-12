@@ -53,7 +53,7 @@ StrictSet.prototype.has = function(value) {
 StrictSet.prototype.equals = function(other) {
     if(!(other instanceof StrictSet))
         return false;
-    else if(this.size()!=other.size())
+    else if(this.length!=other.length)
         return false;
     else {
         var iter = this.set.values();

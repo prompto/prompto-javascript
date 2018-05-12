@@ -209,7 +209,7 @@ EqualsExpression.prototype.getMatchOp = function() {
         case EqOp.NOT_CONTAINS:
             return MatchOp.CONTAINS
         default:
-            throw new Exception("Not supported:" + this.operator.toString());
+            throw new Error("Not supported:" + this.operator.toString());
     }
 };
 
@@ -219,6 +219,37 @@ EqualsExpression.prototype.readFieldName = function(exp) {
         return exp.toString();
     else
         return null;
+};
+
+EqualsExpression.prototype.transpile = function(transpiler) {
+    switch (this.operator) {
+        case EqOp.EQUALS:
+            this.transpileEquals(transpiler);
+            break;
+        case EqOp.NOT_EQUALS:
+            this.transpileNotEquals(transpiler);
+            break;
+        case EqOp.ROUGHLY:
+            this.transpileRoughly(transpiler);
+            break;
+        case EqOp.CONTAINS:
+            this.transpileContains(transpiler);
+            break;
+        case EqOp.NOT_CONTAINS:
+            this.transpileNotContains(transpiler);
+            break;
+        case EqOp.IS_A:
+            this.transpileIsA(transpiler);
+            break;
+        default:
+            throw new Error("Cannot transpile:" + this.operator.toString());
+    }
+};
+
+EqualsExpression.prototype.transpileIsA = function(transpiler) {
+    this.left.transpile(transpiler);
+    transpiler.append(" instanceof ");
+    this.right.transpile(transpiler);
 };
 
 exports.EqualsExpression = EqualsExpression;

@@ -91,7 +91,7 @@ DocumentValue.prototype.toString = function() {
 
 DocumentValue.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
     var values = {};
-    for (var key in this.values) {
+    Object.getOwnPropertyNames(this.values).forEach(function(key) {
         var value = this.values[key];
         if (value == null || value == undefined)
             values[key] = null;
@@ -99,7 +99,7 @@ DocumentValue.prototype.toJson = function(context, json, instanceId, fieldName, 
             var id = this; // TODO create identifier
             value.toJson(context, values, id, key, withType, binaries);
         }
-    }
+    }, this);
     var doc = withType ? { type: DocumentType.instance.name, value: values} : values;
     if(Array.isArray(json))
         json.push(doc);
