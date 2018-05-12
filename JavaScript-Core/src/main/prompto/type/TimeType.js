@@ -98,6 +98,21 @@ TimeType.prototype.checkMember = function (context, name) {
 	}
 };
 
+TimeType.prototype.transpileMember = function(transpiler, name) {
+    if ("hour"==name) {
+        transpiler.append("getHour()");
+    } else if ("minute"==name) {
+        transpiler.append("getMinute()");
+    } else if ("second"==name) {
+        transpiler.append("getSecond()");
+    } else if ("millisecond"==name) {
+        transpiler.append("getMillisecond()");
+    } else {
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
+
 TimeType.prototype.newRange = function(left, right) {
 	if (left instanceof TimeValue && right instanceof TimeValue) {
 		return new TimeRange(left, right);

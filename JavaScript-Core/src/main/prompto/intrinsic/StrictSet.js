@@ -3,14 +3,15 @@ function StrictSet(values) {
     return this;
 }
 
+Object.defineProperty(StrictSet.prototype, "length", {
+    get : function() {
+        return this.set.size;
+    }
+});
+
 StrictSet.prototype.toString = function() {
     return "<" + Array.from(this.set.values()).join(", ") + ">";
 };
-
-StrictSet.prototype.size = function() {
-    return this.set.size;
-};
-
 
 StrictSet.prototype.values = function() {
     return this.set.values();

@@ -54,6 +54,14 @@ ProblemCollector.prototype.reportUnknownVariable = function(id) {
 };
 
 
+ProblemCollector.prototype.reportEmptyVariable = function(id) {
+    var problem = this.readSection(id);
+    problem.type = "error";
+    problem.message = "Empty variable: " + id.name;
+    this.collectProblem(problem);
+};
+
+
 ProblemCollector.prototype.reportUnknown = function(id, type) {
     var problem = this.readSection(id);
     problem.type = "error";

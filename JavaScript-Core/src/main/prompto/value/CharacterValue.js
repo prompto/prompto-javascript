@@ -43,20 +43,11 @@ CharacterValue.prototype.Add = function(context, value) {
 
 CharacterValue.prototype.Multiply = function(context, value) {
     if (value instanceof IntegerValue) {
-        var count = value.value;
-        if (count < 0) {
+        try {
+            var text = this.value.repeat(value.value);
+            return new TextValue(text);
+        } catch(error) {
             throw new SyntaxError("Negative repeat count:" + count);
-        } else if (count == 0) {
-            return new TextValue("");
-        } else if (count == 1) {
-            return new TextValue(value.toString());
-        } else {
-            var all = [];
-            while (--count >= 0) {
-                all[count] = this.value;
-            }
-            var value = all.join("");
-            return new TextValue(value);
         }
     } else {
         throw new SyntaxError("Illegal: Chararacter * " + typeof(value));

@@ -5,6 +5,7 @@ var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
+var Document = require("../intrinsic/Document").Document;
 
 function DocumentExpression(source) {
     Section.call(this);
@@ -26,6 +27,14 @@ DocumentExpression.prototype.interpret = function(context) {
         var value = this.source.interpret(context);
         return this.documentFromValue(context, value);
     }
+};
+
+DocumentExpression.prototype.transpile = function(transpiler) {
+    transpiler.require(Document);
+    if(!this.source)
+        transpiler.append("new Document()");
+    else
+        throw new Error("TO DO");
 };
 
 DocumentExpression.prototype.documentFromValue = function(context, value) {

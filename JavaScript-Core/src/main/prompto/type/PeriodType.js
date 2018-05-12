@@ -54,13 +54,31 @@ PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return this;
 	} else {
-		return NativeType.prototype.checkMultiply(this, context, other, tryReverse);
+		return NativeType.prototype.checkMultiply(this, transpiler, other, tryReverse);
 	}
 };
 
 
+PeriodType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType) {
+        left.transpile(transpiler);
+        transpiler.append(".multiply(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
+};
+
 PeriodType.prototype.checkMinus = function(context) {
 	return this;
 };
+
+
+
+PeriodType.prototype.transpileMinus = function(transpiler, value) {
+    value.transpile(transpiler);
+    transpiler.append(".minus()");
+};
+
 
 exports.PeriodType = PeriodType;

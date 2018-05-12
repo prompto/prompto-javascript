@@ -30,4 +30,11 @@ DivideExpression.prototype.interpret = function(context) {
 };
 
 
+DivideExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.transpileDivide(transpiler, rt, this.left, this.right);
+};
+
+
 exports.DivideExpression = DivideExpression;

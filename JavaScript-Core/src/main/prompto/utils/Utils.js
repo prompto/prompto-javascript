@@ -177,6 +177,24 @@ function mergeObjects() {
     return res;
 }
 
+function multiplyArray(items, count) {
+    var result = [];
+    while(--count>=0) {
+        result = result.concat(items);
+    }
+    return result;
+}
+
+function decimalToString(d) {
+    // mimic 0.0######
+    var s = d.toString();
+    if(s.indexOf('.')>=0)
+        return s;
+    else
+        return s + ".0";
+}
+
+exports.multiplyArray = multiplyArray;
 exports.mergeObjects = mergeObjects;
 exports.equalObjects = equalObjects;
 exports.equalArrays = equalArrays;
@@ -186,3 +204,4 @@ exports.getUtf8StringLength = getUtf8StringLength;
 exports.getUtf8CharLength = getUtf8CharLength;
 exports.stringToUtf8Buffer = stringToUtf8Buffer;
 exports.utf8BufferToString = utf8BufferToString;
+exports.decimalToString = decimalToString;

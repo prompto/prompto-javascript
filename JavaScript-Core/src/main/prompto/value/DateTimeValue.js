@@ -65,7 +65,28 @@ DateTimeValue.prototype.CompareTo = function(context, value) {
 
 DateTimeValue.prototype.getMemberValue = function(context, name) {
     try {
-        var value = this.value.getMember(name);
+    	var value = null;
+        if ("year" == name) {
+            value = this.value.getYear();
+        } else if ("month" == name) {
+            value = this.value.getMonth();
+        } else if ("dayOfMonth" == name) {
+            value = this.value.getDayOfMonth();
+        } else if ("dayOfYear" == name) {
+            value = this.value.getDayOfYear();
+        } else if ("hour" == name) {
+            value = this.value.getHour();
+        } else if ("minute" == name) {
+            value = this.value.getMinute();
+        } else if ("second" == name) {
+            value = this.value.getSecond();
+        } else if ("millisecond" == name) {
+            value = this.value.getMillisecond();
+        } else if ("tzOffset" == name) {
+            value = this.value.getTzOffset();
+        } else if ("tzName" == name) {
+            value = this.value.getTzName();
+        }
         if(typeof(value) === typeof(0))
             return new IntegerValue(value);
         else if(typeof(value) === typeof("z"))
@@ -76,13 +97,6 @@ DateTimeValue.prototype.getMemberValue = function(context, name) {
     return Value.prototype.getMemberValue.call(this, context, name);
 };
 
-DateTimeValue.prototype.getDayOfYear = function() {
-	var first = new Date(this.date);
-	first.setMonth(0);
-	first.setDate(1);
-	var numDays = (this.date - first) / (1000 * 60 * 60 * 24);
-	return 1 + Math.floor(numDays);
-}
 
 
 DateTimeValue.prototype.equals = function(obj) {

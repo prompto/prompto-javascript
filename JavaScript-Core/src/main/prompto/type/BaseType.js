@@ -96,6 +96,14 @@ BaseType.prototype.checkDivide = function(context, other) {
 };
 
 
+BaseType.prototype.transpileDivide = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileDivide(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
+};
+
+
 BaseType.prototype.checkIntDivide = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkIntDivide(context, other.derivedFrom);
@@ -103,11 +111,28 @@ BaseType.prototype.checkIntDivide = function(context, other) {
     	throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
 };
 
+
+BaseType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileIntDivide(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
+};
+
+
 BaseType.prototype.checkModulo = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkModulo(context, other.derivedFrom);
     else
     	throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
+};
+
+
+BaseType.prototype.transpileModulo = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileModulo(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot transpile modulo " + this.name + " to " + other.name);
 };
 
 BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
@@ -119,9 +144,32 @@ BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
 	    throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
 };
 
-BaseType.prototype.checkMinus = function(context) {
-	throw new SyntaxError("Cannot negate " + this.name);
+BaseType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
+    else if(tryReverse)
+        return other.transpileMultiply(transpiler, this, false, right, left);
+    else
+        throw new SyntaxError("Cannot transpile multiply " + this.name + " to " + other.name);
 };
+
+
+
+BaseType.prototype.checkMinus = function(context) {
+    if(this instanceof EnumeratedNativeType)
+        return this.derivedFrom.checkMinus(context);
+    else
+	    throw new SyntaxError("Cannot negate " + this.name);
+};
+
+
+BaseType.prototype.transpileMinus = function(transpiler, value) {
+    if(this instanceof EnumeratedNativeType)
+        return this.derivedFrom.transpileMinus(transpiler, value);
+    else
+        throw new SyntaxError("Cannot transpile negate of " + this.name );
+};
+
 
 BaseType.prototype.checkCompare = function(context, other) {
     if(other instanceof EnumeratedNativeType)
@@ -159,7 +207,15 @@ BaseType.prototype.checkMember = function(context, name) {
     if("text" == name)
         return TextType.instance;
     else
-    	throw new SyntaxError("Cannot read member from " + this.name);
+    	throw new SyntaxError("Cannot read member: " + name + " from " + this.name);
+};
+
+
+BaseType.prototype.transpileMember = function(transpiler, name) {
+    if("text" == name)
+        transpiler.append("toString()");
+    else
+        throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
 };
 
 
@@ -167,6 +223,10 @@ BaseType.prototype.checkSlice = function(context) {
 	throw new SyntaxError("Cannot slice " + this.name);
 };
 
+
+BaseType.prototype.transpileSlice = function(transpiler, first, last) {
+    throw new SyntaxError("Cannot transpile " + this.name);
+};
 
 BaseType.prototype.checkIterator = function(context) {
 	throw new SyntaxError("Cannot iterate over " + this.name);

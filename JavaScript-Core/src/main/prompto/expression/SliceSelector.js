@@ -18,6 +18,7 @@ SliceSelector.prototype.toString = function() {
 			(this.first==null?"":this.first.toString()) + ":" +
 			(this.last==null?"":this.last.toString()) + "]";
 };
+
 SliceSelector.prototype.toDialect = function(writer) {
     this.parent.toDialect(writer);
     writer.append('[');
@@ -63,5 +64,13 @@ SliceSelector.prototype.interpret = function(context) {
 		throw new SyntaxError("Illegal sliced object: " + this.parent);
 	}
 };
+
+SliceSelector.prototype.transpile = function(transpiler) {
+    this.parent.transpile(transpiler);
+    var parentType = this.parent.check(transpiler.context);
+    return parentType.transpileSlice(transpiler, this.first, this.last);
+
+};
+
 
 exports.SliceSelector = SliceSelector;

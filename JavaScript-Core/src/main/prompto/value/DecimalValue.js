@@ -1,6 +1,7 @@
 var Value = require("./Value").Value;
 var IntegerValue = null; // circular dependency
 var DecimalType = null;
+var decimalTostring = require("../utils/Utils").decimalToString;
 
 exports.resolve = function() {
 	IntegerValue = require("./IntegerValue").IntegerValue;
@@ -21,12 +22,7 @@ DecimalValue.Parse = function(text) {
 };
 
 DecimalValue.prototype.toString = function() {
-	// mimic 0.0######
-	if(this.value == Math.floor(this.value)) {
-		return Number(this.value).toFixed(1);
-	} else {
-		return this.value.toFixed(1);
-	}
+    return decimalTostring(this.value);
 };
 
 /*jshint bitwise:false*/

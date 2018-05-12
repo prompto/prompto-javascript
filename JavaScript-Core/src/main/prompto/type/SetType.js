@@ -63,14 +63,6 @@ SetType.prototype.checkIterator = function(context) {
 	return this.itemType;
 }
 
-SetType.prototype.checkMember = function(context, name) {
-	if ("count" == name) {
-		return IntegerType.instance;
-	} else {
-		return ContainerType.prototype.checkMember.call(this, context, name);
-	}
-};
-
 
 SetType.prototype.isAssignableFrom = function(context, other) {
     return ContainerType.prototype.isAssignableFrom.call(this, context, other)

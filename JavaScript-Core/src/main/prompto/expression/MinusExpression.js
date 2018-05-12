@@ -24,4 +24,9 @@ MinusExpression.prototype.interpret = function(context){
 	return val.Minus(context);
 };
 
+MinusExpression.prototype.transpile = function(transpiler) {
+    var type = this.expression.check(transpiler.context);
+    return type.transpileMinus(transpiler, this.expression);
+};
+
 exports.MinusExpression = MinusExpression;

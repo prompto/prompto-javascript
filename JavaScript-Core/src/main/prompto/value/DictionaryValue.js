@@ -1,4 +1,6 @@
 var Value = require("./Value").Value;
+var Dictionary = require("../intrinsic/Dictionary").Dictionary;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var NullValue = require("./NullValue").NullValue;
 var SetValue = require("./SetValue").SetValue;
 var ListValue = require("./ListValue").ListValue;
@@ -11,7 +13,7 @@ var TextType = require("../type/TextType").TextType;
 
 function DictionaryValue(itemType, dict, mutable) {
     Value.call(this, new DictionaryType(itemType));
-	this.dict = dict || {};
+	this.dict = dict || new Dictionary();
     this.mutable = mutable || false;
 	return this;
 }
@@ -37,14 +39,6 @@ DictionaryValue.merge = function(dict1, dict2) {
         dict[p] = dict2.dict[p];
     }
     return new DictionaryValue(dict1.type.itemType, dict);
-};
-
-DictionaryValue.prototype.size = function() {
-    var n = 0;
-    for(p in this.dict) {
-        n += 1;
-    }
-    return n;
 };
 
 DictionaryValue.prototype.isEmpty = function() {
@@ -73,13 +67,16 @@ DictionaryValue.prototype.hasItem = function(context, value) {
 
 DictionaryValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
-        return new IntegerValue(this.size());
+        return new IntegerValue(this.dict.length);
     } else if ("keys"==name) {
-        var set_ = new SetValue(TextType.instance);
-        for(p in this.dict) {
-            set_.add(new TextValue(p));
+        var keys = new StrictSet();
+        var iter = this.dict.keys.values();
+        var item = iter.next();
+        while(!item.done) {
+            keys.add(new TextValue(item.value));
+            item = iter.next();
         }
-        return set_;
+        return new SetValue(TextType.instance, keys);
     } else if ("values"==name) {
         var list = []
         for(p in this.dict) {

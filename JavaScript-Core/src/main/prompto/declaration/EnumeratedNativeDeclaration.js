@@ -89,6 +89,18 @@ EnumeratedNativeDeclaration.prototype.check = function(context) {
 	return this.type;
 };
 
+EnumeratedNativeDeclaration.prototype.transpile = function(transpiler) {
+    transpiler.append("function " + this.name + "(name, value) { this.name = name; this.value = value; return this; };");
+    transpiler.newLine();
+    transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };");
+    transpiler.newLine();
+    this.symbols.forEach(function(symbol) {symbol.initialize(transpiler);});
+    var names = this.symbols.map(function(symbol) { return symbol.name; });
+    transpiler.append(this.name + ".symbols = ");
+    transpiler.append("[" + names.join(", ") + "]");
+    transpiler.append(";");
+};
+
 EnumeratedNativeDeclaration.prototype.getType = function(context) {
 	return this.type;
 };

@@ -145,30 +145,6 @@ DateTime.prototype.toString = function() {
 };
 
 
-DateTime.prototype.getMember = function(name) {
-    if ("year" == name) {
-        return this.date.getUTCFullYear();
-    } else if ("month" == name) {
-        return this.date.getUTCMonth() + 1;
-    } else if ("dayOfMonth" == name) {
-        return this.date.getUTCDate();
-    } else if ("dayOfYear" == name) {
-        return this.getDayOfYear();
-    } else if ("hour" == name) {
-        return this.date.getUTCHours();
-    } else if ("minute" == name) {
-        return this.date.getUTCMinutes();
-    } else if ("second" == name) {
-        return this.date.getUTCSeconds();
-    } else if ("millisecond" == name) {
-        return this.date.getUTCMilliseconds();
-    } else if ("tzOffset" == name) {
-        return this.tzOffset;
-    } else if ("tzName" == name) {
-        return "Z";
-    }
-};
-
 DateTime.prototype.equals = function(value) {
     return this.date.valueOf() == value.date.valueOf() && this.tzOffset == value.tzOffset;
 };
@@ -180,6 +156,52 @@ DateTime.prototype.compareTo = function(date, tzOffset) {
 };
 
 
+DateTime.prototype.getYear = function(value) {
+    return this.date.getUTCFullYear();
+};
+
+DateTime.prototype.getMonth = function(value) {
+    return this.date.getUTCMonth() + 1;
+};
+
+
+DateTime.prototype.getDayOfMonth = function(value) {
+    return this.date.getUTCDate();
+};
+
+
+DateTime.prototype.getDayOfYear = function() {
+    var first = new Date(this.date.getUTCFullYear(), 0, 1, 0, 0, 0, 0);
+    var numDays = (this - first) / (1000 * 60 * 60 * 24);
+    return 1 + Math.floor(numDays);
+};
+
+DateTime.prototype.getHour = function(value) {
+    return this.date.getUTCHours();
+};
+
+
+DateTime.prototype.getMinute = function(value) {
+    return this.date.getUTCMinutes();
+};
+
+
+DateTime.prototype.getSecond = function(value) {
+    return this.date.getUTCSeconds();
+};
+
+
+DateTime.prototype.getMillisecond = function(value) {
+    return this.date.getUTCMilliseconds();
+};
+
+DateTime.prototype.getTzOffset = function(value) {
+    return this.date.tzOffset;
+};
+
+DateTime.prototype.getTzName = function(value) {
+    return "Z";
+};
 
 
 exports.DateTime = DateTime;

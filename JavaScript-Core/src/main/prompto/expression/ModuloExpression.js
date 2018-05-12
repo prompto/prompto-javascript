@@ -28,4 +28,11 @@ ModuloExpression.prototype.interpret = function(context) {
 	return lval.Modulo(context, rval);
 };
 
+
+ModuloExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.transpileModulo(transpiler, rt, this.left, this.right);
+};
+
 exports.ModuloExpression = ModuloExpression;

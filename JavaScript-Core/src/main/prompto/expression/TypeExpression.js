@@ -21,6 +21,10 @@ TypeExpression.prototype.interpret = function(context) {
 	return new TypeValue(this.value);
 };
 
+TypeExpression.prototype.transpile = function(transpiler) {
+    this.value.transpile(transpiler);
+};
+
 TypeExpression.prototype.getMemberValue = function(context, name) {
 	return this.value.getMemberValue(context, name);
 };

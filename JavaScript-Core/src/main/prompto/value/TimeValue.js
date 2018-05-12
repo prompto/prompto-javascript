@@ -71,13 +71,13 @@ TimeValue.prototype.CompareTo = function(context, value) {
 
 TimeValue.prototype.getMemberValue = function(context, name) {
 	if ("hour"==name) {
-		return new IntegerValue(this.value.getUTCHours());
+		return new IntegerValue(this.value.getHour());
 	} else if ("minute"==name) {
-		return new IntegerValue(this.value.getUTCMinutes());
+		return new IntegerValue(this.value.getMinute());
 	} else if ("second"==name) {
-		return new IntegerValue(this.value.getUTCSeconds());
+		return new IntegerValue(this.value.getSecond());
 	} else if ("millisecond"==name) {
-		return new IntegerValue(this.value.getUTCMilliseconds());
+		return new IntegerValue(this.value.getMillisecond());
 	} else {
         return Value.prototype.getMemberValue.call(this, context, name);
 	}

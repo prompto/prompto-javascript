@@ -14,4 +14,9 @@ BooleanLiteral.prototype.check = function(context) {
 	return BooleanType.instance;
 };
 
+BooleanLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
+
+
 exports.BooleanLiteral = BooleanLiteral;

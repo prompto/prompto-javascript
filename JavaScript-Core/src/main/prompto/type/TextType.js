@@ -47,15 +47,7 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
     // can add anything to text
     left.transpile(transpiler);
     transpiler.append(" + ");
-    if(other instanceof ListType) {
-        transpiler.append("'[' + ");
-        right.transpile(transpiler);
-        transpiler.append(".join(', ') + ']'");
-    } else if(other instanceof DecimalType) {
-        right.transpile(transpiler);
-        transpiler.append(".toFixed(1)");
-    } else
-        right.transpile(transpiler);
+    right.transpile(transpiler);
 };
 
 TextType.prototype.checkMultiply = function(context, other, tryReverse) {
@@ -64,6 +56,19 @@ TextType.prototype.checkMultiply = function(context, other, tryReverse) {
 	}
 	return NativeType.prototype.checkMultiply.call(this, context, other, tryReverse);
 };
+
+
+TextType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType) {
+        left.transpile(transpiler);
+        transpiler.append(".repeat(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+};
+
+
 
 TextType.prototype.checkCompare = function(context, other) {
 	if(other instanceof TextType || other instanceof CharacterType) {
@@ -88,6 +93,15 @@ TextType.prototype.checkMember = function(context, name) {
    }
 };
 
+
+TextType.prototype.transpileMember = function(transpiler, name) {
+    if ("count"==name) {
+        transpiler.append("length");
+    } else {
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
 TextType.prototype.checkContains = function(context, other) {
 	if(other instanceof TextType || other instanceof CharacterType) {
 		return BooleanType.instance;
@@ -101,6 +115,21 @@ TextType.prototype.checkContainsAllOrAny = function(context, other) {
 
 TextType.prototype.checkSlice = function(context) {
 	return this;
+};
+
+
+TextType.prototype.transpileSlice = function(transpiler, first, last) {
+    transpiler.append(".substring(");
+    if(first) {
+        first.transpile(transpiler);
+        transpiler.append("-1");
+    } else
+        transpiler.append("0");
+    if(last) {
+        transpiler.append(",");
+        last.transpile(transpiler);
+    }
+    transpiler.append(")");
 };
 
 TextType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
@@ -200,6 +229,10 @@ function resolveBuiltInMethodDeclaration() {
         return TextType.instance;
     };
 
+    ToLowerCaseMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("toLowerCase()");
+    };
+
     ToUpperCaseMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     ToUpperCaseMethodDeclaration.prototype.constructor = ToUpperCaseMethodDeclaration;
 
@@ -212,6 +245,10 @@ function resolveBuiltInMethodDeclaration() {
         return TextType.instance;
     };
 
+    ToUpperCaseMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("toUpperCase()");
+    };
+
     ToCapitalizedMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     ToCapitalizedMethodDeclaration.prototype.constructor = ToCapitalizedMethodDeclaration;
 
@@ -219,6 +256,10 @@ function resolveBuiltInMethodDeclaration() {
         var value = this.getValue(context).getStorableData();
         value = value.replace( /(^|\s)([a-z])/g , function(m, p1, p2){ return p1 + p2.toUpperCase(); } );
         return new TextValue(value);
+    };
+
+    ToCapitalizedMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("replace( /(^|\\s)([a-z])/g , function(m, p1, p2){ return p1 + p2.toUpperCase(); } )");
     };
 
     ToCapitalizedMethodDeclaration.prototype.check = function(context) {
@@ -238,6 +279,11 @@ function resolveBuiltInMethodDeclaration() {
         return TextType.instance;
     };
 
+    TrimMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("trim()");
+    };
+
+
     ReplaceMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     ReplaceMethodDeclaration.prototype.constructor = ReplaceMethodDeclaration;
 
@@ -251,6 +297,14 @@ function resolveBuiltInMethodDeclaration() {
 
     ReplaceMethodDeclaration.prototype.check = function(context) {
         return TextType.instance;
+    };
+
+    ReplaceMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("replace(");
+        assignments.find("toReplace").transpile(transpiler);
+        transpiler.append(",");
+        assignments.find("replaceWith").transpile(transpiler);
+        transpiler.append(")");
     };
 
 
@@ -269,6 +323,15 @@ function resolveBuiltInMethodDeclaration() {
         return TextType.instance;
     };
 
+    ReplaceAllMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("replace(new RegExp(");
+        assignments.find("toReplace").transpile(transpiler);
+        transpiler.append(", 'g'),");
+        assignments.find("replaceWith").transpile(transpiler);
+        transpiler.append(")");
+    };
+
+
     SplitMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     SplitMethodDeclaration.prototype.constructor = SplitMethodDeclaration;
 
@@ -284,6 +347,16 @@ function resolveBuiltInMethodDeclaration() {
         return new ListType(TextType.instance);
     };
 
+    SplitMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("split(");
+        if(assignments)
+            assignments.get(0).transpile(transpiler);
+        else
+            transpiler.append("' '"); // default
+        transpiler.append(")");
+    };
+
+
     StartsWithMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     StartsWithMethodDeclaration.prototype.constructor = StartsWithMethodDeclaration;
 
@@ -296,6 +369,12 @@ function resolveBuiltInMethodDeclaration() {
 
     StartsWithMethodDeclaration.prototype.check = function(context) {
         return BooleanType.instance;
+    };
+
+    StartsWithMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("startsWith(")
+        assignments[0].transpile(transpiler);
+        transpiler.append(")");
     };
 
     EndsWithMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
@@ -311,6 +390,13 @@ function resolveBuiltInMethodDeclaration() {
     EndsWithMethodDeclaration.prototype.check = function(context) {
         return BooleanType.instance;
     };
+
+    EndsWithMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("endsWith(")
+        assignments[0].transpile(transpiler);
+        transpiler.append(")");
+    };
+
 
 }
 

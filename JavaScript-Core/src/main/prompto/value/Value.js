@@ -71,7 +71,7 @@ Value.prototype.getMemberValue = function(context, name) {
         return new TextValue(this.toString());
     }
     else
-	    throw new SyntaxError("No member support for " + this.constructor.name);
+	    throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
 };
 
 Value.prototype.ConvertTo = function(type) {

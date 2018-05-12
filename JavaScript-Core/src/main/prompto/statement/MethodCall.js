@@ -32,17 +32,6 @@ MethodCall.prototype.toDialect = function(writer) {
         writer.append("()");
 };
 
-MethodCall.prototype.transpile = function(transpiler) {
-    var declaration = this.findDeclaration(transpiler.context);
-    transpiler.declare(declaration);
-    this.method.transpile(transpiler);
-    if (this.assignments != null)
-        this.assignments.transpile(transpiler);
-    else
-        transpiler.append("()");
-};
-
-
 MethodCall.prototype.requiresInvoke = function(writer) {
     if (writer.dialect != Dialect.E)
         return false;
@@ -103,6 +92,26 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 		}
 	}
 };
+
+
+MethodCall.prototype.transpile = function(transpiler) {
+    var finder = new MethodFinder(transpiler.context,this);
+    var declaration = finder.findMethod(false);
+    if(declaration instanceof BuiltInMethodDeclaration) {
+        this.method.transpileParent(transpiler);
+        declaration.transpileCall(transpiler, this.assignments);
+    } else {
+        transpiler.declare(declaration);
+        this.method.transpile(transpiler);
+        if (this.assignments != null)
+            this.assignments.transpile(transpiler);
+        else
+            transpiler.append("()");
+    }
+};
+
+
+
 
 MethodCall.prototype.makeAssignments = function(context, declaration) {
 	if(this.assignments==null) {

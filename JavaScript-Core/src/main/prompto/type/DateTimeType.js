@@ -108,6 +108,33 @@ DateTimeType.prototype.checkMember = function(context, name) {
 };
 
 
+DateTimeType.prototype.transpileMember = function(transpiler, name) {
+    if ("year"==name) {
+        transpiler.append("getYear()");
+    } else if ("month"==name) {
+        transpiler.append("getMonth()");
+    } else if ("dayOfMonth"==name) {
+        transpiler.append("getDayOfMonth()");
+    } else if ("dayOfYear"==name) {
+        transpiler.append("getDayOfYear()");
+    } else if ("hour"==name) {
+        transpiler.append("getHour()");
+    } else if ("minute"==name) {
+        transpiler.append("getMinute()");
+    } else if ("second"==name) {
+        transpiler.append("getSecond()");
+    } else if ("millisecond"==name) {
+        transpiler.append("getMillisecond()");
+    } else if ("tzOffset"==name) {
+        transpiler.append("getTzOffset()");
+    } else if ("tzName"==name) {
+        transpiler.append("getTzName()");
+    } else {
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
+
 
 DateTimeType.prototype.sort = function(context, list, desc) {
 

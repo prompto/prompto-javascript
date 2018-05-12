@@ -86,6 +86,21 @@ ListType.prototype.checkMultiply = function(context, other, tryReverse) {
 	}
 };
 
+
+ListType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof IntegerType) {
+        var multiplyArray = require("../utils/Utils").multiplyArray;
+        transpiler.require(multiplyArray);
+        transpiler.append("multiplyArray(");
+        left.transpile(transpiler);
+        transpiler.append(",");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return ContainerType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
 ListType.prototype.checkSlice = function(context) {
 	return this;
 };
@@ -98,12 +113,6 @@ ListType.prototype.checkIterator = function(context) {
 	return this.itemType;
 }
 
-ListType.prototype.checkMember = function(context, name) {
-	if ("count" == name) {
-		return IntegerType.instance;
-	} else {
-		return ContainerType.prototype.checkMember.call(this, context, name);
-	}
-};
+
 
 exports.ListType = ListType;

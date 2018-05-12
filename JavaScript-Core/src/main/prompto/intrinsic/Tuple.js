@@ -10,10 +10,10 @@ Tuple.prototype = Object.create(Array.prototype);
 Tuple.prototype.constructor = Tuple;
 
 Tuple.prototype.addAll = function(items) {
-    if(items instanceof StrictSet)
+    if(typeof(items).name === "StrictSet")
         items = Array.from(items.values());
 	this.push.apply(this, items);
-	return this;; // enable fluid API
+	return this; // enable fluid API
 };
 
 Tuple.prototype.toString = function() {

@@ -37,6 +37,10 @@ ProblemListener.prototype.reportUnknownVariable = function(id) {
     throw new SyntaxError("Unknown variable: " + id.name);
 };
 
+ProblemListener.prototype.reportEmptyVariable = function(id) {
+    throw new SyntaxError("Empty variable: " + id.name);
+};
+
 ProblemListener.prototype.reportNoMatchingPrototype = function(method) {
     throw new SyntaxError("No matching prototype for: " + method.toString());
 };

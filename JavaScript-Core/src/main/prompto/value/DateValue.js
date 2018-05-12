@@ -67,27 +67,18 @@ DateValue.prototype.cmp = function(value) {
 
 DateValue.prototype.getMemberValue = function(context, name) {
     if ("year"==name) {
-        return new IntegerValue(this.value.getUTCFullYear());
+        return new IntegerValue(this.value.getYear());
     } else if ("month"==name) {
-        return new IntegerValue(this.value.getUTCMonth() + 1);
+        return new IntegerValue(this.value.getMonth());
     } else if ("dayOfMonth"==name) {
         return new IntegerValue(this.value.getUTCDate());
     } else if ("dayOfYear"==name) {
-        return new IntegerValue(this.getDayOfYear());
+        return new IntegerValue(this.value.getDayOfYear());
     } else {
         return Value.prototype.getMemberValue.call(this, context, name);
     }
 };
 
-
-
-DateValue.prototype.getDayOfYear = function() {
-    var first = new Date(this.value);
-    first.setMonth(0);
-    first.setDate(1);
-    var numDays = (this.value - first) / (1000 * 60 * 60 * 24);
-    return 1 + Math.floor(numDays);
-};
 
 
 

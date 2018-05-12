@@ -30,20 +30,17 @@ SetValue.prototype.toString = function() {
     return this.items.toString();
 };
 
-SetValue.prototype.size = function() {
-    return this.items.size();
-};
 
 SetValue.prototype.getMemberValue = function(context, name) {
     if ("count"==name) {
-        return new IntegerValue(this.size());
+        return new IntegerValue(this.items.length);
     } else {
         return Value.prototype.getMemberValue.call(this, context, name);
     }
 };
 
 SetValue.prototype.isEmpty = function() {
-    return this.items.size() === 0;
+    return this.items.length === 0;
 };
 
 SetValue.prototype.hasItem = function(context, item) {

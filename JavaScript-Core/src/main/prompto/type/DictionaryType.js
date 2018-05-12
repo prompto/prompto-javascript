@@ -6,6 +6,7 @@ var TextType = require("./TextType").TextType;
 var SetType = require("./SetType").SetType;
 var ListType = require("./ListType").ListType;
 var EntryType = require("./EntryType").EntryType;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
 function DictionaryType(itemType) {
 	ContainerType.call(this, new Identifier(itemType.name+"{}"), itemType);
@@ -98,5 +99,20 @@ DictionaryType.prototype.checkMember = function(context, name) {
 		return ContainerType.prototype.checkMember.call(this, context, name);
 	}
 };
+
+
+DictionaryType.prototype.transpileMember = function(transpiler, name) {
+    if ("count"==name) {
+        transpiler.append("length");
+    } else if("keys"==name) {
+        transpiler.require(StrictSet);
+        transpiler.append("keys");
+    } else if ("values"==name) {
+        transpiler.append("values");
+    } else {
+        ContainerType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
 
 exports.DictionaryType = DictionaryType;

@@ -55,7 +55,7 @@ IntegerType.prototype.transpileAdd = function(transpiler, other, tryReverse, lef
         transpiler.append(" + ");
         right.transpile(transpiler);
     } else
-        return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
 };
 
 IntegerType.prototype.checkSubtract = function(context, other) {
@@ -97,6 +97,16 @@ IntegerType.prototype.checkMultiply = function(context, other, tryReverse) {
 };
 
 
+IntegerType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" * ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+};
+
+
 IntegerType.prototype.checkDivide = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return DecimalType.instance;
@@ -104,6 +114,17 @@ IntegerType.prototype.checkDivide = function(context, other) {
 		return NativeType.prototype.checkDivide.call(this, context, other);
 	}
 };
+
+
+IntegerType.prototype.transpileDivide = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" / ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileDivide.call(this, transpiler, other, left, right);
+};
+
 
 IntegerType.prototype.checkIntDivide = function(context, other) {
 	if(other instanceof IntegerType) {
@@ -113,6 +134,21 @@ IntegerType.prototype.checkIntDivide = function(context, other) {
 	}
 };
 
+
+IntegerType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType ) {
+        // TODO check negative values
+        transpiler.append("Math.floor(");
+        left.transpile(transpiler);
+        transpiler.append(" / ");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileIntDivide.call(this, transpiler, other, left, right);
+};
+
+
+
 IntegerType.prototype.checkModulo = function(context, other) {
 	if(other instanceof IntegerType) {
 		return this;
@@ -121,8 +157,26 @@ IntegerType.prototype.checkModulo = function(context, other) {
 	}
 };
 
+
+IntegerType.prototype.transpileModulo = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType ) {
+        // TODO check negative values
+        left.transpile(transpiler);
+        transpiler.append(" % ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileModulo.call(this, transpiler, other, left, right);
+};
+
 IntegerType.prototype.checkMinus = function(context) {
 	return this;
+};
+
+
+
+IntegerType.prototype.transpileMinus = function(transpiler, value) {
+    transpiler.append(" -");
+    value.transpile(transpiler);
 };
 
 IntegerType.prototype.checkCompare = function(context, other) {
@@ -197,5 +251,11 @@ function resolveBuiltInMethodDeclaration() {
         // TODO support more than leading 0's
         value = "000000000000" + value;
         return value.substr(value.length - format.length);
+    };
+
+    FormatMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("formatInteger(");
+        assignments[0].transpile(transpiler);
+        transpiler.append(")");
     };
 }

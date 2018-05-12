@@ -38,9 +38,7 @@ AssignInstanceStatement.prototype.interpret = function(context) {
 };
 
 AssignInstanceStatement.prototype.transpile = function(transpiler) {
-    this.instance.transpile(transpiler, this.expression);
-    transpiler.append(" = ");
-    this.expression.transpile(transpiler);
+    this.instance.transpileAssign(transpiler, this.expression);
 };
 
 exports.AssignInstanceStatement = AssignInstanceStatement;

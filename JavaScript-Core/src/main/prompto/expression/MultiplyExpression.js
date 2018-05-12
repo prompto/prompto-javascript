@@ -29,4 +29,10 @@ MultiplyExpression.prototype.interpret = function(context) {
 	return lval.Multiply(context, rval);
 };
 
+MultiplyExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.transpileMultiply(transpiler, rt, true, this.left, this.right);
+};
+
 exports.MultiplyExpression = MultiplyExpression;

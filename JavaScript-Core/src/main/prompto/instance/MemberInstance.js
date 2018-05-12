@@ -46,6 +46,12 @@ MemberInstance.prototype.assign = function(context, expression) {
     root.setMember(context, this.name, value);
 };
 
+MemberInstance.prototype.transpileAssign = function(transpiler, expression) {
+    this.parent.transpile(transpiler);
+    transpiler.append(".").append(this.name).append(" = ");
+    expression.transpile(transpiler);
+};
+
 MemberInstance.prototype.interpret = function(context) {
 	var root = this.parent.interpret(context);
 	return root.getMemberValue(context, this.name, true);

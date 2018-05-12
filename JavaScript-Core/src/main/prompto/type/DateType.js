@@ -100,6 +100,21 @@ DateType.prototype.checkMember = function(context, name) {
 	}
 };
 
+
+DateType.prototype.transpileMember = function(transpiler, name) {
+    if ("year"==name) {
+        transpiler.append("getYear()");
+    } else if ("month"==name) {
+        transpiler.append("getMonth()");
+    } else if ("dayOfMonth"==name) {
+        transpiler.append("getDayOfMonth()");
+    } else if ("dayOfYear"==name) {
+        transpiler.append("getDayOfYear()");
+    } else {
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
 DateType.prototype.newRange = function(left, right) {
 	if (left instanceof DateValue && right instanceof DateValue) {
 		return new DateRange(left, right);

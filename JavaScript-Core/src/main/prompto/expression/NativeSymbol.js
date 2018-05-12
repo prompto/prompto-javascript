@@ -50,9 +50,17 @@ NativeSymbol.prototype.interpret = function(context) {
 }
 
 NativeSymbol.prototype.transpile = function(transpiler) {
-    transpiler.initialize(this.name, this.expression);
+    this.type.declare(transpiler);
     transpiler.append(this.name);
 };
+
+NativeSymbol.prototype.initialize = function(transpiler) {
+    transpiler.append("var ").append(this.name).append(" = new ").append(this.type.name).append("('").append(this.name).append("', ");
+    this.expression.transpile(transpiler);
+    transpiler.append(");");
+    transpiler.newLine();
+};
+
 
 
 NativeSymbol.prototype.getMemberValue = function(context, name, autoCreate) {

@@ -2,11 +2,12 @@ var NullValue = require("./NullValue").NullValue;
 var Value = require("./Value").Value;
 var TextValue = require("./TextValue").TextValue;
 var DocumentType = require("../type/DocumentType").DocumentType;
+var Document = require("../intrinsic/Document").Document;
 
 function DocumentValue(values) {
     Value.call(this, DocumentType.instance);
     this.mutable = true;
-    this.values = values || {};
+    this.values = values || new Document();
     return this;
 }
 
@@ -76,6 +77,8 @@ DocumentValue.prototype.toString = function() {
     var values = {}; // need a temporary parent
     for (var key in this.values) {
         var value = this.values[key];
+        if(typeof(value) === 'function')
+            continue;
         if (value == null || value == undefined)
             values[key] = null;
         else {

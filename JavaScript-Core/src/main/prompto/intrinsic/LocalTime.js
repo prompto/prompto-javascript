@@ -58,6 +58,24 @@ LocalTime.prototype.subtractPeriod = function(period) {
     return time;
 };
 
+LocalTime.prototype.getHour = function(value) {
+    return this.getUTCHours();
+};
+
+
+LocalTime.prototype.getMinute = function(value) {
+    return this.getUTCMinutes();
+};
+
+
+LocalTime.prototype.getSecond = function(value) {
+    return this.getUTCSeconds();
+};
+
+
+LocalTime.prototype.getMillisecond = function(value) {
+    return this.getUTCMilliseconds();
+};
 
 
 exports.LocalTime = LocalTime;

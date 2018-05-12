@@ -40,6 +40,15 @@ CharacterType.prototype.checkMember = function(context, name) {
 };
 
 
+CharacterType.prototype.transpileMember = function(transpiler, name) {
+    if ("codePoint"==name) {
+        transpiler.append("charCodeAt(0)");
+    } else {
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
+
 CharacterType.prototype.checkAdd = function(context, other, tryReverse) {
 	return TextType.instance;
 };
@@ -59,6 +68,18 @@ CharacterType.prototype.checkMultiply = function(context, other, tryReverse) {
 	}
 	return NativeType.prototype.checkMultiply.apply(this, context, other, tryReverse);
 };
+
+
+CharacterType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType) {
+        left.transpile(transpiler);
+        transpiler.append(".repeat(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+};
+
 
 CharacterType.prototype.checkCompare = function(context, other) {
 	if(other instanceof CharacterType || other instanceof TextType) {

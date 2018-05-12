@@ -28,4 +28,12 @@ IntDivideExpression.prototype.interpret = function(context) {
 	return lval.IntDivide(context, rval);
 };
 
+
+IntDivideExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.transpileIntDivide(transpiler, rt, this.left, this.right);
+};
+
+
 exports.IntDivideExpression = IntDivideExpression;

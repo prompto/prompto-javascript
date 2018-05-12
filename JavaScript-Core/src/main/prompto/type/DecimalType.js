@@ -74,6 +74,16 @@ DecimalType.prototype.checkMultiply = function(context, other, tryReverse) {
 	}
 };
 
+
+DecimalType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" * ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
+};
+
 DecimalType.prototype.checkDivide = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return this;
@@ -82,13 +92,37 @@ DecimalType.prototype.checkDivide = function(context, other) {
 	}
 };
 
+
+DecimalType.prototype.transpileDivide = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" / ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileDivide.call(this, context, other, left, right);
+};
+
+
 DecimalType.prototype.checkIntDivide = function(context, other) {
     if(other instanceof IntegerType) {
-        return this;
+        return IntegerType.instance;
     } else {
         return NativeType.prototype.checkIntDivide.call(this, context, other);
     }
 };
+
+
+DecimalType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType ) {
+        transpiler.append("Math.floor(");
+        left.transpile(transpiler);
+        transpiler.append(" / ");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileIntDivide.call(this, transpiler, other, left, right);
+};
+
 
 DecimalType.prototype.checkModulo = function(context, other) {
     if(other instanceof IntegerType || other instanceof DecimalType) {
@@ -98,8 +132,24 @@ DecimalType.prototype.checkModulo = function(context, other) {
     }
 };
 
+
+DecimalType.prototype.transpileModulo = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType  || other instanceof DecimalType) {
+        left.transpile(transpiler);
+        transpiler.append(" % ");
+        right.transpile(transpiler);
+    } else
+        return NativeType.prototype.transpileModulo.call(this, transpiler, other, left, right);
+};
+
 DecimalType.prototype.checkMinus = function(context) {
 	return this;
+};
+
+
+DecimalType.prototype.transpileMinus = function(transpiler, value) {
+    transpiler.append(" -");
+    value.transpile(transpiler);
 };
 
 DecimalType.prototype.checkCompare = function(context, other) {

@@ -18,5 +18,23 @@ ContainerType.prototype.checkContains = function(context, other) {
 	}
 };
 
+
+ContainerType.prototype.checkMember = function(context, name) {
+    if ("count" == name) {
+        var IntegerType = require("./IntegerType").IntegerType;
+        return IntegerType.instance;
+    } else {
+        return IterableType.prototype.checkMember.call(this, context, name);
+    }
+};
+
+ContainerType.prototype.transpileMember = function(transpiler, name) {
+    if ("count" == name) {
+        transpiler.append("length");
+    } else {
+        return IterableType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
 exports.ContainerType = ContainerType;
 

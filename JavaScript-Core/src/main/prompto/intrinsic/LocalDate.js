@@ -51,5 +51,24 @@ LocalDate.prototype.subtractPeriod = function(value) {
 };
 
 
+LocalDate.prototype.getYear = function(value) {
+    return this.getUTCFullYear();
+};
+
+LocalDate.prototype.getMonth = function(value) {
+    return this.getUTCMonth() + 1;
+};
+
+
+LocalDate.prototype.getDayOfMonth = function(value) {
+    return this.getUTCDate();
+};
+
+
+LocalDate.prototype.getDayOfYear = function() {
+    var first = new Date(this.getUTCFullYear(), 0, 1, 0, 0, 0, 0);
+    var numDays = (this - first) / (1000 * 60 * 60 * 24);
+    return 1 + Math.floor(numDays);
+};
 
 exports.LocalDate = LocalDate;

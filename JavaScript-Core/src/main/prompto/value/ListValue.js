@@ -1,6 +1,7 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
 var BooleanValue = require("./BooleanValue").BooleanValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
+var multiplyArray = require("../utils/Utils").multiplyArray;
 var ListType = null;
 var SetValue = null;
 
@@ -52,20 +53,13 @@ ListValue.prototype.Add = function(context, value) {
 
 ListValue.prototype.Multiply = function(context, value) {
 	if (value instanceof IntegerValue) {
-		var count = value.value;
+	    var count = value.value;
 		if (count < 0) {
 			throw new SyntaxError("Negative repeat count:" + count);
-		} else if (count == 0) {
-			return new ListValue(this.type.itemType);
-		} else if (count == 1) {
-			return this;
 		} else {
-			var items = [];
-			while(--count>=0) {
-				items = items.concat(this.items);
-			}
-			return new ListValue(this.type.itemType, items);
-		}
+		    var items = multiplyArray(this.items, count);
+            return new ListValue(this.type.itemType, items);
+        }
 	} else {
 		return BaseValueList.prototype.Multiply.apply(this, context, value);
 	}

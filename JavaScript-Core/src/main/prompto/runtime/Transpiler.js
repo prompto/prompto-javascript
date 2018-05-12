@@ -2,7 +2,6 @@ var locateMethod = require('./Interpreter').locateMethod;
 
 function Transpiler(context) {
     this.context = context;
-    this.initialized = {};
     this.declared = new Set();
     this.required = new Set();
     this.lines = [];
@@ -10,27 +9,6 @@ function Transpiler(context) {
     this.indents = "";
     return this;
 }
-
-Transpiler.prototype.initialize = function(name, value) {
-    this.initialized[name] = value;
-};
-
-
-Transpiler.prototype.appendAllInitialized = function() {
-    Object.keys(this.initialized).forEach(function(name) {
-        this.appendOneInitialized(name, this.initialized[name]);
-    }, this);
-
-};
-
-
-Transpiler.prototype.appendOneInitialized = function(name, exp) {
-    this.append(name).append(" = { name: '").append(name).append("', value: ");
-    exp.transpile(this);
-    this.append("};");
-    this.newLine();
-};
-
 
 Transpiler.prototype.declare = function(decl) {
     this.declared.add(decl);
@@ -73,12 +51,25 @@ Transpiler.prototype.appendOneRequired = function(fn) {
     }, this);
     if(fn.prototype.__proto__) {
         var proto = fn.prototype.__proto__;
-        this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
+        if(proto.constructor.name!=="Object")
+            this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
     }
     Object.keys(fn.prototype).forEach(function (key) {
         this.lines.push(fn.name + ".prototype." + key + " = " + fn.prototype[key].toString() + ";");
     }, this);
-
+    Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
+        var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
+        if(desc.get || desc.set) {
+            this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
+            if(desc.get) {
+                this.lines.push("    get: " + desc.get.toString());
+            }
+            if(desc.set) {
+                this.lines.push("    set: " + desc.set.toString());
+            }
+            this.lines.push("});")
+        }
+    }, this);
 };
 
 Transpiler.prototype.append = function(text) {
@@ -119,23 +110,34 @@ function ObjectUtils() {
 
 }
 
-ObjectUtils.prototype.toString = function() {
-    return '{' +  Object.keys(this).map(function(key) { return '"' + key + '":' + this[key]; }, this). join(", ") + '}';
-};
-
 ObjectUtils.values = function(o) {
     var values = [];
     for(name in o) { values.push(o[name]); }
     return values;
 };
 
+
+ObjectUtils.objectToString = function() {
+    return '{' +  Object.keys(this).map(function(key) { return '"' + key + '":' + this[key]; }, this). join(", ") + '}';
+};
+
+ObjectUtils.arrayToString = function() {
+    return '[' + this.join(', ') + ']';
+};
+
+ObjectUtils.formatInteger = function(format) {
+    var value = "000000000000" + this;
+    return value.substr(value.length - format.length);
+};
+
 Transpiler.transpile = function(context, methodName, cmdLineArgs) {
     try {
         var method = locateMethod(context, methodName, cmdLineArgs);
         var transpiler = new Transpiler(context);
-        transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.prototype.toString.toString() + ";");
-        if(!Object.values)
-            transpiler.lines.push("Object.values = " + ObjectUtils.values.toString() + ";");
+        transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + " };");
+        transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
+        transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
+        transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
         method.transpile(transpiler);
         if(transpiler.line!==transpiler.indents) {
             transpiler.lines.push(transpiler.line);
@@ -143,7 +145,6 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         }
         transpiler.lines.push("");
         transpiler.appendAllRequired();
-        transpiler.appendAllInitialized();
         transpiler.appendAllDeclared();
         return transpiler.lines.join("\n");
     } finally {

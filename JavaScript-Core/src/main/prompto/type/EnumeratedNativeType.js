@@ -24,6 +24,30 @@ EnumeratedNativeType.prototype.checkMember = function(context, name) {
 	}
 };
 
+EnumeratedNativeType.prototype.declare = function(transpiler) {
+    var decl = transpiler.context.getRegisteredDeclaration(this.name);
+    if(!decl || !decl.symbols) {
+        throw new SyntaxError(name + " is not an enumerated type!");
+    }
+    transpiler.declare(decl);
+};
+
+EnumeratedNativeType.prototype.transpile = function(transpiler) {
+    this.declare(transpiler);
+    transpiler.append(this.name);
+};
+
+EnumeratedNativeType.prototype.transpileMember = function(transpiler, name) {
+    if ("symbols"==name) {
+        transpiler.append("symbols");
+    } else if ("value"==name || "name"==name) {
+        transpiler.append(name);
+    } else {
+        return BaseType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
+
 EnumeratedNativeType.prototype.getMemberValue = function(context, name) {
 	var decl = context.getRegisteredDeclaration(this.name);
 	if(!decl || !decl.symbols) {
