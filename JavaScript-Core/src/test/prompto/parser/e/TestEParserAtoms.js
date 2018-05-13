@@ -687,11 +687,10 @@ exports.testSimpleDate = function (test) {
     test.ok(literal);
     test.ok(literal instanceof prompto.literal.DateLiteral);
     test.equal("'2012-10-09'", literal.text);
-    var expected = new Date(2012, 10 - 1, 9);
     var actual = literal.getValue().getValue();
-    test.equal(expected.getFullYear(), actual.getFullYear());
-    test.equal(expected.getMonth(), actual.getMonth());
-    test.equal(expected.getDate(), actual.getDate());
+    test.equal(2012, actual.getFullYear());
+    test.equal(10, actual.getMonth());
+    test.equal(9, actual.getDate());
     test.done();
 };
 
