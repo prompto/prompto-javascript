@@ -41,5 +41,31 @@ Dictionary.prototype.toString = function() {
     return "{" + vals.join(", ") + "}";
 };
 
+Dictionary.prototype.equals = function(dict) {
+    var keys = Object.getOwnPropertyNames(this);
+    if (keys.length != dict.length)
+        return false;
+    for (var i = 0; i < keys.length; i++) {
+        var key = keys[i];
+        var v1 = this[key] || null;
+        var v2 = dict[key] || null;
+        if (v1 === v2)
+            continue;
+        else if (v1 === null || v2 === null)
+            return false;
+        else if (v1.equals) {
+            if (!v1.equals(v2)) {
+                return false;
+            }
+        } else if (v2.equals) {
+            if (!v2.equals(v1)) {
+                return false;
+            }
+        } else
+            return false;
+    }
+    return true;
+};
+
 
 exports.Dictionary = Dictionary;

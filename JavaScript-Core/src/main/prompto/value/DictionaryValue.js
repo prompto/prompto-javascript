@@ -101,32 +101,7 @@ DictionaryValue.prototype.convertToJavaScript = function() {
 
 DictionaryValue.prototype.equals = function(obj) {
     if(obj instanceof DictionaryValue) {
-        var keys = Object.getOwnPropertyNames(this.dict);
-        if(keys.length!=Object.getOwnPropertyNames(obj.dict).length) {
-            return false;
-        }
-        for(var i=0;i<keys.length;i++) {
-            var v1 = this.dict[keys[i]] || null;
-            var v2 = obj.dict[keys[i]] || null;
-            if(v1==v2) {
-                continue;
-            } else if(v1==null || v2==null) {
-                return false;
-            } else {
-                if(v1.equals) {
-                    if(!v1.equals(v2)) {
-                        return false;
-                    }
-                } else if(v2.equals) {
-                    if (!v2.equals(v1)) {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return this.dict.equals(obj.dict);
     } else {
         return false;
     }
