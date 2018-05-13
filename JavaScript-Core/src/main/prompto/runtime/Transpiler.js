@@ -135,8 +135,9 @@ Transpiler.prototype.newLine = function() {
     return this;
 };
 
-Transpiler.prototype.indent = function() {
-    this.lines.push(this.line);
+Transpiler.prototype.indent = function(indentOnly) {
+    if(!indentOnly)
+        this.lines.push(this.line);
     this.indents += '\t';
     this.line = this.indents;
     return this;

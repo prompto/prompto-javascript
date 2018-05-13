@@ -14,7 +14,7 @@ SwitchStatement.prototype.checkSwitchType = function(context) {
 
 SwitchStatement.prototype.interpret = function(context) {
 	var switchValue = this.expression.interpret(context);
-	return this.interpretSwitch(context,switchValue,null);
+	return this.interpretSwitch(context, switchValue, null);
 };
 
 SwitchStatement.prototype.toODialect = function(writer) {
@@ -65,6 +65,30 @@ SwitchStatement.prototype.toMDialect = function(writer) {
         writer.dedent();
     }
     writer.dedent();
+};
+
+SwitchStatement.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+    this.declareSwitch(transpiler);
+};
+
+SwitchStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("switch (")
+    this.expression.transpile(transpiler);
+    transpiler.append(") {")
+    transpiler.newLine();
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.transpile(transpiler);
+    });
+    if(this.defaultCase!=null) {
+        transpiler.append("default:");
+        transpiler.indent();
+        this.defaultCase.transpile(transpiler);
+        transpiler.dedent();
+    }
+    transpiler.append("}")
+    transpiler.newLine();
+    return true;
 };
 
 exports.SwitchStatement = SwitchStatement;

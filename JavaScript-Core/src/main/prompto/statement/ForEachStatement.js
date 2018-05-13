@@ -2,6 +2,7 @@ var BaseStatement = require("./BaseStatement").BaseStatement;
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
+var ListType = require("../type/ListType").ListType;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var InternalError = require("../error/InternalError").InternalError;
 var BreakResult = require("../runtime/BreakResult").BreakResult;
@@ -37,18 +38,18 @@ ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 ForEachStatement.prototype.interpret = function(context) {
 	var srcType = this.source.check(context);
 	var elemType = srcType.checkIterator(context);
-	return this.evaluateItemIterator(elemType, context);
+	return this.interpretItemIterator(elemType, context);
 };
 
-ForEachStatement.prototype.evaluateItemIterator = function(elemType, context) {
+ForEachStatement.prototype.interpretItemIterator = function(elemType, context) {
 	if (this.v2 === null) {
-		return this.evaluateItemIteratorNoIndex(elemType, context);
+		return this.interpretItemIteratorNoIndex(elemType, context);
 	} else {
-		return this.evaluateItemIteratorWithIndex(elemType, context);
+		return this.interpretItemIteratorWithIndex(elemType, context);
 	}
 };
 
-ForEachStatement.prototype.evaluateItemIteratorNoIndex = function(elemType, context) {
+ForEachStatement.prototype.interpretItemIteratorNoIndex = function(elemType, context) {
 	var src = this.source.interpret(context);
 	var iterator = this.getIterator(context, src);
 	while (iterator.hasNext()) {
@@ -75,7 +76,7 @@ ForEachStatement.prototype.getIterator = function(context, src) {
         throw new InternalError("Should never end up here!");
 };
 
-ForEachStatement.prototype.evaluateItemIteratorWithIndex = function(elemType, context) {
+ForEachStatement.prototype.interpretItemIteratorWithIndex = function(elemType, context) {
 	var src = this.source.interpret(context);
 	var iterator = src.getIterator(context);
 	var index = 0;
@@ -154,6 +155,56 @@ ForEachStatement.prototype.toMDialect = function(writer) {
 
 ForEachStatement.prototype.canReturn = function() {
     return true;
+};
+
+ForEachStatement.prototype.declare = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context);
+    this.source.declare(transpiler);
+    transpiler = transpiler.newChildTranspiler();
+    if(this.v2) {
+        transpiler.context.registerValue(new Variable(this.v1, IntegerType.instance));
+        transpiler.context.registerValue(new Variable(this.v2, elemType));
+    } else
+        transpiler.context.registerValue(new Variable(this.v1, elemType));
+    this.statements.declare(transpiler);
+};
+
+ForEachStatement.prototype.transpile = function(transpiler) {
+    if(this.v2)
+        this.transpileWithIndex(transpiler);
+    else
+        this.transpileNoIndex(transpiler);
+    return true;
+};
+
+ForEachStatement.prototype.transpileNoIndex = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    if(srcType instanceof ListType)
+        this.transpileArrayNoIndex(transpiler);
+    else
+        this.transpileIteratorNoIndex(transpiler);
+};
+
+ForEachStatement.prototype.transpileIteratorNoIndex = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context);
+    var iterName = this.v1.name + "_iterator";
+    transpiler.append("var ").append(iterName).append(" = ");
+    this.source.transpile(transpiler);
+    transpiler.append(".values();");
+    transpiler.newLine();
+    transpiler.append("while(").append(iterName).append(".hasNext()) {");
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.indent();
+    transpiler.context.registerValue(new Variable(this.v1, elemType));
+    transpiler.append("var ").append(this.v1.name).append(" = ").append(iterName).append(".next();")
+    transpiler.newLine();
+    this.statements.transpile(transpiler);
+    transpiler.dedent();
+    transpiler.flush();
+    transpiler.append("}");
+    transpiler.newLine();
 };
 
 

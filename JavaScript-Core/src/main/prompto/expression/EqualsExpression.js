@@ -256,6 +256,21 @@ EqualsExpression.prototype.transpile = function(transpiler) {
     }
 };
 
+EqualsExpression.prototype.transpileEquals = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    if(lt instanceof BooleanType || lt instanceof IntegerType || lt instanceof DecimalType || lt instanceof CharacterType || lt instanceof TextType) {
+        this.left.transpile(transpiler);
+        transpiler.append(" === ");
+        this.right.transpile(transpiler);
+    } else {
+        this.left.transpile(transpiler);
+        transpiler.append(".equals(");
+        this.right.transpile(transpiler);
+        transpiler.append(")");
+    }
+
+};
+
 EqualsExpression.prototype.transpileIsA = function(transpiler) {
     if(this.right.value===IntegerType.instance) {
         transpiler.append("isAnInteger(");

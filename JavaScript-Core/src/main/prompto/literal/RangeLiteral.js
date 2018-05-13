@@ -34,6 +34,16 @@ RangeLiteral.prototype.interpret = function(context) {
 	return type.newRange(of,ol);
 };
 
+RangeLiteral.prototype.declare = function(transpiler) {
+    var firstType = this.first.check(transpiler.context);
+    var lastType = this.last.check(transpiler.context);
+    return firstType.declareRange(transpiler, lastType);
+};
+
+RangeLiteral.prototype.transpile = function(transpiler) {
+    var firstType = this.first.check(transpiler.context);
+    return firstType.transpileRange(transpiler, this.first, this.last);
+};
 
 exports.RangeLiteral = RangeLiteral;
 

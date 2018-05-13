@@ -43,4 +43,20 @@ TernaryExpression.prototype.interpret = function(context) {
         return this.ifFalse.interpret(context);
 };
 
+TernaryExpression.prototype.declare = function(transpiler) {
+    this.condition.declare(transpiler);
+    this.ifTrue.declare(transpiler);
+    this.ifFalse.declare(transpiler);
+};
+
+TernaryExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("(")
+    this.condition.transpile(transpiler);
+    transpiler.append(" ? ")
+    this.ifTrue.transpile(transpiler);
+    transpiler.append(" : ")
+    this.ifFalse.transpile(transpiler);
+    transpiler.append(")")
+};
+
 exports.TernaryExpression = TernaryExpression;

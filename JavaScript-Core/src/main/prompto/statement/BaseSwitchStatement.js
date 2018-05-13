@@ -75,6 +75,16 @@ BaseSwitchStatement.prototype.interpretSwitch = function(context, switchValue, t
 	return null;
 }
 
+BaseSwitchStatement.prototype.declareSwitch = function(transpiler) {
+    this.switchCases.forEach(function(kase) {
+        kase.declare(transpiler);
+    });
+    if(this.defaultCase!=null) {
+        this.defaultCase.declare(transpiler);
+    }
+}
+
+
 BaseSwitchStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };

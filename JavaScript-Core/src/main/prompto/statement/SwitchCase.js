@@ -19,4 +19,11 @@ SwitchCase.prototype.interpret = function(context) {
 	return this.statements.interpret(context);
 };
 
+SwitchCase.prototype.declare = function(transpiler) {
+    if(this.expression)
+        this.expression.declare(transpiler);
+    this.statements.declare(transpiler);
+};
+
+
 exports.SwitchCase = SwitchCase;

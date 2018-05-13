@@ -261,6 +261,27 @@ IntegerType.prototype.checkRange = function(context, other) {
 };
 
 
+
+IntegerType.prototype.declareRange = function(transpiler, other) {
+    if(other instanceof IntegerType) {
+        var module = require("../intrinsic/Range");
+        transpiler.require(module.Range);
+        transpiler.require(module.IntegerRange);
+    } else {
+        return NativeType.prototype.declareRange.call(this, context, other);
+    }
+};
+
+
+IntegerType.prototype.transpileRange = function(transpiler, first, last) {
+    transpiler.append("new IntegerRange(");
+    first.transpile(transpiler);
+    transpiler.append(",");
+    last.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 IntegerType.prototype.newRange = function(left, right) {
 	if(left instanceof IntegerValue && right instanceof IntegerValue) {
 		return new IntegerRange(left, right);

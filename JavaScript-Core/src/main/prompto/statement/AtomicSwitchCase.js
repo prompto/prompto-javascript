@@ -23,7 +23,7 @@ AtomicSwitchCase.prototype.matches = function(context, value) {
 
 AtomicSwitchCase.prototype.caseToPDialect = function(writer) {
     this.caseToEDialect(writer);
-}
+};
 
 
 AtomicSwitchCase.prototype.caseToODialect = function(writer) {
@@ -33,7 +33,7 @@ AtomicSwitchCase.prototype.caseToODialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
 
 
 AtomicSwitchCase.prototype.catchToODialect = function(writer) {
@@ -44,7 +44,7 @@ AtomicSwitchCase.prototype.catchToODialect = function(writer) {
     this.statements.toDialect(writer);
     writer.dedent();
     writer.append("} ");
-}
+};
 
 
 AtomicSwitchCase.prototype.caseToEDialect = function(writer) {
@@ -54,7 +54,7 @@ AtomicSwitchCase.prototype.caseToEDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
 
 
 AtomicSwitchCase.prototype.catchToPDialect = function(writer) {
@@ -64,11 +64,22 @@ AtomicSwitchCase.prototype.catchToPDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
 
 
 AtomicSwitchCase.prototype.catchToEDialect = function(writer) {
     this.caseToEDialect(writer); // no difference
-}
+};
+
+
+AtomicSwitchCase.prototype.transpile = function(transpiler) {
+    transpiler.append("case ");
+    this.expression.transpile(transpiler);
+    transpiler.append(":");
+    transpiler.indent();
+    this.statements.transpile(transpiler);
+    transpiler.append("break;");
+    transpiler.dedent();
+};
 
 exports.AtomicSwitchCase = AtomicSwitchCase;

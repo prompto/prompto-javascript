@@ -320,6 +320,16 @@ BaseType.prototype.checkRange = function(context, other) {
 	throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
 };
 
+BaseType.prototype.declareRange = function(context, other) {
+    throw new SyntaxError("Cannot declare range of " + this.name + " and " + other.name);
+};
+
+
+BaseType.prototype.transpileRange = function(context, first, last) {
+    throw new SyntaxError("Cannot transpile range of " + this.name);
+};
+
+
 BaseType.prototype.checkAnd = function(context, other) {
 	throw new SyntaxError("Cannot logically combine " + this.name + " and " + other.name);
 };
