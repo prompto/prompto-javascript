@@ -103,6 +103,27 @@ TimeType.prototype.checkRange = function(context, other) {
 	}
 };
 
+
+TimeType.prototype.declareRange = function(transpiler, other) {
+    if(other instanceof TimeType) {
+        var module = require("../intrinsic/Range");
+        transpiler.require(module.Range);
+        transpiler.require(module.TimeRange);
+    } else {
+        return NativeType.prototype.declareRange.call(this, transpiler, other);
+    }
+};
+
+
+TimeType.prototype.transpileRange = function(transpiler, first, last) {
+    transpiler.append("new TimeRange(");
+    first.transpile(transpiler);
+    transpiler.append(",");
+    last.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 TimeType.prototype.checkMember = function (context, name) {
 	if ("hour" == name) {
 		return IntegerType.instance;

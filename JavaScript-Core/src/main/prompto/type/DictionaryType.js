@@ -79,11 +79,46 @@ DictionaryType.prototype.checkContains = function(context, other) {
 };
 
 
+DictionaryType.prototype.declareContains = function(transpiler, other, container, item) {
+    transpiler.require(StrictSet);
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+DictionaryType.prototype.transpileContains = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".has(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 DictionaryType.prototype.checkContainsAllOrAny = function(context, other) {
     return BooleanType.instance;
 };
 
+
+DictionaryType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+    transpiler.require(StrictSet);
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+DictionaryType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAll(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+DictionaryType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAny(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
 
 
 DictionaryType.prototype.checkItem = function(context, other) {

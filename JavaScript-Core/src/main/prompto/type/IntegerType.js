@@ -268,7 +268,7 @@ IntegerType.prototype.declareRange = function(transpiler, other) {
         transpiler.require(module.Range);
         transpiler.require(module.IntegerRange);
     } else {
-        return NativeType.prototype.declareRange.call(this, context, other);
+        return NativeType.prototype.declareRange.call(this, transpiler, other);
     }
 };
 

@@ -147,9 +147,47 @@ TextType.prototype.checkContains = function(context, other) {
 	return NativeType.prototype.checkContains.call(this, context, other);
 };
 
+
+TextType.prototype.declareContains = function(transpiler, other, container, item) {
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+TextType.prototype.transpileContains = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".includes(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 TextType.prototype.checkContainsAllOrAny = function(context, other) {
 	return BooleanType.instance;
 };
+
+
+TextType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+TextType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAll(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+TextType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAny(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 TextType.prototype.checkSlice = function(context) {
 	return this;

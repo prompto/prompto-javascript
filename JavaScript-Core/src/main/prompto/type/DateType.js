@@ -102,6 +102,27 @@ DateType.prototype.checkRange = function(context, other) {
 	}
 };
 
+
+DateType.prototype.declareRange = function(transpiler, other) {
+    if(other instanceof DateType) {
+        var module = require("../intrinsic/Range");
+        transpiler.require(module.Range);
+        transpiler.require(module.DateRange);
+    } else {
+        return NativeType.prototype.declareRange.call(this, transpiler, other);
+    }
+};
+
+
+DateType.prototype.transpileRange = function(transpiler, first, last) {
+    transpiler.append("new DateRange(");
+    first.transpile(transpiler);
+    transpiler.append(",");
+    last.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 DateType.prototype.checkMember = function(context, name) {
 	if ("year"==name) {
 		return IntegerType.instance;

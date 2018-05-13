@@ -66,9 +66,49 @@ SetType.prototype.checkItem = function(context, other) {
 	}
 };
 
+
+SetType.prototype.declareContains = function(transpiler, other, container, item) {
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+SetType.prototype.transpileContains = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".has(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 SetType.prototype.checkContainsAllOrAny = function(context, other) {
 	return BooleanType.instance;
 }
+
+
+SetType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+    var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+    transpiler.require(StrictSet);
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+SetType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAll(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+SetType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAny(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 SetType.prototype.checkIterator = function(context) {
 	return this.itemType;

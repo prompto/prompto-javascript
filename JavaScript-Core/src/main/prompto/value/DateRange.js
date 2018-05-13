@@ -1,5 +1,7 @@
 var RangeValue = require("./RangeValue").RangeValue;
 var DateValue = require("./DateValue").DateValue;
+var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+
 var DateType = null;
 
 exports.resolve = function() {
@@ -26,17 +28,9 @@ DateRange.prototype.getItem = function(index) {
 	if(millis>this.high.value.valueOf()) {
 		throw new IndexOutOfBoundsException();
 	} else {
-		return new DateValue(new Date(millis));
+		return new DateValue(new LocalDate(millis));
 	}
 };
-
-/*
-@Override
-public RangeValue<Date> newInstance(Date left, Date right) {
-	return new DateRange(left, right);
-}
-
-*/
 
 
 exports.DateRange = DateRange;

@@ -67,5 +67,18 @@ Dictionary.prototype.equals = function(dict) {
     return true;
 };
 
+Dictionary.prototype.has = function(item) {
+    return this.keys.has(item, true);
+};
+
+
+Dictionary.prototype.hasAll = function(items) {
+    return this.keys.hasAll(items, true);
+};
+
+Dictionary.prototype.hasAny = function(item) {
+    return this.keys.hasAny(item, true);
+};
+
 
 exports.Dictionary = Dictionary;

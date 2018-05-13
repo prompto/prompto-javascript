@@ -178,6 +178,38 @@ ObjectUtils.arrayToString = function() {
     return '[' + this.join(', ') + ']';
 };
 
+ObjectUtils.arrayHasAll = function(items, noCheckEquals) {
+    var set = new StrictSet(this);
+    return set.hasAll(items, noCheckEquals);
+};
+
+
+ObjectUtils.arrayHasAny = function(items, noCheckEquals) {
+    var set = new StrictSet(this);
+    return set.hasAny(items, noCheckEquals);
+};
+
+ObjectUtils.stringHasAll = function(items) {
+    if(StrictSet && items instanceof StrictSet)
+        items = Array.from(items.values());
+    for(var i=0;i<items.length;i++) {
+        if(!this.includes(items[i]))
+            return false;
+    }
+    return true;
+};
+
+
+ObjectUtils.stringHasAny = function(items) {
+    if(StrictSet && items instanceof StrictSet)
+        items = Array.from(items.values());
+    for(var i=0;i<items.length;i++) {
+        if(this.includes(items[i]))
+            return true;
+    }
+    return false;
+};
+
 ObjectUtils.formatInteger = function(format) {
     var value = "000000000000" + this;
     return value.substr(value.length - format.length);
@@ -221,8 +253,12 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + " };");
         transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
         transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
+        transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
+        transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
         transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
         transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
+        transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
+        transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
         var method = locateMethod(context, methodName, cmdLineArgs);
         method.declare(transpiler);
         transpiler.appendAllRequired();

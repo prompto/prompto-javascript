@@ -50,6 +50,45 @@ StrictSet.prototype.has = function(value) {
     return false;
 };
 
+
+StrictSet.prototype.hasAll = function(items, noCheckEquals) {
+    if(items instanceof StrictSet)
+        items = Array.from(items.values());
+    if(noCheckEquals) {
+        for (var i = 0; i < items.length; i++) {
+            if (!this.set.has(items[i]))
+                return false;
+        }
+        return true;
+    } else {
+        for (var i = 0; i < items.length; i++) {
+            if (!this.has(items[i]))
+                return false;
+        }
+        return true;
+    }
+};
+
+
+StrictSet.prototype.hasAny = function(items, noCheckEquals) {
+    if(items instanceof StrictSet)
+        items = Array.from(items.values());
+    if(noCheckEquals) {
+        for (var i = 0; i < items.length; i++) {
+            if (this.set.has(items[i]))
+                return true;
+        }
+        return false;
+    } else {
+        for (var i = 0; i < items.length; i++) {
+            if (this.has(items[i]))
+                return true;
+        }
+        return false;
+    }
+};
+
+
 StrictSet.prototype.equals = function(other) {
     if(!(other instanceof StrictSet))
         return false;

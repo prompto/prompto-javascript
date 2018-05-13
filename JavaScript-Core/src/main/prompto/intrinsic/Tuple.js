@@ -10,7 +10,7 @@ Tuple.prototype = Object.create(Array.prototype);
 Tuple.prototype.constructor = Tuple;
 
 Tuple.prototype.addAll = function(items) {
-    if(items.__proto__.constructor.name === "StrictSet")
+    if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
     	items = Array.from(items.values());
 	this.push.apply(this, items);
 	return this; // enable fluid API

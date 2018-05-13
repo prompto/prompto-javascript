@@ -88,6 +88,45 @@ TupleType.prototype.checkContains = function(context, other) {
 	return BooleanType.instance;
 };
 
+
+TupleType.prototype.declareContains = function(transpiler, other, container, item) {
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+TupleType.prototype.transpileContains = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".includes(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+
+TupleType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+    var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+    transpiler.require(StrictSet);
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+TupleType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAll(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+TupleType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAny(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 TupleType.prototype.checkContainsAllOrAny = function(context, other) {
 	return BooleanType.instance;
 };

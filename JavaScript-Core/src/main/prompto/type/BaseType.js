@@ -238,12 +238,50 @@ BaseType.prototype.checkContains = function(context, other) {
 };
 
 
+BaseType.prototype.declareContains = function(transpiler, other, container, item) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareContains(transpiler, other.derivedFrom, container, item);
+    else
+        throw new SyntaxError(this.name + " cannot declare contain " + other.name);
+};
+
+BaseType.prototype.transpileContains = function(transpiler, other, container, item) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileContains(transpiler, other.derivedFrom, container, item);
+    else
+        throw new SyntaxError(this.name + " cannot transpile contain " + other.name);
+};
+
+
 BaseType.prototype.checkContainsAllOrAny = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkContainsAllOrAny(context, other.derivedFrom);
     else
-    	throw new SyntaxError(this.name + " cannot contain " + other.name);
+    	throw new SyntaxError(this.name + " cannot contain all or any " + other.name);
 };
+
+BaseType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareContainsAllOrAny(transpiler, other.derivedFrom, container, item);
+    else
+        throw new SyntaxError(this.name + " cannot declare contain all or any " + other.name);
+};
+
+
+BaseType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileContainsAll(transpiler, other.derivedFrom, container, item);
+    else
+        throw new SyntaxError(this.name + " cannot transpile contain all " + other.name);
+};
+
+BaseType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileContainsAny(transpiler, other.derivedFrom, container, item);
+    else
+        throw new SyntaxError(this.name + " cannot transpile contain any " + other.name);
+};
+
 
 
 BaseType.prototype.checkItem = function(context, itemType) {

@@ -198,5 +198,44 @@ ContainsExpression.prototype.readFieldName = function(exp) {
         return null;
 };
 
+ContainsExpression.prototype.declare = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    switch(this.operator) {
+        case ContOp.IN:
+        case ContOp.NOT_IN:
+            return rt.declareContains(transpiler, lt, this.right, this.left);
+        case ContOp.HAS:
+        case ContOp.NOT_HAS:
+            return lt.declareContains(transpiler, rt, this.left, this.right);
+        default:
+            return lt.declareContainsAllOrAny(transpiler, rt, this.left, this.right);
+    }
+};
+
+ContainsExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    switch(this.operator) {
+        case ContOp.NOT_IN:
+            transpiler.append("!");
+        case ContOp.IN:
+            return rt.transpileContains(transpiler, lt, this.right, this.left);
+        case ContOp.NOT_HAS:
+            transpiler.append("!");
+        case ContOp.HAS:
+            return lt.transpileContains(transpiler, rt, this.left, this.right);
+        case ContOp.NOT_HAS_ALL:
+            transpiler.append("!");
+        case ContOp.HAS_ALL:
+            return lt.transpileContainsAll(transpiler, rt, this.left, this.right);
+        case ContOp.NOT_HAS_ANY:
+            transpiler.append("!");
+        case ContOp.HAS_ANY:
+            return lt.transpileContainsAny(transpiler, rt, this.left, this.right);
+        default:
+            throw new Error("Unsupported " + this.operator);
+    }
+};
 
 exports.ContainsExpression = ContainsExpression;

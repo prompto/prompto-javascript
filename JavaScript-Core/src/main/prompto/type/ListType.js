@@ -144,13 +144,50 @@ ListType.prototype.checkSlice = function(context) {
 	return this;
 };
 
+ListType.prototype.declareContains = function(transpiler, other, container, item) {
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+ListType.prototype.transpileContains = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".includes(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 ListType.prototype.checkContainsAllOrAny = function(context, other) {
 	return BooleanType.instance;
-}
+};
+
+ListType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+    var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+    transpiler.require(StrictSet);
+    container.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+ListType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAll(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+ListType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+    container.transpile(transpiler);
+    transpiler.append(".hasAny(");
+    item.transpile(transpiler);
+    transpiler.append(")");
+};
 
 ListType.prototype.checkIterator = function(context) {
 	return this.itemType;
-}
+};
 
 
 

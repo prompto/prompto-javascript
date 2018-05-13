@@ -118,6 +118,28 @@ CharacterType.prototype.checkRange = function(context, other) {
 	}
 };
 
+
+CharacterType.prototype.declareRange = function(transpiler, other) {
+    if(other instanceof CharacterType) {
+        var module = require("../intrinsic/Range");
+        transpiler.require(module.Range);
+        transpiler.require(module.IntegerRange);
+        transpiler.require(module.CharacterRange);
+    } else {
+        return NativeType.prototype.declareRange.call(this, transpiler, other);
+    }
+};
+
+
+CharacterType.prototype.transpileRange = function(transpiler, first, last) {
+    transpiler.append("new CharacterRange(");
+    first.transpile(transpiler);
+    transpiler.append(",");
+    last.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 CharacterType.prototype.newRange = function(left, right) {
 	if(left instanceof CharacterValue && right instanceof CharacterValue) {
 		return new CharacterRange(left, right);
