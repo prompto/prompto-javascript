@@ -30,6 +30,10 @@ UnresolvedCall.prototype.toDialect = function(writer) {
            this.assignments.toDialect(writer);
     }
 };
+
+UnresolvedCall.prototype.toString = function() {
+    return this.callable.toString() + (this.assignments!=null ? this.assignments.toString() : "");
+};
 	
 UnresolvedCall.prototype.check = function(context) {
 	this.resolve(context);

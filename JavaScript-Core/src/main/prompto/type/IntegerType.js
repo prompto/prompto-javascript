@@ -39,6 +39,16 @@ IntegerType.prototype.isAssignableFrom = function(context, other) {
 };
 
 
+IntegerType.prototype.declare = function(transpiler) {
+    var isAnInteger = require("../utils/Utils").isAnInteger;
+    transpiler.require(isAnInteger);
+};
+
+
+IntegerType.prototype.transpile = function(transpiler) {
+    // nothing to do
+};
+
 IntegerType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return this;

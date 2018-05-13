@@ -415,11 +415,17 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
         } else
             throw new Error("Not supported yet!");
     }
-    transpiler.append("function ").append(this.name).append("() {");
+    transpiler.append("function ").append(this.name).append("(values) {");
     transpiler.indent();
     if(parent) {
-        transpiler.append(parent).append(".call(this);");
+        transpiler.append(parent).append(".call(this, values);");
         transpiler.newLine();
+    }
+    if(this.attributes) {
+        this.attributes.forEach(function (attr) {
+            transpiler.append("this.").append(attr.name).append(" = values.").append(attr.name).append(" || null;");
+            transpiler.newLine();
+        }, this);
     }
     transpiler.append("return this;");
     transpiler.dedent();

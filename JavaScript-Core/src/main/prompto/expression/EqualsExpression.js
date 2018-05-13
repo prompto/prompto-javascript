@@ -3,6 +3,8 @@ var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifie
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
 var ContainerType = require("../type/ContainerType").ContainerType;
+var IntegerType = require("../type/IntegerType").IntegerType;
+var DecimalType = require("../type/DecimalType").DecimalType;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var BooleanType = require("../type/BooleanType").BooleanType;
@@ -255,9 +257,27 @@ EqualsExpression.prototype.transpile = function(transpiler) {
 };
 
 EqualsExpression.prototype.transpileIsA = function(transpiler) {
-    this.left.transpile(transpiler);
-    transpiler.append(" instanceof ");
-    this.right.transpile(transpiler);
+    if(this.right.value===IntegerType.instance) {
+        transpiler.append("isAnInteger(");
+        this.left.transpile(transpiler);
+        transpiler.append(")");
+    } else if(this.right.value===DecimalType.instance) {
+        transpiler.append("isADecimal(");
+        this.left.transpile(transpiler);
+        transpiler.append(")");
+    } else if(this.right.value===TextType.instance) {
+        transpiler.append("isAText(");
+        this.left.transpile(transpiler);
+        transpiler.append(")");
+    } else if(this.right.value===CharacterType.instance) {
+        transpiler.append("isACharacter(");
+        this.left.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        this.left.transpile(transpiler);
+        transpiler.append(" instanceof ");
+        this.right.transpile(transpiler);
+    }
 };
 
 exports.EqualsExpression = EqualsExpression;

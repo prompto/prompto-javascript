@@ -34,6 +34,22 @@ CastExpression.prototype.interpret = function(context) {
     return value;
 };
 
+CastExpression.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+};
+
+
+CastExpression.prototype.transpile = function(transpiler) {
+    var expType = this.expression.check(transpiler.context);
+    if(expType===DecimalType.instance && this.type===IntegerType.instance) {
+        transpiler.append("Math.floor(");
+        this.expression.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        this.expression.transpile(transpiler);
+};
+
+
 CastExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };

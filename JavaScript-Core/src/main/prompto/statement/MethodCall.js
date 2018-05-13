@@ -11,6 +11,8 @@ var VoidType = require("../type/VoidType").VoidType;
 var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
+var IntegerType = require("../type/IntegerType").IntegerType;
+var DecimalType = require("../type/DecimalType").DecimalType;
 
 function MethodCall(method, assignments) {
 	SimpleStatement.call(this);
@@ -94,6 +96,18 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 };
 
 
+MethodCall.prototype.declare = function(transpiler) {
+    var finder = new MethodFinder(transpiler.context,this);
+    var declaration = finder.findMethod(false);
+    if(declaration instanceof BuiltInMethodDeclaration)
+        ; // nothing to do
+    else {
+        if (this.assignments != null)
+            this.assignments.declare(transpiler);
+        declaration.declare(transpiler);
+    }
+};
+
 MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context,this);
     var declaration = finder.findMethod(false);
@@ -101,25 +115,24 @@ MethodCall.prototype.transpile = function(transpiler) {
         this.method.transpileParent(transpiler);
         declaration.transpileCall(transpiler, this.assignments);
     } else {
-    	if(!declaration.memberOf)
-            transpiler.declare(declaration);
         this.method.transpile(transpiler);
-        if (this.assignments != null)
-            this.assignments.transpile(transpiler);
-        else
-            transpiler.append("()");
+        transpiler.append("(");
+        var assignments = this.makeAssignments(transpiler.context, declaration);
+        assignments.forEach(function(assignment) {
+            var argType = assignment.argument.getType(transpiler.context);
+            var expression = assignment.resolve(transpiler.context, declaration, false);
+            var expType = expression.check(transpiler.context);
+            if(argType===IntegerType.instance && expType===DecimalType.instance) {
+                transpiler.append("Math.round(");
+                expression.transpile(transpiler);
+                transpiler.append(")");
+            } else
+                expression.transpile(transpiler);
+        });
+        transpiler.append(")");
     }
 };
 
-
-MethodCall.prototype.declare = function(transpiler) {
-    var finder = new MethodFinder(transpiler.context,this);
-    var declaration = finder.findMethod(false);
-    if(!(declaration instanceof BuiltInMethodDeclaration) && !declaration.memberOf)
-        declaration.declare(transpiler);
-    if (this.assignments != null)
-        this.assignments.declare(transpiler);
-};
 
 
 MethodCall.prototype.makeAssignments = function(context, declaration) {
@@ -134,11 +147,11 @@ MethodCall.prototype.interpret = function(context) {
 	var declaration = this.findDeclaration(context);
 	var local = this.method.newLocalContext(context, declaration);
 	declaration.registerArguments(local);
-	var assignments = this.makeAssignments(context,declaration);
+	var assignments = this.makeAssignments(context, declaration);
 	assignments.forEach(function(assignment) {
 		var expression = assignment.resolve(local, declaration, true);
         var argument = assignment.argument;
-		var value = argument.checkValue(context,expression);
+		var value = argument.checkValue(context, expression);
         if(value!=null && argument.mutable && !value.mutable)
             throw new NotMutableError();
 		local.setValue(assignment.id, value);

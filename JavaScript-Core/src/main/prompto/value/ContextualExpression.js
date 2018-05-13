@@ -22,4 +22,10 @@ ContextualExpression.prototype.interpret = function(context) {
 	return this.expression.interpret(this.calling);
 };
 
+ContextualExpression.prototype.transpile = function(transpiler) {
+    transpiler = transpiler.newChildTranspiler(this.calling);
+    this.expression.transpile(transpiler);
+    transpiler.flush();
+};
+
 exports.ContextualExpression = ContextualExpression;

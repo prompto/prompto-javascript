@@ -55,7 +55,7 @@ SwitchErrorStatement.prototype.interpret = function(context) {
 		}
 	} finally {
 		if(this.alwaysInstructions!=null) {
-			this.alwaysInstructions.evaluate(context);
+			this.alwaysInstructions.interpret(context);
 		}
 	}
 	return result;

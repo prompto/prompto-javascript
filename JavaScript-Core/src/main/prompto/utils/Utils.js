@@ -200,6 +200,22 @@ function decimalToString(d) {
         return s + ".0";
 }
 
+function isAnInteger(o) {
+    return typeof(o) === "number" && o === Math.floor(o);
+}
+
+function isADecimal(o) {
+    return typeof(o) === "number" && o !== Math.floor(o);
+}
+
+function isAText(o) {
+    return typeof(o) === 'string' || o instanceof String;
+}
+
+function isACharacter(o) {
+    return isAText(o) && o.length===1;
+}
+
 exports.multiplyArray = multiplyArray;
 exports.mergeObjects = mergeObjects;
 exports.equalObjects = equalObjects;
@@ -211,3 +227,7 @@ exports.getUtf8CharLength = getUtf8CharLength;
 exports.stringToUtf8Buffer = stringToUtf8Buffer;
 exports.utf8BufferToString = utf8BufferToString;
 exports.decimalToString = decimalToString;
+exports.isAnInteger = isAnInteger;
+exports.isADecimal = isADecimal;
+exports.isAText = isAText;
+exports.isACharacter = isACharacter;

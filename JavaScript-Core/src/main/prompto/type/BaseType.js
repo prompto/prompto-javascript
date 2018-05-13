@@ -254,6 +254,22 @@ BaseType.prototype.checkItem = function(context, itemType) {
 };
 
 
+BaseType.prototype.declareItem = function(transpiler, itemType, item) {
+    if(itemType instanceof EnumeratedNativeType)
+        return this.declareItem(transpiler, itemType.derivedFrom, item);
+    else
+        throw new SyntaxError("Cannot declare item from: " + this.name);
+};
+
+BaseType.prototype.transpileItem = function(transpiler, itemType, item) {
+    if(itemType instanceof EnumeratedNativeType)
+        return this.transpileItem(transpiler, itemType.derivedFrom);
+    else
+        throw new SyntaxError("Cannot transpile item from: " + this.name);
+};
+
+
+
 BaseType.prototype.checkMember = function(context, name) {
     if("text" == name)
         return TextType.instance;

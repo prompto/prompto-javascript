@@ -43,11 +43,24 @@ ReturnStatement.prototype.equals = function(obj) {
         return this.expression.equals(obj.expression);
 };
 
-ReturnStatement.prototype.check = function(context) {
-	return this.expression==null ? VoidType.instance : this.expression.check(context);
+ReturnStatement.prototype.declare = function(transpiler) {
+	if(this.expression)
+        this.expression.declare(transpiler);
 };
 
-ReturnStatement.prototype.interpret= function(context) {
+ReturnStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("return");
+    if(this.expression) {
+        transpiler.append(" ");
+        this.expression.transpile(transpiler);
+    }
+};
+
+ReturnStatement.prototype.check = function(context) {
+    return this.expression==null ? VoidType.instance : this.expression.check(context);
+};
+
+ReturnStatement.prototype.interpret = function(context) {
     if(this.expression==null)
         return VoidResult.instance;
     else

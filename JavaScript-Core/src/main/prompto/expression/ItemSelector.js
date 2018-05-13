@@ -44,4 +44,18 @@ ItemSelector.prototype.interpret = function(context) {
     }
 };
 
+ItemSelector.prototype.declare = function(transpiler) {
+    var parentType = this.parent.check(transpiler.context);
+    var itemType = this.item.check(transpiler.context);
+    return parentType.declareItem(transpiler, itemType, this.item);
+};
+
+
+ItemSelector.prototype.transpile = function(transpiler) {
+    this.parent.transpile(transpiler);
+    var parentType = this.parent.check(transpiler.context);
+    var itemType = this.item.check(transpiler.context);
+    return parentType.transpileItem(transpiler, itemType, this.item);
+};
+
 exports.ItemSelector = ItemSelector;

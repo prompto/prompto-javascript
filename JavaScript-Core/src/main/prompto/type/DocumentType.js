@@ -33,6 +33,20 @@ DocumentType.prototype.checkMember = function(context, name) {
 };
 
 
+DocumentType.prototype.declareMember = function(transpiler, name) {
+    // nothing to do
+};
+
+
+DocumentType.prototype.transpileMember = function(transpiler, name) {
+    if ("text"!==name) {
+        transpiler.append(name);
+    } else {
+        ContainerType.prototype.transpileMember.call(this, transpiler, name);
+    }
+};
+
+
 DocumentType.prototype.checkItem = function(context, itemType) {
     if(itemType===TextType.instance)
         return AnyType.instance;

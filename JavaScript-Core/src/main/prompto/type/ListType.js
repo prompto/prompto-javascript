@@ -79,13 +79,33 @@ ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
 };
 
 
-ListType.prototype.checkItem = function(context, other) {
-	if(other==IntegerType.instance) {
+ListType.prototype.checkItem = function(context, itemType) {
+	if(itemType==IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return ContainerType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, itemType);
 	}
 };
+
+ListType.prototype.declareItem = function(transpiler, itemType, item) {
+    if(itemType===IntegerType.instance) {
+        item.declare(transpiler);
+    } else {
+        return ContainerType.prototype.declareItem.call(this, context, itemType, item);
+    }
+};
+
+
+ListType.prototype.transpileItem = function(transpiler, itemType, item) {
+    if(itemType===IntegerType.instance) {
+        transpiler.append("[");
+        item.transpile(transpiler);
+        transpiler.append("-1]");
+    } else {
+        return ContainerType.prototype.transpileItem.call(this, context, itemType, item);
+    }
+};
+
 
 ListType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {

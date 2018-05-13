@@ -37,11 +37,23 @@ TextType.prototype.isAssignableFrom = function(context, other) {
         || (other == CharacterType.instance);
 };
 
+TextType.prototype.declare = function(transpiler) {
+    var isAText = require("../utils/Utils").isAText;
+    transpiler.require(isAText);
+};
+
+
+
+TextType.prototype.transpile = function(transpiler) {
+    // nothing to do
+};
+
+
+
 TextType.prototype.checkAdd = function(context, other, tryReverse) {
 	// can add anything to text
 	return this;
 };
-
 
 
 TextType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {

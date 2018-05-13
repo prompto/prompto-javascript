@@ -164,6 +164,15 @@ ObjectUtils.values = function(o) {
 };
 
 
+ObjectUtils.objectToString = function() {
+    var names = Object.getOwnPropertyNames(this);
+    var vals = names.map(function (name) {
+        return name + ':' + this[name];
+    }, this);
+    return "{" + vals.join(", ") + "}";
+};
+
+
 ObjectUtils.arrayToString = function() {
     return '[' + this.join(', ') + ']';
 };
@@ -209,6 +218,7 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         patchObject();
         var transpiler = new Transpiler(context);
         transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + " };");
+        transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
         transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
         transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
         transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");

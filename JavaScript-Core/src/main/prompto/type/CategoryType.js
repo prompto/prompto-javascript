@@ -55,6 +55,12 @@ CategoryType.prototype.toDialect = function(writer) {
 };
 
 
+CategoryType.prototype.declare = function(transpiler) {
+    var decl = this.getDeclaration(transpiler.context);
+    if(decl instanceof CategoryDeclaration)
+        transpiler.declare(decl);
+};
+
 CategoryType.prototype.transpile = function(transpiler) {
     transpiler.append(this.name);
 };
@@ -199,6 +205,11 @@ CategoryType.prototype.checkMember = function(context, name) {
         throw new SyntaxError("Not a category:" + this.name);
     }
 };
+
+CategoryType.prototype.declareMember = function(transpiler, name) {
+    // TODO visit attributes
+};
+
 
 CategoryType.prototype.transpileMember = function(transpiler, name) {
     if ("text" == name)

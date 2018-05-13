@@ -140,12 +140,26 @@ ConstructorExpression.prototype.interpret = function(context) {
 ConstructorExpression.prototype.declare = function(transpiler) {
     var cd = transpiler.context.getRegisteredDeclaration(this.type.name);
     cd.declare(transpiler);
-    // TODO assignments
+    if(this.copyFrom)
+        this.copyFrom.declare(transpiler);
+    if(this.assignments)
+        this.assignments.declare(transpiler);
 };
 
 ConstructorExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("new ").append(this.type.name).append("()");
-    // TODO assignments
+    transpiler.append("new ").append(this.type.name).append("(");
+    // TODO copyFrom
+    if(this.assignments!=null) {
+        transpiler.append("{");
+        this.assignments.forEach(function(assignment) {
+            transpiler.append(assignment.argument.name).append(":");
+            assignment.expression.transpile(transpiler);
+            transpiler.append(", ");
+        }, this);
+        transpiler.trimLast(2);
+        transpiler.append("}");
+    }
+    transpiler.append(")");
 };
 
 exports.ConstructorExpression = ConstructorExpression;

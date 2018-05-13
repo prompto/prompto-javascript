@@ -129,14 +129,6 @@ ArgumentAssignment.prototype.check = function(context) {
 	return VoidType.instance;
 };
 
-ArgumentAssignment.prototype.evaluate = function(context) {
-	if(context.getRegisteredValue(this.argument.name)==null) {
-		context.registerValue(new Variable(this.argument.name, this.expression));
-	}
-	context.setValue(this.argument.name, this.expression.interpret(context));
-	return null;
-};
-
 ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, checkInstance) {
 	// since we support implicit members, it's time to resolve them
 	var name = this.argument.name;

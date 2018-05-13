@@ -15,6 +15,14 @@ NullLiteral.prototype.interpret = function(context) {
     return NullValue.instance;
 };
 
+NullLiteral.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+NullLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append("null");
+};
+
 NullLiteral.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
