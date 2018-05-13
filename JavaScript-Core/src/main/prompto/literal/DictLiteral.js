@@ -30,8 +30,13 @@ DictLiteral.prototype.toDialect = function(writer) {
     this.entries.toDialect(writer);
 };
 
-DictLiteral.prototype.transpile = function(transpiler) {
+DictLiteral.prototype.declare = function(transpiler) {
     transpiler.require(Dictionary);
+    this.entries.declare(transpiler);
+};
+
+
+DictLiteral.prototype.transpile = function(transpiler) {
     transpiler.append("new Dictionary(")
     this.entries.transpile(transpiler);
     transpiler.append(")");

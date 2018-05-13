@@ -26,4 +26,20 @@ Object.defineProperty(Dictionary.prototype, "values", {
 });
 
 
+Dictionary.prototype.add = function(dict) {
+    var result = Object.assign({}, this, dict);
+    result.__proto__ = Dictionary.prototype;
+    return result;
+}
+
+
+Dictionary.prototype.toString = function() {
+    var names = Object.getOwnPropertyNames(this);
+    var vals = names.map(function (name) {
+        return '"' + name + '":' + this[name];
+    }, this);
+    return "{" + vals.join(", ") + "}";
+};
+
+
 exports.Dictionary = Dictionary;

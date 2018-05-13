@@ -52,8 +52,8 @@ exports.executeResource = function(fileName, methodName, args) {
         var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
         var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
         fs.writeFile(transpiled, js);
-        eval(js);
-        var fn = eval(methodName);
+        js = "var transpiled = function() {" + js + " \nreturn " + methodName + "; }; transpiled();";
+        var fn = eval(js);
         args = args || "";
         fn(args);
     }

@@ -200,7 +200,12 @@ CategoryType.prototype.checkMember = function(context, name) {
     }
 };
 
-
+CategoryType.prototype.transpileMember = function(transpiler, name) {
+    if ("text" == name)
+        transpiler.append("toString()");
+    else
+        transpiler.append(name);
+};
 
 CategoryType.prototype.isAssignableFrom = function(context, other) {
     return BaseType.prototype.isAssignableFrom.call(this, context, other)

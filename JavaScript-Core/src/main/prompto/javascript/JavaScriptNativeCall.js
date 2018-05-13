@@ -30,6 +30,9 @@ JavaScriptNativeCall.prototype.transpile = function(transpiler) {
     this.statement.transpile(transpiler);
 };
 
+JavaScriptNativeCall.prototype.declare = function(transpiler) {
+    this.statement.declare(transpiler);
+};
 
 exports.JavaScriptNativeCall = JavaScriptNativeCall;
 

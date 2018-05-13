@@ -37,6 +37,15 @@ DecimalType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 
+DecimalType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+};
+
+
 DecimalType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if (other instanceof IntegerType || other instanceof DecimalType) {
         left.transpile(transpiler);
@@ -53,6 +62,15 @@ DecimalType.prototype.checkSubtract = function(context, other) {
 	} else {
 		return NativeType.prototype.checkSubtract.call(this, context, other);
 	}
+};
+
+
+DecimalType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
 };
 
 
@@ -75,6 +93,15 @@ DecimalType.prototype.checkMultiply = function(context, other, tryReverse) {
 };
 
 
+DecimalType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareMultiply.call(this, context, other, tryReverse, left, right);
+};
+
+
 DecimalType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
     if (other instanceof IntegerType || other instanceof DecimalType) {
         left.transpile(transpiler);
@@ -84,12 +111,21 @@ DecimalType.prototype.transpileMultiply = function(transpiler, other, tryReverse
         return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
 };
 
+
 DecimalType.prototype.checkDivide = function(context, other) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return this;
 	} else {
 		return NativeType.prototype.checkDivide.call(this, context, other);
 	}
+};
+
+DecimalType.prototype.declareDivide = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType || other instanceof DecimalType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
 };
 
 
@@ -109,6 +145,15 @@ DecimalType.prototype.checkIntDivide = function(context, other) {
     } else {
         return NativeType.prototype.checkIntDivide.call(this, context, other);
     }
+};
+
+
+DecimalType.prototype.declareIntDivide = function(transpiler, other, left, right) {
+    if (other instanceof IntegerType ) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareIntDivide.call(this, transpiler, other, left, right);
 };
 
 

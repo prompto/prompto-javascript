@@ -14,6 +14,12 @@ DictEntry.prototype.toDialect = function(writer) {
     this.value.toDialect(writer);
 };
 
+
+DictEntry.prototype.declare = function(transpiler) {
+    this.value.declare(transpiler);
+};
+
+
 DictEntry.prototype.transpile = function(transpiler) {
     transpiler.append(this.key.value).append(':');
     this.value.transpile(transpiler);

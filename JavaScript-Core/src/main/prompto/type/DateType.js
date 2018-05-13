@@ -33,6 +33,15 @@ DateType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+DateType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof PeriodType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+};
+
 DateType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if (other instanceof PeriodType) {
         left.transpile(transpiler);
@@ -54,6 +63,14 @@ DateType.prototype.checkSubtract = function(context, other) {
 };
 
 
+DateType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    if (other instanceof PeriodType || other instanceof DateType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+};
+
 DateType.prototype.transpileSubtract = function(transpiler, other, left, right) {
     if (other instanceof PeriodType) {
         left.transpile(transpiler);
@@ -68,7 +85,6 @@ DateType.prototype.transpileSubtract = function(transpiler, other, left, right) 
     } else
         return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
 };
-
 
 DateType.prototype.checkCompare = function(context, other) {
 	if (other instanceof DateType || other instanceof DateTimeType) {
@@ -98,6 +114,13 @@ DateType.prototype.checkMember = function(context, name) {
 	} else {
 		return NativeType.prototype.checkMember.call(this, context, name);
 	}
+};
+
+
+DateType.prototype.declareMember = function(transpiler, name) {
+    if (!("year"==name || "month"==name || "dayOfMonth"==name || "dayOfYear"==name)) {
+        NativeType.prototype.declareMember.call(this, transpiler, name);
+    }
 };
 
 

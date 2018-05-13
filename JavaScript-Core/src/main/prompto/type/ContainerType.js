@@ -28,6 +28,14 @@ ContainerType.prototype.checkMember = function(context, name) {
     }
 };
 
+
+ContainerType.prototype.declareMember = function(transpiler, name) {
+    if ("count" !== name) {
+        return IterableType.prototype.declareMember.call(this, transpiler, name);
+    }
+};
+
+
 ContainerType.prototype.transpileMember = function(transpiler, name) {
     if ("count" == name) {
         transpiler.append("length");

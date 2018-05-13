@@ -15,8 +15,11 @@ DateLiteral.prototype.check = function(context) {
 	return DateType.instance;
 };
 
-DateLiteral.prototype.transpile = function(transpiler) {
+DateLiteral.prototype.declare = function(transpiler) {
     transpiler.require(LocalDate);
+};
+
+DateLiteral.prototype.transpile = function(transpiler) {
     transpiler.append("LocalDate.parse(").append(this.text).append(")");
 };
 

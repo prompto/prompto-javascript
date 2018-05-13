@@ -146,17 +146,35 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
     writer.append("}\n");
 };
 
+ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
+    transpiler.declare(this);
+    var global = transpiler.context.isGlobalContext();
+    if(global) {
+        transpiler = transpiler.newLocalTranspiler();
+        this.registerArguments(transpiler.context);
+    }
+    this.statements.declare(transpiler);
+    if(global)
+        transpiler.flush();
+};
+
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     var global = transpiler.context.isGlobalContext();
     if(global) {
         transpiler = transpiler.newLocalTranspiler();
         this.registerArguments(transpiler.context);
     }
-    transpiler.append("function ").append(this.name).append(" (");
+    if(this.memberOf)
+        transpiler.append(this.memberOf.name).append(".prototype.").append(this.name).append(" = function (");
+    else
+        transpiler.append("function ").append(this.name).append(" (");
     this.args.transpile(transpiler);
     transpiler.append(") {").indent();
     this.statements.transpile(transpiler);
     transpiler.dedent().append("}");
+    if(this.memberOf)
+        transpiler.append(";");
+    transpiler.newLine();
     if(global)
         transpiler.flush();
 };

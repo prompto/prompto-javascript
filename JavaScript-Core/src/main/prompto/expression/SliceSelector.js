@@ -65,6 +65,15 @@ SliceSelector.prototype.interpret = function(context) {
 	}
 };
 
+
+SliceSelector.prototype.declare = function(transpiler) {
+    this.parent.declare(transpiler);
+    var parentType = this.parent.check(transpiler.context);
+    return parentType.declareSlice(transpiler, this.first, this.last);
+
+};
+
+
 SliceSelector.prototype.transpile = function(transpiler) {
     this.parent.transpile(transpiler);
     var parentType = this.parent.check(transpiler.context);

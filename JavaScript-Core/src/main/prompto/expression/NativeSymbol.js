@@ -49,8 +49,12 @@ NativeSymbol.prototype.interpret = function(context) {
 	return this;
 }
 
-NativeSymbol.prototype.transpile = function(transpiler) {
+NativeSymbol.prototype.declare = function(transpiler) {
     this.type.declare(transpiler);
+};
+
+
+NativeSymbol.prototype.transpile = function(transpiler) {
     transpiler.append(this.name);
 };
 

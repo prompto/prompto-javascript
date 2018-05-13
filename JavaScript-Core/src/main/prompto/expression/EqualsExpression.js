@@ -12,6 +12,7 @@ var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var Instance = require("../value/Value").Instance;
 var Value = require("../value/Value").Value;
+var Variable = require("../runtime/Variable").Variable;
 var MatchOp = require("../store/MatchOp").MatchOp;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var EqOp = require("../grammar/EqOp").EqOp;
@@ -138,8 +139,10 @@ EqualsExpression.prototype.downCast = function(context, setValue) {
     if(this.operator==EqOp.IS_A) {
         var id = this.readLeftId();
         if(id!=null) {
-            var value = context.getRegisteredValue(id.name);
             var type = this.right.value;
+            var value = context.getRegisteredValue(id.name);
+            if(value==null && !setValue) // need a thing to avoid NPE
+                value = new Variable(id.name, type);
             var local = context.newChildContext();
             value = new LinkedVariable(type, value);
             local.registerValue(value, false);
@@ -219,6 +222,11 @@ EqualsExpression.prototype.readFieldName = function(exp) {
         return exp.toString();
     else
         return null;
+};
+
+EqualsExpression.prototype.declare = function(transpiler) {
+    this.left.declare(transpiler);
+    this.right.declare(transpiler);
 };
 
 EqualsExpression.prototype.transpile = function(transpiler) {

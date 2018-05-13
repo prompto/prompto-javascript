@@ -36,6 +36,8 @@ DictionaryType.prototype.equals = function(obj) {
 	}
 };
 
+
+
 DictionaryType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
 		return this;
@@ -45,11 +47,20 @@ DictionaryType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 
+DictionaryType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return ContainerType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+    }
+};
+
+
 DictionaryType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
-        transpiler.append("Object.assign({},");
         left.transpile(transpiler);
-        transpiler.append(",");
+        transpiler.append(".add(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else {
@@ -101,14 +112,20 @@ DictionaryType.prototype.checkMember = function(context, name) {
 };
 
 
+DictionaryType.prototype.declareMember = function(transpiler, name) {
+    if("keys"==name) {
+        transpiler.require(StrictSet);
+    } else if (!("count"===name || "values"==name)) {
+        ContainerType.prototype.declareMember.call(this, transpiler, name);
+    }
+};
+
+
 DictionaryType.prototype.transpileMember = function(transpiler, name) {
     if ("count"==name) {
         transpiler.append("length");
-    } else if("keys"==name) {
-        transpiler.require(StrictSet);
-        transpiler.append("keys");
-    } else if ("values"==name) {
-        transpiler.append("values");
+    } else if("keys"===name || "values"==name) {
+        transpiler.append(name);
     } else {
         ContainerType.prototype.transpileMember.call(this, transpiler, name);
     }

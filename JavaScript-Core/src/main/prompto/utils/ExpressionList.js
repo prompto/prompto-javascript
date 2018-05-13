@@ -18,6 +18,13 @@ ExpressionList.prototype.toDialect = function(writer) {
     }
 };
 
+ExpressionList.prototype.declare = function(transpiler) {
+    this.forEach(function(item){
+        item.declare(transpiler);
+    });
+};
+
+
 ExpressionList.prototype.transpile = function(transpiler) {
     if (this.length > 0) {
         for (var i = 0; i < this.length; i++) {

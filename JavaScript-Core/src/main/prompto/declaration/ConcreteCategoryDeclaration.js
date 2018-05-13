@@ -384,5 +384,58 @@ ConcreteCategoryDeclaration.prototype.doCollectCategories = function(context, ca
     }
 };
 
+ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
+    transpiler.declare(this);
+    if (this.derivedFrom != null) {
+        this.derivedFrom.forEach(function (cat) {
+            var decl = transpiler.context.getRegisteredDeclaration(cat);
+            decl.declare(transpiler);
+        });
+    }
+};
+
+ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context, list, set) {
+    if(set.has(this))
+        return;
+    if (this.derivedFrom != null) {
+        this.derivedFrom.forEach(function (cat) {
+            var decl = context.getRegisteredDeclaration(cat);
+            decl.ensureDeclarationOrder(context, list, set);
+        });
+    }
+    list.push(this);
+    set.add(this);
+};
+
+ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
+    var parent = null;
+    if(this.derivedFrom != null) {
+        if (this.derivedFrom.length === 1) {
+            parent = this.derivedFrom[0];
+        } else
+            throw new Error("Not supported yet!");
+    }
+    transpiler.append("function ").append(this.name).append("() {");
+    transpiler.indent();
+    if(parent) {
+        transpiler.append(parent).append(".call(this);");
+        transpiler.newLine();
+    }
+    transpiler.append("return this;");
+    transpiler.dedent();
+    transpiler.append("}");
+    transpiler.newLine();
+    if(parent) {
+        transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);")
+        transpiler.newLine();
+        transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";")
+        transpiler.newLine();
+    }
+    this.methods.forEach(function(method) {
+        var t = transpiler.newMemberTranspiler();
+        method.transpile(t);
+        t.flush();
+    }, this);
+};
 
 exports.ConcreteCategoryDeclaration = ConcreteCategoryDeclaration;

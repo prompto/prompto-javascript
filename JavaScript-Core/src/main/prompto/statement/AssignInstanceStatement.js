@@ -41,4 +41,8 @@ AssignInstanceStatement.prototype.transpile = function(transpiler) {
     this.instance.transpileAssign(transpiler, this.expression);
 };
 
+AssignInstanceStatement.prototype.declare = function(transpiler) {
+    this.instance.declareAssign(transpiler, this.expression);
+};
+
 exports.AssignInstanceStatement = AssignInstanceStatement;

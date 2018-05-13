@@ -35,6 +35,17 @@ SetType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+SetType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return ContainerType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
 SetType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
         left.transpile(transpiler);

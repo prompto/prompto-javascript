@@ -15,8 +15,13 @@ PeriodLiteral.prototype.check = function(context) {
 	return PeriodType.instance;
 };
 
-PeriodLiteral.prototype.transpile = function(transpiler) {
+
+PeriodLiteral.prototype.declare = function(transpiler) {
     transpiler.require(Period);
+};
+
+
+PeriodLiteral.prototype.transpile = function(transpiler) {
     transpiler.append("Period.parse(").append(this.text).append(")");
 };
 

@@ -21,4 +21,7 @@ NativeCall.prototype.transpile = function(transpiler) {
     return true;
 };
 
+NativeCall.prototype.declare = function(transpiler) {
+};
+
 exports.NativeCall = NativeCall;

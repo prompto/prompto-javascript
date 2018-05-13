@@ -38,6 +38,11 @@ TupleType.prototype.checkMember = function(context, name) {
 };
 
 
+TupleType.prototype.declareMember = function(transpiler, name) {
+    if ("count" !== name) {
+        return NativeType.prototype.declareMember.call(this, transpiler, name);
+    }
+};
 
 TupleType.prototype.transpileMember = function(transpiler, name) {
     if ("count" == name) {
@@ -55,6 +60,17 @@ TupleType.prototype.checkAdd = function(context, other, tryReverse) {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
 	}
 };
+
+
+TupleType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
 
 TupleType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {

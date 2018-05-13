@@ -38,6 +38,14 @@ DateTimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+DateTimeType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof PeriodType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+};
+
 DateTimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if (other instanceof PeriodType) {
         left.transpile(transpiler);
@@ -58,6 +66,14 @@ DateTimeType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+DateTimeType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    if (other instanceof PeriodType || other instanceof DateTimeType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+};
+
 DateTimeType.prototype.transpileSubtract = function(transpiler, other, left, right) {
     if (other instanceof PeriodType) {
         left.transpile(transpiler);
@@ -72,6 +88,7 @@ DateTimeType.prototype.transpileSubtract = function(transpiler, other, left, rig
     } else
         return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
 };
+
 
 DateTimeType.prototype.checkCompare = function(context, other) {
 	if(other instanceof DateTimeType || other instanceof DateType) {
@@ -105,6 +122,13 @@ DateTimeType.prototype.checkMember = function(context, name) {
 	} else {
 		return NativeType.prototype.checkMember.call(this, context, name);
 	}
+};
+
+
+DateTimeType.prototype.declareMember = function(transpiler, name) {
+    if (!("year"==name || "month"==name || "dayOfMonth"==name || "dayOfYear"==name || "hour"==name || "minute"==name || "second"==name || "millisecond"==name || "tzOffset"==name || "tzName"==name)) {
+        NativeType.prototype.declareMember.call(this, transpiler, name);
+    }
 };
 
 

@@ -29,6 +29,12 @@ ModuloExpression.prototype.interpret = function(context) {
 };
 
 
+ModuloExpression.prototype.declare = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.declareModulo(transpiler, rt, this.left, this.right);
+};
+
 ModuloExpression.prototype.transpile = function(transpiler) {
     var lt = this.left.check(transpiler.context);
     var rt = this.right.check(transpiler.context);

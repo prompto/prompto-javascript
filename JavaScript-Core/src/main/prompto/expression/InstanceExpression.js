@@ -35,6 +35,10 @@ InstanceExpression.prototype.transpile = function(transpiler) {
 };
 
 
+InstanceExpression.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
 InstanceExpression.prototype.toDialect = function(writer, requireMethod) {
     if(requireMethod === undefined)
         requireMethod = true;

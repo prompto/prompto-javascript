@@ -112,6 +112,14 @@ MethodCall.prototype.transpile = function(transpiler) {
 };
 
 
+MethodCall.prototype.declare = function(transpiler) {
+    var finder = new MethodFinder(transpiler.context,this);
+    var declaration = finder.findMethod(false);
+    if(!(declaration instanceof BuiltInMethodDeclaration) && !declaration.memberOf)
+        declaration.declare(transpiler);
+    if (this.assignments != null)
+        this.assignments.declare(transpiler);
+};
 
 
 MethodCall.prototype.makeAssignments = function(context, declaration) {

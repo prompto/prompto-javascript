@@ -62,6 +62,16 @@ BaseType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 
+BaseType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareAdd(transpiler, other.derivedFrom, tryReverse, left, right);
+    else if(tryReverse)
+        return other.declareAdd(transpiler, this, false, right, left);
+    else
+        throw new SyntaxError("Cannot declare add " + this.name + " to " + other.name);
+};
+
+
 BaseType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof EnumeratedNativeType)
         return this.transpileAdd(transpiler, other.derivedFrom, tryReverse, left, right);
@@ -77,6 +87,14 @@ BaseType.prototype.checkSubtract = function(context, other) {
         return this.checkSubtract(context, other.derivedFrom);
     else
         throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
+};
+
+
+BaseType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareSubtract(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot declare substract " + this.name + " to " + other.name);
 };
 
 
@@ -96,6 +114,14 @@ BaseType.prototype.checkDivide = function(context, other) {
 };
 
 
+BaseType.prototype.declareDivide = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareDivide(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot declare divide " + this.name + " to " + other.name);
+};
+
+
 BaseType.prototype.transpileDivide = function(transpiler, other, left, right) {
     if(other instanceof EnumeratedNativeType)
         return this.transpileDivide(transpiler, other.derivedFrom, left, right);
@@ -112,11 +138,19 @@ BaseType.prototype.checkIntDivide = function(context, other) {
 };
 
 
+BaseType.prototype.declareIntDivide = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareIntDivide(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot declare int divide " + this.name + " to " + other.name);
+};
+
+
 BaseType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
     if(other instanceof EnumeratedNativeType)
         return this.transpileIntDivide(transpiler, other.derivedFrom, left, right);
     else
-        throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
+        throw new SyntaxError("Cannot transpile int divide " + this.name + " to " + other.name);
 };
 
 
@@ -128,12 +162,20 @@ BaseType.prototype.checkModulo = function(context, other) {
 };
 
 
+BaseType.prototype.declareModulo = function(transpiler, other, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareModulo(transpiler, other.derivedFrom, left, right);
+    else
+        throw new SyntaxError("Cannot declare modulo " + this.name + " to " + other.name);
+};
+
 BaseType.prototype.transpileModulo = function(transpiler, other, left, right) {
     if(other instanceof EnumeratedNativeType)
         return this.transpileModulo(transpiler, other.derivedFrom, left, right);
     else
         throw new SyntaxError("Cannot transpile modulo " + this.name + " to " + other.name);
 };
+
 
 BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
     if(other instanceof EnumeratedNativeType)
@@ -144,6 +186,16 @@ BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
 	    throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
 };
 
+BaseType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
+    else if(tryReverse)
+        return other.declareMultiply(transpiler, this, false, right, left);
+    else
+        throw new SyntaxError("Cannot declare multiply " + this.name + " to " + other.name);
+};
+
+
 BaseType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof EnumeratedNativeType)
         return this.transpileMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
@@ -152,7 +204,6 @@ BaseType.prototype.transpileMultiply = function(transpiler, other, tryReverse, l
     else
         throw new SyntaxError("Cannot transpile multiply " + this.name + " to " + other.name);
 };
-
 
 
 BaseType.prototype.checkMinus = function(context) {
@@ -211,6 +262,11 @@ BaseType.prototype.checkMember = function(context, name) {
 };
 
 
+BaseType.prototype.declareMember = function(transpiler, name) {
+    if("text" !== name)
+        throw new SyntaxError("Cannot declare member: " + name + " from " + this.name);
+};
+
 BaseType.prototype.transpileMember = function(transpiler, name) {
     if("text" == name)
         transpiler.append("toString()");
@@ -224,8 +280,13 @@ BaseType.prototype.checkSlice = function(context) {
 };
 
 
+BaseType.prototype.declareSlice = function(transpiler, first, last) {
+    throw new SyntaxError("Cannot declare slice for " + this.name);
+};
+
+
 BaseType.prototype.transpileSlice = function(transpiler, first, last) {
-    throw new SyntaxError("Cannot transpile " + this.name);
+    throw new SyntaxError("Cannot transpile slice for " + this.name);
 };
 
 BaseType.prototype.checkIterator = function(context) {

@@ -14,6 +14,12 @@ DecimalLiteral.prototype.check = function(context) {
 	return DecimalType.instance;
 };
 
+
+DecimalLiteral.prototype.declare = function(transpiler) {
+    // nothing to do;
+};
+
+
 DecimalLiteral.prototype.transpile = function(transpiler) {
     transpiler.append(this.text);
 };

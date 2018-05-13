@@ -51,4 +51,8 @@ JavaScriptStatement.prototype.transpile = function(transpiler) {
         throw new Error(this.module.toString());
 };
 
+JavaScriptStatement.prototype.declare = function(transpiler) {
+    // TODO module
+};
+
 exports.JavaScriptStatement = JavaScriptStatement;

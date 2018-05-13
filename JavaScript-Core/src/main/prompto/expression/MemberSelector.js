@@ -44,11 +44,27 @@ MemberSelector.prototype.toDialect = function(writer) {
 };
 
 
+
+MemberSelector.prototype.declareParent = function(transpiler) {
+    // resolve parent to keep clarity
+    var parent = this.resolveParent(transpiler.context);
+    parent.declare(transpiler);
+};
+
+
 MemberSelector.prototype.transpileParent = function(transpiler) {
     // resolve parent to keep clarity
     var parent = this.resolveParent(transpiler.context);
     parent.transpile(transpiler);
     transpiler.append(".");
+};
+
+
+
+MemberSelector.prototype.declare = function(transpiler) {
+    this.declareParent(transpiler);
+    var parentType = this.checkParent(transpiler.context);
+    return parentType.declareMember(transpiler, this.name);
 };
 
 

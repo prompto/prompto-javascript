@@ -80,6 +80,11 @@ ArgumentAssignment.prototype.toEDialect = function(writer) {
     }
 };
 
+
+ArgumentAssignment.prototype.declare = function(transpiler) {
+    this._expression.declare(transpiler);
+};
+
 ArgumentAssignment.prototype.transpile = function(transpiler) {
     this._expression.transpile(transpiler);
 };

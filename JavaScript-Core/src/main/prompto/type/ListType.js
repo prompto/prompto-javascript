@@ -52,6 +52,15 @@ ListType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 
+ListType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return ContainerType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
 
 ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof ListType && this.itemType.equals(other.itemType)) {
@@ -87,10 +96,20 @@ ListType.prototype.checkMultiply = function(context, other, tryReverse) {
 };
 
 
-ListType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+ListType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof IntegerType) {
         var multiplyArray = require("../utils/Utils").multiplyArray;
         transpiler.require(multiplyArray);
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return ContainerType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
+ListType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof IntegerType) {
         transpiler.append("multiplyArray(");
         left.transpile(transpiler);
         transpiler.append(",");

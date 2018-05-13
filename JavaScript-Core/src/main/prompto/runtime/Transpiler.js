@@ -1,4 +1,5 @@
 var locateMethod = require('./Interpreter').locateMethod;
+var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 
 function Transpiler(context) {
     this.context = context;
@@ -10,21 +11,8 @@ function Transpiler(context) {
     return this;
 }
 
-Transpiler.prototype.newLocalTranspiler = function() {
-    var transpiler = new Transpiler(this.context.newLocalContext());
-    transpiler.declared = this.declared;
-    transpiler.required = this.required;
-    transpiler.lines = this.lines;
-    transpiler.line = this.line;
-    transpiler.indents = this.indents;
-    transpiler.parent = this;
-    return transpiler;
 
-};
-
-Transpiler.prototype.newChildTranspiler = function(context) {
-    if(!context)
-        context = this.context.newChildContext();
+Transpiler.prototype.copyTranspiler = function(context) {
     var transpiler = new Transpiler(context);
     transpiler.declared = this.declared;
     transpiler.required = this.required;
@@ -33,8 +21,25 @@ Transpiler.prototype.newChildTranspiler = function(context) {
     transpiler.indents = this.indents;
     transpiler.parent = this;
     return transpiler;
-
 };
+
+Transpiler.prototype.newLocalTranspiler = function() {
+    var context = this.context.newLocalContext();
+    return this.copyTranspiler(context);
+};
+
+Transpiler.prototype.newChildTranspiler = function(context) {
+    if(!context)
+        context = this.context.newChildContext();
+    return this.copyTranspiler(context);
+};
+
+Transpiler.prototype.newMemberTranspiler = function(context) {
+    var context = this.context.newLocalContext();
+    context.parent = this.context;
+    return this.copyTranspiler(context);
+};
+
 
 
 Transpiler.prototype.flush = function() {
@@ -50,7 +55,15 @@ Transpiler.prototype.declare = function(decl) {
 
 
 Transpiler.prototype.appendAllDeclared = function() {
+    var list = [];
+    var set = new Set();
     this.declared.forEach(function(decl) {
+        if(decl instanceof CategoryDeclaration)
+            decl.ensureDeclarationOrder(this.context, list, set);
+        else
+            list.push(decl);
+    }, this);
+    list.forEach(function(decl) {
         this.appendOneDeclared(decl);
     }, this);
 };
@@ -175,25 +188,38 @@ ObjectUtils.decimalToString = function() {
         return s + ".0";
 };
 
+// to ease implementation
+function patchObject() {
+    Object.prototype.declare = function (transpiler) {
+        throw new Error("Declare missing for " + this.__proto__.constructor.name);
+    };
+    Object.prototype.transpile = function (transpiler) {
+        throw new Error("Transpile missing for " + this.__proto__.constructor.name);
+    };
+}
+
+function unpatchObject() {
+    delete Object.prototype.declare;
+    delete Object.prototype.transpile;
+}
+
+
 Transpiler.transpile = function(context, methodName, cmdLineArgs) {
     try {
-        var method = locateMethod(context, methodName, cmdLineArgs);
+        patchObject();
         var transpiler = new Transpiler(context);
         transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + " };");
         transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
         transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
         transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
-        method.transpile(transpiler);
-        if(transpiler.line!==transpiler.indents) {
-            transpiler.lines.push(transpiler.line);
-            transpiler.line = transpiler.indents;
-        }
-        transpiler.lines.push("");
+        var method = locateMethod(context, methodName, cmdLineArgs);
+        method.declare(transpiler);
         transpiler.appendAllRequired();
         transpiler.appendAllDeclared();
         return transpiler.lines.join("\n");
     } finally {
         context.terminated();
+        unpatchObject();
     }
 };
 

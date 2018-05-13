@@ -19,6 +19,13 @@ DictEntryList.prototype.toDialect = function(writer) {
     writer.append('}');
 };
 
+DictEntryList.prototype.declare = function(transpiler) {
+    this.items.forEach(function(item) {
+        item.declare(transpiler);
+    });
+ };
+
+
 DictEntryList.prototype.transpile = function(transpiler) {
     transpiler.append('{');
     if(this.items.length>0) {

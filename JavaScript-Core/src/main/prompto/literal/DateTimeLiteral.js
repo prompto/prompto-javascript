@@ -16,8 +16,12 @@ DateTimeLiteral.prototype.check = function(context) {
 	return DateTimeType.instance;
 };
 
-DateTimeLiteral.prototype.transpile = function(transpiler) {
+DateTimeLiteral.prototype.declare = function(transpiler) {
     transpiler.require(DateTime);
+};
+
+
+DateTimeLiteral.prototype.transpile = function(transpiler) {
     transpiler.append("DateTime.parse(").append(this.text).append(")");
 };
 

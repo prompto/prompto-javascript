@@ -13,6 +13,12 @@ ParenthesisExpression.prototype.toDialect = function(writer) {
     writer.append(")");
 };
 
+
+ParenthesisExpression.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+};
+
+
 ParenthesisExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(");
     this.expression.transpile(transpiler);

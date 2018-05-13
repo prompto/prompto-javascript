@@ -31,11 +31,14 @@ SymbolExpression.prototype.interpret = function(context) {
 	return symbol.interpret(context);
 };
 
+SymbolExpression.prototype.declare = function(transpiler) {
+    var symbol = transpiler.context.getRegisteredValue(this.name);
+    symbol.declare(transpiler);
+};
+
+
 SymbolExpression.prototype.transpile = function(transpiler) {
     var symbol = transpiler.context.getRegisteredValue(this.name);
-    if(symbol==null) {
-        throw new SyntaxError("Unknown symbol:" + this.name);
-    }
     symbol.transpile(transpiler);
 };
 

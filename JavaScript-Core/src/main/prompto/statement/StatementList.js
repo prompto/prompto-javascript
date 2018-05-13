@@ -130,6 +130,12 @@ StatementList.prototype.toDialect = function(writer) {
     });
 };
 
+StatementList.prototype.declare = function(transpiler) {
+    this.forEach(function(stmt) {
+        stmt.declare(transpiler);
+    });
+};
+
 StatementList.prototype.transpile = function(transpiler) {
     this.forEach(function(stmt) {
         var skip = stmt.transpile(transpiler);

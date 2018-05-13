@@ -22,7 +22,7 @@ exports.testInterpretedAutoDecimalCast = function(test) {
 exports.testTranspiledAutoDecimalCast = function(test) {
 	checkTranspiledOutput(test, "cast/autoDecimalCast.pec");
 };
-/*
+
 exports.testInterpretedAutoDowncast = function(test) {
 	checkInterpretedOutput(test, "cast/autoDowncast.pec");
 };
@@ -111,4 +111,3 @@ exports.testTranspiledIsAText = function(test) {
 	checkTranspiledOutput(test, "cast/isAText.pec");
 };
 
-*/

@@ -20,6 +20,12 @@ TextLiteral.prototype.check = function(context) {
 	return TextType.instance;
 };
 
+
+TextLiteral.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
 TextLiteral.prototype.transpile = function(transpiler) {
     transpiler.append(this.text);
 };

@@ -21,6 +21,11 @@ CharacterLiteral.prototype.check = function(context) {
 };
 
 
+CharacterLiteral.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
 CharacterLiteral.prototype.transpile = function(transpiler) {
     transpiler.append(this.text);
 };

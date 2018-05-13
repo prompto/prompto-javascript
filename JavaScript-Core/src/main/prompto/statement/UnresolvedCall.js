@@ -105,15 +105,13 @@ UnresolvedCall.prototype.resolveMember = function(context) {
 };
 
 UnresolvedCall.prototype.transpile = function(transpiler) {
-    try {
-        this.resolve(transpiler.context);
-        this.resolved.transpile(transpiler);
-    } catch(error) {
-        throw error;
-        this.callable.transpile(transpiler);
-        if(this.assignments!=null)
-            this.assignments.transpile(transpiler);
-    }
+    this.resolve(transpiler.context);
+    this.resolved.transpile(transpiler);
+};
+
+UnresolvedCall.prototype.declare = function(transpiler) {
+    this.resolve(transpiler.context);
+    this.resolved.declare(transpiler);
 };
 
 

@@ -30,6 +30,12 @@ SubtractExpression.prototype.interpret = function(context) {
     return lval.Subtract(context, rval);
 };
 
+SubtractExpression.prototype.declare = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.declareSubtract(transpiler, rt, this.left, this.right);
+};
+
 SubtractExpression.prototype.transpile = function(transpiler) {
     var lt = this.left.check(transpiler.context);
     var rt = this.right.check(transpiler.context);

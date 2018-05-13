@@ -59,11 +59,20 @@ IfStatement.prototype.transpile = function(transpiler) {
             transpiler.append(") ");
         }
         transpiler.append("{");
-        transpiler.newLine();
+        transpiler.indent();
         element.transpile(transpiler);
+        transpiler.dedent();
         transpiler.append("}");
     }
     transpiler.newLine();
+    return true;
+};
+
+
+IfStatement.prototype.declare = function(transpiler) {
+    this.elements.forEach(function(element) {
+        element.declare(transpiler);
+    });
 };
 
 
@@ -152,6 +161,19 @@ IfElement.prototype.transpile = function(transpiler) {
     else
         transpiler = transpiler.newChildTranspiler();
     this.statements.transpile(transpiler);
+};
+
+IfElement.prototype.declare = function(transpiler) {
+    if(this.condition)
+        this.condition.declare(transpiler);
+    var context = transpiler.context;
+    if(this.condition instanceof EqualsExpression)
+        context = this.condition.downCast(transpiler.context, false);
+    if(context!=transpiler.context)
+        transpiler = transpiler.newChildTranspiler(context);
+    else
+        transpiler = transpiler.newChildTranspiler();
+    this.statements.declare(transpiler);
 };
 
 IfElement.prototype.downCast = function(context, setValue) {

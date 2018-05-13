@@ -29,6 +29,13 @@ IntDivideExpression.prototype.interpret = function(context) {
 };
 
 
+IntDivideExpression.prototype.declare = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.declareIntDivide(transpiler, rt, this.left, this.right);
+};
+
+
 IntDivideExpression.prototype.transpile = function(transpiler) {
     var lt = this.left.check(transpiler.context);
     var rt = this.right.check(transpiler.context);

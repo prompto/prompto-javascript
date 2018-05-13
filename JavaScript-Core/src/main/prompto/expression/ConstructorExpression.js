@@ -137,8 +137,15 @@ ConstructorExpression.prototype.interpret = function(context) {
 	return instance;
 };
 
+ConstructorExpression.prototype.declare = function(transpiler) {
+    var cd = transpiler.context.getRegisteredDeclaration(this.type.name);
+    cd.declare(transpiler);
+    // TODO assignments
+};
+
 ConstructorExpression.prototype.transpile = function(transpiler) {
     transpiler.append("new ").append(this.type.name).append("()");
+    // TODO assignments
 };
 
 exports.ConstructorExpression = ConstructorExpression;

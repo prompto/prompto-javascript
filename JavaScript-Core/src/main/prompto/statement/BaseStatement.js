@@ -17,4 +17,8 @@ BaseStatement.prototype.transpile = function(transpiler) {
 };
 
 
+BaseStatement.prototype.declare = function(transpiler) {
+    throw new Error("Declare not implemented by " + this.constructor.name);
+};
+
 exports.BaseStatement = BaseStatement;

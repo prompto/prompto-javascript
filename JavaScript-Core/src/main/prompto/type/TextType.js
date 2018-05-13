@@ -42,6 +42,14 @@ TextType.prototype.checkAdd = function(context, other, tryReverse) {
 	return this;
 };
 
+
+
+TextType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    left.declare(transpiler);
+    right.declare(transpiler);
+};
+
+
 TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     var DecimalType = require("./DecimalType").DecimalType;
     // can add anything to text
@@ -57,6 +65,15 @@ TextType.prototype.checkMultiply = function(context, other, tryReverse) {
 		return TextType.instance;
 	}
 	return NativeType.prototype.checkMultiply.call(this, context, other, tryReverse);
+};
+
+
+TextType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof IntegerType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
 };
 
 
@@ -96,6 +113,13 @@ TextType.prototype.checkMember = function(context, name) {
 };
 
 
+TextType.prototype.declareMember = function(transpiler, name) {
+    if ("count"!==name) {
+        NativeType.prototype.declareMember.call(this, transpiler, name);
+    }
+};
+
+
 TextType.prototype.transpileMember = function(transpiler, name) {
     if ("count"==name) {
         transpiler.append("length");
@@ -117,6 +141,16 @@ TextType.prototype.checkContainsAllOrAny = function(context, other) {
 
 TextType.prototype.checkSlice = function(context) {
 	return this;
+};
+
+
+TextType.prototype.declareSlice = function(transpiler, first, last) {
+    if(first) {
+        first.declare(transpiler);
+    }
+    if(last) {
+        last.declare(transpiler);
+    }
 };
 
 

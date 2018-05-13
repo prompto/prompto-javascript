@@ -121,6 +121,13 @@ UnresolvedSelector.prototype.resolveMethod = function(context) {
 };
 
 
+UnresolvedSelector.prototype.declare = function(transpiler) {
+    if(this.resolved==null)
+        this.resolve(transpiler.context, false);
+    this.resolved.declare(transpiler);
+};
+
+
 UnresolvedSelector.prototype.transpile = function(transpiler) {
     if(this.resolved==null)
         this.resolve(transpiler.context, false);

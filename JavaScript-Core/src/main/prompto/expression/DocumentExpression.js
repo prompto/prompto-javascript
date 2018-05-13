@@ -29,8 +29,12 @@ DocumentExpression.prototype.interpret = function(context) {
     }
 };
 
-DocumentExpression.prototype.transpile = function(transpiler) {
+DocumentExpression.prototype.declare = function(transpiler) {
     transpiler.require(Document);
+};
+
+
+DocumentExpression.prototype.transpile = function(transpiler) {
     if(!this.source)
         transpiler.append("new Document()");
     else

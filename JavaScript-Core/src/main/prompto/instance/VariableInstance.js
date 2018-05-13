@@ -73,6 +73,15 @@ VariableInstance.prototype.interpret = function(context) {
 	return context.getValue(this.id);
 };
 
+VariableInstance.prototype.declareAssign = function(transpiler, expression) {
+    if(transpiler.context.getRegisteredValue(this.name)==null) {
+        var type = expression.check(transpiler.context);
+        transpiler.context.registerValue(new Variable(this.id, type));
+    }
+    expression.declare(transpiler);
+};
+
+
 VariableInstance.prototype.transpileAssign = function(transpiler, expression) {
     if(transpiler.context.getRegisteredValue(this.name)==null) {
         var type = expression.check(transpiler.context);
@@ -83,6 +92,12 @@ VariableInstance.prototype.transpileAssign = function(transpiler, expression) {
     transpiler.append(" = ");
     expression.transpile(transpiler);
 };
+
+
+VariableInstance.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
 
 VariableInstance.prototype.transpile = function(transpiler) {
     transpiler.append(this.name);

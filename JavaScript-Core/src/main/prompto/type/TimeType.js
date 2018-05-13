@@ -31,6 +31,16 @@ TimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+TimeType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if (other instanceof PeriodType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
 TimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if (other instanceof PeriodType) {
         left.transpile(transpiler);
@@ -53,6 +63,14 @@ TimeType.prototype.checkSubtract = function(context, other) {
 	}
 };
 
+TimeType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    if (other instanceof TimeType || other instanceof PeriodType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else
+        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+};
+
 TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) {
     if (other instanceof TimeType) {
         left.transpile(transpiler);
@@ -67,6 +85,7 @@ TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) 
     } else
         return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
 };
+
 
 TimeType.prototype.checkCompare = function(context, other) {
 	if (other instanceof TimeType) {
@@ -97,6 +116,14 @@ TimeType.prototype.checkMember = function (context, name) {
 		return NativeType.prototype.checkMember.call(this, context, name);
 	}
 };
+
+
+TimeType.prototype.declareMember = function(transpiler, name) {
+    if (!("hour"===name || "minute"===name || "second"===name || "millisecond"===name)) {
+        NativeType.prototype.declareMember.call(this, transpiler, name);
+    }
+};
+
 
 TimeType.prototype.transpileMember = function(transpiler, name) {
     if ("hour"==name) {

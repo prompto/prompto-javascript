@@ -22,6 +22,12 @@ IntegerLiteral.prototype.check = function(context) {
 	return IntegerType.instance;
 };
 
+
+IntegerLiteral.prototype.declare = function(transpiler) {
+    // nothing to do;
+};
+
+
 IntegerLiteral.prototype.transpile = function(transpiler) {
     transpiler.append(this.text);
 };

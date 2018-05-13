@@ -22,35 +22,17 @@ DictionaryValue.prototype = Object.create(Value.prototype);
 DictionaryValue.prototype.constructor = DictionaryValue;
 
 DictionaryValue.prototype.toString = function() {
-	var names = Object.getOwnPropertyNames(this.dict);
-    var vals = names.map(function(name) {
-        return '"' + name + '":' + this.dict[name];
-	}, this);
-	return "{" + vals.join(", ") + "}";
+    return this.dict.toString();
 };
 
-
-DictionaryValue.merge = function(dict1, dict2) {
-    var dict = {};
-    for(var p in dict1.dict) {
-        dict[p] = dict1.dict[p];
-    }
-    for(var p in dict2.dict) {
-        dict[p] = dict2.dict[p];
-    }
-    return new DictionaryValue(dict1.type.itemType, dict);
-};
 
 DictionaryValue.prototype.isEmpty = function() {
-    for(var p in this.dict) {
-        return false;
-    }
-    return true;
+    return this.dict.isEmpty();
 };
 
 DictionaryValue.prototype.Add = function(context, value) {
     if (value instanceof DictionaryValue) {
-        return DictionaryValue.merge(this, value);
+        return new DictionaryValue(this.type.itemType, this.dict.add(value.dict));
     } else {
         throw new SyntaxError("Illegal: Dict + " + typeof(value));
     }
@@ -78,10 +60,9 @@ DictionaryValue.prototype.getMemberValue = function(context, name) {
         }
         return new SetValue(TextType.instance, keys);
     } else if ("values"==name) {
-        var list = []
-        for(p in this.dict) {
-            list.push(this.dict[p]); // no need to interpret now
-        }
+        var list = Object.getOwnPropertyNames(this.dict).map(function(name) {
+            return this.dict[name];
+        }, this);
         return new ListValue(this.type.itemType, list);
     } else {
         return Value.prototype.getMemberValue.call(this, context, name);
