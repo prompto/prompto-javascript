@@ -18,6 +18,20 @@ StrictSet.prototype.values = function() {
 };
 
 
+StrictSet.prototype.item = function(idx) {
+    var iter = this.set.values();
+    var item = iter.next();
+    while(--idx>=0 && !item.done)
+        item = iter.next();
+    if(item.done)
+        return null;
+    else
+        return item.value;
+};
+
+
+
+
 StrictSet.prototype.addAll = function(items) {
     if(items instanceof StrictSet)
         items = Array.from(items.values());

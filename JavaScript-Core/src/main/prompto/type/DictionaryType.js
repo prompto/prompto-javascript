@@ -129,6 +129,17 @@ DictionaryType.prototype.checkItem = function(context, other) {
 	}
 };
 
+DictionaryType.prototype.declareItem = function(transpiler, itemType, item) {
+    // nothing to do
+};
+
+
+DictionaryType.prototype.transpileItem = function(transpiler, itemType, item) {
+    transpiler.append("[");
+    item.transpile(transpiler);
+    transpiler.append("]");
+};
+
 
 DictionaryType.prototype.checkIterator = function(context) {
 	return new EntryType(this.itemType);

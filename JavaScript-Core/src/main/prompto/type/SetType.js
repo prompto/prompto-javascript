@@ -66,6 +66,16 @@ SetType.prototype.checkItem = function(context, other) {
 	}
 };
 
+SetType.prototype.declareItem = function(transpiler, itemType, item) {
+    // nothing to do
+};
+
+
+SetType.prototype.transpileItem = function(transpiler, itemType, item) {
+    transpiler.append(".item(");
+    item.transpile(transpiler);
+    transpiler.append("-1)");
+};
 
 SetType.prototype.declareContains = function(transpiler, other, container, item) {
     container.declare(transpiler);

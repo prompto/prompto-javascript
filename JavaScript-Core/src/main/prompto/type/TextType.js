@@ -129,6 +129,18 @@ TextType.prototype.checkItem = function(context, other) {
 	}
 };
 
+TextType.prototype.declareItem = function(transpiler, itemType, item) {
+    // nothing to do
+};
+
+
+TextType.prototype.transpileItem = function(transpiler, itemType, item) {
+    transpiler.append("[");
+    item.transpile(transpiler);
+    transpiler.append("-1]");
+};
+
+
 TextType.prototype.checkMember = function(context, name) {
    if ("count"==name) {
 	   return IntegerType.instance;

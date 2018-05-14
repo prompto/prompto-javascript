@@ -25,6 +25,20 @@ RangeType.prototype.checkItem = function(context, other) {
 	}
 };
 
+
+
+RangeType.prototype.declareItem = function(transpiler, itemType, item) {
+    // nothing to do
+};
+
+
+RangeType.prototype.transpileItem = function(transpiler, itemType, item) {
+    transpiler.append(".item(");
+    item.transpile(transpiler);
+    transpiler.append("-1)");
+};
+
+
 RangeType.prototype.checkSlice = function(context) {
 	return this;
 };
