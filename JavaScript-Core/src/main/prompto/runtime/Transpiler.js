@@ -205,6 +205,20 @@ ObjectUtils.arrayHasAny = function(items, noCheckEquals) {
     return set.hasAny(items, noCheckEquals);
 };
 
+ObjectUtils.arraySlice1Based = function(start, last) {
+    if(start)
+        start = start - 1;
+    else
+        start = 0;
+    if(!last)
+        return this.slice(start);
+    if(last >= 0)
+        return this.slice(start, last);
+    else
+        return this.slice(start, 1 + last);
+};
+
+
 ObjectUtils.stringHasAll = function(items) {
     if(StrictSet && items instanceof StrictSet)
         items = Array.from(items.values());
@@ -224,6 +238,17 @@ ObjectUtils.stringHasAny = function(items) {
             return true;
     }
     return false;
+};
+
+ObjectUtils.stringSlice = function(start, last) {
+    if(!start)
+        start = 1;
+    if(!last)
+        return this.substring(start - 1);
+    if(last >= 0)
+        return this.substring(start - 1, last);
+    else
+        return this.substring(start - 1, this.length + 1 + last)
 };
 
 ObjectUtils.formatInteger = function(format) {
@@ -274,10 +299,12 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
         transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
         transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
+        transpiler.lines.push("Array.prototype.slice1Based = " + ObjectUtils.arraySlice1Based.toString() + ";");
         transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
         transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
         transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
         transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
+        transpiler.lines.push("String.prototype.slice = " + ObjectUtils.stringSlice.toString() + ";");
         var method = locateMethod(context, methodName, cmdLineArgs);
         method.declare(transpiler);
         transpiler.appendAllRequired();

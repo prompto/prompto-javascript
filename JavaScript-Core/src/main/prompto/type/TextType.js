@@ -230,12 +230,11 @@ TextType.prototype.declareSlice = function(transpiler, first, last) {
 
 
 TextType.prototype.transpileSlice = function(transpiler, first, last) {
-    transpiler.append(".substring(");
+    transpiler.append(".slice(");
     if(first) {
         first.transpile(transpiler);
-        transpiler.append("-1");
     } else
-        transpiler.append("0");
+        transpiler.append("null");
     if(last) {
         transpiler.append(",");
         last.transpile(transpiler);

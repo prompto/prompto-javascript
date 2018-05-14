@@ -144,6 +144,26 @@ ListType.prototype.checkSlice = function(context) {
 	return this;
 };
 
+
+ListType.prototype.declareSlice = function(transpiler, first, last) {
+    // nothing to do
+};
+
+
+ListType.prototype.transpileSlice = function(transpiler, first, last) {
+    transpiler.append(".slice1Based(");
+    if(first) {
+        first.transpile(transpiler);
+    } else
+        transpiler.append("null");
+    if(last) {
+        transpiler.append(",");
+        last.transpile(transpiler);
+    }
+    transpiler.append(")");
+};
+
+
 ListType.prototype.declareContains = function(transpiler, other, container, item) {
     container.declare(transpiler);
     item.declare(transpiler);
