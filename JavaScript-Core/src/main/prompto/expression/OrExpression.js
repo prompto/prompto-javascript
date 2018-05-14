@@ -53,6 +53,17 @@ OrExpression.prototype.check = function(context) {
 	return lt.checkOr(context, rt);
 };
 
+OrExpression.prototype.declare = function(transpiler) {
+    this.left.declare(transpiler);
+    this.right.declare(transpiler);
+};
+OrExpression.prototype.transpile = function(transpiler) {
+    this.left.transpile(transpiler);
+    transpiler.append(" || ");
+    this.right.transpile(transpiler);
+};
+
+
 OrExpression.prototype.interpret = function(context) {
 	var lval = this.left.interpret(context);
 	var rval = this.right.interpret(context);

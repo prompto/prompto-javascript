@@ -60,6 +60,20 @@ AndExpression.prototype.interpret = function(context) {
 	return lval.And(rval);
 };
 
+
+AndExpression.prototype.declare = function(transpiler) {
+    this.left.declare(transpiler);
+    this.right.declare(transpiler);
+};
+
+
+AndExpression.prototype.transpile = function(transpiler) {
+    this.left.transpile(transpiler);
+    transpiler.append(" && ");
+    this.right.transpile(transpiler);
+};
+
+
 AndExpression.prototype.interpretAssert = function(context, test) {
     var lval = this.left.interpret(context);
     var rval = this.right.interpret(context);

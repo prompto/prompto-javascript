@@ -47,6 +47,20 @@ NotExpression.prototype.check = function(context) {
 	return type.checkNot(context);
 };
 
+
+
+NotExpression.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+};
+
+
+NotExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("!(");
+    this.expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 NotExpression.prototype.interpret = function(context) {
 	var val = this.expression.interpret(context);
 	return val.Not();
