@@ -110,6 +110,16 @@ CharacterType.prototype.checkCompare = function(context, other) {
 	return NativeType.prototype.checkCompare.apply(this, context, other);
 };
 
+CharacterType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+CharacterType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(" ").append(operator.toString()).append(" ");
+    right.transpile(transpiler);
+};
+
 CharacterType.prototype.checkRange = function(context, other) {
 	if(other instanceof CharacterType) {
 		return new RangeType(this);

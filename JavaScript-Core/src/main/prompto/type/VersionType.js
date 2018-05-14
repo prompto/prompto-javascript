@@ -21,4 +21,17 @@ VersionType.prototype.checkCompare = function(context, other) {
 	}
 };
 
+VersionType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+VersionType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".");
+    operator.transpile(transpiler);
+    transpiler.append("(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
 exports.VersionType = VersionType;

@@ -149,6 +149,26 @@ DateTime.prototype.equals = function(value) {
     return value instanceof DateTime && this.date.valueOf() == value.date.valueOf() && this.tzOffset == value.tzOffset;
 };
 
+DateTime.prototype.gt = function(other) {
+    return other instanceof DateTime && this.compareTo(other.date, other.tzOffset) > 0;
+};
+
+
+DateTime.prototype.gte = function(other) {
+    return other instanceof DateTime && this.compareTo(other.date, other.tzOffset) >= 0;
+};
+
+
+DateTime.prototype.lt = function(other) {
+    return other instanceof DateTime && this.compareTo(other.date, other.tzOffset) < 0;
+};
+
+
+DateTime.prototype.lte = function(other) {
+    return other instanceof DateTime && this.compareTo(other.date, other.tzOffset) <= 0;
+};
+
+
 DateTime.prototype.compareTo = function(date, tzOffset) {
     var a = this.date.valueOf() + this.tzOffset*60000;
     var b = date.valueOf() + tzOffset*60000;

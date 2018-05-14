@@ -25,6 +25,26 @@ LocalTime.prototype.equals = function(obj) {
     return obj instanceof LocalTime && this.valueOf() == obj.valueOf();
 };
 
+
+LocalTime.prototype.gt = function(other) {
+    return other instanceof LocalTime && this.valueOf() > other.valueOf();
+};
+
+
+LocalTime.prototype.gte = function(other) {
+    return other instanceof LocalTime && this.valueOf() >= other.valueOf();
+};
+
+LocalTime.prototype.lt = function(other) {
+    return other instanceof LocalTime && this.valueOf() < other.valueOf();
+};
+
+
+LocalTime.prototype.lte = function(other) {
+    return other instanceof LocalTime && this.valueOf() <= other.valueOf();
+};
+
+
 LocalTime.prototype.addPeriod = function(period) {
     var time = new LocalTime();
     var hour = this.getUTCHours() + (period.hours || 0);

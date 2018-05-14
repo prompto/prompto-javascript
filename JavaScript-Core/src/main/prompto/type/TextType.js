@@ -108,6 +108,19 @@ TextType.prototype.checkCompare = function(context, other) {
 	return NativeType.prototype.checkCompare.call(this, context, other);
 };
 
+
+TextType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+
+TextType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(" ").append(operator.toString()).append(" ");
+    right.transpile(transpiler);
+};
+
+
 TextType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {
 		return CharacterType.instance;

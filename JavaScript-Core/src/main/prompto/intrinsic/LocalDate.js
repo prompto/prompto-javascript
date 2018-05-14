@@ -17,9 +17,27 @@ LocalDate.prototype.toString = function() {
 };
 
 LocalDate.prototype.equals = function(other) {
-    return this.valueOf() == other.valueOf();
+    return other instanceof LocalDate && this.valueOf() == other.valueOf();
 };
 
+LocalDate.prototype.gt = function(other) {
+    return other instanceof LocalDate && this.valueOf() > other.valueOf();
+};
+
+
+LocalDate.prototype.gte = function(other) {
+    return other instanceof LocalDate && this.valueOf() >= other.valueOf();
+};
+
+
+LocalDate.prototype.lt = function(other) {
+    return other instanceof LocalDate && this.valueOf() < other.valueOf();
+};
+
+
+LocalDate.prototype.lte = function(other) {
+    return other instanceof LocalDate && this.valueOf() <= other.valueOf();
+};
 
 LocalDate.prototype.addPeriod = function (period) {
     var result = new LocalDate();

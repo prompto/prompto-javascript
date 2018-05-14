@@ -230,6 +230,22 @@ BaseType.prototype.checkCompare = function(context, other) {
 };
 
 
+BaseType.prototype.declareCompare = function(transpiler, other) {
+    if(other instanceof EnumeratedNativeType)
+        return this.declareCompare(transpiler, other.derivedFrom);
+    else
+        throw new SyntaxError(this.name + " cannot declare compare " + other.name);
+};
+
+
+BaseType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    if(other instanceof EnumeratedNativeType)
+        return this.transpileCompare(transpiler, other.derivedFrom, operator, left, right);
+    else
+        throw new SyntaxError(this.name + " cannot transpile compare " + other.name);
+};
+
+
 BaseType.prototype.checkContains = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkContains(context, other.derivedFrom);

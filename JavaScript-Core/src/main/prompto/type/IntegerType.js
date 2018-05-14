@@ -252,6 +252,19 @@ IntegerType.prototype.checkCompare = function(context, other) {
 };
 
 
+
+IntegerType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+IntegerType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(" ").append(operator.toString()).append(" ");
+    right.transpile(transpiler);
+};
+
+
+
 IntegerType.prototype.checkRange = function(context, other) {
 	if(other instanceof IntegerType) {
 		return new RangeType(this);

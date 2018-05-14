@@ -95,6 +95,21 @@ TimeType.prototype.checkCompare = function(context, other) {
 	}
 };
 
+
+TimeType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+TimeType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".");
+    operator.transpile(transpiler);
+    transpiler.append("(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 TimeType.prototype.checkRange = function(context, other) {
 	if (other instanceof TimeType) {
 		return new RangeType(this);

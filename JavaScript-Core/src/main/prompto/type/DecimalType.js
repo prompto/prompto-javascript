@@ -214,6 +214,18 @@ DecimalType.prototype.checkCompare = function(context, other) {
 	}
 };
 
+
+DecimalType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+DecimalType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(" ").append(operator.toString()).append(" ");
+    right.transpile(transpiler);
+};
+
+
 DecimalType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     if (typeof(value)=='number') {
         return new DecimalValue(value);

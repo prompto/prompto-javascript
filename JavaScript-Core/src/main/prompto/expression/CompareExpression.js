@@ -39,6 +39,21 @@ CompareExpression.prototype.interpret = function(context) {
 	return this.compare(context, lval, rval);
 };
 
+CompareExpression.prototype.declare = function(transpiler) {
+    this.left.declare(transpiler);
+    this.right.declare(transpiler);
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.declareCompare(transpiler, rt);
+};
+
+
+CompareExpression.prototype.transpile = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    var rt = this.right.check(transpiler.context);
+    return lt.transpileCompare(transpiler, rt, this.operator, this.left, this.right);
+};
+
 CompareExpression.prototype.compare = function(context, lval, rval) {
 	var cmp = lval.CompareTo(context, rval);
 	switch (this.operator) {

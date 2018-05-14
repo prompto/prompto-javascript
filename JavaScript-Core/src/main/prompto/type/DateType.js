@@ -94,6 +94,29 @@ DateType.prototype.checkCompare = function(context, other) {
 	}
 };
 
+
+DateType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+DateType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".");
+    operator.transpile(transpiler);
+    transpiler.append("(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+DateType.prototype.checkRange = function(context, other) {
+    if(other instanceof CharacterType) {
+        return new RangeType(this);
+    } else {
+        return NativeType.prototype.checkRange.call(this, context, other);
+    }
+};
+
+
 DateType.prototype.checkRange = function(context, other) {
 	if (other instanceof DateType) {
 		return new RangeType(this);

@@ -29,6 +29,23 @@ Version.prototype.asInt = function() {
     return (this.major << 24) | (this.minor << 16) | this.fix;
 };
 
+Version.prototype.gt = function(other) {
+    return other instanceof Version && this.asInt() > other.asInt();
+};
+
+
+Version.prototype.gte = function(other) {
+    return other instanceof Version && this.asInt() >= other.asInt();
+};
+
+Version.prototype.lt = function(other) {
+    return other instanceof Version && this.asInt() < other.asInt();
+};
+
+Version.prototype.lte = function(other) {
+    return other instanceof Version && this.asInt() <= other.asInt();
+};
+
 
 Version.prototype.cmp = function(value) {
     var a = this.asInt();

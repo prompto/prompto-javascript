@@ -98,6 +98,19 @@ DateTimeType.prototype.checkCompare = function(context, other) {
 	}
 };
 
+DateTimeType.prototype.declareCompare = function(context, other) {
+    // nothing to do
+};
+
+DateTimeType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".");
+    operator.transpile(transpiler);
+    transpiler.append("(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
 DateTimeType.prototype.checkMember = function(context, name) {
 	if ("year"==name) {
 		return IntegerType.instance;
