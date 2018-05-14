@@ -86,15 +86,6 @@ RangeValue.prototype.checkLast = function(li, size) {
 	return value;
 };
 
-/*
- @Override
- public Iterable<T> getItems(Context context) {
- return new RangeIterable(context);
- }
-
-*/
-
-
 RangeValue.prototype.getIterator = function(context) {
 	return new RangeIterator(context, this);
 };
@@ -114,17 +105,5 @@ RangeIterator.prototype.next = function() {
 	return this.range.getItemInContext(this.context, new IntegerValue(++this.index));
 };
 
-/*
-@Override
-public boolean isEmpty() {
-	return size()==0;
-}
-
-public abstract long size();
-public abstract int compare(T o1,T o2);
-public abstract T getItem(long index);
-public abstract RangeValue<T> newInstance(T left,T right);
-
-*/
 
 exports.RangeValue = RangeValue;

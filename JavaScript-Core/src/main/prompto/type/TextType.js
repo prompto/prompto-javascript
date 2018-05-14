@@ -230,7 +230,7 @@ TextType.prototype.declareSlice = function(transpiler, first, last) {
 
 
 TextType.prototype.transpileSlice = function(transpiler, first, last) {
-    transpiler.append(".slice(");
+    transpiler.append(".slice1Based(");
     if(first) {
         first.transpile(transpiler);
     } else

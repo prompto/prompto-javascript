@@ -43,6 +43,32 @@ RangeType.prototype.checkSlice = function(context) {
 	return this;
 };
 
+
+RangeType.prototype.declareSlice = function(transpiler, first, last) {
+    if(first) {
+        first.declare(transpiler);
+    }
+    if(last) {
+        last.declare(transpiler);
+    }
+};
+
+
+RangeType.prototype.transpileSlice = function(transpiler, first, last) {
+    transpiler.append(".slice1Based(");
+    if(first) {
+        first.transpile(transpiler);
+    } else
+        transpiler.append("null");
+    if(last) {
+        transpiler.append(",");
+        last.transpile(transpiler);
+    }
+    transpiler.append(")");
+};
+
+
+
 RangeType.prototype.checkIterator = function(context) {
 	return this.itemType;
 };

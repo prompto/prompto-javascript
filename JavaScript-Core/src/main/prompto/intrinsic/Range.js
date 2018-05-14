@@ -34,6 +34,14 @@ Range.prototype.hasAll = function(items) {
 };
 
 
+Range.prototype.slice1Based = function(start, end) {
+    var range = Object.create(this);
+    range.first = start ? this.item(start-1) : this.first;
+    range.last = end ? ( end > 0 ? this.item(end-1) : this.item(this.length + 1 + end) ) : this.last;
+    return range;
+};
+
+
 Range.prototype.hasAny = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = Array.from(items.values());

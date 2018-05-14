@@ -293,7 +293,7 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         var transpiler = new Transpiler(context);
         var equalObjects = require("../utils/Utils").equalObjects;
         transpiler.require(equalObjects);
-        transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + " };");
+        transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
         transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
         transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
         transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
@@ -304,7 +304,7 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
         transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
         transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
         transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
-        transpiler.lines.push("String.prototype.slice = " + ObjectUtils.stringSlice.toString() + ";");
+        transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
         var method = locateMethod(context, methodName, cmdLineArgs);
         method.declare(transpiler);
         transpiler.appendAllRequired();
