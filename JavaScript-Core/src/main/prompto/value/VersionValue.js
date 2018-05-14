@@ -1,59 +1,50 @@
 var Value = require("./Value").Value;
+var Version = require("../intrinsic/Version").Version;
 var VersionType = null;
 
 exports.resolve = function() {
     VersionType = require("../type/VersionType").VersionType;
 };
 
-function VersionValue(major, minor, fix) {
+function VersionValue(version) {
     Value.call(this, VersionType.instance);
-	this.major = major;
-    this.minor = minor;
-    this.fix = fix;
+    this.version = version;
 	return this;
 }
 
 VersionValue.prototype = Object.create(Value.prototype);
 VersionValue.prototype.constructor = VersionValue;
 
-VersionValue.Parse = function(text) {
-    var d1 = text.indexOf('.');
-    var major = parseInt(text.substring(0, d1));
-    var d2 = text.indexOf('.', d1 + 1);
-    var minor = parseInt(text.substring(d1 + 1, d2));
-    var fix = parseInt(text.substring(d2 + 1));
-    return new VersionValue(major, minor, fix);
-};
+Object.defineProperty(VersionValue.prototype, "major", {
+    get: function() { return this.version.major; }
+});
+
+Object.defineProperty(VersionValue.prototype, "minor", {
+    get: function() { return this.version.major; }
+});
+
+Object.defineProperty(VersionValue.prototype, "fix", {
+    get: function() { return this.version.major; }
+});
 
 VersionValue.prototype.toString = function() {
-    return "" + this.major + "." + this.minor + "+" + this.fix;
+    return this.version.toString();
 };
 
-VersionValue.prototype.asInt = function() {
-    return (this.major << 24) | (this.minor << 16) | this.fix;
-};
 
 
 VersionValue.prototype.CompareTo = function(context, value) {
     if (value instanceof VersionValue) {
-        return this.cmp(value);
+        return this.version.cmp(value.version);
     } else {
         throw new SyntaxError("Illegal comparison: VersionValue and " + typeof(value));
     }
 };
 
 
-
-VersionValue.prototype.cmp = function(value) {
-    var a = this.asInt();
-    var b = value.asInt();
-    return a > b ? 1 : (a == b ? 0 : -1);
-};
-
-
 VersionValue.prototype.equals = function(obj) {
     if (obj instanceof VersionValue) {
-        return this.asInt() == obj.asInt();
+        return this.version.equals(obj.version);
     } else {
         return false;
     }

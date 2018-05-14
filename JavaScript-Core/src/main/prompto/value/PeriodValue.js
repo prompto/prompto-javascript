@@ -64,14 +64,7 @@ PeriodValue.prototype.toString = function() {
 
 PeriodValue.prototype.equals = function(obj) {
     if (obj instanceof PeriodValue) {
-        return this.years == obj.years &&
-            this.months == obj.months &&
-            this.weeks == obj.weeks &&
-            this.days == obj.days &&
-            this.hours == obj.hours &&
-            this.minutes == obj.minutes &&
-            this.seconds == obj.seconds &&
-            this.millis == obj.millis;
+        return this.value.equals(obj.value);
     } else {
         return false;
     }

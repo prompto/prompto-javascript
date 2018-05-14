@@ -44,23 +44,6 @@ TimeValue.prototype.Subtract = function(context, value) {
 	}
 };
 
-
-/*
-@Override
-public IValue Subtract(Context context, IValue value) throws PromptoError {
-	if (value instanceof TimeValue) {
-		LocalTime other = ((TimeValue) value).value;
-		org.joda.time.PeriodValue res = new org.joda.time.PeriodValue(0, 0, 0, 0, this.value.getHourOfDay() - other.getHourOfDay(), this.value.getMinuteOfHour() - other.getMinuteOfHour(), this.value.getSecondOfMinute() - other.getSecondOfMinute(), this.value.getMillisOfSecond()
-				- other.getMillisOfSecond());
-		return new PeriodValue(res);
-	} else if (value instanceof PeriodValue)
-		return this.minus((PeriodValue) value);
-	else
-		throw new SyntaxError("Illegal: TimeValue - " + value.getClass().getSimpleName());
-}
-
-*/
-
 TimeValue.prototype.CompareTo = function(context, value) {
 	if (value instanceof TimeValue) {
 		return this.cmp(value);
@@ -83,18 +66,6 @@ TimeValue.prototype.getMemberValue = function(context, name) {
 	}
 };
 
-/*
-@Override
-public Object ConvertTo(Class<?> type) {
-	return value;
-}
-
-public long getMillisOfDay() {
-	return value.getMillisOfDay();
-}
-
-*/
-
 TimeValue.prototype.cmp = function(obj) {
 	var a = this.value.valueOf();
 	var b = obj.value.valueOf();
@@ -103,7 +74,7 @@ TimeValue.prototype.cmp = function(obj) {
 
 TimeValue.prototype.equals = function(obj) {
 	if (obj instanceof TimeValue) {
-		return this.value.valueOf() == obj.value.valueOf();
+		return this.value.equals(obj.value);
 	} else {
 		return false;
 	}

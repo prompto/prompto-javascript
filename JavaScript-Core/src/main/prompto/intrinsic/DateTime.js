@@ -146,7 +146,7 @@ DateTime.prototype.toString = function() {
 
 
 DateTime.prototype.equals = function(value) {
-    return this.date.valueOf() == value.date.valueOf() && this.tzOffset == value.tzOffset;
+    return value instanceof DateTime && this.date.valueOf() == value.date.valueOf() && this.tzOffset == value.tzOffset;
 };
 
 DateTime.prototype.compareTo = function(date, tzOffset) {

@@ -42,7 +42,7 @@ DocumentType.prototype.transpileMember = function(transpiler, name) {
     if ("text"!==name) {
         transpiler.append(name);
     } else {
-        ContainerType.prototype.transpileMember.call(this, transpiler, name);
+        NativeType.prototype.transpileMember.call(this, transpiler, name);
     }
 };
 

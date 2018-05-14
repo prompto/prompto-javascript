@@ -84,7 +84,7 @@ DateValue.prototype.getMemberValue = function(context, name) {
 
 DateValue.prototype.equals = function(obj) {
     if (obj instanceof DateValue) {
-        return this.value.valueOf() == obj.value.valueOf();
+        return this.value.equals(obj.value);
     } else {
         return false;
     }

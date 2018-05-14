@@ -116,20 +116,25 @@ MethodCall.prototype.transpile = function(transpiler) {
         declaration.transpileCall(transpiler, this.assignments);
     } else {
         this.method.transpile(transpiler);
-        transpiler.append("(");
         var assignments = this.makeAssignments(transpiler.context, declaration);
-        assignments.forEach(function(assignment) {
-            var argType = assignment.argument.getType(transpiler.context);
-            var expression = assignment.resolve(transpiler.context, declaration, false);
-            var expType = expression.check(transpiler.context);
-            if(argType===IntegerType.instance && expType===DecimalType.instance) {
-                transpiler.append("Math.round(");
-                expression.transpile(transpiler);
-                transpiler.append(")");
-            } else
-                expression.transpile(transpiler);
-        });
-        transpiler.append(")");
+        if(assignments.length > 0) {
+            transpiler.append("(");
+            assignments.forEach(function (assignment) {
+                var argType = assignment.argument.getType(transpiler.context);
+                var expression = assignment.resolve(transpiler.context, declaration, false);
+                var expType = expression.check(transpiler.context);
+                if (argType === IntegerType.instance && expType === DecimalType.instance) {
+                    transpiler.append("Math.round(");
+                    expression.transpile(transpiler);
+                    transpiler.append(")");
+                } else
+                    expression.transpile(transpiler);
+                transpiler.append(", ");
+            });
+            transpiler.trimLast(2);
+            transpiler.append(")");
+        } else
+            transpiler.append("()");
     }
 };
 

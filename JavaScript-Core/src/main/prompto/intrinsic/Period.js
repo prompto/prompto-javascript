@@ -85,6 +85,19 @@ Period.parse = function (text) {
     return new Period(data);
 };
 
+
+Period.prototype.equals = function(obj) {
+    return this.years == obj.years &&
+        this.months == obj.months &&
+        this.weeks == obj.weeks &&
+        this.days == obj.days &&
+        this.hours == obj.hours &&
+        this.minutes == obj.minutes &&
+        this.seconds == obj.seconds &&
+        this.millis == obj.millis;
+};
+
+
 Period.prototype.minus = function() {
     var data = [];
     data[0] = -this.years;

@@ -229,6 +229,10 @@ EqualsExpression.prototype.readFieldName = function(exp) {
 EqualsExpression.prototype.declare = function(transpiler) {
     this.left.declare(transpiler);
     this.right.declare(transpiler);
+    if(this.operator === EqOp.ROUGHLY) {
+        var removeAccents = require("../utils/Utils").removeAccents;
+        transpiler.require(removeAccents);
+    }
 };
 
 EqualsExpression.prototype.transpile = function(transpiler) {
@@ -248,12 +252,38 @@ EqualsExpression.prototype.transpile = function(transpiler) {
         case EqOp.NOT_CONTAINS:
             this.transpileNotContains(transpiler);
             break;
+        case EqOp.IS:
+            this.transpileIs(transpiler);
+            break;
+        case EqOp.IS_NOT:
+            this.transpileIsNot(transpiler);
+            break;
         case EqOp.IS_A:
             this.transpileIsA(transpiler);
             break;
         default:
             throw new Error("Cannot transpile:" + this.operator.toString());
     }
+};
+
+EqualsExpression.prototype.transpileRoughly = function(transpiler) {
+    transpiler.append("removeAccents(");
+    this.left.transpile(transpiler);
+    transpiler.append(").toLowerCase() === removeAccents(");
+    this.right.transpile(transpiler);
+    transpiler.append(").toLowerCase()");
+};
+
+EqualsExpression.prototype.transpileIs = function(transpiler) {
+    this.left.transpile(transpiler);
+    transpiler.append(" === ");
+    this.right.transpile(transpiler);
+};
+
+EqualsExpression.prototype.transpileIsNot = function(transpiler) {
+    this.left.transpile(transpiler);
+    transpiler.append(" !== ");
+    this.right.transpile(transpiler);
 };
 
 EqualsExpression.prototype.transpileEquals = function(transpiler) {
@@ -268,7 +298,22 @@ EqualsExpression.prototype.transpileEquals = function(transpiler) {
         this.right.transpile(transpiler);
         transpiler.append(")");
     }
+};
 
+
+EqualsExpression.prototype.transpileNotEquals = function(transpiler) {
+    var lt = this.left.check(transpiler.context);
+    if(lt instanceof BooleanType || lt instanceof IntegerType || lt instanceof DecimalType || lt instanceof CharacterType || lt instanceof TextType) {
+        this.left.transpile(transpiler);
+        transpiler.append(" !== ");
+        this.right.transpile(transpiler);
+    } else {
+        transpiler.append("!");
+        this.left.transpile(transpiler);
+        transpiler.append(".equals(");
+        this.right.transpile(transpiler);
+        transpiler.append(")");
+    }
 };
 
 EqualsExpression.prototype.transpileIsA = function(transpiler) {

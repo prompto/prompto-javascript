@@ -178,6 +178,22 @@ ObjectUtils.arrayToString = function() {
     return '[' + this.join(', ') + ']';
 };
 
+ObjectUtils.arrayEquals = function(o) {
+    o = o || null;
+    if(this===o) {
+        return true;
+    }
+    if(!Array.isArray(o) || this.length !== o.length) {
+        return false;
+    }
+    for(var i=0;i<this.length;i++) {
+        if(!equalObjects(this[i], o[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 ObjectUtils.arrayHasAll = function(items, noCheckEquals) {
     var set = new StrictSet(this);
     return set.hasAll(items, noCheckEquals);
@@ -250,11 +266,14 @@ Transpiler.transpile = function(context, methodName, cmdLineArgs) {
     try {
         patchObject();
         var transpiler = new Transpiler(context);
+        var equalObjects = require("../utils/Utils").equalObjects;
+        transpiler.require(equalObjects);
         transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + " };");
         transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
         transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
         transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
         transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
+        transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
         transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
         transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
         transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");

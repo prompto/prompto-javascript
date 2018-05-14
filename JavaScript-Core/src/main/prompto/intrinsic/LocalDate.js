@@ -16,6 +16,10 @@ LocalDate.prototype.toString = function() {
     return this.toISOString().substring(0, 10);
 };
 
+LocalDate.prototype.equals = function(other) {
+    return this.valueOf() == other.valueOf();
+};
+
 
 LocalDate.prototype.addPeriod = function (period) {
     var result = new LocalDate();

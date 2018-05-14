@@ -14,6 +14,15 @@ Range.prototype.values = function() {
     };
 };
 
+Range.prototype.equals = function(obj) {
+    if(Object.is(this, obj))
+        return true;
+    else if(Object.getPrototypeOf(this) === Object.getPrototypeOf(obj))
+        return equalObjects(this.first, obj.first) && equalObjects(this.last, obj.last);
+    else
+        return false;
+};
+
 Range.prototype.hasAll = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = Array.from(items.values());
