@@ -19,6 +19,7 @@ var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
 var DataStore = require("../store/DataStore").DataStore;
+var Variable = require("../runtime/Variable").Variable;
 var Score = require("../runtime/Score").Score;
 
 exports.resolve = function() {
@@ -585,5 +586,36 @@ CategoryType.prototype.loadEnumValue = function(context, value, name) {
     return context.getRegisteredValue(name);
 };
 
+
+CategoryType.prototype.declareSorted = function(transpiler, key) {
+    // nothing to do
+};
+
+CategoryType.prototype.transpileSorted = function(transpiler, key, desc) {
+    key = key || new Variable(new Identifier("key"), TextType.instance);
+    transpiler.append("function(o1, o2) { return ");
+    this.transpileEqualKeys(transpiler, key);
+    transpiler.append(" ? 0 : ");
+    this.transpileGreaterKeys(transpiler, key);
+    transpiler.append(" ? ");
+    if(desc)
+        transpiler.append("-1 : 1; }");
+    else
+        transpiler.append("1 : -1; }");
+};
+
+CategoryType.prototype.transpileEqualKeys = function(transpiler, key) {
+    transpiler.append("o1.");
+    key.transpile(transpiler);
+    transpiler.append(" === o2.");
+    key.transpile(transpiler);
+};
+
+CategoryType.prototype.transpileGreaterKeys = function(transpiler, key) {
+    transpiler.append("o1.");
+    key.transpile(transpiler);
+    transpiler.append(" > o2.");
+    key.transpile(transpiler);
+};
 
 exports.CategoryType = CategoryType;

@@ -414,6 +414,10 @@ BaseType.prototype.readJSONValue = function(context, node, parts) {
 };
 
 
+BaseType.prototype.declareSorted = function(transpiler, key) {
+    throw new Error("Cannot declare sorted from " + this.name);
+};
+
 BaseType.prototype.sort = function(context, list, desc) {
     throw new Error("Unsupported!")
 };

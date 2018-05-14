@@ -72,6 +72,7 @@ SortedExpression.prototype.check = function(context) {
 	return type;
 };
 
+
 SortedExpression.prototype.interpret = function(context) {
 	var type = this.source.check(context);
 	if(!(type instanceof ListType || type instanceof TupleType || type instanceof SetType)) {
@@ -91,5 +92,22 @@ SortedExpression.prototype.interpret = function(context) {
 		return itemType.sort(context, coll, this.desc);
 	}
 };
+
+
+SortedExpression.prototype.declare = function(transpiler) {
+    this.source.declare(transpiler);
+    var type = this.source.check(transpiler.context);
+    type.itemType.declareSorted(transpiler, this.key);
+};
+
+SortedExpression.prototype.transpile = function(transpiler) {
+    var type = this.source.check(transpiler.context);
+    transpiler.append("Array.from(");
+    this.source.transpile(transpiler);
+    transpiler.append(").sort(");
+    type.itemType.transpileSorted(transpiler, this.key, this.desc);
+    transpiler.append(")");
+};
+
 
 exports.SortedExpression = SortedExpression;

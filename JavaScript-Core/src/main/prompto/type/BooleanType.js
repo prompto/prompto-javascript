@@ -46,4 +46,12 @@ BooleanType.prototype.convertJavaScriptValueToPromptoValue = function(context, v
 	}
 };
 
+BooleanType.prototype.transpileSorted = function(transpiler, key, desc) {
+    if(desc)
+        transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? -1 : 1; }");
+    else
+        transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? 1 : -1; }");
+};
+
+
 exports.BooleanType = BooleanType;

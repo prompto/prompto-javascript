@@ -44,5 +44,10 @@ ContainerType.prototype.transpileMember = function(transpiler, name) {
     }
 };
 
+
+ContainerType.prototype.declareSorted = function(transpiler, key) {
+    // nothing to do
+};
+
 exports.ContainerType = ContainerType;
 

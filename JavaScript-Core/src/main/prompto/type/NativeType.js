@@ -29,10 +29,22 @@ NativeType.prototype.sort = function(context, list, desc) {
     function cmp(o1, o2) {
         o1 = o1.value;
         o2 = o2.value;
-        return o1 > o2 ? 1 : o1 == o2 ? 0 : -1;
+        return o1 > o2 ? 1 : o1 === o2 ? 0 : -1;
     }
     return this.doSort(context, list, cmp, desc);
 };
+
+NativeType.prototype.declareSorted = function(transpiler, key) {
+    // nothing to do
+};
+
+NativeType.prototype.transpileSorted = function(transpiler, key, desc) {
+    if(desc)
+        transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? -1 : 1; }");
+    else
+        transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? 1 : -1; }");
+};
+
 
 exports.NativeType = NativeType;
 

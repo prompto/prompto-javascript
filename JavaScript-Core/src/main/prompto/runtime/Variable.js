@@ -18,6 +18,10 @@ Variable.prototype.toString = function() {
 	return this.name;
 }
 
+Variable.prototype.transpile = function(transpiler) {
+    transpiler.append(this.name);
+}
+
 Variable.prototype.getType = function(context) {
     return this.type;
 };
