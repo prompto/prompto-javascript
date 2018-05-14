@@ -113,6 +113,30 @@ CategoryType.prototype.checkMultiply = function(context, other, tryReverse) {
 }
 
 
+CategoryType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
+    var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
+    if(type!=null) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+        type.declare(transpiler);
+    } else
+        return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+};
+
+
+CategoryType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
+    var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
+    if(type!=null) {
+        left.transpile(transpiler);
+        transpiler.append(".operator_MULTIPLY(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
+
+};
+
+
 CategoryType.prototype.checkDivide = function(context, other) {
     var type = this.checkOperator(context, other, false, Operator.DIVIDE);
     if(type!=null)
@@ -122,6 +146,26 @@ CategoryType.prototype.checkDivide = function(context, other) {
 }
 
 
+CategoryType.prototype.declareDivide = function(transpiler, other, left, right) {
+    var type = this.checkOperator(transpiler.context, other, false, Operator.DIVIDE);
+    if(type!=null) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+        type.declare(transpiler);
+    } else
+        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+};
+
+
+CategoryType.prototype.transpileDivide = function(transpiler, other, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".operator_DIVIDE(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+
 CategoryType.prototype.checkIntDivide = function(context, other) {
     var type = this.checkOperator(context, other, false, Operator.IDIVIDE);
     if(type!=null)
@@ -129,6 +173,24 @@ CategoryType.prototype.checkIntDivide = function(context, other) {
     else
         return BaseType.prototype.checkIntDivide.call(this, context, other);
 }
+
+CategoryType.prototype.declareIntDivide = function(transpiler, other, left, right) {
+    var type = this.checkOperator(transpiler.context, other, false, Operator.IDIVIDE);
+    if(type!=null) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+        type.declare(transpiler);
+    } else
+        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+};
+
+
+CategoryType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".operator_IDIVIDE(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
 
 
 CategoryType.prototype.checkModulo = function(context, other) {
@@ -140,6 +202,25 @@ CategoryType.prototype.checkModulo = function(context, other) {
 }
 
 
+CategoryType.prototype.declareModulo = function(transpiler, other, left, right) {
+    var type = this.checkOperator(transpiler.context, other, false, Operator.MODULO);
+    if(type!=null) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+        type.declare(transpiler);
+    } else
+        return NativeType.prototype.declareModulo.call(this, context, other, left, right);
+};
+
+
+CategoryType.prototype.transpileModulo = function(transpiler, other, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".operator_MODULO(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 CategoryType.prototype.checkAdd = function(context, other, tryReverse) {
     var type = this.checkOperator(context, other, tryReverse, Operator.PLUS);
     if(type!=null)
@@ -149,6 +230,24 @@ CategoryType.prototype.checkAdd = function(context, other, tryReverse) {
 }
 
 
+CategoryType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.PLUS);
+    if(type!=null) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+        type.declare(transpiler);
+    } else
+        return BaseType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+};
+
+CategoryType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".operator_PLUS(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 CategoryType.prototype.checkSubtract = function(context, other) {
     var type = this.checkOperator(context, other, false, Operator.MINUS);
     if(type!=null)
@@ -156,6 +255,27 @@ CategoryType.prototype.checkSubtract = function(context, other) {
     else
         return BaseType.prototype.checkSubtract.call(this, context, other);
 }
+
+
+CategoryType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    var type = this.checkOperator(transpiler.context, other, false, Operator.MINUS);
+    if(type!=null) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+        type.declare(transpiler);
+    } else
+        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+};
+
+
+CategoryType.prototype.transpileSubtract = function(transpiler, other, left, right) {
+    left.transpile(transpiler);
+    transpiler.append(".operator_MINUS(");
+    right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 
 CategoryType.prototype.checkOperator = function(context, other, tryReverse, operator) {
     var actual = this.getDeclaration(context);
