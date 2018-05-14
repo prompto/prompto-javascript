@@ -214,6 +214,14 @@ BaseType.prototype.checkMinus = function(context) {
 };
 
 
+BaseType.prototype.declareMinus = function(transpiler, value) {
+    if(this instanceof EnumeratedNativeType)
+        return this.derivedFrom.declareMinus(transpiler, value);
+    else
+        throw new SyntaxError("Cannot declare negate " + this.name);
+};
+
+
 BaseType.prototype.transpileMinus = function(transpiler, value) {
     if(this instanceof EnumeratedNativeType)
         return this.derivedFrom.transpileMinus(transpiler, value);

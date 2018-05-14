@@ -106,6 +106,10 @@ PeriodType.prototype.checkMinus = function(context) {
 
 
 
+PeriodType.prototype.declareMinus = function(transpiler, value) {
+    // nothing to do
+};
+
 PeriodType.prototype.transpileMinus = function(transpiler, value) {
     value.transpile(transpiler);
     transpiler.append(".minus()");

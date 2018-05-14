@@ -192,6 +192,11 @@ DecimalType.prototype.checkMinus = function(context) {
 };
 
 
+DecimalType.prototype.declareMinus = function(transpiler, value) {
+    // nothing to do
+};
+
+
 DecimalType.prototype.transpileMinus = function(transpiler, value) {
     transpiler.append(" -");
     value.transpile(transpiler);

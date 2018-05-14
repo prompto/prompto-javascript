@@ -19,9 +19,16 @@ MinusExpression.prototype.check = function(context) {
 	return type.checkMinus(context);
 };
 
-MinusExpression.prototype.interpret = function(context){
+MinusExpression.prototype.interpret = function(context) {
 	var val = this.expression.interpret(context);
 	return val.Minus(context);
+};
+
+
+MinusExpression.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+    var type = this.expression.check(transpiler.context);
+    return type.declareMinus(transpiler, this.expression);
 };
 
 MinusExpression.prototype.transpile = function(transpiler) {

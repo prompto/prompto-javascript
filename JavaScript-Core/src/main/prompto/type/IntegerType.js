@@ -237,6 +237,10 @@ IntegerType.prototype.checkMinus = function(context) {
 };
 
 
+IntegerType.prototype.declareMinus = function(transpiler, value) {
+    // nothing to do
+};
+
 
 IntegerType.prototype.transpileMinus = function(transpiler, value) {
     transpiler.append(" -");
