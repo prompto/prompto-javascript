@@ -17,21 +17,6 @@ function AssignTupleStatement(names, expression) {
 AssignTupleStatement.prototype = Object.create(SimpleStatement.prototype);
 AssignTupleStatement.prototype.constructor = AssignTupleStatement;
 
-/*
-@Override
-public boolean equals(Object obj) {
-	if(obj==this)
-		return true;
-	if(obj==null)
-		return false;
-	if(!(obj instanceof AssignTupleStatement))
-		return false;
-	AssignTupleStatement other = (AssignTupleStatement)obj;
-	return this.getNames().equals(other.getNames())
-			&& this.getExpression().equals(other.getExpression());
-}
-
-*/
 
 AssignTupleStatement.prototype.check = function(context) {
 	var type = this.expression.check(context);
@@ -41,17 +26,39 @@ AssignTupleStatement.prototype.check = function(context) {
 	this.names.forEach(function(name) {
 		var actual = context.getRegistered(name);
 		if(actual==null) {
-            var actualType = this.expression.check(context);
-			context.registerValue(new Variable(name, actualType));
+			context.registerValue(new Variable(name, AnyType.instance));
 		} else {
 			// need to check type compatibility
 			var actualType = actual.getType(context);
-			var newType = this.expression.check(context);
-            actualType.checkAssignableFrom(context, newType);
+            actualType.checkAssignableFrom(context, AnyType.instance);
 		}
 	}, this);
 	return VoidType.instance;
 };
+
+AssignTupleStatement.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+    this.names.forEach(function(name) {
+        var actual = transpiler.context.getRegistered(name);
+        if(actual==null)
+            transpiler.context.registerValue(new Variable(name, AnyType.instance));
+     }, this);
+};
+
+
+AssignTupleStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("var [");
+    this.names.forEach(function(name) {
+        transpiler.append(name).append(", ");
+        var actual = transpiler.context.getRegistered(name);
+        if(actual==null)
+            transpiler.context.registerValue(new Variable(name, AnyType.instance));
+    });
+    transpiler.trimLast(2);
+    transpiler.append("] = ");
+    this.expression.transpile(transpiler);
+};
+
 
 AssignTupleStatement.prototype.interpret = function(context) {
 	var object = this.expression.interpret(context);
