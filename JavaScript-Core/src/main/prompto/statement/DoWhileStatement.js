@@ -15,6 +15,26 @@ DoWhileStatement.prototype = Object.create(BaseStatement.prototype);
 DoWhileStatement.prototype.constructor = DoWhileStatement;
 
 
+DoWhileStatement.prototype.declare = function(transpiler) {
+    this.condition.declare(transpiler);
+    transpiler = transpiler.newChildTranspiler();
+    this.statements.declare(transpiler);
+};
+
+
+DoWhileStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("do {");
+    transpiler.indent();
+    var child = transpiler.newChildTranspiler();
+    this.statements.transpile(child);
+    child.dedent().flush();
+    transpiler.append("} while(");
+    this.condition.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+
 DoWhileStatement.prototype.check = function(context) {
 	var cond = this.condition.check(context);
 	if(cond!=BooleanType.instance) {

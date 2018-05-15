@@ -15,6 +15,26 @@ WhileStatement.prototype = Object.create(BaseStatement.prototype);
 WhileStatement.prototype.constructor = WhileStatement;
 
 
+WhileStatement.prototype.declare = function(transpiler) {
+    this.condition.declare(transpiler);
+    transpiler = transpiler.newChildTranspiler();
+    this.statements.declare(transpiler);
+};
+
+
+WhileStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("while(");
+    this.condition.transpile(transpiler);
+    transpiler.append(") {");
+    transpiler.indent();
+    var child = transpiler.newChildTranspiler();
+    this.statements.transpile(child);
+    child.dedent().flush();
+    transpiler.append("}").newLine();
+    return true;
+};
+
+
 WhileStatement.prototype.check = function(context) {
 	var cond = this.condition.check(context);
 	if(cond!=BooleanType.instance) {
