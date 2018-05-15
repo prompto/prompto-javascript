@@ -3,9 +3,11 @@ var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var ListType = require("../type/ListType").ListType;
+var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var InternalError = require("../error/InternalError").InternalError;
 var BreakResult = require("../runtime/BreakResult").BreakResult;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
 function ForEachStatement(v1, v2, source, statements) {
 	BaseStatement.call(this);
@@ -159,6 +161,8 @@ ForEachStatement.prototype.canReturn = function() {
 
 ForEachStatement.prototype.declare = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
+    if(srcType instanceof DictionaryType)
+        transpiler.require(StrictSet);
     var elemType = srcType.checkIterator(transpiler.context);
     this.source.declare(transpiler);
     transpiler = transpiler.newChildTranspiler();
@@ -186,13 +190,38 @@ ForEachStatement.prototype.transpileNoIndex = function(transpiler) {
         this.transpileIteratorNoIndex(transpiler);
 };
 
+
+ForEachStatement.prototype.transpileArrayNoIndex = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context);
+    var itemsName = this.v1.name + "_items";
+    transpiler.append("var ").append(itemsName).append(" = ");
+    this.source.transpile(transpiler);
+    transpiler.append(";").newLine();
+    var idxName = this.v1.name + "_idx";
+    transpiler.append("for(var ").append(idxName).append(" = 0; ").append(idxName).append(" < ").append(itemsName).append(".length; ").append(idxName).append("++) {");
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.indent();
+    transpiler.context.registerValue(new Variable(this.v1, elemType));
+    transpiler.append("var ").append(this.v1.name).append(" = ").append(itemsName).append("[").append(idxName).append("];")
+    this.statements.transpile(transpiler);
+    transpiler.dedent();
+    transpiler.flush();
+    transpiler.append("}");
+    transpiler.newLine();
+ };
+
+
 ForEachStatement.prototype.transpileIteratorNoIndex = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
     var elemType = srcType.checkIterator(transpiler.context);
     var iterName = this.v1.name + "_iterator";
     transpiler.append("var ").append(iterName).append(" = ");
     this.source.transpile(transpiler);
-    transpiler.append(".values();");
+    if(srcType instanceof DictionaryType)
+        transpiler.append(".entries();");
+    else
+        transpiler.append(".values();");
     transpiler.newLine();
     transpiler.append("while(").append(iterName).append(".hasNext()) {");
     transpiler = transpiler.newChildTranspiler();
@@ -200,6 +229,62 @@ ForEachStatement.prototype.transpileIteratorNoIndex = function(transpiler) {
     transpiler.context.registerValue(new Variable(this.v1, elemType));
     transpiler.append("var ").append(this.v1.name).append(" = ").append(iterName).append(".next();")
     transpiler.newLine();
+    this.statements.transpile(transpiler);
+    transpiler.dedent();
+    transpiler.flush();
+    transpiler.append("}");
+    transpiler.newLine();
+};
+
+ForEachStatement.prototype.transpileWithIndex = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    if(srcType instanceof ListType)
+        this.transpileArrayWithIndex(transpiler);
+    else
+        this.transpileIteratorWithIndex(transpiler);
+};
+
+
+ForEachStatement.prototype.transpileArrayWithIndex = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context);
+    var itemsName = this.v2.name + "_items";
+    transpiler.append("var ").append(itemsName).append(" = ");
+    this.source.transpile(transpiler);
+    transpiler.append(";").newLine();
+    transpiler.append("for(var ").append(this.v1.name).append(" = 0; ").append(this.v1.name).append(" < ").append(itemsName).append(".length; ").append(this.v1.name).append("++) {");
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.indent();
+    transpiler.context.registerValue(new Variable(this.v1, IntegerType.instance));
+    transpiler.context.registerValue(new Variable(this.v2, elemType));
+    transpiler.append("var ").append(this.v2.name).append(" = ").append(itemsName).append("[").append(this.v1.name).append("];")
+    this.statements.transpile(transpiler);
+    transpiler.dedent();
+    transpiler.flush();
+    transpiler.append("}");
+    transpiler.newLine();
+};
+
+
+ForEachStatement.prototype.transpileIteratorWithIndex = function(transpiler) {
+    var srcType = this.source.check(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context);
+    transpiler.append("var ").append(this.v1.name).append(" = 1;").newLine();
+    var iterName = this.v2.name + "_iterator";
+    transpiler.append("var ").append(iterName).append(" = ");
+    this.source.transpile(transpiler);
+    if(srcType instanceof DictionaryType)
+        transpiler.append(".entries();");
+    else
+        transpiler.append(".values();");
+    transpiler.newLine();
+    transpiler.append("while(").append(iterName).append(".hasNext()) {");
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.indent();
+    transpiler.context.registerValue(new Variable(this.v1, IntegerType.instance));
+    transpiler.append(this.v1.name).append("++;").newLine();
+    transpiler.context.registerValue(new Variable(this.v2, elemType));
+    transpiler.append("var ").append(this.v2.name).append(" = ").append(iterName).append(".next();").newLine();
     this.statements.transpile(transpiler);
     transpiler.dedent();
     transpiler.flush();

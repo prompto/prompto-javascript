@@ -8,6 +8,7 @@ var DateRange = require("../value/DateRange").DateRange;
 var DateValue = require("../value/DateValue").DateValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
+var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 
 function DateType()  {
 	NativeType.call(this, new Identifier("Date"));
@@ -18,6 +19,10 @@ DateType.prototype = Object.create(NativeType.prototype);
 DateType.prototype.constructor = DateType;
 
 DateType.instance = new DateType();
+
+DateType.prototype.declare = function(transpiler) {
+    transpiler.require(LocalDate);
+};
 
 
 DateType.prototype.isAssignableFrom = function(context, other) {

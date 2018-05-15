@@ -433,7 +433,7 @@ BaseType.prototype.doSort = function(context, list, cmp, desc) {
     if( list instanceof ListValue || list instanceof TupleValue) {
         items = [].concat(list.items);
     } else if ( list instanceof SetValue) {
-        items = Array.from(list.items.values());
+        items = Array.from(list.items.set.values());
     }
     items.sort(cmp);
     if(desc)

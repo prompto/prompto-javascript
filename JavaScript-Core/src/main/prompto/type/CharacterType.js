@@ -23,6 +23,10 @@ CharacterType.prototype.constructor = CharacterType;
 CharacterType.instance = new CharacterType();
 
 
+CharacterType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
 CharacterType.prototype.nativeCast = function(context, value) {
     if(value.type instanceof TextType && value.value.length>=1)
         return new CharacterValue(value.value.substring(0, 1));

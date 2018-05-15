@@ -39,7 +39,7 @@ TupleValue.prototype.Add = function(context, value) {
         var items = this.items.concat(value.items);
         return new TupleValue(items);
     } else if(value instanceof SetValue) {
-        var items = Array.from(value.items.values());
+        var items = Array.from(value.items.set.values());
         items = this.items.concat(items);
         return new TupleValue(items);
     } else {

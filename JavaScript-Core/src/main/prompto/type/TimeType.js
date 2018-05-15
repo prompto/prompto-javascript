@@ -7,6 +7,7 @@ var TimeRange = require("../value/TimeRange").TimeRange;
 var TimeValue = require("../value/TimeValue").TimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
+var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
 function TimeType()  {
 	NativeType.call(this, new Identifier("TimeValue"));
@@ -17,6 +18,11 @@ TimeType.prototype = Object.create(NativeType.prototype);
 TimeType.prototype.constructor = TimeType;
 
 TimeType.instance = new TimeType();
+
+TimeType.prototype.declare = function(transpiler) {
+    transpiler.require(LocalTime);
+};
+
 
 TimeType.prototype.isAssignableFrom = function(context, other) {
     return NativeType.prototype.isAssignableFrom.call(this, context, other)

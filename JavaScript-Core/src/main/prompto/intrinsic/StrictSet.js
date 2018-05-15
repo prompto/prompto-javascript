@@ -14,9 +14,13 @@ StrictSet.prototype.toString = function() {
 };
 
 StrictSet.prototype.values = function() {
-    return this.set.values();
+    var iter = this.set.values();
+    var item = iter.next();
+    return {
+        hasNext: function() { return !item.done; },
+        next: function() { var value = item.value; item = iter.next(); return value; }
+    };
 };
-
 
 StrictSet.prototype.item = function(idx) {
     var iter = this.set.values();
@@ -34,7 +38,7 @@ StrictSet.prototype.item = function(idx) {
 
 StrictSet.prototype.addAll = function(items) {
     if(items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     items.forEach(function(item){
         this.add(item);
     }, this);

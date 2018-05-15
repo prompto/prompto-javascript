@@ -11,7 +11,7 @@ Tuple.prototype.constructor = Tuple;
 
 Tuple.prototype.addAll = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-    	items = Array.from(items.values());
+    	items = Array.from(items.set.values());
 	this.push.apply(this, items);
 	return this; // enable fluid API
 };

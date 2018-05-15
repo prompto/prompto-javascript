@@ -25,6 +25,13 @@ Object.defineProperty(Dictionary.prototype, "values", {
     }
 });
 
+Dictionary.prototype.entries = function() {
+    var iter = this.keys.values();
+    return {
+        hasNext: iter.hasNext,
+        next: function() { var key = iter.next(); return {key: key, value: this[key] }; }
+    };
+};
 
 Dictionary.prototype.add = function(dict) {
     var result = Object.assign({}, this, dict);

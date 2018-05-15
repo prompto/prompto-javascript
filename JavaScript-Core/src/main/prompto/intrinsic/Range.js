@@ -105,18 +105,18 @@ DateRange.prototype.constructor = DateRange;
 
 Object.defineProperty(DateRange.prototype, "length", {
     get: function() {
-        var h = this.high.valueOf();
-        var l = this.low.valueOf();
+        var h = this.last.valueOf();
+        var l = this.first.valueOf();
         return 1 + ( (h-l)/(24*60*60*1000));
     }
 });
 
 DateRange.prototype.item = function(idx) {
-    var millis = this.low.valueOf() + (idx-1)*(24*60*60*1000);
-    if(millis>this.high.valueOf()) {
+    var millis = this.first.valueOf() + (idx-1)*(24*60*60*1000);
+    if(millis > this.last.valueOf()) {
         throw new RangeError();
     } else {
-        return new DateValue(new Date(millis));
+        return new LocalDate(millis);
     }
 };
 
@@ -135,13 +135,13 @@ TimeRange.prototype.constructor = TimeRange;
 
 Object.defineProperty(TimeRange.prototype, "length", {
     get: function() {
-        return 1 + (this.high.valueOf() - this.low.valueOf())/1000;
+        return 1 + (this.last.valueOf() - this.first.valueOf())/1000;
     }
 });
 
 TimeRange.prototype.item = function(idx) {
-    var result = this.low.valueOf() + (idx-1)*1000;
-    if(result>this.high.valueOf()) {
+    var result = this.first.valueOf() + (idx-1)*1000;
+    if(result > this.last.valueOf()) {
         throw new RangeError();
     }
     return new LocalTime(result);
@@ -149,7 +149,7 @@ TimeRange.prototype.item = function(idx) {
 
 TimeRange.prototype.has = function(value) {
     var int = value.valueOf();
-    return int>=this.first.valueOf() && int<=this.last.valueOf();
+    return int >= this.first.valueOf() && int <= this.last.valueOf();
 };
 
 

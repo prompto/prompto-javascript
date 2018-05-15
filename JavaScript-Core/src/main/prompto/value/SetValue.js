@@ -55,7 +55,7 @@ SetValue.prototype.hasItem = function(context, item) {
 SetValue.prototype.getItemInContext = function(context, index) {
     if (index instanceof IntegerValue) {
         var idx = index.IntegerValue();
-        var items = Array.from(this.items.values());
+        var items = Array.from(this.items.set.values());
         if(idx<1 || idx>items.length)
             throw new IndexOutOfRangeError();
         return items[idx-1];
@@ -94,7 +94,7 @@ SetValue.prototype.filter = function(context, itemId, filter) {
 }
 
 SetValue.prototype.getIterator = function(context) {
-    return new SetIterator(this.items, context);
+    return this.items.values();
 };
 
 
@@ -107,25 +107,5 @@ SetValue.prototype.equals = function(obj) {
 };
 
 
-function SetIterator(items, context) {
-    this.values = items.values();
-    this.context = context;
-    this.item = this.values.next();
-    return this;
-}
-
-SetIterator.prototype.hasNext = function () {
-    return !this.item.done;
-}
-
-SetIterator.prototype.next = function() {
-    if (this.item == null || this.item.done)
-        return null;
-    else {
-        var value = this.item.value;
-        this.item = this.values.next();
-        return value;
-    }
-};
 
 exports.SetValue = SetValue;

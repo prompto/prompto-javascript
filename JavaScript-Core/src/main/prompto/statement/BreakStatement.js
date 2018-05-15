@@ -27,8 +27,16 @@ BreakStatement.prototype.check = function(context) {
 	return VoidType.instance;
 };
 
-BreakStatement.prototype.interpret= function(context) {
+BreakStatement.prototype.interpret = function(context) {
     return BreakResult.instance;
+};
+
+BreakStatement.prototype.declare = function(transpiler) {
+    // nothing to do;
+};
+
+BreakStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("break");
 };
 
 

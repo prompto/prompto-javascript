@@ -53,10 +53,8 @@ DictionaryValue.prototype.getMemberValue = function(context, name) {
     } else if ("keys"==name) {
         var keys = new StrictSet();
         var iter = this.dict.keys.values();
-        var item = iter.next();
-        while(!item.done) {
-            keys.add(new TextValue(item.value));
-            item = iter.next();
+        while(iter.hasNext()) {
+            keys.add(new TextValue(iter.next()));
         }
         return new SetValue(TextType.instance, keys);
     } else if ("values"==name) {

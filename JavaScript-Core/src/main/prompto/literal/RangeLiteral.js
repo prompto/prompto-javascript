@@ -36,7 +36,9 @@ RangeLiteral.prototype.interpret = function(context) {
 
 RangeLiteral.prototype.declare = function(transpiler) {
     var firstType = this.first.check(transpiler.context);
+    firstType.declare(transpiler);
     var lastType = this.last.check(transpiler.context);
+    lastType.declare(transpiler);
     return firstType.declareRange(transpiler, lastType);
 };
 

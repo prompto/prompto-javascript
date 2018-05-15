@@ -22,4 +22,17 @@ EntryType.prototype.checkMember = function(context, name) {
 	}
 };
 
+EntryType.prototype.declareMember = function(transpiler, name) {
+    if ("key"==name)
+        return;
+    else if ("value"==name)
+        this.itemType.declare(transpiler);
+    else
+        return BaseType.prototype.declareMember.call(this, transpiler);
+};
+
+EntryType.prototype.transpileMember = function(transpiler, name) {
+    transpiler.append(name);
+};
+
 exports.EntryType = EntryType;
