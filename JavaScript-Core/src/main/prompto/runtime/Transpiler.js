@@ -11,6 +11,12 @@ function Transpiler(context) {
     return this;
 }
 
+Transpiler.prototype.toString = function() {
+    this.appendAllRequired();
+    this.appendAllDeclared();
+    return this.lines.join("\n");
+};
+
 
 Transpiler.prototype.copyTranspiler = function(context) {
     var transpiler = new Transpiler(context);
@@ -221,7 +227,7 @@ ObjectUtils.arraySlice1Based = function(start, last) {
 
 ObjectUtils.stringHasAll = function(items) {
     if(StrictSet && items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     for(var i=0;i<items.length;i++) {
         if(!this.includes(items[i]))
             return false;
@@ -232,7 +238,7 @@ ObjectUtils.stringHasAll = function(items) {
 
 ObjectUtils.stringHasAny = function(items) {
     if(StrictSet && items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     for(var i=0;i<items.length;i++) {
         if(this.includes(items[i]))
             return true;
@@ -271,6 +277,14 @@ ObjectUtils.decimalToString = function() {
         return s + ".0";
 };
 
+function print(msg) {
+    var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+    if(isNodeJs)
+        process.stdout.write(msg);
+    else
+        console.log(msg);
+}
+
 // to ease implementation
 function patchObject() {
     Object.prototype.declare = function (transpiler) {
@@ -286,30 +300,51 @@ function unpatchObject() {
     delete Object.prototype.transpile;
 }
 
+function newTranspiler(context) {
+    var transpiler = new Transpiler(context);
+    var equalObjects = require("../utils/Utils").equalObjects;
+    transpiler.require(equalObjects);
+    transpiler.require(print);
+    transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
+    transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
+    transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
+    transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
+    transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
+    transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
+    transpiler.lines.push("Array.prototype.slice1Based = " + ObjectUtils.arraySlice1Based.toString() + ";");
+    transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
+    transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
+    transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
+    transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
+    transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
+    return transpiler;
+}
 
-Transpiler.transpile = function(context, methodName, cmdLineArgs) {
+Transpiler.transpileTest = function(context, testMethod) {
     try {
         patchObject();
-        var transpiler = new Transpiler(context);
-        var equalObjects = require("../utils/Utils").equalObjects;
-        transpiler.require(equalObjects);
-        transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
-        transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
-        transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
-        transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
-        transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
-        transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
-        transpiler.lines.push("Array.prototype.slice1Based = " + ObjectUtils.arraySlice1Based.toString() + ";");
-        transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
-        transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
-        transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
-        transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
-        transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
+        var transpiler = newTranspiler(context);
+        testMethod.declare(transpiler);
+        return transpiler.toString();
+    } finally {
+        context.terminated();
+        unpatchObject();
+    }
+};
+
+Transpiler.prototype.printTestName = function(testName) {
+    this.append('print("\\"').append(testName.substring(1, testName.length - 1)).append('\\" test ');
+    return this;
+};
+
+
+Transpiler.transpileMethod = function(context, methodName, cmdLineArgs) {
+    try {
+        patchObject();
+        var transpiler = newTranspiler(context);
         var method = locateMethod(context, methodName, cmdLineArgs);
         method.declare(transpiler);
-        transpiler.appendAllRequired();
-        transpiler.appendAllDeclared();
-        return transpiler.lines.join("\n");
+        return transpiler.toString();
     } finally {
         context.terminated();
         unpatchObject();

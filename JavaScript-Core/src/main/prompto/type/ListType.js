@@ -72,7 +72,7 @@ ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
         left.transpile(transpiler);
         transpiler.append(".concat(Array.from(");
         right.transpile(transpiler);
-        transpiler.append(".values()))");
+        transpiler.append(".set.values()))");
     } else {
         return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
     }

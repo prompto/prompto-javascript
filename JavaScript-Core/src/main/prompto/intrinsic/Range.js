@@ -4,12 +4,16 @@ function Range(first, last) {
     return this;
 }
 
+Range.prototype.toString = function() {
+    return "[" + this.first + ".." + this.last + "]";
+};
+
 Range.prototype.values = function() {
     var self = this;
     return {
-        idx: 0,
+        idx: 1, // since we are calling item()
         length: self.length,
-        hasNext: function() { return this.idx < this.length },
+        hasNext: function() { return this.idx <= this.length },
         next : function() { return self.item(this.idx++); }
     };
 };
@@ -25,7 +29,7 @@ Range.prototype.equals = function(obj) {
 
 Range.prototype.hasAll = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     for (var i = 0; i < items.length; i++) {
         if (!this.has(items[i]))
             return false;
@@ -44,7 +48,7 @@ Range.prototype.slice1Based = function(start, end) {
 
 Range.prototype.hasAny = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     for (var i = 0; i < items.length; i++) {
         if (this.has(items[i]))
             return true;
@@ -68,7 +72,7 @@ Object.defineProperty(IntegerRange.prototype, "length", {
 });
 
 IntegerRange.prototype.item = function(idx) {
-    return this.first + idx;
+    return this.first + idx - 1;
 };
 
 IntegerRange.prototype.has = function(value) {
@@ -91,7 +95,7 @@ CharacterRange.prototype.has = function(value) {
 
 
 CharacterRange.prototype.item = function(idx) {
-    return String.fromCharCode(this.first + idx);
+    return String.fromCharCode(this.first + idx - 1);
 };
 
 

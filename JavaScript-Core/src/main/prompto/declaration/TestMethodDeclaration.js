@@ -19,6 +19,59 @@ TestMethodDeclaration.prototype.getDeclarationType = function() {
     return "Test";
 };
 
+TestMethodDeclaration.prototype.cleanId = function() {
+    var cleanId = this.name.replace(/\W/g,'_');
+    return cleanId.substring(1, cleanId.length - 2);
+};
+
+
+TestMethodDeclaration.prototype.declare = function(transpiler) {
+    transpiler.declare(this);
+    transpiler = transpiler.newLocalTranspiler();
+    this.statements.declare(transpiler);
+    if(this.assertions)
+        this.assertions.declare(transpiler);
+    if(this.error)
+        this.error.declare(transpiler);
+};
+
+TestMethodDeclaration.prototype.transpile = function(transpiler) {
+    transpiler = transpiler.newLocalTranspiler();
+    transpiler.append("function ").append(this.cleanId()).append("() {");
+    transpiler.indent();
+    transpiler.append("try {");
+    transpiler.indent();
+    this.statements.transpile(transpiler);
+    if(this.assertions) {
+        transpiler.append("var success = true;").newLine();
+        this.assertions.forEach(function (assertion) {
+            transpiler.append("if(");
+            assertion.transpile(transpiler);
+            transpiler.append(")").indent();
+            transpiler.append("success &= true;").dedent();
+            transpiler.append("else {").indent()
+            transpiler.append("success = false;").newLine();
+            transpiler.printTestName(this.name).append('failed while verifying: ')
+                .append(assertion.getExpected(transpiler.context, this.dialect))
+                .append(', found: " + ');
+            assertion.transpileFound(transpiler, this.dialect);
+            transpiler.append(');');
+            transpiler.dedent();
+            transpiler.append("}").newLine();
+        }, this);
+        transpiler.append("if (success)").indent().printTestName(this.name).append('successful");').dedent();
+    }
+    transpiler.dedent();
+    transpiler.dedent();
+    transpiler.append("} catch (e) {");
+    transpiler.indent();
+    transpiler.append("}");
+    transpiler.dedent();
+    transpiler.append("}");
+    transpiler.newLine();
+    transpiler.flush();
+}
+
 TestMethodDeclaration.prototype.check = function(context) {
     // TODO
     return VoidType.instance;
@@ -32,8 +85,7 @@ TestMethodDeclaration.prototype.unregister = function(context) {
     context.unregisterTestDeclaration (this);
 };
 
-TestMethodDeclaration.prototype.getType = function(context)
-{
+TestMethodDeclaration.prototype.getType = function(context) {
     return VoidType.instance;
 };
 
@@ -58,11 +110,10 @@ TestMethodDeclaration.prototype.interpretAsserts = function(context)
         return;
     context.enterMethod (this);
     try {
-        var self = this;
         var success = true;
         this.assertions.forEach(function(a) {
-            success &= a.interpretAssert (context, self);
-        });
+            success &= a.interpretAssert (context, this);
+        }, this);
         if (success)
             this.printSuccess (context);
     } finally {

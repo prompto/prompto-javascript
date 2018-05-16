@@ -26,10 +26,11 @@ Object.defineProperty(Dictionary.prototype, "values", {
 });
 
 Dictionary.prototype.entries = function() {
+    var self = this;
     var iter = this.keys.values();
     return {
         hasNext: iter.hasNext,
-        next: function() { var key = iter.next(); return {key: key, value: this[key] }; }
+        next: function() { var key = iter.next(); return {key: key, value: self[key] }; }
     };
 };
 

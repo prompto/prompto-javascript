@@ -35,7 +35,7 @@ RangeType.prototype.declareItem = function(transpiler, itemType, item) {
 RangeType.prototype.transpileItem = function(transpiler, itemType, item) {
     transpiler.append(".item(");
     item.transpile(transpiler);
-    transpiler.append("-1)");
+    transpiler.append(")");
 };
 
 

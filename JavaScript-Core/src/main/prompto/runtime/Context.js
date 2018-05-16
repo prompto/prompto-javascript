@@ -311,6 +311,11 @@ Context.prototype.hasTests = function() {
     return false;
 };
 
+
+Context.prototype.getTestDeclaration = function(testName) {
+    return this.tests[testName];
+};
+
 Context.prototype.registerNativeBinding = function(type, declaration) {
     if(this === this.globals)
         this.nativeBindings[type] = declaration;

@@ -104,6 +104,8 @@ SortedExpression.prototype.transpile = function(transpiler) {
     var type = this.source.check(transpiler.context);
     transpiler.append("Array.from(");
     this.source.transpile(transpiler);
+    if(type instanceof SetType)
+        transpiler.append(".set");
     transpiler.append(").sort(");
     type.itemType.transpileSorted(transpiler, this.key, this.desc);
     transpiler.append(")");

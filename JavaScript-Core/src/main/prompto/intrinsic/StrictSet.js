@@ -71,7 +71,7 @@ StrictSet.prototype.has = function(value) {
 
 StrictSet.prototype.hasAll = function(items, noCheckEquals) {
     if(items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     if(noCheckEquals) {
         for (var i = 0; i < items.length; i++) {
             if (!this.set.has(items[i]))
@@ -90,7 +90,7 @@ StrictSet.prototype.hasAll = function(items, noCheckEquals) {
 
 StrictSet.prototype.hasAny = function(items, noCheckEquals) {
     if(items instanceof StrictSet)
-        items = Array.from(items.values());
+        items = Array.from(items.set.values());
     if(noCheckEquals) {
         for (var i = 0; i < items.length; i++) {
             if (this.set.has(items[i]))

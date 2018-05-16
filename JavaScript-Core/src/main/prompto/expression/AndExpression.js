@@ -73,20 +73,33 @@ AndExpression.prototype.transpile = function(transpiler) {
     this.right.transpile(transpiler);
 };
 
-
 AndExpression.prototype.interpretAssert = function(context, test) {
     var lval = this.left.interpret(context);
     var rval = this.right.interpret(context);
     var result = lval.And(rval);
     if(result==BooleanValue.TRUE)
         return true;
-    var writer = new CodeWriter(test.dialect, context);
-    this.toDialect(writer);
-    var expected = writer.toString();
+    var expected = this.getExpected(context, test.dialect);
     var actual = lval.toString() + this.operatorToDialect(test.dialect) + rval.toString();
     test.printFailedAssertion(context, expected, actual);
     return false;
 };
+
+AndExpression.prototype.getExpected = function(context, dialect) {
+    var writer = new CodeWriter(dialect, context);
+    this.toDialect(writer);
+    return writer.toString();
+};
+
+
+AndExpression.prototype.transpileFound = function(transpiler, dialect) {
+    transpiler.append("(");
+    this.left.transpile(transpiler);
+    transpiler.append(") + '").append(this.operatorToDialect(dialect)).append("' + (");
+    this.right.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 exports.AndExpression = AndExpression;
 

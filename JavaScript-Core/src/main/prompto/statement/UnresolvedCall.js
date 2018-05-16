@@ -50,11 +50,22 @@ UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclarati
     if (this.resolved.interpretAssert)
         return this.resolved.interpretAssert(context, testMethodDeclaration);
     else {
-        var writer = new CodeWriter(this.dialect, context);
-        this.resolved.toDialect(writer);
-        throw new SyntaxError("Cannot test '" + writer.toString() + "'");
+        var expected = this.getExpected(context, this.dialect);
+        throw new SyntaxError("Cannot test '" + expected + "'");
     }
 };
+
+UnresolvedCall.prototype.getExpected = function(context, dialect) {
+    var writer = new CodeWriter(this.dialect, context);
+    this.toDialect(writer);
+    return writer.toString();
+};
+
+
+UnresolvedCall.prototype.transpileFound = function(transpiler, dialect) {
+    transpiler.append("'<unknown>'");
+};
+
 
 UnresolvedCall.prototype.resolve = function(context) {
 	if(this.resolved===null) {

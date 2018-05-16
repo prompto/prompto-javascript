@@ -18,7 +18,7 @@ EqOp.IS = new EqOp("IS");
 EqOp.IS.toDialect = function(writer) {
     writer.append('is');
 };
-EqOp.IS.toEString = function(dialect) {
+EqOp.IS.toEString = function() {
     return 'is';
 };
 EqOp.IS.toOString = EqOp.IS.toEString;
@@ -28,7 +28,7 @@ EqOp.IS_NOT = new EqOp("IS_NOT");
 EqOp.IS_NOT.toDialect = function(writer) {
     writer.append('is not');
 };
-EqOp.IS_NOT.toEString = function(dialect) {
+EqOp.IS_NOT.toEString = function() {
     return 'is not';
 };
 EqOp.IS_NOT.toOString = EqOp.IS_NOT.toEString;
@@ -39,7 +39,7 @@ EqOp.IS_A = new EqOp("IS_A");
 EqOp.IS_A.toDialect = function(writer) {
     writer.append('is a');
 };
-EqOp.IS_A.toEString = function(dialect) {
+EqOp.IS_A.toEString = function() {
     return 'is a';
 };
 EqOp.IS_A.toOString = EqOp.IS_A.toEString;

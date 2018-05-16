@@ -78,13 +78,29 @@ CompareExpression.prototype.interpretAssert = function(context, test) {
     var result = this.compare(context, lval, rval);
     if(result==BooleanValue.TRUE)
         return true;
-    var writer = new CodeWriter(test.dialect, context);
-    this.toDialect(writer);
-    var expected = writer.toString();
+    var expected = this.getExpected(context, test.dialect);
     var actual = lval.toString() + this.operator.toString() + rval.toString();
     test.printFailedAssertion(context, expected, actual);
     return false;
 };
+
+
+CompareExpression.prototype.getExpected = function(context, dialect) {
+    var writer = new CodeWriter(dialect, context);
+    this.toDialect(writer);
+    return writer.toString();
+};
+
+
+CompareExpression.prototype.transpileFound = function(transpiler, dialect) {
+    transpiler.append("(");
+    this.left.transpile(transpiler);
+    transpiler.append(") + '").append(this.operator.toString(dialect)).append("' + (");
+    this.right.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 
 CompareExpression.prototype.interpretQuery = function(context, query) {
     var name = null;

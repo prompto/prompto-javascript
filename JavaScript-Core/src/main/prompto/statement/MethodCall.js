@@ -169,11 +169,22 @@ MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) 
     if(value instanceof BooleanValue)
         return value.value;
     else {
-        var writer = new CodeWriter(this.dialect, context);
-        this.toDialect(writer);
-        throw new SyntaxError("Cannot test '" + writer.toString() + "'");
+        var expected = this.getExpected(context, this.dialect);
+        throw new SyntaxError("Cannot test '" + expected + "'");
     }
 };
+
+MethodCall.prototype.getExpected = function(context, dialect) {
+    var writer = new CodeWriter(this.dialect, context);
+    this.toDialect(writer);
+    return writer.toString();
+};
+
+
+MethodCall.prototype.transpileFound = function(transpiler, dialect) {
+    transpiler.append("'<unknown>'");
+};
+
 
 MethodCall.prototype.findDeclaration = function(context) {
 	// look for method as value

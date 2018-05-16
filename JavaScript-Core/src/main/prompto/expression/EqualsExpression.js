@@ -30,6 +30,7 @@ EqualsExpression.prototype.toString = function() {
 	return this.left.toString() + " " + this.operator.toString() + " " + this.right.toString();
 };
 
+
 var VOWELS = "AEIO"; // sufficient here
 
 EqualsExpression.prototype.toDialect = function(writer) {
@@ -171,12 +172,17 @@ EqualsExpression.prototype.interpretAssert = function(context, test) {
     var result = this.interpretValues(context, lval, rval);
     if(result==BooleanValue.TRUE)
         return true;
-    var writer = new CodeWriter(test.dialect, context);
-    this.toDialect(writer);
-    var expected = writer.toString();
+    var expected = this.getExpected(context, test.dialect);
     var actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
     test.printFailedAssertion(context, expected, actual);
     return false;
+};
+
+
+EqualsExpression.prototype.getExpected = function(context, dialect) {
+    var writer = new CodeWriter(dialect, context);
+    this.toDialect(writer);
+    return writer.toString();
 };
 
 EqualsExpression.prototype.interpretQuery = function(context, query) {
@@ -235,6 +241,7 @@ EqualsExpression.prototype.declare = function(transpiler) {
     }
 };
 
+
 EqualsExpression.prototype.transpile = function(transpiler) {
     switch (this.operator) {
         case EqOp.EQUALS:
@@ -265,6 +272,15 @@ EqualsExpression.prototype.transpile = function(transpiler) {
             throw new Error("Cannot transpile:" + this.operator.toString());
     }
 };
+
+EqualsExpression.prototype.transpileFound = function(transpiler, dialect) {
+    transpiler.append("(");
+    this.left.transpile(transpiler);
+    transpiler.append(") + ' ").append(this.operator.toString(dialect)).append(" ' + (");
+    this.right.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 EqualsExpression.prototype.transpileRoughly = function(transpiler) {
     transpiler.append("removeAccents(");

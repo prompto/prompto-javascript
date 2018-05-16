@@ -252,12 +252,12 @@ ForEachStatement.prototype.transpileArrayWithIndex = function(transpiler) {
     transpiler.append("var ").append(itemsName).append(" = ");
     this.source.transpile(transpiler);
     transpiler.append(";").newLine();
-    transpiler.append("for(var ").append(this.v1.name).append(" = 0; ").append(this.v1.name).append(" < ").append(itemsName).append(".length; ").append(this.v1.name).append("++) {");
+    transpiler.append("for(var ").append(this.v1.name).append(" = 1; ").append(this.v1.name).append(" <= ").append(itemsName).append(".length; ").append(this.v1.name).append("++) {");
     transpiler = transpiler.newChildTranspiler();
     transpiler.indent();
     transpiler.context.registerValue(new Variable(this.v1, IntegerType.instance));
     transpiler.context.registerValue(new Variable(this.v2, elemType));
-    transpiler.append("var ").append(this.v2.name).append(" = ").append(itemsName).append("[").append(this.v1.name).append("];")
+    transpiler.append("var ").append(this.v2.name).append(" = ").append(itemsName).append("[").append(this.v1.name).append("-1];").newLine();
     this.statements.transpile(transpiler);
     transpiler.dedent();
     transpiler.flush();
@@ -282,10 +282,10 @@ ForEachStatement.prototype.transpileIteratorWithIndex = function(transpiler) {
     transpiler = transpiler.newChildTranspiler();
     transpiler.indent();
     transpiler.context.registerValue(new Variable(this.v1, IntegerType.instance));
-    transpiler.append(this.v1.name).append("++;").newLine();
     transpiler.context.registerValue(new Variable(this.v2, elemType));
     transpiler.append("var ").append(this.v2.name).append(" = ").append(iterName).append(".next();").newLine();
     this.statements.transpile(transpiler);
+    transpiler.append(this.v1.name).append("++;").newLine();
     transpiler.dedent();
     transpiler.flush();
     transpiler.append("}");

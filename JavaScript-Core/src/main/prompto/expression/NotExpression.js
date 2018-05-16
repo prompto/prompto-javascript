@@ -70,12 +70,23 @@ NotExpression.prototype.interpretAssert = function(context, test) {
     var result = this.interpret(context);
     if(result==BooleanValue.TRUE)
         return true;
-    var writer = new CodeWriter(test.dialect, context);
-    this.toDialect(writer);
-    var expected = writer.toString();
+    var expected = this.getExpected(context, test.dialect);
     var actual = this.operatorToDialect(test.dialect) + val.toString();
     test.printFailedAssertion(context, expected, actual);
     return false;
 };
+
+
+NotExpression.prototype.getExpected = function(context, dialect) {
+    var writer = new CodeWriter(dialect, context);
+    this.toDialect(writer);
+    return writer.toString();
+};
+
+NotExpression.prototype.transpileFound = function(transpiler, dialect) {
+    this.transpile(transpiler);
+};
+
+
 
 exports.NotExpression = NotExpression;
