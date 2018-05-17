@@ -131,9 +131,11 @@ DecimalType.prototype.declareDivide = function(transpiler, other, left, right) {
 
 DecimalType.prototype.transpileDivide = function(transpiler, other, left, right) {
     if (other instanceof IntegerType || other instanceof DecimalType) {
+        transpiler.append("divide(");
         left.transpile(transpiler);
-        transpiler.append(" / ");
+        transpiler.append(", ");
         right.transpile(transpiler);
+        transpiler.append(")");
     } else
         return NativeType.prototype.transpileDivide.call(this, context, other, left, right);
 };
@@ -159,11 +161,11 @@ DecimalType.prototype.declareIntDivide = function(transpiler, other, left, right
 
 DecimalType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
     if (other instanceof IntegerType ) {
-        transpiler.append("Math.floor(");
+        transpiler.append("Math.floor(divide(");
         left.transpile(transpiler);
-        transpiler.append(" / ");
+        transpiler.append(", ");
         right.transpile(transpiler);
-        transpiler.append(")");
+        transpiler.append("))");
     } else
         return NativeType.prototype.transpileIntDivide.call(this, transpiler, other, left, right);
 };
