@@ -28,7 +28,7 @@ Indenter.prototype.indent = function() {
 
 Indenter.prototype.dedent = function() {
     if(this.indents.length==0) {
-        throw new Exception("Illegal dedent!");
+        throw new Error("Illegal dedent!");
     }
     this.indents = this.indents.slice(1);
 };
