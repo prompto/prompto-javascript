@@ -21,7 +21,7 @@ TestMethodDeclaration.prototype.getDeclarationType = function() {
 
 TestMethodDeclaration.prototype.cleanId = function() {
     var cleanId = this.name.replace(/\W/g,'_');
-    return cleanId.substring(1, cleanId.length - 2);
+    return cleanId.substring(1, cleanId.length - 1);
 };
 
 
@@ -37,40 +37,79 @@ TestMethodDeclaration.prototype.declare = function(transpiler) {
 
 TestMethodDeclaration.prototype.transpile = function(transpiler) {
     transpiler = transpiler.newLocalTranspiler();
+    if (this.error)
+        this.transpileExpectedError(transpiler);
+    else
+        this.transpileAssertions(transpiler);
+    transpiler.flush();
+};
+
+TestMethodDeclaration.prototype.transpileAssertions = function(transpiler) {
     transpiler.append("function ").append(this.cleanId()).append("() {");
     transpiler.indent();
     transpiler.append("try {");
     transpiler.indent();
     this.statements.transpile(transpiler);
-    if(this.assertions) {
-        transpiler.append("var success = true;").newLine();
-        this.assertions.forEach(function (assertion) {
-            transpiler.append("if(");
-            assertion.transpile(transpiler);
-            transpiler.append(")").indent();
-            transpiler.append("success &= true;").dedent();
-            transpiler.append("else {").indent()
-            transpiler.append("success = false;").newLine();
-            transpiler.printTestName(this.name).append('failed while verifying: ')
-                .append(assertion.getExpected(transpiler.context, this.dialect))
-                .append(', found: " + ');
-            assertion.transpileFound(transpiler, this.dialect);
-            transpiler.append(');');
-            transpiler.dedent();
-            transpiler.append("}").newLine();
-        }, this);
-        transpiler.append("if (success)").indent().printTestName(this.name).append('successful");').dedent();
-    }
-    transpiler.dedent();
+    transpiler.append("var success = true;").newLine();
+    this.assertions.forEach(function (assertion) {
+        transpiler.append("if(");
+        assertion.transpile(transpiler);
+        transpiler.append(")").indent();
+        transpiler.append("success &= true;").dedent();
+        transpiler.append("else {").indent()
+        transpiler.append("success = false;").newLine();
+        transpiler.printTestName(this.name).append('failed while verifying: ')
+            .append(assertion.getExpected(transpiler.context, this.dialect))
+            .append(', found: " + ');
+        assertion.transpileFound(transpiler, this.dialect);
+        transpiler.append(');');
+        transpiler.dedent();
+        transpiler.append("}").newLine();
+    }, this);
+    transpiler.append("if (success)").indent().printTestName(this.name).append('successful");').dedent();
     transpiler.dedent();
     transpiler.append("} catch (e) {");
     transpiler.indent();
+    transpiler.printTestName(this.name).append('failed with error: " + e.name);');
+    transpiler.dedent();
     transpiler.append("}");
     transpiler.dedent();
     transpiler.append("}");
     transpiler.newLine();
     transpiler.flush();
-}
+};
+
+var NativeErrorNames = {
+    DIVIDE_BY_ZERO: "DivideByZeroError",
+    INDEX_OUT_OF_RANGE: RangeError.name,
+    NULL_REFERENCE: ReferenceError.name,
+    NOT_MUTABLE: "NotMutableError",
+    NOT_STORABLE: "NotStorableError",
+    READ_WRITE: "ReadWriteError"
+};
+
+TestMethodDeclaration.prototype.transpileExpectedError = function(transpiler) {
+    transpiler.append("function ").append(this.cleanId()).append("() {");
+    transpiler.indent();
+    transpiler.append("try {");
+    transpiler.indent();
+    this.statements.transpile(transpiler);
+    transpiler.printTestName(this.name).append("failed while expecting: ").append(this.error.name).append(', found: no error");');
+    transpiler.dedent();
+    transpiler.append("} catch (e) {");
+    transpiler.indent();
+    transpiler.append("if(e instanceof ").append(NativeErrorNames[this.error.name]).append(") {").indent();
+    transpiler.printTestName(this.name).append('successful");').dedent();
+    transpiler.append("} else {").indent();
+    transpiler.printTestName(this.name).append('failed while expecting: ').append(this.error.name).append(', found: " + translateError(e));').dedent();;
+    transpiler.append("}");
+    transpiler.dedent();
+    transpiler.append("}");
+    transpiler.dedent();
+    transpiler.append("}");
+    transpiler.newLine();
+    transpiler.flush();
+};
 
 TestMethodDeclaration.prototype.check = function(context) {
     // TODO

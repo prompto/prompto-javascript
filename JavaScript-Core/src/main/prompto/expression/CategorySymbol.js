@@ -77,6 +77,8 @@ CategorySymbol.prototype.getMemberValue = function(context, name, autoCreate) {
 	return instance.getMemberValue(context, name, autoCreate);
 }
 
-
+CategorySymbol.prototype.declare = function(transpiler) {
+    this.type.declare(transpiler);
+};
 
 exports.CategorySymbol = CategorySymbol;

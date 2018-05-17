@@ -108,7 +108,8 @@ Transpiler.prototype.appendOneRequired = function(fn) {
             this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
     }
     Object.keys(fn.prototype).forEach(function (key) {
-        this.lines.push(fn.name + ".prototype." + key + " = " + fn.prototype[key].toString() + ";");
+        var value = key==="constructor" ? fn.name : fn.prototype[key].toString();
+        this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
     }, this);
     Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
         var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
@@ -153,7 +154,7 @@ Transpiler.prototype.dedent = function() {
     if(this.line!==this.indents)
         this.lines.push(this.line);
     if(this.indents.length==0) {
-        throw new Exception("Illegal dedent!");
+        throw new Error("Illegal dedent!");
     }
     this.indents = this.indents.slice(1);
     this.line = this.indents;
@@ -285,6 +286,39 @@ function print(msg) {
         console.log(msg);
 }
 
+function translateError(e) {
+    if(e.promptoName)
+        return e.promptoName;
+    else if(e instanceof DivideByZeroError)
+        return "DIVIDE_BY_ZERO";
+    else if(e instanceof RangeError)
+        return "INDEX_OUT_OF_RANGE";
+    else if(e instanceof ReferenceError)
+        return "NULL_REFERENCE";
+    else
+        return "<unknown: " + e.name + ">";
+/*
+        NOT_MUTABLE: "NotMutableError",
+        NOT_STORABLE: "NotStorableError",
+        READ_WRITE: "ReadWriteError"
+*/
+}
+
+class DivideByZeroError extends Error {
+
+    constructor(message) {
+        super(message);
+        this.name = "DivideByZeroError";
+    }
+}
+
+function divide( a, b ) {
+    if(b===0)
+        throw new DivideByZeroError();
+    else
+        return a / b;
+}
+
 // to ease implementation
 function patchObject() {
     Object.prototype.declare = function (transpiler) {
@@ -305,6 +339,9 @@ function newTranspiler(context) {
     var equalObjects = require("../utils/Utils").equalObjects;
     transpiler.require(equalObjects);
     transpiler.require(print);
+    transpiler.require(divide);
+    transpiler.require(DivideByZeroError);
+    transpiler.require(translateError);
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
     transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
     transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
