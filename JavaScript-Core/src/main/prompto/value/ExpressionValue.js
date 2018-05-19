@@ -23,6 +23,20 @@ ExpressionValue.prototype.interpret = function(context) {
 	}
 };
 
+ExpressionValue.prototype.declare = function(transpiler) {
+    if(this.value.declare) {
+        return this.value.declare(transpiler);
+    }
+};
+
+ExpressionValue.prototype.transpile = function(transpiler) {
+    if (this.value.transpile) {
+        return this.value.transpile(transpiler);
+    }
+    ;
+};
+
+
 ExpressionValue.prototype.toString = function() {
 	return this.value.toString();
 };

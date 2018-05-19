@@ -107,7 +107,7 @@ SortedExpression.prototype.transpile = function(transpiler) {
     if(type instanceof SetType)
         transpiler.append(".set");
     transpiler.append(").sort(");
-    type.itemType.transpileSorted(transpiler, this.key, this.desc);
+    type.itemType.transpileSorted(transpiler, this.desc, this.key);
     transpiler.append(")");
 };
 

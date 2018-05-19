@@ -184,7 +184,7 @@ DateTimeType.prototype.sort = function(context, list, desc) {
 
 
 
-DateTimeType.prototype.transpileSorted = function(transpiler, key, desc) {
+DateTimeType.prototype.transpileSorted = function(transpiler, desc, key) {
     if(desc)
         transpiler.append("function(o1, o2) { return o1.equals(o2) ? 0 : o1.gt(o2) ? -1 : 1; }");
     else

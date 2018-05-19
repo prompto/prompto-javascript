@@ -38,7 +38,7 @@ NativeType.prototype.declareSorted = function(transpiler, key) {
     // nothing to do
 };
 
-NativeType.prototype.transpileSorted = function(transpiler, key, desc) {
+NativeType.prototype.transpileSorted = function(transpiler, desc, key) {
     if(desc)
         transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? -1 : 1; }");
     else

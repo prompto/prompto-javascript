@@ -474,7 +474,7 @@ CategoryType.prototype.sort = function(context, list, desc, key) {
 	} else if (decl.hasMethod(context, keyname, null)) {
 		return this.sortByClassMethod(context, list, desc, keyname);
 	} else {
-		var method = this.findGlobalMethod(context, list, keyname);
+		var method = this.findGlobalMethod(context, keyname);
 		if(method!=null) {
 			return this.sortByGlobalMethod(context, list, desc, method);
 		} else {
@@ -519,7 +519,7 @@ CategoryType.prototype.getMemberMethods = function(context, name) {
 
 
 /* look for a method which takes this category as sole parameter */
-CategoryType.prototype.findGlobalMethod = function(context, list, name) {
+CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 	try {
 		var exp = new ExpressionValue(this, this.newInstance(context));
 		var arg = new ArgumentAssignment(null, exp);
@@ -527,7 +527,7 @@ CategoryType.prototype.findGlobalMethod = function(context, list, name) {
 		var proto = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
 		var finder = new MethodFinder(context, proto);
 		var decl = finder.findMethod(true);
-		return decl==null ? null : proto;
+		return decl==null ? null : returnDecl ? decl : proto;
 	} catch (e) {
 		if(e instanceof PromptoError) {
 			return null;
@@ -588,10 +588,44 @@ CategoryType.prototype.loadEnumValue = function(context, value, name) {
 
 
 CategoryType.prototype.declareSorted = function(transpiler, key) {
-    // nothing to do
+    var keyname = key ? key.toString() : "key";
+    var decl = this.getDeclaration(transpiler.context);
+    if (decl.hasAttribute(transpiler.context, keyname) || decl.hasMethod(transpiler.context, keyname, null)) {
+        return
+    } else {
+        var decl = this.findGlobalMethod(transpiler.context, keyname, true);
+        if (decl != null) {
+            decl.declare(transpiler);
+        } else {
+            key.declare(transpiler);
+        }
+    }
 };
 
-CategoryType.prototype.transpileSorted = function(transpiler, key, desc) {
+CategoryType.prototype.transpileSorted = function(transpiler, desc, key) {
+    var keyname = key ? key.toString() : "key";
+    var decl = this.getDeclaration(transpiler.context);
+    if (decl.hasAttribute(transpiler.context, keyname)) {
+        this.transpileSortedByAttribute(transpiler, desc, key);
+    } else if (decl.hasMethod(transpiler.context, keyname, null)) {
+        this.transpileSortedByClassMethod(transpiler, desc, key);
+    } else {
+        var decl = this.findGlobalMethod(transpiler.context, keyname);
+        if (decl != null) {
+            this.transpileSortedByGlobalMethod(transpiler, desc, keyname);
+        } else {
+            this.transpileSortedByExpression(transpiler, desc, key);
+        }
+    }
+};
+
+
+CategoryType.prototype.transpileSortedByExpression = function(transpiler, desc, key) {
+    this.transpileSortedByAttribute(transpiler, desc, key);
+};
+
+
+CategoryType.prototype.transpileSortedByAttribute = function(transpiler, desc, key) {
     key = key || new Variable(new Identifier("key"), TextType.instance);
     transpiler.append("function(o1, o2) { return ");
     this.transpileEqualKeys(transpiler, key);
@@ -604,6 +638,7 @@ CategoryType.prototype.transpileSorted = function(transpiler, key, desc) {
         transpiler.append("1 : -1; }");
 };
 
+
 CategoryType.prototype.transpileEqualKeys = function(transpiler, key) {
     transpiler.append("o1.");
     key.transpile(transpiler);
@@ -611,11 +646,26 @@ CategoryType.prototype.transpileEqualKeys = function(transpiler, key) {
     key.transpile(transpiler);
 };
 
+
 CategoryType.prototype.transpileGreaterKeys = function(transpiler, key) {
     transpiler.append("o1.");
     key.transpile(transpiler);
     transpiler.append(" > o2.");
     key.transpile(transpiler);
 };
+
+
+CategoryType.prototype.transpileSortedByGlobalMethod = function(transpiler, desc, name) {
+    transpiler.append("function(o1, o2) { return ")
+        .append(name).append("(o1) === ").append(name).append("(o2)").append(" ? 0 : ")
+        .append(name).append("(o1) > ").append(name).append("(o2)").append(" ? ");
+    if(desc)
+        transpiler.append("-1 : 1; }");
+    else
+        transpiler.append("1 : -1; }");
+};
+
+
+
 
 exports.CategoryType = CategoryType;
