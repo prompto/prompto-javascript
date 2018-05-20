@@ -24,6 +24,7 @@ IteratorExpression.prototype.check = function(context) {
     return new IteratorType(itemType);
 };
 
+
 IteratorExpression.prototype.interpret = function(context) {
     var elemType = this.source.check(context).checkIterator(context);
     var items = this.source.interpret(context);
@@ -31,6 +32,20 @@ IteratorExpression.prototype.interpret = function(context) {
     var iterator = this.getIterator(context, items);
     return new IterableValue(context, this.name, elemType, iterator, length, this.expression);
 };
+
+
+IteratorExpression.prototype.declare = function(transpiler) {
+    var sourceType = this.source.check(transpiler.context);
+    sourceType.declareIterator(transpiler, this.name, this.expression);
+};
+
+
+IteratorExpression.prototype.transpile = function(transpiler) {
+    var sourceType = this.source.check(transpiler.context);
+    this.source.transpile(transpiler);
+    sourceType.transpileIterator(transpiler, this.name, this.expression);
+};
+
 
 IteratorExpression.prototype.getIterator = function(context, src) {
     if (src.getIterator)

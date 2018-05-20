@@ -33,12 +33,21 @@ FilteredExpression.prototype.check = function(context) {
 		throw new SyntaxError("Expecting an iterable type as data source !");
 	}
 	var local = context.newChildContext();
-	local.registerValue(new Variable(this.itemId,listType.itemType));
+	local.registerValue(new Variable(this.itemId, listType.itemType));
 	var filterType = this.predicate.check(local);
 	if(filterType!=BooleanType.instance) {
 		throw new SyntaxError("Filtering expresion must return a boolean !");
 	}
 	return listType;
+};
+
+
+FilteredExpression.prototype.declare = function(transpiler) {
+    this.source.declare(transpiler);
+    var listType = this.source.check(transpiler.context);
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
+    this.predicate.declare(transpiler);
 };
 
 FilteredExpression.prototype.interpret = function(context) {
@@ -59,6 +68,18 @@ FilteredExpression.prototype.interpret = function(context) {
     local.registerValue(item);
     return list.filter(local, this.itemId, this.predicate)
 };
+
+FilteredExpression.prototype.transpile = function(transpiler) {
+    var listType = this.source.check(transpiler.context);
+    this.source.transpile(transpiler);
+    transpiler.append(".filter(function(").append(this.itemId.name).append(") { return ")
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
+    this.predicate.transpile(transpiler);
+    transpiler.append("; })");
+    transpiler.flush();
+};
+
 
 FilteredExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);

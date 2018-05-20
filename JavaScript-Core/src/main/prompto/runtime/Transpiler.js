@@ -241,6 +241,20 @@ ObjectUtils.arraySlice1Based = function(start, last) {
     }
 };
 
+ObjectUtils.iterateArray = function (fn) {
+    var self = this;
+    return {
+        length: self.length,
+        iterator: function() {
+            var idx = 0;
+            return {
+                hasNext: function() { return idx < self.length; },
+                next: function() { return fn(self[idx++]); }
+            };
+        }
+    }
+};
+
 
 ObjectUtils.stringHasAll = function(items) {
     if(StrictSet && items instanceof StrictSet)
@@ -383,6 +397,7 @@ function newTranspiler(context) {
     transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
     transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
     transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
+    transpiler.lines.push("Array.prototype.iterate = " + ObjectUtils.iterateArray.toString() + ";");
     transpiler.lines.push("Array.prototype.slice1Based = " + ObjectUtils.arraySlice1Based.toString() + ";");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
     transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");

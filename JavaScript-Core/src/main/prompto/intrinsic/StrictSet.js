@@ -13,7 +13,7 @@ StrictSet.prototype.toString = function() {
     return "<" + Array.from(this.set.values()).join(", ") + ">";
 };
 
-StrictSet.prototype.values = function() {
+StrictSet.prototype.iterator = function() {
     var iter = this.set.values();
     var item = iter.next();
     return {

@@ -44,20 +44,38 @@ exports.executeResource = function(fileName, methodName, args) {
     var context = prompto.runtime.Context.newGlobalContext();
     decls.register(context);
     decls.check(context);
-    if(context.hasTests())
-        throw new Error("Not implemented yet!");
-    else {
-        methodName = methodName || "main";
-        var js = prompto.runtime.Transpiler.transpile(context, methodName);
-        var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
-        var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
-        fs.writeFile(transpiled, js);
-        js = "var transpiled = function() {" + js + " \nreturn " + methodName + "; }; transpiled();";
-        var fn = eval(js);
-        args = args || "";
-        fn(args);
+    if(context.hasTests()) {
+        for(var test in context.tests) {
+            executeTest(context, test);
+        }
+    } else {
+        executeMethod(context, methodName, args);
     }
 };
+
+function executeTest(context, testName) {
+    var testMethod = context.getTestDeclaration(testName);
+    var js = prompto.runtime.Transpiler.transpileTest(context, testMethod);
+    var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
+    var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
+    fs.writeFile(transpiled, js);
+    js = "var transpiled = function() {" + js + " \nreturn " + testMethod.cleanId() + "; }; transpiled();";
+    var fn = eval(js);
+    fn();
+}
+
+function executeMethod(context, methodName, args) {
+    methodName = methodName || "main";
+    var js = prompto.runtime.Transpiler.transpileMethod(context, methodName);
+    var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
+    var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
+    fs.writeFile(transpiled, js);
+    js = "var transpiled = function() {" + js + " \nreturn " + methodName + "; }; transpiled();";
+    var fn = eval(js);
+    args = args || new prompto.intrinsic.Dictionary();
+    fn(args);
+}
+
 
 exports.checkProblems = function(test, code, expected) {
     var listener = new prompto.problem.ProblemCollector();
@@ -163,9 +181,9 @@ exports.checkInterpretedOutput = function(test, fileName) {
 };
 
 exports.checkTranspiledOutput = function(test, fileName) {
-    // prompto.store.DataStore.instance = new prompto.memstore.MemStore();
-    // exports.executeResource(fileName);
-    // checkSameOutput(test, fileName);
+    prompto.store.DataStore.instance = new prompto.memstore.MemStore();
+    exports.executeResource(fileName);
+    checkSameOutput(test, fileName);
     test.done();
 };
 

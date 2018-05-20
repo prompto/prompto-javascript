@@ -148,7 +148,11 @@ ConstructorExpression.prototype.declare = function(transpiler) {
 
 ConstructorExpression.prototype.transpile = function(transpiler) {
     transpiler.append("new ").append(this.type.name).append("(");
-    // TODO copyFrom
+    if(this.copyFrom!=null)
+        this.copyFrom.transpile(transpiler);
+    else
+        transpiler.append("null");
+    transpiler.append(", ");
     if(this.assignments!=null) {
         transpiler.append("{");
         this.assignments.forEach(function(assignment) {
@@ -158,7 +162,8 @@ ConstructorExpression.prototype.transpile = function(transpiler) {
         }, this);
         transpiler.trimLast(2);
         transpiler.append("}");
-    }
+    } else
+        transpiler.append("null");
     transpiler.append(")");
 };
 

@@ -8,7 +8,7 @@ Range.prototype.toString = function() {
     return "[" + this.first + ".." + this.last + "]";
 };
 
-Range.prototype.values = function() {
+Range.prototype.iterator = function() {
     var self = this;
     return {
         idx: 1, // since we are calling item()

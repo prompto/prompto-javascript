@@ -372,6 +372,15 @@ BaseType.prototype.checkIterator = function(context) {
 };
 
 
+BaseType.prototype.declareIterator = function(transpiler, name, expression) {
+    throw new SyntaxError("Cannot declare iterate over " + this.name);
+};
+
+BaseType.prototype.transpileIterator = function(transpiler, name, expression) {
+    throw new SyntaxError("Cannot transpile iterate over " + this.name);
+};
+
+
 BaseType.prototype.checkAssignableFrom = function(context, other) {
 	if (!this.isAssignableFrom(context, other)) {
 		throw new SyntaxError("Type: " + this.name + " is not compatible with: " + other.name);
@@ -387,7 +396,7 @@ BaseType.prototype.declareRange = function(context, other) {
 };
 
 
-BaseType.prototype.transpileRange = function(context, first, last) {
+BaseType.prototype.transpileRange = function(transpiler, first, last) {
     throw new SyntaxError("Cannot transpile range of " + this.name);
 };
 

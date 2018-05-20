@@ -25,9 +25,9 @@ Object.defineProperty(Dictionary.prototype, "values", {
     }
 });
 
-Dictionary.prototype.entries = function() {
+Dictionary.prototype.iterator = function() {
     var self = this;
-    var iter = this.keys.values();
+    var iter = this.keys.iterator();
     return {
         hasNext: iter.hasNext,
         next: function() { var key = iter.next(); return {key: key, value: self[key] }; }

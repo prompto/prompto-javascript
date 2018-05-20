@@ -4,6 +4,7 @@ var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var ListValue = require("../value/ListValue").ListValue;
+var Variable = require("../runtime/Variable").Variable;
 
 exports.resolve = function() {
     IntegerType = require("./IntegerType").IntegerType;
@@ -213,6 +214,24 @@ ListType.prototype.transpileContainsAny = function(transpiler, other, container,
 
 ListType.prototype.checkIterator = function(context) {
 	return this.itemType;
+};
+
+
+
+ListType.prototype.declareIterator = function(transpiler, name, expression) {
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(name, this.itemType));
+    expression.declare(transpiler);
+};
+
+
+ListType.prototype.transpileIterator = function(transpiler, name, expression) {
+    transpiler.append(".iterate(function(").append(name).append(") { return ");
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(name, this.itemType));
+    expression.transpile(transpiler);
+    transpiler.append("; }, this)");
+    transpiler.flush();
 };
 
 
