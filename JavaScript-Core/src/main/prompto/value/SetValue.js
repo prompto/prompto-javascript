@@ -94,7 +94,7 @@ SetValue.prototype.filter = function(context, itemId, filter) {
 }
 
 SetValue.prototype.getIterator = function(context) {
-    return this.items.values();
+    return this.items.iterator();
 };
 
 
