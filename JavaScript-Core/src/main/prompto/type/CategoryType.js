@@ -58,8 +58,7 @@ CategoryType.prototype.toDialect = function(writer) {
 
 CategoryType.prototype.declare = function(transpiler) {
     var decl = this.getDeclaration(transpiler.context);
-    if(decl instanceof CategoryDeclaration && decl.name!=="Error")
-        transpiler.declare(decl);
+    decl.declare(transpiler);
 };
 
 CategoryType.prototype.transpile = function(transpiler) {

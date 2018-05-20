@@ -17,6 +17,7 @@ exports.error = require("./error/index");
 exports.value = require("./value/index");
 exports.memstore = require("./memstore/index");
 exports.store = require("./store/index");
+exports.intrinsic = require("./intrinsic/index");
 
 exports.internet = require("./internet/index");
 exports.io = require("./io/index");

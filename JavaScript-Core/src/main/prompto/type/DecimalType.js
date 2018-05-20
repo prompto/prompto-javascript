@@ -20,6 +20,11 @@ DecimalType.prototype.constructor = DecimalType;
 DecimalType.instance = new DecimalType();
 
 
+DecimalType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
 DecimalType.prototype.isAssignableFrom = function(context, other) {
     return NativeType.prototype.isAssignableFrom.call(this, context, other)
         || (other == IntegerType.instance);

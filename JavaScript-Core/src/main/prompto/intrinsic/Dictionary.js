@@ -76,7 +76,7 @@ Dictionary.prototype.equals = function(dict) {
 };
 
 Dictionary.prototype.has = function(item) {
-    return this.keys.has(item, true);
+    return this.hasOwnProperty(item);
 };
 
 
@@ -88,5 +88,12 @@ Dictionary.prototype.hasAny = function(item) {
     return this.keys.hasAny(item, true);
 };
 
+Dictionary.prototype.item = function(item) {
+    if(!item)
+        throw new ReferenceError();
+    if(!this.hasOwnProperty(item))
+        throw new RangeError();
+    return this[item];
+};
 
 exports.Dictionary = Dictionary;

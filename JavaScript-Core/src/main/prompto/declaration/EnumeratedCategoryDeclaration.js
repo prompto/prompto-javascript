@@ -78,7 +78,7 @@ EnumeratedCategoryDeclaration.prototype.toODialect = function(writer) {
     });
     writer.dedent();
     writer.append("}\n");
-}
+};
 
 EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
@@ -104,7 +104,7 @@ EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
         writer.append("\n");
     });
     writer.dedent();
-}
+};
 
 EnumeratedCategoryDeclaration.prototype.toMDialect = function(writer) {
     writer.append("enum ");
@@ -124,6 +124,89 @@ EnumeratedCategoryDeclaration.prototype.toMDialect = function(writer) {
         writer.append("\n");
     });
     writer.dedent();
-}
+};
+
+EnumeratedCategoryDeclaration.prototype.isUserError = function(context) {
+    return this.derivedFrom && this.derivedFrom.length===1 && this.derivedFrom[0].name==="Error";
+};
+
+EnumeratedCategoryDeclaration.prototype.declare = function(transpiler) {
+    if(this.name==="Error")
+        return;
+    else if (this.isUserError(transpiler.context))
+        this.declareUserError(transpiler);
+    else
+        ConcreteCategoryDeclaration.prototype.declare.call(this, transpiler);
+};
+
+EnumeratedCategoryDeclaration.prototype.declareUserError = function(transpiler) {
+    transpiler.declare(this);
+    // don't declare inherited Error
+};
+
+
+
+EnumeratedCategoryDeclaration.prototype.ensureDeclarationOrder = function(context, list, set) {
+    if(set.has(this))
+        return;
+    if (this.isUserError(context)) {
+        list.push(this);
+        set.add(this);
+        // don't declare inherited Error
+    } else
+        ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder.call(this, context, list, set);
+};
+
+
+EnumeratedCategoryDeclaration.prototype.transpile = function(transpiler) {
+    if (this.isUserError(transpiler.context))
+        this.transpileUserError(transpiler);
+    else
+        this.transpileEnumerated(transpiler);
+};
+
+
+EnumeratedCategoryDeclaration.prototype.transpileUserError = function(transpiler) {
+    transpiler.append("class ").append(this.name).append(" extends Error {").indent();
+    transpiler.newLine();
+    transpiler.append("constructor(values) {").indent();
+    transpiler.append("super(values.text);").newLine();
+    transpiler.append("this.name = '").append(this.name).append("';").newLine();
+    transpiler.append("this.promptoName = values.name;").newLine();
+    if (this.attributes) {
+        this.attributes
+            .filter(function (attr) {
+                return attr.name !== 'name' && attr.name != 'text';
+            })
+            .forEach(function (attr) {
+                transpiler.append("this.").append(attr.name).append(" = values.").append(attr.name).append(" || null;");
+                transpiler.newLine();
+            }, this);
+    }
+    transpiler.append("return this;").dedent();
+    transpiler.append("}").dedent().newLine();
+    transpiler.append("toString() {").indent().append("return this.message;").dedent().append("}").newLine();
+    transpiler.append("}").newLine();
+    this.symbols.forEach(function(symbol) { symbol.initializeError(transpiler); });
+    this.transpileSymbols(transpiler);
+};
+
+EnumeratedCategoryDeclaration.prototype.transpileSymbols = function(transpiler) {
+    var names = this.symbols.map(function (symbol) {
+        return symbol.name;
+    });
+    transpiler.append(this.name + ".symbols = ");
+    transpiler.append("[" + names.join(", ") + "]");
+    transpiler.append(";");
+};
+
+EnumeratedCategoryDeclaration.prototype.transpileEnumerated = function(transpiler) {
+    ConcreteCategoryDeclaration.prototype.transpile.call(this, transpiler);
+    transpiler.newLine();
+    transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };");
+    transpiler.newLine();
+    this.symbols.forEach(function(symbol) { symbol.initialize(transpiler); });
+    this.transpileSymbols(transpiler);
+};
 
 exports.EnumeratedCategoryDeclaration = EnumeratedCategoryDeclaration;

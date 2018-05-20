@@ -23,6 +23,12 @@ ArgumentList.prototype.check = function(context) {
     });
 };
 
+ArgumentList.prototype.declare = function(transpiler) {
+    this.forEach(function(arg) {
+        arg.declare(transpiler);
+    });
+};
+
 ArgumentList.prototype.find = function(name) {
 	for(var i=0;i<this.length;i++) {
 		if(name===this[i].name) {

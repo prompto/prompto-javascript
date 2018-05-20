@@ -54,6 +54,13 @@ BaseMethodDeclaration.prototype.registerArguments = function(context) {
 	}
 };
 
+
+BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
+    if(this.args!=null) {
+        this.args.declare(transpiler);
+    }
+};
+
 BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, checkInstance) {
 	try {
 		var local = context.newLocalContext();

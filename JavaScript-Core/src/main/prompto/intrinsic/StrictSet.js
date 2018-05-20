@@ -55,9 +55,11 @@ StrictSet.prototype.add = function(value) {
     }
 };
 
-StrictSet.prototype.has = function(value) {
+StrictSet.prototype.has = function(value, noCheckEquals) {
     if(this.set.has(value))
         return true;
+    if(noCheckEquals)
+        return false;
     var iter = this.set.values();
     var item = iter.next();
     while(!item.done) {
@@ -72,19 +74,11 @@ StrictSet.prototype.has = function(value) {
 StrictSet.prototype.hasAll = function(items, noCheckEquals) {
     if(items instanceof StrictSet)
         items = Array.from(items.set.values());
-    if(noCheckEquals) {
-        for (var i = 0; i < items.length; i++) {
-            if (!this.set.has(items[i]))
-                return false;
-        }
-        return true;
-    } else {
-        for (var i = 0; i < items.length; i++) {
-            if (!this.has(items[i]))
-                return false;
-        }
-        return true;
+    for (var i = 0; i < items.length; i++) {
+        if (!this.has(items[i], noCheckEquals))
+            return false;
     }
+    return true;
 };
 
 

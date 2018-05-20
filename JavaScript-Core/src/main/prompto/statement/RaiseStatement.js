@@ -41,6 +41,17 @@ RaiseStatement.prototype.interpret = function(context) {
 	throw new UserError(this.expression);
 };
 
+
+RaiseStatement.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+};
+
+RaiseStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("throw ");
+    this.expression.transpile(transpiler);
+};
+
+
 RaiseStatement.prototype.toDialect = function(writer) {
     switch(writer.dialect) {
         case Dialect.E:

@@ -82,4 +82,14 @@ AtomicSwitchCase.prototype.transpile = function(transpiler) {
     transpiler.dedent();
 };
 
+AtomicSwitchCase.prototype.transpileError = function(transpiler) {
+    transpiler.append('case "');
+    this.expression.transpile(transpiler);
+    transpiler.append('":');
+    transpiler.indent();
+    this.statements.transpile(transpiler);
+    transpiler.append("break;");
+    transpiler.dedent();
+};
+
 exports.AtomicSwitchCase = AtomicSwitchCase;

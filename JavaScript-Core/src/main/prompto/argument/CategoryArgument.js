@@ -45,6 +45,10 @@ CategoryArgument.prototype.check = function(context) {
 	this.type.checkExists(context);
 };
 
+CategoryArgument.prototype.declare = function(transpiler) {
+    this.type.declare(transpiler);
+};
+
 CategoryArgument.prototype.getType = function(context) {
 	return this.type;
 };

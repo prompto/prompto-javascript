@@ -156,4 +156,40 @@ SwitchErrorStatement.prototype.toEDialect = function(writer) {
     }
 }
 
+SwitchErrorStatement.prototype.declare = function(transpiler) {
+    this.statements.declare(transpiler);
+    transpiler = transpiler.newLocalTranspiler();
+    transpiler.context.registerValue(new ErrorVariable(this.errorId));
+    this.declareSwitch(transpiler);
+};
+
+
+
+SwitchErrorStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("try {").indent();
+    this.statements.transpile(transpiler);
+    transpiler.dedent().append("} catch(").append(this.errorId.name).append(") {").indent();
+    transpiler = transpiler.newLocalTranspiler();
+    transpiler.context.registerValue(new ErrorVariable(this.errorId));
+    transpiler.append("switch(translateError(").append(this.errorId.name).append(")) {").indent();
+    this.switchCases.forEach(function(switchCase) {
+        switchCase.transpileError(transpiler);
+    }, this);
+    if(this.defaultCase!=null) {
+        transpiler.append("default:").indent();
+        this.defaultCase.transpileError(transpiler);
+        transpiler.dedent();
+    }
+    transpiler.dedent().append("}");
+    if(this.alwaysInstructions) {
+        transpiler.append(" finally {").indent();
+        this.alwaysInstructions.transpile(transpiler);
+        transpiler.dedent().append("}");
+    }
+    transpiler.dedent().append("}");
+    transpiler.flush();
+    return true;
+};
+
+
 exports.SwitchErrorStatement = SwitchErrorStatement;

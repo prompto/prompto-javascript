@@ -181,6 +181,16 @@ ObjectUtils.objectToString = function() {
 };
 
 
+ObjectUtils.arrayItem = function(idx) {
+    if(idx==null)
+        throw new ReferenceError();
+    else if(idx<1 || idx>this.length)
+        throw new RangeError();
+    else
+        return this[idx-1];
+};
+
+
 ObjectUtils.arrayToString = function() {
     return '[' + this.join(', ') + ']';
 };
@@ -213,16 +223,22 @@ ObjectUtils.arrayHasAny = function(items, noCheckEquals) {
 };
 
 ObjectUtils.arraySlice1Based = function(start, last) {
-    if(start)
+    if(start) {
+        if (start < 0 || start >= this.length)
+            throw new RangeError();
         start = start - 1;
-    else
+    } else
         start = 0;
     if(!last)
         return this.slice(start);
-    if(last >= 0)
+    if(last >= 0) {
+        if(last<=start || last>= this.length - 1)
+            throw new RangeError();
         return this.slice(start, last);
-    else
+    } else {
+        // TODO check Range
         return this.slice(start, 1 + last);
+    }
 };
 
 
@@ -248,14 +264,23 @@ ObjectUtils.stringHasAny = function(items) {
 };
 
 ObjectUtils.stringSlice = function(start, last) {
-    if(!start)
-        start = 1;
+    if(start) {
+        if (start < 0 || start >= this.length)
+            throw new RangeError();
+        start = start - 1;
+    } else
+        start = 0;
     if(!last)
-        return this.substring(start - 1);
-    if(last >= 0)
-        return this.substring(start - 1, last);
-    else
-        return this.substring(start - 1, this.length + 1 + last)
+        return this.substring(start);
+    if(last >= 0) {
+        if(last<1 || last>this.length)
+            throw new RangeError();
+        return this.substring(start, last);
+    } else {
+        if(last<-this.length)
+            throw new RangeError();
+        return this.substring(start, this.length + 1 + last)
+    }
 };
 
 ObjectUtils.formatInteger = function(format) {
@@ -289,10 +314,10 @@ function print(msg) {
 function translateError(e) {
     if(e.promptoName)
         return e.promptoName;
-    else if(e instanceof DivideByZeroError)
-        return "DIVIDE_BY_ZERO";
     else if(e instanceof RangeError)
         return "INDEX_OUT_OF_RANGE";
+    else if(e instanceof TypeError)
+        return "NULL_REFERENCE";
     else if(e instanceof ReferenceError)
         return "NULL_REFERENCE";
     else
@@ -307,9 +332,15 @@ function translateError(e) {
 class DivideByZeroError extends Error {
 
     constructor(message) {
-        super(message);
+        super("Divide by zero!")
         this.name = "DivideByZeroError";
+        this.promptoName = "DIVIDE_BY_ZERO";
     }
+
+    toString() {
+        return this.message;
+    }
+
 }
 
 function divide( a, b ) {
@@ -342,8 +373,12 @@ function newTranspiler(context) {
     transpiler.require(divide);
     transpiler.require(DivideByZeroError);
     transpiler.require(translateError);
+    transpiler.lines.push("TypeError.prototype.toString = function() { return 'Null reference!'; };");
+    transpiler.lines.push("ReferenceError.prototype.toString = function() { return 'Null reference!'; };");
+    transpiler.lines.push("RangeError.prototype.toString = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
     transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
+    transpiler.lines.push("Array.prototype.item = " + ObjectUtils.arrayItem.toString() + ";");
     transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
     transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
     transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");

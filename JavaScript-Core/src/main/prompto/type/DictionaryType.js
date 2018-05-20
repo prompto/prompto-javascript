@@ -7,6 +7,7 @@ var SetType = require("./SetType").SetType;
 var ListType = require("./ListType").ListType;
 var EntryType = require("./EntryType").EntryType;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+var Dictionary = require("../intrinsic/Dictionary").Dictionary;
 
 function DictionaryType(itemType) {
 	ContainerType.call(this, new Identifier(itemType.name+"{}"), itemType);
@@ -17,6 +18,9 @@ function DictionaryType(itemType) {
 DictionaryType.prototype = Object.create(ContainerType.prototype);
 DictionaryType.prototype.constructor = DictionaryType;
 
+DictionaryType.prototype.declare = function(transpiler) {
+    transpiler.require(Dictionary);
+};
 
 DictionaryType.prototype.isAssignableFrom = function(context, other) {
     return ContainerType.prototype.isAssignableFrom.call(this, context, other)
@@ -135,9 +139,9 @@ DictionaryType.prototype.declareItem = function(transpiler, itemType, item) {
 
 
 DictionaryType.prototype.transpileItem = function(transpiler, itemType, item) {
-    transpiler.append("[");
+    transpiler.append(".item(");
     item.transpile(transpiler);
-    transpiler.append("]");
+    transpiler.append(")");
 };
 
 

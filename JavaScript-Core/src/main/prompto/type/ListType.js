@@ -18,6 +18,12 @@ function ListType(itemType) {
 ListType.prototype = Object.create(ContainerType.prototype);
 ListType.prototype.constructor = ListType;
 
+
+ListType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
 ListType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     var values = value.map(function(item) {
         return this.itemType.convertJavaScriptValueToPromptoValue(context, item, null);
@@ -98,9 +104,9 @@ ListType.prototype.declareItem = function(transpiler, itemType, item) {
 
 ListType.prototype.transpileItem = function(transpiler, itemType, item) {
     if(itemType===IntegerType.instance) {
-        transpiler.append("[");
+        transpiler.append(".item(");
         item.transpile(transpiler);
-        transpiler.append("-1]");
+        transpiler.append(")");
     } else {
         return ContainerType.prototype.transpileItem.call(this, context, itemType, item);
     }

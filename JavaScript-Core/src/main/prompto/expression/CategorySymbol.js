@@ -1,5 +1,6 @@
 var Symbol = require("./Symbol").Symbol;
 var TextValue = require("../value/TextValue").TextValue;
+var ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
 
 function CategorySymbol(id, assignments) {
 	Symbol.call(this, id);
@@ -79,6 +80,34 @@ CategorySymbol.prototype.getMemberValue = function(context, name, autoCreate) {
 
 CategorySymbol.prototype.declare = function(transpiler) {
     this.type.declare(transpiler);
+};
+
+
+CategorySymbol.prototype.transpile = function(transpiler) {
+    transpiler.append(this.name);
+};
+
+
+CategorySymbol.prototype.initialize = function(transpiler) {
+    transpiler.append("var ").append(this.name).append(" = ");
+    ConstructorExpression.prototype.transpile.call(this, transpiler);
+    transpiler.append(";").newLine();
+};
+
+
+
+CategorySymbol.prototype.initializeError = function(transpiler) {
+    transpiler.append("var ").append(this.name).append(" = new ").append(this.type.name).append("({");
+    transpiler.append("name: '").append(this.name).append("', ");
+    if(this.assignments!=null) {
+        this.assignments.forEach(function (assignment) {
+            transpiler.append(assignment.argument.name).append(":");
+            assignment.expression.transpile(transpiler);
+            transpiler.append(", ");
+        }, this);
+    }
+    transpiler.trimLast(2);
+    transpiler.append("});").newLine();
 };
 
 exports.CategorySymbol = CategorySymbol;
