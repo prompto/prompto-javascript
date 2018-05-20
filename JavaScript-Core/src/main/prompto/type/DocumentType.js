@@ -42,8 +42,27 @@ DocumentType.prototype.transpileMember = function(transpiler, name) {
     if ("text"!==name) {
         transpiler.append(name);
     } else {
-        NativeType.prototype.transpileMember.call(this, transpiler, name);
+        transpiler.append("getText()");
     }
+};
+
+
+
+DocumentType.prototype.transpileAssignMember = function(transpiler, name) {
+    transpiler.append(".getMember('").append(name).append("', true)");
+};
+
+
+DocumentType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
+    transpiler.append(".setMember('").append(name).append("', ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+DocumentType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
+    transpiler.append(".setItem(").append(item).append(", ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
 };
 
 
@@ -52,6 +71,12 @@ DocumentType.prototype.checkItem = function(context, itemType) {
         return AnyType.instance;
     else
         throw ("text");
+};
+
+
+DocumentType.prototype.transpileItem = function(transpiler, type, item) {
+    // required to support Document items
+    transpiler.append(".item(").append(item).append(")");
 };
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {

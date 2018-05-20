@@ -8,6 +8,10 @@ Range.prototype.toString = function() {
     return "[" + this.first + ".." + this.last + "]";
 };
 
+
+Range.prototype.getText = Range.prototype.toString;
+
+
 Range.prototype.iterator = function() {
     var self = this;
     return {

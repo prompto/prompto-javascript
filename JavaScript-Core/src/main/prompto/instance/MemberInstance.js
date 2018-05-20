@@ -24,6 +24,13 @@ MemberInstance.prototype.toDialect = function(writer) {
     writer.append(this.name);
 };
 
+
+MemberInstance.prototype.interpret = function(context) {
+    var root = this.parent.interpret(context);
+    return root.getMemberValue(context, this.name, true);
+};
+
+
 MemberInstance.prototype.checkAssignValue = function(context, valueType) {
 	return this.parent.checkAssignMember(context, this.name, valueType);
 };
@@ -47,6 +54,24 @@ MemberInstance.prototype.assign = function(context, expression) {
 };
 
 
+MemberInstance.prototype.check = function(context) {
+    var parentType = this.parent.check(context);
+    return parentType.checkMember(context, this.name);
+};
+
+
+
+MemberInstance.prototype.declare = function(transpiler) {
+    this.parent.declare(transpiler);
+};
+
+
+MemberInstance.prototype.transpile = function(transpiler) {
+    this.parent.transpile(transpiler);
+    transpiler.append(".").append(this.name);
+};
+
+
 MemberInstance.prototype.declareAssign = function(transpiler, expression) {
     this.parent.declare(transpiler);
     expression.declare(transpiler);
@@ -55,14 +80,17 @@ MemberInstance.prototype.declareAssign = function(transpiler, expression) {
 
 
 MemberInstance.prototype.transpileAssign = function(transpiler, expression) {
-    this.parent.transpile(transpiler);
-    transpiler.append(".").append(this.name).append(" = ");
-    expression.transpile(transpiler);
+    var parentType = this.parent.check(transpiler.context);
+    this.parent.transpileAssignParent(transpiler);
+    parentType.transpileAssignMemberValue(transpiler, this.name, expression);
 };
 
-MemberInstance.prototype.interpret = function(context) {
-	var root = this.parent.interpret(context);
-	return root.getMemberValue(context, this.name, true);
+
+MemberInstance.prototype.transpileAssignParent = function(transpiler) {
+    var parentType = this.parent.check(transpiler.context);
+    this.parent.transpileAssignParent(transpiler);
+    parentType.transpileAssignMember(transpiler, this.name);
 };
+
 
 exports.MemberInstance = MemberInstance;

@@ -20,4 +20,6 @@ Tuple.prototype.toString = function() {
 	return "(" + this.join(", ") + ")";
 };
 
+Tuple.prototype.getText = Tuple.prototype.toString;
+
 exports.Tuple = Tuple;

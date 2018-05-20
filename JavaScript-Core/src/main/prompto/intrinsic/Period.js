@@ -206,4 +206,7 @@ Period.prototype.toString = function() {
 };
 
 
+Period.prototype.getText = Period.prototype.toString;
+
+
 exports.Period = Period;

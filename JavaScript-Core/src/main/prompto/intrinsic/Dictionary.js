@@ -49,6 +49,10 @@ Dictionary.prototype.toString = function() {
     return "{" + vals.join(", ") + "}";
 };
 
+
+Dictionary.prototype.getText = Dictionary.prototype.toString;
+
+
 Dictionary.prototype.equals = function(dict) {
     var keys = Object.getOwnPropertyNames(this);
     if (keys.length != dict.length)

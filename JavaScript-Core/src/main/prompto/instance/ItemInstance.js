@@ -23,6 +23,13 @@ ItemInstance.prototype.toDialect = function(writer) {
     writer.append(']');
 }
 
+ItemInstance.prototype.check = function(context) {
+    var parentType = this.parent.check(context);
+    var itemType = this.item.check(context);
+    return parentType.checkItem(context, itemType);
+};
+
+
 ItemInstance.prototype.checkAssignValue = function(context, valueType) {
     var itemType = this.item.check(context);
 	return this.parent.checkAssignItem(context, itemType, valueType);
@@ -58,5 +65,41 @@ ItemInstance.prototype.interpret = function(context) {
 		throw new SyntaxError("Unknown item/key: " + typeof(item));
 	}
 };
+
+
+ItemInstance.prototype.declare = function(transpiler) {
+    this.parent.declare(transpiler);
+    this.item.declare(transpiler);
+};
+
+
+ItemInstance.prototype.transpile = function(transpiler) {
+    this.parent.transpile(transpiler);
+    transpiler.append(".item(");
+    this.item.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+ItemInstance.prototype.declareAssign = function(transpiler, expression) {
+    this.parent.declare(transpiler);
+    this.item.declare(transpiler);
+    expression.declare(transpiler);
+};
+
+ItemInstance.prototype.transpileAssign = function(transpiler, expression) {
+    var parentType = this.parent.check(transpiler.context);
+    this.parent.transpileAssignParent(transpiler);
+    parentType.transpileAssignItemValue(transpiler, this.item, expression);
+};
+
+
+ItemInstance.prototype.transpileAssignParent = function(transpiler) {
+    this.parent.transpileAssignParent(transpiler);
+    transpiler.append(".getItem(");
+    this.item.transpile(transpiler);
+    transpiler.append(", true)");
+};
+
 
 exports.ItemInstance = ItemInstance;

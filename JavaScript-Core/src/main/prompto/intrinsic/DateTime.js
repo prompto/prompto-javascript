@@ -145,6 +145,9 @@ DateTime.prototype.toString = function() {
 };
 
 
+DateTime.prototype.getText = DateTime.prototype.toString;
+
+
 DateTime.prototype.equals = function(value) {
     return value instanceof DateTime && this.date.valueOf() == value.date.valueOf() && this.tzOffset == value.tzOffset;
 };

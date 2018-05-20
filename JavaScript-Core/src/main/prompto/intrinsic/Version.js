@@ -24,6 +24,8 @@ Version.prototype.toString = function() {
     return "" + this.major + "." + this.minor + "." + this.fix;
 };
 
+Version.prototype.getText = Version.prototype.toString;
+
 
 Version.prototype.asInt = function() {
     return (this.major << 24) | (this.minor << 16) | this.fix;

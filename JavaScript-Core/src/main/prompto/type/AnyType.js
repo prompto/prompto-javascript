@@ -13,13 +13,45 @@ function AnyType() {
 	
 
 
-AnyType.prototype.checkItem = function(context, name) {
+AnyType.prototype.checkItem = function(context, item) {
 	return AnyType.instance; // required to support Document items
 };
 
-AnyType.prototype.checkMember = function(context, name) {
-	return AnyType.instance; // required to support Document members
+
+AnyType.prototype.declareItem = function(transpiler, type, item) {
+    // required to support Document items
+    type.declare(transpiler);
+    item.declare(transpiler);
 };
+
+
+AnyType.prototype.transpileItem = function(transpiler, type, item) {
+    // required to support Document items
+    transpiler.append(".item(").append(item).append(")");
+};
+
+
+AnyType.prototype.checkMember = function(context, name) {
+	// required to support Document members
+    return AnyType.instance;
+};
+
+
+AnyType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
+    // required to support Document members
+    transpiler.append(".setMember('").append(name).append("', ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+AnyType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
+    // required to support Document members
+    transpiler.append(".setItem(").append(item).append(", ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 AnyType.prototype.isAssignableFrom = function(context, other) {
 	return true;

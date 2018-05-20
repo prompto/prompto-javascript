@@ -21,6 +21,9 @@ LocalTime.prototype.toString = function() {
     return this.toISOString().substring(11, 23)
 };
 
+
+LocalTime.prototype.getText = LocalTime.prototype.toString;
+
 LocalTime.prototype.equals = function(obj) {
     return obj instanceof LocalTime && this.valueOf() == obj.valueOf();
 };

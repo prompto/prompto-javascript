@@ -191,6 +191,29 @@ ObjectUtils.arrayItem = function(idx) {
 };
 
 
+ObjectUtils.getArrayItem = function (idx, create) {
+    if(idx==null)
+        throw new ReferenceError();
+    else if(idx<1 || idx>this.length)
+        throw new RangeError();
+    else {
+        if(!this[idx - 1] && create)
+            this[idx - 1] = new Document();
+        return this[idx - 1] || null;
+    }
+};
+
+
+ObjectUtils.setArrayItem = function (idx, value) {
+    if(idx==null)
+        throw new ReferenceError();
+    else if(idx<1 || idx>this.length)
+        throw new RangeError();
+    else
+        this[idx-1] = value;
+};
+
+
 ObjectUtils.arrayToString = function() {
     return '[' + this.join(', ') + ']';
 };
@@ -392,8 +415,12 @@ function newTranspiler(context) {
     transpiler.lines.push("RangeError.prototype.toString = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
     transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
+    transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
     transpiler.lines.push("Array.prototype.item = " + ObjectUtils.arrayItem.toString() + ";");
+    transpiler.lines.push("Array.prototype.getItem = " + ObjectUtils.getArrayItem.toString() + ";");
+    transpiler.lines.push("Array.prototype.setItem = " + ObjectUtils.setArrayItem.toString() + ";");
     transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
+    transpiler.lines.push("Array.prototype.getText = Array.prototype.toString;");
     transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
     transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
     transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
@@ -401,9 +428,11 @@ function newTranspiler(context) {
     transpiler.lines.push("Array.prototype.slice1Based = " + ObjectUtils.arraySlice1Based.toString() + ";");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
     transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
+    transpiler.lines.push("Number.prototype.getText = Number.prototype.toString;");
     transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
     transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
+    transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
     return transpiler;
 }
 

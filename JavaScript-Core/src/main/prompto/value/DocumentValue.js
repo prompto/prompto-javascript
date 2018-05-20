@@ -29,9 +29,8 @@ DocumentValue.prototype.hasMember = function(name) {
 }
 
 DocumentValue.prototype.getMemberValue = function(context, name, autoCreate) {
-    var result = this.values[name] || null;
-    if(result)
-        return result;
+    if(this.values.hasOwnProperty(name))
+        return this.values[name] || null;
     else if("text" == name)
         return new TextValue(this.toString());
     else if(autoCreate) {

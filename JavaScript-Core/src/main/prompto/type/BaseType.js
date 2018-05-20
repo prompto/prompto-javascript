@@ -52,6 +52,16 @@ BaseType.prototype.transpile = function(transpiler) {
 };
 
 
+BaseType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
+    throw new SyntaxError("Cannot transpile assign member value from " + this.name);
+};
+
+
+BaseType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
+    throw new SyntaxError("Cannot transpile assign item value from " + this.name);
+};
+
+
 BaseType.prototype.checkAdd = function(context, other, tryReverse) {
     if(other instanceof EnumeratedNativeType)
         return this.checkAdd(context, other.derivedFrom, tryReverse);
@@ -347,7 +357,7 @@ BaseType.prototype.declareMember = function(transpiler, name) {
 
 BaseType.prototype.transpileMember = function(transpiler, name) {
     if("text" == name)
-        transpiler.append("toString()");
+        transpiler.append("getText()");
     else
         throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
 };

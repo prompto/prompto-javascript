@@ -29,16 +29,23 @@ VariableInstance.prototype.toString = function() {
     return this.name;
 };
 
+
+VariableInstance.prototype.check = function(context) {
+    var actual = context.getRegisteredValue(this.id);
+    return actual.type;
+};
+
+
 VariableInstance.prototype.checkAssignValue = function(context, valueType) {
-	var actual = context.getRegisteredValue(this.id);
-	if(actual==null) {
-		context.registerValue(new Variable(this.id, valueType));
+    var actual = context.getRegisteredValue(this.id);
+    if(actual==null) {
+        context.registerValue(new Variable(this.id, valueType));
         return valueType;
-	} else {
-		// need to check type compatibility
+    } else {
+        // need to check type compatibility
         actual.type.checkAssignableFrom(context, valueType);
         return actual.type;
-	}
+    }
 };
 
 VariableInstance.prototype.checkAssignMember = function(context, name, valueType) {
@@ -91,6 +98,11 @@ VariableInstance.prototype.transpileAssign = function(transpiler, expression) {
     transpiler.append(this.name);
     transpiler.append(" = ");
     expression.transpile(transpiler);
+};
+
+
+VariableInstance.prototype.transpileAssignParent = function(transpiler) {
+    transpiler.append(this.name);
 };
 
 

@@ -80,6 +80,9 @@ UUID.prototype.toString = function() {
     return this.hex;
 };
 
+UUID.prototype.getText = UUID.prototype.toString;
+
+
 UUID.prototype.toBytes = function() {
     var parts = this.hex.split('-');
     var ints = [];
