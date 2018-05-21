@@ -112,7 +112,9 @@ MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context,this);
     var declaration = finder.findMethod(false);
     if(declaration instanceof BuiltInMethodDeclaration) {
-        this.method.transpileParent(transpiler);
+        var parent = this.method.resolveParent(transpiler.context);
+        parent.transpile(transpiler);
+        transpiler.append(".");
         declaration.transpileCall(transpiler, this.assignments);
     } else {
         this.method.transpile(transpiler);
