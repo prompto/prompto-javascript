@@ -95,6 +95,11 @@ VariableInstance.prototype.transpileAssign = function(transpiler, expression) {
         transpiler.context.registerValue(new Variable(this.id, type));
         transpiler.append("var ");
     }
+    var context = transpiler.context.contextForValue(this.id.name);
+    if(context.instanceType) {
+        context.instanceType.transpileInstance(transpiler);
+        transpiler.append(".");
+    }
     transpiler.append(this.name);
     transpiler.append(" = ");
     expression.transpile(transpiler);

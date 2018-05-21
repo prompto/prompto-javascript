@@ -36,8 +36,9 @@ MethodSelector.prototype.toDialect = function(writer) {
 
 MethodSelector.prototype.transpile = function(transpiler) {
     if(this.parent!=null)
-        this.transpileParent(transpiler);
-    transpiler.append(this.name);
+        MemberSelector.prototype.transpile.call(this, transpiler);
+    else
+        transpiler.append(this.name);
 };
 
 

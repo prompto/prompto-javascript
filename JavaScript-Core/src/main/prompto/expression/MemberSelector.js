@@ -52,15 +52,6 @@ MemberSelector.prototype.declareParent = function(transpiler) {
 };
 
 
-MemberSelector.prototype.transpileParent = function(transpiler) {
-    // resolve parent to keep clarity
-    var parent = this.resolveParent(transpiler.context);
-    parent.transpile(transpiler);
-    transpiler.append(".");
-};
-
-
-
 MemberSelector.prototype.declare = function(transpiler) {
     this.declareParent(transpiler);
     var parentType = this.checkParent(transpiler.context);
@@ -69,10 +60,39 @@ MemberSelector.prototype.declare = function(transpiler) {
 
 
 MemberSelector.prototype.transpile = function(transpiler) {
-    this.transpileParent(transpiler);
-    var parentType = this.checkParent(transpiler.context);
-    return parentType.transpileMember(transpiler, this.name);
+    // resolve parent to keep clarity
+    var parent = this.resolveParent(transpiler.context);
+    // special case for singletons
+    if(this.transpileSingleton(transpiler, parent))
+        return;
+    // special case for 'static' type members (like Enum.symbols, Type.name etc...)
+    if(this.transpileTypeMember(transpiler, parent))
+        return;
+    // finally resolve instance member
+    this.transpileInstanceMember(transpiler, parent);
 };
+
+MemberSelector.prototype.transpileSingleton = function(transpiler, parent) {
+    if(parent instanceof TypeExpression && parent.value instanceof CategoryType && !(parent.value instanceof EnumeratedCategoryType)) {
+        parent.value.transpileInstance(transpiler);
+        transpiler.append(".").append(this.name);
+        return true;
+    } else
+        return false;
+};
+
+
+MemberSelector.prototype.transpileTypeMember = function(transpiler, parent) {
+    return false; // TODO
+};
+
+MemberSelector.prototype.transpileInstanceMember = function(transpiler, parent) {
+    parent.transpile(transpiler);
+    transpiler.append(".");
+    var type = parent.check(transpiler.context);
+    type.transpileMember(transpiler, this.name);
+};
+
 
 MemberSelector.prototype.toString = function() {
 	return this.parent.toString() + "." + this.name;

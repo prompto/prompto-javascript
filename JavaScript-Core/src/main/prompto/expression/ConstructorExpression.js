@@ -147,6 +147,7 @@ ConstructorExpression.prototype.declare = function(transpiler) {
 };
 
 ConstructorExpression.prototype.transpile = function(transpiler) {
+    transpiler = transpiler.newInstanceTranspiler(this.type);
     transpiler.append("new ").append(this.type.name).append("(");
     if(this.copyFrom!=null)
         this.copyFrom.transpile(transpiler);
@@ -165,6 +166,7 @@ ConstructorExpression.prototype.transpile = function(transpiler) {
     } else
         transpiler.append("null");
     transpiler.append(")");
+    transpiler.flush();
 };
 
 exports.ConstructorExpression = ConstructorExpression;

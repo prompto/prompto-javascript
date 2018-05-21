@@ -147,18 +147,16 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
 };
 
 ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
+    transpiler = transpiler.newLocalTranspiler();
     if(!this.memberOf) {
         transpiler.declare(this);
         this.declareArguments(transpiler);
     }
-    transpiler = transpiler.newLocalTranspiler();
     this.registerArguments(transpiler.context);
     this.statements.declare(transpiler);
-    transpiler.flush();
 };
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
-    transpiler = transpiler.newLocalTranspiler();
     this.registerArguments(transpiler.context);
     if(this.memberOf)
         transpiler.append(this.memberOf.name).append(".prototype.").append(this.name).append(" = function (");
@@ -171,7 +169,6 @@ ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     if(this.memberOf)
         transpiler.append(";");
     transpiler.newLine();
-    transpiler.flush();
 };
 
 exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

@@ -31,9 +31,11 @@ InstanceExpression.prototype.toString = function() {
 
 
 InstanceExpression.prototype.transpile = function(transpiler) {
-    var named = transpiler.context.getRegistered(this.id.name);
-    if(named instanceof AttributeDeclaration)
-        transpiler.append("this.");
+    var context = transpiler.context.contextForValue(this.id.name);
+    if(context && context.instanceType) {
+        context.instanceType.transpileInstance(transpiler);
+        transpiler.append(".");
+    }
     transpiler.append(this.name);
 };
 

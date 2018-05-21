@@ -40,13 +40,17 @@ Transpiler.prototype.newChildTranspiler = function(context) {
     return this.copyTranspiler(context);
 };
 
-Transpiler.prototype.newMemberTranspiler = function(context) {
+Transpiler.prototype.newMemberTranspiler = function() {
     var context = this.context.newLocalContext();
     context.parent = this.context;
     return this.copyTranspiler(context);
 };
 
 
+Transpiler.prototype.newInstanceTranspiler = function(type) {
+    var context = this.context.newInstanceContext(null, type, true);
+    return this.copyTranspiler(context);
+};
 
 Transpiler.prototype.flush = function() {
     if(this.parent) {
@@ -76,7 +80,9 @@ Transpiler.prototype.appendAllDeclared = function() {
 
 
 Transpiler.prototype.appendOneDeclared = function(decl) {
-    decl.transpile(this);
+    var transpiler = this.newLocalTranspiler();
+    decl.transpile(transpiler);
+    transpiler.flush();
     if(this.line!==this.indents) {
         this.lines.push(this.line);
         this.line = this.indents;

@@ -3,6 +3,7 @@ var SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodD
 var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
 var MethodDeclarationMap = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+var CategoryType = require("../type/CategoryType").CategoryType;
 var mergeObjects = require("../utils/Utils").mergeObjects;
 
 
@@ -438,11 +439,13 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
         transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";")
         transpiler.newLine();
     }
+    transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
     this.methods.forEach(function(method) {
         var t = transpiler.newMemberTranspiler();
         method.transpile(t);
         t.flush();
     }, this);
+    transpiler.flush();
 };
 
 exports.ConcreteCategoryDeclaration = ConcreteCategoryDeclaration;

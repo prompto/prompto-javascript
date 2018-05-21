@@ -4,6 +4,7 @@ var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;
 var CategoryDeclaration = null;
 var ConcreteCategoryDeclaration = null;
+var SingletonCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
@@ -27,6 +28,7 @@ exports.resolve = function() {
 	ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+    SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
 };
@@ -63,6 +65,15 @@ CategoryType.prototype.declare = function(transpiler) {
 
 CategoryType.prototype.transpile = function(transpiler) {
     transpiler.append(this.name);
+};
+
+
+CategoryType.prototype.transpileInstance = function(transpiler) {
+    var decl = this.getDeclaration(transpiler.context);
+    if(decl instanceof SingletonCategoryDeclaration)
+        transpiler.append(this.name).append(".instance");
+    else
+        transpiler.append("this");
 };
 
 CategoryType.prototype.newInstanceFromStored = function(context, stored) {

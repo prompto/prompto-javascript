@@ -26,6 +26,22 @@ WithSingletonStatement.prototype.interpret = function(context) {
 };
 
 
+WithSingletonStatement.prototype.declare = function(transpiler) {
+    this.type.declare(transpiler);
+    var transpiler = transpiler.newInstanceTranspiler(this.type);
+    var transpiler = transpiler.newChildTranspiler();
+    return this.statements.declare(transpiler);
+};
+
+WithSingletonStatement.prototype.transpile = function(transpiler) {
+    var instance = transpiler.newInstanceTranspiler(this.type);
+    var child = instance.newChildTranspiler();
+    this.statements.transpile(child);
+    child.flush();
+    instance.flush();
+    return true;
+};
+
 WithSingletonStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };

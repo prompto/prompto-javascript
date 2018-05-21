@@ -20,6 +20,10 @@ DocumentExpression.prototype.check = function(context) {
 	return DocumentType.instance;
 };
 
+DocumentExpression.prototype.toString = function(context) {
+    return "new Document()";
+};
+
 DocumentExpression.prototype.interpret = function(context) {
     if(!this.source)
         return new DocumentValue();
