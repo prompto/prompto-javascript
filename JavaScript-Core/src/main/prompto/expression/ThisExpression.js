@@ -39,4 +39,16 @@ ThisExpression.prototype.toMDialect = function(writer) {
     writer.append("self");
 };
 
+ThisExpression.prototype.toString = function() {
+    return "this";
+};
+
+ThisExpression.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+ThisExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("this");
+};
+
 exports.ThisExpression = ThisExpression;

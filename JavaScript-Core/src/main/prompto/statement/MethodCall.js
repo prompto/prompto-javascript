@@ -104,9 +104,24 @@ MethodCall.prototype.declare = function(transpiler) {
     else {
         if (this.assignments != null)
             this.assignments.declare(transpiler);
-        declaration.declare(transpiler);
+        var local = this.method.newLocalCheckContext(transpiler.context, declaration);
+        this.declareDeclaration(declaration, transpiler, local);
     }
 };
+
+MethodCall.prototype.declareDeclaration = function(declaration, transpiler, local) {
+    if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(transpiler.context)) {
+        return this.fullDeclare(declaration, transpiler, local);
+    } else {
+        return this.lightDeclare(declaration, transpiler, local);
+    }
+};
+
+MethodCall.prototype.lightDeclare = function(declaration, transpiler, local) {
+    transpiler = transpiler.copyTranspiler(local);
+    declaration.declare(transpiler);
+};
+
 
 MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context,this);

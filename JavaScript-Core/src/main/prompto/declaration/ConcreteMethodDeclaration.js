@@ -147,8 +147,8 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
 };
 
 ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
-    transpiler = transpiler.newLocalTranspiler();
     if(!this.memberOf) {
+        transpiler = transpiler.newLocalTranspiler();
         transpiler.declare(this);
         this.declareArguments(transpiler);
     }

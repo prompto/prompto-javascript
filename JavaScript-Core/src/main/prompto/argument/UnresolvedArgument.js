@@ -44,7 +44,7 @@ UnresolvedArgument.prototype.register = function(context) {
 UnresolvedArgument.prototype.checkValue = function(context, value) {
 	this.resolveAndCheck(context);
 	return this.resolved.checkValue(context, value);
-}
+};
 
 UnresolvedArgument.prototype.resolveAndCheck = function(context) {
 	if(this.resolved!=null)
@@ -63,6 +63,16 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
     context.problemListener = listener;
     if(this.resolved==null)
         context.problemListener.reportUnknownVariable(this.id);
+};
+
+UnresolvedArgument.prototype.declare = function(transpiler) {
+    this.resolveAndCheck(transpiler.context);
+    this.resolved.declare(transpiler);
+};
+
+UnresolvedArgument.prototype.transpile = function(transpiler) {
+    this.resolveAndCheck(transpiler.context);
+    this.resolved.transpile(transpiler);
 };
 
 exports.UnresolvedArgument = UnresolvedArgument;
