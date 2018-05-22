@@ -45,7 +45,7 @@ UnresolvedIdentifier.prototype.toString = function() {
 
 UnresolvedIdentifier.prototype.toDialect = function(writer) {
     try {
-        this.resolve(writer.context, false);
+        this.resolve(writer.context, false, false);
     } catch(e) {
     }
     if(this.resolved!=null)
@@ -75,8 +75,10 @@ UnresolvedIdentifier.prototype.resolveAndCheck = function(context, forMember) {
     return this.resolved.check(context);
 };
 
-UnresolvedIdentifier.prototype.resolve = function(context, forMember) {
-	if(this.resolved==null) {
+UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSelectorParent) {
+	if(updateSelectorParent)
+        this.resolved = null;
+    if(this.resolved==null) {
         // don't collect problems during resolution
         var listener = context.problemListener;
         context.problemListener = new ProblemListener();
@@ -92,7 +94,7 @@ UnresolvedIdentifier.prototype.resolve = function(context, forMember) {
                 }
             }
             if (this.resolved == null) {
-                this.resolved = this.resolveMethod(context);
+                this.resolved = this.resolveMethod(context, updateSelectorParent);
                 if (this.resolved == null) {
                     this.resolved = this.resolveInstance(context);
                 }
@@ -120,11 +122,11 @@ UnresolvedIdentifier.prototype.resolveInstance = function(context) {
 	}
 };
 
-UnresolvedIdentifier.prototype.resolveMethod = function(context) {
+UnresolvedIdentifier.prototype.resolveMethod = function(context, updateSelectorParent) {
 	try {
 	    var selector = new MethodSelector(null, this.id);
 		var call = new MethodCall(selector);
-        call.check(context, true);
+        call.check(context, updateSelectorParent);
 		return call;
 	} catch(e) {
 		if(e instanceof PromptoError) {
@@ -177,12 +179,12 @@ UnresolvedIdentifier.prototype.resolveSymbol = function(context) {
 };
 
 UnresolvedIdentifier.prototype.transpile = function(transpiler) {
-    this.resolve(transpiler.context, false);
+    this.resolve(transpiler.context, false, true);
     this.resolved.transpile(transpiler);
 };
 
 UnresolvedIdentifier.prototype.declare = function(transpiler) {
-    this.resolve(transpiler.context, false);
+    this.resolve(transpiler.context, false, true);
     this.resolved.declare(transpiler);
 };
 
