@@ -65,11 +65,46 @@ StoreStatement.prototype.check = function(context) {
     return VoidType.instance;
 };
 
-StoreStatement.prototype.interpret = function( context) {
+StoreStatement.prototype.interpret = function(context) {
     var idsToDelete = this.getIdsToDelete(context);
     var storablesToAdd = this.getStorablesToAdd(context);
     if (idsToDelete || storablesToAdd)
         DataStore.instance.store(idsToDelete, storablesToAdd);
+};
+
+StoreStatement.prototype.declare = function(transpiler) {
+    transpiler.require(DataStore);
+};
+
+
+StoreStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("DataStore.instance.store(");
+    this.transpileIdsToDelete(transpiler);
+    transpiler.append(", ");
+    this.transpileStorablesToAdd(transpiler);
+    transpiler.append(")");
+};
+
+StoreStatement.prototype.transpileIdsToDelete = function(transpiler) {
+    if(!this.del)
+        transpiler.append("null");
+    else
+        this.del.transpile(transpiler);
+};
+
+StoreStatement.prototype.transpileStorablesToAdd = function(transpiler) {
+    if (!this.add)
+        transpiler.append("null");
+    else {
+        transpiler.append("(function() { ").indent();
+        transpiler.append("var storablesToAdd = [];").newLine();
+        this.add.forEach(function (exp) {
+            exp.transpile(transpiler);
+            transpiler.append(".collectStorables(storablesToAdd);").newLine();
+        }, this);
+        transpiler.append("return storablesToAdd;").newLine();
+        transpiler.dedent().append("})()");
+    }
 };
 
 StoreStatement.prototype.getIdsToDelete = function(context) {
@@ -105,7 +140,7 @@ StoreStatement.prototype.getIdsToDelete = function(context) {
 StoreStatement.prototype.getStorablesToAdd = function(context) {
     if (!this.add)
         return null;
-    var storablesToAdd = []
+    var storablesToAdd = [];
     this.add.forEach(function (exp) {
         var value = exp.interpret(context);
         value.collectStorables(storablesToAdd)

@@ -4,7 +4,8 @@ var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodD
 var MethodDeclarationMap = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var CategoryType = require("../type/CategoryType").CategoryType;
-
+var DataStore = require("../store/DataStore").DataStore;
+var $Root = require("../intrinsic/$Root").$Root;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -391,7 +392,10 @@ ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
             var decl = transpiler.context.getRegisteredDeclaration(cat);
             decl.declare(transpiler);
         });
-    }
+    } else
+        transpiler.require($Root);
+    if(this.storable)
+        transpiler.require(DataStore);
 };
 
 ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context, list, set) {
@@ -417,6 +421,10 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     }
     transpiler.append("function ").append(this.name).append("(copyFrom, values) {");
     transpiler.indent();
+    if(this.storable) {
+        var categories = this.collectCategories(transpiler.context);
+        transpiler.append("this.storable = DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("']);").newLine();
+    }
     this.transpileGetterSetterAttributes(transpiler);
     this.transpileSuperConstructor(transpiler, parent);
     this.transpileLocalAttributes(transpiler);
@@ -424,10 +432,11 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     transpiler.dedent();
     transpiler.append("}");
     transpiler.newLine();
-    if(parent) {
+    if(parent)
         transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);").newLine();
-        transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
-    }
+    else
+        transpiler.append(this.name).append(".prototype = Object.create($Root.prototype);").newLine();
+    transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
     this.transpileMethods(transpiler);
     this.transpileGetterSetters(transpiler);
@@ -438,7 +447,7 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
     if (this.attributes) {
         transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
         this.attributes.forEach(function (attr) {
-            transpiler.append("this.").append(attr.name).append(" = values.").append(attr.name).append(" || null;").newLine();
+            transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null);").newLine();
         }, this);
     }
 };
@@ -446,6 +455,8 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
 ConcreteCategoryDeclaration.prototype.transpileSuperConstructor = function(transpiler, parent) {
     if (parent)
         transpiler.append(parent).append(".call(this, copyFrom, values);").newLine();
+    else
+        transpiler.append("$Root.call(this);").newLine();
 };
 
 ConcreteCategoryDeclaration.prototype.transpileGetterSetterAttributes = function(transpiler) {

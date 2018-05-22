@@ -84,10 +84,42 @@ FetchOneExpression.prototype.interpret = function(context) {
     }
 };
 
+FetchOneExpression.prototype.declare = function(transpiler) {
+    transpiler.require(DataStore);
+    transpiler.require(AttributeInfo);
+    transpiler.require(TypeFamily);
+    if (this.typ != null)
+        this.typ.declare(transpiler);
+    if (this.predicate != null)
+        this.predicate.declareQuery(transpiler);
+};
+
+
+FetchOneExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("(function() {").indent();
+    transpiler.append("var builder = DataStore.instance.newQueryBuilder();").newLine();
+    if (this.typ != null)
+        transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
+    if (this.predicate != null)
+        this.predicate.transpileQuery(transpiler, "builder");
+    if (this.typ != null && this.predicate != null)
+        transpiler.append("builder.and();").newLine();
+    transpiler.append("var stored = DataStore.instance.fetchOne(builder.build());").newLine();
+    transpiler.append("if(stored===null)").indent().append("return null;").dedent();
+    transpiler.append("var name = stored.getData('category').slice(-1)[0];").newLine();
+    transpiler.append("var type = eval(name);").newLine();
+    transpiler.append("var result = new type();").newLine();
+    transpiler.append("result.fromStored(stored);").newLine();
+    transpiler.append("return result;").dedent();
+    transpiler.append("})()");
+};
+
+
+
 FetchOneExpression.prototype.buildFetchOneQuery = function(context, store) {
     var builder = store.newQueryBuilder();
     if (this.typ != null) {
-        var info = AttributeInfo("category", TypeFamily.TEXT, true, null);
+        var info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
         builder.verify(info, MatchOp.CONTAINS, this.typ.name);
     }
     if (this.predicate != null) {

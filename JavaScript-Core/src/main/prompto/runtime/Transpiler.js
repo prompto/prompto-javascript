@@ -116,10 +116,19 @@ Transpiler.prototype.appendAllRequired = function() {
     }, this);
 };
 
+Transpiler.prototype.getTranspiled = function(object) {
+    if(object===null)
+        return "null";
+    else if(object.toTranspiled)
+        return object.toTranspiled();
+    else
+        return object.toString();
+};
+
 Transpiler.prototype.appendOneRequired = function(fn) {
     this.lines.push(fn.toString());
     Object.keys(fn).forEach(function (key) {
-        this.lines.push(fn.name + "." + key + " = " + fn[key].toString() + ";");
+        this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
     }, this);
     if(fn.prototype.__proto__) {
         var proto = fn.prototype.__proto__;

@@ -2,7 +2,7 @@ var MatchOp = require("../store/MatchOp").MatchOp;
 
 function MatchPredicate(info, matchOp, value) {
     this.info = info;
-    this.matchOp = matchOp;
+    this.matchOp = MatchOp[matchOp.name];
     this.value = value;
     return this;
 }

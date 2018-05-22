@@ -2,6 +2,11 @@ function TypeFamily(name) {
     this.name = name;
     return this;
 };
+
+TypeFamily.prototype.toTranspiled = function() {
+    return "new TypeFamily('" + this.name + "')";
+};
+
 // non storable
 TypeFamily.BOOLEAN = new TypeFamily("BOOLEAN");
 TypeFamily.CHARACTER = new TypeFamily("CHARACTER");

@@ -26,7 +26,7 @@ exports.resolve = function() {
 function ConcreteInstance(context, declaration) {
     Instance.call(this, new CategoryType(declaration.id));
 	this.declaration = declaration;
-    this.storable = false;
+    this.storable = null;
     if(declaration.storable) {
         var categories = declaration.collectCategories(context);
         this.storable = DataStore.instance.newStorableDocument(categories);

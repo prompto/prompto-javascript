@@ -7,6 +7,10 @@ MatchOp.prototype.toString = function() {
     return this.name;
 };
 
+MatchOp.prototype.toTranspiled = function() {
+    return "new MatchOp('" + this.name + "')";
+};
+
 MatchOp.EQUALS = new MatchOp("EQUALS");
 MatchOp.ROUGHLY = new MatchOp("ROUGHLY");
 MatchOp.CONTAINS = new MatchOp("CONTAINS");

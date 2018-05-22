@@ -356,6 +356,44 @@ EqualsExpression.prototype.transpileIsA = function(transpiler) {
     }
 };
 
+EqualsExpression.prototype.declareQuery = function(transpiler) {
+    transpiler.require(MatchOp);
+    this.left.declare(transpiler);
+    this.right.declare(transpiler);
+};
+
+EqualsExpression.prototype.transpileQuery = function(transpiler, builder) {
+    var value = null;
+    var name = this.readFieldName(this.left);
+    if (name != null)
+        value = this.right;
+    else {
+        name = this.readFieldName(this.right);
+        if (name != null)
+            value = this.left;
+        else
+            throw new SyntaxError("Unable to interpret predicate");
+    }
+    /*
+    if (value instanceof Instance)
+        value = value.getMemberValue(context, "dbId", false);
+    */
+    /*
+    var decl = context.findAttribute(name);
+    var info = decl == null ? null : decl.getAttributeInfo();
+    var data = value == null ? null : value.getStorableData();
+    var match = this.getMatchOp();
+    query.verify(info, match, data);
+    if (this.operator == EqOp.NOT_EQUALS)
+        query.not();
+    */
+    transpiler.append(builder).append(".verify(new AttributeInfo('").append(name).append("', TypeFamily.TEXT, true, null), MatchOp.EQUALS, ");
+    value.transpile(transpiler);
+    transpiler.append(");").newLine();
+    if (this.operator == EqOp.NOT_EQUALS)
+        transpiler.append(builder).append(".not();").newLine();
+};
+
 exports.EqualsExpression = EqualsExpression;
 
 
