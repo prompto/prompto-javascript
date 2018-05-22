@@ -201,7 +201,7 @@ ObjectUtils.values = function(o) {
 
 
 ObjectUtils.objectToString = function() {
-    var names = Object.getOwnPropertyNames(this);
+    var names = Object.getOwnPropertyNames(this).filter(function(name) { return typeof(this[name]) !== 'function'; }, this);
     var vals = names.map(function (name) {
         return name + ':' + this[name];
     }, this);
