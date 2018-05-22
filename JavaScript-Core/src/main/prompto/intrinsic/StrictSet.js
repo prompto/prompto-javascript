@@ -40,13 +40,19 @@ StrictSet.prototype.item = function(idx) {
 
 
 
-StrictSet.prototype.addAll = function(items) {
+StrictSet.prototype.addItems = function(items) {
     if(items instanceof StrictSet)
         items = Array.from(items.set.values());
     items.forEach(function(item){
         this.add(item);
     }, this);
     return this; // enable fluid API
+};
+
+StrictSet.prototype.addAll = function(items) {
+    var result = new StrictSet(this.set);
+    result.addItems(items);
+    return result; 
 };
 
 
