@@ -15,10 +15,17 @@ FlushStatement.prototype.check = function(context) {
     return VoidType.instance;
 };
 
-
-
 FlushStatement.prototype.interpret = function(context) {
     DataStore.instance.flush();
+};
+
+FlushStatement.prototype.declare = function(transpiler) {
+    transpiler.require(DataStore);
+};
+
+
+FlushStatement.prototype.transpile = function(transpiler) {
+    transpiler.append("DataStore.instance.flush()");
 };
 
 
