@@ -70,10 +70,19 @@ function executeMethod(context, methodName, args) {
     var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
     var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
     fs.writeFile(transpiled, js);
-    js = "var transpiled = function() {" + js + " \nreturn " + methodName + "; }; transpiled();";
-    var fn = eval(js);
+    var lines = [
+        "(function() {",
+        js,
+        "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
+        "return { store:  store, method: " + methodName + "};",
+        "})();"
+    ];
+    js = lines.join("\n");
+    var objs = eval(js);
+    if(objs.store)
+        objs.store.instance = prompto.store.DataStore.instance = new prompto.memstore.MemStore();
     args = args || new prompto.intrinsic.Dictionary();
-    fn(args);
+    objs.method(args);
 }
 
 
