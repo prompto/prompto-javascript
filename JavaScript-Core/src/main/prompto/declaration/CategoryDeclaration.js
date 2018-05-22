@@ -29,14 +29,14 @@ CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) 
         var value = TypeUtils.convertFromJavaScript(dbId);
         instance.setMember(context, "dbId", value);
         var allAttributes = this.getAllAttributes(context);
-        for(var name in allAttributes) {
+        allAttributes.forEach(function(name) {
             var decl = context.getRegisteredDeclaration(name);
             if (decl.storable) {
                 var data = stored.getData(name);
                 var value = data==null ? NullValue.instance : decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null)
                 instance.setMember(context, name, value);
             }
-        }
+        }, this);
     } finally {
         instance.mutable = false;
     }
@@ -44,11 +44,9 @@ CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) 
 };
 
 CategoryDeclaration.prototype.getAllAttributes = function(context) {
-    if(this.attributes) {
-        var result = {};
-        this.attributes.map(function(id) { result[id] = id; });
-        return result;
-    } else
+    if(this.attributes)
+        return new Set(this.attributes);
+    else
         return null;
 };
 

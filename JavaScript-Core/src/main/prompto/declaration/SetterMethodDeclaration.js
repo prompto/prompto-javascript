@@ -1,4 +1,5 @@
 var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
 
 function SetterMethodDeclaration(id, statements) {
     ConcreteMethodDeclaration.call(this, id, null, null, statements);
@@ -16,7 +17,7 @@ SetterMethodDeclaration.prototype.toODialect = function(writer) {
     this.statements.toDialect(writer);
     writer.dedent();
     writer.append("}\n");
-}
+};
 
 SetterMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
@@ -25,7 +26,7 @@ SetterMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
 
 SetterMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def ");
@@ -34,6 +35,14 @@ SetterMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.indent();
     this.statements.toDialect(writer);
     writer.dedent();
-}
+};
+
+SetterMethodDeclaration.prototype.transpile = function(transpiler) {
+    transpiler = transpiler.newSetterTranspiler(this.name);
+    var arg = new AttributeArgument(this.id);
+    arg.register(transpiler.context);
+    this.statements.transpile(transpiler);
+    transpiler.flush();
+};
 
 exports.SetterMethodDeclaration = SetterMethodDeclaration;

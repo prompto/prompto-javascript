@@ -13,10 +13,9 @@ function MethodFinder(context, methodCall) {
 }
 
 MethodFinder.prototype.findMethod = function(checkInstance) {
-	var selector = this.methodCall.method;
-	var candidates = selector.getCandidates(this.context, checkInstance);
+	var candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
     if(candidates.length==0)
-        this.context.problemListener.reportUnknownMethod(this.methodCall.method.id);
+        this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id);
 	var compatibles = this.filterCompatible(candidates, checkInstance);
 	switch(compatibles.length) {
 	case 0:

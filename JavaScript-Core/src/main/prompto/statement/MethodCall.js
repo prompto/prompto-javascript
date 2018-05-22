@@ -7,6 +7,7 @@ var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDec
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var PromptoError = require("../error/PromptoError").PromptoError;
+var ThisExpression = null;
 var VoidType = require("../type/VoidType").VoidType;
 var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
@@ -14,9 +15,14 @@ var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
-function MethodCall(method, assignments) {
+exports.resolve = function() {
+    ThisExpression = require("../expression/ThisExpression").ThisExpression;
+};
+
+
+function MethodCall(selector, assignments) {
 	SimpleStatement.call(this);
-	this.method = method;
+	this.selector = selector;
 	this.assignments = assignments || null;
 	return this;
 }
@@ -27,7 +33,7 @@ MethodCall.prototype.constructor = MethodCall;
 MethodCall.prototype.toDialect = function(writer) {
     if (this.requiresInvoke(writer))
         writer.append("invoke: ");
-    this.method.toDialect(writer);
+    this.selector.toDialect(writer);
     if (this.assignments != null)
         this.assignments.toDialect(writer);
     else if (writer.dialect!= Dialect.E)
@@ -52,16 +58,18 @@ MethodCall.prototype.requiresInvoke = function(writer) {
 }
 
 MethodCall.prototype.toString = function() {
-	return this.method.toString() + " " + (this.assignments!==null ? this.assignments.toString() : "");
+	return this.selector.toString() + " " + (this.assignments!==null ? this.assignments.toString() : "");
 };
 
 
-MethodCall.prototype.check = function(context) {
-	var finder = new MethodFinder(context,this);
+MethodCall.prototype.check = function(context, updateSelectorParent) {
+	var finder = new MethodFinder(context, this);
 	var declaration = finder.findMethod(false);
     if(!declaration)
         return VoidType.instance;
-    var local = this.method.newLocalCheckContext(context, declaration);
+    if(updateSelectorParent && declaration.memberOf && !this.selector.parent)
+        this.selector.parent = new ThisExpression();
+    var local = this.selector.newLocalCheckContext(context, declaration);
     return this.checkDeclaration(declaration, context, local);
 };
 
@@ -104,7 +112,7 @@ MethodCall.prototype.declare = function(transpiler) {
     else {
         if (this.assignments != null)
             this.assignments.declare(transpiler);
-        var local = this.method.newLocalCheckContext(transpiler.context, declaration);
+        var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
         this.declareDeclaration(declaration, transpiler, local);
     }
 };
@@ -127,12 +135,12 @@ MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context,this);
     var declaration = finder.findMethod(false);
     if(declaration instanceof BuiltInMethodDeclaration) {
-        var parent = this.method.resolveParent(transpiler.context);
+        var parent = this.selector.resolveParent(transpiler.context);
         parent.transpile(transpiler);
         transpiler.append(".");
         declaration.transpileCall(transpiler, this.assignments);
     } else {
-        this.method.transpile(transpiler);
+        this.selector.transpile(transpiler);
         var assignments = this.makeAssignments(transpiler.context, declaration);
         if(assignments.length > 0) {
             transpiler.append("(");
@@ -167,7 +175,7 @@ MethodCall.prototype.makeAssignments = function(context, declaration) {
 
 MethodCall.prototype.interpret = function(context) {
 	var declaration = this.findDeclaration(context);
-	var local = this.method.newLocalContext(context, declaration);
+	var local = this.selector.newLocalContext(context, declaration);
 	declaration.registerArguments(local);
 	var assignments = this.makeAssignments(context, declaration);
 	assignments.forEach(function(assignment) {
@@ -206,7 +214,7 @@ MethodCall.prototype.transpileFound = function(transpiler, dialect) {
 MethodCall.prototype.findDeclaration = function(context) {
 	// look for method as value
 	try {
-		var o = context.getValue(this.method.id);
+		var o = context.getValue(this.selector.id);
 		if(o instanceof ClosureValue) {
 			return new ClosureDeclaration(o);
 		}

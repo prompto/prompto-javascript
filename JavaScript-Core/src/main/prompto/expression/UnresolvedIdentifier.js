@@ -122,9 +122,10 @@ UnresolvedIdentifier.prototype.resolveInstance = function(context) {
 
 UnresolvedIdentifier.prototype.resolveMethod = function(context) {
 	try {
-		var method = new MethodCall(new MethodSelector(null, this.id));
-		method.check(context);
-		return method;
+	    var selector = new MethodSelector(null, this.id);
+		var call = new MethodCall(selector);
+        call.check(context, true);
+		return call;
 	} catch(e) {
 		if(e instanceof PromptoError) {
 			return null;

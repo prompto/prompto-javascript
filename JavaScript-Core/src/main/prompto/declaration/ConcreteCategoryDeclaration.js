@@ -4,7 +4,6 @@ var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodD
 var MethodDeclarationMap = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var CategoryType = require("../type/CategoryType").CategoryType;
-var mergeObjects = require("../utils/Utils").mergeObjects;
 
 
 exports.resolve = function() {
@@ -204,15 +203,15 @@ ConcreteCategoryDeclaration.prototype.newInstance = function(context) {
 };
 
 ConcreteCategoryDeclaration.prototype.getAllAttributes = function(context) {
-    var result = CategoryDeclaration.prototype.getAllAttributes.call(this, context) || {};
+    var local = CategoryDeclaration.prototype.getAllAttributes.call(this, context) || new Set();
     if(this.derivedFrom!=null) {
-        this.derivedFrom.map(function (id) {
-            var more = this.getAncestorAttributes(context, id);
-            if (more != null)
-                result = mergeObjects(result, more);
+        this.derivedFrom.forEach(function (id) {
+            var derived = this.getAncestorAttributes(context, id);
+            if (derived != null)
+                derived.forEach(function(attr) { local.add(attr); }, this);
         }, this);
     }
-    return Object.getOwnPropertyNames(result).length==0 ? null : result;
+    return local.size > 0  ? local : null;
 };
 
 ConcreteCategoryDeclaration.prototype.getAncestorAttributes = function(context, id) {
@@ -410,7 +409,7 @@ ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context,
 
 ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     var parent = null;
-    if(this.derivedFrom != null) {
+    if (this.derivedFrom != null) {
         if (this.derivedFrom.length === 1) {
             parent = this.derivedFrom[0];
         } else
@@ -418,34 +417,85 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     }
     transpiler.append("function ").append(this.name).append("(copyFrom, values) {");
     transpiler.indent();
-    if(parent) {
-        transpiler.append(parent).append(".call(this, copyFrom, values);");
-        transpiler.newLine();
-    }
-    if(this.attributes) {
-        transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
-        this.attributes.forEach(function (attr) {
-            transpiler.append("this.").append(attr.name).append(" = values.").append(attr.name).append(" || null;");
-            transpiler.newLine();
-        }, this);
-    }
+    this.transpileGetterSetterAttributes(transpiler);
+    this.transpileSuperConstructor(transpiler, parent);
+    this.transpileLocalAttributes(transpiler);
     transpiler.append("return this;");
     transpiler.dedent();
     transpiler.append("}");
     transpiler.newLine();
     if(parent) {
-        transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);")
-        transpiler.newLine();
-        transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";")
-        transpiler.newLine();
+        transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);").newLine();
+        transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     }
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
-    this.methods.forEach(function(method) {
+    this.transpileMethods(transpiler);
+    this.transpileGetterSetters(transpiler);
+    transpiler.flush();
+};
+
+ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transpiler) {
+    if (this.attributes) {
+        transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
+        this.attributes.forEach(function (attr) {
+            transpiler.append("this.").append(attr.name).append(" = values.").append(attr.name).append(" || null;").newLine();
+        }, this);
+    }
+};
+
+ConcreteCategoryDeclaration.prototype.transpileSuperConstructor = function(transpiler, parent) {
+    if (parent)
+        transpiler.append(parent).append(".call(this, copyFrom, values);").newLine();
+};
+
+ConcreteCategoryDeclaration.prototype.transpileGetterSetterAttributes = function(transpiler) {
+    var allAttributes = this.getAllAttributes(transpiler.context);
+    if(allAttributes) {
+        allAttributes.forEach(function (attr) {
+            if (this.findGetter(transpiler.context, attr.name) || this.findSetter(transpiler.context, attr.name))
+                transpiler.append("this.$").append(attr.name).append(" = null;").newLine();
+        }, this);
+    }
+};
+
+ConcreteCategoryDeclaration.prototype.transpileMethods = function(transpiler) {
+    this.methods.filter(function (decl) {
+        return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
+    }).forEach(function (method) {
         var t = transpiler.newMemberTranspiler();
         method.transpile(t);
         t.flush();
     }, this);
-    transpiler.flush();
 };
+
+ConcreteCategoryDeclaration.prototype.transpileGetterSetters = function(transpiler) {
+    var getterSetters = this.methods.filter(function (decl) {
+        return (decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
+    }, this);
+    var names = new Set(getterSetters.map(function(decl) { return decl.id.name; }));
+    names.forEach(function(name) { this.transpileGetterSetter(transpiler, name); }, this);
+};
+
+ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpiler, name) {
+    var getter = this.findGetter(transpiler.context, name);
+    var setter = this.findSetter(transpiler.context, name);
+    transpiler.append("Object.defineProperty(").append(this.name).append(".prototype, '").append(name).append("', {").indent();
+    transpiler.append("get: function() {").indent();
+    if(getter)
+        getter.transpile(transpiler);
+    else
+        transpiler.append("return this.$").append(name).append(";").newLine();
+    transpiler.dedent().append("}");
+    transpiler.append(",").newLine();
+    transpiler.append("set: function(").append(name).append(") {").indent();
+    if(setter)
+        setter.transpile(transpiler);
+    else
+        transpiler.append("this.$").append(name).append(" = ").append(name).append(";").newLine();
+    transpiler.dedent().append("}");
+    transpiler.dedent().append("});").newLine();
+};
+
+
 
 exports.ConcreteCategoryDeclaration = ConcreteCategoryDeclaration;

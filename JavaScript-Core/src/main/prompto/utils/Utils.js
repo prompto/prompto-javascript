@@ -162,15 +162,6 @@ function utf8BufferToString(buffer) {
     return chars.join("");
 };
 
-function mergeObjects() {
-    var res = {};
-    [].map.call(arguments, function(o) {
-        Object.getOwnPropertyNames(o).map(function(n) {
-            res[n] = o[n];
-        });
-    });
-    return res;
-}
 
 function multiplyArray(items, count) {
     var result = [];
@@ -212,7 +203,6 @@ function isACharacter(o) {
 }
 
 exports.multiplyArray = multiplyArray;
-exports.mergeObjects = mergeObjects;
 exports.equalObjects = equalObjects;
 exports.equalArrays = equalArrays;
 exports.arrayContains = arrayContains;

@@ -46,6 +46,19 @@ Transpiler.prototype.newMemberTranspiler = function() {
     return this.copyTranspiler(context);
 };
 
+Transpiler.prototype.newGetterTranspiler = function(name) {
+    transpiler = this.newMemberTranspiler();
+    transpiler.getterName = name;
+    return transpiler;
+};
+
+
+Transpiler.prototype.newSetterTranspiler = function(name) {
+    transpiler = this.newMemberTranspiler();
+    transpiler.setterName = name;
+    return transpiler;
+};
+
 
 Transpiler.prototype.newInstanceTranspiler = function(type) {
     var context = this.context.newInstanceContext(null, type, true);

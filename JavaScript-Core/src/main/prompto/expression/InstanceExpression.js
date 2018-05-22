@@ -36,6 +36,8 @@ InstanceExpression.prototype.transpile = function(transpiler) {
         context.instanceType.transpileInstance(transpiler);
         transpiler.append(".");
     }
+    if(transpiler.getterName === this.name)
+        transpiler.append("$");
     transpiler.append(this.name);
 };
 
