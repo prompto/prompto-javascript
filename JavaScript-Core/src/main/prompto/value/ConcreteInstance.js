@@ -1,5 +1,6 @@
 var CategoryType = null;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var StorableDocument = require("../memstore/StorableDocument").StorableDocument;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
@@ -81,6 +82,8 @@ ConcreteInstance.prototype.getMemberNames = function() {
 };
 
 ConcreteInstance.prototype.collectStorables = function(list) {
+    if(this.declaration instanceof EnumeratedNativeDeclaration || this.declaration instanceof EnumeratedCategoryDeclaration)
+        return;
     if (this.storable==null)
         throw new NotStorableError();
     if (this.storable.dirty) {
