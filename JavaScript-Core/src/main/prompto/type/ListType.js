@@ -70,16 +70,11 @@ ListType.prototype.declareAdd = function(transpiler, other, tryReverse, left, ri
 
 
 ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof ListType && this.itemType.equals(other.itemType)) {
+    if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
         left.transpile(transpiler);
-        transpiler.append(".concat(");
+        transpiler.append(".add(");
         right.transpile(transpiler);
         transpiler.append(")");
-    } else if(other instanceof SetType && this.itemType.equals(other.itemType)) {
-        left.transpile(transpiler);
-        transpiler.append(".concat(Array.from(");
-        right.transpile(transpiler);
-        transpiler.append(".set.values()))");
     } else {
         return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
     }

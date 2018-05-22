@@ -72,7 +72,7 @@ FilteredExpression.prototype.interpret = function(context) {
 FilteredExpression.prototype.transpile = function(transpiler) {
     var listType = this.source.check(transpiler.context);
     this.source.transpile(transpiler);
-    transpiler.append(".filter(function(").append(this.itemId.name).append(") { return ")
+    transpiler.append(".filtered(function(").append(this.itemId.name).append(") { return ")
     transpiler = transpiler.newChildTranspiler();
     transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
     this.predicate.transpile(transpiler);

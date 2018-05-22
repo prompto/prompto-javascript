@@ -2,6 +2,8 @@ var Literal = require("./Literal").Literal;
 var TupleType = require("../type/TupleType").TupleType;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var ExpressionList = require("../utils/ExpressionList").ExpressionList;
+var List = require("../intrinsic/List").List;
+var Tuple = require("../intrinsic/Tuple").Tuple;
 
 function TupleLiteral(mutable, expressions) {
     if(typeof(mutable)!=typeof(true))
@@ -22,14 +24,14 @@ TupleLiteral.prototype.check = function(context) {
 
 
 TupleLiteral.prototype.declare = function(transpiler) {
-    var Tuple = require("../intrinsic/Tuple").Tuple;
+    transpiler.require(List);
     transpiler.require(Tuple);
     this.expressions.declare(transpiler);
 };
 
 
 TupleLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("new Tuple([");
+    transpiler.append("new Tuple(").append(this.mutable).append(", [");
     this.expressions.transpile(transpiler);
     transpiler.append("])");
 };

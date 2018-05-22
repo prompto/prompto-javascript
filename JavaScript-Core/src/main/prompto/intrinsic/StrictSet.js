@@ -122,5 +122,18 @@ StrictSet.prototype.equals = function(other) {
     }
 };
 
+StrictSet.prototype.sorted = function(sortFunction) {
+    var sorted = Array.from(this.set).sort(sortFunction);
+    return new List(false, sorted);
+};
+
+
+StrictSet.prototype.filtered = function(filterFunction) {
+    var filtered = Array.from(this.set).filter(filterFunction);
+    return new StrictSet(filtered);
+};
+
+
+
 
 exports.StrictSet = StrictSet;

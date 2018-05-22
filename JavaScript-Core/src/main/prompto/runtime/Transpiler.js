@@ -208,104 +208,9 @@ ObjectUtils.objectToString = function() {
     return "{" + vals.join(", ") + "}";
 };
 
-
-ObjectUtils.arrayItem = function(idx) {
-    if(idx==null)
-        throw new ReferenceError();
-    else if(idx<1 || idx>this.length)
-        throw new RangeError();
-    else
-        return this[idx-1];
+ObjectUtils.stringSplitToList = function(separator) {
+    return new List(false, this.split(separator));
 };
-
-
-ObjectUtils.getArrayItem = function (idx, create) {
-    if(idx==null)
-        throw new ReferenceError();
-    else if(idx<1 || idx>this.length)
-        throw new RangeError();
-    else {
-        if(!this[idx - 1] && create)
-            this[idx - 1] = new Document();
-        return this[idx - 1] || null;
-    }
-};
-
-
-ObjectUtils.setArrayItem = function (idx, value) {
-    if(idx==null)
-        throw new ReferenceError();
-    else if(idx<1 || idx>this.length)
-        throw new RangeError();
-    else
-        this[idx-1] = value;
-};
-
-
-ObjectUtils.arrayToString = function() {
-    return '[' + this.join(', ') + ']';
-};
-
-ObjectUtils.arrayEquals = function(o) {
-    o = o || null;
-    if(this===o) {
-        return true;
-    }
-    if(!Array.isArray(o) || this.length !== o.length) {
-        return false;
-    }
-    for(var i=0;i<this.length;i++) {
-        if(!equalObjects(this[i], o[i])) {
-            return false;
-        }
-    }
-    return true;
-}
-
-ObjectUtils.arrayHasAll = function(items, noCheckEquals) {
-    var set = new StrictSet(this);
-    return set.hasAll(items, noCheckEquals);
-};
-
-
-ObjectUtils.arrayHasAny = function(items, noCheckEquals) {
-    var set = new StrictSet(this);
-    return set.hasAny(items, noCheckEquals);
-};
-
-ObjectUtils.arraySlice1Based = function(start, last) {
-    if(start) {
-        if (start < 0 || start >= this.length)
-            throw new RangeError();
-        start = start - 1;
-    } else
-        start = 0;
-    if(!last)
-        return this.slice(start);
-    if(last >= 0) {
-        if(last<=start || last>= this.length - 1)
-            throw new RangeError();
-        return this.slice(start, last);
-    } else {
-        // TODO check Range
-        return this.slice(start, 1 + last);
-    }
-};
-
-ObjectUtils.iterateArray = function (fn) {
-    var self = this;
-    return {
-        length: self.length,
-        iterator: function() {
-            var idx = 0;
-            return {
-                hasNext: function() { return idx < self.length; },
-                next: function() { return fn(self[idx++]); }
-            };
-        }
-    }
-};
-
 
 ObjectUtils.stringHasAll = function(items) {
     if(StrictSet && items instanceof StrictSet)
@@ -415,6 +320,21 @@ function divide( a, b ) {
         return a / b;
 }
 
+
+class NotMutableError extends Error {
+
+    constructor(message) {
+        super("Not a mutable object!")
+        this.name = "NotMutableError";
+        this.promptoName = "NOT_MUTABLE";
+    }
+
+    toString() {
+        return this.message;
+    }
+
+}
+
 // to ease implementation
 function patchObject() {
     Object.prototype.declare = function (transpiler) {
@@ -437,6 +357,7 @@ function newTranspiler(context) {
     transpiler.require(print);
     transpiler.require(divide);
     transpiler.require(DivideByZeroError);
+    transpiler.require(NotMutableError);
     transpiler.require(translateError);
     transpiler.lines.push("TypeError.prototype.toString = function() { return 'Null reference!'; };");
     transpiler.lines.push("ReferenceError.prototype.toString = function() { return 'Null reference!'; };");
@@ -444,21 +365,12 @@ function newTranspiler(context) {
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
     transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
-    transpiler.lines.push("Array.prototype.item = " + ObjectUtils.arrayItem.toString() + ";");
-    transpiler.lines.push("Array.prototype.getItem = " + ObjectUtils.getArrayItem.toString() + ";");
-    transpiler.lines.push("Array.prototype.setItem = " + ObjectUtils.setArrayItem.toString() + ";");
-    transpiler.lines.push("Array.prototype.toString = " + ObjectUtils.arrayToString.toString() + ";");
-    transpiler.lines.push("Array.prototype.getText = Array.prototype.toString;");
-    transpiler.lines.push("Array.prototype.hasAll = " + ObjectUtils.arrayHasAll.toString() + ";");
-    transpiler.lines.push("Array.prototype.hasAny = " + ObjectUtils.arrayHasAny.toString() + ";");
-    transpiler.lines.push("Array.prototype.equals = " + ObjectUtils.arrayEquals.toString() + ";");
-    transpiler.lines.push("Array.prototype.iterate = " + ObjectUtils.iterateArray.toString() + ";");
-    transpiler.lines.push("Array.prototype.slice1Based = " + ObjectUtils.arraySlice1Based.toString() + ";");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
     transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
     transpiler.lines.push("Number.prototype.getText = Number.prototype.toString;");
     transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
     transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
+    transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
     return transpiler;

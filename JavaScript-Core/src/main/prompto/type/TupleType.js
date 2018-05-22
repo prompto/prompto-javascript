@@ -95,7 +95,7 @@ TupleType.prototype.declareAdd = function(transpiler, other, tryReverse, left, r
 TupleType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
         left.transpile(transpiler);
-        transpiler.append(".addAll(");
+        transpiler.append(".add(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else {

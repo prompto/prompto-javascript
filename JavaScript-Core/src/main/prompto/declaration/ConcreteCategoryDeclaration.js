@@ -419,7 +419,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
         } else
             throw new Error("Not supported yet!");
     }
-    transpiler.append("function ").append(this.name).append("(copyFrom, values) {");
+    transpiler.append("function ").append(this.name).append("(copyFrom, values, mutable) {");
     transpiler.indent();
     if(this.storable) {
         var categories = this.collectCategories(transpiler.context);
@@ -428,6 +428,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     this.transpileGetterSetterAttributes(transpiler);
     this.transpileSuperConstructor(transpiler, parent);
     this.transpileLocalAttributes(transpiler);
+    transpiler.append("this.mutable = mutable;").newLine();
     transpiler.append("return this;");
     transpiler.dedent();
     transpiler.append("}");
@@ -445,6 +446,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
 
 ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transpiler) {
     if (this.attributes) {
+        transpiler.append("this.mutable = true;").newLine();
         transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
         this.attributes.forEach(function (attr) {
             transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null);").newLine();
@@ -454,7 +456,7 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
 
 ConcreteCategoryDeclaration.prototype.transpileSuperConstructor = function(transpiler, parent) {
     if (parent)
-        transpiler.append(parent).append(".call(this, copyFrom, values);").newLine();
+        transpiler.append(parent).append(".call(this, copyFrom, values, mutable);").newLine();
     else
         transpiler.append("$Root.call(this);").newLine();
 };

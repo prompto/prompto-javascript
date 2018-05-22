@@ -1,3 +1,4 @@
+var List = require("./List").List;
 var StrictSet = require("./StrictSet").StrictSet;
 
 function Dictionary(entries) {
@@ -21,7 +22,8 @@ Object.defineProperty(Dictionary.prototype, "keys", {
 
 Object.defineProperty(Dictionary.prototype, "values", {
     get : function() {
-        return Object.getOwnPropertyNames(this).map(function(name) { return this[name]; }, this);
+        var names = Object.getOwnPropertyNames(this).map(function(name) { return this[name]; }, this);
+        return new List(false, names);
     }
 });
 

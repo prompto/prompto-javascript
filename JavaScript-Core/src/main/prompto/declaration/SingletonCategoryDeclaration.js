@@ -23,7 +23,13 @@ SingletonCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer)
 
 
 SingletonCategoryDeclaration.prototype.transpile = function(transpiler) {
-    transpiler.append("function ").append(this.name).append("() { return this; };").newLine();
+    transpiler.append("function ").append(this.name).append("() {").indent();
+    transpiler.append("$Root.call(this);").newLine();
+    transpiler.append("this.mutable = true;").newLine();
+    transpiler.append("return this;").dedent();
+    transpiler.append("};").newLine();
+    transpiler.append(this.name).append(".prototype = Object.create($Root.prototype);").newLine();
+    transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     transpiler.append(this.name).append(".instance = new ").append(this.name).append("();").newLine();
     if(this.attributes) {
         this.attributes.forEach(function (attr) {

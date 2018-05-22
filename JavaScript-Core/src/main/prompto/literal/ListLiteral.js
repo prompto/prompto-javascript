@@ -10,6 +10,7 @@ var TextType = require("../type/TextType").TextType;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var TextValue = require("../value/TextValue").TextValue;
 var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
+var List = require("../intrinsic/List").List;
 
 function ListLiteral(mutable, expressions) {
     if(typeof(mutable)!=typeof(true))
@@ -73,18 +74,19 @@ ListLiteral.prototype.toDialect = function(writer) {
 };
 
 ListLiteral.prototype.declare = function(transpiler) {
+    transpiler.require(List);
     if(this.expressions!=null)
         this.expressions.declare(transpiler);
 };
 
 
 ListLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append("new List(").append(this.mutable).append(", [");
     if(this.expressions!=null) {
-        transpiler.append('[');
         this.expressions.transpile(transpiler);
-        transpiler.append(']');
+        transpiler.append('])');
     } else
-        transpiler.append("[]");
+        transpiler.append("])");
 };
 
 

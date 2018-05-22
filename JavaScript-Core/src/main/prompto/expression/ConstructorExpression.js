@@ -17,7 +17,6 @@ exports.resolve = function() {
 function ConstructorExpression(type, copyFrom, assignments, checked) {
     Section.call(this);
 	this.type = type;
-	this.mutable = false;
 	this.copyFrom = copyFrom;
 	this.assignments = assignments;
 	this.checked = checked;
@@ -162,9 +161,10 @@ ConstructorExpression.prototype.transpile = function(transpiler) {
             transpiler.append(", ");
         }, this);
         transpiler.trimLast(2);
-        transpiler.append("}");
+        transpiler.append("}, ");
     } else
-        transpiler.append("null");
+        transpiler.append("null, ");
+    transpiler.append(this.type.mutable);
     transpiler.append(")");
     transpiler.flush();
 };

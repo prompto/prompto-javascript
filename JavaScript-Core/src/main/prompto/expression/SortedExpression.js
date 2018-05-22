@@ -9,6 +9,7 @@ var SetValue = require("../value/SetValue").SetValue;
 var ListType = require("../type/ListType").ListType;
 var TupleType = require("../type/TupleType").TupleType;
 var SetType = require("../type/SetType").SetType;
+var List = require("../intrinsic/List").List;
 
 function SortedExpression(source, desc, key) {
 	this.source = source;
@@ -95,6 +96,7 @@ SortedExpression.prototype.interpret = function(context) {
 
 
 SortedExpression.prototype.declare = function(transpiler) {
+    transpiler.require(List);
     this.source.declare(transpiler);
     var type = this.source.check(transpiler.context);
     type.itemType.declareSorted(transpiler, this.key);
@@ -102,11 +104,8 @@ SortedExpression.prototype.declare = function(transpiler) {
 
 SortedExpression.prototype.transpile = function(transpiler) {
     var type = this.source.check(transpiler.context);
-    transpiler.append("Array.from(");
     this.source.transpile(transpiler);
-    if(type instanceof SetType)
-        transpiler.append(".set");
-    transpiler.append(").sort(");
+    transpiler.append(".sorted(");
     type.itemType.transpileSorted(transpiler, this.desc, this.key);
     transpiler.append(")");
 };

@@ -15,18 +15,20 @@ $Root.prototype.toString = function() {
 };
 
 $Root.prototype.setMember = function(name, value) {
+    if(!this.mutable)
+        throw new NotMutableError();
     this[name] = value;
     if(this.storable)
         this.storable.setData(name, value);
 };
 
 $Root.prototype.fromStored = function(stored) {
-    this.dbId = stored.getData("dbId");
     for(name in this) {
         if(name==='mutable' || name==='storable' || name==='category' || typeof(this[name]) === 'function')
             continue;
         this[name] = stored.getData(name);
     }
+    this.dbId = stored.getData("dbId");
 };
 
 $Root.prototype.collectStorables = function(storablesToAdd) {

@@ -107,9 +107,10 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 MethodCall.prototype.declare = function(transpiler) {
     var finder = new MethodFinder(transpiler.context,this);
     var declaration = finder.findMethod(false);
-    if(declaration instanceof BuiltInMethodDeclaration)
-        ; // nothing to do
-    else {
+    if(declaration instanceof BuiltInMethodDeclaration) {
+        if(declaration.declareCall)
+            declaration.declareCall(transpiler);
+    }else {
         if (this.assignments != null)
             this.assignments.declare(transpiler);
         var local = this.selector.newLocalCheckContext(transpiler.context, declaration);

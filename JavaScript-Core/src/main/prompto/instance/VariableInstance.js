@@ -98,11 +98,14 @@ VariableInstance.prototype.transpileAssign = function(transpiler, expression) {
     var context = transpiler.context.contextForValue(this.id.name);
     if(context.instanceType) {
         context.instanceType.transpileInstance(transpiler);
-        transpiler.append(".");
+        transpiler.append(".setMember('").append(this.name).append("', ");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        transpiler.append(this.name);
+        transpiler.append(" = ");
+        expression.transpile(transpiler);
     }
-    transpiler.append(this.name);
-    transpiler.append(" = ");
-    expression.transpile(transpiler);
 };
 
 

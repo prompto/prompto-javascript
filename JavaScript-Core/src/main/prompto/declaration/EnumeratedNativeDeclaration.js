@@ -96,9 +96,7 @@ EnumeratedNativeDeclaration.prototype.transpile = function(transpiler) {
     transpiler.newLine();
     this.symbols.forEach(function(symbol) {symbol.initialize(transpiler);});
     var names = this.symbols.map(function(symbol) { return symbol.name; });
-    transpiler.append(this.name + ".symbols = ");
-    transpiler.append("[" + names.join(", ") + "]");
-    transpiler.append(";");
+    transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);");
 };
 
 EnumeratedNativeDeclaration.prototype.getType = function(context) {

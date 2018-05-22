@@ -12,6 +12,7 @@ var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var TextLiteral = null;
 var ListValue = null;
+var List = require("../intrinsic/List").List;
 
 exports.resolve = function() {
 	CharacterType = require("./CharacterType").CharacterType;
@@ -457,8 +458,12 @@ function resolveBuiltInMethodDeclaration() {
         return new ListType(TextType.instance);
     };
 
+    SplitMethodDeclaration.prototype.declareCall = function(transpiler) {
+        transpiler.require(List);
+    };
+
     SplitMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
-        transpiler.append("split(");
+        transpiler.append("splitToList(");
         if(assignments)
             assignments.get(0).transpile(transpiler);
         else

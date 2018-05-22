@@ -1,19 +1,36 @@
-function Tuple(items) {
-	Array.call(this);
-	if((items || null)!==null) {
-		this.addAll(items);
-	}
+var List = require("./List").List;
+
+function Tuple(mutable, items) {
+	List.call(this, mutable, items);
 	return this;
 }
 
-Tuple.prototype = Object.create(Array.prototype);
+Tuple.prototype = Object.create(List.prototype);
 Tuple.prototype.constructor = Tuple;
 
-Tuple.prototype.addAll = function(items) {
+Tuple.prototype.add = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-    	items = Array.from(items.set.values());
-	this.push.apply(this, items);
-	return this; // enable fluid API
+        items = Array.from(items.set.values());
+    var concat = new Tuple(false);
+    concat.addItems(this);
+    concat.addItems(items);
+    return concat;
+};
+
+Tuple.prototype.equals = function(o) {
+    o = o || null;
+    if(this===o) {
+        return true;
+    }
+    if(!(o instanceof Tuple) || this.length !== o.length) {
+        return false;
+    }
+    for(var i=0;i<this.length;i++) {
+        if(!equalObjects(this[i], o[i])) {
+            return false;
+        }
+    }
+    return true;
 };
 
 Tuple.prototype.toString = function() {
@@ -21,5 +38,7 @@ Tuple.prototype.toString = function() {
 };
 
 Tuple.prototype.getText = Tuple.prototype.toString;
+
+
 
 exports.Tuple = Tuple;

@@ -2,6 +2,7 @@ var BaseType = require("./BaseType").BaseType;
 var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var List = require("../intrinsic/List").List;
 
 function EnumeratedNativeType(name, derivedFrom) {
 	BaseType.call(this, name);
@@ -27,6 +28,7 @@ EnumeratedNativeType.prototype.checkMember = function(context, name) {
 EnumeratedNativeType.prototype.declare = function(transpiler) {
     var decl = transpiler.context.getRegisteredDeclaration(this.name);
     transpiler.declare(decl);
+    transpiler.require(List);
 };
 
 
