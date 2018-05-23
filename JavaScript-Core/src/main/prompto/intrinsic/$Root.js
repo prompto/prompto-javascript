@@ -15,7 +15,7 @@ $Root.prototype.toString = function() {
 };
 
 $Root.prototype.setMember = function(name, value, mutable) {
-    if(!this.mutable || (value.mutable && !mutable))
+    if(!this.mutable || (value && value.mutable && !mutable))
         throw new NotMutableError();
     this[name] = value;
     if(this.storable)
