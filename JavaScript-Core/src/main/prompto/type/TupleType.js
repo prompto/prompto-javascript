@@ -49,6 +49,14 @@ TupleType.prototype.transpileItem = function(transpiler, itemType, item) {
     }
 };
 
+
+TupleType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
+    transpiler.append(".setItem(").append(item).append(", ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 TupleType.prototype.checkMember = function(context, name) {
 	if ("count"==name) {
 		return IntegerType.instance;

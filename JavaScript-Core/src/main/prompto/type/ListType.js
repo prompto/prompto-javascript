@@ -109,6 +109,13 @@ ListType.prototype.transpileItem = function(transpiler, itemType, item) {
 };
 
 
+ListType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
+    transpiler.append(".setItem(").append(item).append(", ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 ListType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other instanceof IntegerType) {
 		return this;

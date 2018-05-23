@@ -675,7 +675,11 @@ CategoryType.prototype.transpileSortedByGlobalMethod = function(transpiler, desc
         transpiler.append("1 : -1; }");
 };
 
-
+CategoryType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
+    transpiler.append(".setMember('").append(name).append("', ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
 
 
 exports.CategoryType = CategoryType;

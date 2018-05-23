@@ -1,28 +1,36 @@
 var List = require("./List").List;
 var StrictSet = require("./StrictSet").StrictSet;
 
-function Dictionary(entries) {
+function Dictionary(mutable, entries) {
     if(entries)
         Object.getOwnPropertyNames(entries).forEach(function(name) { this[name] = entries[name]; }, this);
+    this.mutable = mutable || false;
     return this;
 }
 
+Object.defineProperty(Dictionary.prototype, "$keys", {
+    get : function() {
+        return Object.getOwnPropertyNames(this).filter(function(name) { return name!=="mutable"; });
+    }
+});
+
+
 Object.defineProperty(Dictionary.prototype, "length", {
     get : function() {
-        return Object.getOwnPropertyNames(this).length;
+        return this.$keys.length;
     }
 });
 
 Object.defineProperty(Dictionary.prototype, "keys", {
     get : function() {
-        return new StrictSet(Object.getOwnPropertyNames(this));
+        return new StrictSet(this.$keys);
     }
 });
 
 
 Object.defineProperty(Dictionary.prototype, "values", {
     get : function() {
-        var names = Object.getOwnPropertyNames(this).map(function(name) { return this[name]; }, this);
+        var names = this.$keys.map(function(name) { return this[name]; }, this);
         return new List(false, names);
     }
 });
@@ -44,8 +52,7 @@ Dictionary.prototype.add = function(dict) {
 
 
 Dictionary.prototype.toString = function() {
-    var names = Object.getOwnPropertyNames(this);
-    var vals = names.map(function (name) {
+    var vals = this.$keys.map(function (name) {
         return '"' + name + '":' + this[name];
     }, this);
     return "{" + vals.join(", ") + "}";
@@ -56,8 +63,8 @@ Dictionary.prototype.getText = Dictionary.prototype.toString;
 
 
 Dictionary.prototype.equals = function(dict) {
-    var keys = Object.getOwnPropertyNames(this);
-    if (keys.length != dict.length)
+    var keys = this.$keys;
+    if (this.length != dict.length)
         return false;
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
@@ -100,6 +107,16 @@ Dictionary.prototype.item = function(item) {
     if(!this.hasOwnProperty(item))
         throw new RangeError();
     return this[item];
+};
+
+
+Dictionary.prototype.setItem = function (item, value) {
+    if(!this.mutable)
+        throw new NotMutableError();
+    else if(item==null)
+        throw new ReferenceError();
+    else
+        this[item] = value;
 };
 
 exports.Dictionary = Dictionary;

@@ -13,8 +13,8 @@ var TextType = require("../type/TextType").TextType;
 
 function DictionaryValue(itemType, dict, mutable) {
     Value.call(this, new DictionaryType(itemType));
-	this.dict = dict || new Dictionary();
     this.mutable = mutable || false;
+	this.dict = dict || new Dictionary(this.mutable);
 	return this;
 }
 
@@ -58,7 +58,7 @@ DictionaryValue.prototype.getMemberValue = function(context, name) {
         }
         return new SetValue(TextType.instance, keys);
     } else if ("values"==name) {
-        var list = Object.getOwnPropertyNames(this.dict).map(function(name) {
+        var list = this.dict.$keys.map(function(name) {
             return this.dict[name];
         }, this);
         return new ListValue(this.type.itemType, list);
@@ -112,7 +112,7 @@ DictionaryValue.prototype.getIterator = function(context) {
 function KVPIterator(context, dict) {
     this.context = context;
     this.dict = dict;
-    this.keys = Object.getOwnPropertyNames(this.dict);
+    this.keys = this.dict.$keys;
     this.index = 0;
     return this;
 }

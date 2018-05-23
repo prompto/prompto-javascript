@@ -52,7 +52,7 @@ StrictSet.prototype.addItems = function(items) {
 StrictSet.prototype.addAll = function(items) {
     var result = new StrictSet(this.set);
     result.addItems(items);
-    return result; 
+    return result;
 };
 
 

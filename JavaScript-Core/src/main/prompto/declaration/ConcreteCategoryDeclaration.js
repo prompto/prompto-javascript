@@ -449,7 +449,7 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
         transpiler.append("this.mutable = true;").newLine();
         transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
         this.attributes.forEach(function (attr) {
-            transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null);").newLine();
+            transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null, mutable);").newLine();
         }, this);
     }
 };

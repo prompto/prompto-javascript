@@ -14,8 +14,8 @@ $Root.prototype.toString = function() {
     return "{" + vals.join(", ") + "}";
 };
 
-$Root.prototype.setMember = function(name, value) {
-    if(!this.mutable)
+$Root.prototype.setMember = function(name, value, mutable) {
+    if(!this.mutable || (value.mutable && !mutable))
         throw new NotMutableError();
     this[name] = value;
     if(this.storable)

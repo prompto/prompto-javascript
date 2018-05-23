@@ -146,6 +146,13 @@ DictionaryType.prototype.transpileItem = function(transpiler, itemType, item) {
 };
 
 
+DictionaryType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
+    transpiler.append(".setItem(").append(item).append(", ");
+    expression.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
 DictionaryType.prototype.checkIterator = function(context) {
 	return new EntryType(this.itemType);
 };

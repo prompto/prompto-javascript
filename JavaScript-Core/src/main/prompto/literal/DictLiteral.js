@@ -37,7 +37,7 @@ DictLiteral.prototype.declare = function(transpiler) {
 
 
 DictLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("new Dictionary(")
+    transpiler.append("new Dictionary(").append(this.mutable).append(", ");
     this.entries.transpile(transpiler);
     transpiler.append(")");
 };

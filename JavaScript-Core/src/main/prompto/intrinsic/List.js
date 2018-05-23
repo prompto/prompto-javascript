@@ -58,7 +58,9 @@ List.prototype.getItem = function (idx, create) {
 };
 
 List.prototype.setItem = function (idx, value) {
-    if(idx==null)
+    if(!this.mutable)
+        throw new NotMutableError();
+    else if(idx==null)
         throw new ReferenceError();
     else if(idx<1 || idx>this.length)
         throw new RangeError();
