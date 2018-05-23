@@ -13,6 +13,7 @@ var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var TextLiteral = null;
 var ListValue = null;
 var List = require("../intrinsic/List").List;
+var TypeFamily = require("../store/TypeFamily").TypeFamily;
 
 exports.resolve = function() {
 	CharacterType = require("./CharacterType").CharacterType;
@@ -25,6 +26,7 @@ exports.resolve = function() {
 
 function TextType()  {
 	NativeType.call(this, new Identifier("Text"));
+	this.family = TypeFamily.TEXT;
 	return this;
 }
 

@@ -374,20 +374,10 @@ EqualsExpression.prototype.transpileQuery = function(transpiler, builder) {
         else
             throw new SyntaxError("Unable to interpret predicate");
     }
-    /*
-    if (value instanceof Instance)
-        value = value.getMemberValue(context, "dbId", false);
-    */
-    /*
-    var decl = context.findAttribute(name);
-    var info = decl == null ? null : decl.getAttributeInfo();
-    var data = value == null ? null : value.getStorableData();
+    var decl = transpiler.context.findAttribute(name);
+    var info = decl.getAttributeInfo();
     var match = this.getMatchOp();
-    query.verify(info, match, data);
-    if (this.operator == EqOp.NOT_EQUALS)
-        query.not();
-    */
-    transpiler.append(builder).append(".verify(new AttributeInfo('").append(name).append("', TypeFamily.TEXT, true, null), MatchOp.EQUALS, ");
+    transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(match.name).append(", ");
     value.transpile(transpiler);
     transpiler.append(");").newLine();
     if (this.operator == EqOp.NOT_EQUALS)

@@ -9,4 +9,9 @@ function AttributeInfo(name, family, collection, indexTypes) {
     return this;
 };
 
+AttributeInfo.prototype.toTranspiled = function() {
+    var indices = "null";
+    return "new AttributeInfo('" + this.name + "', TypeFamily." + this.family.name + ", " + this.collection + ", " + indices + ")";
+};
+
 exports.AttributeInfo = AttributeInfo;
