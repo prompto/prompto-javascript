@@ -126,6 +126,27 @@ CompareExpression.prototype.interpretQuery = function(context, query) {
     }
 };
 
+CompareExpression.prototype.transpileQuery = function(transpiler, builder) {
+    var name = null;
+    var value = null;
+    if (this.left instanceof UnresolvedIdentifier || this.left instanceof InstanceExpression || this.left instanceof MemberSelector) {
+        name = this.left.name;
+        value = this.right;
+    } else if (this.right instanceof UnresolvedIdentifier || this.right instanceof InstanceExpression || this.right instanceof MemberSelector) {
+        name = this.right.name;
+        value = this.left;
+    }
+    var decl = transpiler.context.findAttribute(name);
+    var info = decl == null ? null : decl.getAttributeInfo();
+    var matchOp = this.getMatchOp();
+    // TODO check for dbId field of instance value
+    transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
+    value.transpile(transpiler);
+    transpiler.append(");").newLine();
+    if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
+        transpiler.append(builder).append(".not();").newLine();
+};
+
 CompareExpression.prototype.getMatchOp = function() {
     if (this.operator == CmpOp.GT || this.operator == CmpOp.LTE)
         return MatchOp.GREATER;

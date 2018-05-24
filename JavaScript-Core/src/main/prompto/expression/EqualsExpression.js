@@ -376,8 +376,9 @@ EqualsExpression.prototype.transpileQuery = function(transpiler, builder) {
     }
     var decl = transpiler.context.findAttribute(name);
     var info = decl.getAttributeInfo();
-    var match = this.getMatchOp();
-    transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(match.name).append(", ");
+    var matchOp = this.getMatchOp();
+    // TODO check for dbId field of instance value
+    transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
     value.transpile(transpiler);
     transpiler.append(");").newLine();
     if (this.operator == EqOp.NOT_EQUALS)

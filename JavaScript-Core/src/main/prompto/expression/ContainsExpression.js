@@ -172,14 +172,42 @@ ContainsExpression.prototype.interpretQuery = function(context, query) {
         else
             throw new SyntaxError("Unable to interpret predicate");
     }
-    var matchOp = this.getMatchOp(context, this.getAttributeType(context, name), value.type, this.operator, reverse);
+    var decl = context.findAttribute(name);
+    var info = decl.getAttributeInfo();
+    var matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, reverse);
     if (value instanceof Instance)
         value = value.getMemberValue(context, "dbId", false);
-    var info = context.findAttribute(name).getAttributeInfo();
     var data = value == null ? null : value.getStorableData();
     query.verify(info, matchOp, data);
     if (this.operator.name.indexOf("NOT_")==0)
         query.not();
+};
+
+
+ContainsExpression.prototype.transpileQuery = function(transpiler, builder) {
+    var reverse = false;
+    var value = null;
+    var name = this.readFieldName(this.left);
+    if (name != null)
+        value = this.right;
+    else {
+        reverse = true;
+        name = this.readFieldName(this.right);
+        if (name != null)
+            value = this.left;
+        else
+            throw new SyntaxError("Unable to transpile predicate");
+    }
+    var decl = transpiler.context.findAttribute(name);
+    var info = decl.getAttributeInfo();
+    var type = value.check(transpiler.context);
+    // TODO check for dbId field of instance value
+    var matchOp = this.getMatchOp(transpiler.context, decl.getType(), type, this.operator, reverse);
+    transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
+    value.transpile(transpiler);
+    transpiler.append(");").newLine();
+    if (this.operator.name.indexOf("NOT_")==0)
+        transpiler.append(builder).append(".not();").newLine();
 };
 
 ContainsExpression.prototype.getAttributeType = function(context, name) {
