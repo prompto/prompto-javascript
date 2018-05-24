@@ -36,4 +36,16 @@ CursorType.prototype.checkMember = function(context, name) {
         return IterableType.prototype.checkMember.call(this, context, name);
 };
 
+CursorType.prototype.declareMember = function(transpiler, name) {
+    if("count"!==name && "totalCount"!==name)
+        IterableType.prototype.declareMember.call(this, transpiler, name);
+};
+
+CursorType.prototype.transpileMember = function(transpiler, name) {
+    if("count"===name || "totalCount"===name) {
+        transpiler.append(name);
+    } else
+        IterableType.prototype.transpileMember.call(this, transpiler, name);
+};
+
 exports.CursorType = CursorType;

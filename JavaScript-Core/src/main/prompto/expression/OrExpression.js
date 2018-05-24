@@ -109,6 +109,12 @@ OrExpression.prototype.interpretQuery = function(context, query) {
     query.or();
 };
 
+OrExpression.prototype.transpileQuery = function(transpiler, builder) {
+    this.left.transpileQuery(transpiler, builder);
+    this.right.transpileQuery(transpiler, builder);
+    transpiler.append(builder).append(".or();").newLine();
+};
+
 
 exports.OrExpression = OrExpression;
 

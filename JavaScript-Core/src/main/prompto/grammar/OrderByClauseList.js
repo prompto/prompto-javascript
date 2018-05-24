@@ -25,8 +25,20 @@ OrderByClauseList.prototype.toDialect = function(writer) {
 }
 
 OrderByClauseList.prototype.interpretQuery = function(context, query) {
-    this.map(function (clause) {
+    this.forEach(function (clause) {
         clause.interpretQuery(context, query);
+    });
+};
+
+OrderByClauseList.prototype.declare = function(transpiler) {
+    this.forEach(function (clause) {
+        clause.declare(transpiler);
+    });
+};
+
+OrderByClauseList.prototype.transpileQuery = function(transpiler, builder) {
+    this.forEach(function (clause) {
+        clause.transpileQuery(transpiler, builder);
     });
 };
 

@@ -88,8 +88,16 @@ StoreStatement.prototype.transpile = function(transpiler) {
 StoreStatement.prototype.transpileIdsToDelete = function(transpiler) {
     if(!this.del)
         transpiler.append("null");
-    else
-        this.del.transpile(transpiler);
+    else {
+        transpiler.append("(function() { ").indent();
+        transpiler.append("var idsToDelete = new Set();").newLine();
+        this.del.forEach(function (exp) {
+            exp.transpile(transpiler);
+            transpiler.append(".collectDbIds(idsToDelete);").newLine();
+        }, this);
+        transpiler.append("return idsToDelete;").newLine();
+        transpiler.dedent().append("})()");
+    }
 };
 
 StoreStatement.prototype.transpileStorablesToAdd = function(transpiler) {
@@ -97,7 +105,7 @@ StoreStatement.prototype.transpileStorablesToAdd = function(transpiler) {
         transpiler.append("null");
     else {
         transpiler.append("(function() { ").indent();
-        transpiler.append("var storablesToAdd = [];").newLine();
+        transpiler.append("var storablesToAdd = new Set();").newLine();
         this.add.forEach(function (exp) {
             exp.transpile(transpiler);
             transpiler.append(".collectStorables(storablesToAdd);").newLine();
@@ -110,7 +118,7 @@ StoreStatement.prototype.transpileStorablesToAdd = function(transpiler) {
 StoreStatement.prototype.getIdsToDelete = function(context) {
     if(!this.del)
         return null;
-    var idsToDel = [];
+    var idsToDel = new Set();
     this.del.forEach(function (exp) {
         var value = exp.interpret(context);
         if (value == NullValue.instance)
@@ -118,7 +126,7 @@ StoreStatement.prototype.getIdsToDelete = function(context) {
         else if(value instanceof Instance) {
             var dbId = value.getMemberValue(context, "dbId");
             if (dbId !=null && dbId!=NullValue.instance)
-                idsToDel.push(dbId.getStorableData());
+                idsToDel.add(dbId.getStorableData());
         } else if(value instanceof Container) {
             value.items.map(function (item) {
                 if (value == NullValue.instance)
@@ -140,7 +148,7 @@ StoreStatement.prototype.getIdsToDelete = function(context) {
 StoreStatement.prototype.getStorablesToAdd = function(context) {
     if (!this.add)
         return null;
-    var storablesToAdd = [];
+    var storablesToAdd = new Set();
     this.add.forEach(function (exp) {
         var value = exp.interpret(context);
         value.collectStorables(storablesToAdd)

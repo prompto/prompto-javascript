@@ -81,17 +81,17 @@ ConcreteInstance.prototype.getMemberNames = function() {
 	return Object.getOwnPropertyNames(this.values);
 };
 
-ConcreteInstance.prototype.collectStorables = function(list) {
+ConcreteInstance.prototype.collectStorables = function(set) {
     if(this.declaration instanceof EnumeratedNativeDeclaration || this.declaration instanceof EnumeratedCategoryDeclaration)
         return;
     if (this.storable==null)
         throw new NotStorableError();
     if (this.storable.dirty) {
         this.getOrCreateDbId();
-        list.push(this.storable);
+        set.add(this.storable);
     }
     for(var field in this.values) {
-        this.values[field].collectStorables(list);
+        this.values[field].collectStorables(set);
     }
 };
 

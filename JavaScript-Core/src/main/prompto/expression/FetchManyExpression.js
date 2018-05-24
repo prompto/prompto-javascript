@@ -170,6 +170,54 @@ FetchManyExpression.prototype.interpretLimit = function(context, exp) {
 };
 
 
+FetchManyExpression.prototype.declare = function(transpiler) {
+    var Cursor = require("../intrinsic/Cursor").Cursor;
+    transpiler.require(Cursor);
+    transpiler.require(MatchOp);
+    transpiler.require(DataStore);
+    transpiler.require(AttributeInfo);
+    transpiler.require(TypeFamily);
+    if (this.typ)
+        this.typ.declare(transpiler);
+    if (this.predicate)
+        this.predicate.declare(transpiler);
+    if (this.first)
+        this.first.declare(transpiler);
+    if (this.last)
+        this.last.declare(transpiler);
+    if (this.orderBy)
+        this.orderBy.declare(transpiler);
+};
+
+
+FetchManyExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("(function() {").indent();
+    transpiler.append("var builder = DataStore.instance.newQueryBuilder();").newLine();
+    if (this.typ != null)
+        transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
+    if (this.predicate != null)
+        this.predicate.transpileQuery(transpiler, "builder");
+    if (this.typ != null && this.predicate != null)
+        transpiler.append("builder.and();").newLine();
+    if (this.first) {
+        transpiler.append("builder.setFirst(");
+        this.first.transpile(transpiler);
+        transpiler.append(");").newLine();
+    }
+    if (this.last) {
+        transpiler.append("builder.setLast(");
+        this.last.transpile(transpiler);
+        transpiler.append(");").newLine();
+    }
+    if (this.orderBy)
+        this.orderBy.transpileQuery(transpiler, "builder");
+    transpiler.append("var iterable = DataStore.instance.fetchMany(builder.build());").newLine();
+    var mutable = this.typ ? this.typ.mutable : false;
+    transpiler.append("return new Cursor(").append(mutable).append(", iterable);").dedent();
+    transpiler.append("})()");
+};
+
+
 function DocumentIterator(docs) {
     return this;
     if (doc == null)

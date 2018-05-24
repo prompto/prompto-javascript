@@ -32,9 +32,19 @@ $Root.prototype.fromStored = function(stored) {
 };
 
 $Root.prototype.collectStorables = function(storablesToAdd) {
-    if(this.storable)
-        storablesToAdd.push(this.storable);
+    if(this.storable) {
+        if(!this.dbId)
+            this.dbId = this.storable.getOrCreateDbId();
+        storablesToAdd.add(this.storable);
+        // TODO: traverse object tree
+    }
+
 };
 
+$Root.prototype.collectDbIds = function(idsToDelete) {
+    if(this.dbId)
+        idsToDelete.add(this.dbId);
+    // TODO: traverse object tree
+};
 
 exports.$Root = $Root;

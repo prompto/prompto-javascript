@@ -85,6 +85,7 @@ FetchOneExpression.prototype.interpret = function(context) {
 };
 
 FetchOneExpression.prototype.declare = function(transpiler) {
+    transpiler.require(MatchOp);
     transpiler.require(DataStore);
     transpiler.require(AttributeInfo);
     transpiler.require(TypeFamily);
