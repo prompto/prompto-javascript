@@ -91,7 +91,7 @@ DictionaryValue.prototype.getItemInContext = function(context, index) {
 
 DictionaryValue.prototype.convertToJavaScript = function() {
     var dict = {};
-    Object.getOwnPropertyNames(this.dict).forEach(function(key) {
+    this.dict.$keys.forEach(function(key) {
         dict[key] = this.dict[key].convertToJavaScript();
     }, this);
     return dict;
