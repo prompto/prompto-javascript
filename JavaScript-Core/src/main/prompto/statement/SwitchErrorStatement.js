@@ -177,7 +177,7 @@ SwitchErrorStatement.prototype.transpile = function(transpiler) {
     }, this);
     if(this.defaultCase!=null) {
         transpiler.append("default:").indent();
-        this.defaultCase.transpileError(transpiler);
+        this.defaultCase.transpile(transpiler);
         transpiler.dedent();
     }
     transpiler.dedent().append("}");

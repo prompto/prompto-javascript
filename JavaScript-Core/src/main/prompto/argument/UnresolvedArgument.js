@@ -75,5 +75,10 @@ UnresolvedArgument.prototype.transpile = function(transpiler) {
     this.resolved.transpile(transpiler);
 };
 
+UnresolvedArgument.prototype.transpileCall = function(transpiler, expression) {
+    this.resolveAndCheck(transpiler.context);
+    this.resolved.transpileCall(transpiler, expression);
+};
+
 exports.UnresolvedArgument = UnresolvedArgument;
 

@@ -91,8 +91,8 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 		var assignments = this.makeAssignments(parent,declaration);
 		declaration.registerArguments(local);
 		assignments.forEach(function(assignment) {
-			var expression = assignment.resolve(local,declaration,true);
-			var value = assignment.argument.checkValue(parent,expression);
+			var expression = assignment.resolve(local, declaration, true);
+			var value = assignment.argument.checkValue(parent, expression);
 			local.setValue(assignment.id, value);
 		});
 		return declaration.check(local);
@@ -146,15 +146,9 @@ MethodCall.prototype.transpile = function(transpiler) {
         if(assignments.length > 0) {
             transpiler.append("(");
             assignments.forEach(function (assignment) {
-                var argType = assignment.argument.getType(transpiler.context);
+                var argument = assignment.argument;
                 var expression = assignment.resolve(transpiler.context, declaration, false);
-                var expType = expression.check(transpiler.context);
-                if (argType === IntegerType.instance && expType === DecimalType.instance) {
-                    transpiler.append("Math.round(");
-                    expression.transpile(transpiler);
-                    transpiler.append(")");
-                } else
-                    expression.transpile(transpiler);
+                argument.transpileCall(transpiler, expression);
                 transpiler.append(", ");
             });
             transpiler.trimLast(2);

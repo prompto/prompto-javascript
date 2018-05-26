@@ -37,8 +37,19 @@ Argument.prototype.toDialect = function(writer) {
     }
 };
 
-Argument.prototype.transpile = function(transpiler) {
+Argument.prototype.transpile = function(transpiler, expression) {
     transpiler.append(this.name);
+};
+
+
+Argument.prototype.transpileCall = function(transpiler, expression) {
+    var expType = expression.check(transpiler.context);
+    if (this.type === IntegerType.instance && expType === DecimalType.instance) {
+        transpiler.append("Math.round(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    } else
+        expression.transpile(transpiler);
 };
 
 exports.Argument = Argument;

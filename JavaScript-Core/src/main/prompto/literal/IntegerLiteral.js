@@ -40,6 +40,11 @@ function MinIntegerLiteral() {
 MinIntegerLiteral.prototype = Object.create(IntegerLiteral.prototype);
 MinIntegerLiteral.prototype.constructor = MinIntegerLiteral;
 
+MinIntegerLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append("-0x20000000000000");
+};
+
+
 function MaxIntegerLiteral() {
     IntegerLiteral.call(this, "MAX_INTEGER", 0x20000000000000);
     return this;
@@ -47,6 +52,11 @@ function MaxIntegerLiteral() {
 
 MaxIntegerLiteral.prototype = Object.create(IntegerLiteral.prototype);
 MaxIntegerLiteral.prototype.constructor = MaxIntegerLiteral;
+
+
+MaxIntegerLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append("0x20000000000000");
+};
 
 exports.IntegerLiteral = IntegerLiteral;
 exports.MinIntegerLiteral = MinIntegerLiteral;

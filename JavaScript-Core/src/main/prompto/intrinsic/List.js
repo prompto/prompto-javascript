@@ -69,6 +69,12 @@ List.prototype.setItem = function (idx, value) {
 };
 
 
+List.prototype.has = function(item, noCheckEquals) {
+    var set = new StrictSet(this);
+    return set.has(item, noCheckEquals);
+};
+
+
 List.prototype.hasAll = function(items, noCheckEquals) {
     var set = new StrictSet(this);
     return set.hasAll(items, noCheckEquals);

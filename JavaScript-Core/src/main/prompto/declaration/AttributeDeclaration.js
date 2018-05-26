@@ -109,10 +109,17 @@ AttributeDeclaration.prototype.checkValue = function(context, expression) {
 	this.constraint.checkValue(context, value);
 	return value;
 };
+
 AttributeDeclaration.prototype.getAttributeInfo = function() {
     var collection = this.type instanceof ContainerType;
     var family = collection ? this.type.itemType.family : this.type.family;
     return new AttributeInfo(this.name, family, collection, this.indexTypes);
+};
+
+AttributeDeclaration.prototype.declare = function(transpiler) {
+    this.type.declare(transpiler);
+    if(this.constraint)
+        this.constraint.declare(transpiler, this.name, this.type);
 };
 
 exports.AttributeDeclaration = AttributeDeclaration;

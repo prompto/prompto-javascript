@@ -49,6 +49,7 @@ CategoryArgument.prototype.declare = function(transpiler) {
     this.type.declare(transpiler);
 };
 
+
 CategoryArgument.prototype.getType = function(context) {
 	return this.type;
 };

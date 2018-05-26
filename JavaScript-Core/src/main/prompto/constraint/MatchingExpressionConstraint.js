@@ -24,5 +24,29 @@ MatchingExpressionConstraint.prototype.toDialect = function(writer) {
     this.expression.toDialect(writer);
 }
 
+MatchingExpressionConstraint.prototype.declare = function(transpiler, name, type) {
+    var transpiler = transpiler.newChildTranspiler();
+    var id = new Identifier("value");
+    transpiler.context.registerValue(new Variable(id, type));
+    this.expression.declare(transpiler);
+    this.transpile = function(transpiler) { this.transpileChecker(transpiler, name, type); };
+    transpiler.declare(this);
+};
+
+MatchingExpressionConstraint.prototype.transpileChecker = function(transpiler, name, type) {
+    transpiler.append("function $check_").append(name).append("(value) {").indent();
+    var transpiler = transpiler.newChildTranspiler();
+    var id = new Identifier("value");
+    transpiler.context.registerValue(new Variable(id, type));
+    transpiler.append("if(")
+    this.expression.transpile(transpiler);
+    transpiler.append(")").indent();
+    transpiler.append("return value;").dedent();
+    transpiler.append("else").indent();
+    transpiler.append("throw new IllegalValueError((value == null ? 'null' : value.toString()) + ' does not match: \"").append(this.expression.toString()).append("\"');").dedent();
+    transpiler.dedent().append("}").newLine();
+    transpiler.flush();
+};
+
 exports.MatchingExpressionConstraint = MatchingExpressionConstraint;
 
