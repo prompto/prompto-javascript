@@ -41,6 +41,22 @@ JavaScriptStatement.prototype.toDialect = function(writer) {
         this.module.toDialect(writer);
 };
 
+function $context() {
+    return this;
+};
+
+$context.prototype.transpile = function(transpiler) {
+    transpiler.append("var $context = context;").newLine();
+};
+
+JavaScriptStatement.prototype.declare = function(transpiler) {
+    // TODO module
+    if(this.expression.toString().startsWith("$context")) {
+        transpiler.declare(new $context());
+    }
+};
+
+
 JavaScriptStatement.prototype.transpile = function(transpiler) {
     if(this.isReturn)
         transpiler.append("return ");
@@ -49,10 +65,6 @@ JavaScriptStatement.prototype.transpile = function(transpiler) {
     this.expression.transpile(transpiler);
     if(this.module!=null)
         throw new Error(this.module.toString());
-};
-
-JavaScriptStatement.prototype.declare = function(transpiler) {
-    // TODO module
 };
 
 exports.JavaScriptStatement = JavaScriptStatement;
