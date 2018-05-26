@@ -113,13 +113,13 @@ NativeCategoryDeclaration.prototype.getBinding = function(fail) {
 
 
 NativeCategoryDeclaration.prototype.declare = function(transpiler) {
-    var bound = this.getBoundFunction(true);
-    transpiler.require(bound);
     transpiler.declare(this);
 };
 
 NativeCategoryDeclaration.prototype.transpile = function(transpiler) {
-    var bound = this.getBoundFunction(true);
+    var binding = this.getBinding(true);
+    binding.transpile(transpiler);
+    var bound = binding.resolve();
     var name = getTypeName(bound);
     transpiler.append("function ").append("new_").append(name).append("(values) {").indent();
     transpiler.append("values = values || {};").newLine();

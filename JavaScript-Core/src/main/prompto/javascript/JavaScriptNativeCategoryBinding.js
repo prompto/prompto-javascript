@@ -34,5 +34,10 @@ JavaScriptNativeCategoryBinding.prototype.toDialect = function(writer) {
         this.module.toDialect(writer);
 };
 
+JavaScriptNativeCategoryBinding.prototype.transpile = function(transpiler) {
+    if(this.module)
+        this.module.transpile(transpiler, this.identifier);
+};
+
 exports.JavaScriptNativeCategoryBinding = JavaScriptNativeCategoryBinding;
 
