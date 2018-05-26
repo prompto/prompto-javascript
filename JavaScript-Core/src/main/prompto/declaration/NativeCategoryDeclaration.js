@@ -2,6 +2,7 @@ var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").Concr
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
+var CategoryType = require("../type/CategoryType").CategoryType;
 
 function NativeCategoryDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
     ConcreteCategoryDeclaration.call(this, id, attributes, null, methods);
@@ -109,5 +110,33 @@ NativeCategoryDeclaration.prototype.getBinding = function(fail) {
     else
         return null;
 };
+
+
+NativeCategoryDeclaration.prototype.declare = function(transpiler) {
+    var bound = this.getBoundFunction(true);
+    transpiler.require(bound);
+    transpiler.declare(this);
+};
+
+NativeCategoryDeclaration.prototype.transpile = function(transpiler) {
+    var bound = this.getBoundFunction(true);
+    var name = getTypeName(bound);
+    transpiler.append("function ").append("new_").append(name).append("(values) {").indent();
+    transpiler.append("values = values || {};").newLine();
+    transpiler.append("var value = new ").append(name).append("();").newLine();
+    if(this.attributes) {
+        this.attributes.forEach(function (attr) {
+            transpiler.append("value.").append(attr.name).append(" = values.").append(attr.name).append(" || null;").newLine();
+        }, this);
+    }
+    transpiler.append("return value;").newLine();
+    transpiler.dedent().append("}").newLine();
+    transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+    this.transpileMethods(transpiler);
+    this.transpileGetterSetters(transpiler);
+    transpiler.flush();
+
+};
+
 
 exports.NativeCategoryDeclaration = NativeCategoryDeclaration;

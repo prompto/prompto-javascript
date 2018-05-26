@@ -8,6 +8,8 @@ var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssign
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+var NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
+var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
@@ -146,6 +148,24 @@ ConstructorExpression.prototype.declare = function(transpiler) {
 };
 
 ConstructorExpression.prototype.transpile = function(transpiler) {
+    var decl = transpiler.context.getRegisteredDeclaration(this.type.name);
+    if (decl instanceof NativeCategoryDeclaration)
+        this.transpileNative(transpiler, decl);
+    else
+        this.transpileConcrete(transpiler);
+};
+
+
+ConstructorExpression.prototype.transpileNative = function(transpiler, decl) {
+    var bound = decl.getBoundFunction(true);
+    transpiler.append("new_").append(getTypeName(bound)).append("(");
+    this.transpileAssignments(transpiler);
+    transpiler.append(")");
+    transpiler.flush();
+};
+
+
+ConstructorExpression.prototype.transpileConcrete = function(transpiler) {
     transpiler = transpiler.newInstanceTranspiler(this.type);
     transpiler.append("new ").append(this.type.name).append("(");
     if(this.copyFrom!=null)
@@ -153,6 +173,14 @@ ConstructorExpression.prototype.transpile = function(transpiler) {
     else
         transpiler.append("null");
     transpiler.append(", ");
+    this.transpileAssignments(transpiler);
+    transpiler.append(", ");
+    transpiler.append(this.type.mutable);
+    transpiler.append(")");
+    transpiler.flush();
+};
+
+ConstructorExpression.prototype.transpileAssignments = function(transpiler) {
     if(this.assignments!=null) {
         transpiler.append("{");
         this.assignments.forEach(function(assignment) {
@@ -161,12 +189,9 @@ ConstructorExpression.prototype.transpile = function(transpiler) {
             transpiler.append(", ");
         }, this);
         transpiler.trimLast(2);
-        transpiler.append("}, ");
+        transpiler.append("}");
     } else
-        transpiler.append("null, ");
-    transpiler.append(this.type.mutable);
-    transpiler.append(")");
-    transpiler.flush();
+        transpiler.append("null");
 };
 
 exports.ConstructorExpression = ConstructorExpression;

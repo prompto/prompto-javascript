@@ -125,7 +125,11 @@ Transpiler.prototype.getTranspiled = function(object) {
         return object.toString();
 };
 
+var coreNodeClasses = new Set(["Socket"]);
+
 Transpiler.prototype.appendOneRequired = function(fn) {
+    if(coreNodeClasses.has(fn.name))
+        return;
     this.lines.push(fn.toString());
     Object.keys(fn).forEach(function (key) {
         this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
@@ -144,7 +148,7 @@ Transpiler.prototype.appendOneRequired = function(fn) {
         if(desc.get || desc.set) {
             this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
             if(desc.get) {
-                this.lines.push("    get: " + desc.get.toString());
+                this.lines.push("    get: " + desc.get.toString() + (desc.set ? "," : ""));
             }
             if(desc.set) {
                 this.lines.push("    set: " + desc.set.toString());

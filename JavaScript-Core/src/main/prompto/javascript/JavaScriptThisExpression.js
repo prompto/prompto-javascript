@@ -18,6 +18,10 @@ JavaScriptThisExpression.prototype.toDialect = function(writer) {
     return writer.append("this");
 };
 
+JavaScriptThisExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("this");
+};
+
 JavaScriptThisExpression.prototype.toString = function() {
 	return "this";
 };

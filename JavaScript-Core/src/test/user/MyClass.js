@@ -1,32 +1,39 @@
 function MyClass() {
-	this._id = null;
-	this._name = null;
-	this.display = null;
+	this.$id = null;
+	this.$name = null;
+	this.$display = null;
 	return this;
 };
 
 Object.defineProperty(MyClass.prototype, "id", {
 	get : function() {
-		return this._id;
+		return this.$id;
 	},
 	set : function(value) {
-		this._id = value;
+		this.$id = value;
 		this.computeDisplay();
 	}
 });
 
 Object.defineProperty(MyClass.prototype, "name", {
 	get : function() {
-		return this._name;
+		return this.$name;
 	},
 	set : function(value) {
-		this._name = value;
+		this.$name = value;
 		this.computeDisplay();
 	}
 });
 
+Object.defineProperty(MyClass.prototype, "display", {
+    get : function() {
+        return this.$display;
+    },
+    set : function(value) {}
+});
+
 MyClass.prototype.computeDisplay = function() {
-	this.display = "/id=" + this._id + "/name=" + this._name;
+	this.$display = "/id=" + this.$id + "/name=" + this.$name;
 };
 
 MyClass.prototype.printDisplay = function() {

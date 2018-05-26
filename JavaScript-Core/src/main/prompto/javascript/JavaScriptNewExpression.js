@@ -16,6 +16,12 @@ JavaScriptNewExpression.prototype.interpret = function(context, module) {
     return this.method.interpretNew(context, module);
 };
 
+JavaScriptNewExpression.prototype.transpile = function(transpiler) {
+    transpiler.append('new ');
+    this.method.transpile(transpiler);
+};
+
+
 JavaScriptNewExpression.prototype.toDialect = function(writer) {
     writer.append('new ');
     this.method.toDialect(writer);

@@ -52,6 +52,9 @@ AnyType.prototype.transpileAssignItemValue = function(transpiler, item, expressi
     transpiler.append(")");
 };
 
+AnyType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
 
 AnyType.prototype.isAssignableFrom = function(context, other) {
 	return true;

@@ -19,6 +19,14 @@ CommentStatement.prototype.interpret = function(context) {
     return null;
 };
 
+CommentStatement.prototype.declare = function(transpiler) {
+};
+
+CommentStatement.prototype.transpile = function(transpiler) {
+    return true; // skip
+};
+
+
 function uncomment(line) {
     if (line.indexOf("#")===0)
         return line.substring(1);
