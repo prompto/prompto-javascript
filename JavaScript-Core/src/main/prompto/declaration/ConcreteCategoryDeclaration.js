@@ -501,10 +501,12 @@ ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpile
     transpiler.dedent().append("}");
     transpiler.append(",").newLine();
     transpiler.append("set: function(").append(name).append(") {").indent();
-    if(setter)
+    if(setter) {
+        transpiler.append(name).append(" = (function(").append(name).append(") {").indent();
         setter.transpile(transpiler);
-    else
-        transpiler.append("this.$").append(name).append(" = ").append(name).append(";").newLine();
+        transpiler.append(";").dedent().append("})(name);").newLine();
+    }
+    transpiler.append("this.$").append(name).append(" = ").append(name).append(";").newLine();
     transpiler.dedent().append("}");
     transpiler.dedent().append("});").newLine();
 };

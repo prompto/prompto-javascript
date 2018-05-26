@@ -49,13 +49,9 @@ ReturnStatement.prototype.declare = function(transpiler) {
 };
 
 ReturnStatement.prototype.transpile = function(transpiler) {
-    if(!this.expression) {
-        transpiler.append("return");
-    } else {
-        if(transpiler.setterName)
-            transpiler.append("this.$").append(transpiler.setterName).append(" = ");
-        else
-            transpiler.append("return ");
+    transpiler.append("return");
+    if(this.expression) {
+        transpiler.append(" ");
         this.expression.transpile(transpiler);
     }
 };
