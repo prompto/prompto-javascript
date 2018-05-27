@@ -33,12 +33,18 @@ ArgumentAssignmentList.prototype.find = function(name) {
 };
 
 ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration) {
+    var local = new ArgumentAssignmentList(this);
 	var assignments = new ArgumentAssignmentList();
 	for(var i=0;i<declaration.args.length;i++) {
 	    var argument = declaration.args[i];
-        var assignment = this.find(argument.name);
-        if(assignment==null && i==0 && this.length>0 && this[0].argument==null)
-            assignment = this[0];
+        var assignment = null;
+        var index = local.findIndex(argument.name);
+	    if(index<0 && i==0 && this.length>0 && this[0].argument==null)
+	        index = 0;
+	    if(index>=0) {
+            assignment = local[index];
+            local.splice(index, 1);
+        }
         if(assignment==null) {
             if (argument.defaultExpression != null)
                 assignments.push(new ArgumentAssignment(argument, argument.defaultExpression));
@@ -49,6 +55,8 @@ ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration
             assignments.push(new ArgumentAssignment(argument, expression));
         }
     }
+    if(local.length > 0)
+        throw new SyntaxError("Method has no argument:" + local[0].name);
 	return assignments;
 };
 

@@ -65,7 +65,8 @@ ExtendedArgument.prototype.check = function(context) {
 };
 
 ExtendedArgument.prototype.getType = function(context) {
-    return this.type;
+    var decl = context.getRegisteredDeclaration(this.name);
+    return decl ? decl.getType(context) : this.type;
 };
 
 ExtendedArgument.prototype.toEDialect = function(writer) {
