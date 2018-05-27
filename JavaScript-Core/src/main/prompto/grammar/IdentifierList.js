@@ -14,16 +14,17 @@ IdentifierList.prototype = Object.create(ObjectList.prototype);
 IdentifierList.prototype.constructor = IdentifierList;
 
 
-IdentifierList.parse = function(ids) {
-    var result = new IdentifierList();
-	ids.split(",").forEach(function(part) {
-        result.add(part);
-    });
-	return result;
-};
-
 IdentifierList.prototype.names = function() {
     return this.map(function(id) { return id.name; } );
+};
+
+
+IdentifierList.prototype.hasAttribute = function(name) {
+    for(var i = 0; i < this.length; i++) {
+        if(this[i].name===name)
+            return true;
+    }
+    return false;
 };
 
 IdentifierList.prototype.toDialect = function(writer, finalAnd) {

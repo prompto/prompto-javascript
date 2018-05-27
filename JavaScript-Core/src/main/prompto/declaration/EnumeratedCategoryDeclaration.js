@@ -1,5 +1,9 @@
 var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
+var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+var Identifier = require("../grammar/Identifier").Identifier;
+var List = require("../intrinsic/List").List;
+
 
 function EnumeratedCategoryDeclaration(id, attrs, derived, symbols) {
 	ConcreteCategoryDeclaration.call(this, id, attrs, derived, null);
@@ -22,6 +26,17 @@ EnumeratedCategoryDeclaration.prototype.unregister = function(context) {
         symbol.unregister(context);
     });
 };
+
+
+EnumeratedCategoryDeclaration.prototype.getLocalAttributes = function() {
+    var attributes = ConcreteCategoryDeclaration.prototype.getLocalAttributes.call(this);
+    if(!attributes)
+        attributes = new IdentifierList();
+    if(!attributes.hasAttribute("name"))
+        attributes.add(new Identifier("name"));
+    return attributes;
+};
+
 
 EnumeratedCategoryDeclaration.prototype.hasAttribute = function(context, name) {
     if("name"==name)
@@ -158,6 +173,13 @@ EnumeratedCategoryDeclaration.prototype.ensureDeclarationOrder = function(contex
 };
 
 
+EnumeratedCategoryDeclaration.prototype.declare = function(transpiler) {
+    if(this.name==="Error")
+        return;
+    ConcreteCategoryDeclaration.prototype.declare.call(this, transpiler);
+    transpiler.require(List);
+};
+
 EnumeratedCategoryDeclaration.prototype.transpile = function(transpiler) {
     if (this.isUserError(transpiler.context))
         this.transpileUserError(transpiler);
@@ -184,9 +206,10 @@ EnumeratedCategoryDeclaration.prototype.transpileUserError = function(transpiler
             }, this);
     }
     transpiler.append("return this;").dedent();
-    transpiler.append("}").dedent().newLine();
-    transpiler.append("toString() {").indent().append("return this.message;").dedent().append("}").newLine();
     transpiler.append("}").newLine();
+    transpiler.append("toString() {").indent().append("return this.message;").dedent().append("}").newLine();
+    transpiler.append("getText() {").indent().append("return this.message;").dedent().append("}").newLine();
+    transpiler.dedent().append("}").newLine();
     this.symbols.forEach(function(symbol) { symbol.initializeError(transpiler); });
     this.transpileSymbols(transpiler);
 };
@@ -195,16 +218,17 @@ EnumeratedCategoryDeclaration.prototype.transpileSymbols = function(transpiler) 
     var names = this.symbols.map(function (symbol) {
         return symbol.name;
     });
-    transpiler.append(this.name + ".symbols = ");
-    transpiler.append("[" + names.join(", ") + "]");
-    transpiler.append(";");
+    transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
 };
 
 EnumeratedCategoryDeclaration.prototype.transpileEnumerated = function(transpiler) {
     ConcreteCategoryDeclaration.prototype.transpile.call(this, transpiler);
     transpiler.newLine();
-    transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };");
-    transpiler.newLine();
+    transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
+    if(this.hasAttribute(transpiler.context, "text"))
+        transpiler.append(this.name).append(".prototype.getText = function() { return this.text; };").newLine();
+    else
+        transpiler.append(this.name).append(".prototype.getText = ").append(this.name).append(".prototype.toString;").newLine();
     this.symbols.forEach(function(symbol) { symbol.initialize(transpiler); });
     this.transpileSymbols(transpiler);
 };

@@ -43,9 +43,14 @@ CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) 
     return instance;
 };
 
+CategoryDeclaration.prototype.getLocalAttributes = function() {
+    return this.attributes;
+};
+
 CategoryDeclaration.prototype.getAllAttributes = function(context) {
-    if(this.attributes)
-        return new Set(this.attributes);
+    var attributes = this.getLocalAttributes();
+    if(attributes)
+        return new Set(attributes);
     else
         return null;
 };

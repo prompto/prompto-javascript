@@ -315,6 +315,11 @@ class DivideByZeroError extends Error {
         return this.message;
     }
 
+
+    getText() {
+        return this.message;
+    }
+
 }
 
 function divide( a, b ) {
@@ -337,6 +342,9 @@ class NotMutableError extends Error {
         return this.message;
     }
 
+    getText() {
+        return this.message;
+    }
 }
 
 // to ease implementation
@@ -363,9 +371,9 @@ function newTranspiler(context) {
     transpiler.require(DivideByZeroError);
     transpiler.require(NotMutableError);
     transpiler.require(translateError);
-    transpiler.lines.push("TypeError.prototype.toString = function() { return 'Null reference!'; };");
-    transpiler.lines.push("ReferenceError.prototype.toString = function() { return 'Null reference!'; };");
-    transpiler.lines.push("RangeError.prototype.toString = function() { return 'Index out of range!'; };");
+    transpiler.lines.push("TypeError.prototype.getText = function() { return 'Null reference!'; };");
+    transpiler.lines.push("ReferenceError.prototype.getText = function() { return 'Null reference!'; };");
+    transpiler.lines.push("RangeError.prototype.getText = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
     transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");

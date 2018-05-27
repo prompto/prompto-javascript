@@ -1,5 +1,6 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var EnumeratedNativeType = require("../type/EnumeratedNativeType").EnumeratedNativeType;
+var List = require("../intrinsic/List").List;
 
 function EnumeratedNativeDeclaration(id, derivedFrom, symbols) {
 	BaseDeclaration.call(this, id);
@@ -101,6 +102,10 @@ EnumeratedNativeDeclaration.prototype.transpile = function(transpiler) {
 
 EnumeratedNativeDeclaration.prototype.getType = function(context) {
 	return this.type;
+};
+
+EnumeratedNativeDeclaration.prototype.declare = function(transpiler) {
+    transpiler.require(List);
 };
 
 

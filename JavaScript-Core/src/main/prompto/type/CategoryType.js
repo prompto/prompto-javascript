@@ -344,7 +344,7 @@ CategoryType.prototype.declareMember = function(transpiler, name) {
 
 CategoryType.prototype.transpileMember = function(transpiler, name) {
     if ("text" == name)
-        transpiler.append("toString()");
+        transpiler.append("getText()");
     else
         transpiler.append(name);
 };
