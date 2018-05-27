@@ -24,6 +24,12 @@ AbstractMethodDeclaration.prototype.check = function(context) {
 	return this.returnType;
 };
 
+AbstractMethodDeclaration.prototype.declare = function(transpiler) {
+    if(this.arguments!=null) {
+        this.arguments.declare(transpiler);
+    }
+};
+
 AbstractMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("abstract def ");
     writer.append(this.name);

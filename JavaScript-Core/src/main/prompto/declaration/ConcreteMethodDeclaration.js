@@ -161,7 +161,7 @@ ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     if(this.memberOf)
         transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName()).append(" = function (");
     else
-        transpiler.append("function ").append(this.getTranspiledName()).append(" (");
+        transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
     this.args.transpile(transpiler);
     transpiler.append(") {").indent();
     this.statements.transpile(transpiler);

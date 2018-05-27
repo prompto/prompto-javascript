@@ -3,11 +3,14 @@ var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").Unresol
 var MethodCall = require("./MethodCall").MethodCall;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
+var MethodExpression = require("../expression/MethodExpression").MethodExpression;
+var MethodArgument = require("../argument/MethodArgument").MethodArgument;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var InstanceContext = require("../runtime/Context").InstanceContext;
+
 
 function UnresolvedCall(callable, assignments) {
 	SimpleStatement.call(this);
@@ -86,6 +89,13 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
         decl = this.resolveUnresolvedMember(context.parent, id.name);
         if(decl!=null)
             call = new MethodCall(new MethodSelector(null, id), this.assignments);
+    }
+    if(call==null) {
+        var value = context.getRegisteredValue(id.name);
+        if(value instanceof MethodArgument || value instanceof MethodExpression) {
+            call = new MethodCall(new MethodSelector(null, id), this.assignments);
+            call.variableName = id.name;
+        }
     }
     if(call==null) {
         decl = context.getRegisteredDeclaration(id.name);

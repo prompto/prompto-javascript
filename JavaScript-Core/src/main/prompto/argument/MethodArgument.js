@@ -50,5 +50,14 @@ MethodArgument.prototype.getDeclaration = function(context) {
         return null;
 };
 
+MethodArgument.prototype.declare = function(transpiler) {
+    // nothing to do ?
+};
+
+MethodArgument.prototype.getTranspiledName = function(context) {
+    var method = this.getDeclaration(context);
+    return method.getTranspiledName(context);
+};
+
 
 exports.MethodArgument = MethodArgument;

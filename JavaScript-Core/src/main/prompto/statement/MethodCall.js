@@ -8,6 +8,7 @@ var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDec
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var PromptoError = require("../error/PromptoError").PromptoError;
+var InstanceContext = null;
 var ThisExpression = null;
 var VoidType = require("../type/VoidType").VoidType;
 var Section = require("../parser/Section").Section;
@@ -18,6 +19,7 @@ var DecimalType = require("../type/DecimalType").DecimalType;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
+    InstanceContext= require("../runtime/Context").InstanceContext;
     ThisExpression = require("../expression/ThisExpression").ThisExpression;
 };
 
@@ -137,13 +139,16 @@ MethodCall.prototype.lightDeclare = function(declaration, transpiler, local) {
 MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context, this);
     var declaration = finder.findMethod(false);
+    var parent = this.selector.resolveParent(transpiler.context);
     if(declaration instanceof BuiltInMethodDeclaration) {
-        var parent = this.selector.resolveParent(transpiler.context);
         parent.transpile(transpiler);
         transpiler.append(".");
         declaration.transpileCall(transpiler, this.assignments);
     } else {
-        var selector = new MethodSelector(this.selector.parent, new Identifier(declaration.getTranspiledName(transpiler.context)));
+        if(parent==null && declaration.memberOf && transpiler.context.parent instanceof InstanceContext)
+            parent = new ThisExpression();
+        var name = this.variableName ? this.variableName : declaration.getTranspiledName(transpiler.context);
+        var selector = new MethodSelector(parent, new Identifier(name));
         selector.transpile(transpiler);
         var assignments = this.makeAssignments(transpiler.context, declaration);
         if(assignments.length > 0) {

@@ -51,5 +51,18 @@ MethodExpression.prototype.interpret = function(context, asMethod) {
         }
     }
 };
+
+MethodExpression.prototype.declare = function(transpiler) {
+    var named = transpiler.context.getRegistered(this.name);
+    var decl = named.getFirst();
+    decl.declare(transpiler);
+};
+
+MethodExpression.prototype.transpile = function(transpiler) {
+    var named = transpiler.context.getRegistered(this.name);
+    var decl = named.getFirst();
+    transpiler.append(decl.getTranspiledName(transpiler.context));
+};
+
 	
 exports.MethodExpression = MethodExpression;
