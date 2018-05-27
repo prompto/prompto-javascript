@@ -139,7 +139,7 @@ CategoryType.prototype.transpileMultiply = function(transpiler, other, tryRevers
     var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
     if(type!=null) {
         left.transpile(transpiler);
-        transpiler.append(".operator_MULTIPLY(");
+        transpiler.append(".operator_MULTIPLY").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else
@@ -170,7 +170,7 @@ CategoryType.prototype.declareDivide = function(transpiler, other, left, right) 
 
 CategoryType.prototype.transpileDivide = function(transpiler, other, left, right) {
     left.transpile(transpiler);
-    transpiler.append(".operator_DIVIDE(");
+    transpiler.append(".operator_DIVIDE").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
     right.transpile(transpiler);
     transpiler.append(")");
 };
@@ -198,7 +198,7 @@ CategoryType.prototype.declareIntDivide = function(transpiler, other, left, righ
 
 CategoryType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
     left.transpile(transpiler);
-    transpiler.append(".operator_IDIVIDE(");
+    transpiler.append(".operator_IDIVIDE").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
     right.transpile(transpiler);
     transpiler.append(")");
 };
@@ -226,7 +226,7 @@ CategoryType.prototype.declareModulo = function(transpiler, other, left, right) 
 
 CategoryType.prototype.transpileModulo = function(transpiler, other, left, right) {
     left.transpile(transpiler);
-    transpiler.append(".operator_MODULO(");
+    transpiler.append(".operator_MODULO").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
     right.transpile(transpiler);
     transpiler.append(")");
 };
@@ -253,7 +253,7 @@ CategoryType.prototype.declareAdd = function(transpiler, other, tryReverse, left
 
 CategoryType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
     left.transpile(transpiler);
-    transpiler.append(".operator_PLUS(");
+    transpiler.append(".operator_PLUS").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
     right.transpile(transpiler);
     transpiler.append(")");
 };
@@ -281,7 +281,7 @@ CategoryType.prototype.declareSubtract = function(transpiler, other, left, right
 
 CategoryType.prototype.transpileSubtract = function(transpiler, other, left, right) {
     left.transpile(transpiler);
-    transpiler.append(".operator_MINUS(");
+    transpiler.append(".operator_MINUS").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
     right.transpile(transpiler);
     transpiler.append(")");
 };
@@ -620,9 +620,9 @@ CategoryType.prototype.transpileSorted = function(transpiler, desc, key) {
     } else if (decl.hasMethod(transpiler.context, keyname, null)) {
         this.transpileSortedByClassMethod(transpiler, desc, key);
     } else {
-        var decl = this.findGlobalMethod(transpiler.context, keyname);
+        var decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
-            this.transpileSortedByGlobalMethod(transpiler, desc, keyname);
+            this.transpileSortedByGlobalMethod(transpiler, desc, decl.getTranspiledName(transpiler.context));
         } else {
             this.transpileSortedByExpression(transpiler, desc, key);
         }

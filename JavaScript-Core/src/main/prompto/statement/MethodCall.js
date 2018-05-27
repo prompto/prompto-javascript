@@ -1,5 +1,6 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
+var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
@@ -14,6 +15,7 @@ var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
     ThisExpression = require("../expression/ThisExpression").ThisExpression;
@@ -133,7 +135,7 @@ MethodCall.prototype.lightDeclare = function(declaration, transpiler, local) {
 
 
 MethodCall.prototype.transpile = function(transpiler) {
-    var finder = new MethodFinder(transpiler.context,this);
+    var finder = new MethodFinder(transpiler.context, this);
     var declaration = finder.findMethod(false);
     if(declaration instanceof BuiltInMethodDeclaration) {
         var parent = this.selector.resolveParent(transpiler.context);
@@ -141,7 +143,8 @@ MethodCall.prototype.transpile = function(transpiler) {
         transpiler.append(".");
         declaration.transpileCall(transpiler, this.assignments);
     } else {
-        this.selector.transpile(transpiler);
+        var selector = new MethodSelector(this.selector.parent, new Identifier(declaration.getTranspiledName(transpiler.context)));
+        selector.transpile(transpiler);
         var assignments = this.makeAssignments(transpiler.context, declaration);
         if(assignments.length > 0) {
             transpiler.append("(");

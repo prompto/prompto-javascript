@@ -17,6 +17,10 @@ AttributeArgument.prototype.getProto = function() {
 	return this.id.name;
 };
 
+AttributeArgument.prototype.getTranspiledName =  function(context) {
+    return this.id.name;
+};
+
 
 AttributeArgument.prototype.register = function(context) {
 	context.registerValue(this, true);

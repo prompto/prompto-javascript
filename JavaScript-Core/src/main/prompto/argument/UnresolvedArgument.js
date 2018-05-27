@@ -16,6 +16,11 @@ Object.defineProperty(UnresolvedArgument.prototype, "name", {
     }
 });
 
+UnresolvedArgument.prototype.getTranspiledName =  function(context) {
+    this.resolveAndCheck(context);
+    return this.resolved.getTranspiledName(context);
+};
+
 
 UnresolvedArgument.prototype.toDialect = function(writer) {
     writer.append(this.name);

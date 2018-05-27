@@ -16,6 +16,10 @@ CategoryArgument.prototype.constructor = CategoryArgument;
 CategoryArgument.prototype.getProto = function() {
 	return this.type.name;
 };
+
+CategoryArgument.prototype.getTranspiledName =  function(context) {
+    return this.type.getTranspiledName(context);
+};
 	
 
 CategoryArgument.prototype.equals = function(obj) {

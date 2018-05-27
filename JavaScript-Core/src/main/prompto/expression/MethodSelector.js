@@ -3,7 +3,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+var UnresolvedIdentifier = null;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
@@ -16,6 +16,7 @@ exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
     InstanceContext = require("../runtime/Context").InstanceContext;
     NativeInstance = require("../value/NativeInstance.js").NativeInstance;
+    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration.js").SingletonCategoryDeclaration;
 };
 

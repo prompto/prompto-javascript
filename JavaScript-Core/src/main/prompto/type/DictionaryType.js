@@ -19,6 +19,12 @@ function DictionaryType(itemType) {
 DictionaryType.prototype = Object.create(ContainerType.prototype);
 DictionaryType.prototype.constructor = DictionaryType;
 
+
+DictionaryType.prototype.getTranspiledName = function(context) {
+    return this.itemType.getTranspiledName(context) + "_dict";
+};
+
+
 DictionaryType.prototype.declare = function(transpiler) {
     transpiler.require(Dictionary);
 };

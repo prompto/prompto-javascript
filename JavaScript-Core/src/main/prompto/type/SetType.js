@@ -14,6 +14,11 @@ SetType.prototype = Object.create(ContainerType.prototype);
 SetType.prototype.constructor = SetType;
 
 
+SetType.prototype.getTranspiledName = function(context) {
+    return this.itemType.getTranspiledName(context) + "_set";
+};
+
+
 SetType.prototype.equals = function(obj) {
 	if(obj===this) {
 		return true;

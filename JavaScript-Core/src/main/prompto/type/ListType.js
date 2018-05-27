@@ -25,6 +25,11 @@ ListType.prototype.declare = function(transpiler) {
 };
 
 
+ListType.prototype.getTranspiledName = function(context) {
+    return this.itemType.getTranspiledName(context) + "_list";
+};
+
+
 ListType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     var values = value.map(function(item) {
         return this.itemType.convertJavaScriptValueToPromptoValue(context, item, null);

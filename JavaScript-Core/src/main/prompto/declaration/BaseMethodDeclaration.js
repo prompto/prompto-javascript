@@ -40,6 +40,10 @@ BaseMethodDeclaration.prototype.getProto = function(context) {
     }).join("/");
 };
 
+BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
+    return [this.name].concat(this.args.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
+};
+
 BaseMethodDeclaration.prototype.unregister = function(context) {
     context.unregisterMethodDeclaration (this, this.getProto(context));
 };

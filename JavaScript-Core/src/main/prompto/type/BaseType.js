@@ -27,6 +27,11 @@ Object.defineProperty(BaseType.prototype, "name", {
 });
 
 
+BaseType.prototype.getTranspiledName = function() {
+    return this.name;
+};
+
+
 BaseType.prototype.toString = function() {
 	return this.name;
 };

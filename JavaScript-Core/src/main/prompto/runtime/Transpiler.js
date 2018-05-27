@@ -1,4 +1,3 @@
-var locateMethod = require('./Interpreter').locateMethod;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 
 function Transpiler(context) {
@@ -413,11 +412,10 @@ Transpiler.prototype.printTestName = function(testName) {
 };
 
 
-Transpiler.transpileMethod = function(context, methodName, cmdLineArgs) {
+Transpiler.transpileMethod = function(context, method) {
     try {
         patchObject();
         var transpiler = newTranspiler(context);
-        var method = locateMethod(context, methodName, cmdLineArgs);
         method.declare(transpiler);
         return transpiler.toString();
     } finally {
