@@ -46,4 +46,15 @@ ReadOneExpression.prototype.interpret = function(context) {
     return new TextValue(s);
 };
 
+
+ReadOneExpression.prototype.declare = function(transpiler) {
+    this.resource.declare(transpiler);
+};
+
+ReadOneExpression.prototype.transpile = function(transpiler) {
+    this.resource.transpile(transpiler);
+    transpiler.append(".readLine()");
+};
+
+
 exports.ReadOneExpression = ReadOneExpression;

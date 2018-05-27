@@ -26,7 +26,7 @@ WriteStatement.prototype.check = function(context) {
 	if(!(resourceType instanceof ResourceType))
         context.problemListener.reportNotAResource(this.resource);
 	return VoidType.instance;
-}
+};
 
 WriteStatement.prototype.interpret = function(context) {
     var resContext = context instanceof ResourceContext ? context : context.newResourceContext();
@@ -52,6 +52,44 @@ WriteStatement.prototype.interpret = function(context) {
         if(resContext!=context)
             res.close();
     }
+};
+
+WriteStatement.prototype.declare = function(transpiler) {
+    if(!(transpiler.context instanceof ResourceContext))
+        transpiler = transpiler.newResourceTranspiler();
+    this.resource.declare(transpiler);
+    this.content.declare(transpiler);
+};
+
+WriteStatement.prototype.transpile = function(transpiler) {
+    if (transpiler.context instanceof ResourceContext)
+        this.transpileLine(transpiler);
+    else
+        this.transpileFully(transpiler);
+};
+
+WriteStatement.prototype.transpileLine = function(transpiler) {
+    this.resource.transpile(transpiler);
+    transpiler.append(".writeLine(")
+    this.content.transpile(transpiler);
+    transpiler.append(")");
+};
+
+
+WriteStatement.prototype.transpileFully = function(transpiler) {
+    transpiler = transpiler.newResourceTranspiler();
+    transpiler.append("var $res = ");
+    this.resource.transpile(transpiler);
+    transpiler.append(";").newLine();
+    transpiler.append("try {").indent();
+    transpiler.append("$res.writeFully(")
+    this.content.transpile(transpiler);
+    transpiler.append(");");
+    transpiler.dedent().append("} finally {").indent();
+    transpiler.append("$res.close();").newLine();
+    transpiler.dedent().append("}");
+    transpiler.flush();
+    return true;
 };
 
 WriteStatement.prototype.toDialect = function(writer) {

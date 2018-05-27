@@ -40,6 +40,13 @@ Transpiler.prototype.newChildTranspiler = function(context) {
     return this.copyTranspiler(context);
 };
 
+Transpiler.prototype.newResourceTranspiler = function() {
+    var context = this.context.newResourceContext();
+    return this.copyTranspiler(context);
+};
+
+
+
 Transpiler.prototype.newMemberTranspiler = function() {
     var context = this.context.newLocalContext();
     context.parent = this.context;

@@ -201,7 +201,7 @@ EnumeratedCategoryDeclaration.prototype.transpileUserError = function(transpiler
                 return attr.name !== 'name' && attr.name != 'text';
             })
             .forEach(function (attr) {
-                transpiler.append("this.").append(attr.name).append(" = values.").append(attr.name).append(" || null;");
+                transpiler.append("this.").append(attr.name).append(" = values.hasownProperty('").append(attr.name).append("') ? values.").append(attr.name).append(" : null;");
                 transpiler.newLine();
             }, this);
     }

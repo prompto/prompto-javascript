@@ -126,7 +126,7 @@ NativeCategoryDeclaration.prototype.transpile = function(transpiler) {
     transpiler.append("var value = new ").append(name).append("();").newLine();
     if(this.attributes) {
         this.attributes.forEach(function (attr) {
-            transpiler.append("value.").append(attr.name).append(" = values.").append(attr.name).append(" || null;").newLine();
+            transpiler.append("value.").append(attr.name).append(" = values.hasOwnProperty('").append(attr.name).append("') ? values.").append(attr.name).append(" : null;").newLine();
         }, this);
     }
     transpiler.append("return value;").newLine();

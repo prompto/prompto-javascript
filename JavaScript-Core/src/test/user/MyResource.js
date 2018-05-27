@@ -49,7 +49,8 @@ MyResource.prototype.writeLine = function(data) {
 
 Object.defineProperty(MyResource.prototype, "content", {
     set: function(value) {
-        contents[this.path] = value;
+        if(typeof(value)===typeof(""))
+            contents[this.path] = value;
     }
 });
 

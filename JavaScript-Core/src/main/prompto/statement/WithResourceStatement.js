@@ -29,6 +29,25 @@ WithResourceStatement.prototype.interpret = function(context) {
 	}
 };
 
+WithResourceStatement.prototype.declare = function(transpiler) {
+    transpiler = transpiler.newResourceTranspiler();
+    this.resource.declare(transpiler);
+    this.statements.declare(transpiler);
+};
+
+WithResourceStatement.prototype.transpile = function(transpiler) {
+    transpiler = transpiler.newResourceTranspiler();
+    this.resource.transpile(transpiler);
+    transpiler.append(";").newLine();
+    transpiler.append("try {").indent();
+    this.statements.transpile(transpiler);
+    transpiler.dedent().append("} finally {").indent();
+    this.resource.transpileClose(transpiler);
+    transpiler.dedent().append("}");
+    transpiler.flush();
+    return true;
+};
+
 WithResourceStatement.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };

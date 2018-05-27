@@ -56,7 +56,7 @@ AssignVariableStatement.prototype.check = function(context) {
 	var actual = context.getRegisteredValue(this.name);
 	if(actual==null) {
         var actualType = this.expression.check(context);
-		context.registerValue(new Variable(this.name, actualType));
+		context.registerValue(new Variable(this.id, actualType));
 	} else {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
@@ -76,11 +76,28 @@ AssignVariableStatement.prototype.interpret = function(context) {
 };
 
 
+AssignVariableStatement.prototype.declare = function(transpiler) {
+    var actual = transpiler.context.getRegisteredValue(this.name);
+    if(actual==null) {
+        var actualType = this.expression.check(transpiler.context);
+        transpiler.context.registerValue(new Variable(this.id, actualType));
+    }
+    this.expression.declare(transpiler);
+};
+
 AssignVariableStatement.prototype.transpile = function(transpiler) {
-    if(transpiler.context.getRegisteredValue(this.name)==null)
+    var actual = transpiler.context.getRegisteredValue(this.name);
+    if(actual==null) {
+        var actualType = this.expression.check(transpiler.context);
+        transpiler.context.registerValue(new Variable(this.id, actualType));
         transpiler.append("var ");
+    }
     transpiler.append(this.name).append(" = ");
     this.expression.transpile(transpiler);
+};
+
+AssignVariableStatement.prototype.transpileClose = function(transpiler) {
+    transpiler.append(this.name).append(".close();").newLine();
 };
 
 

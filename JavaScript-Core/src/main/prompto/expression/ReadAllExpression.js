@@ -48,4 +48,14 @@ ReadAllExpression.prototype.interpret = function(context) {
     }
 };
 
+ReadAllExpression.prototype.declare = function(transpiler) {
+    this.resource.declare(transpiler);
+};
+
+
+ReadAllExpression.prototype.transpile = function(transpiler) {
+    this.resource.transpile(transpiler);
+    transpiler.append(".readFully()");
+};
+
 exports.ReadAllExpression = ReadAllExpression;
