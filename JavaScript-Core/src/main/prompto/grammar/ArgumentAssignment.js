@@ -1,4 +1,3 @@
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var CategoryType = null;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
@@ -23,7 +22,7 @@ Object.defineProperty(ArgumentAssignment.prototype, "id", {
 
 Object.defineProperty(ArgumentAssignment.prototype, "name", {
 	get : function() {
-		return this.argument.name;
+		return this.argument ? this.argument.name : null;
 	}
 });
 
@@ -82,7 +81,8 @@ ArgumentAssignment.prototype.toEDialect = function(writer) {
 
 
 ArgumentAssignment.prototype.declare = function(transpiler) {
-    this._expression.declare(transpiler);
+    if(this._expression)
+    	this._expression.declare(transpiler);
 };
 
 ArgumentAssignment.prototype.transpile = function(transpiler) {
@@ -162,8 +162,6 @@ ArgumentAssignment.prototype.makeAssignment = function(context, declaration) {
 	if(argument==null) {
 		throw new SyntaxError("Method has no argument:" + this.name);
 	}
-	var expression = new ContextualExpression(context,this.expression);
-	return new ArgumentAssignment(argument,expression);
 };
 
 exports.ArgumentAssignment = ArgumentAssignment;

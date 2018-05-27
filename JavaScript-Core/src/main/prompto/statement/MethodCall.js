@@ -164,11 +164,7 @@ MethodCall.prototype.transpile = function(transpiler) {
 
 
 MethodCall.prototype.makeAssignments = function(context, declaration) {
-	if(this.assignments==null) {
-		return new ArgumentAssignmentList();
-	} else {
-		return this.assignments.makeAssignments(context, declaration);
-	}
+	return (this.assignments || new ArgumentAssignmentList()).makeAssignments(context, declaration);
 };
 
 MethodCall.prototype.interpret = function(context) {

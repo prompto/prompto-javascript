@@ -1,5 +1,7 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
+var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+var ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
 
 function ArgumentAssignmentList(items, item) {
 	ObjectList.call(this, items || []);
@@ -27,14 +29,26 @@ ArgumentAssignmentList.prototype.find = function(name) {
 			return this[i];
 		}
 	}
-	return None;
+	return null;
 };
 
 ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration) {
 	var assignments = new ArgumentAssignmentList();
-    this.forEach(function(assignment) {
-        assignments.push(assignment.makeAssignment(context, declaration));
-    });
+	for(var i=0;i<declaration.args.length;i++) {
+	    var argument = declaration.args[i];
+        var assignment = this.find(argument.name);
+        if(assignment==null && i==0 && this.length>0 && this[0].argument==null)
+            assignment = this[0];
+        if(assignment==null) {
+            if (argument.defaultExpression != null)
+                assignments.push(new ArgumentAssignment(argument, argument.defaultExpression));
+            else
+                throw new SyntaxError("Missing argument:" + argument.name);
+        } else {
+            var expression = new ContextualExpression(context, assignment.expression);
+            assignments.push(new ArgumentAssignment(argument, expression));
+        }
+    }
 	return assignments;
 };
 
