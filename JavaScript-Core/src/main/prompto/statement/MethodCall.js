@@ -123,7 +123,7 @@ MethodCall.prototype.declare = function(transpiler) {
             this.declareDeclaration(transpiler, declaration, local);
         }, this);
         if(declarations.length>1 && !this.dispatcher) {
-            var declaration = finder.findMostSpecific(declarations, false);
+            var declaration = finder.findMethod(false);
             var sorted = finder.sortMostSpecificFirst(declarations);
             this.dispatcher = new DispatchMethodDeclaration(transpiler.context, this, declaration, sorted);
             transpiler.declare(this.dispatcher);

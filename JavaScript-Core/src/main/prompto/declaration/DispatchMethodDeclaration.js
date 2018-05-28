@@ -18,7 +18,7 @@ exports.resolve = function() {
 };
 
 
-function DispatchMethodDeclaration(context, call, declaration, declarations) {
+function DispatchMethodDeclaration(context, call,  declaration, declarations) {
     BaseMethodDeclaration.call(this, declaration.id, declaration.args, declaration.returnType);
     this.context = context;
     this.call = call;
@@ -114,12 +114,13 @@ DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common,
             outgoing = outgoing.resolved;
         if(incoming==null)
             incoming = this.declaration.args[0];
+        if(incoming instanceof UnresolvedArgument)
+            incoming = incoming.resolved;
         if(incoming instanceof CategoryArgument && outgoing instanceof CategoryArgument) {
             transpiler.append(incoming.name).append(".instanceOf(").append(outgoing.type.name).append(")");
         } else if(incoming instanceof CategoryArgument && outgoing instanceof AttributeArgument) {
             transpiler.append(incoming.name).append(".hasOwnProperty('").append(outgoing.name).append("')");
         } else
-
             throw new Error("Unsupported: " + typeof(incoming) + " and " + typeof(outgoing));
     }
 };
