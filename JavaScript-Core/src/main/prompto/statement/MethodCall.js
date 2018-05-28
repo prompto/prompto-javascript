@@ -4,6 +4,7 @@ var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
 var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
@@ -92,7 +93,7 @@ MethodCall.prototype.lightCheck = function(declaration, parent, local) {
 
 MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 	try {
-		var assignments = this.makeAssignments(parent,declaration);
+		var assignments = this.makeAssignments(parent, declaration);
 		declaration.registerArguments(local);
 		assignments.forEach(function(assignment) {
 			var expression = assignment.resolve(local, declaration, true);
@@ -109,20 +110,28 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 
 
 MethodCall.prototype.declare = function(transpiler) {
-    var finder = new MethodFinder(transpiler.context,this);
-    var declaration = finder.findMethod(false);
-    if(declaration instanceof BuiltInMethodDeclaration) {
-        if(declaration.declareCall)
-            declaration.declareCall(transpiler);
-    }else {
+    var finder = new MethodFinder(transpiler.context, this);
+    var declarations = finder.findCompatibleMethods(false, true);
+    if(declarations.length===1 && declarations[0] instanceof BuiltInMethodDeclaration) {
+        if(declarations[0].declareCall)
+            declarations[0].declareCall(transpiler);
+    } else {
         if (this.assignments != null)
             this.assignments.declare(transpiler);
-        var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
-        this.declareDeclaration(declaration, transpiler, local);
+        declarations.forEach(function(declaration) {
+            var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
+            this.declareDeclaration(transpiler, declaration, local);
+        }, this);
+        if(declarations.length>1 && !this.dispatcher) {
+            var declaration = finder.findMostSpecific(declarations, false);
+            var sorted = finder.sortMostSpecificFirst(declarations);
+            this.dispatcher = new DispatchMethodDeclaration(transpiler.context, this, declaration, sorted);
+            transpiler.declare(this.dispatcher);
+        }
     }
 };
 
-MethodCall.prototype.declareDeclaration = function(declaration, transpiler, local) {
+MethodCall.prototype.declareDeclaration = function(transpiler, declaration, local) {
     if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(transpiler.context)) {
         return this.fullDeclare(declaration, transpiler, local);
     } else {
@@ -138,32 +147,66 @@ MethodCall.prototype.lightDeclare = function(declaration, transpiler, local) {
 
 MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context, this);
-    var declaration = finder.findMethod(false);
+    var declarations = finder.findCompatibleMethods(false, true);
+    if (declarations.length === 1)
+        this.transpileSingle(transpiler, declarations[0], false);
+    else
+        this.transpileMultiple(transpiler, declarations);
+};
+
+
+MethodCall.prototype.transpileMultiple = function(transpiler, declarations) {
+    var name = this.dispatcher.getTranspiledName(transpiler.context);
     var parent = this.selector.resolveParent(transpiler.context);
-    if(declaration instanceof BuiltInMethodDeclaration) {
-        parent.transpile(transpiler);
-        transpiler.append(".");
-        declaration.transpileCall(transpiler, this.assignments);
-    } else {
-        if(parent==null && declaration.memberOf && transpiler.context.parent instanceof InstanceContext)
-            parent = new ThisExpression();
-        var name = this.variableName ? this.variableName : declaration.getTranspiledName(transpiler.context);
-        var selector = new MethodSelector(parent, new Identifier(name));
-        selector.transpile(transpiler);
-        var assignments = this.makeAssignments(transpiler.context, declaration);
-        if(assignments.length > 0) {
-            transpiler.append("(");
-            assignments.forEach(function (assignment) {
-                var argument = assignment.argument;
-                var expression = assignment.resolve(transpiler.context, declaration, false);
-                argument.transpileCall(transpiler, expression);
-                transpiler.append(", ");
-            });
-            transpiler.trimLast(2);
-            transpiler.append(")");
-        } else
-            transpiler.append("()");
+    if(parent==null && declarations[0].memberOf && transpiler.context.parent instanceof InstanceContext)
+        parent = new ThisExpression();
+    var selector = new MethodSelector(parent, new Identifier(name));
+    selector.transpile(transpiler);
+    this.transpileAssignments(transpiler, this.dispatcher);
+};
+
+MethodCall.prototype.transpileSingle = function(transpiler, declaration, allowDerived) {
+    if (declaration instanceof BuiltInMethodDeclaration)
+        this.transpileBuiltin(transpiler, declaration);
+    else {
+        this.transpileSelector(transpiler, declaration);
+        this.transpileAssignments(transpiler, declaration, allowDerived);
     }
+};
+
+MethodCall.prototype.transpileBuiltin = function(transpiler, declaration) {
+    var parent = this.selector.resolveParent(transpiler.context);
+    parent.transpile(transpiler);
+    transpiler.append(".");
+    declaration.transpileCall(transpiler, this.assignments);
+};
+
+
+MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
+    var parent = this.selector.resolveParent(transpiler.context);
+    if (parent == null && declaration.memberOf && transpiler.context.parent instanceof InstanceContext)
+        parent = new ThisExpression();
+    var name = this.variableName ? this.variableName : declaration.getTranspiledName(transpiler.context);
+    var selector = new MethodSelector(parent, new Identifier(name));
+    selector.transpile(transpiler);
+
+};
+
+
+MethodCall.prototype.transpileAssignments = function(transpiler, declaration, allowDerived) {
+    var assignments = this.makeAssignments(transpiler.context, declaration);
+    if(assignments.length > 0) {
+        transpiler.append("(");
+        assignments.forEach(function (assignment) {
+            var argument = assignment.argument;
+            var expression = assignment.resolve(transpiler.context, declaration, false, allowDerived);
+            argument.transpileCall(transpiler, expression);
+            transpiler.append(", ");
+        });
+        transpiler.trimLast(2);
+        transpiler.append(")");
+    } else
+        transpiler.append("()");
 };
 
 

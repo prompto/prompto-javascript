@@ -85,5 +85,10 @@ UnresolvedArgument.prototype.transpileCall = function(transpiler, expression) {
     this.resolved.transpileCall(transpiler, expression);
 };
 
+UnresolvedArgument.prototype.equals = function(other) {
+    return other === this || (other instanceof UnresolvedArgument && this.name === other.name);
+};
+
+
 exports.UnresolvedArgument = UnresolvedArgument;
 

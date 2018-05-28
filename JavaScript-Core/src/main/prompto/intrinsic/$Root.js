@@ -1,12 +1,17 @@
 function $Root() {
     this.mutable = false;
     this.storable = this.storable || null;
+    this.category = new Set();
     return this;
 }
 
+$Root.prototype.instanceOf = function(type) {
+    return this.category.has(type);
+};
+
 $Root.prototype.toString = function() {
     var names = Object.getOwnPropertyNames(this).filter(function(name) {
-        return name!=="dbId" && name!=="mutable" && name!=="storable" && typeof(this[name])!='function';
+        return name!=="dbId" && name!=="mutable" && name!=="storable" && name!=="category" && typeof(this[name])!='function';
     }, this);
     var vals = names.map(function (name) {
         return name + ':' + this[name];

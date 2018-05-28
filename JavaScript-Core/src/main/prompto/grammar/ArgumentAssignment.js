@@ -3,6 +3,8 @@ var InstanceExpression = require("../expression/InstanceExpression").InstanceExp
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
+var PromptoError = require("../error/PromptoError").PromptoError;
+var Specificity = require("../grammar/Specificity").Specificity;
 
 exports.resolve = function() {
     CategoryType = require("../type/CategoryType").CategoryType;
@@ -129,7 +131,7 @@ ArgumentAssignment.prototype.check = function(context) {
 	return VoidType.instance;
 };
 
-ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, checkInstance) {
+ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, checkInstance, allowDerived) {
 	// since we support implicit members, it's time to resolve them
 	var name = this.argument.name;
 	var expression = this.expression;
@@ -142,7 +144,12 @@ ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, chec
 			actual = value.getType();
 		}
 	}
-	if(!required.isAssignableFrom(context, actual) && (actual instanceof CategoryType)) {
+	var assignable = required.isAssignableFrom(context, actual);
+	// when in dispatch, allow derived
+	if(!assignable && allowDerived)
+        assignable = actual.isAssignableFrom(context, required);
+	// try passing member
+	if(!assignable && (actual instanceof CategoryType)) {
 		expression = new MemberSelector(expression, this.argument.id);
 	}
 	return expression;
@@ -162,6 +169,42 @@ ArgumentAssignment.prototype.makeAssignment = function(context, declaration) {
 	if(argument==null) {
 		throw new SyntaxError("Method has no argument:" + this.name);
 	}
+};
+
+ArgumentAssignment.prototype.isAssignableToArgument = function(context, argument, declaration, checkInstance, allowDerived) {
+    return this.computeSpecificity(context, argument, declaration, checkInstance, allowDerived)!==Specificity.INCOMPATIBLE;
+};
+
+ArgumentAssignment.prototype.computeSpecificity = function(context, argument, declaration, checkInstance, allowDerived) {
+    try {
+        var required = argument.getType(context);
+        var actual = this.expression.check(context);
+        // retrieve actual runtime type
+        if(checkInstance && (actual instanceof CategoryType)) {
+            var value = this.expression.interpret(context.getCallingContext());
+            if(value && value.getType) {
+                actual = value.getType();
+            }
+        }
+        if(actual.equals(required)) {
+            return Specificity.EXACT;
+        } else if(required.isAssignableFrom(context, actual)) {
+            return Specificity.INHERITED;
+        } else if(allowDerived && actual.isAssignableFrom(context, required)) {
+            return Specificity.DERIVED;
+        }
+        actual = this.resolve(context, declaration, checkInstance).check(context);
+        if(required.isAssignableFrom(context, actual)) {
+            return Specificity.IMPLICIT;
+        } else if(allowDerived && actual.isAssignableFrom(context, required)) {
+            return Specificity.IMPLICIT;
+        }
+    } catch(error) {
+        if(!(error instanceof PromptoError )) {
+            throw error;
+        }
+    }
+    return Specificity.INCOMPATIBLE;
 };
 
 exports.ArgumentAssignment = ArgumentAssignment;

@@ -60,7 +60,10 @@ AttributeArgument.prototype.transpileCall = function(transpiler, expression) {
         transpiler.append(")");
     } else
         Argument.prototype.transpileCall.call(this, transpiler, expression);
-}
+};
 
+AttributeArgument.prototype.equals = function(other) {
+    return other === this || (other instanceof AttributeArgument && this.name === other.name);
+};
 
 exports.AttributeArgument = AttributeArgument;

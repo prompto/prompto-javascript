@@ -12,11 +12,15 @@ function MethodFinder(context, methodCall) {
 	return this;
 }
 
-MethodFinder.prototype.findMethod = function(checkInstance) {
-	var candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
+MethodFinder.prototype.findCompatibleMethods = function(checkInstance, allowDerived) {
+    var candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
     if(candidates.length==0)
         this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id);
-	var compatibles = this.filterCompatible(candidates, checkInstance);
+    return this.filterCompatible(candidates, checkInstance, allowDerived);
+};
+
+MethodFinder.prototype.findMethod = function(checkInstance) {
+	var compatibles = this.findCompatibleMethods(checkInstance, false);
 	switch(compatibles.length) {
 	case 0:
 		this.context.problemListener.reportNoMatchingPrototype(this.methodCall);
@@ -54,48 +58,64 @@ MethodFinder.prototype.findMostSpecific = function(candidates, checkInstance) {
 	return candidate;
 }
 
-MethodFinder.prototype.scoreMostSpecific = function(d1, d2, checkInstance) {
+MethodFinder.prototype.sortMostSpecificFirst = function(declarations) {
+    var self = this;
+    declarations = Array.from(declarations);
+    // console.error("sorting:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
+    declarations.sort(function(d1, d2) {
+        // console.error( d1.getProto() + "/" + d2.getProto() );
+        var score = self.scoreMostSpecific(d2, d1, false, true);
+        // console.error( "-> " + score.name );
+        return score.value;
+    });
+    // console.error("sorted:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
+    return declarations;
+};
+
+MethodFinder.prototype.scoreMostSpecific = function(decl1, decl2, checkInstance, allowDerived) {
 	try {
-		var s1 = this.context.newLocalContext();
-		d1.registerArguments(s1);
-		var s2 = this.context.newLocalContext();
-		d2.registerArguments(s2);
-		var ass1 = this.methodCall.makeAssignments(this.context, d1);
-		var ass2 = this.methodCall.makeAssignments(this.context, d2);
+        var ctx1 = this.context.newLocalContext();
+		decl1.registerArguments(ctx1);
+		var ctx2 = this.context.newLocalContext();
+		decl2.registerArguments(ctx2);
+		var ass1 = this.methodCall.makeAssignments(this.context, decl1);
+		var ass2 = this.methodCall.makeAssignments(this.context, decl2);
 		for(var i=0;i<ass1.length && i<ass2.length;i++) {
 			var as1 = ass1[i];
 			var as2 = ass2[i];
-			var ar1 = d1.args.find(as1.name);
-			var ar2 = d2.args.find(as2.name);
+			var arg1 = decl1.args.find(as1.name);
+			var arg2 = decl2.args.find(as2.name);
 			if(as1.name===as2.name) {
 				// the general case with named arguments
-				var t1 = ar1.getType(s1);
-				var t2 = ar2.getType(s2);
+				var typ1 = arg1.getType(ctx1);
+				var typ2 = arg2.getType(ctx2);
 				// try resolving runtime type
-				if(checkInstance && t1 instanceof CategoryType && t2 instanceof CategoryType) {
+				if(checkInstance && typ1 instanceof CategoryType && typ2 instanceof CategoryType) {
 					var value = as1.expression.interpret(this.context); // in the named case as1==as2, so only evaluate 1
 					if(value.getType) {
 						var actual = value.getType();
-						var score = actual.scoreMostSpecific(this.context, t1, t2);
+						var score = actual.scoreMostSpecific(this.context, typ1, typ2);
 						if(score!==Score.SIMILAR) {
 							return score;
 						}
 					}
 				}
-				if(t1.isMoreSpecificThan(s2,t2)) {
+				if(typ1.isMoreSpecificThan(ctx2, typ2)) {
+                    // console.error(typ1.name + " is more specific than " + typ2.name);
 					return Score.BETTER;
 				}
-				if(t2.isMoreSpecificThan(s1,t1)) {
-					return Score.WORSE;
+				if(typ2.isMoreSpecificThan(ctx1, typ1)) {
+                    // console.error(typ2.name + " is more specific than " + typ1.name);
+                    return Score.WORSE;
 				}
 			} else {
 				// specific case for single anonymous argument
-				var sp1 = d1.computeSpecificity(s1, ar1, as1, checkInstance);
-				var sp2 = d2.computeSpecificity(s2, ar2, as2, checkInstance);
-				if(sp1.greaterThan(sp2)) {
+				var sp1 = as1.computeSpecificity(ctx1, arg1, decl1, checkInstance, allowDerived);
+				var sp2 = as2.computeSpecificity(ctx2, arg2, decl2, checkInstance, allowDerived);
+				if(sp1.moreSpecificThan(sp2)) {
 					return Score.BETTER;
 				}
-				if(sp2.greaterThan(sp1)) {
+				if(sp2.moreSpecificThan(sp1)) {
 					return Score.WORSE;
 				}
 			}
@@ -108,12 +128,12 @@ MethodFinder.prototype.scoreMostSpecific = function(d1, d2, checkInstance) {
 	return Score.SIMILAR;
 }
 
-MethodFinder.prototype.filterCompatible = function(candidates, checkInstance) {
+MethodFinder.prototype.filterCompatible = function(candidates, checkInstance, allowDerived) {
 	var compatibles = [];
 	candidates.forEach(function(declaration) {
         try {
-			var assignments = this.methodCall.makeAssignments(this.context,declaration);
-			if(declaration.isAssignableTo(this.context, assignments, checkInstance)) {
+			var assignments = this.methodCall.makeAssignments(this.context, declaration);
+			if(declaration.isAssignableTo(this.context, assignments, checkInstance, allowDerived)) {
 				compatibles.push(declaration);
 			}
 		} catch(e) {

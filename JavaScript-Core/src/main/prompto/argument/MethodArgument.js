@@ -59,5 +59,9 @@ MethodArgument.prototype.getTranspiledName = function(context) {
     return method.getTranspiledName(context);
 };
 
+MethodArgument.prototype.equals = function(other) {
+    return other === this || (other instanceof MethodArgument && this.name === other.name);
+};
+
 
 exports.MethodArgument = MethodArgument;

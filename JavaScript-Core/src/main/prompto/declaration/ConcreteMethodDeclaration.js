@@ -8,7 +8,6 @@ var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 function ConcreteMethodDeclaration(id, args, returnType, statements) {
 	BaseMethodDeclaration.call(this, id, args, returnType);
 	this.statements = statements;
-	this.returnType = returnType || null;
 	return this;
 }
 
@@ -158,17 +157,9 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     this.registerArguments(transpiler.context);
-    if(this.memberOf)
-        transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName()).append(" = function (");
-    else
-        transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
-    this.args.transpile(transpiler);
-    transpiler.append(") {").indent();
+    this.transpileProlog(transpiler)
     this.statements.transpile(transpiler);
-    transpiler.dedent().append("}");
-    if(this.memberOf)
-        transpiler.append(";");
-    transpiler.newLine();
+    this.transpileEpilog(transpiler)
 };
 
 exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

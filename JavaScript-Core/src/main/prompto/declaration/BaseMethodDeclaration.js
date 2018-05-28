@@ -1,10 +1,8 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var CategoryType = null;
-var PromptoError = require("../error/PromptoError").PromptoError;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
-var Specificity = require("../grammar/Specificity").Specificity;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
@@ -44,13 +42,34 @@ BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
     return [this.name].concat(this.args.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
 };
 
+
+BaseMethodDeclaration.prototype.transpileProlog = function(transpiler) {
+    if (this.memberOf)
+        transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName()).append(" = function (");
+    else
+        transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
+    this.args.transpile(transpiler);
+    transpiler.append(") {").indent();
+};
+
+
+BaseMethodDeclaration.prototype.transpileEpilog = function(transpiler) {
+    transpiler.dedent().append("}");
+    if(this.memberOf)
+        transpiler.append(";");
+    transpiler.newLine();
+};
+
+
 BaseMethodDeclaration.prototype.unregister = function(context) {
     context.unregisterMethodDeclaration (this, this.getProto(context));
 };
 
+
 BaseMethodDeclaration.prototype.register = function(context) {
 	context.registerMethodDeclaration(this);
 };
+
 
 BaseMethodDeclaration.prototype.registerArguments = function(context) {
 	if(this.args!=null) {
@@ -65,7 +84,7 @@ BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
     }
 };
 
-BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, checkInstance) {
+BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, checkInstance, allowDerived) {
 	try {
 		var local = context.newLocalContext();
 		this.registerArguments(local);
@@ -80,7 +99,7 @@ BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, 
 				else
                     return false;
 			}
-			if(!this.isAssignableToArgument(local, argument, assignment, checkInstance)) {
+			if(!assignment.isAssignableToArgument(local, argument, this, checkInstance, allowDerived)) {
 				return false;
 			}
 			if(idx>=0)
@@ -96,37 +115,7 @@ BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, 
 	}
 };
 
-BaseMethodDeclaration.prototype.isAssignableToArgument = function(context, argument, assignment, checkInstance) {
-	return this.computeSpecificity(context, argument, assignment, checkInstance)!==Specificity.INCOMPATIBLE;
-};
 
-BaseMethodDeclaration.prototype.computeSpecificity = function(context, argument, assignment, checkInstance) {
-	try {
-		var required = argument.getType(context);
-		var actual = assignment.expression.check(context);
-		// retrieve actual runtime type
-		if(checkInstance && (actual instanceof CategoryType)) {
-			var value = assignment.expression.interpret(context.getCallingContext());
-			if(value && value.getType) {
-				actual = value.getType();
-			}
-		}
-		if(actual.equals(required)) {
-			return Specificity.EXACT;
-		} else if(required.isAssignableFrom(context, actual)) {
-			return Specificity.INHERITED;
-		}
-		actual = assignment.resolve(context,this,checkInstance).check(context);
-		if(required.isAssignableFrom(context, actual)) {
-			return Specificity.RESOLVED;
-		}
-	} catch(error) {
-		if(!(error instanceof PromptoError )) {
-			throw error;
-		}
-	}
-	return Specificity.INCOMPATIBLE;
-};
 
 BaseMethodDeclaration.prototype.isEligibleAsMain = function() {
 	return false;

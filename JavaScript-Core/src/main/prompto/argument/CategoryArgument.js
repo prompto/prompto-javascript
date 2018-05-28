@@ -21,24 +21,15 @@ CategoryArgument.prototype.getTranspiledName =  function(context) {
     return this.type.getTranspiledName(context);
 };
 	
-
-CategoryArgument.prototype.equals = function(obj) {
-	if(obj===this) {
-		return true;
-	} 
-	if(obj===null || obj===undefined) {
-		return false;
-	}
-	if(!(obj instanceof CategoryArgument)) {
-		return false;
-	}
-	return utils.equalObjects(this.type, obj.type) && this.name===obj.name;
+CategoryArgument.prototype.equals = function(other) {
+    return other === this || (other instanceof CategoryArgument && utils.equalObjects(this.type, other.type));
 };
 
+
 CategoryArgument.prototype.register = function(context) {
-	var actual = context.getRegisteredValue(this.id.name);
+	var actual = context.getRegisteredValue(this.name);
 	if(actual!==null) {
-		throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
+		throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
 	}
 	context.registerValue(this);
     if(this.defaultExpression!=null)
