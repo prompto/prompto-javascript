@@ -4,8 +4,8 @@ var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
-var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
 var Document = require("../intrinsic/Document").Document;
+var Blob = require("../intrinsic/Blob").Blob;
 
 function DocumentExpression(source) {
     Section.call(this);
@@ -39,10 +39,11 @@ DocumentExpression.prototype.declare = function(transpiler) {
 
 
 DocumentExpression.prototype.transpile = function(transpiler) {
-    if(!this.source)
+    if(this.source) {
+        this.source.transpile(transpiler);
+        transpiler.append(".toDocument()");
+    } else
         transpiler.append("new Document()");
-    else
-        throw new Error("TO DO");
 };
 
 DocumentExpression.prototype.documentFromValue = function(context, value) {
@@ -56,8 +57,8 @@ DocumentExpression.prototype.documentFromBlob = function(context, blob) {
     if("application/zip"!=blob.mimeType)
         throw new Error("documentFromBlob not supported for " + blob.mimeType);
     try {
-        var parts = this.readParts(blob.data);
-        var value = this.readValue(parts);
+        var parts = Blob.readParts(blob.data);
+        var value = Blob.readValue(parts);
         var field = value["type"] || null;
         if (field == null)
             throw new Error("Expecting a 'type' field!");
@@ -74,31 +75,8 @@ DocumentExpression.prototype.documentFromBlob = function(context, blob) {
     }
 };
 
-DocumentExpression.prototype.readParts = function(data) {
-    var JSZip = require("jszip-sync");
-    var zip = new JSZip();
-    return zip.sync(function() {
-        var parts = {};
-        zip.loadAsync(data);
-        zip.forEach(function (entry) {
-            zip.file(entry)
-                .async("arraybuffer")
-                .then(function(value) {
-                    parts[entry] = value;
-                });
-        });
-        return parts;
-    });
-};
 
 
-DocumentExpression.prototype.readValue = function(parts) {
-    var data = parts["value.json"] || null;
-    if (data == null)
-        throw new Error("Expecting a 'value.json' part!");
-    var json = utf8BufferToString(data);
-    return JSON.parse(json);
-};
 
 DocumentExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);

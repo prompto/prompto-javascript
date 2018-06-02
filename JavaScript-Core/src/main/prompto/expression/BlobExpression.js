@@ -1,9 +1,13 @@
 var BlobType = require("../type/BlobType").BlobType;
 var DocumentValue = require("../value/DocumentValue").DocumentValue;
+var Document = require("../intrinsic/Document").Document;
+var Blob = require("../intrinsic/Blob").Blob;
 var BlobValue = require("../value/BlobValue").BlobValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
+var getUtf8CharLength = require("../utils/Utils").getUtf8CharLength;
+var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
 
 function BlobExpression(source) {
     this.source = source;
@@ -16,17 +20,33 @@ BlobExpression.prototype.check = function(context) {
     return BlobType.instance;
 };
 
-
 BlobExpression.prototype.interpret = function(context) {
     var value = this.source.interpret(context);
-    // try {
+    try {
         var datas = BlobExpression.collectDatas(context, value);
-        var zipped = BlobExpression.zipDatas(datas);
+        var zipped = Blob.zipDatas(datas);
         return new BlobValue("application/zip", zipped);
-    // } catch (e) {
-    //     throw new ReadWriteError(e.message);
-    // }
+    } catch (e) {
+        throw new ReadWriteError(e.message);
+    }
 };
+
+BlobExpression.prototype.declare = function(transpiler) {
+    this.source.declare(transpiler);
+    transpiler.require(Blob);
+    transpiler.require(Document);
+    transpiler.require(getUtf8CharLength);
+    transpiler.require(stringToUtf8Buffer);
+    transpiler.require(utf8BufferToString);
+};
+
+
+BlobExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("Blob.ofValue(");
+    this.source.transpile(transpiler);
+    transpiler.append(")");
+};
+
 
 
 BlobExpression.collectDatas = function(context, value) {
@@ -40,21 +60,6 @@ BlobExpression.collectDatas = function(context, value) {
     return binaries;
 };
 
-
-BlobExpression.zipDatas = function(datas) {
-    var JSZip = require("jszip-sync");
-    var zip = new JSZip();
-    return zip.sync(function() {
-        for (var key in datas)
-            zip.file(key, datas[key]);
-        var result = null;
-        zip.generateAsync({type: "arraybuffer", compression: "DEFLATE"}).
-            then(function(value) {
-                result = value;
-            });
-        return result;
-    });
-};
 
 BlobExpression.prototype.toDialect = function(writer) {
     writer.toDialect(this);

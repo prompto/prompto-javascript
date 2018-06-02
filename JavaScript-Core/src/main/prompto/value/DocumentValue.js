@@ -104,7 +104,6 @@ DocumentValue.prototype.toJson = function(context, json, instanceId, fieldName, 
         json.push(doc);
     else
         json[fieldName] = doc;
-
 };
 
 exports.DocumentValue = DocumentValue;
