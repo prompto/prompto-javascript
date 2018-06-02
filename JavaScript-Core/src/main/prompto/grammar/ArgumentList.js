@@ -1,4 +1,5 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
+var CodeArgument = require("../argument/CodeArgument").CodeArgument;
 
 function ArgumentList() {
 	ObjectList.call(this);
@@ -73,12 +74,16 @@ ArgumentList.prototype.toMDialect = function(writer) {
 };
 
 ArgumentList.prototype.transpile = function(transpiler) {
-    this.forEach(function(arg) {
-        arg.transpile(transpiler);
-        transpiler.append(", ");
-    });
-    if(this.length>0)
+    var args = this.filter(function(arg) {
+        return !(arg instanceof CodeArgument);
+    })
+    if(args.length>0) {
+        args.forEach(function (arg) {
+            arg.transpile(transpiler);
+            transpiler.append(", ");
+        });
         transpiler.trimLast(2);
+    }
 };
 
 exports.ArgumentList = ArgumentList;

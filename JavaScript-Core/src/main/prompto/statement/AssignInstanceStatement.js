@@ -43,7 +43,13 @@ AssignInstanceStatement.prototype.declare = function(transpiler) {
 };
 
 AssignInstanceStatement.prototype.transpile = function(transpiler) {
-    this.instance.transpileAssign(transpiler, this.expression);
+    var valueType = this.expression.check(transpiler.context);
+    // don't assign Code expressions
+    if (valueType === CodeType.instance) {
+        this.instance.declareAssign(transpiler, this.expression);
+        return true;
+    } else
+        this.instance.transpileAssign(transpiler, this.expression);
 };
 
 exports.AssignInstanceStatement = AssignInstanceStatement;

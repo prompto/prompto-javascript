@@ -65,4 +65,19 @@ ExecuteExpression.prototype.interpret = function(context) {
 	}
 };
 
+
+ExecuteExpression.prototype.declare = function(transpiler) {
+	var value = transpiler.context.getValue(this.id);
+	value.declareCode(transpiler);
+};
+
+
+ExecuteExpression.prototype.transpile = function(transpiler) {
+    transpiler.append("(");
+    var value = transpiler.context.getValue(this.id);
+    value.transpileCode(transpiler);
+    transpiler.append(")");
+};
+
+
 exports.ExecuteExpression = ExecuteExpression;

@@ -24,7 +24,11 @@ CodeArgument.prototype.register = function(context) {
 };
 
 CodeArgument.prototype.check = function(context) {
-	// ok
+	// nothing to do
+};
+
+CodeArgument.prototype.declare = function(transpiler) {
+    // nothing to do
 };
 
 CodeArgument.prototype.getType = function(context) {

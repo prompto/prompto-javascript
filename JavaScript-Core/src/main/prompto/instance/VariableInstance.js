@@ -1,5 +1,6 @@
 var Variable = require("../runtime/Variable").Variable;
 var NullValue = require("../value/NullValue").NullValue;
+var CodeType = require("../type/CodeType").CodeType;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
 function VariableInstance(id) {
@@ -70,7 +71,7 @@ VariableInstance.prototype.checkAssignItem = function(context, itemType, valueTy
 VariableInstance.prototype.assign = function(context, expression) {
 	var value = expression.interpret(context);
 	if(context.getRegisteredValue(this.name)==null) {
-        var type = value!=NullValue.instance ? value.type : expression.check(context);
+        var type = value != NullValue.instance ? value.type : expression.check(context);
 		context.registerValue(new Variable(this.id, type));
 	}
 	context.setValue(this.id, value);
@@ -82,8 +83,13 @@ VariableInstance.prototype.interpret = function(context) {
 
 VariableInstance.prototype.declareAssign = function(transpiler, expression) {
     if(transpiler.context.getRegisteredValue(this.name)==null) {
-        var type = expression.check(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.id, type));
+        var valueType = expression.check(transpiler.context);
+        transpiler.context.registerValue(new Variable(this.id, valueType));
+        // Code expressions need to be interpreted as part of full check
+        if (valueType === CodeType.instance) {
+            transpiler.context.setValue(this.id, expression.interpret(transpiler.context));
+        }
+
     }
     expression.declare(transpiler);
 };

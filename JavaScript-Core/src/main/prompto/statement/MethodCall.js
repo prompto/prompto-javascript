@@ -18,6 +18,8 @@ var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var CodeArgument = require("../argument/CodeArgument").CodeArgument;
+
 
 exports.resolve = function() {
     InstanceContext= require("../runtime/Context").InstanceContext;
@@ -133,16 +135,34 @@ MethodCall.prototype.declare = function(transpiler) {
 
 MethodCall.prototype.declareDeclaration = function(transpiler, declaration, local) {
     if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(transpiler.context)) {
-        return this.fullDeclare(declaration, transpiler, local);
+        return this.fullDeclareDeclaration(declaration, transpiler, local);
     } else {
-        return this.lightDeclare(declaration, transpiler, local);
+        return this.lightDeclareDeclaration(declaration, transpiler, local);
     }
 };
 
-MethodCall.prototype.lightDeclare = function(declaration, transpiler, local) {
+MethodCall.prototype.lightDeclareDeclaration = function(declaration, transpiler, local) {
     transpiler = transpiler.copyTranspiler(local);
     declaration.declare(transpiler);
 };
+
+var fullDeclareCounter = 0;
+
+MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, local) {
+    if(!this.fullSelector) {
+        var assignments = this.makeAssignments(transpiler.context, declaration);
+        declaration.registerArguments(local);
+        assignments.forEach(function(assignment) {
+            var expression = assignment.resolve(local, declaration, true);
+            var value = assignment.argument.checkValue(transpiler.context, expression);
+            local.setValue(assignment.id, value);
+        });
+        transpiler = transpiler.copyTranspiler(local);
+        this.fullSelector = this.selector.newFullSelector(++fullDeclareCounter);
+        declaration.fullDeclare(transpiler, this.fullSelector.id);
+    }
+};
+
 
 
 MethodCall.prototype.transpile = function(transpiler) {
@@ -183,18 +203,27 @@ MethodCall.prototype.transpileBuiltin = function(transpiler, declaration) {
 
 
 MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
-    var parent = this.selector.resolveParent(transpiler.context);
+    var selector = this.fullSelector || this.selector;
+    var parent = selector.resolveParent(transpiler.context);
     if (parent == null && declaration.memberOf && transpiler.context.parent instanceof InstanceContext)
         parent = new ThisExpression();
-    var name = this.variableName ? this.variableName : declaration.getTranspiledName(transpiler.context);
+    var name = null;
+    if(this.variableName)
+        name = this.variableName;
+    else if(this.fullSelector)
+        name = this.fullSelector.name;
+    else
+        name = declaration.getTranspiledName(transpiler.context);
     var selector = new MethodSelector(parent, new Identifier(name));
     selector.transpile(transpiler);
-
 };
 
 
 MethodCall.prototype.transpileAssignments = function(transpiler, declaration, allowDerived) {
     var assignments = this.makeAssignments(transpiler.context, declaration);
+    assignments = assignments.filter(function(assignment) {
+        return !(assignment.argument instanceof CodeArgument);
+    });
     if(assignments.length > 0) {
         transpiler.append("(");
         assignments.forEach(function (assignment) {

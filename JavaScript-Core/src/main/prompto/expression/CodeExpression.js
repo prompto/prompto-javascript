@@ -37,8 +37,17 @@ CodeExpression.prototype.interpret = function(context) {
 	return new CodeValue(this);
 };
 
-// expression can only be checked and evaluated in the context of an execute:
+CodeExpression.prototype.declare = function(transpiler) {
+    // nothing to do
+};
 
+
+CodeExpression.prototype.transpile = function(transpiler) {
+    // nothing to do
+};
+
+
+// expression can only be checked and evaluated in the context of an execute:
 CodeExpression.prototype.checkCode = function(context) {
 	return this.expression.check(context);
 };
@@ -46,6 +55,14 @@ CodeExpression.prototype.checkCode = function(context) {
 CodeExpression.prototype.interpretCode = function(context) {
 	return this.expression.interpret(context);
 };
-	
+
+CodeExpression.prototype.declareCode = function(transpiler) {
+    return this.expression.declare(transpiler);
+};
+
+CodeExpression.prototype.transpileCode = function(transpiler) {
+    return this.expression.transpile(transpiler);
+};
+
 
 exports.CodeExpression = CodeExpression;

@@ -3,6 +3,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+var Identifier = require("../grammar/Identifier").Identifier;
 var UnresolvedIdentifier = null;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
@@ -33,6 +34,11 @@ MethodSelector.prototype.toDialect = function(writer) {
         writer.append(this.name);
     else
         MemberSelector.prototype.toDialect.call(this, writer);
+};
+
+MethodSelector.prototype.newFullSelector = function(counter){
+    var name = this.id.name + "$" + counter;
+    return new MethodSelector(this.parent, new Identifier(name));
 };
 
 MethodSelector.prototype.transpile = function(transpiler) {

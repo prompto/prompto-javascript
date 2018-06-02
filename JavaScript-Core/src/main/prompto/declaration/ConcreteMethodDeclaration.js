@@ -157,9 +157,34 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     this.registerArguments(transpiler.context);
+    this.registerCodeArguments(transpiler.context);
     this.transpileProlog(transpiler)
     this.statements.transpile(transpiler);
     this.transpileEpilog(transpiler)
 };
+
+ConcreteMethodDeclaration.prototype.registerCodeArguments = function(context) {
+    if(!this.codeArguments)
+        return;
+    Object.getOwnPropertyNames(this.codeArguments).forEach(function(name) {
+        var arg = this.codeArguments[name];
+        context.setValue(arg.id, arg.value);
+    }, this);
+};
+
+ConcreteMethodDeclaration.prototype.fullDeclare = function(transpiler, id) {
+    var declaration = new ConcreteMethodDeclaration(id, this.args, this.returnType, this.statements);
+    declaration.memberOf = this.memberOf;
+    transpiler.declare(declaration);
+    this.statements.declare(transpiler);
+    // remember code arguments
+    declaration.codeArguments = {};
+    this.args.filter(function(arg) {
+        return arg instanceof CodeArgument;
+    }).forEach(function(arg) {
+        declaration.codeArguments[arg.name] = { id: arg.id, value: transpiler.context.getValue(arg.id) };
+    });
+};
+
 
 exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

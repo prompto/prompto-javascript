@@ -39,7 +39,11 @@ BaseMethodDeclaration.prototype.getProto = function(context) {
 };
 
 BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
-    return [this.name].concat(this.args.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
+    // if this is a template instance, name is already transpiled
+    if(this.name.indexOf("$")>0)
+    	return this.name;
+    else
+		return [this.name].concat(this.args.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
 };
 
 
