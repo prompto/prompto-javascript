@@ -1,7 +1,10 @@
 var prompto = require("../index"); // prompto
 var antlr4 = require("antlr4");
-var getResource = require("./BaseParserTest").getResource;
-var checkSameOutput = require("./BaseParserTest").checkSameOutput;
+var BaseParserTest = require("./BaseParserTest");
+var getResource = BaseParserTest.getResource;
+var checkSameOutput = BaseParserTest.checkSameOutput;
+var execute = BaseParserTest.execute;
+var interpret = BaseParserTest.interpret;
 
 function parse(input) {
 	var parser = new prompto.parser.MCleverParser(input);
@@ -18,19 +21,15 @@ exports.parseResource = function(fileName) {
 };
 
 exports.interpretResource = function(fileName, methodName, args) {
-	var input = getResource(fileName);
-	var decls = parse(input);
-	var context = prompto.runtime.Context.newGlobalContext();
-	decls.register(context);
-	decls.check(context);
-    if(context.hasTests())
-        prompto.runtime.Interpreter.interpretTests(context);
-    else {
-        methodName = methodName || "main";
-        args = args || "";
-        prompto.runtime.Interpreter.interpret(context, methodName, args);
-    }
+	var decls = exports.parseResource(fileName);
+    interpret(decls, methodName, args);
 };
+
+exports.executeResource = function(fileName, methodName, args) {
+    var decls = exports.parseResource(fileName);
+    execute(decls, methodName, args);
+};
+
 
 exports.checkInterpretedOutput = function(test, fileName) {
 	exports.interpretResource(fileName);
@@ -39,4 +38,8 @@ exports.checkInterpretedOutput = function(test, fileName) {
 };
 
 
-exports.checkTranspiledOutput = exports.checkInterpretedOutput;
+exports.checkTranspiledOutput = function(test, fileName) {
+    exports.executeResource(fileName);
+    checkSameOutput(test, fileName);
+    test.done();
+};

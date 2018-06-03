@@ -6,8 +6,10 @@ var prompto = require("../index"); // prompto
 var BaseParserTest = require("./BaseParserTest");
 var getResource = BaseParserTest.getResource;
 var checkSameOutput = BaseParserTest.checkSameOutput;
+var execute = BaseParserTest.execute;
+var interpret = BaseParserTest.interpret;
+
 var Out = require("../runtime/utils/Out").Out;
-var locateMethod = require('../runtime/Interpreter').locateMethod;
 
 function parse(input) {
     var parser = new prompto.parser.ECleverParser(input);
@@ -24,79 +26,16 @@ exports.parseResource = function(fileName) {
 };
 
 exports.interpretResource = function(fileName, methodName, args) {
-    var input = getResource(fileName);
-    var decls = parse(input);
-    var context = prompto.runtime.Context.newGlobalContext();
-    decls.register(context);
-    decls.check(context);
-    if(context.hasTests())
-        prompto.runtime.Interpreter.interpretTests(context);
-    else {
-        methodName = methodName || "main";
-        args = args || "";
-        prompto.runtime.Interpreter.interpret(context, methodName, args);
-    }
+    var decls = exports.parseResource(fileName);
+    interpret(decls, methodName, args);
 };
 
 
 exports.executeResource = function(fileName, methodName, args) {
-    var input = getResource(fileName);
-    var decls = parse(input);
-    var context = prompto.runtime.Context.newGlobalContext();
-    decls.register(context);
-    decls.check(context);
-    if(context.hasTests()) {
-        for(var test in context.tests) {
-            executeTest(context, test);
-        }
-    } else {
-        executeMethod(context, methodName, args);
-    }
+    var decls = exports.parseResource(fileName);
+    execute(decls, methodName, args);
 };
 
-function executeTest(context, testName) {
-    var testMethod = context.getTestDeclaration(testName);
-    var js = prompto.runtime.Transpiler.transpileTest(context, testMethod);
-    var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
-    var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
-    fs.writeFileSync(transpiled, js);
-    js = "var transpiled = function() {" + js + " \nreturn " + testMethod.cleanId() + "; }; transpiled();";
-    var fn = eval(js);
-    fn();
-}
-
-function executeMethod(context, methodName, cmdLineArgs) {
-    methodName = methodName || "main";
-    var method = locateMethod(context, methodName, cmdLineArgs);
-    prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
-    var js = prompto.runtime.Transpiler.transpileMethod(context, method);
-    var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
-    var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
-    fs.writeFileSync(transpiled, js);
-    var wrapper = createWrapper(js, method.getTranspiledName(context));
-    // call it to inject/extract data
-    var objs = wrapper(context);
-    if(objs.store)
-        objs.store.instance = prompto.store.DataStore.instance = new prompto.memstore.MemStore();
-    // call method
-    cmdLineArgs = cmdLineArgs || new prompto.intrinsic.Dictionary();
-    objs.method(cmdLineArgs);
-}
-
-
-function createWrapper(js, methodName) {
-    // wrap into a function to inject/extract data
-    var lines = [
-        "(function(context) {",
-        js,
-        "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
-        "return { store:  store, method: " + methodName + " };",
-        "});"
-    ];
-    js = lines.join("\n");
-    // get the function object
-    return eval(js);
-}
 
 exports.checkProblems = function(test, code, expected) {
     var listener = new prompto.problem.ProblemCollector();
