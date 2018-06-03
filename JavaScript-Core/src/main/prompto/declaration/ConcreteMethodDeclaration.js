@@ -155,6 +155,17 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
     this.statements.declare(transpiler);
 };
 
+
+ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
+    this.declareArguments(transpiler);
+    transpiler = transpiler.newChildTranspiler();
+    this.registerArguments(transpiler.context);
+    return this.statements.declare(transpiler);
+};
+
+
+
+
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     this.registerArguments(transpiler.context);
     this.registerCodeArguments(transpiler.context);

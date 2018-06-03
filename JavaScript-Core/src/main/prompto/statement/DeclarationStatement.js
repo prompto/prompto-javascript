@@ -5,10 +5,12 @@ var BaseStatement = require("./BaseStatement").BaseStatement;
 var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
+var InstanceContext = require("../runtime/Context").InstanceContext;
 
 function DeclarationStatement(declaration) {
 	BaseStatement.call(this);
 	this.declaration = declaration;
+    this.declaration.ofStatement = this;
 	return this;
 }
 
@@ -48,5 +50,19 @@ DeclarationStatement.prototype.interpret = function(context) {
 	}
 };
 
+DeclarationStatement.prototype.declare = function(transpiler) {
+	this.declaration.declareChild(transpiler);
+    transpiler.context.registerMethodDeclaration(this.declaration);
+};
+
+DeclarationStatement.prototype.transpile = function(transpiler) {
+    this.declaration.transpile(transpiler);
+    transpiler.context.registerMethodDeclaration(this.declaration);
+    if(transpiler.context.parent instanceof InstanceContext) {
+        var name = this.declaration.getTranspiledName(transpiler.context);
+        transpiler.append(name).append(" = ").append(name).append(".bind(this);").newLine();
+    }
+    return true;
+};
 
 exports.DeclarationStatement = DeclarationStatement;

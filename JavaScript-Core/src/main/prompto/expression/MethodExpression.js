@@ -55,7 +55,8 @@ MethodExpression.prototype.interpret = function(context, asMethod) {
 MethodExpression.prototype.declare = function(transpiler) {
     var named = transpiler.context.getRegistered(this.name);
     var decl = named.getFirst();
-    decl.declare(transpiler);
+    if(!decl.ofStatement)
+        decl.declare(transpiler);
 };
 
 MethodExpression.prototype.transpile = function(transpiler) {
