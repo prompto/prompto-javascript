@@ -412,20 +412,14 @@ ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context,
 };
 
 ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
-    var parent = null;
-    if (this.derivedFrom != null) {
-        if (this.derivedFrom.length === 1) {
-            parent = this.derivedFrom[0];
-        } else
-            throw new Error("Not supported yet!");
-    }
+    var parent = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom[0] : null;
     transpiler.append("function ").append(this.name).append("(copyFrom, values, mutable) {");
     transpiler.indent();
     var categories = this.collectCategories(transpiler.context);
     if(this.storable)
         transpiler.append("this.storable = DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("']);").newLine();
     this.transpileGetterSetterAttributes(transpiler);
-    this.transpileSuperConstructor(transpiler, parent);
+    this.transpileSuperConstructor(transpiler);
     transpiler.append("this.category = new Set([").append(categories.join(', ')).append("]);").newLine();
     this.transpileLocalAttributes(transpiler);
     transpiler.append("this.mutable = mutable;").newLine();
@@ -455,10 +449,12 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
     }
 };
 
-ConcreteCategoryDeclaration.prototype.transpileSuperConstructor = function(transpiler, parent) {
-    if (parent)
-        transpiler.append(parent).append(".call(this, copyFrom, values, mutable);").newLine();
-    else
+ConcreteCategoryDeclaration.prototype.transpileSuperConstructor = function(transpiler) {
+    if (this.derivedFrom && this.derivedFrom.length) {
+        this.derivedFrom.forEach(function(derived) {
+            transpiler.append(derived).append(".call(this, copyFrom, values, mutable);").newLine();
+        });
+    } else
         transpiler.append("$Root.call(this);").newLine();
 };
 
