@@ -169,9 +169,9 @@ ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     this.registerArguments(transpiler.context);
     this.registerCodeArguments(transpiler.context);
-    this.transpileProlog(transpiler)
+    this.transpileProlog(transpiler);
     this.statements.transpile(transpiler);
-    this.transpileEpilog(transpiler)
+    this.transpileEpilog(transpiler);
 };
 
 ConcreteMethodDeclaration.prototype.registerCodeArguments = function(context) {

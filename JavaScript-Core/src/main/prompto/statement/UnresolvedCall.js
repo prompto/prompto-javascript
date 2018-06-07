@@ -129,15 +129,18 @@ UnresolvedCall.prototype.resolveMember = function(context) {
 	return new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.assignments);
 };
 
-UnresolvedCall.prototype.transpile = function(transpiler) {
-    this.resolve(transpiler.context);
-    this.resolved.transpile(transpiler);
-};
 
 UnresolvedCall.prototype.declare = function(transpiler) {
     this.resolve(transpiler.context);
     this.resolved.declare(transpiler);
 };
+
+
+UnresolvedCall.prototype.transpile = function(transpiler) {
+    this.resolve(transpiler.context);
+    this.resolved.transpile(transpiler);
+};
+
 
 
 exports.UnresolvedCall = UnresolvedCall;

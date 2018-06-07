@@ -135,9 +135,9 @@ MethodCall.prototype.declare = function(transpiler) {
 
 MethodCall.prototype.declareDeclaration = function(transpiler, declaration, local) {
     if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(transpiler.context)) {
-        return this.fullDeclareDeclaration(declaration, transpiler, local);
+        this.fullDeclareDeclaration(declaration, transpiler, local);
     } else {
-        return this.lightDeclareDeclaration(declaration, transpiler, local);
+        this.lightDeclareDeclaration(declaration, transpiler, local);
     }
 };
 
@@ -214,7 +214,7 @@ MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
         name = this.fullSelector.name;
     else
         name = declaration.getTranspiledName(transpiler.context);
-    var selector = new MethodSelector(parent, new Identifier(name));
+    selector = new MethodSelector(parent, new Identifier(name));
     selector.transpile(transpiler);
 };
 

@@ -178,15 +178,16 @@ UnresolvedIdentifier.prototype.resolveSymbol = function(context) {
 	}
 };
 
+UnresolvedIdentifier.prototype.declare = function(transpiler) {
+    this.resolve(transpiler.context, false, true);
+    this.resolved.declare(transpiler);
+};
+
 UnresolvedIdentifier.prototype.transpile = function(transpiler) {
     this.resolve(transpiler.context, false, true);
     this.resolved.transpile(transpiler);
 };
 
-UnresolvedIdentifier.prototype.declare = function(transpiler) {
-    this.resolve(transpiler.context, false, true);
-    this.resolved.declare(transpiler);
-};
 
 exports.UnresolvedIdentifier = UnresolvedIdentifier;
 

@@ -50,9 +50,7 @@ IntegerType.prototype.transpile = function(transpiler) {
 };
 
 IntegerType.prototype.checkAdd = function(context, other, tryReverse) {
-	if(other instanceof IntegerType) {
-		return this;
-	} else if(other instanceof DecimalType) {
+	if(other === IntegerType.instance || other === DecimalType.instance) {
 		return other;
 	} else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
@@ -60,7 +58,7 @@ IntegerType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 IntegerType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -69,7 +67,7 @@ IntegerType.prototype.declareAdd = function(transpiler, other, tryReverse, left,
 
 
 IntegerType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.transpile(transpiler);
         transpiler.append(" + ");
         right.transpile(transpiler);
@@ -78,9 +76,9 @@ IntegerType.prototype.transpileAdd = function(transpiler, other, tryReverse, lef
 };
 
 IntegerType.prototype.checkSubtract = function(context, other) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return this;
-	} else if(other instanceof DecimalType) {
+	} else if(other === DecimalType.instance) {
 		return other;
 	} else {
 		return NativeType.prototype.checkSubtract.call(this, context, other);
@@ -88,7 +86,7 @@ IntegerType.prototype.checkSubtract = function(context, other) {
 };
 
 IntegerType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -96,7 +94,7 @@ IntegerType.prototype.declareSubtract = function(transpiler, other, left, right)
 };
 
 IntegerType.prototype.transpileSubtract = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.transpile(transpiler);
         transpiler.append(" - ");
         right.transpile(transpiler);
@@ -106,15 +104,15 @@ IntegerType.prototype.transpileSubtract = function(transpiler, other, left, righ
 
 
 IntegerType.prototype.checkMultiply = function(context, other, tryReverse) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return this;
-	} else if(other instanceof DecimalType) {
+	} else if(other === DecimalType.instance) {
 		return other;
-	} else if(other instanceof CharacterType) {
+	} else if(other === CharacterType.instance) {
 		return TextType.instance;
-	} else if(other instanceof TextType) {
+	} else if(other === TextType.instance) {
 		return other;
-	} else if(other instanceof PeriodType) {
+	} else if(other === PeriodType.instance) {
 		return other;
 	} else if(other instanceof ListType) {
 		return other;
@@ -125,7 +123,7 @@ IntegerType.prototype.checkMultiply = function(context, other, tryReverse) {
 
 
 IntegerType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -134,7 +132,7 @@ IntegerType.prototype.declareMultiply = function(transpiler, other, tryReverse, 
 
 
 IntegerType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.transpile(transpiler);
         transpiler.append(" * ");
         right.transpile(transpiler);
@@ -144,7 +142,7 @@ IntegerType.prototype.transpileMultiply = function(transpiler, other, tryReverse
 
 
 IntegerType.prototype.checkDivide = function(context, other) {
-	if(other instanceof IntegerType || other instanceof DecimalType) {
+	if(other === IntegerType.instance || other === DecimalType.instance) {
 		return DecimalType.instance;
 	} else {
 		return NativeType.prototype.checkDivide.call(this, context, other);
@@ -153,7 +151,7 @@ IntegerType.prototype.checkDivide = function(context, other) {
 
 
 IntegerType.prototype.declareDivide = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -162,7 +160,7 @@ IntegerType.prototype.declareDivide = function(transpiler, other, left, right) {
 
 
 IntegerType.prototype.transpileDivide = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType || other instanceof DecimalType) {
+    if (other === IntegerType.instance || other === DecimalType.instance) {
         transpiler.append("divide(");
         left.transpile(transpiler);
         transpiler.append(", ");
@@ -174,7 +172,7 @@ IntegerType.prototype.transpileDivide = function(transpiler, other, left, right)
 
 
 IntegerType.prototype.checkIntDivide = function(context, other) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return this;
 	} else {
 		return NativeType.prototype.checkIntDivide.call(this, context, other);
@@ -183,7 +181,7 @@ IntegerType.prototype.checkIntDivide = function(context, other) {
 
 
 IntegerType.prototype.declareIntDivide = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType ) {
+    if (other === IntegerType.instance ) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -192,7 +190,7 @@ IntegerType.prototype.declareIntDivide = function(transpiler, other, left, right
 
 
 IntegerType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType ) {
+    if (other === IntegerType.instance ) {
         // TODO check negative values
         transpiler.append("Math.floor(divide(");
         left.transpile(transpiler);
@@ -206,7 +204,7 @@ IntegerType.prototype.transpileIntDivide = function(transpiler, other, left, rig
 
 
 IntegerType.prototype.checkModulo = function(context, other) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return this;
 	} else {
 		return NativeType.prototype.checkModulo.call(this, context, other);
@@ -215,7 +213,7 @@ IntegerType.prototype.checkModulo = function(context, other) {
 
 
 IntegerType.prototype.declareModulo = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType ) {
+    if (other === IntegerType.instance ) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -225,7 +223,7 @@ IntegerType.prototype.declareModulo = function(transpiler, other, left, right) {
 
 
 IntegerType.prototype.transpileModulo = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType ) {
+    if (other === IntegerType.instance ) {
         // TODO check negative values
         left.transpile(transpiler);
         transpiler.append(" % ");
@@ -250,7 +248,7 @@ IntegerType.prototype.transpileMinus = function(transpiler, value) {
 };
 
 IntegerType.prototype.checkCompare = function(context, other) {
-	if(other instanceof IntegerType || other instanceof DecimalType) {
+	if(other === IntegerType.instance || other === DecimalType.instance) {
 		return BooleanType.instance;
 	} else {
 		return NativeType.prototype.checkCompare.call(this, context, other);
@@ -272,7 +270,7 @@ IntegerType.prototype.transpileCompare = function(transpiler, other, operator, l
 
 
 IntegerType.prototype.checkRange = function(context, other) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return new RangeType(this);
 	} else {
 		return NativeType.prototype.checkRange.call(this, context, other);
@@ -282,7 +280,7 @@ IntegerType.prototype.checkRange = function(context, other) {
 
 
 IntegerType.prototype.declareRange = function(transpiler, other) {
-    if(other instanceof IntegerType) {
+    if(other === IntegerType.instance) {
         var module = require("../intrinsic/Range");
         transpiler.require(module.Range);
         transpiler.require(module.IntegerRange);

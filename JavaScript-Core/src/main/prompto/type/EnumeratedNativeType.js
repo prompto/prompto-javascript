@@ -45,9 +45,7 @@ EnumeratedNativeType.prototype.declareMember = function(transpiler, name) {
 };
 
 EnumeratedNativeType.prototype.transpileMember = function(transpiler, name) {
-    if ("symbols"==name) {
-        transpiler.append("symbols");
-    } else if ("value"==name || "name"==name) {
+    if ("symbols"==name || "value"==name || "name"==name) {
         transpiler.append(name);
     } else {
         return BaseType.prototype.transpileMember.call(this, transpiler, name);

@@ -130,10 +130,10 @@ StrictSet.prototype.equals = function(other) {
 
 StrictSet.prototype.intersect = function(other) {
     var items = [];
-    for(item of this.set) {
+    this.set.forEach( function(item) {
         if(other.has(item))
             items.push(item);
-    }
+    });
     return new StrictSet(items);
 };
 

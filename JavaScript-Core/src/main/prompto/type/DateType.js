@@ -31,7 +31,7 @@ DateType.prototype.isAssignableFrom = function(context, other) {
 };
 
 DateType.prototype.checkAdd = function(context, other, tryReverse) {
-	if (other instanceof PeriodType) {
+	if (other === PeriodType.instance) {
 		return this; // ignore time section
 	} else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
@@ -40,25 +40,25 @@ DateType.prototype.checkAdd = function(context, other, tryReverse) {
 
 
 DateType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof PeriodType) {
+    if (other === PeriodType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
 };
 
 DateType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof PeriodType) {
+    if (other === PeriodType.instance) {
         left.transpile(transpiler);
         transpiler.append(".addPeriod(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
 };
 
 DateType.prototype.checkSubtract = function(context, other) {
-	if (other instanceof PeriodType) {
+	if (other === PeriodType.instance) {
 		return this; // ignore time section
 	} else if (other instanceof DateType) {
 		return PeriodType.instance;
@@ -69,7 +69,7 @@ DateType.prototype.checkSubtract = function(context, other) {
 
 
 DateType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other instanceof PeriodType || other instanceof DateType) {
+    if (other === PeriodType.instance || other instanceof DateType) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -77,7 +77,7 @@ DateType.prototype.declareSubtract = function(transpiler, other, left, right) {
 };
 
 DateType.prototype.transpileSubtract = function(transpiler, other, left, right) {
-    if (other instanceof PeriodType) {
+    if (other === PeriodType.instance) {
         left.transpile(transpiler);
         transpiler.append(".subtractPeriod(");
         right.transpile(transpiler);

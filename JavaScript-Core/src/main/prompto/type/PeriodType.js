@@ -21,7 +21,7 @@ PeriodType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 PeriodType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof PeriodType) {
+    if(other === PeriodType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else {
@@ -31,7 +31,7 @@ PeriodType.prototype.declareAdd = function(transpiler, other, tryReverse, left, 
 
 
 PeriodType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof PeriodType) {
+    if(other === PeriodType.instance) {
         left.transpile(transpiler);
         transpiler.append(".add(");
         right.transpile(transpiler);
@@ -44,7 +44,7 @@ PeriodType.prototype.transpileAdd = function(transpiler, other, tryReverse, left
 
 
 PeriodType.prototype.checkSubtract = function(context, other) {
-	if(other instanceof PeriodType) {
+    if(other === PeriodType.instance) {
 		return this;
 	} else {
 		return NativeType.prototype.checkSubtract(this, context, other);
@@ -53,7 +53,7 @@ PeriodType.prototype.checkSubtract = function(context, other) {
 
 
 PeriodType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other instanceof PeriodType) {
+    if(other === PeriodType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -62,7 +62,7 @@ PeriodType.prototype.declareSubtract = function(transpiler, other, left, right) 
 
 
 PeriodType.prototype.transpileSubtract = function(transpiler, other, left, right) {
-    if (other instanceof PeriodType) {
+    if(other === PeriodType.instance) {
         left.transpile(transpiler);
         transpiler.append(".subtract(");
         right.transpile(transpiler);
@@ -72,7 +72,7 @@ PeriodType.prototype.transpileSubtract = function(transpiler, other, left, right
 };
 
 PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return this;
 	} else {
 		return NativeType.prototype.checkMultiply(this, transpiler, other, tryReverse);
@@ -81,7 +81,7 @@ PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
 
 
 PeriodType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType) {
+    if(other === IntegerType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -91,7 +91,7 @@ PeriodType.prototype.declareMultiply = function(transpiler, other, tryReverse, l
 
 
 PeriodType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType) {
+    if(other === IntegerType.instance) {
         left.transpile(transpiler);
         transpiler.append(".multiply(");
         right.transpile(transpiler);

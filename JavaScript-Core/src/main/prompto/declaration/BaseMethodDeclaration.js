@@ -49,7 +49,7 @@ BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
 
 BaseMethodDeclaration.prototype.transpileProlog = function(transpiler) {
     if (this.memberOf)
-        transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName()).append(" = function (");
+        transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName(transpiler.context)).append(" = function (");
     else
         transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
     this.args.transpile(transpiler);

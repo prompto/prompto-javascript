@@ -29,6 +29,10 @@ InstanceExpression.prototype.toString = function() {
 	return this.name;
 };
 
+InstanceExpression.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
 
 InstanceExpression.prototype.transpile = function(transpiler) {
     var context = transpiler.context.contextForValue(this.id.name);
@@ -41,10 +45,6 @@ InstanceExpression.prototype.transpile = function(transpiler) {
     transpiler.append(this.name);
 };
 
-
-InstanceExpression.prototype.declare = function(transpiler) {
-    // nothing to do
-};
 
 InstanceExpression.prototype.toDialect = function(writer, requireMethod) {
     if(requireMethod === undefined)

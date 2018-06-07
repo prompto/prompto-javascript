@@ -30,7 +30,7 @@ TimeType.prototype.isAssignableFrom = function(context, other) {
 };
 
 TimeType.prototype.checkAdd = function(context, other, tryReverse) {
-	if (other instanceof PeriodType) {
+	if (other === PeriodType.instance) {
 		return this; // ignore date section
 	} else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
@@ -38,7 +38,7 @@ TimeType.prototype.checkAdd = function(context, other, tryReverse) {
 };
 
 TimeType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof PeriodType) {
+    if (other === PeriodType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else {
@@ -48,7 +48,7 @@ TimeType.prototype.declareAdd = function(transpiler, other, tryReverse, left, ri
 
 
 TimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof PeriodType) {
+    if (other === PeriodType.instance) {
         left.transpile(transpiler);
         transpiler.append(".addPeriod(");
         right.transpile(transpiler);
@@ -62,7 +62,7 @@ TimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
 TimeType.prototype.checkSubtract = function(context, other) {
 	if (other instanceof TimeType) {
 		return PeriodType.instance; // ignore date section
-	} else if (other instanceof PeriodType) {
+	} else if (other === PeriodType.instance) {
 		return this; // ignore date section
 	} else {
 		return NativeType.prototype.checkSubtract.call(this, context, other);
@@ -70,7 +70,7 @@ TimeType.prototype.checkSubtract = function(context, other) {
 };
 
 TimeType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other instanceof TimeType || other instanceof PeriodType) {
+    if (other instanceof TimeType || other === PeriodType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -83,7 +83,7 @@ TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) 
         transpiler.append(".subtractTime(");
         right.transpile(transpiler);
         transpiler.append(")");
-    } else if (other instanceof PeriodType) {
+    } else if (other === PeriodType.instance) {
         left.transpile(transpiler);
         transpiler.append(".subtractPeriod(");
         right.transpile(transpiler);

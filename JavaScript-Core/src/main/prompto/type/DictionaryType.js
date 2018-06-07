@@ -63,7 +63,7 @@ DictionaryType.prototype.declareAdd = function(transpiler, other, tryReverse, le
         left.declare(transpiler);
         right.declare(transpiler);
     } else {
-        return ContainerType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+        return ContainerType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
     }
 };
 
@@ -75,7 +75,7 @@ DictionaryType.prototype.transpileAdd = function(transpiler, other, tryReverse, 
         right.transpile(transpiler);
         transpiler.append(")");
     } else {
-        return ContainerType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+        return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
     }
 };
 

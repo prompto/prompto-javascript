@@ -82,7 +82,7 @@ TupleType.prototype.transpileMember = function(transpiler, name) {
 
 
 TupleType.prototype.checkAdd = function(context, other, tryReverse) {
-	if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
+	if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
 		return this;
 	} else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
@@ -91,7 +91,7 @@ TupleType.prototype.checkAdd = function(context, other, tryReverse) {
 
 
 TupleType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
+    if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else {
@@ -101,7 +101,7 @@ TupleType.prototype.declareAdd = function(transpiler, other, tryReverse, left, r
 
 
 TupleType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof TupleType || other instanceof ListType || other instanceof SetType) {
+    if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
         left.transpile(transpiler);
         transpiler.append(".add(");
         right.transpile(transpiler);

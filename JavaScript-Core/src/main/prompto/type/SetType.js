@@ -33,16 +33,16 @@ SetType.prototype.equals = function(obj) {
 };
 
 SetType.prototype.checkAdd = function(context, other, tryReverse) {
-	if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
+	if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
 		return this;
 	} else {
-		return ContainerType.prototype.checkAdd.call(this, context, other);
+		return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
 	}
 };
 
 
 SetType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else {
@@ -52,7 +52,7 @@ SetType.prototype.declareAdd = function(transpiler, other, tryReverse, left, rig
 
 
 SetType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType, tryReverse)) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
         left.transpile(transpiler);
         transpiler.append(".addAll(");
         right.transpile(transpiler);
