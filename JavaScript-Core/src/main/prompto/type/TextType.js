@@ -467,7 +467,7 @@ function resolveBuiltInMethodDeclaration() {
     SplitMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
         transpiler.append("splitToList(");
         if(assignments)
-            assignments.get(0).transpile(transpiler);
+            assignments[0].transpile(transpiler);
         else
             transpiler.append("' '"); // default
         transpiler.append(")");
@@ -489,7 +489,7 @@ function resolveBuiltInMethodDeclaration() {
     };
 
     StartsWithMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
-        transpiler.append("startsWith(")
+        transpiler.append("startsWith(");
         assignments[0].transpile(transpiler);
         transpiler.append(")");
     };
@@ -509,7 +509,7 @@ function resolveBuiltInMethodDeclaration() {
     };
 
     EndsWithMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
-        transpiler.append("endsWith(")
+        transpiler.append("endsWith(");
         assignments[0].transpile(transpiler);
         transpiler.append(")");
     };

@@ -177,7 +177,7 @@ DictionaryType.prototype.checkMember = function(context, name) {
 
 
 DictionaryType.prototype.declareMember = function(transpiler, name) {
-    if("keys"==name) {
+    if("keys"===name) {
         transpiler.require(StrictSet);
     } else if("values"==name) {
         transpiler.require(List);
@@ -188,7 +188,7 @@ DictionaryType.prototype.declareMember = function(transpiler, name) {
 
 
 DictionaryType.prototype.transpileMember = function(transpiler, name) {
-    if ("count"==name) {
+    if ("count"===name) {
         transpiler.append("length");
     } else if("keys"===name || "values"==name) {
         transpiler.append(name);
