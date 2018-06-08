@@ -122,7 +122,7 @@ ListType.prototype.transpileAssignItemValue = function(transpiler, item, express
 
 
 ListType.prototype.checkMultiply = function(context, other, tryReverse) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return this;
 	} else {
 		return ContainerType.prototype.checkMultiply.call(this, context, other, tryReverse);
@@ -131,7 +131,7 @@ ListType.prototype.checkMultiply = function(context, other, tryReverse) {
 
 
 ListType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof IntegerType) {
+    if(other === IntegerType.instance) {
         var multiplyArray = require("../utils/Utils").multiplyArray;
         transpiler.require(multiplyArray);
         left.declare(transpiler);
@@ -143,7 +143,7 @@ ListType.prototype.declareMultiply = function(transpiler, other, tryReverse, lef
 
 
 ListType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof IntegerType) {
+    if(other === IntegerType.instance) {
         transpiler.append("multiplyArray(");
         left.transpile(transpiler);
         transpiler.append(",");

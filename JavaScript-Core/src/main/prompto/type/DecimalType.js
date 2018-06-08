@@ -73,7 +73,7 @@ DecimalType.prototype.declareSubtract = function(transpiler, other, left, right)
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
 };
 
 
@@ -83,7 +83,7 @@ DecimalType.prototype.transpileSubtract = function(transpiler, other, left, righ
         transpiler.append(" - ");
         right.transpile(transpiler);
     } else
-        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
 };
 
 
@@ -101,7 +101,7 @@ DecimalType.prototype.declareMultiply = function(transpiler, other, tryReverse, 
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareMultiply.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
 };
 
 
@@ -111,7 +111,7 @@ DecimalType.prototype.transpileMultiply = function(transpiler, other, tryReverse
         transpiler.append(" * ");
         right.transpile(transpiler);
     } else
-        return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
 };
 
 
@@ -128,7 +128,7 @@ DecimalType.prototype.declareDivide = function(transpiler, other, left, right) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+        return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
 };
 
 
@@ -140,7 +140,7 @@ DecimalType.prototype.transpileDivide = function(transpiler, other, left, right)
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileDivide.call(this, context, other, left, right);
+        return NativeType.prototype.transpileDivide.call(this, transpiler, other, left, right);
 };
 
 
@@ -163,7 +163,7 @@ DecimalType.prototype.declareIntDivide = function(transpiler, other, left, right
 
 
 DecimalType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
-    if (other instanceof IntegerType ) {
+    if (other === IntegerType.instance ) {
         transpiler.append("Math.floor(divide(");
         left.transpile(transpiler);
         transpiler.append(", ");

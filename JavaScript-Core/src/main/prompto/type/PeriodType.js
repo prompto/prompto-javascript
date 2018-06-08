@@ -57,7 +57,7 @@ PeriodType.prototype.declareSubtract = function(transpiler, other, left, right) 
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
 };
 
 
@@ -68,7 +68,7 @@ PeriodType.prototype.transpileSubtract = function(transpiler, other, left, right
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
 };
 
 PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
@@ -85,7 +85,7 @@ PeriodType.prototype.declareMultiply = function(transpiler, other, tryReverse, l
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareMultiply.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
 };
 
 
@@ -97,7 +97,7 @@ PeriodType.prototype.transpileMultiply = function(transpiler, other, tryReverse,
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
 };
 
 PeriodType.prototype.checkMinus = function(context) {

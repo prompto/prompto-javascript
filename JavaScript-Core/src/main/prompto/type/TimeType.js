@@ -60,7 +60,7 @@ TimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
 
 
 TimeType.prototype.checkSubtract = function(context, other) {
-	if (other instanceof TimeType) {
+	if (other === TimeType.instance) {
 		return PeriodType.instance; // ignore date section
 	} else if (other === PeriodType.instance) {
 		return this; // ignore date section
@@ -70,15 +70,15 @@ TimeType.prototype.checkSubtract = function(context, other) {
 };
 
 TimeType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other instanceof TimeType || other === PeriodType.instance) {
+    if (other === TimeType.instance || other === PeriodType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
 };
 
 TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) {
-    if (other instanceof TimeType) {
+    if (other === TimeType.instance) {
         left.transpile(transpiler);
         transpiler.append(".subtractTime(");
         right.transpile(transpiler);
@@ -89,12 +89,12 @@ TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) 
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
 };
 
 
 TimeType.prototype.checkCompare = function(context, other) {
-	if (other instanceof TimeType) {
+	if (other === TimeType.instance) {
 		return BooleanType.instance;
 	} else {
 		return NativeType.prototype.checkCompare.call(this, context, other);
@@ -117,7 +117,7 @@ TimeType.prototype.transpileCompare = function(transpiler, other, operator, left
 
 
 TimeType.prototype.checkRange = function(context, other) {
-	if (other instanceof TimeType) {
+	if (other === TimeType.instance) {
 		return new RangeType(this);
 	} else {
 		return NativeType.prototype.checkRange.call(this, context, other);
@@ -126,7 +126,7 @@ TimeType.prototype.checkRange = function(context, other) {
 
 
 TimeType.prototype.declareRange = function(transpiler, other) {
-    if(other instanceof TimeType) {
+    if(other === TimeType.instance) {
         var module = require("../intrinsic/Range");
         transpiler.require(module.Range);
         transpiler.require(module.TimeRange);

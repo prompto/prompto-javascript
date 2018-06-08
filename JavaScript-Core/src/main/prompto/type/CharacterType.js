@@ -81,7 +81,7 @@ CharacterType.prototype.transpileAdd = function(transpiler, other, tryReverse, l
 
 
 CharacterType.prototype.checkMultiply = function(context, other, tryReverse) {
-	if(other instanceof IntegerType) {
+	if(other === IntegerType.instance) {
 		return TextType.instance;
 	}
 	return NativeType.prototype.checkMultiply.apply(this, context, other, tryReverse);
@@ -89,7 +89,7 @@ CharacterType.prototype.checkMultiply = function(context, other, tryReverse) {
 
 
 CharacterType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType) {
+    if (other === IntegerType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -97,7 +97,7 @@ CharacterType.prototype.declareMultiply = function(transpiler, other, tryReverse
 };
 
 CharacterType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType) {
+    if (other === IntegerType.instance) {
         left.transpile(transpiler);
         transpiler.append(".repeat(");
         right.transpile(transpiler);

@@ -84,7 +84,7 @@ TextType.prototype.checkMultiply = function(context, other, tryReverse) {
 
 
 TextType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType) {
+    if (other === IntegerType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
@@ -93,7 +93,7 @@ TextType.prototype.declareMultiply = function(transpiler, other, tryReverse, lef
 
 
 TextType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
-    if (other instanceof IntegerType) {
+    if (other === IntegerType.instance) {
         left.transpile(transpiler);
         transpiler.append(".repeat(");
         right.transpile(transpiler);

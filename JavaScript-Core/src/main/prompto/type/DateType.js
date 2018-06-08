@@ -60,7 +60,7 @@ DateType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
 DateType.prototype.checkSubtract = function(context, other) {
 	if (other === PeriodType.instance) {
 		return this; // ignore time section
-	} else if (other instanceof DateType) {
+	} else if (other === DateType.instance) {
 		return PeriodType.instance;
 	} else {
 		return NativeType.prototype.checkSubtract.call(this, context, other);
@@ -69,11 +69,11 @@ DateType.prototype.checkSubtract = function(context, other) {
 
 
 DateType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other === PeriodType.instance || other instanceof DateType) {
+    if (other === PeriodType.instance || other === DateType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
 };
 
 DateType.prototype.transpileSubtract = function(transpiler, other, left, right) {
@@ -82,17 +82,17 @@ DateType.prototype.transpileSubtract = function(transpiler, other, left, right) 
         transpiler.append(".subtractPeriod(");
         right.transpile(transpiler);
         transpiler.append(")");
-    } else if (other instanceof DateType) {
+    } else if (other === DateType.instance) {
         left.transpile(transpiler);
         transpiler.append(".subtractDate(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
 };
 
 DateType.prototype.checkCompare = function(context, other) {
-	if (other instanceof DateType || other instanceof DateTimeType) {
+	if (other === DateType.instance || other instanceof DateTimeType) {
 		return BooleanType.instance;
 	} else {
 		return NativeType.prototype.checkCompare.call(this, context, other);
@@ -123,7 +123,7 @@ DateType.prototype.checkRange = function(context, other) {
 
 
 DateType.prototype.checkRange = function(context, other) {
-	if (other instanceof DateType) {
+	if (other === DateType.instance) {
 		return new RangeType(this);
 	} else {
 		return Nativetype.prototype.checkRange.call(this, context, other);
@@ -132,7 +132,7 @@ DateType.prototype.checkRange = function(context, other) {
 
 
 DateType.prototype.declareRange = function(transpiler, other) {
-    if(other instanceof DateType) {
+    if(other === DateType.instance) {
         var module = require("../intrinsic/Range");
         transpiler.require(module.Range);
         transpiler.require(module.DateRange);

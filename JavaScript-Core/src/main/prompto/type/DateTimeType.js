@@ -59,7 +59,7 @@ DateTimeType.prototype.transpileAdd = function(transpiler, other, tryReverse, le
 DateTimeType.prototype.checkSubtract = function(context, other) {
 	if (other === PeriodType.instance) {
 		return this;
-	} else if(other instanceof DateTimeType) {
+	} else if(other === DateTimeType.instance) {
 		return PeriodType.instance;
 	} else {
 		return NativeType.prototype.checkSubtract.call(this, context, other);
@@ -67,11 +67,11 @@ DateTimeType.prototype.checkSubtract = function(context, other) {
 };
 
 DateTimeType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if (other === PeriodType.instance || other instanceof DateTimeType) {
+    if (other === PeriodType.instance || other === DateTimeType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
 };
 
 DateTimeType.prototype.transpileSubtract = function(transpiler, other, left, right) {
@@ -80,18 +80,18 @@ DateTimeType.prototype.transpileSubtract = function(transpiler, other, left, rig
         transpiler.append(".subtractPeriod(");
         right.transpile(transpiler);
         transpiler.append(")");
-    } else if (other instanceof DateTimeType) {
+    } else if (other === DateTimeType.instance) {
         left.transpile(transpiler);
         transpiler.append(".subtractDateTime(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
 };
 
 
 DateTimeType.prototype.checkCompare = function(context, other) {
-	if(other instanceof DateTimeType || other instanceof DateType) {
+	if(other === DateTimeType.instance || other instanceof DateType) {
 		return BooleanType.instance;
 	} else {
 		return NativeType.prototype.checkCompare.call(this, context, other);

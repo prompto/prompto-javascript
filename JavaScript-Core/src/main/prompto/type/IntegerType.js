@@ -90,7 +90,7 @@ IntegerType.prototype.declareSubtract = function(transpiler, other, left, right)
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
 };
 
 IntegerType.prototype.transpileSubtract = function(transpiler, other, left, right) {
@@ -99,7 +99,7 @@ IntegerType.prototype.transpileSubtract = function(transpiler, other, left, righ
         transpiler.append(" - ");
         right.transpile(transpiler);
     } else
-        return NativeType.prototype.transpileSubtract.call(this, context, other, left, right);
+        return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
 };
 
 
