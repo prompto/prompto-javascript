@@ -32,7 +32,7 @@ BreakStatement.prototype.interpret = function(context) {
 };
 
 BreakStatement.prototype.declare = function(transpiler) {
-    // nothing to do;
+    // nothing to do
 };
 
 BreakStatement.prototype.transpile = function(transpiler) {

@@ -34,7 +34,7 @@ TupleType.prototype.declareItem = function(transpiler, itemType, item) {
     if(itemType===IntegerType.instance) {
         item.declare(transpiler);
     } else {
-        return ContainerType.prototype.declareItem.call(this, context, itemType, item);
+        return ContainerType.prototype.declareItem.call(this, transpiler, itemType, item);
     }
 };
 
@@ -45,7 +45,7 @@ TupleType.prototype.transpileItem = function(transpiler, itemType, item) {
         item.transpile(transpiler);
         transpiler.append("-1]");
     } else {
-        return ContainerType.prototype.transpileItem.call(this, context, itemType, item);
+        return ContainerType.prototype.transpileItem.call(this, transpiler, itemType, item);
     }
 };
 

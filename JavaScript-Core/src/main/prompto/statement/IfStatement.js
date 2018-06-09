@@ -48,6 +48,15 @@ IfStatement.prototype.interpret = function(context) {
 	return null;
 };
 
+
+IfStatement.prototype.declare = function(transpiler) {
+    this.elements.forEach(function(element) {
+        element.declare(transpiler);
+    });
+};
+
+
+
 IfStatement.prototype.transpile = function(transpiler) {
     for(var i=0;i<this.elements.length;i++) {
         var element = this.elements[i];
@@ -68,12 +77,6 @@ IfStatement.prototype.transpile = function(transpiler) {
     return true;
 };
 
-
-IfStatement.prototype.declare = function(transpiler) {
-    this.elements.forEach(function(element) {
-        element.declare(transpiler);
-    });
-};
 
 
 IfStatement.prototype.toDialect = function(writer) {
@@ -152,17 +155,6 @@ IfElement.prototype.check = function(context) {
 };
 
 
-IfElement.prototype.transpile = function(transpiler) {
-    var context = transpiler.context;
-    if(this.condition instanceof EqualsExpression)
-        context = this.condition.downCast(transpiler.context, false);
-    if(context!=transpiler.context)
-        transpiler = transpiler.newChildTranspiler(context);
-    else
-        transpiler = transpiler.newChildTranspiler();
-    this.statements.transpile(transpiler);
-};
-
 IfElement.prototype.declare = function(transpiler) {
     if(this.condition)
         this.condition.declare(transpiler);
@@ -175,6 +167,20 @@ IfElement.prototype.declare = function(transpiler) {
         transpiler = transpiler.newChildTranspiler();
     this.statements.declare(transpiler);
 };
+
+
+IfElement.prototype.transpile = function(transpiler) {
+    var context = transpiler.context;
+    if(this.condition instanceof EqualsExpression)
+        context = this.condition.downCast(context, false);
+    if(context!=transpiler.context)
+        transpiler = transpiler.newChildTranspiler(context);
+    else
+        transpiler = transpiler.newChildTranspiler();
+    this.statements.transpile(transpiler);
+};
+
+
 
 IfElement.prototype.downCast = function(context, setValue) {
     var parent = context;

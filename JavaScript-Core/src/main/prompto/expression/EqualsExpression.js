@@ -304,7 +304,7 @@ EqualsExpression.prototype.transpileIsNot = function(transpiler) {
 
 EqualsExpression.prototype.transpileEquals = function(transpiler) {
     var lt = this.left.check(transpiler.context);
-    if(lt instanceof BooleanType || lt instanceof IntegerType || lt instanceof DecimalType || lt instanceof CharacterType || lt instanceof TextType) {
+    if(lt === BooleanType.instance || lt === IntegerType.instance || lt === DecimalType.instance || lt === CharacterType.instance || lt === TextType.instance) {
         this.left.transpile(transpiler);
         transpiler.append(" === ");
         this.right.transpile(transpiler);
@@ -319,7 +319,7 @@ EqualsExpression.prototype.transpileEquals = function(transpiler) {
 
 EqualsExpression.prototype.transpileNotEquals = function(transpiler) {
     var lt = this.left.check(transpiler.context);
-    if(lt instanceof BooleanType || lt instanceof IntegerType || lt instanceof DecimalType || lt instanceof CharacterType || lt instanceof TextType) {
+    if(lt === BooleanType.instance || lt === IntegerType.instance || lt === DecimalType.instance || lt === CharacterType.instance || lt === TextType.instance) {
         this.left.transpile(transpiler);
         transpiler.append(" !== ");
         this.right.transpile(transpiler);

@@ -23,8 +23,7 @@ DoWhileStatement.prototype.declare = function(transpiler) {
 
 
 DoWhileStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("do {");
-    transpiler.indent();
+    transpiler.append("do {").indent();
     var child = transpiler.newChildTranspiler();
     this.statements.transpile(child);
     child.dedent().flush();

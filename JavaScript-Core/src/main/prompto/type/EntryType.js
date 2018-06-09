@@ -28,7 +28,7 @@ EntryType.prototype.declareMember = function(transpiler, name) {
     else if ("value"==name)
         this.itemType.declare(transpiler);
     else
-        return BaseType.prototype.declareMember.call(this, transpiler);
+        return BaseType.prototype.declareMember.call(this, transpiler, name);
 };
 
 EntryType.prototype.transpileMember = function(transpiler, name) {
