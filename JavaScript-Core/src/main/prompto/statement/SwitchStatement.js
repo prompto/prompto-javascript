@@ -73,21 +73,18 @@ SwitchStatement.prototype.declare = function(transpiler) {
 };
 
 SwitchStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("switch (")
+    transpiler.append("switch (");
     this.expression.transpile(transpiler);
-    transpiler.append(") {")
-    transpiler.newLine();
+    transpiler.append(") {").newLine();
     this.switchCases.forEach(function(switchCase) {
         switchCase.transpile(transpiler);
     });
     if(this.defaultCase!=null) {
-        transpiler.append("default:");
-        transpiler.indent();
+        transpiler.append("default:").indent();
         this.defaultCase.transpile(transpiler);
         transpiler.dedent();
     }
-    transpiler.append("}")
-    transpiler.newLine();
+    transpiler.append("}").newLine();
     return true;
 };
 

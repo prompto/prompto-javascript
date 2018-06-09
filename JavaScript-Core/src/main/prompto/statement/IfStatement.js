@@ -178,6 +178,7 @@ IfElement.prototype.transpile = function(transpiler) {
     else
         transpiler = transpiler.newChildTranspiler();
     this.statements.transpile(transpiler);
+    transpiler.flush();
 };
 
 

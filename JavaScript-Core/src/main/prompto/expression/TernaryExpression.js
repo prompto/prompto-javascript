@@ -50,13 +50,13 @@ TernaryExpression.prototype.declare = function(transpiler) {
 };
 
 TernaryExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("(")
+    transpiler.append("(");
     this.condition.transpile(transpiler);
-    transpiler.append(" ? ")
+    transpiler.append(" ? ");
     this.ifTrue.transpile(transpiler);
-    transpiler.append(" : ")
+    transpiler.append(" : ");
     this.ifFalse.transpile(transpiler);
-    transpiler.append(")")
+    transpiler.append(")");
 };
 
 exports.TernaryExpression = TernaryExpression;

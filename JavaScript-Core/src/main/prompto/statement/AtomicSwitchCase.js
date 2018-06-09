@@ -75,11 +75,9 @@ AtomicSwitchCase.prototype.catchToEDialect = function(writer) {
 AtomicSwitchCase.prototype.transpile = function(transpiler) {
     transpiler.append("case ");
     this.expression.transpile(transpiler);
-    transpiler.append(":");
-    transpiler.indent();
+    transpiler.append(":").indent();
     this.statements.transpile(transpiler);
-    transpiler.append("break;");
-    transpiler.dedent();
+    transpiler.append("break;").dedent();
 };
 
 AtomicSwitchCase.prototype.transpileError = function(transpiler) {

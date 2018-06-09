@@ -83,13 +83,11 @@ CollectionSwitchCase.prototype.transpile = function(transpiler) {
     this.expression.expressions.forEach(function(expression) {
         transpiler.append("case ");
         expression.transpile(transpiler);
-        transpiler.append(":");
-        transpiler.newLine();
+        transpiler.append(":").newLine();
     }, this);
     transpiler.indent(true);
     this.statements.transpile(transpiler);
-    transpiler.append("break;");
-    transpiler.dedent();
+    transpiler.append("break;").dedent();
 };
 
 exports.CollectionSwitchCase = CollectionSwitchCase;
