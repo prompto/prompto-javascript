@@ -196,11 +196,4 @@ TimeType.prototype.toString = function(value) {
 };
 
 
-TimeType.prototype.transpileSorted = function(transpiler, desc, key) {
-    if(desc)
-        transpiler.append("function(o1, o2) { return o1.equals(o2) ? 0 : o1.gt(o2) ? -1 : 1; }");
-    else
-        transpiler.append("function(o1, o2) { return o1.equals(o2) ? 0 : o1.gt(o2) ? 1 : -1; }");
-};
-
 exports.TimeType = TimeType;
