@@ -27,7 +27,9 @@ AnyType.prototype.declareItem = function(transpiler, type, item) {
 
 AnyType.prototype.transpileItem = function(transpiler, type, item) {
     // required to support Document items
-    transpiler.append(".item(").append(item).append(")");
+    transpiler.append(".item(");
+    item.transpile(transpiler);
+    transpiler.append(")");
 };
 
 
@@ -47,7 +49,9 @@ AnyType.prototype.transpileAssignMemberValue = function(transpiler, name, expres
 
 AnyType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
     // required to support Document members
-    transpiler.append(".setItem(").append(item).append(", ");
+    transpiler.append(".setItem(");
+    item.transpile(transpiler);
+    transpiler.append(", ");
     expression.transpile(transpiler);
     transpiler.append(")");
 };

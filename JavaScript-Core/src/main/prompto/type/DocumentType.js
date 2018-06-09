@@ -60,7 +60,9 @@ DocumentType.prototype.transpileAssignMemberValue = function(transpiler, name, e
 };
 
 DocumentType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
-    transpiler.append(".setItem(").append(item).append(", ");
+    transpiler.append(".setItem(");
+    item.transpile(transpiler);
+    transpiler.append(", ");
     expression.transpile(transpiler);
     transpiler.append(")");
 };
@@ -75,8 +77,9 @@ DocumentType.prototype.checkItem = function(context, itemType) {
 
 
 DocumentType.prototype.transpileItem = function(transpiler, type, item) {
-    // required to support Document items
-    transpiler.append(".item(").append(item).append(")");
+    transpiler.append(".item(");
+    item.transpile(transpiler);
+    transpiler.append(")");
 };
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {
