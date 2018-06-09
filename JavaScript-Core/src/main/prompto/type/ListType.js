@@ -98,7 +98,7 @@ ListType.prototype.declareItem = function(transpiler, itemType, item) {
     if(itemType===IntegerType.instance) {
         item.declare(transpiler);
     } else {
-        return ContainerType.prototype.declareItem.call(this, context, itemType, item);
+        return ContainerType.prototype.declareItem.call(this, transpiler, itemType, item);
     }
 };
 
@@ -109,7 +109,7 @@ ListType.prototype.transpileItem = function(transpiler, itemType, item) {
         item.transpile(transpiler);
         transpiler.append(")");
     } else {
-        return ContainerType.prototype.transpileItem.call(this, context, itemType, item);
+        return ContainerType.prototype.transpileItem.call(this, transpiler, itemType, item);
     }
 };
 
