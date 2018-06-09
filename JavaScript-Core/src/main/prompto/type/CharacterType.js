@@ -134,7 +134,7 @@ CharacterType.prototype.checkRange = function(context, other) {
 
 
 CharacterType.prototype.declareRange = function(transpiler, other) {
-    if(other instanceof CharacterType) {
+    if(other === CharacterType.instance) {
         var module = require("../intrinsic/Range");
         transpiler.require(module.Range);
         transpiler.require(module.IntegerRange);

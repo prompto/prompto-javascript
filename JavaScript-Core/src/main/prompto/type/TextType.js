@@ -195,24 +195,24 @@ TextType.prototype.checkContainsAllOrAny = function(context, other) {
 };
 
 
-TextType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+TextType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
     container.declare(transpiler);
-    item.declare(transpiler);
+    items.declare(transpiler);
 };
 
 
-TextType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+TextType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAll(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
 
-TextType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+TextType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 

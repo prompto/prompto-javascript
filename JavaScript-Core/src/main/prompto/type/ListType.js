@@ -196,26 +196,26 @@ ListType.prototype.checkContainsAllOrAny = function(context, other) {
 	return BooleanType.instance;
 };
 
-ListType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+ListType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
     var StrictSet = require("../intrinsic/StrictSet").StrictSet;
     transpiler.require(StrictSet);
     container.declare(transpiler);
-    item.declare(transpiler);
+    items.declare(transpiler);
 };
 
 
-ListType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+ListType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAll(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
 
-ListType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+ListType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 

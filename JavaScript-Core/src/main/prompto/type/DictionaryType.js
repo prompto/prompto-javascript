@@ -110,24 +110,24 @@ DictionaryType.prototype.checkContainsAllOrAny = function(context, other) {
 };
 
 
-DictionaryType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+DictionaryType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
     transpiler.require(StrictSet);
     container.declare(transpiler);
-    item.declare(transpiler);
+    items.declare(transpiler);
 };
 
 
-DictionaryType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+DictionaryType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAll(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
-DictionaryType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+DictionaryType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 

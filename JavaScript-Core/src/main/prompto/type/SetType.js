@@ -101,26 +101,26 @@ SetType.prototype.checkContainsAllOrAny = function(context, other) {
 }
 
 
-SetType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+SetType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
     var StrictSet = require("../intrinsic/StrictSet").StrictSet;
     transpiler.require(StrictSet);
     container.declare(transpiler);
-    item.declare(transpiler);
+    items.declare(transpiler);
 };
 
 
-SetType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+SetType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAll(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
 
-SetType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+SetType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 

@@ -94,24 +94,24 @@ RangeType.prototype.transpileContains = function(transpiler, other, container, i
 };
 
 
-RangeType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+RangeType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
     transpiler.require(StrictSet);
     container.declare(transpiler);
-    item.declare(transpiler);
+    items.declare(transpiler);
 };
 
 
-RangeType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+RangeType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAll(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
-RangeType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+RangeType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 

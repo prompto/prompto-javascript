@@ -132,25 +132,25 @@ TupleType.prototype.transpileContains = function(transpiler, other, container, i
 
 
 
-TupleType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
+TupleType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
     var StrictSet = require("../intrinsic/StrictSet").StrictSet;
     transpiler.require(StrictSet);
     container.declare(transpiler);
-    item.declare(transpiler);
+    items.declare(transpiler);
 };
 
 
-TupleType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
+TupleType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAll(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
-TupleType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
+TupleType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
-    item.transpile(transpiler);
+    items.transpile(transpiler);
     transpiler.append(")");
 };
 
