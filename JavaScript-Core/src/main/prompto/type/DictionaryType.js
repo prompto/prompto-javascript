@@ -153,7 +153,9 @@ DictionaryType.prototype.transpileItem = function(transpiler, itemType, item) {
 
 
 DictionaryType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
-    transpiler.append(".setItem(").append(item).append(", ");
+    transpiler.append(".setItem(");
+    item.transpile(transpiler);
+    transpiler.append(", ");
     expression.transpile(transpiler);
     transpiler.append(")");
 };
