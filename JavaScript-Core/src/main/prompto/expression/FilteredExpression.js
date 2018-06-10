@@ -42,14 +42,6 @@ FilteredExpression.prototype.check = function(context) {
 };
 
 
-FilteredExpression.prototype.declare = function(transpiler) {
-    this.source.declare(transpiler);
-    var listType = this.source.check(transpiler.context);
-    transpiler = transpiler.newChildTranspiler();
-    transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
-    this.predicate.declare(transpiler);
-};
-
 FilteredExpression.prototype.interpret = function(context) {
 	var listType = this.source.check(context);
 	if(!(listType instanceof IterableType)) {
@@ -69,10 +61,18 @@ FilteredExpression.prototype.interpret = function(context) {
     return list.filter(local, this.itemId, this.predicate)
 };
 
+FilteredExpression.prototype.declare = function(transpiler) {
+    this.source.declare(transpiler);
+    var listType = this.source.check(transpiler.context);
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
+    this.predicate.declare(transpiler);
+};
+
 FilteredExpression.prototype.transpile = function(transpiler) {
     var listType = this.source.check(transpiler.context);
     this.source.transpile(transpiler);
-    transpiler.append(".filtered(function(").append(this.itemId.name).append(") { return ")
+    transpiler.append(".filtered(function(").append(this.itemId.name).append(") { return ");
     transpiler = transpiler.newChildTranspiler();
     transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
     this.predicate.transpile(transpiler);
