@@ -16,8 +16,8 @@ AbstractMethodDeclaration.prototype.memberCheck = function(declaration, context)
 };
 
 AbstractMethodDeclaration.prototype.check = function(context) {
-	if(this.arguments!=null) {
-		this.arguments.check(context);
+	if(this.args!=null) {
+		this.args.check(context);
 	}
 	var local = context.newLocalContext();
 	this.registerArguments(local);
@@ -25,9 +25,7 @@ AbstractMethodDeclaration.prototype.check = function(context) {
 };
 
 AbstractMethodDeclaration.prototype.declare = function(transpiler) {
-    if(this.arguments!=null) {
-        this.arguments.declare(transpiler);
-    }
+    this.declareArguments(transpiler);
 };
 
 AbstractMethodDeclaration.prototype.toMDialect = function(writer) {
