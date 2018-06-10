@@ -20,7 +20,7 @@ var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
 var DataStore = require("../store/DataStore").DataStore;
-var Variable = require("../runtime/Variable").Variable;
+var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var Score = require("../runtime/Score").Score;
 
 exports.resolve = function() {
@@ -601,7 +601,7 @@ CategoryType.prototype.declareSorted = function(transpiler, key) {
     var keyname = key ? key.toString() : "key";
     var decl = this.getDeclaration(transpiler.context);
     if (decl.hasAttribute(transpiler.context, keyname) || decl.hasMethod(transpiler.context, keyname, null)) {
-        return
+        return;
     } else {
         var decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
@@ -620,7 +620,7 @@ CategoryType.prototype.transpileSorted = function(transpiler, desc, key) {
     } else if (decl.hasMethod(transpiler.context, keyname, null)) {
         this.transpileSortedByClassMethod(transpiler, desc, key);
     } else {
-        var decl = this.findGlobalMethod(transpiler.context, keyname, true);
+        decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
             this.transpileSortedByGlobalMethod(transpiler, desc, decl.getTranspiledName(transpiler.context));
         } else {
@@ -636,7 +636,7 @@ CategoryType.prototype.transpileSortedByExpression = function(transpiler, desc, 
 
 
 CategoryType.prototype.transpileSortedByAttribute = function(transpiler, desc, key) {
-    key = key || new Variable(new Identifier("key"), TextType.instance);
+    key = key || new InstanceExpression(new Identifier("key"));
     transpiler.append("function(o1, o2) { return ");
     this.transpileEqualKeys(transpiler, key);
     transpiler.append(" ? 0 : ");
