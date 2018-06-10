@@ -6,7 +6,7 @@ var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var TextValue = require("../value/TextValue").TextValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
-
+var Document = require("../intrinsic/Document").Document;
 
 
 function DocumentType() {
@@ -32,6 +32,10 @@ DocumentType.prototype.checkMember = function(context, name) {
 	return AnyType.instance;
 };
 
+
+DocumentType.prototype.declare = function(transpiler) {
+    transpiler.require(Document);
+};
 
 DocumentType.prototype.declareMember = function(transpiler, name) {
     // nothing to do

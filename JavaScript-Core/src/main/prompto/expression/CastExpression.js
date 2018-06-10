@@ -36,6 +36,7 @@ CastExpression.prototype.interpret = function(context) {
 
 CastExpression.prototype.declare = function(transpiler) {
     this.expression.declare(transpiler);
+    this.type.declare(transpiler);
 };
 
 
