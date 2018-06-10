@@ -1,5 +1,6 @@
 var IterableType = require("./IterableType").IterableType;
 var BooleanType = require("./BooleanType").BooleanType;
+var Variable = require("../runtime/Variable").Variable;
 
 function ContainerType(id, itemType) {
     IterableType.call(this, id);

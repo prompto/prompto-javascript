@@ -26,7 +26,7 @@ MatchingCollectionConstraint.prototype.toDialect = function(writer) {
 
 
 MatchingCollectionConstraint.prototype.declare = function(transpiler, name, type) {
-    var transpiler = transpiler.newChildTranspiler();
+    transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
     this.collection.declare(transpiler);
@@ -40,7 +40,7 @@ MatchingCollectionConstraint.prototype.transpileChecker = function(transpiler, n
     var transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
-    transpiler.append("if(")
+    transpiler.append("if(");
     this.collection.transpile(transpiler);
     transpiler.append(".has(value))").indent();
     transpiler.append("return value;").dedent();

@@ -53,14 +53,14 @@ Transpiler.prototype.newMemberTranspiler = function() {
 };
 
 Transpiler.prototype.newGetterTranspiler = function(name) {
-    transpiler = this.newMemberTranspiler();
+    var transpiler = this.newMemberTranspiler();
     transpiler.getterName = name;
     return transpiler;
 };
 
 
 Transpiler.prototype.newSetterTranspiler = function(name) {
-    transpiler = this.newMemberTranspiler();
+    var transpiler = this.newMemberTranspiler();
     transpiler.setterName = name;
     return transpiler;
 };
@@ -302,11 +302,6 @@ function translateError(e) {
         return "NULL_REFERENCE";
     else
         return "<unknown: " + e.name + ">";
-/*
-        NOT_MUTABLE: "NotMutableError",
-        NOT_STORABLE: "NotStorableError",
-        READ_WRITE: "ReadWriteError"
-*/
 }
 
 class DivideByZeroError extends Error {

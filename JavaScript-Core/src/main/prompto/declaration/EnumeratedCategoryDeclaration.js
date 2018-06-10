@@ -145,22 +145,6 @@ EnumeratedCategoryDeclaration.prototype.isUserError = function(context) {
     return this.derivedFrom && this.derivedFrom.length===1 && this.derivedFrom[0].name==="Error";
 };
 
-EnumeratedCategoryDeclaration.prototype.declare = function(transpiler) {
-    if(this.name==="Error")
-        return;
-    else if (this.isUserError(transpiler.context))
-        this.declareUserError(transpiler);
-    else
-        ConcreteCategoryDeclaration.prototype.declare.call(this, transpiler);
-};
-
-EnumeratedCategoryDeclaration.prototype.declareUserError = function(transpiler) {
-    transpiler.declare(this);
-    // don't declare inherited Error
-};
-
-
-
 EnumeratedCategoryDeclaration.prototype.ensureDeclarationOrder = function(context, list, set) {
     if(set.has(this))
         return;

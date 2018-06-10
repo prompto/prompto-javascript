@@ -38,7 +38,7 @@ MatchingPatternConstraint.prototype.transpileChecker = function(transpiler, name
     var transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
-    transpiler.append("if(new RegExp(")
+    transpiler.append("if(new RegExp(");
     this.expression.transpile(transpiler);
     transpiler.append(").test(value))").indent();
     transpiler.append("return value;").dedent();
