@@ -49,5 +49,22 @@ ContainerType.prototype.declareSorted = function(transpiler, key) {
     // nothing to do
 };
 
+ContainerType.prototype.declareIterator = function(transpiler, name, expression) {
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(name, this.itemType));
+    expression.declare(transpiler);
+};
+
+
+ContainerType.prototype.transpileIterator = function(transpiler, name, expression) {
+    transpiler.append(".iterate(function(").append(name).append(") { return ");
+    transpiler = transpiler.newChildTranspiler();
+    transpiler.context.registerValue(new Variable(name, this.itemType));
+    expression.transpile(transpiler);
+    transpiler.append("; }, this)");
+    transpiler.flush();
+};
+
+
 exports.ContainerType = ContainerType;
 
