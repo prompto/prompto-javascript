@@ -93,7 +93,7 @@ DispatchMethodDeclaration.prototype.transpileCall = function(transpiler, declara
     this.call.transpileSelector(transpiler, declaration);
     transpiler.append("(");
     this.args.forEach(function (arg) {
-        transpiler.append(arg.name)
+        transpiler.append(arg.name);
         transpiler.append(", ");
     }, this);
     transpiler.trimLast(2);
