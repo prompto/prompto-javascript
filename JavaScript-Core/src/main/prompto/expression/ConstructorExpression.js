@@ -161,7 +161,6 @@ ConstructorExpression.prototype.transpileNative = function(transpiler, decl) {
     transpiler.append("new_").append(getTypeName(bound)).append("(");
     this.transpileAssignments(transpiler);
     transpiler.append(")");
-    transpiler.flush();
 };
 
 

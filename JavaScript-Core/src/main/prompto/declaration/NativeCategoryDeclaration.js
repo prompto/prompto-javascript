@@ -121,7 +121,7 @@ NativeCategoryDeclaration.prototype.transpile = function(transpiler) {
     binding.transpile(transpiler);
     var bound = binding.resolve();
     var name = getTypeName(bound);
-    transpiler.append("function ").append("new_").append(name).append("(values) {").indent();
+    transpiler.append("function ").append("new_").append(this.name).append("(values) {").indent();
     transpiler.append("values = values || {};").newLine();
     transpiler.append("var value = new ").append(name).append("();").newLine();
     if(this.attributes) {

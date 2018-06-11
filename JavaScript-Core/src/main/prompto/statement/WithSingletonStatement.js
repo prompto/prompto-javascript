@@ -28,8 +28,8 @@ WithSingletonStatement.prototype.interpret = function(context) {
 
 WithSingletonStatement.prototype.declare = function(transpiler) {
     this.type.declare(transpiler);
-    var transpiler = transpiler.newInstanceTranspiler(this.type);
-    var transpiler = transpiler.newChildTranspiler();
+    transpiler = transpiler.newInstanceTranspiler(this.type);
+    transpiler = transpiler.newChildTranspiler();
     return this.statements.declare(transpiler);
 };
 

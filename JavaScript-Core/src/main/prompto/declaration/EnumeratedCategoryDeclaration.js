@@ -179,16 +179,6 @@ EnumeratedCategoryDeclaration.prototype.transpileUserError = function(transpiler
     transpiler.append("super(values.text);").newLine();
     transpiler.append("this.name = '").append(this.name).append("';").newLine();
     transpiler.append("this.promptoName = values.name;").newLine();
-    if (this.attributes) {
-        this.attributes
-            .filter(function (attr) {
-                return attr.name !== 'name' && attr.name != 'text';
-            })
-            .forEach(function (attr) {
-                transpiler.append("this.").append(attr.name).append(" = values.hasownProperty('").append(attr.name).append("') ? values.").append(attr.name).append(" : null;");
-                transpiler.newLine();
-            }, this);
-    }
     transpiler.append("return this;").dedent();
     transpiler.append("}").newLine();
     transpiler.append("toString() {").indent().append("return this.message;").dedent().append("}").newLine();
