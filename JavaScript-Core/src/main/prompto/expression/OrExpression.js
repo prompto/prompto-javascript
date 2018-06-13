@@ -57,6 +57,8 @@ OrExpression.prototype.declare = function(transpiler) {
     this.left.declare(transpiler);
     this.right.declare(transpiler);
 };
+
+
 OrExpression.prototype.transpile = function(transpiler) {
     this.left.transpile(transpiler);
     transpiler.append(" || ");

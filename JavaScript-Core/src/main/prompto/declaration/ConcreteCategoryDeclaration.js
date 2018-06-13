@@ -420,7 +420,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
         transpiler.append("this.storable = DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("']);").newLine();
     this.transpileGetterSetterAttributes(transpiler);
     this.transpileSuperConstructor(transpiler);
-    transpiler.append("this.category = new Set([").append(categories.join(', ')).append("]);").newLine();
+    transpiler.append("this.category = [").append(categories.join(', ')).append("];").newLine();
     this.transpileLocalAttributes(transpiler);
     transpiler.append("this.mutable = mutable;").newLine();
     transpiler.append("return this;");

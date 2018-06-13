@@ -16,10 +16,10 @@ function MemQueryBuilder() {
 MemQueryBuilder.prototype = Object.create(QueryBuilder.prototype);
 MemQueryBuilder.prototype.constructor = MemQueryBuilder;
 
-MemQueryBuilder.prototype.verify = function(fieldName, matchOp, value) {
+MemQueryBuilder.prototype.verify = function(fieldInfo, matchOp, value) {
     if(this.predicates==null)
         this.predicates = [];
-    this.predicates.push(new MatchPredicate(fieldName, matchOp, value));
+    this.predicates.push(new MatchPredicate(fieldInfo, matchOp, value));
 };
 
 MemQueryBuilder.prototype.and = function() {

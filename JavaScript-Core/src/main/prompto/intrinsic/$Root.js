@@ -1,12 +1,12 @@
 function $Root() {
     this.mutable = false;
     this.storable = this.storable || null;
-    this.category = new Set();
+    this.category = [];
     return this;
 }
 
 $Root.prototype.instanceOf = function(type) {
-    return this.category.has(type);
+    return this.category.indexOf(type)>=0;
 };
 
 $Root.prototype.toString = function() {

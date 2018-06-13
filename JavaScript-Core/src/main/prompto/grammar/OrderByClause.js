@@ -27,7 +27,7 @@ OrderByClause.prototype.interpretQuery = function(context, query) {
 };
 
 OrderByClause.prototype.declare = function(transpiler) {
-
+    // nothing to do
 };
 
 OrderByClause.prototype.transpileQuery = function(transpiler, builder) {
