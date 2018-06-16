@@ -6,9 +6,13 @@ var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var DataStore = require("../store/DataStore").DataStore;
 var $Root = require("../intrinsic/$Root").$Root;
+var EnumeratedCategoryDeclaration = null;
+var EnumeratedNativeDeclaration = null;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+    EnumeratedCategoryDeclaration = require("./EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+    EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 }
 
 function ConcreteCategoryDeclaration(id, attributes, derivedFrom, methods) {
@@ -433,9 +437,31 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
         transpiler.append(this.name).append(".prototype = Object.create($Root.prototype);").newLine();
     transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+    this.transpileLoaders(transpiler);
     this.transpileMethods(transpiler);
     this.transpileGetterSetters(transpiler);
     transpiler.flush();
+};
+
+ConcreteCategoryDeclaration.prototype.transpileLoaders = function(transpiler) {
+    var attributes = this.getLocalAttributes();
+    if (attributes) {
+        attributes
+            .filter(function (attr) {
+                return this.isEnumeratedAttribute(transpiler.context, attr);
+                }, this)
+            .forEach(function (attr) {
+                    transpiler.append(this.name).append(".prototype.load$").append(attr.name).append(" = function(name) {").indent();
+                    transpiler.append("return eval(name);").dedent();
+                    transpiler.append("};").newLine();
+                }, this);
+        }
+};
+
+ConcreteCategoryDeclaration.prototype.isEnumeratedAttribute = function(context, attr) {
+    var decl = context.getRegisteredDeclaration(attr.name);
+    decl = context.getRegisteredDeclaration(decl.type.name);
+    return  decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration;
 };
 
 ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transpiler) {
@@ -444,7 +470,8 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
         transpiler.append("this.mutable = true;").newLine();
         transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
         attributes.forEach(function (attr) {
-            transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null, mutable);").newLine();
+            var isEnum =  this.isEnumeratedAttribute(transpiler.context, attr);
+            transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null, mutable, ").append(isEnum).append(");").newLine();
         }, this);
     }
 };
