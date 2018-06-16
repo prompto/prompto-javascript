@@ -56,7 +56,7 @@ TestMethodDeclaration.prototype.transpileAssertions = function(transpiler) {
         assertion.transpile(transpiler);
         transpiler.append(")").indent();
         transpiler.append("success &= true;").dedent();
-        transpiler.append("else {").indent()
+        transpiler.append("else {").indent();
         transpiler.append("success = false;").newLine();
         transpiler.printTestName(this.name).append('failed while verifying: ')
             .append(assertion.getExpected(transpiler.context, this.dialect))
@@ -101,7 +101,7 @@ TestMethodDeclaration.prototype.transpileExpectedError = function(transpiler) {
     transpiler.append("if(e instanceof ").append(NativeErrorNames[this.error.name]).append(") {").indent();
     transpiler.printTestName(this.name).append('successful");').dedent();
     transpiler.append("} else {").indent();
-    transpiler.printTestName(this.name).append('failed while expecting: ').append(this.error.name).append(', found: " + translateError(e));').dedent();;
+    transpiler.printTestName(this.name).append('failed while expecting: ').append(this.error.name).append(', found: " + translateError(e));').dedent();
     transpiler.append("}");
     transpiler.dedent();
     transpiler.append("}");

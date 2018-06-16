@@ -147,7 +147,7 @@ ContainsExpression.prototype.interpretAssert = function(context, test) {
 ContainsExpression.prototype.transpileFound = function(transpiler, dialect) {
     transpiler.append("(");
     this.left.transpile(transpiler);
-    transpiler.append(") + '").append(this.operator.toString(dialect)).append("' + (");
+    transpiler.append(") + '").append(this.operator.toString()).append("' + (");
     this.right.transpile(transpiler);
     transpiler.append(")");
 };
