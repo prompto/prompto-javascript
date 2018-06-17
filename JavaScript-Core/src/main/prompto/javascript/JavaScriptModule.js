@@ -34,6 +34,10 @@ JavaScriptModule.prototype.resolve = function() {
     if(o!=null) {
         return o;
     }
+    o = this.resolve_path("main", "test");
+    if(o!=null) {
+        return o;
+    }
     return null;
 };
 
@@ -86,12 +90,13 @@ JavaScriptModule.prototype.resolve_runtime = function() {
 };
 
 
-JavaScriptModule.prototype.resolve_path = function(part) {
+JavaScriptModule.prototype.resolve_path = function(part, replace) {
     try {
         var folder = path.sep + part + path.sep;
         var idx = module.filename.lastIndexOf(folder);
         var rootPath = module.filename.substring(0, idx + 1);
-        // for now let's assume prompto and the required module are at the same level
+        if(replace)
+            rootPath = rootPath + replace + "/";
         var modulePath = rootPath + this.toString();
         return eval("require('" + modulePath + "')");
     } catch (e) {
@@ -109,6 +114,8 @@ JavaScriptModule.prototype.transpile = function(transpiler, name) {
     else if(this.transpile_path(transpiler, name, "prompto"))
         return;
     else if(this.transpile_path(transpiler, name, "main"))
+        return;
+    else if(this.transpile_path(transpiler, name, "main", "test"))
         return;
     else
         throw new SyntaxError("Cannot locate module: " + this.toString());
@@ -180,12 +187,13 @@ JavaScriptModule.prototype.transpile_runtime = function(transpiler, name) {
 };
 
 
-JavaScriptModule.prototype.transpile_path = function(transpiler, name, part) {
+JavaScriptModule.prototype.transpile_path = function(transpiler, name, part, replace) {
     try {
         var folder = path.sep + part + path.sep;
         var idx = module.filename.lastIndexOf(folder);
         var rootPath = module.filename.substring(0, idx + 1);
-        // for now let's assume prompto and the required module are at the same level
+        if(replace)
+            rootPath = rootPath + replace + "/";
         var modulePath = rootPath + this.toString();
         var m = eval("require('" + modulePath + "')");
         if(!m)
