@@ -10,7 +10,7 @@ var InstanceContext = require("../runtime/Context").InstanceContext;
 function DeclarationStatement(declaration) {
 	BaseStatement.call(this);
 	this.declaration = declaration;
-    this.declaration.ofStatement = this;
+    this.declaration.declarationStatement = this;
 	return this;
 }
 

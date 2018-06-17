@@ -31,8 +31,13 @@ InstanceExpression.prototype.toString = function() {
 
 InstanceExpression.prototype.declare = function(transpiler) {
     var named = transpiler.context.getRegistered(this.name);
-    if(named instanceof MethodDeclarationMap)
-        transpiler.declare(named.getFirst());
+    if(named instanceof MethodDeclarationMap) {
+        var decl = named.getFirst();
+        // don't declare closures
+        if(decl.declarationStatement)
+            return;
+        transpiler.declare(decl);
+    }
 };
 
 
