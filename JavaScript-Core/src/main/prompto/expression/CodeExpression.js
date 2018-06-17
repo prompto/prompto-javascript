@@ -57,11 +57,11 @@ CodeExpression.prototype.interpretCode = function(context) {
 };
 
 CodeExpression.prototype.declareCode = function(transpiler) {
-    return this.expression.declare(transpiler);
+    this.expression.declare(transpiler);
 };
 
 CodeExpression.prototype.transpileCode = function(transpiler) {
-    return this.expression.transpile(transpiler);
+    this.expression.transpile(transpiler);
 };
 
 

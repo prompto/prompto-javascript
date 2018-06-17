@@ -19,12 +19,12 @@ CodeValue.prototype.interpret = function(context) {
 };
 
 CodeValue.prototype.declareCode = function(transpiler) {
-    return this.expression.declareCode (transpiler);
+    this.expression.declareCode (transpiler);
 };
 
 
 CodeValue.prototype.transpileCode = function(transpiler) {
-    return this.expression.transpileCode (transpiler);
+    this.expression.transpileCode (transpiler);
 };
 
 

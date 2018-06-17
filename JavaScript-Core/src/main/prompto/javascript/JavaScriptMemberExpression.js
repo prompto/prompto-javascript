@@ -30,6 +30,15 @@ JavaScriptMemberExpression.prototype.transpile = function(transpiler) {
     transpiler.append(this.id.name);
 };
 
+
+JavaScriptMemberExpression.prototype.getRoot = function() {
+    if(this.parent!=null)
+        return this.parent.getRoot();
+    else
+        return this.id.name;
+};
+
+
 JavaScriptMemberExpression.prototype.toDialect = function(writer) {
     if (this.parent !== null) {
         this.parent.toDialect(writer);

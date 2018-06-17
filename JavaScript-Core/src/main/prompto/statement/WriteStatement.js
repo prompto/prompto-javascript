@@ -70,7 +70,7 @@ WriteStatement.prototype.transpile = function(transpiler) {
 
 WriteStatement.prototype.transpileLine = function(transpiler) {
     this.resource.transpile(transpiler);
-    transpiler.append(".writeLine(")
+    transpiler.append(".writeLine(");
     this.content.transpile(transpiler);
     transpiler.append(")");
 };
@@ -82,14 +82,13 @@ WriteStatement.prototype.transpileFully = function(transpiler) {
     this.resource.transpile(transpiler);
     transpiler.append(";").newLine();
     transpiler.append("try {").indent();
-    transpiler.append("$res.writeFully(")
+    transpiler.append("$res.writeFully(");
     this.content.transpile(transpiler);
     transpiler.append(");");
     transpiler.dedent().append("} finally {").indent();
     transpiler.append("$res.close();").newLine();
     transpiler.dedent().append("}");
     transpiler.flush();
-    return true;
 };
 
 WriteStatement.prototype.toDialect = function(writer) {

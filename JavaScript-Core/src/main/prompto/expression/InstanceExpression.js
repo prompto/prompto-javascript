@@ -30,19 +30,26 @@ InstanceExpression.prototype.toString = function() {
 };
 
 InstanceExpression.prototype.declare = function(transpiler) {
-    // nothing to do
+    var named = transpiler.context.getRegistered(this.name);
+    if(named instanceof MethodDeclarationMap)
+        transpiler.declare(named.getFirst());
 };
 
 
 InstanceExpression.prototype.transpile = function(transpiler) {
-    var context = transpiler.context.contextForValue(this.id.name);
+    var context = transpiler.context.contextForValue(this.name);
     if(context && context.instanceType) {
         context.instanceType.transpileInstance(transpiler);
         transpiler.append(".");
     }
-    if(transpiler.getterName === this.name)
-        transpiler.append("$");
-    transpiler.append(this.name);
+    var named = transpiler.context.getRegistered(this.name);
+    if(named instanceof MethodDeclarationMap) {
+        transpiler.append(named.getFirst().getTranspiledName());
+    } else {
+        if (transpiler.getterName === this.name)
+            transpiler.append("$");
+        transpiler.append(this.name);
+    }
 };
 
 

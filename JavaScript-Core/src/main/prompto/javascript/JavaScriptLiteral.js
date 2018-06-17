@@ -16,4 +16,9 @@ JavaScriptLiteral.prototype.toDialect = function(writer) {
     writer.append(this.text);
 };
 
+
+JavaScriptLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
+
 exports.JavaScriptLiteral = JavaScriptLiteral;

@@ -43,4 +43,3 @@ exports.checkTranspiledOutput = function(test, fileName) {
     test.done();
 };
 
-exports.checkTranspiledOutput = exports.checkInterpretedOutput;

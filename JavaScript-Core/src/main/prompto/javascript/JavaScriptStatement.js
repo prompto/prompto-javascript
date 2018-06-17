@@ -58,13 +58,15 @@ JavaScriptStatement.prototype.declare = function(transpiler) {
 
 
 JavaScriptStatement.prototype.transpile = function(transpiler) {
+    if(this.module!=null) {
+        var rootName = this.expression.getRoot();
+        this.module.transpile(transpiler, rootName);
+    }
     if(this.isReturn)
         transpiler.append("return ");
     if(!this.expression.transpile)
         throw new Error(this.expression.toString());
     this.expression.transpile(transpiler);
-    if(this.module!=null)
-        throw new Error(this.module.toString());
 };
 
 exports.JavaScriptStatement = JavaScriptStatement;

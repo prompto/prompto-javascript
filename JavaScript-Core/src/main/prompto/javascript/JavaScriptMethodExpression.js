@@ -40,6 +40,14 @@ JavaScriptMethodExpression.prototype.transpile = function(transpiler) {
 };
 
 
+JavaScriptMethodExpression.prototype.getRoot = function() {
+    if(this.parent!=null)
+        return this.parent.getRoot();
+    else
+        return this.id.name;
+};
+
+
 JavaScriptMethodExpression.prototype.findInstanceAndMethod = function(context, module) {
     if (this.parent === null) {
         return this.findGlobal(context, module);

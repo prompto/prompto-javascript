@@ -14,7 +14,7 @@ exports.tearDown = function(done) {
 	Out.restore();
 	done();
 };
-
+/*
 exports.testInterpretedAnonymous = function(test) {
 	checkInterpretedOutput(test, "methods/anonymous.poc");
 };
@@ -50,11 +50,11 @@ exports.testTranspiledE_as_e_bug = function(test) {
 exports.testInterpretedExplicit = function(test) {
 	checkInterpretedOutput(test, "methods/explicit.poc");
 };
-
+*/
 exports.testTranspiledExplicit = function(test) {
 	checkTranspiledOutput(test, "methods/explicit.poc");
 };
-
+/*
 exports.testInterpretedExpressionWith = function(test) {
 	checkInterpretedOutput(test, "methods/expressionWith.poc");
 };
@@ -134,4 +134,4 @@ exports.testInterpretedSpecified = function(test) {
 exports.testTranspiledSpecified = function(test) {
 	checkTranspiledOutput(test, "methods/specified.poc");
 };
-
+*/

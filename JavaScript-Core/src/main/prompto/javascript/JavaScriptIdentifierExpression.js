@@ -23,6 +23,12 @@ JavaScriptIdentifierExpression.prototype.transpile = function(transpiler) {
     transpiler.append(this.id.name);
 };
 
+
+JavaScriptIdentifierExpression.prototype.getRoot = function() {
+	return this.id.name;
+};
+
+
 JavaScriptIdentifierExpression.prototype.interpret = function(context, module) {
     var o = this.interpret_prompto(context);
     if(o!=null) {
