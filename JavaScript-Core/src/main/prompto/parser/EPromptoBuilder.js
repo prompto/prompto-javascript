@@ -11,6 +11,7 @@ var value = require("../value/index");
 var utils = require("../utils/index");
 var parser = require("../parser/index");
 var type = require("../type/index");
+var jsx = require("../jsx/index");
 var java = require("../java/index");
 var csharp = require("../csharp/index");
 var python = require("../python/index");
@@ -2482,6 +2483,106 @@ EPromptoBuilder.prototype.exitPythonSelectorExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitPythonSelfExpression = function(ctx) {
     this.setNodeValue(ctx, new python.PythonSelfExpression());
+};
+
+
+
+EPromptoBuilder.prototype.exitJsxChild = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.jsx));
+};
+
+
+
+EPromptoBuilder.prototype.exitJsxCode = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new jsx.JsxCode(exp));
+};
+
+
+
+EPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+};
+
+
+
+EPromptoBuilder.prototype.exitJsxElement = function(ctx) {
+    var elem = this.getNodeValue(ctx.jsx);
+    var children = this.getNodeValue(ctx.children_);
+    elem.setChildren(children);
+    this.setNodeValue(ctx, elem);
+};
+
+
+EPromptoBuilder.prototype.exitJsxSelfClosing = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.jsx));
+};
+
+
+
+EPromptoBuilder.prototype.exitJsxText = function(ctx) {
+    var text = parser.ParserUtils.getFullText(ctx.text);
+    this.setNodeValue(ctx, new jsx.JsxText(text));
+};
+
+
+
+EPromptoBuilder.prototype.exitJsxValue = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new jsx.JsxExpression(exp));
+};
+
+
+EPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var value = this.getNodeValue(ctx.value);
+    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value));
+};
+
+
+
+EPromptoBuilder.prototype.exitJsx_children = function(ctx) {
+    var list = ctx.jsx_child().map(function(cx) { return this.getNodeValue(cx); }, this);
+    this.setNodeValue(ctx, list);
+};
+
+
+EPromptoBuilder.prototype.exitJsx_element_name = function(ctx) {
+    var name = ctx.getText();
+    this.setNodeValue(ctx, new grammar.Identifier(name));
+};
+
+
+EPromptoBuilder.prototype.exitJsx_expression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.getChild(0)));
+};
+
+
+EPromptoBuilder.prototype.exitJsx_identifier = function(ctx) {
+    var name = ctx.getText();
+    this.setNodeValue(ctx, new grammar.Identifier(name));
+};
+
+
+EPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
+    var text = ctx.getText();
+    this.setNodeValue(ctx, new jsx.JsxLiteral(text));
+};
+
+
+EPromptoBuilder.prototype.exitJsx_opening = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var attributes = ctx.jsx_attribute()
+        .map(function(cx) { return this.getNodeValue(cx); }, this);
+    this.setNodeValue(ctx, new jsx.JsxElement(name, attributes));
+};
+
+
+EPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var attributes = ctx.jsx_attribute()
+        .map(function(cx) { return this.getNodeValue(cx); }, this);
+    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, attributes));
 };
 
 

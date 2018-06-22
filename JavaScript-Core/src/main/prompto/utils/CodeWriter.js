@@ -46,28 +46,35 @@ CodeWriter.prototype.isGlobalContext = function() {
 };
 
 CodeWriter.prototype.append = function(s) {
+    if(typeof(s)!==typeof(""))
+        console.error(s);
     this.indenter.appendTabsIfRequired(s);
     this.indenter.append(s);
-};
-
-CodeWriter.prototype.toString = function() {
-    return this.indenter.value;
+    return this;
 };
 
 CodeWriter.prototype.trimLast = function(count) {
     this.indenter.trimLast(count);
+    return this;
 };
 
 CodeWriter.prototype.indent = function() {
     this.indenter.indent();
+    return this;
 };
 
 CodeWriter.prototype.dedent = function() {
     this.indenter.dedent();
+    return this;
 };
 
 CodeWriter.prototype.newLine = function() {
     this.append('\n');
+    return this;
+};
+
+CodeWriter.prototype.toString = function() {
+    return this.indenter.value;
 };
 
 CodeWriter.prototype.newLocalWriter = function() {

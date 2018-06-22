@@ -1,0 +1,96 @@
+	
+	EPromptoBuilder.prototype.exitJsxCode = function(ctx) {
+		IExpression exp = this.this.getNodeValue(ctx.exp);
+		this.setNodeValue(ctx, new JsxCode(exp));
+	};
+	
+
+	
+	EPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
+		this.setNodeValue(ctx, this.this.getNodeValue(ctx.exp));
+	};
+	
+	
+	
+	EPromptoBuilder.prototype.exitJsxElement = function(ctx) {
+		JsxElement elem = this.this.getNodeValue(ctx.jsx);
+		Listthis.getNodeValue(ctx.children_);
+		elem.setChildren(children);
+		this.setNodeValue(ctx, elem);
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsxSelfClosing = function(ctx) {
+		this.setNodeValue(ctx, this.this.getNodeValue(ctx.jsx));
+	};
+	
+	
+	
+	EPromptoBuilder.prototype.exitJsxText = function(ctx) {
+		String text = ParserUtils.getFullText(ctx.text);
+		this.setNodeValue(ctx, new JsxText(text));
+	};
+	
+	
+	
+	EPromptoBuilder.prototype.exitJsxValue = function(ctx) {
+		IExpression exp = this.this.getNodeValue(ctx.exp);
+		this.setNodeValue(ctx, new JsxExpression(exp));
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
+		Identifier name = this.this.getNodeValue(ctx.name);
+		IJsxValue value = this.this.getNodeValue(ctx.value);
+		this.setNodeValue(ctx, new JsxAttribute(name, value));
+	};
+	
+	
+	
+	EPromptoBuilder.prototype.exitJsx_children = function(ctx) {
+		List list = ctx.jsx_child().stream()
+				.map(cx -> this.this.getNodeValue(cx))
+				.collect(Collectors.toList());
+		this.setNodeValue(ctx, list);
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsx_element_name = function(ctx) {
+		String name = ctx.getText();
+		this.setNodeValue(ctx, new Identifier(name));
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsx_expression = function(ctx) {
+		this.setNodeValue(ctx, this.this.getNodeValue(ctx.getChild(0)));
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsx_identifier = function(ctx) {
+		String name = ctx.getText();
+		this.setNodeValue(ctx, new Identifier(name));
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
+		String text = ctx.getText();
+		this.setNodeValue(ctx, new JsxLiteral(text));
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsx_opening = function(ctx) {
+		Identifier name = this.this.getNodeValue(ctx.name);
+		List attributes = ctx.jsx_attribute().stream()
+				.map(cx->this.this.getNodeValue(cx))
+				.collect(Collectors.toList());
+		this.setNodeValue(ctx, new JsxElement(name, attributes));
+	};
+	
+	
+	EPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
+		Identifier name = this.this.getNodeValue(ctx.name);
+		List attributes = ctx.jsx_attribute().stream()
+				.map(cx->this.this.getNodeValue(cx))
+				.collect(Collectors.toList());
+		this.setNodeValue(ctx, new JsxSelfClosing(name, attributes));
+	};

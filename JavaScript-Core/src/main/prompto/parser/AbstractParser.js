@@ -20,6 +20,10 @@ AbstractParser.prototype.wasNot = function(type) {
 	return this.lastHiddenTokenType()!==type;
 };
 
+AbstractParser.prototype.wasNotWhiteSpace = function() {
+    return this.lastHiddenTokenType()!==this["WS"];
+};
+
 AbstractParser.prototype.willBe = function(type) {
 	return this.getTokenStream().LA(1)===type;
 };

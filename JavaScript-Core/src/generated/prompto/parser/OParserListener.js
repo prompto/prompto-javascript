@@ -740,6 +740,15 @@ OParserListener.prototype.exitIsAnExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#JsxExpression.
+OParserListener.prototype.enterJsxExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxExpression.
+OParserListener.prototype.exitJsxExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#NotExpression.
 OParserListener.prototype.enterNotExpression = function(ctx) {
 };
@@ -2558,6 +2567,15 @@ OParserListener.prototype.exitOperatorModulo = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#keyword.
+OParserListener.prototype.enterKeyword = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#keyword.
+OParserListener.prototype.exitKeyword = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#new_token.
 OParserListener.prototype.enterNew_token = function(ctx) {
 };
@@ -3554,6 +3572,204 @@ OParserListener.prototype.enterCsharp_identifier = function(ctx) {
 
 // Exit a parse tree produced by OParser#csharp_identifier.
 OParserListener.prototype.exitCsharp_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_expression.
+OParserListener.prototype.enterJsx_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_expression.
+OParserListener.prototype.exitJsx_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxSelfClosing.
+OParserListener.prototype.enterJsxSelfClosing = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxSelfClosing.
+OParserListener.prototype.exitJsxSelfClosing = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxElement.
+OParserListener.prototype.enterJsxElement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxElement.
+OParserListener.prototype.exitJsxElement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_fragment.
+OParserListener.prototype.enterJsx_fragment = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_fragment.
+OParserListener.prototype.exitJsx_fragment = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_fragment_start.
+OParserListener.prototype.enterJsx_fragment_start = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_fragment_start.
+OParserListener.prototype.exitJsx_fragment_start = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_fragment_end.
+OParserListener.prototype.enterJsx_fragment_end = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_fragment_end.
+OParserListener.prototype.exitJsx_fragment_end = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_self_closing.
+OParserListener.prototype.enterJsx_self_closing = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_self_closing.
+OParserListener.prototype.exitJsx_self_closing = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_opening.
+OParserListener.prototype.enterJsx_opening = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_opening.
+OParserListener.prototype.exitJsx_opening = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_closing.
+OParserListener.prototype.enterJsx_closing = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_closing.
+OParserListener.prototype.exitJsx_closing = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_element_name.
+OParserListener.prototype.enterJsx_element_name = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_element_name.
+OParserListener.prototype.exitJsx_element_name = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_identifier.
+OParserListener.prototype.enterJsx_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_identifier.
+OParserListener.prototype.exitJsx_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_hyphen_identifier.
+OParserListener.prototype.enterJsx_hyphen_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_hyphen_identifier.
+OParserListener.prototype.exitJsx_hyphen_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#hyphen_identifier.
+OParserListener.prototype.enterHyphen_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#hyphen_identifier.
+OParserListener.prototype.exitHyphen_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#identifier_or_keyword.
+OParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#identifier_or_keyword.
+OParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_attribute.
+OParserListener.prototype.enterJsx_attribute = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_attribute.
+OParserListener.prototype.exitJsx_attribute = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxLiteral.
+OParserListener.prototype.enterJsxLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxLiteral.
+OParserListener.prototype.exitJsxLiteral = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxValue.
+OParserListener.prototype.enterJsxValue = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxValue.
+OParserListener.prototype.exitJsxValue = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_children.
+OParserListener.prototype.enterJsx_children = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_children.
+OParserListener.prototype.exitJsx_children = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxText.
+OParserListener.prototype.enterJsxText = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxText.
+OParserListener.prototype.exitJsxText = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxChild.
+OParserListener.prototype.enterJsxChild = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxChild.
+OParserListener.prototype.exitJsxChild = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#JsxCode.
+OParserListener.prototype.enterJsxCode = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#JsxCode.
+OParserListener.prototype.exitJsxCode = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#jsx_text.
+OParserListener.prototype.enterJsx_text = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_text.
+OParserListener.prototype.exitJsx_text = function(ctx) {
 };
 
 

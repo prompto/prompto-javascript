@@ -15,7 +15,6 @@ exports.tearDown = function(done) {
 	done();
 };
 
-
 exports.testInterpretedAddCharacter = function(test) {
 	checkInterpretedOutput(test, "add/addCharacter.pec");
 };

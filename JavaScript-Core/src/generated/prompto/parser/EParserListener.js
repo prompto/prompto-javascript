@@ -695,6 +695,15 @@ EParserListener.prototype.exitDocumentExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#JsxExpression.
+EParserListener.prototype.enterJsxExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxExpression.
+EParserListener.prototype.exitJsxExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#NotExpression.
 EParserListener.prototype.enterNotExpression = function(ctx) {
 };
@@ -2648,6 +2657,15 @@ EParserListener.prototype.exitOperatorModulo = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#keyword.
+EParserListener.prototype.enterKeyword = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#keyword.
+EParserListener.prototype.exitKeyword = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#new_token.
 EParserListener.prototype.enterNew_token = function(ctx) {
 };
@@ -3626,6 +3644,204 @@ EParserListener.prototype.enterCsharp_identifier = function(ctx) {
 
 // Exit a parse tree produced by EParser#csharp_identifier.
 EParserListener.prototype.exitCsharp_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_expression.
+EParserListener.prototype.enterJsx_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_expression.
+EParserListener.prototype.exitJsx_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxSelfClosing.
+EParserListener.prototype.enterJsxSelfClosing = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxSelfClosing.
+EParserListener.prototype.exitJsxSelfClosing = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxElement.
+EParserListener.prototype.enterJsxElement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxElement.
+EParserListener.prototype.exitJsxElement = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_fragment.
+EParserListener.prototype.enterJsx_fragment = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_fragment.
+EParserListener.prototype.exitJsx_fragment = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_fragment_start.
+EParserListener.prototype.enterJsx_fragment_start = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_fragment_start.
+EParserListener.prototype.exitJsx_fragment_start = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_fragment_end.
+EParserListener.prototype.enterJsx_fragment_end = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_fragment_end.
+EParserListener.prototype.exitJsx_fragment_end = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_self_closing.
+EParserListener.prototype.enterJsx_self_closing = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_self_closing.
+EParserListener.prototype.exitJsx_self_closing = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_opening.
+EParserListener.prototype.enterJsx_opening = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_opening.
+EParserListener.prototype.exitJsx_opening = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_closing.
+EParserListener.prototype.enterJsx_closing = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_closing.
+EParserListener.prototype.exitJsx_closing = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_element_name.
+EParserListener.prototype.enterJsx_element_name = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_element_name.
+EParserListener.prototype.exitJsx_element_name = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_identifier.
+EParserListener.prototype.enterJsx_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_identifier.
+EParserListener.prototype.exitJsx_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_hyphen_identifier.
+EParserListener.prototype.enterJsx_hyphen_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_hyphen_identifier.
+EParserListener.prototype.exitJsx_hyphen_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#hyphen_identifier.
+EParserListener.prototype.enterHyphen_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#hyphen_identifier.
+EParserListener.prototype.exitHyphen_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#identifier_or_keyword.
+EParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#identifier_or_keyword.
+EParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_attribute.
+EParserListener.prototype.enterJsx_attribute = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_attribute.
+EParserListener.prototype.exitJsx_attribute = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxLiteral.
+EParserListener.prototype.enterJsxLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxLiteral.
+EParserListener.prototype.exitJsxLiteral = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxValue.
+EParserListener.prototype.enterJsxValue = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxValue.
+EParserListener.prototype.exitJsxValue = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_children.
+EParserListener.prototype.enterJsx_children = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_children.
+EParserListener.prototype.exitJsx_children = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxText.
+EParserListener.prototype.enterJsxText = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxText.
+EParserListener.prototype.exitJsxText = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxChild.
+EParserListener.prototype.enterJsxChild = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxChild.
+EParserListener.prototype.exitJsxChild = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#JsxCode.
+EParserListener.prototype.enterJsxCode = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#JsxCode.
+EParserListener.prototype.exitJsxCode = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#jsx_text.
+EParserListener.prototype.enterJsx_text = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_text.
+EParserListener.prototype.exitJsx_text = function(ctx) {
 };
 
 
