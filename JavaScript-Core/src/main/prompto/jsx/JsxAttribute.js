@@ -19,4 +19,13 @@ JsxAttribute.prototype.toDialect = function(writer) {
     }
 };
 
+JsxAttribute.prototype.transpile = function(transpiler) {
+    transpiler.append(this.id.name);
+    transpiler.append(": ");
+    if(this.value!=null)
+        this.value.transpile(transpiler);
+    else
+        transpiler.append("true");
+};
+
 exports.JsxAttribute = JsxAttribute;

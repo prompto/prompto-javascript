@@ -202,6 +202,11 @@ function isACharacter(o) {
     return isAText(o) && o.length===1;
 }
 
+function isCharacterUpperCase(char) {
+    return !!/[A-Z]/.exec(char[0]);
+}
+
+
 exports.multiplyArray = multiplyArray;
 exports.equalObjects = equalObjects;
 exports.equalArrays = equalArrays;
@@ -216,3 +221,4 @@ exports.isAnInteger = isAnInteger;
 exports.isADecimal = isADecimal;
 exports.isAText = isAText;
 exports.isACharacter = isACharacter;
+exports.isCharacterUpperCase = isCharacterUpperCase;

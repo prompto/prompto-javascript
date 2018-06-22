@@ -1,3 +1,5 @@
+var TextType = require("../type/TextType").TextType;
+
 function JsxLiteral(text) {
 	this.text = text;
 	return this;
@@ -12,5 +14,8 @@ JsxLiteral.prototype.toDialect = function(writer) {
 	writer.append(this.text);
 };
 
+JsxLiteral.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
 
 exports.JsxLiteral = JsxLiteral;

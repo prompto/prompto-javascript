@@ -21,4 +21,9 @@ JsxExpression.prototype.toDialect = function(writer) {
 	writer.append("}");
 };
 
+
+JsxExpression.prototype.transpile = function(transpiler) {
+    this.expression.transpile(transpiler);
+}
+
 exports.JsxExpression = JsxExpression;

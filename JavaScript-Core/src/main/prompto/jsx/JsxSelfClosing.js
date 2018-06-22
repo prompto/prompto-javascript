@@ -14,4 +14,5 @@ JsxSelfClosing.prototype.toDialect = function(writer) {
     writer.append("/>");
 };
 
+
 exports.JsxSelfClosing = JsxSelfClosing;

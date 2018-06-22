@@ -18,4 +18,8 @@ JsxText.prototype.toDialect = function(writer) {
     writer.append(this.text);
 };
 
+JsxText.prototype.transpile = function(transpiler) {
+    transpiler.append('"').append(this.text).append('"');
+};
+
 exports.JsxText = JsxText;

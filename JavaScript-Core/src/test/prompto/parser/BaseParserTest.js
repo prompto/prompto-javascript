@@ -226,32 +226,42 @@ exports.execute = function(decls, methodName, args) {
 };
 
 function executeTest(context, testName) {
+    prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
     var testMethod = context.getTestDeclaration(testName);
     var js = prompto.runtime.Transpiler.transpileTest(context, testMethod);
-    var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
-    var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
-    fs.writeFileSync(transpiled, js);
-    js = "var transpiled = function() {" + js + " \nreturn " + testMethod.cleanId() + "; }; transpiled();";
-    var fn = eval(js);
+    writeToTempFile(js);
+    var fn = wrapAndExtract(js, testMethod.cleanId(), context);
+    // call test
     fn();
 }
 
 function executeMethod(context, methodName, cmdLineArgs) {
+    prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
     methodName = methodName || "main";
     var method = locateMethod(context, methodName, cmdLineArgs);
     prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
     var js = prompto.runtime.Transpiler.transpileMethod(context, method);
+    writeToTempFile(js);
+    var fn = wrapAndExtract(js, testMethod.cleanId(), context);
+    // call method
+    cmdLineArgs = cmdLineArgs || new prompto.intrinsic.Dictionary();
+    objs.method(cmdLineArgs);
+}
+
+
+function writeToTempFile(js) {
     var idx = __filename.indexOf(path.sep + "JavaScript-Core" + path.sep);
     var transpiled = __filename.substring(0, idx) + path.sep + "JavaScript-Core" + path.sep + "transpiled.js";
     fs.writeFileSync(transpiled, js);
-    var wrapper = createWrapper(js, method.getTranspiledName(context));
+}
+
+function wrapAndExtract(js, methodName, context) {
+    var wrapper = createWrapper(js, methodName);
     // call it to inject/extract data
     var objs = wrapper(context);
     if(objs.store)
         objs.store.instance = prompto.store.DataStore.instance = new prompto.memstore.MemStore();
-    // call method
-    cmdLineArgs = cmdLineArgs || new prompto.intrinsic.Dictionary();
-    objs.method(cmdLineArgs);
+    return objs.method;
 }
 
 function createWrapper(js, methodName) {
@@ -259,6 +269,7 @@ function createWrapper(js, methodName) {
     var lines = [
         "(function(context) {",
         js,
+        "var React = { createElement: function() { return {}; } };",
         "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
         "return { store:  store, method: " + methodName + " };",
         "});"

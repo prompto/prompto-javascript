@@ -21,4 +21,9 @@ JsxCode.prototype.toDialect = function(writer) {
     writer.append("}");
 };
 
+
+JsxCode.prototype.transpile = function(transpiler) {
+    this.expression.transpile(transpiler);
+};
+
 exports.JsxCode = JsxCode;
