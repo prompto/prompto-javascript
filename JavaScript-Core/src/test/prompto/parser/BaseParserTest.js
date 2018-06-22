@@ -242,10 +242,10 @@ function executeMethod(context, methodName, cmdLineArgs) {
     prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
     var js = prompto.runtime.Transpiler.transpileMethod(context, method);
     writeToTempFile(js);
-    var fn = wrapAndExtract(js, testMethod.cleanId(), context);
+    var fn = wrapAndExtract(js, method.getTranspiledName(context), context);
     // call method
     cmdLineArgs = cmdLineArgs || new prompto.intrinsic.Dictionary();
-    objs.method(cmdLineArgs);
+    fn(cmdLineArgs);
 }
 
 
