@@ -39,6 +39,7 @@ TypeFamily.ITERATOR = new TypeFamily("ITERATOR");
 TypeFamily.CLASS = new TypeFamily("CLASS");
 TypeFamily.TYPE = new TypeFamily("TYPE");
 TypeFamily.CODE = new TypeFamily("CODE");
+TypeFamily.JSX = new TypeFamily("JSX");
 // volatile
 TypeFamily.MISSING = new TypeFamily("MISSING");
 

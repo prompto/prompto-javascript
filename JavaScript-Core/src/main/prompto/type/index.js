@@ -21,6 +21,7 @@ exports.MissingType = require('./MissingType').MissingType;
 exports.AnyType = require('./AnyType').AnyType;
 exports.CodeType = require('./CodeType').CodeType;
 exports.UUIDType = require('./UUIDType').UUIDType;
+exports.JsxType = require('./JsxType').JsxType;
 
 require('./BaseType').resolve();
 require('./TextType').resolve();

@@ -351,10 +351,10 @@ class NotMutableError extends Error {
 // to ease implementation
 function patchObject() {
     Object.prototype.declare = function (transpiler) {
-        throw new Error("Declare missing for " + this.__proto__.constructor.name);
+        throw new Error("declare missing for " + this.__proto__.constructor.name);
     };
     Object.prototype.transpile = function (transpiler) {
-        throw new Error("Transpile missing for " + this.__proto__.constructor.name);
+        throw new Error("transpile missing for " + this.__proto__.constructor.name);
     };
 }
 

@@ -1,3 +1,5 @@
+var JsxValue = require("../value/JsxValue").JsxValue;
+
 function IJsxExpression() {
     return this;
 }

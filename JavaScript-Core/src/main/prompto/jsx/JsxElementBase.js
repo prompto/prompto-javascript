@@ -1,4 +1,5 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
+var JsxType = require("../type/JsxType").JsxType;
 
 function JsxElementBase(id, attributes) {
     IJsxExpression.call(this);
@@ -15,7 +16,7 @@ JsxElementBase.prototype.constructor = JsxElementBase;
 JsxElementBase.prototype.check = function(context) {
     if(this.attributes!=null)
         this.attributes.forEach(function(attr) { attr.check(context);});
-    return JsxType.instance();
+    return JsxType.instance;
 };
 
 

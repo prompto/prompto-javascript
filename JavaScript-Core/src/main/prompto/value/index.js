@@ -21,6 +21,7 @@ exports.TypeValue = require('./TypeValue').TypeValue;
 exports.ClosureValue = require('./ClosureValue').ClosureValue;
 exports.IteratorValue = require('./IteratorValue').IteratorValue;
 exports.UUIDValue = require('./UUIDValue').UUIDValue;
+exports.JsxValue = require('./JsxValue').JsxValue;
 
 require('./ConcreteInstance').resolve();
 require('./CharacterRange').resolve();
