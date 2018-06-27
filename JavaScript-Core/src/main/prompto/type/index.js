@@ -22,6 +22,7 @@ exports.AnyType = require('./AnyType').AnyType;
 exports.CodeType = require('./CodeType').CodeType;
 exports.UUIDType = require('./UUIDType').UUIDType;
 exports.JsxType = require('./JsxType').JsxType;
+exports.HtmlType = require('./HtmlType').HtmlType;
 
 require('./BaseType').resolve();
 require('./TextType').resolve();

@@ -65,6 +65,15 @@ MParserListener.prototype.exitIndex_clause = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#concrete_widget_declaration.
+MParserListener.prototype.enterConcrete_widget_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#concrete_widget_declaration.
+MParserListener.prototype.exitConcrete_widget_declaration = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#concrete_category_declaration.
 MParserListener.prototype.enterConcrete_category_declaration = function(ctx) {
 };
@@ -1613,6 +1622,15 @@ MParserListener.prototype.exitUUIDType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#HtmlType.
+MParserListener.prototype.enterHtmlType = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#HtmlType.
+MParserListener.prototype.exitHtmlType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#category_type.
 MParserListener.prototype.enterCategory_type = function(ctx) {
 };
@@ -1664,6 +1682,15 @@ MParserListener.prototype.enterSingletonCategoryDeclaration = function(ctx) {
 
 // Exit a parse tree produced by MParser#SingletonCategoryDeclaration.
 MParserListener.prototype.exitSingletonCategoryDeclaration = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#ConcreteWidgetDeclaration.
+MParserListener.prototype.enterConcreteWidgetDeclaration = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#ConcreteWidgetDeclaration.
+MParserListener.prototype.exitConcreteWidgetDeclaration = function(ctx) {
 };
 
 
@@ -2645,6 +2672,15 @@ MParserListener.prototype.enterModulo = function(ctx) {
 
 // Exit a parse tree produced by MParser#modulo.
 MParserListener.prototype.exitModulo = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#native_widget_declaration.
+MParserListener.prototype.enterNative_widget_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#native_widget_declaration.
+MParserListener.prototype.exitNative_widget_declaration = function(ctx) {
 };
 
 

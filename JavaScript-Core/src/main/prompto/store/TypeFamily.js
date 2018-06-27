@@ -40,6 +40,7 @@ TypeFamily.CLASS = new TypeFamily("CLASS");
 TypeFamily.TYPE = new TypeFamily("TYPE");
 TypeFamily.CODE = new TypeFamily("CODE");
 TypeFamily.JSX = new TypeFamily("JSX");
+TypeFamily.HTML = new TypeFamily("HTML");
 // volatile
 TypeFamily.MISSING = new TypeFamily("MISSING");
 

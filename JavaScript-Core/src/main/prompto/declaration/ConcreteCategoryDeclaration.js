@@ -397,10 +397,16 @@ ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
             decl.declare(transpiler);
         });
     } else
-        transpiler.require($Root);
+        this.declareRoot(transpiler);
     if(this.storable)
         transpiler.require(DataStore);
 };
+
+
+ConcreteCategoryDeclaration.prototype.declareRoot = function(transpiler) {
+    transpiler.require($Root);
+};
+
 
 ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context, list, set) {
     if(set.has(this))
@@ -482,8 +488,14 @@ ConcreteCategoryDeclaration.prototype.transpileSuperConstructor = function(trans
             transpiler.append(derived).append(".call(this, copyFrom, values, mutable);").newLine();
         });
     } else
-        transpiler.append("$Root.call(this);").newLine();
+        this.transpileRootConstructor(transpiler).newLine();
 };
+
+
+ConcreteCategoryDeclaration.prototype.transpileRootConstructor = function(transpiler) {
+    return transpiler.append("$Root.call(this);").newLine();
+};
+
 
 ConcreteCategoryDeclaration.prototype.transpileGetterSetterAttributes = function(transpiler) {
     var allAttributes = this.getAllAttributes(transpiler.context);

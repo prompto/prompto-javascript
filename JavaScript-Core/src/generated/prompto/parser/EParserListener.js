@@ -56,6 +56,15 @@ EParserListener.prototype.exitAttribute_declaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#concrete_widget_declaration.
+EParserListener.prototype.enterConcrete_widget_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#concrete_widget_declaration.
+EParserListener.prototype.exitConcrete_widget_declaration = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#concrete_category_declaration.
 EParserListener.prototype.enterConcrete_category_declaration = function(ctx) {
 };
@@ -1721,6 +1730,15 @@ EParserListener.prototype.exitUUIDType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#HtmlType.
+EParserListener.prototype.enterHtmlType = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#HtmlType.
+EParserListener.prototype.exitHtmlType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#category_type.
 EParserListener.prototype.enterCategory_type = function(ctx) {
 };
@@ -1772,6 +1790,15 @@ EParserListener.prototype.enterSingletonCategoryDeclaration = function(ctx) {
 
 // Exit a parse tree produced by EParser#SingletonCategoryDeclaration.
 EParserListener.prototype.exitSingletonCategoryDeclaration = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#ConcreteWidgetDeclaration.
+EParserListener.prototype.enterConcreteWidgetDeclaration = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ConcreteWidgetDeclaration.
+EParserListener.prototype.exitConcreteWidgetDeclaration = function(ctx) {
 };
 
 
@@ -2753,6 +2780,15 @@ EParserListener.prototype.enterModulo = function(ctx) {
 
 // Exit a parse tree produced by EParser#modulo.
 EParserListener.prototype.exitModulo = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#native_widget_declaration.
+EParserListener.prototype.enterNative_widget_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#native_widget_declaration.
+EParserListener.prototype.exitNative_widget_declaration = function(ctx) {
 };
 
 

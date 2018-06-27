@@ -1,6 +1,7 @@
 exports.AttributeDeclaration = require('./AttributeDeclaration').AttributeDeclaration;
 exports.CategoryDeclaration = require('./CategoryDeclaration').CategoryDeclaration;
 exports.ConcreteCategoryDeclaration = require('./ConcreteCategoryDeclaration').ConcreteCategoryDeclaration;
+exports.ConcreteWidgetDeclaration = require('./ConcreteWidgetDeclaration').ConcreteWidgetDeclaration;
 exports.DeclarationList = require('./DeclarationList').DeclarationList;
 exports.AbstractMethodDeclaration = require('./AbstractMethodDeclaration').AbstractMethodDeclaration;
 exports.ConcreteMethodDeclaration = require('./ConcreteMethodDeclaration').ConcreteMethodDeclaration;

@@ -268,8 +268,8 @@ function createWrapper(js, methodName) {
     // wrap into a function to inject/extract data
     var lines = [
         "(function(context) {",
+        "var React = { createElement: function() { return {}; }, Component: function() { return this; } };",
         js,
-        "var React = { createElement: function() { return {}; } };",
         "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
         "return { store:  store, method: " + methodName + " };",
         "});"

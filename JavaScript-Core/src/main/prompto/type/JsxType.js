@@ -1,8 +1,8 @@
 var NativeType = require("./NativeType").NativeType;
-var TypeFamily = require("../store/TypeFamily").TypeFamily;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function JsxType () {
-    NativeType.call(this, TypeFamily.JSX);
+    NativeType.call(this, new Identifier("Jsx"));
     return this;
 }
 

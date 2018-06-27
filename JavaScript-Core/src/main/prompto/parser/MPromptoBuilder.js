@@ -370,6 +370,12 @@ MPromptoBuilder.prototype.exitTextType = function(ctx) {
 	this.setNodeValue(ctx, type.TextType.instance);
 };
 
+
+MPromptoBuilder.prototype.exitHtmlType = function(ctx) {
+    this.setNodeValue(ctx, type.HtmlType.instance);
+};
+
+
 MPromptoBuilder.prototype.exitThisExpression = function(ctx) {
     this.setNodeValue(ctx, new expression.ThisExpression());
 };
@@ -492,10 +498,27 @@ MPromptoBuilder.prototype.exitConcrete_category_declaration = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitConcrete_widget_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var derived = this.getNodeValue(ctx.derived);
+    var methods = this.getNodeValue(ctx.methods);
+    var decl = new declaration.ConcreteWidgetDeclaration(name, derived, methods);
+    this.setNodeValue(ctx, decl);
+};
+
+
+
 MPromptoBuilder.prototype.exitConcreteCategoryDeclaration = function(ctx) {
 	var decl = this.getNodeValue(ctx.decl);
 	this.setNodeValue(ctx, decl);
 };
+
+
+MPromptoBuilder.prototype.exitConcreteWidgetDeclaration = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
+
 
 MPromptoBuilder.prototype.exitDerived_list = function(ctx) {
     var items = this.getNodeValue(ctx.items);
@@ -1189,6 +1212,8 @@ MPromptoBuilder.prototype.exitDeclaration = function(ctx) {
         ctx_ = ctx.method_declaration();
     if(ctx_==null)
         ctx_ = ctx.resource_declaration();
+    if(ctx_==null)
+        ctx_ = ctx.widget_declaration();
     decl = this.getNodeValue(ctx_);
     if(decl!=null) {
         decl.comments = stmts;

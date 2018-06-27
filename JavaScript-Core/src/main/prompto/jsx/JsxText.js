@@ -19,7 +19,7 @@ JsxText.prototype.toDialect = function(writer) {
 };
 
 JsxText.prototype.transpile = function(transpiler) {
-    transpiler.append('"').append(this.text).append('"');
+    transpiler.append(JSON.stringify(this.text));
 };
 
 exports.JsxText = JsxText;
