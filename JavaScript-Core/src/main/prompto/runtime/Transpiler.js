@@ -211,8 +211,8 @@ ObjectUtils.values = function(o) {
 
 
 ObjectUtils.objectToString = function() {
-    // use original toString on native objects
-    if(EventTarget && this instanceof EventTarget)
+    // use original toString on native browser objects
+    if(typeof(EventTarget)!=='undefined' && this instanceof EventTarget)
         return ObjectToString.call(this);
     var names = Object.getOwnPropertyNames(this).filter(function(name) { return typeof(this[name]) !== 'function'; }, this);
     var vals = names.map(function (name) {
