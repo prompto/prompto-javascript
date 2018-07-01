@@ -211,6 +211,9 @@ ObjectUtils.values = function(o) {
 
 
 ObjectUtils.objectToString = function() {
+    // use original toString on native objects
+    if(EventTarget && this instanceof EventTarget)
+        return ObjectToString.call(this);
     var names = Object.getOwnPropertyNames(this).filter(function(name) { return typeof(this[name]) !== 'function'; }, this);
     var vals = names.map(function (name) {
         return name + ':' + this[name];
@@ -376,6 +379,7 @@ function newTranspiler(context) {
     transpiler.lines.push("ReferenceError.prototype.getText = function() { return 'Null reference!'; };");
     transpiler.lines.push("RangeError.prototype.getText = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
+    transpiler.lines.push("var ObjectToString = Object.prototype.toString;");
     transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
