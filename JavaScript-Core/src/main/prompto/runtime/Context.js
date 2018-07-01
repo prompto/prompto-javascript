@@ -1,6 +1,7 @@
 var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
 var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+var ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
 var BaseMethodDeclaration = require("../declaration/BaseMethodDeclaration").BaseMethodDeclaration;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
@@ -149,7 +150,7 @@ Context.prototype.getCatalog = function() {
 };
 
 Context.prototype.getLocalCatalog = function() {
-    var catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : []};
+    var catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
     for(var name in this.declarations) {
         var decl = this.declarations[name];
         if(decl instanceof AttributeDeclaration)
@@ -159,7 +160,9 @@ Context.prototype.getLocalCatalog = function() {
             info.name = decl.name;
             info.symbols = decl.symbols.map(function(s){return s.name;});
             catalog.enumerations.push(info);
-        } else if(decl instanceof CategoryDeclaration)
+        } else if(decl instanceof ConcreteWidgetDeclaration)
+            catalog.widgets.push(name);
+        else if(decl instanceof CategoryDeclaration)
             catalog.categories.push(name);
         else if(decl instanceof MethodDeclarationMap) {
             var method = {};
@@ -179,6 +182,8 @@ Context.prototype.getLocalCatalog = function() {
         delete catalog.attributes;
     if(catalog.categories.length  <= 0)
         delete catalog.categories;
+    if(catalog.widgets.length  <= 0)
+        delete catalog.widgets;
     if(catalog.enumerations.length  <= 0)
         delete catalog.enumerations;
     if(catalog.methods.length  <= 0)
@@ -304,6 +309,7 @@ Context.prototype.getRegisteredTest = function(name) {
         return null;
     }
 };
+
 
 Context.prototype.hasTests = function() {
     for(var test in this.tests)
