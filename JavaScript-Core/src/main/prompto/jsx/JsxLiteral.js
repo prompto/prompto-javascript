@@ -14,6 +14,11 @@ JsxLiteral.prototype.toDialect = function(writer) {
 	writer.append(this.text);
 };
 
+JsxLiteral.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
 JsxLiteral.prototype.transpile = function(transpiler) {
     transpiler.append(this.text);
 };

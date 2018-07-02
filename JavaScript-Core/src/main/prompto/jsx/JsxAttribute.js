@@ -19,6 +19,11 @@ JsxAttribute.prototype.toDialect = function(writer) {
     }
 };
 
+JsxAttribute.prototype.declare = function(transpiler) {
+    if(this.value!=null)
+        this.value.declare(transpiler);
+};
+
 JsxAttribute.prototype.transpile = function(transpiler) {
     transpiler.append(this.id.name);
     transpiler.append(": ");

@@ -126,6 +126,10 @@ Context.prototype.newChildContext = function() {
 	return context;
 };
 
+Context.prototype.newMemberContext = function(type) {
+    return this.newInstanceContext(null, type, false);
+};
+
 
 Context.prototype.clone = function() {
     var context = new Context();

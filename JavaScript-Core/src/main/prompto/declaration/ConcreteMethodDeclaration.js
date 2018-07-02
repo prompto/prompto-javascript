@@ -146,13 +146,20 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
 };
 
 ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
-    if(!this.memberOf) {
-        transpiler = transpiler.newLocalTranspiler();
-        transpiler.declare(this);
-        this.declareArguments(transpiler);
+    if(this.declaring)
+        return;
+    this.declaring = true;
+    try {
+        if (!this.memberOf) {
+            transpiler = transpiler.newLocalTranspiler();
+            transpiler.declare(this);
+            this.declareArguments(transpiler);
+        }
+        this.registerArguments(transpiler.context);
+        this.statements.declare(transpiler);
+    } finally {
+        this.declaring = false;
     }
-    this.registerArguments(transpiler.context);
-    this.statements.declare(transpiler);
 };
 
 

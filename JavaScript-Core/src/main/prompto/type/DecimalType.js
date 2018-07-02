@@ -183,6 +183,15 @@ DecimalType.prototype.checkModulo = function(context, other) {
 };
 
 
+DecimalType.prototype.declareModulo = function(transpiler, other, left, right) {
+    if(other === IntegerType.instance || other === DecimalType.instance) {
+        return;
+    } else {
+        return NativeType.prototype.declareModulo.call(this, transpiler, other, left, right);
+    }
+};
+
+
 DecimalType.prototype.transpileModulo = function(transpiler, other, left, right) {
     if(other === IntegerType.instance || other === DecimalType.instance) {
         left.transpile(transpiler);

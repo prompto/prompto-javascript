@@ -38,11 +38,9 @@ SetterMethodDeclaration.prototype.toMDialect = function(writer) {
 };
 
 SetterMethodDeclaration.prototype.transpile = function(transpiler) {
-    transpiler = transpiler.newSetterTranspiler(this.name);
     var arg = new AttributeArgument(this.id);
     arg.register(transpiler.context);
     this.statements.transpile(transpiler);
-    transpiler.flush();
 };
 
 exports.SetterMethodDeclaration = SetterMethodDeclaration;

@@ -36,9 +36,9 @@ SingletonCategoryDeclaration.prototype.transpile = function(transpiler) {
             transpiler.append(this.name).append(".instance.").append(attr.name).append(" = null;").newLine();
         }, this);
     }
-    transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+    var type = new CategoryType(this.id);
     this.methods.forEach(function(method) {
-        var m = transpiler.newMemberTranspiler();
+        var m = transpiler.newMemberTranspiler(type);
         method.transpile(m);
         m.flush();
     }, this);

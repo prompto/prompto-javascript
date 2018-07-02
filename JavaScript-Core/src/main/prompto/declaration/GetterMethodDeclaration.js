@@ -37,9 +37,7 @@ GetterMethodDeclaration.prototype.toMDialect = function(writer) {
 };
 
 GetterMethodDeclaration.prototype.transpile = function(transpiler) {
-    transpiler = transpiler.newGetterTranspiler(this.name);
     this.statements.transpile(transpiler);
-    transpiler.flush();
 };
 
 exports.GetterMethodDeclaration = GetterMethodDeclaration;

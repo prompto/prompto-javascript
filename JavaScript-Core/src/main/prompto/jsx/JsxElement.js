@@ -24,6 +24,14 @@ JsxElement.prototype.toDialect = function(writer) {
 };
 
 
+JsxElement.prototype.declareChildren = function(transpiler) {
+    if (this.children != null)
+        this.children.forEach(function (child) {
+            child.declare(transpiler);
+        }, this);
+};
+
+
 JsxElement.prototype.transpileChildren = function(transpiler) {
     if (this.children != null)
         this.children.forEach(function (child) {

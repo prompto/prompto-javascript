@@ -22,6 +22,11 @@ JsxCode.prototype.toDialect = function(writer) {
 };
 
 
+JsxCode.prototype.declare = function(transpiler) {
+    this.expression.declare(transpiler);
+};
+
+
 JsxCode.prototype.transpile = function(transpiler) {
     this.expression.transpile(transpiler);
 };

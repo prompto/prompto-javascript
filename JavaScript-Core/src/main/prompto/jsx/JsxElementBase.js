@@ -21,10 +21,24 @@ JsxElementBase.prototype.check = function(context) {
 };
 
 JsxElementBase.prototype.declare = function(transpiler) {
-    // transpiler.declare(new ReactImporter());
-    if (isCharacterUpperCase(this.id.name[0]))
-        transpiler.require(this.id.name);
+    if (isCharacterUpperCase(this.id.name[0])) {
+        var decl = transpiler.context.getRegisteredDeclaration(this.id.name);
+        decl.declare(transpiler);
+    }
+    if(this.attributes!=null) {
+        this.attributes.forEach(function (attr) {
+            attr.declare(transpiler);
+        });
+    }
+    this.declareChildren(transpiler);
 };
+
+
+
+JsxElementBase.prototype.declareChildren = function(transpiler) {
+    // nothing to do
+};
+
 
 JsxElementBase.prototype.transpile = function(transpiler) {
     transpiler.append("React.createElement(");

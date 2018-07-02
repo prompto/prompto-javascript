@@ -46,21 +46,20 @@ Transpiler.prototype.newResourceTranspiler = function() {
 
 
 
-Transpiler.prototype.newMemberTranspiler = function() {
-    var context = this.context.newLocalContext();
-    context.parent = this.context;
+Transpiler.prototype.newMemberTranspiler = function(type) {
+    var context = this.context.newMemberContext(type).newChildContext();
     return this.copyTranspiler(context);
 };
 
-Transpiler.prototype.newGetterTranspiler = function(name) {
-    var transpiler = this.newMemberTranspiler();
+Transpiler.prototype.newGetterTranspiler = function(type, name) {
+    var transpiler = this.newMemberTranspiler(type);
     transpiler.getterName = name;
     return transpiler;
 };
 
 
-Transpiler.prototype.newSetterTranspiler = function(name) {
-    var transpiler = this.newMemberTranspiler();
+Transpiler.prototype.newSetterTranspiler = function(type, name) {
+    var transpiler = this.newMemberTranspiler(type);
     transpiler.setterName = name;
     return transpiler;
 };

@@ -232,7 +232,7 @@ ConcreteCategoryDeclaration.prototype.findGetter = function(context, attrName) {
 	if(this.methodsMap==null) {
 		return null;
 	}
-	var method = this.methodsMap["getter:"+attrName] || null;
+	var method = this.methodsMap["getter:" + attrName] || null;
 	if(method instanceof GetterMethodDeclaration) {
 		return method;
 	}
@@ -266,7 +266,7 @@ ConcreteCategoryDeclaration.prototype.findSetter = function(context, attrName) {
 	if(this.methodsMap==null) {
 		return null;
 	}
-	var method = this.methodsMap["setter:"+attrName] || null;
+	var method = this.methodsMap["setter:" + attrName] || null;
 	if(method instanceof SetterMethodDeclaration) {
 		return method;
 	}
@@ -400,8 +400,19 @@ ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
         this.declareRoot(transpiler);
     if(this.storable)
         transpiler.require(DataStore);
+    this.declareMethods(transpiler);
 };
 
+
+ConcreteCategoryDeclaration.prototype.declareMethods = function(transpiler) {
+    this.methods.filter(function (decl) {
+        return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
+    }).forEach(function (method) {
+        var t = transpiler.newMemberTranspiler(this.getType(transpiler.context));
+        method.declare(t);
+        t.flush();
+    }, this);
+};
 
 ConcreteCategoryDeclaration.prototype.declareRoot = function(transpiler) {
     transpiler.require($Root);
@@ -511,7 +522,7 @@ ConcreteCategoryDeclaration.prototype.transpileMethods = function(transpiler) {
     this.methods.filter(function (decl) {
         return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
     }).forEach(function (method) {
-        var t = transpiler.newMemberTranspiler();
+        var t = transpiler.newMemberTranspiler(this.getType(transpiler.context));
         method.transpile(t);
         t.flush();
     }, this);
@@ -530,17 +541,21 @@ ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpile
     var setter = this.findSetter(transpiler.context, name);
     transpiler.append("Object.defineProperty(").append(this.name).append(".prototype, '").append(name).append("', {").indent();
     transpiler.append("get: function() {").indent();
-    if(getter)
-        getter.transpile(transpiler);
-    else
+    if(getter) {
+        var t = transpiler.newGetterTranspiler(this.getType(transpiler.context), name);
+        getter.transpile(t);
+        t.flush();
+    } else
         transpiler.append("return this.$").append(name).append(";").newLine();
     transpiler.dedent().append("}");
     transpiler.append(",").newLine();
     transpiler.append("set: function(").append(name).append(") {").indent();
     if(setter) {
-        transpiler.append(name).append(" = (function(").append(name).append(") {").indent();
-        setter.transpile(transpiler);
-        transpiler.append(";").dedent().append("})(name);").newLine();
+        var t = transpiler.newSetterTranspiler(this.getType(transpiler.context), name);
+        t.append(name).append(" = (function(").append(name).append(") {").indent();
+        setter.transpile(t);
+        t.append(";").dedent().append("})(name);").newLine();
+        t.flush();
     }
     transpiler.append("this.$").append(name).append(" = ").append(name).append(";").newLine();
     transpiler.dedent().append("}");
