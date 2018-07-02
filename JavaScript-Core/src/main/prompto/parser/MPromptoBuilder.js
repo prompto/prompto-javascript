@@ -12,6 +12,7 @@ var utils = require("../utils/index");
 var parser = require("../parser/index");
 var type = require("../type/index");
 var jsx = require("../jsx/index");
+var css = require("../css/index");
 var java = require("../java/index");
 var csharp = require("../csharp/index");
 var python = require("../python/index");
@@ -2578,6 +2579,41 @@ MPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
     var attributes = ctx.jsx_attribute()
         .map(cx => this.getNodeValue(cx), this);
     this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, attributes));
+};
+
+
+MPromptoBuilder.prototype.exitCssExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+}
+
+
+MPromptoBuilder.prototype.exitCss_expression = function(ctx) {
+    var exp = new css.CssExpression();
+    ctx.css_field().forEach(function(cx) {
+        var field = this.getNodeValue(cx);
+        exp.addField(field);
+    }, this);
+    this.setNodeValue(ctx, exp);
+};
+
+
+MPromptoBuilder.prototype.exitCss_field = function(ctx) {
+    var name = ctx.name.getText();
+    var value = this.getNodeValue(ctx.value);
+    this.setNodeValue(ctx, new css.CssField(name, value));
+};
+
+
+
+MPromptoBuilder.prototype.exitCssText = function(ctx) {
+    var text = ctx.text.getText();
+    this.setNodeValue(ctx, new css.CssText(text));
+};
+
+
+MPromptoBuilder.prototype.exitCssValue = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new css.CssCode(exp));
 };
 
 

@@ -686,6 +686,15 @@ OParserListener.prototype.exitCallableItemSelector = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#x_expression.
+OParserListener.prototype.enterX_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#x_expression.
+OParserListener.prototype.exitX_expression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#IntDivideExpression.
 OParserListener.prototype.enterIntDivideExpression = function(ctx) {
 };
@@ -998,6 +1007,15 @@ OParserListener.prototype.enterInstanceExpression = function(ctx) {
 
 // Exit a parse tree produced by OParser#InstanceExpression.
 OParserListener.prototype.exitInstanceExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#CssExpression.
+OParserListener.prototype.enterCssExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CssExpression.
+OParserListener.prototype.exitCssExpression = function(ctx) {
 };
 
 
@@ -1727,6 +1745,33 @@ OParserListener.prototype.enterMethod_identifier = function(ctx) {
 
 // Exit a parse tree produced by OParser#method_identifier.
 OParserListener.prototype.exitMethod_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#identifier_or_keyword.
+OParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#identifier_or_keyword.
+OParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#nospace_hyphen_identifier_or_keyword.
+OParserListener.prototype.enterNospace_hyphen_identifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#nospace_hyphen_identifier_or_keyword.
+OParserListener.prototype.exitNospace_hyphen_identifier_or_keyword = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#nospace_identifier_or_keyword.
+OParserListener.prototype.enterNospace_identifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#nospace_identifier_or_keyword.
+OParserListener.prototype.exitNospace_identifier_or_keyword = function(ctx) {
 };
 
 
@@ -3710,33 +3755,6 @@ OParserListener.prototype.exitJsx_identifier = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#jsx_hyphen_identifier.
-OParserListener.prototype.enterJsx_hyphen_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#jsx_hyphen_identifier.
-OParserListener.prototype.exitJsx_hyphen_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#hyphen_identifier.
-OParserListener.prototype.enterHyphen_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#hyphen_identifier.
-OParserListener.prototype.exitHyphen_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#identifier_or_keyword.
-OParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#identifier_or_keyword.
-OParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
-};
-
-
 // Enter a parse tree produced by OParser#jsx_attribute.
 OParserListener.prototype.enterJsx_attribute = function(ctx) {
 };
@@ -3806,6 +3824,60 @@ OParserListener.prototype.enterJsx_text = function(ctx) {
 
 // Exit a parse tree produced by OParser#jsx_text.
 OParserListener.prototype.exitJsx_text = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#css_expression.
+OParserListener.prototype.enterCss_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#css_expression.
+OParserListener.prototype.exitCss_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#css_field.
+OParserListener.prototype.enterCss_field = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#css_field.
+OParserListener.prototype.exitCss_field = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#css_identifier.
+OParserListener.prototype.enterCss_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#css_identifier.
+OParserListener.prototype.exitCss_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#CssValue.
+OParserListener.prototype.enterCssValue = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CssValue.
+OParserListener.prototype.exitCssValue = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#CssText.
+OParserListener.prototype.enterCssText = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CssText.
+OParserListener.prototype.exitCssText = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#css_text.
+OParserListener.prototype.enterCss_text = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#css_text.
+OParserListener.prototype.exitCss_text = function(ctx) {
 };
 
 

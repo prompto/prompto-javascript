@@ -12,6 +12,7 @@ var utils = require("../utils/index");
 var parser = require("../parser/index");
 var type = require("../type/index");
 var jsx = require("../jsx/index");
+var css = require("../css/index");
 var java = require("../java/index");
 var csharp = require("../csharp/index");
 var python = require("../python/index");
@@ -2613,6 +2614,43 @@ OPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
 };
 
 
+	
+OPromptoBuilder.prototype.exitCssExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+}
+	
+	
+OPromptoBuilder.prototype.exitCss_expression = function(ctx) {
+    var exp = new css.CssExpression();
+    ctx.css_field().forEach(function(cx) {
+        var field = this.getNodeValue(cx);
+        exp.addField(field);
+    }, this);
+    this.setNodeValue(ctx, exp);
+};
+	
+	
+OPromptoBuilder.prototype.exitCss_field = function(ctx) {
+    var name = ctx.name.getText();
+    var value = this.getNodeValue(ctx.value);
+    this.setNodeValue(ctx, new css.CssField(name, value));
+};
+	
+	
+	
+OPromptoBuilder.prototype.exitCssText = function(ctx) {
+    var text = ctx.text.getText();
+    this.setNodeValue(ctx, new css.CssText(text));
+};
+	
+	
+OPromptoBuilder.prototype.exitCssValue = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new css.CssCode(exp));
+};
+
+
+
 OPromptoBuilder.prototype.buildSection = function(node, section) {
 	var first = this.findFirstValidToken(node.start.tokenIndex);
 	var last = this.findLastValidToken(node.stop.tokenIndex);
@@ -2654,5 +2692,6 @@ OPromptoBuilder.prototype.readValidToken = function(idx) {
 		return null;
 	}
 };
+
 
 exports.OPromptoBuilder = OPromptoBuilder;

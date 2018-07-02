@@ -956,6 +956,15 @@ MParserListener.prototype.exitInstanceExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#CssExpression.
+MParserListener.prototype.enterCssExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#CssExpression.
+MParserListener.prototype.exitCssExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#CastExpression.
 MParserListener.prototype.enterCastExpression = function(ctx) {
 };
@@ -1709,6 +1718,33 @@ MParserListener.prototype.enterMethod_identifier = function(ctx) {
 
 // Exit a parse tree produced by MParser#method_identifier.
 MParserListener.prototype.exitMethod_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#identifier_or_keyword.
+MParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#identifier_or_keyword.
+MParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#nospace_hyphen_identifier_or_keyword.
+MParserListener.prototype.enterNospace_hyphen_identifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#nospace_hyphen_identifier_or_keyword.
+MParserListener.prototype.exitNospace_hyphen_identifier_or_keyword = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#nospace_identifier_or_keyword.
+MParserListener.prototype.enterNospace_identifier_or_keyword = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#nospace_identifier_or_keyword.
+MParserListener.prototype.exitNospace_identifier_or_keyword = function(ctx) {
 };
 
 
@@ -3674,33 +3710,6 @@ MParserListener.prototype.exitJsx_identifier = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MParser#jsx_hyphen_identifier.
-MParserListener.prototype.enterJsx_hyphen_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_hyphen_identifier.
-MParserListener.prototype.exitJsx_hyphen_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#hyphen_identifier.
-MParserListener.prototype.enterHyphen_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#hyphen_identifier.
-MParserListener.prototype.exitHyphen_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#identifier_or_keyword.
-MParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#identifier_or_keyword.
-MParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
-};
-
-
 // Enter a parse tree produced by MParser#jsx_attribute.
 MParserListener.prototype.enterJsx_attribute = function(ctx) {
 };
@@ -3770,6 +3779,60 @@ MParserListener.prototype.enterJsx_text = function(ctx) {
 
 // Exit a parse tree produced by MParser#jsx_text.
 MParserListener.prototype.exitJsx_text = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#css_expression.
+MParserListener.prototype.enterCss_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#css_expression.
+MParserListener.prototype.exitCss_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#css_field.
+MParserListener.prototype.enterCss_field = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#css_field.
+MParserListener.prototype.exitCss_field = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#css_identifier.
+MParserListener.prototype.enterCss_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#css_identifier.
+MParserListener.prototype.exitCss_identifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#CssValue.
+MParserListener.prototype.enterCssValue = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#CssValue.
+MParserListener.prototype.exitCssValue = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#CssText.
+MParserListener.prototype.enterCssText = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#CssText.
+MParserListener.prototype.exitCssText = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#css_text.
+MParserListener.prototype.enterCss_text = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#css_text.
+MParserListener.prototype.exitCss_text = function(ctx) {
 };
 
 
