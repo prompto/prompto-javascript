@@ -18,6 +18,10 @@ exports.testCategory = function(test) {
 	compareResourceEME(test, "native/category.pec");
 };
 
+exports.testCategoryReturn = function(test) {
+	compareResourceEME(test, "native/categoryReturn.pec");
+};
+
 exports.testMethod = function(test) {
 	compareResourceEME(test, "native/method.pec");
 };

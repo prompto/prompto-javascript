@@ -18,6 +18,10 @@ exports.testCategory = function(test) {
 	compareResourceEOE(test, "native/category.pec");
 };
 
+exports.testCategoryReturn = function(test) {
+	compareResourceEOE(test, "native/categoryReturn.pec");
+};
+
 exports.testMethod = function(test) {
 	compareResourceEOE(test, "native/method.pec");
 };

@@ -521,6 +521,12 @@ MPromptoBuilder.prototype.exitConcreteWidgetDeclaration = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitNativeWidgetDeclaration = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
+
+
 MPromptoBuilder.prototype.exitDerived_list = function(ctx) {
     var items = this.getNodeValue(ctx.items);
     this.setNodeValue(ctx, items);
@@ -1328,6 +1334,15 @@ MPromptoBuilder.prototype.exitNative_category_declaration = function(ctx) {
     var methods = this.getNodeValue(ctx.methods);
     var decl = new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods);
     decl.storable = ctx.STORABLE()!=null;
+    this.setNodeValue(ctx, decl);
+};
+
+
+MPromptoBuilder.prototype.exitNative_widget_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var bindings = this.getNodeValue(ctx.bindings);
+    var methods = this.getNodeValue(ctx.methods);
+    var decl = new declaration.NativeWidgetDeclaration(name, bindings, methods);
     this.setNodeValue(ctx, decl);
 };
 

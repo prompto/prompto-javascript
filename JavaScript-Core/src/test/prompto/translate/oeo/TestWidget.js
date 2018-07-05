@@ -6,3 +6,7 @@ exports.testMinimal = function(test) {
 	compareResourceOEO(test, "widget/minimal.poc");
 };
 
+exports.testNative = function(test) {
+	compareResourceOEO(test, "widget/native.poc");
+};
+

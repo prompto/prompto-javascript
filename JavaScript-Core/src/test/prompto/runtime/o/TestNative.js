@@ -23,6 +23,14 @@ exports.testTranspiledCategory = function(test) {
 	checkTranspiledOutput(test, "native/category.poc");
 };
 
+exports.testInterpretedCategoryReturn = function(test) {
+	checkInterpretedOutput(test, "native/categoryReturn.poc");
+};
+
+exports.testTranspiledCategoryReturn = function(test) {
+	checkTranspiledOutput(test, "native/categoryReturn.poc");
+};
+
 exports.testInterpretedMethod = function(test) {
 	checkInterpretedOutput(test, "native/method.poc");
 };

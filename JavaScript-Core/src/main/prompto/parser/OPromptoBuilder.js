@@ -522,6 +522,12 @@ OPromptoBuilder.prototype.exitConcreteWidgetDeclaration = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitNativeWidgetDeclaration = function(ctx) {
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
+};
+
+
 OPromptoBuilder.prototype.exitDerivedList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
 	this.setNodeValue(ctx, new grammar.IdentifierList(item));
@@ -1367,6 +1373,16 @@ OPromptoBuilder.prototype.exitNative_category_declaration = function(ctx) {
     decl.storable = ctx.STORABLE()!=null;
     this.setNodeValue(ctx, decl);
 };
+
+
+OPromptoBuilder.prototype.exitNative_widget_declaration = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var bindings = this.getNodeValue(ctx.bindings);
+    var methods = this.getNodeValue(ctx.methods);
+    var decl = new declaration.NativeWidgetDeclaration(name, bindings, methods);
+    this.setNodeValue(ctx, decl);
+};
+
 
 
 OPromptoBuilder.prototype.exitNativeCategoryDeclaration = function(ctx) {

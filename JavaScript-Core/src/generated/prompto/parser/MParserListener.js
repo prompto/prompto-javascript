@@ -74,6 +74,15 @@ MParserListener.prototype.exitConcrete_widget_declaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#native_widget_declaration.
+MParserListener.prototype.enterNative_widget_declaration = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#native_widget_declaration.
+MParserListener.prototype.exitNative_widget_declaration = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#concrete_category_declaration.
 MParserListener.prototype.enterConcrete_category_declaration = function(ctx) {
 };
@@ -1703,6 +1712,15 @@ MParserListener.prototype.exitConcreteWidgetDeclaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#NativeWidgetDeclaration.
+MParserListener.prototype.enterNativeWidgetDeclaration = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#NativeWidgetDeclaration.
+MParserListener.prototype.exitNativeWidgetDeclaration = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#type_identifier_list.
 MParserListener.prototype.enterType_identifier_list = function(ctx) {
 };
@@ -2708,15 +2726,6 @@ MParserListener.prototype.enterModulo = function(ctx) {
 
 // Exit a parse tree produced by MParser#modulo.
 MParserListener.prototype.exitModulo = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_widget_declaration.
-MParserListener.prototype.enterNative_widget_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_widget_declaration.
-MParserListener.prototype.exitNative_widget_declaration = function(ctx) {
 };
 
 

@@ -40,6 +40,11 @@ MyClass.prototype.printDisplay = function() {
 	process.stdout.write(this.display);
 };
 
+
+MyClass.prototype.getDisplay = function() {
+    return this.display;
+};
+
 MyClass.boolValue = function() {
 	return true;
 };

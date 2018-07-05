@@ -6,6 +6,10 @@ var antlr4 = require("antlr4");
 var Out = require("../runtime/utils/Out").Out;
 
 var locateMethod = require('../runtime/Interpreter').locateMethod;
+var JsxValue = require("../value/JsxValue").JsxValue;
+
+// mock ReactBootstrap.Button for native widget tests
+global.ReactBootstrap = { Button: function() { this.render = function() { return new JsxValue(null); }; return this; } };
 
 function getPromptoFolder() {
     var prompto = module.filename;
@@ -269,6 +273,7 @@ function createWrapper(js, methodName) {
     var lines = [
         "(function(context) {",
         "var React = { createElement: function() { return {}; }, Component: function() { return this; } };",
+        "var ReactBootstrap = { Button: function() { this.render = function() { return {}; }; return this; } };",
         js,
         "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
         "return { store:  store, method: " + methodName + " };",

@@ -23,3 +23,11 @@ exports.testTranspiledMinimal = function(test) {
 	checkTranspiledOutput(test, "widget/minimal.pec");
 };
 
+exports.testInterpretedNative = function(test) {
+	checkInterpretedOutput(test, "widget/native.pec");
+};
+
+exports.testTranspiledNative = function(test) {
+	checkTranspiledOutput(test, "widget/native.pec");
+};
+

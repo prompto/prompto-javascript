@@ -12,6 +12,11 @@ ConcreteWidgetDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.
 ConcreteWidgetDeclaration.prototype.constructor = ConcreteWidgetDeclaration;
 
 
+ConcreteWidgetDeclaration.prototype.getDeclarationType = function() {
+    return "Widget";
+};
+
+
 ConcreteWidgetDeclaration.prototype.categoryTypeToEDialect = function(writer) {
     if(this.derivedFrom==null)
         writer.append("widget");

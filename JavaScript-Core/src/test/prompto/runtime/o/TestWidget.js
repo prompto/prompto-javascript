@@ -23,3 +23,11 @@ exports.testTranspiledMinimal = function(test) {
 	checkTranspiledOutput(test, "widget/minimal.poc");
 };
 
+exports.testInterpretedNative = function(test) {
+	checkInterpretedOutput(test, "widget/native.poc");
+};
+
+exports.testTranspiledNative = function(test) {
+	checkTranspiledOutput(test, "widget/native.poc");
+};
+

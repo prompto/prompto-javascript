@@ -104,6 +104,14 @@ JavaScriptModule.prototype.resolve_path = function(part, replace) {
     }
 };
 
+JavaScriptModule.prototype.transpileWidget = function(transpiler) {
+    var ids = this.ids;
+    if("js"==ids[ids.length-1]) {
+        ids = ids.pop()
+    }
+    transpiler.append(ids.join("."));
+};
+
 JavaScriptModule.prototype.transpile = function(transpiler, name) {
     if(this.transpile_webpack(transpiler, name))
         return;

@@ -23,3 +23,11 @@ exports.testTranspiledMinimal = function(test) {
 	checkTranspiledOutput(test, "widget/minimal.pmc");
 };
 
+exports.testInterpretedNative = function(test) {
+	checkInterpretedOutput(test, "widget/native.pmc");
+};
+
+exports.testTranspiledNative = function(test) {
+	checkTranspiledOutput(test, "widget/native.pmc");
+};
+

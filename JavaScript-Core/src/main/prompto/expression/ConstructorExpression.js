@@ -9,6 +9,8 @@ var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").Argume
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
+var ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
+var NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 exports.resolve = function() {
@@ -149,11 +151,29 @@ ConstructorExpression.prototype.declare = function(transpiler) {
 
 ConstructorExpression.prototype.transpile = function(transpiler) {
     var decl = transpiler.context.getRegisteredDeclaration(this.type.name);
-    if (decl instanceof NativeCategoryDeclaration)
+    if (decl instanceof NativeWidgetDeclaration)
+        this.transpileNativeWidget(transpiler, decl);
+    else if (decl instanceof ConcreteWidgetDeclaration)
+        this.transpileConcreteWidget(transpiler, decl);
+    else if (decl instanceof NativeCategoryDeclaration)
         this.transpileNative(transpiler, decl);
     else
         this.transpileConcrete(transpiler);
 };
+
+
+ConstructorExpression.prototype.transpileNativeWidget = function(transpiler, decl) {
+    var bound = decl.getBoundFunction(true);
+    transpiler.append("new ").append(getTypeName(bound)).append("()");
+};
+
+
+ConstructorExpression.prototype.transpileConcreteWidget = function(transpiler, decl) {
+    transpiler = transpiler.newInstanceTranspiler(this.type);
+    transpiler.append("new ").append(this.type.name).append("()");
+    transpiler.flush();
+};
+
 
 
 ConstructorExpression.prototype.transpileNative = function(transpiler, decl) {

@@ -47,6 +47,14 @@ exports.testTranspiledCategory = function(test) {
 	checkTranspiledOutput(test, "native/category.pec");
 };
 
+exports.testInterpretedCategoryReturn = function(test) {
+	checkInterpretedOutput(test, "native/categoryReturn.pec");
+};
+
+exports.testTranspiledCategoryReturn = function(test) {
+	checkTranspiledOutput(test, "native/categoryReturn.pec");
+};
+
 exports.testInterpretedMethod = function(test) {
 	checkInterpretedOutput(test, "native/method.pec");
 };

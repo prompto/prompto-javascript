@@ -6,6 +6,10 @@ exports.testCategory = function(test) {
 	compareResourceOMO(test, "native/category.poc");
 };
 
+exports.testCategoryReturn = function(test) {
+	compareResourceOMO(test, "native/categoryReturn.poc");
+};
+
 exports.testMethod = function(test) {
 	compareResourceOMO(test, "native/method.poc");
 };
