@@ -2,6 +2,7 @@ var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDe
 var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
+var NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
 var BaseMethodDeclaration = require("../declaration/BaseMethodDeclaration").BaseMethodDeclaration;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
@@ -164,7 +165,7 @@ Context.prototype.getLocalCatalog = function() {
             info.name = decl.name;
             info.symbols = decl.symbols.map(function(s){return s.name;});
             catalog.enumerations.push(info);
-        } else if(decl instanceof ConcreteWidgetDeclaration)
+        } else if(decl instanceof ConcreteWidgetDeclaration || decl instanceof NativeWidgetDeclaration)
             catalog.widgets.push(name);
         else if(decl instanceof CategoryDeclaration)
             catalog.categories.push(name);
