@@ -31,6 +31,9 @@ Object.defineProperty(ArgumentAssignment.prototype, "name", {
 Object.defineProperty(ArgumentAssignment.prototype, "expression", {
     get : function() {
         return this._expression ? this._expression : new InstanceExpression(this.id);
+    },
+    set : function(expression) {
+        this._expression = expression;
     }
 });
 

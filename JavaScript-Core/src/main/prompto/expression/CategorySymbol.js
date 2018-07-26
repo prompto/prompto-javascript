@@ -98,7 +98,8 @@ CategorySymbol.prototype.initialize = function(transpiler) {
     transpiler.append("var ").append(this.name).append(" = ");
     var nameArg = new AttributeArgument(new Identifier("name"));
     var nameAssign = new ArgumentAssignment(nameArg, new TextLiteral('"' + this.name + '"'));
-    var assignments = new ArgumentAssignmentList(this.assignments, nameAssign);
+    var assignments = new ArgumentAssignmentList(this.assignments);
+    assignments.add(nameAssign);
     var exp = new ConstructorExpression(this.type, null, assignments);
     exp.transpile(transpiler);
     transpiler.append(";").newLine();

@@ -641,7 +641,7 @@ MPromptoBuilder.prototype.exitMethodParent = function(ctx) {
 MPromptoBuilder.prototype.exitExpressionAssignmentList = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	var assign = new grammar.ArgumentAssignment(null, exp);
-	this.setNodeValue(ctx, new grammar.ArgumentAssignmentList(null, assign));
+	this.setNodeValue(ctx, new grammar.ArgumentAssignmentList([assign]));
 };
 
 
@@ -655,7 +655,7 @@ MPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
 
 MPromptoBuilder.prototype.exitArgumentAssignmentList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	this.setNodeValue(ctx, new grammar.ArgumentAssignmentList(null, item));
+	this.setNodeValue(ctx, new grammar.ArgumentAssignmentList([item]));
 };
 
 

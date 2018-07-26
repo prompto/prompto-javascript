@@ -533,7 +533,7 @@ CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 	try {
 		var exp = new ExpressionValue(this, this.newInstance(context));
 		var arg = new ArgumentAssignment(null, exp);
-		var args = new ArgumentAssignmentList(null, arg);
+		var args = new ArgumentAssignmentList([arg]);
 		var proto = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
 		var finder = new MethodFinder(context, proto);
 		var decl = finder.findMethod(true);

@@ -15,3 +15,4 @@ exports.CategorySymbolList = require("./CategorySymbolList").CategorySymbolList;
 exports.NativeCategoryBindingList = require("./NativeCategoryBindingList").NativeCategoryBindingList;
 
 require('./ArgumentAssignment').resolve();
+require('./ArgumentAssignmentList').resolve();

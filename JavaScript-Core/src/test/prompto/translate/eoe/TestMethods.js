@@ -38,6 +38,10 @@ exports.testHomonym = function(test) {
 	compareResourceEOE(test, "methods/homonym.pec");
 };
 
+exports.testImplicitAnd = function(test) {
+	compareResourceEOE(test, "methods/implicitAnd.pec");
+};
+
 exports.testImplicitMember = function(test) {
 	compareResourceEOE(test, "methods/implicitMember.pec");
 };

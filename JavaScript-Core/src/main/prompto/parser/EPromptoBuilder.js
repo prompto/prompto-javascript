@@ -656,6 +656,8 @@ EPromptoBuilder.prototype.exitArgumentAssignmentListExpression = function(ctx) {
 	var item = this.getNodeValue(ctx.item) || null;
 	if(item!==null) {
 		items.add(item);
+	} else {
+		items.checkLastAnd();
 	}
 	this.setNodeValue(ctx, items);
 };
@@ -666,14 +668,16 @@ EPromptoBuilder.prototype.exitArgumentAssignmentListNoExpression = function(ctx)
 	var item = this.getNodeValue(ctx.item) || null;
 	if(item!==null) {
 		items.add(item);
-	}
+	} else {
+        items.checkLastAnd();
+    }
 	this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitArgumentAssignmentList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.ArgumentAssignmentList(null, item);
+	var items = new grammar.ArgumentAssignmentList([item]);
 	this.setNodeValue(ctx, items);
 };
 

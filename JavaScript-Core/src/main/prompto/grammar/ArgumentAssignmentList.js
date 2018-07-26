@@ -1,18 +1,47 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
 var ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
+var AndExpression = null;
+var UnresolvedIdentifier = null;
 
-function ArgumentAssignmentList(items, item) {
+exports.resolve = function() {
+    AndExpression = require("../expression/AndExpression").AndExpression;
+    UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+}
+
+function ArgumentAssignmentList(items) {
 	ObjectList.call(this, items || []);
-	if(item)
-		this.add(item);
 	return this;
 }
 
 ArgumentAssignmentList.prototype = Object.create(ObjectList.prototype);
 ArgumentAssignmentList.prototype.constructor = ArgumentAssignmentList;
-	
+
+
+/* post-fix expression priority for final assignment in E dialect */
+/* 'xyz with a and b as c' should read 'xyz with a, b as c' NOT 'xyz with (a and b) as c' */
+ArgumentAssignmentList.prototype.checkLastAnd = function() {
+    var assignment = this.slice(-1).pop();
+    if(assignment!=null && assignment.argument!=null && assignment.expression instanceof AndExpression) {
+        var and = assignment.expression;
+        if(and.left instanceof UnresolvedIdentifier) {
+            var id = and.left.id;
+            var leading = id.name.charAt(0);
+            if(leading !== leading.toUpperCase()) {
+                this.pop();
+                // add AttributeArgument
+                var argument = new AttributeArgument(id);
+                var attribute = new ArgumentAssignment(argument, null);
+                this.add(attribute);
+                // fix last assignment
+                assignment.expression = and.right;
+                this.add(assignment);
+            }
+        }
+    }
+};
 
 ArgumentAssignmentList.prototype.findIndex = function(name) {
 	for(var i=0;i<this.length;i++) {

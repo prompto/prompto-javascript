@@ -79,6 +79,14 @@ exports.testTranspiledHomonym = function(test) {
 	checkTranspiledOutput(test, "methods/homonym.pec");
 };
 
+exports.testInterpretedImplicitAnd = function(test) {
+	checkInterpretedOutput(test, "methods/implicitAnd.pec");
+};
+
+exports.testTranspiledImplicitAnd = function(test) {
+	checkTranspiledOutput(test, "methods/implicitAnd.pec");
+};
+
 exports.testInterpretedImplicitMember = function(test) {
 	checkInterpretedOutput(test, "methods/implicitMember.pec");
 };
