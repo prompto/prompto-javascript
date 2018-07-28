@@ -10,3 +10,7 @@ exports.testNative = function(test) {
 	compareResourceOMO(test, "widget/native.poc");
 };
 
+exports.testWithEvent = function(test) {
+	compareResourceOMO(test, "widget/withEvent.poc");
+};
+

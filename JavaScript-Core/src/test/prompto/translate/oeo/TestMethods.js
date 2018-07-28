@@ -22,6 +22,10 @@ exports.testExplicit = function(test) {
 	compareResourceOEO(test, "methods/explicit.poc");
 };
 
+exports.testExplicitMember = function(test) {
+	compareResourceOEO(test, "methods/explicitMember.poc");
+};
+
 exports.testExpressionWith = function(test) {
 	compareResourceOEO(test, "methods/expressionWith.poc");
 };

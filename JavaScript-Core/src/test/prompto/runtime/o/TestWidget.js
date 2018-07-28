@@ -31,3 +31,11 @@ exports.testTranspiledNative = function(test) {
 	checkTranspiledOutput(test, "widget/native.poc");
 };
 
+exports.testInterpretedWithEvent = function(test) {
+	checkInterpretedOutput(test, "widget/withEvent.poc");
+};
+
+exports.testTranspiledWithEvent = function(test) {
+	checkTranspiledOutput(test, "widget/withEvent.poc");
+};
+

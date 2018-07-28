@@ -55,6 +55,14 @@ exports.testTranspiledExplicit = function(test) {
 	checkTranspiledOutput(test, "methods/explicit.poc");
 };
 
+exports.testInterpretedExplicitMember = function(test) {
+	checkInterpretedOutput(test, "methods/explicitMember.poc");
+};
+
+exports.testTranspiledExplicitMember = function(test) {
+	checkTranspiledOutput(test, "methods/explicitMember.poc");
+};
+
 exports.testInterpretedExpressionWith = function(test) {
 	checkInterpretedOutput(test, "methods/expressionWith.poc");
 };
