@@ -114,9 +114,10 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 MethodCall.prototype.declare = function(transpiler) {
     var finder = new MethodFinder(transpiler.context, this);
     var declarations = finder.findCompatibleMethods(false, true);
-    if(declarations.length===1 && declarations[0] instanceof BuiltInMethodDeclaration) {
-        if(declarations[0].declareCall)
-            declarations[0].declareCall(transpiler);
+    var first = declarations.size===1 ? declarations.values().next().value : null;
+    if(declarations.size===1 && first instanceof BuiltInMethodDeclaration) {
+        if(first.declareCall)
+            first.declareCall(transpiler);
     } else {
         if (this.assignments != null)
             this.assignments.declare(transpiler);
@@ -124,7 +125,7 @@ MethodCall.prototype.declare = function(transpiler) {
             var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
             this.declareDeclaration(transpiler, declaration, local);
         }, this);
-        if(declarations.length>1 && !this.dispatcher) {
+        if(declarations.size>1 && !this.dispatcher) {
             var declaration = finder.findMethod(false);
             var sorted = finder.sortMostSpecificFirst(declarations);
             this.dispatcher = new DispatchMethodDeclaration(transpiler.context, this, declaration, sorted);
@@ -168,9 +169,10 @@ MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, 
 MethodCall.prototype.transpile = function(transpiler) {
     var finder = new MethodFinder(transpiler.context, this);
     var declarations = finder.findCompatibleMethods(false, true);
-    if (declarations.length === 1)
-        this.transpileSingle(transpiler, declarations[0], false);
-    else
+    if (declarations.size === 1) {
+        var first = declarations.values().next().value;
+        this.transpileSingle(transpiler, first, false);
+    } else
         this.transpileMultiple(transpiler, declarations);
 };
 
@@ -178,7 +180,8 @@ MethodCall.prototype.transpile = function(transpiler) {
 MethodCall.prototype.transpileMultiple = function(transpiler, declarations) {
     var name = this.dispatcher.getTranspiledName(transpiler.context);
     var parent = this.selector.resolveParent(transpiler.context);
-    if(parent==null && declarations[0].memberOf && transpiler.context.parent instanceof InstanceContext)
+    var first = declarations.values().next().value;
+    if(parent==null && first.memberOf && transpiler.context.parent instanceof InstanceContext)
         parent = new ThisExpression();
     var selector = new MethodSelector(parent, new Identifier(name));
     selector.transpile(transpiler);

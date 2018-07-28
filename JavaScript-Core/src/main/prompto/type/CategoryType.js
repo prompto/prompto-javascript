@@ -14,6 +14,7 @@ var NullType = require("./NullType").NullType;
 var TextType = require("./TextType").TextType;
 var AnyType = require("./AnyType").AnyType;
 var MissingType = require("./MissingType").MissingType;
+var MethodType = require("./MethodType").MethodType;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
@@ -329,6 +330,9 @@ CategoryType.prototype.checkMember = function(context, name) {
             return ad.getType(context);
         } else if ("text" == name.toString()) {
             return TextType.instance
+        } else if (cd.hasMethod(context, name)) {
+            var method = cd.getMemberMethodsMap(context, name).getFirst();
+            return new MethodType(method);
         } else {
             throw new SyntaxError("No attribute:" + name + " in category:" + this.name);
         }
@@ -481,7 +485,7 @@ CategoryType.prototype.sort = function(context, list, desc, key) {
 	var decl = this.getDeclaration(context);
 	if (decl.hasAttribute(context, keyname)) {
 		return this.sortByAttribute(context, list, desc, keyname);
-	} else if (decl.hasMethod(context, keyname, null)) {
+	} else if (decl.hasMethod(context, keyname)) {
 		return this.sortByClassMethod(context, list, desc, keyname);
 	} else {
 		var method = this.findGlobalMethod(context, keyname);
@@ -522,8 +526,10 @@ CategoryType.prototype.getMemberMethods = function(context, name) {
     var cd = this.getDeclaration(context);
     if (!(cd instanceof ConcreteCategoryDeclaration))
         throw new SyntaxError("Unknown category:" + this.name);
-    else
-        return cd.getMemberMethods(context, name)
+    else {
+        var methods = cd.getMemberMethodsMap(context, name);
+        return methods.getAll();
+    }
 };
 
 

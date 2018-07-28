@@ -117,8 +117,8 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
 
 UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
     var decl = context.getRegisteredDeclaration(context.instanceType.name);
-    var methods = decl.getMemberMethods(context, name);
-    if(methods!=null && methods.length>0)
+    var methods = decl.getMemberMethodsMap(context, name);
+    if(methods!=null && !methods.isEmpty())
         return methods;
     else
         return null;

@@ -8,6 +8,8 @@ var CategoryType = null;
 var NullValue = require("../value/NullValue").NullValue;
 var Value = require("../value/Value").Value;
 var Text = require("../value/TextValue").Text;
+var Dialect = require("../parser/Dialect").Dialect;
+var MethodType = require("../type/MethodType").MethodType;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
@@ -31,7 +33,19 @@ Object.defineProperty(MemberSelector.prototype, "name", {
     }
 });
 
+
 MemberSelector.prototype.toDialect = function(writer) {
+    if (writer.dialect == Dialect.E) {
+        var type = this.check(writer.context);
+        if (type instanceof MethodType) {
+            writer.append("Method: ");
+        }
+    }
+    this.parentAndMemberToDialect(writer);
+};
+
+
+MemberSelector.prototype.parentAndMemberToDialect = function(writer) {
     // ensure singletons are not treated as constructors
     try {
         this.resolveParent(writer.context);

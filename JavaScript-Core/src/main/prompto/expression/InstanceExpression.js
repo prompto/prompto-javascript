@@ -8,10 +8,12 @@ var MethodType = require("../type/MethodType").MethodType;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var MethodDeclarationMap = null;
+var InstanceContext = null;
 
 exports.resolve = function() {
 	CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+    InstanceContext = require("../runtime/Context").InstanceContext;
 }
 
 function InstanceExpression(id) {
@@ -33,6 +35,9 @@ InstanceExpression.prototype.declare = function(transpiler) {
     var named = transpiler.context.getRegistered(this.name);
     if(named instanceof MethodDeclarationMap) {
         var decl = named.getFirst();
+        // don't declare member methods
+        if(decl.memberOf!=null)
+            return;
         // don't declare closures
         if(decl.declarationStatement)
             return;
@@ -43,13 +48,19 @@ InstanceExpression.prototype.declare = function(transpiler) {
 
 InstanceExpression.prototype.transpile = function(transpiler) {
     var context = transpiler.context.contextForValue(this.name);
-    if(context && context.instanceType) {
+    if(context instanceof InstanceContext) {
         context.instanceType.transpileInstance(transpiler);
         transpiler.append(".");
     }
     var named = transpiler.context.getRegistered(this.name);
     if(named instanceof MethodDeclarationMap) {
         transpiler.append(named.getFirst().getTranspiledName());
+        // need to bind instance methods
+        if(context instanceof InstanceContext) {
+            transpiler.append(".bind(");
+            context.instanceType.transpileInstance(transpiler);
+            transpiler.append(")");
+        }
     } else {
         if (transpiler.getterName === this.name)
             transpiler.append("$");

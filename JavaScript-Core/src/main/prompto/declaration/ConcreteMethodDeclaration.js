@@ -4,10 +4,11 @@ var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
 var CodeArgument = require("../argument/CodeArgument").CodeArgument;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
+var StatementList = require("../statement/StatementList").StatementList;
 
 function ConcreteMethodDeclaration(id, args, returnType, statements) {
 	BaseMethodDeclaration.call(this, id, args, returnType);
-	this.statements = statements;
+	this.statements = statements || new StatementList();
 	return this;
 }
 
@@ -79,6 +80,7 @@ ConcreteMethodDeclaration.prototype.interpret = function(context) {
 ConcreteMethodDeclaration.prototype.toDialect = function(writer) {
     if(writer.context.isGlobalContext())
         writer = writer.newLocalWriter();
+    this.registerArguments(writer.context);
     writer.toDialect(this);
 };
 

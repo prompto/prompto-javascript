@@ -32,9 +32,9 @@ FilteredExpression.prototype.check = function(context) {
 	if(!(listType instanceof IterableType)) {
 		throw new SyntaxError("Expecting an iterable type as data source !");
 	}
-	var local = context.newChildContext();
-	local.registerValue(new Variable(this.itemId, listType.itemType));
-	var filterType = this.predicate.check(local);
+	var child = context.newChildContext();
+	child.registerValue(new Variable(this.itemId, listType.itemType));
+	var filterType = this.predicate.check(child);
 	if(filterType!=BooleanType.instance) {
 		throw new SyntaxError("Filtering expresion must return a boolean !");
 	}
@@ -55,10 +55,10 @@ FilteredExpression.prototype.interpret = function(context) {
 		throw new InternalError("Illegal fetch source: " + this.source);
 	}
 	var itemType = listType.itemType;
-    var local = context.newChildContext();
+    var child = context.newChildContext();
     var item = new Variable(this.itemId, itemType);
-    local.registerValue(item);
-    return list.filter(local, this.itemId, this.predicate)
+    child.registerValue(item);
+    return list.filter(child, this.itemId, this.predicate)
 };
 
 FilteredExpression.prototype.declare = function(transpiler) {
@@ -82,6 +82,10 @@ FilteredExpression.prototype.transpile = function(transpiler) {
 
 
 FilteredExpression.prototype.toDialect = function(writer) {
+    writer = writer.newChildWriter();
+    var sourceType = this.source.check(writer.context);
+    var itemType = sourceType.itemType;
+    writer.context.registerValue(new Variable(this.itemId, itemType));
     writer.toDialect(this);
 };
 

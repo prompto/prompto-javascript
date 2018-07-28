@@ -81,14 +81,16 @@ CodeWriter.prototype.newLocalWriter = function() {
     return new CodeWriter(this.dialect, this.context.newLocalContext(), this.indenter);
 };
 
+CodeWriter.prototype.newChildWriter = function() {
+    return new CodeWriter(this.dialect, this.context.newChildContext(), this.indenter);
+};
+
 CodeWriter.prototype.newInstanceWriter = function(type) {
     return new CodeWriter(this.dialect, this.context.newInstanceContext(null, type), this.indenter);
 };
 
 CodeWriter.prototype.newMemberWriter = function() {
-    var context = this.context.newLocalContext ();
-    context.parent = this.context;
-    return new CodeWriter (this.dialect, context, this.indenter);
+    return new CodeWriter (this.dialect, this.context.newChildContext(), this.indenter);
 };
 
 CodeWriter.prototype.toDialect = function(o) {

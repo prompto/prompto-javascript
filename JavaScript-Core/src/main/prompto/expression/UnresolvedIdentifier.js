@@ -9,6 +9,7 @@ var TypeExpression = require("./TypeExpression").TypeExpression;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Section = require("../parser/Section").Section;
+var Dialect = require("../parser/Dialect").Dialect;
 var EnumeratedCategoryType = null;
 var CategoryType = null;
 var MethodSelector = null;
@@ -82,24 +83,7 @@ UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSele
         // don't collect problems during resolution
         var listener = context.problemListener;
         context.problemListener = new ProblemListener();
-        // try out various solutions
-        this.resolved = this.resolveSymbol(context);
-        if (this.resolved == null) {
-            // is first char uppercase?
-            if (this.resolved == null && this.id.name[0].toUpperCase() == this.id.name[0]) {
-                if (forMember) {
-                    this.resolved = this.resolveType(context);
-                } else {
-                    this.resolved = this.resolveConstructor(context);
-                }
-            }
-            if (this.resolved == null) {
-                this.resolved = this.resolveMethod(context, updateSelectorParent);
-                if (this.resolved == null) {
-                    this.resolved = this.resolveInstance(context);
-                }
-            }
-        }
+        this.resolved = this.doResolve(context, forMember, updateSelectorParent);
         // restore listener
         context.problemListener = listener;
     }
@@ -107,6 +91,34 @@ UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSele
         context.problemListener.reportUnknownIdentifier(this.id);
     return this.resolved;
 };
+
+
+UnresolvedIdentifier.prototype.doResolve = function(context, forMember, updateSelectorParent) {
+    var resolved = this.resolveSymbol(context);
+    if(resolved)
+    	return resolved;
+    resolved = this.resolveTypeOrConstructor(context, forMember);
+    if(resolved)
+        return resolved;
+	resolved = this.resolveMethodCall(context, updateSelectorParent);
+    if(resolved)
+        return resolved;
+	resolved = this.resolveInstance(context);
+    return resolved;
+};
+
+
+UnresolvedIdentifier.prototype.resolveTypeOrConstructor = function(context, forMember) {
+    // is first char uppercase?
+    if (this.id.name[0].toUpperCase() != this.id.name[0])
+    	return null;
+	if (forMember) {
+		return this.resolveType(context);
+	} else {
+		return this.resolveConstructor(context);
+	}
+};
+
 
 UnresolvedIdentifier.prototype.resolveInstance = function(context) {
 	try {
@@ -122,7 +134,9 @@ UnresolvedIdentifier.prototype.resolveInstance = function(context) {
 	}
 };
 
-UnresolvedIdentifier.prototype.resolveMethod = function(context, updateSelectorParent) {
+UnresolvedIdentifier.prototype.resolveMethodCall = function(context, updateSelectorParent) {
+	if(this.id.dialect!=Dialect.E)
+		return null;
 	try {
 	    var selector = new MethodSelector(null, this.id);
 		var call = new MethodCall(selector);

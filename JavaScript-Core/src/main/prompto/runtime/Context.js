@@ -9,7 +9,9 @@ var AttributeDeclaration = require("../declaration/AttributeDeclaration").Attrib
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
+var MethodType = require("../type/MethodType").MethodType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
@@ -284,7 +286,7 @@ Context.prototype.registerMethodDeclaration = function(declaration) {
         actual = new MethodDeclarationMap(declaration.name);
         this.declarations[declaration.name] = actual;
     }
-    actual.register(declaration, this);
+    actual.register(declaration);
 };
 
 Context.prototype.checkDuplicateMethod = function(declaration) {
@@ -377,6 +379,21 @@ MethodDeclarationMap.prototype.getFirst = function() {
     for(var proto in this.protos) {
         return this.protos[proto];
     }
+};
+
+
+MethodDeclarationMap.prototype.getAll = function() {
+    return Object.getOwnPropertyNames(this.protos).map(function(proto) { return this.protos[proto]; }, this);
+};
+
+
+MethodDeclarationMap.prototype.isEmpty = function() {
+    return this.size()===0;
+};
+
+
+MethodDeclarationMap.prototype.size = function() {
+    return Object.getOwnPropertyNames(this.protos).length;
 };
 
 
@@ -514,14 +531,39 @@ InstanceContext.prototype = Object.create(Context.prototype);
 InstanceContext.prototype.constructor = InstanceContext;
 
 
+InstanceContext.prototype.getRegistered = function(name) {
+    var actual = Context.prototype.getRegistered.call(this, name);
+    if (actual)
+        return actual;
+    var decl = this.getDeclaration();
+    var methods = decl.getMemberMethodsMap(this, name);
+    return methods.isEmpty() ? null : methods;
+};
+
+
+InstanceContext.prototype.getRegisteredDeclaration = function(klass, name) {
+    if (klass === MethodDeclarationMap) {
+        var decl = this.getDeclaration();
+        if (decl) {
+            var methods = decl.getMemberMethodsMap(this, name);
+            if (methods && !methods.isEmpty())
+                return methods;
+        }
+    }
+    return Context.prototype.getRegisteredDeclaration.call(this, klass, name)
+};
+
+
 InstanceContext.prototype.readRegisteredValue = function(name) {
     var actual = this.instances[name] || null;
     // not very pure, but avoids a lot of complexity when registering a value
     if(actual === null) {
         var attr = this.getRegisteredDeclaration(name);
-        var type = attr.getType();
-        actual = new Variable(name, type);
-        this.instances[name] = actual;
+        if(attr instanceof AttributeDeclaration) {
+            var type = attr.getType();
+            actual = new Variable(name, type);
+            this.instances[name] = actual;
+        }
     }
     return actual;
 };
@@ -533,7 +575,9 @@ InstanceContext.prototype.contextForValue = function(name) {
 	var context = Context.prototype.contextForValue.call(this, name);
 	if(context !== null) {
 		return context;
-	} else if(this.getDeclaration().hasAttribute(this, name)) {
+	}
+	var decl = this.getDeclaration();
+    if(decl.hasAttribute(this, name) || decl.hasMethod(this, name)) {
 		return this;
 	} else {
 		return null;
@@ -548,7 +592,14 @@ InstanceContext.prototype.getDeclaration = function() {
 };
 
 InstanceContext.prototype.readValue = function(id) {
-	return this.instance.getMemberValue(this.calling, id.name);
+    var decl = this.getDeclaration();
+    if(decl.hasAttribute(this, id.name)) {
+        return this.instance.getMemberValue(this.calling, id.name);
+    } else if(decl.hasMethod(this, id.name)) {
+        var method = decl.getMemberMethodsMap(this, id.name).getFirst()
+        return new ClosureValue(this, new MethodType(method));
+    } else
+        return null;
 };
 
 InstanceContext.prototype.writeValue = function(id, value) {

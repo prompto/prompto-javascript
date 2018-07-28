@@ -1,8 +1,6 @@
 var BaseType = require("../type/BaseType").BaseType;
 
 function Variable (id, type) {
-    if(!(type instanceof BaseType))
-        throw new Error();
     this.id = id;
 	this.type = type;
 	return this;

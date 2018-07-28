@@ -2,9 +2,11 @@ var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = null; // circular dependency
 var Dialect = require("../parser/Dialect").Dialect;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
+var InstanceContext = null;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+    InstanceContext = require("../runtime/Context").InstanceContext;
 };
 
 function MethodExpression(id) {
@@ -62,8 +64,21 @@ MethodExpression.prototype.declare = function(transpiler) {
 
 MethodExpression.prototype.transpile = function(transpiler) {
     var named = transpiler.context.getRegistered(this.name);
-    var decl = named.getFirst();
-    transpiler.append(decl.getTranspiledName(transpiler.context));
+    if(named instanceof MethodDeclarationMap) {
+        var decl = named.getFirst();
+        var context = transpiler.context.contextForValue(this.name);
+        if (context instanceof InstanceContext) {
+            context.instanceType.transpileInstance(transpiler);
+            transpiler.append(".");
+        }
+        transpiler.append(decl.getTranspiledName(transpiler.context));
+        // need to bind instance methods
+        if (context instanceof InstanceContext) {
+            transpiler.append(".bind(");
+            context.instanceType.transpileInstance(transpiler);
+            transpiler.append(")");
+        }
+    }
 };
 
 	

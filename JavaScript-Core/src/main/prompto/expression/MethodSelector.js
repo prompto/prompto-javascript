@@ -12,6 +12,8 @@ var InstanceContext = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var NativeInstance = null;
 var CategoryType = null;
+var MethodDeclarationMap = null;
+
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
@@ -19,6 +21,7 @@ exports.resolve = function() {
     NativeInstance = require("../value/NativeInstance.js").NativeInstance;
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration.js").SingletonCategoryDeclaration;
+    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 };
 
 function MethodSelector(parent, id) {
@@ -33,7 +36,7 @@ MethodSelector.prototype.toDialect = function(writer) {
     if(this.parent==null)
         writer.append(this.name);
     else
-        MemberSelector.prototype.toDialect.call(this, writer);
+        MemberSelector.prototype.parentAndMemberToDialect.call(this, writer);
 };
 
 MethodSelector.prototype.newFullSelector = function(counter){
@@ -66,32 +69,34 @@ MethodSelector.prototype.getCandidates = function(context, checkInstance) {
 };
 
 MethodSelector.prototype.getGlobalCandidates = function(context) {
-    var methods = []
+    var result = new Set();
     // if called from a member method, could be a member method called without this/self
     if(context.parent instanceof InstanceContext) {
         var type = context.parent.instanceType;
         var cd = context.getRegisteredDeclaration(type.name);
         if(cd!=null) {
-            var members = cd.getMemberMethods(context, this.name);
+            var members = cd.getMemberMethodsMap(context, this.name);
             if(members!=null) {
-                Object.keys(members).forEach(function (key) {
-                    methods.push(members[key])
+                members.getAll().forEach(function(method) {
+                    result.add(method);
                 });
             }
         }
     }
-    var methodsMap = context.getRegisteredDeclaration(this.name);
-    if(methodsMap!=null && methodsMap.protos != null)
-        Object.keys(methodsMap.protos).forEach(function (proto) {
-                methods.push(methodsMap.protos[proto])
-            });
-    return methods;
+    var methods = context.getRegisteredDeclaration(this.name);
+    if(methods instanceof MethodDeclarationMap) {
+        methods.getAll().forEach(function(method) {
+            result.add(method);
+        });
+    }
+    return result;
 };
 
 
 MethodSelector.prototype.getMemberCandidates = function(context, checkInstance) {
     var parentType = this.checkParentType(context, checkInstance);
-    return parentType.getMemberMethods(context, this.name);
+    var methods = parentType.getMemberMethods(context, this.name);
+    return new Set(methods);
 };
 
 

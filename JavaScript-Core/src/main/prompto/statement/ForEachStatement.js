@@ -97,6 +97,13 @@ ForEachStatement.prototype.interpretItemIteratorWithIndex = function(elemType, c
 };
 
 ForEachStatement.prototype.toDialect = function(writer) {
+    writer = writer.newChildWriter();
+    var srcType = this.source.check(writer.context);
+    var elemType = srcType.checkIterator(writer.context);
+    var itemName = this.v2 ? this.v2 : this.v1;
+    writer.context.registerValue(new Variable(itemName, elemType))
+    if(this.v2)
+        writer.context.registerValue(new Variable(this.v1, IntegerType.instance))
     writer.toDialect(this);
 };
 

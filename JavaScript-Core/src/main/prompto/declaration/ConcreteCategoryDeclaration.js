@@ -120,6 +120,37 @@ ConcreteCategoryDeclaration.ancestorHasAttribute = function(ancestor, context, n
 	return actual.hasAttribute(context, name);
 };
 
+
+ConcreteCategoryDeclaration.prototype.hasMethod = function(context, name) {
+    this.registerMethods(context);
+    if(this.methodsMap[name])
+        return true;
+    if(this.hasDerivedMethod(context, name))
+        return true;
+    return false;
+};
+
+ConcreteCategoryDeclaration.prototype.hasDerivedMethod = function(context, name) {
+    if(this.derivedFrom==null) {
+        return false;
+    }
+    for(var i=0;i<this.derivedFrom.length;i++) {
+        var ancestor = this.derivedFrom[i].name;
+        if(ConcreteCategoryDeclaration.ancestorHasMethod(ancestor, context, name)) {
+            return true;
+        }
+    }
+    return false;
+};
+
+ConcreteCategoryDeclaration.ancestorHasMethod = function(ancestor, context, name) {
+    var actual = context.getRegisteredDeclaration(ancestor);
+    if(!(actual instanceof CategoryDeclaration)) {
+        return false;
+    }
+    return actual.hasMethod(context, name);
+};
+
 ConcreteCategoryDeclaration.prototype.check = function(context) {
 	this.checkDerived(context);
 	this.checkMethods(context);
@@ -165,7 +196,7 @@ ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context)
 			actual = new MethodDeclarationMap(method.name);
 			this.methodsMap[key] = actual;
 		}
-		actual.register(method, context);
+		actual.register(method);
 	}
 };
 
@@ -297,13 +328,10 @@ ConcreteCategoryDeclaration.findAncestorSetter = function(ancestor, context, att
 };
 
 
-ConcreteCategoryDeclaration.prototype.getMemberMethods = function(context, name) {
+ConcreteCategoryDeclaration.prototype.getMemberMethodsMap = function(context, name) {
 	var methodsMap = new MethodDeclarationMap(name);
-	this.registerMemberMethods(context,methodsMap);
-	var names = Object.getOwnPropertyNames(methodsMap.protos);
-	return names.map(function(name) {
-        return methodsMap.protos[name];
-	});
+	this.registerMemberMethods(context, methodsMap);
+	return methodsMap;
 };
 
 
@@ -327,7 +355,7 @@ ConcreteCategoryDeclaration.prototype.registerThisMemberMethods = function(conte
 	var protos = Object.getOwnPropertyNames(actual.protos);
     protos.forEach(function(proto) {
         var method = actual.protos[proto];
-		result.registerIfMissing(method, context);
+		result.registerIfMissing(method);
 	});
 };
 
@@ -349,12 +377,12 @@ ConcreteCategoryDeclaration.prototype.registerAncestorMemberMethods = function(a
 
 ConcreteCategoryDeclaration.prototype.getOperatorMethod = function(context, operator, type) {
     var methodName = "operator_" + operator.name;
-    var methods = this.getMemberMethods(context, methodName);
+    var methods = this.getMemberMethodsMap(context, methodName);
     if(methods==null)
         return null;
     // find best candidate
     var candidate = null;
-    methods.forEach(function(method) {
+    methods.getAll().forEach(function(method) {
         var potential = method.args[0].getType(context);
         if(!potential.isAssignableFrom(context, type))
             return;

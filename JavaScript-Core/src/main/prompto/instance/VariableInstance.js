@@ -21,6 +21,7 @@ VariableInstance.prototype.toDialect = function(writer, expression) {
         if(actual==null)
             writer.context.registerValue(new Variable(this.id, type));
     } catch(e) {
+        // console.log(e.stack);
         // TODO warning
     }
     writer.append(this.name);

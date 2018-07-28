@@ -83,7 +83,7 @@ CategoryDeclaration.prototype.hasAttribute = function(context, name) {
     return names.indexOf(name)>=0;
 };
 
-CategoryDeclaration.prototype.hasMethod = function(context, key, object) {
+CategoryDeclaration.prototype.hasMethod = function(context, key) {
 	return false;
 };
 

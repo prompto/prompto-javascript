@@ -14,18 +14,19 @@ function MethodFinder(context, methodCall) {
 
 MethodFinder.prototype.findCompatibleMethods = function(checkInstance, allowDerived) {
     var candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
-    if(candidates.length==0)
+    if(candidates.size==0)
         this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id);
     return this.filterCompatible(candidates, checkInstance, allowDerived);
 };
 
 MethodFinder.prototype.findMethod = function(checkInstance) {
 	var compatibles = this.findCompatibleMethods(checkInstance, false);
-	switch(compatibles.length) {
+	switch(compatibles.size) {
 	case 0:
 		this.context.problemListener.reportNoMatchingPrototype(this.methodCall);
+		return null;
 	case 1:
-		return compatibles[0];
+		return compatibles.values().next().value;
 	default:
 		return this.findMostSpecific(compatibles, checkInstance);
 	}
@@ -129,12 +130,12 @@ MethodFinder.prototype.scoreMostSpecific = function(decl1, decl2, checkInstance,
 }
 
 MethodFinder.prototype.filterCompatible = function(candidates, checkInstance, allowDerived) {
-	var compatibles = [];
+	var compatibles = new Set();
 	candidates.forEach(function(declaration) {
         try {
 			var assignments = this.methodCall.makeAssignments(this.context, declaration);
 			if(declaration.isAssignableTo(this.context, assignments, checkInstance, allowDerived)) {
-				compatibles.push(declaration);
+				compatibles.add(declaration);
 			}
 		} catch(e) {
 			if(!(e instanceof SyntaxError)) {

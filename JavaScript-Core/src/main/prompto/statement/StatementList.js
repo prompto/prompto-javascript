@@ -61,8 +61,7 @@ StatementList.prototype.interpret = function(context) {
 		return this.doInterpret(context);
 	} catch(e) {
 		if(e instanceof ReferenceError) {
-            // throw e;
-			throw new NullReferenceError();
+		    throw new NullReferenceError();
 		} else {
             if(!(e instanceof PromptoError))
                 console.trace();

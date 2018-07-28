@@ -79,6 +79,12 @@ SwitchErrorStatement.prototype.populateError = function(e, context) {
 	return error;
 };
 
+SwitchErrorStatement.prototype.toDialect = function(writer) {
+    writer = writer.newLocalWriter();
+    writer.context.registerValue(new ErrorVariable(this.errorId));
+    BaseSwitchStatement.prototype.toDialect.call(this, writer);
+};
+
 SwitchErrorStatement.prototype.toODialect = function(writer) {
     writer.append("try (");
     writer.append(this.errorId.name);
