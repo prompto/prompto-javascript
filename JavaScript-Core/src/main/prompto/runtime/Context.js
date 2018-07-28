@@ -286,7 +286,7 @@ Context.prototype.registerMethodDeclaration = function(declaration) {
         actual = new MethodDeclarationMap(declaration.name);
         this.declarations[declaration.name] = actual;
     }
-    actual.register(declaration);
+    actual.register(declaration, this.problemListener);
 };
 
 Context.prototype.checkDuplicateMethod = function(declaration) {
@@ -355,11 +355,11 @@ function MethodDeclarationMap(name) {
 	return this;
 }
 
-MethodDeclarationMap.prototype.register = function(declaration, context) {
+MethodDeclarationMap.prototype.register = function(declaration, problemListener) {
 	var proto = declaration.getProto();
 	var current = this.protos[proto] || null;
 	if(current!==null)
-        context.problemListener.reportDuplicate(declaration.name, declaration);
+        problemListener.reportDuplicate(declaration.name, declaration);
 	this.protos[proto] = declaration;
 };
 
@@ -368,7 +368,7 @@ MethodDeclarationMap.prototype.unregister = function(proto) {
     return Object.getOwnPropertyNames(this.protos).length === 0;
 };
 
-MethodDeclarationMap.prototype.registerIfMissing = function(declaration,context) {
+MethodDeclarationMap.prototype.registerIfMissing = function(declaration) {
 	var proto = declaration.getProto();
 	if(!(proto in this.protos)) {
 		this.protos[proto] = declaration;
