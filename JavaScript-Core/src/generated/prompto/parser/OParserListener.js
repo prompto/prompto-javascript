@@ -1334,6 +1334,15 @@ OParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#annotation.
+OParserListener.prototype.enterAnnotation = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#annotation.
+OParserListener.prototype.exitAnnotation = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#resource_declaration.
 OParserListener.prototype.enterResource_declaration = function(ctx) {
 };

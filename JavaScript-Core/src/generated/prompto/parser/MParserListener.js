@@ -1307,6 +1307,15 @@ MParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#annotation.
+MParserListener.prototype.enterAnnotation = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#annotation.
+MParserListener.prototype.exitAnnotation = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#resource_declaration.
 MParserListener.prototype.enterResource_declaration = function(ctx) {
 };

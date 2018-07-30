@@ -1415,6 +1415,15 @@ EParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#annotation.
+EParserListener.prototype.enterAnnotation = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#annotation.
+EParserListener.prototype.exitAnnotation = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#resource_declaration.
 EParserListener.prototype.enterResource_declaration = function(ctx) {
 };
