@@ -80,6 +80,11 @@ DeclarationList.prototype.toDialect = function(writer) {
                 cmt.toDialect(writer);
             });
         }
+        if(decl.annotations) {
+            decl.annotations.forEach(function (ann) {
+                ann.toDialect(writer);
+            });
+        }
         decl.toDialect(writer);
         writer.append("\n");
     });

@@ -1191,12 +1191,16 @@ EPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitDeclaration = function(ctx) {
-    var self = this;
-    var stmts = ctx.comment_statement().map(function(csc) {
-        return self.getNodeValue(csc);
-    });
-    if(stmts.length==0)
-        stmts = null;
+    var comments = ctx.comment_statement().map(function(csc) {
+        return this.getNodeValue(csc);
+    }, this);
+    if(comments.length==0)
+        comments = null;
+    var annotations = ctx.annotation_constructor().map(function(csc) {
+        return this.getNodeValue(csc);
+    }, this);
+    if(annotations.length==0)
+        annotations = null;
     var ctx_ = ctx.attribute_declaration();
     if(ctx_==null)
         ctx_ = ctx.category_declaration();
@@ -1210,7 +1214,8 @@ EPromptoBuilder.prototype.exitDeclaration = function(ctx) {
         ctx_ = ctx.widget_declaration();
     decl = this.getNodeValue(ctx_);
     if(decl!=null) {
-        decl.comments = stmts;
+        decl.comments = comments;
+        decl.annotations = annotations;
         this.setNodeValue(ctx, decl);
     }
 };
@@ -1724,6 +1729,19 @@ EPromptoBuilder.prototype.exitModuloExpression = function(ctx) {
 	var left = this.getNodeValue(ctx.left);
 	var right = this.getNodeValue(ctx.right);
 	this.setNodeValue(ctx, new expression.ModuloExpression(left, right));
+};
+
+
+EPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new grammar.Annotation(name, exp));
+};
+
+
+EPromptoBuilder.prototype.exitAnnotation_identifier = function(ctx) {
+    var name = ctx.getText();
+    this.setNodeValue(ctx, new grammar.Identifier(name));
 };
 
 

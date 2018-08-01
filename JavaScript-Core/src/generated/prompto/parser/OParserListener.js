@@ -1334,12 +1334,21 @@ OParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#annotation.
-OParserListener.prototype.enterAnnotation = function(ctx) {
+// Enter a parse tree produced by OParser#annotation_constructor.
+OParserListener.prototype.enterAnnotation_constructor = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#annotation.
-OParserListener.prototype.exitAnnotation = function(ctx) {
+// Exit a parse tree produced by OParser#annotation_constructor.
+OParserListener.prototype.exitAnnotation_constructor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#annotation_identifier.
+OParserListener.prototype.enterAnnotation_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#annotation_identifier.
+OParserListener.prototype.exitAnnotation_identifier = function(ctx) {
 };
 
 

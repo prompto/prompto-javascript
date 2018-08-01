@@ -1415,12 +1415,21 @@ EParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#annotation.
-EParserListener.prototype.enterAnnotation = function(ctx) {
+// Enter a parse tree produced by EParser#annotation_constructor.
+EParserListener.prototype.enterAnnotation_constructor = function(ctx) {
 };
 
-// Exit a parse tree produced by EParser#annotation.
-EParserListener.prototype.exitAnnotation = function(ctx) {
+// Exit a parse tree produced by EParser#annotation_constructor.
+EParserListener.prototype.exitAnnotation_constructor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#annotation_identifier.
+EParserListener.prototype.enterAnnotation_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#annotation_identifier.
+EParserListener.prototype.exitAnnotation_identifier = function(ctx) {
 };
 
 

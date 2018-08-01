@@ -4,6 +4,7 @@ function BaseDeclaration(id) {
 	Section.call(this);
 	this.id = id;
     this.comments = null;
+    this.annotations = null;
     this.declaring = false;
 	return this;
 }

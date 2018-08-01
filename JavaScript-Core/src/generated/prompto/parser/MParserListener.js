@@ -1307,12 +1307,21 @@ MParserListener.prototype.exitDeclaration = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MParser#annotation.
-MParserListener.prototype.enterAnnotation = function(ctx) {
+// Enter a parse tree produced by MParser#annotation_constructor.
+MParserListener.prototype.enterAnnotation_constructor = function(ctx) {
 };
 
-// Exit a parse tree produced by MParser#annotation.
-MParserListener.prototype.exitAnnotation = function(ctx) {
+// Exit a parse tree produced by MParser#annotation_constructor.
+MParserListener.prototype.exitAnnotation_constructor = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#annotation_identifier.
+MParserListener.prototype.enterAnnotation_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#annotation_identifier.
+MParserListener.prototype.exitAnnotation_identifier = function(ctx) {
 };
 
 
