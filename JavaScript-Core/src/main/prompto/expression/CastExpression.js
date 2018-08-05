@@ -1,16 +1,28 @@
+var AnyType = require("../type/AnyType").AnyType;
+var CategoryType = require("../type/CategoryType").CategoryType;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
+function anify(type) {
+    if(type instanceof CategoryType && type.name === "Any")
+        return AnyType.instance;
+    else
+        return type;
+}
+
 function CastExpression(expression, type) {
     this.expression = expression;
-    this.type = type;
+    this.type = anify(type);
     return this;
 }
 
 CastExpression.prototype.check = function(context) {
-    var actual = this.expression.check(context);
+    var actual = anify(this.expression.check(context));
+    // check Any
+    if(actual === AnyType.instance)
+        return this.type;
     // check upcast
     if(this.type.isAssignableFrom(context, actual))
         return this.type;
