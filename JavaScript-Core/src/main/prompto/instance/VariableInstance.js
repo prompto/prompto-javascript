@@ -72,7 +72,7 @@ VariableInstance.prototype.checkAssignItem = function(context, itemType, valueTy
 VariableInstance.prototype.assign = function(context, expression) {
 	var value = expression.interpret(context);
 	if(context.getRegisteredValue(this.name)==null) {
-        var type = value != NullValue.instance ? value.type : expression.check(context);
+        var type = expression.check(context);
 		context.registerValue(new Variable(this.id, type));
 	}
 	context.setValue(this.id, value);
