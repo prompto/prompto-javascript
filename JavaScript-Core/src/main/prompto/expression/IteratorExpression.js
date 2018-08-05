@@ -19,7 +19,7 @@ IteratorExpression.prototype.constructor = IteratorExpression;
 IteratorExpression.prototype.check = function(context) {
     var elemType = this.source.check(context).checkIterator(context);
     var child = context.newChildContext();
-    context.registerValue(new Variable(this.name, elemType));
+    child.registerValue(new Variable(this.name, elemType));
     var itemType = this.expression.check(child);
     return new IteratorType(itemType);
 };
@@ -41,9 +41,12 @@ IteratorExpression.prototype.declare = function(transpiler) {
 
 
 IteratorExpression.prototype.transpile = function(transpiler) {
-    var sourceType = this.source.check(transpiler.context);
+    var srcType = this.source.check(transpiler.context);
+    var resultType = srcType.checkIterator(transpiler.context);
     this.source.transpile(transpiler);
-    sourceType.transpileIterator(transpiler, this.name, this.expression);
+    transpiler = transpiler.newChildTranspiler()
+    srcType.transpileIterator(transpiler, this.name, this.expression);
+    transpiler.flush()
 };
 
 
@@ -55,10 +58,15 @@ IteratorExpression.prototype.getIterator = function(context, src) {
 };
 
 IteratorExpression.prototype.toDialect = function(writer) {
+    var srcType = this.source.check(writer.context);
+    writer = writer.newChildWriter();
+    var resultType = srcType.checkIterator(writer.context);
+    writer.context.registerValue(new Variable(this.name, resultType));
     writer.toDialect(this);
 };
 
 IteratorExpression.prototype.toMDialect = function(writer) {
+
     this.expression.toDialect(writer);
     writer.append(" for ");
     writer.append(this.name.toString());
