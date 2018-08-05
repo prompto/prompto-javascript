@@ -419,7 +419,7 @@ Context.prototype.registerValue = function(value, checkDuplicate) {
         // only explore current context
         var actual = this.instances[value.name] || null;
         if(actual!==null)
-            this.problemListener.reportDuplicateVariable(value.id);
+            this.problemListener.reportDuplicate(value.id);
     }
 	this.instances[value.name] = value;
 };
