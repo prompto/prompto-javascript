@@ -30,9 +30,9 @@ ForEachStatement.prototype.check = function(context) {
 ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 	var child = context.newChildContext();
 	var itemName = this.v2 === null ? this.v1 : this.v2;
-	context.registerValue(new Variable(itemName, elemType));
+    child.registerValue(new Variable(itemName, elemType));
 	if (this.v2 !== null) {
-		context.registerValue(new Variable(this.v1, IntegerType.instance));
+        child.registerValue(new Variable(this.v1, IntegerType.instance));
 	}
 	return this.statements.check(child, null);
 };
