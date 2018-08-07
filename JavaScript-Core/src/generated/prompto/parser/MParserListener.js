@@ -2459,6 +2459,15 @@ MParserListener.prototype.exitDict_literal = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#document_literal.
+MParserListener.prototype.enterDocument_literal = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#document_literal.
+MParserListener.prototype.exitDocument_literal = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#expression_tuple.
 MParserListener.prototype.enterExpression_tuple = function(ctx) {
 };

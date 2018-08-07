@@ -8,15 +8,16 @@ function DictEntryList(entries, entry) {
 }
 
 DictEntryList.prototype.toDialect = function(writer) {
-    writer.append('{');
+    writer.append('<');
     if(this.items.length>0) {
         this.items.forEach(function(item) {
             item.toDialect(writer);
             writer.append(", ");
         });
         writer.trimLast(2);
-    }
-    writer.append('}');
+    } else
+        writer.append(':');
+    writer.append('>');
 };
 
 DictEntryList.prototype.declare = function(transpiler) {
@@ -39,7 +40,7 @@ DictEntryList.prototype.transpile = function(transpiler) {
 };
 
 DictEntryList.prototype.toString = function() {
-	return "{" + this.items.join(", ") + "}";
+	return "<" + (this.items.length ? this.items.join(", ") : ':') + ">";
 };
 
 DictEntryList.prototype.add = function(entry) {

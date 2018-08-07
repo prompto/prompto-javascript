@@ -11,7 +11,7 @@ var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var Dictionary = require("../intrinsic/Dictionary").Dictionary;
 
 function DictionaryType(itemType) {
-	ContainerType.call(this, new Identifier(itemType.name+"{}"), itemType);
+	ContainerType.call(this, new Identifier(itemType.name + "<:>"), itemType);
 	this.itemType = itemType;
 	return this;
 }

@@ -17,7 +17,7 @@ function DictLiteral(mutable, entries) {
     this.mutable = mutable;
 	this.entries = entries || new DictEntryList();
     this.itemType = null;
-	Literal.call(this, this.entries.toString(), new DictionaryValue(MissingType.instance, new Dictionary(), mutable));
+	Literal.call(this, "<:>", new DictionaryValue(MissingType.instance, new Dictionary(), mutable));
 	return this;
 }
 
