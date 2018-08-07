@@ -1941,6 +1941,12 @@ EPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitDocument_literal = function(ctx) {
+    var entries = this.getNodeValue(ctx.dict_entry_list());
+    var items = entries ? new literal.DocEntryList(entries.items) : null;
+    this.setNodeValue(ctx, new literal.DocumentLiteral(items));
+};
+
 EPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
     var predicate = this.getNodeValue(ctx.predicate);

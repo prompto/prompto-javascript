@@ -31,12 +31,12 @@ exports.testTranspiledDeepItem = function(test) {
 	checkTranspiledOutput(test, "documents/deepItem.pec");
 };
 
-exports.testInterpretedDeepVariable = function(test) {
-	checkInterpretedOutput(test, "documents/deepVariable.pec");
+exports.testInterpretedDeepMember = function(test) {
+	checkInterpretedOutput(test, "documents/deepMember.pec");
 };
 
-exports.testTranspiledDeepVariable = function(test) {
-	checkTranspiledOutput(test, "documents/deepVariable.pec");
+exports.testTranspiledDeepMember = function(test) {
+	checkTranspiledOutput(test, "documents/deepMember.pec");
 };
 
 exports.testInterpretedItem = function(test) {
@@ -47,19 +47,27 @@ exports.testTranspiledItem = function(test) {
 	checkTranspiledOutput(test, "documents/item.pec");
 };
 
+exports.testInterpretedLiteral = function(test) {
+	checkInterpretedOutput(test, "documents/literal.pec");
+};
+
+exports.testTranspiledLiteral = function(test) {
+	checkTranspiledOutput(test, "documents/literal.pec");
+};
+
+exports.testInterpretedMember = function(test) {
+	checkInterpretedOutput(test, "documents/member.pec");
+};
+
+exports.testTranspiledMember = function(test) {
+	checkTranspiledOutput(test, "documents/member.pec");
+};
+
 exports.testInterpretedNamedItem = function(test) {
 	checkInterpretedOutput(test, "documents/namedItem.pec");
 };
 
 exports.testTranspiledNamedItem = function(test) {
 	checkTranspiledOutput(test, "documents/namedItem.pec");
-};
-
-exports.testInterpretedVariable = function(test) {
-	checkInterpretedOutput(test, "documents/variable.pec");
-};
-
-exports.testTranspiledVariable = function(test) {
-	checkTranspiledOutput(test, "documents/variable.pec");
 };
 

@@ -10,19 +10,23 @@ exports.testDeepItem = function(test) {
 	compareResourceEME(test, "documents/deepItem.pec");
 };
 
-exports.testDeepVariable = function(test) {
-	compareResourceEME(test, "documents/deepVariable.pec");
+exports.testDeepMember = function(test) {
+	compareResourceEME(test, "documents/deepMember.pec");
 };
 
 exports.testItem = function(test) {
 	compareResourceEME(test, "documents/item.pec");
 };
 
-exports.testNamedItem = function(test) {
-	compareResourceEME(test, "documents/namedItem.pec");
+exports.testLiteral = function(test) {
+	compareResourceEME(test, "documents/literal.pec");
 };
 
-exports.testVariable = function(test) {
-	compareResourceEME(test, "documents/variable.pec");
+exports.testMember = function(test) {
+	compareResourceEME(test, "documents/member.pec");
+};
+
+exports.testNamedItem = function(test) {
+	compareResourceEME(test, "documents/namedItem.pec");
 };
 

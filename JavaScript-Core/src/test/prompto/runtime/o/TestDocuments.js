@@ -23,12 +23,12 @@ exports.testTranspiledDeepItem = function(test) {
 	checkTranspiledOutput(test, "documents/deepItem.poc");
 };
 
-exports.testInterpretedDeepVariable = function(test) {
-	checkInterpretedOutput(test, "documents/deepVariable.poc");
+exports.testInterpretedDeepMember = function(test) {
+	checkInterpretedOutput(test, "documents/deepMember.poc");
 };
 
-exports.testTranspiledDeepVariable = function(test) {
-	checkTranspiledOutput(test, "documents/deepVariable.poc");
+exports.testTranspiledDeepMember = function(test) {
+	checkTranspiledOutput(test, "documents/deepMember.poc");
 };
 
 exports.testInterpretedItem = function(test) {
@@ -39,11 +39,19 @@ exports.testTranspiledItem = function(test) {
 	checkTranspiledOutput(test, "documents/item.poc");
 };
 
-exports.testInterpretedVariable = function(test) {
-	checkInterpretedOutput(test, "documents/variable.poc");
+exports.testInterpretedLiteral = function(test) {
+	checkInterpretedOutput(test, "documents/literal.poc");
 };
 
-exports.testTranspiledVariable = function(test) {
-	checkTranspiledOutput(test, "documents/variable.poc");
+exports.testTranspiledLiteral = function(test) {
+	checkTranspiledOutput(test, "documents/literal.poc");
+};
+
+exports.testInterpretedMember = function(test) {
+	checkInterpretedOutput(test, "documents/member.poc");
+};
+
+exports.testTranspiledMember = function(test) {
+	checkTranspiledOutput(test, "documents/member.poc");
 };
 

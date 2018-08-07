@@ -6,15 +6,19 @@ exports.testDeepItem = function(test) {
 	compareResourceOMO(test, "documents/deepItem.poc");
 };
 
-exports.testDeepVariable = function(test) {
-	compareResourceOMO(test, "documents/deepVariable.poc");
+exports.testDeepMember = function(test) {
+	compareResourceOMO(test, "documents/deepMember.poc");
 };
 
 exports.testItem = function(test) {
 	compareResourceOMO(test, "documents/item.poc");
 };
 
-exports.testVariable = function(test) {
-	compareResourceOMO(test, "documents/variable.poc");
+exports.testLiteral = function(test) {
+	compareResourceOMO(test, "documents/literal.poc");
+};
+
+exports.testMember = function(test) {
+	compareResourceOMO(test, "documents/member.poc");
 };
 

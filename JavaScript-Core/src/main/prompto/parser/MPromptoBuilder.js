@@ -1958,6 +1958,12 @@ MPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitDocument_literal = function(ctx) {
+    var entries = this.getNodeValue(ctx.dict_entry_list());
+    var items = entries ? new literal.DocEntryList(entries.items) : null;
+    this.setNodeValue(ctx, new literal.DocumentLiteral(items));
+};
+
 
 MPromptoBuilder.prototype.exitFetchOne = function(ctx) {
     var category = this.getNodeValue(ctx.typ);
