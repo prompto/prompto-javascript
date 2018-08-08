@@ -507,25 +507,25 @@ exports.testSimpleListLiteral = function(test) {
 
 
 exports.testEmptyDictLiteral = function(test) {
-	var statement = "{}";
+	var statement = "<:>";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
 	test.ok(literal);
 	test.ok(literal instanceof prompto.literal.DictLiteral);
-	test.equal("{}", literal.toString());
+	test.equal("<:>", literal.toString());
 	test.done();
 };
 
 
 exports.testSimpleDictLiteral = function(test) {
-	var statement = "{ \"john\" : 1234, eric : 5678 }";
+	var statement = "< \"john\" : 1234, eric : 5678 >";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
 	test.ok(literal);
 	test.ok(literal instanceof prompto.literal.DictLiteral);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     literal.toDialect(writer)
-	test.equal("{\"john\":1234, eric:5678}", writer.toString());
+	test.equal("<\"john\":1234, eric:5678>", writer.toString());
 	test.done();
 };
 
