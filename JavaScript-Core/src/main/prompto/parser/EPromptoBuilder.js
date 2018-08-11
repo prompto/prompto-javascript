@@ -420,6 +420,16 @@ EPromptoBuilder.prototype.exitListType = function(ctx) {
 	this.setNodeValue(ctx, new type.ListType(typ));
 };
 
+EPromptoBuilder.prototype.exitDictKeyIdentifier = function(ctx) {
+    var text = ctx.name.getText();
+    this.setNodeValue(ctx, new literal.DictIdentifierKey(new grammar.Identifier(text)));
+};
+
+EPromptoBuilder.prototype.exitDictKeyText = function(ctx) {
+    var text = ctx.name.text;
+    this.setNodeValue(ctx, new literal.DictTextKey(text));
+};
+
 EPromptoBuilder.prototype.exitDictType = function(ctx) {
 	var typ = this.getNodeValue(ctx.d);
 	this.setNodeValue(ctx, new type.DictionaryType(typ));

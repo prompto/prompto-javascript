@@ -1847,6 +1847,15 @@ MParserListener.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#any_identifier.
+MParserListener.prototype.enterAny_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#any_identifier.
+MParserListener.prototype.exitAny_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#argument_list.
 MParserListener.prototype.enterArgument_list = function(ctx) {
 };
@@ -2492,6 +2501,24 @@ MParserListener.prototype.enterDict_entry = function(ctx) {
 
 // Exit a parse tree produced by MParser#dict_entry.
 MParserListener.prototype.exitDict_entry = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#DictKeyIdentifier.
+MParserListener.prototype.enterDictKeyIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#DictKeyIdentifier.
+MParserListener.prototype.exitDictKeyIdentifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#DictKeyText.
+MParserListener.prototype.enterDictKeyText = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#DictKeyText.
+MParserListener.prototype.exitDictKeyText = function(ctx) {
 };
 
 

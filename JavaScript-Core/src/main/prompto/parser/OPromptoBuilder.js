@@ -459,6 +459,16 @@ OPromptoBuilder.prototype.exitListType = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitDictKeyIdentifier = function(ctx) {
+    var text = ctx.name.getText();
+    this.setNodeValue(ctx, new literal.DictIdentifierKey(new grammar.Identifier(text)));
+};
+
+OPromptoBuilder.prototype.exitDictKeyText = function(ctx) {
+    var text = ctx.name.text;
+    this.setNodeValue(ctx, new literal.DictTextKey(text));
+};
+
 OPromptoBuilder.prototype.exitDictType = function(ctx) {
 	var typ = this.getNodeValue(ctx.d);
 	this.setNodeValue(ctx, new type.DictionaryType(typ));

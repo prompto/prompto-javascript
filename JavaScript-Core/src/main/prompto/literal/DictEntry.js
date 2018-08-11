@@ -9,8 +9,7 @@ DictEntry.prototype.toString = function() {
 };
 
 DictEntry.prototype.toDialect = function(writer) {
-    this.key.toDialect(writer);
-    writer.append(':');
+    writer.append(this.key.toString()).append(':');
     this.value.toDialect(writer);
 };
 
@@ -21,8 +20,7 @@ DictEntry.prototype.declare = function(transpiler) {
 
 
 DictEntry.prototype.transpile = function(transpiler) {
-    this.key.transpile(transpiler);
-    transpiler.append(':');
+    transpiler.append(this.key.toString()).append(':');
     this.value.transpile(transpiler);
 };
 

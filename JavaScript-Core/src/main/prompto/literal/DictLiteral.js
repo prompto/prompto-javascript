@@ -56,11 +56,7 @@ DictLiteral.prototype.inferElementType = function(context) {
 	}
 	var types = [];
 	items.forEach(function(entry) {
-        var keyType = entry.key.check(context);
-		if(keyType!=TextType.instance) {
-			throw new SyntaxError("Illegal key type: " + keyType.toString());
-		}
-		var elemType = entry.value.check(context);
+  		var elemType = entry.value.check(context);
         types.push(elemType);
 	});
 	return inferElementType(context, types);
@@ -71,7 +67,7 @@ DictLiteral.prototype.interpret = function(context) {
         this.check(context); /// force computation of itemType
         var dict = new Dictionary();
         this.entries.items.forEach(function(entry) {
-            var key = entry.key.interpret(context);
+            var key = entry.key.asText();
             var val = entry.value.interpret(context);
             val = this.interpretPromotion(val);
             dict[key] = val;

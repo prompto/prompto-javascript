@@ -1955,6 +1955,15 @@ EParserListener.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#any_identifier.
+EParserListener.prototype.enterAny_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#any_identifier.
+EParserListener.prototype.exitAny_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#argument_list.
 EParserListener.prototype.enterArgument_list = function(ctx) {
 };
@@ -2600,6 +2609,24 @@ EParserListener.prototype.enterDict_entry = function(ctx) {
 
 // Exit a parse tree produced by EParser#dict_entry.
 EParserListener.prototype.exitDict_entry = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#DictKeyIdentifier.
+EParserListener.prototype.enterDictKeyIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#DictKeyIdentifier.
+EParserListener.prototype.exitDictKeyIdentifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#DictKeyText.
+EParserListener.prototype.enterDictKeyText = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#DictKeyText.
+EParserListener.prototype.exitDictKeyText = function(ctx) {
 };
 
 
