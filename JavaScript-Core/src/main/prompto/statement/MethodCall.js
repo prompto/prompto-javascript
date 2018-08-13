@@ -50,8 +50,8 @@ MethodCall.prototype.toDialect = function(writer) {
 MethodCall.prototype.requiresInvoke = function(writer) {
     if (writer.dialect != Dialect.E)
         return false;
-    if (this.assignments == null || this.assignments.length == 0)
-        return true;
+    if (this.assignments != null && this.assignments.length > 0)
+        return false;
     try {
         finder = new MethodFinder(writer.context, this);
         var declaration = finder.findMethod(false);
