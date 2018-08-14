@@ -27,6 +27,13 @@ ConcreteCategoryDeclaration.prototype = Object.create(CategoryDeclaration.protot
 ConcreteCategoryDeclaration.prototype.constructor = ConcreteCategoryDeclaration;
 
 
+ConcreteCategoryDeclaration.prototype.isWidget = function(context) {
+    if(this.derivedFrom==null || this.derivedFrom.length!=1)
+        return false;
+    var derived = context.getRegisteredDeclaration(this.derivedFrom[0]);
+    return derived.isWidget(context);
+};
+
 ConcreteCategoryDeclaration.prototype.toEDialect = function(writer) {
     var hasMethods = this.methods!=null && this.methods.length>0;
     this.protoToEDialect(writer, hasMethods, false); // no bindings

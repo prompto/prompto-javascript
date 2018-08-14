@@ -21,6 +21,10 @@ CategoryDeclaration.prototype.getDeclarationType = function() {
     return "Category";
 };
 
+CategoryDeclaration.prototype.isWidget = function(context) {
+    return false;
+};
+
 CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) {
     var instance = this.newInstance(context);
     instance.mutable = true;

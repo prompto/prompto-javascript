@@ -165,13 +165,16 @@ Context.prototype.getLocalCatalog = function() {
         else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
             var info = {};
             info.name = decl.name;
-            info.symbols = decl.symbols.map(function(s){return s.name;});
+            info.symbols = decl.symbols.map(function (s) {
+                return s.name;
+            });
             catalog.enumerations.push(info);
-        } else if(decl instanceof ConcreteWidgetDeclaration || decl instanceof NativeWidgetDeclaration)
-            catalog.widgets.push(name);
-        else if(decl instanceof CategoryDeclaration)
-            catalog.categories.push(name);
-        else if(decl instanceof MethodDeclarationMap) {
+        } else if(decl instanceof CategoryDeclaration) {
+            if(decl.isWidget(this))
+                catalog.widgets.push(name);
+            else
+                catalog.categories.push(name);
+        } else if(decl instanceof MethodDeclarationMap) {
             var method = {};
             method.name = decl.name;
             method.protos = [];

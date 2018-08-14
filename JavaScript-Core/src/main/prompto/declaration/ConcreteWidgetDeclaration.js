@@ -12,6 +12,11 @@ ConcreteWidgetDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.
 ConcreteWidgetDeclaration.prototype.constructor = ConcreteWidgetDeclaration;
 
 
+ConcreteWidgetDeclaration.prototype.isWidget = function(context) {
+    return true;
+};
+
+
 ConcreteWidgetDeclaration.prototype.getDeclarationType = function() {
     return "Widget";
 };

@@ -9,6 +9,9 @@ function NativeWidgetDeclaration(name, categoryBindings, methods) {
 NativeWidgetDeclaration.prototype = Object.create(NativeCategoryDeclaration.prototype);
 NativeWidgetDeclaration.prototype.constructor = NativeCategoryDeclaration;
 
+NativeWidgetDeclaration.prototype.isWidget = function(context) {
+    return true;
+};
 
 NativeWidgetDeclaration.prototype.getDeclarationType = function() {
     return "Widget";
