@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
+exports.testAnyAsParameter = function(test) {
+	compareResourceEME(test, "categories/anyAsParameter.pec");
+};
+
 exports.testComposed = function(test) {
 	compareResourceEME(test, "categories/composed.pec");
 };

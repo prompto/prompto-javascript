@@ -15,6 +15,14 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testInterpretedAnyAsParameter = function(test) {
+	checkInterpretedOutput(test, "categories/anyAsParameter.pec");
+};
+
+exports.testTranspiledAnyAsParameter = function(test) {
+	checkTranspiledOutput(test, "categories/anyAsParameter.pec");
+};
+
 exports.testInterpretedComposed = function(test) {
 	checkInterpretedOutput(test, "categories/composed.pec");
 };

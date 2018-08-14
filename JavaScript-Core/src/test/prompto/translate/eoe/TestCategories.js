@@ -2,6 +2,10 @@ require("../../../../exploded");
 
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+exports.testAnyAsParameter = function(test) {
+	compareResourceEOE(test, "categories/anyAsParameter.pec");
+};
+
 exports.testComposed = function(test) {
 	compareResourceEOE(test, "categories/composed.pec");
 };

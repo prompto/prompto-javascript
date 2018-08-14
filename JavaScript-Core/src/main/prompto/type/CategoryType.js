@@ -361,8 +361,9 @@ CategoryType.prototype.isAssignableFrom = function(context, other) {
 
 
 CategoryType.prototype.isAssignableFromCategory = function(context, other) {
-    return other.isDerivedFrom(context, this)
-        || other.isDerivedFromAnonymous(context, this);
+    return "Any"===this.name
+            || other.isDerivedFrom(context, this)
+            || other.isDerivedFromAnonymous(context, this);
 };
 
 
