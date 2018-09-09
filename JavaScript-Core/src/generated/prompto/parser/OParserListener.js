@@ -1307,6 +1307,15 @@ OParserListener.prototype.exitNull_literal = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#jsx_ws.
+OParserListener.prototype.enterJsx_ws = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_ws.
+OParserListener.prototype.exitJsx_ws = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#FullDeclarationList.
 OParserListener.prototype.enterFullDeclarationList = function(ctx) {
 };

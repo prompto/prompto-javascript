@@ -1361,6 +1361,15 @@ EParserListener.prototype.exitLfp = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#jsx_ws.
+EParserListener.prototype.enterJsx_ws = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_ws.
+EParserListener.prototype.exitJsx_ws = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#indent.
 EParserListener.prototype.enterIndent = function(ctx) {
 };
