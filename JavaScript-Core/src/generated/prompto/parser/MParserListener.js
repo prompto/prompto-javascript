@@ -1253,6 +1253,15 @@ MParserListener.prototype.exitLfp = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#jsx_ws.
+MParserListener.prototype.enterJsx_ws = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#jsx_ws.
+MParserListener.prototype.exitJsx_ws = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#indent.
 MParserListener.prototype.enterIndent = function(ctx) {
 };
