@@ -2585,7 +2585,7 @@ EPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitJsxElement = function(ctx) {
-    var elem = this.getNodeValue(ctx.jsx);
+    var elem = this.getNodeValue(ctx.opening);
     var children = this.getNodeValue(ctx.children_);
     elem.setChildren(children);
     this.setNodeValue(ctx, elem);

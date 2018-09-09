@@ -2552,7 +2552,7 @@ MPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitJsxElement = function(ctx) {
-    var elem = this.getNodeValue(ctx.jsx);
+    var elem = this.getNodeValue(ctx.opening);
     var children = this.getNodeValue(ctx.children_);
     elem.setChildren(children);
     this.setNodeValue(ctx, elem);
