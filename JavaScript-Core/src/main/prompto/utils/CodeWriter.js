@@ -45,6 +45,13 @@ CodeWriter.prototype.isGlobalContext = function() {
     return this.context.isGlobalContext();
 };
 
+
+CodeWriter.prototype.appendRaw = function(s) {
+    this.indenter.append(s);
+    return this;
+};
+
+
 CodeWriter.prototype.append = function(s) {
     if(typeof(s)!==typeof(""))
         console.error(s);

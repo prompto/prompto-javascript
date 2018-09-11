@@ -48,6 +48,18 @@ OPromptoBuilder.prototype.getNodeValue = function(node) {
 };
 
 
+OPromptoBuilder.prototype.getHiddenTokensAfterNode = function(node) {
+    return this.getHiddenTokensAfterToken(node.symbol);
+};
+
+OPromptoBuilder.prototype.getHiddenTokensAfterToken = function(token) {
+    var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
+    if(hidden==null || hidden.length===0)
+        return null;
+    else
+        return hidden.map(function(token) { return token.text; }).join("");
+};
+
 
 OPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
 	var e = this.getNodeValue(ctx.parent);
@@ -2586,6 +2598,8 @@ OPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
 
 OPromptoBuilder.prototype.exitJsxElement = function(ctx) {
     var elem = this.getNodeValue(ctx.opening);
+    var closing = this.getNodeValue(ctx.closing);
+    elem.setClosing(closing);
     var children = this.getNodeValue(ctx.children_);
     elem.setChildren(children);
     this.setNodeValue(ctx, elem);
@@ -2614,7 +2628,9 @@ OPromptoBuilder.prototype.exitJsxValue = function(ctx) {
 OPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var value = this.getNodeValue(ctx.value);
-    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value));
+    var stop = value!=null ? ctx.value.stop : ctx.name.stop;
+    var suite = value==null ? null : this.getHiddenTokensAfterToken(stop);
+    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value, suite));
 };
 
 
@@ -2651,17 +2667,28 @@ OPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
 
 OPromptoBuilder.prototype.exitJsx_opening = function(ctx) {
     var name = this.getNodeValue(ctx.name);
+    var nameSuite = this.getHiddenTokensAfterToken(ctx.name.stop);
     var attributes = ctx.jsx_attribute()
         .map(cx => this.getNodeValue(cx), this);
-    this.setNodeValue(ctx, new jsx.JsxElement(name, attributes));
+    var openingSuite = this.getHiddenTokensAfterNode(ctx.GT());
+    this.setNodeValue(ctx, new jsx.JsxElement(name, nameSuite, attributes, openingSuite));
+};
+
+
+OPromptoBuilder.prototype.exitJsx_closing = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    var suite = this.getHiddenTokensAfterNode(ctx.GT());
+    this.setNodeValue(ctx, new jsx.JsxClosing(name, suite));
 };
 
 
 OPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
     var name = this.getNodeValue(ctx.name);
+    var nameSuite = this.getHiddenTokensAfterToken(ctx.name.stop);
     var attributes = ctx.jsx_attribute()
         .map(cx => this.getNodeValue(cx), this);
-    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, attributes));
+    var openingSuite = this.getHiddenTokensAfterNode(ctx.GT());
+    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, nameSuite, attributes, openingSuite));
 };
 
 

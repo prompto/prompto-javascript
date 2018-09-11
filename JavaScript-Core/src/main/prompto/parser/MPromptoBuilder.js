@@ -49,6 +49,44 @@ MPromptoBuilder.prototype.getNodeValue = function(node) {
 
 
 
+MPromptoBuilder.prototype.getHiddenTokensBefore = function(token) {
+    var hidden = this.input.getHiddenTokensToLeft(token.tokenIndex);
+    return this.getHiddenTokensText(hidden);
+};
+
+MPromptoBuilder.prototype.getHiddenTokensAfter = function(token) {
+    var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
+    return this.getHiddenTokensText(hidden);
+};
+
+
+MPromptoBuilder.prototype.getHiddenTokensText = function(hidden) {
+    if(hidden==null || hidden.length===0)
+        return null;
+    else
+        return hidden.map(function(token) { return token.text; }).join("");
+};
+
+MPromptoBuilder.prototype.getJsxWhiteSpace = function(ctx) {
+    var within = ctx.children==null ? null : ctx.children
+        .filter(function(child) { return this.isNotIndent(child); } , this)
+        .map(function(child) { return child.getText(); }, this)
+        .join("");
+    if(within==null || within.length===0)
+        return null;
+    var before = this.getHiddenTokensBefore(ctx.start);
+    if(before!=null)
+        within = before + within;
+    var after = this.getHiddenTokensAfter(ctx.stop);
+    if(after!=null)
+        within = within + after;
+    return within;
+};
+
+MPromptoBuilder.prototype.isNotIndent = function(tree) {
+    return !tree.symbol || tree.symbol.type!=parser.MParser.INDENT;
+}
+
 MPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
 	var e = this.getNodeValue(ctx.parent);
 	this.setNodeValue(ctx, e);
@@ -2553,6 +2591,8 @@ MPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
 
 MPromptoBuilder.prototype.exitJsxElement = function(ctx) {
     var elem = this.getNodeValue(ctx.opening);
+    var closing = this.getNodeValue(ctx.closing);
+    elem.setClosing(closing);
     var children = this.getNodeValue(ctx.children_);
     elem.setChildren(children);
     this.setNodeValue(ctx, elem);
@@ -2581,7 +2621,8 @@ MPromptoBuilder.prototype.exitJsxValue = function(ctx) {
 MPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var value = this.getNodeValue(ctx.value);
-    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value));
+    var suite = this.getJsxWhiteSpace(ctx.jsx_ws());
+    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value, suite));
 };
 
 
@@ -2618,17 +2659,26 @@ MPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
 
 MPromptoBuilder.prototype.exitJsx_opening = function(ctx) {
     var name = this.getNodeValue(ctx.name);
+    var nameSuite = this.getJsxWhiteSpace(ctx.jsx_ws());
     var attributes = ctx.jsx_attribute()
-        .map(cx => this.getNodeValue(cx), this);
-    this.setNodeValue(ctx, new jsx.JsxElement(name, attributes));
+        .map(function(cx) { return this.getNodeValue(cx); }, this);
+    this.setNodeValue(ctx, new jsx.JsxElement(name, nameSuite, attributes, null));
+};
+
+
+
+MPromptoBuilder.prototype.exitJsx_closing = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new jsx.JsxClosing(name, null));
 };
 
 
 MPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
     var name = this.getNodeValue(ctx.name);
+    var nameSuite = this.getJsxWhiteSpace(ctx.jsx_ws());
     var attributes = ctx.jsx_attribute()
-        .map(cx => this.getNodeValue(cx), this);
-    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, attributes));
+        .map(function(cx) { return this.getNodeValue(cx); }, this);
+    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, nameSuite, attributes, null));
 };
 
 

@@ -1,6 +1,7 @@
-function JsxAttribute(id, value) {
+function JsxAttribute(id, value, suite) {
 	this.id = id;
 	this.value = value;
+	this.suite = suite;
 	return this;
 }
 
@@ -12,11 +13,15 @@ JsxAttribute.prototype.check = function(context) {
 
 
 JsxAttribute.prototype.toDialect = function(writer) {
-    writer.append(" ").append(this.id.name);
+    writer.append(this.id.name);
     if(this.value!=null) {
         writer.append("=");
         this.value.toDialect(writer);
     }
+    if(this.suite)
+        writer.appendRaw(this.suite);
+    else
+        writer.append(" ");
 };
 
 JsxAttribute.prototype.declare = function(transpiler) {

@@ -36,16 +36,16 @@ ECleverParser.prototype.parse = function() {
 };
 	
 ECleverParser.prototype.parse_declaration_list = function() {
-	var tree = this.declaration_list();
-	var builder = new EPromptoBuilder(this);
-	var walker = new antlr4.tree.ParseTreeWalker();
-	walker.walk(builder, tree);
-	return builder.getNodeValue(tree);
+	return this.doParse(this.declaration_list, true);
 };
 
 ECleverParser.prototype.parse_standalone_type = function() {
-    this.getTokenStream().tokenSource.addLF = false;
-    var tree = this.category_or_any_type();
+    return this.doParse(this.category_or_any_type, false);
+};
+
+ECleverParser.prototype.doParse = function(rule, addLF) {
+    this.getTokenStream().tokenSource.addLF = addLF;
+    var tree = rule.bind(this)();
     var builder = new EPromptoBuilder(this);
     var walker = new antlr4.tree.ParseTreeWalker();
     walker.walk(builder, tree);

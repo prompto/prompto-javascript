@@ -1,8 +1,11 @@
 var JsxElementBase = require("./JsxElementBase").JsxElementBase
 
 
-function JsxElement(id, attributes) {
+function JsxElement(id, nameSuite, attributes, openingSuite) {
     JsxElementBase.call(this, id, attributes);
+    this.nameSuite = nameSuite;
+    this.openingSuite = openingSuite;
+    this.closing = null;
     return this;
 }
 
@@ -14,13 +17,24 @@ JsxElement.prototype.setChildren = function(children) {
 	return this;
 };
 
+JsxElement.prototype.setClosing = function(closing) {
+    this.closing = closing;
+    return this;
+};
+
 JsxElement.prototype.toDialect = function(writer) {
 	writer.append("<").append(this.id.name);
+    if(this.nameSuite!=null)
+        writer.appendRaw(this.nameSuite);
+    else if(this.attributes.length > 0)
+        writer.append(" ");
 	this.attributes.forEach(function(attr) { attr.toDialect(writer); });
 	writer.append(">");
+    if(this.openingSuite!=null)
+        writer.appendRaw(this.openingSuite);
 	if(this.children!=null)
         this.children.forEach(function(child) { child.toDialect(writer); });
-	writer.append("</").append(this.id.name).append(">");
+	this.closing.toDialect(writer);
 };
 
 

@@ -1,6 +1,7 @@
 exports.JsxSelfClosing = require("./JsxSelfClosing").JsxSelfClosing;
 exports.JsxExpression = require("./JsxExpression").JsxExpression;
 exports.JsxElement = require("./JsxElement").JsxElement;
+exports.JsxClosing = require("./JsxClosing").JsxClosing;
 exports.JsxAttribute = require("./JsxAttribute").JsxAttribute;
 exports.JsxLiteral = require("./JsxLiteral").JsxLiteral;
 exports.JsxCode = require("./JsxCode").JsxCode;

@@ -36,15 +36,20 @@ OCleverParser.prototype.parse = function() {
 };
 
 OCleverParser.prototype.parse_declaration_list = function() {
-	var tree = this.declaration_list();
-	var builder = new OPromptoBuilder(this);
-	var walker = new antlr4.tree.ParseTreeWalker();
-	walker.walk(builder, tree);
-	return builder.getNodeValue(tree);
+	return this.doParse(this.declaration_list);
 };
 
 OCleverParser.prototype.equalToken = function() {
 	return OParser.EQUAL;
 };
+
+OCleverParser.prototype.doParse = function(rule) {
+    var tree = rule.bind(this)();
+    var builder = new OPromptoBuilder(this);
+    var walker = new antlr4.tree.ParseTreeWalker();
+    walker.walk(builder, tree);
+    return builder.getNodeValue(tree);
+};
+
 
 exports.OCleverParser = OCleverParser;

@@ -16,6 +16,7 @@ var css = require("../css/index");
 var java = require("../java/index");
 var csharp = require("../csharp/index");
 var python = require("../python/index");
+var antlr4 = require("antlr4");
 
 function EPromptoBuilder(eparser) {
 	parser.EParserListener.call(this);
@@ -46,6 +47,44 @@ EPromptoBuilder.prototype.getNodeValue = function(node) {
         return this.nodeValues[node["%id"]];
 };
 
+
+EPromptoBuilder.prototype.getHiddenTokensBefore = function(token) {
+    var hidden = this.input.getHiddenTokensToLeft(token.tokenIndex);
+    return this.getHiddenTokensText(hidden);
+};
+
+EPromptoBuilder.prototype.getHiddenTokensAfter = function(token) {
+    var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
+    return this.getHiddenTokensText(hidden);
+};
+
+
+EPromptoBuilder.prototype.getHiddenTokensText = function(hidden) {
+    if(hidden==null || hidden.length===0)
+        return null;
+    else
+        return hidden.map(function(token) { return token.text; }).join("");
+};
+
+EPromptoBuilder.prototype.getJsxWhiteSpace = function(ctx) {
+    var within = ctx.children==null ? null : ctx.children
+        .filter(function(child) { return this.isNotIndent(child); } , this)
+        .map(function(child) { return child.getText(); }, this)
+        .join("");
+    if(within==null || within.length===0)
+        return null;
+    var before = this.getHiddenTokensBefore(ctx.start);
+    if(before!=null)
+        within = before + within;
+    var after = this.getHiddenTokensAfter(ctx.stop);
+    if(after!=null)
+        within = within + after;
+    return within;
+};
+
+EPromptoBuilder.prototype.isNotIndent = function(tree) {
+    return !tree.symbol || tree.symbol.type!=parser.EParser.INDENT;
+}
 
 EPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
@@ -2586,6 +2625,8 @@ EPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitJsxElement = function(ctx) {
     var elem = this.getNodeValue(ctx.opening);
+    var closing = this.getNodeValue(ctx.closing);
+    elem.setClosing(closing);
     var children = this.getNodeValue(ctx.children_);
     elem.setChildren(children);
     this.setNodeValue(ctx, elem);
@@ -2614,7 +2655,8 @@ EPromptoBuilder.prototype.exitJsxValue = function(ctx) {
 EPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var value = this.getNodeValue(ctx.value);
-    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value));
+    var suite = this.getJsxWhiteSpace(ctx.jsx_ws());
+    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value, suite));
 };
 
 
@@ -2650,17 +2692,25 @@ EPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
 
 EPromptoBuilder.prototype.exitJsx_opening = function(ctx) {
     var name = this.getNodeValue(ctx.name);
+    var nameSuite = this.getJsxWhiteSpace(ctx.jsx_ws());
     var attributes = ctx.jsx_attribute()
         .map(function(cx) { return this.getNodeValue(cx); }, this);
-    this.setNodeValue(ctx, new jsx.JsxElement(name, attributes));
+    this.setNodeValue(ctx, new jsx.JsxElement(name, nameSuite, attributes, null));
+};
+
+
+EPromptoBuilder.prototype.exitJsx_closing = function(ctx) {
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new jsx.JsxClosing(name, null));
 };
 
 
 EPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
     var name = this.getNodeValue(ctx.name);
+    var nameSuite = this.getJsxWhiteSpace(ctx.jsx_ws());
     var attributes = ctx.jsx_attribute()
         .map(function(cx) { return this.getNodeValue(cx); }, this);
-    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, attributes));
+    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, nameSuite, attributes, null));
 };
 
 
