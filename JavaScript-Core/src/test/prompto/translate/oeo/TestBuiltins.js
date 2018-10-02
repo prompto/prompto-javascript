@@ -90,6 +90,10 @@ exports.testTextCount = function(test) {
 	compareResourceOEO(test, "builtins/textCount.poc");
 };
 
+exports.testTextIndexOf = function(test) {
+	compareResourceOEO(test, "builtins/textIndexOf.poc");
+};
+
 exports.testTextLowercase = function(test) {
 	compareResourceOEO(test, "builtins/textLowercase.poc");
 };

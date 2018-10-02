@@ -175,6 +175,14 @@ exports.testTranspiledTextCount = function(test) {
 	checkTranspiledOutput(test, "builtins/textCount.poc");
 };
 
+exports.testInterpretedTextIndexOf = function(test) {
+	checkInterpretedOutput(test, "builtins/textIndexOf.poc");
+};
+
+exports.testTranspiledTextIndexOf = function(test) {
+	checkTranspiledOutput(test, "builtins/textIndexOf.poc");
+};
+
 exports.testInterpretedTextLowercase = function(test) {
 	checkInterpretedOutput(test, "builtins/textLowercase.poc");
 };

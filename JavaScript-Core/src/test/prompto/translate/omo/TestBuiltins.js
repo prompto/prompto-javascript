@@ -90,6 +90,10 @@ exports.testTextCount = function(test) {
 	compareResourceOMO(test, "builtins/textCount.poc");
 };
 
+exports.testTextIndexOf = function(test) {
+	compareResourceOMO(test, "builtins/textIndexOf.poc");
+};
+
 exports.testTextLowercase = function(test) {
 	compareResourceOMO(test, "builtins/textLowercase.poc");
 };

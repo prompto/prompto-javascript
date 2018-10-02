@@ -375,6 +375,7 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
+    transpiler.lines.push("String.prototype.indexOf1Based = function(value) { return 1 + this.indexOf(value); }");
     return transpiler;
 }
 

@@ -8,6 +8,7 @@ var BooleanType = require("./BooleanType").BooleanType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var TextValue = null; // circular dependency
+var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var TextLiteral = null;
@@ -273,6 +274,8 @@ TextType.prototype.getMemberMethods = function(context, name) {
             return [new ReplaceAllMethodDeclaration()];
         case "split":
             return [new SplitMethodDeclaration()];
+        case "indexOf":
+            return [new IndexOfMethodDeclaration()];
         default:
             return NativeType.prototype.getMemberMethods.call(context, name);
     }
@@ -324,6 +327,11 @@ function ReplaceAllMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "replaceAll",
         new CategoryArgument(TextType.instance, new Identifier("toReplace")),
         new CategoryArgument(TextType.instance, new Identifier("replaceWith")));
+    return this;
+}
+
+function IndexOfMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "indexOf", new CategoryArgument(TextType.instance, new Identifier("value")));
     return this;
 }
 
@@ -514,7 +522,25 @@ function resolveBuiltInMethodDeclaration() {
         transpiler.append(")");
     };
 
+    IndexOfMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    IndexOfMethodDeclaration.prototype.constructor = IndexOfMethodDeclaration;
 
+    IndexOfMethodDeclaration.prototype.interpret = function(context) {
+        var value = this.getValue(context).getStorableData();
+        var find = context.getValue(new Identifier("value")).getStorableData();
+        var index = value.indexOf(find);
+        return new IntegerValue(index + 1);
+    };
+
+    IndexOfMethodDeclaration.prototype.check = function(context) {
+        return IntegerType.instance;
+    };
+
+    IndexOfMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("indexOf1Based(");
+        assignments[0].transpile(transpiler);
+        transpiler.append(")");
+    };
 }
 
 exports.TextType = TextType;
