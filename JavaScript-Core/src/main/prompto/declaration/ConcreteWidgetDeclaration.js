@@ -1,5 +1,6 @@
 var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 
 
 function ConcreteWidgetDeclaration(name, derivedFrom, methods) {
@@ -26,7 +27,7 @@ ConcreteWidgetDeclaration.prototype.categoryTypeToEDialect = function(writer) {
     if(this.derivedFrom==null)
         writer.append("widget");
     else
-        derivedFrom.toDialect(writer, true);
+        this.derivedFrom.toDialect(writer, true);
 };
 
 
