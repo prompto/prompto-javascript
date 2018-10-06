@@ -96,6 +96,14 @@ ProblemCollector.prototype.reportInvalidCast = function(expression, target, actu
     this.collectProblem(problem);
 };
 
+ProblemListener.prototype.reportExpectingBoolean = function(expression, type) {
+    var problem = this.readSection(expression);
+    problem.type = "error";
+    problem.message = "Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString();
+    this.collectProblem(problem);
+}
+
+
 ProblemCollector.prototype.readSection = function(section) {
     return {
             path : section.path,

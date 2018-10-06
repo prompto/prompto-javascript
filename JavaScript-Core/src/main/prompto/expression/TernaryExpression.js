@@ -1,6 +1,7 @@
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
+var VoidType = require("../type/VoidType").VoidType;
 
 function TernaryExpression(condition, ifTrue, ifFalse) {
     this.condition = condition;
@@ -28,11 +29,13 @@ TernaryExpression.prototype.toDialect = function(writer) {
 TernaryExpression.prototype.check = function(context) {
     var type = this.condition.check(context);
     if(!(type instanceof BooleanType))
-        throw new SyntaxError("Cannot test condition on " +  type.getName() );
+        context.problemListener.reportExpectingBoolean(this.condition, type);
     var trueType = this.ifTrue.check(context);
-    // Type falseType = this.ifFalse.check(context);
-    // TODO check compatibility
-    return trueType;
+    var falseType = this.ifFalse.check(context);
+    if(trueType.isAssignableFrom(context, falseType))
+       return trueType;
+    else if(falseType.isAssignableFrom(context, trueType))
+        return falseType;
 };
 
 TernaryExpression.prototype.interpret = function(context) {

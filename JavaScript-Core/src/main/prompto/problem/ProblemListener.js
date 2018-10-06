@@ -61,5 +61,8 @@ ProblemListener.prototype.reportInvalidCast = function(expression, target, actua
     throw new SyntaxError("Cannot cast " + actual.toString() + " to " + target.toString());
 };
 
+ProblemListener.prototype.reportExpectingBoolean = function(expression, type) {
+    throw new SyntaxError("Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString());
+}
 
 exports.ProblemListener = ProblemListener;

@@ -4,8 +4,10 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var Argument = require("../argument/Argument").Argument;
 var Dialect = require("../parser/Dialect").Dialect;
 var CategoryDeclaration = null;
+var VoidType = require("../type/VoidType").VoidType;
 var MethodType = require("../type/MethodType").MethodType;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
+var Section = require("../parser/Section").Section;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var MethodDeclarationMap = null;
 var InstanceContext = null;
@@ -17,7 +19,8 @@ exports.resolve = function() {
 }
 
 function InstanceExpression(id) {
-	this.id = id;
+    Section.prototype.copySectionFrom.call(this, id);
+    this.id = id;
 	return this;
 }
 
@@ -26,6 +29,7 @@ Object.defineProperty(InstanceExpression.prototype, "name", {
         return this.id.name;
     }
 });
+
 
 InstanceExpression.prototype.toString = function() {
 	return this.name;
@@ -100,8 +104,10 @@ InstanceExpression.prototype.check = function(context) {
 		return named.getType(context);
 	} else if(named instanceof MethodDeclarationMap) { // global method or closure
 		return new MethodType(named.getFirst());
-	} else
+	} else {
         context.problemListener.reportUnknownVariable(this.id);
+        return VoidType.instance;
+    }
 };
 
 InstanceExpression.prototype.interpret = function(context) {
