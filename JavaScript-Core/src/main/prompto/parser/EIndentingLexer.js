@@ -93,6 +93,8 @@ EIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 EIndentingLexer.prototype.deriveToken = function(token, type) {
 	var res = token.clone();
 	res.type = type;
+	if(token.type === ELexer.EOF)
+		res._text = ""
 	return res;
 };
 
