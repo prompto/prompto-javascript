@@ -73,7 +73,7 @@ MethodCall.prototype.check = function(context, updateSelectorParent) {
 	var finder = new MethodFinder(context, this);
 	var declaration = finder.findMethod(false);
     if(!declaration) {
-        context.problemListener.reportUnknownMethod(this.id);
+        context.problemListener.reportUnknownMethod(this.selector.id);
         return VoidType.instance;
     }
     if(updateSelectorParent && declaration.memberOf && !this.selector.parent)

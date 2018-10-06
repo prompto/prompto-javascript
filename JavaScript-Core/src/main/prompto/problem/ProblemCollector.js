@@ -97,8 +97,6 @@ ProblemCollector.prototype.reportInvalidCast = function(expression, target, actu
 };
 
 ProblemCollector.prototype.readSection = function(section) {
-    /*if(!section.end)
-        return null;*/
     return {
             path : section.path,
             startLine : section.start.line,

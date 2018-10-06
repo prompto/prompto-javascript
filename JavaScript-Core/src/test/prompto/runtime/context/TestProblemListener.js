@@ -14,7 +14,7 @@ exports.testLexerError = function(test) {
 exports.testSyntaxError = function(test) {
     var code = "define id as Text attribute\n" +
                "define name as";
-    checkProblems(test, code, "no viable alternative at input 'define name as<EOF>'");
+    checkProblems(test, code, "no viable alternative at input 'define name as'");
 };
 
 exports.testDuplicateAttribute = function(test) {
