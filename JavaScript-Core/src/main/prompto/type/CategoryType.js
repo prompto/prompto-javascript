@@ -44,14 +44,6 @@ function CategoryType(id) {
 CategoryType.prototype = Object.create(BaseType.prototype);
 CategoryType.prototype.constructor =  CategoryType;
 
-/*
-	
-	public Class<?> toJavaClass() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-*/
-
 CategoryType.prototype.toDialect = function(writer) {
     if (this.mutable)
         writer.append("mutable ");
@@ -322,7 +314,7 @@ CategoryType.prototype.checkMember = function(context, name) {
     if (cd instanceof EnumeratedNativeDeclaration) {
         cd.getType(context).checkMember(context, name);
     } else if (cd instanceof CategoryDeclaration) {
-        if(cd.storable && "dbId"===name.toString())
+        if(cd.storable && "dbId" === name.toString())
             return AnyType.instance;
         else if (cd.hasAttribute(context, name)) {
             var ad = context.getRegisteredDeclaration(name);
