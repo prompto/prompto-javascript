@@ -323,7 +323,7 @@ CategoryType.prototype.checkMember = function(context, name) {
         cd.getType(context).checkMember(context, name);
     } else if (cd instanceof CategoryDeclaration) {
         if(cd.storable && "dbId"===name.toString())
-            return AnyType.instance();
+            return AnyType.instance;
         else if (cd.hasAttribute(context, name)) {
             var ad = context.getRegisteredDeclaration(name);
             if (ad == null) {

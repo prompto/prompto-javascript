@@ -6,10 +6,10 @@ function AnyType() {
  	return this;
  }
 
- AnyType.prototype = Object.create(NativeType.prototype);
- AnyType.prototype.constructor = AnyType;
+AnyType.prototype = Object.create(NativeType.prototype);
+AnyType.prototype.constructor = AnyType;
 
- AnyType.instance = new AnyType();
+AnyType.instance = new AnyType();
 	
 
 
