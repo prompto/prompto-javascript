@@ -4,7 +4,8 @@ var StoredDocument = require("./StoredDocument").StoredDocument;
 function StorableDocument(categories) {
     if(!categories)
         throw new Error("!!!");
-    this.categories = categories;
+    // use reserved keyword explicitly
+    this.category = categories;
     this.document = null;
     return this;
 }
@@ -16,7 +17,7 @@ Object.defineProperty(StorableDocument.prototype, "dirty", {
     set : function(value) {
         if (value) {
             if(!this.document)
-                this.document = new StoredDocument(this.categories, ++DataStore.instance.nextDbId);
+                this.document = new StoredDocument(this.category, ++DataStore.instance.nextDbId);
         } else
             this.document = null;
     }

@@ -1,6 +1,7 @@
 
 function StoredDocument(categories, dbId) {
-    this.categories = categories;
+    // use reserved keyword explicitly
+    this.category = categories;
     this.dbId = dbId;
     return this;
 }
