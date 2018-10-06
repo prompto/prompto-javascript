@@ -10,6 +10,7 @@ var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
+var VoidType = require("../type/VoidType").VoidType;
 var EnumeratedCategoryType = null;
 var CategoryType = null;
 var MethodSelector = null;
@@ -73,19 +74,22 @@ UnresolvedIdentifier.prototype.interpret = function(context) {
 
 UnresolvedIdentifier.prototype.resolveAndCheck = function(context, forMember) {
     this.resolve(context, forMember);
-    return this.resolved.check(context);
+    return this.resolved ? this.resolved.check(context) : VoidType.instance;
 };
 
 UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSelectorParent) {
 	if(updateSelectorParent)
         this.resolved = null;
     if(this.resolved==null) {
-        // don't collect problems during resolution
+        // ignore resolution problems during resolution
         var listener = context.problemListener;
-        context.problemListener = new ProblemListener();
-        this.resolved = this.doResolve(context, forMember, updateSelectorParent);
-        // restore listener
-        context.problemListener = listener;
+        try {
+            context.problemListener = new ProblemListener();
+            this.resolved = this.doResolve(context, forMember, updateSelectorParent);
+        } finally {
+            // restore listener
+            context.problemListener = listener;
+        }
     }
 	if(this.resolved==null)
         context.problemListener.reportUnknownIdentifier(this.id);
@@ -126,7 +130,7 @@ UnresolvedIdentifier.prototype.resolveInstance = function(context) {
 		id.check(context);
 		return id;
 	} catch(e) {
-		if(e instanceof SyntaxError) {
+		if(e instanceof PromptoError) {
 			return null;
 		} else {
 			throw e;
@@ -157,7 +161,7 @@ UnresolvedIdentifier.prototype.resolveConstructor = function(context) {
 		method.check(context);
 		return method;
 	} catch(e) {
-		if(e instanceof SyntaxError) {
+		if(e instanceof PromptoError) {
 			return null;
 		} else {
 			throw e;
