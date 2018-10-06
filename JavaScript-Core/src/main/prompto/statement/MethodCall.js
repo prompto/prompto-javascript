@@ -72,8 +72,10 @@ MethodCall.prototype.toString = function() {
 MethodCall.prototype.check = function(context, updateSelectorParent) {
 	var finder = new MethodFinder(context, this);
 	var declaration = finder.findMethod(false);
-    if(!declaration)
+    if(!declaration) {
+        context.problemListener.reportUnknownMethod(this.id);
         return VoidType.instance;
+    }
     if(updateSelectorParent && declaration.memberOf && !this.selector.parent)
         this.selector.parent = new ThisExpression();
     var local = this.selector.newLocalCheckContext(context, declaration);

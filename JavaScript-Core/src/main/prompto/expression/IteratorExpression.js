@@ -17,7 +17,7 @@ IteratorExpression.prototype.constructor = IteratorExpression;
 
 
 IteratorExpression.prototype.check = function(context) {
-    var elemType = this.source.check(context).checkIterator(context);
+    var elemType = this.source.check(context).checkIterator(context, this.source);
     var child = context.newChildContext();
     child.registerValue(new Variable(this.name, elemType));
     var itemType = this.expression.check(child);
@@ -26,7 +26,7 @@ IteratorExpression.prototype.check = function(context) {
 
 
 IteratorExpression.prototype.interpret = function(context) {
-    var elemType = this.source.check(context).checkIterator(context);
+    var elemType = this.source.check(context).checkIterator(context, this.source);
     var items = this.source.interpret(context);
     var length = items.getMemberValue(context, new Identifier("count"), false);
     var iterator = this.getIterator(context, items);
@@ -42,7 +42,7 @@ IteratorExpression.prototype.declare = function(transpiler) {
 
 IteratorExpression.prototype.transpile = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
-    var resultType = srcType.checkIterator(transpiler.context);
+    var resultType = srcType.checkIterator(transpiler.context, this.source);
     this.source.transpile(transpiler);
     transpiler = transpiler.newChildTranspiler()
     srcType.transpileIterator(transpiler, this.name, this.expression);
@@ -60,7 +60,7 @@ IteratorExpression.prototype.getIterator = function(context, src) {
 IteratorExpression.prototype.toDialect = function(writer) {
     var srcType = this.source.check(writer.context);
     writer = writer.newChildWriter();
-    var resultType = srcType.checkIterator(writer.context);
+    var resultType = srcType.checkIterator(writer.context, this.source);
     writer.context.registerValue(new Variable(this.name, resultType));
     writer.toDialect(this);
 };

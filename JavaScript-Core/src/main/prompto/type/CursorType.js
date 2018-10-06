@@ -23,7 +23,7 @@ CursorType.prototype.equals = function(obj) {
     return this.itemType.equals(other.itemType);
 };
 
-CursorType.prototype.checkIterator = function(context) {
+CursorType.prototype.checkIterator = function(context, source) {
     return this.itemType;
 };
 

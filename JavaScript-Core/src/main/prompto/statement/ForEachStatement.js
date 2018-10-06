@@ -23,7 +23,7 @@ ForEachStatement.prototype.constructor = ForEachStatement;
 
 ForEachStatement.prototype.check = function(context) {
 	var srcType = this.source.check(context);
-	var elemType = srcType.checkIterator(context);
+	var elemType = srcType.checkIterator(context, this.source);
 	return this.checkItemIterator(elemType, context);
 };
 
@@ -39,7 +39,7 @@ ForEachStatement.prototype.checkItemIterator = function(elemType, context) {
 
 ForEachStatement.prototype.interpret = function(context) {
 	var srcType = this.source.check(context);
-	var elemType = srcType.checkIterator(context);
+	var elemType = srcType.checkIterator(context, this.source);
 	return this.interpretItemIterator(elemType, context);
 };
 
@@ -99,7 +99,7 @@ ForEachStatement.prototype.interpretItemIteratorWithIndex = function(elemType, c
 ForEachStatement.prototype.toDialect = function(writer) {
     writer = writer.newChildWriter();
     var srcType = this.source.check(writer.context);
-    var elemType = srcType.checkIterator(writer.context);
+    var elemType = srcType.checkIterator(writer.context, this.source);
     var itemName = this.v2 ? this.v2 : this.v1;
     writer.context.registerValue(new Variable(itemName, elemType))
     if(this.v2)
@@ -170,7 +170,7 @@ ForEachStatement.prototype.declare = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
     if(srcType instanceof DictionaryType)
         transpiler.require(StrictSet);
-    var elemType = srcType.checkIterator(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context, this.source);
     this.source.declare(transpiler);
     transpiler = transpiler.newChildTranspiler();
     if(this.v2) {
@@ -200,7 +200,7 @@ ForEachStatement.prototype.transpileNoIndex = function(transpiler) {
 
 ForEachStatement.prototype.transpileArrayNoIndex = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
-    var elemType = srcType.checkIterator(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context, this.source);
     var itemsName = "$" + this.v1.name + "_items";
     transpiler.append("var ").append(itemsName).append(" = ");
     this.source.transpile(transpiler);
@@ -221,7 +221,7 @@ ForEachStatement.prototype.transpileArrayNoIndex = function(transpiler) {
 
 ForEachStatement.prototype.transpileIteratorNoIndex = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
-    var elemType = srcType.checkIterator(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context, this.source);
     var iterName = "$" + this.v1.name + "_iterator";
     transpiler.append("var ").append(iterName).append(" = ");
     this.source.transpile(transpiler);
@@ -251,7 +251,7 @@ ForEachStatement.prototype.transpileWithIndex = function(transpiler) {
 
 ForEachStatement.prototype.transpileArrayWithIndex = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
-    var elemType = srcType.checkIterator(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context, this.source);
     var itemsName = "$" + this.v2.name + "_items";
     transpiler.append("var ").append(itemsName).append(" = ");
     this.source.transpile(transpiler);
@@ -272,7 +272,7 @@ ForEachStatement.prototype.transpileArrayWithIndex = function(transpiler) {
 
 ForEachStatement.prototype.transpileIteratorWithIndex = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
-    var elemType = srcType.checkIterator(transpiler.context);
+    var elemType = srcType.checkIterator(transpiler.context, this.source);
     transpiler.append("var ").append(this.v1.name).append(" = 1;").newLine();
     var iterName = "$" + this.v2.name + "_iterator";
     transpiler.append("var ").append(iterName).append(" = ");

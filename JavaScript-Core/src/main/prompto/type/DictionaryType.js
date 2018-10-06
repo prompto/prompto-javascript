@@ -161,7 +161,7 @@ DictionaryType.prototype.transpileAssignItemValue = function(transpiler, item, e
 };
 
 
-DictionaryType.prototype.checkIterator = function(context) {
+DictionaryType.prototype.checkIterator = function(context, source) {
 	return new EntryType(this.itemType);
 };
 

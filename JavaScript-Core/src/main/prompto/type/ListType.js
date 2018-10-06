@@ -221,7 +221,7 @@ ListType.prototype.transpileContainsAny = function(transpiler, other, container,
     transpiler.append(")");
 };
 
-ListType.prototype.checkIterator = function(context) {
+ListType.prototype.checkIterator = function(context, source) {
 	return this.itemType;
 };
 

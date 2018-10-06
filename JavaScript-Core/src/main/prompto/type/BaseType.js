@@ -1,5 +1,6 @@
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var EnumeratedNativeType = null;
+var VoidType = null;
 var TextType = null;
 var NullType = null;
 var TupleValue = null;
@@ -8,6 +9,7 @@ var ListValue = null;
 
 exports.resolve = function() {
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
+    VoidType = require("./VoidType").VoidType;
     TextType = require("./TextType").TextType;
     NullType = require("./NullType").NullType;
     TupleValue = require("../value/TupleValue").TupleValue;
@@ -382,8 +384,9 @@ BaseType.prototype.transpileSlice = function(transpiler, first, last) {
     throw new SyntaxError("Cannot transpile slice for " + this.name);
 };
 
-BaseType.prototype.checkIterator = function(context) {
-	throw new SyntaxError("Cannot iterate over " + this.name);
+BaseType.prototype.checkIterator = function(context, source) {
+    context.problemListener.reportCannotIterate(source);
+    return VoidType.instance;
 };
 
 

@@ -69,7 +69,7 @@ RangeType.prototype.transpileSlice = function(transpiler, first, last) {
 
 
 
-RangeType.prototype.checkIterator = function(context) {
+RangeType.prototype.checkIterator = function(context, source) {
 	return this.itemType;
 };
 

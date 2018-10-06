@@ -53,6 +53,10 @@ ProblemCollector.prototype.reportUnknownVariable = function(id) {
     this.reportUnknown(id, "variable");
 };
 
+ProblemCollector.prototype.reportUnknownIdentifier = function(id) {
+    this.reportUnknown(id, "identifier");
+};
+
 
 ProblemCollector.prototype.reportEmptyVariable = function(id) {
     var problem = this.readSection(id);
@@ -75,6 +79,15 @@ ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
     problem.message = "No matching prototype for: " + method.toString();
     this.collectProblem(problem);
 };
+
+
+ProblemCollector.prototype.reportCannotIterate = function(source) {
+    var problem = this.readSection(source);
+    problem.type = "error";
+    problem.message = "Cannot iterate over: " + source.toString();
+    this.collectProblem(problem);
+};
+
 
 ProblemCollector.prototype.reportInvalidCast = function(expression, target, actual) {
     var problem = this.readSection(expression);

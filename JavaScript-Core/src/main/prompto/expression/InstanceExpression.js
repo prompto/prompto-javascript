@@ -88,9 +88,7 @@ InstanceExpression.prototype.requiresMethod = function(writer) {
 
 InstanceExpression.prototype.check = function(context) {
 	var named = context.getRegistered(this.id.name);
-	if (named == null) {
-		throw new SyntaxError("Unknown identifier:" + this.id.name);
-	} else if (named instanceof Variable) { // local variable
+	if (named instanceof Variable) { // local variable
         return named.getType(context);
     } else if(named instanceof LinkedVariable) { // local variable
         return named.getType(context);

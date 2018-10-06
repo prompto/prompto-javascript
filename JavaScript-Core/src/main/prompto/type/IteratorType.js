@@ -24,7 +24,7 @@ IteratorType.prototype.equals = function(other) {
     return this.itemType.equals(other.itemType);
 };
 
-IteratorType.prototype.checkIterator = function(context) {
+IteratorType.prototype.checkIterator = function(context, source) {
     return this.itemType;
 };
 

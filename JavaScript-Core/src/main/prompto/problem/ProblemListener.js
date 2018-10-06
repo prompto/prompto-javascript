@@ -45,6 +45,10 @@ ProblemListener.prototype.reportNoMatchingPrototype = function(method) {
     throw new SyntaxError("No matching prototype for: " + method.toString());
 };
 
+ProblemListener.prototype.reportCannotIterate = function(source) {
+    throw new SyntaxError("Cannot iterate over " + source.toString());
+};
+
 ProblemListener.prototype.reportNotAResource = function(method) {
     throw new SyntaxError("Not a resource");
 };

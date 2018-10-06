@@ -125,7 +125,7 @@ SetType.prototype.transpileContainsAny = function(transpiler, other, container, 
 };
 
 
-SetType.prototype.checkIterator = function(context) {
+SetType.prototype.checkIterator = function(context, source) {
 	return this.itemType;
 }
 
