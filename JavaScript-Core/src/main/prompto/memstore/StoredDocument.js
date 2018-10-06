@@ -1,6 +1,6 @@
 
 function StoredDocument(categories, dbId) {
-    this.category = categories;
+    this.categories = categories;
     this.dbId = dbId;
     return this;
 }
