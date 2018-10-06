@@ -539,6 +539,8 @@ InstanceContext.prototype.getRegistered = function(name) {
     if (actual)
         return actual;
     var decl = this.getDeclaration();
+    if (decl==null)
+        return null;
     var methods = decl.getMemberMethodsMap(this, name);
     return methods.isEmpty() ? null : methods;
 };
