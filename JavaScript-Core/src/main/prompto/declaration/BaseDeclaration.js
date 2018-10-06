@@ -34,7 +34,7 @@ BaseDeclaration.prototype.fetchBody = function(parser) {
         section = this.annotations[0];
     if(section==null)
         section = this;
-    return parser.getTokenStream().getText({ start: section.start.tokenIndex, stop: this.end.tokenIndex });
+    return parser.getTokenStream().getText({ start: section.start.tokenIndex, stop: this.end.tokenIndex + 1 });
 }
 
 

@@ -8,7 +8,7 @@ exports.resolve = function() {
 
 function ONamingLexer(input) {
 	OLexer.call(this, input);
-	this.dialect = Dialect.OOPS;
+	this.dialect = Dialect.O;
 	return this;
 }
 

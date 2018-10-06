@@ -49,7 +49,7 @@ OPromptoBuilder.prototype.getNodeValue = function(node) {
 
 
 OPromptoBuilder.prototype.getHiddenTokensAfterNode = function(node) {
-    return this.getHiddenTokensAfterToken(node.symbol);
+    return node ? this.getHiddenTokensAfterToken(node.symbol) : null;
 };
 
 OPromptoBuilder.prototype.getHiddenTokensAfterToken = function(token) {
@@ -2764,7 +2764,8 @@ OPromptoBuilder.prototype.findLastValidToken = function(idx) {
 OPromptoBuilder.prototype.readValidToken = function(idx) {
 	var token = this.input.get(idx);
 	var text = token.text;
-	if(text!==null && text.length>0 && !value.CharacterValue.isWhitespace(text[0])) {
+	// ignore trailing whitespace
+	if(text!==null && text.replace(/(\n|\r|\t|' ')/g,"").length>0) {
 		return token;
 	} else {
 		return null;

@@ -1,8 +1,15 @@
+var Section = require("../parser/Section").Section;
+
 function Annotation(id, expression) {
+    Section.call(this);
     this.id = id;
     this.expression = expression;
     return this;
 }
+
+Annotation.prototype = Object.create(Section.prototype);
+Annotation.prototype.constructor = Annotation;
+
 
 Object.defineProperty(Annotation.prototype, "name", {
     get : function() {
