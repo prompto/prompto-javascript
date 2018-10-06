@@ -322,7 +322,9 @@ CategoryType.prototype.checkMember = function(context, name) {
     if (cd instanceof EnumeratedNativeDeclaration) {
         cd.getType(context).checkMember(context, name);
     } else if (cd instanceof CategoryDeclaration) {
-        if (cd.hasAttribute(context, name)) {
+        if(cd.storable && "dbId"===name.toString())
+            return AnyType.instance();
+        else if (cd.hasAttribute(context, name)) {
             var ad = context.getRegisteredDeclaration(name);
             if (ad == null) {
                 throw new SyntaxError("Unknown attribute:" + name);
