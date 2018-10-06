@@ -15,8 +15,9 @@ function ConcreteMethodDeclaration(id, args, returnType, statements) {
 ConcreteMethodDeclaration.prototype = Object.create(BaseMethodDeclaration.prototype);
 ConcreteMethodDeclaration.prototype.constructor = ConcreteMethodDeclaration;
 
-ConcreteMethodDeclaration.prototype.memberCheck = function(declaration, context) {
-    // TODO Auto-generated method stub
+ConcreteMethodDeclaration.prototype.checkMember = function(declaration, context) {
+    context = context.newInstanceContext(null, declaration.getType(context), false)
+    return this.checkChild(context);
 };
 
 ConcreteMethodDeclaration.prototype.check = function(context) {

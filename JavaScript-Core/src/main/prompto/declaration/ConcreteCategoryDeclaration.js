@@ -167,7 +167,7 @@ ConcreteCategoryDeclaration.prototype.check = function(context) {
 ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
     this.registerMethods(context);
     for (var i = 0; i < this.methods.length; i++) {
-        this.methods[i].memberCheck(this, context);
+        this.methods[i].checkMember(this, context);
     }
 };
 
