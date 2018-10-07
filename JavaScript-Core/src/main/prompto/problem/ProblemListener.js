@@ -65,4 +65,12 @@ ProblemListener.prototype.reportExpectingBoolean = function(expression, type) {
     throw new SyntaxError("Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString());
 }
 
+ProblemListener.prototype.reportMissingClosingTag = function(opening) {
+    throw new SyntaxError("Missing closing tag '&lt;/" + opening.id.name + ">'");
+}
+
+ProblemListener.prototype.reportInvalidClosingTag = function(closing, opening) {
+    throw new SyntaxError("Invalid closing tag: &lt;/" + closing.id.name + ">, expected: &lt;/" + opening.id.name + ">");
+}
+
 exports.ProblemListener = ProblemListener;

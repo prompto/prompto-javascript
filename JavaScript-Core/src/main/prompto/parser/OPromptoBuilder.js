@@ -53,6 +53,8 @@ OPromptoBuilder.prototype.getHiddenTokensAfterNode = function(node) {
 };
 
 OPromptoBuilder.prototype.getHiddenTokensAfterToken = function(token) {
+    if(token.tokenIndex<0)
+        return null;
     var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
     if(hidden==null || hidden.length===0)
         return null;

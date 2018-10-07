@@ -17,6 +17,16 @@ ProblemCollector.prototype.collectProblem = function(problem) {
     this.problems.push(problem);
 };
 
+ProblemCollector.prototype.readSection = function(section) {
+    return {
+        path : section.path,
+        startLine : section.start.line,
+        startColumn : section.start.column,
+        endLine : section.end.line,
+        endColumn : section.end.column
+    };
+}
+
 ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
     var problem = {
             startLine: line,
@@ -96,22 +106,26 @@ ProblemCollector.prototype.reportInvalidCast = function(expression, target, actu
     this.collectProblem(problem);
 };
 
-ProblemListener.prototype.reportExpectingBoolean = function(expression, type) {
+ProblemCollector.prototype.reportExpectingBoolean = function(expression, type) {
     var problem = this.readSection(expression);
     problem.type = "error";
     problem.message = "Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString();
     this.collectProblem(problem);
 }
 
-
-ProblemCollector.prototype.readSection = function(section) {
-    return {
-            path : section.path,
-            startLine : section.start.line,
-            startColumn : section.start.column,
-            endLine : section.end.line,
-            endColumn : section.end.column
-            };
+ProblemCollector.prototype.reportMissingClosingTag = function(opening) {
+    var problem = this.readSection(opening.id);
+    problem.type = "error";
+    problem.message = "Missing closing tag '&lt;/" + opening.id.name + ">";
+    this.collectProblem(problem);
 }
+
+ProblemCollector.prototype.reportInvalidClosingTag = function(closing, opening) {
+    var problem = this.readSection(opening.id);
+    problem.type = "error";
+    problem.message = "Invalid closing tag: &lt;/" + closing.id.name + ">, expected: &lt;/" + opening.id.name + ">";
+    this.collectProblem(problem);
+}
+
 
 exports.ProblemCollector = ProblemCollector;

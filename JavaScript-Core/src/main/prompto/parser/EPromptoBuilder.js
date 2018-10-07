@@ -54,6 +54,8 @@ EPromptoBuilder.prototype.getHiddenTokensBefore = function(token) {
 };
 
 EPromptoBuilder.prototype.getHiddenTokensAfter = function(token) {
+    if(token.tokenIndex<0)
+        return null;
     var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
     return this.getHiddenTokensText(hidden);
 };

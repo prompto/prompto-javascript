@@ -1,4 +1,5 @@
 var JsxElementBase = require("./JsxElementBase").JsxElementBase
+var JsxType = require("../type/JsxType").JsxType;
 
 
 function JsxElement(id, nameSuite, attributes, openingSuite) {
@@ -20,6 +21,19 @@ JsxElement.prototype.setChildren = function(children) {
 JsxElement.prototype.setClosing = function(closing) {
     this.closing = closing;
     return this;
+};
+
+JsxElement.prototype.check = function(context) {
+    JsxElementBase.prototype.check.call(this, context);
+    if(!this.closing)
+        context.problemListener.reportMissingClosingTag(this.id);
+    else
+        this.closing.check(context, this);
+    if(this.children != null)
+        this.children.forEach(function (child) {
+            child.check(context);
+        }, this);
+    return JsxType.instance;
 };
 
 JsxElement.prototype.toDialect = function(writer) {

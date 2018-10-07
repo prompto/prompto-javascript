@@ -15,6 +15,11 @@ JsxElementBase.prototype.constructor = JsxElementBase;
 
 
 JsxElementBase.prototype.check = function(context) {
+    if (isCharacterUpperCase(this.id.name[0])) {
+        var decl = context.getRegisteredDeclaration(this.id.name);
+        if (decl == null)
+            context.problemListener.reportUnknownIdentifier(this.id);
+    }
     if(this.attributes!=null)
         this.attributes.forEach(function(attr) { attr.check(context);});
     return JsxType.instance;
@@ -23,7 +28,10 @@ JsxElementBase.prototype.check = function(context) {
 JsxElementBase.prototype.declare = function(transpiler) {
     if (isCharacterUpperCase(this.id.name[0])) {
         var decl = transpiler.context.getRegisteredDeclaration(this.id.name);
-        decl.declare(transpiler);
+        if(decl==null)
+            transpiler.context.problemListener.reportUnknownIdentifier(this.id);
+        else
+            decl.declare(transpiler);
     }
     if(this.attributes!=null) {
         this.attributes.forEach(function (attr) {

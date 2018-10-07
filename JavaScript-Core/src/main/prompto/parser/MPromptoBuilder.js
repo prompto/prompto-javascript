@@ -55,6 +55,8 @@ MPromptoBuilder.prototype.getHiddenTokensBefore = function(token) {
 };
 
 MPromptoBuilder.prototype.getHiddenTokensAfter = function(token) {
+    if(token.tokenIndex<0)
+        return null;
     var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
     return this.getHiddenTokensText(hidden);
 };
