@@ -121,9 +121,9 @@ ProblemCollector.prototype.reportMissingClosingTag = function(opening) {
 }
 
 ProblemCollector.prototype.reportInvalidClosingTag = function(closing, opening) {
-    var problem = this.readSection(opening.id);
+    var problem = this.readSection(closing);
     problem.type = "error";
-    problem.message = "Invalid closing tag: &lt;/" + closing.id.name + ">, expected: &lt;/" + opening.id.name + ">";
+    problem.message = "Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">";
     this.collectProblem(problem);
 }
 

@@ -70,7 +70,7 @@ ProblemListener.prototype.reportMissingClosingTag = function(opening) {
 }
 
 ProblemListener.prototype.reportInvalidClosingTag = function(closing, opening) {
-    throw new SyntaxError("Invalid closing tag: &lt;/" + closing.id.name + ">, expected: &lt;/" + opening.id.name + ">");
+    throw new SyntaxError("Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">");
 }
 
 exports.ProblemListener = ProblemListener;

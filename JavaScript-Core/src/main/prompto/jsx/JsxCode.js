@@ -1,4 +1,5 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
+var JsxType = require("../type/JsxType").JsxType;
 
 function JsxCode(expression) {
     IJsxExpression.call(this);

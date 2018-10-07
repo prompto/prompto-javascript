@@ -6,7 +6,7 @@ function JsxClosing(id, suite) {
 
 JsxClosing.prototype.check = function(context, opening) {
     if(this.id.name!=opening.id.name)
-        context.problemListener.reportInvalidClosingTag(this.id, opening.id.name);
+        context.problemListener.reportInvalidClosingTag(this.id, opening.id);
 };
 
 JsxClosing.prototype.toDialect = function(writer) {
