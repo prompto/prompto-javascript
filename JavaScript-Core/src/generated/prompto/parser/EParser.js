@@ -1280,8 +1280,8 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "f\u0002\u0727\u0725\u0003\u0002\u0002\u0002\u0728\u072b\u0003\u0002",
     "\u0002\u0002\u0729\u0727\u0003\u0002\u0002\u0002\u0729\u072a\u0003\u0002",
     "\u0002\u0002\u072a\u00f1\u0003\u0002\u0002\u0002\u072b\u0729\u0003\u0002",
-    "\u0002\u0002\u072c\u0731\u0005\u00caf\u0002\u072d\u072e\u0007\u0015",
-    "\u0002\u0002\u072e\u0730\u0005\u00caf\u0002\u072f\u072d\u0003\u0002",
+    "\u0002\u0002\u072c\u0731\u0005\u016c\u00b7\u0002\u072d\u072e\u0007\u0015",
+    "\u0002\u0002\u072e\u0730\u0005\u016c\u00b7\u0002\u072f\u072d\u0003\u0002",
     "\u0002\u0002\u0730\u0733\u0003\u0002\u0002\u0002\u0731\u072f\u0003\u0002",
     "\u0002\u0002\u0731\u0732\u0003\u0002\u0002\u0002\u0732\u0735\u0003\u0002",
     "\u0002\u0002\u0733\u0731\u0003\u0002\u0002\u0002\u0734\u0736\u0005\u00f4",
@@ -20074,14 +20074,14 @@ function Javascript_category_bindingContext(parser, parent, invokingState) {
 Javascript_category_bindingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Javascript_category_bindingContext.prototype.constructor = Javascript_category_bindingContext;
 
-Javascript_category_bindingContext.prototype.identifier = function(i) {
+Javascript_category_bindingContext.prototype.javascript_identifier = function(i) {
     if(i===undefined) {
         i = null;
     }
     if(i===null) {
-        return this.getTypedRuleContexts(IdentifierContext);
+        return this.getTypedRuleContexts(Javascript_identifierContext);
     } else {
-        return this.getTypedRuleContext(IdentifierContext,i);
+        return this.getTypedRuleContext(Javascript_identifierContext,i);
     }
 };
 
@@ -20125,7 +20125,7 @@ EParser.prototype.javascript_category_binding = function() {
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 1834;
-        this.identifier();
+        this.javascript_identifier();
         this.state = 1839;
         this._errHandler.sync(this);
         var _alt = this._interp.adaptivePredict(this._input,133,this._ctx)
@@ -20134,7 +20134,7 @@ EParser.prototype.javascript_category_binding = function() {
                 this.state = 1835;
                 this.match(EParser.DOT);
                 this.state = 1836;
-                this.identifier(); 
+                this.javascript_identifier(); 
             }
             this.state = 1841;
             this._errHandler.sync(this);

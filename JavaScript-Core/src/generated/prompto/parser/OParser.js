@@ -1232,9 +1232,9 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u06d0\u06d2\u0005\u00c6d\u0002\u06d1\u06cf\u0003\u0002",
     "\u0002\u0002\u06d2\u06d5\u0003\u0002\u0002\u0002\u06d3\u06d1\u0003\u0002",
     "\u0002\u0002\u06d3\u06d4\u0003\u0002\u0002\u0002\u06d4\u00ed\u0003\u0002",
-    "\u0002\u0002\u06d5\u06d3\u0003\u0002\u0002\u0002\u06d6\u06db\u0005\u00c6",
-    "d\u0002\u06d7\u06d8\u0007\u0011\u0002\u0002\u06d8\u06da\u0005\u00c6",
-    "d\u0002\u06d9\u06d7\u0003\u0002\u0002\u0002\u06da\u06dd\u0003\u0002",
+    "\u0002\u0002\u06d5\u06d3\u0003\u0002\u0002\u0002\u06d6\u06db\u0005\u016c",
+    "\u00b7\u0002\u06d7\u06d8\u0007\u0011\u0002\u0002\u06d8\u06da\u0005\u016c",
+    "\u00b7\u0002\u06d9\u06d7\u0003\u0002\u0002\u0002\u06da\u06dd\u0003\u0002",
     "\u0002\u0002\u06db\u06d9\u0003\u0002\u0002\u0002\u06db\u06dc\u0003\u0002",
     "\u0002\u0002\u06dc\u06df\u0003\u0002\u0002\u0002\u06dd\u06db\u0003\u0002",
     "\u0002\u0002\u06de\u06e0\u0005\u00f0y\u0002\u06df\u06de\u0003\u0002",
@@ -19123,14 +19123,14 @@ function Javascript_category_bindingContext(parser, parent, invokingState) {
 Javascript_category_bindingContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Javascript_category_bindingContext.prototype.constructor = Javascript_category_bindingContext;
 
-Javascript_category_bindingContext.prototype.identifier = function(i) {
+Javascript_category_bindingContext.prototype.javascript_identifier = function(i) {
     if(i===undefined) {
         i = null;
     }
     if(i===null) {
-        return this.getTypedRuleContexts(IdentifierContext);
+        return this.getTypedRuleContexts(Javascript_identifierContext);
     } else {
-        return this.getTypedRuleContext(IdentifierContext,i);
+        return this.getTypedRuleContext(Javascript_identifierContext,i);
     }
 };
 
@@ -19175,7 +19175,7 @@ OParser.prototype.javascript_category_binding = function() {
     try {
         this.enterOuterAlt(localctx, 1);
         this.state = 1748;
-        this.identifier();
+        this.javascript_identifier();
         this.state = 1753;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
@@ -19183,7 +19183,7 @@ OParser.prototype.javascript_category_binding = function() {
             this.state = 1749;
             this.match(OParser.DOT);
             this.state = 1750;
-            this.identifier();
+            this.javascript_identifier();
             this.state = 1755;
             this._errHandler.sync(this);
             _la = this._input.LA(1);

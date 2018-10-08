@@ -1346,7 +1346,7 @@ MPromptoBuilder.prototype.exitJavaScriptCategoryBinding = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
-    var identifier = ctx.identifier().map(function(cx) { return cx.getText(); }).join(".");
+    var identifier = ctx.javascript_identifier().map(function(cx) { return cx.getText(); }).join(".");
 	var module = this.getNodeValue(ctx.javascript_module());
 	var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
 	this.setNodeValue(ctx, map);
