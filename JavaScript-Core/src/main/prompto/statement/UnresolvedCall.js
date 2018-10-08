@@ -85,8 +85,9 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
 	var id = this.callable.id;
     var call, decl = null;
     // if this happens in the context of a member method, then we need to check for category members first
-    if(context.parent instanceof InstanceContext) {
-        decl = this.resolveUnresolvedMember(context.parent, id.name);
+    var instance = context.getClosestInstanceContext();
+    if(instance!=null) {
+        decl = this.resolveUnresolvedMember(instance, id.name);
         if(decl!=null)
             call = new MethodCall(new MethodSelector(null, id), this.assignments);
     }

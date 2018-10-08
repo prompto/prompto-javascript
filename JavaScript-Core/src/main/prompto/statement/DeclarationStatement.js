@@ -58,7 +58,8 @@ DeclarationStatement.prototype.declare = function(transpiler) {
 DeclarationStatement.prototype.transpile = function(transpiler) {
     this.declaration.transpile(transpiler);
     transpiler.context.registerMethodDeclaration(this.declaration);
-    if(transpiler.context.parent instanceof InstanceContext) {
+    var instance = transpiler.context.getClosestInstanceContext();
+    if(instance!=null) {
         var name = this.declaration.getTranspiledName(transpiler.context);
         transpiler.append(name).append(" = ").append(name).append(".bind(this);").newLine();
     }

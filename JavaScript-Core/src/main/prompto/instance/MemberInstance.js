@@ -56,7 +56,7 @@ MemberInstance.prototype.assign = function(context, expression) {
 
 MemberInstance.prototype.check = function(context) {
     var parentType = this.parent.check(context);
-    return parentType.checkMember(context, this.name);
+    return parentType.checkMember(context, this.id, this.name);
 };
 
 

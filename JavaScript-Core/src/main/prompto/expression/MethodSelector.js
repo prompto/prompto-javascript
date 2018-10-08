@@ -71,8 +71,9 @@ MethodSelector.prototype.getCandidates = function(context, checkInstance) {
 MethodSelector.prototype.getGlobalCandidates = function(context) {
     var result = new Set();
     // if called from a member method, could be a member method called without this/self
-    if(context.parent instanceof InstanceContext) {
-        var type = context.parent.instanceType;
+    var instance = context.getClosestInstanceContext();
+    if(instance!=null) {
+        var type = instance.instanceType;
         var cd = context.getRegisteredDeclaration(type.name);
         if(cd!=null) {
             var members = cd.getMemberMethodsMap(context, this.name);
@@ -153,11 +154,11 @@ MethodSelector.prototype.newLocalContext = function(context, decl) {
 };
 
 MethodSelector.prototype.newLocalInstanceContext = function(context) {
-    var parent = context.parent;
-    if(!(parent instanceof InstanceContext))
+    var instance = context.getClosestInstanceContext();
+    if(instance==null)
         throw new SyntaxError("Not in instance context !");
-    context = context.newLocalContext();
-    context.parent = parent; // make local context child of the existing instance
+    context = instance.newLocalContext();
+    context.parent = instance; // make local context child of the existing instance
     return context;
 };
 

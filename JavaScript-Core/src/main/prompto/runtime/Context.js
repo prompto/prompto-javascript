@@ -59,6 +59,16 @@ Context.prototype.getParentMostContext = function() {
 	}
 };
 
+Context.prototype.getClosestInstanceContext = function() {
+    if(this.parent === null) {
+        return null;
+    } else if(this.parent instanceof InstanceContext) {
+        return this.parent;
+    } else {
+        return this.parent.getClosestInstanceContext();
+    }
+};
+
 Context.prototype.getParentContext = function() {
 	return this.parent;
 }

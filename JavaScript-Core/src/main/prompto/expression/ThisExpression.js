@@ -6,7 +6,7 @@ function ThisExpression() {
 
 ThisExpression.prototype.check = function(context) {
     if (context != null && !(context instanceof InstanceContext))
-        context = context.getParentContext ();
+        context = context.getClosestInstanceContext ();
     if (context instanceof InstanceContext)
         return context.instanceType;
     else
@@ -16,7 +16,7 @@ ThisExpression.prototype.check = function(context) {
 
 ThisExpression.prototype.interpret = function(context) {
     if (context != null && !(context instanceof InstanceContext))
-        context = context.getParentContext ();
+        context = context.getClosestInstanceContext ();
     if (context instanceof InstanceContext)
         return context.instance;
     else
