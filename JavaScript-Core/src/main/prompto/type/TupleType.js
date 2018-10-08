@@ -59,11 +59,11 @@ TupleType.prototype.transpileAssignItemValue = function(transpiler, item, expres
 };
 
 
-TupleType.prototype.checkMember = function(context, name) {
+TupleType.prototype.checkMember = function(context, section, name) {
 	if ("count"==name) {
 		return IntegerType.instance;
 	} else {
-		return NativeType.prototype.checkMember.call(this, context, name);
+		return NativeType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 

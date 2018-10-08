@@ -145,7 +145,7 @@ TimeType.prototype.transpileRange = function(transpiler, first, last) {
 };
 
 
-TimeType.prototype.checkMember = function (context, name) {
+TimeType.prototype.checkMember = function (context, section, name) {
 	if ("hour" == name) {
 		return IntegerType.instance;
 	} else if ("minute" == name) {
@@ -155,7 +155,7 @@ TimeType.prototype.checkMember = function (context, name) {
 	} else if ("millisecond" == name) {
 		return IntegerType.instance;
 	} else {
-		return NativeType.prototype.checkMember.call(this, context, name);
+		return NativeType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 

@@ -33,7 +33,7 @@ AnyType.prototype.transpileItem = function(transpiler, type, item) {
 };
 
 
-AnyType.prototype.checkMember = function(context, name) {
+AnyType.prototype.checkMember = function(context, section, name) {
 	// required to support Document members
     return AnyType.instance;
 };

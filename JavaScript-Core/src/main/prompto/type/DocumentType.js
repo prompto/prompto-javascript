@@ -28,7 +28,7 @@ DocumentType.prototype.isMoreSpecificThan = function(context, other) {
 };
 
 
-DocumentType.prototype.checkMember = function(context, name) {
+DocumentType.prototype.checkMember = function(context, section, name) {
 	return AnyType.instance;
 };
 

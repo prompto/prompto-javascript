@@ -114,7 +114,7 @@ MemberSelector.prototype.toString = function() {
 
 MemberSelector.prototype.check = function(context) {
     var parentType = this.checkParent(context);
-    return parentType.checkMember(context, this.name);
+    return parentType.checkMember(context, this.id, this.name);
 };
 
 MemberSelector.prototype.interpret = function(context) {

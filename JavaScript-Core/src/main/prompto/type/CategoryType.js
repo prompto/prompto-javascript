@@ -306,13 +306,13 @@ CategoryType.prototype.checkExists = function(context) {
 	this.getDeclaration(context);
 };
 
-CategoryType.prototype.checkMember = function(context, name) {
+CategoryType.prototype.checkMember = function(context, section, name) {
     var cd = context.getRegisteredDeclaration(this.name);
     if (cd == null) {
         throw new SyntaxError("Unknown category:" + this.name);
     }
     if (cd instanceof EnumeratedNativeDeclaration) {
-        cd.getType(context).checkMember(context, name);
+        cd.getType(context).checkMember(context, section, name);
     } else if (cd instanceof CategoryDeclaration) {
         if(cd.storable && "dbId" === name.toString())
             return AnyType.instance;

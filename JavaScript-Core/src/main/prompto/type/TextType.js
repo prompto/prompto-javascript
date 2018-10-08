@@ -145,11 +145,11 @@ TextType.prototype.transpileItem = function(transpiler, itemType, item) {
 };
 
 
-TextType.prototype.checkMember = function(context, name) {
+TextType.prototype.checkMember = function(context, section, name) {
    if ("count"==name) {
 	   return IntegerType.instance;
    } else {
-	   return NativeType.prototype.checkMember.call(this, context, name);
+	   return NativeType.prototype.checkMember.call(this, context, section, name);
    }
 };
 

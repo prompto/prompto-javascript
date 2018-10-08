@@ -63,14 +63,18 @@ ProblemListener.prototype.reportInvalidCast = function(expression, target, actua
 
 ProblemListener.prototype.reportExpectingBoolean = function(expression, type) {
     throw new SyntaxError("Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString());
-}
+};
 
 ProblemListener.prototype.reportMissingClosingTag = function(opening) {
     throw new SyntaxError("Missing closing tag '&lt;/" + opening.id.name + ">'");
-}
+};
 
 ProblemListener.prototype.reportInvalidClosingTag = function(closing, opening) {
     throw new SyntaxError("Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">");
-}
+};
+
+ProblemListener.prototype.reportInvalidMember = function(section, name) {
+    throw new SyntaxError("Invalid member '" + name + "' in " + this.name + " type");
+};
 
 exports.ProblemListener = ProblemListener;

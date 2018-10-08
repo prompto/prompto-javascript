@@ -12,13 +12,13 @@ function EntryType(itemType) {
 EntryType.prototype = Object.create(BaseType.prototype);
 EntryType.prototype.constructor = EntryType;
 
-EntryType.prototype.checkMember = function(context, name) {
+EntryType.prototype.checkMember = function(context, section, name) {
 	if ("key"==name) {
 		return TextType.instance;
 	} else if ("value"==name) {
 		return this.itemType;
 	} else {
-		return BaseType.prototype.checkMember.call(this, context, name);
+		return BaseType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 

@@ -28,11 +28,11 @@ IteratorType.prototype.checkIterator = function(context, source) {
     return this.itemType;
 };
 
-IteratorType.prototype.checkMember = function(context, name) {
+IteratorType.prototype.checkMember = function(context, section, name) {
     if ("count"===name)
         return IntegerType.instance;
     else
-        return IterableType.prototype.checkMember.call(this, context, name);
+        return IterableType.prototype.checkMember.call(this, context, section, name);
 };
 
 exports.IteratorType = IteratorType;

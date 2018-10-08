@@ -127,5 +127,11 @@ ProblemCollector.prototype.reportInvalidClosingTag = function(closing, opening) 
     this.collectProblem(problem);
 }
 
+ProblemCollector.prototype.reportInvalidMember = function(section, name) {
+    var problem = this.readSection(section);
+    problem.type = "error";
+    problem.message = "Invalid member '" + name + "' in " + this.name + " type";
+    this.collectProblem(problem);
+};
 
 exports.ProblemCollector = ProblemCollector;

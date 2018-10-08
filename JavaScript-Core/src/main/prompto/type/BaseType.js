@@ -349,11 +349,11 @@ BaseType.prototype.transpileItem = function(transpiler, itemType, item) {
 
 
 
-BaseType.prototype.checkMember = function(context, name) {
+BaseType.prototype.checkMember = function(context, section, name) {
     if("text" == name)
         return TextType.instance;
     else
-    	throw new SyntaxError("Cannot read member: " + name + " from " + this.name);
+        context.problemListener.reportInvalidMember(section, name);
 };
 
 

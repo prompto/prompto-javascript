@@ -35,11 +35,11 @@ CharacterType.prototype.nativeCast = function(context, value) {
 };
 
 
-CharacterType.prototype.checkMember = function(context, name) {
+CharacterType.prototype.checkMember = function(context, section, name) {
     if ("codePoint"==name) {
         return IntegerType.instance;
     } else {
-        return NativeType.prototype.checkMember.call(this, context, name);
+        return NativeType.prototype.checkMember.call(this, context, section, name);
     }
 };
 

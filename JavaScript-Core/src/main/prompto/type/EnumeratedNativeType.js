@@ -13,7 +13,7 @@ function EnumeratedNativeType(name, derivedFrom) {
 EnumeratedNativeType.prototype = Object.create(BaseType.prototype);
 EnumeratedNativeType.prototype.constructor = EnumeratedNativeType;
 
-EnumeratedNativeType.prototype.checkMember = function(context, name) {
+EnumeratedNativeType.prototype.checkMember = function(context, section, name) {
 	if ("symbols"==name) {
 		return new ListType(this);
 	} else if ("value"==name) {
@@ -21,7 +21,7 @@ EnumeratedNativeType.prototype.checkMember = function(context, name) {
 	} else if ("name"==name) {
 		return TextType.instance;
 	} else {
-		return BaseType.prototype.checkMember.call(this, context, name);
+		return BaseType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 

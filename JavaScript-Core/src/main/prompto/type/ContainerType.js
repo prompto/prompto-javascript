@@ -20,12 +20,12 @@ ContainerType.prototype.checkContains = function(context, other) {
 };
 
 
-ContainerType.prototype.checkMember = function(context, name) {
+ContainerType.prototype.checkMember = function(context, section, name) {
     if ("count" == name) {
         var IntegerType = require("./IntegerType").IntegerType;
         return IntegerType.instance;
     } else {
-        return IterableType.prototype.checkMember.call(this, context, name);
+        return IterableType.prototype.checkMember.call(this, context, section, name);
     }
 };
 

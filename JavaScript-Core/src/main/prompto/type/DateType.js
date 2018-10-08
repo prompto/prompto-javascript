@@ -151,7 +151,7 @@ DateType.prototype.transpileRange = function(transpiler, first, last) {
 };
 
 
-DateType.prototype.checkMember = function(context, name) {
+DateType.prototype.checkMember = function(context, section, name) {
 	if ("year"==name) {
 		return IntegerType.instance;
 	} else if ("month"==name) {
@@ -161,7 +161,7 @@ DateType.prototype.checkMember = function(context, name) {
 	} else if ("dayOfYear"==name) {
 		return IntegerType.instance;
 	} else {
-		return NativeType.prototype.checkMember.call(this, context, name);
+		return NativeType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 

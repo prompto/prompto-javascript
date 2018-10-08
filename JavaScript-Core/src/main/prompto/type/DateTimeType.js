@@ -111,7 +111,7 @@ DateTimeType.prototype.transpileCompare = function(transpiler, other, operator, 
     transpiler.append(")");
 };
 
-DateTimeType.prototype.checkMember = function(context, name) {
+DateTimeType.prototype.checkMember = function(context, section, name) {
 	if ("year"==name) {
 		return IntegerType.instance;
 	} else if ("month"==name) {
@@ -133,7 +133,7 @@ DateTimeType.prototype.checkMember = function(context, name) {
 	} else if ("tzName"==name) {
 		return TextType.instance;
 	} else {
-		return NativeType.prototype.checkMember.call(this, context, name);
+		return NativeType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 

@@ -13,13 +13,13 @@ function EnumeratedCategoryType(id) {
 EnumeratedCategoryType.prototype = Object.create(CategoryType.prototype);
 EnumeratedCategoryType.prototype.constructor =  EnumeratedCategoryType;
 
-EnumeratedCategoryType.prototype.checkMember = function(context, name) {
+EnumeratedCategoryType.prototype.checkMember = function(context, section, name) {
     if ("symbols"==name) {
         return new ListType(this);
     } else if ("name"==name) {
         return TextType.instance;
     } else {
-        return CategoryType.prototype.checkMember.call(this, context, name);
+        return CategoryType.prototype.checkMember.call(this, context, section, name);
     }
 };
 

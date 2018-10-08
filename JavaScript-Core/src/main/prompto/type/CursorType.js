@@ -27,13 +27,13 @@ CursorType.prototype.checkIterator = function(context, source) {
     return this.itemType;
 };
 
-CursorType.prototype.checkMember = function(context, name) {
+CursorType.prototype.checkMember = function(context, section, name) {
     if ("count"===name)
         return IntegerType.instance;
     else if ("totalCount"===name)
         return IntegerType.instance;
     else
-        return IterableType.prototype.checkMember.call(this, context, name);
+        return IterableType.prototype.checkMember.call(this, context, section, name);
 };
 
 CursorType.prototype.declareMember = function(transpiler, name) {

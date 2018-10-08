@@ -165,7 +165,7 @@ DictionaryType.prototype.checkIterator = function(context, source) {
 	return new EntryType(this.itemType);
 };
 
-DictionaryType.prototype.checkMember = function(context, name) {
+DictionaryType.prototype.checkMember = function(context, section, name) {
 	if ("count"==name) {
 		return IntegerType.instance;
 	} else if("keys"==name) {
@@ -173,7 +173,7 @@ DictionaryType.prototype.checkMember = function(context, name) {
 	} else if ("values"==name) {
 		return new ListType(this.itemType);
 	} else {
-		return ContainerType.prototype.checkMember.call(this, context, name);
+		return ContainerType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 
