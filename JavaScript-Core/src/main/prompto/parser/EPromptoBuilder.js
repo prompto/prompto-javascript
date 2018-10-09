@@ -88,6 +88,22 @@ EPromptoBuilder.prototype.isNotIndent = function(tree) {
     return !tree.symbol || tree.symbol.type!=parser.EParser.INDENT;
 }
 
+EPromptoBuilder.prototype.readAnnotations = function(ctxs) {
+    var annotations = ctxs.map(function (csc) {
+        return this.getNodeValue(csc);
+    }, this);
+    return (annotations.length == 0) ? null : annotations;
+};
+
+
+EPromptoBuilder.prototype.readComments = function(ctxs) {
+    var comments = ctxs.map(function (csc) {
+        return this.getNodeValue(csc);
+    }, this);
+    return (comments.length == 0) ? null : comments;
+};
+
+
 EPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(exp));
@@ -803,8 +819,15 @@ EPromptoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitMember_method_declaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.getChild(0));
-	this.setNodeValue(ctx, decl);
+    var comments = this.readComments(ctx.comment_statement());
+    var annotations = this.readAnnotations(ctx.annotation_constructor());
+    var ctx_ = ctx.children[ctx.getChildCount()-1];
+    decl = this.getNodeValue(ctx_);
+    if(decl!=null) {
+        decl.comments = comments;
+        decl.annotations = annotations;
+        this.setNodeValue(ctx, decl);
+    }
 };
 
 
@@ -1242,27 +1265,9 @@ EPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitDeclaration = function(ctx) {
-    var comments = ctx.comment_statement().map(function(csc) {
-        return this.getNodeValue(csc);
-    }, this);
-    if(comments.length==0)
-        comments = null;
-    var annotations = ctx.annotation_constructor().map(function(csc) {
-        return this.getNodeValue(csc);
-    }, this);
-    if(annotations.length==0)
-        annotations = null;
-    var ctx_ = ctx.attribute_declaration();
-    if(ctx_==null)
-        ctx_ = ctx.category_declaration();
-    if(ctx_==null)
-        ctx_ = ctx.enum_declaration();
-    if(ctx_==null)
-        ctx_ = ctx.method_declaration();
-    if(ctx_==null)
-        ctx_ = ctx.resource_declaration();
-    if(ctx_==null)
-        ctx_ = ctx.widget_declaration();
+    var comments = this.readComments(ctx.comment_statement());
+    var annotations = this.readAnnotations(ctx.annotation_constructor());
+    var ctx_ = ctx.children[ctx.getChildCount()-1];
     decl = this.getNodeValue(ctx_);
     if(decl!=null) {
         decl.comments = comments;

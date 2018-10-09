@@ -141,6 +141,16 @@ CategoryDeclaration.prototype.methodsToEDialect = function(writer, methods) {
     writer.indent();
     methods.forEach(function(method) {
         writer.newLine();
+        if(method.comments) {
+            method.comments.forEach(function (cmt) {
+                cmt.toDialect(writer);
+            });
+        }
+        if(method.annotations) {
+            method.annotations.forEach(function (ann) {
+                ann.toDialect(writer);
+            });
+        }
         var w = writer.newMemberWriter();
         method.toDialect(w);
     });
@@ -149,6 +159,16 @@ CategoryDeclaration.prototype.methodsToEDialect = function(writer, methods) {
 
 CategoryDeclaration.prototype.methodsToODialect = function(writer, methods) {
     methods.forEach(function(method) {
+        if(method.comments) {
+            method.comments.forEach(function (cmt) {
+                cmt.toDialect(writer);
+            });
+        }
+        if(method.annotations) {
+            method.annotations.forEach(function (ann) {
+                ann.toDialect(writer);
+            });
+        }
         var w = writer.newMemberWriter();
         method.toDialect(w);
         w.newLine();

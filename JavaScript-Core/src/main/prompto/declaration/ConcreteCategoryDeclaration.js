@@ -90,6 +90,16 @@ ConcreteCategoryDeclaration.prototype.methodsToMDialect = function(writer) {
     else {
         writer.newLine();
         this.methods.forEach(function(method) {
+            if(method.comments) {
+                method.comments.forEach(function (cmt) {
+                    cmt.toDialect(writer);
+                });
+            }
+            if(method.annotations) {
+                method.annotations.forEach(function (ann) {
+                    ann.toDialect(writer);
+                });
+            }
             var w = writer.newMemberWriter();
             method.toDialect(w);
             writer.newLine();
@@ -203,7 +213,7 @@ ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context)
 			actual = new MethodDeclarationMap(method.name);
 			this.methodsMap[key] = actual;
 		}
-		actual.register(method);
+		actual.register(method, context.problemListener);
 	}
 };
 
