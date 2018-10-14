@@ -30,6 +30,10 @@ exports.testCastInteger = function(test) {
 	compareResourceEOE(test, "cast/castInteger.pec");
 };
 
+exports.testCastMethod = function(test) {
+	compareResourceEOE(test, "cast/castMethod.pec");
+};
+
 exports.testCastMissing = function(test) {
 	compareResourceEOE(test, "cast/castMissing.pec");
 };

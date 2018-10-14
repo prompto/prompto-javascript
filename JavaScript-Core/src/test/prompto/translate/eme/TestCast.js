@@ -30,6 +30,10 @@ exports.testCastInteger = function(test) {
 	compareResourceEME(test, "cast/castInteger.pec");
 };
 
+exports.testCastMethod = function(test) {
+	compareResourceEME(test, "cast/castMethod.pec");
+};
+
 exports.testCastMissing = function(test) {
 	compareResourceEME(test, "cast/castMissing.pec");
 };

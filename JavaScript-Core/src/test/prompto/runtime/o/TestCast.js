@@ -31,6 +31,14 @@ exports.testTranspiledCastChild = function(test) {
 	checkTranspiledOutput(test, "cast/castChild.poc");
 };
 
+exports.testInterpretedCastMethod = function(test) {
+	checkInterpretedOutput(test, "cast/castMethod.poc");
+};
+
+exports.testTranspiledCastMethod = function(test) {
+	checkTranspiledOutput(test, "cast/castMethod.poc");
+};
+
 exports.testInterpretedCastMissing = function(test) {
 	checkInterpretedOutput(test, "cast/castMissing.poc");
 };

@@ -71,6 +71,14 @@ exports.testTranspiledCastInteger = function(test) {
 	checkTranspiledOutput(test, "cast/castInteger.pec");
 };
 
+exports.testInterpretedCastMethod = function(test) {
+	checkInterpretedOutput(test, "cast/castMethod.pec");
+};
+
+exports.testTranspiledCastMethod = function(test) {
+	checkTranspiledOutput(test, "cast/castMethod.pec");
+};
+
 exports.testInterpretedCastMissing = function(test) {
 	checkInterpretedOutput(test, "cast/castMissing.pec");
 };
