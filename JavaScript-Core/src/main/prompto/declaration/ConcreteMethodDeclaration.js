@@ -5,10 +5,16 @@ var TextType = require("../type/TextType").TextType;
 var CodeArgument = require("../argument/CodeArgument").CodeArgument;
 var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
 var StatementList = require("../statement/StatementList").StatementList;
+var DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
 
 function ConcreteMethodDeclaration(id, args, returnType, statements) {
 	BaseMethodDeclaration.call(this, id, args, returnType);
 	this.statements = statements || new StatementList();
+	this.declarationOf = null;
+    this.statements.forEach(function(stmt) {
+        if(stmt instanceof DeclarationStatement)
+            stmt.declaration.closureOf = this;
+    }, this);
 	return this;
 }
 
@@ -20,9 +26,9 @@ ConcreteMethodDeclaration.prototype.checkMember = function(declaration, context)
     return this.checkChild(context);
 };
 
-ConcreteMethodDeclaration.prototype.check = function(context) {
+ConcreteMethodDeclaration.prototype.check = function(context, isStart) {
 	if(this.canBeChecked(context)) {
-		return this.fullCheck(context, false);
+		return this.fullCheck(context, isStart);
 	} else {
 		return VoidType.instance;
 	}
@@ -49,15 +55,15 @@ ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(contex
 	return false;
 };
 
-ConcreteMethodDeclaration.prototype.fullCheck = function(context, nativeOnly) {
-	if(context.isGlobalContext()) {
+ConcreteMethodDeclaration.prototype.fullCheck = function(context, isStart) {
+	if(isStart) {
 		context = context.newLocalContext();
 		this.registerArguments(context);
 	}
 	if(this.args!==null) {
 		this.args.check(context);
 	}
-	return this.statements.check(context, this.returnType, nativeOnly);
+	return this.statements.check(context, this.returnType);
 };
 
 ConcreteMethodDeclaration.prototype.checkChild = function(context) {

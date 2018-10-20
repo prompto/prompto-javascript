@@ -168,10 +168,10 @@ ConcreteCategoryDeclaration.ancestorHasMethod = function(ancestor, context, name
     return actual.hasMethod(context, name);
 };
 
-ConcreteCategoryDeclaration.prototype.check = function(context) {
+ConcreteCategoryDeclaration.prototype.check = function(context, isStart) {
 	this.checkDerived(context);
 	this.checkMethods(context);
-	return CategoryDeclaration.prototype.check.call(this, context);
+	return CategoryDeclaration.prototype.check.call(this, context, isStart);
 }
 
 ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {

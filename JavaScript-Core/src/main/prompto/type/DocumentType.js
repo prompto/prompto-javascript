@@ -17,7 +17,12 @@ function DocumentType() {
 DocumentType.prototype = Object.create(NativeType.prototype);
 DocumentType.prototype.constructor = DocumentType;
 
-DocumentType.instance = new DocumentType();
+
+
+DocumentType.prototype.withItemType = function(itemType) {
+    return this;
+};
+
 
 
 DocumentType.prototype.isMoreSpecificThan = function(context, other) {
@@ -114,5 +119,9 @@ DocumentType.prototype.readJSONField = function(context, node, parts) {
     else
         throw new Error(typeof(node).toString());
 };
+
+
+DocumentType.instance = new DocumentType();
+
 
 exports.DocumentType = DocumentType;

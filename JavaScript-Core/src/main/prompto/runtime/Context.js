@@ -266,6 +266,20 @@ Context.prototype.getRegisteredDeclaration = function(name) {
 	}
 };
 
+
+Context.prototype.getLocalDeclaration = function(name) {
+    var actual = this.declarations[name] || null;
+    if (actual !== null) {
+        return actual;
+    } else if (this.parent !== null) {
+        return this.parent.getLocalDeclaration(name);
+    } else {
+        return null;
+    }
+};
+
+
+
 Context.prototype.registerDeclaration = function(declaration) {
     if(this.checkDuplicate(declaration))
     	this.declarations[declaration.name] = declaration;

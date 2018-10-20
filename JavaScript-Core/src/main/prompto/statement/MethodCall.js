@@ -5,6 +5,7 @@ var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").Argume
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
+var MethodDeclarationMap = null;
 var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
@@ -22,8 +23,9 @@ var CodeArgument = require("../argument/CodeArgument").CodeArgument;
 
 
 exports.resolve = function() {
-    InstanceContext= require("../runtime/Context").InstanceContext;
+    InstanceContext = require("../runtime/Context").InstanceContext;
     ThisExpression = require("../expression/ThisExpression").ThisExpression;
+    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 };
 
 
@@ -48,16 +50,13 @@ MethodCall.prototype.toDialect = function(writer) {
 };
 
 MethodCall.prototype.requiresInvoke = function(writer) {
-    if (writer.dialect != Dialect.E)
-        return false;
-    if (this.assignments != null && this.assignments.length > 0)
+    if (writer.dialect != Dialect.E || (this.assignments != null && this.assignments.length > 0))
         return false;
     try {
         finder = new MethodFinder(writer.context, this);
         var declaration = finder.findMethod(false);
-        /* if method is abstract, need to prefix with invoke */
-        if(declaration instanceof AbstractMethodDeclaration)
-            return true;
+        /* if method is a reference, need to prefix with invoke */
+        return declaration instanceof AbstractMethodDeclaration || declaration.closureOf !== null;
     } catch(e) {
         // ok
     }
@@ -78,21 +77,32 @@ MethodCall.prototype.check = function(context, updateSelectorParent) {
     }
     if(updateSelectorParent && declaration.memberOf && !this.selector.parent)
         this.selector.parent = new ThisExpression();
-    var local = this.selector.newLocalCheckContext(context, declaration);
+    var local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
     return this.checkDeclaration(declaration, context, local);
 };
+
+
+MethodCall.prototype.isLocalClosure = function(context) {
+    if (this.selector.parent !== null) {
+        return false;
+    }
+    var decl = context.getLocalDeclaration(this.selector.name)
+    return decl instanceof MethodDeclarationMap;
+};
+
+
 
 MethodCall.prototype.checkDeclaration = function(declaration, parent, local) {
 	if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(parent)) {
 		return this.fullCheck(declaration, parent, local);
 	} else {
-		return this.lightCheck(declaration, parent, local);
+		return this.lightCheck(declaration, local);
 	}
 };
 
-MethodCall.prototype.lightCheck = function(declaration, parent, local) {
+MethodCall.prototype.lightCheck = function(declaration, local) {
 	declaration.registerArguments(local);
-	return declaration.check(local);
+	return declaration.check(local, false);
 };
 
 MethodCall.prototype.fullCheck = function(declaration, parent, local) {
@@ -104,7 +114,7 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 			var value = assignment.argument.checkValue(parent, expression);
 			local.setValue(assignment.id, value);
 		});
-		return declaration.check(local);
+		return declaration.check(local, false);
 	} catch (e) {
 		if(e instanceof PromptoError) {
 			throw new SyntaxError(e.message);
@@ -123,10 +133,12 @@ MethodCall.prototype.declare = function(transpiler) {
     } else {
         if (this.assignments != null)
             this.assignments.declare(transpiler);
-        declarations.forEach(function(declaration) {
-            var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
-            this.declareDeclaration(transpiler, declaration, local);
-        }, this);
+        if(!this.isLocalClosure(transpiler.context)) {
+            declarations.forEach(function(declaration) {
+                var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
+                this.declareDeclaration(transpiler, declaration, local);
+            }, this);
+        }
         if(declarations.size>1 && !this.dispatcher) {
             var declaration = finder.findMethod(false);
             var sorted = finder.sortMostSpecificFirst(declarations);

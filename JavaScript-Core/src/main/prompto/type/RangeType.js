@@ -17,6 +17,13 @@ function RangeType(itemType) {
 RangeType.prototype = Object.create(ContainerType.prototype);
 RangeType.prototype.constructor = RangeType;
 
+
+RangeType.prototype.withItemType = function(itemType) {
+    return new RangeType(itemType);
+};
+
+
+
 RangeType.prototype.checkItem = function(context, other) {
 	if (other == IntegerType.instance) {
 		return this.itemType;

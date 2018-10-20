@@ -31,3 +31,4 @@ exports.WriteStatement = require("./WriteStatement").WriteStatement;
 exports.UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
 
 require("./MethodCall").resolve();
+require("./DeclarationStatement").resolve();

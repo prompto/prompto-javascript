@@ -45,7 +45,7 @@ InstanceExpression.prototype.declare = function(transpiler) {
         // don't declare closures
         if(decl.declarationStatement)
             return;
-        transpiler.declare(decl);
+        decl.declare(transpiler);
     }
 };
 

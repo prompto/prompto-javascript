@@ -69,7 +69,7 @@ DeclarationList.prototype.unregister = function(context) {
 
 DeclarationList.prototype.check = function(context) {
     this.forEach(function(decl) {
-        decl.check(context);
+        decl.check(context, true);
     });
 };
 

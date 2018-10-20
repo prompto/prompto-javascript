@@ -17,8 +17,17 @@ function StatementList(statement) {
 StatementList.prototype = Object.create(ObjectList.prototype);
 StatementList.prototype.constructor = StatementList;
 
-StatementList.prototype.check = function(context, returnType, nativeOnly) {
-	nativeOnly = nativeOnly || false;
+StatementList.prototype.check = function(context, returnType) {
+    return this.checkStatements(context, returnType, false);
+};
+
+
+StatementList.prototype.checkNative = function(context, returnType) {
+    return this.checkStatements(context, returnType, true);
+};
+
+
+StatementList.prototype.checkStatements = function(context, returnType, nativeOnly) {
     if(returnType==VoidType.instance) {
         if(nativeOnly) {
             this.forEach(function (stmt) {

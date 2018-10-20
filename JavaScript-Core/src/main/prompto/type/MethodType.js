@@ -22,4 +22,13 @@ MethodType.prototype.checkUnique = function(context) {
 	}
 };
 
+
+MethodType.prototype.isMoreSpecificThan = function(context, other) {
+    return false;
+};
+
+MethodType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
 exports.MethodType = MethodType;

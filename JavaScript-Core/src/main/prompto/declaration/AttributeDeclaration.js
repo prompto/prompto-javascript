@@ -96,7 +96,7 @@ AttributeDeclaration.prototype.register = function(context) {
 	context.registerDeclaration(this);
 };
 
-AttributeDeclaration.prototype.check = function(context) {
+AttributeDeclaration.prototype.check = function(context, isStart) {
 	this.type.checkExists(context);
 	return this.type;
 };

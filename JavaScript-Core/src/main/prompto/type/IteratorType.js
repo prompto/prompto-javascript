@@ -11,6 +11,11 @@ IteratorType.prototype = Object.create(IterableType.prototype);
 IteratorType.prototype.constructor = IteratorType;
 
 
+IteratorType.prototype.withItemType = function(itemType) {
+    return new IteratorType(itemType);
+};
+
+
 IteratorType.prototype.isAssignableFrom = function(context, other) {
     return IterableType.prototype.isAssignableFrom.call(this, context, other)
         || ((other instanceof IteratorType) && this.itemType.isAssignableFrom(context, other.itemType));

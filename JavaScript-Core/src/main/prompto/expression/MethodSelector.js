@@ -1,4 +1,5 @@
 var SingletonCategoryDeclaration = null;
+var MethodType = require("../type/MethodType").MethodType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
@@ -8,6 +9,7 @@ var UnresolvedIdentifier = null;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
+var Variable = require("../runtime/Variable").Variable;
 var InstanceContext = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var NativeInstance = null;
@@ -60,13 +62,17 @@ MethodSelector.prototype.toString = function() {
 	}
 };
 
+
 MethodSelector.prototype.getCandidates = function(context, checkInstance) {
-	if(this.parent===null) {
+    var named = context.getRegistered(this.id);
+    if (named instanceof Variable && named.getType(context) instanceof MethodType)
+        return new Set([named.getType(context).method]);
+	else if(this.parent===null)
 		return this.getGlobalCandidates(context);
-	} else {
+	else
 		return this.getMemberCandidates(context, checkInstance);
-	}
 };
+
 
 MethodSelector.prototype.getGlobalCandidates = function(context) {
     var result = new Set();

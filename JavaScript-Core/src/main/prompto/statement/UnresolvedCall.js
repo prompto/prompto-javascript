@@ -8,6 +8,7 @@ var MethodArgument = require("../argument/MethodArgument").MethodArgument;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var MethodType = require("../type/MethodType").MethodType;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var InstanceContext = require("../runtime/Context").InstanceContext;
 
@@ -92,10 +93,13 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
             call = new MethodCall(new MethodSelector(null, id), this.assignments);
     }
     if(call==null) {
-        var value = context.getRegisteredValue(id.name);
-        if(value instanceof MethodArgument || value instanceof MethodExpression) {
-            call = new MethodCall(new MethodSelector(null, id), this.assignments);
-            call.variableName = id.name;
+        var named = context.getRegisteredValue(id.name);
+        if(named !== null) {
+            var type = named.getType(context);
+            if(type instanceof MethodType) {
+                call = new MethodCall(new MethodSelector(null, id), this.assignments);
+                call.variableName = id.name;
+            }
         }
     }
     if(call==null) {

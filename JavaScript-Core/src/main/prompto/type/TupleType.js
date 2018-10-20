@@ -16,6 +16,10 @@ TupleType.prototype.constructor = TupleType;
 
 TupleType.instance = new TupleType();
 
+TupleType.prototype.withItemType = function(itemType) {
+    return this;
+};
+
 TupleType.prototype.isAssignableFrom = function(context, other) {
     return ContainerType.prototype.isAssignableFrom.call(this, context, other)
         || (other instanceof ListType) || (other instanceof SetType);

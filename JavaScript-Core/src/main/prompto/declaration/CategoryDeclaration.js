@@ -65,7 +65,7 @@ CategoryDeclaration.prototype.register = function(context) {
     this.registerMethods(context);
 };
 
-CategoryDeclaration.prototype.check = function(context) {
+CategoryDeclaration.prototype.check = function(context, isStart) {
 	if(this.attributes!=null) {
 		this.attributes.forEach(function(id) {
 			var ad = context.getRegisteredDeclaration(id.name);

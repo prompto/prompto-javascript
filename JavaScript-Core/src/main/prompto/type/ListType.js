@@ -20,6 +20,11 @@ ListType.prototype = Object.create(ContainerType.prototype);
 ListType.prototype.constructor = ListType;
 
 
+ListType.prototype.withItemType = function(itemType) {
+    return new ListType(itemType);
+};
+
+
 ListType.prototype.declare = function(transpiler) {
     // nothing to do
 };

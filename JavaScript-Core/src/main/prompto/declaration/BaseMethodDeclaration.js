@@ -10,10 +10,11 @@ exports.resolve = function() {
 
 function BaseMethodDeclaration(id, args, returnType) {
 	BaseDeclaration.call(this, id);
-    this.memberOf = null;
-	this.args = args || new ArgumentList();
+    this.args = args || new ArgumentList();
 	this.returnType = returnType || null;
-	return this;
+    this.memberOf = null;
+	this.closureOf = null;
+    return this;
 }
 
 BaseMethodDeclaration.prototype  = Object.create(BaseDeclaration.prototype);

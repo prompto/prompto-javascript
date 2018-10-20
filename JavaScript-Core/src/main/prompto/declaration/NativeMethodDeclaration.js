@@ -7,17 +7,35 @@ var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var NullValue = require("../value/NullValue").NullValue;
 
 function NativeMethodDeclaration(id, args, returnType, statements) {
-	ConcreteMethodDeclaration.call(this, id, args,returnType, statements);
+	ConcreteMethodDeclaration.call(this, id, args, returnType, statements);
 	return this;
 }
 
 NativeMethodDeclaration.prototype = Object.create(ConcreteMethodDeclaration.prototype);
 NativeMethodDeclaration.prototype.constructor = NativeMethodDeclaration;
 
-NativeMethodDeclaration.prototype.check = function(context) {
-	var checked = this.fullCheck(context, true);
-	return this.returnType != null ? this.returnType : checked;
+NativeMethodDeclaration.prototype.check = function(context, isStart) {
+    if(isStart) {
+        context = context.newLocalContext();
+        this.registerArguments(context);
+    }
+    if(this.args!==null)
+        this.args.check(context);
+    var checked = this.statements.checkNative(context, this.returnType);
+    return this.returnType==null ? checked : this.returnType;
 };
+
+
+NativeMethodDeclaration.prototype.checkMember = function(category, context) {
+    context = context.newInstanceContext(null, category.getType(context), false);
+    if (this.args !== null)
+        this.args.check(context);
+    var child = context.newChildContext();
+    this.registerArguments(child);
+    var checked = this.statements.checkNative(context, this.returnType);
+    return this.returnType == null ? checked : this.returnType;
+};
+
 
 NativeMethodDeclaration.prototype.interpret = function(context) {
 	context.enterMethod(this);
@@ -28,6 +46,7 @@ NativeMethodDeclaration.prototype.interpret = function(context) {
 		context.leaveMethod(this);
 	}
 };
+
 
 NativeMethodDeclaration.prototype.castToReturnType = function(context, value) {
     // can only cast to specified type, and if required

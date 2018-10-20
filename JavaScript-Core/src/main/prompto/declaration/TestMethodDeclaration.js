@@ -111,7 +111,7 @@ TestMethodDeclaration.prototype.transpileExpectedError = function(transpiler) {
     transpiler.flush();
 };
 
-TestMethodDeclaration.prototype.check = function(context) {
+TestMethodDeclaration.prototype.check = function(context, isStart) {
     // TODO
     return VoidType.instance;
 };
