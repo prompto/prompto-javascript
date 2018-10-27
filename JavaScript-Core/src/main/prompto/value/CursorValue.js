@@ -3,6 +3,7 @@ var CursorType = require("../type/CursorType").CursorType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var Value = require("./Value").Value;
+var ListValue = require("./ListValue").ListValue;
 var BooleanValue = require("./BooleanValue").BooleanValue;
 
 function CursorValue(context, itemType, iterDocs) {
@@ -95,6 +96,15 @@ CursorValue.prototype.filter = function(context, itemId, filter) {
         return this.current;
     };
     return cursor;
+};
+
+
+CursorValue.prototype.toListValue = function(context) {
+    var result = new ListValue(this.type.itemType);
+    var iter = this.getIterator();
+    while(iter.hasNext())
+        result.add(iter.next());
+    return result;
 };
 
 exports.CursorValue = CursorValue;

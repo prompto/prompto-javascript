@@ -1,6 +1,8 @@
 var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
+var ListType = require("./ListType").ListType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 
 function CursorType(itemType) {
     IterableType.call(this, new Identifier("Cursor<" + itemType.name + ">"), itemType);
@@ -52,6 +54,38 @@ CursorType.prototype.transpileMember = function(transpiler, name) {
         transpiler.append(name);
     } else
         IterableType.prototype.transpileMember.call(this, transpiler, name);
+};
+
+
+CursorType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "toList":
+            return [new ToListMethodDeclaration(this.itemType)];
+        default:
+            return NativeType.prototype.getMemberMethods.call(context, name);
+    }
+};
+
+function ToListMethodDeclaration(itemType) {
+    BuiltInMethodDeclaration.call(this, "toList");
+    this.itemType = itemType;
+    return this;
+}
+
+ToListMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+ToListMethodDeclaration.prototype.constructor = ToListMethodDeclaration;
+
+ToListMethodDeclaration.prototype.interpret = function(context) {
+    var value = this.getValue(context);
+    return value.toListValue(context);
+};
+
+ToListMethodDeclaration.prototype.check = function(context) {
+    return new ListType(this.itemType);
+};
+
+ToListMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+    transpiler.append("toList()");
 };
 
 exports.CursorType = CursorType;

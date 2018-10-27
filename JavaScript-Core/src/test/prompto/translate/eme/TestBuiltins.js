@@ -18,6 +18,10 @@ exports.testCharText = function(test) {
 	compareResourceEME(test, "builtins/charText.pec");
 };
 
+exports.testCursorToList = function(test) {
+	compareResourceEME(test, "builtins/cursorToList.pec");
+};
+
 exports.testDateDayOfMonth = function(test) {
 	compareResourceEME(test, "builtins/dateDayOfMonth.pec");
 };

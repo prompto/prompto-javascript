@@ -12,6 +12,14 @@ Object.defineProperty(Cursor.prototype, "totalCount", {
     get: function() { return this.iterable.totalCount(); }
 });
 
+Cursor.prototype.toList = function() {
+    var array = [];
+    var iterator = this.iterator();
+    while(iterator.hasNext())
+        array.push(iterator.next());
+    return array;
+};
+
 Cursor.prototype.iterator = function() {
     var Iterator = function(cursor) {
         this.iterable = cursor.iterable;

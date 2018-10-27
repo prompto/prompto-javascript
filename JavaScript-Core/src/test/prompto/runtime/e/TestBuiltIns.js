@@ -14,7 +14,7 @@ exports.tearDown = function(done) {
 	Out.restore();
 	done();
 };
-
+/*
 exports.testInterpretedBooleanText = function(test) {
 	checkInterpretedOutput(test, "builtins/booleanText.pec");
 };
@@ -46,7 +46,15 @@ exports.testInterpretedCharText = function(test) {
 exports.testTranspiledCharText = function(test) {
 	checkTranspiledOutput(test, "builtins/charText.pec");
 };
+*/
+exports.testInterpretedCursorToList = function(test) {
+	checkInterpretedOutput(test, "builtins/cursorToList.pec");
+};
 
+exports.testTranspiledCursorToList = function(test) {
+	checkTranspiledOutput(test, "builtins/cursorToList.pec");
+};
+/*
 exports.testInterpretedDateDayOfMonth = function(test) {
 	checkInterpretedOutput(test, "builtins/dateDayOfMonth.pec");
 };
@@ -439,3 +447,4 @@ exports.testTranspiledUuidText = function(test) {
 	checkTranspiledOutput(test, "builtins/uuidText.pec");
 };
 
+*/

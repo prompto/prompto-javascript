@@ -18,6 +18,10 @@ exports.testCharText = function(test) {
 	compareResourceEOE(test, "builtins/charText.pec");
 };
 
+exports.testCursorToList = function(test) {
+	compareResourceEOE(test, "builtins/cursorToList.pec");
+};
+
 exports.testDateDayOfMonth = function(test) {
 	compareResourceEOE(test, "builtins/dateDayOfMonth.pec");
 };
