@@ -13,11 +13,11 @@ Object.defineProperty(Cursor.prototype, "totalCount", {
 });
 
 Cursor.prototype.toList = function() {
-    var array = [];
+    var list = new List(false);
     var iterator = this.iterator();
     while(iterator.hasNext())
-        array.push(iterator.next());
-    return array;
+        list.push(iterator.next());
+    return list;
 };
 
 Cursor.prototype.iterator = function() {
