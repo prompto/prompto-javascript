@@ -1,3 +1,4 @@
+var NativeType = require("./NativeType").NativeType;
 var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
 var ListType = require("./ListType").ListType;
@@ -82,6 +83,11 @@ ToListMethodDeclaration.prototype.interpret = function(context) {
 
 ToListMethodDeclaration.prototype.check = function(context) {
     return new ListType(this.itemType);
+};
+
+ToListMethodDeclaration.prototype.declareCall = function(transpiler) {
+    var List = require("../intrinsic/List").List;
+    transpiler.require(List);
 };
 
 ToListMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {

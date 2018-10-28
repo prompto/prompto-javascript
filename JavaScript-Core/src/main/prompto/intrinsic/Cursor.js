@@ -1,3 +1,5 @@
+var List = require("./List").List;
+
 function Cursor(mutable, iterable) {
     this.mutable = mutable || false;
     this.iterable = iterable;
