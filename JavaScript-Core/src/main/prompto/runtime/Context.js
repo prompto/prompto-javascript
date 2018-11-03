@@ -566,7 +566,12 @@ InstanceContext.prototype.getRegistered = function(name) {
     if (decl==null)
         return null;
     var methods = decl.getMemberMethodsMap(this, name);
-    return methods.isEmpty() ? null : methods;
+    if(methods && !methods.isEmpty())
+        return methods;
+    else if(decl.hasAttribute(this, name))
+        return this.getRegisteredDeclaration(typeof(AttributeDeclaration), name);
+    else
+        return null;
 };
 
 
