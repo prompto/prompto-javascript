@@ -62,6 +62,7 @@ FetchOneExpression.prototype.check = function(context) {
         var decl = context.getRegisteredDeclaration(this.typ.name);
         if (decl == null)
             throw new SyntaxError("Unknown category: " + this.typ.name);
+        context = context.newInstanceContext(null, decl.getType(context), true);
     }
     var filterType = this.predicate.check(context);
     if (filterType != BooleanType.instance)
