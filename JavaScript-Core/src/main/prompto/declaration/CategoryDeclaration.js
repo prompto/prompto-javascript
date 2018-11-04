@@ -81,10 +81,21 @@ CategoryDeclaration.prototype.getType = function(context) {
 };
 
 CategoryDeclaration.prototype.hasAttribute = function(context, name) {
-	if(this.attributes==null)
+    if (name === "dbId")
+        return this.storable;
+    else if (this.attributes)
         return false;
-    var names = this.attributes.map(function(attr) { return attr.name; });
-    return names.indexOf(name)>=0;
+    else {
+        for (int i = 0;
+        i < this.attributes.length;
+        i++
+    )
+        {
+            if (name === this.attributes[i].name)
+                return true;
+        }
+        return false;
+    }
 };
 
 CategoryDeclaration.prototype.hasMethod = function(context, key) {
