@@ -9,7 +9,7 @@ function NativeInstance(context, declaration, instance) {
     this.storable = false;
     if(declaration.storable) {
         var categories = declaration.collectCategories(context);
-        this.storable = DataStore.instance.newStorableDocument(categories);
+        this.storable = DataStore.instance.newStorableDocument(categories, null);
     }
 	this.instance = instance || this.makeInstance();
 	return this;

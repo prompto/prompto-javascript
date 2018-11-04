@@ -34,7 +34,8 @@ StorableDocument.prototype.getOrCreateDbId = function() {
     var dbId = this.getDbId();
     if (dbId == null) {
         dbId = ++DataStore.instance.nextDbId;
-        this.dbIdListener(dbId);
+        if(this.dbIdListener)
+            this.dbIdListener(dbId);
         this.setData("dbId", dbId);
     }
     return dbId;
