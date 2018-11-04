@@ -83,14 +83,10 @@ CategoryDeclaration.prototype.getType = function(context) {
 CategoryDeclaration.prototype.hasAttribute = function(context, name) {
     if (name === "dbId")
         return this.storable;
-    else if (this.attributes)
+    else if (this.attributes == null)
         return false;
     else {
-        for (int i = 0;
-        i < this.attributes.length;
-        i++
-    )
-        {
+        for (var i = 0; i < this.attributes.length; i++ ) {
             if (name === this.attributes[i].name)
                 return true;
         }
