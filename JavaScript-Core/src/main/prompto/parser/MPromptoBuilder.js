@@ -132,7 +132,8 @@ MPromptoBuilder.prototype.exitStoreStatement = function(ctx) {
 MPromptoBuilder.prototype.exitStore_statement = function(ctx) {
     var del = this.getNodeValue(ctx.to_del);
     var add = this.getNodeValue(ctx.to_add);
-    var stmt = new statement.StoreStatement(del, add);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var stmt = new statement.StoreStatement(del, add, stmts);
     this.setNodeValue(ctx, stmt);
 };
 

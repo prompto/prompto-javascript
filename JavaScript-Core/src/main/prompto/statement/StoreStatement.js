@@ -1,5 +1,5 @@
 var NotStorableError = require("../error/NotStorableError").NotStorableError;
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
+var BaseStatement = require("./BaseStatement").BaseStatement;
 var Identifier = require("../grammar/Identifier").Identifier;
 var VoidType = require("../type/VoidType").VoidType;
 var DataStore = require("../store/DataStore").DataStore;
@@ -8,15 +8,21 @@ var Instance = require("../value/Value").Instance;
 var Container = require("../value/Value").Container;
 var Dialect = require("../parser/Dialect").Dialect;
 
-function StoreStatement(del, add) {
-    SimpleStatement.call(this);
+function StoreStatement(del, add, andThen) {
+    BaseStatement.call(this);
     this.del = del;
     this.add = add;
+    this.andThen = andThen;
     return this;
 }
 
-StoreStatement.prototype = Object.create(SimpleStatement.prototype);
+StoreStatement.prototype = Object.create(BaseStatement.prototype);
 StoreStatement.prototype.constructor = StoreStatement;
+
+
+StoreStatement.prototype.isSimple = function() {
+    return this.andThen==null;
+};
 
 
 StoreStatement.prototype.toDialect = function(writer) {
@@ -40,6 +46,17 @@ StoreStatement.prototype.toDialect = function(writer) {
             writer.append('(');
             this.add.toDialect(writer);
             writer.append(')');
+        }
+    }
+    if(this.andThen) {
+        if(writer.dialect == Dialect.O) {
+            writer.append("then {").newLine().indent();
+            this.andThen.toDialect(writer);
+            writer.dedent().append("}");
+        } else {
+            writer.append("then:").newLine().indent();
+            this.andThen.toDialect(writer);
+            writer.dedent();
         }
     }
 };
@@ -70,18 +87,27 @@ StoreStatement.prototype.interpret = function(context) {
     var storablesToAdd = this.getStorablesToAdd(context);
     if (idsToDelete || storablesToAdd)
         DataStore.instance.store(idsToDelete, storablesToAdd);
+    if(this.andThen)
+        this.andThen.interpret(context);
 };
 
 StoreStatement.prototype.declare = function(transpiler) {
     transpiler.require(DataStore);
+    if(this.andThen)
+        this.andThen.declare(transpiler);
 };
 
 
 StoreStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("DataStore.instance.store(");
+    transpiler.append("DataStore.instance.store").append(this.andThen?"Async":"").append("(");
     this.transpileIdsToDelete(transpiler);
     transpiler.append(", ");
     this.transpileStorablesToAdd(transpiler);
+    if(this.andThen) {
+        transpiler.append(", function() {").indent();
+        this.andThen.transpile(transpiler);
+        transpiler.dedent().append("}");
+    }
     transpiler.append(")");
 };
 

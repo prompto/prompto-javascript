@@ -8,4 +8,8 @@ function SimpleStatement() {
 SimpleStatement.prototype = Object.create(BaseStatement.prototype);
 SimpleStatement.prototype.constructor = SimpleStatement;
 
+SimpleStatement.prototype.isSimple = function() {
+    return true;
+};
+
 exports.SimpleStatement = SimpleStatement;

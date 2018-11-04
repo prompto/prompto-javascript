@@ -117,7 +117,7 @@ ForEachStatement.prototype.toODialect = function(writer) {
     writer.append(" in ");
     this.source.toDialect(writer);
     writer.append(")");
-    var oneLine = this.statements.length === 1 && (this.statements[0] instanceof SimpleStatement);
+    var oneLine = this.statements.length === 1 && this.statements[0].isSimple();
     if(!oneLine)
         writer.append(" {");
     writer.newLine();

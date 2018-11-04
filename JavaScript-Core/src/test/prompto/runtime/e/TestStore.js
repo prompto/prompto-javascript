@@ -15,6 +15,14 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testInterpretedAsyncStore = function(test) {
+	checkInterpretedOutput(test, "store/asyncStore.pec");
+};
+
+exports.testTranspiledAsyncStore = function(test) {
+	checkTranspiledOutput(test, "store/asyncStore.pec");
+};
+
 exports.testInterpretedDeleteRecords = function(test) {
 	checkInterpretedOutput(test, "store/deleteRecords.pec");
 };

@@ -24,7 +24,7 @@ MemStore.prototype.isDbIdType = function(type) {
 };
 
 
-MemStore.prototype.store = function(todel, toadd) {
+MemStore.prototype.store = function(todel, toadd, andThen) {
     if(todel) {
         todel.forEach(function(dbId) {
             delete this.iterDocuments[dbId];
@@ -37,7 +37,13 @@ MemStore.prototype.store = function(todel, toadd) {
                 this.iterDocuments[data.dbId] = data;
         }, this);
     }
+    if(andThen)
+        andThen();
 };
+
+
+MemStore.prototype.storeAsync = MemStore.prototype.store;
+
 
 MemStore.prototype.fetchUnique = function(dbId) {
     return this.iterDocuments[dbId] || null;

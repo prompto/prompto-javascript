@@ -130,7 +130,7 @@ StatementList.prototype.doInterpretNative = function(context, returnType) {
 StatementList.prototype.toDialect = function(writer) {
     this.forEach(function(stmt) {
         stmt.toDialect(writer);
-        if(stmt instanceof SimpleStatement) {
+        if(stmt.isSimple()) {
             if(writer.dialect==Dialect.O && !(stmt instanceof NativeCall))
                 writer.append(';');
             writer.newLine();
