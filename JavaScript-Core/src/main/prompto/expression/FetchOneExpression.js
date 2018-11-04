@@ -110,9 +110,7 @@ FetchOneExpression.prototype.transpile = function(transpiler) {
     transpiler.append("if(stored===null)").indent().append("return null;").dedent();
     transpiler.append("var name = stored.getData('category').slice(-1)[0];").newLine();
     transpiler.append("var type = eval(name);").newLine();
-    transpiler.append("var result = new type();").newLine();
-    transpiler.append("result.fromStored(stored);").newLine();
-    transpiler.append("return result;").dedent();
+    transpiler.append("return new type(null, stored, ").append(this.typ!=null && this.typ.mutable).append(");").dedent();
     transpiler.append("})()");
 };
 

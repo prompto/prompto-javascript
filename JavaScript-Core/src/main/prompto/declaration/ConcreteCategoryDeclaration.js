@@ -483,7 +483,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     transpiler.indent();
     var categories = this.collectCategories(transpiler.context);
     if(this.storable)
-        transpiler.append("this.storable = DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("']);").newLine();
+        transpiler.append("this.storable = DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine();
     this.transpileGetterSetterAttributes(transpiler);
     this.transpileSuperConstructor(transpiler);
     transpiler.append("this.category = [").append(categories.join(', ')).append("];").newLine();
