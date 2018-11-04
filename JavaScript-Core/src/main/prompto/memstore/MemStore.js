@@ -134,10 +134,10 @@ MemStore.prototype.newQueryBuilder = function() {
     return new MemQueryBuilder();
 };
 
-MemStore.prototype.newStorableDocument = function(categories) {
+MemStore.prototype.newStorableDocument = function(categories, dbIdListener) {
     if(!StorableDocument)
         StorableDocument = require("./StorableDocument").StorableDocument;
-    return new StorableDocument(categories);
+    return new StorableDocument(categories, dbIdListener);
 };
 
 function StoredIterator(docs, totalCount) {

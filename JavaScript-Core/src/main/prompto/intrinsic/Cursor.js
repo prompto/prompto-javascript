@@ -32,7 +32,9 @@ Cursor.prototype.iterator = function() {
                 return null;
             var name = stored.getData('category').slice(-1)[0];
             var type = eval(name);
-            return new type(null, stored, cursor.mutable);
+            var result = new type(null, {}, cursor.mutable);
+            result.fromStored(stored); // call loaders
+            return result;
         };
         return this;
     };
