@@ -106,7 +106,7 @@ StoreStatement.prototype.transpile = function(transpiler) {
     if(this.andThen) {
         transpiler.append(", function() {").indent();
         this.andThen.transpile(transpiler);
-        transpiler.dedent().append("}");
+        transpiler.dedent().append("}.bind(this)");
     }
     transpiler.append(")");
 };
