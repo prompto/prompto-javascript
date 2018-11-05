@@ -75,7 +75,7 @@ FetchOneStatement.prototype.transpile = function(transpiler) {
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, this.typ));
     this.stmts.transpile(transpiler);
-    transpiler.dedent().append("}.bind(this));").dedent().append("})()");
+    transpiler.dedent().append("}.bind(this));").dedent().append("}).bind(this)()");
     transpiler.flush();
     return false;
 };
