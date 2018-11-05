@@ -59,6 +59,11 @@ MemStore.prototype.fetchOne = function(query) {
     return null;
 };
 
+MemStore.prototype.fetchOneAsync = function(query, andThen) {
+    var record = this.fetchOne(query);
+    andThen(record);
+};
+
 
 MemStore.prototype.fetchMany = function(query) {
     var docs = this.fetchMatching(query);

@@ -317,6 +317,15 @@ EParserListener.prototype.exitStoreStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#FetchStatement.
+EParserListener.prototype.enterFetchStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#FetchStatement.
+EParserListener.prototype.exitFetchStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#FlushStatement.
 EParserListener.prototype.enterFlushStatement = function(ctx) {
 };
@@ -740,6 +749,15 @@ EParserListener.prototype.exitMethodCallExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#FetchExpression.
+EParserListener.prototype.enterFetchExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#FetchExpression.
+EParserListener.prototype.exitFetchExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#NotHasExpression.
 EParserListener.prototype.enterNotHasExpression = function(ctx) {
 };
@@ -899,15 +917,6 @@ EParserListener.prototype.enterTernaryExpression = function(ctx) {
 
 // Exit a parse tree produced by EParser#TernaryExpression.
 EParserListener.prototype.exitTernaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#FetchStoreExpression.
-EParserListener.prototype.enterFetchStoreExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#FetchStoreExpression.
-EParserListener.prototype.exitFetchStoreExpression = function(ctx) {
 };
 
 
@@ -1250,6 +1259,24 @@ EParserListener.prototype.enterFetchMany = function(ctx) {
 
 // Exit a parse tree produced by EParser#FetchMany.
 EParserListener.prototype.exitFetchMany = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#FetchOneAsync.
+EParserListener.prototype.enterFetchOneAsync = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#FetchOneAsync.
+EParserListener.prototype.exitFetchOneAsync = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#FetchManyAsync.
+EParserListener.prototype.enterFetchManyAsync = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#FetchManyAsync.
+EParserListener.prototype.exitFetchManyAsync = function(ctx) {
 };
 
 

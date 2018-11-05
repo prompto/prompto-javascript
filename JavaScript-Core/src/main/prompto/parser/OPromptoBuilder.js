@@ -2029,7 +2029,6 @@ OPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 };
 
 
-
 OPromptoBuilder.prototype.exitDocument_literal = function(ctx) {
     var entries = this.getNodeValue(ctx.dict_entry_list());
     var items = entries ? new literal.DocEntryList(entries.items) : null;
@@ -2037,12 +2036,9 @@ OPromptoBuilder.prototype.exitDocument_literal = function(ctx) {
 };
 
 
-OPromptoBuilder.prototype.exitFetchOne = function(ctx) {
-    var category = this.getNodeValue(ctx.typ);
-    var predicate = this.getNodeValue(ctx.predicate);
-    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
+OPromptoBuilder.prototype.exitFetchStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
 };
-
 
 
 OPromptoBuilder.prototype.exitFetchMany = function(ctx) {
@@ -2055,6 +2051,33 @@ OPromptoBuilder.prototype.exitFetchMany = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitFetchManyAsync = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var predicate = this.getNodeValue(ctx.predicate);
+    var start = this.getNodeValue(ctx.xstart);
+    var stop = this.getNodeValue(ctx.xstop);
+    var orderBy = this.getNodeValue(ctx.orderby);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.FetchManyStatement(category, start, stop, predicate, orderBy, name, stmts));
+};
+
+
+OPromptoBuilder.prototype.exitFetchOne = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
+};
+
+
+OPromptoBuilder.prototype.exitFetchOneAsync = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var predicate = this.getNodeValue(ctx.predicate);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.FetchOneStatement(category, predicate, name, stmts));
+};
+
 
 OPromptoBuilder.prototype.exitFiltered_list_expression = function(ctx) {
     var itemName = this.getNodeValue(ctx.name);
@@ -2062,7 +2085,6 @@ OPromptoBuilder.prototype.exitFiltered_list_expression = function(ctx) {
     var predicate = this.getNodeValue(ctx.predicate);
     this.setNodeValue(ctx, new expression.FilteredExpression(itemName, source, predicate));
 };
-
 
 
 OPromptoBuilder.prototype.exitCode_type = function(ctx) {

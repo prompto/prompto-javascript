@@ -290,6 +290,15 @@ MParserListener.prototype.exitStoreStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#FetchStatement.
+MParserListener.prototype.enterFetchStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#FetchStatement.
+MParserListener.prototype.exitFetchStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#FlushStatement.
 MParserListener.prototype.enterFlushStatement = function(ctx) {
 };
@@ -1187,6 +1196,24 @@ MParserListener.prototype.enterFetchMany = function(ctx) {
 
 // Exit a parse tree produced by MParser#FetchMany.
 MParserListener.prototype.exitFetchMany = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#FetchOneAsync.
+MParserListener.prototype.enterFetchOneAsync = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#FetchOneAsync.
+MParserListener.prototype.exitFetchOneAsync = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#FetchManyAsync.
+MParserListener.prototype.enterFetchManyAsync = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#FetchManyAsync.
+MParserListener.prototype.exitFetchManyAsync = function(ctx) {
 };
 
 

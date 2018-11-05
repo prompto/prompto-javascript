@@ -29,6 +29,8 @@ exports.WithResourceStatement = require("./WithResourceStatement").WithResourceS
 exports.WithSingletonStatement = require("./WithSingletonStatement").WithSingletonStatement;
 exports.WriteStatement = require("./WriteStatement").WriteStatement;
 exports.UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
+exports.FetchOneStatement = require("./FetchOneStatement").FetchOneStatement;
+exports.FetchManyStatement = require("./FetchManyStatement").FetchManyStatement;
 
 require("./MethodCall").resolve();
 require("./DeclarationStatement").resolve();

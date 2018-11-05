@@ -15,6 +15,14 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testInterpretedAsyncFetch = function(test) {
+	checkInterpretedOutput(test, "store/asyncFetch.pec");
+};
+
+exports.testTranspiledAsyncFetch = function(test) {
+	checkTranspiledOutput(test, "store/asyncFetch.pec");
+};
+
 exports.testInterpretedAsyncStore = function(test) {
 	checkInterpretedOutput(test, "store/asyncStore.pec");
 };

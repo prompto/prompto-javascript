@@ -99,6 +99,24 @@ FetchOneExpression.prototype.declare = function(transpiler) {
 
 FetchOneExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
+    this.transpileQuery(transpiler);
+    transpiler.append("var stored = DataStore.instance.fetchOne(builder.build());").newLine();
+    this.transpileConvert(transpiler, "result");
+    transpiler.append("return result;").dedent();
+    transpiler.append("})()");
+};
+
+
+FetchOneExpression.prototype.transpileConvert = function(transpiler, varName) {
+    transpiler.append("if(stored===null)").indent().append("return null;").dedent();
+    transpiler.append("var name = stored.getData('category').slice(-1)[0];").newLine();
+    transpiler.append("var type = eval(name);").newLine();
+    transpiler.append("var ").append(varName).append(" = new type(null, {}, ").append(this.typ!=null && this.typ.mutable).append(");").newLine();
+    transpiler.append(varName).append(".fromStored(stored);").newLine();
+};
+
+
+FetchOneExpression.prototype.transpileQuery = function(transpiler) {
     transpiler.append("var builder = DataStore.instance.newQueryBuilder();").newLine();
     if (this.typ != null)
         transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
@@ -106,16 +124,7 @@ FetchOneExpression.prototype.transpile = function(transpiler) {
         this.predicate.transpileQuery(transpiler, "builder");
     if (this.typ != null && this.predicate != null)
         transpiler.append("builder.and();").newLine();
-    transpiler.append("var stored = DataStore.instance.fetchOne(builder.build());").newLine();
-    transpiler.append("if(stored===null)").indent().append("return null;").dedent();
-    transpiler.append("var name = stored.getData('category').slice(-1)[0];").newLine();
-    transpiler.append("var type = eval(name);").newLine();
-    transpiler.append("var result = new type(null, {}, ").append(this.typ!=null && this.typ.mutable).append(");").newLine();
-    transpiler.append("result.fromStored(stored);").newLine();
-    transpiler.append("return result;").dedent();
-    transpiler.append("})()");
 };
-
 
 
 FetchOneExpression.prototype.buildFetchOneQuery = function(context, store) {

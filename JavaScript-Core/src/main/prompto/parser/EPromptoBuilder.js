@@ -2004,10 +2004,14 @@ EPromptoBuilder.prototype.exitDocument_literal = function(ctx) {
     this.setNodeValue(ctx, new literal.DocumentLiteral(items));
 };
 
-EPromptoBuilder.prototype.exitFetchOne = function(ctx) {
-    var category = this.getNodeValue(ctx.typ);
-    var predicate = this.getNodeValue(ctx.predicate);
-    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
+
+EPromptoBuilder.prototype.exitFetchExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+};
+
+
+EPromptoBuilder.prototype.exitFetchStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
 };
 
 
@@ -2018,6 +2022,34 @@ EPromptoBuilder.prototype.exitFetchMany = function(ctx) {
     var stop = this.getNodeValue(ctx.xstop);
     var orderBy = this.getNodeValue(ctx.orderby);
     this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
+};
+
+
+EPromptoBuilder.prototype.exitFetchManyAsync = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var predicate = this.getNodeValue(ctx.predicate);
+    var start = this.getNodeValue(ctx.xstart);
+    var stop = this.getNodeValue(ctx.xstop);
+    var orderBy = this.getNodeValue(ctx.orderby);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.FetchManyStatement(category, start, stop, predicate, orderBy, name, stmts));
+};
+
+
+EPromptoBuilder.prototype.exitFetchOne = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var predicate = this.getNodeValue(ctx.predicate);
+    this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
+};
+
+
+EPromptoBuilder.prototype.exitFetchOneAsync = function(ctx) {
+    var category = this.getNodeValue(ctx.typ);
+    var predicate = this.getNodeValue(ctx.predicate);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.FetchOneStatement(category, predicate, name, stmts));
 };
 
 
@@ -2033,16 +2065,6 @@ EPromptoBuilder.prototype.exitFiltered_list_suffix = function(ctx) {
     var itemName = this.getNodeValue(ctx.name);
     var predicate = this.getNodeValue(ctx.predicate);
     this.setNodeValue(ctx, new expression.FilteredExpression(itemName, null, predicate));
-};
-
-
-
-
-
-
-EPromptoBuilder.prototype.exitFetchStoreExpression = function(ctx) {
-    var exp = this.getNodeValue(ctx.getChild(0));
-    this.setNodeValue(ctx, exp);
 };
 
 
