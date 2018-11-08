@@ -263,8 +263,11 @@ function wrapAndExtract(js, methodName, context) {
     var wrapper = createWrapper(js, methodName);
     // call it to inject/extract data
     var objs = wrapper(context);
-    if(objs.store)
-        objs.store.instance = prompto.store.DataStore.instance = new prompto.memstore.MemStore();
+    if(objs.store) {
+        var MemStoreModule = require("../memstore/MemStore");
+        objs.store.instance = prompto.store.DataStore.instance = new MemStoreModule.MemStore();
+        MemStoreModule.Cursor = objs.cursor;
+    }
     return objs.method;
 }
 
@@ -276,7 +279,8 @@ function createWrapper(js, methodName) {
         "var ReactBootstrap = { Button: function() { this.render = function() { return {}; }; return this; } };",
         js,
         "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
-        "return { store:  store, method: " + methodName + " };",
+        "var cursor = typeof(Cursor) === 'undefined' ? null : Cursor;",
+        "return { store:  store, cursor: cursor, method: " + methodName + " };",
         "});"
     ];
     js = lines.join("\n");

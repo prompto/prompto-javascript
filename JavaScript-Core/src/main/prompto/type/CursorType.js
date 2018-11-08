@@ -3,6 +3,7 @@ var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
 var ListType = require("./ListType").ListType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var Variable = require("../runtime/Variable").Variable;
 var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 
 function CursorType(itemType) {
@@ -35,6 +36,24 @@ CursorType.prototype.equals = function(obj) {
 CursorType.prototype.checkIterator = function(context, source) {
     return this.itemType;
 };
+
+
+CursorType.prototype.declareIterator = function(transpiler, name, expression) {
+    transpiler = transpiler.newChildTranspiler(null);
+    transpiler.context.registerValue(new Variable(name, this.itemType));
+    expression.declare(transpiler);
+};
+
+
+CursorType.prototype.transpileIterator = function(transpiler, name, expression) {
+    transpiler.append(".iterate(function(").append(name.name).append(") { return ");
+    transpiler = transpiler.newChildTranspiler(null);
+    transpiler.context.registerValue(new Variable(name, this.itemType));
+    expression.transpile(transpiler);
+    transpiler.append("; }, this)");
+    transpiler.flush();
+};
+
 
 CursorType.prototype.checkMember = function(context, section, name) {
     if ("count"===name)

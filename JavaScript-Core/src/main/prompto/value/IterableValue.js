@@ -45,7 +45,16 @@ IterableValue.prototype.getMemberValue = function(context, name) {
     if ("count" === name)
         return new Integer(this.count);
     else
-        throw new InvalidDataError("No such member:" + name);
+        return Value.prototype.getMemberValue.call(this, context, name);
+};
+
+
+IterableValue.prototype.toString = function() {
+    var values = [];
+    var iterator = this.getIterator();
+    while(iterator.hasNext())
+        values.push(iterator.next());
+    return values.join(", ");
 };
 
 exports.IterableValue = IterableValue;

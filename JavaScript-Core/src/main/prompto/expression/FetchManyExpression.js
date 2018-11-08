@@ -192,6 +192,15 @@ FetchManyExpression.prototype.declare = function(transpiler) {
 
 FetchManyExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
+    this.transpileQuery(transpiler);
+    transpiler.append("var iterable = DataStore.instance.fetchMany(builder.build());").newLine();
+    var mutable = this.typ ? this.typ.mutable : false;
+    transpiler.append("return new Cursor(").append(mutable).append(", iterable);").dedent();
+    transpiler.append("})()");
+};
+
+
+FetchManyExpression.prototype.transpileQuery = function(transpiler) {
     transpiler.append("var builder = DataStore.instance.newQueryBuilder();").newLine();
     if (this.typ != null)
         transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
@@ -211,10 +220,6 @@ FetchManyExpression.prototype.transpile = function(transpiler) {
     }
     if (this.orderBy)
         this.orderBy.transpileQuery(transpiler, "builder");
-    transpiler.append("var iterable = DataStore.instance.fetchMany(builder.build());").newLine();
-    var mutable = this.typ ? this.typ.mutable : false;
-    transpiler.append("return new Cursor(").append(mutable).append(", iterable);").dedent();
-    transpiler.append("})()");
 };
 
 

@@ -15,12 +15,20 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testInterpretedAsyncFetch = function(test) {
-	checkInterpretedOutput(test, "store/asyncFetch.pec");
+exports.testInterpretedAsyncFetchMany = function(test) {
+	checkInterpretedOutput(test, "store/asyncFetchMany.pec");
 };
 
-exports.testTranspiledAsyncFetch = function(test) {
-	checkTranspiledOutput(test, "store/asyncFetch.pec");
+exports.testTranspiledAsyncFetchMany = function(test) {
+	checkTranspiledOutput(test, "store/asyncFetchMany.pec");
+};
+
+exports.testInterpretedAsyncFetchOne = function(test) {
+	checkInterpretedOutput(test, "store/asyncFetchOne.pec");
+};
+
+exports.testTranspiledAsyncFetchOne = function(test) {
+	checkTranspiledOutput(test, "store/asyncFetchOne.pec");
 };
 
 exports.testInterpretedAsyncStore = function(test) {
@@ -110,4 +118,3 @@ exports.testInterpretedUntypedRecord = function(test) {
 exports.testTranspiledUntypedRecord = function(test) {
 	checkTranspiledOutput(test, "store/untypedRecord.pec");
 };
-

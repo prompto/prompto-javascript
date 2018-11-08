@@ -14,6 +14,32 @@ Object.defineProperty(Cursor.prototype, "totalCount", {
     get: function() { return this.iterable.totalCount(); }
 });
 
+Cursor.prototype.iterate = function (fn, instance) {
+    if(instance)
+        fn = fn.bind(instance);
+    var self = this;
+    return {
+        length: self.count,
+        iterator: function() {
+            var iterator = self.iterator();
+            return {
+                hasNext: function() { return iterator.hasNext(); },
+                next: function() { return fn(iterator.next()); }
+            };
+        },
+        toArray: function() {
+            var array = [];
+            var iterator = this.iterator();
+            while(iterator.hasNext())
+                array.push(iterator.next());
+            return array;
+        },
+        getText: function() {
+            return this.toArray().join(", ");
+        }
+    };
+};
+
 Cursor.prototype.toList = function() {
     var list = new List(false);
     var iterator = this.iterator();

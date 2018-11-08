@@ -2,8 +2,12 @@ require("../../../../exploded");
 
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAsyncFetch = function(test) {
-	compareResourceEME(test, "store/asyncFetch.pec");
+exports.testAsyncFetchMany = function(test) {
+	compareResourceEME(test, "store/asyncFetchMany.pec");
+};
+
+exports.testAsyncFetchOne = function(test) {
+	compareResourceEME(test, "store/asyncFetchOne.pec");
 };
 
 exports.testAsyncStore = function(test) {

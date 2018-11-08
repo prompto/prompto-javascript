@@ -2,6 +2,7 @@ var InternalError = require("../error/InternalError").InternalError;
 var Store = require("../store/Store").Store;
 var MemQueryBuilder = require("./MemQueryBuilder").MemQueryBuilder;
 var StorableDocument = null;
+exports.Cursor = require("../intrinsic/Cursor").Cursor;
 
 // a utility class for running unit tests only
 function MemStore() {
@@ -71,6 +72,11 @@ MemStore.prototype.fetchMany = function(query) {
     docs = this.sort(query, docs);
     docs = this.slice(query, docs);
     return new StoredIterator(docs, totalCount);
+};
+
+MemStore.prototype.fetchManyAsync = function(query, andThen) {
+    var records = this.fetchMany(query);
+    andThen(new exports.Cursor(false, records));
 };
 
 MemStore.prototype.slice = function(query, docs) {
