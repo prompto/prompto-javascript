@@ -86,3 +86,7 @@ exports.testSpecified = function(test) {
 	compareResourceEOE(test, "methods/specified.pec");
 };
 
+exports.testVoidAsync = function(test) {
+	compareResourceEOE(test, "methods/voidAsync.pec");
+};
+

@@ -118,3 +118,4 @@ exports.testInterpretedUntypedRecord = function(test) {
 exports.testTranspiledUntypedRecord = function(test) {
 	checkTranspiledOutput(test, "store/untypedRecord.pec");
 };
+

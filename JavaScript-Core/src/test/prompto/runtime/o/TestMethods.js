@@ -143,3 +143,11 @@ exports.testTranspiledSpecified = function(test) {
 	checkTranspiledOutput(test, "methods/specified.poc");
 };
 
+exports.testInterpretedVoidAsync = function(test) {
+	checkInterpretedOutput(test, "methods/voidAsync.poc");
+};
+
+exports.testTranspiledVoidAsync = function(test) {
+	checkTranspiledOutput(test, "methods/voidAsync.poc");
+};
+

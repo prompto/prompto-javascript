@@ -650,6 +650,15 @@ OParserListener.prototype.exitMethod_call = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#method_call_statement.
+OParserListener.prototype.enterMethod_call_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#method_call_statement.
+OParserListener.prototype.exitMethod_call_statement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#MethodName.
 OParserListener.prototype.enterMethodName = function(ctx) {
 };

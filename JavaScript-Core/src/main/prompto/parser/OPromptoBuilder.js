@@ -727,8 +727,16 @@ OPromptoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 OPromptoBuilder.prototype.exitMethod_call = function(ctx) {
 	var method = this.getNodeValue(ctx.method);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args));
+	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args, null));
 };
+
+
+OPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
+    var call = this.getNodeValue(ctx.method);
+    call.andThen = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, call);
+};
+
 
 
 OPromptoBuilder.prototype.exitCallableRoot = function(ctx) {

@@ -461,6 +461,15 @@ MParserListener.prototype.exitMethod_call = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#method_call_statement.
+MParserListener.prototype.enterMethod_call_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#method_call_statement.
+MParserListener.prototype.exitMethod_call_statement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#MethodName.
 MParserListener.prototype.enterMethodName = function(ctx) {
 };

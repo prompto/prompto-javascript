@@ -74,3 +74,7 @@ exports.testSpecified = function(test) {
 	compareResourceOEO(test, "methods/specified.poc");
 };
 
+exports.testVoidAsync = function(test) {
+	compareResourceOEO(test, "methods/voidAsync.poc");
+};
+
