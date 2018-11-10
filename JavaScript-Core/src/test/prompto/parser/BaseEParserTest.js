@@ -134,7 +134,9 @@ exports.checkCompletionAt = function(test, code, line, column, expected) {
 };
 
 exports.checkInterpretedOutput = function(test, fileName) {
-    prompto.store.DataStore.instance = new prompto.memstore.MemStore();
+    var MemStoreModule = require("../memstore/MemStore");
+    MemStoreModule.Cursor = require("../intrinsic/Cursor").Cursor;
+    prompto.store.DataStore.instance = new MemStoreModule.MemStore();
     exports.interpretResource(fileName);
     checkSameOutput(test, fileName);
     test.done();
