@@ -134,9 +134,9 @@ FetchManyExpression.prototype.checkSlice = function(context) {
 FetchManyExpression.prototype.interpret = function(context) {
     var store = DataStore.instance;
     var query = this.buildFetchManyQuery(context, store);
-    var results = store.fetchMany(query);
-    typ = this.typ==null ? AnyType.instance : this.typ;
-    return new CursorValue(context, typ, results);
+    var typ = this.typ==null ? AnyType.instance : this.typ;
+    var cursor = store.fetchMany(query, typ.mutable);
+    return new CursorValue(context, typ, cursor.iterable);
 };
 
 
@@ -193,9 +193,8 @@ FetchManyExpression.prototype.declare = function(transpiler) {
 FetchManyExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
     this.transpileQuery(transpiler);
-    transpiler.append("var iterable = DataStore.instance.fetchMany(builder.build());").newLine();
     var mutable = this.typ ? this.typ.mutable : false;
-    transpiler.append("return new Cursor(").append(mutable).append(", iterable);").dedent();
+    transpiler.append("return DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine();
     transpiler.append("})()");
 };
 

@@ -66,17 +66,18 @@ MemStore.prototype.fetchOneAsync = function(query, andThen) {
 };
 
 
-MemStore.prototype.fetchMany = function(query) {
+MemStore.prototype.fetchMany = function(query, mutable) {
     var docs = this.fetchMatching(query);
     var totalCount = docs.length;
     docs = this.sort(query, docs);
     docs = this.slice(query, docs);
-    return new StoredIterator(docs, totalCount);
+    var iterator = new StoredIterator(docs, totalCount);
+    return new exports.Cursor(mutable, iterator)
 };
 
-MemStore.prototype.fetchManyAsync = function(query, andThen) {
-    var records = this.fetchMany(query);
-    andThen(new exports.Cursor(false, records));
+MemStore.prototype.fetchManyAsync = function(query, mutable, andThen) {
+    var cursor = this.fetchMany(query, mutable);
+    andThen(cursor);
 };
 
 MemStore.prototype.slice = function(query, docs) {

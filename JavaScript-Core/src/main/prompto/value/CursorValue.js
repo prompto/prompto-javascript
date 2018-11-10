@@ -6,10 +6,10 @@ var Value = require("./Value").Value;
 var ListValue = require("./ListValue").ListValue;
 var BooleanValue = require("./BooleanValue").BooleanValue;
 
-function CursorValue(context, itemType, iterDocs) {
+function CursorValue(context, itemType, iterDocuments) {
     Value.call(this, new CursorType(itemType));
     this.context = context;
-    this.iterDocuments = iterDocs;
+    this.iterDocuments = iterDocuments;
     this.mutable = itemType.mutable || false;
     return this;
 };
