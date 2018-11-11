@@ -764,7 +764,7 @@ EPromptoBuilder.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
     if (name!=null || stmts!=null)
-        this.setNodeValue(ctx, new statement.AsynchronousCall(exp, args, name, stmts));
+        this.setNodeValue(ctx, new statement.RemoteCall(exp, args, name, stmts));
     else
         this.setNodeValue(ctx, new statement.UnresolvedCall(exp, args));
 };

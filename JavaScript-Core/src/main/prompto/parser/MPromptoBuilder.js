@@ -747,7 +747,7 @@ MPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
     if (name!=null || stmts!=null)
-        this.setNodeValue(ctx, new statement.AsynchronousCall(call.callable, call.assignments, name, stmts));
+        this.setNodeValue(ctx, new statement.RemoteCall(call.callable, call.assignments, name, stmts));
     else
         this.setNodeValue(ctx, call)
 };

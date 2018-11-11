@@ -3,23 +3,23 @@ var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
 
-function AsynchronousCall(caller, assignments, resultName, andThen) {
+function RemoteCall(caller, assignments, resultName, andThen) {
     UnresolvedCall.call(this, caller, assignments);
     this.resultName = resultName;
     this.andThen = andThen;
     return this;
 }
 
-AsynchronousCall.prototype  = Object.create(UnresolvedCall.prototype);
-AsynchronousCall.prototype.constructor = AsynchronousCall;
+RemoteCall.prototype  = Object.create(UnresolvedCall.prototype);
+RemoteCall.prototype.constructor = RemoteCall;
 
 
-AsynchronousCall.prototype.isSimple = function() {
+RemoteCall.prototype.isSimple = function() {
     return false;
 };
 
 
-AsynchronousCall.prototype.toDialect = function(writer) {
+RemoteCall.prototype.toDialect = function(writer) {
     var resultType = this.resolveAndCheck(writer.context);
     UnresolvedCall.prototype.toDialect.call(this, writer);
     writer.append(" then");
@@ -40,7 +40,7 @@ AsynchronousCall.prototype.toDialect = function(writer) {
 };
 
 
-AsynchronousCall.prototype.check = function(context) {
+RemoteCall.prototype.check = function(context) {
     var resultType = this.resolveAndCheck(context);
     context = context.newChildContext();
     if (this.resultName != null)
@@ -50,7 +50,7 @@ AsynchronousCall.prototype.check = function(context) {
 };
 
 
-AsynchronousCall.prototype.interpret = function(context) {
+RemoteCall.prototype.interpret = function(context) {
     var resultType = this.resolveAndCheck(context);
     var resultValue = UnresolvedCall.prototype.interpret.call(this, context);
     context = context.newChildContext();
@@ -63,11 +63,11 @@ AsynchronousCall.prototype.interpret = function(context) {
 };
 
 
-AsynchronousCall.prototype.declare = function(transpiler) {
+RemoteCall.prototype.declare = function(transpiler) {
     var resultType = this.resolveAndCheck(transpiler.context);
     this.resolved.declare(transpiler);
-    var execute = require("../intrinsic/Async").execute;
-    transpiler.require(execute);
+    var runner = require("../intrinsic/RemoteRunner").RemoteRunner;
+    transpiler.require(runner);
     transpiler = transpiler.newChildTranspiler();
     if (this.resultName != null)
         transpiler.context.registerValue(new Variable(this.resultName, resultType));
@@ -75,9 +75,9 @@ AsynchronousCall.prototype.declare = function(transpiler) {
 };
 
 
-AsynchronousCall.prototype.transpile = function(transpiler) {
+RemoteCall.prototype.transpile = function(transpiler) {
     var resultType = this.resolveAndCheck(transpiler.context);
-    transpiler = transpiler.append("execute(function() {").indent().append("return ");
+    transpiler = transpiler.append("RemoteRunner.execute(function() {").indent().append("return ");
     this.resolved.transpile(transpiler);
     transpiler.dedent().append("}, function(");
     if (this.resultName != null)
@@ -92,4 +92,4 @@ AsynchronousCall.prototype.transpile = function(transpiler) {
 };
 
 
-exports.AsynchronousCall = AsynchronousCall;
+exports.RemoteCall = RemoteCall;
