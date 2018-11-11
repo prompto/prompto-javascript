@@ -167,6 +167,14 @@ exports.testTranspiledSpecified = function(test) {
 	checkTranspiledOutput(test, "methods/specified.pec");
 };
 
+exports.testInterpretedTextAsync = function(test) {
+	checkInterpretedOutput(test, "methods/textAsync.pec");
+};
+
+exports.testTranspiledTextAsync = function(test) {
+	checkTranspiledOutput(test, "methods/textAsync.pec");
+};
+
 exports.testInterpretedVoidAsync = function(test) {
 	checkInterpretedOutput(test, "methods/voidAsync.pec");
 };

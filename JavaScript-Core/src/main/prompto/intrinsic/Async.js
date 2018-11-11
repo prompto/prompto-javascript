@@ -1,6 +1,6 @@
 function execute(body, andThen) {
-    body();
-    andThen();
+    var result = body();
+    andThen(result);
 };
 
 exports.execute = execute;

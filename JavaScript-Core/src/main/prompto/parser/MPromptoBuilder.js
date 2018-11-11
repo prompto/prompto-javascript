@@ -738,14 +738,18 @@ MPromptoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 MPromptoBuilder.prototype.exitMethod_call = function(ctx) {
 	var method = this.getNodeValue(ctx.method);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args, null));
+	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args));
 };
 
 
 MPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
     var call = this.getNodeValue(ctx.method);
-    call.andThen = this.getNodeValue(ctx.stmts);
-    this.setNodeValue(ctx, call);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    if (name!=null || stmts!=null)
+        this.setNodeValue(ctx, new statement.AsynchronousCall(call.callable, call.assignments, name, stmts));
+    else
+        this.setNodeValue(ctx, call)
 };
 
 

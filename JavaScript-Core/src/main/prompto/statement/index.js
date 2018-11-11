@@ -29,6 +29,7 @@ exports.WithResourceStatement = require("./WithResourceStatement").WithResourceS
 exports.WithSingletonStatement = require("./WithSingletonStatement").WithSingletonStatement;
 exports.WriteStatement = require("./WriteStatement").WriteStatement;
 exports.UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
+exports.AsynchronousCall = require("./AsynchronousCall").AsynchronousCall;
 exports.FetchOneStatement = require("./FetchOneStatement").FetchOneStatement;
 exports.FetchManyStatement = require("./FetchManyStatement").FetchManyStatement;
 

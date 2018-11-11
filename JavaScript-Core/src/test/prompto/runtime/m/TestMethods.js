@@ -15,6 +15,14 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testInterpretedTextAsync = function(test) {
+	checkInterpretedOutput(test, "methods/textAsync.pmc");
+};
+
+exports.testTranspiledTextAsync = function(test) {
+	checkTranspiledOutput(test, "methods/textAsync.pmc");
+};
+
 exports.testInterpretedVoidAsync = function(test) {
 	checkInterpretedOutput(test, "methods/voidAsync.pmc");
 };

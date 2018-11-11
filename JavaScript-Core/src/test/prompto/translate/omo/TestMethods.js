@@ -74,6 +74,10 @@ exports.testSpecified = function(test) {
 	compareResourceOMO(test, "methods/specified.poc");
 };
 
+exports.testTextAsync = function(test) {
+	compareResourceOMO(test, "methods/textAsync.poc");
+};
+
 exports.testVoidAsync = function(test) {
 	compareResourceOMO(test, "methods/voidAsync.poc");
 };

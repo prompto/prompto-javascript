@@ -11,16 +11,13 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 var MethodType = require("../type/MethodType").MethodType;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var InstanceContext = require("../runtime/Context").InstanceContext;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
 
 
-function UnresolvedCall(callable, assignments, andThen) {
+function UnresolvedCall(callable, assignments) {
     BaseStatement.call(this);
 	this.resolved = null;
 	this.callable = callable;
 	this.assignments = assignments || null;
-	this.andThen = andThen || null;
 	return this;
 }
 
@@ -29,7 +26,7 @@ UnresolvedCall.prototype.constructor = UnresolvedCall;
 
 
 UnresolvedCall.prototype.isSimple = function() {
-    return this.andThen == null;
+    return true;
 };
 
 
@@ -37,28 +34,10 @@ UnresolvedCall.prototype.toDialect = function(writer) {
     try {
         this.resolve(writer.context);
         this.resolved.toDialect(writer);
-        this.andThenToDialect(writer);
     } catch(error) {
         this.callable.toDialect(writer);
         if(this.assignments!=null)
            this.assignments.toDialect(writer);
-        this.andThenToDialect(writer);
-    }
-};
-
-
-UnresolvedCall.prototype.andThenToDialect = function(writer) {
-    if(this.andThen!=null) {
-        writer.append(" then");
-        if (writer.dialect == Dialect.O)
-            writer.append(" {");
-        else
-            writer.append(":");
-        writer = writer.newLine().indent();
-        this.andThen.toDialect(writer);
-        writer = writer.dedent();
-        if (writer.dialect == Dialect.O)
-            writer.append("}");
     }
 };
 
@@ -68,25 +47,18 @@ UnresolvedCall.prototype.toString = function() {
 };
 	
 UnresolvedCall.prototype.check = function(context) {
+    return this.resolveAndCheck(context);
+};
+
+
+UnresolvedCall.prototype.resolveAndCheck = function(context) {
 	this.resolve(context);
-	var result = this.resolved.check(context);
-    if(this.andThen == null)
-        return result;
-    else {
-        this.andThen.check(context, VoidType.instance);
-        return VoidType.instance;
-    }
+	return this.resolved.check(context);
 };
 
 UnresolvedCall.prototype.interpret = function(context) {
 	this.resolve(context);
-	var result = this.resolved.interpret(context);
-    if(this.andThen == null)
-        return result;
-    else {
-        this.andThen.interpret(context);
-        return null;
-    }
+	return this.resolved.interpret(context);
 };
 
 UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
@@ -178,29 +150,13 @@ UnresolvedCall.prototype.resolveMember = function(context) {
 UnresolvedCall.prototype.declare = function(transpiler) {
     this.resolve(transpiler.context);
     this.resolved.declare(transpiler);
-    if(this.andThen!=null) {
-        var execute = require("../intrinsic/Async").execute;
-        transpiler.require(execute);
-        this.andThen.declare(transpiler);
-    }
 };
 
 
 UnresolvedCall.prototype.transpile = function(transpiler) {
     this.resolve(transpiler.context);
-    if(this.andThen!=null)
-        this.transpileAsync(transpiler);
-    else
-        this.resolved.transpile(transpiler);
-};
-
-
-UnresolvedCall.prototype.transpileAsync = function(transpiler) {
-    transpiler = transpiler.append("execute(function() {").indent();
     this.resolved.transpile(transpiler);
-    transpiler = transpiler.dedent().append("}, function() {").indent();
-    this.andThen.transpile(transpiler);
-    transpiler = transpiler.dedent().append("})");
 };
+
 
 exports.UnresolvedCall = UnresolvedCall;
