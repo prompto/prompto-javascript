@@ -77,7 +77,7 @@ RemoteCall.prototype.declare = function(transpiler) {
 
 RemoteCall.prototype.transpile = function(transpiler) {
     var resultType = this.resolveAndCheck(transpiler.context);
-    transpiler = transpiler.append("RemoteRunner.execute(function() {").indent().append("return ");
+    transpiler = transpiler.append("RemoteRunner.run(function() {").indent().append("return ");
     this.resolved.transpile(transpiler);
     transpiler.dedent().append("}, function(");
     if (this.resultName != null)
