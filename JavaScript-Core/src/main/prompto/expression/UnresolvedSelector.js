@@ -5,6 +5,7 @@ var MethodSelector = null;
 var MethodCall = null;
 var UnresolvedCall = null;
 var UnresolvedIdentifier = null;
+var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 exports.resolve = function() {
     MemberSelector = require("./MemberSelector").MemberSelector;
@@ -89,6 +90,8 @@ UnresolvedSelector.prototype.resolve = function(context, forMember) {
 
 
 UnresolvedSelector.prototype.resolveMember = function(context) {
+    var listener = context.problemListener;
+    context.problemListener = new ProblemListener();
     try {
         var member = new MemberSelector(this.parent, this.id);
         member.check(context);
@@ -98,11 +101,15 @@ UnresolvedSelector.prototype.resolveMember = function(context) {
             return null;
         else
             throw e;
+    } finally {
+        context.problemListener = listener;
     }
 };
 
 
 UnresolvedSelector.prototype.resolveMethod = function(context) {
+    var listener = context.problemListener;
+    context.problemListener = new ProblemListener();
     try {
         var resolvedParent = this.parent;
         if (resolvedParent instanceof UnresolvedIdentifier) {
@@ -117,6 +124,8 @@ UnresolvedSelector.prototype.resolveMethod = function(context) {
             return null;
         else
             throw e;
+    } finally {
+        context.problemListener = listener;
     }
 };
 
