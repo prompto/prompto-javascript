@@ -24,6 +24,10 @@ UnresolvedArgument.prototype.getTranspiledName =  function(context) {
 
 UnresolvedArgument.prototype.toDialect = function(writer) {
     writer.append(this.name);
+    if(this.defaultExpression!=null) {
+        writer.append(" = ");
+        this.defaultExpression.toDialect(writer);
+    }
 };
 
 UnresolvedArgument.prototype.check = function(context) {
@@ -43,7 +47,7 @@ UnresolvedArgument.prototype.register = function(context) {
 	this.resolveAndCheck(context);
 	this.resolved.register(context);
     if(this.defaultExpression!=null)
-        context.setValue(this.name, this.defaultExpression.interpret(context));
+        context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
 UnresolvedArgument.prototype.checkValue = function(context, value) {

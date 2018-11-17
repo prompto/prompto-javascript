@@ -25,7 +25,7 @@ AttributeArgument.prototype.getTranspiledName =  function(context) {
 AttributeArgument.prototype.register = function(context) {
 	context.registerValue(this, true);
     if(this.defaultExpression!=null) try {
-        context.setValue(name, this.defaultExpression.interpret(context));
+        context.setValue(this.id, this.defaultExpression.interpret(context));
     } catch(error) {
         throw new SyntaxError("Unable to register default value: "+ this.defaultExpression.toString() + " for argument: " + this.name);
     }
