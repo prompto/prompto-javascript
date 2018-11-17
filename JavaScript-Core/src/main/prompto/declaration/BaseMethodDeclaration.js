@@ -3,6 +3,8 @@ var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var CategoryType = null;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+var ProblemListener = require("../problem/ProblemListener").ProblemListener;
+
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
@@ -90,7 +92,9 @@ BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
 };
 
 BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, checkInstance, allowDerived) {
+	var listener = context.problemListener;
 	try {
+        context.problemListener = new ProblemListener();
 		var local = context.newLocalContext();
 		this.registerArguments(local);
 		var assignmentsList = new ArgumentAssignmentList(assignments);
@@ -117,6 +121,8 @@ BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, 
 		} else {
 			throw e;
 		}
+	} finally {
+        context.problemListener = listener;
 	}
 };
 
