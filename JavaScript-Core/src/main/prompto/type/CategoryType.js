@@ -328,7 +328,7 @@ CategoryType.prototype.checkMember = function(context, section, name) {
             var method = cd.getMemberMethodsMap(context, name).getFirst();
             return new MethodType(method);
         } else {
-            throw new SyntaxError("No attribute:" + name + " in category:" + this.name);
+            context.problemListener.reportUnknownAttribute(section);
         }
 	} else {
         throw new SyntaxError("Not a category:" + this.name);
