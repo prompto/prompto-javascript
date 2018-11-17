@@ -143,7 +143,9 @@ UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
 
 
 UnresolvedCall.prototype.resolveMember = function(context) {
-	return new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.assignments);
+	var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.assignments);
+    call.copySectionFrom(this);
+    return call;
 };
 
 
