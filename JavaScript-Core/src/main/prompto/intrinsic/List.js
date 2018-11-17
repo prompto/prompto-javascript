@@ -16,6 +16,7 @@ List.prototype.addItems = function(items) {
 	return this; // enable fluid API
 };
 
+
 List.prototype.add = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = Array.from(items.set.values());
@@ -24,6 +25,16 @@ List.prototype.add = function(items) {
     concat.addItems(items);
     return concat;
 };
+
+
+List.prototype.remove = function(items) {
+    var excluded = (typeof(StrictSet) !== 'undefined' && items instanceof StrictSet) ? items : new Set(items);
+    var remaining = this.filter(function(item) { return !excluded.has(item); });
+    var concat = new List(false);
+    concat.addItems(remaining);
+    return concat;
+};
+
 
 List.prototype.sorted = function(sortFunction) {
     var sorted = Array.from(this).sort(sortFunction);

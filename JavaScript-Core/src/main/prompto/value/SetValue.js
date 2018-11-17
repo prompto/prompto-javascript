@@ -76,6 +76,26 @@ SetValue.prototype.Add = function(context, value) {
 };
 
 
+SetValue.prototype.Subtract = function(context, value) {
+    if (value instanceof ListValue) {
+        var setValue = new SetValue(this.type.itemType);
+        value = setValue.Add(context, value);
+    }
+    if (value instanceof SetValue) {
+        var set = new StrictSet();
+        var iter = this.items.iterator();
+        while(iter.hasNext()) {
+            var item = iter.next();
+            if(!value.items.has(item))
+                set.set.add(item);
+        }
+        return new SetValue(this.type.itemType, set);
+    } else {
+        return Value.prototype.Subtract.apply(this, context, value);
+    }
+};
+
+
 SetValue.prototype.filter = function(context, itemId, filter) {
     var result = new SetValue(this.type.itemType);
     var iter = this.getIterator(context);

@@ -8,7 +8,7 @@ var runTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/B
 exports.setUp = function(done) {
 	Out.init();
 	BaseParserTest.coreContext = null;
-	loadDependency("core");
+	loadDependency("web");
 	done();
 };
 
@@ -17,39 +17,15 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAny = function(test) {
-	runTests(test, "core/any.pec");
+exports.testEvents = function(test) {
+	runTests(test, "web/events.pec");
 };
 
-exports.testAttribute = function(test) {
-	runTests(test, "core/attribute.pec");
-};
-
-exports.testAttributes = function(test) {
-	runTests(test, "core/attributes.pec");
-};
-
-exports.testCloud = function(test) {
-	runTests(test, "core/cloud.pec");
-};
-
-exports.testError = function(test) {
-	runTests(test, "core/error.pec");
-};
-
-exports.testMath = function(test) {
-	runTests(test, "core/math.pec");
-};
-
-exports.testParse = function(test) {
-	runTests(test, "core/parse.pec");
-};
-
-exports.testTime = function(test) {
-	runTests(test, "core/time.pec");
+exports.testReact = function(test) {
+	runTests(test, "web/react.pec");
 };
 
 exports.testUtils = function(test) {
-	runTests(test, "core/utils.pec");
+	runTests(test, "web/utils.pec");
 };
 

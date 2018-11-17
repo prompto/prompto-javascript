@@ -51,6 +51,21 @@ ListValue.prototype.Add = function(context, value) {
 	}
 };
 
+
+ListValue.prototype.Subtract = function(context, value) {
+    if (value instanceof ListValue) {
+        var setValue = new SetValue(this.type.itemType);
+        value = setValue.Add(context, value);
+    }
+    if(value instanceof SetValue) {
+        var items = this.items.filter(function(item) { return !value.items.has(item); });
+        return new ListValue(this.type.itemType, items);
+    } else {
+        return BaseValueList.prototype.Subtract.apply(this, context, value);
+    }
+};
+
+
 ListValue.prototype.Multiply = function(context, value) {
 	if (value instanceof IntegerValue) {
 	    var count = value.value;

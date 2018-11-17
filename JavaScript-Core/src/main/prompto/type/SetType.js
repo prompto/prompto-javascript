@@ -66,6 +66,37 @@ SetType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, r
 };
 
 
+SetType.prototype.checkSubtract = function(context, other) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
+        return this;
+    } else {
+        return ContainerType.prototype.checkSubtract.call(this, context, other);
+    }
+};
+
+
+SetType.prototype.declareSubtract = function(transpiler, other, left, right) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return ContainerType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+    }
+};
+
+
+SetType.prototype.transpileSubtract= function(transpiler, other, left, right) {
+    if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
+        left.transpile(transpiler);
+        transpiler.append(".remove(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return ContainerType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+    }
+};
+
+
 SetType.prototype.checkItem = function(context, other) {
 	if(other==IntegerType.instance) {
 		return this.itemType;

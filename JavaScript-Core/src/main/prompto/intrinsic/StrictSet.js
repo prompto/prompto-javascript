@@ -38,8 +38,6 @@ StrictSet.prototype.item = function(idx) {
 };
 
 
-
-
 StrictSet.prototype.addItems = function(items) {
     if(items instanceof StrictSet)
         items = Array.from(items.set.values());
@@ -49,10 +47,19 @@ StrictSet.prototype.addItems = function(items) {
     return this; // enable fluid API
 };
 
+
 StrictSet.prototype.addAll = function(items) {
     var result = new StrictSet(this.set);
     result.addItems(items);
     return result;
+};
+
+
+StrictSet.prototype.remove = function(items) {
+    var excluded = (items instanceof StrictSet) ? items : new Set(items);
+    var items = Array.from(this.set.values());
+    var remaining = items.filter(function(item) { return !excluded.has(item); });
+    return new StrictSet(remaining);
 };
 
 
