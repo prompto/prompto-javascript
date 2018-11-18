@@ -86,7 +86,7 @@ ConcreteInstance.prototype.collectStorables = function(set) {
         return;
     if (this.storable==null)
         throw new NotStorableError();
-    if (this.storable.dirty) {
+    if (this.storable.isDirty()) {
         this.getOrCreateDbId();
         set.add(this.storable);
     }
@@ -174,7 +174,7 @@ ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allo
     value = this.autocast(decl, value);
 	this.values[attrName] = value;
     if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-        this.storable.setData(attrName, value.getStorableData());
+        this.storable.setData(attrName, value.getStorableData(), this.getDbId());
 };
 
 ConcreteInstance.prototype.autocast = function(decl, value) {

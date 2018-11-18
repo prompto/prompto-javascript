@@ -62,8 +62,6 @@ NativeInstance.prototype.doGetMember = function(context, attrName, allowGetter) 
 };
 
 // don't call setters from setters, so register them
-// TODO: thread local storage
-
 var activeSetters = {};
 
 function getActiveSetters() {
@@ -97,7 +95,7 @@ NativeInstance.prototype.doSetMember = function(context, attrName, value, allowS
         value = setter.interpret(context);
     }
     if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-        this.storable.setData(attrName, value.getStorableData());
+        this.storable.setData(attrName, value.getStorableData(), null);
 	this.instance[attrName] = value.convertToJavaScript();
 };
 
