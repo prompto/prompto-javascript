@@ -34,6 +34,10 @@ StorableDocument.prototype.getOrCreateDbId = function() {
     return dbId;
 };
 
+StorableDocument.prototype.setDbId = function(dbId) {
+    if(this.document)
+        this.document.dbId = dbId;
+};
 
 StorableDocument.prototype.setData = function(name, value, dbId) {
     if(!this.document) {
