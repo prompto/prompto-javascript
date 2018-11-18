@@ -59,8 +59,9 @@ $Root.prototype.collectStorables = function(storablesToAdd) {
     }
     var names = this.getAttributeNames();
     names.forEach(function(name) {
-        if(this[name] && this[name].collectStorables)
-            this[name].collectStorables(storablesToAdd);
+        var value = this[name];
+        if(value && value.collectStorables)
+            value.collectStorables(storablesToAdd);
     }, this);
 };
 
