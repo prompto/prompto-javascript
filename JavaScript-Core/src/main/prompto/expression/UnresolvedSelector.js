@@ -5,6 +5,7 @@ var MethodSelector = null;
 var MethodCall = null;
 var UnresolvedCall = null;
 var UnresolvedIdentifier = null;
+var AnyType = require("../type/AnyType").AnyType;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 exports.resolve = function() {
@@ -79,17 +80,22 @@ UnresolvedSelector.prototype.resolveAndCheck = function(context, forMember) {
 
 UnresolvedSelector.prototype.resolve = function(context, forMember) {
     if (!this.resolved)
-        this.resolved = this.resolveMethod(context);
+        this.resolved = this.tryResolveMethod(context, null);
     if (!this.resolved)
-        this.resolved = this.resolveMember(context);
+        this.resolved = this.tryResolveMember(context);
     if (!this.resolved)
         throw new SyntaxError("Unknown identifier:" + this.name);
     return this.resolved;
 };
 
 
+UnresolvedSelector.prototype.resolveMethod = function(context, assignments) {
+    if (!this.resolved)
+        this.resolved = this.tryResolveMethod(context, assignments);
+};
 
-UnresolvedSelector.prototype.resolveMember = function(context) {
+
+UnresolvedSelector.prototype.tryResolveMember = function(context) {
     var listener = context.problemListener;
     context.problemListener = new ProblemListener();
     try {
@@ -107,7 +113,7 @@ UnresolvedSelector.prototype.resolveMember = function(context) {
 };
 
 
-UnresolvedSelector.prototype.resolveMethod = function(context) {
+UnresolvedSelector.prototype.tryResolveMethod = function(context, assignments) {
     var listener = context.problemListener;
     context.problemListener = new ProblemListener();
     try {
@@ -116,7 +122,7 @@ UnresolvedSelector.prototype.resolveMethod = function(context) {
             resolvedParent.checkMember(context);
             resolvedParent = resolvedParent.resolved;
         }
-        var method = new UnresolvedCall(new MethodSelector(resolvedParent, this.id), null);
+        var method = new UnresolvedCall(new MethodSelector(resolvedParent, this.id), assignments);
         method.check(context);
         return method;
     } catch (e) {

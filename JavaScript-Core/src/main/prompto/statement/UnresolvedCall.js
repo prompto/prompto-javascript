@@ -3,6 +3,7 @@ var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").Unresol
 var MethodCall = require("./MethodCall").MethodCall;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
+var UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var MethodArgument = require("../argument/MethodArgument").MethodArgument;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
@@ -87,10 +88,18 @@ UnresolvedCall.prototype.resolve = function(context) {
 	if(this.resolved===null) {
 		if(this.callable instanceof UnresolvedIdentifier) {
             this.resolved = this.resolveUnresolvedIdentifier(context);
+        } else if(this.callable instanceof UnresolvedSelector) {
+            this.resolved = this.resolveUnresolvedSelector(context);
 		} else if (this.callable instanceof MemberSelector) {
             this.resolved = this.resolveMember(context);
 		}
 	}
+};
+
+
+UnresolvedCall.prototype.resolveUnresolvedSelector = function(context) {
+    this.callable.resolveMethod(context, this.assignments);
+    return this.callable.resolved;
 };
 
 
