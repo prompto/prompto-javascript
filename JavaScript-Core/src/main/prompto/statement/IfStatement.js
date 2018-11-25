@@ -100,7 +100,8 @@ IfStatement.prototype.toODialect = function(writer) {
         this.elements[i].toODialect(writer);
         curly = this.elements[i].statements.length>1;
     }
-    writer.newLine();
+    if(curly)
+        writer.newLine();
 };
 
 
@@ -110,7 +111,6 @@ IfStatement.prototype.toEDialect = function(writer) {
             writer.append("else ");
         this.elements[i].toEDialect(writer);
     }
-    writer.newLine();
 };
 
 

@@ -57,7 +57,7 @@ FetchManyStatement.prototype.toDialect = function(writer) {
     this.stmts.toDialect(writer);
     writer.dedent();
     if (writer.dialect === Dialect.O)
-        writer.append("}");
+        writer.append("}").newLine();
 };
 
 
