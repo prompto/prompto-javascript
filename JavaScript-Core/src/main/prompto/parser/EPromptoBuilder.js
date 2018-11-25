@@ -115,7 +115,7 @@ EPromptoBuilder.prototype.exitTypeIdentifier = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitMethodCallExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
+	var exp = this.getNodeValue(ctx.exp1 || ctx.exp2);
 	var args = this.getNodeValue(ctx.args);
 	var call = new statement.UnresolvedCall(exp, args);
 	this.setNodeValue(ctx, call);
