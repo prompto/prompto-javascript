@@ -26,6 +26,10 @@ exports.testExplicitMember = function(test) {
 	compareResourceEOE(test, "methods/explicitMember.pec");
 };
 
+exports.testExpressionMember = function(test) {
+	compareResourceEOE(test, "methods/expressionMember.pec");
+};
+
 exports.testExpressionWith = function(test) {
 	compareResourceEOE(test, "methods/expressionWith.pec");
 };

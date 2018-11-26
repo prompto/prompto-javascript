@@ -744,8 +744,7 @@ OPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitCallableRoot = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
+	this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
 };
 
 

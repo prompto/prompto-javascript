@@ -15,6 +15,14 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testInterpretedExpressionMember = function(test) {
+	checkInterpretedOutput(test, "methods/expressionMember.pmc");
+};
+
+exports.testTranspiledExpressionMember = function(test) {
+	checkTranspiledOutput(test, "methods/expressionMember.pmc");
+};
+
 exports.testInterpretedTextAsync = function(test) {
 	checkInterpretedOutput(test, "methods/textAsync.pmc");
 };

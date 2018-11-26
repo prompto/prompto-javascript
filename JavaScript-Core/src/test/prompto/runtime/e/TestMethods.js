@@ -63,6 +63,14 @@ exports.testTranspiledExplicitMember = function(test) {
 	checkTranspiledOutput(test, "methods/explicitMember.pec");
 };
 
+exports.testInterpretedExpressionMember = function(test) {
+	checkInterpretedOutput(test, "methods/expressionMember.pec");
+};
+
+exports.testTranspiledExpressionMember = function(test) {
+	checkTranspiledOutput(test, "methods/expressionMember.pec");
+};
+
 exports.testInterpretedExpressionWith = function(test) {
 	checkInterpretedOutput(test, "methods/expressionWith.pec");
 };

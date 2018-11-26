@@ -26,6 +26,10 @@ exports.testExplicitMember = function(test) {
 	compareResourceEME(test, "methods/explicitMember.pec");
 };
 
+exports.testExpressionMember = function(test) {
+	compareResourceEME(test, "methods/expressionMember.pec");
+};
+
 exports.testExpressionWith = function(test) {
 	compareResourceEME(test, "methods/expressionWith.pec");
 };
