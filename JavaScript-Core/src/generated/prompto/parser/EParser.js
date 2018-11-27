@@ -1342,8 +1342,8 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0002\u0002\u0002\u077e\u077f\u0003\u0002\u0002\u0002\u077f\u00f1\u0003",
     "\u0002\u0002\u0002\u0780\u0781\u0007o\u0002\u0002\u0781\u0782\u0005",
     "\u0146\u00a4\u0002\u0782\u0783\u0007\u0011\u0002\u0002\u0783\u0788\u0005",
-    "\u00ccg\u0002\u0784\u0785\u0007\u0015\u0002\u0002\u0785\u0787\u0005",
-    "\u00ccg\u0002\u0786\u0784\u0003\u0002\u0002\u0002\u0787\u078a\u0003",
+    "\u0188\u00c5\u0002\u0784\u0785\u0007\u0015\u0002\u0002\u0785\u0787\u0005",
+    "\u0188\u00c5\u0002\u0786\u0784\u0003\u0002\u0002\u0002\u0787\u078a\u0003",
     "\u0002\u0002\u0002\u0788\u0786\u0003\u0002\u0002\u0002\u0788\u0789\u0003",
     "\u0002\u0002\u0002\u0789\u00f3\u0003\u0002\u0002\u0002\u078a\u0788\u0003",
     "\u0002\u0002\u0002\u078b\u0790\u0005\u016e\u00b8\u0002\u078c\u078d\u0007",
@@ -20599,14 +20599,14 @@ Python_moduleContext.prototype.COLON = function() {
     return this.getToken(EParser.COLON, 0);
 };
 
-Python_moduleContext.prototype.identifier = function(i) {
+Python_moduleContext.prototype.python_identifier = function(i) {
     if(i===undefined) {
         i = null;
     }
     if(i===null) {
-        return this.getTypedRuleContexts(IdentifierContext);
+        return this.getTypedRuleContexts(Python_identifierContext);
     } else {
-        return this.getTypedRuleContext(IdentifierContext,i);
+        return this.getTypedRuleContext(Python_identifierContext,i);
     }
 };
 
@@ -20652,7 +20652,7 @@ EParser.prototype.python_module = function() {
         this.state = 1920;
         this.match(EParser.COLON);
         this.state = 1921;
-        this.identifier();
+        this.python_identifier();
         this.state = 1926;
         this._errHandler.sync(this);
         var _alt = this._interp.adaptivePredict(this._input,146,this._ctx)
@@ -20661,7 +20661,7 @@ EParser.prototype.python_module = function() {
                 this.state = 1922;
                 this.match(EParser.DOT);
                 this.state = 1923;
-                this.identifier(); 
+                this.python_identifier(); 
             }
             this.state = 1928;
             this._errHandler.sync(this);
