@@ -26,6 +26,15 @@ UUIDValue.prototype.getStorableData = function() {
     return this.value.toString();
 };
 
+
+UUIDValue.prototype.equals = function(obj) {
+    if (obj instanceof UUIDValue) {
+        return this.value.equals(obj.value);
+    } else {
+        return false;
+    }
+};
+
 exports.UUIDValue = UUIDValue;
 
 

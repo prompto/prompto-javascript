@@ -7,6 +7,7 @@ exports.IntegerType = require('./IntegerType').IntegerType;
 exports.DecimalType = require('./DecimalType').DecimalType;
 exports.DateTimeType = require('./DateTimeType').DateTimeType;
 exports.DateType = require('./DateType').DateType;
+exports.TimeType = require('./TimeType').TimeType;
 exports.PeriodType = require('./PeriodType').PeriodType;
 exports.VersionType = require('./VersionType').VersionType;
 exports.ListType = require('./ListType').ListType;

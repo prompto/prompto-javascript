@@ -8,6 +8,7 @@ var TimeValue = require("../value/TimeValue").TimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
+var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 function TimeType()  {
 	NativeType.call(this, new Identifier("TimeValue"));
@@ -28,6 +29,16 @@ TimeType.prototype.isAssignableFrom = function(context, other) {
     return NativeType.prototype.isAssignableFrom.call(this, context, other)
         || (other == DateTimeType.instance);
 };
+
+
+TimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    if (getTypeName(value)=='LocalTime') {
+        return new TimeValue(value);
+    } else {
+        return value; // TODO for now
+    }
+};
+
 
 TimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	if (other === PeriodType.instance) {

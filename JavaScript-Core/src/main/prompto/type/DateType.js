@@ -9,6 +9,7 @@ var DateValue = require("../value/DateValue").DateValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
 var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 function DateType()  {
 	NativeType.call(this, new Identifier("Date"));
@@ -36,6 +37,15 @@ DateType.prototype.checkAdd = function(context, other, tryReverse) {
 	} else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
 	}
+};
+
+
+DateType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    if (getTypeName(value)=='LocalDate') {
+        return new DateValue(value);
+    } else {
+        return value; // TODO for now
+    }
 };
 
 
