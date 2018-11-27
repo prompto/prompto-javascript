@@ -2493,7 +2493,7 @@ EPromptoBuilder.prototype.exitPythonMethodExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitPython_module = function(ctx) {
-    var ids = ctx.identifier().map(function(rule) {
+    var ids = ctx.python_identifier().map(function(rule) {
         return rule.getText();
     });
     var module = new python.PythonModule(ids);
