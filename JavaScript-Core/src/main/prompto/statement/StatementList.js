@@ -128,14 +128,24 @@ StatementList.prototype.doInterpretNative = function(context, returnType) {
 };
 
 StatementList.prototype.toDialect = function(writer) {
-    this.forEach(function(stmt) {
-        stmt.toDialect(writer);
-        if(stmt.isSimple()) {
-            if(writer.dialect==Dialect.O && !(stmt instanceof NativeCall))
-                writer.append(';');
-            writer.newLine();
+    if(this.length==0) {
+        switch(writer.dialect) {
+            case Dialect.E:
+            case Dialect.M:
+                writer.append("pass").newLine();
+                break;
         }
-    });
+
+    } else {
+        this.forEach(function (stmt) {
+            stmt.toDialect(writer);
+            if (stmt.isSimple()) {
+                if (writer.dialect == Dialect.O && !(stmt instanceof NativeCall))
+                    writer.append(';');
+                writer.newLine();
+            }
+        });
+    }
 };
 
 StatementList.prototype.declare = function(transpiler) {

@@ -47,14 +47,6 @@ exports.testTranspiledDotName = function(test) {
 	checkTranspiledOutput(test, "jsx/dotName.pec");
 };
 
-exports.testInterpretedEmpty = function(test) {
-	checkInterpretedOutput(test, "jsx/empty.pec");
-};
-
-exports.testTranspiledEmpty = function(test) {
-	checkTranspiledOutput(test, "jsx/empty.pec");
-};
-
 exports.testInterpretedEmptyAttribute = function(test) {
 	checkInterpretedOutput(test, "jsx/emptyAttribute.pec");
 };

@@ -47,14 +47,6 @@ exports.testTranspiledDotName = function(test) {
 	checkTranspiledOutput(test, "jsx/dotName.pmc");
 };
 
-exports.testInterpretedEmpty = function(test) {
-	checkInterpretedOutput(test, "jsx/empty.pmc");
-};
-
-exports.testTranspiledEmpty = function(test) {
-	checkTranspiledOutput(test, "jsx/empty.pmc");
-};
-
 exports.testInterpretedEmptyAttribute = function(test) {
 	checkInterpretedOutput(test, "jsx/emptyAttribute.pmc");
 };

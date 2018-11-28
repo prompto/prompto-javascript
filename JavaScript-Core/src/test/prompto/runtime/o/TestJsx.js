@@ -47,14 +47,6 @@ exports.testTranspiledDotName = function(test) {
 	checkTranspiledOutput(test, "jsx/dotName.poc");
 };
 
-exports.testInterpretedEmpty = function(test) {
-	checkInterpretedOutput(test, "jsx/empty.poc");
-};
-
-exports.testTranspiledEmpty = function(test) {
-	checkTranspiledOutput(test, "jsx/empty.poc");
-};
-
 exports.testInterpretedEmptyAttribute = function(test) {
 	checkInterpretedOutput(test, "jsx/emptyAttribute.poc");
 };

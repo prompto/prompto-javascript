@@ -18,6 +18,10 @@ exports.testE_as_e_bug = function(test) {
 	compareResourceOMO(test, "methods/e_as_e_bug.poc");
 };
 
+exports.testEmpty = function(test) {
+	compareResourceOMO(test, "methods/empty.poc");
+};
+
 exports.testExplicit = function(test) {
 	compareResourceOMO(test, "methods/explicit.poc");
 };
