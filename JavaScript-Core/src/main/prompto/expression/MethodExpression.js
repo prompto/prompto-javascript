@@ -31,13 +31,20 @@ MethodExpression.prototype.toDialect = function(writer) {
 };
 
 MethodExpression.prototype.check = function(context) {
-	var named = context.getRegistered(this.name);
-	if(named instanceof MethodDeclarationMap) { // global method or closure
-        var decl = named.getFirst();
-		return new MethodType(decl);
-	} else {
-		throw new SyntaxError("No method with name:" + this.name);
-	}
+    var decl = this.getDeclaration(context);
+    if (decl != null) {
+        return new MethodType(decl);
+    } else {
+        context.problemListener.reportUnknownMethod(this.id);
+    }
+};
+
+MethodExpression.prototype.getDeclaration = function(context) {
+    var methods = context.getRegistered(this.id);
+	if(methods instanceof MethodDeclarationMap)
+        return methods.getFirst();
+    else
+        return null;
 };
 
 MethodExpression.prototype.interpret = function(context, asMethod) {
@@ -49,7 +56,7 @@ MethodExpression.prototype.interpret = function(context, asMethod) {
             var decl = named.getFirst();
             return new ClosureValue(context, new MethodType(decl))
         } else {
-            throw new SyntaxError("No method with name:" + this.name);
+            context.problemListener.reportUnknownMethod(this.id);
         }
     }
 };

@@ -110,7 +110,7 @@ MIndentingLexer.prototype.countIndents = function(text) {
 			break;
 		}
 	}
-	return count/4;
+	return Math.floor(count/4);
 };
 
 MIndentingLexer.prototype.interpretAnyToken = function(token) {

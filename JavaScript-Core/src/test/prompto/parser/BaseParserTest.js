@@ -45,7 +45,7 @@ exports.getResource = function(fileName) {
 	return new antlr4.FileStream(fullPath);
 };
 
-function getResourceAsString(fileName) {
+exports.getResourceAsString = function(fileName) {
     fileName = fileName.replace("/", path.sep);
     var fullPath = path.normalize(resourcesFolder + path.sep + fileName);
     if(!fs.existsSync(fullPath))
@@ -111,7 +111,7 @@ function replaceAll(s, a, b) {
 }
 
 exports.compareResourceEOE = function(test, resourceName) {
-    var expected = getResourceAsString(resourceName);
+    var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse e source code
     var dle = parseEString(expected);
@@ -137,7 +137,7 @@ exports.compareResourceEOE = function(test, resourceName) {
 };
 
 exports.compareResourceEME = function(test, resourceName) {
-    var expected = getResourceAsString(resourceName);
+    var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse e source code
     var dle = parseEString(expected);
@@ -163,7 +163,7 @@ exports.compareResourceEME = function(test, resourceName) {
 };
 
 exports.compareResourceOEO = function(test, resourceName) {
-    var expected = getResourceAsString(resourceName);
+    var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse o source code
     var dlo = parseOString(expected);
@@ -190,7 +190,7 @@ exports.compareResourceOEO = function(test, resourceName) {
 
 
 exports.compareResourceOMO = function(test, resourceName) {
-    var expected = getResourceAsString(resourceName);
+    var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse o source code
     var dlo = parseOString(expected);

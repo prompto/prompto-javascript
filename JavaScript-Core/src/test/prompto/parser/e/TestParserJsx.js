@@ -2,6 +2,9 @@ require("../../../../exploded");
 
 var prompto = require("../../../../main/prompto/index");
 var antlr4 = require("antlr4");
+var parseResource = require("../../parser/BaseEParserTest").parseResource;
+var getResourceAsString = require("../../parser/BaseParserTest").getResourceAsString;
+
 
 exports.canParseAndTranslateMultilineElements = function(test) {
 	var jsx = "return <a>\n\t<b/>\n\t<b/>\n</a>";
@@ -27,3 +30,50 @@ exports.canParseAndTranslateMultilineAttributes = function(test) {
     test.done();
 };
 
+
+exports.canParseWidget = function(test) {
+	var decls = parseResource("issues/widget.pec");
+	test.equals(decls.length, 1);
+	var decl = decls[0];
+    test.equals(decl.methods.length, 2);
+    test.done();
+};
+
+
+exports.canParseWidget2 = function(test) {
+    var decls = parseResource("issues/widget.pec");
+    test.equals(decls.length, 1);
+    var decl = decls[0];
+    test.equals(decl.methods.length, 2);
+    test.done();
+};
+
+/* var s = getResourceAsString("issues/widget2.pec");
+    var parser = new prompto.parser.ECleverParser(s);
+    var buffer = parser._input;
+    buffer.fill();
+    var tokens = buffer.tokens;
+    var lexer = buffer.tokenSource;
+    var ELexer = require("../../../../main/prompto/parser/ELexer").ELexer;
+    for(var i=0;i<tokens.length;i++) {
+        var t = tokens[i];
+        switch(t.type) {
+            case ELexer.WS:
+                console.log("WS");
+                break;
+            case ELexer.LF:
+                console.log("LF");
+                break;
+            case ELexer.INDENT:
+                console.log("INDENT");
+                break;
+            case ELexer.DEDENT:
+                console.log("DEDENT");
+                break;
+            default:
+                console.log(t.text);
+        }
+    }
+    test.done();
+};
+*/

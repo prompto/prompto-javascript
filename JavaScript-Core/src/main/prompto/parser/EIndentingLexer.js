@@ -110,7 +110,7 @@ EIndentingLexer.prototype.countIndents = function(text) {
 			break;
 		}
 	}
-	return count/4;
+	return Math.floor(count/4);
 };
 
 EIndentingLexer.prototype.interpretAnyToken = function(token) {
