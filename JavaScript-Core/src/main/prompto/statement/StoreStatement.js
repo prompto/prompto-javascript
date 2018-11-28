@@ -50,11 +50,11 @@ StoreStatement.prototype.toDialect = function(writer) {
     }
     if(this.andThen) {
         if(writer.dialect == Dialect.O) {
-            writer.append("then {").newLine().indent();
+            writer.append(" then {").newLine().indent();
             this.andThen.toDialect(writer);
             writer.dedent().append("}");
         } else {
-            writer.append("then:").newLine().indent();
+            writer.append(" then:").newLine().indent();
             this.andThen.toDialect(writer);
             writer.dedent();
         }
