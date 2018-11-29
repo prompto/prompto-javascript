@@ -23,6 +23,14 @@ exports.testTranspiledForEachCategoryList = function(test) {
 	checkTranspiledOutput(test, "iterate/forEachCategoryList.pec");
 };
 
+exports.testInterpretedForEachExpression = function(test) {
+	checkInterpretedOutput(test, "iterate/forEachExpression.pec");
+};
+
+exports.testTranspiledForEachExpression = function(test) {
+	checkTranspiledOutput(test, "iterate/forEachExpression.pec");
+};
+
 exports.testInterpretedForEachIntegerList = function(test) {
 	checkInterpretedOutput(test, "iterate/forEachIntegerList.pec");
 };

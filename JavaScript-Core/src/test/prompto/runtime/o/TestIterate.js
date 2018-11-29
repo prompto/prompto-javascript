@@ -15,6 +15,14 @@ exports.tearDown = function(done) {
 	done();
 };
 
+exports.testInterpretedForEachExpression = function(test) {
+	checkInterpretedOutput(test, "iterate/forEachExpression.poc");
+};
+
+exports.testTranspiledForEachExpression = function(test) {
+	checkTranspiledOutput(test, "iterate/forEachExpression.poc");
+};
+
 exports.testInterpretedForEachIntegerList = function(test) {
 	checkInterpretedOutput(test, "iterate/forEachIntegerList.poc");
 };

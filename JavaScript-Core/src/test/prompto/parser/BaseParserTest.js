@@ -301,3 +301,4 @@ exports.interpret = function(decls, methodName, args) {
         prompto.runtime.Interpreter.interpret(context, methodName, args);
     }
 };
+
