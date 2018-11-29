@@ -128,6 +128,16 @@ List.prototype.iterate = function (fn) {
                 hasNext: function() { return idx < self.length; },
                 next: function() { return fn(self[idx++]); }
             };
+        },
+        toArray: function() {
+            var array = [];
+            var iterator = this.iterator();
+            while(iterator.hasNext())
+                array.push(iterator.next());
+            return array;
+        },
+        getText: function() {
+            return this.toArray().join(", ");
         }
     }
 };
