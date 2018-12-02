@@ -1,6 +1,8 @@
 var NativeType = require("./NativeType").NativeType;
 var IntegerType = require("./IntegerType").IntegerType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var Period = require("../intrinsic/Period").Period;
+var PeriodValue = require("../value/PeriodValue").PeriodValue;
 
 function PeriodType()  {
 	NativeType.call(this, new Identifier("Period"));
@@ -11,6 +13,14 @@ PeriodType.prototype = Object.create(NativeType.prototype);
 PeriodType.prototype.constructor = PeriodType;
 
 PeriodType.instance = new PeriodType();
+
+PeriodType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    if(value instanceof Period)
+        return new PeriodValue(value);
+    else
+        return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
+};
+
 
 PeriodType.prototype.checkAdd = function(context, other, tryReverse) {
 	if(other instanceof PeriodType) {

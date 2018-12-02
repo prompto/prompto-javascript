@@ -1,6 +1,11 @@
 var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
-var PeriodType = require("../type/PeriodType").PeriodType;
+var PeriodType = null;
+
+exports.resolve = function() {
+    PeriodType = require("../type/PeriodType").PeriodType;
+};
+
 
 function PeriodValue(value) {
     Value.call(this, PeriodType.instance);

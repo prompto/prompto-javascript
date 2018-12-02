@@ -1,6 +1,8 @@
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var Version = require("../intrinsic/Version").Version;
+var VersionValue = require("../value/VersionValue").VersionValue;
 
 function VersionType()  {
 	NativeType.call(this, new Identifier("Version"));
@@ -12,6 +14,12 @@ VersionType.prototype.constructor = VersionType;
 
 VersionType.instance = new VersionType();
 
+VersionType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    if(value instanceof Version)
+        return new VersionValue(value);
+    else
+        return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
+};
 
 VersionType.prototype.checkCompare = function(context, other) {
 	if (other instanceof VersionType) {

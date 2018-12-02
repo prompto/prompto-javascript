@@ -25,8 +25,10 @@ JavaScriptType.scriptToTypeMap = {
     'LocalDate' : type.DateType.instance,
     'LocalTime' : type.TimeType.instance,
     'DateTime' : type.DateTimeType.instance,
+    'Period' : type.PeriodType.instance,
     'Date' : type.DateTimeType.instance,
     'UUID' : type.UUIDType.instance,
+    'Version' : type.VersionType.instance,
 	'object' : type.AnyType.instance
 };
 
