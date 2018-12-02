@@ -23,6 +23,7 @@ var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
 var DataStore = require("../store/DataStore").DataStore;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var Score = require("../runtime/Score").Score;
+var compareValues = require("../utils/Utils").compareValues;
 
 exports.resolve = function() {
 	ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
@@ -481,7 +482,7 @@ CategoryType.prototype.sort = function(context, list, desc, key) {
 	if (decl.hasAttribute(context, keyname)) {
 		return this.sortByAttribute(context, list, desc, keyname);
 	} else if (decl.hasMethod(context, keyname)) {
-		return this.sortByClassMethod(context, list, desc, keyname);
+		return this.sortByMemberMethod(context, list, desc, keyname);
 	} else {
 		var method = this.findGlobalMethod(context, keyname);
 		if(method!=null) {
@@ -496,10 +497,10 @@ CategoryType.prototype.sortByExpression = function(context, list, desc, key) {
 
 	function cmp(o1, o2) {
 		var co = context.newInstanceContext(o1, null);
-		var key1 = key.interpret(co);
+		var value1 = key.interpret(co);
 		co = context.newInstanceContext(o2, null);
-		var key2 = key.interpret(co);
-		return compareKeys(key1, key2);
+		var value2 = key.interpret(co);
+		return compareValues(value1, value2);
 	}
 	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
@@ -507,9 +508,9 @@ CategoryType.prototype.sortByExpression = function(context, list, desc, key) {
 CategoryType.prototype.sortByAttribute = function(context, list, desc, name) {
 
 	function cmp(o1, o2) {
-		var key1 = o1.getMemberValue(context, name);
-		var key2 = o2.getMemberValue(context, name);
-		return compareKeys(key1,key2);
+		var value1 = o1.getMemberValue(context, name);
+		var value2 = o2.getMemberValue(context, name);
+		return compareValues(value1, value2);
 	}
 
 	return BaseType.prototype.doSort(context, list, cmp, desc);
@@ -535,8 +536,8 @@ CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 		var exp = new ExpressionValue(this, this.newInstance(context));
 		var arg = new ArgumentAssignment(null, exp);
 		var args = new ArgumentAssignmentList([arg]);
-		var proto = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
-		var finder = new MethodFinder(context, proto);
+		var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
+		var finder = new MethodFinder(context, call);
 		var decl = finder.findMethod(true);
 		return decl==null ? null : returnDecl ? decl : proto;
 	} catch (e) {
@@ -549,37 +550,19 @@ CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 };
 
 CategoryType.prototype.sortByGlobalMethod = function(context, list, desc, method) {
-	var type = this;
+	var self = this;
 	function cmp(o1, o2) {
 		var assignment = method.assignments[0];
-		assignment._expression = new ExpressionValue(type, o1);
-		var key1 = method.interpret(context);
-		assignment._expression = new ExpressionValue(type, o2);
-		var key2 = method.interpret(context);
-		return compareKeys(key1, key2);
+		assignment._expression = new ExpressionValue(self, o1);
+		var value1 = method.interpret(context);
+		assignment._expression = new ExpressionValue(self, o2);
+		var value2 = method.interpret(context);
+		return compareValues(value1, value2);
 	}
 
 	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
 
-
-function compareKeys(key1, key2) {
-	if(key1==null && key2==null) {
-		return 0;
-	} else if(key1==null) {
-		return -1;
-	} else if(key2==null) {
-		return 1;
-	} else if(key1.compareTo) {
-		return key1.compareTo(key2);
-	} else if(key2.compareTo) {
-		return -key2.compareTo(key1);
-	} else {
-		var s1 = key1.toString();
-		var s2 = key2.toString();
-		return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
-	}
-};
 
 CategoryType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     var decl = this.getDeclaration(context)

@@ -135,6 +135,38 @@ exports.testTranspiledSortDescTimes = function(test) {
 	checkTranspiledOutput(test, "sortList/sortDescTimes.pec");
 };
 
+exports.testInterpretedSortDocumentExpressions = function(test) {
+	checkInterpretedOutput(test, "sortList/sortDocumentExpressions.pec");
+};
+
+exports.testTranspiledSortDocumentExpressions = function(test) {
+	checkTranspiledOutput(test, "sortList/sortDocumentExpressions.pec");
+};
+
+exports.testInterpretedSortDocumentKeys = function(test) {
+	checkInterpretedOutput(test, "sortList/sortDocumentKeys.pec");
+};
+
+exports.testTranspiledSortDocumentKeys = function(test) {
+	checkTranspiledOutput(test, "sortList/sortDocumentKeys.pec");
+};
+
+exports.testInterpretedSortDocumentMethods = function(test) {
+	checkInterpretedOutput(test, "sortList/sortDocumentMethods.pec");
+};
+
+exports.testTranspiledSortDocumentMethods = function(test) {
+	checkTranspiledOutput(test, "sortList/sortDocumentMethods.pec");
+};
+
+exports.testInterpretedSortDocumentNames = function(test) {
+	checkInterpretedOutput(test, "sortList/sortDocumentNames.pec");
+};
+
+exports.testTranspiledSortDocumentNames = function(test) {
+	checkTranspiledOutput(test, "sortList/sortDocumentNames.pec");
+};
+
 exports.testInterpretedSortExpressions = function(test) {
 	checkInterpretedOutput(test, "sortList/sortExpressions.pec");
 };

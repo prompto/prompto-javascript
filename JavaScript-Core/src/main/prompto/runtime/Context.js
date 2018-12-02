@@ -738,5 +738,6 @@ Context.prototype.loadSingleton = function(type) {
 exports.Context = Context;
 exports.BuiltInContext = BuiltInContext;
 exports.InstanceContext = InstanceContext;
+exports.DocumentContext = DocumentContext;
 exports.ResourceContext = ResourceContext;
 exports.MethodDeclarationMap = MethodDeclarationMap;

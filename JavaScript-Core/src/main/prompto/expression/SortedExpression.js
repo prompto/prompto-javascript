@@ -3,6 +3,7 @@ var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifie
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var InternalError = require("../error/InternalError").InternalError;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var DocumentType = require("../type/DocumentType").DocumentType;
 var ListValue = require("../value/ListValue").ListValue;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var SetValue = require("../value/SetValue").SetValue;
@@ -89,7 +90,9 @@ SortedExpression.prototype.interpret = function(context) {
 	var itemType = type.itemType;
 	if(itemType instanceof CategoryType) {
 		return itemType.sort(context, coll, this.desc, this.key);
-	} else {
+	} else if(itemType === DocumentType.instance) {
+        return itemType.sort(context, coll, this.desc, this.key);
+    } else {
 		return itemType.sort(context, coll, this.desc);
 	}
 };

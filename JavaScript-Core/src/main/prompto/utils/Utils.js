@@ -206,7 +206,23 @@ function isCharacterUpperCase(char) {
     return !!/[A-Z]/.exec(char[0]);
 }
 
-
+function compareValues(value1, value2) {
+    if(value1==null && value2==null) {
+        return 0;
+    } else if(value1==null) {
+        return -1;
+    } else if(value2==null) {
+        return 1;
+    } else if(value1.compareTo) {
+        return value1.compareTo(value2);
+    } else if(value2.compareTo) {
+        return -value2.compareTo(value1);
+    } else {
+        var s1 = value1.toString();
+        var s2 = value2.toString();
+        return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
+    }
+};
 
 exports.multiplyArray = multiplyArray;
 exports.equalObjects = equalObjects;
@@ -223,3 +239,4 @@ exports.isADecimal = isADecimal;
 exports.isAText = isAText;
 exports.isACharacter = isACharacter;
 exports.isCharacterUpperCase = isCharacterUpperCase;
+exports.compareValues = compareValues;

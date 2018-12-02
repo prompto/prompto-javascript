@@ -62,6 +62,22 @@ exports.testSortDescTimes = function(test) {
 	compareResourceEME(test, "sortList/sortDescTimes.pec");
 };
 
+exports.testSortDocumentExpressions = function(test) {
+	compareResourceEME(test, "sortList/sortDocumentExpressions.pec");
+};
+
+exports.testSortDocumentKeys = function(test) {
+	compareResourceEME(test, "sortList/sortDocumentKeys.pec");
+};
+
+exports.testSortDocumentMethods = function(test) {
+	compareResourceEME(test, "sortList/sortDocumentMethods.pec");
+};
+
+exports.testSortDocumentNames = function(test) {
+	compareResourceEME(test, "sortList/sortDocumentNames.pec");
+};
+
 exports.testSortExpressions = function(test) {
 	compareResourceEME(test, "sortList/sortExpressions.pec");
 };

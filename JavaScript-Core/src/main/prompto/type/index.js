@@ -35,4 +35,5 @@ require('./CharacterType').resolve();
 require('./ListType').resolve();
 require('./RangeType').resolve();
 require('./CategoryType').resolve();
+require('./DocumentType').resolve();
 require('./UUIDType').resolve();

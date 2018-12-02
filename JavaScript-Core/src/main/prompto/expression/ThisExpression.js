@@ -1,10 +1,14 @@
 var InstanceContext = require("../runtime/Context").InstanceContext;
+var DocumentContext = require("../runtime/Context").DocumentContext;
+var DocumentType = require("../type/DocumentType").DocumentType;
 
 function ThisExpression() {
     return this;
 }
 
 ThisExpression.prototype.check = function(context) {
+    if (context instanceof DocumentContext)
+        return DocumentType.instance;
     if (context != null && !(context instanceof InstanceContext))
         context = context.getClosestInstanceContext ();
     if (context instanceof InstanceContext)
@@ -15,6 +19,8 @@ ThisExpression.prototype.check = function(context) {
 
 
 ThisExpression.prototype.interpret = function(context) {
+    if (context instanceof DocumentContext)
+        return context.document;
     if (context != null && !(context instanceof InstanceContext))
         context = context.getClosestInstanceContext ();
     if (context instanceof InstanceContext)
