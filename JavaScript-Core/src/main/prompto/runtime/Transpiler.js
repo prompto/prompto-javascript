@@ -70,6 +70,13 @@ Transpiler.prototype.newInstanceTranspiler = function(type) {
     return this.copyTranspiler(context);
 };
 
+
+Transpiler.prototype.newDocumentTranspiler = function() {
+    var context = this.context.newDocumentContext(null, false);
+    return this.copyTranspiler(context);
+};
+
+
 Transpiler.prototype.flush = function() {
     if(this.parent) {
         this.parent.line = this.line;

@@ -7,9 +7,10 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var TextValue = require("../value/TextValue").TextValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var Document = require("../intrinsic/Document").Document;
 var MethodDeclarationMap = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var DocumentValue = null;
+var Document = require("../intrinsic/Document").Document;
 var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;
 var MethodCall = require("../statement/MethodCall").MethodCall;
@@ -20,6 +21,7 @@ exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
     ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+    DocumentValue = require("../value/DocumentValue").DocumentValue;
 };
 
 
@@ -91,6 +93,94 @@ DocumentType.prototype.transpileAssignItemValue = function(transpiler, item, exp
 };
 
 
+DocumentType.prototype.declareSorted = function(transpiler, key) {
+    if(key==null)
+        key = new TextLiteral('"key"');
+    var keyname = key.toString();
+    var decl = this.findGlobalMethod(transpiler.context, keyname, true);
+    if (decl != null) {
+        decl.declare(transpiler);
+    } else {
+        transpiler = transpiler.newDocumentTranspiler();
+        key.declare(transpiler);
+    }
+};
+
+
+DocumentType.prototype.transpileSorted = function(transpiler, desc, key) {
+    if(key==null)
+        key = new TextLiteral('"key"');
+    var keyname = key.toString();
+    var decl = this.findGlobalMethod(transpiler.context, keyname, false);
+    if (decl != null) {
+        this.transpileSortedByGlobalMethod(transpiler, desc, decl.getTranspiledName(transpiler.context));
+    } else if(key instanceof TextLiteral) {
+        this.transpileSortedByEntry(transpiler, desc, key);
+    } else {
+        this.transpileSortedByExpression(transpiler, desc, key);
+    }
+};
+
+DocumentType.prototype.transpileSortedByGlobalMethod = function(transpiler, desc, name) {
+    transpiler.append("function(o1, o2) { return ")
+        .append(name).append("(o1) === ").append(name).append("(o2)").append(" ? 0 : ")
+        .append(name).append("(o1) > ").append(name).append("(o2)").append(" ? ");
+    if(desc)
+        transpiler.append("-1 : 1; }");
+    else
+        transpiler.append("1 : -1; }");
+};
+
+
+DocumentType.prototype.transpileSortedByEntry = function(transpiler, descending, key) {
+    transpiler.append("function(o1, o2) { return ");
+    this.transpileEqualEntries(transpiler, key);
+    transpiler.append(" ? 0 : ");
+    this.transpileGreaterEntries(transpiler, key);
+    transpiler.append(" ? ");
+    if(descending)
+        transpiler.append("-1 : 1; }");
+    else
+        transpiler.append("1 : -1; }");
+};
+
+
+DocumentType.prototype.transpileEqualEntries = function(transpiler, key) {
+    transpiler.append("o1[");
+    key.transpile(transpiler);
+    transpiler.append("] === o2[");
+    key.transpile(transpiler);
+    transpiler.append("]");
+};
+
+
+DocumentType.prototype.transpileGreaterEntries = function(transpiler, key) {
+    transpiler.append("o1[");
+    key.transpile(transpiler);
+    transpiler.append("] > o2[");
+    key.transpile(transpiler);
+    transpiler.append("]");
+};
+
+
+DocumentType.prototype.transpileSortedByExpression = function(transpiler, descending, key) {
+    transpiler = transpiler.newDocumentTranspiler();
+    transpiler.append("function(o1, o2) { var v1 = (function() { return ");
+    key.transpile(transpiler);
+    transpiler.append("; }).bind(o1)(); var v2 = (function() { return ");
+    key.transpile(transpiler);
+    transpiler.append("; }).bind(o2)(); return v1===v2 ? 0 : v1 > v2 ? ");
+    if(descending)
+        transpiler.append("-1 : 1; }");
+    else
+        transpiler.append("1 : -1; }");
+    transpiler.flush();
+};
+
+
+
+
+
 DocumentType.prototype.checkItem = function(context, itemType) {
     if(itemType===TextType.instance)
         return AnyType.instance;
@@ -106,7 +196,6 @@ DocumentType.prototype.transpileItem = function(transpiler, type, item) {
 };
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {
-    var DocumentValue = require("../value/DocumentValue").DocumentValue;
     var instance = new DocumentValue();
     for(key in node) {
         var value = this.readJSONField(context, node[key], parts);
@@ -143,9 +232,9 @@ DocumentType.prototype.sort = function(context, list, desc, key) {
         key = new TextLiteral('"key"');
     }
     var keyname = key.toString();
-    var method = this.findGlobalMethod(context, keyname);
-    if(method!=null) {
-        return this.sortByGlobalMethod(context, list, desc, method);
+    var call = this.findGlobalMethod(context, keyname, true);
+    if(call!=null) {
+        return this.sortByGlobalMethod(context, list, desc, call);
     } else if(key instanceof TextLiteral) {
         return this.sortByEntry(context, list, desc, key);
     } else {
@@ -155,29 +244,30 @@ DocumentType.prototype.sort = function(context, list, desc, key) {
 
 
 /* look for a method which takes Document as sole parameter */
-DocumentType.prototype.findGlobalMethod = function(context, name) {
+DocumentType.prototype.findGlobalMethod = function(context, name, returnCall) {
     var methods = context.getRegisteredDeclaration(name);
     if(!(methods instanceof MethodDeclarationMap))
         return null;
     else if(!methods.protos[DocumentType.instance.name])
         return null;
-    else {
-        var exp = new ExpressionValue(this, new Document());
+    else if(returnCall) {
+        var exp = new ExpressionValue(this, new DocumentValue());
         var arg = new ArgumentAssignment(null, exp);
         var args = new ArgumentAssignmentList([arg]);
         return new MethodCall(new MethodSelector(null, new Identifier(name)), args);
-    }
+    } else
+        return methods.protos[DocumentType.instance.name];
 };
 
 
-DocumentType.prototype.sortByGlobalMethod = function(context, list, desc, method) {
+DocumentType.prototype.sortByGlobalMethod = function(context, list, desc, call) {
     var self = this;
     function cmp(o1, o2) {
-        var assignment = method.assignments[0];
+        var assignment = call.assignments[0];
         assignment._expression = new ExpressionValue(self, o1);
-        var value1 = method.interpret(context);
+        var value1 = call.interpret(context);
         assignment._expression = new ExpressionValue(self, o2);
-        var value2 = method.interpret(context);
+        var value2 = call.interpret(context);
         return compareValues(value1, value2);
     }
 

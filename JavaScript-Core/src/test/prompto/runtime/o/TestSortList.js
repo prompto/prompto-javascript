@@ -14,7 +14,7 @@ exports.tearDown = function(done) {
 	Out.restore();
 	done();
 };
-/*
+
 exports.testInterpretedSortBooleans = function(test) {
 	checkInterpretedOutput(test, "sortList/sortBooleans.poc");
 };
@@ -134,41 +134,39 @@ exports.testInterpretedSortDescTimes = function(test) {
 exports.testTranspiledSortDescTimes = function(test) {
 	checkTranspiledOutput(test, "sortList/sortDescTimes.poc");
 };
-*/
 
 exports.testInterpretedSortDocumentExpressions = function(test) {
 	checkInterpretedOutput(test, "sortList/sortDocumentExpressions.poc");
 };
-/*
+
 exports.testTranspiledSortDocumentExpressions = function(test) {
 	checkTranspiledOutput(test, "sortList/sortDocumentExpressions.poc");
 };
-*/
+
 exports.testInterpretedSortDocumentKeys = function(test) {
 	checkInterpretedOutput(test, "sortList/sortDocumentKeys.poc");
 };
-/*
+
 exports.testTranspiledSortDocumentKeys = function(test) {
 	checkTranspiledOutput(test, "sortList/sortDocumentKeys.poc");
 };
-*/
+
 exports.testInterpretedSortDocumentMethods = function(test) {
 	checkInterpretedOutput(test, "sortList/sortDocumentMethods.poc");
 };
-/*
+
 exports.testTranspiledSortDocumentMethods = function(test) {
 	checkTranspiledOutput(test, "sortList/sortDocumentMethods.poc");
 };
-*/
+
 exports.testInterpretedSortDocumentNames = function(test) {
 	checkInterpretedOutput(test, "sortList/sortDocumentNames.poc");
 };
-/*
+
 exports.testTranspiledSortDocumentNames = function(test) {
 	checkTranspiledOutput(test, "sortList/sortDocumentNames.poc");
 };
-*/
-/*
+
 exports.testInterpretedSortExpressions = function(test) {
 	checkInterpretedOutput(test, "sortList/sortExpressions.poc");
 };
@@ -225,4 +223,3 @@ exports.testTranspiledSortTimes = function(test) {
 	checkTranspiledOutput(test, "sortList/sortTimes.poc");
 };
 
-*/

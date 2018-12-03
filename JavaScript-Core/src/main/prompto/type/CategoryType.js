@@ -539,7 +539,7 @@ CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 		var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
 		var finder = new MethodFinder(context, call);
 		var decl = finder.findMethod(true);
-		return decl==null ? null : returnDecl ? decl : proto;
+		return decl==null ? null : returnDecl ? decl : call;
 	} catch (e) {
 		if(e instanceof PromptoError) {
 			return null;

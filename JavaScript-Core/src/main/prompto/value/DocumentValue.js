@@ -106,6 +106,10 @@ DocumentValue.prototype.toJson = function(context, json, instanceId, fieldName, 
         json[fieldName] = doc;
 };
 
+DocumentValue.prototype.declare = function(transpiler) {
+    transpiler.require(Document);
+};
+
 exports.DocumentValue = DocumentValue;
 
 
