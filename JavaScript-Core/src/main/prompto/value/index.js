@@ -1,4 +1,5 @@
 exports.Value = require('./Value').Value;
+exports.NullValue = require('./NullValue').NullValue;
 exports.AnyValue = require('./AnyValue').AnyValue;
 exports.BooleanValue = require('./BooleanValue').BooleanValue;
 exports.BlobValue = require('./BlobValue').BlobValue;
