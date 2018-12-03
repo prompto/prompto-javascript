@@ -40,7 +40,7 @@ function toList(node) {
 }
 
 function fromNumber(node) {
-    if (node == Math.floor(node))
+    if (Number.isInteger(node))
         return new prompto.value.IntegerValue(node);
     else
         return new prompto.value.DecimalValue(node);

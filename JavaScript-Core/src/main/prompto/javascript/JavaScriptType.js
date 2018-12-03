@@ -151,7 +151,7 @@ JavaScriptType.prototype.convertNative = function(context, value, klass, returnT
     if (promptoType != null) {
         return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
     } else if(klass=='number') {
-        if (value == Math.floor(value)) {
+        if (Number.isInteger(value)) {
             return type.IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
         } else {
             return type.DecimalType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);

@@ -187,11 +187,11 @@ function decimalToString(d) {
 }
 
 function isAnInteger(o) {
-    return typeof(o) === "number" && o === Math.floor(o);
+    return typeof(o) === "number" && Number.isInteger(o);
 }
 
 function isADecimal(o) {
-    return typeof(o) === "number" && o !== Math.floor(o);
+    return typeof(o) === "number" && !Number.isInteger(o);
 }
 
 function isAText(o) {

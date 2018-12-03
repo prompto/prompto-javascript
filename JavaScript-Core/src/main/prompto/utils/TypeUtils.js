@@ -10,7 +10,7 @@ convertFromJavaScript = function(value) {
     } else if(typeof(value)=='string') {
         return new TextValue(value);
     } else if(typeof(value)=='number') {
-        if(value == Math.floor(value))
+        if(Number.isInteger(value))
             return new IntegerValue(value);
         else
             return new DecimalValue(value);
