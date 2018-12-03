@@ -96,6 +96,10 @@ CodeWriter.prototype.newInstanceWriter = function(type) {
     return new CodeWriter(this.dialect, this.context.newInstanceContext(null, type), this.indenter);
 };
 
+CodeWriter.prototype.newDocumentWriter = function() {
+    return new CodeWriter(this.dialect, this.context.newDocumentContext(null, false), this.indenter);
+};
+
 CodeWriter.prototype.newMemberWriter = function() {
     return new CodeWriter (this.dialect, this.context.newChildContext(), this.indenter);
 };

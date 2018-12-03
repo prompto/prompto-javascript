@@ -34,6 +34,7 @@ SortedExpression.prototype.toEDialect = function(writer) {
         writer.append("descending ");
     this.source.toDialect(writer);
     if(this.key!=null) {
+        writer = this.contextualizeWriter(writer);
         writer.append(" with ");
         var keyExp = this.key;
         if(keyExp instanceof UnresolvedIdentifier) try {
@@ -56,6 +57,7 @@ SortedExpression.prototype.toODialect = function(writer) {
     writer.append("(");
     this.source.toDialect(writer);
     if(this.key!=null) {
+        writer = this.contextualizeWriter(writer);
         writer.append(", key = ");
         this.key.toDialect(writer);
     }
@@ -65,6 +67,18 @@ SortedExpression.prototype.toODialect = function(writer) {
 SortedExpression.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 }
+
+SortedExpression.prototype.contextualizeWriter = function(writer) {
+    var type = this.source.check(writer.context);
+    var itemType = type.itemType;
+    if (itemType instanceof CategoryType)
+        return writer.newInstanceWriter(itemType);
+    else if (itemType instanceof DocumentType)
+        return writer.newDocumentWriter();
+    else
+        return writer;
+};
+
 
 SortedExpression.prototype.check = function(context) {
 	var type = this.source.check(context);
