@@ -30,3 +30,7 @@ exports.testCopyFromDocument = function(test) {
 	compareResourceEOE(test, "categories/copyFromDocument.pec");
 };
 
+exports.testCopyFromStored = function(test) {
+	compareResourceEOE(test, "categories/copyFromStored.pec");
+};
+

@@ -55,3 +55,11 @@ exports.testTranspiledCopyFromDocument = function(test) {
 	checkTranspiledOutput(test, "categories/copyFromDocument.poc");
 };
 
+exports.testInterpretedCopyFromStored = function(test) {
+	checkInterpretedOutput(test, "categories/copyFromStored.poc");
+};
+
+exports.testTranspiledCopyFromStored = function(test) {
+	checkTranspiledOutput(test, "categories/copyFromStored.poc");
+};
+

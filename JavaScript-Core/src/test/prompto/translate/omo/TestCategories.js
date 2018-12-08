@@ -22,3 +22,7 @@ exports.testCopyFromDocument = function(test) {
 	compareResourceOMO(test, "categories/copyFromDocument.poc");
 };
 
+exports.testCopyFromStored = function(test) {
+	compareResourceOMO(test, "categories/copyFromStored.poc");
+};
+
