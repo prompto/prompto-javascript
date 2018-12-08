@@ -118,7 +118,7 @@ ConstructorExpression.prototype.interpret = function(context) {
 		if((copyObj.getMemberValue || null)!=null) {
 			var names = copyObj.getMemberNames();
 			names.forEach(function(name) {
-				if(cd.hasAttribute(context, name)) {
+                if(name !== "dbId" && cd.hasAttribute(context, name)) {
                     var value = copyObj.getMemberValue(context, name);
                     if(value!=null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
