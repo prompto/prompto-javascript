@@ -77,4 +77,8 @@ ProblemListener.prototype.reportInvalidMember = function(section, name) {
     throw new SyntaxError("Invalid member '" + name + "' in " + this.name + " type");
 };
 
+ProblemListener.prototype.reportInvalidCopySource = function(section) {
+    throw new SyntaxError("Invalid copy source");
+};
+
 exports.ProblemListener = ProblemListener;

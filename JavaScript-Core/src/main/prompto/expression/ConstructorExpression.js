@@ -94,7 +94,7 @@ ConstructorExpression.prototype.check = function(context) {
 	if(this.copyFrom!=null) {
 		var cft = this.copyFrom.check(context);
 		if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
-            context.problemListener.reportInvalidCopySource();
+            context.problemListener.reportInvalidCopySource(this.copyFrom);
             // throw new SyntaxError("Cannot copy from " + cft.getName());
 	}
 	if(this.assignments!=null) {

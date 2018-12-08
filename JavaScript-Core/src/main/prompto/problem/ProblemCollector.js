@@ -134,4 +134,11 @@ ProblemCollector.prototype.reportInvalidMember = function(section, name) {
     this.collectProblem(problem);
 };
 
+ProblemListener.prototype.reportInvalidCopySource = function(section) {
+    var problem = this.readSection(section);
+    problem.type = "error";
+    problem.message = "Invalid copy source";
+    this.collectProblem(problem);
+};
+
 exports.ProblemCollector = ProblemCollector;
