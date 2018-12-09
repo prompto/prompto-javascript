@@ -124,6 +124,8 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 
 
 MethodCall.prototype.declare = function(transpiler) {
+    if (this.assignments != null)
+        this.assignments.declare(transpiler);
     var finder = new MethodFinder(transpiler.context, this);
     var declarations = finder.findCompatibleMethods(false, true);
     var first = declarations.size===1 ? declarations.values().next().value : null;
@@ -131,8 +133,6 @@ MethodCall.prototype.declare = function(transpiler) {
         if(first.declareCall)
             first.declareCall(transpiler);
     } else {
-        if (this.assignments != null)
-            this.assignments.declare(transpiler);
         if(!this.isLocalClosure(transpiler.context)) {
             declarations.forEach(function(declaration) {
                 var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
