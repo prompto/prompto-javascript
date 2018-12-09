@@ -92,6 +92,9 @@ InstanceExpression.prototype.requiresMethod = function(writer) {
 
 InstanceExpression.prototype.check = function(context) {
 	var named = context.getRegistered(this.id.name);
+	if(named==null) {
+	    named = context.getRegisteredDeclaration(this.id.name);
+    }
 	if (named instanceof Variable) { // local variable
         return named.getType(context);
     } else if(named instanceof LinkedVariable) { // local variable
