@@ -35,7 +35,7 @@ MemberInstance.prototype.checkAssignValue = function(context, valueType, section
 	return this.parent.checkAssignMember(context, this.name, valueType, section);
 };
 
-MemberInstance.prototype.checkAssignMember = function(context, name, valueType) {
+MemberInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
 	this.parent.checkAssignMember(context, this.name, section);
     return valueType; // TODO
 };
