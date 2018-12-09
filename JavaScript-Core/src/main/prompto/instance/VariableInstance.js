@@ -38,32 +38,30 @@ VariableInstance.prototype.check = function(context) {
 };
 
 
-VariableInstance.prototype.checkAssignValue = function(context, valueType) {
+VariableInstance.prototype.checkAssignValue = function(context, valueType, section) {
     var actual = context.getRegisteredValue(this.id);
     if(actual==null) {
         context.registerValue(new Variable(this.id, valueType));
         return valueType;
     } else {
         // need to check type compatibility
-        actual.type.checkAssignableFrom(context, valueType, this);
+        actual.type.checkAssignableFrom(context, valueType, section);
         return actual.type;
     }
 };
 
-VariableInstance.prototype.checkAssignMember = function(context, name, valueType) {
+VariableInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
 	var actual = context.getRegisteredValue(this.id);
-	if(actual==null) {
-		throw new SyntaxError("Unknown variable:" + this.id);
-	}
+	if(actual==null)
+	    context.problemListener.reportUnknownVariable(section, this.id);
     return valueType;
 };
 
 
-VariableInstance.prototype.checkAssignItem = function(context, itemType, valueType) {
+VariableInstance.prototype.checkAssignItem = function(context, itemType, valueType, section) {
     var actual = context.getRegisteredValue(this.id);
-    if(actual==null) {
-        throw new SyntaxError("Unknown variable:" + this.id);
-    }
+    if(actual==null)
+        context.problemListener.reportUnknownVariable(section, this.id);
     var parentType = actual.getType(context);
     return parentType.checkItem(context, itemType);
 };

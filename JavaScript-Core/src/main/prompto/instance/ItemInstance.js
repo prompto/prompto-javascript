@@ -30,16 +30,16 @@ ItemInstance.prototype.check = function(context) {
 };
 
 
-ItemInstance.prototype.checkAssignValue = function(context, valueType) {
+ItemInstance.prototype.checkAssignValue = function(context, valueType, section) {
     var itemType = this.item.check(context);
-	return this.parent.checkAssignItem(context, itemType, valueType);
+	return this.parent.checkAssignItem(context, itemType, valueType, section);
 };
 
-ItemInstance.prototype.checkAssignMember = function(context, name, valueType) {
+ItemInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
     return AnyType.instance
 };
 
-ItemInstance.prototype.checkAssignItem = function(context, itemType, valueType) {
+ItemInstance.prototype.checkAssignItem = function(context, itemType, valueType, section) {
     return AnyType.instance
 };
 

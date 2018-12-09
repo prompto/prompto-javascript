@@ -31,16 +31,16 @@ MemberInstance.prototype.interpret = function(context) {
 };
 
 
-MemberInstance.prototype.checkAssignValue = function(context, valueType) {
-	return this.parent.checkAssignMember(context, this.name, valueType);
+MemberInstance.prototype.checkAssignValue = function(context, valueType, section) {
+	return this.parent.checkAssignMember(context, this.name, valueType, section);
 };
 
 MemberInstance.prototype.checkAssignMember = function(context, name, valueType) {
-	this.parent.checkAssignMember(context, this.name);
+	this.parent.checkAssignMember(context, this.name, section);
     return valueType; // TODO
 };
 
-MemberInstance.prototype.checkAssignItem = function(context, itemType, valueType) {
+MemberInstance.prototype.checkAssignItem = function(context, itemType, valueType, section) {
     return valueType; // TODO
 };
 

@@ -134,7 +134,7 @@ ProblemCollector.prototype.reportInvalidMember = function(section, name) {
     this.collectProblem(problem);
 };
 
-ProblemListener.prototype.reportInvalidCopySource = function(section) {
+ProblemCollector.prototype.reportInvalidCopySource = function(section) {
     var problem = this.readSection(section);
     problem.type = "error";
     problem.message = "Invalid copy source";
@@ -142,7 +142,7 @@ ProblemListener.prototype.reportInvalidCopySource = function(section) {
 };
 
 
-ProblemListener.prototype.reportIncompatibleTypes = function(section, left, right) {
+ProblemCollector.prototype.reportIncompatibleTypes = function(section, left, right) {
     var problem = this.readSection(section);
     problem.type = "error";
     problem.message = "Type " + left.name + " is not compatible with " + right.name;
