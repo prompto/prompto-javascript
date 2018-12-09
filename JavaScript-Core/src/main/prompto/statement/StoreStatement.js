@@ -52,7 +52,7 @@ StoreStatement.prototype.toDialect = function(writer) {
         if(writer.dialect == Dialect.O) {
             writer.append(" then {").newLine().indent();
             this.andThen.toDialect(writer);
-            writer.dedent().append("}");
+            writer.dedent().append("}").newLine();
         } else {
             writer.append(" then:").newLine().indent();
             this.andThen.toDialect(writer);
