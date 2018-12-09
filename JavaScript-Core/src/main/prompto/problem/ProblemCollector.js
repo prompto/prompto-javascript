@@ -141,4 +141,13 @@ ProblemListener.prototype.reportInvalidCopySource = function(section) {
     this.collectProblem(problem);
 };
 
+
+ProblemListener.prototype.reportIncompatibleTypes = function(section, left, right) {
+    var problem = this.readSection(section);
+    problem.type = "error";
+    problem.message = "Type " + left.name + " is not compatible with " + right.name;
+    this.collectProblem(problem);
+};
+
+
 exports.ProblemCollector = ProblemCollector;

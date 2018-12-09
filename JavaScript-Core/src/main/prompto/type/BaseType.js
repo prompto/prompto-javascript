@@ -399,10 +399,9 @@ BaseType.prototype.transpileIterator = function(transpiler, name, expression) {
 };
 
 
-BaseType.prototype.checkAssignableFrom = function(context, other) {
-	if (!this.isAssignableFrom(context, other)) {
-		throw new SyntaxError("Type: " + this.name + " is not compatible with: " + other.name);
-	};
+BaseType.prototype.checkAssignableFrom = function(context, other, section) {
+	if (!this.isAssignableFrom(context, other))
+	    context.problemListener.reportIncompatibleTypes(section, this, other);
 };
 
 BaseType.prototype.checkRange = function(context, other) {

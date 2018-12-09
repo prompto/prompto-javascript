@@ -37,7 +37,7 @@ AssignVariableStatement.prototype.checkResource = function(context) {
 	} else {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
-        actualType.checkAssignableFrom(context, type);
+        actualType.checkAssignableFrom(context, type, this);
 	}
 	return VoidType.instance;
 };
@@ -61,7 +61,7 @@ AssignVariableStatement.prototype.check = function(context) {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
 		var newType = expression.check(context);
-        actualType.checkAssignableFrom(context, newType);
+        actualType.checkAssignableFrom(context, newType, this);
 	}
 	return VoidType.instance;
 };

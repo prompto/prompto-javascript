@@ -81,4 +81,10 @@ ProblemListener.prototype.reportInvalidCopySource = function(section) {
     throw new SyntaxError("Invalid copy source");
 };
 
+
+ProblemListener.prototype.reportIncompatibleTypes = function(section, left, right) {
+    throw new SyntaxError("Type " + left.name + " is not compatible with " + right.name);
+};
+
+
 exports.ProblemListener = ProblemListener;
