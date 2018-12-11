@@ -3,7 +3,8 @@ var prompto = require("../../../../../JavaScript-Core/src/main/prompto/index.js"
 var Out = require("../../../../../JavaScript-Core/src/test/prompto/runtime/utils/Out").Out;
 var BaseParserTest = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseParserTest");
 var loadDependency = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").loadDependency;
-var runTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runTests;
+var runInterpretedTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runInterpretedTests;
+var runTranspiledTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runTranspiledTests;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -18,11 +19,19 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testBuffer = function(test) {
-	runTests(test, "console/buffer.pec");
+exports.testInterpretedBuffer = function(test) {
+	runInterpretedTests(test, "console/buffer.pec");
 };
 
-exports.testPrint = function(test) {
-	runTests(test, "console/print.pec");
+exports.testTranspiledBuffer = function(test) {
+	runTranspiledTests(test, "console/buffer.pec");
+};
+
+exports.testInterpretedPrint = function(test) {
+	runInterpretedTests(test, "console/print.pec");
+};
+
+exports.testTranspiledPrint = function(test) {
+	runTranspiledTests(test, "console/print.pec");
 };
 

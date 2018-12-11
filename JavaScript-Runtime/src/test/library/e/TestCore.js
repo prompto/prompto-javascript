@@ -3,7 +3,8 @@ var prompto = require("../../../../../JavaScript-Core/src/main/prompto/index.js"
 var Out = require("../../../../../JavaScript-Core/src/test/prompto/runtime/utils/Out").Out;
 var BaseParserTest = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseParserTest");
 var loadDependency = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").loadDependency;
-var runTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runTests;
+var runInterpretedTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runInterpretedTests;
+var runTranspiledTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runTranspiledTests;
 
 exports.setUp = function(done) {
 	Out.init();
@@ -17,39 +18,75 @@ exports.tearDown = function(done) {
 	done();
 };
 
-exports.testAny = function(test) {
-	runTests(test, "core/any.pec");
+exports.testInterpretedAny = function(test) {
+	runInterpretedTests(test, "core/any.pec");
 };
 
-exports.testAttribute = function(test) {
-	runTests(test, "core/attribute.pec");
+exports.testTranspiledAny = function(test) {
+	runTranspiledTests(test, "core/any.pec");
 };
 
-exports.testAttributes = function(test) {
-	runTests(test, "core/attributes.pec");
+exports.testInterpretedAttribute = function(test) {
+	runInterpretedTests(test, "core/attribute.pec");
 };
 
-exports.testCloud = function(test) {
-	runTests(test, "core/cloud.pec");
+exports.testTranspiledAttribute = function(test) {
+	runTranspiledTests(test, "core/attribute.pec");
 };
 
-exports.testError = function(test) {
-	runTests(test, "core/error.pec");
+exports.testInterpretedAttributes = function(test) {
+	runInterpretedTests(test, "core/attributes.pec");
 };
 
-exports.testMath = function(test) {
-	runTests(test, "core/math.pec");
+exports.testTranspiledAttributes = function(test) {
+	runTranspiledTests(test, "core/attributes.pec");
 };
 
-exports.testParse = function(test) {
-	runTests(test, "core/parse.pec");
+exports.testInterpretedCloud = function(test) {
+	runInterpretedTests(test, "core/cloud.pec");
 };
 
-exports.testTime = function(test) {
-	runTests(test, "core/time.pec");
+exports.testTranspiledCloud = function(test) {
+	runTranspiledTests(test, "core/cloud.pec");
 };
 
-exports.testUtils = function(test) {
-	runTests(test, "core/utils.pec");
+exports.testInterpretedError = function(test) {
+	runInterpretedTests(test, "core/error.pec");
+};
+
+exports.testTranspiledError = function(test) {
+	runTranspiledTests(test, "core/error.pec");
+};
+
+exports.testInterpretedMath = function(test) {
+	runInterpretedTests(test, "core/math.pec");
+};
+
+exports.testTranspiledMath = function(test) {
+	runTranspiledTests(test, "core/math.pec");
+};
+
+exports.testInterpretedParse = function(test) {
+	runInterpretedTests(test, "core/parse.pec");
+};
+
+exports.testTranspiledParse = function(test) {
+	runTranspiledTests(test, "core/parse.pec");
+};
+
+exports.testInterpretedTime = function(test) {
+	runInterpretedTests(test, "core/time.pec");
+};
+
+exports.testTranspiledTime = function(test) {
+	runTranspiledTests(test, "core/time.pec");
+};
+
+exports.testInterpretedUtils = function(test) {
+	runInterpretedTests(test, "core/utils.pec");
+};
+
+exports.testTranspiledUtils = function(test) {
+	runTranspiledTests(test, "core/utils.pec");
 };
 
