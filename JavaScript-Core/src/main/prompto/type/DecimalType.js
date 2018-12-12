@@ -21,7 +21,13 @@ DecimalType.instance = new DecimalType();
 
 
 DecimalType.prototype.declare = function(transpiler) {
-    // nothing to do
+    var isADecimal = require("../utils/Utils").isADecimal;
+    transpiler.require(isADecimal);
+};
+
+
+DecimalType.prototype.transpile = function(transpiler) {
+    transpiler.append('"Decimal"')
 };
 
 

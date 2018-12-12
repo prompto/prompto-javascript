@@ -140,6 +140,12 @@ Interpreter.interpretTest = function(context, name) {
     test.interpret(local);
 };
 
+Interpreter.executeTest = function(context, name) {
+    var test = context.getRegisteredTest(name);
+    var local = context.newLocalContext();
+    test.interpret(local);
+};
+
 exports.locateMethod = locateMethod;
 exports.Interpreter = Interpreter;
 

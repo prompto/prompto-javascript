@@ -40,4 +40,9 @@ IteratorType.prototype.checkMember = function(context, section, name) {
         return IterableType.prototype.checkMember.call(this, context, section, name);
 };
 
+IteratorType.prototype.declare = function(transpiler) {
+    this.itemType.declare(transpiler);
+};
+
+
 exports.IteratorType = IteratorType;

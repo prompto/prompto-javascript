@@ -118,9 +118,10 @@ JavaScriptType.prototype.convertSet = function(context, value, klass, returnType
 };
 
 JavaScriptType.prototype.convertList = function(context, value, klass, returnType) {
-    if(klass==="Array" && returnType instanceof type.ListType) {
+    var maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+    if(maybeList && (klass==="Array" || klass==="List")) {
         var self = this;
-        var itemType = returnType.itemType;
+        var itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
         var items = value.map(function(item) {
             klass = getTypeName(item);
             return self.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
@@ -131,15 +132,18 @@ JavaScriptType.prototype.convertList = function(context, value, klass, returnTyp
 };
 
 JavaScriptType.prototype.convertDocument = function(context, value, klass, returnType) {
-    if(returnType instanceof type.DocumentType && klass=="Object") {
+    var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+    if(maybeDoc && (klass==="object" || klass==="Document")) {
         var self = this;
         var itemType = returnType.itemType;
         var doc = new DocumentValue();
         for(var key in value) {
-            var item = value[key];
-            klass = getTypeName(item);
-            item = self.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
-            doc.setMember(context, new Identifier(key.toString()), item);
+            if(value.hasOwnProperty(key)) {
+                var item = value[key];
+                klass = getTypeName(item);
+                item = self.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
+                doc.setMember(context, new Identifier(key.toString()), item);
+            }
         }
         return doc;
     } else

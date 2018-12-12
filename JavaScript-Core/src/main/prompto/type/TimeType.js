@@ -48,6 +48,17 @@ TimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+TimeType.prototype.declare = function(transpiler) {
+    transpiler.register(LocalTime);
+};
+
+
+TimeType.prototype.transpile = function(transpiler) {
+    transpiler.append('Time');
+};
+
+
 TimeType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
     if (other === PeriodType.instance) {
         left.declare(transpiler);

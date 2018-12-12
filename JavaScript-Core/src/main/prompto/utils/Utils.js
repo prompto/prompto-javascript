@@ -2,7 +2,7 @@ function equalObjects(o1, o2) {
     if(Object.is(o1, o2))
         return true;
     else
-        return typeof(o1)==='object' && o1.equals && o1.equals(o2);
+        return o1.equals && o1.equals(o2);
 
 }
 
@@ -186,6 +186,10 @@ function decimalToString(d) {
         return s + ".0";
 }
 
+function isABoolean(o) {
+    return typeof(o) === "boolean";
+}
+
 function isAnInteger(o) {
     return typeof(o) === "number" && Number.isInteger(o);
 }
@@ -234,6 +238,7 @@ exports.getUtf8CharLength = getUtf8CharLength;
 exports.stringToUtf8Buffer = stringToUtf8Buffer;
 exports.utf8BufferToString = utf8BufferToString;
 exports.decimalToString = decimalToString;
+exports.isABoolean = isABoolean;
 exports.isAnInteger = isAnInteger;
 exports.isADecimal = isADecimal;
 exports.isAText = isAText;

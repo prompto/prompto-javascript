@@ -49,6 +49,16 @@ DateType.prototype.convertJavaScriptValueToPromptoValue = function(context, valu
 };
 
 
+DateType.prototype.declare = function(transpiler) {
+    transpiler.register(LocalDate);
+};
+
+
+DateType.prototype.transpile = function(transpiler) {
+    transpiler.append('Date');
+};
+
+
 DateType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
     if (other === PeriodType.instance) {
         left.declare(transpiler);

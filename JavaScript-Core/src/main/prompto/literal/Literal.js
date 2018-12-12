@@ -11,7 +11,14 @@ Literal.prototype = Object.create(Section.prototype);
 Literal.prototype.constructor = Section;
 
 Literal.prototype.toDialect = function(writer) {
-    writer.append(this.text);
+    writer.append(this.escapedText(writer.escapeMode));
+};
+
+Literal.prototype.escapedText = function(escapeMode) {
+    if(escapeMode)
+        return this.text.replace(/\'/g, "\\'");
+    else
+        return this.text;
 };
 
 Literal.prototype.toString = function() {

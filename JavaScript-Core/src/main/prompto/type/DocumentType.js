@@ -11,6 +11,7 @@ var MethodDeclarationMap = null;
 var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
 var DocumentValue = null;
 var Document = require("../intrinsic/Document").Document;
+var List = require("../intrinsic/List").List;
 var ArgumentAssignmentList = null;
 var ArgumentAssignment = null;
 var MethodCall = require("../statement/MethodCall").MethodCall;
@@ -53,10 +54,24 @@ DocumentType.prototype.checkMember = function(context, section, name) {
 	return AnyType.instance;
 };
 
+DocumentType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
+    if(value instanceof Document)
+        return new DocumentValue(value);
+    else
+        return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
+};
+
 
 DocumentType.prototype.declare = function(transpiler) {
-    transpiler.require(Document);
+    transpiler.register(Document);
+    transpiler.register(List);
 };
+
+
+DocumentType.prototype.transpile = function(transpiler) {
+    transpiler.append('Document')
+};
+
 
 DocumentType.prototype.declareMember = function(transpiler, name) {
     // nothing to do

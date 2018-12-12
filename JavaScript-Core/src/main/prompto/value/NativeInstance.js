@@ -7,7 +7,7 @@ function NativeInstance(context, declaration, instance) {
     Instance.call(this,new CategoryType(declaration.id));
 	this.declaration = declaration;
     this.storable = false;
-    if(declaration.storable) {
+    if(declaration.storable && DataStore.instance) {
         var categories = declaration.collectCategories(context);
         this.storable = DataStore.instance.newStorableDocument(categories, null);
     }

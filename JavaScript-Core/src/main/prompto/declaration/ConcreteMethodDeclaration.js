@@ -164,6 +164,8 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
             transpiler.declare(this);
             this.declareArguments(transpiler);
         }
+        if(this.returnType)
+            this.returnType.declare(transpiler);
         this.registerArguments(transpiler.context);
         this.statements.declare(transpiler);
     } finally {
@@ -178,8 +180,6 @@ ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
     this.registerArguments(transpiler.context);
     return this.statements.declare(transpiler);
 };
-
-
 
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {

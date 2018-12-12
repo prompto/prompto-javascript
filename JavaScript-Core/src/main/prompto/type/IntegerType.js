@@ -46,7 +46,7 @@ IntegerType.prototype.declare = function(transpiler) {
 
 
 IntegerType.prototype.transpile = function(transpiler) {
-    // nothing to do
+    transpiler.append('"Integer"');
 };
 
 IntegerType.prototype.checkAdd = function(context, other, tryReverse) {

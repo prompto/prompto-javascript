@@ -31,12 +31,12 @@ Document.prototype.setMember = function(name, value) {
 };
 
 
-Document.prototype.setItem = function(item, value) {
-    this[item] = value;
+Document.prototype.setItem = function(index, value) {
+    this[index] = value;
 };
 
-Document.prototype.item = function(item) {
-    return this[item];
+Document.prototype.item = function(index) {
+    return this[index];
 };
 
 

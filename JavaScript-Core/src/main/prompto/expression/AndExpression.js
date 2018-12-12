@@ -85,8 +85,9 @@ AndExpression.prototype.interpretAssert = function(context, test) {
     return false;
 };
 
-AndExpression.prototype.getExpected = function(context, dialect) {
+AndExpression.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(dialect, context);
+    writer.escapeMode = escapeMode;
     this.toDialect(writer);
     return writer.toString();
 };

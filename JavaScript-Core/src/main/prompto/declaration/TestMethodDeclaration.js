@@ -58,19 +58,24 @@ TestMethodDeclaration.prototype.transpileAssertions = function(transpiler) {
         transpiler.append("success &= true;").dedent();
         transpiler.append("else {").indent();
         transpiler.append("success = false;").newLine();
-        transpiler.printTestName(this.name).append('failed while verifying: ')
-            .append(assertion.getExpected(transpiler.context, this.dialect))
-            .append(', found: " + ');
+        transpiler.printTestName(this.name).append('failed while verifying: ');
+        transpiler.escape();
+        transpiler.append(assertion.getExpected(transpiler.context, this.dialect, transpiler.escapeMode));
+        transpiler.unescape();
+        transpiler.append(", found: ' + ");
+        transpiler.escape();
         assertion.transpileFound(transpiler, this.dialect);
-        transpiler.append(');');
+        transpiler.unescape();
+        transpiler.append(");");
         transpiler.dedent();
         transpiler.append("}").newLine();
     }, this);
-    transpiler.append("if (success)").indent().printTestName(this.name).append('successful");').dedent();
+    transpiler.append("if (success)").indent().printTestName(this.name).append("successful');").dedent();
     transpiler.dedent();
     transpiler.append("} catch (e) {");
     transpiler.indent();
-    transpiler.printTestName(this.name).append('failed with error: " + e.name);');
+    transpiler.printTestName(this.name).append("failed with error: ' + e.name);");
+    transpiler.append("process.stderr.write(e.stack);").newLine();
     transpiler.dedent();
     transpiler.append("}");
     transpiler.dedent();
@@ -169,14 +174,14 @@ TestMethodDeclaration.print = function(msg) {
 
 TestMethodDeclaration.prototype.printMissingError = function(context, expected, actual)
 {
-    var msg = this.name + " test failed while expecting: " + expected + ", found: " + actual
+    var msg = this.name + " test failed while expecting: " + expected + ", found: " + actual;
     TestMethodDeclaration.print(msg);
 };
 
 
 TestMethodDeclaration.prototype.printFailedAssertion = function(context, expected, actual)
 {
-    var msg = this.name + " test failed while verifying: " + expected + ", found: " + actual
+    var msg = this.name + " test failed while verifying: " + expected + ", found: " + actual;
     TestMethodDeclaration.print(msg);
 };
 

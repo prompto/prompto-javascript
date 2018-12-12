@@ -7,7 +7,9 @@ var BaseParserTest = require("./BaseParserTest");
 var getResource = BaseParserTest.getResource;
 var checkSameOutput = BaseParserTest.checkSameOutput;
 var execute = BaseParserTest.execute;
+var executeTest = BaseParserTest.executeTest;
 var interpret = BaseParserTest.interpret;
+var interpretTest = prompto.runtime.Interpreter.interpretTest;
 
 var Out = require("../runtime/utils/Out").Out;
 
@@ -179,11 +181,11 @@ exports.listLibraryFiles = function(libraryName) {
 
 
 exports.runInterpretedTests = function(test, fileName) {
-    runTests(test, fileName, prompto.runtime.Interpreter.interpretTest);
+    runTests(test, fileName, interpretTest);
 }
 
 exports.runTranspiledTests = function(test, fileName) {
-    runTests(test, fileName, prompto.runtime.Interpreter.interpretTest);
+    runTests(test, fileName, executeTest);
 }
 
 function runTests(test, fileName, runner) {

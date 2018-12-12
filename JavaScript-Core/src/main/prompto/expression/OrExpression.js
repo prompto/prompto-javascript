@@ -84,8 +84,9 @@ OrExpression.prototype.interpretAssert = function(context, test) {
     return false;
 };
 
-OrExpression.prototype.getExpected = function(context, dialect) {
+OrExpression.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(dialect, context);
+    writer.escapeMode = escapeMode;
     this.toDialect(writer);
     return writer.toString();
 };

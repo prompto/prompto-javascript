@@ -40,6 +40,16 @@ DateTimeType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+DateTimeType.prototype.declare = function(transpiler) {
+    transpiler.register(DateTime);
+};
+
+
+DateTimeType.prototype.transpile = function(transpiler) {
+    transpiler.append('DateTime');
+};
+
+
 DateTimeType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
     if (other === PeriodType.instance) {
         left.declare(transpiler);

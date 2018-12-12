@@ -9,6 +9,10 @@ Object.defineProperty(Buffer.prototype, "text", {
     }
 });
 
+Buffer.prototype.getText = function() {
+    return this.data;
+};
+
 Buffer.prototype.isReadable = function() {
     return true;
 };

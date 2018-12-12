@@ -25,6 +25,14 @@ UUIDType.prototype.convertJavaScriptValueToPromptoValue = function(context, valu
     }
 };
 
+UUIDType.prototype.declare = function(transpiler) {
+    transpiler.register(UUID);
+};
+
+UUIDType.prototype.transpile = function(transpiler) {
+    transpiler.append("Uuid");
+};
+
 UUIDType.instance = new UUIDType();
 
 exports.UUIDType = UUIDType;

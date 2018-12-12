@@ -29,6 +29,16 @@ VersionType.prototype.checkCompare = function(context, other) {
 	}
 };
 
+
+VersionType.prototype.declare = function(transpiler) {
+    transpiler.register(Version);
+};
+
+
+VersionType.prototype.transpile = function(transpiler) {
+    transpiler.append('Version')
+};
+
 VersionType.prototype.declareCompare = function(context, other) {
     // nothing to do
 };

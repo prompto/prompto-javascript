@@ -22,7 +22,8 @@ PeriodLiteral.prototype.declare = function(transpiler) {
 
 
 PeriodLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("Period.parse(").append(this.text).append(")");
+	var text = this.escapedText(transpile.escapeMode);
+	transpiler.append("Period.parse(").append(text).append(")");
 };
 
 exports.PeriodLiteral = PeriodLiteral;

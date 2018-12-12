@@ -30,6 +30,17 @@ PeriodType.prototype.checkAdd = function(context, other, tryReverse) {
 	}
 };
 
+
+PeriodType.prototype.declare = function(transpiler) {
+    transpiler.register(Period);
+};
+
+
+PeriodType.prototype.transpile = function(transpiler) {
+    transpiler.append('Period')
+};
+
+
 PeriodType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
     if(other === PeriodType.instance) {
         left.declare(transpiler);

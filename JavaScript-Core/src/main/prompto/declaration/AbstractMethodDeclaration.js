@@ -30,6 +30,10 @@ AbstractMethodDeclaration.prototype.declare = function(transpiler) {
     this.declareArguments(transpiler);
 };
 
+AbstractMethodDeclaration.prototype.transpile = function(transpiler) {
+    // nothing to do
+};
+
 AbstractMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("abstract def ");
     writer.append(this.name);

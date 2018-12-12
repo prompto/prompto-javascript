@@ -53,8 +53,13 @@ CategoryType.prototype.toDialect = function(writer) {
 
 
 CategoryType.prototype.declare = function(transpiler) {
-    var decl = this.getDeclaration(transpiler.context);
-    decl.declare(transpiler);
+    if(this.name==="Any") {
+        var Any = require("../intrinsic/Any").Any;
+        transpiler.require(Any);
+    } else  {
+        var decl = this.getDeclaration(transpiler.context);
+        decl.declare(transpiler);
+    }
 };
 
 CategoryType.prototype.transpile = function(transpiler) {

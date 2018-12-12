@@ -5,6 +5,7 @@ var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var ListValue = require("../value/ListValue").ListValue;
 var Variable = require("../runtime/Variable").Variable;
+var List = require("../intrinsic/List").List;
 
 exports.resolve = function() {
     IntegerType = require("./IntegerType").IntegerType;
@@ -26,7 +27,13 @@ ListType.prototype.withItemType = function(itemType) {
 
 
 ListType.prototype.declare = function(transpiler) {
-    // nothing to do
+    transpiler.register(List);
+    this.itemType.declare(transpiler);
+};
+
+
+ListType.prototype.transpile = function(transpiler) {
+    transpiler.append('List')
 };
 
 

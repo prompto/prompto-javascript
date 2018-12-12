@@ -222,14 +222,14 @@ exports.execute = function(decls, methodName, args) {
     decls.check(context);
     if(context.hasTests()) {
         for(var test in context.tests) {
-            executeTest(context, test);
+            exports.executeTest(context, test);
         }
     } else {
-        executeMethod(context, methodName, args);
+        exports.executeMethod(context, methodName, args);
     }
 };
 
-function executeTest(context, testName) {
+exports.executeTest = function(context, testName) {
     prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
     var testMethod = context.getTestDeclaration(testName);
     var js = prompto.runtime.Transpiler.transpileTest(context, testMethod);
@@ -239,7 +239,7 @@ function executeTest(context, testName) {
     fn();
 }
 
-function executeMethod(context, methodName, cmdLineArgs) {
+exports.executeMethod = function(context, methodName, cmdLineArgs) {
     prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
     methodName = methodName || "main";
     var method = locateMethod(context, methodName, cmdLineArgs);

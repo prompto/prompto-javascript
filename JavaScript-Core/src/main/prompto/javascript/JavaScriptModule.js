@@ -113,7 +113,9 @@ JavaScriptModule.prototype.transpileWidget = function(transpiler) {
 };
 
 JavaScriptModule.prototype.transpile = function(transpiler, name) {
-    if(this.transpile_webpack(transpiler, name))
+    if(this.transpile_intrinsic(transpiler, name))
+        return;
+    else if(this.transpile_webpack(transpiler, name))
         return;
     else if(this.transpile_module(transpiler, name))
         return;
@@ -127,6 +129,10 @@ JavaScriptModule.prototype.transpile = function(transpiler, name) {
         return;
     else
         throw new SyntaxError("Cannot locate module: " + this.toString());
+};
+
+JavaScriptModule.prototype.transpile_intrinsic = function(transpiler, name) {
+    return this.ids[0]==="prompto" && this.ids[1]==="intrinsic";
 };
 
 JavaScriptModule.prototype.transpile_webpack = function(transpiler, name) {
@@ -167,7 +173,7 @@ JavaScriptModule.prototype.transpile_module = function(transpiler, name) {
             return true;
         }
     } catch (e) {
-        return null;
+        return false;
     }
 };
 

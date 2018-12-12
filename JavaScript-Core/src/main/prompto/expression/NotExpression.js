@@ -77,8 +77,9 @@ NotExpression.prototype.interpretAssert = function(context, test) {
 };
 
 
-NotExpression.prototype.getExpected = function(context, dialect) {
+NotExpression.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(dialect, context);
+    writer.escapeMode = escapeMode;
     this.toDialect(writer);
     return writer.toString();
 };

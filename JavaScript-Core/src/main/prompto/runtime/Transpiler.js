@@ -4,6 +4,8 @@ function Transpiler(context) {
     this.context = context;
     this.declared = new Set();
     this.required = new Set();
+    this.registered = new Set();
+    this.escapeMode = 0;
     this.lines = [];
     this.line = "";
     this.indents = "";
@@ -12,6 +14,7 @@ function Transpiler(context) {
 
 Transpiler.prototype.toString = function() {
     this.appendAllRequired();
+    this.appendAllRegistered();
     this.appendAllDeclared();
     return this.lines.join("\n");
 };
@@ -21,6 +24,8 @@ Transpiler.prototype.copyTranspiler = function(context) {
     var transpiler = new Transpiler(context);
     transpiler.declared = this.declared;
     transpiler.required = this.required;
+    transpiler.registered = this.registered;
+    transpiler.escapeMode = this.escapeMode;
     transpiler.lines = this.lines;
     transpiler.line = this.line;
     transpiler.indents = this.indents;
@@ -81,6 +86,7 @@ Transpiler.prototype.flush = function() {
     if(this.parent) {
         this.parent.line = this.line;
         this.parent.indents = this.indents;
+        this.parent.escapeMode = this.escapeMode;
     }
 };
 
@@ -128,6 +134,20 @@ Transpiler.prototype.appendAllRequired = function() {
     }, this);
 };
 
+
+Transpiler.prototype.register = function(f) {
+    this.required.add(f);
+    this.registered.add(f);
+};
+
+
+Transpiler.prototype.appendAllRegistered = function() {
+    this.registered.forEach(function(f) {
+        this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
+    }, this);
+};
+
+
 Transpiler.prototype.getTranspiled = function(object) {
     if(object===null)
         return "null";
@@ -153,7 +173,10 @@ Transpiler.prototype.appendOneRequired = function(fn) {
     }
     Object.keys(fn.prototype).forEach(function (key) {
         var value = key==="constructor" ? fn.name : fn.prototype[key].toString();
-        this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
+        if(value.indexOf("native code")<0)
+            this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
+        else // for now assume this is a redirect on the same type
+            this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
     }, this);
     Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
         var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
@@ -183,6 +206,16 @@ Transpiler.prototype.trimLast = function(count) {
 Transpiler.prototype.newLine = function() {
     this.lines.push(this.line);
     this.line = this.indents;
+    return this;
+};
+
+Transpiler.prototype.escape = function() {
+    this.escapeMode++;
+    return this;
+};
+
+Transpiler.prototype.unescape = function() {
+    this.escapeMode--;
     return this;
 };
 
@@ -383,6 +416,8 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
     transpiler.lines.push("String.prototype.indexOf1Based = function(value) { return 1 + this.indexOf(value); }");
+    transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; }");
+    transpiler.lines.push("intrinsic = {}");
     return transpiler;
 }
 
@@ -399,7 +434,7 @@ Transpiler.transpileTest = function(context, testMethod) {
 };
 
 Transpiler.prototype.printTestName = function(testName) {
-    this.append('print("\\"').append(testName.substring(1, testName.length - 1)).append('\\" test ');
+    this.append("print('").append(testName).append(' test ');
     return this;
 };
 

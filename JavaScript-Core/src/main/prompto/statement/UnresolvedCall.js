@@ -72,8 +72,9 @@ UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclarati
     }
 };
 
-UnresolvedCall.prototype.getExpected = function(context, dialect) {
+UnresolvedCall.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(this.dialect, context);
+    writer.escapeMode = escapeMode;
     this.toDialect(writer);
     return writer.toString();
 };

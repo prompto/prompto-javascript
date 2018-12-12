@@ -287,8 +287,9 @@ MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) 
     }
 };
 
-MethodCall.prototype.getExpected = function(context, dialect) {
+MethodCall.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(this.dialect, context);
+    writer.escapeMode = escapeMode;
     this.toDialect(writer);
     return writer.toString();
 };
