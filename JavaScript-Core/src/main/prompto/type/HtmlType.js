@@ -18,6 +18,16 @@ HtmlType.prototype.isAssignableFrom = function(context, other) {
         return NativeType.prototype.isAssignableFrom.call(this, context, other);
 };
 
+HtmlType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
+HtmlType.prototype.transpile = function(transpiler) {
+    transpiler.append('Html');
+};
+
+
 HtmlType.instance = new HtmlType();
 
 exports.HtmlType = HtmlType;

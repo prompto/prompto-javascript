@@ -1,5 +1,6 @@
 var NativeType = require("./NativeType").NativeType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var Any = require("../intrinsic/Any").Any;
 
 function AnyType() {
  	NativeType.call(this, new Identifier("any"));
@@ -15,6 +16,16 @@ AnyType.instance = new AnyType();
 
 AnyType.prototype.checkItem = function(context, item) {
 	return AnyType.instance; // required to support Document items
+};
+
+
+AnyType.prototype.declare = function(transpiler) {
+    transpiler.register(Any);
+};
+
+
+AnyType.prototype.transpile = function(transpiler) {
+    transpiler.append('Any');
 };
 
 

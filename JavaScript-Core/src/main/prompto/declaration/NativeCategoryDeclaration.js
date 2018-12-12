@@ -114,6 +114,8 @@ NativeCategoryDeclaration.prototype.getBinding = function(fail) {
 
 NativeCategoryDeclaration.prototype.declare = function(transpiler) {
     transpiler.declare(this);
+    if(this.name==="Any")
+        transpiler.register(require("../intrinsic/Any").Any);
 };
 
 NativeCategoryDeclaration.prototype.transpile = function(transpiler) {

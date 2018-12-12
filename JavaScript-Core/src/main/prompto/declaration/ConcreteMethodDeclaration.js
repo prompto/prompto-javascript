@@ -174,6 +174,15 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
 };
 
 
+ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
+    this.registerArguments(transpiler.context);
+    this.registerCodeArguments(transpiler.context);
+    this.transpileProlog(transpiler);
+    this.statements.transpile(transpiler);
+    this.transpileEpilog(transpiler);
+};
+
+
 ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
     this.declareArguments(transpiler);
     transpiler = transpiler.newChildTranspiler();
@@ -182,13 +191,6 @@ ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
 };
 
 
-ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
-    this.registerArguments(transpiler.context);
-    this.registerCodeArguments(transpiler.context);
-    this.transpileProlog(transpiler);
-    this.statements.transpile(transpiler);
-    this.transpileEpilog(transpiler);
-};
 
 ConcreteMethodDeclaration.prototype.registerCodeArguments = function(context) {
     if(!this.codeArguments)

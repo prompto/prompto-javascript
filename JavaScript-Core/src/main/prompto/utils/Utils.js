@@ -2,7 +2,7 @@ function equalObjects(o1, o2) {
     if(Object.is(o1, o2))
         return true;
     else
-        return o1.equals && o1.equals(o2);
+        return o1.equals ? o1.equals(o2) : false;
 
 }
 

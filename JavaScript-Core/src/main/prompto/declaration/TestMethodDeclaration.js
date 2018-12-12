@@ -99,14 +99,14 @@ TestMethodDeclaration.prototype.transpileExpectedError = function(transpiler) {
     transpiler.append("try {");
     transpiler.indent();
     this.statements.transpile(transpiler);
-    transpiler.printTestName(this.name).append("failed while expecting: ").append(this.error.name).append(', found: no error");');
+    transpiler.printTestName(this.name).append("failed while expecting: ").append(this.error.name).append(", found: no error');");
     transpiler.dedent();
     transpiler.append("} catch (e) {");
     transpiler.indent();
     transpiler.append("if(e instanceof ").append(NativeErrorNames[this.error.name]).append(") {").indent();
-    transpiler.printTestName(this.name).append('successful");').dedent();
+    transpiler.printTestName(this.name).append("successful');").dedent();
     transpiler.append("} else {").indent();
-    transpiler.printTestName(this.name).append('failed while expecting: ').append(this.error.name).append(', found: " + translateError(e));').dedent();
+    transpiler.printTestName(this.name).append('failed while expecting: ').append(this.error.name).append(", found: ' + translateError(e));").dedent();
     transpiler.append("}");
     transpiler.dedent();
     transpiler.append("}");
