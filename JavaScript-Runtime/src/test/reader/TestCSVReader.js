@@ -1,4 +1,7 @@
 var csvIterate = require("../../main/prompto/reader/CSVReader").csvIterate;
+intrinsic = {
+    Document: require("../../../../JavaScript-Core/src/main/prompto/intrinsic/Document").Document
+};
 
 exports.testNullRetursnEmptyIterator = function(test) {
     var iter = csvIterate(null, ',', '"');
