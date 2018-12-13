@@ -53,7 +53,7 @@ BooleanType.prototype.declare = function(transpiler) {
 
 
 BooleanType.prototype.transpile = function(transpiler) {
-    transpiler.append('"Boolean"')
+    transpiler.append('"Boolean"');
 };
 
 BooleanType.prototype.transpileSorted = function(transpiler, desc, key) {

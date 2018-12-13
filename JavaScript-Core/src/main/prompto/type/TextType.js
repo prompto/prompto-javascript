@@ -49,7 +49,7 @@ TextType.prototype.declare = function(transpiler) {
 
 
 TextType.prototype.transpile = function(transpiler) {
-    transpiler.append('"Text"')
+    transpiler.append('"Text"');
 };
 
 
