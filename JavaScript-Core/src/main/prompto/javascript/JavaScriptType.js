@@ -135,13 +135,12 @@ JavaScriptType.prototype.convertDocument = function(context, value, klass, retur
     var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
     if(maybeDoc && (klass==="object" || klass==="Document")) {
         var self = this;
-        var itemType = returnType.itemType;
         var doc = new DocumentValue();
         for(var key in value) {
             if(value.hasOwnProperty(key)) {
                 var item = value[key];
                 klass = getTypeName(item);
-                item = self.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
+                item = self.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
                 doc.setMember(context, new Identifier(key.toString()), item);
             }
         }
