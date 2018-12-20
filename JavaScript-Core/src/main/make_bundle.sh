@@ -1,3 +1,3 @@
 webpack
-SERVER_DIR=../../../../prompto-platform/Server/src/main/resources/js/lib
-gzip -c $SERVER_DIR/prompto.core.bundle.js > $SERVER_DIR/prompto.core.bundle.js.gz
+FACTORY_DIR=../../../../prompto-factory/CodeFactory/src/main/resources/js/lib
+gzip -c $FACTORY_DIR/prompto.core.bundle.js > $FACTORY_DIR/prompto.core.bundle.js.gz
