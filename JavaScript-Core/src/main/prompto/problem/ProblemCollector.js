@@ -1,16 +1,12 @@
-/**
- * Created by ericvergnaud on 14/09/15.
- */
-
-var ProblemListener = require('./ProblemListener').ProblemListener;
+var antlr4 = require('antlr4/index');
 
 function ProblemCollector() {
-    ProblemListener.call(this);
+    antlr4.error.ErrorListener.call(this);
     this.problems = [];
     return this;
 }
 
-ProblemCollector.prototype = Object.create(ProblemListener.prototype);
+ProblemCollector.prototype = Object.create(antlr4.error.ErrorListener.prototype);
 ProblemCollector.prototype.constructor = ProblemCollector;
 
 ProblemCollector.prototype.collectProblem = function(problem) {
