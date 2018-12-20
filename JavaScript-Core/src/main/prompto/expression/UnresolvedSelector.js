@@ -97,9 +97,9 @@ UnresolvedSelector.prototype.resolveMethod = function(context, assignments) {
 
 UnresolvedSelector.prototype.tryResolveMember = function(context) {
     var listener = context.problemListener;
-    context.problemListener = new ProblemListener();
-    try {
-        var member = new MemberSelector(this.parent, this.id);
+     try {
+         context.problemListener = new ProblemListener();
+         var member = new MemberSelector(this.parent, this.id);
         member.check(context);
         return member;
     } catch (e) {
@@ -115,8 +115,8 @@ UnresolvedSelector.prototype.tryResolveMember = function(context) {
 
 UnresolvedSelector.prototype.tryResolveMethod = function(context, assignments) {
     var listener = context.problemListener;
-    context.problemListener = new ProblemListener();
     try {
+        context.problemListener = new ProblemListener();
         var resolvedParent = this.parent;
         if (resolvedParent instanceof UnresolvedIdentifier) {
             resolvedParent.checkMember(context);

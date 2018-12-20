@@ -60,16 +60,19 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
 		return;
     // ignore problems during resolution
     var listener = context.problemListener;
-    context.problemListener = new ProblemCollector();
-    // try out various solutions
-	var named = context.getRegisteredDeclaration(this.name);
-	if(named instanceof AttributeDeclaration) {
-		this.resolved = new AttributeArgument(this.id);
-	} else if(named instanceof MethodDeclarationMap) {
-		this.resolved = new MethodArgument(this.id);
-	}
-    // restore listener
-    context.problemListener = listener;
+    try {
+        context.problemListener = new ProblemCollector();
+        // try out various solutions
+        var named = context.getRegisteredDeclaration(this.name);
+        if (named instanceof AttributeDeclaration) {
+            this.resolved = new AttributeArgument(this.id);
+        } else if (named instanceof MethodDeclarationMap) {
+            this.resolved = new MethodArgument(this.id);
+        }
+    } finally {
+        // restore listener
+        context.problemListener = listener;
+    }
     if(this.resolved==null)
         context.problemListener.reportUnknownVariable(this.id);
 };
