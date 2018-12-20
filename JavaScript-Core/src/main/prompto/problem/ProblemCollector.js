@@ -138,12 +138,30 @@ ProblemCollector.prototype.reportInvalidCopySource = function(section) {
 };
 
 
+ProblemCollector.prototype.reportNotAResource = function(section) {
+    var problem = this.readSection(section);
+    problem.type = "error";
+    problem.message = "Not a resource";
+    this.collectProblem(problem);
+};
+
+
+ProblemCollector.prototype.reportNotAResourceContext = function(section) {
+    var problem = this.readSection(section);
+    problem.type = "error";
+    problem.message = "Not a resource context";
+    this.collectProblem(problem);
+};
+
+
+
 ProblemCollector.prototype.reportIncompatibleTypes = function(section, left, right) {
     var problem = this.readSection(section);
     problem.type = "error";
     problem.message = "Type " + left.name + " is not compatible with " + right.name;
     this.collectProblem(problem);
 };
+
 
 
 exports.ProblemCollector = ProblemCollector;
