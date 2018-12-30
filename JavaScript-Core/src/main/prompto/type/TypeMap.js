@@ -4,7 +4,7 @@ function TypeMap() {
 	return this;
 }
 
-TypeMap.prototype.inferType = function(context) {
+TypeMap.prototype.inferType = function(context, section) {
 	var keys = Object.keys(this);
 	if(keys.length===0) {
 		return VoidType.instance;
@@ -20,14 +20,14 @@ TypeMap.prototype.inferType = function(context) {
 		} else if(common.isAssignableFrom(context, type)) {
 			type = common;
 		} else {
-			throw new SyntaxError("Incompatible types: " + type.name + " and " + common.name);
+			context.problemListener.reportIncompatibleTypes(section, common, type);
 		}
 	}
-	// second pass: check compatible
+	// second pass: check compatibility
 	keys.forEach(function(k) {
         var t = this[k];
 		if(t!=type && !type.isAssignableFrom(context, t)) {
-			throw new SyntaxError("Incompatible types: " + type.name + " and " + t.name);
+            context.problemListener.reportIncompatibleTypes(section, type, t);
 		}
 	}, this);
 	return type;

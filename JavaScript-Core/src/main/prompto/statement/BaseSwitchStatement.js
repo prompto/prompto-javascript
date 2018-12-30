@@ -40,23 +40,27 @@ BaseSwitchStatement.prototype.checkSwitchCasesType = function(context) {
 
 BaseSwitchStatement.prototype.checkReturnType = function(context) {
 	var types = new TypeMap();
-	this.collectReturnTypes(context, types);
-	return types.inferType(context);
+	var section = this.collectReturnTypes(context, types);
+	return types.inferType(context, section);
 };
 
 BaseSwitchStatement.prototype.collectReturnTypes = function(context, types) {
+	var section = null;
     this.switchCases.forEach(function(switchCase) {
 		var type = switchCase.checkReturnType(context);
 		if(type!=VoidType.instance) {
+            section = switchCase;
 			types[type.name] = type;
 		}
 	});
 	if(this.defaultCase!=null) {
 		var type = this.defaultCase.check(context, null);
 		if(type!=VoidType.instance) {
+            section = switchCase;
 			types[type.name] = type;
 		}
 	}
+	return section;
 };
 
 BaseSwitchStatement.prototype.interpretSwitch = function(context, switchValue, toThrow) {

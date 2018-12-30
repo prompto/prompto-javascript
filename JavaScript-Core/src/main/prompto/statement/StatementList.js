@@ -41,6 +41,7 @@ StatementList.prototype.checkStatements = function(context, returnType, nativeOn
         }
         return VoidType.instance;
     } else {
+        var section = null;
 	    var types = new TypeMap();
         if(nativeOnly) {
             this.forEach(function (stmt) {
@@ -49,6 +50,7 @@ StatementList.prototype.checkStatements = function(context, returnType, nativeOn
                     if(!stmt.canReturn())
                         type = VoidType.instance;
                     if(type!==VoidType.instance) {
+                        section = stmt;
                         types[type.name] = type;
                     }
                 }
@@ -57,11 +59,12 @@ StatementList.prototype.checkStatements = function(context, returnType, nativeOn
             this.forEach(function (stmt) {
                 var type = stmt.check(context);
                 if(type!==VoidType.instance) {
+                    section = stmt;
                     types[type.name] = type;
                 }
             });
         }
-    	return types.inferType(context);
+    	return types.inferType(context, section);
     }
 };
 
