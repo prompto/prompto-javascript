@@ -74,8 +74,7 @@ EnumeratedCategoryDeclaration.prototype.getType = function(context) {
 };
 
 EnumeratedCategoryDeclaration.prototype.toODialect = function(writer) {
-    writer.append("enumerated category ");
-    writer.append(this.name);
+    writer.append("enumerated category ").append(this.name);
     if(this.attributes!=null) {
         writer.append('(');
         this.attributes.toDialect(writer, true);
@@ -85,20 +84,16 @@ EnumeratedCategoryDeclaration.prototype.toODialect = function(writer) {
         writer.append(" extends ");
         this.derivedFrom.toDialect(writer, true);
     }
-    writer.append(" {\n");
-    writer.indent();
+    writer.append(" {").newLine().indent();
     this.symbols.forEach(function(symbol) {
         symbol.toDialect(writer);
-        writer.append(";\n");
+        writer.append(";").newLine();
     });
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as enumerated ");
+    writer.append("define ").append(this.name).append(" as enumerated ");
     if(this.derivedFrom!=null)
         this.derivedFrom.toDialect(writer, true);
     else
@@ -110,21 +105,19 @@ EnumeratedCategoryDeclaration.prototype.toEDialect = function(writer) {
             writer.append(" with attributes ");
         this.attributes.toDialect(writer, true);
         if(this.symbols!=null && this.symbols.length>0)
-            writer.append(", and symbols:\n");
+            writer.append(", and symbols:").newLine();
     } else
-        writer.append(" with symbols:\n");
+        writer.append(" with symbols:").newLine();
     writer.indent();
     this.symbols.forEach(function(symbol) {
         symbol.toDialect(writer);
-        writer.append("\n");
+        writer.newLine();
     });
     writer.dedent();
 };
 
 EnumeratedCategoryDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("enum ");
-    writer.append(this.name);
-    writer.append("(");
+    writer.append("enum ").append(this.name).append("(");
     if(this.derivedFrom!=null) {
         this.derivedFrom.toDialect(writer, false);
         if(this.attributes!=null && this.attributes.length>0)
@@ -132,11 +125,10 @@ EnumeratedCategoryDeclaration.prototype.toMDialect = function(writer) {
     }
     if(this.attributes!=null && this.attributes.length>0)
         this.attributes.toDialect(writer, false);
-    writer.append("):\n");
-    writer.indent();
+    writer.append("):").newLine().indent();
     this.symbols.forEach(function(symbol) {
         symbol.toDialect(writer);
-        writer.append("\n");
+        writer.newLine();
     });
     writer.dedent();
 };

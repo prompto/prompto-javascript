@@ -107,33 +107,27 @@ ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
 
 
 ConcreteMethodDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("def ");
-    writer.append(this.name);
-    writer.append(" (");
+    writer.append("def ").append(this.name).append(" (");
     this.args.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
         this.returnType.toDialect(writer);
     }
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
 
 ConcreteMethodDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as method ");
+    writer.append("define ").append(this.name).append(" as method ");
     this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
         writer.append(" ");
     }
-    writer.append("doing:\n");
-    writer.indent();
+    writer.append("doing:").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -143,15 +137,11 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
         this.returnType.toDialect(writer);
         writer.append(" ");
     }
-    writer.append("method ");
-    writer.append(this.name);
-    writer.append(" (");
+    writer.append("method ").append(this.name).append(" (");
     this.args.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 ConcreteMethodDeclaration.prototype.declare = function(transpiler) {

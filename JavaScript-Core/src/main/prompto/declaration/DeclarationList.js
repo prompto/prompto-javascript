@@ -86,7 +86,7 @@ DeclarationList.prototype.toDialect = function(writer) {
             });
         }
         decl.toDialect(writer);
-        writer.append("\n");
+        writer.newLine();
     });
 };
 

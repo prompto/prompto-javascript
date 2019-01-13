@@ -76,7 +76,7 @@ AttributeDeclaration.prototype.toMDialect = function(writer) {
     writer.append(this.name);
     writer.append(" ( ");
     this.type.toDialect(writer);
-    writer.append(" ):\n");
+    writer.append(" ):").newLine();
     writer.indent();
     if (this.constraint != null)
         this.constraint.toDialect(writer);

@@ -29,8 +29,7 @@ AtomicSwitchCase.prototype.caseToPDialect = function(writer) {
 AtomicSwitchCase.prototype.caseToODialect = function(writer) {
     writer.append("case ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -39,19 +38,16 @@ AtomicSwitchCase.prototype.caseToODialect = function(writer) {
 AtomicSwitchCase.prototype.catchToODialect = function(writer) {
     writer.append("catch (");
     this.expression.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("} ");
+    writer.dedent().append("} ");
 };
 
 
 AtomicSwitchCase.prototype.caseToEDialect = function(writer) {
     writer.append("when ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -60,8 +56,7 @@ AtomicSwitchCase.prototype.caseToEDialect = function(writer) {
 AtomicSwitchCase.prototype.catchToPDialect = function(writer) {
     writer.append("except ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };

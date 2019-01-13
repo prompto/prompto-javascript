@@ -70,16 +70,14 @@ NativeMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def ");
     if(this.memberOf==null)
         writer.append("native ");
-    writer.append(this.name);
-    writer.append(" (");
+    writer.append(this.name).append(" (");
     this.args.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
         this.returnType.toDialect(writer);
     }
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -91,24 +89,18 @@ NativeMethodDeclaration.prototype.toODialect = function(writer) {
     }
     if(this.memberOf==null)
         writer.append("native ");
-    writer.append("method ");
-    writer.append(this.name);
-    writer.append(" (");
+    writer.append("method ").append(this.name).append(" (");
     this.args.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.statements.forEach(function(stmt) {
         stmt.toDialect(writer);
         writer.newLine();
     });
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 NativeMethodDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as ");
+    writer.append("define ").append(this.name).append(" as ");
     if(this.memberOf==null)
         writer.append("native ");
     writer.append("method ");
@@ -118,11 +110,9 @@ NativeMethodDeclaration.prototype.toEDialect = function(writer) {
         this.returnType.toDialect(writer);
         writer.append(" ");
     }
-    writer.append("doing:\n");
-    writer.indent();
+    writer.append("doing:").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("\n");
+    writer.dedent().newLine();
 };
 
 exports.NativeMethodDeclaration = NativeMethodDeclaration;

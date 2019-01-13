@@ -10,29 +10,19 @@ SetterMethodDeclaration.prototype = Object.create(ConcreteMethodDeclaration.prot
 SetterMethodDeclaration.prototype.contructor = SetterMethodDeclaration;
 
 SetterMethodDeclaration.prototype.toODialect = function(writer) {
-    writer.append("setter ");
-    writer.append(this.name);
-    writer.append(" {\n");
-    writer.indent();
+    writer.append("setter ").append(this.name).append(" {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 SetterMethodDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as setter doing:\n");
-    writer.indent();
+    writer.append("define ").append(this.name).append(" as setter doing:").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
 
 SetterMethodDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("def ");
-    writer.append(this.name);
-    writer.append(" setter():\n");
-    writer.indent();
+    writer.append("def ").append(this.name).append(" setter():").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };

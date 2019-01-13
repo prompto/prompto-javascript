@@ -17,8 +17,7 @@ NativeCategoryBindingList.prototype.toDialect = function(writer) {
 };
 
 NativeCategoryBindingList.prototype.toEDialect = function(writer) {
-    writer.append("define category bindings as:\n");
-    writer.indent();
+    writer.append("define category bindings as:").newLine().indent();
     this.forEach(function(binding) {
         binding.toDialect(writer);
         writer.newLine();
@@ -27,8 +26,7 @@ NativeCategoryBindingList.prototype.toEDialect = function(writer) {
 }
 
 NativeCategoryBindingList.prototype.toMDialect = function(writer) {
-    writer.append("def category bindings:\n");
-    writer.indent();
+    writer.append("def category bindings:").newLine().indent();
     this.forEach(function(binding) {
         binding.toDialect(writer);
         writer.newLine();
@@ -37,15 +35,12 @@ NativeCategoryBindingList.prototype.toMDialect = function(writer) {
 }
 
 NativeCategoryBindingList.prototype.toODialect = function(writer) {
-    writer.append("category bindings {\n");
-    writer.indent();
+    writer.append("category bindings {").newLine().indent();
     this.forEach(function(binding) {
         binding.toDialect(writer);
-        writer.append(';');
-        writer.newLine();
+        writer.append(';').newLine();
     });
-    writer.dedent();
-    writer.append("}");
+    writer.dedent().append("}");
 }
 
 exports.NativeCategoryBindingList = NativeCategoryBindingList;

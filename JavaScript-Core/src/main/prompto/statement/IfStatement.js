@@ -205,8 +205,7 @@ IfElement.prototype.toEDialect = function(writer) {
         writer.append("if ");
         this.condition.toDialect(writer);
     }
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -220,7 +219,7 @@ IfElement.prototype.toODialect = function(writer) {
     }
     var curly = this.statements!=null && this.statements.length>1;
     if(curly)
-        writer.append("{\n");
+        writer.append("{").newLine();
     else
         writer.newLine();
     writer.indent();

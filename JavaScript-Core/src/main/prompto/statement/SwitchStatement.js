@@ -20,30 +20,27 @@ SwitchStatement.prototype.interpret = function(context) {
 SwitchStatement.prototype.toODialect = function(writer) {
     writer.append("switch(");
     this.expression.toDialect(writer);
-    writer.append(") {\n");
+    writer.append(") {").newLine();
     this.switchCases.forEach(function(switchCase) {
         switchCase.caseToODialect(writer);
     });
     if(this.defaultCase!=null) {
-        writer.append("default:\n");
-        writer.indent();
+        writer.append("default:").newLine().indent();
         this.defaultCase.toDialect(writer);
         writer.dedent();
     }
-    writer.append("}\n");
+    writer.append("}").newLine();
 }
 
 SwitchStatement.prototype.toEDialect = function(writer) {
     writer.append("switch on ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.switchCases.forEach(function(switchCase) {
         switchCase.caseToEDialect(writer);
     });
     if(this.defaultCase!=null) {
-        writer.append("otherwise:\n");
-        writer.indent();
+        writer.append("otherwise:").newLine().indent();
         this.defaultCase.toDialect(writer);
         writer.dedent();
     }
@@ -53,14 +50,12 @@ SwitchStatement.prototype.toEDialect = function(writer) {
 SwitchStatement.prototype.toMDialect = function(writer) {
     writer.append("switch on ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.switchCases.forEach(function(switchCase) {
         switchCase.caseToPDialect(writer);
     });
     if(this.defaultCase!=null) {
-        writer.append("otherwise:\n");
-        writer.indent();
+        writer.append("otherwise:").newLine().indent();
         this.defaultCase.toDialect(writer);
         writer.dedent();
     }

@@ -75,8 +75,7 @@ WhileStatement.prototype.toMDialect = function(writer) {
 WhileStatement.prototype.toEDialect = function(writer) {
     writer.append("while ");
     this.condition.toDialect(writer);
-    writer.append(" :\n");
-    writer.indent();
+    writer.append(" :").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -84,11 +83,9 @@ WhileStatement.prototype.toEDialect = function(writer) {
 WhileStatement.prototype.toODialect = function(writer) {
     writer.append("while (");
     this.condition.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 

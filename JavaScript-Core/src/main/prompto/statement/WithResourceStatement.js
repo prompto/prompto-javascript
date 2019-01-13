@@ -55,8 +55,7 @@ WithResourceStatement.prototype.toDialect = function(writer) {
 WithResourceStatement.prototype.toEDialect = function(writer) {
     writer.append("with ");
     this.resource.toDialect(writer);
-    writer.append(", do:\n");
-    writer.indent();
+    writer.append(", do:").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 }
@@ -68,21 +67,18 @@ WithResourceStatement.prototype.toODialect = function(writer) {
     var oneLine = this.statements.length==1 && this.statements[0].isSimple();
     if(!oneLine)
         writer.append(" {");
-    writer.newLine();
-    writer.indent();
+    writer.newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
     if(!oneLine) {
-        writer.append("}");
-        writer.newLine();
+        writer.append("}").newLine();
     }
 }
 
 WithResourceStatement.prototype.toMDialect = function(writer) {
     writer.append("with ");
     this.resource.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 }

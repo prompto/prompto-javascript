@@ -34,44 +34,34 @@ EnumeratedNativeDeclaration.prototype.toDialect = function(writer) {
 
 
 EnumeratedNativeDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("enum ");
-    writer.append(this.name);
-    writer.append('(');
+    writer.append("enum ").append(this.name).append('(');
     this.type.derivedFrom.toDialect(writer);
-    writer.append("):\n");
-    writer.indent();
+    writer.append("):").newLine().indent();
     this.symbols.forEach(function(symbol) {
         symbol.toDialect(writer);
-        writer.append("\n");
+        writer.newLine();
     });
     writer.dedent();
 }
 
 EnumeratedNativeDeclaration.prototype.toODialect = function(writer) {
-    writer.append("enumerated ");
-    writer.append(this.name);
-    writer.append('(');
+    writer.append("enumerated ").append(this.name).append('(');
     this.type.derivedFrom.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.symbols.forEach(function(symbol) {
         symbol.toDialect(writer);
-        writer.append(";\n");
+        writer.append(";").newLine();
     });
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 }
 
 EnumeratedNativeDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as enumerated ");
+    writer.append("define ").append(this.name).append(" as enumerated ");
     this.type.derivedFrom.toDialect(writer);
-    writer.append(" with symbols:\n");
-    writer.indent();
+    writer.append(" with symbols:").newLine().indent();
     this.symbols.forEach(function(symbol) {
         symbol.toDialect(writer);
-        writer.append("\n");
+        writer.newLine();
     });
     writer.dedent();
 };
@@ -91,10 +81,8 @@ EnumeratedNativeDeclaration.prototype.check = function(context, isStart) {
 };
 
 EnumeratedNativeDeclaration.prototype.transpile = function(transpiler) {
-    transpiler.append("function " + this.name + "(name, value) { this.name = name; this.value = value; return this; };");
-    transpiler.newLine();
-    transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };");
-    transpiler.newLine();
+    transpiler.append("function " + this.name + "(name, value) { this.name = name; this.value = value; return this; };").newLine();
+    transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
     this.symbols.forEach(function(symbol) {symbol.initialize(transpiler);});
     var names = this.symbols.map(function(symbol) { return symbol.name; });
     transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);");

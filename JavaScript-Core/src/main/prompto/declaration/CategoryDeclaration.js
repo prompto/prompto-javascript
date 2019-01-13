@@ -187,8 +187,7 @@ CategoryDeclaration.prototype.allToODialect = function(writer, hasBody) {
     if(this.storable)
         writer.append("storable ");
     this.categoryTypeToODialect(writer);
-    writer.append(" ");
-    writer.append(this.name);
+    writer.append(" ").append(this.name);
     if(this.attributes!=null) {
         writer.append('(');
         this.attributes.toDialect(writer, true);
@@ -196,13 +195,9 @@ CategoryDeclaration.prototype.allToODialect = function(writer, hasBody) {
     }
     this.categoryExtensionToODialect(writer);
     if(hasBody) {
-        writer.append(" {\n");
-        writer.newLine();
-        writer.indent();
+        writer.append(" {").newLine().newLine().indent();
         this.bodyToODialect(writer);
-        writer.dedent();
-        writer.append('}');
-        writer.newLine();
+        writer.dedent().append('}').newLine();
     } else
         writer.append(';');
 };
@@ -216,9 +211,7 @@ CategoryDeclaration.prototype.protoToMDialect = function(writer, derivedFrom) {
     if(this.storable)
         writer.append("storable ");
     this.categoryTypeToMDialect(writer);
-    writer.append(" ");
-    writer.append(this.name);
-    writer.append("(");
+    writer.append(" ").append(this.name).append("(");
     if(this.derivedFrom!=null) {
         this.derivedFrom.toDialect(writer, false);
         if(this.attributes!=null)
@@ -226,7 +219,7 @@ CategoryDeclaration.prototype.protoToMDialect = function(writer, derivedFrom) {
     }
     if(this.attributes!=null)
         this.attributes.toDialect(writer, false);
-    writer.append("):\n");
+    writer.append("):").newLine();
 };
 
 

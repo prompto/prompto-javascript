@@ -9,29 +9,19 @@ GetterMethodDeclaration.prototype = Object.create(ConcreteMethodDeclaration.prot
 GetterMethodDeclaration.prototype.contructor = GetterMethodDeclaration;
 
 GetterMethodDeclaration.prototype.toODialect = function(writer) {
-    writer.append("getter ");
-    writer.append(this.name);
-    writer.append(" {\n");
-    writer.indent();
+    writer.append("getter ").append(this.name).append(" {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 GetterMethodDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as getter doing:\n");
-    writer.indent();
+    writer.append("define ").append(this.name).append(" as getter doing:").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
 
 GetterMethodDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("def ");
-    writer.append(this.name);
-    writer.append(" getter():\n");
-    writer.indent();
+    writer.append("def ").append(this.name).append(" getter():").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };

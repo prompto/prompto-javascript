@@ -37,8 +37,7 @@ CollectionSwitchCase.prototype.caseToPDialect = function(writer) {
 CollectionSwitchCase.prototype.caseToODialect = function(writer) {
     writer.append("case in ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 }
@@ -47,8 +46,7 @@ CollectionSwitchCase.prototype.caseToODialect = function(writer) {
 CollectionSwitchCase.prototype.caseToEDialect = function(writer) {
     writer.append("when in ");
     this.expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 }
@@ -57,19 +55,16 @@ CollectionSwitchCase.prototype.caseToEDialect = function(writer) {
 CollectionSwitchCase.prototype.catchToODialect = function(writer) {
     writer.append("catch (");
     this.expression.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("} ");
+    writer.dedent().append("} ");
 }
 
 
 CollectionSwitchCase.prototype.catchToPDialect = function(writer) {
     writer.append("except in ");
     expression.toDialect(writer);
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     statements.toDialect(writer);
     writer.dedent();
 }

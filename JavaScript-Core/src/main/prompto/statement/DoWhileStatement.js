@@ -72,23 +72,19 @@ DoWhileStatement.prototype.toMDialect = function(writer) {
 };
 
 DoWhileStatement.prototype.toEDialect = function(writer) {
-    writer.append("do:\n");
-    writer.indent();
+    writer.append("do:").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("while ");
+    writer.dedent().append("while ");
     this.condition.toDialect(writer);
     writer.newLine();
 };
 
 DoWhileStatement.prototype.toODialect = function(writer) {
-    writer.append("do {\n");
-    writer.indent();
+    writer.append("do {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("} while (");
+    writer.dedent().append("} while (");
     this.condition.toDialect(writer);
-    writer.append(");\n");
+    writer.append(");").newLine();
 };
 
 

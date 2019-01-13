@@ -86,52 +86,39 @@ SwitchErrorStatement.prototype.toDialect = function(writer) {
 };
 
 SwitchErrorStatement.prototype.toODialect = function(writer) {
-    writer.append("try (");
-    writer.append(this.errorId.name);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append("try (").append(this.errorId.name).append(") {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("} ");
+    writer.dedent().append("} ");
     this.switchCases.forEach(function(switchCase) {
         switchCase.catchToODialect(writer);
     });
     if(this.defaultCase!=null) {
-        writer.append("catch(any) {\n");
-        writer.indent();
+        writer.append("catch(any) {").newLine().indent();
         this.defaultCase.toDialect(writer);
-        writer.dedent();
-        writer.append("}");
+        writer.dedent().append("}");
     }
     if(this.alwaysInstructions!=null) {
-        writer.append("finally {\n");
-        writer.indent();
+        writer.append("finally {").newLine().indent();
         this.alwaysInstructions.toDialect(writer);
-        writer.dedent();
-        writer.append("}");
+        writer.dedent().append("}");
     }
     writer.newLine();
 }
 
 SwitchErrorStatement.prototype.toMDialect = function(writer) {
-    writer.append("try ");
-    writer.append(this.errorId.name);
-    writer.append(":\n");
-    writer.indent();
+    writer.append("try ").append(this.errorId.name).append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
     this.switchCases.forEach(function(switchCase) {
         switchCase.catchToPDialect(writer);
     });
     if(this.defaultCase!=null) {
-        writer.append("except:\n");
-        writer.indent();
+        writer.append("except:").newLine().indent();
         this.defaultCase.toDialect(writer);
         writer.dedent();
     }
     if(this.alwaysInstructions!=null) {
-        writer.append("finally:\n");
-        writer.indent();
+        writer.append("finally:").newLine().indent();
         this.alwaysInstructions.toDialect(writer);
         writer.dedent();
     }
@@ -139,24 +126,19 @@ SwitchErrorStatement.prototype.toMDialect = function(writer) {
 }
 
 SwitchErrorStatement.prototype.toEDialect = function(writer) {
-    writer.append("switch on ");
-    writer.append(this.errorId.name);
-    writer.append(" doing:\n");
-    writer.indent();
+    writer.append("switch on ").append(this.errorId.name).append(" doing:").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
     this.switchCases.forEach(function(switchCase) {
         switchCase.catchToEDialect(writer);
     });
     if(this.defaultCase!=null) {
-        writer.append("when any:\n");
-        writer.indent();
+        writer.append("when any:").newLine().indent();
         this.defaultCase.toDialect(writer);
         writer.dedent();
     }
     if(this.alwaysInstructions!=null) {
-        writer.append("always:\n");
-        writer.indent();
+        writer.append("always:").newLine().indent();
         this.alwaysInstructions.toDialect(writer);
         writer.dedent();
     }

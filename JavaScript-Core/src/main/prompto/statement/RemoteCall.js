@@ -36,7 +36,7 @@ RemoteCall.prototype.toDialect = function(writer) {
     this.andThen.toDialect(writer);
     writer = writer.dedent();
     if (writer.dialect == Dialect.O)
-        writer.append("}");
+        writer.append("}").newLine();
 };
 
 

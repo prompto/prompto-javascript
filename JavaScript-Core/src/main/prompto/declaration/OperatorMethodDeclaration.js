@@ -18,33 +18,27 @@ OperatorMethodDeclaration.prototype.memberCheck = function(declaration, context)
 };
 
 OperatorMethodDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("def operator ");
-    writer.append(this.operator.token);
-    writer.append(" (");
+    writer.append("def operator ").append(this.operator.token).append(" (");
     this.args.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
         this.returnType.toDialect(writer);
     }
-    writer.append(":\n");
-    writer.indent();
+    writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
 
 OperatorMethodDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.operator.token);
-    writer.append(" as operator ");
+    writer.append("define ").append(this.operator.token).append(" as operator ");
     this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
         writer.append(" ");
     }
-    writer.append("doing:\n");
-    writer.indent();
+    writer.append("doing:").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent();
 };
@@ -54,15 +48,11 @@ OperatorMethodDeclaration.prototype.toODialect = function(writer) {
         this.returnType.toDialect(writer);
         writer.append(" ");
     }
-    writer.append("operator ");
-    writer.append(this.operator.token);
-    writer.append(" (");
+    writer.append("operator ").append(this.operator.token).append(" (");
     this.args.toDialect(writer);
-    writer.append(") {\n");
-    writer.indent();
+    writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
-    writer.dedent();
-    writer.append("}\n");
+    writer.dedent().append("}").newLine();
 };
 
 exports.OperatorMethodDeclaration = OperatorMethodDeclaration;

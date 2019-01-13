@@ -86,7 +86,7 @@ ConcreteCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) 
 ConcreteCategoryDeclaration.prototype.methodsToMDialect = function(writer) {
     writer.indent();
     if(this.methods==null || this.methods.length==0)
-        writer.append("pass\n");
+        writer.append("pass").newLine();
     else {
         writer.newLine();
         this.methods.forEach(function(method) {
