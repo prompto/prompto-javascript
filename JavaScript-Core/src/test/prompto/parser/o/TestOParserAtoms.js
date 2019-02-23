@@ -46,8 +46,8 @@ OTestParser.prototype.parse_argument_list = function() {
 	return this.value(this.argument_list());
 };
 
-OTestParser.prototype.parse_method_call = function() {
-	return this.value(this.method_call());
+OTestParser.prototype.parse_method_call_statement = function() {
+	return this.value(this.method_call_statement());
 };
 
 OTestParser.prototype.parse_native_method_declaration = function() {
@@ -240,16 +240,16 @@ exports.testList2ArgumentsComma = function(test) {
 exports.testMethodCallExpression = function(test) {
 	var statement = "print (\"person\" + p.name );";
 	var parser = new OTestParser(statement);
-	var ac = parser.parse_method_call();
+	var ac = parser.parse_method_call_statement();
 	test.ok(ac);
 	test.done();
 };
 
 
 exports.testMethodCallWith = function(test) {
-	var statement = "print( value = \"person\" + p.name )";
+	var statement = "print( value = \"person\" + p.name );";
 	var parser = new OTestParser(statement);
-	var mc = parser.parse_method_call();
+	var mc = parser.parse_method_call_statement();
 	test.ok(mc);
 	test.equal("print",mc.callable.name);
 	test.ok(mc.assignments);
@@ -259,7 +259,7 @@ exports.testMethodCallWith = function(test) {
 	test.ok(exp instanceof prompto.expression.PlusExpression);
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     mc.toDialect(writer);
-	test.equal("print(value = \"person\" + p.name)", writer.toString());
+    test.equal("print(value = \"person\" + p.name)", writer.toString());
 	test.done();
 };
 

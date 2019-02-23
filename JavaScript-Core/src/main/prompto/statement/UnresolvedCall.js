@@ -5,6 +5,7 @@ var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
 var MethodExpression = require("../expression/MethodExpression").MethodExpression;
+var SelectorExpression = require("../expression/SelectorExpression").SelectorExpression;
 var MethodArgument = require("../argument/MethodArgument").MethodArgument;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
@@ -170,5 +171,16 @@ UnresolvedCall.prototype.transpile = function(transpiler) {
     this.resolved.transpile(transpiler);
 };
 
+
+UnresolvedCall.prototype.setParent = function(parent) {
+    if(parent) {
+        if(this.callable instanceof UnresolvedIdentifier)
+            this.callable = new MethodSelector(parent, this.callable.id);
+        else if(this.callable instanceof SelectorExpression)
+            this.callable.parent = parent;
+        else
+            throw new Error("Should never happen!");
+    }
+};
 
 exports.UnresolvedCall = UnresolvedCall;

@@ -114,7 +114,10 @@ MPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
 MPromptoBuilder.prototype.exitSelectorExpression = function(ctx) {
 	var parent = this.getNodeValue(ctx.parent);
 	var selector = this.getNodeValue(ctx.selector);
-	selector.parent = parent;
+    if(selector instanceof statement.UnresolvedCall)
+        selector.setParent(parent);
+    else
+    	selector.parent = parent;
 	this.setNodeValue(ctx, selector);
 };
 
@@ -735,15 +738,18 @@ MPromptoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 };
 
 
-MPromptoBuilder.prototype.exitMethod_call = function(ctx) {
-	var method = this.getNodeValue(ctx.method);
+MPromptoBuilder.prototype.exitMethod_call_expression = function(ctx) {
+	var name = this.getNodeValue(ctx.name);
+	var caller = new expression.UnresolvedIdentifier(name);
 	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new statement.UnresolvedCall(method, args));
+	this.setNodeValue(ctx, new statement.UnresolvedCall(caller, args));
 };
 
 
 MPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
+    var parent = this.getNodeValue(ctx.parent);
     var call = this.getNodeValue(ctx.method);
+    call.setParent(parent);
     var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
     if (name!=null || stmts!=null)
@@ -753,28 +759,13 @@ MPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
 };
 
 
-MPromptoBuilder.prototype.exitCallableRoot = function(ctx) {
-    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
-};
-
-
-MPromptoBuilder.prototype.exitCallableSelector = function(ctx) {
-    var parent = this.getNodeValue(ctx.parent);
-    var select = this.getNodeValue(ctx.select);
-    select.parent = parent;
-    this.setNodeValue(ctx, select);
-};
-
-
-MPromptoBuilder.prototype.exitCallableMemberSelector = function(ctx) {
-    var name = this.getNodeValue(ctx.name);
-    this.setNodeValue(ctx, new expression.MemberSelector(null, name));
-};
-
-
-MPromptoBuilder.prototype.exitCallableItemSelector = function(ctx) {
-    var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, new expression.ItemSelector(null, exp));
+MPromptoBuilder.prototype.exitMethodSelector = function(ctx) {
+    var call = this.getNodeValue(ctx.method);
+    if (call.callable instanceof expression.UnresolvedIdentifier) {
+        var id = call.callable.id;
+        call.callable = new expression.UnresolvedSelector(null, id);
+    }
+    this.setNodeValue(ctx, call);
 };
 
 

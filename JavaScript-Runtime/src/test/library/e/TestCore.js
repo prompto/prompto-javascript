@@ -29,11 +29,11 @@ exports.testTranspiledAny = function(test) {
 exports.testInterpretedAttribute = function(test) {
 	runInterpretedTests(test, "core/attribute.pec");
 };
-/*
+
 exports.testTranspiledAttribute = function(test) {
 	runTranspiledTests(test, "core/attribute.pec");
 };
-*/
+
 exports.testInterpretedAttributes = function(test) {
 	runInterpretedTests(test, "core/attributes.pec");
 };
