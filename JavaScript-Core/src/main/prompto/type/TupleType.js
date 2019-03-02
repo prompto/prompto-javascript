@@ -21,7 +21,7 @@ TupleType.prototype.withItemType = function(itemType) {
 };
 
 TupleType.prototype.isAssignableFrom = function(context, other) {
-    return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+    return NativeType.prototype.isAssignableFrom.call(this, context, other)
         || (other instanceof ListType) || (other instanceof SetType);
 };
 
@@ -38,7 +38,7 @@ TupleType.prototype.declareItem = function(transpiler, itemType, item) {
     if(itemType===IntegerType.instance) {
         item.declare(transpiler);
     } else {
-        return ContainerType.prototype.declareItem.call(this, transpiler, itemType, item);
+        return NativeType.prototype.declareItem.call(this, transpiler, itemType, item);
     }
 };
 
@@ -49,7 +49,7 @@ TupleType.prototype.transpileItem = function(transpiler, itemType, item) {
         item.transpile(transpiler);
         transpiler.append("-1]");
     } else {
-        return ContainerType.prototype.transpileItem.call(this, transpiler, itemType, item);
+        return NativeType.prototype.transpileItem.call(this, transpiler, itemType, item);
     }
 };
 
