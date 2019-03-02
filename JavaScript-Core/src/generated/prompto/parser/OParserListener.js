@@ -641,12 +641,12 @@ OParserListener.prototype.exitReturn_statement = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#method_call.
-OParserListener.prototype.enterMethod_call = function(ctx) {
+// Enter a parse tree produced by OParser#method_call_expression.
+OParserListener.prototype.enterMethod_call_expression = function(ctx) {
 };
 
-// Exit a parse tree produced by OParser#method_call.
-OParserListener.prototype.exitMethod_call = function(ctx) {
+// Exit a parse tree produced by OParser#method_call_expression.
+OParserListener.prototype.exitMethod_call_expression = function(ctx) {
 };
 
 
@@ -656,60 +656,6 @@ OParserListener.prototype.enterMethod_call_statement = function(ctx) {
 
 // Exit a parse tree produced by OParser#method_call_statement.
 OParserListener.prototype.exitMethod_call_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#MethodName.
-OParserListener.prototype.enterMethodName = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#MethodName.
-OParserListener.prototype.exitMethodName = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#MethodParent.
-OParserListener.prototype.enterMethodParent = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#MethodParent.
-OParserListener.prototype.exitMethodParent = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#CallableSelector.
-OParserListener.prototype.enterCallableSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#CallableSelector.
-OParserListener.prototype.exitCallableSelector = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#CallableRoot.
-OParserListener.prototype.enterCallableRoot = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#CallableRoot.
-OParserListener.prototype.exitCallableRoot = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#CallableMemberSelector.
-OParserListener.prototype.enterCallableMemberSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#CallableMemberSelector.
-OParserListener.prototype.exitCallableMemberSelector = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#CallableItemSelector.
-OParserListener.prototype.enterCallableItemSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#CallableItemSelector.
-OParserListener.prototype.exitCallableItemSelector = function(ctx) {
 };
 
 
@@ -938,15 +884,6 @@ OParserListener.prototype.exitExecuteExpression = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#MethodExpression.
-OParserListener.prototype.enterMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#MethodExpression.
-OParserListener.prototype.exitMethodExpression = function(ctx) {
-};
-
-
 // Enter a parse tree produced by OParser#GreaterThanOrEqualExpression.
 OParserListener.prototype.enterGreaterThanOrEqualExpression = function(ctx) {
 };
@@ -1100,6 +1037,51 @@ OParserListener.prototype.exitClosure_expression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#MethodExpression.
+OParserListener.prototype.enterMethodExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#MethodExpression.
+OParserListener.prototype.exitMethodExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#ParenthesisExpression.
+OParserListener.prototype.enterParenthesisExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#ParenthesisExpression.
+OParserListener.prototype.exitParenthesisExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#LiteralExpression.
+OParserListener.prototype.enterLiteralExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#LiteralExpression.
+OParserListener.prototype.exitLiteralExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#IdentifierExpression.
+OParserListener.prototype.enterIdentifierExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#IdentifierExpression.
+OParserListener.prototype.exitIdentifierExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#ThisExpression.
+OParserListener.prototype.enterThisExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#ThisExpression.
+OParserListener.prototype.exitThisExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#SelectorExpression.
 OParserListener.prototype.enterSelectorExpression = function(ctx) {
 };
@@ -1214,6 +1196,15 @@ OParserListener.prototype.enterMemberSelector = function(ctx) {
 
 // Exit a parse tree produced by OParser#MemberSelector.
 OParserListener.prototype.exitMemberSelector = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#MethodSelector.
+OParserListener.prototype.enterMethodSelector = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#MethodSelector.
+OParserListener.prototype.exitMethodSelector = function(ctx) {
 };
 
 
@@ -2447,42 +2438,6 @@ OParserListener.prototype.enterLiteral_list_literal = function(ctx) {
 
 // Exit a parse tree produced by OParser#literal_list_literal.
 OParserListener.prototype.exitLiteral_list_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#ParenthesisExpression.
-OParserListener.prototype.enterParenthesisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#ParenthesisExpression.
-OParserListener.prototype.exitParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#LiteralExpression.
-OParserListener.prototype.enterLiteralExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#LiteralExpression.
-OParserListener.prototype.exitLiteralExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#IdentifierExpression.
-OParserListener.prototype.enterIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#IdentifierExpression.
-OParserListener.prototype.exitIdentifierExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by OParser#ThisExpression.
-OParserListener.prototype.enterThisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#ThisExpression.
-OParserListener.prototype.exitThisExpression = function(ctx) {
 };
 
 

@@ -1136,6 +1136,42 @@ EParserListener.prototype.exitInvocation_trailer = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#ParenthesisExpression.
+EParserListener.prototype.enterParenthesisExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ParenthesisExpression.
+EParserListener.prototype.exitParenthesisExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#LiteralExpression.
+EParserListener.prototype.enterLiteralExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#LiteralExpression.
+EParserListener.prototype.exitLiteralExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#IdentifierExpression.
+EParserListener.prototype.enterIdentifierExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#IdentifierExpression.
+EParserListener.prototype.exitIdentifierExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#ThisExpression.
+EParserListener.prototype.enterThisExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ThisExpression.
+EParserListener.prototype.exitThisExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#SelectorExpression.
 EParserListener.prototype.enterSelectorExpression = function(ctx) {
 };
@@ -2519,42 +2555,6 @@ EParserListener.prototype.enterLiteral_list_literal = function(ctx) {
 
 // Exit a parse tree produced by EParser#literal_list_literal.
 EParserListener.prototype.exitLiteral_list_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ParenthesisExpression.
-EParserListener.prototype.enterParenthesisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ParenthesisExpression.
-EParserListener.prototype.exitParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#LiteralExpression.
-EParserListener.prototype.enterLiteralExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#LiteralExpression.
-EParserListener.prototype.exitLiteralExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#IdentifierExpression.
-EParserListener.prototype.enterIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#IdentifierExpression.
-EParserListener.prototype.exitIdentifierExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by EParser#ThisExpression.
-EParserListener.prototype.enterThisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#ThisExpression.
-EParserListener.prototype.exitThisExpression = function(ctx) {
 };
 
 
