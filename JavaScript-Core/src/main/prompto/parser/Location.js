@@ -9,4 +9,8 @@ function Location(token, isEnd) {
 	}
 }
 
+Location.prototype.asObject = function() {
+	return { tokenIndex: this.tokenIndex, line: this.line, column: this.column };
+};
+
 exports.Location = Location;
