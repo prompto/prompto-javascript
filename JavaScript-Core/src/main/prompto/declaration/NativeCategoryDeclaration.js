@@ -27,7 +27,7 @@ NativeCategoryDeclaration.prototype.register = function(context) {
 NativeCategoryDeclaration.prototype.toEDialect = function(writer) {
     this.protoToEDialect(writer, false, true);
     this.bindingsToEDialect(writer);
-    if(this.methods!=null && this.methods.length>0) {
+    if(his.methods.length>0) {
         writer.append("and methods:");
         writer.newLine();
         this.methodsToEDialect(writer, this.methods);
@@ -56,7 +56,7 @@ NativeCategoryDeclaration.prototype.categoryTypeToODialect = function(writer) {
 
 NativeCategoryDeclaration.prototype.bodyToODialect = function(writer) {
     this.categoryBindings.toDialect(writer);
-    if(this.methods!=null && this.methods.length>0) {
+    if(this.methods.length>0) {
         writer.newLine();
         writer.newLine();
         this.methodsToODialect(writer, this.methods);
@@ -68,13 +68,11 @@ NativeCategoryDeclaration.prototype.toMDialect = function(writer) {
     writer.indent();
     writer.newLine();
     this.categoryBindings.toDialect(writer);
-    if(this.methods!=null && this.methods.length>0) {
-        this.methods.forEach(function(method) {
-            var w = writer.newMemberWriter();
-            method.toDialect(w);
-            writer.newLine();
-        });
-    }
+    this.methods.forEach(function(method) {
+        var w = writer.newMemberWriter();
+        method.toDialect(w);
+        writer.newLine();
+    });
     writer.dedent();
     writer.newLine();
 };
@@ -140,5 +138,13 @@ NativeCategoryDeclaration.prototype.transpile = function(transpiler) {
 
 };
 
+NativeCategoryDeclaration.prototype.locateSectionAtLine = function(line) {
+    for(var i=0;i<this.methods.length;i++) {
+        const s = this.methods[i].locateSectionAtLine(line);
+        if(s)
+            return s;
+    }
+    return null;
+};
 
 exports.NativeCategoryDeclaration = NativeCategoryDeclaration;

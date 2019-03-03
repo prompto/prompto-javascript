@@ -607,6 +607,13 @@ ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpile
     transpiler.dedent().append("});").newLine();
 };
 
-
+ConcreteCategoryDeclaration.prototype.locateSectionAtLine = function(line) {
+    for(var i=0;i<this.methods.length;i++) {
+        const s = this.methods[i].locateSectionAtLine(line);
+        if(s)
+            return s;
+    }
+    return null;
+};
 
 exports.ConcreteCategoryDeclaration = ConcreteCategoryDeclaration;

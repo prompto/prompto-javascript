@@ -35,7 +35,11 @@ BaseDeclaration.prototype.fetchBody = function(parser) {
     if(section==null)
         section = this;
     return parser.getTokenStream().getText({ start: section.start.tokenIndex, stop: this.end.tokenIndex + 1 });
-}
+};
 
+
+BaseDeclaration.prototype.locateSectionAtLine = function(line) {
+    return null;
+};
 
 exports.BaseDeclaration = BaseDeclaration;
