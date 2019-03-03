@@ -8,11 +8,12 @@ exports.resolve = function() {
     MParserFactory = require("./MParserFactory").MParserFactory;
 }
 
-function Dialect() {
+function Dialect(name) {
+    this.name = name;
 	return this;
 }
 
-Dialect.E = new Dialect();
+Dialect.E = new Dialect("E");
 Dialect.E.getParserFactory = function() {
 	return new EParserFactory();
 };
@@ -24,7 +25,7 @@ Dialect.E.toString = function(o) {
 };
 
 
-Dialect.O = new Dialect();
+Dialect.O = new Dialect("O");
 Dialect.O.getParserFactory = function() {
 	return new OParserFactory();
 };
@@ -35,7 +36,7 @@ Dialect.O.toString = function(o) {
     return o.toOString();
 };
 
-Dialect.M = new Dialect();
+Dialect.M = new Dialect("M");
 Dialect.M.getParserFactory = function() {
     return new MParserFactory();
 };
