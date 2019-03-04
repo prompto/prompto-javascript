@@ -27,7 +27,7 @@ NativeCategoryDeclaration.prototype.register = function(context) {
 NativeCategoryDeclaration.prototype.toEDialect = function(writer) {
     this.protoToEDialect(writer, false, true);
     this.bindingsToEDialect(writer);
-    if(his.methods.length>0) {
+    if(this.methods.length>0) {
         writer.append("and methods:");
         writer.newLine();
         this.methodsToEDialect(writer, this.methods);
