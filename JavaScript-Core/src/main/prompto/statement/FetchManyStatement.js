@@ -83,4 +83,10 @@ FetchManyStatement.prototype.transpile = function(transpiler) {
     return false;
 };
 
+
+FetchManyStatement.prototype.locateSectionAtLine = function(line) {
+    return this;
+};
+
+
 exports.FetchManyStatement = FetchManyStatement;

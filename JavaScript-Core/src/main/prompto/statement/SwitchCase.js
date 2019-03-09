@@ -26,4 +26,8 @@ SwitchCase.prototype.declare = function(transpiler) {
 };
 
 
+SwitchCase.prototype.locateSectionAtLine = function(line) {
+    return this.statements.locateSectionAtLine(line);
+};
+
 exports.SwitchCase = SwitchCase;

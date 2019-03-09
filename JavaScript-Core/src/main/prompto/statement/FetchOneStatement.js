@@ -80,4 +80,9 @@ FetchOneStatement.prototype.transpile = function(transpiler) {
     return false;
 };
 
+
+FetchOneStatement.prototype.locateSectionAtLine = function(line) {
+    return this;
+};
+
 exports.FetchOneStatement = FetchOneStatement;

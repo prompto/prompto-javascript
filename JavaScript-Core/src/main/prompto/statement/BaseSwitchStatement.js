@@ -98,6 +98,12 @@ BaseSwitchStatement.prototype.canReturn = function() {
     return true;
 };
 
+
+BaseSwitchStatement.prototype.locateSectionAtLine = function(line) {
+    return this.switchCases.locateSectionAtLine(line) || (this.defaultCase ? this.defaultCase.locateSectionAtLine(line) : null) || this;
+};
+
+
 exports.BaseSwitchStatement = BaseSwitchStatement;
 
 function SwitchCaseList(item) {
@@ -111,5 +117,17 @@ function SwitchCaseList(item) {
 
 SwitchCaseList.prototype = Object.create(ObjectList.prototype);
 SwitchCaseList.prototype.constructor = SwitchCaseList;
+
+
+SwitchCaseList.prototype.locateSectionAtLine = function(line) {
+    for(var i=0; i< this.length; i++) {
+        const switchCase = this[i];
+        const section = switchCase.locateSectionAtLine(line);
+        if(section)
+            return section;
+    }
+    return null;
+};
+
 
 exports.SwitchCaseList = SwitchCaseList;

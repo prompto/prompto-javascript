@@ -294,4 +294,9 @@ ForEachStatement.prototype.transpileIteratorWithIndex = function(transpiler) {
 };
 
 
+ForEachStatement.prototype.locateSectionAtLine = function(line) {
+    return this.statements.locateSectionAtLine(line) || this;
+};
+
+
 exports.ForEachStatement = ForEachStatement;

@@ -93,4 +93,8 @@ WhileStatement.prototype.canReturn = function() {
     return true;
 };
 
+WhileStatement.prototype.locateSectionAtLine = function(line) {
+    return this.statements.locateSectionAtLine(line) || this;
+};
+
 exports.WhileStatement = WhileStatement;

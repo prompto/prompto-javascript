@@ -25,4 +25,8 @@ BaseStatement.prototype.declare = function(transpiler) {
     throw new Error("Declare not implemented by " + this.constructor.name);
 };
 
+BaseStatement.prototype.locateSectionAtLine = function(line) {
+    return this;
+};
+
 exports.BaseStatement = BaseStatement;

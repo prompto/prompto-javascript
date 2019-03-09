@@ -206,7 +206,7 @@ ConcreteMethodDeclaration.prototype.fullDeclare = function(transpiler, id) {
 };
 
 ConcreteMethodDeclaration.prototype.locateSectionAtLine = function(line) {
-    return this.statements.find( function(s) { return s.containsLine(line); });
+    return this.statements.locateSectionAtLine(line);
 };
 
 exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

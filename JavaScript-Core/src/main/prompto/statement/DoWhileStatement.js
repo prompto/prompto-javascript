@@ -87,10 +87,13 @@ DoWhileStatement.prototype.toODialect = function(writer) {
     writer.append(");").newLine();
 };
 
-
-
 DoWhileStatement.prototype.canReturn = function() {
     return true;
+};
+
+
+DoWhileStatement.prototype.locateSectionAtLine = function(line) {
+    return this.statements.locateSectionAtLine(line) || this;
 };
 
 

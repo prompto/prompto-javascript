@@ -165,4 +165,10 @@ StatementList.prototype.transpile = function(transpiler) {
     });
 };
 
+
+StatementList.prototype.locateSectionAtLine = function(line) {
+    const statement = this.find( function(s) { return s.containsLine(line); });
+    return statement ? statement.locateSectionAtLine(line) : null;
+};
+
 exports.StatementList = StatementList;
