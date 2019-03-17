@@ -1,5 +1,5 @@
 var path = require('path');
-var target_dir = path.resolve(__dirname, "../../../../prompto-platform/Server/src/main/resources/js/lib/")
+var target_dir = path.resolve(__dirname, "../../../../prompto-factory/CodeFactory/CodeFactory/src/main/resources/js/lib/")
 
 module.exports = {
     entry: './index.js',
