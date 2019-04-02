@@ -117,8 +117,23 @@ TestMethodDeclaration.prototype.transpileExpectedError = function(transpiler) {
 };
 
 TestMethodDeclaration.prototype.check = function(context, isStart) {
-    // TODO
+    context = context.newLocalContext();
+    this.statements.forEach(function(s) {
+        this.checkStatement(context, s);
+    }, this);
+    if(this.assertions!=null) {
+        this.assertions.forEach(function (a) {
+            context = a.check(context);
+        }, this);
+    }
     return VoidType.instance;
+};
+
+
+TestMethodDeclaration.prototype.checkStatement = function(context, statement) {
+    var type = statement.check(context);
+    if(type!=null && type!=VoidType.instance) // null indicates SyntaxError
+        context.problemListener.reportIllegalReturn(statement);
 };
 
 TestMethodDeclaration.prototype.register = function(context) {

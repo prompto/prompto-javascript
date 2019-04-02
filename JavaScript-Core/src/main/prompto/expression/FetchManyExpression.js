@@ -108,7 +108,7 @@ FetchManyExpression.prototype.check = function(context) {
     else {
         var decl = context.getRegisteredDeclaration(this.typ.name);
         if (decl == null)
-            throw new SyntaxError("Unknown category: " + this.typ.name);
+            context.problemListener.reportUnknownCategory(typ.id);
     }
     this.checkFilter(context);
     this.checkOrderBy(context);
@@ -121,7 +121,7 @@ FetchManyExpression.prototype.checkFilter = function(context) {
         return;
     var filterType = this.predicate.check(context);
     if (filterType != BooleanType.instance)
-        throw new SyntaxError("Filtering expression must return a boolean !");
+        context.problemListener.reportExpectingBoolean(this.predicate, filterType);
 };
 
 FetchManyExpression.prototype.checkOrderBy = function(context) {
