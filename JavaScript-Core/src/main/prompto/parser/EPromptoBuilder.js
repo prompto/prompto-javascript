@@ -911,7 +911,7 @@ EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 
 EPromptoBuilder.prototype.exitAssertion = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, exp);
+    this.setNodeValue(ctx, new parser.Assertion(exp));
 };
 
 EPromptoBuilder.prototype.exitAssertion_list = function(ctx) {

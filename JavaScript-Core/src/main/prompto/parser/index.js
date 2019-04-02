@@ -12,6 +12,7 @@ exports.OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
 exports.MPromptoBuilder = require("./MPromptoBuilder").MPromptoBuilder;
 exports.ParserUtils = require("./ParserUtils");
 exports.Dialect = require("./Dialect").Dialect;
+exports.Assertion = require("./Assertion").Assertion;
 exports.Section = require("./Section").Section;
 
 require("./ONamingLexer").resolve();

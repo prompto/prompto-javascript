@@ -916,7 +916,7 @@ OPromptoBuilder.prototype.exitCopy_from = function(ctx) {
 
 OPromptoBuilder.prototype.exitAssertion = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, exp);
+    this.setNodeValue(ctx, new parser.Assertion(exp));
 };
 
 
