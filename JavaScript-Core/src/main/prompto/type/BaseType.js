@@ -328,8 +328,10 @@ BaseType.prototype.transpileContainsAny = function(transpiler, other, container,
 BaseType.prototype.checkItem = function(context, itemType, expression) {
     if(itemType instanceof EnumeratedNativeType)
         return this.checkItem(context, itemType.derivedFrom, expression);
-    else
-        context.problemListener.reportCannotReadItem(this, itemType, expression);
+    else {
+        context.problemListener.reportInvalidItem(this, itemType, expression);
+        return VoidType.instance;
+    }
 };
 
 
@@ -352,8 +354,10 @@ BaseType.prototype.transpileItem = function(transpiler, itemType, item) {
 BaseType.prototype.checkMember = function(context, section, name) {
     if("text" == name)
         return TextType.instance;
-    else
+    else {
         context.problemListener.reportInvalidMember(section, name);
+        return VoidType.instance;
+    }
 };
 
 

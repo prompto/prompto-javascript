@@ -95,7 +95,7 @@ ProblemCollector.prototype.reportCannotIterate = function(source) {
 };
 
 
-ProblemCollector.prototype.reportCannotReadItem = function(parentType, itemType, source) {
+ProblemCollector.prototype.reportInvalidItem = function(parentType, itemType, source) {
     var problem = this.readSection(source);
     problem.type = "error";
     problem.message = "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString();
