@@ -97,11 +97,11 @@ SetType.prototype.transpileSubtract= function(transpiler, other, left, right) {
 };
 
 
-SetType.prototype.checkItem = function(context, other) {
+SetType.prototype.checkItem = function(context, other, expression) {
 	if(other==IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return ContainerType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other, expression);
 	}
 };
 

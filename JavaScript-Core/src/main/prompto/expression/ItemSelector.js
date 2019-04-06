@@ -25,7 +25,7 @@ ItemSelector.prototype.toDialect = function(writer) {
 ItemSelector.prototype.check = function(context) {
 	var parentType = this.parent.check(context);
 	var itemType = this.item.check(context);
-	return parentType.checkItem(context,itemType);
+	return parentType.checkItem(context, itemType, this);
 };
 
 ItemSelector.prototype.interpret = function(context) {

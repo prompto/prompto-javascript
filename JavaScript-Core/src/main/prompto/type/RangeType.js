@@ -24,11 +24,11 @@ RangeType.prototype.withItemType = function(itemType) {
 
 
 
-RangeType.prototype.checkItem = function(context, other) {
+RangeType.prototype.checkItem = function(context, other, expression) {
 	if (other == IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return ContainerType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other, expression);
 	}
 };
 

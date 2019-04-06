@@ -137,11 +137,11 @@ DictionaryType.prototype.transpileContainsAny = function(transpiler, other, cont
 };
 
 
-DictionaryType.prototype.checkItem = function(context, other) {
+DictionaryType.prototype.checkItem = function(context, other, expression) {
 	if(other==TextType.instance) {
 		return this.itemType;
 	} else {
-		return ContainerType.prototype.checkItem.call(this, context, other);
+		return ContainerType.prototype.checkItem.call(this, context, other, expression);
 	}
 };
 

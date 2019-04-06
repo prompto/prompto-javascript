@@ -125,11 +125,11 @@ TextType.prototype.transpileCompare = function(transpiler, other, operator, left
 };
 
 
-TextType.prototype.checkItem = function(context, other) {
+TextType.prototype.checkItem = function(context, other, expression) {
 	if(other==IntegerType.instance) {
 		return CharacterType.instance;
 	} else {
-		return NativeType.prototype.checkItem.call(this, context, other);
+		return NativeType.prototype.checkItem.call(this, context, other, expression);
 	}
 };
 

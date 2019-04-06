@@ -325,11 +325,11 @@ BaseType.prototype.transpileContainsAny = function(transpiler, other, container,
 
 
 
-BaseType.prototype.checkItem = function(context, itemType) {
+BaseType.prototype.checkItem = function(context, itemType, expression) {
     if(itemType instanceof EnumeratedNativeType)
-        return this.checkItem(context, itemType.derivedFrom);
+        return this.checkItem(context, itemType.derivedFrom, expression);
     else
-    	throw new SyntaxError("Cannot read item from " + this.name);
+        context.problemListener.reportCannotReadItem(this, itemType, expression);
 };
 
 

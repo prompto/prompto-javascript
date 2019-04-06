@@ -95,6 +95,14 @@ ProblemCollector.prototype.reportCannotIterate = function(source) {
 };
 
 
+ProblemCollector.prototype.reportCannotReadItem = function(parentType, itemType, source) {
+    var problem = this.readSection(source);
+    problem.type = "error";
+    problem.message = "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString();
+    this.collectProblem(problem);
+};
+
+
 ProblemCollector.prototype.reportInvalidCast = function(expression, target, actual) {
     var problem = this.readSection(expression);
     problem.type = "error";

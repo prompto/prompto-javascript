@@ -129,11 +129,11 @@ ListType.prototype.transpileSubtract = function(transpiler, other, left, right) 
 };
 
 
-ListType.prototype.checkItem = function(context, itemType) {
+ListType.prototype.checkItem = function(context, itemType, expression) {
 	if(itemType==IntegerType.instance) {
 		return this.itemType;
 	} else {
-		return ContainerType.prototype.checkItem.call(this, context, itemType);
+		return ContainerType.prototype.checkItem.call(this, context, itemType, expression);
 	}
 };
 
