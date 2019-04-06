@@ -1,4 +1,5 @@
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+var isWorker = typeof window === 'undefined' && typeof importScripts === 'function';
 var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 var JavaScriptExpressionList = require("./JavaScriptExpressionList").JavaScriptExpressionList;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
@@ -58,7 +59,7 @@ JavaScriptMethodExpression.prototype.findInstanceAndMethod = function(context, m
 
 var stringToFunction = function(str) {
     var arr = str.split(".");
-    var fn = isNodeJs ? this : window;
+    var fn = isNodeJs ? this : isWorker ? self : window;
     for (var i = 0, len = arr.length; i < len; i++) {
         fn = fn[arr[i]];
     }
