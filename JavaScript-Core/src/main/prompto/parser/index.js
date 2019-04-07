@@ -1,9 +1,9 @@
-exports.EParserListener = require("./EParserListener").EParserListener;
-exports.OParserListener = require("./OParserListener").OParserListener;
-exports.MParserListener = require("./MParserListener").MParserListener;
-exports.EParser = require("./EParser").EParser;
-exports.OParser = require("./OParser").OParser;
-exports.MParser = require("./MParser").MParser;
+exports.EParserListener = require("../../../generated/prompto/parser/EParserListener").EParserListener;
+exports.OParserListener = require("../../../generated/prompto/parser/OParserListener").OParserListener;
+exports.MParserListener = require("../../../generated/prompto/parser/MParserListener").MParserListener;
+exports.EParser = require("../../../generated/prompto/parser/EParser").EParser;
+exports.OParser = require("../../../generated/prompto/parser/OParser").OParser;
+exports.MParser = require("../../../generated/prompto/parser/MParser").MParser;
 exports.ECleverParser = require('./ECleverParser').ECleverParser;
 exports.OCleverParser = require('./OCleverParser').OCleverParser;
 exports.MCleverParser = require('./MCleverParser').MCleverParser;

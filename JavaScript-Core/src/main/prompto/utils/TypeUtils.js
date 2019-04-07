@@ -4,7 +4,7 @@ var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var TextValue = require("../value/TextValue").TextValue;
 
-convertFromJavaScript = function(value) {
+var convertFromJavaScript = function(value) {
     if(value==null) {
         return NullValue.instance;
     } else if(typeof(value)=='string') {
@@ -20,14 +20,14 @@ convertFromJavaScript = function(value) {
 };
 
 
-inferExpressionsType = function(context, expressions) {
+var inferExpressionsType = function(context, expressions) {
     if (expressions.length == 0)
         return MissingType.instance;
     var types = expressions.map(function(e) { return e.check(context); });
     return inferElementType(context, types);
 }
 
-inferElementType = function(context, types) {
+var inferElementType = function(context, types) {
     if (types.length == 0)
         return MissingType.instance;
     var lastType = null;

@@ -1,4 +1,4 @@
-JavaLiteral = function(text) {
+var JavaLiteral = function(text) {
     this.text = text;
     return this;
 };

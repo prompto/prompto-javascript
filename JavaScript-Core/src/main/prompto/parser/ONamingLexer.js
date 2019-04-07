@@ -1,5 +1,5 @@
 var antlr4 = require("antlr4/index");
-var OLexer = require("./OLexer").OLexer;
+var OLexer = require("../../../generated/prompto/parser/OLexer").OLexer;
 var Dialect = null;
 
 exports.resolve = function() {

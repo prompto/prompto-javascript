@@ -1,1 +1,0 @@
-/Users/ericvergnaud/Development/prompto/prompto-javascript/JavaScript-Core/src/generated/prompto/parser/MParser.js

@@ -333,7 +333,7 @@ function FormatMethodDeclaration() {
 }
 
 function resolveBuiltInMethodDeclaration() {
-    BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+    var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 
     FormatMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     FormatMethodDeclaration.prototype.constructor = FormatMethodDeclaration;

@@ -1,5 +1,5 @@
 var antlr4 = require("antlr4/index");
-var MLexer = require("./MLexer").MLexer;
+var MLexer = require("../../../generated/prompto/parser/MLexer").MLexer;
 var Dialect = require("./Dialect").Dialect;
 
 function MIndentingLexer(input) {

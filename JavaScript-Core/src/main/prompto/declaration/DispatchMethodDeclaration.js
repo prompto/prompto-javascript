@@ -125,9 +125,9 @@ DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common,
     }
 };
 
-DispatchMethodDeclaration.prototype.findCorrespondingArg = function(context, arguments, common, incoming) {
-    for(var i=0;i<arguments.length;i++) {
-        var outgoing = arguments[i];
+DispatchMethodDeclaration.prototype.findCorrespondingArg = function(context, args, common, incoming) {
+    for(var i=0;i<args.length;i++) {
+        var outgoing = args[i];
         if (common.has(outgoing))
             continue;
         if (outgoing.equals(incoming))
@@ -137,7 +137,7 @@ DispatchMethodDeclaration.prototype.findCorrespondingArg = function(context, arg
                 return outgoing;
         }
     }
-    throw new Error("Could not find matching argument for: " + incoming + " in " + arguments);
+    throw new Error("Could not find matching argument for: " + incoming + " in " + args);
 };
 
 
