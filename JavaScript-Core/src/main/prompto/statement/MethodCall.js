@@ -5,6 +5,7 @@ var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").Argume
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
+var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 var MethodDeclarationMap = null;
 var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
