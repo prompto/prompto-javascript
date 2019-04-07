@@ -13,3 +13,4 @@ JavaScript-Core/src/main/prompto/internet
 JavaScript-Core/src/main/prompto/io
 transpiled.js
 TestWeb.js
+JavaScript-Core/src/generated/prompto/parser/AbstractParser.js

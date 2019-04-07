@@ -12,6 +12,7 @@ var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var IntegerRange = require("../value/IntegerRange").IntegerRange;
 var Identifier = require("../grammar/Identifier").Identifier;
 var PeriodType = null;
+var BuiltInMethodDeclaration = null;
 
 exports.resolve = function() {
     CategoryArgument = require("../argument/CategoryArgument.js").CategoryArgument;
@@ -333,7 +334,7 @@ function FormatMethodDeclaration() {
 }
 
 function resolveBuiltInMethodDeclaration() {
-    var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+    BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 
     FormatMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
     FormatMethodDeclaration.prototype.constructor = FormatMethodDeclaration;

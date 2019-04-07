@@ -1,7 +1,7 @@
 var antlr4 = require("antlr4/index");
 var al = require("../../../generated/prompto/utils/ArgsLexer");
 var ap = require("../../../generated/prompto/utils/ArgsParser");
-var ArgsParserListener = require("./ArgsParserListener").ArgsParserListener;
+var ArgsParserListener = require("../../../generated/prompto/utils/ArgsParserListener").ArgsParserListener;
 
 function CmdLineBuilder() {
 	ArgsParserListener.call(this);
