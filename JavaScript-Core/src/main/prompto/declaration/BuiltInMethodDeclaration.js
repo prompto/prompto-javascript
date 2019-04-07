@@ -1,6 +1,10 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var BuiltInContext = require("../runtime/Context").BuiltInContext;
+var BuiltInContext = null;
+
+exports.resolve = function() {
+    BuiltInContext = require("../runtime/Context").BuiltInContext;
+};
 
 function BuiltInMethodDeclaration(name) {
     var args = null;

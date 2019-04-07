@@ -19,7 +19,9 @@ exports.SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMet
 exports.NativeGetterMethodDeclaration = require("./NativeGetterMethodDeclaration").NativeGetterMethodDeclaration;
 exports.NativeSetterMethodDeclaration = require("./NativeSetterMethodDeclaration").NativeSetterMethodDeclaration;
 exports.DispatchMethodDeclaration = require("./DispatchMethodDeclaration").DispatchMethodDeclaration;
+exports.BuiltInMethodDeclaration = require("./BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 
 require('./BaseMethodDeclaration').resolve();
 require('./ConcreteCategoryDeclaration').resolve();
 require('./DispatchMethodDeclaration').resolve();
+require('./BuiltInMethodDeclaration').resolve();
