@@ -1,4 +1,4 @@
 require("../../../exploded");
-exports.prompto = require("../index");
+exports.prompto = require("../../../main/index");
 
 
