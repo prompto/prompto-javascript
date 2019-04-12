@@ -121,7 +121,7 @@ StoreStatement.prototype.transpileIdsToDelete = function(transpiler) {
             exp.transpile(transpiler);
             transpiler.append(".collectDbIds(idsToDelete);").newLine();
         }, this);
-        transpiler.append("return idsToDelete;").newLine();
+        transpiler.append("return Array.from(idsToDelete);").newLine();
         transpiler.dedent().append("})()");
     }
 };
@@ -136,7 +136,7 @@ StoreStatement.prototype.transpileStorablesToAdd = function(transpiler) {
             exp.transpile(transpiler);
             transpiler.append(".collectStorables(storablesToAdd);").newLine();
         }, this);
-        transpiler.append("return storablesToAdd;").newLine();
+        transpiler.append("return Array.from(storablesToAdd);").newLine();
         transpiler.dedent().append("})()");
     }
 };
