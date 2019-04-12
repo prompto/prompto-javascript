@@ -89,7 +89,7 @@ $Root.prototype.collectStorables = function(storablesToAdd) {
 
 $Root.prototype.collectDbIds = function(idsToDelete) {
     if(this.dbId)
-        idsToDelete.add(this.dbId);
+        idsToDelete.add(this.dbId.toString());
 };
 
 exports.$Root = $Root;
