@@ -11,5 +11,9 @@ module.exports = {
         module: "empty",
         net: "empty",
         fs: "empty"
+    },
+    mode: "production",
+    performance: {
+        hints: false
     }
 };

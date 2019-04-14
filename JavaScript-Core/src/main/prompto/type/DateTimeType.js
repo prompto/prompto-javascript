@@ -3,13 +3,22 @@ var BooleanType = require("./BooleanType").BooleanType;
 var PeriodType = require("./PeriodType").PeriodType;
 var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
-var DateType = require("./DateType").DateType;
-var TimeType = require("./TimeType").TimeType;
+var DateType = null;
+var TimeType = null;
 var AnyType = require("./AnyType").AnyType;
 var DateTime = require("../intrinsic/DateTime").DateTime;
 var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
+var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+var LocalTime = require("../intrinsic/LocalTime").LocalTime;
+
+
+exports.resolve = function() {
+    DateType = require("./DateType").DateType;
+    TimeType = require("./TimeType").TimeType;
+};
+
 
 function DateTimeType()  {
 	NativeType.call(this, new Identifier("DateTime"));
@@ -124,60 +133,72 @@ DateTimeType.prototype.transpileCompare = function(transpiler, other, operator, 
 };
 
 DateTimeType.prototype.checkMember = function(context, section, name) {
-	if ("year"==name) {
+	if ("year"===name) {
 		return IntegerType.instance;
-	} else if ("month"==name) {
+	} else if ("month"===name) {
 		return IntegerType.instance;
-	} else if ("dayOfMonth"==name) {
+	} else if ("dayOfMonth"===name) {
 		return IntegerType.instance;
-	} else if ("dayOfYear"==name) {
+	} else if ("dayOfYear"===name) {
 		return IntegerType.instance;
-	} else if ("hour"==name) {
+	} else if ("hour"===name) {
 		return IntegerType.instance;
-	} else if ("minute"==name) {
+	} else if ("minute"===name) {
 		return IntegerType.instance;
-	} else if ("second"==name) {
+	} else if ("second"===name) {
 		return IntegerType.instance;
-	} else if ("millisecond"==name) {
+	} else if ("millisecond"===name) {
 		return IntegerType.instance;
-	} else if ("tzOffset"==name) {
+	} else if ("tzOffset"===name) {
 		return IntegerType.instance;
-	} else if ("tzName"==name) {
+	} else if ("tzName"===name) {
 		return TextType.instance;
-	} else {
+    } else if ("date"===name) {
+        return DateType.instance;
+    } else if ("time"===name) {
+        return TimeType.instance;
+    } else {
 		return NativeType.prototype.checkMember.call(this, context, section, name);
 	}
 };
 
 
 DateTimeType.prototype.declareMember = function(transpiler, name) {
-    if (!("year"==name || "month"==name || "dayOfMonth"==name || "dayOfYear"==name || "hour"==name || "minute"==name || "second"==name || "millisecond"==name || "tzOffset"==name || "tzName"==name)) {
+    if("date"===name) {
+        transpiler.register(LocalDate);
+    } else if("time"===name) {
+        transpiler.register(LocalTime);
+    } else if (!("year"===name || "month"===name || "dayOfMonth"===name || "dayOfYear"===name || "hour"===name || "minute"===name || "second"===name || "millisecond"===name || "tzOffset"===name || "tzName"===name)) {
         NativeType.prototype.declareMember.call(this, transpiler, name);
     }
 };
 
 
 DateTimeType.prototype.transpileMember = function(transpiler, name) {
-    if ("year"==name) {
+    if ("year"===name) {
         transpiler.append("getYear()");
-    } else if ("month"==name) {
+    } else if ("month"===name) {
         transpiler.append("getMonth()");
-    } else if ("dayOfMonth"==name) {
+    } else if ("dayOfMonth"===name) {
         transpiler.append("getDayOfMonth()");
-    } else if ("dayOfYear"==name) {
+    } else if ("dayOfYear"===name) {
         transpiler.append("getDayOfYear()");
-    } else if ("hour"==name) {
+    } else if ("hour"===name) {
         transpiler.append("getHour()");
-    } else if ("minute"==name) {
+    } else if ("minute"===name) {
         transpiler.append("getMinute()");
-    } else if ("second"==name) {
+    } else if ("second"===name) {
         transpiler.append("getSecond()");
-    } else if ("millisecond"==name) {
+    } else if ("millisecond"===name) {
         transpiler.append("getMillisecond()");
-    } else if ("tzOffset"==name) {
+    } else if ("tzOffset"===name) {
         transpiler.append("getTzOffset()");
-    } else if ("tzName"==name) {
+    } else if ("tzName"===name) {
         transpiler.append("getTzName()");
+    } else if ("date"===name) {
+        transpiler.append("getDate()");
+    } else if ("time"===name) {
+        transpiler.append("getTime()");
     } else {
         NativeType.prototype.transpileMember.call(this, transpiler, name);
     }

@@ -1,4 +1,6 @@
 var Period = require("./Period").Period;
+var LocalDate = require("./LocalDate").LocalDate;
+var LocalTime = require("./LocalTime").LocalTime;
 
 function DateTime(date, tzOffset) {
     this.date = date;
@@ -230,6 +232,16 @@ DateTime.prototype.getTzOffset = function(value) {
 
 DateTime.prototype.getTzName = function(value) {
     return "Z";
+};
+
+
+DateTime.prototype.getDate = function(value) {
+    return new LocalDate(this.date);
+};
+
+
+DateTime.prototype.getTime = function(value) {
+    return new LocalTime(this.date);
 };
 
 

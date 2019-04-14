@@ -87,6 +87,14 @@ exports.testTranspiledDateText = function(test) {
 	checkTranspiledOutput(test, "builtins/dateText.pec");
 };
 
+exports.testInterpretedDateTimeDate = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeDate.pec");
+};
+
+exports.testTranspiledDateTimeDate = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeDate.pec");
+};
+
 exports.testInterpretedDateTimeDayOfMonth = function(test) {
 	checkInterpretedOutput(test, "builtins/dateTimeDayOfMonth.pec");
 };
@@ -149,6 +157,14 @@ exports.testInterpretedDateTimeText = function(test) {
 
 exports.testTranspiledDateTimeText = function(test) {
 	checkTranspiledOutput(test, "builtins/dateTimeText.pec");
+};
+
+exports.testInterpretedDateTimeTime = function(test) {
+	checkInterpretedOutput(test, "builtins/dateTimeTime.pec");
+};
+
+exports.testTranspiledDateTimeTime = function(test) {
+	checkTranspiledOutput(test, "builtins/dateTimeTime.pec");
 };
 
 exports.testInterpretedDateTimeYear = function(test) {

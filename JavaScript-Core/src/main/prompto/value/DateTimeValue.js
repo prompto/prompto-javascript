@@ -86,6 +86,10 @@ DateTimeValue.prototype.getMemberValue = function(context, name) {
             value = this.value.getTzOffset();
         } else if ("tzName" == name) {
             value = this.value.getTzName();
+        } else if ("date" == name) {
+            return new DateValue(this.value.getDate());
+        } else if ("time" == name) {
+            return new TimeValue(this.value.getTime());
         }
         if(typeof(value) === typeof(0))
             return new IntegerValue(value);

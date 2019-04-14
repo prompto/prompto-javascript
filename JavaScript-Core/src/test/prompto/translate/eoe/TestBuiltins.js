@@ -38,6 +38,10 @@ exports.testDateText = function(test) {
 	compareResourceEOE(test, "builtins/dateText.pec");
 };
 
+exports.testDateTimeDate = function(test) {
+	compareResourceEOE(test, "builtins/dateTimeDate.pec");
+};
+
 exports.testDateTimeDayOfMonth = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeDayOfMonth.pec");
 };
@@ -76,6 +80,10 @@ exports.testDateTimeTZOffset = function(test) {
 
 exports.testDateTimeText = function(test) {
 	compareResourceEOE(test, "builtins/dateTimeText.pec");
+};
+
+exports.testDateTimeTime = function(test) {
+	compareResourceEOE(test, "builtins/dateTimeTime.pec");
 };
 
 exports.testDateTimeYear = function(test) {

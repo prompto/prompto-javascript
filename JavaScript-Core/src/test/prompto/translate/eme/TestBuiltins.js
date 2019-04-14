@@ -38,6 +38,10 @@ exports.testDateText = function(test) {
 	compareResourceEME(test, "builtins/dateText.pec");
 };
 
+exports.testDateTimeDate = function(test) {
+	compareResourceEME(test, "builtins/dateTimeDate.pec");
+};
+
 exports.testDateTimeDayOfMonth = function(test) {
 	compareResourceEME(test, "builtins/dateTimeDayOfMonth.pec");
 };
@@ -76,6 +80,10 @@ exports.testDateTimeTZOffset = function(test) {
 
 exports.testDateTimeText = function(test) {
 	compareResourceEME(test, "builtins/dateTimeText.pec");
+};
+
+exports.testDateTimeTime = function(test) {
+	compareResourceEME(test, "builtins/dateTimeTime.pec");
 };
 
 exports.testDateTimeYear = function(test) {

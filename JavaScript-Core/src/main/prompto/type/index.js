@@ -37,3 +37,4 @@ require('./RangeType').resolve();
 require('./CategoryType').resolve();
 require('./DocumentType').resolve();
 require('./UUIDType').resolve();
+require('./DateTimeType').resolve();
