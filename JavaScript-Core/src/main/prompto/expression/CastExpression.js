@@ -20,7 +20,10 @@ function anify(type) {
 function getTargetType(context, itype) {
     if (itype instanceof IterableType) {
         var itemType = getTargetType(context, itype.itemType);
-        return itype.withItemType(itemType);
+        if(itemType)
+            return itype.withItemType(itemType);
+        else
+            return AnyType.instance
     } else if (itype instanceof NativeType) {
         return itype
     } else
