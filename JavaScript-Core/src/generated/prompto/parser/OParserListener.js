@@ -974,6 +974,15 @@ OParserListener.prototype.exitInstanceExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#MutableInstanceExpression.
+OParserListener.prototype.enterMutableInstanceExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#MutableInstanceExpression.
+OParserListener.prototype.exitMutableInstanceExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#CssExpression.
 OParserListener.prototype.enterCssExpression = function(ctx) {
 };
@@ -1097,6 +1106,24 @@ OParserListener.prototype.enterSelectableExpression = function(ctx) {
 
 // Exit a parse tree produced by OParser#SelectableExpression.
 OParserListener.prototype.exitSelectableExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#MutableSelectableExpression.
+OParserListener.prototype.enterMutableSelectableExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#MutableSelectableExpression.
+OParserListener.prototype.exitMutableSelectableExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#MutableSelectorExpression.
+OParserListener.prototype.enterMutableSelectorExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#MutableSelectorExpression.
+OParserListener.prototype.exitMutableSelectorExpression = function(ctx) {
 };
 
 

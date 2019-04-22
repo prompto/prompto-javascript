@@ -36,9 +36,9 @@ exports.resolve = function() {
 };
 
 
-function CategoryType(id) {
+function CategoryType(id, mutable) {
 	BaseType.call(this, id);
-    this.mutable = false;
+    this.mutable = mutable || false;
 	return this;
 }
 

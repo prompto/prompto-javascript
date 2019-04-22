@@ -34,8 +34,16 @@ exports.testMutableArgument = function(test) {
 	compareResourceEME(test, "mutability/mutableArgument.pec");
 };
 
+exports.testMutableChild = function(test) {
+	compareResourceEME(test, "mutability/mutableChild.pec");
+};
+
 exports.testMutableDict = function(test) {
 	compareResourceEME(test, "mutability/mutableDict.pec");
+};
+
+exports.testMutableInstance = function(test) {
+	compareResourceEME(test, "mutability/mutableInstance.pec");
 };
 
 exports.testMutableList = function(test) {

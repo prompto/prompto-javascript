@@ -884,6 +884,15 @@ EParserListener.prototype.exitInstanceExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#MutableInstanceExpression.
+EParserListener.prototype.enterMutableInstanceExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#MutableInstanceExpression.
+EParserListener.prototype.exitMutableInstanceExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#ReadAllExpression.
 EParserListener.prototype.enterReadAllExpression = function(ctx) {
 };
@@ -1214,6 +1223,24 @@ EParserListener.prototype.enterItemSelector = function(ctx) {
 
 // Exit a parse tree produced by EParser#ItemSelector.
 EParserListener.prototype.exitItemSelector = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#MutableSelectableExpression.
+EParserListener.prototype.enterMutableSelectableExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#MutableSelectableExpression.
+EParserListener.prototype.exitMutableSelectableExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#MutableSelectorExpression.
+EParserListener.prototype.enterMutableSelectorExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#MutableSelectorExpression.
+EParserListener.prototype.exitMutableSelectorExpression = function(ctx) {
 };
 
 

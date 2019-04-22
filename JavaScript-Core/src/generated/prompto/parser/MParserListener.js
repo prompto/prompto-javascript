@@ -920,6 +920,15 @@ MParserListener.prototype.exitInstanceExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#MutableInstanceExpression.
+MParserListener.prototype.enterMutableInstanceExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#MutableInstanceExpression.
+MParserListener.prototype.exitMutableInstanceExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#CssExpression.
 MParserListener.prototype.enterCssExpression = function(ctx) {
 };
@@ -1034,6 +1043,24 @@ MParserListener.prototype.enterSelectableExpression = function(ctx) {
 
 // Exit a parse tree produced by MParser#SelectableExpression.
 MParserListener.prototype.exitSelectableExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#MutableSelectableExpression.
+MParserListener.prototype.enterMutableSelectableExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#MutableSelectableExpression.
+MParserListener.prototype.exitMutableSelectableExpression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#MutableSelectorExpression.
+MParserListener.prototype.enterMutableSelectorExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#MutableSelectorExpression.
+MParserListener.prototype.exitMutableSelectorExpression = function(ctx) {
 };
 
 

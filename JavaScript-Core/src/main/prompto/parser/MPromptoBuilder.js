@@ -371,7 +371,7 @@ MPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
 
 MPromptoBuilder.prototype.exitVariableIdentifier = function(ctx) {
 	var id = this.getNodeValue(ctx.variable_identifier());
-	this.setNodeValue(ctx, id);
+	this.setNodeValue(ctx, new expression.InstanceExpression(id));
 };
 
 
@@ -1937,6 +1937,25 @@ MPromptoBuilder.prototype.exitMutable_category_type = function(ctx) {
     var typ = this.getNodeValue (ctx.category_type());
     typ.mutable = ctx.MUTABLE()!=null;
     this.setNodeValue(ctx, typ);
+};
+
+
+MPromptoBuilder.prototype.exitMutableInstanceExpression = function(ctx) {
+    var source = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.MutableExpression(source));
+};
+
+
+MPromptoBuilder.prototype.exitMutableSelectableExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+};
+
+
+MPromptoBuilder.prototype.exitMutableSelectorExpression = function(ctx) {
+    var parent = this.getNodeValue(ctx.parent);
+    var selector = this.getNodeValue(ctx.selector);
+    selector.parent = parent;
+    this.setNodeValue(ctx, selector);
 };
 
 

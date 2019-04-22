@@ -79,12 +79,28 @@ exports.testTranspiledMutableArgument = function(test) {
 	checkTranspiledOutput(test, "mutability/mutableArgument.pec");
 };
 
+exports.testInterpretedMutableChild = function(test) {
+	checkInterpretedOutput(test, "mutability/mutableChild.pec");
+};
+
+exports.testTranspiledMutableChild = function(test) {
+	checkTranspiledOutput(test, "mutability/mutableChild.pec");
+};
+
 exports.testInterpretedMutableDict = function(test) {
 	checkInterpretedOutput(test, "mutability/mutableDict.pec");
 };
 
 exports.testTranspiledMutableDict = function(test) {
 	checkTranspiledOutput(test, "mutability/mutableDict.pec");
+};
+
+exports.testInterpretedMutableInstance = function(test) {
+	checkInterpretedOutput(test, "mutability/mutableInstance.pec");
+};
+
+exports.testTranspiledMutableInstance = function(test) {
+	checkTranspiledOutput(test, "mutability/mutableInstance.pec");
 };
 
 exports.testInterpretedMutableList = function(test) {

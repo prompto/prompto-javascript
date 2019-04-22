@@ -1916,6 +1916,26 @@ EPromptoBuilder.prototype.exitMutable_category_type = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitMutableInstanceExpression = function(ctx) {
+    var source = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.MutableExpression(source));
+};
+
+
+EPromptoBuilder.prototype.exitMutableSelectableExpression = function(ctx) {
+    var name = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.InstanceExpression(name));
+};
+
+
+EPromptoBuilder.prototype.exitMutableSelectorExpression = function(ctx) {
+    var parent = this.getNodeValue(ctx.parent);
+    var selector = this.getNodeValue(ctx.selector);
+    selector.parent = parent;
+    this.setNodeValue(ctx, selector);
+};
+
+
 EPromptoBuilder.prototype.exitMinusExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, new expression.MinusExpression(exp));
