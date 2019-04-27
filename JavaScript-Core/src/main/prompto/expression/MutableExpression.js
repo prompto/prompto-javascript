@@ -1,6 +1,8 @@
 var Section = require("../parser/Section").Section;
 var CategoryType = require("../type/CategoryType").CategoryType;
-var ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
+var NullValue = require("../value/NullValue").NullValue;
+var NativeInstance = require("../value/NativeInstance").NativeInstance;
+var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 
 function MutableExpression(source) {
     Section.call(this);
@@ -21,23 +23,24 @@ MutableExpression.prototype.check = function(context) {
 
 
 MutableExpression.prototype.interpret = function(context) {
-    var sourceType = this.check(context);
-    var ctor = new ConstructorExpression(sourceType, this.source, null, true);
-    return ctor.interpret(context);
+    var value = this.source.interpret(context);
+    if(value == null || value == NullValue.instance )
+        return value;
+    else if(value instanceof ConcreteInstance || value instanceof NativeInstance)
+        return value.toMutable();
+    else
+        context.problemListener.reportInvalidCopySource(this);
 };
 
 
 MutableExpression.prototype.declare = function(transpiler) {
-    var sourceType = this.check(transpiler.context);
-    var ctor = new ConstructorExpression(sourceType, this.source, null, true);
-    ctor.declare(transpiler);
+    this.source.declare(transpiler);
 };
 
 
 MutableExpression.prototype.transpile = function(transpiler) {
-    var sourceType = this.check(transpiler.context);
-    var ctor = new ConstructorExpression(sourceType, this.source, null, true);
-    ctor.transpile(transpiler);
+    this.source.transpile(transpiler);
+    transpiler.append(".toMutable()");
 };
 
 

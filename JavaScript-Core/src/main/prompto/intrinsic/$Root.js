@@ -6,6 +6,12 @@ function $Root() {
     return this;
 }
 
+$Root.prototype.toMutable = function() {
+    var result = Object.create(this);
+    result.mutable = true;
+    return result;
+};
+
 $Root.prototype.instanceOf = function(type) {
     return this.category.indexOf(type)>=0;
 };
@@ -88,8 +94,10 @@ $Root.prototype.collectStorables = function(storablesToAdd) {
 };
 
 $Root.prototype.collectDbIds = function(idsToDelete) {
-    if(this.dbId)
-        idsToDelete.add(this.dbId.toString());
+    if(this.dbId) {
+    	var dbId = typeof(this.dbId) === "object" ? this.dbId.toString() : this.dbId;
+    	idsToDelete.add(dbId);
+    }
 };
 
 exports.$Root = $Root;

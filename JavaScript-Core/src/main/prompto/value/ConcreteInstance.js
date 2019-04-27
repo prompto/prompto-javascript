@@ -40,6 +40,13 @@ function ConcreteInstance(context, declaration) {
 ConcreteInstance.prototype = Object.create(Instance.prototype);
 ConcreteInstance.prototype.constructor = ConcreteInstance;
 
+ConcreteInstance.prototype.toMutable = function() {
+    var result = Object.create(this);
+    result.type = new CategoryType(this.type.id, true);
+    result.mutable = true;
+    return result;
+};
+
 ConcreteInstance.prototype.getType = function() {
 	return this.type;
 };
