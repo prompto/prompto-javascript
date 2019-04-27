@@ -9,7 +9,7 @@ var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var CmdLineParser = require("../utils/CmdLineParser").CmdLineParser;
 var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
-var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 
 var argsType = new DictionaryType(TextType.instance);
 
@@ -23,7 +23,7 @@ function parseCmdLineArgs(cmdLineArgs) {
 			valueArgs[key] = value;
 		});
 		var dict = new DictionaryValue(TextType.instance, valueArgs, false);
-		return new ExpressionValue(argsType, dict);
+		return new ValueExpression(argsType, dict);
 	} catch(e) {
 		// TODO
 		return new DictLiteral(false);

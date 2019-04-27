@@ -8,7 +8,7 @@ var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var TextValue = require("../value/TextValue").TextValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var MethodDeclarationMap = null;
-var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var DocumentValue = null;
 var Document = require("../intrinsic/Document").Document;
 var List = require("../intrinsic/List").List;
@@ -266,7 +266,7 @@ DocumentType.prototype.findGlobalMethod = function(context, name, returnCall) {
     else if(!methods.protos[DocumentType.instance.name])
         return null;
     else if(returnCall) {
-        var exp = new ExpressionValue(this, new DocumentValue());
+        var exp = new ValueExpression(this, new DocumentValue());
         var arg = new ArgumentAssignment(null, exp);
         var args = new ArgumentAssignmentList([arg]);
         return new MethodCall(new MethodSelector(null, new Identifier(name)), args);
@@ -279,9 +279,9 @@ DocumentType.prototype.sortByGlobalMethod = function(context, list, desc, call) 
     var self = this;
     function cmp(o1, o2) {
         var assignment = call.assignments[0];
-        assignment._expression = new ExpressionValue(self, o1);
+        assignment._expression = new ValueExpression(self, o1);
         var value1 = call.interpret(context);
-        assignment._expression = new ExpressionValue(self, o2);
+        assignment._expression = new ValueExpression(self, o2);
         var value2 = call.interpret(context);
         return compareValues(value1, value2);
     }

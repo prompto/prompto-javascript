@@ -7,7 +7,7 @@ var ConcreteCategoryDeclaration = null;
 var SingletonCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
-var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
 var NullType = require("./NullType").NullType;
@@ -538,7 +538,7 @@ CategoryType.prototype.getMemberMethods = function(context, name) {
 /* look for a method which takes this category as sole parameter */
 CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 	try {
-		var exp = new ExpressionValue(this, this.newInstance(context));
+		var exp = new ValueExpression(this, this.newInstance(context));
 		var arg = new ArgumentAssignment(null, exp);
 		var args = new ArgumentAssignmentList([arg]);
 		var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
@@ -558,9 +558,9 @@ CategoryType.prototype.sortByGlobalMethod = function(context, list, desc, method
 	var self = this;
 	function cmp(o1, o2) {
 		var assignment = method.assignments[0];
-		assignment._expression = new ExpressionValue(self, o1);
+		assignment._expression = new ValueExpression(self, o1);
 		var value1 = method.interpret(context);
-		assignment._expression = new ExpressionValue(self, o2);
+		assignment._expression = new ValueExpression(self, o2);
 		var value2 = method.interpret(context);
 		return compareValues(value1, value2);
 	}

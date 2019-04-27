@@ -1,5 +1,5 @@
 var ConcreteMethodDeclaration = null;
-var ExpressionValue = require("../value/ExpressionValue").ExpressionValue;
+var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var MethodType = require("../type/MethodType").MethodType;
