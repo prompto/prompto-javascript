@@ -1,25 +1,20 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedForward = function(test) {
-	checkInterpretedOutput(test, "forward/forward.poc");
-};
+test('Interpreted Forward', () => {
+	checkInterpretedOutput('forward/forward.poc');
+});
 
-exports.testTranspiledForward = function(test) {
-	checkTranspiledOutput(test, "forward/forward.poc");
-};
+test('Transpiled Forward', () => {
+	checkTranspiledOutput('forward/forward.poc');
+});
 

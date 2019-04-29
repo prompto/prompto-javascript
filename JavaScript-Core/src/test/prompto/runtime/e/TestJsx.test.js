@@ -1,97 +1,92 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedChildElement = function(test) {
-	checkInterpretedOutput(test, "jsx/childElement.pec");
-};
+test('Interpreted ChildElement', () => {
+	checkInterpretedOutput('jsx/childElement.pec');
+});
 
-exports.testTranspiledChildElement = function(test) {
-	checkTranspiledOutput(test, "jsx/childElement.pec");
-};
+test('Transpiled ChildElement', () => {
+	checkTranspiledOutput('jsx/childElement.pec');
+});
 
-exports.testInterpretedCodeAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/codeAttribute.pec");
-};
+test('Interpreted CodeAttribute', () => {
+	checkInterpretedOutput('jsx/codeAttribute.pec');
+});
 
-exports.testTranspiledCodeAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/codeAttribute.pec");
-};
+test('Transpiled CodeAttribute', () => {
+	checkTranspiledOutput('jsx/codeAttribute.pec');
+});
 
-exports.testInterpretedCodeElement = function(test) {
-	checkInterpretedOutput(test, "jsx/codeElement.pec");
-};
+test('Interpreted CodeElement', () => {
+	checkInterpretedOutput('jsx/codeElement.pec');
+});
 
-exports.testTranspiledCodeElement = function(test) {
-	checkTranspiledOutput(test, "jsx/codeElement.pec");
-};
+test('Transpiled CodeElement', () => {
+	checkTranspiledOutput('jsx/codeElement.pec');
+});
 
-exports.testInterpretedDotName = function(test) {
-	checkInterpretedOutput(test, "jsx/dotName.pec");
-};
+test('Interpreted DotName', () => {
+	checkInterpretedOutput('jsx/dotName.pec');
+});
 
-exports.testTranspiledDotName = function(test) {
-	checkTranspiledOutput(test, "jsx/dotName.pec");
-};
+test('Transpiled DotName', () => {
+	checkTranspiledOutput('jsx/dotName.pec');
+});
 
-exports.testInterpretedEmptyAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/emptyAttribute.pec");
-};
+test('Interpreted EmptyAttribute', () => {
+	checkInterpretedOutput('jsx/emptyAttribute.pec');
+});
 
-exports.testTranspiledEmptyAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/emptyAttribute.pec");
-};
+test('Transpiled EmptyAttribute', () => {
+	checkTranspiledOutput('jsx/emptyAttribute.pec');
+});
 
-exports.testInterpretedHyphenName = function(test) {
-	checkInterpretedOutput(test, "jsx/hyphenName.pec");
-};
+test('Interpreted HyphenName', () => {
+	checkInterpretedOutput('jsx/hyphenName.pec');
+});
 
-exports.testTranspiledHyphenName = function(test) {
-	checkTranspiledOutput(test, "jsx/hyphenName.pec");
-};
+test('Transpiled HyphenName', () => {
+	checkTranspiledOutput('jsx/hyphenName.pec');
+});
 
-exports.testInterpretedLiteralAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/literalAttribute.pec");
-};
+test('Interpreted LiteralAttribute', () => {
+	checkInterpretedOutput('jsx/literalAttribute.pec');
+});
 
-exports.testTranspiledLiteralAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/literalAttribute.pec");
-};
+test('Transpiled LiteralAttribute', () => {
+	checkTranspiledOutput('jsx/literalAttribute.pec');
+});
 
-exports.testInterpretedSelfClosingDiv = function(test) {
-	checkInterpretedOutput(test, "jsx/selfClosingDiv.pec");
-};
+test('Interpreted SelfClosingDiv', () => {
+	checkInterpretedOutput('jsx/selfClosingDiv.pec');
+});
 
-exports.testTranspiledSelfClosingDiv = function(test) {
-	checkTranspiledOutput(test, "jsx/selfClosingDiv.pec");
-};
+test('Transpiled SelfClosingDiv', () => {
+	checkTranspiledOutput('jsx/selfClosingDiv.pec');
+});
 
-exports.testInterpretedSelfClosingEmptyAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/selfClosingEmptyAttribute.pec");
-};
+test('Interpreted SelfClosingEmptyAttribute', () => {
+	checkInterpretedOutput('jsx/selfClosingEmptyAttribute.pec');
+});
 
-exports.testTranspiledSelfClosingEmptyAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/selfClosingEmptyAttribute.pec");
-};
+test('Transpiled SelfClosingEmptyAttribute', () => {
+	checkTranspiledOutput('jsx/selfClosingEmptyAttribute.pec');
+});
 
-exports.testInterpretedTextElement = function(test) {
-	checkInterpretedOutput(test, "jsx/textElement.pec");
-};
+test('Interpreted TextElement', () => {
+	checkInterpretedOutput('jsx/textElement.pec');
+});
 
-exports.testTranspiledTextElement = function(test) {
-	checkTranspiledOutput(test, "jsx/textElement.pec");
-};
+test('Transpiled TextElement', () => {
+	checkTranspiledOutput('jsx/textElement.pec');
+});
 

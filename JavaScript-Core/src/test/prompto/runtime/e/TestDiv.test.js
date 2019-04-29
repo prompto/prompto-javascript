@@ -1,49 +1,44 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedDivDecimal = function(test) {
-	checkInterpretedOutput(test, "div/divDecimal.pec");
-};
+test('Interpreted DivDecimal', () => {
+	checkInterpretedOutput('div/divDecimal.pec');
+});
 
-exports.testTranspiledDivDecimal = function(test) {
-	checkTranspiledOutput(test, "div/divDecimal.pec");
-};
+test('Transpiled DivDecimal', () => {
+	checkTranspiledOutput('div/divDecimal.pec');
+});
 
-exports.testInterpretedDivInteger = function(test) {
-	checkInterpretedOutput(test, "div/divInteger.pec");
-};
+test('Interpreted DivInteger', () => {
+	checkInterpretedOutput('div/divInteger.pec');
+});
 
-exports.testTranspiledDivInteger = function(test) {
-	checkTranspiledOutput(test, "div/divInteger.pec");
-};
+test('Transpiled DivInteger', () => {
+	checkTranspiledOutput('div/divInteger.pec');
+});
 
-exports.testInterpretedIdivInteger = function(test) {
-	checkInterpretedOutput(test, "div/idivInteger.pec");
-};
+test('Interpreted IdivInteger', () => {
+	checkInterpretedOutput('div/idivInteger.pec');
+});
 
-exports.testTranspiledIdivInteger = function(test) {
-	checkTranspiledOutput(test, "div/idivInteger.pec");
-};
+test('Transpiled IdivInteger', () => {
+	checkTranspiledOutput('div/idivInteger.pec');
+});
 
-exports.testInterpretedModInteger = function(test) {
-	checkInterpretedOutput(test, "div/modInteger.pec");
-};
+test('Interpreted ModInteger', () => {
+	checkInterpretedOutput('div/modInteger.pec');
+});
 
-exports.testTranspiledModInteger = function(test) {
-	checkTranspiledOutput(test, "div/modInteger.pec");
-};
+test('Transpiled ModInteger', () => {
+	checkTranspiledOutput('div/modInteger.pec');
+});
 

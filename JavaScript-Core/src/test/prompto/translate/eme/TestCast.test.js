@@ -1,56 +1,54 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAutoDecimalCast = function(test) {
-	compareResourceEME(test, "cast/autoDecimalCast.pec");
-};
+test('AutoDecimalCast', () => {
+	compareResourceEME('cast/autoDecimalCast.pec');
+});
 
-exports.testAutoDowncast = function(test) {
-	compareResourceEME(test, "cast/autoDowncast.pec");
-};
+test('AutoDowncast', () => {
+	compareResourceEME('cast/autoDowncast.pec');
+});
 
-exports.testAutoIntegerCast = function(test) {
-	compareResourceEME(test, "cast/autoIntegerCast.pec");
-};
+test('AutoIntegerCast', () => {
+	compareResourceEME('cast/autoIntegerCast.pec');
+});
 
-exports.testCastChild = function(test) {
-	compareResourceEME(test, "cast/castChild.pec");
-};
+test('CastChild', () => {
+	compareResourceEME('cast/castChild.pec');
+});
 
-exports.testCastDecimal = function(test) {
-	compareResourceEME(test, "cast/castDecimal.pec");
-};
+test('CastDecimal', () => {
+	compareResourceEME('cast/castDecimal.pec');
+});
 
-exports.testCastDocument = function(test) {
-	compareResourceEME(test, "cast/castDocument.pec");
-};
+test('CastDocument', () => {
+	compareResourceEME('cast/castDocument.pec');
+});
 
-exports.testCastInteger = function(test) {
-	compareResourceEME(test, "cast/castInteger.pec");
-};
+test('CastInteger', () => {
+	compareResourceEME('cast/castInteger.pec');
+});
 
-exports.testCastMethod = function(test) {
-	compareResourceEME(test, "cast/castMethod.pec");
-};
+test('CastMethod', () => {
+	compareResourceEME('cast/castMethod.pec');
+});
 
-exports.testCastMissing = function(test) {
-	compareResourceEME(test, "cast/castMissing.pec");
-};
+test('CastMissing', () => {
+	compareResourceEME('cast/castMissing.pec');
+});
 
-exports.testCastNull = function(test) {
-	compareResourceEME(test, "cast/castNull.pec");
-};
+test('CastNull', () => {
+	compareResourceEME('cast/castNull.pec');
+});
 
-exports.testCastRoot = function(test) {
-	compareResourceEME(test, "cast/castRoot.pec");
-};
+test('CastRoot', () => {
+	compareResourceEME('cast/castRoot.pec');
+});
 
-exports.testIsAChild = function(test) {
-	compareResourceEME(test, "cast/isAChild.pec");
-};
+test('IsAChild', () => {
+	compareResourceEME('cast/isAChild.pec');
+});
 
-exports.testIsAText = function(test) {
-	compareResourceEME(test, "cast/isAText.pec");
-};
+test('IsAText', () => {
+	compareResourceEME('cast/isAText.pec');
+});
 

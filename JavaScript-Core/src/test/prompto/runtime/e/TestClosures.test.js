@@ -1,49 +1,44 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedGlobalClosureNoArg = function(test) {
-	checkInterpretedOutput(test, "closures/globalClosureNoArg.pec");
-};
+test('Interpreted GlobalClosureNoArg', () => {
+	checkInterpretedOutput('closures/globalClosureNoArg.pec');
+});
 
-exports.testTranspiledGlobalClosureNoArg = function(test) {
-	checkTranspiledOutput(test, "closures/globalClosureNoArg.pec");
-};
+test('Transpiled GlobalClosureNoArg', () => {
+	checkTranspiledOutput('closures/globalClosureNoArg.pec');
+});
 
-exports.testInterpretedGlobalClosureWithArg = function(test) {
-	checkInterpretedOutput(test, "closures/globalClosureWithArg.pec");
-};
+test('Interpreted GlobalClosureWithArg', () => {
+	checkInterpretedOutput('closures/globalClosureWithArg.pec');
+});
 
-exports.testTranspiledGlobalClosureWithArg = function(test) {
-	checkTranspiledOutput(test, "closures/globalClosureWithArg.pec");
-};
+test('Transpiled GlobalClosureWithArg', () => {
+	checkTranspiledOutput('closures/globalClosureWithArg.pec');
+});
 
-exports.testInterpretedInstanceClosureNoArg = function(test) {
-	checkInterpretedOutput(test, "closures/instanceClosureNoArg.pec");
-};
+test('Interpreted InstanceClosureNoArg', () => {
+	checkInterpretedOutput('closures/instanceClosureNoArg.pec');
+});
 
-exports.testTranspiledInstanceClosureNoArg = function(test) {
-	checkTranspiledOutput(test, "closures/instanceClosureNoArg.pec");
-};
+test('Transpiled InstanceClosureNoArg', () => {
+	checkTranspiledOutput('closures/instanceClosureNoArg.pec');
+});
 
-exports.testInterpretedParameterClosure = function(test) {
-	checkInterpretedOutput(test, "closures/parameterClosure.pec");
-};
+test('Interpreted ParameterClosure', () => {
+	checkInterpretedOutput('closures/parameterClosure.pec');
+});
 
-exports.testTranspiledParameterClosure = function(test) {
-	checkTranspiledOutput(test, "closures/parameterClosure.pec");
-};
+test('Transpiled ParameterClosure', () => {
+	checkTranspiledOutput('closures/parameterClosure.pec');
+});
 

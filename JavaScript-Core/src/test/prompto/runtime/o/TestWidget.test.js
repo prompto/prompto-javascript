@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedMinimal = function(test) {
-	checkInterpretedOutput(test, "widget/minimal.poc");
-};
+test('Interpreted Minimal', () => {
+	checkInterpretedOutput('widget/minimal.poc');
+});
 
-exports.testTranspiledMinimal = function(test) {
-	checkTranspiledOutput(test, "widget/minimal.poc");
-};
+test('Transpiled Minimal', () => {
+	checkTranspiledOutput('widget/minimal.poc');
+});
 
-exports.testInterpretedNative = function(test) {
-	checkInterpretedOutput(test, "widget/native.poc");
-};
+test('Interpreted Native', () => {
+	checkInterpretedOutput('widget/native.poc');
+});
 
-exports.testTranspiledNative = function(test) {
-	checkTranspiledOutput(test, "widget/native.poc");
-};
+test('Transpiled Native', () => {
+	checkTranspiledOutput('widget/native.poc');
+});
 
-exports.testInterpretedWithEvent = function(test) {
-	checkInterpretedOutput(test, "widget/withEvent.poc");
-};
+test('Interpreted WithEvent', () => {
+	checkInterpretedOutput('widget/withEvent.poc');
+});
 
-exports.testTranspiledWithEvent = function(test) {
-	checkTranspiledOutput(test, "widget/withEvent.poc");
-};
+test('Transpiled WithEvent', () => {
+	checkTranspiledOutput('widget/withEvent.poc');
+});
 

@@ -1,12 +1,10 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testFilterFromList = function(test) {
-	compareResourceOEO(test, "filter/filterFromList.poc");
-};
+test('FilterFromList', () => {
+	compareResourceOEO('filter/filterFromList.poc');
+});
 
-exports.testFilterFromSet = function(test) {
-	compareResourceOEO(test, "filter/filterFromSet.poc");
-};
+test('FilterFromSet', () => {
+	compareResourceOEO('filter/filterFromSet.poc');
+});
 

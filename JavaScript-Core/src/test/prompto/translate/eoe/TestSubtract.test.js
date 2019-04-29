@@ -1,44 +1,42 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testSubDate = function(test) {
-	compareResourceEOE(test, "subtract/subDate.pec");
-};
+test('SubDate', () => {
+	compareResourceEOE('subtract/subDate.pec');
+});
 
-exports.testSubDateTime = function(test) {
-	compareResourceEOE(test, "subtract/subDateTime.pec");
-};
+test('SubDateTime', () => {
+	compareResourceEOE('subtract/subDateTime.pec');
+});
 
-exports.testSubDecimal = function(test) {
-	compareResourceEOE(test, "subtract/subDecimal.pec");
-};
+test('SubDecimal', () => {
+	compareResourceEOE('subtract/subDecimal.pec');
+});
 
-exports.testSubDecimalEnum = function(test) {
-	compareResourceEOE(test, "subtract/subDecimalEnum.pec");
-};
+test('SubDecimalEnum', () => {
+	compareResourceEOE('subtract/subDecimalEnum.pec');
+});
 
-exports.testSubInteger = function(test) {
-	compareResourceEOE(test, "subtract/subInteger.pec");
-};
+test('SubInteger', () => {
+	compareResourceEOE('subtract/subInteger.pec');
+});
 
-exports.testSubIntegerEnum = function(test) {
-	compareResourceEOE(test, "subtract/subIntegerEnum.pec");
-};
+test('SubIntegerEnum', () => {
+	compareResourceEOE('subtract/subIntegerEnum.pec');
+});
 
-exports.testSubList = function(test) {
-	compareResourceEOE(test, "subtract/subList.pec");
-};
+test('SubList', () => {
+	compareResourceEOE('subtract/subList.pec');
+});
 
-exports.testSubPeriod = function(test) {
-	compareResourceEOE(test, "subtract/subPeriod.pec");
-};
+test('SubPeriod', () => {
+	compareResourceEOE('subtract/subPeriod.pec');
+});
 
-exports.testSubSet = function(test) {
-	compareResourceEOE(test, "subtract/subSet.pec");
-};
+test('SubSet', () => {
+	compareResourceEOE('subtract/subSet.pec');
+});
 
-exports.testSubTime = function(test) {
-	compareResourceEOE(test, "subtract/subTime.pec");
-};
+test('SubTime', () => {
+	compareResourceEOE('subtract/subTime.pec');
+});
 

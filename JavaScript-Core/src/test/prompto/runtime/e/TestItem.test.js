@@ -1,57 +1,52 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedItemDict = function(test) {
-	checkInterpretedOutput(test, "item/itemDict.pec");
-};
+test('Interpreted ItemDict', () => {
+	checkInterpretedOutput('item/itemDict.pec');
+});
 
-exports.testTranspiledItemDict = function(test) {
-	checkTranspiledOutput(test, "item/itemDict.pec");
-};
+test('Transpiled ItemDict', () => {
+	checkTranspiledOutput('item/itemDict.pec');
+});
 
-exports.testInterpretedItemList = function(test) {
-	checkInterpretedOutput(test, "item/itemList.pec");
-};
+test('Interpreted ItemList', () => {
+	checkInterpretedOutput('item/itemList.pec');
+});
 
-exports.testTranspiledItemList = function(test) {
-	checkTranspiledOutput(test, "item/itemList.pec");
-};
+test('Transpiled ItemList', () => {
+	checkTranspiledOutput('item/itemList.pec');
+});
 
-exports.testInterpretedItemRange = function(test) {
-	checkInterpretedOutput(test, "item/itemRange.pec");
-};
+test('Interpreted ItemRange', () => {
+	checkInterpretedOutput('item/itemRange.pec');
+});
 
-exports.testTranspiledItemRange = function(test) {
-	checkTranspiledOutput(test, "item/itemRange.pec");
-};
+test('Transpiled ItemRange', () => {
+	checkTranspiledOutput('item/itemRange.pec');
+});
 
-exports.testInterpretedItemSet = function(test) {
-	checkInterpretedOutput(test, "item/itemSet.pec");
-};
+test('Interpreted ItemSet', () => {
+	checkInterpretedOutput('item/itemSet.pec');
+});
 
-exports.testTranspiledItemSet = function(test) {
-	checkTranspiledOutput(test, "item/itemSet.pec");
-};
+test('Transpiled ItemSet', () => {
+	checkTranspiledOutput('item/itemSet.pec');
+});
 
-exports.testInterpretedItemText = function(test) {
-	checkInterpretedOutput(test, "item/itemText.pec");
-};
+test('Interpreted ItemText', () => {
+	checkInterpretedOutput('item/itemText.pec');
+});
 
-exports.testTranspiledItemText = function(test) {
-	checkTranspiledOutput(test, "item/itemText.pec");
-};
+test('Transpiled ItemText', () => {
+	checkTranspiledOutput('item/itemText.pec');
+});
 

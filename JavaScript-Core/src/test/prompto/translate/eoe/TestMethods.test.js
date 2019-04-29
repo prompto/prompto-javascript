@@ -1,104 +1,102 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testAnonymous = function(test) {
-	compareResourceEOE(test, "methods/anonymous.pec");
-};
+test('Anonymous', () => {
+	compareResourceEOE('methods/anonymous.pec');
+});
 
-exports.testAttribute = function(test) {
-	compareResourceEOE(test, "methods/attribute.pec");
-};
+test('Attribute', () => {
+	compareResourceEOE('methods/attribute.pec');
+});
 
-exports.testDefault = function(test) {
-	compareResourceEOE(test, "methods/default.pec");
-};
+test('Default', () => {
+	compareResourceEOE('methods/default.pec');
+});
 
-exports.testE_as_e_bug = function(test) {
-	compareResourceEOE(test, "methods/e_as_e_bug.pec");
-};
+test('E_as_e_bug', () => {
+	compareResourceEOE('methods/e_as_e_bug.pec');
+});
 
-exports.testEmpty = function(test) {
-	compareResourceEOE(test, "methods/empty.pec");
-};
+test('Empty', () => {
+	compareResourceEOE('methods/empty.pec');
+});
 
-exports.testExplicit = function(test) {
-	compareResourceEOE(test, "methods/explicit.pec");
-};
+test('Explicit', () => {
+	compareResourceEOE('methods/explicit.pec');
+});
 
-exports.testExplicitMember = function(test) {
-	compareResourceEOE(test, "methods/explicitMember.pec");
-};
+test('ExplicitMember', () => {
+	compareResourceEOE('methods/explicitMember.pec');
+});
 
-exports.testExpressionMember = function(test) {
-	compareResourceEOE(test, "methods/expressionMember.pec");
-};
+test('ExpressionMember', () => {
+	compareResourceEOE('methods/expressionMember.pec');
+});
 
-exports.testExpressionWith = function(test) {
-	compareResourceEOE(test, "methods/expressionWith.pec");
-};
+test('ExpressionWith', () => {
+	compareResourceEOE('methods/expressionWith.pec');
+});
 
-exports.testExtended = function(test) {
-	compareResourceEOE(test, "methods/extended.pec");
-};
+test('Extended', () => {
+	compareResourceEOE('methods/extended.pec');
+});
 
-exports.testGlobal = function(test) {
-	compareResourceEOE(test, "methods/global.pec");
-};
+test('Global', () => {
+	compareResourceEOE('methods/global.pec');
+});
 
-exports.testHomonym = function(test) {
-	compareResourceEOE(test, "methods/homonym.pec");
-};
+test('Homonym', () => {
+	compareResourceEOE('methods/homonym.pec');
+});
 
-exports.testImplicitAnd = function(test) {
-	compareResourceEOE(test, "methods/implicitAnd.pec");
-};
+test('ImplicitAnd', () => {
+	compareResourceEOE('methods/implicitAnd.pec');
+});
 
-exports.testImplicitMember = function(test) {
-	compareResourceEOE(test, "methods/implicitMember.pec");
-};
+test('ImplicitMember', () => {
+	compareResourceEOE('methods/implicitMember.pec');
+});
 
-exports.testMember = function(test) {
-	compareResourceEOE(test, "methods/member.pec");
-};
+test('Member', () => {
+	compareResourceEOE('methods/member.pec');
+});
 
-exports.testMemberCall = function(test) {
-	compareResourceEOE(test, "methods/memberCall.pec");
-};
+test('MemberCall', () => {
+	compareResourceEOE('methods/memberCall.pec');
+});
 
-exports.testOverride = function(test) {
-	compareResourceEOE(test, "methods/override.pec");
-};
+test('Override', () => {
+	compareResourceEOE('methods/override.pec');
+});
 
-exports.testPolymorphic_abstract = function(test) {
-	compareResourceEOE(test, "methods/polymorphic_abstract.pec");
-};
+test('Polymorphic_abstract', () => {
+	compareResourceEOE('methods/polymorphic_abstract.pec');
+});
 
-exports.testPolymorphic_implicit = function(test) {
-	compareResourceEOE(test, "methods/polymorphic_implicit.pec");
-};
+test('Polymorphic_implicit', () => {
+	compareResourceEOE('methods/polymorphic_implicit.pec');
+});
 
-exports.testPolymorphic_named = function(test) {
-	compareResourceEOE(test, "methods/polymorphic_named.pec");
-};
+test('Polymorphic_named', () => {
+	compareResourceEOE('methods/polymorphic_named.pec');
+});
 
-exports.testPolymorphic_runtime = function(test) {
-	compareResourceEOE(test, "methods/polymorphic_runtime.pec");
-};
+test('Polymorphic_runtime', () => {
+	compareResourceEOE('methods/polymorphic_runtime.pec');
+});
 
-exports.testReturn = function(test) {
-	compareResourceEOE(test, "methods/return.pec");
-};
+test('Return', () => {
+	compareResourceEOE('methods/return.pec');
+});
 
-exports.testSpecified = function(test) {
-	compareResourceEOE(test, "methods/specified.pec");
-};
+test('Specified', () => {
+	compareResourceEOE('methods/specified.pec');
+});
 
-exports.testTextAsync = function(test) {
-	compareResourceEOE(test, "methods/textAsync.pec");
-};
+test('TextAsync', () => {
+	compareResourceEOE('methods/textAsync.pec');
+});
 
-exports.testVoidAsync = function(test) {
-	compareResourceEOE(test, "methods/voidAsync.pec");
-};
+test('VoidAsync', () => {
+	compareResourceEOE('methods/voidAsync.pec');
+});
 

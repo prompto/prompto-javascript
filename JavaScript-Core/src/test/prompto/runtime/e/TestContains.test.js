@@ -1,249 +1,244 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedContainsAllDict = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllDict.pec");
-};
+test('Interpreted ContainsAllDict', () => {
+	checkInterpretedOutput('contains/containsAllDict.pec');
+});
 
-exports.testTranspiledContainsAllDict = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllDict.pec");
-};
+test('Transpiled ContainsAllDict', () => {
+	checkTranspiledOutput('contains/containsAllDict.pec');
+});
 
-exports.testInterpretedContainsAllList = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllList.pec");
-};
+test('Interpreted ContainsAllList', () => {
+	checkInterpretedOutput('contains/containsAllList.pec');
+});
 
-exports.testTranspiledContainsAllList = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllList.pec");
-};
+test('Transpiled ContainsAllList', () => {
+	checkTranspiledOutput('contains/containsAllList.pec');
+});
 
-exports.testInterpretedContainsAllRange = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllRange.pec");
-};
+test('Interpreted ContainsAllRange', () => {
+	checkInterpretedOutput('contains/containsAllRange.pec');
+});
 
-exports.testTranspiledContainsAllRange = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllRange.pec");
-};
+test('Transpiled ContainsAllRange', () => {
+	checkTranspiledOutput('contains/containsAllRange.pec');
+});
 
-exports.testInterpretedContainsAllSet = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllSet.pec");
-};
+test('Interpreted ContainsAllSet', () => {
+	checkInterpretedOutput('contains/containsAllSet.pec');
+});
 
-exports.testTranspiledContainsAllSet = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllSet.pec");
-};
+test('Transpiled ContainsAllSet', () => {
+	checkTranspiledOutput('contains/containsAllSet.pec');
+});
 
-exports.testInterpretedContainsAllText = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllText.pec");
-};
+test('Interpreted ContainsAllText', () => {
+	checkInterpretedOutput('contains/containsAllText.pec');
+});
 
-exports.testTranspiledContainsAllText = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllText.pec");
-};
+test('Transpiled ContainsAllText', () => {
+	checkTranspiledOutput('contains/containsAllText.pec');
+});
 
-exports.testInterpretedContainsAllTuple = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllTuple.pec");
-};
+test('Interpreted ContainsAllTuple', () => {
+	checkInterpretedOutput('contains/containsAllTuple.pec');
+});
 
-exports.testTranspiledContainsAllTuple = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllTuple.pec");
-};
+test('Transpiled ContainsAllTuple', () => {
+	checkTranspiledOutput('contains/containsAllTuple.pec');
+});
 
-exports.testInterpretedContainsAnyDict = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyDict.pec");
-};
+test('Interpreted ContainsAnyDict', () => {
+	checkInterpretedOutput('contains/containsAnyDict.pec');
+});
 
-exports.testTranspiledContainsAnyDict = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyDict.pec");
-};
+test('Transpiled ContainsAnyDict', () => {
+	checkTranspiledOutput('contains/containsAnyDict.pec');
+});
 
-exports.testInterpretedContainsAnyList = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyList.pec");
-};
+test('Interpreted ContainsAnyList', () => {
+	checkInterpretedOutput('contains/containsAnyList.pec');
+});
 
-exports.testTranspiledContainsAnyList = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyList.pec");
-};
+test('Transpiled ContainsAnyList', () => {
+	checkTranspiledOutput('contains/containsAnyList.pec');
+});
 
-exports.testInterpretedContainsAnyRange = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyRange.pec");
-};
+test('Interpreted ContainsAnyRange', () => {
+	checkInterpretedOutput('contains/containsAnyRange.pec');
+});
 
-exports.testTranspiledContainsAnyRange = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyRange.pec");
-};
+test('Transpiled ContainsAnyRange', () => {
+	checkTranspiledOutput('contains/containsAnyRange.pec');
+});
 
-exports.testInterpretedContainsAnySet = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnySet.pec");
-};
+test('Interpreted ContainsAnySet', () => {
+	checkInterpretedOutput('contains/containsAnySet.pec');
+});
 
-exports.testTranspiledContainsAnySet = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnySet.pec");
-};
+test('Transpiled ContainsAnySet', () => {
+	checkTranspiledOutput('contains/containsAnySet.pec');
+});
 
-exports.testInterpretedContainsAnyText = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyText.pec");
-};
+test('Interpreted ContainsAnyText', () => {
+	checkInterpretedOutput('contains/containsAnyText.pec');
+});
 
-exports.testTranspiledContainsAnyText = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyText.pec");
-};
+test('Transpiled ContainsAnyText', () => {
+	checkTranspiledOutput('contains/containsAnyText.pec');
+});
 
-exports.testInterpretedContainsAnyTuple = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyTuple.pec");
-};
+test('Interpreted ContainsAnyTuple', () => {
+	checkInterpretedOutput('contains/containsAnyTuple.pec');
+});
 
-exports.testTranspiledContainsAnyTuple = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyTuple.pec");
-};
+test('Transpiled ContainsAnyTuple', () => {
+	checkTranspiledOutput('contains/containsAnyTuple.pec');
+});
 
-exports.testInterpretedInCharacterRange = function(test) {
-	checkInterpretedOutput(test, "contains/inCharacterRange.pec");
-};
+test('Interpreted InCharacterRange', () => {
+	checkInterpretedOutput('contains/inCharacterRange.pec');
+});
 
-exports.testTranspiledInCharacterRange = function(test) {
-	checkTranspiledOutput(test, "contains/inCharacterRange.pec");
-};
+test('Transpiled InCharacterRange', () => {
+	checkTranspiledOutput('contains/inCharacterRange.pec');
+});
 
-exports.testInterpretedInDateRange = function(test) {
-	checkInterpretedOutput(test, "contains/inDateRange.pec");
-};
+test('Interpreted InDateRange', () => {
+	checkInterpretedOutput('contains/inDateRange.pec');
+});
 
-exports.testTranspiledInDateRange = function(test) {
-	checkTranspiledOutput(test, "contains/inDateRange.pec");
-};
+test('Transpiled InDateRange', () => {
+	checkTranspiledOutput('contains/inDateRange.pec');
+});
 
-exports.testInterpretedInDict = function(test) {
-	checkInterpretedOutput(test, "contains/inDict.pec");
-};
+test('Interpreted InDict', () => {
+	checkInterpretedOutput('contains/inDict.pec');
+});
 
-exports.testTranspiledInDict = function(test) {
-	checkTranspiledOutput(test, "contains/inDict.pec");
-};
+test('Transpiled InDict', () => {
+	checkTranspiledOutput('contains/inDict.pec');
+});
 
-exports.testInterpretedInIntegerRange = function(test) {
-	checkInterpretedOutput(test, "contains/inIntegerRange.pec");
-};
+test('Interpreted InIntegerRange', () => {
+	checkInterpretedOutput('contains/inIntegerRange.pec');
+});
 
-exports.testTranspiledInIntegerRange = function(test) {
-	checkTranspiledOutput(test, "contains/inIntegerRange.pec");
-};
+test('Transpiled InIntegerRange', () => {
+	checkTranspiledOutput('contains/inIntegerRange.pec');
+});
 
-exports.testInterpretedInList = function(test) {
-	checkInterpretedOutput(test, "contains/inList.pec");
-};
+test('Interpreted InList', () => {
+	checkInterpretedOutput('contains/inList.pec');
+});
 
-exports.testTranspiledInList = function(test) {
-	checkTranspiledOutput(test, "contains/inList.pec");
-};
+test('Transpiled InList', () => {
+	checkTranspiledOutput('contains/inList.pec');
+});
 
-exports.testInterpretedInSet = function(test) {
-	checkInterpretedOutput(test, "contains/inSet.pec");
-};
+test('Interpreted InSet', () => {
+	checkInterpretedOutput('contains/inSet.pec');
+});
 
-exports.testTranspiledInSet = function(test) {
-	checkTranspiledOutput(test, "contains/inSet.pec");
-};
+test('Transpiled InSet', () => {
+	checkTranspiledOutput('contains/inSet.pec');
+});
 
-exports.testInterpretedInText = function(test) {
-	checkInterpretedOutput(test, "contains/inText.pec");
-};
+test('Interpreted InText', () => {
+	checkInterpretedOutput('contains/inText.pec');
+});
 
-exports.testTranspiledInText = function(test) {
-	checkTranspiledOutput(test, "contains/inText.pec");
-};
+test('Transpiled InText', () => {
+	checkTranspiledOutput('contains/inText.pec');
+});
 
-exports.testInterpretedInTimeRange = function(test) {
-	checkInterpretedOutput(test, "contains/inTimeRange.pec");
-};
+test('Interpreted InTimeRange', () => {
+	checkInterpretedOutput('contains/inTimeRange.pec');
+});
 
-exports.testTranspiledInTimeRange = function(test) {
-	checkTranspiledOutput(test, "contains/inTimeRange.pec");
-};
+test('Transpiled InTimeRange', () => {
+	checkTranspiledOutput('contains/inTimeRange.pec');
+});
 
-exports.testInterpretedInTuple = function(test) {
-	checkInterpretedOutput(test, "contains/inTuple.pec");
-};
+test('Interpreted InTuple', () => {
+	checkInterpretedOutput('contains/inTuple.pec');
+});
 
-exports.testTranspiledInTuple = function(test) {
-	checkTranspiledOutput(test, "contains/inTuple.pec");
-};
+test('Transpiled InTuple', () => {
+	checkTranspiledOutput('contains/inTuple.pec');
+});
 
-exports.testInterpretedNinCharacterRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninCharacterRange.pec");
-};
+test('Interpreted NinCharacterRange', () => {
+	checkInterpretedOutput('contains/ninCharacterRange.pec');
+});
 
-exports.testTranspiledNinCharacterRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninCharacterRange.pec");
-};
+test('Transpiled NinCharacterRange', () => {
+	checkTranspiledOutput('contains/ninCharacterRange.pec');
+});
 
-exports.testInterpretedNinDateRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninDateRange.pec");
-};
+test('Interpreted NinDateRange', () => {
+	checkInterpretedOutput('contains/ninDateRange.pec');
+});
 
-exports.testTranspiledNinDateRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninDateRange.pec");
-};
+test('Transpiled NinDateRange', () => {
+	checkTranspiledOutput('contains/ninDateRange.pec');
+});
 
-exports.testInterpretedNinDict = function(test) {
-	checkInterpretedOutput(test, "contains/ninDict.pec");
-};
+test('Interpreted NinDict', () => {
+	checkInterpretedOutput('contains/ninDict.pec');
+});
 
-exports.testTranspiledNinDict = function(test) {
-	checkTranspiledOutput(test, "contains/ninDict.pec");
-};
+test('Transpiled NinDict', () => {
+	checkTranspiledOutput('contains/ninDict.pec');
+});
 
-exports.testInterpretedNinIntegerRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninIntegerRange.pec");
-};
+test('Interpreted NinIntegerRange', () => {
+	checkInterpretedOutput('contains/ninIntegerRange.pec');
+});
 
-exports.testTranspiledNinIntegerRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninIntegerRange.pec");
-};
+test('Transpiled NinIntegerRange', () => {
+	checkTranspiledOutput('contains/ninIntegerRange.pec');
+});
 
-exports.testInterpretedNinList = function(test) {
-	checkInterpretedOutput(test, "contains/ninList.pec");
-};
+test('Interpreted NinList', () => {
+	checkInterpretedOutput('contains/ninList.pec');
+});
 
-exports.testTranspiledNinList = function(test) {
-	checkTranspiledOutput(test, "contains/ninList.pec");
-};
+test('Transpiled NinList', () => {
+	checkTranspiledOutput('contains/ninList.pec');
+});
 
-exports.testInterpretedNinSet = function(test) {
-	checkInterpretedOutput(test, "contains/ninSet.pec");
-};
+test('Interpreted NinSet', () => {
+	checkInterpretedOutput('contains/ninSet.pec');
+});
 
-exports.testTranspiledNinSet = function(test) {
-	checkTranspiledOutput(test, "contains/ninSet.pec");
-};
+test('Transpiled NinSet', () => {
+	checkTranspiledOutput('contains/ninSet.pec');
+});
 
-exports.testInterpretedNinText = function(test) {
-	checkInterpretedOutput(test, "contains/ninText.pec");
-};
+test('Interpreted NinText', () => {
+	checkInterpretedOutput('contains/ninText.pec');
+});
 
-exports.testTranspiledNinText = function(test) {
-	checkTranspiledOutput(test, "contains/ninText.pec");
-};
+test('Transpiled NinText', () => {
+	checkTranspiledOutput('contains/ninText.pec');
+});
 
-exports.testInterpretedNinTimeRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninTimeRange.pec");
-};
+test('Interpreted NinTimeRange', () => {
+	checkInterpretedOutput('contains/ninTimeRange.pec');
+});
 
-exports.testTranspiledNinTimeRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninTimeRange.pec");
-};
+test('Transpiled NinTimeRange', () => {
+	checkTranspiledOutput('contains/ninTimeRange.pec');
+});
 

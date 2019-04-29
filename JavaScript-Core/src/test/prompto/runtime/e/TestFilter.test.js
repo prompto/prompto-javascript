@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedFilterFromCursor = function(test) {
-	checkInterpretedOutput(test, "filter/filterFromCursor.pec");
-};
+test('Interpreted FilterFromCursor', () => {
+	checkInterpretedOutput('filter/filterFromCursor.pec');
+});
 
-exports.testTranspiledFilterFromCursor = function(test) {
-	checkTranspiledOutput(test, "filter/filterFromCursor.pec");
-};
+test('Transpiled FilterFromCursor', () => {
+	checkTranspiledOutput('filter/filterFromCursor.pec');
+});
 
-exports.testInterpretedFilterFromList = function(test) {
-	checkInterpretedOutput(test, "filter/filterFromList.pec");
-};
+test('Interpreted FilterFromList', () => {
+	checkInterpretedOutput('filter/filterFromList.pec');
+});
 
-exports.testTranspiledFilterFromList = function(test) {
-	checkTranspiledOutput(test, "filter/filterFromList.pec");
-};
+test('Transpiled FilterFromList', () => {
+	checkTranspiledOutput('filter/filterFromList.pec');
+});
 
-exports.testInterpretedFilterFromSet = function(test) {
-	checkInterpretedOutput(test, "filter/filterFromSet.pec");
-};
+test('Interpreted FilterFromSet', () => {
+	checkInterpretedOutput('filter/filterFromSet.pec');
+});
 
-exports.testTranspiledFilterFromSet = function(test) {
-	checkTranspiledOutput(test, "filter/filterFromSet.pec");
-};
+test('Transpiled FilterFromSet', () => {
+	checkTranspiledOutput('filter/filterFromSet.pec');
+});
 

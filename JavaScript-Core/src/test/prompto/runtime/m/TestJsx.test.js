@@ -1,97 +1,92 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseMParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseMParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedChildElement = function(test) {
-	checkInterpretedOutput(test, "jsx/childElement.pmc");
-};
+test('Interpreted ChildElement', () => {
+	checkInterpretedOutput('jsx/childElement.pmc');
+});
 
-exports.testTranspiledChildElement = function(test) {
-	checkTranspiledOutput(test, "jsx/childElement.pmc");
-};
+test('Transpiled ChildElement', () => {
+	checkTranspiledOutput('jsx/childElement.pmc');
+});
 
-exports.testInterpretedCodeAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/codeAttribute.pmc");
-};
+test('Interpreted CodeAttribute', () => {
+	checkInterpretedOutput('jsx/codeAttribute.pmc');
+});
 
-exports.testTranspiledCodeAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/codeAttribute.pmc");
-};
+test('Transpiled CodeAttribute', () => {
+	checkTranspiledOutput('jsx/codeAttribute.pmc');
+});
 
-exports.testInterpretedCodeElement = function(test) {
-	checkInterpretedOutput(test, "jsx/codeElement.pmc");
-};
+test('Interpreted CodeElement', () => {
+	checkInterpretedOutput('jsx/codeElement.pmc');
+});
 
-exports.testTranspiledCodeElement = function(test) {
-	checkTranspiledOutput(test, "jsx/codeElement.pmc");
-};
+test('Transpiled CodeElement', () => {
+	checkTranspiledOutput('jsx/codeElement.pmc');
+});
 
-exports.testInterpretedDotName = function(test) {
-	checkInterpretedOutput(test, "jsx/dotName.pmc");
-};
+test('Interpreted DotName', () => {
+	checkInterpretedOutput('jsx/dotName.pmc');
+});
 
-exports.testTranspiledDotName = function(test) {
-	checkTranspiledOutput(test, "jsx/dotName.pmc");
-};
+test('Transpiled DotName', () => {
+	checkTranspiledOutput('jsx/dotName.pmc');
+});
 
-exports.testInterpretedEmptyAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/emptyAttribute.pmc");
-};
+test('Interpreted EmptyAttribute', () => {
+	checkInterpretedOutput('jsx/emptyAttribute.pmc');
+});
 
-exports.testTranspiledEmptyAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/emptyAttribute.pmc");
-};
+test('Transpiled EmptyAttribute', () => {
+	checkTranspiledOutput('jsx/emptyAttribute.pmc');
+});
 
-exports.testInterpretedHyphenName = function(test) {
-	checkInterpretedOutput(test, "jsx/hyphenName.pmc");
-};
+test('Interpreted HyphenName', () => {
+	checkInterpretedOutput('jsx/hyphenName.pmc');
+});
 
-exports.testTranspiledHyphenName = function(test) {
-	checkTranspiledOutput(test, "jsx/hyphenName.pmc");
-};
+test('Transpiled HyphenName', () => {
+	checkTranspiledOutput('jsx/hyphenName.pmc');
+});
 
-exports.testInterpretedLiteralAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/literalAttribute.pmc");
-};
+test('Interpreted LiteralAttribute', () => {
+	checkInterpretedOutput('jsx/literalAttribute.pmc');
+});
 
-exports.testTranspiledLiteralAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/literalAttribute.pmc");
-};
+test('Transpiled LiteralAttribute', () => {
+	checkTranspiledOutput('jsx/literalAttribute.pmc');
+});
 
-exports.testInterpretedSelfClosingDiv = function(test) {
-	checkInterpretedOutput(test, "jsx/selfClosingDiv.pmc");
-};
+test('Interpreted SelfClosingDiv', () => {
+	checkInterpretedOutput('jsx/selfClosingDiv.pmc');
+});
 
-exports.testTranspiledSelfClosingDiv = function(test) {
-	checkTranspiledOutput(test, "jsx/selfClosingDiv.pmc");
-};
+test('Transpiled SelfClosingDiv', () => {
+	checkTranspiledOutput('jsx/selfClosingDiv.pmc');
+});
 
-exports.testInterpretedSelfClosingEmptyAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/selfClosingEmptyAttribute.pmc");
-};
+test('Interpreted SelfClosingEmptyAttribute', () => {
+	checkInterpretedOutput('jsx/selfClosingEmptyAttribute.pmc');
+});
 
-exports.testTranspiledSelfClosingEmptyAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/selfClosingEmptyAttribute.pmc");
-};
+test('Transpiled SelfClosingEmptyAttribute', () => {
+	checkTranspiledOutput('jsx/selfClosingEmptyAttribute.pmc');
+});
 
-exports.testInterpretedTextElement = function(test) {
-	checkInterpretedOutput(test, "jsx/textElement.pmc");
-};
+test('Interpreted TextElement', () => {
+	checkInterpretedOutput('jsx/textElement.pmc');
+});
 
-exports.testTranspiledTextElement = function(test) {
-	checkTranspiledOutput(test, "jsx/textElement.pmc");
-};
+test('Transpiled TextElement', () => {
+	checkTranspiledOutput('jsx/textElement.pmc');
+});
 

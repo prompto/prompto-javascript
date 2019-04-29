@@ -1,121 +1,116 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAsyncFetchMany = function(test) {
-	checkInterpretedOutput(test, "store/asyncFetchMany.pec");
-};
+test('Interpreted AsyncFetchMany', () => {
+	checkInterpretedOutput('store/asyncFetchMany.pec');
+});
 
-exports.testTranspiledAsyncFetchMany = function(test) {
-	checkTranspiledOutput(test, "store/asyncFetchMany.pec");
-};
+test('Transpiled AsyncFetchMany', () => {
+	checkTranspiledOutput('store/asyncFetchMany.pec');
+});
 
-exports.testInterpretedAsyncFetchOne = function(test) {
-	checkInterpretedOutput(test, "store/asyncFetchOne.pec");
-};
+test('Interpreted AsyncFetchOne', () => {
+	checkInterpretedOutput('store/asyncFetchOne.pec');
+});
 
-exports.testTranspiledAsyncFetchOne = function(test) {
-	checkTranspiledOutput(test, "store/asyncFetchOne.pec");
-};
+test('Transpiled AsyncFetchOne', () => {
+	checkTranspiledOutput('store/asyncFetchOne.pec');
+});
 
-exports.testInterpretedAsyncStore = function(test) {
-	checkInterpretedOutput(test, "store/asyncStore.pec");
-};
+test('Interpreted AsyncStore', () => {
+	checkInterpretedOutput('store/asyncStore.pec');
+});
 
-exports.testTranspiledAsyncStore = function(test) {
-	checkTranspiledOutput(test, "store/asyncStore.pec");
-};
+test('Transpiled AsyncStore', () => {
+	checkTranspiledOutput('store/asyncStore.pec');
+});
 
-exports.testInterpretedDeleteRecords = function(test) {
-	checkInterpretedOutput(test, "store/deleteRecords.pec");
-};
+test('Interpreted DeleteRecords', () => {
+	checkInterpretedOutput('store/deleteRecords.pec');
+});
 
-exports.testTranspiledDeleteRecords = function(test) {
-	checkTranspiledOutput(test, "store/deleteRecords.pec");
-};
+test('Transpiled DeleteRecords', () => {
+	checkTranspiledOutput('store/deleteRecords.pec');
+});
 
-exports.testInterpretedFlush = function(test) {
-	checkInterpretedOutput(test, "store/flush.pec");
-};
+test('Interpreted Flush', () => {
+	checkInterpretedOutput('store/flush.pec');
+});
 
-exports.testTranspiledFlush = function(test) {
-	checkTranspiledOutput(test, "store/flush.pec");
-};
+test('Transpiled Flush', () => {
+	checkTranspiledOutput('store/flush.pec');
+});
 
-exports.testInterpretedListRecords = function(test) {
-	checkInterpretedOutput(test, "store/listRecords.pec");
-};
+test('Interpreted ListRecords', () => {
+	checkInterpretedOutput('store/listRecords.pec');
+});
 
-exports.testTranspiledListRecords = function(test) {
-	checkTranspiledOutput(test, "store/listRecords.pec");
-};
+test('Transpiled ListRecords', () => {
+	checkTranspiledOutput('store/listRecords.pec');
+});
 
-exports.testInterpretedManyRecords = function(test) {
-	checkInterpretedOutput(test, "store/manyRecords.pec");
-};
+test('Interpreted ManyRecords', () => {
+	checkInterpretedOutput('store/manyRecords.pec');
+});
 
-exports.testTranspiledManyRecords = function(test) {
-	checkTranspiledOutput(test, "store/manyRecords.pec");
-};
+test('Transpiled ManyRecords', () => {
+	checkTranspiledOutput('store/manyRecords.pec');
+});
 
-exports.testInterpretedManyUntypedRecords = function(test) {
-	checkInterpretedOutput(test, "store/manyUntypedRecords.pec");
-};
+test('Interpreted ManyUntypedRecords', () => {
+	checkInterpretedOutput('store/manyUntypedRecords.pec');
+});
 
-exports.testTranspiledManyUntypedRecords = function(test) {
-	checkTranspiledOutput(test, "store/manyUntypedRecords.pec");
-};
+test('Transpiled ManyUntypedRecords', () => {
+	checkTranspiledOutput('store/manyUntypedRecords.pec');
+});
 
-exports.testInterpretedSimpleRecord = function(test) {
-	checkInterpretedOutput(test, "store/simpleRecord.pec");
-};
+test('Interpreted SimpleRecord', () => {
+	checkInterpretedOutput('store/simpleRecord.pec');
+});
 
-exports.testTranspiledSimpleRecord = function(test) {
-	checkTranspiledOutput(test, "store/simpleRecord.pec");
-};
+test('Transpiled SimpleRecord', () => {
+	checkTranspiledOutput('store/simpleRecord.pec');
+});
 
-exports.testInterpretedSlicedRecords = function(test) {
-	checkInterpretedOutput(test, "store/slicedRecords.pec");
-};
+test('Interpreted SlicedRecords', () => {
+	checkInterpretedOutput('store/slicedRecords.pec');
+});
 
-exports.testTranspiledSlicedRecords = function(test) {
-	checkTranspiledOutput(test, "store/slicedRecords.pec");
-};
+test('Transpiled SlicedRecords', () => {
+	checkTranspiledOutput('store/slicedRecords.pec');
+});
 
-exports.testInterpretedSortedRecords = function(test) {
-	checkInterpretedOutput(test, "store/sortedRecords.pec");
-};
+test('Interpreted SortedRecords', () => {
+	checkInterpretedOutput('store/sortedRecords.pec');
+});
 
-exports.testTranspiledSortedRecords = function(test) {
-	checkTranspiledOutput(test, "store/sortedRecords.pec");
-};
+test('Transpiled SortedRecords', () => {
+	checkTranspiledOutput('store/sortedRecords.pec');
+});
 
-exports.testInterpretedSubRecord = function(test) {
-	checkInterpretedOutput(test, "store/subRecord.pec");
-};
+test('Interpreted SubRecord', () => {
+	checkInterpretedOutput('store/subRecord.pec');
+});
 
-exports.testTranspiledSubRecord = function(test) {
-	checkTranspiledOutput(test, "store/subRecord.pec");
-};
+test('Transpiled SubRecord', () => {
+	checkTranspiledOutput('store/subRecord.pec');
+});
 
-exports.testInterpretedUntypedRecord = function(test) {
-	checkInterpretedOutput(test, "store/untypedRecord.pec");
-};
+test('Interpreted UntypedRecord', () => {
+	checkInterpretedOutput('store/untypedRecord.pec');
+});
 
-exports.testTranspiledUntypedRecord = function(test) {
-	checkTranspiledOutput(test, "store/untypedRecord.pec");
-};
+test('Transpiled UntypedRecord', () => {
+	checkTranspiledOutput('store/untypedRecord.pec');
+});
 

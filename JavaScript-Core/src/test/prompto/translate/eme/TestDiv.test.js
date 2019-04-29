@@ -1,20 +1,18 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testDivDecimal = function(test) {
-	compareResourceEME(test, "div/divDecimal.pec");
-};
+test('DivDecimal', () => {
+	compareResourceEME('div/divDecimal.pec');
+});
 
-exports.testDivInteger = function(test) {
-	compareResourceEME(test, "div/divInteger.pec");
-};
+test('DivInteger', () => {
+	compareResourceEME('div/divInteger.pec');
+});
 
-exports.testIdivInteger = function(test) {
-	compareResourceEME(test, "div/idivInteger.pec");
-};
+test('IdivInteger', () => {
+	compareResourceEME('div/idivInteger.pec');
+});
 
-exports.testModInteger = function(test) {
-	compareResourceEME(test, "div/modInteger.pec");
-};
+test('ModInteger', () => {
+	compareResourceEME('div/modInteger.pec');
+});
 

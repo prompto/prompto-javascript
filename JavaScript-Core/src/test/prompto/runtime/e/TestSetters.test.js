@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedGetter = function(test) {
-	checkInterpretedOutput(test, "setters/getter.pec");
-};
+test('Interpreted Getter', () => {
+	checkInterpretedOutput('setters/getter.pec');
+});
 
-exports.testTranspiledGetter = function(test) {
-	checkTranspiledOutput(test, "setters/getter.pec");
-};
+test('Transpiled Getter', () => {
+	checkTranspiledOutput('setters/getter.pec');
+});
 
-exports.testInterpretedGetterCall = function(test) {
-	checkInterpretedOutput(test, "setters/getterCall.pec");
-};
+test('Interpreted GetterCall', () => {
+	checkInterpretedOutput('setters/getterCall.pec');
+});
 
-exports.testTranspiledGetterCall = function(test) {
-	checkTranspiledOutput(test, "setters/getterCall.pec");
-};
+test('Transpiled GetterCall', () => {
+	checkTranspiledOutput('setters/getterCall.pec');
+});
 
-exports.testInterpretedSetter = function(test) {
-	checkInterpretedOutput(test, "setters/setter.pec");
-};
+test('Interpreted Setter', () => {
+	checkInterpretedOutput('setters/setter.pec');
+});
 
-exports.testTranspiledSetter = function(test) {
-	checkTranspiledOutput(test, "setters/setter.pec");
-};
+test('Transpiled Setter', () => {
+	checkTranspiledOutput('setters/setter.pec');
+});
 

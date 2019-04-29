@@ -1,56 +1,54 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAsyncFetchMany = function(test) {
-	compareResourceEME(test, "store/asyncFetchMany.pec");
-};
+test('AsyncFetchMany', () => {
+	compareResourceEME('store/asyncFetchMany.pec');
+});
 
-exports.testAsyncFetchOne = function(test) {
-	compareResourceEME(test, "store/asyncFetchOne.pec");
-};
+test('AsyncFetchOne', () => {
+	compareResourceEME('store/asyncFetchOne.pec');
+});
 
-exports.testAsyncStore = function(test) {
-	compareResourceEME(test, "store/asyncStore.pec");
-};
+test('AsyncStore', () => {
+	compareResourceEME('store/asyncStore.pec');
+});
 
-exports.testDeleteRecords = function(test) {
-	compareResourceEME(test, "store/deleteRecords.pec");
-};
+test('DeleteRecords', () => {
+	compareResourceEME('store/deleteRecords.pec');
+});
 
-exports.testFlush = function(test) {
-	compareResourceEME(test, "store/flush.pec");
-};
+test('Flush', () => {
+	compareResourceEME('store/flush.pec');
+});
 
-exports.testListRecords = function(test) {
-	compareResourceEME(test, "store/listRecords.pec");
-};
+test('ListRecords', () => {
+	compareResourceEME('store/listRecords.pec');
+});
 
-exports.testManyRecords = function(test) {
-	compareResourceEME(test, "store/manyRecords.pec");
-};
+test('ManyRecords', () => {
+	compareResourceEME('store/manyRecords.pec');
+});
 
-exports.testManyUntypedRecords = function(test) {
-	compareResourceEME(test, "store/manyUntypedRecords.pec");
-};
+test('ManyUntypedRecords', () => {
+	compareResourceEME('store/manyUntypedRecords.pec');
+});
 
-exports.testSimpleRecord = function(test) {
-	compareResourceEME(test, "store/simpleRecord.pec");
-};
+test('SimpleRecord', () => {
+	compareResourceEME('store/simpleRecord.pec');
+});
 
-exports.testSlicedRecords = function(test) {
-	compareResourceEME(test, "store/slicedRecords.pec");
-};
+test('SlicedRecords', () => {
+	compareResourceEME('store/slicedRecords.pec');
+});
 
-exports.testSortedRecords = function(test) {
-	compareResourceEME(test, "store/sortedRecords.pec");
-};
+test('SortedRecords', () => {
+	compareResourceEME('store/sortedRecords.pec');
+});
 
-exports.testSubRecord = function(test) {
-	compareResourceEME(test, "store/subRecord.pec");
-};
+test('SubRecord', () => {
+	compareResourceEME('store/subRecord.pec');
+});
 
-exports.testUntypedRecord = function(test) {
-	compareResourceEME(test, "store/untypedRecord.pec");
-};
+test('UntypedRecord', () => {
+	compareResourceEME('store/untypedRecord.pec');
+});
 

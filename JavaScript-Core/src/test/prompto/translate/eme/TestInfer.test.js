@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testInferDict = function(test) {
-	compareResourceEME(test, "infer/inferDict.pec");
-};
+test('InferDict', () => {
+	compareResourceEME('infer/inferDict.pec');
+});
 
-exports.testInferList = function(test) {
-	compareResourceEME(test, "infer/inferList.pec");
-};
+test('InferList', () => {
+	compareResourceEME('infer/inferList.pec');
+});
 
-exports.testInferSet = function(test) {
-	compareResourceEME(test, "infer/inferSet.pec");
-};
+test('InferSet', () => {
+	compareResourceEME('infer/inferSet.pec');
+});
 

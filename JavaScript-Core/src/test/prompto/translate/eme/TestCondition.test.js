@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testComplexIf = function(test) {
-	compareResourceEME(test, "condition/complexIf.pec");
-};
+test('ComplexIf', () => {
+	compareResourceEME('condition/complexIf.pec');
+});
 
-exports.testEmbeddedIf = function(test) {
-	compareResourceEME(test, "condition/embeddedIf.pec");
-};
+test('EmbeddedIf', () => {
+	compareResourceEME('condition/embeddedIf.pec');
+});
 
-exports.testReturnIf = function(test) {
-	compareResourceEME(test, "condition/returnIf.pec");
-};
+test('ReturnIf', () => {
+	compareResourceEME('condition/returnIf.pec');
+});
 
-exports.testSimpleIf = function(test) {
-	compareResourceEME(test, "condition/simpleIf.pec");
-};
+test('SimpleIf', () => {
+	compareResourceEME('condition/simpleIf.pec');
+});
 
-exports.testSwitch = function(test) {
-	compareResourceEME(test, "condition/switch.pec");
-};
+test('Switch', () => {
+	compareResourceEME('condition/switch.pec');
+});
 
-exports.testTernary = function(test) {
-	compareResourceEME(test, "condition/ternary.pec");
-};
+test('Ternary', () => {
+	compareResourceEME('condition/ternary.pec');
+});
 

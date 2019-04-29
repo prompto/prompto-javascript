@@ -1,25 +1,20 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedMemberAttribute = function(test) {
-	checkInterpretedOutput(test, "member/memberAttribute.pec");
-};
+test('Interpreted MemberAttribute', () => {
+	checkInterpretedOutput('member/memberAttribute.pec');
+});
 
-exports.testTranspiledMemberAttribute = function(test) {
-	checkTranspiledOutput(test, "member/memberAttribute.pec");
-};
+test('Transpiled MemberAttribute', () => {
+	checkTranspiledOutput('member/memberAttribute.pec');
+});
 

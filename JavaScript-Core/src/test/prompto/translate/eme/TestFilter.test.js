@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testFilterFromCursor = function(test) {
-	compareResourceEME(test, "filter/filterFromCursor.pec");
-};
+test('FilterFromCursor', () => {
+	compareResourceEME('filter/filterFromCursor.pec');
+});
 
-exports.testFilterFromList = function(test) {
-	compareResourceEME(test, "filter/filterFromList.pec");
-};
+test('FilterFromList', () => {
+	compareResourceEME('filter/filterFromList.pec');
+});
 
-exports.testFilterFromSet = function(test) {
-	compareResourceEME(test, "filter/filterFromSet.pec");
-};
+test('FilterFromSet', () => {
+	compareResourceEME('filter/filterFromSet.pec');
+});
 

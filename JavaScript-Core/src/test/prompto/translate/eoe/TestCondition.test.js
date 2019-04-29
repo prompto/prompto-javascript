@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testComplexIf = function(test) {
-	compareResourceEOE(test, "condition/complexIf.pec");
-};
+test('ComplexIf', () => {
+	compareResourceEOE('condition/complexIf.pec');
+});
 
-exports.testEmbeddedIf = function(test) {
-	compareResourceEOE(test, "condition/embeddedIf.pec");
-};
+test('EmbeddedIf', () => {
+	compareResourceEOE('condition/embeddedIf.pec');
+});
 
-exports.testReturnIf = function(test) {
-	compareResourceEOE(test, "condition/returnIf.pec");
-};
+test('ReturnIf', () => {
+	compareResourceEOE('condition/returnIf.pec');
+});
 
-exports.testSimpleIf = function(test) {
-	compareResourceEOE(test, "condition/simpleIf.pec");
-};
+test('SimpleIf', () => {
+	compareResourceEOE('condition/simpleIf.pec');
+});
 
-exports.testSwitch = function(test) {
-	compareResourceEOE(test, "condition/switch.pec");
-};
+test('Switch', () => {
+	compareResourceEOE('condition/switch.pec');
+});
 
-exports.testTernary = function(test) {
-	compareResourceEOE(test, "condition/ternary.pec");
-};
+test('Ternary', () => {
+	compareResourceEOE('condition/ternary.pec');
+});
 

@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseMParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseMParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedExpressionMember = function(test) {
-	checkInterpretedOutput(test, "methods/expressionMember.pmc");
-};
+test('Interpreted ExpressionMember', () => {
+	checkInterpretedOutput('methods/expressionMember.pmc');
+});
 
-exports.testTranspiledExpressionMember = function(test) {
-	checkTranspiledOutput(test, "methods/expressionMember.pmc");
-};
+test('Transpiled ExpressionMember', () => {
+	checkTranspiledOutput('methods/expressionMember.pmc');
+});
 
-exports.testInterpretedTextAsync = function(test) {
-	checkInterpretedOutput(test, "methods/textAsync.pmc");
-};
+test('Interpreted TextAsync', () => {
+	checkInterpretedOutput('methods/textAsync.pmc');
+});
 
-exports.testTranspiledTextAsync = function(test) {
-	checkTranspiledOutput(test, "methods/textAsync.pmc");
-};
+test('Transpiled TextAsync', () => {
+	checkTranspiledOutput('methods/textAsync.pmc');
+});
 
-exports.testInterpretedVoidAsync = function(test) {
-	checkInterpretedOutput(test, "methods/voidAsync.pmc");
-};
+test('Interpreted VoidAsync', () => {
+	checkInterpretedOutput('methods/voidAsync.pmc');
+});
 
-exports.testTranspiledVoidAsync = function(test) {
-	checkTranspiledOutput(test, "methods/voidAsync.pmc");
-};
+test('Transpiled VoidAsync', () => {
+	checkTranspiledOutput('methods/voidAsync.pmc');
+});
 

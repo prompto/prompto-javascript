@@ -1,33 +1,28 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedSelfAsParameter = function(test) {
-	checkInterpretedOutput(test, "self/selfAsParameter.pec");
-};
+test('Interpreted SelfAsParameter', () => {
+	checkInterpretedOutput('self/selfAsParameter.pec');
+});
 
-exports.testTranspiledSelfAsParameter = function(test) {
-	checkTranspiledOutput(test, "self/selfAsParameter.pec");
-};
+test('Transpiled SelfAsParameter', () => {
+	checkTranspiledOutput('self/selfAsParameter.pec');
+});
 
-exports.testInterpretedSelfMember = function(test) {
-	checkInterpretedOutput(test, "self/selfMember.pec");
-};
+test('Interpreted SelfMember', () => {
+	checkInterpretedOutput('self/selfMember.pec');
+});
 
-exports.testTranspiledSelfMember = function(test) {
-	checkTranspiledOutput(test, "self/selfMember.pec");
-};
+test('Transpiled SelfMember', () => {
+	checkTranspiledOutput('self/selfMember.pec');
+});
 

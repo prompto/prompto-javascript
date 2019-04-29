@@ -1,52 +1,50 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testImmutable = function(test) {
-	compareResourceOMO(test, "mutability/immutable.poc");
-};
+test('Immutable', () => {
+	compareResourceOMO('mutability/immutable.poc');
+});
 
-exports.testImmutableArgument = function(test) {
-	compareResourceOMO(test, "mutability/immutableArgument.poc");
-};
+test('ImmutableArgument', () => {
+	compareResourceOMO('mutability/immutableArgument.poc');
+});
 
-exports.testImmutableDict = function(test) {
-	compareResourceOMO(test, "mutability/immutableDict.poc");
-};
+test('ImmutableDict', () => {
+	compareResourceOMO('mutability/immutableDict.poc');
+});
 
-exports.testImmutableList = function(test) {
-	compareResourceOMO(test, "mutability/immutableList.poc");
-};
+test('ImmutableList', () => {
+	compareResourceOMO('mutability/immutableList.poc');
+});
 
-exports.testImmutableMember = function(test) {
-	compareResourceOMO(test, "mutability/immutableMember.poc");
-};
+test('ImmutableMember', () => {
+	compareResourceOMO('mutability/immutableMember.poc');
+});
 
-exports.testImmutableTuple = function(test) {
-	compareResourceOMO(test, "mutability/immutableTuple.poc");
-};
+test('ImmutableTuple', () => {
+	compareResourceOMO('mutability/immutableTuple.poc');
+});
 
-exports.testMutable = function(test) {
-	compareResourceOMO(test, "mutability/mutable.poc");
-};
+test('Mutable', () => {
+	compareResourceOMO('mutability/mutable.poc');
+});
 
-exports.testMutableArgument = function(test) {
-	compareResourceOMO(test, "mutability/mutableArgument.poc");
-};
+test('MutableArgument', () => {
+	compareResourceOMO('mutability/mutableArgument.poc');
+});
 
-exports.testMutableDict = function(test) {
-	compareResourceOMO(test, "mutability/mutableDict.poc");
-};
+test('MutableDict', () => {
+	compareResourceOMO('mutability/mutableDict.poc');
+});
 
-exports.testMutableList = function(test) {
-	compareResourceOMO(test, "mutability/mutableList.poc");
-};
+test('MutableList', () => {
+	compareResourceOMO('mutability/mutableList.poc');
+});
 
-exports.testMutableMember = function(test) {
-	compareResourceOMO(test, "mutability/mutableMember.poc");
-};
+test('MutableMember', () => {
+	compareResourceOMO('mutability/mutableMember.poc');
+});
 
-exports.testMutableTuple = function(test) {
-	compareResourceOMO(test, "mutability/mutableTuple.poc");
-};
+test('MutableTuple', () => {
+	compareResourceOMO('mutability/mutableTuple.poc');
+});
 

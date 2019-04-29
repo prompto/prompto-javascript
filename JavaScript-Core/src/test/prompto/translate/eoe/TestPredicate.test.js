@@ -1,40 +1,38 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testContainsItem = function(test) {
-	compareResourceEOE(test, "predicate/containsItem.pec");
-};
+test('ContainsItem', () => {
+	compareResourceEOE('predicate/containsItem.pec');
+});
 
-exports.testEquals = function(test) {
-	compareResourceEOE(test, "predicate/equals.pec");
-};
+test('Equals', () => {
+	compareResourceEOE('predicate/equals.pec');
+});
 
-exports.testGreater = function(test) {
-	compareResourceEOE(test, "predicate/greater.pec");
-};
+test('Greater', () => {
+	compareResourceEOE('predicate/greater.pec');
+});
 
-exports.testHasItem = function(test) {
-	compareResourceEOE(test, "predicate/hasItem.pec");
-};
+test('HasItem', () => {
+	compareResourceEOE('predicate/hasItem.pec');
+});
 
-exports.testInList = function(test) {
-	compareResourceEOE(test, "predicate/inList.pec");
-};
+test('InList', () => {
+	compareResourceEOE('predicate/inList.pec');
+});
 
-exports.testLesser = function(test) {
-	compareResourceEOE(test, "predicate/lesser.pec");
-};
+test('Lesser', () => {
+	compareResourceEOE('predicate/lesser.pec');
+});
 
-exports.testNotEquals = function(test) {
-	compareResourceEOE(test, "predicate/notEquals.pec");
-};
+test('NotEquals', () => {
+	compareResourceEOE('predicate/notEquals.pec');
+});
 
-exports.testPartial = function(test) {
-	compareResourceEOE(test, "predicate/partial.pec");
-};
+test('Partial', () => {
+	compareResourceEOE('predicate/partial.pec');
+});
 
-exports.testRoughly = function(test) {
-	compareResourceEOE(test, "predicate/roughly.pec");
-};
+test('Roughly', () => {
+	compareResourceEOE('predicate/roughly.pec');
+});
 

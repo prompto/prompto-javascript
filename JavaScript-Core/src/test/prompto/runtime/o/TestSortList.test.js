@@ -1,225 +1,220 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedSortBooleans = function(test) {
-	checkInterpretedOutput(test, "sortList/sortBooleans.poc");
-};
+test('Interpreted SortBooleans', () => {
+	checkInterpretedOutput('sortList/sortBooleans.poc');
+});
 
-exports.testTranspiledSortBooleans = function(test) {
-	checkTranspiledOutput(test, "sortList/sortBooleans.poc");
-};
+test('Transpiled SortBooleans', () => {
+	checkTranspiledOutput('sortList/sortBooleans.poc');
+});
 
-exports.testInterpretedSortDateTimes = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDateTimes.poc");
-};
+test('Interpreted SortDateTimes', () => {
+	checkInterpretedOutput('sortList/sortDateTimes.poc');
+});
 
-exports.testTranspiledSortDateTimes = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDateTimes.poc");
-};
+test('Transpiled SortDateTimes', () => {
+	checkTranspiledOutput('sortList/sortDateTimes.poc');
+});
 
-exports.testInterpretedSortDates = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDates.poc");
-};
+test('Interpreted SortDates', () => {
+	checkInterpretedOutput('sortList/sortDates.poc');
+});
 
-exports.testTranspiledSortDates = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDates.poc");
-};
+test('Transpiled SortDates', () => {
+	checkTranspiledOutput('sortList/sortDates.poc');
+});
 
-exports.testInterpretedSortDecimals = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDecimals.poc");
-};
+test('Interpreted SortDecimals', () => {
+	checkInterpretedOutput('sortList/sortDecimals.poc');
+});
 
-exports.testTranspiledSortDecimals = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDecimals.poc");
-};
+test('Transpiled SortDecimals', () => {
+	checkTranspiledOutput('sortList/sortDecimals.poc');
+});
 
-exports.testInterpretedSortDescBooleans = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescBooleans.poc");
-};
+test('Interpreted SortDescBooleans', () => {
+	checkInterpretedOutput('sortList/sortDescBooleans.poc');
+});
 
-exports.testTranspiledSortDescBooleans = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescBooleans.poc");
-};
+test('Transpiled SortDescBooleans', () => {
+	checkTranspiledOutput('sortList/sortDescBooleans.poc');
+});
 
-exports.testInterpretedSortDescDateTimes = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescDateTimes.poc");
-};
+test('Interpreted SortDescDateTimes', () => {
+	checkInterpretedOutput('sortList/sortDescDateTimes.poc');
+});
 
-exports.testTranspiledSortDescDateTimes = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescDateTimes.poc");
-};
+test('Transpiled SortDescDateTimes', () => {
+	checkTranspiledOutput('sortList/sortDescDateTimes.poc');
+});
 
-exports.testInterpretedSortDescDates = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescDates.poc");
-};
+test('Interpreted SortDescDates', () => {
+	checkInterpretedOutput('sortList/sortDescDates.poc');
+});
 
-exports.testTranspiledSortDescDates = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescDates.poc");
-};
+test('Transpiled SortDescDates', () => {
+	checkTranspiledOutput('sortList/sortDescDates.poc');
+});
 
-exports.testInterpretedSortDescDecimals = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescDecimals.poc");
-};
+test('Interpreted SortDescDecimals', () => {
+	checkInterpretedOutput('sortList/sortDescDecimals.poc');
+});
 
-exports.testTranspiledSortDescDecimals = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescDecimals.poc");
-};
+test('Transpiled SortDescDecimals', () => {
+	checkTranspiledOutput('sortList/sortDescDecimals.poc');
+});
 
-exports.testInterpretedSortDescExpressions = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescExpressions.poc");
-};
+test('Interpreted SortDescExpressions', () => {
+	checkInterpretedOutput('sortList/sortDescExpressions.poc');
+});
 
-exports.testTranspiledSortDescExpressions = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescExpressions.poc");
-};
+test('Transpiled SortDescExpressions', () => {
+	checkTranspiledOutput('sortList/sortDescExpressions.poc');
+});
 
-exports.testInterpretedSortDescIntegers = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescIntegers.poc");
-};
+test('Interpreted SortDescIntegers', () => {
+	checkInterpretedOutput('sortList/sortDescIntegers.poc');
+});
 
-exports.testTranspiledSortDescIntegers = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescIntegers.poc");
-};
+test('Transpiled SortDescIntegers', () => {
+	checkTranspiledOutput('sortList/sortDescIntegers.poc');
+});
 
-exports.testInterpretedSortDescKeys = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescKeys.poc");
-};
+test('Interpreted SortDescKeys', () => {
+	checkInterpretedOutput('sortList/sortDescKeys.poc');
+});
 
-exports.testTranspiledSortDescKeys = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescKeys.poc");
-};
+test('Transpiled SortDescKeys', () => {
+	checkTranspiledOutput('sortList/sortDescKeys.poc');
+});
 
-exports.testInterpretedSortDescMethods = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescMethods.poc");
-};
+test('Interpreted SortDescMethods', () => {
+	checkInterpretedOutput('sortList/sortDescMethods.poc');
+});
 
-exports.testTranspiledSortDescMethods = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescMethods.poc");
-};
+test('Transpiled SortDescMethods', () => {
+	checkTranspiledOutput('sortList/sortDescMethods.poc');
+});
 
-exports.testInterpretedSortDescNames = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescNames.poc");
-};
+test('Interpreted SortDescNames', () => {
+	checkInterpretedOutput('sortList/sortDescNames.poc');
+});
 
-exports.testTranspiledSortDescNames = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescNames.poc");
-};
+test('Transpiled SortDescNames', () => {
+	checkTranspiledOutput('sortList/sortDescNames.poc');
+});
 
-exports.testInterpretedSortDescTexts = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescTexts.poc");
-};
+test('Interpreted SortDescTexts', () => {
+	checkInterpretedOutput('sortList/sortDescTexts.poc');
+});
 
-exports.testTranspiledSortDescTexts = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescTexts.poc");
-};
+test('Transpiled SortDescTexts', () => {
+	checkTranspiledOutput('sortList/sortDescTexts.poc');
+});
 
-exports.testInterpretedSortDescTimes = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDescTimes.poc");
-};
+test('Interpreted SortDescTimes', () => {
+	checkInterpretedOutput('sortList/sortDescTimes.poc');
+});
 
-exports.testTranspiledSortDescTimes = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDescTimes.poc");
-};
+test('Transpiled SortDescTimes', () => {
+	checkTranspiledOutput('sortList/sortDescTimes.poc');
+});
 
-exports.testInterpretedSortDocumentExpressions = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDocumentExpressions.poc");
-};
+test('Interpreted SortDocumentExpressions', () => {
+	checkInterpretedOutput('sortList/sortDocumentExpressions.poc');
+});
 
-exports.testTranspiledSortDocumentExpressions = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDocumentExpressions.poc");
-};
+test('Transpiled SortDocumentExpressions', () => {
+	checkTranspiledOutput('sortList/sortDocumentExpressions.poc');
+});
 
-exports.testInterpretedSortDocumentKeys = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDocumentKeys.poc");
-};
+test('Interpreted SortDocumentKeys', () => {
+	checkInterpretedOutput('sortList/sortDocumentKeys.poc');
+});
 
-exports.testTranspiledSortDocumentKeys = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDocumentKeys.poc");
-};
+test('Transpiled SortDocumentKeys', () => {
+	checkTranspiledOutput('sortList/sortDocumentKeys.poc');
+});
 
-exports.testInterpretedSortDocumentMethods = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDocumentMethods.poc");
-};
+test('Interpreted SortDocumentMethods', () => {
+	checkInterpretedOutput('sortList/sortDocumentMethods.poc');
+});
 
-exports.testTranspiledSortDocumentMethods = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDocumentMethods.poc");
-};
+test('Transpiled SortDocumentMethods', () => {
+	checkTranspiledOutput('sortList/sortDocumentMethods.poc');
+});
 
-exports.testInterpretedSortDocumentNames = function(test) {
-	checkInterpretedOutput(test, "sortList/sortDocumentNames.poc");
-};
+test('Interpreted SortDocumentNames', () => {
+	checkInterpretedOutput('sortList/sortDocumentNames.poc');
+});
 
-exports.testTranspiledSortDocumentNames = function(test) {
-	checkTranspiledOutput(test, "sortList/sortDocumentNames.poc");
-};
+test('Transpiled SortDocumentNames', () => {
+	checkTranspiledOutput('sortList/sortDocumentNames.poc');
+});
 
-exports.testInterpretedSortExpressions = function(test) {
-	checkInterpretedOutput(test, "sortList/sortExpressions.poc");
-};
+test('Interpreted SortExpressions', () => {
+	checkInterpretedOutput('sortList/sortExpressions.poc');
+});
 
-exports.testTranspiledSortExpressions = function(test) {
-	checkTranspiledOutput(test, "sortList/sortExpressions.poc");
-};
+test('Transpiled SortExpressions', () => {
+	checkTranspiledOutput('sortList/sortExpressions.poc');
+});
 
-exports.testInterpretedSortIntegers = function(test) {
-	checkInterpretedOutput(test, "sortList/sortIntegers.poc");
-};
+test('Interpreted SortIntegers', () => {
+	checkInterpretedOutput('sortList/sortIntegers.poc');
+});
 
-exports.testTranspiledSortIntegers = function(test) {
-	checkTranspiledOutput(test, "sortList/sortIntegers.poc");
-};
+test('Transpiled SortIntegers', () => {
+	checkTranspiledOutput('sortList/sortIntegers.poc');
+});
 
-exports.testInterpretedSortKeys = function(test) {
-	checkInterpretedOutput(test, "sortList/sortKeys.poc");
-};
+test('Interpreted SortKeys', () => {
+	checkInterpretedOutput('sortList/sortKeys.poc');
+});
 
-exports.testTranspiledSortKeys = function(test) {
-	checkTranspiledOutput(test, "sortList/sortKeys.poc");
-};
+test('Transpiled SortKeys', () => {
+	checkTranspiledOutput('sortList/sortKeys.poc');
+});
 
-exports.testInterpretedSortMethods = function(test) {
-	checkInterpretedOutput(test, "sortList/sortMethods.poc");
-};
+test('Interpreted SortMethods', () => {
+	checkInterpretedOutput('sortList/sortMethods.poc');
+});
 
-exports.testTranspiledSortMethods = function(test) {
-	checkTranspiledOutput(test, "sortList/sortMethods.poc");
-};
+test('Transpiled SortMethods', () => {
+	checkTranspiledOutput('sortList/sortMethods.poc');
+});
 
-exports.testInterpretedSortNames = function(test) {
-	checkInterpretedOutput(test, "sortList/sortNames.poc");
-};
+test('Interpreted SortNames', () => {
+	checkInterpretedOutput('sortList/sortNames.poc');
+});
 
-exports.testTranspiledSortNames = function(test) {
-	checkTranspiledOutput(test, "sortList/sortNames.poc");
-};
+test('Transpiled SortNames', () => {
+	checkTranspiledOutput('sortList/sortNames.poc');
+});
 
-exports.testInterpretedSortTexts = function(test) {
-	checkInterpretedOutput(test, "sortList/sortTexts.poc");
-};
+test('Interpreted SortTexts', () => {
+	checkInterpretedOutput('sortList/sortTexts.poc');
+});
 
-exports.testTranspiledSortTexts = function(test) {
-	checkTranspiledOutput(test, "sortList/sortTexts.poc");
-};
+test('Transpiled SortTexts', () => {
+	checkTranspiledOutput('sortList/sortTexts.poc');
+});
 
-exports.testInterpretedSortTimes = function(test) {
-	checkInterpretedOutput(test, "sortList/sortTimes.poc");
-};
+test('Interpreted SortTimes', () => {
+	checkInterpretedOutput('sortList/sortTimes.poc');
+});
 
-exports.testTranspiledSortTimes = function(test) {
-	checkTranspiledOutput(test, "sortList/sortTimes.poc");
-};
+test('Transpiled SortTimes', () => {
+	checkTranspiledOutput('sortList/sortTimes.poc');
+});
 

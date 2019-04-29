@@ -1,48 +1,46 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testChildElement = function(test) {
-	compareResourceOMO(test, "jsx/childElement.poc");
-};
+test('ChildElement', () => {
+	compareResourceOMO('jsx/childElement.poc');
+});
 
-exports.testCodeAttribute = function(test) {
-	compareResourceOMO(test, "jsx/codeAttribute.poc");
-};
+test('CodeAttribute', () => {
+	compareResourceOMO('jsx/codeAttribute.poc');
+});
 
-exports.testCodeElement = function(test) {
-	compareResourceOMO(test, "jsx/codeElement.poc");
-};
+test('CodeElement', () => {
+	compareResourceOMO('jsx/codeElement.poc');
+});
 
-exports.testDotName = function(test) {
-	compareResourceOMO(test, "jsx/dotName.poc");
-};
+test('DotName', () => {
+	compareResourceOMO('jsx/dotName.poc');
+});
 
-exports.testEmpty = function(test) {
-	compareResourceOMO(test, "jsx/empty.poc");
-};
+test('Empty', () => {
+	compareResourceOMO('jsx/empty.poc');
+});
 
-exports.testEmptyAttribute = function(test) {
-	compareResourceOMO(test, "jsx/emptyAttribute.poc");
-};
+test('EmptyAttribute', () => {
+	compareResourceOMO('jsx/emptyAttribute.poc');
+});
 
-exports.testHyphenName = function(test) {
-	compareResourceOMO(test, "jsx/hyphenName.poc");
-};
+test('HyphenName', () => {
+	compareResourceOMO('jsx/hyphenName.poc');
+});
 
-exports.testLiteralAttribute = function(test) {
-	compareResourceOMO(test, "jsx/literalAttribute.poc");
-};
+test('LiteralAttribute', () => {
+	compareResourceOMO('jsx/literalAttribute.poc');
+});
 
-exports.testSelfClosingDiv = function(test) {
-	compareResourceOMO(test, "jsx/selfClosingDiv.poc");
-};
+test('SelfClosingDiv', () => {
+	compareResourceOMO('jsx/selfClosingDiv.poc');
+});
 
-exports.testSelfClosingEmptyAttribute = function(test) {
-	compareResourceOMO(test, "jsx/selfClosingEmptyAttribute.poc");
-};
+test('SelfClosingEmptyAttribute', () => {
+	compareResourceOMO('jsx/selfClosingEmptyAttribute.poc');
+});
 
-exports.testTextElement = function(test) {
-	compareResourceOMO(test, "jsx/textElement.poc");
-};
+test('TextElement', () => {
+	compareResourceOMO('jsx/textElement.poc');
+});
 

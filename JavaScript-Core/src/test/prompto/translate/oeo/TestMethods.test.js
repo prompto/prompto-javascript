@@ -1,92 +1,90 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testAnonymous = function(test) {
-	compareResourceOEO(test, "methods/anonymous.poc");
-};
+test('Anonymous', () => {
+	compareResourceOEO('methods/anonymous.poc');
+});
 
-exports.testAttribute = function(test) {
-	compareResourceOEO(test, "methods/attribute.poc");
-};
+test('Attribute', () => {
+	compareResourceOEO('methods/attribute.poc');
+});
 
-exports.testDefault = function(test) {
-	compareResourceOEO(test, "methods/default.poc");
-};
+test('Default', () => {
+	compareResourceOEO('methods/default.poc');
+});
 
-exports.testE_as_e_bug = function(test) {
-	compareResourceOEO(test, "methods/e_as_e_bug.poc");
-};
+test('E_as_e_bug', () => {
+	compareResourceOEO('methods/e_as_e_bug.poc');
+});
 
-exports.testEmpty = function(test) {
-	compareResourceOEO(test, "methods/empty.poc");
-};
+test('Empty', () => {
+	compareResourceOEO('methods/empty.poc');
+});
 
-exports.testExplicit = function(test) {
-	compareResourceOEO(test, "methods/explicit.poc");
-};
+test('Explicit', () => {
+	compareResourceOEO('methods/explicit.poc');
+});
 
-exports.testExplicitMember = function(test) {
-	compareResourceOEO(test, "methods/explicitMember.poc");
-};
+test('ExplicitMember', () => {
+	compareResourceOEO('methods/explicitMember.poc');
+});
 
-exports.testExpressionMember = function(test) {
-	compareResourceOEO(test, "methods/expressionMember.poc");
-};
+test('ExpressionMember', () => {
+	compareResourceOEO('methods/expressionMember.poc');
+});
 
-exports.testExpressionWith = function(test) {
-	compareResourceOEO(test, "methods/expressionWith.poc");
-};
+test('ExpressionWith', () => {
+	compareResourceOEO('methods/expressionWith.poc');
+});
 
-exports.testExtended = function(test) {
-	compareResourceOEO(test, "methods/extended.poc");
-};
+test('Extended', () => {
+	compareResourceOEO('methods/extended.poc');
+});
 
-exports.testGlobal = function(test) {
-	compareResourceOEO(test, "methods/global.poc");
-};
+test('Global', () => {
+	compareResourceOEO('methods/global.poc');
+});
 
-exports.testImplicitMember = function(test) {
-	compareResourceOEO(test, "methods/implicitMember.poc");
-};
+test('ImplicitMember', () => {
+	compareResourceOEO('methods/implicitMember.poc');
+});
 
-exports.testMember = function(test) {
-	compareResourceOEO(test, "methods/member.poc");
-};
+test('Member', () => {
+	compareResourceOEO('methods/member.poc');
+});
 
-exports.testOverride = function(test) {
-	compareResourceOEO(test, "methods/override.poc");
-};
+test('Override', () => {
+	compareResourceOEO('methods/override.poc');
+});
 
-exports.testPolymorphic_abstract = function(test) {
-	compareResourceOEO(test, "methods/polymorphic_abstract.poc");
-};
+test('Polymorphic_abstract', () => {
+	compareResourceOEO('methods/polymorphic_abstract.poc');
+});
 
-exports.testPolymorphic_implicit = function(test) {
-	compareResourceOEO(test, "methods/polymorphic_implicit.poc");
-};
+test('Polymorphic_implicit', () => {
+	compareResourceOEO('methods/polymorphic_implicit.poc');
+});
 
-exports.testPolymorphic_named = function(test) {
-	compareResourceOEO(test, "methods/polymorphic_named.poc");
-};
+test('Polymorphic_named', () => {
+	compareResourceOEO('methods/polymorphic_named.poc');
+});
 
-exports.testPolymorphic_runtime = function(test) {
-	compareResourceOEO(test, "methods/polymorphic_runtime.poc");
-};
+test('Polymorphic_runtime', () => {
+	compareResourceOEO('methods/polymorphic_runtime.poc');
+});
 
-exports.testReturn = function(test) {
-	compareResourceOEO(test, "methods/return.poc");
-};
+test('Return', () => {
+	compareResourceOEO('methods/return.poc');
+});
 
-exports.testSpecified = function(test) {
-	compareResourceOEO(test, "methods/specified.poc");
-};
+test('Specified', () => {
+	compareResourceOEO('methods/specified.poc');
+});
 
-exports.testTextAsync = function(test) {
-	compareResourceOEO(test, "methods/textAsync.poc");
-};
+test('TextAsync', () => {
+	compareResourceOEO('methods/textAsync.poc');
+});
 
-exports.testVoidAsync = function(test) {
-	compareResourceOEO(test, "methods/voidAsync.poc");
-};
+test('VoidAsync', () => {
+	compareResourceOEO('methods/voidAsync.poc');
+});
 

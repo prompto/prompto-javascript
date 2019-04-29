@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testGlobalClosureNoArg = function(test) {
-	compareResourceOMO(test, "closures/globalClosureNoArg.poc");
-};
+test('GlobalClosureNoArg', () => {
+	compareResourceOMO('closures/globalClosureNoArg.poc');
+});
 
-exports.testGlobalClosureWithArg = function(test) {
-	compareResourceOMO(test, "closures/globalClosureWithArg.poc");
-};
+test('GlobalClosureWithArg', () => {
+	compareResourceOMO('closures/globalClosureWithArg.poc');
+});
 
-exports.testInstanceClosureNoArg = function(test) {
-	compareResourceOMO(test, "closures/instanceClosureNoArg.poc");
-};
+test('InstanceClosureNoArg', () => {
+	compareResourceOMO('closures/instanceClosureNoArg.poc');
+});
 

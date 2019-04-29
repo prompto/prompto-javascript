@@ -1,25 +1,20 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseMParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseMParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedMemberAttribute = function(test) {
-	checkInterpretedOutput(test, "member/memberAttribute.pmc");
-};
+test('Interpreted MemberAttribute', () => {
+	checkInterpretedOutput('member/memberAttribute.pmc');
+});
 
-exports.testTranspiledMemberAttribute = function(test) {
-	checkTranspiledOutput(test, "member/memberAttribute.pmc");
-};
+test('Transpiled MemberAttribute', () => {
+	checkTranspiledOutput('member/memberAttribute.pmc');
+});
 

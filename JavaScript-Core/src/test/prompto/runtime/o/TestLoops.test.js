@@ -1,273 +1,268 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
-
-exports.testInterpretedDoWhile = function(test) {
-	checkInterpretedOutput(test, "loops/doWhile.poc");
-};
-
-exports.testTranspiledDoWhile = function(test) {
-	checkTranspiledOutput(test, "loops/doWhile.poc");
-};
-
-exports.testInterpretedDoWhileBreak = function(test) {
-	checkInterpretedOutput(test, "loops/doWhileBreak.poc");
-};
-
-exports.testTranspiledDoWhileBreak = function(test) {
-	checkTranspiledOutput(test, "loops/doWhileBreak.poc");
-};
-
-exports.testInterpretedEmbeddedForEach = function(test) {
-	checkInterpretedOutput(test, "loops/embeddedForEach.poc");
-};
-
-exports.testTranspiledEmbeddedForEach = function(test) {
-	checkTranspiledOutput(test, "loops/embeddedForEach.poc");
-};
-
-exports.testInterpretedForEachBreak = function(test) {
-	checkInterpretedOutput(test, "loops/forEachBreak.poc");
-};
-
-exports.testTranspiledForEachBreak = function(test) {
-	checkTranspiledOutput(test, "loops/forEachBreak.poc");
-};
-
-exports.testInterpretedForEachCharacterRange = function(test) {
-	checkInterpretedOutput(test, "loops/forEachCharacterRange.poc");
-};
-
-exports.testTranspiledForEachCharacterRange = function(test) {
-	checkTranspiledOutput(test, "loops/forEachCharacterRange.poc");
-};
-
-exports.testInterpretedForEachCharacterRangeWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachCharacterRangeWithIndex.poc");
-};
-
-exports.testTranspiledForEachCharacterRangeWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachCharacterRangeWithIndex.poc");
-};
-
-exports.testInterpretedForEachDateRange = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDateRange.poc");
-};
-
-exports.testTranspiledForEachDateRange = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDateRange.poc");
-};
-
-exports.testInterpretedForEachDateRangeWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDateRangeWithIndex.poc");
-};
-
-exports.testTranspiledForEachDateRangeWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDateRangeWithIndex.poc");
-};
-
-exports.testInterpretedForEachDictionaryItem = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDictionaryItem.poc");
-};
-
-exports.testTranspiledForEachDictionaryItem = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDictionaryItem.poc");
-};
-
-exports.testInterpretedForEachDictionaryItemWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDictionaryItemWithIndex.poc");
-};
-
-exports.testTranspiledForEachDictionaryItemWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDictionaryItemWithIndex.poc");
-};
-
-exports.testInterpretedForEachDictionaryKey = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDictionaryKey.poc");
-};
-
-exports.testTranspiledForEachDictionaryKey = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDictionaryKey.poc");
-};
-
-exports.testInterpretedForEachDictionaryKeyWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDictionaryKeyWithIndex.poc");
-};
-
-exports.testTranspiledForEachDictionaryKeyWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDictionaryKeyWithIndex.poc");
-};
-
-exports.testInterpretedForEachDictionaryValue = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDictionaryValue.poc");
-};
-
-exports.testTranspiledForEachDictionaryValue = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDictionaryValue.poc");
-};
-
-exports.testInterpretedForEachDictionaryValueWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachDictionaryValueWithIndex.poc");
-};
-
-exports.testTranspiledForEachDictionaryValueWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachDictionaryValueWithIndex.poc");
-};
-
-exports.testInterpretedForEachInstanceList = function(test) {
-	checkInterpretedOutput(test, "loops/forEachInstanceList.poc");
-};
-
-exports.testTranspiledForEachInstanceList = function(test) {
-	checkTranspiledOutput(test, "loops/forEachInstanceList.poc");
-};
-
-exports.testInterpretedForEachInstanceListWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachInstanceListWithIndex.poc");
-};
-
-exports.testTranspiledForEachInstanceListWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachInstanceListWithIndex.poc");
-};
-
-exports.testInterpretedForEachInstanceSet = function(test) {
-	checkInterpretedOutput(test, "loops/forEachInstanceSet.poc");
-};
-
-exports.testTranspiledForEachInstanceSet = function(test) {
-	checkTranspiledOutput(test, "loops/forEachInstanceSet.poc");
-};
-
-exports.testInterpretedForEachInstanceSetWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachInstanceSetWithIndex.poc");
-};
-
-exports.testTranspiledForEachInstanceSetWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachInstanceSetWithIndex.poc");
-};
-
-exports.testInterpretedForEachIntegerList = function(test) {
-	checkInterpretedOutput(test, "loops/forEachIntegerList.poc");
-};
-
-exports.testTranspiledForEachIntegerList = function(test) {
-	checkTranspiledOutput(test, "loops/forEachIntegerList.poc");
-};
-
-exports.testInterpretedForEachIntegerListWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachIntegerListWithIndex.poc");
-};
-
-exports.testTranspiledForEachIntegerListWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachIntegerListWithIndex.poc");
-};
-
-exports.testInterpretedForEachIntegerRange = function(test) {
-	checkInterpretedOutput(test, "loops/forEachIntegerRange.poc");
-};
-
-exports.testTranspiledForEachIntegerRange = function(test) {
-	checkTranspiledOutput(test, "loops/forEachIntegerRange.poc");
-};
-
-exports.testInterpretedForEachIntegerRangeWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachIntegerRangeWithIndex.poc");
-};
-
-exports.testTranspiledForEachIntegerRangeWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachIntegerRangeWithIndex.poc");
-};
-
-exports.testInterpretedForEachIntegerSet = function(test) {
-	checkInterpretedOutput(test, "loops/forEachIntegerSet.poc");
-};
-
-exports.testTranspiledForEachIntegerSet = function(test) {
-	checkTranspiledOutput(test, "loops/forEachIntegerSet.poc");
-};
-
-exports.testInterpretedForEachIntegerSetWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachIntegerSetWithIndex.poc");
-};
-
-exports.testTranspiledForEachIntegerSetWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachIntegerSetWithIndex.poc");
-};
-
-exports.testInterpretedForEachTimeRange = function(test) {
-	checkInterpretedOutput(test, "loops/forEachTimeRange.poc");
-};
-
-exports.testTranspiledForEachTimeRange = function(test) {
-	checkTranspiledOutput(test, "loops/forEachTimeRange.poc");
-};
-
-exports.testInterpretedForEachTimeRangeWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachTimeRangeWithIndex.poc");
-};
-
-exports.testTranspiledForEachTimeRangeWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachTimeRangeWithIndex.poc");
-};
-
-exports.testInterpretedForEachTupleList = function(test) {
-	checkInterpretedOutput(test, "loops/forEachTupleList.poc");
-};
-
-exports.testTranspiledForEachTupleList = function(test) {
-	checkTranspiledOutput(test, "loops/forEachTupleList.poc");
-};
-
-exports.testInterpretedForEachTupleListWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachTupleListWithIndex.poc");
-};
-
-exports.testTranspiledForEachTupleListWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachTupleListWithIndex.poc");
-};
-
-exports.testInterpretedForEachTupleSet = function(test) {
-	checkInterpretedOutput(test, "loops/forEachTupleSet.poc");
-};
-
-exports.testTranspiledForEachTupleSet = function(test) {
-	checkTranspiledOutput(test, "loops/forEachTupleSet.poc");
-};
-
-exports.testInterpretedForEachTupleSetWithIndex = function(test) {
-	checkInterpretedOutput(test, "loops/forEachTupleSetWithIndex.poc");
-};
-
-exports.testTranspiledForEachTupleSetWithIndex = function(test) {
-	checkTranspiledOutput(test, "loops/forEachTupleSetWithIndex.poc");
-};
-
-exports.testInterpretedWhile = function(test) {
-	checkInterpretedOutput(test, "loops/while.poc");
-};
-
-exports.testTranspiledWhile = function(test) {
-	checkTranspiledOutput(test, "loops/while.poc");
-};
-
-exports.testInterpretedWhileBreak = function(test) {
-	checkInterpretedOutput(test, "loops/whileBreak.poc");
-};
-
-exports.testTranspiledWhileBreak = function(test) {
-	checkTranspiledOutput(test, "loops/whileBreak.poc");
-};
+});
+
+test('Interpreted DoWhile', () => {
+	checkInterpretedOutput('loops/doWhile.poc');
+});
+
+test('Transpiled DoWhile', () => {
+	checkTranspiledOutput('loops/doWhile.poc');
+});
+
+test('Interpreted DoWhileBreak', () => {
+	checkInterpretedOutput('loops/doWhileBreak.poc');
+});
+
+test('Transpiled DoWhileBreak', () => {
+	checkTranspiledOutput('loops/doWhileBreak.poc');
+});
+
+test('Interpreted EmbeddedForEach', () => {
+	checkInterpretedOutput('loops/embeddedForEach.poc');
+});
+
+test('Transpiled EmbeddedForEach', () => {
+	checkTranspiledOutput('loops/embeddedForEach.poc');
+});
+
+test('Interpreted ForEachBreak', () => {
+	checkInterpretedOutput('loops/forEachBreak.poc');
+});
+
+test('Transpiled ForEachBreak', () => {
+	checkTranspiledOutput('loops/forEachBreak.poc');
+});
+
+test('Interpreted ForEachCharacterRange', () => {
+	checkInterpretedOutput('loops/forEachCharacterRange.poc');
+});
+
+test('Transpiled ForEachCharacterRange', () => {
+	checkTranspiledOutput('loops/forEachCharacterRange.poc');
+});
+
+test('Interpreted ForEachCharacterRangeWithIndex', () => {
+	checkInterpretedOutput('loops/forEachCharacterRangeWithIndex.poc');
+});
+
+test('Transpiled ForEachCharacterRangeWithIndex', () => {
+	checkTranspiledOutput('loops/forEachCharacterRangeWithIndex.poc');
+});
+
+test('Interpreted ForEachDateRange', () => {
+	checkInterpretedOutput('loops/forEachDateRange.poc');
+});
+
+test('Transpiled ForEachDateRange', () => {
+	checkTranspiledOutput('loops/forEachDateRange.poc');
+});
+
+test('Interpreted ForEachDateRangeWithIndex', () => {
+	checkInterpretedOutput('loops/forEachDateRangeWithIndex.poc');
+});
+
+test('Transpiled ForEachDateRangeWithIndex', () => {
+	checkTranspiledOutput('loops/forEachDateRangeWithIndex.poc');
+});
+
+test('Interpreted ForEachDictionaryItem', () => {
+	checkInterpretedOutput('loops/forEachDictionaryItem.poc');
+});
+
+test('Transpiled ForEachDictionaryItem', () => {
+	checkTranspiledOutput('loops/forEachDictionaryItem.poc');
+});
+
+test('Interpreted ForEachDictionaryItemWithIndex', () => {
+	checkInterpretedOutput('loops/forEachDictionaryItemWithIndex.poc');
+});
+
+test('Transpiled ForEachDictionaryItemWithIndex', () => {
+	checkTranspiledOutput('loops/forEachDictionaryItemWithIndex.poc');
+});
+
+test('Interpreted ForEachDictionaryKey', () => {
+	checkInterpretedOutput('loops/forEachDictionaryKey.poc');
+});
+
+test('Transpiled ForEachDictionaryKey', () => {
+	checkTranspiledOutput('loops/forEachDictionaryKey.poc');
+});
+
+test('Interpreted ForEachDictionaryKeyWithIndex', () => {
+	checkInterpretedOutput('loops/forEachDictionaryKeyWithIndex.poc');
+});
+
+test('Transpiled ForEachDictionaryKeyWithIndex', () => {
+	checkTranspiledOutput('loops/forEachDictionaryKeyWithIndex.poc');
+});
+
+test('Interpreted ForEachDictionaryValue', () => {
+	checkInterpretedOutput('loops/forEachDictionaryValue.poc');
+});
+
+test('Transpiled ForEachDictionaryValue', () => {
+	checkTranspiledOutput('loops/forEachDictionaryValue.poc');
+});
+
+test('Interpreted ForEachDictionaryValueWithIndex', () => {
+	checkInterpretedOutput('loops/forEachDictionaryValueWithIndex.poc');
+});
+
+test('Transpiled ForEachDictionaryValueWithIndex', () => {
+	checkTranspiledOutput('loops/forEachDictionaryValueWithIndex.poc');
+});
+
+test('Interpreted ForEachInstanceList', () => {
+	checkInterpretedOutput('loops/forEachInstanceList.poc');
+});
+
+test('Transpiled ForEachInstanceList', () => {
+	checkTranspiledOutput('loops/forEachInstanceList.poc');
+});
+
+test('Interpreted ForEachInstanceListWithIndex', () => {
+	checkInterpretedOutput('loops/forEachInstanceListWithIndex.poc');
+});
+
+test('Transpiled ForEachInstanceListWithIndex', () => {
+	checkTranspiledOutput('loops/forEachInstanceListWithIndex.poc');
+});
+
+test('Interpreted ForEachInstanceSet', () => {
+	checkInterpretedOutput('loops/forEachInstanceSet.poc');
+});
+
+test('Transpiled ForEachInstanceSet', () => {
+	checkTranspiledOutput('loops/forEachInstanceSet.poc');
+});
+
+test('Interpreted ForEachInstanceSetWithIndex', () => {
+	checkInterpretedOutput('loops/forEachInstanceSetWithIndex.poc');
+});
+
+test('Transpiled ForEachInstanceSetWithIndex', () => {
+	checkTranspiledOutput('loops/forEachInstanceSetWithIndex.poc');
+});
+
+test('Interpreted ForEachIntegerList', () => {
+	checkInterpretedOutput('loops/forEachIntegerList.poc');
+});
+
+test('Transpiled ForEachIntegerList', () => {
+	checkTranspiledOutput('loops/forEachIntegerList.poc');
+});
+
+test('Interpreted ForEachIntegerListWithIndex', () => {
+	checkInterpretedOutput('loops/forEachIntegerListWithIndex.poc');
+});
+
+test('Transpiled ForEachIntegerListWithIndex', () => {
+	checkTranspiledOutput('loops/forEachIntegerListWithIndex.poc');
+});
+
+test('Interpreted ForEachIntegerRange', () => {
+	checkInterpretedOutput('loops/forEachIntegerRange.poc');
+});
+
+test('Transpiled ForEachIntegerRange', () => {
+	checkTranspiledOutput('loops/forEachIntegerRange.poc');
+});
+
+test('Interpreted ForEachIntegerRangeWithIndex', () => {
+	checkInterpretedOutput('loops/forEachIntegerRangeWithIndex.poc');
+});
+
+test('Transpiled ForEachIntegerRangeWithIndex', () => {
+	checkTranspiledOutput('loops/forEachIntegerRangeWithIndex.poc');
+});
+
+test('Interpreted ForEachIntegerSet', () => {
+	checkInterpretedOutput('loops/forEachIntegerSet.poc');
+});
+
+test('Transpiled ForEachIntegerSet', () => {
+	checkTranspiledOutput('loops/forEachIntegerSet.poc');
+});
+
+test('Interpreted ForEachIntegerSetWithIndex', () => {
+	checkInterpretedOutput('loops/forEachIntegerSetWithIndex.poc');
+});
+
+test('Transpiled ForEachIntegerSetWithIndex', () => {
+	checkTranspiledOutput('loops/forEachIntegerSetWithIndex.poc');
+});
+
+test('Interpreted ForEachTimeRange', () => {
+	checkInterpretedOutput('loops/forEachTimeRange.poc');
+});
+
+test('Transpiled ForEachTimeRange', () => {
+	checkTranspiledOutput('loops/forEachTimeRange.poc');
+});
+
+test('Interpreted ForEachTimeRangeWithIndex', () => {
+	checkInterpretedOutput('loops/forEachTimeRangeWithIndex.poc');
+});
+
+test('Transpiled ForEachTimeRangeWithIndex', () => {
+	checkTranspiledOutput('loops/forEachTimeRangeWithIndex.poc');
+});
+
+test('Interpreted ForEachTupleList', () => {
+	checkInterpretedOutput('loops/forEachTupleList.poc');
+});
+
+test('Transpiled ForEachTupleList', () => {
+	checkTranspiledOutput('loops/forEachTupleList.poc');
+});
+
+test('Interpreted ForEachTupleListWithIndex', () => {
+	checkInterpretedOutput('loops/forEachTupleListWithIndex.poc');
+});
+
+test('Transpiled ForEachTupleListWithIndex', () => {
+	checkTranspiledOutput('loops/forEachTupleListWithIndex.poc');
+});
+
+test('Interpreted ForEachTupleSet', () => {
+	checkInterpretedOutput('loops/forEachTupleSet.poc');
+});
+
+test('Transpiled ForEachTupleSet', () => {
+	checkTranspiledOutput('loops/forEachTupleSet.poc');
+});
+
+test('Interpreted ForEachTupleSetWithIndex', () => {
+	checkInterpretedOutput('loops/forEachTupleSetWithIndex.poc');
+});
+
+test('Transpiled ForEachTupleSetWithIndex', () => {
+	checkTranspiledOutput('loops/forEachTupleSetWithIndex.poc');
+});
+
+test('Interpreted While', () => {
+	checkInterpretedOutput('loops/while.poc');
+});
+
+test('Transpiled While', () => {
+	checkTranspiledOutput('loops/while.poc');
+});
+
+test('Interpreted WhileBreak', () => {
+	checkInterpretedOutput('loops/whileBreak.poc');
+});
+
+test('Transpiled WhileBreak', () => {
+	checkTranspiledOutput('loops/whileBreak.poc');
+});
 

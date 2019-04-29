@@ -1,65 +1,60 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseMParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseMParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedCodeValue = function(test) {
-	checkInterpretedOutput(test, "css/codeValue.pmc");
-};
+test('Interpreted CodeValue', () => {
+	checkInterpretedOutput('css/codeValue.pmc');
+});
 
-exports.testTranspiledCodeValue = function(test) {
-	checkTranspiledOutput(test, "css/codeValue.pmc");
-};
+test('Transpiled CodeValue', () => {
+	checkTranspiledOutput('css/codeValue.pmc');
+});
 
-exports.testInterpretedHyphenName = function(test) {
-	checkInterpretedOutput(test, "css/hyphenName.pmc");
-};
+test('Interpreted HyphenName', () => {
+	checkInterpretedOutput('css/hyphenName.pmc');
+});
 
-exports.testTranspiledHyphenName = function(test) {
-	checkTranspiledOutput(test, "css/hyphenName.pmc");
-};
+test('Transpiled HyphenName', () => {
+	checkTranspiledOutput('css/hyphenName.pmc');
+});
 
-exports.testInterpretedMultiValue = function(test) {
-	checkInterpretedOutput(test, "css/multiValue.pmc");
-};
+test('Interpreted MultiValue', () => {
+	checkInterpretedOutput('css/multiValue.pmc');
+});
 
-exports.testTranspiledMultiValue = function(test) {
-	checkTranspiledOutput(test, "css/multiValue.pmc");
-};
+test('Transpiled MultiValue', () => {
+	checkTranspiledOutput('css/multiValue.pmc');
+});
 
-exports.testInterpretedNumberValue = function(test) {
-	checkInterpretedOutput(test, "css/numberValue.pmc");
-};
+test('Interpreted NumberValue', () => {
+	checkInterpretedOutput('css/numberValue.pmc');
+});
 
-exports.testTranspiledNumberValue = function(test) {
-	checkTranspiledOutput(test, "css/numberValue.pmc");
-};
+test('Transpiled NumberValue', () => {
+	checkTranspiledOutput('css/numberValue.pmc');
+});
 
-exports.testInterpretedPixelValue = function(test) {
-	checkInterpretedOutput(test, "css/pixelValue.pmc");
-};
+test('Interpreted PixelValue', () => {
+	checkInterpretedOutput('css/pixelValue.pmc');
+});
 
-exports.testTranspiledPixelValue = function(test) {
-	checkTranspiledOutput(test, "css/pixelValue.pmc");
-};
+test('Transpiled PixelValue', () => {
+	checkTranspiledOutput('css/pixelValue.pmc');
+});
 
-exports.testInterpretedTextValue = function(test) {
-	checkInterpretedOutput(test, "css/textValue.pmc");
-};
+test('Interpreted TextValue', () => {
+	checkInterpretedOutput('css/textValue.pmc');
+});
 
-exports.testTranspiledTextValue = function(test) {
-	checkTranspiledOutput(test, "css/textValue.pmc");
-};
+test('Transpiled TextValue', () => {
+	checkTranspiledOutput('css/textValue.pmc');
+});
 

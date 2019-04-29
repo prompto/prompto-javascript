@@ -1,44 +1,42 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testAnd = function(test) {
-	compareResourceEOE(test, "testing/and.pec");
-};
+test('And', () => {
+	compareResourceEOE('testing/and.pec');
+});
 
-exports.testContains = function(test) {
-	compareResourceEOE(test, "testing/contains.pec");
-};
+test('Contains', () => {
+	compareResourceEOE('testing/contains.pec');
+});
 
-exports.testGreater = function(test) {
-	compareResourceEOE(test, "testing/greater.pec");
-};
+test('Greater', () => {
+	compareResourceEOE('testing/greater.pec');
+});
 
-exports.testMethod = function(test) {
-	compareResourceEOE(test, "testing/method.pec");
-};
+test('Method', () => {
+	compareResourceEOE('testing/method.pec');
+});
 
-exports.testNegative = function(test) {
-	compareResourceEOE(test, "testing/negative.pec");
-};
+test('Negative', () => {
+	compareResourceEOE('testing/negative.pec');
+});
 
-exports.testNegativeError = function(test) {
-	compareResourceEOE(test, "testing/negativeError.pec");
-};
+test('NegativeError', () => {
+	compareResourceEOE('testing/negativeError.pec');
+});
 
-exports.testNot = function(test) {
-	compareResourceEOE(test, "testing/not.pec");
-};
+test('Not', () => {
+	compareResourceEOE('testing/not.pec');
+});
 
-exports.testOr = function(test) {
-	compareResourceEOE(test, "testing/or.pec");
-};
+test('Or', () => {
+	compareResourceEOE('testing/or.pec');
+});
 
-exports.testPositive = function(test) {
-	compareResourceEOE(test, "testing/positive.pec");
-};
+test('Positive', () => {
+	compareResourceEOE('testing/positive.pec');
+});
 
-exports.testPositiveError = function(test) {
-	compareResourceEOE(test, "testing/positiveError.pec");
-};
+test('PositiveError', () => {
+	compareResourceEOE('testing/positiveError.pec');
+});
 

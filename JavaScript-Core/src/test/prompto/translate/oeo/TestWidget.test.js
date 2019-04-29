@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testMinimal = function(test) {
-	compareResourceOEO(test, "widget/minimal.poc");
-};
+test('Minimal', () => {
+	compareResourceOEO('widget/minimal.poc');
+});
 
-exports.testNative = function(test) {
-	compareResourceOEO(test, "widget/native.poc");
-};
+test('Native', () => {
+	compareResourceOEO('widget/native.poc');
+});
 
-exports.testWithEvent = function(test) {
-	compareResourceOEO(test, "widget/withEvent.poc");
-};
+test('WithEvent', () => {
+	compareResourceOEO('widget/withEvent.poc');
+});
 

@@ -1,48 +1,46 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testDivideByZero = function(test) {
-	compareResourceOMO(test, "errors/divideByZero.poc");
-};
+test('DivideByZero', () => {
+	compareResourceOMO('errors/divideByZero.poc');
+});
 
-exports.testIndexOutOfRange_listItem = function(test) {
-	compareResourceOMO(test, "errors/indexOutOfRange-listItem.poc");
-};
+test('IndexOutOfRange_listItem', () => {
+	compareResourceOMO('errors/indexOutOfRange-listItem.poc');
+});
 
-exports.testIndexOutOfRange_sliceList = function(test) {
-	compareResourceOMO(test, "errors/indexOutOfRange-sliceList.poc");
-};
+test('IndexOutOfRange_sliceList', () => {
+	compareResourceOMO('errors/indexOutOfRange-sliceList.poc');
+});
 
-exports.testIndexOutOfRange_sliceRange = function(test) {
-	compareResourceOMO(test, "errors/indexOutOfRange-sliceRange.poc");
-};
+test('IndexOutOfRange_sliceRange', () => {
+	compareResourceOMO('errors/indexOutOfRange-sliceRange.poc');
+});
 
-exports.testIndexOutOfRange_sliceText = function(test) {
-	compareResourceOMO(test, "errors/indexOutOfRange-sliceText.poc");
-};
+test('IndexOutOfRange_sliceText', () => {
+	compareResourceOMO('errors/indexOutOfRange-sliceText.poc');
+});
 
-exports.testNullDict = function(test) {
-	compareResourceOMO(test, "errors/nullDict.poc");
-};
+test('NullDict', () => {
+	compareResourceOMO('errors/nullDict.poc');
+});
 
-exports.testNullItem = function(test) {
-	compareResourceOMO(test, "errors/nullItem.poc");
-};
+test('NullItem', () => {
+	compareResourceOMO('errors/nullItem.poc');
+});
 
-exports.testNullKey = function(test) {
-	compareResourceOMO(test, "errors/nullKey.poc");
-};
+test('NullKey', () => {
+	compareResourceOMO('errors/nullKey.poc');
+});
 
-exports.testNullMember = function(test) {
-	compareResourceOMO(test, "errors/nullMember.poc");
-};
+test('NullMember', () => {
+	compareResourceOMO('errors/nullMember.poc');
+});
 
-exports.testNullMethod = function(test) {
-	compareResourceOMO(test, "errors/nullMethod.poc");
-};
+test('NullMethod', () => {
+	compareResourceOMO('errors/nullMethod.poc');
+});
 
-exports.testUserException = function(test) {
-	compareResourceOMO(test, "errors/userException.poc");
-};
+test('UserException', () => {
+	compareResourceOMO('errors/userException.poc');
+});
 

@@ -1,273 +1,268 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
-
-exports.testInterpretedEqBoolean = function(test) {
-	checkInterpretedOutput(test, "equals/eqBoolean.poc");
-};
-
-exports.testTranspiledEqBoolean = function(test) {
-	checkTranspiledOutput(test, "equals/eqBoolean.poc");
-};
-
-exports.testInterpretedEqCharacter = function(test) {
-	checkInterpretedOutput(test, "equals/eqCharacter.poc");
-};
-
-exports.testTranspiledEqCharacter = function(test) {
-	checkTranspiledOutput(test, "equals/eqCharacter.poc");
-};
-
-exports.testInterpretedEqDate = function(test) {
-	checkInterpretedOutput(test, "equals/eqDate.poc");
-};
-
-exports.testTranspiledEqDate = function(test) {
-	checkTranspiledOutput(test, "equals/eqDate.poc");
-};
-
-exports.testInterpretedEqDateTime = function(test) {
-	checkInterpretedOutput(test, "equals/eqDateTime.poc");
-};
-
-exports.testTranspiledEqDateTime = function(test) {
-	checkTranspiledOutput(test, "equals/eqDateTime.poc");
-};
-
-exports.testInterpretedEqDecimal = function(test) {
-	checkInterpretedOutput(test, "equals/eqDecimal.poc");
-};
-
-exports.testTranspiledEqDecimal = function(test) {
-	checkTranspiledOutput(test, "equals/eqDecimal.poc");
-};
-
-exports.testInterpretedEqDict = function(test) {
-	checkInterpretedOutput(test, "equals/eqDict.poc");
-};
-
-exports.testTranspiledEqDict = function(test) {
-	checkTranspiledOutput(test, "equals/eqDict.poc");
-};
-
-exports.testInterpretedEqInteger = function(test) {
-	checkInterpretedOutput(test, "equals/eqInteger.poc");
-};
-
-exports.testTranspiledEqInteger = function(test) {
-	checkTranspiledOutput(test, "equals/eqInteger.poc");
-};
-
-exports.testInterpretedEqList = function(test) {
-	checkInterpretedOutput(test, "equals/eqList.poc");
-};
-
-exports.testTranspiledEqList = function(test) {
-	checkTranspiledOutput(test, "equals/eqList.poc");
-};
-
-exports.testInterpretedEqPeriod = function(test) {
-	checkInterpretedOutput(test, "equals/eqPeriod.poc");
-};
-
-exports.testTranspiledEqPeriod = function(test) {
-	checkTranspiledOutput(test, "equals/eqPeriod.poc");
-};
-
-exports.testInterpretedEqRange = function(test) {
-	checkInterpretedOutput(test, "equals/eqRange.poc");
-};
-
-exports.testTranspiledEqRange = function(test) {
-	checkTranspiledOutput(test, "equals/eqRange.poc");
-};
-
-exports.testInterpretedEqSet = function(test) {
-	checkInterpretedOutput(test, "equals/eqSet.poc");
-};
-
-exports.testTranspiledEqSet = function(test) {
-	checkTranspiledOutput(test, "equals/eqSet.poc");
-};
-
-exports.testInterpretedEqText = function(test) {
-	checkInterpretedOutput(test, "equals/eqText.poc");
-};
-
-exports.testTranspiledEqText = function(test) {
-	checkTranspiledOutput(test, "equals/eqText.poc");
-};
-
-exports.testInterpretedEqTime = function(test) {
-	checkInterpretedOutput(test, "equals/eqTime.poc");
-};
-
-exports.testTranspiledEqTime = function(test) {
-	checkTranspiledOutput(test, "equals/eqTime.poc");
-};
-
-exports.testInterpretedEqVersion = function(test) {
-	checkInterpretedOutput(test, "equals/eqVersion.poc");
-};
-
-exports.testTranspiledEqVersion = function(test) {
-	checkTranspiledOutput(test, "equals/eqVersion.poc");
-};
-
-exports.testInterpretedIsBoolean = function(test) {
-	checkInterpretedOutput(test, "equals/isBoolean.poc");
-};
-
-exports.testTranspiledIsBoolean = function(test) {
-	checkTranspiledOutput(test, "equals/isBoolean.poc");
-};
-
-exports.testInterpretedIsInstance = function(test) {
-	checkInterpretedOutput(test, "equals/isInstance.poc");
-};
-
-exports.testTranspiledIsInstance = function(test) {
-	checkTranspiledOutput(test, "equals/isInstance.poc");
-};
-
-exports.testInterpretedIsNotBoolean = function(test) {
-	checkInterpretedOutput(test, "equals/isNotBoolean.poc");
-};
-
-exports.testTranspiledIsNotBoolean = function(test) {
-	checkTranspiledOutput(test, "equals/isNotBoolean.poc");
-};
-
-exports.testInterpretedIsNotInstance = function(test) {
-	checkInterpretedOutput(test, "equals/isNotInstance.poc");
-};
-
-exports.testTranspiledIsNotInstance = function(test) {
-	checkTranspiledOutput(test, "equals/isNotInstance.poc");
-};
-
-exports.testInterpretedNeqBoolean = function(test) {
-	checkInterpretedOutput(test, "equals/neqBoolean.poc");
-};
-
-exports.testTranspiledNeqBoolean = function(test) {
-	checkTranspiledOutput(test, "equals/neqBoolean.poc");
-};
-
-exports.testInterpretedNeqCharacter = function(test) {
-	checkInterpretedOutput(test, "equals/neqCharacter.poc");
-};
-
-exports.testTranspiledNeqCharacter = function(test) {
-	checkTranspiledOutput(test, "equals/neqCharacter.poc");
-};
-
-exports.testInterpretedNeqDate = function(test) {
-	checkInterpretedOutput(test, "equals/neqDate.poc");
-};
-
-exports.testTranspiledNeqDate = function(test) {
-	checkTranspiledOutput(test, "equals/neqDate.poc");
-};
-
-exports.testInterpretedNeqDateTime = function(test) {
-	checkInterpretedOutput(test, "equals/neqDateTime.poc");
-};
-
-exports.testTranspiledNeqDateTime = function(test) {
-	checkTranspiledOutput(test, "equals/neqDateTime.poc");
-};
-
-exports.testInterpretedNeqDecimal = function(test) {
-	checkInterpretedOutput(test, "equals/neqDecimal.poc");
-};
-
-exports.testTranspiledNeqDecimal = function(test) {
-	checkTranspiledOutput(test, "equals/neqDecimal.poc");
-};
-
-exports.testInterpretedNeqDict = function(test) {
-	checkInterpretedOutput(test, "equals/neqDict.poc");
-};
-
-exports.testTranspiledNeqDict = function(test) {
-	checkTranspiledOutput(test, "equals/neqDict.poc");
-};
-
-exports.testInterpretedNeqInteger = function(test) {
-	checkInterpretedOutput(test, "equals/neqInteger.poc");
-};
-
-exports.testTranspiledNeqInteger = function(test) {
-	checkTranspiledOutput(test, "equals/neqInteger.poc");
-};
-
-exports.testInterpretedNeqList = function(test) {
-	checkInterpretedOutput(test, "equals/neqList.poc");
-};
-
-exports.testTranspiledNeqList = function(test) {
-	checkTranspiledOutput(test, "equals/neqList.poc");
-};
-
-exports.testInterpretedNeqPeriod = function(test) {
-	checkInterpretedOutput(test, "equals/neqPeriod.poc");
-};
-
-exports.testTranspiledNeqPeriod = function(test) {
-	checkTranspiledOutput(test, "equals/neqPeriod.poc");
-};
-
-exports.testInterpretedNeqRange = function(test) {
-	checkInterpretedOutput(test, "equals/neqRange.poc");
-};
-
-exports.testTranspiledNeqRange = function(test) {
-	checkTranspiledOutput(test, "equals/neqRange.poc");
-};
-
-exports.testInterpretedNeqSet = function(test) {
-	checkInterpretedOutput(test, "equals/neqSet.poc");
-};
-
-exports.testTranspiledNeqSet = function(test) {
-	checkTranspiledOutput(test, "equals/neqSet.poc");
-};
-
-exports.testInterpretedNeqText = function(test) {
-	checkInterpretedOutput(test, "equals/neqText.poc");
-};
-
-exports.testTranspiledNeqText = function(test) {
-	checkTranspiledOutput(test, "equals/neqText.poc");
-};
-
-exports.testInterpretedNeqTime = function(test) {
-	checkInterpretedOutput(test, "equals/neqTime.poc");
-};
-
-exports.testTranspiledNeqTime = function(test) {
-	checkTranspiledOutput(test, "equals/neqTime.poc");
-};
-
-exports.testInterpretedReqText = function(test) {
-	checkInterpretedOutput(test, "equals/reqText.poc");
-};
-
-exports.testTranspiledReqText = function(test) {
-	checkTranspiledOutput(test, "equals/reqText.poc");
-};
+});
+
+test('Interpreted EqBoolean', () => {
+	checkInterpretedOutput('equals/eqBoolean.poc');
+});
+
+test('Transpiled EqBoolean', () => {
+	checkTranspiledOutput('equals/eqBoolean.poc');
+});
+
+test('Interpreted EqCharacter', () => {
+	checkInterpretedOutput('equals/eqCharacter.poc');
+});
+
+test('Transpiled EqCharacter', () => {
+	checkTranspiledOutput('equals/eqCharacter.poc');
+});
+
+test('Interpreted EqDate', () => {
+	checkInterpretedOutput('equals/eqDate.poc');
+});
+
+test('Transpiled EqDate', () => {
+	checkTranspiledOutput('equals/eqDate.poc');
+});
+
+test('Interpreted EqDateTime', () => {
+	checkInterpretedOutput('equals/eqDateTime.poc');
+});
+
+test('Transpiled EqDateTime', () => {
+	checkTranspiledOutput('equals/eqDateTime.poc');
+});
+
+test('Interpreted EqDecimal', () => {
+	checkInterpretedOutput('equals/eqDecimal.poc');
+});
+
+test('Transpiled EqDecimal', () => {
+	checkTranspiledOutput('equals/eqDecimal.poc');
+});
+
+test('Interpreted EqDict', () => {
+	checkInterpretedOutput('equals/eqDict.poc');
+});
+
+test('Transpiled EqDict', () => {
+	checkTranspiledOutput('equals/eqDict.poc');
+});
+
+test('Interpreted EqInteger', () => {
+	checkInterpretedOutput('equals/eqInteger.poc');
+});
+
+test('Transpiled EqInteger', () => {
+	checkTranspiledOutput('equals/eqInteger.poc');
+});
+
+test('Interpreted EqList', () => {
+	checkInterpretedOutput('equals/eqList.poc');
+});
+
+test('Transpiled EqList', () => {
+	checkTranspiledOutput('equals/eqList.poc');
+});
+
+test('Interpreted EqPeriod', () => {
+	checkInterpretedOutput('equals/eqPeriod.poc');
+});
+
+test('Transpiled EqPeriod', () => {
+	checkTranspiledOutput('equals/eqPeriod.poc');
+});
+
+test('Interpreted EqRange', () => {
+	checkInterpretedOutput('equals/eqRange.poc');
+});
+
+test('Transpiled EqRange', () => {
+	checkTranspiledOutput('equals/eqRange.poc');
+});
+
+test('Interpreted EqSet', () => {
+	checkInterpretedOutput('equals/eqSet.poc');
+});
+
+test('Transpiled EqSet', () => {
+	checkTranspiledOutput('equals/eqSet.poc');
+});
+
+test('Interpreted EqText', () => {
+	checkInterpretedOutput('equals/eqText.poc');
+});
+
+test('Transpiled EqText', () => {
+	checkTranspiledOutput('equals/eqText.poc');
+});
+
+test('Interpreted EqTime', () => {
+	checkInterpretedOutput('equals/eqTime.poc');
+});
+
+test('Transpiled EqTime', () => {
+	checkTranspiledOutput('equals/eqTime.poc');
+});
+
+test('Interpreted EqVersion', () => {
+	checkInterpretedOutput('equals/eqVersion.poc');
+});
+
+test('Transpiled EqVersion', () => {
+	checkTranspiledOutput('equals/eqVersion.poc');
+});
+
+test('Interpreted IsBoolean', () => {
+	checkInterpretedOutput('equals/isBoolean.poc');
+});
+
+test('Transpiled IsBoolean', () => {
+	checkTranspiledOutput('equals/isBoolean.poc');
+});
+
+test('Interpreted IsInstance', () => {
+	checkInterpretedOutput('equals/isInstance.poc');
+});
+
+test('Transpiled IsInstance', () => {
+	checkTranspiledOutput('equals/isInstance.poc');
+});
+
+test('Interpreted IsNotBoolean', () => {
+	checkInterpretedOutput('equals/isNotBoolean.poc');
+});
+
+test('Transpiled IsNotBoolean', () => {
+	checkTranspiledOutput('equals/isNotBoolean.poc');
+});
+
+test('Interpreted IsNotInstance', () => {
+	checkInterpretedOutput('equals/isNotInstance.poc');
+});
+
+test('Transpiled IsNotInstance', () => {
+	checkTranspiledOutput('equals/isNotInstance.poc');
+});
+
+test('Interpreted NeqBoolean', () => {
+	checkInterpretedOutput('equals/neqBoolean.poc');
+});
+
+test('Transpiled NeqBoolean', () => {
+	checkTranspiledOutput('equals/neqBoolean.poc');
+});
+
+test('Interpreted NeqCharacter', () => {
+	checkInterpretedOutput('equals/neqCharacter.poc');
+});
+
+test('Transpiled NeqCharacter', () => {
+	checkTranspiledOutput('equals/neqCharacter.poc');
+});
+
+test('Interpreted NeqDate', () => {
+	checkInterpretedOutput('equals/neqDate.poc');
+});
+
+test('Transpiled NeqDate', () => {
+	checkTranspiledOutput('equals/neqDate.poc');
+});
+
+test('Interpreted NeqDateTime', () => {
+	checkInterpretedOutput('equals/neqDateTime.poc');
+});
+
+test('Transpiled NeqDateTime', () => {
+	checkTranspiledOutput('equals/neqDateTime.poc');
+});
+
+test('Interpreted NeqDecimal', () => {
+	checkInterpretedOutput('equals/neqDecimal.poc');
+});
+
+test('Transpiled NeqDecimal', () => {
+	checkTranspiledOutput('equals/neqDecimal.poc');
+});
+
+test('Interpreted NeqDict', () => {
+	checkInterpretedOutput('equals/neqDict.poc');
+});
+
+test('Transpiled NeqDict', () => {
+	checkTranspiledOutput('equals/neqDict.poc');
+});
+
+test('Interpreted NeqInteger', () => {
+	checkInterpretedOutput('equals/neqInteger.poc');
+});
+
+test('Transpiled NeqInteger', () => {
+	checkTranspiledOutput('equals/neqInteger.poc');
+});
+
+test('Interpreted NeqList', () => {
+	checkInterpretedOutput('equals/neqList.poc');
+});
+
+test('Transpiled NeqList', () => {
+	checkTranspiledOutput('equals/neqList.poc');
+});
+
+test('Interpreted NeqPeriod', () => {
+	checkInterpretedOutput('equals/neqPeriod.poc');
+});
+
+test('Transpiled NeqPeriod', () => {
+	checkTranspiledOutput('equals/neqPeriod.poc');
+});
+
+test('Interpreted NeqRange', () => {
+	checkInterpretedOutput('equals/neqRange.poc');
+});
+
+test('Transpiled NeqRange', () => {
+	checkTranspiledOutput('equals/neqRange.poc');
+});
+
+test('Interpreted NeqSet', () => {
+	checkInterpretedOutput('equals/neqSet.poc');
+});
+
+test('Transpiled NeqSet', () => {
+	checkTranspiledOutput('equals/neqSet.poc');
+});
+
+test('Interpreted NeqText', () => {
+	checkInterpretedOutput('equals/neqText.poc');
+});
+
+test('Transpiled NeqText', () => {
+	checkTranspiledOutput('equals/neqText.poc');
+});
+
+test('Interpreted NeqTime', () => {
+	checkInterpretedOutput('equals/neqTime.poc');
+});
+
+test('Transpiled NeqTime', () => {
+	checkTranspiledOutput('equals/neqTime.poc');
+});
+
+test('Interpreted ReqText', () => {
+	checkInterpretedOutput('equals/reqText.poc');
+});
+
+test('Transpiled ReqText', () => {
+	checkTranspiledOutput('equals/reqText.poc');
+});
 

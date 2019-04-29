@@ -1,60 +1,58 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testImmutable = function(test) {
-	compareResourceEME(test, "mutability/immutable.pec");
-};
+test('Immutable', () => {
+	compareResourceEME('mutability/immutable.pec');
+});
 
-exports.testImmutableArgument = function(test) {
-	compareResourceEME(test, "mutability/immutableArgument.pec");
-};
+test('ImmutableArgument', () => {
+	compareResourceEME('mutability/immutableArgument.pec');
+});
 
-exports.testImmutableDict = function(test) {
-	compareResourceEME(test, "mutability/immutableDict.pec");
-};
+test('ImmutableDict', () => {
+	compareResourceEME('mutability/immutableDict.pec');
+});
 
-exports.testImmutableList = function(test) {
-	compareResourceEME(test, "mutability/immutableList.pec");
-};
+test('ImmutableList', () => {
+	compareResourceEME('mutability/immutableList.pec');
+});
 
-exports.testImmutableMember = function(test) {
-	compareResourceEME(test, "mutability/immutableMember.pec");
-};
+test('ImmutableMember', () => {
+	compareResourceEME('mutability/immutableMember.pec');
+});
 
-exports.testImmutableTuple = function(test) {
-	compareResourceEME(test, "mutability/immutableTuple.pec");
-};
+test('ImmutableTuple', () => {
+	compareResourceEME('mutability/immutableTuple.pec');
+});
 
-exports.testMutable = function(test) {
-	compareResourceEME(test, "mutability/mutable.pec");
-};
+test('Mutable', () => {
+	compareResourceEME('mutability/mutable.pec');
+});
 
-exports.testMutableArgument = function(test) {
-	compareResourceEME(test, "mutability/mutableArgument.pec");
-};
+test('MutableArgument', () => {
+	compareResourceEME('mutability/mutableArgument.pec');
+});
 
-exports.testMutableChild = function(test) {
-	compareResourceEME(test, "mutability/mutableChild.pec");
-};
+test('MutableChild', () => {
+	compareResourceEME('mutability/mutableChild.pec');
+});
 
-exports.testMutableDict = function(test) {
-	compareResourceEME(test, "mutability/mutableDict.pec");
-};
+test('MutableDict', () => {
+	compareResourceEME('mutability/mutableDict.pec');
+});
 
-exports.testMutableInstance = function(test) {
-	compareResourceEME(test, "mutability/mutableInstance.pec");
-};
+test('MutableInstance', () => {
+	compareResourceEME('mutability/mutableInstance.pec');
+});
 
-exports.testMutableList = function(test) {
-	compareResourceEME(test, "mutability/mutableList.pec");
-};
+test('MutableList', () => {
+	compareResourceEME('mutability/mutableList.pec');
+});
 
-exports.testMutableMember = function(test) {
-	compareResourceEME(test, "mutability/mutableMember.pec");
-};
+test('MutableMember', () => {
+	compareResourceEME('mutability/mutableMember.pec');
+});
 
-exports.testMutableTuple = function(test) {
-	compareResourceEME(test, "mutability/mutableTuple.pec");
-};
+test('MutableTuple', () => {
+	compareResourceEME('mutability/mutableTuple.pec');
+});
 

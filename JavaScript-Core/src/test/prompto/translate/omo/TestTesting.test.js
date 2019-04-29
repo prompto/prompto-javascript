@@ -1,44 +1,42 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testAnd = function(test) {
-	compareResourceOMO(test, "testing/and.poc");
-};
+test('And', () => {
+	compareResourceOMO('testing/and.poc');
+});
 
-exports.testContains = function(test) {
-	compareResourceOMO(test, "testing/contains.poc");
-};
+test('Contains', () => {
+	compareResourceOMO('testing/contains.poc');
+});
 
-exports.testGreater = function(test) {
-	compareResourceOMO(test, "testing/greater.poc");
-};
+test('Greater', () => {
+	compareResourceOMO('testing/greater.poc');
+});
 
-exports.testMethod = function(test) {
-	compareResourceOMO(test, "testing/method.poc");
-};
+test('Method', () => {
+	compareResourceOMO('testing/method.poc');
+});
 
-exports.testNegative = function(test) {
-	compareResourceOMO(test, "testing/negative.poc");
-};
+test('Negative', () => {
+	compareResourceOMO('testing/negative.poc');
+});
 
-exports.testNegativeError = function(test) {
-	compareResourceOMO(test, "testing/negativeError.poc");
-};
+test('NegativeError', () => {
+	compareResourceOMO('testing/negativeError.poc');
+});
 
-exports.testNot = function(test) {
-	compareResourceOMO(test, "testing/not.poc");
-};
+test('Not', () => {
+	compareResourceOMO('testing/not.poc');
+});
 
-exports.testOr = function(test) {
-	compareResourceOMO(test, "testing/or.poc");
-};
+test('Or', () => {
+	compareResourceOMO('testing/or.poc');
+});
 
-exports.testPositive = function(test) {
-	compareResourceOMO(test, "testing/positive.poc");
-};
+test('Positive', () => {
+	compareResourceOMO('testing/positive.poc');
+});
 
-exports.testPositiveError = function(test) {
-	compareResourceOMO(test, "testing/positiveError.poc");
-};
+test('PositiveError', () => {
+	compareResourceOMO('testing/positiveError.poc');
+});
 

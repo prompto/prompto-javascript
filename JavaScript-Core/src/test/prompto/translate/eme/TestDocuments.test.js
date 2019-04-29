@@ -1,32 +1,30 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testBlob = function(test) {
-	compareResourceEME(test, "documents/blob.pec");
-};
+test('Blob', () => {
+	compareResourceEME('documents/blob.pec');
+});
 
-exports.testDeepItem = function(test) {
-	compareResourceEME(test, "documents/deepItem.pec");
-};
+test('DeepItem', () => {
+	compareResourceEME('documents/deepItem.pec');
+});
 
-exports.testDeepMember = function(test) {
-	compareResourceEME(test, "documents/deepMember.pec");
-};
+test('DeepMember', () => {
+	compareResourceEME('documents/deepMember.pec');
+});
 
-exports.testItem = function(test) {
-	compareResourceEME(test, "documents/item.pec");
-};
+test('Item', () => {
+	compareResourceEME('documents/item.pec');
+});
 
-exports.testLiteral = function(test) {
-	compareResourceEME(test, "documents/literal.pec");
-};
+test('Literal', () => {
+	compareResourceEME('documents/literal.pec');
+});
 
-exports.testMember = function(test) {
-	compareResourceEME(test, "documents/member.pec");
-};
+test('Member', () => {
+	compareResourceEME('documents/member.pec');
+});
 
-exports.testNamedItem = function(test) {
-	compareResourceEME(test, "documents/namedItem.pec");
-};
+test('NamedItem', () => {
+	compareResourceEME('documents/namedItem.pec');
+});
 

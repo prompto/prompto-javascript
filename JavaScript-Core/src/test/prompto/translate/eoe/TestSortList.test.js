@@ -1,108 +1,106 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testSortBooleans = function(test) {
-	compareResourceEOE(test, "sortList/sortBooleans.pec");
-};
+test('SortBooleans', () => {
+	compareResourceEOE('sortList/sortBooleans.pec');
+});
 
-exports.testSortDateTimes = function(test) {
-	compareResourceEOE(test, "sortList/sortDateTimes.pec");
-};
+test('SortDateTimes', () => {
+	compareResourceEOE('sortList/sortDateTimes.pec');
+});
 
-exports.testSortDates = function(test) {
-	compareResourceEOE(test, "sortList/sortDates.pec");
-};
+test('SortDates', () => {
+	compareResourceEOE('sortList/sortDates.pec');
+});
 
-exports.testSortDecimals = function(test) {
-	compareResourceEOE(test, "sortList/sortDecimals.pec");
-};
+test('SortDecimals', () => {
+	compareResourceEOE('sortList/sortDecimals.pec');
+});
 
-exports.testSortDescBooleans = function(test) {
-	compareResourceEOE(test, "sortList/sortDescBooleans.pec");
-};
+test('SortDescBooleans', () => {
+	compareResourceEOE('sortList/sortDescBooleans.pec');
+});
 
-exports.testSortDescDateTimes = function(test) {
-	compareResourceEOE(test, "sortList/sortDescDateTimes.pec");
-};
+test('SortDescDateTimes', () => {
+	compareResourceEOE('sortList/sortDescDateTimes.pec');
+});
 
-exports.testSortDescDates = function(test) {
-	compareResourceEOE(test, "sortList/sortDescDates.pec");
-};
+test('SortDescDates', () => {
+	compareResourceEOE('sortList/sortDescDates.pec');
+});
 
-exports.testSortDescDecimals = function(test) {
-	compareResourceEOE(test, "sortList/sortDescDecimals.pec");
-};
+test('SortDescDecimals', () => {
+	compareResourceEOE('sortList/sortDescDecimals.pec');
+});
 
-exports.testSortDescExpressions = function(test) {
-	compareResourceEOE(test, "sortList/sortDescExpressions.pec");
-};
+test('SortDescExpressions', () => {
+	compareResourceEOE('sortList/sortDescExpressions.pec');
+});
 
-exports.testSortDescIntegers = function(test) {
-	compareResourceEOE(test, "sortList/sortDescIntegers.pec");
-};
+test('SortDescIntegers', () => {
+	compareResourceEOE('sortList/sortDescIntegers.pec');
+});
 
-exports.testSortDescKeys = function(test) {
-	compareResourceEOE(test, "sortList/sortDescKeys.pec");
-};
+test('SortDescKeys', () => {
+	compareResourceEOE('sortList/sortDescKeys.pec');
+});
 
-exports.testSortDescMethods = function(test) {
-	compareResourceEOE(test, "sortList/sortDescMethods.pec");
-};
+test('SortDescMethods', () => {
+	compareResourceEOE('sortList/sortDescMethods.pec');
+});
 
-exports.testSortDescNames = function(test) {
-	compareResourceEOE(test, "sortList/sortDescNames.pec");
-};
+test('SortDescNames', () => {
+	compareResourceEOE('sortList/sortDescNames.pec');
+});
 
-exports.testSortDescTexts = function(test) {
-	compareResourceEOE(test, "sortList/sortDescTexts.pec");
-};
+test('SortDescTexts', () => {
+	compareResourceEOE('sortList/sortDescTexts.pec');
+});
 
-exports.testSortDescTimes = function(test) {
-	compareResourceEOE(test, "sortList/sortDescTimes.pec");
-};
+test('SortDescTimes', () => {
+	compareResourceEOE('sortList/sortDescTimes.pec');
+});
 
-exports.testSortDocumentExpressions = function(test) {
-	compareResourceEOE(test, "sortList/sortDocumentExpressions.pec");
-};
+test('SortDocumentExpressions', () => {
+	compareResourceEOE('sortList/sortDocumentExpressions.pec');
+});
 
-exports.testSortDocumentKeys = function(test) {
-	compareResourceEOE(test, "sortList/sortDocumentKeys.pec");
-};
+test('SortDocumentKeys', () => {
+	compareResourceEOE('sortList/sortDocumentKeys.pec');
+});
 
-exports.testSortDocumentMethods = function(test) {
-	compareResourceEOE(test, "sortList/sortDocumentMethods.pec");
-};
+test('SortDocumentMethods', () => {
+	compareResourceEOE('sortList/sortDocumentMethods.pec');
+});
 
-exports.testSortDocumentNames = function(test) {
-	compareResourceEOE(test, "sortList/sortDocumentNames.pec");
-};
+test('SortDocumentNames', () => {
+	compareResourceEOE('sortList/sortDocumentNames.pec');
+});
 
-exports.testSortExpressions = function(test) {
-	compareResourceEOE(test, "sortList/sortExpressions.pec");
-};
+test('SortExpressions', () => {
+	compareResourceEOE('sortList/sortExpressions.pec');
+});
 
-exports.testSortIntegers = function(test) {
-	compareResourceEOE(test, "sortList/sortIntegers.pec");
-};
+test('SortIntegers', () => {
+	compareResourceEOE('sortList/sortIntegers.pec');
+});
 
-exports.testSortKeys = function(test) {
-	compareResourceEOE(test, "sortList/sortKeys.pec");
-};
+test('SortKeys', () => {
+	compareResourceEOE('sortList/sortKeys.pec');
+});
 
-exports.testSortMethods = function(test) {
-	compareResourceEOE(test, "sortList/sortMethods.pec");
-};
+test('SortMethods', () => {
+	compareResourceEOE('sortList/sortMethods.pec');
+});
 
-exports.testSortNames = function(test) {
-	compareResourceEOE(test, "sortList/sortNames.pec");
-};
+test('SortNames', () => {
+	compareResourceEOE('sortList/sortNames.pec');
+});
 
-exports.testSortTexts = function(test) {
-	compareResourceEOE(test, "sortList/sortTexts.pec");
-};
+test('SortTexts', () => {
+	compareResourceEOE('sortList/sortTexts.pec');
+});
 
-exports.testSortTimes = function(test) {
-	compareResourceEOE(test, "sortList/sortTimes.pec");
-};
+test('SortTimes', () => {
+	compareResourceEOE('sortList/sortTimes.pec');
+});
 

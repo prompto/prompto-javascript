@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testMinimal = function(test) {
-	compareResourceOMO(test, "widget/minimal.poc");
-};
+test('Minimal', () => {
+	compareResourceOMO('widget/minimal.poc');
+});
 
-exports.testNative = function(test) {
-	compareResourceOMO(test, "widget/native.poc");
-};
+test('Native', () => {
+	compareResourceOMO('widget/native.poc');
+});
 
-exports.testWithEvent = function(test) {
-	compareResourceOMO(test, "widget/withEvent.poc");
-};
+test('WithEvent', () => {
+	compareResourceOMO('widget/withEvent.poc');
+});
 

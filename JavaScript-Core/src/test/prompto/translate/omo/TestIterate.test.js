@@ -1,12 +1,10 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testForEachExpression = function(test) {
-	compareResourceOMO(test, "iterate/forEachExpression.poc");
-};
+test('ForEachExpression', () => {
+	compareResourceOMO('iterate/forEachExpression.poc');
+});
 
-exports.testForEachIntegerList = function(test) {
-	compareResourceOMO(test, "iterate/forEachIntegerList.poc");
-};
+test('ForEachIntegerList', () => {
+	compareResourceOMO('iterate/forEachIntegerList.poc');
+});
 

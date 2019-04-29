@@ -1,12 +1,10 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testAttribute = function(test) {
-	compareResourceOEO(test, "singleton/attribute.poc");
-};
+test('Attribute', () => {
+	compareResourceOEO('singleton/attribute.poc');
+});
 
-exports.testMember = function(test) {
-	compareResourceOEO(test, "singleton/member.poc");
-};
+test('Member', () => {
+	compareResourceOEO('singleton/member.poc');
+});
 

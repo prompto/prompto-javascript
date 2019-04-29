@@ -1,8 +1,6 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testExpressionInjection = function(test) {
-	compareResourceEOE(test, "injections/expressionInjection.pec");
-};
+test('ExpressionInjection', () => {
+	compareResourceEOE('injections/expressionInjection.pec');
+});
 

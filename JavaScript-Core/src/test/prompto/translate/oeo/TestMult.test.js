@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testMultCharacter = function(test) {
-	compareResourceOEO(test, "mult/multCharacter.poc");
-};
+test('MultCharacter', () => {
+	compareResourceOEO('mult/multCharacter.poc');
+});
 
-exports.testMultDecimal = function(test) {
-	compareResourceOEO(test, "mult/multDecimal.poc");
-};
+test('MultDecimal', () => {
+	compareResourceOEO('mult/multDecimal.poc');
+});
 
-exports.testMultInteger = function(test) {
-	compareResourceOEO(test, "mult/multInteger.poc");
-};
+test('MultInteger', () => {
+	compareResourceOEO('mult/multInteger.poc');
+});
 
-exports.testMultList = function(test) {
-	compareResourceOEO(test, "mult/multList.poc");
-};
+test('MultList', () => {
+	compareResourceOEO('mult/multList.poc');
+});
 
-exports.testMultPeriod = function(test) {
-	compareResourceOEO(test, "mult/multPeriod.poc");
-};
+test('MultPeriod', () => {
+	compareResourceOEO('mult/multPeriod.poc');
+});
 
-exports.testMultText = function(test) {
-	compareResourceOEO(test, "mult/multText.poc");
-};
+test('MultText', () => {
+	compareResourceOEO('mult/multText.poc');
+});
 

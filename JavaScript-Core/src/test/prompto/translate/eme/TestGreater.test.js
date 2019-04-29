@@ -1,64 +1,62 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testGtCharacter = function(test) {
-	compareResourceEME(test, "greater/gtCharacter.pec");
-};
+test('GtCharacter', () => {
+	compareResourceEME('greater/gtCharacter.pec');
+});
 
-exports.testGtDate = function(test) {
-	compareResourceEME(test, "greater/gtDate.pec");
-};
+test('GtDate', () => {
+	compareResourceEME('greater/gtDate.pec');
+});
 
-exports.testGtDateTime = function(test) {
-	compareResourceEME(test, "greater/gtDateTime.pec");
-};
+test('GtDateTime', () => {
+	compareResourceEME('greater/gtDateTime.pec');
+});
 
-exports.testGtDecimal = function(test) {
-	compareResourceEME(test, "greater/gtDecimal.pec");
-};
+test('GtDecimal', () => {
+	compareResourceEME('greater/gtDecimal.pec');
+});
 
-exports.testGtInteger = function(test) {
-	compareResourceEME(test, "greater/gtInteger.pec");
-};
+test('GtInteger', () => {
+	compareResourceEME('greater/gtInteger.pec');
+});
 
-exports.testGtText = function(test) {
-	compareResourceEME(test, "greater/gtText.pec");
-};
+test('GtText', () => {
+	compareResourceEME('greater/gtText.pec');
+});
 
-exports.testGtTime = function(test) {
-	compareResourceEME(test, "greater/gtTime.pec");
-};
+test('GtTime', () => {
+	compareResourceEME('greater/gtTime.pec');
+});
 
-exports.testGtVersion = function(test) {
-	compareResourceEME(test, "greater/gtVersion.pec");
-};
+test('GtVersion', () => {
+	compareResourceEME('greater/gtVersion.pec');
+});
 
-exports.testGteCharacter = function(test) {
-	compareResourceEME(test, "greater/gteCharacter.pec");
-};
+test('GteCharacter', () => {
+	compareResourceEME('greater/gteCharacter.pec');
+});
 
-exports.testGteDate = function(test) {
-	compareResourceEME(test, "greater/gteDate.pec");
-};
+test('GteDate', () => {
+	compareResourceEME('greater/gteDate.pec');
+});
 
-exports.testGteDateTime = function(test) {
-	compareResourceEME(test, "greater/gteDateTime.pec");
-};
+test('GteDateTime', () => {
+	compareResourceEME('greater/gteDateTime.pec');
+});
 
-exports.testGteDecimal = function(test) {
-	compareResourceEME(test, "greater/gteDecimal.pec");
-};
+test('GteDecimal', () => {
+	compareResourceEME('greater/gteDecimal.pec');
+});
 
-exports.testGteInteger = function(test) {
-	compareResourceEME(test, "greater/gteInteger.pec");
-};
+test('GteInteger', () => {
+	compareResourceEME('greater/gteInteger.pec');
+});
 
-exports.testGteText = function(test) {
-	compareResourceEME(test, "greater/gteText.pec");
-};
+test('GteText', () => {
+	compareResourceEME('greater/gteText.pec');
+});
 
-exports.testGteTime = function(test) {
-	compareResourceEME(test, "greater/gteTime.pec");
-};
+test('GteTime', () => {
+	compareResourceEME('greater/gteTime.pec');
+});
 

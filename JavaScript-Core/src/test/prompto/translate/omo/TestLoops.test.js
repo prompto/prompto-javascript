@@ -1,132 +1,130 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testDoWhile = function(test) {
-	compareResourceOMO(test, "loops/doWhile.poc");
-};
+test('DoWhile', () => {
+	compareResourceOMO('loops/doWhile.poc');
+});
 
-exports.testDoWhileBreak = function(test) {
-	compareResourceOMO(test, "loops/doWhileBreak.poc");
-};
+test('DoWhileBreak', () => {
+	compareResourceOMO('loops/doWhileBreak.poc');
+});
 
-exports.testEmbeddedForEach = function(test) {
-	compareResourceOMO(test, "loops/embeddedForEach.poc");
-};
+test('EmbeddedForEach', () => {
+	compareResourceOMO('loops/embeddedForEach.poc');
+});
 
-exports.testForEachBreak = function(test) {
-	compareResourceOMO(test, "loops/forEachBreak.poc");
-};
+test('ForEachBreak', () => {
+	compareResourceOMO('loops/forEachBreak.poc');
+});
 
-exports.testForEachCharacterRange = function(test) {
-	compareResourceOMO(test, "loops/forEachCharacterRange.poc");
-};
+test('ForEachCharacterRange', () => {
+	compareResourceOMO('loops/forEachCharacterRange.poc');
+});
 
-exports.testForEachCharacterRangeWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachCharacterRangeWithIndex.poc");
-};
+test('ForEachCharacterRangeWithIndex', () => {
+	compareResourceOMO('loops/forEachCharacterRangeWithIndex.poc');
+});
 
-exports.testForEachDateRange = function(test) {
-	compareResourceOMO(test, "loops/forEachDateRange.poc");
-};
+test('ForEachDateRange', () => {
+	compareResourceOMO('loops/forEachDateRange.poc');
+});
 
-exports.testForEachDateRangeWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachDateRangeWithIndex.poc");
-};
+test('ForEachDateRangeWithIndex', () => {
+	compareResourceOMO('loops/forEachDateRangeWithIndex.poc');
+});
 
-exports.testForEachDictionaryItem = function(test) {
-	compareResourceOMO(test, "loops/forEachDictionaryItem.poc");
-};
+test('ForEachDictionaryItem', () => {
+	compareResourceOMO('loops/forEachDictionaryItem.poc');
+});
 
-exports.testForEachDictionaryItemWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachDictionaryItemWithIndex.poc");
-};
+test('ForEachDictionaryItemWithIndex', () => {
+	compareResourceOMO('loops/forEachDictionaryItemWithIndex.poc');
+});
 
-exports.testForEachDictionaryKey = function(test) {
-	compareResourceOMO(test, "loops/forEachDictionaryKey.poc");
-};
+test('ForEachDictionaryKey', () => {
+	compareResourceOMO('loops/forEachDictionaryKey.poc');
+});
 
-exports.testForEachDictionaryKeyWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachDictionaryKeyWithIndex.poc");
-};
+test('ForEachDictionaryKeyWithIndex', () => {
+	compareResourceOMO('loops/forEachDictionaryKeyWithIndex.poc');
+});
 
-exports.testForEachDictionaryValue = function(test) {
-	compareResourceOMO(test, "loops/forEachDictionaryValue.poc");
-};
+test('ForEachDictionaryValue', () => {
+	compareResourceOMO('loops/forEachDictionaryValue.poc');
+});
 
-exports.testForEachDictionaryValueWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachDictionaryValueWithIndex.poc");
-};
+test('ForEachDictionaryValueWithIndex', () => {
+	compareResourceOMO('loops/forEachDictionaryValueWithIndex.poc');
+});
 
-exports.testForEachInstanceList = function(test) {
-	compareResourceOMO(test, "loops/forEachInstanceList.poc");
-};
+test('ForEachInstanceList', () => {
+	compareResourceOMO('loops/forEachInstanceList.poc');
+});
 
-exports.testForEachInstanceListWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachInstanceListWithIndex.poc");
-};
+test('ForEachInstanceListWithIndex', () => {
+	compareResourceOMO('loops/forEachInstanceListWithIndex.poc');
+});
 
-exports.testForEachInstanceSet = function(test) {
-	compareResourceOMO(test, "loops/forEachInstanceSet.poc");
-};
+test('ForEachInstanceSet', () => {
+	compareResourceOMO('loops/forEachInstanceSet.poc');
+});
 
-exports.testForEachInstanceSetWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachInstanceSetWithIndex.poc");
-};
+test('ForEachInstanceSetWithIndex', () => {
+	compareResourceOMO('loops/forEachInstanceSetWithIndex.poc');
+});
 
-exports.testForEachIntegerList = function(test) {
-	compareResourceOMO(test, "loops/forEachIntegerList.poc");
-};
+test('ForEachIntegerList', () => {
+	compareResourceOMO('loops/forEachIntegerList.poc');
+});
 
-exports.testForEachIntegerListWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachIntegerListWithIndex.poc");
-};
+test('ForEachIntegerListWithIndex', () => {
+	compareResourceOMO('loops/forEachIntegerListWithIndex.poc');
+});
 
-exports.testForEachIntegerRange = function(test) {
-	compareResourceOMO(test, "loops/forEachIntegerRange.poc");
-};
+test('ForEachIntegerRange', () => {
+	compareResourceOMO('loops/forEachIntegerRange.poc');
+});
 
-exports.testForEachIntegerRangeWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachIntegerRangeWithIndex.poc");
-};
+test('ForEachIntegerRangeWithIndex', () => {
+	compareResourceOMO('loops/forEachIntegerRangeWithIndex.poc');
+});
 
-exports.testForEachIntegerSet = function(test) {
-	compareResourceOMO(test, "loops/forEachIntegerSet.poc");
-};
+test('ForEachIntegerSet', () => {
+	compareResourceOMO('loops/forEachIntegerSet.poc');
+});
 
-exports.testForEachIntegerSetWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachIntegerSetWithIndex.poc");
-};
+test('ForEachIntegerSetWithIndex', () => {
+	compareResourceOMO('loops/forEachIntegerSetWithIndex.poc');
+});
 
-exports.testForEachTimeRange = function(test) {
-	compareResourceOMO(test, "loops/forEachTimeRange.poc");
-};
+test('ForEachTimeRange', () => {
+	compareResourceOMO('loops/forEachTimeRange.poc');
+});
 
-exports.testForEachTimeRangeWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachTimeRangeWithIndex.poc");
-};
+test('ForEachTimeRangeWithIndex', () => {
+	compareResourceOMO('loops/forEachTimeRangeWithIndex.poc');
+});
 
-exports.testForEachTupleList = function(test) {
-	compareResourceOMO(test, "loops/forEachTupleList.poc");
-};
+test('ForEachTupleList', () => {
+	compareResourceOMO('loops/forEachTupleList.poc');
+});
 
-exports.testForEachTupleListWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachTupleListWithIndex.poc");
-};
+test('ForEachTupleListWithIndex', () => {
+	compareResourceOMO('loops/forEachTupleListWithIndex.poc');
+});
 
-exports.testForEachTupleSet = function(test) {
-	compareResourceOMO(test, "loops/forEachTupleSet.poc");
-};
+test('ForEachTupleSet', () => {
+	compareResourceOMO('loops/forEachTupleSet.poc');
+});
 
-exports.testForEachTupleSetWithIndex = function(test) {
-	compareResourceOMO(test, "loops/forEachTupleSetWithIndex.poc");
-};
+test('ForEachTupleSetWithIndex', () => {
+	compareResourceOMO('loops/forEachTupleSetWithIndex.poc');
+});
 
-exports.testWhile = function(test) {
-	compareResourceOMO(test, "loops/while.poc");
-};
+test('While', () => {
+	compareResourceOMO('loops/while.poc');
+});
 
-exports.testWhileBreak = function(test) {
-	compareResourceOMO(test, "loops/whileBreak.poc");
-};
+test('WhileBreak', () => {
+	compareResourceOMO('loops/whileBreak.poc');
+});
 

@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testSliceList = function(test) {
-	compareResourceEME(test, "slice/sliceList.pec");
-};
+test('SliceList', () => {
+	compareResourceEME('slice/sliceList.pec');
+});
 
-exports.testSliceRange = function(test) {
-	compareResourceEME(test, "slice/sliceRange.pec");
-};
+test('SliceRange', () => {
+	compareResourceEME('slice/sliceRange.pec');
+});
 
-exports.testSliceText = function(test) {
-	compareResourceEME(test, "slice/sliceText.pec");
-};
+test('SliceText', () => {
+	compareResourceEME('slice/sliceText.pec');
+});
 

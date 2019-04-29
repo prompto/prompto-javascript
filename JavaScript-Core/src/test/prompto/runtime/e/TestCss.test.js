@@ -1,65 +1,60 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedCodeValue = function(test) {
-	checkInterpretedOutput(test, "css/codeValue.pec");
-};
+test('Interpreted CodeValue', () => {
+	checkInterpretedOutput('css/codeValue.pec');
+});
 
-exports.testTranspiledCodeValue = function(test) {
-	checkTranspiledOutput(test, "css/codeValue.pec");
-};
+test('Transpiled CodeValue', () => {
+	checkTranspiledOutput('css/codeValue.pec');
+});
 
-exports.testInterpretedHyphenName = function(test) {
-	checkInterpretedOutput(test, "css/hyphenName.pec");
-};
+test('Interpreted HyphenName', () => {
+	checkInterpretedOutput('css/hyphenName.pec');
+});
 
-exports.testTranspiledHyphenName = function(test) {
-	checkTranspiledOutput(test, "css/hyphenName.pec");
-};
+test('Transpiled HyphenName', () => {
+	checkTranspiledOutput('css/hyphenName.pec');
+});
 
-exports.testInterpretedMultiValue = function(test) {
-	checkInterpretedOutput(test, "css/multiValue.pec");
-};
+test('Interpreted MultiValue', () => {
+	checkInterpretedOutput('css/multiValue.pec');
+});
 
-exports.testTranspiledMultiValue = function(test) {
-	checkTranspiledOutput(test, "css/multiValue.pec");
-};
+test('Transpiled MultiValue', () => {
+	checkTranspiledOutput('css/multiValue.pec');
+});
 
-exports.testInterpretedNumberValue = function(test) {
-	checkInterpretedOutput(test, "css/numberValue.pec");
-};
+test('Interpreted NumberValue', () => {
+	checkInterpretedOutput('css/numberValue.pec');
+});
 
-exports.testTranspiledNumberValue = function(test) {
-	checkTranspiledOutput(test, "css/numberValue.pec");
-};
+test('Transpiled NumberValue', () => {
+	checkTranspiledOutput('css/numberValue.pec');
+});
 
-exports.testInterpretedPixelValue = function(test) {
-	checkInterpretedOutput(test, "css/pixelValue.pec");
-};
+test('Interpreted PixelValue', () => {
+	checkInterpretedOutput('css/pixelValue.pec');
+});
 
-exports.testTranspiledPixelValue = function(test) {
-	checkTranspiledOutput(test, "css/pixelValue.pec");
-};
+test('Transpiled PixelValue', () => {
+	checkTranspiledOutput('css/pixelValue.pec');
+});
 
-exports.testInterpretedTextValue = function(test) {
-	checkInterpretedOutput(test, "css/textValue.pec");
-};
+test('Interpreted TextValue', () => {
+	checkInterpretedOutput('css/textValue.pec');
+});
 
-exports.testTranspiledTextValue = function(test) {
-	checkTranspiledOutput(test, "css/textValue.pec");
-};
+test('Transpiled TextValue', () => {
+	checkTranspiledOutput('css/textValue.pec');
+});
 

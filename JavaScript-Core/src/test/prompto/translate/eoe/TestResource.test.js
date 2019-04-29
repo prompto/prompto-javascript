@@ -1,20 +1,18 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testReadResource = function(test) {
-	compareResourceEOE(test, "resource/readResource.pec");
-};
+test('ReadResource', () => {
+	compareResourceEOE('resource/readResource.pec');
+});
 
-exports.testReadWithResource = function(test) {
-	compareResourceEOE(test, "resource/readWithResource.pec");
-};
+test('ReadWithResource', () => {
+	compareResourceEOE('resource/readWithResource.pec');
+});
 
-exports.testWriteResource = function(test) {
-	compareResourceEOE(test, "resource/writeResource.pec");
-};
+test('WriteResource', () => {
+	compareResourceEOE('resource/writeResource.pec');
+});
 
-exports.testWriteWithResource = function(test) {
-	compareResourceEOE(test, "resource/writeWithResource.pec");
-};
+test('WriteWithResource', () => {
+	compareResourceEOE('resource/writeWithResource.pec');
+});
 

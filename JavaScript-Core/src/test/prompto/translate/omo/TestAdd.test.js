@@ -1,64 +1,62 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testAddCharacter = function(test) {
-	compareResourceOMO(test, "add/addCharacter.poc");
-};
+test('AddCharacter', () => {
+	compareResourceOMO('add/addCharacter.poc');
+});
 
-exports.testAddDate = function(test) {
-	compareResourceOMO(test, "add/addDate.poc");
-};
+test('AddDate', () => {
+	compareResourceOMO('add/addDate.poc');
+});
 
-exports.testAddDateTime = function(test) {
-	compareResourceOMO(test, "add/addDateTime.poc");
-};
+test('AddDateTime', () => {
+	compareResourceOMO('add/addDateTime.poc');
+});
 
-exports.testAddDecimal = function(test) {
-	compareResourceOMO(test, "add/addDecimal.poc");
-};
+test('AddDecimal', () => {
+	compareResourceOMO('add/addDecimal.poc');
+});
 
-exports.testAddDict = function(test) {
-	compareResourceOMO(test, "add/addDict.poc");
-};
+test('AddDict', () => {
+	compareResourceOMO('add/addDict.poc');
+});
 
-exports.testAddInteger = function(test) {
-	compareResourceOMO(test, "add/addInteger.poc");
-};
+test('AddInteger', () => {
+	compareResourceOMO('add/addInteger.poc');
+});
 
-exports.testAddList = function(test) {
-	compareResourceOMO(test, "add/addList.poc");
-};
+test('AddList', () => {
+	compareResourceOMO('add/addList.poc');
+});
 
-exports.testAddPeriod = function(test) {
-	compareResourceOMO(test, "add/addPeriod.poc");
-};
+test('AddPeriod', () => {
+	compareResourceOMO('add/addPeriod.poc');
+});
 
-exports.testAddSet = function(test) {
-	compareResourceOMO(test, "add/addSet.poc");
-};
+test('AddSet', () => {
+	compareResourceOMO('add/addSet.poc');
+});
 
-exports.testAddTextCharacter = function(test) {
-	compareResourceOMO(test, "add/addTextCharacter.poc");
-};
+test('AddTextCharacter', () => {
+	compareResourceOMO('add/addTextCharacter.poc');
+});
 
-exports.testAddTextDecimal = function(test) {
-	compareResourceOMO(test, "add/addTextDecimal.poc");
-};
+test('AddTextDecimal', () => {
+	compareResourceOMO('add/addTextDecimal.poc');
+});
 
-exports.testAddTextInteger = function(test) {
-	compareResourceOMO(test, "add/addTextInteger.poc");
-};
+test('AddTextInteger', () => {
+	compareResourceOMO('add/addTextInteger.poc');
+});
 
-exports.testAddTextText = function(test) {
-	compareResourceOMO(test, "add/addTextText.poc");
-};
+test('AddTextText', () => {
+	compareResourceOMO('add/addTextText.poc');
+});
 
-exports.testAddTime = function(test) {
-	compareResourceOMO(test, "add/addTime.poc");
-};
+test('AddTime', () => {
+	compareResourceOMO('add/addTime.poc');
+});
 
-exports.testAddTuple = function(test) {
-	compareResourceOMO(test, "add/addTuple.poc");
-};
+test('AddTuple', () => {
+	compareResourceOMO('add/addTuple.poc');
+});
 

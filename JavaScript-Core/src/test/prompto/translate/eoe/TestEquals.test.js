@@ -1,132 +1,130 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testEqBoolean = function(test) {
-	compareResourceEOE(test, "equals/eqBoolean.pec");
-};
+test('EqBoolean', () => {
+	compareResourceEOE('equals/eqBoolean.pec');
+});
 
-exports.testEqCharacter = function(test) {
-	compareResourceEOE(test, "equals/eqCharacter.pec");
-};
+test('EqCharacter', () => {
+	compareResourceEOE('equals/eqCharacter.pec');
+});
 
-exports.testEqDate = function(test) {
-	compareResourceEOE(test, "equals/eqDate.pec");
-};
+test('EqDate', () => {
+	compareResourceEOE('equals/eqDate.pec');
+});
 
-exports.testEqDateTime = function(test) {
-	compareResourceEOE(test, "equals/eqDateTime.pec");
-};
+test('EqDateTime', () => {
+	compareResourceEOE('equals/eqDateTime.pec');
+});
 
-exports.testEqDecimal = function(test) {
-	compareResourceEOE(test, "equals/eqDecimal.pec");
-};
+test('EqDecimal', () => {
+	compareResourceEOE('equals/eqDecimal.pec');
+});
 
-exports.testEqDict = function(test) {
-	compareResourceEOE(test, "equals/eqDict.pec");
-};
+test('EqDict', () => {
+	compareResourceEOE('equals/eqDict.pec');
+});
 
-exports.testEqInteger = function(test) {
-	compareResourceEOE(test, "equals/eqInteger.pec");
-};
+test('EqInteger', () => {
+	compareResourceEOE('equals/eqInteger.pec');
+});
 
-exports.testEqList = function(test) {
-	compareResourceEOE(test, "equals/eqList.pec");
-};
+test('EqList', () => {
+	compareResourceEOE('equals/eqList.pec');
+});
 
-exports.testEqPeriod = function(test) {
-	compareResourceEOE(test, "equals/eqPeriod.pec");
-};
+test('EqPeriod', () => {
+	compareResourceEOE('equals/eqPeriod.pec');
+});
 
-exports.testEqRange = function(test) {
-	compareResourceEOE(test, "equals/eqRange.pec");
-};
+test('EqRange', () => {
+	compareResourceEOE('equals/eqRange.pec');
+});
 
-exports.testEqSet = function(test) {
-	compareResourceEOE(test, "equals/eqSet.pec");
-};
+test('EqSet', () => {
+	compareResourceEOE('equals/eqSet.pec');
+});
 
-exports.testEqText = function(test) {
-	compareResourceEOE(test, "equals/eqText.pec");
-};
+test('EqText', () => {
+	compareResourceEOE('equals/eqText.pec');
+});
 
-exports.testEqTime = function(test) {
-	compareResourceEOE(test, "equals/eqTime.pec");
-};
+test('EqTime', () => {
+	compareResourceEOE('equals/eqTime.pec');
+});
 
-exports.testEqVersion = function(test) {
-	compareResourceEOE(test, "equals/eqVersion.pec");
-};
+test('EqVersion', () => {
+	compareResourceEOE('equals/eqVersion.pec');
+});
 
-exports.testIsBoolean = function(test) {
-	compareResourceEOE(test, "equals/isBoolean.pec");
-};
+test('IsBoolean', () => {
+	compareResourceEOE('equals/isBoolean.pec');
+});
 
-exports.testIsInstance = function(test) {
-	compareResourceEOE(test, "equals/isInstance.pec");
-};
+test('IsInstance', () => {
+	compareResourceEOE('equals/isInstance.pec');
+});
 
-exports.testIsNotBoolean = function(test) {
-	compareResourceEOE(test, "equals/isNotBoolean.pec");
-};
+test('IsNotBoolean', () => {
+	compareResourceEOE('equals/isNotBoolean.pec');
+});
 
-exports.testIsNotInstance = function(test) {
-	compareResourceEOE(test, "equals/isNotInstance.pec");
-};
+test('IsNotInstance', () => {
+	compareResourceEOE('equals/isNotInstance.pec');
+});
 
-exports.testNeqBoolean = function(test) {
-	compareResourceEOE(test, "equals/neqBoolean.pec");
-};
+test('NeqBoolean', () => {
+	compareResourceEOE('equals/neqBoolean.pec');
+});
 
-exports.testNeqCharacter = function(test) {
-	compareResourceEOE(test, "equals/neqCharacter.pec");
-};
+test('NeqCharacter', () => {
+	compareResourceEOE('equals/neqCharacter.pec');
+});
 
-exports.testNeqDate = function(test) {
-	compareResourceEOE(test, "equals/neqDate.pec");
-};
+test('NeqDate', () => {
+	compareResourceEOE('equals/neqDate.pec');
+});
 
-exports.testNeqDateTime = function(test) {
-	compareResourceEOE(test, "equals/neqDateTime.pec");
-};
+test('NeqDateTime', () => {
+	compareResourceEOE('equals/neqDateTime.pec');
+});
 
-exports.testNeqDecimal = function(test) {
-	compareResourceEOE(test, "equals/neqDecimal.pec");
-};
+test('NeqDecimal', () => {
+	compareResourceEOE('equals/neqDecimal.pec');
+});
 
-exports.testNeqDict = function(test) {
-	compareResourceEOE(test, "equals/neqDict.pec");
-};
+test('NeqDict', () => {
+	compareResourceEOE('equals/neqDict.pec');
+});
 
-exports.testNeqInteger = function(test) {
-	compareResourceEOE(test, "equals/neqInteger.pec");
-};
+test('NeqInteger', () => {
+	compareResourceEOE('equals/neqInteger.pec');
+});
 
-exports.testNeqList = function(test) {
-	compareResourceEOE(test, "equals/neqList.pec");
-};
+test('NeqList', () => {
+	compareResourceEOE('equals/neqList.pec');
+});
 
-exports.testNeqPeriod = function(test) {
-	compareResourceEOE(test, "equals/neqPeriod.pec");
-};
+test('NeqPeriod', () => {
+	compareResourceEOE('equals/neqPeriod.pec');
+});
 
-exports.testNeqRange = function(test) {
-	compareResourceEOE(test, "equals/neqRange.pec");
-};
+test('NeqRange', () => {
+	compareResourceEOE('equals/neqRange.pec');
+});
 
-exports.testNeqSet = function(test) {
-	compareResourceEOE(test, "equals/neqSet.pec");
-};
+test('NeqSet', () => {
+	compareResourceEOE('equals/neqSet.pec');
+});
 
-exports.testNeqText = function(test) {
-	compareResourceEOE(test, "equals/neqText.pec");
-};
+test('NeqText', () => {
+	compareResourceEOE('equals/neqText.pec');
+});
 
-exports.testNeqTime = function(test) {
-	compareResourceEOE(test, "equals/neqTime.pec");
-};
+test('NeqTime', () => {
+	compareResourceEOE('equals/neqTime.pec');
+});
 
-exports.testReqText = function(test) {
-	compareResourceEOE(test, "equals/reqText.pec");
-};
+test('ReqText', () => {
+	compareResourceEOE('equals/reqText.pec');
+});
 

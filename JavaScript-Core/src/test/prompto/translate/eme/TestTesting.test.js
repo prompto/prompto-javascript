@@ -1,44 +1,42 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAnd = function(test) {
-	compareResourceEME(test, "testing/and.pec");
-};
+test('And', () => {
+	compareResourceEME('testing/and.pec');
+});
 
-exports.testContains = function(test) {
-	compareResourceEME(test, "testing/contains.pec");
-};
+test('Contains', () => {
+	compareResourceEME('testing/contains.pec');
+});
 
-exports.testGreater = function(test) {
-	compareResourceEME(test, "testing/greater.pec");
-};
+test('Greater', () => {
+	compareResourceEME('testing/greater.pec');
+});
 
-exports.testMethod = function(test) {
-	compareResourceEME(test, "testing/method.pec");
-};
+test('Method', () => {
+	compareResourceEME('testing/method.pec');
+});
 
-exports.testNegative = function(test) {
-	compareResourceEME(test, "testing/negative.pec");
-};
+test('Negative', () => {
+	compareResourceEME('testing/negative.pec');
+});
 
-exports.testNegativeError = function(test) {
-	compareResourceEME(test, "testing/negativeError.pec");
-};
+test('NegativeError', () => {
+	compareResourceEME('testing/negativeError.pec');
+});
 
-exports.testNot = function(test) {
-	compareResourceEME(test, "testing/not.pec");
-};
+test('Not', () => {
+	compareResourceEME('testing/not.pec');
+});
 
-exports.testOr = function(test) {
-	compareResourceEME(test, "testing/or.pec");
-};
+test('Or', () => {
+	compareResourceEME('testing/or.pec');
+});
 
-exports.testPositive = function(test) {
-	compareResourceEME(test, "testing/positive.pec");
-};
+test('Positive', () => {
+	compareResourceEME('testing/positive.pec');
+});
 
-exports.testPositiveError = function(test) {
-	compareResourceEME(test, "testing/positiveError.pec");
-};
+test('PositiveError', () => {
+	compareResourceEME('testing/positiveError.pec');
+});
 

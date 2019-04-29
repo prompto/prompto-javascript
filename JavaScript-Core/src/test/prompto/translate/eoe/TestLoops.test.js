@@ -1,132 +1,130 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testDoWhile = function(test) {
-	compareResourceEOE(test, "loops/doWhile.pec");
-};
+test('DoWhile', () => {
+	compareResourceEOE('loops/doWhile.pec');
+});
 
-exports.testDoWhileBreak = function(test) {
-	compareResourceEOE(test, "loops/doWhileBreak.pec");
-};
+test('DoWhileBreak', () => {
+	compareResourceEOE('loops/doWhileBreak.pec');
+});
 
-exports.testEmbeddedForEach = function(test) {
-	compareResourceEOE(test, "loops/embeddedForEach.pec");
-};
+test('EmbeddedForEach', () => {
+	compareResourceEOE('loops/embeddedForEach.pec');
+});
 
-exports.testForEachBreak = function(test) {
-	compareResourceEOE(test, "loops/forEachBreak.pec");
-};
+test('ForEachBreak', () => {
+	compareResourceEOE('loops/forEachBreak.pec');
+});
 
-exports.testForEachCharacterRange = function(test) {
-	compareResourceEOE(test, "loops/forEachCharacterRange.pec");
-};
+test('ForEachCharacterRange', () => {
+	compareResourceEOE('loops/forEachCharacterRange.pec');
+});
 
-exports.testForEachCharacterRangeWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachCharacterRangeWithIndex.pec");
-};
+test('ForEachCharacterRangeWithIndex', () => {
+	compareResourceEOE('loops/forEachCharacterRangeWithIndex.pec');
+});
 
-exports.testForEachDateRange = function(test) {
-	compareResourceEOE(test, "loops/forEachDateRange.pec");
-};
+test('ForEachDateRange', () => {
+	compareResourceEOE('loops/forEachDateRange.pec');
+});
 
-exports.testForEachDateRangeWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachDateRangeWithIndex.pec");
-};
+test('ForEachDateRangeWithIndex', () => {
+	compareResourceEOE('loops/forEachDateRangeWithIndex.pec');
+});
 
-exports.testForEachDictionaryItem = function(test) {
-	compareResourceEOE(test, "loops/forEachDictionaryItem.pec");
-};
+test('ForEachDictionaryItem', () => {
+	compareResourceEOE('loops/forEachDictionaryItem.pec');
+});
 
-exports.testForEachDictionaryItemWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachDictionaryItemWithIndex.pec");
-};
+test('ForEachDictionaryItemWithIndex', () => {
+	compareResourceEOE('loops/forEachDictionaryItemWithIndex.pec');
+});
 
-exports.testForEachDictionaryKey = function(test) {
-	compareResourceEOE(test, "loops/forEachDictionaryKey.pec");
-};
+test('ForEachDictionaryKey', () => {
+	compareResourceEOE('loops/forEachDictionaryKey.pec');
+});
 
-exports.testForEachDictionaryKeyWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachDictionaryKeyWithIndex.pec");
-};
+test('ForEachDictionaryKeyWithIndex', () => {
+	compareResourceEOE('loops/forEachDictionaryKeyWithIndex.pec');
+});
 
-exports.testForEachDictionaryValue = function(test) {
-	compareResourceEOE(test, "loops/forEachDictionaryValue.pec");
-};
+test('ForEachDictionaryValue', () => {
+	compareResourceEOE('loops/forEachDictionaryValue.pec');
+});
 
-exports.testForEachDictionaryValueWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachDictionaryValueWithIndex.pec");
-};
+test('ForEachDictionaryValueWithIndex', () => {
+	compareResourceEOE('loops/forEachDictionaryValueWithIndex.pec');
+});
 
-exports.testForEachInstanceList = function(test) {
-	compareResourceEOE(test, "loops/forEachInstanceList.pec");
-};
+test('ForEachInstanceList', () => {
+	compareResourceEOE('loops/forEachInstanceList.pec');
+});
 
-exports.testForEachInstanceListWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachInstanceListWithIndex.pec");
-};
+test('ForEachInstanceListWithIndex', () => {
+	compareResourceEOE('loops/forEachInstanceListWithIndex.pec');
+});
 
-exports.testForEachInstanceSet = function(test) {
-	compareResourceEOE(test, "loops/forEachInstanceSet.pec");
-};
+test('ForEachInstanceSet', () => {
+	compareResourceEOE('loops/forEachInstanceSet.pec');
+});
 
-exports.testForEachInstanceSetWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachInstanceSetWithIndex.pec");
-};
+test('ForEachInstanceSetWithIndex', () => {
+	compareResourceEOE('loops/forEachInstanceSetWithIndex.pec');
+});
 
-exports.testForEachIntegerList = function(test) {
-	compareResourceEOE(test, "loops/forEachIntegerList.pec");
-};
+test('ForEachIntegerList', () => {
+	compareResourceEOE('loops/forEachIntegerList.pec');
+});
 
-exports.testForEachIntegerListWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachIntegerListWithIndex.pec");
-};
+test('ForEachIntegerListWithIndex', () => {
+	compareResourceEOE('loops/forEachIntegerListWithIndex.pec');
+});
 
-exports.testForEachIntegerRange = function(test) {
-	compareResourceEOE(test, "loops/forEachIntegerRange.pec");
-};
+test('ForEachIntegerRange', () => {
+	compareResourceEOE('loops/forEachIntegerRange.pec');
+});
 
-exports.testForEachIntegerRangeWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachIntegerRangeWithIndex.pec");
-};
+test('ForEachIntegerRangeWithIndex', () => {
+	compareResourceEOE('loops/forEachIntegerRangeWithIndex.pec');
+});
 
-exports.testForEachIntegerSet = function(test) {
-	compareResourceEOE(test, "loops/forEachIntegerSet.pec");
-};
+test('ForEachIntegerSet', () => {
+	compareResourceEOE('loops/forEachIntegerSet.pec');
+});
 
-exports.testForEachIntegerSetWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachIntegerSetWithIndex.pec");
-};
+test('ForEachIntegerSetWithIndex', () => {
+	compareResourceEOE('loops/forEachIntegerSetWithIndex.pec');
+});
 
-exports.testForEachTimeRange = function(test) {
-	compareResourceEOE(test, "loops/forEachTimeRange.pec");
-};
+test('ForEachTimeRange', () => {
+	compareResourceEOE('loops/forEachTimeRange.pec');
+});
 
-exports.testForEachTimeRangeWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachTimeRangeWithIndex.pec");
-};
+test('ForEachTimeRangeWithIndex', () => {
+	compareResourceEOE('loops/forEachTimeRangeWithIndex.pec');
+});
 
-exports.testForEachTupleList = function(test) {
-	compareResourceEOE(test, "loops/forEachTupleList.pec");
-};
+test('ForEachTupleList', () => {
+	compareResourceEOE('loops/forEachTupleList.pec');
+});
 
-exports.testForEachTupleListWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachTupleListWithIndex.pec");
-};
+test('ForEachTupleListWithIndex', () => {
+	compareResourceEOE('loops/forEachTupleListWithIndex.pec');
+});
 
-exports.testForEachTupleSet = function(test) {
-	compareResourceEOE(test, "loops/forEachTupleSet.pec");
-};
+test('ForEachTupleSet', () => {
+	compareResourceEOE('loops/forEachTupleSet.pec');
+});
 
-exports.testForEachTupleSetWithIndex = function(test) {
-	compareResourceEOE(test, "loops/forEachTupleSetWithIndex.pec");
-};
+test('ForEachTupleSetWithIndex', () => {
+	compareResourceEOE('loops/forEachTupleSetWithIndex.pec');
+});
 
-exports.testWhile = function(test) {
-	compareResourceEOE(test, "loops/while.pec");
-};
+test('While', () => {
+	compareResourceEOE('loops/while.pec');
+});
 
-exports.testWhileBreak = function(test) {
-	compareResourceEOE(test, "loops/whileBreak.pec");
-};
+test('WhileBreak', () => {
+	compareResourceEOE('loops/whileBreak.pec');
+});
 

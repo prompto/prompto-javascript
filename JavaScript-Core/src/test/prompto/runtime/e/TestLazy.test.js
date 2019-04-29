@@ -1,57 +1,52 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedCyclic = function(test) {
-	checkInterpretedOutput(test, "lazy/cyclic.pec");
-};
+test('Interpreted Cyclic', () => {
+	checkInterpretedOutput('lazy/cyclic.pec');
+});
 
-exports.testTranspiledCyclic = function(test) {
-	checkTranspiledOutput(test, "lazy/cyclic.pec");
-};
+test('Transpiled Cyclic', () => {
+	checkTranspiledOutput('lazy/cyclic.pec');
+});
 
-exports.testInterpretedDict = function(test) {
-	checkInterpretedOutput(test, "lazy/dict.pec");
-};
+test('Interpreted Dict', () => {
+	checkInterpretedOutput('lazy/dict.pec');
+});
 
-exports.testTranspiledDict = function(test) {
-	checkTranspiledOutput(test, "lazy/dict.pec");
-};
+test('Transpiled Dict', () => {
+	checkTranspiledOutput('lazy/dict.pec');
+});
 
-exports.testInterpretedList = function(test) {
-	checkInterpretedOutput(test, "lazy/list.pec");
-};
+test('Interpreted List', () => {
+	checkInterpretedOutput('lazy/list.pec');
+});
 
-exports.testTranspiledList = function(test) {
-	checkTranspiledOutput(test, "lazy/list.pec");
-};
+test('Transpiled List', () => {
+	checkTranspiledOutput('lazy/list.pec');
+});
 
-exports.testInterpretedSet = function(test) {
-	checkInterpretedOutput(test, "lazy/set.pec");
-};
+test('Interpreted Set', () => {
+	checkInterpretedOutput('lazy/set.pec');
+});
 
-exports.testTranspiledSet = function(test) {
-	checkTranspiledOutput(test, "lazy/set.pec");
-};
+test('Transpiled Set', () => {
+	checkTranspiledOutput('lazy/set.pec');
+});
 
-exports.testInterpretedTransient = function(test) {
-	checkInterpretedOutput(test, "lazy/transient.pec");
-};
+test('Interpreted Transient', () => {
+	checkInterpretedOutput('lazy/transient.pec');
+});
 
-exports.testTranspiledTransient = function(test) {
-	checkTranspiledOutput(test, "lazy/transient.pec");
-};
+test('Transpiled Transient', () => {
+	checkTranspiledOutput('lazy/transient.pec');
+});
 

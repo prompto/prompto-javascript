@@ -1,132 +1,130 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testEqBoolean = function(test) {
-	compareResourceOMO(test, "equals/eqBoolean.poc");
-};
+test('EqBoolean', () => {
+	compareResourceOMO('equals/eqBoolean.poc');
+});
 
-exports.testEqCharacter = function(test) {
-	compareResourceOMO(test, "equals/eqCharacter.poc");
-};
+test('EqCharacter', () => {
+	compareResourceOMO('equals/eqCharacter.poc');
+});
 
-exports.testEqDate = function(test) {
-	compareResourceOMO(test, "equals/eqDate.poc");
-};
+test('EqDate', () => {
+	compareResourceOMO('equals/eqDate.poc');
+});
 
-exports.testEqDateTime = function(test) {
-	compareResourceOMO(test, "equals/eqDateTime.poc");
-};
+test('EqDateTime', () => {
+	compareResourceOMO('equals/eqDateTime.poc');
+});
 
-exports.testEqDecimal = function(test) {
-	compareResourceOMO(test, "equals/eqDecimal.poc");
-};
+test('EqDecimal', () => {
+	compareResourceOMO('equals/eqDecimal.poc');
+});
 
-exports.testEqDict = function(test) {
-	compareResourceOMO(test, "equals/eqDict.poc");
-};
+test('EqDict', () => {
+	compareResourceOMO('equals/eqDict.poc');
+});
 
-exports.testEqInteger = function(test) {
-	compareResourceOMO(test, "equals/eqInteger.poc");
-};
+test('EqInteger', () => {
+	compareResourceOMO('equals/eqInteger.poc');
+});
 
-exports.testEqList = function(test) {
-	compareResourceOMO(test, "equals/eqList.poc");
-};
+test('EqList', () => {
+	compareResourceOMO('equals/eqList.poc');
+});
 
-exports.testEqPeriod = function(test) {
-	compareResourceOMO(test, "equals/eqPeriod.poc");
-};
+test('EqPeriod', () => {
+	compareResourceOMO('equals/eqPeriod.poc');
+});
 
-exports.testEqRange = function(test) {
-	compareResourceOMO(test, "equals/eqRange.poc");
-};
+test('EqRange', () => {
+	compareResourceOMO('equals/eqRange.poc');
+});
 
-exports.testEqSet = function(test) {
-	compareResourceOMO(test, "equals/eqSet.poc");
-};
+test('EqSet', () => {
+	compareResourceOMO('equals/eqSet.poc');
+});
 
-exports.testEqText = function(test) {
-	compareResourceOMO(test, "equals/eqText.poc");
-};
+test('EqText', () => {
+	compareResourceOMO('equals/eqText.poc');
+});
 
-exports.testEqTime = function(test) {
-	compareResourceOMO(test, "equals/eqTime.poc");
-};
+test('EqTime', () => {
+	compareResourceOMO('equals/eqTime.poc');
+});
 
-exports.testEqVersion = function(test) {
-	compareResourceOMO(test, "equals/eqVersion.poc");
-};
+test('EqVersion', () => {
+	compareResourceOMO('equals/eqVersion.poc');
+});
 
-exports.testIsBoolean = function(test) {
-	compareResourceOMO(test, "equals/isBoolean.poc");
-};
+test('IsBoolean', () => {
+	compareResourceOMO('equals/isBoolean.poc');
+});
 
-exports.testIsInstance = function(test) {
-	compareResourceOMO(test, "equals/isInstance.poc");
-};
+test('IsInstance', () => {
+	compareResourceOMO('equals/isInstance.poc');
+});
 
-exports.testIsNotBoolean = function(test) {
-	compareResourceOMO(test, "equals/isNotBoolean.poc");
-};
+test('IsNotBoolean', () => {
+	compareResourceOMO('equals/isNotBoolean.poc');
+});
 
-exports.testIsNotInstance = function(test) {
-	compareResourceOMO(test, "equals/isNotInstance.poc");
-};
+test('IsNotInstance', () => {
+	compareResourceOMO('equals/isNotInstance.poc');
+});
 
-exports.testNeqBoolean = function(test) {
-	compareResourceOMO(test, "equals/neqBoolean.poc");
-};
+test('NeqBoolean', () => {
+	compareResourceOMO('equals/neqBoolean.poc');
+});
 
-exports.testNeqCharacter = function(test) {
-	compareResourceOMO(test, "equals/neqCharacter.poc");
-};
+test('NeqCharacter', () => {
+	compareResourceOMO('equals/neqCharacter.poc');
+});
 
-exports.testNeqDate = function(test) {
-	compareResourceOMO(test, "equals/neqDate.poc");
-};
+test('NeqDate', () => {
+	compareResourceOMO('equals/neqDate.poc');
+});
 
-exports.testNeqDateTime = function(test) {
-	compareResourceOMO(test, "equals/neqDateTime.poc");
-};
+test('NeqDateTime', () => {
+	compareResourceOMO('equals/neqDateTime.poc');
+});
 
-exports.testNeqDecimal = function(test) {
-	compareResourceOMO(test, "equals/neqDecimal.poc");
-};
+test('NeqDecimal', () => {
+	compareResourceOMO('equals/neqDecimal.poc');
+});
 
-exports.testNeqDict = function(test) {
-	compareResourceOMO(test, "equals/neqDict.poc");
-};
+test('NeqDict', () => {
+	compareResourceOMO('equals/neqDict.poc');
+});
 
-exports.testNeqInteger = function(test) {
-	compareResourceOMO(test, "equals/neqInteger.poc");
-};
+test('NeqInteger', () => {
+	compareResourceOMO('equals/neqInteger.poc');
+});
 
-exports.testNeqList = function(test) {
-	compareResourceOMO(test, "equals/neqList.poc");
-};
+test('NeqList', () => {
+	compareResourceOMO('equals/neqList.poc');
+});
 
-exports.testNeqPeriod = function(test) {
-	compareResourceOMO(test, "equals/neqPeriod.poc");
-};
+test('NeqPeriod', () => {
+	compareResourceOMO('equals/neqPeriod.poc');
+});
 
-exports.testNeqRange = function(test) {
-	compareResourceOMO(test, "equals/neqRange.poc");
-};
+test('NeqRange', () => {
+	compareResourceOMO('equals/neqRange.poc');
+});
 
-exports.testNeqSet = function(test) {
-	compareResourceOMO(test, "equals/neqSet.poc");
-};
+test('NeqSet', () => {
+	compareResourceOMO('equals/neqSet.poc');
+});
 
-exports.testNeqText = function(test) {
-	compareResourceOMO(test, "equals/neqText.poc");
-};
+test('NeqText', () => {
+	compareResourceOMO('equals/neqText.poc');
+});
 
-exports.testNeqTime = function(test) {
-	compareResourceOMO(test, "equals/neqTime.poc");
-};
+test('NeqTime', () => {
+	compareResourceOMO('equals/neqTime.poc');
+});
 
-exports.testReqText = function(test) {
-	compareResourceOMO(test, "equals/reqText.poc");
-};
+test('ReqText', () => {
+	compareResourceOMO('equals/reqText.poc');
+});
 

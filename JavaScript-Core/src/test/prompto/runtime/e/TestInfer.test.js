@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedInferDict = function(test) {
-	checkInterpretedOutput(test, "infer/inferDict.pec");
-};
+test('Interpreted InferDict', () => {
+	checkInterpretedOutput('infer/inferDict.pec');
+});
 
-exports.testTranspiledInferDict = function(test) {
-	checkTranspiledOutput(test, "infer/inferDict.pec");
-};
+test('Transpiled InferDict', () => {
+	checkTranspiledOutput('infer/inferDict.pec');
+});
 
-exports.testInterpretedInferList = function(test) {
-	checkInterpretedOutput(test, "infer/inferList.pec");
-};
+test('Interpreted InferList', () => {
+	checkInterpretedOutput('infer/inferList.pec');
+});
 
-exports.testTranspiledInferList = function(test) {
-	checkTranspiledOutput(test, "infer/inferList.pec");
-};
+test('Transpiled InferList', () => {
+	checkTranspiledOutput('infer/inferList.pec');
+});
 
-exports.testInterpretedInferSet = function(test) {
-	checkInterpretedOutput(test, "infer/inferSet.pec");
-};
+test('Interpreted InferSet', () => {
+	checkInterpretedOutput('infer/inferSet.pec');
+});
 
-exports.testTranspiledInferSet = function(test) {
-	checkTranspiledOutput(test, "infer/inferSet.pec");
-};
+test('Transpiled InferSet', () => {
+	checkTranspiledOutput('infer/inferSet.pec');
+});
 

@@ -1,12 +1,10 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testCallback = function(test) {
-	compareResourceEME(test, "annotations/callback.pec");
-};
+test('Callback', () => {
+	compareResourceEME('annotations/callback.pec');
+});
 
-exports.testCategory = function(test) {
-	compareResourceEME(test, "annotations/category.pec");
-};
+test('Category', () => {
+	compareResourceEME('annotations/category.pec');
+});
 

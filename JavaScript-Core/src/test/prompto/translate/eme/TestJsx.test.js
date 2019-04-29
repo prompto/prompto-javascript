@@ -1,48 +1,46 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testChildElement = function(test) {
-	compareResourceEME(test, "jsx/childElement.pec");
-};
+test('ChildElement', () => {
+	compareResourceEME('jsx/childElement.pec');
+});
 
-exports.testCodeAttribute = function(test) {
-	compareResourceEME(test, "jsx/codeAttribute.pec");
-};
+test('CodeAttribute', () => {
+	compareResourceEME('jsx/codeAttribute.pec');
+});
 
-exports.testCodeElement = function(test) {
-	compareResourceEME(test, "jsx/codeElement.pec");
-};
+test('CodeElement', () => {
+	compareResourceEME('jsx/codeElement.pec');
+});
 
-exports.testDotName = function(test) {
-	compareResourceEME(test, "jsx/dotName.pec");
-};
+test('DotName', () => {
+	compareResourceEME('jsx/dotName.pec');
+});
 
-exports.testEmpty = function(test) {
-	compareResourceEME(test, "jsx/empty.pec");
-};
+test('Empty', () => {
+	compareResourceEME('jsx/empty.pec');
+});
 
-exports.testEmptyAttribute = function(test) {
-	compareResourceEME(test, "jsx/emptyAttribute.pec");
-};
+test('EmptyAttribute', () => {
+	compareResourceEME('jsx/emptyAttribute.pec');
+});
 
-exports.testHyphenName = function(test) {
-	compareResourceEME(test, "jsx/hyphenName.pec");
-};
+test('HyphenName', () => {
+	compareResourceEME('jsx/hyphenName.pec');
+});
 
-exports.testLiteralAttribute = function(test) {
-	compareResourceEME(test, "jsx/literalAttribute.pec");
-};
+test('LiteralAttribute', () => {
+	compareResourceEME('jsx/literalAttribute.pec');
+});
 
-exports.testSelfClosingDiv = function(test) {
-	compareResourceEME(test, "jsx/selfClosingDiv.pec");
-};
+test('SelfClosingDiv', () => {
+	compareResourceEME('jsx/selfClosingDiv.pec');
+});
 
-exports.testSelfClosingEmptyAttribute = function(test) {
-	compareResourceEME(test, "jsx/selfClosingEmptyAttribute.pec");
-};
+test('SelfClosingEmptyAttribute', () => {
+	compareResourceEME('jsx/selfClosingEmptyAttribute.pec');
+});
 
-exports.testTextElement = function(test) {
-	compareResourceEME(test, "jsx/textElement.pec");
-};
+test('TextElement', () => {
+	compareResourceEME('jsx/textElement.pec');
+});
 

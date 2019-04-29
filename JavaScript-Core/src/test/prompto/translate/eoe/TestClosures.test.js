@@ -1,20 +1,18 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testGlobalClosureNoArg = function(test) {
-	compareResourceEOE(test, "closures/globalClosureNoArg.pec");
-};
+test('GlobalClosureNoArg', () => {
+	compareResourceEOE('closures/globalClosureNoArg.pec');
+});
 
-exports.testGlobalClosureWithArg = function(test) {
-	compareResourceEOE(test, "closures/globalClosureWithArg.pec");
-};
+test('GlobalClosureWithArg', () => {
+	compareResourceEOE('closures/globalClosureWithArg.pec');
+});
 
-exports.testInstanceClosureNoArg = function(test) {
-	compareResourceEOE(test, "closures/instanceClosureNoArg.pec");
-};
+test('InstanceClosureNoArg', () => {
+	compareResourceEOE('closures/instanceClosureNoArg.pec');
+});
 
-exports.testParameterClosure = function(test) {
-	compareResourceEOE(test, "closures/parameterClosure.pec");
-};
+test('ParameterClosure', () => {
+	compareResourceEOE('closures/parameterClosure.pec');
+});
 

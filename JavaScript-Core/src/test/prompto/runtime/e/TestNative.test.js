@@ -1,81 +1,76 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAnyId = function(test) {
-	checkInterpretedOutput(test, "native/anyId.pec");
-};
+test('Interpreted AnyId', () => {
+	checkInterpretedOutput('native/anyId.pec');
+});
 
-exports.testTranspiledAnyId = function(test) {
-	checkTranspiledOutput(test, "native/anyId.pec");
-};
+test('Transpiled AnyId', () => {
+	checkTranspiledOutput('native/anyId.pec');
+});
 
-exports.testInterpretedAnyText = function(test) {
-	checkInterpretedOutput(test, "native/anyText.pec");
-};
+test('Interpreted AnyText', () => {
+	checkInterpretedOutput('native/anyText.pec');
+});
 
-exports.testTranspiledAnyText = function(test) {
-	checkTranspiledOutput(test, "native/anyText.pec");
-};
+test('Transpiled AnyText', () => {
+	checkTranspiledOutput('native/anyText.pec');
+});
 
-exports.testInterpretedAttribute = function(test) {
-	checkInterpretedOutput(test, "native/attribute.pec");
-};
+test('Interpreted Attribute', () => {
+	checkInterpretedOutput('native/attribute.pec');
+});
 
-exports.testTranspiledAttribute = function(test) {
-	checkTranspiledOutput(test, "native/attribute.pec");
-};
+test('Transpiled Attribute', () => {
+	checkTranspiledOutput('native/attribute.pec');
+});
 
-exports.testInterpretedCategory = function(test) {
-	checkInterpretedOutput(test, "native/category.pec");
-};
+test('Interpreted Category', () => {
+	checkInterpretedOutput('native/category.pec');
+});
 
-exports.testTranspiledCategory = function(test) {
-	checkTranspiledOutput(test, "native/category.pec");
-};
+test('Transpiled Category', () => {
+	checkTranspiledOutput('native/category.pec');
+});
 
-exports.testInterpretedCategoryReturn = function(test) {
-	checkInterpretedOutput(test, "native/categoryReturn.pec");
-};
+test('Interpreted CategoryReturn', () => {
+	checkInterpretedOutput('native/categoryReturn.pec');
+});
 
-exports.testTranspiledCategoryReturn = function(test) {
-	checkTranspiledOutput(test, "native/categoryReturn.pec");
-};
+test('Transpiled CategoryReturn', () => {
+	checkTranspiledOutput('native/categoryReturn.pec');
+});
 
-exports.testInterpretedMethod = function(test) {
-	checkInterpretedOutput(test, "native/method.pec");
-};
+test('Interpreted Method', () => {
+	checkInterpretedOutput('native/method.pec');
+});
 
-exports.testTranspiledMethod = function(test) {
-	checkTranspiledOutput(test, "native/method.pec");
-};
+test('Transpiled Method', () => {
+	checkTranspiledOutput('native/method.pec');
+});
 
-exports.testInterpretedNow = function(test) {
-	checkInterpretedOutput(test, "native/now.pec");
-};
+test('Interpreted Now', () => {
+	checkInterpretedOutput('native/now.pec');
+});
 
-exports.testTranspiledNow = function(test) {
-	checkTranspiledOutput(test, "native/now.pec");
-};
+test('Transpiled Now', () => {
+	checkTranspiledOutput('native/now.pec');
+});
 
-exports.testInterpretedPrinter = function(test) {
-	checkInterpretedOutput(test, "native/printer.pec");
-};
+test('Interpreted Printer', () => {
+	checkInterpretedOutput('native/printer.pec');
+});
 
-exports.testTranspiledPrinter = function(test) {
-	checkTranspiledOutput(test, "native/printer.pec");
-};
+test('Transpiled Printer', () => {
+	checkTranspiledOutput('native/printer.pec');
+});
 

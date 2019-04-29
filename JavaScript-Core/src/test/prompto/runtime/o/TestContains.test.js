@@ -1,217 +1,212 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedContainsAllList = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllList.poc");
-};
+test('Interpreted ContainsAllList', () => {
+	checkInterpretedOutput('contains/containsAllList.poc');
+});
 
-exports.testTranspiledContainsAllList = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllList.poc");
-};
+test('Transpiled ContainsAllList', () => {
+	checkTranspiledOutput('contains/containsAllList.poc');
+});
 
-exports.testInterpretedContainsAllSet = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllSet.poc");
-};
+test('Interpreted ContainsAllSet', () => {
+	checkInterpretedOutput('contains/containsAllSet.poc');
+});
 
-exports.testTranspiledContainsAllSet = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllSet.poc");
-};
+test('Transpiled ContainsAllSet', () => {
+	checkTranspiledOutput('contains/containsAllSet.poc');
+});
 
-exports.testInterpretedContainsAllText = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllText.poc");
-};
+test('Interpreted ContainsAllText', () => {
+	checkInterpretedOutput('contains/containsAllText.poc');
+});
 
-exports.testTranspiledContainsAllText = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllText.poc");
-};
+test('Transpiled ContainsAllText', () => {
+	checkTranspiledOutput('contains/containsAllText.poc');
+});
 
-exports.testInterpretedContainsAllTuple = function(test) {
-	checkInterpretedOutput(test, "contains/containsAllTuple.poc");
-};
+test('Interpreted ContainsAllTuple', () => {
+	checkInterpretedOutput('contains/containsAllTuple.poc');
+});
 
-exports.testTranspiledContainsAllTuple = function(test) {
-	checkTranspiledOutput(test, "contains/containsAllTuple.poc");
-};
+test('Transpiled ContainsAllTuple', () => {
+	checkTranspiledOutput('contains/containsAllTuple.poc');
+});
 
-exports.testInterpretedContainsAnyList = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyList.poc");
-};
+test('Interpreted ContainsAnyList', () => {
+	checkInterpretedOutput('contains/containsAnyList.poc');
+});
 
-exports.testTranspiledContainsAnyList = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyList.poc");
-};
+test('Transpiled ContainsAnyList', () => {
+	checkTranspiledOutput('contains/containsAnyList.poc');
+});
 
-exports.testInterpretedContainsAnySet = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnySet.poc");
-};
+test('Interpreted ContainsAnySet', () => {
+	checkInterpretedOutput('contains/containsAnySet.poc');
+});
 
-exports.testTranspiledContainsAnySet = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnySet.poc");
-};
+test('Transpiled ContainsAnySet', () => {
+	checkTranspiledOutput('contains/containsAnySet.poc');
+});
 
-exports.testInterpretedContainsAnyText = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyText.poc");
-};
+test('Interpreted ContainsAnyText', () => {
+	checkInterpretedOutput('contains/containsAnyText.poc');
+});
 
-exports.testTranspiledContainsAnyText = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyText.poc");
-};
+test('Transpiled ContainsAnyText', () => {
+	checkTranspiledOutput('contains/containsAnyText.poc');
+});
 
-exports.testInterpretedContainsAnyTuple = function(test) {
-	checkInterpretedOutput(test, "contains/containsAnyTuple.poc");
-};
+test('Interpreted ContainsAnyTuple', () => {
+	checkInterpretedOutput('contains/containsAnyTuple.poc');
+});
 
-exports.testTranspiledContainsAnyTuple = function(test) {
-	checkTranspiledOutput(test, "contains/containsAnyTuple.poc");
-};
+test('Transpiled ContainsAnyTuple', () => {
+	checkTranspiledOutput('contains/containsAnyTuple.poc');
+});
 
-exports.testInterpretedInCharacterRange = function(test) {
-	checkInterpretedOutput(test, "contains/inCharacterRange.poc");
-};
+test('Interpreted InCharacterRange', () => {
+	checkInterpretedOutput('contains/inCharacterRange.poc');
+});
 
-exports.testTranspiledInCharacterRange = function(test) {
-	checkTranspiledOutput(test, "contains/inCharacterRange.poc");
-};
+test('Transpiled InCharacterRange', () => {
+	checkTranspiledOutput('contains/inCharacterRange.poc');
+});
 
-exports.testInterpretedInDateRange = function(test) {
-	checkInterpretedOutput(test, "contains/inDateRange.poc");
-};
+test('Interpreted InDateRange', () => {
+	checkInterpretedOutput('contains/inDateRange.poc');
+});
 
-exports.testTranspiledInDateRange = function(test) {
-	checkTranspiledOutput(test, "contains/inDateRange.poc");
-};
+test('Transpiled InDateRange', () => {
+	checkTranspiledOutput('contains/inDateRange.poc');
+});
 
-exports.testInterpretedInDict = function(test) {
-	checkInterpretedOutput(test, "contains/inDict.poc");
-};
+test('Interpreted InDict', () => {
+	checkInterpretedOutput('contains/inDict.poc');
+});
 
-exports.testTranspiledInDict = function(test) {
-	checkTranspiledOutput(test, "contains/inDict.poc");
-};
+test('Transpiled InDict', () => {
+	checkTranspiledOutput('contains/inDict.poc');
+});
 
-exports.testInterpretedInIntegerRange = function(test) {
-	checkInterpretedOutput(test, "contains/inIntegerRange.poc");
-};
+test('Interpreted InIntegerRange', () => {
+	checkInterpretedOutput('contains/inIntegerRange.poc');
+});
 
-exports.testTranspiledInIntegerRange = function(test) {
-	checkTranspiledOutput(test, "contains/inIntegerRange.poc");
-};
+test('Transpiled InIntegerRange', () => {
+	checkTranspiledOutput('contains/inIntegerRange.poc');
+});
 
-exports.testInterpretedInList = function(test) {
-	checkInterpretedOutput(test, "contains/inList.poc");
-};
+test('Interpreted InList', () => {
+	checkInterpretedOutput('contains/inList.poc');
+});
 
-exports.testTranspiledInList = function(test) {
-	checkTranspiledOutput(test, "contains/inList.poc");
-};
+test('Transpiled InList', () => {
+	checkTranspiledOutput('contains/inList.poc');
+});
 
-exports.testInterpretedInSet = function(test) {
-	checkInterpretedOutput(test, "contains/inSet.poc");
-};
+test('Interpreted InSet', () => {
+	checkInterpretedOutput('contains/inSet.poc');
+});
 
-exports.testTranspiledInSet = function(test) {
-	checkTranspiledOutput(test, "contains/inSet.poc");
-};
+test('Transpiled InSet', () => {
+	checkTranspiledOutput('contains/inSet.poc');
+});
 
-exports.testInterpretedInText = function(test) {
-	checkInterpretedOutput(test, "contains/inText.poc");
-};
+test('Interpreted InText', () => {
+	checkInterpretedOutput('contains/inText.poc');
+});
 
-exports.testTranspiledInText = function(test) {
-	checkTranspiledOutput(test, "contains/inText.poc");
-};
+test('Transpiled InText', () => {
+	checkTranspiledOutput('contains/inText.poc');
+});
 
-exports.testInterpretedInTimeRange = function(test) {
-	checkInterpretedOutput(test, "contains/inTimeRange.poc");
-};
+test('Interpreted InTimeRange', () => {
+	checkInterpretedOutput('contains/inTimeRange.poc');
+});
 
-exports.testTranspiledInTimeRange = function(test) {
-	checkTranspiledOutput(test, "contains/inTimeRange.poc");
-};
+test('Transpiled InTimeRange', () => {
+	checkTranspiledOutput('contains/inTimeRange.poc');
+});
 
-exports.testInterpretedInTuple = function(test) {
-	checkInterpretedOutput(test, "contains/inTuple.poc");
-};
+test('Interpreted InTuple', () => {
+	checkInterpretedOutput('contains/inTuple.poc');
+});
 
-exports.testTranspiledInTuple = function(test) {
-	checkTranspiledOutput(test, "contains/inTuple.poc");
-};
+test('Transpiled InTuple', () => {
+	checkTranspiledOutput('contains/inTuple.poc');
+});
 
-exports.testInterpretedNinCharacterRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninCharacterRange.poc");
-};
+test('Interpreted NinCharacterRange', () => {
+	checkInterpretedOutput('contains/ninCharacterRange.poc');
+});
 
-exports.testTranspiledNinCharacterRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninCharacterRange.poc");
-};
+test('Transpiled NinCharacterRange', () => {
+	checkTranspiledOutput('contains/ninCharacterRange.poc');
+});
 
-exports.testInterpretedNinDateRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninDateRange.poc");
-};
+test('Interpreted NinDateRange', () => {
+	checkInterpretedOutput('contains/ninDateRange.poc');
+});
 
-exports.testTranspiledNinDateRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninDateRange.poc");
-};
+test('Transpiled NinDateRange', () => {
+	checkTranspiledOutput('contains/ninDateRange.poc');
+});
 
-exports.testInterpretedNinDict = function(test) {
-	checkInterpretedOutput(test, "contains/ninDict.poc");
-};
+test('Interpreted NinDict', () => {
+	checkInterpretedOutput('contains/ninDict.poc');
+});
 
-exports.testTranspiledNinDict = function(test) {
-	checkTranspiledOutput(test, "contains/ninDict.poc");
-};
+test('Transpiled NinDict', () => {
+	checkTranspiledOutput('contains/ninDict.poc');
+});
 
-exports.testInterpretedNinIntegerRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninIntegerRange.poc");
-};
+test('Interpreted NinIntegerRange', () => {
+	checkInterpretedOutput('contains/ninIntegerRange.poc');
+});
 
-exports.testTranspiledNinIntegerRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninIntegerRange.poc");
-};
+test('Transpiled NinIntegerRange', () => {
+	checkTranspiledOutput('contains/ninIntegerRange.poc');
+});
 
-exports.testInterpretedNinList = function(test) {
-	checkInterpretedOutput(test, "contains/ninList.poc");
-};
+test('Interpreted NinList', () => {
+	checkInterpretedOutput('contains/ninList.poc');
+});
 
-exports.testTranspiledNinList = function(test) {
-	checkTranspiledOutput(test, "contains/ninList.poc");
-};
+test('Transpiled NinList', () => {
+	checkTranspiledOutput('contains/ninList.poc');
+});
 
-exports.testInterpretedNinSet = function(test) {
-	checkInterpretedOutput(test, "contains/ninSet.poc");
-};
+test('Interpreted NinSet', () => {
+	checkInterpretedOutput('contains/ninSet.poc');
+});
 
-exports.testTranspiledNinSet = function(test) {
-	checkTranspiledOutput(test, "contains/ninSet.poc");
-};
+test('Transpiled NinSet', () => {
+	checkTranspiledOutput('contains/ninSet.poc');
+});
 
-exports.testInterpretedNinText = function(test) {
-	checkInterpretedOutput(test, "contains/ninText.poc");
-};
+test('Interpreted NinText', () => {
+	checkInterpretedOutput('contains/ninText.poc');
+});
 
-exports.testTranspiledNinText = function(test) {
-	checkTranspiledOutput(test, "contains/ninText.poc");
-};
+test('Transpiled NinText', () => {
+	checkTranspiledOutput('contains/ninText.poc');
+});
 
-exports.testInterpretedNinTimeRange = function(test) {
-	checkInterpretedOutput(test, "contains/ninTimeRange.poc");
-};
+test('Interpreted NinTimeRange', () => {
+	checkInterpretedOutput('contains/ninTimeRange.poc');
+});
 
-exports.testTranspiledNinTimeRange = function(test) {
-	checkTranspiledOutput(test, "contains/ninTimeRange.poc");
-};
+test('Transpiled NinTimeRange', () => {
+	checkTranspiledOutput('contains/ninTimeRange.poc');
+});
 

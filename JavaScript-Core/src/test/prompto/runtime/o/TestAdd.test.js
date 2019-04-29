@@ -1,137 +1,132 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAddCharacter = function(test) {
-	checkInterpretedOutput(test, "add/addCharacter.poc");
-};
+test('Interpreted AddCharacter', () => {
+	checkInterpretedOutput('add/addCharacter.poc');
+});
 
-exports.testTranspiledAddCharacter = function(test) {
-	checkTranspiledOutput(test, "add/addCharacter.poc");
-};
+test('Transpiled AddCharacter', () => {
+	checkTranspiledOutput('add/addCharacter.poc');
+});
 
-exports.testInterpretedAddDate = function(test) {
-	checkInterpretedOutput(test, "add/addDate.poc");
-};
+test('Interpreted AddDate', () => {
+	checkInterpretedOutput('add/addDate.poc');
+});
 
-exports.testTranspiledAddDate = function(test) {
-	checkTranspiledOutput(test, "add/addDate.poc");
-};
+test('Transpiled AddDate', () => {
+	checkTranspiledOutput('add/addDate.poc');
+});
 
-exports.testInterpretedAddDateTime = function(test) {
-	checkInterpretedOutput(test, "add/addDateTime.poc");
-};
+test('Interpreted AddDateTime', () => {
+	checkInterpretedOutput('add/addDateTime.poc');
+});
 
-exports.testTranspiledAddDateTime = function(test) {
-	checkTranspiledOutput(test, "add/addDateTime.poc");
-};
+test('Transpiled AddDateTime', () => {
+	checkTranspiledOutput('add/addDateTime.poc');
+});
 
-exports.testInterpretedAddDecimal = function(test) {
-	checkInterpretedOutput(test, "add/addDecimal.poc");
-};
+test('Interpreted AddDecimal', () => {
+	checkInterpretedOutput('add/addDecimal.poc');
+});
 
-exports.testTranspiledAddDecimal = function(test) {
-	checkTranspiledOutput(test, "add/addDecimal.poc");
-};
+test('Transpiled AddDecimal', () => {
+	checkTranspiledOutput('add/addDecimal.poc');
+});
 
-exports.testInterpretedAddDict = function(test) {
-	checkInterpretedOutput(test, "add/addDict.poc");
-};
+test('Interpreted AddDict', () => {
+	checkInterpretedOutput('add/addDict.poc');
+});
 
-exports.testTranspiledAddDict = function(test) {
-	checkTranspiledOutput(test, "add/addDict.poc");
-};
+test('Transpiled AddDict', () => {
+	checkTranspiledOutput('add/addDict.poc');
+});
 
-exports.testInterpretedAddInteger = function(test) {
-	checkInterpretedOutput(test, "add/addInteger.poc");
-};
+test('Interpreted AddInteger', () => {
+	checkInterpretedOutput('add/addInteger.poc');
+});
 
-exports.testTranspiledAddInteger = function(test) {
-	checkTranspiledOutput(test, "add/addInteger.poc");
-};
+test('Transpiled AddInteger', () => {
+	checkTranspiledOutput('add/addInteger.poc');
+});
 
-exports.testInterpretedAddList = function(test) {
-	checkInterpretedOutput(test, "add/addList.poc");
-};
+test('Interpreted AddList', () => {
+	checkInterpretedOutput('add/addList.poc');
+});
 
-exports.testTranspiledAddList = function(test) {
-	checkTranspiledOutput(test, "add/addList.poc");
-};
+test('Transpiled AddList', () => {
+	checkTranspiledOutput('add/addList.poc');
+});
 
-exports.testInterpretedAddPeriod = function(test) {
-	checkInterpretedOutput(test, "add/addPeriod.poc");
-};
+test('Interpreted AddPeriod', () => {
+	checkInterpretedOutput('add/addPeriod.poc');
+});
 
-exports.testTranspiledAddPeriod = function(test) {
-	checkTranspiledOutput(test, "add/addPeriod.poc");
-};
+test('Transpiled AddPeriod', () => {
+	checkTranspiledOutput('add/addPeriod.poc');
+});
 
-exports.testInterpretedAddSet = function(test) {
-	checkInterpretedOutput(test, "add/addSet.poc");
-};
+test('Interpreted AddSet', () => {
+	checkInterpretedOutput('add/addSet.poc');
+});
 
-exports.testTranspiledAddSet = function(test) {
-	checkTranspiledOutput(test, "add/addSet.poc");
-};
+test('Transpiled AddSet', () => {
+	checkTranspiledOutput('add/addSet.poc');
+});
 
-exports.testInterpretedAddTextCharacter = function(test) {
-	checkInterpretedOutput(test, "add/addTextCharacter.poc");
-};
+test('Interpreted AddTextCharacter', () => {
+	checkInterpretedOutput('add/addTextCharacter.poc');
+});
 
-exports.testTranspiledAddTextCharacter = function(test) {
-	checkTranspiledOutput(test, "add/addTextCharacter.poc");
-};
+test('Transpiled AddTextCharacter', () => {
+	checkTranspiledOutput('add/addTextCharacter.poc');
+});
 
-exports.testInterpretedAddTextDecimal = function(test) {
-	checkInterpretedOutput(test, "add/addTextDecimal.poc");
-};
+test('Interpreted AddTextDecimal', () => {
+	checkInterpretedOutput('add/addTextDecimal.poc');
+});
 
-exports.testTranspiledAddTextDecimal = function(test) {
-	checkTranspiledOutput(test, "add/addTextDecimal.poc");
-};
+test('Transpiled AddTextDecimal', () => {
+	checkTranspiledOutput('add/addTextDecimal.poc');
+});
 
-exports.testInterpretedAddTextInteger = function(test) {
-	checkInterpretedOutput(test, "add/addTextInteger.poc");
-};
+test('Interpreted AddTextInteger', () => {
+	checkInterpretedOutput('add/addTextInteger.poc');
+});
 
-exports.testTranspiledAddTextInteger = function(test) {
-	checkTranspiledOutput(test, "add/addTextInteger.poc");
-};
+test('Transpiled AddTextInteger', () => {
+	checkTranspiledOutput('add/addTextInteger.poc');
+});
 
-exports.testInterpretedAddTextText = function(test) {
-	checkInterpretedOutput(test, "add/addTextText.poc");
-};
+test('Interpreted AddTextText', () => {
+	checkInterpretedOutput('add/addTextText.poc');
+});
 
-exports.testTranspiledAddTextText = function(test) {
-	checkTranspiledOutput(test, "add/addTextText.poc");
-};
+test('Transpiled AddTextText', () => {
+	checkTranspiledOutput('add/addTextText.poc');
+});
 
-exports.testInterpretedAddTime = function(test) {
-	checkInterpretedOutput(test, "add/addTime.poc");
-};
+test('Interpreted AddTime', () => {
+	checkInterpretedOutput('add/addTime.poc');
+});
 
-exports.testTranspiledAddTime = function(test) {
-	checkTranspiledOutput(test, "add/addTime.poc");
-};
+test('Transpiled AddTime', () => {
+	checkTranspiledOutput('add/addTime.poc');
+});
 
-exports.testInterpretedAddTuple = function(test) {
-	checkInterpretedOutput(test, "add/addTuple.poc");
-};
+test('Interpreted AddTuple', () => {
+	checkInterpretedOutput('add/addTuple.poc');
+});
 
-exports.testTranspiledAddTuple = function(test) {
-	checkTranspiledOutput(test, "add/addTuple.poc");
-};
+test('Transpiled AddTuple', () => {
+	checkTranspiledOutput('add/addTuple.poc');
+});
 

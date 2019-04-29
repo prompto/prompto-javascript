@@ -1,89 +1,84 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedContainsItem = function(test) {
-	checkInterpretedOutput(test, "predicate/containsItem.pec");
-};
+test('Interpreted ContainsItem', () => {
+	checkInterpretedOutput('predicate/containsItem.pec');
+});
 
-exports.testTranspiledContainsItem = function(test) {
-	checkTranspiledOutput(test, "predicate/containsItem.pec");
-};
+test('Transpiled ContainsItem', () => {
+	checkTranspiledOutput('predicate/containsItem.pec');
+});
 
-exports.testInterpretedEquals = function(test) {
-	checkInterpretedOutput(test, "predicate/equals.pec");
-};
+test('Interpreted Equals', () => {
+	checkInterpretedOutput('predicate/equals.pec');
+});
 
-exports.testTranspiledEquals = function(test) {
-	checkTranspiledOutput(test, "predicate/equals.pec");
-};
+test('Transpiled Equals', () => {
+	checkTranspiledOutput('predicate/equals.pec');
+});
 
-exports.testInterpretedGreater = function(test) {
-	checkInterpretedOutput(test, "predicate/greater.pec");
-};
+test('Interpreted Greater', () => {
+	checkInterpretedOutput('predicate/greater.pec');
+});
 
-exports.testTranspiledGreater = function(test) {
-	checkTranspiledOutput(test, "predicate/greater.pec");
-};
+test('Transpiled Greater', () => {
+	checkTranspiledOutput('predicate/greater.pec');
+});
 
-exports.testInterpretedHasItem = function(test) {
-	checkInterpretedOutput(test, "predicate/hasItem.pec");
-};
+test('Interpreted HasItem', () => {
+	checkInterpretedOutput('predicate/hasItem.pec');
+});
 
-exports.testTranspiledHasItem = function(test) {
-	checkTranspiledOutput(test, "predicate/hasItem.pec");
-};
+test('Transpiled HasItem', () => {
+	checkTranspiledOutput('predicate/hasItem.pec');
+});
 
-exports.testInterpretedInList = function(test) {
-	checkInterpretedOutput(test, "predicate/inList.pec");
-};
+test('Interpreted InList', () => {
+	checkInterpretedOutput('predicate/inList.pec');
+});
 
-exports.testTranspiledInList = function(test) {
-	checkTranspiledOutput(test, "predicate/inList.pec");
-};
+test('Transpiled InList', () => {
+	checkTranspiledOutput('predicate/inList.pec');
+});
 
-exports.testInterpretedLesser = function(test) {
-	checkInterpretedOutput(test, "predicate/lesser.pec");
-};
+test('Interpreted Lesser', () => {
+	checkInterpretedOutput('predicate/lesser.pec');
+});
 
-exports.testTranspiledLesser = function(test) {
-	checkTranspiledOutput(test, "predicate/lesser.pec");
-};
+test('Transpiled Lesser', () => {
+	checkTranspiledOutput('predicate/lesser.pec');
+});
 
-exports.testInterpretedNotEquals = function(test) {
-	checkInterpretedOutput(test, "predicate/notEquals.pec");
-};
+test('Interpreted NotEquals', () => {
+	checkInterpretedOutput('predicate/notEquals.pec');
+});
 
-exports.testTranspiledNotEquals = function(test) {
-	checkTranspiledOutput(test, "predicate/notEquals.pec");
-};
+test('Transpiled NotEquals', () => {
+	checkTranspiledOutput('predicate/notEquals.pec');
+});
 
-exports.testInterpretedPartial = function(test) {
-	checkInterpretedOutput(test, "predicate/partial.pec");
-};
+test('Interpreted Partial', () => {
+	checkInterpretedOutput('predicate/partial.pec');
+});
 
-exports.testTranspiledPartial = function(test) {
-	checkTranspiledOutput(test, "predicate/partial.pec");
-};
+test('Transpiled Partial', () => {
+	checkTranspiledOutput('predicate/partial.pec');
+});
 
-exports.testInterpretedRoughly = function(test) {
-	checkInterpretedOutput(test, "predicate/roughly.pec");
-};
+test('Interpreted Roughly', () => {
+	checkInterpretedOutput('predicate/roughly.pec');
+});
 
-exports.testTranspiledRoughly = function(test) {
-	checkTranspiledOutput(test, "predicate/roughly.pec");
-};
+test('Transpiled Roughly', () => {
+	checkTranspiledOutput('predicate/roughly.pec');
+});
 

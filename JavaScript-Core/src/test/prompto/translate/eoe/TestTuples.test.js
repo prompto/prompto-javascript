@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testMultiAssignment = function(test) {
-	compareResourceEOE(test, "tuples/multiAssignment.pec");
-};
+test('MultiAssignment', () => {
+	compareResourceEOE('tuples/multiAssignment.pec');
+});
 
-exports.testSingleAssignment = function(test) {
-	compareResourceEOE(test, "tuples/singleAssignment.pec");
-};
+test('SingleAssignment', () => {
+	compareResourceEOE('tuples/singleAssignment.pec');
+});
 
-exports.testTupleElement = function(test) {
-	compareResourceEOE(test, "tuples/tupleElement.pec");
-};
+test('TupleElement', () => {
+	compareResourceEOE('tuples/tupleElement.pec');
+});
 

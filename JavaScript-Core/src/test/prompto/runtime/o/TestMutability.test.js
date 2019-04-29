@@ -1,113 +1,108 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedImmutable = function(test) {
-	checkInterpretedOutput(test, "mutability/immutable.poc");
-};
+test('Interpreted Immutable', () => {
+	checkInterpretedOutput('mutability/immutable.poc');
+});
 
-exports.testTranspiledImmutable = function(test) {
-	checkTranspiledOutput(test, "mutability/immutable.poc");
-};
+test('Transpiled Immutable', () => {
+	checkTranspiledOutput('mutability/immutable.poc');
+});
 
-exports.testInterpretedImmutableArgument = function(test) {
-	checkInterpretedOutput(test, "mutability/immutableArgument.poc");
-};
+test('Interpreted ImmutableArgument', () => {
+	checkInterpretedOutput('mutability/immutableArgument.poc');
+});
 
-exports.testTranspiledImmutableArgument = function(test) {
-	checkTranspiledOutput(test, "mutability/immutableArgument.poc");
-};
+test('Transpiled ImmutableArgument', () => {
+	checkTranspiledOutput('mutability/immutableArgument.poc');
+});
 
-exports.testInterpretedImmutableDict = function(test) {
-	checkInterpretedOutput(test, "mutability/immutableDict.poc");
-};
+test('Interpreted ImmutableDict', () => {
+	checkInterpretedOutput('mutability/immutableDict.poc');
+});
 
-exports.testTranspiledImmutableDict = function(test) {
-	checkTranspiledOutput(test, "mutability/immutableDict.poc");
-};
+test('Transpiled ImmutableDict', () => {
+	checkTranspiledOutput('mutability/immutableDict.poc');
+});
 
-exports.testInterpretedImmutableList = function(test) {
-	checkInterpretedOutput(test, "mutability/immutableList.poc");
-};
+test('Interpreted ImmutableList', () => {
+	checkInterpretedOutput('mutability/immutableList.poc');
+});
 
-exports.testTranspiledImmutableList = function(test) {
-	checkTranspiledOutput(test, "mutability/immutableList.poc");
-};
+test('Transpiled ImmutableList', () => {
+	checkTranspiledOutput('mutability/immutableList.poc');
+});
 
-exports.testInterpretedImmutableMember = function(test) {
-	checkInterpretedOutput(test, "mutability/immutableMember.poc");
-};
+test('Interpreted ImmutableMember', () => {
+	checkInterpretedOutput('mutability/immutableMember.poc');
+});
 
-exports.testTranspiledImmutableMember = function(test) {
-	checkTranspiledOutput(test, "mutability/immutableMember.poc");
-};
+test('Transpiled ImmutableMember', () => {
+	checkTranspiledOutput('mutability/immutableMember.poc');
+});
 
-exports.testInterpretedImmutableTuple = function(test) {
-	checkInterpretedOutput(test, "mutability/immutableTuple.poc");
-};
+test('Interpreted ImmutableTuple', () => {
+	checkInterpretedOutput('mutability/immutableTuple.poc');
+});
 
-exports.testTranspiledImmutableTuple = function(test) {
-	checkTranspiledOutput(test, "mutability/immutableTuple.poc");
-};
+test('Transpiled ImmutableTuple', () => {
+	checkTranspiledOutput('mutability/immutableTuple.poc');
+});
 
-exports.testInterpretedMutable = function(test) {
-	checkInterpretedOutput(test, "mutability/mutable.poc");
-};
+test('Interpreted Mutable', () => {
+	checkInterpretedOutput('mutability/mutable.poc');
+});
 
-exports.testTranspiledMutable = function(test) {
-	checkTranspiledOutput(test, "mutability/mutable.poc");
-};
+test('Transpiled Mutable', () => {
+	checkTranspiledOutput('mutability/mutable.poc');
+});
 
-exports.testInterpretedMutableArgument = function(test) {
-	checkInterpretedOutput(test, "mutability/mutableArgument.poc");
-};
+test('Interpreted MutableArgument', () => {
+	checkInterpretedOutput('mutability/mutableArgument.poc');
+});
 
-exports.testTranspiledMutableArgument = function(test) {
-	checkTranspiledOutput(test, "mutability/mutableArgument.poc");
-};
+test('Transpiled MutableArgument', () => {
+	checkTranspiledOutput('mutability/mutableArgument.poc');
+});
 
-exports.testInterpretedMutableDict = function(test) {
-	checkInterpretedOutput(test, "mutability/mutableDict.poc");
-};
+test('Interpreted MutableDict', () => {
+	checkInterpretedOutput('mutability/mutableDict.poc');
+});
 
-exports.testTranspiledMutableDict = function(test) {
-	checkTranspiledOutput(test, "mutability/mutableDict.poc");
-};
+test('Transpiled MutableDict', () => {
+	checkTranspiledOutput('mutability/mutableDict.poc');
+});
 
-exports.testInterpretedMutableList = function(test) {
-	checkInterpretedOutput(test, "mutability/mutableList.poc");
-};
+test('Interpreted MutableList', () => {
+	checkInterpretedOutput('mutability/mutableList.poc');
+});
 
-exports.testTranspiledMutableList = function(test) {
-	checkTranspiledOutput(test, "mutability/mutableList.poc");
-};
+test('Transpiled MutableList', () => {
+	checkTranspiledOutput('mutability/mutableList.poc');
+});
 
-exports.testInterpretedMutableMember = function(test) {
-	checkInterpretedOutput(test, "mutability/mutableMember.poc");
-};
+test('Interpreted MutableMember', () => {
+	checkInterpretedOutput('mutability/mutableMember.poc');
+});
 
-exports.testTranspiledMutableMember = function(test) {
-	checkTranspiledOutput(test, "mutability/mutableMember.poc");
-};
+test('Transpiled MutableMember', () => {
+	checkTranspiledOutput('mutability/mutableMember.poc');
+});
 
-exports.testInterpretedMutableTuple = function(test) {
-	checkInterpretedOutput(test, "mutability/mutableTuple.poc");
-};
+test('Interpreted MutableTuple', () => {
+	checkInterpretedOutput('mutability/mutableTuple.poc');
+});
 
-exports.testTranspiledMutableTuple = function(test) {
-	checkTranspiledOutput(test, "mutability/mutableTuple.poc");
-};
+test('Transpiled MutableTuple', () => {
+	checkTranspiledOutput('mutability/mutableTuple.poc');
+});
 

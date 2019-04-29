@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedForEachCategoryList = function(test) {
-	checkInterpretedOutput(test, "iterate/forEachCategoryList.pec");
-};
+test('Interpreted ForEachCategoryList', () => {
+	checkInterpretedOutput('iterate/forEachCategoryList.pec');
+});
 
-exports.testTranspiledForEachCategoryList = function(test) {
-	checkTranspiledOutput(test, "iterate/forEachCategoryList.pec");
-};
+test('Transpiled ForEachCategoryList', () => {
+	checkTranspiledOutput('iterate/forEachCategoryList.pec');
+});
 
-exports.testInterpretedForEachExpression = function(test) {
-	checkInterpretedOutput(test, "iterate/forEachExpression.pec");
-};
+test('Interpreted ForEachExpression', () => {
+	checkInterpretedOutput('iterate/forEachExpression.pec');
+});
 
-exports.testTranspiledForEachExpression = function(test) {
-	checkTranspiledOutput(test, "iterate/forEachExpression.pec");
-};
+test('Transpiled ForEachExpression', () => {
+	checkTranspiledOutput('iterate/forEachExpression.pec');
+});
 
-exports.testInterpretedForEachIntegerList = function(test) {
-	checkInterpretedOutput(test, "iterate/forEachIntegerList.pec");
-};
+test('Interpreted ForEachIntegerList', () => {
+	checkInterpretedOutput('iterate/forEachIntegerList.pec');
+});
 
-exports.testTranspiledForEachIntegerList = function(test) {
-	checkTranspiledOutput(test, "iterate/forEachIntegerList.pec");
-};
+test('Transpiled ForEachIntegerList', () => {
+	checkTranspiledOutput('iterate/forEachIntegerList.pec');
+});
 

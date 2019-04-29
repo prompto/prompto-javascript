@@ -1,65 +1,60 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedComplexIf = function(test) {
-	checkInterpretedOutput(test, "condition/complexIf.poc");
-};
+test('Interpreted ComplexIf', () => {
+	checkInterpretedOutput('condition/complexIf.poc');
+});
 
-exports.testTranspiledComplexIf = function(test) {
-	checkTranspiledOutput(test, "condition/complexIf.poc");
-};
+test('Transpiled ComplexIf', () => {
+	checkTranspiledOutput('condition/complexIf.poc');
+});
 
-exports.testInterpretedEmbeddedIf = function(test) {
-	checkInterpretedOutput(test, "condition/embeddedIf.poc");
-};
+test('Interpreted EmbeddedIf', () => {
+	checkInterpretedOutput('condition/embeddedIf.poc');
+});
 
-exports.testTranspiledEmbeddedIf = function(test) {
-	checkTranspiledOutput(test, "condition/embeddedIf.poc");
-};
+test('Transpiled EmbeddedIf', () => {
+	checkTranspiledOutput('condition/embeddedIf.poc');
+});
 
-exports.testInterpretedReturnIf = function(test) {
-	checkInterpretedOutput(test, "condition/returnIf.poc");
-};
+test('Interpreted ReturnIf', () => {
+	checkInterpretedOutput('condition/returnIf.poc');
+});
 
-exports.testTranspiledReturnIf = function(test) {
-	checkTranspiledOutput(test, "condition/returnIf.poc");
-};
+test('Transpiled ReturnIf', () => {
+	checkTranspiledOutput('condition/returnIf.poc');
+});
 
-exports.testInterpretedSimpleIf = function(test) {
-	checkInterpretedOutput(test, "condition/simpleIf.poc");
-};
+test('Interpreted SimpleIf', () => {
+	checkInterpretedOutput('condition/simpleIf.poc');
+});
 
-exports.testTranspiledSimpleIf = function(test) {
-	checkTranspiledOutput(test, "condition/simpleIf.poc");
-};
+test('Transpiled SimpleIf', () => {
+	checkTranspiledOutput('condition/simpleIf.poc');
+});
 
-exports.testInterpretedSwitch = function(test) {
-	checkInterpretedOutput(test, "condition/switch.poc");
-};
+test('Interpreted Switch', () => {
+	checkInterpretedOutput('condition/switch.poc');
+});
 
-exports.testTranspiledSwitch = function(test) {
-	checkTranspiledOutput(test, "condition/switch.poc");
-};
+test('Transpiled Switch', () => {
+	checkTranspiledOutput('condition/switch.poc');
+});
 
-exports.testInterpretedTernary = function(test) {
-	checkInterpretedOutput(test, "condition/ternary.poc");
-};
+test('Interpreted Ternary', () => {
+	checkInterpretedOutput('condition/ternary.poc');
+});
 
-exports.testTranspiledTernary = function(test) {
-	checkTranspiledOutput(test, "condition/ternary.poc");
-};
+test('Transpiled Ternary', () => {
+	checkTranspiledOutput('condition/ternary.poc');
+});
 

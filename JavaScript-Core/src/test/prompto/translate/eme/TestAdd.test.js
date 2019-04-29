@@ -1,76 +1,74 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAddCharacter = function(test) {
-	compareResourceEME(test, "add/addCharacter.pec");
-};
+test('AddCharacter', () => {
+	compareResourceEME('add/addCharacter.pec');
+});
 
-exports.testAddDate = function(test) {
-	compareResourceEME(test, "add/addDate.pec");
-};
+test('AddDate', () => {
+	compareResourceEME('add/addDate.pec');
+});
 
-exports.testAddDateTime = function(test) {
-	compareResourceEME(test, "add/addDateTime.pec");
-};
+test('AddDateTime', () => {
+	compareResourceEME('add/addDateTime.pec');
+});
 
-exports.testAddDecimal = function(test) {
-	compareResourceEME(test, "add/addDecimal.pec");
-};
+test('AddDecimal', () => {
+	compareResourceEME('add/addDecimal.pec');
+});
 
-exports.testAddDecimalEnum = function(test) {
-	compareResourceEME(test, "add/addDecimalEnum.pec");
-};
+test('AddDecimalEnum', () => {
+	compareResourceEME('add/addDecimalEnum.pec');
+});
 
-exports.testAddDict = function(test) {
-	compareResourceEME(test, "add/addDict.pec");
-};
+test('AddDict', () => {
+	compareResourceEME('add/addDict.pec');
+});
 
-exports.testAddInteger = function(test) {
-	compareResourceEME(test, "add/addInteger.pec");
-};
+test('AddInteger', () => {
+	compareResourceEME('add/addInteger.pec');
+});
 
-exports.testAddIntegerEnum = function(test) {
-	compareResourceEME(test, "add/addIntegerEnum.pec");
-};
+test('AddIntegerEnum', () => {
+	compareResourceEME('add/addIntegerEnum.pec');
+});
 
-exports.testAddList = function(test) {
-	compareResourceEME(test, "add/addList.pec");
-};
+test('AddList', () => {
+	compareResourceEME('add/addList.pec');
+});
 
-exports.testAddPeriod = function(test) {
-	compareResourceEME(test, "add/addPeriod.pec");
-};
+test('AddPeriod', () => {
+	compareResourceEME('add/addPeriod.pec');
+});
 
-exports.testAddSet = function(test) {
-	compareResourceEME(test, "add/addSet.pec");
-};
+test('AddSet', () => {
+	compareResourceEME('add/addSet.pec');
+});
 
-exports.testAddTextCharacter = function(test) {
-	compareResourceEME(test, "add/addTextCharacter.pec");
-};
+test('AddTextCharacter', () => {
+	compareResourceEME('add/addTextCharacter.pec');
+});
 
-exports.testAddTextDecimal = function(test) {
-	compareResourceEME(test, "add/addTextDecimal.pec");
-};
+test('AddTextDecimal', () => {
+	compareResourceEME('add/addTextDecimal.pec');
+});
 
-exports.testAddTextEnum = function(test) {
-	compareResourceEME(test, "add/addTextEnum.pec");
-};
+test('AddTextEnum', () => {
+	compareResourceEME('add/addTextEnum.pec');
+});
 
-exports.testAddTextInteger = function(test) {
-	compareResourceEME(test, "add/addTextInteger.pec");
-};
+test('AddTextInteger', () => {
+	compareResourceEME('add/addTextInteger.pec');
+});
 
-exports.testAddTextText = function(test) {
-	compareResourceEME(test, "add/addTextText.pec");
-};
+test('AddTextText', () => {
+	compareResourceEME('add/addTextText.pec');
+});
 
-exports.testAddTime = function(test) {
-	compareResourceEME(test, "add/addTime.pec");
-};
+test('AddTime', () => {
+	compareResourceEME('add/addTime.pec');
+});
 
-exports.testAddTuple = function(test) {
-	compareResourceEME(test, "add/addTuple.pec");
-};
+test('AddTuple', () => {
+	compareResourceEME('add/addTuple.pec');
+});
 

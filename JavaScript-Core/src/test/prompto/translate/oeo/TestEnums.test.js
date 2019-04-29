@@ -1,24 +1,22 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testCategoryEnum = function(test) {
-	compareResourceOEO(test, "enums/categoryEnum.poc");
-};
+test('CategoryEnum', () => {
+	compareResourceOEO('enums/categoryEnum.poc');
+});
 
-exports.testIntegerEnum = function(test) {
-	compareResourceOEO(test, "enums/integerEnum.poc");
-};
+test('IntegerEnum', () => {
+	compareResourceOEO('enums/integerEnum.poc');
+});
 
-exports.testTextEnum = function(test) {
-	compareResourceOEO(test, "enums/textEnum.poc");
-};
+test('TextEnum', () => {
+	compareResourceOEO('enums/textEnum.poc');
+});
 
-exports.testTextEnumArg = function(test) {
-	compareResourceOEO(test, "enums/textEnumArg.poc");
-};
+test('TextEnumArg', () => {
+	compareResourceOEO('enums/textEnumArg.poc');
+});
 
-exports.testTextEnumVar = function(test) {
-	compareResourceOEO(test, "enums/textEnumVar.poc");
-};
+test('TextEnumVar', () => {
+	compareResourceOEO('enums/textEnumVar.poc');
+});
 

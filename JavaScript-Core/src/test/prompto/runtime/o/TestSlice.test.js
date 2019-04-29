@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedSliceList = function(test) {
-	checkInterpretedOutput(test, "slice/sliceList.poc");
-};
+test('Interpreted SliceList', () => {
+	checkInterpretedOutput('slice/sliceList.poc');
+});
 
-exports.testTranspiledSliceList = function(test) {
-	checkTranspiledOutput(test, "slice/sliceList.poc");
-};
+test('Transpiled SliceList', () => {
+	checkTranspiledOutput('slice/sliceList.poc');
+});
 
-exports.testInterpretedSliceRange = function(test) {
-	checkInterpretedOutput(test, "slice/sliceRange.poc");
-};
+test('Interpreted SliceRange', () => {
+	checkInterpretedOutput('slice/sliceRange.poc');
+});
 
-exports.testTranspiledSliceRange = function(test) {
-	checkTranspiledOutput(test, "slice/sliceRange.poc");
-};
+test('Transpiled SliceRange', () => {
+	checkTranspiledOutput('slice/sliceRange.poc');
+});
 
-exports.testInterpretedSliceText = function(test) {
-	checkInterpretedOutput(test, "slice/sliceText.poc");
-};
+test('Interpreted SliceText', () => {
+	checkInterpretedOutput('slice/sliceText.poc');
+});
 
-exports.testTranspiledSliceText = function(test) {
-	checkTranspiledOutput(test, "slice/sliceText.poc");
-};
+test('Transpiled SliceText', () => {
+	checkTranspiledOutput('slice/sliceText.poc');
+});
 

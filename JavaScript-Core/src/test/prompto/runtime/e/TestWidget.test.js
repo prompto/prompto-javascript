@@ -1,33 +1,28 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedMinimal = function(test) {
-	checkInterpretedOutput(test, "widget/minimal.pec");
-};
+test('Interpreted Minimal', () => {
+	checkInterpretedOutput('widget/minimal.pec');
+});
 
-exports.testTranspiledMinimal = function(test) {
-	checkTranspiledOutput(test, "widget/minimal.pec");
-};
+test('Transpiled Minimal', () => {
+	checkTranspiledOutput('widget/minimal.pec');
+});
 
-exports.testInterpretedNative = function(test) {
-	checkInterpretedOutput(test, "widget/native.pec");
-};
+test('Interpreted Native', () => {
+	checkInterpretedOutput('widget/native.pec');
+});
 
-exports.testTranspiledNative = function(test) {
-	checkTranspiledOutput(test, "widget/native.pec");
-};
+test('Transpiled Native', () => {
+	checkTranspiledOutput('widget/native.pec');
+});
 

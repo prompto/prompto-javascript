@@ -1,105 +1,100 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedDivideByZero = function(test) {
-	checkInterpretedOutput(test, "errors/divideByZero.poc");
-};
+test('Interpreted DivideByZero', () => {
+	checkInterpretedOutput('errors/divideByZero.poc');
+});
 
-exports.testTranspiledDivideByZero = function(test) {
-	checkTranspiledOutput(test, "errors/divideByZero.poc");
-};
+test('Transpiled DivideByZero', () => {
+	checkTranspiledOutput('errors/divideByZero.poc');
+});
 
-exports.testInterpretedIndexOutOfRange_listItem = function(test) {
-	checkInterpretedOutput(test, "errors/indexOutOfRange-listItem.poc");
-};
+test('Interpreted IndexOutOfRange_listItem', () => {
+	checkInterpretedOutput('errors/indexOutOfRange-listItem.poc');
+});
 
-exports.testTranspiledIndexOutOfRange_listItem = function(test) {
-	checkTranspiledOutput(test, "errors/indexOutOfRange-listItem.poc");
-};
+test('Transpiled IndexOutOfRange_listItem', () => {
+	checkTranspiledOutput('errors/indexOutOfRange-listItem.poc');
+});
 
-exports.testInterpretedIndexOutOfRange_sliceList = function(test) {
-	checkInterpretedOutput(test, "errors/indexOutOfRange-sliceList.poc");
-};
+test('Interpreted IndexOutOfRange_sliceList', () => {
+	checkInterpretedOutput('errors/indexOutOfRange-sliceList.poc');
+});
 
-exports.testTranspiledIndexOutOfRange_sliceList = function(test) {
-	checkTranspiledOutput(test, "errors/indexOutOfRange-sliceList.poc");
-};
+test('Transpiled IndexOutOfRange_sliceList', () => {
+	checkTranspiledOutput('errors/indexOutOfRange-sliceList.poc');
+});
 
-exports.testInterpretedIndexOutOfRange_sliceRange = function(test) {
-	checkInterpretedOutput(test, "errors/indexOutOfRange-sliceRange.poc");
-};
+test('Interpreted IndexOutOfRange_sliceRange', () => {
+	checkInterpretedOutput('errors/indexOutOfRange-sliceRange.poc');
+});
 
-exports.testTranspiledIndexOutOfRange_sliceRange = function(test) {
-	checkTranspiledOutput(test, "errors/indexOutOfRange-sliceRange.poc");
-};
+test('Transpiled IndexOutOfRange_sliceRange', () => {
+	checkTranspiledOutput('errors/indexOutOfRange-sliceRange.poc');
+});
 
-exports.testInterpretedIndexOutOfRange_sliceText = function(test) {
-	checkInterpretedOutput(test, "errors/indexOutOfRange-sliceText.poc");
-};
+test('Interpreted IndexOutOfRange_sliceText', () => {
+	checkInterpretedOutput('errors/indexOutOfRange-sliceText.poc');
+});
 
-exports.testTranspiledIndexOutOfRange_sliceText = function(test) {
-	checkTranspiledOutput(test, "errors/indexOutOfRange-sliceText.poc");
-};
+test('Transpiled IndexOutOfRange_sliceText', () => {
+	checkTranspiledOutput('errors/indexOutOfRange-sliceText.poc');
+});
 
-exports.testInterpretedNullDict = function(test) {
-	checkInterpretedOutput(test, "errors/nullDict.poc");
-};
+test('Interpreted NullDict', () => {
+	checkInterpretedOutput('errors/nullDict.poc');
+});
 
-exports.testTranspiledNullDict = function(test) {
-	checkTranspiledOutput(test, "errors/nullDict.poc");
-};
+test('Transpiled NullDict', () => {
+	checkTranspiledOutput('errors/nullDict.poc');
+});
 
-exports.testInterpretedNullItem = function(test) {
-	checkInterpretedOutput(test, "errors/nullItem.poc");
-};
+test('Interpreted NullItem', () => {
+	checkInterpretedOutput('errors/nullItem.poc');
+});
 
-exports.testTranspiledNullItem = function(test) {
-	checkTranspiledOutput(test, "errors/nullItem.poc");
-};
+test('Transpiled NullItem', () => {
+	checkTranspiledOutput('errors/nullItem.poc');
+});
 
-exports.testInterpretedNullKey = function(test) {
-	checkInterpretedOutput(test, "errors/nullKey.poc");
-};
+test('Interpreted NullKey', () => {
+	checkInterpretedOutput('errors/nullKey.poc');
+});
 
-exports.testTranspiledNullKey = function(test) {
-	checkTranspiledOutput(test, "errors/nullKey.poc");
-};
+test('Transpiled NullKey', () => {
+	checkTranspiledOutput('errors/nullKey.poc');
+});
 
-exports.testInterpretedNullMember = function(test) {
-	checkInterpretedOutput(test, "errors/nullMember.poc");
-};
+test('Interpreted NullMember', () => {
+	checkInterpretedOutput('errors/nullMember.poc');
+});
 
-exports.testTranspiledNullMember = function(test) {
-	checkTranspiledOutput(test, "errors/nullMember.poc");
-};
+test('Transpiled NullMember', () => {
+	checkTranspiledOutput('errors/nullMember.poc');
+});
 
-exports.testInterpretedNullMethod = function(test) {
-	checkInterpretedOutput(test, "errors/nullMethod.poc");
-};
+test('Interpreted NullMethod', () => {
+	checkInterpretedOutput('errors/nullMethod.poc');
+});
 
-exports.testTranspiledNullMethod = function(test) {
-	checkTranspiledOutput(test, "errors/nullMethod.poc");
-};
+test('Transpiled NullMethod', () => {
+	checkTranspiledOutput('errors/nullMethod.poc');
+});
 
-exports.testInterpretedUserException = function(test) {
-	checkInterpretedOutput(test, "errors/userException.poc");
-};
+test('Interpreted UserException', () => {
+	checkInterpretedOutput('errors/userException.poc');
+});
 
-exports.testTranspiledUserException = function(test) {
-	checkTranspiledOutput(test, "errors/userException.poc");
-};
+test('Transpiled UserException', () => {
+	checkTranspiledOutput('errors/userException.poc');
+});
 

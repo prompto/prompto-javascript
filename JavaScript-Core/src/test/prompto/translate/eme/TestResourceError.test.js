@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testBadRead = function(test) {
-	compareResourceEME(test, "resourceError/badRead.pec");
-};
+test('BadRead', () => {
+	compareResourceEME('resourceError/badRead.pec');
+});
 
-exports.testBadResource = function(test) {
-	compareResourceEME(test, "resourceError/badResource.pec");
-};
+test('BadResource', () => {
+	compareResourceEME('resourceError/badResource.pec');
+});
 
-exports.testBadWrite = function(test) {
-	compareResourceEME(test, "resourceError/badWrite.pec");
-};
+test('BadWrite', () => {
+	compareResourceEME('resourceError/badWrite.pec');
+});
 

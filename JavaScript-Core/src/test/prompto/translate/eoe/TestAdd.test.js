@@ -1,76 +1,74 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testAddCharacter = function(test) {
-	compareResourceEOE(test, "add/addCharacter.pec");
-};
+test('AddCharacter', () => {
+	compareResourceEOE('add/addCharacter.pec');
+});
 
-exports.testAddDate = function(test) {
-	compareResourceEOE(test, "add/addDate.pec");
-};
+test('AddDate', () => {
+	compareResourceEOE('add/addDate.pec');
+});
 
-exports.testAddDateTime = function(test) {
-	compareResourceEOE(test, "add/addDateTime.pec");
-};
+test('AddDateTime', () => {
+	compareResourceEOE('add/addDateTime.pec');
+});
 
-exports.testAddDecimal = function(test) {
-	compareResourceEOE(test, "add/addDecimal.pec");
-};
+test('AddDecimal', () => {
+	compareResourceEOE('add/addDecimal.pec');
+});
 
-exports.testAddDecimalEnum = function(test) {
-	compareResourceEOE(test, "add/addDecimalEnum.pec");
-};
+test('AddDecimalEnum', () => {
+	compareResourceEOE('add/addDecimalEnum.pec');
+});
 
-exports.testAddDict = function(test) {
-	compareResourceEOE(test, "add/addDict.pec");
-};
+test('AddDict', () => {
+	compareResourceEOE('add/addDict.pec');
+});
 
-exports.testAddInteger = function(test) {
-	compareResourceEOE(test, "add/addInteger.pec");
-};
+test('AddInteger', () => {
+	compareResourceEOE('add/addInteger.pec');
+});
 
-exports.testAddIntegerEnum = function(test) {
-	compareResourceEOE(test, "add/addIntegerEnum.pec");
-};
+test('AddIntegerEnum', () => {
+	compareResourceEOE('add/addIntegerEnum.pec');
+});
 
-exports.testAddList = function(test) {
-	compareResourceEOE(test, "add/addList.pec");
-};
+test('AddList', () => {
+	compareResourceEOE('add/addList.pec');
+});
 
-exports.testAddPeriod = function(test) {
-	compareResourceEOE(test, "add/addPeriod.pec");
-};
+test('AddPeriod', () => {
+	compareResourceEOE('add/addPeriod.pec');
+});
 
-exports.testAddSet = function(test) {
-	compareResourceEOE(test, "add/addSet.pec");
-};
+test('AddSet', () => {
+	compareResourceEOE('add/addSet.pec');
+});
 
-exports.testAddTextCharacter = function(test) {
-	compareResourceEOE(test, "add/addTextCharacter.pec");
-};
+test('AddTextCharacter', () => {
+	compareResourceEOE('add/addTextCharacter.pec');
+});
 
-exports.testAddTextDecimal = function(test) {
-	compareResourceEOE(test, "add/addTextDecimal.pec");
-};
+test('AddTextDecimal', () => {
+	compareResourceEOE('add/addTextDecimal.pec');
+});
 
-exports.testAddTextEnum = function(test) {
-	compareResourceEOE(test, "add/addTextEnum.pec");
-};
+test('AddTextEnum', () => {
+	compareResourceEOE('add/addTextEnum.pec');
+});
 
-exports.testAddTextInteger = function(test) {
-	compareResourceEOE(test, "add/addTextInteger.pec");
-};
+test('AddTextInteger', () => {
+	compareResourceEOE('add/addTextInteger.pec');
+});
 
-exports.testAddTextText = function(test) {
-	compareResourceEOE(test, "add/addTextText.pec");
-};
+test('AddTextText', () => {
+	compareResourceEOE('add/addTextText.pec');
+});
 
-exports.testAddTime = function(test) {
-	compareResourceEOE(test, "add/addTime.pec");
-};
+test('AddTime', () => {
+	compareResourceEOE('add/addTime.pec');
+});
 
-exports.testAddTuple = function(test) {
-	compareResourceEOE(test, "add/addTuple.pec");
-};
+test('AddTuple', () => {
+	compareResourceEOE('add/addTuple.pec');
+});
 

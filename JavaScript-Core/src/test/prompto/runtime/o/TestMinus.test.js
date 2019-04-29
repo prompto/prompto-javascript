@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedMinusDecimal = function(test) {
-	checkInterpretedOutput(test, "minus/minusDecimal.poc");
-};
+test('Interpreted MinusDecimal', () => {
+	checkInterpretedOutput('minus/minusDecimal.poc');
+});
 
-exports.testTranspiledMinusDecimal = function(test) {
-	checkTranspiledOutput(test, "minus/minusDecimal.poc");
-};
+test('Transpiled MinusDecimal', () => {
+	checkTranspiledOutput('minus/minusDecimal.poc');
+});
 
-exports.testInterpretedMinusInteger = function(test) {
-	checkInterpretedOutput(test, "minus/minusInteger.poc");
-};
+test('Interpreted MinusInteger', () => {
+	checkInterpretedOutput('minus/minusInteger.poc');
+});
 
-exports.testTranspiledMinusInteger = function(test) {
-	checkTranspiledOutput(test, "minus/minusInteger.poc");
-};
+test('Transpiled MinusInteger', () => {
+	checkTranspiledOutput('minus/minusInteger.poc');
+});
 
-exports.testInterpretedMinusPeriod = function(test) {
-	checkInterpretedOutput(test, "minus/minusPeriod.poc");
-};
+test('Interpreted MinusPeriod', () => {
+	checkInterpretedOutput('minus/minusPeriod.poc');
+});
 
-exports.testTranspiledMinusPeriod = function(test) {
-	checkTranspiledOutput(test, "minus/minusPeriod.poc");
-};
+test('Transpiled MinusPeriod', () => {
+	checkTranspiledOutput('minus/minusPeriod.poc');
+});
 

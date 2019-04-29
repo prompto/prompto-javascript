@@ -1,97 +1,92 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseMParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseMParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAnd = function(test) {
-	checkInterpretedOutput(test, "testing/and.pmc");
-};
+test('Interpreted And', () => {
+	checkInterpretedOutput('testing/and.pmc');
+});
 
-exports.testTranspiledAnd = function(test) {
-	checkTranspiledOutput(test, "testing/and.pmc");
-};
+test('Transpiled And', () => {
+	checkTranspiledOutput('testing/and.pmc');
+});
 
-exports.testInterpretedContains = function(test) {
-	checkInterpretedOutput(test, "testing/contains.pmc");
-};
+test('Interpreted Contains', () => {
+	checkInterpretedOutput('testing/contains.pmc');
+});
 
-exports.testTranspiledContains = function(test) {
-	checkTranspiledOutput(test, "testing/contains.pmc");
-};
+test('Transpiled Contains', () => {
+	checkTranspiledOutput('testing/contains.pmc');
+});
 
-exports.testInterpretedGreater = function(test) {
-	checkInterpretedOutput(test, "testing/greater.pmc");
-};
+test('Interpreted Greater', () => {
+	checkInterpretedOutput('testing/greater.pmc');
+});
 
-exports.testTranspiledGreater = function(test) {
-	checkTranspiledOutput(test, "testing/greater.pmc");
-};
+test('Transpiled Greater', () => {
+	checkTranspiledOutput('testing/greater.pmc');
+});
 
-exports.testInterpretedMethod = function(test) {
-	checkInterpretedOutput(test, "testing/method.pmc");
-};
+test('Interpreted Method', () => {
+	checkInterpretedOutput('testing/method.pmc');
+});
 
-exports.testTranspiledMethod = function(test) {
-	checkTranspiledOutput(test, "testing/method.pmc");
-};
+test('Transpiled Method', () => {
+	checkTranspiledOutput('testing/method.pmc');
+});
 
-exports.testInterpretedNegative = function(test) {
-	checkInterpretedOutput(test, "testing/negative.pmc");
-};
+test('Interpreted Negative', () => {
+	checkInterpretedOutput('testing/negative.pmc');
+});
 
-exports.testTranspiledNegative = function(test) {
-	checkTranspiledOutput(test, "testing/negative.pmc");
-};
+test('Transpiled Negative', () => {
+	checkTranspiledOutput('testing/negative.pmc');
+});
 
-exports.testInterpretedNegativeError = function(test) {
-	checkInterpretedOutput(test, "testing/negativeError.pmc");
-};
+test('Interpreted NegativeError', () => {
+	checkInterpretedOutput('testing/negativeError.pmc');
+});
 
-exports.testTranspiledNegativeError = function(test) {
-	checkTranspiledOutput(test, "testing/negativeError.pmc");
-};
+test('Transpiled NegativeError', () => {
+	checkTranspiledOutput('testing/negativeError.pmc');
+});
 
-exports.testInterpretedNot = function(test) {
-	checkInterpretedOutput(test, "testing/not.pmc");
-};
+test('Interpreted Not', () => {
+	checkInterpretedOutput('testing/not.pmc');
+});
 
-exports.testTranspiledNot = function(test) {
-	checkTranspiledOutput(test, "testing/not.pmc");
-};
+test('Transpiled Not', () => {
+	checkTranspiledOutput('testing/not.pmc');
+});
 
-exports.testInterpretedOr = function(test) {
-	checkInterpretedOutput(test, "testing/or.pmc");
-};
+test('Interpreted Or', () => {
+	checkInterpretedOutput('testing/or.pmc');
+});
 
-exports.testTranspiledOr = function(test) {
-	checkTranspiledOutput(test, "testing/or.pmc");
-};
+test('Transpiled Or', () => {
+	checkTranspiledOutput('testing/or.pmc');
+});
 
-exports.testInterpretedPositive = function(test) {
-	checkInterpretedOutput(test, "testing/positive.pmc");
-};
+test('Interpreted Positive', () => {
+	checkInterpretedOutput('testing/positive.pmc');
+});
 
-exports.testTranspiledPositive = function(test) {
-	checkTranspiledOutput(test, "testing/positive.pmc");
-};
+test('Transpiled Positive', () => {
+	checkTranspiledOutput('testing/positive.pmc');
+});
 
-exports.testInterpretedPositiveError = function(test) {
-	checkInterpretedOutput(test, "testing/positiveError.pmc");
-};
+test('Interpreted PositiveError', () => {
+	checkInterpretedOutput('testing/positiveError.pmc');
+});
 
-exports.testTranspiledPositiveError = function(test) {
-	checkTranspiledOutput(test, "testing/positiveError.pmc");
-};
+test('Transpiled PositiveError', () => {
+	checkTranspiledOutput('testing/positiveError.pmc');
+});
 

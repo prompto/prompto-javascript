@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testIntegerEnumeration = function(test) {
-	compareResourceEOE(test, "patterns/integerEnumeration.pec");
-};
+test('IntegerEnumeration', () => {
+	compareResourceEOE('patterns/integerEnumeration.pec');
+});
 
-exports.testIntegerPattern = function(test) {
-	compareResourceEOE(test, "patterns/integerPattern.pec");
-};
+test('IntegerPattern', () => {
+	compareResourceEOE('patterns/integerPattern.pec');
+});
 
-exports.testNegativeIntegerRange = function(test) {
-	compareResourceEOE(test, "patterns/negativeIntegerRange.pec");
-};
+test('NegativeIntegerRange', () => {
+	compareResourceEOE('patterns/negativeIntegerRange.pec');
+});
 
-exports.testPositiveIntegerRange = function(test) {
-	compareResourceEOE(test, "patterns/positiveIntegerRange.pec");
-};
+test('PositiveIntegerRange', () => {
+	compareResourceEOE('patterns/positiveIntegerRange.pec');
+});
 
-exports.testTextEnumeration = function(test) {
-	compareResourceEOE(test, "patterns/textEnumeration.pec");
-};
+test('TextEnumeration', () => {
+	compareResourceEOE('patterns/textEnumeration.pec');
+});
 
-exports.testTextPattern = function(test) {
-	compareResourceEOE(test, "patterns/textPattern.pec");
-};
+test('TextPattern', () => {
+	compareResourceEOE('patterns/textPattern.pec');
+});
 

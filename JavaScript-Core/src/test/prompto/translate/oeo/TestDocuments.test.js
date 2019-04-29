@@ -1,24 +1,22 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testDeepItem = function(test) {
-	compareResourceOEO(test, "documents/deepItem.poc");
-};
+test('DeepItem', () => {
+	compareResourceOEO('documents/deepItem.poc');
+});
 
-exports.testDeepMember = function(test) {
-	compareResourceOEO(test, "documents/deepMember.poc");
-};
+test('DeepMember', () => {
+	compareResourceOEO('documents/deepMember.poc');
+});
 
-exports.testItem = function(test) {
-	compareResourceOEO(test, "documents/item.poc");
-};
+test('Item', () => {
+	compareResourceOEO('documents/item.poc');
+});
 
-exports.testLiteral = function(test) {
-	compareResourceOEO(test, "documents/literal.poc");
-};
+test('Literal', () => {
+	compareResourceOEO('documents/literal.poc');
+});
 
-exports.testMember = function(test) {
-	compareResourceOEO(test, "documents/member.poc");
-};
+test('Member', () => {
+	compareResourceOEO('documents/member.poc');
+});
 

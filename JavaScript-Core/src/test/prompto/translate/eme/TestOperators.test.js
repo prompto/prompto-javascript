@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAddAmount = function(test) {
-	compareResourceEME(test, "operators/addAmount.pec");
-};
+test('AddAmount', () => {
+	compareResourceEME('operators/addAmount.pec');
+});
 
-exports.testDivAmount = function(test) {
-	compareResourceEME(test, "operators/divAmount.pec");
-};
+test('DivAmount', () => {
+	compareResourceEME('operators/divAmount.pec');
+});
 
-exports.testIdivAmount = function(test) {
-	compareResourceEME(test, "operators/idivAmount.pec");
-};
+test('IdivAmount', () => {
+	compareResourceEME('operators/idivAmount.pec');
+});
 
-exports.testModAmount = function(test) {
-	compareResourceEME(test, "operators/modAmount.pec");
-};
+test('ModAmount', () => {
+	compareResourceEME('operators/modAmount.pec');
+});
 
-exports.testMultAmount = function(test) {
-	compareResourceEME(test, "operators/multAmount.pec");
-};
+test('MultAmount', () => {
+	compareResourceEME('operators/multAmount.pec');
+});
 
-exports.testSubAmount = function(test) {
-	compareResourceEME(test, "operators/subAmount.pec");
-};
+test('SubAmount', () => {
+	compareResourceEME('operators/subAmount.pec');
+});
 

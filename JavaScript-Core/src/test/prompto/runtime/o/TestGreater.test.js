@@ -1,137 +1,132 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedGtCharacter = function(test) {
-	checkInterpretedOutput(test, "greater/gtCharacter.poc");
-};
+test('Interpreted GtCharacter', () => {
+	checkInterpretedOutput('greater/gtCharacter.poc');
+});
 
-exports.testTranspiledGtCharacter = function(test) {
-	checkTranspiledOutput(test, "greater/gtCharacter.poc");
-};
+test('Transpiled GtCharacter', () => {
+	checkTranspiledOutput('greater/gtCharacter.poc');
+});
 
-exports.testInterpretedGtDate = function(test) {
-	checkInterpretedOutput(test, "greater/gtDate.poc");
-};
+test('Interpreted GtDate', () => {
+	checkInterpretedOutput('greater/gtDate.poc');
+});
 
-exports.testTranspiledGtDate = function(test) {
-	checkTranspiledOutput(test, "greater/gtDate.poc");
-};
+test('Transpiled GtDate', () => {
+	checkTranspiledOutput('greater/gtDate.poc');
+});
 
-exports.testInterpretedGtDateTime = function(test) {
-	checkInterpretedOutput(test, "greater/gtDateTime.poc");
-};
+test('Interpreted GtDateTime', () => {
+	checkInterpretedOutput('greater/gtDateTime.poc');
+});
 
-exports.testTranspiledGtDateTime = function(test) {
-	checkTranspiledOutput(test, "greater/gtDateTime.poc");
-};
+test('Transpiled GtDateTime', () => {
+	checkTranspiledOutput('greater/gtDateTime.poc');
+});
 
-exports.testInterpretedGtDecimal = function(test) {
-	checkInterpretedOutput(test, "greater/gtDecimal.poc");
-};
+test('Interpreted GtDecimal', () => {
+	checkInterpretedOutput('greater/gtDecimal.poc');
+});
 
-exports.testTranspiledGtDecimal = function(test) {
-	checkTranspiledOutput(test, "greater/gtDecimal.poc");
-};
+test('Transpiled GtDecimal', () => {
+	checkTranspiledOutput('greater/gtDecimal.poc');
+});
 
-exports.testInterpretedGtInteger = function(test) {
-	checkInterpretedOutput(test, "greater/gtInteger.poc");
-};
+test('Interpreted GtInteger', () => {
+	checkInterpretedOutput('greater/gtInteger.poc');
+});
 
-exports.testTranspiledGtInteger = function(test) {
-	checkTranspiledOutput(test, "greater/gtInteger.poc");
-};
+test('Transpiled GtInteger', () => {
+	checkTranspiledOutput('greater/gtInteger.poc');
+});
 
-exports.testInterpretedGtText = function(test) {
-	checkInterpretedOutput(test, "greater/gtText.poc");
-};
+test('Interpreted GtText', () => {
+	checkInterpretedOutput('greater/gtText.poc');
+});
 
-exports.testTranspiledGtText = function(test) {
-	checkTranspiledOutput(test, "greater/gtText.poc");
-};
+test('Transpiled GtText', () => {
+	checkTranspiledOutput('greater/gtText.poc');
+});
 
-exports.testInterpretedGtTime = function(test) {
-	checkInterpretedOutput(test, "greater/gtTime.poc");
-};
+test('Interpreted GtTime', () => {
+	checkInterpretedOutput('greater/gtTime.poc');
+});
 
-exports.testTranspiledGtTime = function(test) {
-	checkTranspiledOutput(test, "greater/gtTime.poc");
-};
+test('Transpiled GtTime', () => {
+	checkTranspiledOutput('greater/gtTime.poc');
+});
 
-exports.testInterpretedGtVersion = function(test) {
-	checkInterpretedOutput(test, "greater/gtVersion.poc");
-};
+test('Interpreted GtVersion', () => {
+	checkInterpretedOutput('greater/gtVersion.poc');
+});
 
-exports.testTranspiledGtVersion = function(test) {
-	checkTranspiledOutput(test, "greater/gtVersion.poc");
-};
+test('Transpiled GtVersion', () => {
+	checkTranspiledOutput('greater/gtVersion.poc');
+});
 
-exports.testInterpretedGteCharacter = function(test) {
-	checkInterpretedOutput(test, "greater/gteCharacter.poc");
-};
+test('Interpreted GteCharacter', () => {
+	checkInterpretedOutput('greater/gteCharacter.poc');
+});
 
-exports.testTranspiledGteCharacter = function(test) {
-	checkTranspiledOutput(test, "greater/gteCharacter.poc");
-};
+test('Transpiled GteCharacter', () => {
+	checkTranspiledOutput('greater/gteCharacter.poc');
+});
 
-exports.testInterpretedGteDate = function(test) {
-	checkInterpretedOutput(test, "greater/gteDate.poc");
-};
+test('Interpreted GteDate', () => {
+	checkInterpretedOutput('greater/gteDate.poc');
+});
 
-exports.testTranspiledGteDate = function(test) {
-	checkTranspiledOutput(test, "greater/gteDate.poc");
-};
+test('Transpiled GteDate', () => {
+	checkTranspiledOutput('greater/gteDate.poc');
+});
 
-exports.testInterpretedGteDateTime = function(test) {
-	checkInterpretedOutput(test, "greater/gteDateTime.poc");
-};
+test('Interpreted GteDateTime', () => {
+	checkInterpretedOutput('greater/gteDateTime.poc');
+});
 
-exports.testTranspiledGteDateTime = function(test) {
-	checkTranspiledOutput(test, "greater/gteDateTime.poc");
-};
+test('Transpiled GteDateTime', () => {
+	checkTranspiledOutput('greater/gteDateTime.poc');
+});
 
-exports.testInterpretedGteDecimal = function(test) {
-	checkInterpretedOutput(test, "greater/gteDecimal.poc");
-};
+test('Interpreted GteDecimal', () => {
+	checkInterpretedOutput('greater/gteDecimal.poc');
+});
 
-exports.testTranspiledGteDecimal = function(test) {
-	checkTranspiledOutput(test, "greater/gteDecimal.poc");
-};
+test('Transpiled GteDecimal', () => {
+	checkTranspiledOutput('greater/gteDecimal.poc');
+});
 
-exports.testInterpretedGteInteger = function(test) {
-	checkInterpretedOutput(test, "greater/gteInteger.poc");
-};
+test('Interpreted GteInteger', () => {
+	checkInterpretedOutput('greater/gteInteger.poc');
+});
 
-exports.testTranspiledGteInteger = function(test) {
-	checkTranspiledOutput(test, "greater/gteInteger.poc");
-};
+test('Transpiled GteInteger', () => {
+	checkTranspiledOutput('greater/gteInteger.poc');
+});
 
-exports.testInterpretedGteText = function(test) {
-	checkInterpretedOutput(test, "greater/gteText.poc");
-};
+test('Interpreted GteText', () => {
+	checkInterpretedOutput('greater/gteText.poc');
+});
 
-exports.testTranspiledGteText = function(test) {
-	checkTranspiledOutput(test, "greater/gteText.poc");
-};
+test('Transpiled GteText', () => {
+	checkTranspiledOutput('greater/gteText.poc');
+});
 
-exports.testInterpretedGteTime = function(test) {
-	checkInterpretedOutput(test, "greater/gteTime.poc");
-};
+test('Interpreted GteTime', () => {
+	checkInterpretedOutput('greater/gteTime.poc');
+});
 
-exports.testTranspiledGteTime = function(test) {
-	checkTranspiledOutput(test, "greater/gteTime.poc");
-};
+test('Transpiled GteTime', () => {
+	checkTranspiledOutput('greater/gteTime.poc');
+});
 

@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAndBoolean = function(test) {
-	checkInterpretedOutput(test, "logic/andBoolean.poc");
-};
+test('Interpreted AndBoolean', () => {
+	checkInterpretedOutput('logic/andBoolean.poc');
+});
 
-exports.testTranspiledAndBoolean = function(test) {
-	checkTranspiledOutput(test, "logic/andBoolean.poc");
-};
+test('Transpiled AndBoolean', () => {
+	checkTranspiledOutput('logic/andBoolean.poc');
+});
 
-exports.testInterpretedNotBoolean = function(test) {
-	checkInterpretedOutput(test, "logic/notBoolean.poc");
-};
+test('Interpreted NotBoolean', () => {
+	checkInterpretedOutput('logic/notBoolean.poc');
+});
 
-exports.testTranspiledNotBoolean = function(test) {
-	checkTranspiledOutput(test, "logic/notBoolean.poc");
-};
+test('Transpiled NotBoolean', () => {
+	checkTranspiledOutput('logic/notBoolean.poc');
+});
 
-exports.testInterpretedOrBoolean = function(test) {
-	checkInterpretedOutput(test, "logic/orBoolean.poc");
-};
+test('Interpreted OrBoolean', () => {
+	checkInterpretedOutput('logic/orBoolean.poc');
+});
 
-exports.testTranspiledOrBoolean = function(test) {
-	checkTranspiledOutput(test, "logic/orBoolean.poc");
-};
+test('Transpiled OrBoolean', () => {
+	checkTranspiledOutput('logic/orBoolean.poc');
+});
 

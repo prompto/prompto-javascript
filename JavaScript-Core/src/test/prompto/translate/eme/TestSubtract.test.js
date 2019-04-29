@@ -1,44 +1,42 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testSubDate = function(test) {
-	compareResourceEME(test, "subtract/subDate.pec");
-};
+test('SubDate', () => {
+	compareResourceEME('subtract/subDate.pec');
+});
 
-exports.testSubDateTime = function(test) {
-	compareResourceEME(test, "subtract/subDateTime.pec");
-};
+test('SubDateTime', () => {
+	compareResourceEME('subtract/subDateTime.pec');
+});
 
-exports.testSubDecimal = function(test) {
-	compareResourceEME(test, "subtract/subDecimal.pec");
-};
+test('SubDecimal', () => {
+	compareResourceEME('subtract/subDecimal.pec');
+});
 
-exports.testSubDecimalEnum = function(test) {
-	compareResourceEME(test, "subtract/subDecimalEnum.pec");
-};
+test('SubDecimalEnum', () => {
+	compareResourceEME('subtract/subDecimalEnum.pec');
+});
 
-exports.testSubInteger = function(test) {
-	compareResourceEME(test, "subtract/subInteger.pec");
-};
+test('SubInteger', () => {
+	compareResourceEME('subtract/subInteger.pec');
+});
 
-exports.testSubIntegerEnum = function(test) {
-	compareResourceEME(test, "subtract/subIntegerEnum.pec");
-};
+test('SubIntegerEnum', () => {
+	compareResourceEME('subtract/subIntegerEnum.pec');
+});
 
-exports.testSubList = function(test) {
-	compareResourceEME(test, "subtract/subList.pec");
-};
+test('SubList', () => {
+	compareResourceEME('subtract/subList.pec');
+});
 
-exports.testSubPeriod = function(test) {
-	compareResourceEME(test, "subtract/subPeriod.pec");
-};
+test('SubPeriod', () => {
+	compareResourceEME('subtract/subPeriod.pec');
+});
 
-exports.testSubSet = function(test) {
-	compareResourceEME(test, "subtract/subSet.pec");
-};
+test('SubSet', () => {
+	compareResourceEME('subtract/subSet.pec');
+});
 
-exports.testSubTime = function(test) {
-	compareResourceEME(test, "subtract/subTime.pec");
-};
+test('SubTime', () => {
+	compareResourceEME('subtract/subTime.pec');
+});
 

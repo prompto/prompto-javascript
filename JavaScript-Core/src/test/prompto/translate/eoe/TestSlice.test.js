@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testSliceList = function(test) {
-	compareResourceEOE(test, "slice/sliceList.pec");
-};
+test('SliceList', () => {
+	compareResourceEOE('slice/sliceList.pec');
+});
 
-exports.testSliceRange = function(test) {
-	compareResourceEOE(test, "slice/sliceRange.pec");
-};
+test('SliceRange', () => {
+	compareResourceEOE('slice/sliceRange.pec');
+});
 
-exports.testSliceText = function(test) {
-	compareResourceEOE(test, "slice/sliceText.pec");
-};
+test('SliceText', () => {
+	compareResourceEOE('slice/sliceText.pec');
+});
 

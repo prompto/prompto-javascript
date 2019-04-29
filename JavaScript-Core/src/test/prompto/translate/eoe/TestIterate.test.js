@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testForEachCategoryList = function(test) {
-	compareResourceEOE(test, "iterate/forEachCategoryList.pec");
-};
+test('ForEachCategoryList', () => {
+	compareResourceEOE('iterate/forEachCategoryList.pec');
+});
 
-exports.testForEachExpression = function(test) {
-	compareResourceEOE(test, "iterate/forEachExpression.pec");
-};
+test('ForEachExpression', () => {
+	compareResourceEOE('iterate/forEachExpression.pec');
+});
 
-exports.testForEachIntegerList = function(test) {
-	compareResourceEOE(test, "iterate/forEachIntegerList.pec");
-};
+test('ForEachIntegerList', () => {
+	compareResourceEOE('iterate/forEachIntegerList.pec');
+});
 

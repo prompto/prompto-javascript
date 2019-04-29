@@ -1,24 +1,22 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testItemDict = function(test) {
-	compareResourceOEO(test, "item/itemDict.poc");
-};
+test('ItemDict', () => {
+	compareResourceOEO('item/itemDict.poc');
+});
 
-exports.testItemList = function(test) {
-	compareResourceOEO(test, "item/itemList.poc");
-};
+test('ItemList', () => {
+	compareResourceOEO('item/itemList.poc');
+});
 
-exports.testItemRange = function(test) {
-	compareResourceOEO(test, "item/itemRange.poc");
-};
+test('ItemRange', () => {
+	compareResourceOEO('item/itemRange.poc');
+});
 
-exports.testItemSet = function(test) {
-	compareResourceOEO(test, "item/itemSet.poc");
-};
+test('ItemSet', () => {
+	compareResourceOEO('item/itemSet.poc');
+});
 
-exports.testItemText = function(test) {
-	compareResourceOEO(test, "item/itemText.poc");
-};
+test('ItemText', () => {
+	compareResourceOEO('item/itemText.poc');
+});
 

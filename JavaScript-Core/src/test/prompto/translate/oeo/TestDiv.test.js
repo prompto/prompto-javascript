@@ -1,20 +1,18 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testDivDecimal = function(test) {
-	compareResourceOEO(test, "div/divDecimal.poc");
-};
+test('DivDecimal', () => {
+	compareResourceOEO('div/divDecimal.poc');
+});
 
-exports.testDivInteger = function(test) {
-	compareResourceOEO(test, "div/divInteger.poc");
-};
+test('DivInteger', () => {
+	compareResourceOEO('div/divInteger.poc');
+});
 
-exports.testIdivInteger = function(test) {
-	compareResourceOEO(test, "div/idivInteger.poc");
-};
+test('IdivInteger', () => {
+	compareResourceOEO('div/idivInteger.poc');
+});
 
-exports.testModInteger = function(test) {
-	compareResourceOEO(test, "div/modInteger.poc");
-};
+test('ModInteger', () => {
+	compareResourceOEO('div/modInteger.poc');
+});
 

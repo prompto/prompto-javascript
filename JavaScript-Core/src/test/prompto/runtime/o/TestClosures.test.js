@@ -1,41 +1,36 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedGlobalClosureNoArg = function(test) {
-	checkInterpretedOutput(test, "closures/globalClosureNoArg.poc");
-};
+test('Interpreted GlobalClosureNoArg', () => {
+	checkInterpretedOutput('closures/globalClosureNoArg.poc');
+});
 
-exports.testTranspiledGlobalClosureNoArg = function(test) {
-	checkTranspiledOutput(test, "closures/globalClosureNoArg.poc");
-};
+test('Transpiled GlobalClosureNoArg', () => {
+	checkTranspiledOutput('closures/globalClosureNoArg.poc');
+});
 
-exports.testInterpretedGlobalClosureWithArg = function(test) {
-	checkInterpretedOutput(test, "closures/globalClosureWithArg.poc");
-};
+test('Interpreted GlobalClosureWithArg', () => {
+	checkInterpretedOutput('closures/globalClosureWithArg.poc');
+});
 
-exports.testTranspiledGlobalClosureWithArg = function(test) {
-	checkTranspiledOutput(test, "closures/globalClosureWithArg.poc");
-};
+test('Transpiled GlobalClosureWithArg', () => {
+	checkTranspiledOutput('closures/globalClosureWithArg.poc');
+});
 
-exports.testInterpretedInstanceClosureNoArg = function(test) {
-	checkInterpretedOutput(test, "closures/instanceClosureNoArg.poc");
-};
+test('Interpreted InstanceClosureNoArg', () => {
+	checkInterpretedOutput('closures/instanceClosureNoArg.poc');
+});
 
-exports.testTranspiledInstanceClosureNoArg = function(test) {
-	checkTranspiledOutput(test, "closures/instanceClosureNoArg.poc");
-};
+test('Transpiled InstanceClosureNoArg', () => {
+	checkTranspiledOutput('closures/instanceClosureNoArg.poc');
+});
 

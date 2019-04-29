@@ -64,17 +64,17 @@ function readExpected(fileName) {
 	return all.split("\n");
 }
 
-exports.checkSameOutput = function(test, resource) {
+exports.checkSameOutput = function(resource) {
 	var read = Out.read();
 	var expected = readExpected(resource);
 	if(expected.length===1) {
-		test.equal(read, expected[0]);
+		expect(read).toEqual(expected[0]);
 	} else {
 		for(var idx=0;idx<expected.length;idx++) {
 			if(read===expected[idx])
 				return;
 		}
-		test.equal(read, expected[0]); // to get a display
+		expect(read).toEqual(expected[0]); // to get a display
 	}
 };
 
@@ -93,10 +93,10 @@ function parseMString(input) {
     return parser.parse();
 }
 
-function assertEquivalent(test, expected, actual) {
+function assertEquivalent( expected, actual) {
     expected = removeWhitespace(expected).replace("modulo","%");
     actual = removeWhitespace(actual).replace("modulo","%");
-    test.equal(actual, expected);
+    expect(actual).toEqual(expected);
 }
 
 function removeWhitespace(s) {
@@ -110,7 +110,7 @@ function replaceAll(s, a, b) {
     return s.split(a).join(b);
 }
 
-exports.compareResourceEOE = function(test, resourceName) {
+exports.compareResourceEOE = function(resourceName) {
     var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse e source code
@@ -132,11 +132,10 @@ exports.compareResourceEOE = function(test, resourceName) {
     var actual = writer.toString();
     // console.log(actual);
     // ensure equivalent
-    assertEquivalent(test, expected, actual);
-    test.done();
+    assertEquivalent(expected, actual);
 };
 
-exports.compareResourceEME = function(test, resourceName) {
+exports.compareResourceEME = function(resourceName) {
     var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse e source code
@@ -158,11 +157,10 @@ exports.compareResourceEME = function(test, resourceName) {
     var actual = writer.toString();
     // console.log(actual);
     // ensure equivalent
-    assertEquivalent(test, expected, actual);
-    test.done();
+    assertEquivalent(expected, actual);
 };
 
-exports.compareResourceOEO = function(test, resourceName) {
+exports.compareResourceOEO = function(resourceName) {
     var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse o source code
@@ -184,12 +182,11 @@ exports.compareResourceOEO = function(test, resourceName) {
     var actual = writer.toString();
     // console.log(actual);
     // ensure equivalent
-    assertEquivalent(test, expected, actual);
-    test.done();
+    assertEquivalent(expected, actual);
 };
 
 
-exports.compareResourceOMO = function(test, resourceName) {
+exports.compareResourceOMO = function(resourceName) {
     var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);
     // parse o source code
@@ -211,8 +208,7 @@ exports.compareResourceOMO = function(test, resourceName) {
     var actual = writer.toString();
     // console.log(actual);
     // ensure equivalent
-    assertEquivalent(test, expected, actual);
-    test.done();
+    assertEquivalent(expected, actual);
 };
 
 
@@ -264,7 +260,7 @@ function wrapAndExtract(js, methodName, context) {
     // call it to inject/extract data
     var objs = wrapper(context);
     if(objs.store) {
-        var MemStoreModule = require("../memstore/MemStore");
+        var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
         objs.store.instance = prompto.store.DataStore.instance = new MemStoreModule.MemStore();
         MemStoreModule.Cursor = objs.cursor;
     }

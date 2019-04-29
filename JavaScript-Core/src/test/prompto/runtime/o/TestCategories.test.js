@@ -1,65 +1,60 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedCopyFromAscendant = function(test) {
-	checkInterpretedOutput(test, "categories/copyFromAscendant.poc");
-};
+test('Interpreted CopyFromAscendant', () => {
+	checkInterpretedOutput('categories/copyFromAscendant.poc');
+});
 
-exports.testTranspiledCopyFromAscendant = function(test) {
-	checkTranspiledOutput(test, "categories/copyFromAscendant.poc");
-};
+test('Transpiled CopyFromAscendant', () => {
+	checkTranspiledOutput('categories/copyFromAscendant.poc');
+});
 
-exports.testInterpretedCopyFromAscendantWithOverride = function(test) {
-	checkInterpretedOutput(test, "categories/copyFromAscendantWithOverride.poc");
-};
+test('Interpreted CopyFromAscendantWithOverride', () => {
+	checkInterpretedOutput('categories/copyFromAscendantWithOverride.poc');
+});
 
-exports.testTranspiledCopyFromAscendantWithOverride = function(test) {
-	checkTranspiledOutput(test, "categories/copyFromAscendantWithOverride.poc");
-};
+test('Transpiled CopyFromAscendantWithOverride', () => {
+	checkTranspiledOutput('categories/copyFromAscendantWithOverride.poc');
+});
 
-exports.testInterpretedCopyFromDescendant = function(test) {
-	checkInterpretedOutput(test, "categories/copyFromDescendant.poc");
-};
+test('Interpreted CopyFromDescendant', () => {
+	checkInterpretedOutput('categories/copyFromDescendant.poc');
+});
 
-exports.testTranspiledCopyFromDescendant = function(test) {
-	checkTranspiledOutput(test, "categories/copyFromDescendant.poc");
-};
+test('Transpiled CopyFromDescendant', () => {
+	checkTranspiledOutput('categories/copyFromDescendant.poc');
+});
 
-exports.testInterpretedCopyFromDescendantWithOverride = function(test) {
-	checkInterpretedOutput(test, "categories/copyFromDescendantWithOverride.poc");
-};
+test('Interpreted CopyFromDescendantWithOverride', () => {
+	checkInterpretedOutput('categories/copyFromDescendantWithOverride.poc');
+});
 
-exports.testTranspiledCopyFromDescendantWithOverride = function(test) {
-	checkTranspiledOutput(test, "categories/copyFromDescendantWithOverride.poc");
-};
+test('Transpiled CopyFromDescendantWithOverride', () => {
+	checkTranspiledOutput('categories/copyFromDescendantWithOverride.poc');
+});
 
-exports.testInterpretedCopyFromDocument = function(test) {
-	checkInterpretedOutput(test, "categories/copyFromDocument.poc");
-};
+test('Interpreted CopyFromDocument', () => {
+	checkInterpretedOutput('categories/copyFromDocument.poc');
+});
 
-exports.testTranspiledCopyFromDocument = function(test) {
-	checkTranspiledOutput(test, "categories/copyFromDocument.poc");
-};
+test('Transpiled CopyFromDocument', () => {
+	checkTranspiledOutput('categories/copyFromDocument.poc');
+});
 
-exports.testInterpretedCopyFromStored = function(test) {
-	checkInterpretedOutput(test, "categories/copyFromStored.poc");
-};
+test('Interpreted CopyFromStored', () => {
+	checkInterpretedOutput('categories/copyFromStored.poc');
+});
 
-exports.testTranspiledCopyFromStored = function(test) {
-	checkTranspiledOutput(test, "categories/copyFromStored.poc");
-};
+test('Transpiled CopyFromStored', () => {
+	checkTranspiledOutput('categories/copyFromStored.poc');
+});
 

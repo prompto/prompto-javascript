@@ -1,36 +1,34 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testSubDate = function(test) {
-	compareResourceOMO(test, "subtract/subDate.poc");
-};
+test('SubDate', () => {
+	compareResourceOMO('subtract/subDate.poc');
+});
 
-exports.testSubDateTime = function(test) {
-	compareResourceOMO(test, "subtract/subDateTime.poc");
-};
+test('SubDateTime', () => {
+	compareResourceOMO('subtract/subDateTime.poc');
+});
 
-exports.testSubDecimal = function(test) {
-	compareResourceOMO(test, "subtract/subDecimal.poc");
-};
+test('SubDecimal', () => {
+	compareResourceOMO('subtract/subDecimal.poc');
+});
 
-exports.testSubInteger = function(test) {
-	compareResourceOMO(test, "subtract/subInteger.poc");
-};
+test('SubInteger', () => {
+	compareResourceOMO('subtract/subInteger.poc');
+});
 
-exports.testSubList = function(test) {
-	compareResourceOMO(test, "subtract/subList.poc");
-};
+test('SubList', () => {
+	compareResourceOMO('subtract/subList.poc');
+});
 
-exports.testSubPeriod = function(test) {
-	compareResourceOMO(test, "subtract/subPeriod.poc");
-};
+test('SubPeriod', () => {
+	compareResourceOMO('subtract/subPeriod.poc');
+});
 
-exports.testSubSet = function(test) {
-	compareResourceOMO(test, "subtract/subSet.poc");
-};
+test('SubSet', () => {
+	compareResourceOMO('subtract/subSet.poc');
+});
 
-exports.testSubTime = function(test) {
-	compareResourceOMO(test, "subtract/subTime.poc");
-};
+test('SubTime', () => {
+	compareResourceOMO('subtract/subTime.poc');
+});
 

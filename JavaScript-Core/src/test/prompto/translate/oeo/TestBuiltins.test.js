@@ -1,136 +1,134 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testDateDayOfMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateDayOfMonth.poc");
-};
+test('DateDayOfMonth', () => {
+	compareResourceOEO('builtins/dateDayOfMonth.poc');
+});
 
-exports.testDateDayOfYear = function(test) {
-	compareResourceOEO(test, "builtins/dateDayOfYear.poc");
-};
+test('DateDayOfYear', () => {
+	compareResourceOEO('builtins/dateDayOfYear.poc');
+});
 
-exports.testDateMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateMonth.poc");
-};
+test('DateMonth', () => {
+	compareResourceOEO('builtins/dateMonth.poc');
+});
 
-exports.testDateTimeDayOfMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeDayOfMonth.poc");
-};
+test('DateTimeDayOfMonth', () => {
+	compareResourceOEO('builtins/dateTimeDayOfMonth.poc');
+});
 
-exports.testDateTimeDayOfYear = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeDayOfYear.poc");
-};
+test('DateTimeDayOfYear', () => {
+	compareResourceOEO('builtins/dateTimeDayOfYear.poc');
+});
 
-exports.testDateTimeHour = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeHour.poc");
-};
+test('DateTimeHour', () => {
+	compareResourceOEO('builtins/dateTimeHour.poc');
+});
 
-exports.testDateTimeMinute = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeMinute.poc");
-};
+test('DateTimeMinute', () => {
+	compareResourceOEO('builtins/dateTimeMinute.poc');
+});
 
-exports.testDateTimeMonth = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeMonth.poc");
-};
+test('DateTimeMonth', () => {
+	compareResourceOEO('builtins/dateTimeMonth.poc');
+});
 
-exports.testDateTimeSecond = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeSecond.poc");
-};
+test('DateTimeSecond', () => {
+	compareResourceOEO('builtins/dateTimeSecond.poc');
+});
 
-exports.testDateTimeTZName = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeTZName.poc");
-};
+test('DateTimeTZName', () => {
+	compareResourceOEO('builtins/dateTimeTZName.poc');
+});
 
-exports.testDateTimeTZOffset = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeTZOffset.poc");
-};
+test('DateTimeTZOffset', () => {
+	compareResourceOEO('builtins/dateTimeTZOffset.poc');
+});
 
-exports.testDateTimeYear = function(test) {
-	compareResourceOEO(test, "builtins/dateTimeYear.poc");
-};
+test('DateTimeYear', () => {
+	compareResourceOEO('builtins/dateTimeYear.poc');
+});
 
-exports.testDateYear = function(test) {
-	compareResourceOEO(test, "builtins/dateYear.poc");
-};
+test('DateYear', () => {
+	compareResourceOEO('builtins/dateYear.poc');
+});
 
-exports.testDictCount = function(test) {
-	compareResourceOEO(test, "builtins/dictCount.poc");
-};
+test('DictCount', () => {
+	compareResourceOEO('builtins/dictCount.poc');
+});
 
-exports.testEnumName = function(test) {
-	compareResourceOEO(test, "builtins/enumName.poc");
-};
+test('EnumName', () => {
+	compareResourceOEO('builtins/enumName.poc');
+});
 
-exports.testEnumSymbols = function(test) {
-	compareResourceOEO(test, "builtins/enumSymbols.poc");
-};
+test('EnumSymbols', () => {
+	compareResourceOEO('builtins/enumSymbols.poc');
+});
 
-exports.testEnumValue = function(test) {
-	compareResourceOEO(test, "builtins/enumValue.poc");
-};
+test('EnumValue', () => {
+	compareResourceOEO('builtins/enumValue.poc');
+});
 
-exports.testIntegerFormat = function(test) {
-	compareResourceOEO(test, "builtins/integerFormat.poc");
-};
+test('IntegerFormat', () => {
+	compareResourceOEO('builtins/integerFormat.poc');
+});
 
-exports.testListCount = function(test) {
-	compareResourceOEO(test, "builtins/listCount.poc");
-};
+test('ListCount', () => {
+	compareResourceOEO('builtins/listCount.poc');
+});
 
-exports.testSetCount = function(test) {
-	compareResourceOEO(test, "builtins/setCount.poc");
-};
+test('SetCount', () => {
+	compareResourceOEO('builtins/setCount.poc');
+});
 
-exports.testTextCapitalize = function(test) {
-	compareResourceOEO(test, "builtins/textCapitalize.poc");
-};
+test('TextCapitalize', () => {
+	compareResourceOEO('builtins/textCapitalize.poc');
+});
 
-exports.testTextCount = function(test) {
-	compareResourceOEO(test, "builtins/textCount.poc");
-};
+test('TextCount', () => {
+	compareResourceOEO('builtins/textCount.poc');
+});
 
-exports.testTextIndexOf = function(test) {
-	compareResourceOEO(test, "builtins/textIndexOf.poc");
-};
+test('TextIndexOf', () => {
+	compareResourceOEO('builtins/textIndexOf.poc');
+});
 
-exports.testTextLowercase = function(test) {
-	compareResourceOEO(test, "builtins/textLowercase.poc");
-};
+test('TextLowercase', () => {
+	compareResourceOEO('builtins/textLowercase.poc');
+});
 
-exports.testTextReplace = function(test) {
-	compareResourceOEO(test, "builtins/textReplace.poc");
-};
+test('TextReplace', () => {
+	compareResourceOEO('builtins/textReplace.poc');
+});
 
-exports.testTextReplaceAll = function(test) {
-	compareResourceOEO(test, "builtins/textReplaceAll.poc");
-};
+test('TextReplaceAll', () => {
+	compareResourceOEO('builtins/textReplaceAll.poc');
+});
 
-exports.testTextSplit = function(test) {
-	compareResourceOEO(test, "builtins/textSplit.poc");
-};
+test('TextSplit', () => {
+	compareResourceOEO('builtins/textSplit.poc');
+});
 
-exports.testTextTrim = function(test) {
-	compareResourceOEO(test, "builtins/textTrim.poc");
-};
+test('TextTrim', () => {
+	compareResourceOEO('builtins/textTrim.poc');
+});
 
-exports.testTextUppercase = function(test) {
-	compareResourceOEO(test, "builtins/textUppercase.poc");
-};
+test('TextUppercase', () => {
+	compareResourceOEO('builtins/textUppercase.poc');
+});
 
-exports.testTimeHour = function(test) {
-	compareResourceOEO(test, "builtins/timeHour.poc");
-};
+test('TimeHour', () => {
+	compareResourceOEO('builtins/timeHour.poc');
+});
 
-exports.testTimeMinute = function(test) {
-	compareResourceOEO(test, "builtins/timeMinute.poc");
-};
+test('TimeMinute', () => {
+	compareResourceOEO('builtins/timeMinute.poc');
+});
 
-exports.testTimeSecond = function(test) {
-	compareResourceOEO(test, "builtins/timeSecond.poc");
-};
+test('TimeSecond', () => {
+	compareResourceOEO('builtins/timeSecond.poc');
+});
 
-exports.testTupleCount = function(test) {
-	compareResourceOEO(test, "builtins/tupleCount.poc");
-};
+test('TupleCount', () => {
+	compareResourceOEO('builtins/tupleCount.poc');
+});
 

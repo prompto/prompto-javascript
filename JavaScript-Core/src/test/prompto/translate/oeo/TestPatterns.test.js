@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testIntegerEnumeration = function(test) {
-	compareResourceOEO(test, "patterns/integerEnumeration.poc");
-};
+test('IntegerEnumeration', () => {
+	compareResourceOEO('patterns/integerEnumeration.poc');
+});
 
-exports.testIntegerPattern = function(test) {
-	compareResourceOEO(test, "patterns/integerPattern.poc");
-};
+test('IntegerPattern', () => {
+	compareResourceOEO('patterns/integerPattern.poc');
+});
 
-exports.testNegativeIntegerRange = function(test) {
-	compareResourceOEO(test, "patterns/negativeIntegerRange.poc");
-};
+test('NegativeIntegerRange', () => {
+	compareResourceOEO('patterns/negativeIntegerRange.poc');
+});
 
-exports.testPositiveIntegerRange = function(test) {
-	compareResourceOEO(test, "patterns/positiveIntegerRange.poc");
-};
+test('PositiveIntegerRange', () => {
+	compareResourceOEO('patterns/positiveIntegerRange.poc');
+});
 
-exports.testTextEnumeration = function(test) {
-	compareResourceOEO(test, "patterns/textEnumeration.poc");
-};
+test('TextEnumeration', () => {
+	compareResourceOEO('patterns/textEnumeration.poc');
+});
 
-exports.testTextPattern = function(test) {
-	compareResourceOEO(test, "patterns/textPattern.poc");
-};
+test('TextPattern', () => {
+	compareResourceOEO('patterns/textPattern.poc');
+});
 

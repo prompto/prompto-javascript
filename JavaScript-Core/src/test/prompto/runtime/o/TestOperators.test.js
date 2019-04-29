@@ -1,65 +1,60 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAddAmount = function(test) {
-	checkInterpretedOutput(test, "operators/addAmount.poc");
-};
+test('Interpreted AddAmount', () => {
+	checkInterpretedOutput('operators/addAmount.poc');
+});
 
-exports.testTranspiledAddAmount = function(test) {
-	checkTranspiledOutput(test, "operators/addAmount.poc");
-};
+test('Transpiled AddAmount', () => {
+	checkTranspiledOutput('operators/addAmount.poc');
+});
 
-exports.testInterpretedDivAmount = function(test) {
-	checkInterpretedOutput(test, "operators/divAmount.poc");
-};
+test('Interpreted DivAmount', () => {
+	checkInterpretedOutput('operators/divAmount.poc');
+});
 
-exports.testTranspiledDivAmount = function(test) {
-	checkTranspiledOutput(test, "operators/divAmount.poc");
-};
+test('Transpiled DivAmount', () => {
+	checkTranspiledOutput('operators/divAmount.poc');
+});
 
-exports.testInterpretedIdivAmount = function(test) {
-	checkInterpretedOutput(test, "operators/idivAmount.poc");
-};
+test('Interpreted IdivAmount', () => {
+	checkInterpretedOutput('operators/idivAmount.poc');
+});
 
-exports.testTranspiledIdivAmount = function(test) {
-	checkTranspiledOutput(test, "operators/idivAmount.poc");
-};
+test('Transpiled IdivAmount', () => {
+	checkTranspiledOutput('operators/idivAmount.poc');
+});
 
-exports.testInterpretedModAmount = function(test) {
-	checkInterpretedOutput(test, "operators/modAmount.poc");
-};
+test('Interpreted ModAmount', () => {
+	checkInterpretedOutput('operators/modAmount.poc');
+});
 
-exports.testTranspiledModAmount = function(test) {
-	checkTranspiledOutput(test, "operators/modAmount.poc");
-};
+test('Transpiled ModAmount', () => {
+	checkTranspiledOutput('operators/modAmount.poc');
+});
 
-exports.testInterpretedMultAmount = function(test) {
-	checkInterpretedOutput(test, "operators/multAmount.poc");
-};
+test('Interpreted MultAmount', () => {
+	checkInterpretedOutput('operators/multAmount.poc');
+});
 
-exports.testTranspiledMultAmount = function(test) {
-	checkTranspiledOutput(test, "operators/multAmount.poc");
-};
+test('Transpiled MultAmount', () => {
+	checkTranspiledOutput('operators/multAmount.poc');
+});
 
-exports.testInterpretedSubAmount = function(test) {
-	checkInterpretedOutput(test, "operators/subAmount.poc");
-};
+test('Interpreted SubAmount', () => {
+	checkInterpretedOutput('operators/subAmount.poc');
+});
 
-exports.testTranspiledSubAmount = function(test) {
-	checkTranspiledOutput(test, "operators/subAmount.poc");
-};
+test('Transpiled SubAmount', () => {
+	checkTranspiledOutput('operators/subAmount.poc');
+});
 

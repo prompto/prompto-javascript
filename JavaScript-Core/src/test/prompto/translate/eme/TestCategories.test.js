@@ -1,36 +1,34 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAnyAsParameter = function(test) {
-	compareResourceEME(test, "categories/anyAsParameter.pec");
-};
+test('AnyAsParameter', () => {
+	compareResourceEME('categories/anyAsParameter.pec');
+});
 
-exports.testComposed = function(test) {
-	compareResourceEME(test, "categories/composed.pec");
-};
+test('Composed', () => {
+	compareResourceEME('categories/composed.pec');
+});
 
-exports.testCopyFromAscendant = function(test) {
-	compareResourceEME(test, "categories/copyFromAscendant.pec");
-};
+test('CopyFromAscendant', () => {
+	compareResourceEME('categories/copyFromAscendant.pec');
+});
 
-exports.testCopyFromAscendantWithOverride = function(test) {
-	compareResourceEME(test, "categories/copyFromAscendantWithOverride.pec");
-};
+test('CopyFromAscendantWithOverride', () => {
+	compareResourceEME('categories/copyFromAscendantWithOverride.pec');
+});
 
-exports.testCopyFromDescendant = function(test) {
-	compareResourceEME(test, "categories/copyFromDescendant.pec");
-};
+test('CopyFromDescendant', () => {
+	compareResourceEME('categories/copyFromDescendant.pec');
+});
 
-exports.testCopyFromDescendantWithOverride = function(test) {
-	compareResourceEME(test, "categories/copyFromDescendantWithOverride.pec");
-};
+test('CopyFromDescendantWithOverride', () => {
+	compareResourceEME('categories/copyFromDescendantWithOverride.pec');
+});
 
-exports.testCopyFromDocument = function(test) {
-	compareResourceEME(test, "categories/copyFromDocument.pec");
-};
+test('CopyFromDocument', () => {
+	compareResourceEME('categories/copyFromDocument.pec');
+});
 
-exports.testCopyFromStored = function(test) {
-	compareResourceEME(test, "categories/copyFromStored.pec");
-};
+test('CopyFromStored', () => {
+	compareResourceEME('categories/copyFromStored.pec');
+});
 

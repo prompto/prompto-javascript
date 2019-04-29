@@ -1,137 +1,132 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedLtCharacter = function(test) {
-	checkInterpretedOutput(test, "less/ltCharacter.pec");
-};
+test('Interpreted LtCharacter', () => {
+	checkInterpretedOutput('less/ltCharacter.pec');
+});
 
-exports.testTranspiledLtCharacter = function(test) {
-	checkTranspiledOutput(test, "less/ltCharacter.pec");
-};
+test('Transpiled LtCharacter', () => {
+	checkTranspiledOutput('less/ltCharacter.pec');
+});
 
-exports.testInterpretedLtDate = function(test) {
-	checkInterpretedOutput(test, "less/ltDate.pec");
-};
+test('Interpreted LtDate', () => {
+	checkInterpretedOutput('less/ltDate.pec');
+});
 
-exports.testTranspiledLtDate = function(test) {
-	checkTranspiledOutput(test, "less/ltDate.pec");
-};
+test('Transpiled LtDate', () => {
+	checkTranspiledOutput('less/ltDate.pec');
+});
 
-exports.testInterpretedLtDateTime = function(test) {
-	checkInterpretedOutput(test, "less/ltDateTime.pec");
-};
+test('Interpreted LtDateTime', () => {
+	checkInterpretedOutput('less/ltDateTime.pec');
+});
 
-exports.testTranspiledLtDateTime = function(test) {
-	checkTranspiledOutput(test, "less/ltDateTime.pec");
-};
+test('Transpiled LtDateTime', () => {
+	checkTranspiledOutput('less/ltDateTime.pec');
+});
 
-exports.testInterpretedLtDecimal = function(test) {
-	checkInterpretedOutput(test, "less/ltDecimal.pec");
-};
+test('Interpreted LtDecimal', () => {
+	checkInterpretedOutput('less/ltDecimal.pec');
+});
 
-exports.testTranspiledLtDecimal = function(test) {
-	checkTranspiledOutput(test, "less/ltDecimal.pec");
-};
+test('Transpiled LtDecimal', () => {
+	checkTranspiledOutput('less/ltDecimal.pec');
+});
 
-exports.testInterpretedLtInteger = function(test) {
-	checkInterpretedOutput(test, "less/ltInteger.pec");
-};
+test('Interpreted LtInteger', () => {
+	checkInterpretedOutput('less/ltInteger.pec');
+});
 
-exports.testTranspiledLtInteger = function(test) {
-	checkTranspiledOutput(test, "less/ltInteger.pec");
-};
+test('Transpiled LtInteger', () => {
+	checkTranspiledOutput('less/ltInteger.pec');
+});
 
-exports.testInterpretedLtText = function(test) {
-	checkInterpretedOutput(test, "less/ltText.pec");
-};
+test('Interpreted LtText', () => {
+	checkInterpretedOutput('less/ltText.pec');
+});
 
-exports.testTranspiledLtText = function(test) {
-	checkTranspiledOutput(test, "less/ltText.pec");
-};
+test('Transpiled LtText', () => {
+	checkTranspiledOutput('less/ltText.pec');
+});
 
-exports.testInterpretedLtTime = function(test) {
-	checkInterpretedOutput(test, "less/ltTime.pec");
-};
+test('Interpreted LtTime', () => {
+	checkInterpretedOutput('less/ltTime.pec');
+});
 
-exports.testTranspiledLtTime = function(test) {
-	checkTranspiledOutput(test, "less/ltTime.pec");
-};
+test('Transpiled LtTime', () => {
+	checkTranspiledOutput('less/ltTime.pec');
+});
 
-exports.testInterpretedLtVersion = function(test) {
-	checkInterpretedOutput(test, "less/ltVersion.pec");
-};
+test('Interpreted LtVersion', () => {
+	checkInterpretedOutput('less/ltVersion.pec');
+});
 
-exports.testTranspiledLtVersion = function(test) {
-	checkTranspiledOutput(test, "less/ltVersion.pec");
-};
+test('Transpiled LtVersion', () => {
+	checkTranspiledOutput('less/ltVersion.pec');
+});
 
-exports.testInterpretedLteCharacter = function(test) {
-	checkInterpretedOutput(test, "less/lteCharacter.pec");
-};
+test('Interpreted LteCharacter', () => {
+	checkInterpretedOutput('less/lteCharacter.pec');
+});
 
-exports.testTranspiledLteCharacter = function(test) {
-	checkTranspiledOutput(test, "less/lteCharacter.pec");
-};
+test('Transpiled LteCharacter', () => {
+	checkTranspiledOutput('less/lteCharacter.pec');
+});
 
-exports.testInterpretedLteDate = function(test) {
-	checkInterpretedOutput(test, "less/lteDate.pec");
-};
+test('Interpreted LteDate', () => {
+	checkInterpretedOutput('less/lteDate.pec');
+});
 
-exports.testTranspiledLteDate = function(test) {
-	checkTranspiledOutput(test, "less/lteDate.pec");
-};
+test('Transpiled LteDate', () => {
+	checkTranspiledOutput('less/lteDate.pec');
+});
 
-exports.testInterpretedLteDateTime = function(test) {
-	checkInterpretedOutput(test, "less/lteDateTime.pec");
-};
+test('Interpreted LteDateTime', () => {
+	checkInterpretedOutput('less/lteDateTime.pec');
+});
 
-exports.testTranspiledLteDateTime = function(test) {
-	checkTranspiledOutput(test, "less/lteDateTime.pec");
-};
+test('Transpiled LteDateTime', () => {
+	checkTranspiledOutput('less/lteDateTime.pec');
+});
 
-exports.testInterpretedLteDecimal = function(test) {
-	checkInterpretedOutput(test, "less/lteDecimal.pec");
-};
+test('Interpreted LteDecimal', () => {
+	checkInterpretedOutput('less/lteDecimal.pec');
+});
 
-exports.testTranspiledLteDecimal = function(test) {
-	checkTranspiledOutput(test, "less/lteDecimal.pec");
-};
+test('Transpiled LteDecimal', () => {
+	checkTranspiledOutput('less/lteDecimal.pec');
+});
 
-exports.testInterpretedLteInteger = function(test) {
-	checkInterpretedOutput(test, "less/lteInteger.pec");
-};
+test('Interpreted LteInteger', () => {
+	checkInterpretedOutput('less/lteInteger.pec');
+});
 
-exports.testTranspiledLteInteger = function(test) {
-	checkTranspiledOutput(test, "less/lteInteger.pec");
-};
+test('Transpiled LteInteger', () => {
+	checkTranspiledOutput('less/lteInteger.pec');
+});
 
-exports.testInterpretedLteText = function(test) {
-	checkInterpretedOutput(test, "less/lteText.pec");
-};
+test('Interpreted LteText', () => {
+	checkInterpretedOutput('less/lteText.pec');
+});
 
-exports.testTranspiledLteText = function(test) {
-	checkTranspiledOutput(test, "less/lteText.pec");
-};
+test('Transpiled LteText', () => {
+	checkTranspiledOutput('less/lteText.pec');
+});
 
-exports.testInterpretedLteTime = function(test) {
-	checkInterpretedOutput(test, "less/lteTime.pec");
-};
+test('Interpreted LteTime', () => {
+	checkInterpretedOutput('less/lteTime.pec');
+});
 
-exports.testTranspiledLteTime = function(test) {
-	checkTranspiledOutput(test, "less/lteTime.pec");
-};
+test('Transpiled LteTime', () => {
+	checkTranspiledOutput('less/lteTime.pec');
+});
 

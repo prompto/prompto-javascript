@@ -1,36 +1,34 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testCategoryEnum = function(test) {
-	compareResourceEME(test, "enums/categoryEnum.pec");
-};
+test('CategoryEnum', () => {
+	compareResourceEME('enums/categoryEnum.pec');
+});
 
-exports.testIntegerEnum = function(test) {
-	compareResourceEME(test, "enums/integerEnum.pec");
-};
+test('IntegerEnum', () => {
+	compareResourceEME('enums/integerEnum.pec');
+});
 
-exports.testStoreCategoryEnum = function(test) {
-	compareResourceEME(test, "enums/storeCategoryEnum.pec");
-};
+test('StoreCategoryEnum', () => {
+	compareResourceEME('enums/storeCategoryEnum.pec');
+});
 
-exports.testStoreIntegerEnum = function(test) {
-	compareResourceEME(test, "enums/storeIntegerEnum.pec");
-};
+test('StoreIntegerEnum', () => {
+	compareResourceEME('enums/storeIntegerEnum.pec');
+});
 
-exports.testStoreTextEnum = function(test) {
-	compareResourceEME(test, "enums/storeTextEnum.pec");
-};
+test('StoreTextEnum', () => {
+	compareResourceEME('enums/storeTextEnum.pec');
+});
 
-exports.testTextEnum = function(test) {
-	compareResourceEME(test, "enums/textEnum.pec");
-};
+test('TextEnum', () => {
+	compareResourceEME('enums/textEnum.pec');
+});
 
-exports.testTextEnumArg = function(test) {
-	compareResourceEME(test, "enums/textEnumArg.pec");
-};
+test('TextEnumArg', () => {
+	compareResourceEME('enums/textEnumArg.pec');
+});
 
-exports.testTextEnumVar = function(test) {
-	compareResourceEME(test, "enums/textEnumVar.pec");
-};
+test('TextEnumVar', () => {
+	compareResourceEME('enums/textEnumVar.pec');
+});
 

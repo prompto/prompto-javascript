@@ -1,64 +1,62 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testLtCharacter = function(test) {
-	compareResourceEME(test, "less/ltCharacter.pec");
-};
+test('LtCharacter', () => {
+	compareResourceEME('less/ltCharacter.pec');
+});
 
-exports.testLtDate = function(test) {
-	compareResourceEME(test, "less/ltDate.pec");
-};
+test('LtDate', () => {
+	compareResourceEME('less/ltDate.pec');
+});
 
-exports.testLtDateTime = function(test) {
-	compareResourceEME(test, "less/ltDateTime.pec");
-};
+test('LtDateTime', () => {
+	compareResourceEME('less/ltDateTime.pec');
+});
 
-exports.testLtDecimal = function(test) {
-	compareResourceEME(test, "less/ltDecimal.pec");
-};
+test('LtDecimal', () => {
+	compareResourceEME('less/ltDecimal.pec');
+});
 
-exports.testLtInteger = function(test) {
-	compareResourceEME(test, "less/ltInteger.pec");
-};
+test('LtInteger', () => {
+	compareResourceEME('less/ltInteger.pec');
+});
 
-exports.testLtText = function(test) {
-	compareResourceEME(test, "less/ltText.pec");
-};
+test('LtText', () => {
+	compareResourceEME('less/ltText.pec');
+});
 
-exports.testLtTime = function(test) {
-	compareResourceEME(test, "less/ltTime.pec");
-};
+test('LtTime', () => {
+	compareResourceEME('less/ltTime.pec');
+});
 
-exports.testLtVersion = function(test) {
-	compareResourceEME(test, "less/ltVersion.pec");
-};
+test('LtVersion', () => {
+	compareResourceEME('less/ltVersion.pec');
+});
 
-exports.testLteCharacter = function(test) {
-	compareResourceEME(test, "less/lteCharacter.pec");
-};
+test('LteCharacter', () => {
+	compareResourceEME('less/lteCharacter.pec');
+});
 
-exports.testLteDate = function(test) {
-	compareResourceEME(test, "less/lteDate.pec");
-};
+test('LteDate', () => {
+	compareResourceEME('less/lteDate.pec');
+});
 
-exports.testLteDateTime = function(test) {
-	compareResourceEME(test, "less/lteDateTime.pec");
-};
+test('LteDateTime', () => {
+	compareResourceEME('less/lteDateTime.pec');
+});
 
-exports.testLteDecimal = function(test) {
-	compareResourceEME(test, "less/lteDecimal.pec");
-};
+test('LteDecimal', () => {
+	compareResourceEME('less/lteDecimal.pec');
+});
 
-exports.testLteInteger = function(test) {
-	compareResourceEME(test, "less/lteInteger.pec");
-};
+test('LteInteger', () => {
+	compareResourceEME('less/lteInteger.pec');
+});
 
-exports.testLteText = function(test) {
-	compareResourceEME(test, "less/lteText.pec");
-};
+test('LteText', () => {
+	compareResourceEME('less/lteText.pec');
+});
 
-exports.testLteTime = function(test) {
-	compareResourceEME(test, "less/lteTime.pec");
-};
+test('LteTime', () => {
+	compareResourceEME('less/lteTime.pec');
+});
 

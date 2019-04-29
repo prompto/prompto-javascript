@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testBadRead = function(test) {
-	compareResourceOEO(test, "resourceError/badRead.poc");
-};
+test('BadRead', () => {
+	compareResourceOEO('resourceError/badRead.poc');
+});
 
-exports.testBadResource = function(test) {
-	compareResourceOEO(test, "resourceError/badResource.poc");
-};
+test('BadResource', () => {
+	compareResourceOEO('resourceError/badResource.poc');
+});
 
-exports.testBadWrite = function(test) {
-	compareResourceOEO(test, "resourceError/badWrite.poc");
-};
+test('BadWrite', () => {
+	compareResourceOEO('resourceError/badWrite.poc');
+});
 

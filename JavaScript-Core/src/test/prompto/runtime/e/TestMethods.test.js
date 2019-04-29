@@ -1,193 +1,188 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAnonymous = function(test) {
-	checkInterpretedOutput(test, "methods/anonymous.pec");
-};
+test('Interpreted Anonymous', () => {
+	checkInterpretedOutput('methods/anonymous.pec');
+});
 
-exports.testTranspiledAnonymous = function(test) {
-	checkTranspiledOutput(test, "methods/anonymous.pec");
-};
+test('Transpiled Anonymous', () => {
+	checkTranspiledOutput('methods/anonymous.pec');
+});
 
-exports.testInterpretedAttribute = function(test) {
-	checkInterpretedOutput(test, "methods/attribute.pec");
-};
+test('Interpreted Attribute', () => {
+	checkInterpretedOutput('methods/attribute.pec');
+});
 
-exports.testTranspiledAttribute = function(test) {
-	checkTranspiledOutput(test, "methods/attribute.pec");
-};
+test('Transpiled Attribute', () => {
+	checkTranspiledOutput('methods/attribute.pec');
+});
 
-exports.testInterpretedDefault = function(test) {
-	checkInterpretedOutput(test, "methods/default.pec");
-};
+test('Interpreted Default', () => {
+	checkInterpretedOutput('methods/default.pec');
+});
 
-exports.testTranspiledDefault = function(test) {
-	checkTranspiledOutput(test, "methods/default.pec");
-};
+test('Transpiled Default', () => {
+	checkTranspiledOutput('methods/default.pec');
+});
 
-exports.testInterpretedE_as_e_bug = function(test) {
-	checkInterpretedOutput(test, "methods/e_as_e_bug.pec");
-};
+test('Interpreted E_as_e_bug', () => {
+	checkInterpretedOutput('methods/e_as_e_bug.pec');
+});
 
-exports.testTranspiledE_as_e_bug = function(test) {
-	checkTranspiledOutput(test, "methods/e_as_e_bug.pec");
-};
+test('Transpiled E_as_e_bug', () => {
+	checkTranspiledOutput('methods/e_as_e_bug.pec');
+});
 
-exports.testInterpretedExplicit = function(test) {
-	checkInterpretedOutput(test, "methods/explicit.pec");
-};
+test('Interpreted Explicit', () => {
+	checkInterpretedOutput('methods/explicit.pec');
+});
 
-exports.testTranspiledExplicit = function(test) {
-	checkTranspiledOutput(test, "methods/explicit.pec");
-};
+test('Transpiled Explicit', () => {
+	checkTranspiledOutput('methods/explicit.pec');
+});
 
-exports.testInterpretedExplicitMember = function(test) {
-	checkInterpretedOutput(test, "methods/explicitMember.pec");
-};
+test('Interpreted ExplicitMember', () => {
+	checkInterpretedOutput('methods/explicitMember.pec');
+});
 
-exports.testTranspiledExplicitMember = function(test) {
-	checkTranspiledOutput(test, "methods/explicitMember.pec");
-};
+test('Transpiled ExplicitMember', () => {
+	checkTranspiledOutput('methods/explicitMember.pec');
+});
 
-exports.testInterpretedExpressionMember = function(test) {
-	checkInterpretedOutput(test, "methods/expressionMember.pec");
-};
+test('Interpreted ExpressionMember', () => {
+	checkInterpretedOutput('methods/expressionMember.pec');
+});
 
-exports.testTranspiledExpressionMember = function(test) {
-	checkTranspiledOutput(test, "methods/expressionMember.pec");
-};
+test('Transpiled ExpressionMember', () => {
+	checkTranspiledOutput('methods/expressionMember.pec');
+});
 
-exports.testInterpretedExpressionWith = function(test) {
-	checkInterpretedOutput(test, "methods/expressionWith.pec");
-};
+test('Interpreted ExpressionWith', () => {
+	checkInterpretedOutput('methods/expressionWith.pec');
+});
 
-exports.testTranspiledExpressionWith = function(test) {
-	checkTranspiledOutput(test, "methods/expressionWith.pec");
-};
+test('Transpiled ExpressionWith', () => {
+	checkTranspiledOutput('methods/expressionWith.pec');
+});
 
-exports.testInterpretedExtended = function(test) {
-	checkInterpretedOutput(test, "methods/extended.pec");
-};
+test('Interpreted Extended', () => {
+	checkInterpretedOutput('methods/extended.pec');
+});
 
-exports.testTranspiledExtended = function(test) {
-	checkTranspiledOutput(test, "methods/extended.pec");
-};
+test('Transpiled Extended', () => {
+	checkTranspiledOutput('methods/extended.pec');
+});
 
-exports.testInterpretedHomonym = function(test) {
-	checkInterpretedOutput(test, "methods/homonym.pec");
-};
+test('Interpreted Homonym', () => {
+	checkInterpretedOutput('methods/homonym.pec');
+});
 
-exports.testTranspiledHomonym = function(test) {
-	checkTranspiledOutput(test, "methods/homonym.pec");
-};
+test('Transpiled Homonym', () => {
+	checkTranspiledOutput('methods/homonym.pec');
+});
 
-exports.testInterpretedImplicitAnd = function(test) {
-	checkInterpretedOutput(test, "methods/implicitAnd.pec");
-};
+test('Interpreted ImplicitAnd', () => {
+	checkInterpretedOutput('methods/implicitAnd.pec');
+});
 
-exports.testTranspiledImplicitAnd = function(test) {
-	checkTranspiledOutput(test, "methods/implicitAnd.pec");
-};
+test('Transpiled ImplicitAnd', () => {
+	checkTranspiledOutput('methods/implicitAnd.pec');
+});
 
-exports.testInterpretedImplicitMember = function(test) {
-	checkInterpretedOutput(test, "methods/implicitMember.pec");
-};
+test('Interpreted ImplicitMember', () => {
+	checkInterpretedOutput('methods/implicitMember.pec');
+});
 
-exports.testTranspiledImplicitMember = function(test) {
-	checkTranspiledOutput(test, "methods/implicitMember.pec");
-};
+test('Transpiled ImplicitMember', () => {
+	checkTranspiledOutput('methods/implicitMember.pec');
+});
 
-exports.testInterpretedMember = function(test) {
-	checkInterpretedOutput(test, "methods/member.pec");
-};
+test('Interpreted Member', () => {
+	checkInterpretedOutput('methods/member.pec');
+});
 
-exports.testTranspiledMember = function(test) {
-	checkTranspiledOutput(test, "methods/member.pec");
-};
+test('Transpiled Member', () => {
+	checkTranspiledOutput('methods/member.pec');
+});
 
-exports.testInterpretedMemberCall = function(test) {
-	checkInterpretedOutput(test, "methods/memberCall.pec");
-};
+test('Interpreted MemberCall', () => {
+	checkInterpretedOutput('methods/memberCall.pec');
+});
 
-exports.testTranspiledMemberCall = function(test) {
-	checkTranspiledOutput(test, "methods/memberCall.pec");
-};
+test('Transpiled MemberCall', () => {
+	checkTranspiledOutput('methods/memberCall.pec');
+});
 
-exports.testInterpretedOverride = function(test) {
-	checkInterpretedOutput(test, "methods/override.pec");
-};
+test('Interpreted Override', () => {
+	checkInterpretedOutput('methods/override.pec');
+});
 
-exports.testTranspiledOverride = function(test) {
-	checkTranspiledOutput(test, "methods/override.pec");
-};
+test('Transpiled Override', () => {
+	checkTranspiledOutput('methods/override.pec');
+});
 
-exports.testInterpretedPolymorphic_abstract = function(test) {
-	checkInterpretedOutput(test, "methods/polymorphic_abstract.pec");
-};
+test('Interpreted Polymorphic_abstract', () => {
+	checkInterpretedOutput('methods/polymorphic_abstract.pec');
+});
 
-exports.testTranspiledPolymorphic_abstract = function(test) {
-	checkTranspiledOutput(test, "methods/polymorphic_abstract.pec");
-};
+test('Transpiled Polymorphic_abstract', () => {
+	checkTranspiledOutput('methods/polymorphic_abstract.pec');
+});
 
-exports.testInterpretedPolymorphic_implicit = function(test) {
-	checkInterpretedOutput(test, "methods/polymorphic_implicit.pec");
-};
+test('Interpreted Polymorphic_implicit', () => {
+	checkInterpretedOutput('methods/polymorphic_implicit.pec');
+});
 
-exports.testTranspiledPolymorphic_implicit = function(test) {
-	checkTranspiledOutput(test, "methods/polymorphic_implicit.pec");
-};
+test('Transpiled Polymorphic_implicit', () => {
+	checkTranspiledOutput('methods/polymorphic_implicit.pec');
+});
 
-exports.testInterpretedPolymorphic_named = function(test) {
-	checkInterpretedOutput(test, "methods/polymorphic_named.pec");
-};
+test('Interpreted Polymorphic_named', () => {
+	checkInterpretedOutput('methods/polymorphic_named.pec');
+});
 
-exports.testTranspiledPolymorphic_named = function(test) {
-	checkTranspiledOutput(test, "methods/polymorphic_named.pec");
-};
+test('Transpiled Polymorphic_named', () => {
+	checkTranspiledOutput('methods/polymorphic_named.pec');
+});
 
-exports.testInterpretedPolymorphic_runtime = function(test) {
-	checkInterpretedOutput(test, "methods/polymorphic_runtime.pec");
-};
+test('Interpreted Polymorphic_runtime', () => {
+	checkInterpretedOutput('methods/polymorphic_runtime.pec');
+});
 
-exports.testTranspiledPolymorphic_runtime = function(test) {
-	checkTranspiledOutput(test, "methods/polymorphic_runtime.pec");
-};
+test('Transpiled Polymorphic_runtime', () => {
+	checkTranspiledOutput('methods/polymorphic_runtime.pec');
+});
 
-exports.testInterpretedSpecified = function(test) {
-	checkInterpretedOutput(test, "methods/specified.pec");
-};
+test('Interpreted Specified', () => {
+	checkInterpretedOutput('methods/specified.pec');
+});
 
-exports.testTranspiledSpecified = function(test) {
-	checkTranspiledOutput(test, "methods/specified.pec");
-};
+test('Transpiled Specified', () => {
+	checkTranspiledOutput('methods/specified.pec');
+});
 
-exports.testInterpretedTextAsync = function(test) {
-	checkInterpretedOutput(test, "methods/textAsync.pec");
-};
+test('Interpreted TextAsync', () => {
+	checkInterpretedOutput('methods/textAsync.pec');
+});
 
-exports.testTranspiledTextAsync = function(test) {
-	checkTranspiledOutput(test, "methods/textAsync.pec");
-};
+test('Transpiled TextAsync', () => {
+	checkTranspiledOutput('methods/textAsync.pec');
+});
 
-exports.testInterpretedVoidAsync = function(test) {
-	checkInterpretedOutput(test, "methods/voidAsync.pec");
-};
+test('Interpreted VoidAsync', () => {
+	checkInterpretedOutput('methods/voidAsync.pec');
+});
 
-exports.testTranspiledVoidAsync = function(test) {
-	checkTranspiledOutput(test, "methods/voidAsync.pec");
-};
+test('Transpiled VoidAsync', () => {
+	checkTranspiledOutput('methods/voidAsync.pec');
+});
 

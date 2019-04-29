@@ -1,76 +1,74 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testCategory = function(test) {
-	compareResourceOEO(test, "native/category.poc");
-};
+test('Category', () => {
+	compareResourceOEO('native/category.poc');
+});
 
-exports.testCategoryReturn = function(test) {
-	compareResourceOEO(test, "native/categoryReturn.poc");
-};
+test('CategoryReturn', () => {
+	compareResourceOEO('native/categoryReturn.poc');
+});
 
-exports.testMethod = function(test) {
-	compareResourceOEO(test, "native/method.poc");
-};
+test('Method', () => {
+	compareResourceOEO('native/method.poc');
+});
 
-exports.testReturn = function(test) {
-	compareResourceOEO(test, "native/return.poc");
-};
+test('Return', () => {
+	compareResourceOEO('native/return.poc');
+});
 
-exports.testReturnBooleanLiteral = function(test) {
-	compareResourceOEO(test, "native/returnBooleanLiteral.poc");
-};
+test('ReturnBooleanLiteral', () => {
+	compareResourceOEO('native/returnBooleanLiteral.poc');
+});
 
-exports.testReturnBooleanObject = function(test) {
-	compareResourceOEO(test, "native/returnBooleanObject.poc");
-};
+test('ReturnBooleanObject', () => {
+	compareResourceOEO('native/returnBooleanObject.poc');
+});
 
-exports.testReturnBooleanValue = function(test) {
-	compareResourceOEO(test, "native/returnBooleanValue.poc");
-};
+test('ReturnBooleanValue', () => {
+	compareResourceOEO('native/returnBooleanValue.poc');
+});
 
-exports.testReturnCharacterLiteral = function(test) {
-	compareResourceOEO(test, "native/returnCharacterLiteral.poc");
-};
+test('ReturnCharacterLiteral', () => {
+	compareResourceOEO('native/returnCharacterLiteral.poc');
+});
 
-exports.testReturnCharacterObject = function(test) {
-	compareResourceOEO(test, "native/returnCharacterObject.poc");
-};
+test('ReturnCharacterObject', () => {
+	compareResourceOEO('native/returnCharacterObject.poc');
+});
 
-exports.testReturnCharacterValue = function(test) {
-	compareResourceOEO(test, "native/returnCharacterValue.poc");
-};
+test('ReturnCharacterValue', () => {
+	compareResourceOEO('native/returnCharacterValue.poc');
+});
 
-exports.testReturnDecimalLiteral = function(test) {
-	compareResourceOEO(test, "native/returnDecimalLiteral.poc");
-};
+test('ReturnDecimalLiteral', () => {
+	compareResourceOEO('native/returnDecimalLiteral.poc');
+});
 
-exports.testReturnIntegerLiteral = function(test) {
-	compareResourceOEO(test, "native/returnIntegerLiteral.poc");
-};
+test('ReturnIntegerLiteral', () => {
+	compareResourceOEO('native/returnIntegerLiteral.poc');
+});
 
-exports.testReturnIntegerObject = function(test) {
-	compareResourceOEO(test, "native/returnIntegerObject.poc");
-};
+test('ReturnIntegerObject', () => {
+	compareResourceOEO('native/returnIntegerObject.poc');
+});
 
-exports.testReturnIntegerValue = function(test) {
-	compareResourceOEO(test, "native/returnIntegerValue.poc");
-};
+test('ReturnIntegerValue', () => {
+	compareResourceOEO('native/returnIntegerValue.poc');
+});
 
-exports.testReturnLongLiteral = function(test) {
-	compareResourceOEO(test, "native/returnLongLiteral.poc");
-};
+test('ReturnLongLiteral', () => {
+	compareResourceOEO('native/returnLongLiteral.poc');
+});
 
-exports.testReturnLongObject = function(test) {
-	compareResourceOEO(test, "native/returnLongObject.poc");
-};
+test('ReturnLongObject', () => {
+	compareResourceOEO('native/returnLongObject.poc');
+});
 
-exports.testReturnLongValue = function(test) {
-	compareResourceOEO(test, "native/returnLongValue.poc");
-};
+test('ReturnLongValue', () => {
+	compareResourceOEO('native/returnLongValue.poc');
+});
 
-exports.testReturnStringLiteral = function(test) {
-	compareResourceOEO(test, "native/returnStringLiteral.poc");
-};
+test('ReturnStringLiteral', () => {
+	compareResourceOEO('native/returnStringLiteral.poc');
+});
 

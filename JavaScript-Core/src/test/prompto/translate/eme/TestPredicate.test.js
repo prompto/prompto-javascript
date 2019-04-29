@@ -1,40 +1,38 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testContainsItem = function(test) {
-	compareResourceEME(test, "predicate/containsItem.pec");
-};
+test('ContainsItem', () => {
+	compareResourceEME('predicate/containsItem.pec');
+});
 
-exports.testEquals = function(test) {
-	compareResourceEME(test, "predicate/equals.pec");
-};
+test('Equals', () => {
+	compareResourceEME('predicate/equals.pec');
+});
 
-exports.testGreater = function(test) {
-	compareResourceEME(test, "predicate/greater.pec");
-};
+test('Greater', () => {
+	compareResourceEME('predicate/greater.pec');
+});
 
-exports.testHasItem = function(test) {
-	compareResourceEME(test, "predicate/hasItem.pec");
-};
+test('HasItem', () => {
+	compareResourceEME('predicate/hasItem.pec');
+});
 
-exports.testInList = function(test) {
-	compareResourceEME(test, "predicate/inList.pec");
-};
+test('InList', () => {
+	compareResourceEME('predicate/inList.pec');
+});
 
-exports.testLesser = function(test) {
-	compareResourceEME(test, "predicate/lesser.pec");
-};
+test('Lesser', () => {
+	compareResourceEME('predicate/lesser.pec');
+});
 
-exports.testNotEquals = function(test) {
-	compareResourceEME(test, "predicate/notEquals.pec");
-};
+test('NotEquals', () => {
+	compareResourceEME('predicate/notEquals.pec');
+});
 
-exports.testPartial = function(test) {
-	compareResourceEME(test, "predicate/partial.pec");
-};
+test('Partial', () => {
+	compareResourceEME('predicate/partial.pec');
+});
 
-exports.testRoughly = function(test) {
-	compareResourceEME(test, "predicate/roughly.pec");
-};
+test('Roughly', () => {
+	compareResourceEME('predicate/roughly.pec');
+});
 

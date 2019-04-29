@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testCodeValue = function(test) {
-	compareResourceOEO(test, "css/codeValue.poc");
-};
+test('CodeValue', () => {
+	compareResourceOEO('css/codeValue.poc');
+});
 
-exports.testHyphenName = function(test) {
-	compareResourceOEO(test, "css/hyphenName.poc");
-};
+test('HyphenName', () => {
+	compareResourceOEO('css/hyphenName.poc');
+});
 
-exports.testMultiValue = function(test) {
-	compareResourceOEO(test, "css/multiValue.poc");
-};
+test('MultiValue', () => {
+	compareResourceOEO('css/multiValue.poc');
+});
 
-exports.testNumberValue = function(test) {
-	compareResourceOEO(test, "css/numberValue.poc");
-};
+test('NumberValue', () => {
+	compareResourceOEO('css/numberValue.poc');
+});
 
-exports.testPixelValue = function(test) {
-	compareResourceOEO(test, "css/pixelValue.poc");
-};
+test('PixelValue', () => {
+	compareResourceOEO('css/pixelValue.poc');
+});
 
-exports.testTextValue = function(test) {
-	compareResourceOEO(test, "css/textValue.poc");
-};
+test('TextValue', () => {
+	compareResourceOEO('css/textValue.poc');
+});
 

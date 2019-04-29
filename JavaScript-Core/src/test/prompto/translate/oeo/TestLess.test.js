@@ -1,64 +1,62 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testLtCharacter = function(test) {
-	compareResourceOEO(test, "less/ltCharacter.poc");
-};
+test('LtCharacter', () => {
+	compareResourceOEO('less/ltCharacter.poc');
+});
 
-exports.testLtDate = function(test) {
-	compareResourceOEO(test, "less/ltDate.poc");
-};
+test('LtDate', () => {
+	compareResourceOEO('less/ltDate.poc');
+});
 
-exports.testLtDateTime = function(test) {
-	compareResourceOEO(test, "less/ltDateTime.poc");
-};
+test('LtDateTime', () => {
+	compareResourceOEO('less/ltDateTime.poc');
+});
 
-exports.testLtDecimal = function(test) {
-	compareResourceOEO(test, "less/ltDecimal.poc");
-};
+test('LtDecimal', () => {
+	compareResourceOEO('less/ltDecimal.poc');
+});
 
-exports.testLtInteger = function(test) {
-	compareResourceOEO(test, "less/ltInteger.poc");
-};
+test('LtInteger', () => {
+	compareResourceOEO('less/ltInteger.poc');
+});
 
-exports.testLtText = function(test) {
-	compareResourceOEO(test, "less/ltText.poc");
-};
+test('LtText', () => {
+	compareResourceOEO('less/ltText.poc');
+});
 
-exports.testLtTime = function(test) {
-	compareResourceOEO(test, "less/ltTime.poc");
-};
+test('LtTime', () => {
+	compareResourceOEO('less/ltTime.poc');
+});
 
-exports.testLtVersion = function(test) {
-	compareResourceOEO(test, "less/ltVersion.poc");
-};
+test('LtVersion', () => {
+	compareResourceOEO('less/ltVersion.poc');
+});
 
-exports.testLteCharacter = function(test) {
-	compareResourceOEO(test, "less/lteCharacter.poc");
-};
+test('LteCharacter', () => {
+	compareResourceOEO('less/lteCharacter.poc');
+});
 
-exports.testLteDate = function(test) {
-	compareResourceOEO(test, "less/lteDate.poc");
-};
+test('LteDate', () => {
+	compareResourceOEO('less/lteDate.poc');
+});
 
-exports.testLteDateTime = function(test) {
-	compareResourceOEO(test, "less/lteDateTime.poc");
-};
+test('LteDateTime', () => {
+	compareResourceOEO('less/lteDateTime.poc');
+});
 
-exports.testLteDecimal = function(test) {
-	compareResourceOEO(test, "less/lteDecimal.poc");
-};
+test('LteDecimal', () => {
+	compareResourceOEO('less/lteDecimal.poc');
+});
 
-exports.testLteInteger = function(test) {
-	compareResourceOEO(test, "less/lteInteger.poc");
-};
+test('LteInteger', () => {
+	compareResourceOEO('less/lteInteger.poc');
+});
 
-exports.testLteText = function(test) {
-	compareResourceOEO(test, "less/lteText.poc");
-};
+test('LteText', () => {
+	compareResourceOEO('less/lteText.poc');
+});
 
-exports.testLteTime = function(test) {
-	compareResourceOEO(test, "less/lteTime.poc");
-};
+test('LteTime', () => {
+	compareResourceOEO('less/lteTime.poc');
+});
 

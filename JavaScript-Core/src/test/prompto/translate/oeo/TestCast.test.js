@@ -1,32 +1,30 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testAutoDowncast = function(test) {
-	compareResourceOEO(test, "cast/autoDowncast.poc");
-};
+test('AutoDowncast', () => {
+	compareResourceOEO('cast/autoDowncast.poc');
+});
 
-exports.testCastChild = function(test) {
-	compareResourceOEO(test, "cast/castChild.poc");
-};
+test('CastChild', () => {
+	compareResourceOEO('cast/castChild.poc');
+});
 
-exports.testCastMethod = function(test) {
-	compareResourceOEO(test, "cast/castMethod.poc");
-};
+test('CastMethod', () => {
+	compareResourceOEO('cast/castMethod.poc');
+});
 
-exports.testCastMissing = function(test) {
-	compareResourceOEO(test, "cast/castMissing.poc");
-};
+test('CastMissing', () => {
+	compareResourceOEO('cast/castMissing.poc');
+});
 
-exports.testCastNull = function(test) {
-	compareResourceOEO(test, "cast/castNull.poc");
-};
+test('CastNull', () => {
+	compareResourceOEO('cast/castNull.poc');
+});
 
-exports.testIsAChild = function(test) {
-	compareResourceOEO(test, "cast/isAChild.poc");
-};
+test('IsAChild', () => {
+	compareResourceOEO('cast/isAChild.poc');
+});
 
-exports.testIsAText = function(test) {
-	compareResourceOEO(test, "cast/isAText.poc");
-};
+test('IsAText', () => {
+	compareResourceOEO('cast/isAText.poc');
+});
 

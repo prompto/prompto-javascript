@@ -1,73 +1,68 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedAutoDowncast = function(test) {
-	checkInterpretedOutput(test, "cast/autoDowncast.poc");
-};
+test('Interpreted AutoDowncast', () => {
+	checkInterpretedOutput('cast/autoDowncast.poc');
+});
 
-exports.testTranspiledAutoDowncast = function(test) {
-	checkTranspiledOutput(test, "cast/autoDowncast.poc");
-};
+test('Transpiled AutoDowncast', () => {
+	checkTranspiledOutput('cast/autoDowncast.poc');
+});
 
-exports.testInterpretedCastChild = function(test) {
-	checkInterpretedOutput(test, "cast/castChild.poc");
-};
+test('Interpreted CastChild', () => {
+	checkInterpretedOutput('cast/castChild.poc');
+});
 
-exports.testTranspiledCastChild = function(test) {
-	checkTranspiledOutput(test, "cast/castChild.poc");
-};
+test('Transpiled CastChild', () => {
+	checkTranspiledOutput('cast/castChild.poc');
+});
 
-exports.testInterpretedCastMethod = function(test) {
-	checkInterpretedOutput(test, "cast/castMethod.poc");
-};
+test('Interpreted CastMethod', () => {
+	checkInterpretedOutput('cast/castMethod.poc');
+});
 
-exports.testTranspiledCastMethod = function(test) {
-	checkTranspiledOutput(test, "cast/castMethod.poc");
-};
+test('Transpiled CastMethod', () => {
+	checkTranspiledOutput('cast/castMethod.poc');
+});
 
-exports.testInterpretedCastMissing = function(test) {
-	checkInterpretedOutput(test, "cast/castMissing.poc");
-};
+test('Interpreted CastMissing', () => {
+	checkInterpretedOutput('cast/castMissing.poc');
+});
 
-exports.testTranspiledCastMissing = function(test) {
-	checkTranspiledOutput(test, "cast/castMissing.poc");
-};
+test('Transpiled CastMissing', () => {
+	checkTranspiledOutput('cast/castMissing.poc');
+});
 
-exports.testInterpretedCastNull = function(test) {
-	checkInterpretedOutput(test, "cast/castNull.poc");
-};
+test('Interpreted CastNull', () => {
+	checkInterpretedOutput('cast/castNull.poc');
+});
 
-exports.testTranspiledCastNull = function(test) {
-	checkTranspiledOutput(test, "cast/castNull.poc");
-};
+test('Transpiled CastNull', () => {
+	checkTranspiledOutput('cast/castNull.poc');
+});
 
-exports.testInterpretedIsAChild = function(test) {
-	checkInterpretedOutput(test, "cast/isAChild.poc");
-};
+test('Interpreted IsAChild', () => {
+	checkInterpretedOutput('cast/isAChild.poc');
+});
 
-exports.testTranspiledIsAChild = function(test) {
-	checkTranspiledOutput(test, "cast/isAChild.poc");
-};
+test('Transpiled IsAChild', () => {
+	checkTranspiledOutput('cast/isAChild.poc');
+});
 
-exports.testInterpretedIsAText = function(test) {
-	checkInterpretedOutput(test, "cast/isAText.poc");
-};
+test('Interpreted IsAText', () => {
+	checkInterpretedOutput('cast/isAText.poc');
+});
 
-exports.testTranspiledIsAText = function(test) {
-	checkTranspiledOutput(test, "cast/isAText.poc");
-};
+test('Transpiled IsAText', () => {
+	checkTranspiledOutput('cast/isAText.poc');
+});
 

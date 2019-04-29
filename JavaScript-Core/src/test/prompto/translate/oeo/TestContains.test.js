@@ -1,104 +1,102 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testContainsAllList = function(test) {
-	compareResourceOEO(test, "contains/containsAllList.poc");
-};
+test('ContainsAllList', () => {
+	compareResourceOEO('contains/containsAllList.poc');
+});
 
-exports.testContainsAllSet = function(test) {
-	compareResourceOEO(test, "contains/containsAllSet.poc");
-};
+test('ContainsAllSet', () => {
+	compareResourceOEO('contains/containsAllSet.poc');
+});
 
-exports.testContainsAllText = function(test) {
-	compareResourceOEO(test, "contains/containsAllText.poc");
-};
+test('ContainsAllText', () => {
+	compareResourceOEO('contains/containsAllText.poc');
+});
 
-exports.testContainsAllTuple = function(test) {
-	compareResourceOEO(test, "contains/containsAllTuple.poc");
-};
+test('ContainsAllTuple', () => {
+	compareResourceOEO('contains/containsAllTuple.poc');
+});
 
-exports.testContainsAnyList = function(test) {
-	compareResourceOEO(test, "contains/containsAnyList.poc");
-};
+test('ContainsAnyList', () => {
+	compareResourceOEO('contains/containsAnyList.poc');
+});
 
-exports.testContainsAnySet = function(test) {
-	compareResourceOEO(test, "contains/containsAnySet.poc");
-};
+test('ContainsAnySet', () => {
+	compareResourceOEO('contains/containsAnySet.poc');
+});
 
-exports.testContainsAnyText = function(test) {
-	compareResourceOEO(test, "contains/containsAnyText.poc");
-};
+test('ContainsAnyText', () => {
+	compareResourceOEO('contains/containsAnyText.poc');
+});
 
-exports.testContainsAnyTuple = function(test) {
-	compareResourceOEO(test, "contains/containsAnyTuple.poc");
-};
+test('ContainsAnyTuple', () => {
+	compareResourceOEO('contains/containsAnyTuple.poc');
+});
 
-exports.testInCharacterRange = function(test) {
-	compareResourceOEO(test, "contains/inCharacterRange.poc");
-};
+test('InCharacterRange', () => {
+	compareResourceOEO('contains/inCharacterRange.poc');
+});
 
-exports.testInDateRange = function(test) {
-	compareResourceOEO(test, "contains/inDateRange.poc");
-};
+test('InDateRange', () => {
+	compareResourceOEO('contains/inDateRange.poc');
+});
 
-exports.testInDict = function(test) {
-	compareResourceOEO(test, "contains/inDict.poc");
-};
+test('InDict', () => {
+	compareResourceOEO('contains/inDict.poc');
+});
 
-exports.testInIntegerRange = function(test) {
-	compareResourceOEO(test, "contains/inIntegerRange.poc");
-};
+test('InIntegerRange', () => {
+	compareResourceOEO('contains/inIntegerRange.poc');
+});
 
-exports.testInList = function(test) {
-	compareResourceOEO(test, "contains/inList.poc");
-};
+test('InList', () => {
+	compareResourceOEO('contains/inList.poc');
+});
 
-exports.testInSet = function(test) {
-	compareResourceOEO(test, "contains/inSet.poc");
-};
+test('InSet', () => {
+	compareResourceOEO('contains/inSet.poc');
+});
 
-exports.testInText = function(test) {
-	compareResourceOEO(test, "contains/inText.poc");
-};
+test('InText', () => {
+	compareResourceOEO('contains/inText.poc');
+});
 
-exports.testInTimeRange = function(test) {
-	compareResourceOEO(test, "contains/inTimeRange.poc");
-};
+test('InTimeRange', () => {
+	compareResourceOEO('contains/inTimeRange.poc');
+});
 
-exports.testInTuple = function(test) {
-	compareResourceOEO(test, "contains/inTuple.poc");
-};
+test('InTuple', () => {
+	compareResourceOEO('contains/inTuple.poc');
+});
 
-exports.testNinCharacterRange = function(test) {
-	compareResourceOEO(test, "contains/ninCharacterRange.poc");
-};
+test('NinCharacterRange', () => {
+	compareResourceOEO('contains/ninCharacterRange.poc');
+});
 
-exports.testNinDateRange = function(test) {
-	compareResourceOEO(test, "contains/ninDateRange.poc");
-};
+test('NinDateRange', () => {
+	compareResourceOEO('contains/ninDateRange.poc');
+});
 
-exports.testNinDict = function(test) {
-	compareResourceOEO(test, "contains/ninDict.poc");
-};
+test('NinDict', () => {
+	compareResourceOEO('contains/ninDict.poc');
+});
 
-exports.testNinIntegerRange = function(test) {
-	compareResourceOEO(test, "contains/ninIntegerRange.poc");
-};
+test('NinIntegerRange', () => {
+	compareResourceOEO('contains/ninIntegerRange.poc');
+});
 
-exports.testNinList = function(test) {
-	compareResourceOEO(test, "contains/ninList.poc");
-};
+test('NinList', () => {
+	compareResourceOEO('contains/ninList.poc');
+});
 
-exports.testNinSet = function(test) {
-	compareResourceOEO(test, "contains/ninSet.poc");
-};
+test('NinSet', () => {
+	compareResourceOEO('contains/ninSet.poc');
+});
 
-exports.testNinText = function(test) {
-	compareResourceOEO(test, "contains/ninText.poc");
-};
+test('NinText', () => {
+	compareResourceOEO('contains/ninText.poc');
+});
 
-exports.testNinTimeRange = function(test) {
-	compareResourceOEO(test, "contains/ninTimeRange.poc");
-};
+test('NinTimeRange', () => {
+	compareResourceOEO('contains/ninTimeRange.poc');
+});
 

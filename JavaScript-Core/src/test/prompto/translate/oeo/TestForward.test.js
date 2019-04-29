@@ -1,8 +1,6 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testForward = function(test) {
-	compareResourceOEO(test, "forward/forward.poc");
-};
+test('Forward', () => {
+	compareResourceOEO('forward/forward.poc');
+});
 

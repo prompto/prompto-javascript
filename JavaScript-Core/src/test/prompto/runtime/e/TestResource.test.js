@@ -1,49 +1,44 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedReadResource = function(test) {
-	checkInterpretedOutput(test, "resource/readResource.pec");
-};
+test('Interpreted ReadResource', () => {
+	checkInterpretedOutput('resource/readResource.pec');
+});
 
-exports.testTranspiledReadResource = function(test) {
-	checkTranspiledOutput(test, "resource/readResource.pec");
-};
+test('Transpiled ReadResource', () => {
+	checkTranspiledOutput('resource/readResource.pec');
+});
 
-exports.testInterpretedReadWithResource = function(test) {
-	checkInterpretedOutput(test, "resource/readWithResource.pec");
-};
+test('Interpreted ReadWithResource', () => {
+	checkInterpretedOutput('resource/readWithResource.pec');
+});
 
-exports.testTranspiledReadWithResource = function(test) {
-	checkTranspiledOutput(test, "resource/readWithResource.pec");
-};
+test('Transpiled ReadWithResource', () => {
+	checkTranspiledOutput('resource/readWithResource.pec');
+});
 
-exports.testInterpretedWriteResource = function(test) {
-	checkInterpretedOutput(test, "resource/writeResource.pec");
-};
+test('Interpreted WriteResource', () => {
+	checkInterpretedOutput('resource/writeResource.pec');
+});
 
-exports.testTranspiledWriteResource = function(test) {
-	checkTranspiledOutput(test, "resource/writeResource.pec");
-};
+test('Transpiled WriteResource', () => {
+	checkTranspiledOutput('resource/writeResource.pec');
+});
 
-exports.testInterpretedWriteWithResource = function(test) {
-	checkInterpretedOutput(test, "resource/writeWithResource.pec");
-};
+test('Interpreted WriteWithResource', () => {
+	checkInterpretedOutput('resource/writeWithResource.pec');
+});
 
-exports.testTranspiledWriteWithResource = function(test) {
-	checkTranspiledOutput(test, "resource/writeWithResource.pec");
-};
+test('Transpiled WriteWithResource', () => {
+	checkTranspiledOutput('resource/writeWithResource.pec');
+});
 

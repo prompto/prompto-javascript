@@ -1,57 +1,52 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedDeepItem = function(test) {
-	checkInterpretedOutput(test, "documents/deepItem.poc");
-};
+test('Interpreted DeepItem', () => {
+	checkInterpretedOutput('documents/deepItem.poc');
+});
 
-exports.testTranspiledDeepItem = function(test) {
-	checkTranspiledOutput(test, "documents/deepItem.poc");
-};
+test('Transpiled DeepItem', () => {
+	checkTranspiledOutput('documents/deepItem.poc');
+});
 
-exports.testInterpretedDeepMember = function(test) {
-	checkInterpretedOutput(test, "documents/deepMember.poc");
-};
+test('Interpreted DeepMember', () => {
+	checkInterpretedOutput('documents/deepMember.poc');
+});
 
-exports.testTranspiledDeepMember = function(test) {
-	checkTranspiledOutput(test, "documents/deepMember.poc");
-};
+test('Transpiled DeepMember', () => {
+	checkTranspiledOutput('documents/deepMember.poc');
+});
 
-exports.testInterpretedItem = function(test) {
-	checkInterpretedOutput(test, "documents/item.poc");
-};
+test('Interpreted Item', () => {
+	checkInterpretedOutput('documents/item.poc');
+});
 
-exports.testTranspiledItem = function(test) {
-	checkTranspiledOutput(test, "documents/item.poc");
-};
+test('Transpiled Item', () => {
+	checkTranspiledOutput('documents/item.poc');
+});
 
-exports.testInterpretedLiteral = function(test) {
-	checkInterpretedOutput(test, "documents/literal.poc");
-};
+test('Interpreted Literal', () => {
+	checkInterpretedOutput('documents/literal.poc');
+});
 
-exports.testTranspiledLiteral = function(test) {
-	checkTranspiledOutput(test, "documents/literal.poc");
-};
+test('Transpiled Literal', () => {
+	checkTranspiledOutput('documents/literal.poc');
+});
 
-exports.testInterpretedMember = function(test) {
-	checkInterpretedOutput(test, "documents/member.poc");
-};
+test('Interpreted Member', () => {
+	checkInterpretedOutput('documents/member.poc');
+});
 
-exports.testTranspiledMember = function(test) {
-	checkTranspiledOutput(test, "documents/member.poc");
-};
+test('Transpiled Member', () => {
+	checkTranspiledOutput('documents/member.poc');
+});
 

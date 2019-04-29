@@ -1,56 +1,54 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testAsyncFetchMany = function(test) {
-	compareResourceEOE(test, "store/asyncFetchMany.pec");
-};
+test('AsyncFetchMany', () => {
+	compareResourceEOE('store/asyncFetchMany.pec');
+});
 
-exports.testAsyncFetchOne = function(test) {
-	compareResourceEOE(test, "store/asyncFetchOne.pec");
-};
+test('AsyncFetchOne', () => {
+	compareResourceEOE('store/asyncFetchOne.pec');
+});
 
-exports.testAsyncStore = function(test) {
-	compareResourceEOE(test, "store/asyncStore.pec");
-};
+test('AsyncStore', () => {
+	compareResourceEOE('store/asyncStore.pec');
+});
 
-exports.testDeleteRecords = function(test) {
-	compareResourceEOE(test, "store/deleteRecords.pec");
-};
+test('DeleteRecords', () => {
+	compareResourceEOE('store/deleteRecords.pec');
+});
 
-exports.testFlush = function(test) {
-	compareResourceEOE(test, "store/flush.pec");
-};
+test('Flush', () => {
+	compareResourceEOE('store/flush.pec');
+});
 
-exports.testListRecords = function(test) {
-	compareResourceEOE(test, "store/listRecords.pec");
-};
+test('ListRecords', () => {
+	compareResourceEOE('store/listRecords.pec');
+});
 
-exports.testManyRecords = function(test) {
-	compareResourceEOE(test, "store/manyRecords.pec");
-};
+test('ManyRecords', () => {
+	compareResourceEOE('store/manyRecords.pec');
+});
 
-exports.testManyUntypedRecords = function(test) {
-	compareResourceEOE(test, "store/manyUntypedRecords.pec");
-};
+test('ManyUntypedRecords', () => {
+	compareResourceEOE('store/manyUntypedRecords.pec');
+});
 
-exports.testSimpleRecord = function(test) {
-	compareResourceEOE(test, "store/simpleRecord.pec");
-};
+test('SimpleRecord', () => {
+	compareResourceEOE('store/simpleRecord.pec');
+});
 
-exports.testSlicedRecords = function(test) {
-	compareResourceEOE(test, "store/slicedRecords.pec");
-};
+test('SlicedRecords', () => {
+	compareResourceEOE('store/slicedRecords.pec');
+});
 
-exports.testSortedRecords = function(test) {
-	compareResourceEOE(test, "store/sortedRecords.pec");
-};
+test('SortedRecords', () => {
+	compareResourceEOE('store/sortedRecords.pec');
+});
 
-exports.testSubRecord = function(test) {
-	compareResourceEOE(test, "store/subRecord.pec");
-};
+test('SubRecord', () => {
+	compareResourceEOE('store/subRecord.pec');
+});
 
-exports.testUntypedRecord = function(test) {
-	compareResourceEOE(test, "store/untypedRecord.pec");
-};
+test('UntypedRecord', () => {
+	compareResourceEOE('store/untypedRecord.pec');
+});
 

@@ -1,97 +1,92 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseEParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseEParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedSubDate = function(test) {
-	checkInterpretedOutput(test, "subtract/subDate.pec");
-};
+test('Interpreted SubDate', () => {
+	checkInterpretedOutput('subtract/subDate.pec');
+});
 
-exports.testTranspiledSubDate = function(test) {
-	checkTranspiledOutput(test, "subtract/subDate.pec");
-};
+test('Transpiled SubDate', () => {
+	checkTranspiledOutput('subtract/subDate.pec');
+});
 
-exports.testInterpretedSubDateTime = function(test) {
-	checkInterpretedOutput(test, "subtract/subDateTime.pec");
-};
+test('Interpreted SubDateTime', () => {
+	checkInterpretedOutput('subtract/subDateTime.pec');
+});
 
-exports.testTranspiledSubDateTime = function(test) {
-	checkTranspiledOutput(test, "subtract/subDateTime.pec");
-};
+test('Transpiled SubDateTime', () => {
+	checkTranspiledOutput('subtract/subDateTime.pec');
+});
 
-exports.testInterpretedSubDecimal = function(test) {
-	checkInterpretedOutput(test, "subtract/subDecimal.pec");
-};
+test('Interpreted SubDecimal', () => {
+	checkInterpretedOutput('subtract/subDecimal.pec');
+});
 
-exports.testTranspiledSubDecimal = function(test) {
-	checkTranspiledOutput(test, "subtract/subDecimal.pec");
-};
+test('Transpiled SubDecimal', () => {
+	checkTranspiledOutput('subtract/subDecimal.pec');
+});
 
-exports.testInterpretedSubDecimalEnum = function(test) {
-	checkInterpretedOutput(test, "subtract/subDecimalEnum.pec");
-};
+test('Interpreted SubDecimalEnum', () => {
+	checkInterpretedOutput('subtract/subDecimalEnum.pec');
+});
 
-exports.testTranspiledSubDecimalEnum = function(test) {
-	checkTranspiledOutput(test, "subtract/subDecimalEnum.pec");
-};
+test('Transpiled SubDecimalEnum', () => {
+	checkTranspiledOutput('subtract/subDecimalEnum.pec');
+});
 
-exports.testInterpretedSubInteger = function(test) {
-	checkInterpretedOutput(test, "subtract/subInteger.pec");
-};
+test('Interpreted SubInteger', () => {
+	checkInterpretedOutput('subtract/subInteger.pec');
+});
 
-exports.testTranspiledSubInteger = function(test) {
-	checkTranspiledOutput(test, "subtract/subInteger.pec");
-};
+test('Transpiled SubInteger', () => {
+	checkTranspiledOutput('subtract/subInteger.pec');
+});
 
-exports.testInterpretedSubIntegerEnum = function(test) {
-	checkInterpretedOutput(test, "subtract/subIntegerEnum.pec");
-};
+test('Interpreted SubIntegerEnum', () => {
+	checkInterpretedOutput('subtract/subIntegerEnum.pec');
+});
 
-exports.testTranspiledSubIntegerEnum = function(test) {
-	checkTranspiledOutput(test, "subtract/subIntegerEnum.pec");
-};
+test('Transpiled SubIntegerEnum', () => {
+	checkTranspiledOutput('subtract/subIntegerEnum.pec');
+});
 
-exports.testInterpretedSubList = function(test) {
-	checkInterpretedOutput(test, "subtract/subList.pec");
-};
+test('Interpreted SubList', () => {
+	checkInterpretedOutput('subtract/subList.pec');
+});
 
-exports.testTranspiledSubList = function(test) {
-	checkTranspiledOutput(test, "subtract/subList.pec");
-};
+test('Transpiled SubList', () => {
+	checkTranspiledOutput('subtract/subList.pec');
+});
 
-exports.testInterpretedSubPeriod = function(test) {
-	checkInterpretedOutput(test, "subtract/subPeriod.pec");
-};
+test('Interpreted SubPeriod', () => {
+	checkInterpretedOutput('subtract/subPeriod.pec');
+});
 
-exports.testTranspiledSubPeriod = function(test) {
-	checkTranspiledOutput(test, "subtract/subPeriod.pec");
-};
+test('Transpiled SubPeriod', () => {
+	checkTranspiledOutput('subtract/subPeriod.pec');
+});
 
-exports.testInterpretedSubSet = function(test) {
-	checkInterpretedOutput(test, "subtract/subSet.pec");
-};
+test('Interpreted SubSet', () => {
+	checkInterpretedOutput('subtract/subSet.pec');
+});
 
-exports.testTranspiledSubSet = function(test) {
-	checkTranspiledOutput(test, "subtract/subSet.pec");
-};
+test('Transpiled SubSet', () => {
+	checkTranspiledOutput('subtract/subSet.pec');
+});
 
-exports.testInterpretedSubTime = function(test) {
-	checkInterpretedOutput(test, "subtract/subTime.pec");
-};
+test('Interpreted SubTime', () => {
+	checkInterpretedOutput('subtract/subTime.pec');
+});
 
-exports.testTranspiledSubTime = function(test) {
-	checkTranspiledOutput(test, "subtract/subTime.pec");
-};
+test('Transpiled SubTime', () => {
+	checkTranspiledOutput('subtract/subTime.pec');
+});
 

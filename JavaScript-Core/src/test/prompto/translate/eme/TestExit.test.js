@@ -1,44 +1,42 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAssignedReturn = function(test) {
-	compareResourceEME(test, "exit/assignedReturn.pec");
-};
+test('AssignedReturn', () => {
+	compareResourceEME('exit/assignedReturn.pec');
+});
 
-exports.testAssignedReturnInDoWhile = function(test) {
-	compareResourceEME(test, "exit/assignedReturnInDoWhile.pec");
-};
+test('AssignedReturnInDoWhile', () => {
+	compareResourceEME('exit/assignedReturnInDoWhile.pec');
+});
 
-exports.testAssignedReturnInForEach = function(test) {
-	compareResourceEME(test, "exit/assignedReturnInForEach.pec");
-};
+test('AssignedReturnInForEach', () => {
+	compareResourceEME('exit/assignedReturnInForEach.pec');
+});
 
-exports.testAssignedReturnInIf = function(test) {
-	compareResourceEME(test, "exit/assignedReturnInIf.pec");
-};
+test('AssignedReturnInIf', () => {
+	compareResourceEME('exit/assignedReturnInIf.pec');
+});
 
-exports.testAssignedReturnInWhile = function(test) {
-	compareResourceEME(test, "exit/assignedReturnInWhile.pec");
-};
+test('AssignedReturnInWhile', () => {
+	compareResourceEME('exit/assignedReturnInWhile.pec');
+});
 
-exports.testUnassignedReturn = function(test) {
-	compareResourceEME(test, "exit/unassignedReturn.pec");
-};
+test('UnassignedReturn', () => {
+	compareResourceEME('exit/unassignedReturn.pec');
+});
 
-exports.testUnassignedReturnInDoWhile = function(test) {
-	compareResourceEME(test, "exit/unassignedReturnInDoWhile.pec");
-};
+test('UnassignedReturnInDoWhile', () => {
+	compareResourceEME('exit/unassignedReturnInDoWhile.pec');
+});
 
-exports.testUnassignedReturnInForEach = function(test) {
-	compareResourceEME(test, "exit/unassignedReturnInForEach.pec");
-};
+test('UnassignedReturnInForEach', () => {
+	compareResourceEME('exit/unassignedReturnInForEach.pec');
+});
 
-exports.testUnassignedReturnInIf = function(test) {
-	compareResourceEME(test, "exit/unassignedReturnInIf.pec");
-};
+test('UnassignedReturnInIf', () => {
+	compareResourceEME('exit/unassignedReturnInIf.pec');
+});
 
-exports.testUnassignedReturnInWhile = function(test) {
-	compareResourceEME(test, "exit/unassignedReturnInWhile.pec");
-};
+test('UnassignedReturnInWhile', () => {
+	compareResourceEME('exit/unassignedReturnInWhile.pec');
+});
 

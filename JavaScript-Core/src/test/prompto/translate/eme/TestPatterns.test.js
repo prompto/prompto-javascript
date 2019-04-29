@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testIntegerEnumeration = function(test) {
-	compareResourceEME(test, "patterns/integerEnumeration.pec");
-};
+test('IntegerEnumeration', () => {
+	compareResourceEME('patterns/integerEnumeration.pec');
+});
 
-exports.testIntegerPattern = function(test) {
-	compareResourceEME(test, "patterns/integerPattern.pec");
-};
+test('IntegerPattern', () => {
+	compareResourceEME('patterns/integerPattern.pec');
+});
 
-exports.testNegativeIntegerRange = function(test) {
-	compareResourceEME(test, "patterns/negativeIntegerRange.pec");
-};
+test('NegativeIntegerRange', () => {
+	compareResourceEME('patterns/negativeIntegerRange.pec');
+});
 
-exports.testPositiveIntegerRange = function(test) {
-	compareResourceEME(test, "patterns/positiveIntegerRange.pec");
-};
+test('PositiveIntegerRange', () => {
+	compareResourceEME('patterns/positiveIntegerRange.pec');
+});
 
-exports.testTextEnumeration = function(test) {
-	compareResourceEME(test, "patterns/textEnumeration.pec");
-};
+test('TextEnumeration', () => {
+	compareResourceEME('patterns/textEnumeration.pec');
+});
 
-exports.testTextPattern = function(test) {
-	compareResourceEME(test, "patterns/textPattern.pec");
-};
+test('TextPattern', () => {
+	compareResourceEME('patterns/textPattern.pec');
+});
 

@@ -1,97 +1,92 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedChildElement = function(test) {
-	checkInterpretedOutput(test, "jsx/childElement.poc");
-};
+test('Interpreted ChildElement', () => {
+	checkInterpretedOutput('jsx/childElement.poc');
+});
 
-exports.testTranspiledChildElement = function(test) {
-	checkTranspiledOutput(test, "jsx/childElement.poc");
-};
+test('Transpiled ChildElement', () => {
+	checkTranspiledOutput('jsx/childElement.poc');
+});
 
-exports.testInterpretedCodeAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/codeAttribute.poc");
-};
+test('Interpreted CodeAttribute', () => {
+	checkInterpretedOutput('jsx/codeAttribute.poc');
+});
 
-exports.testTranspiledCodeAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/codeAttribute.poc");
-};
+test('Transpiled CodeAttribute', () => {
+	checkTranspiledOutput('jsx/codeAttribute.poc');
+});
 
-exports.testInterpretedCodeElement = function(test) {
-	checkInterpretedOutput(test, "jsx/codeElement.poc");
-};
+test('Interpreted CodeElement', () => {
+	checkInterpretedOutput('jsx/codeElement.poc');
+});
 
-exports.testTranspiledCodeElement = function(test) {
-	checkTranspiledOutput(test, "jsx/codeElement.poc");
-};
+test('Transpiled CodeElement', () => {
+	checkTranspiledOutput('jsx/codeElement.poc');
+});
 
-exports.testInterpretedDotName = function(test) {
-	checkInterpretedOutput(test, "jsx/dotName.poc");
-};
+test('Interpreted DotName', () => {
+	checkInterpretedOutput('jsx/dotName.poc');
+});
 
-exports.testTranspiledDotName = function(test) {
-	checkTranspiledOutput(test, "jsx/dotName.poc");
-};
+test('Transpiled DotName', () => {
+	checkTranspiledOutput('jsx/dotName.poc');
+});
 
-exports.testInterpretedEmptyAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/emptyAttribute.poc");
-};
+test('Interpreted EmptyAttribute', () => {
+	checkInterpretedOutput('jsx/emptyAttribute.poc');
+});
 
-exports.testTranspiledEmptyAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/emptyAttribute.poc");
-};
+test('Transpiled EmptyAttribute', () => {
+	checkTranspiledOutput('jsx/emptyAttribute.poc');
+});
 
-exports.testInterpretedHyphenName = function(test) {
-	checkInterpretedOutput(test, "jsx/hyphenName.poc");
-};
+test('Interpreted HyphenName', () => {
+	checkInterpretedOutput('jsx/hyphenName.poc');
+});
 
-exports.testTranspiledHyphenName = function(test) {
-	checkTranspiledOutput(test, "jsx/hyphenName.poc");
-};
+test('Transpiled HyphenName', () => {
+	checkTranspiledOutput('jsx/hyphenName.poc');
+});
 
-exports.testInterpretedLiteralAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/literalAttribute.poc");
-};
+test('Interpreted LiteralAttribute', () => {
+	checkInterpretedOutput('jsx/literalAttribute.poc');
+});
 
-exports.testTranspiledLiteralAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/literalAttribute.poc");
-};
+test('Transpiled LiteralAttribute', () => {
+	checkTranspiledOutput('jsx/literalAttribute.poc');
+});
 
-exports.testInterpretedSelfClosingDiv = function(test) {
-	checkInterpretedOutput(test, "jsx/selfClosingDiv.poc");
-};
+test('Interpreted SelfClosingDiv', () => {
+	checkInterpretedOutput('jsx/selfClosingDiv.poc');
+});
 
-exports.testTranspiledSelfClosingDiv = function(test) {
-	checkTranspiledOutput(test, "jsx/selfClosingDiv.poc");
-};
+test('Transpiled SelfClosingDiv', () => {
+	checkTranspiledOutput('jsx/selfClosingDiv.poc');
+});
 
-exports.testInterpretedSelfClosingEmptyAttribute = function(test) {
-	checkInterpretedOutput(test, "jsx/selfClosingEmptyAttribute.poc");
-};
+test('Interpreted SelfClosingEmptyAttribute', () => {
+	checkInterpretedOutput('jsx/selfClosingEmptyAttribute.poc');
+});
 
-exports.testTranspiledSelfClosingEmptyAttribute = function(test) {
-	checkTranspiledOutput(test, "jsx/selfClosingEmptyAttribute.poc");
-};
+test('Transpiled SelfClosingEmptyAttribute', () => {
+	checkTranspiledOutput('jsx/selfClosingEmptyAttribute.poc');
+});
 
-exports.testInterpretedTextElement = function(test) {
-	checkInterpretedOutput(test, "jsx/textElement.poc");
-};
+test('Interpreted TextElement', () => {
+	checkInterpretedOutput('jsx/textElement.poc');
+});
 
-exports.testTranspiledTextElement = function(test) {
-	checkTranspiledOutput(test, "jsx/textElement.poc");
-};
+test('Transpiled TextElement', () => {
+	checkTranspiledOutput('jsx/textElement.poc');
+});
 

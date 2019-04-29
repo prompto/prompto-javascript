@@ -31,18 +31,16 @@ exports.executeResource = function(fileName, methodName, args) {
 };
 
 
-exports.checkInterpretedOutput = function(test, fileName) {
-    var MemStoreModule = require("../memstore/MemStore");
-    MemStoreModule.Cursor = require("../intrinsic/Cursor").Cursor;
+exports.checkInterpretedOutput = function(fileName) {
+    var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
+    MemStoreModule.Cursor = require("../../../main/prompto/intrinsic/Cursor").Cursor;
     prompto.store.DataStore.instance = new MemStoreModule.MemStore();
 	exports.interpretResource(fileName);
-	checkSameOutput(test, fileName);
-	test.done();
+	checkSameOutput(fileName);
 };
 
 
-exports.checkTranspiledOutput = function(test, fileName) {
+exports.checkTranspiledOutput = function(fileName) {
     exports.executeResource(fileName);
-    checkSameOutput(test, fileName);
-    test.done();
+    checkSameOutput(fileName);
 };

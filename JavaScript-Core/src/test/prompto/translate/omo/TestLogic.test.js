@@ -1,16 +1,14 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testAndBoolean = function(test) {
-	compareResourceOMO(test, "logic/andBoolean.poc");
-};
+test('AndBoolean', () => {
+	compareResourceOMO('logic/andBoolean.poc');
+});
 
-exports.testNotBoolean = function(test) {
-	compareResourceOMO(test, "logic/notBoolean.poc");
-};
+test('NotBoolean', () => {
+	compareResourceOMO('logic/notBoolean.poc');
+});
 
-exports.testOrBoolean = function(test) {
-	compareResourceOMO(test, "logic/orBoolean.poc");
-};
+test('OrBoolean', () => {
+	compareResourceOMO('logic/orBoolean.poc');
+});
 

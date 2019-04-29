@@ -1,64 +1,62 @@
-require("../../../../exploded");
-
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-exports.testGtCharacter = function(test) {
-	compareResourceOMO(test, "greater/gtCharacter.poc");
-};
+test('GtCharacter', () => {
+	compareResourceOMO('greater/gtCharacter.poc');
+});
 
-exports.testGtDate = function(test) {
-	compareResourceOMO(test, "greater/gtDate.poc");
-};
+test('GtDate', () => {
+	compareResourceOMO('greater/gtDate.poc');
+});
 
-exports.testGtDateTime = function(test) {
-	compareResourceOMO(test, "greater/gtDateTime.poc");
-};
+test('GtDateTime', () => {
+	compareResourceOMO('greater/gtDateTime.poc');
+});
 
-exports.testGtDecimal = function(test) {
-	compareResourceOMO(test, "greater/gtDecimal.poc");
-};
+test('GtDecimal', () => {
+	compareResourceOMO('greater/gtDecimal.poc');
+});
 
-exports.testGtInteger = function(test) {
-	compareResourceOMO(test, "greater/gtInteger.poc");
-};
+test('GtInteger', () => {
+	compareResourceOMO('greater/gtInteger.poc');
+});
 
-exports.testGtText = function(test) {
-	compareResourceOMO(test, "greater/gtText.poc");
-};
+test('GtText', () => {
+	compareResourceOMO('greater/gtText.poc');
+});
 
-exports.testGtTime = function(test) {
-	compareResourceOMO(test, "greater/gtTime.poc");
-};
+test('GtTime', () => {
+	compareResourceOMO('greater/gtTime.poc');
+});
 
-exports.testGtVersion = function(test) {
-	compareResourceOMO(test, "greater/gtVersion.poc");
-};
+test('GtVersion', () => {
+	compareResourceOMO('greater/gtVersion.poc');
+});
 
-exports.testGteCharacter = function(test) {
-	compareResourceOMO(test, "greater/gteCharacter.poc");
-};
+test('GteCharacter', () => {
+	compareResourceOMO('greater/gteCharacter.poc');
+});
 
-exports.testGteDate = function(test) {
-	compareResourceOMO(test, "greater/gteDate.poc");
-};
+test('GteDate', () => {
+	compareResourceOMO('greater/gteDate.poc');
+});
 
-exports.testGteDateTime = function(test) {
-	compareResourceOMO(test, "greater/gteDateTime.poc");
-};
+test('GteDateTime', () => {
+	compareResourceOMO('greater/gteDateTime.poc');
+});
 
-exports.testGteDecimal = function(test) {
-	compareResourceOMO(test, "greater/gteDecimal.poc");
-};
+test('GteDecimal', () => {
+	compareResourceOMO('greater/gteDecimal.poc');
+});
 
-exports.testGteInteger = function(test) {
-	compareResourceOMO(test, "greater/gteInteger.poc");
-};
+test('GteInteger', () => {
+	compareResourceOMO('greater/gteInteger.poc');
+});
 
-exports.testGteText = function(test) {
-	compareResourceOMO(test, "greater/gteText.poc");
-};
+test('GteText', () => {
+	compareResourceOMO('greater/gteText.poc');
+});
 
-exports.testGteTime = function(test) {
-	compareResourceOMO(test, "greater/gteTime.poc");
-};
+test('GteTime', () => {
+	compareResourceOMO('greater/gteTime.poc');
+});
 

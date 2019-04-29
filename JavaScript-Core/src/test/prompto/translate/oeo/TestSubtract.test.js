@@ -1,36 +1,34 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testSubDate = function(test) {
-	compareResourceOEO(test, "subtract/subDate.poc");
-};
+test('SubDate', () => {
+	compareResourceOEO('subtract/subDate.poc');
+});
 
-exports.testSubDateTime = function(test) {
-	compareResourceOEO(test, "subtract/subDateTime.poc");
-};
+test('SubDateTime', () => {
+	compareResourceOEO('subtract/subDateTime.poc');
+});
 
-exports.testSubDecimal = function(test) {
-	compareResourceOEO(test, "subtract/subDecimal.poc");
-};
+test('SubDecimal', () => {
+	compareResourceOEO('subtract/subDecimal.poc');
+});
 
-exports.testSubInteger = function(test) {
-	compareResourceOEO(test, "subtract/subInteger.poc");
-};
+test('SubInteger', () => {
+	compareResourceOEO('subtract/subInteger.poc');
+});
 
-exports.testSubList = function(test) {
-	compareResourceOEO(test, "subtract/subList.poc");
-};
+test('SubList', () => {
+	compareResourceOEO('subtract/subList.poc');
+});
 
-exports.testSubPeriod = function(test) {
-	compareResourceOEO(test, "subtract/subPeriod.poc");
-};
+test('SubPeriod', () => {
+	compareResourceOEO('subtract/subPeriod.poc');
+});
 
-exports.testSubSet = function(test) {
-	compareResourceOEO(test, "subtract/subSet.poc");
-};
+test('SubSet', () => {
+	compareResourceOEO('subtract/subSet.poc');
+});
 
-exports.testSubTime = function(test) {
-	compareResourceOEO(test, "subtract/subTime.poc");
-};
+test('SubTime', () => {
+	compareResourceOEO('subtract/subTime.poc');
+});
 

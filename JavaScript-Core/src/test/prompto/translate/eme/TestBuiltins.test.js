@@ -1,236 +1,234 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testBooleanText = function(test) {
-	compareResourceEME(test, "builtins/booleanText.pec");
-};
+test('BooleanText', () => {
+	compareResourceEME('builtins/booleanText.pec');
+});
 
-exports.testCategoryText = function(test) {
-	compareResourceEME(test, "builtins/categoryText.pec");
-};
+test('CategoryText', () => {
+	compareResourceEME('builtins/categoryText.pec');
+});
 
-exports.testCharCodePoint = function(test) {
-	compareResourceEME(test, "builtins/charCodePoint.pec");
-};
+test('CharCodePoint', () => {
+	compareResourceEME('builtins/charCodePoint.pec');
+});
 
-exports.testCharText = function(test) {
-	compareResourceEME(test, "builtins/charText.pec");
-};
+test('CharText', () => {
+	compareResourceEME('builtins/charText.pec');
+});
 
-exports.testCursorToList = function(test) {
-	compareResourceEME(test, "builtins/cursorToList.pec");
-};
+test('CursorToList', () => {
+	compareResourceEME('builtins/cursorToList.pec');
+});
 
-exports.testDateDayOfMonth = function(test) {
-	compareResourceEME(test, "builtins/dateDayOfMonth.pec");
-};
+test('DateDayOfMonth', () => {
+	compareResourceEME('builtins/dateDayOfMonth.pec');
+});
 
-exports.testDateDayOfYear = function(test) {
-	compareResourceEME(test, "builtins/dateDayOfYear.pec");
-};
+test('DateDayOfYear', () => {
+	compareResourceEME('builtins/dateDayOfYear.pec');
+});
 
-exports.testDateMonth = function(test) {
-	compareResourceEME(test, "builtins/dateMonth.pec");
-};
+test('DateMonth', () => {
+	compareResourceEME('builtins/dateMonth.pec');
+});
 
-exports.testDateText = function(test) {
-	compareResourceEME(test, "builtins/dateText.pec");
-};
+test('DateText', () => {
+	compareResourceEME('builtins/dateText.pec');
+});
 
-exports.testDateTimeDate = function(test) {
-	compareResourceEME(test, "builtins/dateTimeDate.pec");
-};
+test('DateTimeDate', () => {
+	compareResourceEME('builtins/dateTimeDate.pec');
+});
 
-exports.testDateTimeDayOfMonth = function(test) {
-	compareResourceEME(test, "builtins/dateTimeDayOfMonth.pec");
-};
+test('DateTimeDayOfMonth', () => {
+	compareResourceEME('builtins/dateTimeDayOfMonth.pec');
+});
 
-exports.testDateTimeDayOfYear = function(test) {
-	compareResourceEME(test, "builtins/dateTimeDayOfYear.pec");
-};
+test('DateTimeDayOfYear', () => {
+	compareResourceEME('builtins/dateTimeDayOfYear.pec');
+});
 
-exports.testDateTimeHour = function(test) {
-	compareResourceEME(test, "builtins/dateTimeHour.pec");
-};
+test('DateTimeHour', () => {
+	compareResourceEME('builtins/dateTimeHour.pec');
+});
 
-exports.testDateTimeMilli = function(test) {
-	compareResourceEME(test, "builtins/dateTimeMilli.pec");
-};
+test('DateTimeMilli', () => {
+	compareResourceEME('builtins/dateTimeMilli.pec');
+});
 
-exports.testDateTimeMinute = function(test) {
-	compareResourceEME(test, "builtins/dateTimeMinute.pec");
-};
+test('DateTimeMinute', () => {
+	compareResourceEME('builtins/dateTimeMinute.pec');
+});
 
-exports.testDateTimeMonth = function(test) {
-	compareResourceEME(test, "builtins/dateTimeMonth.pec");
-};
+test('DateTimeMonth', () => {
+	compareResourceEME('builtins/dateTimeMonth.pec');
+});
 
-exports.testDateTimeSecond = function(test) {
-	compareResourceEME(test, "builtins/dateTimeSecond.pec");
-};
+test('DateTimeSecond', () => {
+	compareResourceEME('builtins/dateTimeSecond.pec');
+});
 
-exports.testDateTimeTZName = function(test) {
-	compareResourceEME(test, "builtins/dateTimeTZName.pec");
-};
+test('DateTimeTZName', () => {
+	compareResourceEME('builtins/dateTimeTZName.pec');
+});
 
-exports.testDateTimeTZOffset = function(test) {
-	compareResourceEME(test, "builtins/dateTimeTZOffset.pec");
-};
+test('DateTimeTZOffset', () => {
+	compareResourceEME('builtins/dateTimeTZOffset.pec');
+});
 
-exports.testDateTimeText = function(test) {
-	compareResourceEME(test, "builtins/dateTimeText.pec");
-};
+test('DateTimeText', () => {
+	compareResourceEME('builtins/dateTimeText.pec');
+});
 
-exports.testDateTimeTime = function(test) {
-	compareResourceEME(test, "builtins/dateTimeTime.pec");
-};
+test('DateTimeTime', () => {
+	compareResourceEME('builtins/dateTimeTime.pec');
+});
 
-exports.testDateTimeYear = function(test) {
-	compareResourceEME(test, "builtins/dateTimeYear.pec");
-};
+test('DateTimeYear', () => {
+	compareResourceEME('builtins/dateTimeYear.pec');
+});
 
-exports.testDateYear = function(test) {
-	compareResourceEME(test, "builtins/dateYear.pec");
-};
+test('DateYear', () => {
+	compareResourceEME('builtins/dateYear.pec');
+});
 
-exports.testDecimalText = function(test) {
-	compareResourceEME(test, "builtins/decimalText.pec");
-};
+test('DecimalText', () => {
+	compareResourceEME('builtins/decimalText.pec');
+});
 
-exports.testDictCount = function(test) {
-	compareResourceEME(test, "builtins/dictCount.pec");
-};
+test('DictCount', () => {
+	compareResourceEME('builtins/dictCount.pec');
+});
 
-exports.testDictKeys = function(test) {
-	compareResourceEME(test, "builtins/dictKeys.pec");
-};
+test('DictKeys', () => {
+	compareResourceEME('builtins/dictKeys.pec');
+});
 
-exports.testDictText = function(test) {
-	compareResourceEME(test, "builtins/dictText.pec");
-};
+test('DictText', () => {
+	compareResourceEME('builtins/dictText.pec');
+});
 
-exports.testDictValues = function(test) {
-	compareResourceEME(test, "builtins/dictValues.pec");
-};
+test('DictValues', () => {
+	compareResourceEME('builtins/dictValues.pec');
+});
 
-exports.testDocumentText = function(test) {
-	compareResourceEME(test, "builtins/documentText.pec");
-};
+test('DocumentText', () => {
+	compareResourceEME('builtins/documentText.pec');
+});
 
-exports.testEnumName = function(test) {
-	compareResourceEME(test, "builtins/enumName.pec");
-};
+test('EnumName', () => {
+	compareResourceEME('builtins/enumName.pec');
+});
 
-exports.testEnumSymbols = function(test) {
-	compareResourceEME(test, "builtins/enumSymbols.pec");
-};
+test('EnumSymbols', () => {
+	compareResourceEME('builtins/enumSymbols.pec');
+});
 
-exports.testEnumValue = function(test) {
-	compareResourceEME(test, "builtins/enumValue.pec");
-};
+test('EnumValue', () => {
+	compareResourceEME('builtins/enumValue.pec');
+});
 
-exports.testIntegerFormat = function(test) {
-	compareResourceEME(test, "builtins/integerFormat.pec");
-};
+test('IntegerFormat', () => {
+	compareResourceEME('builtins/integerFormat.pec');
+});
 
-exports.testIntegerText = function(test) {
-	compareResourceEME(test, "builtins/integerText.pec");
-};
+test('IntegerText', () => {
+	compareResourceEME('builtins/integerText.pec');
+});
 
-exports.testListCount = function(test) {
-	compareResourceEME(test, "builtins/listCount.pec");
-};
+test('ListCount', () => {
+	compareResourceEME('builtins/listCount.pec');
+});
 
-exports.testListText = function(test) {
-	compareResourceEME(test, "builtins/listText.pec");
-};
+test('ListText', () => {
+	compareResourceEME('builtins/listText.pec');
+});
 
-exports.testPeriodText = function(test) {
-	compareResourceEME(test, "builtins/periodText.pec");
-};
+test('PeriodText', () => {
+	compareResourceEME('builtins/periodText.pec');
+});
 
-exports.testSetCount = function(test) {
-	compareResourceEME(test, "builtins/setCount.pec");
-};
+test('SetCount', () => {
+	compareResourceEME('builtins/setCount.pec');
+});
 
-exports.testSetText = function(test) {
-	compareResourceEME(test, "builtins/setText.pec");
-};
+test('SetText', () => {
+	compareResourceEME('builtins/setText.pec');
+});
 
-exports.testTextCapitalize = function(test) {
-	compareResourceEME(test, "builtins/textCapitalize.pec");
-};
+test('TextCapitalize', () => {
+	compareResourceEME('builtins/textCapitalize.pec');
+});
 
-exports.testTextCount = function(test) {
-	compareResourceEME(test, "builtins/textCount.pec");
-};
+test('TextCount', () => {
+	compareResourceEME('builtins/textCount.pec');
+});
 
-exports.testTextEndsWith = function(test) {
-	compareResourceEME(test, "builtins/textEndsWith.pec");
-};
+test('TextEndsWith', () => {
+	compareResourceEME('builtins/textEndsWith.pec');
+});
 
-exports.testTextLowercase = function(test) {
-	compareResourceEME(test, "builtins/textLowercase.pec");
-};
+test('TextLowercase', () => {
+	compareResourceEME('builtins/textLowercase.pec');
+});
 
-exports.testTextReplace = function(test) {
-	compareResourceEME(test, "builtins/textReplace.pec");
-};
+test('TextReplace', () => {
+	compareResourceEME('builtins/textReplace.pec');
+});
 
-exports.testTextReplaceAll = function(test) {
-	compareResourceEME(test, "builtins/textReplaceAll.pec");
-};
+test('TextReplaceAll', () => {
+	compareResourceEME('builtins/textReplaceAll.pec');
+});
 
-exports.testTextSplit = function(test) {
-	compareResourceEME(test, "builtins/textSplit.pec");
-};
+test('TextSplit', () => {
+	compareResourceEME('builtins/textSplit.pec');
+});
 
-exports.testTextStartsWith = function(test) {
-	compareResourceEME(test, "builtins/textStartsWith.pec");
-};
+test('TextStartsWith', () => {
+	compareResourceEME('builtins/textStartsWith.pec');
+});
 
-exports.testTextText = function(test) {
-	compareResourceEME(test, "builtins/textText.pec");
-};
+test('TextText', () => {
+	compareResourceEME('builtins/textText.pec');
+});
 
-exports.testTextTrim = function(test) {
-	compareResourceEME(test, "builtins/textTrim.pec");
-};
+test('TextTrim', () => {
+	compareResourceEME('builtins/textTrim.pec');
+});
 
-exports.testTextUppercase = function(test) {
-	compareResourceEME(test, "builtins/textUppercase.pec");
-};
+test('TextUppercase', () => {
+	compareResourceEME('builtins/textUppercase.pec');
+});
 
-exports.testTimeHour = function(test) {
-	compareResourceEME(test, "builtins/timeHour.pec");
-};
+test('TimeHour', () => {
+	compareResourceEME('builtins/timeHour.pec');
+});
 
-exports.testTimeMilli = function(test) {
-	compareResourceEME(test, "builtins/timeMilli.pec");
-};
+test('TimeMilli', () => {
+	compareResourceEME('builtins/timeMilli.pec');
+});
 
-exports.testTimeMinute = function(test) {
-	compareResourceEME(test, "builtins/timeMinute.pec");
-};
+test('TimeMinute', () => {
+	compareResourceEME('builtins/timeMinute.pec');
+});
 
-exports.testTimeSecond = function(test) {
-	compareResourceEME(test, "builtins/timeSecond.pec");
-};
+test('TimeSecond', () => {
+	compareResourceEME('builtins/timeSecond.pec');
+});
 
-exports.testTimeText = function(test) {
-	compareResourceEME(test, "builtins/timeText.pec");
-};
+test('TimeText', () => {
+	compareResourceEME('builtins/timeText.pec');
+});
 
-exports.testTupleCount = function(test) {
-	compareResourceEME(test, "builtins/tupleCount.pec");
-};
+test('TupleCount', () => {
+	compareResourceEME('builtins/tupleCount.pec');
+});
 
-exports.testTupleText = function(test) {
-	compareResourceEME(test, "builtins/tupleText.pec");
-};
+test('TupleText', () => {
+	compareResourceEME('builtins/tupleText.pec');
+});
 
-exports.testUuidText = function(test) {
-	compareResourceEME(test, "builtins/uuidText.pec");
-};
+test('UuidText', () => {
+	compareResourceEME('builtins/uuidText.pec');
+});
 

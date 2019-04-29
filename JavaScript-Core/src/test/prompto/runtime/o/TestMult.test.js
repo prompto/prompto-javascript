@@ -1,65 +1,60 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedMultCharacter = function(test) {
-	checkInterpretedOutput(test, "mult/multCharacter.poc");
-};
+test('Interpreted MultCharacter', () => {
+	checkInterpretedOutput('mult/multCharacter.poc');
+});
 
-exports.testTranspiledMultCharacter = function(test) {
-	checkTranspiledOutput(test, "mult/multCharacter.poc");
-};
+test('Transpiled MultCharacter', () => {
+	checkTranspiledOutput('mult/multCharacter.poc');
+});
 
-exports.testInterpretedMultDecimal = function(test) {
-	checkInterpretedOutput(test, "mult/multDecimal.poc");
-};
+test('Interpreted MultDecimal', () => {
+	checkInterpretedOutput('mult/multDecimal.poc');
+});
 
-exports.testTranspiledMultDecimal = function(test) {
-	checkTranspiledOutput(test, "mult/multDecimal.poc");
-};
+test('Transpiled MultDecimal', () => {
+	checkTranspiledOutput('mult/multDecimal.poc');
+});
 
-exports.testInterpretedMultInteger = function(test) {
-	checkInterpretedOutput(test, "mult/multInteger.poc");
-};
+test('Interpreted MultInteger', () => {
+	checkInterpretedOutput('mult/multInteger.poc');
+});
 
-exports.testTranspiledMultInteger = function(test) {
-	checkTranspiledOutput(test, "mult/multInteger.poc");
-};
+test('Transpiled MultInteger', () => {
+	checkTranspiledOutput('mult/multInteger.poc');
+});
 
-exports.testInterpretedMultList = function(test) {
-	checkInterpretedOutput(test, "mult/multList.poc");
-};
+test('Interpreted MultList', () => {
+	checkInterpretedOutput('mult/multList.poc');
+});
 
-exports.testTranspiledMultList = function(test) {
-	checkTranspiledOutput(test, "mult/multList.poc");
-};
+test('Transpiled MultList', () => {
+	checkTranspiledOutput('mult/multList.poc');
+});
 
-exports.testInterpretedMultPeriod = function(test) {
-	checkInterpretedOutput(test, "mult/multPeriod.poc");
-};
+test('Interpreted MultPeriod', () => {
+	checkInterpretedOutput('mult/multPeriod.poc');
+});
 
-exports.testTranspiledMultPeriod = function(test) {
-	checkTranspiledOutput(test, "mult/multPeriod.poc");
-};
+test('Transpiled MultPeriod', () => {
+	checkTranspiledOutput('mult/multPeriod.poc');
+});
 
-exports.testInterpretedMultText = function(test) {
-	checkInterpretedOutput(test, "mult/multText.poc");
-};
+test('Interpreted MultText', () => {
+	checkInterpretedOutput('mult/multText.poc');
+});
 
-exports.testTranspiledMultText = function(test) {
-	checkTranspiledOutput(test, "mult/multText.poc");
-};
+test('Transpiled MultText', () => {
+	checkTranspiledOutput('mult/multText.poc');
+});
 

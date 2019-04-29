@@ -1,33 +1,28 @@
-require("../../../../exploded");
-
 var Out = require("../utils/Out").Out;
 var checkInterpretedOutput = require("../../parser/BaseOParserTest").checkInterpretedOutput;
-
 var checkTranspiledOutput = require("../../parser/BaseOParserTest").checkTranspiledOutput;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedFilterFromList = function(test) {
-	checkInterpretedOutput(test, "filter/filterFromList.poc");
-};
+test('Interpreted FilterFromList', () => {
+	checkInterpretedOutput('filter/filterFromList.poc');
+});
 
-exports.testTranspiledFilterFromList = function(test) {
-	checkTranspiledOutput(test, "filter/filterFromList.poc");
-};
+test('Transpiled FilterFromList', () => {
+	checkTranspiledOutput('filter/filterFromList.poc');
+});
 
-exports.testInterpretedFilterFromSet = function(test) {
-	checkInterpretedOutput(test, "filter/filterFromSet.poc");
-};
+test('Interpreted FilterFromSet', () => {
+	checkInterpretedOutput('filter/filterFromSet.poc');
+});
 
-exports.testTranspiledFilterFromSet = function(test) {
-	checkTranspiledOutput(test, "filter/filterFromSet.poc");
-};
+test('Transpiled FilterFromSet', () => {
+	checkTranspiledOutput('filter/filterFromSet.poc');
+});
 

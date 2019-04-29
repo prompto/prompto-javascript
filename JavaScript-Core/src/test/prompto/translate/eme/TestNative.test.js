@@ -1,40 +1,38 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testAnyId = function(test) {
-	compareResourceEME(test, "native/anyId.pec");
-};
+test('AnyId', () => {
+	compareResourceEME('native/anyId.pec');
+});
 
-exports.testAnyText = function(test) {
-	compareResourceEME(test, "native/anyText.pec");
-};
+test('AnyText', () => {
+	compareResourceEME('native/anyText.pec');
+});
 
-exports.testAttribute = function(test) {
-	compareResourceEME(test, "native/attribute.pec");
-};
+test('Attribute', () => {
+	compareResourceEME('native/attribute.pec');
+});
 
-exports.testCategory = function(test) {
-	compareResourceEME(test, "native/category.pec");
-};
+test('Category', () => {
+	compareResourceEME('native/category.pec');
+});
 
-exports.testCategoryReturn = function(test) {
-	compareResourceEME(test, "native/categoryReturn.pec");
-};
+test('CategoryReturn', () => {
+	compareResourceEME('native/categoryReturn.pec');
+});
 
-exports.testMethod = function(test) {
-	compareResourceEME(test, "native/method.pec");
-};
+test('Method', () => {
+	compareResourceEME('native/method.pec');
+});
 
-exports.testNow = function(test) {
-	compareResourceEME(test, "native/now.pec");
-};
+test('Now', () => {
+	compareResourceEME('native/now.pec');
+});
 
-exports.testPrinter = function(test) {
-	compareResourceEME(test, "native/printer.pec");
-};
+test('Printer', () => {
+	compareResourceEME('native/printer.pec');
+});
 
-exports.testReturn = function(test) {
-	compareResourceEME(test, "native/return.pec");
-};
+test('Return', () => {
+	compareResourceEME('native/return.pec');
+});
 

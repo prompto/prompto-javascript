@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-exports.testMultCharacter = function(test) {
-	compareResourceEME(test, "mult/multCharacter.pec");
-};
+test('MultCharacter', () => {
+	compareResourceEME('mult/multCharacter.pec');
+});
 
-exports.testMultDecimal = function(test) {
-	compareResourceEME(test, "mult/multDecimal.pec");
-};
+test('MultDecimal', () => {
+	compareResourceEME('mult/multDecimal.pec');
+});
 
-exports.testMultInteger = function(test) {
-	compareResourceEME(test, "mult/multInteger.pec");
-};
+test('MultInteger', () => {
+	compareResourceEME('mult/multInteger.pec');
+});
 
-exports.testMultList = function(test) {
-	compareResourceEME(test, "mult/multList.pec");
-};
+test('MultList', () => {
+	compareResourceEME('mult/multList.pec');
+});
 
-exports.testMultPeriod = function(test) {
-	compareResourceEME(test, "mult/multPeriod.pec");
-};
+test('MultPeriod', () => {
+	compareResourceEME('mult/multPeriod.pec');
+});
 
-exports.testMultText = function(test) {
-	compareResourceEME(test, "mult/multText.pec");
-};
+test('MultText', () => {
+	compareResourceEME('mult/multText.pec');
+});
 

@@ -1,12 +1,10 @@
-require("../../../../exploded");
-
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-exports.testAttribute = function(test) {
-	compareResourceEOE(test, "singleton/attribute.pec");
-};
+test('Attribute', () => {
+	compareResourceEOE('singleton/attribute.pec');
+});
 
-exports.testMember = function(test) {
-	compareResourceEOE(test, "singleton/member.pec");
-};
+test('Member', () => {
+	compareResourceEOE('singleton/member.pec');
+});
 

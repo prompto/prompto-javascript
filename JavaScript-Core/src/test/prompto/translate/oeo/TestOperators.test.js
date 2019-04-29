@@ -1,28 +1,26 @@
-require("../../../../exploded");
-
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
-exports.testAddAmount = function(test) {
-	compareResourceOEO(test, "operators/addAmount.poc");
-};
+test('AddAmount', () => {
+	compareResourceOEO('operators/addAmount.poc');
+});
 
-exports.testDivAmount = function(test) {
-	compareResourceOEO(test, "operators/divAmount.poc");
-};
+test('DivAmount', () => {
+	compareResourceOEO('operators/divAmount.poc');
+});
 
-exports.testIdivAmount = function(test) {
-	compareResourceOEO(test, "operators/idivAmount.poc");
-};
+test('IdivAmount', () => {
+	compareResourceOEO('operators/idivAmount.poc');
+});
 
-exports.testModAmount = function(test) {
-	compareResourceOEO(test, "operators/modAmount.poc");
-};
+test('ModAmount', () => {
+	compareResourceOEO('operators/modAmount.poc');
+});
 
-exports.testMultAmount = function(test) {
-	compareResourceOEO(test, "operators/multAmount.poc");
-};
+test('MultAmount', () => {
+	compareResourceOEO('operators/multAmount.poc');
+});
 
-exports.testSubAmount = function(test) {
-	compareResourceOEO(test, "operators/subAmount.poc");
-};
+test('SubAmount', () => {
+	compareResourceOEO('operators/subAmount.poc');
+});
 
