@@ -1,12 +1,12 @@
 var path = require("path");
 var fs = require("fs");
 
-var prompto = require("../index"); // prompto
+var prompto = require("../../../main/prompto/index");
 var antlr4 = require("antlr4");
 var Out = require("../runtime/utils/Out").Out;
 
-var locateMethod = require('../runtime/Interpreter').locateMethod;
-var JsxValue = require("../value/JsxValue").JsxValue;
+var locateMethod = prompto.runtime.locateMethod;
+var JsxValue = prompto.value.JsxValue;
 
 // mock ReactBootstrap.Button for native widget tests
 global.ReactBootstrap = { Button: function() { this.render = function() { return new JsxValue(null); }; return this; } };

@@ -56,14 +56,15 @@ DateTime.parse = function(text) {
     var date = new Date(Date.UTC(year, month-1, day, hour, minute, second, milli));
     var tzOffset = 0; // in seconds
     if(text[0]=='+' || text[0]=='-') {
-        tzOffset = text[0]=='+' ? 1 : -1;
+        var sign = text[0]=='+' ? 1 : -1;
         text = text.substring(1); // skip "+/-"
-        tzOffset *= parseInt(text.substring(0, 2)) * 3600;
-        text.substring(2);
+        tzOffset = parseInt(text.substring(0, 2)) * 60 * 60;
+        text = text.substring(2);
         if (text[0] == ':') {
             text = text.substring(1); // skip ":"
-            tzOffset *= parseInt(text.substring(0, 2)) * 60;
+            tzOffset += parseInt(text.substring(0, 2)) * 60;
         }
+        tzOffset *= sign;
    }
     return new DateTime(date, tzOffset);
 };

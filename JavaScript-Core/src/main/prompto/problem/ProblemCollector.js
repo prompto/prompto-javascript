@@ -43,6 +43,21 @@ ProblemCollector.prototype.reportDuplicate = function(name, declaration) {
     this.collectProblem(problem);
 };
 
+ProblemCollector.prototype.reportInvalidAttribute = function(id) {
+    this.reportInvalid(id, "attribute");
+};
+
+ProblemCollector.prototype.reportInvalidCategory = function(id) {
+    this.reportInvalid(id, "category");
+};
+
+ProblemCollector.prototype.reportInvalid = function(id, type) {
+    var problem = this.readSection(id);
+    problem.type = "error";
+    problem.message = "Invalid " + type + ": " + id.name;
+    this.collectProblem(problem);
+};
+
 ProblemCollector.prototype.reportUnknownAttribute = function(id) {
     this.reportUnknown(id, "attribute");
 };

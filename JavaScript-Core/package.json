@@ -1,8 +1,9 @@
 {
-  "name": "prompto-runtime",
+  "name": "prompto",
   "version": "1.0.0",
   "description": "prompto runtime for javascript",
-  "main": "index.js",
+  "repository": "prompto/prompto-javascript.git",
+  "main": "./JavaScript-Core/src/main/index.js",
   "devDependencies": {
     "jest": "^24.7.1"
   },
@@ -11,14 +12,9 @@
     "jszip-sync": "3.1.3-sync",
     "sync-request": "3.0.1"
   },
-  "devDependencies": {
-    "npm": "^5.4.2",
-    "webpack": "^1.15.0"
-  },
   "scripts": {
-    "build": "webpack",
     "test": "jest"
   },
   "author": "Eric Vergnaud",
-  "license": "TO-BE-DONE"
+  "license": "ISC"
 }

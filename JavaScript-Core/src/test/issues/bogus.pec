@@ -17,7 +17,7 @@ define htmlDecode as method receiving Text data doing:
 	return data
 	
 define importNYSEStocks as method doing:
-	sectors = mutable {} as Sector{}
+	sectors = mutable <:> as Sector<:>
 	market = fetch one Market where marketCode = "XNYS"
 	docs = [] as Document[]
 	for each doc in docs:

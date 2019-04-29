@@ -1,8 +1,11 @@
 var antlr4 = require("antlr4");
-var ELexer = require("./ELexer").ELexer;
-var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
+var prompto = require("../../../main/prompto/index");
+var BaseParserTest = require("./BaseParserTest");
 
-exports.parseTokens = function(lexer) {
+var ELexer = prompto.parser.ELexer;
+var EIndentingLexer = prompto.parser.EIndentingLexer;
+
+function parseTokens(lexer) {
 	var result = [];
 	var t = lexer.nextToken();
 	while (t.type!==antlr4.Token.EOF) {
@@ -12,10 +15,10 @@ exports.parseTokens = function(lexer) {
 		t = lexer.nextToken();
 	}
 	return result;
-};
+}
 
-exports.parseTokenTypes = function(lexer) {
-	var tokens = exports.parseTokens(lexer);
+function parseTokenTypes(lexer) {
+	var tokens = parseTokens(lexer);
 	var result = [];
 	for(var i = 0; i<tokens.length; i++) {
 		result[i] = tokens[i].type;
@@ -23,42 +26,42 @@ exports.parseTokenTypes = function(lexer) {
 	return result;
 };
 
-exports.parseTokenNames = function(lexer) {
-	var tokens = exports.parseTokens(lexer);
+function parseTokenNames(lexer) {
+	var tokens = parseTokens(lexer);
 	var s = "";
 	for(var i=0; i<tokens.length; i++) {
 		s += ELexer.prototype.symbolicNames[tokens[i].type] + " ";
 	}
 	return s.substring(0,s.length-1);
-};
+}
 
-exports.newTokenStreamFromString = function(input) {
+function newTokenStreamFromString(input) {
 	var stream = new antlr4.InputStream(input);
 	return new EIndentingLexer(stream);
-};
+}
 
-exports.newTokenStreamFromResource = function(resourceName) {
+function newTokenStreamFromResource(resourceName) {
 	var stream = new antlr4.FileStream(resourceName);
 	return new EIndentingLexer(stream);
-};
+}
 
-exports.parseTokenNamesFromString = function(input) {
-	var lexer = exports.newTokenStreamFromString(input);
-	return exports.parseTokenNames(lexer);
-};
+function parseTokenNamesFromString(input) {
+	var lexer = newTokenStreamFromString(input);
+	return parseTokenNames(lexer);
+}
 
-exports.parseTokenNamesFromResource = function(input) {
-	var lexer = exports.newTokenStreamFromResource(input);
-	return exports.parseTokenNames(lexer);
-};
+function parseTokenNamesFromResource(input) {
+	var lexer = newTokenStreamFromResource(input);
+	return parseTokenNames(lexer);
+}
 
-exports.tokenNamesAsString = function(tokenTypes) {
+function tokenNamesAsString(tokenTypes) {
 	var s = "";
 	for(var i=0;i<tokenTypes.length;i++) {
 		s += ELexer.prototype.symbolicNames[tokenTypes[i]]  + " ";
 	}
 	return s.substring(0,s.length-1);
-};
+}
 
-
-
+exports.parseTokenNamesFromString = parseTokenNamesFromString;
+exports.tokenNamesAsString = tokenNamesAsString;

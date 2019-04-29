@@ -2,7 +2,7 @@ var path = require("path");
 var fs = require("fs");
 
 var antlr4 = require("antlr4");
-var prompto = require("../index"); // prompto
+var prompto = require("../../../main/prompto/index");
 var BaseParserTest = require("./BaseParserTest");
 var getResource = BaseParserTest.getResource;
 var checkSameOutput = BaseParserTest.checkSameOutput;
@@ -39,7 +39,7 @@ exports.executeResource = function(fileName, methodName, args) {
 };
 
 
-exports.checkProblems = function(test, code, expected) {
+exports.checkProblems = function(code, expected) {
     var listener = new prompto.problem.ProblemCollector();
     var parser = new prompto.parser.ECleverParser(code);
     parser.removeErrorListeners();
@@ -50,14 +50,13 @@ exports.checkProblems = function(test, code, expected) {
     decls.register(context);
     decls.check(context);
     if(expected) {
-        test.ok(listener.problems.length > 0);
-        test.equal(listener.problems[0].message, expected);
+        expect(listener.problems.length > 0).toBeTruthy();
+        expect(listener.problems[0].message).toEqual(expected);
     } else
-        test.equal(listener.problems.length, 0);
-    test.done();
+        expect(listener.problems.length).toEqual(0);
 };
 
-exports.checkCompletion = function(test, code, expected) {
+exports.checkCompletion = function(code, expected) {
     var listener = new prompto.problem.CodeCompleter();
     var parser = new prompto.parser.ECleverParser(code);
     parser.removeErrorListeners();
@@ -68,13 +67,12 @@ exports.checkCompletion = function(test, code, expected) {
     decls.register(context);
     decls.check(context);
     if(expected) {
-        test.ok(listener.suggestions.length > 0);
+        expect(listener.suggestions.length > 0).toBeTruthy();
         expected.map(function(suggestion) {
-            test.ok(listener.hasSuggestion(suggestion));
+            expect(listener.hasSuggestion(suggestion)).toBeTruthy();
         });
     } else
-        test.equal(listener.suggestions.length, 0);
-    test.done();
+        expect(listener.suggestions.length).toEqual(0);
 };
 
 function findTerminalAt(tree, line, column) {

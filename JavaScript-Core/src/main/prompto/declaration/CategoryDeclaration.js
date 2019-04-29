@@ -70,7 +70,9 @@ CategoryDeclaration.prototype.check = function(context, isStart) {
 		this.attributes.forEach(function(id) {
 			var ad = context.getRegisteredDeclaration(id.name);
 			if (ad == null)
-                context.problemListener.reportUnknownAttribute(id)
+                context.problemListener.reportUnknownAttribute(id);
+            else if (!(ad instanceof AttributeDeclaration))
+                context.problemListener.reportInvalidAttribute(id)
 		});
 	}
 	return new CategoryType(this.id);

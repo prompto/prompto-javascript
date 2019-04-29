@@ -223,6 +223,8 @@ ConcreteCategoryDeclaration.prototype.checkDerived = function(context) {
             var cd = context.getRegisteredDeclaration(id.name) || null;
 			if (cd == null)
                 context.problemListener.reportUnknownCategory(id);
+			else if(!(cd instanceof CategoryDeclaration))
+                context.problemListener.reportInvalidCategory(id);
 		});
 	}
 };

@@ -19,6 +19,8 @@ exports.memstore = require("./memstore/index");
 exports.store = require("./store/index");
 exports.intrinsic = require("./intrinsic/index");
 
-exports.internet = require("./internet/index");
-exports.io = require("./io/index");
-exports.reader = require("./reader/index");
+exports.internet = require("../../../../JavaScript-Runtime/src/main/prompto/internet/index");
+exports.io = require("../../../../JavaScript-Runtime/src/main/prompto/io/index");
+exports.reader = require("../../../../JavaScript-Runtime/src/main/prompto/reader/index");
+var utils = require("../../../../JavaScript-Runtime/src/main/prompto/utils/index");
+exports.utils = Object.assign(exports.utils, utils);
