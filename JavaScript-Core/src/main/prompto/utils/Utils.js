@@ -121,7 +121,8 @@ function stringToUtf8Buffer(s) {
 }
 
 function utf8BufferToString(buffer) {
-    if(buffer instanceof ArrayBuffer)
+    // work around jest/node sandbox issue where instanceof ArrayBuffer will fail
+    if(buffer instanceof ArrayBuffer || Object.getPrototypeOf(buffer).constructor.name===ArrayBuffer.name)
         buffer = new Uint8Array(buffer);
     var chars = [];
     var idx = 0;
