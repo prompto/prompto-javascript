@@ -55,7 +55,7 @@ CompareExpression.prototype.transpile = function(transpiler) {
 };
 
 CompareExpression.prototype.compare = function(context, lval, rval) {
-	var cmp = lval.CompareTo(context, rval);
+	var cmp = lval.compareTo(context, rval);
 	switch (this.operator) {
 		case CmpOp.GT:
 			return BooleanValue.ValueOf(cmp > 0);

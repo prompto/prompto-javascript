@@ -52,7 +52,7 @@ DateTimeValue.prototype.Subtract = function(context, value) {
 	}
 };
 
-DateTimeValue.prototype.CompareTo = function(context, value) {
+DateTimeValue.prototype.compareToValue = function(context, value) {
     if (value instanceof DateTimeValue) {
         return this.value.compareTo(value.value.date, value.value.tzOffset);
     } else if (value instanceof DateValue) {

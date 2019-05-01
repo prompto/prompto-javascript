@@ -82,7 +82,7 @@ SortedExpression.prototype.contextualizeWriter = function(writer) {
 
 SortedExpression.prototype.check = function(context) {
 	var type = this.source.check(context);
-	if(!(type instanceof ListType || type instanceof TupleType || type instanceof SetType)) {
+	if(!(type instanceof ListType || type instanceof SetType)) {
 		throw new SyntaxError("Unsupported type: " + type);
 	}
 	return type;
@@ -91,24 +91,24 @@ SortedExpression.prototype.check = function(context) {
 
 SortedExpression.prototype.interpret = function(context) {
 	var type = this.source.check(context);
-	if(!(type instanceof ListType || type instanceof TupleType || type instanceof SetType)) {
+	if(!(type instanceof ListType || type instanceof SetType)) {
 		throw new SyntaxError("Unsupported type: " + type);
 	}
 	var coll = this.source.interpret(context);
 	if(coll==null) {
 		throw new NullReferenceError();
 	}
-	if(!(coll instanceof ListValue || coll instanceof TupleValue || coll instanceof SetValue)) {
+	if(!(coll instanceof ListValue || coll instanceof SetValue)) {
 		throw new InternalError("Unexpected type:" + typeof(coll));
 	}
+	var items = coll instanceof ListValue ? coll.items : coll.items.set.values();
+    items = Array.from(items);
 	var itemType = type.itemType;
-	if(itemType instanceof CategoryType) {
-		return itemType.sort(context, coll, this.desc, this.key);
-	} else if(itemType === DocumentType.instance) {
-        return itemType.sort(context, coll, this.desc, this.key);
-    } else {
-		return itemType.sort(context, coll, this.desc);
-	}
+	if(items.length > 1) {
+        var cmp = itemType.getSortedComparator(context, this.key, this.desc);
+        items.sort(cmp);
+    }
+    return new ListValue(itemType, items);
 };
 
 
@@ -119,11 +119,12 @@ SortedExpression.prototype.declare = function(transpiler) {
     type.itemType.declareSorted(transpiler, this.key);
 };
 
+
 SortedExpression.prototype.transpile = function(transpiler) {
     var type = this.source.check(transpiler.context);
     this.source.transpile(transpiler);
     transpiler.append(".sorted(");
-    type.itemType.transpileSorted(transpiler, this.desc, this.key);
+    type.itemType.transpileSortedComparator(transpiler, this.key, this.desc);
     transpiler.append(")");
 };
 

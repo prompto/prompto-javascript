@@ -474,53 +474,63 @@ CategoryType.prototype.newInstance = function(context) {
 };
 
 
-CategoryType.prototype.sort = function(context, list, desc, key) {
-	if (list.size() <= 1) {
-		return list;
-	}
-	key = key || null;
-	if (key == null) {
+CategoryType.prototype.getSortedComparator = function(context, key, desc) {
+    key = key || null;
+	if (key == null)
 		key = new UnresolvedIdentifier(new Identifier("key"));
-	}
-	var keyname = key.toString();
-	var decl = this.getDeclaration(context);
+    var keyname = key.toString();
+    var decl = this.getDeclaration(context);
 	if (decl.hasAttribute(context, keyname)) {
-		return this.sortByAttribute(context, list, desc, keyname);
+		return this.getAttributeSortedComparator(context, keyname, desc);
 	} else if (decl.hasMethod(context, keyname)) {
-		return this.sortByMemberMethod(context, list, desc, keyname);
+		return this.getMemberMethodSortedComparator(context, keyname, desc);
 	} else {
 		var method = this.findGlobalMethod(context, keyname);
 		if(method!=null) {
-			return this.sortByGlobalMethod(context, list, desc, method);
+			return this.getGlobalMethodSortedComparator(context, method, desc);
 		} else {
-			return this.sortByExpression(context, list, desc, key);
+			return this.getExpressionSortedComparator(context, key, desc);
 		}
 	}
 };
 
-CategoryType.prototype.sortByExpression = function(context, list, desc, key) {
-
-	function cmp(o1, o2) {
-		var co = context.newInstanceContext(o1, null);
-		var value1 = key.interpret(co);
-		co = context.newInstanceContext(o2, null);
-		var value2 = key.interpret(co);
-		return compareValues(value1, value2);
-	}
-	return BaseType.prototype.doSort(context, list, cmp, desc);
+CategoryType.prototype.getExpressionSortedComparator = function(context, exp, desc) {
+    return function(o1, o2) {
+		var ctx = context.newInstanceContext(o1, null);
+		var value1 = exp.interpret(ctx);
+        ctx = context.newInstanceContext(o2, null);
+		var value2 = exp.interpret(ctx);
+		return desc ? compareValues(value2, value1) : compareValues(value1, value2);
+	};
 };
 
-CategoryType.prototype.sortByAttribute = function(context, list, desc, name) {
-
-	function cmp(o1, o2) {
-		var value1 = o1.getMemberValue(context, name);
-		var value2 = o2.getMemberValue(context, name);
-		return compareValues(value1, value2);
-	}
-
-	return BaseType.prototype.doSort(context, list, cmp, desc);
+CategoryType.prototype.getAttributeSortedComparator = function(context, name, desc) {
+    if(desc)
+        return function(o1, o2) {
+            var value1 = o1.getMemberValue(context, name);
+            var value2 = o2.getMemberValue(context, name);
+            return compareValues(value2, value1);
+	    };
+    else
+        return function(o1, o2) {
+            var value1 = o1.getMemberValue(context, name);
+            var value2 = o2.getMemberValue(context, name);
+            return compareValues(value1, value2);
+        };
 };
 
+
+CategoryType.prototype.getGlobalMethodSortedComparator = function(context, method, desc) {
+    var cmp = function(o1, o2) {
+        var assignment = method.assignments[0];
+        assignment._expression = new ValueExpression(this, o1);
+        var value1 = method.interpret(context);
+        assignment._expression = new ValueExpression(this, o2);
+        var value2 = method.interpret(context);
+        return desc ? compareValues(value2, value1) : compareValues(value1, value2);
+    };
+    return cmp.bind(this);
+};
 
 
 CategoryType.prototype.getMemberMethods = function(context, name) {
@@ -552,20 +562,6 @@ CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 			throw e;
 		}
 	}
-};
-
-CategoryType.prototype.sortByGlobalMethod = function(context, list, desc, method) {
-	var self = this;
-	function cmp(o1, o2) {
-		var assignment = method.assignments[0];
-		assignment._expression = new ValueExpression(self, o1);
-		var value1 = method.interpret(context);
-		assignment._expression = new ValueExpression(self, o2);
-		var value2 = method.interpret(context);
-		return compareValues(value1, value2);
-	}
-
-	return BaseType.prototype.doSort(context, list, cmp, desc);
 };
 
 
@@ -601,30 +597,30 @@ CategoryType.prototype.declareSorted = function(transpiler, key) {
     }
 };
 
-CategoryType.prototype.transpileSorted = function(transpiler, desc, key) {
+CategoryType.prototype.transpileSortedComparator = function(transpiler, key, desc) {
     var keyname = key ? key.toString() : "key";
     var decl = this.getDeclaration(transpiler.context);
     if (decl.hasAttribute(transpiler.context, keyname)) {
-        this.transpileSortedByAttribute(transpiler, desc, key);
+        this.transpileAttributeSortedComparator(transpiler, key, desc);
     } else if (decl.hasMethod(transpiler.context, keyname, null)) {
-        this.transpileSortedByClassMethod(transpiler, desc, key);
+        this.transpileMemberMethodSortedComparator(transpiler, key, desc);
     } else {
         decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
-            this.transpileSortedByGlobalMethod(transpiler, desc, decl.getTranspiledName(transpiler.context));
+            this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
         } else {
-            this.transpileSortedByExpression(transpiler, desc, key);
+            this.transpileExpressionSortedComparator(transpiler, key, desc);
         }
     }
 };
 
 
-CategoryType.prototype.transpileSortedByExpression = function(transpiler, desc, key) {
-    this.transpileSortedByAttribute(transpiler, desc, key);
+CategoryType.prototype.transpileExpressionSortedComparator = function(transpiler, key, desc) {
+    this.transpileAttributeSortedComparator(transpiler, key, desc);
 };
 
 
-CategoryType.prototype.transpileSortedByAttribute = function(transpiler, desc, key) {
+CategoryType.prototype.transpileAttributeSortedComparator = function(transpiler, key, desc) {
     key = key || new InstanceExpression(new Identifier("key"));
     transpiler.append("function(o1, o2) { return ");
     this.transpileEqualKeys(transpiler, key);
@@ -654,7 +650,7 @@ CategoryType.prototype.transpileGreaterKeys = function(transpiler, key) {
 };
 
 
-CategoryType.prototype.transpileSortedByGlobalMethod = function(transpiler, desc, name) {
+CategoryType.prototype.transpileGlobalMethodSortedComparator = function(transpiler, name, desc) {
     transpiler.append("function(o1, o2) { return ")
         .append(name).append("(o1) === ").append(name).append("(o2)").append(" ? 0 : ")
         .append(name).append("(o1) > ").append(name).append("(o2)").append(" ? ");

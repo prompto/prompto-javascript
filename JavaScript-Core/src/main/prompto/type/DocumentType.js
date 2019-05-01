@@ -87,7 +87,6 @@ DocumentType.prototype.transpileMember = function(transpiler, name) {
 };
 
 
-
 DocumentType.prototype.transpileAssignMember = function(transpiler, name) {
     transpiler.append(".getMember('").append(name).append("', true)");
 };
@@ -98,6 +97,7 @@ DocumentType.prototype.transpileAssignMemberValue = function(transpiler, name, e
     expression.transpile(transpiler);
     transpiler.append(")");
 };
+
 
 DocumentType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
     transpiler.append(".setItem(");
@@ -122,21 +122,21 @@ DocumentType.prototype.declareSorted = function(transpiler, key) {
 };
 
 
-DocumentType.prototype.transpileSorted = function(transpiler, desc, key) {
+DocumentType.prototype.transpileSortedComparator = function(transpiler, key, desc) {
     if(key==null)
         key = new TextLiteral('"key"');
     var keyname = key.toString();
     var decl = this.findGlobalMethod(transpiler.context, keyname, false);
     if (decl != null) {
-        this.transpileSortedByGlobalMethod(transpiler, desc, decl.getTranspiledName(transpiler.context));
+        this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
     } else if(key instanceof TextLiteral) {
-        this.transpileSortedByEntry(transpiler, desc, key);
+        this.transpileEntrySortedComparator(transpiler, key, desc);
     } else {
-        this.transpileSortedByExpression(transpiler, desc, key);
+        this.transpileExpressionSortedComparator(transpiler, key, desc);
     }
 };
 
-DocumentType.prototype.transpileSortedByGlobalMethod = function(transpiler, desc, name) {
+DocumentType.prototype.transpileGlobalMethodSortedComparator = function(transpiler, name, desc) {
     transpiler.append("function(o1, o2) { return ")
         .append(name).append("(o1) === ").append(name).append("(o2)").append(" ? 0 : ")
         .append(name).append("(o1) > ").append(name).append("(o2)").append(" ? ");
@@ -147,7 +147,7 @@ DocumentType.prototype.transpileSortedByGlobalMethod = function(transpiler, desc
 };
 
 
-DocumentType.prototype.transpileSortedByEntry = function(transpiler, descending, key) {
+DocumentType.prototype.transpileEntrySortedComparator = function(transpiler, key, descending) {
     transpiler.append("function(o1, o2) { return ");
     this.transpileEqualEntries(transpiler, key);
     transpiler.append(" ? 0 : ");
@@ -178,7 +178,7 @@ DocumentType.prototype.transpileGreaterEntries = function(transpiler, key) {
 };
 
 
-DocumentType.prototype.transpileSortedByExpression = function(transpiler, descending, key) {
+DocumentType.prototype.transpileExpressionSortedComparator = function(transpiler, key, descending) {
     transpiler = transpiler.newDocumentTranspiler();
     transpiler.append("function(o1, o2) { var v1 = (function() { return ");
     key.transpile(transpiler);
@@ -191,9 +191,6 @@ DocumentType.prototype.transpileSortedByExpression = function(transpiler, descen
         transpiler.append("1 : -1; }");
     transpiler.flush();
 };
-
-
-
 
 
 DocumentType.prototype.checkItem = function(context, itemType) {
@@ -238,22 +235,18 @@ DocumentType.prototype.readJSONField = function(context, node, parts) {
         throw new Error(typeof(node).toString());
 };
 
-DocumentType.prototype.sort = function(context, list, desc, key) {
-    if (list.size() <= 1) {
-        return list;
-    }
+DocumentType.prototype.getSortedComparator = function(context, key, desc) {
     key = key || null;
-    if (key == null) {
+    if (key == null)
         key = new TextLiteral('"key"');
-    }
     var keyname = key.toString();
     var call = this.findGlobalMethod(context, keyname, true);
-    if(call!=null) {
-        return this.sortByGlobalMethod(context, list, desc, call);
+    if(call) {
+        return this.getGlobalMethodSortedComparator(context, call, desc);
     } else if(key instanceof TextLiteral) {
-        return this.sortByEntry(context, list, desc, key);
+        return this.getEntrySortedComparator(context, key, desc);
     } else {
-        return this.sortByExpression(context, list, desc, key);
+        return this.getExpressionSortedComparator(context, key, desc);
     }
 };
 
@@ -275,43 +268,37 @@ DocumentType.prototype.findGlobalMethod = function(context, name, returnCall) {
 };
 
 
-DocumentType.prototype.sortByGlobalMethod = function(context, list, desc, call) {
-    var self = this;
-    function cmp(o1, o2) {
+DocumentType.prototype.getGlobalMethodSortedComparator = function(context, call, desc) {
+    var cmp = function(o1, o2) {
         var assignment = call.assignments[0];
-        assignment._expression = new ValueExpression(self, o1);
+        assignment._expression = new ValueExpression(this, o1);
         var value1 = call.interpret(context);
-        assignment._expression = new ValueExpression(self, o2);
+        assignment._expression = new ValueExpression(this, o2);
         var value2 = call.interpret(context);
         return compareValues(value1, value2);
-    }
-
-    return NativeType.prototype.doSort(context, list, cmp, desc);
+    };
+    return cmp.bind(this);
 };
 
 
-DocumentType.prototype.sortByEntry = function(context, list, desc, key) {
+DocumentType.prototype.getEntrySortedComparator = function(context, key, desc) {
     var name = key.value.getStorableData();
-    function cmp(o1, o2) {
+    return function(o1, o2) {
         var value1 = o1.getMemberValue(context, name);
         var value2 = o2.getMemberValue(context, name);
-        return compareValues(value1, value2);
-    }
-
-    return NativeType.prototype.doSort(context, list, cmp, desc);
+        return desc ? compareValues(value2, value1) : compareValues(value1, value2);
+    };
 };
 
 
-DocumentType.prototype.sortByExpression = function(context, list, desc, expression) {
-
-    function cmp(o1, o2) {
-        var co = context.newDocumentContext(o1, false);
-        var value1 = expression.interpret(co);
-        co = context.newDocumentContext(o2, false);
-        var value2 = expression.interpret(co);
-        return compareValues(value1, value2);
+DocumentType.prototype.getExpressionSortedComparator = function(context, expression, desc) {
+    return function(o1, o2) {
+        var ctx = context.newDocumentContext(o1, false);
+        var value1 = expression.interpret(ctx);
+        ctx = context.newDocumentContext(o2, false);
+        var value2 = expression.interpret(ctx);
+        return desc ? compareValues(value2, value1) : compareValues(value1, value2);
     }
-    return NativeType.prototype.doSort(context, list, cmp, desc);
 };
 
 DocumentType.instance = new DocumentType();

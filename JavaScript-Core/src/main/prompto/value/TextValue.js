@@ -43,7 +43,7 @@ TextValue.prototype.Multiply = function(context, value) {
 	}
 };
 
-TextValue.prototype.CompareTo = function(context, value) {
+TextValue.prototype.compareToValue = function(context, value) {
 	if(value instanceof TextValue || value instanceof CharacterValue) {
 		return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
 	} else {

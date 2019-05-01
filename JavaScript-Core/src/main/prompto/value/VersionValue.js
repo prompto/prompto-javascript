@@ -33,7 +33,7 @@ VersionValue.prototype.toString = function() {
 
 
 
-VersionValue.prototype.CompareTo = function(context, value) {
+VersionValue.prototype.compareToValue = function(context, value) {
     if (value instanceof VersionValue) {
         return this.version.cmp(value.version);
     } else {

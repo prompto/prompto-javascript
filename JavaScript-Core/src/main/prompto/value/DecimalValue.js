@@ -109,7 +109,7 @@ DecimalValue.prototype.Minus = function(context) {
 	return new DecimalValue(-this.value);
 };
 
-DecimalValue.prototype.CompareTo = function(context, value) {
+DecimalValue.prototype.compareToValue = function(context, value) {
 	if (value instanceof IntegerValue || value instanceof DecimalValue) {
 		return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
 	} else {
