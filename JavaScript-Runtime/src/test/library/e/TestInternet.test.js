@@ -1,4 +1,3 @@
-require("../../../../../JavaScript-Core/src/exploded.js");
 var prompto = require("../../../../../JavaScript-Core/src/main/prompto/index.js");
 var Out = require("../../../../../JavaScript-Core/src/test/prompto/runtime/utils/Out").Out;
 var BaseParserTest = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseParserTest");
@@ -6,32 +5,31 @@ var loadDependency = require("../../../../../JavaScript-Core/src/test/prompto/pa
 var runInterpretedTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runInterpretedTests;
 var runTranspiledTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runTranspiledTests;
 
-exports.setUp = function(done) {
+beforeEach( () => {
 	Out.init();
 	BaseParserTest.coreContext = null;
-	loadDependency("reader");
+	loadDependency("internet");
+	loadDependency("console");
 	loadDependency("core");
-	done();
-};
+});
 
-exports.tearDown = function(done) {
+afterEach( () => {
 	Out.restore();
-	done();
-};
+});
 
-exports.testInterpretedJson = function(test) {
-	runInterpretedTests(test, "reader/json.pec");
-};
+test('Interpreted Html', () => {
+	runInterpretedTests('internet/html.pec');
+});
 
-exports.testTranspiledJson = function(test) {
-	runTranspiledTests(test, "reader/json.pec");
-};
+test('Transpiled Html', () => {
+	runTranspiledTests('internet/html.pec');
+});
 
-exports.testInterpretedReader = function(test) {
-	runInterpretedTests(test, "reader/reader.pec");
-};
+test('Interpreted Url', () => {
+	runInterpretedTests('internet/url.pec');
+});
 
-exports.testTranspiledReader = function(test) {
-	runTranspiledTests(test, "reader/reader.pec");
-};
+test('Transpiled Url', () => {
+	runTranspiledTests('internet/url.pec');
+});
 

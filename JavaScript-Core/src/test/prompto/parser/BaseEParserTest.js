@@ -176,15 +176,15 @@ exports.listLibraryFiles = function(libraryName) {
 };
 
 
-exports.runInterpretedTests = function(test, fileName) {
-    runTests(test, fileName, interpretTest);
+exports.runInterpretedTests = function(fileName) {
+    runTests(fileName, interpretTest);
 }
 
-exports.runTranspiledTests = function(test, fileName) {
-    runTests(test, fileName, executeTest);
+exports.runTranspiledTests = function(fileName) {
+    runTests(fileName, executeTest);
 }
 
-function runTests(test, fileName, runner) {
+function runTests(fileName, runner) {
     decls = exports.parseResource(fileName)
     decls.map(function(decl) {
         if (!(decl instanceof prompto.declaration.TestMethodDeclaration))
@@ -193,8 +193,7 @@ function runTests(test, fileName, runner) {
         runner(BaseParserTest.coreContext, decl.name);
         var expected = decl.name + " test successful";
         var read = Out.read();
-        test.equal(read, expected);
+        expect(read).toEqual(expected);
     });
-    test.done();
 };
 
