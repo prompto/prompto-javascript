@@ -1,18 +1,10 @@
 sudo: true
 language: node_js
 node_js:
-  - "6.17"
+  - "10.1.5"
 before_install:
-  - npm install
+  - npm install -g yarn@v1.15.2
 before_script:
-  - cp -r JavaScript-Runtime/src/main/prompto/internet JavaScript-Core/src/main/prompto/internet
-  - cp -r JavaScript-Runtime/src/main/prompto/io JavaScript-Core/src/main/prompto/io
-  - cp -r JavaScript-Runtime/src/main/prompto/reader JavaScript-Core/src/main/prompto/reader
-  - cp -r JavaScript-Runtime/src/test/internet JavaScript-Core/src/test/internet
-  - cp -r JavaScript-Runtime/src/test/reader JavaScript-Core/src/test/reader
-  - mkdir JavaScript-Core/src/test/library
-  - cp -r JavaScript-Runtime/src/test/library/e JavaScript-Core/src/test/library/e
   - chmod 777 ./test.sh
-#  - ls -all -R
 script:
   - bash ./test.sh
