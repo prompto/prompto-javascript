@@ -1,6 +1,7 @@
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
+var ArrowExpression = require("./ArrowExpression").ArrowExpression;
 var InternalError = require("../error/InternalError").InternalError;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var DocumentType = require("../type/DocumentType").DocumentType;
@@ -34,7 +35,9 @@ SortedExpression.prototype.toEDialect = function(writer) {
         writer.append("descending ");
     this.source.toDialect(writer);
     if(this.key!=null) {
-        writer = this.contextualizeWriter(writer);
+        var type = this.source.check(writer.context);
+        var itemType = type.itemType;
+        writer = this.contextualizeWriter(writer, itemType);
         writer.append(" with ");
         var keyExp = this.key;
         if(keyExp instanceof UnresolvedIdentifier) try {
@@ -42,7 +45,10 @@ SortedExpression.prototype.toEDialect = function(writer) {
         } catch (e) {
             // TODO add warning
         }
-        if(keyExp instanceof InstanceExpression)
+        if(keyExp instanceof ArrowExpression) {
+            keyExp.registerArrowArgs(writer.context, itemType);
+            keyExp.toDialect(writer);
+        } else if(keyExp instanceof InstanceExpression)
             keyExp.toDialect(writer, false);
         else
             keyExp.toDialect(writer);
@@ -57,7 +63,9 @@ SortedExpression.prototype.toODialect = function(writer) {
     writer.append("(");
     this.source.toDialect(writer);
     if(this.key!=null) {
-        writer = this.contextualizeWriter(writer);
+        var type = this.source.check(writer.context);
+        var itemType = type.itemType;
+        writer = this.contextualizeWriter(writer, itemType);
         writer.append(", key = ");
         this.key.toDialect(writer);
     }
@@ -68,9 +76,7 @@ SortedExpression.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 }
 
-SortedExpression.prototype.contextualizeWriter = function(writer) {
-    var type = this.source.check(writer.context);
-    var itemType = type.itemType;
+SortedExpression.prototype.contextualizeWriter = function(writer, itemType) {
     if (itemType instanceof CategoryType)
         return writer.newInstanceWriter(itemType);
     else if (itemType instanceof DocumentType)

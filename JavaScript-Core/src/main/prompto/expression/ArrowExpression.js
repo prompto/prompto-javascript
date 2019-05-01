@@ -30,9 +30,9 @@ ArrowExpression.prototype.interpret = function(context) {
 
 ArrowExpression.prototype.toDialect = function(writer) {
     this.argsToDialect(writer);
-    writer.append(argsSuite);
+    writer.append(this.argsSuite);
     writer.append("=>");
-    writer.append(arrowSuite);
+    writer.append(this.arrowSuite);
     this.bodyToDialect(writer);
 };
 
@@ -49,13 +49,13 @@ ArrowExpression.prototype.bodyToDialect = function(writer) {
 
 
 ArrowExpression.prototype.argsToDialect = function(writer) {
-    if(args==null || args.isEmpty())
+    if(this.args==null || this.args.length==0)
         writer.append("()");
-    else if(args.size()==1)
-        writer.append(args.getFirst().toString());
+    else if(this.args.length==1)
+        writer.append(this.args[0].name);
     else {
         writer.append("(");
-        args.toDialect(writer, false);
+        writer.append(this.args.join(", "));
         writer.append(")");
     }
 };
