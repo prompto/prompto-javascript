@@ -8,6 +8,7 @@ var SingletonCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
 var ValueExpression = require("../expression/ValueExpression").ValueExpression;
+var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
 var NullType = require("./NullType").NullType;
@@ -487,8 +488,10 @@ CategoryType.prototype.getSortedComparator = function(context, key, desc) {
 	} else {
 		var method = this.findGlobalMethod(context, keyname);
 		if(method!=null) {
-			return this.getGlobalMethodSortedComparator(context, method, desc);
-		} else {
+            return this.getGlobalMethodSortedComparator(context, method, desc);
+        } else if(key instanceof ArrowExpression) {
+            return key.getSortedComparator(context, this, desc);
+        } else {
 			return this.getExpressionSortedComparator(context, key, desc);
 		}
 	}
@@ -591,6 +594,8 @@ CategoryType.prototype.declareSorted = function(transpiler, key) {
         var decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
             decl.declare(transpiler);
+        } else if(key instanceof ArrowExpression) {
+            // TODO
         } else {
             key.declare(transpiler);
         }
@@ -608,6 +613,8 @@ CategoryType.prototype.transpileSortedComparator = function(transpiler, key, des
         decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
             this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
+        } else if(key instanceof ArrowExpression) {
+            return key.transpileSortedComparator(transpiler, this, desc);
         } else {
             this.transpileExpressionSortedComparator(transpiler, key, desc);
         }

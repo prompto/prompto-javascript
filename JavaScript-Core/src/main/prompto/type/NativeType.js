@@ -20,7 +20,7 @@ NativeType.prototype.getSortedComparator = function(context, key, desc) {
 NativeType.prototype.getExpressionSortedComparator = function(context, expression, desc) {
     var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
     if(expression instanceof ArrowExpression)
-        return expression.getNativeSortedComparator(context, this, desc);
+        return expression.getSortedComparator(context, this, desc);
     else
         throw new Error("Not supported!");
 };
@@ -58,16 +58,6 @@ NativeType.prototype.equals = function(obj) {
 	return obj===this;
 };
 
-NativeType.prototype.sort = function(context, list, desc) {
-
-    function cmp(o1, o2) {
-        o1 = o1.value;
-        o2 = o2.value;
-        return o1 > o2 ? 1 : o1 === o2 ? 0 : -1;
-    }
-    return this.doSort(context, list, cmp, desc);
-};
-
 NativeType.prototype.declareSorted = function(transpiler, key) {
     // nothing to do
 };
@@ -75,7 +65,7 @@ NativeType.prototype.declareSorted = function(transpiler, key) {
 NativeType.prototype.transpileSortedComparator = function(transpiler, key, desc) {
     var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
     if(key instanceof ArrowExpression)
-        return key.transpileNativeSortedComparator(transpiler, this, desc);
+        return key.transpileSortedComparator(transpiler, this, desc);
     else if(desc)
         transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? -1 : 1; }");
 };

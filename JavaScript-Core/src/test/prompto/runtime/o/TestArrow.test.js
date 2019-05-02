@@ -10,35 +10,51 @@ afterEach( () => {
 	Out.restore();
 });
 
-test('Interpreted Sort1', () => {
-	checkInterpretedOutput('arrow/sort1.poc');
+test('Interpreted SortCategory1Arg', () => {
+	checkInterpretedOutput('arrow/sortCategory1Arg.poc');
 });
 
-test('Transpiled Sort1', () => {
-	checkTranspiledOutput('arrow/sort1.poc');
+test('Transpiled SortCategory1Arg', () => {
+	checkTranspiledOutput('arrow/sortCategory1Arg.poc');
 });
 
-test('Interpreted Sort1_desc', () => {
-	checkInterpretedOutput('arrow/sort1_desc.poc');
+test('Interpreted SortCategory2Args', () => {
+	checkInterpretedOutput('arrow/sortCategory2Args.poc');
 });
 
-test('Transpiled Sort1_desc', () => {
-	checkTranspiledOutput('arrow/sort1_desc.poc');
+test('Transpiled SortCategory2Args', () => {
+	checkTranspiledOutput('arrow/sortCategory2Args.poc');
 });
 
-test('Interpreted Sort2', () => {
-	checkInterpretedOutput('arrow/sort2.poc');
+test('Interpreted SortText1Arg', () => {
+	checkInterpretedOutput('arrow/sortText1Arg.poc');
 });
 
-test('Transpiled Sort2', () => {
-	checkTranspiledOutput('arrow/sort2.poc');
+test('Transpiled SortText1Arg', () => {
+	checkTranspiledOutput('arrow/sortText1Arg.poc');
 });
 
-test('Interpreted Sort2_desc', () => {
-	checkInterpretedOutput('arrow/sort2_desc.poc');
+test('Interpreted SortText1ArgDesc', () => {
+	checkInterpretedOutput('arrow/sortText1ArgDesc.poc');
 });
 
-test('Transpiled Sort2_desc', () => {
-	checkTranspiledOutput('arrow/sort2_desc.poc');
+test('Transpiled SortText1ArgDesc', () => {
+	checkTranspiledOutput('arrow/sortText1ArgDesc.poc');
+});
+
+test('Interpreted SortText2Args', () => {
+	checkInterpretedOutput('arrow/sortText2Args.poc');
+});
+
+test('Transpiled SortText2Args', () => {
+	checkTranspiledOutput('arrow/sortText2Args.poc');
+});
+
+test('Interpreted SortText2ArgsDesc', () => {
+	checkInterpretedOutput('arrow/sortText2ArgsDesc.poc');
+});
+
+test('Transpiled SortText2ArgsDesc', () => {
+	checkTranspiledOutput('arrow/sortText2ArgsDesc.poc');
 });
 

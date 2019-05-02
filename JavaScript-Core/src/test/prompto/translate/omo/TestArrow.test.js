@@ -1,18 +1,26 @@
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-test('Sort1', () => {
-	compareResourceOMO('arrow/sort1.poc');
+test('SortCategory1Arg', () => {
+	compareResourceOMO('arrow/sortCategory1Arg.poc');
 });
 
-test('Sort1_desc', () => {
-	compareResourceOMO('arrow/sort1_desc.poc');
+test('SortCategory2Args', () => {
+	compareResourceOMO('arrow/sortCategory2Args.poc');
 });
 
-test('Sort2', () => {
-	compareResourceOMO('arrow/sort2.poc');
+test('SortText1Arg', () => {
+	compareResourceOMO('arrow/sortText1Arg.poc');
 });
 
-test('Sort2_desc', () => {
-	compareResourceOMO('arrow/sort2_desc.poc');
+test('SortText1ArgDesc', () => {
+	compareResourceOMO('arrow/sortText1ArgDesc.poc');
+});
+
+test('SortText2Args', () => {
+	compareResourceOMO('arrow/sortText2Args.poc');
+});
+
+test('SortText2ArgsDesc', () => {
+	compareResourceOMO('arrow/sortText2ArgsDesc.poc');
 });
 

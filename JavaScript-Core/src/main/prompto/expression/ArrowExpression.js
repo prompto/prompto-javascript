@@ -76,19 +76,19 @@ ArrowExpression.prototype.registerArrowArgs = function(context, itemType) {
 };
 
 
-ArrowExpression.prototype.getNativeSortedComparator = function(context, itemType, descending) {
+ArrowExpression.prototype.getSortedComparator = function(context, itemType, descending) {
     switch(this.args.length) {
         case 1:
-            return this.getNativeSortedComparator1Arg(context, itemType, descending);
+            return this.getSortedComparator1Arg(context, itemType, descending);
         case 2:
-            return this.getNativeSortedComparator2Args(context, itemType, descending);
+            return this.getSortedComparator2Args(context, itemType, descending);
         default:
             throw new Error("sorted arrow methods only support 1 or 2 arguments")
     }
 };
 
 
-ArrowExpression.prototype.getNativeSortedComparator1Arg = function(context, itemType, descending) {
+ArrowExpression.prototype.getSortedComparator1Arg = function(context, itemType, descending) {
     var cmp = function(o1, o2) {
         var local = this.registerArrowArgs(context.newLocalContext(), itemType);
         local.setValue(this.args[0], o1);
@@ -101,7 +101,7 @@ ArrowExpression.prototype.getNativeSortedComparator1Arg = function(context, item
 };
 
 
-ArrowExpression.prototype.getNativeSortedComparator2Args = function(context, itemType, descending) {
+ArrowExpression.prototype.getSortedComparator2Args = function(context, itemType, descending) {
     var cmp = function(o1, o2) {
         var local = this.registerArrowArgs(context.newLocalContext(), itemType);
         local.setValue(this.args[0], o1);
@@ -115,13 +115,13 @@ ArrowExpression.prototype.getNativeSortedComparator2Args = function(context, ite
 };
 
 
-ArrowExpression.prototype.transpileNativeSortedComparator = function(transpiler, itemType, descending) {
+ArrowExpression.prototype.transpileSortedComparator = function(transpiler, itemType, descending) {
     switch(this.args.length) {
         case 1:
-            this.transpileNativeSortedComparator1Arg(transpiler, itemType, descending);
+            this.transpileSortedComparator1Arg(transpiler, itemType, descending);
             break;
         case 2:
-            this.transpileNativeSortedComparator2Args(transpiler, itemType, descending);
+            this.transpileSortedComparator2Args(transpiler, itemType, descending);
             break;
         default:
             throw new SyntaxError("Expecting 1 or 2 parameters only!");
@@ -129,7 +129,7 @@ ArrowExpression.prototype.transpileNativeSortedComparator = function(transpiler,
 };
 
 
-ArrowExpression.prototype.transpileNativeSortedComparator1Arg = function(transpiler, itemType, descending) {
+ArrowExpression.prototype.transpileSortedComparator1Arg = function(transpiler, itemType, descending) {
     transpiler = transpiler.newLocalTranspiler();
     this.registerArrowArgs(transpiler.context, itemType);
     transpiler.append("function(o1, o2) { ");
@@ -149,7 +149,7 @@ ArrowExpression.prototype.transpileNativeSortedComparator1Arg = function(transpi
 };
 
 
-ArrowExpression.prototype.transpileNativeSortedComparator2Args = function(transpiler, itemType, descending) {
+ArrowExpression.prototype.transpileSortedComparator2Args = function(transpiler, itemType, descending) {
     transpiler = transpiler.newLocalTranspiler();
     this.registerArrowArgs(transpiler.context, itemType);
     if(descending) {
