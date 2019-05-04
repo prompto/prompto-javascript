@@ -1,8 +1,10 @@
 var Section = require("../parser/Section").Section;
+var Dialect = require("../parser/Dialect").Dialect;
 var ReturnStatement = require("../statement/ReturnStatement").ReturnStatement;
 var StatementList = require("../statement/StatementList").StatementList;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 
 function ArrowExpression(args, argsSuite, arrowSuite) {
@@ -61,6 +63,31 @@ ArrowExpression.prototype.argsToDialect = function(writer) {
 };
 
 
+ArrowExpression.prototype.filterToDialect = function(writer, source) {
+    if(this.args==null || this.args.length==0)
+        throw new SyntaxError("Expecting 1 parameter only!");
+    var sourceType = source.check(writer.context);
+    var itemType = sourceType.itemType;
+    writer = writer.newChildWriter();
+    writer.context.registerValue(new Variable(this.args[0], itemType));
+    switch(writer.dialect) {
+        case Dialect.E:
+        case Dialect.M:
+            source.toDialect(writer);
+            writer.append(" filtered where ");
+            this.toDialect(writer);
+            break;
+        case Dialect.O:
+            writer.append("filtered (");
+            source.toDialect(writer);
+            writer.append(") where (");
+            this.toDialect(writer);
+            writer.append(")");
+            break;
+    }
+};
+
+
 ArrowExpression.prototype.setExpression = function(expression) {
     var stmt = new ReturnStatement(expression);
     this.statements = new StatementList(stmt);
@@ -76,6 +103,40 @@ ArrowExpression.prototype.registerArrowArgs = function(context, itemType) {
 };
 
 
+ArrowExpression.prototype.getFilter = function(context, itemType) {
+    var local = this.registerArrowArgs(context.newLocalContext(), itemType);
+    var filter = function(o) {
+        local.setValue(this.args[0], o);
+        var result = this.statements.interpret(local);
+        if(result instanceof BooleanValue)
+            return result.value;
+        else
+            throw new SyntaxError("Expecting a Boolean result!");
+    };
+    return filter.bind(this);
+};
+
+
+ArrowExpression.prototype.declareFilter = function(transpiler, itemType) {
+    if(this.args.length!=1)
+        throw new SyntaxError("Expecting 1 parameter only!");
+    transpiler = transpiler.newChildTranspiler(null);
+    transpiler.context.registerValue(new Variable(this.args[0], itemType));
+    this.statements.declare(transpiler);
+};
+
+
+ArrowExpression.prototype.transpileFilter = function(transpiler, itemType) {
+    if(this.args.length!=1)
+        throw new SyntaxError("Expecting 1 parameter only!");
+    transpiler = transpiler.newChildTranspiler(null);
+    transpiler.context.registerValue(new Variable(this.args[0], itemType));
+    transpiler.append("function(").append(this.args[0]).append(") { ");
+    this.statements.transpile(transpiler);
+    transpiler.append(" }");
+    transpiler.flush();
+};
+
 ArrowExpression.prototype.getSortedComparator = function(context, itemType, descending) {
     switch(this.args.length) {
         case 1:
@@ -89,8 +150,8 @@ ArrowExpression.prototype.getSortedComparator = function(context, itemType, desc
 
 
 ArrowExpression.prototype.getSortedComparator1Arg = function(context, itemType, descending) {
+    var local = this.registerArrowArgs(context.newLocalContext(), itemType);
     var cmp = function(o1, o2) {
-        var local = this.registerArrowArgs(context.newLocalContext(), itemType);
         local.setValue(this.args[0], o1);
         var key1 = this.statements.interpret(local);
         local.setValue(this.args[0], o2);
@@ -102,8 +163,8 @@ ArrowExpression.prototype.getSortedComparator1Arg = function(context, itemType, 
 
 
 ArrowExpression.prototype.getSortedComparator2Args = function(context, itemType, descending) {
+    var local = this.registerArrowArgs(context.newLocalContext(), itemType);
     var cmp = function(o1, o2) {
-        var local = this.registerArrowArgs(context.newLocalContext(), itemType);
         local.setValue(this.args[0], o1);
         local.setValue(this.args[1], o2);
         var result = this.statements.interpret(local);

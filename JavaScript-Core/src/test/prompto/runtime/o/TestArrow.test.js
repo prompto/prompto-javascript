@@ -10,6 +10,22 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted FilterFromList', () => {
+	checkInterpretedOutput('arrow/filterFromList.poc');
+});
+
+test('Transpiled FilterFromList', () => {
+	checkTranspiledOutput('arrow/filterFromList.poc');
+});
+
+test('Interpreted FilterFromSet', () => {
+	checkInterpretedOutput('arrow/filterFromSet.poc');
+});
+
+test('Transpiled FilterFromSet', () => {
+	checkTranspiledOutput('arrow/filterFromSet.poc');
+});
+
 test('Interpreted SortCategory1Arg', () => {
 	checkInterpretedOutput('arrow/sortCategory1Arg.poc');
 });

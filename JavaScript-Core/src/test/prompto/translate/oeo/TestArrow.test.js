@@ -1,5 +1,13 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('FilterFromList', () => {
+	compareResourceOEO('arrow/filterFromList.poc');
+});
+
+test('FilterFromSet', () => {
+	compareResourceOEO('arrow/filterFromSet.poc');
+});
+
 test('SortCategory1Arg', () => {
 	compareResourceOEO('arrow/sortCategory1Arg.poc');
 });

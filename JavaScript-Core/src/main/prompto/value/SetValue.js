@@ -96,22 +96,12 @@ SetValue.prototype.Subtract = function(context, value) {
 };
 
 
-SetValue.prototype.filter = function(context, itemId, filter) {
-    var result = new SetValue(this.type.itemType);
-    var iter = this.getIterator(context);
-    while(iter.hasNext()) {
-        var o = iter.next();
-        context.setValue(itemId, o);
-        var test = filter.interpret(context);
-        if(!(test instanceof BooleanValue)) {
-            throw new InternalError("Illegal test result: " + test);
-        }
-        if(test.value) {
-            result.add(o);
-        }
-    }
-    return result;
-}
+SetValue.prototype.filter = function(filter) {
+    var items = Array.from(this.items.set).filter(filter);
+    var result = new StrictSet(items);
+    return new SetValue(this.type.itemType, result);
+};
+
 
 SetValue.prototype.getIterator = function(context) {
     return this.items.iterator();
