@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
-  "main": "./JavaScript-Core/src/main/index.js",
   "devDependencies": {
     "react-scripts": "^3.0.0"
   },
