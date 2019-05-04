@@ -73,25 +73,21 @@ CursorValue.prototype.getMemberValue = function(context, name) {
         throw new InvalidDataError("No such member:" + name);
 };
 
-CursorValue.prototype.filter = function(context, itemId, filter) {
+CursorValue.prototype.filter = function(filter) {
     var cursor = new CursorValue(this.context, this.type.itemType, this.iterDocuments);
-    cursor.superHasNext = cursor.hasNext;
+    cursor.source = this;
+    cursor.current = null;
     cursor.hasNext = function() {
         this.current = null;
-        while(this.superHasNext()) {
-            this.current = this.superNext();
-            context.setValue(itemId, this.current);
-            var test = filter.interpret(context);
-            if(!(test instanceof BooleanValue)) {
-                throw new InternalError("Illegal test result: " + test);
-            }
-            if(test.value)
+        while(this.source.hasNext()) {
+            var current = this.source.next();
+            if(filter(current)) {
+                this.current = current;
                 return true;
+            }
         }
-        this.current = null;
         return false;
     };
-    cursor.superNext = cursor.next;
     cursor.next = function() {
         return this.current;
     };

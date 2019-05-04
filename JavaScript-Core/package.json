@@ -10,7 +10,8 @@
   "dependencies": {
     "antlr4": "4.7.1",
     "jszip-sync": "3.2.1-sync",
-    "sync-request": "3.0.1"
+    "sync-request": "3.0.1",
+    "webpack": "^3.6.0"
   },
   "scripts": {
     "test": "jest"
