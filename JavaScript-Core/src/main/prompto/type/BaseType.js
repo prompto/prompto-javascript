@@ -448,35 +448,20 @@ BaseType.prototype.declareSorted = function(transpiler, key) {
     throw new Error("Cannot declare sorted from " + this.name);
 };
 
-BaseType.prototype.sort = function(context, list, desc) {
-    throw new Error("Unsupported!")
+
+BaseType.prototype.getSortedComparator = function(context, key, desc) {
+    throw new Error("Unsupported for type " + this.name);
 };
 
-
-BaseType.prototype.doSort = function(context, list, cmp, desc) {
-	// only sort if required
-	if(list.size()<=1) {
-		return list;
-	}
-    // create result list we can sort in place
-    var items = null;
-    if( list instanceof ListValue || list instanceof TupleValue) {
-        items = [].concat(list.items);
-    } else if ( list instanceof SetValue) {
-        items = Array.from(list.items.set.values());
-    }
-    items.sort(cmp);
-    if(desc)
-        items.reverse(); // TODO optimize
-	return new ListValue(list.type.itemType, items);
-};
 
 BaseType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
 	return value; // TODO for now
 };
 
+
 BaseType.prototype.toDialect = function(writer) {
     writer.append(this.name);
 };
+
 
 exports.BaseType = BaseType;

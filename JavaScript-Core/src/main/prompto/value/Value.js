@@ -62,7 +62,7 @@ Value.prototype.Minus = function(context) {
 	throw new SyntaxError("Minus not supported by " + this.constructor.name);
 };
 
-Value.prototype.CompareTo = function(context, value) {
+Value.prototype.compareToValue = function(context, value) {
 	throw new SyntaxError("Compare not supported by " + this.constructor.name);
 };
 

@@ -58,7 +58,7 @@ CharacterValue.prototype.cmp = function(obj) {
     return this.value > obj.value ? 1 : this.value == obj.value ? 0 : -1 ;
 };
 
-CharacterValue.prototype.CompareTo = function(context, value) {
+CharacterValue.prototype.compareToValue = function(context, value) {
     if(value instanceof TextValue || value instanceof CharacterValue) {
         return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
     } else {

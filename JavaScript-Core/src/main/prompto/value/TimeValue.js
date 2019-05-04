@@ -44,7 +44,7 @@ TimeValue.prototype.Subtract = function(context, value) {
 	}
 };
 
-TimeValue.prototype.CompareTo = function(context, value) {
+TimeValue.prototype.compareToValue = function(context, value) {
 	if (value instanceof TimeValue) {
 		return this.cmp(value);
 	} else {

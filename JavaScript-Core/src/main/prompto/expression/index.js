@@ -41,6 +41,7 @@ exports.ThisExpression = require("./ThisExpression").ThisExpression;
 exports.NativeSymbol = require("./NativeSymbol").NativeSymbol;
 exports.CategorySymbol = require("./CategorySymbol").CategorySymbol;
 exports.UnresolvedSelector = require("./UnresolvedSelector").UnresolvedSelector;
+exports.ArrowExpression = require("./ArrowExpression").ArrowExpression;
 
 require('./MethodSelector').resolve();
 require('./MemberSelector').resolve();

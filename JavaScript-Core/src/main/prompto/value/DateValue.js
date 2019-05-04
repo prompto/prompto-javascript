@@ -47,7 +47,7 @@ DateValue.prototype.Subtract = function(context, value)  {
 
 
 
-DateValue.prototype.CompareTo = function(context, value) {
+DateValue.prototype.compareToValue = function(context, value) {
     if (value instanceof DateValue || value instanceof DateTime) {
         return this.cmp(value);
     } else {

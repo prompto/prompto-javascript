@@ -48,14 +48,31 @@ OPromptoBuilder.prototype.getNodeValue = function(node) {
 };
 
 
+OPromptoBuilder.prototype.getHiddenTokensBeforeNode = function(node) {
+    return node ? this.getHiddenTokensBeforeToken(node.symbol) : null;
+};
+
+
+OPromptoBuilder.prototype.getHiddenTokensBeforeToken = function(token) {
+    return this.getHiddenTokens(token, this.input.getHiddenTokensToLeft);
+};
+
+
 OPromptoBuilder.prototype.getHiddenTokensAfterNode = function(node) {
     return node ? this.getHiddenTokensAfterToken(node.symbol) : null;
 };
 
+
 OPromptoBuilder.prototype.getHiddenTokensAfterToken = function(token) {
+    return this.getHiddenTokens(token, this.input.getHiddenTokensToRight);
+};
+
+
+OPromptoBuilder.prototype.getHiddenTokens = function(token, fetcher) {
     if(token.tokenIndex<0)
         return null;
-    var hidden = this.input.getHiddenTokensToRight(token.tokenIndex);
+    fetcher = fetcher.bind(this.input);
+    var hidden = fetcher(token.tokenIndex);
     if(hidden==null || hidden.length===0)
         return null;
     else
@@ -712,6 +729,47 @@ OPromptoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
 	this.setNodeValue(ctx, items);
+};
+
+
+OPromptoBuilder.prototype.exitArrow_prefix = function(ctx) {
+    var args = this.getNodeValue(ctx.arrow_args());
+    var argsSuite = this.getHiddenTokensBeforeNode(ctx.EGT());
+    var arrowSuite = this.getHiddenTokensAfterNode(ctx.EGT());
+    this.setNodeValue(ctx, new expression.ArrowExpression(args, argsSuite, arrowSuite));
+};
+
+
+OPromptoBuilder.prototype.exitArrowExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+};
+
+
+OPromptoBuilder.prototype.exitArrowExpressionBody = function(ctx) {
+    var arrow = this.getNodeValue(ctx.arrow_prefix());
+    var exp = this.getNodeValue(ctx.expression());
+    arrow.setExpression(exp);
+    this.setNodeValue(ctx, arrow);
+};
+
+
+OPromptoBuilder.prototype.exitArrowListArg = function(ctx) {
+    var list = this.getNodeValue(ctx.variable_identifier_list());
+    this.setNodeValue(ctx, list);
+};
+
+
+OPromptoBuilder.prototype.exitArrowSingleArg = function(ctx) {
+    var arg = this.getNodeValue(ctx.variable_identifier());
+    this.setNodeValue(ctx, new grammar.IdentifierList(arg));
+};
+
+
+OPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
+    var arrow = getNodeValue(ctx.arrow_prefix());
+    var stmts = getNodeValue(ctx.statement_list());
+    arrow.setStatements(stmts);
+    this.setNodeValue(ctx, arrow);
 };
 
 
@@ -2010,12 +2068,10 @@ OPromptoBuilder.prototype.exitSliceFirstOnly = function(ctx) {
 };
 
 
-
 OPromptoBuilder.prototype.exitSliceLastOnly = function(ctx) {
 	var last = this.getNodeValue(ctx.last);
 	this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
 };
-
 
 
 OPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
@@ -2025,6 +2081,11 @@ OPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
 	this.setNodeValue(ctx, new expression.SortedExpression(source, desc, key));
 };
 
+
+OPromptoBuilder.prototype.exitSorted_key = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
+};
 
 
 OPromptoBuilder.prototype.exitDocument_expression = function(ctx) {

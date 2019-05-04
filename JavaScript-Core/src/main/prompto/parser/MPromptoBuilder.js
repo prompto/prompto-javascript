@@ -69,7 +69,7 @@ MPromptoBuilder.prototype.getHiddenTokensText = function(hidden) {
         return hidden.map(function(token) { return token.text; }).join("");
 };
 
-MPromptoBuilder.prototype.getJsxWhiteSpace = function(ctx) {
+MPromptoBuilder.prototype.getWhiteSpacePlus = function(ctx) {
     var within = ctx.children==null ? null : ctx.children
         .filter(function(child) { return this.isNotIndent(child); } , this)
         .map(function(child) { return child.getText(); }, this)
@@ -735,6 +735,51 @@ MPromptoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
 	var items = this.getNodeValue(ctx.items);
 	items.add(item);
 	this.setNodeValue(ctx, items);
+};
+
+
+MPromptoBuilder.prototype.exitArrow_prefix = function(ctx) {
+    var args = this.getNodeValue(ctx.arrow_args());
+    var argsSuite = this.getWhiteSpacePlus(ctx.s1);
+    if(argsSuite==null) // happens when only WS
+        argsSuite = this.getHiddenTokensBefore(ctx.EGT().getSymbol());
+    var arrowSuite = this.getWhiteSpacePlus(ctx.s2);
+    if(arrowSuite==null) // happens when only WS
+        arrowSuite = this.getHiddenTokensAfter(ctx.EGT().getSymbol());
+    this.setNodeValue(ctx, new expression.ArrowExpression(args, argsSuite, arrowSuite));
+};
+
+
+MPromptoBuilder.prototype.exitArrowExpression = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+};
+
+
+MPromptoBuilder.prototype.exitArrowExpressionBody = function(ctx) {
+    var arrow = this.getNodeValue(ctx.arrow_prefix());
+    var exp = this.getNodeValue(ctx.expression());
+    arrow.setExpression(exp);
+    this.setNodeValue(ctx, arrow);
+};
+
+
+MPromptoBuilder.prototype.exitArrowListArg = function(ctx) {
+    var list = this.getNodeValue(ctx.variable_identifier_list());
+    this.setNodeValue(ctx, list);
+};
+
+
+MPromptoBuilder.prototype.exitArrowSingleArg = function(ctx) {
+    var arg = this.getNodeValue(ctx.variable_identifier());
+    this.setNodeValue(ctx, new grammar.IdentifierList(arg));
+};
+
+
+MPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
+    var arrow = getNodeValue(ctx.arrow_prefix());
+    var stmts = getNodeValue(ctx.statement_list());
+    arrow.setStatements(stmts);
+    this.setNodeValue(ctx, arrow);
 };
 
 
@@ -2023,6 +2068,11 @@ MPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitSorted_key = function(ctx) {
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
+};
+
 
 MPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
     var exp = this.getNodeValue(ctx.expression());
@@ -2674,7 +2724,7 @@ MPromptoBuilder.prototype.exitJsxValue = function(ctx) {
 MPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var value = this.getNodeValue(ctx.value);
-    var suite = this.getJsxWhiteSpace(ctx.jsx_ws());
+    var suite = this.getWhiteSpacePlus(ctx.ws_plus());
     this.setNodeValue(ctx, new jsx.JsxAttribute(name, value, suite));
 };
 
@@ -2712,7 +2762,7 @@ MPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
 
 MPromptoBuilder.prototype.exitJsx_opening = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var nameSuite = this.getJsxWhiteSpace(ctx.jsx_ws());
+    var nameSuite = this.getWhiteSpacePlus(ctx.ws_plus());
     var attributes = ctx.jsx_attribute()
         .map(function(cx) { return this.getNodeValue(cx); }, this);
     this.setNodeValue(ctx, new jsx.JsxElement(name, nameSuite, attributes, null));
@@ -2728,7 +2778,7 @@ MPromptoBuilder.prototype.exitJsx_closing = function(ctx) {
 
 MPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var nameSuite = this.getJsxWhiteSpace(ctx.jsx_ws());
+    var nameSuite = this.getWhiteSpacePlus(ctx.ws_plus());
     var attributes = ctx.jsx_attribute()
         .map(function(cx) { return this.getNodeValue(cx); }, this);
     this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, nameSuite, attributes, null));

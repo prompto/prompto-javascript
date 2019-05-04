@@ -86,22 +86,10 @@ ListValue.prototype.toDialect = function(writer) {
     writer.append(']');
 };
 
-ListValue.prototype.filter = function(context, itemId, filter) {
-    var result = new ListValue(this.type.itemType);
-    var iter = this.getIterator(context);
-    while(iter.hasNext()) {
-        var o = iter.next();
-        context.setValue(itemId, o);
-        var test = filter.interpret(context);
-        if(!(test instanceof BooleanValue)) {
-            throw new InternalError("Illegal test result: " + test);
-        }
-        if(test.value) {
-            result.add(o);
-        }
-    }
-    return result;
-}
+ListValue.prototype.filter = function(filter) {
+    var items = this.items.filter(filter);
+    return new ListValue(this.type.itemType, items);
+};
 
 exports.ListValue = ListValue;
 

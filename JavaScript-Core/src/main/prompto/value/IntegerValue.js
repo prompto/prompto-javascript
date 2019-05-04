@@ -114,7 +114,7 @@ IntegerValue.prototype.cmp = function(obj) {
 	return this.value > obj.IntegerValue() ? 1 : this.value == obj.IntegerValue() ? 0 : -1 ;
 };
 
-IntegerValue.prototype.CompareTo = function(context, value) {
+IntegerValue.prototype.compareToValue = function(context, value) {
 	if (value instanceof IntegerValue || value instanceof DecimalValue) {
 		return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
 	} else {

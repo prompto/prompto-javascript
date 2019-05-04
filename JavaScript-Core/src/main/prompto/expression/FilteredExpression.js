@@ -10,6 +10,9 @@ var ListValue = require("../value/ListValue").ListValue;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var SetValue = require("../value/SetValue").SetValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
+var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+
 
 function FilteredExpression(itemId, source, predicate) {
 	Section.call(this);
@@ -23,29 +26,35 @@ FilteredExpression.prototype  = Object.create(Section.prototype);
 FilteredExpression.prototype.constructor = FilteredExpression;
 
 
-FilteredExpression.prototype.toDialect = function(dialect) {
+FilteredExpression.prototype.toString = function(dialect) {
 	return this.source.toString() + " filtered with " + this.itemId + " where " + this.predicate.toString();
 };
 
 FilteredExpression.prototype.check = function(context) {
-	var listType = this.source.check(context);
-	if(!(listType instanceof IterableType)) {
+	var sourceType = this.source.check(context);
+	if(!(sourceType instanceof IterableType)) {
 		throw new SyntaxError("Expecting an iterable type as data source !");
 	}
-	var child = context.newChildContext();
-	child.registerValue(new Variable(this.itemId, listType.itemType));
-	var filterType = this.predicate.check(child);
-	if(filterType!=BooleanType.instance) {
-		throw new SyntaxError("Filtering expresion must return a boolean !");
-	}
-	return listType;
+    var itemType = sourceType.itemType;
+	if(this.itemId!=null) {
+        var child = context.newChildContext();
+        child.registerValue(new Variable(this.itemId, itemType));
+        var filterType = this.predicate.check(child);
+        if (filterType != BooleanType.instance) {
+            throw new SyntaxError("Filtering expression must return a boolean !");
+        }
+    } else if(this.predicate instanceof ArrowExpression) {
+        // TODO
+    } else
+        throw new SyntaxError("Expecting an arrow expression!");
+    return sourceType;
 };
 
 
 FilteredExpression.prototype.interpret = function(context) {
-	var listType = this.source.check(context);
-	if(!(listType instanceof IterableType)) {
-		throw new InternalError("Illegal source type: " + listType.name);
+	var sourceType = this.source.check(context);
+	if(!(sourceType instanceof IterableType)) {
+		throw new InternalError("Illegal source type: " + sourceType.name);
 	}
 	var list = this.source.interpret(context);
 	if(list==null) {
@@ -54,42 +63,64 @@ FilteredExpression.prototype.interpret = function(context) {
 	if(!list.filter) {
 		throw new InternalError("Illegal fetch source: " + this.source);
 	}
-	var itemType = listType.itemType;
-    var child = context.newChildContext();
-    var item = new Variable(this.itemId, itemType);
-    child.registerValue(item);
-    return list.filter(child, this.itemId, this.predicate)
+    var itemType = sourceType.itemType;
+    var arrow = this.toArrowExpression();
+    var filter = arrow.getFilter(context, itemType);
+    return list.filter(filter)
 };
+
+FilteredExpression.prototype.toArrowExpression = function() {
+    if(this.itemId!=null) {
+        var arrow = new ArrowExpression(new IdentifierList(this.itemId), null, null);
+        arrow.setExpression(this.predicate);
+        return arrow;
+    } else if(this.predicate instanceof ArrowExpression)
+        return this.predicate;
+    else
+        throw new SyntaxError("Not a valid filter!");
+};
+
 
 FilteredExpression.prototype.declare = function(transpiler) {
     this.source.declare(transpiler);
     var listType = this.source.check(transpiler.context);
-    transpiler = transpiler.newChildTranspiler();
-    transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
-    this.predicate.declare(transpiler);
+    var itemType = listType.itemType;
+    var arrow = this.toArrowExpression();
+    arrow.declareFilter(transpiler, itemType);
 };
+
 
 FilteredExpression.prototype.transpile = function(transpiler) {
     var listType = this.source.check(transpiler.context);
+    var itemType = listType.itemType;
     this.source.transpile(transpiler);
-    transpiler.append(".filtered(function(").append(this.itemId.name).append(") { return ");
-    transpiler = transpiler.newChildTranspiler();
-    transpiler.context.registerValue(new Variable(this.itemId, listType.itemType));
-    this.predicate.transpile(transpiler);
-    transpiler.append("; })");
+    transpiler.append(".filtered(");
+    var arrow = this.toArrowExpression();
+    arrow.transpileFilter(transpiler, itemType);
+    transpiler.append(")");
     transpiler.flush();
 };
 
 
 FilteredExpression.prototype.toDialect = function(writer) {
+    writer.toDialect(this);
+};
+
+
+FilteredExpression.prototype.toEDialect = function(writer) {
+    if (this.itemId)
+        this.toEDialectExplicit(writer);
+    else if (this.predicate instanceof ArrowExpression)
+        this.predicate.filterToDialect(writer, this.source);
+    else
+        throw new SyntaxError("Expected an arrow expression!");
+};
+
+FilteredExpression.prototype.toEDialectExplicit = function(writer) {
     writer = writer.newChildWriter();
     var sourceType = this.source.check(writer.context);
     var itemType = sourceType.itemType;
     writer.context.registerValue(new Variable(this.itemId, itemType));
-    writer.toDialect(this);
-};
-
-FilteredExpression.prototype.toEDialect = function(writer) {
     this.source.toDialect(writer);
     writer.append(" filtered with ");
     writer.append(this.itemId.name);
@@ -99,6 +130,19 @@ FilteredExpression.prototype.toEDialect = function(writer) {
 
 
 FilteredExpression.prototype.toODialect = function(writer) {
+    if (this.itemId)
+        this.toODialectExplicit(writer);
+    else if (this.predicate instanceof ArrowExpression)
+        this.predicate.filterToDialect(writer, this.source);
+    else
+        throw new SyntaxError("Expected an arrow expression!");
+};
+
+FilteredExpression.prototype.toODialectExplicit = function(writer) {
+    writer = writer.newChildWriter();
+    var sourceType = this.source.check(writer.context);
+    var itemType = sourceType.itemType;
+    writer.context.registerValue(new Variable(this.itemId, itemType));
     writer.append("filtered (");
     this.source.toDialect(writer);
     writer.append(") with (");
