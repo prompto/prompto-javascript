@@ -2,7 +2,7 @@ var path = require('path');
 var target_dir = path.resolve(__dirname, "../../prompto-factory/CodeFactory/CodeFactory/src/main/resources/js/lib/")
 
 module.exports = {
-    entry: './src/main/prompto/index.js',
+    entry: './src/main/index.js',
     output: {
         path: target_dir,
         filename: 'prompto.core.bundle.js'
