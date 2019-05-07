@@ -39,6 +39,10 @@ MCleverParser.prototype.parse_declaration_list = function() {
 	return this.doParse(this.declaration_list, true);
 };
 
+MCleverParser.prototype.parse_repl_input = function() {
+	return this.doParse(this.repl, true);
+};
+
 MCleverParser.prototype.equalToken = function() {
     return MParser.EQUAL;
 };

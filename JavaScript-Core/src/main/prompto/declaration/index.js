@@ -1,3 +1,4 @@
+exports.Declaration = require('./BaseDeclaration').BaseDeclaration;
 exports.AttributeDeclaration = require('./AttributeDeclaration').AttributeDeclaration;
 exports.CategoryDeclaration = require('./CategoryDeclaration').CategoryDeclaration;
 exports.ConcreteCategoryDeclaration = require('./ConcreteCategoryDeclaration').ConcreteCategoryDeclaration;

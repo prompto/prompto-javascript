@@ -2248,12 +2248,16 @@ OPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 };
 
 
-
 OPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
     var source = this.getNodeValue(ctx.source);
     this.setNodeValue(ctx, new expression.ReadOneExpression(source));
 };
 
+
+OPromptoBuilder.prototype.exitRepl = function(ctx) {
+    var value = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, value);
+};
 
 
 OPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
@@ -2262,6 +2266,7 @@ OPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
     var stmts = this.getNodeValue(ctx.stmts);
     this.setNodeValue(ctx, new statement.WithSingletonStatement(typ, stmts));
 };
+
 
 OPromptoBuilder.prototype.exitWithSingletonStatement = function(ctx) {
     var stmt = this.getNodeValue(ctx.stmt);

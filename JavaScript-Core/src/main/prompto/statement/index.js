@@ -1,4 +1,4 @@
-exports.BaseStatement = require("./BaseStatement").BaseStatement;
+exports.Statement = require("./BaseStatement").BaseStatement;
 exports.SimpleStatement = require("./SimpleStatement").SimpleStatement;
 exports.CommentStatement = require("./CommentStatement").CommentStatement;
 exports.StatementList = require("./StatementList").StatementList;

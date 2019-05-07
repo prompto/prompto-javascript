@@ -1496,6 +1496,15 @@ EParserListener.prototype.exitNull_literal = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#repl.
+EParserListener.prototype.enterRepl = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#repl.
+EParserListener.prototype.exitRepl = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#FullDeclarationList.
 EParserListener.prototype.enterFullDeclarationList = function(ctx) {
 };

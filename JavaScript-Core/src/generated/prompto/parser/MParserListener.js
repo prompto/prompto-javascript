@@ -1352,6 +1352,15 @@ MParserListener.prototype.exitNull_literal = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#repl.
+MParserListener.prototype.enterRepl = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#repl.
+MParserListener.prototype.exitRepl = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#FullDeclarationList.
 MParserListener.prototype.enterFullDeclarationList = function(ctx) {
 };

@@ -2235,12 +2235,10 @@ MPromptoBuilder.prototype.exitEnum_declaration = function(ctx) {
 };
 
 
-
 MPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 	var source = this.getNodeValue(ctx.source);
 	this.setNodeValue(ctx, new expression.ReadAllExpression(source));
 };
-
 
 
 MPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
@@ -2249,6 +2247,10 @@ MPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitRepl = function(ctx) {
+    var value = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, value);
+};
 
 
 MPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
@@ -2257,6 +2259,7 @@ MPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
     var stmts = this.getNodeValue(ctx.stmts);
     this.setNodeValue(ctx, new statement.WithSingletonStatement(typ, stmts));
 };
+
 
 MPromptoBuilder.prototype.exitWithSingletonStatement = function(ctx) {
     var stmt = this.getNodeValue(ctx.stmt);

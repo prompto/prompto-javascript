@@ -39,6 +39,10 @@ OCleverParser.prototype.parse_declaration_list = function() {
 	return this.doParse(this.declaration_list);
 };
 
+OCleverParser.prototype.parse_repl_input = function() {
+	return this.doParse(this.repl, true);
+};
+
 OCleverParser.prototype.equalToken = function() {
 	return OParser.EQUAL;
 };
