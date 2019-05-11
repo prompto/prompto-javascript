@@ -9,7 +9,6 @@ var AnyType = require("./AnyType").AnyType;
 var DateTime = require("../intrinsic/DateTime").DateTime;
 var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
-var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
@@ -31,14 +30,12 @@ DateTimeType.prototype.constructor = DateTimeType;
 DateTimeType.instance = new DateTimeType();
 
 DateTimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-	var typeName = getTypeName(value);
-	if (typeName=='DateTime') {
+    if (value instanceof Date)
+        value = new DateTime(value, 0);
+    if(value instanceof DateTime)
         return new DateTimeValue(value);
-    } else if (typeName=='Date') {
-        return new DateTimeValue(new DateTime(value, 0));
-    } else {
+    else
         return value; // TODO for now
-    }
 };
 
 DateTimeType.prototype.checkAdd = function(context, other, tryReverse) {

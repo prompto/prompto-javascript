@@ -9,6 +9,7 @@ var getTypeName = require("./JavaScriptUtils").getTypeName;
 var InternalError = require("../error/InternalError").InternalError;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var AnyNativeCategoryDeclaration = require("../declaration/AnyNativeCategoryDeclaration").AnyNativeCategoryDeclaration;
+var intrinsic = require("../intrinsic");
 
 function JavaScriptType(name) {
 	type.CategoryType.call(this, name);
@@ -20,22 +21,23 @@ JavaScriptType.prototype.constructor = JavaScriptType;
 
 
 JavaScriptType.scriptToTypeMap = {
-	'string' : type.TextType.instance,
-	'boolean' : type.BooleanType.instance,
-    'LocalDate' : type.DateType.instance,
-    'LocalTime' : type.TimeType.instance,
-    'DateTime' : type.DateTimeType.instance,
-    'Period' : type.PeriodType.instance,
+    'string': type.TextType.instance,
+    'boolean': type.BooleanType.instance,
     'Date' : type.DateTimeType.instance,
-    'UUID' : type.UUIDType.instance,
-    'Version' : type.VersionType.instance,
-	'object' : type.AnyType.instance
+    'object': type.AnyType.instance
 };
 
+// workaround webpack name mangling
+JavaScriptType.scriptToTypeMap[intrinsic.LocalDate.name] = type.DateType.instance;
+JavaScriptType.scriptToTypeMap[intrinsic.LocalTime.name] = type.TimeType.instance;
+JavaScriptType.scriptToTypeMap[intrinsic.DateTime.name] = type.DateTimeType.instance;
+JavaScriptType.scriptToTypeMap[intrinsic.Period.name] = type.PeriodType.instance;
+JavaScriptType.scriptToTypeMap[intrinsic.UUID.name] = type.UUIDType.instance;
+JavaScriptType.scriptToTypeMap[intrinsic.Version.name] = type.VersionType.instance;
 
 JavaScriptType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     return this.doConvertJavaScriptValueToPromptoValue(context, value, this.name, returnType);
-}
+};
 
 JavaScriptType.prototype.doConvertJavaScriptValueToPromptoValue = function(context, value, klass, returnType) {
     if(value==null)
