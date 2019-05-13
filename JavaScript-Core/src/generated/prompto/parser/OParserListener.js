@@ -1379,6 +1379,15 @@ OParserListener.prototype.exitWs_plus = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#repl.
+OParserListener.prototype.enterRepl = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#repl.
+OParserListener.prototype.exitRepl = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#FullDeclarationList.
 OParserListener.prototype.enterFullDeclarationList = function(ctx) {
 };

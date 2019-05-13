@@ -39,6 +39,10 @@ ECleverParser.prototype.parse_declaration_list = function() {
 	return this.doParse(this.declaration_list, true);
 };
 
+ECleverParser.prototype.parse_repl_input = function() {
+	return this.doParse(this.repl, true);
+};
+
 ECleverParser.prototype.parse_standalone_type = function() {
     return this.doParse(this.category_or_any_type, false);
 };

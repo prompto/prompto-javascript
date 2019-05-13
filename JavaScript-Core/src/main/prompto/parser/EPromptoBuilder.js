@@ -2247,12 +2247,10 @@ EPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
 };
 
 
-
 EPromptoBuilder.prototype.exitReadAllExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);
 };
-
 
 
 EPromptoBuilder.prototype.exitReadOneExpression = function(ctx) {
@@ -2261,6 +2259,11 @@ EPromptoBuilder.prototype.exitReadOneExpression = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitRepl = function(ctx) {
+    var value = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, value);
+};
+
 
 EPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
     var name = this.getNodeValue(ctx.typ);
@@ -2268,7 +2271,6 @@ EPromptoBuilder.prototype.exitWith_singleton_statement = function(ctx) {
     var stmts = this.getNodeValue(ctx.stmts);
     this.setNodeValue(ctx, new statement.WithSingletonStatement(typ, stmts));
 };
-
 
 
 EPromptoBuilder.prototype.exitWithSingletonStatement = function(ctx) {
@@ -2285,7 +2287,6 @@ EPromptoBuilder.prototype.exitWrite_statement = function(ctx) {
 };
 
 
-
 EPromptoBuilder.prototype.exitWith_resource_statement = function(ctx) {
 	var stmt = this.getNodeValue(ctx.stmt);
 	var stmts = this.getNodeValue(ctx.stmts);
@@ -2293,18 +2294,15 @@ EPromptoBuilder.prototype.exitWith_resource_statement = function(ctx) {
 };
 
 
-
 EPromptoBuilder.prototype.exitAnyType = function(ctx) {
 	this.setNodeValue(ctx, type.AnyType.instance);
 };
-
 
 
 EPromptoBuilder.prototype.exitAnyListType = function(ctx) {
 	var typ = this.getNodeValue(ctx.any_type());
 	this.setNodeValue(ctx, new type.ListType(typ));
 };
-
 
 
 EPromptoBuilder.prototype.exitAnyDictType = function(ctx) {
@@ -2317,7 +2315,7 @@ EPromptoBuilder.prototype.exitCastExpression = function(ctx) {
     var left = this.getNodeValue(ctx.left);
     var type = this.getNodeValue(ctx.right);
     this.setNodeValue(ctx, new expression.CastExpression(left, type));
-}
+};
 
 EPromptoBuilder.prototype.exitCatchAtomicStatement = function(ctx) {
 	var name = this.getNodeValue(ctx.name);

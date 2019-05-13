@@ -8,7 +8,6 @@ var TimeValue = require("../value/TimeValue").TimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
-var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 function TimeType()  {
 	NativeType.call(this, new Identifier("TimeValue"));
@@ -32,7 +31,7 @@ TimeType.prototype.isAssignableFrom = function(context, other) {
 
 
 TimeType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-    if (getTypeName(value)=='LocalTime') {
+    if (value instanceof LocalTime) {
         return new TimeValue(value);
     } else {
         return value; // TODO for now
