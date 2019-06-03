@@ -56,6 +56,8 @@ AndExpression.prototype.check = function(context) {
 
 AndExpression.prototype.interpret = function(context) {
 	var lval = this.left.interpret(context);
+	if(lval instanceof BooleanValue && !lval.value)
+	    return lval;
 	var rval = this.right.interpret(context);
 	return lval.And(rval);
 };
@@ -75,9 +77,10 @@ AndExpression.prototype.transpile = function(transpiler) {
 
 AndExpression.prototype.interpretAssert = function(context, test) {
     var lval = this.left.interpret(context);
-    var rval = this.right.interpret(context);
-    var result = lval.And(rval);
-    if(result==BooleanValue.TRUE)
+    var rval = lval;
+    if(lval instanceof BooleanValue && lval.value)
+        rval = this.right.interpret(context);
+    if(rval==BooleanValue.TRUE)
         return true;
     var expected = this.getExpected(context, test.dialect);
     var actual = lval.toString() + this.operatorToDialect(test.dialect) + rval.toString();

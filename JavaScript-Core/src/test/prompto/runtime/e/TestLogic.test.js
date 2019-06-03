@@ -34,3 +34,11 @@ test('Transpiled OrBoolean', () => {
 	checkTranspiledOutput('logic/orBoolean.pec');
 });
 
+test('Interpreted RightSkipped', () => {
+	checkInterpretedOutput('logic/rightSkipped.pec');
+});
+
+test('Transpiled RightSkipped', () => {
+	checkTranspiledOutput('logic/rightSkipped.pec');
+});
+

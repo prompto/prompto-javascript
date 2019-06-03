@@ -12,3 +12,7 @@ test('OrBoolean', () => {
 	compareResourceOEO('logic/orBoolean.poc');
 });
 
+test('RightSkipped', () => {
+	compareResourceOEO('logic/rightSkipped.poc');
+});
+
