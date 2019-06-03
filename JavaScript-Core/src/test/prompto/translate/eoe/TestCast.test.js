@@ -52,7 +52,7 @@ test('IsAText', () => {
 	compareResourceEOE('cast/isAText.pec');
 });
 
-test('NullisNotAText', () => {
-	compareResourceEOE('cast/nullisNotAText.pec');
+test('NullIsNotAText', () => {
+	compareResourceEOE('cast/nullIsNotAText.pec');
 });
 

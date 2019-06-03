@@ -114,11 +114,11 @@ test('Transpiled IsAText', () => {
 	checkTranspiledOutput('cast/isAText.pec');
 });
 
-test('Interpreted NullisNotAText', () => {
-	checkInterpretedOutput('cast/nullisNotAText.pec');
+test('Interpreted NullIsNotAText', () => {
+	checkInterpretedOutput('cast/nullIsNotAText.pec');
 });
 
-test('Transpiled NullisNotAText', () => {
-	checkTranspiledOutput('cast/nullisNotAText.pec');
+test('Transpiled NullIsNotAText', () => {
+	checkTranspiledOutput('cast/nullIsNotAText.pec');
 });
 
