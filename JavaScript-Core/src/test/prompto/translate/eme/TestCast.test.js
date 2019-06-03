@@ -52,3 +52,7 @@ test('IsAText', () => {
 	compareResourceEME('cast/isAText.pec');
 });
 
+test('NullisNotAText', () => {
+	compareResourceEME('cast/nullisNotAText.pec');
+});
+

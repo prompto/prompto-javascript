@@ -8,6 +8,7 @@ var DecimalType = require("../type/DecimalType").DecimalType;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var BooleanType = require("../type/BooleanType").BooleanType;
+var NullType = require("../type/NullType").NullType;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
@@ -133,6 +134,8 @@ EqualsExpression.prototype.areEqual = function(context, lval, rval) {
 EqualsExpression.prototype.isA = function(context, lval, rval) {
     if(lval instanceof Value && rval instanceof TypeValue) {
         var actual = lval.type;
+        if(actual === NullType.instance)
+            return false;
         var toCheck = rval.value;
         return toCheck.isAssignableFrom(context, actual);
     } else

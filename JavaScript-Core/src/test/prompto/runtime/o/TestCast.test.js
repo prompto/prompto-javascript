@@ -66,3 +66,11 @@ test('Transpiled IsAText', () => {
 	checkTranspiledOutput('cast/isAText.poc');
 });
 
+test('Interpreted NullIsNotAText', () => {
+	checkInterpretedOutput('cast/nullIsNotAText.poc');
+});
+
+test('Transpiled NullIsNotAText', () => {
+	checkTranspiledOutput('cast/nullIsNotAText.poc');
+});
+

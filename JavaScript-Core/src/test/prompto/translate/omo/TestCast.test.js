@@ -28,3 +28,7 @@ test('IsAText', () => {
 	compareResourceOMO('cast/isAText.poc');
 });
 
+test('NullIsNotAText', () => {
+	compareResourceOMO('cast/nullIsNotAText.poc');
+});
+

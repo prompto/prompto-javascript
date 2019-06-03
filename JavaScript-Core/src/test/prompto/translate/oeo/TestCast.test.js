@@ -28,3 +28,7 @@ test('IsAText', () => {
 	compareResourceOEO('cast/isAText.poc');
 });
 
+test('NullIsNotAText', () => {
+	compareResourceOEO('cast/nullIsNotAText.poc');
+});
+

@@ -11,3 +11,4 @@ prompto-tests
 transpiled.js
 TestWeb.test.js
 TestReact-bootstrap-3.js
+TestReact-bootstrap-3.test.js
