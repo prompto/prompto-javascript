@@ -36,4 +36,8 @@ Symbol.prototype.collectStorables = function (storables) {
 };
 
 
+Symbol.prototype.equals = function(value) {
+    return value instanceof Symbol && this.name === value.name;
+};
+
 exports.Symbol = Symbol;
