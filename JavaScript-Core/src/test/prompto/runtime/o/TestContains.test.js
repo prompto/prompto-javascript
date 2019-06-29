@@ -130,6 +130,14 @@ test('Transpiled InText', () => {
 	checkTranspiledOutput('contains/inText.poc');
 });
 
+test('Interpreted InTextEnum', () => {
+	checkInterpretedOutput('contains/inTextEnum.poc');
+});
+
+test('Transpiled InTextEnum', () => {
+	checkTranspiledOutput('contains/inTextEnum.poc');
+});
+
 test('Interpreted InTimeRange', () => {
 	checkInterpretedOutput('contains/inTimeRange.poc');
 });
