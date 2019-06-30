@@ -83,19 +83,6 @@ CategoryType.prototype.newInstanceFromStored = function(context, stored) {
     return inst;
 };
 
-CategoryType.prototype.equals = function(obj) {
-	if(obj===this) {
-		return true;
-	}
-	if(obj===null) {
-		return false;
-	}
-	if(!(obj instanceof CategoryType)) {
-		return false;
-	}
-	return this.name===obj.name;
-};
-
 CategoryType.prototype.checkUnique = function(context) {
 	var actual = context.getRegisteredDeclaration(this.name) || null;
 	if(actual!=null) {
