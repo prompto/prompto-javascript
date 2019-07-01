@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "antlr4": "4.7.1",
+    "html-entities": "1.2.1",
     "jszip-sync": "3.2.1-sync",
     "sync-request": "3.0.1"
   },
