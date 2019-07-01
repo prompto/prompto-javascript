@@ -26,7 +26,9 @@ JsxText.prototype.declare = function(transpiler) {
 
 
 JsxText.prototype.transpile = function(transpiler) {
-    transpiler.append(JSON.stringify(this.text));
+    // convert html entities
+    var text = (new DOMParser()).parseFromString(this.text).body.textContent;
+    transpiler.append(JSON.stringify(text));
 };
 
 exports.JsxText = JsxText;
