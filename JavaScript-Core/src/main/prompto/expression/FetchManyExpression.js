@@ -32,6 +32,8 @@ FetchManyExpression.prototype.toEDialect = function(writer) {
     if(this.first==null)
         writer.append("all ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
@@ -57,6 +59,8 @@ FetchManyExpression.prototype.toODialect = function(writer) {
         writer.append("all ");
     if(this.typ!=null) {
         writer.append("( ");
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ) ");
     }
@@ -88,6 +92,8 @@ FetchManyExpression.prototype.toMDialect = function(writer) {
         writer.append("all ");
     writer.append("( ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }

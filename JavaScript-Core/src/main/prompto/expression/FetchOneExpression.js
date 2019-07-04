@@ -28,6 +28,8 @@ FetchOneExpression.prototype.toDialect = function(writer) {
 FetchOneExpression.prototype.toEDialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
@@ -39,6 +41,8 @@ FetchOneExpression.prototype.toODialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
         writer.append("(");
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(") ");
     }
@@ -50,6 +54,8 @@ FetchOneExpression.prototype.toODialect = function(writer) {
 FetchOneExpression.prototype.toMDialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
