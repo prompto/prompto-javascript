@@ -23,7 +23,7 @@ exports.resolve = function() {
     ListValue = require("../value/ListValue").ListValue;
 	TextValue = require("../value/TextValue").TextValue;
     resolveBuiltInMethodDeclaration();
-}
+};
 
 function TextType()  {
 	NativeType.call(this, new Identifier("Text"));
