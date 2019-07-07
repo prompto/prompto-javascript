@@ -1,8 +1,17 @@
+var BuiltInMethodDeclaration = null;
+var EnumeratedNativeDeclaration = null;
 var BaseType = require("./BaseType").BaseType;
 var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var List = require("../intrinsic/List").List;
+var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
+var Identifier = require("../grammar/Identifier").Identifier;
+
+exports.resolve = function() {
+	EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
+	resolveBuiltInMethodDeclaration();
+};
 
 function EnumeratedNativeType(name, derivedFrom) {
 	BaseType.call(this, name);
@@ -69,5 +78,50 @@ EnumeratedNativeType.prototype.getMemberValue = function(context, name) {
 EnumeratedNativeType.prototype.isAssignableFrom = function(context, other) {
 	return this.id.name === other.id.name;
 };
+
+
+EnumeratedNativeType.prototype.getMemberMethods = function(context, name) {
+	switch (name) {
+		case "symbolOf":
+			return [new SymbolOfMethodDeclaration(this)];
+		default:
+			return BaseType.prototype.getMemberMethods.call(this, context, name);
+	}
+};
+
+
+function SymbolOfMethodDeclaration(enumType) {
+	BuiltInMethodDeclaration.call(this, "symbolOf", new CategoryArgument(TextType.instance, new Identifier("name")));
+	this.enumType = enumType;
+	return this;
+}
+
+function resolveBuiltInMethodDeclaration() {
+
+	BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+
+	SymbolOfMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+	SymbolOfMethodDeclaration.prototype.constructor = SymbolOfMethodDeclaration;
+
+	SymbolOfMethodDeclaration.prototype.check = function (context) {
+		return this.enumType;
+	};
+
+	SymbolOfMethodDeclaration.prototype.interpret = function (context) {
+		var decl = context.getRegistered(this.enumType.name);
+		if(!(decl instanceof EnumeratedNativeDeclaration))
+			throw new SyntaxError(this.enumType.typeName + " is not an enumerated type!");
+		var name = context.getValue(new Identifier("name")).getStorableData();
+		return decl.getSymbol(name);
+	};
+
+	SymbolOfMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+		transpiler.append("symbolOf(");
+		assignments[0].transpile(transpiler);
+		transpiler.append(")");
+	};
+
+}
+
 
 exports.EnumeratedNativeType = EnumeratedNativeType;

@@ -139,6 +139,7 @@ ListType.prototype.checkItem = function(context, itemType, expression) {
 
 ListType.prototype.declareItem = function(transpiler, itemType, item) {
     if(itemType===IntegerType.instance) {
+        this.itemType.declare(transpiler);
         item.declare(transpiler);
     } else {
         return ContainerType.prototype.declareItem.call(this, transpiler, itemType, item);

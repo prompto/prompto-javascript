@@ -1,9 +1,9 @@
 var MemStore = require("../memstore/MemStore").MemStore;
 
-function DataStore() {
+function $DataStore() {
 
 }
 
-DataStore.instance = new MemStore();
+$DataStore.instance = new MemStore();
 
-exports.DataStore = DataStore;
+exports.$DataStore = $DataStore;

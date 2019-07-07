@@ -21,6 +21,10 @@ EnumeratedNativeDeclaration.prototype.getDeclarationType = function() {
 };
 
 
+EnumeratedNativeDeclaration.prototype.getSymbol = function(name) {
+    return this.symbols.filter(function(s) { return s.name === name; })[0] || null;
+};
+
 EnumeratedNativeDeclaration.prototype.unregister = function(context) {
     context.unregisterDeclaration (this);
     this.symbols.forEach(function(symbol) {
@@ -85,7 +89,8 @@ EnumeratedNativeDeclaration.prototype.transpile = function(transpiler) {
     transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
     this.symbols.forEach(function(symbol) {symbol.initialize(transpiler);});
     var names = this.symbols.map(function(symbol) { return symbol.name; });
-    transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);");
+    transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
+    transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
 };
 
 EnumeratedNativeDeclaration.prototype.getType = function(context) {

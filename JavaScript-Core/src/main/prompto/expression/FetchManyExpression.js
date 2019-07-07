@@ -3,7 +3,7 @@ var BooleanType = require("../type/BooleanType").BooleanType;
 var AnyType = require("../type/AnyType").AnyType;
 var CursorType = require("../type/CursorType").CursorType;
 var Section = require("../parser/Section").Section;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var MatchOp = require("../store/MatchOp").MatchOp;
@@ -32,6 +32,8 @@ FetchManyExpression.prototype.toEDialect = function(writer) {
     if(this.first==null)
         writer.append("all ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
@@ -57,6 +59,8 @@ FetchManyExpression.prototype.toODialect = function(writer) {
         writer.append("all ");
     if(this.typ!=null) {
         writer.append("( ");
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ) ");
     }
@@ -88,6 +92,8 @@ FetchManyExpression.prototype.toMDialect = function(writer) {
         writer.append("all ");
     writer.append("( ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
@@ -132,7 +138,7 @@ FetchManyExpression.prototype.checkSlice = function(context) {
 }
 
 FetchManyExpression.prototype.interpret = function(context) {
-    var store = DataStore.instance;
+    var store = $DataStore.instance;
     var query = this.buildFetchManyQuery(context, store);
     var typ = this.typ==null ? AnyType.instance : this.typ;
     var cursor = store.fetchMany(query, typ.mutable);
@@ -174,7 +180,7 @@ FetchManyExpression.prototype.declare = function(transpiler) {
     var Cursor = require("../intrinsic/Cursor").Cursor;
     transpiler.require(Cursor);
     transpiler.require(MatchOp);
-    transpiler.require(DataStore);
+    transpiler.require($DataStore);
     transpiler.require(AttributeInfo);
     transpiler.require(TypeFamily);
     if (this.typ)
@@ -194,13 +200,13 @@ FetchManyExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
     this.transpileQuery(transpiler);
     var mutable = this.typ ? this.typ.mutable : false;
-    transpiler.append("return DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine();
+    transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine();
     transpiler.append("})()");
 };
 
 
 FetchManyExpression.prototype.transpileQuery = function(transpiler) {
-    transpiler.append("var builder = DataStore.instance.newQueryBuilder();").newLine();
+    transpiler.append("var builder = $DataStore.instance.newQueryBuilder();").newLine();
     if (this.typ != null)
         transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
     if (this.predicate != null)

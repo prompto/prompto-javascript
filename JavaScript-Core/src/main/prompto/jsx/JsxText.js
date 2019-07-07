@@ -1,5 +1,6 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var TextType = require("../type/TextType").TextType;
+var Entities = require('html-entities').XmlEntities;
 
 function JsxText(text) {
     IJsxExpression.call(this);
@@ -26,7 +27,9 @@ JsxText.prototype.declare = function(transpiler) {
 
 
 JsxText.prototype.transpile = function(transpiler) {
-    transpiler.append(JSON.stringify(this.text));
+    // convert html entities
+    var text = (new Entities()).decode(this.text);
+    transpiler.append(JSON.stringify(text));
 };
 
 exports.JsxText = JsxText;

@@ -30,12 +30,15 @@ JsxAttribute.prototype.declare = function(transpiler) {
 };
 
 JsxAttribute.prototype.transpile = function(transpiler) {
-    transpiler.append(this.id.name);
+    var name = this.id.name;
+    if(name.indexOf('-')>=0)
+        name = '"' + name + '"';
+    transpiler.append(name);
     transpiler.append(": ");
     if(this.value!=null)
         this.value.transpile(transpiler);
     else
-        transpiler.append("true");
+        transpiler.append("null");
 };
 
 exports.JsxAttribute = JsxAttribute;

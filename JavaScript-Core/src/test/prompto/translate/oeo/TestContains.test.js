@@ -60,6 +60,10 @@ test('InText', () => {
 	compareResourceOEO('contains/inText.poc');
 });
 
+test('InTextEnum', () => {
+	compareResourceOEO('contains/inTextEnum.poc');
+});
+
 test('InTimeRange', () => {
 	compareResourceOEO('contains/inTimeRange.poc');
 });

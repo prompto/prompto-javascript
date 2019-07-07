@@ -27,8 +27,8 @@ CategoryArgument.prototype.equals = function(other) {
 
 
 CategoryArgument.prototype.register = function(context) {
-	var actual = context.getRegisteredValue(this.name);
-	if(actual!==null) {
+	var actual = context.contextForValue(this.name);
+	if(actual===context) {
 		throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
 	}
 	context.registerValue(this);

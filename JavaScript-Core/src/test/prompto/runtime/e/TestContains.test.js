@@ -162,6 +162,14 @@ test('Transpiled InText', () => {
 	checkTranspiledOutput('contains/inText.pec');
 });
 
+test('Interpreted InTextEnum', () => {
+	checkInterpretedOutput('contains/inTextEnum.pec');
+});
+
+test('Transpiled InTextEnum', () => {
+	checkTranspiledOutput('contains/inTextEnum.pec');
+});
+
 test('Interpreted InTimeRange', () => {
 	checkInterpretedOutput('contains/inTimeRange.pec');
 });

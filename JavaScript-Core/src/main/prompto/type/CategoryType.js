@@ -7,6 +7,8 @@ var ConcreteCategoryDeclaration = null;
 var SingletonCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
+var EnumeratedCategoryType = null;
+var EnumeratedNativeType = null;
 var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var Operator = require("../grammar/Operator").Operator;
@@ -21,7 +23,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
@@ -34,6 +36,8 @@ exports.resolve = function() {
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+    EnumeratedCategoryType = require("./EnumeratedCategoryType").EnumeratedCategoryType;
+    EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
 };
 
 
@@ -81,19 +85,6 @@ CategoryType.prototype.newInstanceFromStored = function(context, stored) {
     var inst = decl.newInstanceFromStored(context, stored);
     inst.mutable = this.mutable;
     return inst;
-};
-
-CategoryType.prototype.equals = function(obj) {
-	if(obj===this) {
-		return true;
-	}
-	if(obj===null) {
-		return false;
-	}
-	if(!(obj instanceof CategoryType)) {
-		return false;
-	}
-	return this.name===obj.name;
 };
 
 CategoryType.prototype.checkUnique = function(context) {
@@ -574,8 +565,8 @@ CategoryType.prototype.convertJavaScriptValueToPromptoValue = function(context, 
         return BaseType.prototype.convertPythonValueToPromptoValue(context, value, returnType);
     if(decl instanceof EnumeratedNativeDeclaration || decl instanceof EnumeratedCategoryDeclaration)
         return this.loadEnumValue(context, decl, value);
-    if (DataStore.instance.isDbIdType(typeof(value)))
-        value = DataStore.instance.fetchUnique(value);
+    if ($DataStore.instance.isDbIdType(typeof(value)))
+        value = $DataStore.instance.fetchUnique(value);
     return decl.newInstanceFromStored(context, value);
 };
 
@@ -670,6 +661,10 @@ CategoryType.prototype.transpileGlobalMethodSortedComparator = function(transpil
 CategoryType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
     transpiler.append(".setMember('").append(name).append("', ");
     expression.transpile(transpiler);
+    var type = expression.check(transpiler.context);
+    if(type instanceof EnumeratedCategoryType || type instanceof EnumeratedNativeType) {
+        transpiler.append(", false, true"); // set isEnum flag
+    }
     transpiler.append(")");
 };
 

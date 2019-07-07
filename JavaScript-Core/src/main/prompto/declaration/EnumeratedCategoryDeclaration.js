@@ -20,6 +20,11 @@ EnumeratedCategoryDeclaration.prototype.getDeclarationType = function() {
 };
 
 
+EnumeratedCategoryDeclaration.prototype.getSymbol = function(name) {
+    return this.symbols.filter(function(s) { return s.name === name; })[0] || null;
+};
+
+
 EnumeratedCategoryDeclaration.prototype.unregister = function(context) {
     context.unregisterDeclaration (this);
     this.symbols.forEach(function(symbol) {
@@ -185,6 +190,7 @@ EnumeratedCategoryDeclaration.prototype.transpileSymbols = function(transpiler) 
         return symbol.name;
     });
     transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
+    transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
 };
 
 EnumeratedCategoryDeclaration.prototype.transpileEnumerated = function(transpiler) {

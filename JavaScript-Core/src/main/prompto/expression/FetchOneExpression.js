@@ -4,7 +4,7 @@ var AnyType = require("../type/AnyType").AnyType;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var NullValue = require("../value/NullValue").NullValue;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var MatchOp = require("../store/MatchOp").MatchOp;
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
@@ -28,6 +28,8 @@ FetchOneExpression.prototype.toDialect = function(writer) {
 FetchOneExpression.prototype.toEDialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
@@ -39,6 +41,8 @@ FetchOneExpression.prototype.toODialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
         writer.append("(");
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(") ");
     }
@@ -50,6 +54,8 @@ FetchOneExpression.prototype.toODialect = function(writer) {
 FetchOneExpression.prototype.toMDialect = function(writer) {
     writer.append("fetch one ");
     if(this.typ!=null) {
+        if(this.typ.mutable)
+            writer.append("mutable ");
         writer.append(this.typ.name);
         writer.append(" ");
     }
@@ -71,7 +77,7 @@ FetchOneExpression.prototype.check = function(context) {
 };
 
 FetchOneExpression.prototype.interpret = function(context) {
-    var store = DataStore.instance;
+    var store = $DataStore.instance;
     var query = this.buildFetchOneQuery(context, store);
     var stored = store.fetchOne (query);
     if (stored == null)
@@ -87,7 +93,7 @@ FetchOneExpression.prototype.interpret = function(context) {
 
 FetchOneExpression.prototype.declare = function(transpiler) {
     transpiler.require(MatchOp);
-    transpiler.require(DataStore);
+    transpiler.require($DataStore);
     transpiler.require(AttributeInfo);
     transpiler.require(TypeFamily);
     if (this.typ != null)
@@ -100,7 +106,7 @@ FetchOneExpression.prototype.declare = function(transpiler) {
 FetchOneExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
     this.transpileQuery(transpiler);
-    transpiler.append("var stored = DataStore.instance.fetchOne(builder.build());").newLine();
+    transpiler.append("var stored = $DataStore.instance.fetchOne(builder.build());").newLine();
     this.transpileConvert(transpiler, "result");
     transpiler.append("return result;").dedent();
     transpiler.append("})()");
@@ -117,7 +123,7 @@ FetchOneExpression.prototype.transpileConvert = function(transpiler, varName) {
 
 
 FetchOneExpression.prototype.transpileQuery = function(transpiler) {
-    transpiler.append("var builder = DataStore.instance.newQueryBuilder();").newLine();
+    transpiler.append("var builder = $DataStore.instance.newQueryBuilder();").newLine();
     if (this.typ != null)
         transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
     if (this.predicate != null)

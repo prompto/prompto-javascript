@@ -2,7 +2,7 @@ var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var Identifier = require("../grammar/Identifier").Identifier;
 var VoidType = require("../type/VoidType").VoidType;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var NullValue = require("../value/NullValue").NullValue;
 var Instance = require("../value/Value").Instance;
 var Container = require("../value/Value").Container;
@@ -86,20 +86,20 @@ StoreStatement.prototype.interpret = function(context) {
     var idsToDelete = this.getIdsToDelete(context);
     var storablesToAdd = this.getStorablesToAdd(context);
     if (idsToDelete || storablesToAdd)
-        DataStore.instance.store(idsToDelete, storablesToAdd);
+        $DataStore.instance.store(idsToDelete, storablesToAdd);
     if(this.andThen)
         this.andThen.interpret(context);
 };
 
 StoreStatement.prototype.declare = function(transpiler) {
-    transpiler.require(DataStore);
+    transpiler.require($DataStore);
     if(this.andThen)
         this.andThen.declare(transpiler);
 };
 
 
 StoreStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("DataStore.instance.store").append(this.andThen?"Async":"").append("(");
+    transpiler.append("$DataStore.instance.store").append(this.andThen?"Async":"").append("(");
     this.transpileIdsToDelete(transpiler);
     transpiler.append(", ");
     this.transpileStorablesToAdd(transpiler);

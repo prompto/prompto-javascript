@@ -4,7 +4,7 @@ var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodD
 var MethodDeclarationMap = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var CategoryType = require("../type/CategoryType").CategoryType;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var $Root = require("../intrinsic/$Root").$Root;
 var EnumeratedCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
@@ -446,7 +446,7 @@ ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
     } else
         this.declareRoot(transpiler);
     if(this.storable)
-        transpiler.require(DataStore);
+        transpiler.require($DataStore);
     this.declareMethods(transpiler);
 };
 
@@ -485,7 +485,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     transpiler.indent();
     var categories = this.collectCategories(transpiler.context);
     if(this.storable)
-        transpiler.append("this.storable = DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine();
+        transpiler.append("this.storable = $DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine();
     this.transpileGetterSetterAttributes(transpiler);
     this.transpileSuperConstructor(transpiler);
     transpiler.append("this.category = [").append(categories.join(', ')).append("];").newLine();

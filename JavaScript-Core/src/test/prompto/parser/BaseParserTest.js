@@ -226,7 +226,7 @@ exports.execute = function(decls, methodName, args) {
 };
 
 exports.executeTest = function(context, testName) {
-    prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
+    prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
     var testMethod = context.getTestDeclaration(testName);
     var js = prompto.runtime.Transpiler.transpileTest(context, testMethod);
     writeToTempFile(js);
@@ -236,10 +236,10 @@ exports.executeTest = function(context, testName) {
 }
 
 exports.executeMethod = function(context, methodName, cmdLineArgs) {
-    prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
+    prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
     methodName = methodName || "main";
     var method = locateMethod(context, methodName, cmdLineArgs);
-    prompto.store.DataStore.instance = null; // make sure Store implementation is not transpiled
+    prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
     var js = prompto.runtime.Transpiler.transpileMethod(context, method);
     writeToTempFile(js);
     var fn = wrapAndExtract(js, method.getTranspiledName(context), context);
@@ -261,7 +261,7 @@ function wrapAndExtract(js, methodName, context) {
     var objs = wrapper(context);
     if(objs.store) {
         var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
-        objs.store.instance = prompto.store.DataStore.instance = new MemStoreModule.MemStore();
+        objs.store.instance = prompto.store.$DataStore.instance = new MemStoreModule.MemStore();
         MemStoreModule.Cursor = objs.cursor;
     }
     return objs.method;
@@ -274,7 +274,7 @@ function createWrapper(js, methodName) {
         "var React = { createElement: function() { return {}; }, Component: function() { return this; } };",
         "var ReactBootstrap = { Button: function() { this.render = function() { return {}; }; return this; } };",
         js,
-        "var store = typeof(DataStore) === 'undefined' ? null : DataStore;",
+        "var store = typeof($DataStore) === 'undefined' ? null : $DataStore;",
         "var cursor = typeof(Cursor) === 'undefined' ? null : Cursor;",
         "return { store:  store, cursor: cursor, method: " + methodName + " };",
         "});"

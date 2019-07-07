@@ -25,6 +25,8 @@ exports.UUIDType = require('./UUIDType').UUIDType;
 exports.JsxType = require('./JsxType').JsxType;
 exports.CssType = require('./CssType').CssType;
 exports.HtmlType = require('./HtmlType').HtmlType;
+exports.EnumeratedNativeType = require('./EnumeratedNativeType').EnumeratedNativeType;
+exports.EnumeratedCategoryType = require('./EnumeratedCategoryType').EnumeratedCategoryType;
 
 require('./BaseType').resolve();
 require('./TextType').resolve();
@@ -38,3 +40,5 @@ require('./CategoryType').resolve();
 require('./DocumentType').resolve();
 require('./UUIDType').resolve();
 require('./DateTimeType').resolve();
+require('./EnumeratedNativeType').resolve();
+require('./EnumeratedCategoryType').resolve();

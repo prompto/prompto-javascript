@@ -70,7 +70,7 @@ FetchOneStatement.prototype.declare = function(transpiler) {
 FetchOneStatement.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
     this.transpileQuery(transpiler);
-    transpiler.append("DataStore.instance.fetchOneAsync(builder.build(), function(stored) {").indent();
+    transpiler.append("$DataStore.instance.fetchOneAsync(builder.build(), function(stored) {").indent();
     this.transpileConvert(transpiler, this.name.name);
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, this.typ));

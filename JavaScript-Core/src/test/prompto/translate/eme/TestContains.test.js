@@ -76,6 +76,10 @@ test('InText', () => {
 	compareResourceEME('contains/inText.pec');
 });
 
+test('InTextEnum', () => {
+	compareResourceEME('contains/inTextEnum.pec');
+});
+
 test('InTimeRange', () => {
 	compareResourceEME('contains/inTimeRange.pec');
 });

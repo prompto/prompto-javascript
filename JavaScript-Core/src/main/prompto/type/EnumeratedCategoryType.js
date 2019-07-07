@@ -1,7 +1,16 @@
+var BuiltInMethodDeclaration = null;
+var EnumeratedCategoryDeclaration = null;
 var CategoryType = require("./CategoryType").CategoryType;
 var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
+var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
+var Identifier = require("../grammar/Identifier").Identifier;
+
+exports.resolve = function() {
+    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+    resolveBuiltInMethodDeclaration();
+};
 
 
 
@@ -35,5 +44,50 @@ EnumeratedCategoryType.prototype.getMemberValue = function(context, name) {
         throw new SyntaxError("Unknown member:" + name);
     }
 };
+
+EnumeratedCategoryType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "symbolOf":
+            return [new SymbolOfMethodDeclaration(this)];
+        default:
+            return CategoryType.prototype.getMemberMethods.call(this, context, name);
+    }
+};
+
+
+function SymbolOfMethodDeclaration(enumType) {
+    BuiltInMethodDeclaration.call(this, "symbolOf", new CategoryArgument(TextType.instance, new Identifier("name")));
+    this.enumType = enumType;
+    return this;
+}
+
+
+function resolveBuiltInMethodDeclaration() {
+    BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+
+    SymbolOfMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    SymbolOfMethodDeclaration.prototype.constructor = SymbolOfMethodDeclaration;
+
+    SymbolOfMethodDeclaration.prototype.check = function (context) {
+        return this.enumType;
+    };
+
+    SymbolOfMethodDeclaration.prototype.interpret = function (context) {
+        var decl = context.getRegistered(this.enumType.name);
+        if(!(decl instanceof EnumeratedCategoryDeclaration))
+            throw new SyntaxError(this.enumType.typeName + " is not an enumerated type!");
+        var name = context.getValue(new Identifier("name")).getStorableData();
+        return decl.getSymbol(name);
+    };
+
+    SymbolOfMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("symbolOf(");
+        assignments[0].transpile(transpiler);
+        transpiler.append(")");
+    };
+
+
+}
+
 
 exports.EnumeratedCategoryType = EnumeratedCategoryType;
