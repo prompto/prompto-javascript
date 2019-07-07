@@ -74,7 +74,7 @@ FetchManyStatement.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
     this.transpileQuery(transpiler);
     var mutable = this.typ ? this.typ.mutable : false;
-    transpiler.append("DataStore.instance.fetchManyAsync(builder.build(), ").append(mutable).append(", function(").append(this.name.name).append(") {").indent();
+    transpiler.append("$DataStore.instance.fetchManyAsync(builder.build(), ").append(mutable).append(", function(").append(this.name.name).append(") {").indent();
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
     this.stmts.transpile(transpiler);

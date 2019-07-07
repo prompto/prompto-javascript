@@ -1,15 +1,15 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
 var TypeUtils = require("../utils/TypeUtils");
 var Instance = require("./Value").Instance;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 
 function NativeInstance(context, declaration, instance) {
     Instance.call(this,new CategoryType(declaration.id));
 	this.declaration = declaration;
     this.storable = false;
-    if(declaration.storable && DataStore.instance) {
+    if(declaration.storable && $DataStore.instance) {
         var categories = declaration.collectCategories(context);
-        this.storable = DataStore.instance.newStorableDocument(categories, null);
+        this.storable = $DataStore.instance.newStorableDocument(categories, null);
     }
 	this.instance = instance || this.makeInstance();
 	return this;

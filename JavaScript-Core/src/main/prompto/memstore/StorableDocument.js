@@ -1,4 +1,4 @@
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var StoredDocument = require("./StoredDocument").StoredDocument;
 
 function StorableDocument(categories, dbIdListener) {
@@ -26,7 +26,7 @@ StorableDocument.prototype.getDbId = function() {
 StorableDocument.prototype.getOrCreateDbId = function() {
     var dbId = this.getDbId();
     if (dbId == null) {
-        dbId = ++DataStore.instance.nextDbId;
+        dbId = ++$DataStore.instance.nextDbId;
         if(this.dbIdListener)
             this.dbIdListener(dbId);
         this.setData("dbId", dbId, dbId);

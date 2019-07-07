@@ -1,5 +1,5 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var VoidType = require("../type/VoidType").VoidType;
 
 
@@ -16,16 +16,16 @@ FlushStatement.prototype.check = function(context) {
 };
 
 FlushStatement.prototype.interpret = function(context) {
-    DataStore.instance.flush();
+    $DataStore.instance.flush();
 };
 
 FlushStatement.prototype.declare = function(transpiler) {
-    transpiler.require(DataStore);
+    transpiler.require($DataStore);
 };
 
 
 FlushStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("DataStore.instance.flush()");
+    transpiler.append("$DataStore.instance.flush()");
 };
 
 

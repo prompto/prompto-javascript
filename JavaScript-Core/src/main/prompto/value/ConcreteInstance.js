@@ -13,7 +13,7 @@ var DecimalValue = require("./DecimalValue").DecimalValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var Instance = require("./Value").Instance;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var TypeUtils = require("../utils/TypeUtils");
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
@@ -30,7 +30,7 @@ function ConcreteInstance(context, declaration) {
     this.storable = null;
     if(declaration.storable) {
         var categories = declaration.collectCategories(context);
-        this.storable = DataStore.instance.newStorableDocument(categories);
+        this.storable = $DataStore.instance.newStorableDocument(categories);
     }
     this.mutable = false;
 	this.values = {};

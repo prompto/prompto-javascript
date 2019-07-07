@@ -21,7 +21,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
-var DataStore = require("../store/DataStore").DataStore;
+var $DataStore = require("../store/DataStore").$DataStore;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
@@ -561,8 +561,8 @@ CategoryType.prototype.convertJavaScriptValueToPromptoValue = function(context, 
         return BaseType.prototype.convertPythonValueToPromptoValue(context, value, returnType);
     if(decl instanceof EnumeratedNativeDeclaration || decl instanceof EnumeratedCategoryDeclaration)
         return this.loadEnumValue(context, decl, value);
-    if (DataStore.instance.isDbIdType(typeof(value)))
-        value = DataStore.instance.fetchUnique(value);
+    if ($DataStore.instance.isDbIdType(typeof(value)))
+        value = $DataStore.instance.fetchUnique(value);
     return decl.newInstanceFromStored(context, value);
 };
 

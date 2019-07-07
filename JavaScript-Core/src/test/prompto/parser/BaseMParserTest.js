@@ -34,7 +34,7 @@ exports.executeResource = function(fileName, methodName, args) {
 exports.checkInterpretedOutput = function(fileName) {
     var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
     MemStoreModule.Cursor = require("../../../main/prompto/intrinsic/Cursor").Cursor;
-    prompto.store.DataStore.instance = new MemStoreModule.MemStore();
+    prompto.store.$DataStore.instance = new MemStoreModule.MemStore();
 	exports.interpretResource(fileName);
 	checkSameOutput(fileName);
 };
