@@ -7,6 +7,8 @@ var ConcreteCategoryDeclaration = null;
 var SingletonCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
+var EnumeratedCategoryType = null;
+var EnumeratedNativeType = null;
 var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var Operator = require("../grammar/Operator").Operator;
@@ -34,6 +36,8 @@ exports.resolve = function() {
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+    EnumeratedCategoryType = require("./EnumeratedCategoryType").EnumeratedCategoryType;
+    EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
 };
 
 
