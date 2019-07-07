@@ -78,7 +78,10 @@ StoreStatement.prototype.equals = function(other) {
 
 
 StoreStatement.prototype.check = function(context) {
-    // TODO check expression
+    if(this.andThen) {
+        context = context.newChildContext();
+        this.andThen.check(context, null);
+    }
     return VoidType.instance;
 };
 
