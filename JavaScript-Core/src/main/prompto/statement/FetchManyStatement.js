@@ -4,10 +4,10 @@ var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
 
-function FetchManyStatement(typ, predicate, first, last, orderBy, name, stmts) {
+function FetchManyStatement(typ, predicate, first, last, orderBy, name, andThen) {
     FetchManyExpression.call(this, typ, predicate, first, last, orderBy);
     this.name = name;
-    this.stmts = stmts;
+    this.andThen = andThen;
     return this;
 }
 
@@ -29,7 +29,7 @@ FetchManyStatement.prototype.check = function (context) {
     FetchManyExpression.prototype.check.call(this, context);
     context = context.newChildContext();
     context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-    this.stmts.check(context, null);
+    this.andThen.check(context, null);
     return VoidType.instance;
 };
 
@@ -39,7 +39,7 @@ FetchManyStatement.prototype.interpret = function(context) {
     context = context.newChildContext();
     context.registerValue(new Variable(this.name, new CursorType(this.typ)));
     context.setValue(this.name, record);
-    this.stmts.interpret(context);
+    this.andThen.interpret(context);
     return null;
 };
 
@@ -54,7 +54,7 @@ FetchManyStatement.prototype.toDialect = function(writer) {
     writer = writer.newChildWriter();
     writer.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
     writer.newLine().indent();
-    this.stmts.toDialect(writer);
+    this.andThen.toDialect(writer);
     writer.dedent();
     if (writer.dialect === Dialect.O)
         writer.append("}").newLine();
@@ -66,7 +66,7 @@ FetchManyStatement.prototype.declare = function(transpiler) {
     FetchManyExpression.prototype.declare.call(this, transpiler);
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-    this.stmts.declare(transpiler);
+    this.andThen.declare(transpiler);
 };
 
 
@@ -77,7 +77,7 @@ FetchManyStatement.prototype.transpile = function(transpiler) {
     transpiler.append("$DataStore.instance.fetchManyAsync(builder.build(), ").append(mutable).append(", function(").append(this.name.name).append(") {").indent();
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-    this.stmts.transpile(transpiler);
+    this.andThen.transpile(transpiler);
     transpiler.dedent().append("}.bind(this));").dedent().append("}).bind(this)()");
     transpiler.flush();
     return false;

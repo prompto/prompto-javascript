@@ -3,10 +3,10 @@ var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
 
-function FetchOneStatement(typ, predicate, name, stmts) {
+function FetchOneStatement(typ, predicate, name, andThen) {
     FetchOneExpression.call(this, typ, predicate);
     this.name = name;
-    this.stmts = stmts;
+    this.andThen = andThen;
     return this;
 }
 
@@ -27,7 +27,7 @@ FetchOneStatement.prototype.check = function (context) {
     FetchOneExpression.prototype.check.call(this, context);
     context = context.newChildContext();
     context.registerValue(new Variable(this.name, this.typ));
-    this.stmts.check(context, null);
+    this.andThen.check(context, null);
     return VoidType.instance;
 };
 
@@ -37,7 +37,7 @@ FetchOneStatement.prototype.interpret = function(context) {
     context = context.newChildContext();
     context.registerValue(new Variable(this.name, this.typ));
     context.setValue(this.name, record);
-    this.stmts.interpret(context);
+    this.andThen.interpret(context);
     return null;
 };
 
@@ -52,7 +52,7 @@ FetchOneStatement.prototype.toDialect = function(writer) {
     writer = writer.newChildWriter();
     writer.context.registerValue(new Variable(this.name, this.typ));
     writer.newLine().indent();
-    this.stmts.toDialect(writer);
+    this.andThen.toDialect(writer);
     writer.dedent();
     if (writer.dialect === Dialect.O)
         writer.append("}").newLine();
@@ -63,7 +63,7 @@ FetchOneStatement.prototype.declare = function(transpiler) {
     FetchOneExpression.prototype.declare.call(this, transpiler);
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, this.typ));
-    this.stmts.declare(transpiler);
+    this.andThen.declare(transpiler);
 };
 
 
@@ -74,7 +74,7 @@ FetchOneStatement.prototype.transpile = function(transpiler) {
     this.transpileConvert(transpiler, this.name.name);
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, this.typ));
-    this.stmts.transpile(transpiler);
+    this.andThen.transpile(transpiler);
     transpiler.dedent().append("}.bind(this));").dedent().append("}).bind(this)()");
     transpiler.flush();
     return false;
