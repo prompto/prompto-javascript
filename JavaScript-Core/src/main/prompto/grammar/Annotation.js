@@ -1,9 +1,9 @@
 var Section = require("../parser/Section").Section;
 
-function Annotation(id, expression) {
+function Annotation(id, entries) {
     Section.call(this);
     this.id = id;
-    this.expression = expression;
+    this.entries = entries || null;
     return this;
 }
 
@@ -17,11 +17,20 @@ Object.defineProperty(Annotation.prototype, "name", {
     }
 });
 
+
 Annotation.prototype.toDialect = function(writer) {
     writer.append(this.name);
-    if(this.expression!=null) {
+    if(this.entries != null && this.entries.items.length > 0) {
         writer.append("(");
-        this.expression.toDialect(writer);
+        this.entries.items.forEach(function(entry) {
+            if(entry.key) {
+                writer.append(entry.key);
+                writer.append(" = ");
+            }
+            entry.value.toDialect(writer);
+            writer.append(", ");
+        }, this);
+        writer.trimLast(", ".length);
         writer.append(")");
     }
     writer.newLine();

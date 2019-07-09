@@ -1433,6 +1433,42 @@ OParserListener.prototype.exitAnnotation_identifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#annotation_argument.
+OParserListener.prototype.enterAnnotation_argument = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#annotation_argument.
+OParserListener.prototype.exitAnnotation_argument = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#annotation_argument_name.
+OParserListener.prototype.enterAnnotation_argument_name = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#annotation_argument_name.
+OParserListener.prototype.exitAnnotation_argument_name = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#AnnotationLiteralValue.
+OParserListener.prototype.enterAnnotationLiteralValue = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#AnnotationLiteralValue.
+OParserListener.prototype.exitAnnotationLiteralValue = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#AnnotationTypeValue.
+OParserListener.prototype.enterAnnotationTypeValue = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#AnnotationTypeValue.
+OParserListener.prototype.exitAnnotationTypeValue = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#resource_declaration.
 OParserListener.prototype.enterResource_declaration = function(ctx) {
 };
