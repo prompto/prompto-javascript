@@ -27,17 +27,6 @@ NativeMethodDeclaration.prototype.check = function(context, isStart) {
 };
 
 
-NativeMethodDeclaration.prototype.checkMember = function(category, context) {
-    context = context.newInstanceContext(null, category.getType(context), false);
-    if (this.args !== null)
-        this.args.check(context);
-    var child = context.newChildContext();
-    this.registerArguments(child);
-    var checked = this.statements.checkNative(context, this.returnType);
-    return this.returnType == null ? checked : this.returnType;
-};
-
-
 NativeMethodDeclaration.prototype.interpret = function(context) {
     intrinsic = require("../intrinsic");
     context.enterMethod(this);

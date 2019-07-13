@@ -55,7 +55,10 @@ ConcreteCategoryDeclaration.prototype.toODialect = function(writer) {
 };
 
 ConcreteCategoryDeclaration.prototype.categoryTypeToODialect = function(writer) {
-    writer.append("category");
+    if(this.isWidget(writer.context))
+        writer.append("widget");
+    else
+        writer.append("category");
 };
 
 
@@ -169,6 +172,8 @@ ConcreteCategoryDeclaration.ancestorHasMethod = function(ancestor, context, name
 };
 
 ConcreteCategoryDeclaration.prototype.check = function(context, isStart) {
+    context = context.newInstanceContext(null, this.getType(context), false);
+    this.processAnnotations(context, true);
 	this.checkDerived(context);
 	this.checkMethods(context);
 	return CategoryDeclaration.prototype.check.call(this, context, isStart);
@@ -177,7 +182,7 @@ ConcreteCategoryDeclaration.prototype.check = function(context, isStart) {
 ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
     this.registerMethods(context);
     for (var i = 0; i < this.methods.length; i++) {
-        this.methods[i].checkMember(this, context);
+        this.methods[i].checkChild(context);
     }
 };
 
@@ -438,6 +443,8 @@ ConcreteCategoryDeclaration.prototype.doCollectCategories = function(context, ca
 
 ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
     transpiler.declare(this);
+    transpiler = transpiler.newInstanceTranspiler(this.getType(transpiler.context));
+    this.processAnnotations(transpiler.context, true);
     if (this.derivedFrom != null) {
         this.derivedFrom.forEach(function (cat) {
             var decl = transpiler.context.getRegisteredDeclaration(cat);
@@ -455,7 +462,7 @@ ConcreteCategoryDeclaration.prototype.declareMethods = function(transpiler) {
     this.methods.filter(function (decl) {
         return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
     }).forEach(function (method) {
-        var t = transpiler.newMemberTranspiler(this.getType(transpiler.context));
+        var t = transpiler.newChildTranspiler();
         method.declare(t);
         t.flush();
     }, this);
@@ -501,6 +508,7 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
         transpiler.append(this.name).append(".prototype = Object.create($Root.prototype);").newLine();
     transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+    this.processAnnotations(transpiler.context);
     this.transpileLoaders(transpiler);
     this.transpileMethods(transpiler);
     this.transpileGetterSetters(transpiler);
@@ -569,7 +577,7 @@ ConcreteCategoryDeclaration.prototype.transpileMethods = function(transpiler) {
     this.methods.filter(function (decl) {
         return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
     }).forEach(function (method) {
-        var t = transpiler.newMemberTranspiler(this.getType(transpiler.context));
+        var t = transpiler.newChildTranspiler();
         method.transpile(t);
         t.flush();
     }, this);
@@ -589,7 +597,7 @@ ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpile
     transpiler.append("Object.defineProperty(").append(this.name).append(".prototype, '").append(name).append("', {").indent();
     transpiler.append("get: function() {").indent();
     if(getter) {
-        var t = transpiler.newGetterTranspiler(this.getType(transpiler.context), name);
+        var t = transpiler.newGetterTranspiler(name);
         getter.transpile(t);
         t.flush();
     } else
@@ -598,7 +606,7 @@ ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpile
     transpiler.append(",").newLine();
     transpiler.append("set: function(").append(name).append(") {").indent();
     if(setter) {
-        var t = transpiler.newSetterTranspiler(this.getType(transpiler.context), name);
+        var t = transpiler.newSetterTranspiler(name);
         t.append(name).append(" = (function(").append(name).append(") {").indent();
         setter.transpile(t);
         t.append(";").dedent().append("})(name);").newLine();
