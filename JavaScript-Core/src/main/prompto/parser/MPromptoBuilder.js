@@ -1855,7 +1855,7 @@ MPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
     var args = new literal.DictEntryList();
     var exp = this.getNodeValue(ctx.exp);
     if (exp != null) {
-        args.add(new DictEntry(null, exp));
+        args.add(new literal.DictEntry(null, exp));
     }
     ctx.annotation_argument().map(function(argCtx) {
         arg = this.getNodeValue(argCtx);
