@@ -248,11 +248,11 @@ IntegerType.prototype.transpileMinus = function(transpiler, value) {
     value.transpile(transpiler);
 };
 
-IntegerType.prototype.checkCompare = function(context, other) {
+IntegerType.prototype.checkCompare = function(context, other, section) {
 	if(other === IntegerType.instance || other === DecimalType.instance) {
 		return BooleanType.instance;
 	} else {
-		return NativeType.prototype.checkCompare.call(this, context, other);
+		return NativeType.prototype.checkCompare.call(this, context, other, section);
 	}
 };
 

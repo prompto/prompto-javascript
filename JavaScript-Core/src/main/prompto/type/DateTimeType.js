@@ -108,11 +108,11 @@ DateTimeType.prototype.transpileSubtract = function(transpiler, other, left, rig
 };
 
 
-DateTimeType.prototype.checkCompare = function(context, other) {
+DateTimeType.prototype.checkCompare = function(context, other, section) {
 	if(other === DateTimeType.instance || other instanceof DateType) {
 		return BooleanType.instance;
 	} else {
-		return NativeType.prototype.checkCompare.call(this, context, other);
+		return NativeType.prototype.checkCompare.call(this, context, other, section);
 	}
 };
 

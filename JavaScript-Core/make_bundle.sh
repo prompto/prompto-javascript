@@ -6,4 +6,8 @@ DOCS_DIR=../../prompto-docs/WebSite/src/web/public/js/lib
 cp -f $FACTORY_DIR/prompto.core.bundle.js $DOCS_DIR
 cp -f $FACTORY_DIR/prompto.core.bundle.js.map $DOCS_DIR
 cp -f $FACTORY_DIR/prompto.core.bundle.js.gz $DOCS_DIR
+STATIC_DIR=../../prompto-factory-static/CodeFactory/CodeFactory/src/main/resources/js/lib
+cp -f $FACTORY_DIR/prompto.core.bundle.js $STATIC_DIR
+cp -f $FACTORY_DIR/prompto.core.bundle.js.map $STATIC_DIR
+cp -f $FACTORY_DIR/prompto.core.bundle.js.gz $STATIC_DIR
 

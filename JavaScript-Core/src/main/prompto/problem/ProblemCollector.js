@@ -16,10 +16,10 @@ ProblemCollector.prototype.collectProblem = function(problem) {
 ProblemCollector.prototype.readSection = function(section) {
     return {
         path : section.path,
-        startLine : section.start.line,
-        startColumn : section.start.column,
-        endLine : section.end.line,
-        endColumn : section.end.column
+        startLine : section.start && section.start.line,
+        startColumn : section.start && section.start.column,
+        endLine : section.end && section.end.line,
+        endColumn : section.end && section.end.column
     };
 }
 
@@ -37,10 +37,7 @@ ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, l
 };
 
 ProblemCollector.prototype.reportDuplicate = function(name, declaration) {
-    var problem = this.readSection(declaration.id);
-    problem.type = "error";
-    problem.message = "Duplicate name: " + name;
-    this.collectProblem(problem);
+    this.reportError(declaration.id, "Duplicate name: " + name);
 };
 
 ProblemCollector.prototype.reportInvalidAttribute = function(id) {
@@ -52,10 +49,7 @@ ProblemCollector.prototype.reportInvalidCategory = function(id) {
 };
 
 ProblemCollector.prototype.reportInvalid = function(id, type) {
-    var problem = this.readSection(id);
-    problem.type = "error";
-    problem.message = "Invalid " + type + ": " + id.name;
-    this.collectProblem(problem);
+    this.reportError(id, "Invalid " + type + ": " + id.name);
 };
 
 ProblemCollector.prototype.reportUnknownAttribute = function(id) {
@@ -80,108 +74,72 @@ ProblemCollector.prototype.reportUnknownIdentifier = function(id) {
 
 
 ProblemCollector.prototype.reportEmptyVariable = function(id) {
-    var problem = this.readSection(id);
-    problem.type = "error";
-    problem.message = "Empty variable: " + id.name;
-    this.collectProblem(problem);
+    this.reportError(id, "Empty variable: " + id.name);
 };
 
 
 ProblemCollector.prototype.reportUnknown = function(id, type) {
-    var problem = this.readSection(id);
-    problem.type = "error";
-    problem.message = "Unknown " + type + ": " + id.name;
-    this.collectProblem(problem);
+    this.reportError(id, "Unknown " + type + ": " + id.name);
 };
 
 ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
-    var problem = this.readSection(method);
-    problem.type = "error";
-    problem.message = "No matching prototype for: " + method.toString();
-    this.collectProblem(problem);
+    this.reportError(method, "No matching prototype for: " + method.toString());
 };
 
 
 ProblemCollector.prototype.reportCannotIterate = function(source) {
-    var problem = this.readSection(source);
-    problem.type = "error";
-    problem.message = "Cannot iterate over: " + source.toString();
-    this.collectProblem(problem);
+    this.reportError(source, "Cannot iterate over: " + source.toString());
 };
 
 
 ProblemCollector.prototype.reportInvalidItem = function(parentType, itemType, source) {
-    var problem = this.readSection(source);
-    problem.type = "error";
-    problem.message = "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString();
-    this.collectProblem(problem);
+    this.reportError(source, "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString());
 };
 
 
 ProblemCollector.prototype.reportInvalidCast = function(expression, target, actual) {
-    var problem = this.readSection(expression);
-    problem.type = "error";
-    problem.message = "Cannot cast " + actual.toString() + " to " + target.toString();
-    this.collectProblem(problem);
+    this.reportError(expression, "Cannot cast " + actual.toString() + " to " + target.toString());
 };
 
 ProblemCollector.prototype.reportExpectingBoolean = function(expression, type) {
-    var problem = this.readSection(expression);
-    problem.type = "error";
-    problem.message = "Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString();
-    this.collectProblem(problem);
+    this.reportError(expression, "Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString());
 }
 
 ProblemCollector.prototype.reportMissingClosingTag = function(opening) {
-    var problem = this.readSection(opening.id);
-    problem.type = "error";
-    problem.message = "Missing closing tag '&lt;/" + opening.id.name + ">";
-    this.collectProblem(problem);
+    this.reportError(opening.id, "Missing closing tag '&lt;/" + opening.id.name + ">");
 }
 
 ProblemCollector.prototype.reportInvalidClosingTag = function(closing, opening) {
-    var problem = this.readSection(closing);
-    problem.type = "error";
-    problem.message = "Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">";
-    this.collectProblem(problem);
+    this.reportError(closing, "Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">");
 }
 
 ProblemCollector.prototype.reportInvalidMember = function(section, name) {
-    var problem = this.readSection(section);
-    problem.type = "error";
-    problem.message = "Invalid member '" + name + "' in " + this.name + " type";
-    this.collectProblem(problem);
+    this.reportError(section, "Invalid member '" + name + "' in " + this.name + " type");
 };
 
 ProblemCollector.prototype.reportInvalidCopySource = function(section) {
-    var problem = this.readSection(section);
-    problem.type = "error";
-    problem.message = "Invalid copy source";
-    this.collectProblem(problem);
+    this.reportError(section, "Invalid copy source");
 };
 
 
 ProblemCollector.prototype.reportNotAResource = function(section) {
-    var problem = this.readSection(section);
-    problem.type = "error";
-    problem.message = "Not a resource";
-    this.collectProblem(problem);
+    this.reportError(section, "Not a resource");
 };
 
 
 ProblemCollector.prototype.reportNotAResourceContext = function(section) {
-    var problem = this.readSection(section);
-    problem.type = "error";
-    problem.message = "Not a resource context";
-    this.collectProblem(problem);
+    this.reportError(section, "Not a resource context");
 };
 
 
-
 ProblemCollector.prototype.reportIncompatibleTypes = function(section, left, right) {
+    this.reportError(section, "Type " + left.name + " is not compatible with " + right.name);
+};
+
+ProblemCollector.prototype.reportError = function(section, message) {
     var problem = this.readSection(section);
     problem.type = "error";
-    problem.message = "Type " + left.name + " is not compatible with " + right.name;
+    problem.message = message;
     this.collectProblem(problem);
 };
 

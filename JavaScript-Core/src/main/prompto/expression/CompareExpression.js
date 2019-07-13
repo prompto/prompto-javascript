@@ -30,7 +30,7 @@ CompareExpression.prototype.toDialect = function(writer) {
 CompareExpression.prototype.check = function(context) {
 	var lt = this.left.check(context);
 	var rt = this.right.check(context);
-	return lt.checkCompare(context,rt);
+	return lt.checkCompare(context, rt, this);
 };
 
 CompareExpression.prototype.interpret = function(context) {

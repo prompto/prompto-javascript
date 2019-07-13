@@ -21,11 +21,11 @@ VersionType.prototype.convertJavaScriptValueToPromptoValue = function(context, v
         return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
 };
 
-VersionType.prototype.checkCompare = function(context, other) {
+VersionType.prototype.checkCompare = function(context, other, section) {
 	if (other instanceof VersionType) {
 		return BooleanType.instance;
 	} else {
-		return NativeType.prototype.checkCompare.call(this, context, other);
+		return NativeType.prototype.checkCompare.call(this, context, other, section);
 	}
 };
 

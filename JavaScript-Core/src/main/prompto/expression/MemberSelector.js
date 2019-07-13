@@ -10,6 +10,7 @@ var Value = require("../value/Value").Value;
 var Text = require("../value/TextValue").Text;
 var Dialect = require("../parser/Dialect").Dialect;
 var MethodType = require("../type/MethodType").MethodType;
+var VoidType = require("../type/VoidType").VoidType;
 var ParenthesisExpression = null;
 var UnresolvedCall = null;
 
@@ -147,7 +148,7 @@ MemberSelector.prototype.toString = function() {
 
 MemberSelector.prototype.check = function(context) {
     var parentType = this.checkParent(context);
-    return parentType.checkMember(context, this.id, this.name);
+    return parentType ? parentType.checkMember(context, this.id, this.name) : VoidType.instance;
 };
 
 MemberSelector.prototype.interpret = function(context) {

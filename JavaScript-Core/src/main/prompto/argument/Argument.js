@@ -1,14 +1,19 @@
+var Section = require("../parser/Section").Section;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
 function Argument(id) {
+    Section.call(this);
 	this.id = id;
     this.mutable = false;
     this.defaultExpression = null;
 	return this;
 }
+
+Argument.prototype = Object.create(Section.prototype);
+Argument.prototype.constructor = Argument;
 
 Object.defineProperty(Argument.prototype, "name", {
     get : function() {
