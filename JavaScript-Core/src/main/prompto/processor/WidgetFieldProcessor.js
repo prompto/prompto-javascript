@@ -4,7 +4,7 @@ var TypeExpression = require("../expression/TypeExpression").TypeExpression;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 function WidgetFieldProcessor() {
-    AnnotationProcessor.call(this);
+    AnnotationProcessor.call(this, "@WidgetField");
     return this;
 }
 

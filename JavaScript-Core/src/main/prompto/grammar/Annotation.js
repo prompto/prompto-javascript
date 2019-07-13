@@ -1,5 +1,5 @@
 var Section = require("../parser/Section").Section;
-var AnnotationProcessor = require("../processor/AnnotationProcessor").AnnotationProcessor;
+var AnnotationProcessors = require("../processor/AnnotationProcessors").AnnotationProcessors;
 
 function Annotation(id, entries) {
     Section.call(this);
@@ -52,7 +52,7 @@ Annotation.prototype.toDialect = function(writer) {
 
 
 Annotation.prototype.processCategory = function(context, declaration) {
-    var processor = AnnotationProcessor.forId(this.id);
+    var processor = AnnotationProcessors.forId(this.id);
     if(processor) {
         processor.processCategory(this, context, declaration);
     }
