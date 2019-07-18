@@ -11,6 +11,7 @@ var CategoryDeclaration = require("../declaration/CategoryDeclaration").Category
 var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var MethodType = require("../type/MethodType").MethodType;
+var VoidType = require("../type/VoidType").VoidType;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var InstanceContext = require("../runtime/Context").InstanceContext;
 
@@ -55,17 +56,17 @@ UnresolvedCall.prototype.check = function(context) {
 
 UnresolvedCall.prototype.resolveAndCheck = function(context) {
 	this.resolve(context);
-	return this.resolved.check(context);
+	return this.resolved ? this.resolved.check(context) : VoidType.instance;
 };
 
 UnresolvedCall.prototype.interpret = function(context) {
 	this.resolve(context);
-	return this.resolved.interpret(context);
+	return this.resolved ? this.resolved.interpret(context) : null;
 };
 
 UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
     this.resolve(context);
-    if (this.resolved.interpretAssert)
+    if (this.resolved && this.resolved.interpretAssert)
         return this.resolved.interpretAssert(context, testMethodDeclaration);
     else {
         var expected = this.getExpected(context, this.dialect);

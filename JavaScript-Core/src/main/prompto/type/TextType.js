@@ -105,11 +105,11 @@ TextType.prototype.transpileMultiply = function(transpiler, other, tryReverse, l
 
 
 
-TextType.prototype.checkCompare = function(context, other) {
+TextType.prototype.checkCompare = function(context, other, section) {
 	if(other instanceof TextType || other instanceof CharacterType) {
 		return BooleanType.instance;
 	}
-	return NativeType.prototype.checkCompare.call(this, context, other);
+	return NativeType.prototype.checkCompare.call(this, context, other, section);
 };
 
 

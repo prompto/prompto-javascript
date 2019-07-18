@@ -231,11 +231,11 @@ DecimalType.prototype.transpileMember = function(transpiler, name) {
 };
 
 
-DecimalType.prototype.checkCompare = function(context, other) {
+DecimalType.prototype.checkCompare = function(context, other, section) {
 	if(other instanceof IntegerType || other instanceof DecimalType) {
 		return BooleanType.instance;
 	} else {
-		return NativeType.prototype.checkCompare.call(this, context, other);
+		return NativeType.prototype.checkCompare.call(this, context, other, section);
 	}
 };
 

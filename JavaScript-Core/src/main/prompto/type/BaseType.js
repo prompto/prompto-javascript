@@ -247,11 +247,11 @@ BaseType.prototype.transpileMinus = function(transpiler, value) {
 };
 
 
-BaseType.prototype.checkCompare = function(context, other) {
+BaseType.prototype.checkCompare = function(context, other, section) {
     if(other instanceof EnumeratedNativeType)
-        return this.checkCompare(context, other.derivedFrom);
+        return this.checkCompare(context, other.derivedFrom, section);
     else
-    	throw new SyntaxError("Cannot compare " + this.name + " to " + other.name);
+        context.problemListener.reportError(section, "Cannot compare " + this.name + " to " + other.name);
 };
 
 

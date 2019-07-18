@@ -105,6 +105,26 @@ CategoryDeclaration.prototype.isDerivedFrom = function(context, categoryType) {
 };
 
 
+CategoryDeclaration.prototype.processAnnotations = function(context, processDerivedFrom) {
+    if(processDerivedFrom)
+    {
+        if (this.derivedFrom) {
+            this.derivedFrom.forEach(function (name) {
+                var decl = context.getRegisteredDeclaration(name);
+                if (decl instanceof CategoryDeclaration) {
+                    decl.processAnnotations(context, true);
+                }
+            }, this);
+        }
+    }
+    if(this.annotations) {
+        this.annotations.forEach(function(ann) {
+            ann.processCategory(context, this);
+        }, this);
+    }
+};
+
+
 CategoryDeclaration.prototype.checkConstructorContext = function(context) {
 	// nothing to do
 };
@@ -112,6 +132,7 @@ CategoryDeclaration.prototype.checkConstructorContext = function(context) {
 CategoryDeclaration.prototype.toDialect = function(writer) {
     var type = this.getType(writer.context);
     writer = writer.newInstanceWriter(type);
+    this.processAnnotations(writer.context, true);
     writer.toDialect(this);
 };
 

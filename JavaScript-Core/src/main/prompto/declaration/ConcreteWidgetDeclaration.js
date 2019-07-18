@@ -63,6 +63,7 @@ ConcreteWidgetDeclaration.prototype.transpile = function(transpiler) {
         transpiler.append(this.name).append(".prototype = Object.create(React.Component.prototype);").newLine();
     transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+    this.processAnnotations(transpiler.context, true);
     this.transpileLoaders(transpiler);
     this.transpileMethods(transpiler);
     this.transpileGetterSetters(transpiler);

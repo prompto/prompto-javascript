@@ -107,11 +107,11 @@ CharacterType.prototype.transpileMultiply = function(transpiler, other, tryRever
 };
 
 
-CharacterType.prototype.checkCompare = function(context, other) {
+CharacterType.prototype.checkCompare = function(context, other, section) {
 	if(other instanceof CharacterType || other instanceof TextType) {
 		return BooleanType.instance;
 	}
-	return NativeType.prototype.checkCompare.apply(this, context, other);
+	return NativeType.prototype.checkCompare.apply(this, context, other, section);
 };
 
 CharacterType.prototype.declareCompare = function(context, other) {

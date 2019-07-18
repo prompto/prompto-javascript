@@ -1,3 +1,4 @@
+var Section = require("../parser/Section").Section;
 var CategoryType = null;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
@@ -15,6 +16,9 @@ function ArgumentAssignment(argument, expression) {
 	this._expression = expression;
 	return this;
 }
+
+ArgumentAssignment.prototype = Object.create(Section.prototype);
+ArgumentAssignment.prototype.constructor = ArgumentAssignment;
 
 Object.defineProperty(ArgumentAssignment.prototype, "id", {
     get : function() {
@@ -129,9 +133,23 @@ ArgumentAssignment.prototype.check = function(context) {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
 		var newType = this.expression.check(context);
-        actualType.checkAssignableFrom(context, newType, this);
+		var section = this.toSection();
+        actualType.checkAssignableFrom(context, newType, section);
 	}
 	return VoidType.instance;
+};
+
+ArgumentAssignment.prototype.toSection = function() {
+    if(this.argument && this._expression) {
+        var section = new Section();
+        section.copySectionFrom(this.argument);
+        section.end = this._expression.end;
+        return section;
+    } else if(this._expression) {
+        return this._expression;
+    } else {
+        return this.argument;
+    }
 };
 
 ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, checkInstance, allowDerived) {

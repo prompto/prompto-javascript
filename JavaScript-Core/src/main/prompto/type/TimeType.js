@@ -114,11 +114,11 @@ TimeType.prototype.transpileSubtract = function(transpiler, other, left, right) 
 };
 
 
-TimeType.prototype.checkCompare = function(context, other) {
+TimeType.prototype.checkCompare = function(context, other, section) {
 	if (other === TimeType.instance) {
 		return BooleanType.instance;
 	} else {
-		return NativeType.prototype.checkCompare.call(this, context, other);
+		return NativeType.prototype.checkCompare.call(this, context, other, section);
 	}
 };
 

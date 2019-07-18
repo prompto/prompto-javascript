@@ -16,6 +16,7 @@ var DecimalType = require("../type/DecimalType").DecimalType;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var Variable = require("./Variable").Variable;
+var WidgetField = require("./WidgetField").WidgetField;
 var LinkedValue = require("./LinkedValue").LinkedValue;
 
 function Context() {
@@ -62,8 +63,6 @@ Context.prototype.getParentMostContext = function() {
 Context.prototype.getClosestInstanceContext = function() {
     if(this.parent === null) {
         return null;
-    } else if(this.parent instanceof InstanceContext) {
-        return this.parent;
     } else {
         return this.parent.getClosestInstanceContext();
     }
@@ -551,6 +550,7 @@ function InstanceContext(instance, type) {
 	Context.call(this);
 	this.instance = instance || null;
     this.instanceType = type !== null ? type : instance.type;
+    this.widgetFields = null;
 	return this;
 }
 
@@ -558,7 +558,16 @@ InstanceContext.prototype = Object.create(Context.prototype);
 InstanceContext.prototype.constructor = InstanceContext;
 
 
+InstanceContext.prototype.getClosestInstanceContext = function() {
+    return this;
+};
+
 InstanceContext.prototype.getRegistered = function(name) {
+    if(this.widgetFields) {
+        var field = this.widgetFields[name];
+        if(field)
+            return field;
+    }
     var actual = Context.prototype.getRegistered.call(this, name);
     if (actual)
         return actual;
@@ -574,6 +583,12 @@ InstanceContext.prototype.getRegistered = function(name) {
         return null;
 };
 
+InstanceContext.prototype.registerWidgetField = function(id, type) {
+    var widgetField = new WidgetField(id, type);
+    if(!this.widgetFields)
+        this.widgetFields = {};
+    this.widgetFields[id.name] = widgetField;
+};
 
 InstanceContext.prototype.getRegisteredDeclaration = function(klass, name) {
     if (klass === MethodDeclarationMap) {
@@ -604,6 +619,10 @@ InstanceContext.prototype.readRegisteredValue = function(name) {
 
 
 InstanceContext.prototype.contextForValue = function(name) {
+    if("this" === name)
+        return this;
+    else if(this.widgetFields!=null && this.widgetFields[name])
+        return this;
 	// params and variables have precedence over members
 	// so first look in context values
 	var context = Context.prototype.contextForValue.call(this, name);

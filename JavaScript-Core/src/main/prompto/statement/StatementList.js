@@ -26,43 +26,49 @@ StatementList.prototype.checkNative = function(context, returnType) {
     return this.checkStatements(context, returnType, true);
 };
 
+StatementList.prototype.checkStatement = function(context, statement) {
+    try {
+        return statement.check(context);
+    } catch(e) {
+        if(e instanceof PromptoError)
+            context.problemListener.reportError(statement, e.message);
+        else
+            context.problemListener.reportError(statement, "Internal error, check your syntax!");
+        return VoidType.instance;
+    }
+};
 
 StatementList.prototype.checkStatements = function(context, returnType, nativeOnly) {
     if(returnType==VoidType.instance) {
         if(nativeOnly) {
-            this.forEach(function (stmt) {
-                if(stmt instanceof JavaScriptNativeCall)
-                    stmt.check(context);
-            });
+            this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this)
+                .forEach(function (stmt) { this.checkStatement(context, stmt); }, this);
         } else {
-            this.forEach(function (stmt) {
-                stmt.check(context);
-            });
+            this.forEach(function (stmt) { this.checkStatement(context, stmt); }, this);
         }
         return VoidType.instance;
     } else {
         var section = null;
 	    var types = new TypeMap();
         if(nativeOnly) {
-            this.forEach(function (stmt) {
-                if(stmt instanceof JavaScriptNativeCall) {
-                    var type = stmt.check(context);
+            this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this)
+                .forEach(function (stmt) {
+                    var type = this.checkStatement(context, stmt);
                     if(!stmt.canReturn())
                         type = VoidType.instance;
                     if(type!==VoidType.instance) {
                         section = stmt;
                         types[type.name] = type;
                     }
-                }
-            });
+                }, this);
         } else {
             this.forEach(function (stmt) {
-                var type = stmt.check(context);
+                var type = this.checkStatement(context, stmt);
                 if(type!==VoidType.instance) {
                     section = stmt;
                     types[type.name] = type;
                 }
-            });
+            }, this);
         }
     	return types.inferType(context, section);
     }

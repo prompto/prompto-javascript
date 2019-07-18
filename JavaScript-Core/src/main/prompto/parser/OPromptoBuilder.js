@@ -782,10 +782,10 @@ OPromptoBuilder.prototype.exitMethod_call_expression = function(ctx) {
 OPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
     var parent = this.getNodeValue(ctx.parent);
     var call = this.getNodeValue(ctx.method);
-    call.setParent(parent);
+    call && call.setParent(parent);
     var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
-    if (name!=null || stmts!=null)
+    if (call && name!=null || stmts!=null)
         this.setNodeValue(ctx, new statement.RemoteCall(call.callable, call.assignments, name, stmts));
     else
         this.setNodeValue(ctx, call)
@@ -1870,7 +1870,7 @@ OPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
     var args = new literal.DictEntryList();
     var exp = this.getNodeValue(ctx.exp);
     if (exp != null) {
-        args.add(new DictEntry(null, exp));
+        args.add(new literal.DictEntry(null, exp));
     }
     ctx.annotation_argument().map(function(argCtx) {
         arg = this.getNodeValue(argCtx);
