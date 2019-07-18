@@ -10,6 +10,14 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted FilterFromIterable', () => {
+	checkInterpretedOutput('filter/filterFromIterable.poc');
+});
+
+test('Transpiled FilterFromIterable', () => {
+	checkTranspiledOutput('filter/filterFromIterable.poc');
+});
+
 test('Interpreted FilterFromList', () => {
 	checkInterpretedOutput('filter/filterFromList.poc');
 });

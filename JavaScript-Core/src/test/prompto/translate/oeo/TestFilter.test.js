@@ -1,5 +1,9 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('FilterFromIterable', () => {
+	compareResourceOEO('filter/filterFromIterable.poc');
+});
+
 test('FilterFromList', () => {
 	compareResourceOEO('filter/filterFromList.poc');
 });
