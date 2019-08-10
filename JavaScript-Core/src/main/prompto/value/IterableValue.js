@@ -1,6 +1,7 @@
 var IteratorType = require("../type/IteratorType").IteratorType;
 var Variable = require("../runtime/Variable").Variable;
 var Value = require("./Value").Value;
+var ListValue = require("./ListValue").ListValue;
 
 function IterableValue(context, name, itemType, source, length, expression) {
     Value.call(this, new IteratorType(itemType));
@@ -46,6 +47,19 @@ IterableValue.prototype.getMemberValue = function(context, name) {
         return new Integer(this.count);
     else
         return Value.prototype.getMemberValue.call(this, context, name);
+};
+
+IterableValue.prototype.filter = function(filter) {
+    var list = this.toListValue();
+    return list.filter(filter);
+};
+
+IterableValue.prototype.toListValue = function() {
+    var items = [];
+    var iterator = this.getIterator();
+    while(iterator.hasNext())
+        items.push(iterator.next());
+    return new ListValue(this.itemType, items);
 };
 
 

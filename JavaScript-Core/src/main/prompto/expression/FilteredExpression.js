@@ -5,6 +5,7 @@ var ListType = require("../type/ListType").ListType;
 var TupleType = require("../type/TupleType").TupleType;
 var SetType = require("../type/SetType").SetType;
 var Variable = require("../runtime/Variable").Variable;
+var InternalError = require("../error/InternalError").InternalError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var ListValue = require("../value/ListValue").ListValue;
 var TupleValue = require("../value/TupleValue").TupleValue;
@@ -56,17 +57,17 @@ FilteredExpression.prototype.interpret = function(context) {
 	if(!(sourceType instanceof IterableType)) {
 		throw new InternalError("Illegal source type: " + sourceType.name);
 	}
-	var list = this.source.interpret(context);
-	if(list==null) {
+	var iterable = this.source.interpret(context);
+	if(iterable==null) {
 		throw new NullReferenceError();
 	}
-	if(!list.filter) {
+	if(!iterable.filter) {
 		throw new InternalError("Illegal fetch source: " + this.source);
 	}
     var itemType = sourceType.itemType;
     var arrow = this.toArrowExpression();
     var filter = arrow.getFilter(context, itemType);
-    return list.filter(filter)
+    return iterable.filter(filter)
 };
 
 FilteredExpression.prototype.toArrowExpression = function() {
