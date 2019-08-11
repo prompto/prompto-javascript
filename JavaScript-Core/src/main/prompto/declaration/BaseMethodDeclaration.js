@@ -1,8 +1,8 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ParameterList = require("../param/ParameterList").ParameterList;
 var CategoryType = null;
-var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
-var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var Argument = require("../grammar/Argument").Argument;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 
@@ -10,9 +10,9 @@ exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
 }
 
-function BaseMethodDeclaration(id, args, returnType) {
+function BaseMethodDeclaration(id, parameters, returnType) {
 	BaseDeclaration.call(this, id);
-    this.args = args || new ParameterList();
+    this.parameters = parameters || new ParameterList();
 	this.returnType = returnType || null;
     this.memberOf = null;
 	this.closureOf = null;
@@ -29,15 +29,15 @@ BaseMethodDeclaration.prototype.getDeclarationType = function() {
 
 BaseMethodDeclaration.prototype.getSignature = function(context) {
 	var s = [];
-    this.args.map(function(arg) {
-        s.push(arg.getProto());
+    this.parameters.map(function(param) {
+        s.push(param.getProto());
     });
     return "(" + s.join(", ") + ")";
 };
 
 BaseMethodDeclaration.prototype.getProto = function(context) {
-    return this.args.map(function(arg) {
-        return arg.getProto(context);
+    return this.parameters.map(function(param) {
+        return param.getProto(context);
     }).join("/");
 };
 
@@ -46,7 +46,7 @@ BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
     if(this.name.indexOf("$")>0)
     	return this.name;
     else
-		return [this.name].concat(this.args.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
+		return [this.name].concat(this.parameters.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
 };
 
 
@@ -55,7 +55,7 @@ BaseMethodDeclaration.prototype.transpileProlog = function(transpiler) {
         transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName(transpiler.context)).append(" = function (");
     else
         transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
-    this.args.transpile(transpiler);
+    this.parameters.transpile(transpiler);
     transpiler.append(") {").indent();
 };
 
@@ -78,16 +78,16 @@ BaseMethodDeclaration.prototype.register = function(context) {
 };
 
 
-BaseMethodDeclaration.prototype.registerArguments = function(context) {
-	if(this.args!=null) {
-		this.args.register(context);
+BaseMethodDeclaration.prototype.registerParameters = function(context) {
+	if(this.parameters!=null) {
+		this.parameters.register(context);
 	}
 };
 
 
-BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
-    if(this.args!=null) {
-        this.args.declare(transpiler);
+BaseMethodDeclaration.prototype.declareParameters = function(transpiler) {
+    if(this.parameters!=null) {
+        this.parameters.declare(transpiler);
     }
 };
 
@@ -96,15 +96,15 @@ BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, 
 	try {
         context.problemListener = new ProblemListener();
 		var local = context.newLocalContext();
-		this.registerArguments(local);
-		var assignmentsList = new ArgumentAssignmentList(assignments);
-		for(var i=0;i<this.args.length;i++) {
-			var argument = this.args[i];
+		this.registerParameters(local);
+		var assignmentsList = new ArgumentList(assignments);
+		for(var i=0; i<this.parameters.length; i++) {
+			var argument = this.parameters[i];
 			var idx = assignmentsList.findIndex(argument.id.name);
             var assignment = idx>=0 ? assignmentsList[idx] : null;
             if(assignment==null) { // missing argument
                 if(argument.defaultExpression!=null)
-                    assignment = new ArgumentAssignment(argument, argument.defaultExpression);
+                    assignment = new Argument(argument, argument.defaultExpression);
 				else
                     return false;
 			}

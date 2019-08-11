@@ -2,7 +2,7 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-var ArgumentAssignment = require("./Argument").ArgumentAssignment;
+var Argument = require("./Argument").Argument;
 var AndExpression = null;
 var UnresolvedIdentifier = null;
 
@@ -33,7 +33,7 @@ ArgumentList.prototype.checkLastAnd = function() {
                 this.pop();
                 // add AttributeParameter
                 var argument = new AttributeParameter(id);
-                var attribute = new ArgumentAssignment(argument, null);
+                var attribute = new Argument(argument, null);
                 this.add(attribute);
                 // fix last assignment
                 assignment.expression = and.right;
@@ -64,8 +64,8 @@ ArgumentList.prototype.find = function(name) {
 ArgumentList.prototype.makeAssignments = function(context, declaration) {
     var local = new ArgumentList(this);
 	var assignments = new ArgumentList();
-	for(var i=0;i<declaration.args.length;i++) {
-	    var argument = declaration.args[i];
+	for(var i=0; i<declaration.parameters.length; i++) {
+	    var argument = declaration.parameters[i];
         var assignment = null;
         var index = local.findIndex(argument.name);
 	    if(index<0 && i==0 && this.length>0 && this[0].parameter==null)
@@ -76,12 +76,12 @@ ArgumentList.prototype.makeAssignments = function(context, declaration) {
         }
         if(assignment==null) {
             if (argument.defaultExpression != null)
-                assignments.push(new ArgumentAssignment(argument, argument.defaultExpression));
+                assignments.push(new Argument(argument, argument.defaultExpression));
             else
                 throw new SyntaxError("Missing argument:" + argument.name);
         } else {
             var expression = new ContextualExpression(context, assignment.expression);
-            assignments.push(new ArgumentAssignment(argument, expression));
+            assignments.push(new Argument(argument, expression));
         }
     }
     if(local.length > 0)
@@ -152,5 +152,5 @@ ArgumentList.prototype.transpile = function(transpiler) {
     transpiler.append(")");
 };
 
-exports.ArgumentAssignmentList = ArgumentList;
+exports.ArgumentList = ArgumentList;
 

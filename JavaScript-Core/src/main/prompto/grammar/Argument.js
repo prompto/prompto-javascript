@@ -156,7 +156,7 @@ Argument.prototype.resolve = function(context, methodDeclaration, checkInstance,
 	// since we support implicit members, it's time to resolve them
 	var name = this.parameter.name;
 	var expression = this.expression;
-	var argument = methodDeclaration.args.find(name);
+	var argument = methodDeclaration.parameters.find(name);
 	var required = argument.getType(context);
 	var actual = expression.check(context.getCallingContext());
 	if(checkInstance && actual instanceof CategoryType) {
@@ -180,12 +180,12 @@ Argument.prototype.makeAssignment = function(context, declaration) {
 	var argument = this.parameter;
 	// when 1st argument, can be unnamed
 	if(argument===null) {
-		if(declaration.args.length==0) {
+		if(declaration.parameters.length==0) {
 			throw new SyntaxError("Method has no argument");
 		}
-		argument = declaration.args[0];
+		argument = declaration.parameters[0];
 	} else {
-		argument = declaration.args.find(this.name);
+		argument = declaration.parameters.find(this.name);
 	}
 	if(argument==null) {
 		throw new SyntaxError("Method has no argument:" + this.name);
@@ -228,5 +228,5 @@ Argument.prototype.computeSpecificity = function(context, argument, declaration,
     return Specificity.INCOMPATIBLE;
 };
 
-exports.ArgumentAssignment = Argument;
+exports.Argument = Argument;
 

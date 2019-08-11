@@ -76,16 +76,16 @@ MethodFinder.prototype.sortMostSpecificFirst = function(declarations) {
 MethodFinder.prototype.scoreMostSpecific = function(decl1, decl2, checkInstance, allowDerived) {
 	try {
         var ctx1 = this.context.newLocalContext();
-		decl1.registerArguments(ctx1);
+		decl1.registerParameters(ctx1);
 		var ctx2 = this.context.newLocalContext();
-		decl2.registerArguments(ctx2);
+		decl2.registerParameters(ctx2);
 		var ass1 = this.methodCall.makeAssignments(this.context, decl1);
 		var ass2 = this.methodCall.makeAssignments(this.context, decl2);
 		for(var i=0;i<ass1.length && i<ass2.length;i++) {
 			var as1 = ass1[i];
 			var as2 = ass2[i];
-			var arg1 = decl1.args.find(as1.name);
-			var arg2 = decl2.args.find(as2.name);
+			var arg1 = decl1.parameters.find(as1.name);
+			var arg2 = decl2.parameters.find(as2.name);
 			if(as1.name===as2.name) {
 				// the general case with named arguments
 				var typ1 = arg1.getType(ctx1);

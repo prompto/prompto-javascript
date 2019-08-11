@@ -18,10 +18,10 @@ NativeMethodDeclaration.prototype.check = function(context, isStart) {
     intrinsic = require("../intrinsic");
     if(isStart) {
         context = context.newLocalContext();
-        this.registerArguments(context);
+        this.registerParameters(context);
     }
-    if(this.args!==null)
-        this.args.check(context);
+    if(this.parameters!==null)
+        this.parameters.check(context);
     var checked = this.statements.checkNative(context, this.returnType);
     return this.returnType==null ? checked : this.returnType;
 };
@@ -60,7 +60,7 @@ NativeMethodDeclaration.prototype.toMDialect = function(writer) {
     if(this.memberOf==null)
         writer.append("native ");
     writer.append(this.name).append(" (");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
@@ -79,7 +79,7 @@ NativeMethodDeclaration.prototype.toODialect = function(writer) {
     if(this.memberOf==null)
         writer.append("native ");
     writer.append("method ").append(this.name).append(" (");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     writer.append(") {").newLine().indent();
     this.statements.forEach(function(stmt) {
         stmt.toDialect(writer);
@@ -93,7 +93,7 @@ NativeMethodDeclaration.prototype.toEDialect = function(writer) {
     if(this.memberOf==null)
         writer.append("native ");
     writer.append("method ");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
