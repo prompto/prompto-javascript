@@ -29,8 +29,8 @@ var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
 
 exports.resolve = function() {
-	ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
-	ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+	ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+	ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;

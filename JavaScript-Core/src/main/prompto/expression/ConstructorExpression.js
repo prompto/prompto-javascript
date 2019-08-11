@@ -4,8 +4,8 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
-var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
+var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
@@ -36,12 +36,12 @@ ConstructorExpression.prototype.checkFirstHomonym = function(context, decl) {
         return;
     if(this.assignments && this.assignments.length>0) {
         var assign = this.assignments[0];
-        if(!assign.argument) {
+        if(!assign.parameter) {
             var id = null;
             if (assign.expression instanceof UnresolvedIdentifier || assign.expression instanceof InstanceExpression)
                 id = assign.expression.id;
             if (id && decl.hasAttribute(context, id.name)) {
-                assign.argument = new AttributeParameter(id);
+                assign.parameter = new AttributeParameter(id);
                 assign._expression = null;
             }
         }
@@ -203,7 +203,7 @@ ConstructorExpression.prototype.transpileAssignments = function(transpiler) {
     if(this.assignments!=null) {
         transpiler.append("{");
         this.assignments.forEach(function(assignment) {
-            transpiler.append(assignment.argument.name).append(":");
+            transpiler.append(assignment.parameter.name).append(":");
             assignment.expression.transpile(transpiler);
             transpiler.append(", ");
         }, this);

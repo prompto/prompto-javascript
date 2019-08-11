@@ -20,8 +20,8 @@ var compareValues = require("../utils/Utils").compareValues;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
-    ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+    ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+    ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
     DocumentValue = require("../value/DocumentValue").DocumentValue;
 };
 

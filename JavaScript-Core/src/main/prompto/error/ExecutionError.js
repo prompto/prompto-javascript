@@ -12,8 +12,8 @@ ExecutionError.prototype.constructor = ExecutionError;
 ExecutionError.prototype.interpret = function(context, errorName) {
     var exp = this.getExpression(context);
     if(exp==null) {
-        var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
-        var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+        var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+        var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
         var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
         var TextLiteral = require("../literal/TextLiteral").TextLiteral;
         var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;

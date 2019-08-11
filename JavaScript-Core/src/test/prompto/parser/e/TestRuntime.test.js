@@ -27,7 +27,7 @@ test('SystemOutPrint', () => {
 	var statement = builder.getNodeValue(tree);
 	var context = prompto.runtime.Context.newGlobalContext();
     var id = new prompto.grammar.Identifier("value");
-	var arg = new prompto.argument.CategoryParameter(prompto.type.TextType.instance, id);
+	var arg = new prompto.param.CategoryParameter(prompto.type.TextType.instance, id);
 	arg.register(context);
 	context.setValue(id, new prompto.literal.TextLiteral("\"test\"")); // TextLiteral trims enclosing quotes
 	var result = statement.interpret(context);

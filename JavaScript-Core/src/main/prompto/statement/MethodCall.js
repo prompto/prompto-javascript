@@ -1,7 +1,7 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
@@ -112,7 +112,7 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 		declaration.registerArguments(local);
 		assignments.forEach(function(assignment) {
 			var expression = assignment.resolve(local, declaration, true);
-			var value = assignment.argument.checkValue(parent, expression);
+			var value = assignment.parameter.checkValue(parent, expression);
 			local.setValue(assignment.id, value);
 		});
 		return declaration.check(local, false);
@@ -170,7 +170,7 @@ MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, 
         declaration.registerArguments(local);
         assignments.forEach(function(assignment) {
             var expression = assignment.resolve(local, declaration, true);
-            var value = assignment.argument.checkValue(transpiler.context, expression);
+            var value = assignment.parameter.checkValue(transpiler.context, expression);
             local.setValue(assignment.id, value);
         });
         transpiler = transpiler.copyTranspiler(local);
@@ -240,12 +240,12 @@ MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
 MethodCall.prototype.transpileAssignments = function(transpiler, declaration, allowDerived) {
     var assignments = this.makeAssignments(transpiler.context, declaration);
     assignments = assignments.filter(function(assignment) {
-        return !(assignment.argument instanceof CodeParameter);
+        return !(assignment.parameter instanceof CodeParameter);
     });
     if(assignments.length > 0) {
         transpiler.append("(");
         assignments.forEach(function (assignment) {
-            var argument = assignment.argument;
+            var argument = assignment.parameter;
             var expression = assignment.resolve(transpiler.context, declaration, false, allowDerived);
             argument.transpileCall(transpiler, expression);
             transpiler.append(", ");
@@ -269,7 +269,7 @@ MethodCall.prototype.interpret = function(context) {
 	var assignments = this.makeAssignments(context, declaration);
 	assignments.forEach(function(assignment) {
 		var expression = assignment.resolve(local, declaration, true);
-        var argument = assignment.argument;
+        var argument = assignment.parameter;
 		var value = argument.checkValue(context, expression);
         if(value!=null && argument.mutable && !value.mutable)
             throw new NotMutableError();

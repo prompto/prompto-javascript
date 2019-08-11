@@ -370,7 +370,7 @@ test('Method1Parameter1Statement', () => {
     expect(ad.name).toEqual("printName");
     expect(ad.args).toBeTruthy();
     var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Person"));
-    var expected = new prompto.argument.CategoryParameter(type, new prompto.grammar.Identifier("p"));
+    var expected = new prompto.param.CategoryParameter(type, new prompto.grammar.Identifier("p"));
     expect(prompto.utils.arrayContains(ad.args, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
@@ -388,7 +388,7 @@ test('Method1Extended1Statement', () => {
     expect(ad.name).toEqual("printName");
     expect(ad.args).toBeTruthy();
     var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Object"));
-    var expected = new prompto.argument.ExtendedParameter(type,
+    var expected = new prompto.param.ExtendedParameter(type,
         new prompto.grammar.Identifier("o"),
         new prompto.grammar.IdentifierList(new prompto.grammar.Identifier("name")));
     expect(prompto.utils.arrayContains(ad.args, expected)).toBeTruthy();
@@ -408,7 +408,7 @@ test('Method1Array1Statement', () => {
     expect(ad.name).toEqual("printName");
     expect(ad.args).toBeTruthy();
     var category = new prompto.type.CategoryType(new prompto.grammar.Identifier("Option"));
-    var expected = new prompto.argument.CategoryParameter(
+    var expected = new prompto.param.CategoryParameter(
         new prompto.type.ListType(category),
         new prompto.grammar.Identifier("options"));
     expect(prompto.utils.arrayContains(ad.args, expected)).toBeTruthy();

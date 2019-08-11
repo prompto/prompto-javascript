@@ -1,8 +1,8 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
-var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
 var UnresolvedIdentifier = null;
 var UnresolvedParameter = null;
 var CategoryParameter = null;
@@ -37,7 +37,7 @@ DispatchMethodDeclaration.prototype.getTranspiledName = function(context) {
 
 DispatchMethodDeclaration.prototype.replaceLocalsWithArguments = function(assignments) {
     var items = assignments.map(function(assignment) {
-        var arg = assignment.argument;
+        var arg = assignment.parameter;
         var exp = assignment.expression;
         if(exp instanceof ContextualExpression)
             exp = exp.expression;
@@ -102,7 +102,7 @@ DispatchMethodDeclaration.prototype.transpileCall = function(transpiler, declara
 
 DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common, declaration) {
     for(var i = 0, count = 0;i<this.call.assignments.length; i++) {
-        var incoming = this.call.assignments[i].argument;
+        var incoming = this.call.assignments[i].parameter;
         if(common.has(incoming))
             continue;
         if(count++)

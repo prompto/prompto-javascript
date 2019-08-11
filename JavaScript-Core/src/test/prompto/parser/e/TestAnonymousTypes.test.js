@@ -3,8 +3,8 @@ var parseString = require("../../parser/BaseEParserTest").parseString;
 
 var Identifier = prompto.grammar.Identifier;
 var IdentifierList = prompto.grammar.IdentifierList;
-var CategoryParameter = prompto.argument.CategoryParameter;
-var ExtendedParameter = prompto.argument.ExtendedParameter;
+var CategoryParameter = prompto.param.CategoryParameter;
+var ExtendedParameter = prompto.param.ExtendedParameter;
 var AnyType = prompto.type.AnyType;
 var TextType = prompto.type.TextType;
 var DateType = prompto.type.DateType;

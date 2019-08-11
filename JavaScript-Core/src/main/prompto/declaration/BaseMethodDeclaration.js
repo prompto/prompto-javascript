@@ -1,8 +1,8 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ParameterList = require("../param/ParameterList").ParameterList;
 var CategoryType = null;
-var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
-var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 

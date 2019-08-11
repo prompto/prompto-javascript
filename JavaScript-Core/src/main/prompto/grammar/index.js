@@ -8,11 +8,11 @@ exports.EqOp = require("./EqOp").EqOp;
 exports.OrderByClause = require("./OrderByClause").OrderByClause;
 exports.OrderByClauseList = require("./OrderByClauseList").OrderByClauseList;
 exports.Operator = require("./Operator").Operator;
-exports.ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
-exports.ArgumentAssignmentList = require("./ArgumentAssignmentList").ArgumentAssignmentList;
+exports.ArgumentAssignment = require("./Argument").ArgumentAssignment;
+exports.ArgumentAssignmentList = require("./ArgumentList").ArgumentAssignmentList;
 exports.NativeSymbolList = require("./NativeSymbolList").NativeSymbolList;
 exports.CategorySymbolList = require("./CategorySymbolList").CategorySymbolList;
 exports.NativeCategoryBindingList = require("./NativeCategoryBindingList").NativeCategoryBindingList;
 
-require('./ArgumentAssignment').resolve();
-require('./ArgumentAssignmentList').resolve();
+require('./Argument').resolve();
+require('./ArgumentList').resolve();

@@ -11,28 +11,28 @@ exports.resolve = function() {
     CategoryType = require("../type/CategoryType").CategoryType;
 }
 
-function ArgumentAssignment(argument, expression) {
-	this.argument = argument;
+function Argument(parameter, expression) {
+	this.parameter = parameter;
 	this._expression = expression;
 	return this;
 }
 
-ArgumentAssignment.prototype = Object.create(Section.prototype);
-ArgumentAssignment.prototype.constructor = ArgumentAssignment;
+Argument.prototype = Object.create(Section.prototype);
+Argument.prototype.constructor = Argument;
 
-Object.defineProperty(ArgumentAssignment.prototype, "id", {
+Object.defineProperty(Argument.prototype, "id", {
     get : function() {
-        return this.argument.id;
+        return this.parameter.id;
     }
 });
 
-Object.defineProperty(ArgumentAssignment.prototype, "name", {
+Object.defineProperty(Argument.prototype, "name", {
 	get : function() {
-		return this.argument ? this.argument.name : null;
+		return this.parameter ? this.parameter.name : null;
 	}
 });
 
-Object.defineProperty(ArgumentAssignment.prototype, "expression", {
+Object.defineProperty(Argument.prototype, "expression", {
     get : function() {
         return this._expression ? this._expression : new InstanceExpression(this.id);
     },
@@ -42,68 +42,68 @@ Object.defineProperty(ArgumentAssignment.prototype, "expression", {
 });
 
 // needed for error reporting
-Object.defineProperty(ArgumentAssignment.prototype, "end", {
+Object.defineProperty(Argument.prototype, "end", {
     get : function() {
         return this.expression.end;
     }
 });
 
-ArgumentAssignment.prototype.toDialect = function(writer) {
+Argument.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
 
-ArgumentAssignment.prototype.toODialect = function(writer) {
+Argument.prototype.toODialect = function(writer) {
 	if(!this._expression) {
-        writer.append(this.argument.name);
+        writer.append(this.parameter.name);
 	} else {
-        if (this.argument != null) {
-            writer.append(this.argument.name);
+        if (this.parameter != null) {
+            writer.append(this.parameter.name);
             writer.append(" = ");
         }
         this._expression.toDialect(writer);
     }
 };
 
-ArgumentAssignment.prototype.toMDialect = function(writer) {
+Argument.prototype.toMDialect = function(writer) {
     if(!this._expression) {
-        writer.append(this.argument.name);
+        writer.append(this.parameter.name);
     } else {
-        if (this.argument != null) {
-            writer.append(this.argument.name);
+        if (this.parameter != null) {
+            writer.append(this.parameter.name);
             writer.append(" = ");
         }
         this._expression.toDialect(writer);
     }
 };
 
-ArgumentAssignment.prototype.toEDialect = function(writer) {
+Argument.prototype.toEDialect = function(writer) {
     if(!this._expression) {
-        writer.append(this.argument.name);
+        writer.append(this.parameter.name);
     } else {
         this._expression.toDialect(writer);
-        if (this.argument != null) {
+        if (this.parameter != null) {
             writer.append(" as ");
-            writer.append(this.argument.name);
+            writer.append(this.parameter.name);
         }
     }
 };
 
 
-ArgumentAssignment.prototype.declare = function(transpiler) {
+Argument.prototype.declare = function(transpiler) {
     if(this._expression)
     	this._expression.declare(transpiler);
 };
 
-ArgumentAssignment.prototype.transpile = function(transpiler) {
+Argument.prototype.transpile = function(transpiler) {
     this._expression.transpile(transpiler);
 };
 
 
-ArgumentAssignment.prototype.toString = function() {
+Argument.prototype.toString = function() {
     if(!this._expression) {
-        return this.argument.name;
+        return this.parameter.name;
     } else {
-        if (this.argument === null) {
+        if (this.parameter === null) {
             return this._expression.toString();
         } else {
             return this.name + " = " + this._expression.toString();
@@ -111,24 +111,24 @@ ArgumentAssignment.prototype.toString = function() {
     }
 };
 
-ArgumentAssignment.prototype.equals = function(obj) {
+Argument.prototype.equals = function(obj) {
 	if(obj==this) {
 		return true;
 	} else if(obj==null) {
 		return false;
-	} else if(!(obj instanceof ArgumentAssignment)) {
+	} else if(!(obj instanceof Argument)) {
 		return false;
 	} else {
-		return this.argument.equals(obj.argument) &&
+		return this.parameter.equals(obj.parameter) &&
 			this.expression.equals(other.expression);
 	}
 };
 
-ArgumentAssignment.prototype.check = function(context) {
-	var actual = context.getRegisteredValue(this.argument.name);
+Argument.prototype.check = function(context) {
+	var actual = context.getRegisteredValue(this.parameter.name);
 	if(actual==null) {
         var actualType = this.expression.check(context);
-		context.registerValue(new Variable(this.argument.id, actualType));
+		context.registerValue(new Variable(this.parameter.id, actualType));
 	} else {
 		// need to check type compatibility
 		var actualType = actual.getType(context);
@@ -139,22 +139,22 @@ ArgumentAssignment.prototype.check = function(context) {
 	return VoidType.instance;
 };
 
-ArgumentAssignment.prototype.toSection = function() {
-    if(this.argument && this._expression) {
+Argument.prototype.toSection = function() {
+    if(this.parameter && this._expression) {
         var section = new Section();
-        section.copySectionFrom(this.argument);
+        section.copySectionFrom(this.parameter);
         section.end = this._expression.end;
         return section;
     } else if(this._expression) {
         return this._expression;
     } else {
-        return this.argument;
+        return this.parameter;
     }
 };
 
-ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, checkInstance, allowDerived) {
+Argument.prototype.resolve = function(context, methodDeclaration, checkInstance, allowDerived) {
 	// since we support implicit members, it's time to resolve them
-	var name = this.argument.name;
+	var name = this.parameter.name;
 	var expression = this.expression;
 	var argument = methodDeclaration.args.find(name);
 	var required = argument.getType(context);
@@ -171,13 +171,13 @@ ArgumentAssignment.prototype.resolve = function(context, methodDeclaration, chec
         assignable = actual.isAssignableFrom(context, required);
 	// try passing member
 	if(!assignable && (actual instanceof CategoryType)) {
-		expression = new MemberSelector(expression, this.argument.id);
+		expression = new MemberSelector(expression, this.parameter.id);
 	}
 	return expression;
 };
 
-ArgumentAssignment.prototype.makeAssignment = function(context, declaration) {
-	var argument = this.argument;
+Argument.prototype.makeAssignment = function(context, declaration) {
+	var argument = this.parameter;
 	// when 1st argument, can be unnamed
 	if(argument===null) {
 		if(declaration.args.length==0) {
@@ -192,11 +192,11 @@ ArgumentAssignment.prototype.makeAssignment = function(context, declaration) {
 	}
 };
 
-ArgumentAssignment.prototype.isAssignableToArgument = function(context, argument, declaration, checkInstance, allowDerived) {
+Argument.prototype.isAssignableToArgument = function(context, argument, declaration, checkInstance, allowDerived) {
     return this.computeSpecificity(context, argument, declaration, checkInstance, allowDerived)!==Specificity.INCOMPATIBLE;
 };
 
-ArgumentAssignment.prototype.computeSpecificity = function(context, argument, declaration, checkInstance, allowDerived) {
+Argument.prototype.computeSpecificity = function(context, argument, declaration, checkInstance, allowDerived) {
     try {
         var required = argument.getType(context);
         var actual = this.expression.check(context);
@@ -228,5 +228,5 @@ ArgumentAssignment.prototype.computeSpecificity = function(context, argument, de
     return Specificity.INCOMPATIBLE;
 };
 
-exports.ArgumentAssignment = ArgumentAssignment;
+exports.ArgumentAssignment = Argument;
 

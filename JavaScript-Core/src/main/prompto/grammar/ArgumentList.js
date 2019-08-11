@@ -2,7 +2,7 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-var ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
+var ArgumentAssignment = require("./Argument").ArgumentAssignment;
 var AndExpression = null;
 var UnresolvedIdentifier = null;
 
@@ -11,20 +11,20 @@ exports.resolve = function() {
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 }
 
-function ArgumentAssignmentList(items) {
+function ArgumentList(items) {
 	ObjectList.call(this, items || []);
 	return this;
 }
 
-ArgumentAssignmentList.prototype = Object.create(ObjectList.prototype);
-ArgumentAssignmentList.prototype.constructor = ArgumentAssignmentList;
+ArgumentList.prototype = Object.create(ObjectList.prototype);
+ArgumentList.prototype.constructor = ArgumentList;
 
 
 /* post-fix expression priority for final assignment in E dialect */
 /* 'xyz with a and b as c' should read 'xyz with a, b as c' NOT 'xyz with (a and b) as c' */
-ArgumentAssignmentList.prototype.checkLastAnd = function() {
+ArgumentList.prototype.checkLastAnd = function() {
     var assignment = this.slice(-1).pop();
-    if(assignment!=null && assignment.argument!=null && assignment.expression instanceof AndExpression) {
+    if(assignment!=null && assignment.parameter!=null && assignment.expression instanceof AndExpression) {
         var and = assignment.expression;
         if(and.left instanceof UnresolvedIdentifier) {
             var id = and.left.id;
@@ -43,7 +43,7 @@ ArgumentAssignmentList.prototype.checkLastAnd = function() {
     }
 };
 
-ArgumentAssignmentList.prototype.findIndex = function(name) {
+ArgumentList.prototype.findIndex = function(name) {
 	for(var i=0;i<this.length;i++) {
 		if(name==this[i].name) {
 			return i;
@@ -52,7 +52,7 @@ ArgumentAssignmentList.prototype.findIndex = function(name) {
 	return -1;
 };
 
-ArgumentAssignmentList.prototype.find = function(name) {
+ArgumentList.prototype.find = function(name) {
 	for(var i=0;i<this.length;i++) {
 		if(name==this[i].name) {
 			return this[i];
@@ -61,14 +61,14 @@ ArgumentAssignmentList.prototype.find = function(name) {
 	return null;
 };
 
-ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration) {
-    var local = new ArgumentAssignmentList(this);
-	var assignments = new ArgumentAssignmentList();
+ArgumentList.prototype.makeAssignments = function(context, declaration) {
+    var local = new ArgumentList(this);
+	var assignments = new ArgumentList();
 	for(var i=0;i<declaration.args.length;i++) {
 	    var argument = declaration.args[i];
         var assignment = null;
         var index = local.findIndex(argument.name);
-	    if(index<0 && i==0 && this.length>0 && this[0].argument==null)
+	    if(index<0 && i==0 && this.length>0 && this[0].parameter==null)
 	        index = 0;
 	    if(index>=0) {
             assignment = local[index];
@@ -91,14 +91,14 @@ ArgumentAssignmentList.prototype.makeAssignments = function(context, declaration
 
 
 
-ArgumentAssignmentList.prototype.toDialect = function(writer) {
+ArgumentList.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };
 
-ArgumentAssignmentList.prototype.toEDialect = function(writer) {
+ArgumentList.prototype.toEDialect = function(writer) {
     var idx = 0;
     // anonymous argument before 'with'
-    if(this.length>0 && this[0].argument==null) {
+    if(this.length>0 && this[0].parameter==null) {
         writer.append(' ');
         this[idx++].toDialect(writer);
     }
@@ -118,7 +118,7 @@ ArgumentAssignmentList.prototype.toEDialect = function(writer) {
     }
 };
 
-ArgumentAssignmentList.prototype.toODialect = function(writer) {
+ArgumentList.prototype.toODialect = function(writer) {
     writer.append("(");
     this.forEach(function(arg) {
         arg.toDialect(writer);
@@ -129,19 +129,19 @@ ArgumentAssignmentList.prototype.toODialect = function(writer) {
     writer.append(")");
 };
 
-ArgumentAssignmentList.prototype.toMDialect = function(writer) {
+ArgumentList.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 };
 
 
-ArgumentAssignmentList.prototype.declare = function(transpiler) {
+ArgumentList.prototype.declare = function(transpiler) {
     this.forEach(function(arg) {
         arg.declare(transpiler);
     });
 };
 
 
-ArgumentAssignmentList.prototype.transpile = function(transpiler) {
+ArgumentList.prototype.transpile = function(transpiler) {
     transpiler.append("(");
     this.forEach(function(arg) {
         arg.transpile(transpiler);
@@ -152,5 +152,5 @@ ArgumentAssignmentList.prototype.transpile = function(transpiler) {
     transpiler.append(")");
 };
 
-exports.ArgumentAssignmentList = ArgumentAssignmentList;
+exports.ArgumentAssignmentList = ArgumentList;
 
