@@ -108,7 +108,7 @@ MethodCall.prototype.lightCheck = function(declaration, local) {
 
 MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 	try {
-		var assignments = this.makeAssignments(parent, declaration);
+		var assignments = this.makeArguments(parent, declaration);
 		declaration.registerArguments(local);
 		assignments.forEach(function(assignment) {
 			var expression = assignment.resolve(local, declaration, true);
@@ -166,7 +166,7 @@ var fullDeclareCounter = 0;
 
 MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, local) {
     if(!this.fullSelector) {
-        var assignments = this.makeAssignments(transpiler.context, declaration);
+        var assignments = this.makeArguments(transpiler.context, declaration);
         declaration.registerArguments(local);
         assignments.forEach(function(assignment) {
             var expression = assignment.resolve(local, declaration, true);
@@ -238,7 +238,7 @@ MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
 
 
 MethodCall.prototype.transpileAssignments = function(transpiler, declaration, allowDerived) {
-    var assignments = this.makeAssignments(transpiler.context, declaration);
+    var assignments = this.makeArguments(transpiler.context, declaration);
     assignments = assignments.filter(function(assignment) {
         return !(assignment.parameter instanceof CodeParameter);
     });
@@ -258,15 +258,15 @@ MethodCall.prototype.transpileAssignments = function(transpiler, declaration, al
 
 
 
-MethodCall.prototype.makeAssignments = function(context, declaration) {
-	return (this.assignments || new ArgumentList()).makeAssignments(context, declaration);
+MethodCall.prototype.makeArguments = function(context, declaration) {
+	return (this.assignments || new ArgumentList()).makeArguments(context, declaration);
 };
 
 MethodCall.prototype.interpret = function(context) {
 	var declaration = this.findDeclaration(context);
 	var local = this.selector.newLocalContext(context, declaration);
 	declaration.registerArguments(local);
-	var assignments = this.makeAssignments(context, declaration);
+	var assignments = this.makeArguments(context, declaration);
 	assignments.forEach(function(assignment) {
 		var expression = assignment.resolve(local, declaration, true);
         var argument = assignment.parameter;

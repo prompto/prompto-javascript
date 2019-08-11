@@ -79,8 +79,8 @@ MethodFinder.prototype.scoreMostSpecific = function(decl1, decl2, checkInstance,
 		decl1.registerArguments(ctx1);
 		var ctx2 = this.context.newLocalContext();
 		decl2.registerArguments(ctx2);
-		var ass1 = this.methodCall.makeAssignments(this.context, decl1);
-		var ass2 = this.methodCall.makeAssignments(this.context, decl2);
+		var ass1 = this.methodCall.makeArguments(this.context, decl1);
+		var ass2 = this.methodCall.makeArguments(this.context, decl2);
 		for(var i=0;i<ass1.length && i<ass2.length;i++) {
 			var as1 = ass1[i];
 			var as2 = ass2[i];
@@ -133,7 +133,7 @@ MethodFinder.prototype.filterCompatible = function(candidates, checkInstance, al
 	var compatibles = new Set();
 	candidates.forEach(function(declaration) {
         try {
-			var assignments = this.methodCall.makeAssignments(this.context, declaration);
+			var assignments = this.methodCall.makeArguments(this.context, declaration);
 			if(declaration.isAssignableTo(this.context, assignments, checkInstance, allowDerived)) {
 				compatibles.add(declaration);
 			}

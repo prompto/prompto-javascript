@@ -61,7 +61,7 @@ ArgumentList.prototype.find = function(name) {
 	return null;
 };
 
-ArgumentList.prototype.makeAssignments = function(context, declaration) {
+ArgumentList.prototype.makeArguments = function(context, declaration) {
     var local = new ArgumentList(this);
 	var assignments = new ArgumentList();
 	for(var i=0;i<declaration.args.length;i++) {
