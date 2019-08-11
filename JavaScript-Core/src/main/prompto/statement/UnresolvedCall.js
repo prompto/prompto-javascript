@@ -16,11 +16,11 @@ var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var InstanceContext = require("../runtime/Context").InstanceContext;
 
 
-function UnresolvedCall(callable, assignments) {
+function UnresolvedCall(callable, args) {
     BaseStatement.call(this);
 	this.resolved = null;
 	this.callable = callable;
-	this.assignments = assignments || null;
+	this.args = args || null;
 	return this;
 }
 
@@ -39,14 +39,14 @@ UnresolvedCall.prototype.toDialect = function(writer) {
         this.resolved.toDialect(writer);
     } catch(error) {
         this.callable.toDialect(writer);
-        if(this.assignments!=null)
-           this.assignments.toDialect(writer);
+        if(this.args!=null)
+           this.args.toDialect(writer);
     }
 };
 
 
 UnresolvedCall.prototype.toString = function() {
-    return this.callable.toString() + (this.assignments!=null ? this.assignments.toString() : "");
+    return this.callable.toString() + (this.args!=null ? this.args.toString() : "");
 };
 	
 UnresolvedCall.prototype.check = function(context) {
@@ -101,7 +101,7 @@ UnresolvedCall.prototype.resolve = function(context) {
 
 
 UnresolvedCall.prototype.resolveUnresolvedSelector = function(context) {
-    this.callable.resolveMethod(context, this.assignments);
+    this.callable.resolveMethod(context, this.args);
     return this.callable.resolved;
 };
 
@@ -114,14 +114,14 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
     if(instance!=null) {
         decl = this.resolveUnresolvedMember(instance, id.name);
         if(decl!=null)
-            call = new MethodCall(new MethodSelector(null, id), this.assignments);
+            call = new MethodCall(new MethodSelector(null, id), this.args);
     }
     if(call==null) {
         var named = context.getRegisteredValue(id.name);
         if(named !== null) {
             var type = named.getType(context);
             if(type instanceof MethodType) {
-                call = new MethodCall(new MethodSelector(null, id), this.assignments);
+                call = new MethodCall(new MethodSelector(null, id), this.args);
                 call.variableName = id.name;
             }
         }
@@ -135,9 +135,9 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
                 throw new SyntaxError("Unknown name:" + id.name);
         }
         if (decl instanceof CategoryDeclaration) {
-            call = new ConstructorExpression(new CategoryType(id), null, this.assignments, false);
+            call = new ConstructorExpression(new CategoryType(id), null, this.args, false);
         } else {
-            call = new MethodCall(new MethodSelector(null, id), this.assignments);
+            call = new MethodCall(new MethodSelector(null, id), this.args);
         }
     }
     call.copySectionFrom(this);
@@ -155,7 +155,7 @@ UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
 
 
 UnresolvedCall.prototype.resolveMember = function(context) {
-	var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.assignments);
+	var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
     call.copySectionFrom(this);
     return call;
 };

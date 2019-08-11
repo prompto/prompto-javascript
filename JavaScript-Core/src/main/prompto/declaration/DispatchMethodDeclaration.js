@@ -101,8 +101,8 @@ DispatchMethodDeclaration.prototype.transpileCall = function(transpiler, declara
 };
 
 DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common, declaration) {
-    for(var i = 0, count = 0;i<this.call.assignments.length; i++) {
-        var incoming = this.call.assignments[i].parameter;
+    for(var i = 0, count = 0; i<this.call.args.length; i++) {
+        var incoming = this.call.args[i].parameter;
         if(common.has(incoming))
             continue;
         if(count++)

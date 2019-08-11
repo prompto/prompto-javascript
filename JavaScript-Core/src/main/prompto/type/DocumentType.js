@@ -270,7 +270,7 @@ DocumentType.prototype.findGlobalMethod = function(context, name, returnCall) {
 
 DocumentType.prototype.getGlobalMethodSortedComparator = function(context, call, desc) {
     var cmp = function(o1, o2) {
-        var assignment = call.assignments[0];
+        var assignment = call.args[0];
         assignment._expression = new ValueExpression(this, o1);
         var value1 = call.interpret(context);
         assignment._expression = new ValueExpression(this, o2);

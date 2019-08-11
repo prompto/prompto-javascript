@@ -30,10 +30,10 @@ exports.resolve = function() {
 };
 
 
-function MethodCall(selector, assignments) {
+function MethodCall(selector, args) {
 	SimpleStatement.call(this);
 	this.selector = selector;
-	this.assignments = assignments || null;
+	this.args = args || null;
 	return this;
 }
 
@@ -44,14 +44,14 @@ MethodCall.prototype.toDialect = function(writer) {
     if (this.requiresInvoke(writer))
         writer.append("invoke: ");
     this.selector.toDialect(writer);
-    if (this.assignments != null)
-        this.assignments.toDialect(writer);
+    if (this.args != null)
+        this.args.toDialect(writer);
     else if (writer.dialect!= Dialect.E)
         writer.append("()");
 };
 
 MethodCall.prototype.requiresInvoke = function(writer) {
-    if (writer.dialect != Dialect.E || (this.assignments != null && this.assignments.length > 0))
+    if (writer.dialect != Dialect.E || (this.args != null && this.args.length > 0))
         return false;
     try {
         finder = new MethodFinder(writer.context, this);
@@ -65,7 +65,7 @@ MethodCall.prototype.requiresInvoke = function(writer) {
 }
 
 MethodCall.prototype.toString = function() {
-	return this.selector.toString() + " " + (this.assignments!==null ? this.assignments.toString() : "");
+	return this.selector.toString() + " " + (this.args!==null ? this.args.toString() : "");
 };
 
 
@@ -125,8 +125,8 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 
 
 MethodCall.prototype.declare = function(transpiler) {
-    if (this.assignments != null)
-        this.assignments.declare(transpiler);
+    if (this.args != null)
+        this.args.declare(transpiler);
     var finder = new MethodFinder(transpiler.context, this);
     var declarations = finder.findCompatibleMethods(false, true);
     var first = declarations.size===1 ? declarations.values().next().value : null;
@@ -216,7 +216,7 @@ MethodCall.prototype.transpileBuiltin = function(transpiler, declaration) {
     var parent = this.selector.resolveParent(transpiler.context);
     parent.transpile(transpiler);
     transpiler.append(".");
-    declaration.transpileCall(transpiler, this.assignments);
+    declaration.transpileCall(transpiler, this.args);
 };
 
 
@@ -259,7 +259,7 @@ MethodCall.prototype.transpileAssignments = function(transpiler, declaration, al
 
 
 MethodCall.prototype.makeArguments = function(context, declaration) {
-	return (this.assignments || new ArgumentList()).makeArguments(context, declaration);
+	return (this.args || new ArgumentList()).makeArguments(context, declaration);
 };
 
 MethodCall.prototype.interpret = function(context) {

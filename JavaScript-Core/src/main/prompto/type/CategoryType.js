@@ -516,7 +516,7 @@ CategoryType.prototype.getAttributeSortedComparator = function(context, name, de
 
 CategoryType.prototype.getGlobalMethodSortedComparator = function(context, method, desc) {
     var cmp = function(o1, o2) {
-        var assignment = method.assignments[0];
+        var assignment = method.args[0];
         assignment._expression = new ValueExpression(this, o1);
         var value1 = method.interpret(context);
         assignment._expression = new ValueExpression(this, o2);

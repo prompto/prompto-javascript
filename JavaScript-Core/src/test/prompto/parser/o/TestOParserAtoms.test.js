@@ -237,8 +237,8 @@ test('MethodCallWith ', () => {
 	var mc = parser.parse_method_call_statement();
 	expect(mc).toBeTruthy();
 	expect(mc.callable.name).toEqual("print");
-	expect(mc.assignments).toBeTruthy();
-	var as = mc.assignments[0];
+	expect(mc.args).toBeTruthy();
+	var as = mc.args[0];
 	expect(as.name).toEqual("value");
 	var exp = as.expression;
 	expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
@@ -323,7 +323,7 @@ test('Constructor2AttributesComma ', () => {
 	var parser = new OTestParser(statement);
 	var c = parser.parse_constructor_expression();
 	expect(c).toBeTruthy();
-	var as = c.assignments;
+	var as = c.args;
 	expect(as).toBeTruthy();
 	expect( as.length).toEqual(2);
 	var a = as[0];
