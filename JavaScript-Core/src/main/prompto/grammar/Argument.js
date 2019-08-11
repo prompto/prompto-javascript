@@ -228,5 +228,5 @@ Argument.prototype.computeSpecificity = function(context, argument, declaration,
     return Specificity.INCOMPATIBLE;
 };
 
-exports.ArgumentAssignment = Argument;
+exports.Argument = Argument;
 

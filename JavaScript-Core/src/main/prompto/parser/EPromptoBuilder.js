@@ -708,7 +708,7 @@ EPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
 	var arg = new argument.UnresolvedParameter(name);
-	this.setNodeValue(ctx, new grammar.ArgumentAssignment(arg, exp));
+	this.setNodeValue(ctx, new grammar.Argument(arg, exp));
 };
 
 
@@ -716,9 +716,9 @@ EPromptoBuilder.prototype.exitArgumentAssignmentListExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	var items = this.getNodeValue(ctx.items) || null;
 	if(items===null) {
-		items = new grammar.ArgumentAssignmentList();
+		items = new grammar.ArgumentList();
 	}
-	items.insert(0, new grammar.ArgumentAssignment(null, exp));
+	items.insert(0, new grammar.Argument(null, exp));
 	var item = this.getNodeValue(ctx.item) || null;
 	if(item!==null) {
 		items.add(item);
@@ -743,7 +743,7 @@ EPromptoBuilder.prototype.exitArgumentAssignmentListNoExpression = function(ctx)
 
 EPromptoBuilder.prototype.exitArgumentAssignmentList = function(ctx) {
 	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.ArgumentAssignmentList([item]);
+	var items = new grammar.ArgumentList([item]);
 	this.setNodeValue(ctx, items);
 };
 
@@ -929,7 +929,7 @@ EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
         if(args===null) {
-            args = new grammar.ArgumentAssignmentList();
+            args = new grammar.ArgumentList();
         }
 		args.add(arg);
 	}
@@ -943,7 +943,7 @@ EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
         if(args===null) {
-            args = new grammar.ArgumentAssignmentList();
+            args = new grammar.ArgumentList();
         }
 		args.add(arg);
 	}

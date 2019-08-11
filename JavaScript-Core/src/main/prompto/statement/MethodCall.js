@@ -1,7 +1,7 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
@@ -259,7 +259,7 @@ MethodCall.prototype.transpileAssignments = function(transpiler, declaration, al
 
 
 MethodCall.prototype.makeAssignments = function(context, declaration) {
-	return (this.assignments || new ArgumentAssignmentList()).makeAssignments(context, declaration);
+	return (this.assignments || new ArgumentList()).makeAssignments(context, declaration);
 };
 
 MethodCall.prototype.interpret = function(context) {

@@ -1,8 +1,8 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
-var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var Argument = require("../grammar/Argument").Argument;
 var UnresolvedIdentifier = null;
 var UnresolvedParameter = null;
 var CategoryParameter = null;
@@ -43,11 +43,11 @@ DispatchMethodDeclaration.prototype.replaceLocalsWithArguments = function(assign
             exp = exp.expression;
         if(exp && exp.name) {
             exp = new UnresolvedIdentifier(arg.id);
-            return new ArgumentAssignment(arg, exp);
+            return new Argument(arg, exp);
         } else
             return assignment;
     });
-    return new ArgumentAssignmentList(items);
+    return new ArgumentList(items);
 };
 
 DispatchMethodDeclaration.prototype.transpile = function(transpiler) {

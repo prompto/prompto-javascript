@@ -4,8 +4,8 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
-var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var Argument = require("../grammar/Argument").Argument;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
@@ -64,9 +64,9 @@ ConstructorExpression.prototype.toMDialect = function(writer) {
 
 ConstructorExpression.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
-    var assignments = new ArgumentAssignmentList();
+    var assignments = new ArgumentList();
     if (this.copyFrom != null)
-        assignments.add(new ArgumentAssignment(new AttributeParameter(new Identifier("from")), this.copyFrom));
+        assignments.add(new Argument(new AttributeParameter(new Identifier("from")), this.copyFrom));
     if(this.assignments!=null)
         assignments.addAll(this.assignments);
     assignments.toDialect(writer);

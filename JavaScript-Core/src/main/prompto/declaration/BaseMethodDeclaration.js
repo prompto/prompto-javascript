@@ -1,8 +1,8 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ParameterList = require("../param/ParameterList").ParameterList;
 var CategoryType = null;
-var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
-var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var Argument = require("../grammar/Argument").Argument;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 
@@ -97,14 +97,14 @@ BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, 
         context.problemListener = new ProblemListener();
 		var local = context.newLocalContext();
 		this.registerArguments(local);
-		var assignmentsList = new ArgumentAssignmentList(assignments);
+		var assignmentsList = new ArgumentList(assignments);
 		for(var i=0;i<this.args.length;i++) {
 			var argument = this.args[i];
 			var idx = assignmentsList.findIndex(argument.id.name);
             var assignment = idx>=0 ? assignmentsList[idx] : null;
             if(assignment==null) { // missing argument
                 if(argument.defaultExpression!=null)
-                    assignment = new ArgumentAssignment(argument, argument.defaultExpression);
+                    assignment = new Argument(argument, argument.defaultExpression);
 				else
                     return false;
 			}

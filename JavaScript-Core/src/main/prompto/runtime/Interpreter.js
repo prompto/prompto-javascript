@@ -1,7 +1,7 @@
 var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
-var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
-var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var Argument = require("../grammar/Argument").Argument;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DictLiteral = require("../literal/DictLiteral").DictLiteral;
@@ -31,11 +31,11 @@ function parseCmdLineArgs(cmdLineArgs) {
 }
 
 function buildAssignments(method, cmdLineArgs) {
-	var assignments = new ArgumentAssignmentList();
+	var assignments = new ArgumentList();
 	if(method.args.length==1) {
 		var id = method.args[0].id;
 		var value = parseCmdLineArgs(cmdLineArgs);
-		assignments.add(new ArgumentAssignment(new UnresolvedParameter(id), value));
+		assignments.add(new Argument(new UnresolvedParameter(id), value));
 	}
 	return assignments;
 }
