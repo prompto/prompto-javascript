@@ -8,9 +8,9 @@ var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 
-function CategorySymbol(id, assignments) {
+function CategorySymbol(id, args) {
 	Symbol.call(this, id);
-	this.assignments = assignments;
+	this.args = args;
 	this.instance = null;
 	this.type = null;
 	return this;
@@ -22,7 +22,7 @@ CategorySymbol.prototype.constructor = CategorySymbol;
 CategorySymbol.prototype.toDialect = function(writer) {
     writer.append(this.name);
     writer.append(" ");
-    this.assignments.toDialect(writer);
+    this.args.toDialect(writer);
 };
 
 CategorySymbol.prototype.getType = function(context) {
@@ -30,8 +30,8 @@ CategorySymbol.prototype.getType = function(context) {
 };
 
 CategorySymbol.prototype.toString = function() {
-	if(this.assignments!=null) {
-		return this.assignments.toString();
+	if(this.args!=null) {
+		return this.args.toString();
 	} else {
 		return this.type.name;
 	}
@@ -42,13 +42,13 @@ CategorySymbol.prototype.check = function(context) {
 	if(cd==null) {
 		throw new SyntaxError("Unknown category " + this.type.name);
 	}
-	if(this.assignments!=null) {
+	if(this.args!=null) {
         context = context.newLocalContext();
-		this.assignments.forEach(function(assignment) {
-            if(!cd.hasAttribute(context, assignment.name)) {
-				throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + type.name);
+		this.args.forEach(function(argument) {
+            if(!cd.hasAttribute(context, argument.name)) {
+				throw new SyntaxError("\"" + argument.name + "\" is not an attribute of " + type.name);
 			}
-			assignment.check(context);
+			argument.check(context);
 		});
 	}
 	return this.type;
@@ -63,11 +63,11 @@ CategorySymbol.prototype.makeInstance = function(context) {
 	if(this.instance===null) {
 		var instance = this.type.newInstance(context);
         instance.mutable = true;
-        if(this.assignments!=null) {
+        if(this.args!=null) {
             context = context.newLocalContext();
-            this.assignments.forEach(function(assignment) {
-                var value = assignment.expression.interpret(context);
-                instance.setMember(context, assignment.name, value);
+            this.args.forEach(function(argument) {
+                var value = argument.expression.interpret(context);
+                instance.setMember(context, argument.name, value);
             });
         }
         instance.setMember(context, "name", new TextValue(this.name));
@@ -96,11 +96,11 @@ CategorySymbol.prototype.transpile = function(transpiler) {
 
 CategorySymbol.prototype.initialize = function(transpiler) {
     transpiler.append("var ").append(this.name).append(" = ");
-    var nameArg = new AttributeParameter(new Identifier("name"));
-    var nameAssign = new Argument(nameArg, new TextLiteral('"' + this.name + '"'));
-    var assignments = new ArgumentList(this.assignments);
-    assignments.add(nameAssign);
-    var exp = new ConstructorExpression(this.type, null, assignments);
+    var param = new AttributeParameter(new Identifier("name"));
+    var argument = new Argument(param, new TextLiteral('"' + this.name + '"'));
+    var args = new ArgumentList(this.args);
+    args.add(argument);
+    var exp = new ConstructorExpression(this.type, null, args);
     exp.transpile(transpiler);
     transpiler.append(";").newLine();
 };
@@ -110,10 +110,10 @@ CategorySymbol.prototype.initialize = function(transpiler) {
 CategorySymbol.prototype.initializeError = function(transpiler) {
     transpiler.append("var ").append(this.name).append(" = new ").append(this.type.name).append("({");
     transpiler.append("name: '").append(this.name).append("', ");
-    if(this.assignments!=null) {
-        this.assignments.forEach(function (assignment) {
-            transpiler.append(assignment.parameter.name).append(":");
-            assignment.expression.transpile(transpiler);
+    if(this.args!=null) {
+        this.args.forEach(function (argument) {
+            transpiler.append(argument.parameter.name).append(":");
+            argument.expression.transpile(transpiler);
             transpiler.append(", ");
         }, this);
     }

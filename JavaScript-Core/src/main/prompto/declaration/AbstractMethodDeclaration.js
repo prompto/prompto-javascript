@@ -21,7 +21,7 @@ AbstractMethodDeclaration.prototype.check = function(context, isStart) {
 	}
 	if(isStart) {
 	    var local = context.newLocalContext();
-        this.registerArguments(local);
+        this.registerParameters(local);
     }
 	return this.returnType;
 };

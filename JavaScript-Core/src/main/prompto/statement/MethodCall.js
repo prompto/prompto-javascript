@@ -102,18 +102,18 @@ MethodCall.prototype.checkDeclaration = function(declaration, parent, local) {
 };
 
 MethodCall.prototype.lightCheck = function(declaration, local) {
-	declaration.registerArguments(local);
+	declaration.registerParameters(local);
 	return declaration.check(local, false);
 };
 
 MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 	try {
-		var assignments = this.makeArguments(parent, declaration);
-		declaration.registerArguments(local);
-		assignments.forEach(function(assignment) {
-			var expression = assignment.resolve(local, declaration, true);
-			var value = assignment.parameter.checkValue(parent, expression);
-			local.setValue(assignment.id, value);
+		var args = this.makeArguments(parent, declaration);
+		declaration.registerParameters(local);
+		args.forEach(function(argument) {
+			var expression = argument.resolve(local, declaration, true);
+			var value = argument.parameter.checkValue(parent, expression);
+			local.setValue(argument.id, value);
 		});
 		return declaration.check(local, false);
 	} catch (e) {
@@ -166,12 +166,12 @@ var fullDeclareCounter = 0;
 
 MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, local) {
     if(!this.fullSelector) {
-        var assignments = this.makeArguments(transpiler.context, declaration);
-        declaration.registerArguments(local);
-        assignments.forEach(function(assignment) {
-            var expression = assignment.resolve(local, declaration, true);
-            var value = assignment.parameter.checkValue(transpiler.context, expression);
-            local.setValue(assignment.id, value);
+        var args = this.makeArguments(transpiler.context, declaration);
+        declaration.registerParameters(local);
+        args.forEach(function(argument) {
+            var expression = argument.resolve(local, declaration, true);
+            var value = argument.parameter.checkValue(transpiler.context, expression);
+            local.setValue(argument.id, value);
         });
         transpiler = transpiler.copyTranspiler(local);
         this.fullSelector = this.selector.newFullSelector(++fullDeclareCounter);
@@ -238,16 +238,16 @@ MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
 
 
 MethodCall.prototype.transpileAssignments = function(transpiler, declaration, allowDerived) {
-    var assignments = this.makeArguments(transpiler.context, declaration);
-    assignments = assignments.filter(function(assignment) {
-        return !(assignment.parameter instanceof CodeParameter);
+    var args = this.makeArguments(transpiler.context, declaration);
+    args = args.filter(function(argument) {
+        return !(argument.parameter instanceof CodeParameter);
     });
-    if(assignments.length > 0) {
+    if(args.length > 0) {
         transpiler.append("(");
-        assignments.forEach(function (assignment) {
-            var argument = assignment.parameter;
-            var expression = assignment.resolve(transpiler.context, declaration, false, allowDerived);
-            argument.transpileCall(transpiler, expression);
+        args.forEach(function (argument) {
+            var parameter = argument.parameter;
+            var expression = argument.resolve(transpiler.context, declaration, false, allowDerived);
+            parameter.transpileCall(transpiler, expression);
             transpiler.append(", ");
         });
         transpiler.trimLast(2);
@@ -265,15 +265,15 @@ MethodCall.prototype.makeArguments = function(context, declaration) {
 MethodCall.prototype.interpret = function(context) {
 	var declaration = this.findDeclaration(context);
 	var local = this.selector.newLocalContext(context, declaration);
-	declaration.registerArguments(local);
-	var assignments = this.makeArguments(context, declaration);
-	assignments.forEach(function(assignment) {
-		var expression = assignment.resolve(local, declaration, true);
-        var argument = assignment.parameter;
-		var value = argument.checkValue(context, expression);
-        if(value!=null && argument.mutable && !value.mutable)
+	declaration.registerParameters(local);
+	var args = this.makeArguments(context, declaration);
+	args.forEach(function(argument) {
+		var expression = argument.resolve(local, declaration, true);
+        var parameter = argument.parameter;
+		var value = parameter.checkValue(context, expression);
+        if(value!=null && parameter.mutable && !value.mutable)
             throw new NotMutableError();
-		local.setValue(assignment.id, value);
+		local.setValue(argument.id, value);
 	});
 	return declaration.interpret(local, true);
 };

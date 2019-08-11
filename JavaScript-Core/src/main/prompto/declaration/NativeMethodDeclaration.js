@@ -18,7 +18,7 @@ NativeMethodDeclaration.prototype.check = function(context, isStart) {
     intrinsic = require("../intrinsic");
     if(isStart) {
         context = context.newLocalContext();
-        this.registerArguments(context);
+        this.registerParameters(context);
     }
     if(this.parameters!==null)
         this.parameters.check(context);

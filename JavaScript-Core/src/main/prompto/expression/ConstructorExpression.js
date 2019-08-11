@@ -18,11 +18,11 @@ exports.resolve = function() {
 };
 
 
-function ConstructorExpression(type, copyFrom, assignments, checked) {
+function ConstructorExpression(type, copyFrom, args, checked) {
     Section.call(this);
 	this.type = type;
 	this.copyFrom = copyFrom;
-	this.assignments = assignments;
+	this.args = args;
 	this.checked = checked;
 	return this;
 }
@@ -34,8 +34,8 @@ ConstructorExpression.prototype.constructor = ConstructorExpression;
 ConstructorExpression.prototype.checkFirstHomonym = function(context, decl) {
     if(this.checked)
         return;
-    if(this.assignments && this.assignments.length>0) {
-        var assign = this.assignments[0];
+    if(this.args && this.args.length>0) {
+        var assign = this.args[0];
         if(!assign.parameter) {
             var id = null;
             if (assign.expression instanceof UnresolvedIdentifier || assign.expression instanceof InstanceExpression)
@@ -67,8 +67,8 @@ ConstructorExpression.prototype.toODialect = function(writer) {
     var assignments = new ArgumentList();
     if (this.copyFrom != null)
         assignments.add(new Argument(new AttributeParameter(new Identifier("from")), this.copyFrom));
-    if(this.assignments!=null)
-        assignments.addAll(this.assignments);
+    if(this.args!=null)
+        assignments.addAll(this.args);
     assignments.toDialect(writer);
 };
 
@@ -77,11 +77,11 @@ ConstructorExpression.prototype.toEDialect = function(writer) {
     if (this.copyFrom != null) {
         writer.append(" from ");
         writer.append(this.copyFrom.toString());
-        if (this.assignments != null && this.assignments.length>0)
+        if (this.args != null && this.args.length>0)
             writer.append(",");
     }
-    if (this.assignments != null)
-        this.assignments.toDialect(writer);
+    if (this.args != null)
+        this.args.toDialect(writer);
 };
 
 ConstructorExpression.prototype.check = function(context) {
@@ -97,12 +97,11 @@ ConstructorExpression.prototype.check = function(context) {
             context.problemListener.reportInvalidCopySource(this.copyFrom);
             // throw new SyntaxError("Cannot copy from " + cft.getName());
 	}
-	if(this.assignments!=null) {
-        this.assignments.forEach(function(assignment) {
-			if(!cd.hasAttribute(context, assignment.name))
-                context.problemListener.reportUnknownAttribute(assignment.name);
-                //	throw new SyntaxError("\"" + assignment.name + "\" is not an attribute of " + this.type.name);
-			assignment.check(context);
+	if(this.args!=null) {
+        this.args.forEach(function(argument) {
+			if(!cd.hasAttribute(context, argument.name))
+                context.problemListener.reportUnknownAttribute(argument.name);
+ 			argument.check(context);
 		});
 	}
 	return cd.getType();
@@ -128,12 +127,12 @@ ConstructorExpression.prototype.interpret = function(context) {
 			}, this);
 		}
 	}
-	if(this.assignments!=null) {
-        this.assignments.forEach(function(assignment) {
-			var value = assignment.expression.interpret(context);
+	if(this.args!=null) {
+        this.args.forEach(function(argument) {
+			var value = argument.expression.interpret(context);
             if(value!=null && value.mutable && !this.type.mutable)
                 throw new NotMutableError();
-			instance.setMember(context, assignment.name, value);
+			instance.setMember(context, argument.name, value);
 		}, this);
 	}
     instance.mutable = this.type.mutable;
@@ -145,8 +144,8 @@ ConstructorExpression.prototype.declare = function(transpiler) {
     cd.declare(transpiler);
     if(this.copyFrom)
         this.copyFrom.declare(transpiler);
-    if(this.assignments)
-        this.assignments.declare(transpiler);
+    if(this.args)
+        this.args.declare(transpiler);
 };
 
 ConstructorExpression.prototype.transpile = function(transpiler) {
@@ -200,11 +199,11 @@ ConstructorExpression.prototype.transpileConcrete = function(transpiler) {
 };
 
 ConstructorExpression.prototype.transpileAssignments = function(transpiler) {
-    if(this.assignments!=null) {
+    if(this.args!=null) {
         transpiler.append("{");
-        this.assignments.forEach(function(assignment) {
-            transpiler.append(assignment.parameter.name).append(":");
-            assignment.expression.transpile(transpiler);
+        this.args.forEach(function(argument) {
+            transpiler.append(argument.parameter.name).append(":");
+            argument.expression.transpile(transpiler);
             transpiler.append(", ");
         }, this);
         transpiler.trimLast(2);

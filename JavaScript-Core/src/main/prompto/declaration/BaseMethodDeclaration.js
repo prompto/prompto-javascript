@@ -78,7 +78,7 @@ BaseMethodDeclaration.prototype.register = function(context) {
 };
 
 
-BaseMethodDeclaration.prototype.registerArguments = function(context) {
+BaseMethodDeclaration.prototype.registerParameters = function(context) {
 	if(this.parameters!=null) {
 		this.parameters.register(context);
 	}
@@ -91,30 +91,30 @@ BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
     }
 };
 
-BaseMethodDeclaration.prototype.isAssignableTo = function(context, assignments, checkInstance, allowDerived) {
+BaseMethodDeclaration.prototype.isAssignableTo = function(context, args, checkInstance, allowDerived) {
 	var listener = context.problemListener;
 	try {
         context.problemListener = new ProblemListener();
 		var local = context.newLocalContext();
-		this.registerArguments(local);
-		var assignmentsList = new ArgumentList(assignments);
+		this.registerParameters(local);
+		var argsList = new ArgumentList(args);
 		for(var i=0; i<this.parameters.length; i++) {
-			var argument = this.parameters[i];
-			var idx = assignmentsList.findIndex(argument.id.name);
-            var assignment = idx>=0 ? assignmentsList[idx] : null;
-            if(assignment==null) { // missing argument
-                if(argument.defaultExpression!=null)
-                    assignment = new Argument(argument, argument.defaultExpression);
+			var parameter = this.parameters[i];
+			var idx = argsList.findIndex(parameter.id.name);
+            var argument = idx>=0 ? argsList[idx] : null;
+            if(argument==null) { // missing argument
+                if(parameter.defaultExpression!=null)
+                    argument = new Argument(parameter, parameter.defaultExpression);
 				else
                     return false;
 			}
-			if(!assignment.isAssignableToArgument(local, argument, this, checkInstance, allowDerived)) {
+			if(!argument.isAssignableToArgument(local, parameter, this, checkInstance, allowDerived)) {
 				return false;
 			}
 			if(idx>=0)
-                assignmentsList.remove(idx);
+                argsList.remove(idx);
 		}
-		return assignmentsList.length===0;
+		return argsList.length===0;
 	} catch (e) {
 		if(e instanceof SyntaxError) {
 			return false;

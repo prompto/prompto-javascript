@@ -20,24 +20,24 @@ ArgumentList.prototype = Object.create(ObjectList.prototype);
 ArgumentList.prototype.constructor = ArgumentList;
 
 
-/* post-fix expression priority for final assignment in E dialect */
+/* post-fix expression priority for final argument in E dialect */
 /* 'xyz with a and b as c' should read 'xyz with a, b as c' NOT 'xyz with (a and b) as c' */
 ArgumentList.prototype.checkLastAnd = function() {
-    var assignment = this.slice(-1).pop();
-    if(assignment!=null && assignment.parameter!=null && assignment.expression instanceof AndExpression) {
-        var and = assignment.expression;
+    var argument = this.slice(-1).pop();
+    if(argument!=null && argument.parameter!=null && argument.expression instanceof AndExpression) {
+        var and = argument.expression;
         if(and.left instanceof UnresolvedIdentifier) {
             var id = and.left.id;
             var leading = id.name.charAt(0);
             if(leading !== leading.toUpperCase()) {
                 this.pop();
                 // add AttributeParameter
-                var argument = new AttributeParameter(id);
-                var attribute = new Argument(argument, null);
+                var parameter = new AttributeParameter(id);
+                var attribute = new Argument(parameter, null);
                 this.add(attribute);
-                // fix last assignment
-                assignment.expression = and.right;
-                this.add(assignment);
+                // fix last argument
+                argument.expression = and.right;
+                this.add(argument);
             }
         }
     }

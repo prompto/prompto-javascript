@@ -53,7 +53,7 @@ ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(contex
 ConcreteMethodDeclaration.prototype.fullCheck = function(context, isStart) {
 	if(isStart) {
 		context = context.newLocalContext();
-		this.registerArguments(context);
+		this.registerParameters(context);
 	}
 	if(this.parameters!==null) {
 		this.parameters.check(context);
@@ -66,7 +66,7 @@ ConcreteMethodDeclaration.prototype.checkChild = function(context) {
 		this.parameters.check(context);
 	}
 	var child = context.newChildContext();
-	this.registerArguments(child);
+	this.registerParameters(child);
 	return this.statements.check(child, this.returnType);
 };
 
@@ -82,7 +82,7 @@ ConcreteMethodDeclaration.prototype.interpret = function(context) {
 ConcreteMethodDeclaration.prototype.toDialect = function(writer) {
     if(writer.context.isGlobalContext())
         writer = writer.newLocalWriter();
-    this.registerArguments(writer.context);
+    this.registerParameters(writer.context);
     writer.toDialect(this);
 };
 
@@ -151,7 +151,7 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
         }
         if(this.returnType)
             this.returnType.declare(transpiler);
-        this.registerArguments(transpiler.context);
+        this.registerParameters(transpiler.context);
         this.statements.declare(transpiler);
     } finally {
         this.declaring = false;
@@ -160,7 +160,7 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
 
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
-    this.registerArguments(transpiler.context);
+    this.registerParameters(transpiler.context);
     this.registerCodeArguments(transpiler.context);
     this.transpileProlog(transpiler);
     this.statements.transpile(transpiler);
@@ -171,7 +171,7 @@ ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
 ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
     this.declareArguments(transpiler);
     transpiler = transpiler.newChildTranspiler();
-    this.registerArguments(transpiler.context);
+    this.registerParameters(transpiler.context);
     return this.statements.declare(transpiler);
 };
 

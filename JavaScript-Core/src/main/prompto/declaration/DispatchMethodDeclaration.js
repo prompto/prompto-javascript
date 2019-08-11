@@ -35,23 +35,23 @@ DispatchMethodDeclaration.prototype.getTranspiledName = function(context) {
     return "$dispatch$" + this.declaration.getTranspiledName(context);
 };
 
-DispatchMethodDeclaration.prototype.replaceLocalsWithArguments = function(assignments) {
-    var items = assignments.map(function(assignment) {
-        var arg = assignment.parameter;
-        var exp = assignment.expression;
+DispatchMethodDeclaration.prototype.replaceLocalsWithArguments = function(args) {
+    var items = args.map(function(argument) {
+        var param = argument.parameter;
+        var exp = argument.expression;
         if(exp instanceof ContextualExpression)
             exp = exp.expression;
         if(exp && exp.name) {
-            exp = new UnresolvedIdentifier(arg.id);
-            return new Argument(arg, exp);
+            exp = new UnresolvedIdentifier(param.id);
+            return new Argument(param, exp);
         } else
-            return assignment;
+            return argument;
     });
     return new ArgumentList(items);
 };
 
 DispatchMethodDeclaration.prototype.transpile = function(transpiler) {
-    this.registerArguments(transpiler.context);
+    this.registerParameters(transpiler.context);
     this.transpileProlog(transpiler);
     this.transpileDispatch(transpiler);
     this.transpileEpilog(transpiler);

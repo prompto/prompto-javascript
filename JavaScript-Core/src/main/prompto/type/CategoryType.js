@@ -287,7 +287,7 @@ CategoryType.prototype.checkOperator = function(context, other, tryReverse, oper
             return null;
         context = context.newInstanceContext(null, this);
         var local = context.newLocalContext();
-        method.registerArguments(local);
+        method.registerParameters(local);
         return method.check(local);
     } catch(e) {
         // ok to pass, will try reverse
@@ -516,10 +516,10 @@ CategoryType.prototype.getAttributeSortedComparator = function(context, name, de
 
 CategoryType.prototype.getGlobalMethodSortedComparator = function(context, method, desc) {
     var cmp = function(o1, o2) {
-        var assignment = method.args[0];
-        assignment._expression = new ValueExpression(this, o1);
+        var argument = method.args[0];
+        argument._expression = new ValueExpression(this, o1);
         var value1 = method.interpret(context);
-        assignment._expression = new ValueExpression(this, o2);
+        argument._expression = new ValueExpression(this, o2);
         var value2 = method.interpret(context);
         return desc ? compareValues(value2, value1) : compareValues(value1, value2);
     };
