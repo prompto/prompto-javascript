@@ -1,7 +1,7 @@
-exports.AttributeArgument = require("./AttributeArgument").AttributeArgument;
-exports.CategoryArgument = require("./CategoryArgument").CategoryArgument;
-exports.ExtendedArgument = require("./ExtendedArgument").ExtendedArgument;
-exports.CodeArgument = require("./CodeArgument").CodeArgument;
-exports.UnresolvedArgument = require("./UnresolvedArgument").UnresolvedArgument;
+exports.AttributeParameter = require("./AttributeParameter").AttributeParameter;
+exports.CategoryParameter = require("./CategoryParameter").CategoryParameter;
+exports.ExtendedParameter = require("./ExtendedParameter").ExtendedParameter;
+exports.CodeParameter = require("./CodeParameter").CodeParameter;
+exports.UnresolvedParameter = require("./UnresolvedParameter").UnresolvedParameter;
 
-require("./ExtendedArgument").resolve();
+require("./ExtendedParameter").resolve();

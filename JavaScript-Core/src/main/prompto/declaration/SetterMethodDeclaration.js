@@ -1,5 +1,5 @@
 var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
+var AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
 
 function SetterMethodDeclaration(id, statements) {
     ConcreteMethodDeclaration.call(this, id, null, null, statements);
@@ -28,7 +28,7 @@ SetterMethodDeclaration.prototype.toMDialect = function(writer) {
 };
 
 SetterMethodDeclaration.prototype.transpile = function(transpiler) {
-    var arg = new AttributeArgument(this.id);
+    var arg = new AttributeParameter(this.id);
     arg.register(transpiler.context);
     this.statements.transpile(transpiler);
 };

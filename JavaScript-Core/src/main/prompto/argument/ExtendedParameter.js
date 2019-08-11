@@ -1,4 +1,4 @@
-var CategoryArgument = require("./CategoryArgument").CategoryArgument;
+var CategoryParameter = require("./CategoryParameter").CategoryParameter;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var ConcreteCategoryDeclaration = null;
@@ -8,31 +8,31 @@ exports.resolve = function() {
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 }
 
-function ExtendedArgument(type, id, attributes) {
-    CategoryArgument.call(this, type, id);
+function ExtendedParameter(type, id, attributes) {
+    CategoryParameter.call(this, type, id);
 	this.attributes = attributes;
 	return this;
 }
 
-ExtendedArgument.prototype = Object.create(CategoryArgument.prototype);
-ExtendedArgument.prototype.constructor = ExtendedArgument;
+ExtendedParameter.prototype = Object.create(CategoryParameter.prototype);
+ExtendedParameter.prototype.constructor = ExtendedParameter;
 
 
 
-ExtendedArgument.prototype.getProto = function() {
+ExtendedParameter.prototype.getProto = function() {
 	return this.type.name + '(' + this.attributes.toString() + ')';
 };
 	
 
 
-ExtendedArgument.prototype.equals = function(obj) {
+ExtendedParameter.prototype.equals = function(obj) {
 	if(obj===this) {
 		return true;
 	} 
 	if(obj===null || obj===undefined) {
 		return false;
 	}
-	if(!(obj instanceof ExtendedArgument)) {
+	if(!(obj instanceof ExtendedParameter)) {
 		return false;
 	}
 	return utils.equalObjects(this.type, obj.type) && 
@@ -40,7 +40,7 @@ ExtendedArgument.prototype.equals = function(obj) {
 		utils.equalArrays(this.attributes, obj.attributes);
 };
 
-ExtendedArgument.prototype.register = function(context) {
+ExtendedParameter.prototype.register = function(context) {
 	var actual = context.getRegisteredValue(this.name);
 	if(actual!==null) {
 		throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
@@ -52,7 +52,7 @@ ExtendedArgument.prototype.register = function(context) {
         context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
-ExtendedArgument.prototype.check = function(context) {
+ExtendedParameter.prototype.check = function(context) {
 	this.type.checkExists(context);
 	if(this.attributes!==null) {
 		this.attributes.forEach(function(attr) {
@@ -64,12 +64,12 @@ ExtendedArgument.prototype.check = function(context) {
 	}
 };
 
-ExtendedArgument.prototype.getType = function(context) {
+ExtendedParameter.prototype.getType = function(context) {
     var decl = context.getRegisteredDeclaration(this.name);
     return decl ? decl.getType(context) : this.type;
 };
 
-ExtendedArgument.prototype.toEDialect = function(writer) {
+ExtendedParameter.prototype.toEDialect = function(writer) {
     this.type.toDialect(writer);
     writer.append(' ');
     writer.append(this.name);
@@ -87,7 +87,7 @@ ExtendedArgument.prototype.toEDialect = function(writer) {
     }
 };
 
-ExtendedArgument.prototype.toODialect = function(writer) {
+ExtendedParameter.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
     writer.append('(');
     this.attributes.toDialect(writer, false);
@@ -96,7 +96,7 @@ ExtendedArgument.prototype.toODialect = function(writer) {
     writer.append(this.name);
 };
 
-ExtendedArgument.prototype.toMDialect = function(writer) {
+ExtendedParameter.prototype.toMDialect = function(writer) {
     writer.append(this.name);
     writer.append(':');
     this.type.toDialect(writer);
@@ -105,4 +105,4 @@ ExtendedArgument.prototype.toMDialect = function(writer) {
     writer.append(')');
 };
 
-exports.ExtendedArgument = ExtendedArgument;
+exports.ExtendedParameter = ExtendedParameter;

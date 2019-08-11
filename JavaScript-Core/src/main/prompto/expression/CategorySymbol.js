@@ -3,7 +3,7 @@ var TextValue = require("../value/TextValue").TextValue;
 var ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
-var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
+var AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var Identifier = require("../grammar/Identifier").Identifier;
 
@@ -96,7 +96,7 @@ CategorySymbol.prototype.transpile = function(transpiler) {
 
 CategorySymbol.prototype.initialize = function(transpiler) {
     transpiler.append("var ").append(this.name).append(" = ");
-    var nameArg = new AttributeArgument(new Identifier("name"));
+    var nameArg = new AttributeParameter(new Identifier("name"));
     var nameAssign = new ArgumentAssignment(nameArg, new TextLiteral('"' + this.name + '"'));
     var assignments = new ArgumentAssignmentList(this.assignments);
     assignments.add(nameAssign);

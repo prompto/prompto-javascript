@@ -1,7 +1,7 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
 var Dialect = require("../parser/Dialect").Dialect;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
+var AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
 var ArgumentAssignment = require("./ArgumentAssignment").ArgumentAssignment;
 var AndExpression = null;
 var UnresolvedIdentifier = null;
@@ -31,8 +31,8 @@ ArgumentAssignmentList.prototype.checkLastAnd = function() {
             var leading = id.name.charAt(0);
             if(leading !== leading.toUpperCase()) {
                 this.pop();
-                // add AttributeArgument
-                var argument = new AttributeArgument(id);
+                // add AttributeParameter
+                var argument = new AttributeParameter(id);
                 var attribute = new ArgumentAssignment(argument, null);
                 this.add(attribute);
                 // fix last assignment

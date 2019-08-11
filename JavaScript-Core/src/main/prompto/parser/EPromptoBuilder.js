@@ -660,8 +660,8 @@ EPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
     var arg = attrs ?
-        new argument.ExtendedArgument(typ, name, attrs) :
-        new argument.CategoryArgument(typ, name);
+        new argument.ExtendedParameter(typ, name, attrs) :
+        new argument.CategoryParameter(typ, name);
     var exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -706,7 +706,7 @@ EPromptoBuilder.prototype.exitFull_argument_list = function(ctx) {
 EPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	var arg = new argument.UnresolvedArgument(name);
+	var arg = new argument.UnresolvedParameter(name);
 	this.setNodeValue(ctx, new grammar.ArgumentAssignment(arg, exp));
 };
 
@@ -1520,7 +1520,7 @@ EPromptoBuilder.prototype.exitValue_token = function(ctx) {
 
 EPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.variable_identifier());
-    var arg = new argument.UnresolvedArgument(name);
+    var arg = new argument.UnresolvedParameter(name);
     var exp = this.getNodeValue(ctx.literal_expression());
     arg.defaultExpression = exp || null;
 	this.setNodeValue(ctx, arg);
@@ -2202,7 +2202,7 @@ EPromptoBuilder.prototype.exitCodeExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new argument.CodeArgument(name));
+	this.setNodeValue(ctx, new argument.CodeParameter(name));
 };
 
 

@@ -14,13 +14,13 @@ ExecutionError.prototype.interpret = function(context, errorName) {
     if(exp==null) {
         var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
         var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
-        var UnresolvedArgument = require("../argument/UnresolvedArgument").UnresolvedArgument;
+        var UnresolvedParameter = require("../argument/UnresolvedParameter").UnresolvedParameter;
         var TextLiteral = require("../literal/TextLiteral").TextLiteral;
         var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
         var CategoryType = require("../type/CategoryType").CategoryType;
         var args = new ArgumentAssignmentList();
-        args.add(new ArgumentAssignment(new UnresolvedArgument("name"), new TextLiteral('"' + this.name + '"')));
-        args.add(new ArgumentAssignment(new UnresolvedArgument("text"), new TextLiteral('"' + this.message + '"')));
+        args.add(new ArgumentAssignment(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
+        args.add(new ArgumentAssignment(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
         exp = new ConstructorExpression(new CategoryType("Error"), args);
     }
     if(context.getRegisteredValue(errorName)==null)

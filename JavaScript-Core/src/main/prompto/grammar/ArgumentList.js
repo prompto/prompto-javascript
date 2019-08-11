@@ -1,5 +1,5 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
-var CodeArgument = require("../argument/CodeArgument").CodeArgument;
+var CodeParameter = require("../argument/CodeParameter").CodeParameter;
 
 function ArgumentList() {
 	ObjectList.call(this);
@@ -75,7 +75,7 @@ ArgumentList.prototype.toMDialect = function(writer) {
 
 ArgumentList.prototype.transpile = function(transpiler) {
     var args = this.filter(function(arg) {
-        return !(arg instanceof CodeArgument);
+        return !(arg instanceof CodeParameter);
     })
     if(args.length>0) {
         args.forEach(function (arg) {

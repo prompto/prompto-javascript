@@ -5,7 +5,7 @@ var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var List = require("../intrinsic/List").List;
-var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
+var CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {
@@ -91,7 +91,7 @@ EnumeratedNativeType.prototype.getMemberMethods = function(context, name) {
 
 
 function SymbolOfMethodDeclaration(enumType) {
-	BuiltInMethodDeclaration.call(this, "symbolOf", new CategoryArgument(TextType.instance, new Identifier("name")));
+	BuiltInMethodDeclaration.call(this, "symbolOf", new CategoryParameter(TextType.instance, new Identifier("name")));
 	this.enumType = enumType;
 	return this;
 }

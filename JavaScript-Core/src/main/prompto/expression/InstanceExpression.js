@@ -1,7 +1,7 @@
 var Variable = require("../runtime/Variable").Variable;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var Identifier = require("../grammar/Identifier").Identifier;
-var Argument = require("../argument/Argument").Argument;
+var Parameter = require("../argument/Parameter").Parameter;
 var Dialect = require("../parser/Dialect").Dialect;
 var CategoryDeclaration = null;
 var VoidType = require("../type/VoidType").VoidType;
@@ -99,7 +99,7 @@ InstanceExpression.prototype.check = function(context) {
         return named.getType(context);
     } else if(named instanceof LinkedVariable) { // local variable
         return named.getType(context);
-	} else if (named instanceof Argument) { // named argument
+	} else if (named instanceof Parameter) { // named argument
 		return named.getType(context);
 	} else if(named instanceof CategoryDeclaration) { // any p with x
 		return named.getType(context);

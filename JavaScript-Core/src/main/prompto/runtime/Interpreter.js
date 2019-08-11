@@ -2,7 +2,7 @@ var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
-var UnresolvedArgument = require("../argument/UnresolvedArgument").UnresolvedArgument;
+var UnresolvedParameter = require("../argument/UnresolvedParameter").UnresolvedParameter;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DictLiteral = require("../literal/DictLiteral").DictLiteral;
 var MethodCall = require("../statement/MethodCall").MethodCall;
@@ -35,7 +35,7 @@ function buildAssignments(method, cmdLineArgs) {
 	if(method.args.length==1) {
 		var id = method.args[0].id;
 		var value = parseCmdLineArgs(cmdLineArgs);
-		assignments.add(new ArgumentAssignment(new UnresolvedArgument(id), value));
+		assignments.add(new ArgumentAssignment(new UnresolvedParameter(id), value));
 	}
 	return assignments;
 }

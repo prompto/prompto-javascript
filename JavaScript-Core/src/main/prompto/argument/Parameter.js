@@ -4,7 +4,7 @@ var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
-function Argument(id) {
+function Parameter(id) {
     Section.call(this);
 	this.id = id;
     this.mutable = false;
@@ -12,16 +12,16 @@ function Argument(id) {
 	return this;
 }
 
-Argument.prototype = Object.create(Section.prototype);
-Argument.prototype.constructor = Argument;
+Parameter.prototype = Object.create(Section.prototype);
+Parameter.prototype.constructor = Parameter;
 
-Object.defineProperty(Argument.prototype, "name", {
+Object.defineProperty(Parameter.prototype, "name", {
     get : function() {
         return this.id.name;
     }
 });
 
-Argument.prototype.checkValue = function(context, expression) {
+Parameter.prototype.checkValue = function(context, expression) {
     var value = expression.interpret(context);
     if (value instanceof IntegerValue && this.getType(context)==DecimalType.instance) {
         return new DecimalValue(value.DecimalValue());
@@ -32,7 +32,7 @@ Argument.prototype.checkValue = function(context, expression) {
     }
 };
 
-Argument.prototype.toDialect = function(writer) {
+Parameter.prototype.toDialect = function(writer) {
     if(this.mutable)
         writer.append("mutable ");
     writer.toDialect(this);
@@ -42,12 +42,12 @@ Argument.prototype.toDialect = function(writer) {
     }
 };
 
-Argument.prototype.transpile = function(transpiler, expression) {
+Parameter.prototype.transpile = function(transpiler, expression) {
     transpiler.append(this.name);
 };
 
 
-Argument.prototype.transpileCall = function(transpiler, expression) {
+Parameter.prototype.transpileCall = function(transpiler, expression) {
     var expType = expression.check(transpiler.context);
     if (this.type === IntegerType.instance && expType === DecimalType.instance) {
         transpiler.append("Math.round(");
@@ -57,4 +57,4 @@ Argument.prototype.transpileCall = function(transpiler, expression) {
         expression.transpile(transpiler);
 };
 
-exports.Argument = Argument;
+exports.Parameter = Parameter;

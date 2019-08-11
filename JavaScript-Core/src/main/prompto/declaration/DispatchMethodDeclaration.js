@@ -4,17 +4,17 @@ var ContextualExpression = require("../value/ContextualExpression").ContextualEx
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var UnresolvedIdentifier = null;
-var UnresolvedArgument = null;
-var CategoryArgument = null;
-var AttributeArgument = null;
+var UnresolvedParameter = null;
+var CategoryParameter = null;
+var AttributeParameter = null;
 var Variable = require("../runtime/Variable").Variable;
 var AnyType = require("../type/AnyType").AnyType;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-    UnresolvedArgument = require("../argument/UnresolvedArgument").UnresolvedArgument;
-    CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
-    AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
+    UnresolvedParameter = require("../argument/UnresolvedParameter").UnresolvedParameter;
+    CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
+    AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
 };
 
 
@@ -107,18 +107,18 @@ DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common,
             continue;
         if(count++)
             transpiler.append(" && ");
-        if(incoming instanceof UnresolvedArgument)
+        if(incoming instanceof UnresolvedParameter)
             incoming = incoming.resolved;
         var outgoing = incoming==null ? declaration.args[0] : this.findCorrespondingArg(transpiler.context, declaration.args, common, incoming);
-        if(outgoing instanceof UnresolvedArgument)
+        if(outgoing instanceof UnresolvedParameter)
             outgoing = outgoing.resolved;
         if(incoming==null)
             incoming = this.declaration.args[0];
-        if(incoming instanceof UnresolvedArgument)
+        if(incoming instanceof UnresolvedParameter)
             incoming = incoming.resolved;
-        if(incoming instanceof CategoryArgument && outgoing instanceof CategoryArgument) {
+        if(incoming instanceof CategoryParameter && outgoing instanceof CategoryParameter) {
             transpiler.append(incoming.name).append(".instanceOf(").append(outgoing.type.name).append(")");
-        } else if(incoming instanceof CategoryArgument && outgoing instanceof AttributeArgument) {
+        } else if(incoming instanceof CategoryParameter && outgoing instanceof AttributeParameter) {
             transpiler.append(incoming.name).append(".hasOwnProperty('").append(outgoing.name).append("')");
         } else
             throw new Error("Unsupported: " + typeof(incoming) + " and " + typeof(outgoing));
@@ -132,7 +132,7 @@ DispatchMethodDeclaration.prototype.findCorrespondingArg = function(context, arg
             continue;
         if (outgoing.equals(incoming))
             return outgoing;
-        if (incoming instanceof CategoryArgument && outgoing instanceof CategoryArgument) {
+        if (incoming instanceof CategoryParameter && outgoing instanceof CategoryParameter) {
             if(incoming.type.isAssignableFrom(context, outgoing.type) || outgoing.type.isAssignableFrom(context, incoming.type))
                 return outgoing;
         }

@@ -1,4 +1,4 @@
-var CategoryArgument = null;
+var CategoryParameter = null;
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var DecimalType = require("./DecimalType").DecimalType;
@@ -15,7 +15,7 @@ var PeriodType = null;
 var BuiltInMethodDeclaration = null;
 
 exports.resolve = function() {
-    CategoryArgument = require("../argument/CategoryArgument.js").CategoryArgument;
+    CategoryParameter = require("../argument/CategoryParameter.js").CategoryParameter;
 	CharacterType = require("./CharacterType").CharacterType;
 	TextType = require("./TextType").TextType;
 	PeriodType = require("./PeriodType").PeriodType;
@@ -329,7 +329,7 @@ exports.IntegerType = IntegerType;
 
 function FormatMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "format",
-        new CategoryArgument(TextType.instance, new Identifier("format")));
+        new CategoryParameter(TextType.instance, new Identifier("format")));
     return this;
 }
 

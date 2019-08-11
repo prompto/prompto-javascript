@@ -10,7 +10,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var TextValue = null; // circular dependency
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
+var CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
 var TextLiteral = null;
 var ListValue = null;
 var List = require("../intrinsic/List").List;
@@ -302,36 +302,36 @@ function ToCapitalizedMethodDeclaration() {
 }
 
 function SplitMethodDeclaration() {
-    BuiltInMethodDeclaration.call(this, "split", new CategoryArgument(TextType.instance, new Identifier("separator"), new TextLiteral('" "')));
+    BuiltInMethodDeclaration.call(this, "split", new CategoryParameter(TextType.instance, new Identifier("separator"), new TextLiteral('" "')));
     return this;
 }
 
 function StartsWithMethodDeclaration() {
-    BuiltInMethodDeclaration.call(this, "startsWith", new CategoryArgument(TextType.instance, new Identifier("value")));
+    BuiltInMethodDeclaration.call(this, "startsWith", new CategoryParameter(TextType.instance, new Identifier("value")));
     return this;
 }
 
 function EndsWithMethodDeclaration() {
-    BuiltInMethodDeclaration.call(this, "endsWith", new CategoryArgument(TextType.instance, new Identifier("value")));
+    BuiltInMethodDeclaration.call(this, "endsWith", new CategoryParameter(TextType.instance, new Identifier("value")));
     return this;
 }
 
 function ReplaceMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "replace",
-        new CategoryArgument(TextType.instance, new Identifier("toReplace")),
-        new CategoryArgument(TextType.instance, new Identifier("replaceWith")));
+        new CategoryParameter(TextType.instance, new Identifier("toReplace")),
+        new CategoryParameter(TextType.instance, new Identifier("replaceWith")));
     return this;
 }
 
 function ReplaceAllMethodDeclaration() {
     BuiltInMethodDeclaration.call(this, "replaceAll",
-        new CategoryArgument(TextType.instance, new Identifier("toReplace")),
-        new CategoryArgument(TextType.instance, new Identifier("replaceWith")));
+        new CategoryParameter(TextType.instance, new Identifier("toReplace")),
+        new CategoryParameter(TextType.instance, new Identifier("replaceWith")));
     return this;
 }
 
 function IndexOfMethodDeclaration() {
-    BuiltInMethodDeclaration.call(this, "indexOf", new CategoryArgument(TextType.instance, new Identifier("value")));
+    BuiltInMethodDeclaration.call(this, "indexOf", new CategoryParameter(TextType.instance, new Identifier("value")));
     return this;
 }
 

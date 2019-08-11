@@ -1,28 +1,28 @@
 var ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var AttributeArgument = require("./AttributeArgument").AttributeArgument;
+var AttributeParameter = require("./AttributeParameter").AttributeParameter;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-var MethodArgument = require("./MethodArgument").MethodArgument;
+var MethodParameter = require("./MethodParameter").MethodParameter;
 
-function UnresolvedArgument(id) {
+function UnresolvedParameter(id) {
 	this.id = id;
 	this.resolved = null;
 	return this;
 }
 
-Object.defineProperty(UnresolvedArgument.prototype, "name", {
+Object.defineProperty(UnresolvedParameter.prototype, "name", {
     get : function() {
         return this.id.name;
     }
 });
 
-UnresolvedArgument.prototype.getTranspiledName =  function(context) {
+UnresolvedParameter.prototype.getTranspiledName =  function(context) {
     this.resolveAndCheck(context);
     return this.resolved.getTranspiledName(context);
 };
 
 
-UnresolvedArgument.prototype.toDialect = function(writer) {
+UnresolvedParameter.prototype.toDialect = function(writer) {
     writer.append(this.name);
     if(this.defaultExpression!=null) {
         writer.append(" = ");
@@ -30,32 +30,32 @@ UnresolvedArgument.prototype.toDialect = function(writer) {
     }
 };
 
-UnresolvedArgument.prototype.check = function(context) {
+UnresolvedParameter.prototype.check = function(context) {
 	this.resolveAndCheck(context);
 };
 
-UnresolvedArgument.prototype.getProto = function() {
+UnresolvedParameter.prototype.getProto = function() {
 	return this.name;
 };
 
-UnresolvedArgument.prototype.getType = function(context) {
+UnresolvedParameter.prototype.getType = function(context) {
 	this.resolveAndCheck(context);
 	return this.resolved.getType(context);
 };
 
-UnresolvedArgument.prototype.register = function(context) {
+UnresolvedParameter.prototype.register = function(context) {
 	this.resolveAndCheck(context);
 	this.resolved.register(context);
     if(this.defaultExpression!=null)
         context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
-UnresolvedArgument.prototype.checkValue = function(context, value) {
+UnresolvedParameter.prototype.checkValue = function(context, value) {
 	this.resolveAndCheck(context);
 	return this.resolved.checkValue(context, value);
 };
 
-UnresolvedArgument.prototype.resolveAndCheck = function(context) {
+UnresolvedParameter.prototype.resolveAndCheck = function(context) {
 	if(this.resolved!=null)
 		return;
     // ignore problems during resolution
@@ -65,9 +65,9 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
         // try out various solutions
         var named = context.getRegisteredDeclaration(this.name);
         if (named instanceof AttributeDeclaration) {
-            this.resolved = new AttributeArgument(this.id);
+            this.resolved = new AttributeParameter(this.id);
         } else if (named instanceof MethodDeclarationMap) {
-            this.resolved = new MethodArgument(this.id);
+            this.resolved = new MethodParameter(this.id);
         }
     } finally {
         // restore listener
@@ -77,25 +77,25 @@ UnresolvedArgument.prototype.resolveAndCheck = function(context) {
         context.problemListener.reportUnknownVariable(this.id);
 };
 
-UnresolvedArgument.prototype.declare = function(transpiler) {
+UnresolvedParameter.prototype.declare = function(transpiler) {
     this.resolveAndCheck(transpiler.context);
     this.resolved.declare(transpiler);
 };
 
-UnresolvedArgument.prototype.transpile = function(transpiler) {
+UnresolvedParameter.prototype.transpile = function(transpiler) {
     this.resolveAndCheck(transpiler.context);
     this.resolved.transpile(transpiler);
 };
 
-UnresolvedArgument.prototype.transpileCall = function(transpiler, expression) {
+UnresolvedParameter.prototype.transpileCall = function(transpiler, expression) {
     this.resolveAndCheck(transpiler.context);
     this.resolved.transpileCall(transpiler, expression);
 };
 
-UnresolvedArgument.prototype.equals = function(other) {
-    return other === this || (other instanceof UnresolvedArgument && this.name === other.name);
+UnresolvedParameter.prototype.equals = function(other) {
+    return other === this || (other instanceof UnresolvedParameter && this.name === other.name);
 };
 
 
-exports.UnresolvedArgument = UnresolvedArgument;
+exports.UnresolvedParameter = UnresolvedParameter;
 

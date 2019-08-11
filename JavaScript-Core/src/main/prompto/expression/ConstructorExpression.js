@@ -3,7 +3,7 @@ var CategoryType = null;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var AttributeArgument = require("../argument/AttributeArgument").AttributeArgument;
+var AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
@@ -41,7 +41,7 @@ ConstructorExpression.prototype.checkFirstHomonym = function(context, decl) {
             if (assign.expression instanceof UnresolvedIdentifier || assign.expression instanceof InstanceExpression)
                 id = assign.expression.id;
             if (id && decl.hasAttribute(context, id.name)) {
-                assign.argument = new AttributeArgument(id);
+                assign.argument = new AttributeParameter(id);
                 assign._expression = null;
             }
         }
@@ -66,7 +66,7 @@ ConstructorExpression.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
     var assignments = new ArgumentAssignmentList();
     if (this.copyFrom != null)
-        assignments.add(new ArgumentAssignment(new AttributeArgument(new Identifier("from")), this.copyFrom));
+        assignments.add(new ArgumentAssignment(new AttributeParameter(new Identifier("from")), this.copyFrom));
     if(this.assignments!=null)
         assignments.addAll(this.assignments);
     assignments.toDialect(writer);

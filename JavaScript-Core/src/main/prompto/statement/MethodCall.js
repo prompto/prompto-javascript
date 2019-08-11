@@ -20,7 +20,7 @@ var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Identifier = require("../grammar/Identifier").Identifier;
-var CodeArgument = require("../argument/CodeArgument").CodeArgument;
+var CodeParameter = require("../argument/CodeParameter").CodeParameter;
 
 
 exports.resolve = function() {
@@ -240,7 +240,7 @@ MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
 MethodCall.prototype.transpileAssignments = function(transpiler, declaration, allowDerived) {
     var assignments = this.makeAssignments(transpiler.context, declaration);
     assignments = assignments.filter(function(assignment) {
-        return !(assignment.argument instanceof CodeArgument);
+        return !(assignment.argument instanceof CodeParameter);
     });
     if(assignments.length > 0) {
         transpiler.append("(");

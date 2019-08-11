@@ -1,32 +1,32 @@
-var Argument = require("./Argument").Argument;
+var Parameter = require("./Parameter").Parameter;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var utils = require("../utils/index");
 
-function CategoryArgument(type, id, defaultExpression) {
-	Argument.call(this, id);
+function CategoryParameter(type, id, defaultExpression) {
+	Parameter.call(this, id);
 	this.type = type;
     this.defaultExpression = defaultExpression || null;
 	return this;
 }
 
-CategoryArgument.prototype = Object.create(Argument.prototype);
-CategoryArgument.prototype.constructor = CategoryArgument;
+CategoryParameter.prototype = Object.create(Parameter.prototype);
+CategoryParameter.prototype.constructor = CategoryParameter;
 
-CategoryArgument.prototype.getProto = function() {
+CategoryParameter.prototype.getProto = function() {
 	return this.type.name;
 };
 
-CategoryArgument.prototype.getTranspiledName =  function(context) {
+CategoryParameter.prototype.getTranspiledName =  function(context) {
     return this.type.getTranspiledName(context);
 };
 	
-CategoryArgument.prototype.equals = function(other) {
-    return other === this || (other instanceof CategoryArgument && utils.equalObjects(this.type, other.type));
+CategoryParameter.prototype.equals = function(other) {
+    return other === this || (other instanceof CategoryParameter && utils.equalObjects(this.type, other.type));
 };
 
 
-CategoryArgument.prototype.register = function(context) {
+CategoryParameter.prototype.register = function(context) {
 	var actual = context.contextForValue(this.name);
 	if(actual===context) {
 		throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
@@ -36,20 +36,20 @@ CategoryArgument.prototype.register = function(context) {
         context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
-CategoryArgument.prototype.check = function(context) {
+CategoryParameter.prototype.check = function(context) {
 	this.type.checkExists(context);
 };
 
-CategoryArgument.prototype.declare = function(transpiler) {
+CategoryParameter.prototype.declare = function(transpiler) {
     this.type.declare(transpiler);
 };
 
 
-CategoryArgument.prototype.getType = function(context) {
+CategoryParameter.prototype.getType = function(context) {
 	return this.type;
 };
 
-CategoryArgument.prototype.toEDialect = function(writer) {
+CategoryParameter.prototype.toEDialect = function(writer) {
     var anonymous = "any"==this.type.name;
     this.type.toDialect(writer);
     if(anonymous) {
@@ -62,16 +62,16 @@ CategoryArgument.prototype.toEDialect = function(writer) {
     }
 };
 
-CategoryArgument.prototype.toODialect = function(writer) {
+CategoryParameter.prototype.toODialect = function(writer) {
     this.type.toDialect(writer);
     writer.append(' ');
     writer.append(this.name);
 };
 
-CategoryArgument.prototype.toMDialect = function(writer) {
+CategoryParameter.prototype.toMDialect = function(writer) {
     writer.append(this.name);
     writer.append(':');
     this.type.toDialect(writer);
 };
 
-exports.CategoryArgument = CategoryArgument;
+exports.CategoryParameter = CategoryParameter;

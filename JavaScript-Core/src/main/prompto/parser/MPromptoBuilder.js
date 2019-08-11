@@ -668,8 +668,8 @@ MPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var attrs = this.getNodeValue(ctx.attrs);
     var arg = attrs ?
-        new argument.ExtendedArgument(typ, name, attrs) :
-        new argument.CategoryArgument(typ, name);
+        new argument.ExtendedParameter(typ, name, attrs) :
+        new argument.CategoryParameter(typ, name);
     var exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -716,7 +716,7 @@ MPromptoBuilder.prototype.exitExpressionAssignmentList = function(ctx) {
 MPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var exp = this.getNodeValue(ctx.exp);
-	var arg = new argument.UnresolvedArgument(name);
+	var arg = new argument.UnresolvedParameter(name);
 	this.setNodeValue(ctx, new grammar.ArgumentAssignment(arg, exp));
 };
 
@@ -1538,7 +1538,7 @@ MPromptoBuilder.prototype.exitValue_token = function(ctx) {
 
 MPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
     var name = this.getNodeValue(ctx.variable_identifier());
-    var arg = new argument.UnresolvedArgument(name);
+    var arg = new argument.UnresolvedParameter(name);
     var exp = this.getNodeValue(ctx.literal_expression());
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -2212,7 +2212,7 @@ MPromptoBuilder.prototype.exitCategory_or_any_type = function(ctx) {
 
 MPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new argument.CodeArgument(name));
+	this.setNodeValue(ctx, new argument.CodeParameter(name));
 };
 
 

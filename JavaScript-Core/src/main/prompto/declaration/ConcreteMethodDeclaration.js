@@ -2,8 +2,8 @@ var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclara
 var VoidType = require("../type/VoidType").VoidType;
 var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
-var CodeArgument = require("../argument/CodeArgument").CodeArgument;
-var CategoryArgument = require("../argument/CategoryArgument").CategoryArgument;
+var CodeParameter = require("../argument/CodeParameter").CodeParameter;
+var CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
 var StatementList = require("../statement/StatementList").StatementList;
 var DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
 
@@ -43,7 +43,7 @@ ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(contex
 		return false;
 	}
 	for(var i=0;i<this.args.length;i++) {
-		if(this.args[i] instanceof CodeArgument) {
+		if(this.args[i] instanceof CodeParameter) {
 			return true;
 		}
 	}
@@ -92,7 +92,7 @@ ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
         return true;
     else if(this.args.length==1) {
         var arg = this.args[0];
-        if( arg instanceof CategoryArgument
+        if( arg instanceof CategoryParameter
             && arg.type instanceof DictionaryType
             && arg.type.itemType==TextType.instance )
                 return true;
@@ -194,7 +194,7 @@ ConcreteMethodDeclaration.prototype.fullDeclare = function(transpiler, id) {
     // remember code arguments
     declaration.codeArguments = {};
     this.args.filter(function(arg) {
-        return arg instanceof CodeArgument;
+        return arg instanceof CodeParameter;
     }).forEach(function(arg) {
         declaration.codeArguments[arg.name] = { id: arg.id, value: transpiler.context.getValue(arg.id) };
     });
