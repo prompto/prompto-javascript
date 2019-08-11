@@ -368,10 +368,10 @@ test('Method1Parameter1Statement', () => {
     var ad = parser.parse_concrete_method_declaration();
     expect(ad).toBeTruthy();
     expect(ad.name).toEqual("printName");
-    expect(ad.parameters).toBeTruthy();
+    expect(ad.args).toBeTruthy();
     var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Person"));
     var expected = new prompto.param.CategoryParameter(type, new prompto.grammar.Identifier("p"));
-    expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
+    expect(prompto.utils.arrayContains(ad.args, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
@@ -386,12 +386,12 @@ test('Method1Extended1Statement', () => {
     var ad = parser.parse_concrete_method_declaration();
     expect(ad).toBeTruthy();
     expect(ad.name).toEqual("printName");
-    expect(ad.parameters).toBeTruthy();
+    expect(ad.args).toBeTruthy();
     var type = new prompto.type.CategoryType(new prompto.grammar.Identifier("Object"));
     var expected = new prompto.param.ExtendedParameter(type,
         new prompto.grammar.Identifier("o"),
         new prompto.grammar.IdentifierList(new prompto.grammar.Identifier("name")));
-    expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
+    expect(prompto.utils.arrayContains(ad.args, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
@@ -406,12 +406,12 @@ test('Method1Array1Statement', () => {
     var ad = parser.parse_concrete_method_declaration();
     expect(ad).toBeTruthy();
     expect(ad.name).toEqual("printName");
-    expect(ad.parameters).toBeTruthy();
+    expect(ad.args).toBeTruthy();
     var category = new prompto.type.CategoryType(new prompto.grammar.Identifier("Option"));
     var expected = new prompto.param.CategoryParameter(
         new prompto.type.ListType(category),
         new prompto.grammar.Identifier("options"));
-    expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
+    expect(prompto.utils.arrayContains(ad.args, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);

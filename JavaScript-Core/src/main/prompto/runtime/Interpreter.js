@@ -1,7 +1,7 @@
 var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
-var Argument = require("../grammar/Argument").Argument;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
 var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DictLiteral = require("../literal/DictLiteral").DictLiteral;
@@ -31,11 +31,11 @@ function parseCmdLineArgs(cmdLineArgs) {
 }
 
 function buildAssignments(method, cmdLineArgs) {
-	var assignments = new ArgumentList();
-	if(method.parameters.length==1) {
-		var id = method.parameters[0].id;
+	var assignments = new ArgumentAssignmentList();
+	if(method.args.length==1) {
+		var id = method.args[0].id;
 		var value = parseCmdLineArgs(cmdLineArgs);
-		assignments.add(new Argument(new UnresolvedParameter(id), value));
+		assignments.add(new ArgumentAssignment(new UnresolvedParameter(id), value));
 	}
 	return assignments;
 }
@@ -62,14 +62,14 @@ function locateMethodWithArgs(map) {
 	// try exact match first
     for(var i=0;i<protos.length;i++) {
         var method = map.protos[protos[i]];
-        if(identicalArguments(method.parameters, arguments))
+        if(identicalArguments(method.args, arguments))
             return method;
     };
 	// match Text{} argument, will pass null
 	if(arguments.length==1) {
         for(var i=0;i<protos.length;i++) {
             var method = map.protos[protos[i]];
-            if (isSingleTextDictArgument(method.parameters))
+            if (isSingleTextDictArgument(method.args))
                 return method;
 
         };
@@ -77,7 +77,7 @@ function locateMethodWithArgs(map) {
 	// match no argument, will ignore options
     for(var i=0;i<protos.length;i++) {
         var method = map.protos[protos[i]];
-		if(method.parameters.length==0)
+		if(method.args.length==0)
 			return method;
 	};
 	throw new SyntaxError("Could not find a compatible \"" + map.name + "\" method.");

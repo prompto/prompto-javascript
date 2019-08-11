@@ -39,11 +39,11 @@ ConcreteMethodDeclaration.prototype.canBeChecked = function(context) {
 
 ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(context) {
 	// if at least one argument is 'Code'
-	if(this.parameters===null) {
+	if(this.args===null) {
 		return false;
 	}
-	for(var i=0; i<this.parameters.length; i++) {
-		if(this.parameters[i] instanceof CodeParameter) {
+	for(var i=0;i<this.args.length;i++) {
+		if(this.args[i] instanceof CodeParameter) {
 			return true;
 		}
 	}
@@ -53,20 +53,20 @@ ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(contex
 ConcreteMethodDeclaration.prototype.fullCheck = function(context, isStart) {
 	if(isStart) {
 		context = context.newLocalContext();
-		this.registerParameters(context);
+		this.registerArguments(context);
 	}
-	if(this.parameters!==null) {
-		this.parameters.check(context);
+	if(this.args!==null) {
+		this.args.check(context);
 	}
 	return this.statements.check(context, this.returnType);
 };
 
 ConcreteMethodDeclaration.prototype.checkChild = function(context) {
-	if(this.parameters!=null) {
-		this.parameters.check(context);
+	if(this.args!=null) {
+		this.args.check(context);
 	}
 	var child = context.newChildContext();
-	this.registerParameters(child);
+	this.registerArguments(child);
 	return this.statements.check(child, this.returnType);
 };
 
@@ -82,16 +82,16 @@ ConcreteMethodDeclaration.prototype.interpret = function(context) {
 ConcreteMethodDeclaration.prototype.toDialect = function(writer) {
     if(writer.context.isGlobalContext())
         writer = writer.newLocalWriter();
-    this.registerParameters(writer.context);
+    this.registerArguments(writer.context);
     writer.toDialect(this);
 };
 
 
 ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
-    if(this.parameters.length==0)
+    if(this.args.length==0)
         return true;
-    else if(this.parameters.length==1) {
-        var arg = this.parameters[0];
+    else if(this.args.length==1) {
+        var arg = this.args[0];
         if( arg instanceof CategoryParameter
             && arg.type instanceof DictionaryType
             && arg.type.itemType==TextType.instance )
@@ -103,7 +103,7 @@ ConcreteMethodDeclaration.prototype.isEligibleAsMain = function () {
 
 ConcreteMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def ").append(this.name).append(" (");
-    this.parameters.toDialect(writer);
+    this.args.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
@@ -116,7 +116,7 @@ ConcreteMethodDeclaration.prototype.toMDialect = function(writer) {
 
 ConcreteMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ").append(this.name).append(" as method ");
-    this.parameters.toDialect(writer);
+    this.args.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
@@ -133,7 +133,7 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
         writer.append(" ");
     }
     writer.append("method ").append(this.name).append(" (");
-    this.parameters.toDialect(writer);
+    this.args.toDialect(writer);
     writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent().append("}").newLine();
@@ -147,11 +147,11 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
         if (!this.memberOf) {
             transpiler = transpiler.newLocalTranspiler();
             transpiler.declare(this);
-            this.declareParameters(transpiler);
+            this.declareArguments(transpiler);
         }
         if(this.returnType)
             this.returnType.declare(transpiler);
-        this.registerParameters(transpiler.context);
+        this.registerArguments(transpiler.context);
         this.statements.declare(transpiler);
     } finally {
         this.declaring = false;
@@ -160,7 +160,7 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
 
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
-    this.registerParameters(transpiler.context);
+    this.registerArguments(transpiler.context);
     this.registerCodeArguments(transpiler.context);
     this.transpileProlog(transpiler);
     this.statements.transpile(transpiler);
@@ -169,9 +169,9 @@ ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
 
 
 ConcreteMethodDeclaration.prototype.declareChild = function(transpiler) {
-    this.declareParameters(transpiler);
+    this.declareArguments(transpiler);
     transpiler = transpiler.newChildTranspiler();
-    this.registerParameters(transpiler.context);
+    this.registerArguments(transpiler.context);
     return this.statements.declare(transpiler);
 };
 
@@ -187,13 +187,13 @@ ConcreteMethodDeclaration.prototype.registerCodeArguments = function(context) {
 };
 
 ConcreteMethodDeclaration.prototype.fullDeclare = function(transpiler, id) {
-    var declaration = new ConcreteMethodDeclaration(id, this.parameters, this.returnType, this.statements);
+    var declaration = new ConcreteMethodDeclaration(id, this.args, this.returnType, this.statements);
     declaration.memberOf = this.memberOf;
     transpiler.declare(declaration);
     this.statements.declare(transpiler);
     // remember code arguments
     declaration.codeArguments = {};
-    this.parameters.filter(function(arg) {
+    this.args.filter(function(arg) {
         return arg instanceof CodeParameter;
     }).forEach(function(arg) {
         declaration.codeArguments[arg.name] = { id: arg.id, value: transpiler.context.getValue(arg.id) };

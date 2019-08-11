@@ -1,7 +1,7 @@
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var Identifier = require("../grammar/Identifier").Identifier;
-var ArgumentList = null;
-var Argument = null;
+var ArgumentAssignmentList = null;
+var ArgumentAssignment = null;
 var CategoryDeclaration = null;
 var ConcreteCategoryDeclaration = null;
 var SingletonCategoryDeclaration = null;
@@ -29,8 +29,8 @@ var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
 
 exports.resolve = function() {
-	ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-	Argument = require("../grammar/Argument").Argument;
+	ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+	ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;
@@ -287,7 +287,7 @@ CategoryType.prototype.checkOperator = function(context, other, tryReverse, oper
             return null;
         context = context.newInstanceContext(null, this);
         var local = context.newLocalContext();
-        method.registerParameters(local);
+        method.registerArguments(local);
         return method.check(local);
     } catch(e) {
         // ok to pass, will try reverse
@@ -543,8 +543,8 @@ CategoryType.prototype.getMemberMethods = function(context, name) {
 CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
 	try {
 		var exp = new ValueExpression(this, this.newInstance(context));
-		var arg = new Argument(null, exp);
-		var args = new ArgumentList([arg]);
+		var arg = new ArgumentAssignment(null, exp);
+		var args = new ArgumentAssignmentList([arg]);
 		var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
 		var finder = new MethodFinder(context, call);
 		var decl = finder.findMethod(true);

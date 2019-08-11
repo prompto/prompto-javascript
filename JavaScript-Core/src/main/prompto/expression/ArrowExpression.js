@@ -106,7 +106,7 @@ ArrowExpression.prototype.registerArrowArgs = function(context, itemType) {
 ArrowExpression.prototype.getFilter = function(context, itemType) {
     var local = this.registerArrowArgs(context.newLocalContext(), itemType);
     var filter = function(o) {
-        local.setValue(this.parameters[0], o);
+        local.setValue(this.args[0], o);
         var result = this.statements.interpret(local);
         if(result instanceof BooleanValue)
             return result.value;
@@ -152,9 +152,9 @@ ArrowExpression.prototype.getSortedComparator = function(context, itemType, desc
 ArrowExpression.prototype.getSortedComparator1Arg = function(context, itemType, descending) {
     var local = this.registerArrowArgs(context.newLocalContext(), itemType);
     var cmp = function(o1, o2) {
-        local.setValue(this.parameters[0], o1);
+        local.setValue(this.args[0], o1);
         var key1 = this.statements.interpret(local);
-        local.setValue(this.parameters[0], o2);
+        local.setValue(this.args[0], o2);
         var key2 = this.statements.interpret(local);
         return descending ? key2.compareToValue(context, key1) : key1.compareToValue(context, key2);
     };
@@ -165,8 +165,8 @@ ArrowExpression.prototype.getSortedComparator1Arg = function(context, itemType, 
 ArrowExpression.prototype.getSortedComparator2Args = function(context, itemType, descending) {
     var local = this.registerArrowArgs(context.newLocalContext(), itemType);
     var cmp = function(o1, o2) {
-        local.setValue(this.parameters[0], o1);
-        local.setValue(this.parameters[1], o2);
+        local.setValue(this.args[0], o1);
+        local.setValue(this.args[1], o2);
         var result = this.statements.interpret(local);
         if(!(result instanceof IntegerValue))
             throw new SyntaxError("Expecting an Integer as result of key body!");

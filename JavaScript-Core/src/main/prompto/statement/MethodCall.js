@@ -1,7 +1,7 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
 var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
 var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
@@ -102,14 +102,14 @@ MethodCall.prototype.checkDeclaration = function(declaration, parent, local) {
 };
 
 MethodCall.prototype.lightCheck = function(declaration, local) {
-	declaration.registerParameters(local);
+	declaration.registerArguments(local);
 	return declaration.check(local, false);
 };
 
 MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 	try {
 		var assignments = this.makeAssignments(parent, declaration);
-		declaration.registerParameters(local);
+		declaration.registerArguments(local);
 		assignments.forEach(function(assignment) {
 			var expression = assignment.resolve(local, declaration, true);
 			var value = assignment.parameter.checkValue(parent, expression);
@@ -167,7 +167,7 @@ var fullDeclareCounter = 0;
 MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, local) {
     if(!this.fullSelector) {
         var assignments = this.makeAssignments(transpiler.context, declaration);
-        declaration.registerParameters(local);
+        declaration.registerArguments(local);
         assignments.forEach(function(assignment) {
             var expression = assignment.resolve(local, declaration, true);
             var value = assignment.parameter.checkValue(transpiler.context, expression);
@@ -259,13 +259,13 @@ MethodCall.prototype.transpileAssignments = function(transpiler, declaration, al
 
 
 MethodCall.prototype.makeAssignments = function(context, declaration) {
-	return (this.assignments || new ArgumentList()).makeAssignments(context, declaration);
+	return (this.assignments || new ArgumentAssignmentList()).makeAssignments(context, declaration);
 };
 
 MethodCall.prototype.interpret = function(context) {
 	var declaration = this.findDeclaration(context);
 	var local = this.selector.newLocalContext(context, declaration);
-	declaration.registerParameters(local);
+	declaration.registerArguments(local);
 	var assignments = this.makeAssignments(context, declaration);
 	assignments.forEach(function(assignment) {
 		var expression = assignment.resolve(local, declaration, true);

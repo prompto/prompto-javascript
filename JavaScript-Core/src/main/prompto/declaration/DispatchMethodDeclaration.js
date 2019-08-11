@@ -1,8 +1,8 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
 var UnresolvedIdentifier = null;
 var UnresolvedParameter = null;
 var CategoryParameter = null;
@@ -19,7 +19,7 @@ exports.resolve = function() {
 
 
 function DispatchMethodDeclaration(context, call,  declaration, declarations) {
-    BaseMethodDeclaration.call(this, declaration.id, declaration.parameters, declaration.returnType);
+    BaseMethodDeclaration.call(this, declaration.id, declaration.args, declaration.returnType);
     this.context = context;
     this.call = call;
     this.declaration = declaration;
@@ -43,15 +43,15 @@ DispatchMethodDeclaration.prototype.replaceLocalsWithArguments = function(assign
             exp = exp.expression;
         if(exp && exp.name) {
             exp = new UnresolvedIdentifier(arg.id);
-            return new Argument(arg, exp);
+            return new ArgumentAssignment(arg, exp);
         } else
             return assignment;
     });
-    return new ArgumentList(items);
+    return new ArgumentAssignmentList(items);
 };
 
 DispatchMethodDeclaration.prototype.transpile = function(transpiler) {
-    this.registerParameters(transpiler.context);
+    this.registerArguments(transpiler.context);
     this.transpileProlog(transpiler);
     this.transpileDispatch(transpiler);
     this.transpileEpilog(transpiler);
@@ -78,9 +78,9 @@ DispatchMethodDeclaration.prototype.collectCommonArgs = function() {
     for(var i=0; i<this.declarations.length; i++) {
         var declaration = this.declarations[i];
         if(i==0)
-            common = new StrictSet(declaration.parameters);
+            common = new StrictSet(declaration.args);
         else {
-            var current = new StrictSet(declaration.parameters);
+            var current = new StrictSet(declaration.args);
             common = common.intersect(current);
             if(common.length===0)
                 break;
@@ -92,7 +92,7 @@ DispatchMethodDeclaration.prototype.collectCommonArgs = function() {
 DispatchMethodDeclaration.prototype.transpileCall = function(transpiler, declaration) {
     this.call.transpileSelector(transpiler, declaration);
     transpiler.append("(");
-    this.parameters.forEach(function (arg) {
+    this.args.forEach(function (arg) {
         transpiler.append(arg.name);
         transpiler.append(", ");
     }, this);
@@ -109,11 +109,11 @@ DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common,
             transpiler.append(" && ");
         if(incoming instanceof UnresolvedParameter)
             incoming = incoming.resolved;
-        var outgoing = incoming==null ? declaration.parameters[0] : this.findCorrespondingArg(transpiler.context, declaration.parameters, common, incoming);
+        var outgoing = incoming==null ? declaration.args[0] : this.findCorrespondingArg(transpiler.context, declaration.args, common, incoming);
         if(outgoing instanceof UnresolvedParameter)
             outgoing = outgoing.resolved;
         if(incoming==null)
-            incoming = this.declaration.parameters[0];
+            incoming = this.declaration.args[0];
         if(incoming instanceof UnresolvedParameter)
             incoming = incoming.resolved;
         if(incoming instanceof CategoryParameter && outgoing instanceof CategoryParameter) {

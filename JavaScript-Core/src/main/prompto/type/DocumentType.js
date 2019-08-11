@@ -12,16 +12,16 @@ var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var DocumentValue = null;
 var Document = require("../intrinsic/Document").Document;
 var List = require("../intrinsic/List").List;
-var ArgumentList = null;
-var Argument = null;
+var ArgumentAssignmentList = null;
+var ArgumentAssignment = null;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var compareValues = require("../utils/Utils").compareValues;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-    Argument = require("../grammar/Argument").Argument;
+    ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+    ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
     DocumentValue = require("../value/DocumentValue").DocumentValue;
 };
 
@@ -260,8 +260,8 @@ DocumentType.prototype.findGlobalMethod = function(context, name, returnCall) {
         return null;
     else if(returnCall) {
         var exp = new ValueExpression(this, new DocumentValue());
-        var arg = new Argument(null, exp);
-        var args = new ArgumentList([arg]);
+        var arg = new ArgumentAssignment(null, exp);
+        var args = new ArgumentAssignmentList([arg]);
         return new MethodCall(new MethodSelector(null, new Identifier(name)), args);
     } else
         return methods.protos[DocumentType.instance.name];

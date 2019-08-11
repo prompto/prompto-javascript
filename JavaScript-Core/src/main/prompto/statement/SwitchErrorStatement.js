@@ -64,9 +64,9 @@ SwitchErrorStatement.prototype.interpret = function(context) {
 SwitchErrorStatement.prototype.populateError = function(e, context) {
 	var error = e.getExpression(context);
 	if(error==null) {
-		var args = new ArgumentList();
-		args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral(typeof(e))));
-		args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral(e.message)));
+		var args = new ArgumentAssignmentList();
+		args.add(new ArgumentAssignment(new UnresolvedParameter("name"), new TextLiteral(typeof(e))));
+		args.add(new ArgumentAssignment(new UnresolvedParameter("text"), new TextLiteral(e.message)));
 		error = new ConstructorExpression(new CategoryType("Error"), args);
 	}
 	if(context.getRegisteredValue(this.errorId)==null) {

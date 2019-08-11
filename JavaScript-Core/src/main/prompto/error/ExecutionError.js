@@ -12,15 +12,15 @@ ExecutionError.prototype.constructor = ExecutionError;
 ExecutionError.prototype.interpret = function(context, errorName) {
     var exp = this.getExpression(context);
     if(exp==null) {
-        var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-        var Argument = require("../grammar/Argument").Argument;
+        var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+        var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
         var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
         var TextLiteral = require("../literal/TextLiteral").TextLiteral;
         var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
         var CategoryType = require("../type/CategoryType").CategoryType;
-        var args = new ArgumentList();
-        args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
-        args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
+        var args = new ArgumentAssignmentList();
+        args.add(new ArgumentAssignment(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
+        args.add(new ArgumentAssignment(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
         exp = new ConstructorExpression(new CategoryType("Error"), args);
     }
     if(context.getRegisteredValue(errorName)==null)

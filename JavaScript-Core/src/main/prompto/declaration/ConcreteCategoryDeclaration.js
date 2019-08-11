@@ -407,13 +407,13 @@ ConcreteCategoryDeclaration.prototype.getOperatorMethod = function(context, oper
     // find best candidate
     var candidate = null;
     methods.getAll().forEach(function(method) {
-        var potential = method.parameters[0].getType(context);
+        var potential = method.args[0].getType(context);
         if(!potential.isAssignableFrom(context, type))
             return;
         if(candidate==null)
             candidate = method;
         else {
-            var currentBest = candidate.parameters[0].getType(context);
+            var currentBest = candidate.args[0].getType(context);
             if(potential.isAssignableFrom(context, currentBest))
                 candidate = method;
         }

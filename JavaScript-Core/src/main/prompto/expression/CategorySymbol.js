@@ -1,8 +1,8 @@
 var Symbol = require("./Symbol").Symbol;
 var TextValue = require("../value/TextValue").TextValue;
 var ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
+var ArgumentAssignmentList = require("../grammar/ArgumentList").ArgumentAssignmentList;
+var ArgumentAssignment = require("../grammar/Argument").ArgumentAssignment;
 var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -97,8 +97,8 @@ CategorySymbol.prototype.transpile = function(transpiler) {
 CategorySymbol.prototype.initialize = function(transpiler) {
     transpiler.append("var ").append(this.name).append(" = ");
     var nameArg = new AttributeParameter(new Identifier("name"));
-    var nameAssign = new Argument(nameArg, new TextLiteral('"' + this.name + '"'));
-    var assignments = new ArgumentList(this.assignments);
+    var nameAssign = new ArgumentAssignment(nameArg, new TextLiteral('"' + this.name + '"'));
+    var assignments = new ArgumentAssignmentList(this.assignments);
     assignments.add(nameAssign);
     var exp = new ConstructorExpression(this.type, null, assignments);
     exp.transpile(transpiler);
