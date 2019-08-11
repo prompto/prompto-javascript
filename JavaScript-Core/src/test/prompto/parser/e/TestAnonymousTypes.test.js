@@ -3,8 +3,8 @@ var parseString = require("../../parser/BaseEParserTest").parseString;
 
 var Identifier = prompto.grammar.Identifier;
 var IdentifierList = prompto.grammar.IdentifierList;
-var CategoryArgument = prompto.argument.CategoryArgument;
-var ExtendedArgument = prompto.argument.ExtendedArgument;
+var CategoryParameter = prompto.argument.CategoryParameter;
+var ExtendedParameter = prompto.argument.ExtendedParameter;
 var AnyType = prompto.type.AnyType;
 var TextType = prompto.type.TextType;
 var DateType = prompto.type.DateType;
@@ -32,7 +32,7 @@ beforeEach(() => {
 
 test('AnonymousAnyType is assignable', () => {
 	// any x
-	var argument = new CategoryArgument(AnyType.instance, new Identifier("x"));
+	var argument = new CategoryParameter(AnyType.instance, new Identifier("x"));
 	argument.register(context);
 	var st = argument.getType(context);
 	expect(st instanceof AnyType).toBeTruthy();
@@ -53,7 +53,7 @@ test('AnonymousAnyType is assignable', () => {
 test('AnonymousAnyType with attribute is assignable', () => {
 	// any x with attribute: name
 	var list = new IdentifierList(new Identifier("name"));
-	var argument = new ExtendedArgument(AnyType.instance, new Identifier("x"), list);
+	var argument = new ExtendedParameter(AnyType.instance, new Identifier("x"), list);
 	argument.register(context);
 	var st = argument.getType(context);
 	expect(st instanceof CategoryType).toBeTruthy();
@@ -73,7 +73,7 @@ test('AnonymousAnyType with attribute is assignable', () => {
 
 test('AnonymousCategoryType is assignable', () => {
 	// Root x
-	var argument = new CategoryArgument(new CategoryType(new Identifier("Root")), new Identifier("x"));
+	var argument = new CategoryParameter(new CategoryType(new Identifier("Root")), new Identifier("x"));
 	argument.register(context);
 	var st = argument.getType(context);
 	expect(st instanceof CategoryType).toBeTruthy();
@@ -95,7 +95,7 @@ test('AnonymousCategoryType is assignable', () => {
 test('AnonymousCategoryType with attribute is assignable', () => {
 	// Root x with attribute: name
 	var list = new IdentifierList(new Identifier("name"));
-	var argument = new ExtendedArgument(new CategoryType(new Identifier("Root")), new Identifier("test"), list);
+	var argument = new ExtendedParameter(new CategoryType(new Identifier("Root")), new Identifier("test"), list);
 	argument.register(context);
 	var st = argument.getType(context);
 	expect(st instanceof CategoryType).toBeTruthy();
