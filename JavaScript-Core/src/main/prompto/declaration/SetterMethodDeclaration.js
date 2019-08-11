@@ -1,5 +1,5 @@
 var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-var AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
+var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 
 function SetterMethodDeclaration(id, statements) {
     ConcreteMethodDeclaration.call(this, id, null, null, statements);

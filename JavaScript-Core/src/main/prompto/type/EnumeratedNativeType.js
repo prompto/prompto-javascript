@@ -5,7 +5,7 @@ var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var List = require("../intrinsic/List").List;
-var CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
+var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = function() {

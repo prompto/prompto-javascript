@@ -1,4 +1,4 @@
-var argument = require("../argument/index");
+var argument = require("../param/index");
 var constraint = require("../constraint/index");
 var instance = require("../instance/index");
 var declaration = require("../declaration/index");
@@ -9,6 +9,7 @@ var literal = require("../literal/index");
 var grammar = require("../grammar/index");
 var value = require("../value/index");
 var utils = require("../utils/index");
+var param = require("../param/index");
 var parser = require("../parser/index");
 var type = require("../type/index");
 var jsx = require("../jsx/index");
@@ -689,7 +690,7 @@ OPromptoBuilder.prototype.exitCodeArgument = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitArgument_list = function(ctx) {
-    var items = new grammar.ArgumentList();
+    var items = new param.ParameterList();
     ctx.argument().forEach(function(r) {
         var item = this.getNodeValue(r);
         items.add(item);

@@ -2,8 +2,8 @@ var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclara
 var VoidType = require("../type/VoidType").VoidType;
 var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
-var CodeParameter = require("../argument/CodeParameter").CodeParameter;
-var CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
+var CodeParameter = require("../param/CodeParameter").CodeParameter;
+var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
 var StatementList = require("../statement/StatementList").StatementList;
 var DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
 

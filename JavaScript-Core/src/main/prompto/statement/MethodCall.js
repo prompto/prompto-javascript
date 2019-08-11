@@ -20,7 +20,7 @@ var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Identifier = require("../grammar/Identifier").Identifier;
-var CodeParameter = require("../argument/CodeParameter").CodeParameter;
+var CodeParameter = require("../param/CodeParameter").CodeParameter;
 
 
 exports.resolve = function() {

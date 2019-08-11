@@ -14,7 +14,7 @@ ExecutionError.prototype.interpret = function(context, errorName) {
     if(exp==null) {
         var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
         var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
-        var UnresolvedParameter = require("../argument/UnresolvedParameter").UnresolvedParameter;
+        var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
         var TextLiteral = require("../literal/TextLiteral").TextLiteral;
         var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
         var CategoryType = require("../type/CategoryType").CategoryType;

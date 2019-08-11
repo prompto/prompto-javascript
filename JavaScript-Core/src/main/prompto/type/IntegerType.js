@@ -15,7 +15,7 @@ var PeriodType = null;
 var BuiltInMethodDeclaration = null;
 
 exports.resolve = function() {
-    CategoryParameter = require("../argument/CategoryParameter.js").CategoryParameter;
+    CategoryParameter = require("../param/CategoryParameter.js").CategoryParameter;
 	CharacterType = require("./CharacterType").CharacterType;
 	TextType = require("./TextType").TextType;
 	PeriodType = require("./PeriodType").PeriodType;

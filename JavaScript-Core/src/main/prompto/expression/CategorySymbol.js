@@ -3,7 +3,7 @@ var TextValue = require("../value/TextValue").TextValue;
 var ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
-var AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
+var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var Identifier = require("../grammar/Identifier").Identifier;
 

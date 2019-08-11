@@ -1,5 +1,5 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var ParameterList = require("../param/ParameterList").ParameterList;
 var BuiltInContext = null;
 
 exports.resolve = function() {
@@ -9,7 +9,7 @@ exports.resolve = function() {
 function BuiltInMethodDeclaration(name) {
     var args = null;
     if ( arguments.length > 1 ) {
-        args = new ArgumentList();
+        args = new ParameterList();
         for(var i = 1;i<arguments.length; i++) {
             args.add(arguments[i]);
         }

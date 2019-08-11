@@ -1,4 +1,4 @@
-var argument = require("../argument/index");
+var argument = require("../param/index");
 var constraint = require("../constraint/index");
 var instance = require("../instance/index");
 var declaration = require("../declaration/index");
@@ -7,6 +7,7 @@ var javascript = require("../javascript/index");
 var statement = require("../statement/index");
 var literal = require("../literal/index");
 var grammar = require("../grammar/index");
+var param = require("../param/index");
 var value = require("../value/index");
 var utils = require("../utils/index");
 var parser = require("../parser/index");
@@ -675,7 +676,7 @@ EPromptoBuilder.prototype.exitCodeArgument = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitArgument_list = function(ctx) {
-    var items = new grammar.ArgumentList();
+    var items = new param.ParameterList();
     ctx.argument().forEach(function(r) {
         var item = this.getNodeValue(r);
         items.add(item);

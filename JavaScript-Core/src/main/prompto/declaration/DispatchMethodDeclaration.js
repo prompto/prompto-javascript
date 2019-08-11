@@ -12,9 +12,9 @@ var AnyType = require("../type/AnyType").AnyType;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-    UnresolvedParameter = require("../argument/UnresolvedParameter").UnresolvedParameter;
-    CategoryParameter = require("../argument/CategoryParameter").CategoryParameter;
-    AttributeParameter = require("../argument/AttributeParameter").AttributeParameter;
+    UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
+    CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+    AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 };
 
 

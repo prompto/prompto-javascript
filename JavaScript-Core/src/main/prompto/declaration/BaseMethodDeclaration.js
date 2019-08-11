@@ -1,5 +1,5 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var ParameterList = require("../param/ParameterList").ParameterList;
 var CategoryType = null;
 var ArgumentAssignmentList = require("../grammar/ArgumentAssignmentList").ArgumentAssignmentList;
 var ArgumentAssignment = require("../grammar/ArgumentAssignment").ArgumentAssignment;
@@ -12,7 +12,7 @@ exports.resolve = function() {
 
 function BaseMethodDeclaration(id, args, returnType) {
 	BaseDeclaration.call(this, id);
-    this.args = args || new ArgumentList();
+    this.args = args || new ParameterList();
 	this.returnType = returnType || null;
     this.memberOf = null;
 	this.closureOf = null;

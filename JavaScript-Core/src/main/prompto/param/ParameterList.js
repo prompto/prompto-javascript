@@ -1,7 +1,7 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
-var CodeParameter = require("../argument/CodeParameter").CodeParameter;
+var CodeParameter = require("./CodeParameter").CodeParameter;
 
-function ArgumentList() {
+function ParameterList() {
 	ObjectList.call(this);
     for (var i=0; i < arguments.length; i++) {
 		this.add(arguments[i]);
@@ -9,28 +9,28 @@ function ArgumentList() {
 	return this;
 }
 
-ArgumentList.prototype = Object.create(ObjectList.prototype);
-ArgumentList.prototype.constructor = ArgumentList;
+ParameterList.prototype = Object.create(ObjectList.prototype);
+ParameterList.prototype.constructor = ParameterList;
 
-ArgumentList.prototype.register = function(context) {
+ParameterList.prototype.register = function(context) {
     this.forEach(function(arg) {
         arg.register(context);
     });
 };
 
-ArgumentList.prototype.check = function(context) {
+ParameterList.prototype.check = function(context) {
     this.forEach(function(arg) {
         arg.check(context);
     });
 };
 
-ArgumentList.prototype.declare = function(transpiler) {
+ParameterList.prototype.declare = function(transpiler) {
     this.forEach(function(arg) {
         arg.declare(transpiler);
     });
 };
 
-ArgumentList.prototype.find = function(name) {
+ParameterList.prototype.find = function(name) {
 	for(var i=0;i<this.length;i++) {
 		if(name===this[i].name) {
 			return this[i];
@@ -39,13 +39,13 @@ ArgumentList.prototype.find = function(name) {
 	return null;
 };
 
-ArgumentList.prototype.toDialect = function(writer) {
+ParameterList.prototype.toDialect = function(writer) {
     if(this.length==0)
         return;
     writer.toDialect(this);
 };
 
-ArgumentList.prototype.toEDialect = function(writer) {
+ParameterList.prototype.toEDialect = function(writer) {
     writer.append("receiving ");
     for(var i=0;i<this.length-1;i++) {
         this[i].toDialect(writer);
@@ -59,7 +59,7 @@ ArgumentList.prototype.toEDialect = function(writer) {
     writer.append(" ");
 };
 
-ArgumentList.prototype.toODialect = function(writer) {
+ParameterList.prototype.toODialect = function(writer) {
     if(this.length>0) {
         this.forEach(function(arg) {
             arg.toDialect(writer);
@@ -69,11 +69,11 @@ ArgumentList.prototype.toODialect = function(writer) {
     }
 };
 
-ArgumentList.prototype.toMDialect = function(writer) {
+ParameterList.prototype.toMDialect = function(writer) {
     this.toODialect(writer);
 };
 
-ArgumentList.prototype.transpile = function(transpiler) {
+ParameterList.prototype.transpile = function(transpiler) {
     var args = this.filter(function(arg) {
         return !(arg instanceof CodeParameter);
     })
@@ -86,4 +86,4 @@ ArgumentList.prototype.transpile = function(transpiler) {
     }
 };
 
-exports.ArgumentList = ArgumentList;
+exports.ParameterList = ParameterList;
