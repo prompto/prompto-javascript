@@ -63,30 +63,30 @@ ArgumentList.prototype.find = function(name) {
 
 ArgumentList.prototype.makeArguments = function(context, declaration) {
     var local = new ArgumentList(this);
-	var assignments = new ArgumentList();
+	var args = new ArgumentList();
 	for(var i=0; i<declaration.parameters.length; i++) {
-	    var argument = declaration.parameters[i];
-        var assignment = null;
-        var index = local.findIndex(argument.name);
+	    var parameter = declaration.parameters[i];
+        var argument = null;
+        var index = local.findIndex(parameter.name);
 	    if(index<0 && i==0 && this.length>0 && this[0].parameter==null)
 	        index = 0;
 	    if(index>=0) {
-            assignment = local[index];
+            argument = local[index];
             local.splice(index, 1);
         }
-        if(assignment==null) {
-            if (argument.defaultExpression != null)
-                assignments.push(new Argument(argument, argument.defaultExpression));
+        if(argument==null) {
+            if (parameter.defaultExpression != null)
+                args.push(new Argument(parameter, parameter.defaultExpression));
             else
-                throw new SyntaxError("Missing argument:" + argument.name);
+                throw new SyntaxError("Missing argument:" + parameter.name);
         } else {
-            var expression = new ContextualExpression(context, assignment.expression);
-            assignments.push(new Argument(argument, expression));
+            var expression = new ContextualExpression(context, argument.expression);
+            args.push(new Argument(parameter, expression));
         }
     }
     if(local.length > 0)
         throw new SyntaxError("Method has no argument:" + local[0].name);
-	return assignments;
+	return args;
 };
 
 
