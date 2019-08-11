@@ -19,7 +19,7 @@ OperatorMethodDeclaration.prototype.memberCheck = function(declaration, context)
 
 OperatorMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("def operator ").append(this.operator.token).append(" (");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
@@ -32,7 +32,7 @@ OperatorMethodDeclaration.prototype.toMDialect = function(writer) {
 
 OperatorMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ").append(this.operator.token).append(" as operator ");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
@@ -49,7 +49,7 @@ OperatorMethodDeclaration.prototype.toODialect = function(writer) {
         writer.append(" ");
     }
     writer.append("operator ").append(this.operator.token).append(" (");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     writer.append(") {").newLine().indent();
     this.statements.toDialect(writer);
     writer.dedent().append("}").newLine();

@@ -117,7 +117,7 @@ EPromptoBuilder.prototype.exitTypeIdentifier = function(ctx) {
 
 EPromptoBuilder.prototype.exitMethodCallExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp1 || ctx.exp2);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	var call = new statement.UnresolvedCall(exp, args);
 	this.setNodeValue(ctx, call);
 };
@@ -804,7 +804,7 @@ EPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
 
 EPromptoBuilder.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
  	var exp = this.getNodeValue(ctx.exp);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
     if (name!=null || stmts!=null)
@@ -891,7 +891,7 @@ EPromptoBuilder.prototype.exitStatement_list = function(ctx) {
 EPromptoBuilder.prototype.exitAbstract_method_declaration = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, type));
 };
 
@@ -899,7 +899,7 @@ EPromptoBuilder.prototype.exitAbstract_method_declaration = function(ctx) {
 EPromptoBuilder.prototype.exitConcrete_method_declaration = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	var stmts = this.getNodeValue(ctx.stmts);
 	this.setNodeValue(ctx, new declaration.ConcreteMethodDeclaration(name, args, type, stmts));
 };
@@ -925,7 +925,7 @@ EPromptoBuilder.prototype.exitMethod_identifier = function(ctx) {
 EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
     var copyFrom = this.getNodeValue(ctx.copyExp) || null;
-	var args = this.getNodeValue(ctx.args) || null;
+	var args = this.getNodeValue(ctx.parameters) || null;
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
         if(args===null) {
@@ -939,7 +939,7 @@ EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
 
 EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
-	var args = this.getNodeValue(ctx.args) || null;
+	var args = this.getNodeValue(ctx.parameters) || null;
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
         if(args===null) {
@@ -1245,7 +1245,7 @@ EPromptoBuilder.prototype.exitJavascript_native_statement = function(ctx) {
 EPromptoBuilder.prototype.exitNative_method_declaration = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	var stmts = this.getNodeValue(ctx.stmts);
 	var decl = new declaration.NativeMethodDeclaration(name, args, type, stmts);
 	this.setNodeValue(ctx, decl);
@@ -1278,7 +1278,7 @@ EPromptoBuilder.prototype.exitJavascriptArgumentListItem = function(ctx) {
 
 EPromptoBuilder.prototype.exitJava_method_expression = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	this.setNodeValue(ctx, new java.JavaMethodExpression(name, args));
 };
 
@@ -1294,7 +1294,7 @@ EPromptoBuilder.prototype.exitJavaScriptMethodExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitJavascript_method_expression = function(ctx) {
 	var id = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
 };
 
@@ -2215,7 +2215,7 @@ EPromptoBuilder.prototype.exitCategory_or_any_type = function(ctx) {
 
 EPromptoBuilder.prototype.exitCategory_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
+	var args = this.getNodeValue(ctx.parameters);
 	var arg = this.getNodeValue(ctx.arg) || null;
 	if(arg!==null) {
 		args.add(arg);
@@ -2474,7 +2474,7 @@ EPromptoBuilder.prototype.exitCsharp_this_expression = function(ctx) {
 
 EPromptoBuilder.prototype.exitCsharp_method_expression = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var args = this.getNodeValue(ctx.args);
+    var args = this.getNodeValue(ctx.parameters);
     this.setNodeValue(ctx, new csharp.CSharpMethodExpression(name, args));
 };
 
@@ -2561,7 +2561,7 @@ EPromptoBuilder.prototype.exitPython_category_binding = function(ctx) {
 
 EPromptoBuilder.prototype.exitPython_method_expression = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var args = this.getNodeValue(ctx.args);
+    var args = this.getNodeValue(ctx.parameters);
     var method = new python.PythonMethodExpression(name, args);
     this.setNodeValue(ctx, method);
 };

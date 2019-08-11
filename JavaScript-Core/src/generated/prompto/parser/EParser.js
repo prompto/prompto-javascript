@@ -2985,7 +2985,7 @@ EParser.prototype.category_symbol = function() {
         this.state = 543;
         localctx.name = this.symbol_identifier();
         this.state = 544;
-        localctx.args = this.with_argument_assignment_list(0);
+        localctx.parameters = this.with_argument_assignment_list(0);
         this.state = 547;
         this._errHandler.sync(this);
         _la = this._input.LA(1);
@@ -5537,7 +5537,7 @@ EParser.prototype.abstract_method_declaration = function() {
             this.state = 829;
             this.match(EParser.RECEIVING);
             this.state = 830;
-            localctx.args = this.full_argument_list();
+            localctx.parameters = this.full_argument_list();
         }
 
         this.state = 835;
@@ -5679,7 +5679,7 @@ EParser.prototype.concrete_method_declaration = function() {
             this.state = 841;
             this.match(EParser.RECEIVING);
             this.state = 842;
-            localctx.args = this.full_argument_list();
+            localctx.parameters = this.full_argument_list();
         }
 
         this.state = 847;
@@ -5870,7 +5870,7 @@ EParser.prototype.native_method_declaration = function() {
             this.state = 865;
             this.match(EParser.RECEIVING);
             this.state = 866;
-            localctx.args = this.full_argument_list();
+            localctx.parameters = this.full_argument_list();
         }
 
         this.state = 871;
@@ -7425,7 +7425,7 @@ EParser.prototype.method_call_statement = function() {
             var la_ = this._interp.adaptivePredict(this._input,45,this._ctx);
             if(la_===1) {
                 this.state = 960;
-                localctx.args = this.argument_assignment_list();
+                localctx.parameters = this.argument_assignment_list();
 
             }
             this.state = 973;
@@ -11355,7 +11355,7 @@ EParser.prototype.expression = function(_p) {
 
             }
             this.state = 1180;
-            localctx.args = this.argument_assignment_list();
+            localctx.parameters = this.argument_assignment_list();
             break;
 
         case 7:
@@ -13311,7 +13311,7 @@ EParser.prototype.constructor_expression = function() {
                 }
 
                 this.state = 1400;
-                localctx.args = this.with_argument_assignment_list(0);
+                localctx.parameters = this.with_argument_assignment_list(0);
                 this.state = 1403;
                 this._errHandler.sync(this);
                 var la_ = this._interp.adaptivePredict(this._input,72,this._ctx);
@@ -13336,7 +13336,7 @@ EParser.prototype.constructor_expression = function() {
             var la_ = this._interp.adaptivePredict(this._input,75,this._ctx);
             if(la_===1) {
                 this.state = 1408;
-                localctx.args = this.with_argument_assignment_list(0);
+                localctx.parameters = this.with_argument_assignment_list(0);
                 this.state = 1411;
                 this._errHandler.sync(this);
                 var la_ = this._interp.adaptivePredict(this._input,74,this._ctx);
@@ -28535,7 +28535,7 @@ EParser.prototype.javascript_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===EParser.LPAR || _la===EParser.LBRAK || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (EParser.BOOLEAN - 52)) | (1 << (EParser.CHARACTER - 52)) | (1 << (EParser.TEXT - 52)) | (1 << (EParser.INTEGER - 52)) | (1 << (EParser.DECIMAL - 52)) | (1 << (EParser.DATE - 52)) | (1 << (EParser.TIME - 52)) | (1 << (EParser.DATETIME - 52)) | (1 << (EParser.PERIOD - 52)) | (1 << (EParser.VERSION - 52)) | (1 << (EParser.UUID - 52)) | (1 << (EParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (EParser.NONE - 124)) | (1 << (EParser.NULL - 124)) | (1 << (EParser.READ - 124)) | (1 << (EParser.SELF - 124)) | (1 << (EParser.TEST - 124)) | (1 << (EParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (EParser.WRITE - 162)) | (1 << (EParser.BOOLEAN_LITERAL - 162)) | (1 << (EParser.CHAR_LITERAL - 162)) | (1 << (EParser.SYMBOL_IDENTIFIER - 162)) | (1 << (EParser.TYPE_IDENTIFIER - 162)) | (1 << (EParser.VARIABLE_IDENTIFIER - 162)) | (1 << (EParser.DOLLAR_IDENTIFIER - 162)) | (1 << (EParser.TEXT_LITERAL - 162)) | (1 << (EParser.INTEGER_LITERAL - 162)) | (1 << (EParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2399;
-            localctx.args = this.javascript_arguments(0);
+            localctx.parameters = this.javascript_arguments(0);
         }
 
         this.state = 2402;
@@ -30059,7 +30059,7 @@ EParser.prototype.python_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===EParser.LPAR || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (EParser.BOOLEAN - 52)) | (1 << (EParser.CHARACTER - 52)) | (1 << (EParser.TEXT - 52)) | (1 << (EParser.INTEGER - 52)) | (1 << (EParser.DECIMAL - 52)) | (1 << (EParser.DATE - 52)) | (1 << (EParser.TIME - 52)) | (1 << (EParser.DATETIME - 52)) | (1 << (EParser.PERIOD - 52)) | (1 << (EParser.VERSION - 52)) | (1 << (EParser.UUID - 52)) | (1 << (EParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (EParser.NONE - 124)) | (1 << (EParser.NULL - 124)) | (1 << (EParser.READ - 124)) | (1 << (EParser.SELF - 124)) | (1 << (EParser.TEST - 124)) | (1 << (EParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (EParser.WRITE - 162)) | (1 << (EParser.BOOLEAN_LITERAL - 162)) | (1 << (EParser.CHAR_LITERAL - 162)) | (1 << (EParser.SYMBOL_IDENTIFIER - 162)) | (1 << (EParser.TYPE_IDENTIFIER - 162)) | (1 << (EParser.VARIABLE_IDENTIFIER - 162)) | (1 << (EParser.DOLLAR_IDENTIFIER - 162)) | (1 << (EParser.TEXT_LITERAL - 162)) | (1 << (EParser.INTEGER_LITERAL - 162)) | (1 << (EParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2468;
-            localctx.args = this.python_argument_list();
+            localctx.parameters = this.python_argument_list();
         }
 
         this.state = 2471;
@@ -31945,7 +31945,7 @@ EParser.prototype.java_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===EParser.LPAR || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (EParser.BOOLEAN - 52)) | (1 << (EParser.CHARACTER - 52)) | (1 << (EParser.TEXT - 52)) | (1 << (EParser.INTEGER - 52)) | (1 << (EParser.DECIMAL - 52)) | (1 << (EParser.DATE - 52)) | (1 << (EParser.TIME - 52)) | (1 << (EParser.DATETIME - 52)) | (1 << (EParser.PERIOD - 52)) | (1 << (EParser.VERSION - 52)) | (1 << (EParser.UUID - 52)) | (1 << (EParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (EParser.NONE - 124)) | (1 << (EParser.NULL - 124)) | (1 << (EParser.READ - 124)) | (1 << (EParser.SELF - 124)) | (1 << (EParser.TEST - 124)) | (1 << (EParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (EParser.WRITE - 162)) | (1 << (EParser.BOOLEAN_LITERAL - 162)) | (1 << (EParser.CHAR_LITERAL - 162)) | (1 << (EParser.SYMBOL_IDENTIFIER - 162)) | (1 << (EParser.TYPE_IDENTIFIER - 162)) | (1 << (EParser.VARIABLE_IDENTIFIER - 162)) | (1 << (EParser.NATIVE_IDENTIFIER - 162)) | (1 << (EParser.DOLLAR_IDENTIFIER - 162)) | (1 << (EParser.TEXT_LITERAL - 162)) | (1 << (EParser.INTEGER_LITERAL - 162)) | (1 << (EParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2572;
-            localctx.args = this.java_arguments(0);
+            localctx.parameters = this.java_arguments(0);
         }
 
         this.state = 2575;
@@ -33648,7 +33648,7 @@ EParser.prototype.csharp_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===EParser.LPAR || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (EParser.BOOLEAN - 52)) | (1 << (EParser.CHARACTER - 52)) | (1 << (EParser.TEXT - 52)) | (1 << (EParser.INTEGER - 52)) | (1 << (EParser.DECIMAL - 52)) | (1 << (EParser.DATE - 52)) | (1 << (EParser.TIME - 52)) | (1 << (EParser.DATETIME - 52)) | (1 << (EParser.PERIOD - 52)) | (1 << (EParser.VERSION - 52)) | (1 << (EParser.UUID - 52)) | (1 << (EParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (EParser.NONE - 124)) | (1 << (EParser.NULL - 124)) | (1 << (EParser.READ - 124)) | (1 << (EParser.SELF - 124)) | (1 << (EParser.TEST - 124)) | (1 << (EParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (EParser.WRITE - 162)) | (1 << (EParser.BOOLEAN_LITERAL - 162)) | (1 << (EParser.CHAR_LITERAL - 162)) | (1 << (EParser.SYMBOL_IDENTIFIER - 162)) | (1 << (EParser.TYPE_IDENTIFIER - 162)) | (1 << (EParser.VARIABLE_IDENTIFIER - 162)) | (1 << (EParser.DOLLAR_IDENTIFIER - 162)) | (1 << (EParser.TEXT_LITERAL - 162)) | (1 << (EParser.INTEGER_LITERAL - 162)) | (1 << (EParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2664;
-            localctx.args = this.csharp_arguments(0);
+            localctx.parameters = this.csharp_arguments(0);
         }
 
         this.state = 2667;

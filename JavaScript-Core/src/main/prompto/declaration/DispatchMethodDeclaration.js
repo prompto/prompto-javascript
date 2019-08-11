@@ -19,7 +19,7 @@ exports.resolve = function() {
 
 
 function DispatchMethodDeclaration(context, call,  declaration, declarations) {
-    BaseMethodDeclaration.call(this, declaration.id, declaration.args, declaration.returnType);
+    BaseMethodDeclaration.call(this, declaration.id, declaration.parameters, declaration.returnType);
     this.context = context;
     this.call = call;
     this.declaration = declaration;
@@ -78,9 +78,9 @@ DispatchMethodDeclaration.prototype.collectCommonArgs = function() {
     for(var i=0; i<this.declarations.length; i++) {
         var declaration = this.declarations[i];
         if(i==0)
-            common = new StrictSet(declaration.args);
+            common = new StrictSet(declaration.parameters);
         else {
-            var current = new StrictSet(declaration.args);
+            var current = new StrictSet(declaration.parameters);
             common = common.intersect(current);
             if(common.length===0)
                 break;
@@ -92,7 +92,7 @@ DispatchMethodDeclaration.prototype.collectCommonArgs = function() {
 DispatchMethodDeclaration.prototype.transpileCall = function(transpiler, declaration) {
     this.call.transpileSelector(transpiler, declaration);
     transpiler.append("(");
-    this.args.forEach(function (arg) {
+    this.parameters.forEach(function (arg) {
         transpiler.append(arg.name);
         transpiler.append(", ");
     }, this);
@@ -109,11 +109,11 @@ DispatchMethodDeclaration.prototype.transpileTest = function(transpiler, common,
             transpiler.append(" && ");
         if(incoming instanceof UnresolvedParameter)
             incoming = incoming.resolved;
-        var outgoing = incoming==null ? declaration.args[0] : this.findCorrespondingArg(transpiler.context, declaration.args, common, incoming);
+        var outgoing = incoming==null ? declaration.parameters[0] : this.findCorrespondingArg(transpiler.context, declaration.parameters, common, incoming);
         if(outgoing instanceof UnresolvedParameter)
             outgoing = outgoing.resolved;
         if(incoming==null)
-            incoming = this.declaration.args[0];
+            incoming = this.declaration.parameters[0];
         if(incoming instanceof UnresolvedParameter)
             incoming = incoming.resolved;
         if(incoming instanceof CategoryParameter && outgoing instanceof CategoryParameter) {

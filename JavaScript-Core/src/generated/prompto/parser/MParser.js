@@ -2864,7 +2864,7 @@ MParser.prototype.category_symbol = function() {
         _la = this._input.LA(1);
         if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (MParser.LPAR - 20)) | (1 << (MParser.LBRAK - 20)) | (1 << (MParser.LCURL - 20)) | (1 << (MParser.MINUS - 20)) | (1 << (MParser.LT - 20)) | (1 << (MParser.LTGT - 20)) | (1 << (MParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 63)) & ~0x1f) == 0 && ((1 << (_la - 63)) & ((1 << (MParser.CODE - 63)) | (1 << (MParser.DOCUMENT - 63)) | (1 << (MParser.BLOB - 63)))) !== 0) || ((((_la - 102)) & ~0x1f) == 0 && ((1 << (_la - 102)) & ((1 << (MParser.EXECUTE - 102)) | (1 << (MParser.FETCH - 102)) | (1 << (MParser.MUTABLE - 102)) | (1 << (MParser.NONE - 102)) | (1 << (MParser.NOT - 102)))) !== 0) || ((((_la - 137)) & ~0x1f) == 0 && ((1 << (_la - 137)) & ((1 << (MParser.READ - 137)) | (1 << (MParser.SELF - 137)) | (1 << (MParser.SORTED - 137)) | (1 << (MParser.THIS - 137)) | (1 << (MParser.BOOLEAN_LITERAL - 137)) | (1 << (MParser.CHAR_LITERAL - 137)) | (1 << (MParser.MIN_INTEGER - 137)) | (1 << (MParser.MAX_INTEGER - 137)) | (1 << (MParser.SYMBOL_IDENTIFIER - 137)) | (1 << (MParser.TYPE_IDENTIFIER - 137)))) !== 0) || ((((_la - 169)) & ~0x1f) == 0 && ((1 << (_la - 169)) & ((1 << (MParser.VARIABLE_IDENTIFIER - 169)) | (1 << (MParser.TEXT_LITERAL - 169)) | (1 << (MParser.UUID_LITERAL - 169)) | (1 << (MParser.INTEGER_LITERAL - 169)) | (1 << (MParser.HEXA_LITERAL - 169)) | (1 << (MParser.DECIMAL_LITERAL - 169)) | (1 << (MParser.DATETIME_LITERAL - 169)) | (1 << (MParser.TIME_LITERAL - 169)) | (1 << (MParser.DATE_LITERAL - 169)) | (1 << (MParser.PERIOD_LITERAL - 169)) | (1 << (MParser.VERSION_LITERAL - 169)))) !== 0)) {
             this.state = 531;
-            localctx.args = this.argument_assignment_list(0);
+            localctx.parameters = this.argument_assignment_list(0);
         }
 
         this.state = 534;
@@ -5057,7 +5057,7 @@ MParser.prototype.abstract_method_declaration = function() {
         _la = this._input.LA(1);
         if(_la===MParser.CODE || _la===MParser.MUTABLE || _la===MParser.VARIABLE_IDENTIFIER) {
             this.state = 768;
-            localctx.args = this.argument_list();
+            localctx.parameters = this.argument_list();
         }
 
         this.state = 771;
@@ -5189,7 +5189,7 @@ MParser.prototype.concrete_method_declaration = function() {
         _la = this._input.LA(1);
         if(_la===MParser.CODE || _la===MParser.MUTABLE || _la===MParser.VARIABLE_IDENTIFIER) {
             this.state = 779;
-            localctx.args = this.argument_list();
+            localctx.parameters = this.argument_list();
         }
 
         this.state = 782;
@@ -5395,7 +5395,7 @@ MParser.prototype.native_method_declaration = function() {
         _la = this._input.LA(1);
         if(_la===MParser.CODE || _la===MParser.MUTABLE || _la===MParser.VARIABLE_IDENTIFIER) {
             this.state = 801;
-            localctx.args = this.argument_list();
+            localctx.parameters = this.argument_list();
         }
 
         this.state = 804;
@@ -6853,7 +6853,7 @@ MParser.prototype.method_call_expression = function() {
         _la = this._input.LA(1);
         if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (MParser.LPAR - 20)) | (1 << (MParser.LBRAK - 20)) | (1 << (MParser.LCURL - 20)) | (1 << (MParser.MINUS - 20)) | (1 << (MParser.LT - 20)) | (1 << (MParser.LTGT - 20)) | (1 << (MParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 63)) & ~0x1f) == 0 && ((1 << (_la - 63)) & ((1 << (MParser.CODE - 63)) | (1 << (MParser.DOCUMENT - 63)) | (1 << (MParser.BLOB - 63)))) !== 0) || ((((_la - 102)) & ~0x1f) == 0 && ((1 << (_la - 102)) & ((1 << (MParser.EXECUTE - 102)) | (1 << (MParser.FETCH - 102)) | (1 << (MParser.MUTABLE - 102)) | (1 << (MParser.NONE - 102)) | (1 << (MParser.NOT - 102)))) !== 0) || ((((_la - 137)) & ~0x1f) == 0 && ((1 << (_la - 137)) & ((1 << (MParser.READ - 137)) | (1 << (MParser.SELF - 137)) | (1 << (MParser.SORTED - 137)) | (1 << (MParser.THIS - 137)) | (1 << (MParser.BOOLEAN_LITERAL - 137)) | (1 << (MParser.CHAR_LITERAL - 137)) | (1 << (MParser.MIN_INTEGER - 137)) | (1 << (MParser.MAX_INTEGER - 137)) | (1 << (MParser.SYMBOL_IDENTIFIER - 137)) | (1 << (MParser.TYPE_IDENTIFIER - 137)))) !== 0) || ((((_la - 169)) & ~0x1f) == 0 && ((1 << (_la - 169)) & ((1 << (MParser.VARIABLE_IDENTIFIER - 169)) | (1 << (MParser.TEXT_LITERAL - 169)) | (1 << (MParser.UUID_LITERAL - 169)) | (1 << (MParser.INTEGER_LITERAL - 169)) | (1 << (MParser.HEXA_LITERAL - 169)) | (1 << (MParser.DECIMAL_LITERAL - 169)) | (1 << (MParser.DATETIME_LITERAL - 169)) | (1 << (MParser.TIME_LITERAL - 169)) | (1 << (MParser.DATE_LITERAL - 169)) | (1 << (MParser.PERIOD_LITERAL - 169)) | (1 << (MParser.VERSION_LITERAL - 169)))) !== 0)) {
             this.state = 903;
-            localctx.args = this.argument_assignment_list(0);
+            localctx.parameters = this.argument_assignment_list(0);
         }
 
         this.state = 906;
@@ -12278,7 +12278,7 @@ MParser.prototype.constructor_expression = function() {
                 this.state = 1316;
                 this.match(MParser.COMMA);
                 this.state = 1317;
-                localctx.args = this.argument_assignment_list(0);
+                localctx.parameters = this.argument_assignment_list(0);
             }
 
             this.state = 1320;
@@ -12297,7 +12297,7 @@ MParser.prototype.constructor_expression = function() {
             _la = this._input.LA(1);
             if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (MParser.LPAR - 20)) | (1 << (MParser.LBRAK - 20)) | (1 << (MParser.LCURL - 20)) | (1 << (MParser.MINUS - 20)) | (1 << (MParser.LT - 20)) | (1 << (MParser.LTGT - 20)) | (1 << (MParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 63)) & ~0x1f) == 0 && ((1 << (_la - 63)) & ((1 << (MParser.CODE - 63)) | (1 << (MParser.DOCUMENT - 63)) | (1 << (MParser.BLOB - 63)))) !== 0) || ((((_la - 102)) & ~0x1f) == 0 && ((1 << (_la - 102)) & ((1 << (MParser.EXECUTE - 102)) | (1 << (MParser.FETCH - 102)) | (1 << (MParser.MUTABLE - 102)) | (1 << (MParser.NONE - 102)) | (1 << (MParser.NOT - 102)))) !== 0) || ((((_la - 137)) & ~0x1f) == 0 && ((1 << (_la - 137)) & ((1 << (MParser.READ - 137)) | (1 << (MParser.SELF - 137)) | (1 << (MParser.SORTED - 137)) | (1 << (MParser.THIS - 137)) | (1 << (MParser.BOOLEAN_LITERAL - 137)) | (1 << (MParser.CHAR_LITERAL - 137)) | (1 << (MParser.MIN_INTEGER - 137)) | (1 << (MParser.MAX_INTEGER - 137)) | (1 << (MParser.SYMBOL_IDENTIFIER - 137)) | (1 << (MParser.TYPE_IDENTIFIER - 137)))) !== 0) || ((((_la - 169)) & ~0x1f) == 0 && ((1 << (_la - 169)) & ((1 << (MParser.VARIABLE_IDENTIFIER - 169)) | (1 << (MParser.TEXT_LITERAL - 169)) | (1 << (MParser.UUID_LITERAL - 169)) | (1 << (MParser.INTEGER_LITERAL - 169)) | (1 << (MParser.HEXA_LITERAL - 169)) | (1 << (MParser.DECIMAL_LITERAL - 169)) | (1 << (MParser.DATETIME_LITERAL - 169)) | (1 << (MParser.TIME_LITERAL - 169)) | (1 << (MParser.DATE_LITERAL - 169)) | (1 << (MParser.PERIOD_LITERAL - 169)) | (1 << (MParser.VERSION_LITERAL - 169)))) !== 0)) {
                 this.state = 1324;
-                localctx.args = this.argument_assignment_list(0);
+                localctx.parameters = this.argument_assignment_list(0);
             }
 
             this.state = 1327;
@@ -27335,7 +27335,7 @@ MParser.prototype.javascript_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===MParser.LPAR || _la===MParser.LBRAK || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (MParser.BOOLEAN - 52)) | (1 << (MParser.CHARACTER - 52)) | (1 << (MParser.TEXT - 52)) | (1 << (MParser.INTEGER - 52)) | (1 << (MParser.DECIMAL - 52)) | (1 << (MParser.DATE - 52)) | (1 << (MParser.TIME - 52)) | (1 << (MParser.DATETIME - 52)) | (1 << (MParser.PERIOD - 52)) | (1 << (MParser.VERSION - 52)) | (1 << (MParser.UUID - 52)) | (1 << (MParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (MParser.NONE - 124)) | (1 << (MParser.NULL - 124)) | (1 << (MParser.READ - 124)) | (1 << (MParser.SELF - 124)) | (1 << (MParser.TEST - 124)) | (1 << (MParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (MParser.WRITE - 162)) | (1 << (MParser.BOOLEAN_LITERAL - 162)) | (1 << (MParser.CHAR_LITERAL - 162)) | (1 << (MParser.SYMBOL_IDENTIFIER - 162)) | (1 << (MParser.TYPE_IDENTIFIER - 162)) | (1 << (MParser.VARIABLE_IDENTIFIER - 162)) | (1 << (MParser.DOLLAR_IDENTIFIER - 162)) | (1 << (MParser.TEXT_LITERAL - 162)) | (1 << (MParser.INTEGER_LITERAL - 162)) | (1 << (MParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2291;
-            localctx.args = this.javascript_arguments(0);
+            localctx.parameters = this.javascript_arguments(0);
         }
 
         this.state = 2294;
@@ -28859,7 +28859,7 @@ MParser.prototype.python_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===MParser.LPAR || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (MParser.BOOLEAN - 52)) | (1 << (MParser.CHARACTER - 52)) | (1 << (MParser.TEXT - 52)) | (1 << (MParser.INTEGER - 52)) | (1 << (MParser.DECIMAL - 52)) | (1 << (MParser.DATE - 52)) | (1 << (MParser.TIME - 52)) | (1 << (MParser.DATETIME - 52)) | (1 << (MParser.PERIOD - 52)) | (1 << (MParser.VERSION - 52)) | (1 << (MParser.UUID - 52)) | (1 << (MParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (MParser.NONE - 124)) | (1 << (MParser.NULL - 124)) | (1 << (MParser.READ - 124)) | (1 << (MParser.SELF - 124)) | (1 << (MParser.TEST - 124)) | (1 << (MParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (MParser.WRITE - 162)) | (1 << (MParser.BOOLEAN_LITERAL - 162)) | (1 << (MParser.CHAR_LITERAL - 162)) | (1 << (MParser.SYMBOL_IDENTIFIER - 162)) | (1 << (MParser.TYPE_IDENTIFIER - 162)) | (1 << (MParser.VARIABLE_IDENTIFIER - 162)) | (1 << (MParser.DOLLAR_IDENTIFIER - 162)) | (1 << (MParser.TEXT_LITERAL - 162)) | (1 << (MParser.INTEGER_LITERAL - 162)) | (1 << (MParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2360;
-            localctx.args = this.python_argument_list();
+            localctx.parameters = this.python_argument_list();
         }
 
         this.state = 2363;
@@ -30745,7 +30745,7 @@ MParser.prototype.java_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===MParser.LPAR || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (MParser.BOOLEAN - 52)) | (1 << (MParser.CHARACTER - 52)) | (1 << (MParser.TEXT - 52)) | (1 << (MParser.INTEGER - 52)) | (1 << (MParser.DECIMAL - 52)) | (1 << (MParser.DATE - 52)) | (1 << (MParser.TIME - 52)) | (1 << (MParser.DATETIME - 52)) | (1 << (MParser.PERIOD - 52)) | (1 << (MParser.VERSION - 52)) | (1 << (MParser.UUID - 52)) | (1 << (MParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (MParser.NONE - 124)) | (1 << (MParser.NULL - 124)) | (1 << (MParser.READ - 124)) | (1 << (MParser.SELF - 124)) | (1 << (MParser.TEST - 124)) | (1 << (MParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (MParser.WRITE - 162)) | (1 << (MParser.BOOLEAN_LITERAL - 162)) | (1 << (MParser.CHAR_LITERAL - 162)) | (1 << (MParser.SYMBOL_IDENTIFIER - 162)) | (1 << (MParser.TYPE_IDENTIFIER - 162)) | (1 << (MParser.VARIABLE_IDENTIFIER - 162)) | (1 << (MParser.NATIVE_IDENTIFIER - 162)) | (1 << (MParser.DOLLAR_IDENTIFIER - 162)) | (1 << (MParser.TEXT_LITERAL - 162)) | (1 << (MParser.INTEGER_LITERAL - 162)) | (1 << (MParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2464;
-            localctx.args = this.java_arguments(0);
+            localctx.parameters = this.java_arguments(0);
         }
 
         this.state = 2467;
@@ -32448,7 +32448,7 @@ MParser.prototype.csharp_method_expression = function() {
         _la = this._input.LA(1);
         if(_la===MParser.LPAR || ((((_la - 52)) & ~0x1f) == 0 && ((1 << (_la - 52)) & ((1 << (MParser.BOOLEAN - 52)) | (1 << (MParser.CHARACTER - 52)) | (1 << (MParser.TEXT - 52)) | (1 << (MParser.INTEGER - 52)) | (1 << (MParser.DECIMAL - 52)) | (1 << (MParser.DATE - 52)) | (1 << (MParser.TIME - 52)) | (1 << (MParser.DATETIME - 52)) | (1 << (MParser.PERIOD - 52)) | (1 << (MParser.VERSION - 52)) | (1 << (MParser.UUID - 52)) | (1 << (MParser.HTML - 52)))) !== 0) || ((((_la - 124)) & ~0x1f) == 0 && ((1 << (_la - 124)) & ((1 << (MParser.NONE - 124)) | (1 << (MParser.NULL - 124)) | (1 << (MParser.READ - 124)) | (1 << (MParser.SELF - 124)) | (1 << (MParser.TEST - 124)) | (1 << (MParser.THIS - 124)))) !== 0) || ((((_la - 162)) & ~0x1f) == 0 && ((1 << (_la - 162)) & ((1 << (MParser.WRITE - 162)) | (1 << (MParser.BOOLEAN_LITERAL - 162)) | (1 << (MParser.CHAR_LITERAL - 162)) | (1 << (MParser.SYMBOL_IDENTIFIER - 162)) | (1 << (MParser.TYPE_IDENTIFIER - 162)) | (1 << (MParser.VARIABLE_IDENTIFIER - 162)) | (1 << (MParser.DOLLAR_IDENTIFIER - 162)) | (1 << (MParser.TEXT_LITERAL - 162)) | (1 << (MParser.INTEGER_LITERAL - 162)) | (1 << (MParser.DECIMAL_LITERAL - 162)))) !== 0)) {
             this.state = 2556;
-            localctx.args = this.csharp_arguments(0);
+            localctx.parameters = this.csharp_arguments(0);
         }
 
         this.state = 2559;

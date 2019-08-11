@@ -16,8 +16,8 @@ AbstractMethodDeclaration.prototype.memberCheck = function(declaration, context)
 };
 
 AbstractMethodDeclaration.prototype.check = function(context, isStart) {
-	if(this.args!=null) {
-		this.args.check(context);
+	if(this.parameters!=null) {
+		this.parameters.check(context);
 	}
 	if(isStart) {
 	    var local = context.newLocalContext();
@@ -38,7 +38,7 @@ AbstractMethodDeclaration.prototype.toMDialect = function(writer) {
     writer.append("abstract def ");
     writer.append(this.name);
     writer.append(" (");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     writer.append(")");
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("->");
@@ -50,7 +50,7 @@ AbstractMethodDeclaration.prototype.toEDialect = function(writer) {
     writer.append("define ");
     writer.append(this.name);
     writer.append(" as abstract method ");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     if(this.returnType!=null && this.returnType!=VoidType.instance) {
         writer.append("returning ");
         this.returnType.toDialect(writer);
@@ -66,7 +66,7 @@ AbstractMethodDeclaration.prototype.toODialect = function(writer) {
     writer.append("method ");
     writer.append(this.name);
     writer.append(" (");
-    this.args.toDialect(writer);
+    this.parameters.toDialect(writer);
     writer.append(");");
 }
 

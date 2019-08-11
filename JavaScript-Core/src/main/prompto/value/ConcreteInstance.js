@@ -298,7 +298,7 @@ ConcreteInstance.prototype.interpretOperator = function(context, value, operator
     context = context.newInstanceContext(this);
     var local = context.newChildContext();
     decl.registerArguments(local);
-    var arg = decl.args[0];
+    var arg = decl.parameters[0];
     local.setValue(arg.id, value);
     return decl.interpret(local);
 };
