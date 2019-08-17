@@ -9,6 +9,8 @@ var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration"
 var MethodDeclarationMap = null;
 var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
+var ArrowDeclaration = require("../declaration/ArrowDeclaration").ArrowDeclaration;
+var ArrowValue = require("../value/ArrowValue").ArrowValue;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var InstanceContext = null;
@@ -307,8 +309,10 @@ MethodCall.prototype.findDeclaration = function(context) {
 		var o = context.getValue(this.selector.id);
 		if(o instanceof ClosureValue) {
 			return new ClosureDeclaration(o);
-		}
-	} catch (e) {
+		} else if(o instanceof ArrowValue) {
+            return new ArrowDeclaration(o);
+        }
+    } catch (e) {
 		if(!(e instanceof PromptoError)) {
 			throw e;
 		}

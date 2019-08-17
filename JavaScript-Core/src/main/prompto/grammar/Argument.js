@@ -1,9 +1,12 @@
 var Section = require("../parser/Section").Section;
 var CategoryType = null;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var Variable = require("../runtime/Variable").Variable;
 var VoidType = require("../type/VoidType").VoidType;
+var MethodType = require("../type/MethodType").MethodType;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Specificity = require("../grammar/Specificity").Specificity;
 
@@ -157,20 +160,21 @@ Argument.prototype.resolve = function(context, methodDeclaration, checkInstance,
 	var name = this.parameter.name;
 	var expression = this.expression;
 	var argument = methodDeclaration.parameters.find(name);
-	var required = argument.getType(context);
-	var actual = expression.check(context.getCallingContext());
-	if(checkInstance && actual instanceof CategoryType) {
+	var requiredType = argument.getType(context);
+    var checkArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+    var actualType = checkArrow ? requiredType.checkArrowExpression(expression) : expression.check(context.getCallingContext());
+	if(checkInstance && actualType instanceof CategoryType) {
 		var value = expression.interpret(context.getCallingContext());
 		if(value && value.getType) {
-			actual = value.getType();
+            actualType = value.getType();
 		}
 	}
-	var assignable = required.isAssignableFrom(context, actual);
+	var assignable = requiredType.isAssignableFrom(context, actualType);
 	// when in dispatch, allow derived
 	if(!assignable && allowDerived)
-        assignable = actual.isAssignableFrom(context, required);
+        assignable = actual.isAssignableFrom(context, requiredType);
 	// try passing member
-	if(!assignable && (actual instanceof CategoryType)) {
+	if(!assignable && (actualType instanceof CategoryType)) {
 		expression = new MemberSelector(expression, this.parameter.id);
 	}
 	return expression;
@@ -196,28 +200,28 @@ Argument.prototype.isAssignableToArgument = function(context, argument, declarat
     return this.computeSpecificity(context, argument, declaration, checkInstance, allowDerived)!==Specificity.INCOMPATIBLE;
 };
 
-Argument.prototype.computeSpecificity = function(context, argument, declaration, checkInstance, allowDerived) {
+Argument.prototype.computeSpecificity = function(context, parameter, declaration, checkInstance, allowDerived) {
     try {
-        var required = argument.getType(context);
-        var actual = this.expression.check(context);
+        var requiredType = parameter.getType(context);
+        var actualType = this.checkActualType(context, requiredType, this.expression, checkInstance);
         // retrieve actual runtime type
-        if(checkInstance && (actual instanceof CategoryType)) {
+        if(checkInstance && (actualType instanceof CategoryType)) {
             var value = this.expression.interpret(context.getCallingContext());
             if(value && value.getType) {
-                actual = value.getType();
+                actualType = value.getType();
             }
         }
-        if(actual.equals(required)) {
+        if(actualType.equals(requiredType)) {
             return Specificity.EXACT;
-        } else if(required.isAssignableFrom(context, actual)) {
+        } else if(requiredType.isAssignableFrom(context, actualType)) {
             return Specificity.INHERITED;
-        } else if(allowDerived && actual.isAssignableFrom(context, required)) {
+        } else if(allowDerived && actualType.isAssignableFrom(context, requiredType)) {
             return Specificity.DERIVED;
         }
-        actual = this.resolve(context, declaration, checkInstance).check(context);
-        if(required.isAssignableFrom(context, actual)) {
+        actualType = this.resolve(context, declaration, checkInstance).check(context);
+        if(requiredType.isAssignableFrom(context, actualType)) {
             return Specificity.IMPLICIT;
-        } else if(allowDerived && actual.isAssignableFrom(context, required)) {
+        } else if(allowDerived && actualType.isAssignableFrom(context, requiredType)) {
             return Specificity.IMPLICIT;
         }
     } catch(error) {
@@ -226,6 +230,34 @@ Argument.prototype.computeSpecificity = function(context, argument, declaration,
         }
     }
     return Specificity.INCOMPATIBLE;
+};
+
+Argument.prototype.checkActualType = function(context, requiredType, expression, checkInstance) {
+    var isArrow = this.isArrowExpression(requiredType, expression);
+    var actualType = isArrow ? this.checkArrowExpression(context, requiredType, expression) : expression.check(context.getCallingContext());
+    if(checkInstance && actualType instanceof CategoryType) {
+        var value = expression.interpret(context.getCallingContext());
+        if(value && value.getType)
+            actualType = value.getType();
+    }
+    return actualType;
+};
+
+
+Argument.prototype.isArrowExpression = function(requiredType, expression) {
+    if(!(requiredType instanceof MethodType))
+        return false;
+    if(expression instanceof ArrowExpression)
+        return true;
+    else
+        return expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+}
+
+
+Argument.prototype.checkArrowExpression = function(context, requiredType, expression) {
+    context = expression instanceof ContextualExpression ? expression.calling : context.getCallingContext();
+    var arrow = expression instanceof ArrowExpression ? expression : expression.expression;
+    return requiredType.checkArrowExpression(context, arrow);
 };
 
 exports.Argument = Argument;

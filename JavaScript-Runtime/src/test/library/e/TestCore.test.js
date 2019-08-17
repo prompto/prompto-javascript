@@ -34,11 +34,7 @@ test('Transpiled Any', () => {
 test('Interpreted Attribute', () => {
 	runInterpretedTests('core/attribute.pec');
 });
-/*
-test('Transpiled Attribute', () => {
-	runTranspiledTests('core/attribute.pec');
-});
-*/
+
 test('Interpreted Attributes', () => {
 	runInterpretedTests('core/attributes.pec');
 });

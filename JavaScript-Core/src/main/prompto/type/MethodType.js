@@ -27,6 +27,12 @@ MethodType.prototype.isMoreSpecificThan = function(context, other) {
     return false;
 };
 
+
+MethodType.prototype.checkArrowExpression = function(expression) {
+	return this; // TODO check
+};
+
+
 MethodType.prototype.declare = function(transpiler) {
     // nothing to do
 };

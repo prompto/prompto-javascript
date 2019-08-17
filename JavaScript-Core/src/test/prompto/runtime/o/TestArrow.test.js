@@ -10,6 +10,14 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted ArrowArgument', () => {
+	checkInterpretedOutput('arrow/arrowArgument.poc');
+});
+
+test('Transpiled ArrowArgument', () => {
+	checkTranspiledOutput('arrow/arrowArgument.poc');
+});
+
 test('Interpreted FilterFromList', () => {
 	checkInterpretedOutput('arrow/filterFromList.poc');
 });

@@ -6,7 +6,6 @@ var Variable = require("../runtime/Variable").Variable;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-
 function ArrowExpression(args, argsSuite, arrowSuite) {
     Section.call(this);
     this.args = args;
@@ -20,13 +19,27 @@ ArrowExpression.prototype = Object.create(Section.prototype);
 ArrowExpression.prototype.constructor = ArrowExpression;
 
 
+ArrowExpression.prototype.toString = function(writer) {
+    if(!writer) {
+        var Context = require("../runtime/Context").Context;
+        var CodeWriter = require("../utils/CodeWriter").CodeWriter;
+        writer = new CodeWriter(Dialect.E, Context.newGlobalContext());
+    }
+    try {
+        this.toDialect(writer);
+        return writer.toString();
+    } catch(e) {
+        return "";
+    }
+}
+
 ArrowExpression.prototype.check = function(context) {
     throw new Error("Unsupported operation");
 };
 
 
 ArrowExpression.prototype.interpret = function(context) {
-    throw new Error("Unsupported operation");
+    return this.statements.interpret(context);
 };
 
 

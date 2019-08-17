@@ -1,5 +1,9 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('ArrowArgument', () => {
+	compareResourceOEO('arrow/arrowArgument.poc');
+});
+
 test('FilterFromList', () => {
 	compareResourceOEO('arrow/filterFromList.poc');
 });
