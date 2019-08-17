@@ -31,12 +31,9 @@ ParameterList.prototype.declare = function(transpiler) {
 };
 
 ParameterList.prototype.find = function(name) {
-	for(var i=0;i<this.length;i++) {
-		if(name===this[i].name) {
-			return this[i];
-		}
-	}
-	return null;
+    return this.filter(function(param) {
+        return name === param.name;
+    })[0] || null;
 };
 
 ParameterList.prototype.toDialect = function(writer) {

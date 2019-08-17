@@ -134,9 +134,9 @@ ArgumentList.prototype.toMDialect = function(writer) {
 };
 
 
-ArgumentList.prototype.declare = function(transpiler) {
+ArgumentList.prototype.declare = function(transpiler, methodDeclaration) {
     this.forEach(function(arg) {
-        arg.declare(transpiler);
+        arg.declare(transpiler, methodDeclaration);
     });
 };
 

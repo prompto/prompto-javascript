@@ -74,6 +74,21 @@ MethodParameter.prototype.getTranspiledName = function(context) {
     return method.getTranspiledName(context);
 };
 
+
+MethodParameter.prototype.transpileCall = function(transpiler, expression) {
+	if(!this.transpileArrowExpressionCall(transpiler, expression))
+		expression.transpile(transpiler);
+};
+
+MethodParameter.prototype.transpileArrowExpressionCall = function(transpiler, expression) {
+	if(!(expression instanceof ContextualExpression) || !(expression.expression instanceof ArrowExpression))
+		return false;
+	var target = this.getType(transpiler.context);
+	target.transpileArrowExpression(transpiler, expression.expression);
+	return true;
+}
+
+
 MethodParameter.prototype.equals = function(other) {
     return other === this || (other instanceof MethodParameter && this.name === other.name);
 };

@@ -145,7 +145,7 @@ ConstructorExpression.prototype.declare = function(transpiler) {
     if(this.copyFrom)
         this.copyFrom.declare(transpiler);
     if(this.args)
-        this.args.declare(transpiler);
+        this.args.declare(transpiler, null);
 };
 
 ConstructorExpression.prototype.transpile = function(transpiler) {

@@ -33,13 +33,24 @@ ArrowExpression.prototype.toString = function(writer) {
     }
 }
 
-ArrowExpression.prototype.check = function(context) {
-    throw new Error("Unsupported operation");
+ArrowExpression.prototype.check = function(context, returnType) {
+    return this.statements.check(context, returnType || null);
 };
 
 
 ArrowExpression.prototype.interpret = function(context) {
     return this.statements.interpret(context);
+};
+
+
+ArrowExpression.prototype.declare = function(transpiler) {
+    this.statements.declare(transpiler);
+};
+
+
+ArrowExpression.prototype.transpile = function(transpiler) {
+    this.statements.transpile(transpiler);
+    return false;
 };
 
 

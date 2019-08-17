@@ -37,4 +37,23 @@ MethodType.prototype.declare = function(transpiler) {
     // nothing to do
 };
 
+
+MethodType.prototype.declareArrowExpression = function(transpiler, expression) {
+	transpiler = transpiler.newChildTranspiler(null);
+	this.method.registerParameters(transpiler.context);
+	expression.declare(transpiler);
+};
+
+
+MethodType.prototype.transpileArrowExpression = function(transpiler, expression) {
+	transpiler = transpiler.newChildTranspiler(null);
+	transpiler.append("function(");
+	this.method.parameters.transpile(transpiler);
+	transpiler.append(") {");
+	this.method.registerParameters(transpiler.context);
+	expression.transpile(transpiler);
+	transpiler.append("}");
+	transpiler.flush();
+};
+
 exports.MethodType = MethodType;

@@ -92,15 +92,35 @@ Argument.prototype.toEDialect = function(writer) {
 };
 
 
-Argument.prototype.declare = function(transpiler) {
-    if(this._expression)
+Argument.prototype.declare = function(transpiler, methodDeclaration) {
+    if(this._expression && !this.declareArrowExpression(transpiler, methodDeclaration))
     	this._expression.declare(transpiler);
 };
 
-Argument.prototype.transpile = function(transpiler) {
-    this._expression.transpile(transpiler);
+
+Argument.prototype.declareArrowExpression = function(transpiler, methodDeclaration) {
+    if(this.parameter==null || methodDeclaration==null)
+        return false;
+    var parameter = this.findParameter(methodDeclaration);
+    var requiredType = parameter.getType(transpiler.context);
+    var isArrow = requiredType instanceof MethodType && this._expression instanceof ArrowExpression;
+    if(isArrow) {
+        requiredType.declareArrowExpression(transpiler, this._expression);
+        return true;
+    } else
+        return false;
 };
 
+
+Argument.prototype.transpile = function(transpiler, methodDeclaration) {
+    if(this._expression && !this.transpileArrowExpression(transpiler, methodDeclaration))
+        this._expression.transpile(transpiler);
+};
+
+Argument.prototype.transpileArrowExpression = function(transpiler, methodDeclaration) {
+    // TODO Auto-generated method stub
+    return false;
+};
 
 Argument.prototype.toString = function() {
     if(!this._expression) {
@@ -155,12 +175,17 @@ Argument.prototype.toSection = function() {
     }
 };
 
+
+Argument.prototype.findParameter = function(methodDeclaration) {
+    return methodDeclaration.parameters.find(this.parameter.name);
+};
+
+
 Argument.prototype.resolve = function(context, methodDeclaration, checkInstance, allowDerived) {
 	// since we support implicit members, it's time to resolve them
-	var name = this.parameter.name;
 	var expression = this.expression;
-	var argument = methodDeclaration.parameters.find(name);
-	var requiredType = argument.getType(context);
+	var parameter = this.findParameter(methodDeclaration);
+	var requiredType = parameter.getType(context);
     var checkArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
     var actualType = checkArrow ? requiredType.checkArrowExpression(expression) : expression.check(context.getCallingContext());
 	if(checkInstance && actualType instanceof CategoryType) {

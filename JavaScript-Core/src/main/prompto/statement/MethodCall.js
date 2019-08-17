@@ -127,8 +127,6 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 
 
 MethodCall.prototype.declare = function(transpiler) {
-    if (this.args != null)
-        this.args.declare(transpiler);
     var finder = new MethodFinder(transpiler.context, this);
     var declarations = finder.findCompatibleMethods(false, true);
     var first = declarations.size===1 ? declarations.values().next().value : null;
@@ -152,6 +150,8 @@ MethodCall.prototype.declare = function(transpiler) {
 };
 
 MethodCall.prototype.declareDeclaration = function(transpiler, declaration, local) {
+    if (this.args != null)
+        this.args.declare(transpiler, declaration);
     if(declaration instanceof ConcreteMethodDeclaration && declaration.mustBeCheckedInCallContext(transpiler.context)) {
         this.fullDeclareDeclaration(declaration, transpiler, local);
     } else {
