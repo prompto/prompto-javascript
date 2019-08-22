@@ -3,15 +3,11 @@ var Literal = require("./Literal").Literal;
 var IntegerType = require("../type/IntegerType").IntegerType;
 
 function parse(value) {
-	if(typeof(value)=='string') {
-		return parseInt(value);
-	} else {
-		return value;
-	}
+	return parseInt(value);
 }
 
 function IntegerLiteral(text, value) {
-	Literal.call(this, text, new IntegerValue(parse(value)));
+	Literal.call(this, text, new IntegerValue(value || parse(text)));
 	return this;
 }
 

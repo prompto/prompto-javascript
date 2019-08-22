@@ -1361,6 +1361,15 @@ OParserListener.prototype.exitAssign_tuple_statement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#type_literal.
+OParserListener.prototype.enterType_literal = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#type_literal.
+OParserListener.prototype.exitType_literal = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#null_literal.
 OParserListener.prototype.enterNull_literal = function(ctx) {
 };
@@ -2501,6 +2510,15 @@ OParserListener.prototype.enterUUIDLiteral = function(ctx) {
 
 // Exit a parse tree produced by OParser#UUIDLiteral.
 OParserListener.prototype.exitUUIDLiteral = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#TypeLiteral.
+OParserListener.prototype.enterTypeLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#TypeLiteral.
+OParserListener.prototype.exitTypeLiteral = function(ctx) {
 };
 
 

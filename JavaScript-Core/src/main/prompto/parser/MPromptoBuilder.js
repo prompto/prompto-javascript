@@ -185,7 +185,7 @@ MPromptoBuilder.prototype.exitBlobType = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitBooleanLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.getText()));
 };
 
 
@@ -206,32 +206,32 @@ MPromptoBuilder.prototype.exitMaxIntegerLiteral = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitIntegerLiteral = function(ctx) {
-    this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.t.text, ctx.t.text));
+    this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitDecimalLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.DecimalLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.DecimalLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitHexadecimalLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.HexaLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.HexaLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitCharacterLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitDateLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.DateLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.DateLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitDateTimeLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
 };
 
 MPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
@@ -254,17 +254,17 @@ MPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitTextLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.TextLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.TextLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitTimeLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.TimeLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.TimeLiteral(ctx.getText()));
 };
 
 
 MPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.t.text));
+	this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.getText()));
 };
 
 
@@ -274,7 +274,7 @@ MPromptoBuilder.prototype.exitPeriodType = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitVersionLiteral = function(ctx) {
-    this.setNodeValue(ctx, new literal.VersionLiteral(ctx.t.text));
+    this.setNodeValue(ctx, new literal.VersionLiteral(ctx.getText()));
 };
 
 
@@ -784,7 +784,7 @@ MPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
 MPromptoBuilder.prototype.exitMethod_call_expression = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
 	var caller = new expression.UnresolvedIdentifier(name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	this.setNodeValue(ctx, new statement.UnresolvedCall(caller, args));
 };
 
@@ -893,7 +893,7 @@ MPromptoBuilder.prototype.exitStatement_list = function(ctx) {
 MPromptoBuilder.prototype.exitAbstract_method_declaration = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, type));
 };
 
@@ -901,7 +901,7 @@ MPromptoBuilder.prototype.exitAbstract_method_declaration = function(ctx) {
 MPromptoBuilder.prototype.exitConcrete_method_declaration = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	var stmts = this.getNodeValue(ctx.stmts);
 	this.setNodeValue(ctx, new declaration.ConcreteMethodDeclaration(name, args, type, stmts));
 };
@@ -934,14 +934,14 @@ MPromptoBuilder.prototype.exitMethod_Expression = function(ctx) {
 MPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
     var type = this.getNodeValue(ctx.typ);
     var copyFrom = this.getNodeValue(ctx.copyExp) || null;
-    var args = this.getNodeValue(ctx.parameters) || null;
+    var args = this.getNodeValue(ctx.args) || null;
     this.setNodeValue(ctx, new expression.ConstructorExpression(type, copyFrom, args, true));
 };
 
 
 MPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
     var type = this.getNodeValue(ctx.typ);
-    var args = this.getNodeValue(ctx.parameters) || null;
+    var args = this.getNodeValue(ctx.args) || null;
     this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
 };
 
@@ -1243,7 +1243,7 @@ MPromptoBuilder.prototype.exitJavascript_native_statement = function(ctx) {
 MPromptoBuilder.prototype.exitNative_method_declaration = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	var stmts = this.getNodeValue(ctx.stmts);
 	this.setNodeValue(ctx, new declaration.NativeMethodDeclaration(name, args, type, stmts));
 };
@@ -1275,7 +1275,7 @@ MPromptoBuilder.prototype.exitJavascriptArgumentListItem = function(ctx) {
 
 MPromptoBuilder.prototype.exitJava_method_expression = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	this.setNodeValue(ctx, new java.JavaMethodExpression(name, args));
 };
 
@@ -1290,7 +1290,7 @@ MPromptoBuilder.prototype.exitJavaScriptMethodExpression = function(ctx) {
 
 MPromptoBuilder.prototype.exitJavascript_method_expression = function(ctx) {
 	var id = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
 };
 
@@ -1521,7 +1521,7 @@ MPromptoBuilder.prototype.exitKey_token = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitUUIDLiteral = function(ctx) {
-    this.setNodeValue(ctx, new literal.UUIDLiteral(ctx.t.text));
+    this.setNodeValue(ctx, new literal.UUIDLiteral(ctx.getText()));
 };
 
 
@@ -2219,7 +2219,7 @@ MPromptoBuilder.prototype.exitCode_argument = function(ctx) {
 
 MPromptoBuilder.prototype.exitCategory_symbol = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.parameters);
+	var args = this.getNodeValue(ctx.args);
 	this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
 };
 
@@ -2439,7 +2439,7 @@ MPromptoBuilder.prototype.exitCsharp_this_expression = function(ctx) {
 
 MPromptoBuilder.prototype.exitCsharp_method_expression = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var args = this.getNodeValue(ctx.parameters);
+    var args = this.getNodeValue(ctx.args);
     this.setNodeValue(ctx, new csharp.CSharpMethodExpression(name, args));
 };
 
@@ -2528,7 +2528,7 @@ MPromptoBuilder.prototype.exitPython_category_binding = function(ctx) {
 
 MPromptoBuilder.prototype.exitPython_method_expression = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var args = this.getNodeValue(ctx.parameters);
+    var args = this.getNodeValue(ctx.args);
     var method = new python.PythonMethodExpression(name, args);
     this.setNodeValue(ctx, method);
 };

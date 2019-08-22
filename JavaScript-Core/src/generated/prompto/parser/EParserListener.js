@@ -1487,6 +1487,15 @@ EParserListener.prototype.exitDedent = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#type_literal.
+EParserListener.prototype.enterType_literal = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#type_literal.
+EParserListener.prototype.exitType_literal = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#null_literal.
 EParserListener.prototype.enterNull_literal = function(ctx) {
 };
@@ -2618,6 +2627,15 @@ EParserListener.prototype.enterUUIDLiteral = function(ctx) {
 
 // Exit a parse tree produced by EParser#UUIDLiteral.
 EParserListener.prototype.exitUUIDLiteral = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#TypeLiteral.
+EParserListener.prototype.enterTypeLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#TypeLiteral.
+EParserListener.prototype.exitTypeLiteral = function(ctx) {
 };
 
 

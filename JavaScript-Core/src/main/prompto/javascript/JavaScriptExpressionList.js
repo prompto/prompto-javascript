@@ -36,10 +36,9 @@ JavaScriptExpressionList.prototype.transpile = function(transpiler) {
 
 
 JavaScriptExpressionList.prototype.computeArguments = function(context) {
-	var self = this;
-    return this.map(function(arg) {
-        return self.computeArgument(arg, context);
-	});
+	return this.map(function(arg) {
+        return this.computeArgument(arg, context);
+	}, this);
 };
 
 

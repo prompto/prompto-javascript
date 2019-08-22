@@ -1343,6 +1343,15 @@ MParserListener.prototype.exitDedent = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#type_literal.
+MParserListener.prototype.enterType_literal = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#type_literal.
+MParserListener.prototype.exitType_literal = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#null_literal.
 MParserListener.prototype.enterNull_literal = function(ctx) {
 };
@@ -2474,6 +2483,15 @@ MParserListener.prototype.enterUUIDLiteral = function(ctx) {
 
 // Exit a parse tree produced by MParser#UUIDLiteral.
 MParserListener.prototype.exitUUIDLiteral = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#TypeLiteral.
+MParserListener.prototype.enterTypeLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#TypeLiteral.
+MParserListener.prototype.exitTypeLiteral = function(ctx) {
 };
 
 
