@@ -31,6 +31,16 @@ BaseStatement.prototype.declare = function(transpiler) {
     throw new Error("Declare not implemented by " + this.constructor.name);
 };
 
+BaseStatement.prototype.declareParent = function(transpiler) {
+    this.declare(transpiler);
+};
+
+
+BaseStatement.prototype.transpileParent = function(transpiler) {
+    this.transpile(transpiler);
+};
+
+
 BaseStatement.prototype.locateSectionAtLine = function(line) {
     return this;
 };
