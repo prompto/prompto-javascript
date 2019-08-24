@@ -195,15 +195,23 @@ MethodSelector.prototype.newInstanceContext = function(context) {
 	if(value==null || value==NullValue.instance) {
 		throw new NullReferenceError();
 	}
-    if(value instanceof TypeValue && value.value instanceof CategoryType)
-        value = context.loadSingleton(value.value);
-	if(value instanceof ConcreteInstance || value instanceof NativeInstance) {
+    if(value instanceof TypeValue) {
+        var type = value.value;
+        if(type instanceof CategoryType) {
+            var decl = type.getDeclaration(context);
+            if(decl instanceof SingletonCategoryDeclaration) {
+                value = context.loadSingleton(value.value);
+            }
+        }
+    }
+    if(value instanceof TypeValue) {
+        return context.newChildContext();
+    } else if(value instanceof ConcreteInstance || value instanceof NativeInstance) {
         context = context.newInstanceContext(value, null);
         return context.newChildContext();
     } else {
         context = context.newBuiltInContext(value);
         return context.newChildContext();
-
     }
 };
 

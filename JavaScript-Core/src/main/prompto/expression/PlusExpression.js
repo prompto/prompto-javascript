@@ -1,10 +1,15 @@
+var Expression = require("./Expression").Expression;
 var Value = require("../value/Value").Value;
 
 function PlusExpression(left, right) {
+	Expression.call(this);
 	this.left = left;
 	this.right = right;
 	return this;
 }
+
+PlusExpression.prototype = Object.create(Expression.prototype);
+PlusExpression.prototype.constructor = PlusExpression;
 
 PlusExpression.prototype.toString = function() {
 	return this.left.toString() + " + " + this.right.toString();

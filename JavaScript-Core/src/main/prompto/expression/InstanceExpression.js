@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var Variable = require("../runtime/Variable").Variable;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -7,7 +8,6 @@ var CategoryDeclaration = null;
 var VoidType = require("../type/VoidType").VoidType;
 var MethodType = require("../type/MethodType").MethodType;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var Section = require("../parser/Section").Section;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var MethodDeclarationMap = null;
 var InstanceContext = null;
@@ -19,10 +19,16 @@ exports.resolve = function() {
 }
 
 function InstanceExpression(id) {
-    Section.prototype.copySectionFrom.call(this, id);
+    Expression.call(this);
+    this.copySectionFrom.call(this, id);
     this.id = id;
 	return this;
 }
+
+
+InstanceExpression.prototype = Object.create(Expression.prototype);
+InstanceExpression.prototype.constructor = InstanceExpression;
+
 
 Object.defineProperty(InstanceExpression.prototype, "name", {
     get : function() {

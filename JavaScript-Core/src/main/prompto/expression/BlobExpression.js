@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var BlobType = require("../type/BlobType").BlobType;
 var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var Document = require("../intrinsic/Document").Document;
@@ -10,9 +11,14 @@ var getUtf8CharLength = require("../utils/Utils").getUtf8CharLength;
 var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
 
 function BlobExpression(source) {
+    Expression.call(this);
     this.source = source;
     return this;
 }
+
+
+BlobExpression.prototype = Object.create(Expression.prototype);
+BlobExpression.prototype.constructor = BlobExpression;
 
 
 BlobExpression.prototype.check = function(context) {

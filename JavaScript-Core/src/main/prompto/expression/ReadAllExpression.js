@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var ResourceType = require("../type/ResourceType").ResourceType;
 var ResourceContext = require("../runtime/Context").ResourceContext;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
@@ -7,9 +8,13 @@ var TextType = require("../type/TextType").TextType;
 var TextValue = require("../value/TextValue").TextValue;
 
 function ReadAllExpression(resource) {
+    Expression.call(this);
 	this.resource = resource;
 	return this;
 }
+
+ReadAllExpression.prototype = Object.create(Expression.prototype);
+ReadAllExpression.prototype.constructor = ReadAllExpression;
 
 ReadAllExpression.prototype.toString = function() {
 	return "read all from " + this.resource.toString();

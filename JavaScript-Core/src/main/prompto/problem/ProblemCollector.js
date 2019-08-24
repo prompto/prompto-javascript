@@ -113,8 +113,8 @@ ProblemCollector.prototype.reportInvalidClosingTag = function(closing, opening) 
     this.reportError(closing, "Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">");
 }
 
-ProblemCollector.prototype.reportInvalidMember = function(section, name) {
-    this.reportError(section, "Invalid member '" + name + "' in " + this.name + " type");
+ProblemCollector.prototype.reportInvalidMember = function(section, type, name) {
+    this.reportError(section, "Invalid member '" + name + "' in " + type.name + " type");
 };
 
 ProblemCollector.prototype.reportInvalidCopySource = function(section) {

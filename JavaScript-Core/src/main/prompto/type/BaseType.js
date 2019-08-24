@@ -54,6 +54,11 @@ BaseType.prototype.getMemberMethods = function(context, name) {
 };
 
 
+BaseType.prototype.getStaticMemberMethods = function(context, name) {
+    return [];
+};
+
+
 BaseType.prototype.transpile = function(transpiler) {
     throw new Error("Transpile not implemented by " + this.constructor.name);
 };
@@ -342,6 +347,7 @@ BaseType.prototype.declareItem = function(transpiler, itemType, item) {
         throw new SyntaxError("Cannot declare item from: " + this.name);
 };
 
+
 BaseType.prototype.transpileItem = function(transpiler, itemType, item) {
     if(itemType instanceof EnumeratedNativeType)
         return this.transpileItem(transpiler, itemType.derivedFrom);
@@ -350,14 +356,19 @@ BaseType.prototype.transpileItem = function(transpiler, itemType, item) {
 };
 
 
-
 BaseType.prototype.checkMember = function(context, section, name) {
     if("text" == name)
         return TextType.instance;
     else {
-        context.problemListener.reportInvalidMember(section, name);
+        context.problemListener.reportInvalidMember(section, this, name);
         return VoidType.instance;
     }
+};
+
+
+BaseType.prototype.checkStaticMember = function(context, section, name) {
+    context.problemListener.reportInvalidMember(section, this, name);
+    return VoidType.instance;
 };
 
 

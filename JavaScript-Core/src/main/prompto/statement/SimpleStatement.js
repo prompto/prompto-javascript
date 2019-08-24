@@ -12,4 +12,5 @@ SimpleStatement.prototype.isSimple = function() {
     return true;
 };
 
+
 exports.SimpleStatement = SimpleStatement;

@@ -157,8 +157,8 @@ EnumeratedCategoryDeclaration.prototype.ensureDeclarationOrder = function(contex
 EnumeratedCategoryDeclaration.prototype.declare = function(transpiler) {
     if(this.name==="Error")
         return;
-    ConcreteCategoryDeclaration.prototype.declare.call(this, transpiler);
     transpiler.require(List);
+    ConcreteCategoryDeclaration.prototype.declare.call(this, transpiler);
 };
 
 EnumeratedCategoryDeclaration.prototype.transpile = function(transpiler) {

@@ -305,33 +305,41 @@ CategoryType.prototype.checkExists = function(context) {
 };
 
 CategoryType.prototype.checkMember = function(context, section, name) {
-    var cd = context.getRegisteredDeclaration(this.name);
-    if (cd == null) {
-        throw new SyntaxError("Unknown category:" + this.name);
+    var decl = context.getRegisteredDeclaration(this.name);
+    if (decl == null) {
+        context.problemListener.reportUnknownCategory(this.id);
+        return null;
     }
-    if (cd instanceof EnumeratedNativeDeclaration) {
-        cd.getType(context).checkMember(context, section, name);
-    } else if (cd instanceof CategoryDeclaration) {
-        if(cd.storable && "dbId" === name.toString())
-            return AnyType.instance;
-        else if (cd.hasAttribute(context, name)) {
-            var ad = context.getRegisteredDeclaration(name);
-            if (ad == null) {
-                throw new SyntaxError("Unknown attribute:" + name);
-            }
-            return ad.getType(context);
-        } else if ("text" == name.toString()) {
-            return TextType.instance
-        } else if (cd.hasMethod(context, name)) {
-            var method = cd.getMemberMethodsMap(context, name).getFirst();
-            return new MethodType(method);
-        } else {
-            context.problemListener.reportUnknownAttribute(section);
-        }
+    if (decl instanceof EnumeratedNativeDeclaration) {
+        return decl.getType(context).checkMember(context, section, name);
+    } else if (decl instanceof CategoryDeclaration) {
+        return this.checkCategoryMember(context, section, decl, name);
 	} else {
-        throw new SyntaxError("Not a category:" + this.name);
+        context.problemListener.reportUnknownCategory(this.id);
+        return null;
     }
 };
+
+
+CategoryType.prototype.checkCategoryMember = function(context, section, decl, name) {
+    if(decl.storable && "dbId" === name.toString())
+        return AnyType.instance;
+    else if (decl.hasAttribute(context, name)) {
+        var ad = context.getRegisteredDeclaration(name);
+        if (ad == null) {
+            throw new SyntaxError("Unknown attribute:" + name);
+        }
+        return ad.getType(context);
+    } else if ("text" == name.toString()) {
+        return TextType.instance
+    } else if (decl.hasMethod(context, name)) {
+        var method = decl.getMemberMethodsMap(context, name).getFirst();
+        return new MethodType(method);
+    } else {
+        context.problemListener.reportUnknownAttribute(section);
+    }
+};
+
 
 CategoryType.prototype.declareMember = function(transpiler, name) {
     // TODO visit attributes
@@ -344,6 +352,47 @@ CategoryType.prototype.transpileMember = function(transpiler, name) {
     else
         transpiler.append(name);
 };
+
+
+CategoryType.prototype.checkStaticMember = function(context, section, name) {
+    var decl = context.getRegisteredDeclaration(this.name);
+    if(decl==null) {
+        context.problemListener.reportUnknownIdentifier(this.name, this);
+        return null;
+    } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
+        return decl.getType(context).checkStaticMember(context, section, name);
+    } else if(decl instanceof SingletonCategoryDeclaration) {
+        return this.checkCategoryMember(context, section, decl, name);
+    } else {
+        context.getProblemListener().reportUnknownAttribute({name: name});
+        return null;
+    }
+};
+
+
+CategoryType.prototype.declareStaticMember = function(transpiler, name) {
+    // TODO visit attributes
+};
+
+
+CategoryType.prototype.transpileStaticMember = function(transpiler, name) {
+    if(this.getDeclaration(transpiler.context) instanceof SingletonCategoryDeclaration)
+        transpiler.append("instance.");
+    transpiler.append(name);
+};
+
+
+CategoryType.prototype.getStaticMemberValue = function(context, name) {
+    var decl = this.getDeclaration(context);
+    if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
+        return decl.getType(context).getStaticMemberValue(context, name);
+    else if(decl instanceof SingletonCategoryDeclaration) {
+        var singleton = context.loadSingleton(this);
+        return singleton.getMemberValue(context, name);
+    } else
+        return BaseType.prototype.getStaticMemberValue.call(this, context, name);
+}
+
 
 CategoryType.prototype.isAssignableFrom = function(context, other) {
     return BaseType.prototype.isAssignableFrom.call(this, context, other)
@@ -488,6 +537,7 @@ CategoryType.prototype.getSortedComparator = function(context, key, desc) {
 	}
 };
 
+
 CategoryType.prototype.getExpressionSortedComparator = function(context, exp, desc) {
     return function(o1, o2) {
 		var ctx = context.newInstanceContext(o1, null);
@@ -497,6 +547,7 @@ CategoryType.prototype.getExpressionSortedComparator = function(context, exp, de
 		return desc ? compareValues(value2, value1) : compareValues(value1, value2);
 	};
 };
+
 
 CategoryType.prototype.getAttributeSortedComparator = function(context, name, desc) {
     if(desc)
@@ -528,15 +579,28 @@ CategoryType.prototype.getGlobalMethodSortedComparator = function(context, metho
 
 
 CategoryType.prototype.getMemberMethods = function(context, name) {
-    var cd = this.getDeclaration(context);
-    if (!(cd instanceof ConcreteCategoryDeclaration))
+    var decl = this.getDeclaration(context);
+   if (!(decl instanceof ConcreteCategoryDeclaration))
         throw new SyntaxError("Unknown category:" + this.name);
     else {
-        var methods = cd.getMemberMethodsMap(context, name);
+        var methods = decl.getMemberMethodsMap(context, name);
         return methods.getAll();
     }
 };
 
+
+CategoryType.prototype.getStaticMemberMethods = function(context, name) {
+    var decl = this.getDeclaration(context);
+    if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
+        return decl.getType(context).getStaticMemberMethods(context, name);
+    else if(decl instanceof SingletonCategoryDeclaration)
+        return decl.getType(context).getMemberMethods(context, name);
+    else if (decl instanceof ConcreteCategoryDeclaration) {
+        var methods = decl.getMemberMethodsMap(context, name);
+        return methods.getAll();
+    } else
+        throw new SyntaxError("Unknown category:" + this.name);
+};
 
 
 /* look for a method which takes this category as sole parameter */

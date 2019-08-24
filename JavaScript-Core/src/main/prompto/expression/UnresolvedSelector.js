@@ -8,7 +8,7 @@ var UnresolvedIdentifier = null;
 var AnyType = require("../type/AnyType").AnyType;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
-exports.resolve = function() {
+exports.resolve = function () {
     MemberSelector = require("./MemberSelector").MemberSelector;
     MethodSelector = require("./MethodSelector").MethodSelector;
     MethodCall = require("../statement/MethodCall").MethodCall;
@@ -28,17 +28,17 @@ UnresolvedSelector.prototype = Object.create(SelectorExpression.prototype);
 UnresolvedSelector.prototype.constructor = UnresolvedSelector;
 
 Object.defineProperty(UnresolvedSelector.prototype, "name", {
-    get : function() {
+    get: function () {
         return this.id.name;
     }
 });
 
-UnresolvedSelector.prototype.toString = function() {
+UnresolvedSelector.prototype.toString = function () {
     return this.parent ? this.parent.toString() + '.' + this.name : this.name;
 };
 
 
-UnresolvedSelector.prototype.toDialect = function(writer) {
+UnresolvedSelector.prototype.toDialect = function (writer) {
     try {
         this.resolve(writer.context, false);
     } catch (e) {
@@ -48,37 +48,36 @@ UnresolvedSelector.prototype.toDialect = function(writer) {
         this.resolved.toDialect(writer);
     else {
         if (this.parent)
-            this.parent.toDialect(writer);
+            this.parent.parentToDialect(writer);
         writer.append('.');
         writer.append(this.name);
     }
 };
 
 
-UnresolvedSelector.prototype.check = function(context) {
+UnresolvedSelector.prototype.check = function (context) {
     return this.resolveAndCheck(context, false);
 };
 
 
-
-UnresolvedSelector.prototype.checkMember = function(context) {
+UnresolvedSelector.prototype.checkMember = function (context) {
     return this.resolveAndCheck(context, false);
 };
 
 
-UnresolvedSelector.prototype.interpret = function(context) {
+UnresolvedSelector.prototype.interpret = function (context) {
     this.resolveAndCheck(context, false);
     return this.resolved.interpret(context);
 };
 
 
-UnresolvedSelector.prototype.resolveAndCheck = function(context, forMember) {
+UnresolvedSelector.prototype.resolveAndCheck = function (context, forMember) {
     this.resolve(context, forMember);
     return this.resolved ? this.resolved.check(context) : AnyType.instance;
 };
 
 
-UnresolvedSelector.prototype.resolve = function(context, forMember) {
+UnresolvedSelector.prototype.resolve = function (context, forMember) {
     if (!this.resolved)
         this.resolved = this.tryResolveMethod(context, null);
     if (!this.resolved)
@@ -89,21 +88,26 @@ UnresolvedSelector.prototype.resolve = function(context, forMember) {
 };
 
 
-UnresolvedSelector.prototype.resolveMethod = function(context, assignments) {
+UnresolvedSelector.prototype.resolveMethod = function (context, assignments) {
     if (!this.resolved)
         this.resolved = this.tryResolveMethod(context, assignments);
 };
 
 
-UnresolvedSelector.prototype.tryResolveMember = function(context) {
+UnresolvedSelector.prototype.tryResolveMember = function (context) {
     var listener = context.problemListener;
-     try {
-         context.problemListener = new ProblemListener();
-         var member = new MemberSelector(this.parent, this.id);
+    try {
+        context.problemListener = new ProblemListener();
+        var resolvedParent = this.parent;
+        if(resolvedParent instanceof UnresolvedIdentifier) {
+            resolvedParent.checkMember(context);
+            resolvedParent = resolvedParent.resolved;
+        }
+        var member = new MemberSelector(resolvedParent, this.id);
         member.check(context);
         return member;
     } catch (e) {
-        if(e instanceof SyntaxError)
+        if (e instanceof SyntaxError)
             return null;
         else
             throw e;
@@ -113,7 +117,7 @@ UnresolvedSelector.prototype.tryResolveMember = function(context) {
 };
 
 
-UnresolvedSelector.prototype.tryResolveMethod = function(context, assignments) {
+UnresolvedSelector.prototype.tryResolveMethod = function (context, assignments) {
     var listener = context.problemListener;
     try {
         context.problemListener = new ProblemListener();
@@ -126,7 +130,7 @@ UnresolvedSelector.prototype.tryResolveMethod = function(context, assignments) {
         method.check(context);
         return method;
     } catch (e) {
-        if(e instanceof SyntaxError)
+        if (e instanceof SyntaxError)
             return null;
         else
             throw e;
@@ -136,15 +140,15 @@ UnresolvedSelector.prototype.tryResolveMethod = function(context, assignments) {
 };
 
 
-UnresolvedSelector.prototype.declare = function(transpiler) {
-    if(this.resolved==null)
+UnresolvedSelector.prototype.declare = function (transpiler) {
+    if (this.resolved == null)
         this.resolve(transpiler.context, false);
     this.resolved.declare(transpiler);
 };
 
 
-UnresolvedSelector.prototype.transpile = function(transpiler) {
-    if(this.resolved==null)
+UnresolvedSelector.prototype.transpile = function (transpiler) {
+    if (this.resolved == null)
         this.resolve(transpiler.context, false);
     this.resolved.transpile(transpiler);
 };

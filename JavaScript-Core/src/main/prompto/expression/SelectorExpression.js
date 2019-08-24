@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var UnresolvedIdentifier;
 
 exports.resolve = function() {
@@ -6,12 +6,12 @@ exports.resolve = function() {
 }
 
 function SelectorExpression(parent) {
-    Section.call(this);
+    Expression.call(this);
 	this.parent = parent || null;
 	return this;
 }
 
-SelectorExpression.prototype = Object.create(Section.prototype);
+SelectorExpression.prototype = Object.create(Expression.prototype);
 SelectorExpression.prototype.constructor = SelectorExpression;
 
 

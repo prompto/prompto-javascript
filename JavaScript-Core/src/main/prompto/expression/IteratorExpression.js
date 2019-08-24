@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var Variable = require("../runtime/Variable").Variable;
 var Identifier = require("../grammar/Identifier").Identifier;
 var IteratorType = require("../type/IteratorType").IteratorType;
@@ -7,14 +7,14 @@ var UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
 var ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
 
 function IteratorExpression(name, source, expression) {
-    Section.call(this);
+    Expression.call(this);
     this.name = name;
     this.source = source;
     this.expression = expression;
     return this;
 }
 
-IteratorExpression.prototype = Object.create(Section.prototype);
+IteratorExpression.prototype = Object.create(Expression.prototype);
 IteratorExpression.prototype.constructor = IteratorExpression;
 
 

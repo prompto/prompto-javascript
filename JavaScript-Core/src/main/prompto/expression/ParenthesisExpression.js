@@ -1,7 +1,13 @@
+var Expression = require("./Expression").Expression;
+
 function ParenthesisExpression(expression) {
+    Expression.call(this);
 	this.expression = expression;
 	return this;
 };
+
+ParenthesisExpression.prototype = Object.create(Expression.prototype);
+ParenthesisExpression.prototype.constructor = ParenthesisExpression;
 
 ParenthesisExpression.prototype.toString = function() {
 	return "(" + this.expression.toString() + ")";

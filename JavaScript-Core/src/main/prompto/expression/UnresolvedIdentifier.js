@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var EnumeratedCategoryDeclaration = null;
 var CategoryDeclaration = null;
@@ -8,7 +9,6 @@ var SymbolExpression = require("./SymbolExpression").SymbolExpression;
 var TypeExpression = require("./TypeExpression").TypeExpression;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var PromptoError = require("../error/PromptoError").PromptoError;
-var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
 var VoidType = require("../type/VoidType").VoidType;
 var EnumeratedCategoryType = null;
@@ -25,13 +25,13 @@ exports.resolve = function() {
 }
 
 function UnresolvedIdentifier(id) {
-    Section.call(this);
+	Expression.call(this);
 	this.id = id;
 	this.resolved = null;
 	return this;
 }
 
-UnresolvedIdentifier.prototype = Object.create(Section.prototype);
+UnresolvedIdentifier.prototype = Object.create(Expression.prototype);
 UnresolvedIdentifier.prototype.constructor = UnresolvedIdentifier;
 
 Object.defineProperty(UnresolvedIdentifier.prototype, "name", {

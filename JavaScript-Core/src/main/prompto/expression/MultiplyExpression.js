@@ -1,10 +1,15 @@
+var Expression = require("./Expression").Expression;
 var Value = require("../value/Value").Value;
 
 function MultiplyExpression(left, right) {
+	Expression.call(this);
 	this.left = left;
 	this.right = right;
 	return this;
 }
+
+MultiplyExpression.prototype = Object.create(Expression.prototype);
+MultiplyExpression.prototype.constructor = MultiplyExpression;
 
 MultiplyExpression.prototype.toString = function() {
 	return this.left.toString() + " * " + this.right.toString();

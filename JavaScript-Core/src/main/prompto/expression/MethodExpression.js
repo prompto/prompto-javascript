@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = null; // circular dependency
 var Dialect = require("../parser/Dialect").Dialect;
@@ -10,9 +11,13 @@ exports.resolve = function() {
 };
 
 function MethodExpression(id) {
+    Expression.call(this);
 	this.id = id;
 	return this;
 }
+
+MethodExpression.prototype = Object.create(Expression.prototype);
+MethodExpression.prototype.constructor = MethodExpression;
 
 Object.defineProperty(MethodExpression.prototype, "name", {
     get : function() {

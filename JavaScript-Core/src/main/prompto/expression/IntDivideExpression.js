@@ -1,10 +1,15 @@
+var Expression = require("./Expression").Expression;
 var Value = require("../value/Value").Value;
 
 function IntDivideExpression(left, right) {
+	Expression.call(this);
 	this.left = left;
 	this.right = right;
 	return this;
 }
+
+IntDivideExpression.prototype = Object.create(Expression.prototype);
+IntDivideExpression.prototype.constructor = IntDivideExpression;
 
 IntDivideExpression.prototype.toString = function() {
 	return this.left.toString() + " \\ " + this.right.toString();

@@ -1,20 +1,21 @@
+var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function AndExpression(left, right) {
+    Expression.call(this);
 	this.left = left;
 	this.right = right;
 	return this;
 }
 
+AndExpression.prototype = Object.create(Expression.prototype);
+AndExpression.prototype.constructor = AndExpression;
+
 AndExpression.prototype.toString = function() {
 	return this.left.toString() + " and " + this.right.toString();
-};
-
-AndExpression.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
 };
 
 AndExpression.prototype.operatorToDialect = function(dialect) {

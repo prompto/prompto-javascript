@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var AnyType = require("../type/AnyType").AnyType;
@@ -11,7 +12,7 @@ var CursorValue = require("../value/CursorValue").CursorValue;
 var Store = require("../store/Store").Store;
 
 function FetchManyExpression(typ, first, last, predicate, orderBy) {
-    Section.call(this);
+    Expression.call(this);
     this.typ = typ;
     this.predicate = predicate;
     this.first = first;
@@ -20,7 +21,7 @@ function FetchManyExpression(typ, first, last, predicate, orderBy) {
     return this;
 }
 
-FetchManyExpression.prototype = Object.create(Section.prototype);
+FetchManyExpression.prototype = Object.create(Expression.prototype);
 FetchManyExpression.prototype.constructor = FetchManyExpression;
 
 FetchManyExpression.prototype.toDialect = function(writer) {

@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var Dialect = require("../parser/Dialect").Dialect;
 var ReturnStatement = require("../statement/ReturnStatement").ReturnStatement;
 var StatementList = require("../statement/StatementList").StatementList;
@@ -7,7 +7,7 @@ var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function ArrowExpression(args, argsSuite, arrowSuite) {
-    Section.call(this);
+    Expression.call(this);
     this.args = args;
     this.argsSuite = argsSuite;
     this.arrowSuite = arrowSuite;
@@ -15,7 +15,7 @@ function ArrowExpression(args, argsSuite, arrowSuite) {
     return this;
 }
 
-ArrowExpression.prototype = Object.create(Section.prototype);
+ArrowExpression.prototype = Object.create(Expression.prototype);
 ArrowExpression.prototype.constructor = ArrowExpression;
 
 

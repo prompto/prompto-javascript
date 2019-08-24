@@ -16,6 +16,12 @@ BaseStatement.prototype.isSimple = function() {
     return false;
 };
 
+
+BaseStatement.prototype.parentToDialect = function(writer) {
+    this.toDialect(writer);
+};
+
+
 BaseStatement.prototype.transpile = function(transpiler) {
     throw new Error("Transpile not implemented by " + this.constructor.name);
 };

@@ -173,6 +173,18 @@ UnresolvedCall.prototype.transpile = function(transpiler) {
 };
 
 
+
+UnresolvedCall.prototype.declareParent = function(transpiler) {
+    this.declare(transpiler);
+};
+
+
+
+UnresolvedCall.prototype.transpileParent = function(transpiler) {
+    this.transpile(transpiler);
+};
+
+
 UnresolvedCall.prototype.setParent = function(parent) {
     if(parent) {
         if(this.callable instanceof UnresolvedIdentifier)

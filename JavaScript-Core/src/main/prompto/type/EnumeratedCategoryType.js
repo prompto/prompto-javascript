@@ -23,9 +23,7 @@ EnumeratedCategoryType.prototype = Object.create(CategoryType.prototype);
 EnumeratedCategoryType.prototype.constructor =  EnumeratedCategoryType;
 
 EnumeratedCategoryType.prototype.checkMember = function(context, section, name) {
-    if ("symbols"==name) {
-        return new ListType(this);
-    } else if ("name"==name) {
+    if ("name"==name) {
         return TextType.instance;
     } else {
         return CategoryType.prototype.checkMember.call(this, context, section, name);
@@ -33,7 +31,34 @@ EnumeratedCategoryType.prototype.checkMember = function(context, section, name) 
 };
 
 
-EnumeratedCategoryType.prototype.getMemberValue = function(context, name) {
+EnumeratedCategoryType.prototype.checkStaticMember = function(context, section, name) {
+    if ("symbols"==name) {
+        return new ListType(this);
+    } else {
+        return CategoryType.prototype.checkStaticMember.call(this, context, section, name);
+    }
+};
+
+
+EnumeratedCategoryType.prototype.declareStaticMember = function(transpiler, name) {
+    if("symbols"==name) {
+        var decl = transpiler.context.getRegisteredDeclaration(this.name);
+        transpiler.declare(decl);
+    } else
+        BaseType.prototype.declareStaticMember.call(this, transpiler, name);
+};
+
+
+EnumeratedCategoryType.prototype.transpileStaticMember = function(transpiler, name) {
+    if ("symbols"==name) {
+        transpiler.append(name);
+    } else {
+        return BaseType.prototype.transpileStaticMember.call(this, transpiler, name);
+    }
+};
+
+
+EnumeratedCategoryType.prototype.getStaticMemberValue = function(context, name) {
     var decl = context.getRegisteredDeclaration(this.name);
     if (!decl || !decl.symbols) {
         throw new SyntaxError(name + " is not an enumerated type!");
@@ -45,12 +70,12 @@ EnumeratedCategoryType.prototype.getMemberValue = function(context, name) {
     }
 };
 
-EnumeratedCategoryType.prototype.getMemberMethods = function(context, name) {
+EnumeratedCategoryType.prototype.getStaticMemberMethods = function(context, name) {
     switch (name) {
         case "symbolOf":
             return [new SymbolOfMethodDeclaration(this)];
         default:
-            return CategoryType.prototype.getMemberMethods.call(this, context, name);
+            return [];
     }
 };
 

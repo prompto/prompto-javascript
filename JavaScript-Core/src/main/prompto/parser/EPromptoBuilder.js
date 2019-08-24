@@ -599,6 +599,17 @@ EPromptoBuilder.prototype.exitType_identifier_list = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitType_literal = function(ctx) {
+    var type = this.getNodeValue(ctx.typedef());
+    this.setNodeValue(ctx, new literal.TypeLiteral(type));
+};
+
+
+EPromptoBuilder.prototype.exitTypeLiteral = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.type_literal()));
+};
+
+
 EPromptoBuilder.prototype.exitInstanceExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, exp);
@@ -932,7 +943,8 @@ EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
             args = new grammar.ArgumentList();
         }
 		args.add(arg);
-	}
+	} else if(args!==null)
+	    args.checkLastAnd();
 	this.setNodeValue(ctx, new expression.ConstructorExpression(type, copyFrom, args, true));
 };
 
@@ -946,7 +958,8 @@ EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
             args = new grammar.ArgumentList();
         }
 		args.add(arg);
-	}
+	} else if(args!==null)
+        args.checkLastAnd();
 	this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
 };
 

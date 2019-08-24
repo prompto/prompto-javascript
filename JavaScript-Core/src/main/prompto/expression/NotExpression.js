@@ -1,12 +1,17 @@
+var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function NotExpression(expression) {
+    Expression.call(this);
 	this.expression = expression;
 	return this;
 }
+
+NotExpression.prototype = Object.create(Expression.prototype);
+NotExpression.prototype.constructor = NotExpression;
 
 NotExpression.prototype.toString = function() {
     return "not " + this.expression.toString();

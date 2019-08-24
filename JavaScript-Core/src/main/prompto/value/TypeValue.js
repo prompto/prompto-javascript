@@ -10,4 +10,10 @@ TypeValue.prototype.toString = function() {
     return this.value.toString();
 };
 
+
+TypeValue.prototype.getMemberValue = function(context, name, autoCreate) {
+    return this.value.getStaticMemberValue(context, name);
+};
+
+
 exports.TypeValue = TypeValue;

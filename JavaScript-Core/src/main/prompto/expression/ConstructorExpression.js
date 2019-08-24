@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var CategoryType = null;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DocumentType = require("../type/DocumentType").DocumentType;
@@ -19,7 +19,7 @@ exports.resolve = function() {
 
 
 function ConstructorExpression(type, copyFrom, args, checked) {
-    Section.call(this);
+    Expression.call(this);
 	this.type = type;
 	this.copyFrom = copyFrom;
 	this.args = args;
@@ -27,7 +27,7 @@ function ConstructorExpression(type, copyFrom, args, checked) {
 	return this;
 }
 
-ConstructorExpression.prototype  = Object.create(Section.prototype);
+ConstructorExpression.prototype  = Object.create(Expression.prototype);
 ConstructorExpression.prototype.constructor = ConstructorExpression;
 
 

@@ -27,6 +27,7 @@ exports.CssType = require('./CssType').CssType;
 exports.HtmlType = require('./HtmlType').HtmlType;
 exports.EnumeratedNativeType = require('./EnumeratedNativeType').EnumeratedNativeType;
 exports.EnumeratedCategoryType = require('./EnumeratedCategoryType').EnumeratedCategoryType;
+exports.TypeType = require('./TypeType').TypeType;
 
 require('./BaseType').resolve();
 require('./TextType').resolve();

@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var BlobValue = require("../value/BlobValue").BlobValue;
@@ -8,12 +8,12 @@ var Document = require("../intrinsic/Document").Document;
 var Blob = require("../intrinsic/Blob").Blob;
 
 function DocumentExpression(source) {
-    Section.call(this);
+    Expression.call(this);
     this.source = source;
 	return this;
 }
 
-DocumentExpression.prototype  = Object.create(Section.prototype);
+DocumentExpression.prototype  = Object.create(Expression.prototype);
 DocumentExpression.prototype.constructor = DocumentExpression;
 
 DocumentExpression.prototype.check = function(context) {

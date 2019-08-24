@@ -216,7 +216,7 @@ MethodCall.prototype.transpileSingle = function(transpiler, declaration, allowDe
 
 MethodCall.prototype.transpileBuiltin = function(transpiler, declaration) {
     var parent = this.selector.resolveParent(transpiler.context);
-    parent.transpile(transpiler);
+    parent.transpileParent(transpiler);
     transpiler.append(".");
     declaration.transpileCall(transpiler, this.args);
 };

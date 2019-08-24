@@ -1,10 +1,15 @@
+var Expression = require("./Expression").Expression;
 var Value = require("../value/Value").Value;
 
 function SubtractExpression(left, right) {
+    Expression.call(this);
 	this.left = left;
 	this.right = right;
 	return this;
 }
+
+SubtractExpression.prototype = Object.create(Expression.prototype);
+SubtractExpression.prototype.constructor = SubtractExpression;
 
 SubtractExpression.prototype.toString = function() {
 	return this.left.toString() + " - " + this.right.toString();

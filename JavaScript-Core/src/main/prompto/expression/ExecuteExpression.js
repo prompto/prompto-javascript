@@ -1,15 +1,15 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var CodeValue = require("../value/CodeValue").CodeValue;
 var PromptoError = require("../error/PromptoError").PromptoError;
 
 function ExecuteExpression(id) {
-	Section.call(this);
+	Expression.call(this);
 	this.id = id;
 	return this;
 }
 
 
-ExecuteExpression.prototype  = Object.create(Section.prototype);
+ExecuteExpression.prototype  = Object.create(Expression.prototype);
 ExecuteExpression.prototype.constructor = ExecuteExpression;
 
 Object.defineProperty(ExecuteExpression.prototype, "name", {

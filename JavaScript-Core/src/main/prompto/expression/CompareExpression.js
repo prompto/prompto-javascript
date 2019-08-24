@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var MemberSelector = require("./MemberSelector").MemberSelector;
@@ -9,11 +10,17 @@ var MatchOp = require("../store/MatchOp").MatchOp;
 var CmpOp = require("../grammar/CmpOp").CmpOp;
 
 function CompareExpression(left, operator, right) {
+    Expression.call(this);
 	this.left = left;
 	this.operator = operator;
 	this.right = right;
 	return this;
 }
+
+
+CompareExpression.prototype = Object.create(Expression.prototype);
+CompareExpression.prototype.constructor = CompareExpression;
+
 
 CompareExpression.prototype.toString = function() {
 	return this.left.toString() + " " + this.operator.toString() + " " + this.right.toString();

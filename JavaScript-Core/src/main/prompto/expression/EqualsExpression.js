@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
@@ -23,11 +24,15 @@ var VOWELS = "AEIO"; // sufficient here
 
 
 function EqualsExpression(left, operator, right) {
+    Expression.call(this);
     this.left = left;
     this.operator = operator;
     this.right = right;
     return this;
 }
+
+EqualsExpression.prototype = Object.create(Expression.prototype);
+EqualsExpression.prototype.constructor = EqualsExpression;
 
 EqualsExpression.prototype.toString = function() {
     return this.left.toString() + " " + this.operator.toString() + " " + this.right.toString();

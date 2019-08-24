@@ -1,10 +1,15 @@
+var Expression = require("./Expression").Expression;
 var CodeValue = require("../value/CodeValue").CodeValue;
 var CodeType = require("../type/CodeType").CodeType;
 
 function CodeExpression(expression) {
+    Expression.call(this);
 	this.expression = expression;
 	return this;
 }
+
+CodeExpression.prototype = Object.create(Expression.prototype);
+CodeExpression.prototype.constructor = CodeExpression;
 
 CodeExpression.prototype.toString = function() {
 	return "Code: " + this.expression.toString();

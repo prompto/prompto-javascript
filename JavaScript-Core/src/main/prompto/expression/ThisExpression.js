@@ -1,10 +1,15 @@
+var Expression = require("./Expression").Expression;
 var InstanceContext = require("../runtime/Context").InstanceContext;
 var DocumentContext = require("../runtime/Context").DocumentContext;
 var DocumentType = require("../type/DocumentType").DocumentType;
 
 function ThisExpression() {
+    Expression.call(this);
     return this;
 }
+
+ThisExpression.prototype = Object.create(Expression.prototype);
+ThisExpression.prototype.constructor = ThisExpression;
 
 ThisExpression.prototype.check = function(context) {
     if (context instanceof DocumentContext)

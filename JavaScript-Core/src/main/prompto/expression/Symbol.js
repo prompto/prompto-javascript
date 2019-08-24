@@ -1,13 +1,13 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 
 function Symbol(id) {
-    Section.call(this);
+    Expression.call(this);
     this.id = id;
     this.mutable = false;
     return this;
 }
 
-Symbol.prototype = Object.create(Section.prototype);
+Symbol.prototype = Object.create(Expression.prototype);
 Symbol.prototype.constructor = Symbol;
 
 Object.defineProperty(Symbol.prototype, "name", {

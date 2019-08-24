@@ -1,13 +1,18 @@
+var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function OrExpression(left, right) {
+    Expression.call(this);
 	this.left = left;
 	this.right = right;
 	return this;
 }
+
+OrExpression.prototype = Object.create(Expression.prototype);
+OrExpression.prototype.constructor = OrExpression;
 
 OrExpression.prototype.toString = function() {
     return this.left.toString() + " or " + this.right.toString();

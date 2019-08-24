@@ -1,16 +1,16 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var NullValue = require("../value/NullValue").NullValue;
 var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 
 function MutableExpression(source) {
-    Section.call(this);
+    Expression.call(this);
     this.source = source;
     return this;
 }
 
-MutableExpression.prototype  = Object.create(Section.prototype);
+MutableExpression.prototype  = Object.create(Expression.prototype);
 MutableExpression.prototype.constructor = MutableExpression;
 
 MutableExpression.prototype.check = function(context) {

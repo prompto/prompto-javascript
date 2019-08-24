@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
@@ -14,11 +15,15 @@ var SetType = require("../type/SetType").SetType;
 var List = require("../intrinsic/List").List;
 
 function SortedExpression(source, desc, key) {
+    Expression.call(this);
 	this.source = source;
     this.desc = desc;
 	this.key = key || null;
 	return this;
 }
+
+SortedExpression.prototype = Object.create(Expression.prototype);
+SortedExpression.prototype.constructor = SortedExpression;
 
 SortedExpression.prototype.toString = function() {
 	return "sorted " + (this.desc ? "descending " : "") + this.source.toString() +

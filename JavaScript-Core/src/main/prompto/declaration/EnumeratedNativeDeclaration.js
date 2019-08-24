@@ -99,6 +99,7 @@ EnumeratedNativeDeclaration.prototype.getType = function(context) {
 
 EnumeratedNativeDeclaration.prototype.declare = function(transpiler) {
     transpiler.require(List);
+    transpiler.declare(this);
 };
 
 

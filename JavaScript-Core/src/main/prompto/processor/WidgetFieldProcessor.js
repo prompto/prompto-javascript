@@ -1,5 +1,6 @@
 var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
+var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
 var TypeExpression = require("../expression/TypeExpression").TypeExpression;
 var Identifier = require("../grammar/Identifier").Identifier;
 
@@ -26,7 +27,7 @@ WidgetFieldProcessor.prototype.doProcessCategory = function(annotation, context,
     var fieldType = annotation.getArgument("type");
     if(!(fieldName instanceof TextLiteral)) {
         context.problemListener.reportIllegalAnnotation("WidgetField requires a Text value for argument 'name'", annotation)
-    } else if(!(fieldType instanceof TypeExpression)) {
+    } else if(!(fieldType instanceof TypeExpression || fieldType instanceof TypeLiteral)) {
         context.problemListener.reportIllegalAnnotation("WidgetField requires a a Type value for argument 'type'", annotation)
     } else {
         var name = fieldName.toString();

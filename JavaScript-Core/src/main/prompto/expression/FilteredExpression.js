@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var IterableType = require("../type/IterableType").IterableType;
 var ListType = require("../type/ListType").ListType;
@@ -16,14 +16,14 @@ var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 
 
 function FilteredExpression(itemId, source, predicate) {
-	Section.call(this);
+    Expression.call(this);
 	this.itemId = itemId;
 	this.source = source;
 	this.predicate = predicate;
 	return this;
 }
 
-FilteredExpression.prototype  = Object.create(Section.prototype);
+FilteredExpression.prototype  = Object.create(Expression.prototype);
 FilteredExpression.prototype.constructor = FilteredExpression;
 
 

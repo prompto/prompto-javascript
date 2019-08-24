@@ -28,4 +28,9 @@ ContextualExpression.prototype.transpile = function(transpiler) {
     transpiler.flush();
 };
 
+ContextualExpression.prototype.transpileParent = function(transpiler) {
+	this.transpile(transpiler);
+};
+
+
 exports.ContextualExpression = ContextualExpression;

@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var AnyType = require("../type/AnyType").AnyType;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
@@ -49,10 +50,14 @@ function getTargetAtomicType(context, itype) {
 
 
 function CastExpression(expression, type) {
+    Expression.call(this);
     this.expression = expression;
     this.type = anify(type);
     return this;
 }
+
+CastExpression.prototype = Object.create(Expression.prototype);
+CastExpression.prototype.constructor = CastExpression;
 
 CastExpression.prototype.check = function(context) {
     var actual = anify(this.expression.check(context));

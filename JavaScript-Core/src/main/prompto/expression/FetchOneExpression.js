@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+var Expression = require("./Expression").Expression;
 var Identifier = require("../grammar/Identifier").Identifier;
 var AnyType = require("../type/AnyType").AnyType;
 var BooleanType = require("../type/BooleanType").BooleanType;
@@ -10,7 +10,7 @@ var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 
 function FetchOneExpression(typ, predicate, start, end) {
-    Section.call(this);
+    Expression.call(this);
     this.typ = typ;
     this.predicate = predicate;
     this.start = start;
@@ -18,7 +18,7 @@ function FetchOneExpression(typ, predicate, start, end) {
     return this;
 }
 
-FetchOneExpression.prototype = Object.create(Section.prototype);
+FetchOneExpression.prototype = Object.create(Expression.prototype);
 FetchOneExpression.prototype.constructor = FetchOneExpression;
 
 FetchOneExpression.prototype.toDialect = function(writer) {

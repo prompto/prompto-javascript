@@ -1,3 +1,4 @@
+var Expression = require("./Expression").Expression;
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
@@ -13,11 +14,16 @@ var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function ContainsExpression(left, operator, right) {
+    Expression.call(this);
     this.left = left;
     this.operator = operator;
     this.right = right;
     return this;
 }
+
+ContainsExpression.prototype = Object.create(Expression.prototype);
+ContainsExpression.prototype.constructor = ContainsExpression;
+
 
 ContainsExpression.prototype.toString = function() {
     return this.left.toString() + " " + this.operator.toString() + " " + this.right.toString();

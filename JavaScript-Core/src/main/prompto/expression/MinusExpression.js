@@ -1,9 +1,15 @@
+var Expression = require("./Expression").Expression;
 var Value = require("../value/Value").Value;
 
 function MinusExpression(expression) {
+    Expression.call(this);
 	this.expression = expression;
 	return this;
 }
+
+MinusExpression.prototype = Object.create(Expression.prototype);
+MinusExpression.prototype.constructor = MinusExpression;
+
 
 MinusExpression.prototype.toString = function() {
 	return "-" + this.expression.toString();

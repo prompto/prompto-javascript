@@ -1,9 +1,14 @@
+var Expression = require("./Expression").Expression;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function SymbolExpression(id) {
+	Expression.call(this);
     this.id = id;
 	return this;
 }
+
+SymbolExpression.prototype = Object.create(Expression.prototype);
+SymbolExpression.prototype.constructor = SymbolExpression;
 
 Object.defineProperty(SymbolExpression.prototype, "name", {
     get : function() {
