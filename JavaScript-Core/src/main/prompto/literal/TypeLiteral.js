@@ -23,7 +23,7 @@ TypeLiteral.prototype.interpret = function(context) {
 
 TypeLiteral.prototype.toDialect = function(writer) {
     if(writer.dialect==Dialect.E)
-        writer.append("type: ");
+        writer.append("Type: ");
     this.value.toDialect(writer);
 }
 
