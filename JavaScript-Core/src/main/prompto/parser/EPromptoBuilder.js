@@ -2788,7 +2788,7 @@ EPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var value = this.getNodeValue(ctx.value);
     var suite = this.getWhiteSpacePlus(ctx.ws_plus());
-    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value, suite));
+    this.setNodeValue(ctx, new jsx.JsxProperty(name, value, suite));
 };
 
 

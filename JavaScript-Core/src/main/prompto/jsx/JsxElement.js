@@ -40,9 +40,9 @@ JsxElement.prototype.toDialect = function(writer) {
 	writer.append("<").append(this.id.name);
     if(this.nameSuite!=null)
         writer.appendRaw(this.nameSuite);
-    else if(this.attributes.length > 0)
+    else if(this.properties.length > 0)
         writer.append(" ");
-	this.attributes.forEach(function(attr) { attr.toDialect(writer); });
+	this.properties.forEach(function(attr) { attr.toDialect(writer); });
 	writer.append(">");
     if(this.openingSuite!=null)
         writer.appendRaw(this.openingSuite);

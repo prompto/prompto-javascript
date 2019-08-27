@@ -2760,7 +2760,7 @@ OPromptoBuilder.prototype.exitJsx_attribute = function(ctx) {
     var value = this.getNodeValue(ctx.value);
     var stop = value!=null ? ctx.value.stop : ctx.name.stop;
     var suite = value==null ? null : this.getHiddenTokensAfterToken(stop);
-    this.setNodeValue(ctx, new jsx.JsxAttribute(name, value, suite));
+    this.setNodeValue(ctx, new jsx.JsxProperty(name, value, suite));
 };
 
 

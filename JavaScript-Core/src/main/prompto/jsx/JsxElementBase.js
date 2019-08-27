@@ -2,10 +2,10 @@ var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var JsxType = require("../type/JsxType").JsxType;
 var isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
 
-function JsxElementBase(id, attributes) {
+function JsxElementBase(id, properties) {
     IJsxExpression.call(this);
     this.id = id;
-	this.attributes = attributes;
+	this.properties = properties;
 	return this;
 }
 
@@ -20,8 +20,8 @@ JsxElementBase.prototype.check = function(context) {
         if (decl == null)
             context.problemListener.reportUnknownIdentifier(this.id);
     }
-    if(this.attributes!=null)
-        this.attributes.forEach(function(attr) { attr.check(context);});
+    if(this.properties!=null)
+        this.properties.forEach(function(attr) { attr.check(context);});
     return JsxType.instance;
 };
 
@@ -33,9 +33,9 @@ JsxElementBase.prototype.declare = function(transpiler) {
         else
             decl.declare(transpiler);
     }
-    if(this.attributes!=null) {
-        this.attributes.forEach(function (attr) {
-            attr.declare(transpiler);
+    if(this.properties!=null) {
+        this.properties.forEach(function (prop) {
+            prop.declare(transpiler);
         });
     }
     this.declareChildren(transpiler);
@@ -55,11 +55,11 @@ JsxElementBase.prototype.transpile = function(transpiler) {
     else
         transpiler.append('"').append(this.id.name).append('"');
     transpiler.append(", ");
-    if(this.attributes==null || this.attributes.length===0)
+    if(this.properties==null || this.properties.length===0)
         transpiler.append("null");
     else {
         transpiler.append("{");
-        this.attributes.forEach(function(attr) {
+        this.properties.forEach(function(attr) {
             attr.transpile(transpiler);
             transpiler.append(", ");
         });

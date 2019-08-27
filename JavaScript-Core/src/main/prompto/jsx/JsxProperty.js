@@ -1,4 +1,4 @@
-function JsxAttribute(id, value, suite) {
+function JsxProperty(id, value, suite) {
 	this.id = id;
 	this.value = value;
 	this.suite = suite;
@@ -6,13 +6,13 @@ function JsxAttribute(id, value, suite) {
 }
 
 
-JsxAttribute.prototype.check = function(context) {
+JsxProperty.prototype.check = function(context) {
     if(this.value!=null)
         this.value.check(context);
 };
 
 
-JsxAttribute.prototype.toDialect = function(writer) {
+JsxProperty.prototype.toDialect = function(writer) {
     writer.append(this.id.name);
     if(this.value!=null) {
         writer.append("=");
@@ -24,12 +24,12 @@ JsxAttribute.prototype.toDialect = function(writer) {
         writer.append(" ");
 };
 
-JsxAttribute.prototype.declare = function(transpiler) {
+JsxProperty.prototype.declare = function(transpiler) {
     if(this.value!=null)
         this.value.declare(transpiler);
 };
 
-JsxAttribute.prototype.transpile = function(transpiler) {
+JsxProperty.prototype.transpile = function(transpiler) {
     var name = this.id.name;
     if(name.indexOf('-')>=0)
         name = '"' + name + '"';
@@ -41,4 +41,4 @@ JsxAttribute.prototype.transpile = function(transpiler) {
         transpiler.append("null");
 };
 
-exports.JsxAttribute = JsxAttribute;
+exports.JsxProperty = JsxProperty;
