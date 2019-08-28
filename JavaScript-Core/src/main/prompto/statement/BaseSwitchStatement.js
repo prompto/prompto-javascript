@@ -56,7 +56,7 @@ BaseSwitchStatement.prototype.collectReturnTypes = function(context, types) {
 	if(this.defaultCase!=null) {
 		var type = this.defaultCase.check(context, null);
 		if(type!=VoidType.instance) {
-            section = switchCase;
+            section = this.defaultCase;
 			types[type.name] = type;
 		}
 	}

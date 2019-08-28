@@ -1,5 +1,4 @@
 var Parameter = require("./Parameter").Parameter;
-var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var utils = require("../utils/index");
 

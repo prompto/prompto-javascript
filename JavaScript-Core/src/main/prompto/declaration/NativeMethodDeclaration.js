@@ -15,7 +15,7 @@ NativeMethodDeclaration.prototype = Object.create(ConcreteMethodDeclaration.prot
 NativeMethodDeclaration.prototype.constructor = NativeMethodDeclaration;
 
 NativeMethodDeclaration.prototype.check = function(context, isStart) {
-    intrinsic = require("../intrinsic");
+    require("../intrinsic");
     if(isStart) {
         context = context.newLocalContext();
         this.registerParameters(context);
@@ -28,7 +28,7 @@ NativeMethodDeclaration.prototype.check = function(context, isStart) {
 
 
 NativeMethodDeclaration.prototype.interpret = function(context) {
-    intrinsic = require("../intrinsic");
+    require("../intrinsic");
     context.enterMethod(this);
 	try {
 		var result = this.statements.interpretNative(context, this.returnType);

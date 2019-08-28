@@ -1,4 +1,5 @@
 var NativeType = require("./NativeType").NativeType;
+var TextType = require("./TextType").TextType;
 
 function BinaryType(name) {
     NativeType.call(this, name);

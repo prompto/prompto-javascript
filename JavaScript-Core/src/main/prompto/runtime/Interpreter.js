@@ -1,5 +1,6 @@
 var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var TextType = require("../type/TextType").TextType;
+var TextValue = require("../value/TextValue").TextValue;
 var Argument = require("../grammar/Argument").Argument;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
@@ -18,8 +19,8 @@ function parseCmdLineArgs(cmdLineArgs) {
 		var args = CmdLineParser.parse(cmdLineArgs);
 		var valueArgs = {};
 		Object.keys(args).forEach(function(s) {
-            var key = new Text(s);
-			var value = new Text(args[s]);
+            var key = new TextValue(s);
+			var value = new TextValue(args[s]);
 			valueArgs[key] = value;
 		});
 		var dict = new DictionaryValue(TextType.instance, valueArgs, false);
@@ -64,22 +65,22 @@ function locateMethodWithArgs(map) {
         var method = map.protos[protos[i]];
         if(identicalArguments(method.parameters, arguments))
             return method;
-    };
+    }
 	// match Text{} argument, will pass null
 	if(arguments.length==1) {
-        for(var i=0;i<protos.length;i++) {
-            var method = map.protos[protos[i]];
+        for(i=0;i<protos.length;i++) {
+            method = map.protos[protos[i]];
             if (isSingleTextDictArgument(method.parameters))
                 return method;
 
-        };
+        }
 	}
 	// match no argument, will ignore options
-    for(var i=0;i<protos.length;i++) {
-        var method = map.protos[protos[i]];
+    for(i=0;i<protos.length;i++) {
+        method = map.protos[protos[i]];
 		if(method.parameters.length==0)
 			return method;
-	};
+	}
 	throw new SyntaxError("Could not find a compatible \"" + map.name + "\" method.");
 }
 

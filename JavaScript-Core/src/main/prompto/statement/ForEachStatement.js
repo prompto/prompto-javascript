@@ -1,5 +1,4 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var ListType = require("../type/ListType").ListType;

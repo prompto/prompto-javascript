@@ -43,7 +43,7 @@ JavaScriptStatement.prototype.toDialect = function(writer) {
 
 function $context() {
     return this;
-};
+}
 
 $context.prototype.transpile = function(transpiler) {
     transpiler.append("var $context = context;").newLine();

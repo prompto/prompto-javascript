@@ -1,19 +1,20 @@
 var Value = require("./Value").Value;
 var PeriodValue = require("./PeriodValue").PeriodValue;
-var DateValue = require("./DateValue").DateValue;
+var DateValue = null;
 var TimeValue = require("./TimeValue").TimeValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var DateTimeType = null;
 
 exports.resolve = function() {
+    DateValue = require("./DateValue").DateValue;
     DateTimeType = require("../type/DateTimeType").DateTimeType;
 };
 
 function DateTimeValue(value) {
-	Value.call(this, DateTimeType.instance);
-	this.value = value;
-	return this;
+    Value.call(this, DateTimeType.instance);
+    this.value = value;
+    return this;
 }
 
 DateTimeValue.prototype = Object.create(Value.prototype);
@@ -29,27 +30,27 @@ DateTimeValue.prototype.toString = function() {
 };
 
 DateTimeValue.prototype.Add = function(context, value) {
-	if (value instanceof PeriodValue) {
+    if (value instanceof PeriodValue) {
         var result = this.value.addPeriod(value.value);
         return new DateTimeValue(result);
-	} else {
-		throw new SyntaxError("Illegal: DateTimeValue + " + typeof(value));
-	}
+    } else {
+        throw new SyntaxError("Illegal: DateTimeValue + " + typeof(value));
+    }
 };
 
 
 DateTimeValue.prototype.Subtract = function(context, value) {
-	if (value instanceof DateTimeValue) {
-		return new PeriodValue(this.value.subtractDateTime(value.value));
-	} /* else if (value instanceof DateValue) {
-		return new PeriodValue(this.value.subtractDate(value.value));
-	} else if (value instanceof TimeValue) {
-		return new PeriodValue(this.value.subtractTime(value.value));
-	} */ else if (value instanceof PeriodValue) {
-		return new DateTimeValue(this.value.subtractPeriod(value.value));
-	} else {
-		throw new SyntaxError("Illegal: DateTimeValue - " + typeof(value));
-	}
+    if (value instanceof DateTimeValue) {
+        return new PeriodValue(this.value.subtractDateTime(value.value));
+    } /* else if (value instanceof DateValue) {
+        return new PeriodValue(this.value.subtractDate(value.value));
+    } else if (value instanceof TimeValue) {
+        return new PeriodValue(this.value.subtractTime(value.value));
+    } */ else if (value instanceof PeriodValue) {
+        return new DateTimeValue(this.value.subtractPeriod(value.value));
+    } else {
+        throw new SyntaxError("Illegal: DateTimeValue - " + typeof(value));
+    }
 };
 
 DateTimeValue.prototype.compareToValue = function(context, value) {
@@ -65,7 +66,7 @@ DateTimeValue.prototype.compareToValue = function(context, value) {
 
 DateTimeValue.prototype.getMemberValue = function(context, name) {
     try {
-    	var value = null;
+        var value = null;
         if ("year" == name) {
             value = this.value.getYear();
         } else if ("month" == name) {
@@ -104,11 +105,11 @@ DateTimeValue.prototype.getMemberValue = function(context, name) {
 
 
 DateTimeValue.prototype.equals = function(obj) {
-	if (obj instanceof DateTimeValue) {
-		return this.value.equals(obj.value);
-	} else {
-		return false;
-	}
+    if (obj instanceof DateTimeValue) {
+        return this.value.equals(obj.value);
+    } else {
+        return false;
+    }
 };
 
 exports.DateTimeValue = DateTimeValue;

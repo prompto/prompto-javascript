@@ -33,7 +33,6 @@ ValueExpression.prototype.transpile = function(transpiler) {
     if (this.value.transpile) {
         return this.value.transpile(transpiler);
     }
-    ;
 };
 
 

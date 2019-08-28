@@ -1,6 +1,7 @@
 var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+var InternalError = require("../error/InternalError").InternalError;
 var BaseType = require("../type/BaseType").BaseType;
 var RangeType = require("../type/RangeType").RangeType;
 

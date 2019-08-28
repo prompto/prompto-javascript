@@ -26,7 +26,7 @@ function SymbolListIterator(symbols, context) {
     this.context = context;
     this.idx = 0;
     return this;
-};
+}
 
 SymbolListIterator.prototype.hasNext = function() {
     return this.idx<this.symbols.length;

@@ -1,7 +1,6 @@
 var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
-var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function NotExpression(expression) {
@@ -18,15 +17,7 @@ NotExpression.prototype.toString = function() {
 };
 
 NotExpression.prototype.operatorToDialect = function(dialect) {
-    switch(dialect) {
-        case Dialect.E:
-        case Dialect.M:
-            return "not ";
-        case Dialect.O:
-            return "! ";
-        default:
-            throw new Exception("Unsupported: " + dialect.name);
-    }
+    return dialect==Dialect.O ? "! ": "not ";
 };
 
 NotExpression.prototype.toDialect = function(writer) {
@@ -76,7 +67,7 @@ NotExpression.prototype.interpretAssert = function(context, test) {
     if(result==BooleanValue.TRUE)
         return true;
     var expected = this.getExpected(context, test.dialect);
-    var actual = this.operatorToDialect(test.dialect) + val.toString();
+    var actual = this.operatorToDialect(test.dialect) + result.toString();
     test.printFailedAssertion(context, expected, actual);
     return false;
 };

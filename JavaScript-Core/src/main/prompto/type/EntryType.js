@@ -1,5 +1,4 @@
 var BaseType = require("./BaseType").BaseType;
-var BooleanType = require("./BooleanType").BooleanType;
 var TextType = require("./TextType").TextType;
 var Identifier = require("../grammar/Identifier").Identifier;
 

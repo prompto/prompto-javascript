@@ -1,4 +1,3 @@
-var antlr4 = require("antlr4/index");
 var OLexer = require("../../../generated/prompto/parser/OLexer").OLexer;
 var Dialect = null;
 

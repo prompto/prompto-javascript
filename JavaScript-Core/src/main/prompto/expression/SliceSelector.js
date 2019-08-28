@@ -33,11 +33,11 @@ SliceSelector.prototype.toDialect = function(writer) {
 SliceSelector.prototype.check = function(context) {
 	var firstType = this.first!=null ? this.first.check(context) : null;
 	var lastType = this.last!=null ? this.last.check(context) : null;
-	if(this.firstType!=null && !(this.firstType instanceof IntegerType)) {
-		throw new SyntaxError(this.firstType.toString() + " is not an integer");
+	if(firstType!=null && !(firstType instanceof IntegerType)) {
+		throw new SyntaxError(firstType.toString() + " is not an integer");
 	}
-	if(this.lastType!=null && !(this.lastType instanceof IntegerType)) {
-		throw new SyntaxError(this.lastType.toString() + " is not an integer");
+	if(lastType!=null && !(lastType instanceof IntegerType)) {
+		throw new SyntaxError(lastType.toString() + " is not an integer");
 	}
 	var parentType = this.parent.check(context);
 	return parentType.checkSlice(context);

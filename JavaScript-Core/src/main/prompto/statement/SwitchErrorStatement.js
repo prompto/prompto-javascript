@@ -4,6 +4,13 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 var VoidType = require("../type/VoidType").VoidType;
 var ExecutionError = require("../error/ExecutionError").ExecutionError;
+var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+var Argument = require("../grammar/Argument").Argument;
+var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
+var TextLiteral = require("../literal/TextLiteral").TextLiteral;
+var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
+var CategoryType = require("../type/CategoryType").CategoryType;
+
 
 function SwitchErrorStatement(errorId, statements, handlers, anyStmts, alwaysStmts) {
 	BaseSwitchStatement.call(this, handlers, anyStmts);

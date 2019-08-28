@@ -1,8 +1,6 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var InternalError = require("../error/InternalError").InternalError;
 var ContainerType = require("../type/ContainerType").ContainerType;
 var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
-var Value = require("../value/Value").Value;
 
 function AttributeDeclaration(id, type, constraint, indexTypes) {
 	BaseDeclaration.call(this, id);

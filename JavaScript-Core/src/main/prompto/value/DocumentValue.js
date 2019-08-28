@@ -34,7 +34,7 @@ DocumentValue.prototype.getMemberValue = function(context, name, autoCreate) {
     else if("text" == name)
         return new TextValue(this.toString());
     else if(autoCreate) {
-        result = new DocumentValue();
+        var result = new DocumentValue();
         this.values[name] = result;
         return result;
     } else

@@ -1,21 +1,16 @@
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var ParameterList = require("../param/ParameterList").ParameterList;
-var CategoryType = null;
 var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
 var Argument = require("../grammar/Argument").Argument;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 
-exports.resolve = function() {
-	CategoryType = require("../type/CategoryType").CategoryType;
-}
-
 function BaseMethodDeclaration(id, parameters, returnType) {
-	BaseDeclaration.call(this, id);
+    BaseDeclaration.call(this, id);
     this.parameters = parameters || new ParameterList();
-	this.returnType = returnType || null;
+    this.returnType = returnType || null;
     this.memberOf = null;
-	this.closureOf = null;
+    this.closureOf = null;
     return this;
 }
 
@@ -28,7 +23,7 @@ BaseMethodDeclaration.prototype.getDeclarationType = function() {
 };
 
 BaseMethodDeclaration.prototype.getSignature = function(context) {
-	var s = [];
+    var s = [];
     this.parameters.map(function(arg) {
         s.push(arg.getProto());
     });
@@ -44,9 +39,9 @@ BaseMethodDeclaration.prototype.getProto = function(context) {
 BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
     // if this is a template instance, name is already transpiled
     if(this.name.indexOf("$")>0)
-    	return this.name;
+        return this.name;
     else
-		return [this.name].concat(this.parameters.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
+        return [this.name].concat(this.parameters.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
 };
 
 
@@ -74,14 +69,14 @@ BaseMethodDeclaration.prototype.unregister = function(context) {
 
 
 BaseMethodDeclaration.prototype.register = function(context) {
-	context.registerMethodDeclaration(this);
+    context.registerMethodDeclaration(this);
 };
 
 
 BaseMethodDeclaration.prototype.registerParameters = function(context) {
-	if(this.parameters!=null) {
-		this.parameters.register(context);
-	}
+    if(this.parameters!=null) {
+        this.parameters.register(context);
+    }
 };
 
 
@@ -92,44 +87,44 @@ BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
 };
 
 BaseMethodDeclaration.prototype.isAssignableTo = function(context, args, checkInstance, allowDerived) {
-	var listener = context.problemListener;
-	try {
+    var listener = context.problemListener;
+    try {
         context.problemListener = new ProblemListener();
-		var local = context.newLocalContext();
-		this.registerParameters(local);
-		var argsList = new ArgumentList(args);
-		for(var i=0; i<this.parameters.length; i++) {
-			var parameter = this.parameters[i];
-			var idx = argsList.findIndex(parameter.id.name);
+        var local = context.newLocalContext();
+        this.registerParameters(local);
+        var argsList = new ArgumentList(args);
+        for(var i=0; i<this.parameters.length; i++) {
+            var parameter = this.parameters[i];
+            var idx = argsList.findIndex(parameter.id.name);
             var argument = idx>=0 ? argsList[idx] : null;
             if(argument==null) { // missing argument
                 if(parameter.defaultExpression!=null)
                     argument = new Argument(parameter, parameter.defaultExpression);
-				else
+                else
                     return false;
-			}
-			if(!argument.isAssignableToArgument(local, parameter, this, checkInstance, allowDerived)) {
-				return false;
-			}
-			if(idx>=0)
+            }
+            if(!argument.isAssignableToArgument(local, parameter, this, checkInstance, allowDerived)) {
+                return false;
+            }
+            if(idx>=0)
                 argsList.remove(idx);
-		}
-		return argsList.length===0;
-	} catch (e) {
-		if(e instanceof SyntaxError) {
-			return false;
-		} else {
-			throw e;
-		}
-	} finally {
+        }
+        return argsList.length===0;
+    } catch (e) {
+        if(e instanceof SyntaxError) {
+            return false;
+        } else {
+            throw e;
+        }
+    } finally {
         context.problemListener = listener;
-	}
+    }
 };
 
 
 
 BaseMethodDeclaration.prototype.isEligibleAsMain = function() {
-	return false;
+    return false;
 };
 
 exports.BaseMethodDeclaration = BaseMethodDeclaration;

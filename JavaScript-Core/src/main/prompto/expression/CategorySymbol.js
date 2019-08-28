@@ -46,7 +46,7 @@ CategorySymbol.prototype.check = function(context) {
         context = context.newLocalContext();
 		this.args.forEach(function(argument) {
             if(!cd.hasAttribute(context, argument.name)) {
-				throw new SyntaxError("\"" + argument.name + "\" is not an attribute of " + type.name);
+				throw new SyntaxError("\"" + argument.name + "\" is not an attribute of " + this.type.name);
 			}
 			argument.check(context);
 		});

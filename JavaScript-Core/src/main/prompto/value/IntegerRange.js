@@ -1,4 +1,5 @@
 var RangeValue = require("./RangeValue").RangeValue;
+var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var IntegerType = null;
 
@@ -22,7 +23,7 @@ IntegerRange.prototype.size = function() {
 IntegerRange.prototype.getItem = function(index) {
 	var result = this.low.IntegerValue() + index - 1;
 	if(result>this.high.IntegerValue()) {
-		throw new IndexOutOfBoundsException();
+		throw new IndexOutOfRangeError();
 	}
 	return new IntegerValue(result);
 };

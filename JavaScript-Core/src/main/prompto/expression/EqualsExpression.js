@@ -1,6 +1,7 @@
 var Expression = require("./Expression").Expression;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+var MemberSelector = require("./MemberSelector").MemberSelector;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
 var ContainerType = require("../type/ContainerType").ContainerType;
@@ -38,8 +39,6 @@ EqualsExpression.prototype.toString = function() {
     return this.left.toString() + " " + this.operator.toString() + " " + this.right.toString();
 };
 
-
-var VOWELS = "AEIO"; // sufficient here
 
 EqualsExpression.prototype.toDialect = function(writer) {
     this.left.toDialect(writer);

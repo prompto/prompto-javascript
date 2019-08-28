@@ -1,3 +1,4 @@
+var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var RangeValue = require("./RangeValue").RangeValue;
 var TimeValue = require("./TimeValue").TimeValue;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
@@ -27,7 +28,7 @@ TimeRange.prototype.compare = function(o1, o2) {
 TimeRange.prototype.getItem = function(index) {
 	var result = this.low.value.valueOf() + (index-1)*1000;
 	if(result>this.high.value.valueOf()) {
-		throw new IndexOutOfBoundsException();
+		throw new IndexOutOfRangeError();
 	}
 	return new TimeValue(new LocalTime(result));
 };

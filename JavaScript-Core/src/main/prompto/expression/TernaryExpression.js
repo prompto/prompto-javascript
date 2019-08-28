@@ -2,7 +2,6 @@ var Expression = require("./Expression").Expression;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var VoidType = require("../type/VoidType").VoidType;
 
 function TernaryExpression(condition, ifTrue, ifFalse) {
     Expression.call(this);

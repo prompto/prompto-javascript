@@ -1,7 +1,7 @@
 var Value = require("./Value").Value;
+var DateTimeValue = require("./DateTimeValue").DateTimeValue;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
-var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 var DateType = null;
 
 exports.resolve = function() {
@@ -48,7 +48,7 @@ DateValue.prototype.Subtract = function(context, value)  {
 
 
 DateValue.prototype.compareToValue = function(context, value) {
-    if (value instanceof DateValue || value instanceof DateTime) {
+    if (value instanceof DateValue || value instanceof DateTimeValue) {
         return this.cmp(value);
     } else {
         throw new SyntaxError("Illegal comparison: Date and " + typeof(value));

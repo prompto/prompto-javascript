@@ -5,7 +5,7 @@ function OrderByClause(names, descending) {
     this.names = names;
     this.descending = descending || false;
     return this;
-};
+}
 
 OrderByClause.prototype = Object.create(Section.prototype);
 OrderByClause.prototype.constructor = OrderByClause;

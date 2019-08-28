@@ -15,9 +15,9 @@ exports.resolve = function() {
 }
 
 function Argument(parameter, expression) {
-	this.parameter = parameter;
-	this._expression = expression;
-	return this;
+    this.parameter = parameter;
+    this._expression = expression;
+    return this;
 }
 
 Argument.prototype = Object.create(Section.prototype);
@@ -30,9 +30,9 @@ Object.defineProperty(Argument.prototype, "id", {
 });
 
 Object.defineProperty(Argument.prototype, "name", {
-	get : function() {
-		return this.parameter ? this.parameter.name : null;
-	}
+    get : function() {
+        return this.parameter ? this.parameter.name : null;
+    }
 });
 
 Object.defineProperty(Argument.prototype, "expression", {
@@ -56,9 +56,9 @@ Argument.prototype.toDialect = function(writer) {
 };
 
 Argument.prototype.toODialect = function(writer) {
-	if(!this._expression) {
+    if(!this._expression) {
         writer.append(this.parameter.name);
-	} else {
+    } else {
         if (this.parameter != null) {
             writer.append(this.parameter.name);
             writer.append(" = ");
@@ -94,7 +94,7 @@ Argument.prototype.toEDialect = function(writer) {
 
 Argument.prototype.declare = function(transpiler, methodDeclaration) {
     if(this._expression && !this.declareArrowExpression(transpiler, methodDeclaration))
-    	this._expression.declare(transpiler);
+        this._expression.declare(transpiler);
 };
 
 
@@ -135,31 +135,31 @@ Argument.prototype.toString = function() {
 };
 
 Argument.prototype.equals = function(obj) {
-	if(obj==this) {
-		return true;
-	} else if(obj==null) {
-		return false;
-	} else if(!(obj instanceof Argument)) {
-		return false;
-	} else {
-		return this.parameter.equals(obj.parameter) &&
-			this.expression.equals(other.expression);
-	}
+    if(obj==this) {
+        return true;
+    } else if(obj==null) {
+        return false;
+    } else if(!(obj instanceof Argument)) {
+        return false;
+    } else {
+        return this.parameter.equals(obj.parameter) &&
+            this.expression.equals(obj.expression);
+    }
 };
 
 Argument.prototype.check = function(context) {
-	var actual = context.getRegisteredValue(this.parameter.name);
-	if(actual==null) {
+    var actual = context.getRegisteredValue(this.parameter.name);
+    if(actual==null) {
         var actualType = this.expression.check(context);
-		context.registerValue(new Variable(this.parameter.id, actualType));
-	} else {
-		// need to check type compatibility
-		var actualType = actual.getType(context);
-		var newType = this.expression.check(context);
-		var section = this.toSection();
+        context.registerValue(new Variable(this.parameter.id, actualType));
+    } else {
+        // need to check type compatibility
+        actualType = actual.getType(context);
+        var newType = this.expression.check(context);
+        var section = this.toSection();
         actualType.checkAssignableFrom(context, newType, section);
-	}
-	return VoidType.instance;
+    }
+    return VoidType.instance;
 };
 
 Argument.prototype.toSection = function() {
@@ -182,43 +182,43 @@ Argument.prototype.findParameter = function(methodDeclaration) {
 
 
 Argument.prototype.resolve = function(context, methodDeclaration, checkInstance, allowDerived) {
-	// since we support implicit members, it's time to resolve them
-	var expression = this.expression;
-	var parameter = this.findParameter(methodDeclaration);
-	var requiredType = parameter.getType(context);
+    // since we support implicit members, it's time to resolve them
+    var expression = this.expression;
+    var parameter = this.findParameter(methodDeclaration);
+    var requiredType = parameter.getType(context);
     var checkArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
     var actualType = checkArrow ? requiredType.checkArrowExpression(expression) : expression.check(context.getCallingContext());
-	if(checkInstance && actualType instanceof CategoryType) {
-		var value = expression.interpret(context.getCallingContext());
-		if(value && value.getType) {
+    if(checkInstance && actualType instanceof CategoryType) {
+        var value = expression.interpret(context.getCallingContext());
+        if(value && value.getType) {
             actualType = value.getType();
-		}
-	}
-	var assignable = requiredType.isAssignableFrom(context, actualType);
-	// when in dispatch, allow derived
-	if(!assignable && allowDerived)
-        assignable = actual.isAssignableFrom(context, requiredType);
-	// try passing member
-	if(!assignable && (actualType instanceof CategoryType)) {
-		expression = new MemberSelector(expression, this.parameter.id);
-	}
-	return expression;
+        }
+    }
+    var assignable = requiredType.isAssignableFrom(context, actualType);
+    // when in dispatch, allow derived
+    if(!assignable && allowDerived)
+        assignable = actualType.isAssignableFrom(context, requiredType);
+    // try passing member
+    if(!assignable && (actualType instanceof CategoryType)) {
+        expression = new MemberSelector(expression, this.parameter.id);
+    }
+    return expression;
 };
 
 Argument.prototype.makeAssignment = function(context, declaration) {
-	var argument = this.parameter;
-	// when 1st argument, can be unnamed
-	if(argument===null) {
-		if(declaration.parameters.length==0) {
-			throw new SyntaxError("Method has no argument");
-		}
-		argument = declaration.parameters[0];
-	} else {
-		argument = declaration.parameters.find(this.name);
-	}
-	if(argument==null) {
-		throw new SyntaxError("Method has no argument:" + this.name);
-	}
+    var argument = this.parameter;
+    // when 1st argument, can be unnamed
+    if(argument===null) {
+        if(declaration.parameters.length==0) {
+            throw new SyntaxError("Method has no argument");
+        }
+        argument = declaration.parameters[0];
+    } else {
+        argument = declaration.parameters.find(this.name);
+    }
+    if(argument==null) {
+        throw new SyntaxError("Method has no argument:" + this.name);
+    }
 };
 
 Argument.prototype.isAssignableToArgument = function(context, argument, declaration, checkInstance, allowDerived) {

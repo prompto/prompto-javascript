@@ -37,7 +37,8 @@ var inferElementType = function(context, types) {
             lastType = elemType;
         } else if (!lastType.equals(elemType)) {
             if (lastType.isAssignableFrom(context, elemType)) {
-                ; // lastType is less specific
+                /* eslint no-empty: [ "off" ] */
+                // lastType is less specific
             } else if (elemType.isAssignableFrom(context, lastType)) {
                 lastType = elemType; // elemType is less specific
             } else {
@@ -64,7 +65,6 @@ function inferCommonRootType(context, type1, type2) {
 
 function inferCommonCategoryType(context, type1, type2, trySwap) {
     var CategoryType = require("../type/CategoryType").CategoryType;
-    var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     var decl1 = context.getRegisteredDeclaration(type1.id.name);
     if (decl1.derivedFrom != null) {
         for (var i = 0; i < decl1.derivedFrom.length; i++) {
@@ -73,8 +73,8 @@ function inferCommonCategoryType(context, type1, type2, trySwap) {
                 return parentType;
         }
         // climb up the tree
-        for (var i = 0; i < decl1.derivedFrom.length; i++) {
-            var parentType = new CategoryType(decl1.derivedFrom[i]);
+        for (i = 0; i < decl1.derivedFrom.length; i++) {
+            parentType = new CategoryType(decl1.derivedFrom[i]);
             var commonType = inferCommonCategoryType(context, parentType, type2, false)
             if (commonType != null)
                 return commonType;

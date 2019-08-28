@@ -2,7 +2,6 @@ var SingletonCategoryDeclaration = null;
 var MethodType = require("../type/MethodType").MethodType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MemberSelector = require("./MemberSelector").MemberSelector;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var Identifier = require("../grammar/Identifier").Identifier;
 var UnresolvedIdentifier = null;
@@ -10,7 +9,6 @@ var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var Variable = require("../runtime/Variable").Variable;
-var InstanceContext = null;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var NativeInstance = null;
 var CategoryType = null;
@@ -19,7 +17,6 @@ var MethodDeclarationMap = null;
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
-    InstanceContext = require("../runtime/Context").InstanceContext;
     NativeInstance = require("../value/NativeInstance.js").NativeInstance;
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration.js").SingletonCategoryDeclaration;
@@ -140,7 +137,7 @@ MethodSelector.prototype.checkParentInstance = function(context) {
 MethodSelector.prototype.getCategoryCandidates = function(context) {
 	var parentType = this.checkParent(context);
 	if(!(parentType instanceof CategoryType)) {
-		throw new SyntaxError(parent.toString() + " is not a category");
+		throw new SyntaxError(this.parent.toString() + " is not a category");
 	}
 	var cd = context.getRegisteredDeclaration(parentType.name);
 	if(cd===null) {

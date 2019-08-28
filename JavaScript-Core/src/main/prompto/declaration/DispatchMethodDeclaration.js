@@ -7,8 +7,6 @@ var UnresolvedIdentifier = null;
 var UnresolvedParameter = null;
 var CategoryParameter = null;
 var AttributeParameter = null;
-var Variable = require("../runtime/Variable").Variable;
-var AnyType = require("../type/AnyType").AnyType;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;

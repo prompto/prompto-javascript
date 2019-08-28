@@ -77,8 +77,8 @@ JavaScriptIdentifierExpression.prototype.interpret_module = function(module) {
 		return null;
 	} else {
 		try {
-			m = module.resolve();
-			o = m[this.id.name]
+			var m = module.resolve();
+			var o = m[this.id.name]
 			if(o) {
 				return o;
 			} else {

@@ -59,6 +59,7 @@ JavaScriptMethodExpression.prototype.findInstanceAndMethod = function(context, m
 
 var stringToFunction = function(str) {
     var arr = str.split(".");
+    /* global self, window */
     var fn = isNodeJs ? this : isWorker ? self : window;
     for (var i = 0, len = arr.length; i < len; i++) {
         fn = fn[arr[i]];
@@ -83,7 +84,7 @@ JavaScriptMethodExpression.prototype.findGlobal = function(context, module) {
 
 JavaScriptMethodExpression.prototype.findInModule = function(context, module) {
     try {
-        m = module.resolve();
+        var m = module.resolve();
         if(m[this.id.name])
             return { instance: null, method: m[this.id.name] };
         else

@@ -5,7 +5,6 @@ var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
 var TupleValue = require("../value/TupleValue").TupleValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 
 function AssignTupleStatement(names, expression) {
 	SimpleStatement.call(this);

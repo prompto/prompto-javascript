@@ -6,7 +6,6 @@ var CharacterType = null;
 var ListType = require("./ListType").ListType;
 var RangeType = require("./RangeType").RangeType;
 var TextType = null;
-var AnyType = require("./AnyType").AnyType;
 var TextValue = null;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var IntegerRange = require("../value/IntegerRange").IntegerRange;

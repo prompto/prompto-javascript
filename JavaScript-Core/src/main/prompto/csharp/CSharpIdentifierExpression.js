@@ -19,11 +19,10 @@ CSharpIdentifierExpression.prototype.toString = function() {
 }
 
 CSharpIdentifierExpression.parse = function(ids) {
-	var parts = ids.split("\\.");
 	var result = null;
-	for(var idx=0;i<parts.length;idx++) {
-		result = new CSharpIdentifierExpression(result, parts[idx]);
-	}
+	ids.split("\\.").forEach(function(part) {
+		result = new CSharpIdentifierExpression(result, part);
+	}, this);
 	return result;
 };
 

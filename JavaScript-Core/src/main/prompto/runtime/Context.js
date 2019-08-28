@@ -1,14 +1,9 @@
 var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
 var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
 var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
-var NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
-var BaseMethodDeclaration = require("../declaration/BaseMethodDeclaration").BaseMethodDeclaration;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var MethodType = require("../type/MethodType").MethodType;
@@ -18,46 +13,47 @@ var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var Variable = require("./Variable").Variable;
 var WidgetField = require("./WidgetField").WidgetField;
 var LinkedValue = require("./LinkedValue").LinkedValue;
+var InternalError = require("../error/InternalError").InternalError;
 
 function Context() {
-	this.globals = null;
-	this.calling = null;
-	this.parent = null; // for inner methods
-	this.debugger = null;
-	this.declarations = {};
+    this.globals = null;
+    this.calling = null;
+    this.parent = null; // for inner methods
+    this.debugger = null;
+    this.declarations = {};
     this.tests = {};
-	this.instances = {};
-	this.values = {};
+    this.instances = {};
+    this.values = {};
     this.nativeBindings = {};
     this.problemListener = new ProblemListener();
-	return this;
+    return this;
 }
 
 Context.newGlobalContext = function() {
-	var context = new Context();
-	context.globals = context;
-	context.calling = null;
-	context.parent = null;
-	context.debugger = null;
-	return context;
+    var context = new Context();
+    context.globals = context;
+    context.calling = null;
+    context.parent = null;
+    context.debugger = null;
+    return context;
 };
 
 
 Context.prototype.isGlobalContext = function() {
-	return this===this.globals;
+    return this===this.globals;
 };
 
 
 Context.prototype.getCallingContext = function() {
-	return this.calling;
+    return this.calling;
 };
 
 Context.prototype.getParentMostContext = function() {
-	if(this.parent === null) {
-		return this;
-	} else {
-		return this.parent.getParentMostContext();
-	}
+    if(this.parent === null) {
+        return this;
+    } else {
+        return this.parent.getParentMostContext();
+    }
 };
 
 Context.prototype.getClosestInstanceContext = function() {
@@ -69,41 +65,41 @@ Context.prototype.getClosestInstanceContext = function() {
 };
 
 Context.prototype.getParentContext = function() {
-	return this.parent;
+    return this.parent;
 }
 
 Context.prototype.setParentContext = function(parent) {
-	this.parent = parent;
+    this.parent = parent;
 }
 
 Context.prototype.newResourceContext = function() {
-	var context = new ResourceContext();
-	context.globals = this.globals;
-	context.calling = this.calling;
-	context.parent = this;
-	context.debugger = this.debugger;
+    var context = new ResourceContext();
+    context.globals = this.globals;
+    context.calling = this.calling;
+    context.parent = this;
+    context.debugger = this.debugger;
     context.problemListener = this.problemListener;
     return context;
 };
 
 Context.prototype.newLocalContext = function() {
-	var context = new Context();
-	context.globals = this.globals;
-	context.calling = this;
-	context.parent = null;
-	context.debugger = this.debugger;
+    var context = new Context();
+    context.globals = this.globals;
+    context.calling = this;
+    context.parent = null;
+    context.debugger = this.debugger;
     context.problemListener = this.problemListener;
-	return context;
+    return context;
 };
 
 Context.prototype.newDocumentContext = function(doc, isChild) {
-	var context = new DocumentContext(doc);
-	context.globals = this.globals;
-	context.calling = isChild ? this.calling : this;
-	context.parent = isChild ? this : null;
-	context.debugger = this.debugger;
+    var context = new DocumentContext(doc);
+    context.globals = this.globals;
+    context.calling = isChild ? this.calling : this;
+    context.parent = isChild ? this : null;
+    context.debugger = this.debugger;
     context.problemListener = this.problemListener;
-	return context;
+    return context;
 };
 
 
@@ -129,13 +125,13 @@ Context.prototype.newInstanceContext = function(instance, type, isChild) {
 };
 
 Context.prototype.newChildContext = function() {
-	var context = new Context();
-	context.globals = this.globals;
-	context.calling = this.calling;
-	context.parent = this;
-	context.debugger = this.debugger;
+    var context = new Context();
+    context.globals = this.globals;
+    context.calling = this.calling;
+    context.parent = this;
+    context.debugger = this.debugger;
     context.problemListener = this.problemListener;
-	return context;
+    return context;
 };
 
 Context.prototype.newMemberContext = function(type) {
@@ -194,7 +190,7 @@ Context.prototype.getLocalCatalog = function() {
             catalog.methods.push(method);
         }
     }
-    for(var name in this.tests)
+    for(name in this.tests)
         catalog.tests.push(name);
     // minimize for UI optimization
     if(catalog.attributes.length <= 0)
@@ -234,35 +230,35 @@ Context.prototype.getAllAttributes = function() {
 };
 
 Context.prototype.getRegistered = function(name) {
-	// resolve upwards, since local names override global ones
-	var actual = this.declarations[name] || null;
-	if(actual!==null) {
-		return actual;
-	}
-	actual = this.instances[name] || null;
-	if(actual!==null) {
-		return actual;
-	} else if(this.parent!==null) {
-		return this.parent.getRegistered(name);
-	} else if(this.globals!==this) {
-		return this.globals.getRegistered(name);
-	} else {
-		return null;
-	}
+    // resolve upwards, since local names override global ones
+    var actual = this.declarations[name] || null;
+    if(actual!==null) {
+        return actual;
+    }
+    actual = this.instances[name] || null;
+    if(actual!==null) {
+        return actual;
+    } else if(this.parent!==null) {
+        return this.parent.getRegistered(name);
+    } else if(this.globals!==this) {
+        return this.globals.getRegistered(name);
+    } else {
+        return null;
+    }
 };
 
 Context.prototype.getRegisteredDeclaration = function(name) {
-	// resolve upwards, since local names override global ones
-	var actual = this.declarations[name] || null;
-	if(actual!==null) {
-		return actual;
-	} else if(this.parent!==null) {
-		return this.parent.getRegisteredDeclaration(name);
-	} else if(this.globals!==this) {
-		return this.globals.getRegisteredDeclaration(name);
-	} else {
-		return null;
-	}
+    // resolve upwards, since local names override global ones
+    var actual = this.declarations[name] || null;
+    if(actual!==null) {
+        return actual;
+    } else if(this.parent!==null) {
+        return this.parent.getRegisteredDeclaration(name);
+    } else if(this.globals!==this) {
+        return this.globals.getRegisteredDeclaration(name);
+    } else {
+        return null;
+    }
 };
 
 
@@ -281,7 +277,7 @@ Context.prototype.getLocalDeclaration = function(name) {
 
 Context.prototype.registerDeclaration = function(declaration) {
     if(this.checkDuplicate(declaration))
-    	this.declarations[declaration.name] = declaration;
+        this.declarations[declaration.name] = declaration;
 };
 
 Context.prototype.checkDuplicate = function(declaration) {
@@ -376,17 +372,17 @@ Context.prototype.getNativeBinding = function(type) {
 };
 
 function MethodDeclarationMap(name) {
-	this.name = name;
-	this.protos = {};
-	return this;
+    this.name = name;
+    this.protos = {};
+    return this;
 }
 
 MethodDeclarationMap.prototype.register = function(declaration, problemListener) {
-	var proto = declaration.getProto();
-	var current = this.protos[proto] || null;
-	if(current!==null)
+    var proto = declaration.getProto();
+    var current = this.protos[proto] || null;
+    if(current!==null)
         problemListener.reportDuplicate(declaration.name, declaration);
-	this.protos[proto] = declaration;
+    this.protos[proto] = declaration;
 };
 
 MethodDeclarationMap.prototype.unregister = function(proto) {
@@ -395,10 +391,10 @@ MethodDeclarationMap.prototype.unregister = function(proto) {
 };
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration) {
-	var proto = declaration.getProto();
-	if(!(proto in this.protos)) {
-		this.protos[proto] = declaration;
-	}
+    var proto = declaration.getProto();
+    if(!(proto in this.protos)) {
+        this.protos[proto] = declaration;
+    }
 };
 
 MethodDeclarationMap.prototype.getFirst = function() {
@@ -434,20 +430,20 @@ Context.prototype.getRegisteredValue = function(name) {
 
 
 Context.prototype.readRegisteredValue = function(name) {
-	return this.instances[name] || null;
+    return this.instances[name] || null;
 };
 
 
 Context.prototype.registerValue = function(value, checkDuplicate) {
     if(checkDuplicate === undefined)
         checkDuplicate = true;
-	if(checkDuplicate) {
+    if(checkDuplicate) {
         // only explore current context
         var actual = this.instances[value.name] || null;
         if(actual!==null)
             this.problemListener.reportDuplicate(value.id);
     }
-	this.instances[value.name] = value;
+    this.instances[value.name] = value;
 };
 
 
@@ -464,17 +460,17 @@ Context.prototype.hasValue = function(id) {
 
 
 Context.prototype.getValue = function(id) {
-	var context = this.contextForValue(id.name);
-	if(context===null)
+    var context = this.contextForValue(id.name);
+    if(context===null)
         this.problemListener.reportUnknownVariable(id);
-	return context.readValue(id);
+    return context.readValue(id);
 };
 
 
 
 Context.prototype.readValue = function(id) {
-	var value = this.values[id.name] || null;
-	if(value===null)
+    var value = this.values[id.name] || null;
+    if(value===null)
         this.problemListener.reportEmptyVariable(id);
     if(value instanceof LinkedValue)
         return value.context.getValue(id);
@@ -485,10 +481,10 @@ Context.prototype.readValue = function(id) {
 
 
 Context.prototype.setValue = function(id, value) {
-	var context = this.contextForValue(id.name);
-	if(context===null)
+    var context = this.contextForValue(id.name);
+    if(context===null)
         this.problemListener.reportUnknownVariable(id);
-	context.writeValue(id, value);
+    context.writeValue(id, value);
 };
 
 
@@ -498,7 +494,7 @@ Context.prototype.writeValue = function(id, value) {
     if(current instanceof LinkedValue)
         current.context.setValue(id, value);
     else
-    	this.values[id.name] = value;
+        this.values[id.name] = value;
 };
 
 Context.prototype.autocast = function(name, value) {
@@ -511,17 +507,17 @@ Context.prototype.autocast = function(name, value) {
 };
 
 Context.prototype.contextForValue = function(name) {
-	// resolve upwards, since local names override global ones
-	var actual = this.instances[name] || null;
-	if(actual!==null) {
-		return this;
-	} else if(this.parent!==null) {
-		return this.parent.contextForValue(name);
-	} else if(this.globals!==this) {
-		return this.globals.contextForValue(name);
-	} else {
-		return null;
-	}
+    // resolve upwards, since local names override global ones
+    var actual = this.instances[name] || null;
+    if(actual!==null) {
+        return this;
+    } else if(this.parent!==null) {
+        return this.parent.contextForValue(name);
+    } else if(this.globals!==this) {
+        return this.globals.contextForValue(name);
+    } else {
+        return null;
+    }
 };
 
 Context.prototype.contextForDeclaration = function(name) {
@@ -539,19 +535,19 @@ Context.prototype.contextForDeclaration = function(name) {
 };
 
 function ResourceContext() {
-	Context.call(this);
-	return this;
+    Context.call(this);
+    return this;
 }
 
 ResourceContext.prototype = Object.create(Context.prototype);
 ResourceContext.prototype.constructor = ResourceContext;
 
 function InstanceContext(instance, type) {
-	Context.call(this);
-	this.instance = instance || null;
+    Context.call(this);
+    this.instance = instance || null;
     this.instanceType = type !== null ? type : instance.type;
     this.widgetFields = null;
-	return this;
+    return this;
 }
 
 InstanceContext.prototype = Object.create(Context.prototype);
@@ -623,18 +619,18 @@ InstanceContext.prototype.contextForValue = function(name) {
         return this;
     else if(this.widgetFields!=null && this.widgetFields[name])
         return this;
-	// params and variables have precedence over members
-	// so first look in context values
-	var context = Context.prototype.contextForValue.call(this, name);
-	if(context !== null) {
-		return context;
-	}
-	var decl = this.getDeclaration();
+    // params and variables have precedence over members
+    // so first look in context values
+    var context = Context.prototype.contextForValue.call(this, name);
+    if(context !== null) {
+        return context;
+    }
+    var decl = this.getDeclaration();
     if(decl.hasAttribute(this, name) || decl.hasMethod(this, name)) {
-		return this;
-	} else {
-		return null;
-	}
+        return this;
+    } else {
+        return null;
+    }
 };
 
 InstanceContext.prototype.getDeclaration = function() {
@@ -656,7 +652,7 @@ InstanceContext.prototype.readValue = function(id) {
 };
 
 InstanceContext.prototype.writeValue = function(id, value) {
-	this.instance.setMember(this.calling, id.name, value);
+    this.instance.setMember(this.calling, id.name, value);
 };
 
 
@@ -699,39 +695,39 @@ DocumentContext.prototype.readValue = function(name) {
 };
 
 
-DocumentContext.prototype.writeValue = function(name) {
-    this.document.setMember(this.calling, name, value);
+DocumentContext.prototype.writeValue = function(id, value) {
+    this.document.setMember(this.calling, id, value);
 };
 
 
 Context.prototype.enterMethod = function(method) {
-	if(this.debugger !== null) {
-		this.debugger.enterMethod(this, method);
-	}
+    if(this.debugger !== null) {
+        this.debugger.enterMethod(this, method);
+    }
 };
 
 Context.prototype.leaveMethod = function(method) {
-	if(this.debugger !== null) {
-		this.debugger.leaveMethod(this, method);
-	}
+    if(this.debugger !== null) {
+        this.debugger.leaveMethod(this, method);
+    }
 };
 
 Context.prototype.enterStatement = function(statement) {
-	if(this.debugger !== null) {
-		this.debugger.enterStatement(this, statement);
-	}
+    if(this.debugger !== null) {
+        this.debugger.enterStatement(this, statement);
+    }
 };
 
 Context.prototype.leaveStatement = function(statement) {
-	if(this.debugger !== null) {
-		this.debugger.leaveStatement(this, statement);
-	}
+    if(this.debugger !== null) {
+        this.debugger.leaveStatement(this, statement);
+    }
 };
 
 Context.prototype.terminated = function() {
-	if (this.debugger !== null) {
-		this.debugger.terminated();
-	}
+    if (this.debugger !== null) {
+        this.debugger.terminated();
+    }
 };
 
 Context.prototype.loadSingleton = function(type) {

@@ -2,8 +2,6 @@ var AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaratio
 var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var TypeUtils = require("../utils/TypeUtils");
-var Identifier = require("../grammar/Identifier").Identifier;
-var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var NullValue = require("../value/NullValue").NullValue;
 
 function CategoryDeclaration(id, attributes) {

@@ -3,19 +3,19 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var Any = require("../intrinsic/Any").Any;
 
 function AnyType() {
- 	NativeType.call(this, new Identifier("any"));
- 	return this;
+    NativeType.call(this, new Identifier("any"));
+    return this;
  }
 
 AnyType.prototype = Object.create(NativeType.prototype);
 AnyType.prototype.constructor = AnyType;
 
 AnyType.instance = new AnyType();
-	
+
 
 
 AnyType.prototype.checkItem = function(context, item) {
-	return AnyType.instance; // required to support Document items
+    return AnyType.instance; // required to support Document items
 };
 
 
@@ -45,7 +45,7 @@ AnyType.prototype.transpileItem = function(transpiler, type, item) {
 
 
 AnyType.prototype.checkMember = function(context, section, name) {
-	// required to support Document members
+    // required to support Document members
     return AnyType.instance;
 };
 
@@ -72,7 +72,7 @@ AnyType.prototype.declare = function(transpiler) {
 };
 
 AnyType.prototype.isAssignableFrom = function(context, other) {
-	return true;
+    return true;
 };
 
 exports.AnyType = AnyType;

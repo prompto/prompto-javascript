@@ -1,5 +1,4 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 
 function WithResourceStatement(resource, statements) {
 	BaseStatement.call(this);

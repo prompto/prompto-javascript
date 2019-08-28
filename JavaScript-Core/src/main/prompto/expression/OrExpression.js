@@ -1,7 +1,6 @@
 var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
-var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function OrExpression(left, right) {
@@ -23,15 +22,7 @@ OrExpression.prototype.toDialect = function(writer) {
 };
 
 OrExpression.prototype.operatorToDialect = function(dialect) {
-    switch(dialect) {
-        case Dialect.E:
-        case Dialect.M:
-            return " or ";
-        case Dialect.O:
-            return " || ";
-        default:
-            throw new Exception("Unsupported: " + dialect.name);
-    }
+    return dialect==Dialect.O ? " || " : " or ";
 };
 
 OrExpression.prototype.toEDialect = function(writer) {

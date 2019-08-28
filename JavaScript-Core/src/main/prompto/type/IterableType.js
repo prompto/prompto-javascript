@@ -1,5 +1,4 @@
 var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
 
 function IterableType(id, itemType) {
 	NativeType.call(this, id);

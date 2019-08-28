@@ -1,7 +1,6 @@
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = null; // circular dependency
-var AnyType = require("./AnyType").AnyType;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 
@@ -51,7 +50,7 @@ DecimalType.prototype.declareAdd = function(transpiler, other, tryReverse, left,
         left.declare(transpiler);
         right.declare(transpiler);
     } else
-        return NativeType.prototype.declareAdd.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
 };
 
 
@@ -61,7 +60,7 @@ DecimalType.prototype.transpileAdd = function(transpiler, other, tryReverse, lef
         transpiler.append(" + ");
         right.transpile(transpiler);
     } else
-        return NativeType.prototype.transpileAdd.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
 };
 
 

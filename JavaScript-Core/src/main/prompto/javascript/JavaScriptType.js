@@ -14,7 +14,7 @@ var intrinsic = require("../intrinsic");
 function JavaScriptType(name) {
 	type.CategoryType.call(this, name);
 	return this;
-};
+}
 
 JavaScriptType.prototype = Object.create(type.CategoryType.prototype);
 JavaScriptType.prototype.constructor = JavaScriptType;
@@ -136,16 +136,13 @@ JavaScriptType.prototype.convertList = function(context, value, klass, returnTyp
 JavaScriptType.prototype.convertDocument = function(context, value, klass, returnType) {
     var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
     if(maybeDoc && (klass==="object" || klass==="Document")) {
-        var self = this;
         var doc = new DocumentValue();
-        for(var key in value) {
-            if(value.hasOwnProperty(key)) {
-                var item = value[key];
-                klass = getTypeName(item);
-                item = self.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
-                doc.setMember(context, new Identifier(key.toString()), item);
-            }
-        }
+        Object.getOwnPropertyNames(value).forEach(function(name) {
+            var item = value[name];
+            klass = getTypeName(item);
+            item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
+            doc.setMember(context, new Identifier(name), item);
+        }, this);
         return doc;
     } else
         return null;

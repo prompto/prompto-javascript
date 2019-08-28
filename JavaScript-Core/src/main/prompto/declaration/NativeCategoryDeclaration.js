@@ -6,10 +6,10 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 
 function NativeCategoryDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
     ConcreteCategoryDeclaration.call(this, id, attributes, null, methods);
-	this.categoryBindings = categoryBindings;
-	this.attributeBindings = attributeBindings;
-	this.bound = null;
-	return this;
+    this.categoryBindings = categoryBindings;
+    this.attributeBindings = attributeBindings;
+    this.bound = null;
+    return this;
 }
 
 NativeCategoryDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.prototype);
@@ -82,29 +82,29 @@ NativeCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) {
 };
 
 NativeCategoryDeclaration.prototype.newInstance = function(context) {
-	return new NativeInstance(context, this);
+    return new NativeInstance(context, this);
 };
 
 NativeCategoryDeclaration.prototype.getBoundFunction = function(fail) {
-	if(this.bound==null) {
-		var binding = this.getBinding(fail);
+    if(this.bound==null) {
+        var binding = this.getBinding(fail);
         if(binding!=null) {
             this.bound = binding.resolve();
             if(fail && this.bound==null)
                 throw new SyntaxError("No JavaScript function:" + binding.toString());
-		}
-	}
-	return this.bound;
+        }
+    }
+    return this.bound;
 };
 
 NativeCategoryDeclaration.prototype.getBinding = function(fail) {
-	for(var i=0;i<this.categoryBindings.length;i++) {
-		if(this.categoryBindings[i] instanceof JavaScriptNativeCategoryBinding) {
-			return this.categoryBindings[i];
-		}
-	}
+    for(var i=0;i<this.categoryBindings.length;i++) {
+        if(this.categoryBindings[i] instanceof JavaScriptNativeCategoryBinding) {
+            return this.categoryBindings[i];
+        }
+    }
     if(fail)
-	    throw new SyntaxError("Missing JavaScript binding for category: " + this.name);
+        throw new SyntaxError("Missing JavaScript binding for category: " + this.name);
     else
         return null;
 };

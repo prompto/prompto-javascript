@@ -1,5 +1,4 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
-var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
 
 function JavaScriptExpressionList(expression) {
 	ObjectList.call(this);

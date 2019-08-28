@@ -8,7 +8,7 @@ exports.getTypeName = function(value) {
         case "function":
             if(value.name)
                 return value.name;
-            // don't break
+            // no-break
         case "object":
             if (value.constructor) {
                 if (value.constructor.name) {

@@ -3,7 +3,6 @@ var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var ResourceType = require("../type/ResourceType").ResourceType;
 var VoidType = require("../type/VoidType").VoidType;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
 
 function WriteStatement(content, resource) {
@@ -34,10 +33,7 @@ WriteStatement.prototype.interpret = function(context) {
 	if(res==null) {
 		throw new NullReferenceError();
 	}
-	if(!(res.isWritable)) {
-		throw new InternalError("Illegal write source: " + o);
-	}
-	if(!res.isWritable()) {
+	if(!res.isWritable || !res.isWritable()) {
 		throw new InvalidResourceError("Not writable");
 	}
 	var str = this.content.interpret(resContext).toString();

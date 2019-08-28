@@ -4,16 +4,13 @@ var MethodCall = require("./MethodCall").MethodCall;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
-var MethodExpression = require("../expression/MethodExpression").MethodExpression;
 var SelectorExpression = require("../expression/SelectorExpression").SelectorExpression;
-var MethodParameter = require("../param/MethodParameter").MethodParameter;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var InstanceContext = require("../runtime/Context").InstanceContext;
 
 
 function UnresolvedCall(callable, args) {

@@ -1,4 +1,5 @@
 var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+var IntegerType = require("../type/IntegerType").IntegerType;
 
 function JavaScriptIntegerLiteral(text) {
 	JavaScriptLiteral.call(this, text);

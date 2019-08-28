@@ -14,17 +14,17 @@ var NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 exports.resolve = function() {
-	CategoryType = require("../type/CategoryType").CategoryType;
+    CategoryType = require("../type/CategoryType").CategoryType;
 };
 
 
 function ConstructorExpression(type, copyFrom, args, checked) {
     Expression.call(this);
-	this.type = type;
-	this.copyFrom = copyFrom;
-	this.args = args;
-	this.checked = checked;
-	return this;
+    this.type = type;
+    this.copyFrom = copyFrom;
+    this.args = args;
+    this.checked = checked;
+    return this;
 }
 
 ConstructorExpression.prototype  = Object.create(Expression.prototype);
@@ -85,58 +85,58 @@ ConstructorExpression.prototype.toEDialect = function(writer) {
 };
 
 ConstructorExpression.prototype.check = function(context) {
-	// need to update type, since it was arbitrarily set to CategoryType
-	var cd = context.getRegisteredDeclaration(this.type.name);
-	if(cd==null)
+    // need to update type, since it was arbitrarily set to CategoryType
+    var cd = context.getRegisteredDeclaration(this.type.name);
+    if(cd==null)
         context.problemListener.reportUnknownCategory(this.type.id);
-	this.checkFirstHomonym(context, cd);
-	cd.checkConstructorContext(context);
-	if(this.copyFrom!=null) {
-		var cft = this.copyFrom.check(context);
-		if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
+    this.checkFirstHomonym(context, cd);
+    cd.checkConstructorContext(context);
+    if(this.copyFrom!=null) {
+        var cft = this.copyFrom.check(context);
+        if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
             context.problemListener.reportInvalidCopySource(this.copyFrom);
             // throw new SyntaxError("Cannot copy from " + cft.getName());
-	}
-	if(this.args!=null) {
+    }
+    if(this.args!=null) {
         this.args.forEach(function(argument) {
-			if(!cd.hasAttribute(context, argument.name))
+            if(!cd.hasAttribute(context, argument.name))
                 context.problemListener.reportUnknownAttribute(argument.name);
- 			argument.check(context);
-		});
-	}
-	return cd.getType();
+            argument.check(context);
+        });
+    }
+    return cd.getType();
 };
 
 ConstructorExpression.prototype.interpret = function(context) {
     var cd = context.getRegisteredDeclaration(this.type.name);
     this.checkFirstHomonym(context, cd);
-	var instance = this.type.newInstance(context);
+    var instance = this.type.newInstance(context);
     instance.mutable = true;
-	if(this.copyFrom!=null) {
-		var copyObj = this.copyFrom.interpret(context);
-		if((copyObj.getMemberValue || null)!=null) {
-			var names = copyObj.getMemberNames();
-			names.forEach(function(name) {
+    if(this.copyFrom!=null) {
+        var copyObj = this.copyFrom.interpret(context);
+        if((copyObj.getMemberValue || null)!=null) {
+            var names = copyObj.getMemberNames();
+            names.forEach(function(name) {
                 if(name !== "dbId" && cd.hasAttribute(context, name)) {
                     var value = copyObj.getMemberValue(context, name);
                     if(value!=null && value.mutable && !this.type.mutable)
                         throw new NotMutableError();
                     // TODO convert Document member to attribute type
-					instance.setMember(context, name, value);
-				}
-			}, this);
-		}
-	}
-	if(this.args!=null) {
+                    instance.setMember(context, name, value);
+                }
+            }, this);
+        }
+    }
+    if(this.args!=null) {
         this.args.forEach(function(argument) {
-			var value = argument.expression.interpret(context);
+            var value = argument.expression.interpret(context);
             if(value!=null && value.mutable && !this.type.mutable)
                 throw new NotMutableError();
-			instance.setMember(context, argument.name, value);
-		}, this);
-	}
+            instance.setMember(context, argument.name, value);
+        }, this);
+    }
     instance.mutable = this.type.mutable;
-	return instance;
+    return instance;
 };
 
 ConstructorExpression.prototype.declare = function(transpiler) {

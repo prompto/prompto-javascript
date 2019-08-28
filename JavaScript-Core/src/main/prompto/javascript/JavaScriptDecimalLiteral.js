@@ -1,4 +1,6 @@
 var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+var DecimalType = require("../type/DecimalType").DecimalType;
+
 
 function JavaScriptDecimalLiteral(text) {
 	JavaScriptLiteral.call(this, text);

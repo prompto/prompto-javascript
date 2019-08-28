@@ -1,5 +1,6 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var ParameterList = require("../param/ParameterList").ParameterList;
+var InternalError = require("../error/InternalError").InternalError;
 var BuiltInContext = null;
 
 exports.resolve = function() {

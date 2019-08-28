@@ -2,9 +2,9 @@ var Expression = require("./Expression").Expression;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var MemberSelector = require("./MemberSelector").MemberSelector;
+var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var Instance = require("../value/Value").Instance;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var MatchOp = require("../store/MatchOp").MatchOp;
 var CmpOp = require("../grammar/CmpOp").CmpOp;
@@ -126,7 +126,7 @@ CompareExpression.prototype.interpretQuery = function(context, query) {
         var decl = context.findAttribute(name);
         var info = decl == null ? null : decl.getAttributeInfo();
         if (value instanceof Instance)
-            value = value.getMemberValue(context, "dbId", False)
+            value = value.getMemberValue(context, "dbId", false);
         var matchOp = this.getMatchOp();
         query.verify(info, matchOp, value == null ? null : value.getStorableData());
         if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
@@ -161,7 +161,7 @@ CompareExpression.prototype.getMatchOp = function() {
     else if (this.operator == CmpOp.GTE || this.operator == CmpOp.LT)
         return MatchOp.LESSER;
     else
-        throw new InvalidValueError(this.operator.toString());
+        throw new InvalidDataError(this.operator.toString());
 };
 
 

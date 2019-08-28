@@ -1,7 +1,6 @@
 var Expression = require("./Expression").Expression;
 var Variable = require("../runtime/Variable").Variable;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
-var Identifier = require("../grammar/Identifier").Identifier;
 var Parameter = require("../param/Parameter").Parameter;
 var Dialect = require("../parser/Dialect").Dialect;
 var CategoryDeclaration = null;
@@ -13,7 +12,7 @@ var MethodDeclarationMap = null;
 var InstanceContext = null;
 
 exports.resolve = function() {
-	CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     InstanceContext = require("../runtime/Context").InstanceContext;
 }
@@ -22,7 +21,7 @@ function InstanceExpression(id) {
     Expression.call(this);
     this.copySectionFrom.call(this, id);
     this.id = id;
-	return this;
+    return this;
 }
 
 
@@ -38,7 +37,7 @@ Object.defineProperty(InstanceExpression.prototype, "name", {
 
 
 InstanceExpression.prototype.toString = function() {
-	return this.name;
+    return this.name;
 };
 
 InstanceExpression.prototype.declare = function(transpiler) {
@@ -97,23 +96,23 @@ InstanceExpression.prototype.requiresMethod = function(writer) {
 };
 
 InstanceExpression.prototype.check = function(context) {
-	var named = context.getRegistered(this.id.name);
-	if(named==null) {
-	    named = context.getRegisteredDeclaration(this.id.name);
+    var named = context.getRegistered(this.id.name);
+    if(named==null) {
+        named = context.getRegisteredDeclaration(this.id.name);
     }
-	if (named instanceof Variable) { // local variable
+    if (named instanceof Variable) { // local variable
         return named.getType(context);
     } else if(named instanceof LinkedVariable) { // local variable
         return named.getType(context);
-	} else if (named instanceof Parameter) { // named argument
-		return named.getType(context);
-	} else if(named instanceof CategoryDeclaration) { // any p with x
-		return named.getType(context);
-	} else if(named instanceof AttributeDeclaration) { // in category method
-		return named.getType(context);
-	} else if(named instanceof MethodDeclarationMap) { // global method or closure
-		return new MethodType(named.getFirst());
-	} else {
+    } else if (named instanceof Parameter) { // named argument
+        return named.getType(context);
+    } else if(named instanceof CategoryDeclaration) { // any p with x
+        return named.getType(context);
+    } else if(named instanceof AttributeDeclaration) { // in category method
+        return named.getType(context);
+    } else if(named instanceof MethodDeclarationMap) { // global method or closure
+        return new MethodType(named.getFirst());
+    } else {
         context.problemListener.reportUnknownVariable(this.id);
         return VoidType.instance;
     }

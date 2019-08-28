@@ -5,6 +5,8 @@ var IteratorType = require("../type/IteratorType").IteratorType;
 var IterableValue = require("../value/IterableValue").IterableValue;
 var UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
 var ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
+var InternalError = require("../error/InternalError").InternalError;
+
 
 function IteratorExpression(name, source, expression) {
     Expression.call(this);
@@ -45,7 +47,7 @@ IteratorExpression.prototype.declare = function(transpiler) {
 
 IteratorExpression.prototype.transpile = function(transpiler) {
     var srcType = this.source.check(transpiler.context);
-    var resultType = srcType.checkIterator(transpiler.context, this.source);
+    /*var resultType = */srcType.checkIterator(transpiler.context, this.source);
     this.source.transpile(transpiler);
     transpiler = transpiler.newChildTranspiler()
     srcType.transpileIterator(transpiler, this.name, this.expression);

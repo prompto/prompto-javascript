@@ -3,7 +3,7 @@ var SwitchCase = require("./SwitchCase").SwitchCase;
 function AtomicSwitchCase(expression, statements) {
 	SwitchCase.call(this, expression, statements);
 	return this;
-};
+}
 
 AtomicSwitchCase.prototype = Object.create(SwitchCase.prototype);
 AtomicSwitchCase.prototype.constructor = AtomicSwitchCase;
@@ -21,7 +21,7 @@ AtomicSwitchCase.prototype.matches = function(context, value) {
 };
 
 
-AtomicSwitchCase.prototype.caseToPDialect = function(writer) {
+AtomicSwitchCase.prototype.caseToMDialect = function(writer) {
     this.caseToEDialect(writer);
 };
 

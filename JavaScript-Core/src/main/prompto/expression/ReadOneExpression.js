@@ -2,7 +2,6 @@ var Expression = require("./Expression").Expression;
 var ResourceType = require("../type/ResourceType").ResourceType;
 var ResourceContext = require("../runtime/Context").ResourceContext;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InternalError = require("../error/InternalError").InternalError;
 var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
 var TextType = require("../type/TextType").TextType;
 var TextValue = require("../value/TextValue").TextValue;
@@ -41,10 +40,7 @@ ReadOneExpression.prototype.interpret = function(context) {
 	if(res==null) {
 		throw new NullReferenceError();
 	}
-	if(!(res.isReadable)) {
-		throw new InternalError("Illegal read source: " + o);
-	}
-	if(!res.isReadable()) {
+	if(!res.isReadable || !res.isReadable()) {
 		throw new InvalidResourceError("Not readable");
 	}
     var s = res.readLine();

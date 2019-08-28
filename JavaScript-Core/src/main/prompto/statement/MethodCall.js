@@ -16,13 +16,11 @@ var PromptoError = require("../error/PromptoError").PromptoError;
 var InstanceContext = null;
 var ThisExpression = null;
 var VoidType = require("../type/VoidType").VoidType;
-var Section = require("../parser/Section").Section;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var CodeParameter = require("../param/CodeParameter").CodeParameter;
+var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 
 
 exports.resolve = function() {
@@ -56,7 +54,7 @@ MethodCall.prototype.requiresInvoke = function(writer) {
     if (writer.dialect != Dialect.E || (this.args != null && this.args.length > 0))
         return false;
     try {
-        finder = new MethodFinder(writer.context, this);
+        var finder = new MethodFinder(writer.context, this);
         var declaration = finder.findMethod(false);
         /* if method is a reference, need to prefix with invoke */
         return declaration instanceof AbstractMethodDeclaration || declaration.closureOf !== null;

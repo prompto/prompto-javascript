@@ -7,7 +7,7 @@ if(isNodeJs) {
     exports.stderr = process.stderr;
 } else {
     // need a named wrapper around console for situations where console is anonymous (such as in ace.js)
-    function writer(m) {
+    var writer = function (m) {
         this.write = m || console.log;
     };
 

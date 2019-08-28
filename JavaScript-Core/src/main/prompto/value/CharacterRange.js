@@ -1,5 +1,5 @@
 var RangeValue = require("./RangeValue").RangeValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
+var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var CharacterValue = null;
 var CharacterType = null;
 
@@ -25,7 +25,7 @@ CharacterRange.prototype.size = function() {
 CharacterRange.prototype.getItem = function(index) {
 	var result = this.low.value.charCodeAt(0) + index - 1;
 	if(result>this.high.value.charCodeAt(0)) {
-		throw new IndexOutOfBoundsException();
+		throw new IndexOutOfRangeError();
 	} else {
 		return new CharacterValue(String.fromCharCode(result));
 	}

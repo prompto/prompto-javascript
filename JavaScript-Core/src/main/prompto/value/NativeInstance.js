@@ -2,6 +2,8 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 var TypeUtils = require("../utils/TypeUtils");
 var Instance = require("./Value").Instance;
 var $DataStore = require("../store/DataStore").$DataStore;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
+var Variable = require("../runtime/Variable").Variable;
 
 function NativeInstance(context, declaration, instance) {
     Instance.call(this,new CategoryType(declaration.id));

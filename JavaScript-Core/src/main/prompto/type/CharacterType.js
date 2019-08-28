@@ -2,11 +2,11 @@ var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
-var AnyType = require("./AnyType").AnyType;
 var CharacterValue = null;
 var RangeType = require("./RangeType").RangeType;
 var CharacterRange = require("../value/CharacterRange").CharacterRange;
 var Identifier = require("../grammar/Identifier").Identifier;
+var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 exports.resolve = function() {
     CharacterValue = require("../value/CharacterValue").CharacterValue;

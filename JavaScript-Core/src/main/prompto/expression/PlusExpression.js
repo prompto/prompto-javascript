@@ -1,5 +1,4 @@
 var Expression = require("./Expression").Expression;
-var Value = require("../value/Value").Value;
 
 function PlusExpression(left, right) {
 	Expression.call(this);

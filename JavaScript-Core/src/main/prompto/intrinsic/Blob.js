@@ -1,4 +1,7 @@
 var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
+var stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
+var Document = require("./Document").Document;
+
 
 function Blob(data) {
     this.data = data;

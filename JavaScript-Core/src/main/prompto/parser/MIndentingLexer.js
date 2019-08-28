@@ -1,4 +1,3 @@
-var antlr4 = require("antlr4/index");
 var MLexer = require("../../../generated/prompto/parser/MLexer").MLexer;
 var Dialect = require("./Dialect").Dialect;
 

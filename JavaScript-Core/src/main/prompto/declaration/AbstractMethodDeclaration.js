@@ -1,11 +1,10 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var VoidType = require("../type/VoidType").VoidType;
-var CodeParameter = require("../param/CodeParameter").CodeParameter;
 
 function AbstractMethodDeclaration(id, args, returnType) {
-	BaseMethodDeclaration.call(this, id, args, returnType);
+    BaseMethodDeclaration.call(this, id, args, returnType);
     this.returnType = returnType || VoidType.instance;
-	return this;
+    return this;
 }
 
 AbstractMethodDeclaration.prototype = Object.create(BaseMethodDeclaration.prototype);
@@ -16,14 +15,14 @@ AbstractMethodDeclaration.prototype.memberCheck = function(declaration, context)
 };
 
 AbstractMethodDeclaration.prototype.check = function(context, isStart) {
-	if(this.parameters!=null) {
-		this.parameters.check(context);
-	}
-	if(isStart) {
-	    var local = context.newLocalContext();
+    if(this.parameters!=null) {
+        this.parameters.check(context);
+    }
+    if(isStart) {
+        var local = context.newLocalContext();
         this.registerParameters(local);
     }
-	return this.returnType;
+    return this.returnType;
 };
 
 AbstractMethodDeclaration.prototype.declare = function(transpiler) {

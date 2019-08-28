@@ -57,7 +57,7 @@ ExtendedParameter.prototype.check = function(context) {
 	if(this.attributes!==null) {
 		this.attributes.forEach(function(attr) {
 			var actual = context.getRegisteredDeclaration(attr);
-			if (!actual instanceof AttributeDeclaration) {
+			if (!(actual instanceof AttributeDeclaration)) {
 				throw new SyntaxError("Unknown attribute: \"" + attr + "\"");
 			}
 		});

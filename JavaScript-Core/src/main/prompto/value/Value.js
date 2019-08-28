@@ -10,7 +10,7 @@ function Value (type) {
     this.id = ++id;
     this.type = type;
     this.mutable = false;
-	return this;
+    return this;
 }
 
 Value.prototype.collectStorables = function(list) {
@@ -18,19 +18,19 @@ Value.prototype.collectStorables = function(list) {
 };
 
 Value.prototype.And = function(context, value) {
-	throw new SyntaxError("Logical and not supported by " + this.constructor.name);
+    throw new SyntaxError("Logical and not supported by " + this.constructor.name);
 };
 
 Value.prototype.Or = function(context, value) {
-	throw new SyntaxError("Logical or not supported by " + this.constructor.name);
+    throw new SyntaxError("Logical or not supported by " + this.constructor.name);
 };
 
 Value.prototype.Not = function(context) {
-	throw new SyntaxError("Logical negation not supported by " + this.constructor.name);
+    throw new SyntaxError("Logical negation not supported by " + this.constructor.name);
 };
 
 Value.prototype.Add = function(context, value) {
-	throw new SyntaxError("Add not supported by " + this.constructor.name);
+    throw new SyntaxError("Add not supported by " + this.constructor.name);
 };
 
 Value.prototype.transpile = function(transpiler) {
@@ -39,31 +39,31 @@ Value.prototype.transpile = function(transpiler) {
 
 
 Value.prototype.Subtract = function(context, value) {
-	throw new SyntaxError("Subtract not supported by " + this.constructor.name);
+    throw new SyntaxError("Subtract not supported by " + this.constructor.name);
 };
 
 Value.prototype.Multiply = function(context, value) {
-	throw new SyntaxError("Multiply not supported by " + this.constructor.name);
+    throw new SyntaxError("Multiply not supported by " + this.constructor.name);
 };
 
 Value.prototype.Divide = function(context, value) {
-	throw new SyntaxError("Divide not supported by " + this.constructor.name);
+    throw new SyntaxError("Divide not supported by " + this.constructor.name);
 };
 
 Value.prototype.IntDivide = function(context, value) {
-	throw new SyntaxError("Integer divide not supported by " + this.constructor.name);
+    throw new SyntaxError("Integer divide not supported by " + this.constructor.name);
 };
 
 Value.prototype.Modulo = function(context, value) {
-	throw new SyntaxError("Modulo not supported by " + this.constructor.name);
+    throw new SyntaxError("Modulo not supported by " + this.constructor.name);
 };
 
 Value.prototype.Minus = function(context) {
-	throw new SyntaxError("Minus not supported by " + this.constructor.name);
+    throw new SyntaxError("Minus not supported by " + this.constructor.name);
 };
 
 Value.prototype.compareToValue = function(context, value) {
-	throw new SyntaxError("Compare not supported by " + this.constructor.name);
+    throw new SyntaxError("Compare not supported by " + this.constructor.name);
 };
 
 Value.prototype.getMemberValue = function(context, name) {
@@ -71,11 +71,11 @@ Value.prototype.getMemberValue = function(context, name) {
         return new TextValue(this.toString());
     }
     else
-	    throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
+        throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
 };
 
 Value.prototype.ConvertTo = function(type) {
-	return this;
+    return this;
 };
 
 Value.prototype.Roughly = function(context, value) {

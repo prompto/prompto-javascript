@@ -19,11 +19,10 @@ PythonIdentifierExpression.prototype.toString = function() {
 }
 
 PythonIdentifierExpression.parse = function(ids) {
-	var parts = ids.split("\\.");
 	var result = null;
-	for(var idx=0;i<parts.length;idx++) {
-		result = new PythonIdentifierExpression(result, parts[idx]);
-	}
+	ids.split("\\.").forEach(function(part) {
+		result = new PythonIdentifierExpression(result, part);
+	});
 	return result;
 };
 

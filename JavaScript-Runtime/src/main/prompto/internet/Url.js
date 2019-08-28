@@ -24,6 +24,7 @@ Url.prototype.readFully = function() {
         var res = request('GET', this.path);
         return res.getBody().toString();
     } else {
+        /* global XMLHttpRequest */
         var r = new XMLHttpRequest();
         r.overrideMimeType('text/plain');
         r.open('GET', this.path, false);

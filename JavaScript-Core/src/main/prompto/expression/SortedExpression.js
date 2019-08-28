@@ -7,10 +7,8 @@ var InternalError = require("../error/InternalError").InternalError;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var ListValue = require("../value/ListValue").ListValue;
-var TupleValue = require("../value/TupleValue").TupleValue;
 var SetValue = require("../value/SetValue").SetValue;
 var ListType = require("../type/ListType").ListType;
-var TupleType = require("../type/TupleType").TupleType;
 var SetType = require("../type/SetType").SetType;
 var List = require("../intrinsic/List").List;
 

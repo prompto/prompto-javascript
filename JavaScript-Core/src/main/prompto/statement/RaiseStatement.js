@@ -25,7 +25,7 @@ RaiseStatement.prototype.equals = function(obj) {
 	} else if(!(obj instanceof RaiseStatement)) {
 		return false;
 	} else {
-		return this.expression.equals(other.expression);
+		return this.expression.equals(obj.expression);
 	}
 };
 

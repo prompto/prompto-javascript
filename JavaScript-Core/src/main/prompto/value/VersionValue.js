@@ -1,5 +1,4 @@
 var Value = require("./Value").Value;
-var Version = require("../intrinsic/Version").Version;
 var VersionType = null;
 
 exports.resolve = function() {

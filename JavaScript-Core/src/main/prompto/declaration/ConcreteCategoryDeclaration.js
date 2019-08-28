@@ -16,11 +16,11 @@ exports.resolve = function() {
 }
 
 function ConcreteCategoryDeclaration(id, attributes, derivedFrom, methods) {
-	CategoryDeclaration.call(this, id, attributes);
-	this.derivedFrom = derivedFrom || null;
-	this.methodsMap = null;
-	this.methods = methods || [];
-	return this;
+    CategoryDeclaration.call(this, id, attributes);
+    this.derivedFrom = derivedFrom || null;
+    this.methodsMap = null;
+    this.methods = methods || [];
+    return this;
 }
 
 ConcreteCategoryDeclaration.prototype = Object.create(CategoryDeclaration.prototype);
@@ -112,32 +112,32 @@ ConcreteCategoryDeclaration.prototype.methodsToMDialect = function(writer) {
 };
 
 ConcreteCategoryDeclaration.prototype.hasAttribute = function(context, name) {
-	if (CategoryDeclaration.prototype.hasAttribute.call(this, context, name)) {
-		return true;
-	} else {
-		return this.hasDerivedAttribute(context, name);
-	}
+    if (CategoryDeclaration.prototype.hasAttribute.call(this, context, name)) {
+        return true;
+    } else {
+        return this.hasDerivedAttribute(context, name);
+    }
 };
 
 ConcreteCategoryDeclaration.prototype.hasDerivedAttribute = function(context, name) {
-	if(this.derivedFrom==null) {
-		return false;
-	}
-	for(var i=0;i<this.derivedFrom.length;i++) {
+    if(this.derivedFrom==null) {
+        return false;
+    }
+    for(var i=0;i<this.derivedFrom.length;i++) {
         var ancestor = this.derivedFrom[i].name;
-		if(ConcreteCategoryDeclaration.ancestorHasAttribute(ancestor, context, name)) {
-			return true;
-		}
-	}
-	return false;
+        if(ConcreteCategoryDeclaration.ancestorHasAttribute(ancestor, context, name)) {
+            return true;
+        }
+    }
+    return false;
 };
 
 ConcreteCategoryDeclaration.ancestorHasAttribute = function(ancestor, context, name) {
-	var actual = context.getRegisteredDeclaration(ancestor);
-	if(!(actual instanceof CategoryDeclaration)) {
-		return false;
-	}
-	return actual.hasAttribute(context, name);
+    var actual = context.getRegisteredDeclaration(ancestor);
+    if(!(actual instanceof CategoryDeclaration)) {
+        return false;
+    }
+    return actual.hasAttribute(context, name);
 };
 
 
@@ -176,7 +176,7 @@ ConcreteCategoryDeclaration.prototype.check = function(context, isStart) {
     this.checkDerived(context);
     this.processAnnotations(context, true);
     this.checkMethods(context);
-	return CategoryDeclaration.prototype.check.call(this, context, isStart);
+    return CategoryDeclaration.prototype.check.call(this, context, isStart);
 }
 
 ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
@@ -187,79 +187,79 @@ ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
 };
 
 ConcreteCategoryDeclaration.prototype.registerMethods = function(context) {
-	if(this.methodsMap==null) {
+    if(this.methodsMap==null) {
         this.methodsMap = {};
-		this.methods.forEach(function(method) {
+        this.methods.forEach(function(method) {
             method.memberOf = this;
-			this.registerMethod(method, context);
-		}, this);
-	}
+            this.registerMethod(method, context);
+        }, this);
+    }
 };
 
 
 ConcreteCategoryDeclaration.prototype.registerMethod = function(method, context) {
-	var actual;
-	if(method instanceof SetterMethodDeclaration) {
-		var key = "setter:" + method.name;
-		actual = this.methodsMap[key] || null;
-		if(actual!=null)
+    var actual;
+    if(method instanceof SetterMethodDeclaration) {
+        var key = "setter:" + method.name;
+        actual = this.methodsMap[key] || null;
+        if(actual!=null)
             context.problemListener.reportDuplicateSetter(method.id);
-		this.methodsMap[key] = method;
-	} else if(method instanceof GetterMethodDeclaration) {
-		var key = "getter:"+method.name;
-		actual = this.methodsMap[key] || null;
-		if(actual!=null)
+        this.methodsMap[key] = method;
+    } else if(method instanceof GetterMethodDeclaration) {
+        key = "getter:"+method.name;
+        actual = this.methodsMap[key] || null;
+        if(actual!=null)
             context.problemListener.reportDuplicateGetter(method.id);
-		this.methodsMap[key] = method;
-	} else {
-		var key = method.name;
-		actual = this.methodsMap[key] || null;
-		if(actual==null) {
-			actual = new MethodDeclarationMap(method.name);
-			this.methodsMap[key] = actual;
-		}
-		actual.register(method, context.problemListener);
-	}
+        this.methodsMap[key] = method;
+    } else {
+        key = method.name;
+        actual = this.methodsMap[key] || null;
+        if(actual==null) {
+            actual = new MethodDeclarationMap(method.name);
+            this.methodsMap[key] = actual;
+        }
+        actual.register(method, context.problemListener);
+    }
 };
 
 ConcreteCategoryDeclaration.prototype.checkDerived = function(context) {
-	if(this.derivedFrom!=null) {
+    if(this.derivedFrom!=null) {
         this.derivedFrom.map( function(id) {
             var cd = context.getRegisteredDeclaration(id.name) || null;
-			if (cd == null)
+            if (cd == null)
                 context.problemListener.reportUnknownCategory(id);
-			else if(!(cd instanceof CategoryDeclaration))
+            else if(!(cd instanceof CategoryDeclaration))
                 context.problemListener.reportInvalidCategory(id);
-		});
-	}
+        });
+    }
 };
 
 ConcreteCategoryDeclaration.prototype.isDerivedFrom = function(context, categoryType) {
-	if(this.derivedFrom==null) {
-		return false;
-	}
-	for(var i=0;i<this.derivedFrom.length;i++) {
-		var ancestor = this.derivedFrom[i].name;
-		if(ancestor==categoryType.name) {
-			return true;
-		}
-		if(ConcreteCategoryDeclaration.isAncestorDerivedFrom(ancestor,context,categoryType)) {
-			return true;
-		}
-	}
-	return false;
+    if(this.derivedFrom==null) {
+        return false;
+    }
+    for(var i=0;i<this.derivedFrom.length;i++) {
+        var ancestor = this.derivedFrom[i].name;
+        if(ancestor==categoryType.name) {
+            return true;
+        }
+        if(ConcreteCategoryDeclaration.isAncestorDerivedFrom(ancestor,context,categoryType)) {
+            return true;
+        }
+    }
+    return false;
 };
 
 ConcreteCategoryDeclaration.isAncestorDerivedFrom = function(ancestor, context, categoryType) {
-	var actual = context.getRegisteredDeclaration(ancestor);
-	if(!(actual instanceof CategoryDeclaration)) {
-		return false;
-	}
-	return actual.isDerivedFrom(context, categoryType);
+    var actual = context.getRegisteredDeclaration(ancestor);
+    if(!(actual instanceof CategoryDeclaration)) {
+        return false;
+    }
+    return actual.isDerivedFrom(context, categoryType);
 };
 
 ConcreteCategoryDeclaration.prototype.newInstance = function(context) {
-	return new ConcreteInstance(context, this);
+    return new ConcreteInstance(context, this);
 };
 
 ConcreteCategoryDeclaration.prototype.getAllAttributes = function(context) {
@@ -284,118 +284,118 @@ ConcreteCategoryDeclaration.prototype.getAncestorAttributes = function(context, 
 
 
 ConcreteCategoryDeclaration.prototype.findGetter = function(context, attrName) {
-	if(this.methodsMap==null) {
-		return null;
-	}
-	var method = this.methodsMap["getter:" + attrName] || null;
-	if(method instanceof GetterMethodDeclaration) {
-		return method;
-	}
-	if(method!=null)
+    if(this.methodsMap==null) {
+        return null;
+    }
+    var method = this.methodsMap["getter:" + attrName] || null;
+    if(method instanceof GetterMethodDeclaration) {
+        return method;
+    }
+    if(method!=null)
         context.problemListener.reportBadGetter(method.id);
-	return this.findDerivedGetter(context, attrName);
+    return this.findDerivedGetter(context, attrName);
 };
 
 ConcreteCategoryDeclaration.prototype.findDerivedGetter = function(context, attrName) {
-	if(this.derivedFrom==null) {
-		return null;
-	}
-	for(var i=0;i<this.derivedFrom;i++) {
-		var method = ConcreteCategoryDeclaration.findAncestorGetter(this.derivedFrom[i],context,attrName);
-		if(method!=null) {
-			return method;
-		}
-	}
-	return null;
+    if(this.derivedFrom==null) {
+        return null;
+    }
+    for(var i=0;i<this.derivedFrom;i++) {
+        var method = ConcreteCategoryDeclaration.findAncestorGetter(this.derivedFrom[i],context,attrName);
+        if(method!=null) {
+            return method;
+        }
+    }
+    return null;
 }
 
 ConcreteCategoryDeclaration.findAncestorGetter = function(ancestor, context, attrName) {
-	var actual = context.getRegisteredDeclaration(ancestor);
-	if(!(actual instanceof ConcreteCategoryDeclaration)) {
-		return null;
-	}
-	return actual.findGetter(context, attrName);
+    var actual = context.getRegisteredDeclaration(ancestor);
+    if(!(actual instanceof ConcreteCategoryDeclaration)) {
+        return null;
+    }
+    return actual.findGetter(context, attrName);
 };
 
 ConcreteCategoryDeclaration.prototype.findSetter = function(context, attrName) {
-	if(this.methodsMap==null) {
-		return null;
-	}
-	var method = this.methodsMap["setter:" + attrName] || null;
-	if(method instanceof SetterMethodDeclaration) {
-		return method;
-	}
-	if(method!=null)
+    if(this.methodsMap==null) {
+        return null;
+    }
+    var method = this.methodsMap["setter:" + attrName] || null;
+    if(method instanceof SetterMethodDeclaration) {
+        return method;
+    }
+    if(method!=null)
         context.problemListener.reportBadSetter(method.id);
-	return this.findDerivedSetter(context,attrName);
+    return this.findDerivedSetter(context,attrName);
 };
 
 ConcreteCategoryDeclaration.prototype.findDerivedSetter = function(context, attrName) {
-	if(this.derivedFrom==null) {
-		return null;
-	}
-	for(var i=0;i<this.derivedFrom;i++) {
-		var method = ConcreteCategoryDeclaration.findAncestorSetter(this.derivedFrom[i],context,attrName);
-		if(method!=null) {
-			return method;
-		}
-	}
-	return null;
+    if(this.derivedFrom==null) {
+        return null;
+    }
+    for(var i=0;i<this.derivedFrom;i++) {
+        var method = ConcreteCategoryDeclaration.findAncestorSetter(this.derivedFrom[i],context,attrName);
+        if(method!=null) {
+            return method;
+        }
+    }
+    return null;
 };
 
 ConcreteCategoryDeclaration.findAncestorSetter = function(ancestor, context, attrName) {
-	var actual = context.getRegisteredDeclaration(ancestor);
-	if(!(actual instanceof ConcreteCategoryDeclaration)) {
-		return null;
-	}
-	return actual.findSetter(context, attrName);
+    var actual = context.getRegisteredDeclaration(ancestor);
+    if(!(actual instanceof ConcreteCategoryDeclaration)) {
+        return null;
+    }
+    return actual.findSetter(context, attrName);
 };
 
 
 ConcreteCategoryDeclaration.prototype.getMemberMethodsMap = function(context, name) {
-	var methodsMap = new MethodDeclarationMap(name);
-	this.registerMemberMethods(context, methodsMap);
-	return methodsMap;
+    var methodsMap = new MethodDeclarationMap(name);
+    this.registerMemberMethods(context, methodsMap);
+    return methodsMap;
 };
 
 
 ConcreteCategoryDeclaration.prototype.registerMemberMethods = function(context, result) {
     this.registerMethods(context);
-	this.registerThisMemberMethods(context,result);
-	this.registerDerivedMemberMethods(context,result);
+    this.registerThisMemberMethods(context,result);
+    this.registerDerivedMemberMethods(context,result);
 };
 
 
 ConcreteCategoryDeclaration.prototype.registerThisMemberMethods = function(context, result) {
-	if(this.methodsMap==null) {
-		return;
-	}
-	var actual = this.methodsMap[result.name] || null;
-	if(actual==null) {
-		return;
-	}
-	if(!(actual instanceof MethodDeclarationMap))
+    if(this.methodsMap==null) {
+        return;
+    }
+    var actual = this.methodsMap[result.name] || null;
+    if(actual==null) {
+        return;
+    }
+    if(!(actual instanceof MethodDeclarationMap))
         context.problemListener.reportBadMember(actual.id);
-	var protos = Object.getOwnPropertyNames(actual.protos);
+    var protos = Object.getOwnPropertyNames(actual.protos);
     protos.forEach(function(proto) {
         var method = actual.protos[proto];
-		result.registerIfMissing(method);
-	});
+        result.registerIfMissing(method);
+    });
 };
 
 ConcreteCategoryDeclaration.prototype.registerDerivedMemberMethods = function(context, result) {
-	if(this.derivedFrom!=null)
+    if(this.derivedFrom!=null)
         this.derivedFrom.forEach(function(ancestor) {
-		    this.registerAncestorMemberMethods(ancestor, context, result);
-	    }, this);
+            this.registerAncestorMemberMethods(ancestor, context, result);
+        }, this);
 };
 
 ConcreteCategoryDeclaration.prototype.registerAncestorMemberMethods = function(ancestor, context, result) {
-	var actual = context.getRegisteredDeclaration(ancestor);
-	if(!(actual instanceof ConcreteCategoryDeclaration)) {
-		return;
-	}
-	actual.registerMemberMethods(context, result);
+    var actual = context.getRegisteredDeclaration(ancestor);
+    if(!(actual instanceof ConcreteCategoryDeclaration)) {
+        return;
+    }
+    actual.registerMemberMethods(context, result);
 };
 
 
@@ -606,7 +606,7 @@ ConcreteCategoryDeclaration.prototype.transpileGetterSetter = function(transpile
     transpiler.append(",").newLine();
     transpiler.append("set: function(").append(name).append(") {").indent();
     if(setter) {
-        var t = transpiler.newSetterTranspiler(name);
+        t = transpiler.newSetterTranspiler(name);
         t.append(name).append(" = (function(").append(name).append(") {").indent();
         setter.transpile(t);
         t.append(";").dedent().append("})(name);").newLine();

@@ -16,11 +16,11 @@ function ListLiteral(mutable, expressions) {
     if(typeof(mutable)!=typeof(true))
         throw "mutable!";
     expressions = expressions || new ExpressionList();
-	Literal.call(this, "[" + expressions.toString() + "]", new ListValue(MissingType.instance));
-	this.itemType = null;
+    Literal.call(this, "[" + expressions.toString() + "]", new ListValue(MissingType.instance));
+    this.itemType = null;
     this.mutable = mutable;
     this.expressions = expressions;
-	return this;
+    return this;
 }
 
 ListLiteral.prototype = Object.create(Literal.prototype);
@@ -28,27 +28,27 @@ ListLiteral.prototype.constructor = ListLiteral;
 
 
 ListLiteral.prototype.check = function(context) {
-	if(this.itemType==null) {
-		this.itemType = inferExpressionsType(context, this.expressions);
+    if(this.itemType==null) {
+        this.itemType = inferExpressionsType(context, this.expressions);
         this.type = new ListType(this.itemType);
-	}
-	return this.type;
+    }
+    return this.type;
 };
 
 
 ListLiteral.prototype.interpret = function(context) {
-	if(this.expressions.length) {
+    if(this.expressions.length) {
         var self = this;
         this.check(context); // force computation of itemType
-		var list = new ListValue(this.itemType, null, null, this.mutable);
-		this.expressions.forEach(function(expression) {
-			var item = expression.interpret(context);
+        var list = new ListValue(this.itemType, null, null, this.mutable);
+        this.expressions.forEach(function(expression) {
+            var item = expression.interpret(context);
             item = self.interpretPromotion(item);
-			list.add(item);
-		});
-		return list;
-	} else
-	    return this.value;
+            list.add(item);
+        });
+        return list;
+    } else
+        return this.value;
 };
 
 ListLiteral.prototype.interpretPromotion = function(item) {

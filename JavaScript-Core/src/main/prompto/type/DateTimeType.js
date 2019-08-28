@@ -5,7 +5,6 @@ var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
 var DateType = null;
 var TimeType = null;
-var AnyType = require("./AnyType").AnyType;
 var DateTime = require("../intrinsic/DateTime").DateTime;
 var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
 var Identifier = require("../grammar/Identifier").Identifier;

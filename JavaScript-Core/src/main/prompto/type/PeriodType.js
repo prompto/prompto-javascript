@@ -96,7 +96,7 @@ PeriodType.prototype.checkMultiply = function(context, other, tryReverse) {
 	if(other === IntegerType.instance) {
 		return this;
 	} else {
-		return NativeType.prototype.checkMultiply(this, transpiler, other, tryReverse);
+		return NativeType.prototype.checkMultiply(this, context, other, tryReverse);
 	}
 };
 

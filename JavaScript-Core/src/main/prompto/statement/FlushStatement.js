@@ -6,7 +6,7 @@ var VoidType = require("../type/VoidType").VoidType;
 function FlushStatement() {
     SimpleStatement.call(this);
     return this;
-};
+}
 
 FlushStatement.prototype = Object.create(SimpleStatement.prototype);
 FlushStatement.prototype.constructor = FlushStatement;

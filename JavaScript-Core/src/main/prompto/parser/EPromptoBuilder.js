@@ -8,7 +8,6 @@ var statement = require("../statement/index");
 var literal = require("../literal/index");
 var grammar = require("../grammar/index");
 var param = require("../param/index");
-var value = require("../value/index");
 var utils = require("../utils/index");
 var parser = require("../parser/index");
 var type = require("../type/index");
@@ -17,15 +16,14 @@ var css = require("../css/index");
 var java = require("../java/index");
 var csharp = require("../csharp/index");
 var python = require("../python/index");
-var antlr4 = require("antlr4");
 
 function EPromptoBuilder(eparser) {
-	parser.EParserListener.call(this);
-	this.input = eparser.getTokenStream();
-	this.path = eparser.path;
-	this.nodeValues = {};
+    parser.EParserListener.call(this);
+    this.input = eparser.getTokenStream();
+    this.path = eparser.path;
+    this.nodeValues = {};
     this.nextNodeId = 0;
-	return this;
+    return this;
 }
 
 EPromptoBuilder.prototype = Object.create(parser.EParserListener.prototype);
@@ -35,10 +33,10 @@ EPromptoBuilder.prototype.constructor = EPromptoBuilder;
 EPromptoBuilder.prototype.setNodeValue = function(node, value) {
     if(node["%id"]===undefined)
         node["%id"] = this.nextNodeId++;
-	this.nodeValues[node["%id"]] = value;
-	if(value instanceof parser.Section) {
-		this.buildSection(node, value);
-	}
+    this.nodeValues[node["%id"]] = value;
+    if(value instanceof parser.Section) {
+        this.buildSection(node, value);
+    }
 };
 
 EPromptoBuilder.prototype.getNodeValue = function(node) {
@@ -106,45 +104,45 @@ EPromptoBuilder.prototype.readComments = function(ctxs) {
 
 
 EPromptoBuilder.prototype.exitIdentifierExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.UnresolvedIdentifier(exp));
 };
 
 EPromptoBuilder.prototype.exitTypeIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.type_identifier());
-	this.setNodeValue(ctx, name);
+    var name = this.getNodeValue(ctx.type_identifier());
+    this.setNodeValue(ctx, name);
 };
 
 EPromptoBuilder.prototype.exitMethodCallExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp1 || ctx.exp2);
-	var args = this.getNodeValue(ctx.args);
-	var call = new statement.UnresolvedCall(exp, args);
-	this.setNodeValue(ctx, call);
+    var exp = this.getNodeValue(ctx.exp1 || ctx.exp2);
+    var args = this.getNodeValue(ctx.args);
+    var call = new statement.UnresolvedCall(exp, args);
+    this.setNodeValue(ctx, call);
 };
 
 
 EPromptoBuilder.prototype.exitUnresolvedExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
 EPromptoBuilder.prototype.exitUnresolvedIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new expression.UnresolvedIdentifier(name));
 };
 
 EPromptoBuilder.prototype.exitUnresolvedSelector = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var selector = this.getNodeValue(ctx.selector);
-	selector.parent = parent;
-	this.setNodeValue(ctx, selector);
+    var parent = this.getNodeValue(ctx.parent);
+    var selector = this.getNodeValue(ctx.selector);
+    selector.parent = parent;
+    this.setNodeValue(ctx, selector);
 };
 
 
 EPromptoBuilder.prototype.exitUnresolved_selector = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.MemberSelector(null, name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new expression.MemberSelector(null, name));
 };
 
 
@@ -188,7 +186,7 @@ EPromptoBuilder.prototype.exitBlobType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitBooleanLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.getText()));
 };
 
 
@@ -198,40 +196,40 @@ EPromptoBuilder.prototype.exitBreakStatement = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitMinIntegerLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.MinIntegerLiteral());
+    this.setNodeValue(ctx, new literal.MinIntegerLiteral());
 };
 
 
 EPromptoBuilder.prototype.exitMaxIntegerLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.MaxIntegerLiteral());
+    this.setNodeValue(ctx, new literal.MaxIntegerLiteral());
 };
 
 
 EPromptoBuilder.prototype.exitIntegerLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.getText()));
 };
-	
+
 
 EPromptoBuilder.prototype.exitDecimalLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.DecimalLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.DecimalLiteral(ctx.getText()));
 };
 
 EPromptoBuilder.prototype.exitHexadecimalLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.HexaLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.HexaLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitCharacterLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.getText()));
 };
 
 EPromptoBuilder.prototype.exitDateLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.DateLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.DateLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitDateTimeLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
 };
 
 EPromptoBuilder.prototype.exitTernaryExpression = function(ctx) {
@@ -253,16 +251,16 @@ EPromptoBuilder.prototype.exitTest_method_declaration = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitTextLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.TextLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.TextLiteral(ctx.getText()));
 };
 
 EPromptoBuilder.prototype.exitTimeLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.TimeLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.TimeLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitPeriodLiteral = function(ctx) {
-	this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new literal.PeriodLiteral(ctx.getText()));
 };
 
 
@@ -293,30 +291,30 @@ EPromptoBuilder.prototype.exitVariable_identifier = function(ctx) {
 
 EPromptoBuilder.prototype.exitList_literal = function(ctx) {
     var mutable = ctx.MUTABLE() !== null;
-	var items = this.getNodeValue(ctx.expression_list()) || null;
-	var value = new literal.ListLiteral(mutable, items);
-	this.setNodeValue(ctx, value);
+    var items = this.getNodeValue(ctx.expression_list()) || null;
+    var value = new literal.ListLiteral(mutable, items);
+    this.setNodeValue(ctx, value);
 };
 
 EPromptoBuilder.prototype.exitDict_literal = function(ctx) {
     var mutable = ctx.MUTABLE() !== null;
-	var items = this.getNodeValue(ctx.dict_entry_list()) || null;
-	var value = new literal.DictLiteral(mutable, items);
-	this.setNodeValue(ctx, value);
+    var items = this.getNodeValue(ctx.dict_entry_list()) || null;
+    var value = new literal.DictLiteral(mutable, items);
+    this.setNodeValue(ctx, value);
 };
 
 EPromptoBuilder.prototype.exitTuple_literal = function(ctx) {
     var mutable = ctx.MUTABLE() !== null;
-	var items = this.getNodeValue(ctx.expression_tuple()) || null;
-	var value = new literal.TupleLiteral(mutable, items);
-	this.setNodeValue(ctx, value);
+    var items = this.getNodeValue(ctx.expression_tuple()) || null;
+    var value = new literal.TupleLiteral(mutable, items);
+    this.setNodeValue(ctx, value);
 };
 
 
 EPromptoBuilder.prototype.exitRange_literal = function(ctx) {
-	var low = this.getNodeValue(ctx.low);
-	var high = this.getNodeValue(ctx.high);
-	this.setNodeValue(ctx, new literal.RangeLiteral(low, high));
+    var low = this.getNodeValue(ctx.low);
+    var high = this.getNodeValue(ctx.high);
+    this.setNodeValue(ctx, new literal.RangeLiteral(low, high));
 };
 
 
@@ -327,20 +325,20 @@ EPromptoBuilder.prototype.exitDict_entry_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitDict_entry = function(ctx) {
-	var key = this.getNodeValue(ctx.key);
-	var value = this.getNodeValue(ctx.value);
-	var entry = new literal.DictEntry(key, value);
-	this.setNodeValue(ctx, entry);
+    var key = this.getNodeValue(ctx.key);
+    var value = this.getNodeValue(ctx.value);
+    var entry = new literal.DictEntry(key, value);
+    this.setNodeValue(ctx, entry);
 };
 
 EPromptoBuilder.prototype.exitLiteral_expression = function(ctx) {
-	var exp = this.getNodeValue(ctx.getChild(0));
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.getChild(0));
+    this.setNodeValue(ctx, exp);
 };
 
 
@@ -351,8 +349,8 @@ EPromptoBuilder.prototype.exitLiteralExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitVariableIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.variable_identifier());
-	this.setNodeValue(ctx, name);
+    var name = this.getNodeValue(ctx.variable_identifier());
+    this.setNodeValue(ctx, name);
 };
 
 
@@ -362,14 +360,14 @@ EPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitNative_symbol = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
+    var name = this.getNodeValue(ctx.name);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
 };
 
 EPromptoBuilder.prototype.exitSymbolIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.symbol_identifier());
-	this.setNodeValue(ctx, name);
+    var name = this.getNodeValue(ctx.symbol_identifier());
+    this.setNodeValue(ctx, name);
 };
 
 EPromptoBuilder.prototype.exitBlobType = function(ctx) {
@@ -377,12 +375,12 @@ EPromptoBuilder.prototype.exitBlobType = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitBooleanType = function(ctx) {
-	this.setNodeValue(ctx, type.BooleanType.instance);
+    this.setNodeValue(ctx, type.BooleanType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitCharacterType = function(ctx) {
-	this.setNodeValue(ctx, type.CharacterType.instance);
+    this.setNodeValue(ctx, type.CharacterType.instance);
 };
 
 EPromptoBuilder.prototype.exitImageType = function(ctx) {
@@ -391,7 +389,7 @@ EPromptoBuilder.prototype.exitImageType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitTextType = function(ctx) {
-	this.setNodeValue(ctx, type.TextType.instance);
+    this.setNodeValue(ctx, type.TextType.instance);
 };
 
 
@@ -405,44 +403,44 @@ EPromptoBuilder.prototype.exitThisExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitIntegerType = function(ctx) {
-	this.setNodeValue(ctx, type.IntegerType.instance);
+    this.setNodeValue(ctx, type.IntegerType.instance);
 };
 
 EPromptoBuilder.prototype.exitDecimalType = function(ctx) {
-	this.setNodeValue(ctx, type.DecimalType.instance);
+    this.setNodeValue(ctx, type.DecimalType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitDateType = function(ctx) {
-	this.setNodeValue(ctx, type.DateType.instance);
+    this.setNodeValue(ctx, type.DateType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitDateTimeType = function(ctx) {
-	this.setNodeValue(ctx, type.DateTimeType.instance);
+    this.setNodeValue(ctx, type.DateTimeType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitTimeType = function(ctx) {
-	this.setNodeValue(ctx, type.TimeType.instance);
+    this.setNodeValue(ctx, type.TimeType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitCodeType = function(ctx) {
-	this.setNodeValue(ctx, type.CodeType.instance);
+    this.setNodeValue(ctx, type.CodeType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitPrimaryType = function(ctx) {
-	var type = this.getNodeValue(ctx.p);
-	this.setNodeValue(ctx, type);
+    var type = this.getNodeValue(ctx.p);
+    this.setNodeValue(ctx, type);
 };
 
 
 EPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
-	var id = this.getNodeValue(ctx.name);
-	var type = this.getNodeValue(ctx.typ);
-	var match = this.getNodeValue(ctx.match);
+    var id = this.getNodeValue(ctx.name);
+    var type = this.getNodeValue(ctx.typ);
+    var match = this.getNodeValue(ctx.match);
     var indices = null;
     if (ctx.indices !=null)
         indices = indices = this.getNodeValue(ctx.indices);
@@ -450,31 +448,31 @@ EPromptoBuilder.prototype.exitAttribute_declaration = function(ctx) {
         indices =  new grammar.IdentifierList();
     if (ctx.index !=null)
         indices.push(this.getNodeValue(ctx.index))
-	var decl = new declaration.AttributeDeclaration(id, type, match, indices);
+    var decl = new declaration.AttributeDeclaration(id, type, match, indices);
     decl.storable = ctx.STORABLE()!=null;
     this.setNodeValue(ctx, decl);
 };
 
 EPromptoBuilder.prototype.exitNativeType = function(ctx) {
-	var type = this.getNodeValue(ctx.n);
-	this.setNodeValue(ctx, type);
+    var type = this.getNodeValue(ctx.n);
+    this.setNodeValue(ctx, type);
 };
 
 EPromptoBuilder.prototype.exitCategoryType = function(ctx) {
-	var type = this.getNodeValue(ctx.c);
-	this.setNodeValue(ctx, type);
+    var type = this.getNodeValue(ctx.c);
+    this.setNodeValue(ctx, type);
 };
 
 
 EPromptoBuilder.prototype.exitCategory_type = function(ctx) {
-	var name = new grammar.Identifier(ctx.getText());
+    var name = new grammar.Identifier(ctx.getText());
     this.buildSection(ctx, name);
-	this.setNodeValue(ctx, new type.CategoryType(name));
+    this.setNodeValue(ctx, new type.CategoryType(name));
 };
 
 EPromptoBuilder.prototype.exitListType = function(ctx) {
-	var typ = this.getNodeValue(ctx.l);
-	this.setNodeValue(ctx, new type.ListType(typ));
+    var typ = this.getNodeValue(ctx.l);
+    this.setNodeValue(ctx, new type.ListType(typ));
 };
 
 EPromptoBuilder.prototype.exitDictKeyIdentifier = function(ctx) {
@@ -488,8 +486,8 @@ EPromptoBuilder.prototype.exitDictKeyText = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitDictType = function(ctx) {
-	var typ = this.getNodeValue(ctx.d);
-	this.setNodeValue(ctx, new type.DictionaryType(typ));
+    var typ = this.getNodeValue(ctx.d);
+    this.setNodeValue(ctx, new type.DictionaryType(typ));
 };
 
 EPromptoBuilder.prototype.exitAttributeList = function(ctx) {
@@ -524,18 +522,18 @@ EPromptoBuilder.prototype.exitVariable_identifier_list = function(ctx) {
         var item = this.getNodeValue(rule);
         list.add(item);
     }, this);
-	this.setNodeValue(ctx, list);
+    this.setNodeValue(ctx, list);
 };
 
 
 
 
 EPromptoBuilder.prototype.exitConcrete_category_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var attrs = this.getNodeValue(ctx.attrs) || null;
-	var derived = this.getNodeValue(ctx.derived) || null;
-	var methods = this.getNodeValue(ctx.methods) || null;
-	var decl = new declaration.ConcreteCategoryDeclaration(name, attrs, derived, methods);
+    var name = this.getNodeValue(ctx.name);
+    var attrs = this.getNodeValue(ctx.attrs) || null;
+    var derived = this.getNodeValue(ctx.derived) || null;
+    var methods = this.getNodeValue(ctx.methods) || null;
+    var decl = new declaration.ConcreteCategoryDeclaration(name, attrs, derived, methods);
     decl.storable = ctx.STORABLE()!=null;
     this.setNodeValue(ctx, decl);
 };
@@ -552,8 +550,8 @@ EPromptoBuilder.prototype.exitConcrete_widget_declaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitConcreteCategoryDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
 };
 
 
@@ -570,16 +568,16 @@ EPromptoBuilder.prototype.exitNativeWidgetDeclaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitDerivedList = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	this.setNodeValue(ctx, items);
+    var items = this.getNodeValue(ctx.items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitDerivedListItem = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	var item = this.getNodeValue(ctx.item);
-	items.add(item);
-	this.setNodeValue(ctx, items);
+    var items = this.getNodeValue(ctx.items);
+    var item = this.getNodeValue(ctx.item);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 
@@ -595,7 +593,7 @@ EPromptoBuilder.prototype.exitType_identifier_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
@@ -611,22 +609,22 @@ EPromptoBuilder.prototype.exitTypeLiteral = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitInstanceExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
 EPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	this.setNodeValue(ctx, parent);
+    var parent = this.getNodeValue(ctx.parent);
+    this.setNodeValue(ctx, parent);
 };
 
 
 EPromptoBuilder.prototype.exitSelectorExpression = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var selector = this.getNodeValue(ctx.selector);
-	selector.parent = parent;
-	this.setNodeValue(ctx, selector);
+    var parent = this.getNodeValue(ctx.parent);
+    var selector = this.getNodeValue(ctx.selector);
+    selector.parent = parent;
+    this.setNodeValue(ctx, selector);
 };
 
 EPromptoBuilder.prototype.exitSet_literal = function(ctx) {
@@ -650,27 +648,27 @@ EPromptoBuilder.prototype.exitStore_statement = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitMemberSelector = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.UnresolvedSelector(null, name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new expression.UnresolvedSelector(null, name));
 };
 
 
 EPromptoBuilder.prototype.exitItemSelector = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new expression.ItemSelector(null, exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.ItemSelector(null, exp));
 };
 
 
 EPromptoBuilder.prototype.exitSliceSelector = function(ctx) {
-	var slice = this.getNodeValue(ctx.xslice);
-	this.setNodeValue(ctx, slice);
+    var slice = this.getNodeValue(ctx.xslice);
+    this.setNodeValue(ctx, slice);
 };
 
 
 EPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
-	var typ = this.getNodeValue(ctx.typ);
-	var name = this.getNodeValue(ctx.name);
-	var attrs = this.getNodeValue(ctx.attrs);
+    var typ = this.getNodeValue(ctx.typ);
+    var name = this.getNodeValue(ctx.name);
+    var attrs = this.getNodeValue(ctx.attrs);
     var arg = attrs ?
         new argument.ExtendedParameter(typ, name, attrs) :
         new argument.CategoryParameter(typ, name);
@@ -681,8 +679,8 @@ EPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCodeArgument = function(ctx) {
-	var arg = this.getNodeValue(ctx.arg);
-	this.setNodeValue(ctx, arg);
+    var arg = this.getNodeValue(ctx.arg);
+    this.setNodeValue(ctx, arg);
 };
 
 
@@ -692,7 +690,7 @@ EPromptoBuilder.prototype.exitArgument_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
@@ -707,63 +705,63 @@ EPromptoBuilder.prototype.exitFlushStatement = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitFull_argument_list = function(ctx) {
-	var items = this.getNodeValue(ctx.items); 
-	var item = this.getNodeValue(ctx.item) || null; 
-	if(item!==null) {
-		items.add(item);
-	}
-	this.setNodeValue(ctx, items);
+    var items = this.getNodeValue(ctx.items);
+    var item = this.getNodeValue(ctx.item) || null;
+    if(item!==null) {
+        items.add(item);
+    }
+    this.setNodeValue(ctx, items);
 };
 
 EPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var exp = this.getNodeValue(ctx.exp);
-	var arg = new argument.UnresolvedParameter(name);
-	this.setNodeValue(ctx, new grammar.Argument(arg, exp));
+    var name = this.getNodeValue(ctx.name);
+    var exp = this.getNodeValue(ctx.exp);
+    var arg = new argument.UnresolvedParameter(name);
+    this.setNodeValue(ctx, new grammar.Argument(arg, exp));
 };
 
 
 EPromptoBuilder.prototype.exitArgumentAssignmentListExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var items = this.getNodeValue(ctx.items) || null;
-	if(items===null) {
-		items = new grammar.ArgumentList();
-	}
-	items.insert(0, new grammar.Argument(null, exp));
-	var item = this.getNodeValue(ctx.item) || null;
-	if(item!==null) {
-		items.add(item);
-	} else {
-		items.checkLastAnd();
-	}
-	this.setNodeValue(ctx, items);
+    var exp = this.getNodeValue(ctx.exp);
+    var items = this.getNodeValue(ctx.items) || null;
+    if(items===null) {
+        items = new grammar.ArgumentList();
+    }
+    items.insert(0, new grammar.Argument(null, exp));
+    var item = this.getNodeValue(ctx.item) || null;
+    if(item!==null) {
+        items.add(item);
+    } else {
+        items.checkLastAnd();
+    }
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitArgumentAssignmentListNoExpression = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	var item = this.getNodeValue(ctx.item) || null;
-	if(item!==null) {
-		items.add(item);
-	} else {
+    var items = this.getNodeValue(ctx.items);
+    var item = this.getNodeValue(ctx.item) || null;
+    if(item!==null) {
+        items.add(item);
+    } else {
         items.checkLastAnd();
     }
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitArgumentAssignmentList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.ArgumentList([item]);
-	this.setNodeValue(ctx, items);
+    var item = this.getNodeValue(ctx.item);
+    var items = new grammar.ArgumentList([item]);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitArgumentAssignmentListItem = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = this.getNodeValue(ctx.items);
-	items.add(item);
-	this.setNodeValue(ctx, items);
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 
@@ -806,17 +804,17 @@ EPromptoBuilder.prototype.exitArrowSingleArg = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
-    var arrow = getNodeValue(ctx.arrow_prefix());
-    var stmts = getNodeValue(ctx.statement_list());
+    var arrow = this.getNodeValue(ctx.arrow_prefix());
+    var stmts = this.getNodeValue(ctx.statement_list());
     arrow.setStatements(stmts);
     this.setNodeValue(ctx, arrow);
 };
 
 
 EPromptoBuilder.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
- 	var exp = this.getNodeValue(ctx.exp);
-	var args = this.getNodeValue(ctx.args);
-	var name = this.getNodeValue(ctx.name);
+    var exp = this.getNodeValue(ctx.exp);
+    var args = this.getNodeValue(ctx.args);
+    var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
     if (name!=null || stmts!=null)
         this.setNodeValue(ctx, new statement.RemoteCall(exp, args, name, stmts));
@@ -826,10 +824,10 @@ EPromptoBuilder.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitAddExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	var exp = ctx.op.type===parser.EParser.PLUS ? new expression.PlusExpression(left, right) : new expression.SubtractExpression(left, right);
-	this.setNodeValue(ctx, exp);
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    var exp = ctx.op.type===parser.EParser.PLUS ? new expression.PlusExpression(left, right) : new expression.SubtractExpression(left, right);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitMember_method_declaration_list = function(ctx) {
@@ -838,7 +836,7 @@ EPromptoBuilder.prototype.exitMember_method_declaration_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 EPromptoBuilder.prototype.exitNative_member_method_declaration_list = function(ctx) {
@@ -871,9 +869,9 @@ EPromptoBuilder.prototype.exitNative_getter_declaration = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new declaration.SetterMethodDeclaration(name, stmts));
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new declaration.SetterMethodDeclaration(name, stmts));
 };
 
 
@@ -896,23 +894,23 @@ EPromptoBuilder.prototype.exitStatement_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 EPromptoBuilder.prototype.exitAbstract_method_declaration = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, type));
+    var type = this.getNodeValue(ctx.typ);
+    var name = this.getNodeValue(ctx.name);
+    var args = this.getNodeValue(ctx.args);
+    this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, type));
 };
 
 
 EPromptoBuilder.prototype.exitConcrete_method_declaration = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new declaration.ConcreteMethodDeclaration(name, args, type, stmts));
+    var type = this.getNodeValue(ctx.typ);
+    var name = this.getNodeValue(ctx.name);
+    var args = this.getNodeValue(ctx.args);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new declaration.ConcreteMethodDeclaration(name, args, type, stmts));
 };
 
 
@@ -923,8 +921,8 @@ EPromptoBuilder.prototype.exitMethod_declaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitMethodCallStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
@@ -934,33 +932,33 @@ EPromptoBuilder.prototype.exitMethod_identifier = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitConstructorFrom = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
+    var type = this.getNodeValue(ctx.typ);
     var copyFrom = this.getNodeValue(ctx.copyExp) || null;
-	var args = this.getNodeValue(ctx.args) || null;
-	var arg = this.getNodeValue(ctx.arg) || null;
-	if(arg!==null) {
+    var args = this.getNodeValue(ctx.args) || null;
+    var arg = this.getNodeValue(ctx.arg) || null;
+    if(arg!==null) {
         if(args===null) {
             args = new grammar.ArgumentList();
         }
-		args.add(arg);
-	} else if(args!==null)
-	    args.checkLastAnd();
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, copyFrom, args, true));
+        args.add(arg);
+    } else if(args!==null)
+        args.checkLastAnd();
+    this.setNodeValue(ctx, new expression.ConstructorExpression(type, copyFrom, args, true));
 };
 
 
 EPromptoBuilder.prototype.exitConstructorNoFrom = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var args = this.getNodeValue(ctx.args) || null;
-	var arg = this.getNodeValue(ctx.arg) || null;
-	if(arg!==null) {
+    var type = this.getNodeValue(ctx.typ);
+    var args = this.getNodeValue(ctx.args) || null;
+    var arg = this.getNodeValue(ctx.arg) || null;
+    if(arg!==null) {
         if(args===null) {
             args = new grammar.ArgumentList();
         }
-		args.add(arg);
-	} else if(args!==null)
+        args.add(arg);
+    } else if(args!==null)
         args.checkLastAnd();
-	this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
+    this.setNodeValue(ctx, new expression.ConstructorExpression(type, null, args, true));
 };
 
 EPromptoBuilder.prototype.exitAssertion = function(ctx) {
@@ -979,34 +977,34 @@ EPromptoBuilder.prototype.exitAssertion_list = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitAssignInstanceStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitAssign_instance_statement = function(ctx) {
-	var inst = this.getNodeValue(ctx.inst);
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new statement.AssignInstanceStatement(inst, exp));
+    var inst = this.getNodeValue(ctx.inst);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new statement.AssignInstanceStatement(inst, exp));
 };
 
 
 EPromptoBuilder.prototype.exitAssign_variable_statement = function(ctx) {
-	var name = this.getNodeValue(ctx.variable_identifier());
-	var exp = this.getNodeValue(ctx.expression());
-	this.setNodeValue(ctx, new statement.AssignVariableStatement(name, exp));
+    var name = this.getNodeValue(ctx.variable_identifier());
+    var exp = this.getNodeValue(ctx.expression());
+    this.setNodeValue(ctx, new statement.AssignVariableStatement(name, exp));
 };
 
 
 EPromptoBuilder.prototype.exitAssign_tuple_statement = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new statement.AssignTupleStatement(items, exp));
+    var items = this.getNodeValue(ctx.items);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new statement.AssignTupleStatement(items, exp));
 };
 
 EPromptoBuilder.prototype.exitRootInstance = function(ctx) {
-	var name = this.getNodeValue(ctx.variable_identifier());
-	this.setNodeValue(ctx, new instance.VariableInstance(name));
+    var name = this.getNodeValue(ctx.variable_identifier());
+    this.setNodeValue(ctx, new instance.VariableInstance(name));
 };
 
 EPromptoBuilder.prototype.exitRoughlyEqualsExpression = function(ctx) {
@@ -1018,15 +1016,15 @@ EPromptoBuilder.prototype.exitRoughlyEqualsExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitChildInstance = function(ctx) {
-	var parent = this.getNodeValue(ctx.assignable_instance());
-	var child = this.getNodeValue(ctx.child_instance());
-	child.parent = parent;
-	this.setNodeValue(ctx, child);
+    var parent = this.getNodeValue(ctx.assignable_instance());
+    var child = this.getNodeValue(ctx.child_instance());
+    child.parent = parent;
+    this.setNodeValue(ctx, child);
 };
 
 EPromptoBuilder.prototype.exitMemberInstance = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new instance.MemberInstance(name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new instance.MemberInstance(name));
 };
 
 EPromptoBuilder.prototype.exitIsATypeExpression = function(ctx) {
@@ -1055,13 +1053,13 @@ EPromptoBuilder.prototype.exitIsNotExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitItemInstance = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new instance.ItemInstance(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new instance.ItemInstance(exp));
 };
 
 EPromptoBuilder.prototype.exitConstructorExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitNative_statement_list = function(ctx) {
@@ -1070,15 +1068,15 @@ EPromptoBuilder.prototype.exitNative_statement_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 EPromptoBuilder.prototype.exitJava_identifier = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    this.setNodeValue(ctx, ctx.getText());
 };
 
 EPromptoBuilder.prototype.exitJavascript_identifier = function(ctx) {
-	var id = new grammar.Identifier(ctx.getText());
+    var id = new grammar.Identifier(ctx.getText());
     this.setNodeValue(ctx, id);
 };
 
@@ -1103,8 +1101,8 @@ EPromptoBuilder.prototype.exitJavascript_this_expression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitJavaIdentifier = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new java.JavaIdentifierExpression(null, name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new java.JavaIdentifierExpression(null, name));
 };
 
 EPromptoBuilder.prototype.exitJavaIdentifierExpression = function(ctx) {
@@ -1113,28 +1111,28 @@ EPromptoBuilder.prototype.exitJavaIdentifierExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJavaChildIdentifier = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var name = this.getNodeValue(ctx.name);
-	var child = new java.JavaIdentifierExpression(parent, name);
-	this.setNodeValue(ctx, child);
+    var parent = this.getNodeValue(ctx.parent);
+    var name = this.getNodeValue(ctx.name);
+    var child = new java.JavaIdentifierExpression(parent, name);
+    this.setNodeValue(ctx, child);
 };
 
 
 EPromptoBuilder.prototype.exitJavaClassIdentifier = function(ctx) {
-	var klass = this.getNodeValue(ctx.klass);
-	this.setNodeValue(ctx, klass);
+    var klass = this.getNodeValue(ctx.klass);
+    this.setNodeValue(ctx, klass);
 };
 
 EPromptoBuilder.prototype.exitJavaChildClassIdentifier = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var child = new java.JavaIdentifierExpression(parent, ctx.name.text);
-	this.setNodeValue(ctx, child);
+    var parent = this.getNodeValue(ctx.parent);
+    var child = new java.JavaIdentifierExpression(parent, ctx.name.text);
+    this.setNodeValue(ctx, child);
 };
 
 
 EPromptoBuilder.prototype.exitJavaPrimaryExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitJavascriptBooleanLiteral = function(ctx) {
@@ -1159,8 +1157,8 @@ EPromptoBuilder.prototype.exitJavascriptDecimalLiteral = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJavascriptPrimaryExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitJavascript_identifier_expression = function(ctx) {
@@ -1169,17 +1167,17 @@ EPromptoBuilder.prototype.exitJavascript_identifier_expression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJavaSelectorExpression = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var child = this.getNodeValue(ctx.child);
-	child.parent = parent;
-	this.setNodeValue(ctx, child);
+    var parent = this.getNodeValue(ctx.parent);
+    var child = this.getNodeValue(ctx.child);
+    child.parent = parent;
+    this.setNodeValue(ctx, child);
 };
 
 EPromptoBuilder.prototype.exitJavascriptSelectorExpression = function(ctx) {
-	var parent = this.getNodeValue(ctx.parent);
-	var child = this.getNodeValue(ctx.child);
-	child.parent = parent;
-	this.setNodeValue(ctx, child);
+    var parent = this.getNodeValue(ctx.parent);
+    var child = this.getNodeValue(ctx.child);
+    child.parent = parent;
+    this.setNodeValue(ctx, child);
 };
 
 EPromptoBuilder.prototype.exitJavaScriptMemberExpression = function(ctx) {
@@ -1193,106 +1191,106 @@ EPromptoBuilder.prototype.exitJava_primary_expression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitJava_item_expression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new java.JavaItemExpression(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new java.JavaItemExpression(exp));
 };
 
 EPromptoBuilder.prototype.exitJavascript_item_expression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new javascript.JavaScriptItemExpression(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new javascript.JavaScriptItemExpression(exp));
 };
 
 EPromptoBuilder.prototype.exitJavaItemExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitJavascriptItemExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitJavaStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmt = new java.JavaStatement(exp,false);
-	this.setNodeValue(ctx, stmt);
+    var exp = this.getNodeValue(ctx.exp);
+    var stmt = new java.JavaStatement(exp,false);
+    this.setNodeValue(ctx, stmt);
 };
 
 EPromptoBuilder.prototype.exitJavascriptStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmt = new javascript.JavaScriptStatement(exp,false);
-	this.setNodeValue(ctx, stmt);
+    var exp = this.getNodeValue(ctx.exp);
+    var stmt = new javascript.JavaScriptStatement(exp,false);
+    this.setNodeValue(ctx, stmt);
 };
 
 EPromptoBuilder.prototype.exitJavaReturnStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new java.JavaStatement(exp,true));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new java.JavaStatement(exp,true));
 };
 
 EPromptoBuilder.prototype.exitJavascriptReturnStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new javascript.JavaScriptStatement(exp,true));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new javascript.JavaScriptStatement(exp,true));
 };
 
 
 EPromptoBuilder.prototype.exitJavaNativeStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.java_statement());
-	var call = new java.JavaNativeCall(stmt);
-	this.setNodeValue(ctx, call);
+    var stmt = this.getNodeValue(ctx.java_statement());
+    var call = new java.JavaNativeCall(stmt);
+    this.setNodeValue(ctx, call);
 };
 
 
 EPromptoBuilder.prototype.exitJavaScriptNativeStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.javascript_native_statement());
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.javascript_native_statement());
+    this.setNodeValue(ctx, stmt);
 };
 
 EPromptoBuilder.prototype.exitJavascript_native_statement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.javascript_statement());
-	var module = this.getNodeValue(ctx.javascript_module());
+    var stmt = this.getNodeValue(ctx.javascript_statement());
+    var module = this.getNodeValue(ctx.javascript_module());
     stmt.module = module || null;
-	this.setNodeValue(ctx, new javascript.JavaScriptNativeCall(stmt));
+    this.setNodeValue(ctx, new javascript.JavaScriptNativeCall(stmt));
 };
 
 
 EPromptoBuilder.prototype.exitNative_method_declaration = function(ctx) {
-	var type = this.getNodeValue(ctx.typ);
-	var name = this.getNodeValue(ctx.name);
-	var params = this.getNodeValue(ctx.args);
-	var stmts = this.getNodeValue(ctx.stmts);
-	var decl = new declaration.NativeMethodDeclaration(name, params, type, stmts);
-	this.setNodeValue(ctx, decl);
+    var type = this.getNodeValue(ctx.typ);
+    var name = this.getNodeValue(ctx.name);
+    var params = this.getNodeValue(ctx.args);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var decl = new declaration.NativeMethodDeclaration(name, params, type, stmts);
+    this.setNodeValue(ctx, decl);
 };
 
 EPromptoBuilder.prototype.exitJavaArgumentList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	this.setNodeValue(ctx, new java.JavaExpressionList(item));
+    var item = this.getNodeValue(ctx.item);
+    this.setNodeValue(ctx, new java.JavaExpressionList(item));
 };
 
 EPromptoBuilder.prototype.exitJavascriptArgumentList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	this.setNodeValue(ctx, new javascript.JavaScriptExpressionList(item));
+    var item = this.getNodeValue(ctx.item);
+    this.setNodeValue(ctx, new javascript.JavaScriptExpressionList(item));
 };
 
 
 EPromptoBuilder.prototype.exitJavaArgumentListItem = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = this.getNodeValue(ctx.items);
-	items.add(item);
-	this.setNodeValue(ctx, items);
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 EPromptoBuilder.prototype.exitJavascriptArgumentListItem = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = this.getNodeValue(ctx.items);
-	items.add(item);
-	this.setNodeValue(ctx, items);
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 EPromptoBuilder.prototype.exitJava_method_expression = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new java.JavaMethodExpression(name, args));
+    var name = this.getNodeValue(ctx.name);
+    var args = this.getNodeValue(ctx.args);
+    this.setNodeValue(ctx, new java.JavaMethodExpression(name, args));
 };
 
 EPromptoBuilder.prototype.exitJava_this_expression = function(ctx) {
@@ -1306,19 +1304,19 @@ EPromptoBuilder.prototype.exitJavaScriptMethodExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitJavascript_method_expression = function(ctx) {
-	var id = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
+    var id = this.getNodeValue(ctx.name);
+    var args = this.getNodeValue(ctx.args);
+    this.setNodeValue(ctx, new javascript.JavaScriptMethodExpression(id, args));
 };
 
 EPromptoBuilder.prototype.exitJavaMethodExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 EPromptoBuilder.prototype.exitFullDeclarationList = function(ctx) {
-	var items = this.getNodeValue(ctx.declarations()) || new declaration.DeclarationList();
-	this.setNodeValue(ctx, items);
+    var items = this.getNodeValue(ctx.declarations()) || new declaration.DeclarationList();
+    this.setNodeValue(ctx, items);
 };
 
 
@@ -1341,7 +1339,7 @@ EPromptoBuilder.prototype.exitDeclarations = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
@@ -1360,82 +1358,82 @@ EPromptoBuilder.prototype.exitIteratorType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitJavaBooleanLiteral = function(ctx) {
-	this.setNodeValue(ctx, new java.JavaBooleanLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new java.JavaBooleanLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitJavaIntegerLiteral = function(ctx) {
-	this.setNodeValue(ctx, new java.JavaIntegerLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new java.JavaIntegerLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitJavaDecimalLiteral = function(ctx) {
-	this.setNodeValue(ctx, new java.JavaDecimalLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new java.JavaDecimalLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitJavaCharacterLiteral = function(ctx) {
-	this.setNodeValue(ctx, new java.JavaCharacterLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new java.JavaCharacterLiteral(ctx.getText()));
 };
 
 
 EPromptoBuilder.prototype.exitJavaTextLiteral = function(ctx) {
-	this.setNodeValue(ctx, new java.JavaTextLiteral(ctx.getText()));
+    this.setNodeValue(ctx, new java.JavaTextLiteral(ctx.getText()));
 };
 
 EPromptoBuilder.prototype.exitJavaCategoryBinding = function(ctx) {
-	var map = this.getNodeValue(ctx.binding);
-	this.setNodeValue(ctx, new java.JavaNativeCategoryBinding(map));
+    var map = this.getNodeValue(ctx.binding);
+    this.setNodeValue(ctx, new java.JavaNativeCategoryBinding(map));
 };
 
 EPromptoBuilder.prototype.exitJavaScriptCategoryBinding = function(ctx) {
-	this.setNodeValue(ctx, this.getNodeValue(ctx.binding));
+    this.setNodeValue(ctx, this.getNodeValue(ctx.binding));
 };
 
 EPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
-	var identifier = ctx.javascript_identifier().map(function(cx) { return cx.getText(); }).join(".");
-	var module = this.getNodeValue(ctx.javascript_module()) || null;
-	var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
-	this.setNodeValue(ctx, map);
+    var identifier = ctx.javascript_identifier().map(function(cx) { return cx.getText(); }).join(".");
+    var module = this.getNodeValue(ctx.javascript_module()) || null;
+    var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
+    this.setNodeValue(ctx, map);
 };
 
 EPromptoBuilder.prototype.exitJavascript_module = function(ctx) {
-	var ids = ctx.javascript_identifier().map(function(rule) {
+    var ids = ctx.javascript_identifier().map(function(rule) {
         return rule.getText();
-	});
-	var module = new javascript.JavaScriptModule(ids);
-	this.setNodeValue(ctx, module);
+    });
+    var module = new javascript.JavaScriptModule(ids);
+    this.setNodeValue(ctx, module);
 };
 
 EPromptoBuilder.prototype.exitNativeCategoryBindingList = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = new grammar.NativeCategoryBindingList(item);
-	this.setNodeValue(ctx, items);
+    var item = this.getNodeValue(ctx.item);
+    var items = new grammar.NativeCategoryBindingList(item);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitNativeCategoryBindingListItem = function(ctx) {
-	var item = this.getNodeValue(ctx.item);
-	var items = this.getNodeValue(ctx.items);
-	items.add(item);
-	this.setNodeValue(ctx, items);
+    var item = this.getNodeValue(ctx.item);
+    var items = this.getNodeValue(ctx.items);
+    items.add(item);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitNative_category_bindings = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	this.setNodeValue(ctx, items);
+    var items = this.getNodeValue(ctx.items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitNative_category_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var attrs = this.getNodeValue(ctx.attrs);
-	var bindings = this.getNodeValue(ctx.bindings);
+    var name = this.getNodeValue(ctx.name);
+    var attrs = this.getNodeValue(ctx.attrs);
+    var bindings = this.getNodeValue(ctx.bindings);
     var methods = this.getNodeValue(ctx.methods);
     var decl = new declaration.NativeCategoryDeclaration(name, attrs, bindings, null, methods);
     decl.storable = ctx.STORABLE()!=null;
-	this.setNodeValue(ctx, decl);
+    this.setNodeValue(ctx, decl);
 };
 
 
@@ -1449,15 +1447,15 @@ EPromptoBuilder.prototype.exitNative_widget_declaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitNativeCategoryDeclaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, decl);
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, decl);
 };
 
 
 EPromptoBuilder.prototype.exitNative_resource_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var attrs = this.getNodeValue(ctx.attrs);
-	var bindings = this.getNodeValue(ctx.bindings);
+    var name = this.getNodeValue(ctx.name);
+    var attrs = this.getNodeValue(ctx.attrs);
+    var bindings = this.getNodeValue(ctx.bindings);
     var methods = this.getNodeValue(ctx.methods);
     var decl = new declaration.NativeResourceDeclaration(name, attrs, bindings, null, methods);
     decl.storable = ctx.STORABLE()!=null;
@@ -1466,21 +1464,21 @@ EPromptoBuilder.prototype.exitNative_resource_declaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitResource_declaration = function(ctx) {
-	var decl = this.getNodeValue(ctx.native_resource_declaration());
-	this.setNodeValue(ctx, decl);
+    var decl = this.getNodeValue(ctx.native_resource_declaration());
+    this.setNodeValue(ctx, decl);
 };
 
 
 
 EPromptoBuilder.prototype.exitParenthesis_expression = function(ctx) {
-	var exp = this.getNodeValue(ctx.expression());
-	this.setNodeValue(ctx, new expression.ParenthesisExpression(exp));
+    var exp = this.getNodeValue(ctx.expression());
+    this.setNodeValue(ctx, new expression.ParenthesisExpression(exp));
 };
 
 
 EPromptoBuilder.prototype.exitParenthesisExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
@@ -1490,208 +1488,208 @@ EPromptoBuilder.prototype.exitNative_symbol_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitEnum_native_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var type = this.getNodeValue(ctx.typ);
-	var symbols = this.getNodeValue(ctx.symbols);
-	this.setNodeValue(ctx, new declaration.EnumeratedNativeDeclaration(name, type, symbols));
+    var name = this.getNodeValue(ctx.name);
+    var type = this.getNodeValue(ctx.typ);
+    var symbols = this.getNodeValue(ctx.symbols);
+    this.setNodeValue(ctx, new declaration.EnumeratedNativeDeclaration(name, type, symbols));
 };
 
 
 EPromptoBuilder.prototype.exitFor_each_statement = function(ctx) {
-	var name1 = this.getNodeValue(ctx.name1);
-	var name2 = this.getNodeValue(ctx.name2);
-	var source = this.getNodeValue(ctx.source);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.ForEachStatement(name1, name2, source, stmts));
+    var name1 = this.getNodeValue(ctx.name1);
+    var name2 = this.getNodeValue(ctx.name2);
+    var source = this.getNodeValue(ctx.source);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.ForEachStatement(name1, name2, source, stmts));
 };
 
 
 EPromptoBuilder.prototype.exitForEachStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitSymbols_token = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    this.setNodeValue(ctx, ctx.getText());
 };
 
 
 EPromptoBuilder.prototype.exitKey_token = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    this.setNodeValue(ctx, ctx.getText());
 };
 
 
 EPromptoBuilder.prototype.exitValue_token = function(ctx) {
-	this.setNodeValue(ctx, ctx.getText());
+    this.setNodeValue(ctx, ctx.getText());
 };
 
 
 EPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
-	var name = this.getNodeValue(ctx.variable_identifier());
+    var name = this.getNodeValue(ctx.variable_identifier());
     var arg = new argument.UnresolvedParameter(name);
     var exp = this.getNodeValue(ctx.literal_expression());
     arg.defaultExpression = exp || null;
-	this.setNodeValue(ctx, arg);
+    this.setNodeValue(ctx, arg);
 };
 
 
 EPromptoBuilder.prototype.exitClosureStatement = function(ctx) {
-	var decl = this.getNodeValue(ctx.decl);
-	this.setNodeValue(ctx, new statement.DeclarationStatement(decl));
+    var decl = this.getNodeValue(ctx.decl);
+    this.setNodeValue(ctx, new statement.DeclarationStatement(decl));
 };
 
 
 EPromptoBuilder.prototype.exitReturn_statement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new statement.ReturnStatement(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new statement.ReturnStatement(exp));
 };
 
 
 EPromptoBuilder.prototype.exitReturnStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitClosureExpression = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.MethodExpression(name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new expression.MethodExpression(name));
 };
 
 
 EPromptoBuilder.prototype.exitIf_statement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	var elseIfs = this.getNodeValue(ctx.elseIfs);
-	var elseStmts = this.getNodeValue(ctx.elseStmts);
-	this.setNodeValue(ctx, new statement.IfStatement(exp, stmts, elseIfs, elseStmts));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var elseIfs = this.getNodeValue(ctx.elseIfs);
+    var elseStmts = this.getNodeValue(ctx.elseStmts);
+    this.setNodeValue(ctx, new statement.IfStatement(exp, stmts, elseIfs, elseStmts));
 };
 
 
 EPromptoBuilder.prototype.exitElseIfStatementList = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	var elem = new statement.IfElement(exp, stmts);
-	this.setNodeValue(ctx, new statement.IfElementList(elem));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var elem = new statement.IfElement(exp, stmts);
+    this.setNodeValue(ctx, new statement.IfElementList(elem));
 };
 
 
 EPromptoBuilder.prototype.exitElseIfStatementListItem = function(ctx) {
-	var items = this.getNodeValue(ctx.items);
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	var elem = new statement.IfElement(exp, stmts);
-	items.add(elem);
-	this.setNodeValue(ctx, items);
+    var items = this.getNodeValue(ctx.items);
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var elem = new statement.IfElement(exp, stmts);
+    items.add(elem);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitIfStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitSwitchStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitAssignTupleStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitRaiseStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitWriteStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitWithResourceStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitWhileStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitDoWhileStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitTryStatement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	this.setNodeValue(ctx, stmt);
+    var stmt = this.getNodeValue(ctx.stmt);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitEqualsExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.EQUALS, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.EQUALS, right));
 };
 
 
 EPromptoBuilder.prototype.exitNotEqualsExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_EQUALS, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_EQUALS, right));
 };
 
 
 EPromptoBuilder.prototype.exitGreaterThanExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.GT, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.GT, right));
 };
 
 
 EPromptoBuilder.prototype.exitGreaterThanOrEqualExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.GTE, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.GTE, right));
 };
 
 
 EPromptoBuilder.prototype.exitLessThanExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.LT, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.LT, right));
 };
 
 
 EPromptoBuilder.prototype.exitLessThanOrEqualExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.LTE, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.LTE, right));
 };
 
 
 EPromptoBuilder.prototype.exitAtomicSwitchCase = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.AtomicSwitchCase(exp, stmts));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.AtomicSwitchCase(exp, stmts));
 };
 
 
@@ -1704,9 +1702,9 @@ EPromptoBuilder.prototype.exitCollection_literal = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCollectionSwitchCase = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
 };
 
 
@@ -1716,52 +1714,52 @@ EPromptoBuilder.prototype.exitSwitch_case_statement_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitSwitch_statement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var cases = this.getNodeValue(ctx.cases);
-	var stmts = this.getNodeValue(ctx.stmts);
-	var stmt = new statement.SwitchStatement(exp, cases, stmts);
-	this.setNodeValue(ctx, stmt);
+    var exp = this.getNodeValue(ctx.exp);
+    var cases = this.getNodeValue(ctx.cases);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var stmt = new statement.SwitchStatement(exp, cases, stmts);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitLiteralRangeLiteral = function(ctx) {
-	var low = this.getNodeValue(ctx.low);
-	var high = this.getNodeValue(ctx.high);
-	this.setNodeValue(ctx, new literal.RangeLiteral(low, high));
+    var low = this.getNodeValue(ctx.low);
+    var high = this.getNodeValue(ctx.high);
+    this.setNodeValue(ctx, new literal.RangeLiteral(low, high));
 };
 
 EPromptoBuilder.prototype.exitLiteralListLiteral = function(ctx) {
-	var exp = this.getNodeValue(ctx.literal_list_literal());
-	this.setNodeValue(ctx, new literal.ListLiteral(false, exp));
+    var exp = this.getNodeValue(ctx.literal_list_literal());
+    this.setNodeValue(ctx, new literal.ListLiteral(false, exp));
 };
 
 
 EPromptoBuilder.prototype.exitLiteral_list_literal = function(ctx) {
-	var items = new utils.ExpressionList();
+    var items = new utils.ExpressionList();
     ctx.atomic_literal().forEach(function(r) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitInExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.IN, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.IN, right));
 };
 
 
 EPromptoBuilder.prototype.exitNotInExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_IN, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_IN, right));
 };
 
 
@@ -1780,65 +1778,65 @@ EPromptoBuilder.prototype.exitNotHasExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitHasAllExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ALL, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ALL, right));
 };
 
 
 EPromptoBuilder.prototype.exitNotHasAllExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ALL, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ALL, right));
 };
 
 
 EPromptoBuilder.prototype.exitHasAnyExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ANY, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ANY, right));
 };
 
 
 EPromptoBuilder.prototype.exitNotHasAnyExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ANY, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ANY, right));
 };
 
 
 EPromptoBuilder.prototype.exitContainsExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.CONTAINS, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.CONTAINS, right));
 };
 
 
 EPromptoBuilder.prototype.exitNotContainsExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_CONTAINS, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_CONTAINS, right));
 };
 
 
 EPromptoBuilder.prototype.exitDivideExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.DivideExpression(left, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.DivideExpression(left, right));
 };
 
 
 EPromptoBuilder.prototype.exitIntDivideExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.IntDivideExpression(left, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.IntDivideExpression(left, right));
 };
 
 
 EPromptoBuilder.prototype.exitModuloExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.ModuloExpression(left, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.ModuloExpression(left, right));
 };
 
 
@@ -1850,7 +1848,7 @@ EPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
         args.add(new literal.DictEntry(null, exp));
     }
     ctx.annotation_argument().map(function(argCtx) {
-        arg = this.getNodeValue(argCtx);
+        var arg = this.getNodeValue(argCtx);
         args.add(arg);
     }, this);
     this.setNodeValue(ctx, new grammar.Annotation(name, args));
@@ -1887,9 +1885,9 @@ EPromptoBuilder.prototype.exitAnnotationTypeValue = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitAndExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.AndExpression(left, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.AndExpression(left, right));
 };
 
 
@@ -1973,16 +1971,16 @@ EPromptoBuilder.prototype.exitOrder_by_list = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitOrExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.OrExpression(left, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.OrExpression(left, right));
 };
 
 
 EPromptoBuilder.prototype.exitMultiplyExpression = function(ctx) {
-	var left = this.getNodeValue(ctx.left);
-	var right = this.getNodeValue(ctx.right);
-	this.setNodeValue(ctx, new expression.MultiplyExpression(left, right));
+    var left = this.getNodeValue(ctx.left);
+    var right = this.getNodeValue(ctx.right);
+    this.setNodeValue(ctx, new expression.MultiplyExpression(left, right));
 };
 
 
@@ -2014,28 +2012,28 @@ EPromptoBuilder.prototype.exitMutableSelectorExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitMinusExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new expression.MinusExpression(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.MinusExpression(exp));
 };
 
 
 EPromptoBuilder.prototype.exitNotExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new expression.NotExpression(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.NotExpression(exp));
 };
 
 
 EPromptoBuilder.prototype.exitWhile_statement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.WhileStatement(exp, stmts));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.WhileStatement(exp, stmts));
 };
 
 
 EPromptoBuilder.prototype.exitDo_while_statement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.DoWhileStatement(exp, stmts));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.DoWhileStatement(exp, stmts));
 };
 
 EPromptoBuilder.prototype.exitSingleton_category_declaration = function(ctx) {
@@ -2051,29 +2049,29 @@ EPromptoBuilder.prototype.exitSingletonCategoryDeclaration = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitSliceFirstAndLast = function(ctx) {
-	var first = this.getNodeValue(ctx.first);
-	var last = this.getNodeValue(ctx.last);
-	this.setNodeValue(ctx, new expression.SliceSelector(null, first, last));
+    var first = this.getNodeValue(ctx.first);
+    var last = this.getNodeValue(ctx.last);
+    this.setNodeValue(ctx, new expression.SliceSelector(null, first, last));
 };
 
 
 EPromptoBuilder.prototype.exitSliceFirstOnly = function(ctx) {
-	var first = this.getNodeValue(ctx.first);
-	this.setNodeValue(ctx, new expression.SliceSelector(null, first, null));
+    var first = this.getNodeValue(ctx.first);
+    this.setNodeValue(ctx, new expression.SliceSelector(null, first, null));
 };
 
 
 EPromptoBuilder.prototype.exitSliceLastOnly = function(ctx) {
-	var last = this.getNodeValue(ctx.last);
-	this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
+    var last = this.getNodeValue(ctx.last);
+    this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
 };
 
 
 EPromptoBuilder.prototype.exitSorted_expression = function(ctx) {
-	var source = this.getNodeValue(ctx.source);
+    var source = this.getNodeValue(ctx.source);
     var desc = ctx.DESC()!=null;
-	var key = this.getNodeValue(ctx.key);
-	this.setNodeValue(ctx, new expression.SortedExpression(source, desc, key));
+    var key = this.getNodeValue(ctx.key);
+    this.setNodeValue(ctx, new expression.SortedExpression(source, desc, key));
 };
 
 
@@ -2084,25 +2082,25 @@ EPromptoBuilder.prototype.exitSorted_key = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitSortedExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
 EPromptoBuilder.prototype.exitDocumentExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
 EPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
     var exp = this.getNodeValue(ctx.expression());
-	this.setNodeValue(ctx, new expression.DocumentExpression(exp));
+    this.setNodeValue(ctx, new expression.DocumentExpression(exp));
 };
 
 
 EPromptoBuilder.prototype.exitDocumentType = function(ctx) {
-	this.setNodeValue(ctx, type.DocumentType.instance);
+    this.setNodeValue(ctx, type.DocumentType.instance);
 };
 
 
@@ -2178,13 +2176,13 @@ EPromptoBuilder.prototype.exitFiltered_list_suffix = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCode_type = function(ctx) {
-	this.setNodeValue(ctx, type.CodeType.instance);
+    this.setNodeValue(ctx, type.CodeType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitExecuteExpression = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new expression.ExecuteExpression(name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new expression.ExecuteExpression(name));
 };
 
 
@@ -2209,14 +2207,14 @@ EPromptoBuilder.prototype.exitExpression_tuple = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCodeExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new expression.CodeExpression(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new expression.CodeExpression(exp));
 };
 
 
 EPromptoBuilder.prototype.exitCode_argument = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new argument.CodeParameter(name));
+    var name = this.getNodeValue(ctx.name);
+    this.setNodeValue(ctx, new argument.CodeParameter(name));
 };
 
 
@@ -2227,13 +2225,13 @@ EPromptoBuilder.prototype.exitCategory_or_any_type = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCategory_symbol = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var args = this.getNodeValue(ctx.args);
-	var arg = this.getNodeValue(ctx.arg) || null;
-	if(arg!==null) {
-		args.add(arg);
-	}
-	this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
+    var name = this.getNodeValue(ctx.name);
+    var args = this.getNodeValue(ctx.args);
+    var arg = this.getNodeValue(ctx.arg) || null;
+    if(arg!==null) {
+        args.add(arg);
+    }
+    this.setNodeValue(ctx, new expression.CategorySymbol(name, args));
 };
 
 
@@ -2243,17 +2241,17 @@ EPromptoBuilder.prototype.exitCategory_symbol_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitEnum_category_declaration = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var attrs = this.getNodeValue(ctx.attrs);
-	var parent = this.getNodeValue(ctx.derived);
-	var derived = parent==null ? null : new grammar.IdentifierList(parent);
-	var symbols = this.getNodeValue(ctx.symbols);
-	this.setNodeValue(ctx, new declaration.EnumeratedCategoryDeclaration(name, attrs, derived, symbols));
+    var name = this.getNodeValue(ctx.name);
+    var attrs = this.getNodeValue(ctx.attrs);
+    var parent = this.getNodeValue(ctx.derived);
+    var derived = parent==null ? null : new grammar.IdentifierList(parent);
+    var symbols = this.getNodeValue(ctx.symbols);
+    this.setNodeValue(ctx, new declaration.EnumeratedCategoryDeclaration(name, attrs, derived, symbols));
 };
 
 
@@ -2264,8 +2262,8 @@ EPromptoBuilder.prototype.exitEnum_declaration = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
-	var source = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new expression.ReadAllExpression(source));
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadAllExpression(source));
 };
 
 
@@ -2276,8 +2274,8 @@ EPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitReadAllExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
@@ -2309,33 +2307,33 @@ EPromptoBuilder.prototype.exitWithSingletonStatement = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitWrite_statement = function(ctx) {
-	var what = this.getNodeValue(ctx.what);
-	var target = this.getNodeValue(ctx.target);
-	this.setNodeValue(ctx, new statement.WriteStatement(what, target));
+    var what = this.getNodeValue(ctx.what);
+    var target = this.getNodeValue(ctx.target);
+    this.setNodeValue(ctx, new statement.WriteStatement(what, target));
 };
 
 
 EPromptoBuilder.prototype.exitWith_resource_statement = function(ctx) {
-	var stmt = this.getNodeValue(ctx.stmt);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.WithResourceStatement(stmt, stmts));
+    var stmt = this.getNodeValue(ctx.stmt);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.WithResourceStatement(stmt, stmts));
 };
 
 
 EPromptoBuilder.prototype.exitAnyType = function(ctx) {
-	this.setNodeValue(ctx, type.AnyType.instance);
+    this.setNodeValue(ctx, type.AnyType.instance);
 };
 
 
 EPromptoBuilder.prototype.exitAnyListType = function(ctx) {
-	var typ = this.getNodeValue(ctx.any_type());
-	this.setNodeValue(ctx, new type.ListType(typ));
+    var typ = this.getNodeValue(ctx.any_type());
+    this.setNodeValue(ctx, new type.ListType(typ));
 };
 
 
 EPromptoBuilder.prototype.exitAnyDictType = function(ctx) {
-	var typ = this.getNodeValue(ctx.typ);
-	this.setNodeValue(ctx, new type.DictType(typ));
+    var typ = this.getNodeValue(ctx.typ);
+    this.setNodeValue(ctx, new type.DictType(typ));
 };
 
 
@@ -2346,16 +2344,16 @@ EPromptoBuilder.prototype.exitCastExpression = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitCatchAtomicStatement = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.AtomicSwitchCase(new expression.SymbolExpression(name), stmts));
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.AtomicSwitchCase(new expression.SymbolExpression(name), stmts));
 };
 
 
 EPromptoBuilder.prototype.exitCatchCollectionStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
+    var exp = this.getNodeValue(ctx.exp);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
 };
 
 
@@ -2365,43 +2363,43 @@ EPromptoBuilder.prototype.exitCatch_statement_list = function(ctx) {
         var item = this.getNodeValue(r);
         items.add(item);
     }, this);
-	this.setNodeValue(ctx, items);
+    this.setNodeValue(ctx, items);
 };
 
 
 EPromptoBuilder.prototype.exitTry_statement = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var stmts = this.getNodeValue(ctx.stmts);
-	var handlers = this.getNodeValue(ctx.handlers);
-	var anyStmts = this.getNodeValue(ctx.anyStmts);
-	var finalStmts = this.getNodeValue(ctx.finalStmts);
-	var stmt = new statement.SwitchErrorStatement(name, stmts, handlers, anyStmts, finalStmts);
-	this.setNodeValue(ctx, stmt);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    var handlers = this.getNodeValue(ctx.handlers);
+    var anyStmts = this.getNodeValue(ctx.anyStmts);
+    var finalStmts = this.getNodeValue(ctx.finalStmts);
+    var stmt = new statement.SwitchErrorStatement(name, stmts, handlers, anyStmts, finalStmts);
+    this.setNodeValue(ctx, stmt);
 };
 
 
 EPromptoBuilder.prototype.exitRaise_statement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new statement.RaiseStatement(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new statement.RaiseStatement(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingList = function(ctx) {
-	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
+    var exp = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingRange = function(ctx) {
-	var exp = this.getNodeValue(ctx.source);
-	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
+    var exp = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
 };
 
 EPromptoBuilder.prototype.exitMatchingPattern = function(ctx) {
-	this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
+    this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));
 };
 
 EPromptoBuilder.prototype.exitLiteralSetLiteral = function(ctx) {
@@ -2411,21 +2409,21 @@ EPromptoBuilder.prototype.exitLiteralSetLiteral = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitInvocation_expression = function(ctx) {
-	var name = this.getNodeValue(ctx.name);
-	var select = new expression.MethodSelector(null, name);
-	this.setNodeValue(ctx, new statement.MethodCall(select));
+    var name = this.getNodeValue(ctx.name);
+    var select = new expression.MethodSelector(null, name);
+    this.setNodeValue(ctx, new statement.MethodCall(select));
 };
 
 
 EPromptoBuilder.prototype.exitInvocationExpression = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
 EPromptoBuilder.prototype.exitInvokeStatement = function(ctx) {
-	var exp = this.getNodeValue(ctx.exp);
-	this.setNodeValue(ctx, exp);
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
 };
 
 
@@ -2883,46 +2881,46 @@ EPromptoBuilder.prototype.exitCssValue = function(ctx) {
 
 
 EPromptoBuilder.prototype.buildSection = function(node, section) {
-	var first = this.findFirstValidToken(node.start.tokenIndex);
-	var last = this.findLastValidToken(node.stop.tokenIndex);
-	section.setSectionFrom(this.path, first, last, parser.Dialect.E);
+    var first = this.findFirstValidToken(node.start.tokenIndex);
+    var last = this.findLastValidToken(node.stop.tokenIndex);
+    section.setSectionFrom(this.path, first, last, parser.Dialect.E);
 };
 
 EPromptoBuilder.prototype.findFirstValidToken = function(idx) {
-	if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
-		idx = 0;
-	}
-	do {
-		var token = this.readValidToken(idx++);
-		if(token!==null) {
-			return token;
-		}
-	} while(idx<this.input.tokenSource.size);
-	return null;
+    if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
+        idx = 0;
+    }
+    do {
+        var token = this.readValidToken(idx++);
+        if(token!==null) {
+            return token;
+        }
+    } while(idx<this.input.tokenSource.size);
+    return null;
 };
 
 EPromptoBuilder.prototype.findLastValidToken = function(idx) {
-	if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
-		idx = 0;
-	}
-	while(idx>=0) {
-		var token = this.readValidToken(idx--);
-		if(token!==null) {
-			return token;
-		}
-	}
-	return null;
+    if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
+        idx = 0;
+    }
+    while(idx>=0) {
+        var token = this.readValidToken(idx--);
+        if(token!==null) {
+            return token;
+        }
+    }
+    return null;
 };
 
 EPromptoBuilder.prototype.readValidToken = function(idx) {
-	var token = this.input.get(idx);
-	var text = token.text;
+    var token = this.input.get(idx);
+    var text = token.text;
     // ignore trailing whitespace
     if(text!==null && text.replace(/(\n|\r|\t|' ')/g,"").length>0) {
-		return token;
-	} else {
-		return null;
-	}
+        return token;
+    } else {
+        return null;
+    }
 };
 
 

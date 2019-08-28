@@ -1,16 +1,21 @@
 var List = require("./List").List;
 var StrictSet = require("./StrictSet").StrictSet;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
 
 function Dictionary(mutable, entries) {
     if(entries)
-        Object.getOwnPropertyNames(entries).forEach(function(name) { this[name] = entries[name]; }, this);
+        Object.getOwnPropertyNames(entries).forEach(function(name) {
+            this[name] = entries[name];
+        }, this);
     this.mutable = mutable || false;
     return this;
 }
 
 Object.defineProperty(Dictionary.prototype, "$keys", {
     get : function() {
-        return Object.getOwnPropertyNames(this).filter(function(name) { return name!=="mutable"; });
+        return Object.getOwnPropertyNames(this).filter(function(name) {
+            return name!=="mutable";
+        });
     }
 });
 
@@ -30,7 +35,9 @@ Object.defineProperty(Dictionary.prototype, "keys", {
 
 Object.defineProperty(Dictionary.prototype, "values", {
     get : function() {
-        var names = this.$keys.map(function(name) { return this[name]; }, this);
+        var names = this.$keys.map(function(name) {
+            return this[name];
+        }, this);
         return new List(false, names);
     }
 });

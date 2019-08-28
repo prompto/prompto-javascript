@@ -2,6 +2,7 @@ var Value = require("./Value").Value;
 var IntegerValue = null; // circular dependency
 var DecimalType = null;
 var decimalTostring = require("../utils/Utils").decimalToString;
+var DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
 
 exports.resolve = function() {
 	IntegerValue = require("./IntegerValue").IntegerValue;

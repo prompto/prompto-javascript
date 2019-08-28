@@ -25,7 +25,7 @@ MatchingPatternConstraint.prototype.toDialect = function(writer) {
 
 
 MatchingPatternConstraint.prototype.declare = function(transpiler, name, type) {
-    var transpiler = transpiler.newChildTranspiler();
+    transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
     this.expression.declare(transpiler);
@@ -35,7 +35,7 @@ MatchingPatternConstraint.prototype.declare = function(transpiler, name, type) {
 
 MatchingPatternConstraint.prototype.transpileChecker = function(transpiler, name, type) {
     transpiler.append("function $check_").append(name).append("(value) {").indent();
-    var transpiler = transpiler.newChildTranspiler();
+    transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
     transpiler.append("if(new RegExp(");

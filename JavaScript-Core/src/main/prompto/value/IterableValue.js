@@ -1,6 +1,7 @@
 var IteratorType = require("../type/IteratorType").IteratorType;
 var Variable = require("../runtime/Variable").Variable;
 var Value = require("./Value").Value;
+var IntegerValue = require("./IntegerValue").IntegerValue;
 var ListValue = require("./ListValue").ListValue;
 
 function IterableValue(context, name, itemType, source, length, expression) {
@@ -44,7 +45,7 @@ IterableValue.prototype.next = function() {
 
 IterableValue.prototype.getMemberValue = function(context, name) {
     if ("count" === name)
-        return new Integer(this.count);
+        return new IntegerValue(this.count);
     else
         return Value.prototype.getMemberValue.call(this, context, name);
 };

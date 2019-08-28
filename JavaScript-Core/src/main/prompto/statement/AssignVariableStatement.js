@@ -59,8 +59,8 @@ AssignVariableStatement.prototype.check = function(context) {
 		context.registerValue(new Variable(this.id, actualType));
 	} else {
 		// need to check type compatibility
-		var actualType = actual.getType(context);
-		var newType = expression.check(context);
+		actualType = actual.getType(context);
+		var newType = this.expression.check(context);
         actualType.checkAssignableFrom(context, newType, this);
 	}
 	return VoidType.instance;

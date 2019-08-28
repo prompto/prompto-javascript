@@ -26,3 +26,5 @@ exports.PeriodLiteral = require('./PeriodLiteral').PeriodLiteral;
 exports.VersionLiteral = require('./VersionLiteral').VersionLiteral;
 exports.UUIDLiteral = require('./UUIDLiteral').UUIDLiteral;
 exports.TypeLiteral = require('./TypeLiteral').TypeLiteral;
+
+require('./TextLiteral').resolve();

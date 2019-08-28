@@ -20,7 +20,7 @@ Literal.prototype.parentToDialect = function(writer) {
 
 Literal.prototype.escapedText = function(escapeMode) {
     if(escapeMode)
-        return this.text.replace(/\'/g, "\\'");
+        return this.text.replace(/'/g, "\\'");
     else
         return this.text;
 };

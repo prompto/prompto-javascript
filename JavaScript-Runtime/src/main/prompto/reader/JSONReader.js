@@ -16,6 +16,7 @@ function toValue(node) {
 
 function toList(node) {
     var values = node.map(toValue);
+    /* global intrinsic */
     return new intrinsic.List(false, values);
 }
 

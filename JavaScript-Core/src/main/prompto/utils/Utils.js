@@ -1,3 +1,4 @@
+/* global ArrayBuffer, Uint8Array */
 function equalObjects(o1, o2) {
     if(Object.is(o1, o2))
         return true;
@@ -161,7 +162,7 @@ function utf8BufferToString(buffer) {
         chars.push(String.fromCharCode(code));
     }
     return chars.join("");
-};
+}
 
 
 function multiplyArray(items, count) {
@@ -227,7 +228,7 @@ function compareValues(value1, value2) {
         var s2 = value2.toString();
         return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
     }
-};
+}
 
 exports.multiplyArray = multiplyArray;
 exports.equalObjects = equalObjects;

@@ -33,7 +33,7 @@ Store.prototype.fetchMany = function(query) {
 
 function QueryBuilder() {
     return this;
-};
+}
 
 QueryBuilder.prototype.verify = function(fieldName, matchOp, value) {
     throw new Error("Must override verify!");

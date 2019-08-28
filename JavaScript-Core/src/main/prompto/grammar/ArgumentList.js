@@ -1,5 +1,4 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
-var Dialect = require("../parser/Dialect").Dialect;
 var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 var Argument = require("./Argument").Argument;
@@ -12,8 +11,8 @@ exports.resolve = function() {
 }
 
 function ArgumentList(items) {
-	ObjectList.call(this, items || []);
-	return this;
+    ObjectList.call(this, items || []);
+    return this;
 }
 
 ArgumentList.prototype = Object.create(ObjectList.prototype);
@@ -44,33 +43,33 @@ ArgumentList.prototype.checkLastAnd = function() {
 };
 
 ArgumentList.prototype.findIndex = function(name) {
-	for(var i=0;i<this.length;i++) {
-		if(name==this[i].name) {
-			return i;
-		}
-	}
-	return -1;
+    for(var i=0;i<this.length;i++) {
+        if(name==this[i].name) {
+            return i;
+        }
+    }
+    return -1;
 };
 
 ArgumentList.prototype.find = function(name) {
-	for(var i=0;i<this.length;i++) {
-		if(name==this[i].name) {
-			return this[i];
-		}
-	}
-	return null;
+    for(var i=0;i<this.length;i++) {
+        if(name==this[i].name) {
+            return this[i];
+        }
+    }
+    return null;
 };
 
 ArgumentList.prototype.makeArguments = function(context, declaration) {
     var local = new ArgumentList(this);
-	var args = new ArgumentList();
-	for(var i=0; i<declaration.parameters.length; i++) {
-	    var parameter = declaration.parameters[i];
+    var args = new ArgumentList();
+    for(var i=0; i<declaration.parameters.length; i++) {
+        var parameter = declaration.parameters[i];
         var argument = null;
         var index = local.findIndex(parameter.name);
-	    if(index<0 && i==0 && this.length>0 && this[0].parameter==null)
-	        index = 0;
-	    if(index>=0) {
+        if(index<0 && i==0 && this.length>0 && this[0].parameter==null)
+            index = 0;
+        if(index>=0) {
             argument = local[index];
             local.splice(index, 1);
         }
@@ -86,7 +85,7 @@ ArgumentList.prototype.makeArguments = function(context, declaration) {
     }
     if(local.length > 0)
         throw new SyntaxError("Method has no argument:" + local[0].name);
-	return args;
+    return args;
 };
 
 

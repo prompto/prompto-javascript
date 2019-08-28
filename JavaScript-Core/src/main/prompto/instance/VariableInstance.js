@@ -1,11 +1,9 @@
 var Variable = require("../runtime/Variable").Variable;
-var NullValue = require("../value/NullValue").NullValue;
 var CodeType = require("../type/CodeType").CodeType;
-var DocumentType = require("../type/DocumentType").DocumentType;
 
 function VariableInstance(id) {
-	this.id = id;
-	return this;
+    this.id = id;
+    return this;
 }
 
 Object.defineProperty(VariableInstance.prototype, "name", {
@@ -51,9 +49,9 @@ VariableInstance.prototype.checkAssignValue = function(context, valueType, secti
 };
 
 VariableInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
-	var actual = context.getRegisteredValue(this.id);
-	if(actual==null)
-	    context.problemListener.reportUnknownVariable(section, this.id);
+    var actual = context.getRegisteredValue(this.id);
+    if(actual==null)
+        context.problemListener.reportUnknownVariable(section, this.id);
     return valueType;
 };
 
@@ -68,16 +66,16 @@ VariableInstance.prototype.checkAssignItem = function(context, itemType, valueTy
 
 
 VariableInstance.prototype.assign = function(context, expression) {
-	var value = expression.interpret(context);
-	if(context.getRegisteredValue(this.name)==null) {
+    var value = expression.interpret(context);
+    if(context.getRegisteredValue(this.name)==null) {
         var type = expression.check(context);
-		context.registerValue(new Variable(this.id, type));
-	}
-	context.setValue(this.id, value);
+        context.registerValue(new Variable(this.id, type));
+    }
+    context.setValue(this.id, value);
 };
 
 VariableInstance.prototype.interpret = function(context) {
-	return context.getValue(this.id);
+    return context.getValue(this.id);
 };
 
 VariableInstance.prototype.declareAssign = function(transpiler, expression) {

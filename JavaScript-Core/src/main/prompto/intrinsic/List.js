@@ -1,9 +1,14 @@
+var StrictSet = require("./StrictSet").StrictSet;
+var Document = require("./Document").Document;
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
+var equalObjects = require("../utils/Utils").equalObjects;
+
 function List(mutable, items) {
     Array.call(this);
     if(items)
         this.addItems(items);
-	this.mutable = mutable;
-	return this;
+    this.mutable = mutable;
+    return this;
 }
 
 List.prototype = Object.create(Array.prototype);
@@ -11,9 +16,9 @@ List.prototype.constructor = List;
 
 List.prototype.addItems = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-    	items = Array.from(items.set.values());
-	this.push.apply(this, items);
-	return this; // enable fluid API
+        items = Array.from(items.set.values());
+    this.push.apply(this, items);
+    return this; // enable fluid API
 };
 
 
@@ -170,7 +175,7 @@ List.prototype.equals = function(o) {
 };
 
 List.prototype.toString = function() {
-	return "[" + this.join(", ") + "]";
+    return "[" + this.join(", ") + "]";
 };
 
 List.prototype.getText = List.prototype.toString;

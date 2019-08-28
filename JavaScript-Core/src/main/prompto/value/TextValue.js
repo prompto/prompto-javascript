@@ -4,6 +4,7 @@ var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextType = require("../type/TextType").TextType;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 var removeAccents = require("../utils/Utils").removeAccents;
+var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 function TextValue(value) {
 	Value.call(this, TextType.instance);
@@ -36,7 +37,7 @@ TextValue.prototype.Multiply = function(context, value) {
             var text = this.value.repeat(value.value);
             return new TextValue(text);
         } catch(error) {
-            throw new SyntaxError("Negative repeat count:" + count);
+            throw new SyntaxError("Negative repeat count:" + value.value);
         }
 	} else {
 		throw new SyntaxError("Illegal: Chararacter * " + typeof(value));
@@ -76,8 +77,8 @@ TextValue.prototype.getItemInContext = function(context, index) {
 			throw new InvalidDataError("No such item:" + index.toString());
 		}
 	} catch (e) {
-		if(e instanceof IndexOutOfBoundsException) {
-			throw new IndexOutOfRangeError();
+		if(e instanceof IndexOutOfRangeError) {
+			throw e;
 		} else {
 			throw e;
 		}

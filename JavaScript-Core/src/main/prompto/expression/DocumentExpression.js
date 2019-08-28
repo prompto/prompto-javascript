@@ -2,7 +2,6 @@ var Expression = require("./Expression").Expression;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var DocumentValue = require("../value/DocumentValue").DocumentValue;
 var BlobValue = require("../value/BlobValue").BlobValue;
-var Dialect = require("../parser/Dialect").Dialect;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var Document = require("../intrinsic/Document").Document;
 var Blob = require("../intrinsic/Blob").Blob;

@@ -9,16 +9,17 @@ var DictionaryType = require("../type/DictionaryType").DictionaryType;
 var CharacterType = require("../type/CharacterType").CharacterType;
 var TextType = require("../type/TextType").TextType;
 var inferElementType = require("../utils/TypeUtils").inferElementType;
-
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
+var TextValue = require("../value/TextValue").TextValue;
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
 function DictLiteral(mutable, entries) {
     this.mutable = mutable;
-	this.entries = entries || new DictEntryList();
+    this.entries = entries || new DictEntryList();
     this.itemType = null;
-	Literal.call(this, "<:>", new DictionaryValue(MissingType.instance, new Dictionary(), mutable));
-	return this;
+    Literal.call(this, "<:>", new DictionaryValue(MissingType.instance, new Dictionary(), mutable));
+    return this;
 }
 
 DictLiteral.prototype = Object.create(Literal.prototype);
@@ -44,26 +45,26 @@ DictLiteral.prototype.transpile = function(transpiler) {
 
 
 DictLiteral.prototype.check = function(context) {
-	if(this.itemType==null)
+    if(this.itemType==null)
         this.itemType = this.inferElementType(context);
-	return new DictionaryType(this.itemType);
+    return new DictionaryType(this.itemType);
 };
 
 DictLiteral.prototype.inferElementType = function(context) {
-	var items = this.entries.items;
-	if(items.length==0) {
-		return MissingType.instance;
-	}
-	var types = [];
-	items.forEach(function(entry) {
-  		var elemType = entry.value.check(context);
+    var items = this.entries.items;
+    if(items.length==0) {
+        return MissingType.instance;
+    }
+    var types = [];
+    items.forEach(function(entry) {
+        var elemType = entry.value.check(context);
         types.push(elemType);
-	});
-	return inferElementType(context, types);
+    });
+    return inferElementType(context, types);
 };
 
 DictLiteral.prototype.interpret = function(context) {
-	if(this.entries.items.length>0) {
+    if(this.entries.items.length>0) {
         this.check(context); /// force computation of itemType
         var dict = new Dictionary();
         this.entries.items.forEach(function(entry) {
@@ -74,7 +75,7 @@ DictLiteral.prototype.interpret = function(context) {
         }, this);
         return new DictionaryValue(this.itemType, dict, this.mutable);
     } else
-	    return this.value;
+        return this.value;
 };
 
 
@@ -82,9 +83,9 @@ DictLiteral.prototype.interpretPromotion = function(item) {
     if (item == null)
         return item;
     if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
-        return new Decimal(item.DecimalValue());
+        return new DecimalValue(item.DecimalValue());
     else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
-        return new Text(item.value);
+        return new TextValue(item.value);
     else
         return item;
 };

@@ -1,4 +1,3 @@
-var InternalError = require("../error/InternalError").InternalError;
 var Store = require("../store/Store").Store;
 var MemQueryBuilder = require("./MemQueryBuilder").MemQueryBuilder;
 var StorableDocument = null;
@@ -52,8 +51,8 @@ MemStore.prototype.fetchUnique = function(dbId) {
 
 
 MemStore.prototype.fetchOne = function(query) {
-    for (dbId in this.iterDocuments) {
-        doc = this.iterDocuments[dbId];
+    for (var dbId in this.iterDocuments) {
+        var doc = this.iterDocuments[dbId];
         if(doc.matches(query.predicate))
             return doc;
     }
@@ -139,8 +138,8 @@ MemStore.prototype.readValue = function(doc, orderBy) {
 
 MemStore.prototype.fetchMatching = function(query) {
     var docs = [];
-    for (dbId in this.iterDocuments) {
-        doc = this.iterDocuments[dbId];
+    for (var dbId in this.iterDocuments) {
+        var doc = this.iterDocuments[dbId];
         if(doc.matches(query.predicate))
             docs.push(doc);
     }

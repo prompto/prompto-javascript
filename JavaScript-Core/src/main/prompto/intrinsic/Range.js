@@ -1,3 +1,9 @@
+var equalObjects = require("../utils/Utils").equalObjects;
+var StrictSet = require("./StrictSet").StrictSet;
+var LocalDate = require("./LocalDate").LocalDate;
+var LocalTime = require("./LocalTime").LocalTime;
+
+
 function Range(first, last) {
     this.first = first;
     this.last = last;

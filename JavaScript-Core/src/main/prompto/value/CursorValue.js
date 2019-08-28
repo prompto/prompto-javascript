@@ -4,7 +4,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var Value = require("./Value").Value;
 var ListValue = require("./ListValue").ListValue;
-var BooleanValue = require("./BooleanValue").BooleanValue;
+var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 function CursorValue(context, itemType, iterDocuments) {
     Value.call(this, new CursorType(itemType));
@@ -12,7 +12,7 @@ function CursorValue(context, itemType, iterDocuments) {
     this.iterDocuments = iterDocuments;
     this.mutable = itemType.mutable || false;
     return this;
-};
+}
 
 CursorValue.prototype = Object.create(Value.prototype);
 CursorValue.prototype.constructor = CursorValue;

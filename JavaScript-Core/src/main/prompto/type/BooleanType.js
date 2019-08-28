@@ -1,6 +1,5 @@
 var NativeType = require("./NativeType").NativeType;
 var Identifier = require("../grammar/Identifier").Identifier;
-var AnyType = require("./AnyType").AnyType;
 var BooleanValue = null;
 
 exports.resolve = function() {

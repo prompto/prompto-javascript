@@ -1,7 +1,7 @@
 function CssText(text) {
     this.text = text;
     return this;
-};
+}
 
 CssText.prototype.toDialect = function(writer) {
     writer.append(this.text);

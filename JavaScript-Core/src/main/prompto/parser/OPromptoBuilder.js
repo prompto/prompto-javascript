@@ -7,7 +7,6 @@ var javascript = require("../javascript/index");
 var statement = require("../statement/index");
 var literal = require("../literal/index");
 var grammar = require("../grammar/index");
-var value = require("../value/index");
 var utils = require("../utils/index");
 var param = require("../param/index");
 var parser = require("../parser/index");
@@ -25,7 +24,7 @@ function OPromptoBuilder(oparser) {
 	this.nodeValues = {};
     this.nextNodeId = 0;
 	return this;
-};
+}
 
 OPromptoBuilder.prototype = Object.create(parser.OParserListener.prototype);
 OPromptoBuilder.prototype.constructor = OPromptoBuilder;
@@ -37,7 +36,7 @@ OPromptoBuilder.prototype.setNodeValue = function(node, value) {
     this.nodeValues[node["%id"]] = value;
     if(value instanceof parser.Section) {
         this.buildSection(node, value);
-    };
+    }
 };
 
 
@@ -774,8 +773,8 @@ OPromptoBuilder.prototype.exitArrowSingleArg = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
-    var arrow = getNodeValue(ctx.arrow_prefix());
-    var stmts = getNodeValue(ctx.statement_list());
+    var arrow = this.getNodeValue(ctx.arrow_prefix());
+    var stmts = this.getNodeValue(ctx.statement_list());
     arrow.setStatements(stmts);
     this.setNodeValue(ctx, arrow);
 };
@@ -1421,7 +1420,7 @@ OPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitJavascript_module = function(ctx) {
-	ids = ctx.javascript_identifier().map(function(rule) {
+	var ids = ctx.javascript_identifier().map(function(rule) {
         return rule.getText();
 	});
 	var module = new javascript.JavaScriptModule(ids);
@@ -1590,7 +1589,7 @@ OPromptoBuilder.prototype.exitReturnStatement = function(ctx) {
 
 OPromptoBuilder.prototype.exitClosure_expression = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
-	this.setNodeValue(ctx, new MethodExpression(name));
+	this.setNodeValue(ctx, new expression.MethodExpression(name));
 };
 
 
@@ -1884,7 +1883,7 @@ OPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
         args.add(new literal.DictEntry(null, exp));
     }
     ctx.annotation_argument().map(function(argCtx) {
-        arg = this.getNodeValue(argCtx);
+        var arg = this.getNodeValue(argCtx);
         args.add(arg);
     }, this);
     this.setNodeValue(ctx, new grammar.Annotation(name, args));
@@ -2326,7 +2325,7 @@ OPromptoBuilder.prototype.exitAnyListType = function(ctx) {
 
 OPromptoBuilder.prototype.exitAnyDictType = function(ctx) {
 	var type = this.getNodeValue(ctx.typ);
-	this.setNodeValue(ctx, new DictType(type));
+	this.setNodeValue(ctx, new type.DictType(type));
 };
 
 
@@ -2346,7 +2345,7 @@ OPromptoBuilder.prototype.exitCatchAtomicStatement = function(ctx) {
 OPromptoBuilder.prototype.exitCatchCollectionStatement = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	var stmts = this.getNodeValue(ctx.stmts);
-	this.setNodeValue(ctx, new CollectionSwitchCase(exp, stmts));
+	this.setNodeValue(ctx, new statement.CollectionSwitchCase(exp, stmts));
 };
 
 
@@ -2868,12 +2867,12 @@ OPromptoBuilder.prototype.buildSection = function(node, section) {
 OPromptoBuilder.prototype.findFirstValidToken = function(idx) {
 	if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
 		idx = 0;
-	};
+	}
 	do {
 		var token = this.readValidToken(idx++);
 		if(token!==null) {
 			return token;
-		};
+		}
 	} while(idx<this.input.tokenSource.size);
 	return null;
 };
@@ -2881,13 +2880,13 @@ OPromptoBuilder.prototype.findFirstValidToken = function(idx) {
 OPromptoBuilder.prototype.findLastValidToken = function(idx) {
 	if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
 		idx = 0;
-	};
+	}
 	while(idx>=0) {
 		var token = this.readValidToken(idx--);
 		if(token!==null) {
 			return token;
 		}
-	};
+	}
 	return null;
 };
 

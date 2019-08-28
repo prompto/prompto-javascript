@@ -13,6 +13,7 @@ var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
+var NativeType = require("./NativeType").NativeType;
 var NullType = require("./NullType").NullType;
 var TextType = require("./TextType").TextType;
 var AnyType = require("./AnyType").AnyType;
@@ -29,8 +30,8 @@ var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
 
 exports.resolve = function() {
-	ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-	Argument = require("../grammar/Argument").Argument;
+    ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+    Argument = require("../grammar/Argument").Argument;
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;
@@ -42,9 +43,9 @@ exports.resolve = function() {
 
 
 function CategoryType(id, mutable) {
-	BaseType.call(this, id);
+    BaseType.call(this, id);
     this.mutable = mutable || false;
-	return this;
+    return this;
 }
 
 CategoryType.prototype = Object.create(BaseType.prototype);
@@ -88,21 +89,21 @@ CategoryType.prototype.newInstanceFromStored = function(context, stored) {
 };
 
 CategoryType.prototype.checkUnique = function(context) {
-	var actual = context.getRegisteredDeclaration(this.name) || null;
-	if(actual!=null) {
-		throw new SyntaxError("Duplicate name: \"" + this.name + "\"");
-	}
+    var actual = context.getRegisteredDeclaration(this.name) || null;
+    if(actual!=null) {
+        throw new SyntaxError("Duplicate name: \"" + this.name + "\"");
+    }
 };
 
 CategoryType.prototype.getDeclaration = function(context) {
-	var decl = context.getRegisteredDeclaration(this.name) || null;
-	if(decl==null) {
+    var decl = context.getRegisteredDeclaration(this.name) || null;
+    if(decl==null) {
         if(context.problemListener)
             context.problemListener.reportUnknownCategory(this.id);
         else
-		    throw new SyntaxError("Unknown category: \"" + this.name + "\"");
-	}
-	return decl;
+            throw new SyntaxError("Unknown category: \"" + this.name + "\"");
+    }
+    return decl;
 };
 
 
@@ -134,7 +135,7 @@ CategoryType.prototype.transpileMultiply = function(transpiler, other, tryRevers
         right.transpile(transpiler);
         transpiler.append(")");
     } else
-        return NativeType.prototype.transpileMultiply.call(this, context, other, tryReverse, left, right);
+        return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
 
 };
 
@@ -155,7 +156,7 @@ CategoryType.prototype.declareDivide = function(transpiler, other, left, right) 
         right.declare(transpiler);
         type.declare(transpiler);
     } else
-        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+        return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
 };
 
 
@@ -183,7 +184,7 @@ CategoryType.prototype.declareIntDivide = function(transpiler, other, left, righ
         right.declare(transpiler);
         type.declare(transpiler);
     } else
-        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+        return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
 };
 
 
@@ -211,7 +212,7 @@ CategoryType.prototype.declareModulo = function(transpiler, other, left, right) 
         right.declare(transpiler);
         type.declare(transpiler);
     } else
-        return NativeType.prototype.declareModulo.call(this, context, other, left, right);
+        return NativeType.prototype.declareModulo.call(this, transpiler, other, left, right);
 };
 
 
@@ -266,7 +267,7 @@ CategoryType.prototype.declareSubtract = function(transpiler, other, left, right
         right.declare(transpiler);
         type.declare(transpiler);
     } else
-        return NativeType.prototype.declareDivide.call(this, context, other, left, right);
+        return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
 };
 
 
@@ -301,7 +302,7 @@ CategoryType.prototype.checkOperator = function(context, other, tryReverse, oper
 
 
 CategoryType.prototype.checkExists = function(context) {
-	this.getDeclaration(context);
+    this.getDeclaration(context);
 };
 
 CategoryType.prototype.checkMember = function(context, section, name) {
@@ -314,7 +315,7 @@ CategoryType.prototype.checkMember = function(context, section, name) {
         return decl.getType(context).checkMember(context, section, name);
     } else if (decl instanceof CategoryDeclaration) {
         return this.checkCategoryMember(context, section, decl, name);
-	} else {
+    } else {
         context.problemListener.reportUnknownCategory(this.id);
         return null;
     }
@@ -415,6 +416,7 @@ CategoryType.prototype.isDerivedFrom = function(context, other) {
         if (thisDecl instanceof CategoryDeclaration)
             return this.isDerivedFromCategory(context, thisDecl, other);
     } catch (e) {
+        /* eslint no-empty: [ "off" ] */
     }
     return false; // TODO
 };
@@ -470,82 +472,82 @@ CategoryType.prototype.isDerivedFromAnonymousCategory = function(context, thisDe
 };
 
 CategoryType.prototype.isAnonymous = function() {
-	return this.name[0]==this.name[0].toLowerCase(); // since it's the name of the argument
+    return this.name[0]==this.name[0].toLowerCase(); // since it's the name of the argument
 }
 
 CategoryType.prototype.isMoreSpecificThan = function(context, other) {
     if(other instanceof NullType || other instanceof AnyType || other instanceof MissingType)
         return true;
-	if(!(other instanceof CategoryType)) {
-		return false;
-	}
-	if(other.isAnonymous()) {
-		return true;
-	}
-	var thisDecl = context.getRegisteredDeclaration(this.name);
-	if(thisDecl.isDerivedFrom(context, other)) {
-		return true;
-	} else {
-		return false;
-	}
+    if(!(other instanceof CategoryType)) {
+        return false;
+    }
+    if(other.isAnonymous()) {
+        return true;
+    }
+    var thisDecl = context.getRegisteredDeclaration(this.name);
+    if(thisDecl.isDerivedFrom(context, other)) {
+        return true;
+    } else {
+        return false;
+    }
 };
 
 CategoryType.prototype.scoreMostSpecific = function(context, t1, t2) {
-	if(t1.equals(t2)) {
-		return Score.SIMILAR;
-	} else if(this.equals(t1)) {
-		return Score.BETTER;
-	} else  if(this.equals(t2)) {
-		return Score.WORSE;
-	}
-	// since this derives from both t1 and t2, return the most specific of t1 and t2
-	if(t1.isMoreSpecificThan(context,t2)) {
-		return Score.BETTER;
-	} else if(t2.isMoreSpecificThan(context,t1)) {
-		return Score.WORSE;
-	} else {
-		return Score.SIMILAR;
-	} // should never happen
+    if(t1.equals(t2)) {
+        return Score.SIMILAR;
+    } else if(this.equals(t1)) {
+        return Score.BETTER;
+    } else  if(this.equals(t2)) {
+        return Score.WORSE;
+    }
+    // since this derives from both t1 and t2, return the most specific of t1 and t2
+    if(t1.isMoreSpecificThan(context,t2)) {
+        return Score.BETTER;
+    } else if(t2.isMoreSpecificThan(context,t1)) {
+        return Score.WORSE;
+    } else {
+        return Score.SIMILAR;
+    } // should never happen
 };
 
 
 CategoryType.prototype.newInstance = function(context) {
-	var decl = context.getRegisteredDeclaration(this.name);
-	return decl.newInstance(context);
+    var decl = context.getRegisteredDeclaration(this.name);
+    return decl.newInstance(context);
 };
 
 
 CategoryType.prototype.getSortedComparator = function(context, key, desc) {
     key = key || null;
-	if (key == null)
-		key = new UnresolvedIdentifier(new Identifier("key"));
+    if (key == null)
+        key = new UnresolvedIdentifier(new Identifier("key"));
     var keyname = key.toString();
     var decl = this.getDeclaration(context);
-	if (decl.hasAttribute(context, keyname)) {
-		return this.getAttributeSortedComparator(context, keyname, desc);
-	} else if (decl.hasMethod(context, keyname)) {
-		return this.getMemberMethodSortedComparator(context, keyname, desc);
-	} else {
-		var method = this.findGlobalMethod(context, keyname);
-		if(method!=null) {
+    if (decl.hasAttribute(context, keyname)) {
+        return this.getAttributeSortedComparator(context, keyname, desc);
+    } else if (decl.hasMethod(context, keyname)) {
+        return this.getMemberMethodSortedComparator(context, keyname, desc);
+    } else {
+        var method = this.findGlobalMethod(context, keyname);
+        if(method!=null) {
             return this.getGlobalMethodSortedComparator(context, method, desc);
         } else if(key instanceof ArrowExpression) {
             return key.getSortedComparator(context, this, desc);
         } else {
-			return this.getExpressionSortedComparator(context, key, desc);
-		}
-	}
+            return this.getExpressionSortedComparator(context, key, desc);
+        }
+    }
 };
 
 
 CategoryType.prototype.getExpressionSortedComparator = function(context, exp, desc) {
     return function(o1, o2) {
-		var ctx = context.newInstanceContext(o1, null);
-		var value1 = exp.interpret(ctx);
+        var ctx = context.newInstanceContext(o1, null);
+        var value1 = exp.interpret(ctx);
         ctx = context.newInstanceContext(o2, null);
-		var value2 = exp.interpret(ctx);
-		return desc ? compareValues(value2, value1) : compareValues(value1, value2);
-	};
+        var value2 = exp.interpret(ctx);
+        return desc ? compareValues(value2, value1) : compareValues(value1, value2);
+    };
 };
 
 
@@ -555,7 +557,7 @@ CategoryType.prototype.getAttributeSortedComparator = function(context, name, de
             var value1 = o1.getMemberValue(context, name);
             var value2 = o2.getMemberValue(context, name);
             return compareValues(value2, value1);
-	    };
+        };
     else
         return function(o1, o2) {
             var value1 = o1.getMemberValue(context, name);
@@ -605,21 +607,21 @@ CategoryType.prototype.getStaticMemberMethods = function(context, name) {
 
 /* look for a method which takes this category as sole parameter */
 CategoryType.prototype.findGlobalMethod = function(context, name, returnDecl) {
-	try {
-		var exp = new ValueExpression(this, this.newInstance(context));
-		var arg = new Argument(null, exp);
-		var args = new ArgumentList([arg]);
-		var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
-		var finder = new MethodFinder(context, call);
-		var decl = finder.findMethod(true);
-		return decl==null ? null : returnDecl ? decl : call;
-	} catch (e) {
-		if(e instanceof PromptoError) {
-			return null;
-		} else {
-			throw e;
-		}
-	}
+    try {
+        var exp = new ValueExpression(this, this.newInstance(context));
+        var arg = new Argument(null, exp);
+        var args = new ArgumentList([arg]);
+        var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
+        var finder = new MethodFinder(context, call);
+        var decl = finder.findMethod(true);
+        return decl==null ? null : returnDecl ? decl : call;
+    } catch (e) {
+        if(e instanceof PromptoError) {
+            return null;
+        } else {
+            throw e;
+        }
+    }
 };
 
 
@@ -646,7 +648,7 @@ CategoryType.prototype.declareSorted = function(transpiler, key) {
     if (decl.hasAttribute(transpiler.context, keyname) || decl.hasMethod(transpiler.context, keyname, null)) {
         return;
     } else {
-        var decl = this.findGlobalMethod(transpiler.context, keyname, true);
+        decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
             decl.declare(transpiler);
         } else if(key instanceof ArrowExpression) {

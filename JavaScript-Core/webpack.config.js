@@ -12,6 +12,15 @@ module.exports = {
         net: "empty",
         fs: "empty"
     },
+    module: {
+        rules: [
+            {
+                test: /\.(js)$/,
+                exclude: /node_modules/,
+                use: ["eslint-loader"]
+            }
+        ]
+    },
     mode: "production",
     performance: {
         hints: false

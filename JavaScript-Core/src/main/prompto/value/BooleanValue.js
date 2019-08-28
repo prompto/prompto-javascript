@@ -37,7 +37,6 @@ BooleanValue.prototype.And = function(value) {
 	} else {
 		throw new SyntaxError("Illegal: Boolean and " + typeof(value));
 	}
-	return this.value;
 };
 
 
@@ -47,7 +46,6 @@ BooleanValue.prototype.Or = function(value) {
 	} else {
 		throw new SyntaxError("Illegal: Boolean or " + typeof(value));
 	}
-	return this.value;
 };
 
 

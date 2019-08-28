@@ -32,7 +32,6 @@ ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, l
             type: "error",
             message: msg
         };
-        ;
     this.collectProblem(problem);
 };
 

@@ -1,5 +1,4 @@
 var NativeType = require("./NativeType").NativeType;
-var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var UUIDValue = null;
 var UUID = require("../intrinsic/UUID").UUID;

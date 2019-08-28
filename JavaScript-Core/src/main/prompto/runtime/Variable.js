@@ -1,5 +1,3 @@
-var BaseType = require("../type/BaseType").BaseType;
-
 function Variable (id, type) {
     this.id = id;
 	this.type = type;

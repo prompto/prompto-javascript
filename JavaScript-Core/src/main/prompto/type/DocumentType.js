@@ -5,8 +5,10 @@ var NullType = require("./NullType").NullType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
+var NullValue = require("../value/NullValue").NullValue;
 var TextValue = require("../value/TextValue").TextValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
+var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var MethodDeclarationMap = null;
 var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var DocumentValue = null;
@@ -209,7 +211,7 @@ DocumentType.prototype.transpileItem = function(transpiler, type, item) {
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {
     var instance = new DocumentValue();
-    for(key in node) {
+    for(var key in node) {
         var value = this.readJSONField(context, node[key], parts);
         instance.setMember(context, key, value);
     }
@@ -224,7 +226,7 @@ DocumentType.prototype.readJSONField = function(context, node, parts) {
     else if(typeof(node)===typeof(1))
         return new IntegerValue(node);
     else if(typeof(node)===typeof(1.0))
-        return new Decimal(node)
+        return new DecimalValue(node)
     else if(typeof(node)===typeof(""))
         return new TextValue(node)
     else if(typeof(node)===typeof([]))

@@ -1,7 +1,6 @@
 var Value = require("./Value").Value;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
-var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 var TimeType = null;
 
 exports.resolve = function() {

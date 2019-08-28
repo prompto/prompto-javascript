@@ -1,16 +1,9 @@
 var Expression = require("./Expression").Expression;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var IterableType = require("../type/IterableType").IterableType;
-var ListType = require("../type/ListType").ListType;
-var TupleType = require("../type/TupleType").TupleType;
-var SetType = require("../type/SetType").SetType;
 var Variable = require("../runtime/Variable").Variable;
 var InternalError = require("../error/InternalError").InternalError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var ListValue = require("../value/ListValue").ListValue;
-var TupleValue = require("../value/TupleValue").TupleValue;
-var SetValue = require("../value/SetValue").SetValue;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 

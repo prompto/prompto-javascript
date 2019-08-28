@@ -37,7 +37,7 @@ MatchingCollectionConstraint.prototype.declare = function(transpiler, name, type
 
 MatchingCollectionConstraint.prototype.transpileChecker = function(transpiler, name, type) {
     transpiler.append("function $check_").append(name).append("(value) {").indent();
-    var transpiler = transpiler.newChildTranspiler();
+    transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
     transpiler.append("if(");

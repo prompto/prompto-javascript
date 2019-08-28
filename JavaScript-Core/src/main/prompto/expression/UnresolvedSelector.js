@@ -2,7 +2,6 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var MemberSelector = null;
 var MethodSelector = null;
-var MethodCall = null;
 var UnresolvedCall = null;
 var UnresolvedIdentifier = null;
 var AnyType = require("../type/AnyType").AnyType;
@@ -11,7 +10,6 @@ var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 exports.resolve = function () {
     MemberSelector = require("./MemberSelector").MemberSelector;
     MethodSelector = require("./MethodSelector").MethodSelector;
-    MethodCall = require("../statement/MethodCall").MethodCall;
     UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 }

@@ -1,3 +1,5 @@
+var NotMutableError = require("../error/NotMutableError").NotMutableError;
+
 function $Root() {
     this.mutable = false;
     this.storable = this.storable || null;
@@ -95,8 +97,8 @@ $Root.prototype.collectStorables = function(storablesToAdd) {
 
 $Root.prototype.collectDbIds = function(idsToDelete) {
     if(this.dbId) {
-    	var dbId = typeof(this.dbId) === "object" ? this.dbId.toString() : this.dbId;
-    	idsToDelete.add(dbId);
+        var dbId = typeof(this.dbId) === "object" ? this.dbId.toString() : this.dbId;
+        idsToDelete.add(dbId);
     }
 };
 

@@ -47,7 +47,7 @@ CharacterValue.prototype.Multiply = function(context, value) {
             var text = this.value.repeat(value.value);
             return new TextValue(text);
         } catch(error) {
-            throw new SyntaxError("Negative repeat count:" + count);
+            throw new SyntaxError("Negative repeat count:" + value.value);
         }
     } else {
         throw new SyntaxError("Illegal: Chararacter * " + typeof(value));

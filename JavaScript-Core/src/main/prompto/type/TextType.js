@@ -5,8 +5,6 @@ var CharacterType = null;
 var ListType = null;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
-var AnyType = require("./AnyType").AnyType;
-var Identifier = require("../grammar/Identifier").Identifier;
 var TextValue = null; // circular dependency
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
@@ -17,18 +15,18 @@ var List = require("../intrinsic/List").List;
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 
 exports.resolve = function() {
-	CharacterType = require("./CharacterType").CharacterType;
+    CharacterType = require("./CharacterType").CharacterType;
     ListType = require("./ListType").ListType;
     TextLiteral = require("../literal/TextLiteral").TextLiteral;
     ListValue = require("../value/ListValue").ListValue;
-	TextValue = require("../value/TextValue").TextValue;
+    TextValue = require("../value/TextValue").TextValue;
     resolveBuiltInMethodDeclaration();
 };
 
 function TextType()  {
-	NativeType.call(this, new Identifier("Text"));
-	this.family = TypeFamily.TEXT;
-	return this;
+    NativeType.call(this, new Identifier("Text"));
+    this.family = TypeFamily.TEXT;
+    return this;
 }
 
 TextType.prototype = Object.create(NativeType.prototype);
@@ -37,7 +35,7 @@ TextType.prototype.constructor = TextType;
 TextType.instance = new TextType();
 
 TextType.prototype.isAssignableFrom = function(context, other) {
-	return NativeType.prototype.isAssignableFrom.call(this, context, other)
+    return NativeType.prototype.isAssignableFrom.call(this, context, other)
         || (other == CharacterType.instance);
 };
 
@@ -55,8 +53,8 @@ TextType.prototype.transpile = function(transpiler) {
 
 
 TextType.prototype.checkAdd = function(context, other, tryReverse) {
-	// can add anything to text
-	return this;
+    // can add anything to text
+    return this;
 };
 
 
@@ -77,10 +75,10 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
 };
 
 TextType.prototype.checkMultiply = function(context, other, tryReverse) {
-	if(other instanceof IntegerType) {
-		return TextType.instance;
-	}
-	return NativeType.prototype.checkMultiply.call(this, context, other, tryReverse);
+    if(other instanceof IntegerType) {
+        return TextType.instance;
+    }
+    return NativeType.prototype.checkMultiply.call(this, context, other, tryReverse);
 };
 
 
@@ -106,10 +104,10 @@ TextType.prototype.transpileMultiply = function(transpiler, other, tryReverse, l
 
 
 TextType.prototype.checkCompare = function(context, other, section) {
-	if(other instanceof TextType || other instanceof CharacterType) {
-		return BooleanType.instance;
-	}
-	return NativeType.prototype.checkCompare.call(this, context, other, section);
+    if(other instanceof TextType || other instanceof CharacterType) {
+        return BooleanType.instance;
+    }
+    return NativeType.prototype.checkCompare.call(this, context, other, section);
 };
 
 
@@ -126,11 +124,11 @@ TextType.prototype.transpileCompare = function(transpiler, other, operator, left
 
 
 TextType.prototype.checkItem = function(context, other, expression) {
-	if(other==IntegerType.instance) {
-		return CharacterType.instance;
-	} else {
-		return NativeType.prototype.checkItem.call(this, context, other, expression);
-	}
+    if(other==IntegerType.instance) {
+        return CharacterType.instance;
+    } else {
+        return NativeType.prototype.checkItem.call(this, context, other, expression);
+    }
 };
 
 TextType.prototype.declareItem = function(transpiler, itemType, item) {
@@ -147,9 +145,9 @@ TextType.prototype.transpileItem = function(transpiler, itemType, item) {
 
 TextType.prototype.checkMember = function(context, section, name) {
    if ("count"==name) {
-	   return IntegerType.instance;
+       return IntegerType.instance;
    } else {
-	   return NativeType.prototype.checkMember.call(this, context, section, name);
+       return NativeType.prototype.checkMember.call(this, context, section, name);
    }
 };
 
@@ -170,10 +168,10 @@ TextType.prototype.transpileMember = function(transpiler, name) {
 };
 
 TextType.prototype.checkContains = function(context, other) {
-	if(other instanceof TextType || other instanceof CharacterType) {
-		return BooleanType.instance;
-	}
-	return NativeType.prototype.checkContains.call(this, context, other);
+    if(other instanceof TextType || other instanceof CharacterType) {
+        return BooleanType.instance;
+    }
+    return NativeType.prototype.checkContains.call(this, context, other);
 };
 
 
@@ -192,7 +190,7 @@ TextType.prototype.transpileContains = function(transpiler, other, container, it
 
 
 TextType.prototype.checkContainsAllOrAny = function(context, other) {
-	return BooleanType.instance;
+    return BooleanType.instance;
 };
 
 
@@ -219,7 +217,7 @@ TextType.prototype.transpileContainsAny = function(transpiler, other, container,
 
 
 TextType.prototype.checkSlice = function(context) {
-	return this;
+    return this;
 };
 
 
@@ -247,11 +245,11 @@ TextType.prototype.transpileSlice = function(transpiler, first, last) {
 };
 
 TextType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-	if (typeof(value) == 'string') {
-		return new TextValue(value);
-	} else {
-		return value; // TODO for now
-	}
+    if (typeof(value) == 'string') {
+        return new TextValue(value);
+    } else {
+        return value; // TODO for now
+    }
 }
 
 TextType.prototype.getMemberMethods = function(context, name) {

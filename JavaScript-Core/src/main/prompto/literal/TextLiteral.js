@@ -1,6 +1,11 @@
 var Literal = require("./Literal").Literal;
-var TextValue = require("../value/TextValue").TextValue;
+var TextValue = null;
 var TextType = require("../type/TextType").TextType;
+
+
+exports.resolve = function() {
+	TextValue = require("../value/TextValue").TextValue;
+};
 
 /*jshint evil:true*/
 function unescape(text) {

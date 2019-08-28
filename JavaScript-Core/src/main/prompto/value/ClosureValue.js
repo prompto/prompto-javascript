@@ -1,4 +1,3 @@
-var MethodType = require("../type/MethodType").MethodType;
 var Value = require("./Value").Value;
 
 function ClosureValue(context, type) {

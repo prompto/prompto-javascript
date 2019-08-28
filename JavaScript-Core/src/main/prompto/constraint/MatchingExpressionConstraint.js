@@ -25,7 +25,7 @@ MatchingExpressionConstraint.prototype.toDialect = function(writer) {
 }
 
 MatchingExpressionConstraint.prototype.declare = function(transpiler, name, type) {
-    var transpiler = transpiler.newChildTranspiler();
+    transpiler = transpiler.newChildTranspiler();
     var id = new Identifier("value");
     transpiler.context.registerValue(new Variable(id, type));
     this.expression.declare(transpiler);

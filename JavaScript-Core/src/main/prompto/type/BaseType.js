@@ -3,24 +3,18 @@ var EnumeratedNativeType = null;
 var VoidType = null;
 var TextType = null;
 var NullType = null;
-var TupleValue = null;
-var SetValue = null;
-var ListValue = null;
 
 exports.resolve = function() {
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
     VoidType = require("./VoidType").VoidType;
     TextType = require("./TextType").TextType;
     NullType = require("./NullType").NullType;
-    TupleValue = require("../value/TupleValue").TupleValue;
-    SetValue = require("../value/SetValue").SetValue;
-    ListValue = require("../value/ListValue").ListValue;
-};
+}
 
 function BaseType(id) {
-	this.id = id;
-	return this;
-};
+    this.id = id;
+    return this;
+}
 
 Object.defineProperty(BaseType.prototype, "name", {
     get : function() {
@@ -35,7 +29,7 @@ BaseType.prototype.getTranspiledName = function() {
 
 
 BaseType.prototype.toString = function() {
-	return this.name;
+    return this.name;
 };
 
 
@@ -80,7 +74,7 @@ BaseType.prototype.checkAdd = function(context, other, tryReverse) {
     else if(tryReverse)
         return other.checkAdd(context, this, false);
     else
-	    throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
+        throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
 };
 
 
@@ -156,7 +150,7 @@ BaseType.prototype.checkIntDivide = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkIntDivide(context, other.derivedFrom);
     else
-    	throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
+        throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
 };
 
 
@@ -180,7 +174,7 @@ BaseType.prototype.checkModulo = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkModulo(context, other.derivedFrom);
     else
-    	throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
+        throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
 };
 
 
@@ -205,7 +199,7 @@ BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
     else if(tryReverse)
         return other.checkMultiply(context, this, false);
     else
-	    throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
+        throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
 };
 
 BaseType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
@@ -232,7 +226,7 @@ BaseType.prototype.checkMinus = function(context) {
     if(this instanceof EnumeratedNativeType)
         return this.derivedFrom.checkMinus(context);
     else
-	    throw new SyntaxError("Cannot negate " + this.name);
+        throw new SyntaxError("Cannot negate " + this.name);
 };
 
 
@@ -280,7 +274,7 @@ BaseType.prototype.checkContains = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkContains(context, other.derivedFrom);
     else
-    	throw new SyntaxError(this.name + " cannot contain " + other.name);
+        throw new SyntaxError(this.name + " cannot contain " + other.name);
 };
 
 
@@ -303,7 +297,7 @@ BaseType.prototype.checkContainsAllOrAny = function(context, other) {
     if(other instanceof EnumeratedNativeType)
         return this.checkContainsAllOrAny(context, other.derivedFrom);
     else
-    	throw new SyntaxError(this.name + " cannot contain all or any " + other.name);
+        throw new SyntaxError(this.name + " cannot contain all or any " + other.name);
 };
 
 BaseType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
@@ -386,7 +380,7 @@ BaseType.prototype.transpileMember = function(transpiler, name) {
 
 
 BaseType.prototype.checkSlice = function(context) {
-	throw new SyntaxError("Cannot slice " + this.name);
+    throw new SyntaxError("Cannot slice " + this.name);
 };
 
 
@@ -415,12 +409,12 @@ BaseType.prototype.transpileIterator = function(transpiler, name, expression) {
 
 
 BaseType.prototype.checkAssignableFrom = function(context, other, section) {
-	if (!this.isAssignableFrom(context, other))
-	    context.problemListener.reportIncompatibleTypes(section, this, other);
+    if (!this.isAssignableFrom(context, other))
+        context.problemListener.reportIncompatibleTypes(section, this, other);
 };
 
 BaseType.prototype.checkRange = function(context, other) {
-	throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
+    throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
 };
 
 BaseType.prototype.declareRange = function(context, other) {
@@ -434,15 +428,15 @@ BaseType.prototype.transpileRange = function(transpiler, first, last) {
 
 
 BaseType.prototype.checkAnd = function(context, other) {
-	throw new SyntaxError("Cannot logically combine " + this.name + " and " + other.name);
+    throw new SyntaxError("Cannot logically combine " + this.name + " and " + other.name);
 };
 
 BaseType.prototype.checkOr = function(context, other) {
-	throw new SyntaxError("Cannot logically combine " + this.name + " or " + other.name);
+    throw new SyntaxError("Cannot logically combine " + this.name + " or " + other.name);
 };
 
 BaseType.prototype.checkNot = function(context) {
-	throw new SyntaxError("Cannot logically negate " + this.name);
+    throw new SyntaxError("Cannot logically negate " + this.name);
 };
 
 BaseType.prototype.getMember = function(context, name) {
@@ -466,7 +460,7 @@ BaseType.prototype.getSortedComparator = function(context, key, desc) {
 
 
 BaseType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-	return value; // TODO for now
+    return value; // TODO for now
 };
 
 

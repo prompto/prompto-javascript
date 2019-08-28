@@ -1,33 +1,24 @@
 var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
-var Value = require("../value/Value").Value;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 function AndExpression(left, right) {
     Expression.call(this);
-	this.left = left;
-	this.right = right;
-	return this;
+    this.left = left;
+    this.right = right;
+    return this;
 }
 
 AndExpression.prototype = Object.create(Expression.prototype);
 AndExpression.prototype.constructor = AndExpression;
 
 AndExpression.prototype.toString = function() {
-	return this.left.toString() + " and " + this.right.toString();
+    return this.left.toString() + " and " + this.right.toString();
 };
 
 AndExpression.prototype.operatorToDialect = function(dialect) {
-    switch(dialect) {
-        case Dialect.E:
-        case Dialect.M:
-            return " and ";
-        case Dialect.O:
-            return " && ";
-        default:
-            throw new Exception("Unsupported: " + dialect.name);
-    }
+    return dialect==Dialect.O ? " && " : " and ";
 };
 
 AndExpression.prototype.toEDialect = function(writer) {
@@ -50,17 +41,17 @@ AndExpression.prototype.toMDialect = function(writer) {
 
 
 AndExpression.prototype.check = function(context) {
-	var lt = this.left.check(context);
-	var rt = this.right.check(context);
-	return lt.checkAnd(context, rt);
+    var lt = this.left.check(context);
+    var rt = this.right.check(context);
+    return lt.checkAnd(context, rt);
 };
 
 AndExpression.prototype.interpret = function(context) {
-	var lval = this.left.interpret(context);
-	if(lval instanceof BooleanValue && !lval.value)
-	    return lval;
-	var rval = this.right.interpret(context);
-	return lval.And(rval);
+    var lval = this.left.interpret(context);
+    if(lval instanceof BooleanValue && !lval.value)
+        return lval;
+    var rval = this.right.interpret(context);
+    return lval.And(rval);
 };
 
 

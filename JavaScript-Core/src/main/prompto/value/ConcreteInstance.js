@@ -1,9 +1,6 @@
 var CategoryType = null;
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
 var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var StorableDocument = require("../memstore/StorableDocument").StorableDocument;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var Variable = require("../runtime/Variable").Variable;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -12,6 +9,7 @@ var NullValue = require("./NullValue").NullValue;
 var DecimalValue = require("./DecimalValue").DecimalValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
+var Value = require("./Value").Value;
 var Instance = require("./Value").Instance;
 var $DataStore = require("../store/DataStore").$DataStore;
 var TypeUtils = require("../utils/TypeUtils");
@@ -19,22 +17,22 @@ var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
 
 exports.resolve = function() {
-	CategoryType = require("../type/CategoryType").CategoryType;
+    CategoryType = require("../type/CategoryType").CategoryType;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
 };
 
 function ConcreteInstance(context, declaration) {
     Instance.call(this, new CategoryType(declaration.id));
-	this.declaration = declaration;
+    this.declaration = declaration;
     this.storable = null;
     if(declaration.storable) {
         var categories = declaration.collectCategories(context);
         this.storable = $DataStore.instance.newStorableDocument(categories);
     }
     this.mutable = false;
-	this.values = {};
-	return this;
+    this.values = {};
+    return this;
 }
 
 ConcreteInstance.prototype = Object.create(Instance.prototype);
@@ -48,7 +46,7 @@ ConcreteInstance.prototype.toMutable = function() {
 };
 
 ConcreteInstance.prototype.getType = function() {
-	return this.type;
+    return this.type;
 };
 
 ConcreteInstance.prototype.convertToJavaScript = function() {
@@ -85,7 +83,7 @@ ConcreteInstance.prototype.getStorableData = function() {
 };
 
 ConcreteInstance.prototype.getMemberNames = function() {
-	return Object.getOwnPropertyNames(this.values);
+    return Object.getOwnPropertyNames(this.values);
 };
 
 ConcreteInstance.prototype.collectStorables = function(set) {
@@ -108,23 +106,23 @@ ConcreteInstance.prototype.collectStorables = function(set) {
 var activeGetters = {};
 
 function getActiveGetters() {
-	return activeGetters;
+    return activeGetters;
 }
 
 ConcreteInstance.prototype.getMemberValue = function(context, attrName) {
     /* if(typeof(attrName) != typeof(""))
         throw "What?"; */
-	var stacked = getActiveGetters()[attrName] || null;
+    var stacked = getActiveGetters()[attrName] || null;
     var first = stacked==null;
     if(first)
         getActiveGetters()[attrName] = context;
-	try {
-		return this.doGetMember(context, attrName, first);
-	} finally {
-		if(first) {
-			delete getActiveGetters()[attrName];
-		}
-	}
+    try {
+        return this.doGetMember(context, attrName, first);
+    } finally {
+        if(first) {
+            delete getActiveGetters()[attrName];
+        }
+    }
 };
 
 ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter) {
@@ -146,7 +144,7 @@ ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter
 var activeSetters = {};
 
 function getActiveSetters() {
-	return activeSetters;
+    return activeSetters;
 }
 
 ConcreteInstance.prototype.setMember = function(context, attrName, value) {
@@ -154,32 +152,32 @@ ConcreteInstance.prototype.setMember = function(context, attrName, value) {
         throw "What?"; */
     if(!this.mutable)
         throw new NotMutableError();
-	var stacked = getActiveSetters()[attrName] || null;
+    var stacked = getActiveSetters()[attrName] || null;
     var first = stacked==null;
     if(first)
         getActiveSetters()[attrName] = context;
-	try {
-		this.doSetMember(context, attrName, value, first);
-	} finally {
-		if(first) {
-			delete getActiveSetters()[attrName];
-		}
-	}
+    try {
+        this.doSetMember(context, attrName, value, first);
+    } finally {
+        if(first) {
+            delete getActiveSetters()[attrName];
+        }
+    }
 };
 
 ConcreteInstance.prototype.doSetMember = function(context, attrName, value, allowSetter) {
     var decl = context.getRegisteredDeclaration(attrName);
-	var setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
-	if(setter!=null) {
-		// use attribute name as parameter name for incoming value
-		context = context.newInstanceContext(this, null).newChildContext();
+    var setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
+    if(setter!=null) {
+        // use attribute name as parameter name for incoming value
+        context = context.newInstanceContext(this, null).newChildContext();
         var id = new Identifier(attrName);
-		context.registerValue(new Variable(id, decl.getType()));
-		context.setValue(id, value);
-		value = setter.interpret(context);
-	}
+        context.registerValue(new Variable(id, decl.getType()));
+        context.setValue(id, value);
+        value = setter.interpret(context);
+    }
     value = this.autocast(decl, value);
-	this.values[attrName] = value;
+    this.values[attrName] = value;
     if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
         this.storable.setData(attrName, value.getStorableData(), this.getDbId());
 };
@@ -191,50 +189,50 @@ ConcreteInstance.prototype.autocast = function(decl, value) {
 };
 
 ConcreteInstance.prototype.equals = function(obj) {
-	if(obj==this) {
-		return true;
-	} else if(!(obj instanceof ConcreteInstance)) {
+    if(obj==this) {
+        return true;
+    } else if(!(obj instanceof ConcreteInstance)) {
         return false;
     } else if(this.declaration!==obj.declaration) {
-	    return false;
-	} else {
-		var names = Object.getOwnPropertyNames(this.values);
-		var otherNames = Object.getOwnPropertyNames(obj.values);
-		if(names.length!=otherNames.length) {
-			return false;
-		}
-		for(var i=0;i<names.length;i++) {
-			var v1 = this.values[names[i]] || null;
-			var v2 = obj.values[names[i]];
-			if(v1==v2) {
-				continue;
-			} else if(v1==null || v2==null) {
-				return false;
-			} else {
-				if(v1.equals) {
-					if(!v1.equals(v2)) {
-						return false;
-					}
-				} else if(v2.equals) {
-					if(!v2.equals(v1)) {
-						return false;
-					}
-				} else {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+        return false;
+    } else {
+        var names = Object.getOwnPropertyNames(this.values);
+        var otherNames = Object.getOwnPropertyNames(obj.values);
+        if(names.length!=otherNames.length) {
+            return false;
+        }
+        for(var i=0;i<names.length;i++) {
+            var v1 = this.values[names[i]] || null;
+            var v2 = obj.values[names[i]];
+            if(v1==v2) {
+                continue;
+            } else if(v1==null || v2==null) {
+                return false;
+            } else {
+                if(v1.equals) {
+                    if(!v1.equals(v2)) {
+                        return false;
+                    }
+                } else if(v2.equals) {
+                    if(!v2.equals(v1)) {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 };
 
 ConcreteInstance.prototype.toString = function() {
-	var props = [];
-	for(p in this.values) {
+    var props = [];
+    for(var p in this.values) {
         if("dbId"!=p)
-		    props.push(p + ":" + this.values[p].toString())
-	}
-	return "{" + props.join(", ") + "}";
+            props.push(p + ":" + this.values[p].toString())
+    }
+    return "{" + props.join(", ") + "}";
 };
 
 

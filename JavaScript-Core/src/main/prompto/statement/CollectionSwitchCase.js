@@ -4,7 +4,7 @@ var SwitchCase = require("./SwitchCase").SwitchCase;
 function CollectionSwitchCase(expression, statements) {
 	SwitchCase.call(this, expression,statements);
 	return this;
-};
+}
 
 CollectionSwitchCase.prototype = Object.create(SwitchCase.prototype);
 CollectionSwitchCase.prototype.constructor = CollectionSwitchCase;
@@ -29,7 +29,7 @@ CollectionSwitchCase.prototype.matches = function(context, value) {
 };
 
 
-CollectionSwitchCase.prototype.caseToPDialect = function(writer) {
+CollectionSwitchCase.prototype.caseToMDialect = function(writer) {
     this.caseToEDialect(writer);
 }
 
@@ -61,17 +61,17 @@ CollectionSwitchCase.prototype.catchToODialect = function(writer) {
 }
 
 
-CollectionSwitchCase.prototype.catchToPDialect = function(writer) {
+CollectionSwitchCase.prototype.catchToMDialect = function(writer) {
     writer.append("except in ");
-    expression.toDialect(writer);
+    this.expression.toDialect(writer);
     writer.append(":").newLine().indent();
-    statements.toDialect(writer);
+    this.statements.toDialect(writer);
     writer.dedent();
 }
 
 
 CollectionSwitchCase.prototype.catchToEDialect = function(writer) {
-    caseToEDialect(writer); // no difference
+    this.caseToEDialect(writer); // no difference
 }
 
 CollectionSwitchCase.prototype.transpile = function(transpiler) {

@@ -6,7 +6,7 @@ function OrderByClauseList(clause) {
     if(clause)
         this.push(clause);
     return this;
-};
+}
 
 OrderByClauseList.prototype = Object.create(ObjectList.prototype);
 OrderByClauseList.prototype.constructor = OrderByClauseList;

@@ -1,4 +1,6 @@
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+var List = require("../intrinsic/List").List;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
 function Transpiler(context) {
     this.context = context;
@@ -238,7 +240,7 @@ function ObjectUtils() {
 
 ObjectUtils.values = function(o) {
     var values = [];
-    for(name in o) { values.push(o[name]); }
+    for(var name in o) { values.push(o[name]); }
     return values;
 };
 

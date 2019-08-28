@@ -17,6 +17,7 @@ MatchPredicate.prototype.matchesData = function(data) {
         case MatchOp.ROUGHLY:
             if(typeof(data)==typeof(this.value) && typeof(data)==typeof(""))
                 return data.toLowerCase()==this.value.toLowerCase();
+            // no-break
         case MatchOp.EQUALS:
             return this.value==data;
         case MatchOp.CONTAINS:

@@ -7,19 +7,19 @@ function CssExpression() {
 }
 
 CssExpression.prototype.check = function(context) {
-	return CssType.instance;
+    return CssType.instance;
 }
 
 CssExpression.prototype.interpret = function(context) {
-	return new CssValue(this);
+    return new CssValue(this);
 }
 
 CssExpression.prototype.toDialect = function(writer) {
-	writer.append("{");
-	this.fields.forEach(function(field) {
-	    field.toDialect(writer);
+    writer.append("{");
+    this.fields.forEach(function(field) {
+        field.toDialect(writer);
     }, this);
-	writer.append("}");
+    writer.append("}");
 }
 
 CssExpression.prototype.addField = function(field) {
@@ -33,14 +33,14 @@ CssExpression.prototype.declare = function(transpiler) {
 }
 
 CssExpression.prototype.transpile = function(transpiler) {
-	transpiler.append("{");
-	this.fields.forEach(function(field) {
-	    field.transpile(transpiler);
-		transpiler.append(", ");
-	}, this);
-	transpiler.trimLast(", ".length);
-	transpiler.append("}");
-	return false;
+    transpiler.append("{");
+    this.fields.forEach(function(field) {
+        field.transpile(transpiler);
+        transpiler.append(", ");
+    }, this);
+    transpiler.trimLast(", ".length);
+    transpiler.append("}");
+    return false;
 }
 
 exports.CssExpression = CssExpression;

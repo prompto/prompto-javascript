@@ -1,6 +1,4 @@
-var NotStorableError = require("../error/NotStorableError").NotStorableError;
 var BaseStatement = require("./BaseStatement").BaseStatement;
-var Identifier = require("../grammar/Identifier").Identifier;
 var VoidType = require("../type/VoidType").VoidType;
 var $DataStore = require("../store/DataStore").$DataStore;
 var NullValue = require("../value/NullValue").NullValue;
@@ -70,7 +68,7 @@ StoreStatement.prototype.equals = function(other) {
         return true;
     else if (other == null)
         return false;
-    else if (!(obj instanceof StoreStatement))
+    else if (!(other instanceof StoreStatement))
         return false
     else
         return this.add.equals(other.add);

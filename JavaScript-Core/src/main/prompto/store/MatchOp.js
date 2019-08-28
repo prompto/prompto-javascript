@@ -1,7 +1,7 @@
 function MatchOp(name) {
     this.name = name;
     return this;
-};
+}
 
 MatchOp.prototype.toString = function() {
     return this.name;

@@ -11,9 +11,9 @@ var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var Dictionary = require("../intrinsic/Dictionary").Dictionary;
 
 function DictionaryType(itemType) {
-	ContainerType.call(this, new Identifier(itemType.name + "<:>"), itemType);
-	this.itemType = itemType;
-	return this;
+    ContainerType.call(this, new Identifier(itemType.name + "<:>"), itemType);
+    this.itemType = itemType;
+    return this;
 }
 
 DictionaryType.prototype = Object.create(ContainerType.prototype);
@@ -36,30 +36,30 @@ DictionaryType.prototype.declare = function(transpiler) {
 
 DictionaryType.prototype.isAssignableFrom = function(context, other) {
     return ContainerType.prototype.isAssignableFrom.call(this, context, other)
-	    || ((other instanceof DictionaryType) && this.itemType.isAssignableFrom(context, other.itemType));
+        || ((other instanceof DictionaryType) && this.itemType.isAssignableFrom(context, other.itemType));
 };
 
 
 DictionaryType.prototype.equals = function(obj) {
-	if (obj == null) {
-		return false;
-	} else if (obj == this) {
-		return true;
-	} else if (!(obj instanceof DictionaryType)) {
-		return false;
-	} else {
-		return this.itemType.equals(obj.itemType);
-	}
+    if (obj == null) {
+        return false;
+    } else if (obj == this) {
+        return true;
+    } else if (!(obj instanceof DictionaryType)) {
+        return false;
+    } else {
+        return this.itemType.equals(obj.itemType);
+    }
 };
 
 
 
 DictionaryType.prototype.checkAdd = function(context, other, tryReverse) {
-	if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
-		return this;
-	} else {
-		return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
-	}
+    if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
+        return this;
+    } else {
+        return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
+    }
 };
 
 
@@ -138,11 +138,11 @@ DictionaryType.prototype.transpileContainsAny = function(transpiler, other, cont
 
 
 DictionaryType.prototype.checkItem = function(context, other, expression) {
-	if(other==TextType.instance) {
-		return this.itemType;
-	} else {
-		return ContainerType.prototype.checkItem.call(this, context, other, expression);
-	}
+    if(other==TextType.instance) {
+        return this.itemType;
+    } else {
+        return ContainerType.prototype.checkItem.call(this, context, other, expression);
+    }
 };
 
 DictionaryType.prototype.declareItem = function(transpiler, itemType, item) {
@@ -167,19 +167,19 @@ DictionaryType.prototype.transpileAssignItemValue = function(transpiler, item, e
 
 
 DictionaryType.prototype.checkIterator = function(context, source) {
-	return new EntryType(this.itemType);
+    return new EntryType(this.itemType);
 };
 
 DictionaryType.prototype.checkMember = function(context, section, name) {
-	if ("count"==name) {
-		return IntegerType.instance;
-	} else if("keys"==name) {
-		return new SetType(TextType.instance);
-	} else if ("values"==name) {
-		return new ListType(this.itemType);
-	} else {
-		return ContainerType.prototype.checkMember.call(this, context, section, name);
-	}
+    if ("count"==name) {
+        return IntegerType.instance;
+    } else if("keys"==name) {
+        return new SetType(TextType.instance);
+    } else if ("values"==name) {
+        return new ListType(this.itemType);
+    } else {
+        return ContainerType.prototype.checkMember.call(this, context, section, name);
+    }
 };
 
 

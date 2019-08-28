@@ -1,13 +1,7 @@
 var SelectorExpression = require("./SelectorExpression").SelectorExpression;
 var UnresolvedIdentifier = null;
-var SymbolExpression = require("./SymbolExpression").SymbolExpression;
-var TypeExpression = require("./TypeExpression").TypeExpression;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var EnumeratedCategoryType = null;
-var CategoryType = null;
 var NullValue = require("../value/NullValue").NullValue;
-var Value = require("../value/Value").Value;
-var Text = require("../value/TextValue").Text;
 var Dialect = require("../parser/Dialect").Dialect;
 var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
@@ -16,8 +10,6 @@ var UnresolvedCall = null;
 
 exports.resolve = function() {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-    EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-    CategoryType = require("../type/CategoryType").CategoryType;
     ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
     UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
 };
@@ -123,7 +115,7 @@ MemberSelector.prototype.check = function(context) {
 MemberSelector.prototype.interpret = function(context) {
     // resolve parent to keep clarity
     var parent = this.resolveParent(context);
-    var instance = this.parent.interpret(context);
+    var instance = parent.interpret(context);
     if (instance == null || instance == NullValue.instance)
         throw new NullReferenceError();
     else

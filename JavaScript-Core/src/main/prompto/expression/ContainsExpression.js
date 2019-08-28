@@ -2,9 +2,6 @@ var Expression = require("./Expression").Expression;
 var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var MemberSelector = require("../expression/MemberSelector").MemberSelector;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var ContainerType = require("../type/ContainerType").ContainerType;
-var TextType = require("../type/TextType").TextType;
 var NullValue = require("../value/NullValue").NullValue;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var MatchOp = require("../store/MatchOp").MatchOp;
@@ -267,18 +264,22 @@ ContainsExpression.prototype.transpile = function(transpiler) {
     switch(this.operator) {
         case ContOp.NOT_IN:
             transpiler.append("!");
+            // no-break
         case ContOp.IN:
             return rt.transpileContains(transpiler, lt, this.right, this.left);
         case ContOp.NOT_HAS:
             transpiler.append("!");
+            // no-break
         case ContOp.HAS:
             return lt.transpileContains(transpiler, rt, this.left, this.right);
         case ContOp.NOT_HAS_ALL:
             transpiler.append("!");
+            // no-break
         case ContOp.HAS_ALL:
             return lt.transpileContainsAll(transpiler, rt, this.left, this.right);
         case ContOp.NOT_HAS_ANY:
             transpiler.append("!");
+            // no-break
         case ContOp.HAS_ANY:
             return lt.transpileContainsAny(transpiler, rt, this.left, this.right);
         default:

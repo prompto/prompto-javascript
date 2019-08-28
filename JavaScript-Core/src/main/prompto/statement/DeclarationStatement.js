@@ -1,11 +1,9 @@
 var ConcreteMethodDeclaration = null;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var Variable = require("../runtime/Variable").Variable;
-var InstanceContext = require("../runtime/Context").InstanceContext;
 
 exports.resolve = function() {
     ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;

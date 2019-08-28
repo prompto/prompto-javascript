@@ -12,11 +12,10 @@ JavaIdentifierExpression.prototype = Object.create(JavaExpression.prototype);
 JavaIdentifierExpression.prototype.constructor = JavaIdentifierExpression;
 
 JavaIdentifierExpression.prototype.parse = function(ids) {
-	var parts = ids.split("\\.");
 	var result = null;
-	for(var idx=0;idx<parts.length;idx++) {
-		result = new JavaIdentifierExpression(result, part[idx]);
-	}
+	ids.split("\\.").forEach(function(part) {
+		result = new JavaIdentifierExpression(result, part);
+	});
 	return result;
 };
 

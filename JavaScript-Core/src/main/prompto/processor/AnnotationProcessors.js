@@ -1,5 +1,7 @@
-var processors = new Map();
 var WidgetFieldProcessor = require("./WidgetFieldProcessor").WidgetFieldProcessor;
+
+/* global Map */
+var processors = new Map();
 
 function forId(id) {
     return forName(id.name);
@@ -19,7 +21,6 @@ function forName(name) {
 function loadByName(name) {
     try {
         var simpleName = name.substring(1) + "Processor";
-        var parts = module.filename.split("/");
         var idx = module.filename.lastIndexOf("/");
         var modulePath = module.filename.substring(0, idx + 1) + simpleName + ".js";
         var script = eval("require('" + modulePath + "')");

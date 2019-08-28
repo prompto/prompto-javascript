@@ -4,14 +4,13 @@ var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var NativeCall = require("./NativeCall").NativeCall;
 var JavaScriptNativeCall = require("../javascript/JavaScriptNativeCall").JavaScriptNativeCall;
 
 function StatementList(statement) {
-	ObjectList.call(this);
-	this.add(statement);
-	return this;
+    ObjectList.call(this);
+    this.add(statement);
+    return this;
 }
 
 StatementList.prototype = Object.create(ObjectList.prototype);
@@ -49,7 +48,7 @@ StatementList.prototype.checkStatements = function(context, returnType, nativeOn
         return VoidType.instance;
     } else {
         var section = null;
-	    var types = new TypeMap();
+        var types = new TypeMap();
         if(nativeOnly) {
             this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this)
                 .forEach(function (stmt) {
@@ -70,22 +69,22 @@ StatementList.prototype.checkStatements = function(context, returnType, nativeOn
                 }
             }, this);
         }
-    	return types.inferType(context, section);
+        return types.inferType(context, section);
     }
 };
 
 StatementList.prototype.interpret = function(context) {
-	try {
-		return this.doInterpret(context);
-	} catch(e) {
-		if(e instanceof ReferenceError) {
-		    throw new NullReferenceError();
-		} else {
+    try {
+        return this.doInterpret(context);
+    } catch(e) {
+        if(e instanceof ReferenceError) {
+            throw new NullReferenceError();
+        } else {
             if(!(e instanceof PromptoError))
                 console.trace();
-			throw e;
-		}
-	}
+            throw e;
+        }
+    }
 };
 
 StatementList.prototype.interpretNative = function(context, returnType) {
@@ -103,20 +102,20 @@ StatementList.prototype.interpretNative = function(context, returnType) {
 };
 
 StatementList.prototype.doInterpret = function(context) {
-	for(var i=0;i<this.length;i++) {
-    	var stmt = this[i];
-		context.enterStatement(stmt);
-		try {
-			var result = stmt.interpret(context);
-			if(!stmt.canReturn())
-			    result = null;
-			if(result!=null)
-				return result;
-		} finally {
-			context.leaveStatement(stmt);
-		}
-	}
-	return null;
+    for(var i=0;i<this.length;i++) {
+        var stmt = this[i];
+        context.enterStatement(stmt);
+        try {
+            var result = stmt.interpret(context);
+            if(!stmt.canReturn())
+                result = null;
+            if(result!=null)
+                return result;
+        } finally {
+            context.leaveStatement(stmt);
+        }
+    }
+    return null;
 };
 
 StatementList.prototype.doInterpretNative = function(context, returnType) {

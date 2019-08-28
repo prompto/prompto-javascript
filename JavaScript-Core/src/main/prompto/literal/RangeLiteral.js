@@ -1,3 +1,5 @@
+var IntegerType = require("../type/IntegerType").IntegerType;
+
 function RangeLiteral(first, last) {
 	this.first = first;
 	this.last = last;

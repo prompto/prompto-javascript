@@ -59,7 +59,7 @@ Document.prototype.toJson = function(json, instanceId, fieldName, withType, bina
 };
 
 Document.prototype.fromJson = function(node, parts) {
-    for (key in node) {
+    for (var key in node) {
         this[key] = this.readJsonField(node[key], parts);
     }
 };

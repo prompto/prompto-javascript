@@ -4,7 +4,7 @@ function ParenthesisExpression(expression) {
     Expression.call(this);
 	this.expression = expression;
 	return this;
-};
+}
 
 ParenthesisExpression.prototype = Object.create(Expression.prototype);
 ParenthesisExpression.prototype.constructor = ParenthesisExpression;

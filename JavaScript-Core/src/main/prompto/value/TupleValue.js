@@ -1,4 +1,6 @@
+var InternalError = require("../error/InternalError").InternalError;
 var BaseValueList = require("./BaseValueList").BaseValueList;
+var BooleanValue = require("./BooleanValue").BooleanValue;
 var TupleType = null;
 var SetValue = null;
 
@@ -39,7 +41,7 @@ TupleValue.prototype.Add = function(context, value) {
         var items = this.items.concat(value.items);
         return new TupleValue(items);
     } else if(value instanceof SetValue) {
-        var items = Array.from(value.items.set.values());
+        items = Array.from(value.items.set.values());
         items = this.items.concat(items);
         return new TupleValue(items);
     } else {
@@ -54,7 +56,7 @@ TupleValue.prototype.filter = function(context, itemId, filter) {
         var o = iter.next();
         context.setValue(itemId, o);
         var test = filter.interpret(context);
-        if(!(test instanceof Bool)) {
+        if(!(test instanceof BooleanValue)) {
             throw new InternalError("Illegal test result: " + test);
         }
         if(test.value) {

@@ -30,7 +30,7 @@ CursorType.prototype.equals = function(obj) {
         return true;
     if(!(obj instanceof CursorType))
         return false;
-    return this.itemType.equals(other.itemType);
+    return this.itemType.equals(obj.itemType);
 };
 
 CursorType.prototype.checkIterator = function(context, source) {

@@ -3,13 +3,12 @@ var IntegerType = require("../type/IntegerType").IntegerType;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var AnyType = require("../type/AnyType").AnyType;
 var CursorType = require("../type/CursorType").CursorType;
-var Section = require("../parser/Section").Section;
 var $DataStore = require("../store/DataStore").$DataStore;
 var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var MatchOp = require("../store/MatchOp").MatchOp;
 var CursorValue = require("../value/CursorValue").CursorValue;
-var Store = require("../store/Store").Store;
+var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 function FetchManyExpression(typ, first, last, predicate, orderBy) {
     Expression.call(this);
@@ -172,7 +171,7 @@ FetchManyExpression.prototype.interpretLimit = function(context, exp) {
         return null;
     var value = exp.interpret(context);
     if(value.type!=IntegerType.instance)
-        throw new InvalidValueError("Expecting an Integer, got:" + value.type.name);
+        throw new InvalidDataError("Expecting an Integer, got:" + value.type.name);
     return value.getStorableData();
 };
 
@@ -228,14 +227,5 @@ FetchManyExpression.prototype.transpileQuery = function(transpiler) {
         this.orderBy.transpileQuery(transpiler, "builder");
 };
 
-
-function DocumentIterator(docs) {
-    return this;
-    if (doc == null)
-        return NullValue.instance;
-    else
-        return this.typ.newInstanceFromDocument(context, doc);
-
-}
 
 exports.FetchManyExpression = FetchManyExpression;

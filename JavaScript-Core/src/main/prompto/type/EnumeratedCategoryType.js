@@ -1,6 +1,7 @@
 var BuiltInMethodDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
 var CategoryType = require("./CategoryType").CategoryType;
+var BaseType = require("./BaseType").BaseType;
 var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;

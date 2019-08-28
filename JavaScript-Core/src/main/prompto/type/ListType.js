@@ -4,7 +4,6 @@ var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var ListValue = require("../value/ListValue").ListValue;
-var Variable = require("../runtime/Variable").Variable;
 var List = require("../intrinsic/List").List;
 
 exports.resolve = function() {
@@ -124,7 +123,7 @@ ListType.prototype.transpileSubtract = function(transpiler, other, left, right) 
         right.transpile(transpiler);
         transpiler.append(")");
     } else {
-        return ContainerType.prototype.transpileSubtract.call(this, transpiler, other, tryReverse, left, right);
+        return ContainerType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
     }
 };
 

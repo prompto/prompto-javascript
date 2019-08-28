@@ -1,6 +1,7 @@
 var RangeValue = require("./RangeValue").RangeValue;
 var DateValue = require("./DateValue").DateValue;
 var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
 var DateType = null;
 
@@ -26,7 +27,7 @@ DateRange.prototype.size = function() {
 DateRange.prototype.getItem = function(index) {
 	var millis = this.low.value.valueOf() + (index-1)*(24*60*60*1000);
 	if(millis>this.high.value.valueOf()) {
-		throw new IndexOutOfBoundsException();
+		throw new IndexOutOfRangeError();
 	} else {
 		return new DateValue(new LocalDate(millis));
 	}

@@ -1,12 +1,11 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 
 function WithSingletonStatement(type, statements) {
     BaseStatement.call(this);
     this.type = type;
     this.statements = statements;
     return this;
-};
+}
 
 WithSingletonStatement.prototype = Object.create(BaseStatement.prototype);
 WithSingletonStatement.prototype.constructor = WithSingletonStatement;

@@ -1,3 +1,5 @@
+var List = require("./List").List;
+
 function StrictSet(values) {
     this.set = new Set(values);
     return this;
@@ -57,8 +59,8 @@ StrictSet.prototype.addAll = function(items) {
 
 StrictSet.prototype.remove = function(items) {
     var excluded = (items instanceof StrictSet) ? items : new Set(items);
-    var items = Array.from(this.set.values());
-    var remaining = items.filter(function(item) { return !excluded.has(item); });
+    var current = Array.from(this.set.values());
+    var remaining = current.filter(function(item) { return !excluded.has(item); });
     return new StrictSet(remaining);
 };
 
@@ -109,7 +111,7 @@ StrictSet.prototype.hasAny = function(items, noCheckEquals) {
         }
         return false;
     } else {
-        for (var i = 0; i < items.length; i++) {
+        for (i = 0; i < items.length; i++) {
             if (this.has(items[i]))
                 return true;
         }

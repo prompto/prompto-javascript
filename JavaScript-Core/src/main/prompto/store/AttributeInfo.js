@@ -7,7 +7,7 @@ function AttributeInfo(name, family, collection, indexTypes) {
     this.value = indexTypes == null ? false : indexTypes.indexOf("value")>=0;
     this.words = indexTypes == null ? false : indexTypes.indexOf("words")>=0;
     return this;
-};
+}
 
 AttributeInfo.prototype.toTranspiled = function() {
     return "new AttributeInfo('" + this.name + "', TypeFamily." + this.family.name + ", " + this.collection + ", null)";

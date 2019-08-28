@@ -10,6 +10,7 @@ var TypeExpression = require("./TypeExpression").TypeExpression;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Dialect = require("../parser/Dialect").Dialect;
+var NativeType = require("../type/NativeType").NativeType;
 var VoidType = require("../type/VoidType").VoidType;
 var EnumeratedCategoryType = null;
 var CategoryType = null;
@@ -18,17 +19,17 @@ var MethodSelector = null;
 exports.resolve = function() {
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
     EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-	MethodSelector = require("./MethodSelector").MethodSelector;
+    MethodSelector = require("./MethodSelector").MethodSelector;
     CategoryType = require("../type/CategoryType").CategoryType;
-	CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-	ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
+    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+    ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
 }
 
 function UnresolvedIdentifier(id) {
-	Expression.call(this);
-	this.id = id;
-	this.resolved = null;
-	return this;
+    Expression.call(this);
+    this.id = id;
+    this.resolved = null;
+    return this;
 }
 
 UnresolvedIdentifier.prototype = Object.create(Expression.prototype);
@@ -41,7 +42,7 @@ Object.defineProperty(UnresolvedIdentifier.prototype, "name", {
 });
 
 UnresolvedIdentifier.prototype.toString = function() {
-	return this.id.name;
+    return this.id.name;
 };
 
 
@@ -49,6 +50,7 @@ UnresolvedIdentifier.prototype.toDialect = function(writer) {
     try {
         this.resolve(writer.context, false, false);
     } catch(e) {
+        /* eslint no-empty: [ "off" ] */
     }
     if(this.resolved!=null)
         this.resolved.toDialect(writer);
@@ -57,19 +59,19 @@ UnresolvedIdentifier.prototype.toDialect = function(writer) {
 };
 
 UnresolvedIdentifier.prototype.check = function(context) {
-	return this.resolveAndCheck(context, false);
+    return this.resolveAndCheck(context, false);
 };
 
 UnresolvedIdentifier.prototype.checkMember = function(context) {
-	return this.resolveAndCheck(context, true);
+    return this.resolveAndCheck(context, true);
 };
 
 
 UnresolvedIdentifier.prototype.interpret = function(context) {
-	if(this.resolved==null) {
-		this.resolveAndCheck(context, false);
-	}
-	return this.resolved.interpret(context);
+    if(this.resolved==null) {
+        this.resolveAndCheck(context, false);
+    }
+    return this.resolved.interpret(context);
 };
 
 UnresolvedIdentifier.prototype.resolveAndCheck = function(context, forMember) {
@@ -78,7 +80,7 @@ UnresolvedIdentifier.prototype.resolveAndCheck = function(context, forMember) {
 };
 
 UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSelectorParent) {
-	if(updateSelectorParent)
+    if(updateSelectorParent)
         this.resolved = null;
     if(this.resolved==null) {
         // ignore resolution problems during resolution
@@ -91,7 +93,7 @@ UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSele
             context.problemListener = listener;
         }
     }
-	if(this.resolved==null)
+    if(this.resolved==null)
         context.problemListener.reportUnknownIdentifier(this.id);
     return this.resolved;
 };
@@ -100,14 +102,14 @@ UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSele
 UnresolvedIdentifier.prototype.doResolve = function(context, forMember, updateSelectorParent) {
     var resolved = this.resolveSymbol(context);
     if(resolved)
-    	return resolved;
+        return resolved;
     resolved = this.resolveTypeOrConstructor(context, forMember);
     if(resolved)
         return resolved;
-	resolved = this.resolveMethodCall(context, updateSelectorParent);
+    resolved = this.resolveMethodCall(context, updateSelectorParent);
     if(resolved)
         return resolved;
-	resolved = this.resolveInstance(context);
+    resolved = this.resolveInstance(context);
     return resolved;
 };
 
@@ -115,85 +117,85 @@ UnresolvedIdentifier.prototype.doResolve = function(context, forMember, updateSe
 UnresolvedIdentifier.prototype.resolveTypeOrConstructor = function(context, forMember) {
     // is first char uppercase?
     if (this.id.name[0].toUpperCase() != this.id.name[0])
-    	return null;
-	if (forMember) {
-		return this.resolveType(context);
-	} else {
-		return this.resolveConstructor(context);
-	}
+        return null;
+    if (forMember) {
+        return this.resolveType(context);
+    } else {
+        return this.resolveConstructor(context);
+    }
 };
 
 
 UnresolvedIdentifier.prototype.resolveInstance = function(context) {
-	try {
-		var id = new InstanceExpression(this.id);
-		id.check(context);
-		return id;
-	} catch(e) {
-		if(e instanceof PromptoError) {
-			return null;
-		} else {
-			throw e;
-		}
-	}
+    try {
+        var id = new InstanceExpression(this.id);
+        id.check(context);
+        return id;
+    } catch(e) {
+        if(e instanceof PromptoError) {
+            return null;
+        } else {
+            throw e;
+        }
+    }
 };
 
 UnresolvedIdentifier.prototype.resolveMethodCall = function(context, updateSelectorParent) {
-	if(this.id.dialect!=Dialect.E)
-		return null;
-	try {
-	    var selector = new MethodSelector(null, this.id);
-		var call = new MethodCall(selector);
+    if(this.id.dialect!=Dialect.E)
+        return null;
+    try {
+        var selector = new MethodSelector(null, this.id);
+        var call = new MethodCall(selector);
         call.check(context, updateSelectorParent);
-		return call;
-	} catch(e) {
-		if(e instanceof PromptoError) {
-			return null;
-		} else {
-			throw e;
-		}
-	}
+        return call;
+    } catch(e) {
+        if(e instanceof PromptoError) {
+            return null;
+        } else {
+            throw e;
+        }
+    }
 };
 
 UnresolvedIdentifier.prototype.resolveConstructor = function(context) {
-	try {
-		var method = new ConstructorExpression(new CategoryType(this.id), null, null, true);
-		method.check(context);
-		return method;
-	} catch(e) {
-		if(e instanceof PromptoError) {
-			return null;
-		} else {
-			throw e;
-		}
-	}
+    try {
+        var method = new ConstructorExpression(new CategoryType(this.id), null, null, true);
+        method.check(context);
+        return method;
+    } catch(e) {
+        if(e instanceof PromptoError) {
+            return null;
+        } else {
+            throw e;
+        }
+    }
 };
 
 UnresolvedIdentifier.prototype.resolveType = function(context) {
-	var decl = context.getRegisteredDeclaration(this.name);
+    var decl = context.getRegisteredDeclaration(this.name);
     if(decl instanceof EnumeratedCategoryDeclaration) {
         return new TypeExpression(new EnumeratedCategoryType(this.id));
     } else if(decl instanceof CategoryDeclaration) {
-		return new TypeExpression(new CategoryType(this.id));
-	} else if(decl instanceof EnumeratedNativeDeclaration) {
-		return new TypeExpression(decl.getType(context));
-	} else {
-		var allTypes = NativeType.getAll();
-		for(var i=0;i<allTypes.length;i++) {
-			if (this.name == allTypes[i].name) {
-				return new TypeExpression(allTypes[i]);
-			}
-		}
-	}
-	return null;
+        return new TypeExpression(new CategoryType(this.id));
+    } else if(decl instanceof EnumeratedNativeDeclaration) {
+        return new TypeExpression(decl.getType(context));
+    } else {
+        var allTypes = NativeType.getAll();
+        for(var i=0;i<allTypes.length;i++) {
+            if (this.name == allTypes[i].name) {
+                return new TypeExpression(allTypes[i]);
+            }
+        }
+    }
+    return null;
 };
 
 UnresolvedIdentifier.prototype.resolveSymbol = function(context) {
-	if(this.id.name==this.id.name.toUpperCase()) {
-		return new SymbolExpression(this.id);
-	} else {
-		return null;
-	}
+    if(this.id.name==this.id.name.toUpperCase()) {
+        return new SymbolExpression(this.id);
+    } else {
+        return null;
+    }
 };
 
 UnresolvedIdentifier.prototype.declare = function(transpiler) {

@@ -9,6 +9,7 @@ function csvIterate(text, columns, separator, encloser) {
 }
 
 function csvRead(text, columns, separator, encloser) {
+    /* global intrinsic */
     var list = new intrinsic.List();
     var iter = new CSVIterator(text, columns, separator, encloser);
     while(iter.hasNext())
@@ -71,7 +72,7 @@ CSVIterator.prototype.fetchChar = function(eatNewLine) {
         this.peekedChar = null;
         this.nextChar = c;
     } else {
-        var c = this.index < this.text.length ? this.text.charCodeAt(this.index++) : -1;
+        c = this.index < this.text.length ? this.text.charCodeAt(this.index++) : -1;
         if(c==CR)
             this.fetchChar(eatNewLine);
         else if(eatNewLine && (c==LF))

@@ -52,7 +52,7 @@ SwitchStatement.prototype.toMDialect = function(writer) {
     this.expression.toDialect(writer);
     writer.append(":").newLine().indent();
     this.switchCases.forEach(function(switchCase) {
-        switchCase.caseToPDialect(writer);
+        switchCase.caseToMDialect(writer);
     });
     if(this.defaultCase!=null) {
         writer.append("otherwise:").newLine().indent();

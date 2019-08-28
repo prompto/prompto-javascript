@@ -3,11 +3,11 @@ var BooleanType = require("./BooleanType").BooleanType;
 var PeriodType = require("./PeriodType").PeriodType;
 var IntegerType = require("./IntegerType").IntegerType;
 var RangeType = require("./RangeType").RangeType;
-var AnyType = require("./AnyType").AnyType;
 var DateRange = require("../value/DateRange").DateRange;
 var DateValue = require("../value/DateValue").DateValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 var DateTimeType = require("./DateTimeType").DateTimeType;
+var CharacterType = require("./CharacterType").CharacterType;
 var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 
 function DateType()  {
@@ -145,7 +145,7 @@ DateType.prototype.checkRange = function(context, other) {
 	if (other === DateType.instance) {
 		return new RangeType(this);
 	} else {
-		return Nativetype.prototype.checkRange.call(this, context, other);
+		return NativeType.prototype.checkRange.call(this, context, other);
 	}
 };
 

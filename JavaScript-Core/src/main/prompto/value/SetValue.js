@@ -1,9 +1,9 @@
-var BooleanValue = require("./BooleanValue").BooleanValue;
 var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var SetType = require("../type/SetType").SetType;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var ListValue = null;
+var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
 exports.resolve = function() {
     SetType = require("../type/SetType").SetType;

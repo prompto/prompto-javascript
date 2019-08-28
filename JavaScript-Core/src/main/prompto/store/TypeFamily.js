@@ -1,7 +1,7 @@
 function TypeFamily(name) {
     this.name = name;
     return this;
-};
+}
 
 TypeFamily.prototype.toTranspiled = function() {
     return "new TypeFamily('" + this.name + "')";
