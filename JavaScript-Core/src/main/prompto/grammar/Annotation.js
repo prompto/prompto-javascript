@@ -19,6 +19,14 @@ Object.defineProperty(Annotation.prototype, "name", {
 });
 
 
+Annotation.prototype.getDefaultArgument = function() {
+    if(this.entries && this.entries.items.length===1)
+        return this.entries.items[0].value;
+    else
+        return null;
+};
+
+
 Annotation.prototype.getArgument = function(name) {
     if(!this.entries || !this.entries.items)
         return null;
@@ -55,6 +63,8 @@ Annotation.prototype.processCategory = function(context, declaration) {
     var processor = AnnotationProcessors.forId(this.id);
     if(processor) {
         processor.processCategory(this, context, declaration);
+    } else {
+        context.problemListener.reportUnknownAnnotation(this);
     }
 };
 

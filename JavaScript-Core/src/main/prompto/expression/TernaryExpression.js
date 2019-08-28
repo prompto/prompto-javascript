@@ -34,7 +34,7 @@ TernaryExpression.prototype.toDialect = function(writer) {
 TernaryExpression.prototype.check = function(context) {
     var type = this.condition.check(context);
     if(!(type instanceof BooleanType))
-        context.problemListener.reportExpectingBoolean(this.condition, type);
+        context.problemListener.reportIllegalAssignment(this.condition, BooleanType.instance, type);
     var trueType = this.ifTrue.check(context);
     var falseType = this.ifFalse.check(context);
     if(trueType.isAssignableFrom(context, falseType))

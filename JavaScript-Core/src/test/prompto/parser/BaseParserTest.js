@@ -228,7 +228,7 @@ exports.execute = function(decls, methodName, args) {
 exports.executeTest = function(context, testName) {
     prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
     var testMethod = context.getTestDeclaration(testName);
-    var js = prompto.runtime.Transpiler.transpileTest(context, testMethod);
+    var js = prompto.runtime.Transpiler.transpile(context, testMethod);
     writeToTempFile(js);
     var fn = wrapAndExtract(js, testMethod.cleanId(), context);
     // call test
@@ -240,7 +240,7 @@ exports.executeMethod = function(context, methodName, cmdLineArgs) {
     methodName = methodName || "main";
     var method = locateMethod(context, methodName, cmdLineArgs);
     prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
-    var js = prompto.runtime.Transpiler.transpileMethod(context, method);
+    var js = prompto.runtime.Transpiler.transpile(context, method);
     writeToTempFile(js);
     var fn = wrapAndExtract(js, method.getTranspiledName(context), context);
     // call method

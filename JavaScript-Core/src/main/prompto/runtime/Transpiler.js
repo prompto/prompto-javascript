@@ -415,11 +415,11 @@ function newTranspiler(context) {
     return transpiler;
 }
 
-Transpiler.transpileTest = function(context, testMethod) {
+Transpiler.transpile = function(context, thing) {
     try {
         patchObject();
         var transpiler = newTranspiler(context);
-        testMethod.declare(transpiler);
+        thing.declare(transpiler);
         return transpiler.toString();
     } finally {
         context.terminated();
@@ -432,17 +432,5 @@ Transpiler.prototype.printTestName = function(testName) {
     return this;
 };
 
-
-Transpiler.transpileMethod = function(context, method) {
-    try {
-        patchObject();
-        var transpiler = newTranspiler(context);
-        method.declare(transpiler);
-        return transpiler.toString();
-    } finally {
-        context.terminated();
-        unpatchObject();
-    }
-};
 
 exports.Transpiler = Transpiler;

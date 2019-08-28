@@ -2,6 +2,7 @@ exports.IdentifierList = require('./IdentifierList').IdentifierList;
 exports.Identifier = require('./Identifier').Identifier;
 exports.MethodDeclarationList = require("./MethodDeclarationList").MethodDeclarationList;
 exports.Annotation = require("./Annotation").Annotation;
+exports.Structure = require("./Structure").Structure;
 exports.ContOp = require("./ContOp").ContOp;
 exports.CmpOp = require("./CmpOp").CmpOp;
 exports.EqOp = require("./EqOp").EqOp;

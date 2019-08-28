@@ -1,3 +1,5 @@
+var BooleanType = require("../type/BooleanType").BooleanType;
+
 function JsxProperty(id, value, suite) {
 	this.id = id;
 	this.value = value;
@@ -8,7 +10,9 @@ function JsxProperty(id, value, suite) {
 
 JsxProperty.prototype.check = function(context) {
     if(this.value!=null)
-        this.value.check(context);
+        return this.value.check(context);
+    else
+        return BooleanType.instance; // a value-less property is treated as a boolean flag
 };
 
 

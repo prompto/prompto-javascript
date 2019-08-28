@@ -128,7 +128,7 @@ FetchManyExpression.prototype.checkFilter = function(context) {
         return;
     var filterType = this.predicate.check(context);
     if (filterType != BooleanType.instance)
-        context.problemListener.reportExpectingBoolean(this.predicate, filterType);
+        context.problemListener.reportIllegalAssignment(this.predicate, BooleanType.instance, filterType);
 };
 
 FetchManyExpression.prototype.checkOrderBy = function(context) {

@@ -173,9 +173,9 @@ ConcreteCategoryDeclaration.ancestorHasMethod = function(ancestor, context, name
 
 ConcreteCategoryDeclaration.prototype.check = function(context, isStart) {
     context = context.newInstanceContext(null, this.getType(context), false);
+    this.checkDerived(context);
     this.processAnnotations(context, true);
-	this.checkDerived(context);
-	this.checkMethods(context);
+    this.checkMethods(context);
 	return CategoryDeclaration.prototype.check.call(this, context, isStart);
 }
 

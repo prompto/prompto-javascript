@@ -56,6 +56,10 @@ ProblemCollector.prototype.reportUnknownAttribute = function(id) {
     this.reportUnknown(id, "attribute");
 };
 
+ProblemCollector.prototype.reportUnknownProperty = function(id) {
+    this.reportUnknown(id, "property");
+};
+
 ProblemCollector.prototype.reportUnknownCategory = function(id) {
     this.reportUnknown(id, "category");
 };
@@ -66,6 +70,10 @@ ProblemCollector.prototype.reportUnknownMethod = function(id) {
 
 ProblemCollector.prototype.reportUnknownVariable = function(id) {
     this.reportUnknown(id, "variable");
+};
+
+ProblemCollector.prototype.reportUnknownAnnotation = function(id) {
+    this.reportUnknown(id, "annotation");
 };
 
 ProblemCollector.prototype.reportUnknownIdentifier = function(id) {
@@ -101,17 +109,17 @@ ProblemCollector.prototype.reportInvalidCast = function(expression, target, actu
     this.reportError(expression, "Cannot cast " + actual.toString() + " to " + target.toString());
 };
 
-ProblemCollector.prototype.reportExpectingBoolean = function(expression, type) {
-    this.reportError(expression, "Cannot test " + expression.toString() + ", expected a Boolean got a " + type.toString());
-}
+ProblemCollector.prototype.reportIllegalAssignment = function(expression, expected, actual) {
+    this.reportError(expression, "Illegal expression type, expected: " + expected.name + ", got: " + actual.name);
+};
 
 ProblemCollector.prototype.reportMissingClosingTag = function(opening) {
     this.reportError(opening.id, "Missing closing tag '&lt;/" + opening.id.name + ">");
-}
+};
 
 ProblemCollector.prototype.reportInvalidClosingTag = function(closing, opening) {
     this.reportError(closing, "Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">");
-}
+};
 
 ProblemCollector.prototype.reportInvalidMember = function(section, type, name) {
     this.reportError(section, "Invalid member '" + name + "' in " + type.name + " type");

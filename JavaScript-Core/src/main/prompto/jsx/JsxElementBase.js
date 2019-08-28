@@ -1,6 +1,7 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var JsxType = require("../type/JsxType").JsxType;
 var isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
+var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 
 function JsxElementBase(id, properties) {
     IJsxExpression.call(this);
@@ -15,15 +16,40 @@ JsxElementBase.prototype.constructor = JsxElementBase;
 
 
 JsxElementBase.prototype.check = function(context) {
+    var propertyTypes = null;
     if (isCharacterUpperCase(this.id.name[0])) {
         var decl = context.getRegisteredDeclaration(this.id.name);
         if (decl == null)
             context.problemListener.reportUnknownIdentifier(this.id);
-    }
-    if(this.properties!=null)
-        this.properties.forEach(function(attr) { attr.check(context);});
+        else if(decl instanceof CategoryDeclaration && decl.isWidget())
+            propertyTypes = decl.propertyTypes || null;
+    } else
+        propertyTypes = this.getHtmlPropertyTypes(this.id.name);
+    this.checkProperties(context, propertyTypes);
     return JsxType.instance;
 };
+
+
+JsxElementBase.prototype.getHtmlPropertyTypes = function(name) {
+    return null; // TODO
+};
+
+
+JsxElementBase.prototype.checkProperties = function(context, propertyTypes) {
+    if(this.properties==null)
+        return;
+    this.properties.forEach(function(prop) {
+        var actual = prop.check(context);
+        if(propertyTypes) {
+            var expected = propertyTypes.get(prop.id.name);
+            if(expected==null)
+                context.problemListener.reportUnknownProperty(prop, prop.id.name);
+            else if(!expected.isAssignableFrom(context, actual))
+                context.problemListener.reportIllegalAssignment(prop, expected, actual);
+        }
+    });
+};
+
 
 JsxElementBase.prototype.declare = function(transpiler) {
     if (isCharacterUpperCase(this.id.name[0])) {
