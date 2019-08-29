@@ -14,8 +14,11 @@ function NativeMethodDeclaration(id, args, returnType, statements) {
 NativeMethodDeclaration.prototype = Object.create(ConcreteMethodDeclaration.prototype);
 NativeMethodDeclaration.prototype.constructor = NativeMethodDeclaration;
 
+/* global intrinsic:writable */
+
 NativeMethodDeclaration.prototype.check = function(context, isStart) {
-    require("../intrinsic");
+    /* eslint no-unused-vars: [ "off"] */
+    intrinsic = require("../intrinsic");
     if(isStart) {
         context = context.newLocalContext();
         this.registerParameters(context);
@@ -28,7 +31,8 @@ NativeMethodDeclaration.prototype.check = function(context, isStart) {
 
 
 NativeMethodDeclaration.prototype.interpret = function(context) {
-    require("../intrinsic");
+    /* eslint no-unused-vars: [ "off"] */
+    intrinsic = require("../intrinsic");
     context.enterMethod(this);
 	try {
 		var result = this.statements.interpretNative(context, this.returnType);

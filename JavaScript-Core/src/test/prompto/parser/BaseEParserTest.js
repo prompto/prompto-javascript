@@ -186,14 +186,16 @@ exports.runTranspiledTests = function(fileName) {
 
 function runTests(fileName, runner) {
     decls = exports.parseResource(fileName)
-    decls.map(function(decl) {
-        if (!(decl instanceof prompto.declaration.TestMethodDeclaration))
-            return;
-        Out.reset()
-        runner(BaseParserTest.coreContext, decl.name);
-        var expected = decl.name + " test successful";
-        var read = Out.read();
-        expect(read).toEqual(expected);
-    });
-};
+    decls
+        .filter(function (decl) {
+            return decl instanceof prompto.declaration.TestMethodDeclaration;
+        })
+        .forEach(function (decl) {
+            Out.reset()
+            runner(BaseParserTest.coreContext, decl.name);
+            var expected = decl.name + " test successful";
+            var read = Out.read();
+            expect(read).toEqual(expected);
+        });
+}
 
