@@ -16,21 +16,21 @@ JsxElementBase.prototype.constructor = JsxElementBase;
 
 
 JsxElementBase.prototype.check = function(context) {
-    var propertyTypes = null;
+    var propertyMap = null;
     if (isCharacterUpperCase(this.id.name[0])) {
         var decl = context.getRegisteredDeclaration(this.id.name);
         if (decl == null)
             context.problemListener.reportUnknownIdentifier(this.id);
         else if(decl instanceof CategoryDeclaration && decl.isWidget())
-            propertyTypes = decl.propertyTypes || null;
+            propertyMap = decl.properties || null;
     } else
-        propertyTypes = this.getHtmlPropertyTypes(this.id.name);
-    this.checkProperties(context, propertyTypes);
+        propertyMap = this.getHtmlProperties(this.id.name);
+    this.checkProperties(context, propertyMap);
     return JsxType.instance;
 };
 
 
-JsxElementBase.prototype.getHtmlPropertyTypes = function(name) {
+JsxElementBase.prototype.getHtmlProperties = function(name) {
     return null; // TODO
 };
 
@@ -44,7 +44,7 @@ JsxElementBase.prototype.checkProperties = function(context, propertyTypes) {
             var expected = propertyTypes.get(prop.id.name);
             if(expected==null)
                 context.problemListener.reportUnknownProperty(prop, prop.id.name);
-            else if(!expected.isAssignableFrom(context, actual))
+            else if(!expected.type.isAssignableFrom(context, actual))
                 context.problemListener.reportIllegalAssignment(prop, expected, actual);
         }
     });

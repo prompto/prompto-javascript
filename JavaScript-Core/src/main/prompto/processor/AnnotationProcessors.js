@@ -1,4 +1,5 @@
 var WidgetFieldProcessor = require("./WidgetFieldProcessor").WidgetFieldProcessor;
+var WidgetPropertiesProcessor = require("./WidgetPropertiesProcessor").WidgetPropertiesProcessor;
 
 /* global Map */
 var processors = new Map();
@@ -38,6 +39,7 @@ function register(processor) {
 
 function registerAll() {
     register(new WidgetFieldProcessor());
+    register(new WidgetPropertiesProcessor());
 }
 
 exports.AnnotationProcessors =  {

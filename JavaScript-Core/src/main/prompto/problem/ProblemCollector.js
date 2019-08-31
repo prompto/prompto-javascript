@@ -112,6 +112,10 @@ ProblemCollector.prototype.reportIllegalAssignment = function(expression, expect
     this.reportError(expression, "Illegal expression type, expected: " + expected.name + ", got: " + actual.name);
 };
 
+ProblemCollector.prototype.reportIllegalAnnotation = function(section, message) {
+    this.reportWarning(section, message);
+};
+
 ProblemCollector.prototype.reportMissingClosingTag = function(opening) {
     this.reportError(opening.id, "Missing closing tag '&lt;/" + opening.id.name + ">");
 };
@@ -146,6 +150,14 @@ ProblemCollector.prototype.reportIncompatibleTypes = function(section, left, rig
 ProblemCollector.prototype.reportError = function(section, message) {
     var problem = this.readSection(section);
     problem.type = "error";
+    problem.message = message;
+    this.collectProblem(problem);
+};
+
+
+ProblemCollector.prototype.reportWarning = function(section, message) {
+    var problem = this.readSection(section);
+    problem.type = "warning";
     problem.message = message;
     this.collectProblem(problem);
 };
