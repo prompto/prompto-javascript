@@ -44,9 +44,9 @@ CharacterType.prototype.checkMember = function(context, section, name) {
 };
 
 
-CharacterType.prototype.declareMember = function(transpiler, name) {
+CharacterType.prototype.declareMember = function(transpiler, section, name) {
     if ("codePoint"!==name) {
-        NativeType.prototype.declareMember.call(this, transpiler, name);
+        NativeType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

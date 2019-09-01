@@ -53,12 +53,12 @@ EnumeratedNativeType.prototype.transpile = function(transpiler) {
     transpiler.append(this.name);
 };
 
-EnumeratedNativeType.prototype.declareMember = function(transpiler, name) {
+EnumeratedNativeType.prototype.declareMember = function(transpiler, section, name) {
     if("value"==name || "name"==name) {
         var decl = transpiler.context.getRegisteredDeclaration(this.name);
         transpiler.declare(decl);
     } else
-        BaseType.prototype.declareMember.call(this, transpiler, name);
+        BaseType.prototype.declareMember.call(this, transpiler, section, name);
 };
 
 EnumeratedNativeType.prototype.transpileMember = function(transpiler, name) {
@@ -70,12 +70,12 @@ EnumeratedNativeType.prototype.transpileMember = function(transpiler, name) {
 };
 
 
-EnumeratedNativeType.prototype.declareStaticMember = function(transpiler, name) {
+EnumeratedNativeType.prototype.declareStaticMember = function(transpiler, section, name) {
 	if("symbols"==name) {
 		var decl = transpiler.context.getRegisteredDeclaration(this.name);
 		transpiler.declare(decl);
 	} else
-		BaseType.prototype.declareStaticMember.call(this, transpiler, name);
+		BaseType.prototype.declareStaticMember.call(this, transpiler, section, name);
 };
 
 EnumeratedNativeType.prototype.transpileStaticMember = function(transpiler, name) {

@@ -103,23 +103,27 @@ CategoryDeclaration.prototype.isDerivedFrom = function(context, categoryType) {
 };
 
 
-CategoryDeclaration.prototype.processAnnotations = function(context, processDerivedFrom) {
-    if(processDerivedFrom)
-    {
-        if (this.derivedFrom) {
-            this.derivedFrom.forEach(function (name) {
-                var decl = context.getRegisteredDeclaration(name);
-                if (decl instanceof CategoryDeclaration) {
-                    decl.processAnnotations(context, true);
-                }
-            }, this);
-        }
-    }
-    if(this.annotations) {
-        this.annotations.forEach(function(ann) {
-            ann.processCategory(context, this);
+CategoryDeclaration.prototype.getAllAnnotations = function(context) {
+    var annotations = [];
+    if (this.derivedFrom) {
+        this.derivedFrom.forEach(function (name) {
+            var decl = context.getRegisteredDeclaration(name);
+            if (decl instanceof CategoryDeclaration) {
+                annotations = annotations.concat(decl.getAllAnnotations(context));
+            }
         }, this);
     }
+    if(this.annotations)
+        annotations = annotations.concat(this.annotations);
+    return annotations;
+};
+
+
+CategoryDeclaration.prototype.processAnnotations = function(context, processDerivedFrom) {
+    var annotations = processDerivedFrom ? this.getAllAnnotations(context) : (this.annotations || []);
+    annotations.forEach(function (ann) {
+        ann.processCategory(context, this);
+    }, this);
 };
 
 

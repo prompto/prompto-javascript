@@ -183,13 +183,13 @@ DictionaryType.prototype.checkMember = function(context, section, name) {
 };
 
 
-DictionaryType.prototype.declareMember = function(transpiler, name) {
+DictionaryType.prototype.declareMember = function(transpiler, section, name) {
     if("keys"===name) {
         transpiler.require(StrictSet);
     } else if("values"==name) {
         transpiler.require(List);
     } else if ("count"!==name) {
-        ContainerType.prototype.declareMember.call(this, transpiler, name);
+        ContainerType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

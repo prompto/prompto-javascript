@@ -579,11 +579,15 @@ InstanceContext.prototype.getRegistered = function(name) {
         return null;
 };
 
-InstanceContext.prototype.registerWidgetField = function(id, type) {
-    var widgetField = new WidgetField(id, type);
+InstanceContext.prototype.registerWidgetField = function(id, type, override) {
     if(!this.widgetFields)
         this.widgetFields = {};
-    this.widgetFields[id.name] = widgetField;
+    if(override || !this.widgetFields[id.name]) {
+        var widgetField = new WidgetField(id, type);
+        this.widgetFields[id.name] = widgetField;
+    } else {
+        this.problemListener.reportDuplicate(id, id.name, this.widgetFields[id.name].id);
+    }
 };
 
 InstanceContext.prototype.getRegisteredDeclaration = function(klass, name) {

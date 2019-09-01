@@ -17,9 +17,9 @@ TypeType.prototype.checkMember = function(context, section, name) {
 };
 
 
-TypeType.prototype.declareMember = function(transpiler, name) {
+TypeType.prototype.declareMember = function(transpiler, section, name) {
     this.type.declare(transpiler);
-    this.type.declareStaticMember(transpiler, name);
+    this.type.declareStaticMember(transpiler, section, name);
 };
 
 

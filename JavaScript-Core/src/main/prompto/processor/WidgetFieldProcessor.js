@@ -32,7 +32,7 @@ WidgetFieldProcessor.prototype.doProcessCategory = function(annotation, context,
     } else {
         var name = fieldName.toString();
         var type = fieldType.value;
-        context.registerWidgetField(new Identifier(name.substring(1, name.length-1)), type);
+        context.registerWidgetField(new Identifier(name.substring(1, name.length-1)), type, false);
     }
 };
 

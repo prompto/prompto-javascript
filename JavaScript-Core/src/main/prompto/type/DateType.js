@@ -185,9 +185,9 @@ DateType.prototype.checkMember = function(context, section, name) {
 };
 
 
-DateType.prototype.declareMember = function(transpiler, name) {
+DateType.prototype.declareMember = function(transpiler, section, name) {
     if (!("year"==name || "month"==name || "dayOfMonth"==name || "dayOfYear"==name)) {
-        NativeType.prototype.declareMember.call(this, transpiler, name);
+        NativeType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

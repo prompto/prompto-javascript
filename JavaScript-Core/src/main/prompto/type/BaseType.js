@@ -366,9 +366,9 @@ BaseType.prototype.checkStaticMember = function(context, section, name) {
 };
 
 
-BaseType.prototype.declareMember = function(transpiler, name) {
+BaseType.prototype.declareMember = function(transpiler, section, name) {
     if("text" !== name)
-        throw new SyntaxError("Cannot declare member: " + name + " from " + this.name);
+        transpiler.context.problemListener.reportInvalidMember(section, section, name);
 };
 
 BaseType.prototype.transpileMember = function(transpiler, name) {

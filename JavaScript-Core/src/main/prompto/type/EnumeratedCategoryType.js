@@ -41,12 +41,12 @@ EnumeratedCategoryType.prototype.checkStaticMember = function(context, section, 
 };
 
 
-EnumeratedCategoryType.prototype.declareStaticMember = function(transpiler, name) {
+EnumeratedCategoryType.prototype.declareStaticMember = function(transpiler, section, name) {
     if("symbols"==name) {
         var decl = transpiler.context.getRegisteredDeclaration(this.name);
         transpiler.declare(decl);
     } else
-        BaseType.prototype.declareStaticMember.call(this, transpiler, name);
+        BaseType.prototype.declareStaticMember.call(this, transpiler, section, name);
 };
 
 

@@ -21,13 +21,13 @@ EntryType.prototype.checkMember = function(context, section, name) {
 	}
 };
 
-EntryType.prototype.declareMember = function(transpiler, name) {
+EntryType.prototype.declareMember = function(transpiler, section, name) {
     if ("key"==name)
         return;
     else if ("value"==name)
         this.itemType.declare(transpiler);
     else
-        return BaseType.prototype.declareMember.call(this, transpiler, name);
+        return BaseType.prototype.declareMember.call(this, transpiler, section, name);
 };
 
 EntryType.prototype.transpileMember = function(transpiler, name) {

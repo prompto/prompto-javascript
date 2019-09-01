@@ -1,5 +1,7 @@
 var BaseType = require("./BaseType").BaseType;
 var DocumentType = require("./DocumentType").DocumentType;
+var Document = require("../intrinsic/Document").Document;
+var List = require("../intrinsic/List").List;
 var Identifier = require("../grammar/Identifier").Identifier;
 
 /* transient type for holding child property structure */
@@ -19,5 +21,36 @@ PropertiesType.prototype.isAssignableFrom = function(context, other) {
     else
         return BaseType.prototype.isAssignableFrom.call(this, context, other);
 };
+
+
+PropertiesType.prototype.checkMember = function(context, section, name) {
+    var prop = this.properties.get(name);
+    return prop ? prop.type : BaseType.prototype.checkMember.call(this, context, section, name);
+};
+
+
+PropertiesType.prototype.declare = function(transpiler) {
+    transpiler.register(Document);
+    transpiler.register(List);
+};
+
+
+PropertiesType.prototype.declareMember = function(transpiler, section, name) {
+    var prop = this.properties.get(name);
+    if(prop)
+        prop.type.declare(transpiler);
+    else
+        BaseType.prototype.declareMember.call(this, transpiler, section, name);
+};
+
+
+PropertiesType.prototype.transpileMember = function(transpiler, name) {
+    if ("text"===name) {
+        transpiler.append("getText()");
+    } else {
+        transpiler.append(name);
+    }
+};
+
 
 exports.PropertiesType = PropertiesType;

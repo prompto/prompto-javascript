@@ -22,6 +22,11 @@ BaseDeclaration.prototype.unregister = function(context) {
     context.unregisterDeclaration (this);
 };
 
+BaseDeclaration.prototype.getAllAnnotations = function(context) {
+    return this.annotations || [];
+};
+
+
 BaseDeclaration.prototype.toDialect = function(writer) {
     writer.toDialect(this);
 };

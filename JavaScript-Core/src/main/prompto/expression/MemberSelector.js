@@ -39,11 +39,15 @@ MemberSelector.prototype.toDialect = function(writer) {
 
 
 MemberSelector.prototype.toEDialect = function(writer) {
-    var type = this.check(writer.context);
-    if (type instanceof MethodType) {
-        writer.append("Method: ");
+    try {
+        var type = this.check(writer.context);
+        if (type instanceof MethodType) {
+            writer.append("Method: ");
+        }
+    } catch (e) {
+        // gracefully skip exceptions
     }
-    this.parentAndMemberToDialect(writer);
+   this.parentAndMemberToDialect(writer);
 };
 
 
@@ -90,7 +94,7 @@ MemberSelector.prototype.declare = function(transpiler) {
     var parent = this.resolveParent(transpiler.context);
     parent.declareParent(transpiler);
     var parentType = this.checkParent(transpiler.context);
-    return parentType.declareMember(transpiler, this.name);
+    return parentType.declareMember(transpiler, this, this.name);
 };
 
 

@@ -159,13 +159,13 @@ DateTimeType.prototype.checkMember = function(context, section, name) {
 };
 
 
-DateTimeType.prototype.declareMember = function(transpiler, name) {
+DateTimeType.prototype.declareMember = function(transpiler, section, name) {
     if("date"===name) {
         transpiler.register(LocalDate);
     } else if("time"===name) {
         transpiler.register(LocalTime);
     } else if (!("year"===name || "month"===name || "dayOfMonth"===name || "dayOfYear"===name || "hour"===name || "minute"===name || "second"===name || "millisecond"===name || "tzOffset"===name || "tzName"===name)) {
-        NativeType.prototype.declareMember.call(this, transpiler, name);
+        NativeType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

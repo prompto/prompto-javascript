@@ -1,10 +1,13 @@
 var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
 var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
+var BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
 var DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
 var Property = require("../grammar/Property").Property;
 var PropertyMap = require("../grammar/PropertyMap").PropertyMap;
 var PropertiesType = require("../type/PropertiesType").PropertiesType;
+var InternalError = require("../error/InternalError").InternalError;
+var Identifier = require("../grammar/Identifier").Identifier;
 
 function WidgetPropertiesProcessor() {
     AnnotationProcessor.call(this, "@WidgetProperties");
@@ -27,9 +30,38 @@ WidgetPropertiesProcessor.prototype.processCategory = function(annotation, conte
 WidgetPropertiesProcessor.prototype.doProcessCategory = function(annotation, context, widget) {
     var types = annotation.getDefaultArgument();
     var properties = this.checkProperties(annotation, context, types);
-    if (properties != null)
+    if (properties != null) {
         widget.properties = properties;
+        var widgetField = this.findWidgetPropertiesFieldAnnotation(context, widget);
+        if(widgetField)
+            this.overrideWidgetFieldType(context, widgetField, new PropertiesType(properties));
+    }
 };
+
+
+WidgetPropertiesProcessor.prototype.overrideWidgetFieldType = function(context, widgetField, type) {
+    var value = widgetField.getArgument("name");
+    if(!(value instanceof TextLiteral))
+        return; // raise warning
+    var name = value.toString();
+    var instance = context.getClosestInstanceContext();
+    if(instance==null)
+        throw new InternalError("Expected an instance context. Please report this bug.");
+    instance.registerWidgetField(new Identifier(name.substring(1, name.length -1)), type, true);
+};
+
+
+WidgetPropertiesProcessor.prototype.findWidgetPropertiesFieldAnnotation = function(context, widget) {
+    var found = widget.getAllAnnotations(context)
+        .filter(function(a) {
+            return a.name==="@WidgetField";
+        }).filter(function(a) {
+            var value = a.getArgument("isProperties");
+            return value instanceof BooleanLiteral && value.value.value;
+        });
+    return found[0] || null;
+};
+
 
 WidgetPropertiesProcessor.prototype.checkProperties = function(annotation, context, types) {
     if (!(types instanceof DocumentLiteral)) {

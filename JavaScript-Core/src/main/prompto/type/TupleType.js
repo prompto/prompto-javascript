@@ -72,9 +72,9 @@ TupleType.prototype.checkMember = function(context, section, name) {
 };
 
 
-TupleType.prototype.declareMember = function(transpiler, name) {
+TupleType.prototype.declareMember = function(transpiler, section, name) {
     if ("count" !== name) {
-        return NativeType.prototype.declareMember.call(this, transpiler, name);
+        return NativeType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

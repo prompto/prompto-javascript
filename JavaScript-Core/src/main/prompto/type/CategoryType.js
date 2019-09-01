@@ -342,7 +342,7 @@ CategoryType.prototype.checkCategoryMember = function(context, section, decl, na
 };
 
 
-CategoryType.prototype.declareMember = function(transpiler, name) {
+CategoryType.prototype.declareMember = function(transpiler, section, name) {
     // TODO visit attributes
 };
 
@@ -371,7 +371,7 @@ CategoryType.prototype.checkStaticMember = function(context, section, name) {
 };
 
 
-CategoryType.prototype.declareStaticMember = function(transpiler, name) {
+CategoryType.prototype.declareStaticMember = function(transpiler, section, name) {
     // TODO visit attributes
 };
 

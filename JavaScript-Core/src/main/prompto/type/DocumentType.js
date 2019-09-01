@@ -75,16 +75,16 @@ DocumentType.prototype.transpile = function(transpiler) {
 };
 
 
-DocumentType.prototype.declareMember = function(transpiler, name) {
+DocumentType.prototype.declareMember = function(transpiler, section, name) {
     // nothing to do
 };
 
 
 DocumentType.prototype.transpileMember = function(transpiler, name) {
-    if ("text"!==name) {
-        transpiler.append(name);
-    } else {
+    if ("text"===name) {
         transpiler.append("getText()");
+    } else {
+        transpiler.append(name);
     }
 };
 

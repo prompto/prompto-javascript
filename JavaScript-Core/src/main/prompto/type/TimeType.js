@@ -181,9 +181,9 @@ TimeType.prototype.checkMember = function (context, section, name) {
 };
 
 
-TimeType.prototype.declareMember = function(transpiler, name) {
+TimeType.prototype.declareMember = function(transpiler, section, name) {
     if (!("hour"===name || "minute"===name || "second"===name || "millisecond"===name)) {
-        NativeType.prototype.declareMember.call(this, transpiler, name);
+        NativeType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

@@ -152,9 +152,9 @@ TextType.prototype.checkMember = function(context, section, name) {
 };
 
 
-TextType.prototype.declareMember = function(transpiler, name) {
+TextType.prototype.declareMember = function(transpiler, section, name) {
     if ("count"!==name) {
-        NativeType.prototype.declareMember.call(this, transpiler, name);
+        NativeType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 

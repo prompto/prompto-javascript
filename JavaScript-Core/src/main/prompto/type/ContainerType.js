@@ -30,9 +30,9 @@ ContainerType.prototype.checkMember = function(context, section, name) {
 };
 
 
-ContainerType.prototype.declareMember = function(transpiler, name) {
+ContainerType.prototype.declareMember = function(transpiler, section, name) {
     if ("count" !== name) {
-        return IterableType.prototype.declareMember.call(this, transpiler, name);
+        return IterableType.prototype.declareMember.call(this, transpiler, section, name);
     }
 };
 
