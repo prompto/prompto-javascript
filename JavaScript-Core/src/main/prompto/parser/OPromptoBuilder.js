@@ -619,7 +619,7 @@ OPromptoBuilder.prototype.exitType_identifier_list = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitType_literal = function(ctx) {
-    var type = this.getNodeValue(ctx.typedef());
+    var type = this.getNodeValue(ctx.category_or_any_type());
     this.setNodeValue(ctx, new literal.TypeLiteral(type));
 };
 
