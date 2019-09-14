@@ -105,8 +105,8 @@ WidgetPropertiesProcessor.prototype.checkProperty = function(annotation, context
     }
 };
 
-WidgetPropertiesProcessor.prototype.checkPropertyDocumentLiteral = function(annotation, context, entry, prop, value) {
-    var children = value.entries;
+WidgetPropertiesProcessor.prototype.checkPropertyDocumentLiteral = function(annotation, context, entry, prop, literal) {
+    var children = literal.entries;
     for(var i=0; i<children.items.length; i++) {
         var child = children.items[i];
         var name = child.key.toString();
