@@ -97,3 +97,90 @@ test('Transpiles ReactWidgetProps2 with warnings', () => {
     expect(js).toEqual(expect.stringContaining("some stuff"));
     expect(warning).toEqual("invalid");
 });
+
+
+test('Transpiles Required', () => {
+    var decls = parseResource("annotations/WidgetProps5.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("Hello"));
+});
+
+
+test('Transpiles Required with warnings', () => {
+    var warning = null;
+    var listener = new prompto.problem.ProblemCollector()
+    listener.reportMissingProperty = function(section, name) {
+        warning = "invalid";
+    }
+    var decls = parseResource("annotations/WidgetProps6.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    context.problemListener = listener;
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("stuff"));
+    expect(warning).toEqual("invalid");
+});
+
+
+test('Transpiles TypeSet', () => {
+    var decls = parseResource("annotations/WidgetProps7.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("Hello"));
+});
+
+
+test('Transpiles TypeSet with warnings', () => {
+    var warning = null;
+    var listener = new prompto.problem.ProblemCollector()
+    listener.reportIllegalAssignment = function(section, required, actual) {
+        warning = "invalid";
+    }
+    var decls = parseResource("annotations/WidgetProps8.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    context.problemListener = listener;
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("stuff"));
+    expect(warning).toEqual("invalid");
+});
+
+
+test('Transpiles ValueSet', () => {
+    var decls = parseResource("annotations/WidgetProps9.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("John"));
+});
+
+
+test('Transpiles ValueSet with warnings', () => {
+    var warning = null;
+    var listener = new prompto.problem.ProblemCollector()
+    listener.reportIllegalValue = function(section, message) {
+        warning = "invalid";
+    }
+    var decls = parseResource("annotations/WidgetProps10.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    context.problemListener = listener;
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("stuff"));
+    expect(warning).toEqual("invalid");
+});

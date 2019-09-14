@@ -1,4 +1,6 @@
 var MissingType = require("../type/MissingType").MissingType;
+var NativeType = require("../type/NativeType").NativeType;
+var AnyType = require("../type/AnyType").AnyType;
 var NullValue = require("../value/NullValue").NullValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
@@ -58,6 +60,8 @@ function inferCommonRootType(context, type1, type2) {
     var CategoryType = require("../type/CategoryType").CategoryType;
     if ((type1 instanceof CategoryType) && (type2 instanceof CategoryType))
         return inferCommonCategoryType(context, type1, type2, true);
+    else if(type1 instanceof NativeType || type2 instanceof NativeType)
+        return AnyType.instance;
     else
         return null;
 }

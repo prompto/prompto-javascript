@@ -1,4 +1,5 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
+var Literal = require("../literal/Literal").Literal;
 
 function JsxExpression(expression) {
     IJsxExpression.call(this);
@@ -13,6 +14,15 @@ JsxExpression.prototype.constructor = JsxExpression;
 
 JsxExpression.prototype.check = function(context) {
 	return this.expression.check(context);
+};
+
+JsxExpression.prototype.isLiteral = function() {
+    return this.expression instanceof Literal;
+};
+
+
+JsxExpression.prototype.toString = function() {
+    return this.expression.toString();
 };
 
 JsxExpression.prototype.toDialect = function(writer) {

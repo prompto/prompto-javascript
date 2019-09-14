@@ -7,9 +7,14 @@ var DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
 var Property = require("../property/Property").Property;
 var PropertyMap = require("../property/PropertyMap").PropertyMap;
 var PropertiesType = require("../type/PropertiesType").PropertiesType;
+var AnyType = require("../type/AnyType").AnyType;
+var TypeType = require("../type/TypeType").TypeType;
 var InternalError = require("../error/InternalError").InternalError;
 var Identifier = require("../grammar/Identifier").Identifier;
 var TypeValidator = require("../property/TypeValidator").TypeValidator;
+var TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
+var ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
+var BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 
 function WidgetPropertiesProcessor() {
@@ -149,12 +154,21 @@ WidgetPropertiesProcessor.prototype.checkPropertyDocumentLiteral = function(anno
 };
 
 
-WidgetPropertiesProcessor.prototype.checkPropertySetLiteral = function(annotation, context, entry, prop, value) {
-    var setType = value.check(context);
+WidgetPropertiesProcessor.prototype.checkPropertySetLiteral = function(annotation, context, entry, prop, literal) {
+    var setType = literal.check(context);
     var itemType = setType.itemType || null;
+    var value = literal.interpret(context);
     if(itemType instanceof TypeType) {
-        var types = value.value.items.map(function(l) {return l.value;});
+        var types = Array.from(value.items.set).map(function (l) {
+            return l.value;
+        });
         prop.validator = new TypeSetValidator(new Set(types));
+        return prop;
+    } else if(itemType === AnyType.instance) {
+        var values = Array.from(value.items.set).map(function (l) {
+            return l.toString();
+        });
+        prop.validator = new ValueSetValidator(new Set(values));
         return prop;
     } else {
         context.problemListener.reportIllegalAnnotation(entry.key, "Expected a set of Types.");

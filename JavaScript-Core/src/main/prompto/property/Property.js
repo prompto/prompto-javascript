@@ -24,4 +24,14 @@ Property.prototype.validate = function(context, jsxProperty) {
     this._validator.validate(context, jsxProperty);
 };
 
+
+Property.prototype.isRequired = function() {
+    return this._validator.isRequired();
+};
+
+
+Property.prototype.setRequired = function(set) {
+    this._validator = set ? this._validator.required() : this._validator.optional();
+};
+
 exports.Property = Property;

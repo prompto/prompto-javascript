@@ -36,19 +36,29 @@ JsxElementBase.prototype.getHtmlProperties = function(name) {
 
 
 JsxElementBase.prototype.checkProperties = function(context, propertyMap) {
-    if(this.properties==null)
-        return;
-    this.properties.forEach(function(prop) {
-        prop.check(context);
-        if(propertyMap) {
-            var declared = propertyMap.get(prop.id.name);
-            if(declared==null)
-                context.problemListener.reportUnknownProperty(prop, prop.id.name);
+    var actualNames = new Set();
+    if(this.properties!==null)
+        this.properties.forEach(function(prop) {
+            if(actualNames.has(prop.id.name))
+                context.problemListener.reportDuplicateProperty(prop, prop.id.name);
             else
-                declared.validate(context, prop)
+                actualNames.add(prop.id.name);
+            prop.check(context);
+            if(propertyMap) {
+                var declared = propertyMap.get(prop.id.name);
+                if(declared==null)
+                    context.problemListener.reportUnknownProperty(prop, prop.id.name);
+                else
+                    declared.validate(context, prop)
+            }
+        });
+    if(propertyMap!==null) {
+        for(var name in propertyMap.entries) {
+            var prop = propertyMap.entries[name];
+            if(prop.isRequired() && !actualNames.has(name))
+                context.problemListener.reportMissingProperty(this, name);
         }
-    });
-    // TODO check required properties
+    }
 };
 
 

@@ -10,6 +10,17 @@ JsxLiteral.prototype.check = function(context) {
 	return TextType.instance;
 };
 
+
+JsxLiteral.prototype.toString = function() {
+	return this.text;
+};
+
+
+JsxLiteral.prototype.isLiteral = function(context) {
+	return true;
+};
+
+
 JsxLiteral.prototype.toDialect = function(writer) {
 	writer.append(this.text);
 };
