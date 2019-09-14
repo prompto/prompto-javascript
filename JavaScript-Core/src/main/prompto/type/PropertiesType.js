@@ -25,7 +25,7 @@ PropertiesType.prototype.isAssignableFrom = function(context, other) {
 
 PropertiesType.prototype.checkMember = function(context, section, name) {
     var prop = this.properties.get(name);
-    return prop ? prop.type : BaseType.prototype.checkMember.call(this, context, section, name);
+    return prop ? prop.validator.getType(context) : BaseType.prototype.checkMember.call(this, context, section, name);
 };
 
 
@@ -38,7 +38,7 @@ PropertiesType.prototype.declare = function(transpiler) {
 PropertiesType.prototype.declareMember = function(transpiler, section, name) {
     var prop = this.properties.get(name);
     if(prop)
-        prop.type.declare(transpiler);
+        prop.validator.getType(transpiler.context).declare(transpiler);
     else
         BaseType.prototype.declareMember.call(this, transpiler, section, name);
 };

@@ -35,19 +35,20 @@ JsxElementBase.prototype.getHtmlProperties = function(name) {
 };
 
 
-JsxElementBase.prototype.checkProperties = function(context, propertyTypes) {
+JsxElementBase.prototype.checkProperties = function(context, propertyMap) {
     if(this.properties==null)
         return;
     this.properties.forEach(function(prop) {
-        var actual = prop.check(context);
-        if(propertyTypes) {
-            var expected = propertyTypes.get(prop.id.name);
-            if(expected==null)
+        prop.check(context);
+        if(propertyMap) {
+            var declared = propertyMap.get(prop.id.name);
+            if(declared==null)
                 context.problemListener.reportUnknownProperty(prop, prop.id.name);
-            else if(!expected.type.isAssignableFrom(context, actual))
-                context.problemListener.reportIllegalAssignment(prop, expected, actual);
+            else
+                declared.validate(context, prop)
         }
     });
+    // TODO check required properties
 };
 
 
