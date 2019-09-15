@@ -2117,15 +2117,6 @@ EParserListener.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 
-// Enter a parse tree produced by EParser#any_identifier.
-EParserListener.prototype.enterAny_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by EParser#any_identifier.
-EParserListener.prototype.exitAny_identifier = function(ctx) {
-};
-
-
 // Enter a parse tree produced by EParser#argument_list.
 EParserListener.prototype.enterArgument_list = function(ctx) {
 };

@@ -2000,15 +2000,6 @@ OParserListener.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 
-// Enter a parse tree produced by OParser#any_identifier.
-OParserListener.prototype.enterAny_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by OParser#any_identifier.
-OParserListener.prototype.exitAny_identifier = function(ctx) {
-};
-
-
 // Enter a parse tree produced by OParser#argument_list.
 OParserListener.prototype.enterArgument_list = function(ctx) {
 };

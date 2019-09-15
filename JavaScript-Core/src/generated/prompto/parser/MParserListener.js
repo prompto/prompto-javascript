@@ -1973,15 +1973,6 @@ MParserListener.prototype.exitSymbol_identifier = function(ctx) {
 };
 
 
-// Enter a parse tree produced by MParser#any_identifier.
-MParserListener.prototype.enterAny_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#any_identifier.
-MParserListener.prototype.exitAny_identifier = function(ctx) {
-};
-
-
 // Enter a parse tree produced by MParser#argument_list.
 MParserListener.prototype.enterArgument_list = function(ctx) {
 };
