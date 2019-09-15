@@ -56,9 +56,11 @@ ArrowExpression.prototype.transpile = function(transpiler) {
 
 ArrowExpression.prototype.toDialect = function(writer) {
     this.argsToDialect(writer);
-    writer.append(this.argsSuite);
+    if(this.argsSuite!=null)
+        writer.append(this.argsSuite);
     writer.append("=>");
-    writer.append(this.arrowSuite);
+    if(this.arrowSuite!=null)
+        writer.append(this.arrowSuite);
     this.bodyToDialect(writer);
 };
 
