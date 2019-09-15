@@ -1685,6 +1685,15 @@ OParserListener.prototype.exitBooleanType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#CssType.
+OParserListener.prototype.enterCssType = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#CssType.
+OParserListener.prototype.exitCssType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#CharacterType.
 OParserListener.prototype.enterCharacterType = function(ctx) {
 };

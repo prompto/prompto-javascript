@@ -1,4 +1,5 @@
 var TextType = require("../type/TextType").TextType;
+var VoidType = require("../type/VoidType").VoidType;
 
 function JsxLiteral(text) {
 	this.text = text;
@@ -10,6 +11,9 @@ JsxLiteral.prototype.check = function(context) {
 	return TextType.instance;
 };
 
+JsxLiteral.prototype.checkProto = function(context, proto) {
+	return VoidType.instance;
+};
 
 JsxLiteral.prototype.toString = function() {
 	return this.text;

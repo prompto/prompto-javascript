@@ -17,6 +17,20 @@ ConcreteWidgetDeclaration.prototype.isWidget = function(context) {
     return true;
 };
 
+ConcreteWidgetDeclaration.prototype.getProperties = function(context) {
+    if(typeof(this.properties)=="undefined") {
+        this.properties = null;
+        // don't bubble up buried problems
+        const savedProblems = context.problemListener.problems;
+        context.problemListener.problems = [];
+        try {
+            this.check(context);
+        } finally {
+            context.problemListener.problems = savedProblems;
+        }
+    }
+    return this.properties;
+};
 
 ConcreteWidgetDeclaration.prototype.getDeclarationType = function() {
     return "Widget";

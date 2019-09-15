@@ -31,8 +31,10 @@ StatementList.prototype.checkStatement = function(context, statement) {
     } catch(e) {
         if(e instanceof PromptoError)
             context.problemListener.reportError(statement, e.message);
-        else
+        else {
             context.problemListener.reportError(statement, "Internal error, check your syntax!");
+            console.error(e.stack);
+        }
         return VoidType.instance;
     }
 };

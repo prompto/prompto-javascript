@@ -1798,6 +1798,11 @@ OPromptoBuilder.prototype.exitNotInExpression = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitCssType = function(ctx) {
+    this.setNodeValue(ctx, type.CssType.instance);
+};
+
+
 OPromptoBuilder.prototype.exitHasExpression = function(ctx) {
     var left = this.getNodeValue(ctx.left);
     var right = this.getNodeValue(ctx.right);

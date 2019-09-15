@@ -12,7 +12,7 @@ exports.resolve = function() {
 
 function SetValue(itemType, items) {
     Value.call(this, new SetType(itemType));
-    this.itemType = null;
+    this.itemType = itemType;
     this.items = items || new StrictSet();
     return this;
 }

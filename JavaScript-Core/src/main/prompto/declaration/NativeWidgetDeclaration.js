@@ -13,6 +13,22 @@ NativeWidgetDeclaration.prototype.isWidget = function(context) {
     return true;
 };
 
+
+NativeWidgetDeclaration.prototype.getProperties = function(context) {
+    if(typeof(this.properties)=="undefined") {
+        this.properties = null;
+        // don't bubble up buried problems
+        const savedProblems = context.problemListener.problems;
+        context.problemListener.problems = [];
+        try {
+            this.check(context);
+        } finally {
+            context.problemListener.problems = savedProblems;
+        }
+    }
+    return this.properties;
+};
+
 NativeWidgetDeclaration.prototype.getDeclarationType = function() {
     return "Widget";
 };

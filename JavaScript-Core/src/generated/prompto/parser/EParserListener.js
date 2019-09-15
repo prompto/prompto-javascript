@@ -1802,6 +1802,15 @@ EParserListener.prototype.exitBooleanType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#CssType.
+EParserListener.prototype.enterCssType = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#CssType.
+EParserListener.prototype.exitCssType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#CharacterType.
 EParserListener.prototype.enterCharacterType = function(ctx) {
 };

@@ -2,6 +2,9 @@ var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var JsxType = require("../type/JsxType").JsxType;
 var isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+var OCleverParser = require("../parser/OCleverParser").OCleverParser;
+var WidgetPropertiesProcessor = require("../processor/WidgetPropertiesProcessor").WidgetPropertiesProcessor;
+var DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
 
 function JsxElementBase(id, properties) {
     IJsxExpression.call(this);
@@ -16,26 +19,45 @@ JsxElementBase.prototype.constructor = JsxElementBase;
 
 
 JsxElementBase.prototype.check = function(context) {
-    var propertyMap = null;
     if (isCharacterUpperCase(this.id.name[0])) {
+        var propertyMap = null;
         var decl = context.getRegisteredDeclaration(this.id.name);
         if (decl == null)
             context.problemListener.reportUnknownIdentifier(this.id);
         else if(decl instanceof CategoryDeclaration && decl.isWidget())
-            propertyMap = decl.properties || null;
-    } else
-        propertyMap = this.getHtmlProperties(this.id.name);
-    this.checkProperties(context, propertyMap);
+            propertyMap = decl.getProperties(context);
+        this.checkWidgetProperties(context, propertyMap);
+    } else {
+        this.checkHtmlProperties(context)
+    }
     return JsxType.instance;
 };
 
+const HTML_PROPERTY_TYPES = `{
+    style: Css,
+    id: any,
+    onClick: MouseEventCallback,
+    onContextMenu: MouseEventCallback
+}`;
 
-JsxElementBase.prototype.getHtmlProperties = function(name) {
-    return null; // TODO
-};
+
+let HTML_PROPERTIES_MAP = null;
+
+function getHtmlProperties(context, name) {
+    if(HTML_PROPERTIES_MAP==null) {
+        const parser = new OCleverParser(HTML_PROPERTY_TYPES);
+        const types = parser.parse_document_literal();
+        const parsed = types instanceof DocumentLiteral;
+        if(parsed) {
+            const processor = new WidgetPropertiesProcessor();
+            HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
+        }
+    }
+    return HTML_PROPERTIES_MAP; // TODO filter by html tag name
+}
 
 
-JsxElementBase.prototype.checkProperties = function(context, propertyMap) {
+JsxElementBase.prototype.checkWidgetProperties = function(context, propertyMap) {
     var actualNames = new Set();
     if(this.properties!==null)
         this.properties.forEach(function(prop) {
@@ -46,6 +68,8 @@ JsxElementBase.prototype.checkProperties = function(context, propertyMap) {
             prop.check(context);
             if(propertyMap) {
                 var declared = propertyMap.get(prop.id.name);
+                if(declared==null)
+                    declared = getHtmlProperties(context).get(prop.id.name);
                 if(declared==null)
                     context.problemListener.reportUnknownProperty(prop, prop.id.name);
                 else
@@ -61,6 +85,29 @@ JsxElementBase.prototype.checkProperties = function(context, propertyMap) {
     }
 };
 
+
+JsxElementBase.prototype.checkHtmlProperties = function(context) {
+    var propertyMap = getHtmlProperties(context);
+    var actualNames = new Set();
+    if(this.properties!==null)
+        this.properties.forEach(function(prop) {
+            if(actualNames.has(prop.id.name))
+                context.problemListener.reportDuplicateProperty(prop, prop.id.name);
+            else
+                actualNames.add(prop.id.name);
+            prop.check(context);
+            var declared = propertyMap.get(prop.id.name);
+            if(declared==null)
+                context.problemListener.reportUnknownProperty(prop, prop.id.name);
+            else
+                declared.validate(context, prop)
+        });
+    for(var name in propertyMap.entries) {
+        var prop = propertyMap.entries[name];
+        if(prop.isRequired() && !actualNames.has(name))
+            context.problemListener.reportMissingProperty(this, name);
+    }
+};
 
 JsxElementBase.prototype.declare = function(transpiler) {
     if (isCharacterUpperCase(this.id.name[0])) {

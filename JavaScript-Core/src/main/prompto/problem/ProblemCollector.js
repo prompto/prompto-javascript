@@ -55,10 +55,6 @@ ProblemCollector.prototype.reportUnknownAttribute = function(id) {
     this.reportUnknown(id, "attribute");
 };
 
-ProblemCollector.prototype.reportUnknownProperty = function(id) {
-    this.reportUnknown(id, "property");
-};
-
 ProblemCollector.prototype.reportUnknownCategory = function(id) {
     this.reportUnknown(id, "category");
 };
@@ -88,6 +84,22 @@ ProblemCollector.prototype.reportEmptyVariable = function(id) {
 ProblemCollector.prototype.reportUnknown = function(id, type) {
     this.reportError(id, "Unknown " + type + ": " + id.name);
 };
+
+
+ProblemCollector.prototype.reportUnknownProperty = function(section, name) {
+    this.reportWarning(section, "Unknown property: " + name);
+};
+
+
+ProblemCollector.prototype.reportMissingProperty = function(section, name) {
+    this.reportWarning(section, "Missing required property: " + name);
+};
+
+
+ProblemCollector.prototype.reportDuplicateProperty = function(section, name) {
+    this.reportWarning(section, "Duplicate property: " + name);
+};
+
 
 ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
     this.reportError(method, "No matching prototype for: " + method.toString());

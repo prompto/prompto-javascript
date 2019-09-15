@@ -1,3 +1,4 @@
+var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var Literal = require("../literal/Literal").Literal;
 
@@ -14,6 +15,13 @@ JsxExpression.prototype.constructor = JsxExpression;
 
 JsxExpression.prototype.check = function(context) {
 	return this.expression.check(context);
+};
+
+JsxExpression.prototype.checkProto = function(context, proto) {
+    if(this.expression instanceof ArrowExpression)
+        return proto.checkArrowExpression(context, this.expression);
+    else
+        return this.expression.check(context);
 };
 
 JsxExpression.prototype.isLiteral = function() {

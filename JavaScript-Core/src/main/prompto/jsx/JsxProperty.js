@@ -1,11 +1,18 @@
+var Section = require("../parser/Section").Section;
 var BooleanType = require("../type/BooleanType").BooleanType;
+var VoidType = require("../type/VoidType").VoidType;
 
 function JsxProperty(id, value, suite) {
+    Section.call(this);
 	this.id = id;
 	this.value = value;
 	this.suite = suite;
 	return this;
 }
+
+
+JsxProperty.prototype = Object.create(Section.prototype);
+JsxProperty.prototype.constructor = JsxProperty;
 
 
 JsxProperty.prototype.check = function(context) {
@@ -15,6 +22,13 @@ JsxProperty.prototype.check = function(context) {
         return BooleanType.instance; // a value-less property is treated as a boolean flag
 };
 
+
+JsxProperty.prototype.checkProto = function(context, proto) {
+    if(this.value!=null)
+        return this.value.checkProto(context, proto);
+    else
+        return VoidType.instance; // force failure
+};
 
 JsxProperty.prototype.toDialect = function(writer) {
     writer.append(this.id.name);

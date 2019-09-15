@@ -184,3 +184,24 @@ test('Transpiles ValueSet with warnings', () => {
     expect(js).toEqual(expect.stringContaining("stuff"));
     expect(warning).toEqual("invalid");
 });
+
+
+test('Transpiles Callback', () => {
+    var decls = parseResource("annotations/WidgetProps11.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("stuff"));
+});
+
+test('Transpiles Arrow', () => {
+    var decls = parseResource("annotations/WidgetProps12.poc");
+    var context = prompto.runtime.Context.newGlobalContext();
+    decls.register(context);
+    decls.check(context);
+    var decl = context.getRegisteredDeclaration("Container");
+    var js = prompto.runtime.Transpiler.transpile(context, decl);
+    expect(js).toEqual(expect.stringContaining("stuff"));
+});

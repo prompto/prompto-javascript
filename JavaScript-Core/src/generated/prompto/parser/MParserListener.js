@@ -1658,6 +1658,15 @@ MParserListener.prototype.exitBooleanType = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#CssType.
+MParserListener.prototype.enterCssType = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#CssType.
+MParserListener.prototype.exitCssType = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#CharacterType.
 MParserListener.prototype.enterCharacterType = function(ctx) {
 };

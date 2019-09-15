@@ -1763,6 +1763,11 @@ EPromptoBuilder.prototype.exitNotInExpression = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitCssType = function(ctx) {
+    this.setNodeValue(ctx, type.CssType.instance);
+};
+
+
 EPromptoBuilder.prototype.exitHasExpression = function(ctx) {
     var left = this.getNodeValue(ctx.left);
     var right = this.getNodeValue(ctx.right);

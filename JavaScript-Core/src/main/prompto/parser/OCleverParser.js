@@ -43,6 +43,10 @@ OCleverParser.prototype.parse_repl_input = function() {
 	return this.doParse(this.repl, true);
 };
 
+OCleverParser.prototype.parse_document_literal = function() {
+	return this.doParse(this.document_literal);
+};
+
 OCleverParser.prototype.equalToken = function() {
 	return OParser.EQUAL;
 };

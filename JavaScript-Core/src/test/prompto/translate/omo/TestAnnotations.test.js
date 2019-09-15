@@ -28,6 +28,14 @@ test('WidgetProps10', () => {
 	compareResourceOMO('annotations/WidgetProps10.poc');
 });
 
+test('WidgetProps11', () => {
+	compareResourceOMO('annotations/WidgetProps11.poc');
+});
+
+test('WidgetProps12', () => {
+	compareResourceOMO('annotations/WidgetProps12.poc');
+});
+
 test('WidgetProps2', () => {
 	compareResourceOMO('annotations/WidgetProps2.poc');
 });

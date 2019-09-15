@@ -17,6 +17,7 @@ var java = require("../java/index");
 var csharp = require("../csharp/index");
 var python = require("../python/index");
 
+
 function MPromptoBuilder(pparser) {
     parser.MParserListener.call(this);
     this.input = pparser.getTokenStream();
@@ -1781,6 +1782,11 @@ MPromptoBuilder.prototype.exitNotInExpression = function(ctx) {
     var left = this.getNodeValue(ctx.left);
     var right = this.getNodeValue(ctx.right);
     this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_IN, right));
+};
+
+
+MPromptoBuilder.prototype.exitCssType = function(ctx) {
+    this.setNodeValue(ctx, type.CssType.instance);
 };
 
 

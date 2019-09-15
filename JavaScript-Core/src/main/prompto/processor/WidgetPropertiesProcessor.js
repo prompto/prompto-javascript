@@ -8,6 +8,8 @@ var Property = require("../property/Property").Property;
 var PropertyMap = require("../property/PropertyMap").PropertyMap;
 var PropertiesType = require("../type/PropertiesType").PropertiesType;
 var AnyType = require("../type/AnyType").AnyType;
+var NativeType = require("../type/NativeType").NativeType;
+var MethodType = require("../type/MethodType").MethodType;
 var TypeType = require("../type/TypeType").TypeType;
 var InternalError = require("../error/InternalError").InternalError;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -15,7 +17,7 @@ var TypeValidator = require("../property/TypeValidator").TypeValidator;
 var TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
 var ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
-
+var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
 function WidgetPropertiesProcessor() {
     AnnotationProcessor.call(this, "@WidgetProperties");
@@ -37,7 +39,7 @@ WidgetPropertiesProcessor.prototype.processCategory = function(annotation, conte
 
 WidgetPropertiesProcessor.prototype.doProcessCategory = function(annotation, context, widget) {
     var types = annotation.getDefaultArgument();
-    var properties = this.checkProperties(annotation, context, types);
+    var properties = this.loadProperties(annotation, context, types);
     if (properties != null) {
         widget.properties = properties;
         var widgetField = this.findWidgetPropertiesFieldAnnotation(context, widget);
@@ -71,14 +73,14 @@ WidgetPropertiesProcessor.prototype.findWidgetPropertiesFieldAnnotation = functi
 };
 
 
-WidgetPropertiesProcessor.prototype.checkProperties = function(annotation, context, types) {
+WidgetPropertiesProcessor.prototype.loadProperties = function(annotation, context, types) {
     if (!(types instanceof DocumentLiteral)) {
         context.problemListener.reportIllegalAnnotation(annotation, "WidgetProperties expects a Document of types as unique parameter");
         return null;
     }
     var props = new PropertyMap();
     types.entries.items.forEach(function(entry) {
-        var prop = this.checkProperty(annotation, context, entry);
+        var prop = this.loadProperty(annotation, context, entry);
         if(prop) {
             if(props.has(prop.name))
                 context.problemListener.reportIllegalAnnotation(entry.key, "Duplicate property: " + prop.name);
@@ -89,23 +91,23 @@ WidgetPropertiesProcessor.prototype.checkProperties = function(annotation, conte
     return props;
 };
 
-WidgetPropertiesProcessor.prototype.checkProperty = function(annotation, context, entry) {
+WidgetPropertiesProcessor.prototype.loadProperty = function(annotation, context, entry) {
     var prop = new Property();
     prop.name = entry.key.toString();
     var value = entry.value;
     if(value instanceof TypeLiteral)
-        return this.checkPropertyTypeLiteral(annotation, context, entry, prop, value);
+        return this.loadPropertyTypeLiteral(annotation, context, entry, prop, value);
     else if(value instanceof SetLiteral)
-        return this.checkPropertySetLiteral(annotation, context, entry, prop, value);
+        return this.loadPropertySetLiteral(annotation, context, entry, prop, value);
     else if(value instanceof DocumentLiteral)
-        return this.checkPropertyDocumentLiteral(annotation, context, entry, prop, value);
+        return this.loadPropertyDocumentLiteral(annotation, context, entry, prop, value);
     else {
         context.problemListener.reportIllegalAnnotation(annotation, "WidgetProperties expects a Document of types as unique parameter");
         return null;
     }
 };
 
-WidgetPropertiesProcessor.prototype.checkPropertyDocumentLiteral = function(annotation, context, entry, prop, literal) {
+WidgetPropertiesProcessor.prototype.loadPropertyDocumentLiteral = function(annotation, context, entry, prop, literal) {
     var children = literal.entries;
     for(var i=0; i<children.items.length; i++) {
         var child = children.items[i];
@@ -113,39 +115,58 @@ WidgetPropertiesProcessor.prototype.checkPropertyDocumentLiteral = function(anno
         var value = child.value;
         switch(name) {
             case "required":
-                if(value instanceof BooleanLiteral)
-                    prop.setRequired(value.interpret(context)===BooleanValue.TRUE);
-                else
-                    context.problemListener.reportIllegalAnnotation(child.key, "Expected a Boolean value for 'required'.");
-                break;
+                if(value instanceof BooleanLiteral) {
+                    prop.setRequired(value.interpret(context) === BooleanValue.TRUE);
+                    break;
+                }
+                context.problemListener.reportIllegalAnnotation(child.key, "Expected a Boolean value for 'required'.");
+                return null;
             case "help":
-                if(value instanceof TextLiteral)
+                if(value instanceof TextLiteral) {
                     prop.help = value.value.getStorableData();
-                else
-                    context.problemListener.reportIllegalAnnotation(child.key, "Expected a Text value for 'help'.");
-                break;
+                    break;
+                }
+                context.problemListener.reportIllegalAnnotation(child.key, "Expected a Text value for 'help'.");
+                return null;
             case "type":
-                if(value instanceof TypeLiteral)
-                    prop.validator = new TypeValidator(value.value);
-                else if(value instanceof DocumentLiteral) {
-                    var embedded = this.checkProperties(annotation, context, value);
-                    if(embedded)
+                if(value instanceof TypeLiteral) {
+                    var type = this.resolveTypeLiteral(annotation, context, value);
+                    if (type) {
+                        prop.validator = new TypeValidator(type);
+                        break;
+                    }
+                } else if(value instanceof DocumentLiteral) {
+                    var embedded = this.loadProperties(annotation, context, value);
+                    if (embedded) {
                         prop.validator = new TypeValidator(new PropertiesType(embedded));
-                    else
-                        return null;
-                } else
-                    context.problemListener.reportIllegalAnnotation(child.key, "Expected a Type value for 'type'.");
-                break;
+                        break;
+                    }
+                }
+                context.problemListener.reportIllegalAnnotation(child.key, "Expected a Type value for 'type'.");
+                return null;
+            case "types":
+                if(value instanceof SetLiteral) {
+                    value = value.interpret(context);
+                    var types = Array.from(value.items.set).map(function (l) {
+                        return this.resolveType(annotation, context, l.value);
+                    }, this);
+                    prop.validator = new TypeSetValidator(types);
+                    break;
+                }
+                context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
+                return null;
             case "values":
                 if(value instanceof SetLiteral) {
-                    var texts = value.value.items.map(function(v) { return v.getStorableData(); });
+                    value = value.interpret(context);
+                    var texts = Array.from(value.items.set).map(function (l) {
+                        return l.toString();
+                    });
                     prop.validator = new ValueSetValidator(texts);
-                } else {
-                    context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
-                    return null;
+                    break;
                 }
-                break;
-            default:
+                context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
+                return null;
+             default:
                 context.problemListener.reportIllegalAnnotation(child.key, "Unknown property attribute: " + name);
                 return null;
         }
@@ -154,21 +175,22 @@ WidgetPropertiesProcessor.prototype.checkPropertyDocumentLiteral = function(anno
 };
 
 
-WidgetPropertiesProcessor.prototype.checkPropertySetLiteral = function(annotation, context, entry, prop, literal) {
-    var setType = literal.check(context);
-    var itemType = setType.itemType || null;
+WidgetPropertiesProcessor.prototype.loadPropertySetLiteral = function(annotation, context, entry, prop, literal) {
     var value = literal.interpret(context);
+    var itemType = value.itemType || null;
     if(itemType instanceof TypeType) {
         var types = Array.from(value.items.set).map(function (l) {
-            return l.value;
-        });
+            return this.resolveType(annotation, context, l.value);
+        }, this);
+        if(types.indexOf(null)>=0)
+            return null;
         prop.validator = new TypeSetValidator(new Set(types));
         return prop;
     } else if(itemType === AnyType.instance) {
-        var values = Array.from(value.items.set).map(function (l) {
+        var texts = Array.from(value.items.set).map(function (l) {
             return l.toString();
         });
-        prop.validator = new ValueSetValidator(new Set(values));
+        prop.validator = new ValueSetValidator(new Set(texts));
         return prop;
     } else {
         context.problemListener.reportIllegalAnnotation(entry.key, "Expected a set of Types.");
@@ -176,10 +198,31 @@ WidgetPropertiesProcessor.prototype.checkPropertySetLiteral = function(annotatio
     }
 };
 
-WidgetPropertiesProcessor.prototype.checkPropertyTypeLiteral = function(annotation, context, entry, prop, value) {
-    prop.validator = new TypeValidator(entry.value.value);
+WidgetPropertiesProcessor.prototype.loadPropertyTypeLiteral = function(annotation, context, entry, prop, literal) {
+    var type = this.resolveTypeLiteral(annotation, context, literal);
+    if(!type)
+        return null;
+    prop.validator = new TypeValidator(type);
     return prop;
-
 };
+
+WidgetPropertiesProcessor.prototype.resolveTypeLiteral = function(annotation, context, literal) {
+    return this.resolveType(annotation, context, literal.value);
+};
+
+
+WidgetPropertiesProcessor.prototype.resolveType = function(annotation, context, type) {
+    if(type instanceof NativeType)
+        return type;
+    var decl = context.getRegisteredDeclaration(type.name);
+    if(!decl) {
+        context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + type.name);
+        return null;
+    } else if(decl instanceof MethodDeclarationMap)
+        return new MethodType(decl.getFirst());
+    else
+        return decl.getType(context);
+};
+
 
 exports.WidgetPropertiesProcessor = WidgetPropertiesProcessor;
