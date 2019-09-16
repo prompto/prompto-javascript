@@ -18,6 +18,7 @@ exports.value = require("./value/index");
 exports.memstore = require("./memstore/index");
 exports.store = require("./store/index");
 exports.intrinsic = require("./intrinsic/index");
+exports.jsx = require("./jsx/index");
 
 exports.internet = require("../../../../JavaScript-Runtime/src/main/prompto/internet/index");
 exports.io = require("../../../../JavaScript-Runtime/src/main/prompto/io/index");

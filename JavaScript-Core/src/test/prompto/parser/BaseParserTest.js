@@ -10,6 +10,8 @@ var JsxValue = prompto.value.JsxValue;
 
 // mock ReactBootstrap.Button for native widget tests
 global.ReactBootstrap = { Button: function() { this.render = function() { return new JsxValue(null); }; return this; } };
+// disable unavailable callbacks for property type checking
+prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(true);
 
 function getPromptoFolder() {
     var prompto = module.filename;

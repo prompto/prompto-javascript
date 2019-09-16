@@ -4,7 +4,8 @@ var isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var OCleverParser = require("../parser/OCleverParser").OCleverParser;
 var WidgetPropertiesProcessor = require("../processor/WidgetPropertiesProcessor").WidgetPropertiesProcessor;
-var DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
+var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
+var AnyType = require("../type/AnyType").AnyType;
 
 function JsxElementBase(id, properties) {
     IJsxExpression.call(this);
@@ -42,16 +43,18 @@ const HTML_PROPERTY_TYPES = `{
 
 
 let HTML_PROPERTIES_MAP = null;
+let HTML_TEST_MODE = false;
 
 function getHtmlProperties(context, name) {
     if(HTML_PROPERTIES_MAP==null) {
         const parser = new OCleverParser(HTML_PROPERTY_TYPES);
         const types = parser.parse_document_literal();
-        const parsed = types instanceof DocumentLiteral;
-        if(parsed) {
-            const processor = new WidgetPropertiesProcessor();
-            HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
+        if(HTML_TEST_MODE) {
+            const any = new TypeLiteral(AnyType.instance);
+            types.entries.items.forEach(function(e) { e.value = any; });
         }
+        const processor = new WidgetPropertiesProcessor();
+        HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
     }
     return HTML_PROPERTIES_MAP; // TODO filter by html tag name
 }
@@ -102,11 +105,11 @@ JsxElementBase.prototype.checkHtmlProperties = function(context) {
             else
                 declared.validate(context, prop)
         });
-    for(var name in propertyMap.entries) {
+    Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
         var prop = propertyMap.entries[name];
         if(prop.isRequired() && !actualNames.has(name))
             context.problemListener.reportMissingProperty(this, name);
-    }
+    }, this);
 };
 
 JsxElementBase.prototype.declare = function(transpiler) {
@@ -155,6 +158,10 @@ JsxElementBase.prototype.transpile = function(transpiler) {
 
 JsxElementBase.prototype.transpileChildren = function(transpiler) {
     // nothing to do
+};
+
+JsxElementBase.set_HTML_TEST_MODE = function(mode) {
+    HTML_TEST_MODE = mode;
 };
 
 exports.JsxElementBase = JsxElementBase;
