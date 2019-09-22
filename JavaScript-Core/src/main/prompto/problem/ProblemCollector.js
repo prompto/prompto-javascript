@@ -21,7 +21,7 @@ ProblemCollector.prototype.readSection = function(section) {
         endLine : section.end && section.end.line,
         endColumn : section.end && section.end.column
     };
-}
+};
 
 ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {
     var problem = {

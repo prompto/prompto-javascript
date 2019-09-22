@@ -16,6 +16,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var TypeValidator = require("../property/TypeValidator").TypeValidator;
 var TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
 var ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
+var NullValue = require("../value/NullValue").NullValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
@@ -147,10 +148,16 @@ WidgetPropertiesProcessor.prototype.loadPropertyDocumentLiteral = function(annot
             case "types":
                 if(value instanceof SetLiteral) {
                     value = value.interpret(context);
-                    var types = Array.from(value.items.set).map(function (l) {
-                        return this.resolveType(annotation, context, l.value);
+                    var types = Array.from(value.items.set)
+                        .filter(function(l) {
+                           return l !== NullValue.instance;
+                        })
+                        .map(function (l) {
+                            return this.resolveType(annotation, context, l.value);
                     }, this);
-                    prop.validator = new TypeSetValidator(types);
+                    prop.validator = new TypeSetValidator(new Set(types));
+                    if(types.length==value.items.set.size)
+                        prop.validator = prop.validator.required();
                     break;
                 }
                 context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
@@ -158,10 +165,16 @@ WidgetPropertiesProcessor.prototype.loadPropertyDocumentLiteral = function(annot
             case "values":
                 if(value instanceof SetLiteral) {
                     value = value.interpret(context);
-                    var texts = Array.from(value.items.set).map(function (l) {
-                        return l.toString();
-                    });
-                    prop.validator = new ValueSetValidator(texts);
+                    var texts = Array.from(value.items.set)
+                        .filter(function(l) {
+                            return l !== NullValue.instance;
+                        })
+                        .map(function (l) {
+                            return l.toString();
+                        });
+                    prop.validator = new ValueSetValidator(new Set(texts));
+                    if(texts.length==value.items.set.size)
+                        prop.validator = prop.validator.required();
                     break;
                 }
                 context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
@@ -179,18 +192,30 @@ WidgetPropertiesProcessor.prototype.loadPropertySetLiteral = function(annotation
     var value = literal.interpret(context);
     var itemType = value.itemType || null;
     if(itemType instanceof TypeType) {
-        var types = Array.from(value.items.set).map(function (l) {
-            return this.resolveType(annotation, context, l.value);
-        }, this);
+        var types = Array.from(value.items.set)
+            .filter(function(l) {
+                return l !== NullValue.instance;
+            })
+            .map(function (l) {
+                return this.resolveType(annotation, context, l.value);
+            }, this);
         if(types.indexOf(null)>=0)
-            return null;
+            return null; // TODO something went wrong
         prop.validator = new TypeSetValidator(new Set(types));
+        if(types.length==value.items.set.size)
+            prop.validator = prop.validator.required();
         return prop;
     } else if(itemType === AnyType.instance) {
-        var texts = Array.from(value.items.set).map(function (l) {
-            return l.toString();
-        });
+        var texts = Array.from(value.items.set)
+            .filter(function(l) {
+                return l !== NullValue.instance;
+            })
+            .map(function (l) {
+                return l.toString();
+            });
         prop.validator = new ValueSetValidator(new Set(texts));
+        if(texts.length==value.items.set.size)
+            prop.validator = prop.validator.required();
         return prop;
     } else {
         context.problemListener.reportIllegalAnnotation(entry.key, "Expected a set of Types.");

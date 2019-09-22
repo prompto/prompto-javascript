@@ -16,11 +16,6 @@ ValueSetValidator.prototype.getType = function(context) {
 };
 
 
-ValueSetValidator.prototype.isRequired = function() {
-    return !this.values.has(null);
-};
-
-
 ValueSetValidator.prototype.validate = function(context, property) {
     var value = property.value;
     if(value.isLiteral()) {
