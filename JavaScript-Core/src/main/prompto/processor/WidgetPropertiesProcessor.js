@@ -8,6 +8,7 @@ var Property = require("../property/Property").Property;
 var PropertyMap = require("../property/PropertyMap").PropertyMap;
 var PropertiesType = require("../type/PropertiesType").PropertiesType;
 var AnyType = require("../type/AnyType").AnyType;
+var TextType = require("../type/TextType").TextType;
 var NativeType = require("../type/NativeType").NativeType;
 var MethodType = require("../type/MethodType").MethodType;
 var TypeType = require("../type/TypeType").TypeType;
@@ -205,7 +206,7 @@ WidgetPropertiesProcessor.prototype.loadPropertySetLiteral = function(annotation
         if(types.length==value.items.set.size)
             prop.validator = prop.validator.required();
         return prop;
-    } else if(itemType === AnyType.instance) {
+    } else if(itemType === AnyType.instance || itemType === TextType.instance) {
         var texts = Array.from(value.items.set)
             .filter(function(l) {
                 return l !== NullValue.instance;
