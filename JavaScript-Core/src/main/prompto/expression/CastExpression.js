@@ -1,6 +1,5 @@
 var Expression = require("./Expression").Expression;
 var AnyType = require("../type/AnyType").AnyType;
-var CategoryType = require("../type/CategoryType").CategoryType;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
@@ -9,14 +8,7 @@ var NativeType = require("../type/NativeType").NativeType;
 var IterableType = require("../type/IterableType").IterableType;
 var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-
-function anify(type) {
-    if(type instanceof CategoryType && type.name === "Any")
-        return AnyType.instance;
-    else
-        return type;
-}
-
+var anify = require("../utils/TypeUtils").anify;
 
 function getTargetType(context, itype) {
     if (itype instanceof IterableType) {
