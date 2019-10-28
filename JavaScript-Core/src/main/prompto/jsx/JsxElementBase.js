@@ -162,8 +162,8 @@ const HTML_PROPERTY_TYPES = `{
     onClick: ClickEventCallback,
     onContextMenu: ClickEventCallback,
     onChange: InputChangedCallback,
-    key: Any // TODO: for React only
-}`;
+    key: Any 
+}`; // TODO: 'key' is for React only
 
 
 let HTML_PROPERTIES_MAP = null;
