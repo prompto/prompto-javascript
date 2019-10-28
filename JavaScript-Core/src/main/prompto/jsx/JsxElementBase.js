@@ -161,7 +161,8 @@ const HTML_PROPERTY_TYPES = `{
     wrap: { values: <null, "hard", "soft">, help: "How the value of the form control is to be wrapped for form submission"},
     onClick: ClickEventCallback,
     onContextMenu: ClickEventCallback,
-    onChange: InputChangedCallback
+    onChange: InputChangedCallback,
+    key: Any // TODO: for React only
 }`;
 
 
