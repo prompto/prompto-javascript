@@ -1,7 +1,7 @@
 var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
 
 function InlinedProcessor() {
-    InlinedProcessor.call(this, "@InlinedProcessor");
+    AnnotationProcessor.call(this, "@InlinedProcessor");
     return this;
 }
 
