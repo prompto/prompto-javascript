@@ -160,13 +160,15 @@ UnresolvedCall.prototype.resolveMember = function(context) {
 
 UnresolvedCall.prototype.declare = function(transpiler) {
     this.resolve(transpiler.context);
-    this.resolved.declare(transpiler);
+    if(this.resolved)
+        this.resolved.declare(transpiler);
 };
 
 
 UnresolvedCall.prototype.transpile = function(transpiler) {
     this.resolve(transpiler.context);
-    this.resolved.transpile(transpiler);
+    if(this.resolved)
+        this.resolved.transpile(transpiler);
 };
 
 

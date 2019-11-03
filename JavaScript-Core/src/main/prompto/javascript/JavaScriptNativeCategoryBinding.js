@@ -1,4 +1,6 @@
 var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+if(global && !global.Event)
+    global.Event = function() {};
 
 function JavaScriptNativeCategoryBinding(identifier, module) {
 	NativeCategoryBinding.call(this);
