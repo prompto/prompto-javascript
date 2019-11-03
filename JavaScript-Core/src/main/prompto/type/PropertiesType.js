@@ -22,6 +22,11 @@ PropertiesType.prototype.isAssignableFrom = function(context, other) {
         return BaseType.prototype.isAssignableFrom.call(this, context, other);
 };
 
+PropertiesType.prototype.getMemberMethods = function(context, name) {
+    var prop = this.properties.get(name);
+    return prop ? prop.validator.getMethodDeclarations(context) : BaseType.prototype.getMemberMethods.call(this, context, name);
+};
+
 
 PropertiesType.prototype.checkMember = function(context, section, name) {
     var prop = this.properties.get(name);

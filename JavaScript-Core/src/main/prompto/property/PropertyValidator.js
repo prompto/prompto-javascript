@@ -18,4 +18,9 @@ PropertyValidator.prototype.required = function() {
 };
 
 
+PropertyValidator.prototype.getMethodDeclarations = function(context) {
+    return [];
+};
+
+
 exports.PropertyValidator = PropertyValidator;
