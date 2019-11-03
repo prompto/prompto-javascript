@@ -34,6 +34,7 @@ JsxElementBase.prototype.check = function(context) {
     return JsxType.instance;
 };
 
+// ensure this stays in sync with Java version
 const HTML_PROPERTY_TYPES = `{
     abbr: { type: Text, help: "Alternative label to use for the header cell when referencing the cell in other contexts"},
     accept: { type: any, help: "Hint for expected file type in file upload controls"},
