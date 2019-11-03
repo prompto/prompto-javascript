@@ -21,17 +21,23 @@ JsxElementBase.prototype.constructor = JsxElementBase;
 
 JsxElementBase.prototype.check = function(context) {
     if (isCharacterUpperCase(this.id.name[0])) {
-        var propertyMap = null;
-        var decl = context.getRegisteredDeclaration(this.id.name);
-        if (decl == null)
-            context.problemListener.reportUnknownIdentifier(this.id);
-        else if(decl instanceof CategoryDeclaration && decl.isWidget())
-            propertyMap = decl.getProperties(context);
+        var propertyMap = this.getPropertyMap(context);
         this.checkWidgetProperties(context, propertyMap);
     } else {
         this.checkHtmlProperties(context)
     }
     return JsxType.instance;
+};
+
+JsxElementBase.prototype.getPropertyMap = function(context) {
+    var decl = context.getRegisteredDeclaration(this.id.name);
+    if (decl == null) {
+        context.problemListener.reportUnknownIdentifier(this.id);
+        return null;
+    } else if(decl instanceof CategoryDeclaration && decl.isWidget())
+        return decl.getProperties(context);
+    else
+        return null;
 };
 
 // ensure this stays in sync with Java version
