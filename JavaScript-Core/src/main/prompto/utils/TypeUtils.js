@@ -95,7 +95,7 @@ function inferCommonCategoryType(context, type1, type2, trySwap) {
         return null;
 }
 
-function anify(type) {
+function anyfy(type) {
     if(type instanceof CategoryType && type.name === "Any")
         return AnyType.instance;
     else
@@ -105,4 +105,4 @@ function anify(type) {
 exports.convertFromJavaScript = convertFromJavaScript;
 exports.inferExpressionsType = inferExpressionsType;
 exports.inferElementType = inferElementType;
-exports.anify = anify;
+exports.anyfy = anyfy;
