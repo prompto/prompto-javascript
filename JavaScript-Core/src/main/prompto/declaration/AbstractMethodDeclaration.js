@@ -25,6 +25,13 @@ AbstractMethodDeclaration.prototype.check = function(context, isStart) {
     return this.returnType;
 };
 
+AbstractMethodDeclaration.prototype.checkChild = function(context) {
+    if(this.parameters!=null) {
+        this.parameters.check(context);
+    }
+    return this.returnType;
+};
+
 AbstractMethodDeclaration.prototype.declare = function(transpiler) {
     this.declareArguments(transpiler);
 };
