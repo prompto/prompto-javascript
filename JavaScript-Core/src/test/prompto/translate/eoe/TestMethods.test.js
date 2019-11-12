@@ -1,5 +1,9 @@
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+test('AbstractMember', () => {
+	compareResourceEOE('methods/abstractMember.pec');
+});
+
 test('Anonymous', () => {
 	compareResourceEOE('methods/anonymous.pec');
 });

@@ -1,5 +1,9 @@
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
+test('AbstractMember', () => {
+	compareResourceEME('methods/abstractMember.pec');
+});
+
 test('Anonymous', () => {
 	compareResourceEME('methods/anonymous.pec');
 });

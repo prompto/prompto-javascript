@@ -1,5 +1,9 @@
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
+test('AbstractMember', () => {
+	compareResourceOMO('methods/abstractMember.poc');
+});
+
 test('Anonymous', () => {
 	compareResourceOMO('methods/anonymous.poc');
 });

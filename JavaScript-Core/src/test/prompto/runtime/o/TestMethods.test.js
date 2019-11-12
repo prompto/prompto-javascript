@@ -10,6 +10,14 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted AbstractMember', () => {
+	checkInterpretedOutput('methods/abstractMember.poc');
+});
+
+test('Transpiled AbstractMember', () => {
+	checkTranspiledOutput('methods/abstractMember.poc');
+});
+
 test('Interpreted Anonymous', () => {
 	checkInterpretedOutput('methods/anonymous.poc');
 });
