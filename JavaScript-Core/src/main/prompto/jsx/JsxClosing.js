@@ -1,8 +1,13 @@
+var Section = require("../parser/Section").Section;
+
 function JsxClosing(id, suite) {
     this.id = id;
     this.suite = suite;
     return this;
 }
+
+JsxClosing.prototype = Object.create(Section.prototype);
+JsxClosing.prototype.constructor = JsxClosing;
 
 JsxClosing.prototype.check = function(context, opening) {
     if(this.id.name!=opening.id.name)

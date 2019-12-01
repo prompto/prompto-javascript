@@ -10,7 +10,6 @@ function JsxProperty(id, value, suite) {
 	return this;
 }
 
-
 JsxProperty.prototype = Object.create(Section.prototype);
 JsxProperty.prototype.constructor = JsxProperty;
 
