@@ -14,7 +14,8 @@ ProblemListener.prototype.readSection = function(section) {
 };
 
 ProblemListener.prototype.collectProblem = function(problem) {
-    throw new SyntaxError(problem.message);
+    if(problem.type == "error")
+        throw new SyntaxError(problem.message);
 };
 
 
