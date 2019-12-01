@@ -2853,17 +2853,17 @@ MPromptoBuilder.prototype.exitCssValue = function(ctx) {
 
 
 MPromptoBuilder.prototype.buildSection = function(node, section) {
-    var first = this.findFirstValidToken(node.start.tokenIndex);
-    var last = this.findLastValidToken(node.stop.tokenIndex);
+    var first = this.findFirstValidToken(node.start.tokenIndex, section instanceof jsx.JsxText);
+    var last = this.findLastValidToken(node.stop.tokenIndex, section instanceof jsx.JsxText);
     section.setSectionFrom(this.path, first, last, parser.Dialect.M);
 };
 
-MPromptoBuilder.prototype.findFirstValidToken = function(idx) {
+MPromptoBuilder.prototype.findFirstValidToken = function(idx, allowWS) {
     if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
         idx = 0;
     }
     do {
-        var token = this.readValidToken(idx++);
+        var token = this.readValidToken(idx++, allowWS);
         if(token!==null) {
             return token;
         }
@@ -2871,12 +2871,12 @@ MPromptoBuilder.prototype.findFirstValidToken = function(idx) {
     return null;
 };
 
-MPromptoBuilder.prototype.findLastValidToken = function(idx) {
+MPromptoBuilder.prototype.findLastValidToken = function(idx, allowWS) {
     if(idx===-1) { // happens because input.index() is called before any other read operation (bug?)
         idx = 0;
     }
     while(idx>=0) {
-        var token = this.readValidToken(idx--);
+        var token = this.readValidToken(idx--, allowWS);
         if(token!==null) {
             return token;
         }
@@ -2884,11 +2884,11 @@ MPromptoBuilder.prototype.findLastValidToken = function(idx) {
     return null;
 };
 
-MPromptoBuilder.prototype.readValidToken = function(idx) {
+MPromptoBuilder.prototype.readValidToken = function(idx, allowWS) {
     var token = this.input.get(idx);
     var text = token.text;
     // ignore trailing whitespace
-    if(text!==null && text.replace(/(\n|\r|\t|' ')/g,"").length>0) {
+    if(text!==null && (allowWS || text.replace(/(\n|\r|\t|' ')/g,"").length>0)) {
         return token;
     } else {
         return null;
