@@ -487,7 +487,17 @@ ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context,
 };
 
 ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
-    var parent = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom[0] : null;
+    this.transpileConstructor(transpiler);
+    transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+    this.processAnnotations(transpiler.context);
+    this.transpileLoaders(transpiler);
+    this.transpileMethods(transpiler);
+    this.transpileGetterSetters(transpiler);
+    transpiler.flush();
+};
+
+
+ConcreteCategoryDeclaration.prototype.transpileConstructor = function(transpiler) {
     transpiler.append("function ").append(this.name).append("(copyFrom, values, mutable) {");
     transpiler.indent();
     var categories = this.collectCategories(transpiler.context);
@@ -505,18 +515,14 @@ ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     transpiler.dedent();
     transpiler.append("}");
     transpiler.newLine();
+    var parent = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom[0] : null;
     if(parent)
         transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);").newLine();
     else
         transpiler.append(this.name).append(".prototype = Object.create($Root.prototype);").newLine();
     transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
-    transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
-    this.processAnnotations(transpiler.context);
-    this.transpileLoaders(transpiler);
-    this.transpileMethods(transpiler);
-    this.transpileGetterSetters(transpiler);
-    transpiler.flush();
 };
+
 
 ConcreteCategoryDeclaration.prototype.transpileLoaders = function(transpiler) {
     var attributes = this.getLocalAttributes();
