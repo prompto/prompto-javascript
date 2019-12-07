@@ -371,11 +371,13 @@ Context.prototype.getNativeBinding = function(type) {
         return this.globals.getNativeBinding(type);
 };
 
+
 function MethodDeclarationMap(name) {
     this.name = name;
     this.protos = {};
     return this;
 }
+
 
 MethodDeclarationMap.prototype.register = function(declaration, problemListener) {
     var proto = declaration.getProto();
@@ -385,10 +387,17 @@ MethodDeclarationMap.prototype.register = function(declaration, problemListener)
     this.protos[proto] = declaration;
 };
 
+
 MethodDeclarationMap.prototype.unregister = function(proto) {
     delete this.protos[proto];
     return Object.getOwnPropertyNames(this.protos).length === 0;
 };
+
+
+MethodDeclarationMap.prototype.hasProto = function(proto) {
+    return !!this.protos[proto];
+};
+
 
 MethodDeclarationMap.prototype.registerIfMissing = function(declaration) {
     var proto = declaration.getProto();

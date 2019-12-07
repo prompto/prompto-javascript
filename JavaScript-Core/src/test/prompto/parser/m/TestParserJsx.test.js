@@ -1,7 +1,7 @@
 var prompto = require("../../../../main/prompto/index");
 var antlr4 = require("antlr4");
 
-test('canParseAndTranslateMultilineElements', () => {
+test('parses and translates multi-line elements', () => {
 	var jsx = "return <a>\n\t<b/>\n\t<b/>\n</a>";
 	var parser = new prompto.parser.MCleverParser(jsx);
 	var stmt = parser.doParse(parser.return_statement, true);
@@ -12,7 +12,7 @@ test('canParseAndTranslateMultilineElements', () => {
 	expect(out).toEqual(jsx);
 });
 
-test('canParseAndTranslateMultilineAttributes', () => {
+test('parses and translates multi-line attributes', () => {
 	var jsx = "return <a \n\tx=\"abc\"\n\ty=\"def\"\n\tz=\"stuff\" />";
     var parser = new prompto.parser.MCleverParser(jsx);
     var stmt = parser.doParse(parser.return_statement, true);

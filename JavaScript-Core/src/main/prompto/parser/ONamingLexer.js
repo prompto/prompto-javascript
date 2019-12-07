@@ -1,4 +1,4 @@
-var OLexer = require("../../../generated/prompto/parser/OLexer").OLexer;
+var OLexer = require("./OLexer").OLexer;
 var Dialect = null;
 
 exports.resolve = function() {

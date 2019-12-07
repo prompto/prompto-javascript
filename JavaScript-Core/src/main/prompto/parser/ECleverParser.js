@@ -2,7 +2,7 @@ var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefi
 var fs = isNodeJs ? require("fs") : {}; // nodejs only
 var antlr4 = require("antlr4/index");
 var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
-var EParser = require("../../../generated/prompto/parser/EParser").EParser;
+var EParser = require("./EParser").EParser;
 var EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
 
 function createInput(input) {

@@ -4,6 +4,7 @@ exports.CategoryDeclaration = require('./CategoryDeclaration').CategoryDeclarati
 exports.ConcreteCategoryDeclaration = require('./ConcreteCategoryDeclaration').ConcreteCategoryDeclaration;
 exports.ConcreteWidgetDeclaration = require('./ConcreteWidgetDeclaration').ConcreteWidgetDeclaration;
 exports.DeclarationList = require('./DeclarationList').DeclarationList;
+exports.BaseMethodDeclaration = require('./BaseMethodDeclaration').BaseMethodDeclaration;
 exports.AbstractMethodDeclaration = require('./AbstractMethodDeclaration').AbstractMethodDeclaration;
 exports.ConcreteMethodDeclaration = require('./ConcreteMethodDeclaration').ConcreteMethodDeclaration;
 exports.NativeMethodDeclaration = require('./NativeMethodDeclaration').NativeMethodDeclaration;

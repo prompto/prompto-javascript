@@ -1,7 +1,7 @@
 /* do NOT delete this file, it is NOT generated */
 /* it has to be located in the generated folder */
 /* to work around jest resolver issues */
-var Parser = require("antlr4/index").Parser;
+var Parser = require("antlr4").Parser;
 
 function AbstractParser(input) {
 	Parser.call(this, input);

@@ -1,4 +1,4 @@
-var ELexer = require("../../../generated/prompto/parser/ELexer").ELexer;
+var ELexer = require("./ELexer").ELexer;
 var Dialect = require("./Dialect").Dialect;
 
 function EIndentingLexer(input) {
