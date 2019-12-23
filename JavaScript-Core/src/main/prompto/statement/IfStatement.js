@@ -32,9 +32,12 @@ IfStatement.prototype.setFinal = function(statements) {
 };
 
 IfStatement.prototype.check = function(context) {
-	return this.elements[0].check(context);
-	// TODO check consistency with additional elements
-}
+    var types = this.elements.map(function(element) {
+        return element.check(context);
+    });
+    // TODO check consistency across elements
+	return types[0];
+};
 
 IfStatement.prototype.interpret = function(context) {
 	for(var i=0;i<this.elements.length;i++) {
@@ -147,10 +150,10 @@ IfElement.prototype.constructor = IfElement;
 
 IfElement.prototype.check = function(context) {
     if(this.condition) {
-	var type = this.condition.check(context);
-	if(type!=BooleanType.instance) {
-		throw new SyntaxError("Expected a boolean condition!");
-	}
+        var type = this.condition.check(context);
+        if(type!=BooleanType.instance) {
+            throw new SyntaxError("Expected a boolean condition!");
+        }
     }
     context = this.downCast(context, false);
 	return this.statements.check(context, null);
