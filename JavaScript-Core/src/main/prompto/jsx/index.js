@@ -3,6 +3,7 @@ exports.JsxExpression = require("./JsxExpression").JsxExpression;
 exports.JsxElementBase = require("./JsxElementBase").JsxElementBase;
 exports.JsxElement = require("./JsxElement").JsxElement;
 exports.JsxClosing = require("./JsxClosing").JsxClosing;
+exports.JsxFragment = require("./JsxFragment").JsxFragment;
 exports.JsxProperty = require("./JsxProperty").JsxProperty;
 exports.JsxLiteral = require("./JsxLiteral").JsxLiteral;
 exports.JsxCode = require("./JsxCode").JsxCode;

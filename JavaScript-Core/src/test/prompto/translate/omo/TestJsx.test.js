@@ -24,6 +24,10 @@ test('EmptyAttribute', () => {
 	compareResourceOMO('jsx/emptyAttribute.poc');
 });
 
+test('Fragment', () => {
+	compareResourceOMO('jsx/fragment.poc');
+});
+
 test('HyphenName', () => {
 	compareResourceOMO('jsx/hyphenName.poc');
 });

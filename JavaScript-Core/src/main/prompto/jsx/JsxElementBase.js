@@ -29,6 +29,7 @@ JsxElementBase.prototype.check = function(context) {
     return JsxType.instance;
 };
 
+
 JsxElementBase.prototype.getPropertyMap = function(context) {
     var decl = context.getRegisteredDeclaration(this.id.name);
     if (decl == null) {

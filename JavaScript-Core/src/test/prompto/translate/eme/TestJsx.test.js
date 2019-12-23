@@ -24,6 +24,10 @@ test('EmptyAttribute', () => {
 	compareResourceEME('jsx/emptyAttribute.pec');
 });
 
+test('Fragment', () => {
+	compareResourceEME('jsx/fragment.pec');
+});
+
 test('HyphenName', () => {
 	compareResourceEME('jsx/hyphenName.pec');
 });

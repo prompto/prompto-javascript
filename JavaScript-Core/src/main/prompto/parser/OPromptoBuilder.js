@@ -2793,6 +2793,15 @@ OPromptoBuilder.prototype.exitJsx_identifier = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitJsx_fragment = function(ctx) {
+    var openingSuite = this.getHiddenTokensAfterToken(ctx.jsx_fragment_start().stop);
+    var closingSuite = this.getHiddenTokensBeforeToken(ctx.jsx_fragment_end().start);
+    var fragment = new jsx.JsxFragment(openingSuite, closingSuite);
+    fragment.children = this.getNodeValue(ctx.children_);
+    this.setNodeValue(ctx, fragment);
+};
+
+
 OPromptoBuilder.prototype.exitJsxLiteral = function(ctx) {
     var text = ctx.getText();
     this.setNodeValue(ctx, new jsx.JsxLiteral(text));

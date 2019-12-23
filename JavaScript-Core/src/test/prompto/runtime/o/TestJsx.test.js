@@ -50,6 +50,14 @@ test('Transpiled EmptyAttribute', () => {
 	checkTranspiledOutput('jsx/emptyAttribute.poc');
 });
 
+test('Interpreted Fragment', () => {
+	checkInterpretedOutput('jsx/fragment.poc');
+});
+
+test('Transpiled Fragment', () => {
+	checkTranspiledOutput('jsx/fragment.poc');
+});
+
 test('Interpreted HyphenName', () => {
 	checkInterpretedOutput('jsx/hyphenName.poc');
 });

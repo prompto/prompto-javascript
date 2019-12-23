@@ -50,6 +50,14 @@ test('Transpiled EmptyAttribute', () => {
 	checkTranspiledOutput('jsx/emptyAttribute.pmc');
 });
 
+test('Interpreted Fragment', () => {
+	checkInterpretedOutput('jsx/fragment.pmc');
+});
+
+test('Transpiled Fragment', () => {
+	checkTranspiledOutput('jsx/fragment.pmc');
+});
+
 test('Interpreted HyphenName', () => {
 	checkInterpretedOutput('jsx/hyphenName.pmc');
 });
