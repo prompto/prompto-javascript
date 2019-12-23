@@ -146,10 +146,12 @@ IfElement.prototype.constructor = IfElement;
 
 
 IfElement.prototype.check = function(context) {
+    if(this.condition) {
 	var type = this.condition.check(context);
 	if(type!=BooleanType.instance) {
 		throw new SyntaxError("Expected a boolean condition!");
 	}
+    }
     context = this.downCast(context, false);
 	return this.statements.check(context, null);
 };
