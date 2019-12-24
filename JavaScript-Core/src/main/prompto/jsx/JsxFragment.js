@@ -1,11 +1,10 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var JsxType = require("../type/JsxType").JsxType;
 
-function JsxFragment(openingSuite, closingSuite) {
+function JsxFragment(openingSuite) {
     IJsxExpression.call(this);
     this.openingSuite = openingSuite;
-    this.closingSuite = closingSuite;
-    return this;
+     return this;
 }
 
 
@@ -21,8 +20,6 @@ JsxFragment.prototype.toDialect = function(writer) {
         this.children.forEach(function(child) {
             child.toDialect(writer);
         });
-    if(this.closingSuite!=null)
-        writer.appendRaw(this.closingSuite);
     writer.append("</>");
 };
 

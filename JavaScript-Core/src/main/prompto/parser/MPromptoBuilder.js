@@ -2788,8 +2788,7 @@ MPromptoBuilder.prototype.exitJsx_identifier = function(ctx) {
 
 MPromptoBuilder.prototype.exitJsx_fragment = function(ctx) {
     var openingSuite = this.getWhiteSpacePlus(ctx.ws_plus(0));
-    var closingSuite = this.getWhiteSpacePlus(ctx.ws_plus(1));
-    var fragment = new jsx.JsxFragment(openingSuite, closingSuite);
+    var fragment = new jsx.JsxFragment(openingSuite);
     fragment.children = this.getNodeValue(ctx.children_);
     this.setNodeValue(ctx, fragment);
 };
