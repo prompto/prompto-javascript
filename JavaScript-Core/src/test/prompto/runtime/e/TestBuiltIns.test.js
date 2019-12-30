@@ -18,6 +18,14 @@ test('Transpiled BooleanText', () => {
 	checkTranspiledOutput('builtins/booleanText.pec');
 });
 
+test('Interpreted CategoryCategory', () => {
+	checkInterpretedOutput('builtins/categoryCategory.pec');
+});
+
+test('Transpiled CategoryCategory', () => {
+	checkTranspiledOutput('builtins/categoryCategory.pec');
+});
+
 test('Interpreted CategoryText', () => {
 	checkInterpretedOutput('builtins/categoryText.pec');
 });

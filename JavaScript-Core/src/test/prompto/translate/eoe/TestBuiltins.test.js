@@ -4,6 +4,10 @@ test('BooleanText', () => {
 	compareResourceEOE('builtins/booleanText.pec');
 });
 
+test('CategoryCategory', () => {
+	compareResourceEOE('builtins/categoryCategory.pec');
+});
+
 test('CategoryText', () => {
 	compareResourceEOE('builtins/categoryText.pec');
 });

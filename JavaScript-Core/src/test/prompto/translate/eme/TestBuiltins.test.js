@@ -4,6 +4,10 @@ test('BooleanText', () => {
 	compareResourceEME('builtins/booleanText.pec');
 });
 
+test('CategoryCategory', () => {
+	compareResourceEME('builtins/categoryCategory.pec');
+});
+
 test('CategoryText', () => {
 	compareResourceEME('builtins/categoryText.pec');
 });
