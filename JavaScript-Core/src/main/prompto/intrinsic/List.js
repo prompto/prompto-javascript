@@ -123,7 +123,9 @@ List.prototype.slice1Based = function(start, last) {
 };
 
 
-List.prototype.iterate = function (fn) {
+List.prototype.iterate = function (fn, instance) {
+    if(instance)
+        fn = fn.bind(instance);
     var self = this;
     return {
         length: self.length,
@@ -154,12 +156,21 @@ List.prototype.iterate = function (fn) {
     }
 };
 
+
 List.prototype.collectStorables = function(storablesToAdd) {
     this.forEach(function(item) {
         if(item && item.collectStorables)
             item.collectStorables(storablesToAdd);
-    });
+    }, this);
 };
+
+
+List.prototype.collectDbIds = function(idsToDelete) {
+    this.forEach(function(item) {
+        item.collectDbIds(idsToDelete);
+    }, this);
+};
+
 
 List.prototype.equals = function(o) {
     o = o || null;

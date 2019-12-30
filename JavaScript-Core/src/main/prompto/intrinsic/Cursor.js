@@ -14,6 +14,7 @@ Object.defineProperty(Cursor.prototype, "totalCount", {
     get: function() { return this.iterable.totalCount(); }
 });
 
+
 Cursor.prototype.iterate = function (fn, instance) {
     if(instance)
         fn = fn.bind(instance);
@@ -49,6 +50,10 @@ Cursor.prototype.toList = function() {
     while(iterator.hasNext())
         list.push(iterator.next());
     return list;
+};
+
+Cursor.prototype.collectDbIds = function(idsToDelete) {
+	this.toList().collectDbIds(idsToDelete);
 };
 
 Cursor.prototype.iterator = function() {
