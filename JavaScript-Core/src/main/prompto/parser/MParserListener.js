@@ -1946,6 +1946,15 @@ MParserListener.prototype.exitSymbolIdentifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#member_identifier.
+MParserListener.prototype.enterMember_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#member_identifier.
+MParserListener.prototype.exitMember_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#variable_identifier.
 MParserListener.prototype.enterVariable_identifier = function(ctx) {
 };

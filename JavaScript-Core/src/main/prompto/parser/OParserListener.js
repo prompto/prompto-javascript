@@ -1973,6 +1973,15 @@ OParserListener.prototype.exitSymbolIdentifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#member_identifier.
+OParserListener.prototype.enterMember_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#member_identifier.
+OParserListener.prototype.exitMember_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#variable_identifier.
 OParserListener.prototype.enterVariable_identifier = function(ctx) {
 };

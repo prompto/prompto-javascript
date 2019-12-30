@@ -630,6 +630,12 @@ MPromptoBuilder.prototype.exitTypeLiteral = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitMember_identifier = function(ctx) {
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
+};
+
+
 MPromptoBuilder.prototype.exitMemberSelector = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     this.setNodeValue(ctx, new expression.MemberSelector(null, name));

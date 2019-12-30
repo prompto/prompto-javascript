@@ -647,6 +647,12 @@ EPromptoBuilder.prototype.exitStore_statement = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitMember_identifier = function(ctx) {
+    var name = new grammar.Identifier(ctx.getText());
+    this.setNodeValue(ctx, name);
+};
+
+
 EPromptoBuilder.prototype.exitMemberSelector = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     this.setNodeValue(ctx, new expression.UnresolvedSelector(null, name));

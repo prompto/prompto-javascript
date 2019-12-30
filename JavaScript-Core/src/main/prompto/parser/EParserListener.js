@@ -2090,6 +2090,15 @@ EParserListener.prototype.exitSymbolIdentifier = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#member_identifier.
+EParserListener.prototype.enterMember_identifier = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#member_identifier.
+EParserListener.prototype.exitMember_identifier = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#variable_identifier.
 EParserListener.prototype.enterVariable_identifier = function(ctx) {
 };
