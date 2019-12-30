@@ -34,6 +34,9 @@ Cursor.prototype.iterate = function (fn, instance) {
                 array.push(iterator.next());
             return array;
         },
+        toList: function() {
+            return new List(false, this.toArray());
+        },
         getText: function() {
             return this.toArray().join(", ");
         }

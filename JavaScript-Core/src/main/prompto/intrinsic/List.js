@@ -145,6 +145,9 @@ List.prototype.iterate = function (fn) {
                 array.push(iterator.next());
             return array;
         },
+        toList: function() {
+            return self;
+        },
         getText: function() {
             return this.toArray().join(", ");
         }

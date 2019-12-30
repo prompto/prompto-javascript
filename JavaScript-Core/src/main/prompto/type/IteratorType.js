@@ -1,6 +1,7 @@
 var IterableType = require("./IterableType").IterableType;
 var IntegerType = require("./IntegerType").IntegerType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
 
 function IteratorType(itemType) {
     IterableType.call(this, new Identifier("Iterator<" + itemType.name + ">"), itemType);
@@ -44,5 +45,13 @@ IteratorType.prototype.declare = function(transpiler) {
     this.itemType.declare(transpiler);
 };
 
+IteratorType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "toList":
+            return [new ToListMethodDeclaration(this.itemType)];
+        default:
+            return IterableType.prototype.getMemberMethods.call(context, name);
+    }
+};
 
 exports.IteratorType = IteratorType;
