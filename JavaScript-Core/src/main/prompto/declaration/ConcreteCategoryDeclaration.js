@@ -31,7 +31,7 @@ ConcreteCategoryDeclaration.prototype.isWidget = function(context) {
     if(this.derivedFrom==null || this.derivedFrom.length!=1)
         return false;
     var derived = context.getRegisteredDeclaration(this.derivedFrom[0]);
-    return derived.isWidget(context);
+    return derived && derived.isWidget(context);
 };
 
 ConcreteCategoryDeclaration.prototype.toEDialect = function(writer) {
