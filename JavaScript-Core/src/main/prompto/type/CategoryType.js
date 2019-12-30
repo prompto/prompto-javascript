@@ -345,12 +345,16 @@ CategoryType.prototype.checkCategoryMember = function(context, section, decl, na
 
 
 CategoryType.prototype.declareMember = function(transpiler, section, name) {
+    if( "category" === name ) {
+        var Category = require("../intrinsic/$Root").Category;
+        transpiler.require(Category);
+    }
     // TODO visit attributes
 };
 
 
 CategoryType.prototype.transpileMember = function(transpiler, name) {
-    if ("text" == name)
+    if ("text" === name)
         transpiler.append("getText()");
     else
         transpiler.append(name);

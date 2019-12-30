@@ -502,15 +502,15 @@ ConcreteCategoryDeclaration.prototype.transpileConstructor = function(transpiler
     transpiler.indent();
     var categories = this.collectCategories(transpiler.context);
     if(this.storable) {
-        transpiler.append("if(!this.storable) {").newLine().indent()
-            .append("this.storable = $DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine()
+        transpiler.append("if(!this.$storable) {").newLine().indent()
+            .append("this.$storable = $DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine()
             .dedent().append("}").newLine();
     }
     this.transpileGetterSetterAttributes(transpiler);
     this.transpileSuperConstructor(transpiler);
-    transpiler.append("this.category = [").append(categories.join(', ')).append("];").newLine();
+    transpiler.append("this.$categories = [").append(categories.join(', ')).append("];").newLine();
     this.transpileLocalAttributes(transpiler);
-    transpiler.append("this.mutable = mutable;").newLine();
+    transpiler.append("this.$mutable = mutable;").newLine();
     transpiler.append("return this;");
     transpiler.dedent();
     transpiler.append("}");
@@ -548,7 +548,7 @@ ConcreteCategoryDeclaration.prototype.isEnumeratedAttribute = function(context, 
 ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transpiler) {
     var attributes = this.getLocalAttributes();
     if (attributes) {
-        transpiler.append("this.mutable = true;").newLine();
+        transpiler.append("this.$mutable = true;").newLine();
         transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
         attributes.forEach(function (attr) {
             var isEnum =  this.isEnumeratedAttribute(transpiler.context, attr);
