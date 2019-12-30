@@ -1,4 +1,5 @@
 var CategoryType = require("../type/CategoryType").CategoryType;
+var Identifier = require("../grammar/Identifier").Identifier;
 var TypeUtils = require("../utils/TypeUtils");
 var Instance = require("./Value").Instance;
 var $DataStore = require("../store/DataStore").$DataStore;
