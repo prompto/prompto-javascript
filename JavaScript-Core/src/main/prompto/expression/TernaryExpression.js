@@ -1,4 +1,5 @@
 var Expression = require("./Expression").Expression;
+var TypeMap = require("../type/TypeMap").TypeMap;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
@@ -36,10 +37,10 @@ TernaryExpression.prototype.check = function(context) {
         context.problemListener.reportIllegalAssignment(this.condition, BooleanType.instance, type);
     var trueType = this.ifTrue.check(context);
     var falseType = this.ifFalse.check(context);
-    if(trueType.isAssignableFrom(context, falseType))
-       return trueType;
-    else if(falseType.isAssignableFrom(context, trueType))
-        return falseType;
+    var types = new TypeMap();
+    types[trueType.name] = trueType;
+    types[falseType.name] = falseType;
+    return types.inferType(context, this);
 };
 
 TernaryExpression.prototype.interpret = function(context) {
