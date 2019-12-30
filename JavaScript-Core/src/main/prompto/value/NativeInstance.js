@@ -6,7 +6,7 @@ var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var Variable = require("../runtime/Variable").Variable;
 
 function NativeInstance(context, declaration, instance) {
-    Instance.call(this,new CategoryType(declaration.id));
+    Instance.call(this, new CategoryType(declaration.id));
 	this.declaration = declaration;
     this.storable = false;
     if(declaration.storable && $DataStore.instance) {
@@ -39,6 +39,8 @@ function getActiveGetters() {
 }
 
 NativeInstance.prototype.getMemberValue = function(context, attrName) {
+    if("category" === attrName)
+        return this.getCategory(context);
     var stacked = getActiveGetters()[attrName] || null;
     var first = stacked==null;
     if(first)
@@ -51,6 +53,13 @@ NativeInstance.prototype.getMemberValue = function(context, attrName) {
         }
     }
 };
+
+
+NativeInstance.prototype.getCategory = function(context) {
+    var decl = context.getRegisteredDeclaration(new Identifier("Category"));
+    return new NativeInstance(context, decl, this.declaration);
+};
+
 
 NativeInstance.prototype.doGetMember = function(context, attrName, allowGetter) {
     var getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;

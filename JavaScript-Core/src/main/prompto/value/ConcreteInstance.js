@@ -11,6 +11,7 @@ var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var Value = require("./Value").Value;
 var Instance = require("./Value").Instance;
+var NativeInstance = null;
 var $DataStore = require("../store/DataStore").$DataStore;
 var TypeUtils = require("../utils/TypeUtils");
 var EnumeratedNativeDeclaration = null;
@@ -18,6 +19,7 @@ var EnumeratedCategoryDeclaration = null;
 
 exports.resolve = function() {
     CategoryType = require("../type/CategoryType").CategoryType;
+    NativeInstance = require("./NativeInstance").NativeInstance;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
 };
@@ -112,6 +114,8 @@ function getActiveGetters() {
 ConcreteInstance.prototype.getMemberValue = function(context, attrName) {
     /* if(typeof(attrName) != typeof(""))
         throw "What?"; */
+    if("category" === attrName)
+        return this.getCategory(context);
     var stacked = getActiveGetters()[attrName] || null;
     var first = stacked==null;
     if(first)
@@ -125,12 +129,19 @@ ConcreteInstance.prototype.getMemberValue = function(context, attrName) {
     }
 };
 
+
+ConcreteInstance.prototype.getCategory = function(context) {
+    var decl = context.getRegisteredDeclaration(new Identifier("Category"));
+    return new NativeInstance(context, decl, this.declaration);
+};
+
+
 ConcreteInstance.prototype.doGetMember = function(context, attrName, allowGetter) {
     var getter = allowGetter ? this.declaration.findGetter(context, attrName) : null;
     if (getter != null) {
         context = context.newInstanceContext(this, null).newChildContext();
         return getter.interpret(context);
-    } else if (this.declaration.hasAttribute(context, attrName) || "dbId" == attrName) {
+    } else if (this.declaration.hasAttribute(context, attrName) || "dbId" === attrName) {
         return this.values[attrName] || NullValue.instance;
     } else if ("text" == attrName) {
         return new TextValue(this.toString());

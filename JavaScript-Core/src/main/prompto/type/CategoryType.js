@@ -306,6 +306,8 @@ CategoryType.prototype.checkExists = function(context) {
 };
 
 CategoryType.prototype.checkMember = function(context, section, name) {
+    if( "category" === name.toString())
+        return new CategoryType(new Identifier("Category"));
     var decl = context.getRegisteredDeclaration(this.name);
     if (decl == null) {
         context.problemListener.reportUnknownCategory(this.id);
