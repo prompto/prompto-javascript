@@ -6,6 +6,7 @@ var InternalError = require("../error/InternalError").InternalError;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+var ListType = require("../type/ListType").ListType;
 
 
 function FilteredExpression(itemId, source, predicate) {
@@ -41,7 +42,7 @@ FilteredExpression.prototype.check = function(context) {
         // TODO
     } else
         throw new SyntaxError("Expecting an arrow expression!");
-    return sourceType;
+    return new ListType(itemType);
 };
 
 
