@@ -4,7 +4,7 @@ var VersionValue = require("../value/VersionValue").VersionValue;
 var Version = require("../intrinsic/Version").Version;
 
 function VersionLiteral(text) {
-    var version = Version.Parse(text.substring(2,text.length-1));
+    var version = Version.parse(text.substring(2,text.length-1));
 	Literal.call(this, text, new VersionValue(version));
 	return this;
 }
@@ -21,7 +21,7 @@ VersionLiteral.prototype.declare = function(transpiler) {
 };
 
 VersionLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("Version.Parse(").append(this.text).append(")");
+    transpiler.append("Version.parse(").append(this.text).append(")");
 };
 
 exports.VersionLiteral = VersionLiteral;

@@ -5,7 +5,7 @@ function Version(major, minor, fix) {
     return this;
 }
 
-Version.Parse = function(text) {
+Version.parse = function(text) {
     if(text.startsWith("v"))
         text = text.substring(1);
     var d1 = text.indexOf('.');
