@@ -70,8 +70,8 @@ MemStore.prototype.fetchMany = function(query, mutable) {
     var totalCount = docs.length;
     docs = this.sort(query, docs);
     docs = this.slice(query, docs);
-    var iterator = new StoredIterator(docs, totalCount);
-    return new exports.Cursor(mutable, iterator)
+    var iterable = new StoredIterable(docs, totalCount);
+    return new exports.Cursor(mutable, iterable)
 };
 
 MemStore.prototype.fetchManyAsync = function(query, mutable, andThen) {
@@ -157,12 +157,16 @@ MemStore.prototype.newStorableDocument = function(categories, dbIdListener) {
     return new StorableDocument(categories, dbIdListener);
 };
 
-function StoredIterator(docs, totalCount) {
-    this.index = 0;
+function StoredIterable(docs, totalCount) {
     this.count = function() { return docs.length; };
     this.totalCount = function() { return totalCount; };
-    this.hasNext = function() { return this.index < docs.length; };
-    this.next = function() { return docs[this.index++]; };
+    this.iterator = function() {
+        var index = 0;
+        return {
+            hasNext: function() { return index < docs.length; },
+            next: function() { return docs[index++]; }
+        };
+    }
     return this;
 }
 
