@@ -200,7 +200,7 @@ FetchManyExpression.prototype.transpile = function(transpiler) {
     transpiler.append("(function() {").indent();
     this.transpileQuery(transpiler);
     var mutable = this.typ ? this.typ.mutable : false;
-    transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine();
+    transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine().dedent();
     transpiler.append("})()");
 };
 
