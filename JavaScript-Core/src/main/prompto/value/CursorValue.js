@@ -5,11 +5,12 @@ var IntegerValue = require("./IntegerValue").IntegerValue;
 var Value = require("./Value").Value;
 var ListValue = require("./ListValue").ListValue;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+var IteratorValue = require("./IteratorValue").IteratorValue;
 
-function CursorValue(context, itemType, iterDocuments) {
+function CursorValue(context, itemType, iterable) {
     Value.call(this, new CursorType(itemType));
     this.context = context;
-    this.iterDocuments = iterDocuments;
+    this.iterable = iterable;
     this.mutable = itemType.mutable || false;
     return this;
 }
@@ -23,12 +24,12 @@ CursorValue.prototype.isEmpty = function() {
 };
 
 CursorValue.prototype.count = function() {
-    return this.iterDocuments.count();
+    return this.iterable.count();
 };
 
 
 CursorValue.prototype.totalCount = function() {
-    return this.iterDocuments.totalCount();
+    return this.iterable.totalCount();
 };
 
 
@@ -41,18 +42,7 @@ CursorValue.prototype.toString = function() {
 
 
 CursorValue.prototype.getIterator = function() {
-    return this;
-};
-
-
-CursorValue.prototype.hasNext = function() {
-    return this.iterDocuments.hasNext();
-};
-
-CursorValue.prototype.next = function() {
-    var stored = this.iterDocuments.next();
-    var itemType = this.readItemType(stored);
-    return itemType.newInstanceFromStored(this.context, stored);
+    return new CursorIterator(this);
 };
 
 CursorValue.prototype.readItemType = function(stored) {
@@ -74,24 +64,14 @@ CursorValue.prototype.getMemberValue = function(context, name) {
 };
 
 CursorValue.prototype.filter = function(filter) {
-    var cursor = new CursorValue(this.context, this.type.itemType, this.iterDocuments);
-    cursor.source = this;
-    cursor.current = null;
-    cursor.hasNext = function() {
-        this.current = null;
-        while(this.source.hasNext()) {
-            var current = this.source.next();
-            if(filter(current)) {
-                this.current = current;
-                return true;
-            }
-        }
-        return false;
-    };
-    cursor.next = function() {
-        return this.current;
-    };
-    return cursor;
+    var result = new ListValue(this.type.itemType);
+    var iter = this.getIterator();
+    while(iter.hasNext()) {
+        var current = iter.next();
+        if (filter(current))
+            result.add(current);
+    }
+    return result;
 };
 
 
@@ -102,5 +82,22 @@ CursorValue.prototype.toListValue = function(context) {
         result.add(iter.next());
     return result;
 };
+
+
+function CursorIterator(cursor) {
+    IteratorValue.call(this, cursor.type.itemType, cursor.iterable);
+    this.cursor = cursor;
+    return this;
+}
+
+CursorIterator.prototype = Object.create(IteratorValue.prototype);
+CursorIterator.prototype.constructor = CursorIterator;
+
+CursorIterator.prototype.next = function() {
+    var stored = this.iterator.next();
+    var itemType = this.cursor.readItemType(stored);
+    return itemType.newInstanceFromStored(this.cursor.context, stored);
+};
+
 
 exports.CursorValue = CursorValue;
