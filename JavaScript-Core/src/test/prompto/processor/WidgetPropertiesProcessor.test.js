@@ -81,24 +81,6 @@ test('Transpiles ReactWidgetProps1', () => {
 });
 
 
-test('Transpiles ReactWidgetProps2 with warnings', () => {
-    var warning = null;
-    var listener = new prompto.problem.ProblemCollector()
-    listener.reportInvalidMember = function(section, name) {
-        warning = "invalid";
-    }
-    var decls = parseResource("annotations/ReactWidgetProps2.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
-    context.problemListener = listener;
-    decls.register(context);
-    decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
-    var js = prompto.runtime.Transpiler.transpile(context, decl);
-    expect(js).toEqual(expect.stringContaining("some stuff"));
-    expect(warning).toEqual("invalid");
-});
-
-
 test('Transpiles Required', () => {
     var decls = parseResource("annotations/WidgetProps5.poc");
     var context = prompto.runtime.Context.newGlobalContext();
