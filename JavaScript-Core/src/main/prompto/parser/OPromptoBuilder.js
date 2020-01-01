@@ -2730,9 +2730,9 @@ OPromptoBuilder.prototype.exitJsxChild = function(ctx) {
 
 OPromptoBuilder.prototype.exitJsxCode = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, new jsx.JsxCode(exp));
+    var suite = this.getHiddenTokensAfterNode(ctx.RCURL());
+    this.setNodeValue(ctx, new jsx.JsxCode(exp, suite));
 };
-
 
 
 OPromptoBuilder.prototype.exitJsxExpression = function(ctx) {
@@ -2840,8 +2840,8 @@ OPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
     var nameSuite = this.getHiddenTokensAfterToken(ctx.name.stop);
     var attributes = ctx.jsx_attribute()
         .map(cx => this.getNodeValue(cx), this);
-    var openingSuite = this.getHiddenTokensAfterNode(ctx.GT());
-    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, nameSuite, attributes, openingSuite));
+    var suite = this.getHiddenTokensAfterNode(ctx.GT());
+    this.setNodeValue(ctx, new jsx.JsxSelfClosing(name, nameSuite, attributes, suite));
 };
 
 

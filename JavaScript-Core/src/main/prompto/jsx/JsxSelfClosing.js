@@ -1,9 +1,9 @@
 var JsxElementBase = require("./JsxElementBase").JsxElementBase;
 
-function JsxSelfClosing(id, nameSuite, properties, openingSuite) {
+function JsxSelfClosing(id, nameSuite, properties, elementSuite) {
     JsxElementBase.call(this, id, properties);
     this.nameSuite = nameSuite;
-    this.openingSuite = openingSuite;
+    this.elementSuite = elementSuite;
     return this;
 }
 
@@ -20,8 +20,8 @@ JsxSelfClosing.prototype.toDialect = function(writer) {
         prop.toDialect(writer);
     });
     writer.append("/>");
-    if(this.openingSuite!=null)
-        writer.appendRaw(this.openingSuite);
+    if(this.elementSuite!=null)
+        writer.appendRaw(this.elementSuite);
 };
 
 

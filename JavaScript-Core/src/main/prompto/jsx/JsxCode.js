@@ -1,9 +1,10 @@
 var IJsxExpression = require("./IJsxExpression").IJsxExpression;
 var JsxType = require("../type/JsxType").JsxType;
 
-function JsxCode(expression) {
+function JsxCode(expression, suite) {
     IJsxExpression.call(this);
 	this.expression = expression;
+	this.suite = suite;
 	return this;
 }
 
@@ -20,6 +21,8 @@ JsxCode.prototype.toDialect = function(writer) {
     writer.append("{");
     this.expression.toDialect(writer);
     writer.append("}");
+    if(this.suite!=null)
+        writer.appendRaw(this.suite);
 };
 
 
