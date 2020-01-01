@@ -26,6 +26,14 @@ test('Transpiled IntegerEnum', () => {
 	checkTranspiledOutput('enums/integerEnum.poc');
 });
 
+test('Interpreted SwitchEnum', () => {
+	checkInterpretedOutput('enums/switchEnum.poc');
+});
+
+test('Transpiled SwitchEnum', () => {
+	checkTranspiledOutput('enums/switchEnum.poc');
+});
+
 test('Interpreted TextEnum', () => {
 	checkInterpretedOutput('enums/textEnum.poc');
 });

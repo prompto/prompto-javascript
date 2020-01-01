@@ -8,6 +8,10 @@ test('IntegerEnum', () => {
 	compareResourceOEO('enums/integerEnum.poc');
 });
 
+test('SwitchEnum', () => {
+	compareResourceOEO('enums/switchEnum.poc');
+});
+
 test('TextEnum', () => {
 	compareResourceOEO('enums/textEnum.poc');
 });

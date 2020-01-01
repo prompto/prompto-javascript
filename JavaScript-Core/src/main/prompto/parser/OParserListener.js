@@ -2522,6 +2522,15 @@ OParserListener.prototype.exitUUIDLiteral = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#SymbolLiteral.
+OParserListener.prototype.enterSymbolLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#SymbolLiteral.
+OParserListener.prototype.exitSymbolLiteral = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#TypeLiteral.
 OParserListener.prototype.enterTypeLiteral = function(ctx) {
 };

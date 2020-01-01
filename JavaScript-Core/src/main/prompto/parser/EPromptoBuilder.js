@@ -359,16 +359,25 @@ EPromptoBuilder.prototype.exitSymbol_identifier = function(ctx) {
     this.setNodeValue(ctx, name);
 };
 
+
 EPromptoBuilder.prototype.exitNative_symbol = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, new expression.NativeSymbol(name, exp));
 };
 
+
 EPromptoBuilder.prototype.exitSymbolIdentifier = function(ctx) {
     var name = this.getNodeValue(ctx.symbol_identifier());
     this.setNodeValue(ctx, name);
 };
+
+
+EPromptoBuilder.prototype.exitSymbolLiteral = function(ctx) {
+    var name = ctx.getText();
+    this.setNodeValue(ctx, new expression.SymbolExpression(new grammar.Identifier(name)));
+};
+
 
 EPromptoBuilder.prototype.exitBlobType = function(ctx) {
     this.setNodeValue(ctx, type.BlobType.instance);

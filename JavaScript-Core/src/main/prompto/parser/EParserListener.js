@@ -2639,6 +2639,15 @@ EParserListener.prototype.exitUUIDLiteral = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#SymbolLiteral.
+EParserListener.prototype.enterSymbolLiteral = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#SymbolLiteral.
+EParserListener.prototype.exitSymbolLiteral = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#TypeLiteral.
 EParserListener.prototype.enterTypeLiteral = function(ctx) {
 };

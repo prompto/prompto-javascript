@@ -397,6 +397,11 @@ OPromptoBuilder.prototype.exitSymbolIdentifier = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitSymbolLiteral = function(ctx) {
+    var name = ctx.getText();
+    this.setNodeValue(ctx, new expression.SymbolExpression(new grammar.Identifier(name)));
+};
+
 
 OPromptoBuilder.prototype.exitBlobType = function(ctx) {
     this.setNodeValue(ctx, type.BlobType.instance);
