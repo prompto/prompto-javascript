@@ -354,21 +354,21 @@ BaseType.prototype.checkMember = function(context, section, name) {
     if("text" == name)
         return TextType.instance;
     else {
-        context.problemListener.reportInvalidMember(section, this, name);
+        context.problemListener.reportUnknownAttribute(section, this, name);
         return VoidType.instance;
     }
 };
 
 
 BaseType.prototype.checkStaticMember = function(context, section, name) {
-    context.problemListener.reportInvalidMember(section, this, name);
+    context.problemListener.reportUnknownAttribute(section, this, name);
     return VoidType.instance;
 };
 
 
 BaseType.prototype.declareMember = function(transpiler, section, name) {
     if("text" !== name)
-        transpiler.context.problemListener.reportInvalidMember(section, section, name);
+        transpiler.context.problemListener.reportUnknownAttribute(section, section, name);
 };
 
 BaseType.prototype.transpileMember = function(transpiler, name) {
