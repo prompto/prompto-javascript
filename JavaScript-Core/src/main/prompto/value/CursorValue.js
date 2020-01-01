@@ -85,7 +85,7 @@ CursorValue.prototype.toListValue = function(context) {
 
 
 function CursorIterator(cursor) {
-    IteratorValue.call(this, cursor.type.itemType, cursor.iterable);
+    IteratorValue.call(this, cursor.type.itemType, cursor.iterable.iterator());
     this.cursor = cursor;
     return this;
 }

@@ -2,9 +2,9 @@ var Value = require("./Value").Value;
 var IteratorType = require("../type/IteratorType").IteratorType;
 
 /* thin wrapper to expose an iterator as a prompto value */
-function IteratorValue(itemType, iterable) {
+function IteratorValue(itemType, iterator) {
     Value.call(this, new IteratorType(itemType));
-    this.iterator = iterable.iterator();
+    this.iterator = iterator;
     return this;
 }
 

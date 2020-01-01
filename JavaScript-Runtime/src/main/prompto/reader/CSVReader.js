@@ -17,6 +17,7 @@ function csvRead(text, columns, separator, encloser) {
     return list;
 }
 
+
 function CSVIterator(text, columns, separator, encloser) {
     this.text = text || null;
     this.index = 0;
@@ -34,10 +35,10 @@ var CR = '\r'.charCodeAt(0);
 var LF = '\n'.charCodeAt(0);
 var ESC = '\\'.charCodeAt(0);
 
-
 CSVIterator.prototype.iterator = function() {
     return this;
 };
+
 
 CSVIterator.prototype.hasNext = function() {
     if(this.nextChar==0)
