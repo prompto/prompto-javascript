@@ -10,9 +10,9 @@ BinaryType.prototype = Object.create(NativeType.prototype);
 BinaryType.prototype.constructor = BinaryType;
 
 BinaryType.prototype.checkMember = function(context, section, name) {
-    if ("name" === name) {
+    if ("mimeType" === name ) {
         return TextType.instance;
-    } else if ("format" === name ) {
+    } else if ("url" === name ) {
         return TextType.instance;
     } else
         return NativeType.prototype.checkMember.call(context, section, name);
