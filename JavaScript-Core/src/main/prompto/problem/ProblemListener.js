@@ -10,7 +10,7 @@ ProblemListener.prototype = Object.create(ProblemCollector.prototype);
 ProblemListener.prototype.constructor = ProblemListener;
 
 ProblemListener.prototype.readSection = function(section) {
-    return {}; // avoid NPE when section unused
+    return {}; // avoid NPE
 };
 
 ProblemListener.prototype.collectProblem = function(problem) {

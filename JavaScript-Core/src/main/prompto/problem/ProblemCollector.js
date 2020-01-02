@@ -159,21 +159,23 @@ ProblemCollector.prototype.reportIncompatibleTypes = function(section, left, rig
     this.reportError(section, "Type " + left.name + " is not compatible with " + right.name);
 };
 
+
 ProblemCollector.prototype.reportError = function(section, message) {
-    var problem = this.readSection(section);
-    problem.type = "error";
-    problem.message = message;
-    this.collectProblem(problem);
+    this.reportProblem(section, message, "error");
 };
 
 
 ProblemCollector.prototype.reportWarning = function(section, message) {
+    this.reportProblem(section, message, "warning");
+};
+
+
+ProblemCollector.prototype.reportProblem = function(section, message, type) {
     var problem = this.readSection(section);
-    problem.type = "warning";
+    problem.type = type;
     problem.message = message;
     this.collectProblem(problem);
 };
-
 
 
 exports.ProblemCollector = ProblemCollector;
