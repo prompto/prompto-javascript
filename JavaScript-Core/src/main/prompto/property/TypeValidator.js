@@ -18,10 +18,20 @@ TypeValidator.prototype.getType = function(context) {
 };
 
 
-TypeValidator.prototype.validate = function(context, property) {
-    var actual = this.type instanceof MethodType ? property.checkProto(context, this.type) : property.check(context);
+TypeValidator.prototype.validate = function(context, jsxProp) {
+    var actual = this.type instanceof MethodType ? jsxProp.checkProto(context, this.type) : jsxProp.check(context);
     if(!this.type.isAssignableFrom(context, anyfy(actual)))
-        context.problemListener.reportIllegalAssignment(property, this.type, actual);
+        context.problemListener.reportIllegalAssignment(jsxProp, this.type, actual);
+};
+
+
+TypeValidator.prototype.declare = function(transpiler, jsxProp) {
+    jsxProp.declareProto(transpiler, this.type);
+};
+
+
+TypeValidator.prototype.transpile = function(transpiler, jsxProp) {
+    jsxProp.transpileProto(transpiler, this.type);
 };
 
 

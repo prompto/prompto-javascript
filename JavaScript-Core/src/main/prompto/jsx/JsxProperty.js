@@ -29,6 +29,18 @@ JsxProperty.prototype.checkProto = function(context, proto) {
         return VoidType.instance; // force failure
 };
 
+
+JsxProperty.prototype.declareProto = function(transpiler, proto) {
+    if(this.value!=null)
+        this.value.declareProto(transpiler, proto);
+};
+
+
+JsxProperty.prototype.transpileProto = function(transpiler, proto) {
+    if(this.value!=null)
+        this.value.transpileProto(transpiler, proto);
+};
+
 JsxProperty.prototype.toDialect = function(writer) {
     writer.append(this.id.name);
     if(this.value!=null) {

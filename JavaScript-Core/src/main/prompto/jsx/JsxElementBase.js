@@ -19,18 +19,26 @@ JsxElementBase.prototype = Object.create(IJsxExpression.prototype);
 JsxElementBase.prototype.constructor = JsxElementBase;
 
 
+JsxElementBase.prototype.isHtmlTag = function(context) {
+    return !isCharacterUpperCase(this.id.name[0]);
+};
+
 JsxElementBase.prototype.check = function(context) {
-    if (isCharacterUpperCase(this.id.name[0])) {
-        var propertyMap = this.getPropertyMap(context);
+    if (this.isHtmlTag())
+        this.checkHtmlProperties(context);
+    else {
+        var propertyMap = this.getWidgetPropertyMap(context);
         this.checkWidgetProperties(context, propertyMap);
-    } else {
-        this.checkHtmlProperties(context)
     }
     return JsxType.instance;
 };
 
 
 JsxElementBase.prototype.getPropertyMap = function(context) {
+    return this.isHtmlTag() ? JsxElementBase.getHtmlProperties(context, this.id.name) : this.getWidgetPropertyMap(context);
+};
+
+JsxElementBase.prototype.getWidgetPropertyMap = function(context) {
     var decl = context.getRegisteredDeclaration(this.id.name);
     if (decl == null) {
         context.problemListener.reportUnknownIdentifier(this.id);
@@ -195,22 +203,13 @@ JsxElementBase.getHtmlProperties = function(context, name) {
 JsxElementBase.prototype.checkWidgetProperties = function(context, propertyMap) {
     var actualNames = new Set();
     if(this.properties!==null)
-        this.properties.forEach(function(prop) {
-            if(actualNames.has(prop.id.name))
-                context.problemListener.reportDuplicateProperty(prop, prop.id.name);
+        this.properties.forEach(function(jsxprop) {
+            if(actualNames.has(jsxprop.id.name))
+                context.problemListener.reportDuplicateProperty(jsxprop, jsxprop.id.name);
             else
-                actualNames.add(prop.id.name);
-            if(propertyMap) {
-                var declared = propertyMap.get(prop.id.name);
-                if(declared==null)
-                    declared = JsxElementBase.getHtmlProperties(context).get(prop.id.name);
-                if(declared==null)
-                    context.problemListener.reportUnknownProperty(prop, prop.id.name);
-                else
-                    declared.validate(context, prop)
-            } else
-                prop.check(context);
-        });
+                actualNames.add(jsxprop.id.name);
+            this.checkWidgetProperty(context, propertyMap, jsxprop);
+        }, this);
     if(propertyMap!==null) {
         for(var name in propertyMap.entries) {
             var prop = propertyMap.entries[name];
@@ -221,21 +220,36 @@ JsxElementBase.prototype.checkWidgetProperties = function(context, propertyMap) 
 };
 
 
+JsxElementBase.prototype.checkWidgetProperty = function(context, propertyMap, jsxProp) {
+    var name = jsxProp.id.name;
+    if(propertyMap) {
+        var property = propertyMap.get(name);
+        if(property==null)
+            property = JsxElementBase.getHtmlProperties(context).get(name);
+        if(property==null)
+            context.problemListener.reportUnknownProperty(jsxProp, name);
+        else
+            property.validate(context, jsxProp)
+    } else
+        jsxProp.check(context);
+};
+
+
 JsxElementBase.prototype.checkHtmlProperties = function(context) {
     var propertyMap = JsxElementBase.getHtmlProperties(context);
     var actualNames = new Set();
     if(this.properties!==null)
-        this.properties.forEach(function(prop) {
-            if(actualNames.has(prop.id.name))
-                context.problemListener.reportDuplicateProperty(prop, prop.id.name);
+        this.properties.forEach(function(jsxProp) {
+            if(actualNames.has(jsxProp.id.name))
+                context.problemListener.reportDuplicateProperty(jsxProp, jsxProp.id.name);
             else
-                actualNames.add(prop.id.name);
-            prop.check(context);
-            var declared = propertyMap.get(prop.id.name);
-            if(declared==null)
-                context.problemListener.reportUnknownProperty(prop, prop.id.name);
+                actualNames.add(jsxProp.id.name);
+            jsxProp.check(context);
+            var property = propertyMap.get(jsxProp.id.name);
+            if(property==null)
+                context.problemListener.reportUnknownProperty(jsxProp, jsxProp.id.name);
             else
-                declared.validate(context, prop)
+                property.validate(context, jsxProp)
         });
     Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
         var prop = propertyMap.entries[name];
@@ -245,7 +259,7 @@ JsxElementBase.prototype.checkHtmlProperties = function(context) {
 };
 
 JsxElementBase.prototype.declare = function(transpiler) {
-    if (isCharacterUpperCase(this.id.name[0])) {
+    if (!this.isHtmlTag()) {
         var decl = transpiler.context.getRegisteredDeclaration(this.id.name);
         if(decl==null)
             transpiler.context.problemListener.reportUnknownIdentifier(this.id);
@@ -253,13 +267,26 @@ JsxElementBase.prototype.declare = function(transpiler) {
             decl.declare(transpiler);
     }
     if(this.properties!=null) {
-        this.properties.forEach(function (prop) {
-            prop.declare(transpiler);
-        });
+        var propertyMap = this.getPropertyMap(transpiler.context);
+        this.properties.forEach(function (jsxprop) {
+            this.declareProperty(transpiler, propertyMap, jsxprop);
+        }, this);
     }
     this.declareChildren(transpiler);
 };
 
+
+JsxElementBase.prototype.declareProperty = function(transpiler, propertyMap, jsxProp) {
+    var name = jsxProp.id.name;
+    var property = propertyMap ? propertyMap.get(name) : null;
+    if(!property && !this.isHtmlTag())
+        property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
+    if(property)
+        property.declare(transpiler, jsxProp);
+    else
+        jsxProp.declare(transpiler);
+
+};
 
 
 JsxElementBase.prototype.declareChildren = function(transpiler) {
@@ -277,22 +304,38 @@ JsxElementBase.prototype.transpile = function(transpiler) {
     if(this.properties==null || this.properties.length===0)
         transpiler.append("null");
     else {
+        var propertyMap = this.getPropertyMap(transpiler.context);
         transpiler.append("{");
-        this.properties.forEach(function(property) {
-            property.transpile(transpiler);
+        this.properties.forEach(function(jsxProp) {
+            this.transpileProperty(transpiler, propertyMap, jsxProp);
             transpiler.append(", ");
-        });
+        }, this);
         transpiler.trimLast(2).append("}");
     }
     this.transpileChildren(transpiler);
     transpiler.append(")");
 };
 
+
+JsxElementBase.prototype.transpileProperty = function(transpiler, propertyMap, jsxProp) {
+    var name = jsxProp.id.name;
+    var property = propertyMap ? propertyMap.get(name) : null;
+    if(!property && !this.isHtmlTag())
+        property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
+    if(property)
+        property.transpile(transpiler, jsxProp);
+    else
+        jsxProp.transpile(transpiler);
+
+};
+
+
 JsxElementBase.prototype.transpileChildren = function(transpiler) {
     // nothing to do
 };
 
 JsxElementBase.set_HTML_TEST_MODE = function(mode) {
+    HTML_PROPERTIES_MAP = null;
     HTML_TEST_MODE = mode;
 };
 

@@ -24,6 +24,23 @@ JsxExpression.prototype.checkProto = function(context, proto) {
         return this.expression.check(context);
 };
 
+
+JsxExpression.prototype.declareProto = function(transpiler, proto) {
+    if(this.expression instanceof ArrowExpression)
+        return proto.declareArrowExpression(transpiler, this.expression);
+    else
+        return this.expression.declare(transpiler);
+};
+
+
+JsxExpression.prototype.transpileProto = function(transpiler, proto) {
+    if(this.expression instanceof ArrowExpression)
+        return proto.transpileArrowExpression(transpiler, this.expression);
+    else
+        return this.expression.transpile(transpiler);
+};
+
+
 JsxExpression.prototype.isLiteral = function() {
     return this.expression instanceof Literal;
 };

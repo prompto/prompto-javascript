@@ -172,6 +172,7 @@ test('Transpiles Callback', () => {
     var decls = parseResource("annotations/WidgetProps11.poc");
     var context = prompto.runtime.Context.newGlobalContext();
     decls.register(context);
+    prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(false);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
     var js = prompto.runtime.Transpiler.transpile(context, decl);

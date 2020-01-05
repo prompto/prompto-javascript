@@ -23,4 +23,14 @@ PropertyValidator.prototype.getMethodDeclarations = function(context) {
 };
 
 
+PropertyValidator.prototype.declare = function(transpiler, jsxProp) {
+    jsxProp.declare(transpiler);
+};
+
+
+PropertyValidator.prototype.transpile = function(transpiler, jsxProp) {
+    jsxProp.transpile(transpiler);
+};
+
+
 exports.PropertyValidator = PropertyValidator;

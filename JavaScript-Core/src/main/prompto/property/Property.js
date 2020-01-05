@@ -25,6 +25,15 @@ Property.prototype.validate = function(context, jsxProperty) {
 };
 
 
+Property.prototype.declare = function(transpiler, jsxProperty) {
+    this._validator.declare(transpiler, jsxProperty);
+};
+
+
+Property.prototype.transpile = function(transpiler, jsxProperty) {
+    this._validator.transpile(transpiler, jsxProperty);
+};
+
 Property.prototype.isRequired = function() {
     return this._validator.isRequired();
 };
