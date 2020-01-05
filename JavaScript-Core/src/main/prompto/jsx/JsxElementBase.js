@@ -200,7 +200,6 @@ JsxElementBase.prototype.checkWidgetProperties = function(context, propertyMap) 
                 context.problemListener.reportDuplicateProperty(prop, prop.id.name);
             else
                 actualNames.add(prop.id.name);
-            prop.check(context);
             if(propertyMap) {
                 var declared = propertyMap.get(prop.id.name);
                 if(declared==null)
@@ -209,7 +208,8 @@ JsxElementBase.prototype.checkWidgetProperties = function(context, propertyMap) 
                     context.problemListener.reportUnknownProperty(prop, prop.id.name);
                 else
                     declared.validate(context, prop)
-            }
+            } else
+                prop.check(context);
         });
     if(propertyMap!==null) {
         for(var name in propertyMap.entries) {
@@ -278,8 +278,8 @@ JsxElementBase.prototype.transpile = function(transpiler) {
         transpiler.append("null");
     else {
         transpiler.append("{");
-        this.properties.forEach(function(attr) {
-            attr.transpile(transpiler);
+        this.properties.forEach(function(property) {
+            property.transpile(transpiler);
             transpiler.append(", ");
         });
         transpiler.trimLast(2).append("}");
