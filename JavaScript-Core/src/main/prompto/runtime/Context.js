@@ -262,6 +262,14 @@ Context.prototype.getRegisteredDeclaration = function(name) {
 };
 
 
+Context.prototype.getTypedDeclaration = function(klass, name) {
+    var decl = this.getRegisteredDeclaration(name);
+    if(decl==null || !klass.prototype.isPrototypeOf(decl))
+        return null;
+    else
+        return decl;
+};
+
 Context.prototype.getLocalDeclaration = function(name) {
     var actual = this.declarations[name] || null;
     if (actual !== null) {
@@ -583,7 +591,7 @@ InstanceContext.prototype.getRegistered = function(name) {
     if(methods && !methods.isEmpty())
         return methods;
     else if(decl.hasAttribute(this, name))
-        return this.getRegisteredDeclaration(typeof(AttributeDeclaration), name);
+        return this.getTypedDeclaration(typeof(AttributeDeclaration), name);
     else
         return null;
 };
@@ -599,7 +607,7 @@ InstanceContext.prototype.registerWidgetField = function(id, type, override) {
     }
 };
 
-InstanceContext.prototype.getRegisteredDeclaration = function(klass, name) {
+InstanceContext.prototype.getTypedDeclaration = function(klass, name) {
     if (klass === MethodDeclarationMap) {
         var decl = this.getDeclaration();
         if (decl) {
@@ -608,7 +616,7 @@ InstanceContext.prototype.getRegisteredDeclaration = function(klass, name) {
                 return methods;
         }
     }
-    return Context.prototype.getRegisteredDeclaration.call(this, klass, name)
+    return Context.prototype.getTypedDeclaration.call(this, klass, name)
 };
 
 
@@ -650,7 +658,7 @@ InstanceContext.prototype.getDeclaration = function() {
     if(this.instance !== null)
         return this.instance.declaration;
     else
-        return this.getRegisteredDeclaration(this.instanceType.name);
+        return this.getTypedDeclaration(CategoryDeclaration, this.instanceType.name);
 };
 
 InstanceContext.prototype.readValue = function(id) {
