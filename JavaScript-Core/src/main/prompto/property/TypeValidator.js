@@ -26,12 +26,18 @@ TypeValidator.prototype.validate = function(context, jsxProp) {
 
 
 TypeValidator.prototype.declare = function(transpiler, jsxProp) {
-    jsxProp.declareProto(transpiler, this.type);
+    if(this.type instanceof MethodType)
+        jsxProp.declareProto(transpiler, this.type);
+    else
+        jsxProp.declare(transpiler);
 };
 
 
 TypeValidator.prototype.transpile = function(transpiler, jsxProp) {
-    jsxProp.transpileProto(transpiler, this.type);
+    if(this.type instanceof MethodType)
+        jsxProp.transpileProto(transpiler, this.type);
+    else
+        jsxProp.transpile(transpiler);
 };
 
 
