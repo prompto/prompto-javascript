@@ -1037,6 +1037,15 @@ MParserListener.prototype.exitThisExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#SuperExpression.
+MParserListener.prototype.enterSuperExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#SuperExpression.
+MParserListener.prototype.exitSuperExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#SelectorExpression.
 MParserListener.prototype.enterSelectorExpression = function(ctx) {
 };
@@ -2537,6 +2546,15 @@ MParserListener.prototype.enterThis_expression = function(ctx) {
 
 // Exit a parse tree produced by MParser#this_expression.
 MParserListener.prototype.exitThis_expression = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#super_expression.
+MParserListener.prototype.enterSuper_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#super_expression.
+MParserListener.prototype.exitSuper_expression = function(ctx) {
 };
 
 
