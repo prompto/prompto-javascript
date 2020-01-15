@@ -827,7 +827,7 @@ EPromptoBuilder.prototype.exitArrowStatementsBody = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
-    var exp = this.getNodeValue(ctx.exp);
+    var exp = ctx.exp1 ? this.getNodeValue(ctx.exp1) : this.getNodeValue(ctx.exp2);
     var args = this.getNodeValue(ctx.args);
     var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
@@ -1608,6 +1608,11 @@ EPromptoBuilder.prototype.exitElseIfStatementListItem = function(ctx) {
 EPromptoBuilder.prototype.exitIfStatement = function(ctx) {
     var stmt = this.getNodeValue(ctx.stmt);
     this.setNodeValue(ctx, stmt);
+};
+
+
+EPromptoBuilder.prototype.exitSuperExpression = function(ctx) {
+    this.setNodeValue(ctx, new expression.SuperExpression());
 };
 
 

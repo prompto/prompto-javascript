@@ -206,9 +206,13 @@ IfElement.prototype.toMDialect = function(writer) {
 }
 
 IfElement.prototype.toEDialect = function(writer) {
+    var context = writer.context;
     if(this.condition!=null) {
         writer.append("if ");
         this.condition.toDialect(writer);
+        context = this.downCast(context, false);
+        if (context !== writer.context)
+            writer = writer.newChildWriter(context);
     }
     writer.append(":").newLine().indent();
     this.statements.toDialect(writer);
@@ -216,11 +220,15 @@ IfElement.prototype.toEDialect = function(writer) {
 };
 
 IfElement.prototype.toODialect = function(writer) {
+    var context = writer.context;
     if(this.condition!=null)
     {
         writer.append("if (");
         this.condition.toDialect(writer);
         writer.append(") ");
+        context = this.downCast(context, false);
+        if (context !== writer.context)
+            writer = writer.newChildWriter(context);
     }
     var curly = this.statements!=null && this.statements.length>1;
     if(curly)

@@ -1630,6 +1630,11 @@ MPromptoBuilder.prototype.exitIfStatement = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitSuperExpression = function(ctx) {
+    this.setNodeValue(ctx, new expression.SuperExpression());
+};
+
+
 MPromptoBuilder.prototype.exitSwitchStatement = function(ctx) {
     var stmt = this.getNodeValue(ctx.stmt);
     this.setNodeValue(ctx, stmt);

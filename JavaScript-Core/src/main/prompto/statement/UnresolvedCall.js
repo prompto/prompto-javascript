@@ -11,7 +11,7 @@ var CategoryType = require("../type/CategoryType").CategoryType;
 var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-
+var Dialect = require("../parser/Dialect").Dialect;
 
 function UnresolvedCall(callable, args) {
     BaseStatement.call(this);
@@ -38,6 +38,8 @@ UnresolvedCall.prototype.toDialect = function(writer) {
         this.callable.toDialect(writer);
         if(this.args!=null)
            this.args.toDialect(writer);
+        else if(writer.dialect !== Dialect.E)
+            writer.append("()");
     }
 };
 
@@ -93,6 +95,10 @@ UnresolvedCall.prototype.resolve = function(context) {
 		} else if (this.callable instanceof MemberSelector) {
             this.resolved = this.resolveMember(context);
 		}
+		if(this.resolved)
+		    return this.resolved;
+		else
+            context.problemListener.reportUnkownMethod(this.caller);
 	}
 };
 

@@ -1643,6 +1643,11 @@ OPromptoBuilder.prototype.exitIfStatement = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitSuperExpression = function(ctx) {
+    this.setNodeValue(ctx, new expression.SuperExpression());
+};
+
+
 OPromptoBuilder.prototype.exitSwitchStatement = function(ctx) {
 	var stmt = this.getNodeValue(ctx.stmt);
 	this.setNodeValue(ctx, stmt);

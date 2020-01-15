@@ -88,8 +88,9 @@ CodeWriter.prototype.newLocalWriter = function() {
     return new CodeWriter(this.dialect, this.context.newLocalContext(), this.indenter);
 };
 
-CodeWriter.prototype.newChildWriter = function() {
-    return new CodeWriter(this.dialect, this.context.newChildContext(), this.indenter);
+CodeWriter.prototype.newChildWriter = function(context) {
+    context = context || this.context.newChildContext();
+    return new CodeWriter(this.dialect, context, this.indenter);
 };
 
 CodeWriter.prototype.newInstanceWriter = function(type) {

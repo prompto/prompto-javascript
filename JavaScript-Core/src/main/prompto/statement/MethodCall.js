@@ -302,22 +302,32 @@ MethodCall.prototype.transpileFound = function(transpiler, dialect) {
 
 
 MethodCall.prototype.findDeclaration = function(context) {
-	// look for method as value
-	try {
-		var o = context.getValue(this.selector.id);
-		if(o instanceof ClosureValue) {
-			return new ClosureDeclaration(o);
-		} else if(o instanceof ArrowValue) {
+    var method = this.findRegistered(context);
+    if(method)
+        return method;
+    else {
+        // look for declared method
+        var finder = new MethodFinder(context, this);
+        return finder.findMethod(true);
+    }
+};
+
+
+MethodCall.prototype.findRegistered = function(context) {
+    // look for method as value
+    if(!this.selector.parent)  try {
+        var o = context.getValue(this.selector.id);
+        if(o instanceof ClosureValue) {
+            return new ClosureDeclaration(o);
+        } else if(o instanceof ArrowValue) {
             return new ArrowDeclaration(o);
         }
     } catch (e) {
-		if(!(e instanceof PromptoError)) {
-			throw e;
-		}
-	}
-	// look for declared method
-	var finder = new MethodFinder(context,this);
-	return finder.findMethod(true);
+        if(!(e instanceof PromptoError)) {
+            throw e;
+        }
+    }
+    return null;
 };
 
 exports.MethodCall = MethodCall;

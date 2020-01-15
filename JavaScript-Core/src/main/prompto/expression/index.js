@@ -38,6 +38,7 @@ exports.ReadOneExpression = require("./ReadOneExpression").ReadOneExpression;
 exports.TypeExpression = require("./TypeExpression").TypeExpression;
 exports.CastExpression = require("./CastExpression").CastExpression;
 exports.ThisExpression = require("./ThisExpression").ThisExpression;
+exports.SuperExpression = require("./SuperExpression").SuperExpression;
 exports.NativeSymbol = require("./NativeSymbol").NativeSymbol;
 exports.CategorySymbol = require("./CategorySymbol").CategorySymbol;
 exports.UnresolvedSelector = require("./UnresolvedSelector").UnresolvedSelector;

@@ -58,6 +58,17 @@ CategoryType.prototype.toDialect = function(writer) {
 };
 
 
+CategoryType.prototype.getSuperType = function(context) {
+    var decl = this.getDeclaration(context);
+    if(decl instanceof CategoryDeclaration) {
+        var derived = decl.derivedFrom;
+        if(derived && derived.length)
+            return new CategoryType(derived[0]);
+    }
+    context.problemListener.reportNoSuperType(this);
+};
+
+
 CategoryType.prototype.declare = function(transpiler) {
     if(this.name==="Any") {
         var Any = require("../intrinsic/Any").Any;
