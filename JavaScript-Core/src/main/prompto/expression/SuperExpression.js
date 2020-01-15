@@ -1,6 +1,7 @@
 var ThisExpression = require("./ThisExpression").ThisExpression;
 var InstanceContext = require("../runtime/Context").InstanceContext;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var AnyType = require("../type/AnyType").AnyType;
 
 function SuperExpression() {
     ThisExpression.call(this);
@@ -26,7 +27,7 @@ SuperExpression.prototype.getSuperType = function(context) {
             return type;
     }
     else
-        context.problemListener.reportNoSuperType(section, this);
+        context.problemListener.reportNoSuperType(this, AnyType.instance);
 };
 
 

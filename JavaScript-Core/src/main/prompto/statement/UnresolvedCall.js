@@ -15,10 +15,10 @@ var Dialect = require("../parser/Dialect").Dialect;
 
 function UnresolvedCall(callable, args) {
     BaseStatement.call(this);
-	this.resolved = null;
-	this.callable = callable;
-	this.args = args || null;
-	return this;
+    this.resolved = null;
+    this.callable = callable;
+    this.args = args || null;
+    return this;
 }
 
 UnresolvedCall.prototype  = Object.create(BaseStatement.prototype);
@@ -47,20 +47,20 @@ UnresolvedCall.prototype.toDialect = function(writer) {
 UnresolvedCall.prototype.toString = function() {
     return this.callable.toString() + (this.args!=null ? this.args.toString() : "");
 };
-	
+
 UnresolvedCall.prototype.check = function(context) {
     return this.resolveAndCheck(context);
 };
 
 
 UnresolvedCall.prototype.resolveAndCheck = function(context) {
-	this.resolve(context);
-	return this.resolved ? this.resolved.check(context) : VoidType.instance;
+    this.resolve(context);
+    return this.resolved ? this.resolved.check(context) : VoidType.instance;
 };
 
 UnresolvedCall.prototype.interpret = function(context) {
-	this.resolve(context);
-	return this.resolved ? this.resolved.interpret(context) : null;
+    this.resolve(context);
+    return this.resolved ? this.resolved.interpret(context) : null;
 };
 
 UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
@@ -87,19 +87,19 @@ UnresolvedCall.prototype.transpileFound = function(transpiler, dialect) {
 
 
 UnresolvedCall.prototype.resolve = function(context) {
-	if(this.resolved===null) {
-		if(this.callable instanceof UnresolvedIdentifier) {
+    if(this.resolved===null) {
+        if(this.callable instanceof UnresolvedIdentifier) {
             this.resolved = this.resolveUnresolvedIdentifier(context);
         } else if(this.callable instanceof UnresolvedSelector) {
             this.resolved = this.resolveUnresolvedSelector(context);
-		} else if (this.callable instanceof MemberSelector) {
+        } else if (this.callable instanceof MemberSelector) {
             this.resolved = this.resolveMember(context);
-		}
-		if(this.resolved)
-		    return this.resolved;
-		else
+        }
+        if(this.resolved)
+            return this.resolved;
+        else
             context.problemListener.reportUnkownMethod(this.caller);
-	}
+    }
 };
 
 
@@ -110,7 +110,7 @@ UnresolvedCall.prototype.resolveUnresolvedSelector = function(context) {
 
 
 UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
-	var id = this.callable.id;
+    var id = this.callable.id;
     var call, decl = null;
     // if this happens in the context of a member method, then we need to check for category members first
     var instance = context.getClosestInstanceContext();
@@ -158,7 +158,7 @@ UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
 
 
 UnresolvedCall.prototype.resolveMember = function(context) {
-	var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
+    var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
     call.copySectionFrom(this);
     return call;
 };
