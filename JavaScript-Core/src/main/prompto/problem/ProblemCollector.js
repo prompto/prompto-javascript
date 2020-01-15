@@ -160,6 +160,10 @@ ProblemCollector.prototype.reportIncompatibleTypes = function(section, left, rig
 };
 
 
+ProblemCollector.prototype.reportNoSuperType = function(section, type) {
+    this.reportError(section, "Type " + type.name + " has no super type");
+};
+
 ProblemCollector.prototype.reportError = function(section, message) {
     this.reportProblem(section, message, "error");
 };

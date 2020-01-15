@@ -58,14 +58,14 @@ CategoryType.prototype.toDialect = function(writer) {
 };
 
 
-CategoryType.prototype.getSuperType = function(context) {
+CategoryType.prototype.getSuperType = function(context, section) {
     var decl = this.getDeclaration(context);
     if(decl instanceof CategoryDeclaration) {
         var derived = decl.derivedFrom;
         if(derived && derived.length)
             return new CategoryType(derived[0]);
     }
-    context.problemListener.reportNoSuperType(this);
+    context.problemListener.reportNoSuperType(section, this);
 };
 
 

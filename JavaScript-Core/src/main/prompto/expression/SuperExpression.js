@@ -21,12 +21,12 @@ SuperExpression.prototype.getSuperType = function(context) {
     if (context instanceof InstanceContext) {
         var type = context.instanceType;
         if(type instanceof CategoryType)
-            return type.getSuperType(context);
+            return type.getSuperType(context, this);
         else
             return type;
     }
     else
-        throw new SyntaxError ("Not in an instance context!");
+        context.problemListener.reportNoSuperType(section, this);
 };
 
 
