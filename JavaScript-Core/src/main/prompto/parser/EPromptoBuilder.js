@@ -630,10 +630,11 @@ EPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitSelectorExpression = function(ctx) {
-    var parent = this.getNodeValue(ctx.parent);
     var selector = this.getNodeValue(ctx.selector);
-    selector.parent = parent;
-    this.setNodeValue(ctx, selector);
+    if(selector) {
+        selector.parent = this.getNodeValue(ctx.parent);
+        this.setNodeValue(ctx, selector);
+    }
 };
 
 EPromptoBuilder.prototype.exitSet_literal = function(ctx) {

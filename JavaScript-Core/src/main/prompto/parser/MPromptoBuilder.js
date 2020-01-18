@@ -113,13 +113,15 @@ MPromptoBuilder.prototype.exitSelectableExpression = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitSelectorExpression = function(ctx) {
-    var parent = this.getNodeValue(ctx.parent);
     var selector = this.getNodeValue(ctx.selector);
-    if(selector instanceof statement.UnresolvedCall)
-        selector.setParent(parent);
-    else
-        selector.parent = parent;
-    this.setNodeValue(ctx, selector);
+    if(selector) {
+        var parent = this.getNodeValue(ctx.parent);
+        if(selector instanceof statement.UnresolvedCall)
+            selector.setParent(parent);
+        else
+            selector.parent = parent;
+        this.setNodeValue(ctx, selector);
+    }
 };
 
 MPromptoBuilder.prototype.exitSet_literal = function(ctx) {
