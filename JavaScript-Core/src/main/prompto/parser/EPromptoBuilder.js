@@ -914,19 +914,23 @@ EPromptoBuilder.prototype.exitStatement_list = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitAbstract_method_declaration = function(ctx) {
-    var type = this.getNodeValue(ctx.typ);
+    var typ = this.getNodeValue(ctx.typ);
+    if(typ instanceof type.CategoryType)
+        typ.mutable = ctx.MUTABLE()!=null;
     var name = this.getNodeValue(ctx.name);
     var args = this.getNodeValue(ctx.args);
-    this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, type));
+    this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, typ));
 };
 
 
 EPromptoBuilder.prototype.exitConcrete_method_declaration = function(ctx) {
-    var type = this.getNodeValue(ctx.typ);
+    var typ = this.getNodeValue(ctx.typ);
+    if(typ instanceof type.CategoryType)
+        typ.mutable = ctx.MUTABLE()!=null;
     var name = this.getNodeValue(ctx.name);
     var args = this.getNodeValue(ctx.args);
     var stmts = this.getNodeValue(ctx.stmts);
-    this.setNodeValue(ctx, new declaration.ConcreteMethodDeclaration(name, args, type, stmts));
+    this.setNodeValue(ctx, new declaration.ConcreteMethodDeclaration(name, args, typ, stmts));
 };
 
 
