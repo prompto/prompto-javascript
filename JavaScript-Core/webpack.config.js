@@ -4,6 +4,7 @@ var target_dir = path.resolve(__dirname, "../../prompto-factory/CodeFactory/Code
 module.exports = {
     entry: './src/main/index-full.js',
     output: {
+        globalObject: 'this',
         path: target_dir,
         filename: 'prompto.core.bundle.js'
     },
