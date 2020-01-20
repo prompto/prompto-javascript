@@ -8,4 +8,4 @@ exports.Window = require('./Window');
 exports.openWindow = exports.Window.openWindow;
 var FileRefModule = require('./FileRef');
 exports.FileRef = FileRefModule.FileRef;
-exports.selectFile = FileRefModule.selectFile;
+exports.selectFileRef = FileRefModule.selectFileRef;

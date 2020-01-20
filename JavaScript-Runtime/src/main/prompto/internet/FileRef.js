@@ -15,12 +15,12 @@ FileRef.prototype.readBlob = function() {
 
 exports.FileRef = FileRef;
 
-exports.selectFile = function(callback, mimeTypes) {
+exports.selectFileRef = function(callback, mimeTypes) {
     var input = document.createElement("input");
     input.type = 'file';
     input.style = { display: "none" };
     if(mimeTypes && mimeTypes.length)
-        input.accept = mimeTypes.join(",");
+        input.accept = Array.from(mimeTypes.set).join(",");
     input.onchange = function(e) {
         callback(new FileRef(e.target.files[0]));
     };
