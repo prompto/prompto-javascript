@@ -28,6 +28,7 @@ var $DataStore = require("../store/DataStore").$DataStore;
 var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
+var MethodDeclarationMap = null;
 
 exports.resolve = function() {
     ArgumentList = require("../grammar/ArgumentList").ArgumentList;
@@ -39,6 +40,7 @@ exports.resolve = function() {
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
     EnumeratedCategoryType = require("./EnumeratedCategoryType").EnumeratedCategoryType;
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
+    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 };
 
 
@@ -50,6 +52,33 @@ function CategoryType(id, mutable) {
 
 CategoryType.prototype = Object.create(BaseType.prototype);
 CategoryType.prototype.constructor =  CategoryType;
+
+
+CategoryType.prototype.anyfy = function() {
+    if (this.name === "Any")
+        return AnyType.instance;
+    else
+        return this;
+};
+
+
+CategoryType.prototype.resolve = function(context, onError) {
+    var type = this.anyfy();
+    if(type instanceof NativeType)
+        return type;
+    var decl = context.getRegisteredDeclaration(type.name);
+    if(!decl) {
+        if(onError) {
+            onError(type);
+            return null;
+        } else
+            throw new SyntaxError("Unkown type: " + type.name);
+    } else if(decl instanceof MethodDeclarationMap)
+        return new MethodType(decl.getFirst());
+    else
+        return decl.getType(context);
+};
+
 
 CategoryType.prototype.toDialect = function(writer) {
     if (this.mutable)

@@ -9,8 +9,6 @@ var PropertyMap = require("../property/PropertyMap").PropertyMap;
 var PropertiesType = require("../type/PropertiesType").PropertiesType;
 var AnyType = require("../type/AnyType").AnyType;
 var TextType = require("../type/TextType").TextType;
-var NativeType = require("../type/NativeType").NativeType;
-var MethodType = require("../type/MethodType").MethodType;
 var TypeType = require("../type/TypeType").TypeType;
 var InternalError = require("../error/InternalError").InternalError;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -19,7 +17,6 @@ var TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
 var ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
 var NullValue = require("../value/NullValue").NullValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
 function WidgetPropertiesProcessor() {
     AnnotationProcessor.call(this, "@WidgetProperties");
@@ -132,7 +129,7 @@ WidgetPropertiesProcessor.prototype.loadPropertyDocumentLiteral = function(annot
                 return null;
             case "type":
                 if(value instanceof TypeLiteral) {
-                    var type = this.resolveTypeLiteral(annotation, context, value);
+                    var type = value.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
                     if (type) {
                         prop.validator = new TypeValidator(type);
                         break;
@@ -154,7 +151,7 @@ WidgetPropertiesProcessor.prototype.loadPropertyDocumentLiteral = function(annot
                            return l !== NullValue.instance;
                         })
                         .map(function (l) {
-                            return this.resolveType(annotation, context, l.value);
+                            return l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
                     }, this);
                     prop.validator = new TypeSetValidator(new Set(types));
                     if(types.length==value.items.set.size)
@@ -198,7 +195,7 @@ WidgetPropertiesProcessor.prototype.loadPropertySetLiteral = function(annotation
                 return l !== NullValue.instance;
             })
             .map(function (l) {
-                return this.resolveType(annotation, context, l.value);
+                return l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) );
             }, this);
         if(types.indexOf(null)>=0)
             return null; // TODO something went wrong
@@ -225,30 +222,11 @@ WidgetPropertiesProcessor.prototype.loadPropertySetLiteral = function(annotation
 };
 
 WidgetPropertiesProcessor.prototype.loadPropertyTypeLiteral = function(annotation, context, entry, prop, literal) {
-    var type = this.resolveTypeLiteral(annotation, context, literal);
+    var type = literal.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
     if(!type)
         return null;
     prop.validator = new TypeValidator(type);
     return prop;
 };
-
-WidgetPropertiesProcessor.prototype.resolveTypeLiteral = function(annotation, context, literal) {
-    return this.resolveType(annotation, context, literal.value);
-};
-
-
-WidgetPropertiesProcessor.prototype.resolveType = function(annotation, context, type) {
-    if(type instanceof NativeType)
-        return type;
-    var decl = context.getRegisteredDeclaration(type.name);
-    if(!decl) {
-        context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + type.name);
-        return null;
-    } else if(decl instanceof MethodDeclarationMap)
-        return new MethodType(decl.getFirst());
-    else
-        return decl.getType(context);
-};
-
 
 exports.WidgetPropertiesProcessor = WidgetPropertiesProcessor;

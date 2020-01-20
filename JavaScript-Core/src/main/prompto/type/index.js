@@ -11,6 +11,7 @@ exports.TimeType = require('./TimeType').TimeType;
 exports.PeriodType = require('./PeriodType').PeriodType;
 exports.VersionType = require('./VersionType').VersionType;
 exports.ListType = require('./ListType').ListType;
+exports.SetType = require('./SetType').SetType;
 exports.DictionaryType = require('./DictionaryType').DictionaryType;
 exports.CategoryType = require('./CategoryType').CategoryType;
 exports.ResourceType = require('./ResourceType').ResourceType;

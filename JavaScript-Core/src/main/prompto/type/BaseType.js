@@ -22,6 +22,15 @@ Object.defineProperty(BaseType.prototype, "name", {
     }
 });
 
+BaseType.prototype.anyfy = function() {
+    return this;
+};
+
+
+BaseType.prototype.resolve = function(context, onError) {
+    return this;
+};
+
 
 BaseType.prototype.getTranspiledName = function() {
     return this.name;

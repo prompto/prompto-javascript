@@ -8,5 +8,3 @@ exports.utf8BufferToString = require('./Utils').utf8BufferToString;
 exports.stringToUtf8Buffer = require('./Utils').stringToUtf8Buffer;
 exports.equalArrays = require('./Utils').equalArrays;
 exports.arrayContains = require('./Utils').arrayContains;
-
-require('./TypeUtils').resolve();

@@ -9,7 +9,6 @@ var VoidType = require("../type/VoidType").VoidType;
 var MethodType = require("../type/MethodType").MethodType;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Specificity = require("../grammar/Specificity").Specificity;
-var anyfy = require("../utils/TypeUtils").anyfy;
 
 exports.resolve = function() {
     CategoryType = require("../type/CategoryType").CategoryType;
@@ -228,8 +227,8 @@ Argument.prototype.isAssignableToArgument = function(context, argument, declarat
 
 Argument.prototype.computeSpecificity = function(context, parameter, declaration, checkInstance, allowDerived) {
     try {
-        var requiredType = anyfy(parameter.getType(context));
-        var actualType = this.checkActualType(context, requiredType, this.expression, checkInstance);
+        var requiredType = parameter.getType(context).resolve(context, null);
+        var actualType = this.checkActualType(context, requiredType, this.expression, checkInstance).resolve(context, null);
         // retrieve actual runtime type
         if(checkInstance && (actualType instanceof CategoryType)) {
             var value = this.expression.interpret(context.getCallingContext());
@@ -266,7 +265,7 @@ Argument.prototype.checkActualType = function(context, requiredType, expression,
         if(value && value.getType)
             actualType = value.getType();
     }
-    return anyfy(actualType);
+    return actualType;
 };
 
 

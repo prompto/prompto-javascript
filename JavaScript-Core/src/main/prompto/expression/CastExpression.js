@@ -8,7 +8,6 @@ var NativeType = require("../type/NativeType").NativeType;
 var IterableType = require("../type/IterableType").IterableType;
 var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-var anyfy = require("../utils/TypeUtils").anyfy;
 
 function getTargetType(context, itype) {
     if (itype instanceof IterableType) {
@@ -44,7 +43,7 @@ function getTargetAtomicType(context, itype) {
 function CastExpression(expression, type) {
     Expression.call(this);
     this.expression = expression;
-    this.type = anyfy(type);
+    this.type = type.anyfy();
     return this;
 }
 
@@ -52,7 +51,7 @@ CastExpression.prototype = Object.create(Expression.prototype);
 CastExpression.prototype.constructor = CastExpression;
 
 CastExpression.prototype.check = function(context) {
-    var actual = anyfy(this.expression.check(context));
+    var actual = this.expression.check(context).anyfy();
     var target = getTargetType(context, this.type);
     // check Any
     if(actual === AnyType.instance)

@@ -1,15 +1,10 @@
 var MissingType = require("../type/MissingType").MissingType;
-var CategoryType = null;
 var NativeType = require("../type/NativeType").NativeType;
 var AnyType = require("../type/AnyType").AnyType;
 var NullValue = require("../value/NullValue").NullValue;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var TextValue = require("../value/TextValue").TextValue;
-
-exports.resolve = function() {
-    CategoryType = require("../type/CategoryType").CategoryType;
-};
 
 var convertFromJavaScript = function(value) {
     if(value==null) {
@@ -95,14 +90,7 @@ function inferCommonCategoryType(context, type1, type2, trySwap) {
         return null;
 }
 
-function anyfy(type) {
-    if(type instanceof CategoryType && type.name === "Any")
-        return AnyType.instance;
-    else
-        return type;
-}
 
 exports.convertFromJavaScript = convertFromJavaScript;
 exports.inferExpressionsType = inferExpressionsType;
 exports.inferElementType = inferElementType;
-exports.anyfy = anyfy;

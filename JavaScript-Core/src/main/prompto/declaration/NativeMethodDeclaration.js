@@ -25,7 +25,7 @@ NativeMethodDeclaration.prototype.check = function(context, isStart) {
     }
     if(this.parameters!==null)
         this.parameters.check(context);
-    var checked = this.statements.checkNative(context, this.returnType);
+    var checked = this.statements.checkNative(context, this.returnType).anyfy();
     return this.returnType==null ? checked : this.returnType;
 };
 

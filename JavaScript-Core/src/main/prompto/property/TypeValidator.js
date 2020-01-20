@@ -1,11 +1,10 @@
 var PropertyValidator = require("./PropertyValidator").PropertyValidator;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 var MethodType = require("../type/MethodType").MethodType;
-var anyfy = require("../utils/TypeUtils").anyfy;
 
 function TypeValidator(type) {
     PropertyValidator.call(this);
-    this.type = anyfy(type);
+    this.type = type.anyfy();
     return this;
 }
 
@@ -20,7 +19,7 @@ TypeValidator.prototype.getType = function(context) {
 
 TypeValidator.prototype.validate = function(context, jsxProp) {
     var actual = this.type instanceof MethodType ? jsxProp.checkProto(context, this.type) : jsxProp.check(context);
-    if(!this.type.isAssignableFrom(context, anyfy(actual)))
+    if(!this.type.isAssignableFrom(context, actual.anyfy()))
         context.problemListener.reportIllegalAssignment(jsxProp, this.type, actual);
 };
 
