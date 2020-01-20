@@ -891,6 +891,12 @@ EPromptoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitSetType = function(ctx) {
+    var typ = this.getNodeValue(ctx.s);
+    this.setNodeValue(ctx, new type.SetType(typ));
+};
+
+
 EPromptoBuilder.prototype.exitMember_method_declaration = function(ctx) {
     var comments = this.readComments(ctx.comment_statement());
     var annotations = this.readAnnotations(ctx.annotation_constructor());

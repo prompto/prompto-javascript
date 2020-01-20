@@ -871,6 +871,12 @@ MPromptoBuilder.prototype.exitSetter_method_declaration = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitSetType = function(ctx) {
+    var typ = this.getNodeValue(ctx.s);
+    this.setNodeValue(ctx, new type.SetType(typ));
+};
+
+
 MPromptoBuilder.prototype.exitGetter_method_declaration = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var stmts = this.getNodeValue(ctx.stmts);
