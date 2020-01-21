@@ -46,7 +46,7 @@ BlobExpression.prototype.declare = function(transpiler) {
 
 
 BlobExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("Blob.ofValue(");
+    transpiler.append("Blob.fromValue(");
     this.source.transpile(transpiler);
     transpiler.append(")");
 };
