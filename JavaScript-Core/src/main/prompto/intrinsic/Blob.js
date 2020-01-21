@@ -74,7 +74,7 @@ Blob.readValue = function(parts) {
 
 Blob.prototype.toDocument = function() {
     if (this.zipped)
-        return zippedToDocument();
+        return this.zippedToDocument();
     else
         return null;
 };
