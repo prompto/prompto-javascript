@@ -3,37 +3,45 @@ if(global && !global.Event)
     global.Event = function() {};
 
 function JavaScriptNativeCategoryBinding(identifier, module) {
-	NativeCategoryBinding.call(this);
-	this.identifier = identifier;
-	this.module = module || null;
-	return this;
+    NativeCategoryBinding.call(this);
+    this.identifier = identifier;
+    this.module = module || null;
+    return this;
 }
 
 JavaScriptNativeCategoryBinding.prototype = Object.create(NativeCategoryBinding.prototype);
 JavaScriptNativeCategoryBinding.prototype.creator = JavaScriptNativeCategoryBinding;
 
 JavaScriptNativeCategoryBinding.prototype.resolve = function() {
-	var m = this.resolve_module();
-	if(m==null) {
-		return eval(this.identifier);
-	} else {
-		return m[this.identifier] || null;
-	}
+    var m = this.resolve_module();
+    if(m==null) {
+        try {
+            return eval(this.identifier);
+        } catch(e) {
+            return null;
+        }
+    } else {
+        return m[this.identifier] || null;
+    }
 };
 
 JavaScriptNativeCategoryBinding.prototype.resolve_module = function(context) {
-	if (this.module == null) {
-		return null;
-	} else {
-		return this.module.resolve();
-	}
+    if (this.module == null) {
+        return null;
+    } else {
+        return this.module.resolve();
+    }
 };
 
 
 JavaScriptNativeCategoryBinding.prototype.resolveWidget = function(context) {
     var m = this.resolve_widget_module();
     if(m==null) {
-        return eval(this.identifier);
+        try {
+            return eval(this.identifier);
+        } catch(e) {
+            return null;
+        }
     } else {
         return m[this.identifier] || null;
     }
