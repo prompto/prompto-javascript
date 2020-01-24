@@ -96,6 +96,11 @@ ProblemCollector.prototype.reportMissingProperty = function(section, name) {
 };
 
 
+ProblemCollector.prototype.reportSwitchMissingStatement = function(section) {
+    this.reportWarning(section, "Switch case requires at minimal one statement");
+};
+
+
 ProblemCollector.prototype.reportDuplicateProperty = function(section, name) {
     this.reportWarning(section, "Duplicate property: " + name);
 };

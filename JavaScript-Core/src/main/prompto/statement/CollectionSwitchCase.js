@@ -1,31 +1,32 @@
 var CollectionType = require("../type/ContainerType").ContainerType;
 var SwitchCase = require("./SwitchCase").SwitchCase;
+var VoidType = require("../type/VoidType").VoidType;
 
 function CollectionSwitchCase(expression, statements) {
-	SwitchCase.call(this, expression,statements);
-	return this;
+    SwitchCase.call(this, expression,statements);
+    return this;
 }
 
 CollectionSwitchCase.prototype = Object.create(SwitchCase.prototype);
 CollectionSwitchCase.prototype.constructor = CollectionSwitchCase;
 
 CollectionSwitchCase.prototype.checkSwitchType = function(context, type) {
-	var thisType = this.expression.check(context);
-	if(thisType instanceof CollectionType) {
-		thisType = thisType.itemType;
-	}
-	if(!type.isAssignableFrom(context, thisType)) {
-		throw new SyntaxError("Cannot assign:" + thisType.name + " to:" + type.name);
-	}
+    var thisType = this.expression ? this.expression.check(context) : VoidType.instance;
+    if(thisType instanceof CollectionType) {
+        thisType = thisType.itemType;
+    }
+    if(!type.isAssignableFrom(context, thisType)) {
+        context.problemListener.reportIncompatibleTypes(this, type, thisType);
+    }
 };
 
 CollectionSwitchCase.prototype.matches = function(context, value) {
-	var thisValue = this.expression.interpret(context);
-	if(thisValue.hasItem) {
-		return thisValue.hasItem(context, value);
-	} else {
-		return false;
-	}
+    var thisValue = this.expression.interpret(context);
+    if(thisValue.hasItem) {
+        return thisValue.hasItem(context, value);
+    } else {
+        return false;
+    }
 };
 
 
@@ -36,36 +37,36 @@ CollectionSwitchCase.prototype.caseToMDialect = function(writer) {
 
 CollectionSwitchCase.prototype.caseToODialect = function(writer) {
     writer.append("case in ");
-    this.expression.toDialect(writer);
+    this.expression && this.expression.toDialect(writer);
     writer.append(":").newLine().indent();
-    this.statements.toDialect(writer);
+    this.statements && this.statements.toDialect(writer);
     writer.dedent();
 }
 
 
 CollectionSwitchCase.prototype.caseToEDialect = function(writer) {
     writer.append("when in ");
-    this.expression.toDialect(writer);
+    this.expression && this.expression.toDialect(writer);
     writer.append(":").newLine().indent();
-    this.statements.toDialect(writer);
+    this.statements && this.statements.toDialect(writer);
     writer.dedent();
 }
 
 
 CollectionSwitchCase.prototype.catchToODialect = function(writer) {
     writer.append("catch (");
-    this.expression.toDialect(writer);
+    this.expression && this.expression.toDialect(writer);
     writer.append(") {").newLine().indent();
-    this.statements.toDialect(writer);
+    this.statements && this.statements.toDialect(writer);
     writer.dedent().append("} ");
 }
 
 
 CollectionSwitchCase.prototype.catchToMDialect = function(writer) {
     writer.append("except in ");
-    this.expression.toDialect(writer);
+    this.expression && this.expression.toDialect(writer);
     writer.append(":").newLine().indent();
-    this.statements.toDialect(writer);
+    this.statements && this.statements.toDialect(writer);
     writer.dedent();
 }
 
@@ -75,13 +76,13 @@ CollectionSwitchCase.prototype.catchToEDialect = function(writer) {
 }
 
 CollectionSwitchCase.prototype.transpile = function(transpiler) {
-    this.expression.expressions.forEach(function(expression) {
+    this.expression && this.expression.expressions.forEach(function(expression) {
         transpiler.append("case ");
         expression.transpile(transpiler);
         transpiler.append(":").newLine();
     }, this);
     transpiler.indent(true);
-    this.statements.transpile(transpiler);
+    this.statements && this.statements.transpile(transpiler);
     transpiler.append("break;").dedent();
 };
 
