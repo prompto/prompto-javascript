@@ -7,7 +7,7 @@ test('NoError', () => {
 
 test('LexerError', () => {
     var code = "\"abc";
-    checkProblems(code, "token recognition error at: '\"abc'");
+    checkProblems(code, "mismatched input '\"' expecting {<EOF>, LF, COMMENT, 'define', ARONDBASE_IDENTIFIER}");
 });
 
 test('SyntaxError', () => {
