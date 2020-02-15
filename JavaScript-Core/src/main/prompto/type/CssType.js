@@ -9,6 +9,15 @@ function CssType () {
 CssType.prototype = Object.create(NativeType.prototype);
 CssType.prototype.constructor = CssType;
 
+CssType.prototype.declare = function(transpiler) {
+    // nothing to do
+};
+
+
+
+CssType.prototype.transpile = function(transpiler) {
+    transpiler.append("Object");
+};
 
 CssType.instance = new CssType();
 
