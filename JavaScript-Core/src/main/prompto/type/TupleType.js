@@ -6,6 +6,10 @@ var IntegerType = require("./IntegerType").IntegerType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
 
+exports.resolve = function() {
+    resolveBuiltinMethods();
+};
+
 function TupleType()  {
 	NativeType.call(this, new Identifier("Tuple"));
 	return this;
@@ -153,6 +157,7 @@ TupleType.prototype.transpileContainsAll = function(transpiler, other, container
     transpiler.append(")");
 };
 
+
 TupleType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
     container.transpile(transpiler);
     transpiler.append(".hasAny(");
@@ -165,4 +170,31 @@ TupleType.prototype.checkContainsAllOrAny = function(context, other) {
 	return BooleanType.instance;
 };
 
+
+TupleType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "join":
+            return [new JoinTupleMethodDeclaration()];
+        default:
+            return NativeType.prototype.getMemberMethods.call(context, name);
+    }
+};
+
 exports.TupleType = TupleType;
+
+
+function JoinTupleMethodDeclaration() {
+    BaseJoinMethodDeclaration.call(this);
+    return this;
+}
+
+function resolveBuiltinMethods() {
+    BaseJoinMethodDeclaration = require("./ContainerType").BaseJoinMethodDeclaration;
+
+    JoinTupleMethodDeclaration.prototype = Object.create(BaseJoinMethodDeclaration.prototype);
+    JoinTupleMethodDeclaration.prototype.constructor = JoinTupleMethodDeclaration;
+
+    JoinTupleMethodDeclaration.prototype.getItems = function(context) {
+        return this.getValue(context).items;
+    };
+}

@@ -4,6 +4,11 @@ var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
 
+
+exports.resolve = function() {
+    resolveBuiltinMethods();
+};
+
 function SetType(itemType) {
 	ContainerType.call(this, new Identifier(itemType.name+"<>"), itemType);
 	this.itemType = itemType;
@@ -164,6 +169,15 @@ SetType.prototype.checkIterator = function(context, source) {
 }
 
 
+SetType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "join":
+            return [new JoinSetMethodDeclaration()];
+        default:
+            return ContainerType.prototype.getMemberMethods.call(context, name);
+    }
+};
+
 SetType.prototype.isAssignableFrom = function(context, other) {
     return ContainerType.prototype.isAssignableFrom.call(this, context, other)
         || ((other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType));
@@ -171,3 +185,20 @@ SetType.prototype.isAssignableFrom = function(context, other) {
 
 
 exports.SetType = SetType;
+
+
+function JoinSetMethodDeclaration() {
+    BaseJoinMethodDeclaration.call(this);
+    return this;
+}
+
+function resolveBuiltinMethods() {
+    BaseJoinMethodDeclaration = require("./ContainerType").BaseJoinMethodDeclaration;
+
+    JoinSetMethodDeclaration.prototype = Object.create(BaseJoinMethodDeclaration.prototype);
+    JoinSetMethodDeclaration.prototype.constructor = JoinSetMethodDeclaration;
+
+    JoinSetMethodDeclaration.prototype.getItems = function(context) {
+        return Array.from(this.getValue(context).items.set);
+    };
+}

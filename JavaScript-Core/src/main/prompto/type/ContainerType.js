@@ -1,6 +1,18 @@
 var IterableType = require("./IterableType").IterableType;
 var BooleanType = require("./BooleanType").BooleanType;
+var TextType = null;
+var Identifier = require("../grammar/Identifier").Identifier;
 var Variable = require("../runtime/Variable").Variable;
+var TextLiteral = null;
+var BuiltInMethodDeclaration = null;
+var CategoryParameter = null;
+
+exports.resolve = function() {
+    TextType = require("./TextType").TextType;
+    TextLiteral = require("../literal/TextLiteral").TextLiteral;
+    CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+    resolveBuiltInMethodDeclaration();
+};
 
 function ContainerType(id, itemType) {
     IterableType.call(this, id);
@@ -67,5 +79,38 @@ ContainerType.prototype.transpileIterator = function(transpiler, name, expressio
 };
 
 
-exports.ContainerType = ContainerType;
+function BaseJoinMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "join", new CategoryParameter(TextType.instance, new Identifier("delimiter"), new TextLiteral('","')));
+    return this;
+}
 
+exports.ContainerType = ContainerType;
+exports.BaseJoinMethodDeclaration = BaseJoinMethodDeclaration;
+
+function resolveBuiltInMethodDeclaration() {
+    TextValue = require("../value/TextValue").TextValue;
+    BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+
+    BaseJoinMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    BaseJoinMethodDeclaration.prototype.constructor = BaseJoinMethodDeclaration;
+
+    BaseJoinMethodDeclaration.prototype.interpret = function(context) {
+        var items = this.getItems(context);
+        var texts = items.map(function(value) { return value.toString(); });
+        var delimiter = context.getValue(new Identifier("delimiter")).getStorableData();
+        var joined = texts.join(delimiter);
+        return new TextValue(joined);
+    };
+
+    BaseJoinMethodDeclaration.prototype.check = function(context) {
+        return TextType.instance;
+    };
+
+    BaseJoinMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
+        transpiler.append("join(");
+        assignments[0].transpile(transpiler);
+        transpiler.append(")");
+    };
+
+
+}

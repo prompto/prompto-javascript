@@ -146,12 +146,28 @@ test('Transpiled ListCount', () => {
 	checkTranspiledOutput('builtins/listCount.poc');
 });
 
+test('Interpreted ListJoin', () => {
+	checkInterpretedOutput('builtins/listJoin.poc');
+});
+
+test('Transpiled ListJoin', () => {
+	checkTranspiledOutput('builtins/listJoin.poc');
+});
+
 test('Interpreted SetCount', () => {
 	checkInterpretedOutput('builtins/setCount.poc');
 });
 
 test('Transpiled SetCount', () => {
 	checkTranspiledOutput('builtins/setCount.poc');
+});
+
+test('Interpreted SetJoin', () => {
+	checkInterpretedOutput('builtins/setJoin.poc');
+});
+
+test('Transpiled SetJoin', () => {
+	checkTranspiledOutput('builtins/setJoin.poc');
 });
 
 test('Interpreted TextCapitalize', () => {
@@ -256,5 +272,13 @@ test('Interpreted TupleCount', () => {
 
 test('Transpiled TupleCount', () => {
 	checkTranspiledOutput('builtins/tupleCount.poc');
+});
+
+test('Interpreted TupleJoin', () => {
+	checkInterpretedOutput('builtins/tupleJoin.poc');
+});
+
+test('Transpiled TupleJoin', () => {
+	checkTranspiledOutput('builtins/tupleJoin.poc');
 });
 

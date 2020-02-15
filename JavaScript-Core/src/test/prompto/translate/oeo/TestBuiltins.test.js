@@ -76,8 +76,16 @@ test('ListCount', () => {
 	compareResourceOEO('builtins/listCount.poc');
 });
 
+test('ListJoin', () => {
+	compareResourceOEO('builtins/listJoin.poc');
+});
+
 test('SetCount', () => {
 	compareResourceOEO('builtins/setCount.poc');
+});
+
+test('SetJoin', () => {
+	compareResourceOEO('builtins/setJoin.poc');
 });
 
 test('TextCapitalize', () => {
@@ -130,5 +138,9 @@ test('TimeSecond', () => {
 
 test('TupleCount', () => {
 	compareResourceOEO('builtins/tupleCount.poc');
+});
+
+test('TupleJoin', () => {
+	compareResourceOEO('builtins/tupleJoin.poc');
 });
 

@@ -1,4 +1,5 @@
 var ContainerType = require("./ContainerType").ContainerType;
+var BaseJoinMethodDeclaration = null;
 var SetType = null;
 var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
@@ -6,9 +7,11 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var ListValue = require("../value/ListValue").ListValue;
 var List = require("../intrinsic/List").List;
 
+
 exports.resolve = function() {
     IntegerType = require("./IntegerType").IntegerType;
     SetType = require("./SetType").SetType;
+    resolveBuiltinMethods();
 };
 
 function ListType(itemType) {
@@ -264,12 +267,37 @@ ListType.prototype.transpileContainsAny = function(transpiler, other, container,
     transpiler.append(")");
 };
 
+
 ListType.prototype.checkIterator = function(context, source) {
 	return this.itemType;
 };
 
 
-
+ListType.prototype.getMemberMethods = function(context, name) {
+    switch (name) {
+        case "join":
+            return [new JoinListMethodDeclaration()];
+        default:
+            return ContainerType.prototype.getMemberMethods.call(context, name);
+    }
+};
 
 
 exports.ListType = ListType;
+
+
+function JoinListMethodDeclaration() {
+    BaseJoinMethodDeclaration.call(this);
+    return this;
+}
+
+function resolveBuiltinMethods() {
+    BaseJoinMethodDeclaration = require("./ContainerType").BaseJoinMethodDeclaration;
+
+    JoinListMethodDeclaration.prototype = Object.create(BaseJoinMethodDeclaration.prototype);
+    JoinListMethodDeclaration.prototype.constructor = JoinListMethodDeclaration;
+
+    JoinListMethodDeclaration.prototype.getItems = function(context) {
+        return this.getValue(context).items;
+    };
+}
