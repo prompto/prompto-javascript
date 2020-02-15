@@ -5,6 +5,7 @@ var ListType = require("./ListType").ListType;
 var IntegerType = require("./IntegerType").IntegerType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var BaseJoinMethodDeclaration = null;
 
 exports.resolve = function() {
     resolveBuiltinMethods();

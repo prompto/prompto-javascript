@@ -6,10 +6,12 @@ var Variable = require("../runtime/Variable").Variable;
 var TextLiteral = null;
 var BuiltInMethodDeclaration = null;
 var CategoryParameter = null;
+var TextValue = null;
 
 exports.resolve = function() {
     TextType = require("./TextType").TextType;
     TextLiteral = require("../literal/TextLiteral").TextLiteral;
+    TextValue = require("../value/TextValue").TextValue;
     CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
     resolveBuiltInMethodDeclaration();
 };

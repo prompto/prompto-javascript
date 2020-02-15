@@ -3,6 +3,7 @@ var ListType = require("./ListType").ListType;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var BaseJoinMethodDeclaration = null;
 
 
 exports.resolve = function() {
