@@ -4178,6 +4178,15 @@ EParserListener.prototype.exitJsx_text = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#jsx_char.
+EParserListener.prototype.enterJsx_char = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#jsx_char.
+EParserListener.prototype.exitJsx_char = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#css_expression.
 EParserListener.prototype.enterCss_expression = function(ctx) {
 };

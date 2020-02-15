@@ -4034,6 +4034,15 @@ MParserListener.prototype.exitJsx_text = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#jsx_char.
+MParserListener.prototype.enterJsx_char = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#jsx_char.
+MParserListener.prototype.exitJsx_char = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#css_expression.
 MParserListener.prototype.enterCss_expression = function(ctx) {
 };

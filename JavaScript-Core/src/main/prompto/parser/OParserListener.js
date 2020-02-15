@@ -4079,6 +4079,15 @@ OParserListener.prototype.exitJsx_text = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#jsx_char.
+OParserListener.prototype.enterJsx_char = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#jsx_char.
+OParserListener.prototype.exitJsx_char = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#css_expression.
 OParserListener.prototype.enterCss_expression = function(ctx) {
 };

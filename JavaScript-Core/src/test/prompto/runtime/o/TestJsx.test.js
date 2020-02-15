@@ -74,6 +74,14 @@ test('Transpiled LiteralAttribute', () => {
 	checkTranspiledOutput('jsx/literalAttribute.poc');
 });
 
+test('Interpreted NonAsciiTextElement', () => {
+	checkInterpretedOutput('jsx/nonAsciiTextElement.poc');
+});
+
+test('Transpiled NonAsciiTextElement', () => {
+	checkTranspiledOutput('jsx/nonAsciiTextElement.poc');
+});
+
 test('Interpreted SelfClosingDiv', () => {
 	checkInterpretedOutput('jsx/selfClosingDiv.poc');
 });

@@ -36,6 +36,10 @@ test('LiteralAttribute', () => {
 	compareResourceEME('jsx/literalAttribute.pec');
 });
 
+test('NonAsciiTextElement', () => {
+	compareResourceEME('jsx/nonAsciiTextElement.pec');
+});
+
 test('SelfClosingDiv', () => {
 	compareResourceEME('jsx/selfClosingDiv.pec');
 });

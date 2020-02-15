@@ -74,6 +74,14 @@ test('Transpiled LiteralAttribute', () => {
 	checkTranspiledOutput('jsx/literalAttribute.pmc');
 });
 
+test('Interpreted NonAsciiTextElement', () => {
+	checkInterpretedOutput('jsx/nonAsciiTextElement.pmc');
+});
+
+test('Transpiled NonAsciiTextElement', () => {
+	checkTranspiledOutput('jsx/nonAsciiTextElement.pmc');
+});
+
 test('Interpreted SelfClosingDiv', () => {
 	checkInterpretedOutput('jsx/selfClosingDiv.pmc');
 });

@@ -74,6 +74,14 @@ test('Transpiled LiteralAttribute', () => {
 	checkTranspiledOutput('jsx/literalAttribute.pec');
 });
 
+test('Interpreted NonAsciiTextElement', () => {
+	checkInterpretedOutput('jsx/nonAsciiTextElement.pec');
+});
+
+test('Transpiled NonAsciiTextElement', () => {
+	checkTranspiledOutput('jsx/nonAsciiTextElement.pec');
+});
+
 test('Interpreted SelfClosingDiv', () => {
 	checkInterpretedOutput('jsx/selfClosingDiv.pec');
 });
