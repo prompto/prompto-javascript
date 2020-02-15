@@ -2913,7 +2913,7 @@ EPromptoBuilder.prototype.exitCss_field = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitCssText = function(ctx) {
-    var text = ctx.text.getText();
+    var text = this.input.getText(ctx.text.start, ctx.text.stop);
     this.setNodeValue(ctx, new css.CssText(text));
 };
 
