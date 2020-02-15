@@ -2877,7 +2877,7 @@ MPromptoBuilder.prototype.exitCss_field = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitCssText = function(ctx) {
-    var text = this.input.getText(ctx.text.start, ctx.text.stop);
+    var text = this.input.getText({start: ctx.text.start, stop: ctx.text.stop});
     this.setNodeValue(ctx, new css.CssText(text));
 };
 
