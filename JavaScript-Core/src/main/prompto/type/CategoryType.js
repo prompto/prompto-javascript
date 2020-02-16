@@ -771,12 +771,19 @@ CategoryType.prototype.transpileGlobalMethodSortedComparator = function(transpil
 };
 
 CategoryType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
-    transpiler.append(".setMember('").append(name).append("', ");
+    var decl = transpiler.context.getRegisteredDeclaration(name);
+    transpiler.append(".setMember('")
+        .append(name)
+        .append("', ");
     expression.transpile(transpiler);
+    transpiler.append(", ")
+        .append(decl.storable)
+        .append(", false"); // not mutable
     var type = expression.check(transpiler.context);
-    if(type instanceof EnumeratedCategoryType || type instanceof EnumeratedNativeType) {
-        transpiler.append(", false, true"); // set isEnum flag
-    }
+    if(type instanceof EnumeratedCategoryType || type instanceof EnumeratedNativeType)
+        transpiler.append(", true"); // set isEnum flag
+    else
+        transpiler.append(", false"); // set isEnum flag
     transpiler.append(")");
 };
 

@@ -552,7 +552,18 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
         transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
         attributes.forEach(function (attr) {
             var isEnum =  this.isEnumeratedAttribute(transpiler.context, attr);
-            transpiler.append("this.setMember('").append(attr.name).append("', values.").append(attr.name).append(" || null, mutable, ").append(isEnum).append(");").newLine();
+            var decl = transpiler.context.getRegisteredDeclaration(attr.name);
+            transpiler.append("this.setMember('")
+                    .append(attr.name)
+                    .append("', values.")
+                    .append(attr.name)
+                    .append(" || null")
+                    .append(", ")
+                    .append(decl.storable)
+                    .append(", mutable")
+                    .append(", ")
+                    .append(isEnum)
+                    .append(");").newLine();
         }, this);
     }
 };
