@@ -9,6 +9,7 @@ var TextValue = null; // circular dependency
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
 var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+var IntegerLiteral = null;
 var TextLiteral = null;
 var ListValue = null;
 var List = require("../intrinsic/List").List;
@@ -17,6 +18,7 @@ var TypeFamily = require("../store/TypeFamily").TypeFamily;
 exports.resolve = function() {
     CharacterType = require("./CharacterType").CharacterType;
     ListType = require("./ListType").ListType;
+    IntegerLiteral = require("../literal/IntegerLiteral").IntegerLiteral;
     TextLiteral = require("../literal/TextLiteral").TextLiteral;
     ListValue = require("../value/ListValue").ListValue;
     TextValue = require("../value/TextValue").TextValue;
@@ -329,7 +331,9 @@ function ReplaceAllMethodDeclaration() {
 }
 
 function IndexOfMethodDeclaration() {
-    BuiltInMethodDeclaration.call(this, "indexOf", new CategoryParameter(TextType.instance, new Identifier("value")));
+    BuiltInMethodDeclaration.call(this, "indexOf",
+        new CategoryParameter(TextType.instance, new Identifier("value")),
+        new CategoryParameter(IntegerType.instance, new Identifier("fromIndex"), new IntegerLiteral("1")));
     return this;
 }
 
@@ -525,8 +529,9 @@ function resolveBuiltInMethodDeclaration() {
 
     IndexOfMethodDeclaration.prototype.interpret = function(context) {
         var value = this.getValue(context).getStorableData();
-        var find = context.getValue(new Identifier("value")).getStorableData();
-        var index = value.indexOf(find);
+        var toFind = context.getValue(new Identifier("value")).getStorableData();
+        var fromIndex = context.getValue(new Identifier("fromIndex")).getStorableData();
+        var index = value.indexOf(toFind, fromIndex - 1);
         return new IntegerValue(index + 1);
     };
 
@@ -537,7 +542,12 @@ function resolveBuiltInMethodDeclaration() {
     IndexOfMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
         transpiler.append("indexOf1Based(");
         assignments[0].transpile(transpiler);
-        transpiler.append(")");
+        if(assignments.length>1) {
+            transpiler.append(",");
+            assignments[1].transpile(transpiler);
+            transpiler.append(")");
+        } else
+            transpiler.append(",1)");
     };
 }
 

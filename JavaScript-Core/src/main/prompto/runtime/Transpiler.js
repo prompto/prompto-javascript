@@ -411,7 +411,7 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
-    transpiler.lines.push("String.prototype.indexOf1Based = function(value) { return 1 + this.indexOf(value); }");
+    transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); }");
     transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; }");
     transpiler.lines.push("intrinsic = {}");
     return transpiler;

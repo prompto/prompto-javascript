@@ -98,7 +98,7 @@ UnresolvedCall.prototype.resolve = function(context) {
         if(this.resolved)
             return this.resolved;
         else
-            context.problemListener.reportUnkownMethod(this.caller);
+            context.problemListener.reportUnknownMethod(this.callable);
     }
 };
 
