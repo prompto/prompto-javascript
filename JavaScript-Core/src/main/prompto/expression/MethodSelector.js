@@ -12,11 +12,13 @@ var Variable = require("../runtime/Variable").Variable;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var NativeInstance = null;
 var CategoryType = null;
+var CategorySymbol = null;
 var MethodDeclarationMap = null;
 
 
 exports.resolve = function() {
 	CategoryType = require("../type/CategoryType").CategoryType;
+    CategorySymbol = require("./CategorySymbol").CategorySymbol;
     NativeInstance = require("../value/NativeInstance.js").NativeInstance;
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
     SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration.js").SingletonCategoryDeclaration;
@@ -200,6 +202,9 @@ MethodSelector.prototype.newInstanceContext = function(context) {
                 value = context.loadSingleton(value.value);
             }
         }
+    }
+    if(value instanceof CategorySymbol) {
+        value = value.interpret(context);
     }
     if(value instanceof TypeValue) {
         return context.newChildContext();
