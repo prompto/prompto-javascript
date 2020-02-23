@@ -45,6 +45,6 @@ test('PolymorphicImplicit', () => {
 test('EnumeratedCategory', () => {
 	var stmts = parseResource("enums/categoryEnum.pec");
 	expect(stmts).toBeTruthy();
-	expect(stmts.length).toEqual(6);
+	expect(stmts.length).toEqual(7);
 });
 
