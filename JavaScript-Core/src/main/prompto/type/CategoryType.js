@@ -345,8 +345,8 @@ CategoryType.prototype.checkExists = function(context) {
     this.getDeclaration(context);
 };
 
-CategoryType.prototype.checkMember = function(context, section, name) {
-    if( "category" === name.toString())
+CategoryType.prototype.checkMember = function(context, section, id) {
+    if( "category" === id.toString())
         return new CategoryType(new Identifier("Category"));
     var decl = context.getRegisteredDeclaration(this.name);
     if (decl == null) {
@@ -354,9 +354,9 @@ CategoryType.prototype.checkMember = function(context, section, name) {
         return null;
     }
     if (decl instanceof EnumeratedNativeDeclaration) {
-        return decl.getType(context).checkMember(context, section, name);
+        return decl.getType(context).checkMember(context, section, id);
     } else if (decl instanceof CategoryDeclaration) {
-        return this.checkCategoryMember(context, section, decl, name);
+        return this.checkCategoryMember(context, section, decl, id);
     } else {
         context.problemListener.reportUnknownCategory(this.id);
         return null;
@@ -364,8 +364,9 @@ CategoryType.prototype.checkMember = function(context, section, name) {
 };
 
 
-CategoryType.prototype.checkCategoryMember = function(context, section, decl, name) {
-    if(decl.storable && "dbId" === name.toString())
+CategoryType.prototype.checkCategoryMember = function(context, section, decl, id) {
+    var name = id.toString();
+    if(decl.storable && "dbId" === name)
         return AnyType.instance;
     else if (decl.hasAttribute(context, name)) {
         var ad = context.getRegisteredDeclaration(name);
@@ -373,13 +374,13 @@ CategoryType.prototype.checkCategoryMember = function(context, section, decl, na
             throw new SyntaxError("Unknown attribute:" + name);
         }
         return ad.getType(context);
-    } else if ("text" == name.toString()) {
+    } else if ("text" == name) {
         return TextType.instance
     } else if (decl.hasMethod(context, name)) {
         var method = decl.getMemberMethodsMap(context, name).getFirst();
         return new MethodType(method);
     } else {
-        context.problemListener.reportUnknownAttribute(section);
+        context.problemListener.reportUnknownAttribute(id);
     }
 };
 
@@ -401,17 +402,17 @@ CategoryType.prototype.transpileMember = function(transpiler, name) {
 };
 
 
-CategoryType.prototype.checkStaticMember = function(context, section, name) {
+CategoryType.prototype.checkStaticMember = function(context, section, id) {
     var decl = context.getRegisteredDeclaration(this.name);
     if(decl==null) {
         context.problemListener.reportUnknownIdentifier(this.name, this);
         return null;
     } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
-        return decl.getType(context).checkStaticMember(context, section, name);
+        return decl.getType(context).checkStaticMember(context, section, id);
     } else if(decl instanceof SingletonCategoryDeclaration) {
-        return this.checkCategoryMember(context, section, decl, name);
+        return this.checkCategoryMember(context, section, decl, id);
     } else {
-        context.getProblemListener().reportUnknownAttribute({name: name});
+        context.getProblemListener().reportUnknownAttribute(id);
         return null;
     }
 };

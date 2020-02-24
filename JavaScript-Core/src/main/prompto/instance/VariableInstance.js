@@ -1,5 +1,6 @@
 var Variable = require("../runtime/Variable").Variable;
 var CodeType = require("../type/CodeType").CodeType;
+var DocumentType = require("../type/DocumentType").DocumentType;
 
 function VariableInstance(id) {
     this.id = id;
@@ -48,11 +49,17 @@ VariableInstance.prototype.checkAssignValue = function(context, valueType, secti
     }
 };
 
-VariableInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
+VariableInstance.prototype.checkAssignMember = function(context, id, valueType, section) {
     var actual = context.getRegisteredValue(this.id);
     if(actual==null)
         context.problemListener.reportUnknownVariable(section, this.id);
-    return valueType;
+    var thisType = actual.getType(context);
+    if(thisType !== DocumentType.instance) {
+        var requiredType = thisType.checkMember(context, section, id);
+        if (requiredType && !requiredType.isAssignableFrom(context, valueType))
+            context.problemListener.reportIncompatibleTypes(section, requiredType, valueType);
+        return valueType;
+    }
 };
 
 

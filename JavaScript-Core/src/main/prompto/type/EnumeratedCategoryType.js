@@ -23,20 +23,22 @@ function EnumeratedCategoryType(id) {
 EnumeratedCategoryType.prototype = Object.create(CategoryType.prototype);
 EnumeratedCategoryType.prototype.constructor =  EnumeratedCategoryType;
 
-EnumeratedCategoryType.prototype.checkMember = function(context, section, name) {
+EnumeratedCategoryType.prototype.checkMember = function(context, section, id) {
+    var name = id.toString();
     if ("name"==name) {
         return TextType.instance;
     } else {
-        return CategoryType.prototype.checkMember.call(this, context, section, name);
+        return CategoryType.prototype.checkMember.call(this, context, section, id);
     }
 };
 
 
-EnumeratedCategoryType.prototype.checkStaticMember = function(context, section, name) {
+EnumeratedCategoryType.prototype.checkStaticMember = function(context, section, id) {
+    var name = id.toString();
     if ("symbols"==name) {
         return new ListType(this);
     } else {
-        return CategoryType.prototype.checkStaticMember.call(this, context, section, name);
+        return CategoryType.prototype.checkStaticMember.call(this, context, section, id);
     }
 };
 

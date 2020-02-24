@@ -31,11 +31,11 @@ MemberInstance.prototype.interpret = function(context) {
 
 
 MemberInstance.prototype.checkAssignValue = function(context, valueType, section) {
-	return this.parent.checkAssignMember(context, this.name, valueType, section);
+	return this.parent.checkAssignMember(context, this.id, valueType, section);
 };
 
-MemberInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
-	this.parent.checkAssignMember(context, this.name, section);
+MemberInstance.prototype.checkAssignMember = function(context, id, valueType, section) {
+	this.parent.checkAssignMember(context, this.id, section);
     return valueType; // TODO
 };
 
