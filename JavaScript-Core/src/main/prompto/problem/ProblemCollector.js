@@ -169,6 +169,12 @@ ProblemCollector.prototype.reportNoSuperType = function(section, type) {
     this.reportError(section, "Type " + type.name + " has no super type");
 };
 
+
+ProblemCollector.prototype.reportAssigningVoidType = function(section) {
+    this.reportError(section, "Cannot assign void type");
+};
+
+
 ProblemCollector.prototype.reportError = function(section, message) {
     this.reportProblem(section, message, "error");
 };
