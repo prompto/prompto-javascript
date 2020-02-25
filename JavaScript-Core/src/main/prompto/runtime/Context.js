@@ -6,6 +6,7 @@ var AttributeDeclaration = require("../declaration/AttributeDeclaration").Attrib
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
+var ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
 var MethodType = require("../type/MethodType").MethodType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
@@ -152,6 +153,20 @@ Context.prototype.clone = function() {
     context.values = Object.create(this.values);
     context.nativeBindings = Object.create(this.nativeBindings);
     return context;
+};
+
+Context.prototype.pushProblemListener = function() {
+    if (this.problemListeners)
+        this.problemListeners.push(this.problemListener);
+    else
+        this.problemListeners = [this.problemListener];
+    this.problemListener = this.problemListener instanceof ProblemListener ? new ProblemListener() : new ProblemCollector();
+};
+
+Context.prototype.popProblemListener = function() {
+    this.problemListener = this.problemListeners.pop();
+    if(this.problemListeners.length==0)
+        delete this.problemListeners;
 };
 
 Context.prototype.getCatalog = function() {

@@ -22,7 +22,6 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var CodeParameter = require("../param/CodeParameter").CodeParameter;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 
-
 exports.resolve = function() {
     InstanceContext = require("../runtime/Context").InstanceContext;
     ThisExpression = require("../expression/ThisExpression").ThisExpression;
@@ -79,7 +78,13 @@ MethodCall.prototype.check = function(context, updateSelectorParent) {
     if(updateSelectorParent && declaration.memberOf && !this.selector.parent)
         this.selector.parent = new ThisExpression();
     var local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
-    return this.checkDeclaration(declaration, context, local);
+    // don't bubble up problems
+    try {
+        local.pushProblemListener();
+        return this.checkDeclaration(declaration, context, local);
+    } finally {
+        local.popProblemListener();
+    }
 };
 
 
