@@ -19,6 +19,7 @@ var Argument = null;
 var MethodCall = require("../statement/MethodCall").MethodCall;
 var MethodSelector = require("../expression/MethodSelector").MethodSelector;
 var compareValues = require("../utils/Utils").compareValues;
+var equalArrays = require("../utils/Utils").equalArrays;
 
 exports.resolve = function() {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -67,6 +68,7 @@ DocumentType.prototype.convertJavaScriptValueToPromptoValue = function(context, 
 DocumentType.prototype.declare = function(transpiler) {
     transpiler.register(Document);
     transpiler.register(List);
+    transpiler.require(equalArrays);
 };
 
 

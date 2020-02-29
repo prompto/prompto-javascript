@@ -3,6 +3,7 @@ var Value = require("./Value").Value;
 var TextValue = require("./TextValue").TextValue;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var Document = require("../intrinsic/Document").Document;
+var equalArrays = require("../utils/Utils").equalArrays;
 
 function DocumentValue(values) {
     Value.call(this, DocumentType.instance);
