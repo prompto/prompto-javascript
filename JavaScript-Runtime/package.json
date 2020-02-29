@@ -4,12 +4,14 @@
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
   "devDependencies": {
-    "react-scripts": "^3.0.0"
+    "jest": "^24.7.1",
+    "webpack": "4.30.0"
   },
   "dependencies": {
     "antlr4": "4.7.1",
     "jszip-sync": "3.2.1-sync",
-    "sync-request": "3.0.1"
+    "sync-request": "3.0.1",
+    "js-yaml": "3.13.1"
   },
   "scripts": {
     "test": "jest"

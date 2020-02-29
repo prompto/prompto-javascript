@@ -47,11 +47,7 @@ JavaScriptExpressionList.prototype.computeArgument = function(arg, context) {
 		arg = arg.interpret(context);
 	}
 	// convert value to JavaScript
-	if(arg.convertToJavaScript) {
-        return arg.convertToJavaScript();
-    } else {
-        return arg;
-    }
+	return arg.convertToJavaScript();
 };
 
 exports.JavaScriptExpressionList = JavaScriptExpressionList;

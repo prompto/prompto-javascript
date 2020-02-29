@@ -67,4 +67,12 @@ BooleanValue.prototype.equals = function(obj) {
 	}
 };
 
+
+BooleanValue.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
+	if(Array.isArray(json))
+		json.push(this.value);
+	else
+		json[fieldName] = this.value;
+};
+
 exports.BooleanValue = BooleanValue;

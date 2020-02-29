@@ -24,6 +24,17 @@ DocumentValue.prototype.getStorableData = function() {
     return this.values;
 };
 
+
+DocumentValue.prototype.convertToJavaScript = function() {
+    var values = new Document();
+    Object.getOwnPropertyNames(this.values).forEach(function(key) {
+        var value = this.values[key];
+        values[key] = value.convertToJavaScript();
+    }, this);
+    return values;
+};
+
+
 DocumentValue.prototype.hasMember = function(name) {
     return this.values.hasOwnProperty(name);
 }
@@ -66,7 +77,17 @@ DocumentValue.prototype.setItemInContext = function(context, index, value) {
 };
 
 DocumentValue.prototype.equals = function(other) {
-    return other==this;
+    if(this==other)
+        return true;
+    if(!(other instanceof DocumentValue))
+        return false;
+    var thisNames = Object.getOwnPropertyNames(this.values);
+    var otherNames = Object.getOwnPropertyNames(other.values);
+    if(!thisNames.equals(otherNames))
+        return false;
+    return thisNames.every(function(name) {
+        return this.values[name].equals(other.values[name]);
+    }, this);
 };
 
 

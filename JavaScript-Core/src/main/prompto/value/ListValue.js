@@ -1,6 +1,7 @@
 var BaseValueList = require("./BaseValueList").BaseValueList;
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var multiplyArray = require("../utils/Utils").multiplyArray;
+var List  = require("../intrinsic/List").List;
 var ListType = null;
 var SetValue = null;
 
@@ -34,6 +35,14 @@ ListValue.prototype.collectStorables = function(list) {
     this.items.map(function(item) {
         item.collectStorables(list);
     });
+};
+
+
+ListValue.prototype.convertToJavaScript = function() {
+    var items = this.items.map(function(value) {
+        return value.convertToJavaScript();
+    }, this);
+    return new List(this.mutable, items);
 };
 
 

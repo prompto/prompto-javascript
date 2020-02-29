@@ -27,6 +27,10 @@ function equalArrays(o1, o2) {
 	return true;
 }
 
+Array.prototype.equals = function(o) {
+    return equalArrays(this, o);
+};
+
 function arrayContains(a, o) {
 	for(var i=0;i<a.length;i++) {
 		if(equalObjects(a[i], o)) {

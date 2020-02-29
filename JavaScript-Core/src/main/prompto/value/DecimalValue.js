@@ -26,6 +26,12 @@ DecimalValue.prototype.toString = function() {
     return decimalTostring(this.value);
 };
 
+
+DecimalValue.prototype.convertToJavaScript = function() {
+	return this.value;
+};
+
+
 /*jshint bitwise:false*/
 DecimalValue.prototype.IntegerValue = function() {
 	return Math.floor(this.value);

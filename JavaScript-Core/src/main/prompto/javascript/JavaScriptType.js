@@ -122,12 +122,11 @@ JavaScriptType.prototype.convertSet = function(context, value, klass, returnType
 JavaScriptType.prototype.convertList = function(context, value, klass, returnType) {
     var maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
     if(maybeList && (klass==="Array" || klass==="List")) {
-        var self = this;
         var itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
         var items = value.map(function(item) {
             klass = getTypeName(item);
-            return self.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
-        });
+            return this.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
+        }, this);
         return new ListValue(itemType, items);
     } else
         return null;
@@ -135,7 +134,7 @@ JavaScriptType.prototype.convertList = function(context, value, klass, returnTyp
 
 JavaScriptType.prototype.convertDocument = function(context, value, klass, returnType) {
     var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
-    if(maybeDoc && (klass==="object" || klass==="Document")) {
+    if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
         var doc = new DocumentValue();
         Object.getOwnPropertyNames(value).forEach(function(name) {
             var item = value[name];

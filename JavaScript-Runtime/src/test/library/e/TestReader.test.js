@@ -32,3 +32,11 @@ test('Transpiled Reader', () => {
 	runTranspiledTests('reader/reader.pec');
 });
 
+test('Interpreted Yaml', () => {
+	runInterpretedTests('reader/yaml.pec');
+});
+
+test('Transpiled Yaml', () => {
+	runTranspiledTests('reader/yaml.pec');
+});
+

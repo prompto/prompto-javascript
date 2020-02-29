@@ -29,6 +29,12 @@ IntegerValue.prototype.getStorableData = function() {
     return this.value;
 };
 
+
+IntegerValue.prototype.convertToJavaScript = function() {
+	return this.value;
+};
+
+
 IntegerValue.prototype.IntegerValue = function() {
 	return this.value;
 };
