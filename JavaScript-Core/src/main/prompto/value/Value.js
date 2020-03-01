@@ -17,6 +17,10 @@ Value.prototype.collectStorables = function(list) {
     // do nothing
 };
 
+Value.prototype.convertToJavaScript = function() {
+    throw new SyntaxError("convertToJavaScript not implemented by " + this.constructor.name);
+};
+
 Value.prototype.And = function(context, value) {
     throw new SyntaxError("Logical and not supported by " + this.constructor.name);
 };

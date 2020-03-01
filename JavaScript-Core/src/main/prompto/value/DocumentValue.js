@@ -84,7 +84,7 @@ DocumentValue.prototype.equals = function(other) {
         return false;
     var thisNames = Object.getOwnPropertyNames(this.values);
     var otherNames = Object.getOwnPropertyNames(other.values);
-    if(!thisNames.equals(otherNames))
+    if(!equalArrays(thisNames, otherNames))
         return false;
     return thisNames.every(function(name) {
         return this.values[name].equals(other.values[name]);
