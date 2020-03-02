@@ -1,3 +1,5 @@
+var equalArrays = require("../utils/Utils").equalArrays;
+
 function Document(entries) {
     if(entries)
         Object.getOwnPropertyNames(entries).forEach(function(name) { this[name] = entries[name]; }, this);
@@ -16,7 +18,7 @@ Document.prototype.equals = function(other) {
         return false;
     var thisNames = Object.getOwnPropertyNames(this);
     var otherNames = Object.getOwnPropertyNames(other);
-    if(!equalArrays(thisNames,otherNames))
+    if(!equalArrays(thisNames, otherNames))
         return false;
     return thisNames.every(function(name) {
         return this[name]===other[name] || (this[name].equals && this[name].equals(other[name]));
