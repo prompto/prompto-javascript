@@ -15,6 +15,10 @@ MethodType.prototype.equals = function(other) {
         ((other instanceof MethodType) && (this.method.getProto()==other.method.getProto()));
 };
 
+MethodType.prototype.checkExists = function(context) {
+	// TODO
+};
+
 MethodType.prototype.checkUnique = function(context) {
 	var actual = context.getRegisteredDeclaration(this.name);
 	if (actual != null) {

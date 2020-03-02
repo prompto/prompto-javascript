@@ -23,6 +23,12 @@ function EnumeratedCategoryType(id) {
 EnumeratedCategoryType.prototype = Object.create(CategoryType.prototype);
 EnumeratedCategoryType.prototype.constructor =  EnumeratedCategoryType;
 
+
+EnumeratedCategoryType.prototype.checkExists = function(context) {
+    // TODO
+};
+
+
 EnumeratedCategoryType.prototype.checkMember = function(context, section, id) {
     var name = id.toString();
     if ("name"==name) {

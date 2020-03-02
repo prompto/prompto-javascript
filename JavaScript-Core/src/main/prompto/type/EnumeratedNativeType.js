@@ -22,6 +22,13 @@ function EnumeratedNativeType(name, derivedFrom) {
 EnumeratedNativeType.prototype = Object.create(BaseType.prototype);
 EnumeratedNativeType.prototype.constructor = EnumeratedNativeType;
 
+
+EnumeratedNativeType.prototype.checkExists = function(context) {
+	// TODO
+};
+
+
+
 EnumeratedNativeType.prototype.checkMember = function(context, section, name) {
 	if ("value"==name) {
 		return this.derivedFrom;
