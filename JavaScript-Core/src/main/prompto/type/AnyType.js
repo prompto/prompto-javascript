@@ -1,4 +1,5 @@
 var NativeType = require("./NativeType").NativeType;
+var DocumentType = require("./DocumentType").DocumentType;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Any = require("../intrinsic/Any").Any;
 
@@ -13,14 +14,25 @@ AnyType.prototype.constructor = AnyType;
 AnyType.instance = new AnyType();
 
 
+AnyType.prototype.isAssignableFrom = function(context, other) {
+    return true;
+};
+
 
 AnyType.prototype.checkItem = function(context, item) {
-    return AnyType.instance; // required to support Document items
+    return DocumentType.instance.checkItem(context, item);
 };
+
+
+AnyType.prototype.checkMember = function(context, section, name) {
+    return DocumentType.instance.checkMember(context, section, name);
+};
+
 
 
 AnyType.prototype.declare = function(transpiler) {
     transpiler.register(Any);
+    DocumentType.instance.declare(transpiler);
 };
 
 
@@ -30,23 +42,22 @@ AnyType.prototype.transpile = function(transpiler) {
 
 
 AnyType.prototype.declareItem = function(transpiler, type, item) {
-    // required to support Document items
-    type.declare(transpiler);
-    item.declare(transpiler);
+    DocumentType.instance.declareItem(transpiler, type, item);
 };
 
 
 AnyType.prototype.transpileItem = function(transpiler, type, item) {
-    // required to support Document items
-    transpiler.append(".item(");
-    item.transpile(transpiler);
-    transpiler.append(")");
+    DocumentType.instance.transpileItem(transpiler, type, item);
 };
 
 
-AnyType.prototype.checkMember = function(context, section, name) {
-    // required to support Document members
-    return AnyType.instance;
+AnyType.prototype.declareMember = function(transpiler, name) {
+    DocumentType.instance.declareMember(transpiler, name);
+};
+
+
+AnyType.prototype.transpileMember = function(transpiler, name) {
+    DocumentType.instance.transpileMember(transpiler, name);
 };
 
 
@@ -65,14 +76,6 @@ AnyType.prototype.transpileAssignItemValue = function(transpiler, item, expressi
     transpiler.append(", ");
     expression.transpile(transpiler);
     transpiler.append(")");
-};
-
-AnyType.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-AnyType.prototype.isAssignableFrom = function(context, other) {
-    return true;
 };
 
 exports.AnyType = AnyType;

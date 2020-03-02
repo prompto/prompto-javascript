@@ -38,11 +38,9 @@ DocumentType.prototype = Object.create(NativeType.prototype);
 DocumentType.prototype.constructor = DocumentType;
 
 
-
 DocumentType.prototype.withItemType = function(itemType) {
     return this;
 };
-
 
 
 DocumentType.prototype.isMoreSpecificThan = function(context, other) {
@@ -56,6 +54,7 @@ DocumentType.prototype.isMoreSpecificThan = function(context, other) {
 DocumentType.prototype.checkMember = function(context, section, name) {
 	return AnyType.instance;
 };
+
 
 DocumentType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
     if(value instanceof Document)
@@ -86,8 +85,29 @@ DocumentType.prototype.transpileMember = function(transpiler, name) {
     if ("text"===name) {
         transpiler.append("getText()");
     } else {
-        transpiler.append(name);
+        transpiler.append("getMember('").append(name).append("', false)");
     }
+};
+
+
+DocumentType.prototype.checkItem = function(context, itemType) {
+    if(itemType===TextType.instance)
+        return AnyType.instance;
+    else
+        throw ("text");
+};
+
+
+DocumentType.prototype.declareItem = function(transpiler, type, item) {
+    type.declare(transpiler);
+    item.declare(transpiler);
+};
+
+
+DocumentType.prototype.transpileItem = function(transpiler, type, item) {
+    transpiler.append(".item(");
+    item.transpile(transpiler);
+    transpiler.append(")");
 };
 
 
@@ -196,20 +216,6 @@ DocumentType.prototype.transpileExpressionSortedComparator = function(transpiler
     transpiler.flush();
 };
 
-
-DocumentType.prototype.checkItem = function(context, itemType) {
-    if(itemType===TextType.instance)
-        return AnyType.instance;
-    else
-        throw ("text");
-};
-
-
-DocumentType.prototype.transpileItem = function(transpiler, type, item) {
-    transpiler.append(".item(");
-    item.transpile(transpiler);
-    transpiler.append(")");
-};
 
 DocumentType.prototype.readJSONValue = function(context, node, parts) {
     var instance = new DocumentValue();
