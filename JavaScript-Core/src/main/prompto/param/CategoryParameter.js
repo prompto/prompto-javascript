@@ -5,6 +5,7 @@ var utils = require("../utils/index");
 function CategoryParameter(type, id, defaultExpression) {
 	Parameter.call(this, id);
 	this.type = type;
+	this.resolved  = null;
     this.defaultExpression = defaultExpression || null;
 	return this;
 }
@@ -36,7 +37,14 @@ CategoryParameter.prototype.register = function(context) {
 };
 
 CategoryParameter.prototype.check = function(context) {
-	this.type.checkExists(context);
+    this.resolve(context);
+	this.resolved.checkExists(context);
+};
+
+CategoryParameter.prototype.resolve = function(context) {
+    if(this.resolved==null) {
+        this.resolved = this.type.resolve(context, null);
+    }
 };
 
 CategoryParameter.prototype.declare = function(transpiler) {
