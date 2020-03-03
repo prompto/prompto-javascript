@@ -31,6 +31,7 @@ exports.EnumeratedCategoryType = require('./EnumeratedCategoryType').EnumeratedC
 exports.TypeType = require('./TypeType').TypeType;
 
 require('./BaseType').resolve();
+require('./AnyType').resolve();
 require('./TextType').resolve();
 require('./BooleanType').resolve();
 require('./DecimalType').resolve();

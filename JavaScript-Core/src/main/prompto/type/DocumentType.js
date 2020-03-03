@@ -91,10 +91,7 @@ DocumentType.prototype.transpileMember = function(transpiler, name) {
 
 
 DocumentType.prototype.checkItem = function(context, itemType) {
-    if(itemType===TextType.instance)
-        return AnyType.instance;
-    else
-        throw ("text");
+    return AnyType.instance;
 };
 
 

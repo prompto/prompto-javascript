@@ -1,7 +1,11 @@
 var NativeType = require("./NativeType").NativeType;
-var DocumentType = require("./DocumentType").DocumentType;
+var DocumentType = null;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Any = require("../intrinsic/Any").Any;
+
+exports.resolve = function() {
+    DocumentType = require("./DocumentType").DocumentType;
+};
 
 function AnyType() {
     NativeType.call(this, new Identifier("any"));
@@ -12,7 +16,6 @@ AnyType.prototype = Object.create(NativeType.prototype);
 AnyType.prototype.constructor = AnyType;
 
 AnyType.instance = new AnyType();
-
 
 AnyType.prototype.isAssignableFrom = function(context, other) {
     return true;
