@@ -3,11 +3,12 @@ var AttributeDeclaration = require("../declaration/AttributeDeclaration").Attrib
 var AttributeParameter = require("./AttributeParameter").AttributeParameter;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 var MethodParameter = require("./MethodParameter").MethodParameter;
+var VoidType = require("../type/VoidType").VoidType;
 
 function UnresolvedParameter(id) {
-	this.id = id;
-	this.resolved = null;
-	return this;
+    this.id = id;
+    this.resolved = null;
+    return this;
 }
 
 Object.defineProperty(UnresolvedParameter.prototype, "name", {
@@ -31,33 +32,37 @@ UnresolvedParameter.prototype.toDialect = function(writer) {
 };
 
 UnresolvedParameter.prototype.check = function(context) {
-	this.resolveAndCheck(context);
+    this.resolveAndCheck(context);
 };
 
 UnresolvedParameter.prototype.getProto = function() {
-	return this.name;
+    return this.name;
 };
 
 UnresolvedParameter.prototype.getType = function(context) {
-	this.resolveAndCheck(context);
-	return this.resolved.getType(context);
+    this.resolveAndCheck(context);
+    return this.resolved.getType(context);
 };
 
 UnresolvedParameter.prototype.register = function(context) {
-	this.resolveAndCheck(context);
-	this.resolved.register(context);
+    this.resolveAndCheck(context);
+    if(this.resolved!=null)
+        this.resolved.register(context);
     if(this.defaultExpression!=null)
         context.setValue(this.id, this.defaultExpression.interpret(context));
 };
 
 UnresolvedParameter.prototype.checkValue = function(context, value) {
-	this.resolveAndCheck(context);
-	return this.resolved.checkValue(context, value);
+    this.resolveAndCheck(context);
+    if(this.resolved!=null)
+        return this.resolved.checkValue(context, value);
+    else
+        return VoidType.instance;
 };
 
 UnresolvedParameter.prototype.resolveAndCheck = function(context) {
-	if(this.resolved!=null)
-		return;
+    if(this.resolved!=null)
+        return;
     // ignore problems during resolution
     var listener = context.problemListener;
     try {
