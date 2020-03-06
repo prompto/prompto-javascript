@@ -40,10 +40,6 @@ test('MutableList', () => {
 	compareResourceOMO('mutability/mutableList.poc');
 });
 
-test('MutableMember', () => {
-	compareResourceOMO('mutability/mutableMember.poc');
-});
-
 test('MutableTuple', () => {
 	compareResourceOMO('mutability/mutableTuple.poc');
 });

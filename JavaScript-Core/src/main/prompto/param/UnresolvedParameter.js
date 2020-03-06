@@ -17,6 +17,11 @@ Object.defineProperty(UnresolvedParameter.prototype, "name", {
     }
 });
 
+
+UnresolvedParameter.prototype.setMutable =  function(mutable) {
+    this.mutable = mutable;
+};
+
 UnresolvedParameter.prototype.getTranspiledName =  function(context) {
     this.resolveAndCheck(context);
     return this.resolved.getTranspiledName(context);
@@ -80,6 +85,8 @@ UnresolvedParameter.prototype.resolveAndCheck = function(context) {
     }
     if(this.resolved==null)
         context.problemListener.reportUnknownVariable(this.id);
+    else
+        this.resolved.setMutable(this.mutable);
 };
 
 UnresolvedParameter.prototype.declare = function(transpiler) {

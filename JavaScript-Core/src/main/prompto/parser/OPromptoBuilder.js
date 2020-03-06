@@ -1971,7 +1971,7 @@ OPromptoBuilder.prototype.exitOperator_argument = function(ctx) {
 
 OPromptoBuilder.prototype.exitOperatorArgument = function(ctx) {
     var arg = this.getNodeValue(ctx.arg);
-    arg.mutable = ctx.MUTABLE()!=null;
+    arg.setMutable(ctx.MUTABLE()!=null);
     this.setNodeValue(ctx, arg);
 };
 

@@ -48,10 +48,6 @@ test('MutableList', () => {
 	compareResourceEME('mutability/mutableList.pec');
 });
 
-test('MutableMember', () => {
-	compareResourceEME('mutability/mutableMember.pec');
-});
-
 test('MutableTuple', () => {
 	compareResourceEME('mutability/mutableTuple.pec');
 });

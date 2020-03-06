@@ -21,6 +21,12 @@ Object.defineProperty(Parameter.prototype, "name", {
     }
 });
 
+
+Parameter.prototype.setMutable =  function(mutable) {
+    this.mutable = mutable;
+};
+
+
 Parameter.prototype.checkValue = function(context, expression) {
     var value = expression.interpret(context);
     if (value instanceof IntegerValue && this.getType(context)==DecimalType.instance) {

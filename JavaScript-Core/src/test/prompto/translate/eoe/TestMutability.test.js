@@ -48,10 +48,6 @@ test('MutableList', () => {
 	compareResourceEOE('mutability/mutableList.pec');
 });
 
-test('MutableMember', () => {
-	compareResourceEOE('mutability/mutableMember.pec');
-});
-
 test('MutableTuple', () => {
 	compareResourceEOE('mutability/mutableTuple.pec');
 });

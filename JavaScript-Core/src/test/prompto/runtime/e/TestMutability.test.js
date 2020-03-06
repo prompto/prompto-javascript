@@ -106,14 +106,6 @@ test('Transpiled MutableList', () => {
 	checkTranspiledOutput('mutability/mutableList.pec');
 });
 
-test('Interpreted MutableMember', () => {
-	checkInterpretedOutput('mutability/mutableMember.pec');
-});
-
-test('Transpiled MutableMember', () => {
-	checkTranspiledOutput('mutability/mutableMember.pec');
-});
-
 test('Interpreted MutableTuple', () => {
 	checkInterpretedOutput('mutability/mutableTuple.pec');
 });

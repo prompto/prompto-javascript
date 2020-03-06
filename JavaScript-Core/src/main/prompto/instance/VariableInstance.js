@@ -1,4 +1,5 @@
 var Variable = require("../runtime/Variable").Variable;
+var VoidType = require("../type/VoidType").VoidType;
 var CodeType = require("../type/CodeType").CodeType;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var CategoryType = require("../type/CategoryType").CategoryType;
@@ -52,10 +53,14 @@ VariableInstance.prototype.checkAssignValue = function(context, valueType, secti
 
 VariableInstance.prototype.checkAssignMember = function(context, id, valueType, section) {
     var actual = context.getRegisteredValue(this.id);
-    if(actual==null)
+    if(actual==null) {
         context.problemListener.reportUnknownVariable(section, this.id);
+        return VoidType.instance;
+    }
     var thisType = actual.getType(context);
-    if(thisType !== DocumentType.instance) {
+    if(thisType === DocumentType.instance)
+        return thisType;
+    else {
         if(thisType instanceof CategoryType && !thisType.mutable)
             context.problemListener.reportNotMutable(section, this.name);
         var requiredType = thisType.checkMember(context, section, id);

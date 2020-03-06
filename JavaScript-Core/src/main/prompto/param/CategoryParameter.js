@@ -13,6 +13,11 @@ function CategoryParameter(type, id, defaultExpression) {
 CategoryParameter.prototype = Object.create(Parameter.prototype);
 CategoryParameter.prototype.constructor = CategoryParameter;
 
+CategoryParameter.prototype.setMutable = function(mutable) {
+    this.type.mutable = mutable;
+    this.mutable = mutable;
+};
+
 CategoryParameter.prototype.getProto = function() {
 	return this.type.name;
 };
@@ -58,7 +63,7 @@ CategoryParameter.prototype.getType = function(context) {
 
 CategoryParameter.prototype.toEDialect = function(writer) {
     var anonymous = "any"==this.type.name;
-    this.type.toDialect(writer);
+    this.type.toDialect(writer, true);
     if(anonymous) {
         writer.append(' ');
         writer.append(this.name);
@@ -70,7 +75,7 @@ CategoryParameter.prototype.toEDialect = function(writer) {
 };
 
 CategoryParameter.prototype.toODialect = function(writer) {
-    this.type.toDialect(writer);
+    this.type.toDialect(writer, true);
     writer.append(' ');
     writer.append(this.name);
 };
@@ -78,7 +83,7 @@ CategoryParameter.prototype.toODialect = function(writer) {
 CategoryParameter.prototype.toMDialect = function(writer) {
     writer.append(this.name);
     writer.append(':');
-    this.type.toDialect(writer);
+    this.type.toDialect(writer, true);
 };
 
 exports.CategoryParameter = CategoryParameter;

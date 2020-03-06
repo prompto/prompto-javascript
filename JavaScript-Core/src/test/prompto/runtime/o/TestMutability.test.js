@@ -90,14 +90,6 @@ test('Transpiled MutableList', () => {
 	checkTranspiledOutput('mutability/mutableList.poc');
 });
 
-test('Interpreted MutableMember', () => {
-	checkInterpretedOutput('mutability/mutableMember.poc');
-});
-
-test('Transpiled MutableMember', () => {
-	checkTranspiledOutput('mutability/mutableMember.poc');
-});
-
 test('Interpreted MutableTuple', () => {
 	checkInterpretedOutput('mutability/mutableTuple.poc');
 });

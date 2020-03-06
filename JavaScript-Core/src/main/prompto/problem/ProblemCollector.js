@@ -174,7 +174,7 @@ ProblemCollector.prototype.reportAssigningVoidType = function(section) {
     this.reportError(section, "Cannot assign void type");
 };
 
-ProblemCollector.prototype.reportNotMutalme = function(section, name) {
+ProblemCollector.prototype.reportNotMutable = function(section, name) {
     this.reportError(section, name + " is not mutable");
 };
 

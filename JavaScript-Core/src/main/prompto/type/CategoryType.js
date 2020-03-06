@@ -80,8 +80,8 @@ CategoryType.prototype.resolve = function(context, onError) {
 };
 
 
-CategoryType.prototype.toDialect = function(writer) {
-    if (this.mutable)
+CategoryType.prototype.toDialect = function(writer, skipMutable) {
+    if (this.mutable && !skipMutable)
         writer.append("mutable ");
     writer.append(this.name);
 };
