@@ -59,7 +59,7 @@ VariableInstance.prototype.checkAssignMember = function(context, id, valueType, 
     }
     var thisType = actual.getType(context);
     if(thisType === DocumentType.instance)
-        return thisType;
+        return valueType;
     else {
         if(thisType instanceof CategoryType && !thisType.mutable)
             context.problemListener.reportNotMutable(section, this.name);
