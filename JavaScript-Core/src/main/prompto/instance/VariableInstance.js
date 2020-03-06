@@ -1,6 +1,7 @@
 var Variable = require("../runtime/Variable").Variable;
 var CodeType = require("../type/CodeType").CodeType;
 var DocumentType = require("../type/DocumentType").DocumentType;
+var CategoryType = require("../type/CategoryType").CategoryType;
 
 function VariableInstance(id) {
     this.id = id;
@@ -55,6 +56,8 @@ VariableInstance.prototype.checkAssignMember = function(context, id, valueType, 
         context.problemListener.reportUnknownVariable(section, this.id);
     var thisType = actual.getType(context);
     if(thisType !== DocumentType.instance) {
+        if(thisType instanceof CategoryType && !thisType.mutable)
+            context.problemListener.reportNotMutable(section, this.name);
         var requiredType = thisType.checkMember(context, section, id);
         if (requiredType && !requiredType.isAssignableFrom(context, valueType))
             context.problemListener.reportIncompatibleTypes(section, requiredType, valueType);
