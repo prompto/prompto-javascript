@@ -6,31 +6,39 @@ function TypeMap() {
 
 TypeMap.prototype.inferType = function(context, section) {
 	var keys = Object.keys(this);
-	if(keys.length===0) {
-		return VoidType.instance;
+	switch (keys.length) {
+		case 0:
+			return VoidType.instance;
+		case 1:
+			return this[keys[0]];
+		default:
+			return this.doInferType(context, keys, section);
 	}
-	var type = null;
+};
+
+TypeMap.prototype.doInferType = function(context, keys, section) {
+	var inferred = null;
 	// first pass: get less specific type
 	for(var i=0;i<keys.length;i++) {
-		var common = this[keys[i]];
-		if(type==null) {
-			type = common;
-		} else if(type.isAssignableFrom(context, common)) {
+		var current = this[keys[i]];
+		if(inferred==null) {
+			inferred = current;
+		} else if(inferred.isAssignableFrom(context, current)) {
 			continue;
-		} else if(common.isAssignableFrom(context, type)) {
-			type = common;
+		} else if(current.isAssignableFrom(context, inferred)) {
+			inferred = current;
 		} else {
-			context.problemListener.reportIncompatibleTypes(section, common, type);
+			context.problemListener.reportIncompatibleTypes(section, current, inferred);
 		}
 	}
 	// second pass: check compatibility
 	keys.forEach(function(k) {
-        var t = this[k];
-		if(t!=type && !type.isAssignableFrom(context, t)) {
-            context.problemListener.reportIncompatibleTypes(section, type, t);
+        var type = this[k];
+		if(type!=inferred && !inferred.isAssignableFrom(context, type)) {
+            context.problemListener.reportIncompatibleTypes(section, inferred, type);
 		}
 	}, this);
-	return type;
+	return inferred;
 };
 
 exports.TypeMap = TypeMap;
