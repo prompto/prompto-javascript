@@ -3,6 +3,8 @@ var ObjectList = require("../utils/ObjectList").ObjectList;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
+var TypeMap = require("../type/TypeMap").TypeMap;
+var VoidType = require("../type/VoidType").VoidType;
 
 function IfStatement(condition, statements, elseIfs, elseStmts) {
 	BaseStatement.call(this);
@@ -32,11 +34,16 @@ IfStatement.prototype.setFinal = function(statements) {
 };
 
 IfStatement.prototype.check = function(context) {
-    var types = this.elements.map(function(element) {
-        return element.check(context);
+    var types = new TypeMap();
+    var section = null;
+    this.elements.forEach(function(element) {
+        var type = element.check(context);
+        if(type!==VoidType.instance) {
+            section = element;
+            types[type.name] = type;
+        }
     });
-    // TODO check consistency across elements
-	return types[0];
+	return types.inferType(context, section);
 };
 
 IfStatement.prototype.interpret = function(context) {
