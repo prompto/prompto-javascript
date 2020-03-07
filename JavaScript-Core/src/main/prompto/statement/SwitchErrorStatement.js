@@ -40,13 +40,14 @@ SwitchErrorStatement.prototype.collectReturnTypes = function(context, types) {
 	}
 	var local = context.newLocalContext();
 	local.registerValue(new ErrorVariable(this.errorId));
-	BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
+	var section = BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
 	if(this.alwaysInstructions!=null) {
 		type = this.alwaysInstructions.check(context, null);
 		if(type!=VoidType.instance) {
 			types[type.name] = type;
 		}
 	}
+	return section;
 };
 
 SwitchErrorStatement.prototype.interpret = function(context) {
