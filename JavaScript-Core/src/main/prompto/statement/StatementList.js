@@ -50,27 +50,17 @@ StatementList.prototype.checkStatements = function(context, returnType, nativeOn
         return VoidType.instance;
     } else {
         var section = null;
+        var stmts = nativeOnly ? this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this) : this;
         var types = new TypeMap();
-        if(nativeOnly) {
-            this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this)
-                .forEach(function (stmt) {
-                    var type = this.checkStatement(context, stmt);
-                    if(!stmt.canReturn())
-                        type = VoidType.instance;
-                    if(type!==VoidType.instance) {
-                        section = stmt;
-                        types[type.name] = type;
-                    }
-                }, this);
-        } else {
-            this.forEach(function (stmt) {
-                var type = this.checkStatement(context, stmt);
-                if(type!==VoidType.instance) {
-                    section = stmt;
-                    types[type.name] = type;
-                }
-            }, this);
-        }
+        stmts.forEach(function (stmt) {
+            var type = this.checkStatement(context, stmt);
+            if(!stmt.canReturn())
+                type = VoidType.instance;
+            if(type!==VoidType.instance) {
+                section = stmt;
+                types[type.name] = type;
+            }
+        }, this);
         return types.inferType(context, section);
     }
 };
