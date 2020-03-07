@@ -100,7 +100,7 @@ ConstructorExpression.prototype.check = function(context) {
     if(this.args!=null) {
         this.args.forEach(function(argument) {
             if(!cd.hasAttribute(context, argument.name))
-                context.problemListener.reportUnknownAttribute(argument.name);
+                context.problemListener.reportUnknownAttribute(argument.id);
             argument.check(context);
         });
     }
