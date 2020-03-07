@@ -14,13 +14,22 @@ ProblemCollector.prototype.collectProblem = function(problem) {
 };
 
 ProblemCollector.prototype.readSection = function(section) {
-    return {
-        path : section.path,
-        startLine : section.start && section.start.line,
-        startColumn : section.start && section.start.column,
-        endLine : section.end && section.end.line,
-        endColumn : section.end && section.end.column
-    };
+    if(section)
+        return {
+            path : section.path,
+            startLine : section.start && section.start.line,
+            startColumn : section.start && section.start.column,
+            endLine : section.end && section.end.line,
+            endColumn : section.end && section.end.column
+        };
+    else
+        return {
+            path : "",
+            startLine : 1,
+            startColumn : 1,
+            endLine : 99999,
+            endColumn : 99999
+        };
 };
 
 ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, line, column, msg, e) {

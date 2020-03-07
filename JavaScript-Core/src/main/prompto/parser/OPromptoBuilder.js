@@ -818,8 +818,9 @@ OPromptoBuilder.prototype.exitMethod_call_statement = function(ctx) {
 OPromptoBuilder.prototype.exitMethodSelector = function(ctx) {
     var call = this.getNodeValue(ctx.method);
     if (call.callable instanceof expression.UnresolvedIdentifier) {
-        var id = call.callable.id;
-        call.callable = new expression.UnresolvedSelector(null, id);
+        var callable = new expression.UnresolvedSelector(null, call.callable.id);
+        callable.copySectionFrom(call.callable);
+        call.callable = callable;
     }
     this.setNodeValue(ctx, call);
 };
