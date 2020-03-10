@@ -24,6 +24,13 @@ EnumeratedCategoryType.prototype = Object.create(CategoryType.prototype);
 EnumeratedCategoryType.prototype.constructor =  EnumeratedCategoryType;
 
 
+EnumeratedCategoryType.prototype.asMutable = function(mutable) {
+    if(mutable)
+        ; // TODO throw ?
+    return this;
+};
+
+
 EnumeratedCategoryType.prototype.checkExists = function(context) {
     // TODO
 };

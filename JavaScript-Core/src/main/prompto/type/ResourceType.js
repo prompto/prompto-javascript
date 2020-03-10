@@ -19,4 +19,12 @@ ResourceType.prototype.equals = function(obj) {
 };
 
 
+ResourceType.prototype.asMutable = function(mutable) {
+	if(mutable)
+		; // TODO throw ?
+	return this;
+};
+
+
+
 exports.ResourceType = ResourceType;

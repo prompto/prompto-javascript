@@ -54,6 +54,13 @@ CategoryType.prototype = Object.create(BaseType.prototype);
 CategoryType.prototype.constructor =  CategoryType;
 
 
+CategoryType.prototype.asMutable = function(mutable) {
+    if(mutable == this.mutable)
+        return this;
+    else
+        return new CategoryType(this.id, mutable);
+};
+
 CategoryType.prototype.anyfy = function() {
     if (this.name === "Any")
         return AnyType.instance;
