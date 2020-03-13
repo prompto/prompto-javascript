@@ -24,7 +24,7 @@ EnumeratedCategoryType.prototype = Object.create(CategoryType.prototype);
 EnumeratedCategoryType.prototype.constructor =  EnumeratedCategoryType;
 
 
-EnumeratedCategoryType.prototype.asMutable = function(mutable) {
+EnumeratedCategoryType.prototype.asMutable = function(context, mutable) {
     if(mutable)
         ; // TODO throw ?
     return this;

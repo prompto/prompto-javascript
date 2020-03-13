@@ -9,17 +9,17 @@ var IterableType = require("../type/IterableType").IterableType;
 var MethodType = require("../type/MethodType").MethodType;
 var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
-function getTargetType(context, itype) {
+function getTargetType(context, itype, mutable) {
     if (itype instanceof IterableType) {
         var itemType = getTargetType(context, itype.itemType);
         if(itemType)
-            return itype.withItemType(itemType);
+            return itype.withItemType(itemType).asMutable(context, mutable);
         else
             return AnyType.instance
     } else if (itype instanceof NativeType) {
-        return itype
+        return itype.asMutable(context, mutable)
     } else
-        return getTargetAtomicType(context, itype);
+        return getTargetAtomicType(context, itype).asMutable(context, mutable);
 }
 
 
@@ -40,10 +40,11 @@ function getTargetAtomicType(context, itype) {
 }
 
 
-function CastExpression(expression, type) {
+function CastExpression(expression, type, mutable) {
     Expression.call(this);
     this.expression = expression;
     this.type = type.anyfy();
+    this.mutable = mutable;
     return this;
 }
 
@@ -52,7 +53,7 @@ CastExpression.prototype.constructor = CastExpression;
 
 CastExpression.prototype.check = function(context) {
     var actual = this.expression.check(context).anyfy();
-    var target = getTargetType(context, this.type);
+    var target = getTargetType(context, this.type, this.mutable);
     // check Any
     if(actual === AnyType.instance)
         return target;
@@ -105,6 +106,8 @@ CastExpression.prototype.toDialect = function(writer) {
 CastExpression.prototype.toEDialect = function(writer) {
     this.expression.toDialect(writer);
     writer.append(" as ");
+    if(this.mutable)
+        writer.append("mutable ");
     this.type.toDialect(writer);
 };
 
@@ -114,6 +117,8 @@ CastExpression.prototype.toMDialect = function(writer) {
 
 CastExpression.prototype.toODialect = function(writer) {
     writer.append("(");
+    if(this.mutable)
+        writer.append("mutable ");
     this.type.toDialect(writer);
     writer.append(")");
     this.expression.toDialect(writer);

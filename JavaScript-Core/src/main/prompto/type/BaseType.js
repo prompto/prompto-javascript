@@ -32,6 +32,13 @@ BaseType.prototype.resolve = function(context, onError) {
 };
 
 
+BaseType.prototype.asMutable = function(context, mutable) {
+    if(mutable)
+        context.problemListener.reportError(section, this.name + " cannot be mutable");
+    else
+        return this;
+};
+
 BaseType.prototype.getTranspiledName = function() {
     return this.name;
 };

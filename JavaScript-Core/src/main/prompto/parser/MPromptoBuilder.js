@@ -2359,7 +2359,7 @@ MPromptoBuilder.prototype.exitAnyDictType = function(ctx) {
 MPromptoBuilder.prototype.exitCastExpression = function(ctx) {
     var left = this.getNodeValue(ctx.left);
     var type = this.getNodeValue(ctx.right);
-    this.setNodeValue(ctx, new expression.CastExpression(left, type));
+    this.setNodeValue(ctx, new expression.CastExpression(left, type, ctx.MUTABLE() != null));
 }
 
 MPromptoBuilder.prototype.exitCatchAtomicStatement = function(ctx) {

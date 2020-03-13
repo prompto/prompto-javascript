@@ -104,7 +104,7 @@ ConstructorExpression.prototype.check = function(context) {
             argument.check(context);
         });
     }
-    return cd.getType().asMutable(this.type.mutable);
+    return cd.getType().asMutable(context, this.type.mutable);
 };
 
 ConstructorExpression.prototype.interpret = function(context) {

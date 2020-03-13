@@ -54,7 +54,7 @@ CategoryType.prototype = Object.create(BaseType.prototype);
 CategoryType.prototype.constructor =  CategoryType;
 
 
-CategoryType.prototype.asMutable = function(mutable) {
+CategoryType.prototype.asMutable = function(context, mutable) {
     if(mutable == this.mutable)
         return this;
     else
