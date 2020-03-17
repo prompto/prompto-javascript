@@ -86,7 +86,7 @@ DictionaryType.prototype.transpileAdd = function(transpiler, other, tryReverse, 
 
 
 
-DictionaryType.prototype.checkContains = function(context, other) {
+DictionaryType.prototype.checkContains = function(context, section, other) {
     if(other==TextType.instance) {
         return BooleanType.instance;
     } else {
