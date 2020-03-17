@@ -169,11 +169,11 @@ TextType.prototype.transpileMember = function(transpiler, name) {
     }
 };
 
-TextType.prototype.checkContains = function(context, other) {
+TextType.prototype.checkContains = function(context, section, other) {
     if(other instanceof TextType || other instanceof CharacterType) {
         return BooleanType.instance;
     }
-    return NativeType.prototype.checkContains.call(this, context, other);
+    return NativeType.prototype.checkContains.call(this, context, section, other);
 };
 
 

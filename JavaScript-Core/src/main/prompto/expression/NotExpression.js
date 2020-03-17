@@ -2,6 +2,7 @@ var Expression = require("./Expression").Expression;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
+var BooleanType = require("../type/BooleanType").BooleanType;
 
 function NotExpression(expression) {
     Expression.call(this);
@@ -38,9 +39,14 @@ NotExpression.prototype.toODialect = function(writer) {
 };
 
 
-NotExpression.prototype.check = function(context) {
-	var type = this.expression.check(context);
-	return type.checkNot(context);
+NotExpression.prototype.check = function (context) {
+    var type = this.expression.check(context);
+    if (type)
+        return type.checkNot(context);
+    else {
+        context.problemListener.reportError(this, "Could not check expression to negate");
+        return BooleanType.instance; // don't propagate error
+    }
 };
 
 

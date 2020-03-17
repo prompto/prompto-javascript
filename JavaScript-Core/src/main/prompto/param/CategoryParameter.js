@@ -43,7 +43,10 @@ CategoryParameter.prototype.register = function(context) {
 
 CategoryParameter.prototype.check = function(context) {
     this.resolve(context);
-	this.resolved.checkExists(context);
+	if(this.resolved)
+        this.resolved.checkExists(context);
+	else
+        context.problemListener.reportUnknownCategory(this.type.id);
 };
 
 CategoryParameter.prototype.resolve = function(context) {

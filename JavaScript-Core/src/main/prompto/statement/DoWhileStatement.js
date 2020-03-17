@@ -33,14 +33,13 @@ DoWhileStatement.prototype.transpile = function(transpiler) {
 };
 
 
-
-DoWhileStatement.prototype.check = function(context) {
-	var cond = this.condition.check(context);
-	if(cond!=BooleanType.instance) {
-		throw new SyntaxError("Expected a Boolean condition!");
-	}
-	var child = context.newChildContext();
-	return this.statements.check(child, null);
+DoWhileStatement.prototype.check = function (context) {
+    var cond = this.condition.check(context);
+    if (cond != BooleanType.instance) {
+        context.problemListener.reportError(this, "Expected a Boolean condition!");
+    }
+    var child = context.newChildContext();
+    return this.statements.check(child, null);
 };
 
 DoWhileStatement.prototype.interpret = function(context) {

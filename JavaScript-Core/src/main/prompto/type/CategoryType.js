@@ -13,6 +13,7 @@ var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var Operator = require("../grammar/Operator").Operator;
 var BaseType = require("./BaseType").BaseType;
+var VoidType = require("./VoidType").VoidType;
 var NativeType = require("./NativeType").NativeType;
 var NullType = require("./NullType").NullType;
 var TextType = require("./TextType").TextType;
@@ -75,11 +76,11 @@ CategoryType.prototype.resolve = function(context, onError) {
         return type;
     var decl = context.getRegisteredDeclaration(type.name);
     if(!decl) {
-        if(onError) {
+        if(onError)
             onError(type);
-            return null;
-        } else
-            throw new SyntaxError("Unkown type: " + type.name);
+        else
+            context.problemListener.reportUnknownCategory(this.id);
+        return AnyType.instance; // don't propagate error
     } else if(decl instanceof MethodDeclarationMap)
         return new MethodType(decl.getFirst());
     else
@@ -358,7 +359,7 @@ CategoryType.prototype.checkMember = function(context, section, id) {
     var decl = context.getRegisteredDeclaration(this.name);
     if (decl == null) {
         context.problemListener.reportUnknownCategory(this.id);
-        return null;
+        return VoidType.instance;
     }
     if (decl instanceof EnumeratedNativeDeclaration) {
         return decl.getType(context).checkMember(context, section, id);
@@ -366,7 +367,7 @@ CategoryType.prototype.checkMember = function(context, section, id) {
         return this.checkCategoryMember(context, section, decl, id);
     } else {
         context.problemListener.reportUnknownCategory(this.id);
-        return null;
+        return VoidType.instance;
     }
 };
 

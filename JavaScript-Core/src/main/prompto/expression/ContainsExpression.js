@@ -40,10 +40,10 @@ ContainsExpression.prototype.check = function(context) {
     switch(this.operator) {
     case ContOp.IN:
     case ContOp.NOT_IN:
-        return rt.checkContains(context,lt);
+        return rt.checkContains(context, this, lt);
     case ContOp.HAS:
     case ContOp.NOT_HAS:
-        return lt.checkContains(context, rt);
+        return lt.checkContains(context, this, rt);
     default:
         return lt.checkContainsAllOrAny(context, rt);
     }

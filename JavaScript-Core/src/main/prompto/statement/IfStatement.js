@@ -159,7 +159,7 @@ IfElement.prototype.check = function(context) {
     if(this.condition) {
         var type = this.condition.check(context);
         if(type!=BooleanType.instance) {
-            throw new SyntaxError("Expected a boolean condition!");
+            context.problemListener.reportError(this, "Expected a Boolean condition!");
         }
     }
     context = this.downCast(context, false);

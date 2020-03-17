@@ -25,11 +25,11 @@ function ContainerType(id, itemType) {
 ContainerType.prototype = Object.create(IterableType.prototype);
 ContainerType.prototype.constructor = ContainerType;
 
-ContainerType.prototype.checkContains = function(context, other) {
+ContainerType.prototype.checkContains = function(context, section, other) {
 	if(other.isAssignableFrom(context, this.itemType)) {
 		return BooleanType.instance;
 	} else {
-		return IterableType.prototype.checkContains.call(this, context, other);
+		return IterableType.prototype.checkContains.call(this, context, section, other);
 	}
 };
 

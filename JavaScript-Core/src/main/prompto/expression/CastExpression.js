@@ -12,14 +12,19 @@ var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 function getTargetType(context, itype, mutable) {
     if (itype instanceof IterableType) {
         var itemType = getTargetType(context, itype.itemType);
-        if(itemType)
+        if (itemType)
             return itype.withItemType(itemType).asMutable(context, mutable);
         else
-            return AnyType.instance
+            return AnyType.instance;
     } else if (itype instanceof NativeType) {
         return itype.asMutable(context, mutable)
-    } else
-        return getTargetAtomicType(context, itype).asMutable(context, mutable);
+    } else {
+        itype = getTargetAtomicType(context, itype);
+        if (itype != null)
+            return itype.asMutable(context, mutable);
+        else
+            return null;
+    }
 }
 
 
@@ -52,7 +57,13 @@ CastExpression.prototype = Object.create(Expression.prototype);
 CastExpression.prototype.constructor = CastExpression;
 
 CastExpression.prototype.check = function(context) {
-    var actual = this.expression.check(context).anyfy();
+    var actual = this.expression.check(context);
+    if(actual)
+        actual = actual.anyfy();
+    else {
+        context.problemListener.reportError(this, "Could not check expression type");
+        return AnyType.instance;
+    }
     var target = getTargetType(context, this.type, this.mutable);
     // check Any
     if(actual === AnyType.instance)

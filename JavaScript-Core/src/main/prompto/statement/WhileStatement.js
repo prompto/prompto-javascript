@@ -38,7 +38,7 @@ WhileStatement.prototype.transpile = function(transpiler) {
 WhileStatement.prototype.check = function(context) {
 	var cond = this.condition.check(context);
 	if(cond!=BooleanType.instance) {
-		throw new SyntaxError("Expected a Boolean condition!");
+        context.problemListener.reportError(this, "Expected a Boolean condition!");
 	}
 	var child = context.newChildContext();
 	return this.statements.check(child, null);

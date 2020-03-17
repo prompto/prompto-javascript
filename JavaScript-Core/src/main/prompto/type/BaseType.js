@@ -2,10 +2,12 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var EnumeratedNativeType = null;
 var VoidType = null;
 var TextType = null;
+var BooleanType = null;
 var NullType = null;
 
 exports.resolve = function() {
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
+    BooleanType = require("./BooleanType").BooleanType;
     VoidType = require("./VoidType").VoidType;
     TextType = require("./TextType").TextType;
     NullType = require("./NullType").NullType;
@@ -286,11 +288,13 @@ BaseType.prototype.transpileCompare = function(transpiler, other, operator, left
 };
 
 
-BaseType.prototype.checkContains = function(context, other) {
+BaseType.prototype.checkContains = function(context, section, other) {
     if(other instanceof EnumeratedNativeType)
-        return this.checkContains(context, other.derivedFrom);
-    else
-        throw new SyntaxError(this.name + " cannot contain " + other.name);
+        return this.checkContains(context, section, other.derivedFrom);
+    else {
+        context.problemListener.reportError(section, this.name + " cannot contain " + other.name);
+        return BooleanType.instance;
+    }
 };
 
 
