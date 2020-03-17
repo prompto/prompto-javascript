@@ -388,6 +388,7 @@ CategoryType.prototype.checkCategoryMember = function(context, section, decl, id
         return new MethodType(method);
     } else {
         context.problemListener.reportUnknownAttribute(id);
+        return AnyType.instance;
     }
 };
 
