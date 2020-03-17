@@ -7,6 +7,7 @@ var NullReferenceError = require("../error/NullReferenceError").NullReferenceErr
 var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
 var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 var ListType = require("../type/ListType").ListType;
+var AnyType = require("../type/AnyType").AnyType;
 
 
 function FilteredExpression(itemId, source, predicate) {
@@ -29,7 +30,7 @@ FilteredExpression.prototype.check = function(context) {
 	var sourceType = this.source.check(context);
 	if(!(sourceType instanceof IterableType)) {
         context.problemListener.reportError(this, "Expecting an iterable type as data source !");
-        return AnyType.instance;
+        return new ListType(AnyType.instance);
 	}
     var itemType = sourceType.itemType;
 	if(this.itemId!=null) {
