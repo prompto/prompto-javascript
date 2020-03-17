@@ -28,7 +28,8 @@ FilteredExpression.prototype.toString = function(dialect) {
 FilteredExpression.prototype.check = function(context) {
 	var sourceType = this.source.check(context);
 	if(!(sourceType instanceof IterableType)) {
-		throw new SyntaxError("Expecting an iterable type as data source !");
+        context.problemListener.reportError(this, "Expecting an iterable type as data source !");
+        return AnyType.instance;
 	}
     var itemType = sourceType.itemType;
 	if(this.itemId!=null) {
@@ -36,12 +37,12 @@ FilteredExpression.prototype.check = function(context) {
         child.registerValue(new Variable(this.itemId, itemType));
         var filterType = this.predicate.check(child);
         if (filterType != BooleanType.instance) {
-            throw new SyntaxError("Filtering expression must return a boolean !");
+            context.problemListener.reportError(this, "Filtering expression must return a boolean !");
         }
     } else if(this.predicate instanceof ArrowExpression) {
         // TODO
     } else
-        throw new SyntaxError("Expecting an arrow expression!");
+        context.problemListener.reportError(this, "Expected an arrow expression!");
     return new ListType(itemType);
 };
 
