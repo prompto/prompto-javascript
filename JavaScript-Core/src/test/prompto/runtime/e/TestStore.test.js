@@ -42,6 +42,38 @@ test('Transpiled DeleteRecords', () => {
 	checkTranspiledOutput('store/deleteRecords.pec');
 });
 
+test('Interpreted FetchAnd', () => {
+	checkInterpretedOutput('store/fetchAnd.pec');
+});
+
+test('Transpiled FetchAnd', () => {
+	checkTranspiledOutput('store/fetchAnd.pec');
+});
+
+test('Interpreted FetchBoolean', () => {
+	checkInterpretedOutput('store/fetchBoolean.pec');
+});
+
+test('Transpiled FetchBoolean', () => {
+	checkTranspiledOutput('store/fetchBoolean.pec');
+});
+
+test('Interpreted FetchNotBoolean', () => {
+	checkInterpretedOutput('store/fetchNotBoolean.pec');
+});
+
+test('Transpiled FetchNotBoolean', () => {
+	checkTranspiledOutput('store/fetchNotBoolean.pec');
+});
+
+test('Interpreted FetchOr', () => {
+	checkInterpretedOutput('store/fetchOr.pec');
+});
+
+test('Transpiled FetchOr', () => {
+	checkTranspiledOutput('store/fetchOr.pec');
+});
+
 test('Interpreted Flush', () => {
 	checkInterpretedOutput('store/flush.pec');
 });

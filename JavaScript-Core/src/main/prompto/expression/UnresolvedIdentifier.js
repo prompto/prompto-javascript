@@ -74,10 +74,36 @@ UnresolvedIdentifier.prototype.interpret = function(context) {
     return this.resolved.interpret(context);
 };
 
+
+UnresolvedIdentifier.prototype.interpretQuery = function(context, builder) {
+    if(this.resolved==null) {
+        this.resolveAndCheck(context, false);
+    }
+    this.resolved.interpretQuery(context, builder);
+};
+
+
+UnresolvedIdentifier.prototype.declareQuery = function(transpiler) {
+    if(this.resolved==null) {
+        this.resolveAndCheck(transpiler.context, false);
+    }
+    this.resolved && this.resolved.declareQuery(transpiler);
+};
+
+
+UnresolvedIdentifier.prototype.transpileQuery = function(transpiler, builderName) {
+    if(this.resolved==null) {
+        this.resolveAndCheck(transpiler.context, false);
+    }
+    this.resolved && this.resolved.transpileQuery(transpiler, builderName);
+};
+
+
 UnresolvedIdentifier.prototype.resolveAndCheck = function(context, forMember) {
     this.resolve(context, forMember);
     return this.resolved ? this.resolved.check(context) : VoidType.instance;
 };
+
 
 UnresolvedIdentifier.prototype.resolve = function(context, forMember, updateSelectorParent) {
     if(updateSelectorParent)

@@ -1,5 +1,6 @@
 var NativeType = require("./NativeType").NativeType;
 var Identifier = require("../grammar/Identifier").Identifier;
+var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var BooleanValue = null;
 
 exports.resolve = function() {
@@ -8,6 +9,7 @@ exports.resolve = function() {
 
 function BooleanType()  {
 	NativeType.call(this, new Identifier("Boolean"));
+	this.family = TypeFamily.BOOLEAN;
 	return this;
 }
 

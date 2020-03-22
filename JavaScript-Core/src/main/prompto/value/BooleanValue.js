@@ -26,6 +26,11 @@ BooleanValue.Parse = function(text) {
 };
 
 
+BooleanValue.prototype.getStorableData = function() {
+	return this.value;
+};
+
+
 BooleanValue.prototype.getValue = function() {
 	return this.value;
 };

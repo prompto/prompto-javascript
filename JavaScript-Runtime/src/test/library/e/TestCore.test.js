@@ -59,6 +59,14 @@ test('Transpiled Cloud', () => {
 	runTranspiledTests('core/cloud.pec');
 });
 
+test('Interpreted Config', () => {
+	runInterpretedTests('core/config.pec');
+});
+
+test('Transpiled Config', () => {
+	runTranspiledTests('core/config.pec');
+});
+
 test('Interpreted Error', () => {
 	runInterpretedTests('core/error.pec');
 });

@@ -97,5 +97,29 @@ AndExpression.prototype.transpileFound = function(transpiler, dialect) {
 };
 
 
+
+AndExpression.prototype.interpretQuery = function(context, query) {
+    if (!this.left["interpretQuery"])
+        throw new SyntaxError("Not a predicate: " + this.left.toString());
+    this.left.interpretQuery(context, query);
+    if (!this.right["interpretQuery"])
+        throw new SyntaxError("Not a predicate: " + this.right.toString());
+    this.right.interpretQuery(context, query);
+    query.and();
+};
+
+
+AndExpression.prototype.declareQuery = function(transpiler) {
+    this.left.declareQuery(transpiler);
+    this.right.declareQuery(transpiler);
+};
+
+
+AndExpression.prototype.transpileQuery = function(transpiler, builderName) {
+    this.left.transpileQuery(transpiler, builderName);
+    this.right.transpileQuery(transpiler, builderName);
+    transpiler.append(builderName).append(".and();").newLine();
+};
+
 exports.AndExpression = AndExpression;
 

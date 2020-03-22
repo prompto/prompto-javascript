@@ -16,6 +16,22 @@ test('DeleteRecords', () => {
 	compareResourceEME('store/deleteRecords.pec');
 });
 
+test('FetchAnd', () => {
+	compareResourceEME('store/fetchAnd.pec');
+});
+
+test('FetchBoolean', () => {
+	compareResourceEME('store/fetchBoolean.pec');
+});
+
+test('FetchNotBoolean', () => {
+	compareResourceEME('store/fetchNotBoolean.pec');
+});
+
+test('FetchOr', () => {
+	compareResourceEME('store/fetchOr.pec');
+});
+
 test('Flush', () => {
 	compareResourceEME('store/flush.pec');
 });

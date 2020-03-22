@@ -108,10 +108,17 @@ OrExpression.prototype.interpretQuery = function(context, query) {
     query.or();
 };
 
-OrExpression.prototype.transpileQuery = function(transpiler, builder) {
-    this.left.transpileQuery(transpiler, builder);
-    this.right.transpileQuery(transpiler, builder);
-    transpiler.append(builder).append(".or();").newLine();
+
+OrExpression.prototype.declareQuery = function(transpiler) {
+    this.left.declareQuery(transpiler);
+    this.right.declareQuery(transpiler);
+};
+
+
+OrExpression.prototype.transpileQuery = function(transpiler, builderName) {
+    this.left.transpileQuery(transpiler, builderName);
+    this.right.transpileQuery(transpiler, builderName);
+    transpiler.append(builderName).append(".or();").newLine();
 };
 
 

@@ -5,16 +5,23 @@ var Parameter = require("../param/Parameter").Parameter;
 var Dialect = require("../parser/Dialect").Dialect;
 var CategoryDeclaration = null;
 var VoidType = require("../type/VoidType").VoidType;
+var BooleanType = require("../type/BooleanType").BooleanType;
 var MethodType = require("../type/MethodType").MethodType;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
 var MethodDeclarationMap = null;
 var InstanceContext = null;
+var EqualsExpression = null;
+var EqOp = require("../grammar/EqOp").EqOp;
+var EqualsExpression = null;
+var BooleanLiteral = null;
 
 exports.resolve = function() {
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     InstanceContext = require("../runtime/Context").InstanceContext;
+    EqualsExpression = require("./EqualsExpression").EqualsExpression;
+    BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
 }
 
 function InstanceExpression(id) {
@@ -118,6 +125,7 @@ InstanceExpression.prototype.check = function(context) {
     }
 };
 
+
 InstanceExpression.prototype.interpret = function(context) {
     if(context.hasValue(this.id)) {
         return context.getValue(this.id);
@@ -131,5 +139,35 @@ InstanceExpression.prototype.interpret = function(context) {
         }
     }
 };
+
+
+InstanceExpression.prototype.toPredicate = function(context) {
+    var decl = context.findAttribute(this.id.name);
+    if(!decl)
+        context.problemListener.reportUnknownIdentifier(this.id);
+    else if(decl.getType()!=BooleanType.instance)
+        context.problemListener.reportError(this.id, "Expected a Boolean, got: " + decl.getType());
+    else
+        return new EqualsExpression(this, EqOp.EQUALS, new BooleanLiteral("true"));
+};
+
+
+InstanceExpression.prototype.interpretQuery = function(context, builder) {
+    var predicate = this.toPredicate(context);
+    predicate && predicate.interpretQuery(context, builder);
+};
+
+
+InstanceExpression.prototype.declareQuery = function(transpiler) {
+    var predicate = this.toPredicate(transpiler.context);
+    predicate && predicate.declareQuery(transpiler);
+};
+
+
+InstanceExpression.prototype.transpileQuery = function(transpiler, builderName) {
+    var predicate = this.toPredicate(transpiler.context);
+    predicate && predicate.transpileQuery(transpiler, builderName);
+};
+
 
 exports.InstanceExpression = InstanceExpression;

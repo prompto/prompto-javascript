@@ -79,6 +79,26 @@ NotExpression.prototype.interpretAssert = function(context, test) {
 };
 
 
+NotExpression.prototype.interpretQuery = function(context, query) {
+    if (!this.expression["interpretQuery"])
+        throw new SyntaxError("Not a predicate: " + this.expression.toString());
+    this.expression.interpretQuery(context, query);
+    query.not();
+};
+
+
+NotExpression.prototype.declareQuery = function(transpiler) {
+    this.expression.declareQuery(transpiler);
+};
+
+
+NotExpression.prototype.transpileQuery = function(transpiler, builderName) {
+    this.expression.transpileQuery(transpiler, builderName);
+    transpiler.append(builderName).append(".not();").newLine();
+};
+
+
+
 NotExpression.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(dialect, context);
     writer.escapeMode = escapeMode;
