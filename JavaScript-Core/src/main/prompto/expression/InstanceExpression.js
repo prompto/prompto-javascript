@@ -13,7 +13,6 @@ var MethodDeclarationMap = null;
 var InstanceContext = null;
 var EqualsExpression = null;
 var EqOp = require("../grammar/EqOp").EqOp;
-var EqualsExpression = null;
 var BooleanLiteral = null;
 
 exports.resolve = function() {
