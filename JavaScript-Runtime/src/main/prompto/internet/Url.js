@@ -26,9 +26,9 @@ Url.prototype.readFully = function() {
     } else {
         /* global XMLHttpRequest */
         var r = new XMLHttpRequest();
-        r.setRequestHeader("Access-Control-Allow-Origin", "*");
         r.overrideMimeType('text/plain');
         r.open('GET', this.path, false);
+        r.setRequestHeader("Access-Control-Allow-Origin", "*");
         r.send();
         if (r.status != 200) {
             var rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
