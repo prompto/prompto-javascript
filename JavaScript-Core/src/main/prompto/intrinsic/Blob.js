@@ -14,6 +14,8 @@ Blob.fromFile = function(file) {
     return blob;
 };
 
+// TODO move the below to an Archive type
+
 Blob.fromValue = function(value) {
     var binaries = {};
     // create json type-aware object graph and collect binaries

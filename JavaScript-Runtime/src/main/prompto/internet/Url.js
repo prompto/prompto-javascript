@@ -26,6 +26,7 @@ Url.prototype.readFully = function() {
     } else {
         /* global XMLHttpRequest */
         var r = new XMLHttpRequest();
+        r.setRequestHeader("Access-Control-Allow-Origin", "*");
         r.overrideMimeType('text/plain');
         r.open('GET', this.path, false);
         r.send();

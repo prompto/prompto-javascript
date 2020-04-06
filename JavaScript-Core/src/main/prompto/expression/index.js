@@ -34,6 +34,7 @@ exports.IteratorExpression = require("./IteratorExpression").IteratorExpression;
 exports.SortedExpression = require("./SortedExpression").SortedExpression;
 exports.TernaryExpression = require("./TernaryExpression").TernaryExpression;
 exports.ReadAllExpression = require("./ReadAllExpression").ReadAllExpression;
+exports.ReadBlobExpression = require("./ReadBlobExpression").ReadBlobExpression;
 exports.ReadOneExpression = require("./ReadOneExpression").ReadOneExpression;
 exports.TypeExpression = require("./TypeExpression").TypeExpression;
 exports.CastExpression = require("./CastExpression").CastExpression;

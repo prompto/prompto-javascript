@@ -2810,6 +2810,15 @@ OParserListener.prototype.exitSorted_key = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#read_blob_expression.
+OParserListener.prototype.enterRead_blob_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#read_blob_expression.
+OParserListener.prototype.exitRead_blob_expression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#read_all_expression.
 OParserListener.prototype.enterRead_all_expression = function(ctx) {
 };

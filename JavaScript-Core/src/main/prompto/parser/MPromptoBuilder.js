@@ -2300,6 +2300,12 @@ MPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 };
 
 
+MPromptoBuilder.prototype.exitRead_blob_expression = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadBlobExpression(source));
+};
+
+
 MPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
     var source = this.getNodeValue(ctx.source);
     this.setNodeValue(ctx, new expression.ReadOneExpression(source));

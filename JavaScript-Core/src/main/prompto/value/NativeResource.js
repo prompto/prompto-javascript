@@ -16,6 +16,10 @@ NativeResource.prototype.isWritable = function() {
 	return this.instance.isWritable();
 };
 
+NativeResource.prototype.readBinary = function() {
+	return this.instance.readBinary();
+};
+
 NativeResource.prototype.readFully = function() {
 	return this.instance.readFully();
 };

@@ -2307,6 +2307,12 @@ OPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitRead_blob_expression = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadBlobExpression(source));
+};
+
+
 OPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
     var source = this.getNodeValue(ctx.source);
     this.setNodeValue(ctx, new expression.ReadOneExpression(source));
@@ -2367,7 +2373,8 @@ OPromptoBuilder.prototype.exitCastExpression = function(ctx) {
     var left = this.getNodeValue(ctx.left);
     var type = this.getNodeValue(ctx.right);
     this.setNodeValue(ctx, new expression.CastExpression(left, type, ctx.MUTABLE() != null));
-}
+};
+
 
 OPromptoBuilder.prototype.exitCatchAtomicStatement = function(ctx) {
 	var name = this.getNodeValue(ctx.name);
@@ -2409,20 +2416,24 @@ OPromptoBuilder.prototype.exitRaise_statement = function(ctx) {
 	this.setNodeValue(ctx, new statement.RaiseStatement(exp));
 };
 
+
 OPromptoBuilder.prototype.exitMatchingList = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
 	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
+
 
 OPromptoBuilder.prototype.exitMatchingRange = function(ctx) {
 	var exp = this.getNodeValue(ctx.source);
 	this.setNodeValue(ctx, new constraint.MatchingCollectionConstraint(exp));
 };
 
+
 OPromptoBuilder.prototype.exitMatchingExpression = function(ctx) {
 	var exp = this.getNodeValue(ctx.exp);
 	this.setNodeValue(ctx, new constraint.MatchingExpressionConstraint(exp));
 };
+
 
 OPromptoBuilder.prototype.exitMatchingPattern = function(ctx) {
 	this.setNodeValue(ctx, new constraint.MatchingPatternConstraint(new literal.TextLiteral(ctx.text.text)));

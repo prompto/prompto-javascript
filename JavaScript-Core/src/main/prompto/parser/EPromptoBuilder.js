@@ -2303,6 +2303,12 @@ EPromptoBuilder.prototype.exitRead_all_expression = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitRead_blob_expression = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    this.setNodeValue(ctx, new expression.ReadBlobExpression(source));
+};
+
+
 EPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
     var source = this.getNodeValue(ctx.source);
     this.setNodeValue(ctx, new expression.ReadOneExpression(source));
@@ -2310,6 +2316,12 @@ EPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitReadAllExpression = function(ctx) {
+    var exp = this.getNodeValue(ctx.exp);
+    this.setNodeValue(ctx, exp);
+};
+
+
+EPromptoBuilder.prototype.exitReadBlobExpression = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);
 };

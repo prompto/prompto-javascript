@@ -1037,6 +1037,15 @@ EParserListener.prototype.exitConstructorExpression = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#ReadBlobExpression.
+EParserListener.prototype.enterReadBlobExpression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ReadBlobExpression.
+EParserListener.prototype.exitReadBlobExpression = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#MultiplyExpression.
 EParserListener.prototype.enterMultiplyExpression = function(ctx) {
 };
@@ -2924,6 +2933,15 @@ EParserListener.prototype.enterSorted_key = function(ctx) {
 
 // Exit a parse tree produced by EParser#sorted_key.
 EParserListener.prototype.exitSorted_key = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#read_blob_expression.
+EParserListener.prototype.enterRead_blob_expression = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#read_blob_expression.
+EParserListener.prototype.exitRead_blob_expression = function(ctx) {
 };
 
 
