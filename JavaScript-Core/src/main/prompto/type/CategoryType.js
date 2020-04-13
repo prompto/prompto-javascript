@@ -353,8 +353,8 @@ CategoryType.prototype.checkExists = function(context) {
     this.getDeclaration(context);
 };
 
-CategoryType.prototype.checkMember = function(context, section, id) {
-    if( "category" === id.toString())
+CategoryType.prototype.checkMember = function(context, section, name) {
+    if( "category" === name)
         return new CategoryType(new Identifier("Category"));
     var decl = context.getRegisteredDeclaration(this.name);
     if (decl == null) {
@@ -362,9 +362,9 @@ CategoryType.prototype.checkMember = function(context, section, id) {
         return VoidType.instance;
     }
     if (decl instanceof EnumeratedNativeDeclaration) {
-        return decl.getType(context).checkMember(context, section, id);
+        return decl.getType(context).checkMember(context, section, name);
     } else if (decl instanceof CategoryDeclaration) {
-        return this.checkCategoryMember(context, section, decl, id);
+        return this.checkCategoryMember(context, section, decl, name);
     } else {
         context.problemListener.reportUnknownCategory(this.id);
         return VoidType.instance;
@@ -372,8 +372,7 @@ CategoryType.prototype.checkMember = function(context, section, id) {
 };
 
 
-CategoryType.prototype.checkCategoryMember = function(context, section, decl, id) {
-    var name = id.toString();
+CategoryType.prototype.checkCategoryMember = function(context, section, decl, name) {
     if(decl.storable && "dbId" === name)
         return AnyType.instance;
     else if (decl.hasAttribute(context, name)) {
@@ -388,7 +387,7 @@ CategoryType.prototype.checkCategoryMember = function(context, section, decl, id
         var method = decl.getMemberMethodsMap(context, name).getFirst();
         return new MethodType(method);
     } else {
-        context.problemListener.reportUnknownAttribute(id);
+        context.problemListener.reportUnknownAttribute(section);
         return AnyType.instance;
     }
 };

@@ -63,7 +63,7 @@ VariableInstance.prototype.checkAssignMember = function(context, id, valueType, 
     else {
         if(thisType instanceof CategoryType && !thisType.mutable)
             context.problemListener.reportNotMutable(section, this.name);
-        var requiredType = thisType.checkMember(context, section, id);
+        var requiredType = thisType.checkMember(context, section, id.name);
         if (requiredType && !requiredType.isAssignableFrom(context, valueType))
             context.problemListener.reportIncompatibleTypes(section, requiredType, valueType);
         return valueType;

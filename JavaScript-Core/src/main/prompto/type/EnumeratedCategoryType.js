@@ -36,22 +36,20 @@ EnumeratedCategoryType.prototype.checkExists = function(context) {
 };
 
 
-EnumeratedCategoryType.prototype.checkMember = function(context, section, id) {
-    var name = id.toString();
+EnumeratedCategoryType.prototype.checkMember = function(context, section, name) {
     if ("name"==name) {
         return TextType.instance;
     } else {
-        return CategoryType.prototype.checkMember.call(this, context, section, id);
+        return CategoryType.prototype.checkMember.call(this, context, section, name);
     }
 };
 
 
-EnumeratedCategoryType.prototype.checkStaticMember = function(context, section, id) {
-    var name = id.toString();
+EnumeratedCategoryType.prototype.checkStaticMember = function(context, section, name) {
     if ("symbols"==name) {
         return new ListType(this);
     } else {
-        return CategoryType.prototype.checkStaticMember.call(this, context, section, id);
+        return CategoryType.prototype.checkStaticMember.call(this, context, section, name);
     }
 };
 
