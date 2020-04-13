@@ -125,6 +125,10 @@ ProblemCollector.prototype.reportCannotIterate = function(source) {
 };
 
 
+ProblemCollector.prototype.reportCannotSort = function(source) {
+    this.reportError(source, "Cannot sort: " + source.toString());
+};
+
 ProblemCollector.prototype.reportInvalidItem = function(parentType, itemType, source) {
     this.reportError(source, "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString());
 };

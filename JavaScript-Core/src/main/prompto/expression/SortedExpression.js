@@ -14,44 +14,44 @@ var List = require("../intrinsic/List").List;
 
 function SortedExpression(source, desc, key) {
     Expression.call(this);
-	this.source = source;
+    this.source = source;
     this.desc = desc;
-	this.key = key || null;
-	return this;
+    this.key = key || null;
+    return this;
 }
 
 SortedExpression.prototype = Object.create(Expression.prototype);
 SortedExpression.prototype.constructor = SortedExpression;
 
-SortedExpression.prototype.toString = function() {
-	return "sorted " + (this.desc ? "descending " : "") + this.source.toString() +
-		(this.key==null ? "" : " with " + this.key.toString() + " as key");
+SortedExpression.prototype.toString = function () {
+    return "sorted " + (this.desc ? "descending " : "") + this.source.toString() +
+        (this.key == null ? "" : " with " + this.key.toString() + " as key");
 };
 
-SortedExpression.prototype.toDialect = function(writer) {
+SortedExpression.prototype.toDialect = function (writer) {
     writer.toDialect(this);
 };
 
-SortedExpression.prototype.toEDialect = function(writer) {
+SortedExpression.prototype.toEDialect = function (writer) {
     writer.append("sorted ");
-    if(this.desc)
+    if (this.desc)
         writer.append("descending ");
     this.source.toDialect(writer);
-    if(this.key!=null) {
+    if (this.key != null) {
         var type = this.source.check(writer.context);
         var itemType = type.itemType;
         writer = this.contextualizeWriter(writer, itemType);
         writer.append(" with ");
         var keyExp = this.key;
-        if(keyExp instanceof UnresolvedIdentifier) try {
+        if (keyExp instanceof UnresolvedIdentifier) try {
             keyExp = keyExp.resolve(writer.context, false);
         } catch (e) {
             // TODO add warning
         }
-        if(keyExp instanceof ArrowExpression) {
+        if (keyExp instanceof ArrowExpression) {
             keyExp.registerArrowArgs(writer.context, itemType);
             keyExp.toDialect(writer);
-        } else if(keyExp instanceof InstanceExpression)
+        } else if (keyExp instanceof InstanceExpression)
             keyExp.toDialect(writer, false);
         else
             keyExp.toDialect(writer);
@@ -59,13 +59,13 @@ SortedExpression.prototype.toEDialect = function(writer) {
     }
 }
 
-SortedExpression.prototype.toODialect = function(writer) {
+SortedExpression.prototype.toODialect = function (writer) {
     writer.append("sorted ");
-    if(this.desc)
+    if (this.desc)
         writer.append("desc ");
     writer.append("(");
     this.source.toDialect(writer);
-    if(this.key!=null) {
+    if (this.key != null) {
         var type = this.source.check(writer.context);
         var itemType = type.itemType;
         writer = this.contextualizeWriter(writer, itemType);
@@ -75,11 +75,11 @@ SortedExpression.prototype.toODialect = function(writer) {
     writer.append(")");
 }
 
-SortedExpression.prototype.toMDialect = function(writer) {
+SortedExpression.prototype.toMDialect = function (writer) {
     this.toODialect(writer);
 }
 
-SortedExpression.prototype.contextualizeWriter = function(writer, itemType) {
+SortedExpression.prototype.contextualizeWriter = function (writer, itemType) {
     if (itemType instanceof CategoryType)
         return writer.newInstanceWriter(itemType);
     else if (itemType instanceof DocumentType)
@@ -89,31 +89,31 @@ SortedExpression.prototype.contextualizeWriter = function(writer, itemType) {
 };
 
 
-SortedExpression.prototype.check = function(context) {
-	var type = this.source.check(context);
-	if(!(type instanceof ListType || type instanceof SetType)) {
-		throw new SyntaxError("Unsupported type: " + type);
-	}
-	return type;
+SortedExpression.prototype.check = function (context) {
+    var type = this.source.check(context);
+    if (!(type instanceof ListType || type instanceof SetType)) {
+        context.problemListener.reportCannotSort(this.source);
+    }
+    return type;
 };
 
 
-SortedExpression.prototype.interpret = function(context) {
-	var type = this.source.check(context);
-	if(!(type instanceof ListType || type instanceof SetType)) {
-		throw new SyntaxError("Unsupported type: " + type);
-	}
-	var coll = this.source.interpret(context);
-	if(coll==null) {
-		throw new NullReferenceError();
-	}
-	if(!(coll instanceof ListValue || coll instanceof SetValue)) {
-		throw new InternalError("Unexpected type:" + typeof(coll));
-	}
-	var items = coll instanceof ListValue ? coll.items : coll.items.set.values();
+SortedExpression.prototype.interpret = function (context) {
+    var type = this.source.check(context);
+    if (!(type instanceof ListType || type instanceof SetType)) {
+        throw new SyntaxError("Unsupported type: " + type);
+    }
+    var coll = this.source.interpret(context);
+    if (coll == null) {
+        throw new NullReferenceError();
+    }
+    if (!(coll instanceof ListValue || coll instanceof SetValue)) {
+        throw new InternalError("Unexpected type:" + typeof (coll));
+    }
+    var items = coll instanceof ListValue ? coll.items : coll.items.set.values();
     items = Array.from(items);
-	var itemType = type.itemType;
-	if(items.length > 1) {
+    var itemType = type.itemType;
+    if (items.length > 1) {
         var cmp = itemType.getSortedComparator(context, this.key, this.desc);
         items.sort(cmp);
     }
@@ -121,7 +121,7 @@ SortedExpression.prototype.interpret = function(context) {
 };
 
 
-SortedExpression.prototype.declare = function(transpiler) {
+SortedExpression.prototype.declare = function (transpiler) {
     transpiler.require(List);
     this.source.declare(transpiler);
     var type = this.source.check(transpiler.context);
@@ -129,7 +129,7 @@ SortedExpression.prototype.declare = function(transpiler) {
 };
 
 
-SortedExpression.prototype.transpile = function(transpiler) {
+SortedExpression.prototype.transpile = function (transpiler) {
     var type = this.source.check(transpiler.context);
     this.source.transpile(transpiler);
     transpiler.append(".sorted(");
