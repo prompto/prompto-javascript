@@ -555,9 +555,11 @@ ConcreteCategoryDeclaration.prototype.transpileLocalAttributes = function(transp
             var decl = transpiler.context.getRegisteredDeclaration(attr.name);
             transpiler.append("this.setMember('")
                     .append(attr.name)
-                    .append("', values.")
+                    .append("', values.hasOwnProperty('")
                     .append(attr.name)
-                    .append(" || null")
+                    .append("') ? values.")
+                    .append(attr.name)
+                    .append(" : null")
                     .append(", ")
                     .append(decl.storable)
                     .append(", mutable")
