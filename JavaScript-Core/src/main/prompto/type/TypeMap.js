@@ -1,4 +1,5 @@
 var VoidType = require("./VoidType").VoidType;
+var NullType = require("./NullType").NullType;
 
 function TypeMap() {
 	return this;
@@ -23,6 +24,8 @@ TypeMap.prototype.doInferType = function(context, keys, section) {
 		var current = this[keys[i]];
 		if(inferred==null) {
 			inferred = current;
+		} else if(current == NullType.instance) {
+			continue;
 		} else if(inferred.isAssignableFrom(context, current)) {
 			continue;
 		} else if(current.isAssignableFrom(context, inferred)) {
