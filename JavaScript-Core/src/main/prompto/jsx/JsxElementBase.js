@@ -178,7 +178,8 @@ const HTML_PROPERTY_TYPES = `{
     onClick: ClickEventCallback,
     onContextMenu: ClickEventCallback,
     onChange: InputChangedCallback,
-    key: Any 
+    key: Any,
+    ref: Text 
 }`; // TODO: 'key' is for React only
 
 
