@@ -66,8 +66,8 @@ EnumeratedCategoryDeclaration.prototype.register = function(context) {
 	});
 };
 
-EnumeratedCategoryDeclaration.prototype.check = function(context, isStart) {
-	ConcreteCategoryDeclaration.prototype.check.call(this, context, isStart);
+EnumeratedCategoryDeclaration.prototype.check = function(context) {
+	ConcreteCategoryDeclaration.prototype.check.call(this, context);
     this.symbols.forEach(function(symbol) {
         symbol.check(context);
 	});

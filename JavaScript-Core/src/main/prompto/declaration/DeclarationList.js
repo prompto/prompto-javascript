@@ -69,7 +69,10 @@ DeclarationList.prototype.unregister = function(context) {
 
 DeclarationList.prototype.check = function(context) {
     this.forEach(function(decl) {
-        decl.check(context, true);
+        if(decl instanceof BaseMethodDeclaration)
+            decl.check(context, {isStart: true, isMember: false});
+        else
+            decl.check(context);
     });
 };
 

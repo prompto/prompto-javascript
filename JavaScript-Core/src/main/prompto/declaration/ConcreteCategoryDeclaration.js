@@ -171,12 +171,12 @@ ConcreteCategoryDeclaration.ancestorHasMethod = function(ancestor, context, name
     return actual.hasMethod(context, name);
 };
 
-ConcreteCategoryDeclaration.prototype.check = function(context, isStart) {
+ConcreteCategoryDeclaration.prototype.check = function(context) {
     context = context.newInstanceContext(null, this.getType(context), false);
     this.checkDerived(context);
     this.processAnnotations(context, true);
     this.checkMethods(context);
-    return CategoryDeclaration.prototype.check.call(this, context, isStart);
+    return CategoryDeclaration.prototype.check.call(this, context);
 }
 
 ConcreteCategoryDeclaration.prototype.checkMethods = function(context) {
@@ -463,7 +463,7 @@ ConcreteCategoryDeclaration.prototype.declareMethods = function(transpiler) {
         return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
     }).forEach(function (method) {
         var t = transpiler.newChildTranspiler();
-        method.declare(t);
+        method.declare(t, {isStart: false, isMember: true});
         t.flush();
     }, this);
 };

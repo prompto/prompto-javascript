@@ -16,10 +16,10 @@ NativeMethodDeclaration.prototype.constructor = NativeMethodDeclaration;
 
 /* global intrinsic:writable */
 
-NativeMethodDeclaration.prototype.check = function(context, isStart) {
+NativeMethodDeclaration.prototype.check = function(context, flags) {
     /* eslint no-unused-vars: [ "off"] */
     intrinsic = require("../intrinsic");
-    if(isStart) {
+    if(flags.isStart) {
         context = context.newLocalContext();
         this.registerParameters(context);
     }

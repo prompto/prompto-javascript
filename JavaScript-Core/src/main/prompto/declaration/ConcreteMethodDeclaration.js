@@ -21,9 +21,9 @@ function ConcreteMethodDeclaration(id, args, returnType, statements) {
 ConcreteMethodDeclaration.prototype = Object.create(BaseMethodDeclaration.prototype);
 ConcreteMethodDeclaration.prototype.constructor = ConcreteMethodDeclaration;
 
-ConcreteMethodDeclaration.prototype.check = function(context, isStart) {
+ConcreteMethodDeclaration.prototype.check = function(context, flags) {
 	if(this.canBeChecked(context)) {
-		return this.fullCheck(context, isStart);
+		return this.fullCheck(context, flags);
 	} else {
 		return VoidType.instance;
 	}
@@ -50,11 +50,13 @@ ConcreteMethodDeclaration.prototype.mustBeCheckedInCallContext = function(contex
 	return false;
 };
 
-ConcreteMethodDeclaration.prototype.fullCheck = function(context, isStart) {
-	if(isStart) {
+ConcreteMethodDeclaration.prototype.fullCheck = function(context, flags) {
+	if(flags.isStart) {
 		context = context.newLocalContext();
 		this.registerParameters(context);
-	}
+	} else if(this.memberOf && !flags.isMember) {
+        this.memberOf.processAnnotations(context);
+    }
 	if(this.parameters!==null) {
 		this.parameters.check(context);
 	}

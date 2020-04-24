@@ -116,7 +116,7 @@ TestMethodDeclaration.prototype.transpileExpectedError = function(transpiler) {
     transpiler.flush();
 };
 
-TestMethodDeclaration.prototype.check = function(context, isStart) {
+TestMethodDeclaration.prototype.check = function(context) {
     context = context.newLocalContext();
     this.statements.forEach(function(s) {
         this.checkStatement(context, s);

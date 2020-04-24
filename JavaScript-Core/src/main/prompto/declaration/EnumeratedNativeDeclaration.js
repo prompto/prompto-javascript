@@ -77,7 +77,7 @@ EnumeratedNativeDeclaration.prototype.register = function(context) {
 	});
 };
 
-EnumeratedNativeDeclaration.prototype.check = function(context, isStart) {
+EnumeratedNativeDeclaration.prototype.check = function(context) {
     this.symbols.forEach(function(symbol) {
 		symbol.check(context);
 	});
