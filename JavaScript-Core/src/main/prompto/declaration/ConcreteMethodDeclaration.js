@@ -140,25 +140,30 @@ ConcreteMethodDeclaration.prototype.toODialect = function(writer) {
 };
 
 ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
-    if(this.declaring)
-        return;
-    this.declaring = true;
-    try {
-        if (this.memberOf) {
-            transpiler = transpiler.newLocalTranspiler();
-            transpiler.declare(this);
-            this.declareArguments(transpiler);
-        } else
-            this.memberOf.declare(transpiler);
-        if(this.returnType)
-            this.returnType.declare(transpiler);
-        this.registerParameters(transpiler.context);
-        this.statements.declare(transpiler);
-    } finally {
-        this.declaring = false;
+    if(!this.declaring) {
+        this.declaring = true;
+        try {
+            this.doDeclare(transpiler);
+        } finally {
+            this.declaring = false;
+        }
     }
 };
 
+
+ConcreteMethodDeclaration.prototype.doDeclare = function(transpiler) {
+    if(this.returnType)
+        this.returnType.declare(transpiler);
+    if (this.memberOf)
+        this.memberOf.declare(transpiler);
+    else {
+        transpiler = transpiler.newLocalTranspiler();
+        transpiler.declare(this);
+        this.declareArguments(transpiler);
+    }
+    this.registerParameters(transpiler.context);
+    this.statements.declare(transpiler);
+};
 
 ConcreteMethodDeclaration.prototype.transpile = function(transpiler) {
     this.registerParameters(transpiler.context);
