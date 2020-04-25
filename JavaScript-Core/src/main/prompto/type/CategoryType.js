@@ -337,7 +337,7 @@ CategoryType.prototype.checkOperator = function(context, other, tryReverse, oper
         context = context.newInstanceContext(null, this);
         var local = context.newLocalContext();
         method.registerParameters(local);
-        return method.check(local, {isStart: false, isMember: true});
+        return method.check(local, false);
     } catch(e) {
         // ok to pass, will try reverse
     }

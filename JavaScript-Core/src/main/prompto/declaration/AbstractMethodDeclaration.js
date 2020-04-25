@@ -14,11 +14,11 @@ AbstractMethodDeclaration.prototype.memberCheck = function(declaration, context)
     // TODO Auto-generated method stub
 };
 
-AbstractMethodDeclaration.prototype.check = function(context, flags) {
+AbstractMethodDeclaration.prototype.check = function(context, isStart) {
     if(this.parameters!=null) {
         this.parameters.check(context);
     }
-    if(flags.isStart) {
+    if(isStart) {
         var local = context.newLocalContext();
         this.registerParameters(local);
     }

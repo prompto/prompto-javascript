@@ -108,7 +108,7 @@ MethodCall.prototype.checkDeclaration = function(declaration, parent, local) {
 
 MethodCall.prototype.lightCheck = function(declaration, local) {
 	declaration.registerParameters(local);
-	return declaration.check(local, {isStart: false, isMember: false});
+	return declaration.check(local, false);
 };
 
 MethodCall.prototype.fullCheck = function(declaration, parent, local) {
@@ -120,7 +120,7 @@ MethodCall.prototype.fullCheck = function(declaration, parent, local) {
 			var value = argument.parameter.checkValue(parent, expression);
 			local.setValue(argument.id, value);
 		});
-		return declaration.check(local, {isStart: false, isMember: false});
+		return declaration.check(local, false);
 	} catch (e) {
 		if(e instanceof PromptoError) {
 			throw new SyntaxError(e.message);

@@ -461,7 +461,7 @@ ConcreteCategoryDeclaration.prototype.declareMethods = function(transpiler) {
         return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
     }).forEach(function (method) {
         var t = transpiler.newChildTranspiler();
-        method.declare(t, {isStart: false, isMember: true});
+        method.declare(t, false);
         t.flush();
     }, this);
 };
