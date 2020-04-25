@@ -183,7 +183,6 @@ MethodSelector.prototype.newInstanceCheckContext = function(context) {
     if (type instanceof CategoryType) {
         var decl = context.getRegisteredDeclaration(type.name);
         context = context.newInstanceContext(null, type, decl instanceof SingletonCategoryDeclaration);
-        decl.processAnnotations(context, true);
         return context.newChildContext();
     } else
         return context.newChildContext();

@@ -122,6 +122,9 @@ Context.prototype.newInstanceContext = function(instance, type, isChild) {
     context.parent = isChild ? this : null;
     context.debugger = this.debugger;
     context.problemListener = this.problemListener;
+    var decl = context.getDeclaration();
+    if(decl)
+        decl.processAnnotations(context, true);
     return context;
 };
 

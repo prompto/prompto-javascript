@@ -174,7 +174,6 @@ ConcreteCategoryDeclaration.ancestorHasMethod = function(ancestor, context, name
 ConcreteCategoryDeclaration.prototype.check = function(context) {
     context = context.newInstanceContext(null, this.getType(context), false);
     this.checkDerived(context);
-    this.processAnnotations(context, true);
     this.checkMethods(context);
     return CategoryDeclaration.prototype.check.call(this, context);
 }
@@ -444,7 +443,6 @@ ConcreteCategoryDeclaration.prototype.doCollectCategories = function(context, ca
 ConcreteCategoryDeclaration.prototype.declare = function(transpiler) {
     transpiler.declare(this);
     transpiler = transpiler.newInstanceTranspiler(this.getType(transpiler.context));
-    this.processAnnotations(transpiler.context, true);
     if (this.derivedFrom != null) {
         this.derivedFrom.forEach(function (cat) {
             var decl = transpiler.context.getRegisteredDeclaration(cat);
@@ -489,7 +487,6 @@ ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context,
 ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     this.transpileConstructor(transpiler);
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
-    this.processAnnotations(transpiler.context, true);
     this.transpileLoaders(transpiler);
     this.transpileMethods(transpiler);
     this.transpileGetterSetters(transpiler);

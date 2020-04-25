@@ -134,7 +134,6 @@ CategoryDeclaration.prototype.checkConstructorContext = function(context) {
 CategoryDeclaration.prototype.toDialect = function(writer) {
     var type = this.getType(writer.context);
     writer = writer.newInstanceWriter(type);
-    this.processAnnotations(writer.context, true);
     writer.toDialect(this);
 };
 
