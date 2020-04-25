@@ -489,7 +489,7 @@ ConcreteCategoryDeclaration.prototype.ensureDeclarationOrder = function(context,
 ConcreteCategoryDeclaration.prototype.transpile = function(transpiler) {
     this.transpileConstructor(transpiler);
     transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
-    this.processAnnotations(transpiler.context);
+    this.processAnnotations(transpiler.context, true);
     this.transpileLoaders(transpiler);
     this.transpileMethods(transpiler);
     this.transpileGetterSetters(transpiler);

@@ -611,16 +611,29 @@ InstanceContext.prototype.getRegistered = function(name) {
         return null;
 };
 
-InstanceContext.prototype.registerWidgetField = function(id, type, override) {
+InstanceContext.prototype.registerWidgetField = function(id, type, createdBy) {
     if(!this.widgetFields)
         this.widgetFields = {};
-    if(override || !this.widgetFields[id.name]) {
-        var widgetField = new WidgetField(id, type);
-        this.widgetFields[id.name] = widgetField;
-    } else {
-        this.problemListener.reportDuplicate(id, id.name, this.widgetFields[id.name].id);
-    }
+    var widgetField = this.widgetFields[id.name];
+    if(widgetField) {
+        // we control reentrance by registering which processor created the widgetField
+        if(widgetField.createdBy == createdBy)
+            return;
+        this.getProblemListener().reportDuplicate(id, id.name, id);
+    } else
+        this.widgetFields[id.name] = new WidgetField(id.name, type, createdBy);
 };
+
+
+InstanceContext.prototype.overrideWidgetFieldType = function(id, type, updatedBy) {
+    var widgetField = this.widgetFields ? this.widgetFields[id.name] : null;
+    if(widgetField) {
+        widgetField.type = type;
+        widgetField.updatedBy = updatedBy;
+    } else
+        this.problemListener.reportUnknownIdentifier(id, id.name);
+};
+
 
 InstanceContext.prototype.getTypedDeclaration = function(klass, name) {
     if (klass === MethodDeclarationMap) {

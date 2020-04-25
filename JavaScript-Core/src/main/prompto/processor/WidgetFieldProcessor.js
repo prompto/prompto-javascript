@@ -30,9 +30,13 @@ WidgetFieldProcessor.prototype.doProcessCategory = function(annotation, context,
     } else if(!(fieldType instanceof TypeExpression || fieldType instanceof TypeLiteral)) {
         context.problemListener.reportIllegalAnnotation("WidgetField requires a a Type value for argument 'type'", annotation)
     } else {
-        var name = fieldName.toString();
-        var type = fieldType.value;
-        context.registerWidgetField(new Identifier(name.substring(1, name.length-1)), type, false);
+        var instance = context.getClosestInstanceContext();
+        if(instance) {
+            var name = fieldName.toString();
+            var type = fieldType.value;
+            instance.registerWidgetField(new Identifier(name.substring(1, name.length - 1)), type, this);
+        } else
+            context.problemListener.reportError("Expected an instance context!");
     }
 };
 

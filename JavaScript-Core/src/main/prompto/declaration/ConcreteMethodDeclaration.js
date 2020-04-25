@@ -54,9 +54,7 @@ ConcreteMethodDeclaration.prototype.fullCheck = function(context, flags) {
 	if(flags.isStart) {
 		context = context.newLocalContext();
 		this.registerParameters(context);
-	} else if(this.memberOf && !flags.isMember) {
-        this.memberOf.processAnnotations(context);
-    }
+	}
 	if(this.parameters!==null) {
 		this.parameters.check(context);
 	}
