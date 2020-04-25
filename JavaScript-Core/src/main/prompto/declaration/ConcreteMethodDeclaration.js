@@ -144,11 +144,12 @@ ConcreteMethodDeclaration.prototype.declare = function(transpiler) {
         return;
     this.declaring = true;
     try {
-        if (!this.memberOf) {
+        if (this.memberOf) {
             transpiler = transpiler.newLocalTranspiler();
             transpiler.declare(this);
             this.declareArguments(transpiler);
-        }
+        } else
+            this.memberOf.declare(transpiler);
         if(this.returnType)
             this.returnType.declare(transpiler);
         this.registerParameters(transpiler.context);
