@@ -5,6 +5,7 @@ var StatementList = require("../statement/StatementList").StatementList;
 var Variable = require("../runtime/Variable").Variable;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
+var VoidType = require("../type/VoidType").VoidType;
 
 function ArrowExpression(args, argsSuite, arrowSuite) {
     Expression.call(this);
@@ -93,7 +94,7 @@ ArrowExpression.prototype.filterToDialect = function(writer, source) {
     if(this.args==null || this.args.length==0)
         throw new SyntaxError("Expecting 1 parameter only!");
     var sourceType = source.check(writer.context);
-    var itemType = sourceType.itemType;
+    var itemType = sourceType ? sourceType.itemType : VoidType.instance;
     writer = writer.newChildWriter();
     writer.context.registerValue(new Variable(this.args[0], itemType));
     switch(writer.dialect) {
