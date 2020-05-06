@@ -16,20 +16,20 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted Csv', () => {
+	runInterpretedTests('reader/csv.pec');
+});
+
+test('Transpiled Csv', () => {
+	runTranspiledTests('reader/csv.pec');
+});
+
 test('Interpreted Json', () => {
 	runInterpretedTests('reader/json.pec');
 });
 
 test('Transpiled Json', () => {
 	runTranspiledTests('reader/json.pec');
-});
-
-test('Interpreted Reader', () => {
-	runInterpretedTests('reader/reader.pec');
-});
-
-test('Transpiled Reader', () => {
-	runTranspiledTests('reader/reader.pec');
 });
 
 test('Interpreted Yaml', () => {
