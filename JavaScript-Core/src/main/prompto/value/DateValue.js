@@ -25,6 +25,12 @@ DateValue.prototype.getValue = function() {
 	return this.value; 
 };
 
+
+DateValue.prototype.convertToJavaScript = function() {
+    return this.value;
+};
+
+
 DateValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {
         var date = this.value.addPeriod(value.value);
