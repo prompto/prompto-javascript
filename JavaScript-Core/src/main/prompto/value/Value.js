@@ -71,9 +71,8 @@ Value.prototype.compareToValue = function(context, value) {
 };
 
 Value.prototype.getMemberValue = function(context, name) {
-    if("text" == name) {
+    if("text" == name)
         return new TextValue(this.toString());
-    }
     else
         throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
 };

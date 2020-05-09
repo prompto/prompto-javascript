@@ -32,7 +32,7 @@ IteratorExpression.prototype.check = function(context) {
 IteratorExpression.prototype.interpret = function(context) {
     var elemType = this.source.check(context).checkIterator(context, this.source);
     var items = this.source.interpret(context);
-    var length = items.getMemberValue(context, new Identifier("count"), false);
+    var length = items.getMemberValue(context, "count", false);
     var iterator = this.getIterator(context, items);
     return new IterableValue(context, this.name, elemType, iterator, length, this.expression);
 };

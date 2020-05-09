@@ -23,6 +23,13 @@ function RangeValue(itemType, left, right) {
 RangeValue.prototype = Object.create(Value.prototype);
 RangeValue.prototype.constructor = RangeValue;
 
+RangeValue.prototype.getMemberValue = function(context, name) {
+	if("count" == name)
+		return new IntegerValue(this.size());
+	else
+		throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
+};
+
 RangeValue.prototype.toString = function() {
 	return "[" + (this.low==null?"":this.low.toString()) + ".."
 			+ (this.high==null?"":this.high.toString()) + "]";

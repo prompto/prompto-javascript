@@ -8,3 +8,7 @@ test('ForEachIntegerList', () => {
 	compareResourceOMO('iterate/forEachIntegerList.poc');
 });
 
+test('ForEachIntegerRange', () => {
+	compareResourceOMO('iterate/forEachIntegerRange.poc');
+});
+

@@ -26,3 +26,11 @@ test('Transpiled ForEachIntegerList', () => {
 	checkTranspiledOutput('iterate/forEachIntegerList.poc');
 });
 
+test('Interpreted ForEachIntegerRange', () => {
+	checkInterpretedOutput('iterate/forEachIntegerRange.poc');
+});
+
+test('Transpiled ForEachIntegerRange', () => {
+	checkTranspiledOutput('iterate/forEachIntegerRange.poc');
+});
+
