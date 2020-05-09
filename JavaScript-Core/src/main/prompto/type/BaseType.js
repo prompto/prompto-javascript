@@ -41,6 +41,12 @@ BaseType.prototype.asMutable = function(context, mutable) {
         return this;
 };
 
+
+BaseType.prototype.isStorable = function(context) {
+    return false;
+};
+
+
 BaseType.prototype.getTranspiledName = function() {
     return this.name;
 };

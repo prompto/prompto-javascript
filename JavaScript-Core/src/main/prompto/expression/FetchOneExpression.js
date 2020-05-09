@@ -3,6 +3,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var AnyType = require("../type/AnyType").AnyType;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var CategoryType = require("../type/CategoryType").CategoryType;
+var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var NullValue = require("../value/NullValue").NullValue;
 var $DataStore = require("../store/DataStore").$DataStore;
 var MatchOp = require("../store/MatchOp").MatchOp;
@@ -66,8 +67,10 @@ FetchOneExpression.prototype.toMDialect = function(writer) {
 FetchOneExpression.prototype.check = function(context) {
     if(this.typ!=null) {
         var decl = context.getRegisteredDeclaration(this.typ.name);
-        if (decl == null)
-            throw new SyntaxError("Unknown category: " + this.typ.name);
+        if (decl == null || !(decl instanceof CategoryDeclaration))
+            context.problemListener.reportUnknownCategory(this.typ.id);
+        if(!(decl.isStorable && decl.isStorable(context)))
+            context.problemListener.reportNotStorable(this.typ.id, this.typ.name);
         context = context.newInstanceContext(null, decl.getType(context), true);
     }
     var filterType = this.predicate.check(context);

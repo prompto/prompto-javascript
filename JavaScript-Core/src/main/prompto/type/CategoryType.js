@@ -62,6 +62,13 @@ CategoryType.prototype.asMutable = function(context, mutable) {
         return new CategoryType(this.id, mutable);
 };
 
+
+CategoryType.prototype.isStorable = function(context) {
+    var decl = this.getDeclaration(context);
+    return decl.isStorable && decl.isStorable(context);
+};
+
+
 CategoryType.prototype.anyfy = function() {
     if (this.name === "Any")
         return AnyType.instance;

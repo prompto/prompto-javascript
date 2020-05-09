@@ -23,6 +23,23 @@ CategoryDeclaration.prototype.isWidget = function(context) {
     return false;
 };
 
+
+CategoryDeclaration.prototype.isStorable = function(context) {
+    return this.storable || this.isDerivedFromStorable(context);
+};
+
+
+CategoryDeclaration.prototype.isDerivedFromStorable = function(context) {
+    if(this.derivedFrom == null)
+        return false;
+    else
+        return this.derivedFrom.find(name=>{
+            var decl = context.getRegisteredDeclaration(name);
+            return decl && decl.isStorable(context);
+        });
+};
+
+
 CategoryDeclaration.prototype.newInstanceFromStored = function(context, stored) {
     var instance = this.newInstance(context);
     instance.mutable = true;

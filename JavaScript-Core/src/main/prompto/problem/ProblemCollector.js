@@ -191,6 +191,9 @@ ProblemCollector.prototype.reportNotMutable = function(section, name) {
     this.reportError(section, name + " is not mutable");
 };
 
+ProblemCollector.prototype.reportNotStorable = function(section, name) {
+    this.reportError(section, name + " is not storable");
+};
 
 
 ProblemCollector.prototype.reportError = function(section, message) {

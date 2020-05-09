@@ -1,4 +1,5 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
+var AnyType = require("../type/AnyType").AnyType;
 var VoidType = require("../type/VoidType").VoidType;
 var $DataStore = require("../store/DataStore").$DataStore;
 var NullValue = require("../value/NullValue").NullValue;
@@ -76,12 +77,45 @@ StoreStatement.prototype.equals = function(other) {
 
 
 StoreStatement.prototype.check = function(context) {
+    this.checkDeletables(context);
+    this.checkStorables(context);
+    this.checkFuture(context);
+    return VoidType.instance;
+};
+
+
+StoreStatement.prototype.checkDeletables = function(context) {
+    if (this.del)
+        this.del.forEach(exp=>this.checkStorable(context, exp), this);
+};
+
+StoreStatement.prototype.checkStorables = function(context) {
+    if (this.add)
+        this.add.forEach(exp=>this.checkStorable(context, exp), this);
+};
+
+
+StoreStatement.prototype.checkStorable = function(context, exp) {
+    var type = exp.check(context);
+    if(type.itemType)
+        type = type.itemType;
+    if(type == AnyType.instance)
+        return;
+    else if(!type.isStorable(context)) {
+        var name = exp.toString();
+        if(name.indexOf(' ')>0 || name.indexOf(',')>0)
+            name = type.typename;
+        context.problemListener.reportNotStorable(this, name);
+    }
+};
+
+StoreStatement.prototype.checkFuture = function(context) {
     if(this.andThen) {
         context = context.newChildContext();
         this.andThen.check(context, null);
     }
-    return VoidType.instance;
 };
+
 
 StoreStatement.prototype.interpret = function(context) {
     var idsToDelete = this.getIdsToDelete(context);

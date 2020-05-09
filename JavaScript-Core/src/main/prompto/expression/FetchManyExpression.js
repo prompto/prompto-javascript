@@ -9,6 +9,7 @@ var TypeFamily = require("../store/TypeFamily").TypeFamily;
 var MatchOp = require("../store/MatchOp").MatchOp;
 var CursorValue = require("../value/CursorValue").CursorValue;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 
 function FetchManyExpression(typ, first, last, predicate, orderBy) {
     Expression.call(this);
@@ -108,13 +109,16 @@ FetchManyExpression.prototype.toMDialect = function(writer) {
 };
 
 FetchManyExpression.prototype.check = function(context) {
-    var typ = this.typ
+    var typ = this.typ;
     if (typ==null)
         typ = AnyType.instance;
     else {
         var decl = context.getRegisteredDeclaration(this.typ.name);
-        if (decl == null)
+        if (decl == null  || !(decl instanceof CategoryDeclaration))
             context.problemListener.reportUnknownCategory(typ.id);
+        if(!(decl.isStorable && decl.isStorable(context)))
+            context.problemListener.reportNotStorable(this.typ.id, this.typ.name);
+        context = context.newInstanceContext(null, decl.getType(context), true);
     }
     this.checkFilter(context);
     this.checkOrderBy(context);
