@@ -1,6 +1,5 @@
 var Expression = require("./Expression").Expression;
 var Variable = require("../runtime/Variable").Variable;
-var Identifier = require("../grammar/Identifier").Identifier;
 var IteratorType = require("../type/IteratorType").IteratorType;
 var IterableValue = require("../value/IterableValue").IterableValue;
 var UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
