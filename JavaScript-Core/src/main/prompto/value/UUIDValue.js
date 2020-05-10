@@ -1,4 +1,5 @@
 var Value = require("./Value").Value;
+var TextValue = require("./TextValue").TextValue;
 var UUIDType = require("../type/UUIDType").UUIDType;
 var UUID = require("../intrinsic/UUID").UUID;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;

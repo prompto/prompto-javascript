@@ -1,5 +1,6 @@
 var Value = require("./Value").Value;
 var IntegerValue = require("./IntegerValue").IntegerValue;
+var TextValue = require("./TextValue").TextValue;
 var PeriodType = null;
 
 exports.resolve = function() {

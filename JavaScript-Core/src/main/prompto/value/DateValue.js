@@ -2,6 +2,7 @@ var Value = require("./Value").Value;
 var DateTimeValue = require("./DateTimeValue").DateTimeValue;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
+var TextValue = require("./TextValue").TextValue;
 var DateType = null;
 
 exports.resolve = function() {
