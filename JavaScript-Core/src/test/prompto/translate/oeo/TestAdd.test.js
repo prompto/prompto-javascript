@@ -20,6 +20,10 @@ test('AddDict', () => {
 	compareResourceOEO('add/addDict.poc');
 });
 
+test('AddDocument', () => {
+	compareResourceOEO('add/addDocument.poc');
+});
+
 test('AddInteger', () => {
 	compareResourceOEO('add/addInteger.poc');
 });

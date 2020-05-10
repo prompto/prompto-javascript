@@ -77,6 +77,15 @@ DocumentValue.prototype.setItemInContext = function(context, index, value) {
     }
 };
 
+
+DocumentValue.prototype.Add = function(context, value) {
+    if (value instanceof DocumentValue) {
+        return new DocumentValue(this.values.add(value.values));
+    } else {
+        throw new SyntaxError("Illegal: Document + " + typeof(value));
+    }
+};
+
 DocumentValue.prototype.equals = function(other) {
     if(this==other)
         return true;

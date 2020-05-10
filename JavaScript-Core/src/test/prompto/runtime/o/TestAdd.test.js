@@ -50,6 +50,14 @@ test('Transpiled AddDict', () => {
 	checkTranspiledOutput('add/addDict.poc');
 });
 
+test('Interpreted AddDocument', () => {
+	checkInterpretedOutput('add/addDocument.poc');
+});
+
+test('Transpiled AddDocument', () => {
+	checkTranspiledOutput('add/addDocument.poc');
+});
+
 test('Interpreted AddInteger', () => {
 	checkInterpretedOutput('add/addInteger.poc');
 });

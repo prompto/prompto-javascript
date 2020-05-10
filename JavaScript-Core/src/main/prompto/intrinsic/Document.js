@@ -59,6 +59,11 @@ Document.prototype.setItem = function(index, value) {
 };
 
 
+Document.prototype.add = function(doc) {
+    var result = Object.assign({}, this, doc);
+    result.__proto__ = Document.prototype;
+    return result;
+};
 
 Document.prototype.toJson = function(json, instanceId, fieldName, withType, binaries) {
     var values = {};

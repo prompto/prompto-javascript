@@ -61,6 +61,37 @@ DocumentType.prototype.checkMember = function (context, section, name) {
 };
 
 
+DocumentType.prototype.checkAdd = function(context, other, tryReverse) {
+    if(other instanceof DocumentType) {
+        return this;
+    } else {
+        return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+    }
+};
+
+
+DocumentType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof DocumentType) {
+        left.declare(transpiler);
+        right.declare(transpiler);
+    } else {
+        return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
+DocumentType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
+    if(other instanceof DocumentType) {
+        left.transpile(transpiler);
+        transpiler.append(".add(");
+        right.transpile(transpiler);
+        transpiler.append(")");
+    } else {
+        return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+    }
+};
+
+
 DocumentType.prototype.convertJavaScriptValueToPromptoValue = function (context, value, returnType) {
     if (value instanceof Document)
         return new DocumentValue(value);
