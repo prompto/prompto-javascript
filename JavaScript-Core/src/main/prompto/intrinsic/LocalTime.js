@@ -23,6 +23,7 @@ LocalTime.prototype.toString = function() {
 
 
 LocalTime.prototype.getText = LocalTime.prototype.toString;
+LocalTime.prototype.toDocument = LocalTime.prototype.toString;
 
 LocalTime.prototype.equals = function(obj) {
     return obj instanceof LocalTime && this.valueOf() == obj.valueOf();

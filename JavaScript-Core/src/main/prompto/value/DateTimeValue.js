@@ -103,13 +103,17 @@ DateTimeValue.prototype.getMemberValue = function(context, name) {
 };
 
 
-
 DateTimeValue.prototype.equals = function(obj) {
     if (obj instanceof DateTimeValue) {
         return this.value.equals(obj.value);
     } else {
         return false;
     }
+};
+
+
+DateTimeValue.prototype.toDocumentValue = function(context) {
+    return new TextValue(this.toString());
 };
 
 exports.DateTimeValue = DateTimeValue;

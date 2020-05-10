@@ -97,6 +97,10 @@ UUID.prototype.toBytes = function() {
     return ints;
 };
 
+
+UUID.prototype.toDocument = UUID.prototype.toString;
+
+
 UUID.prototype.equals = function(uuid) {
     if (uuid instanceof UUID) {
         return this.hex === uuid.hex;

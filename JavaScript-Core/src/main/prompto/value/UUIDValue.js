@@ -35,6 +35,12 @@ UUIDValue.prototype.equals = function(obj) {
     }
 };
 
+
+UUIDValue.prototype.toDocumentValue = function(context) {
+    return new TextValue(this.toString());
+};
+
+
 exports.UUIDValue = UUIDValue;
 
 

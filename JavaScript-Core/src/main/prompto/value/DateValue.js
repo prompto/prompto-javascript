@@ -52,7 +52,6 @@ DateValue.prototype.Subtract = function(context, value)  {
 };
 
 
-
 DateValue.prototype.compareToValue = function(context, value) {
     if (value instanceof DateValue || value instanceof DateTimeValue) {
         return this.cmp(value);
@@ -62,13 +61,11 @@ DateValue.prototype.compareToValue = function(context, value) {
 };
 
 
-
 DateValue.prototype.cmp = function(value) {
     var a = this.value.valueOf();
     var b = value.value.valueOf();
     return a > b ? 1 : (a == b ? 0 : -1);
 };
-
 
 
 DateValue.prototype.getMemberValue = function(context, name) {
@@ -86,8 +83,6 @@ DateValue.prototype.getMemberValue = function(context, name) {
 };
 
 
-
-
 DateValue.prototype.equals = function(obj) {
     if (obj instanceof DateValue) {
         return this.value.equals(obj.value);
@@ -96,6 +91,11 @@ DateValue.prototype.equals = function(obj) {
     }
 };
 
+
+
+DateValue.prototype.toDocumentValue = function(context) {
+    return new TextValue(this.toString());
+};
 
 exports.DateValue = DateValue;
 

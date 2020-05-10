@@ -155,6 +155,7 @@ DateTime.prototype.toString = function() {
 
 
 DateTime.prototype.getText = DateTime.prototype.toString;
+DateTime.prototype.toDocument = DateTime.prototype.toString;
 
 
 DateTime.prototype.equals = function(value) {

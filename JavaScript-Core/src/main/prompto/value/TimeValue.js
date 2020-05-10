@@ -79,17 +79,9 @@ TimeValue.prototype.equals = function(obj) {
 	}
 };
 
-/*
-@Override
-public int hashCode() {
-	return value.hashCode();
-}
 
-@Override
-public String toString() {
-	return value.toString();
-}
-
-*/
+TimeValue.prototype.toDocumentValue = function(context) {
+	return new TextValue(this.toString());
+};
 
 exports.TimeValue = TimeValue;

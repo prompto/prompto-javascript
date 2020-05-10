@@ -17,6 +17,7 @@ LocalDate.prototype.toString = function() {
 };
 
 LocalDate.prototype.getText = LocalDate.prototype.toString;
+LocalDate.prototype.toDocument = LocalDate.prototype.toString;
 
 LocalDate.prototype.equals = function(other) {
     return other instanceof LocalDate && this.valueOf() == other.valueOf();

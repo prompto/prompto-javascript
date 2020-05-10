@@ -54,15 +54,6 @@ PeriodValue.prototype.Multiply = function(context, value) {
     }
 };
 
-/*
- override
- public Object ConvertTo(Type type)
- {
- return this; // TODO convert to TimeSpan
- }
-
-*/
-
 PeriodValue.prototype.toString = function() {
     return this.value.toString();
 };
@@ -75,130 +66,11 @@ PeriodValue.prototype.equals = function(obj) {
     }
 };
 
-/*
-
- override
- public int GetHashCode()
- {
- return ToString().GetHashCode();
- }
 
 
- }
- }
+PeriodValue.prototype.toDocumentValue = function(context) {
+    return new TextValue(this.toString());
+};
 
-
- */
-/*
- public static final PeriodValue ZERO = new PeriodValue(0, 0, 0, 0, 0, 0, 0, 0);
-
- org.joda.time.PeriodValue value;
-
- public PeriodValue(int years, int months, int weeks, int days, int hours, int minutes, int seconds, int millis)
- {
- value = new org.joda.time.PeriodValue(years, months, weeks, days, hours, minutes, seconds, millis);
- }
-
- public PeriodValue(org.joda.time.PeriodValue value)
- {
- this.value = value;
- }
-
- public org.joda.time.PeriodValue getValue() {
- return value;
- }
-
-
- @Override
- public IValue Add(Context context, IValue value) throws PromptoError
- {
- if (value instanceof PeriodValue)
- return this.plus((PeriodValue)value);
- else
- throw new SyntaxError("Illegal: PeriodValue + " + value.getClass().getSimpleName());
- }
-
- @Override
- public IValue Subtract(Context context, IValue value) throws PromptoError
- {
- if (value instanceof PeriodValue)
- return this.minus((PeriodValue)value);
- else
- throw new SyntaxError("Illegal: PeriodValue - " + value.getClass().getSimpleName());
- }
-
- @Override
- public IValue Multiply(Context context, IValue value) throws PromptoError
- {
- if (value instanceof IntegerValue)
- {
- int count = (int)((IntegerValue)value).IntegerValue();
- if (count < 0)
- throw new SyntaxError("Negative repeat count:" + count);
- if (count == 0)
- return PeriodValue.ZERO;
- if (count == 1)
- return this;
- return this.times(count);
- }
- else
- throw new SyntaxError("Illegal: PeriodValue * " + value.getClass().getSimpleName());
- }
-
- @Override
- public Object ConvertTo(Class<?> type)
- {
- return value;
- }
-
- public PeriodValue minus(PeriodValue period)
- {
- return new PeriodValue( this.value.minus(period.value));
- }
-
-
-
- public PeriodValue plus(PeriodValue period)
- {
- return new PeriodValue(this.value.plus(period.value));
- }
-
- public PeriodValue times(int count)
- {
- return new PeriodValue(
- this.value.getYears() * count,
- this.value.getMonths() * count,
- this.value.getWeeks() * count,
- this.value.getDays() * count,
- this.value.getHours() * count,
- this.value.getMinutes() * count,
- this.value.getSeconds() * count,
- this.value.getMillis() * count);
- }
-
- @Override
- public String toString()
- {
- return value.toString();
- }
-
- @Override
- public boolean equals(Object obj)
- {
- if (obj instanceof PeriodValue)
- return this.value.equals(((PeriodValue)obj).value);
- else
- return false;
- }
-
- @Override
- public int hashCode()
- {
- return value.hashCode();
- }
-
-
- }
- */
 
 exports.PeriodValue = PeriodValue;

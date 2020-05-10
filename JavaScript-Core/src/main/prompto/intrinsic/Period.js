@@ -213,6 +213,7 @@ Period.prototype.toString = function() {
 
 
 Period.prototype.getText = Period.prototype.toString;
+Period.prototype.toDocument = Period.prototype.toString;
 
 
 exports.Period = Period;
