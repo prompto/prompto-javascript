@@ -1,6 +1,7 @@
 var Expression = require("./Expression").Expression;
 var DocumentType = require("../type/DocumentType").DocumentType;
 var DocumentValue = require("../value/DocumentValue").DocumentValue;
+var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var BlobValue = require("../value/BlobValue").BlobValue;
 var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
 var Document = require("../intrinsic/Document").Document;
@@ -48,6 +49,8 @@ DocumentExpression.prototype.transpile = function(transpiler) {
 DocumentExpression.prototype.documentFromValue = function(context, value) {
     if (value instanceof BlobValue)
         return this.documentFromBlob(context, value);
+    else if (value instanceof ConcreteInstance)
+        return value.toDocumentValue(context);
     else
         throw new Error("documentFromValue not supported for " + typeof(value));
 };
@@ -91,15 +94,19 @@ DocumentExpression.prototype.toEDialect = function(writer) {
 
 DocumentExpression.prototype.toMDialect = function(writer) {
     writer.append("Document(");
-    if (this.source)
+    if (this.source) {
+        writer.append(" from = ");
         this.source.toDialect(writer);
+    }
     writer.append(")");
 };
 
 DocumentExpression.prototype.toODialect = function(writer) {
     writer.append("Document(");
-    if (this.source)
+    if (this.source) {
+        writer.append(" from = ");
         this.source.toDialect(writer);
+    }
     writer.append(")");
 };
 

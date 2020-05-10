@@ -206,6 +206,4 @@ BaseValueList.prototype.toJson = function(context, json, instanceId, fieldName, 
 
 };
 
-
-
 exports.BaseValueList = BaseValueList;

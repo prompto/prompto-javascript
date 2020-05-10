@@ -16,8 +16,8 @@ var Document = require("../intrinsic/Document").Document;
 var List = require("../intrinsic/List").List;
 var ArgumentList = null;
 var Argument = null;
-var MethodCall = require("../statement/MethodCall").MethodCall;
-var MethodSelector = require("../expression/MethodSelector").MethodSelector;
+var MethodCall = null;
+var MethodSelector = null;
 var compareValues = require("../utils/Utils").compareValues;
 var equalArrays = require("../utils/Utils").equalArrays;
 
@@ -26,6 +26,8 @@ exports.resolve = function () {
     ArgumentList = require("../grammar/ArgumentList").ArgumentList;
     Argument = require("../grammar/Argument").Argument;
     DocumentValue = require("../value/DocumentValue").DocumentValue;
+    MethodSelector = require("../expression/MethodSelector").MethodSelector;
+    MethodCall = require("../statement/MethodCall").MethodCall;
 };
 
 

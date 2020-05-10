@@ -26,6 +26,14 @@ test('Transpiled DeepMember', () => {
 	checkTranspiledOutput('documents/deepMember.poc');
 });
 
+test('Interpreted Instance', () => {
+	checkInterpretedOutput('documents/instance.poc');
+});
+
+test('Transpiled Instance', () => {
+	checkTranspiledOutput('documents/instance.poc');
+});
+
 test('Interpreted Item', () => {
 	checkInterpretedOutput('documents/item.poc');
 });

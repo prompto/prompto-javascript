@@ -8,6 +8,7 @@ var Operator = require("../grammar/Operator").Operator;
 var NullValue = require("./NullValue").NullValue;
 var DecimalValue = require("./DecimalValue").DecimalValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
+var DocumentValue = require("./DocumentValue").DocumentValue;
 var TextValue = require("./TextValue").TextValue;
 var Value = require("./Value").Value;
 var Instance = require("./Value").Instance;
@@ -311,6 +312,16 @@ ConcreteInstance.prototype.interpretOperator = function(context, value, operator
     local.setValue(arg.id, value);
     return decl.interpret(local);
 };
+
+
+ConcreteInstance.prototype.toDocumentValue = function(context) {
+    var doc = new DocumentValue();
+    Object.getOwnPropertyNames(this.values).map(name => {
+        doc.values[name] = this.values[name].toDocumentValue(context);
+    }, this);
+    return doc;
+};
+
 
 exports.ConcreteInstance = ConcreteInstance;
 

@@ -2151,7 +2151,7 @@ OPromptoBuilder.prototype.exitSorted_key = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitDocument_expression = function(ctx) {
-    var exp = this.getNodeValue(ctx.expression());
+    var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, new expression.DocumentExpression(exp));
 };
 

@@ -12,6 +12,10 @@ test('DeepMember', () => {
 	compareResourceEOE('documents/deepMember.pec');
 });
 
+test('Instance', () => {
+	compareResourceEOE('documents/instance.pec');
+});
+
 test('Item', () => {
 	compareResourceEOE('documents/item.pec');
 });

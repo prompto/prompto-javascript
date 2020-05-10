@@ -34,6 +34,14 @@ test('Transpiled DeepMember', () => {
 	checkTranspiledOutput('documents/deepMember.pec');
 });
 
+test('Interpreted Instance', () => {
+	checkInterpretedOutput('documents/instance.pec');
+});
+
+test('Transpiled Instance', () => {
+	checkTranspiledOutput('documents/instance.pec');
+});
+
 test('Interpreted Item', () => {
 	checkInterpretedOutput('documents/item.pec');
 });

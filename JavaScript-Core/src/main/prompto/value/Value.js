@@ -1,7 +1,10 @@
 var TextValue = null;
+var ListValue = null;
+var AnyType = require("../type/AnyType").AnyType;
 
 exports.resolve = function() {
     TextValue = require("./TextValue").TextValue;
+    ListValue = require("./ListValue").ListValue;
 };
 
 var id = 0;
@@ -90,6 +93,11 @@ Value.prototype.Contains = function(context, value) {
     throw new SyntaxError("Contains not supported by " + this.constructor.name);
 };
 
+
+Value.prototype.toDocumentValue = function(context) {
+    return this;
+};
+
 function Instance(type) {
     Value.call(this, type);
     return this;
@@ -106,6 +114,14 @@ function Container(type) {
 
 Container.prototype = Object.create(Value.prototype);
 Container.prototype.constructor = Container;
+
+
+Container.prototype.toDocumentValue = function(context) {
+    var items = this.items.map(function (item) {
+        item.toDocumentValue(context);
+    });
+    return new ListValue(AnyType.instance, items);
+};
 
 
 exports.Value = Value;

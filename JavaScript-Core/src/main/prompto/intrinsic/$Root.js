@@ -1,4 +1,5 @@
 var NotMutableError = require("../error/NotMutableError").NotMutableError;
+var Document = require("./Document").Document;
 
 function Category(klass) {
     this.klass = klass;
@@ -112,6 +113,20 @@ $Root.prototype.collectDbIds = function(idsToDelete) {
         var dbId = typeof(this.dbId) === "object" ? this.dbId.toString() : this.dbId;
         idsToDelete.add(dbId);
     }
+};
+
+$Root.prototype.toDocument = function() {
+    var doc = new Document();
+    var names = this.getAttributeNames();
+    names.forEach(function(name) {
+        if(this.hasOwnProperty(name)) {
+            var value = this[name];
+            if(value && value.toDocument)
+                value = value.toDocument();
+            doc[name] = value;
+        }
+    }, this);
+    return doc;
 };
 
 exports.Category = Category;

@@ -8,6 +8,10 @@ test('DeepMember', () => {
 	compareResourceOMO('documents/deepMember.poc');
 });
 
+test('Instance', () => {
+	compareResourceOMO('documents/instance.poc');
+});
+
 test('Item', () => {
 	compareResourceOMO('documents/item.poc');
 });

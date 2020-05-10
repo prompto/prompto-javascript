@@ -13242,6 +13242,7 @@ function Document_expressionContext(parser, parent, invokingState) {
 	antlr4.ParserRuleContext.call(this, parent, invokingState);
     this.parser = parser;
     this.ruleIndex = EParser.RULE_document_expression;
+    this.exp = null; // ExpressionContext
     return this;
 }
 
@@ -13292,7 +13293,7 @@ EParser.prototype.document_expression = function() {
             this.state = 1406;
             this.match(EParser.FROM);
             this.state = 1407;
-            this.expression(0);
+            localctx.exp = this.expression(0);
 
         }
     } catch (re) {
