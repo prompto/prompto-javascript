@@ -265,7 +265,7 @@ JsxElementBase.prototype.declare = function(transpiler) {
         if(decl==null)
             transpiler.context.problemListener.reportUnknownIdentifier(this.id);
         else
-            decl.declare(transpiler);
+            decl.declare(transpiler.newLocalTranspiler());
     }
     if(this.properties!=null) {
         var propertyMap = this.getPropertyMap(transpiler.context);
