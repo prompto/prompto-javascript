@@ -44,6 +44,7 @@ require('./TupleType').resolve();
 require('./RangeType').resolve();
 require('./CategoryType').resolve();
 require('./DocumentType').resolve();
+require('./DictionaryType').resolve();
 require('./UUIDType').resolve();
 require('./DateTimeType').resolve();
 require('./EnumeratedNativeType').resolve();

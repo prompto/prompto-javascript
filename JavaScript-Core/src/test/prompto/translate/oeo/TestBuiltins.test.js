@@ -56,6 +56,10 @@ test('DictCount', () => {
 	compareResourceOEO('builtins/dictCount.poc');
 });
 
+test('DictSwap', () => {
+	compareResourceOEO('builtins/dictSwap.poc');
+});
+
 test('EnumName', () => {
 	compareResourceOEO('builtins/enumName.poc');
 });

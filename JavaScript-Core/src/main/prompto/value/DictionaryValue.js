@@ -106,7 +106,23 @@ DictionaryValue.prototype.equals = function(obj) {
 
 DictionaryValue.prototype.getIterator = function(context) {
     return new KVPIterator(context, this.dict);
-}
+};
+
+
+DictionaryValue.prototype.swap = function(context) {
+    var swapped = new Dictionary(true);
+    var iter = this.dict.iterator();
+    while(iter.hasNext()) {
+        var entry = iter.next();
+        var key = entry.value;
+        if(key instanceof TextValue)
+            key = new TextValue(key.toString());
+        swapped.setItem(key, entry.key);
+    }
+    swapped.mutable = false;
+    return new DictionaryValue(TextType.instance, swapped, false);
+};
+
 
 function KVPIterator(context, dict) {
     this.context = context;

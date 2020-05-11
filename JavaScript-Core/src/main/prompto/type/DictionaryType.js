@@ -9,6 +9,11 @@ var EntryType = require("./EntryType").EntryType;
 var List = require("../intrinsic/List").List;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var Dictionary = require("../intrinsic/Dictionary").Dictionary;
+var BuiltInMethodDeclaration = null;
+
+exports.resolve = function() {
+    resolveBuiltInMethodDeclaration();
+};
 
 function DictionaryType(itemType) {
     ContainerType.call(this, new Identifier(itemType.name + "<:>"), itemType);
@@ -204,5 +209,39 @@ DictionaryType.prototype.transpileMember = function(transpiler, name) {
     }
 };
 
+
+DictionaryType.prototype.getMemberMethods = function(context, name) {
+    if (name === "swap" )
+        return [new SwapMethodDeclaration()];
+     else
+        return ContainerType.prototype.getMemberMethods.call(context, name);
+};
+
+
+function SwapMethodDeclaration() {
+    BuiltInMethodDeclaration.call(this, "swap");
+    return this;
+}
+
+
+function resolveBuiltInMethodDeclaration() {
+    BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+
+    SwapMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
+    SwapMethodDeclaration.prototype.constructor = SwapMethodDeclaration;
+
+    SwapMethodDeclaration.prototype.interpret = function (context) {
+        var value = this.getValue(context);
+        return value.swap(context);
+    };
+
+    SwapMethodDeclaration.prototype.check = function (context) {
+        return new DictionaryType(TextType.instance);
+    };
+
+    SwapMethodDeclaration.prototype.transpileCall = function (transpiler, assignments) {
+        transpiler.append("swap()");
+    };
+}
 
 exports.DictionaryType = DictionaryType;
