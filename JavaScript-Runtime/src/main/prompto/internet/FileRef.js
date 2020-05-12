@@ -6,15 +6,19 @@ function FileRef(file) {
 }
 
 FileRef.prototype.readImage = function() {
-    return null; // Image.fromFile(this.file)
+    // return Image.fromFile(this.file);
+    return null;
 };
 
 FileRef.prototype.readBlob = function() {
-    return null; // Blob.fromFile(this.file)
+    // return Blob.fromFile(this.file);
+    return null;
 };
 
-FileRef.prototype.readText = function() {
-    return null; // FileReaderSync;readAsText(this.file)
+FileRef.prototype.readText = function(callback) {
+    // var reader = new FileReader();
+    // reader.onload = function(event) { callback(reader.result); };
+    // reader.readAsText(this.file);
 };
 
 exports.FileRef = FileRef;
