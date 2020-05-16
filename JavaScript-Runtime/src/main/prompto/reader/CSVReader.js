@@ -43,6 +43,7 @@ var CR = '\r'.charCodeAt(0);
 var LF = '\n'.charCodeAt(0);
 var ESC = '\\'.charCodeAt(0);
 
+
 CSVIterator.prototype.iterator = function() {
     return this;
 };
