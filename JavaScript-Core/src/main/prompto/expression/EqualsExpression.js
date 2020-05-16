@@ -271,6 +271,9 @@ EqualsExpression.prototype.transpile = function(transpiler) {
         case EqOp.IS_A:
             this.transpileIsA(transpiler);
             break;
+        case EqOp.IS_NOT_A:
+            this.transpileIsNotA(transpiler);
+            break;
         default:
             throw new Error("Cannot transpile:" + this.operator.toString());
     }
@@ -356,6 +359,13 @@ EqualsExpression.prototype.transpileContains = function(transpiler) {
 EqualsExpression.prototype.transpileNotContains = function(transpiler) {
     transpiler.append("!");
     this.transpileContains(transpiler);
+};
+
+
+EqualsExpression.prototype.transpileIsNotA = function(transpiler) {
+    transpiler.append("!(");
+    this.transpileIsA(transpiler);
+    transpiler.append(")");
 };
 
 

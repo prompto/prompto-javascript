@@ -122,6 +122,14 @@ test('Transpiled EqVersion', () => {
 	checkTranspiledOutput('equals/eqVersion.poc');
 });
 
+test('Interpreted IsABoolean', () => {
+	checkInterpretedOutput('equals/isABoolean.poc');
+});
+
+test('Transpiled IsABoolean', () => {
+	checkTranspiledOutput('equals/isABoolean.poc');
+});
+
 test('Interpreted IsBoolean', () => {
 	checkInterpretedOutput('equals/isBoolean.poc');
 });
@@ -136,6 +144,14 @@ test('Interpreted IsInstance', () => {
 
 test('Transpiled IsInstance', () => {
 	checkTranspiledOutput('equals/isInstance.poc');
+});
+
+test('Interpreted IsNotABoolean', () => {
+	checkInterpretedOutput('equals/isNotABoolean.poc');
+});
+
+test('Transpiled IsNotABoolean', () => {
+	checkTranspiledOutput('equals/isNotABoolean.poc');
 });
 
 test('Interpreted IsNotBoolean', () => {

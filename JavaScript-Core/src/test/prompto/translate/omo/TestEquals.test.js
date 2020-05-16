@@ -56,12 +56,20 @@ test('EqVersion', () => {
 	compareResourceOMO('equals/eqVersion.poc');
 });
 
+test('IsABoolean', () => {
+	compareResourceOMO('equals/isABoolean.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOMO('equals/isBoolean.poc');
 });
 
 test('IsInstance', () => {
 	compareResourceOMO('equals/isInstance.poc');
+});
+
+test('IsNotABoolean', () => {
+	compareResourceOMO('equals/isNotABoolean.poc');
 });
 
 test('IsNotBoolean', () => {
