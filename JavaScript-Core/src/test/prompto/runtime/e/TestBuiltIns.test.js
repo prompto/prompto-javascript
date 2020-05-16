@@ -226,12 +226,36 @@ test('Transpiled DictValues', () => {
 	checkTranspiledOutput('builtins/dictValues.pec');
 });
 
+test('Interpreted DocumentCount', () => {
+	checkInterpretedOutput('builtins/documentCount.pec');
+});
+
+test('Transpiled DocumentCount', () => {
+	checkTranspiledOutput('builtins/documentCount.pec');
+});
+
+test('Interpreted DocumentKeys', () => {
+	checkInterpretedOutput('builtins/documentKeys.pec');
+});
+
+test('Transpiled DocumentKeys', () => {
+	checkTranspiledOutput('builtins/documentKeys.pec');
+});
+
 test('Interpreted DocumentText', () => {
 	checkInterpretedOutput('builtins/documentText.pec');
 });
 
 test('Transpiled DocumentText', () => {
 	checkTranspiledOutput('builtins/documentText.pec');
+});
+
+test('Interpreted DocumentValues', () => {
+	checkInterpretedOutput('builtins/documentValues.pec');
+});
+
+test('Transpiled DocumentValues', () => {
+	checkTranspiledOutput('builtins/documentValues.pec');
 });
 
 test('Interpreted EnumName', () => {

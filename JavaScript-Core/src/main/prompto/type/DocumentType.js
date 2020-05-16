@@ -1,6 +1,9 @@
 var MissingType = require("./MissingType").MissingType;
 var NativeType = require("./NativeType").NativeType;
+var IntegerType = require("./IntegerType").IntegerType;
 var TextType = require("./TextType").TextType;
+var ListType = require("./ListType").ListType;
+var SetType = require("./SetType").SetType;
 var NullType = require("./NullType").NullType;
 var AnyType = require("./AnyType").AnyType;
 var Identifier = require("../grammar/Identifier").Identifier;
@@ -13,6 +16,7 @@ var MethodDeclarationMap = null;
 var ValueExpression = require("../expression/ValueExpression").ValueExpression;
 var DocumentValue = null;
 var Document = require("../intrinsic/Document").Document;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var List = require("../intrinsic/List").List;
 var ArgumentList = null;
 var Argument = null;
@@ -54,7 +58,13 @@ DocumentType.prototype.isMoreSpecificThan = function (context, other) {
 
 
 DocumentType.prototype.checkMember = function (context, section, name) {
-    if (name === "text")
+    if ("count"==name) {
+        return IntegerType.instance;
+    } else if("keys"==name) {
+        return new SetType(TextType.instance);
+    } else if ("values"==name) {
+        return new ListType(AnyType.instance);
+    } else if (name === "text")
         return TextType.instance;
     else
         return AnyType.instance;
@@ -113,12 +123,21 @@ DocumentType.prototype.transpile = function (transpiler) {
 
 
 DocumentType.prototype.declareMember = function (transpiler, section, name) {
-    // nothing to do
+    if("keys"===name) {
+        transpiler.require(StrictSet);
+    } else if("values"==name) {
+        transpiler.require(List);
+    } else
+        ; // nothing to do
 };
 
 
 DocumentType.prototype.transpileMember = function (transpiler, name) {
-    if ("text" === name) {
+    if ("count"===name) {
+        transpiler.append("length");
+    } else if("keys"===name || "values"==name) {
+        transpiler.append(name);
+    } else if ("text" === name) {
         transpiler.append("getText()");
     } else {
         transpiler.append("getMember('").append(name).append("', false)");

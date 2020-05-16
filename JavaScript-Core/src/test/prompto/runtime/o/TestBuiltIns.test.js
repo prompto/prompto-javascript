@@ -114,6 +114,14 @@ test('Transpiled DictSwap', () => {
 	checkTranspiledOutput('builtins/dictSwap.poc');
 });
 
+test('Interpreted DocumentCount', () => {
+	checkInterpretedOutput('builtins/documentCount.poc');
+});
+
+test('Transpiled DocumentCount', () => {
+	checkTranspiledOutput('builtins/documentCount.poc');
+});
+
 test('Interpreted EnumName', () => {
 	checkInterpretedOutput('builtins/enumName.poc');
 });

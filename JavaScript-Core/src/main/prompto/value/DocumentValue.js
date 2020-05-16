@@ -1,8 +1,14 @@
 var NullValue = require("./NullValue").NullValue;
 var Value = require("./Value").Value;
 var TextValue = require("./TextValue").TextValue;
+var IntegerValue = require("./IntegerValue").IntegerValue;
+var SetValue = require("./SetValue").SetValue;
+var ListValue = require("./ListValue").ListValue;
 var DocumentType = require("../type/DocumentType").DocumentType;
+var TextType = require("../type/TextType").TextType;
+var AnyType = require("../type/AnyType").AnyType;
 var Document = require("../intrinsic/Document").Document;
+var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var equalArrays = require("../utils/Utils").equalArrays;
 
 function DocumentValue(values) {
@@ -41,7 +47,20 @@ DocumentValue.prototype.hasMember = function(name) {
 }
 
 DocumentValue.prototype.getMemberValue = function(context, name, autoCreate) {
-    if(this.values.hasOwnProperty(name))
+    if ("count"==name) {
+        return new IntegerValue(this.values.length);
+    } else if ("keys"==name) {
+        var keys = new StrictSet();
+        this.getMemberNames().forEach(function (name) {
+            keys.add(new TextValue(name));
+        });
+        return new SetValue(TextType.instance, keys);
+    } else if ("values"==name) {
+        var list = this.getMemberNames().map(function (name) {
+            return this.values[name];
+        }, this);
+        return new ListValue(AnyType.instance, list);
+    } else if(this.values.hasOwnProperty(name))
         return this.values[name] || null;
     else if("text" == name)
         return new TextValue(this.toString());

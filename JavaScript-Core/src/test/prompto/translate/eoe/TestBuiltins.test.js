@@ -116,8 +116,20 @@ test('DictValues', () => {
 	compareResourceEOE('builtins/dictValues.pec');
 });
 
+test('DocumentCount', () => {
+	compareResourceEOE('builtins/documentCount.pec');
+});
+
+test('DocumentKeys', () => {
+	compareResourceEOE('builtins/documentKeys.pec');
+});
+
 test('DocumentText', () => {
 	compareResourceEOE('builtins/documentText.pec');
+});
+
+test('DocumentValues', () => {
+	compareResourceEOE('builtins/documentValues.pec');
 });
 
 test('EnumName', () => {

@@ -1,10 +1,44 @@
 var equalArrays = require("../utils/Utils").equalArrays;
+var StrictSet = require("./StrictSet").StrictSet;
+var List = require("./List").List;
 
 function Document(entries) {
     if(entries)
         Object.getOwnPropertyNames(entries).forEach(function(name) { this[name] = entries[name]; }, this);
     return this;
 }
+
+
+Object.defineProperty(Document.prototype, "$keys", {
+    get : function() {
+        return Object.getOwnPropertyNames(this).filter(function(name) {
+            return name!=="mutable";
+        });
+    }
+});
+
+
+Object.defineProperty(Document.prototype, "length", {
+    get : function() {
+        return this.$keys.length;
+    }
+});
+
+Object.defineProperty(Document.prototype, "keys", {
+    get : function() {
+        return new StrictSet(this.$keys);
+    }
+});
+
+
+Object.defineProperty(Document.prototype, "values", {
+    get : function() {
+        var names = this.$keys.map(function(name) {
+            return this[name];
+        }, this);
+        return new List(false, names);
+    }
+});
 
 Document.prototype.toString = function() {
     return JSON.stringify(this);
