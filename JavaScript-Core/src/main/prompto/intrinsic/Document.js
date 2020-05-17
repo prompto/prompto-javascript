@@ -101,7 +101,7 @@ Document.prototype.add = function(doc) {
 
 
 Document.prototype.toDocument = function() {
-    var result = Object.assign({}, other);
+    var result = Object.assign({}, this);
     result.__proto__ = Document.prototype;
     return result;
 };
