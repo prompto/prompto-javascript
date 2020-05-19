@@ -177,6 +177,9 @@ exports.listLibraryFiles = function(libraryName) {
 
 
 exports.runInterpretedTests = function(fileName) {
+    var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
+    MemStoreModule.Cursor = require("../../../main/prompto/intrinsic/Cursor").Cursor;
+    prompto.store.$DataStore.instance = new MemStoreModule.MemStore();
     runTests(fileName, interpretTest);
 }
 

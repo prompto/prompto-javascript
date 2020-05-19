@@ -54,9 +54,9 @@ JavaScriptIdentifierExpression.prototype.interpret = function (context, module) 
 };
 
 JavaScriptIdentifierExpression.prototype.interpret_prompto = function (context) {
-    if ("$context" == this.id.name)
+    if ("$context" === this.id.name)
         return context;
-    else if ("$store" == this.id.name)
+    else if ("$store" === this.id.name)
         return $DataStore.instance;
     else
         return null;
