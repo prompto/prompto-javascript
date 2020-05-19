@@ -6,6 +6,7 @@ exports.Cursor = require("../intrinsic/Cursor").Cursor;
 // a utility class for running unit tests only
 function MemStore() {
     Store.call(this);
+    this.sequences = {};
     this.iterDocuments = {};
     this.nextDbId = 1;
     return this;
@@ -13,6 +14,13 @@ function MemStore() {
 
 MemStore.prototype = Object.create(Store.prototype);
 MemStore.prototype.constructor = MemStore;
+
+
+MemStore.prototype.nextSequenceValue = function(name) {
+    var value = (this.sequences[name] || 0) + 1;
+    this.sequences[name] = value;
+    return value;
+};
 
 
 MemStore.prototype.flush = function() {

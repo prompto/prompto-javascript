@@ -3,6 +3,12 @@ function Store() {
     return this;
 }
 
+
+Store.prototype.nextSequenceValue = function(name) {
+    throw new Error("Must override nextSequenceValue!");
+};
+
+
 Store.prototype.newQueryBuilder = function() {
     throw new Error("Must override newQueryBuilder!");
 };

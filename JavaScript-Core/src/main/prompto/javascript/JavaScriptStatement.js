@@ -3,6 +3,8 @@ var AnyType = require("../type/AnyType").AnyType;
 var JavaScriptType = require("./JavaScriptType").JavaScriptType;
 var getTypeName = require("./JavaScriptUtils").getTypeName;
 var Identifier = require("../grammar/Identifier").Identifier;
+var $DataStore = require("../store/DataStore").$DataStore;
+
 
 function JavaScriptStatement(expression, isReturn) {
 	this.expression = expression;
@@ -51,9 +53,11 @@ $context.prototype.transpile = function(transpiler) {
 
 JavaScriptStatement.prototype.declare = function(transpiler) {
     // TODO module
-    if(this.expression.toString().startsWith("$context")) {
+    var str = this.expression.toString();
+    if(str.startsWith("$context"))
         transpiler.declare(new $context());
-    }
+    else if(str.startsWith("$store"))
+        transpiler.require($DataStore);
 };
 
 
