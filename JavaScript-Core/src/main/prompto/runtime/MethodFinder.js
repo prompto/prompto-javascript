@@ -54,7 +54,7 @@ MethodFinder.prototype.findMostSpecific = function(candidates, checkInstance) {
 		}
 	}, this);
 	if(ambiguous.length>0) {
-		throw new SyntaxError("Too many prototypes!"); // TODO refine
+		this.context.problemListener.reportTooManyPrototypes(this.methodCall);
 	}
 	return candidate;
 }

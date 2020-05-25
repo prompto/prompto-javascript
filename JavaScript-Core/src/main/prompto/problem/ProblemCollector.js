@@ -120,6 +120,11 @@ ProblemCollector.prototype.reportNoMatchingPrototype = function(method) {
 };
 
 
+ProblemCollector.prototype.reportTooManyPrototypes = function(method) {
+    this.reportError(method, "Too many prototypes for: " + method.toString());
+};
+
+
 ProblemCollector.prototype.reportCannotIterate = function(source) {
     this.reportError(source, "Cannot iterate over: " + source.toString());
 };
