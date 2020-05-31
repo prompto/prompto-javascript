@@ -71,9 +71,13 @@ TextType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, 
     // can add anything to text
     left.transpile(transpiler);
     transpiler.append(" + ");
-    right.transpile(transpiler);
-    if(other === DecimalType.instance)
-        transpiler.append(".toDecimalString()");
+    // fix js precedence issue with -3.0.toDecimalString()
+    if(other === DecimalType.instance) {
+        transpiler.append("(");
+        right.transpile(transpiler);
+        transpiler.append(").toDecimalString()");
+    } else
+        right.transpile(transpiler);
 };
 
 TextType.prototype.checkMultiply = function(context, other, tryReverse) {
