@@ -44,8 +44,8 @@ ProblemCollector.prototype.syntaxError = function(recognizer, offendingSymbol, l
     this.collectProblem(problem);
 };
 
-ProblemCollector.prototype.reportDuplicate = function(name, declaration) {
-    this.reportError(declaration.id, "Duplicate name: " + name);
+ProblemCollector.prototype.reportDuplicate = function(id) {
+    this.reportError(id, "Duplicate name: " + id.name);
 };
 
 ProblemCollector.prototype.reportInvalidAttribute = function(id) {
@@ -191,6 +191,12 @@ ProblemCollector.prototype.reportNoSuperType = function(section, type) {
 ProblemCollector.prototype.reportAssigningVoidType = function(section) {
     this.reportError(section, "Cannot assign void type");
 };
+
+
+ProblemCollector.prototype.reportReturningVoidType = function(section) {
+    this.reportError(section, "Cannot return void type");
+};
+
 
 ProblemCollector.prototype.reportNotMutable = function(section, name) {
     this.reportError(section, name + " is not mutable");

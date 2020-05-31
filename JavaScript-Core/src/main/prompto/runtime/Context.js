@@ -309,7 +309,7 @@ Context.prototype.registerDeclaration = function(declaration) {
 Context.prototype.checkDuplicate = function(declaration) {
     var actual = this.getRegistered(declaration.name) || null;
     if (actual !== null && actual !== declaration)
-        this.problemListener.reportDuplicate(declaration.name, declaration);
+        this.problemListener.reportDuplicate(declaration.id);
     return actual === null;
 };
 
@@ -340,14 +340,14 @@ Context.prototype.registerMethodDeclaration = function(declaration) {
 Context.prototype.checkDuplicateMethod = function(declaration) {
     var actual = this.getRegistered(declaration.name) || null;
     if (actual !== null && !(actual instanceof MethodDeclarationMap))
-        this.problemListener.reportDuplicate(declaration.name, declaration);
+        this.problemListener.reportDuplicate(declaration.id);
     return actual;
 };
 
 Context.prototype.registerTestDeclaration = function(declaration) {
     var actual = this.tests[declaration.name] || null;
     if(actual!==null)
-        this.problemListener.reportDuplicate(declaration.name, declaration);
+        this.problemListener.reportDuplicate(declaration.id);
     this.tests[declaration.name] = declaration;
 };
 
@@ -409,7 +409,7 @@ MethodDeclarationMap.prototype.register = function(declaration, problemListener)
     var proto = declaration.getProto();
     var current = this.protos[proto] || null;
     if(current!==null)
-        problemListener.reportDuplicate(declaration.name, declaration);
+        problemListener.reportDuplicate(declaration.id);
     this.protos[proto] = declaration;
 };
 
@@ -622,7 +622,7 @@ InstanceContext.prototype.registerWidgetField = function(id, type, createdBy) {
         // we control reentrance by registering which processor created the widgetField
         if(widgetField.createdBy == createdBy)
             return;
-        this.getProblemListener().reportDuplicate(id, id.name, id);
+        this.getProblemListener().reportDuplicate(id);
     } else
         this.widgetFields[id.name] = new WidgetField(id.name, type, createdBy);
 };

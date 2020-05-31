@@ -57,7 +57,12 @@ ReturnStatement.prototype.transpile = function(transpiler) {
 };
 
 ReturnStatement.prototype.check = function(context) {
-    return this.expression==null ? VoidType.instance : this.expression.check(context);
+    if(this.expression==null)
+        return VoidType.instance;
+    var type = this.expression.check(context);
+    if(type == VoidType.instance)
+        context.problemListener.reportReturningVoidType(this.expression);
+    return type;
 };
 
 ReturnStatement.prototype.interpret = function(context) {

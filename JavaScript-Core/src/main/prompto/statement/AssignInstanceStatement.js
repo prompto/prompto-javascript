@@ -25,7 +25,7 @@ AssignInstanceStatement.prototype.toString = function() {
 AssignInstanceStatement.prototype.check = function(context) {
     var valueType = this.expression.check(context);
     if(valueType===VoidType.instance)
-        context.problemListener.reportAssigningVoidType(this);
+        context.problemListener.reportAssigningVoidType(this.expression);
 	this.instance.checkAssignValue(context, valueType, this);
     // Code expressions need to be interpreted as part of full check
     if (valueType === CodeType.instance) {
