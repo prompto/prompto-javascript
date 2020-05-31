@@ -3,9 +3,10 @@ var NullValue = require("../value/NullValue").NullValue;
 var VoidResult = require("../runtime/VoidResult").VoidResult;
 var VoidType = require("../type/VoidType").VoidType;
 
-function ReturnStatement(expression) {
+function ReturnStatement(expression, fromArrowExpression) {
 	SimpleStatement.call(this);
 	this.expression = expression || null;
+    this.fromArrowExpression = fromArrowExpression || false;
 	return this;
 }
 
@@ -60,7 +61,7 @@ ReturnStatement.prototype.check = function(context) {
     if(this.expression==null)
         return VoidType.instance;
     var type = this.expression.check(context);
-    if(type == VoidType.instance)
+    if(type == VoidType.instance && !this.fromArrowExpression)
         context.problemListener.reportReturningVoidType(this.expression);
     return type;
 };

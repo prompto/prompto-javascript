@@ -116,7 +116,7 @@ ArrowExpression.prototype.filterToDialect = function(writer, source) {
 
 
 ArrowExpression.prototype.setExpression = function(expression) {
-    var stmt = new ReturnStatement(expression);
+    var stmt = new ReturnStatement(expression, true);
     this.statements = new StatementList(stmt);
 };
 
