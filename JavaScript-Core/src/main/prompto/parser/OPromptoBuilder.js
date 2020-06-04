@@ -2319,6 +2319,19 @@ OPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
 };
 
 
+OPromptoBuilder.prototype.exitRead_statement = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.ReadStatement(source, name, stmts));
+};
+
+
+OPromptoBuilder.prototype.exitReadStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
+};
+
+
 OPromptoBuilder.prototype.exitRepl = function(ctx) {
     var value = this.getNodeValue(ctx.getChild(0));
     this.setNodeValue(ctx, value);

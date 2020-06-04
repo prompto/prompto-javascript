@@ -17,6 +17,14 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted Email', () => {
+	runInterpretedTests('internet/email.pec');
+});
+
+test('Transpiled Email', () => {
+	runTranspiledTests('internet/email.pec');
+});
+
 test('Interpreted Html', () => {
 	runInterpretedTests('internet/html.pec');
 });

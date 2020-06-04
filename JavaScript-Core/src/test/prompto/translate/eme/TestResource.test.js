@@ -4,6 +4,10 @@ test('ReadResource', () => {
 	compareResourceEME('resource/readResource.pec');
 });
 
+test('ReadResourceThen', () => {
+	compareResourceEME('resource/readResourceThen.pec');
+});
+
 test('ReadWithResource', () => {
 	compareResourceEME('resource/readWithResource.pec');
 });

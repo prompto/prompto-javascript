@@ -2315,6 +2315,14 @@ EPromptoBuilder.prototype.exitRead_one_expression = function(ctx) {
 };
 
 
+EPromptoBuilder.prototype.exitRead_statement = function(ctx) {
+    var source = this.getNodeValue(ctx.source);
+    var name = this.getNodeValue(ctx.name);
+    var stmts = this.getNodeValue(ctx.stmts);
+    this.setNodeValue(ctx, new statement.ReadStatement(source, name, stmts));
+};
+
+
 EPromptoBuilder.prototype.exitReadAllExpression = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);
@@ -2330,6 +2338,11 @@ EPromptoBuilder.prototype.exitReadBlobExpression = function(ctx) {
 EPromptoBuilder.prototype.exitReadOneExpression = function(ctx) {
     var exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, exp);
+};
+
+
+EPromptoBuilder.prototype.exitReadStatement = function(ctx) {
+    this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
 };
 
 

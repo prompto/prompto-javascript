@@ -18,6 +18,14 @@ test('Transpiled ReadResource', () => {
 	checkTranspiledOutput('resource/readResource.poc');
 });
 
+test('Interpreted ReadResourceThen', () => {
+	checkInterpretedOutput('resource/readResourceThen.poc');
+});
+
+test('Transpiled ReadResourceThen', () => {
+	checkTranspiledOutput('resource/readResourceThen.poc');
+});
+
 test('Interpreted ReadWithResource', () => {
 	checkInterpretedOutput('resource/readWithResource.poc');
 });

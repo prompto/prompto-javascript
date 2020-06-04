@@ -4,6 +4,10 @@ test('ReadResource', () => {
 	compareResourceOMO('resource/readResource.poc');
 });
 
+test('ReadResourceThen', () => {
+	compareResourceOMO('resource/readResourceThen.poc');
+});
+
 test('ReadWithResource', () => {
 	compareResourceOMO('resource/readWithResource.poc');
 });

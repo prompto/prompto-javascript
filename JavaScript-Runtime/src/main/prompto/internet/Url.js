@@ -1,8 +1,9 @@
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
-function Url(path, encoding) {
+function Url(path, encoding, method) {
     this.path = path;
     this.encoding = encoding || "utf-8";
+    this.method = method || "GET";
     return this;
 }
 
@@ -21,20 +22,43 @@ Url.prototype.readFully = function() {
     if(isNodeJs) {
         // need a synchronous call here, highly discouraged in main thread
         var request = eval("require('sync-request')");
-        var res = request('GET', this.path);
+        var res = request(this.method, this.path);
         return res.getBody().toString();
     } else {
         /* global XMLHttpRequest */
-        var r = new XMLHttpRequest();
-        r.overrideMimeType('text/plain');
-        r.open('GET', this.path, false);
-        r.setRequestHeader("Access-Control-Allow-Origin", "*");
-        r.send();
-        if (r.status != 200) {
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('text/plain');
+        xhr.open(this.method, this.path, false);
+        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        xhr.send();
+        if (xhr.status != 200) {
             var rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
-            throw new rwe("Request failed, status: " + r.status +", " + r.statusText);
+            throw new rwe("Request failed, status: " + xhr.status +", " + xhr.statusText);
         }
-        return r.responseText;
+        return xhr.responseText;
+    }
+};
+
+Url.prototype.readFullyAsync = function(callback) {
+    if(isNodeJs) {
+        // TODO switch to async
+        var request = eval("require('sync-request')");
+        var res = request(this.method, this.path);
+        return res.getBody().toString();
+    } else {
+        /* global XMLHttpRequest */
+        var xhr = new XMLHttpRequest();
+        xhr.overrideMimeType('text/plain');
+        xhr.open(this.method, this.path, true);
+        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        xhr.onload = function() {
+            if (xhr.status != 200) {
+                var rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
+                throw new rwe("Request failed, status: " + xhr.status +", " + xhr.statusText);
+            }
+            callback(xhr.responseText);
+        }
+        xhr.send();
     }
 };
 

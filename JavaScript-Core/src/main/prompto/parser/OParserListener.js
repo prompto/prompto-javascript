@@ -335,6 +335,15 @@ OParserListener.prototype.exitFetchStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#ReadStatement.
+OParserListener.prototype.enterReadStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#ReadStatement.
+OParserListener.prototype.exitReadStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#FlushStatement.
 OParserListener.prototype.enterFlushStatement = function(ctx) {
 };
@@ -1223,6 +1232,15 @@ OParserListener.prototype.enterFetchManyAsync = function(ctx) {
 
 // Exit a parse tree produced by OParser#FetchManyAsync.
 OParserListener.prototype.exitFetchManyAsync = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#read_statement.
+OParserListener.prototype.enterRead_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#read_statement.
+OParserListener.prototype.exitRead_statement = function(ctx) {
 };
 
 

@@ -326,6 +326,15 @@ EParserListener.prototype.exitFetchStatement = function(ctx) {
 };
 
 
+// Enter a parse tree produced by EParser#ReadStatement.
+EParserListener.prototype.enterReadStatement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#ReadStatement.
+EParserListener.prototype.exitReadStatement = function(ctx) {
+};
+
+
 // Enter a parse tree produced by EParser#FlushStatement.
 EParserListener.prototype.enterFlushStatement = function(ctx) {
 };
@@ -1367,6 +1376,15 @@ EParserListener.prototype.enterFetchManyAsync = function(ctx) {
 
 // Exit a parse tree produced by EParser#FetchManyAsync.
 EParserListener.prototype.exitFetchManyAsync = function(ctx) {
+};
+
+
+// Enter a parse tree produced by EParser#read_statement.
+EParserListener.prototype.enterRead_statement = function(ctx) {
+};
+
+// Exit a parse tree produced by EParser#read_statement.
+EParserListener.prototype.exitRead_statement = function(ctx) {
 };
 
 

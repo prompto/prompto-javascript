@@ -32,6 +32,7 @@ exports.UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
 exports.RemoteCall = require("./RemoteCall").RemoteCall;
 exports.FetchOneStatement = require("./FetchOneStatement").FetchOneStatement;
 exports.FetchManyStatement = require("./FetchManyStatement").FetchManyStatement;
+exports.ReadStatement = require("./ReadStatement").ReadStatement;
 
 require("./MethodCall").resolve();
 require("./DeclarationStatement").resolve();
