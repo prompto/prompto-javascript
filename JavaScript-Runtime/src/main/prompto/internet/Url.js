@@ -41,10 +41,11 @@ Url.prototype.readFully = function() {
 
 Url.prototype.readFullyAsync = function(callback) {
     if(isNodeJs) {
-        // TODO switch to async
-        var request = eval("require('sync-request')");
-        var res = request(this.method, this.path);
-        return res.getBody().toString();
+        // TODO test this
+        var request = eval("require('then-request')");
+        request(this.method, this.path, null, function(res) {
+            callback(res.getBody().toString());
+        });
     } else {
         /* global XMLHttpRequest */
         var xhr = new XMLHttpRequest();
