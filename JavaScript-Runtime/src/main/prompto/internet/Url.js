@@ -1,5 +1,9 @@
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
+if(!isNodeJs) {
+    /* global XMLHttpRequest */
+}
+
 function Url(path, encoding, method) {
     this.path = path;
     this.encoding = encoding || "utf-8";
@@ -25,7 +29,6 @@ Url.prototype.readFully = function() {
         var res = request(this.method, this.path);
         return res.getBody().toString();
     } else {
-        /* global XMLHttpRequest */
         var xhr = new XMLHttpRequest();
         xhr.overrideMimeType('text/plain');
         xhr.open(this.method, this.path, false);
@@ -47,7 +50,6 @@ Url.prototype.readFullyAsync = function(callback) {
             callback(res.getBody().toString());
         });
     } else {
-        /* global XMLHttpRequest */
         var xhr = new XMLHttpRequest();
         xhr.overrideMimeType('text/plain');
         xhr.open(this.method, this.path, true);
