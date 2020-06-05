@@ -20,6 +20,10 @@ MyResource.prototype.readFully = function() {
 	return contents[this.path] || null;
 };
 
+MyResource.prototype.readFullyAsync = function(callback) {
+    callback(contents[this.path] || null);
+};
+
 MyResource.prototype.writeFully = function(data) {
     contents[this.path] = data;
 };

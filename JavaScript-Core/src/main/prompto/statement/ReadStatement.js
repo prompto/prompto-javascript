@@ -71,7 +71,8 @@ ReadStatement.prototype.declare = function(transpiler) {
 
 
 ReadStatement.prototype.transpile = function(transpiler) {
-    transpiler.append(this.source.name).append(".readFullyAsync(function(").append(this.name.name).append(") {").indent();
+    this.resource.transpile(transpiler);
+    transpiler.append(".readFullyAsync(function(").append(this.name.name).append(") {").indent();
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, TextType.instance));
     this.andThen.transpile(transpiler);
