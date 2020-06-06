@@ -197,6 +197,7 @@ EnumeratedCategoryDeclaration.prototype.transpileEnumerated = function(transpile
     ConcreteCategoryDeclaration.prototype.transpile.call(this, transpiler);
     transpiler.newLine();
     transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
+    transpiler.append(this.name).append(".prototype.equals = function(other) { return this==other; };").newLine();
     if(this.hasAttribute(transpiler.context, "text"))
         transpiler.append(this.name).append(".prototype.getText = function() { return this.text; };").newLine();
     else

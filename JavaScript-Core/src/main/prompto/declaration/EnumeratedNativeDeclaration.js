@@ -87,6 +87,7 @@ EnumeratedNativeDeclaration.prototype.check = function(context) {
 EnumeratedNativeDeclaration.prototype.transpile = function(transpiler) {
     transpiler.append("function " + this.name + "(name, value) { this.name = name; this.value = value; return this; };").newLine();
     transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
+    transpiler.append(this.name).append(".prototype.equals = function(other) { return this==other; };").newLine();
     this.symbols.forEach(function(symbol) {symbol.initialize(transpiler);});
     var names = this.symbols.map(function(symbol) { return symbol.name; });
     transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
