@@ -76,7 +76,7 @@ ReadStatement.prototype.transpile = function(transpiler) {
     transpiler = transpiler.newChildTranspiler(transpiler.context);
     transpiler.context.registerValue(new Variable(this.name, TextType.instance));
     this.andThen.transpile(transpiler);
-    transpiler.dedent().append("}.bind(this));")
+    transpiler.dedent().append("}.bind(this))")
     transpiler.flush();
     return false;
 };
