@@ -26,7 +26,8 @@ Url.prototype.readFully = function() {
     if(isNodeJs) {
         // need a synchronous call here, highly discouraged in main thread
         var request = eval("require('sync-request')");
-        var res = request(this.httpRequestMethod, this.path);
+        var method = this.httpRequestMethod || "GET";
+        var res = request(method, this.path);
         return res.getBody().toString();
     } else {
         var xhr = this.createHttpRequest(false);
@@ -56,7 +57,8 @@ Url.prototype.readFullyAsync = function(callback) {
             callback(result);
         } else {
             var request = eval("require('then-request')");
-            request(this.httpRequestMethod, this.path, null, function(x, res) {
+            var method = this.httpRequestMethod || "GET";
+            request(method, this.path, null, function(x, res) {
                 callback(res.getBody());
             });
         }
@@ -72,9 +74,10 @@ Url.prototype.readFullyAsync = function(callback) {
 };
 
 Url.prototype.createHttpRequest = function(async) {
+    var method = this.httpRequestMethod || "GET";
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/plain');
-    xhr.open(this.httpRequestMethod, this.path, async);
+    xhr.open(method, this.path, async);
     xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     return xhr;
