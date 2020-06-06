@@ -7,7 +7,7 @@ if(!isNodeJs) {
 function Url(path, encoding, method) {
     this.path = path;
     this.encoding = encoding || "utf-8";
-    this.method = method || "GET";
+    this.httpRequestMethod = method || "GET";
     return this;
 }
 
@@ -26,19 +26,25 @@ Url.prototype.readFully = function() {
     if(isNodeJs) {
         // need a synchronous call here, highly discouraged in main thread
         var request = eval("require('sync-request')");
-        var res = request(this.method, this.path);
+        var res = request(this.httpRequestMethod, this.path);
         return res.getBody().toString();
     } else {
-        var xhr = new XMLHttpRequest();
-        xhr.overrideMimeType('text/plain');
-        xhr.open(this.method, this.path, false);
-        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        var xhr = this.createHttpRequest(false);
         xhr.send();
-        if (xhr.status != 200) {
+        this.checkStatus(xhr);
+        return xhr.responseText;
+    }
+};
+
+Url.prototype.checkStatus = function(xhr) {
+    if (xhr.status != 200) {
+        try {
             var rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
             throw new rwe("Request failed, status: " + xhr.status +", " + xhr.statusText);
+        } catch(error) {
+            throw new Error("Request failed, status: " + xhr.status +", " + xhr.statusText);
         }
-        return xhr.responseText;
+
     }
 };
 
@@ -50,24 +56,28 @@ Url.prototype.readFullyAsync = function(callback) {
             callback(result);
         } else {
             var request = eval("require('then-request')");
-            request(this.method, this.path, null, function(x, res) {
+            request(this.httpRequestMethod, this.path, null, function(x, res) {
                 callback(res.getBody());
             });
         }
     } else {
-        var xhr = new XMLHttpRequest();
-        xhr.overrideMimeType('text/plain');
-        xhr.open(this.method, this.path, true);
-        xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+        var self = this;
+        var xhr = this.createHttpRequest(true);
         xhr.onload = function() {
-            if (xhr.status != 200) {
-                var rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
-                throw new rwe("Request failed, status: " + xhr.status +", " + xhr.statusText);
-            }
+            self.checkStatus(xhr);
             callback(xhr.responseText);
         }
         xhr.send();
     }
+};
+
+Url.prototype.createHttpRequest = function(async) {
+    var xhr = new XMLHttpRequest();
+    xhr.overrideMimeType('text/plain');
+    xhr.open(this.httpRequestMethod, this.path, async);
+    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    return xhr;
 };
 
 Url.prototype.readLine = function() {
