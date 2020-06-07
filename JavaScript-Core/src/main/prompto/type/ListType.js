@@ -70,7 +70,7 @@ ListType.prototype.equals = function(obj) {
 };
 
 ListType.prototype.checkAdd = function(context, other, tryReverse) {
-	if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
+	if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType)) {
 		return this;
 	} else {
 		return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
@@ -79,7 +79,7 @@ ListType.prototype.checkAdd = function(context, other, tryReverse) {
 
 
 ListType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
+    if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(transpiler.context, other.itemType)) {
         left.declare(transpiler);
         right.declare(transpiler);
     } else {
@@ -89,7 +89,7 @@ ListType.prototype.declareAdd = function(transpiler, other, tryReverse, left, ri
 
 
 ListType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
+    if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(transpiler.context, other.itemType)) {
         left.transpile(transpiler);
         transpiler.append(".add(");
         right.transpile(transpiler);

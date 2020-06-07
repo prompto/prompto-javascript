@@ -74,6 +74,14 @@ test('Transpiled AddList', () => {
 	checkTranspiledOutput('add/addList.poc');
 });
 
+test('Interpreted AddListDerived', () => {
+	checkInterpretedOutput('add/addListDerived.poc');
+});
+
+test('Transpiled AddListDerived', () => {
+	checkTranspiledOutput('add/addListDerived.poc');
+});
+
 test('Interpreted AddPeriod', () => {
 	checkInterpretedOutput('add/addPeriod.poc');
 });
@@ -88,6 +96,14 @@ test('Interpreted AddSet', () => {
 
 test('Transpiled AddSet', () => {
 	checkTranspiledOutput('add/addSet.poc');
+});
+
+test('Interpreted AddSetDerived', () => {
+	checkInterpretedOutput('add/addSetDerived.poc');
+});
+
+test('Transpiled AddSetDerived', () => {
+	checkTranspiledOutput('add/addSetDerived.poc');
 });
 
 test('Interpreted AddTextCharacter', () => {

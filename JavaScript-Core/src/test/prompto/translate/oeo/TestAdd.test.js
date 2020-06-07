@@ -32,12 +32,20 @@ test('AddList', () => {
 	compareResourceOEO('add/addList.poc');
 });
 
+test('AddListDerived', () => {
+	compareResourceOEO('add/addListDerived.poc');
+});
+
 test('AddPeriod', () => {
 	compareResourceOEO('add/addPeriod.poc');
 });
 
 test('AddSet', () => {
 	compareResourceOEO('add/addSet.poc');
+});
+
+test('AddSetDerived', () => {
+	compareResourceOEO('add/addSetDerived.poc');
 });
 
 test('AddTextCharacter', () => {
