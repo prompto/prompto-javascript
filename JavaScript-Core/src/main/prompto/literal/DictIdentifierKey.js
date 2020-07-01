@@ -1,4 +1,5 @@
 var TextValue = require("../value/TextValue").TextValue;
+var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 
 function DictIdentifierKey(id) {
     this.id = id;
