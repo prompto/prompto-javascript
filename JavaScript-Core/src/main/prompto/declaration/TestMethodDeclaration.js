@@ -132,7 +132,7 @@ TestMethodDeclaration.prototype.check = function(context) {
 
 TestMethodDeclaration.prototype.checkStatement = function(context, statement) {
     var type = statement.check(context);
-    if(type!=null && type!=VoidType.instance) // null indicates SyntaxError
+    if(statement.canReturn() && type!=null && type!=VoidType.instance) // null indicates SyntaxError
         context.problemListener.reportIllegalReturn(statement);
 };
 

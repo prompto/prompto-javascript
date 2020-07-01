@@ -8,6 +8,12 @@ function SwitchStatement(expression, switchCases, defaultCase) {
 SwitchStatement.prototype = Object.create(BaseSwitchStatement.prototype);
 SwitchStatement.prototype.constructor = SwitchStatement;
 
+
+SwitchStatement.prototype.canReturn = function() {
+    return true;
+};
+
+
 SwitchStatement.prototype.checkSwitchType = function(context) {
 	return this.expression.check(context);
 };

@@ -198,6 +198,11 @@ ProblemCollector.prototype.reportReturningVoidType = function(section) {
 };
 
 
+ProblemCollector.prototype.reportIllegalReturn = function(section) {
+    this.reportError(section, "A test method cannot return");
+};
+
+
 ProblemCollector.prototype.reportNotMutable = function(section, name) {
     this.reportError(section, name + " is not mutable");
 };
