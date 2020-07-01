@@ -18,6 +18,10 @@ DictTextKey.prototype.stringValue = function() {
     return unescape(this.text);
 };
 
+DictTextKey.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
+
 DictTextKey.prototype.interpret = function(context) {
     return new TextValue(this.stringValue());
 };

@@ -18,6 +18,10 @@ DocTextKey.prototype.stringValue = function() {
     return unescape(this.text);
 };
 
+DocTextKey.prototype.transpile = function(transpiler) {
+    transpiler.append(this.text);
+};
+
 DocTextKey.prototype.interpret = function(context) {
     return new TextValue(this.stringValue());
 };

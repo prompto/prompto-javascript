@@ -20,7 +20,8 @@ DictEntry.prototype.declare = function(transpiler) {
 
 
 DictEntry.prototype.transpile = function(transpiler) {
-    transpiler.append(this.key.toString()).append(':');
+    this.key.transpile(transpiler);
+    transpiler.append(':');
     this.value.transpile(transpiler);
 };
 

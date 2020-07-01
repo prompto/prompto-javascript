@@ -10,6 +10,10 @@ DictIdentifierKey.prototype.toString = function() {
     return this.id.toString();
 };
 
+DictIdentifierKey.prototype.transpile = function(transpiler) {
+    transpiler.append("[").append(this.id.name).append("]");
+};
+
 DictIdentifierKey.prototype.interpret = function(context) {
     var value = new InstanceExpression(this.id).interpret(context);
     if(value instanceof TextValue)
