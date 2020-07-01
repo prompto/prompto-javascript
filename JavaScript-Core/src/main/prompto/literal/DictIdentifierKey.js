@@ -9,12 +9,14 @@ DictIdentifierKey.prototype.toString = function() {
     return this.id.toString();
 };
 
-DictIdentifierKey.prototype.asKey = function() {
-    return this.id.toString();
-};
-
-DictIdentifierKey.prototype.asText = function() {
-    return new TextValue(this.asKey());
+DictIdentifierKey.prototype.interpret = function(context) {
+    var value = new InstanceExpression(this.id).interpret(context);
+    if(value instanceof TextValue)
+        return value;
+    else {
+        context.problemListener.reportIllegalValue(this, "Expected a Text, got " + value.type.typeName);
+        return null;
+    }
 };
 
 

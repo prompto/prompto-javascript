@@ -68,7 +68,7 @@ DictLiteral.prototype.interpret = function(context) {
         this.check(context); /// force computation of itemType
         var dict = new Dictionary();
         this.entries.items.forEach(function(entry) {
-            var key = entry.key.asText();
+            var key = entry.key.interpret(context);
             var val = entry.value.interpret(context);
             val = this.interpretPromotion(val);
             dict[key] = val;

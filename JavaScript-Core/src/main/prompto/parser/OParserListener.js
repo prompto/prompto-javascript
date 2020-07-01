@@ -2666,6 +2666,42 @@ OParserListener.prototype.exitExpression_tuple = function(ctx) {
 };
 
 
+// Enter a parse tree produced by OParser#doc_entry_list.
+OParserListener.prototype.enterDoc_entry_list = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#doc_entry_list.
+OParserListener.prototype.exitDoc_entry_list = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#doc_entry.
+OParserListener.prototype.enterDoc_entry = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#doc_entry.
+OParserListener.prototype.exitDoc_entry = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#DocKeyIdentifier.
+OParserListener.prototype.enterDocKeyIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#DocKeyIdentifier.
+OParserListener.prototype.exitDocKeyIdentifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by OParser#DocKeyText.
+OParserListener.prototype.enterDocKeyText = function(ctx) {
+};
+
+// Exit a parse tree produced by OParser#DocKeyText.
+OParserListener.prototype.exitDocKeyText = function(ctx) {
+};
+
+
 // Enter a parse tree produced by OParser#dict_entry_list.
 OParserListener.prototype.enterDict_entry_list = function(ctx) {
 };

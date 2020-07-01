@@ -336,6 +336,67 @@ EPromptoBuilder.prototype.exitDict_entry = function(ctx) {
     this.setNodeValue(ctx, entry);
 };
 
+
+EPromptoBuilder.prototype.exitDoc_entry_list = function(ctx) {
+    var items = new literal.DocEntryList(null, null);
+    ctx.doc_entry().forEach(function(r) {
+        var item = this.getNodeValue(r);
+        items.add(item);
+    }, this);
+    this.setNodeValue(ctx, items);
+};
+
+
+EPromptoBuilder.prototype.exitDoc_entry = function(ctx) {
+    var key = this.getNodeValue(ctx.key);
+    var value = this.getNodeValue(ctx.value);
+    var entry = new literal.DocEntry(key, value);
+    this.setNodeValue(ctx, entry);
+};
+
+
+EPromptoBuilder.prototype.exitDocKeyIdentifier = function(ctx) {
+    var text = ctx.name.getText();
+    this.setNodeValue(ctx, new literal.DocIdentifierKey(new grammar.Identifier(text)));
+};
+
+
+EPromptoBuilder.prototype.exitDocKeyText = function(ctx) {
+    var text = ctx.name.text;
+    this.setNodeValue(ctx, new literal.DocTextKey(text));
+};
+
+
+EPromptoBuilder.prototype.exitDoc_entry_list = function(ctx) {
+    var items = new literal.DocEntryList(null, null);
+    ctx.doc_entry().forEach(function(r) {
+        var item = this.getNodeValue(r);
+        items.add(item);
+    }, this);
+    this.setNodeValue(ctx, items);
+};
+
+
+EPromptoBuilder.prototype.exitDoc_entry = function(ctx) {
+    var key = this.getNodeValue(ctx.key);
+    var value = this.getNodeValue(ctx.value);
+    var entry = new literal.DocEntry(key, value);
+    this.setNodeValue(ctx, entry);
+};
+
+
+EPromptoBuilder.prototype.exitDocKeyIdentifier = function(ctx) {
+    var text = ctx.name.getText();
+    this.setNodeValue(ctx, new literal.DocIdentifierKey(new grammar.Identifier(text)));
+};
+
+
+EPromptoBuilder.prototype.exitDocKeyText = function(ctx) {
+    var text = ctx.name.text;
+    this.setNodeValue(ctx, new literal.DocTextKey(text));
+};
+
+
 EPromptoBuilder.prototype.exitLiteral_expression = function(ctx) {
     var exp = this.getNodeValue(ctx.getChild(0));
     this.setNodeValue(ctx, exp);
@@ -1878,10 +1939,10 @@ EPromptoBuilder.prototype.exitModuloExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
     var name = this.getNodeValue(ctx.name);
-    var args = new literal.DictEntryList();
+    var args = new literal.DocEntryList();
     var exp = this.getNodeValue(ctx.exp);
     if (exp != null) {
-        args.add(new literal.DictEntry(null, exp));
+        args.add(new literal.DocEntry(null, exp));
     }
     ctx.annotation_argument().map(function(argCtx) {
         var arg = this.getNodeValue(argCtx);
@@ -1894,7 +1955,7 @@ EPromptoBuilder.prototype.exitAnnotation_constructor = function(ctx) {
 EPromptoBuilder.prototype.exitAnnotation_argument = function(ctx) {
     var name = this.getNodeValue(ctx.name);
     var exp = this.getNodeValue(ctx.exp);
-    this.setNodeValue(ctx, new literal.DictEntry(name, exp));
+    this.setNodeValue(ctx, new literal.DocEntry(name, exp));
 };
 
 
@@ -2141,9 +2202,8 @@ EPromptoBuilder.prototype.exitDocumentType = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitDocument_literal = function(ctx) {
-    var entries = this.getNodeValue(ctx.dict_entry_list());
-    var items = entries ? new literal.DocEntryList(entries.items) : null;
-    this.setNodeValue(ctx, new literal.DocumentLiteral(items));
+    var entries = this.getNodeValue(ctx.doc_entry_list()) || new literal.DocEntryList();
+    this.setNodeValue(ctx, new literal.DocumentLiteral(entries));
 };
 
 

@@ -2639,6 +2639,42 @@ MParserListener.prototype.exitExpression_tuple = function(ctx) {
 };
 
 
+// Enter a parse tree produced by MParser#doc_entry_list.
+MParserListener.prototype.enterDoc_entry_list = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#doc_entry_list.
+MParserListener.prototype.exitDoc_entry_list = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#doc_entry.
+MParserListener.prototype.enterDoc_entry = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#doc_entry.
+MParserListener.prototype.exitDoc_entry = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#DocKeyIdentifier.
+MParserListener.prototype.enterDocKeyIdentifier = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#DocKeyIdentifier.
+MParserListener.prototype.exitDocKeyIdentifier = function(ctx) {
+};
+
+
+// Enter a parse tree produced by MParser#DocKeyText.
+MParserListener.prototype.enterDocKeyText = function(ctx) {
+};
+
+// Exit a parse tree produced by MParser#DocKeyText.
+MParserListener.prototype.exitDocKeyText = function(ctx) {
+};
+
+
 // Enter a parse tree produced by MParser#dict_entry_list.
 MParserListener.prototype.enterDict_entry_list = function(ctx) {
 };

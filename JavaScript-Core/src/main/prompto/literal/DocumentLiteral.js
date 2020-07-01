@@ -48,7 +48,7 @@ DocumentLiteral.prototype.interpret = function(context) {
         this.check(context); /// force computation of itemType
         var doc = new Document();
         this.entries.items.forEach(function(entry) {
-            var key = entry.key.asText();
+            var key = entry.key.interpret(context);
             var val = entry.value.interpret(context);
             val = this.interpretPromotion(val);
             doc[key] = val;
