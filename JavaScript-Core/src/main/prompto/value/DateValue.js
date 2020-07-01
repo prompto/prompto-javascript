@@ -18,9 +18,16 @@ function DateValue(value) {
 DateValue.prototype = Object.create(Value.prototype);
 DateValue.prototype.constructor = DateValue;
 
+
 DateValue.prototype.toString = function() {
     return this.value.toString();
 };
+
+
+DateValue.prototype.getStorableData = function() {
+    return this.value;
+};
+
 
 DateValue.prototype.getValue = function() {
 	return this.value; 

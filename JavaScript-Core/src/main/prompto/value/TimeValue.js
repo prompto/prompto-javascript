@@ -17,13 +17,21 @@ function TimeValue(value) {
 TimeValue.prototype = Object.create(Value.prototype);
 TimeValue.prototype.constructor = TimeValue;
 
+
 TimeValue.prototype.toString = function() {
     return this.value.toString();
 };
 
+
+TimeValue.prototype.getStorableData = function() {
+	return this.value;
+};
+
+
 TimeValue.prototype.getValue = function() {
 	return this.value;
 };
+
 
 TimeValue.prototype.Add = function(context, value) {
 	if (value instanceof PeriodValue) {
