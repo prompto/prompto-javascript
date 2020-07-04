@@ -1,14 +1,16 @@
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var PeriodType = require("./PeriodType").PeriodType;
+var TimeType = require("./TimeType").TimeType;
+var DateTimeType = require("./DateTimeType").DateTimeType;
 var IntegerType = require("./IntegerType").IntegerType;
 var RangeType = require("./RangeType").RangeType;
 var DateRange = require("../value/DateRange").DateRange;
 var DateValue = require("../value/DateValue").DateValue;
 var Identifier = require("../grammar/Identifier").Identifier;
-var DateTimeType = require("./DateTimeType").DateTimeType;
 var CharacterType = require("./CharacterType").CharacterType;
 var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+var DateTime = require("../intrinsic/DateTime").DateTime;
 
 function DateType()  {
 	NativeType.call(this, new Identifier("Date"));
@@ -33,7 +35,9 @@ DateType.prototype.isAssignableFrom = function(context, other) {
 DateType.prototype.checkAdd = function(context, other, tryReverse) {
 	if (other === PeriodType.instance) {
 		return this; // ignore time section
-	} else {
+	} else if(other === TimeType.instance) {
+        return DateTimeType.instance;
+    } else {
 		return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
 	}
 };
@@ -59,17 +63,22 @@ DateType.prototype.transpile = function(transpiler) {
 
 
 DateType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other === PeriodType.instance) {
+    if (other === PeriodType.instance || other == TimeType.instance) {
         left.declare(transpiler);
         right.declare(transpiler);
+        if(other == TimeType.instance)
+            transpiler.register(DateTime);
     } else
         return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
 };
 
 DateType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if (other === PeriodType.instance) {
+    if (other === PeriodType.instance || other == TimeType.instance) {
         left.transpile(transpiler);
-        transpiler.append(".addPeriod(");
+        if(other == TimeType.instance)
+            transpiler.append(".addTime(");
+        else
+            transpiler.append(".addPeriod(");
         right.transpile(transpiler);
         transpiler.append(")");
     } else

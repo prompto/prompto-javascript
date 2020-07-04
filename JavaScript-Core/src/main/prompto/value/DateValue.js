@@ -1,4 +1,5 @@
 var Value = require("./Value").Value;
+var TimeValue = require("./TimeValue").TimeValue;
 var DateTimeValue = require("./DateTimeValue").DateTimeValue;
 var PeriodValue = require("./PeriodValue").PeriodValue;
 var IntegerValue = require("./IntegerValue").IntegerValue;
@@ -42,6 +43,8 @@ DateValue.prototype.convertToJavaScript = function() {
 DateValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {
         return new DateValue(this.value.addPeriod(value.value));
+    } if (value instanceof TimeValue) {
+        return new DateTimeValue(this.value.addTime(value.value));
     } else {
         throw new SyntaxError("Illegal: Date + " + typeof(value));
     }

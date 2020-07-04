@@ -13,3 +13,5 @@ exports.StrictSet = require("./StrictSet").StrictSet;
 exports.Tuple = require("./Tuple").Tuple;
 exports.UUID = require("./UUID").UUID;
 exports.Version = require("./Version").Version;
+
+require('./LocalDate').resolve();

@@ -1,4 +1,9 @@
 var Period = require("./Period").Period;
+var DateTime = null;
+
+exports.resolve = function() {
+    DateTime = require("./DateTime").DateTime;
+};
 
 function LocalDate(value) {
     var date = new Date(value);
@@ -51,6 +56,11 @@ LocalDate.prototype.addPeriod = function (period) {
     var day = this.getUTCDate() + ((period.weeks || 0) * 7) + (period.days || 0);
     result.setUTCDate(day);
     return result;
+};
+
+LocalDate.prototype.addTime = function (time) {
+    var dateTime = new Date(this.valueOf() + time.valueOf());
+    return new DateTime(dateTime, 0);
 };
 
 
