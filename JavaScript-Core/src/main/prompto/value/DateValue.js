@@ -41,8 +41,7 @@ DateValue.prototype.convertToJavaScript = function() {
 
 DateValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {
-        var date = this.value.addPeriod(value.value);
-        return new DateValue(date);
+        return new DateValue(this.value.addPeriod(value.value));
     } else {
         throw new SyntaxError("Illegal: Date + " + typeof(value));
     }
@@ -51,9 +50,9 @@ DateValue.prototype.Add = function(context, value) {
 
 DateValue.prototype.Subtract = function(context, value)  {
     if (value instanceof DateValue) {
-        return this.value.subtractDate(value.value);
+        return new PeriodValue(this.value.subtractDate(value.value));
     } else if (value instanceof PeriodValue) {
-        return this.value.subtractPeriod(value.value);
+        return new DateValue(this.value.subtractPeriod(value.value));
     } else {
         throw new SyntaxError("Illegal: Date - " + typeof(value));
     }
