@@ -189,16 +189,16 @@ DateTime.prototype.compareTo = function(date, tzOffset) {
 };
 
 
-DateTime.prototype.getYear = function(value) {
+DateTime.prototype.getYear = function() {
     return this.date.getUTCFullYear();
 };
 
-DateTime.prototype.getMonth = function(value) {
+DateTime.prototype.getMonth = function() {
     return this.date.getUTCMonth() + 1;
 };
 
 
-DateTime.prototype.getDayOfMonth = function(value) {
+DateTime.prototype.getDayOfMonth = function() {
     return this.date.getUTCDate();
 };
 
@@ -209,45 +209,45 @@ DateTime.prototype.getDayOfYear = function() {
     return 1 + Math.floor(numDays);
 };
 
-DateTime.prototype.getHour = function(value) {
+DateTime.prototype.getHour = function() {
     return this.date.getUTCHours();
 };
 
 
-DateTime.prototype.getMinute = function(value) {
+DateTime.prototype.getMinute = function() {
     return this.date.getUTCMinutes();
 };
 
 
-DateTime.prototype.getSecond = function(value) {
+DateTime.prototype.getSecond = function() {
     return this.date.getUTCSeconds();
 };
 
 
-DateTime.prototype.getMillisecond = function(value) {
+DateTime.prototype.getMillisecond = function() {
     return this.date.getUTCMilliseconds();
 };
 
-DateTime.prototype.getTzOffset = function(value) {
+DateTime.prototype.getTzOffset = function() {
     return this.date.tzOffset;
 };
 
-DateTime.prototype.getTzName = function(value) {
+DateTime.prototype.getTzName = function() {
     return "Z";
 };
 
 
-DateTime.prototype.getDate = function(value) {
-    let value = this.date.valueOf();
-    value = value - ( value % 24 * 60 * 60 * 1000 );
-    return new LocalDate(new Date(value));
+DateTime.prototype.getDate = function() {
+    let epoch = this.date.valueOf();
+    epoch = epoch - ( epoch % 24 * 60 * 60 * 1000 );
+    return new LocalDate(new Date(epoch));
 };
 
 
-DateTime.prototype.getTime = function(value) {
-    let value = this.date.valueOf();
-    value = value % 24 * 60 * 60 * 1000;
-    return new LocalTime(new Date(value));
+DateTime.prototype.getTime = function() {
+    let epoch = this.date.valueOf();
+    epoch = epoch % 24 * 60 * 60 * 1000;
+    return new LocalTime(new Date(epoch));
 };
 
 
