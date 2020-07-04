@@ -90,9 +90,9 @@ DateTime.prototype.addPeriod = function (period) {
 
 
 DateTime.prototype.subtractDateTime = function(other) {
-    var thisValue = this.date.valueOf() + this.tzOffset*1000;
-    var otherValue = other.date.valueOf() + other.tzOffset*1000;
-    var numDays = ( thisValue - otherValue)/(24*60*60*1000);
+    var thisValue = this.date.valueOf() + this.tzOffset * 1000;
+    var otherValue = other.date.valueOf() + other.tzOffset * 1000;
+    var numDays = ( thisValue - otherValue)/(24 * 60 * 60 * 1000);
     var data = [];
     data[3] = Math.floor(numDays);
     data[4] = this.date.getUTCHours() - other.date.getUTCHours();
@@ -183,8 +183,8 @@ DateTime.prototype.lte = function(other) {
 
 
 DateTime.prototype.compareTo = function(date, tzOffset) {
-    var a = this.date.valueOf() + this.tzOffset*60000;
-    var b = date.valueOf() + tzOffset*60000;
+    var a = this.date.valueOf() + this.tzOffset * 60000;
+    var b = date.valueOf() + tzOffset * 60000;
     return a > b ? 1 : (a == b ? 0 : -1);
 };
 
@@ -205,7 +205,7 @@ DateTime.prototype.getDayOfMonth = function(value) {
 
 DateTime.prototype.getDayOfYear = function() {
     var first = new Date(this.date.getUTCFullYear(), 0, 1, 0, 0, 0, 0);
-    var numDays = (this - first) / (1000 * 60 * 60 * 24);
+    var numDays = (this - first) / (24 * 60 * 60 * 1000);
     return 1 + Math.floor(numDays);
 };
 
@@ -238,12 +238,16 @@ DateTime.prototype.getTzName = function(value) {
 
 
 DateTime.prototype.getDate = function(value) {
-    return new LocalDate(this.date);
+    let value = this.date.valueOf();
+    value = value - ( value % 24 * 60 * 60 * 1000 );
+    return new LocalDate(new Date(value));
 };
 
 
 DateTime.prototype.getTime = function(value) {
-    return new LocalTime(this.date);
+    let value = this.date.valueOf();
+    value = value % 24 * 60 * 60 * 1000;
+    return new LocalTime(new Date(value));
 };
 
 
