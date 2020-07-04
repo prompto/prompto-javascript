@@ -89,35 +89,35 @@ DateTime.prototype.addPeriod = function (period) {
 };
 
 
-DateTime.prototype.subtractDateTime = function(other) {
+DateTime.prototype.subtractDateTime = function(dateTime) {
     var thisValue = this.date.valueOf() + this.tzOffset * 1000;
-    var otherValue = other.date.valueOf() + other.tzOffset * 1000;
+    var otherValue = dateTime.date.valueOf() + dateTime.tzOffset * 1000;
     var numDays = ( thisValue - otherValue)/(24 * 60 * 60 * 1000);
     var data = [];
     data[3] = Math.floor(numDays);
-    data[4] = this.date.getUTCHours() - other.date.getUTCHours();
-    data[5] = this.date.getUTCMinutes() - other.date.getUTCMinutes();
-    data[6] = this.date.getUTCSeconds() - other.date.getUTCSeconds();
-    data[7] = this.date.getUTCMilliseconds() - other.date.getUTCMilliseconds();
+    data[4] = this.date.getUTCHours() - dateTime.date.getUTCHours();
+    data[5] = this.date.getUTCMinutes() - dateTime.date.getUTCMinutes();
+    data[6] = this.date.getUTCSeconds() - dateTime.date.getUTCSeconds();
+    data[7] = this.date.getUTCMilliseconds() - dateTime.date.getUTCMilliseconds();
     return new Period(data);
 };
 
 
-DateTime.prototype.subtractPeriod = function(value) {
+DateTime.prototype.subtractPeriod = function(period) {
     var date = new Date();
-    var year = this.date.getUTCFullYear() - (value.years || 0);
+    var year = this.date.getUTCFullYear() - (period.years || 0);
     date.setUTCFullYear(year);
-    var month = this.date.getUTCMonth() - (value.months || 0);
+    var month = this.date.getUTCMonth() - (period.months || 0);
     date.setUTCMonth(month);
-    var day = this.date.getUTCDate() - ((value.weeks || 0) * 7) - (value.days || 0);
+    var day = this.date.getUTCDate() - ((period.weeks || 0) * 7) - (period.days || 0);
     date.setUTCDate(day);
-    var hour = this.date.getUTCHours() - (value.hours || 0);
+    var hour = this.date.getUTCHours() - (period.hours || 0);
     date.setUTCHours(hour);
-    var minute = this.date.getUTCMinutes() - (value.minutes || 0);
+    var minute = this.date.getUTCMinutes() - (period.minutes || 0);
     date.setUTCMinutes(minute);
-    var second = this.date.getUTCSeconds() - (value.seconds || 0);
+    var second = this.date.getUTCSeconds() - (period.seconds || 0);
     date.setUTCSeconds(second);
-    var millis = this.date.getUTCMilliseconds() - (value.millis || 0);
+    var millis = this.date.getUTCMilliseconds() - (period.millis || 0);
     date.setUTCMilliseconds(millis);
     return new DateTime(date, this.tzOffset);
 };
