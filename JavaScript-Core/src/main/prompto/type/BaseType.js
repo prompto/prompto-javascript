@@ -63,7 +63,7 @@ BaseType.prototype.equals = function(other) {
 
 
 BaseType.prototype.isAssignableFrom = function(context, other) {
-    return this==other || this.equals(other) || other.equals(NullType.instance);
+    return this==other || this.equals(other) || other==NullType.instance;
 };
 
 
