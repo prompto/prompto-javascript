@@ -127,15 +127,13 @@ FetchManyExpression.prototype.check = function(context) {
 };
 
 FetchManyExpression.prototype.checkFilter = function(context) {
-    if(!this.predicate)
-        return;
-    var filterType = this.predicate.checkQuery(context);
-    if (filterType != BooleanType.instance)
-        context.problemListener.reportIllegalAssignment(this.predicate, BooleanType.instance, filterType);
+    if(this.predicate)
+        this.predicate.checkQuery(context);
 };
 
 FetchManyExpression.prototype.checkOrderBy = function(context) {
-
+    if (this.orderBy != null)
+        this.orderBy.checkQuery(context);
 }
 
 FetchManyExpression.prototype.checkSlice = function(context) {

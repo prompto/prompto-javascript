@@ -156,6 +156,10 @@ ProblemCollector.prototype.reportIllegalAnnotation = function(section, message) 
     this.reportWarning(section, message);
 };
 
+ProblemCollector.prototype.reportIllegalOperation = function(section, message) {
+    this.reportWarning(section, message);
+};
+
 ProblemCollector.prototype.reportMissingClosingTag = function(opening) {
     this.reportError(opening.id, "Missing closing tag '&lt;/" + opening.id.name + ">");
 };

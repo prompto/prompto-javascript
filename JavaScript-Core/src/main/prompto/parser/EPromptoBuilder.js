@@ -2050,11 +2050,11 @@ EPromptoBuilder.prototype.exitOperator_method_declaration= function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitOrder_by = function(ctx) {
-    var names = new grammar.IdentifierList();
+    var ids = new grammar.IdentifierList();
     ctx.variable_identifier().map( function(ctx_) {
-        names.push(this.getNodeValue(ctx_));
+        ids.push(this.getNodeValue(ctx_));
     }, this);
-    var clause = new grammar.OrderByClause(names, ctx.DESC()!=null);
+    var clause = new grammar.OrderByClause(ids, ctx.DESC()!=null);
     this.setNodeValue(ctx, clause);
 };
 

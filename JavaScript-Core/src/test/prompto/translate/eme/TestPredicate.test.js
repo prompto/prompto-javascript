@@ -1,5 +1,13 @@
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
+test('And', () => {
+	compareResourceEME('predicate/and.pec');
+});
+
+test('AndError', () => {
+	compareResourceEME('predicate/andError.pec');
+});
+
 test('ContainsItem', () => {
 	compareResourceEME('predicate/containsItem.pec');
 });
@@ -30,6 +38,22 @@ test('Lesser', () => {
 
 test('NotEquals', () => {
 	compareResourceEME('predicate/notEquals.pec');
+});
+
+test('Or', () => {
+	compareResourceEME('predicate/or.pec');
+});
+
+test('OrError', () => {
+	compareResourceEME('predicate/orError.pec');
+});
+
+test('Parenthesis', () => {
+	compareResourceEME('predicate/parenthesis.pec');
+});
+
+test('ParenthesisError', () => {
+	compareResourceEME('predicate/parenthesisError.pec');
 });
 
 test('Partial', () => {

@@ -51,7 +51,16 @@ OrExpression.prototype.check = function(context) {
 
 
 OrExpression.prototype.checkQuery = function(context) {
-    return this.check(context);
+    if (!this.left["checkQuery"]) {
+        context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.left.toString());
+        return;
+    }
+    this.left.checkQuery(context);
+    if (!this.right["checkQuery"]) {
+        context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
+        return;
+    }
+    this.right.checkQuery(context);
 };
 
 
@@ -106,10 +115,10 @@ OrExpression.prototype.transpileFound = function(transpiler, dialect) {
 
 OrExpression.prototype.interpretQuery = function(context, query) {
     if (!this.left["interpretQuery"])
-        throw new SyntaxError("Not a predicate: " + this.left.toString());
+        context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.left.toString());
     this.left.interpretQuery(context, query);
     if (!this.right["interpretQuery"])
-        throw new SyntaxError("Not a predicate: " + this.right.toString());
+        context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
     this.right.interpretQuery(context, query);
     query.or();
 };

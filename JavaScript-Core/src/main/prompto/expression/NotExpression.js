@@ -51,7 +51,11 @@ NotExpression.prototype.check = function (context) {
 
 
 NotExpression.prototype.checkQuery = function(context) {
-    return this.check(context);
+    if (!this.expression["checkQuery"]) {
+        context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.expression.toString());
+        return;
+    }
+    this.expression.checkQuery(context);
 };
 
 
@@ -85,7 +89,7 @@ NotExpression.prototype.interpretAssert = function(context, test) {
 
 NotExpression.prototype.interpretQuery = function(context, query) {
     if (!this.expression["interpretQuery"])
-        throw new SyntaxError("Not a predicate: " + this.expression.toString());
+        context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.expression.toString());
     this.expression.interpretQuery(context, query);
     query.not();
 };

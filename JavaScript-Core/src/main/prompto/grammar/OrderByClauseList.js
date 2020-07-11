@@ -24,6 +24,12 @@ OrderByClauseList.prototype.toDialect = function(writer) {
         writer.append(" )");
 }
 
+OrderByClauseList.prototype.checkQuery = function(context) {
+    this.forEach(function (clause) {
+        clause.checkQuery(context);
+    });
+};
+
 OrderByClauseList.prototype.interpretQuery = function(context, query) {
     this.forEach(function (clause) {
         clause.interpretQuery(context, query);

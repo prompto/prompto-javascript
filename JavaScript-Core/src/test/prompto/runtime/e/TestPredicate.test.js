@@ -10,6 +10,22 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted And', () => {
+	checkInterpretedOutput('predicate/and.pec');
+});
+
+test('Transpiled And', () => {
+	checkTranspiledOutput('predicate/and.pec');
+});
+
+test('Interpreted AndError', () => {
+	checkInterpretedOutput('predicate/andError.pec');
+});
+
+test('Transpiled AndError', () => {
+	checkTranspiledOutput('predicate/andError.pec');
+});
+
 test('Interpreted ContainsItem', () => {
 	checkInterpretedOutput('predicate/containsItem.pec');
 });
@@ -72,6 +88,38 @@ test('Interpreted NotEquals', () => {
 
 test('Transpiled NotEquals', () => {
 	checkTranspiledOutput('predicate/notEquals.pec');
+});
+
+test('Interpreted Or', () => {
+	checkInterpretedOutput('predicate/or.pec');
+});
+
+test('Transpiled Or', () => {
+	checkTranspiledOutput('predicate/or.pec');
+});
+
+test('Interpreted OrError', () => {
+	checkInterpretedOutput('predicate/orError.pec');
+});
+
+test('Transpiled OrError', () => {
+	checkTranspiledOutput('predicate/orError.pec');
+});
+
+test('Interpreted Parenthesis', () => {
+	checkInterpretedOutput('predicate/parenthesis.pec');
+});
+
+test('Transpiled Parenthesis', () => {
+	checkTranspiledOutput('predicate/parenthesis.pec');
+});
+
+test('Interpreted ParenthesisError', () => {
+	checkInterpretedOutput('predicate/parenthesisError.pec');
+});
+
+test('Transpiled ParenthesisError', () => {
+	checkTranspiledOutput('predicate/parenthesisError.pec');
 });
 
 test('Interpreted Partial', () => {

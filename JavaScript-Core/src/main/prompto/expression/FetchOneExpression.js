@@ -73,9 +73,7 @@ FetchOneExpression.prototype.check = function(context) {
             context.problemListener.reportNotStorable(this.typ.id, this.typ.name);
         context = context.newInstanceContext(null, decl.getType(context), true);
     }
-    var filterType = this.predicate.checkQuery(context);
-    if (filterType != BooleanType.instance)
-        throw new SyntaxError("Filtering expression must return a boolean !");
+    this.predicate.checkQuery(context);
     return this.typ || AnyType.instance;
 };
 
