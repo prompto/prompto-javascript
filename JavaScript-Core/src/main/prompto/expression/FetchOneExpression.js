@@ -1,7 +1,6 @@
 var Expression = require("./Expression").Expression;
 var Identifier = require("../grammar/Identifier").Identifier;
 var AnyType = require("../type/AnyType").AnyType;
-var BooleanType = require("../type/BooleanType").BooleanType;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 var NullValue = require("../value/NullValue").NullValue;

@@ -1,6 +1,5 @@
 var Expression = require("./Expression").Expression;
 var IntegerType = require("../type/IntegerType").IntegerType;
-var BooleanType = require("../type/BooleanType").BooleanType;
 var AnyType = require("../type/AnyType").AnyType;
 var CursorType = require("../type/CursorType").CursorType;
 var $DataStore = require("../store/DataStore").$DataStore;
