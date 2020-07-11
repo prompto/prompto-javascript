@@ -14,21 +14,21 @@ afterEach(() => {
 
 test('BadRead', () => {
 	expect(() => {
-        interpretResource("resourceError/badRead.pec");
-	}).toThrow(new prompto.error.SyntaxError("Not a resource"));
+        interpretResource("resourceError/badRead.pec", null, null, true);
+	}).toThrow(new prompto.error.SyntaxError("Not a resource in method 'main'"));
 });
 
 
 test('BadWrite', () => {
 	expect(() => {
-        interpretResource("resourceError/badWrite.pec");
-	}).toThrow(new prompto.error.SyntaxError("Not a resource"));
+        interpretResource("resourceError/badWrite.pec", null, null, true);
+	}).toThrow(new prompto.error.SyntaxError("Not a resource in method 'main'"));
 });
 
 
 test('BadResource', () => {
 	expect(() => {
-        interpretResource("resourceError/badResource.pec");
-	}).toThrow(new prompto.error.SyntaxError("Not a resource context"));
+        interpretResource("resourceError/badResource.pec", null, null, true);
+	}).toThrow(new prompto.error.SyntaxError("Not a resource context in method 'main'"));
 });
 

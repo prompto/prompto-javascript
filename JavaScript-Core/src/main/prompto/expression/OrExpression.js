@@ -49,6 +49,12 @@ OrExpression.prototype.check = function(context) {
 	return lt.checkOr(context, rt);
 };
 
+
+OrExpression.prototype.checkQuery = function(context) {
+    return this.check(context);
+};
+
+
 OrExpression.prototype.declare = function(transpiler) {
     this.left.declare(transpiler);
     this.right.declare(transpiler);

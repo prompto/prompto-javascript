@@ -1,7 +1,4 @@
 var Expression = require("./Expression").Expression;
-var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-var InstanceExpression = require("./InstanceExpression").InstanceExpression;
-var MemberSelector = require("./MemberSelector").MemberSelector;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 var Instance = require("../value/Value").Instance;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
@@ -37,7 +34,11 @@ CompareExpression.prototype.toDialect = function(writer) {
 CompareExpression.prototype.check = function(context) {
 	var lt = this.left.check(context);
 	var rt = this.right.check(context);
-	return lt.checkCompare(context, rt, this);
+	return this.checkOperator(context, lt, rt);
+};
+
+CompareExpression.prototype.checkOperator = function(context, lt, rt) {
+    return lt.checkCompare(context, rt, this);
 };
 
 CompareExpression.prototype.interpret = function(context) {
@@ -109,51 +110,44 @@ CompareExpression.prototype.transpileFound = function(transpiler, dialect) {
 };
 
 
-
-CompareExpression.prototype.interpretQuery = function(context, query) {
-    var name = null;
-    var value = null;
-    if (this.left instanceof UnresolvedIdentifier || this.left instanceof InstanceExpression || this.left instanceof MemberSelector) {
-        name = this.left.name;
-        value = this.right.interpret(context);
-    } else if (this.right instanceof UnresolvedIdentifier || this.right instanceof InstanceExpression || this.right instanceof MemberSelector) {
-        name = this.right.name;
-        value = this.left.interpret(context);
-    }
-    if (name == null)
-        throw new SyntaxError("Unable to interpret predicate");
-    else {
-        var decl = context.findAttribute(name);
-        var info = decl == null ? null : decl.getAttributeInfo();
-        if (value instanceof Instance)
-            value = value.getMemberValue(context, "dbId", false);
-        var matchOp = this.getMatchOp();
-        query.verify(info, matchOp, value == null ? null : value.getStorableData());
-        if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
-            query.not();
-    }
+CompareExpression.prototype.checkQuery = function(context) {
+    var decl = this.left.checkAttribute(context);
+    if(decl && !decl.storable)
+        context.problemListener.reportNotStorable(this, decl.name);
+    var rt = this.right.check(context);
+    return this.checkOperator(context, decl.getType(), rt);
 };
 
+
+CompareExpression.prototype.interpretQuery = function(context, query) {
+    var decl = this.left.checkAttribute(context);
+    if(!decl.storable)
+        throw new SyntaxError("Unable to interpret predicate");
+    var value = this.right.interpret(context);
+    var info = decl.getAttributeInfo();
+    if (value instanceof Instance)
+        value = value.getMemberValue(context, "dbId", false);
+    var matchOp = this.getMatchOp();
+    query.verify(info, matchOp, value == null ? null : value.getStorableData());
+    if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
+        query.not();
+};
+
+
 CompareExpression.prototype.transpileQuery = function(transpiler, builder) {
-    var name = null;
-    var value = null;
-    if (this.left instanceof UnresolvedIdentifier || this.left instanceof InstanceExpression || this.left instanceof MemberSelector) {
-        name = this.left.name;
-        value = this.right;
-    } else if (this.right instanceof UnresolvedIdentifier || this.right instanceof InstanceExpression || this.right instanceof MemberSelector) {
-        name = this.right.name;
-        value = this.left;
-    }
-    var decl = transpiler.context.findAttribute(name);
-    var info = decl == null ? null : decl.getAttributeInfo();
+    var decl = this.left.checkAttribute(transpiler.context);
+    if(!decl.storable)
+        throw new SyntaxError("Unable to interpret predicate");
+    var info = decl.getAttributeInfo();
     var matchOp = this.getMatchOp();
     // TODO check for dbId field of instance value
     transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
-    value.transpile(transpiler);
+    this.right.transpile(transpiler);
     transpiler.append(");").newLine();
     if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
         transpiler.append(builder).append(".not();").newLine();
 };
+
 
 CompareExpression.prototype.getMatchOp = function() {
     if (this.operator == CmpOp.GT || this.operator == CmpOp.LTE)

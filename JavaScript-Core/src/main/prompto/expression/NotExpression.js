@@ -50,6 +50,10 @@ NotExpression.prototype.check = function (context) {
 };
 
 
+NotExpression.prototype.checkQuery = function(context) {
+    return this.check(context);
+};
+
 
 NotExpression.prototype.declare = function(transpiler) {
     this.expression.declare(transpiler);

@@ -6,6 +6,7 @@ var CodeParameter = require("../param/CodeParameter").CodeParameter;
 var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
 var StatementList = require("../statement/StatementList").StatementList;
 var DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
+var SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 function ConcreteMethodDeclaration(id, args, returnType, statements) {
 	BaseMethodDeclaration.call(this, id, args, returnType);
@@ -58,7 +59,7 @@ ConcreteMethodDeclaration.prototype.fullCheck = function(context, isStart) {
 	if(this.parameters!==null) {
 		this.parameters.check(context);
 	}
-	return this.statements.check(context, this.returnType);
+	return this.checkStatements(context);
 };
 
 ConcreteMethodDeclaration.prototype.checkChild = function(context) {
@@ -67,8 +68,21 @@ ConcreteMethodDeclaration.prototype.checkChild = function(context) {
 	}
 	var child = context.newChildContext();
 	this.registerParameters(child);
-	return this.statements.check(child, this.returnType);
+    return this.checkStatements(child);
 };
+
+
+ConcreteMethodDeclaration.prototype.checkStatements = function(context) {
+    try {
+        return this.statements.check(context, this.returnType);
+    } catch(e) {
+        if(e instanceof SyntaxError)
+            throw new SyntaxError(e.message + " in method '" + this.name + "'");
+        else
+            throw e;
+    }
+};
+
 
 ConcreteMethodDeclaration.prototype.interpret = function(context) {
 	context.enterMethod(this);

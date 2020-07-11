@@ -125,6 +125,18 @@ InstanceExpression.prototype.check = function(context) {
 };
 
 
+InstanceExpression.prototype.checkAttribute = function(context) {
+    var decl = context.findAttribute(this.name);
+    return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
+};
+
+
+InstanceExpression.prototype.checkQuery = function(context) {
+    return this.check(context);
+};
+
+
+
 InstanceExpression.prototype.interpret = function(context) {
     if(context.hasValue(this.id)) {
         return context.getValue(this.id);

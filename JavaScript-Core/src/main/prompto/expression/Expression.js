@@ -19,6 +19,11 @@ Expression.prototype.parentToDialect = function(writer) {
 };
 
 
+Expression.prototype.checkAttribute = function(context) {
+    context.problemListener.reportMissingAttribute(this, this.toString());
+};
+
+
 Expression.prototype.declare = function(transpiler) {
     throw new Error("declare not implemented by " + this.constructor.name);
 };

@@ -1,7 +1,6 @@
 var Expression = require("./Expression").Expression;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-var MemberSelector = require("./MemberSelector").MemberSelector;
 var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
 var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
 var ContainerType = require("../type/ContainerType").ContainerType;
@@ -57,6 +56,11 @@ EqualsExpression.prototype.toDialect = function(writer) {
 EqualsExpression.prototype.check = function(context) {
     var lt = this.left.check(context);
     var rt = this.right.check(context);
+    return this.checkOperator(context, lt, rt);
+};
+
+
+EqualsExpression.prototype.checkOperator = function(context, lt, rt) {
     if(this.operator==EqOp.CONTAINS || this.operator==EqOp.NOT_CONTAINS) {
         if(lt instanceof ContainerType)
             lt = lt.itemType;
@@ -188,23 +192,24 @@ EqualsExpression.prototype.interpretAssert = function(context, test) {
 };
 
 
+EqualsExpression.prototype.checkQuery = function(context) {
+    var decl = this.left.checkAttribute(context);
+    if(decl && !decl.storable)
+        context.problemListener.reportNotStorable(this, decl.name);
+    var rt = this.right.check(context);
+    return this.checkOperator(context, decl.getType(), rt);
+};
+
+
 EqualsExpression.prototype.interpretQuery = function(context, query) {
-    var value = null;
-    var name = this.readFieldName(this.left);
-    if (name != null)
-        value = this.right.interpret(context);
-    else {
-        name = this.readFieldName(this.right);
-        if (name != null)
-            value = this.left.interpret(context);
-        else
-            throw new SyntaxError("Unable to interpret predicate");
-    }
+    var decl = this.left.checkAttribute(context);
+    if(!decl || !decl.storable)
+        throw new SyntaxError("Unable to interpret predicate");
+    var value = this.right.interpret(context);
     if (value instanceof Instance)
         value = value.getMemberValue(context, "dbId", false);
-    var decl = context.findAttribute(name);
-    var info = decl == null ? null : decl.getAttributeInfo();
-    var data = value == null ? null : value.getStorableData();
+    var info = decl.getAttributeInfo();
+    var data = value.getStorableData();
     var match = this.getMatchOp();
     query.verify(info, match, data);
     if (this.operator == EqOp.NOT_EQUALS)
@@ -227,13 +232,6 @@ EqualsExpression.prototype.getMatchOp = function() {
     }
 };
 
-
-EqualsExpression.prototype.readFieldName = function(exp) {
-    if (exp instanceof UnresolvedIdentifier || exp instanceof InstanceExpression || exp instanceof MemberSelector)
-        return exp.toString();
-    else
-        return null;
-};
 
 EqualsExpression.prototype.declare = function(transpiler) {
     this.left.declare(transpiler);
@@ -404,23 +402,14 @@ EqualsExpression.prototype.declareQuery = function(transpiler) {
 };
 
 EqualsExpression.prototype.transpileQuery = function(transpiler, builder) {
-    var value = null;
-    var name = this.readFieldName(this.left);
-    if (name != null)
-        value = this.right;
-    else {
-        name = this.readFieldName(this.right);
-        if (name != null)
-            value = this.left;
-        else
-            throw new SyntaxError("Unable to interpret predicate");
-    }
-    var decl = transpiler.context.findAttribute(name);
+    var decl = this.left.checkAttribute(transpiler.context);
+    if(!decl || !decl.storable)
+        throw new SyntaxError("Unable to transpile predicate");
     var info = decl.getAttributeInfo();
     var matchOp = this.getMatchOp();
     // TODO check for dbId field of instance value
     transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
-    value.transpile(transpiler);
+    this.right.transpile(transpiler);
     transpiler.append(");").newLine();
     if (this.operator == EqOp.NOT_EQUALS)
         transpiler.append(builder).append(".not();").newLine();

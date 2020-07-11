@@ -26,6 +26,14 @@ test('Transpiled Equals', () => {
 	checkTranspiledOutput('predicate/equals.pec');
 });
 
+test('Interpreted EqualsError', () => {
+	checkInterpretedOutput('predicate/equalsError.pec');
+});
+
+test('Transpiled EqualsError', () => {
+	checkTranspiledOutput('predicate/equalsError.pec');
+});
+
 test('Interpreted Greater', () => {
 	checkInterpretedOutput('predicate/greater.pec');
 });

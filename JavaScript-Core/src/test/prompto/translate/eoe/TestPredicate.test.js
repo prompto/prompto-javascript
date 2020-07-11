@@ -8,6 +8,10 @@ test('Equals', () => {
 	compareResourceEOE('predicate/equals.pec');
 });
 
+test('EqualsError', () => {
+	compareResourceEOE('predicate/equalsError.pec');
+});
+
 test('Greater', () => {
 	compareResourceEOE('predicate/greater.pec');
 });

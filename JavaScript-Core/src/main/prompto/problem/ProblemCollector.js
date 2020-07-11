@@ -105,6 +105,11 @@ ProblemCollector.prototype.reportMissingProperty = function(section, name) {
 };
 
 
+ProblemCollector.prototype.reportMissingAttribute = function(section, actual) {
+    this.reportError(section, "Expected an attribute, got: " + actual);
+};
+
+
 ProblemCollector.prototype.reportSwitchMissingStatement = function(section) {
     this.reportWarning(section, "Switch case requires at minimal one statement");
 };

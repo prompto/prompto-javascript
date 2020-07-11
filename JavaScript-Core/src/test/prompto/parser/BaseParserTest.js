@@ -215,15 +215,22 @@ exports.compareResourceOMO = function(resourceName) {
 
 
 exports.execute = function(decls, methodName, args) {
-    var context = prompto.runtime.Context.newGlobalContext();
-    decls.register(context);
-    decls.check(context);
-    if(context.hasTests()) {
-        for(var test in context.tests) {
-            exports.executeTest(context, test);
+    try {
+        var context = prompto.runtime.Context.newGlobalContext();
+        decls.register(context);
+        decls.check(context);
+        if(context.hasTests()) {
+            for(var test in context.tests) {
+                exports.executeTest(context, test);
+            }
+        } else {
+            exports.executeMethod(context, methodName, args);
         }
-    } else {
-        exports.executeMethod(context, methodName, args);
+    } catch(e) {
+        if(e instanceof prompto.error.SyntaxError)
+            process.stdout.write(e.message);
+        else
+            throw e;
     }
 };
 
@@ -287,16 +294,26 @@ function createWrapper(js, methodName) {
 }
 
 
-exports.interpret = function(decls, methodName, args) {
-    var context = prompto.runtime.Context.newGlobalContext();
-    decls.register(context);
-    decls.check(context);
-    if(context.hasTests())
-        prompto.runtime.Interpreter.interpretTests(context);
-    else {
-        methodName = methodName || "main";
-        args = args || "";
-        prompto.runtime.Interpreter.interpret(context, methodName, args);
+exports.interpret = function(decls, methodName, args, rethrow) {
+    try {
+        var context = prompto.runtime.Context.newGlobalContext();
+        decls.register(context);
+        decls.check(context);
+        if(context.hasTests())
+            prompto.runtime.Interpreter.interpretTests(context);
+        else {
+            methodName = methodName || "main";
+            args = args || "";
+            prompto.runtime.Interpreter.interpret(context, methodName, args);
+        }
+    } catch(e) {
+        if(e instanceof prompto.error.SyntaxError) {
+            if(rethrow)
+                throw e;
+            else
+                process.stdout.write(e.message);
+        } else
+            throw e;
     }
 };
 

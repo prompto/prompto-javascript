@@ -27,9 +27,9 @@ exports.parseResource = function(fileName) {
     return parse(input);
 };
 
-exports.interpretResource = function(fileName, methodName, args) {
+exports.interpretResource = function(fileName, methodName, args, rethrow) {
     var decls = exports.parseResource(fileName);
-    interpret(decls, methodName, args);
+    interpret(decls, methodName, args, rethrow);
 };
 
 

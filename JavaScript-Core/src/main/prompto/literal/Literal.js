@@ -29,6 +29,15 @@ Literal.prototype.toString = function() {
 	return this.text;
 };
 
+Literal.prototype.toString = function() {
+    return this.text;
+};
+
+
+Literal.prototype.checkAttribute = function(context) {
+    context.problemListener.reportMissingAttribute(this, this.toString());
+};
+
 Literal.prototype.declare = function(transpiler) {
     throw new Error("Declare not implemented by " + this.constructor.name);
 };

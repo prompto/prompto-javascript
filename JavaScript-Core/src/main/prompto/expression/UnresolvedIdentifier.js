@@ -62,6 +62,18 @@ UnresolvedIdentifier.prototype.check = function(context) {
     return this.resolveAndCheck(context, false);
 };
 
+
+UnresolvedIdentifier.prototype.checkAttribute = function(context) {
+    var decl = context.findAttribute(this.name);
+    return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
+};
+
+
+UnresolvedIdentifier.prototype.checkQuery = function(context) {
+    return this.check(context);
+};
+
+
 UnresolvedIdentifier.prototype.checkMember = function(context) {
     return this.resolveAndCheck(context, true);
 };

@@ -8,6 +8,10 @@ test('Equals', () => {
 	compareResourceEME('predicate/equals.pec');
 });
 
+test('EqualsError', () => {
+	compareResourceEME('predicate/equalsError.pec');
+});
+
 test('Greater', () => {
 	compareResourceEME('predicate/greater.pec');
 });

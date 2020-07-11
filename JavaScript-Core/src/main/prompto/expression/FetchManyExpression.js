@@ -129,7 +129,7 @@ FetchManyExpression.prototype.check = function(context) {
 FetchManyExpression.prototype.checkFilter = function(context) {
     if(!this.predicate)
         return;
-    var filterType = this.predicate.check(context);
+    var filterType = this.predicate.checkQuery(context);
     if (filterType != BooleanType.instance)
         context.problemListener.reportIllegalAssignment(this.predicate, BooleanType.instance, filterType);
 };

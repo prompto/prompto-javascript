@@ -46,6 +46,12 @@ AndExpression.prototype.check = function(context) {
     return lt.checkAnd(context, rt);
 };
 
+
+AndExpression.prototype.checkQuery = function(context) {
+    return this.check(context);
+};
+
+
 AndExpression.prototype.interpret = function(context) {
     var lval = this.left.interpret(context);
     if(lval instanceof BooleanValue && !lval.value)

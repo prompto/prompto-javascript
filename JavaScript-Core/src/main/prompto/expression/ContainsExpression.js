@@ -37,17 +37,23 @@ ContainsExpression.prototype.toDialect = function(writer) {
 ContainsExpression.prototype.check = function(context) {
     var lt = this.left.check(context);
     var rt = this.right.check(context);
-    switch(this.operator) {
-    case ContOp.IN:
-    case ContOp.NOT_IN:
-        return rt.checkContains(context, this, lt);
-    case ContOp.HAS:
-    case ContOp.NOT_HAS:
-        return lt.checkContains(context, this, rt);
-    default:
-        return lt.checkContainsAllOrAny(context, rt);
+    return this.checkOperator(context, lt, rt);
+};
+
+
+ContainsExpression.prototype.checkOperator = function(context, lt, rt) {
+    switch (this.operator) {
+        case ContOp.IN:
+        case ContOp.NOT_IN:
+            return rt.checkContains(context, this, lt);
+        case ContOp.HAS:
+        case ContOp.NOT_HAS:
+            return lt.checkContains(context, this, rt);
+        default:
+            return lt.checkContainsAllOrAny(context, rt);
     }
 };
+
 
 ContainsExpression.prototype.interpret = function(context) {
     var lval = this.left.interpret(context);
@@ -163,25 +169,26 @@ ContainsExpression.prototype.getExpected = function(context, dialect, escapeMode
     return writer.toString();
 };
 
+
+ContainsExpression.prototype.checkQuery = function(context) {
+    var decl = this.left.checkAttribute(context);
+    if(decl && !decl.storable)
+        context.problemListener.reportNotStorable(this, decl.name);
+    var rt = this.right.check(context);
+    return this.checkOperator(context, decl.getType(), rt);
+};
+
+
 ContainsExpression.prototype.interpretQuery = function(context, query) {
-    var value = null;
-    var name = this.readFieldName(this.left);
-    var reverse = name == null;
-    if ( name != null )
-        value = this.right.interpret(context);
-    else {
-        name = this.readFieldName(this.right);
-        if (name != null)
-            value = this.left.interpret(context);
-        else
-            throw new SyntaxError("Unable to interpret predicate");
-    }
-    var decl = context.findAttribute(name);
+    var decl = this.left.checkAttribute(context);
+    if(!decl || !decl.storable)
+        throw new SyntaxError("Unable to interpret predicate");
     var info = decl.getAttributeInfo();
-    var matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, reverse);
+    var value = this.right.interpret(context);
     if (value instanceof Instance)
         value = value.getMemberValue(context, "dbId", false);
-    var data = value == null ? null : value.getStorableData();
+    var data = value.getStorableData();
+    var matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, false);
     query.verify(info, matchOp, data);
     if (this.operator.name.indexOf("NOT_")==0)
         query.not();
@@ -189,34 +196,25 @@ ContainsExpression.prototype.interpretQuery = function(context, query) {
 
 
 ContainsExpression.prototype.transpileQuery = function(transpiler, builder) {
-    var reverse = false;
-    var value = null;
-    var name = this.readFieldName(this.left);
-    if (name != null)
-        value = this.right;
-    else {
-        reverse = true;
-        name = this.readFieldName(this.right);
-        if (name != null)
-            value = this.left;
-        else
-            throw new SyntaxError("Unable to transpile predicate");
-    }
-    var decl = transpiler.context.findAttribute(name);
+    var decl = this.left.checkAttribute(transpiler.context);
+    if(!decl || !decl.storable)
+        throw new SyntaxError("Unable to transpile predicate");
     var info = decl.getAttributeInfo();
-    var type = value.check(transpiler.context);
+    var type = this.right.check(transpiler.context);
     // TODO check for dbId field of instance value
-    var matchOp = this.getMatchOp(transpiler.context, decl.getType(), type, this.operator, reverse);
+    var matchOp = this.getMatchOp(transpiler.context, decl.getType(), type, this.operator, false);
     transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
-    value.transpile(transpiler);
+    this.right.transpile(transpiler);
     transpiler.append(");").newLine();
     if (this.operator.name.indexOf("NOT_")==0)
         transpiler.append(builder).append(".not();").newLine();
 };
 
+
 ContainsExpression.prototype.getAttributeType = function(context, name) {
     return context.getRegisteredDeclaration(name).getType();
 };
+
 
 ContainsExpression.prototype.getMatchOp = function(context, fieldType, valueType, operator, reverse) {
     if (reverse) {
@@ -242,6 +240,7 @@ ContainsExpression.prototype.readFieldName = function(exp) {
     else
         return null;
 };
+
 
 ContainsExpression.prototype.declare = function(transpiler) {
     var lt = this.left.check(transpiler.context);
