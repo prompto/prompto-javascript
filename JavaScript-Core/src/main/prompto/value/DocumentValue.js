@@ -105,6 +105,7 @@ DocumentValue.prototype.Add = function(context, value) {
     }
 };
 
+
 DocumentValue.prototype.equals = function(other) {
     if(this==other)
         return true;
