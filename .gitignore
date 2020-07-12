@@ -14,3 +14,4 @@ TestReact-bootstrap-3.js
 TestReact-bootstrap-3.test.js
 generated
 JavaScript-Core/src/generated-saved
+JavaScript-Core/src/test/prompto/perf/*
