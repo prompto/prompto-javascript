@@ -1,5 +1,6 @@
 var BaseStatement = require("./BaseStatement").BaseStatement;
 var ObjectList = require("../utils/ObjectList").ObjectList;
+var StatementList = require("./StatementList").StatementList;
 var BooleanType = require("../type/BooleanType").BooleanType;
 var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
@@ -163,7 +164,12 @@ IfElement.prototype.check = function(context) {
         }
     }
     context = this.downCast(context, false);
-	return this.statements.check(context, null);
+    var statements = this.statements;
+    if(!statements) {
+        context.problemListener.reportError(this, "Expected a statement!");
+        statements = new StatementList();
+    }
+    return statements.check(context, null);
 };
 
 
