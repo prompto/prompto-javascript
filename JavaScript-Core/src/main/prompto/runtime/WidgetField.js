@@ -3,7 +3,7 @@ var Variable = require("./Variable").Variable;
 function WidgetField (id, type, createdBy, updatedBy) {
     Variable.call(this, id, type);
     this.createdBy = createdBy;
-    this.updatedBy = this.updatedBy;
+    this.updatedBy = updatedBy;
     return this;
 }
 
