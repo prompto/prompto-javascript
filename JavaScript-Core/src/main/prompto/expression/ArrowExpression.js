@@ -24,7 +24,7 @@ ArrowExpression.prototype.toString = function(writer) {
     if(!writer) {
         var Context = require("../runtime/Context").Context;
         var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-        writer = new CodeWriter(Dialect.E, Context.newGlobalContext());
+        writer = new CodeWriter(Dialect.E, Context.newGlobalsContext());
     }
     try {
         this.toDialect(writer);

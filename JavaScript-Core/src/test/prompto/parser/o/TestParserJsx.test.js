@@ -6,7 +6,7 @@ test('canParseAndTranslateMultilineElements', () => {
 	var parser = new prompto.parser.OCleverParser(jsx);
 	var stmt = parser.doParse(parser.return_statement);
 	expect(stmt.expression).toBeTruthy();
-	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, prompto.runtime.Context.newGlobalContext());
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, prompto.runtime.Context.newGlobalsContext());
 	stmt.toDialect(writer);
 	writer.append(";");
 	var out = writer.toString();
@@ -18,7 +18,7 @@ test('canParseAndTranslateMultilineAttributes', () => {
     var parser = new prompto.parser.OCleverParser(jsx);
     var stmt = parser.doParse(parser.return_statement);
     expect(stmt.expression).toBeTruthy();
-	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, prompto.runtime.Context.newGlobalContext());
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, prompto.runtime.Context.newGlobalsContext());
 	stmt.toDialect(writer);
     writer.append(";");
     var out = writer.toString();

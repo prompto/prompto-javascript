@@ -7,7 +7,7 @@ var context;
 
 beforeEach(()=> {
 	Out.init();
-	context = prompto.runtime.Context.newGlobalContext();
+	context = prompto.runtime.Context.newGlobalsContext();
 });
 
 afterEach(()=> {

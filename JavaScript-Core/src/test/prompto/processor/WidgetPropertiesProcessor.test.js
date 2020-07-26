@@ -3,7 +3,7 @@ var parseResource = require("../parser/BaseOParserTest").parseResource;
 
 test('Transpiles WidgetProps1', () => {
     var decls = parseResource("annotations/WidgetProps1.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -19,7 +19,7 @@ test('Transpiles WidgetProps2 with warnings', () => {
         warning = "invalid";
     }
     var decls = parseResource("annotations/WidgetProps2.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -32,7 +32,7 @@ test('Transpiles WidgetProps2 with warnings', () => {
 
 test('Transpiles WidgetProps3', () => {
     var decls = parseResource("annotations/WidgetProps3.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -48,7 +48,7 @@ test('Transpiles WidgetProps4 with warnings', () => {
         warning = "invalid";
     }
     var decls = parseResource("annotations/WidgetProps4.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -61,7 +61,7 @@ test('Transpiles WidgetProps4 with warnings', () => {
 
 test('Transpiles WidgetChildProps1', () => {
     var decls = parseResource("annotations/WidgetChildProps1.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -72,7 +72,7 @@ test('Transpiles WidgetChildProps1', () => {
 
 test('Transpiles ReactWidgetProps1', () => {
     var decls = parseResource("annotations/ReactWidgetProps1.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -83,7 +83,7 @@ test('Transpiles ReactWidgetProps1', () => {
 
 test('Transpiles Required', () => {
     var decls = parseResource("annotations/WidgetProps5.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -99,7 +99,7 @@ test('Transpiles Required with warnings', () => {
         warning = "invalid";
     }
     var decls = parseResource("annotations/WidgetProps6.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -112,7 +112,7 @@ test('Transpiles Required with warnings', () => {
 
 test('Transpiles TypeSet', () => {
     var decls = parseResource("annotations/WidgetProps7.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -128,7 +128,7 @@ test('Transpiles TypeSet with warnings', () => {
         warning = "invalid";
     }
     var decls = parseResource("annotations/WidgetProps8.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -141,7 +141,7 @@ test('Transpiles TypeSet with warnings', () => {
 
 test('Transpiles ValueSet', () => {
     var decls = parseResource("annotations/WidgetProps9.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -157,7 +157,7 @@ test('Transpiles ValueSet with warnings', () => {
         warning = "invalid";
     }
     var decls = parseResource("annotations/WidgetProps10.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -170,7 +170,7 @@ test('Transpiles ValueSet with warnings', () => {
 
 test('Transpiles Callback', () => {
     var decls = parseResource("annotations/WidgetProps11.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(false);
     decls.check(context);
@@ -181,7 +181,7 @@ test('Transpiles Callback', () => {
 
 test('Transpiles Arrow', () => {
     var decls = parseResource("annotations/WidgetProps12.poc");
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
     var decl = context.getRegisteredDeclaration("Container");
@@ -190,7 +190,7 @@ test('Transpiles Arrow', () => {
 });
 
 test('Loads Html properties', () => {
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     registerDummyCallbacks(context);
     prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(false);
     var props = prompto.jsx.JsxElementBase.getHtmlProperties(context);

@@ -22,7 +22,7 @@ beforeEach(() => {
 		"define Root as category with attribute id\r\n" +
 		"define Derived as Root with attribute name\r\n" +
 		"define Unrelated as category with attributes id and name\r\n");
-	context = prompto.runtime.Context.newGlobalContext();
+	context = prompto.runtime.Context.newGlobalsContext();
 	stmts.register(context);
 });
 

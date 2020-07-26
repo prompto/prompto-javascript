@@ -26,7 +26,7 @@ test('SystemOutPrint', () => {
 	var walker = new antlr4.tree.ParseTreeWalker();
 	walker.walk(builder, tree);
 	var statement = builder.getNodeValue(tree);
-	var context = prompto.runtime.Context.newGlobalContext();
+	var context = prompto.runtime.Context.newGlobalsContext();
     var id = new prompto.grammar.Identifier("value")
 	var arg = new prompto.param.CategoryParameter(
         prompto.type.TextType.instance, id);

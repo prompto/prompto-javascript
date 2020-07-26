@@ -36,7 +36,7 @@ Indenter.prototype.dedent = function() {
 
 function CodeWriter(dialect, context, indenter) {
     this.dialect = dialect;
-    this.context = context || Context.newGlobalContext();
+    this.context = context || Context.newGlobalsContext();
     this.indenter = indenter || new Indenter();
     return this;
 }

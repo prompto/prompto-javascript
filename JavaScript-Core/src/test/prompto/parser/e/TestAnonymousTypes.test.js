@@ -19,7 +19,7 @@ var ConcreteCategoryDeclaration = prompto.declaration.ConcreteCategoryDeclaratio
 var context;
 
 beforeEach(() => {
-	context = prompto.runtime.Context.newGlobalContext();
+	context = prompto.runtime.Context.newGlobalsContext();
 	var stmts = parseString("define id as Integer attribute\r\n" +
 			"define name as String attribute\r\n" +
 			"define other as String attribute\r\n" +

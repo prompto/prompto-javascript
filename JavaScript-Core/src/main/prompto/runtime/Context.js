@@ -30,7 +30,7 @@ function Context() {
     return this;
 }
 
-Context.newGlobalContext = function() {
+Context.newGlobalsContext = function() {
     var context = new Context();
     context.globals = context;
     context.calling = null;

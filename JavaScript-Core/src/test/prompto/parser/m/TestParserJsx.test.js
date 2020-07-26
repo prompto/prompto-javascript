@@ -6,7 +6,7 @@ test('parses and translates multi-line elements', () => {
 	var parser = new prompto.parser.MCleverParser(jsx);
 	var stmt = parser.doParse(parser.return_statement, true);
 	expect(stmt.expression).toBeTruthy();
-	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, prompto.runtime.Context.newGlobalContext());
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, prompto.runtime.Context.newGlobalsContext());
 	stmt.toDialect(writer);
 	var out = writer.toString();
 	expect(out).toEqual(jsx);
@@ -17,7 +17,7 @@ test('parses and translates multi-line attributes', () => {
     var parser = new prompto.parser.MCleverParser(jsx);
     var stmt = parser.doParse(parser.return_statement, true);
     expect(stmt.expression).toBeTruthy();
-	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, prompto.runtime.Context.newGlobalContext());
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, prompto.runtime.Context.newGlobalsContext());
 	stmt.toDialect(writer);
     var out = writer.toString();
     expect(out).toEqual(jsx);

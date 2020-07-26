@@ -45,7 +45,7 @@ exports.checkProblems = function(code, expected) {
     parser.removeErrorListeners();
     parser.addErrorListener(listener);
     var decls = parser.parse();
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -62,7 +62,7 @@ exports.checkCompletion = function(code, expected) {
     parser.removeErrorListeners();
     parser.addErrorListener(listener);
     var decls = parser.parse();
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
@@ -148,7 +148,7 @@ exports.checkTranspiledOutput = function(fileName) {
 
 exports.loadDependency = function(libraryName) {
     if (BaseParserTest.coreContext == null)
-        BaseParserTest.coreContext = prompto.runtime.Context.newGlobalContext();
+        BaseParserTest.coreContext = prompto.runtime.Context.newGlobalsContext();
     var allDecls = null;
     var files = exports.listLibraryFiles(libraryName);
     if (files) files.map(function (file) {
@@ -176,19 +176,21 @@ exports.listLibraryFiles = function(libraryName) {
 };
 
 
-exports.runInterpretedTests = function(fileName) {
+exports.runInterpretedTests = function(fileName, register) {
     var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
     MemStoreModule.Cursor = require("../../../main/prompto/intrinsic/Cursor").Cursor;
     prompto.store.$DataStore.instance = new MemStoreModule.MemStore();
-    runTests(fileName, interpretTest);
+    runTests(fileName, interpretTest, register);
 }
 
 exports.runTranspiledTests = function(fileName) {
     runTests(fileName, executeTest);
 }
 
-function runTests(fileName, runner) {
+function runTests(fileName, runner, register) {
     decls = exports.parseResource(fileName)
+    if(register)
+        decls.register(BaseParserTest.coreContext);
     decls
         .filter(function (decl) {
             return decl instanceof prompto.declaration.TestMethodDeclaration;

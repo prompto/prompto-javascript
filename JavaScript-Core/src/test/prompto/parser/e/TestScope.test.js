@@ -3,7 +3,7 @@ var parseString = require("../../parser/BaseEParserTest").parseString;
 
 test('Attribute', () => {
 	expect(() => {
-		var context = prompto.runtime.Context.newGlobalContext();
+		var context = prompto.runtime.Context.newGlobalsContext();
 		expect(context.getRegisteredDeclaration("id")).toBeNull();
 		var stmts = parseString("define id as Integer attribute");
 		expect(stmts).toBeTruthy();
@@ -18,7 +18,7 @@ test('Attribute', () => {
 
 test('Category', () => {
 	expect(() => {
-		var context = prompto.runtime.Context.newGlobalContext();
+		var context = prompto.runtime.Context.newGlobalsContext();
 		expect(context.getRegisteredDeclaration("Person")).toBeNull();
 		var stmts = parseString("define Person as category with attributes id and name");
 		expect(stmts).toBeTruthy();
@@ -32,7 +32,7 @@ test('Category', () => {
 });
 
 test('Method', () => {
-	var context = prompto.runtime.Context.newGlobalContext();
+	var context = prompto.runtime.Context.newGlobalsContext();
 	expect(context.getRegisteredDeclaration("printName")).toBeNull();
 	var stmts = parseString("define name as Text attribute\r\n" +
 			"define printName as method receiving name doing:\r\n" +

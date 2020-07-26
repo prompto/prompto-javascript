@@ -117,7 +117,7 @@ exports.compareResourceEOE = function(resourceName) {
     // console.log(expected);
     // parse e source code
     var dle = parseEString(expected);
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     dle.register(context);
     // rewrite as o
     var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, context);
@@ -126,7 +126,7 @@ exports.compareResourceEOE = function(resourceName) {
     // console.log(o);
     // parse o source code
     var dlo = parseOString(o);
-    context = prompto.runtime.Context.newGlobalContext();
+    context = prompto.runtime.Context.newGlobalsContext();
     dlo.register(context);
     // rewrite as e
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E, context);
@@ -142,7 +142,7 @@ exports.compareResourceEME = function(resourceName) {
     // console.log(expected);
     // parse e source code
     var dle = parseEString(expected);
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     dle.register(context);
     // rewrite as o
     var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, context);
@@ -151,7 +151,7 @@ exports.compareResourceEME = function(resourceName) {
     // console.log(p);
     // parse p source code
     var dlp = parseMString(p);
-    context = prompto.runtime.Context.newGlobalContext();
+    context = prompto.runtime.Context.newGlobalsContext();
     dlp.register(context);
     // rewrite as e
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E, context);
@@ -167,7 +167,7 @@ exports.compareResourceOEO = function(resourceName) {
     // console.log(expected);
     // parse o source code
     var dlo = parseOString(expected);
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     dlo.register(context);
     // rewrite as e
     var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E, context);
@@ -176,7 +176,7 @@ exports.compareResourceOEO = function(resourceName) {
     // console.log(e);
     // parse e source code
     var dle = parseEString(e);
-    context = prompto.runtime.Context.newGlobalContext();
+    context = prompto.runtime.Context.newGlobalsContext();
     dle.register(context);
     // rewrite as o
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, context);
@@ -193,7 +193,7 @@ exports.compareResourceOMO = function(resourceName) {
     // console.log(expected);
     // parse o source code
     var dlo = parseOString(expected);
-    var context = prompto.runtime.Context.newGlobalContext();
+    var context = prompto.runtime.Context.newGlobalsContext();
     dlo.register(context);
     // rewrite as p
     var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.M, context);
@@ -202,7 +202,7 @@ exports.compareResourceOMO = function(resourceName) {
     // console.log(p);
     // parse p source code
     var dlp = parseMString(p);
-    context = prompto.runtime.Context.newGlobalContext();
+    context = prompto.runtime.Context.newGlobalsContext();
     dlp.register(context);
     // rewrite as o
     writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, context);
@@ -216,7 +216,7 @@ exports.compareResourceOMO = function(resourceName) {
 
 exports.execute = function(decls, methodName, args) {
     try {
-        var context = prompto.runtime.Context.newGlobalContext();
+        var context = prompto.runtime.Context.newGlobalsContext();
         decls.register(context);
         decls.check(context);
         if(context.hasTests()) {
@@ -296,7 +296,7 @@ function createWrapper(js, methodName) {
 
 exports.interpret = function(decls, methodName, args, rethrow) {
     try {
-        var context = prompto.runtime.Context.newGlobalContext();
+        var context = prompto.runtime.Context.newGlobalsContext();
         decls.register(context);
         decls.check(context);
         if(context.hasTests())
