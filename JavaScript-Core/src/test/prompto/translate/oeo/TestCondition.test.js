@@ -24,3 +24,7 @@ test('Ternary', () => {
 	compareResourceOEO('condition/ternary.poc');
 });
 
+test('TernaryType', () => {
+	compareResourceOEO('condition/ternaryType.poc');
+});
+

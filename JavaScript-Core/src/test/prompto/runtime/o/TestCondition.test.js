@@ -58,3 +58,11 @@ test('Transpiled Ternary', () => {
 	checkTranspiledOutput('condition/ternary.poc');
 });
 
+test('Interpreted TernaryType', () => {
+	checkInterpretedOutput('condition/ternaryType.poc');
+});
+
+test('Transpiled TernaryType', () => {
+	checkTranspiledOutput('condition/ternaryType.poc');
+});
+
