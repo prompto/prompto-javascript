@@ -22,10 +22,10 @@ TypeMap.prototype.doInferType = function(context, keys, section) {
 	// first pass: get less specific type
 	for(var i=0;i<keys.length;i++) {
 		var current = this[keys[i]];
-		if(inferred==null) {
-			inferred = current;
-		} else if(current == NullType.instance) {
+		if(current == NullType.instance) {
 			continue;
+		} else if(inferred==null) {
+			inferred = current;
 		} else if(inferred.isAssignableFrom(context, current)) {
 			continue;
 		} else if(current.isAssignableFrom(context, inferred)) {
