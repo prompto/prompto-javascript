@@ -8,6 +8,10 @@ test('EmbeddedIf', () => {
 	compareResourceOMO('condition/embeddedIf.poc');
 });
 
+test('LocalScope', () => {
+	compareResourceOMO('condition/localScope.poc');
+});
+
 test('ReturnIf', () => {
 	compareResourceOMO('condition/returnIf.poc');
 });

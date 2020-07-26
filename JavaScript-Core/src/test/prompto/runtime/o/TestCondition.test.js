@@ -26,6 +26,14 @@ test('Transpiled EmbeddedIf', () => {
 	checkTranspiledOutput('condition/embeddedIf.poc');
 });
 
+test('Interpreted LocalScope', () => {
+	checkInterpretedOutput('condition/localScope.poc');
+});
+
+test('Transpiled LocalScope', () => {
+	checkTranspiledOutput('condition/localScope.poc');
+});
+
 test('Interpreted ReturnIf', () => {
 	checkInterpretedOutput('condition/returnIf.poc');
 });
