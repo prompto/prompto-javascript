@@ -17,11 +17,14 @@ module.exports = {
         rules: [
             {
                 test: /\.(js)$/,
-                exclude: /node_modules/,
+                exclude: [/node_modules/,/antlr4/],
                 use: ["eslint-loader"]
             }
         ]
     },
+    externals: [
+        "fibers",
+    ],
     mode: "production",
     performance: {
         hints: false
