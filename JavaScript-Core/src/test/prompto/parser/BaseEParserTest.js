@@ -176,31 +176,39 @@ exports.listLibraryFiles = function(libraryName) {
 };
 
 
-exports.runInterpretedTests = function(fileName, register) {
+exports.runInterpretedTests = function(fileName, options) {
     var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
     MemStoreModule.Cursor = require("../../../main/prompto/intrinsic/Cursor").Cursor;
     prompto.store.$DataStore.instance = new MemStoreModule.MemStore();
-    runTests(fileName, interpretTest, register);
-}
+    runTests(fileName, interpretTest, options);
+};
+
 
 exports.runTranspiledTests = function(fileName) {
     runTests(fileName, executeTest);
 }
 
-function runTests(fileName, runner, register) {
+function runTests(fileName, runner, options) {
     decls = exports.parseResource(fileName)
-    if(register)
+    if(options && options.register)
         decls.register(BaseParserTest.coreContext);
     decls
         .filter(function (decl) {
             return decl instanceof prompto.declaration.TestMethodDeclaration;
         })
         .forEach(function (decl) {
-            Out.reset()
-            runner(BaseParserTest.coreContext, decl.name);
-            var expected = decl.name + " test successful";
-            var read = Out.read();
-            expect(read).toEqual(expected);
+            runTest(decl, runner, options);
         });
 }
 
+function runTest(decl, runner, options) {
+    Out.reset()
+    runner(BaseParserTest.coreContext, decl.name);
+    var expected = decl.name + " test successful";
+    var actual = Out.read();
+    if(options && options.throws) {
+        if(actual!==expected)
+            throw new Error("Expected:\n" + expected + "\nActual:\n" + actual);
+    } else
+        expect(actual).toEqual(expected);
+}

@@ -49,6 +49,7 @@ Context.prototype.getCallingContext = function() {
     return this.calling;
 };
 
+
 Context.prototype.getParentMostContext = function() {
     if(this.parent === null) {
         return this;
@@ -56,6 +57,7 @@ Context.prototype.getParentMostContext = function() {
         return this.parent.getParentMostContext();
     }
 };
+
 
 Context.prototype.getClosestInstanceContext = function() {
     if(this.parent === null) {
@@ -65,13 +67,21 @@ Context.prototype.getClosestInstanceContext = function() {
     }
 };
 
+
 Context.prototype.getParentContext = function() {
     return this.parent;
-}
+};
+
 
 Context.prototype.setParentContext = function(parent) {
     this.parent = parent;
-}
+};
+
+
+Context.prototype.isChildOf = function(context) {
+    return context === this.parent || (this.parent && this.parent.isChildOf(context));
+};
+
 
 Context.prototype.newResourceContext = function() {
     var context = new ResourceContext();

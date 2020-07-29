@@ -63,6 +63,12 @@ UnresolvedIdentifier.prototype.check = function(context) {
 };
 
 
+UnresolvedIdentifier.prototype.checkReference = function(context) {
+    this.resolve(context);
+    return this.resolved.checkReference(context);
+};
+
+
 UnresolvedIdentifier.prototype.checkAttribute = function(context) {
     var decl = context.findAttribute(this.name);
     return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
@@ -84,6 +90,14 @@ UnresolvedIdentifier.prototype.interpret = function(context) {
         this.resolveAndCheck(context, false);
     }
     return this.resolved.interpret(context);
+};
+
+
+UnresolvedIdentifier.prototype.interpretReference = function(context) {
+    if(this.resolved==null) {
+        this.resolveAndCheck(context, false);
+    }
+    return this.resolved.interpretReference(context);
 };
 
 

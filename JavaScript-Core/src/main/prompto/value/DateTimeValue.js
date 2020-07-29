@@ -20,7 +20,13 @@ function DateTimeValue(value) {
 DateTimeValue.prototype = Object.create(Value.prototype);
 DateTimeValue.prototype.constructor = DateTimeValue;
 
+
 DateTimeValue.prototype.getStorableData = function() {
+    return this.value;
+};
+
+
+DateTimeValue.prototype.convertToJavaScript = function() {
     return this.value;
 };
 

@@ -25,6 +25,14 @@ PeriodValue.prototype = Object.create(Value.prototype);
 PeriodValue.prototype.constructor = PeriodValue;
 
 
+PeriodValue.prototype.totalMilliseconds = function() {
+    return this.value.totalMilliseconds();
+};
+
+PeriodValue.prototype.convertToJavaScript = function() {
+    return this.value;
+};
+
 
 PeriodValue.prototype.Add = function(context, value) {
     if (value instanceof PeriodValue) {

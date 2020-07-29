@@ -22,6 +22,11 @@ BaseStatement.prototype.parentToDialect = function(writer) {
 };
 
 
+BaseStatement.prototype.checkReference = function(context) {
+    return this.check(context);
+};
+
+
 BaseStatement.prototype.transpile = function(transpiler) {
     throw new Error("Transpile not implemented by " + this.constructor.name);
 };

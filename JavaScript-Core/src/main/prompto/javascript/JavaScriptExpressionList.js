@@ -43,7 +43,7 @@ JavaScriptExpressionList.prototype.computeArguments = function(context) {
 
 JavaScriptExpressionList.prototype.computeArgument = function(arg, context) {
 	// interpret expression in a loop (might be a wrapper)
-	while(arg.interpret) {
+	while(arg && arg.interpret && !arg.convertToJavaScript) {
 		arg = arg.interpret(context);
 	}
 	// convert value to JavaScript

@@ -15,6 +15,7 @@ var NotMutableError = require("../error/NotMutableError").NotMutableError;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var InstanceContext = null;
 var ThisExpression = null;
+var MethodType = require("../type/MethodType").MethodType;
 var VoidType = require("../type/VoidType").VoidType;
 var Dialect = require("../parser/Dialect").Dialect;
 var BooleanValue = require("../value/BooleanValue").BooleanValue;
@@ -85,6 +86,16 @@ MethodCall.prototype.check = function(context, updateSelectorParent) {
     } finally {
         local.popProblemListener();
     }
+};
+
+
+MethodCall.prototype.checkReference = function(context) {
+    var finder = new MethodFinder(context, this);
+    var method = finder.findMethod(false);
+    if(method)
+        return new MethodType(method);
+    else
+        return null;
 };
 
 
@@ -283,6 +294,13 @@ MethodCall.prototype.interpret = function(context) {
 	return declaration.interpret(local, true);
 };
 
+
+MethodCall.prototype.interpretReference = function(context) {
+    var declaration = this.findDeclaration(context)
+    return new ClosureValue(context, new MethodType(declaration));
+};
+
+
 MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
     var value = this.interpret(context);
     if(value instanceof BooleanValue)
@@ -292,6 +310,7 @@ MethodCall.prototype.interpretAssert = function(context, testMethodDeclaration) 
         throw new SyntaxError("Cannot test '" + expected + "'");
     }
 };
+
 
 MethodCall.prototype.getExpected = function(context, dialect, escapeMode) {
     var writer = new CodeWriter(this.dialect, context);

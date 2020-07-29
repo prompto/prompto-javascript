@@ -6,13 +6,16 @@ function ClosureValue(context, type) {
     return this;
 }
 
+
 ClosureValue.prototype = Object.create(Value.prototype);
 ClosureValue.prototype.constructor = ClosureValue;
+
 
 ClosureValue.prototype.interpret = function(context) {
     var parentMost = this.context.getParentMostContext();
     var savedParent = parentMost.getParentContext();
-    parentMost.setParentContext(context);
+    if(!context.isChildOf(parentMost))
+        parentMost.setParentContext(context);
     try {
         var local = this.context.newChildContext();
         return this.doInterpret(local);
@@ -25,5 +28,11 @@ ClosureValue.prototype.interpret = function(context) {
 ClosureValue.prototype.doInterpret = function(local) {
     return this.type.method.interpret(local);
 };
+
+
+ClosureValue.prototype.convertToJavaScript = function() {
+    return this;
+};
+
 
 exports.ClosureValue = ClosureValue;

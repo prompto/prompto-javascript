@@ -19,6 +19,10 @@ Expression.prototype.parentToDialect = function(writer) {
 };
 
 
+Expression.prototype.checkReference = function(context) {
+    return this.check(context);
+};
+
 Expression.prototype.checkAttribute = function(context) {
     context.problemListener.reportMissingAttribute(this, this.toString());
 };

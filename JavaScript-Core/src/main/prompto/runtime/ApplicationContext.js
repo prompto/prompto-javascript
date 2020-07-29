@@ -1,9 +1,11 @@
 var Context = require("./Context").Context;
 var instance = null;
 
-function ApplicationContext() {
 
+function ApplicationContext() {
+    return this;
 }
+
 
 ApplicationContext.set = function(context) {
     var current = instance;
@@ -11,10 +13,15 @@ ApplicationContext.set = function(context) {
     return current;
 };
 
+
 ApplicationContext.get = function() {
     return instance;
 };
 
+
 ApplicationContext.init = function() {
     return ApplicationContext.set(Context.newGlobalsContext());
 };
+
+
+exports.ApplicationContext = ApplicationContext;

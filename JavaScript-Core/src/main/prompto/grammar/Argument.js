@@ -258,8 +258,14 @@ Argument.prototype.computeSpecificity = function(context, parameter, declaration
 };
 
 Argument.prototype.checkActualType = function(context, requiredType, expression, checkInstance) {
+    var actualType = null;
     var isArrow = this.isArrowExpression(requiredType, expression);
-    var actualType = isArrow ? this.checkArrowExpression(context, requiredType, expression) : expression.check(context.getCallingContext());
+    if(isArrow)
+        actualType = this.checkArrowExpression(context, requiredType, expression);
+    else if(requiredType instanceof MethodType)
+        actualType = expression.checkReference(context.getCallingContext());
+    else
+        actualType = expression.check(context.getCallingContext());
     if(checkInstance && actualType instanceof CategoryType) {
         var value = expression.interpret(context.getCallingContext());
         if(value && value.getType)

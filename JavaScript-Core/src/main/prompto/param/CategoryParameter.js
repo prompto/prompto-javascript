@@ -1,4 +1,5 @@
 var Parameter = require("./Parameter").Parameter;
+var MethodType = require("../type/MethodType").MethodType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var utils = require("../utils/index");
 
@@ -28,6 +29,15 @@ CategoryParameter.prototype.getTranspiledName =  function(context) {
 	
 CategoryParameter.prototype.equals = function(other) {
     return other === this || (other instanceof CategoryParameter && utils.equalObjects(this.type, other.type));
+};
+
+
+CategoryParameter.prototype.checkValue = function(context, expression) {
+    this.resolve(context);
+    if(this.resolved instanceof MethodType)
+        return expression.interpretReference(context);
+    else
+        return Parameter.prototype.checkValue.call(this, context, expression);
 };
 
 
