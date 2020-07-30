@@ -6,12 +6,25 @@ var runInterpretedTests = require("../../../../../JavaScript-Core/src/test/promp
 var runTranspiledTests = require("../../../../../JavaScript-Core/src/test/prompto/parser/BaseEParserTest").runTranspiledTests;
 var Fiber = require('fibers');
 
+/*
 Fiber(function() {
     Out.init();
     BaseParserTest.coreContext = null;
     loadDependency("core");
     var savedContext = prompto.runtime.ApplicationContext.set(BaseParserTest.coreContext);
     runInterpretedTests('manual/scheduler.pec', { register: true, throws: true });
+    Out.restore();
+    prompto.runtime.ApplicationContext.set(savedContext);
+}).run();
+*/
+
+
+Fiber(function() {
+    Out.init();
+    BaseParserTest.coreContext = null;
+    loadDependency("core");
+    var savedContext = prompto.runtime.ApplicationContext.set(BaseParserTest.coreContext);
+    runTranspiledTests('manual/scheduler.pec', { register: true, throws: true });
     Out.restore();
     prompto.runtime.ApplicationContext.set(savedContext);
 }).run();

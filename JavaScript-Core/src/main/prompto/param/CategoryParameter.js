@@ -40,6 +40,13 @@ CategoryParameter.prototype.checkValue = function(context, expression) {
         return Parameter.prototype.checkValue.call(this, context, expression);
 };
 
+CategoryParameter.prototype.transpileCall = function(transpiler, expression) {
+    this.resolve(transpiler.context);
+    if(this.resolved instanceof MethodType)
+        expression.transpileReference(transpiler);
+    else
+        Parameter.prototype.transpileCall.call(this, transpiler, expression);
+};
 
 CategoryParameter.prototype.register = function(context) {
 	var actual = context.contextForValue(this.name);
@@ -66,9 +73,12 @@ CategoryParameter.prototype.resolve = function(context) {
 };
 
 CategoryParameter.prototype.declare = function(transpiler) {
-    this.type.declare(transpiler);
+    this.resolve(transpiler.context);
+    if(this.resolved instanceof MethodType)
+        this.resolved.declare(transpiler);
+    else
+        this.type.declare(transpiler);
 };
-
 
 CategoryParameter.prototype.getType = function(context) {
 	return this.type;

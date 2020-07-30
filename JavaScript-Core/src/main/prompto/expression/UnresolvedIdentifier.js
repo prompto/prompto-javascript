@@ -260,6 +260,12 @@ UnresolvedIdentifier.prototype.transpile = function(transpiler) {
     this.resolved.transpile(transpiler);
 };
 
+UnresolvedIdentifier.prototype.transpileReference = function(transpiler) {
+    if(this.resolved==null) {
+        this.resolveAndCheck(transpiler.context, false);
+    }
+    return this.resolved.transpileReference(transpiler);
+};
 
 exports.UnresolvedIdentifier = UnresolvedIdentifier;
 

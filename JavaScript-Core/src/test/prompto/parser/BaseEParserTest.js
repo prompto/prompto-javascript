@@ -184,8 +184,8 @@ exports.runInterpretedTests = function(fileName, options) {
 };
 
 
-exports.runTranspiledTests = function(fileName) {
-    runTests(fileName, executeTest);
+exports.runTranspiledTests = function(fileName, options) {
+    runTests(fileName, executeTest, options);
 }
 
 function runTests(fileName, runner, options) {

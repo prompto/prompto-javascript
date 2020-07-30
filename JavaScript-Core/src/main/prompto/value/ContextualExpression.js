@@ -44,6 +44,13 @@ ContextualExpression.prototype.transpile = function(transpiler) {
 };
 
 
+ContextualExpression.prototype.transpileReference = function(transpiler) {
+	transpiler = transpiler.newChildTranspiler(this.calling);
+	this.expression.transpileReference(transpiler);
+	transpiler.flush();
+};
+
+
 ContextualExpression.prototype.transpileParent = function(transpiler) {
 	this.transpile(transpiler);
 };

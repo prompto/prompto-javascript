@@ -198,17 +198,36 @@ MethodCall.prototype.fullDeclareDeclaration = function(declaration, transpiler, 
 
 
 MethodCall.prototype.transpile = function(transpiler) {
+    this.doTranspile(transpiler, false);
+};
+
+
+MethodCall.prototype.transpileReference = function(transpiler) {
+    this.doTranspile(transpiler, true);
+};
+
+MethodCall.prototype.doTranspile = function(transpiler, refOnly) {
     var finder = new MethodFinder(transpiler.context, this);
     var declarations = finder.findCompatibleMethods(false, true);
     if (declarations.size === 1) {
         var first = declarations.values().next().value;
-        this.transpileSingle(transpiler, first, false);
+        this.transpileSingle(transpiler, first, false, refOnly);
     } else
-        this.transpileMultiple(transpiler, declarations);
+        this.transpileMultiple(transpiler, declarations, refOnly);
 };
 
 
-MethodCall.prototype.transpileMultiple = function(transpiler, declarations) {
+MethodCall.prototype.transpileSingle = function(transpiler, declaration, allowDerived, refOnly) {
+    if (declaration instanceof BuiltInMethodDeclaration)
+        this.transpileBuiltin(transpiler, declaration, refOnly);
+    else {
+        this.transpileSelector(transpiler, declaration);
+        if(!refOnly)
+            this.transpileAssignments(transpiler, declaration, allowDerived);
+    }
+};
+
+MethodCall.prototype.transpileMultiple = function(transpiler, declarations, refOnly) {
     var name = this.dispatcher.getTranspiledName(transpiler.context);
     var parent = this.selector.resolveParent(transpiler.context);
     var first = declarations.values().next().value;
@@ -216,23 +235,20 @@ MethodCall.prototype.transpileMultiple = function(transpiler, declarations) {
         parent = new ThisExpression();
     var selector = new MethodSelector(parent, new Identifier(name));
     selector.transpile(transpiler);
-    this.transpileAssignments(transpiler, this.dispatcher);
+    if(!refOnly)
+        this.transpileAssignments(transpiler, this.dispatcher);
 };
 
-MethodCall.prototype.transpileSingle = function(transpiler, declaration, allowDerived) {
-    if (declaration instanceof BuiltInMethodDeclaration)
-        this.transpileBuiltin(transpiler, declaration);
-    else {
-        this.transpileSelector(transpiler, declaration);
-        this.transpileAssignments(transpiler, declaration, allowDerived);
-    }
-};
 
-MethodCall.prototype.transpileBuiltin = function(transpiler, declaration) {
+
+MethodCall.prototype.transpileBuiltin = function(transpiler, declaration, refOnly) {
     var parent = this.selector.resolveParent(transpiler.context);
     parent.transpileParent(transpiler);
     transpiler.append(".");
-    declaration.transpileCall(transpiler, this.args);
+    if(refOnly)
+        transpiler.append(declaration.name);
+    else
+        declaration.transpileCall(transpiler, this.args, refOnly);
 };
 
 
