@@ -12,7 +12,7 @@ Scheduler.schedule = function(method, executeAt, repeatEvery, jobName) {
     var jobId = ++Scheduler.lastJobId;
     var delay = executeAt.date.valueOf() - (new Date()).valueOf();
     var timerTask = repeatEvery != null ? Scheduler.makeRepeatingTask(runner, jobId, repeatEvery) : Scheduler.makeSingleTask(runner, jobId);
-    Scheduler.timers[jobId] = { id: setTimeout(timerTask, delay), cancel: clearTimeout };
+    Scheduler.timers[jobId] = { id: setTimeout(timerTask, delay), cancel: function(id) { clearTimeout(id); } };
     return jobId;
 };
 
@@ -34,7 +34,7 @@ Scheduler.makeRepeatingTask = function(runner, jobId, repeatEvery) {
             var interval = repeatEvery.totalMilliseconds(); // TODO
             Scheduler.timers[jobId] = { id: setInterval(function() {
                     runner();
-            }, interval), cancel: clearInterval };
+            }, interval), cancel: function(id) { clearInterval(id); } };
         }
     };
 };
