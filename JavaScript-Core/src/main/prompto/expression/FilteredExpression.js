@@ -91,9 +91,12 @@ FilteredExpression.prototype.transpile = function(transpiler) {
     var listType = this.source.check(transpiler.context);
     var itemType = listType.itemType;
     this.source.transpile(transpiler);
-    transpiler.append(".filtered(");
+    transpiler.append(".filtered((");
     var arrow = this.toArrowExpression();
     arrow.transpileFilter(transpiler, itemType);
+    transpiler.append(")");
+    if(transpiler.context.getClosestInstanceContext()!=null)
+        transpiler.append(".bind(this)");
     transpiler.append(")");
     transpiler.flush();
 };
