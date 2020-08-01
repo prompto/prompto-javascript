@@ -162,31 +162,37 @@ MethodSelector.prototype.getCategoryCandidates = function(context) {
 	return cd.getMemberMethods(context, this.name);
 };
 
-MethodSelector.prototype.newLocalContext = function(context, decl) {
+MethodSelector.prototype.newLocalContext = function(context, declaration) {
 	if(this.parent!=null) {
         return this.newInstanceContext(context);
-    } else if(decl.memberOf!=null) {
-        return this.newLocalInstanceContext(context);
+    } else if(declaration.memberOf!=null) {
+        return this.newLocalInstanceContext(context, declaration);
     } else {
         return context.newLocalContext();
 	}
 };
 
-MethodSelector.prototype.newLocalInstanceContext = function(context) {
+MethodSelector.prototype.newLocalInstanceContext = function(context, declaration) {
     var instance = context.getClosestInstanceContext();
-    if(instance==null)
-        throw new SyntaxError("Not in instance context !");
-    context = instance.newLocalContext();
-    context.parent = instance; // make local context child of the existing instance
-    return context;
+    if(instance!=null) {
+        var required = declaration.memberOf.getType(context);
+        var actual = instance.instanceType;
+        if (!required.isAssignableFrom(context, actual))
+            instance = null;
+    }
+    if(instance==null) {
+        var declaring = declaration.memberOf.getType(context);
+        instance = context.newInstanceContext(declaring, false);
+    }
+    return instance.newChildContext()
 };
 
 
-MethodSelector.prototype.newLocalCheckContext = function(context, decl) {
+MethodSelector.prototype.newLocalCheckContext = function(context, declaration) {
     if (this.parent != null) {
         return this.newInstanceCheckContext(context);
-    } else if(decl.memberOf!=null) {
-        return this.newLocalInstanceContext(context);
+    } else if(declaration.memberOf!=null) {
+        return this.newLocalInstanceContext(context, declaration);
     } else {
         return context.newLocalContext();
     }

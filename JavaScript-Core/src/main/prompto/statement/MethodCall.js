@@ -360,7 +360,7 @@ MethodCall.prototype.findRegistered = function(context) {
     if(!this.selector.parent)  try {
         var o = context.getValue(this.selector.id);
         if(o instanceof ClosureValue) {
-            return new ClosureDeclaration(o);
+            return this.getClosureDeclaration(context, o);
         } else if(o instanceof ArrowValue) {
             return new ArrowDeclaration(o);
         }
@@ -371,5 +371,22 @@ MethodCall.prototype.findRegistered = function(context) {
     }
     return null;
 };
+
+
+MethodCall.prototype.getClosureDeclaration = function(context, closure) {
+    var decl = closure.type.method
+    if(decl.memberOf!=null) {
+        // the closure references a member method (useful when a method reference is needed)
+        // in which case we may simply want to return that method to avoid spilling context into method body
+        // this is only true if the closure comes straight from the method's instance context
+        // if the closure comes from an accessible context that is not the instance context
+        // then it is a local variable that needs the closure context to be interpreted
+        declaring = context.contextForValue(this.selector.name);
+        if (declaring === closure.context)
+            return decl;
+    }
+    return new ClosureDeclaration(closure);
+};
+
 
 exports.MethodCall = MethodCall;
