@@ -114,6 +114,14 @@ test('Transpiled Override', () => {
 	checkTranspiledOutput('methods/override.poc');
 });
 
+test('Interpreted Parameter', () => {
+	checkInterpretedOutput('methods/parameter.poc');
+});
+
+test('Transpiled Parameter', () => {
+	checkTranspiledOutput('methods/parameter.poc');
+});
+
 test('Interpreted Polymorphic_abstract', () => {
 	checkInterpretedOutput('methods/polymorphic_abstract.poc');
 });

@@ -72,6 +72,10 @@ test('Override', () => {
 	compareResourceEME('methods/override.pec');
 });
 
+test('Parameter', () => {
+	compareResourceEME('methods/parameter.pec');
+});
+
 test('Polymorphic_abstract', () => {
 	compareResourceEME('methods/polymorphic_abstract.pec');
 });

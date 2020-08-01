@@ -138,6 +138,14 @@ test('Transpiled Override', () => {
 	checkTranspiledOutput('methods/override.pec');
 });
 
+test('Interpreted Parameter', () => {
+	checkInterpretedOutput('methods/parameter.pec');
+});
+
+test('Transpiled Parameter', () => {
+	checkTranspiledOutput('methods/parameter.pec');
+});
+
 test('Interpreted Polymorphic_abstract', () => {
 	checkInterpretedOutput('methods/polymorphic_abstract.pec');
 });

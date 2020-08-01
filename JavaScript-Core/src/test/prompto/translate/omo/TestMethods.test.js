@@ -60,6 +60,10 @@ test('Override', () => {
 	compareResourceOMO('methods/override.poc');
 });
 
+test('Parameter', () => {
+	compareResourceOMO('methods/parameter.poc');
+});
+
 test('Polymorphic_abstract', () => {
 	compareResourceOMO('methods/polymorphic_abstract.poc');
 });

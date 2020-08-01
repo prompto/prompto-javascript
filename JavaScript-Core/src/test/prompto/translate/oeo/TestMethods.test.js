@@ -60,6 +60,10 @@ test('Override', () => {
 	compareResourceOEO('methods/override.poc');
 });
 
+test('Parameter', () => {
+	compareResourceOEO('methods/parameter.poc');
+});
+
 test('Polymorphic_abstract', () => {
 	compareResourceOEO('methods/polymorphic_abstract.poc');
 });
