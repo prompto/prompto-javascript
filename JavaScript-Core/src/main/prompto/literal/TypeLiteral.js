@@ -3,6 +3,7 @@ var TypeType = require("../type/TypeType").TypeType;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var Dialect = require("../parser/Dialect").Dialect;
 var Type = require("../intrinsic/Type").Type;
+var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
 function TypeLiteral(type) {
     Literal.call(this, type.toString(), type);
@@ -22,8 +23,13 @@ TypeLiteral.prototype.interpret = function(context) {
 
 
 TypeLiteral.prototype.toDialect = function(writer) {
-    if(writer.dialect==Dialect.E)
-        writer.append("Type: ");
+    if(writer.dialect==Dialect.E) {
+        var decl = writer.context.getRegisteredDeclaration(this.value.id);
+        if(decl instanceof MethodDeclarationMap)
+            writer.append("Method: ");
+        else
+            writer.append("Type: ");
+    }
     this.value.toDialect(writer);
 }
 

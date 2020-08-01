@@ -262,6 +262,8 @@ MethodCall.prototype.transpileSelector = function(transpiler, declaration) {
         name = this.variableName;
     else if(this.fullSelector)
         name = this.fullSelector.name;
+    else if(selector.name !== declaration.name)
+        name = selector.name;
     else
         name = declaration.getTranspiledName(transpiler.context);
     selector = new MethodSelector(parent, new Identifier(name));

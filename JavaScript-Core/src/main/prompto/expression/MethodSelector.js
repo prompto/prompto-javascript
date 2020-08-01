@@ -9,7 +9,6 @@ var UnresolvedIdentifier = null;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
-var Variable = require("../runtime/Variable").Variable;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var NativeInstance = null;
 var CategoryType = null;
