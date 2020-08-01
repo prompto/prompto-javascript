@@ -381,7 +381,7 @@ MethodCall.prototype.getClosureDeclaration = function(context, closure) {
         // this is only true if the closure comes straight from the method's instance context
         // if the closure comes from an accessible context that is not the instance context
         // then it is a local variable that needs the closure context to be interpreted
-        declaring = context.contextForValue(this.selector.name);
+        var declaring = context.contextForValue(this.selector.name);
         if (declaring === closure.context)
             return decl;
     }
