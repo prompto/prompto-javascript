@@ -18,13 +18,10 @@ module.exports = {
             {
                 test: /\.(js)$/,
                 exclude: [/node_modules/,/antlr4/],
-                use: ["eslint-loader"]
+                use: ["eslint-loader", 'webpack-conditional-loader']
             }
         ]
     },
-    externals: [
-        "fibers",
-    ],
     mode: "production",
     performance: {
         hints: false

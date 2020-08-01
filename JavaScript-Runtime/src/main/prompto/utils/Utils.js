@@ -1,4 +1,7 @@
-var Fiber = require("fibers"); // nodejs only, see Core/webpack.config.js
+var Fiber = null;
+// #if process.env.NODE_ENV === 'DEVELOPMENT'
+Fiber = require("fibers"); // nodejs only, see Core/webpack.config.js
+// #endif
 
 function doSleepFiber(millis) {
     var fiber = Fiber.current;
