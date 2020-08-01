@@ -34,6 +34,8 @@ TypeMap.prototype.doInferType = function(context, keys, section) {
 			context.problemListener.reportIncompatibleTypes(section, current, inferred);
 		}
 	}
+	if(inferred==null)
+		return NullType.instance;
 	// second pass: check compatibility
 	keys.forEach(function(k) {
         var type = this[k];
