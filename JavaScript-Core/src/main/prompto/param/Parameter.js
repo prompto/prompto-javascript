@@ -1,18 +1,18 @@
-var Section = require("../parser/Section").Section;
+var NamedInstance = require("../grammar/NamedInstance").NamedInstance;
 var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
 function Parameter(id) {
-    Section.call(this);
+    NamedInstance.call(this);
 	this.id = id;
     this.mutable = false;
     this.defaultExpression = null;
 	return this;
 }
 
-Parameter.prototype = Object.create(Section.prototype);
+Parameter.prototype = Object.create(NamedInstance.prototype);
 Parameter.prototype.constructor = Parameter;
 
 Object.defineProperty(Parameter.prototype, "name", {

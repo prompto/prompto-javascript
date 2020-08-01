@@ -19,12 +19,26 @@ Expression.prototype.parentToDialect = function(writer) {
 };
 
 
+Expression.prototype.check = function(context) {
+    throw new Error("check not implemented by " + this.constructor.name);
+};
+
 Expression.prototype.checkReference = function(context) {
     return this.check(context);
 };
 
 Expression.prototype.checkAttribute = function(context) {
     context.problemListener.reportMissingAttribute(this, this.toString());
+};
+
+
+Expression.prototype.interpret = function(context) {
+    throw new Error("interpret not implemented by " + this.constructor.name);
+};
+
+
+Expression.prototype.interpretReference = function(context) {
+   return this.interpret(context);
 };
 
 
@@ -35,6 +49,11 @@ Expression.prototype.declare = function(transpiler) {
 
 Expression.prototype.transpile = function(transpiler) {
     throw new Error("transpile not implemented by " + this.constructor.name);
+};
+
+
+Expression.prototype.transpileReference = function(transpiler) {
+    this.transpile(transpiler);
 };
 
 

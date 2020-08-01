@@ -119,16 +119,21 @@ UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
         if(decl!=null)
             call = new MethodCall(new MethodSelector(null, id), this.args);
     }
+    // could be a local instance
     if(call==null) {
         var named = context.getRegisteredValue(id.name);
         if(named !== null) {
             var type = named.getType(context);
-            if(type instanceof MethodType) {
-                call = new MethodCall(new MethodSelector(null, id), this.args);
-                call.variableName = id.name;
+            if(type != null) {
+                type = type.resolve(context);
+                if(type instanceof MethodType) {
+                    call = new MethodCall(new MethodSelector(null, id), this.args);
+                    call.variableName = id.name;
+                }
             }
         }
     }
+    // could be a declaration
     if(call==null) {
         decl = context.getRegisteredDeclaration(id.name);
         if (decl === null) {

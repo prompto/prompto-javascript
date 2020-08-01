@@ -4,6 +4,7 @@ var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var MemberSelector = require("./MemberSelector").MemberSelector;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 var Identifier = require("../grammar/Identifier").Identifier;
+var NamedInstance = require("../grammar/NamedInstance").NamedInstance;
 var UnresolvedIdentifier = null;
 var InstanceExpression = require("./InstanceExpression").InstanceExpression;
 var NullValue = require("../value/NullValue").NullValue;
@@ -63,13 +64,27 @@ MethodSelector.prototype.toString = function() {
 
 
 MethodSelector.prototype.getCandidates = function(context, checkInstance) {
-    var named = context.getRegistered(this.id);
-    if (named instanceof Variable && named.getType(context) instanceof MethodType)
-        return new Set([named.getType(context).method]);
+    var decl = this.getMethodInstance(context);
+    if(decl!=null)
+        return new Set([decl]);
 	else if(this.parent===null)
 		return this.getGlobalCandidates(context);
 	else
 		return this.getMemberCandidates(context, checkInstance);
+};
+
+
+MethodSelector.prototype.getMethodInstance = function(context) {
+    var named = context.getRegistered(this.id);
+    if (named instanceof NamedInstance) {
+        var type = named.getType(context);
+        if (type != null) {
+            type = type.resolve(context);
+            if (type instanceof MethodType)
+                return type.method;
+        }
+    }
+    return null;
 };
 
 

@@ -13,6 +13,7 @@ exports.ArgumentList = require("./ArgumentList").ArgumentList;
 exports.NativeSymbolList = require("./NativeSymbolList").NativeSymbolList;
 exports.CategorySymbolList = require("./CategorySymbolList").CategorySymbolList;
 exports.NativeCategoryBindingList = require("./NativeCategoryBindingList").NativeCategoryBindingList;
+exports.NamedInstance = require("./NamedInstance").NamedInstance;
 
 require('./Argument').resolve();
 require('./ArgumentList').resolve();
