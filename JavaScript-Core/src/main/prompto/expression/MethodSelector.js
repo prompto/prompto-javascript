@@ -11,6 +11,7 @@ var NullValue = require("../value/NullValue").NullValue;
 var TypeValue = require("../value/TypeValue").TypeValue;
 var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 var NativeInstance = null;
+var TypeType = require("../type/TypeType").TypeType;
 var CategoryType = null;
 var CategorySymbol = null;
 var MethodDeclarationMap = null;
@@ -200,8 +201,15 @@ MethodSelector.prototype.newLocalCheckContext = function(context, declaration) {
 
 MethodSelector.prototype.newInstanceCheckContext = function(context) {
     var type = this.parent.check (context);
+    // if calling singleton method, parent is the singleton type
+    if(type instanceof TypeType) {
+        var decl = context.getRegisteredDeclaration(type.type.id);
+        if(decl instanceof SingletonCategoryDeclaration) {
+            type = decl.getType(context);
+        }
+    }
     if (type instanceof CategoryType) {
-        var decl = context.getRegisteredDeclaration(type.name);
+        decl = context.getRegisteredDeclaration(type.name);
         context = context.newInstanceContext(null, type, decl instanceof SingletonCategoryDeclaration);
         return context.newChildContext();
     } else
