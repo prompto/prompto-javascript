@@ -212,13 +212,15 @@ EqualsExpression.prototype.interpretQuery = function(context, query) {
     var data = value.getStorableData();
     var match = this.getMatchOp();
     query.verify(info, match, data);
-    if (this.operator == EqOp.NOT_EQUALS)
+    if (this.operator == EqOp.NOT_EQUALS || this.operator == EqOp.IS_NOT || this.operator == EqOp.NOT_CONTAINS)
         query.not();
 };
 
 
 EqualsExpression.prototype.getMatchOp = function() {
     switch (this.operator) {
+        case EqOp.IS:
+        case EqOp.IS_NOT:
         case EqOp.EQUALS:
         case EqOp.NOT_EQUALS:
             return MatchOp.EQUALS;
@@ -411,7 +413,7 @@ EqualsExpression.prototype.transpileQuery = function(transpiler, builder) {
     transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
     this.right.transpile(transpiler);
     transpiler.append(");").newLine();
-    if (this.operator == EqOp.NOT_EQUALS)
+    if (this.operator == EqOp.NOT_EQUALS || this.operator == EqOp.IS_NOT || this.operator == EqOp.NOT_CONTAINS)
         transpiler.append(builder).append(".not();").newLine();
 };
 
