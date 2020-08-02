@@ -4,6 +4,10 @@ test('Attribute', () => {
 	compareResourceOMO('singleton/attribute.poc');
 });
 
+test('Internal', () => {
+	compareResourceOMO('singleton/internal.poc');
+});
+
 test('Member', () => {
 	compareResourceOMO('singleton/member.poc');
 });
