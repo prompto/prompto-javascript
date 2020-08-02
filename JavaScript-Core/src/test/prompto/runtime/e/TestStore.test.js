@@ -58,12 +58,92 @@ test('Transpiled FetchBoolean', () => {
 	checkTranspiledOutput('store/fetchBoolean.pec');
 });
 
+test('Interpreted FetchContains', () => {
+	checkInterpretedOutput('store/fetchContains.pec');
+});
+
+test('Transpiled FetchContains', () => {
+	checkTranspiledOutput('store/fetchContains.pec');
+});
+
+test('Interpreted FetchGreater', () => {
+	checkInterpretedOutput('store/fetchGreater.pec');
+});
+
+test('Transpiled FetchGreater', () => {
+	checkTranspiledOutput('store/fetchGreater.pec');
+});
+
+test('Interpreted FetchGreaterEqual', () => {
+	checkInterpretedOutput('store/fetchGreaterEqual.pec');
+});
+
+test('Transpiled FetchGreaterEqual', () => {
+	checkTranspiledOutput('store/fetchGreaterEqual.pec');
+});
+
+test('Interpreted FetchHas', () => {
+	checkInterpretedOutput('store/fetchHas.pec');
+});
+
+test('Transpiled FetchHas', () => {
+	checkTranspiledOutput('store/fetchHas.pec');
+});
+
+test('Interpreted FetchIn', () => {
+	checkInterpretedOutput('store/fetchIn.pec');
+});
+
+test('Transpiled FetchIn', () => {
+	checkTranspiledOutput('store/fetchIn.pec');
+});
+
+test('Interpreted FetchLesser', () => {
+	checkInterpretedOutput('store/fetchLesser.pec');
+});
+
+test('Transpiled FetchLesser', () => {
+	checkTranspiledOutput('store/fetchLesser.pec');
+});
+
+test('Interpreted FetchLesserEqual', () => {
+	checkInterpretedOutput('store/fetchLesserEqual.pec');
+});
+
+test('Transpiled FetchLesserEqual', () => {
+	checkTranspiledOutput('store/fetchLesserEqual.pec');
+});
+
 test('Interpreted FetchNotBoolean', () => {
 	checkInterpretedOutput('store/fetchNotBoolean.pec');
 });
 
 test('Transpiled FetchNotBoolean', () => {
 	checkTranspiledOutput('store/fetchNotBoolean.pec');
+});
+
+test('Interpreted FetchNotContains', () => {
+	checkInterpretedOutput('store/fetchNotContains.pec');
+});
+
+test('Transpiled FetchNotContains', () => {
+	checkTranspiledOutput('store/fetchNotContains.pec');
+});
+
+test('Interpreted FetchNotHas', () => {
+	checkInterpretedOutput('store/fetchNotHas.pec');
+});
+
+test('Transpiled FetchNotHas', () => {
+	checkTranspiledOutput('store/fetchNotHas.pec');
+});
+
+test('Interpreted FetchNotIn', () => {
+	checkInterpretedOutput('store/fetchNotIn.pec');
+});
+
+test('Transpiled FetchNotIn', () => {
+	checkTranspiledOutput('store/fetchNotIn.pec');
 });
 
 test('Interpreted FetchOr', () => {

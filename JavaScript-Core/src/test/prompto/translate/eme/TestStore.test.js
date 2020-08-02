@@ -24,8 +24,48 @@ test('FetchBoolean', () => {
 	compareResourceEME('store/fetchBoolean.pec');
 });
 
+test('FetchContains', () => {
+	compareResourceEME('store/fetchContains.pec');
+});
+
+test('FetchGreater', () => {
+	compareResourceEME('store/fetchGreater.pec');
+});
+
+test('FetchGreaterEqual', () => {
+	compareResourceEME('store/fetchGreaterEqual.pec');
+});
+
+test('FetchHas', () => {
+	compareResourceEME('store/fetchHas.pec');
+});
+
+test('FetchIn', () => {
+	compareResourceEME('store/fetchIn.pec');
+});
+
+test('FetchLesser', () => {
+	compareResourceEME('store/fetchLesser.pec');
+});
+
+test('FetchLesserEqual', () => {
+	compareResourceEME('store/fetchLesserEqual.pec');
+});
+
 test('FetchNotBoolean', () => {
 	compareResourceEME('store/fetchNotBoolean.pec');
+});
+
+test('FetchNotContains', () => {
+	compareResourceEME('store/fetchNotContains.pec');
+});
+
+test('FetchNotHas', () => {
+	compareResourceEME('store/fetchNotHas.pec');
+});
+
+test('FetchNotIn', () => {
+	compareResourceEME('store/fetchNotIn.pec');
 });
 
 test('FetchOr', () => {
