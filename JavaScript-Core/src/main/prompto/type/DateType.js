@@ -8,7 +8,6 @@ var RangeType = require("./RangeType").RangeType;
 var DateRange = require("../value/DateRange").DateRange;
 var DateValue = require("../value/DateValue").DateValue;
 var Identifier = require("../grammar/Identifier").Identifier;
-var CharacterType = require("./CharacterType").CharacterType;
 var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 var DateTime = require("../intrinsic/DateTime").DateTime;
 
@@ -16,10 +15,6 @@ class DateType extends NativeType {
  
     constructor() {
         super(new Identifier("Date"));
-    }
-
-    declare(transpiler) {
-        transpiler.require(LocalDate);
     }
 
     isAssignableFrom(context, other) {
@@ -128,14 +123,6 @@ class DateType extends NativeType {
         transpiler.append("(");
         right.transpile(transpiler);
         transpiler.append(")");
-    }
-
-    checkRange(context, other) {
-        if(other instanceof CharacterType) {
-            return new RangeType(this);
-        } else {
-            return NativeType.prototype.checkRange.call(this, context, other);
-        }
     }
 
     checkRange(context, other) {

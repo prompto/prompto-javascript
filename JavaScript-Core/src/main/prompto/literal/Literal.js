@@ -27,10 +27,6 @@ class Literal extends Section {
         return this.text;
     }
 
-    toString() {
-        return this.text;
-    }
-
     checkAttribute(context) {
         context.problemListener.reportMissingAttribute(this, this.toString());
     }

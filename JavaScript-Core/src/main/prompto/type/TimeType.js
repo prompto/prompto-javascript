@@ -15,10 +15,6 @@ class TimeType extends NativeType {
         super(new Identifier("TimeValue"));
     }
 
-    declare(transpiler) {
-        transpiler.require(LocalTime);
-    }
-
     isAssignableFrom(context, other) {
         return NativeType.prototype.isAssignableFrom.call(this, context, other)
             || (other == DateTimeType.instance);

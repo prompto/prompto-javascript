@@ -1,6 +1,5 @@
 var IterableType = require("./IterableType").IterableType;
 var BooleanType = require("./BooleanType").BooleanType;
-var Identifier = require("../grammar/Identifier").Identifier;
 var Variable = require("../runtime/Variable").Variable;
 
 class ContainerType extends IterableType {

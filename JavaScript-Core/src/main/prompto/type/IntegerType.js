@@ -1,4 +1,3 @@
-var CategoryParameter = null;
 var NativeType = require("./NativeType").NativeType;
 var BooleanType = require("./BooleanType").BooleanType;
 var DecimalType = require("./DecimalType").DecimalType;

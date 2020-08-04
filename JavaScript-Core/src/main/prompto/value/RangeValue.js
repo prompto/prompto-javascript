@@ -9,7 +9,7 @@ class RangeValue extends Value {
    
     constructor(itemType, left, right) {
         if(!(itemType instanceof BaseType))
-            return;
+            throw new SyntaxError("Not a type!");
         super(new RangeType(itemType));
         var cmp = left.cmp(right);
         if(cmp<0) {

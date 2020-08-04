@@ -4,12 +4,10 @@ var CharacterType = null;
 var IntegerType = require("./IntegerType").IntegerType;
 var BooleanType = require("./BooleanType").BooleanType;
 var TextValue = null; // circular dependency
-var IntegerLiteral = null;
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 
 exports.resolve = function() {
     CharacterType = require("./CharacterType").CharacterType;
-    IntegerLiteral = require("../literal/IntegerLiteral").IntegerLiteral;
     TextValue = require("../value/TextValue").TextValue;
  };
 

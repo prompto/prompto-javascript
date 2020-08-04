@@ -1,5 +1,4 @@
 var ContainerType = require("./ContainerType").ContainerType;
-var BaseJoinMethodDeclaration = null;
 var SetType = null;
 var IntegerType = null;
 var BooleanType = require("./BooleanType").BooleanType;
