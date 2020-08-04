@@ -1,5 +1,4 @@
-function NativeCategoryBinding() {
-    return this;
+class NativeCategoryBinding {
 }
 
 

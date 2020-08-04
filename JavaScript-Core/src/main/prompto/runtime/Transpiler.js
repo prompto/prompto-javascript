@@ -2,237 +2,242 @@ var CategoryDeclaration = require("../declaration/CategoryDeclaration").Category
 var List = require("../intrinsic/List").List;
 var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
-function Transpiler(context) {
-    this.context = context;
-    this.declared = new Set();
-    this.required = new Set();
-    this.registered = new Set();
-    this.escapeMode = 0;
-    this.lines = [];
-    this.line = "";
-    this.indents = "";
-    return this;
-}
-
-Transpiler.prototype.toString = function() {
-    this.appendAllRequired();
-    this.appendAllRegistered();
-    this.appendAllDeclared();
-    return this.lines.join("\n");
-};
-
-
-Transpiler.prototype.copyTranspiler = function(context) {
-    var transpiler = new Transpiler(context);
-    transpiler.declared = this.declared;
-    transpiler.required = this.required;
-    transpiler.registered = this.registered;
-    transpiler.escapeMode = this.escapeMode;
-    transpiler.lines = this.lines;
-    transpiler.line = this.line;
-    transpiler.indents = this.indents;
-    transpiler.parent = this;
-    return transpiler;
-};
-
-Transpiler.prototype.newLocalTranspiler = function() {
-    var context = this.context.newLocalContext();
-    return this.copyTranspiler(context);
-};
-
-Transpiler.prototype.newChildTranspiler = function(context) {
-    if(!context)
-        context = this.context.newChildContext();
-    return this.copyTranspiler(context);
-};
-
-Transpiler.prototype.newResourceTranspiler = function() {
-    var context = this.context.newResourceContext();
-    return this.copyTranspiler(context);
-};
-
-
-Transpiler.prototype.newGetterTranspiler = function(name) {
-    var transpiler = this.newChildTranspiler();
-    transpiler.getterName = name;
-    return transpiler;
-};
-
-
-Transpiler.prototype.newSetterTranspiler = function(name) {
-    var transpiler = this.newChildTranspiler();
-    transpiler.setterName = name;
-    return transpiler;
-};
-
-
-Transpiler.prototype.newInstanceTranspiler = function(type) {
-    var context = this.context.newInstanceContext(null, type, true);
-    return this.copyTranspiler(context);
-};
-
-
-Transpiler.prototype.newDocumentTranspiler = function() {
-    var context = this.context.newDocumentContext(null, false);
-    return this.copyTranspiler(context);
-};
-
-
-Transpiler.prototype.flush = function() {
-    if(this.parent) {
-        this.parent.line = this.line;
-        this.parent.indents = this.indents;
-        this.parent.escapeMode = this.escapeMode;
-    }
-};
-
-Transpiler.prototype.declare = function(decl) {
-    this.declared.add(decl);
-};
-
-
-Transpiler.prototype.appendAllDeclared = function() {
-    var list = [];
-    var set = new Set();
-    this.declared.forEach(function(decl) {
-        if(decl instanceof CategoryDeclaration)
-            decl.ensureDeclarationOrder(this.context, list, set);
-        else
-            list.push(decl);
-    }, this);
-    list.forEach(function(decl) {
-        this.appendOneDeclared(decl);
-    }, this);
-};
-
-
-Transpiler.prototype.appendOneDeclared = function(decl) {
-    var transpiler = this.newLocalTranspiler();
-    decl.transpile(transpiler);
-    transpiler.flush();
-    if(this.line!==this.indents) {
-        this.lines.push(this.line);
-        this.line = this.indents;
-    }
-    this.lines.push("");
-};
-
-
-Transpiler.prototype.require = function(fn) {
-    this.required.add(fn);
-};
-
-
-
-Transpiler.prototype.appendAllRequired = function() {
-    this.required.forEach(function(fn) {
-        this.appendOneRequired(fn);
-    }, this);
-};
-
-
-Transpiler.prototype.register = function(f) {
-    this.required.add(f);
-    this.registered.add(f);
-};
-
-
-Transpiler.prototype.appendAllRegistered = function() {
-    this.registered.forEach(function(f) {
-        this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
-    }, this);
-};
-
-
-Transpiler.prototype.getTranspiled = function(object) {
-    if(object===null)
-        return "null";
-    else if(object.toTranspiled)
-        return object.toTranspiled();
-    else
-        return object.toString();
-};
-
 var coreNodeClasses = new Set(["Socket"]);
 
-Transpiler.prototype.appendOneRequired = function(fn) {
-    if(coreNodeClasses.has(fn.name))
-        return;
-    this.lines.push(fn.toString());
-    Object.keys(fn).forEach(function (key) {
-        this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
-    }, this);
-    if(fn.prototype.__proto__) {
-        var proto = fn.prototype.__proto__;
-        if(proto.constructor.name!=="Object")
-            this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
+class Transpiler {
+
+    constructor(context) {
+        this.context = context;
+        this.declared = new Set();
+        this.required = new Set();
+        this.registered = new Set();
+        this.escapeMode = 0;
+        this.lines = [];
+        this.line = "";
+        this.indents = "";
     }
-    Object.keys(fn.prototype).forEach(function (key) {
-        var value = key==="constructor" ? fn.name : fn.prototype[key].toString();
-        if(value.indexOf("native code")<0)
-            this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
-        else // for now assume this is a redirect on the same type
-            this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
-    }, this);
-    Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
-        var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
-        if(desc.get || desc.set) {
-            this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
-            if(desc.get) {
-                this.lines.push("    get: " + desc.get.toString() + (desc.set ? "," : ""));
-            }
-            if(desc.set) {
-                this.lines.push("    set: " + desc.set.toString());
-            }
-            this.lines.push("});")
+
+    toString() {
+        this.appendAllRequired();
+        this.appendAllRegistered();
+        this.appendAllDeclared();
+        return this.lines.join("\n");
+    }
+
+    copyTranspiler(context) {
+        var transpiler = new Transpiler(context);
+        transpiler.declared = this.declared;
+        transpiler.required = this.required;
+        transpiler.registered = this.registered;
+        transpiler.escapeMode = this.escapeMode;
+        transpiler.lines = this.lines;
+        transpiler.line = this.line;
+        transpiler.indents = this.indents;
+        transpiler.parent = this;
+        return transpiler;
+    }
+
+    newLocalTranspiler() {
+        var context = this.context.newLocalContext();
+        return this.copyTranspiler(context);
+    }
+
+    newChildTranspiler(context) {
+        if(!context)
+            context = this.context.newChildContext();
+        return this.copyTranspiler(context);
+    }
+
+    newResourceTranspiler() {
+        var context = this.context.newResourceContext();
+        return this.copyTranspiler(context);
+    }
+
+    newGetterTranspiler(name) {
+        var transpiler = this.newChildTranspiler();
+        transpiler.getterName = name;
+        return transpiler;
+    }
+
+    newSetterTranspiler(name) {
+        var transpiler = this.newChildTranspiler();
+        transpiler.setterName = name;
+        return transpiler;
+    }
+
+    newInstanceTranspiler(type) {
+        var context = this.context.newInstanceContext(null, type, true);
+        return this.copyTranspiler(context);
+    }
+
+    newDocumentTranspiler() {
+        var context = this.context.newDocumentContext(null, false);
+        return this.copyTranspiler(context);
+    }
+
+    flush() {
+        if(this.parent) {
+            this.parent.line = this.line;
+            this.parent.indents = this.indents;
+            this.parent.escapeMode = this.escapeMode;
         }
-    }, this);
-};
-
-Transpiler.prototype.append = function(text) {
-    this.line += text;
-    return this;
-};
-
-Transpiler.prototype.trimLast = function(count) {
-    this.line = this.line.substring(0, this.line.length - count);
-    return this;
-};
-
-Transpiler.prototype.newLine = function() {
-    this.lines.push(this.line);
-    this.line = this.indents;
-    return this;
-};
-
-Transpiler.prototype.escape = function() {
-    this.escapeMode++;
-    return this;
-};
-
-Transpiler.prototype.unescape = function() {
-    this.escapeMode--;
-    return this;
-};
-
-Transpiler.prototype.indent = function(indentOnly) {
-    if(!indentOnly)
-        this.lines.push(this.line);
-    this.indents += '\t';
-    this.line = this.indents;
-    return this;
-};
-
-Transpiler.prototype.dedent = function() {
-    if(this.line!==this.indents)
-        this.lines.push(this.line);
-    if(this.indents.length==0) {
-        throw new Error("Illegal dedent!");
     }
-    this.indents = this.indents.slice(1);
-    this.line = this.indents;
-    return this;
-};
+
+    declare(decl) {
+        this.declared.add(decl);
+    }
+
+    appendAllDeclared() {
+        var list = [];
+        var set = new Set();
+        this.declared.forEach(function(decl) {
+            if(decl instanceof CategoryDeclaration)
+                decl.ensureDeclarationOrder(this.context, list, set);
+            else
+                list.push(decl);
+        }, this);
+        list.forEach(function(decl) {
+            this.appendOneDeclared(decl);
+        }, this);
+    }
+
+    appendOneDeclared(decl) {
+        var transpiler = this.newLocalTranspiler();
+        decl.transpile(transpiler);
+        transpiler.flush();
+        if(this.line!==this.indents) {
+            this.lines.push(this.line);
+            this.line = this.indents;
+        }
+        this.lines.push("");
+    }
+
+    require(fn) {
+        this.required.add(fn);
+    }
+
+    appendAllRequired() {
+        this.required.forEach(function(fn) {
+            this.appendOneRequired(fn);
+        }, this);
+    }
+
+    register(f) {
+        this.required.add(f);
+        this.registered.add(f);
+    }
+
+    appendAllRegistered() {
+        this.registered.forEach(function(f) {
+            this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
+        }, this);
+    }
+
+    getTranspiled(object) {
+        if(object===null)
+            return "null";
+        else if(object.toTranspiled)
+            return object.toTranspiled();
+        else
+            return object.toString();
+    }
+
+    appendOneRequired(fn) {
+        if(coreNodeClasses.has(fn.name))
+            return;
+        this.lines.push(fn.toString());
+        Object.keys(fn).forEach(function (key) {
+            this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
+        }, this);
+        if(fn.prototype.__proto__) {
+            var proto = fn.prototype.__proto__;
+            if(proto.constructor.name!=="Object")
+                this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
+        }
+        Object.keys(fn.prototype).forEach(function (key) {
+            var value = key==="constructor" ? fn.name : fn.prototype[key].toString();
+            if(value.indexOf("native code")<0)
+                this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
+            else // for now assume this is a redirect on the same type
+                this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
+        }, this);
+        Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
+            var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
+            if(desc.get || desc.set) {
+                this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
+                if(desc.get) {
+                    this.lines.push("    get: " + desc.get.toString() + (desc.set ? "," : ""));
+                }
+                if(desc.set) {
+                    this.lines.push("    set: " + desc.set.toString());
+                }
+                this.lines.push("});")
+            }
+        }, this);
+    }
+
+    append(text) {
+        this.line += text;
+        return this;
+    }
+
+    trimLast(count) {
+        this.line = this.line.substring(0, this.line.length - count);
+        return this;
+    }
+
+    newLine() {
+        this.lines.push(this.line);
+        this.line = this.indents;
+        return this;
+    }
+
+    escape() {
+        this.escapeMode++;
+        return this;
+    }
+
+    unescape() {
+        this.escapeMode--;
+        return this;
+    }
+
+    indent(indentOnly) {
+        if(!indentOnly)
+            this.lines.push(this.line);
+        this.indents += '\t';
+        this.line = this.indents;
+        return this;
+    }
+
+    dedent() {
+        if(this.line!==this.indents)
+            this.lines.push(this.line);
+        if(this.indents.length==0) {
+            throw new Error("Illegal dedent!");
+        }
+        this.indents = this.indents.slice(1);
+        this.line = this.indents;
+        return this;
+    }
+
+    static transpile(context, thing) {
+        try {
+            patchObject();
+            var transpiler = newTranspiler(context);
+            thing.declare(transpiler);
+            return transpiler.toString();
+        } finally {
+            context.terminated();
+            unpatchObject();
+        }
+    }
+
+    printTestName(testName) {
+        this.append("print('").append(testName).append(' test ');
+        return this;
+    }
+}
 
 function ObjectUtils() {
 
@@ -416,23 +421,6 @@ function newTranspiler(context) {
     transpiler.lines.push("intrinsic = {}");
     return transpiler;
 }
-
-Transpiler.transpile = function(context, thing) {
-    try {
-        patchObject();
-        var transpiler = newTranspiler(context);
-        thing.declare(transpiler);
-        return transpiler.toString();
-    } finally {
-        context.terminated();
-        unpatchObject();
-    }
-};
-
-Transpiler.prototype.printTestName = function(testName) {
-    this.append("print('").append(testName).append(' test ');
-    return this;
-};
 
 
 exports.Transpiler = Transpiler;

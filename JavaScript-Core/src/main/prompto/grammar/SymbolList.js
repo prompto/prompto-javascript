@@ -1,40 +1,40 @@
 var ObjectList = require("../utils/ObjectList").ObjectList;
 var MissingType = require("../type/MissingType").MissingType;
 
-function SymbolList(symbol) {
-    ObjectList.call(this, MissingType.instance);
-	if(symbol)
-        this.add(symbol);
-	return this;
+class SymbolList extends ObjectList {
+    constructor(symbol) {
+        super(MissingType.instance);
+        if(symbol)
+            this.add(symbol);
+        return this;
+    }
+
+    getIterator(context) {
+        return new SymbolListIterator(this, context);
+    }
+
+    toString() {
+        var names = this.map(function(s) { return s.name;});
+        return "[" + names.join(", ") + "]";
+    }
 }
 
-SymbolList.prototype = Object.create(ObjectList.prototype);
-SymbolList.prototype.constructor = SymbolList;
+class SymbolListIterator {
+    constructor(symbols, context) {
+        this.symbols = symbols;
+        this.context = context;
+        this.idx = 0;
+        return this;
+    }
 
-SymbolList.prototype.getIterator = function(context) {
-    return new SymbolListIterator(this, context);
-};
+    hasNext() {
+        return this.idx<this.symbols.length;
+    }
 
-
-SymbolList.prototype.toString = function() {
-    var names = this.map(function(s) { return s.name;});
-    return "[" + names.join(", ") + "]";
-};
-
-function SymbolListIterator(symbols, context) {
-    this.symbols = symbols;
-    this.context = context;
-    this.idx = 0;
-    return this;
+    next() {
+        return this.symbols[this.idx++].interpret(this.context);
+    }
 }
-
-SymbolListIterator.prototype.hasNext = function() {
-    return this.idx<this.symbols.length;
-};
-
-SymbolListIterator.prototype.next = function() {
-    return this.symbols[this.idx++].interpret(this.context);
-};
 
 
 exports.SymbolList = SymbolList;

@@ -1,15 +1,17 @@
-function MatchOp(name) {
-    this.name = name;
-    return this;
+class MatchOp {
+    constructor(name) {
+        this.name = name;
+        return this;
+    }
+
+    toString() {
+        return this.name;
+    }
+
+    toTranspiled() {
+        return "new MatchOp('" + this.name + "')";
+    }
 }
-
-MatchOp.prototype.toString = function() {
-    return this.name;
-};
-
-MatchOp.prototype.toTranspiled = function() {
-    return "new MatchOp('" + this.name + "')";
-};
 
 MatchOp.EQUALS = new MatchOp("EQUALS");
 MatchOp.ROUGHLY = new MatchOp("ROUGHLY");

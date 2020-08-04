@@ -1,38 +1,33 @@
 var Value = require("./Value").Value;
 
-function ClosureValue(context, type) {
-    Value.call(this, type);
-    this.context = context;
-    return this;
-}
-
-
-ClosureValue.prototype = Object.create(Value.prototype);
-ClosureValue.prototype.constructor = ClosureValue;
-
-
-ClosureValue.prototype.interpret = function(context) {
-    var parentMost = this.context.getParentMostContext();
-    var savedParent = parentMost.getParentContext();
-    if(!context.isChildOf(parentMost))
-        parentMost.setParentContext(context);
-    try {
-        var local = this.context.newChildContext();
-        return this.doInterpret(local);
-    } finally {
-        parentMost.setParentContext(savedParent);
+class ClosureValue extends Value {
+ 
+    constructor(context, type) {
+        super(type);
+        this.context = context;
     }
-};
 
+    interpret(context) {
+        var parentMost = this.context.getParentMostContext();
+        var savedParent = parentMost.getParentContext();
+        if(!context.isChildOf(parentMost))
+            parentMost.setParentContext(context);
+        try {
+            var local = this.context.newChildContext();
+            return this.doInterpret(local);
+        } finally {
+            parentMost.setParentContext(savedParent);
+        }
+    }
 
-ClosureValue.prototype.doInterpret = function(local) {
-    return this.type.method.interpret(local);
-};
+    doInterpret(local) {
+        return this.type.method.interpret(local);
+    }
 
-
-ClosureValue.prototype.convertToJavaScript = function() {
-    return this;
-};
+    convertToJavaScript() {
+        return this;
+    }
+}
 
 
 exports.ClosureValue = ClosureValue;

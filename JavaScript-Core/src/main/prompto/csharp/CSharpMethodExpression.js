@@ -1,28 +1,26 @@
 var CSharpSelectorExpression = require("./CSharpSelectorExpression").CSharpSelectorExpression;
 var CSharpExpressionList = require("./CSharpExpressionList").CSharpExpressionList;
 
-function CSharpMethodExpression(name, args) {
-    CSharpSelectorExpression.call(this);
-    this.name = name;
-    this.args = args || new CSharpExpressionList();
-    return this;
+class CSharpMethodExpression extends CSharpSelectorExpression {
+    constructor(name, args) {
+        super();
+        this.name = name;
+        this.args = args || new CSharpExpressionList();
+        return this;
+    }
+
+    toString() {
+        return this.parent.toString() + "." + this.name + "(" + this.args.toString() + ")";
+    }
+
+    toDialect(writer) {
+        this.parent.toDialect(writer);
+        writer.append('.');
+        writer.append(this.name);
+        writer.append('(');
+        this.args.toDialect(writer);
+        writer.append(')');
+    }
 }
-
-CSharpMethodExpression.prototype = Object.create(CSharpSelectorExpression.prototype);
-CSharpMethodExpression.prototype.constructor = CSharpMethodExpression;
-
-
-CSharpMethodExpression.prototype.toString = function() {
-    return this.parent.toString() + "." + this.name + "(" + this.args.toString() + ")";
-};
-
-CSharpMethodExpression.prototype.toDialect = function(writer) {
-    this.parent.toDialect(writer);
-    writer.append('.');
-    writer.append(this.name);
-    writer.append('(');
-    this.args.toDialect(writer);
-    writer.append(')');
-};
 
 exports.CSharpMethodExpression = CSharpMethodExpression;

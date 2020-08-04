@@ -1,12 +1,11 @@
 var JavaLiteral = require("./JavaLiteral").JavaLiteral;
 
-function JavaIntegerLiteral(text) {
-	JavaLiteral.call(this, text);
-    return this;
+class JavaIntegerLiteral extends JavaLiteral {
+    constructor(text) {
+        super(text);
+        return this;
+    }
 }
-
-JavaIntegerLiteral.prototype = Object.create(JavaLiteral.prototype);
-JavaIntegerLiteral.prototype.constructor = JavaIntegerLiteral;
 
 exports.JavaIntegerLiteral = JavaIntegerLiteral;
 

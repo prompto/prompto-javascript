@@ -1,31 +1,29 @@
 var Value = require("./Value").Value;
 var CodeType = require("../type/CodeType").CodeType;
 
-function CodeValue(expression) {
-    Value.call(this, CodeType.instance);
-    this.expression = expression;
-    return this;
+class CodeValue extends Value {
+    constructor(expression) {
+        super(CodeType.instance);
+        this.expression = expression;
+        return this;
+    }
+
+    check(context) {
+        return this.expression.checkCode (context);
+    }
+
+    interpret(context) {
+        return this.expression.interpretCode (context);
+    }
+
+    declareCode(transpiler) {
+        this.expression.declareCode (transpiler);
+    }
+
+    transpileCode(transpiler) {
+        this.expression.transpileCode (transpiler);
+    }
 }
-
-CodeValue.prototype = Object.create(Value.prototype);
-CodeValue.prototype.constructor = CodeValue;
-
-CodeValue.prototype.check = function(context) {
-    return this.expression.checkCode (context);
-};
-
-CodeValue.prototype.interpret = function(context) {
-    return this.expression.interpretCode (context);
-};
-
-CodeValue.prototype.declareCode = function(transpiler) {
-    this.expression.declareCode (transpiler);
-};
-
-
-CodeValue.prototype.transpileCode = function(transpiler) {
-    this.expression.transpileCode (transpiler);
-};
 
 
 exports.CodeValue = CodeValue; 

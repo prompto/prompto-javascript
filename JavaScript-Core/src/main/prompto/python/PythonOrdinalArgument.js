@@ -1,10 +1,12 @@
-function PythonOrdinalArgument(expression) {
-    this.expression = expression;
-    return this;
-}
+class PythonOrdinalArgument {
+    constructor(expression) {
+        this.expression = expression;
+        return this;
+    }
 
-PythonOrdinalArgument.prototype.toDialect = function(writer) {
-    this.expression.toDialect(writer);
-};
+    toDialect(writer) {
+        this.expression.toDialect(writer);
+    }
+}
 
 exports.PythonOrdinalArgument = PythonOrdinalArgument;

@@ -7,27 +7,25 @@ function parse(text) {
 	return eval(text);
 }
 
-function UUIDLiteral(text) {
-	Literal.call(this, text, new UUIDValue(parse(text)));
-	return this;
+class UUIDLiteral extends Literal {
+    constructor(text) {
+        super(text, new UUIDValue(parse(text)));
+        return this;
+    }
+
+    check(context) {
+        return UUIDType.instance;
+    }
+
+    declare(transpiler) {
+        var UUID = require("../intrinsic/UUID").UUID;
+        transpiler.require(UUID);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("UUID.fromString(").append(this.text).append(")");
+    }
 }
-
-UUIDLiteral.prototype = Object.create(Literal.prototype);
-UUIDLiteral.prototype.constructor = UUIDLiteral;
-
-
-UUIDLiteral.prototype.check = function(context) {
-	return UUIDType.instance;
-};
-
-UUIDLiteral.prototype.declare = function(transpiler) {
-    var UUID = require("../intrinsic/UUID").UUID;
-    transpiler.require(UUID);
-};
-
-UUIDLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("UUID.fromString(").append(this.text).append(")");
-};
 
 
 exports.UUIDLiteral = UUIDLiteral;

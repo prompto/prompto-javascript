@@ -5,25 +5,27 @@ function unescape(text) {
     return eval(text);
 }
 
-function DocTextKey(text) {
-    this.text = text;
-    return this;
+class DocTextKey {
+  
+    constructor(text) {
+        this.text = text;
+    }
+
+    toString() {
+        return this.text;
+    }
+
+    stringValue() {
+        return unescape(this.text);
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
+
+    interpret(context) {
+        return new TextValue(this.stringValue());
+    }
 }
-
-DocTextKey.prototype.toString = function() {
-    return this.text;
-};
-
-DocTextKey.prototype.stringValue = function() {
-    return unescape(this.text);
-};
-
-DocTextKey.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
-
-DocTextKey.prototype.interpret = function(context) {
-    return new TextValue(this.stringValue());
-};
 
 exports.DocTextKey = DocTextKey;

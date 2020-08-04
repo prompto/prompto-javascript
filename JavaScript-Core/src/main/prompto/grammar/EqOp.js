@@ -1,18 +1,20 @@
-function EqOp(name) {
-    this.name = name
-    return this;
+class EqOp {
+    constructor(name) {
+        this.name = name
+        return this;
+    }
+
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
+
+    toString(dialect) {
+        if(dialect)
+            return dialect.toString(this);
+        else
+            return this.name;
+    }
 }
-
-EqOp.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
-
-EqOp.prototype.toString = function(dialect) {
-    if(dialect)
-        return dialect.toString(this);
-    else
-        return this.name;
-};
 
 EqOp.IS = new EqOp("IS");
 EqOp.IS.toDialect = function(writer) {

@@ -12,27 +12,23 @@ function unescape(text) {
 	return eval(text);
 }
 
-function TextLiteral(text) {
-	Literal.call(this, text, new TextValue(unescape(text)));
-	return this;
+class TextLiteral extends Literal {
+    constructor(text) {
+        super(text, new TextValue(unescape(text)));
+        return this;
+    }
+
+    check(context) {
+        return TextType.instance;
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
 }
-
-TextLiteral.prototype = Object.create(Literal.prototype);
-TextLiteral.prototype.constructor = TextLiteral;
-
-
-TextLiteral.prototype.check = function(context) {
-	return TextType.instance;
-};
-
-
-TextLiteral.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-
-TextLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
 
 exports.TextLiteral = TextLiteral;

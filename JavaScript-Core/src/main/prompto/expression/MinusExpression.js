@@ -1,44 +1,41 @@
 var Expression = require("./Expression").Expression;
 
-function MinusExpression(expression) {
-    Expression.call(this);
-	this.expression = expression;
-	return this;
+class MinusExpression extends Expression {
+    constructor(expression) {
+        super();
+        this.expression = expression;
+        return this;
+    }
+
+    toString() {
+        return "-" + this.expression.toString();
+    }
+
+    toDialect(writer) {
+        writer.append("-");
+        this.expression.toDialect(writer);
+    }
+
+    check(context) {
+        var type = this.expression.check(context);
+        return type.checkMinus(context);
+    }
+
+    interpret(context) {
+        var val = this.expression.interpret(context);
+        return val.Minus(context);
+    }
+
+    declare(transpiler) {
+        this.expression.declare(transpiler);
+        var type = this.expression.check(transpiler.context);
+        return type.declareMinus(transpiler, this.expression);
+    }
+
+    transpile(transpiler) {
+        var type = this.expression.check(transpiler.context);
+        return type.transpileMinus(transpiler, this.expression);
+    }
 }
-
-MinusExpression.prototype = Object.create(Expression.prototype);
-MinusExpression.prototype.constructor = MinusExpression;
-
-
-MinusExpression.prototype.toString = function() {
-	return "-" + this.expression.toString();
-};
-
-MinusExpression.prototype.toDialect = function(writer) {
-    writer.append("-");
-    this.expression.toDialect(writer);
-};
-
-MinusExpression.prototype.check = function(context) {
-	var type = this.expression.check(context);
-	return type.checkMinus(context);
-};
-
-MinusExpression.prototype.interpret = function(context) {
-	var val = this.expression.interpret(context);
-	return val.Minus(context);
-};
-
-
-MinusExpression.prototype.declare = function(transpiler) {
-    this.expression.declare(transpiler);
-    var type = this.expression.check(transpiler.context);
-    return type.declareMinus(transpiler, this.expression);
-};
-
-MinusExpression.prototype.transpile = function(transpiler) {
-    var type = this.expression.check(transpiler.context);
-    return type.transpileMinus(transpiler, this.expression);
-};
 
 exports.MinusExpression = MinusExpression;

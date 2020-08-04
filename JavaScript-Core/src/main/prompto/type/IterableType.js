@@ -1,19 +1,17 @@
 var NativeType = require("./NativeType").NativeType;
 
-function IterableType(id, itemType) {
-	NativeType.call(this, id);
-	this.itemType = itemType;
-	return this;
+class IterableType extends NativeType {
+    constructor(id, itemType) {
+        super(id);
+        this.itemType = itemType;
+        return this;
+    }
+
+    isMoreSpecificThan(context, other) {
+        return (other instanceof IterableType &&
+            this.itemType.isMoreSpecificThan(context, other.itemType));
+    }
 }
-
-IterableType.prototype = Object.create(NativeType.prototype);
-IterableType.prototype.constructor = IterableType;
-
-
-IterableType.prototype.isMoreSpecificThan = function(context, other) {
-    return (other instanceof IterableType &&
-        this.itemType.isMoreSpecificThan(context, other.itemType));
-};
 
 exports.IterableType = IterableType;
 

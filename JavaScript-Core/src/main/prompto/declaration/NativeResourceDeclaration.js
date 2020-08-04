@@ -3,40 +3,37 @@ var ResourceType = require("../type/ResourceType").ResourceType;
 var NativeResource = require("../value/NativeResource").NativeResource;
 var ResourceContext = require("../runtime/Context").ResourceContext;
 
-function NativeResourceDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
-	NativeCategoryDeclaration.call(this, id, attributes, categoryBindings, attributeBindings, methods);
-	return this;
+class NativeResourceDeclaration extends NativeCategoryDeclaration {
+    constructor(id, attributes, categoryBindings, attributeBindings, methods) {
+        super(id, attributes, categoryBindings, attributeBindings, methods);
+        return this;
+    }
+
+    getType(context) {
+        return new ResourceType(this.id);
+    }
+
+    newInstance(context) {
+        return new NativeResource(context, this);
+    }
+
+    checkConstructorContext(context) {
+        if(!(context instanceof ResourceContext))
+            context.problemListener.reportNotAResourceContext(this);
+    }
+
+    categoryTypeToEDialect(writer) {
+        writer.append("native resource");
+    }
+
+    categoryTypeToODialect(writer) {
+        writer.append("native resource");
+    }
+
+    categoryTypeToMDialect(writer) {
+        writer.append("native resource");
+    }
 }
-
-NativeResourceDeclaration.prototype = Object.create(NativeCategoryDeclaration.prototype);
-NativeResourceDeclaration.prototype.constructor = NativeResourceDeclaration;
-
-
-NativeResourceDeclaration.prototype.getType = function(context) {
-	return new ResourceType(this.id);
-};
-
-
-NativeResourceDeclaration.prototype.newInstance = function(context) {
-	return new NativeResource(context, this);
-};
-
-NativeResourceDeclaration.prototype.checkConstructorContext = function(context) {
-	if(!(context instanceof ResourceContext))
-        context.problemListener.reportNotAResourceContext(this);
-};
-
-NativeResourceDeclaration.prototype.categoryTypeToEDialect = function(writer) {
-    writer.append("native resource");
-};
-
-NativeResourceDeclaration.prototype.categoryTypeToODialect = function(writer) {
-    writer.append("native resource");
-};
-
-NativeResourceDeclaration.prototype.categoryTypeToMDialect = function(writer) {
-    writer.append("native resource");
-};
 
 
 

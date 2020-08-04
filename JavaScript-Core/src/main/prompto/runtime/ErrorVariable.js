@@ -6,20 +6,19 @@ exports.resolve = function() {
     EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 };
 
-function ErrorVariable(id) {
-	Variable.call(this, id, new EnumeratedCategoryType(new Identifier("Error")));
-	return this;
+class ErrorVariable extends Variable {
+    constructor(id) {
+        super(id, new EnumeratedCategoryType(new Identifier("Error")));
+        return this;
+    }
+
+    toString() {
+        return this.name;
+    }
+
+    getType(context) {
+        return new EnumeratedCategoryType(new Identifier("Error"));
+    }
 }
-
-ErrorVariable.prototype = Object.create(Variable.prototype);
-ErrorVariable.prototype.constructor = ErrorVariable;
-
-ErrorVariable.prototype.toString = function() {
-	return this.name;
-};
-
-ErrorVariable.prototype.getType = function(context) {
-	return new EnumeratedCategoryType(new Identifier("Error"));
-};
 
 exports.ErrorVariable = ErrorVariable;

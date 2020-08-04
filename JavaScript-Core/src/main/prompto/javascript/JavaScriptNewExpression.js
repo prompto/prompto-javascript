@@ -1,30 +1,29 @@
 var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
 
-function JavaScriptNewExpression(method) {
-    this.method = method;
-    return this;
+class JavaScriptNewExpression extends JavaScriptExpression {
+
+    constructor(method) {
+        super();
+        this.method = method;
+    }
+
+    toString() {
+        return "new " + this.method.toString();
+    }
+
+    interpret(context, module) {
+        return this.method.interpretNew(context, module);
+    }
+
+    transpile(transpiler) {
+        transpiler.append('new ');
+        this.method.transpile(transpiler);
+    }
+
+    toDialect(writer) {
+        writer.append('new ');
+        this.method.toDialect(writer);
+    }
 }
-
-JavaScriptNewExpression.prototype = Object.create(JavaScriptExpression.prototype);
-JavaScriptNewExpression.prototype.constructor = JavaScriptNewExpression;
-
-JavaScriptNewExpression.prototype.toString = function() {
-    return "new " + this.method.toString();
-};
-
-JavaScriptNewExpression.prototype.interpret = function(context, module) {
-    return this.method.interpretNew(context, module);
-};
-
-JavaScriptNewExpression.prototype.transpile = function(transpiler) {
-    transpiler.append('new ');
-    this.method.transpile(transpiler);
-};
-
-
-JavaScriptNewExpression.prototype.toDialect = function(writer) {
-    writer.append('new ');
-    this.method.toDialect(writer);
-};
 
 exports.JavaScriptNewExpression = JavaScriptNewExpression;

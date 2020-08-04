@@ -1,31 +1,30 @@
 var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
 var ListType = require("./ListType").ListType;
 
-function ToListMethodDeclaration(itemType) {
-    BuiltInMethodDeclaration.call(this, "toList");
-    this.itemType = itemType;
-    return this;
+class ToListMethodDeclaration extends BuiltInMethodDeclaration {
+    constructor(itemType) {
+        super("toList");
+        this.itemType = itemType;
+        return this;
+    }
+
+    interpret(context) {
+        var value = this.getValue(context);
+        return value.toListValue(context);
+    }
+
+    check(context) {
+        return new ListType(this.itemType);
+    }
+
+    declareCall(transpiler) {
+        var List = require("../intrinsic/List").List;
+        transpiler.require(List);
+    }
+
+    transpileCall(transpiler, assignments) {
+        transpiler.append("toList()");
+    }
 }
-
-ToListMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
-ToListMethodDeclaration.prototype.constructor = ToListMethodDeclaration;
-
-ToListMethodDeclaration.prototype.interpret = function(context) {
-    var value = this.getValue(context);
-    return value.toListValue(context);
-};
-
-ToListMethodDeclaration.prototype.check = function(context) {
-    return new ListType(this.itemType);
-};
-
-ToListMethodDeclaration.prototype.declareCall = function(transpiler) {
-    var List = require("../intrinsic/List").List;
-    transpiler.require(List);
-};
-
-ToListMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
-    transpiler.append("toList()");
-};
 
 exports.ToListMethodDeclaration = ToListMethodDeclaration;

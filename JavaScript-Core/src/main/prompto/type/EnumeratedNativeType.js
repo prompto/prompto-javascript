@@ -1,159 +1,107 @@
-var BuiltInMethodDeclaration = null;
-var EnumeratedNativeDeclaration = null;
 var BaseType = require("./BaseType").BaseType;
 var ListType = require("./ListType").ListType;
 var TextType = require("./TextType").TextType;
 var SyntaxError = require("../error/SyntaxError").SyntaxError;
 var List = require("../intrinsic/List").List;
-var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-var Identifier = require("../grammar/Identifier").Identifier;
 
-exports.resolve = function() {
-	EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-	resolveBuiltInMethodDeclaration();
-};
+class EnumeratedNativeType extends BaseType {
 
-function EnumeratedNativeType(name, derivedFrom) {
-	BaseType.call(this, name);
-	this.derivedFrom = derivedFrom;
-	return this;
-}
+    constructor(name, derivedFrom) {
+        super(name);
+        this.derivedFrom = derivedFrom;
+    }
 
-EnumeratedNativeType.prototype = Object.create(BaseType.prototype);
-EnumeratedNativeType.prototype.constructor = EnumeratedNativeType;
+    checkExists(context) {
+        // TODO
+    }
 
+    checkMember(context, section, name) {
+        if ("value"==name) {
+            return this.derivedFrom;
+        } else if ("name"==name) {
+            return TextType.instance;
+        } else {
+            return BaseType.prototype.checkMember.call(this, context, section, name);
+        }
+    }
 
-EnumeratedNativeType.prototype.checkExists = function(context) {
-	// TODO
-};
+    checkStaticMember(context, section, name) {
+        if ("symbols"==name) {
+            return new ListType(this);
+        } else {
+            return BaseType.prototype.checkStaticMember.call(this, context, section, name);
+        }
+    }
 
-
-
-EnumeratedNativeType.prototype.checkMember = function(context, section, name) {
-	if ("value"==name) {
-		return this.derivedFrom;
-	} else if ("name"==name) {
-		return TextType.instance;
-	} else {
-		return BaseType.prototype.checkMember.call(this, context, section, name);
-	}
-};
-
-
-EnumeratedNativeType.prototype.checkStaticMember = function(context, section, name) {
-	if ("symbols"==name) {
-		return new ListType(this);
-	} else {
-		return BaseType.prototype.checkStaticMember.call(this, context, section, name);
-	}
-};
-
-
-EnumeratedNativeType.prototype.declare = function(transpiler) {
-    var decl = transpiler.context.getRegisteredDeclaration(this.name);
-    transpiler.declare(decl);
-    transpiler.require(List);
-};
-
-
-EnumeratedNativeType.prototype.transpile = function(transpiler) {
-    transpiler.append(this.name);
-};
-
-EnumeratedNativeType.prototype.declareMember = function(transpiler, section, name) {
-    if("value"==name || "name"==name) {
+    declare(transpiler) {
         var decl = transpiler.context.getRegisteredDeclaration(this.name);
         transpiler.declare(decl);
-    } else
-        BaseType.prototype.declareMember.call(this, transpiler, section, name);
-};
-
-EnumeratedNativeType.prototype.transpileMember = function(transpiler, name) {
-    if ("value"==name || "name"==name) {
-        transpiler.append(name);
-    } else {
-        return BaseType.prototype.transpileMember.call(this, transpiler, name);
+        transpiler.require(List);
     }
-};
 
+    transpile(transpiler) {
+        transpiler.append(this.name);
+    }
 
-EnumeratedNativeType.prototype.declareStaticMember = function(transpiler, section, name) {
-	if("symbols"==name) {
-		var decl = transpiler.context.getRegisteredDeclaration(this.name);
-		transpiler.declare(decl);
-	} else
-		BaseType.prototype.declareStaticMember.call(this, transpiler, section, name);
-};
+    declareMember(transpiler, section, name) {
+        if("value"==name || "name"==name) {
+            var decl = transpiler.context.getRegisteredDeclaration(this.name);
+            transpiler.declare(decl);
+        } else
+            super.declareMember(transpiler, section, name);
+    }
 
-EnumeratedNativeType.prototype.transpileStaticMember = function(transpiler, name) {
-	if ("symbols"==name) {
-		transpiler.append(name);
-	} else {
-		return BaseType.prototype.transpileStaticMember.call(this, transpiler, name);
-	}
-};
+    transpileMember(transpiler, name) {
+        if ("value"==name || "name"==name) {
+            transpiler.append(name);
+        } else {
+            return BaseType.prototype.transpileMember.call(this, transpiler, name);
+        }
+    }
 
+    declareStaticMember(transpiler, section, name) {
+        if("symbols"==name) {
+            var decl = transpiler.context.getRegisteredDeclaration(this.name);
+            transpiler.declare(decl);
+        } else
+            super.declareStaticMember(transpiler, section, name);
+    }
 
-EnumeratedNativeType.prototype.getStaticMemberValue = function(context, name) {
-	var decl = context.getRegisteredDeclaration(this.name);
-	if(!decl || !decl.symbols) {
-		throw new SyntaxError(name + " is not an enumerated type!");
-	}
-	if ("symbols"==name) {
-		return decl.symbols;
-	} else {
-		throw new SyntaxError("Unknown member:" + name);
-	}
-};
+    transpileStaticMember(transpiler, name) {
+        if ("symbols"==name) {
+            transpiler.append(name);
+        } else {
+            return BaseType.prototype.transpileStaticMember.call(this, transpiler, name);
+        }
+    }
 
+    getStaticMemberValue(context, name) {
+        var decl = context.getRegisteredDeclaration(this.name);
+        if(!decl || !decl.symbols) {
+            throw new SyntaxError(name + " is not an enumerated type!");
+        }
+        if ("symbols"==name) {
+            return decl.symbols;
+        } else {
+            throw new SyntaxError("Unknown member:" + name);
+        }
+    }
 
-EnumeratedNativeType.prototype.isAssignableFrom = function(context, other) {
-	return this.id.name === other.id.name;
-};
+    isAssignableFrom(context, other) {
+        return this.id.name === other.id.name;
+    }
 
-
-EnumeratedNativeType.prototype.getStaticMemberMethods = function(context, name) {
-	switch (name) {
-		case "symbolOf":
-			return [new SymbolOfMethodDeclaration(this)];
-		default:
-			return BaseType.prototype.getStaticMemberMethods.call(this, context, name);
-	}
-};
-
-
-function SymbolOfMethodDeclaration(enumType) {
-	BuiltInMethodDeclaration.call(this, "symbolOf", new CategoryParameter(TextType.instance, new Identifier("name")));
-	this.enumType = enumType;
-	return this;
+    getStaticMemberMethods(context, name) {
+        switch (name) {
+            case "symbolOf":
+                var SymbolOfMethodDeclaration = require("../builtins/EnumeratedNativeTypeBuiltins").SymbolOfMethodDeclaration;
+                return [new SymbolOfMethodDeclaration(this)];
+            default:
+                return BaseType.prototype.getStaticMemberMethods.call(this, context, name);
+        }
+    }
 }
 
-function resolveBuiltInMethodDeclaration() {
-
-	BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-
-	SymbolOfMethodDeclaration.prototype = Object.create(BuiltInMethodDeclaration.prototype);
-	SymbolOfMethodDeclaration.prototype.constructor = SymbolOfMethodDeclaration;
-
-	SymbolOfMethodDeclaration.prototype.check = function (context) {
-		return this.enumType;
-	};
-
-	SymbolOfMethodDeclaration.prototype.interpret = function (context) {
-		var decl = context.getRegistered(this.enumType.name);
-		if(!(decl instanceof EnumeratedNativeDeclaration))
-			throw new SyntaxError(this.enumType.typeName + " is not an enumerated type!");
-		var name = context.getValue(new Identifier("name")).getStorableData();
-		return decl.getSymbol(name);
-	};
-
-	SymbolOfMethodDeclaration.prototype.transpileCall = function(transpiler, assignments) {
-		transpiler.append("symbolOf(");
-		assignments[0].transpile(transpiler);
-		transpiler.append(")");
-	};
-
-}
 
 
 exports.EnumeratedNativeType = EnumeratedNativeType;

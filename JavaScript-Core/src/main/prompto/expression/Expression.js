@@ -1,69 +1,58 @@
 var Section = require("../parser/Section").Section;
 
-function Expression() {
-    Section.call(this);
-    return this;
+class Expression extends Section {
+ 
+    constructor() {
+        super();
+    }
+
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
+
+    parentToDialect(writer) {
+        this.toDialect(writer);
+    }
+
+    check(context) {
+        throw new Error("check not implemented by " + this.constructor.name);
+    }
+
+    checkReference(context) {
+        return this.check(context);
+    }
+
+    checkAttribute(context) {
+        context.problemListener.reportMissingAttribute(this, this.toString());
+    }
+
+    interpret(context) {
+        throw new Error("interpret not implemented by " + this.constructor.name);
+    }
+
+    interpretReference(context) {
+       return this.interpret(context);
+    }
+
+    declare(transpiler) {
+        throw new Error("declare not implemented by " + this.constructor.name);
+    }
+
+    transpile(transpiler) {
+        throw new Error("transpile not implemented by " + this.constructor.name);
+    }
+
+    transpileReference(transpiler) {
+        this.transpile(transpiler);
+    }
+
+    declareParent(transpiler) {
+        this.declare(transpiler);
+    }
+
+    transpileParent(transpiler) {
+        this.transpile(transpiler);
+    }
 }
-
-Expression.prototype = Object.create(Section.prototype);
-Expression.prototype.constructor = Expression;
-
-
-Expression.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
-
-
-Expression.prototype.parentToDialect = function(writer) {
-    this.toDialect(writer);
-};
-
-
-Expression.prototype.check = function(context) {
-    throw new Error("check not implemented by " + this.constructor.name);
-};
-
-Expression.prototype.checkReference = function(context) {
-    return this.check(context);
-};
-
-Expression.prototype.checkAttribute = function(context) {
-    context.problemListener.reportMissingAttribute(this, this.toString());
-};
-
-
-Expression.prototype.interpret = function(context) {
-    throw new Error("interpret not implemented by " + this.constructor.name);
-};
-
-
-Expression.prototype.interpretReference = function(context) {
-   return this.interpret(context);
-};
-
-
-Expression.prototype.declare = function(transpiler) {
-    throw new Error("declare not implemented by " + this.constructor.name);
-};
-
-
-Expression.prototype.transpile = function(transpiler) {
-    throw new Error("transpile not implemented by " + this.constructor.name);
-};
-
-
-Expression.prototype.transpileReference = function(transpiler) {
-    this.transpile(transpiler);
-};
-
-
-Expression.prototype.declareParent = function(transpiler) {
-    this.declare(transpiler);
-};
-
-
-Expression.prototype.transpileParent = function(transpiler) {
-    this.transpile(transpiler);
-};
 
 exports.Expression = Expression;

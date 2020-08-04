@@ -9,119 +9,114 @@ exports.resolve = function() {
 
 var id = 0;
 
-function Value (type) {
-    this.id = ++id;
-    this.type = type;
-    this.mutable = false;
-    return this;
+class Value {
+   
+    constructor(type) {
+        this.id = ++id;
+        this.type = type;
+        this.mutable = false;
+    }
+
+    collectStorables(list) {
+        // do nothing
+    }
+
+    convertToJavaScript() {
+        throw new SyntaxError("convertToJavaScript not implemented by " + this.constructor.name);
+    }
+
+    And(context, value) {
+        throw new SyntaxError("Logical and not supported by " + this.constructor.name);
+    }
+
+    Or(context, value) {
+        throw new SyntaxError("Logical or not supported by " + this.constructor.name);
+    }
+
+    Not(context) {
+        throw new SyntaxError("Logical negation not supported by " + this.constructor.name);
+    }
+
+    Add(context, value) {
+        throw new SyntaxError("Add not supported by " + this.constructor.name);
+    }
+
+    transpile(transpiler) {
+        throw new Error("Transpile not implemented by " + this.constructor.name);
+    }
+
+    Subtract(context, value) {
+        throw new SyntaxError("Subtract not supported by " + this.constructor.name);
+    }
+
+    Multiply(context, value) {
+        throw new SyntaxError("Multiply not supported by " + this.constructor.name);
+    }
+
+    Divide(context, value) {
+        throw new SyntaxError("Divide not supported by " + this.constructor.name);
+    }
+
+    IntDivide(context, value) {
+        throw new SyntaxError("Integer divide not supported by " + this.constructor.name);
+    }
+
+    Modulo(context, value) {
+        throw new SyntaxError("Modulo not supported by " + this.constructor.name);
+    }
+
+    Minus(context) {
+        throw new SyntaxError("Minus not supported by " + this.constructor.name);
+    }
+
+    compareToValue(context, value) {
+        throw new SyntaxError("Compare not supported by " + this.constructor.name);
+    }
+
+    getMemberValue(context, name) {
+        if("text" == name)
+            return new TextValue(this.toString());
+        else
+            throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
+    }
+
+    ConvertTo(type) {
+        return this;
+    }
+
+    Roughly(context, value) {
+        return this.equals(value);
+    }
+
+    Contains(context, value) {
+        throw new SyntaxError("Contains not supported by " + this.constructor.name);
+    }
+
+    toDocumentValue(context) {
+        return this;
+    }
 }
 
-Value.prototype.collectStorables = function(list) {
-    // do nothing
-};
-
-Value.prototype.convertToJavaScript = function() {
-    throw new SyntaxError("convertToJavaScript not implemented by " + this.constructor.name);
-};
-
-Value.prototype.And = function(context, value) {
-    throw new SyntaxError("Logical and not supported by " + this.constructor.name);
-};
-
-Value.prototype.Or = function(context, value) {
-    throw new SyntaxError("Logical or not supported by " + this.constructor.name);
-};
-
-Value.prototype.Not = function(context) {
-    throw new SyntaxError("Logical negation not supported by " + this.constructor.name);
-};
-
-Value.prototype.Add = function(context, value) {
-    throw new SyntaxError("Add not supported by " + this.constructor.name);
-};
-
-Value.prototype.transpile = function(transpiler) {
-    throw new Error("Transpile not implemented by " + this.constructor.name);
-};
-
-
-Value.prototype.Subtract = function(context, value) {
-    throw new SyntaxError("Subtract not supported by " + this.constructor.name);
-};
-
-Value.prototype.Multiply = function(context, value) {
-    throw new SyntaxError("Multiply not supported by " + this.constructor.name);
-};
-
-Value.prototype.Divide = function(context, value) {
-    throw new SyntaxError("Divide not supported by " + this.constructor.name);
-};
-
-Value.prototype.IntDivide = function(context, value) {
-    throw new SyntaxError("Integer divide not supported by " + this.constructor.name);
-};
-
-Value.prototype.Modulo = function(context, value) {
-    throw new SyntaxError("Modulo not supported by " + this.constructor.name);
-};
-
-Value.prototype.Minus = function(context) {
-    throw new SyntaxError("Minus not supported by " + this.constructor.name);
-};
-
-Value.prototype.compareToValue = function(context, value) {
-    throw new SyntaxError("Compare not supported by " + this.constructor.name);
-};
-
-Value.prototype.getMemberValue = function(context, name) {
-    if("text" == name)
-        return new TextValue(this.toString());
-    else
-        throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
-};
-
-Value.prototype.ConvertTo = function(type) {
-    return this;
-};
-
-Value.prototype.Roughly = function(context, value) {
-    return this.equals(value);
-};
-
-
-Value.prototype.Contains = function(context, value) {
-    throw new SyntaxError("Contains not supported by " + this.constructor.name);
-};
-
-
-Value.prototype.toDocumentValue = function(context) {
-    return this;
-};
-
-function Instance(type) {
-    Value.call(this, type);
-    return this;
+class Instance extends Value {
+    constructor(type) {
+        super(type);
+        return this;
+    }
 }
 
-Instance.prototype = Object.create(Value.prototype);
-Instance.prototype.constructor = Instance;
+class Container extends Value {
+    constructor(type) {
+        super(type);
+        return this;
+    }
 
-
-function Container(type) {
-    Value.call(this, type);
-    return this;
+    toDocumentValue(context) {
+        var items = this.items.map(function (item) {
+            item.toDocumentValue(context);
+        });
+        return new ListValue(AnyType.instance, items);
+    }
 }
-
-Container.prototype = Object.create(Value.prototype);
-Container.prototype.constructor = Container;
-
-
-Container.prototype.toDocumentValue = function(context) {
-    var items = this.items.map(function (item) {
-        item.toDocumentValue(context);
-    });
-    return new ListValue(AnyType.instance, items);
-};
 
 
 exports.Value = Value;

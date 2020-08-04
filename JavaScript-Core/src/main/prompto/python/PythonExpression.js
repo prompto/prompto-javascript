@@ -1,4 +1,4 @@
-function PythonExpression() {
+class PythonExpression {
 	
 }
 

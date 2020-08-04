@@ -1,4 +1,4 @@
-function JavaExpression() {
+class JavaExpression {
 }
 
 exports.JavaExpression = JavaExpression;

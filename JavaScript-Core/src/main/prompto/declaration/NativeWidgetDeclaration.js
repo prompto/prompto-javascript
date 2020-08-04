@@ -1,68 +1,66 @@
 var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
 
-function NativeWidgetDeclaration(name, categoryBindings, methods) {
-    NativeCategoryDeclaration.call(this, name, null, categoryBindings, null, methods);
-    return this;
+class NativeWidgetDeclaration extends NativeCategoryDeclaration {
+    constructor(name, categoryBindings, methods) {
+        super(name, null, categoryBindings, null, methods);
+        return this;
+    }
+
+    isWidget(context) {
+        return true;
+    }
+
+    getProperties(context) {
+        if(typeof(this.properties)=="undefined") {
+            this.properties = null;
+            // don't bubble up buried problems
+            const savedProblems = context.problemListener.problems;
+            context.problemListener.problems = [];
+            try {
+                this.check(context);
+            } finally {
+                context.problemListener.problems = savedProblems;
+            }
+        }
+        return this.properties;
+    }
+
+    getDeclarationType() {
+        return "Widget";
+    }
+
+    getBoundFunction(fail) {
+        if(this.bound==null) {
+            var binding = this.getBinding(fail);
+            if(binding!=null) {
+                this.bound = binding.resolveWidget();
+                if(fail && this.bound==null)
+                    throw new SyntaxError("No JavaScript function:" + binding.toString());
+            }
+        }
+        return this.bound;
+    }
+
+    categoryTypeToEDialect(writer) {
+        writer.append("native widget");
+    }
+
+    categoryTypeToODialect(writer) {
+        writer.append("native widget");
+    }
+
+    categoryTypeToMDialect(writer) {
+        writer.append("native widget");
+    }
+
+    transpile(transpiler) {
+        var binding = this.getBinding();
+        binding.transpileWidget(transpiler);
+        return true;
+    }
 }
 
-
-NativeWidgetDeclaration.prototype = Object.create(NativeCategoryDeclaration.prototype);
 NativeWidgetDeclaration.prototype.constructor = NativeCategoryDeclaration;
-
-NativeWidgetDeclaration.prototype.isWidget = function(context) {
-    return true;
-};
-
-
-NativeWidgetDeclaration.prototype.getProperties = function(context) {
-    if(typeof(this.properties)=="undefined") {
-        this.properties = null;
-        // don't bubble up buried problems
-        const savedProblems = context.problemListener.problems;
-        context.problemListener.problems = [];
-        try {
-            this.check(context);
-        } finally {
-            context.problemListener.problems = savedProblems;
-        }
-    }
-    return this.properties;
-};
-
-NativeWidgetDeclaration.prototype.getDeclarationType = function() {
-    return "Widget";
-};
-
-
-NativeWidgetDeclaration.prototype.getBoundFunction = function(fail) {
-    if(this.bound==null) {
-        var binding = this.getBinding(fail);
-        if(binding!=null) {
-            this.bound = binding.resolveWidget();
-            if(fail && this.bound==null)
-                throw new SyntaxError("No JavaScript function:" + binding.toString());
-        }
-    }
-    return this.bound;
-};
-
-NativeWidgetDeclaration.prototype.categoryTypeToEDialect = function(writer) {
-    writer.append("native widget");
-};
-
-NativeWidgetDeclaration.prototype.categoryTypeToODialect = function(writer) {
-    writer.append("native widget");
-};
-
-NativeWidgetDeclaration.prototype.categoryTypeToMDialect = function(writer) {
-    writer.append("native widget");
-};
-
-NativeWidgetDeclaration.prototype.transpile = function(transpiler) {
-    var binding = this.getBinding();
-    binding.transpileWidget(transpiler);
-    return true;
-};
 
 
 exports.NativeWidgetDeclaration = NativeWidgetDeclaration;

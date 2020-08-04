@@ -2,21 +2,20 @@ var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
 
-function JavaScriptDecimalLiteral(text) {
-	JavaScriptLiteral.call(this, text);
-	return this;
+class JavaScriptDecimalLiteral extends JavaScriptLiteral {
+    constructor(text) {
+        super(text);
+        return this;
+    }
+
+    check(context) {
+        return DecimalType.instance;
+    }
+
+    toString() {
+        return this.value.toString();
+    }
 }
-
-JavaScriptDecimalLiteral.prototype = Object.create(JavaScriptLiteral.prototype);
-JavaScriptDecimalLiteral.prototype.constructor = JavaScriptDecimalLiteral;
-
-JavaScriptDecimalLiteral.prototype.check = function(context) {
-	return DecimalType.instance;
-};
-
-JavaScriptDecimalLiteral.prototype.toString = function() {
-	return this.value.toString();
-};
 
 exports.JavaScriptDecimalLiteral = JavaScriptDecimalLiteral;
 

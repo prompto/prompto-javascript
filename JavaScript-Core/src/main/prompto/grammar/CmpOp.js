@@ -1,10 +1,12 @@
-function CmpOp() {
-	return this;
-}
+class CmpOp {
+    constructor() {
+        return this;
+    }
 
-CmpOp.prototype.toDialect = function(writer) {
-    writer.append(this.toString());
-};
+    toDialect(writer) {
+        writer.append(this.toString());
+    }
+}
 
 
 CmpOp.GT = new CmpOp();

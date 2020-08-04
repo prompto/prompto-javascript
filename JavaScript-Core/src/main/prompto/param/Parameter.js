@@ -4,63 +4,57 @@ var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var IntegerType = require("../type/IntegerType").IntegerType;
 var DecimalType = require("../type/DecimalType").DecimalType;
 
-function Parameter(id) {
-    NamedInstance.call(this);
-	this.id = id;
-    this.mutable = false;
-    this.defaultExpression = null;
-	return this;
-}
+class Parameter extends NamedInstance {
+ 
+    constructor(id) {
+        super();
+        this.id = id;
+        this.mutable = false;
+        this.defaultExpression = null;
+    }
 
-Parameter.prototype = Object.create(NamedInstance.prototype);
-Parameter.prototype.constructor = Parameter;
-
-Object.defineProperty(Parameter.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
-
-Parameter.prototype.setMutable =  function(mutable) {
-    this.mutable = mutable;
-};
-
-
-Parameter.prototype.checkValue = function(context, expression) {
-    var value = expression.interpret(context);
-    if (value instanceof IntegerValue && this.getType(context)==DecimalType.instance) {
-        return new DecimalValue(value.DecimalValue());
-    } else if (value instanceof DecimalValue && this.getType(context)==IntegerType.instance) {
-        return new IntegerValue(value.IntegerValue());
-    } else {
-        return value;
+    setMutable(mutable) {
+        this.mutable = mutable;
     }
-};
 
-Parameter.prototype.toDialect = function(writer) {
-    if(this.mutable)
-        writer.append("mutable ");
-    writer.toDialect(this);
-    if(this.defaultExpression!=null) {
-        writer.append(" = ");
-        this.defaultExpression.toDialect(writer);
+    checkValue(context, expression) {
+        var value = expression.interpret(context);
+        if (value instanceof IntegerValue && this.getType(context)==DecimalType.instance) {
+            return new DecimalValue(value.DecimalValue());
+        } else if (value instanceof DecimalValue && this.getType(context)==IntegerType.instance) {
+            return new IntegerValue(value.IntegerValue());
+        } else {
+            return value;
+        }
     }
-};
 
-Parameter.prototype.transpile = function(transpiler, expression) {
-    transpiler.append(this.name);
-};
+    toDialect(writer) {
+        if(this.mutable)
+            writer.append("mutable ");
+        writer.toDialect(this);
+        if(this.defaultExpression!=null) {
+            writer.append(" = ");
+            this.defaultExpression.toDialect(writer);
+        }
+    }
 
+    transpile(transpiler, expression) {
+        transpiler.append(this.name);
+    }
 
-Parameter.prototype.transpileCall = function(transpiler, expression) {
-    var expType = expression.check(transpiler.context);
-    if (this.type === IntegerType.instance && expType === DecimalType.instance) {
-        transpiler.append("Math.round(");
-        expression.transpile(transpiler);
-        transpiler.append(")");
-    } else
-        expression.transpile(transpiler);
-};
+    transpileCall(transpiler, expression) {
+        var expType = expression.check(transpiler.context);
+        if (this.type === IntegerType.instance && expType === DecimalType.instance) {
+            transpiler.append("Math.round(");
+            expression.transpile(transpiler);
+            transpiler.append(")");
+        } else
+            expression.transpile(transpiler);
+    }
+}
 
 exports.Parameter = Parameter;

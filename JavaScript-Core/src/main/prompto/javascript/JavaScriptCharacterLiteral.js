@@ -1,17 +1,16 @@
 var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
 var CharacterType = require("../type/CharacterType").CharacterType;
 
-function JavaScriptCharacterLiteral(text) {
-	JavaScriptLiteral.call(this, text);
-	return this;
+class JavaScriptCharacterLiteral extends JavaScriptLiteral {
+    constructor(text) {
+        super(text);
+        return this;
+    }
+
+    check(context) {
+        return CharacterType.instance;
+    }
 }
-
-JavaScriptCharacterLiteral.prototype = Object.create(JavaScriptLiteral.prototype);
-JavaScriptCharacterLiteral.prototype.constructor = JavaScriptCharacterLiteral;
-
-JavaScriptCharacterLiteral.prototype.check = function(context) {
-	return CharacterType.instance;
-};
 
 exports.JavaScriptCharacterLiteral = JavaScriptCharacterLiteral;
 

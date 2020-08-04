@@ -1,37 +1,36 @@
 var CSharpExpression = require("./CSharpExpression").CSharpExpression;
 
-function CSharpIdentifierExpression(parent, identifier) {
-	CSharpExpression.call(this);
-	this.parent = parent;
-	this.identifier = identifier;
-	return this;
-}
-
-CSharpIdentifierExpression.prototype = Object.create(CSharpExpression.prototype);
-CSharpIdentifierExpression.prototype.constructor = CSharpIdentifierExpression;
-
-CSharpIdentifierExpression.prototype.toString = function() {
-	if(this.parent===null) {
-		return this.identifier;
-	} else {
-		return this.parent.toString() + "." + this.identifier;
-	}
-}
-
-CSharpIdentifierExpression.parse = function(ids) {
-	var result = null;
-	ids.split("\\.").forEach(function(part) {
-		result = new CSharpIdentifierExpression(result, part);
-	}, this);
-	return result;
-};
-
-CSharpIdentifierExpression.prototype.toDialect = function(writer) {
-    if(this.parent!=null) {
-        this.parent.toDialect(writer);
-        writer.append('.');
+class CSharpIdentifierExpression extends CSharpExpression {
+    constructor(parent, identifier) {
+        super();
+        this.parent = parent;
+        this.identifier = identifier;
+        return this;
     }
-    writer.append(this.identifier);
-};
+
+    toString() {
+        if(this.parent===null) {
+            return this.identifier;
+        } else {
+            return this.parent.toString() + "." + this.identifier;
+        }
+    }
+
+    static parse(ids) {
+        var result = null;
+        ids.split("\\.").forEach(function(part) {
+            result = new CSharpIdentifierExpression(result, part);
+        }, this);
+        return result;
+    }
+
+    toDialect(writer) {
+        if(this.parent!=null) {
+            this.parent.toDialect(writer);
+            writer.append('.');
+        }
+        writer.append(this.identifier);
+    }
+}
 
 exports.CSharpIdentifierExpression = CSharpIdentifierExpression;

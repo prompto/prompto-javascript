@@ -3,41 +3,38 @@ var InstanceContext = require("../runtime/Context").InstanceContext;
 var CategoryType = require("../type/CategoryType").CategoryType;
 var AnyType = require("../type/AnyType").AnyType;
 
-function SuperExpression() {
-    ThisExpression.call(this);
-    return this;
-}
-
-SuperExpression.prototype = Object.create(ThisExpression.prototype);
-SuperExpression.prototype.constructor = SuperExpression;
-
-SuperExpression.prototype.check = function(context) {
-    return this.getSuperType(context);
-};
-
-
-SuperExpression.prototype.getSuperType = function(context) {
-    if (context != null && !(context instanceof InstanceContext))
-        context = context.getClosestInstanceContext ();
-    if (context instanceof InstanceContext) {
-        var type = context.instanceType;
-        if(type instanceof CategoryType)
-            return type.getSuperType(context, this);
-        else
-            return type;
+class SuperExpression extends ThisExpression {
+    constructor() {
+        super();
+        return this;
     }
-    else
-        context.problemListener.reportNoSuperType(this, AnyType.instance);
-};
 
+    check(context) {
+        return this.getSuperType(context);
+    }
 
-SuperExpression.prototype.toDialect = function(writer) {
-    writer.append("super");
-};
+    getSuperType(context) {
+        if (context != null && !(context instanceof InstanceContext))
+            context = context.getClosestInstanceContext ();
+        if (context instanceof InstanceContext) {
+            var type = context.instanceType;
+            if(type instanceof CategoryType)
+                return type.getSuperType(context, this);
+            else
+                return type;
+        }
+        else
+            context.problemListener.reportNoSuperType(this, AnyType.instance);
+    }
 
-SuperExpression.prototype.transpile = function(transpiler) {
-    var type = this.getSuperType(transpiler.context);
-    transpiler.append(type.name).append(".prototype");
-};
+    toDialect(writer) {
+        writer.append("super");
+    }
+
+    transpile(transpiler) {
+        var type = this.getSuperType(transpiler.context);
+        transpiler.append(type.name).append(".prototype");
+    }
+}
 
 exports.SuperExpression = SuperExpression;

@@ -8,28 +8,25 @@ exports.resolve = function() {
     CharacterType = require("../type/CharacterType").CharacterType;
 }
 
-function CharacterRange(left, right) {
-	RangeValue.call(this, CharacterType.instance, left, right);
-	return this;
+class CharacterRange extends RangeValue {
+    constructor(left, right) {
+        super(CharacterType.instance, left, right);
+        return this;
+    }
+
+    size() {
+        return 1 + this.high.value.charCodeAt(0) - this.low.value.charCodeAt(0);
+    }
+
+    getItem(index) {
+        var result = this.low.value.charCodeAt(0) + index - 1;
+        if(result>this.high.value.charCodeAt(0)) {
+            throw new IndexOutOfRangeError();
+        } else {
+            return new CharacterValue(String.fromCharCode(result));
+        }
+    }
 }
-
-CharacterRange.prototype = Object.create(RangeValue.prototype);
-CharacterRange.prototype.constructor = CharacterRange;
-
-
-CharacterRange.prototype.size = function() {
-	return 1 + this.high.value.charCodeAt(0) - this.low.value.charCodeAt(0);
-};
-
-
-CharacterRange.prototype.getItem = function(index) {
-	var result = this.low.value.charCodeAt(0) + index - 1;
-	if(result>this.high.value.charCodeAt(0)) {
-		throw new IndexOutOfRangeError();
-	} else {
-		return new CharacterValue(String.fromCharCode(result));
-	}
-};
 
 /*
 @Override

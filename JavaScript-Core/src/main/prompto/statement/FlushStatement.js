@@ -3,49 +3,44 @@ var $DataStore = require("../store/DataStore").$DataStore;
 var VoidType = require("../type/VoidType").VoidType;
 
 
-function FlushStatement() {
-    SimpleStatement.call(this);
-    return this;
+class FlushStatement extends SimpleStatement {
+    constructor() {
+        super();
+        return this;
+    }
+
+    check(context) {
+        return VoidType.instance;
+    }
+
+    interpret(context) {
+        $DataStore.instance.flush();
+    }
+
+    declare(transpiler) {
+        transpiler.require($DataStore);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("$DataStore.instance.flush()");
+    }
+
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
+
+    toEDialect(writer) {
+        writer.append("flush");
+    }
+
+    toMDialect(writer) {
+        writer.append("flush()");
+    }
+
+    toODialect(writer) {
+        writer.append("flush()");
+    }
 }
-
-FlushStatement.prototype = Object.create(SimpleStatement.prototype);
-FlushStatement.prototype.constructor = FlushStatement;
-
-FlushStatement.prototype.check = function(context) {
-    return VoidType.instance;
-};
-
-FlushStatement.prototype.interpret = function(context) {
-    $DataStore.instance.flush();
-};
-
-FlushStatement.prototype.declare = function(transpiler) {
-    transpiler.require($DataStore);
-};
-
-
-FlushStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("$DataStore.instance.flush()");
-};
-
-
-FlushStatement.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
-
-FlushStatement.prototype.toEDialect = function(writer) {
-    writer.append("flush");
-};
-
-
-FlushStatement.prototype.toMDialect = function(writer) {
-    writer.append("flush()");
-};
-
-
-FlushStatement.prototype.toODialect = function(writer) {
-    writer.append("flush()");
-};
 
 
 exports.FlushStatement = FlushStatement;

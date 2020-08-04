@@ -7,28 +7,24 @@ function unescape(text) {
 	return eval(text);
 }
 
-function CharacterLiteral(text) {
-	Literal.call(this, text, new CharacterValue(unescape(text)));
-	return this;
+class CharacterLiteral extends Literal {
+    constructor(text) {
+        super(text, new CharacterValue(unescape(text)));
+        return this;
+    }
+
+    check(context) {
+        return CharacterType.instance;
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
 }
-
-CharacterLiteral.prototype = Object.create(Literal.prototype);
-CharacterLiteral.prototype.constructor = CharacterLiteral;
-
-
-CharacterLiteral.prototype.check = function(context) {
-	return CharacterType.instance;
-};
-
-
-CharacterLiteral.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-
-CharacterLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
 
 
 exports.CharacterLiteral = CharacterLiteral;

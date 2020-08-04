@@ -1,4 +1,4 @@
-function CSharpExpression() {
+class CSharpExpression {
 	
 }
 

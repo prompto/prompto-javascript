@@ -2,29 +2,61 @@ var BaseStatement = require("./BaseStatement").BaseStatement;
 var Dialect = require("../parser/Dialect").Dialect;
 var VoidType = require("../type/VoidType").VoidType;
 
-function CommentStatement(text) {
-    BaseStatement.call(this);
-    this.text = text;
-    return this;
+class CommentStatement extends BaseStatement {
+    constructor(text) {
+        super();
+        this.text = text;
+        return this;
+    }
+
+    check(context) {
+        return VoidType.instance;
+    }
+
+    interpret(context) {
+        return null;
+    }
+
+    declare(transpiler) {
+    }
+
+    transpile(transpiler) {
+        return true; // skip
+    }
+
+    toDialect(writer) {
+        var lines = this.text.split("\n");
+        lines = lines.map(function (line) {
+            return uncomment(line);
+        });
+        switch (writer.dialect) {
+            case Dialect.E:
+            case Dialect.O:
+                if (lines.length > 1) {
+                    writer.append("/*");
+                    lines.forEach(function (line) {
+                        writer.append(line)
+                        writer.newLine();
+                    });
+                    writer.trimLast(1);
+                    writer.append("*/");
+                    writer.newLine();
+                } else {
+                    writer.append("//");
+                    writer.append(lines[0]);
+                    writer.newLine();
+                }
+                break;
+            case Dialect.M:
+                lines.forEach(function (line) {
+                    writer.append("#")
+                    writer.append(line)
+                    writer.newLine()
+                });
+                break;
+        }
+    }
 }
-
-CommentStatement.prototype = Object.create(BaseStatement.prototype);
-CommentStatement.prototype.constructor = CommentStatement;
-
-CommentStatement.prototype.check = function(context) {
-    return VoidType.instance;
-};
-
-CommentStatement.prototype.interpret = function(context) {
-    return null;
-};
-
-CommentStatement.prototype.declare = function(transpiler) {
-};
-
-CommentStatement.prototype.transpile = function(transpiler) {
-    return true; // skip
-};
 
 
 function uncomment(line) {
@@ -35,38 +67,5 @@ function uncomment(line) {
     else
         return line;
 }
-
-CommentStatement.prototype.toDialect = function(writer) {
-    var lines = this.text.split("\n");
-    lines = lines.map(function (line) {
-        return uncomment(line);
-    });
-    switch (writer.dialect) {
-        case Dialect.E:
-        case Dialect.O:
-            if (lines.length > 1) {
-                writer.append("/*");
-                lines.forEach(function (line) {
-                    writer.append(line)
-                    writer.newLine();
-                });
-                writer.trimLast(1);
-                writer.append("*/");
-                writer.newLine();
-            } else {
-                writer.append("//");
-                writer.append(lines[0]);
-                writer.newLine();
-            }
-            break;
-        case Dialect.M:
-            lines.forEach(function (line) {
-                writer.append("#")
-                writer.append(line)
-                writer.newLine()
-            });
-            break;
-    }
-};
 
 exports.CommentStatement = CommentStatement;

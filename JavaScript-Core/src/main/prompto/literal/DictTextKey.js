@@ -5,25 +5,27 @@ function unescape(text) {
     return eval(text);
 }
 
-function DictTextKey(text) {
-    this.text = text;
-    return this;
+class DictTextKey {
+  
+    constructor(text) {
+        this.text = text;
+   }
+
+    toString() {
+        return this.text;
+    }
+
+    stringValue() {
+        return unescape(this.text);
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
+
+    interpret(context) {
+        return new TextValue(this.stringValue());
+    }
 }
-
-DictTextKey.prototype.toString = function() {
-    return this.text;
-};
-
-DictTextKey.prototype.stringValue = function() {
-    return unescape(this.text);
-};
-
-DictTextKey.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
-
-DictTextKey.prototype.interpret = function(context) {
-    return new TextValue(this.stringValue());
-};
 
 exports.DictTextKey = DictTextKey;

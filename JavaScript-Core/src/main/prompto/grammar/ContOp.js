@@ -1,15 +1,17 @@
-function ContOp(name) {
-    this.name = name;
-    return this;
+class ContOp {
+    constructor(name) {
+        this.name = name;
+        return this;
+    }
+
+    toString() {
+        return this.name.toLowerCase().replace('_', ' ');
+    }
+
+    toDialect(writer) {
+        writer.append(this.toString());
+    }
 }
-
-ContOp.prototype.toString = function() {
-    return this.name.toLowerCase().replace('_', ' ');
-};
-
-ContOp.prototype.toDialect = function(writer) {
-    writer.append(this.toString());
-};
 
 ContOp.IN = new ContOp("IN");
 ContOp.HAS = new ContOp("HAS");

@@ -9,118 +9,101 @@ exports.resolve = function() {
     BooleanType = require("./BooleanType").BooleanType;
 };
 
-function RangeType(itemType) {
-    ContainerType.call(this, new Identifier(itemType.name+"[..]"),itemType);
-	return this;
+class RangeType extends ContainerType {
+    constructor(itemType) {
+        super(new Identifier(itemType.name+"[..]"), itemType);
+        return this;
+    }
+
+    withItemType(itemType) {
+        return new RangeType(itemType);
+    }
+
+    checkItem(context, other, expression) {
+        if (other == IntegerType.instance) {
+            return this.itemType;
+        } else {
+            return ContainerType.prototype.checkItem.call(this, context, other, expression);
+        }
+    }
+
+    declareItem(transpiler, itemType, item) {
+        // nothing to do
+    }
+
+    transpileItem(transpiler, itemType, item) {
+        transpiler.append(".item(");
+        item.transpile(transpiler);
+        transpiler.append(")");
+    }
+
+    checkSlice(context) {
+        return this;
+    }
+
+    declareSlice(transpiler, first, last) {
+        if(first) {
+            first.declare(transpiler);
+        }
+        if(last) {
+            last.declare(transpiler);
+        }
+    }
+
+    transpileSlice(transpiler, first, last) {
+        transpiler.append(".slice1Based(");
+        if(first) {
+            first.transpile(transpiler);
+        } else
+            transpiler.append("null");
+        if(last) {
+            transpiler.append(",");
+            last.transpile(transpiler);
+        }
+        transpiler.append(")");
+    }
+
+    checkIterator(context, source) {
+        return this.itemType;
+    }
+
+    checkContainsAllOrAny(context, other) {
+        return BooleanType.instance;
+    }
+
+    declareContains(transpiler, other, container, item) {
+        transpiler.require(StrictSet);
+        container.declare(transpiler);
+        item.declare(transpiler);
+    }
+
+    transpileContains(transpiler, other, container, item) {
+        container.transpile(transpiler);
+        transpiler.append(".has(");
+        item.transpile(transpiler);
+        transpiler.append(")");
+    }
+
+    declareContainsAllOrAny(transpiler, other, container, items) {
+        transpiler.require(StrictSet);
+        container.declare(transpiler);
+        items.declare(transpiler);
+    }
+
+    transpileContainsAll(transpiler, other, container, items) {
+        container.transpile(transpiler);
+        transpiler.append(".hasAll(");
+        items.transpile(transpiler);
+        transpiler.append(")");
+    }
+
+    transpileContainsAny(transpiler, other, container, items) {
+        container.transpile(transpiler);
+        transpiler.append(".hasAny(");
+        items.transpile(transpiler);
+        transpiler.append(")");
+    }
 }
-
-RangeType.prototype = Object.create(ContainerType.prototype);
-RangeType.prototype.constructor = RangeType;
-
-
-RangeType.prototype.withItemType = function(itemType) {
-    return new RangeType(itemType);
-};
-
-
-
-RangeType.prototype.checkItem = function(context, other, expression) {
-	if (other == IntegerType.instance) {
-		return this.itemType;
-	} else {
-		return ContainerType.prototype.checkItem.call(this, context, other, expression);
-	}
-};
-
-
-
-RangeType.prototype.declareItem = function(transpiler, itemType, item) {
-    // nothing to do
-};
-
-
-RangeType.prototype.transpileItem = function(transpiler, itemType, item) {
-    transpiler.append(".item(");
-    item.transpile(transpiler);
-    transpiler.append(")");
-};
-
-
-RangeType.prototype.checkSlice = function(context) {
-	return this;
-};
-
-
-RangeType.prototype.declareSlice = function(transpiler, first, last) {
-    if(first) {
-        first.declare(transpiler);
-    }
-    if(last) {
-        last.declare(transpiler);
-    }
-};
-
-
-RangeType.prototype.transpileSlice = function(transpiler, first, last) {
-    transpiler.append(".slice1Based(");
-    if(first) {
-        first.transpile(transpiler);
-    } else
-        transpiler.append("null");
-    if(last) {
-        transpiler.append(",");
-        last.transpile(transpiler);
-    }
-    transpiler.append(")");
-};
-
-
-
-RangeType.prototype.checkIterator = function(context, source) {
-	return this.itemType;
-};
-
-
-RangeType.prototype.checkContainsAllOrAny = function(context, other) {
-    return BooleanType.instance;
-};
-
-
-RangeType.prototype.declareContains = function(transpiler, other, container, item) {
-    transpiler.require(StrictSet);
-    container.declare(transpiler);
-    item.declare(transpiler);
-};
-
-
-RangeType.prototype.transpileContains = function(transpiler, other, container, item) {
-    container.transpile(transpiler);
-    transpiler.append(".has(");
-    item.transpile(transpiler);
-    transpiler.append(")");
-};
-
-
-RangeType.prototype.declareContainsAllOrAny = function(transpiler, other, container, items) {
-    transpiler.require(StrictSet);
-    container.declare(transpiler);
-    items.declare(transpiler);
-};
-
-
-RangeType.prototype.transpileContainsAll = function(transpiler, other, container, items) {
-    container.transpile(transpiler);
-    transpiler.append(".hasAll(");
-    items.transpile(transpiler);
-    transpiler.append(")");
-};
-
-RangeType.prototype.transpileContainsAny = function(transpiler, other, container, items) {
-    container.transpile(transpiler);
-    transpiler.append(".hasAny(");
-    items.transpile(transpiler);
-    transpiler.append(")");
-};
 
 
 exports.RangeType = RangeType;

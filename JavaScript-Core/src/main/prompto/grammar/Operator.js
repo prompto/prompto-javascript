@@ -1,16 +1,18 @@
-function Operator(name, token) {
-    this.name = name;
-    this.token = token;
-    return this;
+class Operator {
+    constructor(name, token) {
+        this.name = name;
+        this.token = token;
+        return this;
+    }
+
+    toString() {
+        return this.token;
+    }
+
+    toDialect(writer) {
+        writer.append(this.token);
+    }
 }
-
-Operator.prototype.toString = function() {
-    return this.token;
-};
-
-Operator.prototype.toDialect = function(writer) {
-    writer.append(this.token);
-};
 
 Operator.PLUS = new Operator("PLUS", "+");
 Operator.MINUS = new Operator("MINUS", "-");

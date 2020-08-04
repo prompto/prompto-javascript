@@ -1,32 +1,28 @@
 var NamedInstance = require("../grammar/NamedInstance").NamedInstance;
 
-function Variable (id, type) {
-    NamedInstance.call(this);
-    this.id = id;
-	this.type = type;
-	return this;
-}
+class Variable extends NamedInstance {
 
-Variable.prototype  = Object.create(NamedInstance.prototype);
-Variable.prototype.constructor = Variable;
+    constructor(id, type) {
+        super();
+        this.id = id;
+        this.type = type;
+     }
 
-
-Object.defineProperty(Variable.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
-Variable.prototype.toString = function() {
-	return this.name;
+    toString() {
+        return this.name;
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.name);
+    }
+
+    getType(context) {
+        return this.type;
+    }
 }
-
-Variable.prototype.transpile = function(transpiler) {
-    transpiler.append(this.name);
-}
-
-Variable.prototype.getType = function(context) {
-    return this.type;
-};
 
 exports.Variable = Variable;

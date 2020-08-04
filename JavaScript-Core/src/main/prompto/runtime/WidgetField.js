@@ -1,13 +1,12 @@
 var Variable = require("./Variable").Variable;
 
-function WidgetField (id, type, createdBy, updatedBy) {
-    Variable.call(this, id, type);
-    this.createdBy = createdBy;
-    this.updatedBy = updatedBy;
-    return this;
-}
+class WidgetField extends Variable {
 
-WidgetField.prototype = Object.create(Variable.prototype);
-WidgetField.prototype.constructor = WidgetField;
+    constructor(id, type, createdBy, updatedBy) {
+        super(id, type);
+        this.createdBy = createdBy;
+        this.updatedBy = updatedBy;
+    }
+}
 
 exports.WidgetField = WidgetField;

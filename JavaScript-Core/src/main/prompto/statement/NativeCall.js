@@ -1,27 +1,26 @@
 var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var VoidType = require("../type/VoidType").VoidType;
 
-function NativeCall() {
-	SimpleStatement.call(this);
-	return this;
+class NativeCall extends SimpleStatement {
+    constructor() {
+        super();
+        return this;
+    }
+
+    toString() {
+        return this.statement.toString();
+    }
+
+    check(context) {
+        return VoidType.instance;
+    }
+
+    transpile(transpiler) {
+        return true;
+    }
+
+    declare(transpiler) {
+    }
 }
-	
-NativeCall.prototype = Object.create(SimpleStatement.prototype);
-NativeCall.prototype.constructor = NativeCall;
-
-NativeCall.prototype.toString = function() {
-	return this.statement.toString();
-};
-
-NativeCall.prototype.check = function(context) {
-	return VoidType.instance;
-};
-
-NativeCall.prototype.transpile = function(transpiler) {
-    return true;
-};
-
-NativeCall.prototype.declare = function(transpiler) {
-};
 
 exports.NativeCall = NativeCall;

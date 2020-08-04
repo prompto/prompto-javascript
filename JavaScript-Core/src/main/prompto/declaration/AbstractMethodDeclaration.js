@@ -1,79 +1,78 @@
 var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
 var VoidType = require("../type/VoidType").VoidType;
 
-function AbstractMethodDeclaration(id, args, returnType) {
-    BaseMethodDeclaration.call(this, id, args, returnType);
-    this.returnType = returnType || VoidType.instance;
-    return this;
-}
-
-AbstractMethodDeclaration.prototype = Object.create(BaseMethodDeclaration.prototype);
-AbstractMethodDeclaration.prototype.constructor = AbstractMethodDeclaration;
-
-AbstractMethodDeclaration.prototype.memberCheck = function(declaration, context) {
-    // TODO Auto-generated method stub
-};
-
-AbstractMethodDeclaration.prototype.check = function(context, isStart) {
-    if(this.parameters!=null) {
-        this.parameters.check(context);
+class AbstractMethodDeclaration extends BaseMethodDeclaration {
+    constructor(id, args, returnType) {
+        super(id, args, returnType);
+        this.returnType = returnType || VoidType.instance;
+        return this;
     }
-    if(isStart) {
-        var local = context.newLocalContext();
-        this.registerParameters(local);
+
+    memberCheck(declaration, context) {
+        // TODO Auto-generated method stub
     }
-    return this.returnType;
-};
 
-AbstractMethodDeclaration.prototype.checkChild = function(context) {
-    if(this.parameters!=null) {
-        this.parameters.check(context);
+    check(context, isStart) {
+        if(this.parameters!=null) {
+            this.parameters.check(context);
+        }
+        if(isStart) {
+            var local = context.newLocalContext();
+            this.registerParameters(local);
+        }
+        return this.returnType;
     }
-    return this.returnType;
-};
 
-AbstractMethodDeclaration.prototype.declare = function(transpiler) {
-    this.declareArguments(transpiler);
-};
-
-AbstractMethodDeclaration.prototype.transpile = function(transpiler) {
-    // nothing to do
-};
-
-AbstractMethodDeclaration.prototype.toMDialect = function(writer) {
-    writer.append("abstract def ");
-    writer.append(this.name);
-    writer.append(" (");
-    this.parameters.toDialect(writer);
-    writer.append(")");
-    if(this.returnType!=null && this.returnType!=VoidType.instance) {
-        writer.append("->");
-        this.returnType.toDialect(writer);
+    checkChild(context) {
+        if(this.parameters!=null) {
+            this.parameters.check(context);
+        }
+        return this.returnType;
     }
-}
 
-AbstractMethodDeclaration.prototype.toEDialect = function(writer) {
-    writer.append("define ");
-    writer.append(this.name);
-    writer.append(" as abstract method ");
-    this.parameters.toDialect(writer);
-    if(this.returnType!=null && this.returnType!=VoidType.instance) {
-        writer.append("returning ");
-        this.returnType.toDialect(writer);
+    declare(transpiler) {
+        this.declareArguments(transpiler);
     }
-};
 
-AbstractMethodDeclaration.prototype.toODialect = function(writer) {
-    writer.append("abstract ");
-    if(this.returnType!=null && this.returnType!=VoidType.instance) {
-        this.returnType.toDialect(writer);
-        writer.append(" ");
+    transpile(transpiler) {
+        // nothing to do
     }
-    writer.append("method ");
-    writer.append(this.name);
-    writer.append(" (");
-    this.parameters.toDialect(writer);
-    writer.append(");");
+
+    toMDialect(writer) {
+        writer.append("abstract def ");
+        writer.append(this.name);
+        writer.append(" (");
+        this.parameters.toDialect(writer);
+        writer.append(")");
+        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+            writer.append("->");
+            this.returnType.toDialect(writer);
+        }
+    }
+
+    toEDialect(writer) {
+        writer.append("define ");
+        writer.append(this.name);
+        writer.append(" as abstract method ");
+        this.parameters.toDialect(writer);
+        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+            writer.append("returning ");
+            this.returnType.toDialect(writer);
+        }
+    }
+
+    toODialect(writer) {
+        writer.append("abstract ");
+        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+            this.returnType.toDialect(writer);
+            writer.append(" ");
+        }
+        writer.append("method ");
+        writer.append(this.name);
+        writer.append(" (");
+        this.parameters.toDialect(writer);
+        writer.append(");");
+    }
 }
 
 exports.AbstractMethodDeclaration = AbstractMethodDeclaration;

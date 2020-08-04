@@ -7,47 +7,189 @@ var WidgetPropertiesProcessor = require("../processor/WidgetPropertiesProcessor"
 var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
 var AnyType = require("../type/AnyType").AnyType;
 
-function JsxElementBase(id, properties) {
-    IJsxExpression.call(this);
-    this.id = id;
-	this.properties = properties;
-	return this;
-}
-
-
-JsxElementBase.prototype = Object.create(IJsxExpression.prototype);
-JsxElementBase.prototype.constructor = JsxElementBase;
-
-
-JsxElementBase.prototype.isHtmlTag = function(context) {
-    return !isCharacterUpperCase(this.id.name[0]);
-};
-
-JsxElementBase.prototype.check = function(context) {
-    if (this.isHtmlTag())
-        this.checkHtmlProperties(context);
-    else {
-        var propertyMap = this.getWidgetPropertyMap(context);
-        this.checkWidgetProperties(context, propertyMap);
+class JsxElementBase extends IJsxExpression {
+  
+    constructor(id, properties) {
+        super();
+        this.id = id;
+        this.properties = properties;
     }
-    return JsxType.instance;
-};
 
+    isHtmlTag(context) {
+        return !isCharacterUpperCase(this.id.name[0]);
+    }
 
-JsxElementBase.prototype.getPropertyMap = function(context) {
-    return this.isHtmlTag() ? JsxElementBase.getHtmlProperties(context, this.id.name) : this.getWidgetPropertyMap(context);
-};
+    check(context) {
+        if (this.isHtmlTag())
+            this.checkHtmlProperties(context);
+        else {
+            var propertyMap = this.getWidgetPropertyMap(context);
+            this.checkWidgetProperties(context, propertyMap);
+        }
+        return JsxType.instance;
+    }
 
-JsxElementBase.prototype.getWidgetPropertyMap = function(context) {
-    var decl = context.getRegisteredDeclaration(this.id.name);
-    if (decl == null) {
-        context.problemListener.reportUnknownIdentifier(this.id);
-        return null;
-    } else if(decl instanceof CategoryDeclaration && decl.isWidget())
-        return decl.getProperties(context);
-    else
-        return null;
-};
+    getPropertyMap(context) {
+        return this.isHtmlTag() ? JsxElementBase.getHtmlProperties(context, this.id.name) : this.getWidgetPropertyMap(context);
+    }
+
+    getWidgetPropertyMap(context) {
+        var decl = context.getRegisteredDeclaration(this.id.name);
+        if (decl == null) {
+            context.problemListener.reportUnknownIdentifier(this.id);
+            return null;
+        } else if(decl instanceof CategoryDeclaration && decl.isWidget())
+            return decl.getProperties(context);
+        else
+            return null;
+    }
+
+    static getHtmlProperties(context, name) {
+        if(HTML_PROPERTIES_MAP==null) {
+            const parser = new OCleverParser(HTML_PROPERTY_TYPES);
+            const types = parser.parse_document_literal();
+            if(HTML_TEST_MODE) {
+                const any = new TypeLiteral(AnyType.instance);
+                types.entries.items.forEach(function(e) { e.value = any; });
+            }
+            const processor = new WidgetPropertiesProcessor();
+            HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
+        }
+        return HTML_PROPERTIES_MAP; // TODO filter by html tag name
+    }
+
+    checkWidgetProperties(context, propertyMap) {
+        var actualNames = new Set();
+        if(this.properties!==null)
+            this.properties.forEach(function(jsxprop) {
+                if(actualNames.has(jsxprop.id.name))
+                    context.problemListener.reportDuplicateProperty(jsxprop, jsxprop.id.name);
+                else
+                    actualNames.add(jsxprop.id.name);
+                this.checkWidgetProperty(context, propertyMap, jsxprop);
+            }, this);
+        if(propertyMap!==null) {
+            for(var name in propertyMap.entries) {
+                var prop = propertyMap.entries[name];
+                if(prop.isRequired() && !actualNames.has(name))
+                    context.problemListener.reportMissingProperty(this, name);
+            }
+        }
+    }
+
+    checkWidgetProperty(context, propertyMap, jsxProp) {
+        var name = jsxProp.id.name;
+        if(propertyMap) {
+            var property = propertyMap.get(name);
+            if(property==null)
+                property = JsxElementBase.getHtmlProperties(context).get(name);
+            if(property==null)
+                context.problemListener.reportUnknownProperty(jsxProp, name);
+            else
+                property.validate(context, jsxProp)
+        } else
+            jsxProp.check(context);
+    }
+
+    checkHtmlProperties(context) {
+        var propertyMap = JsxElementBase.getHtmlProperties(context);
+        var actualNames = new Set();
+        if(this.properties!==null)
+            this.properties.forEach(function(jsxProp) {
+                if(actualNames.has(jsxProp.id.name))
+                    context.problemListener.reportDuplicateProperty(jsxProp, jsxProp.id.name);
+                else
+                    actualNames.add(jsxProp.id.name);
+                jsxProp.check(context);
+                var property = propertyMap.get(jsxProp.id.name);
+                if(property==null)
+                    context.problemListener.reportUnknownProperty(jsxProp, jsxProp.id.name);
+                else
+                    property.validate(context, jsxProp)
+            });
+        Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
+            var prop = propertyMap.entries[name];
+            if(prop.isRequired() && !actualNames.has(name))
+                context.problemListener.reportMissingProperty(this, name);
+        }, this);
+    }
+
+    declare(transpiler) {
+        if (!this.isHtmlTag()) {
+            var decl = transpiler.context.getRegisteredDeclaration(this.id.name);
+            if(decl==null)
+                transpiler.context.problemListener.reportUnknownIdentifier(this.id);
+            else
+                decl.declare(transpiler.newLocalTranspiler());
+        }
+        if(this.properties!=null) {
+            var propertyMap = this.getPropertyMap(transpiler.context);
+            this.properties.forEach(function (jsxprop) {
+                this.declareProperty(transpiler, propertyMap, jsxprop);
+            }, this);
+        }
+        this.declareChildren(transpiler);
+    }
+
+    declareProperty(transpiler, propertyMap, jsxProp) {
+        var name = jsxProp.id.name;
+        var property = propertyMap ? propertyMap.get(name) : null;
+        if(!property && !this.isHtmlTag())
+            property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
+        if(property)
+            property.declare(transpiler, jsxProp);
+        else
+            jsxProp.declare(transpiler);
+
+    }
+
+    declareChildren(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append("React.createElement(");
+        if (isCharacterUpperCase(this.id.name[0]))
+            transpiler.append(this.id.name);
+        else
+            transpiler.append('"').append(this.id.name).append('"');
+        transpiler.append(", ");
+        if(this.properties==null || this.properties.length===0)
+            transpiler.append("null");
+        else {
+            var propertyMap = this.getPropertyMap(transpiler.context);
+            transpiler.append("{");
+            this.properties.forEach(function(jsxProp) {
+                this.transpileProperty(transpiler, propertyMap, jsxProp);
+                transpiler.append(", ");
+            }, this);
+            transpiler.trimLast(2).append("}");
+        }
+        this.transpileChildren(transpiler);
+        transpiler.append(")");
+    }
+
+    transpileProperty(transpiler, propertyMap, jsxProp) {
+        var name = jsxProp.id.name;
+        var property = propertyMap ? propertyMap.get(name) : null;
+        if(!property && !this.isHtmlTag())
+            property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
+        if(property)
+            property.transpile(transpiler, jsxProp);
+        else
+            jsxProp.transpile(transpiler);
+
+    }
+
+    transpileChildren(transpiler) {
+        // nothing to do
+    }
+
+    static set_HTML_TEST_MODE(mode) {
+        HTML_PROPERTIES_MAP = null;
+        HTML_TEST_MODE = mode;
+    }
+}
 
 // ensure this stays in sync with Java version
 const HTML_PROPERTY_TYPES = `{
@@ -185,159 +327,5 @@ const HTML_PROPERTY_TYPES = `{
 
 let HTML_PROPERTIES_MAP = null;
 let HTML_TEST_MODE = false;
-
-JsxElementBase.getHtmlProperties = function(context, name) {
-    if(HTML_PROPERTIES_MAP==null) {
-        const parser = new OCleverParser(HTML_PROPERTY_TYPES);
-        const types = parser.parse_document_literal();
-        if(HTML_TEST_MODE) {
-            const any = new TypeLiteral(AnyType.instance);
-            types.entries.items.forEach(function(e) { e.value = any; });
-        }
-        const processor = new WidgetPropertiesProcessor();
-        HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
-    }
-    return HTML_PROPERTIES_MAP; // TODO filter by html tag name
-};
-
-
-JsxElementBase.prototype.checkWidgetProperties = function(context, propertyMap) {
-    var actualNames = new Set();
-    if(this.properties!==null)
-        this.properties.forEach(function(jsxprop) {
-            if(actualNames.has(jsxprop.id.name))
-                context.problemListener.reportDuplicateProperty(jsxprop, jsxprop.id.name);
-            else
-                actualNames.add(jsxprop.id.name);
-            this.checkWidgetProperty(context, propertyMap, jsxprop);
-        }, this);
-    if(propertyMap!==null) {
-        for(var name in propertyMap.entries) {
-            var prop = propertyMap.entries[name];
-            if(prop.isRequired() && !actualNames.has(name))
-                context.problemListener.reportMissingProperty(this, name);
-        }
-    }
-};
-
-
-JsxElementBase.prototype.checkWidgetProperty = function(context, propertyMap, jsxProp) {
-    var name = jsxProp.id.name;
-    if(propertyMap) {
-        var property = propertyMap.get(name);
-        if(property==null)
-            property = JsxElementBase.getHtmlProperties(context).get(name);
-        if(property==null)
-            context.problemListener.reportUnknownProperty(jsxProp, name);
-        else
-            property.validate(context, jsxProp)
-    } else
-        jsxProp.check(context);
-};
-
-
-JsxElementBase.prototype.checkHtmlProperties = function(context) {
-    var propertyMap = JsxElementBase.getHtmlProperties(context);
-    var actualNames = new Set();
-    if(this.properties!==null)
-        this.properties.forEach(function(jsxProp) {
-            if(actualNames.has(jsxProp.id.name))
-                context.problemListener.reportDuplicateProperty(jsxProp, jsxProp.id.name);
-            else
-                actualNames.add(jsxProp.id.name);
-            jsxProp.check(context);
-            var property = propertyMap.get(jsxProp.id.name);
-            if(property==null)
-                context.problemListener.reportUnknownProperty(jsxProp, jsxProp.id.name);
-            else
-                property.validate(context, jsxProp)
-        });
-    Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
-        var prop = propertyMap.entries[name];
-        if(prop.isRequired() && !actualNames.has(name))
-            context.problemListener.reportMissingProperty(this, name);
-    }, this);
-};
-
-JsxElementBase.prototype.declare = function(transpiler) {
-    if (!this.isHtmlTag()) {
-        var decl = transpiler.context.getRegisteredDeclaration(this.id.name);
-        if(decl==null)
-            transpiler.context.problemListener.reportUnknownIdentifier(this.id);
-        else
-            decl.declare(transpiler.newLocalTranspiler());
-    }
-    if(this.properties!=null) {
-        var propertyMap = this.getPropertyMap(transpiler.context);
-        this.properties.forEach(function (jsxprop) {
-            this.declareProperty(transpiler, propertyMap, jsxprop);
-        }, this);
-    }
-    this.declareChildren(transpiler);
-};
-
-
-JsxElementBase.prototype.declareProperty = function(transpiler, propertyMap, jsxProp) {
-    var name = jsxProp.id.name;
-    var property = propertyMap ? propertyMap.get(name) : null;
-    if(!property && !this.isHtmlTag())
-        property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
-    if(property)
-        property.declare(transpiler, jsxProp);
-    else
-        jsxProp.declare(transpiler);
-
-};
-
-
-JsxElementBase.prototype.declareChildren = function(transpiler) {
-    // nothing to do
-};
-
-
-JsxElementBase.prototype.transpile = function(transpiler) {
-    transpiler.append("React.createElement(");
-    if (isCharacterUpperCase(this.id.name[0]))
-        transpiler.append(this.id.name);
-    else
-        transpiler.append('"').append(this.id.name).append('"');
-    transpiler.append(", ");
-    if(this.properties==null || this.properties.length===0)
-        transpiler.append("null");
-    else {
-        var propertyMap = this.getPropertyMap(transpiler.context);
-        transpiler.append("{");
-        this.properties.forEach(function(jsxProp) {
-            this.transpileProperty(transpiler, propertyMap, jsxProp);
-            transpiler.append(", ");
-        }, this);
-        transpiler.trimLast(2).append("}");
-    }
-    this.transpileChildren(transpiler);
-    transpiler.append(")");
-};
-
-
-JsxElementBase.prototype.transpileProperty = function(transpiler, propertyMap, jsxProp) {
-    var name = jsxProp.id.name;
-    var property = propertyMap ? propertyMap.get(name) : null;
-    if(!property && !this.isHtmlTag())
-        property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
-    if(property)
-        property.transpile(transpiler, jsxProp);
-    else
-        jsxProp.transpile(transpiler);
-
-};
-
-
-JsxElementBase.prototype.transpileChildren = function(transpiler) {
-    // nothing to do
-};
-
-JsxElementBase.set_HTML_TEST_MODE = function(mode) {
-    HTML_PROPERTIES_MAP = null;
-    HTML_TEST_MODE = mode;
-};
 
 exports.JsxElementBase = JsxElementBase;

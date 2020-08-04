@@ -11,13 +11,145 @@ var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var AnyNativeCategoryDeclaration = require("../declaration/AnyNativeCategoryDeclaration").AnyNativeCategoryDeclaration;
 var intrinsic = require("../intrinsic");
 
-function JavaScriptType(name) {
-	type.CategoryType.call(this, name);
-	return this;
-}
+class JavaScriptType extends type.CategoryType {
+  
+    constructor(name) {
+        super(name);
+    }
 
-JavaScriptType.prototype = Object.create(type.CategoryType.prototype);
-JavaScriptType.prototype.constructor = JavaScriptType;
+    convertJavaScriptValueToPromptoValue(context, value, returnType) {
+        return this.doConvertJavaScriptValueToPromptoValue(context, value, this.name, returnType);
+    }
+
+    doConvertJavaScriptValueToPromptoValue(context, value, klass, returnType) {
+        if(value==null)
+            return NullValue.instance;
+        var res = this.convertValue(value);
+        if(res)
+            return res;
+        else
+            res = this.convertNative(context, value, klass, returnType);
+        if(res)
+            return res;
+        else
+            res = this.convertDocument(context, value, klass, returnType);
+        if(res)
+            return res;
+        else
+            res = this.convertList(context, value, klass, returnType);
+        if(res)
+            return res;
+        else
+            res = this.convertSet(context, value, klass, returnType);
+        if(res)
+            return res;
+        else
+            res = this.convertDict(context, value, klass, returnType);
+        if(res)
+            return res;
+        else
+            res = this.convertIterator(context, value, klass, returnType);
+        if(res)
+            return res;
+        else
+            res = this.convertCategory(context, value, klass, returnType);
+        if(res)
+            return res;
+        else if(returnType==type.AnyType.instance) {
+            return new NativeInstance(AnyNativeCategoryDeclaration.instance, value);
+        } else {
+            // when running under nodeunit, process.stdout is sometimes a WriteStream rather than a Socket
+            // so need to adjust accordingly to prevent TestNative.testPrinter to fail
+            if(klass=='WriteStream') {
+                res = this.convertCategory(context, value, "Socket", returnType);
+                if(res)
+                    return res;
+            }
+            throw new InternalError("Unable to convert:" + getTypeName(value));
+        }
+    }
+
+    convertCategory(context, value, klass, returnType) {
+        var decl = context.getNativeBinding(klass);
+        if(decl!=null)
+            return new NativeInstance(context, decl, value);
+        else
+            return null;
+    }
+
+    convertIterator(context, value, klass, returnType) {
+        if(returnType instanceof type.IteratorType && value.hasNext!==undefined && value.next!==undefined) {
+            var self = this;
+            var converting = {
+                hasNext : function() { return value.hasNext(); },
+                next : function() {
+                    var item = value.next();
+                    klass = getTypeName(item);
+                    return self.doConvertJavaScriptValueToPromptoValue(context, item, klass, returnType.itemType);
+                }
+            };
+            return new IteratorValue(returnType.itemType, converting);
+        } else
+            return null; // TODO
+    }
+
+    convertDict(context, value, klass, returnType) {
+        return null; // TODO
+    }
+
+    convertSet(context, value, klass, returnType) {
+        return null; // TODO
+    }
+
+    convertList(context, value, klass, returnType) {
+        var maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+        if(maybeList && (klass==="Array" || klass==="List")) {
+            var itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
+            var items = value.map(function(item) {
+                klass = getTypeName(item);
+                return this.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
+            }, this);
+            return new ListValue(itemType, items);
+        } else
+            return null;
+    }
+
+    convertDocument(context, value, klass, returnType) {
+        var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+        if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
+            var doc = new DocumentValue();
+            Object.getOwnPropertyNames(value).forEach(function(name) {
+                var item = value[name];
+                klass = getTypeName(item);
+                item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
+                doc.setMember(context, new Identifier(name), item);
+            }, this);
+            return doc;
+        } else
+            return null;
+    }
+
+    convertNative(context, value, klass, returnType) {
+        var promptoType = JavaScriptType.scriptToTypeMap[klass] || null;
+        if (promptoType != null) {
+            return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
+        } else if(klass=='number') {
+            if (Number.isInteger(value)) {
+                return type.IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
+            } else {
+                return type.DecimalType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
+            }
+        } else
+            return null;
+    }
+
+    convertValue(value) {
+        if(value instanceof Value)
+            return value;
+        else
+            return null;
+    }
+}
 
 
 JavaScriptType.scriptToTypeMap = {
@@ -34,138 +166,5 @@ JavaScriptType.scriptToTypeMap[intrinsic.DateTime.name] = type.DateTimeType.inst
 JavaScriptType.scriptToTypeMap[intrinsic.Period.name] = type.PeriodType.instance;
 JavaScriptType.scriptToTypeMap[intrinsic.UUID.name] = type.UUIDType.instance;
 JavaScriptType.scriptToTypeMap[intrinsic.Version.name] = type.VersionType.instance;
-
-JavaScriptType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-    return this.doConvertJavaScriptValueToPromptoValue(context, value, this.name, returnType);
-};
-
-JavaScriptType.prototype.doConvertJavaScriptValueToPromptoValue = function(context, value, klass, returnType) {
-    if(value==null)
-        return NullValue.instance;
-    var res = this.convertValue(value);
-    if(res)
-        return res;
-    else
-        res = this.convertNative(context, value, klass, returnType);
-    if(res)
-        return res;
-    else
-        res = this.convertDocument(context, value, klass, returnType);
-    if(res)
-        return res;
-    else
-        res = this.convertList(context, value, klass, returnType);
-    if(res)
-        return res;
-    else
-        res = this.convertSet(context, value, klass, returnType);
-    if(res)
-        return res;
-    else
-        res = this.convertDict(context, value, klass, returnType);
-    if(res)
-        return res;
-    else
-        res = this.convertIterator(context, value, klass, returnType);
-    if(res)
-        return res;
-    else
-        res = this.convertCategory(context, value, klass, returnType);
-    if(res)
-        return res;
-    else if(returnType==type.AnyType.instance) {
-        return new NativeInstance(AnyNativeCategoryDeclaration.instance, value);
-	} else {
-        // when running under nodeunit, process.stdout is sometimes a WriteStream rather than a Socket
-        // so need to adjust accordingly to prevent TestNative.testPrinter to fail
-        if(klass=='WriteStream') {
-            res = this.convertCategory(context, value, "Socket", returnType);
-            if(res)
-                return res;
-        }
-		throw new InternalError("Unable to convert:" + getTypeName(value));
-	}
-};
-
-JavaScriptType.prototype.convertCategory = function(context, value, klass, returnType) {
-    var decl = context.getNativeBinding(klass);
-    if(decl!=null)
-        return new NativeInstance(context, decl, value);
-    else
-        return null;
-};
-
-JavaScriptType.prototype.convertIterator = function(context, value, klass, returnType) {
-    if(returnType instanceof type.IteratorType && value.hasNext!==undefined && value.next!==undefined) {
-        var self = this;
-        var converting = {
-            hasNext : function() { return value.hasNext(); },
-            next : function() {
-                var item = value.next();
-                klass = getTypeName(item);
-                return self.doConvertJavaScriptValueToPromptoValue(context, item, klass, returnType.itemType);
-            }
-        };
-        return new IteratorValue(returnType.itemType, converting);
-    } else
-        return null; // TODO
-};
-
-JavaScriptType.prototype.convertDict = function(context, value, klass, returnType) {
-    return null; // TODO
-};
-
-JavaScriptType.prototype.convertSet = function(context, value, klass, returnType) {
-    return null; // TODO
-};
-
-JavaScriptType.prototype.convertList = function(context, value, klass, returnType) {
-    var maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
-    if(maybeList && (klass==="Array" || klass==="List")) {
-        var itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
-        var items = value.map(function(item) {
-            klass = getTypeName(item);
-            return this.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
-        }, this);
-        return new ListValue(itemType, items);
-    } else
-        return null;
-};
-
-JavaScriptType.prototype.convertDocument = function(context, value, klass, returnType) {
-    var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
-    if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
-        var doc = new DocumentValue();
-        Object.getOwnPropertyNames(value).forEach(function(name) {
-            var item = value[name];
-            klass = getTypeName(item);
-            item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
-            doc.setMember(context, new Identifier(name), item);
-        }, this);
-        return doc;
-    } else
-        return null;
-};
-
-JavaScriptType.prototype.convertNative = function(context, value, klass, returnType) {
-    var promptoType = JavaScriptType.scriptToTypeMap[klass] || null;
-    if (promptoType != null) {
-        return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
-    } else if(klass=='number') {
-        if (Number.isInteger(value)) {
-            return type.IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
-        } else {
-            return type.DecimalType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
-        }
-    } else
-        return null;
-};
-
-JavaScriptType.prototype.convertValue = function(value) {
-    if(value instanceof Value)
-        return value;
-    else
-        return null;
-};
 
 exports.JavaScriptType = JavaScriptType;

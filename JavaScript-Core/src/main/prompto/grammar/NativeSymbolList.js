@@ -1,11 +1,10 @@
 var SymbolList = require("./SymbolList").SymbolList;
 
-function NativeSymbolList(symbol) {
-	SymbolList.call(this, symbol);
-	return this;
+class NativeSymbolList extends SymbolList {
+    constructor(symbol) {
+        super(symbol);
+        return this;
+    }
 }
-
-NativeSymbolList.prototype = Object.create(SymbolList.prototype);
-NativeSymbolList.prototype.constructor = NativeSymbolList;
 
 exports.NativeSymbolList = NativeSymbolList;

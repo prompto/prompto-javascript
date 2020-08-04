@@ -13,486 +13,429 @@ exports.resolve = function() {
     NullType = require("./NullType").NullType;
 }
 
-function BaseType(id) {
-    this.id = id;
-    return this;
-}
+class BaseType {
+ 
+    constructor(id) {
+        this.id = id;
+    }
 
-Object.defineProperty(BaseType.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
-BaseType.prototype.anyfy = function() {
-    return this;
-};
-
-
-BaseType.prototype.resolve = function(context, onError) {
-    return this;
-};
-
-
-BaseType.prototype.asMutable = function(context, mutable) {
-    if(mutable)
-        context.problemListener.reportError(this, this.name + " cannot be mutable");
-    else
+    anyfy() {
         return this;
-};
-
-
-BaseType.prototype.isStorable = function(context) {
-    return false;
-};
-
-
-BaseType.prototype.getTranspiledName = function() {
-    return this.name;
-};
-
-
-BaseType.prototype.toString = function() {
-    return this.name;
-};
-
-
-BaseType.prototype.equals = function(other) {
-    return (other instanceof BaseType) && this.name==other.name;
-};
-
-
-BaseType.prototype.isAssignableFrom = function(context, other) {
-    return this==other || this.equals(other) || other==NullType.instance;
-};
-
-
-BaseType.prototype.getMemberMethods = function(context, name) {
-    return [];
-};
-
-
-BaseType.prototype.getStaticMemberMethods = function(context, name) {
-    return [];
-};
-
-
-BaseType.prototype.transpile = function(transpiler) {
-    throw new Error("Transpile not implemented by " + this.constructor.name);
-};
-
-
-BaseType.prototype.transpileAssignMemberValue = function(transpiler, name, expression) {
-    throw new SyntaxError("Cannot transpile assign member value from " + this.name);
-};
-
-
-BaseType.prototype.transpileAssignItemValue = function(transpiler, item, expression) {
-    throw new SyntaxError("Cannot transpile assign item value from " + this.name);
-};
-
-
-BaseType.prototype.checkAdd = function(context, other, tryReverse) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkAdd(context, other.derivedFrom, tryReverse);
-    else if(tryReverse)
-        return other.checkAdd(context, this, false);
-    else
-        throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.declareAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareAdd(transpiler, other.derivedFrom, tryReverse, left, right);
-    else if(tryReverse)
-        return other.declareAdd(transpiler, this, false, right, left);
-    else
-        throw new SyntaxError("Cannot declare add " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.transpileAdd = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileAdd(transpiler, other.derivedFrom, tryReverse, left, right);
-    else if(tryReverse)
-        return other.transpileAdd(transpiler, this, false, right, left);
-    else
-        throw new SyntaxError("Cannot transpile add " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.checkSubtract = function(context, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkSubtract(context, other.derivedFrom);
-    else
-        throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
-};
-
-
-BaseType.prototype.declareSubtract = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareSubtract(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot declare substract " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.transpileSubtract = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileSubtract(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot transpile substract " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.checkDivide = function(context, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkDivide(context, other.derivedFrom);
-    else
-        throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
-};
-
-
-BaseType.prototype.declareDivide = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareDivide(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot declare divide " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.transpileDivide = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileDivide(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.checkIntDivide = function(context, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkIntDivide(context, other.derivedFrom);
-    else
-        throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
-};
-
-
-BaseType.prototype.declareIntDivide = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareIntDivide(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot declare int divide " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.transpileIntDivide = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileIntDivide(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot transpile int divide " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.checkModulo = function(context, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkModulo(context, other.derivedFrom);
-    else
-        throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
-};
-
-
-BaseType.prototype.declareModulo = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareModulo(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot declare modulo " + this.name + " to " + other.name);
-};
-
-BaseType.prototype.transpileModulo = function(transpiler, other, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileModulo(transpiler, other.derivedFrom, left, right);
-    else
-        throw new SyntaxError("Cannot transpile modulo " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.checkMultiply = function(context, other, tryReverse) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkMultiply(context, other.derivedFrom, tryReverse);
-    else if(tryReverse)
-        return other.checkMultiply(context, this, false);
-    else
-        throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
-};
-
-BaseType.prototype.declareMultiply = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
-    else if(tryReverse)
-        return other.declareMultiply(transpiler, this, false, right, left);
-    else
-        throw new SyntaxError("Cannot declare multiply " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.transpileMultiply = function(transpiler, other, tryReverse, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
-    else if(tryReverse)
-        return other.transpileMultiply(transpiler, this, false, right, left);
-    else
-        throw new SyntaxError("Cannot transpile multiply " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.checkMinus = function(context) {
-    if(this instanceof EnumeratedNativeType)
-        return this.derivedFrom.checkMinus(context);
-    else
-        throw new SyntaxError("Cannot negate " + this.name);
-};
-
-
-BaseType.prototype.declareMinus = function(transpiler, value) {
-    if(this instanceof EnumeratedNativeType)
-        return this.derivedFrom.declareMinus(transpiler, value);
-    else
-        throw new SyntaxError("Cannot declare negate " + this.name);
-};
-
-
-BaseType.prototype.transpileMinus = function(transpiler, value) {
-    if(this instanceof EnumeratedNativeType)
-        return this.derivedFrom.transpileMinus(transpiler, value);
-    else
-        throw new SyntaxError("Cannot transpile negate of " + this.name );
-};
-
-
-BaseType.prototype.checkCompare = function(context, other, section) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkCompare(context, other.derivedFrom, section);
-    else
-        context.problemListener.reportError(section, "Cannot compare " + this.name + " to " + other.name);
-};
-
-
-BaseType.prototype.declareCompare = function(transpiler, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareCompare(transpiler, other.derivedFrom);
-    else
-        throw new SyntaxError(this.name + " cannot declare compare " + other.name);
-};
-
-
-BaseType.prototype.transpileCompare = function(transpiler, other, operator, left, right) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileCompare(transpiler, other.derivedFrom, operator, left, right);
-    else
-        throw new SyntaxError(this.name + " cannot transpile compare " + other.name);
-};
-
-
-BaseType.prototype.checkContains = function(context, section, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkContains(context, section, other.derivedFrom);
-    else {
-        context.problemListener.reportError(section, this.name + " cannot contain " + other.name);
-        return BooleanType.instance;
     }
-};
 
-
-BaseType.prototype.declareContains = function(transpiler, other, container, item) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareContains(transpiler, other.derivedFrom, container, item);
-    else
-        throw new SyntaxError(this.name + " cannot declare contain " + other.name);
-};
-
-BaseType.prototype.transpileContains = function(transpiler, other, container, item) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileContains(transpiler, other.derivedFrom, container, item);
-    else
-        throw new SyntaxError(this.name + " cannot transpile contain " + other.name);
-};
-
-
-BaseType.prototype.checkContainsAllOrAny = function(context, other) {
-    if(other instanceof EnumeratedNativeType)
-        return this.checkContainsAllOrAny(context, other.derivedFrom);
-    else
-        throw new SyntaxError(this.name + " cannot contain all or any " + other.name);
-};
-
-BaseType.prototype.declareContainsAllOrAny = function(transpiler, other, container, item) {
-    if(other instanceof EnumeratedNativeType)
-        return this.declareContainsAllOrAny(transpiler, other.derivedFrom, container, item);
-    else
-        throw new SyntaxError(this.name + " cannot declare contain all or any " + other.name);
-};
-
-
-BaseType.prototype.transpileContainsAll = function(transpiler, other, container, item) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileContainsAll(transpiler, other.derivedFrom, container, item);
-    else
-        throw new SyntaxError(this.name + " cannot transpile contain all " + other.name);
-};
-
-BaseType.prototype.transpileContainsAny = function(transpiler, other, container, item) {
-    if(other instanceof EnumeratedNativeType)
-        return this.transpileContainsAny(transpiler, other.derivedFrom, container, item);
-    else
-        throw new SyntaxError(this.name + " cannot transpile contain any " + other.name);
-};
-
-
-
-BaseType.prototype.checkItem = function(context, itemType, expression) {
-    if(itemType instanceof EnumeratedNativeType)
-        return this.checkItem(context, itemType.derivedFrom, expression);
-    else {
-        context.problemListener.reportInvalidItem(this, itemType, expression);
-        return VoidType.instance;
+    resolve(context, onError) {
+        return this;
     }
-};
 
+    asMutable(context, mutable) {
+        if(mutable)
+            context.problemListener.reportError(this, this.name + " cannot be mutable");
+        else
+            return this;
+    }
 
-BaseType.prototype.declareItem = function(transpiler, itemType, item) {
-    if(itemType instanceof EnumeratedNativeType)
-        return this.declareItem(transpiler, itemType.derivedFrom, item);
-    else
-        throw new SyntaxError("Cannot declare item from: " + this.name);
-};
+    isStorable(context) {
+        return false;
+    }
 
+    getTranspiledName() {
+        return this.name;
+    }
 
-BaseType.prototype.transpileItem = function(transpiler, itemType, item) {
-    if(itemType instanceof EnumeratedNativeType)
-        return this.transpileItem(transpiler, itemType.derivedFrom);
-    else
-        throw new SyntaxError("Cannot transpile item from: " + this.name);
-};
+    toString() {
+        return this.name;
+    }
 
+    equals(other) {
+        return (other instanceof BaseType) && this.name==other.name;
+    }
 
-BaseType.prototype.checkMember = function(context, section, name) {
-    if("text" == name)
-        return TextType.instance;
-    else {
+    isAssignableFrom(context, other) {
+        return this==other || this.equals(other) || other==NullType.instance;
+    }
+
+    getMemberMethods(context, name) {
+        return [];
+    }
+
+    getStaticMemberMethods(context, name) {
+        return [];
+    }
+
+    transpile(transpiler) {
+        throw new Error("Transpile not implemented by " + this.constructor.name);
+    }
+
+    transpileAssignMemberValue(transpiler, name, expression) {
+        throw new SyntaxError("Cannot transpile assign member value from " + this.name);
+    }
+
+    transpileAssignItemValue(transpiler, item, expression) {
+        throw new SyntaxError("Cannot transpile assign item value from " + this.name);
+    }
+
+    checkAdd(context, other, tryReverse) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkAdd(context, other.derivedFrom, tryReverse);
+        else if(tryReverse)
+            return other.checkAdd(context, this, false);
+        else
+            throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
+    }
+
+    declareAdd(transpiler, other, tryReverse, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareAdd(transpiler, other.derivedFrom, tryReverse, left, right);
+        else if(tryReverse)
+            return other.declareAdd(transpiler, this, false, right, left);
+        else
+            throw new SyntaxError("Cannot declare add " + this.name + " to " + other.name);
+    }
+
+    transpileAdd(transpiler, other, tryReverse, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileAdd(transpiler, other.derivedFrom, tryReverse, left, right);
+        else if(tryReverse)
+            return other.transpileAdd(transpiler, this, false, right, left);
+        else
+            throw new SyntaxError("Cannot transpile add " + this.name + " to " + other.name);
+    }
+
+    checkSubtract(context, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkSubtract(context, other.derivedFrom);
+        else
+            throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
+    }
+
+    declareSubtract(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareSubtract(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot declare substract " + this.name + " to " + other.name);
+    }
+
+    transpileSubtract(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileSubtract(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot transpile substract " + this.name + " to " + other.name);
+    }
+
+    checkDivide(context, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkDivide(context, other.derivedFrom);
+        else
+            throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
+    }
+
+    declareDivide(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareDivide(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot declare divide " + this.name + " to " + other.name);
+    }
+
+    transpileDivide(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileDivide(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
+    }
+
+    checkIntDivide(context, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkIntDivide(context, other.derivedFrom);
+        else
+            throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
+    }
+
+    declareIntDivide(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareIntDivide(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot declare int divide " + this.name + " to " + other.name);
+    }
+
+    transpileIntDivide(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileIntDivide(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot transpile int divide " + this.name + " to " + other.name);
+    }
+
+    checkModulo(context, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkModulo(context, other.derivedFrom);
+        else
+            throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
+    }
+
+    declareModulo(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareModulo(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot declare modulo " + this.name + " to " + other.name);
+    }
+
+    transpileModulo(transpiler, other, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileModulo(transpiler, other.derivedFrom, left, right);
+        else
+            throw new SyntaxError("Cannot transpile modulo " + this.name + " to " + other.name);
+    }
+
+    checkMultiply(context, other, tryReverse) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkMultiply(context, other.derivedFrom, tryReverse);
+        else if(tryReverse)
+            return other.checkMultiply(context, this, false);
+        else
+            throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
+    }
+
+    declareMultiply(transpiler, other, tryReverse, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
+        else if(tryReverse)
+            return other.declareMultiply(transpiler, this, false, right, left);
+        else
+            throw new SyntaxError("Cannot declare multiply " + this.name + " to " + other.name);
+    }
+
+    transpileMultiply(transpiler, other, tryReverse, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
+        else if(tryReverse)
+            return other.transpileMultiply(transpiler, this, false, right, left);
+        else
+            throw new SyntaxError("Cannot transpile multiply " + this.name + " to " + other.name);
+    }
+
+    checkMinus(context) {
+        if(this instanceof EnumeratedNativeType)
+            return this.derivedFrom.checkMinus(context);
+        else
+            throw new SyntaxError("Cannot negate " + this.name);
+    }
+
+    declareMinus(transpiler, value) {
+        if(this instanceof EnumeratedNativeType)
+            return this.derivedFrom.declareMinus(transpiler, value);
+        else
+            throw new SyntaxError("Cannot declare negate " + this.name);
+    }
+
+    transpileMinus(transpiler, value) {
+        if(this instanceof EnumeratedNativeType)
+            return this.derivedFrom.transpileMinus(transpiler, value);
+        else
+            throw new SyntaxError("Cannot transpile negate of " + this.name );
+    }
+
+    checkCompare(context, other, section) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkCompare(context, other.derivedFrom, section);
+        else
+            context.problemListener.reportError(section, "Cannot compare " + this.name + " to " + other.name);
+    }
+
+    declareCompare(transpiler, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareCompare(transpiler, other.derivedFrom);
+        else
+            throw new SyntaxError(this.name + " cannot declare compare " + other.name);
+    }
+
+    transpileCompare(transpiler, other, operator, left, right) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileCompare(transpiler, other.derivedFrom, operator, left, right);
+        else
+            throw new SyntaxError(this.name + " cannot transpile compare " + other.name);
+    }
+
+    checkContains(context, section, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkContains(context, section, other.derivedFrom);
+        else {
+            context.problemListener.reportError(section, this.name + " cannot contain " + other.name);
+            return BooleanType.instance;
+        }
+    }
+
+    declareContains(transpiler, other, container, item) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareContains(transpiler, other.derivedFrom, container, item);
+        else
+            throw new SyntaxError(this.name + " cannot declare contain " + other.name);
+    }
+
+    transpileContains(transpiler, other, container, item) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileContains(transpiler, other.derivedFrom, container, item);
+        else
+            throw new SyntaxError(this.name + " cannot transpile contain " + other.name);
+    }
+
+    checkContainsAllOrAny(context, other) {
+        if(other instanceof EnumeratedNativeType)
+            return this.checkContainsAllOrAny(context, other.derivedFrom);
+        else
+            throw new SyntaxError(this.name + " cannot contain all or any " + other.name);
+    }
+
+    declareContainsAllOrAny(transpiler, other, container, item) {
+        if(other instanceof EnumeratedNativeType)
+            return this.declareContainsAllOrAny(transpiler, other.derivedFrom, container, item);
+        else
+            throw new SyntaxError(this.name + " cannot declare contain all or any " + other.name);
+    }
+
+    transpileContainsAll(transpiler, other, container, item) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileContainsAll(transpiler, other.derivedFrom, container, item);
+        else
+            throw new SyntaxError(this.name + " cannot transpile contain all " + other.name);
+    }
+
+    transpileContainsAny(transpiler, other, container, item) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileContainsAny(transpiler, other.derivedFrom, container, item);
+        else
+            throw new SyntaxError(this.name + " cannot transpile contain any " + other.name);
+    }
+
+    checkItem(context, itemType, expression) {
+        if(itemType instanceof EnumeratedNativeType)
+            return this.checkItem(context, itemType.derivedFrom, expression);
+        else {
+            context.problemListener.reportInvalidItem(this, itemType, expression);
+            return VoidType.instance;
+        }
+    }
+
+    declareItem(transpiler, itemType, item) {
+        if(itemType instanceof EnumeratedNativeType)
+            return this.declareItem(transpiler, itemType.derivedFrom, item);
+        else
+            throw new SyntaxError("Cannot declare item from: " + this.name);
+    }
+
+    transpileItem(transpiler, itemType, item) {
+        if(itemType instanceof EnumeratedNativeType)
+            return this.transpileItem(transpiler, itemType.derivedFrom);
+        else
+            throw new SyntaxError("Cannot transpile item from: " + this.name);
+    }
+
+    checkMember(context, section, name) {
+        if("text" == name)
+            return TextType.instance;
+        else {
+            context.problemListener.reportUnknownAttribute(section, this, name);
+            return VoidType.instance;
+        }
+    }
+
+    checkStaticMember(context, section, name) {
         context.problemListener.reportUnknownAttribute(section, this, name);
         return VoidType.instance;
     }
-};
 
+    declareMember(transpiler, section, name) {
+        if("text" !== name)
+            transpiler.context.problemListener.reportUnknownAttribute(section, section, name);
+    }
 
-BaseType.prototype.checkStaticMember = function(context, section, name) {
-    context.problemListener.reportUnknownAttribute(section, this, name);
-    return VoidType.instance;
-};
+    transpileMember(transpiler, name) {
+        if("text" == name)
+            transpiler.append("getText()");
+        else
+            throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
+    }
 
+    checkSlice(context) {
+        throw new SyntaxError("Cannot slice " + this.name);
+    }
 
-BaseType.prototype.declareMember = function(transpiler, section, name) {
-    if("text" !== name)
-        transpiler.context.problemListener.reportUnknownAttribute(section, section, name);
-};
+    declareSlice(transpiler, first, last) {
+        throw new SyntaxError("Cannot declare slice for " + this.name);
+    }
 
-BaseType.prototype.transpileMember = function(transpiler, name) {
-    if("text" == name)
-        transpiler.append("getText()");
-    else
-        throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
-};
+    transpileSlice(transpiler, first, last) {
+        throw new SyntaxError("Cannot transpile slice for " + this.name);
+    }
 
+    checkIterator(context, source) {
+        context.problemListener.reportCannotIterate(source);
+        return VoidType.instance;
+    }
 
-BaseType.prototype.checkSlice = function(context) {
-    throw new SyntaxError("Cannot slice " + this.name);
-};
+    declareIterator(transpiler, name, expression) {
+        throw new SyntaxError("Cannot declare iterate over " + this.name);
+    }
 
+    transpileIterator(transpiler, name, expression) {
+        throw new SyntaxError("Cannot transpile iterate over " + this.name);
+    }
 
-BaseType.prototype.declareSlice = function(transpiler, first, last) {
-    throw new SyntaxError("Cannot declare slice for " + this.name);
-};
+    checkAssignableFrom(context, other, section) {
+        if (!this.isAssignableFrom(context, other))
+            context.problemListener.reportIncompatibleTypes(section, this, other);
+    }
 
+    checkRange(context, other) {
+        throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
+    }
 
-BaseType.prototype.transpileSlice = function(transpiler, first, last) {
-    throw new SyntaxError("Cannot transpile slice for " + this.name);
-};
+    declareRange(context, other) {
+        throw new SyntaxError("Cannot declare range of " + this.name + " and " + other.name);
+    }
 
-BaseType.prototype.checkIterator = function(context, source) {
-    context.problemListener.reportCannotIterate(source);
-    return VoidType.instance;
-};
+    transpileRange(transpiler, first, last) {
+        throw new SyntaxError("Cannot transpile range of " + this.name);
+    }
 
+    checkAnd(context, other) {
+        throw new SyntaxError("Cannot logically combine " + this.name + " and " + other.name);
+    }
 
-BaseType.prototype.declareIterator = function(transpiler, name, expression) {
-    throw new SyntaxError("Cannot declare iterate over " + this.name);
-};
+    checkOr(context, other) {
+        throw new SyntaxError("Cannot logically combine " + this.name + " or " + other.name);
+    }
 
-BaseType.prototype.transpileIterator = function(transpiler, name, expression) {
-    throw new SyntaxError("Cannot transpile iterate over " + this.name);
-};
+    checkNot(context) {
+        throw new SyntaxError("Cannot logically negate " + this.name);
+    }
 
+    getMember(context, name) {
+        throw new SyntaxError("Cannot read member from " + this.name);
+    }
 
-BaseType.prototype.checkAssignableFrom = function(context, other, section) {
-    if (!this.isAssignableFrom(context, other))
-        context.problemListener.reportIncompatibleTypes(section, this, other);
-};
+    readJSONValue(context, node, parts) {
+        throw new Error("Unsupported!")
+    }
 
-BaseType.prototype.checkRange = function(context, other) {
-    throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
-};
+    declareSorted(transpiler, key) {
+        throw new Error("Cannot declare sorted from " + this.name);
+    }
 
-BaseType.prototype.declareRange = function(context, other) {
-    throw new SyntaxError("Cannot declare range of " + this.name + " and " + other.name);
-};
+    getSortedComparator(context, key, desc) {
+        throw new Error("Unsupported for type " + this.name);
+    }
 
+    convertJavaScriptValueToPromptoValue(context, value, returnType) {
+        return value; // TODO for now
+    }
 
-BaseType.prototype.transpileRange = function(transpiler, first, last) {
-    throw new SyntaxError("Cannot transpile range of " + this.name);
-};
-
-
-BaseType.prototype.checkAnd = function(context, other) {
-    throw new SyntaxError("Cannot logically combine " + this.name + " and " + other.name);
-};
-
-BaseType.prototype.checkOr = function(context, other) {
-    throw new SyntaxError("Cannot logically combine " + this.name + " or " + other.name);
-};
-
-BaseType.prototype.checkNot = function(context) {
-    throw new SyntaxError("Cannot logically negate " + this.name);
-};
-
-BaseType.prototype.getMember = function(context, name) {
-    throw new SyntaxError("Cannot read member from " + this.name);
-};
-
-
-BaseType.prototype.readJSONValue = function(context, node, parts) {
-    throw new Error("Unsupported!")
-};
-
-
-BaseType.prototype.declareSorted = function(transpiler, key) {
-    throw new Error("Cannot declare sorted from " + this.name);
-};
-
-
-BaseType.prototype.getSortedComparator = function(context, key, desc) {
-    throw new Error("Unsupported for type " + this.name);
-};
-
-
-BaseType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-    return value; // TODO for now
-};
-
-
-BaseType.prototype.toDialect = function(writer) {
-    writer.append(this.name);
-};
+    toDialect(writer) {
+        writer.append(this.name);
+    }
+}
 
 
 exports.BaseType = BaseType;

@@ -1,39 +1,38 @@
-function ObjectList(items, item) {
-	Array.call(this);
-	items = items || null;
-	if(items!==null) {
-		this.addAll(items);
-	}
-    item = item || null;
-    if(item!==null) {
-        this.add(item);
+class ObjectList extends Array {
+
+    constructor(items, item) {
+        super();
+        items = items || null;
+        if(items!==null) {
+            this.addAll(items);
+        }
+        item = item || null;
+        if(item!==null) {
+            this.add(item);
+        }
     }
-	return this;
+
+    addAll(items) {
+        this.push.apply(this, Array.from(items));
+    }
+
+    add(item) {
+        if(item)
+            this.push(item);
+    }
+
+    insert(before, item) {
+        this.splice(0, 0, item);
+    }
+
+    remove(index) {
+        this.splice(index, 1);
+    }
+
+    toString() {
+        return this.join(", ");
+    }
 }
-
-ObjectList.prototype = Object.create(Array.prototype);
-ObjectList.prototype.constructor = ObjectList;
-
-ObjectList.prototype.addAll = function(items) {
-	this.push.apply(this, items);
-};
-
-ObjectList.prototype.add = function(item) {
-	if(item)
-        this.push(item);
-};
-
-ObjectList.prototype.insert = function(before, item) {
-	this.splice(0, 0, item);
-};
-
-ObjectList.prototype.remove = function(index) {
-	this.splice(index, 1);
-};
-
-ObjectList.prototype.toString = function() {
-	return this.join(", ");
-};
 
 
 exports.ObjectList = ObjectList;

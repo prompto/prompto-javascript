@@ -112,40 +112,38 @@ function identicalArguments(args, argTypes) {
 	return true;
 }
 
-function Interpreter() {
-}
+class Interpreter {
+    static interpret(context, methodName, cmdLineArgs) {
+        try {
+            var method = locateMethod(context, methodName, cmdLineArgs);
+            var assignments = buildAssignments(method, cmdLineArgs);
+            var call = new MethodCall(new MethodSelector(null, new Identifier(methodName)),assignments);
+            call.interpret(context);
+        } finally {
+            context.terminated();
+        }
+    }
 
-Interpreter.interpret = function(context, methodName, cmdLineArgs) {
-	try {
-		var method = locateMethod(context, methodName, cmdLineArgs);
-		var assignments = buildAssignments(method, cmdLineArgs);
-		var call = new MethodCall(new MethodSelector(null, new Identifier(methodName)),assignments);
-		call.interpret(context);
-	} finally {
-		context.terminated();
-	}
-};
+    static interpretTests(context) {
+        for(var name in context.tests) {
+            var test = context.tests[name];
+            var local = context.newLocalContext();
+            test.interpret(local);
+        }
+    }
 
-
-Interpreter.interpretTests = function(context) {
-    for(var name in context.tests) {
-        var test = context.tests[name];
+    static interpretTest(context, name) {
+        var test = context.getRegisteredTest(name);
         var local = context.newLocalContext();
         test.interpret(local);
     }
-};
 
-Interpreter.interpretTest = function(context, name) {
-    var test = context.getRegisteredTest(name);
-    var local = context.newLocalContext();
-    test.interpret(local);
-};
-
-Interpreter.executeTest = function(context, name) {
-    var test = context.getRegisteredTest(name);
-    var local = context.newLocalContext();
-    test.interpret(local);
-};
+    static executeTest(context, name) {
+        var test = context.getRegisteredTest(name);
+        var local = context.newLocalContext();
+        test.interpret(local);
+    }
+}
 
 exports.locateMethod = locateMethod;
 exports.Interpreter = Interpreter;

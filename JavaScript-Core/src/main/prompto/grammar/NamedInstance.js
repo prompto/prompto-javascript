@@ -1,11 +1,10 @@
 var Section = require("../parser/Section").Section;
 
-function NamedInstance() {
-    Section.call(this);
-    return this;
-}
+class NamedInstance extends Section {
 
-NamedInstance.prototype = Object.create(Section.prototype);
-NamedInstance.prototype.constructor = NamedInstance;
+    constructor() {
+        super();
+    }
+}
 
 exports.NamedInstance = NamedInstance;

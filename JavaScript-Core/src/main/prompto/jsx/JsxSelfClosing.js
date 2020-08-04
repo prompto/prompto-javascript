@@ -1,28 +1,27 @@
 var JsxElementBase = require("./JsxElementBase").JsxElementBase;
 
-function JsxSelfClosing(id, nameSuite, properties, elementSuite) {
-    JsxElementBase.call(this, id, properties);
-    this.nameSuite = nameSuite;
-    this.elementSuite = elementSuite;
-    return this;
+class JsxSelfClosing extends JsxElementBase {
+    constructor(id, nameSuite, properties, elementSuite) {
+        super(id, properties);
+        this.nameSuite = nameSuite;
+        this.elementSuite = elementSuite;
+        return this;
+    }
+
+    toDialect(writer) {
+        writer.append("<").append(this.id.name);
+        if(this.nameSuite!=null)
+            writer.appendRaw(this.nameSuite);
+        else if(this.properties.length > 0)
+            writer.append(" ");
+        this.properties.forEach(function(prop) {
+            prop.toDialect(writer);
+        });
+        writer.append("/>");
+        if(this.elementSuite!=null)
+            writer.appendRaw(this.elementSuite);
+    }
 }
-
-JsxSelfClosing.prototype = Object.create(JsxElementBase.prototype);
-JsxSelfClosing.prototype.constructor = JsxSelfClosing;
-
-JsxSelfClosing.prototype.toDialect = function(writer) {
-    writer.append("<").append(this.id.name);
-    if(this.nameSuite!=null)
-        writer.appendRaw(this.nameSuite);
-    else if(this.properties.length > 0)
-        writer.append(" ");
-    this.properties.forEach(function(prop) {
-        prop.toDialect(writer);
-    });
-    writer.append("/>");
-    if(this.elementSuite!=null)
-        writer.appendRaw(this.elementSuite);
-};
 
 
 exports.JsxSelfClosing = JsxSelfClosing;

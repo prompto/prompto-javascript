@@ -2,46 +2,43 @@ var SimpleStatement = require("./SimpleStatement").SimpleStatement;
 var BreakResult = require("../runtime/BreakResult").BreakResult;
 var VoidType = require("../type/VoidType").VoidType;
 
-function BreakStatement() {
-	SimpleStatement.call(this);
-	return this;
+class BreakStatement extends SimpleStatement {
+    constructor() {
+        super();
+        return this;
+    }
+
+    toString() {
+        return "break"
+    }
+
+    toDialect(writer) {
+        writer.append("break");
+    }
+
+    equals(obj) {
+        return (obj instanceof BreakStatement);
+    }
+
+    check(context) {
+        return VoidType.instance;
+    }
+
+    interpret(context) {
+        return BreakResult.instance;
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append("break");
+    }
+
+    canReturn() {
+        return true;
+    }
 }
-
-BreakStatement.prototype = Object.create(SimpleStatement.prototype);
-BreakStatement.prototype.constructor = BreakStatement;
-
-BreakStatement.prototype.toString = function() {
-	return "break"
-}
-
-BreakStatement.prototype.toDialect = function(writer) {
-    writer.append("break");
-};
-
-
-BreakStatement.prototype.equals = function(obj) {
-	return (obj instanceof BreakStatement);
-};
-
-BreakStatement.prototype.check = function(context) {
-	return VoidType.instance;
-};
-
-BreakStatement.prototype.interpret = function(context) {
-    return BreakResult.instance;
-};
-
-BreakStatement.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-BreakStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("break");
-};
-
-
-BreakStatement.prototype.canReturn = function() {
-    return true;
-};
 
 exports.BreakStatement = BreakStatement;

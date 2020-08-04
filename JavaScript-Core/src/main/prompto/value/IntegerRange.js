@@ -7,30 +7,28 @@ exports.resolve =function() {
     IntegerType = require("../type/IntegerType").IntegerType;
 };
 
-function IntegerRange(left, right) {
-	RangeValue.call(this, IntegerType.instance, left, right);
-	return this;
+class IntegerRange extends RangeValue {
+    constructor(left, right) {
+        super(IntegerType.instance, left, right);
+        return this;
+    }
+
+    size() {
+        return 1 + this.high.IntegerValue() - this.low.IntegerValue();
+    }
+
+    getItem(index) {
+        var result = this.low.IntegerValue() + index - 1;
+        if(result>this.high.IntegerValue()) {
+            throw new IndexOutOfRangeError();
+        }
+        return new IntegerValue(result);
+    }
+
+    newInstance(left, right) {
+        return new IntegerRange(left, right);
+    }
 }
-
-IntegerRange.prototype = Object.create(RangeValue.prototype);
-IntegerRange.prototype.constructor = IntegerRange;
-
-IntegerRange.prototype.size = function() {
-	return 1 + this.high.IntegerValue() - this.low.IntegerValue();
-};
-
-
-IntegerRange.prototype.getItem = function(index) {
-	var result = this.low.IntegerValue() + index - 1;
-	if(result>this.high.IntegerValue()) {
-		throw new IndexOutOfRangeError();
-	}
-	return new IntegerValue(result);
-};
-
-IntegerRange.prototype.newInstance = function(left, right) {
-	return new IntegerRange(left, right);
-};
 
 
 exports.IntegerRange = IntegerRange;

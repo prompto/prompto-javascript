@@ -1,11 +1,10 @@
 var SymbolList = require("./SymbolList").SymbolList;
 
-function CategorySymbolList(symbol) {
-	SymbolList.call(this, symbol);
-	return this;
+class CategorySymbolList extends SymbolList {
+    constructor(symbol) {
+        super(symbol);
+        return this;
+    }
 }
-
-CategorySymbolList.prototype = Object.create(SymbolList.prototype);
-CategorySymbolList.prototype.constructor = CategorySymbolList;
 
 exports.CategorySymbolList = CategorySymbolList;

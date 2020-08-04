@@ -3,59 +3,57 @@ var Value = require("../value/Value").Value;
 var NullValue = require("../value/NullValue").NullValue;
 var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 
-function ItemSelector(parent, item) {
-	SelectorExpression.call(this, parent);
-	this.item = item;
+class ItemSelector extends SelectorExpression {
+    constructor(parent, item) {
+        super(parent);
+        this.item = item;
+    }
+
+    toString() {
+        return this.parent.toString() + "[" + this.item.toString() + "]";
+    }
+
+    toDialect(writer) {
+        this.parent.toDialect(writer);
+        writer.append("[");
+        this.item.toDialect(writer);
+        writer.append("]");
+    }
+
+    check(context) {
+        var parentType = this.parent.check(context);
+        var itemType = this.item.check(context);
+        return parentType.checkItem(context, itemType, this);
+    }
+
+    interpret(context) {
+        var o = this.parent.interpret(context);
+        if (o == null || o == NullValue.instance) {
+            throw new NullReferenceError();
+        }
+        var i = this.item.interpret(context);
+        if (i == null || i == NullValue.instance) {
+            throw new NullReferenceError();
+        }
+        if (o.getItemInContext && i instanceof Value) {
+            return o.getItemInContext(context, i);
+        } else {
+            throw new SyntaxError("Unknown container: " + this.parent);
+        }
+    }
+
+    declare(transpiler) {
+        var parentType = this.parent.check(transpiler.context);
+        var itemType = this.item.check(transpiler.context);
+        return parentType.declareItem(transpiler, itemType, this.item);
+    }
+
+    transpile(transpiler) {
+        this.parent.transpile(transpiler);
+        var parentType = this.parent.check(transpiler.context);
+        var itemType = this.item.check(transpiler.context);
+        return parentType.transpileItem(transpiler, itemType, this.item);
+    }
 }
-
-ItemSelector.prototype = Object.create(SelectorExpression.prototype);
-ItemSelector.prototype.constructor = ItemSelector;
-
-ItemSelector.prototype.toString = function() {
-	return this.parent.toString() + "[" + this.item.toString() + "]";
-};
-
-ItemSelector.prototype.toDialect = function(writer) {
-    this.parent.toDialect(writer);
-    writer.append("[");
-    this.item.toDialect(writer);
-    writer.append("]");
-};
-
-ItemSelector.prototype.check = function(context) {
-	var parentType = this.parent.check(context);
-	var itemType = this.item.check(context);
-	return parentType.checkItem(context, itemType, this);
-};
-
-ItemSelector.prototype.interpret = function(context) {
-    var o = this.parent.interpret(context);
-    if (o == null || o == NullValue.instance) {
-        throw new NullReferenceError();
-    }
-    var i = this.item.interpret(context);
-    if (i == null || i == NullValue.instance) {
-        throw new NullReferenceError();
-    }
-    if (o.getItemInContext && i instanceof Value) {
-        return o.getItemInContext(context, i);
-    } else {
-        throw new SyntaxError("Unknown container: " + this.parent);
-    }
-};
-
-ItemSelector.prototype.declare = function(transpiler) {
-    var parentType = this.parent.check(transpiler.context);
-    var itemType = this.item.check(transpiler.context);
-    return parentType.declareItem(transpiler, itemType, this.item);
-};
-
-
-ItemSelector.prototype.transpile = function(transpiler) {
-    this.parent.transpile(transpiler);
-    var parentType = this.parent.check(transpiler.context);
-    var itemType = this.item.check(transpiler.context);
-    return parentType.transpileItem(transpiler, itemType, this.item);
-};
 
 exports.ItemSelector = ItemSelector;

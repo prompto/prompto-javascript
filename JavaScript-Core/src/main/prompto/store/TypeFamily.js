@@ -1,11 +1,13 @@
-function TypeFamily(name) {
-    this.name = name;
-    return this;
-}
+class TypeFamily {
+    constructor(name) {
+        this.name = name;
+        return this;
+    }
 
-TypeFamily.prototype.toTranspiled = function() {
-    return "new TypeFamily('" + this.name + "')";
-};
+    toTranspiled() {
+        return "new TypeFamily('" + this.name + "')";
+    }
+}
 
 // non storable
 TypeFamily.BOOLEAN = new TypeFamily("BOOLEAN");

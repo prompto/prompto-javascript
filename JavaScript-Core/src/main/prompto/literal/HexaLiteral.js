@@ -21,17 +21,17 @@ function parseHexa(text) {
 	return new IntegerValue(value);
 }
 
-function HexaLiteral(text) {
-	Literal.call(this, text, parseHexa(text));
-	return this;
+class HexaLiteral extends Literal {
+    constructor(text) {
+        super(text, parseHexa(text));
+        return this;
+    }
+
+    check(context) {
+        return IntegerType.instance;
+    }
 }
 
-HexaLiteral.prototype = Object.create(Literal.prototype);
-HexaLiteral.prototype.constructor = HexaLiteral;
-
 HexaLiteral.parseHexa = parseHexa;
-HexaLiteral.prototype.check = function(context) {
-	return IntegerType.instance;
-};
 
 exports.HexaLiteral = HexaLiteral;

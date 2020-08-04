@@ -4,147 +4,145 @@ var NativeInstance = require("../value/NativeInstance").NativeInstance;
 var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
 var CategoryType = require("../type/CategoryType").CategoryType;
 
-function NativeCategoryDeclaration(id, attributes, categoryBindings, attributeBindings, methods) {
-    ConcreteCategoryDeclaration.call(this, id, attributes, null, methods);
-    this.categoryBindings = categoryBindings;
-    this.attributeBindings = attributeBindings;
-    this.bound = null;
-    return this;
-}
+class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
+    constructor(id, attributes, categoryBindings, attributeBindings, methods) {
+        super(id, attributes, null, methods);
+        this.categoryBindings = categoryBindings;
+        this.attributeBindings = attributeBindings;
+        this.bound = null;
+        return this;
+    }
 
-NativeCategoryDeclaration.prototype = Object.create(ConcreteCategoryDeclaration.prototype);
-NativeCategoryDeclaration.prototype.constructor = NativeCategoryDeclaration;
+    register(context) {
+        super.register(context);
+        var bound = this.getBoundFunction(false);
+        if(bound!=null) {
+            var name = getTypeName(bound);
+            context.registerNativeBinding(name, this);
+        }
+    }
 
-NativeCategoryDeclaration.prototype.register = function(context) {
-    ConcreteCategoryDeclaration.prototype.register.call(this, context);
-    var bound = this.getBoundFunction(false);
-    if(bound!=null) {
+    toEDialect(writer) {
+        this.protoToEDialect(writer, false, true);
+        this.bindingsToEDialect(writer);
+        if(this.methods.length>0) {
+            writer.append("and methods:");
+            writer.newLine();
+            this.methodsToEDialect(writer, this.methods);
+        }
+    }
+
+    categoryTypeToEDialect(writer) {
+        writer.append("native category");
+    }
+
+    bindingsToEDialect(writer) {
+        writer.indent();
+        this.categoryBindings.toDialect(writer);
+        writer.dedent();
+        writer.newLine();
+    }
+
+    toODialect(writer) {
+        var hasBody = true; // always one
+        this.allToODialect(writer, hasBody);
+    }
+
+    categoryTypeToODialect(writer) {
+        writer.append("native category");
+    }
+
+    bodyToODialect(writer) {
+        this.categoryBindings.toDialect(writer);
+        if(this.methods.length>0) {
+            writer.newLine();
+            writer.newLine();
+            this.methodsToODialect(writer, this.methods);
+        }
+    }
+
+    toMDialect(writer) {
+        this.protoToMDialect(writer, null);
+        writer.indent();
+        writer.newLine();
+        this.categoryBindings.toDialect(writer);
+        this.methods.forEach(function(method) {
+            var w = writer.newMemberWriter();
+            method.toDialect(w);
+            writer.newLine();
+        });
+        writer.dedent();
+        writer.newLine();
+    }
+
+    categoryTypeToMDialect(writer) {
+        writer.append("native category");
+    }
+
+    newInstance(context) {
+        return new NativeInstance(context, this);
+    }
+
+    getBoundFunction(fail) {
+        if(this.bound==null) {
+            var binding = this.getBinding(fail);
+            if(binding!=null) {
+                this.bound = binding.resolve();
+                if(fail && this.bound==null)
+                    throw new SyntaxError("No JavaScript function:" + binding.toString());
+            }
+        }
+        return this.bound;
+    }
+
+    getBinding(fail) {
+        for(var i=0;i<this.categoryBindings.length;i++) {
+            if(this.categoryBindings[i] instanceof JavaScriptNativeCategoryBinding) {
+                return this.categoryBindings[i];
+            }
+        }
+        if(fail)
+            throw new SyntaxError("Missing JavaScript binding for category: " + this.name);
+        else
+            return null;
+    }
+
+    declare(transpiler) {
+        transpiler.declare(this);
+        if(this.name==="Any")
+            transpiler.register(require("../intrinsic/Any").Any);
+    }
+
+    transpile(transpiler) {
+        var binding = this.getBinding(true);
+        binding.transpile(transpiler);
+        var bound = binding.resolve();
         var name = getTypeName(bound);
-        context.registerNativeBinding(name, this);
-    }
-};
-
-NativeCategoryDeclaration.prototype.toEDialect = function(writer) {
-    this.protoToEDialect(writer, false, true);
-    this.bindingsToEDialect(writer);
-    if(this.methods.length>0) {
-        writer.append("and methods:");
-        writer.newLine();
-        this.methodsToEDialect(writer, this.methods);
-    }
-};
-
-NativeCategoryDeclaration.prototype.categoryTypeToEDialect = function(writer) {
-    writer.append("native category");
-};
-
-NativeCategoryDeclaration.prototype.bindingsToEDialect = function(writer) {
-    writer.indent();
-    this.categoryBindings.toDialect(writer);
-    writer.dedent();
-    writer.newLine();
-};
-
-NativeCategoryDeclaration.prototype.toODialect = function(writer) {
-    var hasBody = true; // always one
-    this.allToODialect(writer, hasBody);
-};
-
-NativeCategoryDeclaration.prototype.categoryTypeToODialect = function(writer) {
-    writer.append("native category");
-};
-
-NativeCategoryDeclaration.prototype.bodyToODialect = function(writer) {
-    this.categoryBindings.toDialect(writer);
-    if(this.methods.length>0) {
-        writer.newLine();
-        writer.newLine();
-        this.methodsToODialect(writer, this.methods);
-    }
-};
-
-NativeCategoryDeclaration.prototype.toMDialect = function(writer) {
-    this.protoToMDialect(writer, null);
-    writer.indent();
-    writer.newLine();
-    this.categoryBindings.toDialect(writer);
-    this.methods.forEach(function(method) {
-        var w = writer.newMemberWriter();
-        method.toDialect(w);
-        writer.newLine();
-    });
-    writer.dedent();
-    writer.newLine();
-};
-
-NativeCategoryDeclaration.prototype.categoryTypeToMDialect = function(writer) {
-    writer.append("native category");
-};
-
-NativeCategoryDeclaration.prototype.newInstance = function(context) {
-    return new NativeInstance(context, this);
-};
-
-NativeCategoryDeclaration.prototype.getBoundFunction = function(fail) {
-    if(this.bound==null) {
-        var binding = this.getBinding(fail);
-        if(binding!=null) {
-            this.bound = binding.resolve();
-            if(fail && this.bound==null)
-                throw new SyntaxError("No JavaScript function:" + binding.toString());
+        transpiler.append("function ").append("new_").append(this.name).append("(values) {").indent();
+        transpiler.append("values = values || {};").newLine();
+        transpiler.append("var value = new ").append(name).append("();").newLine();
+        if(this.attributes) {
+            this.attributes.forEach(function (attr) {
+                transpiler.append("value.").append(attr.name).append(" = values.hasOwnProperty('").append(attr.name).append("') ? values.").append(attr.name).append(" : null;").newLine();
+            }, this);
         }
-    }
-    return this.bound;
-};
+        transpiler.append("return value;").newLine();
+        transpiler.dedent().append("}").newLine();
+        transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
+        this.transpileMethods(transpiler);
+        this.transpileGetterSetters(transpiler);
+        transpiler.flush();
 
-NativeCategoryDeclaration.prototype.getBinding = function(fail) {
-    for(var i=0;i<this.categoryBindings.length;i++) {
-        if(this.categoryBindings[i] instanceof JavaScriptNativeCategoryBinding) {
-            return this.categoryBindings[i];
-        }
     }
-    if(fail)
-        throw new SyntaxError("Missing JavaScript binding for category: " + this.name);
-    else
+
+    locateSectionAtLine(line) {
+        for(var i=0;i<this.methods.length;i++) {
+            const s = this.methods[i].locateSectionAtLine(line);
+            if(s)
+                return s;
+        }
         return null;
-};
-
-
-NativeCategoryDeclaration.prototype.declare = function(transpiler) {
-    transpiler.declare(this);
-    if(this.name==="Any")
-        transpiler.register(require("../intrinsic/Any").Any);
-};
-
-NativeCategoryDeclaration.prototype.transpile = function(transpiler) {
-    var binding = this.getBinding(true);
-    binding.transpile(transpiler);
-    var bound = binding.resolve();
-    var name = getTypeName(bound);
-    transpiler.append("function ").append("new_").append(this.name).append("(values) {").indent();
-    transpiler.append("values = values || {};").newLine();
-    transpiler.append("var value = new ").append(name).append("();").newLine();
-    if(this.attributes) {
-        this.attributes.forEach(function (attr) {
-            transpiler.append("value.").append(attr.name).append(" = values.hasOwnProperty('").append(attr.name).append("') ? values.").append(attr.name).append(" : null;").newLine();
-        }, this);
     }
-    transpiler.append("return value;").newLine();
-    transpiler.dedent().append("}").newLine();
-    transpiler = transpiler.newInstanceTranspiler(new CategoryType(this.id));
-    this.transpileMethods(transpiler);
-    this.transpileGetterSetters(transpiler);
-    transpiler.flush();
-
-};
-
-NativeCategoryDeclaration.prototype.locateSectionAtLine = function(line) {
-    for(var i=0;i<this.methods.length;i++) {
-        const s = this.methods[i].locateSectionAtLine(line);
-        if(s)
-            return s;
-    }
-    return null;
-};
+}
 
 exports.NativeCategoryDeclaration = NativeCategoryDeclaration;

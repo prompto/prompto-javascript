@@ -43,20 +43,17 @@ var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
 var decisionsToDFA = atn.decisionToState.map( function(ds, index) { return new antlr4.dfa.DFA(ds, index); });
 
-function ArgsLexer(input) {
-	antlr4.Lexer.call(this, input);
-    this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
-    return this;
+class ArgsLexer extends antlr4.Lexer {
+    constructor(input) {
+        super(input);
+        this._interp = new antlr4.atn.LexerATNSimulator(this, atn, decisionsToDFA, new antlr4.PredictionContextCache());
+        return this;
+    }
+
+    get atn() {
+            return atn;
+    }
 }
-
-ArgsLexer.prototype = Object.create(antlr4.Lexer.prototype);
-ArgsLexer.prototype.constructor = ArgsLexer;
-
-Object.defineProperty(ArgsLexer.prototype, "atn", {
-        get : function() {
-                return atn;
-        }
-});
 
 ArgsLexer.EOF = antlr4.Token.EOF;
 ArgsLexer.STRING = 1;

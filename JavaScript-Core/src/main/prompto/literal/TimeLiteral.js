@@ -3,28 +3,25 @@ var TimeType = require("../type/TimeType").TimeType;
 var TimeValue = require("../value/TimeValue").TimeValue;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
-function TimeLiteral(text) {
-	var lt = LocalTime.parse(text.substring(1,text.length-1));
-	Literal.call(this, text, new TimeValue(lt));
-	return this;
+class TimeLiteral extends Literal {
+    constructor(text) {
+        var lt = LocalTime.parse(text.substring(1,text.length-1));
+        super(text, new TimeValue(lt));
+        return this;
+    }
+
+    check(context) {
+        return TimeType.instance;
+    }
+
+    declare(transpiler) {
+        transpiler.require(LocalTime);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("LocalTime.parse(").append(this.text).append(")");
+    }
 }
-
-TimeLiteral.prototype = Object.create(Literal.prototype);
-TimeLiteral.prototype.constructor = TimeLiteral;
-
-TimeLiteral.prototype.check = function(context) {
-	return TimeType.instance;
-};
-
-
-TimeLiteral.prototype.declare = function(transpiler) {
-    transpiler.require(LocalTime);
-};
-
-
-TimeLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("LocalTime.parse(").append(this.text).append(")");
-};
 
 exports.TimeLiteral = TimeLiteral;
 

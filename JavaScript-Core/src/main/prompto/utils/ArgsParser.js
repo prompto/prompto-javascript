@@ -38,23 +38,145 @@ var symbolicNames = [ null, "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
 
 var ruleNames =  [ "parse", "entry", "key", "value" ];
 
-function ArgsParser (input) {
-	antlr4.Parser.call(this, input);
-    this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
-    this.ruleNames = ruleNames;
-    this.literalNames = literalNames;
-    this.symbolicNames = symbolicNames;
-    return this;
-}
+class ArgsParser extends antlr4.Parser {
+    constructor(input) {
+        super(input);
+        this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
+        this.ruleNames = ruleNames;
+        this.literalNames = literalNames;
+        this.symbolicNames = symbolicNames;
+        return this;
+    }
 
-ArgsParser.prototype = Object.create(antlr4.Parser.prototype);
-ArgsParser.prototype.constructor = ArgsParser;
-
-Object.defineProperty(ArgsParser.prototype, "atn", {
-	get : function() {
+    get atn() {
 		return atn;
 	}
-});
+
+    parse() {
+
+        var localctx = new ParseContext(this, this._ctx, this.state);
+        this.enterRule(localctx, 0, ArgsParser.RULE_parse);
+        var _la = 0; // Token type
+        try {
+            this.enterOuterAlt(localctx, 1);
+            this.state = 11;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            while(_la===ArgsParser.DASH || _la===ArgsParser.ELEMENT) {
+                this.state = 8;
+                localctx.e = this.entry();
+                this.state = 13;
+                this._errHandler.sync(this);
+                _la = this._input.LA(1);
+            }
+        } catch (re) {
+            if(re instanceof antlr4.error.RecognitionException) {
+                localctx.exception = re;
+                this._errHandler.reportError(this, re);
+                this._errHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        } finally {
+            this.exitRule();
+        }
+        return localctx;
+    }
+
+    entry() {
+
+        var localctx = new EntryContext(this, this._ctx, this.state);
+        this.enterRule(localctx, 2, ArgsParser.RULE_entry);
+        var _la = 0; // Token type
+        try {
+            this.enterOuterAlt(localctx, 1);
+            this.state = 15;
+            this._errHandler.sync(this);
+            _la = this._input.LA(1);
+            if(_la===ArgsParser.DASH) {
+                this.state = 14;
+                this.match(ArgsParser.DASH);
+            }
+
+            this.state = 17;
+            localctx.k = this.key();
+            this.state = 18;
+            this.match(ArgsParser.EQUALS);
+            this.state = 19;
+            localctx.v = this.value();
+        } catch (re) {
+            if(re instanceof antlr4.error.RecognitionException) {
+                localctx.exception = re;
+                this._errHandler.reportError(this, re);
+                this._errHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        } finally {
+            this.exitRule();
+        }
+        return localctx;
+    }
+
+    key() {
+
+        var localctx = new KeyContext(this, this._ctx, this.state);
+        this.enterRule(localctx, 4, ArgsParser.RULE_key);
+        try {
+            this.enterOuterAlt(localctx, 1);
+            this.state = 21;
+            this.match(ArgsParser.ELEMENT);
+        } catch (re) {
+            if(re instanceof antlr4.error.RecognitionException) {
+                localctx.exception = re;
+                this._errHandler.reportError(this, re);
+                this._errHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        } finally {
+            this.exitRule();
+        }
+        return localctx;
+    }
+
+    value() {
+
+        var localctx = new ValueContext(this, this._ctx, this.state);
+        this.enterRule(localctx, 6, ArgsParser.RULE_value);
+        try {
+            this.state = 25;
+            this._errHandler.sync(this);
+            switch(this._input.LA(1)) {
+            case ArgsParser.ELEMENT:
+                localctx = new ELEMENTContext(this, localctx);
+                this.enterOuterAlt(localctx, 1);
+                this.state = 23;
+                this.match(ArgsParser.ELEMENT);
+                break;
+            case ArgsParser.STRING:
+                localctx = new STRINGContext(this, localctx);
+                this.enterOuterAlt(localctx, 2);
+                this.state = 24;
+                this.match(ArgsParser.STRING);
+                break;
+            default:
+                throw new antlr4.error.NoViableAltException(this);
+            }
+        } catch (re) {
+            if(re instanceof antlr4.error.RecognitionException) {
+                localctx.exception = re;
+                this._errHandler.reportError(this, re);
+                this._errHandler.recover(this, re);
+            } else {
+                throw re;
+            }
+        } finally {
+            this.exitRule();
+        }
+        return localctx;
+    }
+}
 
 ArgsParser.EOF = antlr4.Token.EOF;
 ArgsParser.STRING = 1;
@@ -68,343 +190,210 @@ ArgsParser.RULE_entry = 1;
 ArgsParser.RULE_key = 2;
 ArgsParser.RULE_value = 3;
 
-function ParseContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ArgsParser.RULE_parse;
-    this.e = null; // EntryContext
-    return this;
+class ParseContext extends antlr4.ParserRuleContext {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArgsParser.RULE_parse;
+        this.e = null; // EntryContext
+        return this;
+    }
+
+    entry(i) {
+        if(i===undefined) {
+            i = null;
+        }
+        if(i===null) {
+            return this.getTypedRuleContexts(EntryContext);
+        } else {
+            return this.getTypedRuleContext(EntryContext,i);
+        }
+    }
+
+    enterRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.enterParse(this);
+        }
+    }
+
+    exitRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.exitParse(this);
+        }
+    }
 }
-
-ParseContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-ParseContext.prototype.constructor = ParseContext;
-
-ParseContext.prototype.entry = function(i) {
-    if(i===undefined) {
-        i = null;
-    }
-    if(i===null) {
-        return this.getTypedRuleContexts(EntryContext);
-    } else {
-        return this.getTypedRuleContext(EntryContext,i);
-    }
-};
-
-ParseContext.prototype.enterRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.enterParse(this);
-	}
-};
-
-ParseContext.prototype.exitRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.exitParse(this);
-	}
-};
 
 
 
 
 ArgsParser.ParseContext = ParseContext;
 
-ArgsParser.prototype.parse = function() {
-
-    var localctx = new ParseContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 0, ArgsParser.RULE_parse);
-    var _la = 0; // Token type
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 11;
-        this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        while(_la===ArgsParser.DASH || _la===ArgsParser.ELEMENT) {
-            this.state = 8;
-            localctx.e = this.entry();
-            this.state = 13;
-            this._errHandler.sync(this);
-            _la = this._input.LA(1);
+class EntryContext extends antlr4.ParserRuleContext {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
         }
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArgsParser.RULE_entry;
+        this.k = null; // KeyContext
+        this.v = null; // ValueContext
+        return this;
     }
-    return localctx;
-};
 
-function EntryContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ArgsParser.RULE_entry;
-    this.k = null; // KeyContext
-    this.v = null; // ValueContext
-    return this;
+    EQUALS() {
+        return this.getToken(ArgsParser.EQUALS, 0);
+    }
+
+    key() {
+        return this.getTypedRuleContext(KeyContext,0);
+    }
+
+    value() {
+        return this.getTypedRuleContext(ValueContext,0);
+    }
+
+    DASH() {
+        return this.getToken(ArgsParser.DASH, 0);
+    }
+
+    enterRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.enterEntry(this);
+        }
+    }
+
+    exitRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.exitEntry(this);
+        }
+    }
 }
-
-EntryContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-EntryContext.prototype.constructor = EntryContext;
-
-EntryContext.prototype.EQUALS = function() {
-    return this.getToken(ArgsParser.EQUALS, 0);
-};
-
-EntryContext.prototype.key = function() {
-    return this.getTypedRuleContext(KeyContext,0);
-};
-
-EntryContext.prototype.value = function() {
-    return this.getTypedRuleContext(ValueContext,0);
-};
-
-EntryContext.prototype.DASH = function() {
-    return this.getToken(ArgsParser.DASH, 0);
-};
-
-EntryContext.prototype.enterRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.enterEntry(this);
-	}
-};
-
-EntryContext.prototype.exitRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.exitEntry(this);
-	}
-};
 
 
 
 
 ArgsParser.EntryContext = EntryContext;
 
-ArgsParser.prototype.entry = function() {
-
-    var localctx = new EntryContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 2, ArgsParser.RULE_entry);
-    var _la = 0; // Token type
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 15;
-        this._errHandler.sync(this);
-        _la = this._input.LA(1);
-        if(_la===ArgsParser.DASH) {
-            this.state = 14;
-            this.match(ArgsParser.DASH);
+class KeyContext extends antlr4.ParserRuleContext {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
         }
-
-        this.state = 17;
-        localctx.k = this.key();
-        this.state = 18;
-        this.match(ArgsParser.EQUALS);
-        this.state = 19;
-        localctx.v = this.value();
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArgsParser.RULE_key;
+        return this;
     }
-    return localctx;
-};
 
-function KeyContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ArgsParser.RULE_key;
-    return this;
+    ELEMENT() {
+        return this.getToken(ArgsParser.ELEMENT, 0);
+    }
+
+    enterRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.enterKey(this);
+        }
+    }
+
+    exitRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.exitKey(this);
+        }
+    }
 }
-
-KeyContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-KeyContext.prototype.constructor = KeyContext;
-
-KeyContext.prototype.ELEMENT = function() {
-    return this.getToken(ArgsParser.ELEMENT, 0);
-};
-
-KeyContext.prototype.enterRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.enterKey(this);
-	}
-};
-
-KeyContext.prototype.exitRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.exitKey(this);
-	}
-};
 
 
 
 
 ArgsParser.KeyContext = KeyContext;
 
-ArgsParser.prototype.key = function() {
-
-    var localctx = new KeyContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 4, ArgsParser.RULE_key);
-    try {
-        this.enterOuterAlt(localctx, 1);
-        this.state = 21;
-        this.match(ArgsParser.ELEMENT);
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
+class ValueContext extends antlr4.ParserRuleContext {
+    constructor(parser, parent, invokingState) {
+        if(parent===undefined) {
+            parent = null;
+        }
+        if(invokingState===undefined || invokingState===null) {
+            invokingState = -1;
+        }
+        super(parent, invokingState);
+        this.parser = parser;
+        this.ruleIndex = ArgsParser.RULE_value;
+        return this;
     }
-    return localctx;
-};
 
-function ValueContext(parser, parent, invokingState) {
-	if(parent===undefined) {
-	    parent = null;
-	}
-	if(invokingState===undefined || invokingState===null) {
-		invokingState = -1;
-	}
-	antlr4.ParserRuleContext.call(this, parent, invokingState);
-    this.parser = parser;
-    this.ruleIndex = ArgsParser.RULE_value;
-    return this;
+    copyFrom(ctx) {
+        super.copyFrom(ctx);
+    }
 }
 
-ValueContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
-ValueContext.prototype.constructor = ValueContext;
+class ELEMENTContext extends ValueContext {
+    constructor(parser, ctx) {
+        super(parser);
+        ValueContext.prototype.copyFrom.call(this, ctx);
+        return this;
+    }
 
+    ELEMENT() {
+        return this.getToken(ArgsParser.ELEMENT, 0);
+    }
 
- 
-ValueContext.prototype.copyFrom = function(ctx) {
-    antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
-};
+    enterRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.enterELEMENT(this);
+        }
+    }
 
-
-function ELEMENTContext(parser, ctx) {
-	ValueContext.call(this, parser);
-    ValueContext.prototype.copyFrom.call(this, ctx);
-    return this;
+    exitRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.exitELEMENT(this);
+        }
+    }
 }
-
-ELEMENTContext.prototype = Object.create(ValueContext.prototype);
-ELEMENTContext.prototype.constructor = ELEMENTContext;
 
 ArgsParser.ELEMENTContext = ELEMENTContext;
 
-ELEMENTContext.prototype.ELEMENT = function() {
-    return this.getToken(ArgsParser.ELEMENT, 0);
-};
-ELEMENTContext.prototype.enterRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.enterELEMENT(this);
-	}
-};
+class STRINGContext extends ValueContext {
+    constructor(parser, ctx) {
+        super(parser);
+        ValueContext.prototype.copyFrom.call(this, ctx);
+        return this;
+    }
 
-ELEMENTContext.prototype.exitRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.exitELEMENT(this);
-	}
-};
+    STRING() {
+        return this.getToken(ArgsParser.STRING, 0);
+    }
 
+    enterRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.enterSTRING(this);
+        }
+    }
 
-function STRINGContext(parser, ctx) {
-	ValueContext.call(this, parser);
-    ValueContext.prototype.copyFrom.call(this, ctx);
-    return this;
+    exitRule(listener) {
+        if(listener instanceof ArgsParserListener ) {
+            listener.exitSTRING(this);
+        }
+    }
 }
 
-STRINGContext.prototype = Object.create(ValueContext.prototype);
-STRINGContext.prototype.constructor = STRINGContext;
-
 ArgsParser.STRINGContext = STRINGContext;
-
-STRINGContext.prototype.STRING = function() {
-    return this.getToken(ArgsParser.STRING, 0);
-};
-STRINGContext.prototype.enterRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.enterSTRING(this);
-	}
-};
-
-STRINGContext.prototype.exitRule = function(listener) {
-    if(listener instanceof ArgsParserListener ) {
-        listener.exitSTRING(this);
-	}
-};
 
 
 
 ArgsParser.ValueContext = ValueContext;
-
-ArgsParser.prototype.value = function() {
-
-    var localctx = new ValueContext(this, this._ctx, this.state);
-    this.enterRule(localctx, 6, ArgsParser.RULE_value);
-    try {
-        this.state = 25;
-        this._errHandler.sync(this);
-        switch(this._input.LA(1)) {
-        case ArgsParser.ELEMENT:
-            localctx = new ELEMENTContext(this, localctx);
-            this.enterOuterAlt(localctx, 1);
-            this.state = 23;
-            this.match(ArgsParser.ELEMENT);
-            break;
-        case ArgsParser.STRING:
-            localctx = new STRINGContext(this, localctx);
-            this.enterOuterAlt(localctx, 2);
-            this.state = 24;
-            this.match(ArgsParser.STRING);
-            break;
-        default:
-            throw new antlr4.error.NoViableAltException(this);
-        }
-    } catch (re) {
-    	if(re instanceof antlr4.error.RecognitionException) {
-	        localctx.exception = re;
-	        this._errHandler.reportError(this, re);
-	        this._errHandler.recover(this, re);
-	    } else {
-	    	throw re;
-	    }
-    } finally {
-        this.exitRule();
-    }
-    return localctx;
-};
 
 
 exports.ArgsParser = ArgsParser;
