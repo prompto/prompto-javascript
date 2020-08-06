@@ -203,6 +203,7 @@ function runTests(fileName, runner, options) {
 
 function runTest(decl, runner, options) {
     Out.reset()
+    intrinsic = prompto.intrinsic;
     runner(BaseParserTest.coreContext, decl.name);
     var expected = decl.name + " test successful";
     var actual = Out.read();

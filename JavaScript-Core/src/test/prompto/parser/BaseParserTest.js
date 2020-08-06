@@ -2,7 +2,6 @@ var path = require("path");
 var fs = require("fs");
 
 var prompto = require("../../../main/prompto/index");
-intrinsic = prompto.intrinsic;
 
 var antlr4 = require("antlr4");
 var Out = require("../runtime/utils/Out").Out;
