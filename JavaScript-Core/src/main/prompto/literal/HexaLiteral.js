@@ -1,13 +1,13 @@
-var Literal = require("./Literal").Literal;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
+const Literal = require("./Literal").Literal;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const IntegerType = require("../type/IntegerType").IntegerType;
 
 /* jshint bitwise:false*/
 function parseHexa(text) {
-	var value = 0;
-	for(var i=2;i<text.length; i++) {
+	let value = 0;
+	for(let i=2;i<text.length; i++) {
 		value <<= 4;
-		var c = text[i];
+		const c = text[i];
 		if(c>='0' && c<='9') {
 			value += (c.charCodeAt(0) - '0'.charCodeAt(0));
 		} else if(c>='a' && c<='f') {

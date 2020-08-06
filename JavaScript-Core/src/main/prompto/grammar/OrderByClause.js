@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+const Section = require("../parser/Section").Section;
 
 class OrderByClause extends Section {
 
@@ -19,15 +19,15 @@ class OrderByClause extends Section {
     }
 
     checkQuery(context) {
-        var id = this.ids[0];
-        var decl = context.findAttribute(id.name);
+        const id = this.ids[0];
+        const decl = context.findAttribute(id.name);
         if(decl==null)
             context.problemListener.reportUnknownAttribute(id);
     }
 
     interpretQuery(context, query) {
-        var id = this.ids[0];
-        var info = context.findAttribute(id.name).getAttributeInfo();
+        const id = this.ids[0];
+        const info = context.findAttribute(id.name).getAttributeInfo();
         query.addOrderByClause(info, this.descending);
     }
 
@@ -36,8 +36,8 @@ class OrderByClause extends Section {
     }
 
     transpileQuery(transpiler, builder) {
-        var id = this.ids[0];
-        var info = transpiler.context.findAttribute(id.name).getAttributeInfo();
+        const id = this.ids[0];
+        const info = transpiler.context.findAttribute(id.name).getAttributeInfo();
         transpiler.append(builder).append(".addOrderByClause(").append(info.toTranspiled()).append(", ").append(this.descending).append(");").newLine();
     }
 }

@@ -1,4 +1,4 @@
-var PythonNativeCall = require("./PythonNativeCall").PythonNativeCall;
+const PythonNativeCall = require("./PythonNativeCall").PythonNativeCall;
 
 class Python3NativeCall extends PythonNativeCall {
     constructor(statement, module) {

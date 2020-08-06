@@ -1,5 +1,5 @@
-var CSharpSelectorExpression = require("./CSharpSelectorExpression").CSharpSelectorExpression;
-var CSharpExpressionList = require("./CSharpExpressionList").CSharpExpressionList;
+const CSharpSelectorExpression = require("./CSharpSelectorExpression").CSharpSelectorExpression;
+const CSharpExpressionList = require("./CSharpExpressionList").CSharpExpressionList;
 
 class CSharpMethodExpression extends CSharpSelectorExpression {
     constructor(name, args) {

@@ -1,4 +1,4 @@
-var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
+const NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
 
 class NativeWidgetDeclaration extends NativeCategoryDeclaration {
     constructor(name, categoryBindings, methods) {
@@ -31,7 +31,7 @@ class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 
     getBoundFunction(fail) {
         if(this.bound==null) {
-            var binding = this.getBinding(fail);
+            const binding = this.getBinding(fail);
             if(binding!=null) {
                 this.bound = binding.resolveWidget();
                 if(fail && this.bound==null)
@@ -54,7 +54,7 @@ class NativeWidgetDeclaration extends NativeCategoryDeclaration {
     }
 
     transpile(transpiler) {
-        var binding = this.getBinding();
+        const binding = this.getBinding();
         binding.transpileWidget(transpiler);
         return true;
     }

@@ -1,7 +1,7 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var TypeMap = require("../type/TypeMap").TypeMap;
-var VoidType = require("../type/VoidType").VoidType;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const TypeMap = require("../type/TypeMap").TypeMap;
+const VoidType = require("../type/VoidType").VoidType;
 
 class BaseSwitchStatement extends BaseStatement {
     constructor(switchCases, defaultCase) {
@@ -29,29 +29,29 @@ class BaseSwitchStatement extends BaseStatement {
     }
 
     checkSwitchCasesType(context) {
-        var type = this.checkSwitchType(context);
+        const type = this.checkSwitchType(context);
         this.switchCases.forEach(switchCase => {
             switchCase.checkSwitchType(context, type);
         });
     }
 
     checkReturnType(context) {
-        var types = new TypeMap();
-        var section = this.collectReturnTypes(context, types);
+        const types = new TypeMap();
+        const section = this.collectReturnTypes(context, types);
         return types.inferType(context, section);
     }
 
     collectReturnTypes(context, types) {
-        var section = null;
+        let section = null;
         this.switchCases.forEach(switchCase => {
-            var type = switchCase.checkReturnType(context);
+            const type = switchCase.checkReturnType(context);
             if(type!=VoidType.instance) {
                 section = switchCase;
                 types[type.name] = type;
             }
         });
         if(this.defaultCase!=null) {
-            var type = this.defaultCase.check(context, null);
+            const type = this.defaultCase.check(context, null);
             if(type!=VoidType.instance) {
                 section = this.defaultCase;
                 types[type.name] = type;
@@ -61,8 +61,8 @@ class BaseSwitchStatement extends BaseStatement {
     }
 
     interpretSwitch(context, switchValue, toThrow) {
-        for(var i=0;i<this.switchCases.length;i++) {
-            var sc = this.switchCases[i];
+        for(let i=0;i<this.switchCases.length;i++) {
+            const sc = this.switchCases[i];
             if(sc.matches(context, switchValue)) {
                 return sc.interpret(context);
             }
@@ -112,7 +112,7 @@ class SwitchCaseList extends ObjectList {
     }
 
     locateSectionAtLine(line) {
-        for(var i=0; i< this.length; i++) {
+        for(let i=0; i< this.length; i++) {
             const switchCase = this[i];
             const section = switchCase.locateSectionAtLine(line);
             if(section)

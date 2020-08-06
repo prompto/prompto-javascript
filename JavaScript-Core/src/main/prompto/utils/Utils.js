@@ -19,7 +19,7 @@ function equalArrays(o1, o2) {
 	if(o1.length !== o2.length) {
 		return false;
 	}
-	for(var i=0;i<o1.length;i++) {
+	for(let i=0;i<o1.length;i++) {
 		if(!equalObjects(o1[i], o2[i])) {
 			return false;
 		}
@@ -28,7 +28,7 @@ function equalArrays(o1, o2) {
 }
 
 function arrayContains(a, o) {
-	for(var i=0;i<a.length;i++) {
+	for(let i=0;i<a.length;i++) {
 		if(equalObjects(a[i], o)) {
 			return true;
 		}
@@ -67,13 +67,13 @@ function getUtf8CharLength(c) {
 }
 
 function stringToUtf8Buffer(s) {
-    var codes = s.split('')
+    const codes = s.split('')
         .map(c => c.charCodeAt(0));
-    var size = codes.map(getUtf8CharLength)
+    const size = codes.map(getUtf8CharLength)
         .reduce((prev, cur) => prev + cur, 0);
-    var buffer = new ArrayBuffer(size);
-    var view = new Uint8Array(buffer);
-    var idx = 0;
+    const buffer = new ArrayBuffer(size);
+    const view = new Uint8Array(buffer);
+    let idx = 0;
     codes.forEach(c => {
         if (c < 0x80 /* 128 */) {
             /* one byte */
@@ -117,11 +117,11 @@ function utf8BufferToString(buffer) {
     // work around jest/node sandbox issue where instanceof ArrayBuffer will fail
     if(buffer instanceof ArrayBuffer || Object.getPrototypeOf(buffer).constructor.name===ArrayBuffer.name)
         buffer = new Uint8Array(buffer);
-    var chars = [];
-    var idx = 0;
+    const chars = [];
+    let idx = 0;
     while(idx<buffer.length) {
-        var byte = buffer[idx];
-        var code = 0;
+        const byte = buffer[idx];
+        let code = 0;
         if (byte > 251 && byte < 254 && idx + 5 < buffer.length) {
             /* (byte - 252 << 30) may be not safe in ECMAScript! So...: */
             /* six bytes */
@@ -158,7 +158,7 @@ function utf8BufferToString(buffer) {
 
 
 function multiplyArray(items, count) {
-    var result = [];
+    let result = [];
     while(--count>=0) {
         result = result.concat(items);
     }
@@ -167,8 +167,8 @@ function multiplyArray(items, count) {
 
 function decimalToString(d) {
     // mimic 0.0######
-    var s = d.toString();
-    var i = s.indexOf('.');
+    const s = d.toString();
+    let i = s.indexOf('.');
     if(i>=0) {
         // fix IEEE issue
         i = s.indexOf('000000', i);
@@ -216,8 +216,8 @@ function compareValues(value1, value2) {
     } else if(value2.compareTo) {
         return -value2.compareTo(value1);
     } else {
-        var s1 = value1.toString();
-        var s2 = value2.toString();
+        const s1 = value1.toString();
+        const s2 = value2.toString();
         return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
     }
 }

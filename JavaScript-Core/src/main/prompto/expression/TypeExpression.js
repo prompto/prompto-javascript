@@ -1,6 +1,6 @@
-var Expression = require("./Expression").Expression;
-var TypeType = require("../type/TypeType").TypeType;
-var TypeValue = require("../value/TypeValue").TypeValue;
+const Expression = require("./Expression").Expression;
+const TypeType = require("../type/TypeType").TypeType;
+const TypeValue = require("../value/TypeValue").TypeValue;
 
 class TypeExpression extends Expression {
     constructor(value) {

@@ -1,27 +1,27 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
-var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
-var ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-var DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var MethodDeclarationMap = null;
-var ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
-var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var ArrowDeclaration = require("../declaration/ArrowDeclaration").ArrowDeclaration;
-var ArrowValue = require("../value/ArrowValue").ArrowValue;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var InstanceContext = null;
-var ThisExpression = null;
-var MethodType = require("../type/MethodType").MethodType;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var Identifier = require("../grammar/Identifier").Identifier;
-var CodeParameter = require("../param/CodeParameter").CodeParameter;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const MethodFinder = require("../runtime/MethodFinder").MethodFinder;
+const MethodSelector = require("../expression/MethodSelector").MethodSelector;
+const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+const AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
+const ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+const DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+let MethodDeclarationMap = null;
+const ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
+const ClosureValue = require("../value/ClosureValue").ClosureValue;
+const ArrowDeclaration = require("../declaration/ArrowDeclaration").ArrowDeclaration;
+const ArrowValue = require("../value/ArrowValue").ArrowValue;
+const NotMutableError = require("../error/NotMutableError").NotMutableError;
+const PromptoError = require("../error/PromptoError").PromptoError;
+let InstanceContext = null;
+let ThisExpression = null;
+const MethodType = require("../type/MethodType").MethodType;
+const VoidType = require("../type/VoidType").VoidType;
+const Dialect = require("../parser/Dialect").Dialect;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const Identifier = require("../grammar/Identifier").Identifier;
+const CodeParameter = require("../param/CodeParameter").CodeParameter;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
 
 exports.resolve = () => {
     InstanceContext = require("../runtime/Context").InstanceContext;
@@ -52,8 +52,8 @@ class MethodCall extends SimpleStatement {
         if (writer.dialect != Dialect.E || (this.args != null && this.args.length > 0))
             return false;
         try {
-            var finder = new MethodFinder(writer.context, this);
-            var declaration = finder.findMethod(false);
+            const finder = new MethodFinder(writer.context, this);
+            const declaration = finder.findMethod(false);
             /* if method is a reference, need to prefix with invoke */
             return declaration instanceof AbstractMethodDeclaration || declaration.closureOf !== null;
         } catch(e) {
@@ -67,15 +67,15 @@ class MethodCall extends SimpleStatement {
     }
 
     check(context, updateSelectorParent) {
-        var finder = new MethodFinder(context, this);
-        var declaration = finder.findMethod(false);
+        const finder = new MethodFinder(context, this);
+        const declaration = finder.findMethod(false);
         if(!declaration) {
             context.problemListener.reportUnknownMethod(this.selector.id);
             return VoidType.instance;
         }
         if(updateSelectorParent && declaration.memberOf && !this.selector.parent)
             this.selector.parent = new ThisExpression();
-        var local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
+        const local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
         // don't bubble up problems
         try {
             local.pushProblemListener();
@@ -86,8 +86,8 @@ class MethodCall extends SimpleStatement {
     }
 
     checkReference(context) {
-        var finder = new MethodFinder(context, this);
-        var method = finder.findMethod(false);
+        const finder = new MethodFinder(context, this);
+        const method = finder.findMethod(false);
         if(method)
             return new MethodType(method);
         else
@@ -98,7 +98,7 @@ class MethodCall extends SimpleStatement {
         if (this.selector.parent !== null) {
             return false;
         }
-        var decl = context.getLocalDeclaration(this.selector.name)
+        const decl = context.getLocalDeclaration(this.selector.name);
         return decl instanceof MethodDeclarationMap;
     }
 
@@ -117,11 +117,11 @@ class MethodCall extends SimpleStatement {
 
     fullCheck(declaration, parent, local) {
         try {
-            var args = this.makeArguments(parent, declaration);
+            const args = this.makeArguments(parent, declaration);
             declaration.registerParameters(local);
             args.forEach(argument => {
-                var expression = argument.resolve(local, declaration, true);
-                var value = argument.parameter.checkValue(parent, expression);
+                const expression = argument.resolve(local, declaration, true);
+                const value = argument.parameter.checkValue(parent, expression);
                 local.setValue(argument.id, value);
             });
             return declaration.check(local, false);
@@ -133,22 +133,22 @@ class MethodCall extends SimpleStatement {
     }
 
     declare(transpiler) {
-        var finder = new MethodFinder(transpiler.context, this);
-        var declarations = finder.findCompatibleMethods(false, true);
-        var first = declarations.size===1 ? declarations.values().next().value : null;
+        const finder = new MethodFinder(transpiler.context, this);
+        const declarations = finder.findCompatibleMethods(false, true);
+        const first = declarations.size===1 ? declarations.values().next().value : null;
         if(declarations.size===1 && first instanceof BuiltInMethodDeclaration) {
             if(first.declareCall)
                 first.declareCall(transpiler);
         } else {
             if(!this.isLocalClosure(transpiler.context)) {
                 declarations.forEach(function(declaration) {
-                    var local = this.selector.newLocalCheckContext(transpiler.context, declaration);
+                    const local = this.selector.newLocalCheckContext(transpiler.context, declaration);
                     this.declareDeclaration(transpiler, declaration, local);
                 }, this);
             }
             if(declarations.size>1 && !this.dispatcher) {
-                var declaration = finder.findMethod(false);
-                var sorted = finder.sortMostSpecificFirst(declarations);
+                const declaration = finder.findMethod(false);
+                const sorted = finder.sortMostSpecificFirst(declarations);
                 this.dispatcher = new DispatchMethodDeclaration(transpiler.context, this, declaration, sorted);
                 transpiler.declare(this.dispatcher);
             }
@@ -172,11 +172,11 @@ class MethodCall extends SimpleStatement {
 
     fullDeclareDeclaration(declaration, transpiler, local) {
         if(!this.fullSelector) {
-            var args = this.makeArguments(transpiler.context, declaration);
+            const args = this.makeArguments(transpiler.context, declaration);
             declaration.registerParameters(local);
             args.forEach(argument => {
-                var expression = argument.resolve(local, declaration, true);
-                var value = argument.parameter.checkValue(transpiler.context, expression);
+                const expression = argument.resolve(local, declaration, true);
+                const value = argument.parameter.checkValue(transpiler.context, expression);
                 local.setValue(argument.id, value);
             });
             transpiler = transpiler.copyTranspiler(local);
@@ -194,10 +194,10 @@ class MethodCall extends SimpleStatement {
     }
 
     doTranspile(transpiler, refOnly) {
-        var finder = new MethodFinder(transpiler.context, this);
-        var declarations = finder.findCompatibleMethods(false, true);
+        const finder = new MethodFinder(transpiler.context, this);
+        const declarations = finder.findCompatibleMethods(false, true);
         if (declarations.size === 1) {
-            var first = declarations.values().next().value;
+            const first = declarations.values().next().value;
             this.transpileSingle(transpiler, first, false, refOnly);
         } else
             this.transpileMultiple(transpiler, declarations, refOnly);
@@ -214,19 +214,19 @@ class MethodCall extends SimpleStatement {
     }
 
     transpileMultiple(transpiler, declarations, refOnly) {
-        var name = this.dispatcher.getTranspiledName(transpiler.context);
-        var parent = this.selector.resolveParent(transpiler.context);
-        var first = declarations.values().next().value;
+        const name = this.dispatcher.getTranspiledName(transpiler.context);
+        let parent = this.selector.resolveParent(transpiler.context);
+        const first = declarations.values().next().value;
         if(parent==null && first.memberOf && transpiler.context.parent instanceof InstanceContext)
             parent = new ThisExpression();
-        var selector = new MethodSelector(parent, new Identifier(name));
+        const selector = new MethodSelector(parent, new Identifier(name));
         selector.transpile(transpiler);
         if(!refOnly)
             this.transpileAssignments(transpiler, this.dispatcher);
     }
 
     transpileBuiltin(transpiler, declaration, refOnly) {
-        var parent = this.selector.resolveParent(transpiler.context);
+        const parent = this.selector.resolveParent(transpiler.context);
         parent.transpileParent(transpiler);
         transpiler.append(".");
         if(refOnly)
@@ -236,11 +236,11 @@ class MethodCall extends SimpleStatement {
     }
 
     transpileSelector(transpiler, declaration) {
-        var selector = this.fullSelector || this.selector;
-        var parent = selector.resolveParent(transpiler.context);
+        let selector = this.fullSelector || this.selector;
+        let parent = selector.resolveParent(transpiler.context);
         if (parent == null && declaration.memberOf && transpiler.context.parent instanceof InstanceContext)
             parent = new ThisExpression();
-        var name = null;
+        let name = null;
         if(this.variableName)
             name = this.variableName;
         else if(this.fullSelector)
@@ -254,13 +254,13 @@ class MethodCall extends SimpleStatement {
     }
 
     transpileAssignments(transpiler, declaration, allowDerived) {
-        var args = this.makeArguments(transpiler.context, declaration);
+        let args = this.makeArguments(transpiler.context, declaration);
         args = args.filter(argument => !(argument.parameter instanceof CodeParameter));
         if(args.length > 0) {
             transpiler.append("(");
             args.forEach(argument => {
-                var parameter = argument.parameter;
-                var expression = argument.resolve(transpiler.context, declaration, false, allowDerived);
+                const parameter = argument.parameter;
+                const expression = argument.resolve(transpiler.context, declaration, false, allowDerived);
                 parameter.transpileCall(transpiler, expression);
                 transpiler.append(", ");
             });
@@ -275,14 +275,14 @@ class MethodCall extends SimpleStatement {
     }
 
     interpret(context) {
-        var declaration = this.findDeclaration(context);
-        var local = this.selector.newLocalContext(context, declaration);
+        const declaration = this.findDeclaration(context);
+        const local = this.selector.newLocalContext(context, declaration);
         declaration.registerParameters(local);
-        var args = this.makeArguments(context, declaration);
+        const args = this.makeArguments(context, declaration);
         args.forEach(argument => {
-            var expression = argument.resolve(local, declaration, true);
-            var parameter = argument.parameter;
-            var value = parameter.checkValue(context, expression);
+            const expression = argument.resolve(local, declaration, true);
+            const parameter = argument.parameter;
+            const value = parameter.checkValue(context, expression);
             if(value!=null && parameter.mutable && !value.mutable)
                 throw new NotMutableError();
             local.setValue(argument.id, value);
@@ -291,22 +291,22 @@ class MethodCall extends SimpleStatement {
     }
 
     interpretReference(context) {
-        var declaration = this.findDeclaration(context)
+        const declaration = this.findDeclaration(context);
         return new ClosureValue(context, new MethodType(declaration));
     }
 
     interpretAssert(context, testMethodDeclaration) {
-        var value = this.interpret(context);
+        const value = this.interpret(context);
         if(value instanceof BooleanValue)
             return value.value;
         else {
-            var expected = this.getExpected(context, this.dialect);
+            const expected = this.getExpected(context, this.dialect);
             throw new SyntaxError("Cannot test '" + expected + "'");
         }
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(this.dialect, context);
+        const writer = new CodeWriter(this.dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();
@@ -317,12 +317,12 @@ class MethodCall extends SimpleStatement {
     }
 
     findDeclaration(context) {
-        var method = this.findRegistered(context);
+        const method = this.findRegistered(context);
         if(method)
             return method;
         else {
             // look for declared method
-            var finder = new MethodFinder(context, this);
+            const finder = new MethodFinder(context, this);
             return finder.findMethod(true);
         }
     }
@@ -330,7 +330,7 @@ class MethodCall extends SimpleStatement {
     findRegistered(context) {
         // look for method as value
         if(!this.selector.parent)  try {
-            var o = context.getValue(this.selector.id);
+            const o = context.getValue(this.selector.id);
             if(o instanceof ClosureValue) {
                 return this.getClosureDeclaration(context, o);
             } else if(o instanceof ArrowValue) {
@@ -345,14 +345,14 @@ class MethodCall extends SimpleStatement {
     }
 
     getClosureDeclaration(context, closure) {
-        var decl = closure.type.method
+        const decl = closure.type.method;
         if(decl.memberOf!=null) {
             // the closure references a member method (useful when a method reference is needed)
             // in which case we may simply want to return that method to avoid spilling context into method body
             // this is only true if the closure comes straight from the method's instance context
             // if the closure comes from an accessible context that is not the instance context
             // then it is a local variable that needs the closure context to be interpreted
-            var declaring = context.contextForValue(this.selector.name);
+            const declaring = context.contextForValue(this.selector.name);
             if (declaring === closure.context)
                 return decl;
         }

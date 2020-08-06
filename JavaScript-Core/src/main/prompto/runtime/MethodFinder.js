@@ -1,6 +1,6 @@
-var PromptoError = require("../error/PromptoError").PromptoError;
-var CategoryType = null;
-var Score = require("./Score").Score;
+const PromptoError = require("../error/PromptoError").PromptoError;
+let CategoryType = null;
+const Score = require("./Score").Score;
 
 exports.resolve = () => {
 	CategoryType = require("../type/CategoryType").CategoryType;
@@ -14,14 +14,14 @@ class MethodFinder {
    }
 
     findCompatibleMethods(checkInstance, allowDerived) {
-        var candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
+        const candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
         if(candidates.size==0)
             this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id);
         return this.filterCompatible(candidates, checkInstance, allowDerived);
     }
 
     findMethod(checkInstance) {
-        var compatibles = this.findCompatibleMethods(checkInstance, false);
+        const compatibles = this.findCompatibleMethods(checkInstance, false);
         switch(compatibles.size) {
         case 0:
             this.context.problemListener.reportNoMatchingPrototype(this.methodCall);
@@ -34,13 +34,13 @@ class MethodFinder {
     }
 
     findMostSpecific(candidates, checkInstance) {
-        var candidate = null;
-        var ambiguous = [];
+        let candidate = null;
+        let ambiguous = [];
         candidates.forEach(function(c) {
             if(candidate==null)
                 candidate = c;
             else {
-                var score = this.scoreMostSpecific(candidate, c, checkInstance);
+                const score = this.scoreMostSpecific(candidate, c, checkInstance);
                 switch(score) {
                 case Score.WORSE:
                     candidate = c;
@@ -61,12 +61,12 @@ class MethodFinder {
     }
 
     sortMostSpecificFirst(declarations) {
-        var self = this;
+        const self = this;
         declarations = Array.from(declarations);
         // console.error("sorting:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
         declarations.sort((d1, d2) => {
             // console.error( d1.getProto() + "/" + d2.getProto() );
-            var score = self.scoreMostSpecific(d2, d1, false, true);
+            const score = self.scoreMostSpecific(d2, d1, false, true);
             // console.error( "-> " + score.name );
             return score.value;
         });
@@ -76,27 +76,27 @@ class MethodFinder {
 
     scoreMostSpecific(decl1, decl2, checkInstance, allowDerived) {
         try {
-            var ctx1 = this.context.newLocalContext();
+            const ctx1 = this.context.newLocalContext();
             decl1.registerParameters(ctx1);
-            var ctx2 = this.context.newLocalContext();
+            const ctx2 = this.context.newLocalContext();
             decl2.registerParameters(ctx2);
-            var ass1 = this.methodCall.makeArguments(this.context, decl1);
-            var ass2 = this.methodCall.makeArguments(this.context, decl2);
-            for(var i=0;i<ass1.length && i<ass2.length;i++) {
-                var as1 = ass1[i];
-                var as2 = ass2[i];
-                var arg1 = decl1.parameters.find(as1.name);
-                var arg2 = decl2.parameters.find(as2.name);
+            const ass1 = this.methodCall.makeArguments(this.context, decl1);
+            const ass2 = this.methodCall.makeArguments(this.context, decl2);
+            for(let i=0;i<ass1.length && i<ass2.length;i++) {
+                const as1 = ass1[i];
+                const as2 = ass2[i];
+                const arg1 = decl1.parameters.find(as1.name);
+                const arg2 = decl2.parameters.find(as2.name);
                 if(as1.name===as2.name) {
                     // the general case with named arguments
-                    var typ1 = arg1.getType(ctx1);
-                    var typ2 = arg2.getType(ctx2);
+                    const typ1 = arg1.getType(ctx1);
+                    const typ2 = arg2.getType(ctx2);
                     // try resolving runtime type
                     if(checkInstance && typ1 instanceof CategoryType && typ2 instanceof CategoryType) {
-                        var value = as1.expression.interpret(this.context); // in the named case as1==as2, so only evaluate 1
+                        const value = as1.expression.interpret(this.context); // in the named case as1==as2, so only evaluate 1
                         if(value.getType) {
-                            var actual = value.getType();
-                            var score = actual.scoreMostSpecific(this.context, typ1, typ2);
+                            const actual = value.getType();
+                            const score = actual.scoreMostSpecific(this.context, typ1, typ2);
                             if(score!==Score.SIMILAR) {
                                 return score;
                             }
@@ -112,8 +112,8 @@ class MethodFinder {
                     }
                 } else {
                     // specific case for single anonymous argument
-                    var sp1 = as1.computeSpecificity(ctx1, arg1, decl1, checkInstance, allowDerived);
-                    var sp2 = as2.computeSpecificity(ctx2, arg2, decl2, checkInstance, allowDerived);
+                    const sp1 = as1.computeSpecificity(ctx1, arg1, decl1, checkInstance, allowDerived);
+                    const sp2 = as2.computeSpecificity(ctx2, arg2, decl2, checkInstance, allowDerived);
                     if(sp1.moreSpecificThan(sp2)) {
                         return Score.BETTER;
                     }
@@ -131,10 +131,10 @@ class MethodFinder {
     }
 
     filterCompatible(candidates, checkInstance, allowDerived) {
-        var compatibles = new Set();
+        const compatibles = new Set();
         candidates.forEach(function(declaration) {
             try {
-                var assignments = this.methodCall.makeArguments(this.context, declaration);
+                const assignments = this.methodCall.makeArguments(this.context, declaration);
                 if(declaration.isAssignableTo(this.context, assignments, checkInstance, allowDerived)) {
                     compatibles.add(declaration);
                 }

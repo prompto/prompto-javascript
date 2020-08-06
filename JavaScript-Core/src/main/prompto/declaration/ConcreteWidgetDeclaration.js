@@ -1,6 +1,6 @@
-var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
 
 
 class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
@@ -53,7 +53,7 @@ class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
     }
 
     transpile(transpiler) {
-        var parent = this.derivedFrom!=null && this.derivedFrom.length>0 ? this.derivedFrom[0] : null;
+        const parent = this.derivedFrom!=null && this.derivedFrom.length>0 ? this.derivedFrom[0] : null;
         transpiler.append("function ").append(this.name).append("() {");
         transpiler.indent();
         this.transpileGetterSetterAttributes(transpiler);

@@ -1,5 +1,5 @@
-var MLexer = require("./MLexer").MLexer;
-var Dialect = require("./Dialect").Dialect;
+const MLexer = require("./MLexer").MLexer;
+const Dialect = require("./Dialect").Dialect;
 
 function MIndentingLexer(input) {
     MLexer.call(this, input);
@@ -17,7 +17,7 @@ MIndentingLexer.prototype = Object.create(MLexer.prototype);
 MIndentingLexer.prototype.constructor = MIndentingLexer;
 
 MIndentingLexer.prototype.indentedNextToken = function() {
-	var t = this.getNextToken();
+	const t = this.getNextToken();
 	this.wasLF = t.type===MLexer.LF;
 	return t;
 };
@@ -60,8 +60,8 @@ MIndentingLexer.prototype.interpretEOF = function(eof) {
   
 MIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 	// count TABs following LF
-	var indentCount = this.countIndents(lftab.text);
-	var next = this.nextLexerToken();
+	const indentCount = this.countIndents(lftab.text);
+	const next = this.nextLexerToken();
 	// if this was an empty line, simply skip it
 	if(next.type===MLexer.EOF || next.type===MLexer.LF_TAB) {
 		this.tokens.push(this.deriveToken(lftab, MLexer.LF));
@@ -90,7 +90,7 @@ MIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 };
 
 MIndentingLexer.prototype.deriveToken = (token, type) => {
-	var res = token.clone();
+	const res = token.clone();
 	res.type = type;
     if(token.type === MLexer.EOF)
         res._text = ""
@@ -98,8 +98,8 @@ MIndentingLexer.prototype.deriveToken = (token, type) => {
 };
 
 MIndentingLexer.prototype.countIndents = text => {
-	var count = 0;
-	for(var i=0;i<text.length;i++) {
+	let count = 0;
+	for(let i=0;i<text.length;i++) {
 		switch(text[i]) {
 		case ' ':
 			count += 1;

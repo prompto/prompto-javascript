@@ -1,8 +1,8 @@
-var QueryBuilder = require("../store/Store").QueryBuilder;
-var AndPredicate = require("./AndPredicate").AndPredicate;
-var OrPredicate = require("./OrPredicate").OrPredicate;
-var NotPredicate = require("./NotPredicate").NotPredicate;
-var MatchPredicate = require("./MatchPredicate").MatchPredicate;
+const QueryBuilder = require("../store/Store").QueryBuilder;
+const AndPredicate = require("./AndPredicate").AndPredicate;
+const OrPredicate = require("./OrPredicate").OrPredicate;
+const NotPredicate = require("./NotPredicate").NotPredicate;
+const MatchPredicate = require("./MatchPredicate").MatchPredicate;
 
 class MemQueryBuilder extends QueryBuilder {
     constructor() {
@@ -21,19 +21,19 @@ class MemQueryBuilder extends QueryBuilder {
     }
 
     and() {
-        var right = this.predicates.pop();
-        var left = this.predicates.pop();
+        const right = this.predicates.pop();
+        const left = this.predicates.pop();
         this.predicates.push(new AndPredicate(left, right));
     }
 
     or() {
-        var right = this.predicates.pop();
-        var left = this.predicates.pop();
+        const right = this.predicates.pop();
+        const left = this.predicates.pop();
         this.predicates.push(new OrPredicate(left, right));
     }
 
     not() {
-        var top = this.predicates.pop();
+        const top = this.predicates.pop();
         this.predicates.push(new NotPredicate(top));
     }
 

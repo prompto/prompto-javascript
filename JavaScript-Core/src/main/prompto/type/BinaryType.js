@@ -1,5 +1,5 @@
-var NativeType = require("./NativeType").NativeType;
-var TextType = require("./TextType").TextType;
+const NativeType = require("./NativeType").NativeType;
+const TextType = require("./TextType").TextType;
 
 class BinaryType extends NativeType {
     constructor(name) {

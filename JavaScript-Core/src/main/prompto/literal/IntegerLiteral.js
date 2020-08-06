@@ -1,6 +1,6 @@
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var Literal = require("./Literal").Literal;
-var IntegerType = require("../type/IntegerType").IntegerType;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const Literal = require("./Literal").Literal;
+const IntegerType = require("../type/IntegerType").IntegerType;
 
 function parse(value) {
 	return parseInt(value);

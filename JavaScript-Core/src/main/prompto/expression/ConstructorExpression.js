@@ -1,17 +1,17 @@
-var Expression = require("./Expression").Expression;
-var CategoryType = null;
-var Identifier = require("../grammar/Identifier").Identifier;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-var Argument = require("../grammar/Argument").Argument;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-var NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
-var ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
-var NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
-var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
+const Expression = require("./Expression").Expression;
+let CategoryType = null;
+const Identifier = require("../grammar/Identifier").Identifier;
+const DocumentType = require("../type/DocumentType").DocumentType;
+const NotMutableError = require("../error/NotMutableError").NotMutableError;
+const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
+const Argument = require("../grammar/Argument").Argument;
+const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+const NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
+const ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
+const NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
+const getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
 exports.resolve = () => {
     CategoryType = require("../type/CategoryType").CategoryType;
@@ -32,9 +32,9 @@ class ConstructorExpression extends Expression {
         if(this.checked)
             return;
         if(this.args && this.args.length>0) {
-            var assign = this.args[0];
+            const assign = this.args[0];
             if(!assign.parameter) {
-                var id = null;
+                let id = null;
                 if (assign.expression instanceof UnresolvedIdentifier || assign.expression instanceof InstanceExpression)
                     id = assign.expression.id;
                 if (id && decl.hasAttribute(context, id.name)) {
@@ -48,7 +48,7 @@ class ConstructorExpression extends Expression {
     }
 
     toDialect(writer) {
-        var cd = writer.context.getRegisteredDeclaration(this.type.name);
+        const cd = writer.context.getRegisteredDeclaration(this.type.name);
         if(cd==null)
             writer.context.problemListener.reportUnknownCategory(this.type.id);
         this.checkFirstHomonym(writer.context, cd);
@@ -61,7 +61,7 @@ class ConstructorExpression extends Expression {
 
     toODialect(writer) {
         this.type.toDialect(writer);
-        var assignments = new ArgumentList();
+        const assignments = new ArgumentList();
         if (this.copyFrom != null)
             assignments.add(new Argument(new AttributeParameter(new Identifier("from")), this.copyFrom));
         if(this.args!=null)
@@ -83,13 +83,13 @@ class ConstructorExpression extends Expression {
 
     check(context) {
         // need to update type, since it was arbitrarily set to CategoryType
-        var cd = context.getRegisteredDeclaration(this.type.name);
+        const cd = context.getRegisteredDeclaration(this.type.name);
         if(cd==null)
             context.problemListener.reportUnknownCategory(this.type.id);
         this.checkFirstHomonym(context, cd);
         cd.checkConstructorContext(context);
         if(this.copyFrom!=null) {
-            var cft = this.copyFrom.check(context);
+            const cft = this.copyFrom.check(context);
             if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
                 context.problemListener.reportInvalidCopySource(this.copyFrom);
                 // throw new SyntaxError("Cannot copy from " + cft.getName());
@@ -105,17 +105,17 @@ class ConstructorExpression extends Expression {
     }
 
     interpret(context) {
-        var cd = context.getRegisteredDeclaration(this.type.name);
+        const cd = context.getRegisteredDeclaration(this.type.name);
         this.checkFirstHomonym(context, cd);
-        var instance = this.type.newInstance(context);
+        const instance = this.type.newInstance(context);
         instance.mutable = true;
         if(this.copyFrom!=null) {
-            var copyObj = this.copyFrom.interpret(context);
+            const copyObj = this.copyFrom.interpret(context);
             if((copyObj.getMemberValue || null)!=null) {
-                var names = copyObj.getMemberNames();
+                const names = copyObj.getMemberNames();
                 names.forEach(function(name) {
                     if(name !== "dbId" && cd.hasAttribute(context, name)) {
-                        var value = copyObj.getMemberValue(context, name);
+                        const value = copyObj.getMemberValue(context, name);
                         if(value!=null && value.mutable && !this.type.mutable)
                             throw new NotMutableError();
                         // TODO convert Document member to attribute type
@@ -126,7 +126,7 @@ class ConstructorExpression extends Expression {
         }
         if(this.args!=null) {
             this.args.forEach(function(argument) {
-                var value = argument.expression.interpret(context);
+                const value = argument.expression.interpret(context);
                 if(value!=null && value.mutable && !this.type.mutable)
                     throw new NotMutableError();
                 instance.setMember(context, argument.name, value);
@@ -137,7 +137,7 @@ class ConstructorExpression extends Expression {
     }
 
     declare(transpiler) {
-        var cd = transpiler.context.getRegisteredDeclaration(this.type.name);
+        const cd = transpiler.context.getRegisteredDeclaration(this.type.name);
         cd.declare(transpiler);
         if(this.copyFrom)
             this.copyFrom.declare(transpiler);
@@ -146,7 +146,7 @@ class ConstructorExpression extends Expression {
     }
 
     transpile(transpiler) {
-        var decl = transpiler.context.getRegisteredDeclaration(this.type.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.type.name);
         if (decl instanceof NativeWidgetDeclaration)
             this.transpileNativeWidget(transpiler, decl);
         else if (decl instanceof ConcreteWidgetDeclaration)
@@ -158,7 +158,7 @@ class ConstructorExpression extends Expression {
     }
 
     transpileNativeWidget(transpiler, decl) {
-        var bound = decl.getBoundFunction(true);
+        const bound = decl.getBoundFunction(true);
         transpiler.append("new ").append(getTypeName(bound)).append("()");
     }
 
@@ -169,7 +169,7 @@ class ConstructorExpression extends Expression {
     }
 
     transpileNative(transpiler, decl) {
-        var bound = decl.getBoundFunction(true);
+        const bound = decl.getBoundFunction(true);
         transpiler.append("new_").append(getTypeName(bound)).append("(");
         this.transpileAssignments(transpiler);
         transpiler.append(")");

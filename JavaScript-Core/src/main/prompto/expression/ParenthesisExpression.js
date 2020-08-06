@@ -1,4 +1,4 @@
-var Expression = require("./Expression").Expression;
+const Expression = require("./Expression").Expression;
 
 class ParenthesisExpression extends Expression {
   

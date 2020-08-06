@@ -1,14 +1,14 @@
-var Expression = require("./Expression").Expression;
-var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-var MemberSelector = require("../expression/MemberSelector").MemberSelector;
-var NullValue = require("../value/NullValue").NullValue;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var MatchOp = require("../store/MatchOp").MatchOp;
-var ContOp = require("../grammar/ContOp").ContOp;
-var Instance = require("../value/Value").Instance;
-var Value = require("../value/Value").Value;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
+const Expression = require("./Expression").Expression;
+const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+const MemberSelector = require("../expression/MemberSelector").MemberSelector;
+const NullValue = require("../value/NullValue").NullValue;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const MatchOp = require("../store/MatchOp").MatchOp;
+const ContOp = require("../grammar/ContOp").ContOp;
+const Instance = require("../value/Value").Instance;
+const Value = require("../value/Value").Value;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 class ContainsExpression extends Expression {
   
@@ -32,8 +32,8 @@ class ContainsExpression extends Expression {
     }
 
     check(context) {
-        var lt = this.left.check(context);
-        var rt = this.right.check(context);
+        const lt = this.left.check(context);
+        const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
     }
 
@@ -51,13 +51,13 @@ class ContainsExpression extends Expression {
     }
 
     interpret(context) {
-        var lval = this.left.interpret(context);
-        var rval = this.right.interpret(context);
+        const lval = this.left.interpret(context);
+        const rval = this.right.interpret(context);
         return this.interpretValues(context, lval, rval);
     }
 
     interpretValues(context, lval, rval) {
-        var result = null;
+        let result = null;
         switch (this.operator) {
         case ContOp.IN:
         case ContOp.NOT_IN:
@@ -97,18 +97,18 @@ class ContainsExpression extends Expression {
         }
         // error management
         if (this.operator.name.lastIndexOf("IN")==this.operator.name.length-"IN".length) {
-            var tmp = lval;
+            const tmp = lval;
             lval = rval;
             rval = tmp;
         }
-        var lowerName = this.operator.name.toLowerCase().replace('_', ' ');
+        const lowerName = this.operator.name.toLowerCase().replace('_', ' ');
         throw new SyntaxError("Illegal comparison: " + lval.type.toString() + " " + lowerName + " " + rval.type.toString());
     }
 
     containsAll(context, container, items) {
-        var iterItems = items.getIterator(context);
+        const iterItems = items.getIterator(context);
         while(iterItems.hasNext()) {
-            var item = iterItems.next();
+            const item = iterItems.next();
             if (item instanceof Value) {
                 if (!container.hasItem(context, item)) {
                     return false;
@@ -121,9 +121,9 @@ class ContainsExpression extends Expression {
     }
 
     containsAny(context, container, items) {
-        var iterItems = items.getIterator(context);
+        const iterItems = items.getIterator(context);
         while(iterItems.hasNext()) {
-            var item = iterItems.next();
+            const item = iterItems.next();
             if (item instanceof Value)
             {
                 if (container.hasItem(context, item)) {
@@ -137,13 +137,13 @@ class ContainsExpression extends Expression {
     }
 
     interpretAssert(context, test) {
-        var lval = this.left.interpret(context);
-        var rval = this.right.interpret(context);
-        var result = this.interpretValues(context, lval, rval);
+        const lval = this.left.interpret(context);
+        const rval = this.right.interpret(context);
+        const result = this.interpretValues(context, lval, rval);
         if(result==BooleanValue.TRUE)
             return true;
-        var expected = this.getExpected(context, test.dialect);
-        var actual = lval.toString() + " " + this.operator.toString() +  " " + rval.toString();
+        const expected = this.getExpected(context, test.dialect);
+        const actual = lval.toString() + " " + this.operator.toString() +  " " + rval.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
@@ -157,43 +157,43 @@ class ContainsExpression extends Expression {
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(dialect, context);
+        const writer = new CodeWriter(dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();
     }
 
     checkQuery(context) {
-        var decl = this.left.checkAttribute(context);
+        const decl = this.left.checkAttribute(context);
         if(decl && !decl.storable)
             context.problemListener.reportNotStorable(this, decl.name);
-        var rt = this.right.check(context);
+        const rt = this.right.check(context);
         return this.checkOperator(context, decl.getType(), rt);
     }
 
     interpretQuery(context, query) {
-        var decl = this.left.checkAttribute(context);
+        const decl = this.left.checkAttribute(context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
-        var info = decl.getAttributeInfo();
-        var value = this.right.interpret(context);
+        const info = decl.getAttributeInfo();
+        let value = this.right.interpret(context);
         if (value instanceof Instance)
             value = value.getMemberValue(context, "dbId", false);
-        var data = value.getStorableData();
-        var matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, false);
+        const data = value.getStorableData();
+        const matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, false);
         query.verify(info, matchOp, data);
         if (this.operator.name.indexOf("NOT_")==0)
             query.not();
     }
 
     transpileQuery(transpiler, builder) {
-        var decl = this.left.checkAttribute(transpiler.context);
+        const decl = this.left.checkAttribute(transpiler.context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to transpile predicate");
-        var info = decl.getAttributeInfo();
-        var type = this.right.check(transpiler.context);
+        const info = decl.getAttributeInfo();
+        const type = this.right.check(transpiler.context);
         // TODO check for dbId field of instance value
-        var matchOp = this.getMatchOp(transpiler.context, decl.getType(), type, this.operator, false);
+        const matchOp = this.getMatchOp(transpiler.context, decl.getType(), type, this.operator, false);
         transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
         this.right.transpile(transpiler);
         transpiler.append(");").newLine();
@@ -207,7 +207,7 @@ class ContainsExpression extends Expression {
 
     getMatchOp(context, fieldType, valueType, operator, reverse) {
         if (reverse) {
-            var reversed = operator.reverse();
+            const reversed = operator.reverse();
             if (reversed == null)
                 throw new SyntaxError("Cannot reverse " + this.operator.toString());
             else
@@ -229,8 +229,8 @@ class ContainsExpression extends Expression {
     }
 
     declare(transpiler) {
-        var lt = this.left.check(transpiler.context);
-        var rt = this.right.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
         switch(this.operator) {
             case ContOp.IN:
             case ContOp.NOT_IN:
@@ -244,8 +244,8 @@ class ContainsExpression extends Expression {
     }
 
     transpile(transpiler) {
-        var lt = this.left.check(transpiler.context);
-        var rt = this.right.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
         switch(this.operator) {
             case ContOp.NOT_IN:
                 transpiler.append("!");

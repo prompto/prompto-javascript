@@ -1,7 +1,7 @@
 exports.NullLiteral = require('./NullLiteral').NullLiteral;
 exports.BooleanLiteral = require('./BooleanLiteral').BooleanLiteral;
 exports.CharacterLiteral = require('./CharacterLiteral').CharacterLiteral;
-var ilm = require('./IntegerLiteral');
+const ilm = require('./IntegerLiteral');
 exports.IntegerLiteral = ilm.IntegerLiteral;
 exports.MinIntegerLiteral = ilm.MinIntegerLiteral;
 exports.MaxIntegerLiteral = ilm.MaxIntegerLiteral;

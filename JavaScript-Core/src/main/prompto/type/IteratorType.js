@@ -1,7 +1,7 @@
-var IterableType = require("./IterableType").IterableType;
-var IntegerType = require("./IntegerType").IntegerType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
+const IterableType = require("./IterableType").IterableType;
+const IntegerType = require("./IntegerType").IntegerType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
 
 class IteratorType extends IterableType {
     constructor(itemType) {

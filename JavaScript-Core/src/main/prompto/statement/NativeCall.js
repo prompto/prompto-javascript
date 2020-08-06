@@ -1,5 +1,5 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var VoidType = require("../type/VoidType").VoidType;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const VoidType = require("../type/VoidType").VoidType;
 
 class NativeCall extends SimpleStatement {
     constructor() {

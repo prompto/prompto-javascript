@@ -1,7 +1,7 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TypeFamily = require("../store/TypeFamily").TypeFamily;
-var BooleanValue = null;
+const NativeType = require("./NativeType").NativeType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const TypeFamily = require("../store/TypeFamily").TypeFamily;
+let BooleanValue = null;
 
 exports.resolve = () => {
     BooleanValue = require("../value/BooleanValue").BooleanValue;
@@ -43,7 +43,7 @@ class BooleanType extends NativeType {
     }
 
     declare(transpiler) {
-        var isABoolean = require("../utils/Utils").isABoolean;
+        const isABoolean = require("../utils/Utils").isABoolean;
         transpiler.require(isABoolean);
     }
 

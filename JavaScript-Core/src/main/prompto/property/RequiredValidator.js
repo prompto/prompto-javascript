@@ -1,4 +1,4 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
+const PropertyValidator = require("./PropertyValidator").PropertyValidator;
 
 class RequiredValidator extends PropertyValidator {
     constructor(validator) {

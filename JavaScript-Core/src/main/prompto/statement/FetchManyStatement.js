@@ -1,8 +1,8 @@
-var FetchManyExpression = require("../expression/FetchManyExpression").FetchManyExpression;
-var CursorType = require("../type/CursorType").CursorType;
-var Variable = require("../runtime/Variable").Variable;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
+const FetchManyExpression = require("../expression/FetchManyExpression").FetchManyExpression;
+const CursorType = require("../type/CursorType").CursorType;
+const Variable = require("../runtime/Variable").Variable;
+const VoidType = require("../type/VoidType").VoidType;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class FetchManyStatement extends FetchManyExpression {
     constructor(typ, predicate, first, last, orderBy, name, andThen) {
@@ -29,7 +29,7 @@ class FetchManyStatement extends FetchManyExpression {
     }
 
     interpret(context) {
-        var record = FetchManyExpression.prototype.interpret.call(this, context);
+        const record = FetchManyExpression.prototype.interpret.call(this, context);
         context = context.newChildContext();
         context.registerValue(new Variable(this.name, new CursorType(this.typ)));
         context.setValue(this.name, record);
@@ -63,7 +63,7 @@ class FetchManyStatement extends FetchManyExpression {
     transpile(transpiler) {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
-        var mutable = this.typ ? this.typ.mutable : false;
+        const mutable = this.typ ? this.typ.mutable : false;
         transpiler.append("$DataStore.instance.fetchManyAsync(builder.build(), ").append(mutable).append(", function(").append(this.name.name).append(") {").indent();
         transpiler = transpiler.newChildTranspiler(transpiler.context);
         transpiler.context.registerValue(new Variable(this.name, new CursorType(this.typ)));

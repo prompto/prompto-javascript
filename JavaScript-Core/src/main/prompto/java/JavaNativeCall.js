@@ -1,4 +1,4 @@
-var NativeCall = require("../statement/NativeCall").NativeCall;
+const NativeCall = require("../statement/NativeCall").NativeCall;
 
 class JavaNativeCall extends NativeCall {
     constructor(statement) {

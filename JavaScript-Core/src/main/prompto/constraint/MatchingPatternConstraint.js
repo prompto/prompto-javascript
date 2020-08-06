@@ -1,6 +1,6 @@
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Variable = require("../runtime/Variable").Variable;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Variable = require("../runtime/Variable").Variable;
 
 class MatchingPatternConstraint {
     constructor(expression) {
@@ -11,7 +11,7 @@ class MatchingPatternConstraint {
 
     checkValue(context, value) {
         if(this.pattern==null) {
-            var toMatch = this.expression.interpret(context);
+            const toMatch = this.expression.interpret(context);
             this.pattern = new RegExp(toMatch);
         }
         if(!this.pattern.test(value.toString())) {
@@ -26,7 +26,7 @@ class MatchingPatternConstraint {
 
     declare(transpiler, name, type) {
         transpiler = transpiler.newChildTranspiler();
-        var id = new Identifier("value");
+        const id = new Identifier("value");
         transpiler.context.registerValue(new Variable(id, type));
         this.expression.declare(transpiler);
         this.transpile = function(transpiler) { this.transpileChecker(transpiler, name, type); };
@@ -36,7 +36,7 @@ class MatchingPatternConstraint {
     transpileChecker(transpiler, name, type) {
         transpiler.append("function $check_").append(name).append("(value) {").indent();
         transpiler = transpiler.newChildTranspiler();
-        var id = new Identifier("value");
+        const id = new Identifier("value");
         transpiler.context.registerValue(new Variable(id, type));
         transpiler.append("if(new RegExp(");
         this.expression.transpile(transpiler);

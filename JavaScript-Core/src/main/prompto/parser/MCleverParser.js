@@ -1,9 +1,9 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? require("fs") : {}; // nodejs only
-var antlr4 = require("antlr4/index");
-var MIndentingLexer = require("./MIndentingLexer").MIndentingLexer;
-var MParser = require("./MParser").MParser;
-var MPromptoBuilder = require("./MPromptoBuilder").MPromptoBuilder;
+const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+const fs = isNodeJs ? require("fs") : {}; // nodejs only
+const antlr4 = require("antlr4/index");
+const MIndentingLexer = require("./MIndentingLexer").MIndentingLexer;
+const MParser = require("./MParser").MParser;
+const MPromptoBuilder = require("./MPromptoBuilder").MPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -47,9 +47,9 @@ MCleverParser.prototype.equalToken = () => MParser.EQUAL;
 
 MCleverParser.prototype.doParse = function(rule, addLF) {
     this.getTokenStream().tokenSource.addLF = addLF;
-    var tree = rule.bind(this)();
-    var builder = new MPromptoBuilder(this);
-    var walker = new antlr4.tree.ParseTreeWalker();
+    const tree = rule.bind(this)();
+    const builder = new MPromptoBuilder(this);
+    const walker = new antlr4.tree.ParseTreeWalker();
     walker.walk(builder, tree);
     return builder.getNodeValue(tree);
 };

@@ -1,8 +1,8 @@
-var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
-var TypeExpression = require("../expression/TypeExpression").TypeExpression;
-var Identifier = require("../grammar/Identifier").Identifier;
+const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
+const TypeExpression = require("../expression/TypeExpression").TypeExpression;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class WidgetFieldProcessor extends AnnotationProcessor {
 
@@ -19,17 +19,17 @@ class WidgetFieldProcessor extends AnnotationProcessor {
     }
 
     doProcessCategory(annotation, context, declaration) {
-        var fieldName = annotation.getArgument("name");
-        var fieldType = annotation.getArgument("type");
+        const fieldName = annotation.getArgument("name");
+        const fieldType = annotation.getArgument("type");
         if(!(fieldName instanceof TextLiteral)) {
             context.problemListener.reportIllegalAnnotation("WidgetField requires a Text value for argument 'name'", annotation)
         } else if(!(fieldType instanceof TypeExpression || fieldType instanceof TypeLiteral)) {
             context.problemListener.reportIllegalAnnotation("WidgetField requires a a Type value for argument 'type'", annotation)
         } else {
-            var instance = context.getClosestInstanceContext();
+            const instance = context.getClosestInstanceContext();
             if(instance) {
-                var name = fieldName.toString();
-                var type = fieldType.value;
+                const name = fieldName.toString();
+                const type = fieldType.value;
                 instance.registerWidgetField(new Identifier(name.substring(1, name.length - 1)), type, this);
             } else
                 context.problemListener.reportError("Expected an instance context!");

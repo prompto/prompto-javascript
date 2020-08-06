@@ -1,4 +1,4 @@
-var AlwaysValidator = require("./AlwaysValidator").AlwaysValidator;
+const AlwaysValidator = require("./AlwaysValidator").AlwaysValidator;
 
 class Property {
     constructor() {

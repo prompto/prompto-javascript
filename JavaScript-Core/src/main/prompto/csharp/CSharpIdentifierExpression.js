@@ -1,4 +1,4 @@
-var CSharpExpression = require("./CSharpExpression").CSharpExpression;
+const CSharpExpression = require("./CSharpExpression").CSharpExpression;
 
 class CSharpIdentifierExpression extends CSharpExpression {
     constructor(parent, identifier) {
@@ -17,7 +17,7 @@ class CSharpIdentifierExpression extends CSharpExpression {
     }
 
     static parse(ids) {
-        var result = null;
+        let result = null;
         ids.split("\\.").forEach(part => {
             result = new CSharpIdentifierExpression(result, part);
         }, this);

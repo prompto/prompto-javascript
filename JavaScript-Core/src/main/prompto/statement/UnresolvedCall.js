@@ -1,17 +1,17 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-var MethodCall = require("./MethodCall").MethodCall;
-var MemberSelector = require("../expression/MemberSelector").MemberSelector;
-var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
-var SelectorExpression = require("../expression/SelectorExpression").SelectorExpression;
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var MethodType = require("../type/MethodType").MethodType;
-var VoidType = require("../type/VoidType").VoidType;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var Dialect = require("../parser/Dialect").Dialect;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+const MethodCall = require("./MethodCall").MethodCall;
+const MemberSelector = require("../expression/MemberSelector").MemberSelector;
+const MethodSelector = require("../expression/MethodSelector").MethodSelector;
+const UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
+const SelectorExpression = require("../expression/SelectorExpression").SelectorExpression;
+const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+const ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const MethodType = require("../type/MethodType").MethodType;
+const VoidType = require("../type/VoidType").VoidType;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class UnresolvedCall extends BaseStatement {
  
@@ -62,13 +62,13 @@ class UnresolvedCall extends BaseStatement {
         if (this.resolved && this.resolved.interpretAssert)
             return this.resolved.interpretAssert(context, testMethodDeclaration);
         else {
-            var expected = this.getExpected(context, this.dialect);
+            const expected = this.getExpected(context, this.dialect);
             throw new SyntaxError("Cannot test '" + expected + "'");
         }
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(this.dialect, context);
+        const writer = new CodeWriter(this.dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();
@@ -100,10 +100,10 @@ class UnresolvedCall extends BaseStatement {
     }
 
     resolveUnresolvedIdentifier(context) {
-        var id = this.callable.id;
-        var call, decl = null;
+        const id = this.callable.id;
+        let call, decl = null;
         // if this happens in the context of a member method, then we need to check for category members first
-        var instance = context.getClosestInstanceContext();
+        const instance = context.getClosestInstanceContext();
         if(instance!=null) {
             decl = this.resolveUnresolvedMember(instance, id.name);
             if(decl!=null)
@@ -111,9 +111,9 @@ class UnresolvedCall extends BaseStatement {
         }
         // could be a local instance
         if(call==null) {
-            var named = context.getRegisteredValue(id.name);
+            const named = context.getRegisteredValue(id.name);
             if(named !== null) {
-                var type = named.getType(context);
+                let type = named.getType(context);
                 if(type != null) {
                     type = type.resolve(context);
                     if(type instanceof MethodType) {
@@ -141,8 +141,8 @@ class UnresolvedCall extends BaseStatement {
     }
 
     resolveUnresolvedMember(context, name) {
-        var decl = context.getRegisteredDeclaration(context.instanceType.name);
-        var methods = decl.getMemberMethodsMap(context, name);
+        const decl = context.getRegisteredDeclaration(context.instanceType.name);
+        const methods = decl.getMemberMethodsMap(context, name);
         if(methods!=null && !methods.isEmpty())
             return methods;
         else
@@ -150,7 +150,7 @@ class UnresolvedCall extends BaseStatement {
     }
 
     resolveMember(context) {
-        var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
+        const call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
         call.copySectionFrom(this);
         return call;
     }

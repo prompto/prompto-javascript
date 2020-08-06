@@ -1,8 +1,8 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var BreakResult = require("../runtime/BreakResult").BreakResult;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const BreakResult = require("../runtime/BreakResult").BreakResult;
 
 class WhileStatement extends BaseStatement {
    
@@ -23,7 +23,7 @@ class WhileStatement extends BaseStatement {
         this.condition.transpile(transpiler);
         transpiler.append(") {");
         transpiler.indent();
-        var child = transpiler.newChildTranspiler();
+        const child = transpiler.newChildTranspiler();
         this.statements.transpile(child);
         child.dedent().flush();
         transpiler.append("}").newLine();
@@ -31,18 +31,18 @@ class WhileStatement extends BaseStatement {
     }
 
     check(context) {
-        var cond = this.condition.check(context);
+        const cond = this.condition.check(context);
         if(cond!=BooleanType.instance) {
             context.problemListener.reportError(this, "Expected a Boolean condition!");
         }
-        var child = context.newChildContext();
+        const child = context.newChildContext();
         return this.statements.check(child, null);
     }
 
     interpret(context) {
         while(this.interpretCondition(context)) {
-            var child = context.newChildContext();
-            var value = this.statements.interpret(child);
+            const child = context.newChildContext();
+            const value = this.statements.interpret(child);
             if(value==BreakResult.instance)
                 break;
             if(value!=null)
@@ -52,7 +52,7 @@ class WhileStatement extends BaseStatement {
     }
 
     interpretCondition(context) {
-        var value = this.condition.interpret(context);
+        const value = this.condition.interpret(context);
         if(!(value instanceof BooleanValue)) {
             throw new InvalidDataError("Expected a Boolean, got:" + typeof(value));
         }

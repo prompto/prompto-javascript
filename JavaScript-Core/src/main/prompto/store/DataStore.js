@@ -1,4 +1,4 @@
-var MemStore = require("../memstore/MemStore").MemStore;
+const MemStore = require("../memstore/MemStore").MemStore;
 
 function $DataStore() {
 

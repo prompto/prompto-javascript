@@ -1,4 +1,4 @@
-var SymbolList = require("./SymbolList").SymbolList;
+const SymbolList = require("./SymbolList").SymbolList;
 
 class NativeSymbolList extends SymbolList {
     constructor(symbol) {

@@ -1,7 +1,7 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var NullValue = require("../value/NullValue").NullValue;
-var VoidResult = require("../runtime/VoidResult").VoidResult;
-var VoidType = require("../type/VoidType").VoidType;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const NullValue = require("../value/NullValue").NullValue;
+const VoidResult = require("../runtime/VoidResult").VoidResult;
+const VoidType = require("../type/VoidType").VoidType;
 
 class ReturnStatement extends SimpleStatement {
   
@@ -57,7 +57,7 @@ class ReturnStatement extends SimpleStatement {
     check(context) {
         if(this.expression==null)
             return VoidType.instance;
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         if(type == VoidType.instance && !this.fromArrowExpression)
             context.problemListener.reportReturningVoidType(this.expression);
         return type;

@@ -1,5 +1,5 @@
-var BooleanType = require("../type/BooleanType").BooleanType;
-var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
 
 class Assertion {
     constructor(expression) {
@@ -8,7 +8,7 @@ class Assertion {
     }
 
     check(context) {
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         if(type!==BooleanType.instance)
             context.problemListener.reportIllegalNonBoolean(this.expression, type);
         if(this.expression instanceof EqualsExpression)

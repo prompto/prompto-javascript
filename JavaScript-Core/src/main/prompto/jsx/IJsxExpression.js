@@ -1,5 +1,5 @@
-var Section = require("../parser/Section").Section;
-var JsxValue = require("../value/JsxValue").JsxValue;
+const Section = require("../parser/Section").Section;
+const JsxValue = require("../value/JsxValue").JsxValue;
 
 class IJsxExpression extends Section {
     constructor() {

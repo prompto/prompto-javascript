@@ -1,4 +1,4 @@
-var ObjectList = require("./ObjectList").ObjectList;
+const ObjectList = require("./ObjectList").ObjectList;
 
 class ExpressionList extends ObjectList {
     constructor(items, item) {
@@ -8,7 +8,7 @@ class ExpressionList extends ObjectList {
 
     toDialect(writer) {
         if (this.length > 0) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].toDialect(writer);
                 writer.append(", ");
             }
@@ -24,7 +24,7 @@ class ExpressionList extends ObjectList {
 
     transpile(transpiler) {
         if (this.length > 0) {
-            for (var i = 0; i < this.length; i++) {
+            for (let i = 0; i < this.length; i++) {
                 this[i].transpile(transpiler);
                 transpiler.append(", ");
             }

@@ -1,5 +1,5 @@
-var BinaryType = require("./BinaryType").BinaryType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const BinaryType = require("./BinaryType").BinaryType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class ImageType extends BinaryType {
     constructor() {

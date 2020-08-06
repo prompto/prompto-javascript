@@ -1,5 +1,5 @@
-var BaseType = require("./BaseType").BaseType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const BaseType = require("./BaseType").BaseType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 
 class TypeType extends BaseType {

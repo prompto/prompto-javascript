@@ -1,8 +1,8 @@
-var BaseType = require("./BaseType").BaseType;
-var DocumentType = require("./DocumentType").DocumentType;
-var Document = require("../intrinsic/Document").Document;
-var List = require("../intrinsic/List").List;
-var Identifier = require("../grammar/Identifier").Identifier;
+const BaseType = require("./BaseType").BaseType;
+const DocumentType = require("./DocumentType").DocumentType;
+const Document = require("../intrinsic/Document").Document;
+const List = require("../intrinsic/List").List;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 /* transient type for holding child property structure */
 class PropertiesType extends BaseType {
@@ -20,12 +20,12 @@ class PropertiesType extends BaseType {
     }
 
     getMemberMethods(context, name) {
-        var prop = this.properties.get(name);
+        const prop = this.properties.get(name);
         return prop ? prop.validator.getMethodDeclarations(context) : BaseType.prototype.getMemberMethods.call(this, context, name);
     }
 
     checkMember(context, section, name) {
-        var prop = this.properties.get(name);
+        const prop = this.properties.get(name);
         return prop ? prop.validator.getType(context) : BaseType.prototype.checkMember.call(this, context, section, name);
     }
 
@@ -35,7 +35,7 @@ class PropertiesType extends BaseType {
     }
 
     declareMember(transpiler, section, name) {
-        var prop = this.properties.get(name);
+        const prop = this.properties.get(name);
         if(prop)
             prop.validator.getType(transpiler.context).declare(transpiler);
         else

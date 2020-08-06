@@ -1,6 +1,6 @@
-var NativeType = require("./NativeType").NativeType;
-var JsxType = require("./JsxType").JsxType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const NativeType = require("./NativeType").NativeType;
+const JsxType = require("./JsxType").JsxType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class HtmlType extends NativeType {
     constructor() {

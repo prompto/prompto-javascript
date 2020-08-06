@@ -1,10 +1,10 @@
-var ContainerType = require("./ContainerType").ContainerType;
-var SetType = null;
-var IntegerType = null;
-var BooleanType = require("./BooleanType").BooleanType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var ListValue = require("../value/ListValue").ListValue;
-var List = require("../intrinsic/List").List;
+const ContainerType = require("./ContainerType").ContainerType;
+let SetType = null;
+let IntegerType = null;
+const BooleanType = require("./BooleanType").BooleanType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const ListValue = require("../value/ListValue").ListValue;
+const List = require("../intrinsic/List").List;
 
 
 exports.resolve = () => {
@@ -36,7 +36,7 @@ class ListType extends ContainerType {
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
-        var values = value.map(function(item) {
+        const values = value.map(function(item) {
             return this.itemType.convertJavaScriptValueToPromptoValue(context, item, null);
         }, this);
         return new ListValue(this.itemType, values);
@@ -161,7 +161,7 @@ class ListType extends ContainerType {
 
     declareMultiply(transpiler, other, tryReverse, left, right) {
         if(other === IntegerType.instance) {
-            var multiplyArray = require("../utils/Utils").multiplyArray;
+            const multiplyArray = require("../utils/Utils").multiplyArray;
             transpiler.require(multiplyArray);
             left.declare(transpiler);
             right.declare(transpiler);
@@ -220,7 +220,7 @@ class ListType extends ContainerType {
     }
 
     declareContainsAllOrAny(transpiler, other, container, items) {
-        var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
@@ -247,7 +247,7 @@ class ListType extends ContainerType {
     getMemberMethods(context, name) {
         switch (name) {
             case "join":
-                var JoinListMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinListMethodDeclaration;
+                const JoinListMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinListMethodDeclaration;
                 return [new JoinListMethodDeclaration()];
             default:
                 return ContainerType.prototype.getMemberMethods.call(context, name);

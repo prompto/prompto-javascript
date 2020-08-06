@@ -1,4 +1,4 @@
-var BaseType = require("./BaseType").BaseType;
+const BaseType = require("./BaseType").BaseType;
 
 class NativeType extends BaseType {
     constructor(id) {
@@ -14,7 +14,7 @@ class NativeType extends BaseType {
     }
 
     getExpressionSortedComparator(context, expression, desc) {
-        var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+        const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
         if(expression instanceof ArrowExpression)
             return expression.getSortedComparator(context, this, desc);
         else
@@ -57,7 +57,7 @@ class NativeType extends BaseType {
     }
 
     transpileSortedComparator(transpiler, key, desc) {
-        var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+        const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
         if(key instanceof ArrowExpression)
             return key.transpileSortedComparator(transpiler, this, desc);
         else if(desc)

@@ -1,5 +1,5 @@
-var BinaryValue = require("./BinaryValue").BinaryValue;
-var BlobType = require("../type/BlobType").BlobType;
+const BinaryValue = require("./BinaryValue").BinaryValue;
+const BlobType = require("../type/BlobType").BlobType;
 
 class BlobValue extends BinaryValue {
     constructor(mimeType, data) {

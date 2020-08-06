@@ -1,35 +1,35 @@
-var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-var Identifier = require("../grammar/Identifier").Identifier;
-var ArgumentList = null;
-var Argument = null;
-var CategoryDeclaration = null;
-var ConcreteCategoryDeclaration = null;
-var SingletonCategoryDeclaration = null;
-var EnumeratedNativeDeclaration = null;
-var EnumeratedCategoryDeclaration = null;
-var EnumeratedCategoryType = null;
-var EnumeratedNativeType = null;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var Operator = require("../grammar/Operator").Operator;
-var BaseType = require("./BaseType").BaseType;
-var VoidType = require("./VoidType").VoidType;
-var NativeType = require("./NativeType").NativeType;
-var NullType = require("./NullType").NullType;
-var TextType = require("./TextType").TextType;
-var AnyType = require("./AnyType").AnyType;
-var MissingType = require("./MissingType").MissingType;
-var MethodType = require("./MethodType").MethodType;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var MethodCall = require("../statement/MethodCall").MethodCall;
-var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var MethodFinder = require("../runtime/MethodFinder").MethodFinder;
-var $DataStore = require("../store/DataStore").$DataStore;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-var Score = require("../runtime/Score").Score;
-var compareValues = require("../utils/Utils").compareValues;
-var MethodDeclarationMap = null;
+const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
+const Identifier = require("../grammar/Identifier").Identifier;
+let ArgumentList = null;
+let Argument = null;
+let CategoryDeclaration = null;
+let ConcreteCategoryDeclaration = null;
+let SingletonCategoryDeclaration = null;
+let EnumeratedNativeDeclaration = null;
+let EnumeratedCategoryDeclaration = null;
+let EnumeratedCategoryType = null;
+let EnumeratedNativeType = null;
+const ValueExpression = require("../expression/ValueExpression").ValueExpression;
+const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+const Operator = require("../grammar/Operator").Operator;
+const BaseType = require("./BaseType").BaseType;
+const VoidType = require("./VoidType").VoidType;
+const NativeType = require("./NativeType").NativeType;
+const NullType = require("./NullType").NullType;
+const TextType = require("./TextType").TextType;
+const AnyType = require("./AnyType").AnyType;
+const MissingType = require("./MissingType").MissingType;
+const MethodType = require("./MethodType").MethodType;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const MethodCall = require("../statement/MethodCall").MethodCall;
+const MethodSelector = require("../expression/MethodSelector").MethodSelector;
+const MethodFinder = require("../runtime/MethodFinder").MethodFinder;
+const $DataStore = require("../store/DataStore").$DataStore;
+const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+const Score = require("../runtime/Score").Score;
+const compareValues = require("../utils/Utils").compareValues;
+let MethodDeclarationMap = null;
 
 exports.resolve = () => {
     ArgumentList = require("../grammar/ArgumentList").ArgumentList;
@@ -60,7 +60,7 @@ class CategoryType extends BaseType {
     }
 
     isStorable(context) {
-        var decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context);
         return decl.isStorable && decl.isStorable(context);
     }
 
@@ -72,10 +72,10 @@ class CategoryType extends BaseType {
     }
 
     resolve(context, onError) {
-        var type = this.anyfy();
+        const type = this.anyfy();
         if(type instanceof NativeType)
             return type;
-        var decl = context.getRegisteredDeclaration(type.name);
+        const decl = context.getRegisteredDeclaration(type.name);
         if(!decl) {
             if(onError)
                 onError(type);
@@ -95,9 +95,9 @@ class CategoryType extends BaseType {
     }
 
     getSuperType(context, section) {
-        var decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context);
         if(decl instanceof CategoryDeclaration) {
-            var derived = decl.derivedFrom;
+            const derived = decl.derivedFrom;
             if(derived && derived.length)
                 return new CategoryType(derived[0]);
         }
@@ -106,10 +106,10 @@ class CategoryType extends BaseType {
 
     declare(transpiler) {
         if(this.name==="Any") {
-            var Any = require("../intrinsic/Any").Any;
+            const Any = require("../intrinsic/Any").Any;
             transpiler.require(Any);
         } else  {
-            var decl = this.getDeclaration(transpiler.context);
+            const decl = this.getDeclaration(transpiler.context);
             decl.declare(transpiler);
         }
     }
@@ -119,7 +119,7 @@ class CategoryType extends BaseType {
     }
 
     transpileInstance(transpiler) {
-        var decl = this.getDeclaration(transpiler.context);
+        const decl = this.getDeclaration(transpiler.context);
         if(decl instanceof SingletonCategoryDeclaration)
             transpiler.append(this.name).append(".instance");
         else
@@ -127,21 +127,21 @@ class CategoryType extends BaseType {
     }
 
     newInstanceFromStored(context, stored) {
-        var decl = this.getDeclaration(context);
-        var inst = decl.newInstanceFromStored(context, stored);
+        const decl = this.getDeclaration(context);
+        const inst = decl.newInstanceFromStored(context, stored);
         inst.mutable = this.mutable;
         return inst;
     }
 
     checkUnique(context) {
-        var actual = context.getRegisteredDeclaration(this.name) || null;
+        const actual = context.getRegisteredDeclaration(this.name) || null;
         if(actual!=null) {
             throw new SyntaxError("Duplicate name: \"" + this.name + "\"");
         }
     }
 
     getDeclaration(context) {
-        var decl = context.getRegisteredDeclaration(this.name) || null;
+        const decl = context.getRegisteredDeclaration(this.name) || null;
         if(decl==null) {
             if(context.problemListener)
                 context.problemListener.reportUnknownCategory(this.id);
@@ -152,7 +152,7 @@ class CategoryType extends BaseType {
     }
 
     checkMultiply(context, other, tryReverse) {
-        var type = this.checkOperator(context, other, tryReverse, Operator.MULTIPLY);
+        const type = this.checkOperator(context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null)
             return type;
         else
@@ -160,7 +160,7 @@ class CategoryType extends BaseType {
     }
 
     declareMultiply(transpiler, other, tryReverse, left, right) {
-        var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
+        const type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -170,7 +170,7 @@ class CategoryType extends BaseType {
     }
 
     transpileMultiply(transpiler, other, tryReverse, left, right) {
-        var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
+        const type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null) {
             left.transpile(transpiler);
             transpiler.append(".operator_MULTIPLY").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
@@ -182,7 +182,7 @@ class CategoryType extends BaseType {
     }
 
     checkDivide(context, other) {
-        var type = this.checkOperator(context, other, false, Operator.DIVIDE);
+        const type = this.checkOperator(context, other, false, Operator.DIVIDE);
         if(type!=null)
             return type;
         else
@@ -190,7 +190,7 @@ class CategoryType extends BaseType {
     }
 
     declareDivide(transpiler, other, left, right) {
-        var type = this.checkOperator(transpiler.context, other, false, Operator.DIVIDE);
+        const type = this.checkOperator(transpiler.context, other, false, Operator.DIVIDE);
         if(type!=null) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -207,7 +207,7 @@ class CategoryType extends BaseType {
     }
 
     checkIntDivide(context, other) {
-        var type = this.checkOperator(context, other, false, Operator.IDIVIDE);
+        const type = this.checkOperator(context, other, false, Operator.IDIVIDE);
         if(type!=null)
             return type;
         else
@@ -215,7 +215,7 @@ class CategoryType extends BaseType {
     }
 
     declareIntDivide(transpiler, other, left, right) {
-        var type = this.checkOperator(transpiler.context, other, false, Operator.IDIVIDE);
+        const type = this.checkOperator(transpiler.context, other, false, Operator.IDIVIDE);
         if(type!=null) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -232,7 +232,7 @@ class CategoryType extends BaseType {
     }
 
     checkModulo(context, other) {
-        var type = this.checkOperator(context, other, false, Operator.MODULO);
+        const type = this.checkOperator(context, other, false, Operator.MODULO);
         if(type!=null)
             return type;
         else
@@ -240,7 +240,7 @@ class CategoryType extends BaseType {
     }
 
     declareModulo(transpiler, other, left, right) {
-        var type = this.checkOperator(transpiler.context, other, false, Operator.MODULO);
+        const type = this.checkOperator(transpiler.context, other, false, Operator.MODULO);
         if(type!=null) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -257,7 +257,7 @@ class CategoryType extends BaseType {
     }
 
     checkAdd(context, other, tryReverse) {
-        var type = this.checkOperator(context, other, tryReverse, Operator.PLUS);
+        const type = this.checkOperator(context, other, tryReverse, Operator.PLUS);
         if(type!=null)
             return type;
         else
@@ -265,7 +265,7 @@ class CategoryType extends BaseType {
     }
 
     declareAdd(transpiler, other, tryReverse, left, right) {
-        var type = this.checkOperator(transpiler.context, other, tryReverse, Operator.PLUS);
+        const type = this.checkOperator(transpiler.context, other, tryReverse, Operator.PLUS);
         if(type!=null) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -282,7 +282,7 @@ class CategoryType extends BaseType {
     }
 
     checkSubtract(context, other) {
-        var type = this.checkOperator(context, other, false, Operator.MINUS);
+        const type = this.checkOperator(context, other, false, Operator.MINUS);
         if(type!=null)
             return type;
         else
@@ -290,7 +290,7 @@ class CategoryType extends BaseType {
     }
 
     declareSubtract(transpiler, other, left, right) {
-        var type = this.checkOperator(transpiler.context, other, false, Operator.MINUS);
+        const type = this.checkOperator(transpiler.context, other, false, Operator.MINUS);
         if(type!=null) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -307,13 +307,13 @@ class CategoryType extends BaseType {
     }
 
     checkOperator(context, other, tryReverse, operator) {
-        var actual = this.getDeclaration(context);
+        const actual = this.getDeclaration(context);
         if(actual instanceof ConcreteCategoryDeclaration) try {
-            var method = actual.getOperatorMethod(context, operator, other);
+            const method = actual.getOperatorMethod(context, operator, other);
             if(method==null)
                 return null;
             context = context.newInstanceContext(null, this);
-            var local = context.newLocalContext();
+            const local = context.newLocalContext();
             method.registerParameters(local);
             return method.check(local, false);
         } catch(e) {
@@ -332,7 +332,7 @@ class CategoryType extends BaseType {
     checkMember(context, section, name) {
         if( "category" === name)
             return new CategoryType(new Identifier("Category"));
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         if (decl == null) {
             context.problemListener.reportUnknownCategory(this.id);
             return VoidType.instance;
@@ -351,7 +351,7 @@ class CategoryType extends BaseType {
         if(decl.storable && "dbId" === name)
             return AnyType.instance;
         else if (decl.hasAttribute(context, name)) {
-            var ad = context.getRegisteredDeclaration(name);
+            const ad = context.getRegisteredDeclaration(name);
             if (ad == null) {
                 throw new SyntaxError("Unknown attribute:" + name);
             }
@@ -359,7 +359,7 @@ class CategoryType extends BaseType {
         } else if ("text" == name) {
             return TextType.instance
         } else if (decl.hasMethod(context, name)) {
-            var method = decl.getMemberMethodsMap(context, name).getFirst();
+            const method = decl.getMemberMethodsMap(context, name).getFirst();
             return new MethodType(method);
         } else {
             context.problemListener.reportUnknownAttribute(section);
@@ -369,7 +369,7 @@ class CategoryType extends BaseType {
 
     declareMember(transpiler, section, name) {
         if( "category" === name ) {
-            var Category = require("../intrinsic/$Root").Category;
+            const Category = require("../intrinsic/$Root").Category;
             transpiler.require(Category);
         }
         // TODO visit attributes
@@ -383,7 +383,7 @@ class CategoryType extends BaseType {
     }
 
     checkStaticMember(context, section, id) {
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         if(decl==null) {
             context.problemListener.reportUnknownIdentifier(this.name, this);
             return null;
@@ -408,11 +408,11 @@ class CategoryType extends BaseType {
     }
 
     getStaticMemberValue(context, name) {
-        var decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context);
         if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
             return decl.getType(context).getStaticMemberValue(context, name);
         else if(decl instanceof SingletonCategoryDeclaration) {
-            var singleton = context.loadSingleton(this);
+            const singleton = context.loadSingleton(this);
             return singleton.getMemberValue(context, name);
         } else
             return BaseType.prototype.getStaticMemberValue.call(this, context, name);
@@ -431,7 +431,7 @@ class CategoryType extends BaseType {
 
     isDerivedFrom(context, other) {
         try {
-            var thisDecl = this.getDeclaration(context);
+            const thisDecl = this.getDeclaration(context);
             if (thisDecl instanceof CategoryDeclaration)
                 return this.isDerivedFromCategory(context, thisDecl, other);
         } catch (e) {
@@ -444,8 +444,8 @@ class CategoryType extends BaseType {
         if(decl.derivedFrom==null) {
             return false;
         }
-        for(var i=0;i<decl.derivedFrom.length; i++) {
-            var ct = new CategoryType(decl.derivedFrom[i]);
+        for(let i=0;i<decl.derivedFrom.length; i++) {
+            const ct = new CategoryType(decl.derivedFrom[i]);
             if (ct.equals(other) || ct.isDerivedFrom(context, other)) {
                 return true;
             }
@@ -457,9 +457,9 @@ class CategoryType extends BaseType {
         if (!(other instanceof CategoryType) || !other.isAnonymous())
             return false;
         try {
-            var thisDecl = this.getDeclaration(context);
+            const thisDecl = this.getDeclaration(context);
             if (thisDecl instanceof CategoryDeclaration) {
-                var otherDecl = other.getDeclaration(context);
+                const otherDecl = other.getDeclaration(context);
                 if (otherDecl instanceof CategoryDeclaration)
                     return this.isDerivedFromAnonymousCategory(context, thisDecl, otherDecl);
             }
@@ -474,12 +474,12 @@ class CategoryType extends BaseType {
 
     isDerivedFromAnonymousCategory(context, thisDecl, otherDecl) {
         // an anonymous category extends 1 and only 1 category
-        var baseId = otherDecl.derivedFrom[0];
+        const baseId = otherDecl.derivedFrom[0];
         // check we derive from root category (if not extending 'Any')
         if("any"!=baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
             return false;
-        var allAttributes = otherDecl.getAllAttributes(context);
-        for(var attr of allAttributes) {
+        const allAttributes = otherDecl.getAllAttributes(context);
+        for(const attr of allAttributes) {
             if(!thisDecl.hasAttribute(context, attr.name)) {
                 return false;
             }
@@ -500,7 +500,7 @@ class CategoryType extends BaseType {
         if(other.isAnonymous()) {
             return true;
         }
-        var thisDecl = context.getRegisteredDeclaration(this.name);
+        const thisDecl = context.getRegisteredDeclaration(this.name);
         if(thisDecl.isDerivedFrom(context, other)) {
             return true;
         } else {
@@ -527,7 +527,7 @@ class CategoryType extends BaseType {
     }
 
     newInstance(context) {
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         return decl.newInstance(context);
     }
 
@@ -535,14 +535,14 @@ class CategoryType extends BaseType {
         key = key || null;
         if (key == null)
             key = new UnresolvedIdentifier(new Identifier("key"));
-        var keyname = key.toString();
-        var decl = this.getDeclaration(context);
+        const keyname = key.toString();
+        const decl = this.getDeclaration(context);
         if (decl.hasAttribute(context, keyname)) {
             return this.getAttributeSortedComparator(context, keyname, desc);
         } else if (decl.hasMethod(context, keyname)) {
             return this.getMemberMethodSortedComparator(context, keyname, desc);
         } else {
-            var method = this.findGlobalMethod(context, keyname);
+            const method = this.findGlobalMethod(context, keyname);
             if(method!=null) {
                 return this.getGlobalMethodSortedComparator(context, method, desc);
             } else if(key instanceof ArrowExpression) {
@@ -555,10 +555,10 @@ class CategoryType extends BaseType {
 
     getExpressionSortedComparator(context, exp, desc) {
         return (o1, o2) => {
-            var ctx = context.newInstanceContext(o1, null);
-            var value1 = exp.interpret(ctx);
+            let ctx = context.newInstanceContext(o1, null);
+            const value1 = exp.interpret(ctx);
             ctx = context.newInstanceContext(o2, null);
-            var value2 = exp.interpret(ctx);
+            const value2 = exp.interpret(ctx);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }
@@ -566,48 +566,48 @@ class CategoryType extends BaseType {
     getAttributeSortedComparator(context, name, desc) {
         if(desc)
             return (o1, o2) => {
-                var value1 = o1.getMemberValue(context, name);
-                var value2 = o2.getMemberValue(context, name);
+                const value1 = o1.getMemberValue(context, name);
+                const value2 = o2.getMemberValue(context, name);
                 return compareValues(value2, value1);
             };
         else
             return (o1, o2) => {
-                var value1 = o1.getMemberValue(context, name);
-                var value2 = o2.getMemberValue(context, name);
+                const value1 = o1.getMemberValue(context, name);
+                const value2 = o2.getMemberValue(context, name);
                 return compareValues(value1, value2);
             };
     }
 
     getGlobalMethodSortedComparator(context, method, desc) {
-        var cmp = function(o1, o2) {
-            var argument = method.args[0];
+        const cmp = function(o1, o2) {
+            const argument = method.args[0];
             argument._expression = new ValueExpression(this, o1);
-            var value1 = method.interpret(context);
+            const value1 = method.interpret(context);
             argument._expression = new ValueExpression(this, o2);
-            var value2 = method.interpret(context);
+            const value2 = method.interpret(context);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
         return cmp.bind(this);
     }
 
     getMemberMethods(context, name) {
-        var decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context);
        if (!(decl instanceof ConcreteCategoryDeclaration))
             throw new SyntaxError("Unknown category:" + this.name);
         else {
-            var methods = decl.getMemberMethodsMap(context, name);
+            const methods = decl.getMemberMethodsMap(context, name);
             return methods.getAll();
         }
     }
 
     getStaticMemberMethods(context, name) {
-        var decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context);
         if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
             return decl.getType(context).getStaticMemberMethods(context, name);
         else if(decl instanceof SingletonCategoryDeclaration)
             return decl.getType(context).getMemberMethods(context, name);
         else if (decl instanceof ConcreteCategoryDeclaration) {
-            var methods = decl.getMemberMethodsMap(context, name);
+            const methods = decl.getMemberMethodsMap(context, name);
             return methods.getAll();
         } else
             throw new SyntaxError("Unknown category:" + this.name);
@@ -616,12 +616,12 @@ class CategoryType extends BaseType {
     /* look for a method which takes this category as sole parameter */
     findGlobalMethod(context, name, returnDecl) {
         try {
-            var exp = new ValueExpression(this, this.newInstance(context));
-            var arg = new Argument(null, exp);
-            var args = new ArgumentList([arg]);
-            var call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
-            var finder = new MethodFinder(context, call);
-            var decl = finder.findMethod(true);
+            const exp = new ValueExpression(this, this.newInstance(context));
+            const arg = new Argument(null, exp);
+            const args = new ArgumentList([arg]);
+            const call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
+            const finder = new MethodFinder(context, call);
+            const decl = finder.findMethod(true);
             return decl==null ? null : returnDecl ? decl : call;
         } catch (e) {
             if(e instanceof PromptoError) {
@@ -633,7 +633,7 @@ class CategoryType extends BaseType {
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
-        var decl = this.getDeclaration(context)
+        const decl = this.getDeclaration(context);
         if (decl == null)
             return BaseType.prototype.convertPythonValueToPromptoValue(context, value, returnType);
         if(decl instanceof EnumeratedNativeDeclaration || decl instanceof EnumeratedCategoryDeclaration)
@@ -648,8 +648,8 @@ class CategoryType extends BaseType {
     }
 
     declareSorted(transpiler, key) {
-        var keyname = key ? key.toString() : "key";
-        var decl = this.getDeclaration(transpiler.context);
+        const keyname = key ? key.toString() : "key";
+        let decl = this.getDeclaration(transpiler.context);
         if (decl.hasAttribute(transpiler.context, keyname) || decl.hasMethod(transpiler.context, keyname, null)) {
             return;
         } else {
@@ -665,8 +665,8 @@ class CategoryType extends BaseType {
     }
 
     transpileSortedComparator(transpiler, key, desc) {
-        var keyname = key ? key.toString() : "key";
-        var decl = this.getDeclaration(transpiler.context);
+        const keyname = key ? key.toString() : "key";
+        let decl = this.getDeclaration(transpiler.context);
         if (decl.hasAttribute(transpiler.context, keyname)) {
             this.transpileAttributeSortedComparator(transpiler, key, desc);
         } else if (decl.hasMethod(transpiler.context, keyname, null)) {
@@ -725,7 +725,7 @@ class CategoryType extends BaseType {
     }
 
     transpileAssignMemberValue(transpiler, name, expression) {
-        var decl = transpiler.context.getRegisteredDeclaration(name);
+        const decl = transpiler.context.getRegisteredDeclaration(name);
         transpiler.append(".setMember('")
             .append(name)
             .append("', ");
@@ -733,7 +733,7 @@ class CategoryType extends BaseType {
         transpiler.append(", ")
             .append(decl.storable)
             .append(", false"); // not mutable
-        var type = expression.check(transpiler.context);
+        const type = expression.check(transpiler.context);
         if(type instanceof EnumeratedCategoryType || type instanceof EnumeratedNativeType)
             transpiler.append(", true"); // set isEnum flag
         else

@@ -1,17 +1,17 @@
-var Expression = require("./Expression").Expression;
-var AnyType = require("../type/AnyType").AnyType;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var NativeType = require("../type/NativeType").NativeType;
-var IterableType = require("../type/IterableType").IterableType;
-var MethodType = require("../type/MethodType").MethodType;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+const Expression = require("./Expression").Expression;
+const AnyType = require("../type/AnyType").AnyType;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const NativeType = require("../type/NativeType").NativeType;
+const IterableType = require("../type/IterableType").IterableType;
+const MethodType = require("../type/MethodType").MethodType;
+const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
 function getTargetType(context, itype, mutable) {
     if (itype instanceof IterableType) {
-        var itemType = getTargetType(context, itype.itemType);
+        const itemType = getTargetType(context, itype.itemType);
         if (itemType)
             return itype.withItemType(itemType).asMutable(context, mutable);
         else
@@ -29,7 +29,7 @@ function getTargetType(context, itype, mutable) {
 
 
 function getTargetAtomicType(context, itype) {
-    var decl = context.getRegisteredDeclaration(itype.id);
+    const decl = context.getRegisteredDeclaration(itype.id);
     if (decl == null) {
         context.problemListener.reportUnknownIdentifier(itype.id, itype);
         return null;
@@ -55,14 +55,14 @@ class CastExpression extends Expression {
     }
 
     check(context) {
-        var actual = this.expression.check(context);
+        let actual = this.expression.check(context);
         if(actual)
             actual = actual.anyfy();
         else {
             context.problemListener.reportError(this, "Could not check expression type");
             return AnyType.instance;
         }
-        var target = getTargetType(context, this.type, this.mutable);
+        const target = getTargetType(context, this.type, this.mutable);
         // check Any
         if(actual === AnyType.instance)
             return target;
@@ -76,8 +76,8 @@ class CastExpression extends Expression {
     }
 
     interpret(context) {
-        var value = this.expression.interpret(context);
-        var target = getTargetType(context, this.type);
+        let value = this.expression.interpret(context);
+        const target = getTargetType(context, this.type);
         if(value) {
             if (value instanceof IntegerValue && target==DecimalType.instance) {
                 value = new DecimalValue(value.DecimalValue());
@@ -92,12 +92,12 @@ class CastExpression extends Expression {
 
     declare(transpiler) {
         this.expression.declare(transpiler);
-        var target = getTargetType(transpiler.context, this.type);
+        const target = getTargetType(transpiler.context, this.type);
         target.declare(transpiler);
     }
 
     transpile(transpiler) {
-        var expType = this.expression.check(transpiler.context);
+        const expType = this.expression.check(transpiler.context);
         if(expType===DecimalType.instance && this.type===IntegerType.instance) {
             transpiler.append("Math.floor(");
             this.expression.transpile(transpiler);

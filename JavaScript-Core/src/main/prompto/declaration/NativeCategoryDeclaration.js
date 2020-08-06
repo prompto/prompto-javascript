@@ -1,8 +1,8 @@
-var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
-var NativeInstance = require("../value/NativeInstance").NativeInstance;
-var JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
-var CategoryType = require("../type/CategoryType").CategoryType;
+const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+const getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
+const NativeInstance = require("../value/NativeInstance").NativeInstance;
+const JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
+const CategoryType = require("../type/CategoryType").CategoryType;
 
 class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
     constructor(id, attributes, categoryBindings, attributeBindings, methods) {
@@ -15,9 +15,9 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
 
     register(context) {
         super.register(context);
-        var bound = this.getBoundFunction(false);
+        const bound = this.getBoundFunction(false);
         if(bound!=null) {
-            var name = getTypeName(bound);
+            const name = getTypeName(bound);
             context.registerNativeBinding(name, this);
         }
     }
@@ -44,7 +44,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     toODialect(writer) {
-        var hasBody = true; // always one
+        const hasBody = true; // always one
         this.allToODialect(writer, hasBody);
     }
 
@@ -67,7 +67,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
         writer.newLine();
         this.categoryBindings.toDialect(writer);
         this.methods.forEach(method => {
-            var w = writer.newMemberWriter();
+            const w = writer.newMemberWriter();
             method.toDialect(w);
             writer.newLine();
         });
@@ -85,7 +85,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
 
     getBoundFunction(fail) {
         if(this.bound==null) {
-            var binding = this.getBinding(fail);
+            const binding = this.getBinding(fail);
             if(binding!=null) {
                 this.bound = binding.resolve();
                 if(fail && this.bound==null)
@@ -96,7 +96,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     getBinding(fail) {
-        for(var i=0;i<this.categoryBindings.length;i++) {
+        for(let i=0;i<this.categoryBindings.length;i++) {
             if(this.categoryBindings[i] instanceof JavaScriptNativeCategoryBinding) {
                 return this.categoryBindings[i];
             }
@@ -114,10 +114,10 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     transpile(transpiler) {
-        var binding = this.getBinding(true);
+        const binding = this.getBinding(true);
         binding.transpile(transpiler);
-        var bound = binding.resolve();
-        var name = getTypeName(bound);
+        const bound = binding.resolve();
+        const name = getTypeName(bound);
         transpiler.append("function ").append("new_").append(this.name).append("(values) {").indent();
         transpiler.append("values = values || {};").newLine();
         transpiler.append("var value = new ").append(name).append("();").newLine();
@@ -136,7 +136,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     locateSectionAtLine(line) {
-        for(var i=0;i<this.methods.length;i++) {
+        for(let i=0;i<this.methods.length;i++) {
             const s = this.methods[i].locateSectionAtLine(line);
             if(s)
                 return s;

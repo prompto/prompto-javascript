@@ -1,11 +1,11 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var SelectorExpression = require("./SelectorExpression").SelectorExpression;
-var MemberSelector = null;
-var MethodSelector = null;
-var UnresolvedCall = null;
-var UnresolvedIdentifier = null;
-var AnyType = require("../type/AnyType").AnyType;
-var ProblemListener = require("../problem/ProblemListener").ProblemListener;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const SelectorExpression = require("./SelectorExpression").SelectorExpression;
+let MemberSelector = null;
+let MethodSelector = null;
+let UnresolvedCall = null;
+let UnresolvedIdentifier = null;
+const AnyType = require("../type/AnyType").AnyType;
+const ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 exports.resolve = () => {
     MemberSelector = require("./MemberSelector").MemberSelector;
@@ -81,15 +81,15 @@ class UnresolvedSelector extends SelectorExpression {
     }
 
     tryResolveMember(context) {
-        var listener = context.problemListener;
+        const listener = context.problemListener;
         try {
             context.problemListener = new ProblemListener();
-            var resolvedParent = this.parent;
+            let resolvedParent = this.parent;
             if(resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
                 resolvedParent = resolvedParent.resolved;
             }
-            var member = new MemberSelector(resolvedParent, this.id);
+            const member = new MemberSelector(resolvedParent, this.id);
             member.check(context);
             return member;
         } catch (e) {
@@ -103,15 +103,15 @@ class UnresolvedSelector extends SelectorExpression {
     }
 
     tryResolveMethod(context, assignments) {
-        var listener = context.problemListener;
+        const listener = context.problemListener;
         try {
             context.problemListener = new ProblemListener();
-            var resolvedParent = this.parent;
+            let resolvedParent = this.parent;
             if (resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
                 resolvedParent = resolvedParent.resolved;
             }
-            var method = new UnresolvedCall(new MethodSelector(resolvedParent, this.id), assignments);
+            const method = new UnresolvedCall(new MethodSelector(resolvedParent, this.id), assignments);
             method.check(context);
             return method;
         } catch (e) {

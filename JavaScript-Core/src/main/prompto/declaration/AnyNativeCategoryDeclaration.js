@@ -1,5 +1,5 @@
-var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
-var Identifier = require("../grammar/Identifier").Identifier;
+const NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class AnyNativeCategoryDeclaration extends NativeCategoryDeclaration {
     constructor() {

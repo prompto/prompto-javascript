@@ -1,4 +1,4 @@
-var AbstractMethodDeclaration = require("./AbstractMethodDeclaration").AbstractMethodDeclaration;
+const AbstractMethodDeclaration = require("./AbstractMethodDeclaration").AbstractMethodDeclaration;
 
 class ArrowDeclaration extends AbstractMethodDeclaration {
     constructor(arrow) {

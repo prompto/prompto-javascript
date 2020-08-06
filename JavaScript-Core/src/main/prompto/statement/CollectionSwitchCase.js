@@ -1,6 +1,6 @@
-var CollectionType = require("../type/ContainerType").ContainerType;
-var SwitchCase = require("./SwitchCase").SwitchCase;
-var VoidType = require("../type/VoidType").VoidType;
+const CollectionType = require("../type/ContainerType").ContainerType;
+const SwitchCase = require("./SwitchCase").SwitchCase;
+const VoidType = require("../type/VoidType").VoidType;
 
 class CollectionSwitchCase extends SwitchCase {
     constructor(expression, statements) {
@@ -9,7 +9,7 @@ class CollectionSwitchCase extends SwitchCase {
     }
 
     checkSwitchType(context, type) {
-        var thisType = this.expression ? this.expression.check(context) : VoidType.instance;
+        let thisType = this.expression ? this.expression.check(context) : VoidType.instance;
         if(thisType instanceof CollectionType) {
             thisType = thisType.itemType;
         }
@@ -19,7 +19,7 @@ class CollectionSwitchCase extends SwitchCase {
     }
 
     matches(context, value) {
-        var thisValue = this.expression.interpret(context);
+        const thisValue = this.expression.interpret(context);
         if(thisValue.hasItem) {
             return thisValue.hasItem(context, value);
         } else {

@@ -1,5 +1,5 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var IntegerType = require("../type/IntegerType").IntegerType;
+const JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+const IntegerType = require("../type/IntegerType").IntegerType;
 
 class JavaScriptIntegerLiteral extends JavaScriptLiteral {
     constructor(text) {

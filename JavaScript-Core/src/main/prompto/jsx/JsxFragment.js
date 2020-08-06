@@ -1,5 +1,5 @@
-var IJsxExpression = require("./IJsxExpression").IJsxExpression;
-var JsxType = require("../type/JsxType").JsxType;
+const IJsxExpression = require("./IJsxExpression").IJsxExpression;
+const JsxType = require("../type/JsxType").JsxType;
 
 class JsxFragment extends IJsxExpression {
     constructor(openingSuite) {

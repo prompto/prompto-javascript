@@ -1,11 +1,11 @@
-var Expression = require("./Expression").Expression;
-var Dialect = require("../parser/Dialect").Dialect;
-var ReturnStatement = require("../statement/ReturnStatement").ReturnStatement;
-var StatementList = require("../statement/StatementList").StatementList;
-var Variable = require("../runtime/Variable").Variable;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var VoidType = require("../type/VoidType").VoidType;
+const Expression = require("./Expression").Expression;
+const Dialect = require("../parser/Dialect").Dialect;
+const ReturnStatement = require("../statement/ReturnStatement").ReturnStatement;
+const StatementList = require("../statement/StatementList").StatementList;
+const Variable = require("../runtime/Variable").Variable;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const VoidType = require("../type/VoidType").VoidType;
 
 class ArrowExpression extends Expression {
   
@@ -19,8 +19,8 @@ class ArrowExpression extends Expression {
 
     toString(writer) {
         if(!writer) {
-            var Context = require("../runtime/Context").Context;
-            var CodeWriter = require("../utils/CodeWriter").CodeWriter;
+            const Context = require("../runtime/Context").Context;
+            const CodeWriter = require("../utils/CodeWriter").CodeWriter;
             writer = new CodeWriter(Dialect.E, Context.newGlobalsContext());
         }
         try {
@@ -83,8 +83,8 @@ class ArrowExpression extends Expression {
     filterToDialect(writer, source) {
         if(this.args==null || this.args.length==0)
             throw new SyntaxError("Expecting 1 parameter only!");
-        var sourceType = source.check(writer.context);
-        var itemType = sourceType ? sourceType.itemType : VoidType.instance;
+        const sourceType = source.check(writer.context);
+        const itemType = sourceType ? sourceType.itemType : VoidType.instance;
         writer = writer.newChildWriter();
         writer.context.registerValue(new Variable(this.args[0], itemType));
         switch(writer.dialect) {
@@ -105,23 +105,23 @@ class ArrowExpression extends Expression {
     }
 
     setExpression(expression) {
-        var stmt = new ReturnStatement(expression, true);
+        const stmt = new ReturnStatement(expression, true);
         this.statements = new StatementList(stmt);
     }
 
     registerArrowArgs(context, itemType) {
         this.args.forEach(arg => {
-            var param = new Variable(arg, itemType);
+            const param = new Variable(arg, itemType);
             context.registerValue(param);
         });
         return context;
     }
 
     getFilter(context, itemType) {
-        var local = this.registerArrowArgs(context.newLocalContext(), itemType);
-        var filter = function(o) {
+        const local = this.registerArrowArgs(context.newLocalContext(), itemType);
+        const filter = function(o) {
             local.setValue(this.args[0], o);
-            var result = this.statements.interpret(local);
+            const result = this.statements.interpret(local);
             if(result instanceof BooleanValue)
                 return result.value;
             else
@@ -161,23 +161,23 @@ class ArrowExpression extends Expression {
     }
 
     getSortedComparator1Arg(context, itemType, descending) {
-        var local = this.registerArrowArgs(context.newLocalContext(), itemType);
-        var cmp = function(o1, o2) {
+        const local = this.registerArrowArgs(context.newLocalContext(), itemType);
+        const cmp = function(o1, o2) {
             local.setValue(this.args[0], o1);
-            var key1 = this.statements.interpret(local);
+            const key1 = this.statements.interpret(local);
             local.setValue(this.args[0], o2);
-            var key2 = this.statements.interpret(local);
+            const key2 = this.statements.interpret(local);
             return descending ? key2.compareToValue(context, key1) : key1.compareToValue(context, key2);
         };
         return cmp.bind(this);
     }
 
     getSortedComparator2Args(context, itemType, descending) {
-        var local = this.registerArrowArgs(context.newLocalContext(), itemType);
-        var cmp = function(o1, o2) {
+        const local = this.registerArrowArgs(context.newLocalContext(), itemType);
+        const cmp = function(o1, o2) {
             local.setValue(this.args[0], o1);
             local.setValue(this.args[1], o2);
-            var result = this.statements.interpret(local);
+            const result = this.statements.interpret(local);
             if(!(result instanceof IntegerValue))
                 throw new SyntaxError("Expecting an Integer as result of key body!");
             return descending ? -result.value : result.value;

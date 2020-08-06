@@ -1,9 +1,9 @@
-var Value = require("./Value").Value;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-var InternalError = require("../error/InternalError").InternalError;
-var BaseType = require("../type/BaseType").BaseType;
-var RangeType = require("../type/RangeType").RangeType;
+const Value = require("./Value").Value;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+const InternalError = require("../error/InternalError").InternalError;
+const BaseType = require("../type/BaseType").BaseType;
+const RangeType = require("../type/RangeType").RangeType;
 
 class RangeValue extends Value {
    
@@ -11,7 +11,7 @@ class RangeValue extends Value {
         if(!(itemType instanceof BaseType))
             throw new SyntaxError("Not a type!");
         super(new RangeType(itemType));
-        var cmp = left.cmp(right);
+        const cmp = left.cmp(right);
         if(cmp<0) {
             this.low = left;
             this.high = right;
@@ -42,15 +42,15 @@ class RangeValue extends Value {
     }
 
     hasItem(context, lval) {
-        var a = lval.cmp(this.low);
-        var b = this.high.cmp(lval);
+        const a = lval.cmp(this.low);
+        const b = this.high.cmp(lval);
         return a>=0 && b>=0;
     }
 
     getItemInContext(context, index) {
         if (index instanceof IntegerValue) {
             try {
-                var value = this.getItem(index.IntegerValue());
+                const value = this.getItem(index.IntegerValue());
                 if (value instanceof Value) {
                     return value;
                 } else {
@@ -66,14 +66,14 @@ class RangeValue extends Value {
     }
 
     slice(fi, li) {
-        var size = this.size();
-        var first = this.checkFirst(fi, size);
-        var last = this.checkLast(li, size);
+        const size = this.size();
+        const first = this.checkFirst(fi, size);
+        const last = this.checkLast(li, size);
         return this.newInstance(this.getItem(first),this.getItem(last));
     }
 
     checkFirst(fi, size) {
-        var value = (fi == null) ? 1 : fi.IntegerValue();
+        const value = (fi == null) ? 1 : fi.IntegerValue();
         if (value < 1 || value > size) {
             throw new IndexOutOfRangeError();
         }
@@ -81,7 +81,7 @@ class RangeValue extends Value {
     }
 
     checkLast(li, size) {
-        var value = (li == null) ? size : li.IntegerValue();
+        let value = (li == null) ? size : li.IntegerValue();
         if (value < 0) {
             value = size + 1 + li.IntegerValue();
         }

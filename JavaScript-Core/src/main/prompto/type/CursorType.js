@@ -1,9 +1,9 @@
-var NativeType = require("./NativeType").NativeType;
-var IterableType = require("./IterableType").IterableType;
-var IntegerType = require("./IntegerType").IntegerType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Variable = require("../runtime/Variable").Variable;
-var ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
+const NativeType = require("./NativeType").NativeType;
+const IterableType = require("./IterableType").IterableType;
+const IntegerType = require("./IntegerType").IntegerType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Variable = require("../runtime/Variable").Variable;
+const ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
 
 class CursorType extends IterableType {
     constructor(itemType) {

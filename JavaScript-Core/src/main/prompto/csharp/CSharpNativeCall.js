@@ -1,4 +1,4 @@
-var NativeCall = require("../statement/NativeCall").NativeCall;
+const NativeCall = require("../statement/NativeCall").NativeCall;
 
 class CSharpNativeCall extends NativeCall {
     constructor(statement) {

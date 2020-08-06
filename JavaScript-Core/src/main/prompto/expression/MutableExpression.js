@@ -1,8 +1,8 @@
-var Expression = require("./Expression").Expression;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var NullValue = require("../value/NullValue").NullValue;
-var NativeInstance = require("../value/NativeInstance").NativeInstance;
-var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+const Expression = require("./Expression").Expression;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const NullValue = require("../value/NullValue").NullValue;
+const NativeInstance = require("../value/NativeInstance").NativeInstance;
+const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 
 class MutableExpression extends Expression {
     constructor(source) {
@@ -12,7 +12,7 @@ class MutableExpression extends Expression {
     }
 
     check(context) {
-        var sourceType = this.source.check(context);
+        const sourceType = this.source.check(context);
         if(!(sourceType instanceof CategoryType))
             context.problemListener.reportInvalidCopySource(this);
         return new CategoryType(sourceType, true);
@@ -20,7 +20,7 @@ class MutableExpression extends Expression {
     }
 
     interpret(context) {
-        var value = this.source.interpret(context);
+        const value = this.source.interpret(context);
         if(value == null || value == NullValue.instance )
             return value;
         else if(value instanceof ConcreteInstance || value instanceof NativeInstance)

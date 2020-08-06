@@ -1,13 +1,13 @@
-var Expression = require("./Expression").Expression;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var IterableType = require("../type/IterableType").IterableType;
-var Variable = require("../runtime/Variable").Variable;
-var InternalError = require("../error/InternalError").InternalError;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
-var ListType = require("../type/ListType").ListType;
-var AnyType = require("../type/AnyType").AnyType;
+const Expression = require("./Expression").Expression;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const IterableType = require("../type/IterableType").IterableType;
+const Variable = require("../runtime/Variable").Variable;
+const InternalError = require("../error/InternalError").InternalError;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+const ListType = require("../type/ListType").ListType;
+const AnyType = require("../type/AnyType").AnyType;
 
 
 class FilteredExpression extends Expression {
@@ -24,16 +24,16 @@ class FilteredExpression extends Expression {
     }
 
     check(context) {
-        var sourceType = this.source.check(context);
+        const sourceType = this.source.check(context);
         if(!(sourceType instanceof IterableType)) {
             context.problemListener.reportError(this, "Expecting an iterable type as data source !");
             return new ListType(AnyType.instance);
         }
-        var itemType = sourceType.itemType;
+        const itemType = sourceType.itemType;
         if(this.itemId!=null) {
-            var child = context.newChildContext();
+            const child = context.newChildContext();
             child.registerValue(new Variable(this.itemId, itemType));
-            var filterType = this.predicate.check(child);
+            const filterType = this.predicate.check(child);
             if (filterType != BooleanType.instance) {
                 context.problemListener.reportError(this, "Filtering expression must return a boolean !");
             }
@@ -45,26 +45,26 @@ class FilteredExpression extends Expression {
     }
 
     interpret(context) {
-        var sourceType = this.source.check(context);
+        const sourceType = this.source.check(context);
         if(!(sourceType instanceof IterableType)) {
             throw new InternalError("Illegal source type: " + sourceType.name);
         }
-        var iterable = this.source.interpret(context);
+        const iterable = this.source.interpret(context);
         if(iterable==null) {
             throw new NullReferenceError();
         }
         if(!iterable.filter) {
             throw new InternalError("Illegal fetch source: " + this.source);
         }
-        var itemType = sourceType.itemType;
-        var arrow = this.toArrowExpression();
-        var filter = arrow.getFilter(context, itemType);
+        const itemType = sourceType.itemType;
+        const arrow = this.toArrowExpression();
+        const filter = arrow.getFilter(context, itemType);
         return iterable.filter(filter)
     }
 
     toArrowExpression() {
         if(this.itemId!=null) {
-            var arrow = new ArrowExpression(new IdentifierList(this.itemId), null, null);
+            const arrow = new ArrowExpression(new IdentifierList(this.itemId), null, null);
             arrow.setExpression(this.predicate);
             return arrow;
         } else if(this.predicate instanceof ArrowExpression)
@@ -75,18 +75,18 @@ class FilteredExpression extends Expression {
 
     declare(transpiler) {
         this.source.declare(transpiler);
-        var listType = this.source.check(transpiler.context);
-        var itemType = listType.itemType;
-        var arrow = this.toArrowExpression();
+        const listType = this.source.check(transpiler.context);
+        const itemType = listType.itemType;
+        const arrow = this.toArrowExpression();
         arrow.declareFilter(transpiler, itemType);
     }
 
     transpile(transpiler) {
-        var listType = this.source.check(transpiler.context);
-        var itemType = listType.itemType;
+        const listType = this.source.check(transpiler.context);
+        const itemType = listType.itemType;
         this.source.transpile(transpiler);
         transpiler.append(".filtered((");
-        var arrow = this.toArrowExpression();
+        const arrow = this.toArrowExpression();
         arrow.transpileFilter(transpiler, itemType);
         transpiler.append(")");
         if(transpiler.context.getClosestInstanceContext()!=null)
@@ -110,8 +110,8 @@ class FilteredExpression extends Expression {
 
     toEDialectExplicit(writer) {
         writer = writer.newChildWriter();
-        var sourceType = this.source.check(writer.context);
-        var itemType = sourceType.itemType;
+        const sourceType = this.source.check(writer.context);
+        const itemType = sourceType.itemType;
         writer.context.registerValue(new Variable(this.itemId, itemType));
         this.source.toDialect(writer);
         writer.append(" filtered with ");
@@ -131,8 +131,8 @@ class FilteredExpression extends Expression {
 
     toODialectExplicit(writer) {
         writer = writer.newChildWriter();
-        var sourceType = this.source.check(writer.context);
-        var itemType = sourceType.itemType;
+        const sourceType = this.source.check(writer.context);
+        const itemType = sourceType.itemType;
         writer.context.registerValue(new Variable(this.itemId, itemType));
         writer.append("filtered (");
         this.source.toDialect(writer);

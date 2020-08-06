@@ -1,7 +1,7 @@
-var ThisExpression = require("./ThisExpression").ThisExpression;
-var InstanceContext = require("../runtime/Context").InstanceContext;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var AnyType = require("../type/AnyType").AnyType;
+const ThisExpression = require("./ThisExpression").ThisExpression;
+const InstanceContext = require("../runtime/Context").InstanceContext;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const AnyType = require("../type/AnyType").AnyType;
 
 class SuperExpression extends ThisExpression {
     constructor() {
@@ -17,7 +17,7 @@ class SuperExpression extends ThisExpression {
         if (context != null && !(context instanceof InstanceContext))
             context = context.getClosestInstanceContext ();
         if (context instanceof InstanceContext) {
-            var type = context.instanceType;
+            const type = context.instanceType;
             if(type instanceof CategoryType)
                 return type.getSuperType(context, this);
             else
@@ -32,7 +32,7 @@ class SuperExpression extends ThisExpression {
     }
 
     transpile(transpiler) {
-        var type = this.getSuperType(transpiler.context);
+        const type = this.getSuperType(transpiler.context);
         transpiler.append(type.name).append(".prototype");
     }
 }

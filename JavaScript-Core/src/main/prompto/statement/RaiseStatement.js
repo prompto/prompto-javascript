@@ -1,10 +1,10 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var VoidType = require("../type/VoidType").VoidType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var UserError = require("../error/UserError").UserError;
-var Dialect = require("../parser/Dialect").Dialect;
-var Identifier = require("../grammar/Identifier").Identifier;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const VoidType = require("../type/VoidType").VoidType;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const UserError = require("../error/UserError").UserError;
+const Dialect = require("../parser/Dialect").Dialect;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class RaiseStatement extends SimpleStatement {
     constructor(expression) {
@@ -28,7 +28,7 @@ class RaiseStatement extends SimpleStatement {
     }
 
     check(context) {
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         if(!new CategoryType(new Identifier("Error")).isAssignableFrom(context, type)) {
             throw new SyntaxError(type.name + " does not extend Error");
         }

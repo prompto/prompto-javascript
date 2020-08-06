@@ -1,5 +1,5 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var path = isNodeJs ? require('path') : null;
+const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+const path = isNodeJs ? require('path') : null;
 
 class JavaScriptModule {
     constructor(ids) {
@@ -7,7 +7,7 @@ class JavaScriptModule {
     }
 
     toString() {
-        var res = this.ids.join("/");
+        let res = this.ids.join("/");
         if("js"==this.ids[this.ids.length-1]) {
             res = res.replace("/js", ".js")
         }
@@ -15,7 +15,7 @@ class JavaScriptModule {
     }
 
     resolve() {
-        var o = this.resolve_webpack();
+        let o = this.resolve_webpack();
         if(o!=null) {
             return o;
         }
@@ -45,14 +45,14 @@ class JavaScriptModule {
     resolve_webpack() {
         try {
             // get a copy of the path identifiers
-            var ids = [].concat(this.ids);
+            const ids = [].concat(this.ids);
             // drop the 'js' extension
             if(ids[ids.length-1]=="js")
                 ids.pop();
             // last id is the function, forget it
             ids.pop();
             // eval root module
-            var m = eval(ids.shift());
+            let m = eval(ids.shift());
             // drill down
             ids.forEach(id => {
                 m = m ? m[id] || null : null;
@@ -65,7 +65,7 @@ class JavaScriptModule {
 
     resolve_module() {
         try {
-            var rootPath = this.toString();
+            const rootPath = this.toString();
             return eval("require('" + rootPath + "')");
         } catch (e) {
             return null;
@@ -74,11 +74,11 @@ class JavaScriptModule {
 
     resolve_runtime() {
         try {
-            var folder = path.sep + "JavaScript-Core" + path.sep;
-            var idx = module.filename.lastIndexOf(folder);
-            var rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
+            const folder = path.sep + "JavaScript-Core" + path.sep;
+            const idx = module.filename.lastIndexOf(folder);
+            const rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
             // for now let's assume prompto and the required module are at the same level
-            var modulePath = rootPath + this.toString();
+            const modulePath = rootPath + this.toString();
             return eval("require('" + modulePath + "')");
         } catch (e) {
             // process.stderr.write("Failed requiring " + modulepath + "\n");
@@ -88,12 +88,12 @@ class JavaScriptModule {
 
     resolve_path(part, replace) {
         try {
-            var folder = path.sep + part + path.sep;
-            var idx = module.filename.lastIndexOf(folder);
-            var rootPath = module.filename.substring(0, idx + 1);
+            const folder = path.sep + part + path.sep;
+            const idx = module.filename.lastIndexOf(folder);
+            let rootPath = module.filename.substring(0, idx + 1);
             if(replace)
                 rootPath = rootPath + replace + "/";
-            var modulePath = rootPath + this.toString();
+            const modulePath = rootPath + this.toString();
             return eval("require('" + modulePath + "')");
         } catch (e) {
             return null;
@@ -101,7 +101,7 @@ class JavaScriptModule {
     }
 
     transpileWidget(transpiler) {
-        var ids = this.ids;
+        let ids = this.ids;
         if("js"==ids[ids.length-1]) {
             ids = ids.pop()
         }
@@ -134,14 +134,14 @@ class JavaScriptModule {
     transpile_webpack(transpiler, name) {
         try {
             // get a copy of the path identifiers
-            var ids = [].concat(this.ids);
+            const ids = [].concat(this.ids);
             // drop the 'js' extension
             if(ids[ids.length-1]=="js")
                 ids.pop();
             // last id is the function, forget it
             ids.pop();
             // eval root module
-            var m = eval(ids.shift());
+            let m = eval(ids.shift());
             // drill down
             ids.forEach(id => {
                 m = m ? m[id] || null : null;
@@ -159,8 +159,8 @@ class JavaScriptModule {
 
     transpile_module(transpiler, name) {
         try {
-            var modulePath = this.toString();
-            var m = eval("require('" + modulePath + "')");
+            const modulePath = this.toString();
+            const m = eval("require('" + modulePath + "')");
             if(!m)
                 return false;
             else {
@@ -174,12 +174,12 @@ class JavaScriptModule {
 
     transpile_runtime(transpiler, name) {
         try {
-            var folder = path.sep + "JavaScript-Core" + path.sep;
-            var idx = module.filename.lastIndexOf(folder);
-            var rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
+            const folder = path.sep + "JavaScript-Core" + path.sep;
+            const idx = module.filename.lastIndexOf(folder);
+            const rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
             // for now let's assume prompto and the required module are at the same level
-            var modulePath = rootPath + this.toString();
-            var m = eval("require('" + modulePath + "')");
+            const modulePath = rootPath + this.toString();
+            const m = eval("require('" + modulePath + "')");
             if(!m)
                 return false;
             else {
@@ -195,13 +195,13 @@ class JavaScriptModule {
 
     transpile_path(transpiler, name, part, replace) {
         try {
-            var folder = path.sep + part + path.sep;
-            var idx = module.filename.lastIndexOf(folder);
-            var rootPath = module.filename.substring(0, idx + 1);
+            const folder = path.sep + part + path.sep;
+            const idx = module.filename.lastIndexOf(folder);
+            let rootPath = module.filename.substring(0, idx + 1);
             if(replace)
                 rootPath = rootPath + replace + "/";
-            var modulePath = rootPath + this.toString();
-            var m = eval("require('" + modulePath + "')");
+            const modulePath = rootPath + this.toString();
+            const m = eval("require('" + modulePath + "')");
             if(!m)
                 return false;
             else {

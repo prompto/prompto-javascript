@@ -1,8 +1,8 @@
-var CategoryParameter = require("../param/CategoryParameter.js").CategoryParameter;
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
-var Identifier = require("../grammar/Identifier").Identifier;
+const CategoryParameter = require("../param/CategoryParameter.js").CategoryParameter;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+const TextType = require("../type/TextType").TextType;
+const TextValue = require("../value/TextValue").TextValue;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class FormatMethodDeclaration extends BuiltInMethodDeclaration {
 
@@ -11,8 +11,8 @@ class FormatMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var format = context.getValue(new Identifier("format")).getStorableData();
+        let value = this.getValue(context).getStorableData();
+        const format = context.getValue(new Identifier("format")).getStorableData();
         value = this.format(value, format);
         return new TextValue(value);
     }

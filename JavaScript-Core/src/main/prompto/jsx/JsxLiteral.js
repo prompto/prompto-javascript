@@ -1,5 +1,5 @@
-var TextType = require("../type/TextType").TextType;
-var VoidType = require("../type/VoidType").VoidType;
+const TextType = require("../type/TextType").TextType;
+const VoidType = require("../type/VoidType").VoidType;
 
 class JsxLiteral {
     constructor(text) {

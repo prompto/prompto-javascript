@@ -1,4 +1,4 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+const NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
 if(global && !global.Event)
     global.Event = () => {};
 
@@ -11,7 +11,7 @@ class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
     }
 
     resolve() {
-        var m = this.resolve_module();
+        const m = this.resolve_module();
         if(m==null) {
             try {
                 return eval(this.identifier);
@@ -32,7 +32,7 @@ class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
     }
 
     resolveWidget(context) {
-        var m = this.resolve_widget_module();
+        const m = this.resolve_widget_module();
         if(m==null) {
             try {
                 return eval(this.identifier);

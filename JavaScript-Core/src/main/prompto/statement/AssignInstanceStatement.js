@@ -1,6 +1,6 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var CodeType = require("../type/CodeType").CodeType;
-var VoidType = require("../type/VoidType").VoidType;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const CodeType = require("../type/CodeType").CodeType;
+const VoidType = require("../type/VoidType").VoidType;
 
 class AssignInstanceStatement extends SimpleStatement {
   
@@ -21,7 +21,7 @@ class AssignInstanceStatement extends SimpleStatement {
     }
 
     check(context) {
-        var valueType = this.expression.check(context);
+        const valueType = this.expression.check(context);
         if(valueType===VoidType.instance)
             context.problemListener.reportAssigningVoidType(this.expression);
         this.instance.checkAssignValue(context, valueType, this);
@@ -42,7 +42,7 @@ class AssignInstanceStatement extends SimpleStatement {
     }
 
     transpile(transpiler) {
-        var valueType = this.expression.check(transpiler.context);
+        const valueType = this.expression.check(transpiler.context);
         // don't assign Code expressions
         if (valueType === CodeType.instance) {
             this.instance.declareAssign(transpiler, this.expression);

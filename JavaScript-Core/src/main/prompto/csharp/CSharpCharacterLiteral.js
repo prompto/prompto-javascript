@@ -1,4 +1,4 @@
-var CSharpLiteral = require("./CSharpLiteral").CSharpLiteral;
+const CSharpLiteral = require("./CSharpLiteral").CSharpLiteral;
 
 class CSharpCharacterLiteral extends CSharpLiteral {
     constructor(text) {

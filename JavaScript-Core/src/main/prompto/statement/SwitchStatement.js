@@ -1,4 +1,4 @@
-var BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
+const BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
 
 class SwitchStatement extends BaseSwitchStatement {
  
@@ -16,7 +16,7 @@ class SwitchStatement extends BaseSwitchStatement {
     }
 
     interpret(context) {
-        var switchValue = this.expression.interpret(context);
+        const switchValue = this.expression.interpret(context);
         return this.interpretSwitch(context, switchValue, null);
     }
 

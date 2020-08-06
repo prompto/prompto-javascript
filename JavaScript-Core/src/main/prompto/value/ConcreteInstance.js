@@ -1,22 +1,22 @@
-var CategoryType = null;
-var NotStorableError = require("../error/NotStorableError").NotStorableError;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var Variable = require("../runtime/Variable").Variable;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Operator = require("../grammar/Operator").Operator;
-var NullValue = require("./NullValue").NullValue;
-var DecimalValue = require("./DecimalValue").DecimalValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var DocumentValue = require("./DocumentValue").DocumentValue;
-var TextValue = require("./TextValue").TextValue;
-var Value = require("./Value").Value;
-var Instance = require("./Value").Instance;
-var NativeInstance = null;
-var $DataStore = require("../store/DataStore").$DataStore;
-var TypeUtils = require("../utils/TypeUtils");
-var EnumeratedNativeDeclaration = null;
-var EnumeratedCategoryDeclaration = null;
+let CategoryType = null;
+const NotStorableError = require("../error/NotStorableError").NotStorableError;
+const NotMutableError = require("../error/NotMutableError").NotMutableError;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const Variable = require("../runtime/Variable").Variable;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Operator = require("../grammar/Operator").Operator;
+const NullValue = require("./NullValue").NullValue;
+const DecimalValue = require("./DecimalValue").DecimalValue;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const DocumentValue = require("./DocumentValue").DocumentValue;
+const TextValue = require("./TextValue").TextValue;
+const Value = require("./Value").Value;
+const Instance = require("./Value").Instance;
+let NativeInstance = null;
+const $DataStore = require("../store/DataStore").$DataStore;
+const TypeUtils = require("../utils/TypeUtils");
+let EnumeratedNativeDeclaration = null;
+let EnumeratedCategoryDeclaration = null;
 
 exports.resolve = () => {
     CategoryType = require("../type/CategoryType").CategoryType;
@@ -32,7 +32,7 @@ class ConcreteInstance extends Instance {
         this.declaration = declaration;
         this.storable = null;
         if(declaration.storable) {
-            var categories = declaration.collectCategories(context);
+            const categories = declaration.collectCategories(context);
             this.storable = $DataStore.instance.newStorableDocument(categories);
         }
         this.mutable = false;
@@ -40,7 +40,7 @@ class ConcreteInstance extends Instance {
     }
 
     toMutable() {
-        var result = Object.create(this);
+        const result = Object.create(this);
         result.type = new CategoryType(this.type.id, true);
         result.mutable = true;
         return result;
@@ -55,15 +55,15 @@ class ConcreteInstance extends Instance {
     }
 
     getDbId() {
-        var dbId = this.values["dbId"] || null;
+        const dbId = this.values["dbId"] || null;
         return dbId == null ? null : dbId.getStorableData();
     }
 
     getOrCreateDbId() {
-        var dbId = this.getDbId();
+        let dbId = this.getDbId();
         if(dbId==null) {
             dbId = this.storable.getOrCreateDbId();
-            var value = TypeUtils.convertFromJavaScript(dbId);
+            const value = TypeUtils.convertFromJavaScript(dbId);
             this.values["dbId"] = value;
         }
         return dbId;
@@ -94,7 +94,7 @@ class ConcreteInstance extends Instance {
             this.getOrCreateDbId();
             set.add(this.storable);
         }
-        for(var field in this.values) {
+        for(const field in this.values) {
             this.values[field].collectStorables(set);
         }
     }
@@ -104,8 +104,8 @@ class ConcreteInstance extends Instance {
             throw "What?"; */
         if("category" === attrName)
             return this.getCategory(context);
-        var stacked = getActiveGetters()[attrName] || null;
-        var first = stacked==null;
+        const stacked = getActiveGetters()[attrName] || null;
+        const first = stacked==null;
         if(first)
             getActiveGetters()[attrName] = context;
         try {
@@ -118,12 +118,12 @@ class ConcreteInstance extends Instance {
     }
 
     getCategory(context) {
-        var decl = context.getRegisteredDeclaration(new Identifier("Category"));
+        const decl = context.getRegisteredDeclaration(new Identifier("Category"));
         return new NativeInstance(context, decl, this.declaration);
     }
 
     doGetMember(context, attrName, allowGetter) {
-        var getter = allowGetter ? this.declaration.findGetter(context, attrName) : null;
+        const getter = allowGetter ? this.declaration.findGetter(context, attrName) : null;
         if (getter != null) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
@@ -140,8 +140,8 @@ class ConcreteInstance extends Instance {
             throw "What?"; */
         if(!this.mutable)
             throw new NotMutableError();
-        var stacked = getActiveSetters()[attrName] || null;
-        var first = stacked==null;
+        const stacked = getActiveSetters()[attrName] || null;
+        const first = stacked==null;
         if(first)
             getActiveSetters()[attrName] = context;
         try {
@@ -154,12 +154,12 @@ class ConcreteInstance extends Instance {
     }
 
     doSetMember(context, attrName, value, allowSetter) {
-        var decl = context.getRegisteredDeclaration(attrName);
-        var setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
+        const decl = context.getRegisteredDeclaration(attrName);
+        const setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
         if(setter!=null) {
             // use attribute name as parameter name for incoming value
             context = context.newInstanceContext(this, null).newChildContext();
-            var id = new Identifier(attrName);
+            const id = new Identifier(attrName);
             context.registerValue(new Variable(id, decl.getType()));
             context.setValue(id, value);
             value = setter.interpret(context);
@@ -184,14 +184,14 @@ class ConcreteInstance extends Instance {
         } else if(this.declaration!==obj.declaration) {
             return false;
         } else {
-            var names = Object.getOwnPropertyNames(this.values);
-            var otherNames = Object.getOwnPropertyNames(obj.values);
+            const names = Object.getOwnPropertyNames(this.values);
+            const otherNames = Object.getOwnPropertyNames(obj.values);
             if(names.length!=otherNames.length) {
                 return false;
             }
-            for(var i=0;i<names.length;i++) {
-                var v1 = this.values[names[i]] || null;
-                var v2 = obj.values[names[i]];
+            for(let i=0;i<names.length;i++) {
+                const v1 = this.values[names[i]] || null;
+                const v2 = obj.values[names[i]];
                 if(v1==v2) {
                     continue;
                 } else if(v1==null || v2==null) {
@@ -215,8 +215,8 @@ class ConcreteInstance extends Instance {
     }
 
     toString() {
-        var props = [];
-        for(var p in this.values) {
+        const props = [];
+        for(const p in this.values) {
             if("dbId"!=p)
                 props.push(p + ":" + this.values[p].toString())
         }
@@ -272,17 +272,17 @@ class ConcreteInstance extends Instance {
     }
 
     interpretOperator(context, value, operator) {
-        var decl = this.declaration.getOperatorMethod(context, operator, value.type);
+        const decl = this.declaration.getOperatorMethod(context, operator, value.type);
         context = context.newInstanceContext(this);
-        var local = context.newChildContext();
+        const local = context.newChildContext();
         decl.registerParameters(local);
-        var arg = decl.parameters[0];
+        const arg = decl.parameters[0];
         local.setValue(arg.id, value);
         return decl.interpret(local);
     }
 
     toDocumentValue(context) {
-        var doc = new DocumentValue();
+        const doc = new DocumentValue();
         Object.getOwnPropertyNames(this.values).map(name => {
             doc.values[name] = this.values[name].toDocumentValue(context);
         }, this);
@@ -293,7 +293,7 @@ class ConcreteInstance extends Instance {
 // don't call getters from getters, so register them
 // TODO: thread local storage
 
-var activeGetters = {};
+const activeGetters = {};
 
 function getActiveGetters() {
     return activeGetters;
@@ -302,7 +302,7 @@ function getActiveGetters() {
 
 // don't call setters from setters, so register them
 
-var activeSetters = {};
+const activeSetters = {};
 
 function getActiveSetters() {
     return activeSetters;

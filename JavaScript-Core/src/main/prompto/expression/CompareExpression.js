@@ -1,10 +1,10 @@
-var Expression = require("./Expression").Expression;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var Instance = require("../value/Value").Instance;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var MatchOp = require("../store/MatchOp").MatchOp;
-var CmpOp = require("../grammar/CmpOp").CmpOp;
+const Expression = require("./Expression").Expression;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const Instance = require("../value/Value").Instance;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const MatchOp = require("../store/MatchOp").MatchOp;
+const CmpOp = require("../grammar/CmpOp").CmpOp;
 
 class CompareExpression extends Expression {
   
@@ -28,8 +28,8 @@ class CompareExpression extends Expression {
     }
 
     check(context) {
-        var lt = this.left.check(context);
-        var rt = this.right.check(context);
+        const lt = this.left.check(context);
+        const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
     }
 
@@ -38,27 +38,27 @@ class CompareExpression extends Expression {
     }
 
     interpret(context) {
-        var lval = this.left.interpret(context);
-        var rval = this.right.interpret(context);
+        const lval = this.left.interpret(context);
+        const rval = this.right.interpret(context);
         return this.compare(context, lval, rval);
     }
 
     declare(transpiler) {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
-        var lt = this.left.check(transpiler.context);
-        var rt = this.right.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
         return lt.declareCompare(transpiler, rt);
     }
 
     transpile(transpiler) {
-        var lt = this.left.check(transpiler.context);
-        var rt = this.right.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
         return lt.transpileCompare(transpiler, rt, this.operator, this.left, this.right);
     }
 
     compare(context, lval, rval) {
-        var cmp = lval.compareToValue(context, rval);
+        const cmp = lval.compareToValue(context, rval);
         switch (this.operator) {
             case CmpOp.GT:
                 return BooleanValue.ValueOf(cmp > 0);
@@ -75,19 +75,19 @@ class CompareExpression extends Expression {
     }
 
     interpretAssert(context, test) {
-        var lval = this.left.interpret(context);
-        var rval = this.right.interpret(context);
-        var result = this.compare(context, lval, rval);
+        const lval = this.left.interpret(context);
+        const rval = this.right.interpret(context);
+        const result = this.compare(context, lval, rval);
         if(result==BooleanValue.TRUE)
             return true;
-        var expected = this.getExpected(context, test.dialect);
-        var actual = lval.toString() + this.operator.toString() + rval.toString();
+        const expected = this.getExpected(context, test.dialect);
+        const actual = lval.toString() + this.operator.toString() + rval.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(dialect, context);
+        const writer = new CodeWriter(dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();
@@ -102,33 +102,33 @@ class CompareExpression extends Expression {
     }
 
     checkQuery(context) {
-        var decl = this.left.checkAttribute(context);
+        const decl = this.left.checkAttribute(context);
         if(decl && !decl.storable)
             context.problemListener.reportNotStorable(this, decl.name);
-        var rt = this.right.check(context);
+        const rt = this.right.check(context);
         return this.checkOperator(context, decl.getType(), rt);
     }
 
     interpretQuery(context, query) {
-        var decl = this.left.checkAttribute(context);
+        const decl = this.left.checkAttribute(context);
         if(!decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
-        var value = this.right.interpret(context);
-        var info = decl.getAttributeInfo();
+        let value = this.right.interpret(context);
+        const info = decl.getAttributeInfo();
         if (value instanceof Instance)
             value = value.getMemberValue(context, "dbId", false);
-        var matchOp = this.getMatchOp();
+        const matchOp = this.getMatchOp();
         query.verify(info, matchOp, value == null ? null : value.getStorableData());
         if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
             query.not();
     }
 
     transpileQuery(transpiler, builder) {
-        var decl = this.left.checkAttribute(transpiler.context);
+        const decl = this.left.checkAttribute(transpiler.context);
         if(!decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
-        var info = decl.getAttributeInfo();
-        var matchOp = this.getMatchOp();
+        const info = decl.getAttributeInfo();
+        const matchOp = this.getMatchOp();
         // TODO check for dbId field of instance value
         transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
         this.right.transpile(transpiler);

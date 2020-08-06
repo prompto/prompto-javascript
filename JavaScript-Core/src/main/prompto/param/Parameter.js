@@ -1,8 +1,8 @@
-var NamedInstance = require("../grammar/NamedInstance").NamedInstance;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
+const NamedInstance = require("../grammar/NamedInstance").NamedInstance;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const DecimalType = require("../type/DecimalType").DecimalType;
 
 class Parameter extends NamedInstance {
  
@@ -22,7 +22,7 @@ class Parameter extends NamedInstance {
     }
 
     checkValue(context, expression) {
-        var value = expression.interpret(context);
+        const value = expression.interpret(context);
         if (value instanceof IntegerValue && this.getType(context)==DecimalType.instance) {
             return new DecimalValue(value.DecimalValue());
         } else if (value instanceof DecimalValue && this.getType(context)==IntegerType.instance) {
@@ -47,7 +47,7 @@ class Parameter extends NamedInstance {
     }
 
     transpileCall(transpiler, expression) {
-        var expType = expression.check(transpiler.context);
+        const expType = expression.check(transpiler.context);
         if (this.type === IntegerType.instance && expType === DecimalType.instance) {
             transpiler.append("Math.round(");
             expression.transpile(transpiler);

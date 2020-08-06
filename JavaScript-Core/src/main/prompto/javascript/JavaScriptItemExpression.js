@@ -1,4 +1,4 @@
-var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
+const JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 
 class JavaScriptItemExpression extends JavaScriptSelectorExpression {
     constructor(item) {

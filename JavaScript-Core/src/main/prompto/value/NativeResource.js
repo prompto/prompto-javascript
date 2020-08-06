@@ -1,4 +1,4 @@
-var NativeInstance = require("./NativeInstance").NativeInstance;
+const NativeInstance = require("./NativeInstance").NativeInstance;
 
 class NativeResource extends NativeInstance {
   

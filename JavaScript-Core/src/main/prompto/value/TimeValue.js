@@ -1,8 +1,8 @@
-var Value = require("./Value").Value;
-var PeriodValue = require("./PeriodValue").PeriodValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var TextValue = require("./TextValue").TextValue;
-var TimeType = null;
+const Value = require("./Value").Value;
+const PeriodValue = require("./PeriodValue").PeriodValue;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const TextValue = require("./TextValue").TextValue;
+let TimeType = null;
 
 exports.resolve = () => {
     TimeType = require("../type/TimeType").TimeType;
@@ -68,8 +68,8 @@ class TimeValue extends Value {
     }
 
     cmp(obj) {
-        var a = this.value.valueOf();
-        var b = obj.value.valueOf();
+        const a = this.value.valueOf();
+        const b = obj.value.valueOf();
         return a > b ? 1 : (a == b ? 0 : -1) ;
     }
 

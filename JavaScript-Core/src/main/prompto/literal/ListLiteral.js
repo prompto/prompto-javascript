@@ -1,16 +1,16 @@
-var Literal = require("./Literal").Literal;
-var ListValue = require("../value/ListValue").ListValue;
-var ListType = require("../type/ListType").ListType;
-var MissingType = require("../type/MissingType").MissingType;
-var ExpressionList = require("../utils/ExpressionList").ExpressionList;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextType = require("../type/TextType").TextType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var TextValue = require("../value/TextValue").TextValue;
-var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
-var List = require("../intrinsic/List").List;
+const Literal = require("./Literal").Literal;
+const ListValue = require("../value/ListValue").ListValue;
+const ListType = require("../type/ListType").ListType;
+const MissingType = require("../type/MissingType").MissingType;
+const ExpressionList = require("../utils/ExpressionList").ExpressionList;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const CharacterType = require("../type/CharacterType").CharacterType;
+const TextType = require("../type/TextType").TextType;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const TextValue = require("../value/TextValue").TextValue;
+const inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
+const List = require("../intrinsic/List").List;
 
 class ListLiteral extends Literal {
     constructor(mutable, expressions) {
@@ -34,11 +34,11 @@ class ListLiteral extends Literal {
 
     interpret(context) {
         if(this.expressions.length) {
-            var self = this;
+            const self = this;
             this.check(context); // force computation of itemType
-            var list = new ListValue(this.itemType, null, null, this.mutable);
+            const list = new ListValue(this.itemType, null, null, this.mutable);
             this.expressions.forEach(expression => {
-                var item = expression.interpret(context);
+                let item = expression.interpret(context);
                 item = self.interpretPromotion(item);
                 list.add(item);
             });

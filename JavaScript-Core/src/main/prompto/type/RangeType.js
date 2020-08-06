@@ -1,8 +1,8 @@
-var ContainerType = require("./ContainerType").ContainerType;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-var Identifier = require("../grammar/Identifier").Identifier;
-var IntegerType = null;
-var BooleanType = null;
+const ContainerType = require("./ContainerType").ContainerType;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const Identifier = require("../grammar/Identifier").Identifier;
+let IntegerType = null;
+let BooleanType = null;
 
 exports.resolve = () => {
 	IntegerType = require("./IntegerType").IntegerType;

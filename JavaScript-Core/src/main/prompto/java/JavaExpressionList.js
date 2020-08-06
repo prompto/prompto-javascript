@@ -1,4 +1,4 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
+const ObjectList = require("../utils/ObjectList").ObjectList;
 
 class JavaExpressionList extends ObjectList {
     constructor(expression) {

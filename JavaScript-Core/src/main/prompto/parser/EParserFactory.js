@@ -1,6 +1,6 @@
-var antlr4 = require("antlr4/index");
-var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
-var ECleverParser = require("./ECleverParser").ECleverParser;
+const antlr4 = require("antlr4/index");
+const EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
+const ECleverParser = require("./ECleverParser").ECleverParser;
 
 exports.EParserFactory = function() {
 	

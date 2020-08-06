@@ -1,4 +1,4 @@
-var TextValue = require("../value/TextValue").TextValue;
+const TextValue = require("../value/TextValue").TextValue;
 
 /*jshint evil:true*/
 function unescape(text) {

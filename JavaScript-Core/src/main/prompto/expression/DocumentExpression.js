@@ -1,11 +1,11 @@
-var Expression = require("./Expression").Expression;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var DocumentValue = require("../value/DocumentValue").DocumentValue;
-var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-var BlobValue = require("../value/BlobValue").BlobValue;
-var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
-var Document = require("../intrinsic/Document").Document;
-var Blob = require("../intrinsic/Blob").Blob;
+const Expression = require("./Expression").Expression;
+const DocumentType = require("../type/DocumentType").DocumentType;
+const DocumentValue = require("../value/DocumentValue").DocumentValue;
+const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+const BlobValue = require("../value/BlobValue").BlobValue;
+const ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
+const Document = require("../intrinsic/Document").Document;
+const Blob = require("../intrinsic/Blob").Blob;
 
 class DocumentExpression extends Expression {
  
@@ -26,7 +26,7 @@ class DocumentExpression extends Expression {
         if(!this.source)
             return new DocumentValue();
         else {
-            var value = this.source.interpret(context);
+            const value = this.source.interpret(context);
             return this.documentFromValue(context, value);
         }
     }
@@ -56,13 +56,13 @@ class DocumentExpression extends Expression {
         if("application/zip"!=blob.mimeType)
             throw new Error("documentFromBlob not supported for " + blob.mimeType);
         try {
-            var parts = Blob.readParts(blob.data);
-            var value = Blob.readValue(parts);
-            var field = value["type"] || null;
+            const parts = Blob.readParts(blob.data);
+            const value = Blob.readValue(parts);
+            let field = value["type"] || null;
             if (field == null)
                 throw new Error("Expecting a 'type' field!");
-            var ECleverParser = require("../parser/ECleverParser").ECleverParser;
-            var itype = new ECleverParser(field).parse_standalone_type();
+            const ECleverParser = require("../parser/ECleverParser").ECleverParser;
+            const itype = new ECleverParser(field).parse_standalone_type();
             if (itype != DocumentType.instance)
                 throw new Error("Expecting a DocumentValue type!");
             field = value["value"] || null;

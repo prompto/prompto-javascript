@@ -1,4 +1,4 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+const NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
 
 class JavaNativeCategoryBinding extends NativeCategoryBinding {
     constructor(expression) {

@@ -1,4 +1,4 @@
-var Parameter = require("./Parameter").Parameter;
+const Parameter = require("./Parameter").Parameter;
 
 class AttributeParameter extends Parameter {
     constructor(id) {
@@ -28,28 +28,28 @@ class AttributeParameter extends Parameter {
     }
 
     check(context) {
-        var actual = context.getRegisteredDeclaration(this.name);
+        const actual = context.getRegisteredDeclaration(this.name);
         if(actual==null)
             throw new SyntaxError("Unknown attribute: \"" + this.name + "\"");
     }
 
     getType(context) {
-        var named = context.getRegisteredDeclaration(this.name);
+        const named = context.getRegisteredDeclaration(this.name);
         return named.getType(context);
     }
 
     checkValue(context, value) {
-        var actual = context.getRegisteredDeclaration(this.name);
+        const actual = context.getRegisteredDeclaration(this.name);
         return actual.checkValue(context,value);
     }
 
     declare(transpiler) {
-        var decl = transpiler.context.getRegisteredDeclaration(this.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.name);
         decl.declare(transpiler);
     }
 
     transpileCall(transpiler, expression) {
-        var decl = transpiler.context.getRegisteredDeclaration(this.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.name);
         if(decl.constraint) {
             transpiler.append("$check_").append(this.name).append("(");
             super.transpileCall(transpiler, expression);

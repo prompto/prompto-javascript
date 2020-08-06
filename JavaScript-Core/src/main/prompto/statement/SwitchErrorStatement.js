@@ -1,15 +1,15 @@
-var BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
-var ErrorVariable = require("../runtime/ErrorVariable").ErrorVariable;
-var Identifier = require("../grammar/Identifier").Identifier;
-var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-var VoidType = require("../type/VoidType").VoidType;
-var ExecutionError = require("../error/ExecutionError").ExecutionError;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
-var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
-var CategoryType = require("../type/CategoryType").CategoryType;
+const BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
+const ErrorVariable = require("../runtime/ErrorVariable").ErrorVariable;
+const Identifier = require("../grammar/Identifier").Identifier;
+const EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
+const VoidType = require("../type/VoidType").VoidType;
+const ExecutionError = require("../error/ExecutionError").ExecutionError;
+const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+const Argument = require("../grammar/Argument").Argument;
+const UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
+const CategoryType = require("../type/CategoryType").CategoryType;
 
 
 class SwitchErrorStatement extends BaseSwitchStatement {
@@ -22,7 +22,7 @@ class SwitchErrorStatement extends BaseSwitchStatement {
     }
 
     checkSwitchCasesType(context) {
-        var local = context.newLocalContext();
+        const local = context.newLocalContext();
         local.registerValue(new ErrorVariable(this.errorId));
         super.checkSwitchCasesType(local);
     }
@@ -32,13 +32,13 @@ class SwitchErrorStatement extends BaseSwitchStatement {
     }
 
     collectReturnTypes(context, types) {
-        var type = this.statements.check(context, null);
+        let type = this.statements.check(context, null);
         if(type!=VoidType.instance) {
             types[type.name] = type;
         }
-        var local = context.newLocalContext();
+        const local = context.newLocalContext();
         local.registerValue(new ErrorVariable(this.errorId));
-        var section = BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
+        const section = BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
         if(this.alwaysInstructions!=null) {
             type = this.alwaysInstructions.check(context, null);
             if(type!=VoidType.instance) {
@@ -49,12 +49,12 @@ class SwitchErrorStatement extends BaseSwitchStatement {
     }
 
     interpret(context) {
-        var result = null;
+        let result = null;
         try {
             result = this.statements.interpret(context);
         } catch ( e) {
             if(e instanceof ExecutionError) {
-                var switchValue = this.populateError(e, context);
+                const switchValue = this.populateError(e, context);
                 result = this.interpretSwitch(context, switchValue, e);
             } else {
                 throw e;
@@ -68,9 +68,9 @@ class SwitchErrorStatement extends BaseSwitchStatement {
     }
 
     populateError(e, context) {
-        var error = e.getExpression(context);
+        let error = e.getExpression(context);
         if(error==null) {
-            var args = new ArgumentList();
+            const args = new ArgumentList();
             args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral(typeof(e))));
             args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral(e.message)));
             error = new ConstructorExpression(new CategoryType("Error"), args);

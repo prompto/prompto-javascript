@@ -1,4 +1,4 @@
-var IntegerType = require("../type/IntegerType").IntegerType;
+const IntegerType = require("../type/IntegerType").IntegerType;
 
 class RangeLiteral {
     constructor(first, last) {
@@ -20,33 +20,33 @@ class RangeLiteral {
     }
 
     check(context) {
-        var firstType = this.first.check(context);
-        var lastType = this.last.check(context);
+        const firstType = this.first.check(context);
+        const lastType = this.last.check(context);
         return firstType.checkRange(context,lastType);
     }
 
     interpret(context) {
-        var type = this.first.check(context);
+        let type = this.first.check(context);
         if("IntegerLimits"==type.name) {
             type = IntegerType.instance;
         }
-        var of = this.first.interpret(context);
-        var ol = this.last.interpret(context);
+        const of = this.first.interpret(context);
+        const ol = this.last.interpret(context);
         return type.newRange(of,ol);
     }
 
     declare(transpiler) {
         this.first.declare(transpiler);
-        var firstType = this.first.check(transpiler.context);
+        const firstType = this.first.check(transpiler.context);
         firstType.declare(transpiler);
         this.last.declare(transpiler);
-        var lastType = this.last.check(transpiler.context);
+        const lastType = this.last.check(transpiler.context);
         lastType.declare(transpiler);
         return firstType.declareRange(transpiler, lastType);
     }
 
     transpile(transpiler) {
-        var firstType = this.first.check(transpiler.context);
+        const firstType = this.first.check(transpiler.context);
         return firstType.transpileRange(transpiler, this.first, this.last);
     }
 }

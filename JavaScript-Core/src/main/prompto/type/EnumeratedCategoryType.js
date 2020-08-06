@@ -1,8 +1,8 @@
-var CategoryType = require("./CategoryType").CategoryType;
-var BaseType = require("./BaseType").BaseType;
-var ListType = require("./ListType").ListType;
-var TextType = require("./TextType").TextType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
+const CategoryType = require("./CategoryType").CategoryType;
+const BaseType = require("./BaseType").BaseType;
+const ListType = require("./ListType").ListType;
+const TextType = require("./TextType").TextType;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 
 class EnumeratedCategoryType extends CategoryType {
@@ -39,7 +39,7 @@ class EnumeratedCategoryType extends CategoryType {
 
     declareStaticMember(transpiler, section, name) {
         if("symbols"==name) {
-            var decl = transpiler.context.getRegisteredDeclaration(this.name);
+            const decl = transpiler.context.getRegisteredDeclaration(this.name);
             transpiler.declare(decl);
         } else
             BaseType.prototype.declareStaticMember.call(this, transpiler, section, name);
@@ -54,7 +54,7 @@ class EnumeratedCategoryType extends CategoryType {
     }
 
     getStaticMemberValue(context, name) {
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         if (!decl || !decl.symbols) {
             throw new SyntaxError(name + " is not an enumerated type!");
         }
@@ -68,7 +68,7 @@ class EnumeratedCategoryType extends CategoryType {
     getStaticMemberMethods(context, name) {
         switch (name) {
             case "symbolOf":
-                var SymbolOfMethodDeclaration = require("../builtins/EnumeratedCategoryTypeBuiltins").SymbolOfMethodDeclaration;
+                const SymbolOfMethodDeclaration = require("../builtins/EnumeratedCategoryTypeBuiltins").SymbolOfMethodDeclaration;
                 return [new SymbolOfMethodDeclaration(this)];
             default:
                 return [];

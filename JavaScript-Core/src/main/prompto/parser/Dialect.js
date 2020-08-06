@@ -1,6 +1,6 @@
-var EParserFactory = null;
-var OParserFactory = null;
-var MParserFactory = null;
+let EParserFactory = null;
+let OParserFactory = null;
+let MParserFactory = null;
 
 exports.resolve = () => {
     EParserFactory = require("./EParserFactory").EParserFactory;

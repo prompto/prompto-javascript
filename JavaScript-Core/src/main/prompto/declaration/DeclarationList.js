@@ -1,9 +1,9 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
-var CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
-var EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-var TestMethodDeclaration = require("./TestMethodDeclaration").TestMethodDeclaration;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
+const CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
+const EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
+const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
+const TestMethodDeclaration = require("./TestMethodDeclaration").TestMethodDeclaration;
 
 class DeclarationList extends ObjectList {
 

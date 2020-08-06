@@ -1,11 +1,11 @@
-var Literal = require("./Literal").Literal;
-var TimeType = require("../type/TimeType").TimeType;
-var TimeValue = require("../value/TimeValue").TimeValue;
-var LocalTime = require("../intrinsic/LocalTime").LocalTime;
+const Literal = require("./Literal").Literal;
+const TimeType = require("../type/TimeType").TimeType;
+const TimeValue = require("../value/TimeValue").TimeValue;
+const LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
 class TimeLiteral extends Literal {
     constructor(text) {
-        var lt = LocalTime.parse(text.substring(1,text.length-1));
+        const lt = LocalTime.parse(text.substring(1,text.length-1));
         super(text, new TimeValue(lt));
         return this;
     }

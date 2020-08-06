@@ -1,4 +1,4 @@
-var ProblemListener = require('./ProblemListener').ProblemListener;
+const ProblemListener = require('./ProblemListener').ProblemListener;
 
 class CodeCompleter extends ProblemListener {
     constructor() {
@@ -8,16 +8,16 @@ class CodeCompleter extends ProblemListener {
     }
 
     syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-        var self = this;
-        var parser = recognizer._ctx.parser;
+        const self = this;
+        const parser = recognizer._ctx.parser;
         e.deadEndConfigs.configs.forEach(cfg => {
-            var intervals = cfg.state.atn.getExpectedTokens(cfg.state.stateNumber, e.ctx);
+            const intervals = cfg.state.atn.getExpectedTokens(cfg.state.stateNumber, e.ctx);
             intervals.intervals.forEach(interval => {
-                for(var t=interval.start;t<interval.stop;t++) {
-                    var literal = parser.literalNames[t];
+                for(let t=interval.start;t<interval.stop;t++) {
+                    let literal = parser.literalNames[t];
                     if(literal)
                         literal = literal.substring(1, literal.length-1);
-                    var suggestion = { type : t, symbol : parser.symbolicNames[t], literal : literal };
+                    const suggestion = { type : t, symbol : parser.symbolicNames[t], literal : literal };
                     self.suggestions.push(suggestion);
                 }
             });

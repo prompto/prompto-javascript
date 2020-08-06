@@ -1,4 +1,4 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
+const BaseStatement = require("./BaseStatement").BaseStatement;
 
 class SimpleStatement extends BaseStatement {
     constructor() {

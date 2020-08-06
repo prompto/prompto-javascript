@@ -1,6 +1,6 @@
-var Variable = require("./Variable").Variable;
-var Identifier = require("../grammar/Identifier").Identifier;
-var EnumeratedCategoryType = null;
+const Variable = require("./Variable").Variable;
+const Identifier = require("../grammar/Identifier").Identifier;
+let EnumeratedCategoryType = null;
 
 exports.resolve = () => {
     EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;

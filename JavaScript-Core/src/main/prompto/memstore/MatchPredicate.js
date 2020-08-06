@@ -1,4 +1,4 @@
-var MatchOp = require("../store/MatchOp").MatchOp;
+const MatchOp = require("../store/MatchOp").MatchOp;
 
 class MatchPredicate {
     constructor(info, matchOp, value) {
@@ -9,7 +9,7 @@ class MatchPredicate {
     }
 
     matches(stored) {
-        var data = stored.getData(this.info.name);
+        const data = stored.getData(this.info.name);
         return this.matchesData(data);
     }
 
@@ -27,7 +27,7 @@ class MatchPredicate {
                 else if(typeof(data)===typeof(""))
                     return data.indexOf(this.value)>=0;
                 else if(data.length) {
-                    for(var i=0;i<data.length;i++) {
+                    for(let i=0;i<data.length;i++) {
                         if(this.matchesData(data[i]))
                             return true;
                     }

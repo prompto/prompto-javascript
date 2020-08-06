@@ -1,16 +1,16 @@
-var Expression = require("./Expression").Expression;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-var InstanceExpression = require("./InstanceExpression").InstanceExpression;
-var ArrowExpression = require("./ArrowExpression").ArrowExpression;
-var InternalError = require("../error/InternalError").InternalError;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var ListValue = require("../value/ListValue").ListValue;
-var SetValue = require("../value/SetValue").SetValue;
-var ListType = require("../type/ListType").ListType;
-var SetType = require("../type/SetType").SetType;
-var List = require("../intrinsic/List").List;
+const Expression = require("./Expression").Expression;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+const InstanceExpression = require("./InstanceExpression").InstanceExpression;
+const ArrowExpression = require("./ArrowExpression").ArrowExpression;
+const InternalError = require("../error/InternalError").InternalError;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const DocumentType = require("../type/DocumentType").DocumentType;
+const ListValue = require("../value/ListValue").ListValue;
+const SetValue = require("../value/SetValue").SetValue;
+const ListType = require("../type/ListType").ListType;
+const SetType = require("../type/SetType").SetType;
+const List = require("../intrinsic/List").List;
 
 class SortedExpression extends Expression {
  
@@ -36,11 +36,11 @@ class SortedExpression extends Expression {
             writer.append("descending ");
         this.source.toDialect(writer);
         if (this.key != null) {
-            var type = this.source.check(writer.context);
-            var itemType = type.itemType;
+            const type = this.source.check(writer.context);
+            const itemType = type.itemType;
             writer = this.contextualizeWriter(writer, itemType);
             writer.append(" with ");
-            var keyExp = this.key;
+            let keyExp = this.key;
             if (keyExp instanceof UnresolvedIdentifier) try {
                 keyExp = keyExp.resolve(writer.context, false);
             } catch (e) {
@@ -64,8 +64,8 @@ class SortedExpression extends Expression {
         writer.append("(");
         this.source.toDialect(writer);
         if (this.key != null) {
-            var type = this.source.check(writer.context);
-            var itemType = type.itemType;
+            const type = this.source.check(writer.context);
+            const itemType = type.itemType;
             writer = this.contextualizeWriter(writer, itemType);
             writer.append(", key = ");
             this.key.toDialect(writer);
@@ -87,7 +87,7 @@ class SortedExpression extends Expression {
     }
 
     check(context) {
-        var type = this.source.check(context);
+        const type = this.source.check(context);
         if (!(type instanceof ListType || type instanceof SetType)) {
             context.problemListener.reportCannotSort(this.source);
         }
@@ -95,22 +95,22 @@ class SortedExpression extends Expression {
     }
 
     interpret(context) {
-        var type = this.source.check(context);
+        const type = this.source.check(context);
         if (!(type instanceof ListType || type instanceof SetType)) {
             throw new SyntaxError("Unsupported type: " + type);
         }
-        var coll = this.source.interpret(context);
+        const coll = this.source.interpret(context);
         if (coll == null) {
             throw new NullReferenceError();
         }
         if (!(coll instanceof ListValue || coll instanceof SetValue)) {
             throw new InternalError("Unexpected type:" + typeof (coll));
         }
-        var items = coll instanceof ListValue ? coll.items : coll.items.set.values();
+        let items = coll instanceof ListValue ? coll.items : coll.items.set.values();
         items = Array.from(items);
-        var itemType = type.itemType;
+        const itemType = type.itemType;
         if (items.length > 1) {
-            var cmp = itemType.getSortedComparator(context, this.key, this.desc);
+            const cmp = itemType.getSortedComparator(context, this.key, this.desc);
             items.sort(cmp);
         }
         return new ListValue(itemType, items);
@@ -119,12 +119,12 @@ class SortedExpression extends Expression {
     declare(transpiler) {
         transpiler.require(List);
         this.source.declare(transpiler);
-        var type = this.source.check(transpiler.context);
+        const type = this.source.check(transpiler.context);
         type.itemType.declareSorted(transpiler, this.key);
     }
 
     transpile(transpiler) {
-        var type = this.source.check(transpiler.context);
+        const type = this.source.check(transpiler.context);
         this.source.transpile(transpiler);
         transpiler.append(".sorted(");
         type.itemType.transpileSortedComparator(transpiler, this.key, this.desc);

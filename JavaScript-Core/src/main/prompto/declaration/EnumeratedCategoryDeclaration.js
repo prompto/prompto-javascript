@@ -1,8 +1,8 @@
-var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
-var Identifier = require("../grammar/Identifier").Identifier;
-var List = require("../intrinsic/List").List;
+const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+const EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
+const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+const Identifier = require("../grammar/Identifier").Identifier;
+const List = require("../intrinsic/List").List;
 
 
 class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
@@ -28,7 +28,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     getLocalAttributes() {
-        var attributes = ConcreteCategoryDeclaration.prototype.getLocalAttributes.call(this);
+        let attributes = ConcreteCategoryDeclaration.prototype.getLocalAttributes.call(this);
         if(!attributes)
             attributes = new IdentifierList();
         if(!attributes.hasAttribute("name"))
@@ -45,7 +45,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
 
     setSymbols(symbols) {
         this.symbols = symbols || [];
-        var type = new EnumeratedCategoryType(this.id);
+        const type = new EnumeratedCategoryType(this.id);
         this.symbols.forEach(symbol => {
             symbol.type = type;
         });
@@ -176,7 +176,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     transpileSymbols(transpiler) {
-        var names = this.symbols.map(symbol => symbol.name);
+        const names = this.symbols.map(symbol => symbol.name);
         transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
         transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
     }

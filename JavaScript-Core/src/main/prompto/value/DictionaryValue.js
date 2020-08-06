@@ -1,14 +1,14 @@
-var Value = require("./Value").Value;
-var Dictionary = require("../intrinsic/Dictionary").Dictionary;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-var NullValue = require("./NullValue").NullValue;
-var SetValue = require("./SetValue").SetValue;
-var ListValue = require("./ListValue").ListValue;
-var TextValue = require("./TextValue").TextValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var InternalError = require("../error/InternalError").InternalError;
-var DictionaryType = require("../type/DictionaryType").DictionaryType;
-var TextType = require("../type/TextType").TextType;
+const Value = require("./Value").Value;
+const Dictionary = require("../intrinsic/Dictionary").Dictionary;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const NullValue = require("./NullValue").NullValue;
+const SetValue = require("./SetValue").SetValue;
+const ListValue = require("./ListValue").ListValue;
+const TextValue = require("./TextValue").TextValue;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const InternalError = require("../error/InternalError").InternalError;
+const DictionaryType = require("../type/DictionaryType").DictionaryType;
+const TextType = require("../type/TextType").TextType;
 
 class DictionaryValue extends Value {
  
@@ -46,14 +46,14 @@ class DictionaryValue extends Value {
         if ("count"==name) {
             return new IntegerValue(this.dict.length);
         } else if ("keys"==name) {
-            var keys = new StrictSet();
-            var iter = this.dict.keys.iterator();
+            const keys = new StrictSet();
+            const iter = this.dict.keys.iterator();
             while(iter.hasNext()) {
                 keys.add(new TextValue(iter.next()));
             }
             return new SetValue(TextType.instance, keys);
         } else if ("values"==name) {
-            var list = this.dict.$keys.map(function(name) {
+            const list = this.dict.$keys.map(function(name) {
                 return this.dict[name];
             }, this);
             return new ListValue(this.type.itemType, list);
@@ -72,7 +72,7 @@ class DictionaryValue extends Value {
     getItemInContext(context, index) {
         if (index instanceof TextValue)
         {
-            var value = this.dict[index] || NullValue.instance;
+            const value = this.dict[index] || NullValue.instance;
             if (value instanceof Value) {
                 return value;
             } else {
@@ -84,7 +84,7 @@ class DictionaryValue extends Value {
     }
 
     convertToJavaScript() {
-        var dict = {};
+        const dict = {};
         this.dict.$keys.forEach(function(key) {
             dict[key] = this.dict[key].convertToJavaScript();
         }, this);
@@ -104,11 +104,11 @@ class DictionaryValue extends Value {
     }
 
     swap(context) {
-        var swapped = new Dictionary(true);
-        var iter = this.dict.iterator();
+        const swapped = new Dictionary(true);
+        const iter = this.dict.iterator();
         while(iter.hasNext()) {
-            var entry = iter.next();
-            var key = entry.value;
+            const entry = iter.next();
+            let key = entry.value;
             if(key instanceof TextValue)
                 key = new TextValue(key.toString());
             swapped.setItem(key, entry.key);
@@ -132,7 +132,7 @@ class KVPIterator {
     }
 
     next() {
-        var key = this.keys[this.index++];
+        const key = this.keys[this.index++];
         return new KVPValue(key, this.dict[key]);
     }
 }

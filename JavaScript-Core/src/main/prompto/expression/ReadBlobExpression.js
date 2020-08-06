@@ -1,9 +1,9 @@
-var Expression = require("./Expression").Expression;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-var BlobType = require("../type/BlobType").BlobType;
-var BlobValue = require("../value/BlobValue").BlobValue;
+const Expression = require("./Expression").Expression;
+const ResourceType = require("../type/ResourceType").ResourceType;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
+const BlobType = require("../type/BlobType").BlobType;
+const BlobValue = require("../value/BlobValue").BlobValue;
 
 class ReadBlobExpression extends Expression {
 
@@ -23,7 +23,7 @@ class ReadBlobExpression extends Expression {
 
     check(context) {
         context = context.newResourceContext();
-        var sourceType = this.resource.check(context);
+        const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
             context.problemListener.reportNotAResource(this.resource);
         return BlobType.instance;
@@ -31,7 +31,7 @@ class ReadBlobExpression extends Expression {
 
     interpret(context) {
         context = context.newResourceContext();
-        var res = this.resource.interpret(context);
+        const res = this.resource.interpret(context);
         if(res==null) {
             throw new NullReferenceError();
         }
@@ -39,7 +39,7 @@ class ReadBlobExpression extends Expression {
             throw new InvalidResourceError("Not readable");
         }
         try {
-            var b = res.readBinary();
+            const b = res.readBinary();
             return new BlobValue(b.mimeType, b.data);
         } finally {
             res.close();

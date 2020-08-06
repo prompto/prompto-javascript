@@ -1,7 +1,7 @@
-var NativeType = require("./NativeType").NativeType;
-var DocumentType = null;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Any = require("../intrinsic/Any").Any;
+const NativeType = require("./NativeType").NativeType;
+let DocumentType = null;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Any = require("../intrinsic/Any").Any;
 
 exports.resolve = () => {
     DocumentType = require("./DocumentType").DocumentType;

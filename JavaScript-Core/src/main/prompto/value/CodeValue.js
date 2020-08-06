@@ -1,5 +1,5 @@
-var Value = require("./Value").Value;
-var CodeType = require("../type/CodeType").CodeType;
+const Value = require("./Value").Value;
+const CodeType = require("../type/CodeType").CodeType;
 
 class CodeValue extends Value {
     constructor(expression) {

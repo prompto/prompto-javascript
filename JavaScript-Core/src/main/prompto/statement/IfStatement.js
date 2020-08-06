@@ -1,11 +1,11 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var StatementList = require("./StatementList").StatementList;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var TypeMap = require("../type/TypeMap").TypeMap;
-var VoidType = require("../type/VoidType").VoidType;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const StatementList = require("./StatementList").StatementList;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const TypeMap = require("../type/TypeMap").TypeMap;
+const VoidType = require("../type/VoidType").VoidType;
 
 class IfStatement extends BaseStatement {
   
@@ -32,10 +32,10 @@ class IfStatement extends BaseStatement {
     }
 
     check(context) {
-        var types = new TypeMap();
-        var section = null;
+        const types = new TypeMap();
+        let section = null;
         this.elements.forEach(element => {
-            var type = element.check(context);
+            const type = element.check(context);
             if(type!==VoidType.instance) {
                 section = element;
                 types[type.name] = type;
@@ -45,10 +45,10 @@ class IfStatement extends BaseStatement {
     }
 
     interpret(context) {
-        for(var i=0;i<this.elements.length;i++) {
-            var element = this.elements[i];
-            var condition = element.condition || null;
-            var test = condition==null ? BooleanValue.TRUE : condition.interpret(context);
+        for(let i=0;i<this.elements.length;i++) {
+            const element = this.elements[i];
+            const condition = element.condition || null;
+            const test = condition==null ? BooleanValue.TRUE : condition.interpret(context);
             if(test instanceof BooleanValue && BooleanValue.TRUE.equals(test)) {
                 return element.interpret(context);
             }
@@ -63,8 +63,8 @@ class IfStatement extends BaseStatement {
     }
 
     transpile(transpiler) {
-        for(var i=0;i<this.elements.length;i++) {
-            var element = this.elements[i];
+        for(let i=0;i<this.elements.length;i++) {
+            const element = this.elements[i];
             if (i > 0)
                 transpiler.append(" else ");
             if (element.condition) {
@@ -91,8 +91,8 @@ class IfStatement extends BaseStatement {
     }
 
     toODialect(writer) {
-        var curly = false;
-        for(var i=0;i<this.elements.length; i++) {
+        let curly = false;
+        for(let i=0;i<this.elements.length; i++) {
             if(i>0) {
                 if (curly)
                     writer.append(" ");
@@ -106,7 +106,7 @@ class IfStatement extends BaseStatement {
     }
 
     toEDialect(writer) {
-        for(var i=0;i<this.elements.length; i++) {
+        for(let i=0;i<this.elements.length; i++) {
             if(i>0)
                 writer.append("else ");
             this.elements[i].toEDialect(writer);
@@ -143,13 +143,13 @@ class IfElement extends BaseStatement {
 
     check(context) {
         if(this.condition) {
-            var type = this.condition.check(context);
+            const type = this.condition.check(context);
             if(type!=BooleanType.instance) {
                 context.problemListener.reportError(this, "Expected a Boolean condition!");
             }
         }
         context = this.downCast(context, false);
-        var statements = this.statements;
+        let statements = this.statements;
         if(!statements) {
             context.problemListener.reportError(this, "Expected a statement!");
             statements = new StatementList();
@@ -160,7 +160,7 @@ class IfElement extends BaseStatement {
     declare(transpiler) {
         if(this.condition)
             this.condition.declare(transpiler);
-        var context = transpiler.context;
+        let context = transpiler.context;
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downCast(transpiler.context, false);
         if(context!=transpiler.context)
@@ -171,7 +171,7 @@ class IfElement extends BaseStatement {
     }
 
     transpile(transpiler) {
-        var context = transpiler.context;
+        let context = transpiler.context;
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downCast(context, false);
         if(context!=transpiler.context)
@@ -183,7 +183,7 @@ class IfElement extends BaseStatement {
     }
 
     downCast(context, setValue) {
-        var parent = context;
+        const parent = context;
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downCast(context, setValue);
         context = parent!=context ? context : context.newChildContext();
@@ -200,7 +200,7 @@ class IfElement extends BaseStatement {
     }
 
     toEDialect(writer) {
-        var context = writer.context;
+        let context = writer.context;
         if(this.condition!=null) {
             writer.append("if ");
             this.condition.toDialect(writer);
@@ -214,7 +214,7 @@ class IfElement extends BaseStatement {
     }
 
     toODialect(writer) {
-        var context = writer.context;
+        let context = writer.context;
         if(this.condition!=null)
         {
             writer.append("if (");
@@ -224,7 +224,7 @@ class IfElement extends BaseStatement {
             if (context !== writer.context)
                 writer = writer.newChildWriter(context);
         }
-        var curly = this.statements!=null && this.statements.length>1;
+        const curly = this.statements!=null && this.statements.length>1;
         if(curly)
             writer.append("{").newLine();
         else

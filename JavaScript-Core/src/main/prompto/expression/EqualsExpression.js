@@ -1,26 +1,26 @@
-var Expression = require("./Expression").Expression;
-var InstanceExpression = require("./InstanceExpression").InstanceExpression;
-var UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
-var LinkedValue = require("../runtime/LinkedValue").LinkedValue;
-var ContainerType = require("../type/ContainerType").ContainerType;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextType = require("../type/TextType").TextType;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var NullType = require("../type/NullType").NullType;
-var TypeValue = require("../value/TypeValue").TypeValue;
-var NullValue = require("../value/NullValue").NullValue;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var Instance = require("../value/Value").Instance;
-var Value = require("../value/Value").Value;
-var Variable = require("../runtime/Variable").Variable;
-var MatchOp = require("../store/MatchOp").MatchOp;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var EqOp = require("../grammar/EqOp").EqOp;
-var VOWELS = "AEIO"; // sufficient here
+const Expression = require("./Expression").Expression;
+const InstanceExpression = require("./InstanceExpression").InstanceExpression;
+const UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+const LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
+const LinkedValue = require("../runtime/LinkedValue").LinkedValue;
+const ContainerType = require("../type/ContainerType").ContainerType;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const CharacterType = require("../type/CharacterType").CharacterType;
+const TextType = require("../type/TextType").TextType;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const NullType = require("../type/NullType").NullType;
+const TypeValue = require("../value/TypeValue").TypeValue;
+const NullValue = require("../value/NullValue").NullValue;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const Instance = require("../value/Value").Instance;
+const Value = require("../value/Value").Value;
+const Variable = require("../runtime/Variable").Variable;
+const MatchOp = require("../store/MatchOp").MatchOp;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const EqOp = require("../grammar/EqOp").EqOp;
+const VOWELS = "AEIO"; // sufficient here
 
 
 class EqualsExpression extends Expression {
@@ -42,7 +42,7 @@ class EqualsExpression extends Expression {
         this.operator.toDialect(writer);
         // make this a AN
         if(this.operator==EqOp.IS_A || this.operator==EqOp.IS_NOT_A) {
-            var name = this.right.toString();
+            const name = this.right.toString();
             if(VOWELS.indexOf(name.charAt(0))>=0)
                 writer.append("n");
         }
@@ -51,8 +51,8 @@ class EqualsExpression extends Expression {
     }
 
     check(context) {
-        var lt = this.left.check(context);
-        var rt = this.right.check(context);
+        const lt = this.left.check(context);
+        const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
     }
 
@@ -69,13 +69,13 @@ class EqualsExpression extends Expression {
     }
 
     interpret(context) {
-        var lval = this.left.interpret(context) || NullValue.instance;
-        var rval = this.right.interpret(context) || NullValue.instance;
+        const lval = this.left.interpret(context) || NullValue.instance;
+        const rval = this.right.interpret(context) || NullValue.instance;
         return this.interpretValues(context, lval, rval);
     }
 
     interpretValues(context, lval, rval) {
-        var equal = false;
+        let equal = false;
         switch(this.operator) {
             case EqOp.IS:
                 equal = lval==rval;
@@ -136,10 +136,10 @@ class EqualsExpression extends Expression {
 
     isA(context, lval, rval) {
         if(lval instanceof Value && rval instanceof TypeValue) {
-            var actual = lval.type;
+            const actual = lval.type;
             if(actual === NullType.instance)
                 return false;
-            var toCheck = rval.value;
+            const toCheck = rval.value;
             return toCheck.isAssignableFrom(context, actual);
         } else
             return false;
@@ -147,13 +147,13 @@ class EqualsExpression extends Expression {
 
     downCast(context, setValue) {
         if(this.operator==EqOp.IS_A) {
-            var id = this.readLeftId();
+            const id = this.readLeftId();
             if(id!=null) {
-                var type = this.right.value;
-                var value = context.getRegisteredValue(id.name);
+                const type = this.right.value;
+                let value = context.getRegisteredValue(id.name);
                 if(value==null && !setValue) // need a thing to avoid NPE
                     value = new Variable(id.name, type);
-                var local = context.newChildContext();
+                const local = context.newChildContext();
                 value = new LinkedVariable(type, value);
                 local.registerValue(value, false);
                 if(setValue)
@@ -174,35 +174,35 @@ class EqualsExpression extends Expression {
     }
 
     interpretAssert(context, test) {
-        var lval = this.left.interpret(context) || NullValue.instance;
-        var rval = this.right.interpret(context) || NullValue.instance;
-        var result = this.interpretValues(context, lval, rval);
+        const lval = this.left.interpret(context) || NullValue.instance;
+        const rval = this.right.interpret(context) || NullValue.instance;
+        const result = this.interpretValues(context, lval, rval);
         if(result==BooleanValue.TRUE)
             return true;
-        var expected = this.getExpected(context, test.dialect);
-        var actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
+        const expected = this.getExpected(context, test.dialect);
+        const actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
 
     checkQuery(context) {
-        var decl = this.left.checkAttribute(context);
+        const decl = this.left.checkAttribute(context);
         if(decl && !decl.storable)
             context.problemListener.reportNotStorable(this, decl.name);
-        var rt = this.right.check(context);
+        const rt = this.right.check(context);
         return this.checkOperator(context, decl.getType(), rt);
     }
 
     interpretQuery(context, query) {
-        var decl = this.left.checkAttribute(context);
+        const decl = this.left.checkAttribute(context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
-        var value = this.right.interpret(context);
+        let value = this.right.interpret(context);
         if (value instanceof Instance)
             value = value.getMemberValue(context, "dbId", false);
-        var info = decl.getAttributeInfo();
-        var data = value.getStorableData();
-        var match = this.getMatchOp();
+        const info = decl.getAttributeInfo();
+        const data = value.getStorableData();
+        const match = this.getMatchOp();
         query.verify(info, match, data);
         if (this.operator == EqOp.NOT_EQUALS || this.operator == EqOp.IS_NOT || this.operator == EqOp.NOT_CONTAINS)
             query.not();
@@ -229,7 +229,7 @@ class EqualsExpression extends Expression {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
         if(this.operator === EqOp.ROUGHLY) {
-            var removeAccents = require("../utils/Utils").removeAccents;
+            const removeAccents = require("../utils/Utils").removeAccents;
             transpiler.require(removeAccents);
         }
     }
@@ -277,7 +277,7 @@ class EqualsExpression extends Expression {
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(dialect, context);
+        const writer = new CodeWriter(dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();
@@ -304,7 +304,7 @@ class EqualsExpression extends Expression {
     }
 
     transpileEquals(transpiler) {
-        var lt = this.left.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
         if(lt === BooleanType.instance || lt === IntegerType.instance || lt === DecimalType.instance || lt === CharacterType.instance || lt === TextType.instance) {
             this.left.transpile(transpiler);
             transpiler.append(" === ");
@@ -319,7 +319,7 @@ class EqualsExpression extends Expression {
     }
 
     transpileNotEquals(transpiler) {
-        var lt = this.left.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
         if(lt === BooleanType.instance || lt === IntegerType.instance || lt === DecimalType.instance || lt === CharacterType.instance || lt === TextType.instance) {
             this.left.transpile(transpiler);
             transpiler.append(" !== ");
@@ -386,11 +386,11 @@ class EqualsExpression extends Expression {
     }
 
     transpileQuery(transpiler, builder) {
-        var decl = this.left.checkAttribute(transpiler.context);
+        const decl = this.left.checkAttribute(transpiler.context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to transpile predicate");
-        var info = decl.getAttributeInfo();
-        var matchOp = this.getMatchOp();
+        const info = decl.getAttributeInfo();
+        const matchOp = this.getMatchOp();
         // TODO check for dbId field of instance value
         transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
         this.right.transpile(transpiler);

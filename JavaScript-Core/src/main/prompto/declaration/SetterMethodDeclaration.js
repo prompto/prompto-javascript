@@ -1,5 +1,5 @@
-var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
+const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 
 class SetterMethodDeclaration extends ConcreteMethodDeclaration {
     constructor(id, statements) {
@@ -26,7 +26,7 @@ class SetterMethodDeclaration extends ConcreteMethodDeclaration {
     }
 
     transpile(transpiler) {
-        var arg = new AttributeParameter(this.id);
+        const arg = new AttributeParameter(this.id);
         arg.register(transpiler.context);
         this.statements.transpile(transpiler);
     }

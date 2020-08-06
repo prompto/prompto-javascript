@@ -1,13 +1,13 @@
-var Expression = require("./Expression").Expression;
-var Identifier = require("../grammar/Identifier").Identifier;
-var AnyType = require("../type/AnyType").AnyType;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var NullValue = require("../value/NullValue").NullValue;
-var $DataStore = require("../store/DataStore").$DataStore;
-var MatchOp = require("../store/MatchOp").MatchOp;
-var TypeFamily = require("../store/TypeFamily").TypeFamily;
-var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
+const Expression = require("./Expression").Expression;
+const Identifier = require("../grammar/Identifier").Identifier;
+const AnyType = require("../type/AnyType").AnyType;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+const NullValue = require("../value/NullValue").NullValue;
+const $DataStore = require("../store/DataStore").$DataStore;
+const MatchOp = require("../store/MatchOp").MatchOp;
+const TypeFamily = require("../store/TypeFamily").TypeFamily;
+const AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 
 class FetchOneExpression extends Expression {
  
@@ -63,7 +63,7 @@ class FetchOneExpression extends Expression {
 
     check(context) {
         if(this.typ!=null) {
-            var decl = context.getRegisteredDeclaration(this.typ.name);
+            const decl = context.getRegisteredDeclaration(this.typ.name);
             if (decl == null || !(decl instanceof CategoryDeclaration))
                 context.problemListener.reportUnknownCategory(this.typ.id);
             if(!(decl.isStorable && decl.isStorable(context)))
@@ -75,14 +75,14 @@ class FetchOneExpression extends Expression {
     }
 
     interpret(context) {
-        var store = $DataStore.instance;
-        var query = this.buildFetchOneQuery(context, store);
-        var stored = store.fetchOne (query);
+        const store = $DataStore.instance;
+        const query = this.buildFetchOneQuery(context, store);
+        const stored = store.fetchOne (query);
         if (stored == null)
             return NullValue.instance;
         else {
-            var typeName = stored.getData("category").slice(-1)[0];
-            var typ = new CategoryType(new Identifier(typeName));
+            const typeName = stored.getData("category").slice(-1)[0];
+            const typ = new CategoryType(new Identifier(typeName));
             if (this.typ != null)
                 typ.mutable = this.typ.mutable;
             return typ.newInstanceFromStored(context, stored);
@@ -128,9 +128,9 @@ class FetchOneExpression extends Expression {
     }
 
     buildFetchOneQuery(context, store) {
-        var builder = store.newQueryBuilder();
+        const builder = store.newQueryBuilder();
         if (this.typ != null) {
-            var info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
+            const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
             builder.verify(info, MatchOp.CONTAINS, this.typ.name);
         }
         if (this.predicate != null) {

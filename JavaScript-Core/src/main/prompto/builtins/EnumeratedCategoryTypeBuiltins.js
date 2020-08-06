@@ -1,9 +1,9 @@
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-var TextType = require("../type/TextType").TextType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+const EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+const TextType = require("../type/TextType").TextType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {
 
@@ -17,10 +17,10 @@ class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var decl = context.getRegistered(this.enumType.name);
+        const decl = context.getRegistered(this.enumType.name);
         if(!(decl instanceof EnumeratedCategoryDeclaration))
             throw new SyntaxError(this.enumType.typeName + " is not an enumerated type!");
-        var name = context.getValue(new Identifier("name")).getStorableData();
+        const name = context.getValue(new Identifier("name")).getStorableData();
         return decl.getSymbol(name);
     }
 

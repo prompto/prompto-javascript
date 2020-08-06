@@ -1,6 +1,6 @@
-var BaseType = require("./BaseType").BaseType;
-var TextType = require("./TextType").TextType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const BaseType = require("./BaseType").BaseType;
+const TextType = require("./TextType").TextType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class EntryType extends BaseType {
     constructor(itemType) {

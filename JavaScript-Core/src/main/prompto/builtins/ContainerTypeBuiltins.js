@@ -1,9 +1,9 @@
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+const Identifier = require("../grammar/Identifier").Identifier;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const TextType = require("../type/TextType").TextType;
+const TextValue = require("../value/TextValue").TextValue;
 
 class BaseJoinMethodDeclaration extends BuiltInMethodDeclaration {
 
@@ -12,10 +12,10 @@ class BaseJoinMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var items = this.getItems(context);
-        var texts = items.map(value => value.toString());
-        var delimiter = context.getValue(new Identifier("delimiter")).getStorableData();
-        var joined = texts.join(delimiter);
+        const items = this.getItems(context);
+        const texts = items.map(value => value.toString());
+        const delimiter = context.getValue(new Identifier("delimiter")).getStorableData();
+        const joined = texts.join(delimiter);
         return new TextValue(joined);
     }
 

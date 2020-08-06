@@ -1,8 +1,8 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var Identifier = require("../grammar/Identifier").Identifier;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var VoidType = require("../type/VoidType").VoidType;
+const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
+const Identifier = require("../grammar/Identifier").Identifier;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const VoidType = require("../type/VoidType").VoidType;
 
 class TestMethodDeclaration extends BaseDeclaration {
 
@@ -18,7 +18,7 @@ class TestMethodDeclaration extends BaseDeclaration {
     }
 
     cleanId() {
-        var cleanId = this.name.replace(/\W/g,'_');
+        const cleanId = this.name.replace(/\W/g,'_');
         return cleanId.substring(1, cleanId.length - 1);
     }
 
@@ -118,7 +118,7 @@ class TestMethodDeclaration extends BaseDeclaration {
     }
 
     checkStatement(context, statement) {
-        var type = statement.check(context);
+        const type = statement.check(context);
         if(statement.canReturn() && type!=null && type!=VoidType.instance) // null indicates SyntaxError
             context.problemListener.reportIllegalReturn(statement);
     }
@@ -153,7 +153,7 @@ class TestMethodDeclaration extends BaseDeclaration {
             return;
         context.enterMethod (this);
         try {
-            var success = true;
+            let success = true;
             this.assertions.forEach(function(a) {
                 success &= a.interpretAssert (context, this);
             }, this);
@@ -172,17 +172,17 @@ class TestMethodDeclaration extends BaseDeclaration {
     }
 
     printMissingError(context, expected, actual) {
-        var msg = this.name + " test failed while expecting: " + expected + ", found: " + actual;
+        const msg = this.name + " test failed while expecting: " + expected + ", found: " + actual;
         TestMethodDeclaration.print(msg);
     }
 
     printFailedAssertion(context, expected, actual) {
-        var msg = this.name + " test failed while verifying: " + expected + ", found: " + actual;
+        const msg = this.name + " test failed while verifying: " + expected + ", found: " + actual;
         TestMethodDeclaration.print(msg);
     }
 
     printSuccess(context) {
-        var msg = this.name + " test successful";
+        const msg = this.name + " test successful";
         TestMethodDeclaration.print(msg);
     }
 
@@ -208,13 +208,13 @@ class TestMethodDeclaration extends BaseDeclaration {
         // help fix runtime issues by rethrowing non PromptoErrors
         if(!ex.interpret)
             throw ex;
-        var expectedError = this.error == null ? null : this.error.interpret (context);
-        var actual = ex.interpret (context, new Identifier("__test_error__"));
+        const expectedError = this.error == null ? null : this.error.interpret (context);
+        const actual = ex.interpret (context, new Identifier("__test_error__"));
         if (expectedError!=null && expectedError.equals (actual))
             this.printSuccess (context);
         else {
-            var actualName = actual.getMemberValue (context, "name").toString ();
-            var expectedName = this.error == null ? "SUCCESS" : this.error.name;
+            const actualName = actual.getMemberValue (context, "name").toString ();
+            const expectedName = this.error == null ? "SUCCESS" : this.error.name;
             this.printMissingError (context, expectedName, actualName);
         }
     }
@@ -282,7 +282,7 @@ class TestMethodDeclaration extends BaseDeclaration {
     }
 }
 
-var NativeErrorNames = {
+const NativeErrorNames = {
     DIVIDE_BY_ZERO: "DivideByZeroError",
     INDEX_OUT_OF_RANGE: RangeError.name,
     NULL_REFERENCE: ReferenceError.name,

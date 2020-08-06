@@ -1,7 +1,7 @@
-var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var NativeResource = require("../value/NativeResource").NativeResource;
-var ResourceContext = require("../runtime/Context").ResourceContext;
+const NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
+const ResourceType = require("../type/ResourceType").ResourceType;
+const NativeResource = require("../value/NativeResource").NativeResource;
+const ResourceContext = require("../runtime/Context").ResourceContext;
 
 class NativeResourceDeclaration extends NativeCategoryDeclaration {
     constructor(id, attributes, categoryBindings, attributeBindings, methods) {

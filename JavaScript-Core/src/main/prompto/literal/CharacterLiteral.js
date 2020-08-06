@@ -1,6 +1,6 @@
-var Literal = require("./Literal").Literal;
-var CharacterValue = require("../value/CharacterValue").CharacterValue;
-var CharacterType = require("../type/CharacterType").CharacterType;
+const Literal = require("./Literal").Literal;
+const CharacterValue = require("../value/CharacterValue").CharacterValue;
+const CharacterType = require("../type/CharacterType").CharacterType;
 
 /*jshint evil:true*/
 function unescape(text) {

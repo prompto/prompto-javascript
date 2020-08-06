@@ -1,6 +1,6 @@
-var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var $DataStore = require("../store/DataStore").$DataStore;
+const JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const $DataStore = require("../store/DataStore").$DataStore;
 
 class JavaScriptIdentifierExpression extends JavaScriptExpression {
    
@@ -29,7 +29,7 @@ class JavaScriptIdentifierExpression extends JavaScriptExpression {
     }
 
     interpret(context, module) {
-        var o = this.interpret_prompto(context);
+        let o = this.interpret_prompto(context);
         if (o != null) {
             return o;
         }
@@ -78,8 +78,8 @@ class JavaScriptIdentifierExpression extends JavaScriptExpression {
             return null;
         } else {
             try {
-                var m = module.resolve();
-                var o = m[this.id.name]
+                const m = module.resolve();
+                const o = m[this.id.name];
                 if (o) {
                     return o;
                 } else {

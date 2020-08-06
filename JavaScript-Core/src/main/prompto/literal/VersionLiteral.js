@@ -1,11 +1,11 @@
-var Literal = require("./Literal").Literal;
-var VersionType = require("../type/VersionType").VersionType;
-var VersionValue = require("../value/VersionValue").VersionValue;
-var Version = require("../intrinsic/Version").Version;
+const Literal = require("./Literal").Literal;
+const VersionType = require("../type/VersionType").VersionType;
+const VersionValue = require("../value/VersionValue").VersionValue;
+const Version = require("../intrinsic/Version").Version;
 
 class VersionLiteral extends Literal {
     constructor(text) {
-        var version = Version.parse(text.substring(2,text.length-1));
+        const version = Version.parse(text.substring(2,text.length-1));
         super(text, new VersionValue(version));
         return this;
     }

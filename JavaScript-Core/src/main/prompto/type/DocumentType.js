@@ -1,29 +1,29 @@
-var MissingType = require("./MissingType").MissingType;
-var NativeType = require("./NativeType").NativeType;
-var IntegerType = require("./IntegerType").IntegerType;
-var TextType = require("./TextType").TextType;
-var ListType = require("./ListType").ListType;
-var SetType = require("./SetType").SetType;
-var NullType = require("./NullType").NullType;
-var AnyType = require("./AnyType").AnyType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var NullValue = require("../value/NullValue").NullValue;
-var TextValue = require("../value/TextValue").TextValue;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var MethodDeclarationMap = null;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
-var DocumentValue = null;
-var Document = require("../intrinsic/Document").Document;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-var List = require("../intrinsic/List").List;
-var ArgumentList = null;
-var Argument = null;
-var MethodCall = null;
-var MethodSelector = null;
-var compareValues = require("../utils/Utils").compareValues;
-var equalArrays = require("../utils/Utils").equalArrays;
+const MissingType = require("./MissingType").MissingType;
+const NativeType = require("./NativeType").NativeType;
+const IntegerType = require("./IntegerType").IntegerType;
+const TextType = require("./TextType").TextType;
+const ListType = require("./ListType").ListType;
+const SetType = require("./SetType").SetType;
+const NullType = require("./NullType").NullType;
+const AnyType = require("./AnyType").AnyType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const NullValue = require("../value/NullValue").NullValue;
+const TextValue = require("../value/TextValue").TextValue;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+let MethodDeclarationMap = null;
+const ValueExpression = require("../expression/ValueExpression").ValueExpression;
+let DocumentValue = null;
+const Document = require("../intrinsic/Document").Document;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const List = require("../intrinsic/List").List;
+let ArgumentList = null;
+let Argument = null;
+let MethodCall = null;
+let MethodSelector = null;
+const compareValues = require("../utils/Utils").compareValues;
+const equalArrays = require("../utils/Utils").equalArrays;
 
 exports.resolve = () => {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -167,8 +167,8 @@ class DocumentType extends NativeType {
     declareSorted(transpiler, key) {
         if (key == null)
             key = new TextLiteral('"key"');
-        var keyname = key.toString();
-        var decl = this.findGlobalMethod(transpiler.context, keyname, true);
+        const keyname = key.toString();
+        const decl = this.findGlobalMethod(transpiler.context, keyname, true);
         if (decl != null) {
             decl.declare(transpiler);
         } else {
@@ -180,8 +180,8 @@ class DocumentType extends NativeType {
     transpileSortedComparator(transpiler, key, desc) {
         if (key == null)
             key = new TextLiteral('"key"');
-        var keyname = key.toString();
-        var decl = this.findGlobalMethod(transpiler.context, keyname, false);
+        const keyname = key.toString();
+        const decl = this.findGlobalMethod(transpiler.context, keyname, false);
         if (decl != null) {
             this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
         } else if (key instanceof TextLiteral) {
@@ -244,9 +244,9 @@ class DocumentType extends NativeType {
     }
 
     readJSONValue(context, node, parts) {
-        var instance = new DocumentValue();
-        for (var key in node) {
-            var value = this.readJSONField(context, node[key], parts);
+        const instance = new DocumentValue();
+        for (const key in node) {
+            const value = this.readJSONField(context, node[key], parts);
             instance.setMember(context, key, value);
         }
         return instance;
@@ -275,8 +275,8 @@ class DocumentType extends NativeType {
         key = key || null;
         if (key == null)
             key = new TextLiteral('"key"');
-        var keyname = key.toString();
-        var call = this.findGlobalMethod(context, keyname, true);
+        const keyname = key.toString();
+        const call = this.findGlobalMethod(context, keyname, true);
         if (call) {
             return this.getGlobalMethodSortedComparator(context, call, desc);
         } else if (key instanceof TextLiteral) {
@@ -288,47 +288,47 @@ class DocumentType extends NativeType {
 
     /* look for a method which takes Document as sole parameter */
     findGlobalMethod(context, name, returnCall) {
-        var methods = context.getRegisteredDeclaration(name);
+        const methods = context.getRegisteredDeclaration(name);
         if (!(methods instanceof MethodDeclarationMap))
             return null;
         else if (!methods.protos[DocumentType.instance.name])
             return null;
         else if (returnCall) {
-            var exp = new ValueExpression(this, new DocumentValue());
-            var arg = new Argument(null, exp);
-            var args = new ArgumentList([arg]);
+            const exp = new ValueExpression(this, new DocumentValue());
+            const arg = new Argument(null, exp);
+            const args = new ArgumentList([arg]);
             return new MethodCall(new MethodSelector(null, new Identifier(name)), args);
         } else
             return methods.protos[DocumentType.instance.name];
     }
 
     getGlobalMethodSortedComparator(context, call, desc) {
-        var cmp = function (o1, o2) {
-            var argument = call.args[0];
+        const cmp = function (o1, o2) {
+            const argument = call.args[0];
             argument._expression = new ValueExpression(this, o1);
-            var value1 = call.interpret(context);
+            const value1 = call.interpret(context);
             argument._expression = new ValueExpression(this, o2);
-            var value2 = call.interpret(context);
+            const value2 = call.interpret(context);
             return compareValues(value1, value2);
         };
         return cmp.bind(this);
     }
 
     getEntrySortedComparator(context, key, desc) {
-        var name = key.value.getStorableData();
+        const name = key.value.getStorableData();
         return (o1, o2) => {
-            var value1 = o1.getMemberValue(context, name);
-            var value2 = o2.getMemberValue(context, name);
+            const value1 = o1.getMemberValue(context, name);
+            const value2 = o2.getMemberValue(context, name);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }
 
     getExpressionSortedComparator(context, expression, desc) {
         return (o1, o2) => {
-            var ctx = context.newDocumentContext(o1, false);
-            var value1 = expression.interpret(ctx);
+            let ctx = context.newDocumentContext(o1, false);
+            const value1 = expression.interpret(ctx);
             ctx = context.newDocumentContext(o2, false);
-            var value2 = expression.interpret(ctx);
+            const value2 = expression.interpret(ctx);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }

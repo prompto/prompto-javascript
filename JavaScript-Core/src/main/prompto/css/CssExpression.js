@@ -1,5 +1,5 @@
-var CssType = require("../type/CssType").CssType;
-var CssValue = require("../value/CssValue").CssValue;
+const CssType = require("../type/CssType").CssType;
+const CssValue = require("../value/CssValue").CssValue;
 
 class CssExpression {
     constructor() {

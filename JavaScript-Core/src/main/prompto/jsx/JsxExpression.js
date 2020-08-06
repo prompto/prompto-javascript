@@ -1,6 +1,6 @@
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var IJsxExpression = require("./IJsxExpression").IJsxExpression;
-var Literal = require("../literal/Literal").Literal;
+const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+const IJsxExpression = require("./IJsxExpression").IJsxExpression;
+const Literal = require("../literal/Literal").Literal;
 
 class JsxExpression extends IJsxExpression {
     constructor(expression) {

@@ -1,7 +1,7 @@
-var Literal = require("./Literal").Literal;
-var PeriodType = require("../type/PeriodType").PeriodType;
-var PeriodValue = require("../value/PeriodValue").PeriodValue;
-var Period = require("../intrinsic/Period").Period;
+const Literal = require("./Literal").Literal;
+const PeriodType = require("../type/PeriodType").PeriodType;
+const PeriodValue = require("../value/PeriodValue").PeriodValue;
+const Period = require("../intrinsic/Period").Period;
 
 class PeriodLiteral extends Literal {
     constructor(text) {

@@ -1,4 +1,4 @@
-var SymbolList = require("./SymbolList").SymbolList;
+const SymbolList = require("./SymbolList").SymbolList;
 
 class CategorySymbolList extends SymbolList {
     constructor(symbol) {

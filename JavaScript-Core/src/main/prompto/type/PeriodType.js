@@ -1,8 +1,8 @@
-var NativeType = require("./NativeType").NativeType;
-var IntegerType = require("./IntegerType").IntegerType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Period = require("../intrinsic/Period").Period;
-var PeriodValue = require("../value/PeriodValue").PeriodValue;
+const NativeType = require("./NativeType").NativeType;
+const IntegerType = require("./IntegerType").IntegerType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Period = require("../intrinsic/Period").Period;
+const PeriodValue = require("../value/PeriodValue").PeriodValue;
 
 class PeriodType extends NativeType {
     constructor() {

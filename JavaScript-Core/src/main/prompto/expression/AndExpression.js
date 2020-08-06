@@ -1,7 +1,7 @@
-var Expression = require("./Expression").Expression;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var Dialect = require("../parser/Dialect").Dialect;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
+const Expression = require("./Expression").Expression;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const Dialect = require("../parser/Dialect").Dialect;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 class AndExpression extends Expression {
   
@@ -38,8 +38,8 @@ class AndExpression extends Expression {
     }
 
     check(context) {
-        var lt = this.left.check(context);
-        var rt = this.right.check(context);
+        const lt = this.left.check(context);
+        const rt = this.right.check(context);
         return lt.checkAnd(context, rt);
     }
 
@@ -57,10 +57,10 @@ class AndExpression extends Expression {
     }
 
     interpret(context) {
-        var lval = this.left.interpret(context);
+        const lval = this.left.interpret(context);
         if(lval instanceof BooleanValue && !lval.value)
             return lval;
-        var rval = this.right.interpret(context);
+        const rval = this.right.interpret(context);
         return lval.And(rval);
     }
 
@@ -76,20 +76,20 @@ class AndExpression extends Expression {
     }
 
     interpretAssert(context, test) {
-        var lval = this.left.interpret(context);
-        var rval = lval;
+        const lval = this.left.interpret(context);
+        let rval = lval;
         if(lval instanceof BooleanValue && lval.value)
             rval = this.right.interpret(context);
         if(rval==BooleanValue.TRUE)
             return true;
-        var expected = this.getExpected(context, test.dialect);
-        var actual = lval.toString() + this.operatorToDialect(test.dialect) + rval.toString();
+        const expected = this.getExpected(context, test.dialect);
+        const actual = lval.toString() + this.operatorToDialect(test.dialect) + rval.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(dialect, context);
+        const writer = new CodeWriter(dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();

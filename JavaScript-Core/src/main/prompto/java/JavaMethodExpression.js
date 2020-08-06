@@ -1,5 +1,5 @@
-var JavaSelectorExpression = require("./JavaSelectorExpression").JavaSelectorExpression;
-var JavaExpressionList = require("./JavaExpressionList").JavaExpressionList;
+const JavaSelectorExpression = require("./JavaSelectorExpression").JavaSelectorExpression;
+const JavaExpressionList = require("./JavaExpressionList").JavaExpressionList;
 
 class JavaMethodExpression extends JavaSelectorExpression {
     constructor(name, args) {

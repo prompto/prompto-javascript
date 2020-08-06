@@ -1,4 +1,4 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
+const BaseStatement = require("./BaseStatement").BaseStatement;
 
 class WithSingletonStatement extends BaseStatement {
     constructor(type, statements) {
@@ -9,16 +9,16 @@ class WithSingletonStatement extends BaseStatement {
     }
 
     check(context) {
-        var instanceContext = context.newInstanceContext(null, this.type, true);
-        var childContext = instanceContext.newChildContext();
+        const instanceContext = context.newInstanceContext(null, this.type, true);
+        const childContext = instanceContext.newChildContext();
         return this.statements.check(childContext, null);
     }
 
     interpret(context) {
         // TODO synchronize
-        var instance = context.loadSingleton(this.type);
-        var instanceContext = context.newInstanceContext(instance, null, true);
-        var childContext = instanceContext.newChildContext();
+        const instance = context.loadSingleton(this.type);
+        const instanceContext = context.newInstanceContext(instance, null, true);
+        const childContext = instanceContext.newChildContext();
         return this.statements.interpret(childContext);
     }
 
@@ -30,8 +30,8 @@ class WithSingletonStatement extends BaseStatement {
     }
 
     transpile(transpiler) {
-        var instance = transpiler.newInstanceTranspiler(this.type);
-        var child = instance.newChildTranspiler();
+        const instance = transpiler.newInstanceTranspiler(this.type);
+        const child = instance.newChildTranspiler();
         this.statements.transpile(child);
         child.flush();
         instance.flush();
@@ -54,7 +54,7 @@ class WithSingletonStatement extends BaseStatement {
         writer.append("with (");
         this.type.toDialect(writer);
         writer.append(")");
-        var oneLine = this.statements.length==1 && this.statements[0].isSimple();
+        const oneLine = this.statements.length==1 && this.statements[0].isSimple();
         if(!oneLine)
             writer.append(" {");
         writer.newLine().indent();

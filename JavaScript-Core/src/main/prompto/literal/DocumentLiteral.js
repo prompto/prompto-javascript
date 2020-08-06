@@ -1,14 +1,14 @@
-var Literal = require("./Literal").Literal;
-var Document = require("../intrinsic/Document").Document;
-var DocEntryList = require("./DocEntryList").DocEntryList;
-var DocumentValue = require("../value/DocumentValue").DocumentValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextType = require("../type/TextType").TextType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var TextValue = require("../value/TextValue").TextValue;
+const Literal = require("./Literal").Literal;
+const Document = require("../intrinsic/Document").Document;
+const DocEntryList = require("./DocEntryList").DocEntryList;
+const DocumentValue = require("../value/DocumentValue").DocumentValue;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const DocumentType = require("../type/DocumentType").DocumentType;
+const CharacterType = require("../type/CharacterType").CharacterType;
+const TextType = require("../type/TextType").TextType;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const TextValue = require("../value/TextValue").TextValue;
 
 
 // we can only compute keys by evaluating key expressions in context
@@ -42,10 +42,10 @@ class DocumentLiteral extends Literal {
     interpret(context) {
         if(this.entries.items.length>0) {
             this.check(context); /// force computation of itemType
-            var doc = new Document();
+            const doc = new Document();
             this.entries.items.forEach(function(entry) {
-                var key = entry.key.interpret(context);
-                var val = entry.value.interpret(context);
+                const key = entry.key.interpret(context);
+                let val = entry.value.interpret(context);
                 val = this.interpretPromotion(val);
                 doc[key] = val;
             }, this);

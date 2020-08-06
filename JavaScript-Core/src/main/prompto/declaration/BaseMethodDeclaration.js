@@ -1,8 +1,8 @@
-var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var ParameterList = require("../param/ParameterList").ParameterList;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
-var ProblemListener = require("../problem/ProblemListener").ProblemListener;
+const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
+const ParameterList = require("../param/ParameterList").ParameterList;
+const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+const Argument = require("../grammar/Argument").Argument;
+const ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
 
 class BaseMethodDeclaration extends BaseDeclaration {
@@ -20,7 +20,7 @@ class BaseMethodDeclaration extends BaseDeclaration {
     }
 
     getSignature(context) {
-        var s = [];
+        const s = [];
         this.parameters.map(arg => {
             s.push(arg.getProto());
         });
@@ -76,16 +76,16 @@ class BaseMethodDeclaration extends BaseDeclaration {
     }
 
     isAssignableTo(context, args, checkInstance, allowDerived) {
-        var listener = context.problemListener;
+        const listener = context.problemListener;
         try {
             context.problemListener = new ProblemListener();
-            var local = context.newLocalContext();
+            const local = context.newLocalContext();
             this.registerParameters(local);
-            var argsList = new ArgumentList(args);
-            for(var i=0; i<this.parameters.length; i++) {
-                var parameter = this.parameters[i];
-                var idx = argsList.findIndex(parameter.id.name);
-                var argument = idx>=0 ? argsList[idx] : null;
+            const argsList = new ArgumentList(args);
+            for(let i=0; i<this.parameters.length; i++) {
+                const parameter = this.parameters[i];
+                const idx = argsList.findIndex(parameter.id.name);
+                let argument = idx>=0 ? argsList[idx] : null;
                 if(argument==null) { // missing argument
                     if(parameter.defaultExpression!=null)
                         argument = new Argument(parameter, parameter.defaultExpression);

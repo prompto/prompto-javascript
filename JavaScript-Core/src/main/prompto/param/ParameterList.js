@@ -1,10 +1,10 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var CodeParameter = require("./CodeParameter").CodeParameter;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const CodeParameter = require("./CodeParameter").CodeParameter;
 
 class ParameterList extends ObjectList {
     constructor() {
         super();
-        for (var i=0; i < arguments.length; i++) {
+        for (let i=0; i < arguments.length; i++) {
             this.add(arguments[i]);
         }
         return this;
@@ -40,7 +40,7 @@ class ParameterList extends ObjectList {
 
     toEDialect(writer) {
         writer.append("receiving ");
-        for(var i=0;i<this.length-1;i++) {
+        for(let i=0;i<this.length-1;i++) {
             this[i].toDialect(writer);
             writer.append(", ");
         }
@@ -67,7 +67,7 @@ class ParameterList extends ObjectList {
     }
 
     transpile(transpiler) {
-        var args = this.filter(arg => !(arg instanceof CodeParameter))
+        const args = this.filter(arg => !(arg instanceof CodeParameter));
         if(args.length>0) {
             args.forEach(arg => {
                 arg.transpile(transpiler);

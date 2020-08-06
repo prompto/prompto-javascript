@@ -1,7 +1,7 @@
-var RangeValue = require("./RangeValue").RangeValue;
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-var CharacterValue = null;
-var CharacterType = null;
+const RangeValue = require("./RangeValue").RangeValue;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+let CharacterValue = null;
+let CharacterType = null;
 
 exports.resolve = () => {
     CharacterValue = require("./CharacterValue").CharacterValue;
@@ -19,7 +19,7 @@ class CharacterRange extends RangeValue {
     }
 
     getItem(index) {
-        var result = this.low.value.charCodeAt(0) + index - 1;
+        const result = this.low.value.charCodeAt(0) + index - 1;
         if(result>this.high.value.charCodeAt(0)) {
             throw new IndexOutOfRangeError();
         } else {

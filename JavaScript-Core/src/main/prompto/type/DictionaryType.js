@@ -1,14 +1,14 @@
-var Identifier = require("../grammar/Identifier").Identifier;
-var ContainerType = require("./ContainerType").ContainerType;
-var BooleanType = require("./BooleanType").BooleanType;
-var IntegerType = require("./IntegerType").IntegerType;
-var TextType = require("./TextType").TextType;
-var SetType = require("./SetType").SetType;
-var ListType = require("./ListType").ListType;
-var EntryType = require("./EntryType").EntryType;
-var List = require("../intrinsic/List").List;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-var Dictionary = require("../intrinsic/Dictionary").Dictionary;
+const Identifier = require("../grammar/Identifier").Identifier;
+const ContainerType = require("./ContainerType").ContainerType;
+const BooleanType = require("./BooleanType").BooleanType;
+const IntegerType = require("./IntegerType").IntegerType;
+const TextType = require("./TextType").TextType;
+const SetType = require("./SetType").SetType;
+const ListType = require("./ListType").ListType;
+const EntryType = require("./EntryType").EntryType;
+const List = require("../intrinsic/List").List;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const Dictionary = require("../intrinsic/Dictionary").Dictionary;
 
 
 class DictionaryType extends ContainerType {
@@ -184,7 +184,7 @@ class DictionaryType extends ContainerType {
 
     getMemberMethods(context, name) {
         if (name === "swap" ) {
-            var SwapMethodDeclaration = require("../builtins/DictionaryTypeBuiltins").SwapMethodDeclaration;
+            const SwapMethodDeclaration = require("../builtins/DictionaryTypeBuiltins").SwapMethodDeclaration;
             return [new SwapMethodDeclaration()];
         } else
             return ContainerType.prototype.getMemberMethods.call(context, name);

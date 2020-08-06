@@ -1,10 +1,10 @@
-var CategoryType = require("../type/CategoryType").CategoryType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TypeUtils = require("../utils/TypeUtils");
-var Instance = require("./Value").Instance;
-var $DataStore = require("../store/DataStore").$DataStore;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var Variable = require("../runtime/Variable").Variable;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const TypeUtils = require("../utils/TypeUtils");
+const Instance = require("./Value").Instance;
+const $DataStore = require("../store/DataStore").$DataStore;
+const NotMutableError = require("../error/NotMutableError").NotMutableError;
+const Variable = require("../runtime/Variable").Variable;
 
 class NativeInstance extends Instance {
     constructor(context, declaration, instance) {
@@ -12,7 +12,7 @@ class NativeInstance extends Instance {
         this.declaration = declaration;
         this.storable = false;
         if(declaration.storable && $DataStore.instance) {
-            var categories = declaration.collectCategories(context);
+            const categories = declaration.collectCategories(context);
             this.storable = $DataStore.instance.newStorableDocument(categories, null);
         }
         this.instance = instance || this.makeInstance();
@@ -20,7 +20,7 @@ class NativeInstance extends Instance {
     }
 
     makeInstance() {
-        var bound = this.declaration.getBoundFunction(true);
+        const bound = this.declaration.getBoundFunction(true);
         return new bound();
     }
 
@@ -31,8 +31,8 @@ class NativeInstance extends Instance {
     getMemberValue(context, attrName) {
         if("category" === attrName)
             return this.getCategory(context);
-        var stacked = getActiveGetters()[attrName] || null;
-        var first = stacked==null;
+        const stacked = getActiveGetters()[attrName] || null;
+        const first = stacked==null;
         if(first)
             getActiveGetters()[attrName] = context;
         try {
@@ -45,17 +45,17 @@ class NativeInstance extends Instance {
     }
 
     getCategory(context) {
-        var decl = context.getRegisteredDeclaration(new Identifier("Category"));
+        const decl = context.getRegisteredDeclaration(new Identifier("Category"));
         return new NativeInstance(context, decl, this.declaration);
     }
 
     doGetMember(context, attrName, allowGetter) {
-        var getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
+        const getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
         if(getter!=null) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
         } else {
-            var value = this.instance[attrName];
+            const value = this.instance[attrName];
             return TypeUtils.convertFromJavaScript(value);
         }
     }
@@ -63,8 +63,8 @@ class NativeInstance extends Instance {
     setMember(context, attrName, value) {
         if(!this.mutable)
             throw new NotMutableError();
-        var stacked = getActiveSetters()[attrName] || null;
-        var first = stacked==null;
+        const stacked = getActiveSetters()[attrName] || null;
+        const first = stacked==null;
         if(first)
             getActiveSetters()[attrName] = context;
         try {
@@ -77,8 +77,8 @@ class NativeInstance extends Instance {
     }
 
     doSetMember(context, attrName, value, allowSetter) {
-        var decl = context.getRegisteredDeclaration(attrName);
-        var setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
+        const decl = context.getRegisteredDeclaration(attrName);
+        const setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
         if(setter!=null) {
             // use attribute name as parameter name for incoming value
             context = context.newInstanceContext(this, null).newChildContext();
@@ -95,14 +95,14 @@ class NativeInstance extends Instance {
 // don't call getters from getters, so register them
 // TODO: thread local storage
 
-var activeGetters = {};
+const activeGetters = {};
 
 function getActiveGetters() {
     return activeGetters;
 }
 
 // don't call setters from setters, so register them
-var activeSetters = {};
+const activeSetters = {};
 
 function getActiveSetters() {
     return activeSetters;

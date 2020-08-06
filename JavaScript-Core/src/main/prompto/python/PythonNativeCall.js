@@ -1,4 +1,4 @@
-var NativeCall = require("../statement/NativeCall").NativeCall;
+const NativeCall = require("../statement/NativeCall").NativeCall;
 
 class PythonNativeCall extends NativeCall {
     constructor(statement) {

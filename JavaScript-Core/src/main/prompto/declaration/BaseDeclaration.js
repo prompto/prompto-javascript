@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+const Section = require("../parser/Section").Section;
 
 class BaseDeclaration extends Section {
 
@@ -27,7 +27,7 @@ class BaseDeclaration extends Section {
     }
 
     fetchBody(parser) {
-        var section = null;
+        let section = null;
         if(section==null && this.comments && this.comments.length > 0)
             section = this.comments[0];
         if(section==null && this.annotations && this.annotations.length > 0)

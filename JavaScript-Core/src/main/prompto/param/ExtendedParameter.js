@@ -1,8 +1,8 @@
-var CategoryParameter = require("./CategoryParameter").CategoryParameter;
-var IdentifierList = require("../grammar/IdentifierList").IdentifierList;
-var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var ConcreteCategoryDeclaration = null;
-var utils = require("../utils/index");
+const CategoryParameter = require("./CategoryParameter").CategoryParameter;
+const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
+let ConcreteCategoryDeclaration = null;
+const utils = require("../utils/index");
 
 exports.resolve = () => {
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
@@ -35,11 +35,11 @@ class ExtendedParameter extends CategoryParameter {
     }
 
     register(context) {
-        var actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.name);
         if(actual!==null) {
             throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
         }
-        var declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(this.type.id), null);
+        const declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(this.type.id), null);
         context.registerDeclaration(declaration);
         context.registerValue(this);
         if(this.defaultExpression!=null)
@@ -50,7 +50,7 @@ class ExtendedParameter extends CategoryParameter {
         this.type.checkExists(context);
         if(this.attributes!==null) {
             this.attributes.forEach(attr => {
-                var actual = context.getRegisteredDeclaration(attr);
+                const actual = context.getRegisteredDeclaration(attr);
                 if (!(actual instanceof AttributeDeclaration)) {
                     throw new SyntaxError("Unknown attribute: \"" + attr + "\"");
                 }
@@ -59,7 +59,7 @@ class ExtendedParameter extends CategoryParameter {
     }
 
     getType(context) {
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         return decl ? decl.getType(context) : this.type;
     }
 

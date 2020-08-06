@@ -1,4 +1,4 @@
-var NamedInstance = require("../grammar/NamedInstance").NamedInstance;
+const NamedInstance = require("../grammar/NamedInstance").NamedInstance;
 
 class Variable extends NamedInstance {
 

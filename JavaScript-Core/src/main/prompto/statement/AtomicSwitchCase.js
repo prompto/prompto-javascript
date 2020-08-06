@@ -1,5 +1,5 @@
-var SwitchCase = require("./SwitchCase").SwitchCase;
-var VoidType = require("../type/VoidType").VoidType;
+const SwitchCase = require("./SwitchCase").SwitchCase;
+const VoidType = require("../type/VoidType").VoidType;
 
 class AtomicSwitchCase extends SwitchCase {
     constructor(expression, statements) {
@@ -8,14 +8,14 @@ class AtomicSwitchCase extends SwitchCase {
     }
 
     checkSwitchType(context, type) {
-        var thisType = this.expression ? this.expression.check(context) : VoidType.instnce;
+        const thisType = this.expression ? this.expression.check(context) : VoidType.instnce;
         if(!type.isAssignableFrom(context, thisType)) {
             context.problemListener.reportIncompatibleTypes(this, type, thisType);
         }
     }
 
     matches(context, value) {
-        var thisValue = this.expression.interpret(context);
+        const thisValue = this.expression.interpret(context);
         return value.equals(thisValue);
     }
 

@@ -1,11 +1,11 @@
-var CategoryType = require("../type/CategoryType").CategoryType;
-var CursorType = require("../type/CursorType").CursorType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var Value = require("./Value").Value;
-var ListValue = require("./ListValue").ListValue;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var IteratorValue = require("./IteratorValue").IteratorValue;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const CursorType = require("../type/CursorType").CursorType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const Value = require("./Value").Value;
+const ListValue = require("./ListValue").ListValue;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const IteratorValue = require("./IteratorValue").IteratorValue;
 
 class CursorValue extends Value {
     constructor(context, itemType, iterable) {
@@ -29,7 +29,7 @@ class CursorValue extends Value {
     }
 
     toString() {
-        var list = [];
+        const list = [];
         while(this.hasNext())
             list.push(this.next().toString());
         return '[' + list.join(", ") + ']';
@@ -40,9 +40,9 @@ class CursorValue extends Value {
     }
 
     readItemType(stored) {
-        var categories = stored["category"] || null;
-        var category = categories[categories.length-1];
-        var typ = new CategoryType(new Identifier(category));
+        const categories = stored["category"] || null;
+        const category = categories[categories.length-1];
+        const typ = new CategoryType(new Identifier(category));
         typ.mutable = this.mutable;
         return typ;
     }
@@ -57,10 +57,10 @@ class CursorValue extends Value {
     }
 
     filter(filter) {
-        var result = new ListValue(this.type.itemType);
-        var iter = this.getIterator();
+        const result = new ListValue(this.type.itemType);
+        const iter = this.getIterator();
         while(iter.hasNext()) {
-            var current = iter.next();
+            const current = iter.next();
             if (filter(current))
                 result.add(current);
         }
@@ -68,8 +68,8 @@ class CursorValue extends Value {
     }
 
     toListValue(context) {
-        var result = new ListValue(this.type.itemType);
-        var iter = this.getIterator();
+        const result = new ListValue(this.type.itemType);
+        const iter = this.getIterator();
         while(iter.hasNext())
             result.add(iter.next());
         return result;
@@ -84,8 +84,8 @@ class CursorIterator extends IteratorValue {
     }
 
     next() {
-        var stored = this.iterator.next();
-        var itemType = this.cursor.readItemType(stored);
+        const stored = this.iterator.next();
+        const itemType = this.cursor.readItemType(stored);
         return itemType.newInstanceFromStored(this.cursor.context, stored);
     }
 }

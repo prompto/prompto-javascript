@@ -1,4 +1,4 @@
-var JavaExpression = require("./JavaExpression").JavaExpression;
+const JavaExpression = require("./JavaExpression").JavaExpression;
 
 class JavaIdentifierExpression extends JavaExpression {
     constructor(parent, identifier, isChildClass) {
@@ -10,7 +10,7 @@ class JavaIdentifierExpression extends JavaExpression {
     }
 
     parse(ids) {
-        var result = null;
+        let result = null;
         ids.split("\\.").forEach(part => {
             result = new JavaIdentifierExpression(result, part);
         });

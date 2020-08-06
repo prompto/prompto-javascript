@@ -1,5 +1,5 @@
-var NullType = require("../type/NullType").NullType;
-var NullValue = require("../value/NullValue").NullValue;
+const NullType = require("../type/NullType").NullType;
+const NullValue = require("../value/NullValue").NullValue;
 
 class NullLiteral {
     constructor() {

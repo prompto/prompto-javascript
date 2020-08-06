@@ -1,15 +1,15 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var PeriodType = require("./PeriodType").PeriodType;
-var TimeType = require("./TimeType").TimeType;
-var DateTimeType = require("./DateTimeType").DateTimeType;
-var IntegerType = require("./IntegerType").IntegerType;
-var RangeType = require("./RangeType").RangeType;
-var DateRange = require("../value/DateRange").DateRange;
-var DateValue = require("../value/DateValue").DateValue;
-var Identifier = require("../grammar/Identifier").Identifier;
-var LocalDate = require("../intrinsic/LocalDate").LocalDate;
-var DateTime = require("../intrinsic/DateTime").DateTime;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const PeriodType = require("./PeriodType").PeriodType;
+const TimeType = require("./TimeType").TimeType;
+const DateTimeType = require("./DateTimeType").DateTimeType;
+const IntegerType = require("./IntegerType").IntegerType;
+const RangeType = require("./RangeType").RangeType;
+const DateRange = require("../value/DateRange").DateRange;
+const DateValue = require("../value/DateValue").DateValue;
+const Identifier = require("../grammar/Identifier").Identifier;
+const LocalDate = require("../intrinsic/LocalDate").LocalDate;
+const DateTime = require("../intrinsic/DateTime").DateTime;
 
 class DateType extends NativeType {
  
@@ -135,7 +135,7 @@ class DateType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === DateType.instance) {
-            var module = require("../intrinsic/Range");
+            const module = require("../intrinsic/Range");
             transpiler.require(module.Range);
             transpiler.require(module.DateRange);
         } else {

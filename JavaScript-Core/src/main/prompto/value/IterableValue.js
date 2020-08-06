@@ -1,8 +1,8 @@
-var IteratorType = require("../type/IteratorType").IteratorType;
-var Variable = require("../runtime/Variable").Variable;
-var Value = require("./Value").Value;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var ListValue = require("./ListValue").ListValue;
+const IteratorType = require("../type/IteratorType").IteratorType;
+const Variable = require("../runtime/Variable").Variable;
+const Value = require("./Value").Value;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const ListValue = require("./ListValue").ListValue;
 
 class IterableValue extends Value {
     constructor(context, name, itemType, source, length, expression) {
@@ -33,7 +33,7 @@ class IterableValue extends Value {
     }
 
     next() {
-        var child = this.context.newChildContext();
+        const child = this.context.newChildContext();
         child.registerValue(new Variable(this.name, this.itemType));
         child.setValue(this.name, this.source.next());
         return this.expression.interpret(child);
@@ -47,21 +47,21 @@ class IterableValue extends Value {
     }
 
     filter(filter) {
-        var list = this.toListValue();
+        const list = this.toListValue();
         return list.filter(filter);
     }
 
     toListValue() {
-        var items = [];
-        var iterator = this.getIterator();
+        const items = [];
+        const iterator = this.getIterator();
         while(iterator.hasNext())
             items.push(iterator.next());
         return new ListValue(this.itemType, items);
     }
 
     toString() {
-        var values = [];
-        var iterator = this.getIterator();
+        const values = [];
+        const iterator = this.getIterator();
         while(iterator.hasNext())
             values.push(iterator.next());
         return values.join(", ");

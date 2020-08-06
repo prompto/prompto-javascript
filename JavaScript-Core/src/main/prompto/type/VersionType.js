@@ -1,8 +1,8 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Version = require("../intrinsic/Version").Version;
-var VersionValue = require("../value/VersionValue").VersionValue;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Version = require("../intrinsic/Version").Version;
+const VersionValue = require("../value/VersionValue").VersionValue;
 
 class VersionType extends NativeType {
     constructor() {

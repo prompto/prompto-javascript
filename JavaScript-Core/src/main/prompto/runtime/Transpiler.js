@@ -1,8 +1,8 @@
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var List = require("../intrinsic/List").List;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+const List = require("../intrinsic/List").List;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
-var coreNodeClasses = new Set(["Socket"]);
+const coreNodeClasses = new Set(["Socket"]);
 
 class Transpiler {
 
@@ -25,7 +25,7 @@ class Transpiler {
     }
 
     copyTranspiler(context) {
-        var transpiler = new Transpiler(context);
+        const transpiler = new Transpiler(context);
         transpiler.declared = this.declared;
         transpiler.required = this.required;
         transpiler.registered = this.registered;
@@ -38,7 +38,7 @@ class Transpiler {
     }
 
     newLocalTranspiler() {
-        var context = this.context.newLocalContext();
+        const context = this.context.newLocalContext();
         return this.copyTranspiler(context);
     }
 
@@ -49,29 +49,29 @@ class Transpiler {
     }
 
     newResourceTranspiler() {
-        var context = this.context.newResourceContext();
+        const context = this.context.newResourceContext();
         return this.copyTranspiler(context);
     }
 
     newGetterTranspiler(name) {
-        var transpiler = this.newChildTranspiler();
+        const transpiler = this.newChildTranspiler();
         transpiler.getterName = name;
         return transpiler;
     }
 
     newSetterTranspiler(name) {
-        var transpiler = this.newChildTranspiler();
+        const transpiler = this.newChildTranspiler();
         transpiler.setterName = name;
         return transpiler;
     }
 
     newInstanceTranspiler(type) {
-        var context = this.context.newInstanceContext(null, type, true);
+        const context = this.context.newInstanceContext(null, type, true);
         return this.copyTranspiler(context);
     }
 
     newDocumentTranspiler() {
-        var context = this.context.newDocumentContext(null, false);
+        const context = this.context.newDocumentContext(null, false);
         return this.copyTranspiler(context);
     }
 
@@ -88,8 +88,8 @@ class Transpiler {
     }
 
     appendAllDeclared() {
-        var list = [];
-        var set = new Set();
+        const list = [];
+        const set = new Set();
         this.declared.forEach(function(decl) {
             if(decl instanceof CategoryDeclaration)
                 decl.ensureDeclarationOrder(this.context, list, set);
@@ -102,7 +102,7 @@ class Transpiler {
     }
 
     appendOneDeclared(decl) {
-        var transpiler = this.newLocalTranspiler();
+        const transpiler = this.newLocalTranspiler();
         decl.transpile(transpiler);
         transpiler.flush();
         if(this.line!==this.indents) {
@@ -150,19 +150,19 @@ class Transpiler {
             this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
         }, this);
         if(fn.prototype.__proto__) {
-            var proto = fn.prototype.__proto__;
+            const proto = fn.prototype.__proto__;
             if(proto.constructor.name!=="Object")
                 this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
         }
         Object.keys(fn.prototype).forEach(function (key) {
-            var value = key==="constructor" ? fn.name : fn.prototype[key].toString();
+            const value = key==="constructor" ? fn.name : fn.prototype[key].toString();
             if(value.indexOf("native code")<0)
                 this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
             else // for now assume this is a redirect on the same type
                 this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
         }, this);
         Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
-            var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
+            const desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
             if(desc.get || desc.set) {
                 this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
                 if(desc.get) {
@@ -224,7 +224,7 @@ class Transpiler {
     static transpile(context, thing) {
         try {
             patchObject();
-            var transpiler = newTranspiler(context);
+            const transpiler = newTranspiler(context);
             thing.declare(transpiler);
             return transpiler.toString();
         } finally {
@@ -244,8 +244,8 @@ function ObjectUtils() {
 }
 
 ObjectUtils.values = o => {
-    var values = [];
-    for(var name in o) { values.push(o[name]); }
+    const values = [];
+    for(const name in o) { values.push(o[name]); }
     return values;
 };
 
@@ -256,7 +256,7 @@ ObjectUtils.stringSplitToList = function(separator) {
 ObjectUtils.stringHasAll = function(items) {
     if(StrictSet && items instanceof StrictSet)
         items = Array.from(items.set.values());
-    for(var i=0;i<items.length;i++) {
+    for(let i=0;i<items.length;i++) {
         if(!this.includes(items[i]))
             return false;
     }
@@ -267,7 +267,7 @@ ObjectUtils.stringHasAll = function(items) {
 ObjectUtils.stringHasAny = function(items) {
     if(StrictSet && items instanceof StrictSet)
         items = Array.from(items.set.values());
-    for(var i=0;i<items.length;i++) {
+    for(let i=0;i<items.length;i++) {
         if(this.includes(items[i]))
             return true;
     }
@@ -295,14 +295,14 @@ ObjectUtils.stringSlice = function(start, last) {
 };
 
 ObjectUtils.formatInteger = function(format) {
-    var value = "000000000000" + this;
+    const value = "000000000000" + this;
     return value.substr(value.length - format.length);
 };
 
 ObjectUtils.decimalToString = function() {
     // mimic 0.0######
-    var s = this.toString();
-    var i = s.indexOf('.');
+    const s = this.toString();
+    let i = s.indexOf('.');
     if(i>=0) {
         // fix IEEE issue
         i = s.indexOf('000000', i);
@@ -315,7 +315,7 @@ ObjectUtils.decimalToString = function() {
 };
 
 function print(msg) {
-    var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+    const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
     if(isNodeJs)
         process.stdout.write(msg);
     else
@@ -395,8 +395,8 @@ function unpatchObject() {
 }
 
 function newTranspiler(context) {
-    var transpiler = new Transpiler(context);
-    var equalObjects = require("../utils/Utils").equalObjects;
+    const transpiler = new Transpiler(context);
+    const equalObjects = require("../utils/Utils").equalObjects;
     transpiler.require(equalObjects);
     transpiler.require(print);
     transpiler.require(divide);

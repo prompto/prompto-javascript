@@ -1,7 +1,7 @@
-var Literal = require("./Literal").Literal;
-var DateType = require("../type/DateType").DateType;
-var DateValue = require("../value/DateValue").DateValue;
-var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+const Literal = require("./Literal").Literal;
+const DateType = require("../type/DateType").DateType;
+const DateValue = require("../value/DateValue").DateValue;
+const LocalDate = require("../intrinsic/LocalDate").LocalDate;
 
 class DateLiteral extends Literal {
     constructor(text) {

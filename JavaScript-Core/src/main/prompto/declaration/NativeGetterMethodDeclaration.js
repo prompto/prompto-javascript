@@ -1,4 +1,4 @@
-var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
+const GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
 
 class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
     constructor(id, statements) {
@@ -9,7 +9,7 @@ class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
     interpret(context) {
         context.enterMethod(this);
         try {
-            var result = this.statements.interpretNative(context, this.returnType);
+            const result = this.statements.interpretNative(context, this.returnType);
             return this.castToReturnType(context, result);
         } finally {
             context.leaveMethod(this);

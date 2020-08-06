@@ -1,7 +1,7 @@
-var Value = require("./Value").Value;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var TextValue = require("./TextValue").TextValue;
-var PeriodType = null;
+const Value = require("./Value").Value;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const TextValue = require("./TextValue").TextValue;
+let PeriodType = null;
 
 exports.resolve = () => {
     PeriodType = require("../type/PeriodType").PeriodType;

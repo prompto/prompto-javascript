@@ -1,7 +1,7 @@
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Variable = require("../runtime/Variable").Variable;
-var AnyType = require("../type/AnyType").AnyType;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Variable = require("../runtime/Variable").Variable;
+const AnyType = require("../type/AnyType").AnyType;
 
 class MatchingExpressionConstraint {
     constructor(expression) {
@@ -10,11 +10,11 @@ class MatchingExpressionConstraint {
     }
 
     checkValue(context, value) {
-        var child = context.newChildContext();
-        var id = new Identifier("value");
+        const child = context.newChildContext();
+        const id = new Identifier("value");
         child.registerValue(new Variable(id, AnyType.instance));
         child.setValue(id, value);
-        var test = this.expression.interpret(child);
+        const test = this.expression.interpret(child);
         if(!test.value) {
             throw new InvalidDataError((value == null ? "null" : value.toString()) + " does not match:" + this.expression.toString());
         }
@@ -27,7 +27,7 @@ class MatchingExpressionConstraint {
 
     declare(transpiler, name, type) {
         transpiler = transpiler.newChildTranspiler();
-        var id = new Identifier("value");
+        const id = new Identifier("value");
         transpiler.context.registerValue(new Variable(id, type));
         this.expression.declare(transpiler);
         this.transpile = function(transpiler) { this.transpileChecker(transpiler, name, type); };
@@ -37,7 +37,7 @@ class MatchingExpressionConstraint {
     transpileChecker(transpiler, name, type) {
         transpiler.append("function $check_").append(name).append("(value) {").indent();
         transpiler = transpiler.newChildTranspiler();
-        var id = new Identifier("value");
+        const id = new Identifier("value");
         transpiler.context.registerValue(new Variable(id, type));
         transpiler.append("if(");
         this.expression.transpile(transpiler);

@@ -1,8 +1,8 @@
-var Expression = require("./Expression").Expression;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var Dialect = require("../parser/Dialect").Dialect;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var BooleanType = require("../type/BooleanType").BooleanType;
+const Expression = require("./Expression").Expression;
+const CodeWriter = require("../utils/CodeWriter").CodeWriter;
+const Dialect = require("../parser/Dialect").Dialect;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const BooleanType = require("../type/BooleanType").BooleanType;
 
 class NotExpression extends Expression {
  
@@ -37,7 +37,7 @@ class NotExpression extends Expression {
     }
 
     check(context) {
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         if (type)
             return type.checkNot(context);
         else {
@@ -65,16 +65,16 @@ class NotExpression extends Expression {
     }
 
     interpret(context) {
-        var val = this.expression.interpret(context);
+        const val = this.expression.interpret(context);
         return val.Not();
     }
 
     interpretAssert(context, test) {
-        var result = this.interpret(context);
+        const result = this.interpret(context);
         if(result==BooleanValue.TRUE)
             return true;
-        var expected = this.getExpected(context, test.dialect);
-        var actual = this.operatorToDialect(test.dialect) + result.toString();
+        const expected = this.getExpected(context, test.dialect);
+        const actual = this.operatorToDialect(test.dialect) + result.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
@@ -96,7 +96,7 @@ class NotExpression extends Expression {
     }
 
     getExpected(context, dialect, escapeMode) {
-        var writer = new CodeWriter(dialect, context);
+        const writer = new CodeWriter(dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();

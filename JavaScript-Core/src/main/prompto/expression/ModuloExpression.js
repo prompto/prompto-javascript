@@ -1,4 +1,4 @@
-var Expression = require("./Expression").Expression;
+const Expression = require("./Expression").Expression;
 
 class ModuloExpression extends Expression {
     constructor(left, right) {
@@ -19,26 +19,26 @@ class ModuloExpression extends Expression {
     }
 
     check(context) {
-        var lt = this.left.check(context);
-        var rt = this.right.check(context);
+        const lt = this.left.check(context);
+        const rt = this.right.check(context);
         return lt.checkModulo(context, rt);
     }
 
     interpret(context) {
-        var lval = this.left.interpret(context);
-        var rval = this.right.interpret(context);
+        const lval = this.left.interpret(context);
+        const rval = this.right.interpret(context);
         return lval.Modulo(context, rval);
     }
 
     declare(transpiler) {
-        var lt = this.left.check(transpiler.context);
-        var rt = this.right.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
         return lt.declareModulo(transpiler, rt, this.left, this.right);
     }
 
     transpile(transpiler) {
-        var lt = this.left.check(transpiler.context);
-        var rt = this.right.check(transpiler.context);
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
         return lt.transpileModulo(transpiler, rt, this.left, this.right);
     }
 }

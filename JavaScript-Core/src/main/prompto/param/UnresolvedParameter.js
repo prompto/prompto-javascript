@@ -1,9 +1,9 @@
-var ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
-var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var AttributeParameter = require("./AttributeParameter").AttributeParameter;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-var MethodParameter = require("./MethodParameter").MethodParameter;
-var VoidType = require("../type/VoidType").VoidType;
+const ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
+const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
+const AttributeParameter = require("./AttributeParameter").AttributeParameter;
+const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+const MethodParameter = require("./MethodParameter").MethodParameter;
+const VoidType = require("../type/VoidType").VoidType;
 
 class UnresolvedParameter {
   
@@ -66,11 +66,11 @@ class UnresolvedParameter {
         if(this.resolved!=null)
             return;
         // ignore problems during resolution
-        var listener = context.problemListener;
+        const listener = context.problemListener;
         try {
             context.problemListener = new ProblemCollector();
             // try out various solutions
-            var named = context.getRegisteredDeclaration(this.name);
+            const named = context.getRegisteredDeclaration(this.name);
             if (named instanceof AttributeDeclaration) {
                 this.resolved = new AttributeParameter(this.id);
             } else if (named instanceof MethodDeclarationMap) {

@@ -1,5 +1,5 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var MissingType = require("../type/MissingType").MissingType;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const MissingType = require("../type/MissingType").MissingType;
 
 class SymbolList extends ObjectList {
     constructor(symbol) {
@@ -14,7 +14,7 @@ class SymbolList extends ObjectList {
     }
 
     toString() {
-        var names = this.map(s => s.name);
+        const names = this.map(s => s.name);
         return "[" + names.join(", ") + "]";
     }
 }

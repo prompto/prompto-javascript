@@ -1,9 +1,9 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var isWorker = typeof window === 'undefined' && typeof importScripts === 'function';
-var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
-var JavaScriptExpressionList = require("./JavaScriptExpressionList").JavaScriptExpressionList;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var NativeInstance = require("../value/NativeInstance").NativeInstance;
+const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+const isWorker = typeof window === 'undefined' && typeof importScripts === 'function';
+const JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
+const JavaScriptExpressionList = require("./JavaScriptExpressionList").JavaScriptExpressionList;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const NativeInstance = require("../value/NativeInstance").NativeInstance;
 
 class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
     constructor(id, args) {
@@ -18,10 +18,10 @@ class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
     }
 
     interpret(context, module) {
-        var m = this.findInstanceAndMethod(context, module);
+        const m = this.findInstanceAndMethod(context, module);
         if(!m)
             throw new SyntaxError("Could not find function: "+ this.id.name + (module ? " in module: " + module.toString() : ""));
-        var args = this.args.computeArguments(context);
+        const args = this.args.computeArguments(context);
         return m.method.apply(m.instance, args);
     }
 
@@ -51,10 +51,10 @@ class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
     }
 
     interpretNew(context, module) {
-        var m = this.findInstanceAndMethod(context, module);
+        const m = this.findInstanceAndMethod(context, module);
         if(!m)
             throw new SyntaxError("Could not find function: "+ this.id.name);
-        var args = this.args.computeArguments(context);
+        const args = this.args.computeArguments(context);
         return args.length ? new m.method(args) : new m.method();
     }
 
@@ -67,7 +67,7 @@ class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
 
     findInModule(context, module) {
         try {
-            var m = module.resolve();
+            const m = module.resolve();
             if(m[this.id.name])
                 return { instance: null, method: m[this.id.name] };
             else
@@ -78,7 +78,7 @@ class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
     }
 
     findMember(context, module) {
-        var i = this.parent.interpret(context, module)
+        let i = this.parent.interpret(context, module);
         if(i===null) {
             throw "Null reference";
         }
@@ -104,14 +104,14 @@ class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
     }
 }
 
-var stringToFunction = function(str) {
-    var arr = str.split(".");
+function stringToFunction(str) {
+    const arr = str.split(".");
     /* global self, window */
-    var fn = isNodeJs ? this : isWorker ? self : window;
-    for (var i = 0, len = arr.length; i < len; i++) {
+    let fn = isNodeJs ? this : isWorker ? self : window;
+    for (let i = 0, len = arr.length; i < len; i++) {
         fn = fn[arr[i]];
     }
     return fn;
-};
+}
 
 exports.JavaScriptMethodExpression = JavaScriptMethodExpression;

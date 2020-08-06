@@ -1,7 +1,7 @@
-var RangeValue = require("./RangeValue").RangeValue;
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var IntegerType = null;
+const RangeValue = require("./RangeValue").RangeValue;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+let IntegerType = null;
 
 exports.resolve =() => {
     IntegerType = require("../type/IntegerType").IntegerType;
@@ -18,7 +18,7 @@ class IntegerRange extends RangeValue {
     }
 
     getItem(index) {
-        var result = this.low.IntegerValue() + index - 1;
+        const result = this.low.IntegerValue() + index - 1;
         if(result>this.high.IntegerValue()) {
             throw new IndexOutOfRangeError();
         }

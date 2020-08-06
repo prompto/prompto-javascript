@@ -1,8 +1,8 @@
-var Value = require("./Value").Value;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextValue = null; // circular dependency
-var removeAccents = require("../utils/Utils").removeAccents;
+const Value = require("./Value").Value;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const CharacterType = require("../type/CharacterType").CharacterType;
+let TextValue = null; // circular dependency
+const removeAccents = require("../utils/Utils").removeAccents;
 
 exports.resolve = () => {
     TextValue = require("./TextValue").TextValue;
@@ -34,7 +34,7 @@ class CharacterValue extends Value {
     Multiply(context, value) {
         if (value instanceof IntegerValue) {
             try {
-                var text = this.value.repeat(value.value);
+                const text = this.value.repeat(value.value);
                 return new TextValue(text);
             } catch(error) {
                 throw new SyntaxError("Negative repeat count:" + value.value);
@@ -81,7 +81,7 @@ class CharacterValue extends Value {
     }
 }
 
-var whitespace = [];
+const whitespace = [];
 whitespace[" ".charCodeAt(0)] = true;
 whitespace["\t".charCodeAt(0)] = true;
 whitespace["\r".charCodeAt(0)] = true;

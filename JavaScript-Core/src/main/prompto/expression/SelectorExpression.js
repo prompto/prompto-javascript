@@ -1,5 +1,5 @@
-var Expression = require("./Expression").Expression;
-var UnresolvedIdentifier;
+const Expression = require("./Expression").Expression;
+let UnresolvedIdentifier;
 
 exports.resolve = () => {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;

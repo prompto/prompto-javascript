@@ -1,8 +1,8 @@
-var ContainerType = require("./ContainerType").ContainerType;
-var ListType = require("./ListType").ListType;
-var IntegerType = require("./IntegerType").IntegerType;
-var BooleanType = require("./BooleanType").BooleanType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const ContainerType = require("./ContainerType").ContainerType;
+const ListType = require("./ListType").ListType;
+const IntegerType = require("./IntegerType").IntegerType;
+const BooleanType = require("./BooleanType").BooleanType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class SetType extends ContainerType {
  
@@ -123,7 +123,7 @@ class SetType extends ContainerType {
     }
 
     declareContainsAllOrAny(transpiler, other, container, items) {
-        var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
@@ -150,7 +150,7 @@ class SetType extends ContainerType {
     getMemberMethods(context, name) {
         switch (name) {
             case "join":
-                var JoinSetMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinSetMethodDeclaration;
+                const JoinSetMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinSetMethodDeclaration;
                 return [new JoinSetMethodDeclaration()];
             default:
                 return ContainerType.prototype.getMemberMethods.call(context, name);

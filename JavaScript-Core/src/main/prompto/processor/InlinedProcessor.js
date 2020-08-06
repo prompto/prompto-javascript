@@ -1,4 +1,4 @@
-var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
+const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
 
 class InlinedProcessor extends AnnotationProcessor {
     constructor() {

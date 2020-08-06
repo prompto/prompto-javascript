@@ -1,4 +1,4 @@
-var Location = require("./Location").Location;
+const Location = require("./Location").Location;
 
 class Section {
 

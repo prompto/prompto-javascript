@@ -1,9 +1,9 @@
-var RangeValue = require("./RangeValue").RangeValue;
-var DateValue = require("./DateValue").DateValue;
-var LocalDate = require("../intrinsic/LocalDate").LocalDate;
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+const RangeValue = require("./RangeValue").RangeValue;
+const DateValue = require("./DateValue").DateValue;
+const LocalDate = require("../intrinsic/LocalDate").LocalDate;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
-var DateType = null;
+let DateType = null;
 
 exports.resolve = () => {
     DateType = require("../type/DateType").DateType;
@@ -16,13 +16,13 @@ class DateRange extends RangeValue {
     }
 
     size() {
-        var h = this.high.value.valueOf();
-        var l = this.low.value.valueOf();
+        const h = this.high.value.valueOf();
+        const l = this.low.value.valueOf();
         return 1 + ( (h-l)/(24*60*60*1000));
     }
 
     getItem(index) {
-        var millis = this.low.value.valueOf() + (index-1)*(24*60*60*1000);
+        const millis = this.low.value.valueOf() + (index-1)*(24*60*60*1000);
         if(millis>this.high.value.valueOf()) {
             throw new IndexOutOfRangeError();
         } else {

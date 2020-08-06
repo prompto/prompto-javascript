@@ -1,4 +1,4 @@
-var PythonExpression = require("./PythonExpression").PythonExpression;
+const PythonExpression = require("./PythonExpression").PythonExpression;
 
 class PythonIdentifierExpression extends PythonExpression {
     constructor(parent, identifier) {
@@ -17,7 +17,7 @@ class PythonIdentifierExpression extends PythonExpression {
     }
 
     static parse(ids) {
-        var result = null;
+        let result = null;
         ids.split("\\.").forEach(part => {
             result = new PythonIdentifierExpression(result, part);
         });

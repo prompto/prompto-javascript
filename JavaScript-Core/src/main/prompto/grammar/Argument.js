@@ -1,14 +1,14 @@
-var Section = require("../parser/Section").Section;
-var CategoryType = null;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var MemberSelector = require("../expression/MemberSelector").MemberSelector;
-var Variable = require("../runtime/Variable").Variable;
-var VoidType = require("../type/VoidType").VoidType;
-var MethodType = require("../type/MethodType").MethodType;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var Specificity = require("../grammar/Specificity").Specificity;
+const Section = require("../parser/Section").Section;
+let CategoryType = null;
+const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+const MemberSelector = require("../expression/MemberSelector").MemberSelector;
+const Variable = require("../runtime/Variable").Variable;
+const VoidType = require("../type/VoidType").VoidType;
+const MethodType = require("../type/MethodType").MethodType;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const Specificity = require("../grammar/Specificity").Specificity;
 
 exports.resolve = () => {
     CategoryType = require("../type/CategoryType").CategoryType;
@@ -86,9 +86,9 @@ class Argument extends Section {
     declareArrowExpression(transpiler, methodDeclaration) {
         if(this.parameter==null || methodDeclaration==null)
             return false;
-        var parameter = this.findParameter(methodDeclaration);
-        var requiredType = parameter.getType(transpiler.context);
-        var isArrow = requiredType instanceof MethodType && this._expression instanceof ArrowExpression;
+        const parameter = this.findParameter(methodDeclaration);
+        const requiredType = parameter.getType(transpiler.context);
+        const isArrow = requiredType instanceof MethodType && this._expression instanceof ArrowExpression;
         if(isArrow) {
             requiredType.declareArrowExpression(transpiler, this._expression);
             return true;
@@ -132,15 +132,15 @@ class Argument extends Section {
     }
 
     check(context) {
-        var actual = context.getRegisteredValue(this.parameter.name);
+        const actual = context.getRegisteredValue(this.parameter.name);
         if(actual==null) {
-            var actualType = this.expression.check(context);
+            const actualType = this.expression.check(context);
             context.registerValue(new Variable(this.parameter.id, actualType));
         } else {
             // need to check type compatibility
-            actualType = actual.getType(context);
-            var newType = this.expression.check(context);
-            var section = this.toSection();
+            const actualType = actual.getType(context);
+            const newType = this.expression.check(context);
+            const section = this.toSection();
             actualType.checkAssignableFrom(context, newType, section);
         }
         return VoidType.instance;
@@ -148,7 +148,7 @@ class Argument extends Section {
 
     toSection() {
         if(this.parameter && this._expression) {
-            var section = new Section();
+            const section = new Section();
             section.copySectionFrom(this.parameter);
             section.end = this._expression.end;
             return section;
@@ -165,18 +165,18 @@ class Argument extends Section {
 
     resolve(context, methodDeclaration, checkInstance, allowDerived) {
         // since we support implicit members, it's time to resolve them
-        var expression = this.expression;
-        var parameter = this.findParameter(methodDeclaration);
-        var requiredType = parameter.getType(context);
-        var checkArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
-        var actualType = checkArrow ? requiredType.checkArrowExpression(expression) : expression.check(context.getCallingContext());
+        let expression = this.expression;
+        const parameter = this.findParameter(methodDeclaration);
+        const requiredType = parameter.getType(context);
+        const checkArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+        let actualType = checkArrow ? requiredType.checkArrowExpression(expression) : expression.check(context.getCallingContext());
         if(checkInstance && actualType instanceof CategoryType) {
-            var value = expression.interpret(context.getCallingContext());
+            const value = expression.interpret(context.getCallingContext());
             if(value && value.getType) {
                 actualType = value.getType();
             }
         }
-        var assignable = requiredType.isAssignableFrom(context, actualType);
+        let assignable = requiredType.isAssignableFrom(context, actualType);
         // when in dispatch, allow derived
         if(!assignable && allowDerived)
             assignable = actualType.isAssignableFrom(context, requiredType);
@@ -188,7 +188,7 @@ class Argument extends Section {
     }
 
     makeAssignment(context, declaration) {
-        var argument = this.parameter;
+        let argument = this.parameter;
         // when 1st argument, can be unnamed
         if(argument===null) {
             if(declaration.parameters.length==0) {
@@ -209,11 +209,11 @@ class Argument extends Section {
 
     computeSpecificity(context, parameter, declaration, checkInstance, allowDerived) {
         try {
-            var requiredType = parameter.getType(context).resolve(context, null);
-            var actualType = this.checkActualType(context, requiredType, this.expression, checkInstance).resolve(context, null);
+            const requiredType = parameter.getType(context).resolve(context, null);
+            let actualType = this.checkActualType(context, requiredType, this.expression, checkInstance).resolve(context, null);
             // retrieve actual runtime type
             if(checkInstance && (actualType instanceof CategoryType)) {
-                var value = this.expression.interpret(context.getCallingContext());
+                const value = this.expression.interpret(context.getCallingContext());
                 if(value && value.getType) {
                     actualType = value.getType();
                 }
@@ -240,8 +240,8 @@ class Argument extends Section {
     }
 
     checkActualType(context, requiredType, expression, checkInstance) {
-        var actualType = null;
-        var isArrow = this.isArrowExpression(requiredType, expression);
+        let actualType = null;
+        const isArrow = this.isArrowExpression(requiredType, expression);
         if(isArrow)
             actualType = this.checkArrowExpression(context, requiredType, expression);
         else if(requiredType instanceof MethodType)
@@ -249,7 +249,7 @@ class Argument extends Section {
         else
             actualType = expression.check(context.getCallingContext());
         if(checkInstance && actualType instanceof CategoryType) {
-            var value = expression.interpret(context.getCallingContext());
+            const value = expression.interpret(context.getCallingContext());
             if(value && value.getType)
                 actualType = value.getType();
         }
@@ -267,7 +267,7 @@ class Argument extends Section {
 
     checkArrowExpression(context, requiredType, expression) {
         context = expression instanceof ContextualExpression ? expression.calling : context.getCallingContext();
-        var arrow = expression instanceof ArrowExpression ? expression : expression.expression;
+        const arrow = expression instanceof ArrowExpression ? expression : expression.expression;
         return requiredType.checkArrowExpression(context, arrow);
     }
 }

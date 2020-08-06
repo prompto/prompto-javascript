@@ -1,8 +1,8 @@
-var ReadAllExpression = require("../expression/ReadAllExpression").ReadAllExpression;
-var Variable = require("../runtime/Variable").Variable;
-var TextType = require("../type/TextType").TextType;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
+const ReadAllExpression = require("../expression/ReadAllExpression").ReadAllExpression;
+const Variable = require("../runtime/Variable").Variable;
+const TextType = require("../type/TextType").TextType;
+const VoidType = require("../type/VoidType").VoidType;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class ReadStatement extends ReadAllExpression {
 
@@ -29,7 +29,7 @@ class ReadStatement extends ReadAllExpression {
     }
 
     interpret(context) {
-        var result = ReadAllExpression.prototype.interpret.call(this, context);
+        const result = ReadAllExpression.prototype.interpret.call(this, context);
         context = context.newChildContext();
         context.registerValue(new Variable(this.name, TextType.instance));
         context.setValue(this.name, result);

@@ -1,8 +1,8 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var IntegerType = null; // circular dependency
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var Identifier = require("../grammar/Identifier").Identifier;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+let IntegerType = null; // circular dependency
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 exports.resolve = () => {
 	IntegerType = require("./IntegerType").IntegerType;
@@ -15,7 +15,7 @@ class DecimalType extends NativeType {
     }
 
     declare(transpiler) {
-        var isADecimal = require("../utils/Utils").isADecimal;
+        const isADecimal = require("../utils/Utils").isADecimal;
         transpiler.require(isADecimal);
     }
 

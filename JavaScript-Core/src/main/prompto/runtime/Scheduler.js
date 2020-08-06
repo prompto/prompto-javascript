@@ -1,12 +1,12 @@
-var ApplicationContext = require("./ApplicationContext").ApplicationContext;
+const ApplicationContext = require("./ApplicationContext").ApplicationContext;
 
 class Scheduler {
  
     static schedule(method, executeAt, repeatEvery, jobName) {
-        var runner = method.interpret ? () => { method.interpret(ApplicationContext.get()); } : method;
-        var jobId = ++Scheduler.lastJobId;
-        var delay = executeAt.date.valueOf() - (new Date()).valueOf();
-        var timerTask = repeatEvery != null ? Scheduler.makeRepeatingTask(runner, jobId, repeatEvery) : Scheduler.makeSingleTask(runner, jobId);
+        const runner = method.interpret ? () => { method.interpret(ApplicationContext.get()); } : method;
+        const jobId = ++Scheduler.lastJobId;
+        const delay = executeAt.date.valueOf() - (new Date()).valueOf();
+        const timerTask = repeatEvery != null ? Scheduler.makeRepeatingTask(runner, jobId, repeatEvery) : Scheduler.makeSingleTask(runner, jobId);
         Scheduler.timers[jobId] = { id: setTimeout(timerTask, delay), cancel: function(id) { clearTimeout(id); } };
         return jobId;
     }
@@ -26,7 +26,7 @@ class Scheduler {
             try {
                 runner();
             } finally {
-                var interval = repeatEvery.totalMilliseconds(); // TODO
+                const interval = repeatEvery.totalMilliseconds(); // TODO
                 Scheduler.timers[jobId] = { id: setInterval(() => {
                         runner();
                 }, interval), cancel: function(id) { clearInterval(id); } };
@@ -35,7 +35,7 @@ class Scheduler {
     }
 
     static cancel(jobId) {
-      var timer = Scheduler.timers[jobId];
+      const timer = Scheduler.timers[jobId];
       if(!timer)
           console.log("Timer not found: " + jobId);
       else {

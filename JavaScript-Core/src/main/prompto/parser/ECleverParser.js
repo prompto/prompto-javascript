@@ -1,9 +1,9 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? require("fs") : {}; // nodejs only
-var antlr4 = require("antlr4/index");
-var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
-var EParser = require("./EParser").EParser;
-var EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
+const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+const fs = isNodeJs ? require("fs") : {}; // nodejs only
+const antlr4 = require("antlr4/index");
+const EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
+const EParser = require("./EParser").EParser;
+const EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -49,9 +49,9 @@ ECleverParser.prototype.parse_standalone_type = function() {
 
 ECleverParser.prototype.doParse = function(rule, addLF) {
     this.getTokenStream().tokenSource.addLF = addLF;
-    var tree = rule.bind(this)();
-    var builder = new EPromptoBuilder(this);
-    var walker = new antlr4.tree.ParseTreeWalker();
+    const tree = rule.bind(this)();
+    const builder = new EPromptoBuilder(this);
+    const walker = new antlr4.tree.ParseTreeWalker();
     walker.walk(builder, tree);
     return builder.getNodeValue(tree);
 };

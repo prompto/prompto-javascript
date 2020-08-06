@@ -12,7 +12,7 @@ class PropertyValidator {
     }
 
     required() {
-        var RequiredValidator = require("./RequiredValidator").RequiredValidator;
+        const RequiredValidator = require("./RequiredValidator").RequiredValidator;
         return new RequiredValidator(this);
     }
 

@@ -1,20 +1,20 @@
-var Expression = require("./Expression").Expression;
-var MethodCall = require("../statement/MethodCall").MethodCall;
-var EnumeratedCategoryDeclaration = null;
-var CategoryDeclaration = null;
-var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-var ConstructorExpression = null;
-var InstanceExpression = require("./InstanceExpression").InstanceExpression;
-var SymbolExpression = require("./SymbolExpression").SymbolExpression;
-var TypeExpression = require("./TypeExpression").TypeExpression;
-var ProblemListener = require("../problem/ProblemListener").ProblemListener;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var Dialect = require("../parser/Dialect").Dialect;
-var NativeType = require("../type/NativeType").NativeType;
-var VoidType = require("../type/VoidType").VoidType;
-var EnumeratedCategoryType = null;
-var CategoryType = null;
-var MethodSelector = null;
+const Expression = require("./Expression").Expression;
+const MethodCall = require("../statement/MethodCall").MethodCall;
+let EnumeratedCategoryDeclaration = null;
+let CategoryDeclaration = null;
+const EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
+let ConstructorExpression = null;
+const InstanceExpression = require("./InstanceExpression").InstanceExpression;
+const SymbolExpression = require("./SymbolExpression").SymbolExpression;
+const TypeExpression = require("./TypeExpression").TypeExpression;
+const ProblemListener = require("../problem/ProblemListener").ProblemListener;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const Dialect = require("../parser/Dialect").Dialect;
+const NativeType = require("../type/NativeType").NativeType;
+const VoidType = require("../type/VoidType").VoidType;
+let EnumeratedCategoryType = null;
+let CategoryType = null;
+let MethodSelector = null;
 
 exports.resolve = () => {
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
@@ -63,7 +63,7 @@ class UnresolvedIdentifier extends Expression {
     }
 
     checkAttribute(context) {
-        var decl = context.findAttribute(this.name);
+        const decl = context.findAttribute(this.name);
         return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
     }
 
@@ -120,7 +120,7 @@ class UnresolvedIdentifier extends Expression {
             this.resolved = null;
         if(this.resolved==null) {
             // ignore resolution problems during resolution
-            var listener = context.problemListener;
+            const listener = context.problemListener;
             try {
                 context.problemListener = new ProblemListener();
                 this.resolved = this.doResolve(context, forMember, updateSelectorParent);
@@ -135,7 +135,7 @@ class UnresolvedIdentifier extends Expression {
     }
 
     doResolve(context, forMember, updateSelectorParent) {
-        var resolved = this.resolveSymbol(context);
+        let resolved = this.resolveSymbol(context);
         if(resolved)
             return resolved;
         resolved = this.resolveTypeOrConstructor(context, forMember);
@@ -161,7 +161,7 @@ class UnresolvedIdentifier extends Expression {
 
     resolveInstance(context) {
         try {
-            var id = new InstanceExpression(this.id);
+            const id = new InstanceExpression(this.id);
             id.check(context);
             return id;
         } catch(e) {
@@ -177,8 +177,8 @@ class UnresolvedIdentifier extends Expression {
         if(this.id.dialect!=Dialect.E)
             return null;
         try {
-            var selector = new MethodSelector(null, this.id);
-            var call = new MethodCall(selector);
+            const selector = new MethodSelector(null, this.id);
+            const call = new MethodCall(selector);
             call.check(context, updateSelectorParent);
             return call;
         } catch(e) {
@@ -192,7 +192,7 @@ class UnresolvedIdentifier extends Expression {
 
     resolveConstructor(context) {
         try {
-            var method = new ConstructorExpression(new CategoryType(this.id), null, null, true);
+            const method = new ConstructorExpression(new CategoryType(this.id), null, null, true);
             method.check(context);
             return method;
         } catch(e) {
@@ -205,7 +205,7 @@ class UnresolvedIdentifier extends Expression {
     }
 
     resolveType(context) {
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         if(decl instanceof EnumeratedCategoryDeclaration) {
             return new TypeExpression(new EnumeratedCategoryType(this.id));
         } else if(decl instanceof CategoryDeclaration) {
@@ -213,8 +213,8 @@ class UnresolvedIdentifier extends Expression {
         } else if(decl instanceof EnumeratedNativeDeclaration) {
             return new TypeExpression(decl.getType(context));
         } else {
-            var allTypes = NativeType.getAll();
-            for(var i=0;i<allTypes.length;i++) {
+            const allTypes = NativeType.getAll();
+            for(let i=0;i<allTypes.length;i++) {
                 if (this.name == allTypes[i].name) {
                     return new TypeExpression(allTypes[i]);
                 }

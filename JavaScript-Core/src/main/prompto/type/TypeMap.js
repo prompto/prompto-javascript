@@ -1,10 +1,10 @@
-var VoidType = require("./VoidType").VoidType;
-var NullType = require("./NullType").NullType;
+const VoidType = require("./VoidType").VoidType;
+const NullType = require("./NullType").NullType;
 
 class TypeMap {
   
     inferType(context, section) {
-        var keys = Object.keys(this);
+        const keys = Object.keys(this);
         switch (keys.length) {
             case 0:
                 return VoidType.instance;
@@ -16,10 +16,10 @@ class TypeMap {
     }
 
     doInferType(context, keys, section) {
-        var inferred = null;
+        let inferred = null;
         // first pass: get less specific type
-        for(var i=0;i<keys.length;i++) {
-            var current = this[keys[i]];
+        for(let i=0;i<keys.length;i++) {
+            const current = this[keys[i]];
             if(current == NullType.instance) {
                 continue;
             } else if(inferred==null) {
@@ -36,7 +36,7 @@ class TypeMap {
             return NullType.instance;
         // second pass: check compatibility
         keys.forEach(function(k) {
-            var type = this[k];
+            const type = this[k];
             if(type!=inferred && !inferred.isAssignableFrom(context, type)) {
                 context.problemListener.reportIncompatibleTypes(section, inferred, type);
             }

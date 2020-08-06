@@ -1,5 +1,5 @@
-var BooleanType = require("../type/BooleanType").BooleanType;
-var Value = require("./Value").Value;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const Value = require("./Value").Value;
 
 class BooleanValue extends Value {
   
@@ -13,7 +13,7 @@ class BooleanValue extends Value {
     }
 
     static Parse(text) {
-        var bool = text==="true";
+        const bool = text==="true";
         return BooleanValue.ValueOf(bool);
     }
 

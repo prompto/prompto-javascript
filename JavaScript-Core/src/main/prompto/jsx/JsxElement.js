@@ -1,5 +1,5 @@
-var JsxElementBase = require("./JsxElementBase").JsxElementBase
-var JsxType = require("../type/JsxType").JsxType;
+const JsxElementBase = require("./JsxElementBase").JsxElementBase;
+const JsxType = require("../type/JsxType").JsxType;
 
 
 class JsxElement extends JsxElementBase {

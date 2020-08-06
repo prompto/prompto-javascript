@@ -1,6 +1,6 @@
-var Literal = require("./Literal").Literal;
-var UUIDValue = require("../value/UUIDValue").UUIDValue;
-var UUIDType = require("../type/UUIDType").UUIDType;
+const Literal = require("./Literal").Literal;
+const UUIDValue = require("../value/UUIDValue").UUIDValue;
+const UUIDType = require("../type/UUIDType").UUIDType;
 
 /*jshint evil:true*/
 function parse(text) {
@@ -18,7 +18,7 @@ class UUIDLiteral extends Literal {
     }
 
     declare(transpiler) {
-        var UUID = require("../intrinsic/UUID").UUID;
+        const UUID = require("../intrinsic/UUID").UUID;
         transpiler.require(UUID);
     }
 

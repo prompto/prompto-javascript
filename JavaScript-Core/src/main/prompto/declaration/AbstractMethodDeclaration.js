@@ -1,5 +1,5 @@
-var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-var VoidType = require("../type/VoidType").VoidType;
+const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
+const VoidType = require("../type/VoidType").VoidType;
 
 class AbstractMethodDeclaration extends BaseMethodDeclaration {
     constructor(id, args, returnType) {
@@ -17,7 +17,7 @@ class AbstractMethodDeclaration extends BaseMethodDeclaration {
             this.parameters.check(context);
         }
         if(isStart) {
-            var local = context.newLocalContext();
+            const local = context.newLocalContext();
             this.registerParameters(local);
         }
         return this.returnType;

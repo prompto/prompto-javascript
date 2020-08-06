@@ -1,6 +1,6 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var $DataStore = require("../store/DataStore").$DataStore;
-var VoidType = require("../type/VoidType").VoidType;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const $DataStore = require("../store/DataStore").$DataStore;
+const VoidType = require("../type/VoidType").VoidType;
 
 
 class FlushStatement extends SimpleStatement {

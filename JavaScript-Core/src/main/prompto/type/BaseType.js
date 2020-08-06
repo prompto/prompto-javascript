@@ -1,9 +1,9 @@
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var EnumeratedNativeType = null;
-var VoidType = null;
-var TextType = null;
-var BooleanType = null;
-var NullType = null;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+let EnumeratedNativeType = null;
+let VoidType = null;
+let TextType = null;
+let BooleanType = null;
+let NullType = null;
 
 exports.resolve = () => {
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;

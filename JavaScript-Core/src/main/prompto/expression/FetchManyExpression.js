@@ -1,14 +1,14 @@
-var Expression = require("./Expression").Expression;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var AnyType = require("../type/AnyType").AnyType;
-var CursorType = require("../type/CursorType").CursorType;
-var $DataStore = require("../store/DataStore").$DataStore;
-var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
-var TypeFamily = require("../store/TypeFamily").TypeFamily;
-var MatchOp = require("../store/MatchOp").MatchOp;
-var CursorValue = require("../value/CursorValue").CursorValue;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+const Expression = require("./Expression").Expression;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const AnyType = require("../type/AnyType").AnyType;
+const CursorType = require("../type/CursorType").CursorType;
+const $DataStore = require("../store/DataStore").$DataStore;
+const AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
+const TypeFamily = require("../store/TypeFamily").TypeFamily;
+const MatchOp = require("../store/MatchOp").MatchOp;
+const CursorValue = require("../value/CursorValue").CursorValue;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 
 class FetchManyExpression extends Expression {
 
@@ -106,11 +106,11 @@ class FetchManyExpression extends Expression {
     }
 
     check(context) {
-        var typ = this.typ;
+        let typ = this.typ;
         if (typ==null)
             typ = AnyType.instance;
         else {
-            var decl = context.getRegisteredDeclaration(this.typ.name);
+            const decl = context.getRegisteredDeclaration(this.typ.name);
             if (decl == null  || !(decl instanceof CategoryDeclaration))
                 context.problemListener.reportUnknownCategory(typ.id);
             if(!(decl.isStorable && decl.isStorable(context)))
@@ -137,19 +137,19 @@ class FetchManyExpression extends Expression {
     }
 
     interpret(context) {
-        var store = $DataStore.instance;
-        var query = this.buildFetchManyQuery(context, store);
-        var typ = this.typ==null ? AnyType.instance : this.typ;
-        var cursor = store.fetchMany(query, typ.mutable);
+        const store = $DataStore.instance;
+        const query = this.buildFetchManyQuery(context, store);
+        const typ = this.typ==null ? AnyType.instance : this.typ;
+        const cursor = store.fetchMany(query, typ.mutable);
         return new CursorValue(context, typ, cursor.iterable);
     }
 
     buildFetchManyQuery(context, store) {
-        var builder = store.newQueryBuilder();
+        const builder = store.newQueryBuilder();
         builder.setFirst(this.interpretLimit(context, this.first));
         builder.setLast(this.interpretLimit(context, this.last));
         if (this.typ != null) {
-            var info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
+            const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
             builder.verify(info, MatchOp.HAS, this.typ.name);
         }
         if (this.predicate != null)
@@ -164,14 +164,14 @@ class FetchManyExpression extends Expression {
     interpretLimit(context, exp) {
         if (exp == null)
             return null;
-        var value = exp.interpret(context);
+        const value = exp.interpret(context);
         if(value.type!=IntegerType.instance)
             throw new InvalidDataError("Expecting an Integer, got:" + value.type.name);
         return value.getStorableData();
     }
 
     declare(transpiler) {
-        var Cursor = require("../intrinsic/Cursor").Cursor;
+        const Cursor = require("../intrinsic/Cursor").Cursor;
         transpiler.require(Cursor);
         transpiler.require(MatchOp);
         transpiler.require($DataStore);
@@ -192,7 +192,7 @@ class FetchManyExpression extends Expression {
     transpile(transpiler) {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
-        var mutable = this.typ ? this.typ.mutable : false;
+        const mutable = this.typ ? this.typ.mutable : false;
         transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine().dedent();
         transpiler.append("})()");
     }

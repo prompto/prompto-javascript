@@ -1,5 +1,5 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var Dialect = require("../parser/Dialect").Dialect;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class OrderByClauseList extends ObjectList {
 

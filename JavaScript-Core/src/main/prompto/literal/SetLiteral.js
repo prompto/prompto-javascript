@@ -1,15 +1,15 @@
-var Literal = require("./Literal").Literal;
-var SetValue = require("../value/SetValue").SetValue;
-var SetType = require("../type/SetType").SetType;
-var MissingType = require("../type/MissingType").MissingType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextType = require("../type/TextType").TextType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var TextValue = require("../value/TextValue").TextValue;
-var ExpressionList = require("../utils/ExpressionList").ExpressionList;
-var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
+const Literal = require("./Literal").Literal;
+const SetValue = require("../value/SetValue").SetValue;
+const SetType = require("../type/SetType").SetType;
+const MissingType = require("../type/MissingType").MissingType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const CharacterType = require("../type/CharacterType").CharacterType;
+const TextType = require("../type/TextType").TextType;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const TextValue = require("../value/TextValue").TextValue;
+const ExpressionList = require("../utils/ExpressionList").ExpressionList;
+const inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
 
 class SetLiteral extends Literal {
     constructor(expressions) {
@@ -29,7 +29,7 @@ class SetLiteral extends Literal {
     }
 
     declare(transpiler) {
-        var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         this.expressions.declare(transpiler);
     }
@@ -41,11 +41,11 @@ class SetLiteral extends Literal {
     }
 
     interpret(context) {
-        var self = this;
+        const self = this;
         this.check(context); // force computation of itemType
-        var value = new SetValue(this.itemType);
+        const value = new SetValue(this.itemType);
         this.expressions.forEach(expression => {
-            var item = expression.interpret(context);
+            let item = expression.interpret(context);
             item = self.interpretPromotion(item);
             value.add(item);
         });

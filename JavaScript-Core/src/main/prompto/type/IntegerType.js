@@ -1,14 +1,14 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var DecimalType = require("./DecimalType").DecimalType;
-var CharacterType = null;
-var ListType = require("./ListType").ListType;
-var RangeType = require("./RangeType").RangeType;
-var TextType = null;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var IntegerRange = require("../value/IntegerRange").IntegerRange;
-var Identifier = require("../grammar/Identifier").Identifier;
-var PeriodType = null;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const DecimalType = require("./DecimalType").DecimalType;
+let CharacterType = null;
+const ListType = require("./ListType").ListType;
+const RangeType = require("./RangeType").RangeType;
+let TextType = null;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const IntegerRange = require("../value/IntegerRange").IntegerRange;
+const Identifier = require("../grammar/Identifier").Identifier;
+let PeriodType = null;
 
 exports.resolve = () => {
 	CharacterType = require("./CharacterType").CharacterType;
@@ -28,7 +28,7 @@ class IntegerType extends NativeType {
     }
 
     declare(transpiler) {
-        var isAnInteger = require("../utils/Utils").isAnInteger;
+        const isAnInteger = require("../utils/Utils").isAnInteger;
         transpiler.require(isAnInteger);
     }
 
@@ -245,7 +245,7 @@ class IntegerType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === IntegerType.instance) {
-            var module = require("../intrinsic/Range");
+            const module = require("../intrinsic/Range");
             transpiler.require(module.Range);
             transpiler.require(module.IntegerRange);
         } else {
@@ -280,7 +280,7 @@ class IntegerType extends NativeType {
     getMemberMethods(context, name) {
         switch (name) {
             case "format":
-                var FormatMethodDeclaration = require("../builtins/IntegerTypeBuiltins").FormatMethodDeclaration;
+                const FormatMethodDeclaration = require("../builtins/IntegerTypeBuiltins").FormatMethodDeclaration;
                 return [new FormatMethodDeclaration()];
             default:
                 return NativeType.prototype.getMemberMethods.call(context, name);

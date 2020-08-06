@@ -1,11 +1,11 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var AnyType = require("../type/AnyType").AnyType;
-var VoidType = require("../type/VoidType").VoidType;
-var $DataStore = require("../store/DataStore").$DataStore;
-var NullValue = require("../value/NullValue").NullValue;
-var Instance = require("../value/Value").Instance;
-var Container = require("../value/Value").Container;
-var Dialect = require("../parser/Dialect").Dialect;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const AnyType = require("../type/AnyType").AnyType;
+const VoidType = require("../type/VoidType").VoidType;
+const $DataStore = require("../store/DataStore").$DataStore;
+const NullValue = require("../value/NullValue").NullValue;
+const Instance = require("../value/Value").Instance;
+const Container = require("../value/Value").Container;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class StoreStatement extends BaseStatement {
  
@@ -89,13 +89,13 @@ class StoreStatement extends BaseStatement {
     }
 
     checkStorable(context, exp) {
-        var type = exp.check(context);
+        let type = exp.check(context);
         if(type.itemType)
             type = type.itemType;
         if(type == AnyType.instance)
             return;
         else if(!type.isStorable(context)) {
-            var name = exp.toString();
+            let name = exp.toString();
             if(name.indexOf(' ')>0 || name.indexOf(',')>0)
                 name = type.typename;
             context.problemListener.reportNotStorable(this, name);
@@ -110,8 +110,8 @@ class StoreStatement extends BaseStatement {
     }
 
     interpret(context) {
-        var idsToDelete = this.getIdsToDelete(context);
-        var storablesToAdd = this.getStorablesToAdd(context);
+        const idsToDelete = this.getIdsToDelete(context);
+        const storablesToAdd = this.getStorablesToAdd(context);
         if (idsToDelete || storablesToAdd)
             $DataStore.instance.store(idsToDelete, storablesToAdd);
         if(this.andThen)
@@ -170,13 +170,13 @@ class StoreStatement extends BaseStatement {
     getIdsToDelete(context) {
         if(!this.del)
             return null;
-        var idsToDel = new Set();
+        const idsToDel = new Set();
         this.del.forEach(exp => {
-            var value = exp.interpret(context);
+            const value = exp.interpret(context);
             if (value == NullValue.instance)
                 return;
             else if(value instanceof Instance) {
-                var dbId = value.getMemberValue(context, "dbId");
+                const dbId = value.getMemberValue(context, "dbId");
                 if (dbId !=null && dbId!=NullValue.instance)
                     idsToDel.add(dbId.getStorableData());
             } else if(value instanceof Container) {
@@ -184,7 +184,7 @@ class StoreStatement extends BaseStatement {
                     if (value == NullValue.instance)
                         return;
                     else if (value instanceof Instance) {
-                        var dbId = value.getMemberValue(context, "dbId");
+                        const dbId = value.getMemberValue(context, "dbId");
                         if (dbId != null && dbId != NullValue.instance)
                             idsToDel.push(dbId.getStorableData());
                     }
@@ -200,9 +200,9 @@ class StoreStatement extends BaseStatement {
     getStorablesToAdd(context) {
         if (!this.add)
             return null;
-        var storablesToAdd = new Set();
+        const storablesToAdd = new Set();
         this.add.forEach(exp => {
-            var value = exp.interpret(context);
+            const value = exp.interpret(context);
             value.collectStorables(storablesToAdd)
         });
         if (storablesToAdd.length == 0)

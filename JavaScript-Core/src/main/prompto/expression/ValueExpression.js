@@ -1,4 +1,4 @@
-var Value = require("../value/Value").Value;
+const Value = require("../value/Value").Value;
 
 class ValueExpression extends Value {
     constructor(type, value) {

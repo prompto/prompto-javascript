@@ -1,5 +1,5 @@
-var ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var CategoryType = require("../type/CategoryType").CategoryType;
+const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+const CategoryType = require("../type/CategoryType").CategoryType;
 
 class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
     constructor(id, attributes, methods) {
@@ -33,10 +33,10 @@ class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
                 transpiler.append(this.name).append(".instance.").append(attr.name).append(" = null;").newLine();
             }, this);
         }
-        var type = new CategoryType(this.id);
-        var instance = transpiler.newInstanceTranspiler(type);
+        const type = new CategoryType(this.id);
+        const instance = transpiler.newInstanceTranspiler(type);
         this.methods.forEach(method => {
-            var m = instance.newChildTranspiler();
+            const m = instance.newChildTranspiler();
             method.transpile(m);
             m.flush();
         }, this);

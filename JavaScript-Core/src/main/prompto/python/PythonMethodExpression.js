@@ -1,5 +1,5 @@
-var PythonSelectorExpression = require("./PythonSelectorExpression").PythonSelectorExpression;
-var PythonArgumentList = require("./PythonArgumentList").PythonArgumentList;
+const PythonSelectorExpression = require("./PythonSelectorExpression").PythonSelectorExpression;
+const PythonArgumentList = require("./PythonArgumentList").PythonArgumentList;
 
 class PythonMethodExpression extends PythonSelectorExpression {
     constructor(name, args) {

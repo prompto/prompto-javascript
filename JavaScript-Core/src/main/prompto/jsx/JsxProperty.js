@@ -1,6 +1,6 @@
-var Section = require("../parser/Section").Section;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var VoidType = require("../type/VoidType").VoidType;
+const Section = require("../parser/Section").Section;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const VoidType = require("../type/VoidType").VoidType;
 
 class JsxProperty extends Section {
     constructor(id, value, suite) {
@@ -53,7 +53,7 @@ class JsxProperty extends Section {
     }
 
     transpile(transpiler) {
-        var name = this.id.name;
+        let name = this.id.name;
         if(name.indexOf('-')>=0)
             name = '"' + name + '"';
         transpiler.append(name);

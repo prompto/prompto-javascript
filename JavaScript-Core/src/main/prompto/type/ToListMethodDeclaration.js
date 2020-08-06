@@ -1,5 +1,5 @@
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var ListType = require("./ListType").ListType;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+const ListType = require("./ListType").ListType;
 
 class ToListMethodDeclaration extends BuiltInMethodDeclaration {
     constructor(itemType) {
@@ -9,7 +9,7 @@ class ToListMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context);
+        const value = this.getValue(context);
         return value.toListValue(context);
     }
 
@@ -18,7 +18,7 @@ class ToListMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     declareCall(transpiler) {
-        var List = require("../intrinsic/List").List;
+        const List = require("../intrinsic/List").List;
         transpiler.require(List);
     }
 

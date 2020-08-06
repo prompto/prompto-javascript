@@ -1,20 +1,20 @@
-var EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-var EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-var ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var ProblemListener = require("../problem/ProblemListener").ProblemListener;
-var ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
-var MethodType = require("../type/MethodType").MethodType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var Variable = require("./Variable").Variable;
-var WidgetField = require("./WidgetField").WidgetField;
-var LinkedValue = require("./LinkedValue").LinkedValue;
-var InternalError = require("../error/InternalError").InternalError;
+const EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
+const EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
+const ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
+const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
+const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+const ClosureValue = require("../value/ClosureValue").ClosureValue;
+const ProblemListener = require("../problem/ProblemListener").ProblemListener;
+const ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
+const MethodType = require("../type/MethodType").MethodType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const Variable = require("./Variable").Variable;
+const WidgetField = require("./WidgetField").WidgetField;
+const LinkedValue = require("./LinkedValue").LinkedValue;
+const InternalError = require("../error/InternalError").InternalError;
 
 class Context {
   
@@ -32,7 +32,7 @@ class Context {
     }
 
     static newGlobalsContext() {
-        var context = new Context();
+        const context = new Context();
         context.globals = context;
         context.calling = null;
         context.parent = null;
@@ -77,7 +77,7 @@ class Context {
     }
 
     newResourceContext() {
-        var context = new ResourceContext();
+        const context = new ResourceContext();
         context.globals = this.globals;
         context.calling = this.calling;
         context.parent = this;
@@ -87,7 +87,7 @@ class Context {
     }
 
     newLocalContext() {
-        var context = new Context();
+        const context = new Context();
         context.globals = this.globals;
         context.calling = this;
         context.parent = null;
@@ -97,7 +97,7 @@ class Context {
     }
 
     newDocumentContext(doc, isChild) {
-        var context = new DocumentContext(doc);
+        const context = new DocumentContext(doc);
         context.globals = this.globals;
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
@@ -107,7 +107,7 @@ class Context {
     }
 
     newBuiltInContext(value) {
-        var context = new BuiltInContext(value);
+        const context = new BuiltInContext(value);
         context.globals = this.globals;
         context.calling = this;
         context.parent = null;
@@ -117,20 +117,20 @@ class Context {
     }
 
     newInstanceContext(instance, type, isChild) {
-        var context = new InstanceContext(instance, type);
+        const context = new InstanceContext(instance, type);
         context.globals = this.globals;
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
         context.debugger = this.debugger;
         context.problemListener = this.problemListener;
-        var decl = context.getDeclaration();
+        const decl = context.getDeclaration();
         if(decl)
             decl.processAnnotations(context, true);
         return context;
     }
 
     newChildContext() {
-        var context = new Context();
+        const context = new Context();
         context.globals = this.globals;
         context.calling = this.calling;
         context.parent = this;
@@ -144,7 +144,7 @@ class Context {
     }
 
     clone() {
-        var context = new Context();
+        const context = new Context();
         context.globals = context;
         context.calling = null;
         context.parent = null;
@@ -180,13 +180,13 @@ class Context {
     }
 
     getLocalCatalog() {
-        var catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
-        for(var name in this.declarations) {
-            var decl = this.declarations[name];
+        const catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
+        for(const name in this.declarations) {
+            const decl = this.declarations[name];
             if(decl instanceof AttributeDeclaration)
                 catalog.attributes.push(name);
             else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
-                var info = {};
+                const info = {};
                 info.name = decl.name;
                 info.symbols = decl.symbols.map(s => s.name);
                 catalog.enumerations.push(info);
@@ -196,17 +196,17 @@ class Context {
                 else
                     catalog.categories.push(name);
             } else if(decl instanceof MethodDeclarationMap) {
-                var method = {};
+                const method = {};
                 method.name = decl.name;
                 method.protos = [];
-                for (var proto in decl.protos) {
-                    var main = decl.protos[proto].isEligibleAsMain();
+                for (const proto in decl.protos) {
+                    const main = decl.protos[proto].isEligibleAsMain();
                     method.protos.push({proto: proto, main: main});
                 }
                 catalog.methods.push(method);
             }
         }
-        for(name in this.tests)
+        for(const name in this.tests)
             catalog.tests.push(name);
         // minimize for UI optimization
         if(catalog.attributes.length <= 0)
@@ -233,8 +233,8 @@ class Context {
 
     getAllAttributes() {
         if(this===this.globals) {
-            var list = [];
-            for(var name in this.declarations) {
+            let list = [];
+            for(const name in this.declarations) {
                 if(this.declarations[name] instanceof AttributeDeclaration)
                     list.push(this.declarations[name]);
             }
@@ -247,7 +247,7 @@ class Context {
 
     getRegistered(name) {
         // resolve upwards, since local names override global ones
-        var actual = this.declarations[name] || null;
+        let actual = this.declarations[name] || null;
         if(actual!==null) {
             return actual;
         }
@@ -265,7 +265,7 @@ class Context {
 
     getRegisteredDeclaration(name) {
         // resolve upwards, since local names override global ones
-        var actual = this.declarations[name] || null;
+        const actual = this.declarations[name] || null;
         if(actual!==null) {
             return actual;
         } else if(this.parent!==null) {
@@ -278,7 +278,7 @@ class Context {
     }
 
     getTypedDeclaration(klass, name) {
-        var decl = this.getRegisteredDeclaration(name);
+        const decl = this.getRegisteredDeclaration(name);
         if(decl==null || !klass.prototype.isPrototypeOf(decl))
             return null;
         else
@@ -286,7 +286,7 @@ class Context {
     }
 
     getLocalDeclaration(name) {
-        var actual = this.declarations[name] || null;
+        const actual = this.declarations[name] || null;
         if (actual !== null) {
             return actual;
         } else if (this.parent !== null) {
@@ -302,7 +302,7 @@ class Context {
     }
 
     checkDuplicate(declaration) {
-        var actual = this.getRegistered(declaration.name) || null;
+        const actual = this.getRegistered(declaration.name) || null;
         if (actual !== null && actual !== declaration)
             this.problemListener.reportDuplicate(declaration.id);
         return actual === null;
@@ -313,7 +313,7 @@ class Context {
     }
 
     unregisterMethodDeclaration(declaration, proto) {
-        var map = this.declarations[declaration.name];
+        const map = this.declarations[declaration.name];
         if(map && map.unregister(proto))
             delete this.declarations[declaration.name];
     }
@@ -323,7 +323,7 @@ class Context {
     }
 
     registerMethodDeclaration(declaration) {
-        var actual = this.checkDuplicateMethod(declaration);
+        let actual = this.checkDuplicateMethod(declaration);
         if (actual === null) {
             actual = new MethodDeclarationMap(declaration.name);
             this.declarations[declaration.name] = actual;
@@ -332,14 +332,14 @@ class Context {
     }
 
     checkDuplicateMethod(declaration) {
-        var actual = this.getRegistered(declaration.name) || null;
+        const actual = this.getRegistered(declaration.name) || null;
         if (actual !== null && !(actual instanceof MethodDeclarationMap))
             this.problemListener.reportDuplicate(declaration.id);
         return actual;
     }
 
     registerTestDeclaration(declaration) {
-        var actual = this.tests[declaration.name] || null;
+        const actual = this.tests[declaration.name] || null;
         if(actual!==null)
             this.problemListener.reportDuplicate(declaration.id);
         this.tests[declaration.name] = declaration;
@@ -347,7 +347,7 @@ class Context {
 
     getRegisteredTest(name) {
         // resolve upwards, since local names override global ones
-        var actual = this.tests[name] || null;
+        const actual = this.tests[name] || null;
         if(actual!==null) {
             return actual;
         } else if(this.parent!==null) {
@@ -360,7 +360,7 @@ class Context {
     }
 
     hasTests() {
-        for(var test in this.tests)
+        for(const test in this.tests)
             return true;
         return false;
     }
@@ -378,7 +378,7 @@ class Context {
 
     getNativeBinding(type) {
         if(this===this.globals) {
-            var binding = this.nativeBindings[type] || null;
+            const binding = this.nativeBindings[type] || null;
             if (binding !== null)
                 return binding;
             else if (this.parent !== null)
@@ -390,7 +390,7 @@ class Context {
     }
 
     getRegisteredValue(name) {
-        var context = this.contextForValue(name);
+        const context = this.contextForValue(name);
         if (context === null)
             return null;
         else
@@ -406,7 +406,7 @@ class Context {
             checkDuplicate = true;
         if(checkDuplicate) {
             // only explore current context
-            var actual = this.instances[value.name] || null;
+            const actual = this.instances[value.name] || null;
             if(actual!==null)
                 this.problemListener.reportDuplicate(value.id);
         }
@@ -422,14 +422,14 @@ class Context {
     }
 
     getValue(id) {
-        var context = this.contextForValue(id.name);
+        const context = this.contextForValue(id.name);
         if(context===null)
             this.problemListener.reportUnknownVariable(id);
         return context.readValue(id);
     }
 
     readValue(id) {
-        var value = this.values[id.name] || null;
+        const value = this.values[id.name] || null;
         if(value===null)
             this.problemListener.reportEmptyVariable(id);
         if(value instanceof LinkedValue)
@@ -439,7 +439,7 @@ class Context {
     }
 
     setValue(id, value) {
-        var context = this.contextForValue(id.name);
+        const context = this.contextForValue(id.name);
         if(context===null)
             this.problemListener.reportUnknownVariable(id);
         context.writeValue(id, value);
@@ -447,7 +447,7 @@ class Context {
 
     writeValue(id, value) {
         value = this.autocast(id.name, value);
-        var current = this.values[id.name];
+        const current = this.values[id.name];
         if(current instanceof LinkedValue)
             current.context.setValue(id, value);
         else
@@ -456,7 +456,7 @@ class Context {
 
     autocast(name, value) {
         if(value !== null && value instanceof IntegerValue) {
-            var actual = this.instances[name];
+            const actual = this.instances[name];
             if(actual.getType(this) === DecimalType.instance)
                 value = new DecimalValue(value.DecimalValue());
         }
@@ -465,7 +465,7 @@ class Context {
 
     contextForValue(name) {
         // resolve upwards, since local names override global ones
-        var actual = this.instances[name] || null;
+        const actual = this.instances[name] || null;
         if(actual!==null) {
             return this;
         } else if(this.parent!==null) {
@@ -479,7 +479,7 @@ class Context {
 
     contextForDeclaration(name) {
         // resolve upwards, since local names override global ones
-        var actual = this.declarations[name] || null;
+        const actual = this.declarations[name] || null;
         if(actual!==null) {
             return this;
         } else if(this.parent!==null) {
@@ -523,9 +523,9 @@ class Context {
 
     loadSingleton(type) {
         if(this === this.globals) {
-            var value = this.values[type.name] || null;
+            let value = this.values[type.name] || null;
             if(value === null) {
-                var decl = this.declarations[type.name] || null;
+                const decl = this.declarations[type.name] || null;
                 if(!(decl instanceof ConcreteCategoryDeclaration))
                     throw new InternalError("No such singleton:" + type.name);
                 value = new ConcreteInstance(this, decl);
@@ -549,8 +549,8 @@ class MethodDeclarationMap {
     }
 
     register(declaration, problemListener) {
-        var proto = declaration.getProto();
-        var current = this.protos[proto] || null;
+        const proto = declaration.getProto();
+        const current = this.protos[proto] || null;
         if(current!==null)
             problemListener.reportDuplicate(declaration.id);
         this.protos[proto] = declaration;
@@ -566,14 +566,14 @@ class MethodDeclarationMap {
     }
 
     registerIfMissing(declaration) {
-        var proto = declaration.getProto();
+        const proto = declaration.getProto();
         if(!(proto in this.protos)) {
             this.protos[proto] = declaration;
         }
     }
 
     getFirst() {
-        for(var proto in this.protos) {
+        for(const proto in this.protos) {
             return this.protos[proto];
         }
     }
@@ -613,17 +613,17 @@ class InstanceContext extends Context {
 
     getRegistered(name) {
         if(this.widgetFields) {
-            var field = this.widgetFields[name];
+            const field = this.widgetFields[name];
             if(field)
                 return field;
         }
-        var actual = Context.prototype.getRegistered.call(this, name);
+        const actual = Context.prototype.getRegistered.call(this, name);
         if (actual)
             return actual;
-        var decl = this.getDeclaration();
+        const decl = this.getDeclaration();
         if (decl==null)
             return null;
-        var methods = decl.getMemberMethodsMap(this, name);
+        const methods = decl.getMemberMethodsMap(this, name);
         if(methods && !methods.isEmpty())
             return methods;
         else if(decl.hasAttribute(this, name))
@@ -635,7 +635,7 @@ class InstanceContext extends Context {
     registerWidgetField(id, type, createdBy) {
         if(!this.widgetFields)
             this.widgetFields = {};
-        var widgetField = this.widgetFields[id.name];
+        const widgetField = this.widgetFields[id.name];
         if(widgetField) {
             // we control reentrance by registering which processor created the widgetField
             if(widgetField.createdBy == createdBy)
@@ -646,7 +646,7 @@ class InstanceContext extends Context {
     }
 
     overrideWidgetFieldType(id, type, updatedBy) {
-        var widgetField = this.widgetFields ? this.widgetFields[id.name] : null;
+        const widgetField = this.widgetFields ? this.widgetFields[id.name] : null;
         if(widgetField) {
             widgetField.type = type;
             widgetField.updatedBy = updatedBy;
@@ -656,9 +656,9 @@ class InstanceContext extends Context {
 
     getTypedDeclaration(klass, name) {
         if (klass === MethodDeclarationMap) {
-            var decl = this.getDeclaration();
+            const decl = this.getDeclaration();
             if (decl) {
-                var methods = decl.getMemberMethodsMap(this, name);
+                const methods = decl.getMemberMethodsMap(this, name);
                 if (methods && !methods.isEmpty())
                     return methods;
             }
@@ -667,12 +667,12 @@ class InstanceContext extends Context {
     }
 
     readRegisteredValue(name) {
-        var actual = this.instances[name] || null;
+        let actual = this.instances[name] || null;
         // not very pure, but avoids a lot of complexity when registering a value
         if(actual === null) {
-            var attr = this.getRegisteredDeclaration(name);
+            const attr = this.getRegisteredDeclaration(name);
             if(attr instanceof AttributeDeclaration) {
-                var type = attr.getType();
+                const type = attr.getType();
                 actual = new Variable(name, type);
                 this.instances[name] = actual;
             }
@@ -687,11 +687,11 @@ class InstanceContext extends Context {
             return this;
         // params and variables have precedence over members
         // so first look in context values
-        var context = Context.prototype.contextForValue.call(this, name);
+        const context = Context.prototype.contextForValue.call(this, name);
         if(context !== null) {
             return context;
         }
-        var decl = this.getDeclaration();
+        const decl = this.getDeclaration();
         if(decl.hasAttribute(this, name) || decl.hasMethod(this, name)) {
             return this;
         } else {
@@ -707,11 +707,11 @@ class InstanceContext extends Context {
     }
 
     readValue(id) {
-        var decl = this.getDeclaration();
+        const decl = this.getDeclaration();
         if(decl.hasAttribute(this, id.name)) {
             return this.instance.getMemberValue(this.calling, id.name);
         } else if(decl.hasMethod(this, id.name)) {
-            var method = decl.getMemberMethodsMap(this, id.name).getFirst()
+            const method = decl.getMemberMethodsMap(this, id.name).getFirst();
             return new ClosureValue(this, new MethodType(method));
         } else
             return null;
@@ -740,7 +740,7 @@ class DocumentContext extends Context {
     contextForValue(name) {
         // params and variables have precedence over members
         // so first look in context values
-        var context = Context.prototype.contextForValue.call(this, name);
+        const context = Context.prototype.contextForValue.call(this, name);
         if (context !== null)
             return context;
         // since any name is valid in the context of a document

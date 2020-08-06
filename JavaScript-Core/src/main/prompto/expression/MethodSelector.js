@@ -1,20 +1,20 @@
-var SingletonCategoryDeclaration = null;
-var MethodType = require("../type/MethodType").MethodType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var MemberSelector = require("./MemberSelector").MemberSelector;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var Identifier = require("../grammar/Identifier").Identifier;
-var NamedInstance = require("../grammar/NamedInstance").NamedInstance;
-var UnresolvedIdentifier = null;
-var InstanceExpression = require("./InstanceExpression").InstanceExpression;
-var NullValue = require("../value/NullValue").NullValue;
-var TypeValue = require("../value/TypeValue").TypeValue;
-var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-var NativeInstance = null;
-var TypeType = require("../type/TypeType").TypeType;
-var CategoryType = null;
-var CategorySymbol = null;
-var MethodDeclarationMap = null;
+let SingletonCategoryDeclaration = null;
+const MethodType = require("../type/MethodType").MethodType;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const MemberSelector = require("./MemberSelector").MemberSelector;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const Identifier = require("../grammar/Identifier").Identifier;
+const NamedInstance = require("../grammar/NamedInstance").NamedInstance;
+let UnresolvedIdentifier = null;
+const InstanceExpression = require("./InstanceExpression").InstanceExpression;
+const NullValue = require("../value/NullValue").NullValue;
+const TypeValue = require("../value/TypeValue").TypeValue;
+const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+let NativeInstance = null;
+const TypeType = require("../type/TypeType").TypeType;
+let CategoryType = null;
+let CategorySymbol = null;
+let MethodDeclarationMap = null;
 
 
 exports.resolve = () => {
@@ -40,7 +40,7 @@ class MethodSelector extends MemberSelector {
     }
 
     newFullSelector(counter) {
-        var name = this.id.name + "$" + counter;
+        const name = this.id.name + "$" + counter;
         return new MethodSelector(this.parent, new Identifier(name));
     }
 
@@ -60,7 +60,7 @@ class MethodSelector extends MemberSelector {
     }
 
     getCandidates(context, checkInstance) {
-        var decl = this.getMethodInstance(context);
+        const decl = this.getMethodInstance(context);
         if(decl!=null)
             return new Set([decl]);
         else if(this.parent===null)
@@ -70,9 +70,9 @@ class MethodSelector extends MemberSelector {
     }
 
     getMethodInstance(context) {
-        var named = context.getRegistered(this.id);
+        const named = context.getRegistered(this.id);
         if (named instanceof NamedInstance) {
-            var type = named.getType(context);
+            let type = named.getType(context);
             if (type != null) {
                 type = type.resolve(context);
                 if (type instanceof MethodType)
@@ -83,14 +83,14 @@ class MethodSelector extends MemberSelector {
     }
 
     getGlobalCandidates(context) {
-        var result = new Set();
+        const result = new Set();
         // if called from a member method, could be a member method called without this/self
-        var instance = context.getClosestInstanceContext();
+        const instance = context.getClosestInstanceContext();
         if(instance!=null) {
-            var type = instance.instanceType;
-            var cd = context.getRegisteredDeclaration(type.name);
+            const type = instance.instanceType;
+            const cd = context.getRegisteredDeclaration(type.name);
             if(cd!=null) {
-                var members = cd.getMemberMethodsMap(context, this.name);
+                const members = cd.getMemberMethodsMap(context, this.name);
                 if(members!=null) {
                     members.getAll().forEach(method => {
                         result.add(method);
@@ -98,7 +98,7 @@ class MethodSelector extends MemberSelector {
                 }
             }
         }
-        var methods = context.getRegisteredDeclaration(this.name);
+        const methods = context.getRegisteredDeclaration(this.name);
         if(methods instanceof MethodDeclarationMap) {
             methods.getAll().forEach(method => {
                 result.add(method);
@@ -108,8 +108,8 @@ class MethodSelector extends MemberSelector {
     }
 
     getMemberCandidates(context, checkInstance) {
-        var parentType = this.checkParentType(context, checkInstance);
-        var methods = parentType.getMemberMethods(context, this.name);
+        const parentType = this.checkParentType(context, checkInstance);
+        const methods = parentType.getMemberMethods(context, this.name);
         return new Set(methods);
     }
 
@@ -121,16 +121,16 @@ class MethodSelector extends MemberSelector {
     }
 
     checkParentInstance(context) {
-        var id = null;
+        let id = null;
         if(this.parent instanceof UnresolvedIdentifier)
             id = this.parent.id;
         else if(this.parent instanceof InstanceExpression)
             id = this.parent.id;
         if(id!=null) {
             // don't get Singleton values
-            var first = id.name.substring(0, 1);
+            const first = id.name.substring(0, 1);
             if(first.toLowerCase()==first) {
-                var value = context.getValue(id);
+                const value = context.getValue(id);
                 if(value!=null && value!=NullValue.instance)
                     return value.type;
             }
@@ -140,11 +140,11 @@ class MethodSelector extends MemberSelector {
     }
 
     getCategoryCandidates(context) {
-        var parentType = this.checkParent(context);
+        const parentType = this.checkParent(context);
         if(!(parentType instanceof CategoryType)) {
             throw new SyntaxError(this.parent.toString() + " is not a category");
         }
-        var cd = context.getRegisteredDeclaration(parentType.name);
+        const cd = context.getRegisteredDeclaration(parentType.name);
         if(cd===null) {
             throw new SyntaxError("Unknown category:" + parentType.name);
         }
@@ -162,15 +162,15 @@ class MethodSelector extends MemberSelector {
     }
 
     newLocalInstanceContext(context, declaration) {
-        var instance = context.getClosestInstanceContext();
+        let instance = context.getClosestInstanceContext();
         if(instance!=null) {
-            var required = declaration.memberOf.getType(context);
-            var actual = instance.instanceType;
+            const required = declaration.memberOf.getType(context);
+            const actual = instance.instanceType;
             if (!required.isAssignableFrom(context, actual))
                 instance = null;
         }
         if(instance==null) {
-            var declaring = declaration.memberOf.getType(context);
+            const declaring = declaration.memberOf.getType(context);
             instance = context.newInstanceContext(declaring, false);
         }
         return instance.newChildContext()
@@ -187,16 +187,16 @@ class MethodSelector extends MemberSelector {
     }
 
     newInstanceCheckContext(context) {
-        var type = this.parent.check (context);
+        let type = this.parent.check (context);
         // if calling singleton method, parent is the singleton type
         if(type instanceof TypeType) {
-            var decl = context.getRegisteredDeclaration(type.type.id);
+            const decl = context.getRegisteredDeclaration(type.type.id);
             if(decl instanceof SingletonCategoryDeclaration) {
                 type = decl.getType(context);
             }
         }
         if (type instanceof CategoryType) {
-            decl = context.getRegisteredDeclaration(type.name);
+            const decl = context.getRegisteredDeclaration(type.name);
             context = context.newInstanceContext(null, type, decl instanceof SingletonCategoryDeclaration);
             return context.newChildContext();
         } else
@@ -204,14 +204,14 @@ class MethodSelector extends MemberSelector {
     }
 
     newInstanceContext(context) {
-        var value = this.parent.interpret(context);
+        let value = this.parent.interpret(context);
         if(value==null || value==NullValue.instance) {
             throw new NullReferenceError();
         }
         if(value instanceof TypeValue) {
-            var type = value.value;
+            const type = value.value;
             if(type instanceof CategoryType) {
-                var decl = type.getDeclaration(context);
+                const decl = type.getDeclaration(context);
                 if(decl instanceof SingletonCategoryDeclaration) {
                     value = context.loadSingleton(value.value);
                 }

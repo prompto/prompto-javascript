@@ -1,7 +1,7 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var UUIDValue = null;
-var UUID = require("../intrinsic/UUID").UUID;
+const NativeType = require("./NativeType").NativeType;
+const Identifier = require("../grammar/Identifier").Identifier;
+let UUIDValue = null;
+const UUID = require("../intrinsic/UUID").UUID;
 
 exports.resolve = () => {
     UUIDValue = require("../value/UUIDValue").UUIDValue;

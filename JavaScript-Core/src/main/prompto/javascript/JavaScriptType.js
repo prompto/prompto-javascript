@@ -1,15 +1,15 @@
-var type = require("../type/index.js");
-var Value = require("../value/Value").Value;
-var DocumentValue = require("../value/DocumentValue").DocumentValue;
-var NullValue = require("../value/NullValue").NullValue;
-var ListValue = require("../value/ListValue").ListValue;
-var IteratorValue = require("../value/IteratorValue").IteratorValue;
-var Identifier = require("../grammar/Identifier").Identifier;
-var getTypeName = require("./JavaScriptUtils").getTypeName;
-var InternalError = require("../error/InternalError").InternalError;
-var NativeInstance = require("../value/NativeInstance").NativeInstance;
-var AnyNativeCategoryDeclaration = require("../declaration/AnyNativeCategoryDeclaration").AnyNativeCategoryDeclaration;
-var intrinsic = require("../intrinsic");
+const type = require("../type/index.js");
+const Value = require("../value/Value").Value;
+const DocumentValue = require("../value/DocumentValue").DocumentValue;
+const NullValue = require("../value/NullValue").NullValue;
+const ListValue = require("../value/ListValue").ListValue;
+const IteratorValue = require("../value/IteratorValue").IteratorValue;
+const Identifier = require("../grammar/Identifier").Identifier;
+const getTypeName = require("./JavaScriptUtils").getTypeName;
+const InternalError = require("../error/InternalError").InternalError;
+const NativeInstance = require("../value/NativeInstance").NativeInstance;
+const AnyNativeCategoryDeclaration = require("../declaration/AnyNativeCategoryDeclaration").AnyNativeCategoryDeclaration;
+const intrinsic = require("../intrinsic");
 
 class JavaScriptType extends type.CategoryType {
   
@@ -24,7 +24,7 @@ class JavaScriptType extends type.CategoryType {
     doConvertJavaScriptValueToPromptoValue(context, value, klass, returnType) {
         if(value==null)
             return NullValue.instance;
-        var res = this.convertValue(value);
+        let res = this.convertValue(value);
         if(res)
             return res;
         else
@@ -70,7 +70,7 @@ class JavaScriptType extends type.CategoryType {
     }
 
     convertCategory(context, value, klass, returnType) {
-        var decl = context.getNativeBinding(klass);
+        const decl = context.getNativeBinding(klass);
         if(decl!=null)
             return new NativeInstance(context, decl, value);
         else
@@ -79,11 +79,11 @@ class JavaScriptType extends type.CategoryType {
 
     convertIterator(context, value, klass, returnType) {
         if(returnType instanceof type.IteratorType && value.hasNext!==undefined && value.next!==undefined) {
-            var self = this;
-            var converting = {
+            const self = this;
+            const converting = {
                 hasNext : function() { return value.hasNext(); },
                 next : function() {
-                    var item = value.next();
+                    const item = value.next();
                     klass = getTypeName(item);
                     return self.doConvertJavaScriptValueToPromptoValue(context, item, klass, returnType.itemType);
                 }
@@ -102,10 +102,10 @@ class JavaScriptType extends type.CategoryType {
     }
 
     convertList(context, value, klass, returnType) {
-        var maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+        const maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
         if(maybeList && (klass==="Array" || klass==="List")) {
-            var itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
-            var items = value.map(function(item) {
+            const itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
+            const items = value.map(function(item) {
                 klass = getTypeName(item);
                 return this.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
             }, this);
@@ -115,11 +115,11 @@ class JavaScriptType extends type.CategoryType {
     }
 
     convertDocument(context, value, klass, returnType) {
-        var maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+        const maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
         if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
-            var doc = new DocumentValue();
+            const doc = new DocumentValue();
             Object.getOwnPropertyNames(value).forEach(function(name) {
-                var item = value[name];
+                let item = value[name];
                 klass = getTypeName(item);
                 item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
                 doc.setMember(context, new Identifier(name), item);
@@ -130,7 +130,7 @@ class JavaScriptType extends type.CategoryType {
     }
 
     convertNative(context, value, klass, returnType) {
-        var promptoType = JavaScriptType.scriptToTypeMap[klass] || null;
+        const promptoType = JavaScriptType.scriptToTypeMap[klass] || null;
         if (promptoType != null) {
             return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
         } else if(klass=='number') {

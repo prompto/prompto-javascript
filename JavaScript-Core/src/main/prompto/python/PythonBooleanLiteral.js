@@ -1,4 +1,4 @@
-var PythonLiteral = require("./PythonLiteral").PythonLiteral;
+const PythonLiteral = require("./PythonLiteral").PythonLiteral;
 
 class PythonBooleanLiteral extends PythonLiteral {
     constructor(text) {

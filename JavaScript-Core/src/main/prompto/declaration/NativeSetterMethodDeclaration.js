@@ -1,4 +1,4 @@
-var SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
+const SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
 
 class NativeSetterMethodDeclaration extends SetterMethodDeclaration {
     constructor(id, statements) {

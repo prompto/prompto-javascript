@@ -1,5 +1,5 @@
-var $DataStore = require("../store/DataStore").$DataStore;
-var StoredDocument = require("./StoredDocument").StoredDocument;
+const $DataStore = require("../store/DataStore").$DataStore;
+const StoredDocument = require("./StoredDocument").StoredDocument;
 
 class StorableDocument {
     constructor(categories, dbIdListener) {
@@ -25,7 +25,7 @@ class StorableDocument {
     }
 
     getOrCreateDbId() {
-        var dbId = this.getDbId();
+        let dbId = this.getDbId();
         if (dbId == null) {
             dbId = ++$DataStore.instance.nextDbId;
             if(this.dbIdListener)

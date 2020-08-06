@@ -1,12 +1,12 @@
-var SelectorExpression = require("./SelectorExpression").SelectorExpression;
-var UnresolvedIdentifier = null;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var NullValue = require("../value/NullValue").NullValue;
-var Dialect = require("../parser/Dialect").Dialect;
-var MethodType = require("../type/MethodType").MethodType;
-var VoidType = require("../type/VoidType").VoidType;
-var ParenthesisExpression = null;
-var UnresolvedCall = null;
+const SelectorExpression = require("./SelectorExpression").SelectorExpression;
+let UnresolvedIdentifier = null;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const NullValue = require("../value/NullValue").NullValue;
+const Dialect = require("../parser/Dialect").Dialect;
+const MethodType = require("../type/MethodType").MethodType;
+const VoidType = require("../type/VoidType").VoidType;
+let ParenthesisExpression = null;
+let UnresolvedCall = null;
 
 exports.resolve = () => {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
@@ -34,7 +34,7 @@ class MemberSelector extends SelectorExpression {
 
     toEDialect(writer) {
         try {
-            var type = this.check(writer.context);
+            const type = this.check(writer.context);
             if (type instanceof MethodType) {
                 writer.append("Method: ");
             }
@@ -80,17 +80,17 @@ class MemberSelector extends SelectorExpression {
     }
 
     declare(transpiler) {
-        var parent = this.resolveParent(transpiler.context);
+        const parent = this.resolveParent(transpiler.context);
         parent.declareParent(transpiler);
-        var parentType = this.checkParent(transpiler.context);
+        const parentType = this.checkParent(transpiler.context);
         return parentType.declareMember(transpiler, this, this.name);
     }
 
     transpile(transpiler) {
-        var parent = this.resolveParent(transpiler.context);
+        const parent = this.resolveParent(transpiler.context);
         parent.transpileParent(transpiler);
         transpiler.append(".");
-        var parentType = this.checkParent(transpiler.context);
+        const parentType = this.checkParent(transpiler.context);
         parentType.transpileMember(transpiler, this.name);
         return false;
     }
@@ -100,14 +100,14 @@ class MemberSelector extends SelectorExpression {
     }
 
     check(context) {
-        var parentType = this.checkParent(context);
+        const parentType = this.checkParent(context);
         return parentType ? parentType.checkMember(context, this.id, this.name) : VoidType.instance;
     }
 
     interpret(context) {
         // resolve parent to keep clarity
-        var parent = this.resolveParent(context);
-        var instance = parent.interpret(context);
+        const parent = this.resolveParent(context);
+        const instance = parent.interpret(context);
         if (instance == null || instance == NullValue.instance)
             throw new NullReferenceError();
         else

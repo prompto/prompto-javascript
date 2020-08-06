@@ -1,9 +1,9 @@
-var Literal = require("./Literal").Literal;
-var TupleType = require("../type/TupleType").TupleType;
-var TupleValue = require("../value/TupleValue").TupleValue;
-var ExpressionList = require("../utils/ExpressionList").ExpressionList;
-var List = require("../intrinsic/List").List;
-var Tuple = require("../intrinsic/Tuple").Tuple;
+const Literal = require("./Literal").Literal;
+const TupleType = require("../type/TupleType").TupleType;
+const TupleValue = require("../value/TupleValue").TupleValue;
+const ExpressionList = require("../utils/ExpressionList").ExpressionList;
+const List = require("../intrinsic/List").List;
+const Tuple = require("../intrinsic/Tuple").Tuple;
 
 class TupleLiteral extends Literal {
     constructor(mutable, expressions) {
@@ -34,9 +34,9 @@ class TupleLiteral extends Literal {
 
     interpret(context) {
         if(this.expressions.length>0) {
-            var tuple = new TupleValue();
+            const tuple = new TupleValue();
             this.expressions.forEach(expression => {
-                var item = expression.interpret(context);
+                const item = expression.interpret(context);
                 tuple.add(item);
             });
             tuple.mutable = this.mutable;

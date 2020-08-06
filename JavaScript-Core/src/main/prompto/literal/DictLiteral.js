@@ -1,16 +1,16 @@
-var Literal = require("./Literal").Literal;
-var Dictionary = require("../intrinsic/Dictionary").Dictionary;
-var DictEntryList = require("./DictEntryList").DictEntryList;
-var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var MissingType = require("../type/MissingType").MissingType;
-var DictionaryType = require("../type/DictionaryType").DictionaryType;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextType = require("../type/TextType").TextType;
-var inferElementType = require("../utils/TypeUtils").inferElementType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var TextValue = require("../value/TextValue").TextValue;
+const Literal = require("./Literal").Literal;
+const Dictionary = require("../intrinsic/Dictionary").Dictionary;
+const DictEntryList = require("./DictEntryList").DictEntryList;
+const DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const MissingType = require("../type/MissingType").MissingType;
+const DictionaryType = require("../type/DictionaryType").DictionaryType;
+const CharacterType = require("../type/CharacterType").CharacterType;
+const TextType = require("../type/TextType").TextType;
+const inferElementType = require("../utils/TypeUtils").inferElementType;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const TextValue = require("../value/TextValue").TextValue;
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
@@ -47,13 +47,13 @@ class DictLiteral extends Literal {
     }
 
     inferElementType(context) {
-        var items = this.entries.items;
+        const items = this.entries.items;
         if(items.length==0) {
             return MissingType.instance;
         }
-        var types = [];
+        const types = [];
         items.forEach(entry => {
-            var elemType = entry.value.check(context);
+            const elemType = entry.value.check(context);
             types.push(elemType);
         });
         return inferElementType(context, types);
@@ -62,10 +62,10 @@ class DictLiteral extends Literal {
     interpret(context) {
         if(this.entries.items.length>0) {
             this.check(context); /// force computation of itemType
-            var dict = new Dictionary();
+            const dict = new Dictionary();
             this.entries.items.forEach(function(entry) {
-                var key = entry.key.interpret(context);
-                var val = entry.value.interpret(context);
+                const key = entry.key.interpret(context);
+                let val = entry.value.interpret(context);
                 val = this.interpretPromotion(val);
                 dict[key] = val;
             }, this);

@@ -1,6 +1,6 @@
-var IterableType = require("./IterableType").IterableType;
-var BooleanType = require("./BooleanType").BooleanType;
-var Variable = require("../runtime/Variable").Variable;
+const IterableType = require("./IterableType").IterableType;
+const BooleanType = require("./BooleanType").BooleanType;
+const Variable = require("../runtime/Variable").Variable;
 
 class ContainerType extends IterableType {
   
@@ -19,7 +19,7 @@ class ContainerType extends IterableType {
 
     checkMember(context, section, name) {
         if ("count" == name) {
-            var IntegerType = require("./IntegerType").IntegerType;
+            const IntegerType = require("./IntegerType").IntegerType;
             return IntegerType.instance;
         } else {
             return IterableType.prototype.checkMember.call(this, context, section, name);

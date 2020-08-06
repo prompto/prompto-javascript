@@ -1,13 +1,13 @@
-var CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
-var SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
-var GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
-var MethodDeclarationMap = null;
-var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var $DataStore = require("../store/DataStore").$DataStore;
-var $Root = require("../intrinsic/$Root").$Root;
-var EnumeratedCategoryDeclaration = null;
-var EnumeratedNativeDeclaration = null;
+const CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
+const SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
+const GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
+let MethodDeclarationMap = null;
+const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const $DataStore = require("../store/DataStore").$DataStore;
+const $Root = require("../intrinsic/$Root").$Root;
+let EnumeratedCategoryDeclaration = null;
+let EnumeratedNativeDeclaration = null;
 
 exports.resolve = () => {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -27,12 +27,12 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     isWidget(context) {
         if(this.derivedFrom==null || this.derivedFrom.length!=1)
             return false;
-        var derived = context.getRegisteredDeclaration(this.derivedFrom[0]);
+        const derived = context.getRegisteredDeclaration(this.derivedFrom[0]);
         return derived && derived.isWidget(context);
     }
 
     toEDialect(writer) {
-        var hasMethods = this.methods!=null && this.methods.length>0;
+        const hasMethods = this.methods!=null && this.methods.length>0;
         this.protoToEDialect(writer, hasMethods, false); // no bindings
         if(hasMethods)
             this.methodsToEDialect(writer, this.methods);
@@ -46,7 +46,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     toODialect(writer) {
-        var hasMethods = this.methods!=null && this.methods.length>0;
+        const hasMethods = this.methods!=null && this.methods.length>0;
         this.allToODialect(writer, hasMethods);
     }
 
@@ -94,7 +94,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
                         ann.toDialect(writer);
                     });
                 }
-                var w = writer.newMemberWriter();
+                const w = writer.newMemberWriter();
                 method.toDialect(w);
                 writer.newLine();
             });
@@ -114,8 +114,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.derivedFrom==null) {
             return false;
         }
-        for(var i=0;i<this.derivedFrom.length;i++) {
-            var ancestor = this.derivedFrom[i].name;
+        for(let i=0;i<this.derivedFrom.length;i++) {
+            const ancestor = this.derivedFrom[i].name;
             if(ConcreteCategoryDeclaration.ancestorHasAttribute(ancestor, context, name)) {
                 return true;
             }
@@ -124,7 +124,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     static ancestorHasAttribute(ancestor, context, name) {
-        var actual = context.getRegisteredDeclaration(ancestor);
+        const actual = context.getRegisteredDeclaration(ancestor);
         if(!(actual instanceof CategoryDeclaration)) {
             return false;
         }
@@ -144,8 +144,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.derivedFrom==null) {
             return false;
         }
-        for(var i=0;i<this.derivedFrom.length;i++) {
-            var ancestor = this.derivedFrom[i].name;
+        for(let i=0;i<this.derivedFrom.length;i++) {
+            const ancestor = this.derivedFrom[i].name;
             if(ConcreteCategoryDeclaration.ancestorHasMethod(ancestor, context, name)) {
                 return true;
             }
@@ -154,7 +154,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     static ancestorHasMethod(ancestor, context, name) {
-        var actual = context.getRegisteredDeclaration(ancestor);
+        const actual = context.getRegisteredDeclaration(ancestor);
         if(!(actual instanceof CategoryDeclaration)) {
             return false;
         }
@@ -170,7 +170,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     checkMethods(context) {
         this.registerMethods(context);
-        for (var i = 0; i < this.methods.length; i++) {
+        for (let i = 0; i < this.methods.length; i++) {
             this.methods[i].checkChild(context);
         }
     }
@@ -186,21 +186,21 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     registerMethod(method, context) {
-        var actual;
+        let actual;
         if(method instanceof SetterMethodDeclaration) {
-            var key = "setter:" + method.name;
+            const key = "setter:" + method.name;
             actual = this.methodsMap[key] || null;
             if(actual!=null)
                 context.problemListener.reportDuplicateSetter(method.id);
             this.methodsMap[key] = method;
         } else if(method instanceof GetterMethodDeclaration) {
-            key = "getter:"+method.name;
+            const key = "getter:"+method.name;
             actual = this.methodsMap[key] || null;
             if(actual!=null)
                 context.problemListener.reportDuplicateGetter(method.id);
             this.methodsMap[key] = method;
         } else {
-            key = method.name;
+           const key = method.name;
             actual = this.methodsMap[key] || null;
             if(actual==null) {
                 actual = new MethodDeclarationMap(method.name);
@@ -213,7 +213,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     checkDerived(context) {
         if(this.derivedFrom!=null) {
             this.derivedFrom.map( id => {
-                var cd = context.getRegisteredDeclaration(id.name) || null;
+                const cd = context.getRegisteredDeclaration(id.name) || null;
                 if (cd == null)
                     context.problemListener.reportUnknownCategory(id);
                 else if(!(cd instanceof CategoryDeclaration))
@@ -226,8 +226,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.derivedFrom==null) {
             return false;
         }
-        for(var i=0;i<this.derivedFrom.length;i++) {
-            var ancestor = this.derivedFrom[i].name;
+        for(let i=0;i<this.derivedFrom.length;i++) {
+            const ancestor = this.derivedFrom[i].name;
             if(ancestor==categoryType.name) {
                 return true;
             }
@@ -239,7 +239,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     static isAncestorDerivedFrom(ancestor, context, categoryType) {
-        var actual = context.getRegisteredDeclaration(ancestor);
+        const actual = context.getRegisteredDeclaration(ancestor);
         if(!(actual instanceof CategoryDeclaration)) {
             return false;
         }
@@ -251,10 +251,10 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     getAllAttributes(context) {
-        var local = CategoryDeclaration.prototype.getAllAttributes.call(this, context) || new Set();
+        const local = CategoryDeclaration.prototype.getAllAttributes.call(this, context) || new Set();
         if(this.derivedFrom!=null) {
             this.derivedFrom.forEach(function (id) {
-                var derived = this.getAncestorAttributes(context, id);
+                const derived = this.getAncestorAttributes(context, id);
                 if (derived != null)
                     derived.forEach(attr => { local.add(attr); }, this);
             }, this);
@@ -263,7 +263,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     getAncestorAttributes(context, id) {
-        var decl = context.getRegisteredDeclaration(id.name);
+        const decl = context.getRegisteredDeclaration(id.name);
         if(decl==null)
             return null;
         else
@@ -274,7 +274,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.methodsMap==null) {
             return null;
         }
-        var method = this.methodsMap["getter:" + attrName] || null;
+        const method = this.methodsMap["getter:" + attrName] || null;
         if(method instanceof GetterMethodDeclaration) {
             return method;
         }
@@ -287,8 +287,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.derivedFrom==null) {
             return null;
         }
-        for(var i=0;i<this.derivedFrom;i++) {
-            var method = ConcreteCategoryDeclaration.findAncestorGetter(this.derivedFrom[i],context,attrName);
+        for(let i=0;i<this.derivedFrom;i++) {
+            const method = ConcreteCategoryDeclaration.findAncestorGetter(this.derivedFrom[i],context,attrName);
             if(method!=null) {
                 return method;
             }
@@ -297,7 +297,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     static findAncestorGetter(ancestor, context, attrName) {
-        var actual = context.getRegisteredDeclaration(ancestor);
+        const actual = context.getRegisteredDeclaration(ancestor);
         if(!(actual instanceof ConcreteCategoryDeclaration)) {
             return null;
         }
@@ -308,7 +308,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.methodsMap==null) {
             return null;
         }
-        var method = this.methodsMap["setter:" + attrName] || null;
+        const method = this.methodsMap["setter:" + attrName] || null;
         if(method instanceof SetterMethodDeclaration) {
             return method;
         }
@@ -321,8 +321,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.derivedFrom==null) {
             return null;
         }
-        for(var i=0;i<this.derivedFrom;i++) {
-            var method = ConcreteCategoryDeclaration.findAncestorSetter(this.derivedFrom[i],context,attrName);
+        for(let i=0;i<this.derivedFrom;i++) {
+            const method = ConcreteCategoryDeclaration.findAncestorSetter(this.derivedFrom[i],context,attrName);
             if(method!=null) {
                 return method;
             }
@@ -331,7 +331,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     static findAncestorSetter(ancestor, context, attrName) {
-        var actual = context.getRegisteredDeclaration(ancestor);
+        const actual = context.getRegisteredDeclaration(ancestor);
         if(!(actual instanceof ConcreteCategoryDeclaration)) {
             return null;
         }
@@ -339,7 +339,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     getMemberMethodsMap(context, name) {
-        var methodsMap = new MethodDeclarationMap(name);
+        const methodsMap = new MethodDeclarationMap(name);
         this.registerMemberMethods(context, methodsMap);
         return methodsMap;
     }
@@ -354,15 +354,15 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.methodsMap==null) {
             return;
         }
-        var actual = this.methodsMap[result.name] || null;
+        const actual = this.methodsMap[result.name] || null;
         if(actual==null) {
             return;
         }
         if(!(actual instanceof MethodDeclarationMap))
             context.problemListener.reportBadMember(actual.id);
-        var protos = Object.getOwnPropertyNames(actual.protos);
+        const protos = Object.getOwnPropertyNames(actual.protos);
         protos.forEach(proto => {
-            var method = actual.protos[proto];
+            const method = actual.protos[proto];
             result.registerIfMissing(method);
         });
     }
@@ -375,7 +375,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     registerAncestorMemberMethods(ancestor, context, result) {
-        var actual = context.getRegisteredDeclaration(ancestor);
+        const actual = context.getRegisteredDeclaration(ancestor);
         if(!(actual instanceof ConcreteCategoryDeclaration)) {
             return;
         }
@@ -383,20 +383,20 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     getOperatorMethod(context, operator, type) {
-        var methodName = "operator_" + operator.name;
-        var methods = this.getMemberMethodsMap(context, methodName);
+        const methodName = "operator_" + operator.name;
+        const methods = this.getMemberMethodsMap(context, methodName);
         if(methods==null)
             return null;
         // find best candidate
-        var candidate = null;
+        let candidate = null;
         methods.getAll().forEach(method => {
-            var potential = method.parameters[0].getType(context);
+            const potential = method.parameters[0].getType(context);
             if(!potential.isAssignableFrom(context, type))
                 return;
             if(candidate==null)
                 candidate = method;
             else {
-                var currentBest = candidate.parameters[0].getType(context);
+                const currentBest = candidate.parameters[0].getType(context);
                 if(potential.isAssignableFrom(context, currentBest))
                     candidate = method;
             }
@@ -405,8 +405,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     collectCategories(context) {
-        var cat_set = {};
-        var cat_list = [];
+        const cat_set = {};
+        const cat_list = [];
         this.doCollectCategories(context, cat_set, cat_list);
         return cat_list;
     }
@@ -414,7 +414,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     doCollectCategories(context, cat_set, cat_list) {
         if (this.derivedFrom != null) {
             this.derivedFrom.forEach(cat => {
-                var decl = context.getRegisteredDeclaration(cat);
+                const decl = context.getRegisteredDeclaration(cat);
                 decl.doCollectCategories(context, cat_set, cat_list);
             });
         }
@@ -429,7 +429,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         transpiler = transpiler.newInstanceTranspiler(this.getType(transpiler.context));
         if (this.derivedFrom != null) {
             this.derivedFrom.forEach(cat => {
-                var decl = transpiler.context.getRegisteredDeclaration(cat);
+                const decl = transpiler.context.getRegisteredDeclaration(cat);
                 decl.declare(transpiler);
             });
         } else
@@ -441,7 +441,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     declareMethods(transpiler) {
         this.methods.filter(decl => !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration)).forEach(method => {
-            var t = transpiler.newChildTranspiler();
+            const t = transpiler.newChildTranspiler();
             method.declare(t, false);
             t.flush();
         }, this);
@@ -456,7 +456,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
             return;
         if (this.derivedFrom != null) {
             this.derivedFrom.forEach(cat => {
-                var decl = context.getRegisteredDeclaration(cat);
+                const decl = context.getRegisteredDeclaration(cat);
                 decl.ensureDeclarationOrder(context, list, set);
             });
         }
@@ -476,7 +476,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     transpileConstructor(transpiler) {
         transpiler.append("function ").append(this.name).append("(copyFrom, values, mutable) {");
         transpiler.indent();
-        var categories = this.collectCategories(transpiler.context);
+        const categories = this.collectCategories(transpiler.context);
         if(this.storable) {
             transpiler.append("if(!this.$storable) {").newLine().indent()
                 .append("this.$storable = $DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine()
@@ -491,7 +491,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         transpiler.dedent();
         transpiler.append("}");
         transpiler.newLine();
-        var parent = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom[0] : null;
+        const parent = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom[0] : null;
         if(parent)
             transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);").newLine();
         else
@@ -500,7 +500,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     transpileLoaders(transpiler) {
-        var attributes = this.getLocalAttributes();
+        const attributes = this.getLocalAttributes();
         if (attributes) {
             attributes
                 .filter(function (attr) {
@@ -515,19 +515,19 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     isEnumeratedAttribute(context, attr) {
-        var decl = context.getRegisteredDeclaration(attr.name);
+        let decl = context.getRegisteredDeclaration(attr.name);
         decl = context.getRegisteredDeclaration(decl.type.name);
         return  decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration;
     }
 
     transpileLocalAttributes(transpiler) {
-        var attributes = this.getLocalAttributes();
+        const attributes = this.getLocalAttributes();
         if (attributes) {
             transpiler.append("this.$mutable = true;").newLine();
             transpiler.append("values = Object.assign({}, copyFrom, values);").newLine();
             attributes.forEach(function (attr) {
-                var isEnum =  this.isEnumeratedAttribute(transpiler.context, attr);
-                var decl = transpiler.context.getRegisteredDeclaration(attr.name);
+                const isEnum =  this.isEnumeratedAttribute(transpiler.context, attr);
+                const decl = transpiler.context.getRegisteredDeclaration(attr.name);
                 transpiler.append("this.setMember('")
                         .append(attr.name)
                         .append("', values.hasOwnProperty('")
@@ -559,7 +559,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     transpileGetterSetterAttributes(transpiler) {
-        var allAttributes = this.getAllAttributes(transpiler.context);
+        const allAttributes = this.getAllAttributes(transpiler.context);
         if(allAttributes) {
             allAttributes.forEach(function (attr) {
                 if (this.findGetter(transpiler.context, attr.name) || this.findSetter(transpiler.context, attr.name))
@@ -570,25 +570,25 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     transpileMethods(transpiler) {
         this.methods.filter(decl => !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration)).forEach(method => {
-            var t = transpiler.newChildTranspiler();
+            const t = transpiler.newChildTranspiler();
             method.transpile(t);
             t.flush();
         }, this);
     }
 
     transpileGetterSetters(transpiler) {
-        var getterSetters = this.methods.filter(decl => decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration, this);
-        var names = new Set(getterSetters.map(decl => decl.id.name));
+        const getterSetters = this.methods.filter(decl => decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration, this);
+        const names = new Set(getterSetters.map(decl => decl.id.name));
         names.forEach(function(name) { this.transpileGetterSetter(transpiler, name); }, this);
     }
 
     transpileGetterSetter(transpiler, name) {
-        var getter = this.findGetter(transpiler.context, name);
-        var setter = this.findSetter(transpiler.context, name);
+        const getter = this.findGetter(transpiler.context, name);
+        const setter = this.findSetter(transpiler.context, name);
         transpiler.append("Object.defineProperty(").append(this.name).append(".prototype, '").append(name).append("', {").indent();
         transpiler.append("get: function() {").indent();
         if(getter) {
-            var t = transpiler.newGetterTranspiler(name);
+            const t = transpiler.newGetterTranspiler(name);
             getter.transpile(t);
             t.flush();
         } else
@@ -597,7 +597,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         transpiler.append(",").newLine();
         transpiler.append("set: function(").append(name).append(") {").indent();
         if(setter) {
-            t = transpiler.newSetterTranspiler(name);
+            const t = transpiler.newSetterTranspiler(name);
             t.append(name).append(" = (function(").append(name).append(") {").indent();
             setter.transpile(t);
             t.append(";").dedent().append("})(name);").newLine();
@@ -609,7 +609,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     locateSectionAtLine(line) {
-        for(var i=0;i<this.methods.length;i++) {
+        for(let i=0;i<this.methods.length;i++) {
             const s = this.methods[i].locateSectionAtLine(line);
             if(s)
                 return s;

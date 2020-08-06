@@ -1,5 +1,5 @@
-var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
-var ThisExpression = require("../expression/ThisExpression").ThisExpression;
+const JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
+const ThisExpression = require("../expression/ThisExpression").ThisExpression;
 
 class JavaScriptThisExpression extends JavaScriptExpression {
     constructor() {

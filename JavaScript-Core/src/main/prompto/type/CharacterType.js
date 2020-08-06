@@ -1,12 +1,12 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var IntegerType = require("./IntegerType").IntegerType;
-var TextType = require("./TextType").TextType;
-var CharacterValue = null;
-var RangeType = require("./RangeType").RangeType;
-var CharacterRange = require("../value/CharacterRange").CharacterRange;
-var Identifier = require("../grammar/Identifier").Identifier;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const IntegerType = require("./IntegerType").IntegerType;
+const TextType = require("./TextType").TextType;
+let CharacterValue = null;
+const RangeType = require("./RangeType").RangeType;
+const CharacterRange = require("../value/CharacterRange").CharacterRange;
+const Identifier = require("../grammar/Identifier").Identifier;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 exports.resolve = () => {
     CharacterValue = require("../value/CharacterValue").CharacterValue;
@@ -119,7 +119,7 @@ class CharacterType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === CharacterType.instance) {
-            var module = require("../intrinsic/Range");
+            const module = require("../intrinsic/Range");
             transpiler.require(module.Range);
             transpiler.require(module.IntegerRange);
             transpiler.require(module.CharacterRange);

@@ -1,5 +1,5 @@
-var ProblemCollector = require('./ProblemCollector').ProblemCollector;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
+const ProblemCollector = require('./ProblemCollector').ProblemCollector;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 class ProblemListener extends ProblemCollector {
    

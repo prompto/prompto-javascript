@@ -3,7 +3,7 @@ exports.getTypeName = value => {
     if (value === null) {
         return "null";
     }
-    var t = typeof(value);
+    const t = typeof(value);
     switch(t) {
         case "function":
             if(value.name)
@@ -17,7 +17,7 @@ exports.getTypeName = value => {
                     // Internet Explorer
                     // Anonymous functions are stringified as follows: 'function () {}'
                     // => the regex below does not match
-                    var match = value.constructor.toString().match(/^function (.+)\(.*$/);
+                    const match = value.constructor.toString().match(/^function (.+)\(.*$/);
                     if (match) {
                         return match[1];
                     }

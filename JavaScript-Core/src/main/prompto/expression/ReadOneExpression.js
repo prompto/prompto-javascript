@@ -1,10 +1,10 @@
-var Expression = require("./Expression").Expression;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var ResourceContext = require("../runtime/Context").ResourceContext;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
+const Expression = require("./Expression").Expression;
+const ResourceType = require("../type/ResourceType").ResourceType;
+const ResourceContext = require("../runtime/Context").ResourceContext;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
+const TextType = require("../type/TextType").TextType;
+const TextValue = require("../value/TextValue").TextValue;
 
 class ReadOneExpression extends Expression {
     constructor(resource) {
@@ -25,7 +25,7 @@ class ReadOneExpression extends Expression {
     check(context) {
         if(!(context instanceof ResourceContext))
             context.problemListener.reportNotAResourceContext(this.resource);
-        var sourceType = this.resource.check(context);
+        const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
             context.problemListener.reportNotAResource(this.resource);
         return TextType.instance;
@@ -34,14 +34,14 @@ class ReadOneExpression extends Expression {
     interpret(context) {
         if(!(context instanceof ResourceContext))
             context.problemListener.reportNotAResourceContext(this.resource);
-        var res = this.resource.interpret(context);
+        const res = this.resource.interpret(context);
         if(res==null) {
             throw new NullReferenceError();
         }
         if(!res.isReadable || !res.isReadable()) {
             throw new InvalidResourceError("Not readable");
         }
-        var s = res.readLine();
+        const s = res.readLine();
         return new TextValue(s);
     }
 

@@ -1,5 +1,5 @@
-var Value = require("./Value").Value;
-var VersionType = null;
+const Value = require("./Value").Value;
+let VersionType = null;
 
 exports.resolve = () => {
     VersionType = require("../type/VersionType").VersionType;

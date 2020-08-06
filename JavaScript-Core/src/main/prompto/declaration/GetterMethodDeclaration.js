@@ -1,4 +1,4 @@
-var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 
 class GetterMethodDeclaration extends ConcreteMethodDeclaration {
     constructor(id, statements) {

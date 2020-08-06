@@ -1,7 +1,7 @@
-var UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
-var Variable = require("../runtime/Variable").Variable;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
+const UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
+const Variable = require("../runtime/Variable").Variable;
+const VoidType = require("../type/VoidType").VoidType;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class RemoteCall extends UnresolvedCall {
     constructor(caller, assignments, resultName, andThen) {
@@ -16,7 +16,7 @@ class RemoteCall extends UnresolvedCall {
     }
 
     toDialect(writer) {
-        var resultType = this.resolveAndCheck(writer.context);
+        const resultType = this.resolveAndCheck(writer.context);
         super.toDialect(writer);
         writer.append(" then");
         writer = writer.newChildWriter();
@@ -36,7 +36,7 @@ class RemoteCall extends UnresolvedCall {
     }
 
     check(context) {
-        var resultType = this.resolveAndCheck(context);
+        const resultType = this.resolveAndCheck(context);
         context = context.newChildContext();
         if (this.resultName != null)
             context.registerValue(new Variable(this.resultName, resultType));
@@ -45,8 +45,8 @@ class RemoteCall extends UnresolvedCall {
     }
 
     interpret(context) {
-        var resultType = this.resolveAndCheck(context);
-        var resultValue = UnresolvedCall.prototype.interpret.call(this, context);
+        const resultType = this.resolveAndCheck(context);
+        const resultValue = UnresolvedCall.prototype.interpret.call(this, context);
         context = context.newChildContext();
         if (this.resultName != null) {
             context.registerValue(new Variable(this.resultName, resultType));
@@ -57,9 +57,9 @@ class RemoteCall extends UnresolvedCall {
     }
 
     declare(transpiler) {
-        var resultType = this.resolveAndCheck(transpiler.context);
+        const resultType = this.resolveAndCheck(transpiler.context);
         this.resolved.declare(transpiler);
-        var runner = require("../intrinsic/RemoteRunner").RemoteRunner;
+        const runner = require("../intrinsic/RemoteRunner").RemoteRunner;
         transpiler.require(runner);
         transpiler = transpiler.newChildTranspiler();
         if (this.resultName != null)
@@ -68,7 +68,7 @@ class RemoteCall extends UnresolvedCall {
     }
 
     transpile(transpiler) {
-        var resultType = this.resolveAndCheck(transpiler.context);
+        const resultType = this.resolveAndCheck(transpiler.context);
         transpiler = transpiler.append("RemoteRunner.run(function() {").indent().append("return ");
         this.resolved.transpile(transpiler);
         transpiler.dedent().append("}, function(");

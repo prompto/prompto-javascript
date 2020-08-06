@@ -1,8 +1,8 @@
-var Value = require("./Value").Value;
-var IntegerValue = null; // circular dependency
-var DecimalType = null;
-var decimalTostring = require("../utils/Utils").decimalToString;
-var DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
+const Value = require("./Value").Value;
+let IntegerValue = null; // circular dependency
+let DecimalType = null;
+const decimalTostring = require("../utils/Utils").decimalToString;
+const DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
 
 exports.resolve = () => {
 	IntegerValue = require("./IntegerValue").IntegerValue;

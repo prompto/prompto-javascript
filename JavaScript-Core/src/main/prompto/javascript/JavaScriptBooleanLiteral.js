@@ -1,5 +1,5 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var BooleanType = require("../type/BooleanType").BooleanType;
+const JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+const BooleanType = require("../type/BooleanType").BooleanType;
 
 class JavaScriptBooleanLiteral extends JavaScriptLiteral {
     constructor(text) {

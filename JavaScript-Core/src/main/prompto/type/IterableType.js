@@ -1,4 +1,4 @@
-var NativeType = require("./NativeType").NativeType;
+const NativeType = require("./NativeType").NativeType;
 
 class IterableType extends NativeType {
     constructor(id, itemType) {

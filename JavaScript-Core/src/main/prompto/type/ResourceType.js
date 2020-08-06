@@ -1,4 +1,4 @@
-var CategoryType = require("./CategoryType").CategoryType;
+const CategoryType = require("./CategoryType").CategoryType;
 
 class ResourceType extends CategoryType {
  

@@ -1,4 +1,4 @@
-var Expression = require("./Expression").Expression;
+const Expression = require("./Expression").Expression;
 
 class MinusExpression extends Expression {
     constructor(expression) {
@@ -17,23 +17,23 @@ class MinusExpression extends Expression {
     }
 
     check(context) {
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         return type.checkMinus(context);
     }
 
     interpret(context) {
-        var val = this.expression.interpret(context);
+        const val = this.expression.interpret(context);
         return val.Minus(context);
     }
 
     declare(transpiler) {
         this.expression.declare(transpiler);
-        var type = this.expression.check(transpiler.context);
+        const type = this.expression.check(transpiler.context);
         return type.declareMinus(transpiler, this.expression);
     }
 
     transpile(transpiler) {
-        var type = this.expression.check(transpiler.context);
+        const type = this.expression.check(transpiler.context);
         return type.transpileMinus(transpiler, this.expression);
     }
 }

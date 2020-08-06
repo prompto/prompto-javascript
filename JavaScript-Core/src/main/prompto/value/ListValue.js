@@ -1,9 +1,9 @@
-var BaseValueList = require("./BaseValueList").BaseValueList;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var multiplyArray = require("../utils/Utils").multiplyArray;
-var List  = require("../intrinsic/List").List;
-var ListType = null;
-var SetValue = null;
+const BaseValueList = require("./BaseValueList").BaseValueList;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const multiplyArray = require("../utils/Utils").multiplyArray;
+const List  = require("../intrinsic/List").List;
+let ListType = null;
+let SetValue = null;
 
 exports.resolve = () => {
     ListType = require("../type/ListType").ListType;
@@ -34,17 +34,17 @@ class ListValue extends BaseValueList {
     }
 
     convertToJavaScript() {
-        var items = this.items.map(value => value.convertToJavaScript(), this);
+        const items = this.items.map(value => value.convertToJavaScript(), this);
         return new List(this.mutable, items);
     }
 
     Add(context, value) {
         if (value instanceof ListValue) {
-            var items = this.items.concat(value.items);
+            const items = this.items.concat(value.items);
             return new ListValue(this.type.itemType, items);
         } else if(value instanceof SetValue) {
-            var items1 = Array.from(value.items.set.values());
-            var items2 = this.items.concat(items1);
+            const items1 = Array.from(value.items.set.values());
+            const items2 = this.items.concat(items1);
             return new ListValue(this.type.itemType, items2);
         } else {
             return BaseValueList.prototype.Add.apply(this, context, value);
@@ -53,11 +53,11 @@ class ListValue extends BaseValueList {
 
     Subtract(context, value) {
         if (value instanceof ListValue) {
-            var setValue = new SetValue(this.type.itemType);
+            const setValue = new SetValue(this.type.itemType);
             value = setValue.Add(context, value);
         }
         if(value instanceof SetValue) {
-            var items = this.items.filter(item => !value.items.has(item));
+            const items = this.items.filter(item => !value.items.has(item));
             return new ListValue(this.type.itemType, items);
         } else {
             return BaseValueList.prototype.Subtract.apply(this, context, value);
@@ -66,11 +66,11 @@ class ListValue extends BaseValueList {
 
     Multiply(context, value) {
         if (value instanceof IntegerValue) {
-            var count = value.value;
+            const count = value.value;
             if (count < 0) {
                 throw new SyntaxError("Negative repeat count:" + count);
             } else {
-                var items = multiplyArray(this.items, count);
+                const items = multiplyArray(this.items, count);
                 return new ListValue(this.type.itemType, items);
             }
         } else {
@@ -85,7 +85,7 @@ class ListValue extends BaseValueList {
     }
 
     filter(filter) {
-        var items = this.items.filter(filter);
+        const items = this.items.filter(filter);
         return new ListValue(this.type.itemType, items);
     }
 }

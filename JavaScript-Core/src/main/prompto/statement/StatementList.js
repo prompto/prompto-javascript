@@ -1,11 +1,11 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var TypeMap = require("../type/TypeMap").TypeMap;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var NativeCall = require("./NativeCall").NativeCall;
-var JavaScriptNativeCall = require("../javascript/JavaScriptNativeCall").JavaScriptNativeCall;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const TypeMap = require("../type/TypeMap").TypeMap;
+const VoidType = require("../type/VoidType").VoidType;
+const Dialect = require("../parser/Dialect").Dialect;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const NativeCall = require("./NativeCall").NativeCall;
+const JavaScriptNativeCall = require("../javascript/JavaScriptNativeCall").JavaScriptNativeCall;
 
 class StatementList extends ObjectList {
     constructor(statement) {
@@ -46,11 +46,11 @@ class StatementList extends ObjectList {
             }
             return VoidType.instance;
         } else {
-            var section = null;
-            var stmts = nativeOnly ? this.filter(stmt => stmt instanceof JavaScriptNativeCall, this) : this;
-            var types = new TypeMap();
+            let section = null;
+            const stmts = nativeOnly ? this.filter(stmt => stmt instanceof JavaScriptNativeCall, this) : this;
+            const types = new TypeMap();
             stmts.forEach(function (stmt) {
-                var type = this.checkStatement(context, stmt);
+                let type = this.checkStatement(context, stmt);
                 if(!stmt.canReturn())
                     type = VoidType.instance;
                 if(type!==VoidType.instance) {
@@ -91,11 +91,11 @@ class StatementList extends ObjectList {
     }
 
     doInterpret(context) {
-        for(var i=0;i<this.length;i++) {
-            var stmt = this[i];
+        for(let i=0;i<this.length;i++) {
+            const stmt = this[i];
             context.enterStatement(stmt);
             try {
-                var result = stmt.interpret(context);
+                let result = stmt.interpret(context);
                 if(!stmt.canReturn())
                     result = null;
                 if(result!=null)
@@ -108,13 +108,13 @@ class StatementList extends ObjectList {
     }
 
     doInterpretNative(context, returnType) {
-        for(var i=0;i<this.length;i++) {
-            var stmt = this[i];
+        for(let i=0;i<this.length;i++) {
+            const stmt = this[i];
             if(!(stmt instanceof JavaScriptNativeCall))
                 continue;
             context.enterStatement(stmt);
             try {
-                var result = stmt.interpret(context, returnType);
+                const result = stmt.interpret(context, returnType);
                 if(result!=null)
                     return result;
             } finally {
@@ -153,7 +153,7 @@ class StatementList extends ObjectList {
 
     transpile(transpiler) {
         this.forEach(stmt => {
-            var skip = stmt.transpile(transpiler);
+            const skip = stmt.transpile(transpiler);
             if(!skip)
                 transpiler.append(";").newLine();
         });

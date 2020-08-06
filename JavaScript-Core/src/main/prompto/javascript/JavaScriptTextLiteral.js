@@ -1,5 +1,5 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var TextType = require("../type/TextType").TextType;
+const JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+const TextType = require("../type/TextType").TextType;
 
 class JavaScriptTextLiteral extends JavaScriptLiteral {
     constructor(text) {

@@ -1,5 +1,5 @@
-var OLexer = require("./OLexer").OLexer;
-var Dialect = null;
+const OLexer = require("./OLexer").OLexer;
+let Dialect = null;
 
 exports.resolve = () => {
 	Dialect = require("./Dialect").Dialect;

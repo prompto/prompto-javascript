@@ -1,5 +1,5 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var Dialect = require("../parser/Dialect").Dialect;
+const ObjectList = require("../utils/ObjectList").ObjectList;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class IdentifierList extends ObjectList {
     constructor(item) {
@@ -16,7 +16,7 @@ class IdentifierList extends ObjectList {
     }
 
     hasAttribute(name) {
-        for(var i = 0; i < this.length; i++) {
+        for(let i = 0; i < this.length; i++) {
             if(this[i].name===name)
                 return true;
         }
@@ -46,7 +46,7 @@ class IdentifierList extends ObjectList {
                 writer.append(this[0].name);
                 break;
             default:
-                for(var i=0;i<this.length;i++) {
+                for(let i=0;i<this.length;i++) {
                     if(finalAnd && i==this.length-1)
                         break;
                     writer.append(this[i].name);

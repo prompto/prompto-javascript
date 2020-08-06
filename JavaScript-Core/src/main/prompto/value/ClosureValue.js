@@ -1,4 +1,4 @@
-var Value = require("./Value").Value;
+const Value = require("./Value").Value;
 
 class ClosureValue extends Value {
  
@@ -8,12 +8,12 @@ class ClosureValue extends Value {
     }
 
     interpret(context) {
-        var parentMost = this.context.getParentMostContext();
-        var savedParent = parentMost.getParentContext();
+        const parentMost = this.context.getParentMostContext();
+        const savedParent = parentMost.getParentContext();
         if(!context.isChildOf(parentMost))
             parentMost.setParentContext(context);
         try {
-            var local = this.context.newChildContext();
+            const local = this.context.newChildContext();
             return this.doInterpret(local);
         } finally {
             parentMost.setParentContext(savedParent);

@@ -1,7 +1,7 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-var MethodType = require("../type/MethodType").MethodType;
-var AnyType = require("../type/AnyType").AnyType;
+const PropertyValidator = require("./PropertyValidator").PropertyValidator;
+const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+const MethodType = require("../type/MethodType").MethodType;
+const AnyType = require("../type/AnyType").AnyType;
 
 class TypeSetValidator extends PropertyValidator {
     constructor(types) {
@@ -15,7 +15,7 @@ class TypeSetValidator extends PropertyValidator {
     }
 
     validate(context, property) {
-        var actual = property.check(context);
+        const actual = property.check(context);
         if(!Array.from(this.types).some(type => type.isAssignableFrom(context, actual), this))
             context.problemListener.reportIllegalAssignment(property, this.types, actual);
     }
@@ -24,7 +24,7 @@ class TypeSetValidator extends PropertyValidator {
         return Array.from(this.types)
             .filter(t => t instanceof MethodType)
             .map(function(t) {
-                var decls = context.getRegisteredDeclaration(this.type.name);
+                const decls = context.getRegisteredDeclaration(this.type.name);
                 return decls instanceof MethodDeclarationMap ? decls.getAll() : [];
             })
             .reduce((reduced, current) => reduced.concat(current), []);

@@ -1,10 +1,10 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var TupleType = require("../type/TupleType").TupleType;
-var AnyType = require("../type/AnyType").AnyType;
-var VoidType = require("../type/VoidType").VoidType;
-var Variable = require("../runtime/Variable").Variable;
-var TupleValue = require("../value/TupleValue").TupleValue;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const TupleType = require("../type/TupleType").TupleType;
+const AnyType = require("../type/AnyType").AnyType;
+const VoidType = require("../type/VoidType").VoidType;
+const Variable = require("../runtime/Variable").Variable;
+const TupleValue = require("../value/TupleValue").TupleValue;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
 
 class AssignTupleStatement extends SimpleStatement {
     constructor(names, expression) {
@@ -15,17 +15,17 @@ class AssignTupleStatement extends SimpleStatement {
     }
 
     check(context) {
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         if(type!=TupleType.instance) {
             throw new SyntaxError("Expecting a tuple expression, got " + type.getName());
         }
         this.names.forEach(name => {
-            var actual = context.getRegistered(name);
+            const actual = context.getRegistered(name);
             if(actual==null) {
                 context.registerValue(new Variable(name, AnyType.instance));
             } else {
                 // need to check type compatibility
-                var actualType = actual.getType(context);
+                const actualType = actual.getType(context);
                 actualType.checkAssignableFrom(context, AnyType.instance);
             }
         }, this);
@@ -35,7 +35,7 @@ class AssignTupleStatement extends SimpleStatement {
     declare(transpiler) {
         this.expression.declare(transpiler);
         this.names.forEach(name => {
-            var actual = transpiler.context.getRegistered(name);
+            const actual = transpiler.context.getRegistered(name);
             if(actual==null)
                 transpiler.context.registerValue(new Variable(name, AnyType.instance));
          }, this);
@@ -45,7 +45,7 @@ class AssignTupleStatement extends SimpleStatement {
         transpiler.append("var [");
         this.names.forEach(name => {
             transpiler.append(name).append(", ");
-            var actual = transpiler.context.getRegistered(name);
+            const actual = transpiler.context.getRegistered(name);
             if(actual==null)
                 transpiler.context.registerValue(new Variable(name, AnyType.instance));
         });
@@ -55,13 +55,13 @@ class AssignTupleStatement extends SimpleStatement {
     }
 
     interpret(context) {
-        var object = this.expression.interpret(context);
+        const object = this.expression.interpret(context);
         if(!(object instanceof TupleValue)) {
             throw new SyntaxError("Expecting a tuple expression, got " + typeof(object));
         }
-        for(var i=0;i<this.names.length;i++) {
-            var name = this.names[i];
-            var value = object.getItemInContext(context, new IntegerValue(i+1)); // since getItemInContext is 1 based
+        for(let i=0;i<this.names.length;i++) {
+            const name = this.names[i];
+            const value = object.getItemInContext(context, new IntegerValue(i+1)); // since getItemInContext is 1 based
             if(context.getRegisteredValue(name)==null) {
                 context.registerValue(new Variable(name, AnyType.instance));
             }

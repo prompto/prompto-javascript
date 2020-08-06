@@ -1,7 +1,7 @@
-var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-var ParameterList = require("../param/ParameterList").ParameterList;
-var Identifier = require("../grammar/Identifier").Identifier;
-var VoidType = require("../type/VoidType").VoidType;
+const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+const ParameterList = require("../param/ParameterList").ParameterList;
+const Identifier = require("../grammar/Identifier").Identifier;
+const VoidType = require("../type/VoidType").VoidType;
 
 class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
     constructor(op, arg, returnType, stmts) {

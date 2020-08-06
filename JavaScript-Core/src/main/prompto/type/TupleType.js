@@ -1,10 +1,10 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var SetType = require("./SetType").SetType;
-var ListType = require("./ListType").ListType;
-var IntegerType = require("./IntegerType").IntegerType;
-var AnyType = require("./AnyType").AnyType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const SetType = require("./SetType").SetType;
+const ListType = require("./ListType").ListType;
+const IntegerType = require("./IntegerType").IntegerType;
+const AnyType = require("./AnyType").AnyType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class TupleType extends NativeType {
 
@@ -122,7 +122,7 @@ class TupleType extends NativeType {
     }
 
     declareContainsAllOrAny(transpiler, other, container, items) {
-        var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
@@ -149,7 +149,7 @@ class TupleType extends NativeType {
     getMemberMethods(context, name) {
         switch (name) {
             case "join":
-                var JoinTupleMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinTupleMethodDeclaration;
+                const JoinTupleMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinTupleMethodDeclaration;
                 return [new JoinTupleMethodDeclaration()];
             default:
                 return NativeType.prototype.getMemberMethods.call(context, name);

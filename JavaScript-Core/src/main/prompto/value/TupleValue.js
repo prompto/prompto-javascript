@@ -1,8 +1,8 @@
-var InternalError = require("../error/InternalError").InternalError;
-var BaseValueList = require("./BaseValueList").BaseValueList;
-var BooleanValue = require("./BooleanValue").BooleanValue;
-var TupleType = null;
-var SetValue = null;
+const InternalError = require("../error/InternalError").InternalError;
+const BaseValueList = require("./BaseValueList").BaseValueList;
+const BooleanValue = require("./BooleanValue").BooleanValue;
+let TupleType = null;
+let SetValue = null;
 
 exports.resolve = () => {
     TupleType = require("../type/TupleType").TupleType;
@@ -36,10 +36,10 @@ class TupleValue extends BaseValueList {
 
     Add(context, value) {
         if (value instanceof BaseValueList) {
-            var items = this.items.concat(value.items);
+            const items = this.items.concat(value.items);
             return new TupleValue(items);
         } else if(value instanceof SetValue) {
-            items = Array.from(value.items.set.values());
+            let items = Array.from(value.items.set.values());
             items = this.items.concat(items);
             return new TupleValue(items);
         } else {
@@ -48,12 +48,12 @@ class TupleValue extends BaseValueList {
     }
 
     filter(context, itemId, filter) {
-        var result = new TupleValue();
-        var iter = this.getIterator(context);
+        const result = new TupleValue();
+        const iter = this.getIterator(context);
         while(iter.hasNext()) {
-            var o = iter.next();
+            const o = iter.next();
             context.setValue(itemId, o);
-            var test = filter.interpret(context);
+            const test = filter.interpret(context);
             if(!(test instanceof BooleanValue)) {
                 throw new InternalError("Illegal test result: " + test);
             }

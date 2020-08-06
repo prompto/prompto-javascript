@@ -1,4 +1,4 @@
-var JavaLiteral = require("./JavaLiteral").JavaLiteral;
+const JavaLiteral = require("./JavaLiteral").JavaLiteral;
 
 class JavaIntegerLiteral extends JavaLiteral {
     constructor(text) {

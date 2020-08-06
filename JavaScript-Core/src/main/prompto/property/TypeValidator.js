@@ -1,6 +1,6 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-var MethodType = require("../type/MethodType").MethodType;
+const PropertyValidator = require("./PropertyValidator").PropertyValidator;
+const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+const MethodType = require("../type/MethodType").MethodType;
 
 class TypeValidator extends PropertyValidator {
     constructor(type) {
@@ -14,7 +14,7 @@ class TypeValidator extends PropertyValidator {
     }
 
     validate(context, jsxProp) {
-        var actual = this.type instanceof MethodType ? jsxProp.checkProto(context, this.type) : jsxProp.check(context);
+        const actual = this.type instanceof MethodType ? jsxProp.checkProto(context, this.type) : jsxProp.check(context);
         if(!this.type.isAssignableFrom(context, actual.anyfy()))
             context.problemListener.reportIllegalAssignment(jsxProp, this.type, actual);
     }
@@ -35,7 +35,7 @@ class TypeValidator extends PropertyValidator {
 
     getMethodDeclarations(context) {
         if(this.type instanceof MethodType) {
-            var decls = context.getRegisteredDeclaration(this.type.name);
+            const decls = context.getRegisteredDeclaration(this.type.name);
             if(decls instanceof MethodDeclarationMap)
                 return decls.getAll();
         }

@@ -1,15 +1,15 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var PeriodType = require("./PeriodType").PeriodType;
-var IntegerType = require("./IntegerType").IntegerType;
-var TextType = require("./TextType").TextType;
-var DateType = null;
-var TimeType = null;
-var DateTime = require("../intrinsic/DateTime").DateTime;
-var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
-var Identifier = require("../grammar/Identifier").Identifier;
-var LocalDate = require("../intrinsic/LocalDate").LocalDate;
-var LocalTime = require("../intrinsic/LocalTime").LocalTime;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const PeriodType = require("./PeriodType").PeriodType;
+const IntegerType = require("./IntegerType").IntegerType;
+const TextType = require("./TextType").TextType;
+let DateType = null;
+let TimeType = null;
+const DateTime = require("../intrinsic/DateTime").DateTime;
+const DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
+const Identifier = require("../grammar/Identifier").Identifier;
+const LocalDate = require("../intrinsic/LocalDate").LocalDate;
+const LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
 
 exports.resolve = () => {

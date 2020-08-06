@@ -1,6 +1,6 @@
-var Literal = require("./Literal").Literal;
-var TextValue = null;
-var TextType = require("../type/TextType").TextType;
+const Literal = require("./Literal").Literal;
+let TextValue = null;
+const TextType = require("../type/TextType").TextType;
 
 
 exports.resolve = () => {

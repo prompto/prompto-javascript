@@ -1,12 +1,12 @@
-var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
-var UnresolvedIdentifier = null;
-var UnresolvedParameter = null;
-var CategoryParameter = null;
-var AttributeParameter = null;
+const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+const Argument = require("../grammar/Argument").Argument;
+let UnresolvedIdentifier = null;
+let UnresolvedParameter = null;
+let CategoryParameter = null;
+let AttributeParameter = null;
 
 exports.resolve = () => {
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
@@ -31,9 +31,9 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 
     replaceLocalsWithArguments(args) {
-        var items = args.map(argument => {
-            var param = argument.parameter;
-            var exp = argument.expression;
+        const items = args.map(argument => {
+            const param = argument.parameter;
+            let exp = argument.expression;
             if(exp instanceof ContextualExpression)
                 exp = exp.expression;
             if(exp && exp.name) {
@@ -53,8 +53,8 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 
     transpileDispatch(transpiler) {
-        var common = this.collectCommonArgs();
-        for(var i=0; i<this.declarations.length; i++) {
+        const common = this.collectCommonArgs();
+        for(let i=0; i<this.declarations.length; i++) {
             if(i>0)
                 transpiler.append("else ");
             if(i<this.declarations.length-1) {
@@ -69,13 +69,13 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 
     collectCommonArgs() {
-        var common = null;
-        for(var i=0; i<this.declarations.length; i++) {
-            var declaration = this.declarations[i];
+        let common = null;
+        for(let i=0; i<this.declarations.length; i++) {
+            const declaration = this.declarations[i];
             if(i==0)
                 common = new StrictSet(declaration.parameters);
             else {
-                var current = new StrictSet(declaration.parameters);
+                const current = new StrictSet(declaration.parameters);
                 common = common.intersect(current);
                 if(common.length===0)
                     break;
@@ -96,15 +96,15 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 
     transpileTest(transpiler, common, declaration) {
-        for(var i = 0, count = 0; i<this.call.args.length; i++) {
-            var incoming = this.call.args[i].parameter;
+        for(let i = 0, count = 0; i<this.call.args.length; i++) {
+            let incoming = this.call.args[i].parameter;
             if(common.has(incoming))
                 continue;
             if(count++)
                 transpiler.append(" && ");
             if(incoming instanceof UnresolvedParameter)
                 incoming = incoming.resolved;
-            var outgoing = incoming==null ? declaration.parameters[0] : this.findCorrespondingArg(transpiler.context, declaration.parameters, common, incoming);
+            let outgoing = incoming==null ? declaration.parameters[0] : this.findCorrespondingArg(transpiler.context, declaration.parameters, common, incoming);
             if(outgoing instanceof UnresolvedParameter)
                 outgoing = outgoing.resolved;
             if(incoming==null)
@@ -121,8 +121,8 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 
     findCorrespondingArg(context, args, common, incoming) {
-        for(var i=0;i<args.length;i++) {
-            var outgoing = args[i];
+        for(let i=0;i<args.length;i++) {
+            const outgoing = args[i];
             if (common.has(outgoing))
                 continue;
             if (outgoing.equals(incoming))

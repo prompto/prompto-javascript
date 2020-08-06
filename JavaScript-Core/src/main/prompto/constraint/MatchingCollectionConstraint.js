@@ -1,7 +1,7 @@
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var Identifier = require("../grammar/Identifier").Identifier;
-var Variable = require("../runtime/Variable").Variable;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const Identifier = require("../grammar/Identifier").Identifier;
+const Variable = require("../runtime/Variable").Variable;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
 class MatchingCollectionConstraint {
     constructor(collection) {
@@ -10,7 +10,7 @@ class MatchingCollectionConstraint {
     }
 
     checkValue(context, value) {
-        var container = this.collection.interpret(context);
+        const container = this.collection.interpret(context);
         if(container.hasItem) {
             if(!(container.hasItem(context, value))) {
                 throw new InvalidDataError("" + value.toString() + " is not in: " + this.collection.toString());
@@ -27,7 +27,7 @@ class MatchingCollectionConstraint {
 
     declare(transpiler, name, type) {
         transpiler = transpiler.newChildTranspiler();
-        var id = new Identifier("value");
+        const id = new Identifier("value");
         transpiler.context.registerValue(new Variable(id, type));
         this.collection.declare(transpiler);
         this.transpile = function(transpiler) { this.transpileChecker(transpiler, name, type); };
@@ -38,7 +38,7 @@ class MatchingCollectionConstraint {
     transpileChecker(transpiler, name, type) {
         transpiler.append("function $check_").append(name).append("(value) {").indent();
         transpiler = transpiler.newChildTranspiler();
-        var id = new Identifier("value");
+        const id = new Identifier("value");
         transpiler.context.registerValue(new Variable(id, type));
         transpiler.append("if(");
         this.collection.transpile(transpiler);

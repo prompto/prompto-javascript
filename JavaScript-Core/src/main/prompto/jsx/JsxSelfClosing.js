@@ -1,4 +1,4 @@
-var JsxElementBase = require("./JsxElementBase").JsxElementBase;
+const JsxElementBase = require("./JsxElementBase").JsxElementBase;
 
 class JsxSelfClosing extends JsxElementBase {
     constructor(id, nameSuite, properties, elementSuite) {

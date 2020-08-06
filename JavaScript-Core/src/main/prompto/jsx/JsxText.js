@@ -1,6 +1,6 @@
-var IJsxExpression = require("./IJsxExpression").IJsxExpression;
-var TextType = require("../type/TextType").TextType;
-var Entities = require('html-entities').XmlEntities;
+const IJsxExpression = require("./IJsxExpression").IJsxExpression;
+const TextType = require("../type/TextType").TextType;
+const Entities = require('html-entities').XmlEntities;
 
 class JsxText extends IJsxExpression {
     constructor(text) {
@@ -23,7 +23,7 @@ class JsxText extends IJsxExpression {
 
     transpile(transpiler) {
         // convert html entities
-        var text = (new Entities()).decode(this.text);
+        const text = (new Entities()).decode(this.text);
         transpiler.append(JSON.stringify(text));
     }
 }

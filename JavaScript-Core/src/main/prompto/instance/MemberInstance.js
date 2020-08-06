@@ -1,4 +1,4 @@
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
+const NotMutableError = require("../error/NotMutableError").NotMutableError;
 
 class MemberInstance {
    
@@ -22,7 +22,7 @@ class MemberInstance {
     }
 
     interpret(context) {
-        var root = this.parent.interpret(context);
+        const root = this.parent.interpret(context);
         return root.getMemberValue(context, this.name, true);
     }
 
@@ -40,15 +40,15 @@ class MemberInstance {
     }
 
     assign(context, expression) {
-        var root = this.parent.interpret(context);
+        const root = this.parent.interpret(context);
         if(!root.mutable)
             throw new NotMutableError();
-        var value = expression.interpret(context);
+        const value = expression.interpret(context);
         root.setMember(context, this.name, value);
     }
 
     check(context) {
-        var parentType = this.parent.check(context);
+        const parentType = this.parent.check(context);
         return parentType.checkMember(context, this.id, this.name);
     }
 
@@ -67,13 +67,13 @@ class MemberInstance {
     }
 
     transpileAssign(transpiler, expression) {
-        var parentType = this.parent.check(transpiler.context);
+        const parentType = this.parent.check(transpiler.context);
         this.parent.transpileAssignParent(transpiler);
         parentType.transpileAssignMemberValue(transpiler, this.name, expression);
     }
 
     transpileAssignParent(transpiler) {
-        var parentType = this.parent.check(transpiler.context);
+        const parentType = this.parent.check(transpiler.context);
         this.parent.transpileAssignParent(transpiler);
         parentType.transpileAssignMember(transpiler, this.name);
     }

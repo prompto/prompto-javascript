@@ -1,5 +1,5 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var DecimalType = require("../type/DecimalType").DecimalType;
+const JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+const DecimalType = require("../type/DecimalType").DecimalType;
 
 
 class JavaScriptDecimalLiteral extends JavaScriptLiteral {

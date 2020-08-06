@@ -1,8 +1,8 @@
-var Variable = require("../runtime/Variable").Variable;
-var VoidType = require("../type/VoidType").VoidType;
-var CodeType = require("../type/CodeType").CodeType;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var CategoryType = require("../type/CategoryType").CategoryType;
+const Variable = require("../runtime/Variable").Variable;
+const VoidType = require("../type/VoidType").VoidType;
+const CodeType = require("../type/CodeType").CodeType;
+const DocumentType = require("../type/DocumentType").DocumentType;
+const CategoryType = require("../type/CategoryType").CategoryType;
 
 class VariableInstance {
   
@@ -16,8 +16,8 @@ class VariableInstance {
 
     toDialect(writer, expression) {
         if(expression!=null) try {
-            var type = expression.check(writer.context);
-            var actual = writer.context.getRegisteredValue(this.name);
+            const type = expression.check(writer.context);
+            const actual = writer.context.getRegisteredValue(this.name);
             if(actual==null)
                 writer.context.registerValue(new Variable(this.id, type));
         } catch(e) {
@@ -32,12 +32,12 @@ class VariableInstance {
     }
 
     check(context) {
-        var actual = context.getRegisteredValue(this.id);
+        const actual = context.getRegisteredValue(this.id);
         return actual.type;
     }
 
     checkAssignValue(context, valueType, section) {
-        var actual = context.getRegisteredValue(this.id);
+        const actual = context.getRegisteredValue(this.id);
         if(actual==null) {
             context.registerValue(new Variable(this.id, valueType));
             return valueType;
@@ -49,18 +49,18 @@ class VariableInstance {
     }
 
     checkAssignMember(context, id, valueType, section) {
-        var actual = context.getRegisteredValue(this.id);
+        const actual = context.getRegisteredValue(this.id);
         if(actual==null) {
             context.problemListener.reportUnknownVariable(section, this.id);
             return VoidType.instance;
         }
-        var thisType = actual.getType(context);
+        const thisType = actual.getType(context);
         if(thisType === DocumentType.instance)
             return valueType;
         else {
             if(thisType instanceof CategoryType && !thisType.mutable)
                 context.problemListener.reportNotMutable(section, this.name);
-            var requiredType = thisType.checkMember(context, section, id.name);
+            const requiredType = thisType.checkMember(context, section, id.name);
             if (requiredType && !requiredType.isAssignableFrom(context, valueType))
                 context.problemListener.reportIncompatibleTypes(section, requiredType, valueType);
             return valueType;
@@ -68,17 +68,17 @@ class VariableInstance {
     }
 
     checkAssignItem(context, itemType, valueType, section) {
-        var actual = context.getRegisteredValue(this.id);
+        const actual = context.getRegisteredValue(this.id);
         if(actual==null)
             context.problemListener.reportUnknownVariable(section, this.id);
-        var parentType = actual.getType(context);
+        const parentType = actual.getType(context);
         return parentType.checkItem(context, itemType);
     }
 
     assign(context, expression) {
-        var value = expression.interpret(context);
+        const value = expression.interpret(context);
         if(context.getRegisteredValue(this.name)==null) {
-            var type = expression.check(context);
+            const type = expression.check(context);
             context.registerValue(new Variable(this.id, type));
         }
         context.setValue(this.id, value);
@@ -90,7 +90,7 @@ class VariableInstance {
 
     declareAssign(transpiler, expression) {
         if(transpiler.context.getRegisteredValue(this.name)==null) {
-            var valueType = expression.check(transpiler.context);
+            const valueType = expression.check(transpiler.context);
             transpiler.context.registerValue(new Variable(this.id, valueType));
             // Code expressions need to be interpreted as part of full check
             if (valueType === CodeType.instance) {
@@ -103,11 +103,11 @@ class VariableInstance {
 
     transpileAssign(transpiler, expression) {
         if(transpiler.context.getRegisteredValue(this.name)==null) {
-            var type = expression.check(transpiler.context);
+            const type = expression.check(transpiler.context);
             transpiler.context.registerValue(new Variable(this.id, type));
             transpiler.append("var ");
         }
-        var context = transpiler.context.contextForValue(this.id.name);
+        const context = transpiler.context.contextForValue(this.id.name);
         if(context.instanceType) {
             context.instanceType.transpileInstance(transpiler);
             transpiler.append(".setMember('").append(this.name).append("', ");

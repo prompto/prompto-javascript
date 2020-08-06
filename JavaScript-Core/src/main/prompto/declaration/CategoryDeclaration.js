@@ -1,8 +1,8 @@
-var AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
-var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var TypeUtils = require("../utils/TypeUtils");
-var NullValue = require("../value/NullValue").NullValue;
+const AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
+const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
+const CategoryType = require("../type/CategoryType").CategoryType;
+const TypeUtils = require("../utils/TypeUtils");
+const NullValue = require("../value/NullValue").NullValue;
 
 class CategoryDeclaration extends BaseDeclaration {
     constructor(id, attributes) {
@@ -30,24 +30,24 @@ class CategoryDeclaration extends BaseDeclaration {
             return false;
         else
             return this.derivedFrom.find(name=>{
-                var decl = context.getRegisteredDeclaration(name);
+                const decl = context.getRegisteredDeclaration(name);
                 return decl && decl.isStorable(context);
             });
     }
 
     newInstanceFromStored(context, stored) {
-        var instance = this.newInstance(context);
+        const instance = this.newInstance(context);
         instance.mutable = true;
         try {
-            var dbId = stored.dbId;
-            var value = TypeUtils.convertFromJavaScript(dbId);
+            const dbId = stored.dbId;
+            const value = TypeUtils.convertFromJavaScript(dbId);
             instance.setMember(context, "dbId", value);
-            var allAttributes = this.getAllAttributes(context);
+            const allAttributes = this.getAllAttributes(context);
             allAttributes.forEach(name => {
-                var decl = context.getRegisteredDeclaration(name);
+                const decl = context.getRegisteredDeclaration(name);
                 if (decl.storable) {
-                    var data = stored.getData(name);
-                    var value = data==null ? NullValue.instance : decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null)
+                    const data = stored.getData(name);
+                    const value = data==null ? NullValue.instance : decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null);
                     instance.setMember(context, name, value);
                 }
             }, this);
@@ -62,7 +62,7 @@ class CategoryDeclaration extends BaseDeclaration {
     }
 
     getAllAttributes(context) {
-        var attributes = this.getLocalAttributes();
+        const attributes = this.getLocalAttributes();
         if(attributes)
             return new Set(attributes);
         else
@@ -77,7 +77,7 @@ class CategoryDeclaration extends BaseDeclaration {
     check(context) {
         if(this.attributes!=null) {
             this.attributes.forEach(id => {
-                var ad = context.getRegisteredDeclaration(id.name);
+                const ad = context.getRegisteredDeclaration(id.name);
                 if (ad == null)
                     context.problemListener.reportUnknownAttribute(id);
                 else if (!(ad instanceof AttributeDeclaration))
@@ -97,7 +97,7 @@ class CategoryDeclaration extends BaseDeclaration {
         else if (this.attributes == null)
             return false;
         else {
-            for (var i = 0; i < this.attributes.length; i++ ) {
+            for (let i = 0; i < this.attributes.length; i++ ) {
                 if (name === this.attributes[i].name)
                     return true;
             }
@@ -114,10 +114,10 @@ class CategoryDeclaration extends BaseDeclaration {
     }
 
     getAllAnnotations(context) {
-        var annotations = [];
+        let annotations = [];
         if (this.derivedFrom) {
             this.derivedFrom.forEach(name => {
-                var decl = context.getRegisteredDeclaration(name);
+                const decl = context.getRegisteredDeclaration(name);
                 if (decl instanceof CategoryDeclaration) {
                     annotations = annotations.concat(decl.getAllAnnotations(context));
                 }
@@ -129,7 +129,7 @@ class CategoryDeclaration extends BaseDeclaration {
     }
 
     processAnnotations(context, processDerivedFrom) {
-        var annotations = processDerivedFrom ? this.getAllAnnotations(context) : (this.annotations || []);
+        const annotations = processDerivedFrom ? this.getAllAnnotations(context) : (this.annotations || []);
         annotations.forEach(function (ann) {
             ann.processCategory(context, this);
         }, this);
@@ -140,13 +140,13 @@ class CategoryDeclaration extends BaseDeclaration {
     }
 
     toDialect(writer) {
-        var type = this.getType(writer.context);
+        const type = this.getType(writer.context);
         writer = writer.newInstanceWriter(type);
         writer.toDialect(this);
     }
 
     protoToEDialect(writer, hasMethods, hasBindings) {
-        var hasAttributes = this.attributes!=null && this.attributes.length>0;
+        const hasAttributes = this.attributes!=null && this.attributes.length>0;
         writer.append("define ");
         writer.append(this.name);
         writer.append(" as ");
@@ -188,7 +188,7 @@ class CategoryDeclaration extends BaseDeclaration {
                     ann.toDialect(writer);
                 });
             }
-            var w = writer.newMemberWriter();
+            const w = writer.newMemberWriter();
             method.toDialect(w);
         });
         writer.dedent();
@@ -206,7 +206,7 @@ class CategoryDeclaration extends BaseDeclaration {
                     ann.toDialect(writer);
                 });
             }
-            var w = writer.newMemberWriter();
+            const w = writer.newMemberWriter();
             method.toDialect(w);
             w.newLine();
         });

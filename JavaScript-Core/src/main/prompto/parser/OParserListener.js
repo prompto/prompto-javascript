@@ -1,6 +1,6 @@
 // Generated from OParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
+const antlr4 = require('antlr4/index');
 
 // This class defines a complete listener for a parse tree produced by OParser.
 function OParserListener() {

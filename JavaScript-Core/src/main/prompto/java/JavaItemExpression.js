@@ -1,4 +1,4 @@
-var JavaSelectorExpression = require("./JavaSelectorExpression").JavaSelectorExpression;
+const JavaSelectorExpression = require("./JavaSelectorExpression").JavaSelectorExpression;
 
 class JavaItemExpression extends JavaSelectorExpression {
     constructor(item) {

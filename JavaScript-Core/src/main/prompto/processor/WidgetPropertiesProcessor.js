@@ -1,22 +1,22 @@
-var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var SetLiteral = require("../literal/SetLiteral").SetLiteral;
-var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
-var BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
-var DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
-var Property = require("../property/Property").Property;
-var PropertyMap = require("../property/PropertyMap").PropertyMap;
-var PropertiesType = require("../type/PropertiesType").PropertiesType;
-var AnyType = require("../type/AnyType").AnyType;
-var TextType = require("../type/TextType").TextType;
-var TypeType = require("../type/TypeType").TypeType;
-var InternalError = require("../error/InternalError").InternalError;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TypeValidator = require("../property/TypeValidator").TypeValidator;
-var TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
-var ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
-var NullValue = require("../value/NullValue").NullValue;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
+const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const SetLiteral = require("../literal/SetLiteral").SetLiteral;
+const TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
+const BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
+const DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
+const Property = require("../property/Property").Property;
+const PropertyMap = require("../property/PropertyMap").PropertyMap;
+const PropertiesType = require("../type/PropertiesType").PropertiesType;
+const AnyType = require("../type/AnyType").AnyType;
+const TextType = require("../type/TextType").TextType;
+const TypeType = require("../type/TypeType").TypeType;
+const InternalError = require("../error/InternalError").InternalError;
+const Identifier = require("../grammar/Identifier").Identifier;
+const TypeValidator = require("../property/TypeValidator").TypeValidator;
+const TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
+const ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
+const NullValue = require("../value/NullValue").NullValue;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 class WidgetPropertiesProcessor extends AnnotationProcessor {
   
@@ -33,31 +33,31 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
     }
 
     doProcessCategory(annotation, context, widget) {
-        var types = annotation.getDefaultArgument();
-        var properties = this.loadProperties(annotation, context, types);
+        const types = annotation.getDefaultArgument();
+        const properties = this.loadProperties(annotation, context, types);
         if (properties != null) {
             widget.properties = properties;
-            var widgetField = this.findWidgetPropertiesFieldAnnotation(context, widget);
+            const widgetField = this.findWidgetPropertiesFieldAnnotation(context, widget);
             if(widgetField)
                 this.overrideWidgetFieldType(context, widgetField, new PropertiesType(properties));
         }
     }
 
     overrideWidgetFieldType(context, widgetField, type) {
-        var value = widgetField.getArgument("name");
+        const value = widgetField.getArgument("name");
         if(!(value instanceof TextLiteral))
             return; // raise warning
-        var name = value.toString();
-        var instance = context.getClosestInstanceContext();
+        const name = value.toString();
+        const instance = context.getClosestInstanceContext();
         if(instance==null)
             throw new InternalError("Expected an instance context. Please report this bug.");
         instance.overrideWidgetFieldType(new Identifier(name.substring(1, name.length -1)), type, this);
     }
 
     findWidgetPropertiesFieldAnnotation(context, widget) {
-        var found = widget.getAllAnnotations(context)
+        const found = widget.getAllAnnotations(context)
             .filter(a => a.name==="@WidgetField").filter(a => {
-                var value = a.getArgument("isProperties");
+                const value = a.getArgument("isProperties");
                 return value instanceof BooleanLiteral && value.value.value;
             });
         return found[0] || null;
@@ -68,9 +68,9 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
             context.problemListener.reportIllegalAnnotation(annotation, "WidgetProperties expects a Document of types as unique parameter");
             return null;
         }
-        var props = new PropertyMap();
+        const props = new PropertyMap();
         types.entries.items.forEach(function(entry) {
-            var prop = this.loadProperty(annotation, context, entry);
+            const prop = this.loadProperty(annotation, context, entry);
             if(prop) {
                 if(props.has(prop.name))
                     context.problemListener.reportIllegalAnnotation(entry.key, "Duplicate property: " + prop.name);
@@ -82,9 +82,9 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
     }
 
     loadProperty(annotation, context, entry) {
-        var prop = new Property();
+        const prop = new Property();
         prop.name = entry.key.toString();
-        var value = entry.value;
+        const value = entry.value;
         if(value instanceof TypeLiteral)
             return this.loadPropertyTypeLiteral(annotation, context, entry, prop, value);
         else if(value instanceof SetLiteral)
@@ -98,11 +98,11 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
     }
 
     loadPropertyDocumentLiteral(annotation, context, entry, prop, literal) {
-        var children = literal.entries;
-        for(var i=0; i<children.items.length; i++) {
-            var child = children.items[i];
-            var name = child.key.toString();
-            var value = child.value;
+        const children = literal.entries;
+        for(let i=0; i<children.items.length; i++) {
+            const child = children.items[i];
+            const name = child.key.toString();
+            let value = child.value;
             switch(name) {
                 case "required":
                     if(value instanceof BooleanLiteral) {
@@ -120,13 +120,13 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                     return null;
                 case "type":
                     if(value instanceof TypeLiteral) {
-                        var type = value.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
+                        const type = value.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
                         if (type) {
                             prop.validator = new TypeValidator(type);
                             break;
                         }
                     } else if(value instanceof DocumentLiteral) {
-                        var embedded = this.loadProperties(annotation, context, value);
+                        const embedded = this.loadProperties(annotation, context, value);
                         if (embedded) {
                             prop.validator = new TypeValidator(new PropertiesType(embedded));
                             break;
@@ -137,7 +137,7 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                 case "types":
                     if(value instanceof SetLiteral) {
                         value = value.interpret(context);
-                        var types = Array.from(value.items.set)
+                        const types = Array.from(value.items.set)
                             .filter(l => l !== NullValue.instance)
                             .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name)), this);
                         prop.validator = new TypeSetValidator(new Set(types));
@@ -150,7 +150,7 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                 case "values":
                     if(value instanceof SetLiteral) {
                         value = value.interpret(context);
-                        var texts = Array.from(value.items.set)
+                        const texts = Array.from(value.items.set)
                             .filter(l => l !== NullValue.instance)
                             .map(l => l.toString());
                         prop.validator = new ValueSetValidator(new Set(texts));
@@ -169,10 +169,10 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
     }
 
     loadPropertySetLiteral(annotation, context, entry, prop, literal) {
-        var value = literal.interpret(context);
-        var itemType = value.itemType || null;
+        const value = literal.interpret(context);
+        const itemType = value.itemType || null;
         if(itemType instanceof TypeType) {
-            var types = Array.from(value.items.set)
+            const types = Array.from(value.items.set)
                 .filter(l => l !== NullValue.instance)
                 .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) ), this);
             if(types.indexOf(null)>=0)
@@ -182,7 +182,7 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                 prop.validator = prop.validator.required();
             return prop;
         } else if(itemType === AnyType.instance || itemType === TextType.instance) {
-            var texts = Array.from(value.items.set)
+            const texts = Array.from(value.items.set)
                 .filter(l => l !== NullValue.instance)
                 .map(l => l.toString());
             prop.validator = new ValueSetValidator(new Set(texts));
@@ -196,7 +196,7 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
     }
 
     loadPropertyTypeLiteral(annotation, context, entry, prop, literal) {
-        var type = literal.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
+        const type = literal.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
         if(!type)
             return null;
         prop.validator = new TypeValidator(type);

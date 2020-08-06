@@ -1,7 +1,7 @@
-var Expression = require("./Expression").Expression;
-var InstanceContext = require("../runtime/Context").InstanceContext;
-var DocumentContext = require("../runtime/Context").DocumentContext;
-var DocumentType = require("../type/DocumentType").DocumentType;
+const Expression = require("./Expression").Expression;
+const InstanceContext = require("../runtime/Context").InstanceContext;
+const DocumentContext = require("../runtime/Context").DocumentContext;
+const DocumentType = require("../type/DocumentType").DocumentType;
 
 class ThisExpression extends Expression {
     constructor() {

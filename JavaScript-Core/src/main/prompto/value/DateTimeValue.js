@@ -1,10 +1,10 @@
-var Value = require("./Value").Value;
-var PeriodValue = require("./PeriodValue").PeriodValue;
-var DateValue = null;
-var TimeValue = require("./TimeValue").TimeValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var TextValue = require("./TextValue").TextValue;
-var DateTimeType = null;
+const Value = require("./Value").Value;
+const PeriodValue = require("./PeriodValue").PeriodValue;
+let DateValue = null;
+const TimeValue = require("./TimeValue").TimeValue;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const TextValue = require("./TextValue").TextValue;
+let DateTimeType = null;
 
 exports.resolve = () => {
     DateValue = require("./DateValue").DateValue;
@@ -32,7 +32,7 @@ class DateTimeValue extends Value {
 
     Add(context, value) {
         if (value instanceof PeriodValue) {
-            var result = this.value.addPeriod(value.value);
+            const result = this.value.addPeriod(value.value);
             return new DateTimeValue(result);
         } else {
             throw new SyntaxError("Illegal: DateTimeValue + " + typeof(value));
@@ -65,7 +65,7 @@ class DateTimeValue extends Value {
 
     getMemberValue(context, name) {
         try {
-            var value = null;
+            let value = null;
             if ("year" == name) {
                 value = this.value.getYear();
             } else if ("month" == name) {

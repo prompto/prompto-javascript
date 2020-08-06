@@ -1,11 +1,11 @@
-var Context = require("./Context").Context;
-var instance = null;
+const Context = require("./Context").Context;
+let instance = null;
 
 
 class ApplicationContext {
  
     static set(context) {
-        var current = instance;
+        const current = instance;
         instance = context;
         return current;
     }

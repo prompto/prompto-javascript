@@ -1,7 +1,7 @@
-var Parameter = require("./Parameter").Parameter;
-var MethodType = require("../type/MethodType").MethodType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var utils = require("../utils/index");
+const Parameter = require("./Parameter").Parameter;
+const MethodType = require("../type/MethodType").MethodType;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const utils = require("../utils/index");
 
 class CategoryParameter extends Parameter {
     
@@ -46,7 +46,7 @@ class CategoryParameter extends Parameter {
     }
 
     register(context) {
-        var actual = context.contextForValue(this.name);
+        const actual = context.contextForValue(this.name);
         if(actual===context) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }
@@ -82,7 +82,7 @@ class CategoryParameter extends Parameter {
     }
 
     toEDialect(writer) {
-        var anonymous = "any"==this.type.name;
+        const anonymous = "any"==this.type.name;
         this.type.toDialect(writer, true);
         if(anonymous) {
             writer.append(' ');

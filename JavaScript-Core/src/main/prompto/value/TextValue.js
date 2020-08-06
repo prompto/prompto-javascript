@@ -1,10 +1,10 @@
-var Value = require("./Value").Value;
-var CharacterValue = require("./CharacterValue").CharacterValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var TextType = require("../type/TextType").TextType;
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-var removeAccents = require("../utils/Utils").removeAccents;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const Value = require("./Value").Value;
+const CharacterValue = require("./CharacterValue").CharacterValue;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const TextType = require("../type/TextType").TextType;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+const removeAccents = require("../utils/Utils").removeAccents;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 class TextValue extends Value {
     constructor(value) {
@@ -32,7 +32,7 @@ class TextValue extends Value {
     Multiply(context, value) {
         if (value instanceof IntegerValue) {
             try {
-                var text = this.value.repeat(value.value);
+                const text = this.value.repeat(value.value);
                 return new TextValue(text);
             } catch(error) {
                 throw new SyntaxError("Negative repeat count:" + value.value);
@@ -92,13 +92,13 @@ class TextValue extends Value {
     }
 
     slice(fi, li) {
-        var first = this.checkFirst(fi);
-        var last = this.checkLast(li);
+        const first = this.checkFirst(fi);
+        const last = this.checkLast(li);
         return new TextValue(this.value.slice(first - 1, last));
     }
 
     checkFirst(fi) {
-        var value = (fi == null) ? 1 : fi.IntegerValue();
+        const value = (fi == null) ? 1 : fi.IntegerValue();
         if (value < 1 || value > this.value.length) {
             throw new IndexOutOfRangeError();
         }
@@ -106,7 +106,7 @@ class TextValue extends Value {
     }
 
     checkLast(li) {
-        var value = (li == null) ? this.value.length : li.IntegerValue();
+        let value = (li == null) ? this.value.length : li.IntegerValue();
         if (value < 0) {
             value = this.value.length + 1 + li.IntegerValue();
         }

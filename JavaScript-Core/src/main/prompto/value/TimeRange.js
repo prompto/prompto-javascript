@@ -1,8 +1,8 @@
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-var RangeValue = require("./RangeValue").RangeValue;
-var TimeValue = require("./TimeValue").TimeValue;
-var LocalTime = require("../intrinsic/LocalTime").LocalTime;
-var TimeType = null;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+const RangeValue = require("./RangeValue").RangeValue;
+const TimeValue = require("./TimeValue").TimeValue;
+const LocalTime = require("../intrinsic/LocalTime").LocalTime;
+let TimeType = null;
 
 exports.resolve = () => {
     TimeType = require("../type/TimeType").TimeType;
@@ -23,7 +23,7 @@ class TimeRange extends RangeValue {
     }
 
     getItem(index) {
-        var result = this.low.value.valueOf() + (index-1)*1000;
+        const result = this.low.value.valueOf() + (index-1)*1000;
         if(result>this.high.value.valueOf()) {
             throw new IndexOutOfRangeError();
         }

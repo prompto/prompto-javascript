@@ -1,12 +1,12 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var Variable = require("../runtime/Variable").Variable;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var ListType = require("../type/ListType").ListType;
-var DictionaryType = require("../type/DictionaryType").DictionaryType;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var InternalError = require("../error/InternalError").InternalError;
-var BreakResult = require("../runtime/BreakResult").BreakResult;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const Variable = require("../runtime/Variable").Variable;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const ListType = require("../type/ListType").ListType;
+const DictionaryType = require("../type/DictionaryType").DictionaryType;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const InternalError = require("../error/InternalError").InternalError;
+const BreakResult = require("../runtime/BreakResult").BreakResult;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
 class ForEachStatement extends BaseStatement {
     constructor(v1, v2, source, statements) {
@@ -19,14 +19,14 @@ class ForEachStatement extends BaseStatement {
     }
 
     check(context) {
-        var srcType = this.source.check(context);
-        var elemType = srcType.checkIterator(context, this.source);
+        const srcType = this.source.check(context);
+        const elemType = srcType.checkIterator(context, this.source);
         return this.checkItemIterator(elemType, context);
     }
 
     checkItemIterator(elemType, context) {
-        var child = context.newChildContext();
-        var itemName = this.v2 === null ? this.v1 : this.v2;
+        const child = context.newChildContext();
+        const itemName = this.v2 === null ? this.v1 : this.v2;
         child.registerValue(new Variable(itemName, elemType));
         if (this.v2 !== null) {
             child.registerValue(new Variable(this.v1, IntegerType.instance));
@@ -35,8 +35,8 @@ class ForEachStatement extends BaseStatement {
     }
 
     interpret(context) {
-        var srcType = this.source.check(context);
-        var elemType = srcType.checkIterator(context, this.source);
+        const srcType = this.source.check(context);
+        const elemType = srcType.checkIterator(context, this.source);
         return this.interpretItemIterator(elemType, context);
     }
 
@@ -49,12 +49,12 @@ class ForEachStatement extends BaseStatement {
     }
 
     interpretItemIteratorNoIndex(elemType, context) {
-        var src = this.source.interpret(context);
-        var iterator = this.getIterator(context, src);
+        const src = this.source.interpret(context);
+        const iterator = this.getIterator(context, src);
         while (iterator.hasNext()) {
-            var child = context.newChildContext();
+            const child = context.newChildContext();
             child.registerValue(new Variable(this.v1, elemType));
-            var value = iterator.next();
+            let value = iterator.next();
             child.setValue(this.v1, value);
             value = this.statements.interpret(child);
             if(value==BreakResult.instance)
@@ -76,16 +76,16 @@ class ForEachStatement extends BaseStatement {
     }
 
     interpretItemIteratorWithIndex(elemType, context) {
-        var src = this.source.interpret(context);
-        var iterator = src.getIterator(context);
-        var index = 0;
+        const src = this.source.interpret(context);
+        const iterator = src.getIterator(context);
+        let index = 0;
         while (iterator.hasNext()) {
-            var child = context.newChildContext();
+            const child = context.newChildContext();
             child.registerValue(new Variable(this.v2, elemType));
             child.setValue(this.v2, iterator.next());
             child.registerValue(new Variable(this.v1, IntegerType.instance));
             child.setValue(this.v1, new IntegerValue(++index));
-            var value = this.statements.interpret(child);
+            const value = this.statements.interpret(child);
             if (value != null) {
                 return value;
             }
@@ -95,9 +95,9 @@ class ForEachStatement extends BaseStatement {
 
     toDialect(writer) {
         writer = writer.newChildWriter();
-        var srcType = this.source.check(writer.context);
-        var elemType = srcType.checkIterator(writer.context, this.source);
-        var itemName = this.v2 ? this.v2 : this.v1;
+        const srcType = this.source.check(writer.context);
+        const elemType = srcType.checkIterator(writer.context, this.source);
+        const itemName = this.v2 ? this.v2 : this.v1;
         writer.context.registerValue(new Variable(itemName, elemType))
         if(this.v2)
             writer.context.registerValue(new Variable(this.v1, IntegerType.instance))
@@ -114,7 +114,7 @@ class ForEachStatement extends BaseStatement {
         writer.append(" in ");
         this.source.toDialect(writer);
         writer.append(")");
-        var oneLine = this.statements.length === 1 && this.statements[0].isSimple();
+        const oneLine = this.statements.length === 1 && this.statements[0].isSimple();
         if(!oneLine)
             writer.append(" {");
         writer.newLine();
@@ -164,10 +164,10 @@ class ForEachStatement extends BaseStatement {
     }
 
     declare(transpiler) {
-        var srcType = this.source.check(transpiler.context);
+        const srcType = this.source.check(transpiler.context);
         if(srcType instanceof DictionaryType)
             transpiler.require(StrictSet);
-        var elemType = srcType.checkIterator(transpiler.context, this.source);
+        const elemType = srcType.checkIterator(transpiler.context, this.source);
         this.source.declare(transpiler);
         transpiler = transpiler.newChildTranspiler();
         if(this.v2) {
@@ -187,7 +187,7 @@ class ForEachStatement extends BaseStatement {
     }
 
     transpileNoIndex(transpiler) {
-        var srcType = this.source.check(transpiler.context);
+        const srcType = this.source.check(transpiler.context);
         if(srcType instanceof ListType)
             this.transpileArrayNoIndex(transpiler);
         else
@@ -195,15 +195,15 @@ class ForEachStatement extends BaseStatement {
     }
 
     transpileArrayNoIndex(transpiler) {
-        var srcType = this.source.check(transpiler.context);
-        var elemType = srcType.checkIterator(transpiler.context, this.source);
-        var itemsName = "$" + this.v1.name + "_items";
+        const srcType = this.source.check(transpiler.context);
+        const elemType = srcType.checkIterator(transpiler.context, this.source);
+        const itemsName = "$" + this.v1.name + "_items";
         transpiler.append("var ").append(itemsName).append(" = ");
         this.source.transpile(transpiler);
         transpiler.append(";").newLine();
-        var idxName = "$" + this.v1.name + "_idx";
+        const idxName = "$" + this.v1.name + "_idx";
         transpiler.append("for(var ").append(idxName).append(" = 0; ").append(idxName).append(" < ").append(itemsName).append(".length; ").append(idxName).append("++) {");
-        var child = transpiler.newChildTranspiler();
+        const child = transpiler.newChildTranspiler();
         child.indent();
         child.context.registerValue(new Variable(this.v1, elemType));
         child.append("var ").append(this.v1.name).append(" = ").append(itemsName).append("[").append(idxName).append("];");
@@ -215,15 +215,15 @@ class ForEachStatement extends BaseStatement {
      }
 
     transpileIteratorNoIndex(transpiler) {
-        var srcType = this.source.check(transpiler.context);
-        var elemType = srcType.checkIterator(transpiler.context, this.source);
-        var iterName = "$" + this.v1.name + "_iterator";
+        const srcType = this.source.check(transpiler.context);
+        const elemType = srcType.checkIterator(transpiler.context, this.source);
+        const iterName = "$" + this.v1.name + "_iterator";
         transpiler.append("var ").append(iterName).append(" = ");
         this.source.transpile(transpiler);
         transpiler.append(".iterator();");
         transpiler.newLine();
         transpiler.append("while(").append(iterName).append(".hasNext()) {");
-        var child = transpiler.newChildTranspiler();
+        const child = transpiler.newChildTranspiler();
         child.indent();
         child.context.registerValue(new Variable(this.v1, elemType));
         child.append("var ").append(this.v1.name).append(" = ").append(iterName).append(".next();");
@@ -236,7 +236,7 @@ class ForEachStatement extends BaseStatement {
     }
 
     transpileWithIndex(transpiler) {
-        var srcType = this.source.check(transpiler.context);
+        const srcType = this.source.check(transpiler.context);
         if(srcType instanceof ListType)
             this.transpileArrayWithIndex(transpiler);
         else
@@ -244,14 +244,14 @@ class ForEachStatement extends BaseStatement {
     }
 
     transpileArrayWithIndex(transpiler) {
-        var srcType = this.source.check(transpiler.context);
-        var elemType = srcType.checkIterator(transpiler.context, this.source);
-        var itemsName = "$" + this.v2.name + "_items";
+        const srcType = this.source.check(transpiler.context);
+        const elemType = srcType.checkIterator(transpiler.context, this.source);
+        const itemsName = "$" + this.v2.name + "_items";
         transpiler.append("var ").append(itemsName).append(" = ");
         this.source.transpile(transpiler);
         transpiler.append(";").newLine();
         transpiler.append("for(var ").append(this.v1.name).append(" = 1; ").append(this.v1.name).append(" <= ").append(itemsName).append(".length; ").append(this.v1.name).append("++) {");
-        var child = transpiler.newChildTranspiler();
+        const child = transpiler.newChildTranspiler();
         child.indent();
         child.context.registerValue(new Variable(this.v1, IntegerType.instance));
         child.context.registerValue(new Variable(this.v2, elemType));
@@ -264,16 +264,16 @@ class ForEachStatement extends BaseStatement {
     }
 
     transpileIteratorWithIndex(transpiler) {
-        var srcType = this.source.check(transpiler.context);
-        var elemType = srcType.checkIterator(transpiler.context, this.source);
+        const srcType = this.source.check(transpiler.context);
+        const elemType = srcType.checkIterator(transpiler.context, this.source);
         transpiler.append("var ").append(this.v1.name).append(" = 1;").newLine();
-        var iterName = "$" + this.v2.name + "_iterator";
+        const iterName = "$" + this.v2.name + "_iterator";
         transpiler.append("var ").append(iterName).append(" = ");
         this.source.transpile(transpiler);
         transpiler.append(".iterator();");
         transpiler.newLine();
         transpiler.append("while(").append(iterName).append(".hasNext()) {");
-        var child = transpiler.newChildTranspiler();
+        const child = transpiler.newChildTranspiler();
         child.indent();
         child.context.registerValue(new Variable(this.v1, IntegerType.instance));
         child.context.registerValue(new Variable(this.v2, elemType));

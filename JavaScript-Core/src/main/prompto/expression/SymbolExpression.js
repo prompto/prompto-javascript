@@ -1,5 +1,5 @@
-var Expression = require("./Expression").Expression;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
+const Expression = require("./Expression").Expression;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 class SymbolExpression extends Expression {
     constructor(id) {
@@ -17,7 +17,7 @@ class SymbolExpression extends Expression {
     }
 
     check(context) {
-        var symbol = context.getRegisteredValue(this.name);
+        const symbol = context.getRegisteredValue(this.name);
         if(symbol==null) {
             throw new SyntaxError("Unknown symbol:" + this.name);
         }
@@ -25,7 +25,7 @@ class SymbolExpression extends Expression {
     }
 
     interpret(context) {
-        var symbol = context.getRegisteredValue(this.name);
+        const symbol = context.getRegisteredValue(this.name);
         if(symbol==null) {
             throw new SyntaxError("Unknown symbol:" + this.name);
         }
@@ -33,12 +33,12 @@ class SymbolExpression extends Expression {
     }
 
     declare(transpiler) {
-        var symbol = transpiler.context.getRegisteredValue(this.name);
+        const symbol = transpiler.context.getRegisteredValue(this.name);
         symbol.declare(transpiler);
     }
 
     transpile(transpiler) {
-        var symbol = transpiler.context.getRegisteredValue(this.name);
+        const symbol = transpiler.context.getRegisteredValue(this.name);
         symbol.transpile(transpiler);
     }
 }

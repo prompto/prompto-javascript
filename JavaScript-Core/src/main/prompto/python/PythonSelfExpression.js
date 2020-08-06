@@ -1,4 +1,4 @@
-var PythonExpression = require("./PythonExpression").PythonExpression;
+const PythonExpression = require("./PythonExpression").PythonExpression;
 
 class PythonSelfExpression extends PythonExpression {
     constructor() {

@@ -1,4 +1,4 @@
-var Value = require("./Value").Value;
+const Value = require("./Value").Value;
 
 class TypeValue extends Value{
   

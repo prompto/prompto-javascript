@@ -1,4 +1,4 @@
-var PythonLiteral = require("./PythonLiteral").PythonLiteral;
+const PythonLiteral = require("./PythonLiteral").PythonLiteral;
 
 class PythonTextLiteral extends PythonLiteral {
     constructor(text) {

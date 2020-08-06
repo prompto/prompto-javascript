@@ -1,4 +1,4 @@
-var Value = require("./Value").Value;
+const Value = require("./Value").Value;
 
 class BinaryValue extends Value {
     constructor(itype, mimeType, data) {

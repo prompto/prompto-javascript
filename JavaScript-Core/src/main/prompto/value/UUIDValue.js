@@ -1,8 +1,8 @@
-var Value = require("./Value").Value;
-var TextValue = require("./TextValue").TextValue;
-var UUIDType = require("../type/UUIDType").UUIDType;
-var UUID = require("../intrinsic/UUID").UUID;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+const Value = require("./Value").Value;
+const TextValue = require("./TextValue").TextValue;
+const UUIDType = require("../type/UUIDType").UUIDType;
+const UUID = require("../intrinsic/UUID").UUID;
+const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
 class UUIDValue extends Value {
    

@@ -1,9 +1,9 @@
-var ConcreteMethodDeclaration = null;
-var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var MethodType = require("../type/MethodType").MethodType;
-var VoidType = require("../type/VoidType").VoidType;
-var Variable = require("../runtime/Variable").Variable;
+let ConcreteMethodDeclaration = null;
+const ClosureValue = require("../value/ClosureValue").ClosureValue;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const MethodType = require("../type/MethodType").MethodType;
+const VoidType = require("../type/VoidType").VoidType;
+const Variable = require("../runtime/Variable").Variable;
 
 exports.resolve = () => {
     ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
@@ -40,9 +40,9 @@ class DeclarationStatement extends BaseStatement {
 
     interpret(context) {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
-            var method = this.declaration;
+            const method = this.declaration;
             context.registerMethodDeclaration(method);
-            var type = new MethodType(method);
+            const type = new MethodType(method);
             context.registerValue(new Variable(method.id, type));
             context.setValue(method.id, new ClosureValue(context, type));
             return null;
@@ -59,9 +59,9 @@ class DeclarationStatement extends BaseStatement {
     transpile(transpiler) {
         this.declaration.transpile(transpiler);
         transpiler.context.registerMethodDeclaration(this.declaration);
-        var instance = transpiler.context.getClosestInstanceContext();
+        const instance = transpiler.context.getClosestInstanceContext();
         if(instance!=null) {
-            var name = this.declaration.getTranspiledName(transpiler.context);
+            const name = this.declaration.getTranspiledName(transpiler.context);
             transpiler.append(name).append(" = ").append(name).append(".bind(this);").newLine();
         }
         return true;

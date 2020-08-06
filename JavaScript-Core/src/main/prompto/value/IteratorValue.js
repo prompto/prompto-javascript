@@ -1,5 +1,5 @@
-var Value = require("./Value").Value;
-var IteratorType = require("../type/IteratorType").IteratorType;
+const Value = require("./Value").Value;
+const IteratorType = require("../type/IteratorType").IteratorType;
 
 /* thin wrapper to expose an iterator as a prompto value */
 class IteratorValue extends Value {

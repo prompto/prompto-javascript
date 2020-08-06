@@ -1,5 +1,5 @@
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var AnyType = require("../type/AnyType").AnyType;
+const NotMutableError = require("../error/NotMutableError").NotMutableError;
+const AnyType = require("../type/AnyType").AnyType;
 
 class ItemInstance {
     constructor(item) {
@@ -20,13 +20,13 @@ class ItemInstance {
     }
 
     check(context) {
-        var parentType = this.parent.check(context);
-        var itemType = this.item.check(context);
+        const parentType = this.parent.check(context);
+        const itemType = this.item.check(context);
         return parentType.checkItem(context, itemType);
     }
 
     checkAssignValue(context, valueType, section) {
-        var itemType = this.item.check(context);
+        const itemType = this.item.check(context);
         return this.parent.checkAssignItem(context, itemType, valueType, section);
     }
 
@@ -39,11 +39,11 @@ class ItemInstance {
     }
 
     assign(context, expression) {
-        var root = this.parent.interpret(context);
+        const root = this.parent.interpret(context);
         if(!root.mutable)
             throw new NotMutableError();
-        var item = this.item.interpret(context);
-        var value = expression.interpret(context);
+        const item = this.item.interpret(context);
+        const value = expression.interpret(context);
         if (root.setItemInContext) {
             root.setItemInContext(context, item, value);
         } else {
@@ -52,8 +52,8 @@ class ItemInstance {
     }
 
     interpret(context) {
-        var root = this.parent.interpret(context);
-        var item = this.item.interpret(context);
+        const root = this.parent.interpret(context);
+        const item = this.item.interpret(context);
         if (root.getItemInContext) {
             return root.getItemInContext(context, item);
         } else {
@@ -80,7 +80,7 @@ class ItemInstance {
     }
 
     transpileAssign(transpiler, expression) {
-        var parentType = this.parent.check(transpiler.context);
+        const parentType = this.parent.check(transpiler.context);
         this.parent.transpileAssignParent(transpiler);
         parentType.transpileAssignItemValue(transpiler, this.item, expression);
     }

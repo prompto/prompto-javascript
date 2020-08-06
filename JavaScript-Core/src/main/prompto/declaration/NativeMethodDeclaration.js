@@ -1,10 +1,10 @@
-var ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var VoidType = require("../type/VoidType").VoidType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var NullValue = require("../value/NullValue").NullValue;
+const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const DecimalType = require("../type/DecimalType").DecimalType;
+const VoidType = require("../type/VoidType").VoidType;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const NullValue = require("../value/NullValue").NullValue;
 
 class NativeMethodDeclaration extends ConcreteMethodDeclaration {
     constructor(id, args, returnType, statements) {
@@ -16,23 +16,23 @@ class NativeMethodDeclaration extends ConcreteMethodDeclaration {
 
     check(context, isStart) {
         /* eslint no-unused-vars: [ "off"] */
-        var intrinsic = require("../intrinsic");
+        const intrinsic = require("../intrinsic");
         if(isStart) {
             context = context.newLocalContext();
             this.registerParameters(context);
         }
         if(this.parameters!==null)
             this.parameters.check(context);
-        var checked = this.statements.checkNative(context, this.returnType).anyfy();
+        const checked = this.statements.checkNative(context, this.returnType).anyfy();
         return this.returnType==null ? checked : this.returnType;
     }
 
     interpret(context) {
         /* eslint no-unused-vars: [ "off"] */
-        var intrinsic = require("../intrinsic");
+        const intrinsic = require("../intrinsic");
         context.enterMethod(this);
         try {
-            var result = this.statements.interpretNative(context, this.returnType);
+            const result = this.statements.interpretNative(context, this.returnType);
             return this.castToReturnType(context, result);
         } finally {
             context.leaveMethod(this);

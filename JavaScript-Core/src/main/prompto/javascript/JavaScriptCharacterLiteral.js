@@ -1,5 +1,5 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var CharacterType = require("../type/CharacterType").CharacterType;
+const JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
+const CharacterType = require("../type/CharacterType").CharacterType;
 
 class JavaScriptCharacterLiteral extends JavaScriptLiteral {
     constructor(text) {

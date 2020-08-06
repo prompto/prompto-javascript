@@ -1,9 +1,9 @@
-var Value = require("./Value").Value;
-var Container = require("./Value").Container;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var PromptoError = require("../error/PromptoError").PromptoError;
-var InternalError = require("../error/InternalError").InternalError;
-var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+const Value = require("./Value").Value;
+const Container = require("./Value").Container;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const PromptoError = require("../error/PromptoError").PromptoError;
+const InternalError = require("../error/InternalError").InternalError;
+const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
 /* an abstract list of values, common to ListValue and TupleValue */
 class BaseValueList extends Container {
@@ -32,7 +32,7 @@ class BaseValueList extends Container {
 
     setItemInContext(context, index, value) {
         if (index instanceof IntegerValue) {
-            var idx = index.IntegerValue() - 1;
+            const idx = index.IntegerValue() - 1;
             if (idx > this.items.length) {
                 throw new IndexOutOfRangeError();
             }
@@ -54,14 +54,14 @@ class BaseValueList extends Container {
     }
 
     slice(fi, li) {
-        var first = this.checkFirst(fi);
-        var last = this.checkLast(li);
-        var items = this.items.slice(first-1,last);
+        const first = this.checkFirst(fi);
+        const last = this.checkLast(li);
+        const items = this.items.slice(first-1,last);
         return this.newInstance(items);
     }
 
     checkFirst(fi) {
-        var value = (fi == null) ? 1 : fi.IntegerValue();
+        const value = (fi == null) ? 1 : fi.IntegerValue();
         if (value < 1 || value > this.items.length) {
             throw new IndexOutOfRangeError();
         }
@@ -69,7 +69,7 @@ class BaseValueList extends Container {
     }
 
     checkLast(li) {
-        var value = (li == null) ? this.items.length : li.IntegerValue();
+        let value = (li == null) ? this.items.length : li.IntegerValue();
         if (value < 0) {
             value = this.items.length + 1 + li.IntegerValue();
         }
@@ -80,7 +80,7 @@ class BaseValueList extends Container {
     }
 
     hasItem(context, lval) {
-        for (var i=0;i<this.items.length;i++) {
+        for (let i=0;i<this.items.length;i++) {
             if (this.items[i].equals(lval))
                 return true;
         }
@@ -90,11 +90,11 @@ class BaseValueList extends Container {
     getItemInContext(context, index) {
         if (index instanceof IntegerValue) {
             try {
-                var idx = index.IntegerValue() - 1;
+                const idx = index.IntegerValue() - 1;
                 if(idx>this.items.length) {
                     throw new IndexOutOfRangeError();
                 }
-                var value = this.items[idx] || null;
+                const value = this.items[idx] || null;
                 if(value==null) {
                     return null;
                 }
@@ -119,9 +119,9 @@ class BaseValueList extends Container {
             if(this.items.length!=obj.items.length) {
                 return false;
             } else {
-                for(var i=0;i<this.items.length;i++) {
-                    var v1 = this.items[i] || null;
-                    var v2 = obj.items[i] || null;
+                for(let i=0;i<this.items.length;i++) {
+                    const v1 = this.items[i] || null;
+                    const v2 = obj.items[i] || null;
                     if(v1==v2) {
                         continue;
                     } else if(v1==null || v2==null) {
@@ -173,7 +173,7 @@ class BaseValueList extends Container {
     }
 
     toJson(context, json, instanceId, fieldName, withType, binaries) {
-        var values = [];
+        const values = [];
         this.items.map(item => {
             item.toJson(context, values, instanceId, fieldName, withType, binaries);
         });

@@ -1,12 +1,12 @@
-var Expression = require("./Expression").Expression;
-var BlobType = require("../type/BlobType").BlobType;
-var Document = require("../intrinsic/Document").Document;
-var Blob = require("../intrinsic/Blob").Blob;
-var BlobValue = require("../value/BlobValue").BlobValue;
-var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
-var stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
-var getUtf8CharLength = require("../utils/Utils").getUtf8CharLength;
-var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
+const Expression = require("./Expression").Expression;
+const BlobType = require("../type/BlobType").BlobType;
+const Document = require("../intrinsic/Document").Document;
+const Blob = require("../intrinsic/Blob").Blob;
+const BlobValue = require("../value/BlobValue").BlobValue;
+const ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
+const stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
+const getUtf8CharLength = require("../utils/Utils").getUtf8CharLength;
+const utf8BufferToString = require("../utils/Utils").utf8BufferToString;
 
 class BlobExpression extends Expression {
     constructor(source) {
@@ -21,10 +21,10 @@ class BlobExpression extends Expression {
     }
 
     interpret(context) {
-        var value = this.source.interpret(context);
+        const value = this.source.interpret(context);
         try {
-            var datas = BlobExpression.collectDatas(context, value);
-            var zipped = Blob.zipDatas(datas);
+            const datas = BlobExpression.collectDatas(context, value);
+            const zipped = Blob.zipDatas(datas);
             return new BlobValue("application/zip", zipped);
         } catch (e) {
             throw new ReadWriteError(e.message);
@@ -47,11 +47,11 @@ class BlobExpression extends Expression {
     }
 
     static collectDatas(context, value) {
-        var binaries = {};
+        const binaries = {};
         // create json type-aware object graph and collect binaries
-        var values = {}; // need a temporary parent
+        const values = {}; // need a temporary parent
         value.toJson(context, values, null, "value", true, binaries);
-        var json = JSON.stringify(values["value"]);
+        const json = JSON.stringify(values["value"]);
         // add it
         binaries["value.json"] = stringToUtf8Buffer(json);
         return binaries;

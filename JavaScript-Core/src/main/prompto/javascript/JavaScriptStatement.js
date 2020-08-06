@@ -1,9 +1,9 @@
-var VoidType = require("../type/VoidType").VoidType;
-var AnyType = require("../type/AnyType").AnyType;
-var JavaScriptType = require("./JavaScriptType").JavaScriptType;
-var getTypeName = require("./JavaScriptUtils").getTypeName;
-var Identifier = require("../grammar/Identifier").Identifier;
-var $DataStore = require("../store/DataStore").$DataStore;
+const VoidType = require("../type/VoidType").VoidType;
+const AnyType = require("../type/AnyType").AnyType;
+const JavaScriptType = require("./JavaScriptType").JavaScriptType;
+const getTypeName = require("./JavaScriptUtils").getTypeName;
+const Identifier = require("../grammar/Identifier").Identifier;
+const $DataStore = require("../store/DataStore").$DataStore;
 
 
 class JavaScriptStatement {
@@ -23,13 +23,13 @@ class JavaScriptStatement {
     }
 
     interpret(context, returnType) {
-        var result = this.expression.interpret(context, this.module);
+        let result = this.expression.interpret(context, this.module);
         if (!this.isReturn) {
             return null;
         }
         if(result !== null) {
-            var id = new Identifier(getTypeName(result));
-            var type = new JavaScriptType(id);
+            const id = new Identifier(getTypeName(result));
+            const type = new JavaScriptType(id);
             result = type.convertJavaScriptValueToPromptoValue(context, result, returnType);
         }
         return result;
@@ -46,7 +46,7 @@ class JavaScriptStatement {
 
     declare(transpiler) {
         // TODO module
-        var str = this.expression.toString();
+        const str = this.expression.toString();
         if(str.startsWith("$context"))
             transpiler.declare(new $context());
         else if(str.startsWith("$store"))
@@ -55,7 +55,7 @@ class JavaScriptStatement {
 
     transpile(transpiler) {
         if(this.module!=null) {
-            var rootName = this.expression.getRoot();
+            const rootName = this.expression.getRoot();
             this.module.transpile(transpiler, rootName);
         }
         if(this.isReturn)

@@ -1,11 +1,11 @@
-var Symbol = require("./Symbol").Symbol;
-var TextValue = require("../value/TextValue").TextValue;
-var ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
-var AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var Identifier = require("../grammar/Identifier").Identifier;
+const Symbol = require("./Symbol").Symbol;
+const TextValue = require("../value/TextValue").TextValue;
+const ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
+const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
+const Argument = require("../grammar/Argument").Argument;
+const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 
 class CategorySymbol extends Symbol {
@@ -36,7 +36,7 @@ class CategorySymbol extends Symbol {
     }
 
     check(context) {
-        var cd = context.getRegisteredDeclaration(this.type.name);
+        const cd = context.getRegisteredDeclaration(this.type.name);
         if(cd==null) {
             throw new SyntaxError("Unknown category " + this.type.name);
         }
@@ -58,12 +58,12 @@ class CategorySymbol extends Symbol {
 
     makeInstance(context) {
         if(this.instance===null) {
-            var instance = this.type.newInstance(context);
+            const instance = this.type.newInstance(context);
             instance.mutable = true;
             if(this.args!=null) {
                 context = context.newLocalContext();
                 this.args.forEach(argument => {
-                    var value = argument.expression.interpret(context);
+                    const value = argument.expression.interpret(context);
                     instance.setMember(context, argument.name, value);
                 });
             }
@@ -75,7 +75,7 @@ class CategorySymbol extends Symbol {
     }
 
     getMemberValue(context, name, autoCreate) {
-        var instance = this.makeInstance(context);
+        const instance = this.makeInstance(context);
         return instance.getMemberValue(context, name, autoCreate);
     }
 
@@ -89,11 +89,11 @@ class CategorySymbol extends Symbol {
 
     initialize(transpiler) {
         transpiler.append("var ").append(this.name).append(" = ");
-        var param = new AttributeParameter(new Identifier("name"));
-        var argument = new Argument(param, new TextLiteral('"' + this.name + '"'));
-        var args = new ArgumentList(this.args);
+        const param = new AttributeParameter(new Identifier("name"));
+        const argument = new Argument(param, new TextLiteral('"' + this.name + '"'));
+        const args = new ArgumentList(this.args);
         args.add(argument);
-        var exp = new ConstructorExpression(this.type, null, args);
+        const exp = new ConstructorExpression(this.type, null, args);
         exp.transpile(transpiler);
         transpiler.append(";").newLine();
     }

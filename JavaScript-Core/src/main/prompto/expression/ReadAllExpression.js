@@ -1,9 +1,9 @@
-var Expression = require("./Expression").Expression;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
+const Expression = require("./Expression").Expression;
+const ResourceType = require("../type/ResourceType").ResourceType;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
+const TextType = require("../type/TextType").TextType;
+const TextValue = require("../value/TextValue").TextValue;
 
 class ReadAllExpression extends Expression {
     constructor(resource) {
@@ -23,7 +23,7 @@ class ReadAllExpression extends Expression {
 
     check(context) {
         context = context.newResourceContext();
-        var sourceType = this.resource.check(context);
+        const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
             context.problemListener.reportNotAResource(this.resource);
         return TextType.instance;
@@ -31,7 +31,7 @@ class ReadAllExpression extends Expression {
 
     interpret(context) {
         context = context.newResourceContext();
-        var res = this.resource.interpret(context);
+        const res = this.resource.interpret(context);
         if(res==null) {
             throw new NullReferenceError();
         }
@@ -39,7 +39,7 @@ class ReadAllExpression extends Expression {
             throw new InvalidResourceError("Not readable");
         }
         try {
-            var s = res.readFully();
+            const s = res.readFully();
             return new TextValue(s);
         } finally {
             res.close();

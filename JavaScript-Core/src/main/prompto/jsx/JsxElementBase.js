@@ -1,11 +1,11 @@
-var IJsxExpression = require("./IJsxExpression").IJsxExpression;
-var JsxType = require("../type/JsxType").JsxType;
-var isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var OCleverParser = require("../parser/OCleverParser").OCleverParser;
-var WidgetPropertiesProcessor = require("../processor/WidgetPropertiesProcessor").WidgetPropertiesProcessor;
-var TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
-var AnyType = require("../type/AnyType").AnyType;
+const IJsxExpression = require("./IJsxExpression").IJsxExpression;
+const JsxType = require("../type/JsxType").JsxType;
+const isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
+const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
+const OCleverParser = require("../parser/OCleverParser").OCleverParser;
+const WidgetPropertiesProcessor = require("../processor/WidgetPropertiesProcessor").WidgetPropertiesProcessor;
+const TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
+const AnyType = require("../type/AnyType").AnyType;
 
 class JsxElementBase extends IJsxExpression {
   
@@ -23,7 +23,7 @@ class JsxElementBase extends IJsxExpression {
         if (this.isHtmlTag())
             this.checkHtmlProperties(context);
         else {
-            var propertyMap = this.getWidgetPropertyMap(context);
+            const propertyMap = this.getWidgetPropertyMap(context);
             this.checkWidgetProperties(context, propertyMap);
         }
         return JsxType.instance;
@@ -34,7 +34,7 @@ class JsxElementBase extends IJsxExpression {
     }
 
     getWidgetPropertyMap(context) {
-        var decl = context.getRegisteredDeclaration(this.id.name);
+        const decl = context.getRegisteredDeclaration(this.id.name);
         if (decl == null) {
             context.problemListener.reportUnknownIdentifier(this.id);
             return null;
@@ -59,7 +59,7 @@ class JsxElementBase extends IJsxExpression {
     }
 
     checkWidgetProperties(context, propertyMap) {
-        var actualNames = new Set();
+        const actualNames = new Set();
         if(this.properties!==null)
             this.properties.forEach(function(jsxprop) {
                 if(actualNames.has(jsxprop.id.name))
@@ -69,8 +69,8 @@ class JsxElementBase extends IJsxExpression {
                 this.checkWidgetProperty(context, propertyMap, jsxprop);
             }, this);
         if(propertyMap!==null) {
-            for(var name in propertyMap.entries) {
-                var prop = propertyMap.entries[name];
+            for(const name in propertyMap.entries) {
+                const prop = propertyMap.entries[name];
                 if(prop.isRequired() && !actualNames.has(name))
                     context.problemListener.reportMissingProperty(this, name);
             }
@@ -78,9 +78,9 @@ class JsxElementBase extends IJsxExpression {
     }
 
     checkWidgetProperty(context, propertyMap, jsxProp) {
-        var name = jsxProp.id.name;
+        const name = jsxProp.id.name;
         if(propertyMap) {
-            var property = propertyMap.get(name);
+            let property = propertyMap.get(name);
             if(property==null)
                 property = JsxElementBase.getHtmlProperties(context).get(name);
             if(property==null)
@@ -92,8 +92,8 @@ class JsxElementBase extends IJsxExpression {
     }
 
     checkHtmlProperties(context) {
-        var propertyMap = JsxElementBase.getHtmlProperties(context);
-        var actualNames = new Set();
+        const propertyMap = JsxElementBase.getHtmlProperties(context);
+        const actualNames = new Set();
         if(this.properties!==null)
             this.properties.forEach(jsxProp => {
                 if(actualNames.has(jsxProp.id.name))
@@ -101,14 +101,14 @@ class JsxElementBase extends IJsxExpression {
                 else
                     actualNames.add(jsxProp.id.name);
                 jsxProp.check(context);
-                var property = propertyMap.get(jsxProp.id.name);
+                const property = propertyMap.get(jsxProp.id.name);
                 if(property==null)
                     context.problemListener.reportUnknownProperty(jsxProp, jsxProp.id.name);
                 else
                     property.validate(context, jsxProp)
             });
         Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
-            var prop = propertyMap.entries[name];
+            const prop = propertyMap.entries[name];
             if(prop.isRequired() && !actualNames.has(name))
                 context.problemListener.reportMissingProperty(this, name);
         }, this);
@@ -116,14 +116,14 @@ class JsxElementBase extends IJsxExpression {
 
     declare(transpiler) {
         if (!this.isHtmlTag()) {
-            var decl = transpiler.context.getRegisteredDeclaration(this.id.name);
+            const decl = transpiler.context.getRegisteredDeclaration(this.id.name);
             if(decl==null)
                 transpiler.context.problemListener.reportUnknownIdentifier(this.id);
             else
                 decl.declare(transpiler.newLocalTranspiler());
         }
         if(this.properties!=null) {
-            var propertyMap = this.getPropertyMap(transpiler.context);
+            const propertyMap = this.getPropertyMap(transpiler.context);
             this.properties.forEach(function (jsxprop) {
                 this.declareProperty(transpiler, propertyMap, jsxprop);
             }, this);
@@ -132,8 +132,8 @@ class JsxElementBase extends IJsxExpression {
     }
 
     declareProperty(transpiler, propertyMap, jsxProp) {
-        var name = jsxProp.id.name;
-        var property = propertyMap ? propertyMap.get(name) : null;
+        const name = jsxProp.id.name;
+        let property = propertyMap ? propertyMap.get(name) : null;
         if(!property && !this.isHtmlTag())
             property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
         if(property)
@@ -157,7 +157,7 @@ class JsxElementBase extends IJsxExpression {
         if(this.properties==null || this.properties.length===0)
             transpiler.append("null");
         else {
-            var propertyMap = this.getPropertyMap(transpiler.context);
+            const propertyMap = this.getPropertyMap(transpiler.context);
             transpiler.append("{");
             this.properties.forEach(function(jsxProp) {
                 this.transpileProperty(transpiler, propertyMap, jsxProp);
@@ -170,8 +170,8 @@ class JsxElementBase extends IJsxExpression {
     }
 
     transpileProperty(transpiler, propertyMap, jsxProp) {
-        var name = jsxProp.id.name;
-        var property = propertyMap ? propertyMap.get(name) : null;
+        const name = jsxProp.id.name;
+        let property = propertyMap ? propertyMap.get(name) : null;
         if(!property && !this.isHtmlTag())
             property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
         if(property)

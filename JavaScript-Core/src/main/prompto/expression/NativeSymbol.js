@@ -1,6 +1,6 @@
-var Symbol = require("./Symbol").Symbol;
-var Dialect = require("../parser/Dialect").Dialect;
-var TextValue = require("../value/TextValue").TextValue;
+const Symbol = require("./Symbol").Symbol;
+const Dialect = require("../parser/Dialect").Dialect;
+const TextValue = require("../value/TextValue").TextValue;
 
 class NativeSymbol extends Symbol {
     constructor(id, expression) {
@@ -34,7 +34,7 @@ class NativeSymbol extends Symbol {
     }
 
     check(context) {
-        var actual = this.expression.check(context);
+        const actual = this.expression.check(context);
         if(!this.type.derivedFrom.isAssignableFrom(context, actual)) {
             throw new SyntaxError("Cannot assign " + actual.name + " to " + this.type.derivedFrom.name);
         }

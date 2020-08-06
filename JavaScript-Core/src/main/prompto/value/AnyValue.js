@@ -1,5 +1,5 @@
-var Value = require("./Value").Value;
-var AnyType = require("../type/AnyType").AnyType;
+const Value = require("./Value").Value;
+const AnyType = require("../type/AnyType").AnyType;
 
 class AnyValue extends Value {
     constructor() {

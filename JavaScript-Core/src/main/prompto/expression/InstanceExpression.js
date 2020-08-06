@@ -1,19 +1,19 @@
-var Expression = require("./Expression").Expression;
-var Variable = require("../runtime/Variable").Variable;
-var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
-var Parameter = require("../param/Parameter").Parameter;
-var Dialect = require("../parser/Dialect").Dialect;
-var CategoryDeclaration = null;
-var VoidType = require("../type/VoidType").VoidType;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var MethodType = require("../type/MethodType").MethodType;
-var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var MethodDeclarationMap = null;
-var InstanceContext = null;
-var EqualsExpression = null;
-var EqOp = require("../grammar/EqOp").EqOp;
-var BooleanLiteral = null;
+const Expression = require("./Expression").Expression;
+const Variable = require("../runtime/Variable").Variable;
+const LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
+const Parameter = require("../param/Parameter").Parameter;
+const Dialect = require("../parser/Dialect").Dialect;
+let CategoryDeclaration = null;
+const VoidType = require("../type/VoidType").VoidType;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const MethodType = require("../type/MethodType").MethodType;
+const ClosureValue = require("../value/ClosureValue").ClosureValue;
+const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
+let MethodDeclarationMap = null;
+let InstanceContext = null;
+let EqualsExpression = null;
+const EqOp = require("../grammar/EqOp").EqOp;
+let BooleanLiteral = null;
 
 exports.resolve = () => {
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
@@ -40,9 +40,9 @@ class InstanceExpression extends Expression {
     }
 
     declare(transpiler) {
-        var named = transpiler.context.getRegistered(this.name);
+        const named = transpiler.context.getRegistered(this.name);
         if(named instanceof MethodDeclarationMap) {
-            var decl = named.getFirst();
+            const decl = named.getFirst();
             // don't declare member methods
             if(decl.memberOf!=null)
                 return;
@@ -54,12 +54,12 @@ class InstanceExpression extends Expression {
     }
 
     transpile(transpiler) {
-        var context = transpiler.context.contextForValue(this.name);
+        const context = transpiler.context.contextForValue(this.name);
         if(context instanceof InstanceContext) {
             context.instanceType.transpileInstance(transpiler);
             transpiler.append(".");
         }
-        var named = transpiler.context.getRegistered(this.name);
+        const named = transpiler.context.getRegistered(this.name);
         if(named instanceof MethodDeclarationMap) {
             transpiler.append(named.getFirst().getTranspiledName());
             // need to bind instance methods
@@ -86,14 +86,14 @@ class InstanceExpression extends Expression {
     requiresMethod(writer) {
         if(writer.dialect!=Dialect.E)
             return false;
-        var o = writer.context.getRegistered(this.name);
+        const o = writer.context.getRegistered(this.name);
         if(o instanceof MethodDeclarationMap)
             return true;
         return false;
     }
 
     check(context) {
-        var named = context.getRegistered(this.id.name);
+        let named = context.getRegistered(this.id.name);
         if(named==null) {
             named = context.getRegisteredDeclaration(this.id.name);
         }
@@ -116,7 +116,7 @@ class InstanceExpression extends Expression {
     }
 
     checkAttribute(context) {
-        var decl = context.findAttribute(this.name);
+        const decl = context.findAttribute(this.name);
         return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
     }
 
@@ -128,9 +128,9 @@ class InstanceExpression extends Expression {
         if(context.hasValue(this.id)) {
             return context.getValue(this.id);
         } else {
-            var named = context.getRegistered(this.id);
+            const named = context.getRegistered(this.id);
             if (named instanceof MethodDeclarationMap) {
-                var decl = named.getFirst();
+                const decl = named.getFirst();
                 return new ClosureValue(context, new MethodType(decl))
             } else {
                 throw new SyntaxError("No method with name:" + this.name);
@@ -139,7 +139,7 @@ class InstanceExpression extends Expression {
     }
 
     toPredicate(context) {
-        var decl = context.findAttribute(this.id.name);
+        const decl = context.findAttribute(this.id.name);
         if(!decl)
             context.problemListener.reportUnknownIdentifier(this.id);
         else if(decl.getType()!=BooleanType.instance)
@@ -149,17 +149,17 @@ class InstanceExpression extends Expression {
     }
 
     interpretQuery(context, builder) {
-        var predicate = this.toPredicate(context);
+        const predicate = this.toPredicate(context);
         predicate && predicate.interpretQuery(context, builder);
     }
 
     declareQuery(transpiler) {
-        var predicate = this.toPredicate(transpiler.context);
+        const predicate = this.toPredicate(transpiler.context);
         predicate && predicate.declareQuery(transpiler);
     }
 
     transpileQuery(transpiler, builderName) {
-        var predicate = this.toPredicate(transpiler.context);
+        const predicate = this.toPredicate(transpiler.context);
         predicate && predicate.transpileQuery(transpiler, builderName);
     }
 }

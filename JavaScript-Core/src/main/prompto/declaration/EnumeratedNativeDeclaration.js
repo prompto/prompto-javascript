@@ -1,6 +1,6 @@
-var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var EnumeratedNativeType = require("../type/EnumeratedNativeType").EnumeratedNativeType;
-var List = require("../intrinsic/List").List;
+const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
+const EnumeratedNativeType = require("../type/EnumeratedNativeType").EnumeratedNativeType;
+const List = require("../intrinsic/List").List;
 
 class EnumeratedNativeDeclaration extends BaseDeclaration {
 
@@ -84,7 +84,7 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
         transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
         transpiler.append(this.name).append(".prototype.equals = function(other) { return this==other; };").newLine();
         this.symbols.forEach(symbol => {symbol.initialize(transpiler);});
-        var names = this.symbols.map(symbol => symbol.name);
+        const names = this.symbols.map(symbol => symbol.name);
         transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
         transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
     }

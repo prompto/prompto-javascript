@@ -1,6 +1,6 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var BreakResult = require("../runtime/BreakResult").BreakResult;
-var VoidType = require("../type/VoidType").VoidType;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const BreakResult = require("../runtime/BreakResult").BreakResult;
+const VoidType = require("../type/VoidType").VoidType;
 
 class BreakStatement extends SimpleStatement {
     constructor() {

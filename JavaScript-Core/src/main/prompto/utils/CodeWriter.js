@@ -1,4 +1,4 @@
-var Context = require("../runtime/Context").Context;
+const Context = require("../runtime/Context").Context;
 
 class Indenter {
 

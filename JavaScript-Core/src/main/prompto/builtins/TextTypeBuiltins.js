@@ -1,17 +1,17 @@
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
-var ListType = require("../type/ListType").ListType;
-var ListValue = require("../value/ListValue").ListValue;
-var Identifier = require("../grammar/Identifier").Identifier;
-var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-var IntegerLiteral = require("../literal/IntegerLiteral").IntegerLiteral;
-var List = require("../intrinsic/List").List;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
+const IntegerType = require("../type/IntegerType").IntegerType;
+const IntegerValue = require("../value/IntegerValue").IntegerValue;
+const TextType = require("../type/TextType").TextType;
+const TextValue = require("../value/TextValue").TextValue;
+const ListType = require("../type/ListType").ListType;
+const ListValue = require("../value/ListValue").ListValue;
+const Identifier = require("../grammar/Identifier").Identifier;
+const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+const TextLiteral = require("../literal/TextLiteral").TextLiteral;
+const IntegerLiteral = require("../literal/IntegerLiteral").IntegerLiteral;
+const List = require("../intrinsic/List").List;
 
 
 class ToLowerCaseMethodDeclaration extends BuiltInMethodDeclaration {
@@ -21,7 +21,7 @@ class ToLowerCaseMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
+        const value = this.getValue(context).getStorableData();
         return new TextValue(value.toLowerCase());
     }
 
@@ -41,7 +41,7 @@ class ToUpperCaseMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
+        const value = this.getValue(context).getStorableData();
         return new TextValue(value.toUpperCase());
     }
 
@@ -61,7 +61,7 @@ class TrimMethodDeclaration extends BuiltInMethodDeclaration {
      }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
+        let value = this.getValue(context).getStorableData();
         value = value.trim();
         return new TextValue(value);
     }
@@ -82,7 +82,7 @@ class ToCapitalizedMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
+        let value = this.getValue(context).getStorableData();
         value = value.replace( /(^|\s)([a-z])/g , (m, p1, p2) => p1 + p2.toUpperCase() );
         return new TextValue(value);
     }
@@ -103,10 +103,10 @@ class SplitMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var sep = context.getValue(new Identifier("separator")).getStorableData();
-        var list = value.split(sep);
-        var texts = list.map(s => new TextValue(s));
+        const value = this.getValue(context).getStorableData();
+        const sep = context.getValue(new Identifier("separator")).getStorableData();
+        const list = value.split(sep);
+        const texts = list.map(s => new TextValue(s));
         return new ListValue(TextType.instance, texts);
     }
 
@@ -135,9 +135,9 @@ class StartsWithMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var find = context.getValue(new Identifier("value")).getStorableData();
-        var startsWith = value.indexOf(find)===0;
+        const value = this.getValue(context).getStorableData();
+        const find = context.getValue(new Identifier("value")).getStorableData();
+        const startsWith = value.indexOf(find)===0;
         return BooleanValue.ValueOf(startsWith);
     }
 
@@ -162,9 +162,9 @@ class EndsWithMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var find = context.getValue(new Identifier("value")).getStorableData();
-        var endsWith = value.indexOf(find)===value.length-find.length;
+        const value = this.getValue(context).getStorableData();
+        const find = context.getValue(new Identifier("value")).getStorableData();
+        const endsWith = value.indexOf(find)===value.length-find.length;
         return BooleanValue.ValueOf(endsWith);
     }
 
@@ -186,9 +186,9 @@ class ReplaceMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
-        var replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
+        let value = this.getValue(context).getStorableData();
+        const toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
+        const replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
         value = value.replace(toReplace, replaceWith);
         return new TextValue(value);
     }
@@ -213,9 +213,9 @@ class ReplaceAllMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
-        var replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
+        let value = this.getValue(context).getStorableData();
+        const toReplace = context.getValue(new Identifier("toReplace")).getStorableData();
+        const replaceWith = context.getValue(new Identifier("replaceWith")).getStorableData();
         value = value.replace(new RegExp(toReplace, 'g'), replaceWith);
         return new TextValue(value);
     }
@@ -241,10 +241,10 @@ class IndexOfMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context).getStorableData();
-        var toFind = context.getValue(new Identifier("value")).getStorableData();
-        var fromIndex = context.getValue(new Identifier("fromIndex")).getStorableData();
-        var index = value.indexOf(toFind, fromIndex - 1);
+        const value = this.getValue(context).getStorableData();
+        const toFind = context.getValue(new Identifier("value")).getStorableData();
+        const fromIndex = context.getValue(new Identifier("fromIndex")).getStorableData();
+        const index = value.indexOf(toFind, fromIndex - 1);
         return new IntegerValue(index + 1);
     }
 

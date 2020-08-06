@@ -1,9 +1,9 @@
-var ResourceContext = require("../runtime/Context").ResourceContext;
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var VoidType = require("../type/VoidType").VoidType;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
+const ResourceContext = require("../runtime/Context").ResourceContext;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const ResourceType = require("../type/ResourceType").ResourceType;
+const VoidType = require("../type/VoidType").VoidType;
+const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
+const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
 
 class WriteStatement extends SimpleStatement {
     constructor(content, resource) {
@@ -19,22 +19,22 @@ class WriteStatement extends SimpleStatement {
 
     check(context) {
         context = context instanceof ResourceContext ? context : context.newResourceContext();
-        var resourceType = this.resource.check(context);
+        const resourceType = this.resource.check(context);
         if(!(resourceType instanceof ResourceType))
             context.problemListener.reportNotAResource(this.resource);
         return VoidType.instance;
     }
 
     interpret(context) {
-        var resContext = context instanceof ResourceContext ? context : context.newResourceContext();
-        var res = this.resource.interpret(resContext);
+        const resContext = context instanceof ResourceContext ? context : context.newResourceContext();
+        const res = this.resource.interpret(resContext);
         if(res==null) {
             throw new NullReferenceError();
         }
         if(!res.isWritable || !res.isWritable()) {
             throw new InvalidResourceError("Not writable");
         }
-        var str = this.content.interpret(resContext).toString();
+        const str = this.content.interpret(resContext).toString();
         try {
             if(context==resContext) {
                 res.writeLine(str);

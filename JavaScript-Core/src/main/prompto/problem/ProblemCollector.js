@@ -1,4 +1,4 @@
-var antlr4 = require('antlr4/index');
+const antlr4 = require('antlr4/index');
 
 class ProblemCollector extends antlr4.error.ErrorListener {
    
@@ -31,7 +31,7 @@ class ProblemCollector extends antlr4.error.ErrorListener {
     }
 
     syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
-        var problem = {
+        const problem = {
                 startLine: line,
                 startColumn: column,
                 endLine: line,
@@ -207,7 +207,7 @@ class ProblemCollector extends antlr4.error.ErrorListener {
     }
 
     reportProblem(section, message, type) {
-        var problem = this.readSection(section);
+        const problem = this.readSection(section);
         problem.type = type;
         problem.message = message;
         this.collectProblem(problem);

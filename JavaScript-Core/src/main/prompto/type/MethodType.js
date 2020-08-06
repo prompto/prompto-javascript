@@ -1,4 +1,4 @@
-var BaseType = require("./BaseType").BaseType;
+const BaseType = require("./BaseType").BaseType;
 
 class MethodType extends BaseType {
   
@@ -17,7 +17,7 @@ class MethodType extends BaseType {
     }
 
     checkUnique(context) {
-        var actual = context.getRegisteredDeclaration(this.name);
+        const actual = context.getRegisteredDeclaration(this.name);
         if (actual != null) {
             throw new SyntaxError("Duplicate name: \"" + this.name + "\"");
         }

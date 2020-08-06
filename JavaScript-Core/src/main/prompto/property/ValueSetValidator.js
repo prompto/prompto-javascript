@@ -1,5 +1,5 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
-var AnyType = require("../type/AnyType").AnyType;
+const PropertyValidator = require("./PropertyValidator").PropertyValidator;
+const AnyType = require("../type/AnyType").AnyType;
 
 class ValueSetValidator extends PropertyValidator {
     constructor(values) {
@@ -13,13 +13,13 @@ class ValueSetValidator extends PropertyValidator {
     }
 
     validate(context, property) {
-        var value = property.value;
+        const value = property.value;
         if(value.isLiteral()) {
-            var text = value.toString();
+            let text = value.toString();
             if(text.startsWith("\"") && text.endsWith("\""))
                 text = text.substring(1, text.length - 1);
             if(!this.values.has(text)) {
-                var message = "Illegal value " + text + ", expected one of " + this.values;
+                const message = "Illegal value " + text + ", expected one of " + this.values;
                 context.problemListener.reportIllegalValue(property, message);
             }
         }

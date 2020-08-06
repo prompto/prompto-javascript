@@ -1,5 +1,5 @@
-var Value = require("./Value").Value;
-var CssType = require("../type/CssType").CssType;
+const Value = require("./Value").Value;
+const CssType = require("../type/CssType").CssType;
 
 class CssValue extends Value {
     constructor(expression) {

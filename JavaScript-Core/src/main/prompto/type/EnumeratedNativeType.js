@@ -1,8 +1,8 @@
-var BaseType = require("./BaseType").BaseType;
-var ListType = require("./ListType").ListType;
-var TextType = require("./TextType").TextType;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
-var List = require("../intrinsic/List").List;
+const BaseType = require("./BaseType").BaseType;
+const ListType = require("./ListType").ListType;
+const TextType = require("./TextType").TextType;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
+const List = require("../intrinsic/List").List;
 
 class EnumeratedNativeType extends BaseType {
 
@@ -34,7 +34,7 @@ class EnumeratedNativeType extends BaseType {
     }
 
     declare(transpiler) {
-        var decl = transpiler.context.getRegisteredDeclaration(this.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.name);
         transpiler.declare(decl);
         transpiler.require(List);
     }
@@ -45,7 +45,7 @@ class EnumeratedNativeType extends BaseType {
 
     declareMember(transpiler, section, name) {
         if("value"==name || "name"==name) {
-            var decl = transpiler.context.getRegisteredDeclaration(this.name);
+            const decl = transpiler.context.getRegisteredDeclaration(this.name);
             transpiler.declare(decl);
         } else
             super.declareMember(transpiler, section, name);
@@ -61,7 +61,7 @@ class EnumeratedNativeType extends BaseType {
 
     declareStaticMember(transpiler, section, name) {
         if("symbols"==name) {
-            var decl = transpiler.context.getRegisteredDeclaration(this.name);
+            const decl = transpiler.context.getRegisteredDeclaration(this.name);
             transpiler.declare(decl);
         } else
             super.declareStaticMember(transpiler, section, name);
@@ -76,7 +76,7 @@ class EnumeratedNativeType extends BaseType {
     }
 
     getStaticMemberValue(context, name) {
-        var decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.name);
         if(!decl || !decl.symbols) {
             throw new SyntaxError(name + " is not an enumerated type!");
         }
@@ -94,7 +94,7 @@ class EnumeratedNativeType extends BaseType {
     getStaticMemberMethods(context, name) {
         switch (name) {
             case "symbolOf":
-                var SymbolOfMethodDeclaration = require("../builtins/EnumeratedNativeTypeBuiltins").SymbolOfMethodDeclaration;
+                const SymbolOfMethodDeclaration = require("../builtins/EnumeratedNativeTypeBuiltins").SymbolOfMethodDeclaration;
                 return [new SymbolOfMethodDeclaration(this)];
             default:
                 return BaseType.prototype.getStaticMemberMethods.call(this, context, name);

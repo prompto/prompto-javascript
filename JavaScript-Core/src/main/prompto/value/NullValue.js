@@ -1,5 +1,5 @@
-var Value = require("./Value").Value;
-var NullType = require("../type/NullType").NullType;
+const Value = require("./Value").Value;
+const NullType = require("../type/NullType").NullType;
 
 class NullValue extends Value {
     constructor() {

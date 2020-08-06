@@ -1,6 +1,6 @@
-var BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-var DictionaryType = require("../type/DictionaryType").DictionaryType;
-var TextType = require("../type/TextType").TextType;
+const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
+const DictionaryType = require("../type/DictionaryType").DictionaryType;
+const TextType = require("../type/TextType").TextType;
 
 class SwapMethodDeclaration extends BuiltInMethodDeclaration {
 
@@ -10,7 +10,7 @@ class SwapMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        var value = this.getValue(context);
+        const value = this.getValue(context);
         return value.swap(context);
     }
 

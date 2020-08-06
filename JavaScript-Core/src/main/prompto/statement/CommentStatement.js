@@ -1,6 +1,6 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var Dialect = require("../parser/Dialect").Dialect;
-var VoidType = require("../type/VoidType").VoidType;
+const BaseStatement = require("./BaseStatement").BaseStatement;
+const Dialect = require("../parser/Dialect").Dialect;
+const VoidType = require("../type/VoidType").VoidType;
 
 class CommentStatement extends BaseStatement {
     constructor(text) {
@@ -25,7 +25,7 @@ class CommentStatement extends BaseStatement {
     }
 
     toDialect(writer) {
-        var lines = this.text.split("\n");
+        let lines = this.text.split("\n");
         lines = lines.map(line => uncomment(line));
         switch (writer.dialect) {
             case Dialect.E:

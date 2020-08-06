@@ -1,6 +1,6 @@
-var Literal = require("./Literal").Literal;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var DecimalType = require("../type/DecimalType").DecimalType;
+const Literal = require("./Literal").Literal;
+const DecimalValue = require("../value/DecimalValue").DecimalValue;
+const DecimalType = require("../type/DecimalType").DecimalType;
 
 class DecimalLiteral extends Literal {
     constructor(text) {

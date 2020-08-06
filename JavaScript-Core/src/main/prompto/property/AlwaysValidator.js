@@ -1,5 +1,5 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
-var AnyType = require("../type/AnyType").AnyType;
+const PropertyValidator = require("./PropertyValidator").PropertyValidator;
+const AnyType = require("../type/AnyType").AnyType;
 
 class AlwaysValidator extends PropertyValidator {
     constructor() {

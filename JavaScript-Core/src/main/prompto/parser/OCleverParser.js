@@ -1,9 +1,9 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? require("fs") : {}; // nodejs only
-var antlr4 = require("antlr4/index");
-var ONamingLexer = require("./ONamingLexer").ONamingLexer;
-var OParser = require("./OParser").OParser;
-var OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
+const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+const fs = isNodeJs ? require("fs") : {}; // nodejs only
+const antlr4 = require("antlr4/index");
+const ONamingLexer = require("./ONamingLexer").ONamingLexer;
+const OParser = require("./OParser").OParser;
+const OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -50,9 +50,9 @@ OCleverParser.prototype.parse_document_literal = function() {
 OCleverParser.prototype.equalToken = () => OParser.EQUAL;
 
 OCleverParser.prototype.doParse = function(rule) {
-    var tree = rule.bind(this)();
-    var builder = new OPromptoBuilder(this);
-    var walker = new antlr4.tree.ParseTreeWalker();
+    const tree = rule.bind(this)();
+    const builder = new OPromptoBuilder(this);
+    const walker = new antlr4.tree.ParseTreeWalker();
     walker.walk(builder, tree);
     return builder.getNodeValue(tree);
 };

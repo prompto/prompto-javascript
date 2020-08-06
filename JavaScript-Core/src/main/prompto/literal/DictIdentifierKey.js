@@ -1,5 +1,5 @@
-var TextValue = require("../value/TextValue").TextValue;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+const TextValue = require("../value/TextValue").TextValue;
+const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 
 class DictIdentifierKey {
  
@@ -16,7 +16,7 @@ class DictIdentifierKey {
     }
 
     interpret(context) {
-        var value = new InstanceExpression(this.id).interpret(context);
+        const value = new InstanceExpression(this.id).interpret(context);
         if(value instanceof TextValue)
             return value;
         else {

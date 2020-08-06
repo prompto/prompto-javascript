@@ -1,4 +1,4 @@
-var CSharpExpression = require("./CSharpExpression").CSharpExpression;
+const CSharpExpression = require("./CSharpExpression").CSharpExpression;
 
 class CSharpSelectorExpression extends CSharpExpression {
     constructor(parent) {

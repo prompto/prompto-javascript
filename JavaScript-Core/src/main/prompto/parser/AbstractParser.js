@@ -1,7 +1,7 @@
 /* do NOT delete this file, it is NOT generated */
 /* it has to be located in the generated folder */
 /* to work around jest resolver issues */
-var Parser = require("antlr4").Parser;
+const Parser = require("antlr4").Parser;
 
 function AbstractParser(input) {
 	Parser.call(this, input);
@@ -34,8 +34,8 @@ AbstractParser.prototype.willNotBe = function(type) {
 };
 
 AbstractParser.prototype.nextHiddenTokenType = function() {
-	var bts = this.getTokenStream();
-	var hidden = bts.getHiddenTokensToRight(bts.index-1);
+	const bts = this.getTokenStream();
+	const hidden = bts.getHiddenTokensToRight(bts.index-1);
 	if(hidden===null || hidden.length===0) {
 		return 0;
 	} else {
@@ -52,8 +52,8 @@ AbstractParser.prototype.willBeText = function(text) {
 };
 
 AbstractParser.prototype.lastHiddenTokenType = function() {
-	var bts = this.getTokenStream();
-	var hidden = bts.getHiddenTokensToLeft(bts.index);
+	const bts = this.getTokenStream();
+	const hidden = bts.getHiddenTokensToLeft(bts.index);
 	if(hidden===null || hidden.length===0) {
 		return 0;
 	} else {

@@ -1,7 +1,7 @@
-var Value = require("./Value").Value;
-var DecimalValue = require("./DecimalValue").DecimalValue;
-var IntegerType = null;
-var DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
+const Value = require("./Value").Value;
+const DecimalValue = require("./DecimalValue").DecimalValue;
+let IntegerType = null;
+const DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
 
 exports.resolve = () => {
     IntegerType = require("../type/IntegerType").IntegerType;

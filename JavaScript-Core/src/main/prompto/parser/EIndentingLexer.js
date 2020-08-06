@@ -1,5 +1,5 @@
-var ELexer = require("./ELexer").ELexer;
-var Dialect = require("./Dialect").Dialect;
+const ELexer = require("./ELexer").ELexer;
+const Dialect = require("./Dialect").Dialect;
 
 function EIndentingLexer(input) {
 	ELexer.call(this, input);
@@ -17,7 +17,7 @@ EIndentingLexer.prototype = Object.create(ELexer.prototype);
 EIndentingLexer.prototype.constructor = EIndentingLexer;
 
 EIndentingLexer.prototype.indentedNextToken = function() {
-	var t = this.getNextToken();
+	const t = this.getNextToken();
 	this.wasLF = t.type===ELexer.LF;
 	return t;
 };
@@ -60,8 +60,8 @@ EIndentingLexer.prototype.interpretEOF = function(eof) {
   
 EIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 	// count TABs following LF
-	var indentCount = this.countIndents(lftab.text);
-	var next = this.nextLexerToken();
+	const indentCount = this.countIndents(lftab.text);
+	const next = this.nextLexerToken();
 	// if this was an empty line, simply skip it
 	if(next.type===ELexer.EOF || next.type===ELexer.LF_TAB) {
 		this.tokens.push(this.deriveToken(lftab, ELexer.LF));
@@ -90,7 +90,7 @@ EIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 };
 
 EIndentingLexer.prototype.deriveToken = (token, type) => {
-	var res = token.clone();
+	const res = token.clone();
 	res.type = type;
 	if(token.type === ELexer.EOF)
 		res._text = ""
@@ -98,8 +98,8 @@ EIndentingLexer.prototype.deriveToken = (token, type) => {
 };
 
 EIndentingLexer.prototype.countIndents = text => {
-	var count = 0;
-	for(var i=0;i<text.length;i++) {
+	let count = 0;
+	for(let i=0;i<text.length;i++) {
 		switch(text[i]) {
 		case ' ':
 			count += 1;

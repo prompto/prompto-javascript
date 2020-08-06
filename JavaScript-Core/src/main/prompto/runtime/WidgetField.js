@@ -1,4 +1,4 @@
-var Variable = require("./Variable").Variable;
+const Variable = require("./Variable").Variable;
 
 class WidgetField extends Variable {
 

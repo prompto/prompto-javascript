@@ -1,9 +1,9 @@
-var Literal = require("./Literal").Literal;
-var TypeType = require("../type/TypeType").TypeType;
-var TypeValue = require("../value/TypeValue").TypeValue;
-var Dialect = require("../parser/Dialect").Dialect;
-var Type = require("../intrinsic/Type").Type;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
+const Literal = require("./Literal").Literal;
+const TypeType = require("../type/TypeType").TypeType;
+const TypeValue = require("../value/TypeValue").TypeValue;
+const Dialect = require("../parser/Dialect").Dialect;
+const Type = require("../intrinsic/Type").Type;
+const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
 class TypeLiteral extends Literal {
   
@@ -21,7 +21,7 @@ class TypeLiteral extends Literal {
 
     toDialect(writer) {
         if(writer.dialect==Dialect.E) {
-            var decl = writer.context.getRegisteredDeclaration(this.value.id);
+            const decl = writer.context.getRegisteredDeclaration(this.value.id);
             if(decl instanceof MethodDeclarationMap)
                 writer.append("Method: ");
             else

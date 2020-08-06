@@ -1,4 +1,4 @@
-var ContextualExpression = require("./ContextualExpression").ContextualExpression;
+const ContextualExpression = require("./ContextualExpression").ContextualExpression;
 
 class ArrowValue extends ContextualExpression {
     constructor(method, calling, arrow) {
@@ -8,7 +8,7 @@ class ArrowValue extends ContextualExpression {
     }
 
     interpret(context) {
-        var parent = context.getParentContext();
+        const parent = context.getParentContext();
         try {
             context.setParentContext(this.calling);
             return this.expression.interpret(context);

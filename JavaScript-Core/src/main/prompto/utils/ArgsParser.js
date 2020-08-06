@@ -1,10 +1,10 @@
 // Generated from ArgsParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
-var ArgsParserListener = require('./ArgsParserListener').ArgsParserListener;
-var grammarFileName = "ArgsParser.g4";
+const antlr4 = require('antlr4/index');
+const ArgsParserListener = require('./ArgsParserListener').ArgsParserListener;
+const grammarFileName = "ArgsParser.g4";
 
-var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
+const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003\u0007\u001e\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",
     "\t\u0004\u0004\u0005\t\u0005\u0003\u0002\u0007\u0002\f\n\u0002\f\u0002",
     "\u000e\u0002\u000f\u000b\u0002\u0003\u0003\u0005\u0003\u0012\n\u0003",
@@ -26,17 +26,17 @@ var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\t\u0003\u0002\u0002\u0002\u0005\r\u0011\u001b"].join("");
 
 
-var atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
+const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
 
-var decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index));
+const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DFA(ds, index));
 
-var sharedContextCache = new antlr4.PredictionContextCache();
+const sharedContextCache = new antlr4.PredictionContextCache();
 
-var literalNames = [ null, null, "'='", "'-'", "' '" ];
+const literalNames = [ null, null, "'='", "'-'", "' '" ];
 
-var symbolicNames = [ null, "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
+const symbolicNames = [ null, "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
 
-var ruleNames =  [ "parse", "entry", "key", "value" ];
+const ruleNames =  [ "parse", "entry", "key", "value" ];
 
 class ArgsParser extends antlr4.Parser {
     constructor(input) {
@@ -54,9 +54,9 @@ class ArgsParser extends antlr4.Parser {
 
     parse() {
 
-        var localctx = new ParseContext(this, this._ctx, this.state);
+        const localctx = new ParseContext(this, this._ctx, this.state);
         this.enterRule(localctx, 0, ArgsParser.RULE_parse);
-        var _la = 0; // Token type
+        let _la = 0; // Token type
         try {
             this.enterOuterAlt(localctx, 1);
             this.state = 11;
@@ -85,9 +85,9 @@ class ArgsParser extends antlr4.Parser {
 
     entry() {
 
-        var localctx = new EntryContext(this, this._ctx, this.state);
+        const localctx = new EntryContext(this, this._ctx, this.state);
         this.enterRule(localctx, 2, ArgsParser.RULE_entry);
-        var _la = 0; // Token type
+        let _la = 0; // Token type
         try {
             this.enterOuterAlt(localctx, 1);
             this.state = 15;
@@ -120,7 +120,7 @@ class ArgsParser extends antlr4.Parser {
 
     key() {
 
-        var localctx = new KeyContext(this, this._ctx, this.state);
+        const localctx = new KeyContext(this, this._ctx, this.state);
         this.enterRule(localctx, 4, ArgsParser.RULE_key);
         try {
             this.enterOuterAlt(localctx, 1);
@@ -142,7 +142,7 @@ class ArgsParser extends antlr4.Parser {
 
     value() {
 
-        var localctx = new ValueContext(this, this._ctx, this.state);
+        let localctx = new ValueContext(this, this._ctx, this.state);
         this.enterRule(localctx, 6, ArgsParser.RULE_value);
         try {
             this.state = 25;

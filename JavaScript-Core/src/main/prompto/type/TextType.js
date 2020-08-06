@@ -1,10 +1,10 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var CharacterType = null;
-var IntegerType = require("./IntegerType").IntegerType;
-var BooleanType = require("./BooleanType").BooleanType;
-var TextValue = null; // circular dependency
-var TypeFamily = require("../store/TypeFamily").TypeFamily;
+const NativeType = require("./NativeType").NativeType;
+const Identifier = require("../grammar/Identifier").Identifier;
+let CharacterType = null;
+const IntegerType = require("./IntegerType").IntegerType;
+const BooleanType = require("./BooleanType").BooleanType;
+let TextValue = null; // circular dependency
+const TypeFamily = require("../store/TypeFamily").TypeFamily;
 
 exports.resolve = () => {
     CharacterType = require("./CharacterType").CharacterType;
@@ -24,7 +24,7 @@ class TextType extends NativeType {
     }
 
     declare(transpiler) {
-        var isAText = require("../utils/Utils").isAText;
+        const isAText = require("../utils/Utils").isAText;
         transpiler.require(isAText);
     }
 
@@ -43,7 +43,7 @@ class TextType extends NativeType {
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
-        var DecimalType = require("./DecimalType").DecimalType;
+        const DecimalType = require("./DecimalType").DecimalType;
         // can add anything to text
         left.transpile(transpiler);
         transpiler.append(" + ");
@@ -217,34 +217,34 @@ class TextType extends NativeType {
     getMemberMethods(context, name) {
         switch (name) {
             case "startsWith":
-                var StartsWithMethodDeclaration = require("../builtins/TextTypeBuiltins").StartsWithMethodDeclaration;
+                const StartsWithMethodDeclaration = require("../builtins/TextTypeBuiltins").StartsWithMethodDeclaration;
                 return [new StartsWithMethodDeclaration()];
             case "endsWith":
-                var EndsWithMethodDeclaration = require("../builtins/TextTypeBuiltins").EndsWithMethodDeclaration;
+                const EndsWithMethodDeclaration = require("../builtins/TextTypeBuiltins").EndsWithMethodDeclaration;
                 return [new EndsWithMethodDeclaration()];
             case "toLowerCase":
-                var ToLowerCaseMethodDeclaration = require("../builtins/TextTypeBuiltins").ToLowerCaseMethodDeclaration;
+                const ToLowerCaseMethodDeclaration = require("../builtins/TextTypeBuiltins").ToLowerCaseMethodDeclaration;
                 return [new ToLowerCaseMethodDeclaration()];
             case "toUpperCase":
-                var ToUpperCaseMethodDeclaration = require("../builtins/TextTypeBuiltins").ToUpperCaseMethodDeclaration;
+                const ToUpperCaseMethodDeclaration = require("../builtins/TextTypeBuiltins").ToUpperCaseMethodDeclaration;
                 return [new ToUpperCaseMethodDeclaration()];
             case "toCapitalized":
-                var ToCapitalizedMethodDeclaration = require("../builtins/TextTypeBuiltins").ToCapitalizedMethodDeclaration;
+                const ToCapitalizedMethodDeclaration = require("../builtins/TextTypeBuiltins").ToCapitalizedMethodDeclaration;
                 return [new ToCapitalizedMethodDeclaration()];
             case "trim":
-                var TrimMethodDeclaration = require("../builtins/TextTypeBuiltins").TrimMethodDeclaration;
+                const TrimMethodDeclaration = require("../builtins/TextTypeBuiltins").TrimMethodDeclaration;
                 return [new TrimMethodDeclaration()];
             case "replace":
-                var ReplaceMethodDeclaration = require("../builtins/TextTypeBuiltins").ReplaceMethodDeclaration;
+                const ReplaceMethodDeclaration = require("../builtins/TextTypeBuiltins").ReplaceMethodDeclaration;
                 return [new ReplaceMethodDeclaration()];
             case "replaceAll":
-                var ReplaceAllMethodDeclaration = require("../builtins/TextTypeBuiltins").ReplaceAllMethodDeclaration;
+                const ReplaceAllMethodDeclaration = require("../builtins/TextTypeBuiltins").ReplaceAllMethodDeclaration;
                 return [new ReplaceAllMethodDeclaration()];
             case "split":
-                var SplitMethodDeclaration = require("../builtins/TextTypeBuiltins").SplitMethodDeclaration;
+                const SplitMethodDeclaration = require("../builtins/TextTypeBuiltins").SplitMethodDeclaration;
                 return [new SplitMethodDeclaration()];
             case "indexOf":
-                var IndexOfMethodDeclaration = require("../builtins/TextTypeBuiltins").IndexOfMethodDeclaration;
+                const IndexOfMethodDeclaration = require("../builtins/TextTypeBuiltins").IndexOfMethodDeclaration;
                 return [new IndexOfMethodDeclaration()];
             default:
                 return NativeType.prototype.getMemberMethods.call(context, name);

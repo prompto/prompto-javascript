@@ -1,6 +1,6 @@
-var Expression = require("./Expression").Expression;
-var CodeValue = require("../value/CodeValue").CodeValue;
-var PromptoError = require("../error/PromptoError").PromptoError;
+const Expression = require("./Expression").Expression;
+const CodeValue = require("../value/CodeValue").CodeValue;
+const PromptoError = require("../error/PromptoError").PromptoError;
 
 class ExecuteExpression extends Expression {
     constructor(id) {
@@ -38,7 +38,7 @@ class ExecuteExpression extends Expression {
 
     check(context) {
         try {
-            var value = context.getValue(this.id);
+            const value = context.getValue(this.id);
             if(value instanceof CodeValue) {
                 return value.checkCode(context);
             } else {
@@ -52,7 +52,7 @@ class ExecuteExpression extends Expression {
     }
 
     interpret(context) {
-        var value = context.getValue(this.id);
+        const value = context.getValue(this.id);
         if(value instanceof CodeValue) {
             return value.interpret(context);
         } else {
@@ -61,13 +61,13 @@ class ExecuteExpression extends Expression {
     }
 
     declare(transpiler) {
-        var value = transpiler.context.getValue(this.id);
+        const value = transpiler.context.getValue(this.id);
         value.declareCode(transpiler);
     }
 
     transpile(transpiler) {
         transpiler.append("(");
-        var value = transpiler.context.getValue(this.id);
+        const value = transpiler.context.getValue(this.id);
         value.transpileCode(transpiler);
         transpiler.append(")");
     }

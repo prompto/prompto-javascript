@@ -1,6 +1,6 @@
-var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var ContainerType = require("../type/ContainerType").ContainerType;
-var AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
+const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
+const ContainerType = require("../type/ContainerType").ContainerType;
+const AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 
 class AttributeDeclaration extends BaseDeclaration {
     constructor(id, type, constraint, indexTypes) {
@@ -98,7 +98,7 @@ class AttributeDeclaration extends BaseDeclaration {
     }
 
     checkValue(context, expression) {
-        var value = expression.interpret(context);
+        const value = expression.interpret(context);
         if(this.constraint==null) {
             return value;
         }
@@ -107,8 +107,8 @@ class AttributeDeclaration extends BaseDeclaration {
     }
 
     getAttributeInfo() {
-        var collection = this.type instanceof ContainerType;
-        var family = collection ? this.type.itemType.family : this.type.family;
+        const collection = this.type instanceof ContainerType;
+        const family = collection ? this.type.itemType.family : this.type.family;
         return new AttributeInfo(this.name, family, collection, this.indexTypes);
     }
 

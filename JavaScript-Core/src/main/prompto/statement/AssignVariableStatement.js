@@ -1,7 +1,7 @@
-var SimpleStatement = require("./SimpleStatement").SimpleStatement;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var Variable = require("../runtime/Variable").Variable;
-var VoidType = require("../type/VoidType").VoidType;
+const SimpleStatement = require("./SimpleStatement").SimpleStatement;
+const ResourceType = require("../type/ResourceType").ResourceType;
+const Variable = require("../runtime/Variable").Variable;
+const VoidType = require("../type/VoidType").VoidType;
 
 class AssignVariableStatement extends SimpleStatement {
     constructor(id, expression) {
@@ -22,16 +22,16 @@ class AssignVariableStatement extends SimpleStatement {
     }
 
     checkResource(context) {
-        var type = this.expression.check(context);
+        const type = this.expression.check(context);
         if(!(type instanceof ResourceType)) {
             throw new SyntaxError("Not a resource!");
         }
-        var actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.name);
         if(actual==null) {
             context.registerValue(new Variable(this.id, type));
         } else {
             // need to check type compatibility
-            var actualType = actual.getType(context);
+            const actualType = actual.getType(context);
             actualType.checkAssignableFrom(context, type, this);
         }
         return VoidType.instance;
@@ -48,14 +48,14 @@ class AssignVariableStatement extends SimpleStatement {
     }
 
     check(context) {
-        var actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.name);
         if(actual==null) {
-            var actualType = this.expression.check(context);
+            const actualType = this.expression.check(context);
             context.registerValue(new Variable(this.id, actualType));
         } else {
             // need to check type compatibility
-            actualType = actual.getType(context);
-            var newType = this.expression.check(context);
+            const actualType = actual.getType(context);
+            const newType = this.expression.check(context);
             actualType.checkAssignableFrom(context, newType, this);
         }
         return VoidType.instance;
@@ -63,7 +63,7 @@ class AssignVariableStatement extends SimpleStatement {
 
     interpret(context) {
         if(context.getRegisteredValue(this.name)==null) {
-            var actualType = this.expression.check(context);
+            const actualType = this.expression.check(context);
             context.registerValue(new Variable(this.id, actualType));
         }
         context.setValue(this.id, this.expression.interpret(context));
@@ -71,18 +71,18 @@ class AssignVariableStatement extends SimpleStatement {
     }
 
     declare(transpiler) {
-        var actual = transpiler.context.getRegisteredValue(this.name);
+        const actual = transpiler.context.getRegisteredValue(this.name);
         if(actual==null) {
-            var actualType = this.expression.check(transpiler.context);
+            const actualType = this.expression.check(transpiler.context);
             transpiler.context.registerValue(new Variable(this.id, actualType));
         }
         this.expression.declare(transpiler);
     }
 
     transpile(transpiler) {
-        var actual = transpiler.context.getRegisteredValue(this.name);
+        const actual = transpiler.context.getRegisteredValue(this.name);
         if(actual==null) {
-            var actualType = this.expression.check(transpiler.context);
+            const actualType = this.expression.check(transpiler.context);
             transpiler.context.registerValue(new Variable(this.id, actualType));
             transpiler.append("var ");
         }

@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+const Section = require("../parser/Section").Section;
 
 class SwitchCase extends Section {
     constructor(expression, statements) {

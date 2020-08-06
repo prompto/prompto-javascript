@@ -1,5 +1,5 @@
-var CodeType = require("../type/CodeType").CodeType;
-var Parameter = require("./Parameter").Parameter;
+const CodeType = require("../type/CodeType").CodeType;
+const Parameter = require("./Parameter").Parameter;
 
 class CodeParameter extends Parameter {
     constructor(id) {
@@ -12,7 +12,7 @@ class CodeParameter extends Parameter {
     }
 
     register(context) {
-        var actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.name);
         if(actual!=null) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }

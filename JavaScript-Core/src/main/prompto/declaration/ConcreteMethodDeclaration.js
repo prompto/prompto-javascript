@@ -1,12 +1,12 @@
-var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-var VoidType = require("../type/VoidType").VoidType;
-var DictionaryType = require("../type/DictionaryType").DictionaryType;
-var TextType = require("../type/TextType").TextType;
-var CodeParameter = require("../param/CodeParameter").CodeParameter;
-var CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-var StatementList = require("../statement/StatementList").StatementList;
-var DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
+const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
+const VoidType = require("../type/VoidType").VoidType;
+const DictionaryType = require("../type/DictionaryType").DictionaryType;
+const TextType = require("../type/TextType").TextType;
+const CodeParameter = require("../param/CodeParameter").CodeParameter;
+const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
+const StatementList = require("../statement/StatementList").StatementList;
+const DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
+const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
 class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     constructor(id, args, returnType, statements) {
@@ -40,7 +40,7 @@ class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         if(this.parameters===null) {
             return false;
         }
-        for(var i=0; i<this.parameters.length; i++) {
+        for(let i=0; i<this.parameters.length; i++) {
             if(this.parameters[i] instanceof CodeParameter) {
                 return true;
             }
@@ -63,7 +63,7 @@ class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         if(this.parameters!=null) {
             this.parameters.check(context);
         }
-        var child = context.newChildContext();
+        const child = context.newChildContext();
         this.registerParameters(child);
         return this.checkStatements(child);
     }
@@ -99,7 +99,7 @@ class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         if(this.parameters.length==0)
             return true;
         else if(this.parameters.length==1) {
-            var arg = this.parameters[0];
+            const arg = this.parameters[0];
             if( arg instanceof CategoryParameter
                 && arg.type instanceof DictionaryType
                 && arg.type.itemType==TextType.instance )
@@ -190,13 +190,13 @@ class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         if(!this.codeArguments)
             return;
         Object.getOwnPropertyNames(this.codeArguments).forEach(function(name) {
-            var arg = this.codeArguments[name];
+            const arg = this.codeArguments[name];
             context.setValue(arg.id, arg.value);
         }, this);
     }
 
     fullDeclare(transpiler, id) {
-        var declaration = new ConcreteMethodDeclaration(id, this.parameters, this.returnType, this.statements);
+        const declaration = new ConcreteMethodDeclaration(id, this.parameters, this.returnType, this.statements);
         declaration.memberOf = this.memberOf;
         transpiler.declare(declaration);
         this.statements.declare(transpiler);

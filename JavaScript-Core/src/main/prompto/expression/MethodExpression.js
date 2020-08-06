@@ -1,9 +1,9 @@
-var Expression = require("./Expression").Expression;
-var MethodType = require("../type/MethodType").MethodType;
-var MethodDeclarationMap = null; // circular dependency
-var Dialect = require("../parser/Dialect").Dialect;
-var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var InstanceContext = null;
+const Expression = require("./Expression").Expression;
+const MethodType = require("../type/MethodType").MethodType;
+let MethodDeclarationMap = null; // circular dependency
+const Dialect = require("../parser/Dialect").Dialect;
+const ClosureValue = require("../value/ClosureValue").ClosureValue;
+let InstanceContext = null;
 
 exports.resolve = () => {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -32,7 +32,7 @@ class MethodExpression extends Expression {
     }
 
     check(context) {
-        var decl = this.getDeclaration(context);
+        const decl = this.getDeclaration(context);
         if (decl != null) {
             return new MethodType(decl);
         } else {
@@ -41,7 +41,7 @@ class MethodExpression extends Expression {
     }
 
     getDeclaration(context) {
-        var methods = context.getRegistered(this.id);
+        const methods = context.getRegistered(this.id);
         if(methods instanceof MethodDeclarationMap)
             return methods.getFirst();
         else
@@ -52,9 +52,9 @@ class MethodExpression extends Expression {
         if(context.hasValue(this.id)) {
             return context.getValue(this.id);
         } else {
-            var named = context.getRegistered(this.id);
+            const named = context.getRegistered(this.id);
             if (named instanceof MethodDeclarationMap) {
-                var decl = named.getFirst();
+                const decl = named.getFirst();
                 return new ClosureValue(context, new MethodType(decl))
             } else {
                 context.problemListener.reportUnknownMethod(this.id);
@@ -63,18 +63,18 @@ class MethodExpression extends Expression {
     }
 
     declare(transpiler) {
-        var named = transpiler.context.getRegistered(this.name);
-        var decl = named.getFirst();
+        const named = transpiler.context.getRegistered(this.name);
+        const decl = named.getFirst();
         // don't declare closures
         if(!decl.declarationStatement)
             decl.declare(transpiler);
     }
 
     transpile(transpiler) {
-        var named = transpiler.context.getRegistered(this.name);
+        const named = transpiler.context.getRegistered(this.name);
         if(named instanceof MethodDeclarationMap) {
-            var decl = named.getFirst();
-            var context = transpiler.context.contextForValue(this.name);
+            const decl = named.getFirst();
+            const context = transpiler.context.contextForValue(this.name);
             if (context instanceof InstanceContext) {
                 context.instanceType.transpileInstance(transpiler);
                 transpiler.append(".");

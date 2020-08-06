@@ -1,7 +1,7 @@
-var BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-var ParameterList = require("../param/ParameterList").ParameterList;
-var InternalError = require("../error/InternalError").InternalError;
-var BuiltInContext = null;
+const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
+const ParameterList = require("../param/ParameterList").ParameterList;
+const InternalError = require("../error/InternalError").InternalError;
+let BuiltInContext = null;
 
 exports.resolve = () => {
     BuiltInContext = require("../runtime/Context").BuiltInContext;
@@ -10,10 +10,10 @@ exports.resolve = () => {
 class BuiltInMethodDeclaration extends BaseMethodDeclaration {
 
     constructor(name) {
-        var args = null;
+        let args = null;
         if ( arguments.length > 1 ) {
             args = new ParameterList();
-            for(var i = 1;i<arguments.length; i++) {
+            for(let i = 1;i<arguments.length; i++) {
                 args.add(arguments[i]);
             }
         }

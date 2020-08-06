@@ -1,4 +1,4 @@
-var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
+const JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 
 class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
     constructor(id) {
@@ -12,7 +12,7 @@ class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
     }
 
     interpret(context) {
-        var o = this.parent.interpret(context);
+        const o = this.parent.interpret(context);
         if(o!=null) {
             return this.interpret_field(o);
         } else {

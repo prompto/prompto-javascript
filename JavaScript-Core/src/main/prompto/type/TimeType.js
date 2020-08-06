@@ -1,13 +1,13 @@
-var NativeType = require("./NativeType").NativeType;
-var BooleanType = require("./BooleanType").BooleanType;
-var PeriodType = require("./PeriodType").PeriodType;
-var IntegerType = require("./IntegerType").IntegerType;
-var RangeType = require("./RangeType").RangeType;
-var TimeRange = require("../value/TimeRange").TimeRange;
-var TimeValue = require("../value/TimeValue").TimeValue;
-var Identifier = require("../grammar/Identifier").Identifier;
-var DateTimeType = require("./DateTimeType").DateTimeType;
-var LocalTime = require("../intrinsic/LocalTime").LocalTime;
+const NativeType = require("./NativeType").NativeType;
+const BooleanType = require("./BooleanType").BooleanType;
+const PeriodType = require("./PeriodType").PeriodType;
+const IntegerType = require("./IntegerType").IntegerType;
+const RangeType = require("./RangeType").RangeType;
+const TimeRange = require("../value/TimeRange").TimeRange;
+const TimeValue = require("../value/TimeValue").TimeValue;
+const Identifier = require("../grammar/Identifier").Identifier;
+const DateTimeType = require("./DateTimeType").DateTimeType;
+const LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
 class TimeType extends NativeType {
  
@@ -128,7 +128,7 @@ class TimeType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === TimeType.instance) {
-            var module = require("../intrinsic/Range");
+            const module = require("../intrinsic/Range");
             transpiler.require(module.Range);
             transpiler.require(module.TimeRange);
         } else {

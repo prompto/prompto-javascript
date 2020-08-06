@@ -1,15 +1,15 @@
-var NullValue = require("./NullValue").NullValue;
-var Value = require("./Value").Value;
-var TextValue = require("./TextValue").TextValue;
-var IntegerValue = require("./IntegerValue").IntegerValue;
-var SetValue = require("./SetValue").SetValue;
-var ListValue = require("./ListValue").ListValue;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var TextType = require("../type/TextType").TextType;
-var AnyType = require("../type/AnyType").AnyType;
-var Document = require("../intrinsic/Document").Document;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-var equalArrays = require("../utils/Utils").equalArrays;
+const NullValue = require("./NullValue").NullValue;
+const Value = require("./Value").Value;
+const TextValue = require("./TextValue").TextValue;
+const IntegerValue = require("./IntegerValue").IntegerValue;
+const SetValue = require("./SetValue").SetValue;
+const ListValue = require("./ListValue").ListValue;
+const DocumentType = require("../type/DocumentType").DocumentType;
+const TextType = require("../type/TextType").TextType;
+const AnyType = require("../type/AnyType").AnyType;
+const Document = require("../intrinsic/Document").Document;
+const StrictSet = require("../intrinsic/StrictSet").StrictSet;
+const equalArrays = require("../utils/Utils").equalArrays;
 
 class DocumentValue extends Value {
  
@@ -28,9 +28,9 @@ class DocumentValue extends Value {
     }
 
     convertToJavaScript() {
-        var values = new Document();
+        const values = new Document();
         Object.getOwnPropertyNames(this.values).forEach(function(key) {
-            var value = this.values[key];
+            const value = this.values[key];
             values[key] = value.convertToJavaScript();
         }, this);
         return values;
@@ -44,13 +44,13 @@ class DocumentValue extends Value {
         if ("count"==name) {
             return new IntegerValue(this.values.length);
         } else if ("keys"==name) {
-            var keys = new StrictSet();
+            const keys = new StrictSet();
             this.getMemberNames().forEach(name => {
                 keys.add(new TextValue(name));
             });
             return new SetValue(TextType.instance, keys);
         } else if ("values"==name) {
-            var list = this.getMemberNames().map(function (name) {
+            const list = this.getMemberNames().map(function (name) {
                 return this.values[name];
             }, this);
             return new ListValue(AnyType.instance, list);
@@ -59,7 +59,7 @@ class DocumentValue extends Value {
         else if("text" == name)
             return new TextValue(this.toString());
         else if(autoCreate) {
-            var result = new DocumentValue();
+            const result = new DocumentValue();
             this.values[name] = result;
             return result;
         } else
@@ -100,8 +100,8 @@ class DocumentValue extends Value {
             return true;
         if(!(other instanceof DocumentValue))
             return false;
-        var thisNames = Object.getOwnPropertyNames(this.values);
-        var otherNames = Object.getOwnPropertyNames(other.values);
+        const thisNames = Object.getOwnPropertyNames(this.values);
+        const otherNames = Object.getOwnPropertyNames(other.values);
         if(!equalArrays(thisNames, otherNames))
             return false;
         return thisNames.every(function(name) {
@@ -110,17 +110,17 @@ class DocumentValue extends Value {
     }
 
     toString() {
-        var binaries = {};
+        const binaries = {};
         // create json type-aware object graph and collect binaries
-        var values = {}; // need a temporary parent
-        for (var key in this.values) {
-            var value = this.values[key];
+        const values = {}; // need a temporary parent
+        for (const key in this.values) {
+            const value = this.values[key];
             if(typeof(value) === 'function')
                 continue;
             if (value == null || value == undefined)
                 values[key] = null;
             else {
-                var id = this; // TODO create identifier
+                const id = this; // TODO create identifier
                 value.toJson(null, values, id, key, false, binaries);
             }
         }
@@ -128,17 +128,17 @@ class DocumentValue extends Value {
     }
 
     toJson(context, json, instanceId, fieldName, withType, binaries) {
-        var values = {};
+        const values = {};
         Object.getOwnPropertyNames(this.values).forEach(function(key) {
-            var value = this.values[key];
+            const value = this.values[key];
             if (value == null || value == undefined)
                 values[key] = null;
             else {
-                var id = this; // TODO create identifier
+                const id = this; // TODO create identifier
                 value.toJson(context, values, id, key, withType, binaries);
             }
         }, this);
-        var doc = withType ? { type: DocumentType.instance.name, value: values} : values;
+        const doc = withType ? { type: DocumentType.instance.name, value: values} : values;
         if(Array.isArray(json))
             json.push(doc);
         else

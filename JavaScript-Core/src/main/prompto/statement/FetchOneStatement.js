@@ -1,7 +1,7 @@
-var FetchOneExpression = require("../expression/FetchOneExpression").FetchOneExpression;
-var Variable = require("../runtime/Variable").Variable;
-var VoidType = require("../type/VoidType").VoidType;
-var Dialect = require("../parser/Dialect").Dialect;
+const FetchOneExpression = require("../expression/FetchOneExpression").FetchOneExpression;
+const Variable = require("../runtime/Variable").Variable;
+const VoidType = require("../type/VoidType").VoidType;
+const Dialect = require("../parser/Dialect").Dialect;
 
 class FetchOneStatement extends FetchOneExpression {
     constructor(typ, predicate, name, andThen) {
@@ -28,7 +28,7 @@ class FetchOneStatement extends FetchOneExpression {
     }
 
     interpret(context) {
-        var record = FetchOneExpression.prototype.interpret.call(this, context);
+        const record = FetchOneExpression.prototype.interpret.call(this, context);
         context = context.newChildContext();
         context.registerValue(new Variable(this.name, this.typ));
         context.setValue(this.name, record);

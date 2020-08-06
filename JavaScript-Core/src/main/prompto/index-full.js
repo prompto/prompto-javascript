@@ -23,5 +23,5 @@ exports.jsx = require("./jsx/index");
 exports.internet = require("../../../../JavaScript-Runtime/src/main/prompto/internet/index");
 exports.io = require("../../../../JavaScript-Runtime/src/main/prompto/io/index");
 exports.reader = require("../../../../JavaScript-Runtime/src/main/prompto/reader/index");
-var utils = require("../../../../JavaScript-Runtime/src/main/prompto/utils/index");
+const utils = require("../../../../JavaScript-Runtime/src/main/prompto/utils/index");
 exports.utils = Object.assign(exports.utils, utils);

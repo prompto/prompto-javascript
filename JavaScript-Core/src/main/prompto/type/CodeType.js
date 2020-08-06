@@ -1,5 +1,5 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
+const NativeType = require("./NativeType").NativeType;
+const Identifier = require("../grammar/Identifier").Identifier;
 
 class CodeType extends NativeType {
     constructor() {

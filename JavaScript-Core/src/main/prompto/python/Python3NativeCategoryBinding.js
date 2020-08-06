@@ -1,4 +1,4 @@
-var PythonNativeCategoryBinding = require("./PythonNativeCategoryBinding").PythonNativeCategoryBinding;
+const PythonNativeCategoryBinding = require("./PythonNativeCategoryBinding").PythonNativeCategoryBinding;
 
 class Python3NativeCategoryBinding extends PythonNativeCategoryBinding {
     constructor(binding) {

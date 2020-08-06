@@ -1,6 +1,6 @@
-var Expression = require("./Expression").Expression;
-var CodeValue = require("../value/CodeValue").CodeValue;
-var CodeType = require("../type/CodeType").CodeType;
+const Expression = require("./Expression").Expression;
+const CodeValue = require("../value/CodeValue").CodeValue;
+const CodeType = require("../type/CodeType").CodeType;
 
 class CodeExpression extends Expression {
     constructor(expression) {

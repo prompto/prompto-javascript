@@ -1,6 +1,6 @@
-var Literal = require("./Literal").Literal;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
+const Literal = require("./Literal").Literal;
+const BooleanType = require("../type/BooleanType").BooleanType;
+const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
 class BooleanLiteral extends Literal {
     constructor(text) {

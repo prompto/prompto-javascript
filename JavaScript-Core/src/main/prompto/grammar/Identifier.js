@@ -1,4 +1,4 @@
-var Section = require("../parser/Section").Section;
+const Section = require("../parser/Section").Section;
 
 class Identifier extends Section {
     constructor(name) {

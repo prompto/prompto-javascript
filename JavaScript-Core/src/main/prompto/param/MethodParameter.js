@@ -1,8 +1,8 @@
-var Parameter = require("./Parameter").Parameter;
-var MethodType = require("../type/MethodType").MethodType;
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var ArrowValue = require("../value/ArrowValue").ArrowValue;
+const Parameter = require("./Parameter").Parameter;
+const MethodType = require("../type/MethodType").MethodType;
+const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
+const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
+const ArrowValue = require("../value/ArrowValue").ArrowValue;
 
 class MethodParameter extends Parameter {
     constructor(id) {
@@ -23,7 +23,7 @@ class MethodParameter extends Parameter {
     }
 
     register(context) {
-        var actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.name);
         if(actual!=null) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }
@@ -31,14 +31,14 @@ class MethodParameter extends Parameter {
     }
 
     check(context) {
-        var actual = context.getRegisteredDeclaration(this.name);
+        const actual = context.getRegisteredDeclaration(this.name);
         if(actual==null) {
             throw new SyntaxError("Unknown method: \"" + this.name + "\"");
         }
     }
 
     checkValue(context, expression) {
-        var isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+        const isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
         return isArrow ? this.checkArrowValue(context, expression) : Parameter.prototype.checkValue.call(this, context, expression);
     }
 
@@ -47,12 +47,12 @@ class MethodParameter extends Parameter {
     }
 
     getType(context) {
-        var method = this.getDeclaration(context);
+        const method = this.getDeclaration(context);
         return new MethodType(method);
     }
 
     getDeclaration(context) {
-        var methods = context.getRegisteredDeclaration(this.name);
+        const methods = context.getRegisteredDeclaration(this.name);
         if (methods)
             return methods.getFirst();
         else
@@ -64,7 +64,7 @@ class MethodParameter extends Parameter {
     }
 
     getTranspiledName(context) {
-        var method = this.getDeclaration(context);
+        const method = this.getDeclaration(context);
         return method.getTranspiledName(context);
     }
 
@@ -76,7 +76,7 @@ class MethodParameter extends Parameter {
     transpileArrowExpressionCall(transpiler, expression) {
         if(!(expression instanceof ContextualExpression) || !(expression.expression instanceof ArrowExpression))
             return false;
-        var target = this.getType(transpiler.context);
+        const target = this.getType(transpiler.context);
         target.transpileArrowExpression(transpiler, expression.expression);
         return true;
     }

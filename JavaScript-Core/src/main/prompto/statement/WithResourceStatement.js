@@ -1,4 +1,4 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
+const BaseStatement = require("./BaseStatement").BaseStatement;
 
 class WithResourceStatement extends BaseStatement {
     constructor(resource, statements) {
@@ -19,7 +19,7 @@ class WithResourceStatement extends BaseStatement {
             this.resource.interpret(context);
             return this.statements.interpret(context);
         } finally {
-            var res = context.getValue(this.resource.id);
+            const res = context.getValue(this.resource.id);
             if(res.close) {
                 res.close();
             }
@@ -61,7 +61,7 @@ class WithResourceStatement extends BaseStatement {
         writer.append("with (");
         this.resource.toDialect(writer);
         writer.append(")");
-        var oneLine = this.statements.length==1 && this.statements[0].isSimple();
+        const oneLine = this.statements.length==1 && this.statements[0].isSimple();
         if(!oneLine)
             writer.append(" {");
         writer.newLine().indent();

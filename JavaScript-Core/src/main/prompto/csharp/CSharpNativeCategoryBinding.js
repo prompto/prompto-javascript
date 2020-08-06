@@ -1,4 +1,4 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+const NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
 
 class CSharpNativeCategoryBinding extends NativeCategoryBinding {
     constructor(expression) {

@@ -1,5 +1,5 @@
-var Section = require("../parser/Section").Section;
-var AnnotationProcessors = require("../processor/AnnotationProcessors").AnnotationProcessors;
+const Section = require("../parser/Section").Section;
+const AnnotationProcessors = require("../processor/AnnotationProcessors").AnnotationProcessors;
 
 class Annotation extends Section {
     constructor(id, entries) {
@@ -23,7 +23,7 @@ class Annotation extends Section {
     getArgument(name) {
         if(!this.entries || !this.entries.items)
             return null;
-        var entry = this.entries.items.filter(entry => name === entry.key && entry.key.toString())[0];
+        const entry = this.entries.items.filter(entry => name === entry.key && entry.key.toString())[0];
         if(entry)
             return entry.value;
         else
@@ -49,7 +49,7 @@ class Annotation extends Section {
     }
 
     processCategory(context, declaration) {
-        var processor = AnnotationProcessors.forId(this.id);
+        const processor = AnnotationProcessors.forId(this.id);
         if(processor) {
             processor.processCategory(this, context, declaration);
         } else {
