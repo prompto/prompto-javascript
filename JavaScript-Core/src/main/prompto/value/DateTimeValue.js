@@ -6,7 +6,7 @@ var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var DateTimeType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     DateValue = require("./DateValue").DateValue;
     DateTimeType = require("../type/DateTimeType").DateTimeType;
 };

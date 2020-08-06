@@ -10,7 +10,7 @@ var MethodType = require("../type/MethodType").MethodType;
 var PromptoError = require("../error/PromptoError").PromptoError;
 var Specificity = require("../grammar/Specificity").Specificity;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CategoryType = require("../type/CategoryType").CategoryType;
 }
 

@@ -3,7 +3,7 @@ var DecimalValue = require("./DecimalValue").DecimalValue;
 var IntegerType = null;
 var DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
 
-exports.resolve = function() {
+exports.resolve = () => {
     IntegerType = require("../type/IntegerType").IntegerType;
 };
 

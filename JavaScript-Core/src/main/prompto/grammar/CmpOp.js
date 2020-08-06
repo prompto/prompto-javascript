@@ -10,35 +10,35 @@ class CmpOp {
 
 
 CmpOp.GT = new CmpOp();
-CmpOp.GT.toString = function() {
+CmpOp.GT.toString = () => {
     return ">";
 };
-CmpOp.GT.transpile = function(transpiler) {
+CmpOp.GT.transpile = transpiler => {
     transpiler.append("gt");
 };
 
 CmpOp.GTE = new CmpOp();
-CmpOp.GTE.toString = function() {
+CmpOp.GTE.toString = () => {
     return ">=";
 };
-CmpOp.GTE.transpile = function(transpiler) {
+CmpOp.GTE.transpile = transpiler => {
     transpiler.append("gte");
 };
 
 
 CmpOp.LT = new CmpOp();
-CmpOp.LT.toString = function() {
+CmpOp.LT.toString = () => {
     return "<";
 };
-CmpOp.LT.transpile = function(transpiler) {
+CmpOp.LT.transpile = transpiler => {
     transpiler.append("lt");
 };
 
 CmpOp.LTE = new CmpOp();
-CmpOp.LTE.toString = function() {
+CmpOp.LTE.toString = () => {
     return "<=";
 };
-CmpOp.LTE.transpile = function(transpiler) {
+CmpOp.LTE.transpile = transpiler => {
     transpiler.append("lte");
 };
 

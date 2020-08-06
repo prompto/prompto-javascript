@@ -8,7 +8,7 @@ var UnresolvedParameter = null;
 var CategoryParameter = null;
 var AttributeParameter = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
     UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
     CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
@@ -31,7 +31,7 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 
     replaceLocalsWithArguments(args) {
-        var items = args.map(function(argument) {
+        var items = args.map(argument => {
             var param = argument.parameter;
             var exp = argument.expression;
             if(exp instanceof ContextualExpression)
@@ -87,7 +87,7 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     transpileCall(transpiler, declaration) {
         this.call.transpileSelector(transpiler, declaration);
         transpiler.append("(");
-        this.parameters.forEach(function (arg) {
+        this.parameters.forEach(arg => {
             transpiler.append(arg.name);
             transpiler.append(", ");
         }, this);

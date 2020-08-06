@@ -17,7 +17,7 @@ class ExpressionList extends ObjectList {
     }
 
     declare(transpiler) {
-        this.forEach(function(item){
+        this.forEach(item => {
             item.declare(transpiler);
         });
     }

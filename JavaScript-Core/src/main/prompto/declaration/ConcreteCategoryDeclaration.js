@@ -9,7 +9,7 @@ var $Root = require("../intrinsic/$Root").$Root;
 var EnumeratedCategoryDeclaration = null;
 var EnumeratedNativeDeclaration = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     EnumeratedCategoryDeclaration = require("./EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
     EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
@@ -83,14 +83,14 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
             writer.append("pass").newLine();
         else {
             writer.newLine();
-            this.methods.forEach(function(method) {
+            this.methods.forEach(method => {
                 if(method.comments) {
-                    method.comments.forEach(function (cmt) {
+                    method.comments.forEach(cmt => {
                         cmt.toDialect(writer);
                     });
                 }
                 if(method.annotations) {
-                    method.annotations.forEach(function (ann) {
+                    method.annotations.forEach(ann => {
                         ann.toDialect(writer);
                     });
                 }
@@ -212,7 +212,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     checkDerived(context) {
         if(this.derivedFrom!=null) {
-            this.derivedFrom.map( function(id) {
+            this.derivedFrom.map( id => {
                 var cd = context.getRegisteredDeclaration(id.name) || null;
                 if (cd == null)
                     context.problemListener.reportUnknownCategory(id);
@@ -256,7 +256,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
             this.derivedFrom.forEach(function (id) {
                 var derived = this.getAncestorAttributes(context, id);
                 if (derived != null)
-                    derived.forEach(function(attr) { local.add(attr); }, this);
+                    derived.forEach(attr => { local.add(attr); }, this);
             }, this);
         }
         return local.size > 0  ? local : null;
@@ -361,7 +361,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(!(actual instanceof MethodDeclarationMap))
             context.problemListener.reportBadMember(actual.id);
         var protos = Object.getOwnPropertyNames(actual.protos);
-        protos.forEach(function(proto) {
+        protos.forEach(proto => {
             var method = actual.protos[proto];
             result.registerIfMissing(method);
         });
@@ -389,7 +389,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
             return null;
         // find best candidate
         var candidate = null;
-        methods.getAll().forEach(function(method) {
+        methods.getAll().forEach(method => {
             var potential = method.parameters[0].getType(context);
             if(!potential.isAssignableFrom(context, type))
                 return;
@@ -413,7 +413,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     doCollectCategories(context, cat_set, cat_list) {
         if (this.derivedFrom != null) {
-            this.derivedFrom.forEach(function (cat) {
+            this.derivedFrom.forEach(cat => {
                 var decl = context.getRegisteredDeclaration(cat);
                 decl.doCollectCategories(context, cat_set, cat_list);
             });
@@ -428,7 +428,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         transpiler.declare(this);
         transpiler = transpiler.newInstanceTranspiler(this.getType(transpiler.context));
         if (this.derivedFrom != null) {
-            this.derivedFrom.forEach(function (cat) {
+            this.derivedFrom.forEach(cat => {
                 var decl = transpiler.context.getRegisteredDeclaration(cat);
                 decl.declare(transpiler);
             });
@@ -440,9 +440,9 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     declareMethods(transpiler) {
-        this.methods.filter(function (decl) {
+        this.methods.filter(decl => {
             return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
-        }).forEach(function (method) {
+        }).forEach(method => {
             var t = transpiler.newChildTranspiler();
             method.declare(t, false);
             t.flush();
@@ -457,7 +457,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(set.has(this))
             return;
         if (this.derivedFrom != null) {
-            this.derivedFrom.forEach(function (cat) {
+            this.derivedFrom.forEach(cat => {
                 var decl = context.getRegisteredDeclaration(cat);
                 decl.ensureDeclarationOrder(context, list, set);
             });
@@ -549,7 +549,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     transpileSuperConstructor(transpiler) {
         if (this.derivedFrom && this.derivedFrom.length) {
-            this.derivedFrom.forEach(function(derived) {
+            this.derivedFrom.forEach(derived => {
                 transpiler.append(derived).append(".call(this, copyFrom, values, mutable);").newLine();
             });
         } else
@@ -571,9 +571,9 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     transpileMethods(transpiler) {
-        this.methods.filter(function (decl) {
+        this.methods.filter(decl => {
             return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
-        }).forEach(function (method) {
+        }).forEach(method => {
             var t = transpiler.newChildTranspiler();
             method.transpile(t);
             t.flush();
@@ -581,10 +581,10 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     transpileGetterSetters(transpiler) {
-        var getterSetters = this.methods.filter(function (decl) {
+        var getterSetters = this.methods.filter(decl => {
             return (decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
         }, this);
-        var names = new Set(getterSetters.map(function(decl) { return decl.id.name; }));
+        var names = new Set(getterSetters.map(decl => { return decl.id.name; }));
         names.forEach(function(name) { this.transpileGetterSetter(transpiler, name); }, this);
     }
 

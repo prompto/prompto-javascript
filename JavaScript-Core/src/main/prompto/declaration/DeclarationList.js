@@ -25,48 +25,48 @@ class DeclarationList extends ObjectList {
     }
 
     registerAttributes(context) {
-        this.forEach(function (decl) {
+        this.forEach(decl => {
             if(decl instanceof AttributeDeclaration)
                 decl.register(context);
         });
     }
 
     registerCategories(context) {
-        this.forEach(function (decl) {
+        this.forEach(decl => {
             if(decl instanceof CategoryDeclaration)
                 decl.register(context);
         });
     }
 
     registerEnumerated(context) {
-        this.forEach(function (decl) {
+        this.forEach(decl => {
             if(decl instanceof EnumeratedNativeDeclaration)
                 decl.register(context);
         });
     }
 
     registerMethods(context) {
-        this.forEach(function (decl) {
+        this.forEach(decl => {
             if(decl instanceof BaseMethodDeclaration)
                 decl.register(context);
         });
     }
 
     registerTests(context) {
-        this.forEach(function (decl) {
+        this.forEach(decl => {
             if(decl instanceof TestMethodDeclaration)
                 decl.register(context);
         });
     }
 
     unregister(context) {
-        this.forEach(function(decl) {
+        this.forEach(decl => {
             decl.unregister(context);
         });
     }
 
     check(context) {
-        this.forEach(function(decl) {
+        this.forEach(decl => {
             if(decl instanceof BaseMethodDeclaration)
                 decl.check(context, true);
             else
@@ -75,14 +75,14 @@ class DeclarationList extends ObjectList {
     }
 
     toDialect(writer) {
-        this.forEach(function(decl) {
+        this.forEach(decl => {
             if(decl.comments) {
-                decl.comments.forEach(function (cmt) {
+                decl.comments.forEach(cmt => {
                     cmt.toDialect(writer);
                 });
             }
             if(decl.annotations) {
-                decl.annotations.forEach(function (ann) {
+                decl.annotations.forEach(ann => {
                     ann.toDialect(writer);
                 });
             }

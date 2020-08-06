@@ -243,7 +243,7 @@ function ObjectUtils() {
 
 }
 
-ObjectUtils.values = function(o) {
+ObjectUtils.values = o => {
     var values = [];
     for(var name in o) { values.push(o[name]); }
     return values;

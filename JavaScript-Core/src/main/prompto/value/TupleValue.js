@@ -4,7 +4,7 @@ var BooleanValue = require("./BooleanValue").BooleanValue;
 var TupleType = null;
 var SetValue = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     TupleType = require("../type/TupleType").TupleType;
     SetValue = require("./SetValue").SetValue;
 };

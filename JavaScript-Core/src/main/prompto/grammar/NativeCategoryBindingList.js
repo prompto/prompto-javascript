@@ -16,7 +16,7 @@ class NativeCategoryBindingList extends ObjectList {
 
     toEDialect(writer) {
         writer.append("define category bindings as:").newLine().indent();
-        this.forEach(function(binding) {
+        this.forEach(binding => {
             binding.toDialect(writer);
             writer.newLine();
         });
@@ -25,7 +25,7 @@ class NativeCategoryBindingList extends ObjectList {
 
     toMDialect(writer) {
         writer.append("def category bindings:").newLine().indent();
-        this.forEach(function(binding) {
+        this.forEach(binding => {
             binding.toDialect(writer);
             writer.newLine();
         });
@@ -34,7 +34,7 @@ class NativeCategoryBindingList extends ObjectList {
 
     toODialect(writer) {
         writer.append("category bindings {").newLine().indent();
-        this.forEach(function(binding) {
+        this.forEach(binding => {
             binding.toDialect(writer);
             writer.append(';').newLine();
         });

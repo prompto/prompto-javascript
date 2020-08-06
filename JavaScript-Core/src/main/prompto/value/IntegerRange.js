@@ -3,7 +3,7 @@ var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRa
 var IntegerValue = require("./IntegerValue").IntegerValue;
 var IntegerType = null;
 
-exports.resolve =function() {
+exports.resolve =() => {
     IntegerType = require("../type/IntegerType").IntegerType;
 };
 

@@ -161,7 +161,7 @@ class BaseValueList extends Container {
 
     toDialect(writer) {
         if(this.items.length>0) {
-            this.items.forEach(function(o) {
+            this.items.forEach(o => {
                 if(o.toDialect)
                     o.toDialect(writer);
                 else
@@ -174,7 +174,7 @@ class BaseValueList extends Container {
 
     toJson(context, json, instanceId, fieldName, withType, binaries) {
         var values = [];
-        this.items.map(function(item) {
+        this.items.map(item => {
             item.toJson(context, values, instanceId, fieldName, withType, binaries);
         });
         if(Array.isArray(json))

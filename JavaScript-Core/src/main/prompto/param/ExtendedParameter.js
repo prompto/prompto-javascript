@@ -4,7 +4,7 @@ var AttributeDeclaration = require("../declaration/AttributeDeclaration").Attrib
 var ConcreteCategoryDeclaration = null;
 var utils = require("../utils/index");
 
-exports.resolve = function() {
+exports.resolve = () => {
     ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
 }
 
@@ -49,7 +49,7 @@ class ExtendedParameter extends CategoryParameter {
     check(context) {
         this.type.checkExists(context);
         if(this.attributes!==null) {
-            this.attributes.forEach(function(attr) {
+            this.attributes.forEach(attr => {
                 var actual = context.getRegisteredDeclaration(attr);
                 if (!(actual instanceof AttributeDeclaration)) {
                     throw new SyntaxError("Unknown attribute: \"" + attr + "\"");

@@ -81,7 +81,7 @@ class NativeMethodDeclaration extends ConcreteMethodDeclaration {
         writer.append("method ").append(this.name).append(" (");
         this.parameters.toDialect(writer);
         writer.append(") {").newLine().indent();
-        this.statements.forEach(function(stmt) {
+        this.statements.forEach(stmt => {
             stmt.toDialect(writer);
             writer.newLine();
         });

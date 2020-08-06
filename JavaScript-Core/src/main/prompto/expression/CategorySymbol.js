@@ -62,7 +62,7 @@ class CategorySymbol extends Symbol {
             instance.mutable = true;
             if(this.args!=null) {
                 context = context.newLocalContext();
-                this.args.forEach(function(argument) {
+                this.args.forEach(argument => {
                     var value = argument.expression.interpret(context);
                     instance.setMember(context, argument.name, value);
                 });
@@ -102,7 +102,7 @@ class CategorySymbol extends Symbol {
         transpiler.append("var ").append(this.name).append(" = new ").append(this.type.name).append("({");
         transpiler.append("name: '").append(this.name).append("', ");
         if(this.args!=null) {
-            this.args.forEach(function (argument) {
+            this.args.forEach(argument => {
                 transpiler.append(argument.parameter.name).append(":");
                 argument.expression.transpile(transpiler);
                 transpiler.append(", ");

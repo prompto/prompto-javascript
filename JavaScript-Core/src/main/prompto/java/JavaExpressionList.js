@@ -12,7 +12,7 @@ class JavaExpressionList extends ObjectList {
 
     toDialect(writer) {
         if(this.length>0) {
-            this.forEach(function(exp) {
+            this.forEach(exp => {
                 exp.toDialect(writer);
                 writer.append(", ");
             });

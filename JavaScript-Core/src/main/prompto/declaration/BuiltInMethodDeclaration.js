@@ -3,7 +3,7 @@ var ParameterList = require("../param/ParameterList").ParameterList;
 var InternalError = require("../error/InternalError").InternalError;
 var BuiltInContext = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     BuiltInContext = require("../runtime/Context").BuiltInContext;
 };
 

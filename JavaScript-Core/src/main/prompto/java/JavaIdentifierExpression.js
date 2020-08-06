@@ -11,7 +11,7 @@ class JavaIdentifierExpression extends JavaExpression {
 
     parse(ids) {
         var result = null;
-        ids.split("\\.").forEach(function(part) {
+        ids.split("\\.").forEach(part => {
             result = new JavaIdentifierExpression(result, part);
         });
         return result;

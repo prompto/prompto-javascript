@@ -4,7 +4,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var IntegerType = null;
 var BooleanType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
 	IntegerType = require("./IntegerType").IntegerType;
     BooleanType = require("./BooleanType").BooleanType;
 };

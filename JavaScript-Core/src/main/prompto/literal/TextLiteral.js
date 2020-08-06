@@ -3,7 +3,7 @@ var TextValue = null;
 var TextType = require("../type/TextType").TextType;
 
 
-exports.resolve = function() {
+exports.resolve = () => {
 	TextValue = require("../value/TextValue").TextValue;
 };
 

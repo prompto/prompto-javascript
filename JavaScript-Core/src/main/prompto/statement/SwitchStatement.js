@@ -24,7 +24,7 @@ class SwitchStatement extends BaseSwitchStatement {
         writer.append("switch(");
         this.expression.toDialect(writer);
         writer.append(") {").newLine();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.caseToODialect(writer);
         });
         if(this.defaultCase!=null) {
@@ -39,7 +39,7 @@ class SwitchStatement extends BaseSwitchStatement {
         writer.append("switch on ");
         this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.caseToEDialect(writer);
         });
         if(this.defaultCase!=null) {
@@ -54,7 +54,7 @@ class SwitchStatement extends BaseSwitchStatement {
         writer.append("switch on ");
         this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.caseToMDialect(writer);
         });
         if(this.defaultCase!=null) {
@@ -74,7 +74,7 @@ class SwitchStatement extends BaseSwitchStatement {
         transpiler.append("switch (");
         this.expression.transpile(transpiler);
         transpiler.append(") {").newLine();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.transpile(transpiler);
         });
         if(this.defaultCase!=null) {

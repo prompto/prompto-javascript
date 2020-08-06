@@ -12,7 +12,7 @@ class PythonArgumentList extends ObjectList {
 
     toDialect(writer) {
         if(this.length>0) {
-            this.forEach(function(arg) {
+            this.forEach(arg => {
                 arg.toDialect(writer);
                 writer.append(", ");
             });

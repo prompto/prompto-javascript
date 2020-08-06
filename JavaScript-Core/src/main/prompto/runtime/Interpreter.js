@@ -18,7 +18,7 @@ function parseCmdLineArgs(cmdLineArgs) {
 	try {
 		var args = CmdLineParser.parse(cmdLineArgs);
 		var valueArgs = {};
-		Object.keys(args).forEach(function(s) {
+		Object.keys(args).forEach(s => {
             var key = new TextValue(s);
 			var value = new TextValue(args[s]);
 			valueArgs[key] = value;

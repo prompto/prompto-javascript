@@ -25,7 +25,7 @@ var MethodSelector = null;
 var compareValues = require("../utils/Utils").compareValues;
 var equalArrays = require("../utils/Utils").equalArrays;
 
-exports.resolve = function () {
+exports.resolve = () => {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     ArgumentList = require("../grammar/ArgumentList").ArgumentList;
     Argument = require("../grammar/Argument").Argument;
@@ -316,7 +316,7 @@ class DocumentType extends NativeType {
 
     getEntrySortedComparator(context, key, desc) {
         var name = key.value.getStorableData();
-        return function (o1, o2) {
+        return (o1, o2) => {
             var value1 = o1.getMemberValue(context, name);
             var value2 = o2.getMemberValue(context, name);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
@@ -324,13 +324,13 @@ class DocumentType extends NativeType {
     }
 
     getExpressionSortedComparator(context, expression, desc) {
-        return function (o1, o2) {
+        return (o1, o2) => {
             var ctx = context.newDocumentContext(o1, false);
             var value1 = expression.interpret(ctx);
             ctx = context.newDocumentContext(o2, false);
             var value2 = expression.interpret(ctx);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
-        }
+        };
     }
 }
 

@@ -23,7 +23,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var CodeParameter = require("../param/CodeParameter").CodeParameter;
 var CodeWriter = require("../utils/CodeWriter").CodeWriter;
 
-exports.resolve = function() {
+exports.resolve = () => {
     InstanceContext = require("../runtime/Context").InstanceContext;
     ThisExpression = require("../expression/ThisExpression").ThisExpression;
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
@@ -119,7 +119,7 @@ class MethodCall extends SimpleStatement {
         try {
             var args = this.makeArguments(parent, declaration);
             declaration.registerParameters(local);
-            args.forEach(function(argument) {
+            args.forEach(argument => {
                 var expression = argument.resolve(local, declaration, true);
                 var value = argument.parameter.checkValue(parent, expression);
                 local.setValue(argument.id, value);
@@ -174,7 +174,7 @@ class MethodCall extends SimpleStatement {
         if(!this.fullSelector) {
             var args = this.makeArguments(transpiler.context, declaration);
             declaration.registerParameters(local);
-            args.forEach(function(argument) {
+            args.forEach(argument => {
                 var expression = argument.resolve(local, declaration, true);
                 var value = argument.parameter.checkValue(transpiler.context, expression);
                 local.setValue(argument.id, value);
@@ -255,12 +255,12 @@ class MethodCall extends SimpleStatement {
 
     transpileAssignments(transpiler, declaration, allowDerived) {
         var args = this.makeArguments(transpiler.context, declaration);
-        args = args.filter(function(argument) {
+        args = args.filter(argument => {
             return !(argument.parameter instanceof CodeParameter);
         });
         if(args.length > 0) {
             transpiler.append("(");
-            args.forEach(function (argument) {
+            args.forEach(argument => {
                 var parameter = argument.parameter;
                 var expression = argument.resolve(transpiler.context, declaration, false, allowDerived);
                 parameter.transpileCall(transpiler, expression);
@@ -281,7 +281,7 @@ class MethodCall extends SimpleStatement {
         var local = this.selector.newLocalContext(context, declaration);
         declaration.registerParameters(local);
         var args = this.makeArguments(context, declaration);
-        args.forEach(function(argument) {
+        args.forEach(argument => {
             var expression = argument.resolve(local, declaration, true);
             var parameter = argument.parameter;
             var value = parameter.checkValue(context, expression);

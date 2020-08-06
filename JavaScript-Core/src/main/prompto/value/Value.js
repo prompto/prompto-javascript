@@ -2,7 +2,7 @@ var TextValue = null;
 var ListValue = null;
 var AnyType = require("../type/AnyType").AnyType;
 
-exports.resolve = function() {
+exports.resolve = () => {
     TextValue = require("./TextValue").TextValue;
     ListValue = require("./ListValue").ListValue;
 };
@@ -111,7 +111,7 @@ class Container extends Value {
     }
 
     toDocumentValue(context) {
-        var items = this.items.map(function (item) {
+        var items = this.items.map(item => {
             item.toDocumentValue(context);
         });
         return new ListValue(AnyType.instance, items);

@@ -4,7 +4,7 @@ var CharacterType = require("../type/CharacterType").CharacterType;
 var TextValue = null; // circular dependency
 var removeAccents = require("../utils/Utils").removeAccents;
 
-exports.resolve = function() {
+exports.resolve = () => {
     TextValue = require("./TextValue").TextValue;
 }
 

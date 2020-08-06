@@ -50,7 +50,7 @@ class JsxElementBase extends IJsxExpression {
             const types = parser.parse_document_literal();
             if(HTML_TEST_MODE) {
                 const any = new TypeLiteral(AnyType.instance);
-                types.entries.items.forEach(function(e) { e.value = any; });
+                types.entries.items.forEach(e => { e.value = any; });
             }
             const processor = new WidgetPropertiesProcessor();
             HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
@@ -95,7 +95,7 @@ class JsxElementBase extends IJsxExpression {
         var propertyMap = JsxElementBase.getHtmlProperties(context);
         var actualNames = new Set();
         if(this.properties!==null)
-            this.properties.forEach(function(jsxProp) {
+            this.properties.forEach(jsxProp => {
                 if(actualNames.has(jsxProp.id.name))
                     context.problemListener.reportDuplicateProperty(jsxProp, jsxProp.id.name);
                 else

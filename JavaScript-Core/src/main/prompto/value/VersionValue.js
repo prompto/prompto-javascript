@@ -1,7 +1,7 @@
 var Value = require("./Value").Value;
 var VersionType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     VersionType = require("../type/VersionType").VersionType;
 };
 

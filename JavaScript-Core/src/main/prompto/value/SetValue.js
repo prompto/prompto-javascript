@@ -5,7 +5,7 @@ var StrictSet = require("../intrinsic/StrictSet").StrictSet;
 var ListValue = null;
 var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
-exports.resolve = function() {
+exports.resolve = () => {
     SetType = require("../type/SetType").SetType;
     ListValue = require("./ListValue").ListValue;
 };

@@ -3,7 +3,7 @@ var Identifier = require("../grammar/Identifier").Identifier;
 var UUIDValue = null;
 var UUID = require("../intrinsic/UUID").UUID;
 
-exports.resolve = function() {
+exports.resolve = () => {
     UUIDValue = require("../value/UUIDValue").UUIDValue;
 }
 

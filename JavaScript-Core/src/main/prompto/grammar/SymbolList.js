@@ -14,7 +14,7 @@ class SymbolList extends ObjectList {
     }
 
     toString() {
-        var names = this.map(function(s) { return s.name;});
+        var names = this.map(s => { return s.name;});
         return "[" + names.join(", ") + "]";
     }
 }

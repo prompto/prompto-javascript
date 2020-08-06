@@ -4,7 +4,7 @@ var TimeValue = require("./TimeValue").TimeValue;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 var TimeType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     TimeType = require("../type/TimeType").TimeType;
 };
 

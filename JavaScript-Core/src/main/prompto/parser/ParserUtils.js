@@ -1,4 +1,4 @@
-exports.getFullText = function(ctx) {
+exports.getFullText = ctx => {
     var start = ctx.start;
     var stop = ctx.stop;
     if(start == null || stop == null || start.start<0 || stop.stop<0)

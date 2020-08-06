@@ -1,5 +1,5 @@
 // borrowed from http://www.2ality.com/2011/11/improving-typeof.html
-exports.getTypeName = function(value) {
+exports.getTypeName = value => {
     if (value === null) {
         return "null";
     }

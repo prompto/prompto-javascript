@@ -17,7 +17,7 @@ class CssExpression {
 
     toDialect(writer) {
         writer.append("{");
-        this.fields.forEach(function(field) {
+        this.fields.forEach(field => {
             field.toDialect(writer);
         }, this);
         writer.append("}");
@@ -28,14 +28,14 @@ class CssExpression {
     }
 
     declare(transpiler) {
-        this.fields.forEach(function(field) {
+        this.fields.forEach(field => {
             field.declare(transpiler);
         }, this);
     }
 
     transpile(transpiler) {
         transpiler.append("{");
-        this.fields.forEach(function(field) {
+        this.fields.forEach(field => {
             field.transpile(transpiler);
             transpiler.append(", ");
         }, this);

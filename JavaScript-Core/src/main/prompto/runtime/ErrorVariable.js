@@ -2,7 +2,7 @@ var Variable = require("./Variable").Variable;
 var Identifier = require("../grammar/Identifier").Identifier;
 var EnumeratedCategoryType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
 };
 

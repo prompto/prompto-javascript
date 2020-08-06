@@ -110,7 +110,7 @@ class TestMethodDeclaration extends BaseDeclaration {
             this.checkStatement(context, s);
         }, this);
         if(this.assertions!=null) {
-            this.assertions.forEach(function (a) {
+            this.assertions.forEach(a => {
                 context = a.check(context);
             }, this);
         }
@@ -236,7 +236,7 @@ class TestMethodDeclaration extends BaseDeclaration {
             writer.newLine();
         } else if(this.assertions!=null) {
             writer.newLine().indent ();
-            this.assertions.forEach(function(a) {
+            this.assertions.forEach(a => {
                 a.toDialect (writer);
                 writer.newLine();
             });
@@ -255,7 +255,7 @@ class TestMethodDeclaration extends BaseDeclaration {
             writer.newLine();
         } else if(this.assertions!=null) {
             writer.append(":").newLine().indent ();
-            this.assertions.forEach(function(a) {
+            this.assertions.forEach(a => {
                 a.toDialect (writer);
                 writer.newLine();
             });
@@ -273,7 +273,7 @@ class TestMethodDeclaration extends BaseDeclaration {
             writer.append (";").newLine();
         } else if(this.assertions!=null) {
             writer.append ("{").newLine().indent ();
-            this.assertions.forEach(function(a) {
+            this.assertions.forEach(a => {
                 a.toDialect (writer);
                 writer.append(";").newLine();
             });

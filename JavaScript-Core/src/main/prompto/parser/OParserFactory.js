@@ -4,11 +4,11 @@ var OCleverParser = require("./OCleverParser").OCleverParser;
 
 exports.OopsParserFactory =  function() {
 	
-	this.newLexer = function(data) {
+	this.newLexer = data => {
 		return new ONamingLexer(new antlr4.InputStream(data));
 	};
 
-	this.newParser = function(path, data) {
+	this.newParser = (path, data) => {
 		return new OCleverParser(path, data);
 	};
 

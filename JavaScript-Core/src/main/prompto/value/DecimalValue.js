@@ -4,7 +4,7 @@ var DecimalType = null;
 var decimalTostring = require("../utils/Utils").decimalToString;
 var DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
 
-exports.resolve = function() {
+exports.resolve = () => {
 	IntegerValue = require("./IntegerValue").IntegerValue;
     DecimalType = require("../type/DecimalType").DecimalType;
 };

@@ -31,7 +31,7 @@ var Score = require("../runtime/Score").Score;
 var compareValues = require("../utils/Utils").compareValues;
 var MethodDeclarationMap = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     ArgumentList = require("../grammar/ArgumentList").ArgumentList;
     Argument = require("../grammar/Argument").Argument;
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
@@ -554,7 +554,7 @@ class CategoryType extends BaseType {
     }
 
     getExpressionSortedComparator(context, exp, desc) {
-        return function(o1, o2) {
+        return (o1, o2) => {
             var ctx = context.newInstanceContext(o1, null);
             var value1 = exp.interpret(ctx);
             ctx = context.newInstanceContext(o2, null);
@@ -565,13 +565,13 @@ class CategoryType extends BaseType {
 
     getAttributeSortedComparator(context, name, desc) {
         if(desc)
-            return function(o1, o2) {
+            return (o1, o2) => {
                 var value1 = o1.getMemberValue(context, name);
                 var value2 = o2.getMemberValue(context, name);
                 return compareValues(value2, value1);
             };
         else
-            return function(o1, o2) {
+            return (o1, o2) => {
                 var value1 = o1.getMemberValue(context, name);
                 var value2 = o2.getMemberValue(context, name);
                 return compareValues(value1, value2);

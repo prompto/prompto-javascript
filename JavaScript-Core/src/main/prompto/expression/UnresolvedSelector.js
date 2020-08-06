@@ -7,7 +7,7 @@ var UnresolvedIdentifier = null;
 var AnyType = require("../type/AnyType").AnyType;
 var ProblemListener = require("../problem/ProblemListener").ProblemListener;
 
-exports.resolve = function () {
+exports.resolve = () => {
     MemberSelector = require("./MemberSelector").MemberSelector;
     MethodSelector = require("./MethodSelector").MethodSelector;
     UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;

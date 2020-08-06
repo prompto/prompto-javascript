@@ -5,7 +5,7 @@ var List  = require("../intrinsic/List").List;
 var ListType = null;
 var SetValue = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     ListType = require("../type/ListType").ListType;
     SetValue = require("./SetValue").SetValue;
 };
@@ -23,20 +23,20 @@ class ListValue extends BaseValueList {
 
     getStorableData() {
         if(this.storables == null)
-            this.storables = this.items.map(function(item) {
+            this.storables = this.items.map(item => {
                 return item.getStorableData();
             });
         return this.storables;
     }
 
     collectStorables(list) {
-        this.items.map(function(item) {
+        this.items.map(item => {
             item.collectStorables(list);
         });
     }
 
     convertToJavaScript() {
-        var items = this.items.map(function(value) {
+        var items = this.items.map(value => {
             return value.convertToJavaScript();
         }, this);
         return new List(this.mutable, items);
@@ -61,7 +61,7 @@ class ListValue extends BaseValueList {
             value = setValue.Add(context, value);
         }
         if(value instanceof SetValue) {
-            var items = this.items.filter(function(item) { return !value.items.has(item); });
+            var items = this.items.filter(item => { return !value.items.has(item); });
             return new ListValue(this.type.itemType, items);
         } else {
             return BaseValueList.prototype.Subtract.apply(this, context, value);

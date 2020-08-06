@@ -23,13 +23,13 @@ class NativeType extends BaseType {
 
     getNativeSortedComparator(desc) {
         if(desc)
-            return function(o1, o2) {
+            return (o1, o2) => {
                 o1 = o1.value;
                 o2 = o2.value;
                 return o1 < o2 ? 1 : o1 === o2 ? 0 : -1;
             };
         else
-            return function(o1, o2) {
+            return (o1, o2) => {
                 o1 = o1.value;
                 o2 = o2.value;
                 return o1 > o2 ? 1 : o1 === o2 ? 0 : -1;

@@ -4,7 +4,7 @@ var IntegerType = null; // circular dependency
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var Identifier = require("../grammar/Identifier").Identifier;
 
-exports.resolve = function() {
+exports.resolve = () => {
 	IntegerType = require("./IntegerType").IntegerType;
 }
 

@@ -52,7 +52,7 @@ class DictLiteral extends Literal {
             return MissingType.instance;
         }
         var types = [];
-        items.forEach(function(entry) {
+        items.forEach(entry => {
             var elemType = entry.value.check(context);
             types.push(elemType);
         });

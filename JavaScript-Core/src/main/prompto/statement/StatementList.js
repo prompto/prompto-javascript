@@ -39,7 +39,7 @@ class StatementList extends ObjectList {
     checkStatements(context, returnType, nativeOnly) {
         if(returnType==VoidType.instance) {
             if(nativeOnly) {
-                this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this)
+                this.filter(stmt => { return stmt instanceof JavaScriptNativeCall; }, this)
                     .forEach(function (stmt) { this.checkStatement(context, stmt); }, this);
             } else {
                 this.forEach(function (stmt) { this.checkStatement(context, stmt); }, this);
@@ -47,7 +47,7 @@ class StatementList extends ObjectList {
             return VoidType.instance;
         } else {
             var section = null;
-            var stmts = nativeOnly ? this.filter(function (stmt) { return stmt instanceof JavaScriptNativeCall; }, this) : this;
+            var stmts = nativeOnly ? this.filter(stmt => { return stmt instanceof JavaScriptNativeCall; }, this) : this;
             var types = new TypeMap();
             stmts.forEach(function (stmt) {
                 var type = this.checkStatement(context, stmt);
@@ -134,7 +134,7 @@ class StatementList extends ObjectList {
             }
 
         } else {
-            this.forEach(function (stmt) {
+            this.forEach(stmt => {
                 stmt.toDialect(writer);
                 if (stmt.isSimple()) {
                     if (writer.dialect == Dialect.O && !(stmt instanceof NativeCall))
@@ -146,13 +146,13 @@ class StatementList extends ObjectList {
     }
 
     declare(transpiler) {
-        this.forEach(function(stmt) {
+        this.forEach(stmt => {
             stmt.declare(transpiler);
         });
     }
 
     transpile(transpiler) {
-        this.forEach(function(stmt) {
+        this.forEach(stmt => {
             var skip = stmt.transpile(transpiler);
             if(!skip)
                 transpiler.append(";").newLine();
@@ -160,7 +160,7 @@ class StatementList extends ObjectList {
     }
 
     locateSectionAtLine(line) {
-        const statement = this.find( function(s) { return s.containsLine(line); });
+        const statement = this.find( s => { return s.containsLine(line); });
         return statement ? statement.locateSectionAtLine(line) : null;
     }
 }

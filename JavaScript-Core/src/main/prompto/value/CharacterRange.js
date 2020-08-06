@@ -3,7 +3,7 @@ var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRa
 var CharacterValue = null;
 var CharacterType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CharacterValue = require("./CharacterValue").CharacterValue;
     CharacterType = require("../type/CharacterType").CharacterType;
 }

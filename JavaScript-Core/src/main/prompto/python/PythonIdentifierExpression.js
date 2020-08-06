@@ -18,7 +18,7 @@ class PythonIdentifierExpression extends PythonExpression {
 
     static parse(ids) {
         var result = null;
-        ids.split("\\.").forEach(function(part) {
+        ids.split("\\.").forEach(part => {
             result = new PythonIdentifierExpression(result, part);
         });
         return result;

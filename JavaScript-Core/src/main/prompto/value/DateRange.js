@@ -5,7 +5,7 @@ var IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRa
 
 var DateType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     DateType = require("../type/DateType").DateType;
 };
 

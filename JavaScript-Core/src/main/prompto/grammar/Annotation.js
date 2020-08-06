@@ -23,7 +23,7 @@ class Annotation extends Section {
     getArgument(name) {
         if(!this.entries || !this.entries.items)
             return null;
-        var entry = this.entries.items.filter(function(entry) {
+        var entry = this.entries.items.filter(entry => {
             return name === entry.key && entry.key.toString();
         })[0];
         if(entry)
@@ -36,7 +36,7 @@ class Annotation extends Section {
         writer.append(this.name);
         if(this.entries != null && this.entries.items.length > 0) {
             writer.append("(");
-            this.entries.items.forEach(function(entry) {
+            this.entries.items.forEach(entry => {
                 if(entry.key) {
                     writer.append(entry.key);
                     writer.append(" = ");

@@ -3,7 +3,7 @@ var ApplicationContext = require("./ApplicationContext").ApplicationContext;
 class Scheduler {
  
     static schedule(method, executeAt, repeatEvery, jobName) {
-        var runner = method.interpret ? function() { method.interpret(ApplicationContext.get()); } : method;
+        var runner = method.interpret ? () => { method.interpret(ApplicationContext.get()); } : method;
         var jobId = ++Scheduler.lastJobId;
         var delay = executeAt.date.valueOf() - (new Date()).valueOf();
         var timerTask = repeatEvery != null ? Scheduler.makeRepeatingTask(runner, jobId, repeatEvery) : Scheduler.makeSingleTask(runner, jobId);
@@ -12,7 +12,7 @@ class Scheduler {
     }
 
     static makeSingleTask(runner, jobId) {
-        return function() {
+        return () => {
             try {
                 runner();
             } finally {
@@ -22,12 +22,12 @@ class Scheduler {
     }
 
     static makeRepeatingTask(runner, jobId, repeatEvery) {
-        return function() {
+        return () => {
             try {
                 runner();
             } finally {
                 var interval = repeatEvery.totalMilliseconds(); // TODO
-                Scheduler.timers[jobId] = { id: setInterval(function() {
+                Scheduler.timers[jobId] = { id: setInterval(() => {
                         runner();
                 }, interval), cancel: function(id) { clearInterval(id); } };
             }

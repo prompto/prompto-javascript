@@ -110,7 +110,7 @@ class ArrowExpression extends Expression {
     }
 
     registerArrowArgs(context, itemType) {
-        this.args.forEach(function(arg) {
+        this.args.forEach(arg => {
             var param = new Variable(arg, itemType);
             context.registerValue(param);
         });

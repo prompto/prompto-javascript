@@ -1,7 +1,7 @@
 var OLexer = require("./OLexer").OLexer;
 var Dialect = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
 	Dialect = require("./Dialect").Dialect;
 }
 

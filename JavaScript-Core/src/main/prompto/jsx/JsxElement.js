@@ -28,7 +28,7 @@ class JsxElement extends JsxElementBase {
         else
             this.closing.check(context, this);
         if(this.children != null)
-            this.children.forEach(function (child) {
+            this.children.forEach(child => {
                 child.check(context);
             }, this);
         return JsxType.instance;
@@ -40,25 +40,25 @@ class JsxElement extends JsxElementBase {
             writer.appendRaw(this.nameSuite);
         else if(this.properties.length > 0)
             writer.append(" ");
-        this.properties.forEach(function(attr) { attr.toDialect(writer); });
+        this.properties.forEach(attr => { attr.toDialect(writer); });
         writer.append(">");
         if(this.openingSuite!=null)
             writer.appendRaw(this.openingSuite);
         if(this.children!=null)
-            this.children.forEach(function(child) { child.toDialect(writer); });
+            this.children.forEach(child => { child.toDialect(writer); });
         this.closing.toDialect(writer);
     }
 
     declareChildren(transpiler) {
         if (this.children != null)
-            this.children.forEach(function (child) {
+            this.children.forEach(child => {
                 child.declare(transpiler);
             }, this);
     }
 
     transpileChildren(transpiler) {
         if (this.children != null)
-            this.children.forEach(function (child) {
+            this.children.forEach(child => {
                 transpiler.append(", ");
                 child.transpile(transpiler);
             }, this);

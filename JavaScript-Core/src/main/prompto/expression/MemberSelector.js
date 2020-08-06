@@ -8,7 +8,7 @@ var VoidType = require("../type/VoidType").VoidType;
 var ParenthesisExpression = null;
 var UnresolvedCall = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
     ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
     UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;

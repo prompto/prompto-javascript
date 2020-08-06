@@ -12,7 +12,7 @@ var LocalDate = require("../intrinsic/LocalDate").LocalDate;
 var LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
 
-exports.resolve = function() {
+exports.resolve = () => {
     DateType = require("./DateType").DateType;
     TimeType = require("./TimeType").TimeType;
 };

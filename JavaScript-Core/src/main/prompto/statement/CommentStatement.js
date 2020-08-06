@@ -26,7 +26,7 @@ class CommentStatement extends BaseStatement {
 
     toDialect(writer) {
         var lines = this.text.split("\n");
-        lines = lines.map(function (line) {
+        lines = lines.map(line => {
             return uncomment(line);
         });
         switch (writer.dialect) {
@@ -34,7 +34,7 @@ class CommentStatement extends BaseStatement {
             case Dialect.O:
                 if (lines.length > 1) {
                     writer.append("/*");
-                    lines.forEach(function (line) {
+                    lines.forEach(line => {
                         writer.append(line)
                         writer.newLine();
                     });
@@ -48,7 +48,7 @@ class CommentStatement extends BaseStatement {
                 }
                 break;
             case Dialect.M:
-                lines.forEach(function (line) {
+                lines.forEach(line => {
                     writer.append("#")
                     writer.append(line)
                     writer.newLine()

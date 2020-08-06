@@ -6,7 +6,7 @@ var IntegerValue = require("../value/IntegerValue").IntegerValue;
 var DecimalValue = require("../value/DecimalValue").DecimalValue;
 var TextValue = require("../value/TextValue").TextValue;
 
-var convertFromJavaScript = function(value) {
+var convertFromJavaScript = value => {
     if(value==null) {
         return NullValue.instance;
     } else if(typeof(value)=='string') {
@@ -22,14 +22,14 @@ var convertFromJavaScript = function(value) {
 };
 
 
-var inferExpressionsType = function(context, expressions) {
+var inferExpressionsType = (context, expressions) => {
     if (expressions.length == 0)
         return MissingType.instance;
-    var types = expressions.map(function(e) { return e.check(context); });
+    var types = expressions.map(e => { return e.check(context); });
     return inferElementType(context, types);
 }
 
-var inferElementType = function(context, types) {
+var inferElementType = (context, types) => {
     if (types.length == 0)
         return MissingType.instance;
     var lastType = null;

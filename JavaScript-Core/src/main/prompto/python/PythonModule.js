@@ -5,7 +5,7 @@ class PythonModule {
 
     toDialect(writer) {
         writer.append(" from module: ");
-        this.ids.forEach(function(id) {
+        this.ids.forEach(id => {
             writer.append(id);
             writer.append('.');
         });

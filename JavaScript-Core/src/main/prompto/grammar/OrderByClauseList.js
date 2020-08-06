@@ -13,7 +13,7 @@ class OrderByClauseList extends ObjectList {
         writer.append("order by ");
         if(writer.dialect==Dialect.O)
             writer.append("( ");
-        this.forEach(function(clause) {
+        this.forEach(clause => {
             clause.toDialect(writer);
             writer.append(", ");
         });
@@ -23,25 +23,25 @@ class OrderByClauseList extends ObjectList {
     }
 
     checkQuery(context) {
-        this.forEach(function (clause) {
+        this.forEach(clause => {
             clause.checkQuery(context);
         });
     }
 
     interpretQuery(context, query) {
-        this.forEach(function (clause) {
+        this.forEach(clause => {
             clause.interpretQuery(context, query);
         });
     }
 
     declare(transpiler) {
-        this.forEach(function (clause) {
+        this.forEach(clause => {
             clause.declare(transpiler);
         });
     }
 
     transpileQuery(transpiler, builder) {
-        this.forEach(function (clause) {
+        this.forEach(clause => {
             clause.transpileQuery(transpiler, builder);
         });
     }

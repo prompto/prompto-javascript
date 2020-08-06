@@ -11,25 +11,25 @@ class ParameterList extends ObjectList {
     }
 
     register(context) {
-        this.forEach(function(arg) {
+        this.forEach(arg => {
             arg.register(context);
         });
     }
 
     check(context) {
-        this.forEach(function(arg) {
+        this.forEach(arg => {
             arg.check(context);
         });
     }
 
     declare(transpiler) {
-        this.forEach(function(arg) {
+        this.forEach(arg => {
             arg.declare(transpiler);
         });
     }
 
     find(name) {
-        return this.filter(function(param) {
+        return this.filter(param => {
             return name === param.name;
         })[0] || null;
     }
@@ -56,7 +56,7 @@ class ParameterList extends ObjectList {
 
     toODialect(writer) {
         if(this.length>0) {
-            this.forEach(function(arg) {
+            this.forEach(arg => {
                 arg.toDialect(writer);
                 writer.append(", ");
             });
@@ -69,11 +69,11 @@ class ParameterList extends ObjectList {
     }
 
     transpile(transpiler) {
-        var args = this.filter(function(arg) {
+        var args = this.filter(arg => {
             return !(arg instanceof CodeParameter);
         })
         if(args.length>0) {
-            args.forEach(function (arg) {
+            args.forEach(arg => {
                 arg.transpile(transpiler);
                 transpiler.append(", ");
             });

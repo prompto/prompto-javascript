@@ -7,7 +7,7 @@ var ListValue = require("../value/ListValue").ListValue;
 var List = require("../intrinsic/List").List;
 
 
-exports.resolve = function() {
+exports.resolve = () => {
     IntegerType = require("./IntegerType").IntegerType;
     SetType = require("./SetType").SetType;
 };

@@ -3,7 +3,7 @@ var DocumentType = null;
 var Identifier = require("../grammar/Identifier").Identifier;
 var Any = require("../intrinsic/Any").Any;
 
-exports.resolve = function() {
+exports.resolve = () => {
     DocumentType = require("./DocumentType").DocumentType;
 };
 

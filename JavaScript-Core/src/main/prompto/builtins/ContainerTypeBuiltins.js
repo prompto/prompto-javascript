@@ -13,7 +13,7 @@ class BaseJoinMethodDeclaration extends BuiltInMethodDeclaration {
 
     interpret(context) {
         var items = this.getItems(context);
-        var texts = items.map(function(value) { return value.toString(); });
+        var texts = items.map(value => { return value.toString(); });
         var delimiter = context.getValue(new Identifier("delimiter")).getStorableData();
         var joined = texts.join(delimiter);
         return new TextValue(joined);

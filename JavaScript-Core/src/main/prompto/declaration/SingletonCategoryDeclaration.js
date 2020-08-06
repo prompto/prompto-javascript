@@ -35,7 +35,7 @@ class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
         }
         var type = new CategoryType(this.id);
         var instance = transpiler.newInstanceTranspiler(type);
-        this.methods.forEach(function(method) {
+        this.methods.forEach(method => {
             var m = instance.newChildTranspiler();
             method.transpile(m);
             m.flush();

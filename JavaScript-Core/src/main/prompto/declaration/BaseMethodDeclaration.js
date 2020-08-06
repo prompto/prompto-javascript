@@ -21,14 +21,14 @@ class BaseMethodDeclaration extends BaseDeclaration {
 
     getSignature(context) {
         var s = [];
-        this.parameters.map(function(arg) {
+        this.parameters.map(arg => {
             s.push(arg.getProto());
         });
         return "(" + s.join(", ") + ")";
     }
 
     getProto(context) {
-        return this.parameters.map(function(arg) {
+        return this.parameters.map(arg => {
             return arg.getProto(context);
         }).join("/");
     }
@@ -38,7 +38,7 @@ class BaseMethodDeclaration extends BaseDeclaration {
         if(this.name.indexOf("$")>0)
             return this.name;
         else
-            return [this.name].concat(this.parameters.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
+            return [this.name].concat(this.parameters.map(arg => { return arg.getTranspiledName(context); })).join("$");
     }
 
     transpileProlog(transpiler) {

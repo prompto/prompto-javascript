@@ -5,7 +5,7 @@ var TextType = null;
 var BooleanType = null;
 var NullType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
     BooleanType = require("./BooleanType").BooleanType;
     VoidType = require("./VoidType").VoidType;

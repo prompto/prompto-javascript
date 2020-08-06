@@ -66,7 +66,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
         writer.indent();
         writer.newLine();
         this.categoryBindings.toDialect(writer);
-        this.methods.forEach(function(method) {
+        this.methods.forEach(method => {
             var w = writer.newMemberWriter();
             method.toDialect(w);
             writer.newLine();
@@ -122,7 +122,7 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
         transpiler.append("values = values || {};").newLine();
         transpiler.append("var value = new ").append(name).append("();").newLine();
         if(this.attributes) {
-            this.attributes.forEach(function (attr) {
+            this.attributes.forEach(attr => {
                 transpiler.append("value.").append(attr.name).append(" = values.hasOwnProperty('").append(attr.name).append("') ? values.").append(attr.name).append(" : null;").newLine();
             }, this);
         }

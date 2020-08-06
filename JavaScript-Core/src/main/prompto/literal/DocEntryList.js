@@ -11,7 +11,7 @@ class DocEntryList {
     toDialect(writer) {
         writer.append('{');
         if(this.items.length>0) {
-            this.items.forEach(function(item) {
+            this.items.forEach(item => {
                 item.toDialect(writer);
                 writer.append(", ");
             });
@@ -21,7 +21,7 @@ class DocEntryList {
     }
 
     declare(transpiler) {
-        this.items.forEach(function(item) {
+        this.items.forEach(item => {
             item.declare(transpiler);
         });
      }
@@ -29,7 +29,7 @@ class DocEntryList {
     transpile(transpiler) {
         transpiler.append('{');
         if(this.items.length>0) {
-            this.items.forEach(function(item) {
+            this.items.forEach(item => {
                 item.transpile(transpiler);
                 transpiler.append(",");
             });

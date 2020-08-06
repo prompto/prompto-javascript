@@ -30,7 +30,7 @@ class BaseSwitchStatement extends BaseStatement {
 
     checkSwitchCasesType(context) {
         var type = this.checkSwitchType(context);
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.checkSwitchType(context, type);
         });
     }
@@ -43,7 +43,7 @@ class BaseSwitchStatement extends BaseStatement {
 
     collectReturnTypes(context, types) {
         var section = null;
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             var type = switchCase.checkReturnType(context);
             if(type!=VoidType.instance) {
                 section = switchCase;
@@ -77,7 +77,7 @@ class BaseSwitchStatement extends BaseStatement {
     }
 
     declareSwitch(transpiler) {
-        this.switchCases.forEach(function(kase) {
+        this.switchCases.forEach(kase => {
             kase.declare(transpiler);
         });
         if(this.defaultCase!=null) {

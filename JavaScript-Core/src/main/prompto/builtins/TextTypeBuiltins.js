@@ -83,7 +83,7 @@ class ToCapitalizedMethodDeclaration extends BuiltInMethodDeclaration {
 
     interpret(context) {
         var value = this.getValue(context).getStorableData();
-        value = value.replace( /(^|\s)([a-z])/g , function(m, p1, p2){ return p1 + p2.toUpperCase(); } );
+        value = value.replace( /(^|\s)([a-z])/g , (m, p1, p2) => { return p1 + p2.toUpperCase(); } );
         return new TextValue(value);
     }
 
@@ -106,7 +106,7 @@ class SplitMethodDeclaration extends BuiltInMethodDeclaration {
         var value = this.getValue(context).getStorableData();
         var sep = context.getValue(new Identifier("separator")).getStorableData();
         var list = value.split(sep);
-        var texts = list.map(function(s) { return new TextValue(s); });
+        var texts = list.map(s => { return new TextValue(s); });
         return new ListValue(TextType.instance, texts);
     }
 

@@ -94,7 +94,7 @@ class MemStore extends Store {
         if(!query.orderBys || docs.length<2)
             return docs;
         var self = this;
-        docs.sort( function(doc1, doc2) {
+        docs.sort( (doc1, doc2) => {
             var tuple1 = self.readTuple(doc1, query.orderBys);
             var tuple2 = self.readTuple(doc2, query.orderBys);
             return self.compareTuples(tuple1, tuple2, query.orderBys);
@@ -159,9 +159,9 @@ MemStore.prototype.storeAsync = MemStore.prototype.store;
 
 
 function StoredIterable(docs, totalCount) {
-    this.count = function() { return docs.length; };
-    this.totalCount = function() { return totalCount; };
-    this.iterator = function() {
+    this.count = () => { return docs.length; };
+    this.totalCount = () => { return totalCount; };
+    this.iterator = () => {
         var index = 0;
         return {
             hasNext: function() { return index < docs.length; },

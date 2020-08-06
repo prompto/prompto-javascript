@@ -34,7 +34,7 @@ class IfStatement extends BaseStatement {
     check(context) {
         var types = new TypeMap();
         var section = null;
-        this.elements.forEach(function(element) {
+        this.elements.forEach(element => {
             var type = element.check(context);
             if(type!==VoidType.instance) {
                 section = element;
@@ -57,7 +57,7 @@ class IfStatement extends BaseStatement {
     }
 
     declare(transpiler) {
-        this.elements.forEach(function(element) {
+        this.elements.forEach(element => {
             element.declare(transpiler);
         });
     }

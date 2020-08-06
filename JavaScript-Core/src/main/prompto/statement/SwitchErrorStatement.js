@@ -95,7 +95,7 @@ class SwitchErrorStatement extends BaseSwitchStatement {
         writer.append("try (").append(this.errorId.name).append(") {").newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent().append("} ");
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.catchToODialect(writer);
         });
         if(this.defaultCase!=null) {
@@ -115,7 +115,7 @@ class SwitchErrorStatement extends BaseSwitchStatement {
         writer.append("try ").append(this.errorId.name).append(":").newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.catchToPDialect(writer);
         });
         if(this.defaultCase!=null) {
@@ -135,7 +135,7 @@ class SwitchErrorStatement extends BaseSwitchStatement {
         writer.append("switch on ").append(this.errorId.name).append(" doing:").newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.catchToEDialect(writer);
         });
         if(this.defaultCase!=null) {
@@ -164,7 +164,7 @@ class SwitchErrorStatement extends BaseSwitchStatement {
         transpiler = transpiler.newLocalTranspiler();
         transpiler.context.registerValue(new ErrorVariable(this.errorId));
         transpiler.append("switch(translateError(").append(this.errorId.name).append(")) {").indent();
-        this.switchCases.forEach(function(switchCase) {
+        this.switchCases.forEach(switchCase => {
             switchCase.transpileError(transpiler);
         }, this);
         if(this.defaultCase!=null) {

@@ -43,7 +43,7 @@ MCleverParser.prototype.parse_repl_input = function() {
 	return this.doParse(this.repl, true);
 };
 
-MCleverParser.prototype.equalToken = function() {
+MCleverParser.prototype.equalToken = () => {
     return MParser.EQUAL;
 };
 

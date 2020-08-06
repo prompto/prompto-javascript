@@ -5,7 +5,7 @@ var Argument = require("./Argument").Argument;
 var AndExpression = null;
 var UnresolvedIdentifier = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     AndExpression = require("../expression/AndExpression").AndExpression;
     UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
 }
@@ -114,7 +114,7 @@ class ArgumentList extends ObjectList {
 
     toODialect(writer) {
         writer.append("(");
-        this.forEach(function(arg) {
+        this.forEach(arg => {
             arg.toDialect(writer);
             writer.append(", ");
         });
@@ -128,14 +128,14 @@ class ArgumentList extends ObjectList {
     }
 
     declare(transpiler, methodDeclaration) {
-        this.forEach(function(arg) {
+        this.forEach(arg => {
             arg.declare(transpiler, methodDeclaration);
         });
     }
 
     transpile(transpiler) {
         transpiler.append("(");
-        this.forEach(function(arg) {
+        this.forEach(arg => {
             arg.transpile(transpiler);
             transpiler.append(", ");
         });

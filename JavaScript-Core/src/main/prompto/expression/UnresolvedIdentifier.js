@@ -16,7 +16,7 @@ var EnumeratedCategoryType = null;
 var CategoryType = null;
 var MethodSelector = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
     EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
     MethodSelector = require("./MethodSelector").MethodSelector;

@@ -18,7 +18,7 @@ class CSharpIdentifierExpression extends CSharpExpression {
 
     static parse(ids) {
         var result = null;
-        ids.split("\\.").forEach(function(part) {
+        ids.split("\\.").forEach(part => {
             result = new CSharpIdentifierExpression(result, part);
         }, this);
         return result;

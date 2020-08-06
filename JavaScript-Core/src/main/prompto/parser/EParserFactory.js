@@ -4,11 +4,11 @@ var ECleverParser = require("./ECleverParser").ECleverParser;
 
 exports.EParserFactory = function() {
 	
-	this.newLexer = function(data) {
+	this.newLexer = data => {
 		return new EIndentingLexer(new antlr4.InputStream(data));
 	};
 
-	this.newParser = function(path, data) {
+	this.newParser = (path, data) => {
 		return new ECleverParser(path, data);
 	};
 

@@ -8,7 +8,7 @@ var CharacterRange = require("../value/CharacterRange").CharacterRange;
 var Identifier = require("../grammar/Identifier").Identifier;
 var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CharacterValue = require("../value/CharacterValue").CharacterValue;
 };
 

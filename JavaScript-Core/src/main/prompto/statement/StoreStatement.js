@@ -143,7 +143,7 @@ class StoreStatement extends BaseStatement {
         else {
             transpiler.append("(function() { ").indent();
             transpiler.append("var idsToDelete = new Set();").newLine();
-            this.del.forEach(function (exp) {
+            this.del.forEach(exp => {
                 exp.transpile(transpiler);
                 transpiler.append(".collectDbIds(idsToDelete);").newLine();
             }, this);
@@ -158,7 +158,7 @@ class StoreStatement extends BaseStatement {
         else {
             transpiler.append("(function() { ").indent();
             transpiler.append("var storablesToAdd = new Set();").newLine();
-            this.add.forEach(function (exp) {
+            this.add.forEach(exp => {
                 exp.transpile(transpiler);
                 transpiler.append(".collectStorables(storablesToAdd);").newLine();
             }, this);
@@ -171,7 +171,7 @@ class StoreStatement extends BaseStatement {
         if(!this.del)
             return null;
         var idsToDel = new Set();
-        this.del.forEach(function (exp) {
+        this.del.forEach(exp => {
             var value = exp.interpret(context);
             if (value == NullValue.instance)
                 return;
@@ -180,7 +180,7 @@ class StoreStatement extends BaseStatement {
                 if (dbId !=null && dbId!=NullValue.instance)
                     idsToDel.add(dbId.getStorableData());
             } else if(value instanceof Container) {
-                value.items.map(function (item) {
+                value.items.map(item => {
                     if (value == NullValue.instance)
                         return;
                     else if (value instanceof Instance) {
@@ -201,7 +201,7 @@ class StoreStatement extends BaseStatement {
         if (!this.add)
             return null;
         var storablesToAdd = new Set();
-        this.add.forEach(function (exp) {
+        this.add.forEach(exp => {
             var value = exp.interpret(context);
             value.collectStorables(storablesToAdd)
         });

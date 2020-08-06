@@ -19,7 +19,7 @@ class AssignTupleStatement extends SimpleStatement {
         if(type!=TupleType.instance) {
             throw new SyntaxError("Expecting a tuple expression, got " + type.getName());
         }
-        this.names.forEach(function(name) {
+        this.names.forEach(name => {
             var actual = context.getRegistered(name);
             if(actual==null) {
                 context.registerValue(new Variable(name, AnyType.instance));
@@ -34,7 +34,7 @@ class AssignTupleStatement extends SimpleStatement {
 
     declare(transpiler) {
         this.expression.declare(transpiler);
-        this.names.forEach(function(name) {
+        this.names.forEach(name => {
             var actual = transpiler.context.getRegistered(name);
             if(actual==null)
                 transpiler.context.registerValue(new Variable(name, AnyType.instance));
@@ -43,7 +43,7 @@ class AssignTupleStatement extends SimpleStatement {
 
     transpile(transpiler) {
         transpiler.append("var [");
-        this.names.forEach(function(name) {
+        this.names.forEach(name => {
             transpiler.append(name).append(", ");
             var actual = transpiler.context.getRegistered(name);
             if(actual==null)

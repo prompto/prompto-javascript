@@ -55,11 +55,11 @@ function removeAccents(s) {
 
 function getUtf8StringLength(s) {
     return s.split('')
-        .map(function (c) {
+        .map(c => {
             return c.charCodeAt(0);
         })
         .map(getUtf8CharLength)
-        .reduce(function(prev, cur) {
+        .reduce((prev, cur) => {
             return prev + cur;
         }, 0);
 }
@@ -72,17 +72,17 @@ function getUtf8CharLength(c) {
 
 function stringToUtf8Buffer(s) {
     var codes = s.split('')
-        .map(function (c) {
+        .map(c => {
             return c.charCodeAt(0);
         });
     var size = codes.map(getUtf8CharLength)
-        .reduce(function(prev, cur) {
+        .reduce((prev, cur) => {
             return prev + cur;
         }, 0);
     var buffer = new ArrayBuffer(size);
     var view = new Uint8Array(buffer);
     var idx = 0;
-    codes.forEach(function(c) {
+    codes.forEach(c => {
         if (c < 0x80 /* 128 */) {
             /* one byte */
             view[idx++] = c;

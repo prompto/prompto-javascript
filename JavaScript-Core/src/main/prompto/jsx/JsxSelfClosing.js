@@ -14,7 +14,7 @@ class JsxSelfClosing extends JsxElementBase {
             writer.appendRaw(this.nameSuite);
         else if(this.properties.length > 0)
             writer.append(" ");
-        this.properties.forEach(function(prop) {
+        this.properties.forEach(prop => {
             prop.toDialect(writer);
         });
         writer.append("/>");

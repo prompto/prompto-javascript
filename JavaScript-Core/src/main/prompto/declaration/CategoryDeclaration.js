@@ -43,7 +43,7 @@ class CategoryDeclaration extends BaseDeclaration {
             var value = TypeUtils.convertFromJavaScript(dbId);
             instance.setMember(context, "dbId", value);
             var allAttributes = this.getAllAttributes(context);
-            allAttributes.forEach(function(name) {
+            allAttributes.forEach(name => {
                 var decl = context.getRegisteredDeclaration(name);
                 if (decl.storable) {
                     var data = stored.getData(name);
@@ -76,7 +76,7 @@ class CategoryDeclaration extends BaseDeclaration {
 
     check(context) {
         if(this.attributes!=null) {
-            this.attributes.forEach(function(id) {
+            this.attributes.forEach(id => {
                 var ad = context.getRegisteredDeclaration(id.name);
                 if (ad == null)
                     context.problemListener.reportUnknownAttribute(id);
@@ -116,7 +116,7 @@ class CategoryDeclaration extends BaseDeclaration {
     getAllAnnotations(context) {
         var annotations = [];
         if (this.derivedFrom) {
-            this.derivedFrom.forEach(function (name) {
+            this.derivedFrom.forEach(name => {
                 var decl = context.getRegisteredDeclaration(name);
                 if (decl instanceof CategoryDeclaration) {
                     annotations = annotations.concat(decl.getAllAnnotations(context));
@@ -176,15 +176,15 @@ class CategoryDeclaration extends BaseDeclaration {
 
     methodsToEDialect(writer, methods) {
         writer.indent();
-        methods.forEach(function(method) {
+        methods.forEach(method => {
             writer.newLine();
             if(method.comments) {
-                method.comments.forEach(function (cmt) {
+                method.comments.forEach(cmt => {
                     cmt.toDialect(writer);
                 });
             }
             if(method.annotations) {
-                method.annotations.forEach(function (ann) {
+                method.annotations.forEach(ann => {
                     ann.toDialect(writer);
                 });
             }
@@ -195,14 +195,14 @@ class CategoryDeclaration extends BaseDeclaration {
     }
 
     methodsToODialect(writer, methods) {
-        methods.forEach(function(method) {
+        methods.forEach(method => {
             if(method.comments) {
-                method.comments.forEach(function (cmt) {
+                method.comments.forEach(cmt => {
                     cmt.toDialect(writer);
                 });
             }
             if(method.annotations) {
-                method.annotations.forEach(function (ann) {
+                method.annotations.forEach(ann => {
                     ann.toDialect(writer);
                 });
             }

@@ -12,4304 +12,4304 @@ EParserListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototyp
 EParserListener.prototype.constructor = EParserListener;
 
 // Enter a parse tree produced by EParser#enum_category_declaration.
-EParserListener.prototype.enterEnum_category_declaration = function(ctx) {
+EParserListener.prototype.enterEnum_category_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#enum_category_declaration.
-EParserListener.prototype.exitEnum_category_declaration = function(ctx) {
+EParserListener.prototype.exitEnum_category_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#enum_native_declaration.
-EParserListener.prototype.enterEnum_native_declaration = function(ctx) {
+EParserListener.prototype.enterEnum_native_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#enum_native_declaration.
-EParserListener.prototype.exitEnum_native_declaration = function(ctx) {
+EParserListener.prototype.exitEnum_native_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_symbol.
-EParserListener.prototype.enterNative_symbol = function(ctx) {
+EParserListener.prototype.enterNative_symbol = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_symbol.
-EParserListener.prototype.exitNative_symbol = function(ctx) {
+EParserListener.prototype.exitNative_symbol = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#category_symbol.
-EParserListener.prototype.enterCategory_symbol = function(ctx) {
+EParserListener.prototype.enterCategory_symbol = ctx => {
 };
 
 // Exit a parse tree produced by EParser#category_symbol.
-EParserListener.prototype.exitCategory_symbol = function(ctx) {
+EParserListener.prototype.exitCategory_symbol = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#attribute_declaration.
-EParserListener.prototype.enterAttribute_declaration = function(ctx) {
+EParserListener.prototype.enterAttribute_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#attribute_declaration.
-EParserListener.prototype.exitAttribute_declaration = function(ctx) {
+EParserListener.prototype.exitAttribute_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#concrete_widget_declaration.
-EParserListener.prototype.enterConcrete_widget_declaration = function(ctx) {
+EParserListener.prototype.enterConcrete_widget_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#concrete_widget_declaration.
-EParserListener.prototype.exitConcrete_widget_declaration = function(ctx) {
+EParserListener.prototype.exitConcrete_widget_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_widget_declaration.
-EParserListener.prototype.enterNative_widget_declaration = function(ctx) {
+EParserListener.prototype.enterNative_widget_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_widget_declaration.
-EParserListener.prototype.exitNative_widget_declaration = function(ctx) {
+EParserListener.prototype.exitNative_widget_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#concrete_category_declaration.
-EParserListener.prototype.enterConcrete_category_declaration = function(ctx) {
+EParserListener.prototype.enterConcrete_category_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#concrete_category_declaration.
-EParserListener.prototype.exitConcrete_category_declaration = function(ctx) {
+EParserListener.prototype.exitConcrete_category_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#singleton_category_declaration.
-EParserListener.prototype.enterSingleton_category_declaration = function(ctx) {
+EParserListener.prototype.enterSingleton_category_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#singleton_category_declaration.
-EParserListener.prototype.exitSingleton_category_declaration = function(ctx) {
+EParserListener.prototype.exitSingleton_category_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DerivedList.
-EParserListener.prototype.enterDerivedList = function(ctx) {
+EParserListener.prototype.enterDerivedList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DerivedList.
-EParserListener.prototype.exitDerivedList = function(ctx) {
+EParserListener.prototype.exitDerivedList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DerivedListItem.
-EParserListener.prototype.enterDerivedListItem = function(ctx) {
+EParserListener.prototype.enterDerivedListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DerivedListItem.
-EParserListener.prototype.exitDerivedListItem = function(ctx) {
+EParserListener.prototype.exitDerivedListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#operator_method_declaration.
-EParserListener.prototype.enterOperator_method_declaration = function(ctx) {
+EParserListener.prototype.enterOperator_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#operator_method_declaration.
-EParserListener.prototype.exitOperator_method_declaration = function(ctx) {
+EParserListener.prototype.exitOperator_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#setter_method_declaration.
-EParserListener.prototype.enterSetter_method_declaration = function(ctx) {
+EParserListener.prototype.enterSetter_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#setter_method_declaration.
-EParserListener.prototype.exitSetter_method_declaration = function(ctx) {
+EParserListener.prototype.exitSetter_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_setter_declaration.
-EParserListener.prototype.enterNative_setter_declaration = function(ctx) {
+EParserListener.prototype.enterNative_setter_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_setter_declaration.
-EParserListener.prototype.exitNative_setter_declaration = function(ctx) {
+EParserListener.prototype.exitNative_setter_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#getter_method_declaration.
-EParserListener.prototype.enterGetter_method_declaration = function(ctx) {
+EParserListener.prototype.enterGetter_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#getter_method_declaration.
-EParserListener.prototype.exitGetter_method_declaration = function(ctx) {
+EParserListener.prototype.exitGetter_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_getter_declaration.
-EParserListener.prototype.enterNative_getter_declaration = function(ctx) {
+EParserListener.prototype.enterNative_getter_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_getter_declaration.
-EParserListener.prototype.exitNative_getter_declaration = function(ctx) {
+EParserListener.prototype.exitNative_getter_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_category_declaration.
-EParserListener.prototype.enterNative_category_declaration = function(ctx) {
+EParserListener.prototype.enterNative_category_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_category_declaration.
-EParserListener.prototype.exitNative_category_declaration = function(ctx) {
+EParserListener.prototype.exitNative_category_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_resource_declaration.
-EParserListener.prototype.enterNative_resource_declaration = function(ctx) {
+EParserListener.prototype.enterNative_resource_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_resource_declaration.
-EParserListener.prototype.exitNative_resource_declaration = function(ctx) {
+EParserListener.prototype.exitNative_resource_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_category_bindings.
-EParserListener.prototype.enterNative_category_bindings = function(ctx) {
+EParserListener.prototype.enterNative_category_bindings = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_category_bindings.
-EParserListener.prototype.exitNative_category_bindings = function(ctx) {
+EParserListener.prototype.exitNative_category_bindings = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NativeCategoryBindingListItem.
-EParserListener.prototype.enterNativeCategoryBindingListItem = function(ctx) {
+EParserListener.prototype.enterNativeCategoryBindingListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NativeCategoryBindingListItem.
-EParserListener.prototype.exitNativeCategoryBindingListItem = function(ctx) {
+EParserListener.prototype.exitNativeCategoryBindingListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NativeCategoryBindingList.
-EParserListener.prototype.enterNativeCategoryBindingList = function(ctx) {
+EParserListener.prototype.enterNativeCategoryBindingList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NativeCategoryBindingList.
-EParserListener.prototype.exitNativeCategoryBindingList = function(ctx) {
+EParserListener.prototype.exitNativeCategoryBindingList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AttributeList.
-EParserListener.prototype.enterAttributeList = function(ctx) {
+EParserListener.prototype.enterAttributeList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AttributeList.
-EParserListener.prototype.exitAttributeList = function(ctx) {
+EParserListener.prototype.exitAttributeList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AttributeListItem.
-EParserListener.prototype.enterAttributeListItem = function(ctx) {
+EParserListener.prototype.enterAttributeListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AttributeListItem.
-EParserListener.prototype.exitAttributeListItem = function(ctx) {
+EParserListener.prototype.exitAttributeListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#abstract_method_declaration.
-EParserListener.prototype.enterAbstract_method_declaration = function(ctx) {
+EParserListener.prototype.enterAbstract_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#abstract_method_declaration.
-EParserListener.prototype.exitAbstract_method_declaration = function(ctx) {
+EParserListener.prototype.exitAbstract_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#concrete_method_declaration.
-EParserListener.prototype.enterConcrete_method_declaration = function(ctx) {
+EParserListener.prototype.enterConcrete_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#concrete_method_declaration.
-EParserListener.prototype.exitConcrete_method_declaration = function(ctx) {
+EParserListener.prototype.exitConcrete_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_method_declaration.
-EParserListener.prototype.enterNative_method_declaration = function(ctx) {
+EParserListener.prototype.enterNative_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_method_declaration.
-EParserListener.prototype.exitNative_method_declaration = function(ctx) {
+EParserListener.prototype.exitNative_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#test_method_declaration.
-EParserListener.prototype.enterTest_method_declaration = function(ctx) {
+EParserListener.prototype.enterTest_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#test_method_declaration.
-EParserListener.prototype.exitTest_method_declaration = function(ctx) {
+EParserListener.prototype.exitTest_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#assertion.
-EParserListener.prototype.enterAssertion = function(ctx) {
+EParserListener.prototype.enterAssertion = ctx => {
 };
 
 // Exit a parse tree produced by EParser#assertion.
-EParserListener.prototype.exitAssertion = function(ctx) {
+EParserListener.prototype.exitAssertion = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#full_argument_list.
-EParserListener.prototype.enterFull_argument_list = function(ctx) {
+EParserListener.prototype.enterFull_argument_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#full_argument_list.
-EParserListener.prototype.exitFull_argument_list = function(ctx) {
+EParserListener.prototype.exitFull_argument_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#typed_argument.
-EParserListener.prototype.enterTyped_argument = function(ctx) {
+EParserListener.prototype.enterTyped_argument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#typed_argument.
-EParserListener.prototype.exitTyped_argument = function(ctx) {
+EParserListener.prototype.exitTyped_argument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AssignInstanceStatement.
-EParserListener.prototype.enterAssignInstanceStatement = function(ctx) {
+EParserListener.prototype.enterAssignInstanceStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AssignInstanceStatement.
-EParserListener.prototype.exitAssignInstanceStatement = function(ctx) {
+EParserListener.prototype.exitAssignInstanceStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MethodCallStatement.
-EParserListener.prototype.enterMethodCallStatement = function(ctx) {
+EParserListener.prototype.enterMethodCallStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MethodCallStatement.
-EParserListener.prototype.exitMethodCallStatement = function(ctx) {
+EParserListener.prototype.exitMethodCallStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AssignTupleStatement.
-EParserListener.prototype.enterAssignTupleStatement = function(ctx) {
+EParserListener.prototype.enterAssignTupleStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AssignTupleStatement.
-EParserListener.prototype.exitAssignTupleStatement = function(ctx) {
+EParserListener.prototype.exitAssignTupleStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#StoreStatement.
-EParserListener.prototype.enterStoreStatement = function(ctx) {
+EParserListener.prototype.enterStoreStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#StoreStatement.
-EParserListener.prototype.exitStoreStatement = function(ctx) {
+EParserListener.prototype.exitStoreStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FetchStatement.
-EParserListener.prototype.enterFetchStatement = function(ctx) {
+EParserListener.prototype.enterFetchStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FetchStatement.
-EParserListener.prototype.exitFetchStatement = function(ctx) {
+EParserListener.prototype.exitFetchStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ReadStatement.
-EParserListener.prototype.enterReadStatement = function(ctx) {
+EParserListener.prototype.enterReadStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ReadStatement.
-EParserListener.prototype.exitReadStatement = function(ctx) {
+EParserListener.prototype.exitReadStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FlushStatement.
-EParserListener.prototype.enterFlushStatement = function(ctx) {
+EParserListener.prototype.enterFlushStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FlushStatement.
-EParserListener.prototype.exitFlushStatement = function(ctx) {
+EParserListener.prototype.exitFlushStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#BreakStatement.
-EParserListener.prototype.enterBreakStatement = function(ctx) {
+EParserListener.prototype.enterBreakStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#BreakStatement.
-EParserListener.prototype.exitBreakStatement = function(ctx) {
+EParserListener.prototype.exitBreakStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ReturnStatement.
-EParserListener.prototype.enterReturnStatement = function(ctx) {
+EParserListener.prototype.enterReturnStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ReturnStatement.
-EParserListener.prototype.exitReturnStatement = function(ctx) {
+EParserListener.prototype.exitReturnStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IfStatement.
-EParserListener.prototype.enterIfStatement = function(ctx) {
+EParserListener.prototype.enterIfStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IfStatement.
-EParserListener.prototype.exitIfStatement = function(ctx) {
+EParserListener.prototype.exitIfStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SwitchStatement.
-EParserListener.prototype.enterSwitchStatement = function(ctx) {
+EParserListener.prototype.enterSwitchStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SwitchStatement.
-EParserListener.prototype.exitSwitchStatement = function(ctx) {
+EParserListener.prototype.exitSwitchStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ForEachStatement.
-EParserListener.prototype.enterForEachStatement = function(ctx) {
+EParserListener.prototype.enterForEachStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ForEachStatement.
-EParserListener.prototype.exitForEachStatement = function(ctx) {
+EParserListener.prototype.exitForEachStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#WhileStatement.
-EParserListener.prototype.enterWhileStatement = function(ctx) {
+EParserListener.prototype.enterWhileStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#WhileStatement.
-EParserListener.prototype.exitWhileStatement = function(ctx) {
+EParserListener.prototype.exitWhileStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DoWhileStatement.
-EParserListener.prototype.enterDoWhileStatement = function(ctx) {
+EParserListener.prototype.enterDoWhileStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DoWhileStatement.
-EParserListener.prototype.exitDoWhileStatement = function(ctx) {
+EParserListener.prototype.exitDoWhileStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#RaiseStatement.
-EParserListener.prototype.enterRaiseStatement = function(ctx) {
+EParserListener.prototype.enterRaiseStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#RaiseStatement.
-EParserListener.prototype.exitRaiseStatement = function(ctx) {
+EParserListener.prototype.exitRaiseStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TryStatement.
-EParserListener.prototype.enterTryStatement = function(ctx) {
+EParserListener.prototype.enterTryStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TryStatement.
-EParserListener.prototype.exitTryStatement = function(ctx) {
+EParserListener.prototype.exitTryStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#WriteStatement.
-EParserListener.prototype.enterWriteStatement = function(ctx) {
+EParserListener.prototype.enterWriteStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#WriteStatement.
-EParserListener.prototype.exitWriteStatement = function(ctx) {
+EParserListener.prototype.exitWriteStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#WithResourceStatement.
-EParserListener.prototype.enterWithResourceStatement = function(ctx) {
+EParserListener.prototype.enterWithResourceStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#WithResourceStatement.
-EParserListener.prototype.exitWithResourceStatement = function(ctx) {
+EParserListener.prototype.exitWithResourceStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#WithSingletonStatement.
-EParserListener.prototype.enterWithSingletonStatement = function(ctx) {
+EParserListener.prototype.enterWithSingletonStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#WithSingletonStatement.
-EParserListener.prototype.exitWithSingletonStatement = function(ctx) {
+EParserListener.prototype.exitWithSingletonStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ClosureStatement.
-EParserListener.prototype.enterClosureStatement = function(ctx) {
+EParserListener.prototype.enterClosureStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ClosureStatement.
-EParserListener.prototype.exitClosureStatement = function(ctx) {
+EParserListener.prototype.exitClosureStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CommentStatement.
-EParserListener.prototype.enterCommentStatement = function(ctx) {
+EParserListener.prototype.enterCommentStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CommentStatement.
-EParserListener.prototype.exitCommentStatement = function(ctx) {
+EParserListener.prototype.exitCommentStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#flush_statement.
-EParserListener.prototype.enterFlush_statement = function(ctx) {
+EParserListener.prototype.enterFlush_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#flush_statement.
-EParserListener.prototype.exitFlush_statement = function(ctx) {
+EParserListener.prototype.exitFlush_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#store_statement.
-EParserListener.prototype.enterStore_statement = function(ctx) {
+EParserListener.prototype.enterStore_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#store_statement.
-EParserListener.prototype.exitStore_statement = function(ctx) {
+EParserListener.prototype.exitStore_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#UnresolvedWithArgsStatement.
-EParserListener.prototype.enterUnresolvedWithArgsStatement = function(ctx) {
+EParserListener.prototype.enterUnresolvedWithArgsStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#UnresolvedWithArgsStatement.
-EParserListener.prototype.exitUnresolvedWithArgsStatement = function(ctx) {
+EParserListener.prototype.exitUnresolvedWithArgsStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#InvokeStatement.
-EParserListener.prototype.enterInvokeStatement = function(ctx) {
+EParserListener.prototype.enterInvokeStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#InvokeStatement.
-EParserListener.prototype.exitInvokeStatement = function(ctx) {
+EParserListener.prototype.exitInvokeStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#with_resource_statement.
-EParserListener.prototype.enterWith_resource_statement = function(ctx) {
+EParserListener.prototype.enterWith_resource_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#with_resource_statement.
-EParserListener.prototype.exitWith_resource_statement = function(ctx) {
+EParserListener.prototype.exitWith_resource_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#with_singleton_statement.
-EParserListener.prototype.enterWith_singleton_statement = function(ctx) {
+EParserListener.prototype.enterWith_singleton_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#with_singleton_statement.
-EParserListener.prototype.exitWith_singleton_statement = function(ctx) {
+EParserListener.prototype.exitWith_singleton_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#switch_statement.
-EParserListener.prototype.enterSwitch_statement = function(ctx) {
+EParserListener.prototype.enterSwitch_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#switch_statement.
-EParserListener.prototype.exitSwitch_statement = function(ctx) {
+EParserListener.prototype.exitSwitch_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AtomicSwitchCase.
-EParserListener.prototype.enterAtomicSwitchCase = function(ctx) {
+EParserListener.prototype.enterAtomicSwitchCase = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AtomicSwitchCase.
-EParserListener.prototype.exitAtomicSwitchCase = function(ctx) {
+EParserListener.prototype.exitAtomicSwitchCase = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CollectionSwitchCase.
-EParserListener.prototype.enterCollectionSwitchCase = function(ctx) {
+EParserListener.prototype.enterCollectionSwitchCase = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CollectionSwitchCase.
-EParserListener.prototype.exitCollectionSwitchCase = function(ctx) {
+EParserListener.prototype.exitCollectionSwitchCase = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#for_each_statement.
-EParserListener.prototype.enterFor_each_statement = function(ctx) {
+EParserListener.prototype.enterFor_each_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#for_each_statement.
-EParserListener.prototype.exitFor_each_statement = function(ctx) {
+EParserListener.prototype.exitFor_each_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#do_while_statement.
-EParserListener.prototype.enterDo_while_statement = function(ctx) {
+EParserListener.prototype.enterDo_while_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#do_while_statement.
-EParserListener.prototype.exitDo_while_statement = function(ctx) {
+EParserListener.prototype.exitDo_while_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#while_statement.
-EParserListener.prototype.enterWhile_statement = function(ctx) {
+EParserListener.prototype.enterWhile_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#while_statement.
-EParserListener.prototype.exitWhile_statement = function(ctx) {
+EParserListener.prototype.exitWhile_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#if_statement.
-EParserListener.prototype.enterIf_statement = function(ctx) {
+EParserListener.prototype.enterIf_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#if_statement.
-EParserListener.prototype.exitIf_statement = function(ctx) {
+EParserListener.prototype.exitIf_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ElseIfStatementList.
-EParserListener.prototype.enterElseIfStatementList = function(ctx) {
+EParserListener.prototype.enterElseIfStatementList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ElseIfStatementList.
-EParserListener.prototype.exitElseIfStatementList = function(ctx) {
+EParserListener.prototype.exitElseIfStatementList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ElseIfStatementListItem.
-EParserListener.prototype.enterElseIfStatementListItem = function(ctx) {
+EParserListener.prototype.enterElseIfStatementListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ElseIfStatementListItem.
-EParserListener.prototype.exitElseIfStatementListItem = function(ctx) {
+EParserListener.prototype.exitElseIfStatementListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#raise_statement.
-EParserListener.prototype.enterRaise_statement = function(ctx) {
+EParserListener.prototype.enterRaise_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#raise_statement.
-EParserListener.prototype.exitRaise_statement = function(ctx) {
+EParserListener.prototype.exitRaise_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#try_statement.
-EParserListener.prototype.enterTry_statement = function(ctx) {
+EParserListener.prototype.enterTry_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#try_statement.
-EParserListener.prototype.exitTry_statement = function(ctx) {
+EParserListener.prototype.exitTry_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CatchAtomicStatement.
-EParserListener.prototype.enterCatchAtomicStatement = function(ctx) {
+EParserListener.prototype.enterCatchAtomicStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CatchAtomicStatement.
-EParserListener.prototype.exitCatchAtomicStatement = function(ctx) {
+EParserListener.prototype.exitCatchAtomicStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CatchCollectionStatement.
-EParserListener.prototype.enterCatchCollectionStatement = function(ctx) {
+EParserListener.prototype.enterCatchCollectionStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CatchCollectionStatement.
-EParserListener.prototype.exitCatchCollectionStatement = function(ctx) {
+EParserListener.prototype.exitCatchCollectionStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#break_statement.
-EParserListener.prototype.enterBreak_statement = function(ctx) {
+EParserListener.prototype.enterBreak_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#break_statement.
-EParserListener.prototype.exitBreak_statement = function(ctx) {
+EParserListener.prototype.exitBreak_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#return_statement.
-EParserListener.prototype.enterReturn_statement = function(ctx) {
+EParserListener.prototype.enterReturn_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#return_statement.
-EParserListener.prototype.exitReturn_statement = function(ctx) {
+EParserListener.prototype.exitReturn_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IntDivideExpression.
-EParserListener.prototype.enterIntDivideExpression = function(ctx) {
+EParserListener.prototype.enterIntDivideExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IntDivideExpression.
-EParserListener.prototype.exitIntDivideExpression = function(ctx) {
+EParserListener.prototype.exitIntDivideExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#HasAnyExpression.
-EParserListener.prototype.enterHasAnyExpression = function(ctx) {
+EParserListener.prototype.enterHasAnyExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#HasAnyExpression.
-EParserListener.prototype.exitHasAnyExpression = function(ctx) {
+EParserListener.prototype.exitHasAnyExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#HasExpression.
-EParserListener.prototype.enterHasExpression = function(ctx) {
+EParserListener.prototype.enterHasExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#HasExpression.
-EParserListener.prototype.exitHasExpression = function(ctx) {
+EParserListener.prototype.exitHasExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#InExpression.
-EParserListener.prototype.enterInExpression = function(ctx) {
+EParserListener.prototype.enterInExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#InExpression.
-EParserListener.prototype.exitInExpression = function(ctx) {
+EParserListener.prototype.exitInExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxExpression.
-EParserListener.prototype.enterJsxExpression = function(ctx) {
+EParserListener.prototype.enterJsxExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxExpression.
-EParserListener.prototype.exitJsxExpression = function(ctx) {
+EParserListener.prototype.exitJsxExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#GreaterThanExpression.
-EParserListener.prototype.enterGreaterThanExpression = function(ctx) {
+EParserListener.prototype.enterGreaterThanExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#GreaterThanExpression.
-EParserListener.prototype.exitGreaterThanExpression = function(ctx) {
+EParserListener.prototype.exitGreaterThanExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OrExpression.
-EParserListener.prototype.enterOrExpression = function(ctx) {
+EParserListener.prototype.enterOrExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OrExpression.
-EParserListener.prototype.exitOrExpression = function(ctx) {
+EParserListener.prototype.exitOrExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ReadOneExpression.
-EParserListener.prototype.enterReadOneExpression = function(ctx) {
+EParserListener.prototype.enterReadOneExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ReadOneExpression.
-EParserListener.prototype.exitReadOneExpression = function(ctx) {
+EParserListener.prototype.exitReadOneExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotHasAnyExpression.
-EParserListener.prototype.enterNotHasAnyExpression = function(ctx) {
+EParserListener.prototype.enterNotHasAnyExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotHasAnyExpression.
-EParserListener.prototype.exitNotHasAnyExpression = function(ctx) {
+EParserListener.prototype.exitNotHasAnyExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AndExpression.
-EParserListener.prototype.enterAndExpression = function(ctx) {
+EParserListener.prototype.enterAndExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AndExpression.
-EParserListener.prototype.exitAndExpression = function(ctx) {
+EParserListener.prototype.exitAndExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArrowExpression.
-EParserListener.prototype.enterArrowExpression = function(ctx) {
+EParserListener.prototype.enterArrowExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArrowExpression.
-EParserListener.prototype.exitArrowExpression = function(ctx) {
+EParserListener.prototype.exitArrowExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MethodCallExpression.
-EParserListener.prototype.enterMethodCallExpression = function(ctx) {
+EParserListener.prototype.enterMethodCallExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MethodCallExpression.
-EParserListener.prototype.exitMethodCallExpression = function(ctx) {
+EParserListener.prototype.exitMethodCallExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FetchExpression.
-EParserListener.prototype.enterFetchExpression = function(ctx) {
+EParserListener.prototype.enterFetchExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FetchExpression.
-EParserListener.prototype.exitFetchExpression = function(ctx) {
+EParserListener.prototype.exitFetchExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotHasExpression.
-EParserListener.prototype.enterNotHasExpression = function(ctx) {
+EParserListener.prototype.enterNotHasExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotHasExpression.
-EParserListener.prototype.exitNotHasExpression = function(ctx) {
+EParserListener.prototype.exitNotHasExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SortedExpression.
-EParserListener.prototype.enterSortedExpression = function(ctx) {
+EParserListener.prototype.enterSortedExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SortedExpression.
-EParserListener.prototype.exitSortedExpression = function(ctx) {
+EParserListener.prototype.exitSortedExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotHasAllExpression.
-EParserListener.prototype.enterNotHasAllExpression = function(ctx) {
+EParserListener.prototype.enterNotHasAllExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotHasAllExpression.
-EParserListener.prototype.exitNotHasAllExpression = function(ctx) {
+EParserListener.prototype.exitNotHasAllExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ContainsExpression.
-EParserListener.prototype.enterContainsExpression = function(ctx) {
+EParserListener.prototype.enterContainsExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ContainsExpression.
-EParserListener.prototype.exitContainsExpression = function(ctx) {
+EParserListener.prototype.exitContainsExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotContainsExpression.
-EParserListener.prototype.enterNotContainsExpression = function(ctx) {
+EParserListener.prototype.enterNotContainsExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotContainsExpression.
-EParserListener.prototype.exitNotContainsExpression = function(ctx) {
+EParserListener.prototype.exitNotContainsExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#RoughlyEqualsExpression.
-EParserListener.prototype.enterRoughlyEqualsExpression = function(ctx) {
+EParserListener.prototype.enterRoughlyEqualsExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#RoughlyEqualsExpression.
-EParserListener.prototype.exitRoughlyEqualsExpression = function(ctx) {
+EParserListener.prototype.exitRoughlyEqualsExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ExecuteExpression.
-EParserListener.prototype.enterExecuteExpression = function(ctx) {
+EParserListener.prototype.enterExecuteExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ExecuteExpression.
-EParserListener.prototype.exitExecuteExpression = function(ctx) {
+EParserListener.prototype.exitExecuteExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#GreaterThanOrEqualExpression.
-EParserListener.prototype.enterGreaterThanOrEqualExpression = function(ctx) {
+EParserListener.prototype.enterGreaterThanOrEqualExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#GreaterThanOrEqualExpression.
-EParserListener.prototype.exitGreaterThanOrEqualExpression = function(ctx) {
+EParserListener.prototype.exitGreaterThanOrEqualExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IteratorExpression.
-EParserListener.prototype.enterIteratorExpression = function(ctx) {
+EParserListener.prototype.enterIteratorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IteratorExpression.
-EParserListener.prototype.exitIteratorExpression = function(ctx) {
+EParserListener.prototype.exitIteratorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IsNotExpression.
-EParserListener.prototype.enterIsNotExpression = function(ctx) {
+EParserListener.prototype.enterIsNotExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IsNotExpression.
-EParserListener.prototype.exitIsNotExpression = function(ctx) {
+EParserListener.prototype.exitIsNotExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DivideExpression.
-EParserListener.prototype.enterDivideExpression = function(ctx) {
+EParserListener.prototype.enterDivideExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DivideExpression.
-EParserListener.prototype.exitDivideExpression = function(ctx) {
+EParserListener.prototype.exitDivideExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IsExpression.
-EParserListener.prototype.enterIsExpression = function(ctx) {
+EParserListener.prototype.enterIsExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IsExpression.
-EParserListener.prototype.exitIsExpression = function(ctx) {
+EParserListener.prototype.exitIsExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AddExpression.
-EParserListener.prototype.enterAddExpression = function(ctx) {
+EParserListener.prototype.enterAddExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AddExpression.
-EParserListener.prototype.exitAddExpression = function(ctx) {
+EParserListener.prototype.exitAddExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#InstanceExpression.
-EParserListener.prototype.enterInstanceExpression = function(ctx) {
+EParserListener.prototype.enterInstanceExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#InstanceExpression.
-EParserListener.prototype.exitInstanceExpression = function(ctx) {
+EParserListener.prototype.exitInstanceExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MutableInstanceExpression.
-EParserListener.prototype.enterMutableInstanceExpression = function(ctx) {
+EParserListener.prototype.enterMutableInstanceExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MutableInstanceExpression.
-EParserListener.prototype.exitMutableInstanceExpression = function(ctx) {
+EParserListener.prototype.exitMutableInstanceExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ReadAllExpression.
-EParserListener.prototype.enterReadAllExpression = function(ctx) {
+EParserListener.prototype.enterReadAllExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ReadAllExpression.
-EParserListener.prototype.exitReadAllExpression = function(ctx) {
+EParserListener.prototype.exitReadAllExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CastExpression.
-EParserListener.prototype.enterCastExpression = function(ctx) {
+EParserListener.prototype.enterCastExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CastExpression.
-EParserListener.prototype.exitCastExpression = function(ctx) {
+EParserListener.prototype.exitCastExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ModuloExpression.
-EParserListener.prototype.enterModuloExpression = function(ctx) {
+EParserListener.prototype.enterModuloExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ModuloExpression.
-EParserListener.prototype.exitModuloExpression = function(ctx) {
+EParserListener.prototype.exitModuloExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TernaryExpression.
-EParserListener.prototype.enterTernaryExpression = function(ctx) {
+EParserListener.prototype.enterTernaryExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TernaryExpression.
-EParserListener.prototype.exitTernaryExpression = function(ctx) {
+EParserListener.prototype.exitTernaryExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotEqualsExpression.
-EParserListener.prototype.enterNotEqualsExpression = function(ctx) {
+EParserListener.prototype.enterNotEqualsExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotEqualsExpression.
-EParserListener.prototype.exitNotEqualsExpression = function(ctx) {
+EParserListener.prototype.exitNotEqualsExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DocumentExpression.
-EParserListener.prototype.enterDocumentExpression = function(ctx) {
+EParserListener.prototype.enterDocumentExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DocumentExpression.
-EParserListener.prototype.exitDocumentExpression = function(ctx) {
+EParserListener.prototype.exitDocumentExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotExpression.
-EParserListener.prototype.enterNotExpression = function(ctx) {
+EParserListener.prototype.enterNotExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotExpression.
-EParserListener.prototype.exitNotExpression = function(ctx) {
+EParserListener.prototype.exitNotExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#InvocationExpression.
-EParserListener.prototype.enterInvocationExpression = function(ctx) {
+EParserListener.prototype.enterInvocationExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#InvocationExpression.
-EParserListener.prototype.exitInvocationExpression = function(ctx) {
+EParserListener.prototype.exitInvocationExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CodeExpression.
-EParserListener.prototype.enterCodeExpression = function(ctx) {
+EParserListener.prototype.enterCodeExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CodeExpression.
-EParserListener.prototype.exitCodeExpression = function(ctx) {
+EParserListener.prototype.exitCodeExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AmbiguousExpression.
-EParserListener.prototype.enterAmbiguousExpression = function(ctx) {
+EParserListener.prototype.enterAmbiguousExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AmbiguousExpression.
-EParserListener.prototype.exitAmbiguousExpression = function(ctx) {
+EParserListener.prototype.exitAmbiguousExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#LessThanOrEqualExpression.
-EParserListener.prototype.enterLessThanOrEqualExpression = function(ctx) {
+EParserListener.prototype.enterLessThanOrEqualExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#LessThanOrEqualExpression.
-EParserListener.prototype.exitLessThanOrEqualExpression = function(ctx) {
+EParserListener.prototype.exitLessThanOrEqualExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ClosureExpression.
-EParserListener.prototype.enterClosureExpression = function(ctx) {
+EParserListener.prototype.enterClosureExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ClosureExpression.
-EParserListener.prototype.exitClosureExpression = function(ctx) {
+EParserListener.prototype.exitClosureExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#BlobExpression.
-EParserListener.prototype.enterBlobExpression = function(ctx) {
+EParserListener.prototype.enterBlobExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#BlobExpression.
-EParserListener.prototype.exitBlobExpression = function(ctx) {
+EParserListener.prototype.exitBlobExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FilteredListExpression.
-EParserListener.prototype.enterFilteredListExpression = function(ctx) {
+EParserListener.prototype.enterFilteredListExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FilteredListExpression.
-EParserListener.prototype.exitFilteredListExpression = function(ctx) {
+EParserListener.prototype.exitFilteredListExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ConstructorExpression.
-EParserListener.prototype.enterConstructorExpression = function(ctx) {
+EParserListener.prototype.enterConstructorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ConstructorExpression.
-EParserListener.prototype.exitConstructorExpression = function(ctx) {
+EParserListener.prototype.exitConstructorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ReadBlobExpression.
-EParserListener.prototype.enterReadBlobExpression = function(ctx) {
+EParserListener.prototype.enterReadBlobExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ReadBlobExpression.
-EParserListener.prototype.exitReadBlobExpression = function(ctx) {
+EParserListener.prototype.exitReadBlobExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MultiplyExpression.
-EParserListener.prototype.enterMultiplyExpression = function(ctx) {
+EParserListener.prototype.enterMultiplyExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MultiplyExpression.
-EParserListener.prototype.exitMultiplyExpression = function(ctx) {
+EParserListener.prototype.exitMultiplyExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NotInExpression.
-EParserListener.prototype.enterNotInExpression = function(ctx) {
+EParserListener.prototype.enterNotInExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NotInExpression.
-EParserListener.prototype.exitNotInExpression = function(ctx) {
+EParserListener.prototype.exitNotInExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#UnresolvedExpression.
-EParserListener.prototype.enterUnresolvedExpression = function(ctx) {
+EParserListener.prototype.enterUnresolvedExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#UnresolvedExpression.
-EParserListener.prototype.exitUnresolvedExpression = function(ctx) {
+EParserListener.prototype.exitUnresolvedExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MinusExpression.
-EParserListener.prototype.enterMinusExpression = function(ctx) {
+EParserListener.prototype.enterMinusExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MinusExpression.
-EParserListener.prototype.exitMinusExpression = function(ctx) {
+EParserListener.prototype.exitMinusExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#HasAllExpression.
-EParserListener.prototype.enterHasAllExpression = function(ctx) {
+EParserListener.prototype.enterHasAllExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#HasAllExpression.
-EParserListener.prototype.exitHasAllExpression = function(ctx) {
+EParserListener.prototype.exitHasAllExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CssExpression.
-EParserListener.prototype.enterCssExpression = function(ctx) {
+EParserListener.prototype.enterCssExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CssExpression.
-EParserListener.prototype.exitCssExpression = function(ctx) {
+EParserListener.prototype.exitCssExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#LessThanExpression.
-EParserListener.prototype.enterLessThanExpression = function(ctx) {
+EParserListener.prototype.enterLessThanExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#LessThanExpression.
-EParserListener.prototype.exitLessThanExpression = function(ctx) {
+EParserListener.prototype.exitLessThanExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#EqualsExpression.
-EParserListener.prototype.enterEqualsExpression = function(ctx) {
+EParserListener.prototype.enterEqualsExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#EqualsExpression.
-EParserListener.prototype.exitEqualsExpression = function(ctx) {
+EParserListener.prototype.exitEqualsExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#UnresolvedSelector.
-EParserListener.prototype.enterUnresolvedSelector = function(ctx) {
+EParserListener.prototype.enterUnresolvedSelector = ctx => {
 };
 
 // Exit a parse tree produced by EParser#UnresolvedSelector.
-EParserListener.prototype.exitUnresolvedSelector = function(ctx) {
+EParserListener.prototype.exitUnresolvedSelector = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#UnresolvedIdentifier.
-EParserListener.prototype.enterUnresolvedIdentifier = function(ctx) {
+EParserListener.prototype.enterUnresolvedIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#UnresolvedIdentifier.
-EParserListener.prototype.exitUnresolvedIdentifier = function(ctx) {
+EParserListener.prototype.exitUnresolvedIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#unresolved_selector.
-EParserListener.prototype.enterUnresolved_selector = function(ctx) {
+EParserListener.prototype.enterUnresolved_selector = ctx => {
 };
 
 // Exit a parse tree produced by EParser#unresolved_selector.
-EParserListener.prototype.exitUnresolved_selector = function(ctx) {
+EParserListener.prototype.exitUnresolved_selector = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#invocation_expression.
-EParserListener.prototype.enterInvocation_expression = function(ctx) {
+EParserListener.prototype.enterInvocation_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#invocation_expression.
-EParserListener.prototype.exitInvocation_expression = function(ctx) {
+EParserListener.prototype.exitInvocation_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#invocation_trailer.
-EParserListener.prototype.enterInvocation_trailer = function(ctx) {
+EParserListener.prototype.enterInvocation_trailer = ctx => {
 };
 
 // Exit a parse tree produced by EParser#invocation_trailer.
-EParserListener.prototype.exitInvocation_trailer = function(ctx) {
+EParserListener.prototype.exitInvocation_trailer = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ParenthesisExpression.
-EParserListener.prototype.enterParenthesisExpression = function(ctx) {
+EParserListener.prototype.enterParenthesisExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ParenthesisExpression.
-EParserListener.prototype.exitParenthesisExpression = function(ctx) {
+EParserListener.prototype.exitParenthesisExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#LiteralExpression.
-EParserListener.prototype.enterLiteralExpression = function(ctx) {
+EParserListener.prototype.enterLiteralExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#LiteralExpression.
-EParserListener.prototype.exitLiteralExpression = function(ctx) {
+EParserListener.prototype.exitLiteralExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IdentifierExpression.
-EParserListener.prototype.enterIdentifierExpression = function(ctx) {
+EParserListener.prototype.enterIdentifierExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IdentifierExpression.
-EParserListener.prototype.exitIdentifierExpression = function(ctx) {
+EParserListener.prototype.exitIdentifierExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ThisExpression.
-EParserListener.prototype.enterThisExpression = function(ctx) {
+EParserListener.prototype.enterThisExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ThisExpression.
-EParserListener.prototype.exitThisExpression = function(ctx) {
+EParserListener.prototype.exitThisExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SuperExpression.
-EParserListener.prototype.enterSuperExpression = function(ctx) {
+EParserListener.prototype.enterSuperExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SuperExpression.
-EParserListener.prototype.exitSuperExpression = function(ctx) {
+EParserListener.prototype.exitSuperExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SelectorExpression.
-EParserListener.prototype.enterSelectorExpression = function(ctx) {
+EParserListener.prototype.enterSelectorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SelectorExpression.
-EParserListener.prototype.exitSelectorExpression = function(ctx) {
+EParserListener.prototype.exitSelectorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SelectableExpression.
-EParserListener.prototype.enterSelectableExpression = function(ctx) {
+EParserListener.prototype.enterSelectableExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SelectableExpression.
-EParserListener.prototype.exitSelectableExpression = function(ctx) {
+EParserListener.prototype.exitSelectableExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MemberSelector.
-EParserListener.prototype.enterMemberSelector = function(ctx) {
+EParserListener.prototype.enterMemberSelector = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MemberSelector.
-EParserListener.prototype.exitMemberSelector = function(ctx) {
+EParserListener.prototype.exitMemberSelector = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SliceSelector.
-EParserListener.prototype.enterSliceSelector = function(ctx) {
+EParserListener.prototype.enterSliceSelector = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SliceSelector.
-EParserListener.prototype.exitSliceSelector = function(ctx) {
+EParserListener.prototype.exitSliceSelector = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ItemSelector.
-EParserListener.prototype.enterItemSelector = function(ctx) {
+EParserListener.prototype.enterItemSelector = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ItemSelector.
-EParserListener.prototype.exitItemSelector = function(ctx) {
+EParserListener.prototype.exitItemSelector = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MutableSelectableExpression.
-EParserListener.prototype.enterMutableSelectableExpression = function(ctx) {
+EParserListener.prototype.enterMutableSelectableExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MutableSelectableExpression.
-EParserListener.prototype.exitMutableSelectableExpression = function(ctx) {
+EParserListener.prototype.exitMutableSelectableExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MutableSelectorExpression.
-EParserListener.prototype.enterMutableSelectorExpression = function(ctx) {
+EParserListener.prototype.enterMutableSelectorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MutableSelectorExpression.
-EParserListener.prototype.exitMutableSelectorExpression = function(ctx) {
+EParserListener.prototype.exitMutableSelectorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#document_expression.
-EParserListener.prototype.enterDocument_expression = function(ctx) {
+EParserListener.prototype.enterDocument_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#document_expression.
-EParserListener.prototype.exitDocument_expression = function(ctx) {
+EParserListener.prototype.exitDocument_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#blob_expression.
-EParserListener.prototype.enterBlob_expression = function(ctx) {
+EParserListener.prototype.enterBlob_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#blob_expression.
-EParserListener.prototype.exitBlob_expression = function(ctx) {
+EParserListener.prototype.exitBlob_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ConstructorFrom.
-EParserListener.prototype.enterConstructorFrom = function(ctx) {
+EParserListener.prototype.enterConstructorFrom = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ConstructorFrom.
-EParserListener.prototype.exitConstructorFrom = function(ctx) {
+EParserListener.prototype.exitConstructorFrom = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ConstructorNoFrom.
-EParserListener.prototype.enterConstructorNoFrom = function(ctx) {
+EParserListener.prototype.enterConstructorNoFrom = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ConstructorNoFrom.
-EParserListener.prototype.exitConstructorNoFrom = function(ctx) {
+EParserListener.prototype.exitConstructorNoFrom = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#write_statement.
-EParserListener.prototype.enterWrite_statement = function(ctx) {
+EParserListener.prototype.enterWrite_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#write_statement.
-EParserListener.prototype.exitWrite_statement = function(ctx) {
+EParserListener.prototype.exitWrite_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ambiguous_expression.
-EParserListener.prototype.enterAmbiguous_expression = function(ctx) {
+EParserListener.prototype.enterAmbiguous_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ambiguous_expression.
-EParserListener.prototype.exitAmbiguous_expression = function(ctx) {
+EParserListener.prototype.exitAmbiguous_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#filtered_list_suffix.
-EParserListener.prototype.enterFiltered_list_suffix = function(ctx) {
+EParserListener.prototype.enterFiltered_list_suffix = ctx => {
 };
 
 // Exit a parse tree produced by EParser#filtered_list_suffix.
-EParserListener.prototype.exitFiltered_list_suffix = function(ctx) {
+EParserListener.prototype.exitFiltered_list_suffix = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FetchOne.
-EParserListener.prototype.enterFetchOne = function(ctx) {
+EParserListener.prototype.enterFetchOne = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FetchOne.
-EParserListener.prototype.exitFetchOne = function(ctx) {
+EParserListener.prototype.exitFetchOne = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FetchMany.
-EParserListener.prototype.enterFetchMany = function(ctx) {
+EParserListener.prototype.enterFetchMany = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FetchMany.
-EParserListener.prototype.exitFetchMany = function(ctx) {
+EParserListener.prototype.exitFetchMany = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FetchOneAsync.
-EParserListener.prototype.enterFetchOneAsync = function(ctx) {
+EParserListener.prototype.enterFetchOneAsync = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FetchOneAsync.
-EParserListener.prototype.exitFetchOneAsync = function(ctx) {
+EParserListener.prototype.exitFetchOneAsync = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FetchManyAsync.
-EParserListener.prototype.enterFetchManyAsync = function(ctx) {
+EParserListener.prototype.enterFetchManyAsync = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FetchManyAsync.
-EParserListener.prototype.exitFetchManyAsync = function(ctx) {
+EParserListener.prototype.exitFetchManyAsync = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#read_statement.
-EParserListener.prototype.enterRead_statement = function(ctx) {
+EParserListener.prototype.enterRead_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#read_statement.
-EParserListener.prototype.exitRead_statement = function(ctx) {
+EParserListener.prototype.exitRead_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#sorted_expression.
-EParserListener.prototype.enterSorted_expression = function(ctx) {
+EParserListener.prototype.enterSorted_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#sorted_expression.
-EParserListener.prototype.exitSorted_expression = function(ctx) {
+EParserListener.prototype.exitSorted_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArgumentAssignmentListExpression.
-EParserListener.prototype.enterArgumentAssignmentListExpression = function(ctx) {
+EParserListener.prototype.enterArgumentAssignmentListExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArgumentAssignmentListExpression.
-EParserListener.prototype.exitArgumentAssignmentListExpression = function(ctx) {
+EParserListener.prototype.exitArgumentAssignmentListExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArgumentAssignmentListNoExpression.
-EParserListener.prototype.enterArgumentAssignmentListNoExpression = function(ctx) {
+EParserListener.prototype.enterArgumentAssignmentListNoExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArgumentAssignmentListNoExpression.
-EParserListener.prototype.exitArgumentAssignmentListNoExpression = function(ctx) {
+EParserListener.prototype.exitArgumentAssignmentListNoExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArgumentAssignmentList.
-EParserListener.prototype.enterArgumentAssignmentList = function(ctx) {
+EParserListener.prototype.enterArgumentAssignmentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArgumentAssignmentList.
-EParserListener.prototype.exitArgumentAssignmentList = function(ctx) {
+EParserListener.prototype.exitArgumentAssignmentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArgumentAssignmentListItem.
-EParserListener.prototype.enterArgumentAssignmentListItem = function(ctx) {
+EParserListener.prototype.enterArgumentAssignmentListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArgumentAssignmentListItem.
-EParserListener.prototype.exitArgumentAssignmentListItem = function(ctx) {
+EParserListener.prototype.exitArgumentAssignmentListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#argument_assignment.
-EParserListener.prototype.enterArgument_assignment = function(ctx) {
+EParserListener.prototype.enterArgument_assignment = ctx => {
 };
 
 // Exit a parse tree produced by EParser#argument_assignment.
-EParserListener.prototype.exitArgument_assignment = function(ctx) {
+EParserListener.prototype.exitArgument_assignment = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#assign_instance_statement.
-EParserListener.prototype.enterAssign_instance_statement = function(ctx) {
+EParserListener.prototype.enterAssign_instance_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#assign_instance_statement.
-EParserListener.prototype.exitAssign_instance_statement = function(ctx) {
+EParserListener.prototype.exitAssign_instance_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MemberInstance.
-EParserListener.prototype.enterMemberInstance = function(ctx) {
+EParserListener.prototype.enterMemberInstance = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MemberInstance.
-EParserListener.prototype.exitMemberInstance = function(ctx) {
+EParserListener.prototype.exitMemberInstance = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ItemInstance.
-EParserListener.prototype.enterItemInstance = function(ctx) {
+EParserListener.prototype.enterItemInstance = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ItemInstance.
-EParserListener.prototype.exitItemInstance = function(ctx) {
+EParserListener.prototype.exitItemInstance = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#assign_tuple_statement.
-EParserListener.prototype.enterAssign_tuple_statement = function(ctx) {
+EParserListener.prototype.enterAssign_tuple_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#assign_tuple_statement.
-EParserListener.prototype.exitAssign_tuple_statement = function(ctx) {
+EParserListener.prototype.exitAssign_tuple_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#lfs.
-EParserListener.prototype.enterLfs = function(ctx) {
+EParserListener.prototype.enterLfs = ctx => {
 };
 
 // Exit a parse tree produced by EParser#lfs.
-EParserListener.prototype.exitLfs = function(ctx) {
+EParserListener.prototype.exitLfs = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#lfp.
-EParserListener.prototype.enterLfp = function(ctx) {
+EParserListener.prototype.enterLfp = ctx => {
 };
 
 // Exit a parse tree produced by EParser#lfp.
-EParserListener.prototype.exitLfp = function(ctx) {
+EParserListener.prototype.exitLfp = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ws_plus.
-EParserListener.prototype.enterWs_plus = function(ctx) {
+EParserListener.prototype.enterWs_plus = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ws_plus.
-EParserListener.prototype.exitWs_plus = function(ctx) {
+EParserListener.prototype.exitWs_plus = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#indent.
-EParserListener.prototype.enterIndent = function(ctx) {
+EParserListener.prototype.enterIndent = ctx => {
 };
 
 // Exit a parse tree produced by EParser#indent.
-EParserListener.prototype.exitIndent = function(ctx) {
+EParserListener.prototype.exitIndent = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#dedent.
-EParserListener.prototype.enterDedent = function(ctx) {
+EParserListener.prototype.enterDedent = ctx => {
 };
 
 // Exit a parse tree produced by EParser#dedent.
-EParserListener.prototype.exitDedent = function(ctx) {
+EParserListener.prototype.exitDedent = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#type_literal.
-EParserListener.prototype.enterType_literal = function(ctx) {
+EParserListener.prototype.enterType_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#type_literal.
-EParserListener.prototype.exitType_literal = function(ctx) {
+EParserListener.prototype.exitType_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#null_literal.
-EParserListener.prototype.enterNull_literal = function(ctx) {
+EParserListener.prototype.enterNull_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#null_literal.
-EParserListener.prototype.exitNull_literal = function(ctx) {
+EParserListener.prototype.exitNull_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#repl.
-EParserListener.prototype.enterRepl = function(ctx) {
+EParserListener.prototype.enterRepl = ctx => {
 };
 
 // Exit a parse tree produced by EParser#repl.
-EParserListener.prototype.exitRepl = function(ctx) {
+EParserListener.prototype.exitRepl = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#FullDeclarationList.
-EParserListener.prototype.enterFullDeclarationList = function(ctx) {
+EParserListener.prototype.enterFullDeclarationList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#FullDeclarationList.
-EParserListener.prototype.exitFullDeclarationList = function(ctx) {
+EParserListener.prototype.exitFullDeclarationList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#declarations.
-EParserListener.prototype.enterDeclarations = function(ctx) {
+EParserListener.prototype.enterDeclarations = ctx => {
 };
 
 // Exit a parse tree produced by EParser#declarations.
-EParserListener.prototype.exitDeclarations = function(ctx) {
+EParserListener.prototype.exitDeclarations = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#declaration.
-EParserListener.prototype.enterDeclaration = function(ctx) {
+EParserListener.prototype.enterDeclaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#declaration.
-EParserListener.prototype.exitDeclaration = function(ctx) {
+EParserListener.prototype.exitDeclaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#annotation_constructor.
-EParserListener.prototype.enterAnnotation_constructor = function(ctx) {
+EParserListener.prototype.enterAnnotation_constructor = ctx => {
 };
 
 // Exit a parse tree produced by EParser#annotation_constructor.
-EParserListener.prototype.exitAnnotation_constructor = function(ctx) {
+EParserListener.prototype.exitAnnotation_constructor = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#annotation_identifier.
-EParserListener.prototype.enterAnnotation_identifier = function(ctx) {
+EParserListener.prototype.enterAnnotation_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#annotation_identifier.
-EParserListener.prototype.exitAnnotation_identifier = function(ctx) {
+EParserListener.prototype.exitAnnotation_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#annotation_argument.
-EParserListener.prototype.enterAnnotation_argument = function(ctx) {
+EParserListener.prototype.enterAnnotation_argument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#annotation_argument.
-EParserListener.prototype.exitAnnotation_argument = function(ctx) {
+EParserListener.prototype.exitAnnotation_argument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#annotation_argument_name.
-EParserListener.prototype.enterAnnotation_argument_name = function(ctx) {
+EParserListener.prototype.enterAnnotation_argument_name = ctx => {
 };
 
 // Exit a parse tree produced by EParser#annotation_argument_name.
-EParserListener.prototype.exitAnnotation_argument_name = function(ctx) {
+EParserListener.prototype.exitAnnotation_argument_name = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AnnotationLiteralValue.
-EParserListener.prototype.enterAnnotationLiteralValue = function(ctx) {
+EParserListener.prototype.enterAnnotationLiteralValue = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AnnotationLiteralValue.
-EParserListener.prototype.exitAnnotationLiteralValue = function(ctx) {
+EParserListener.prototype.exitAnnotationLiteralValue = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AnnotationTypeValue.
-EParserListener.prototype.enterAnnotationTypeValue = function(ctx) {
+EParserListener.prototype.enterAnnotationTypeValue = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AnnotationTypeValue.
-EParserListener.prototype.exitAnnotationTypeValue = function(ctx) {
+EParserListener.prototype.exitAnnotationTypeValue = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#resource_declaration.
-EParserListener.prototype.enterResource_declaration = function(ctx) {
+EParserListener.prototype.enterResource_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#resource_declaration.
-EParserListener.prototype.exitResource_declaration = function(ctx) {
+EParserListener.prototype.exitResource_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#enum_declaration.
-EParserListener.prototype.enterEnum_declaration = function(ctx) {
+EParserListener.prototype.enterEnum_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#enum_declaration.
-EParserListener.prototype.exitEnum_declaration = function(ctx) {
+EParserListener.prototype.exitEnum_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_symbol_list.
-EParserListener.prototype.enterNative_symbol_list = function(ctx) {
+EParserListener.prototype.enterNative_symbol_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_symbol_list.
-EParserListener.prototype.exitNative_symbol_list = function(ctx) {
+EParserListener.prototype.exitNative_symbol_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#category_symbol_list.
-EParserListener.prototype.enterCategory_symbol_list = function(ctx) {
+EParserListener.prototype.enterCategory_symbol_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#category_symbol_list.
-EParserListener.prototype.exitCategory_symbol_list = function(ctx) {
+EParserListener.prototype.exitCategory_symbol_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#symbol_list.
-EParserListener.prototype.enterSymbol_list = function(ctx) {
+EParserListener.prototype.enterSymbol_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#symbol_list.
-EParserListener.prototype.exitSymbol_list = function(ctx) {
+EParserListener.prototype.exitSymbol_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MatchingList.
-EParserListener.prototype.enterMatchingList = function(ctx) {
+EParserListener.prototype.enterMatchingList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MatchingList.
-EParserListener.prototype.exitMatchingList = function(ctx) {
+EParserListener.prototype.exitMatchingList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MatchingSet.
-EParserListener.prototype.enterMatchingSet = function(ctx) {
+EParserListener.prototype.enterMatchingSet = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MatchingSet.
-EParserListener.prototype.exitMatchingSet = function(ctx) {
+EParserListener.prototype.exitMatchingSet = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MatchingRange.
-EParserListener.prototype.enterMatchingRange = function(ctx) {
+EParserListener.prototype.enterMatchingRange = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MatchingRange.
-EParserListener.prototype.exitMatchingRange = function(ctx) {
+EParserListener.prototype.exitMatchingRange = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MatchingPattern.
-EParserListener.prototype.enterMatchingPattern = function(ctx) {
+EParserListener.prototype.enterMatchingPattern = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MatchingPattern.
-EParserListener.prototype.exitMatchingPattern = function(ctx) {
+EParserListener.prototype.exitMatchingPattern = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MatchingExpression.
-EParserListener.prototype.enterMatchingExpression = function(ctx) {
+EParserListener.prototype.enterMatchingExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MatchingExpression.
-EParserListener.prototype.exitMatchingExpression = function(ctx) {
+EParserListener.prototype.exitMatchingExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#list_literal.
-EParserListener.prototype.enterList_literal = function(ctx) {
+EParserListener.prototype.enterList_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#list_literal.
-EParserListener.prototype.exitList_literal = function(ctx) {
+EParserListener.prototype.exitList_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#set_literal.
-EParserListener.prototype.enterSet_literal = function(ctx) {
+EParserListener.prototype.enterSet_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#set_literal.
-EParserListener.prototype.exitSet_literal = function(ctx) {
+EParserListener.prototype.exitSet_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#expression_list.
-EParserListener.prototype.enterExpression_list = function(ctx) {
+EParserListener.prototype.enterExpression_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#expression_list.
-EParserListener.prototype.exitExpression_list = function(ctx) {
+EParserListener.prototype.exitExpression_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#range_literal.
-EParserListener.prototype.enterRange_literal = function(ctx) {
+EParserListener.prototype.enterRange_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#range_literal.
-EParserListener.prototype.exitRange_literal = function(ctx) {
+EParserListener.prototype.exitRange_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IteratorType.
-EParserListener.prototype.enterIteratorType = function(ctx) {
+EParserListener.prototype.enterIteratorType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IteratorType.
-EParserListener.prototype.exitIteratorType = function(ctx) {
+EParserListener.prototype.exitIteratorType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SetType.
-EParserListener.prototype.enterSetType = function(ctx) {
+EParserListener.prototype.enterSetType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SetType.
-EParserListener.prototype.exitSetType = function(ctx) {
+EParserListener.prototype.exitSetType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ListType.
-EParserListener.prototype.enterListType = function(ctx) {
+EParserListener.prototype.enterListType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ListType.
-EParserListener.prototype.exitListType = function(ctx) {
+EParserListener.prototype.exitListType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DictType.
-EParserListener.prototype.enterDictType = function(ctx) {
+EParserListener.prototype.enterDictType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DictType.
-EParserListener.prototype.exitDictType = function(ctx) {
+EParserListener.prototype.exitDictType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CursorType.
-EParserListener.prototype.enterCursorType = function(ctx) {
+EParserListener.prototype.enterCursorType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CursorType.
-EParserListener.prototype.exitCursorType = function(ctx) {
+EParserListener.prototype.exitCursorType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PrimaryType.
-EParserListener.prototype.enterPrimaryType = function(ctx) {
+EParserListener.prototype.enterPrimaryType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PrimaryType.
-EParserListener.prototype.exitPrimaryType = function(ctx) {
+EParserListener.prototype.exitPrimaryType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NativeType.
-EParserListener.prototype.enterNativeType = function(ctx) {
+EParserListener.prototype.enterNativeType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NativeType.
-EParserListener.prototype.exitNativeType = function(ctx) {
+EParserListener.prototype.exitNativeType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CategoryType.
-EParserListener.prototype.enterCategoryType = function(ctx) {
+EParserListener.prototype.enterCategoryType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CategoryType.
-EParserListener.prototype.exitCategoryType = function(ctx) {
+EParserListener.prototype.exitCategoryType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#BooleanType.
-EParserListener.prototype.enterBooleanType = function(ctx) {
+EParserListener.prototype.enterBooleanType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#BooleanType.
-EParserListener.prototype.exitBooleanType = function(ctx) {
+EParserListener.prototype.exitBooleanType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CssType.
-EParserListener.prototype.enterCssType = function(ctx) {
+EParserListener.prototype.enterCssType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CssType.
-EParserListener.prototype.exitCssType = function(ctx) {
+EParserListener.prototype.exitCssType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CharacterType.
-EParserListener.prototype.enterCharacterType = function(ctx) {
+EParserListener.prototype.enterCharacterType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CharacterType.
-EParserListener.prototype.exitCharacterType = function(ctx) {
+EParserListener.prototype.exitCharacterType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TextType.
-EParserListener.prototype.enterTextType = function(ctx) {
+EParserListener.prototype.enterTextType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TextType.
-EParserListener.prototype.exitTextType = function(ctx) {
+EParserListener.prototype.exitTextType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ImageType.
-EParserListener.prototype.enterImageType = function(ctx) {
+EParserListener.prototype.enterImageType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ImageType.
-EParserListener.prototype.exitImageType = function(ctx) {
+EParserListener.prototype.exitImageType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IntegerType.
-EParserListener.prototype.enterIntegerType = function(ctx) {
+EParserListener.prototype.enterIntegerType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IntegerType.
-EParserListener.prototype.exitIntegerType = function(ctx) {
+EParserListener.prototype.exitIntegerType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DecimalType.
-EParserListener.prototype.enterDecimalType = function(ctx) {
+EParserListener.prototype.enterDecimalType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DecimalType.
-EParserListener.prototype.exitDecimalType = function(ctx) {
+EParserListener.prototype.exitDecimalType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DocumentType.
-EParserListener.prototype.enterDocumentType = function(ctx) {
+EParserListener.prototype.enterDocumentType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DocumentType.
-EParserListener.prototype.exitDocumentType = function(ctx) {
+EParserListener.prototype.exitDocumentType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DateType.
-EParserListener.prototype.enterDateType = function(ctx) {
+EParserListener.prototype.enterDateType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DateType.
-EParserListener.prototype.exitDateType = function(ctx) {
+EParserListener.prototype.exitDateType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DateTimeType.
-EParserListener.prototype.enterDateTimeType = function(ctx) {
+EParserListener.prototype.enterDateTimeType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DateTimeType.
-EParserListener.prototype.exitDateTimeType = function(ctx) {
+EParserListener.prototype.exitDateTimeType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TimeType.
-EParserListener.prototype.enterTimeType = function(ctx) {
+EParserListener.prototype.enterTimeType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TimeType.
-EParserListener.prototype.exitTimeType = function(ctx) {
+EParserListener.prototype.exitTimeType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PeriodType.
-EParserListener.prototype.enterPeriodType = function(ctx) {
+EParserListener.prototype.enterPeriodType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PeriodType.
-EParserListener.prototype.exitPeriodType = function(ctx) {
+EParserListener.prototype.exitPeriodType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#VersionType.
-EParserListener.prototype.enterVersionType = function(ctx) {
+EParserListener.prototype.enterVersionType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#VersionType.
-EParserListener.prototype.exitVersionType = function(ctx) {
+EParserListener.prototype.exitVersionType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CodeType.
-EParserListener.prototype.enterCodeType = function(ctx) {
+EParserListener.prototype.enterCodeType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CodeType.
-EParserListener.prototype.exitCodeType = function(ctx) {
+EParserListener.prototype.exitCodeType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#BlobType.
-EParserListener.prototype.enterBlobType = function(ctx) {
+EParserListener.prototype.enterBlobType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#BlobType.
-EParserListener.prototype.exitBlobType = function(ctx) {
+EParserListener.prototype.exitBlobType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#UUIDType.
-EParserListener.prototype.enterUUIDType = function(ctx) {
+EParserListener.prototype.enterUUIDType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#UUIDType.
-EParserListener.prototype.exitUUIDType = function(ctx) {
+EParserListener.prototype.exitUUIDType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#HtmlType.
-EParserListener.prototype.enterHtmlType = function(ctx) {
+EParserListener.prototype.enterHtmlType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#HtmlType.
-EParserListener.prototype.exitHtmlType = function(ctx) {
+EParserListener.prototype.exitHtmlType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#category_type.
-EParserListener.prototype.enterCategory_type = function(ctx) {
+EParserListener.prototype.enterCategory_type = ctx => {
 };
 
 // Exit a parse tree produced by EParser#category_type.
-EParserListener.prototype.exitCategory_type = function(ctx) {
+EParserListener.prototype.exitCategory_type = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#mutable_category_type.
-EParserListener.prototype.enterMutable_category_type = function(ctx) {
+EParserListener.prototype.enterMutable_category_type = ctx => {
 };
 
 // Exit a parse tree produced by EParser#mutable_category_type.
-EParserListener.prototype.exitMutable_category_type = function(ctx) {
+EParserListener.prototype.exitMutable_category_type = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#code_type.
-EParserListener.prototype.enterCode_type = function(ctx) {
+EParserListener.prototype.enterCode_type = ctx => {
 };
 
 // Exit a parse tree produced by EParser#code_type.
-EParserListener.prototype.exitCode_type = function(ctx) {
+EParserListener.prototype.exitCode_type = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ConcreteCategoryDeclaration.
-EParserListener.prototype.enterConcreteCategoryDeclaration = function(ctx) {
+EParserListener.prototype.enterConcreteCategoryDeclaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ConcreteCategoryDeclaration.
-EParserListener.prototype.exitConcreteCategoryDeclaration = function(ctx) {
+EParserListener.prototype.exitConcreteCategoryDeclaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NativeCategoryDeclaration.
-EParserListener.prototype.enterNativeCategoryDeclaration = function(ctx) {
+EParserListener.prototype.enterNativeCategoryDeclaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NativeCategoryDeclaration.
-EParserListener.prototype.exitNativeCategoryDeclaration = function(ctx) {
+EParserListener.prototype.exitNativeCategoryDeclaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SingletonCategoryDeclaration.
-EParserListener.prototype.enterSingletonCategoryDeclaration = function(ctx) {
+EParserListener.prototype.enterSingletonCategoryDeclaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SingletonCategoryDeclaration.
-EParserListener.prototype.exitSingletonCategoryDeclaration = function(ctx) {
+EParserListener.prototype.exitSingletonCategoryDeclaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ConcreteWidgetDeclaration.
-EParserListener.prototype.enterConcreteWidgetDeclaration = function(ctx) {
+EParserListener.prototype.enterConcreteWidgetDeclaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ConcreteWidgetDeclaration.
-EParserListener.prototype.exitConcreteWidgetDeclaration = function(ctx) {
+EParserListener.prototype.exitConcreteWidgetDeclaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NativeWidgetDeclaration.
-EParserListener.prototype.enterNativeWidgetDeclaration = function(ctx) {
+EParserListener.prototype.enterNativeWidgetDeclaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NativeWidgetDeclaration.
-EParserListener.prototype.exitNativeWidgetDeclaration = function(ctx) {
+EParserListener.prototype.exitNativeWidgetDeclaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#type_identifier_list.
-EParserListener.prototype.enterType_identifier_list = function(ctx) {
+EParserListener.prototype.enterType_identifier_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#type_identifier_list.
-EParserListener.prototype.exitType_identifier_list = function(ctx) {
+EParserListener.prototype.exitType_identifier_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#method_identifier.
-EParserListener.prototype.enterMethod_identifier = function(ctx) {
+EParserListener.prototype.enterMethod_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#method_identifier.
-EParserListener.prototype.exitMethod_identifier = function(ctx) {
+EParserListener.prototype.exitMethod_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#identifier_or_keyword.
-EParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
+EParserListener.prototype.enterIdentifier_or_keyword = ctx => {
 };
 
 // Exit a parse tree produced by EParser#identifier_or_keyword.
-EParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
+EParserListener.prototype.exitIdentifier_or_keyword = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#nospace_hyphen_identifier_or_keyword.
-EParserListener.prototype.enterNospace_hyphen_identifier_or_keyword = function(ctx) {
+EParserListener.prototype.enterNospace_hyphen_identifier_or_keyword = ctx => {
 };
 
 // Exit a parse tree produced by EParser#nospace_hyphen_identifier_or_keyword.
-EParserListener.prototype.exitNospace_hyphen_identifier_or_keyword = function(ctx) {
+EParserListener.prototype.exitNospace_hyphen_identifier_or_keyword = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#nospace_identifier_or_keyword.
-EParserListener.prototype.enterNospace_identifier_or_keyword = function(ctx) {
+EParserListener.prototype.enterNospace_identifier_or_keyword = ctx => {
 };
 
 // Exit a parse tree produced by EParser#nospace_identifier_or_keyword.
-EParserListener.prototype.exitNospace_identifier_or_keyword = function(ctx) {
+EParserListener.prototype.exitNospace_identifier_or_keyword = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#VariableIdentifier.
-EParserListener.prototype.enterVariableIdentifier = function(ctx) {
+EParserListener.prototype.enterVariableIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#VariableIdentifier.
-EParserListener.prototype.exitVariableIdentifier = function(ctx) {
+EParserListener.prototype.exitVariableIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TypeIdentifier.
-EParserListener.prototype.enterTypeIdentifier = function(ctx) {
+EParserListener.prototype.enterTypeIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TypeIdentifier.
-EParserListener.prototype.exitTypeIdentifier = function(ctx) {
+EParserListener.prototype.exitTypeIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SymbolIdentifier.
-EParserListener.prototype.enterSymbolIdentifier = function(ctx) {
+EParserListener.prototype.enterSymbolIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SymbolIdentifier.
-EParserListener.prototype.exitSymbolIdentifier = function(ctx) {
+EParserListener.prototype.exitSymbolIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#member_identifier.
-EParserListener.prototype.enterMember_identifier = function(ctx) {
+EParserListener.prototype.enterMember_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#member_identifier.
-EParserListener.prototype.exitMember_identifier = function(ctx) {
+EParserListener.prototype.exitMember_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#variable_identifier.
-EParserListener.prototype.enterVariable_identifier = function(ctx) {
+EParserListener.prototype.enterVariable_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#variable_identifier.
-EParserListener.prototype.exitVariable_identifier = function(ctx) {
+EParserListener.prototype.exitVariable_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#attribute_identifier.
-EParserListener.prototype.enterAttribute_identifier = function(ctx) {
+EParserListener.prototype.enterAttribute_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#attribute_identifier.
-EParserListener.prototype.exitAttribute_identifier = function(ctx) {
+EParserListener.prototype.exitAttribute_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#type_identifier.
-EParserListener.prototype.enterType_identifier = function(ctx) {
+EParserListener.prototype.enterType_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#type_identifier.
-EParserListener.prototype.exitType_identifier = function(ctx) {
+EParserListener.prototype.exitType_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#symbol_identifier.
-EParserListener.prototype.enterSymbol_identifier = function(ctx) {
+EParserListener.prototype.enterSymbol_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#symbol_identifier.
-EParserListener.prototype.exitSymbol_identifier = function(ctx) {
+EParserListener.prototype.exitSymbol_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#argument_list.
-EParserListener.prototype.enterArgument_list = function(ctx) {
+EParserListener.prototype.enterArgument_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#argument_list.
-EParserListener.prototype.exitArgument_list = function(ctx) {
+EParserListener.prototype.exitArgument_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CodeArgument.
-EParserListener.prototype.enterCodeArgument = function(ctx) {
+EParserListener.prototype.enterCodeArgument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CodeArgument.
-EParserListener.prototype.exitCodeArgument = function(ctx) {
+EParserListener.prototype.exitCodeArgument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorArgument.
-EParserListener.prototype.enterOperatorArgument = function(ctx) {
+EParserListener.prototype.enterOperatorArgument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorArgument.
-EParserListener.prototype.exitOperatorArgument = function(ctx) {
+EParserListener.prototype.exitOperatorArgument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#operator_argument.
-EParserListener.prototype.enterOperator_argument = function(ctx) {
+EParserListener.prototype.enterOperator_argument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#operator_argument.
-EParserListener.prototype.exitOperator_argument = function(ctx) {
+EParserListener.prototype.exitOperator_argument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#named_argument.
-EParserListener.prototype.enterNamed_argument = function(ctx) {
+EParserListener.prototype.enterNamed_argument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#named_argument.
-EParserListener.prototype.exitNamed_argument = function(ctx) {
+EParserListener.prototype.exitNamed_argument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#code_argument.
-EParserListener.prototype.enterCode_argument = function(ctx) {
+EParserListener.prototype.enterCode_argument = ctx => {
 };
 
 // Exit a parse tree produced by EParser#code_argument.
-EParserListener.prototype.exitCode_argument = function(ctx) {
+EParserListener.prototype.exitCode_argument = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#category_or_any_type.
-EParserListener.prototype.enterCategory_or_any_type = function(ctx) {
+EParserListener.prototype.enterCategory_or_any_type = ctx => {
 };
 
 // Exit a parse tree produced by EParser#category_or_any_type.
-EParserListener.prototype.exitCategory_or_any_type = function(ctx) {
+EParserListener.prototype.exitCategory_or_any_type = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AnyListType.
-EParserListener.prototype.enterAnyListType = function(ctx) {
+EParserListener.prototype.enterAnyListType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AnyListType.
-EParserListener.prototype.exitAnyListType = function(ctx) {
+EParserListener.prototype.exitAnyListType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AnyType.
-EParserListener.prototype.enterAnyType = function(ctx) {
+EParserListener.prototype.enterAnyType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AnyType.
-EParserListener.prototype.exitAnyType = function(ctx) {
+EParserListener.prototype.exitAnyType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#AnyDictType.
-EParserListener.prototype.enterAnyDictType = function(ctx) {
+EParserListener.prototype.enterAnyDictType = ctx => {
 };
 
 // Exit a parse tree produced by EParser#AnyDictType.
-EParserListener.prototype.exitAnyDictType = function(ctx) {
+EParserListener.prototype.exitAnyDictType = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#member_method_declaration_list.
-EParserListener.prototype.enterMember_method_declaration_list = function(ctx) {
+EParserListener.prototype.enterMember_method_declaration_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#member_method_declaration_list.
-EParserListener.prototype.exitMember_method_declaration_list = function(ctx) {
+EParserListener.prototype.exitMember_method_declaration_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#member_method_declaration.
-EParserListener.prototype.enterMember_method_declaration = function(ctx) {
+EParserListener.prototype.enterMember_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#member_method_declaration.
-EParserListener.prototype.exitMember_method_declaration = function(ctx) {
+EParserListener.prototype.exitMember_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_member_method_declaration_list.
-EParserListener.prototype.enterNative_member_method_declaration_list = function(ctx) {
+EParserListener.prototype.enterNative_member_method_declaration_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_member_method_declaration_list.
-EParserListener.prototype.exitNative_member_method_declaration_list = function(ctx) {
+EParserListener.prototype.exitNative_member_method_declaration_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_member_method_declaration.
-EParserListener.prototype.enterNative_member_method_declaration = function(ctx) {
+EParserListener.prototype.enterNative_member_method_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_member_method_declaration.
-EParserListener.prototype.exitNative_member_method_declaration = function(ctx) {
+EParserListener.prototype.exitNative_member_method_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaCategoryBinding.
-EParserListener.prototype.enterJavaCategoryBinding = function(ctx) {
+EParserListener.prototype.enterJavaCategoryBinding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaCategoryBinding.
-EParserListener.prototype.exitJavaCategoryBinding = function(ctx) {
+EParserListener.prototype.exitJavaCategoryBinding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpCategoryBinding.
-EParserListener.prototype.enterCSharpCategoryBinding = function(ctx) {
+EParserListener.prototype.enterCSharpCategoryBinding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpCategoryBinding.
-EParserListener.prototype.exitCSharpCategoryBinding = function(ctx) {
+EParserListener.prototype.exitCSharpCategoryBinding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#Python2CategoryBinding.
-EParserListener.prototype.enterPython2CategoryBinding = function(ctx) {
+EParserListener.prototype.enterPython2CategoryBinding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#Python2CategoryBinding.
-EParserListener.prototype.exitPython2CategoryBinding = function(ctx) {
+EParserListener.prototype.exitPython2CategoryBinding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#Python3CategoryBinding.
-EParserListener.prototype.enterPython3CategoryBinding = function(ctx) {
+EParserListener.prototype.enterPython3CategoryBinding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#Python3CategoryBinding.
-EParserListener.prototype.exitPython3CategoryBinding = function(ctx) {
+EParserListener.prototype.exitPython3CategoryBinding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaScriptCategoryBinding.
-EParserListener.prototype.enterJavaScriptCategoryBinding = function(ctx) {
+EParserListener.prototype.enterJavaScriptCategoryBinding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaScriptCategoryBinding.
-EParserListener.prototype.exitJavaScriptCategoryBinding = function(ctx) {
+EParserListener.prototype.exitJavaScriptCategoryBinding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_category_binding.
-EParserListener.prototype.enterPython_category_binding = function(ctx) {
+EParserListener.prototype.enterPython_category_binding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_category_binding.
-EParserListener.prototype.exitPython_category_binding = function(ctx) {
+EParserListener.prototype.exitPython_category_binding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_module.
-EParserListener.prototype.enterPython_module = function(ctx) {
+EParserListener.prototype.enterPython_module = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_module.
-EParserListener.prototype.exitPython_module = function(ctx) {
+EParserListener.prototype.exitPython_module = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_category_binding.
-EParserListener.prototype.enterJavascript_category_binding = function(ctx) {
+EParserListener.prototype.enterJavascript_category_binding = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_category_binding.
-EParserListener.prototype.exitJavascript_category_binding = function(ctx) {
+EParserListener.prototype.exitJavascript_category_binding = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_module.
-EParserListener.prototype.enterJavascript_module = function(ctx) {
+EParserListener.prototype.enterJavascript_module = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_module.
-EParserListener.prototype.exitJavascript_module = function(ctx) {
+EParserListener.prototype.exitJavascript_module = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#variable_identifier_list.
-EParserListener.prototype.enterVariable_identifier_list = function(ctx) {
+EParserListener.prototype.enterVariable_identifier_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#variable_identifier_list.
-EParserListener.prototype.exitVariable_identifier_list = function(ctx) {
+EParserListener.prototype.exitVariable_identifier_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#attribute_identifier_list.
-EParserListener.prototype.enterAttribute_identifier_list = function(ctx) {
+EParserListener.prototype.enterAttribute_identifier_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#attribute_identifier_list.
-EParserListener.prototype.exitAttribute_identifier_list = function(ctx) {
+EParserListener.prototype.exitAttribute_identifier_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#method_declaration.
-EParserListener.prototype.enterMethod_declaration = function(ctx) {
+EParserListener.prototype.enterMethod_declaration = ctx => {
 };
 
 // Exit a parse tree produced by EParser#method_declaration.
-EParserListener.prototype.exitMethod_declaration = function(ctx) {
+EParserListener.prototype.exitMethod_declaration = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#comment_statement.
-EParserListener.prototype.enterComment_statement = function(ctx) {
+EParserListener.prototype.enterComment_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#comment_statement.
-EParserListener.prototype.exitComment_statement = function(ctx) {
+EParserListener.prototype.exitComment_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#native_statement_list.
-EParserListener.prototype.enterNative_statement_list = function(ctx) {
+EParserListener.prototype.enterNative_statement_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#native_statement_list.
-EParserListener.prototype.exitNative_statement_list = function(ctx) {
+EParserListener.prototype.exitNative_statement_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaNativeStatement.
-EParserListener.prototype.enterJavaNativeStatement = function(ctx) {
+EParserListener.prototype.enterJavaNativeStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaNativeStatement.
-EParserListener.prototype.exitJavaNativeStatement = function(ctx) {
+EParserListener.prototype.exitJavaNativeStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpNativeStatement.
-EParserListener.prototype.enterCSharpNativeStatement = function(ctx) {
+EParserListener.prototype.enterCSharpNativeStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpNativeStatement.
-EParserListener.prototype.exitCSharpNativeStatement = function(ctx) {
+EParserListener.prototype.exitCSharpNativeStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#Python2NativeStatement.
-EParserListener.prototype.enterPython2NativeStatement = function(ctx) {
+EParserListener.prototype.enterPython2NativeStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#Python2NativeStatement.
-EParserListener.prototype.exitPython2NativeStatement = function(ctx) {
+EParserListener.prototype.exitPython2NativeStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#Python3NativeStatement.
-EParserListener.prototype.enterPython3NativeStatement = function(ctx) {
+EParserListener.prototype.enterPython3NativeStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#Python3NativeStatement.
-EParserListener.prototype.exitPython3NativeStatement = function(ctx) {
+EParserListener.prototype.exitPython3NativeStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaScriptNativeStatement.
-EParserListener.prototype.enterJavaScriptNativeStatement = function(ctx) {
+EParserListener.prototype.enterJavaScriptNativeStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaScriptNativeStatement.
-EParserListener.prototype.exitJavaScriptNativeStatement = function(ctx) {
+EParserListener.prototype.exitJavaScriptNativeStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_native_statement.
-EParserListener.prototype.enterPython_native_statement = function(ctx) {
+EParserListener.prototype.enterPython_native_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_native_statement.
-EParserListener.prototype.exitPython_native_statement = function(ctx) {
+EParserListener.prototype.exitPython_native_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_native_statement.
-EParserListener.prototype.enterJavascript_native_statement = function(ctx) {
+EParserListener.prototype.enterJavascript_native_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_native_statement.
-EParserListener.prototype.exitJavascript_native_statement = function(ctx) {
+EParserListener.prototype.exitJavascript_native_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#statement_list.
-EParserListener.prototype.enterStatement_list = function(ctx) {
+EParserListener.prototype.enterStatement_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#statement_list.
-EParserListener.prototype.exitStatement_list = function(ctx) {
+EParserListener.prototype.exitStatement_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#assertion_list.
-EParserListener.prototype.enterAssertion_list = function(ctx) {
+EParserListener.prototype.enterAssertion_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#assertion_list.
-EParserListener.prototype.exitAssertion_list = function(ctx) {
+EParserListener.prototype.exitAssertion_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#switch_case_statement_list.
-EParserListener.prototype.enterSwitch_case_statement_list = function(ctx) {
+EParserListener.prototype.enterSwitch_case_statement_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#switch_case_statement_list.
-EParserListener.prototype.exitSwitch_case_statement_list = function(ctx) {
+EParserListener.prototype.exitSwitch_case_statement_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#catch_statement_list.
-EParserListener.prototype.enterCatch_statement_list = function(ctx) {
+EParserListener.prototype.enterCatch_statement_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#catch_statement_list.
-EParserListener.prototype.exitCatch_statement_list = function(ctx) {
+EParserListener.prototype.exitCatch_statement_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#LiteralRangeLiteral.
-EParserListener.prototype.enterLiteralRangeLiteral = function(ctx) {
+EParserListener.prototype.enterLiteralRangeLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#LiteralRangeLiteral.
-EParserListener.prototype.exitLiteralRangeLiteral = function(ctx) {
+EParserListener.prototype.exitLiteralRangeLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#LiteralListLiteral.
-EParserListener.prototype.enterLiteralListLiteral = function(ctx) {
+EParserListener.prototype.enterLiteralListLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#LiteralListLiteral.
-EParserListener.prototype.exitLiteralListLiteral = function(ctx) {
+EParserListener.prototype.exitLiteralListLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#LiteralSetLiteral.
-EParserListener.prototype.enterLiteralSetLiteral = function(ctx) {
+EParserListener.prototype.enterLiteralSetLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#LiteralSetLiteral.
-EParserListener.prototype.exitLiteralSetLiteral = function(ctx) {
+EParserListener.prototype.exitLiteralSetLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MinIntegerLiteral.
-EParserListener.prototype.enterMinIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterMinIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MinIntegerLiteral.
-EParserListener.prototype.exitMinIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitMinIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#MaxIntegerLiteral.
-EParserListener.prototype.enterMaxIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterMaxIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#MaxIntegerLiteral.
-EParserListener.prototype.exitMaxIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitMaxIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IntegerLiteral.
-EParserListener.prototype.enterIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IntegerLiteral.
-EParserListener.prototype.exitIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#HexadecimalLiteral.
-EParserListener.prototype.enterHexadecimalLiteral = function(ctx) {
+EParserListener.prototype.enterHexadecimalLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#HexadecimalLiteral.
-EParserListener.prototype.exitHexadecimalLiteral = function(ctx) {
+EParserListener.prototype.exitHexadecimalLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CharacterLiteral.
-EParserListener.prototype.enterCharacterLiteral = function(ctx) {
+EParserListener.prototype.enterCharacterLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CharacterLiteral.
-EParserListener.prototype.exitCharacterLiteral = function(ctx) {
+EParserListener.prototype.exitCharacterLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DateLiteral.
-EParserListener.prototype.enterDateLiteral = function(ctx) {
+EParserListener.prototype.enterDateLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DateLiteral.
-EParserListener.prototype.exitDateLiteral = function(ctx) {
+EParserListener.prototype.exitDateLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TimeLiteral.
-EParserListener.prototype.enterTimeLiteral = function(ctx) {
+EParserListener.prototype.enterTimeLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TimeLiteral.
-EParserListener.prototype.exitTimeLiteral = function(ctx) {
+EParserListener.prototype.exitTimeLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TextLiteral.
-EParserListener.prototype.enterTextLiteral = function(ctx) {
+EParserListener.prototype.enterTextLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TextLiteral.
-EParserListener.prototype.exitTextLiteral = function(ctx) {
+EParserListener.prototype.exitTextLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DecimalLiteral.
-EParserListener.prototype.enterDecimalLiteral = function(ctx) {
+EParserListener.prototype.enterDecimalLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DecimalLiteral.
-EParserListener.prototype.exitDecimalLiteral = function(ctx) {
+EParserListener.prototype.exitDecimalLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DateTimeLiteral.
-EParserListener.prototype.enterDateTimeLiteral = function(ctx) {
+EParserListener.prototype.enterDateTimeLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DateTimeLiteral.
-EParserListener.prototype.exitDateTimeLiteral = function(ctx) {
+EParserListener.prototype.exitDateTimeLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#BooleanLiteral.
-EParserListener.prototype.enterBooleanLiteral = function(ctx) {
+EParserListener.prototype.enterBooleanLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#BooleanLiteral.
-EParserListener.prototype.exitBooleanLiteral = function(ctx) {
+EParserListener.prototype.exitBooleanLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PeriodLiteral.
-EParserListener.prototype.enterPeriodLiteral = function(ctx) {
+EParserListener.prototype.enterPeriodLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PeriodLiteral.
-EParserListener.prototype.exitPeriodLiteral = function(ctx) {
+EParserListener.prototype.exitPeriodLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#VersionLiteral.
-EParserListener.prototype.enterVersionLiteral = function(ctx) {
+EParserListener.prototype.enterVersionLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#VersionLiteral.
-EParserListener.prototype.exitVersionLiteral = function(ctx) {
+EParserListener.prototype.exitVersionLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#UUIDLiteral.
-EParserListener.prototype.enterUUIDLiteral = function(ctx) {
+EParserListener.prototype.enterUUIDLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#UUIDLiteral.
-EParserListener.prototype.exitUUIDLiteral = function(ctx) {
+EParserListener.prototype.exitUUIDLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SymbolLiteral.
-EParserListener.prototype.enterSymbolLiteral = function(ctx) {
+EParserListener.prototype.enterSymbolLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SymbolLiteral.
-EParserListener.prototype.exitSymbolLiteral = function(ctx) {
+EParserListener.prototype.exitSymbolLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#TypeLiteral.
-EParserListener.prototype.enterTypeLiteral = function(ctx) {
+EParserListener.prototype.enterTypeLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#TypeLiteral.
-EParserListener.prototype.exitTypeLiteral = function(ctx) {
+EParserListener.prototype.exitTypeLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#NullLiteral.
-EParserListener.prototype.enterNullLiteral = function(ctx) {
+EParserListener.prototype.enterNullLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#NullLiteral.
-EParserListener.prototype.exitNullLiteral = function(ctx) {
+EParserListener.prototype.exitNullLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#literal_list_literal.
-EParserListener.prototype.enterLiteral_list_literal = function(ctx) {
+EParserListener.prototype.enterLiteral_list_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#literal_list_literal.
-EParserListener.prototype.exitLiteral_list_literal = function(ctx) {
+EParserListener.prototype.exitLiteral_list_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#this_expression.
-EParserListener.prototype.enterThis_expression = function(ctx) {
+EParserListener.prototype.enterThis_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#this_expression.
-EParserListener.prototype.exitThis_expression = function(ctx) {
+EParserListener.prototype.exitThis_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#super_expression.
-EParserListener.prototype.enterSuper_expression = function(ctx) {
+EParserListener.prototype.enterSuper_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#super_expression.
-EParserListener.prototype.exitSuper_expression = function(ctx) {
+EParserListener.prototype.exitSuper_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#parenthesis_expression.
-EParserListener.prototype.enterParenthesis_expression = function(ctx) {
+EParserListener.prototype.enterParenthesis_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#parenthesis_expression.
-EParserListener.prototype.exitParenthesis_expression = function(ctx) {
+EParserListener.prototype.exitParenthesis_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#literal_expression.
-EParserListener.prototype.enterLiteral_expression = function(ctx) {
+EParserListener.prototype.enterLiteral_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#literal_expression.
-EParserListener.prototype.exitLiteral_expression = function(ctx) {
+EParserListener.prototype.exitLiteral_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#collection_literal.
-EParserListener.prototype.enterCollection_literal = function(ctx) {
+EParserListener.prototype.enterCollection_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#collection_literal.
-EParserListener.prototype.exitCollection_literal = function(ctx) {
+EParserListener.prototype.exitCollection_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#tuple_literal.
-EParserListener.prototype.enterTuple_literal = function(ctx) {
+EParserListener.prototype.enterTuple_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#tuple_literal.
-EParserListener.prototype.exitTuple_literal = function(ctx) {
+EParserListener.prototype.exitTuple_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#dict_literal.
-EParserListener.prototype.enterDict_literal = function(ctx) {
+EParserListener.prototype.enterDict_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#dict_literal.
-EParserListener.prototype.exitDict_literal = function(ctx) {
+EParserListener.prototype.exitDict_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#document_literal.
-EParserListener.prototype.enterDocument_literal = function(ctx) {
+EParserListener.prototype.enterDocument_literal = ctx => {
 };
 
 // Exit a parse tree produced by EParser#document_literal.
-EParserListener.prototype.exitDocument_literal = function(ctx) {
+EParserListener.prototype.exitDocument_literal = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#expression_tuple.
-EParserListener.prototype.enterExpression_tuple = function(ctx) {
+EParserListener.prototype.enterExpression_tuple = ctx => {
 };
 
 // Exit a parse tree produced by EParser#expression_tuple.
-EParserListener.prototype.exitExpression_tuple = function(ctx) {
+EParserListener.prototype.exitExpression_tuple = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#doc_entry_list.
-EParserListener.prototype.enterDoc_entry_list = function(ctx) {
+EParserListener.prototype.enterDoc_entry_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#doc_entry_list.
-EParserListener.prototype.exitDoc_entry_list = function(ctx) {
+EParserListener.prototype.exitDoc_entry_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#doc_entry.
-EParserListener.prototype.enterDoc_entry = function(ctx) {
+EParserListener.prototype.enterDoc_entry = ctx => {
 };
 
 // Exit a parse tree produced by EParser#doc_entry.
-EParserListener.prototype.exitDoc_entry = function(ctx) {
+EParserListener.prototype.exitDoc_entry = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DocKeyIdentifier.
-EParserListener.prototype.enterDocKeyIdentifier = function(ctx) {
+EParserListener.prototype.enterDocKeyIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DocKeyIdentifier.
-EParserListener.prototype.exitDocKeyIdentifier = function(ctx) {
+EParserListener.prototype.exitDocKeyIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DocKeyText.
-EParserListener.prototype.enterDocKeyText = function(ctx) {
+EParserListener.prototype.enterDocKeyText = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DocKeyText.
-EParserListener.prototype.exitDocKeyText = function(ctx) {
+EParserListener.prototype.exitDocKeyText = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#dict_entry_list.
-EParserListener.prototype.enterDict_entry_list = function(ctx) {
+EParserListener.prototype.enterDict_entry_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#dict_entry_list.
-EParserListener.prototype.exitDict_entry_list = function(ctx) {
+EParserListener.prototype.exitDict_entry_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#dict_entry.
-EParserListener.prototype.enterDict_entry = function(ctx) {
+EParserListener.prototype.enterDict_entry = ctx => {
 };
 
 // Exit a parse tree produced by EParser#dict_entry.
-EParserListener.prototype.exitDict_entry = function(ctx) {
+EParserListener.prototype.exitDict_entry = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DictKeyIdentifier.
-EParserListener.prototype.enterDictKeyIdentifier = function(ctx) {
+EParserListener.prototype.enterDictKeyIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DictKeyIdentifier.
-EParserListener.prototype.exitDictKeyIdentifier = function(ctx) {
+EParserListener.prototype.exitDictKeyIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#DictKeyText.
-EParserListener.prototype.enterDictKeyText = function(ctx) {
+EParserListener.prototype.enterDictKeyText = ctx => {
 };
 
 // Exit a parse tree produced by EParser#DictKeyText.
-EParserListener.prototype.exitDictKeyText = function(ctx) {
+EParserListener.prototype.exitDictKeyText = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SliceFirstAndLast.
-EParserListener.prototype.enterSliceFirstAndLast = function(ctx) {
+EParserListener.prototype.enterSliceFirstAndLast = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SliceFirstAndLast.
-EParserListener.prototype.exitSliceFirstAndLast = function(ctx) {
+EParserListener.prototype.exitSliceFirstAndLast = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SliceFirstOnly.
-EParserListener.prototype.enterSliceFirstOnly = function(ctx) {
+EParserListener.prototype.enterSliceFirstOnly = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SliceFirstOnly.
-EParserListener.prototype.exitSliceFirstOnly = function(ctx) {
+EParserListener.prototype.exitSliceFirstOnly = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#SliceLastOnly.
-EParserListener.prototype.enterSliceLastOnly = function(ctx) {
+EParserListener.prototype.enterSliceLastOnly = ctx => {
 };
 
 // Exit a parse tree produced by EParser#SliceLastOnly.
-EParserListener.prototype.exitSliceLastOnly = function(ctx) {
+EParserListener.prototype.exitSliceLastOnly = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#assign_variable_statement.
-EParserListener.prototype.enterAssign_variable_statement = function(ctx) {
+EParserListener.prototype.enterAssign_variable_statement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#assign_variable_statement.
-EParserListener.prototype.exitAssign_variable_statement = function(ctx) {
+EParserListener.prototype.exitAssign_variable_statement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ChildInstance.
-EParserListener.prototype.enterChildInstance = function(ctx) {
+EParserListener.prototype.enterChildInstance = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ChildInstance.
-EParserListener.prototype.exitChildInstance = function(ctx) {
+EParserListener.prototype.exitChildInstance = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#RootInstance.
-EParserListener.prototype.enterRootInstance = function(ctx) {
+EParserListener.prototype.enterRootInstance = ctx => {
 };
 
 // Exit a parse tree produced by EParser#RootInstance.
-EParserListener.prototype.exitRootInstance = function(ctx) {
+EParserListener.prototype.exitRootInstance = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IsATypeExpression.
-EParserListener.prototype.enterIsATypeExpression = function(ctx) {
+EParserListener.prototype.enterIsATypeExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IsATypeExpression.
-EParserListener.prototype.exitIsATypeExpression = function(ctx) {
+EParserListener.prototype.exitIsATypeExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#IsOtherExpression.
-EParserListener.prototype.enterIsOtherExpression = function(ctx) {
+EParserListener.prototype.enterIsOtherExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#IsOtherExpression.
-EParserListener.prototype.exitIsOtherExpression = function(ctx) {
+EParserListener.prototype.exitIsOtherExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArrowExpressionBody.
-EParserListener.prototype.enterArrowExpressionBody = function(ctx) {
+EParserListener.prototype.enterArrowExpressionBody = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArrowExpressionBody.
-EParserListener.prototype.exitArrowExpressionBody = function(ctx) {
+EParserListener.prototype.exitArrowExpressionBody = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArrowStatementsBody.
-EParserListener.prototype.enterArrowStatementsBody = function(ctx) {
+EParserListener.prototype.enterArrowStatementsBody = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArrowStatementsBody.
-EParserListener.prototype.exitArrowStatementsBody = function(ctx) {
+EParserListener.prototype.exitArrowStatementsBody = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#arrow_prefix.
-EParserListener.prototype.enterArrow_prefix = function(ctx) {
+EParserListener.prototype.enterArrow_prefix = ctx => {
 };
 
 // Exit a parse tree produced by EParser#arrow_prefix.
-EParserListener.prototype.exitArrow_prefix = function(ctx) {
+EParserListener.prototype.exitArrow_prefix = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArrowSingleArg.
-EParserListener.prototype.enterArrowSingleArg = function(ctx) {
+EParserListener.prototype.enterArrowSingleArg = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArrowSingleArg.
-EParserListener.prototype.exitArrowSingleArg = function(ctx) {
+EParserListener.prototype.exitArrowSingleArg = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#ArrowListArg.
-EParserListener.prototype.enterArrowListArg = function(ctx) {
+EParserListener.prototype.enterArrowListArg = ctx => {
 };
 
 // Exit a parse tree produced by EParser#ArrowListArg.
-EParserListener.prototype.exitArrowListArg = function(ctx) {
+EParserListener.prototype.exitArrowListArg = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#sorted_key.
-EParserListener.prototype.enterSorted_key = function(ctx) {
+EParserListener.prototype.enterSorted_key = ctx => {
 };
 
 // Exit a parse tree produced by EParser#sorted_key.
-EParserListener.prototype.exitSorted_key = function(ctx) {
+EParserListener.prototype.exitSorted_key = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#read_blob_expression.
-EParserListener.prototype.enterRead_blob_expression = function(ctx) {
+EParserListener.prototype.enterRead_blob_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#read_blob_expression.
-EParserListener.prototype.exitRead_blob_expression = function(ctx) {
+EParserListener.prototype.exitRead_blob_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#read_all_expression.
-EParserListener.prototype.enterRead_all_expression = function(ctx) {
+EParserListener.prototype.enterRead_all_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#read_all_expression.
-EParserListener.prototype.exitRead_all_expression = function(ctx) {
+EParserListener.prototype.exitRead_all_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#read_one_expression.
-EParserListener.prototype.enterRead_one_expression = function(ctx) {
+EParserListener.prototype.enterRead_one_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#read_one_expression.
-EParserListener.prototype.exitRead_one_expression = function(ctx) {
+EParserListener.prototype.exitRead_one_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#order_by_list.
-EParserListener.prototype.enterOrder_by_list = function(ctx) {
+EParserListener.prototype.enterOrder_by_list = ctx => {
 };
 
 // Exit a parse tree produced by EParser#order_by_list.
-EParserListener.prototype.exitOrder_by_list = function(ctx) {
+EParserListener.prototype.exitOrder_by_list = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#order_by.
-EParserListener.prototype.enterOrder_by = function(ctx) {
+EParserListener.prototype.enterOrder_by = ctx => {
 };
 
 // Exit a parse tree produced by EParser#order_by.
-EParserListener.prototype.exitOrder_by = function(ctx) {
+EParserListener.prototype.exitOrder_by = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorPlus.
-EParserListener.prototype.enterOperatorPlus = function(ctx) {
+EParserListener.prototype.enterOperatorPlus = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorPlus.
-EParserListener.prototype.exitOperatorPlus = function(ctx) {
+EParserListener.prototype.exitOperatorPlus = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorMinus.
-EParserListener.prototype.enterOperatorMinus = function(ctx) {
+EParserListener.prototype.enterOperatorMinus = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorMinus.
-EParserListener.prototype.exitOperatorMinus = function(ctx) {
+EParserListener.prototype.exitOperatorMinus = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorMultiply.
-EParserListener.prototype.enterOperatorMultiply = function(ctx) {
+EParserListener.prototype.enterOperatorMultiply = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorMultiply.
-EParserListener.prototype.exitOperatorMultiply = function(ctx) {
+EParserListener.prototype.exitOperatorMultiply = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorDivide.
-EParserListener.prototype.enterOperatorDivide = function(ctx) {
+EParserListener.prototype.enterOperatorDivide = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorDivide.
-EParserListener.prototype.exitOperatorDivide = function(ctx) {
+EParserListener.prototype.exitOperatorDivide = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorIDivide.
-EParserListener.prototype.enterOperatorIDivide = function(ctx) {
+EParserListener.prototype.enterOperatorIDivide = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorIDivide.
-EParserListener.prototype.exitOperatorIDivide = function(ctx) {
+EParserListener.prototype.exitOperatorIDivide = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#OperatorModulo.
-EParserListener.prototype.enterOperatorModulo = function(ctx) {
+EParserListener.prototype.enterOperatorModulo = ctx => {
 };
 
 // Exit a parse tree produced by EParser#OperatorModulo.
-EParserListener.prototype.exitOperatorModulo = function(ctx) {
+EParserListener.prototype.exitOperatorModulo = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#keyword.
-EParserListener.prototype.enterKeyword = function(ctx) {
+EParserListener.prototype.enterKeyword = ctx => {
 };
 
 // Exit a parse tree produced by EParser#keyword.
-EParserListener.prototype.exitKeyword = function(ctx) {
+EParserListener.prototype.exitKeyword = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#new_token.
-EParserListener.prototype.enterNew_token = function(ctx) {
+EParserListener.prototype.enterNew_token = ctx => {
 };
 
 // Exit a parse tree produced by EParser#new_token.
-EParserListener.prototype.exitNew_token = function(ctx) {
+EParserListener.prototype.exitNew_token = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#key_token.
-EParserListener.prototype.enterKey_token = function(ctx) {
+EParserListener.prototype.enterKey_token = ctx => {
 };
 
 // Exit a parse tree produced by EParser#key_token.
-EParserListener.prototype.exitKey_token = function(ctx) {
+EParserListener.prototype.exitKey_token = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#module_token.
-EParserListener.prototype.enterModule_token = function(ctx) {
+EParserListener.prototype.enterModule_token = ctx => {
 };
 
 // Exit a parse tree produced by EParser#module_token.
-EParserListener.prototype.exitModule_token = function(ctx) {
+EParserListener.prototype.exitModule_token = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#value_token.
-EParserListener.prototype.enterValue_token = function(ctx) {
+EParserListener.prototype.enterValue_token = ctx => {
 };
 
 // Exit a parse tree produced by EParser#value_token.
-EParserListener.prototype.exitValue_token = function(ctx) {
+EParserListener.prototype.exitValue_token = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#symbols_token.
-EParserListener.prototype.enterSymbols_token = function(ctx) {
+EParserListener.prototype.enterSymbols_token = ctx => {
 };
 
 // Exit a parse tree produced by EParser#symbols_token.
-EParserListener.prototype.exitSymbols_token = function(ctx) {
+EParserListener.prototype.exitSymbols_token = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#assign.
-EParserListener.prototype.enterAssign = function(ctx) {
+EParserListener.prototype.enterAssign = ctx => {
 };
 
 // Exit a parse tree produced by EParser#assign.
-EParserListener.prototype.exitAssign = function(ctx) {
+EParserListener.prototype.exitAssign = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#multiply.
-EParserListener.prototype.enterMultiply = function(ctx) {
+EParserListener.prototype.enterMultiply = ctx => {
 };
 
 // Exit a parse tree produced by EParser#multiply.
-EParserListener.prototype.exitMultiply = function(ctx) {
+EParserListener.prototype.exitMultiply = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#divide.
-EParserListener.prototype.enterDivide = function(ctx) {
+EParserListener.prototype.enterDivide = ctx => {
 };
 
 // Exit a parse tree produced by EParser#divide.
-EParserListener.prototype.exitDivide = function(ctx) {
+EParserListener.prototype.exitDivide = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#idivide.
-EParserListener.prototype.enterIdivide = function(ctx) {
+EParserListener.prototype.enterIdivide = ctx => {
 };
 
 // Exit a parse tree produced by EParser#idivide.
-EParserListener.prototype.exitIdivide = function(ctx) {
+EParserListener.prototype.exitIdivide = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#modulo.
-EParserListener.prototype.enterModulo = function(ctx) {
+EParserListener.prototype.enterModulo = ctx => {
 };
 
 // Exit a parse tree produced by EParser#modulo.
-EParserListener.prototype.exitModulo = function(ctx) {
+EParserListener.prototype.exitModulo = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptReturnStatement.
-EParserListener.prototype.enterJavascriptReturnStatement = function(ctx) {
+EParserListener.prototype.enterJavascriptReturnStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptReturnStatement.
-EParserListener.prototype.exitJavascriptReturnStatement = function(ctx) {
+EParserListener.prototype.exitJavascriptReturnStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptStatement.
-EParserListener.prototype.enterJavascriptStatement = function(ctx) {
+EParserListener.prototype.enterJavascriptStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptStatement.
-EParserListener.prototype.exitJavascriptStatement = function(ctx) {
+EParserListener.prototype.exitJavascriptStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptSelectorExpression.
-EParserListener.prototype.enterJavascriptSelectorExpression = function(ctx) {
+EParserListener.prototype.enterJavascriptSelectorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptSelectorExpression.
-EParserListener.prototype.exitJavascriptSelectorExpression = function(ctx) {
+EParserListener.prototype.exitJavascriptSelectorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptPrimaryExpression.
-EParserListener.prototype.enterJavascriptPrimaryExpression = function(ctx) {
+EParserListener.prototype.enterJavascriptPrimaryExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptPrimaryExpression.
-EParserListener.prototype.exitJavascriptPrimaryExpression = function(ctx) {
+EParserListener.prototype.exitJavascriptPrimaryExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_primary_expression.
-EParserListener.prototype.enterJavascript_primary_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_primary_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_primary_expression.
-EParserListener.prototype.exitJavascript_primary_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_primary_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_this_expression.
-EParserListener.prototype.enterJavascript_this_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_this_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_this_expression.
-EParserListener.prototype.exitJavascript_this_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_this_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_new_expression.
-EParserListener.prototype.enterJavascript_new_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_new_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_new_expression.
-EParserListener.prototype.exitJavascript_new_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_new_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaScriptMethodExpression.
-EParserListener.prototype.enterJavaScriptMethodExpression = function(ctx) {
+EParserListener.prototype.enterJavaScriptMethodExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaScriptMethodExpression.
-EParserListener.prototype.exitJavaScriptMethodExpression = function(ctx) {
+EParserListener.prototype.exitJavaScriptMethodExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaScriptMemberExpression.
-EParserListener.prototype.enterJavaScriptMemberExpression = function(ctx) {
+EParserListener.prototype.enterJavaScriptMemberExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaScriptMemberExpression.
-EParserListener.prototype.exitJavaScriptMemberExpression = function(ctx) {
+EParserListener.prototype.exitJavaScriptMemberExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaScriptItemExpression.
-EParserListener.prototype.enterJavaScriptItemExpression = function(ctx) {
+EParserListener.prototype.enterJavaScriptItemExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaScriptItemExpression.
-EParserListener.prototype.exitJavaScriptItemExpression = function(ctx) {
+EParserListener.prototype.exitJavaScriptItemExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_method_expression.
-EParserListener.prototype.enterJavascript_method_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_method_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_method_expression.
-EParserListener.prototype.exitJavascript_method_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_method_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptArgumentList.
-EParserListener.prototype.enterJavascriptArgumentList = function(ctx) {
+EParserListener.prototype.enterJavascriptArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptArgumentList.
-EParserListener.prototype.exitJavascriptArgumentList = function(ctx) {
+EParserListener.prototype.exitJavascriptArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptArgumentListItem.
-EParserListener.prototype.enterJavascriptArgumentListItem = function(ctx) {
+EParserListener.prototype.enterJavascriptArgumentListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptArgumentListItem.
-EParserListener.prototype.exitJavascriptArgumentListItem = function(ctx) {
+EParserListener.prototype.exitJavascriptArgumentListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_item_expression.
-EParserListener.prototype.enterJavascript_item_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_item_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_item_expression.
-EParserListener.prototype.exitJavascript_item_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_item_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_parenthesis_expression.
-EParserListener.prototype.enterJavascript_parenthesis_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_parenthesis_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_parenthesis_expression.
-EParserListener.prototype.exitJavascript_parenthesis_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_parenthesis_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_identifier_expression.
-EParserListener.prototype.enterJavascript_identifier_expression = function(ctx) {
+EParserListener.prototype.enterJavascript_identifier_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_identifier_expression.
-EParserListener.prototype.exitJavascript_identifier_expression = function(ctx) {
+EParserListener.prototype.exitJavascript_identifier_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptIntegerLiteral.
-EParserListener.prototype.enterJavascriptIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterJavascriptIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptIntegerLiteral.
-EParserListener.prototype.exitJavascriptIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitJavascriptIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptDecimalLiteral.
-EParserListener.prototype.enterJavascriptDecimalLiteral = function(ctx) {
+EParserListener.prototype.enterJavascriptDecimalLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptDecimalLiteral.
-EParserListener.prototype.exitJavascriptDecimalLiteral = function(ctx) {
+EParserListener.prototype.exitJavascriptDecimalLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptTextLiteral.
-EParserListener.prototype.enterJavascriptTextLiteral = function(ctx) {
+EParserListener.prototype.enterJavascriptTextLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptTextLiteral.
-EParserListener.prototype.exitJavascriptTextLiteral = function(ctx) {
+EParserListener.prototype.exitJavascriptTextLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptBooleanLiteral.
-EParserListener.prototype.enterJavascriptBooleanLiteral = function(ctx) {
+EParserListener.prototype.enterJavascriptBooleanLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptBooleanLiteral.
-EParserListener.prototype.exitJavascriptBooleanLiteral = function(ctx) {
+EParserListener.prototype.exitJavascriptBooleanLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavascriptCharacterLiteral.
-EParserListener.prototype.enterJavascriptCharacterLiteral = function(ctx) {
+EParserListener.prototype.enterJavascriptCharacterLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavascriptCharacterLiteral.
-EParserListener.prototype.exitJavascriptCharacterLiteral = function(ctx) {
+EParserListener.prototype.exitJavascriptCharacterLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#javascript_identifier.
-EParserListener.prototype.enterJavascript_identifier = function(ctx) {
+EParserListener.prototype.enterJavascript_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#javascript_identifier.
-EParserListener.prototype.exitJavascript_identifier = function(ctx) {
+EParserListener.prototype.exitJavascript_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonReturnStatement.
-EParserListener.prototype.enterPythonReturnStatement = function(ctx) {
+EParserListener.prototype.enterPythonReturnStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonReturnStatement.
-EParserListener.prototype.exitPythonReturnStatement = function(ctx) {
+EParserListener.prototype.exitPythonReturnStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonStatement.
-EParserListener.prototype.enterPythonStatement = function(ctx) {
+EParserListener.prototype.enterPythonStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonStatement.
-EParserListener.prototype.exitPythonStatement = function(ctx) {
+EParserListener.prototype.exitPythonStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonSelectorExpression.
-EParserListener.prototype.enterPythonSelectorExpression = function(ctx) {
+EParserListener.prototype.enterPythonSelectorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonSelectorExpression.
-EParserListener.prototype.exitPythonSelectorExpression = function(ctx) {
+EParserListener.prototype.exitPythonSelectorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonPrimaryExpression.
-EParserListener.prototype.enterPythonPrimaryExpression = function(ctx) {
+EParserListener.prototype.enterPythonPrimaryExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonPrimaryExpression.
-EParserListener.prototype.exitPythonPrimaryExpression = function(ctx) {
+EParserListener.prototype.exitPythonPrimaryExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonSelfExpression.
-EParserListener.prototype.enterPythonSelfExpression = function(ctx) {
+EParserListener.prototype.enterPythonSelfExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonSelfExpression.
-EParserListener.prototype.exitPythonSelfExpression = function(ctx) {
+EParserListener.prototype.exitPythonSelfExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonParenthesisExpression.
-EParserListener.prototype.enterPythonParenthesisExpression = function(ctx) {
+EParserListener.prototype.enterPythonParenthesisExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonParenthesisExpression.
-EParserListener.prototype.exitPythonParenthesisExpression = function(ctx) {
+EParserListener.prototype.exitPythonParenthesisExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonIdentifierExpression.
-EParserListener.prototype.enterPythonIdentifierExpression = function(ctx) {
+EParserListener.prototype.enterPythonIdentifierExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonIdentifierExpression.
-EParserListener.prototype.exitPythonIdentifierExpression = function(ctx) {
+EParserListener.prototype.exitPythonIdentifierExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonLiteralExpression.
-EParserListener.prototype.enterPythonLiteralExpression = function(ctx) {
+EParserListener.prototype.enterPythonLiteralExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonLiteralExpression.
-EParserListener.prototype.exitPythonLiteralExpression = function(ctx) {
+EParserListener.prototype.exitPythonLiteralExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonGlobalMethodExpression.
-EParserListener.prototype.enterPythonGlobalMethodExpression = function(ctx) {
+EParserListener.prototype.enterPythonGlobalMethodExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonGlobalMethodExpression.
-EParserListener.prototype.exitPythonGlobalMethodExpression = function(ctx) {
+EParserListener.prototype.exitPythonGlobalMethodExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_self_expression.
-EParserListener.prototype.enterPython_self_expression = function(ctx) {
+EParserListener.prototype.enterPython_self_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_self_expression.
-EParserListener.prototype.exitPython_self_expression = function(ctx) {
+EParserListener.prototype.exitPython_self_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonMethodExpression.
-EParserListener.prototype.enterPythonMethodExpression = function(ctx) {
+EParserListener.prototype.enterPythonMethodExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonMethodExpression.
-EParserListener.prototype.exitPythonMethodExpression = function(ctx) {
+EParserListener.prototype.exitPythonMethodExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonItemExpression.
-EParserListener.prototype.enterPythonItemExpression = function(ctx) {
+EParserListener.prototype.enterPythonItemExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonItemExpression.
-EParserListener.prototype.exitPythonItemExpression = function(ctx) {
+EParserListener.prototype.exitPythonItemExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_method_expression.
-EParserListener.prototype.enterPython_method_expression = function(ctx) {
+EParserListener.prototype.enterPython_method_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_method_expression.
-EParserListener.prototype.exitPython_method_expression = function(ctx) {
+EParserListener.prototype.exitPython_method_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonOrdinalOnlyArgumentList.
-EParserListener.prototype.enterPythonOrdinalOnlyArgumentList = function(ctx) {
+EParserListener.prototype.enterPythonOrdinalOnlyArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonOrdinalOnlyArgumentList.
-EParserListener.prototype.exitPythonOrdinalOnlyArgumentList = function(ctx) {
+EParserListener.prototype.exitPythonOrdinalOnlyArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonNamedOnlyArgumentList.
-EParserListener.prototype.enterPythonNamedOnlyArgumentList = function(ctx) {
+EParserListener.prototype.enterPythonNamedOnlyArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonNamedOnlyArgumentList.
-EParserListener.prototype.exitPythonNamedOnlyArgumentList = function(ctx) {
+EParserListener.prototype.exitPythonNamedOnlyArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonArgumentList.
-EParserListener.prototype.enterPythonArgumentList = function(ctx) {
+EParserListener.prototype.enterPythonArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonArgumentList.
-EParserListener.prototype.exitPythonArgumentList = function(ctx) {
+EParserListener.prototype.exitPythonArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonOrdinalArgumentList.
-EParserListener.prototype.enterPythonOrdinalArgumentList = function(ctx) {
+EParserListener.prototype.enterPythonOrdinalArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonOrdinalArgumentList.
-EParserListener.prototype.exitPythonOrdinalArgumentList = function(ctx) {
+EParserListener.prototype.exitPythonOrdinalArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonOrdinalArgumentListItem.
-EParserListener.prototype.enterPythonOrdinalArgumentListItem = function(ctx) {
+EParserListener.prototype.enterPythonOrdinalArgumentListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonOrdinalArgumentListItem.
-EParserListener.prototype.exitPythonOrdinalArgumentListItem = function(ctx) {
+EParserListener.prototype.exitPythonOrdinalArgumentListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonNamedArgumentList.
-EParserListener.prototype.enterPythonNamedArgumentList = function(ctx) {
+EParserListener.prototype.enterPythonNamedArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonNamedArgumentList.
-EParserListener.prototype.exitPythonNamedArgumentList = function(ctx) {
+EParserListener.prototype.exitPythonNamedArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonNamedArgumentListItem.
-EParserListener.prototype.enterPythonNamedArgumentListItem = function(ctx) {
+EParserListener.prototype.enterPythonNamedArgumentListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonNamedArgumentListItem.
-EParserListener.prototype.exitPythonNamedArgumentListItem = function(ctx) {
+EParserListener.prototype.exitPythonNamedArgumentListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_parenthesis_expression.
-EParserListener.prototype.enterPython_parenthesis_expression = function(ctx) {
+EParserListener.prototype.enterPython_parenthesis_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_parenthesis_expression.
-EParserListener.prototype.exitPython_parenthesis_expression = function(ctx) {
+EParserListener.prototype.exitPython_parenthesis_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonChildIdentifier.
-EParserListener.prototype.enterPythonChildIdentifier = function(ctx) {
+EParserListener.prototype.enterPythonChildIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonChildIdentifier.
-EParserListener.prototype.exitPythonChildIdentifier = function(ctx) {
+EParserListener.prototype.exitPythonChildIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonPromptoIdentifier.
-EParserListener.prototype.enterPythonPromptoIdentifier = function(ctx) {
+EParserListener.prototype.enterPythonPromptoIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonPromptoIdentifier.
-EParserListener.prototype.exitPythonPromptoIdentifier = function(ctx) {
+EParserListener.prototype.exitPythonPromptoIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonIdentifier.
-EParserListener.prototype.enterPythonIdentifier = function(ctx) {
+EParserListener.prototype.enterPythonIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonIdentifier.
-EParserListener.prototype.exitPythonIdentifier = function(ctx) {
+EParserListener.prototype.exitPythonIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonIntegerLiteral.
-EParserListener.prototype.enterPythonIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterPythonIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonIntegerLiteral.
-EParserListener.prototype.exitPythonIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitPythonIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonDecimalLiteral.
-EParserListener.prototype.enterPythonDecimalLiteral = function(ctx) {
+EParserListener.prototype.enterPythonDecimalLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonDecimalLiteral.
-EParserListener.prototype.exitPythonDecimalLiteral = function(ctx) {
+EParserListener.prototype.exitPythonDecimalLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonTextLiteral.
-EParserListener.prototype.enterPythonTextLiteral = function(ctx) {
+EParserListener.prototype.enterPythonTextLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonTextLiteral.
-EParserListener.prototype.exitPythonTextLiteral = function(ctx) {
+EParserListener.prototype.exitPythonTextLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonBooleanLiteral.
-EParserListener.prototype.enterPythonBooleanLiteral = function(ctx) {
+EParserListener.prototype.enterPythonBooleanLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonBooleanLiteral.
-EParserListener.prototype.exitPythonBooleanLiteral = function(ctx) {
+EParserListener.prototype.exitPythonBooleanLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#PythonCharacterLiteral.
-EParserListener.prototype.enterPythonCharacterLiteral = function(ctx) {
+EParserListener.prototype.enterPythonCharacterLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#PythonCharacterLiteral.
-EParserListener.prototype.exitPythonCharacterLiteral = function(ctx) {
+EParserListener.prototype.exitPythonCharacterLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#python_identifier.
-EParserListener.prototype.enterPython_identifier = function(ctx) {
+EParserListener.prototype.enterPython_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#python_identifier.
-EParserListener.prototype.exitPython_identifier = function(ctx) {
+EParserListener.prototype.exitPython_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaReturnStatement.
-EParserListener.prototype.enterJavaReturnStatement = function(ctx) {
+EParserListener.prototype.enterJavaReturnStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaReturnStatement.
-EParserListener.prototype.exitJavaReturnStatement = function(ctx) {
+EParserListener.prototype.exitJavaReturnStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaStatement.
-EParserListener.prototype.enterJavaStatement = function(ctx) {
+EParserListener.prototype.enterJavaStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaStatement.
-EParserListener.prototype.exitJavaStatement = function(ctx) {
+EParserListener.prototype.exitJavaStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaSelectorExpression.
-EParserListener.prototype.enterJavaSelectorExpression = function(ctx) {
+EParserListener.prototype.enterJavaSelectorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaSelectorExpression.
-EParserListener.prototype.exitJavaSelectorExpression = function(ctx) {
+EParserListener.prototype.exitJavaSelectorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaPrimaryExpression.
-EParserListener.prototype.enterJavaPrimaryExpression = function(ctx) {
+EParserListener.prototype.enterJavaPrimaryExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaPrimaryExpression.
-EParserListener.prototype.exitJavaPrimaryExpression = function(ctx) {
+EParserListener.prototype.exitJavaPrimaryExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_primary_expression.
-EParserListener.prototype.enterJava_primary_expression = function(ctx) {
+EParserListener.prototype.enterJava_primary_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_primary_expression.
-EParserListener.prototype.exitJava_primary_expression = function(ctx) {
+EParserListener.prototype.exitJava_primary_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_this_expression.
-EParserListener.prototype.enterJava_this_expression = function(ctx) {
+EParserListener.prototype.enterJava_this_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_this_expression.
-EParserListener.prototype.exitJava_this_expression = function(ctx) {
+EParserListener.prototype.exitJava_this_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_new_expression.
-EParserListener.prototype.enterJava_new_expression = function(ctx) {
+EParserListener.prototype.enterJava_new_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_new_expression.
-EParserListener.prototype.exitJava_new_expression = function(ctx) {
+EParserListener.prototype.exitJava_new_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaMethodExpression.
-EParserListener.prototype.enterJavaMethodExpression = function(ctx) {
+EParserListener.prototype.enterJavaMethodExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaMethodExpression.
-EParserListener.prototype.exitJavaMethodExpression = function(ctx) {
+EParserListener.prototype.exitJavaMethodExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaItemExpression.
-EParserListener.prototype.enterJavaItemExpression = function(ctx) {
+EParserListener.prototype.enterJavaItemExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaItemExpression.
-EParserListener.prototype.exitJavaItemExpression = function(ctx) {
+EParserListener.prototype.exitJavaItemExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_method_expression.
-EParserListener.prototype.enterJava_method_expression = function(ctx) {
+EParserListener.prototype.enterJava_method_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_method_expression.
-EParserListener.prototype.exitJava_method_expression = function(ctx) {
+EParserListener.prototype.exitJava_method_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaArgumentListItem.
-EParserListener.prototype.enterJavaArgumentListItem = function(ctx) {
+EParserListener.prototype.enterJavaArgumentListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaArgumentListItem.
-EParserListener.prototype.exitJavaArgumentListItem = function(ctx) {
+EParserListener.prototype.exitJavaArgumentListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaArgumentList.
-EParserListener.prototype.enterJavaArgumentList = function(ctx) {
+EParserListener.prototype.enterJavaArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaArgumentList.
-EParserListener.prototype.exitJavaArgumentList = function(ctx) {
+EParserListener.prototype.exitJavaArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_item_expression.
-EParserListener.prototype.enterJava_item_expression = function(ctx) {
+EParserListener.prototype.enterJava_item_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_item_expression.
-EParserListener.prototype.exitJava_item_expression = function(ctx) {
+EParserListener.prototype.exitJava_item_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_parenthesis_expression.
-EParserListener.prototype.enterJava_parenthesis_expression = function(ctx) {
+EParserListener.prototype.enterJava_parenthesis_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_parenthesis_expression.
-EParserListener.prototype.exitJava_parenthesis_expression = function(ctx) {
+EParserListener.prototype.exitJava_parenthesis_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaIdentifier.
-EParserListener.prototype.enterJavaIdentifier = function(ctx) {
+EParserListener.prototype.enterJavaIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaIdentifier.
-EParserListener.prototype.exitJavaIdentifier = function(ctx) {
+EParserListener.prototype.exitJavaIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaChildIdentifier.
-EParserListener.prototype.enterJavaChildIdentifier = function(ctx) {
+EParserListener.prototype.enterJavaChildIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaChildIdentifier.
-EParserListener.prototype.exitJavaChildIdentifier = function(ctx) {
+EParserListener.prototype.exitJavaChildIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaClassIdentifier.
-EParserListener.prototype.enterJavaClassIdentifier = function(ctx) {
+EParserListener.prototype.enterJavaClassIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaClassIdentifier.
-EParserListener.prototype.exitJavaClassIdentifier = function(ctx) {
+EParserListener.prototype.exitJavaClassIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaChildClassIdentifier.
-EParserListener.prototype.enterJavaChildClassIdentifier = function(ctx) {
+EParserListener.prototype.enterJavaChildClassIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaChildClassIdentifier.
-EParserListener.prototype.exitJavaChildClassIdentifier = function(ctx) {
+EParserListener.prototype.exitJavaChildClassIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaIntegerLiteral.
-EParserListener.prototype.enterJavaIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterJavaIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaIntegerLiteral.
-EParserListener.prototype.exitJavaIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitJavaIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaDecimalLiteral.
-EParserListener.prototype.enterJavaDecimalLiteral = function(ctx) {
+EParserListener.prototype.enterJavaDecimalLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaDecimalLiteral.
-EParserListener.prototype.exitJavaDecimalLiteral = function(ctx) {
+EParserListener.prototype.exitJavaDecimalLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaTextLiteral.
-EParserListener.prototype.enterJavaTextLiteral = function(ctx) {
+EParserListener.prototype.enterJavaTextLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaTextLiteral.
-EParserListener.prototype.exitJavaTextLiteral = function(ctx) {
+EParserListener.prototype.exitJavaTextLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaBooleanLiteral.
-EParserListener.prototype.enterJavaBooleanLiteral = function(ctx) {
+EParserListener.prototype.enterJavaBooleanLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaBooleanLiteral.
-EParserListener.prototype.exitJavaBooleanLiteral = function(ctx) {
+EParserListener.prototype.exitJavaBooleanLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JavaCharacterLiteral.
-EParserListener.prototype.enterJavaCharacterLiteral = function(ctx) {
+EParserListener.prototype.enterJavaCharacterLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JavaCharacterLiteral.
-EParserListener.prototype.exitJavaCharacterLiteral = function(ctx) {
+EParserListener.prototype.exitJavaCharacterLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#java_identifier.
-EParserListener.prototype.enterJava_identifier = function(ctx) {
+EParserListener.prototype.enterJava_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#java_identifier.
-EParserListener.prototype.exitJava_identifier = function(ctx) {
+EParserListener.prototype.exitJava_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpReturnStatement.
-EParserListener.prototype.enterCSharpReturnStatement = function(ctx) {
+EParserListener.prototype.enterCSharpReturnStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpReturnStatement.
-EParserListener.prototype.exitCSharpReturnStatement = function(ctx) {
+EParserListener.prototype.exitCSharpReturnStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpStatement.
-EParserListener.prototype.enterCSharpStatement = function(ctx) {
+EParserListener.prototype.enterCSharpStatement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpStatement.
-EParserListener.prototype.exitCSharpStatement = function(ctx) {
+EParserListener.prototype.exitCSharpStatement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpSelectorExpression.
-EParserListener.prototype.enterCSharpSelectorExpression = function(ctx) {
+EParserListener.prototype.enterCSharpSelectorExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpSelectorExpression.
-EParserListener.prototype.exitCSharpSelectorExpression = function(ctx) {
+EParserListener.prototype.exitCSharpSelectorExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpPrimaryExpression.
-EParserListener.prototype.enterCSharpPrimaryExpression = function(ctx) {
+EParserListener.prototype.enterCSharpPrimaryExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpPrimaryExpression.
-EParserListener.prototype.exitCSharpPrimaryExpression = function(ctx) {
+EParserListener.prototype.exitCSharpPrimaryExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_primary_expression.
-EParserListener.prototype.enterCsharp_primary_expression = function(ctx) {
+EParserListener.prototype.enterCsharp_primary_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_primary_expression.
-EParserListener.prototype.exitCsharp_primary_expression = function(ctx) {
+EParserListener.prototype.exitCsharp_primary_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_this_expression.
-EParserListener.prototype.enterCsharp_this_expression = function(ctx) {
+EParserListener.prototype.enterCsharp_this_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_this_expression.
-EParserListener.prototype.exitCsharp_this_expression = function(ctx) {
+EParserListener.prototype.exitCsharp_this_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_new_expression.
-EParserListener.prototype.enterCsharp_new_expression = function(ctx) {
+EParserListener.prototype.enterCsharp_new_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_new_expression.
-EParserListener.prototype.exitCsharp_new_expression = function(ctx) {
+EParserListener.prototype.exitCsharp_new_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpMethodExpression.
-EParserListener.prototype.enterCSharpMethodExpression = function(ctx) {
+EParserListener.prototype.enterCSharpMethodExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpMethodExpression.
-EParserListener.prototype.exitCSharpMethodExpression = function(ctx) {
+EParserListener.prototype.exitCSharpMethodExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpItemExpression.
-EParserListener.prototype.enterCSharpItemExpression = function(ctx) {
+EParserListener.prototype.enterCSharpItemExpression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpItemExpression.
-EParserListener.prototype.exitCSharpItemExpression = function(ctx) {
+EParserListener.prototype.exitCSharpItemExpression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_method_expression.
-EParserListener.prototype.enterCsharp_method_expression = function(ctx) {
+EParserListener.prototype.enterCsharp_method_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_method_expression.
-EParserListener.prototype.exitCsharp_method_expression = function(ctx) {
+EParserListener.prototype.exitCsharp_method_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpArgumentList.
-EParserListener.prototype.enterCSharpArgumentList = function(ctx) {
+EParserListener.prototype.enterCSharpArgumentList = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpArgumentList.
-EParserListener.prototype.exitCSharpArgumentList = function(ctx) {
+EParserListener.prototype.exitCSharpArgumentList = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpArgumentListItem.
-EParserListener.prototype.enterCSharpArgumentListItem = function(ctx) {
+EParserListener.prototype.enterCSharpArgumentListItem = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpArgumentListItem.
-EParserListener.prototype.exitCSharpArgumentListItem = function(ctx) {
+EParserListener.prototype.exitCSharpArgumentListItem = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_item_expression.
-EParserListener.prototype.enterCsharp_item_expression = function(ctx) {
+EParserListener.prototype.enterCsharp_item_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_item_expression.
-EParserListener.prototype.exitCsharp_item_expression = function(ctx) {
+EParserListener.prototype.exitCsharp_item_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_parenthesis_expression.
-EParserListener.prototype.enterCsharp_parenthesis_expression = function(ctx) {
+EParserListener.prototype.enterCsharp_parenthesis_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_parenthesis_expression.
-EParserListener.prototype.exitCsharp_parenthesis_expression = function(ctx) {
+EParserListener.prototype.exitCsharp_parenthesis_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpIdentifier.
-EParserListener.prototype.enterCSharpIdentifier = function(ctx) {
+EParserListener.prototype.enterCSharpIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpIdentifier.
-EParserListener.prototype.exitCSharpIdentifier = function(ctx) {
+EParserListener.prototype.exitCSharpIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpChildIdentifier.
-EParserListener.prototype.enterCSharpChildIdentifier = function(ctx) {
+EParserListener.prototype.enterCSharpChildIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpChildIdentifier.
-EParserListener.prototype.exitCSharpChildIdentifier = function(ctx) {
+EParserListener.prototype.exitCSharpChildIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpPromptoIdentifier.
-EParserListener.prototype.enterCSharpPromptoIdentifier = function(ctx) {
+EParserListener.prototype.enterCSharpPromptoIdentifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpPromptoIdentifier.
-EParserListener.prototype.exitCSharpPromptoIdentifier = function(ctx) {
+EParserListener.prototype.exitCSharpPromptoIdentifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpIntegerLiteral.
-EParserListener.prototype.enterCSharpIntegerLiteral = function(ctx) {
+EParserListener.prototype.enterCSharpIntegerLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpIntegerLiteral.
-EParserListener.prototype.exitCSharpIntegerLiteral = function(ctx) {
+EParserListener.prototype.exitCSharpIntegerLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpDecimalLiteral.
-EParserListener.prototype.enterCSharpDecimalLiteral = function(ctx) {
+EParserListener.prototype.enterCSharpDecimalLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpDecimalLiteral.
-EParserListener.prototype.exitCSharpDecimalLiteral = function(ctx) {
+EParserListener.prototype.exitCSharpDecimalLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpTextLiteral.
-EParserListener.prototype.enterCSharpTextLiteral = function(ctx) {
+EParserListener.prototype.enterCSharpTextLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpTextLiteral.
-EParserListener.prototype.exitCSharpTextLiteral = function(ctx) {
+EParserListener.prototype.exitCSharpTextLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpBooleanLiteral.
-EParserListener.prototype.enterCSharpBooleanLiteral = function(ctx) {
+EParserListener.prototype.enterCSharpBooleanLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpBooleanLiteral.
-EParserListener.prototype.exitCSharpBooleanLiteral = function(ctx) {
+EParserListener.prototype.exitCSharpBooleanLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CSharpCharacterLiteral.
-EParserListener.prototype.enterCSharpCharacterLiteral = function(ctx) {
+EParserListener.prototype.enterCSharpCharacterLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CSharpCharacterLiteral.
-EParserListener.prototype.exitCSharpCharacterLiteral = function(ctx) {
+EParserListener.prototype.exitCSharpCharacterLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#csharp_identifier.
-EParserListener.prototype.enterCsharp_identifier = function(ctx) {
+EParserListener.prototype.enterCsharp_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#csharp_identifier.
-EParserListener.prototype.exitCsharp_identifier = function(ctx) {
+EParserListener.prototype.exitCsharp_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_expression.
-EParserListener.prototype.enterJsx_expression = function(ctx) {
+EParserListener.prototype.enterJsx_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_expression.
-EParserListener.prototype.exitJsx_expression = function(ctx) {
+EParserListener.prototype.exitJsx_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxSelfClosing.
-EParserListener.prototype.enterJsxSelfClosing = function(ctx) {
+EParserListener.prototype.enterJsxSelfClosing = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxSelfClosing.
-EParserListener.prototype.exitJsxSelfClosing = function(ctx) {
+EParserListener.prototype.exitJsxSelfClosing = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxElement.
-EParserListener.prototype.enterJsxElement = function(ctx) {
+EParserListener.prototype.enterJsxElement = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxElement.
-EParserListener.prototype.exitJsxElement = function(ctx) {
+EParserListener.prototype.exitJsxElement = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_fragment.
-EParserListener.prototype.enterJsx_fragment = function(ctx) {
+EParserListener.prototype.enterJsx_fragment = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_fragment.
-EParserListener.prototype.exitJsx_fragment = function(ctx) {
+EParserListener.prototype.exitJsx_fragment = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_fragment_start.
-EParserListener.prototype.enterJsx_fragment_start = function(ctx) {
+EParserListener.prototype.enterJsx_fragment_start = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_fragment_start.
-EParserListener.prototype.exitJsx_fragment_start = function(ctx) {
+EParserListener.prototype.exitJsx_fragment_start = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_fragment_end.
-EParserListener.prototype.enterJsx_fragment_end = function(ctx) {
+EParserListener.prototype.enterJsx_fragment_end = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_fragment_end.
-EParserListener.prototype.exitJsx_fragment_end = function(ctx) {
+EParserListener.prototype.exitJsx_fragment_end = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_self_closing.
-EParserListener.prototype.enterJsx_self_closing = function(ctx) {
+EParserListener.prototype.enterJsx_self_closing = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_self_closing.
-EParserListener.prototype.exitJsx_self_closing = function(ctx) {
+EParserListener.prototype.exitJsx_self_closing = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_opening.
-EParserListener.prototype.enterJsx_opening = function(ctx) {
+EParserListener.prototype.enterJsx_opening = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_opening.
-EParserListener.prototype.exitJsx_opening = function(ctx) {
+EParserListener.prototype.exitJsx_opening = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_closing.
-EParserListener.prototype.enterJsx_closing = function(ctx) {
+EParserListener.prototype.enterJsx_closing = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_closing.
-EParserListener.prototype.exitJsx_closing = function(ctx) {
+EParserListener.prototype.exitJsx_closing = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_element_name.
-EParserListener.prototype.enterJsx_element_name = function(ctx) {
+EParserListener.prototype.enterJsx_element_name = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_element_name.
-EParserListener.prototype.exitJsx_element_name = function(ctx) {
+EParserListener.prototype.exitJsx_element_name = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_identifier.
-EParserListener.prototype.enterJsx_identifier = function(ctx) {
+EParserListener.prototype.enterJsx_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_identifier.
-EParserListener.prototype.exitJsx_identifier = function(ctx) {
+EParserListener.prototype.exitJsx_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_attribute.
-EParserListener.prototype.enterJsx_attribute = function(ctx) {
+EParserListener.prototype.enterJsx_attribute = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_attribute.
-EParserListener.prototype.exitJsx_attribute = function(ctx) {
+EParserListener.prototype.exitJsx_attribute = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxLiteral.
-EParserListener.prototype.enterJsxLiteral = function(ctx) {
+EParserListener.prototype.enterJsxLiteral = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxLiteral.
-EParserListener.prototype.exitJsxLiteral = function(ctx) {
+EParserListener.prototype.exitJsxLiteral = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxValue.
-EParserListener.prototype.enterJsxValue = function(ctx) {
+EParserListener.prototype.enterJsxValue = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxValue.
-EParserListener.prototype.exitJsxValue = function(ctx) {
+EParserListener.prototype.exitJsxValue = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_children.
-EParserListener.prototype.enterJsx_children = function(ctx) {
+EParserListener.prototype.enterJsx_children = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_children.
-EParserListener.prototype.exitJsx_children = function(ctx) {
+EParserListener.prototype.exitJsx_children = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxText.
-EParserListener.prototype.enterJsxText = function(ctx) {
+EParserListener.prototype.enterJsxText = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxText.
-EParserListener.prototype.exitJsxText = function(ctx) {
+EParserListener.prototype.exitJsxText = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxChild.
-EParserListener.prototype.enterJsxChild = function(ctx) {
+EParserListener.prototype.enterJsxChild = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxChild.
-EParserListener.prototype.exitJsxChild = function(ctx) {
+EParserListener.prototype.exitJsxChild = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#JsxCode.
-EParserListener.prototype.enterJsxCode = function(ctx) {
+EParserListener.prototype.enterJsxCode = ctx => {
 };
 
 // Exit a parse tree produced by EParser#JsxCode.
-EParserListener.prototype.exitJsxCode = function(ctx) {
+EParserListener.prototype.exitJsxCode = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_text.
-EParserListener.prototype.enterJsx_text = function(ctx) {
+EParserListener.prototype.enterJsx_text = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_text.
-EParserListener.prototype.exitJsx_text = function(ctx) {
+EParserListener.prototype.exitJsx_text = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#jsx_char.
-EParserListener.prototype.enterJsx_char = function(ctx) {
+EParserListener.prototype.enterJsx_char = ctx => {
 };
 
 // Exit a parse tree produced by EParser#jsx_char.
-EParserListener.prototype.exitJsx_char = function(ctx) {
+EParserListener.prototype.exitJsx_char = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#css_expression.
-EParserListener.prototype.enterCss_expression = function(ctx) {
+EParserListener.prototype.enterCss_expression = ctx => {
 };
 
 // Exit a parse tree produced by EParser#css_expression.
-EParserListener.prototype.exitCss_expression = function(ctx) {
+EParserListener.prototype.exitCss_expression = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#css_field.
-EParserListener.prototype.enterCss_field = function(ctx) {
+EParserListener.prototype.enterCss_field = ctx => {
 };
 
 // Exit a parse tree produced by EParser#css_field.
-EParserListener.prototype.exitCss_field = function(ctx) {
+EParserListener.prototype.exitCss_field = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#css_identifier.
-EParserListener.prototype.enterCss_identifier = function(ctx) {
+EParserListener.prototype.enterCss_identifier = ctx => {
 };
 
 // Exit a parse tree produced by EParser#css_identifier.
-EParserListener.prototype.exitCss_identifier = function(ctx) {
+EParserListener.prototype.exitCss_identifier = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CssValue.
-EParserListener.prototype.enterCssValue = function(ctx) {
+EParserListener.prototype.enterCssValue = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CssValue.
-EParserListener.prototype.exitCssValue = function(ctx) {
+EParserListener.prototype.exitCssValue = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#CssText.
-EParserListener.prototype.enterCssText = function(ctx) {
+EParserListener.prototype.enterCssText = ctx => {
 };
 
 // Exit a parse tree produced by EParser#CssText.
-EParserListener.prototype.exitCssText = function(ctx) {
+EParserListener.prototype.exitCssText = ctx => {
 };
 
 
 // Enter a parse tree produced by EParser#css_text.
-EParserListener.prototype.enterCss_text = function(ctx) {
+EParserListener.prototype.enterCss_text = ctx => {
 };
 
 // Exit a parse tree produced by EParser#css_text.
-EParserListener.prototype.exitCss_text = function(ctx) {
+EParserListener.prototype.exitCss_text = ctx => {
 };
 
 

@@ -9,7 +9,7 @@ class OrderByClause extends Section {
     }
 
     toDialect(writer) {
-        this.ids.forEach(function(id) {
+        this.ids.forEach(id => {
             writer.append(id.toString());
             writer.append(".");
         });

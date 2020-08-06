@@ -37,7 +37,7 @@ class ListLiteral extends Literal {
             var self = this;
             this.check(context); // force computation of itemType
             var list = new ListValue(this.itemType, null, null, this.mutable);
-            this.expressions.forEach(function(expression) {
+            this.expressions.forEach(expression => {
                 var item = expression.interpret(context);
                 item = self.interpretPromotion(item);
                 list.add(item);

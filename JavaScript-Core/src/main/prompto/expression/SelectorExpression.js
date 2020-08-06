@@ -1,7 +1,7 @@
 var Expression = require("./Expression").Expression;
 var UnresolvedIdentifier;
 
-exports.resolve = function() {
+exports.resolve = () => {
     UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
 }
 

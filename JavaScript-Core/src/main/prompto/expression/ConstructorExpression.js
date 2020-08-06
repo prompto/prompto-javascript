@@ -13,7 +13,7 @@ var ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaratio
 var NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
 var getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CategoryType = require("../type/CategoryType").CategoryType;
 };
 
@@ -95,7 +95,7 @@ class ConstructorExpression extends Expression {
                 // throw new SyntaxError("Cannot copy from " + cft.getName());
         }
         if(this.args!=null) {
-            this.args.forEach(function(argument) {
+            this.args.forEach(argument => {
                 if(!cd.hasAttribute(context, argument.name))
                     context.problemListener.reportUnknownAttribute(argument.id);
                 argument.check(context);
@@ -193,7 +193,7 @@ class ConstructorExpression extends Expression {
     transpileAssignments(transpiler) {
         if(this.args!=null) {
             transpiler.append("{");
-            this.args.forEach(function(argument) {
+            this.args.forEach(argument => {
                 transpiler.append(argument.parameter.name).append(":");
                 argument.expression.transpile(transpiler);
                 transpiler.append(", ");

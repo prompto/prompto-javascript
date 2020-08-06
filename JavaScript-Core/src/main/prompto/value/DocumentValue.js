@@ -45,7 +45,7 @@ class DocumentValue extends Value {
             return new IntegerValue(this.values.length);
         } else if ("keys"==name) {
             var keys = new StrictSet();
-            this.getMemberNames().forEach(function (name) {
+            this.getMemberNames().forEach(name => {
                 keys.add(new TextValue(name));
             });
             return new SetValue(TextType.instance, keys);

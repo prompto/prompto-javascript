@@ -44,7 +44,7 @@ class SetLiteral extends Literal {
         var self = this;
         this.check(context); // force computation of itemType
         var value = new SetValue(this.itemType);
-        this.expressions.forEach(function(expression) {
+        this.expressions.forEach(expression => {
             var item = expression.interpret(context);
             item = self.interpretPromotion(item);
             value.add(item);

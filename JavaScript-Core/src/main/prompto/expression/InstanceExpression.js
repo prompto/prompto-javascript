@@ -15,7 +15,7 @@ var EqualsExpression = null;
 var EqOp = require("../grammar/EqOp").EqOp;
 var BooleanLiteral = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     InstanceContext = require("../runtime/Context").InstanceContext;

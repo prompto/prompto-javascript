@@ -17,12 +17,12 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
     }
 
     getSymbol(name) {
-        return this.symbols.filter(function(s) { return s.name === name; })[0] || null;
+        return this.symbols.filter(s => { return s.name === name; })[0] || null;
     }
 
     unregister(context) {
         context.unregisterDeclaration (this);
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.unregister(context);
         });
     }
@@ -46,21 +46,21 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
     setSymbols(symbols) {
         this.symbols = symbols || [];
         var type = new EnumeratedCategoryType(this.id);
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.type = type;
         });
     }
 
     register(context) {
         context.registerDeclaration(this);
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.register(context);
         });
     }
 
     check(context) {
         super.check(context);
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.check(context);
         });
         return this.getType(context);
@@ -82,7 +82,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
             this.derivedFrom.toDialect(writer, true);
         }
         writer.append(" {").newLine().indent();
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.toDialect(writer);
             writer.append(";").newLine();
         });
@@ -106,7 +106,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
         } else
             writer.append(" with symbols:").newLine();
         writer.indent();
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.toDialect(writer);
             writer.newLine();
         });
@@ -123,7 +123,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
         if(this.attributes!=null && this.attributes.length>0)
             this.attributes.toDialect(writer, false);
         writer.append("):").newLine().indent();
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.toDialect(writer);
             writer.newLine();
         });
@@ -171,12 +171,12 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
         transpiler.append("toString() {").indent().append("return this.message;").dedent().append("}").newLine();
         transpiler.append("getText() {").indent().append("return this.message;").dedent().append("}").newLine();
         transpiler.dedent().append("}").newLine();
-        this.symbols.forEach(function(symbol) { symbol.initializeError(transpiler); });
+        this.symbols.forEach(symbol => { symbol.initializeError(transpiler); });
         this.transpileSymbols(transpiler);
     }
 
     transpileSymbols(transpiler) {
-        var names = this.symbols.map(function (symbol) {
+        var names = this.symbols.map(symbol => {
             return symbol.name;
         });
         transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
@@ -192,7 +192,7 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
             transpiler.append(this.name).append(".prototype.getText = function() { return this.text; };").newLine();
         else
             transpiler.append(this.name).append(".prototype.getText = ").append(this.name).append(".prototype.toString;").newLine();
-        this.symbols.forEach(function(symbol) { symbol.initialize(transpiler); });
+        this.symbols.forEach(symbol => { symbol.initialize(transpiler); });
         this.transpileSymbols(transpiler);
     }
 }

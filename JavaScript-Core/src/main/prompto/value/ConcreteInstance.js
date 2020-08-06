@@ -18,7 +18,7 @@ var TypeUtils = require("../utils/TypeUtils");
 var EnumeratedNativeDeclaration = null;
 var EnumeratedCategoryDeclaration = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CategoryType = require("../type/CategoryType").CategoryType;
     NativeInstance = require("./NativeInstance").NativeInstance;
     EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;

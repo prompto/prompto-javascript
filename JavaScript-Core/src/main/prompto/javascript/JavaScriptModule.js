@@ -54,7 +54,7 @@ class JavaScriptModule {
             // eval root module
             var m = eval(ids.shift());
             // drill down
-            ids.forEach(function(id) {
+            ids.forEach(id => {
                 m = m ? m[id] || null : null;
             });
             return m || null;
@@ -143,7 +143,7 @@ class JavaScriptModule {
             // eval root module
             var m = eval(ids.shift());
             // drill down
-            ids.forEach(function(id) {
+            ids.forEach(id => {
                 m = m ? m[id] || null : null;
             });
             if(!m)
@@ -215,7 +215,7 @@ class JavaScriptModule {
 
     toDialect(writer) {
         writer.append(" from module: ");
-        this.ids.forEach(function(id) {
+        this.ids.forEach(id => {
             if("js"==id) {
                 writer.trimLast(1);
                 writer.append('.');

@@ -89,7 +89,7 @@ MIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 	}
 };
 
-MIndentingLexer.prototype.deriveToken = function(token, type) {
+MIndentingLexer.prototype.deriveToken = (token, type) => {
 	var res = token.clone();
 	res.type = type;
     if(token.type === MLexer.EOF)
@@ -97,7 +97,7 @@ MIndentingLexer.prototype.deriveToken = function(token, type) {
 	return res;
 };
 
-MIndentingLexer.prototype.countIndents = function(text) {
+MIndentingLexer.prototype.countIndents = text => {
 	var count = 0;
 	for(var i=0;i<text.length;i++) {
 		switch(text[i]) {

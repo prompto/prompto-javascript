@@ -2,7 +2,7 @@ var PromptoError = require("../error/PromptoError").PromptoError;
 var CategoryType = null;
 var Score = require("./Score").Score;
 
-exports.resolve = function() {
+exports.resolve = () => {
 	CategoryType = require("../type/CategoryType").CategoryType;
 }
 
@@ -64,7 +64,7 @@ class MethodFinder {
         var self = this;
         declarations = Array.from(declarations);
         // console.error("sorting:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
-        declarations.sort(function(d1, d2) {
+        declarations.sort((d1, d2) => {
             // console.error( d1.getProto() + "/" + d2.getProto() );
             var score = self.scoreMostSpecific(d2, d1, false, true);
             // console.error( "-> " + score.name );

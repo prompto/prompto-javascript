@@ -4,7 +4,7 @@ var IntegerValue = require("./IntegerValue").IntegerValue;
 var TextValue = require("./TextValue").TextValue;
 var TimeType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     TimeType = require("../type/TimeType").TimeType;
 };
 

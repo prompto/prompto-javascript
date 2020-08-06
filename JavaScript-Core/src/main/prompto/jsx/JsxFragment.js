@@ -13,7 +13,7 @@ class JsxFragment extends IJsxExpression {
         if(this.openingSuite!=null)
             writer.appendRaw(this.openingSuite);
         if(this.children!=null)
-            this.children.forEach(function(child) {
+            this.children.forEach(child => {
                 child.toDialect(writer);
             });
         writer.append("</>");
@@ -21,7 +21,7 @@ class JsxFragment extends IJsxExpression {
 
     check(context) {
         if (this.children != null)
-            this.children.forEach(function(child) {
+            this.children.forEach(child => {
                 child.check(context);
             });
         return JsxType.instance;
@@ -29,7 +29,7 @@ class JsxFragment extends IJsxExpression {
 
     declare(transpiler) {
         if (this.children != null)
-            this.children.forEach(function(child) {
+            this.children.forEach(child => {
                 child.declare(transpiler);
             });
     }
@@ -37,7 +37,7 @@ class JsxFragment extends IJsxExpression {
     transpile(transpiler) {
         if (this.children != null && this.children.length > 0) {
             transpiler.append("React.createElement(React.Fragment, null");
-            this.children.forEach(function(child) {
+            this.children.forEach(child => {
                 transpiler.append(", ");
                 child.transpile(transpiler);
             });

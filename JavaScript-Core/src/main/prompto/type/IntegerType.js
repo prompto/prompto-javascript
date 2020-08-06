@@ -10,7 +10,7 @@ var IntegerRange = require("../value/IntegerRange").IntegerRange;
 var Identifier = require("../grammar/Identifier").Identifier;
 var PeriodType = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
 	CharacterType = require("./CharacterType").CharacterType;
 	TextType = require("./TextType").TextType;
 	PeriodType = require("./PeriodType").PeriodType;

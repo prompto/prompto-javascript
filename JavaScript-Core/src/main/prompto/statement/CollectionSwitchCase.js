@@ -68,7 +68,7 @@ class CollectionSwitchCase extends SwitchCase {
     }
 
     transpile(transpiler) {
-        this.expression && this.expression.expressions.forEach(function(expression) {
+        this.expression && this.expression.expressions.forEach(expression => {
             transpiler.append("case ");
             expression.transpile(transpiler);
             transpiler.append(":").newLine();

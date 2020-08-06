@@ -5,7 +5,7 @@ var Dialect = require("../parser/Dialect").Dialect;
 var ClosureValue = require("../value/ClosureValue").ClosureValue;
 var InstanceContext = null;
 
-exports.resolve = function() {
+exports.resolve = () => {
     MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
     InstanceContext = require("../runtime/Context").InstanceContext;
 };

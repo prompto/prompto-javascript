@@ -6,7 +6,7 @@ var BooleanType = require("./BooleanType").BooleanType;
 var TextValue = null; // circular dependency
 var TypeFamily = require("../store/TypeFamily").TypeFamily;
 
-exports.resolve = function() {
+exports.resolve = () => {
     CharacterType = require("./CharacterType").CharacterType;
     TextValue = require("../value/TextValue").TextValue;
  };

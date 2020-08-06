@@ -56,9 +56,9 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
 
     findWidgetPropertiesFieldAnnotation(context, widget) {
         var found = widget.getAllAnnotations(context)
-            .filter(function(a) {
+            .filter(a => {
                 return a.name==="@WidgetField";
-            }).filter(function(a) {
+            }).filter(a => {
                 var value = a.getArgument("isProperties");
                 return value instanceof BooleanLiteral && value.value.value;
             });
@@ -140,10 +140,10 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                     if(value instanceof SetLiteral) {
                         value = value.interpret(context);
                         var types = Array.from(value.items.set)
-                            .filter(function(l) {
+                            .filter(l => {
                                return l !== NullValue.instance;
                             })
-                            .map(function (l) {
+                            .map(l => {
                                 return l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
                         }, this);
                         prop.validator = new TypeSetValidator(new Set(types));
@@ -157,10 +157,10 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                     if(value instanceof SetLiteral) {
                         value = value.interpret(context);
                         var texts = Array.from(value.items.set)
-                            .filter(function(l) {
+                            .filter(l => {
                                 return l !== NullValue.instance;
                             })
-                            .map(function (l) {
+                            .map(l => {
                                 return l.toString();
                             });
                         prop.validator = new ValueSetValidator(new Set(texts));
@@ -183,10 +183,10 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
         var itemType = value.itemType || null;
         if(itemType instanceof TypeType) {
             var types = Array.from(value.items.set)
-                .filter(function(l) {
+                .filter(l => {
                     return l !== NullValue.instance;
                 })
-                .map(function (l) {
+                .map(l => {
                     return l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) );
                 }, this);
             if(types.indexOf(null)>=0)
@@ -197,10 +197,10 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
             return prop;
         } else if(itemType === AnyType.instance || itemType === TextType.instance) {
             var texts = Array.from(value.items.set)
-                .filter(function(l) {
+                .filter(l => {
                     return l !== NullValue.instance;
                 })
-                .map(function (l) {
+                .map(l => {
                     return l.toString();
                 });
             prop.validator = new ValueSetValidator(new Set(texts));

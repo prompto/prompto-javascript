@@ -12,7 +12,7 @@ class IdentifierList extends ObjectList {
     }
 
     names() {
-        return this.map(function(id) { return id.name; } );
+        return this.map(id => { return id.name; } );
     }
 
     hasAttribute(name) {
@@ -62,7 +62,7 @@ class IdentifierList extends ObjectList {
 
     toODialect(writer) {
         if(this.length>0) {
-            this.forEach(function(id) {
+            this.forEach(id => {
                 writer.append(id.name);
                 writer.append(", ");
             });

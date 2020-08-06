@@ -18,12 +18,12 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
     }
 
     getSymbol(name) {
-        return this.symbols.filter(function(s) { return s.name === name; })[0] || null;
+        return this.symbols.filter(s => { return s.name === name; })[0] || null;
     }
 
     unregister(context) {
         context.unregisterDeclaration (this);
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.unregister(context);
         });
     }
@@ -36,7 +36,7 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
         writer.append("enum ").append(this.name).append('(');
         this.type.derivedFrom.toDialect(writer);
         writer.append("):").newLine().indent();
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.toDialect(writer);
             writer.newLine();
         });
@@ -47,7 +47,7 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
         writer.append("enumerated ").append(this.name).append('(');
         this.type.derivedFrom.toDialect(writer);
         writer.append(") {").newLine().indent();
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.toDialect(writer);
             writer.append(";").newLine();
         });
@@ -58,7 +58,7 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
         writer.append("define ").append(this.name).append(" as enumerated ");
         this.type.derivedFrom.toDialect(writer);
         writer.append(" with symbols:").newLine().indent();
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.toDialect(writer);
             writer.newLine();
         });
@@ -67,13 +67,13 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
 
     register(context) {
         context.registerDeclaration(this);
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.register(context);
         });
     }
 
     check(context) {
-        this.symbols.forEach(function(symbol) {
+        this.symbols.forEach(symbol => {
             symbol.check(context);
         });
         return this.type;
@@ -83,8 +83,8 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
         transpiler.append("function " + this.name + "(name, value) { this.name = name; this.value = value; return this; };").newLine();
         transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
         transpiler.append(this.name).append(".prototype.equals = function(other) { return this==other; };").newLine();
-        this.symbols.forEach(function(symbol) {symbol.initialize(transpiler);});
-        var names = this.symbols.map(function(symbol) { return symbol.name; });
+        this.symbols.forEach(symbol => {symbol.initialize(transpiler);});
+        var names = this.symbols.map(symbol => { return symbol.name; });
         transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
         transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
     }

@@ -17,7 +17,7 @@ var CategorySymbol = null;
 var MethodDeclarationMap = null;
 
 
-exports.resolve = function() {
+exports.resolve = () => {
 	CategoryType = require("../type/CategoryType").CategoryType;
     CategorySymbol = require("./CategorySymbol").CategorySymbol;
     NativeInstance = require("../value/NativeInstance.js").NativeInstance;
@@ -92,7 +92,7 @@ class MethodSelector extends MemberSelector {
             if(cd!=null) {
                 var members = cd.getMemberMethodsMap(context, this.name);
                 if(members!=null) {
-                    members.getAll().forEach(function(method) {
+                    members.getAll().forEach(method => {
                         result.add(method);
                     });
                 }
@@ -100,7 +100,7 @@ class MethodSelector extends MemberSelector {
         }
         var methods = context.getRegisteredDeclaration(this.name);
         if(methods instanceof MethodDeclarationMap) {
-            methods.getAll().forEach(function(method) {
+            methods.getAll().forEach(method => {
                 result.add(method);
             });
         }

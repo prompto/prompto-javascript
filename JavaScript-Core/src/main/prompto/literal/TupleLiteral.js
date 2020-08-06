@@ -35,7 +35,7 @@ class TupleLiteral extends Literal {
     interpret(context) {
         if(this.expressions.length>0) {
             var tuple = new TupleValue();
-            this.expressions.forEach(function(expression) {
+            this.expressions.forEach(expression => {
                 var item = expression.interpret(context);
                 tuple.add(item);
             });
