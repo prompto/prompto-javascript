@@ -255,9 +255,7 @@ class MethodCall extends SimpleStatement {
 
     transpileAssignments(transpiler, declaration, allowDerived) {
         var args = this.makeArguments(transpiler.context, declaration);
-        args = args.filter(argument => {
-            return !(argument.parameter instanceof CodeParameter);
-        });
+        args = args.filter(argument => !(argument.parameter instanceof CodeParameter));
         if(args.length > 0) {
             transpiler.append("(");
             args.forEach(argument => {

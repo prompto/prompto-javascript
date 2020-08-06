@@ -14,37 +14,25 @@ function Dialect(name) {
 }
 
 Dialect.E = new Dialect("E");
-Dialect.E.getParserFactory = () => {
-	return new EParserFactory();
-};
+Dialect.E.getParserFactory = () => new EParserFactory();
 Dialect.E.toDialect = (w, o) => {
     o.toEDialect(w);
 };
-Dialect.E.toString = o => {
-    return o.toEString();
-};
+Dialect.E.toString = o => o.toEString();
 
 
 Dialect.O = new Dialect("O");
-Dialect.O.getParserFactory = () => {
-	return new OParserFactory();
-};
+Dialect.O.getParserFactory = () => new OParserFactory();
 Dialect.O.toDialect = (w, o) => {
     o.toODialect(w);
 };
-Dialect.O.toString = o => {
-    return o.toOString();
-};
+Dialect.O.toString = o => o.toOString();
 
 Dialect.M = new Dialect("M");
-Dialect.M.getParserFactory = () => {
-    return new MParserFactory();
-};
+Dialect.M.getParserFactory = () => new MParserFactory();
 Dialect.M.toDialect = (w, o) => {
     o.toMDialect(w);
 };
-Dialect.M.toString = o => {
-    return o.toMString();
-};
+Dialect.M.toString = o => o.toMString();
 
 exports.Dialect = Dialect;

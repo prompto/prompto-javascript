@@ -26,9 +26,7 @@ class CommentStatement extends BaseStatement {
 
     toDialect(writer) {
         var lines = this.text.split("\n");
-        lines = lines.map(line => {
-            return uncomment(line);
-        });
+        lines = lines.map(line => uncomment(line));
         switch (writer.dialect) {
             case Dialect.E:
             case Dialect.O:

@@ -28,9 +28,7 @@ class BaseMethodDeclaration extends BaseDeclaration {
     }
 
     getProto(context) {
-        return this.parameters.map(arg => {
-            return arg.getProto(context);
-        }).join("/");
+        return this.parameters.map(arg => arg.getProto(context)).join("/");
     }
 
     getTranspiledName(context) {
@@ -38,7 +36,7 @@ class BaseMethodDeclaration extends BaseDeclaration {
         if(this.name.indexOf("$")>0)
             return this.name;
         else
-            return [this.name].concat(this.parameters.map(arg => { return arg.getTranspiledName(context); })).join("$");
+            return [this.name].concat(this.parameters.map(arg => arg.getTranspiledName(context))).join("$");
     }
 
     transpileProlog(transpiler) {

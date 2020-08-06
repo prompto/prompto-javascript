@@ -188,9 +188,7 @@ class Context {
             else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
                 var info = {};
                 info.name = decl.name;
-                info.symbols = decl.symbols.map(s => {
-                    return s.name;
-                });
+                info.symbols = decl.symbols.map(s => s.name);
                 catalog.enumerations.push(info);
             } else if(decl instanceof CategoryDeclaration) {
                 if(decl.isWidget(this))

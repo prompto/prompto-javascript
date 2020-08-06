@@ -202,9 +202,7 @@ class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         this.statements.declare(transpiler);
         // remember code arguments
         declaration.codeArguments = {};
-        this.parameters.filter(arg => {
-            return arg instanceof CodeParameter;
-        }).forEach(arg => {
+        this.parameters.filter(arg => arg instanceof CodeParameter).forEach(arg => {
             declaration.codeArguments[arg.name] = { id: arg.id, value: transpiler.context.getValue(arg.id) };
         });
     }

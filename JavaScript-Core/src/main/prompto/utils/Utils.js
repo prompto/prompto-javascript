@@ -55,13 +55,9 @@ function removeAccents(s) {
 
 function getUtf8StringLength(s) {
     return s.split('')
-        .map(c => {
-            return c.charCodeAt(0);
-        })
+        .map(c => c.charCodeAt(0))
         .map(getUtf8CharLength)
-        .reduce((prev, cur) => {
-            return prev + cur;
-        }, 0);
+        .reduce((prev, cur) => prev + cur, 0);
 }
 
 /* the below inspired by MDN StringView.js */
@@ -72,13 +68,9 @@ function getUtf8CharLength(c) {
 
 function stringToUtf8Buffer(s) {
     var codes = s.split('')
-        .map(c => {
-            return c.charCodeAt(0);
-        });
+        .map(c => c.charCodeAt(0));
     var size = codes.map(getUtf8CharLength)
-        .reduce((prev, cur) => {
-            return prev + cur;
-        }, 0);
+        .reduce((prev, cur) => prev + cur, 0);
     var buffer = new ArrayBuffer(size);
     var view = new Uint8Array(buffer);
     var idx = 0;

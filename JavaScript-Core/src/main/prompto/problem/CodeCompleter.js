@@ -25,7 +25,7 @@ class CodeCompleter extends ProblemListener {
     }
 
     hasSuggestion(s) {
-        return this.suggestions.map(s => { return s.literal; }).indexOf(s)>=0;
+        return this.suggestions.map(s => s.literal).indexOf(s)>=0;
     }
 }
 

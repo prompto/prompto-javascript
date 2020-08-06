@@ -11,9 +11,7 @@ function AbstractParser(input) {
 AbstractParser.prototype = Object.create(Parser.prototype);
 AbstractParser.prototype.constructor = AbstractParser;
 
-AbstractParser.prototype.isText = (token, text) => {
-	return text === token.text;
-};
+AbstractParser.prototype.isText = (token, text) => text === token.text;
 
 AbstractParser.prototype.was = function(type) {
 	return this.lastHiddenTokenType()===type;

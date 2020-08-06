@@ -76,7 +76,7 @@ OPromptoBuilder.prototype.getHiddenTokens = function(token, fetcher) {
     if(hidden==null || hidden.length===0)
         return null;
     else
-        return hidden.map(token => { return token.text; }).join("");
+        return hidden.map(token => token.text).join("");
 };
 
 
@@ -1466,7 +1466,7 @@ OPromptoBuilder.prototype.exitJavaScriptCategoryBinding = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
-    var identifier = ctx.javascript_identifier().map(cx => { return cx.getText(); }).join(".");
+    var identifier = ctx.javascript_identifier().map(cx => cx.getText()).join(".");
     var module = this.getNodeValue(ctx.javascript_module()) || null;
 	var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
 	this.setNodeValue(ctx, map);
@@ -1474,9 +1474,7 @@ OPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
 
 
 OPromptoBuilder.prototype.exitJavascript_module = function(ctx) {
-	var ids = ctx.javascript_identifier().map(rule => {
-        return rule.getText();
-	});
+	var ids = ctx.javascript_identifier().map(rule => rule.getText());
 	var module = new javascript.JavaScriptModule(ids);
 	this.setNodeValue(ctx, module);
 };
@@ -2648,9 +2646,7 @@ OPromptoBuilder.prototype.exitPythonMethodExpression = function(ctx) {
 };
 
 OPromptoBuilder.prototype.exitPython_module = function(ctx) {
-    var ids = ctx.python_identifier().map(rule => {
-        return rule.getText();
-    });
+    var ids = ctx.python_identifier().map(rule => rule.getText());
     var module = new python.PythonModule(ids);
     this.setNodeValue(ctx, module);
 };

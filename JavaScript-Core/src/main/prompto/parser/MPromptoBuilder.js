@@ -67,13 +67,13 @@ MPromptoBuilder.prototype.getHiddenTokensText = hidden => {
     if(hidden==null || hidden.length===0)
         return null;
     else
-        return hidden.map(token => { return token.text; }).join("");
+        return hidden.map(token => token.text).join("");
 };
 
 MPromptoBuilder.prototype.getWhiteSpacePlus = function(ctx) {
     var within = ctx.children==null ? null : ctx.children
         .filter(function(child) { return this.isNotIndent(child); } , this)
-        .map(child => { return child.getText(); }, this)
+        .map(child => child.getText(), this)
         .join("");
     if(within==null || within.length===0)
         return null;
@@ -86,9 +86,7 @@ MPromptoBuilder.prototype.getWhiteSpacePlus = function(ctx) {
     return within;
 };
 
-MPromptoBuilder.prototype.isNotIndent = tree => {
-    return !tree.symbol || tree.symbol.type!=parser.MParser.INDENT;
-}
+MPromptoBuilder.prototype.isNotIndent = tree => !tree.symbol || tree.symbol.type!=parser.MParser.INDENT
 
 MPromptoBuilder.prototype.readAnnotations = function(ctxs) {
     var annotations = ctxs.map(function (csc) {
@@ -1454,7 +1452,7 @@ MPromptoBuilder.prototype.exitJavaScriptCategoryBinding = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
-    var identifier = ctx.javascript_identifier().map(cx => { return cx.getText(); }).join(".");
+    var identifier = ctx.javascript_identifier().map(cx => cx.getText()).join(".");
     var module = this.getNodeValue(ctx.javascript_module());
     var map = new javascript.JavaScriptNativeCategoryBinding(identifier, module);
     this.setNodeValue(ctx, map);
@@ -1462,9 +1460,7 @@ MPromptoBuilder.prototype.exitJavascript_category_binding = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitJavascript_module = function(ctx) {
-    var ids = ctx.javascript_identifier().map(rule => {
-        return rule.getText();
-    });
+    var ids = ctx.javascript_identifier().map(rule => rule.getText());
     var module = new javascript.JavaScriptModule(ids);
     this.setNodeValue(ctx, module);
 };
@@ -2636,9 +2632,7 @@ MPromptoBuilder.prototype.exitPythonMethodExpression = function(ctx) {
 };
 
 MPromptoBuilder.prototype.exitPython_module = function(ctx) {
-    var ids = ctx.python_identifier().map(rule => {
-        return rule.getText();
-    });
+    var ids = ctx.python_identifier().map(rule => rule.getText());
     var module = new python.PythonModule(ids);
     this.setNodeValue(ctx, module);
 };

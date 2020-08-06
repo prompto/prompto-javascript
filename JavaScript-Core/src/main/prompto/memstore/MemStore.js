@@ -159,8 +159,8 @@ MemStore.prototype.storeAsync = MemStore.prototype.store;
 
 
 function StoredIterable(docs, totalCount) {
-    this.count = () => { return docs.length; };
-    this.totalCount = () => { return totalCount; };
+    this.count = () => docs.length;
+    this.totalCount = () => totalCount;
     this.iterator = () => {
         var index = 0;
         return {

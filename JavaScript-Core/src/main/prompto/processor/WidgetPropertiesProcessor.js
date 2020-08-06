@@ -56,9 +56,7 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
 
     findWidgetPropertiesFieldAnnotation(context, widget) {
         var found = widget.getAllAnnotations(context)
-            .filter(a => {
-                return a.name==="@WidgetField";
-            }).filter(a => {
+            .filter(a => a.name==="@WidgetField").filter(a => {
                 var value = a.getArgument("isProperties");
                 return value instanceof BooleanLiteral && value.value.value;
             });
@@ -140,12 +138,8 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                     if(value instanceof SetLiteral) {
                         value = value.interpret(context);
                         var types = Array.from(value.items.set)
-                            .filter(l => {
-                               return l !== NullValue.instance;
-                            })
-                            .map(l => {
-                                return l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
-                        }, this);
+                            .filter(l => l !== NullValue.instance)
+                            .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name)), this);
                         prop.validator = new TypeSetValidator(new Set(types));
                         if(types.length==value.items.set.size)
                             prop.validator = prop.validator.required();
@@ -157,12 +151,8 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
                     if(value instanceof SetLiteral) {
                         value = value.interpret(context);
                         var texts = Array.from(value.items.set)
-                            .filter(l => {
-                                return l !== NullValue.instance;
-                            })
-                            .map(l => {
-                                return l.toString();
-                            });
+                            .filter(l => l !== NullValue.instance)
+                            .map(l => l.toString());
                         prop.validator = new ValueSetValidator(new Set(texts));
                         if(texts.length==value.items.set.size)
                             prop.validator = prop.validator.required();
@@ -183,12 +173,8 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
         var itemType = value.itemType || null;
         if(itemType instanceof TypeType) {
             var types = Array.from(value.items.set)
-                .filter(l => {
-                    return l !== NullValue.instance;
-                })
-                .map(l => {
-                    return l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) );
-                }, this);
+                .filter(l => l !== NullValue.instance)
+                .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) ), this);
             if(types.indexOf(null)>=0)
                 return null; // TODO something went wrong
             prop.validator = new TypeSetValidator(new Set(types));
@@ -197,12 +183,8 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
             return prop;
         } else if(itemType === AnyType.instance || itemType === TextType.instance) {
             var texts = Array.from(value.items.set)
-                .filter(l => {
-                    return l !== NullValue.instance;
-                })
-                .map(l => {
-                    return l.toString();
-                });
+                .filter(l => l !== NullValue.instance)
+                .map(l => l.toString());
             prop.validator = new ValueSetValidator(new Set(texts));
             if(texts.length==value.items.set.size)
                 prop.validator = prop.validator.required();

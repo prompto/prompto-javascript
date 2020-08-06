@@ -29,9 +29,7 @@ class ParameterList extends ObjectList {
     }
 
     find(name) {
-        return this.filter(param => {
-            return name === param.name;
-        })[0] || null;
+        return this.filter(param => name === param.name)[0] || null;
     }
 
     toDialect(writer) {
@@ -69,9 +67,7 @@ class ParameterList extends ObjectList {
     }
 
     transpile(transpiler) {
-        var args = this.filter(arg => {
-            return !(arg instanceof CodeParameter);
-        })
+        var args = this.filter(arg => !(arg instanceof CodeParameter))
         if(args.length>0) {
             args.forEach(arg => {
                 arg.transpile(transpiler);

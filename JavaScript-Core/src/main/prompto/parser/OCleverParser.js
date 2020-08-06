@@ -47,9 +47,7 @@ OCleverParser.prototype.parse_document_literal = function() {
 	return this.doParse(this.document_literal);
 };
 
-OCleverParser.prototype.equalToken = () => {
-	return OParser.EQUAL;
-};
+OCleverParser.prototype.equalToken = () => OParser.EQUAL;
 
 OCleverParser.prototype.doParse = function(rule) {
     var tree = rule.bind(this)();

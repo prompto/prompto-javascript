@@ -23,9 +23,7 @@ class Annotation extends Section {
     getArgument(name) {
         if(!this.entries || !this.entries.items)
             return null;
-        var entry = this.entries.items.filter(entry => {
-            return name === entry.key && entry.key.toString();
-        })[0];
+        var entry = this.entries.items.filter(entry => name === entry.key && entry.key.toString())[0];
         if(entry)
             return entry.value;
         else

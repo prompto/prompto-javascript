@@ -23,9 +23,7 @@ class ListValue extends BaseValueList {
 
     getStorableData() {
         if(this.storables == null)
-            this.storables = this.items.map(item => {
-                return item.getStorableData();
-            });
+            this.storables = this.items.map(item => item.getStorableData());
         return this.storables;
     }
 
@@ -36,9 +34,7 @@ class ListValue extends BaseValueList {
     }
 
     convertToJavaScript() {
-        var items = this.items.map(value => {
-            return value.convertToJavaScript();
-        }, this);
+        var items = this.items.map(value => value.convertToJavaScript(), this);
         return new List(this.mutable, items);
     }
 
@@ -61,7 +57,7 @@ class ListValue extends BaseValueList {
             value = setValue.Add(context, value);
         }
         if(value instanceof SetValue) {
-            var items = this.items.filter(item => { return !value.items.has(item); });
+            var items = this.items.filter(item => !value.items.has(item));
             return new ListValue(this.type.itemType, items);
         } else {
             return BaseValueList.prototype.Subtract.apply(this, context, value);

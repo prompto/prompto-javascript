@@ -18,7 +18,7 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
     }
 
     getSymbol(name) {
-        return this.symbols.filter(s => { return s.name === name; })[0] || null;
+        return this.symbols.filter(s => s.name === name)[0] || null;
     }
 
     unregister(context) {
@@ -84,7 +84,7 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
         transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
         transpiler.append(this.name).append(".prototype.equals = function(other) { return this==other; };").newLine();
         this.symbols.forEach(symbol => {symbol.initialize(transpiler);});
-        var names = this.symbols.map(symbol => { return symbol.name; });
+        var names = this.symbols.map(symbol => symbol.name);
         transpiler.append(this.name).append(".symbols = new List(false, [").append(names.join(", ")).append("]);").newLine();
         transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
     }

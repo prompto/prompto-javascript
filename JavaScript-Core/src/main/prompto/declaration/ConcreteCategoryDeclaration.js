@@ -440,9 +440,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     declareMethods(transpiler) {
-        this.methods.filter(decl => {
-            return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
-        }).forEach(method => {
+        this.methods.filter(decl => !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration)).forEach(method => {
             var t = transpiler.newChildTranspiler();
             method.declare(t, false);
             t.flush();
@@ -571,9 +569,7 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     transpileMethods(transpiler) {
-        this.methods.filter(decl => {
-            return !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
-        }).forEach(method => {
+        this.methods.filter(decl => !(decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration)).forEach(method => {
             var t = transpiler.newChildTranspiler();
             method.transpile(t);
             t.flush();
@@ -581,10 +577,8 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     transpileGetterSetters(transpiler) {
-        var getterSetters = this.methods.filter(decl => {
-            return (decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration);
-        }, this);
-        var names = new Set(getterSetters.map(decl => { return decl.id.name; }));
+        var getterSetters = this.methods.filter(decl => decl instanceof SetterMethodDeclaration || decl instanceof GetterMethodDeclaration, this);
+        var names = new Set(getterSetters.map(decl => decl.id.name));
         names.forEach(function(name) { this.transpileGetterSetter(transpiler, name); }, this);
     }
 

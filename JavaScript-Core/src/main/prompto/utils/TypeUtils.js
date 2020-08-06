@@ -25,7 +25,7 @@ var convertFromJavaScript = value => {
 var inferExpressionsType = (context, expressions) => {
     if (expressions.length == 0)
         return MissingType.instance;
-    var types = expressions.map(e => { return e.check(context); });
+    var types = expressions.map(e => e.check(context));
     return inferElementType(context, types);
 }
 

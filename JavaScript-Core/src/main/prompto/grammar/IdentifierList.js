@@ -12,7 +12,7 @@ class IdentifierList extends ObjectList {
     }
 
     names() {
-        return this.map(id => { return id.name; } );
+        return this.map(id => id.name );
     }
 
     hasAttribute(name) {
