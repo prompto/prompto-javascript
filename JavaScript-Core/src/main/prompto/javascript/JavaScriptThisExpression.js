@@ -1,11 +1,9 @@
-const JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
-const ThisExpression = require("../expression/ThisExpression").ThisExpression;
 
-class JavaScriptThisExpression extends JavaScriptExpression {
+export default class JavaScriptThisExpression extends JavaScriptExpression {
+
     constructor() {
         super();
         this.expression = new ThisExpression();
-        return this;
     }
 
     interpret(context) {
@@ -24,5 +22,3 @@ class JavaScriptThisExpression extends JavaScriptExpression {
         return "this";
     }
 }
-
-exports.JavaScriptThisExpression = JavaScriptThisExpression;

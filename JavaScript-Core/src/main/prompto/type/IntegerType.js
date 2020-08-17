@@ -1,29 +1,18 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const DecimalType = require("./DecimalType").DecimalType;
-let CharacterType = null;
-const ListType = require("./ListType").ListType;
-const RangeType = require("./RangeType").RangeType;
-let TextType = null;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const IntegerRange = require("../value/IntegerRange").IntegerRange;
-const Identifier = require("../grammar/Identifier").Identifier;
-let PeriodType = null;
+import NativeType from "./NativeType"
+import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from "./index"
+import { Identifier } from "../grammar/index"
+import { IntegerValue, IntegerRange } from "../value/index"
+import { FormatMethodDeclaration } from "../builtins/IntegerTypeBuiltins"
 
-exports.resolve = () => {
-	CharacterType = require("./CharacterType").CharacterType;
-	TextType = require("./TextType").TextType;
-	PeriodType = require("./PeriodType").PeriodType;
-}
 
-class IntegerType extends NativeType {
+export default class IntegerType extends NativeType {
 
     constructor() {
         super(new Identifier("Integer"));
     }
 
     isAssignableFrom(context, other) {
-        return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || (other == DecimalType.instance);
     }
 
@@ -280,7 +269,6 @@ class IntegerType extends NativeType {
     getMemberMethods(context, name) {
         switch (name) {
             case "format":
-                const FormatMethodDeclaration = require("../builtins/IntegerTypeBuiltins").FormatMethodDeclaration;
                 return [new FormatMethodDeclaration()];
             default:
                 return NativeType.prototype.getMemberMethods.call(context, name);
@@ -291,4 +279,3 @@ class IntegerType extends NativeType {
 IntegerType.instance = new IntegerType();
 
 
-exports.IntegerType = IntegerType;

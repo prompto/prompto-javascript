@@ -1,11 +1,13 @@
-exports.Context = require('./Context').Context;
-exports.VoidResult = require('./VoidResult').VoidResult;
-exports.MethodDeclarationMap  = require('./Context').MethodDeclarationMap;
-exports.Interpreter = require('./Interpreter').Interpreter;
-exports.locateMethod = require('./Interpreter').locateMethod;
-exports.Transpiler = require('./Transpiler').Transpiler;
-exports.Scheduler = require('./Scheduler').Scheduler;
-exports.ApplicationContext = require('./ApplicationContext').ApplicationContext;
+export { Context, BuiltInContext } from './Context';
+// export {default as VoidResult} from './VoidResult';
+export {default as MethodDeclarationMap} from './MethodDeclarationMap';
+// export {default as Interpreter} from './Interpreter';
+// export {default as locateMethod} from './Interpreter';
+// export {default as Transpiler} from './Transpiler';
+// export {default as Scheduler} from './Scheduler';
+// export {default as ApplicationContext} from './ApplicationContext';
+export {default as Variable} from './Variable';
+export {default as ErrorVariable} from './ErrorVariable';
 
-require('./MethodFinder').resolve();
-require('./ErrorVariable').resolve();
+// require('./MethodFinder';
+// require('./Error{default asiable';

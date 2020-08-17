@@ -1,21 +1,21 @@
-const argument = require("../param/index");
-const constraint = require("../constraint/index");
-const instance = require("../instance/index");
-const declaration = require("../declaration/index");
-const expression = require("../expression/index");
-const javascript = require("../javascript/index");
-const statement = require("../statement/index");
-const literal = require("../literal/index");
-const grammar = require("../grammar/index");
-const utils = require("../utils/index");
-const param = require("../param/index");
-const parser = require("../parser/index");
-const type = require("../type/index");
-const jsx = require("../jsx/index");
-const css = require("../css/index");
-const java = require("../java/index");
-const csharp = require("../csharp/index");
-const python = require("../python/index");
+import argument from "../param/index";
+import constraint from "../constraint/index";
+import instance from "../instance/index";
+import declaration from "../declaration/index";
+import expression from "../expression/index";
+import javascript from "../javascript/index";
+import statement from "../statement/index";
+import literal from "../literal/index";
+import grammar from "../grammar/index";
+import utils from "../utils/index";
+import param from "../param/index";
+import parser from "../parser/index";
+import type from "../type/index";
+import jsx from "../jsx/index";
+import css from "../css/index";
+import java from "../java/index";
+import csharp from "../csharp/index";
+import python from "../python/index";
 
 function OPromptoBuilder(oparser) {
 	parser.OParserListener.call(this);
@@ -2912,12 +2912,12 @@ OPromptoBuilder.prototype.exitJsx_self_closing = function(ctx) {
 };
 
 
-	
+
 OPromptoBuilder.prototype.exitCssExpression = function(ctx) {
     this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
 }
-	
-	
+
+
 OPromptoBuilder.prototype.exitCss_expression = function(ctx) {
     const exp = new css.CssExpression();
     ctx.css_field().forEach(function(cx) {
@@ -2926,22 +2926,22 @@ OPromptoBuilder.prototype.exitCss_expression = function(ctx) {
     }, this);
     this.setNodeValue(ctx, exp);
 };
-	
-	
+
+
 OPromptoBuilder.prototype.exitCss_field = function(ctx) {
     const name = ctx.name.getText();
     const value = this.getNodeValue(ctx.value);
     this.setNodeValue(ctx, new css.CssField(name, value));
 };
-	
-	
-	
+
+
+
 OPromptoBuilder.prototype.exitCssText = function(ctx) {
     const text = this.input.getText({start: ctx.text.start, stop: ctx.text.stop});
     this.setNodeValue(ctx, new css.CssText(text));
 };
-	
-	
+
+
 OPromptoBuilder.prototype.exitCssValue = function(ctx) {
     const exp = this.getNodeValue(ctx.exp);
     this.setNodeValue(ctx, new css.CssCode(exp));
@@ -2993,4 +2993,4 @@ OPromptoBuilder.prototype.readValidToken = function(idx) {
 };
 
 
-exports.OPromptoBuilder = OPromptoBuilder;
+export {OPromptoBuilder};

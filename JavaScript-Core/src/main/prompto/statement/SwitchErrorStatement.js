@@ -1,18 +1,5 @@
-const BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
-const ErrorVariable = require("../runtime/ErrorVariable").ErrorVariable;
-const Identifier = require("../grammar/Identifier").Identifier;
-const EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-const VoidType = require("../type/VoidType").VoidType;
-const ExecutionError = require("../error/ExecutionError").ExecutionError;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const Argument = require("../grammar/Argument").Argument;
-const UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
-const CategoryType = require("../type/CategoryType").CategoryType;
 
-
-class SwitchErrorStatement extends BaseSwitchStatement {
+export default class SwitchErrorStatement extends BaseSwitchStatement {
 
     constructor(errorId, statements, handlers, anyStmts, alwaysStmts) {
         super(handlers, anyStmts);
@@ -184,5 +171,3 @@ class SwitchErrorStatement extends BaseSwitchStatement {
     }
 }
 
-
-exports.SwitchErrorStatement = SwitchErrorStatement;

@@ -1,7 +1,7 @@
-class PropertyMap {
+export default class PropertyMap {
+
     constructor() {
         this.entries = {};
-        return this;
     }
 
     set(name, type) {
@@ -16,5 +16,3 @@ class PropertyMap {
         return !!this.entries[name];
     }
 }
-
-exports.PropertyMap = PropertyMap;

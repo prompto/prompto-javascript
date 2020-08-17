@@ -1,21 +1,12 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const Variable = require("../runtime/Variable").Variable;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const ListType = require("../type/ListType").ListType;
-const DictionaryType = require("../type/DictionaryType").DictionaryType;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const InternalError = require("../error/InternalError").InternalError;
-const BreakResult = require("../runtime/BreakResult").BreakResult;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
-class ForEachStatement extends BaseStatement {
+export default class ForEachStatement extends BaseStatement {
+
     constructor(v1, v2, source, statements) {
         super();
         this.v1 = v1 || null;
         this.v2 = v2 || null;
         this.source = source;
         this.statements = statements;
-        return this;
     }
 
     check(context) {
@@ -290,6 +281,3 @@ class ForEachStatement extends BaseStatement {
         return this.statements.locateSectionAtLine(line) || this;
     }
 }
-
-
-exports.ForEachStatement = ForEachStatement;

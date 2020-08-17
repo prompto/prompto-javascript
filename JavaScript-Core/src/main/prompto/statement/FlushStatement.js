@@ -1,13 +1,6 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const $DataStore = require("../store/DataStore").$DataStore;
-const VoidType = require("../type/VoidType").VoidType;
 
 
-class FlushStatement extends SimpleStatement {
-    constructor() {
-        super();
-        return this;
-    }
+export default class FlushStatement extends SimpleStatement {
 
     check(context) {
         return VoidType.instance;
@@ -42,5 +35,3 @@ class FlushStatement extends SimpleStatement {
     }
 }
 
-
-exports.FlushStatement = FlushStatement;

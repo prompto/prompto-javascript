@@ -1,16 +1,5 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-const Argument = require("./Argument").Argument;
-let AndExpression = null;
-let UnresolvedIdentifier = null;
 
-exports.resolve = () => {
-    AndExpression = require("../expression/AndExpression").AndExpression;
-    UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-}
-
-class ArgumentList extends ObjectList {
+export default class ArgumentList extends ObjectList {
 
     constructor(items) {
         super(items || []);
@@ -144,6 +133,3 @@ class ArgumentList extends ObjectList {
         transpiler.append(")");
     }
 }
-
-exports.ArgumentList = ArgumentList;
-

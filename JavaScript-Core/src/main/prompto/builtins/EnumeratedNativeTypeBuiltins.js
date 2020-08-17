@@ -1,11 +1,6 @@
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-const EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-const TextType = require("../type/TextType").TextType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
 
+// don't use export default since more builtins are expected
 class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {
 
     constructor(enumType) {
@@ -32,4 +27,4 @@ class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {
     }
 }
 
-exports.SymbolOfMethodDeclaration = SymbolOfMethodDeclaration;
+export {SymbolOfMethodDeclaration};

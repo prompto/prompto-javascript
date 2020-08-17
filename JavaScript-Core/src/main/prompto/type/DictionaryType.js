@@ -1,17 +1,5 @@
-const Identifier = require("../grammar/Identifier").Identifier;
-const ContainerType = require("./ContainerType").ContainerType;
-const BooleanType = require("./BooleanType").BooleanType;
-const IntegerType = require("./IntegerType").IntegerType;
-const TextType = require("./TextType").TextType;
-const SetType = require("./SetType").SetType;
-const ListType = require("./ListType").ListType;
-const EntryType = require("./EntryType").EntryType;
-const List = require("../intrinsic/List").List;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-const Dictionary = require("../intrinsic/Dictionary").Dictionary;
 
-
-class DictionaryType extends ContainerType {
+export default class DictionaryType extends ContainerType {
 
     constructor(itemType) {
         super(new Identifier(itemType.name + "<:>"), itemType);
@@ -191,4 +179,3 @@ class DictionaryType extends ContainerType {
     }
 }
 
-exports.DictionaryType = DictionaryType;

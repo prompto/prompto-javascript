@@ -1,18 +1,12 @@
-const ContainerType = require("./ContainerType").ContainerType;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-const Identifier = require("../grammar/Identifier").Identifier;
-let IntegerType = null;
-let BooleanType = null;
+import ContainerType from "./ContainerType"
+import { BooleanType, IntegerType } from "./index"
+import { Identifier } from "../grammar/index"
+import { StrictSet } from "../intrinsic/index"
 
-exports.resolve = () => {
-	IntegerType = require("./IntegerType").IntegerType;
-    BooleanType = require("./BooleanType").BooleanType;
-};
+export default class RangeType extends ContainerType {
 
-class RangeType extends ContainerType {
     constructor(itemType) {
         super(new Identifier(itemType.name+"[..]"), itemType);
-        return this;
     }
 
     withItemType(itemType) {
@@ -104,6 +98,3 @@ class RangeType extends ContainerType {
         transpiler.append(")");
     }
 }
-
-
-exports.RangeType = RangeType;

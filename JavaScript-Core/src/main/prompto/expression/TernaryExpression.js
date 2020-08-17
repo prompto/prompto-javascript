@@ -1,16 +1,11 @@
-const Expression = require("./Expression").Expression;
-const TypeMap = require("../type/TypeMap").TypeMap;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const Dialect = require("../parser/Dialect").Dialect;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-class TernaryExpression extends Expression {
+export default class TernaryExpression extends Expression {
+
     constructor(condition, ifTrue, ifFalse) {
         super();
         this.condition = condition;
         this.ifTrue = ifTrue;
         this.ifFalse = ifFalse;
-        return this;
     }
 
     toDialect(writer) {
@@ -65,5 +60,3 @@ class TernaryExpression extends Expression {
         transpiler.append(")");
     }
 }
-
-exports.TernaryExpression = TernaryExpression;

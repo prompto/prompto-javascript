@@ -1,16 +1,13 @@
-const Literal = require("./Literal").Literal;
-const CharacterValue = require("../value/CharacterValue").CharacterValue;
-const CharacterType = require("../type/CharacterType").CharacterType;
 
 /*jshint evil:true*/
 function unescape(text) {
 	return eval(text);
 }
 
-class CharacterLiteral extends Literal {
+export default class CharacterLiteral extends Literal {
+
     constructor(text) {
         super(text, new CharacterValue(unescape(text)));
-        return this;
     }
 
     check(context) {
@@ -27,4 +24,3 @@ class CharacterLiteral extends Literal {
 }
 
 
-exports.CharacterLiteral = CharacterLiteral;

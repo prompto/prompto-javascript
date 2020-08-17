@@ -1,16 +1,12 @@
-const RangeValue = require("./RangeValue").RangeValue;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-let IntegerType = null;
+import RangeValue from "./RangeValue"
+import { IntegerValue } from "./index"
+import { IntegerType } from "../type/index"
+import { IndexOutOfRangeError } from "../error/index"
 
-exports.resolve =() => {
-    IntegerType = require("../type/IntegerType").IntegerType;
-};
+export default class IntegerRange extends RangeValue {
 
-class IntegerRange extends RangeValue {
     constructor(left, right) {
         super(IntegerType.instance, left, right);
-        return this;
     }
 
     size() {
@@ -29,6 +25,3 @@ class IntegerRange extends RangeValue {
         return new IntegerRange(left, right);
     }
 }
-
-
-exports.IntegerRange = IntegerRange;

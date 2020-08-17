@@ -1,7 +1,5 @@
-const NativeType = require("./NativeType").NativeType;
-const TextType = require("./TextType").TextType;
 
-class BinaryType extends NativeType {
+export default class BinaryType extends NativeType {
     constructor(name) {
         super(name);
         return this;
@@ -16,5 +14,3 @@ class BinaryType extends NativeType {
             return NativeType.prototype.checkMember.call(context, section, name);
     }
 }
-
-exports.BinaryType = BinaryType;

@@ -1,20 +1,7 @@
-const Literal = require("./Literal").Literal;
-const Dictionary = require("../intrinsic/Dictionary").Dictionary;
-const DictEntryList = require("./DictEntryList").DictEntryList;
-const DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const MissingType = require("../type/MissingType").MissingType;
-const DictionaryType = require("../type/DictionaryType").DictionaryType;
-const CharacterType = require("../type/CharacterType").CharacterType;
-const TextType = require("../type/TextType").TextType;
-const inferElementType = require("../utils/TypeUtils").inferElementType;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const TextValue = require("../value/TextValue").TextValue;
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
-class DictLiteral extends Literal {
+export default class DictLiteral extends Literal {
 
     constructor(mutable, entries) {
         super("<:>", new DictionaryValue(MissingType.instance, new Dictionary(), mutable));
@@ -85,5 +72,3 @@ class DictLiteral extends Literal {
             return item;
     }
 }
-
-exports.DictLiteral = DictLiteral;

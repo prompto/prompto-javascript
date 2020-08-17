@@ -1,10 +1,8 @@
-const CodeType = require("../type/CodeType").CodeType;
-const Parameter = require("./Parameter").Parameter;
 
-class CodeParameter extends Parameter {
+export default class CodeParameter extends Parameter {
+
     constructor(id) {
         super(id);
-        return this;
     }
 
     getProto() {
@@ -37,6 +35,3 @@ class CodeParameter extends Parameter {
         writer.append(this.name);
     }
 }
-
-
-exports.CodeParameter = CodeParameter;

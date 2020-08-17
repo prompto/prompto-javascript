@@ -1,12 +1,10 @@
-const IJsxExpression = require("./IJsxExpression").IJsxExpression;
-const JsxType = require("../type/JsxType").JsxType;
 
-class JsxCode extends IJsxExpression {
+export default class JsxCode extends IJsxExpression {
+
     constructor(expression, suite) {
         super();
         this.expression = expression;
         this.suite = suite;
-        return this;
     }
 
     check(context) {
@@ -30,5 +28,3 @@ class JsxCode extends IJsxExpression {
         this.expression.transpile(transpiler);
     }
 }
-
-exports.JsxCode = JsxCode;

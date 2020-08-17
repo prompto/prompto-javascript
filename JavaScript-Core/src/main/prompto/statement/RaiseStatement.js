@@ -1,16 +1,9 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const VoidType = require("../type/VoidType").VoidType;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const UserError = require("../error/UserError").UserError;
-const Dialect = require("../parser/Dialect").Dialect;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class RaiseStatement extends SimpleStatement {
+export default class RaiseStatement extends SimpleStatement {
+
     constructor(expression) {
         super();
         this.expression = expression;
-        return this;
     }
 
     toString() {
@@ -61,5 +54,3 @@ class RaiseStatement extends SimpleStatement {
         this.expression.toDialect(writer);
     }
 }
-
-exports.RaiseStatement = RaiseStatement;

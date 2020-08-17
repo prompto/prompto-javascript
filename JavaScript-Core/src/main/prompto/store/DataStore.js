@@ -1,9 +1,7 @@
-const MemStore = require("../memstore/MemStore").MemStore;
 
-function $DataStore() {
+export default function $DataStore() {
 
 }
 
 $DataStore.instance = new MemStore();
 
-exports.$DataStore = $DataStore;

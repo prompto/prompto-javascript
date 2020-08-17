@@ -1,11 +1,8 @@
-const Literal = require("./Literal").Literal;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const DecimalType = require("../type/DecimalType").DecimalType;
 
-class DecimalLiteral extends Literal {
+export default class DecimalLiteral extends Literal {
+
     constructor(text) {
         super(text, DecimalValue.Parse(text));
-        return this;
     }
 
     check(context) {
@@ -20,6 +17,3 @@ class DecimalLiteral extends Literal {
         transpiler.append(this.text);
     }
 }
-
-
-exports.DecimalLiteral = DecimalLiteral;

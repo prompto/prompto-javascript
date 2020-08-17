@@ -1,13 +1,10 @@
-const Value = require("./Value").Value;
-const DecimalValue = require("./DecimalValue").DecimalValue;
-let IntegerType = null;
-const DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
+import Value from "./Value"
+import { DecimalValue } from "./index"
+import { SyntaxError, DivideByZeroError } from "../error/index"
+import { IntegerType } from "../type/index"
 
-exports.resolve = () => {
-    IntegerType = require("../type/IntegerType").IntegerType;
-};
 
-class IntegerValue extends Value {
+export default class IntegerValue extends Value {
  
     constructor(value) {
         super(IntegerType.instance);
@@ -139,5 +136,3 @@ class IntegerValue extends Value {
             json[fieldName] = this.value;
     }
 }
-
-exports.IntegerValue = IntegerValue;

@@ -1,11 +1,9 @@
-const IJsxExpression = require("./IJsxExpression").IJsxExpression;
-const JsxType = require("../type/JsxType").JsxType;
 
-class JsxFragment extends IJsxExpression {
+export default class JsxFragment extends IJsxExpression {
+
     constructor(openingSuite) {
         super();
         this.openingSuite = openingSuite;
-         return this;
     }
 
     toDialect(writer) {
@@ -46,5 +44,3 @@ class JsxFragment extends IJsxExpression {
         return false;
     }
 }
-
-exports.JsxFragment = JsxFragment;

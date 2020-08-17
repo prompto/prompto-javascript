@@ -1,16 +1,10 @@
-const ResourceContext = require("../runtime/Context").ResourceContext;
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const ResourceType = require("../type/ResourceType").ResourceType;
-const VoidType = require("../type/VoidType").VoidType;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
 
-class WriteStatement extends SimpleStatement {
+export default class WriteStatement extends SimpleStatement {
+
     constructor(content, resource) {
         super();
         this.content = content;
         this.resource = resource;
-        return this;
     }
 
     toString() {
@@ -107,4 +101,3 @@ class WriteStatement extends SimpleStatement {
     }
 }
 
-exports.WriteStatement = WriteStatement;

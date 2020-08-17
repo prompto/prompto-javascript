@@ -1,16 +1,9 @@
-const Expression = require("./Expression").Expression;
-const ResourceType = require("../type/ResourceType").ResourceType;
-const ResourceContext = require("../runtime/Context").ResourceContext;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-const TextType = require("../type/TextType").TextType;
-const TextValue = require("../value/TextValue").TextValue;
 
-class ReadOneExpression extends Expression {
+export default class ReadOneExpression extends Expression {
+
     constructor(resource) {
         super();
         this.resource = resource;
-        return this;
     }
 
     toString() {
@@ -54,6 +47,3 @@ class ReadOneExpression extends Expression {
         transpiler.append(".readLine()");
     }
 }
-
-
-exports.ReadOneExpression = ReadOneExpression;

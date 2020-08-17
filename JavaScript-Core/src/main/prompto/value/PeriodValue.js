@@ -1,14 +1,10 @@
-const Value = require("./Value").Value;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const TextValue = require("./TextValue").TextValue;
-let PeriodType = null;
-
-exports.resolve = () => {
-    PeriodType = require("../type/PeriodType").PeriodType;
-};
+import Value from "./Value"
+import { IntegerValue, TextValue } from "./index"
+import { SyntaxError } from "../error/index"
+import { PeriodType } from "../type/index"
 
 
-class PeriodValue extends Value {
+export default class PeriodValue extends Value {
  
     constructor(value) {
         super(PeriodType.instance);
@@ -76,4 +72,3 @@ class PeriodValue extends Value {
 }
 
 
-exports.PeriodValue = PeriodValue;

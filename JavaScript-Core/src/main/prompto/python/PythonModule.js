@@ -1,4 +1,5 @@
-class PythonModule {
+export default class PythonModule {
+
     constructor(ids) {
         this.ids = ids;
     }
@@ -12,5 +13,3 @@ class PythonModule {
         writer.trimLast(1);
     }
 }
-
-exports.PythonModule = PythonModule;

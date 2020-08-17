@@ -1,10 +1,7 @@
-const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-const List = require("../intrinsic/List").List;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
 const coreNodeClasses = new Set(["Socket"]);
 
-class Transpiler {
+export default class Transpiler {
 
     constructor(context) {
         this.context = context;
@@ -423,4 +420,3 @@ function newTranspiler(context) {
 }
 
 
-exports.Transpiler = Transpiler;

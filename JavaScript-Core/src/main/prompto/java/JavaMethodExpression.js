@@ -1,12 +1,10 @@
-const JavaSelectorExpression = require("./JavaSelectorExpression").JavaSelectorExpression;
-const JavaExpressionList = require("./JavaExpressionList").JavaExpressionList;
 
-class JavaMethodExpression extends JavaSelectorExpression {
+export default class JavaMethodExpression extends JavaSelectorExpression {
+
     constructor(name, args) {
         super();
         this.name = name;
         this.args = args || new JavaExpressionList();
-        return this;
     }
 
     toString() {
@@ -22,5 +20,3 @@ class JavaMethodExpression extends JavaSelectorExpression {
         writer.append(')');
     }
 }
-
-exports.JavaMethodExpression = JavaMethodExpression;

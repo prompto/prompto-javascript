@@ -1,10 +1,8 @@
-const SwitchCase = require("./SwitchCase").SwitchCase;
-const VoidType = require("../type/VoidType").VoidType;
 
-class AtomicSwitchCase extends SwitchCase {
+export default class AtomicSwitchCase extends SwitchCase {
+
     constructor(expression, statements) {
         super(expression, statements);
-        return this;
     }
 
     checkSwitchType(context, type) {
@@ -78,4 +76,3 @@ class AtomicSwitchCase extends SwitchCase {
     }
 }
 
-exports.AtomicSwitchCase = AtomicSwitchCase;

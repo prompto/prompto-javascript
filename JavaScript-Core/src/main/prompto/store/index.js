@@ -1,5 +1,5 @@
-exports.Store = require('./Store').Store;
-exports.$DataStore = require('./DataStore').$DataStore;
-exports.MatchOp = require('./MatchOp').MatchOp;
-exports.TypeFamily = require("./TypeFamily").TypeFamily;
-exports.AttributeInfo = require("./AttributeInfo").AttributeInfo;
+// export {default as Store} from './Store';
+// export {default as $DataStore} from './DataStore';
+// export {default as MatchOp} from './MatchOp';
+export {default as TypeFamily} from "./TypeFamily";
+export {default as AttributeInfo} from "./AttributeInfo";

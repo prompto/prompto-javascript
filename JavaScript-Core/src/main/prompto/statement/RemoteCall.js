@@ -1,14 +1,10 @@
-const UnresolvedCall = require("./UnresolvedCall").UnresolvedCall;
-const Variable = require("../runtime/Variable").Variable;
-const VoidType = require("../type/VoidType").VoidType;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class RemoteCall extends UnresolvedCall {
+export default class RemoteCall extends UnresolvedCall {
+
     constructor(caller, assignments, resultName, andThen) {
         super(caller, assignments);
         this.resultName = resultName;
         this.andThen = andThen;
-        return this;
     }
 
     isSimple() {
@@ -84,5 +80,3 @@ class RemoteCall extends UnresolvedCall {
     }
 }
 
-
-exports.RemoteCall = RemoteCall;

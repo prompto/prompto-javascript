@@ -1,13 +1,8 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
 
-class JavaScriptExpressionList extends ObjectList {
+export default class JavaScriptExpressionList extends ObjectList {
+
     constructor(expression) {
-        super();
-        expression = expression || null;
-        if(expression!==null) {
-            this.add(expression);
-        }
-        return this;
+        super(null, expression);
     }
 
     toDialect(writer) {
@@ -45,5 +40,3 @@ class JavaScriptExpressionList extends ObjectList {
         return arg && arg.convertToJavaScript ? arg.convertToJavaScript() : arg;
     }
 }
-
-exports.JavaScriptExpressionList = JavaScriptExpressionList;

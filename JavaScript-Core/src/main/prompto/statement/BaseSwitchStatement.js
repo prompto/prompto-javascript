@@ -1,14 +1,10 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const TypeMap = require("../type/TypeMap").TypeMap;
-const VoidType = require("../type/VoidType").VoidType;
 
-class BaseSwitchStatement extends BaseStatement {
+export default class BaseSwitchStatement extends BaseStatement {
+
     constructor(switchCases, defaultCase) {
         super();
         this.switchCases = switchCases || new SwitchCaseList();
         this.defaultCase = defaultCase || null;
-        return this;
     }
 
     /*
@@ -99,28 +95,4 @@ class BaseSwitchStatement extends BaseStatement {
 }
 
 
-exports.BaseSwitchStatement = BaseSwitchStatement;
 
-class SwitchCaseList extends ObjectList {
-    constructor(item) {
-        super();
-        item = item || null;
-        if(item!=null) {
-            this.add(item);
-        }
-        return this;
-    }
-
-    locateSectionAtLine(line) {
-        for(let i=0; i< this.length; i++) {
-            const switchCase = this[i];
-            const section = switchCase.locateSectionAtLine(line);
-            if(section)
-                return section;
-        }
-        return null;
-    }
-}
-
-
-exports.SwitchCaseList = SwitchCaseList;

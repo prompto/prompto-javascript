@@ -1,12 +1,5 @@
-const Expression = require("./Expression").Expression;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const Instance = require("../value/Value").Instance;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const MatchOp = require("../store/MatchOp").MatchOp;
-const CmpOp = require("../grammar/CmpOp").CmpOp;
 
-class CompareExpression extends Expression {
+export default class CompareExpression extends Expression {
   
     constructor(left, operator, right) {
         super();
@@ -147,5 +140,3 @@ class CompareExpression extends Expression {
     }
 }
 
-
-exports.CompareExpression = CompareExpression;

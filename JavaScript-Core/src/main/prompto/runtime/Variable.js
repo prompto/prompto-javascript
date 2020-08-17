@@ -1,6 +1,5 @@
-const NamedInstance = require("../grammar/NamedInstance").NamedInstance;
 
-class Variable extends NamedInstance {
+export default class Variable extends NamedInstance {
 
     constructor(id, type) {
         super();
@@ -25,4 +24,3 @@ class Variable extends NamedInstance {
     }
 }
 
-exports.Variable = Variable;

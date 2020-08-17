@@ -1,6 +1,5 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
 
-class CSharpExpressionList extends ObjectList {
+export default class CSharpExpressionList extends ObjectList {
     constructor(expression) {
         super();
         expression = expression || null;
@@ -20,5 +19,3 @@ class CSharpExpressionList extends ObjectList {
         }
     }
 }
-
-exports.CSharpExpressionList = CSharpExpressionList;

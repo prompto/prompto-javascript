@@ -1,20 +1,5 @@
-const Section = require("../parser/Section").Section;
-let CategoryType = null;
-const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-const MemberSelector = require("../expression/MemberSelector").MemberSelector;
-const Variable = require("../runtime/Variable").Variable;
-const VoidType = require("../type/VoidType").VoidType;
-const MethodType = require("../type/MethodType").MethodType;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const Specificity = require("../grammar/Specificity").Specificity;
 
-exports.resolve = () => {
-    CategoryType = require("../type/CategoryType").CategoryType;
-}
-
-class Argument extends Section {
+export default class Argument extends Section {
 
     constructor(parameter, expression) {
         super();
@@ -271,6 +256,3 @@ class Argument extends Section {
         return requiredType.checkArrowExpression(context, arrow);
     }
 }
-
-exports.Argument = Argument;
-

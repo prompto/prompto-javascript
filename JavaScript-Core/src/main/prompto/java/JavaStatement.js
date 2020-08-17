@@ -1,8 +1,8 @@
-class JavaStatement {
+export default class JavaStatement {
+
     constructor(expression, isReturn) {
         this.expression = expression;
         this.isReturn = isReturn || false;
-        return this;
     }
 
     toString() {
@@ -16,5 +16,3 @@ class JavaStatement {
         writer.append(';');
     }
 }
-
-exports.JavaStatement = JavaStatement;

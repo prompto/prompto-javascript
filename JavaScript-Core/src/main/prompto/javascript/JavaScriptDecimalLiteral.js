@@ -1,11 +1,9 @@
-const JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-const DecimalType = require("../type/DecimalType").DecimalType;
 
 
-class JavaScriptDecimalLiteral extends JavaScriptLiteral {
+export default class JavaScriptDecimalLiteral extends JavaScriptLiteral {
+
     constructor(text) {
         super(text);
-        return this;
     }
 
     check(context) {
@@ -16,6 +14,3 @@ class JavaScriptDecimalLiteral extends JavaScriptLiteral {
         return this.value.toString();
     }
 }
-
-exports.JavaScriptDecimalLiteral = JavaScriptDecimalLiteral;
-

@@ -1,12 +1,8 @@
-const IterableType = require("./IterableType").IterableType;
-const IntegerType = require("./IntegerType").IntegerType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
 
-class IteratorType extends IterableType {
+export default class IteratorType extends IterableType {
+
     constructor(itemType) {
         super(new Identifier("Iterator<" + itemType.name + ">"), itemType);
-        return this;
     }
 
     withItemType(itemType) {
@@ -51,4 +47,3 @@ class IteratorType extends IterableType {
     }
 }
 
-exports.IteratorType = IteratorType;

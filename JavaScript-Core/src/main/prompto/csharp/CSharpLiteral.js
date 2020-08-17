@@ -1,7 +1,7 @@
-class CSharpLiteral {
+export default class CSharpLiteral {
+
     constructor(text) {
         this.text = text;
-        return this;
     }
 
     toDialect(writer) {
@@ -9,5 +9,3 @@ class CSharpLiteral {
     }
 }
 
-
-exports.CSharpLiteral = CSharpLiteral;

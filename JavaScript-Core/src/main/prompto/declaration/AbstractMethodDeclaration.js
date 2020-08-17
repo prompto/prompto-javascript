@@ -1,11 +1,9 @@
-const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-const VoidType = require("../type/VoidType").VoidType;
 
-class AbstractMethodDeclaration extends BaseMethodDeclaration {
+export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
+
     constructor(id, args, returnType) {
         super(id, args, returnType);
         this.returnType = returnType || VoidType.instance;
-        return this;
     }
 
     memberCheck(declaration, context) {
@@ -74,5 +72,3 @@ class AbstractMethodDeclaration extends BaseMethodDeclaration {
         writer.append(");");
     }
 }
-
-exports.AbstractMethodDeclaration = AbstractMethodDeclaration;

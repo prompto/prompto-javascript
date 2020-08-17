@@ -1,10 +1,8 @@
-const BooleanType = require("../type/BooleanType").BooleanType;
-const EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
 
-class Assertion {
+export default class Assertion {
+
     constructor(expression) {
         this.expression = expression;
-        return this;
     }
 
     check(context) {
@@ -40,5 +38,3 @@ class Assertion {
         return this.expression.getExpected(context, dialect, escapeMode);
     }
 }
-
-exports.Assertion = Assertion;

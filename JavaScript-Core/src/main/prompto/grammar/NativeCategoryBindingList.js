@@ -1,13 +1,12 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
 
-class NativeCategoryBindingList extends ObjectList {
+export default class NativeCategoryBindingList extends ObjectList {
+
     constructor(binding) {
         super();
         binding = binding || null;
         if (binding != null) {
             this.add(binding);
         }
-        return this;
     }
 
     toDialect(writer) {
@@ -41,5 +40,3 @@ class NativeCategoryBindingList extends ObjectList {
         writer.dedent().append("}");
     }
 }
-
-exports.NativeCategoryBindingList = NativeCategoryBindingList;

@@ -1,6 +1,5 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
 
-function DivideByZeroError() {
+export default function DivideByZeroError() {
 	ExecutionError.call(this);
 	return this;
 }
@@ -11,5 +10,3 @@ DivideByZeroError.prototype.constructor = DivideByZeroError;
 DivideByZeroError.prototype.getExpression = function(context) {
 	return context.getRegisteredValue("DIVIDE_BY_ZERO");
 };
-
-exports.DivideByZeroError = DivideByZeroError;

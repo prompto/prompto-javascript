@@ -1,14 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const IterableType = require("./IterableType").IterableType;
-const IntegerType = require("./IntegerType").IntegerType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Variable = require("../runtime/Variable").Variable;
-const ToListMethodDeclaration = require("./ToListMethodDeclaration").ToListMethodDeclaration;
 
-class CursorType extends IterableType {
+export default class CursorType extends IterableType {
+
     constructor(itemType) {
         super(new Identifier("Cursor<" + itemType.name + ">"), itemType);
-        return this;
     }
 
     withItemType(itemType) {
@@ -78,4 +72,3 @@ class CursorType extends IterableType {
     }
 }
 
-exports.CursorType = CursorType;

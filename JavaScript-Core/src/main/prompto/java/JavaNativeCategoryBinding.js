@@ -1,10 +1,9 @@
-const NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
 
-class JavaNativeCategoryBinding extends NativeCategoryBinding {
+export default class JavaNativeCategoryBinding extends NativeCategoryBinding {
+
     constructor(expression) {
         super();
         this.expression = expression;
-        return this;
     }
 
     toDialect(writer) {
@@ -12,7 +11,3 @@ class JavaNativeCategoryBinding extends NativeCategoryBinding {
         this.expression.toDialect(writer);
     }
 }
-
-JavaNativeCategoryBinding.prototype.creator = JavaNativeCategoryBinding;
-
-exports.JavaNativeCategoryBinding = JavaNativeCategoryBinding;

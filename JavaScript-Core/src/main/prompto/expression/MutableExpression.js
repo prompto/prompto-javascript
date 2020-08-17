@@ -1,14 +1,9 @@
-const Expression = require("./Expression").Expression;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const NullValue = require("../value/NullValue").NullValue;
-const NativeInstance = require("../value/NativeInstance").NativeInstance;
-const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
 
-class MutableExpression extends Expression {
+export default class MutableExpression extends Expression {
+
     constructor(source) {
         super();
         this.source = source;
-        return this;
     }
 
     check(context) {
@@ -43,5 +38,3 @@ class MutableExpression extends Expression {
         this.source.toDialect(writer);
     }
 }
-
-exports.MutableExpression = MutableExpression;

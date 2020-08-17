@@ -1,6 +1,3 @@
-const Literal = require("./Literal").Literal;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const IntegerType = require("../type/IntegerType").IntegerType;
 
 /* jshint bitwise:false*/
 function parseHexa(text) {
@@ -21,10 +18,10 @@ function parseHexa(text) {
 	return new IntegerValue(value);
 }
 
-class HexaLiteral extends Literal {
+export default class HexaLiteral extends Literal {
+
     constructor(text) {
         super(text, parseHexa(text));
-        return this;
     }
 
     check(context) {
@@ -33,5 +30,3 @@ class HexaLiteral extends Literal {
 }
 
 HexaLiteral.parseHexa = parseHexa;
-
-exports.HexaLiteral = HexaLiteral;

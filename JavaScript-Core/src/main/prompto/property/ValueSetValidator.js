@@ -1,11 +1,9 @@
-const PropertyValidator = require("./PropertyValidator").PropertyValidator;
-const AnyType = require("../type/AnyType").AnyType;
 
-class ValueSetValidator extends PropertyValidator {
+export default class ValueSetValidator extends PropertyValidator {
+
     constructor(values) {
         super();
         this.values = values;
-        return this;
     }
 
     getType(context) {
@@ -26,5 +24,3 @@ class ValueSetValidator extends PropertyValidator {
     }
 }
 
-
-exports.ValueSetValidator = ValueSetValidator;

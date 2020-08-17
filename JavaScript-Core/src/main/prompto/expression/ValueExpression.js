@@ -1,12 +1,11 @@
-const Value = require("../value/Value").Value;
 
-class ValueExpression extends Value {
+export default class ValueExpression extends Value {
+
     constructor(type, value) {
         super(type);
         this.value = value;
         // make this sliceable
         this.sliceable = value.slice ? value : null;
-        return this;
     }
 
     check(context) {
@@ -41,5 +40,3 @@ class ValueExpression extends Value {
         return this.value.toDialect(dialect);
     }
 }
-
-exports.ValueExpression = ValueExpression;

@@ -1,17 +1,14 @@
-const Context = require("./Context").Context;
-let instance = null;
 
-
-class ApplicationContext {
+export default class ApplicationContext {
  
     static set(context) {
-        const current = instance;
-        instance = context;
+        const current = ApplicationContext.instance;
+        ApplicationContext.instance = context;
         return current;
     }
 
     static get() {
-        return instance;
+        return ApplicationContext.instance;
     }
 
     static init() {
@@ -19,5 +16,5 @@ class ApplicationContext {
     }
 }
 
+ApplicationContext.instance = null;
 
-exports.ApplicationContext = ApplicationContext;

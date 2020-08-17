@@ -1,4 +1,2 @@
-class JavaExpression {
+export default class JavaExpression {
 }
-
-exports.JavaExpression = JavaExpression;

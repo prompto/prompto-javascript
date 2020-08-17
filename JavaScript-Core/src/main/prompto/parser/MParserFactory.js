@@ -1,8 +1,6 @@
-const antlr4 = require("antlr4/index");
-const SIndentingLexer = require("./MIndentingLexer").MIndentingLexer;
-const SCleverParser = require("./MCleverParser").MCleverParser;
+import antlr4 from "antlr4/index";
 
-antlr4.MParserFactory = function() {
+export function MParserFactory() {
 	
 	this.newLexer = data => new SIndentingLexer(new antlr4.InputStream(data));
 

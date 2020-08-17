@@ -1,7 +1,7 @@
-class MatchOp {
+export default class MatchOp {
+
     constructor(name) {
         this.name = name;
-        return this;
     }
 
     toString() {
@@ -21,5 +21,3 @@ MatchOp.IN = new MatchOp("IN");
 MatchOp.CONTAINED = new MatchOp("CONTAINED");
 MatchOp.GREATER = new MatchOp("GREATER");
 MatchOp.LESSER = new MatchOp("LESSER");
-
-exports.MatchOp = MatchOp;

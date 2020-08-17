@@ -1,6 +1,5 @@
-const Section = require("../parser/Section").Section;
 
-class JsxClosing extends Section {
+export default class JsxClosing extends Section {
 
     constructor(id, suite) {
         super();
@@ -19,5 +18,3 @@ class JsxClosing extends Section {
             writer.appendRaw(this.suite);
     }
 }
-
-exports.JsxClosing = JsxClosing;

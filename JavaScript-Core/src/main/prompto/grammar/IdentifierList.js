@@ -1,14 +1,12 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class IdentifierList extends ObjectList {
+export default class IdentifierList extends ObjectList {
+
     constructor(item) {
         super();
         item = item || null;
         if(item!==null) {
             this.add(item);
         }
-        return this;
     }
 
     names() {
@@ -74,5 +72,3 @@ class IdentifierList extends ObjectList {
         this.toODialect(writer);
     }
 }
-
-exports.IdentifierList = IdentifierList;

@@ -1,14 +1,6 @@
-const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-const VoidType = require("../type/VoidType").VoidType;
-const DictionaryType = require("../type/DictionaryType").DictionaryType;
-const TextType = require("../type/TextType").TextType;
-const CodeParameter = require("../param/CodeParameter").CodeParameter;
-const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-const StatementList = require("../statement/StatementList").StatementList;
-const DeclarationStatement = require("../statement/DeclarationStatement").DeclarationStatement;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-class ConcreteMethodDeclaration extends BaseMethodDeclaration {
+export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
+
     constructor(id, args, returnType, statements) {
         super(id, args, returnType);
         this.statements = statements || new StatementList();
@@ -211,5 +203,3 @@ class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         return this.statements.locateSectionAtLine(line);
     }
 }
-
-exports.ConcreteMethodDeclaration = ConcreteMethodDeclaration;

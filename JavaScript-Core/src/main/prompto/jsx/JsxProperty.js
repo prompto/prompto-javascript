@@ -1,14 +1,11 @@
-const Section = require("../parser/Section").Section;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const VoidType = require("../type/VoidType").VoidType;
 
-class JsxProperty extends Section {
+export default class JsxProperty extends Section {
+
     constructor(id, value, suite) {
         super();
         this.id = id;
         this.value = value;
         this.suite = suite;
-        return this;
     }
 
     check(context) {
@@ -65,4 +62,3 @@ class JsxProperty extends Section {
     }
 }
 
-exports.JsxProperty = JsxProperty;

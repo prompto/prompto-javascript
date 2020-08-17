@@ -1,15 +1,11 @@
-const Value = require("./Value").Value;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-const InternalError = require("../error/InternalError").InternalError;
-const BaseType = require("../type/BaseType").BaseType;
-const RangeType = require("../type/RangeType").RangeType;
+import Value from "./Value"
+import { IntegerValue } from "./index"
+import { SyntaxError, IndexOutOfRangeError, InternalError } from "../error/index"
+import { RangeType } from "../type/index"
 
-class RangeValue extends Value {
+export default class RangeValue extends Value {
    
     constructor(itemType, left, right) {
-        if(!(itemType instanceof BaseType))
-            throw new SyntaxError("Not a type!");
         super(new RangeType(itemType));
         const cmp = left.cmp(right);
         if(cmp<0) {
@@ -113,5 +109,3 @@ class RangeIterator {
     }
 }
 
-
-exports.RangeValue = RangeValue;

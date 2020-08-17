@@ -1,15 +1,7 @@
-const Expression = require("./Expression").Expression;
-const InstanceContext = require("../runtime/Context").InstanceContext;
-const DocumentContext = require("../runtime/Context").DocumentContext;
-const DocumentType = require("../type/DocumentType").DocumentType;
 
-class ThisExpression extends Expression {
-    constructor() {
-        super();
-        return this;
-    }
+export default class ThisExpression extends Expression {
 
-    check(context) {
+   check(context) {
         if (context instanceof DocumentContext)
             return DocumentType.instance;
         if (context != null && !(context instanceof InstanceContext))
@@ -59,5 +51,3 @@ class ThisExpression extends Expression {
         transpiler.append("this");
     }
 }
-
-exports.ThisExpression = ThisExpression;

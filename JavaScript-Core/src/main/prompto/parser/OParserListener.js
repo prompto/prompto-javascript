@@ -1,6 +1,6 @@
 // Generated from OParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-const antlr4 = require('antlr4/index');
+import antlr4 from 'antlr4/index';
 
 // This class defines a complete listener for a parse tree produced by OParser.
 function OParserListener() {
@@ -4206,4 +4206,4 @@ OParserListener.prototype.exitCss_text = ctx => {
 
 
 
-exports.OParserListener = OParserListener;
+export {OParserListener};

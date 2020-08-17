@@ -1,6 +1,6 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
 
-class WithResourceStatement extends BaseStatement {
+export default class WithResourceStatement extends BaseStatement {
+
     constructor(resource, statements) {
         super();
         this.resource = resource;
@@ -80,5 +80,3 @@ class WithResourceStatement extends BaseStatement {
         writer.dedent();
     }
 }
-
-exports.WithResourceStatement = WithResourceStatement;

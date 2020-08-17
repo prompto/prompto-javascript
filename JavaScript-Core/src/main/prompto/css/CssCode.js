@@ -1,7 +1,7 @@
-class CssCode {
+export default class CssCode {
+
     constructor(expression) {
         this.expression = expression;
-        return this;
     }
 
     toDialect(writer) {
@@ -18,5 +18,3 @@ class CssCode {
         this.expression.transpile(transpiler);
     }
 }
-
-exports.CssCode = CssCode;

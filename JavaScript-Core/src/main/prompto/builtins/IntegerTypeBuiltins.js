@@ -1,9 +1,11 @@
-const CategoryParameter = require("../param/CategoryParameter.js").CategoryParameter;
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-const TextType = require("../type/TextType").TextType;
-const TextValue = require("../value/TextValue").TextValue;
-const Identifier = require("../grammar/Identifier").Identifier;
+import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
+import { CategoryParameter } from "../param/index"
+import { TextType } from "../type/index"
+import {  } from "../value/index"
+import { Identifier } from "../grammar/index"
 
+
+// don't use export default since more builtins are expected
 class FormatMethodDeclaration extends BuiltInMethodDeclaration {
 
     constructor() {
@@ -34,4 +36,4 @@ class FormatMethodDeclaration extends BuiltInMethodDeclaration {
     }
 }
 
-exports.FormatMethodDeclaration = FormatMethodDeclaration;
+export {FormatMethodDeclaration};

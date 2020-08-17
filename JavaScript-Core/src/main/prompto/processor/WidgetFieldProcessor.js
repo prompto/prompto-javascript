@@ -1,10 +1,5 @@
-const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
-const TypeExpression = require("../expression/TypeExpression").TypeExpression;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class WidgetFieldProcessor extends AnnotationProcessor {
+export default class WidgetFieldProcessor extends AnnotationProcessor {
 
     constructor() {
         super("@WidgetField");
@@ -36,5 +31,3 @@ class WidgetFieldProcessor extends AnnotationProcessor {
         }
     }
 }
-
-exports.WidgetFieldProcessor = WidgetFieldProcessor;

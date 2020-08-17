@@ -1,12 +1,5 @@
-const VoidType = require("../type/VoidType").VoidType;
-const AnyType = require("../type/AnyType").AnyType;
-const JavaScriptType = require("./JavaScriptType").JavaScriptType;
-const getTypeName = require("./JavaScriptUtils").getTypeName;
-const Identifier = require("../grammar/Identifier").Identifier;
-const $DataStore = require("../store/DataStore").$DataStore;
 
-
-class JavaScriptStatement {
+export default class JavaScriptStatement {
   
     constructor(expression, isReturn) {
         this.expression = expression;
@@ -75,5 +68,3 @@ class $context {
         transpiler.append("var $context = context;").newLine();
     }
 }
-
-exports.JavaScriptStatement = JavaScriptStatement;

@@ -1,11 +1,10 @@
-const Expression = require("./Expression").Expression;
 
-class SubtractExpression extends Expression {
+export default class SubtractExpression extends Expression {
+
     constructor(left, right) {
         super();
         this.left = left;
         this.right = right;
-        return this;
     }
 
     toString() {
@@ -42,8 +41,6 @@ class SubtractExpression extends Expression {
         return lt.transpileSubtract(transpiler, rt, this.left, this.right);
     }
 }
-
-exports.SubtractExpression = SubtractExpression;
 
 
 

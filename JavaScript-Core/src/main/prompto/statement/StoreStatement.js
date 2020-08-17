@@ -1,13 +1,5 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const AnyType = require("../type/AnyType").AnyType;
-const VoidType = require("../type/VoidType").VoidType;
-const $DataStore = require("../store/DataStore").$DataStore;
-const NullValue = require("../value/NullValue").NullValue;
-const Instance = require("../value/Value").Instance;
-const Container = require("../value/Value").Container;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class StoreStatement extends BaseStatement {
+export default class StoreStatement extends BaseStatement {
  
     constructor(del, add, andThen) {
         super();
@@ -211,6 +203,3 @@ class StoreStatement extends BaseStatement {
             return storablesToAdd;
     }
 }
-
-
-exports.StoreStatement = StoreStatement;

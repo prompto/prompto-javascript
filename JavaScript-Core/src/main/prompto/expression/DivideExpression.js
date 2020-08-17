@@ -1,11 +1,10 @@
-const Expression = require("./Expression").Expression;
 
-class DivideExpression extends Expression {
+export default class DivideExpression extends Expression {
+
     constructor(left, right) {
         super();
         this.left = left;
         this.right = right;
-        return this;
     }
 
     toString() {
@@ -42,5 +41,3 @@ class DivideExpression extends Expression {
         return lt.transpileDivide(transpiler, rt, this.left, this.right);
     }
 }
-
-exports.DivideExpression = DivideExpression;

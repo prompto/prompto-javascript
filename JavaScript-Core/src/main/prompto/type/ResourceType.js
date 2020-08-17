@@ -1,6 +1,5 @@
-const CategoryType = require("./CategoryType").CategoryType;
 
-class ResourceType extends CategoryType {
+export default class ResourceType extends CategoryType {
  
     constructor(name) {
         super(name);
@@ -24,5 +23,3 @@ class ResourceType extends CategoryType {
 }
 
 
-
-exports.ResourceType = ResourceType;

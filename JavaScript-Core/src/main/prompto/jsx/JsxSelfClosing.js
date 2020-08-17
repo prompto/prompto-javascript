@@ -1,11 +1,10 @@
-const JsxElementBase = require("./JsxElementBase").JsxElementBase;
 
-class JsxSelfClosing extends JsxElementBase {
+export default class JsxSelfClosing extends JsxElementBase {
+
     constructor(id, nameSuite, properties, elementSuite) {
         super(id, properties);
         this.nameSuite = nameSuite;
         this.elementSuite = elementSuite;
-        return this;
     }
 
     toDialect(writer) {
@@ -23,5 +22,3 @@ class JsxSelfClosing extends JsxElementBase {
     }
 }
 
-
-exports.JsxSelfClosing = JsxSelfClosing;

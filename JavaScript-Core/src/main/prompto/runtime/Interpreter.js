@@ -1,16 +1,3 @@
-const DictionaryType = require("../type/DictionaryType").DictionaryType;
-const TextType = require("../type/TextType").TextType;
-const TextValue = require("../value/TextValue").TextValue;
-const Argument = require("../grammar/Argument").Argument;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
-const Identifier = require("../grammar/Identifier").Identifier;
-const DictLiteral = require("../literal/DictLiteral").DictLiteral;
-const MethodCall = require("../statement/MethodCall").MethodCall;
-const MethodSelector = require("../expression/MethodSelector").MethodSelector;
-const CmdLineParser = require("../utils/CmdLineParser").CmdLineParser;
-const DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
-const ValueExpression = require("../expression/ValueExpression").ValueExpression;
 
 const argsType = new DictionaryType(TextType.instance);
 
@@ -145,7 +132,7 @@ class Interpreter {
     }
 }
 
-exports.locateMethod = locateMethod;
-exports.Interpreter = Interpreter;
+export {locateMethod};
+export {Interpreter};
 
 

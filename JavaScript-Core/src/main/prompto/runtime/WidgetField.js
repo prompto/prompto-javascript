@@ -1,6 +1,5 @@
-const Variable = require("./Variable").Variable;
 
-class WidgetField extends Variable {
+export default class WidgetField extends Variable {
 
     constructor(id, type, createdBy, updatedBy) {
         super(id, type);
@@ -9,4 +8,3 @@ class WidgetField extends Variable {
     }
 }
 
-exports.WidgetField = WidgetField;

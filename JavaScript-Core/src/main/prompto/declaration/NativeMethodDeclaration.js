@@ -1,15 +1,8 @@
-const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const VoidType = require("../type/VoidType").VoidType;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const NullValue = require("../value/NullValue").NullValue;
 
-class NativeMethodDeclaration extends ConcreteMethodDeclaration {
+export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
+
     constructor(id, args, returnType, statements) {
         super(id, args, returnType, statements);
-        return this;
     }
 
     /* global intrinsic:writable */
@@ -104,5 +97,3 @@ class NativeMethodDeclaration extends ConcreteMethodDeclaration {
         writer.dedent().newLine();
     }
 }
-
-exports.NativeMethodDeclaration = NativeMethodDeclaration;

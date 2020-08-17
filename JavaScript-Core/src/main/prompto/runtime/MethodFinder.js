@@ -1,12 +1,5 @@
-const PromptoError = require("../error/PromptoError").PromptoError;
-let CategoryType = null;
-const Score = require("./Score").Score;
 
-exports.resolve = () => {
-	CategoryType = require("../type/CategoryType").CategoryType;
-}
-
-class MethodFinder {
+export default class MethodFinder {
     
     constructor(context, methodCall) {
         this.context = context;
@@ -149,5 +142,3 @@ class MethodFinder {
     }
 }
 
-
-exports.MethodFinder = MethodFinder;

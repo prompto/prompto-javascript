@@ -1,11 +1,5 @@
-const CategoryType = require("./CategoryType").CategoryType;
-const BaseType = require("./BaseType").BaseType;
-const ListType = require("./ListType").ListType;
-const TextType = require("./TextType").TextType;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-
-class EnumeratedCategoryType extends CategoryType {
+export default class EnumeratedCategoryType extends CategoryType {
   
     constructor(id) {
         super(id);
@@ -76,5 +70,3 @@ class EnumeratedCategoryType extends CategoryType {
     }
 }
 
-
-exports.EnumeratedCategoryType = EnumeratedCategoryType;

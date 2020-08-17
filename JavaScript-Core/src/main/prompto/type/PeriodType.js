@@ -1,20 +1,21 @@
-const NativeType = require("./NativeType").NativeType;
-const IntegerType = require("./IntegerType").IntegerType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Period = require("../intrinsic/Period").Period;
-const PeriodValue = require("../value/PeriodValue").PeriodValue;
+import NativeType from "./NativeType"
+import { IntegerType } from "./index"
+import { Identifier } from "../grammar/index"
+import { PeriodValue } from "../value/index"
+import { Period } from "../intrinsic/index"
 
-class PeriodType extends NativeType {
+
+export default class PeriodType extends NativeType {
+
     constructor() {
         super(new Identifier("Period"));
-        return this;
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
         if(value instanceof Period)
             return new PeriodValue(value);
         else
-            return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
     checkAdd(context, other, tryReverse) {
@@ -122,4 +123,3 @@ class PeriodType extends NativeType {
 PeriodType.instance = new PeriodType();
 
 
-exports.PeriodType = PeriodType;

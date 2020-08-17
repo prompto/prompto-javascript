@@ -1,7 +1,7 @@
-class JavaLiteral {
+export default class JavaLiteral {
+
     constructor(text) {
         this.text = text;
-        return this;
     }
 
     toString() {
@@ -12,6 +12,3 @@ class JavaLiteral {
         writer.append(this.text);
     }
 }
-
-
-exports.JavaLiteral = JavaLiteral

@@ -1,6 +1,5 @@
-const Section = require("../parser/Section").Section;
 
-class Literal extends Section {
+export default class Literal extends Section {
   
     constructor(text, value) {
         super();
@@ -56,6 +55,3 @@ class Literal extends Section {
     }
 }
 
-Literal.prototype.constructor = Section;
-
-exports.Literal = Literal;

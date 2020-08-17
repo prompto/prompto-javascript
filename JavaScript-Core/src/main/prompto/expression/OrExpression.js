@@ -1,9 +1,5 @@
-const Expression = require("./Expression").Expression;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const Dialect = require("../parser/Dialect").Dialect;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-class OrExpression extends Expression {
+export default class OrExpression extends Expression {
   
     constructor(left, right) {
         super();
@@ -125,7 +121,3 @@ class OrExpression extends Expression {
         transpiler.append(builderName).append(".or();").newLine();
     }
 }
-
-
-exports.OrExpression = OrExpression;
-

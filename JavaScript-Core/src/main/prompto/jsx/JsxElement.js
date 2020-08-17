@@ -1,14 +1,11 @@
-const JsxElementBase = require("./JsxElementBase").JsxElementBase;
-const JsxType = require("../type/JsxType").JsxType;
 
+export default class JsxElement extends JsxElementBase {
 
-class JsxElement extends JsxElementBase {
     constructor(id, nameSuite, attributes, openingSuite) {
         super(id, attributes);
         this.nameSuite = nameSuite;
         this.openingSuite = openingSuite;
         this.closing = null;
-        return this;
     }
 
     setChildren(children) {
@@ -64,5 +61,3 @@ class JsxElement extends JsxElementBase {
             }, this);
     }
 }
-
-exports.JsxElement = JsxElement;

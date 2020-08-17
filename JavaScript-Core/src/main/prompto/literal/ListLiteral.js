@@ -1,18 +1,6 @@
-const Literal = require("./Literal").Literal;
-const ListValue = require("../value/ListValue").ListValue;
-const ListType = require("../type/ListType").ListType;
-const MissingType = require("../type/MissingType").MissingType;
-const ExpressionList = require("../utils/ExpressionList").ExpressionList;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const CharacterType = require("../type/CharacterType").CharacterType;
-const TextType = require("../type/TextType").TextType;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const TextValue = require("../value/TextValue").TextValue;
-const inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
-const List = require("../intrinsic/List").List;
 
-class ListLiteral extends Literal {
+export default class ListLiteral extends Literal {
+
     constructor(mutable, expressions) {
         if(typeof(mutable)!=typeof(true))
             throw "mutable!";
@@ -21,7 +9,6 @@ class ListLiteral extends Literal {
         this.itemType = null;
         this.mutable = mutable;
         this.expressions = expressions;
-        return this;
     }
 
     check(context) {
@@ -86,4 +73,3 @@ class ListLiteral extends Literal {
 }
 
 
-exports.ListLiteral = ListLiteral;

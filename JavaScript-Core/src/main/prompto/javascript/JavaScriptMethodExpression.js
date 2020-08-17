@@ -1,16 +1,12 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const isWorker = typeof window === 'undefined' && typeof importScripts === 'function';
-const JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
-const JavaScriptExpressionList = require("./JavaScriptExpressionList").JavaScriptExpressionList;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const NativeInstance = require("../value/NativeInstance").NativeInstance;
 
-class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
+export default class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
+
     constructor(id, args) {
         super();
         this.id = id;
         this.args = args || new JavaScriptExpressionList();
-        return this;
     }
 
     toString() {
@@ -113,5 +109,3 @@ function stringToFunction(str) {
     }
     return fn;
 }
-
-exports.JavaScriptMethodExpression = JavaScriptMethodExpression;

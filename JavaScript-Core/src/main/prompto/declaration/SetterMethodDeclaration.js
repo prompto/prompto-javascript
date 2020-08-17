@@ -1,10 +1,8 @@
-const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
 
 class SetterMethodDeclaration extends ConcreteMethodDeclaration {
+
     constructor(id, statements) {
         super(id, null, null, statements);
-        return this;
     }
 
     toODialect(writer) {
@@ -31,7 +29,3 @@ class SetterMethodDeclaration extends ConcreteMethodDeclaration {
         this.statements.transpile(transpiler);
     }
 }
-
-SetterMethodDeclaration.prototype.contructor = SetterMethodDeclaration;
-
-exports.SetterMethodDeclaration = SetterMethodDeclaration;

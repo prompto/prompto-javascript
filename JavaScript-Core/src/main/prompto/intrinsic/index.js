@@ -1,17 +1,18 @@
-exports.Any = require("./Any").Any;
-exports.Blob = require("./Blob").Blob;
-exports.Cursor = require("./Cursor").Cursor;
-exports.DateTime = require("./DateTime").DateTime;
-exports.Dictionary = require("./Dictionary").Dictionary;
-exports.Document = require("./Document").Document;
-exports.List = require("./List").List;
-exports.LocalDate = require("./LocalDate").LocalDate;
-exports.LocalTime = require("./LocalTime").LocalTime;
-exports.Period = require("./Period").Period;
-exports.Range = require("./Range").Range;
-exports.StrictSet = require("./StrictSet").StrictSet;
-exports.Tuple = require("./Tuple").Tuple;
-exports.UUID = require("./UUID").UUID;
-exports.Version = require("./Version").Version;
-
-require('./LocalDate').resolve();
+// export {default as Any} from"./Any";
+// export {default as Blob} from"./Blob";
+// export {default as Cursor} from"./Cursor";
+// export {default as DateTime} from"./DateTime";
+// export {default as Dictionary} from"./Dictionary";
+export {default as Document} from"./Document";
+export {default as List} from"./List";
+// export {default as LocalDate} from"./LocalDate";
+// export {default as LocalTime} from"./LocalTime";
+export {default as Period} from"./Period";
+// export {default as Range} from"./Range";
+export {default as StrictSet} from"./StrictSet";
+// export {default as Tuple} from"./Tuple";
+// export {default as UUID} from"./UUID";
+// export {default as Version} from"./Version";
+/*
+require('./LocalDate';
+*/

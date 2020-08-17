@@ -1,13 +1,11 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const CodeParameter = require("./CodeParameter").CodeParameter;
 
-class ParameterList extends ObjectList {
+export default class ParameterList extends ObjectList {
+
     constructor() {
         super();
         for (let i=0; i < arguments.length; i++) {
             this.add(arguments[i]);
         }
-        return this;
     }
 
     register(context) {
@@ -77,5 +75,3 @@ class ParameterList extends ObjectList {
         }
     }
 }
-
-exports.ParameterList = ParameterList;

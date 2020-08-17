@@ -1,19 +1,5 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-const MethodCall = require("./MethodCall").MethodCall;
-const MemberSelector = require("../expression/MemberSelector").MemberSelector;
-const MethodSelector = require("../expression/MethodSelector").MethodSelector;
-const UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
-const SelectorExpression = require("../expression/SelectorExpression").SelectorExpression;
-const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-const ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const MethodType = require("../type/MethodType").MethodType;
-const VoidType = require("../type/VoidType").VoidType;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class UnresolvedCall extends BaseStatement {
+export default class UnresolvedCall extends BaseStatement {
  
     constructor(callable, args) {
         super();
@@ -178,5 +164,3 @@ class UnresolvedCall extends BaseStatement {
         }
     }
 }
-
-exports.UnresolvedCall = UnresolvedCall;

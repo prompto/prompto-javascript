@@ -1,6 +1,6 @@
-var List = require("./List").List;
+// var List = require("./List").List;
 
-function Cursor(mutable, iterable) {
+export default function Cursor(mutable, iterable) {
     this.mutable = mutable || false;
     this.iterable = iterable;
     return this;
@@ -112,4 +112,3 @@ Cursor.prototype.toString = function () {
     return '[' + list.join(", ") + ']';
 };
 
-exports.Cursor = Cursor;

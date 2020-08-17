@@ -1,6 +1,5 @@
-const Section = require("../parser/Section").Section;
 
-class OrderByClause extends Section {
+export default class OrderByClause extends Section {
 
     constructor(ids, descending) {
         super();
@@ -41,5 +40,3 @@ class OrderByClause extends Section {
         transpiler.append(builder).append(".addOrderByClause(").append(info.toTranspiled()).append(", ").append(this.descending).append(");").newLine();
     }
 }
-
-exports.OrderByClause = OrderByClause;

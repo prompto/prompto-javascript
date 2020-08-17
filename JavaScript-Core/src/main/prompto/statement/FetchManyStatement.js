@@ -1,15 +1,10 @@
-const FetchManyExpression = require("../expression/FetchManyExpression").FetchManyExpression;
-const CursorType = require("../type/CursorType").CursorType;
-const Variable = require("../runtime/Variable").Variable;
-const VoidType = require("../type/VoidType").VoidType;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class FetchManyStatement extends FetchManyExpression {
+export default class FetchManyStatement extends FetchManyExpression {
+
     constructor(typ, predicate, first, last, orderBy, name, andThen) {
         super(typ, predicate, first, last, orderBy);
         this.name = name;
         this.andThen = andThen;
-        return this;
     }
 
     canReturn() {
@@ -78,5 +73,3 @@ class FetchManyStatement extends FetchManyExpression {
     }
 }
 
-
-exports.FetchManyStatement = FetchManyStatement;

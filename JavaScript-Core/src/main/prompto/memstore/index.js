@@ -1,1 +1,1 @@
-exports.MemStore = require('./MemStore').MemStore;
+export {default as MemStore} from './MemStore';

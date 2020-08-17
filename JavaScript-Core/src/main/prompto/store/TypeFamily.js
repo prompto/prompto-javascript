@@ -1,7 +1,7 @@
-class TypeFamily {
+export default class TypeFamily {
+
     constructor(name) {
         this.name = name;
-        return this;
     }
 
     toTranspiled() {
@@ -46,5 +46,3 @@ TypeFamily.CSS = new TypeFamily("CSS");
 TypeFamily.HTML = new TypeFamily("HTML");
 // volatile
 TypeFamily.MISSING = new TypeFamily("MISSING");
-
-exports.TypeFamily = TypeFamily;

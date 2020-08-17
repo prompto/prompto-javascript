@@ -1,6 +1,3 @@
-class PythonExpression {
+export default class PythonExpression {
 	
 }
-
-
-exports.PythonExpression = PythonExpression;

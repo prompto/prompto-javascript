@@ -1,13 +1,12 @@
-const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
+import ConcreteCategoryDeclaration from "./ConcreteCategoryDeclaration"
+import { IdentifierList } from "../grammar/index"
+import { CategoryType } from "../type/index"
 
+export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
 
-class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
     constructor(name, derivedFrom, methods) {
         derivedFrom = derivedFrom==null ? null : new IdentifierList(derivedFrom);
         super(name, null, derivedFrom, methods);
-        return this;
     }
 
     isWidget(context) {
@@ -80,5 +79,3 @@ class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
         return transpiler.append("React.Component.call(this);");
     }
 }
-
-exports.ConcreteWidgetDeclaration = ConcreteWidgetDeclaration;

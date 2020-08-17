@@ -1,14 +1,10 @@
-const FetchOneExpression = require("../expression/FetchOneExpression").FetchOneExpression;
-const Variable = require("../runtime/Variable").Variable;
-const VoidType = require("../type/VoidType").VoidType;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class FetchOneStatement extends FetchOneExpression {
+export default class FetchOneStatement extends FetchOneExpression {
+
     constructor(typ, predicate, name, andThen) {
         super(typ, predicate);
         this.name = name;
         this.andThen = andThen;
-        return this;
     }
 
     canReturn() {
@@ -76,5 +72,3 @@ class FetchOneStatement extends FetchOneExpression {
         return this;
     }
 }
-
-exports.FetchOneStatement = FetchOneStatement;

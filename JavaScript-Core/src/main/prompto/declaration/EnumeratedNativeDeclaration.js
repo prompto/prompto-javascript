@@ -1,8 +1,5 @@
-const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-const EnumeratedNativeType = require("../type/EnumeratedNativeType").EnumeratedNativeType;
-const List = require("../intrinsic/List").List;
 
-class EnumeratedNativeDeclaration extends BaseDeclaration {
+export default class EnumeratedNativeDeclaration extends BaseDeclaration {
 
     constructor(id, derivedFrom, symbols) {
         super(id);
@@ -99,5 +96,3 @@ class EnumeratedNativeDeclaration extends BaseDeclaration {
     }
 }
 
-
-exports.EnumeratedNativeDeclaration = EnumeratedNativeDeclaration;

@@ -1,12 +1,10 @@
-const CSharpSelectorExpression = require("./CSharpSelectorExpression").CSharpSelectorExpression;
-const CSharpExpressionList = require("./CSharpExpressionList").CSharpExpressionList;
 
-class CSharpMethodExpression extends CSharpSelectorExpression {
+export default class CSharpMethodExpression extends CSharpSelectorExpression {
+
     constructor(name, args) {
         super();
         this.name = name;
         this.args = args || new CSharpExpressionList();
-        return this;
     }
 
     toString() {
@@ -22,5 +20,3 @@ class CSharpMethodExpression extends CSharpSelectorExpression {
         writer.append(')');
     }
 }
-
-exports.CSharpMethodExpression = CSharpMethodExpression;

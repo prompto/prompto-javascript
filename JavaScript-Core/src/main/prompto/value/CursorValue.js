@@ -1,19 +1,11 @@
-const CategoryType = require("../type/CategoryType").CategoryType;
-const CursorType = require("../type/CursorType").CursorType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const Value = require("./Value").Value;
-const ListValue = require("./ListValue").ListValue;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const IteratorValue = require("./IteratorValue").IteratorValue;
 
-class CursorValue extends Value {
+export default class CursorValue extends Value {
+
     constructor(context, itemType, iterable) {
         super(new CursorType(itemType));
         this.context = context;
         this.iterable = iterable;
         this.mutable = itemType.mutable || false;
-        return this;
     }
 
     isEmpty() {
@@ -90,5 +82,3 @@ class CursorIterator extends IteratorValue {
     }
 }
 
-
-exports.CursorValue = CursorValue;

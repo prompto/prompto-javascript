@@ -1,22 +1,12 @@
-let ConcreteMethodDeclaration = null;
-const ClosureValue = require("../value/ClosureValue").ClosureValue;
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const MethodType = require("../type/MethodType").MethodType;
-const VoidType = require("../type/VoidType").VoidType;
-const Variable = require("../runtime/Variable").Variable;
 
-exports.resolve = () => {
-    ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-};
+export default class DeclarationStatement extends BaseStatement {
 
-class DeclarationStatement extends BaseStatement {
     constructor(declaration) {
         super();
         this.declaration = declaration;
         this.declaration.declarationStatement = this;
         if(declaration instanceof ConcreteMethodDeclaration)
             declaration.declarationOf = this;
-        return this;
     }
 
     toDialect(writer) {
@@ -68,4 +58,3 @@ class DeclarationStatement extends BaseStatement {
     }
 }
 
-exports.DeclarationStatement = DeclarationStatement;

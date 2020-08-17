@@ -1,19 +1,8 @@
-const Literal = require("./Literal").Literal;
-const Document = require("../intrinsic/Document").Document;
-const DocEntryList = require("./DocEntryList").DocEntryList;
-const DocumentValue = require("../value/DocumentValue").DocumentValue;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const DocumentType = require("../type/DocumentType").DocumentType;
-const CharacterType = require("../type/CharacterType").CharacterType;
-const TextType = require("../type/TextType").TextType;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const TextValue = require("../value/TextValue").TextValue;
 
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
-class DocumentLiteral extends Literal {
+export default class DocumentLiteral extends Literal {
 
     constructor(entries) {
         super("{}", new DocumentValue(new Document()));
@@ -65,5 +54,3 @@ class DocumentLiteral extends Literal {
             return item;
     }
 }
-
-exports.DocumentLiteral = DocumentLiteral;

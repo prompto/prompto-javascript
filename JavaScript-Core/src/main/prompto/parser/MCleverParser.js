@@ -1,9 +1,6 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
-const antlr4 = require("antlr4/index");
-const MIndentingLexer = require("./MIndentingLexer").MIndentingLexer;
-const MParser = require("./MParser").MParser;
-const MPromptoBuilder = require("./MPromptoBuilder").MPromptoBuilder;
+import antlr4 from "antlr4/index";
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -34,7 +31,7 @@ MCleverParser.prototype.constructor = MCleverParser;
 MCleverParser.prototype.parse = function() {
 	return this.parse_declaration_list();
 };
-	
+
 MCleverParser.prototype.parse_declaration_list = function() {
 	return this.doParse(this.declaration_list, true);
 };
@@ -54,4 +51,4 @@ MCleverParser.prototype.doParse = function(rule, addLF) {
     return builder.getNodeValue(tree);
 };
 
-exports.MCleverParser = MCleverParser;
+export {MCleverParser};

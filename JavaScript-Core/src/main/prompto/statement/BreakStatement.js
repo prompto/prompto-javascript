@@ -1,12 +1,5 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const BreakResult = require("../runtime/BreakResult").BreakResult;
-const VoidType = require("../type/VoidType").VoidType;
 
-class BreakStatement extends SimpleStatement {
-    constructor() {
-        super();
-        return this;
-    }
+export default class BreakStatement extends SimpleStatement {
 
     toString() {
         return "break"
@@ -41,4 +34,3 @@ class BreakStatement extends SimpleStatement {
     }
 }
 
-exports.BreakStatement = BreakStatement;

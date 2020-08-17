@@ -1,9 +1,6 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
-const antlr4 = require("antlr4/index");
-const ONamingLexer = require("./ONamingLexer").ONamingLexer;
-const OParser = require("./OParser").OParser;
-const OPromptoBuilder = require("./OPromptoBuilder").OPromptoBuilder;
+import antlr4 from "antlr4/index";
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -58,4 +55,4 @@ OCleverParser.prototype.doParse = function(rule) {
 };
 
 
-exports.OCleverParser = OCleverParser;
+export {OCleverParser};

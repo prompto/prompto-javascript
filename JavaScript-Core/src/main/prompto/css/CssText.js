@@ -1,7 +1,7 @@
-class CssText {
+export default class CssText {
+
     constructor(text) {
         this.text = text;
-        return this;
     }
 
     toDialect(writer) {
@@ -16,5 +16,3 @@ class CssText {
         transpiler.append(JSON.stringify(this.text));
     }
 }
-
-exports.CssText = CssText;

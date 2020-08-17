@@ -1,17 +1,11 @@
-const NullValue = require("./NullValue").NullValue;
-const Value = require("./Value").Value;
-const TextValue = require("./TextValue").TextValue;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const SetValue = require("./SetValue").SetValue;
-const ListValue = require("./ListValue").ListValue;
-const DocumentType = require("../type/DocumentType").DocumentType;
-const TextType = require("../type/TextType").TextType;
-const AnyType = require("../type/AnyType").AnyType;
-const Document = require("../intrinsic/Document").Document;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-const equalArrays = require("../utils/Utils").equalArrays;
+import Value from "./Value"
+import { IntegerValue, NullValue, TextValue, SetValue, ListValue } from "./index"
+import { DocumentType, AnyType, TextType } from "../type/index"
+import { Document, StrictSet } from "../intrinsic/index"
+import { SyntaxError } from "../error/index"
+import { equalArrays } from "../utils/index"
 
-class DocumentValue extends Value {
+export default class DocumentValue extends Value {
  
     constructor(values) {
         super(DocumentType.instance);
@@ -150,6 +144,5 @@ class DocumentValue extends Value {
     }
 }
 
-exports.DocumentValue = DocumentValue;
 
 

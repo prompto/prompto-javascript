@@ -1,11 +1,5 @@
-const Expression = require("./Expression").Expression;
-const ResourceType = require("../type/ResourceType").ResourceType;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-const BlobType = require("../type/BlobType").BlobType;
-const BlobValue = require("../value/BlobValue").BlobValue;
 
-class ReadBlobExpression extends Expression {
+export default class ReadBlobExpression extends Expression {
 
     constructor(resource) {
         super();
@@ -55,5 +49,3 @@ class ReadBlobExpression extends Expression {
         transpiler.append(".readBinary()");
     }
 }
-
-exports.ReadBlobExpression = ReadBlobExpression;

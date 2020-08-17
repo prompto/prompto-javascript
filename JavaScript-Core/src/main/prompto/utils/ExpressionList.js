@@ -1,9 +1,8 @@
-const ObjectList = require("./ObjectList").ObjectList;
 
-class ExpressionList extends ObjectList {
+export default class ExpressionList extends ObjectList {
+
     constructor(items, item) {
         super(items, item);
-        return this;
     }
 
     toDialect(writer) {
@@ -32,5 +31,3 @@ class ExpressionList extends ObjectList {
         }
     }
 }
-
-exports.ExpressionList = ExpressionList;

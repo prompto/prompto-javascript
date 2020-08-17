@@ -1,6 +1,5 @@
-const BaseSwitchStatement = require("./BaseSwitchStatement").BaseSwitchStatement;
 
-class SwitchStatement extends BaseSwitchStatement {
+export default class SwitchStatement extends BaseSwitchStatement {
  
     constructor(expression, switchCases, defaultCase) {
         super(switchCases, defaultCase);
@@ -86,5 +85,3 @@ class SwitchStatement extends BaseSwitchStatement {
         return true;
     }
 }
-
-exports.SwitchStatement = SwitchStatement;

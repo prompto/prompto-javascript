@@ -1,12 +1,10 @@
-const Value = require("./Value").Value;
-const IteratorType = require("../type/IteratorType").IteratorType;
 
 /* thin wrapper to expose an iterator as a prompto value */
-class IteratorValue extends Value {
+export default class IteratorValue extends Value {
+
     constructor(itemType, iterator) {
         super(new IteratorType(itemType));
         this.iterator = iterator;
-        return this;
     }
 
     hasNext() {
@@ -18,4 +16,3 @@ class IteratorValue extends Value {
     }
 }
 
-exports.IteratorValue = IteratorValue;

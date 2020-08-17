@@ -1,10 +1,6 @@
-const IteratorType = require("../type/IteratorType").IteratorType;
-const Variable = require("../runtime/Variable").Variable;
-const Value = require("./Value").Value;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const ListValue = require("./ListValue").ListValue;
 
-class IterableValue extends Value {
+export default class IterableValue extends Value {
+
     constructor(context, name, itemType, source, length, expression) {
         super(new IteratorType(itemType));
         this.context = context;
@@ -13,7 +9,6 @@ class IterableValue extends Value {
         this.source = source;
         this.count = length;
         this.expression = expression;
-        return this;
     }
 
     isEmpty() {
@@ -67,5 +62,3 @@ class IterableValue extends Value {
         return values.join(", ");
     }
 }
-
-exports.IterableValue = IterableValue;

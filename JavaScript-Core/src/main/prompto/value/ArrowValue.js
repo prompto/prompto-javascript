@@ -1,10 +1,9 @@
-const ContextualExpression = require("./ContextualExpression").ContextualExpression;
 
-class ArrowValue extends ContextualExpression {
+export default class ArrowValue extends ContextualExpression {
+
     constructor(method, calling, arrow) {
         super(calling, arrow);
         this.method = method;
-        return this;
     }
 
     interpret(context) {
@@ -18,4 +17,3 @@ class ArrowValue extends ContextualExpression {
     }
 }
 
-exports.ArrowValue = ArrowValue;

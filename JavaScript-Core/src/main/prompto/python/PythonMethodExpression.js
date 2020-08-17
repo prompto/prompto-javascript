@@ -1,12 +1,10 @@
-const PythonSelectorExpression = require("./PythonSelectorExpression").PythonSelectorExpression;
-const PythonArgumentList = require("./PythonArgumentList").PythonArgumentList;
 
-class PythonMethodExpression extends PythonSelectorExpression {
+export default class PythonMethodExpression extends PythonSelectorExpression {
+
     constructor(name, args) {
         super();
         this.name = name;
         this.args = args || new PythonArgumentList();
-        return this;
     }
 
     toString() {
@@ -24,5 +22,3 @@ class PythonMethodExpression extends PythonSelectorExpression {
         writer.append(')');
     }
 }
-
-exports.PythonMethodExpression = PythonMethodExpression;

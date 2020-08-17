@@ -1,9 +1,3 @@
-const OLexer = require("./OLexer").OLexer;
-let Dialect = null;
-
-exports.resolve = () => {
-	Dialect = require("./Dialect").Dialect;
-}
 
 function ONamingLexer(input) {
 	OLexer.call(this, input);
@@ -14,4 +8,4 @@ function ONamingLexer(input) {
 ONamingLexer.prototype = Object.create(OLexer.prototype);
 ONamingLexer.prototype.constructor = ONamingLexer;
 
-exports.ONamingLexer = ONamingLexer
+export {ONamingLexer};

@@ -1,13 +1,5 @@
-const Expression = require("./Expression").Expression;
-const Dialect = require("../parser/Dialect").Dialect;
-const ReturnStatement = require("../statement/ReturnStatement").ReturnStatement;
-const StatementList = require("../statement/StatementList").StatementList;
-const Variable = require("../runtime/Variable").Variable;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const VoidType = require("../type/VoidType").VoidType;
 
-class ArrowExpression extends Expression {
+export default class ArrowExpression extends Expression {
   
     constructor(args, argsSuite, arrowSuite) {
         super();
@@ -238,5 +230,3 @@ class ArrowExpression extends Expression {
         transpiler.flush();
     }
 }
-
-exports.ArrowExpression = ArrowExpression;

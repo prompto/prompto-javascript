@@ -1,31 +1,4 @@
-const Expression = require("./Expression").Expression;
-const MethodCall = require("../statement/MethodCall").MethodCall;
-let EnumeratedCategoryDeclaration = null;
-let CategoryDeclaration = null;
-const EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-let ConstructorExpression = null;
-const InstanceExpression = require("./InstanceExpression").InstanceExpression;
-const SymbolExpression = require("./SymbolExpression").SymbolExpression;
-const TypeExpression = require("./TypeExpression").TypeExpression;
-const ProblemListener = require("../problem/ProblemListener").ProblemListener;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const Dialect = require("../parser/Dialect").Dialect;
-const NativeType = require("../type/NativeType").NativeType;
-const VoidType = require("../type/VoidType").VoidType;
-let EnumeratedCategoryType = null;
-let CategoryType = null;
-let MethodSelector = null;
-
-exports.resolve = () => {
-    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-    EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-    MethodSelector = require("./MethodSelector").MethodSelector;
-    CategoryType = require("../type/CategoryType").CategoryType;
-    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-    ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
-}
-
-class UnresolvedIdentifier extends Expression {
+export default class UnresolvedIdentifier extends Expression {
  
     constructor(id) {
         super();
@@ -248,6 +221,3 @@ class UnresolvedIdentifier extends Expression {
         return this.resolved.transpileReference(transpiler);
     }
 }
-
-exports.UnresolvedIdentifier = UnresolvedIdentifier;
-

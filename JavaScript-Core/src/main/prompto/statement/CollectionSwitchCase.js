@@ -1,11 +1,8 @@
-const CollectionType = require("../type/ContainerType").ContainerType;
-const SwitchCase = require("./SwitchCase").SwitchCase;
-const VoidType = require("../type/VoidType").VoidType;
 
-class CollectionSwitchCase extends SwitchCase {
+export default class CollectionSwitchCase extends SwitchCase {
+
     constructor(expression, statements) {
         super(expression, statements);
-        return this;
     }
 
     checkSwitchType(context, type) {
@@ -79,4 +76,3 @@ class CollectionSwitchCase extends SwitchCase {
     }
 }
 
-exports.CollectionSwitchCase = CollectionSwitchCase;

@@ -1,16 +1,14 @@
-const Value = require("./Value").Value;
-const CharacterValue = require("./CharacterValue").CharacterValue;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const TextType = require("../type/TextType").TextType;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-const removeAccents = require("../utils/Utils").removeAccents;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
+import Value from "./Value"
+import { IntegerValue, CharacterValue } from "./index"
+import { TextType } from "../type/index"
+import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from "../error/index"
+import { removeAccents } from "../utils/index"
 
-class TextValue extends Value {
+export default class TextValue extends Value {
+
     constructor(value) {
         super(TextType.instance);
         this.value = value;
-        return this;
     }
 
     getStorableData() {
@@ -164,6 +162,5 @@ class TextIterator {
     }
 }
 
-exports.TextValue = TextValue;
 
 

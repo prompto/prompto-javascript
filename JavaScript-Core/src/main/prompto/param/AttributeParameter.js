@@ -1,9 +1,8 @@
-const Parameter = require("./Parameter").Parameter;
 
-class AttributeParameter extends Parameter {
+export default class AttributeParameter extends Parameter {
+
     constructor(id) {
         super(id);
-        return this;
     }
 
     toString() {
@@ -62,5 +61,3 @@ class AttributeParameter extends Parameter {
         return other === this || (other instanceof AttributeParameter && this.name === other.name);
     }
 }
-
-exports.AttributeParameter = AttributeParameter;

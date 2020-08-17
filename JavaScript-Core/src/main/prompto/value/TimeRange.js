@@ -1,17 +1,8 @@
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-const RangeValue = require("./RangeValue").RangeValue;
-const TimeValue = require("./TimeValue").TimeValue;
-const LocalTime = require("../intrinsic/LocalTime").LocalTime;
-let TimeType = null;
 
-exports.resolve = () => {
-    TimeType = require("../type/TimeType").TimeType;
-};
+export default class TimeRange extends RangeValue {
 
-class TimeRange extends RangeValue {
     constructor(left, right) {
         super(TimeType.instance, left, right);
-        return this;
     }
 
     size() {
@@ -31,11 +22,3 @@ class TimeRange extends RangeValue {
     }
 }
 
-/*
-@Override
-public RangeValue<TimeValue> newInstance(TimeValue left, TimeValue right) {
-	return new TimeRange(left, right);
-}
-*/
-
-exports.TimeRange = TimeRange;

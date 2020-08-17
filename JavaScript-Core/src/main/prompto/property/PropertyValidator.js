@@ -1,7 +1,4 @@
-class PropertyValidator {
-    constructor() {
-        return this;
-    }
+export default class PropertyValidator {
 
     isRequired() {
         return false;
@@ -29,5 +26,3 @@ class PropertyValidator {
     }
 }
 
-
-exports.PropertyValidator = PropertyValidator;

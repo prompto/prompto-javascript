@@ -1,10 +1,7 @@
-const CSharpLiteral = require("./CSharpLiteral").CSharpLiteral;
 
-class CSharpTextLiteral extends CSharpLiteral {
+export default class CSharpTextLiteral extends CSharpLiteral {
+
     constructor(text) {
         super(text);
-        return this;
     }
 }
-
-exports.CSharpTextLiteral = CSharpTextLiteral;

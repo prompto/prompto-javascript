@@ -4,8 +4,8 @@
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
   "devDependencies": {
-    "eslint": "^6.2.2",
-    "eslint-loader": "^3.0.0",
+    "eslint": "^7.6.0",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-es5": "^1.4.1",
     "fibers": "5.0.0",
     "jest": "^24.7.1",

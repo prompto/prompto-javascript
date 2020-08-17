@@ -1,12 +1,8 @@
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Variable = require("../runtime/Variable").Variable;
-const AnyType = require("../type/AnyType").AnyType;
 
-class MatchingExpressionConstraint {
+export default class MatchingExpressionConstraint {
+
     constructor(expression) {
         this.expression = expression;
-        return this;
     }
 
     checkValue(context, value) {
@@ -49,6 +45,4 @@ class MatchingExpressionConstraint {
         transpiler.flush();
     }
 }
-
-exports.MatchingExpressionConstraint = MatchingExpressionConstraint;
 

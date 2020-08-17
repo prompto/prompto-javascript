@@ -1,12 +1,9 @@
-const BaseType = require("./BaseType").BaseType;
-const TextType = require("./TextType").TextType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class EntryType extends BaseType {
+export default class EntryType extends BaseType {
+
     constructor(itemType) {
         super(new Identifier(itemType.name + "{}[]"));
         this.itemType = itemType;
-        return this;
     }
 
     checkMember(context, section, name) {
@@ -32,5 +29,3 @@ class EntryType extends BaseType {
         transpiler.append(name);
     }
 }
-
-exports.EntryType = EntryType;

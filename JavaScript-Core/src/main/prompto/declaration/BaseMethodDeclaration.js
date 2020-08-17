@@ -1,11 +1,9 @@
-const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-const ParameterList = require("../param/ParameterList").ParameterList;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const Argument = require("../grammar/Argument").Argument;
-const ProblemListener = require("../problem/ProblemListener").ProblemListener;
+import BaseDeclaration from "./BaseDeclaration"
+import { ArgumentList, Argument } from "../grammar/index"
+import { ParameterList } from "../param/index"
+import { ProblemListener } from "../problem/index"
 
-
-class BaseMethodDeclaration extends BaseDeclaration {
+export default class BaseMethodDeclaration extends BaseDeclaration {
 
     constructor(id, parameters, returnType) {
         super(id);
@@ -114,7 +112,5 @@ class BaseMethodDeclaration extends BaseDeclaration {
         return false;
     }
 }
-
-exports.BaseMethodDeclaration = BaseMethodDeclaration;
 
 

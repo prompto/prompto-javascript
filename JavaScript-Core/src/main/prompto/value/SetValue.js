@@ -1,21 +1,15 @@
-const Value = require("./Value").Value;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-let SetType = require("../type/SetType").SetType;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-let ListValue = null;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+import Value from "./Value"
+import { IntegerValue, ListValue } from "./index"
+import { SyntaxError, IndexOutOfRangeError } from "../error/index"
+import { SetType } from "../type/index"
+import { StrictSet } from "../intrinsic/index"
 
-exports.resolve = () => {
-    SetType = require("../type/SetType").SetType;
-    ListValue = require("./ListValue").ListValue;
-};
+export default class SetValue extends Value {
 
-class SetValue extends Value {
     constructor(itemType, items) {
         super(new SetType(itemType));
         this.itemType = itemType;
         this.items = items || new StrictSet();
-        return this;
     }
 
     add(item) {
@@ -106,6 +100,3 @@ class SetValue extends Value {
     }
 }
 
-
-
-exports.SetValue = SetValue;

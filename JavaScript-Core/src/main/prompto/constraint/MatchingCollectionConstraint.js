@@ -1,12 +1,8 @@
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Variable = require("../runtime/Variable").Variable;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
 
-class MatchingCollectionConstraint {
+export default class MatchingCollectionConstraint {
+
     constructor(collection) {
         this.collection = collection;
-        return this;
     }
 
     checkValue(context, value) {
@@ -50,7 +46,4 @@ class MatchingCollectionConstraint {
         transpiler.flush();
     }
 }
-
-
-exports.MatchingCollectionConstraint = MatchingCollectionConstraint;
 

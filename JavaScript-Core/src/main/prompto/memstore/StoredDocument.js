@@ -1,9 +1,9 @@
 
-class StoredDocument {
+export default class StoredDocument {
+
     constructor(categories) {
         // use reserved 'category' keyword explicitly
         this.category = categories;
-        return this;
     }
 
     getData(name) {
@@ -17,5 +17,3 @@ class StoredDocument {
             return predicate.matches(this);
     }
 }
-
-exports.StoredDocument = StoredDocument;

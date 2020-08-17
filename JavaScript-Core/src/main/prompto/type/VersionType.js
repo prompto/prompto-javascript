@@ -1,13 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Version = require("../intrinsic/Version").Version;
-const VersionValue = require("../value/VersionValue").VersionValue;
 
-class VersionType extends NativeType {
+export default class VersionType extends NativeType {
+
     constructor() {
         super(new Identifier("Version"));
-        return this;
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
@@ -49,4 +44,3 @@ class VersionType extends NativeType {
 
 VersionType.instance = new VersionType();
 
-exports.VersionType = VersionType;

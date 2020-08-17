@@ -1,5 +1,3 @@
-const ELexer = require("./ELexer").ELexer;
-const Dialect = require("./Dialect").Dialect;
 
 function EIndentingLexer(input) {
 	ELexer.call(this, input);
@@ -57,7 +55,7 @@ EIndentingLexer.prototype.interpretEOF = function(eof) {
 	}
 	this.tokens.push(eof);
 };
-  
+
 EIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 	// count TABs following LF
 	const indentCount = this.countIndents(lftab.text);
@@ -116,5 +114,5 @@ EIndentingLexer.prototype.interpretAnyToken = function(token) {
 	this.tokens.push(token);
 };
 
-exports.EIndentingLexer = EIndentingLexer;
+export {EIndentingLexer};
 

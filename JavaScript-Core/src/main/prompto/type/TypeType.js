@@ -1,12 +1,9 @@
-const BaseType = require("./BaseType").BaseType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
+export default class TypeType extends BaseType {
 
-class TypeType extends BaseType {
     constructor(type) {
         super(new Identifier("Type"));
         this.type = type;
-        return this;
     }
 
     checkMember(context, section, name) {
@@ -27,4 +24,3 @@ class TypeType extends BaseType {
     }
 }
 
-exports.TypeType = TypeType;

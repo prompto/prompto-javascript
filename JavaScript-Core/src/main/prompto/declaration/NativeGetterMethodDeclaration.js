@@ -1,9 +1,8 @@
-const GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
 
-class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
+export default class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
+
     constructor(id, statements) {
         super(id, statements);
-        return this;
     }
 
     interpret(context) {
@@ -27,6 +26,3 @@ class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
     }
 }
 
-NativeGetterMethodDeclaration.prototype.contructor = NativeGetterMethodDeclaration;
-
-exports.NativeGetterMethodDeclaration = NativeGetterMethodDeclaration;

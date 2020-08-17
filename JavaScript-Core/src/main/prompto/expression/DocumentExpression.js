@@ -1,13 +1,5 @@
-const Expression = require("./Expression").Expression;
-const DocumentType = require("../type/DocumentType").DocumentType;
-const DocumentValue = require("../value/DocumentValue").DocumentValue;
-const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-const BlobValue = require("../value/BlobValue").BlobValue;
-const ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
-const Document = require("../intrinsic/Document").Document;
-const Blob = require("../intrinsic/Blob").Blob;
 
-class DocumentExpression extends Expression {
+export default class DocumentExpression extends Expression {
  
     constructor(source) {
         super();
@@ -104,5 +96,3 @@ class DocumentExpression extends Expression {
         writer.append(")");
     }
 }
-
-exports.DocumentExpression = DocumentExpression;

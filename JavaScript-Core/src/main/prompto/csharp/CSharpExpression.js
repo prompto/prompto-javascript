@@ -1,5 +1,4 @@
-class CSharpExpression {
+export default class CSharpExpression {
 	
 }
 
-exports.CSharpExpression = CSharpExpression;

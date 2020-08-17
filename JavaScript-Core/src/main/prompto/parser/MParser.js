@@ -1,8 +1,9 @@
 // Generated from MParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
-var MParserListener = require('./MParserListener').MParserListener;
-var AbstractParser = require('./AbstractParser').AbstractParser;
+import antlr4 from 'antlr4/index';
+
+import {MParserListener} from './MParserListener';
+import {AbstractParser} from './AbstractParser';
 
 var grammarFileName = "MParser.g4";
 
@@ -4934,7 +4935,7 @@ Native_category_binding_listContext.prototype = Object.create(antlr4.ParserRuleC
 Native_category_binding_listContext.prototype.constructor = Native_category_binding_listContext;
 
 
- 
+
 Native_category_binding_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -5939,7 +5940,7 @@ StatementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 StatementContext.prototype.constructor = StatementContext;
 
 
- 
+
 StatementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -7531,7 +7532,7 @@ Switch_case_statementContext.prototype = Object.create(antlr4.ParserRuleContext.
 Switch_case_statementContext.prototype.constructor = Switch_case_statementContext;
 
 
- 
+
 Switch_case_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -8209,7 +8210,7 @@ Else_if_statement_listContext.prototype = Object.create(antlr4.ParserRuleContext
 Else_if_statement_listContext.prototype.constructor = Else_if_statement_listContext;
 
 
- 
+
 Else_if_statement_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -8691,7 +8692,7 @@ Catch_statementContext.prototype = Object.create(antlr4.ParserRuleContext.protot
 Catch_statementContext.prototype.constructor = Catch_statementContext;
 
 
- 
+
 Catch_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -9035,7 +9036,7 @@ ExpressionContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ExpressionContext.prototype.constructor = ExpressionContext;
 
 
- 
+
 ExpressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -11294,7 +11295,7 @@ Selectable_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.
 Selectable_expressionContext.prototype.constructor = Selectable_expressionContext;
 
 
- 
+
 Selectable_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -11554,7 +11555,7 @@ Instance_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.pr
 Instance_expressionContext.prototype.constructor = Instance_expressionContext;
 
 
- 
+
 Instance_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -11695,7 +11696,7 @@ Mutable_instance_expressionContext.prototype = Object.create(antlr4.ParserRuleCo
 Mutable_instance_expressionContext.prototype.constructor = Mutable_instance_expressionContext;
 
 
- 
+
 Mutable_instance_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -11989,7 +11990,7 @@ Instance_selectorContext.prototype = Object.create(antlr4.ParserRuleContext.prot
 Instance_selectorContext.prototype.constructor = Instance_selectorContext;
 
 
- 
+
 Instance_selectorContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -12396,7 +12397,7 @@ Constructor_expressionContext.prototype = Object.create(antlr4.ParserRuleContext
 Constructor_expressionContext.prototype.constructor = Constructor_expressionContext;
 
 
- 
+
 Constructor_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -12656,7 +12657,7 @@ Argument_assignment_listContext.prototype = Object.create(antlr4.ParserRuleConte
 Argument_assignment_listContext.prototype.constructor = Argument_assignment_listContext;
 
 
- 
+
 Argument_assignment_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -13104,7 +13105,7 @@ Fetch_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Fetch_expressionContext.prototype.constructor = Fetch_expressionContext;
 
 
- 
+
 Fetch_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -13365,7 +13366,7 @@ Fetch_statementContext.prototype = Object.create(antlr4.ParserRuleContext.protot
 Fetch_statementContext.prototype.constructor = Fetch_statementContext;
 
 
- 
+
 Fetch_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -14031,7 +14032,7 @@ Child_instanceContext.prototype = Object.create(antlr4.ParserRuleContext.prototy
 Child_instanceContext.prototype.constructor = Child_instanceContext;
 
 
- 
+
 Child_instanceContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -14895,7 +14896,7 @@ Declaration_listContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Declaration_listContext.prototype.constructor = Declaration_listContext;
 
 
- 
+
 Declaration_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -15637,7 +15638,7 @@ Annotation_argument_valueContext.prototype = Object.create(antlr4.ParserRuleCont
 Annotation_argument_valueContext.prototype.constructor = Annotation_argument_valueContext;
 
 
- 
+
 Annotation_argument_valueContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -16168,7 +16169,7 @@ Attribute_constraintContext.prototype = Object.create(antlr4.ParserRuleContext.p
 Attribute_constraintContext.prototype.constructor = Attribute_constraintContext;
 
 
- 
+
 Attribute_constraintContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -16782,7 +16783,7 @@ TypedefContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 TypedefContext.prototype.constructor = TypedefContext;
 
 
- 
+
 TypedefContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -17155,7 +17156,7 @@ Primary_typeContext.prototype = Object.create(antlr4.ParserRuleContext.prototype
 Primary_typeContext.prototype.constructor = Primary_typeContext;
 
 
- 
+
 Primary_typeContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -17290,7 +17291,7 @@ Native_typeContext.prototype = Object.create(antlr4.ParserRuleContext.prototype)
 Native_typeContext.prototype.constructor = Native_typeContext;
 
 
- 
+
 Native_typeContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -18094,7 +18095,7 @@ Category_declarationContext.prototype = Object.create(antlr4.ParserRuleContext.p
 Category_declarationContext.prototype.constructor = Category_declarationContext;
 
 
- 
+
 Category_declarationContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -18249,7 +18250,7 @@ Widget_declarationContext.prototype = Object.create(antlr4.ParserRuleContext.pro
 Widget_declarationContext.prototype.constructor = Widget_declarationContext;
 
 
- 
+
 Widget_declarationContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -18859,7 +18860,7 @@ IdentifierContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 IdentifierContext.prototype.constructor = IdentifierContext;
 
 
- 
+
 IdentifierContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -19419,7 +19420,7 @@ ArgumentContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 ArgumentContext.prototype.constructor = ArgumentContext;
 
 
- 
+
 ArgumentContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -19868,7 +19869,7 @@ Any_typeContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Any_typeContext.prototype.constructor = Any_typeContext;
 
 
- 
+
 Any_typeContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -20499,7 +20500,7 @@ Native_category_bindingContext.prototype = Object.create(antlr4.ParserRuleContex
 Native_category_bindingContext.prototype.constructor = Native_category_bindingContext;
 
 
- 
+
 Native_category_bindingContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -21601,7 +21602,7 @@ Native_statementContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Native_statementContext.prototype.constructor = Native_statementContext;
 
 
- 
+
 Native_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -22383,7 +22384,7 @@ Literal_collectionContext.prototype = Object.create(antlr4.ParserRuleContext.pro
 Literal_collectionContext.prototype.constructor = Literal_collectionContext;
 
 
- 
+
 Literal_collectionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -22588,7 +22589,7 @@ Atomic_literalContext.prototype = Object.create(antlr4.ParserRuleContext.prototy
 Atomic_literalContext.prototype.constructor = Atomic_literalContext;
 
 
- 
+
 Atomic_literalContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -24334,7 +24335,7 @@ Doc_keyContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Doc_keyContext.prototype.constructor = Doc_keyContext;
 
 
- 
+
 Doc_keyContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -24732,7 +24733,7 @@ Dict_keyContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Dict_keyContext.prototype.constructor = Dict_keyContext;
 
 
- 
+
 Dict_keyContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -24966,7 +24967,7 @@ Slice_argumentsContext.prototype = Object.create(antlr4.ParserRuleContext.protot
 Slice_argumentsContext.prototype.constructor = Slice_argumentsContext;
 
 
- 
+
 Slice_argumentsContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -25220,7 +25221,7 @@ Assignable_instanceContext.prototype = Object.create(antlr4.ParserRuleContext.pr
 Assignable_instanceContext.prototype.constructor = Assignable_instanceContext;
 
 
- 
+
 Assignable_instanceContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -25357,7 +25358,7 @@ Is_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.prototyp
 Is_expressionContext.prototype.constructor = Is_expressionContext;
 
 
- 
+
 Is_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -25485,7 +25486,7 @@ Arrow_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Arrow_expressionContext.prototype.constructor = Arrow_expressionContext;
 
 
- 
+
 Arrow_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -25709,7 +25710,7 @@ Arrow_argsContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Arrow_argsContext.prototype.constructor = Arrow_argsContext;
 
 
- 
+
 Arrow_argsContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -26366,7 +26367,7 @@ OperatorContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 OperatorContext.prototype.constructor = OperatorContext;
 
 
- 
+
 OperatorContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -27758,7 +27759,7 @@ Javascript_statementContext.prototype = Object.create(antlr4.ParserRuleContext.p
 Javascript_statementContext.prototype.constructor = Javascript_statementContext;
 
 
- 
+
 Javascript_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -27896,7 +27897,7 @@ Javascript_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.
 Javascript_expressionContext.prototype.constructor = Javascript_expressionContext;
 
 
- 
+
 Javascript_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -28288,7 +28289,7 @@ Javascript_selector_expressionContext.prototype = Object.create(antlr4.ParserRul
 Javascript_selector_expressionContext.prototype.constructor = Javascript_selector_expressionContext;
 
 
- 
+
 Javascript_selector_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -28541,7 +28542,7 @@ Javascript_argumentsContext.prototype = Object.create(antlr4.ParserRuleContext.p
 Javascript_argumentsContext.prototype.constructor = Javascript_argumentsContext;
 
 
- 
+
 Javascript_argumentsContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -28892,7 +28893,7 @@ Javascript_literal_expressionContext.prototype = Object.create(antlr4.ParserRule
 Javascript_literal_expressionContext.prototype.constructor = Javascript_literal_expressionContext;
 
 
- 
+
 Javascript_literal_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -29328,7 +29329,7 @@ Python_statementContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Python_statementContext.prototype.constructor = Python_statementContext;
 
 
- 
+
 Python_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -29454,7 +29455,7 @@ Python_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.prot
 Python_expressionContext.prototype.constructor = Python_expressionContext;
 
 
- 
+
 Python_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -29595,7 +29596,7 @@ Python_primary_expressionContext.prototype = Object.create(antlr4.ParserRuleCont
 Python_primary_expressionContext.prototype.constructor = Python_primary_expressionContext;
 
 
- 
+
 Python_primary_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -29879,7 +29880,7 @@ Python_selector_expressionContext.prototype = Object.create(antlr4.ParserRuleCon
 Python_selector_expressionContext.prototype.constructor = Python_selector_expressionContext;
 
 
- 
+
 Python_selector_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -30102,7 +30103,7 @@ Python_argument_listContext.prototype = Object.create(antlr4.ParserRuleContext.p
 Python_argument_listContext.prototype.constructor = Python_argument_listContext;
 
 
- 
+
 Python_argument_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -30270,7 +30271,7 @@ Python_ordinal_argument_listContext.prototype = Object.create(antlr4.ParserRuleC
 Python_ordinal_argument_listContext.prototype.constructor = Python_ordinal_argument_listContext;
 
 
- 
+
 Python_ordinal_argument_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -30417,7 +30418,7 @@ Python_named_argument_listContext.prototype = Object.create(antlr4.ParserRuleCon
 Python_named_argument_listContext.prototype.constructor = Python_named_argument_listContext;
 
 
- 
+
 Python_named_argument_listContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -30662,7 +30663,7 @@ Python_identifier_expressionContext.prototype = Object.create(antlr4.ParserRuleC
 Python_identifier_expressionContext.prototype.constructor = Python_identifier_expressionContext;
 
 
- 
+
 Python_identifier_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -30852,7 +30853,7 @@ Python_literal_expressionContext.prototype = Object.create(antlr4.ParserRuleCont
 Python_literal_expressionContext.prototype.constructor = Python_literal_expressionContext;
 
 
- 
+
 Python_literal_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -31288,7 +31289,7 @@ Java_statementContext.prototype = Object.create(antlr4.ParserRuleContext.prototy
 Java_statementContext.prototype.constructor = Java_statementContext;
 
 
- 
+
 Java_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -31426,7 +31427,7 @@ Java_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.protot
 Java_expressionContext.prototype.constructor = Java_expressionContext;
 
 
- 
+
 Java_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -31798,7 +31799,7 @@ Java_selector_expressionContext.prototype = Object.create(antlr4.ParserRuleConte
 Java_selector_expressionContext.prototype.constructor = Java_selector_expressionContext;
 
 
- 
+
 Java_selector_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -32009,7 +32010,7 @@ Java_argumentsContext.prototype = Object.create(antlr4.ParserRuleContext.prototy
 Java_argumentsContext.prototype.constructor = Java_argumentsContext;
 
 
- 
+
 Java_argumentsContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -32300,7 +32301,7 @@ Java_identifier_expressionContext.prototype = Object.create(antlr4.ParserRuleCon
 Java_identifier_expressionContext.prototype.constructor = Java_identifier_expressionContext;
 
 
- 
+
 Java_identifier_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -32447,7 +32448,7 @@ Java_class_identifier_expressionContext.prototype = Object.create(antlr4.ParserR
 Java_class_identifier_expressionContext.prototype.constructor = Java_class_identifier_expressionContext;
 
 
- 
+
 Java_class_identifier_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -32588,7 +32589,7 @@ Java_literal_expressionContext.prototype = Object.create(antlr4.ParserRuleContex
 Java_literal_expressionContext.prototype.constructor = Java_literal_expressionContext;
 
 
- 
+
 Java_literal_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -33024,7 +33025,7 @@ Csharp_statementContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Csharp_statementContext.prototype.constructor = Csharp_statementContext;
 
 
- 
+
 Csharp_statementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -33162,7 +33163,7 @@ Csharp_expressionContext.prototype = Object.create(antlr4.ParserRuleContext.prot
 Csharp_expressionContext.prototype.constructor = Csharp_expressionContext;
 
 
- 
+
 Csharp_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -33534,7 +33535,7 @@ Csharp_selector_expressionContext.prototype = Object.create(antlr4.ParserRuleCon
 Csharp_selector_expressionContext.prototype.constructor = Csharp_selector_expressionContext;
 
 
- 
+
 Csharp_selector_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -33745,7 +33746,7 @@ Csharp_argumentsContext.prototype = Object.create(antlr4.ParserRuleContext.proto
 Csharp_argumentsContext.prototype.constructor = Csharp_argumentsContext;
 
 
- 
+
 Csharp_argumentsContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -34036,7 +34037,7 @@ Csharp_identifier_expressionContext.prototype = Object.create(antlr4.ParserRuleC
 Csharp_identifier_expressionContext.prototype.constructor = Csharp_identifier_expressionContext;
 
 
- 
+
 Csharp_identifier_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -34226,7 +34227,7 @@ Csharp_literal_expressionContext.prototype = Object.create(antlr4.ParserRuleCont
 Csharp_literal_expressionContext.prototype.constructor = Csharp_literal_expressionContext;
 
 
- 
+
 Csharp_literal_expressionContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -34734,7 +34735,7 @@ Jsx_elementContext.prototype = Object.create(antlr4.ParserRuleContext.prototype)
 Jsx_elementContext.prototype.constructor = Jsx_elementContext;
 
 
- 
+
 Jsx_elementContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -35666,7 +35667,7 @@ Jsx_attribute_valueContext.prototype = Object.create(antlr4.ParserRuleContext.pr
 Jsx_attribute_valueContext.prototype.constructor = Jsx_attribute_valueContext;
 
 
- 
+
 Jsx_attribute_valueContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -35876,7 +35877,7 @@ Jsx_childContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Jsx_childContext.prototype.constructor = Jsx_childContext;
 
 
- 
+
 Jsx_childContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -36824,7 +36825,7 @@ Css_valueContext.prototype = Object.create(antlr4.ParserRuleContext.prototype);
 Css_valueContext.prototype.constructor = Css_valueContext;
 
 
- 
+
 Css_valueContext.prototype.copyFrom = function(ctx) {
     antlr4.ParserRuleContext.prototype.copyFrom.call(this, ctx);
 };
@@ -37468,4 +37469,4 @@ MParser.prototype.css_identifier_sempred = function(localctx, predIndex) {
 };
 
 
-exports.MParser = MParser;
+export {MParser};

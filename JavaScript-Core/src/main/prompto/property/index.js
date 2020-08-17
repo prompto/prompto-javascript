@@ -1,2 +1,2 @@
-exports.Property = require('./Property').Property;
-exports.PropertyMap = require('./PropertyMap').PropertyMap;
+export {default as Property} from './Property';
+export {default as PropertyMap} from './PropertyMap';

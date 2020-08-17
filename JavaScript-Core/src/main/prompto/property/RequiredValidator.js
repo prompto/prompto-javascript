@@ -1,10 +1,9 @@
-const PropertyValidator = require("./PropertyValidator").PropertyValidator;
 
-class RequiredValidator extends PropertyValidator {
+export default class RequiredValidator extends PropertyValidator {
+
     constructor(validator) {
         super();
         this.validator = validator;
-        return this;
     }
 
     isRequired() {
@@ -27,6 +26,3 @@ class RequiredValidator extends PropertyValidator {
         this.validator.validate(context, property);
     }
 }
-
-
-exports.RequiredValidator = RequiredValidator;

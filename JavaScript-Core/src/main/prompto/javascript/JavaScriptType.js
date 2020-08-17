@@ -1,17 +1,5 @@
-const type = require("../type/index.js");
-const Value = require("../value/Value").Value;
-const DocumentValue = require("../value/DocumentValue").DocumentValue;
-const NullValue = require("../value/NullValue").NullValue;
-const ListValue = require("../value/ListValue").ListValue;
-const IteratorValue = require("../value/IteratorValue").IteratorValue;
-const Identifier = require("../grammar/Identifier").Identifier;
-const getTypeName = require("./JavaScriptUtils").getTypeName;
-const InternalError = require("../error/InternalError").InternalError;
-const NativeInstance = require("../value/NativeInstance").NativeInstance;
-const AnyNativeCategoryDeclaration = require("../declaration/AnyNativeCategoryDeclaration").AnyNativeCategoryDeclaration;
-const intrinsic = require("../intrinsic");
 
-class JavaScriptType extends type.CategoryType {
+export default class JavaScriptType extends type.CategoryType {
   
     constructor(name) {
         super(name);
@@ -166,5 +154,3 @@ JavaScriptType.scriptToTypeMap[intrinsic.DateTime.name] = type.DateTimeType.inst
 JavaScriptType.scriptToTypeMap[intrinsic.Period.name] = type.PeriodType.instance;
 JavaScriptType.scriptToTypeMap[intrinsic.UUID.name] = type.UUIDType.instance;
 JavaScriptType.scriptToTypeMap[intrinsic.Version.name] = type.VersionType.instance;
-
-exports.JavaScriptType = JavaScriptType;

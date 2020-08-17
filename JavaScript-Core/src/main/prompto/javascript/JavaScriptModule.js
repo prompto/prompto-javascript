@@ -1,7 +1,8 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const path = isNodeJs ? require('path') : null;
 
-class JavaScriptModule {
+export default class JavaScriptModule {
+
     constructor(ids) {
         this.ids = ids;
     }
@@ -226,6 +227,3 @@ class JavaScriptModule {
         writer.trimLast(1);
     }
 }
-
-
-exports.JavaScriptModule = JavaScriptModule;

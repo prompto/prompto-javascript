@@ -1,11 +1,10 @@
-const PythonExpression = require("./PythonExpression").PythonExpression;
 
-class PythonIdentifierExpression extends PythonExpression {
+export default class PythonIdentifierExpression extends PythonExpression {
+
     constructor(parent, identifier) {
         super();
         this.parent = parent;
         this.identifier = identifier;
-        return this;
     }
 
     toString() {
@@ -33,5 +32,3 @@ class PythonIdentifierExpression extends PythonExpression {
     }
 }
 
-
-exports.PythonIdentifierExpression = PythonIdentifierExpression;

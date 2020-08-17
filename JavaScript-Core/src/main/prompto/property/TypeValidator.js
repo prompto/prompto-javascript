@@ -1,12 +1,9 @@
-const PropertyValidator = require("./PropertyValidator").PropertyValidator;
-const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-const MethodType = require("../type/MethodType").MethodType;
 
-class TypeValidator extends PropertyValidator {
+export default class TypeValidator extends PropertyValidator {
+
     constructor(type) {
         super();
         this.type = type.anyfy();
-        return this;
     }
 
     getType(context) {
@@ -42,5 +39,3 @@ class TypeValidator extends PropertyValidator {
         return PropertyValidator.constructor.getMethodDeclarations.call(this, context);
     }
 }
-
-exports.TypeValidator = TypeValidator;

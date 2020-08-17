@@ -1,21 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const IntegerType = require("./IntegerType").IntegerType;
-const TextType = require("./TextType").TextType;
-let CharacterValue = null;
-const RangeType = require("./RangeType").RangeType;
-const CharacterRange = require("../value/CharacterRange").CharacterRange;
-const Identifier = require("../grammar/Identifier").Identifier;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
-exports.resolve = () => {
-    CharacterValue = require("../value/CharacterValue").CharacterValue;
-};
+export default class CharacterType extends NativeType {
 
-class CharacterType extends NativeType {
     constructor() {
         super(new Identifier("Character"));
-        return this;
     }
 
     declare(transpiler) {
@@ -146,6 +133,3 @@ class CharacterType extends NativeType {
 }
 
 CharacterType.instance = new CharacterType();
-
-
-exports.CharacterType = CharacterType;

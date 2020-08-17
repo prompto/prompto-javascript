@@ -1,24 +1,5 @@
-const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const SetLiteral = require("../literal/SetLiteral").SetLiteral;
-const TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
-const BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
-const DocumentLiteral = require("../literal/DocumentLiteral").DocumentLiteral;
-const Property = require("../property/Property").Property;
-const PropertyMap = require("../property/PropertyMap").PropertyMap;
-const PropertiesType = require("../type/PropertiesType").PropertiesType;
-const AnyType = require("../type/AnyType").AnyType;
-const TextType = require("../type/TextType").TextType;
-const TypeType = require("../type/TypeType").TypeType;
-const InternalError = require("../error/InternalError").InternalError;
-const Identifier = require("../grammar/Identifier").Identifier;
-const TypeValidator = require("../property/TypeValidator").TypeValidator;
-const TypeSetValidator = require("../property/TypeSetValidator").TypeSetValidator;
-const ValueSetValidator = require("../property/ValueSetValidator").ValueSetValidator;
-const NullValue = require("../value/NullValue").NullValue;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-class WidgetPropertiesProcessor extends AnnotationProcessor {
+export default class WidgetPropertiesProcessor extends AnnotationProcessor {
   
     constructor() {
         super("@WidgetProperties");
@@ -203,5 +184,3 @@ class WidgetPropertiesProcessor extends AnnotationProcessor {
         return prop;
     }
 }
-
-exports.WidgetPropertiesProcessor = WidgetPropertiesProcessor;

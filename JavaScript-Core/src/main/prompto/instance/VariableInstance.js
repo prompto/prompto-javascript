@@ -1,10 +1,5 @@
-const Variable = require("../runtime/Variable").Variable;
-const VoidType = require("../type/VoidType").VoidType;
-const CodeType = require("../type/CodeType").CodeType;
-const DocumentType = require("../type/DocumentType").DocumentType;
-const CategoryType = require("../type/CategoryType").CategoryType;
 
-class VariableInstance {
+export default class VariableInstance {
   
     constructor(id) {
         this.id = id;
@@ -132,5 +127,3 @@ class VariableInstance {
         transpiler.append(this.name);
     }
 }
-
-exports.VariableInstance = VariableInstance;

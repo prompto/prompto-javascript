@@ -1,11 +1,5 @@
-const Literal = require("./Literal").Literal;
-const TypeType = require("../type/TypeType").TypeType;
-const TypeValue = require("../value/TypeValue").TypeValue;
-const Dialect = require("../parser/Dialect").Dialect;
-const Type = require("../intrinsic/Type").Type;
-const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
-class TypeLiteral extends Literal {
+export default class TypeLiteral extends Literal {
   
     constructor(type) {
         super(type.toString(), type);
@@ -53,5 +47,3 @@ class TypeLiteral extends Literal {
     }
 }
 
-
-exports.TypeLiteral = TypeLiteral;

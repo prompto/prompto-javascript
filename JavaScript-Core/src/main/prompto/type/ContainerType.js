@@ -1,8 +1,5 @@
-const IterableType = require("./IterableType").IterableType;
-const BooleanType = require("./BooleanType").BooleanType;
-const Variable = require("../runtime/Variable").Variable;
 
-class ContainerType extends IterableType {
+export default class ContainerType extends IterableType {
   
     constructor(id, itemType) {
         super(id);
@@ -59,5 +56,3 @@ class ContainerType extends IterableType {
         transpiler.flush();
     }
 }
-
-exports.ContainerType = ContainerType;

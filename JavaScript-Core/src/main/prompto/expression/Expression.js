@@ -1,11 +1,6 @@
-const Section = require("../parser/Section").Section;
 
-class Expression extends Section {
+export default class Expression extends Section {
  
-    constructor() {
-        super();
-    }
-
     toDialect(writer) {
         writer.toDialect(this);
     }
@@ -54,5 +49,3 @@ class Expression extends Section {
         this.transpile(transpiler);
     }
 }
-
-exports.Expression = Expression;

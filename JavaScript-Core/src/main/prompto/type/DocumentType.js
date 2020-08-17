@@ -1,41 +1,13 @@
-const MissingType = require("./MissingType").MissingType;
-const NativeType = require("./NativeType").NativeType;
-const IntegerType = require("./IntegerType").IntegerType;
-const TextType = require("./TextType").TextType;
-const ListType = require("./ListType").ListType;
-const SetType = require("./SetType").SetType;
-const NullType = require("./NullType").NullType;
-const AnyType = require("./AnyType").AnyType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const NullValue = require("../value/NullValue").NullValue;
-const TextValue = require("../value/TextValue").TextValue;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-let MethodDeclarationMap = null;
-const ValueExpression = require("../expression/ValueExpression").ValueExpression;
-let DocumentValue = null;
-const Document = require("../intrinsic/Document").Document;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-const List = require("../intrinsic/List").List;
-let ArgumentList = null;
-let Argument = null;
-let MethodCall = null;
-let MethodSelector = null;
-const compareValues = require("../utils/Utils").compareValues;
-const equalArrays = require("../utils/Utils").equalArrays;
+import NativeType from "./NativeType"
+import { NullType, AnyType, MissingType, SetType, TextType, ListType, IntegerType } from "./index"
+import { Identifier, ArgumentList, Argument } from "../grammar/index"
+import { List, StrictSet, Document } from "../intrinsic/index"
+import { MethodDeclarationMap } from "../runtime/index"
+import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from "../value/index"
+import { TextLiteral } from "../literal/index"
+import { equalArrays, compareValues } from "../utils/index"
 
-exports.resolve = () => {
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-    Argument = require("../grammar/Argument").Argument;
-    DocumentValue = require("../value/DocumentValue").DocumentValue;
-    MethodSelector = require("../expression/MethodSelector").MethodSelector;
-    MethodCall = require("../statement/MethodCall").MethodCall;
-};
-
-
-class DocumentType extends NativeType {
+export default class DocumentType extends NativeType {
  
     constructor() {
         super(new Identifier("Document"));
@@ -49,7 +21,7 @@ class DocumentType extends NativeType {
         if ((other instanceof NullType) || (other instanceof AnyType) || (other instanceof MissingType))
             return true;
         else
-            return NativeType.prototype.isMoreSpecificThan.call(this, context, other);
+            return super.isMoreSpecificThan(context, other);
     }
 
     checkMember(context, section, name) {
@@ -337,4 +309,3 @@ class DocumentType extends NativeType {
 DocumentType.instance = new DocumentType();
 
 
-exports.DocumentType = DocumentType;

@@ -1,9 +1,5 @@
-const Expression = require("./Expression").Expression;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const Dialect = require("../parser/Dialect").Dialect;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-class AndExpression extends Expression {
+export default class AndExpression extends Expression {
   
     constructor(left, right) {
         super();
@@ -124,6 +120,3 @@ class AndExpression extends Expression {
         transpiler.append(builderName).append(".and();").newLine();
     }
 }
-
-exports.AndExpression = AndExpression;
-

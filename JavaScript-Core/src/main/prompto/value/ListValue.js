@@ -1,16 +1,11 @@
-const BaseValueList = require("./BaseValueList").BaseValueList;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const multiplyArray = require("../utils/Utils").multiplyArray;
-const List  = require("../intrinsic/List").List;
-let ListType = null;
-let SetValue = null;
+import BaseValueList from "./BaseValueList"
+import { SetValue, IntegerValue } from "./index"
+import { SyntaxError } from "../error/index"
+import { ListType } from "../type/index"
+import { List } from "../intrinsic/index"
+import { multiplyArray } from "../utils/Utils"
 
-exports.resolve = () => {
-    ListType = require("../type/ListType").ListType;
-    SetValue = require("./SetValue").SetValue;
-};
-
-class ListValue extends BaseValueList {
+export default class ListValue extends BaseValueList {
  
     constructor(itemType, items, item, mutable) {
         super(new ListType(itemType), items, item, mutable);
@@ -90,5 +85,4 @@ class ListValue extends BaseValueList {
     }
 }
 
-exports.ListValue = ListValue;
 

@@ -1,6 +1,5 @@
-const NotMutableError = require("../error/NotMutableError").NotMutableError;
 
-class MemberInstance {
+export default class MemberInstance {
    
     constructor(id) {
         this.parent = null;
@@ -78,6 +77,3 @@ class MemberInstance {
         parentType.transpileAssignMember(transpiler, this.name);
     }
 }
-
-
-exports.MemberInstance = MemberInstance;

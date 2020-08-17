@@ -1,32 +1,5 @@
-let SingletonCategoryDeclaration = null;
-const MethodType = require("../type/MethodType").MethodType;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const MemberSelector = require("./MemberSelector").MemberSelector;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const Identifier = require("../grammar/Identifier").Identifier;
-const NamedInstance = require("../grammar/NamedInstance").NamedInstance;
-let UnresolvedIdentifier = null;
-const InstanceExpression = require("./InstanceExpression").InstanceExpression;
-const NullValue = require("../value/NullValue").NullValue;
-const TypeValue = require("../value/TypeValue").TypeValue;
-const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-let NativeInstance = null;
-const TypeType = require("../type/TypeType").TypeType;
-let CategoryType = null;
-let CategorySymbol = null;
-let MethodDeclarationMap = null;
 
-
-exports.resolve = () => {
-	CategoryType = require("../type/CategoryType").CategoryType;
-    CategorySymbol = require("./CategorySymbol").CategorySymbol;
-    NativeInstance = require("../value/NativeInstance.js").NativeInstance;
-    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-    SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration.js").SingletonCategoryDeclaration;
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-};
-
-class MethodSelector extends MemberSelector {
+export default class MethodSelector extends MemberSelector {
   
     constructor(parent, id) {
         super(parent, id);
@@ -231,8 +204,4 @@ class MethodSelector extends MemberSelector {
         }
     }
 }
-
-
-
-exports.MethodSelector = MethodSelector;
 

@@ -1,20 +1,11 @@
-const Symbol = require("./Symbol").Symbol;
-const TextValue = require("../value/TextValue").TextValue;
-const ConstructorExpression = require("./ConstructorExpression").ConstructorExpression;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const Argument = require("../grammar/Argument").Argument;
-const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const Identifier = require("../grammar/Identifier").Identifier;
 
+export default class CategorySymbol extends Symbol {
 
-class CategorySymbol extends Symbol {
     constructor(id, args) {
         super(id);
         this.args = args;
         this.instance = null;
         this.type = null;
-        return this;
     }
 
     toDialect(writer) {
@@ -112,5 +103,3 @@ class CategorySymbol extends Symbol {
         transpiler.append("});").newLine();
     }
 }
-
-exports.CategorySymbol = CategorySymbol;

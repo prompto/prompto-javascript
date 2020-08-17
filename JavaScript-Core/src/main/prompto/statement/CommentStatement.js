@@ -1,12 +1,9 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const Dialect = require("../parser/Dialect").Dialect;
-const VoidType = require("../type/VoidType").VoidType;
 
-class CommentStatement extends BaseStatement {
+export default class CommentStatement extends BaseStatement {
+
     constructor(text) {
         super();
         this.text = text;
-        return this;
     }
 
     check(context) {
@@ -65,5 +62,3 @@ function uncomment(line) {
     else
         return line;
 }
-
-exports.CommentStatement = CommentStatement;

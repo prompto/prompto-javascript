@@ -1,11 +1,9 @@
-const Expression = require("./Expression").Expression;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
 
-class SymbolExpression extends Expression {
+export default class SymbolExpression extends Expression {
+
     constructor(id) {
         super();
         this.id = id;
-        return this;
     }
 
     get name() {
@@ -43,5 +41,3 @@ class SymbolExpression extends Expression {
     }
 }
 
-
-exports.SymbolExpression = SymbolExpression;

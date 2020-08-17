@@ -1,14 +1,13 @@
-const antlr4 = require("antlr4/index");
-const al = require("./ArgsLexer");
-const ap = require("./ArgsParser");
-const ArgsParserListener = require("./ArgsParserListener").ArgsParserListener;
+import antlr4 from "antlr4/index";
+import ArgsLexer from "./ArgsLexer";
+import ArgsParser from "./ArgsParser";
 
 class CmdLineBuilder extends ArgsParserListener {
+
     constructor() {
         super();
         this.args = {};
         this.values = {};
-        return this;
     }
 
     getCmdLineArgs() {
@@ -35,10 +34,7 @@ class CmdLineBuilder extends ArgsParserListener {
     }
 }
 
-class CmdLineParser {
-    constructor() {
-        return this;
-    }
+export default class CmdLineParser {
 
     static parse(input) {
         if (input === null) {
@@ -55,5 +51,3 @@ class CmdLineParser {
         return builder.getCmdLineArgs();
     }
 }
-
-exports.CmdLineParser = CmdLineParser;

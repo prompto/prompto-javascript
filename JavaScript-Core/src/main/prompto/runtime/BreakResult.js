@@ -1,7 +1,5 @@
-function BreakResult() {
-    return this;
+export default class BreakResult {
+
 }
 
 BreakResult.instance = new BreakResult();
-
-exports.BreakResult = BreakResult;

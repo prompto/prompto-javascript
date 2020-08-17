@@ -1,9 +1,5 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const NullValue = require("../value/NullValue").NullValue;
-const VoidResult = require("../runtime/VoidResult").VoidResult;
-const VoidType = require("../type/VoidType").VoidType;
 
-class ReturnStatement extends SimpleStatement {
+export default class ReturnStatement extends SimpleStatement {
   
     constructor(expression, fromArrowExpression) {
         super();
@@ -75,4 +71,3 @@ class ReturnStatement extends SimpleStatement {
     }
 }
 
-exports.ReturnStatement = ReturnStatement;

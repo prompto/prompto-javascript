@@ -1,12 +1,9 @@
-const Expression = require("./Expression").Expression;
-const CodeValue = require("../value/CodeValue").CodeValue;
-const PromptoError = require("../error/PromptoError").PromptoError;
 
-class ExecuteExpression extends Expression {
+export default class ExecuteExpression extends Expression {
+
     constructor(id) {
         super();
         this.id = id;
-        return this;
     }
 
     get name() {
@@ -74,4 +71,4 @@ class ExecuteExpression extends Expression {
 }
 
 
-exports.ExecuteExpression = ExecuteExpression;
+export {ExecuteExpression};

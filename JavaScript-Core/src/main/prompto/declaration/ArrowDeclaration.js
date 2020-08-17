@@ -1,10 +1,9 @@
-const AbstractMethodDeclaration = require("./AbstractMethodDeclaration").AbstractMethodDeclaration;
 
-class ArrowDeclaration extends AbstractMethodDeclaration {
+export default class ArrowDeclaration extends AbstractMethodDeclaration {
+
     constructor(arrow) {
         super(arrow.method.id, arrow.method.parameters, arrow.method.returnType);
         this.arrow = arrow;
-        return this;
     }
 
     interpret(context) {
@@ -12,4 +11,3 @@ class ArrowDeclaration extends AbstractMethodDeclaration {
     }
 }
 
-exports.ArrowDeclaration = ArrowDeclaration;

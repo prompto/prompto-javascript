@@ -1,13 +1,5 @@
-const NativeType = require("./NativeType").NativeType;
-let DocumentType = null;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Any = require("../intrinsic/Any").Any;
 
-exports.resolve = () => {
-    DocumentType = require("./DocumentType").DocumentType;
-};
-
-class AnyType extends NativeType {
+export default class AnyType extends NativeType {
  
     constructor() {
         super(new Identifier("any"));
@@ -69,4 +61,4 @@ class AnyType extends NativeType {
 
 AnyType.instance = new AnyType();
 
-exports.AnyType = AnyType;
+

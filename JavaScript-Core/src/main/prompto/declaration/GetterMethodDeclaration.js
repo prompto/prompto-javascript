@@ -1,9 +1,8 @@
-const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
 
-class GetterMethodDeclaration extends ConcreteMethodDeclaration {
+export default class GetterMethodDeclaration extends ConcreteMethodDeclaration {
+
     constructor(id, statements) {
         super(id, null, null, statements);
-        return this;
     }
 
     toODialect(writer) {
@@ -28,7 +27,3 @@ class GetterMethodDeclaration extends ConcreteMethodDeclaration {
         this.statements.transpile(transpiler);
     }
 }
-
-GetterMethodDeclaration.prototype.contructor = GetterMethodDeclaration;
-
-exports.GetterMethodDeclaration = GetterMethodDeclaration;

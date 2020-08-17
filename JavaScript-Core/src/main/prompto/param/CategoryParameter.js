@@ -1,9 +1,5 @@
-const Parameter = require("./Parameter").Parameter;
-const MethodType = require("../type/MethodType").MethodType;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const utils = require("../utils/index");
 
-class CategoryParameter extends Parameter {
+export default class CategoryParameter extends Parameter {
     
     constructor(type, id, defaultExpression) {
         super(id);
@@ -107,4 +103,3 @@ class CategoryParameter extends Parameter {
     }
 }
 
-exports.CategoryParameter = CategoryParameter;

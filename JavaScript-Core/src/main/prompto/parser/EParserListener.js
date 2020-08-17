@@ -1,6 +1,6 @@
 // Generated from EParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-const antlr4 = require('antlr4/index');
+import antlr4 from 'antlr4/index';
 
 // This class defines a complete listener for a parse tree produced by EParser.
 function EParserListener() {
@@ -4314,4 +4314,4 @@ EParserListener.prototype.exitCss_text = ctx => {
 
 
 
-exports.EParserListener = EParserListener;
+export {EParserListener};

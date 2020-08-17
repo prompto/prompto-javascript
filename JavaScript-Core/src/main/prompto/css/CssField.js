@@ -1,4 +1,4 @@
-class CssField {
+export default class CssField {
     constructor(name, value) {
         this.name = name;
         this.value = value;
@@ -20,6 +20,3 @@ class CssField {
         this.value.transpile(transpiler);
     }
 }
-
-
-exports.CssField = CssField;

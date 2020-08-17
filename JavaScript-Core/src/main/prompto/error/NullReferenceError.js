@@ -1,6 +1,4 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
-
-function NullReferenceError() {
+export default function NullReferenceError() {
 	ExecutionError.call(this);
 	return this;
 }
@@ -11,5 +9,3 @@ NullReferenceError.prototype.constructor = NullReferenceError;
 NullReferenceError.prototype.getExpression = function(context) {
 	return context.getRegisteredValue("NULL_REFERENCE");
 };
-
-exports.NullReferenceError = NullReferenceError;

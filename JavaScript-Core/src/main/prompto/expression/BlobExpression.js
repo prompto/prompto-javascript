@@ -1,18 +1,9 @@
-const Expression = require("./Expression").Expression;
-const BlobType = require("../type/BlobType").BlobType;
-const Document = require("../intrinsic/Document").Document;
-const Blob = require("../intrinsic/Blob").Blob;
-const BlobValue = require("../value/BlobValue").BlobValue;
-const ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
-const stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
-const getUtf8CharLength = require("../utils/Utils").getUtf8CharLength;
-const utf8BufferToString = require("../utils/Utils").utf8BufferToString;
 
-class BlobExpression extends Expression {
+export default class BlobExpression extends Expression {
+
     constructor(source) {
         super();
         this.source = source;
-        return this;
     }
 
     check(context) {
@@ -78,5 +69,3 @@ class BlobExpression extends Expression {
         writer.append(')');
     }
 }
-
-exports.BlobExpression = BlobExpression;

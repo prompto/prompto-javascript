@@ -1,16 +1,16 @@
-const AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
-const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const TypeUtils = require("../utils/TypeUtils");
-const NullValue = require("../value/NullValue").NullValue;
+import BaseDeclaration from "./BaseDeclaration"
+import { AttributeDeclaration } from "./index"
+import { CategoryType } from "../type/index"
+import { NullValue } from "../value/index"
+import { convertFromJavaScript } from "../utils/index"
 
-class CategoryDeclaration extends BaseDeclaration {
+export default class CategoryDeclaration extends BaseDeclaration {
+
     constructor(id, attributes) {
         super(id);
         this.attributes = attributes || null;
         this.derivedFrom = null;
         this.storable = false;
-        return this;
     }
 
     getDeclarationType() {
@@ -40,7 +40,7 @@ class CategoryDeclaration extends BaseDeclaration {
         instance.mutable = true;
         try {
             const dbId = stored.dbId;
-            const value = TypeUtils.convertFromJavaScript(dbId);
+            const value = convertFromJavaScript(dbId);
             instance.setMember(context, "dbId", value);
             const allAttributes = this.getAllAttributes(context);
             allAttributes.forEach(name => {
@@ -251,6 +251,4 @@ class CategoryDeclaration extends BaseDeclaration {
     }
 }
 
-
-exports.CategoryDeclaration = CategoryDeclaration;
 

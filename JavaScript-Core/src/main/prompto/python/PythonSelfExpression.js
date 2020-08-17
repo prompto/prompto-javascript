@@ -1,10 +1,5 @@
-const PythonExpression = require("./PythonExpression").PythonExpression;
 
-class PythonSelfExpression extends PythonExpression {
-    constructor() {
-        super();
-        return this;
-    }
+export default class PythonSelfExpression extends PythonExpression {
 
     toString() {
         return "self";
@@ -14,5 +9,3 @@ class PythonSelfExpression extends PythonExpression {
         writer.append("self");
     }
 }
-
-exports.PythonSelfExpression = PythonSelfExpression;

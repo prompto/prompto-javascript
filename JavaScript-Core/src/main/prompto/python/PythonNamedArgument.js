@@ -1,8 +1,8 @@
-class PythonNamedArgument {
+export default class PythonNamedArgument {
+
     constructor(name, expression) {
         this.name = name;
         this.expression = expression;
-        return this;
     }
 
     toDialect(writer) {
@@ -11,5 +11,3 @@ class PythonNamedArgument {
         this.expression.toDialect(writer);
     }
 }
-
-exports.PythonNamedArgument = PythonNamedArgument;

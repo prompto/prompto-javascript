@@ -1,29 +1,7 @@
-const Expression = require("./Expression").Expression;
-const InstanceExpression = require("./InstanceExpression").InstanceExpression;
-const UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-const LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
-const LinkedValue = require("../runtime/LinkedValue").LinkedValue;
-const ContainerType = require("../type/ContainerType").ContainerType;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const CharacterType = require("../type/CharacterType").CharacterType;
-const TextType = require("../type/TextType").TextType;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const NullType = require("../type/NullType").NullType;
-const TypeValue = require("../value/TypeValue").TypeValue;
-const NullValue = require("../value/NullValue").NullValue;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const Instance = require("../value/Value").Instance;
-const Value = require("../value/Value").Value;
-const Variable = require("../runtime/Variable").Variable;
-const MatchOp = require("../store/MatchOp").MatchOp;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const EqOp = require("../grammar/EqOp").EqOp;
 const VOWELS = "AEIO"; // sufficient here
 
 
-class EqualsExpression extends Expression {
+export default class EqualsExpression extends Expression {
   
     constructor(left, operator, right) {
         super();
@@ -399,7 +377,3 @@ class EqualsExpression extends Expression {
             transpiler.append(builder).append(".not();").newLine();
     }
 }
-
-exports.EqualsExpression = EqualsExpression;
-
-

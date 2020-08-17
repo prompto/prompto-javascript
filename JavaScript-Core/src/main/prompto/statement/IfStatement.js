@@ -1,13 +1,5 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const StatementList = require("./StatementList").StatementList;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const EqualsExpression = require("../expression/EqualsExpression").EqualsExpression;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const TypeMap = require("../type/TypeMap").TypeMap;
-const VoidType = require("../type/VoidType").VoidType;
 
-class IfStatement extends BaseStatement {
+export default class IfStatement extends BaseStatement {
   
     constructor(condition, statements, elseIfs, elseStmts) {
         super();
@@ -118,7 +110,7 @@ class IfStatement extends BaseStatement {
     }
 }
 
-exports.IfStatement = IfStatement;
+export {IfStatement};
 
 class IfElementList extends ObjectList {
     constructor(item) {
@@ -131,7 +123,7 @@ class IfElementList extends ObjectList {
     }
 }
 
-exports.IfElementList = IfElementList;
+export {IfElementList};
 
 class IfElement extends BaseStatement {
     constructor(condition, statements) {
@@ -237,4 +229,3 @@ class IfElement extends BaseStatement {
     }
 }
 
-exports.IfElement = IfElement;

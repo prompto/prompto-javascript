@@ -1,7 +1,5 @@
-const BooleanType = require("../type/BooleanType").BooleanType;
-const Value = require("./Value").Value;
 
-class BooleanValue extends Value {
+export default class BooleanValue extends Value {
   
     constructor(value) {
         super(BooleanType.instance);
@@ -70,4 +68,3 @@ BooleanValue.FALSE = new BooleanValue(false);
 BooleanValue.TRUE.not = BooleanValue.FALSE;
 BooleanValue.FALSE.not = BooleanValue.TRUE;
 
-exports.BooleanValue = BooleanValue;

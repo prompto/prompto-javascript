@@ -1,14 +1,5 @@
-let EParserFactory = null;
-let OParserFactory = null;
-let MParserFactory = null;
 
-exports.resolve = () => {
-    EParserFactory = require("./EParserFactory").EParserFactory;
-    OParserFactory = require("./OParserFactory").OParserFactory;
-    MParserFactory = require("./MParserFactory").MParserFactory;
-}
-
-function Dialect(name) {
+export default function Dialect(name) {
     this.name = name;
 	return this;
 }
@@ -35,4 +26,3 @@ Dialect.M.toDialect = (w, o) => {
 };
 Dialect.M.toString = o => o.toMString();
 
-exports.Dialect = Dialect;

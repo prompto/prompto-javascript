@@ -1,12 +1,10 @@
-const Section = require("../parser/Section").Section;
-const AnnotationProcessors = require("../processor/AnnotationProcessors").AnnotationProcessors;
 
-class Annotation extends Section {
+export default class Annotation extends Section {
+
     constructor(id, entries) {
         super();
         this.id = id;
         this.entries = entries || null;
-        return this;
     }
 
     get name() {
@@ -57,5 +55,3 @@ class Annotation extends Section {
         }
     }
 }
-
-exports.Annotation = Annotation;

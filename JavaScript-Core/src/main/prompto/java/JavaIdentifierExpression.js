@@ -1,12 +1,11 @@
-const JavaExpression = require("./JavaExpression").JavaExpression;
 
-class JavaIdentifierExpression extends JavaExpression {
+export default class JavaIdentifierExpression extends JavaExpression {
+
     constructor(parent, identifier, isChildClass) {
         super();
         this.parent = parent || null;
         this.identifier = identifier || null;
         this.isChildClass = isChildClass || false;
-        return this;
     }
 
     parse(ids) {
@@ -34,5 +33,3 @@ class JavaIdentifierExpression extends JavaExpression {
     }
 }
 
-
-exports.JavaIdentifierExpression = JavaIdentifierExpression;

@@ -1,11 +1,10 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
 
-class WithSingletonStatement extends BaseStatement {
+export default class WithSingletonStatement extends BaseStatement {
+
     constructor(type, statements) {
         super();
         this.type = type;
         this.statements = statements;
-        return this;
     }
 
     check(context) {
@@ -73,4 +72,3 @@ class WithSingletonStatement extends BaseStatement {
     }
 }
 
-exports.WithSingletonStatement = WithSingletonStatement;

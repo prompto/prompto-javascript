@@ -1,7 +1,7 @@
-class PythonOrdinalArgument {
+export default class PythonOrdinalArgument {
+
     constructor(expression) {
         this.expression = expression;
-        return this;
     }
 
     toDialect(writer) {
@@ -9,4 +9,3 @@ class PythonOrdinalArgument {
     }
 }
 
-exports.PythonOrdinalArgument = PythonOrdinalArgument;

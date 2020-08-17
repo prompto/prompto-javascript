@@ -1,6 +1,4 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
-
-function ReadWriteError(message) {
+export default function ReadWriteError(message) {
     ExecutionError.call(this, message);
     return this;
 }
@@ -11,5 +9,3 @@ ReadWriteError.prototype.constructor = ReadWriteError;
 ReadWriteError.prototype.getExpression = function(context) {
     return context.getRegisteredValue("READ_WRITE");
 };
-
-exports.ReadWriteError = ReadWriteError;

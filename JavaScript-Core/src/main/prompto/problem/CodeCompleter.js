@@ -1,10 +1,9 @@
-const ProblemListener = require('./ProblemListener').ProblemListener;
 
-class CodeCompleter extends ProblemListener {
+export default class CodeCompleter extends ProblemListener {
+
     constructor() {
         super();
         this.suggestions = [];
-        return this;
     }
 
     syntaxError(recognizer, offendingSymbol, line, column, msg, e) {
@@ -28,5 +27,3 @@ class CodeCompleter extends ProblemListener {
         return this.suggestions.map(s => s.literal).indexOf(s)>=0;
     }
 }
-
-exports.CodeCompleter = CodeCompleter;

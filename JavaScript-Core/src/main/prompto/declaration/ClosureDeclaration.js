@@ -1,6 +1,5 @@
-const AbstractMethodDeclaration = require("./AbstractMethodDeclaration").AbstractMethodDeclaration;
 
-class ClosureDeclaration extends AbstractMethodDeclaration {
+export default class ClosureDeclaration extends AbstractMethodDeclaration {
     constructor(closure) {
         super(
             closure.type.method.id,
@@ -8,12 +7,9 @@ class ClosureDeclaration extends AbstractMethodDeclaration {
             closure.type.method.returnType
         );
         this.closure = closure;
-        return this;
     }
 
     interpret(context) {
         return this.closure.interpret(context);
     }
 }
-
-exports.ClosureDeclaration = ClosureDeclaration;

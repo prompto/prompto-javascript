@@ -1,5 +1,5 @@
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var Document = require("./Document").Document;
+import { NotMutableError } from "../error/index";
+import Document from "./Document";
 
 function Category(klass) {
     this.klass = klass;

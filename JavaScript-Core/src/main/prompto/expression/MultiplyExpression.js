@@ -1,11 +1,10 @@
-const Expression = require("./Expression").Expression;
 
-class MultiplyExpression extends Expression {
+export default class MultiplyExpression extends Expression {
+
     constructor(left, right) {
         super();
         this.left = left;
         this.right = right;
-        return this;
     }
 
     toString() {
@@ -42,5 +41,3 @@ class MultiplyExpression extends Expression {
         return lt.transpileMultiply(transpiler, rt, true, this.left, this.right);
     }
 }
-
-exports.MultiplyExpression = MultiplyExpression;

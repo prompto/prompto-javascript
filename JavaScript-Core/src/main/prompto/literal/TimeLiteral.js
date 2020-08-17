@@ -1,13 +1,9 @@
-const Literal = require("./Literal").Literal;
-const TimeType = require("../type/TimeType").TimeType;
-const TimeValue = require("../value/TimeValue").TimeValue;
-const LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
-class TimeLiteral extends Literal {
+export default class TimeLiteral extends Literal {
+
     constructor(text) {
         const lt = LocalTime.parse(text.substring(1,text.length-1));
         super(text, new TimeValue(lt));
-        return this;
     }
 
     check(context) {
@@ -23,5 +19,4 @@ class TimeLiteral extends Literal {
     }
 }
 
-exports.TimeLiteral = TimeLiteral;
 

@@ -1,11 +1,10 @@
-const Expression = require("./Expression").Expression;
 
-class Symbol extends Expression {
+export default class Symbol extends Expression {
+
     constructor(id) {
         super();
         this.id = id;
         this.mutable = false;
-        return this;
     }
 
     get name() {
@@ -32,5 +31,3 @@ class Symbol extends Expression {
         return value instanceof Symbol && this.name === value.name;
     }
 }
-
-exports.Symbol = Symbol;

@@ -1,15 +1,5 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const PeriodType = require("./PeriodType").PeriodType;
-const IntegerType = require("./IntegerType").IntegerType;
-const RangeType = require("./RangeType").RangeType;
-const TimeRange = require("../value/TimeRange").TimeRange;
-const TimeValue = require("../value/TimeValue").TimeValue;
-const Identifier = require("../grammar/Identifier").Identifier;
-const DateTimeType = require("./DateTimeType").DateTimeType;
-const LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
-class TimeType extends NativeType {
+export default class TimeType extends NativeType {
  
     constructor() {
         super(new Identifier("TimeValue"));
@@ -192,6 +182,3 @@ class TimeType extends NativeType {
 }
 
 TimeType.instance = new TimeType();
-
-
-exports.TimeType = TimeType;

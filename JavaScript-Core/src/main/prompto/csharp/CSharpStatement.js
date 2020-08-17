@@ -1,8 +1,8 @@
-class CSharpStatement {
+export default class CSharpStatement {
+
     constructor(expression, isReturn) {
         this.expression = expression;
         this.isReturn = isReturn;
-        return this;
     }
 
     toString() {
@@ -16,5 +16,3 @@ class CSharpStatement {
         writer.append(';');
     }
 }
-
-exports.CSharpStatement = CSharpStatement;

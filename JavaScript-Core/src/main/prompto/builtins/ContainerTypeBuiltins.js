@@ -1,10 +1,4 @@
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-const Identifier = require("../grammar/Identifier").Identifier;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const TextType = require("../type/TextType").TextType;
-const TextValue = require("../value/TextValue").TextValue;
-
+// don't use export default since more builtins are expected
 class BaseJoinMethodDeclaration extends BuiltInMethodDeclaration {
 
     constructor() {
@@ -64,6 +58,4 @@ class JoinTupleMethodDeclaration extends BaseJoinMethodDeclaration {
 }
 
 
-exports.JoinListMethodDeclaration = JoinListMethodDeclaration;
-exports.JoinSetMethodDeclaration = JoinSetMethodDeclaration;
-exports.JoinTupleMethodDeclaration = JoinTupleMethodDeclaration;
+export {JoinListMethodDeclaration, JoinSetMethodDeclaration, JoinTupleMethodDeclaration};

@@ -1,4 +1,4 @@
-class ObjectList extends Array {
+export default class ObjectList extends Array {
 
     constructor(items, item) {
         super();
@@ -35,4 +35,3 @@ class ObjectList extends Array {
 }
 
 
-exports.ObjectList = ObjectList;

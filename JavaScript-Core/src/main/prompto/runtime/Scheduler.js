@@ -1,6 +1,5 @@
-const ApplicationContext = require("./ApplicationContext").ApplicationContext;
 
-class Scheduler {
+export default class Scheduler {
  
     static schedule(method, executeAt, repeatEvery, jobName) {
         const runner = method.interpret ? () => { method.interpret(ApplicationContext.get()); } : method;
@@ -47,5 +46,3 @@ class Scheduler {
 
 Scheduler.lastJobId = 0;
 Scheduler.timers = [];
-
-exports.Scheduler = Scheduler;

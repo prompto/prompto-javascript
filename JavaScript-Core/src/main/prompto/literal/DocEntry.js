@@ -1,4 +1,4 @@
-class DocEntry {
+export default class DocEntry {
  
     constructor(key, value) {
         this.key = key;
@@ -26,4 +26,3 @@ class DocEntry {
 }
 
 
-exports.DocEntry = DocEntry;

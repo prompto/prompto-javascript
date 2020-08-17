@@ -1,14 +1,10 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const ResourceType = require("../type/ResourceType").ResourceType;
-const Variable = require("../runtime/Variable").Variable;
-const VoidType = require("../type/VoidType").VoidType;
 
-class AssignVariableStatement extends SimpleStatement {
+export default class AssignVariableStatement extends SimpleStatement {
+
     constructor(id, expression) {
         super();
         this.id = id;
         this.expression = expression;
-        return this;
     }
 
     get name() {
@@ -95,5 +91,3 @@ class AssignVariableStatement extends SimpleStatement {
     }
 }
 
-
-exports.AssignVariableStatement = AssignVariableStatement;

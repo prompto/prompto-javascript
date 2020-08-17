@@ -1,11 +1,5 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const VoidType = require("../type/VoidType").VoidType;
 
-class NativeCall extends SimpleStatement {
-    constructor() {
-        super();
-        return this;
-    }
+export default class NativeCall extends SimpleStatement {
 
     toString() {
         return this.statement.toString();
@@ -23,4 +17,3 @@ class NativeCall extends SimpleStatement {
     }
 }
 
-exports.NativeCall = NativeCall;

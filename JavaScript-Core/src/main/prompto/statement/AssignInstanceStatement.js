@@ -1,8 +1,5 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const CodeType = require("../type/CodeType").CodeType;
-const VoidType = require("../type/VoidType").VoidType;
 
-class AssignInstanceStatement extends SimpleStatement {
+export default class AssignInstanceStatement extends SimpleStatement {
   
     constructor(instance, expression) {
         super();
@@ -51,5 +48,3 @@ class AssignInstanceStatement extends SimpleStatement {
             this.instance.transpileAssign(transpiler, this.expression);
     }
 }
-
-exports.AssignInstanceStatement = AssignInstanceStatement;

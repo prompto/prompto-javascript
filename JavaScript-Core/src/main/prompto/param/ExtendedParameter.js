@@ -1,18 +1,9 @@
-const CategoryParameter = require("./CategoryParameter").CategoryParameter;
-const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
-const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-let ConcreteCategoryDeclaration = null;
-const utils = require("../utils/index");
 
-exports.resolve = () => {
-    ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-}
+export default class ExtendedParameter extends CategoryParameter {
 
-class ExtendedParameter extends CategoryParameter {
     constructor(type, id, attributes) {
         super(type, id);
         this.attributes = attributes;
-        return this;
     }
 
     getProto() {
@@ -100,4 +91,3 @@ class ExtendedParameter extends CategoryParameter {
     }
 }
 
-exports.ExtendedParameter = ExtendedParameter;

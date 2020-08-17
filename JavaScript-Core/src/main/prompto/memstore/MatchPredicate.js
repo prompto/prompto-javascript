@@ -1,11 +1,10 @@
-const MatchOp = require("../store/MatchOp").MatchOp;
 
-class MatchPredicate {
+export default class MatchPredicate {
+
     constructor(info, matchOp, value) {
         this.info = info;
         this.matchOp = MatchOp[matchOp.name];
         this.value = value;
-        return this;
     }
 
     matches(stored) {
@@ -47,5 +46,3 @@ class MatchPredicate {
         }
     }
 }
-
-exports.MatchPredicate = MatchPredicate;

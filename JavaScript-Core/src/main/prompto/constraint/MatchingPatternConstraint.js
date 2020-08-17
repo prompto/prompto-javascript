@@ -1,12 +1,12 @@
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Variable = require("../runtime/Variable").Variable;
+import { InvalidDataError } from "../error/index"
+import { Identifier } from "../grammar/index"
+import { Variable } from "../runtime/index"
 
-class MatchingPatternConstraint {
+export default class MatchingPatternConstraint {
+
     constructor(expression) {
         this.expression = expression;
         this.pattern = null;
-        return this;
     }
 
     checkValue(context, value) {
@@ -49,5 +49,3 @@ class MatchingPatternConstraint {
     }
 }
 
-
-exports.MatchingPatternConstraint = MatchingPatternConstraint;

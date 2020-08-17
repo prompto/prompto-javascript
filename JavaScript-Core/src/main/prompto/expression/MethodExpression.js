@@ -1,20 +1,9 @@
-const Expression = require("./Expression").Expression;
-const MethodType = require("../type/MethodType").MethodType;
-let MethodDeclarationMap = null; // circular dependency
-const Dialect = require("../parser/Dialect").Dialect;
-const ClosureValue = require("../value/ClosureValue").ClosureValue;
-let InstanceContext = null;
 
-exports.resolve = () => {
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    InstanceContext = require("../runtime/Context").InstanceContext;
-};
+export default class MethodExpression extends Expression {
 
-class MethodExpression extends Expression {
     constructor(id) {
         super();
         this.id = id;
-        return this;
     }
 
     get name() {
@@ -89,6 +78,3 @@ class MethodExpression extends Expression {
         }
     }
 }
-
-
-exports.MethodExpression = MethodExpression;

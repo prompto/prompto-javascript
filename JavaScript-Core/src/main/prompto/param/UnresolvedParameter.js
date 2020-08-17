@@ -1,11 +1,5 @@
-const ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
-const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-const AttributeParameter = require("./AttributeParameter").AttributeParameter;
-const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-const MethodParameter = require("./MethodParameter").MethodParameter;
-const VoidType = require("../type/VoidType").VoidType;
 
-class UnresolvedParameter {
+export default class UnresolvedParameter {
   
     constructor(id) {
         this.id = id;
@@ -107,5 +101,4 @@ class UnresolvedParameter {
 }
 
 
-exports.UnresolvedParameter = UnresolvedParameter;
 

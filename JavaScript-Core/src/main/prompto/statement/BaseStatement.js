@@ -1,6 +1,5 @@
-const Section = require("../parser/Section").Section;
 
-class BaseStatement extends Section {
+export default class BaseStatement extends Section {
   
     canReturn() {
         return false;
@@ -39,4 +38,3 @@ class BaseStatement extends Section {
     }
 }
 
-exports.BaseStatement = BaseStatement;

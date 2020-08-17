@@ -1,10 +1,9 @@
-const Expression = require("./Expression").Expression;
 
-class MinusExpression extends Expression {
+export default class MinusExpression extends Expression {
+
     constructor(expression) {
         super();
         this.expression = expression;
-        return this;
     }
 
     toString() {
@@ -38,4 +37,4 @@ class MinusExpression extends Expression {
     }
 }
 
-exports.MinusExpression = MinusExpression;
+export {MinusExpression};

@@ -1,11 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const JsxType = require("./JsxType").JsxType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class HtmlType extends NativeType {
+export default class HtmlType extends NativeType {
+
     constructor() {
         super(new Identifier("Html"));
-        return this;
     }
 
     isAssignableFrom(context, other) {
@@ -26,5 +23,3 @@ class HtmlType extends NativeType {
 
 
 HtmlType.instance = new HtmlType();
-
-exports.HtmlType = HtmlType;

@@ -1,15 +1,9 @@
-let TextValue = null;
-let ListValue = null;
-const AnyType = require("../type/AnyType").AnyType;
-
-exports.resolve = () => {
-    TextValue = require("./TextValue").TextValue;
-    ListValue = require("./ListValue").ListValue;
-};
+import { TextValue } from "./index"
+import { SyntaxError } from "../error/index"
 
 let id = 0;
 
-class Value {
+export default class Value {
    
     constructor(type) {
         this.id = ++id;
@@ -97,28 +91,4 @@ class Value {
     }
 }
 
-class Instance extends Value {
-    constructor(type) {
-        super(type);
-        return this;
-    }
-}
 
-class Container extends Value {
-    constructor(type) {
-        super(type);
-        return this;
-    }
-
-    toDocumentValue(context) {
-        const items = this.items.map(item => {
-            item.toDocumentValue(context);
-        });
-        return new ListValue(AnyType.instance, items);
-    }
-}
-
-
-exports.Value = Value;
-exports.Instance = Instance;
-exports.Container = Container;

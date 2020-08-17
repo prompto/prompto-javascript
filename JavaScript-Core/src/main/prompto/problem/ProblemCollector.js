@@ -1,6 +1,6 @@
-const antlr4 = require('antlr4/index');
+import antlr4 from 'antlr4/index';
 
-class ProblemCollector extends antlr4.error.ErrorListener {
+export default class ProblemCollector extends antlr4.error.ErrorListener {
    
     constructor() {
         super();
@@ -213,6 +213,3 @@ class ProblemCollector extends antlr4.error.ErrorListener {
         this.collectProblem(problem);
     }
 }
-
-
-exports.ProblemCollector = ProblemCollector;

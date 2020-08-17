@@ -1,6 +1,5 @@
-const Value = require("./Value").Value;
 
-class ContextualExpression extends Value {
+export default class ContextualExpression extends Value {
  
     constructor(calling, expression) {
         super(null); // TODO check that this is not a problem
@@ -45,5 +44,3 @@ class ContextualExpression extends Value {
     }
 }
 
-
-exports.ContextualExpression = ContextualExpression;

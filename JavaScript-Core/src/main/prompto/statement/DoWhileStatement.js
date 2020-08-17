@@ -1,10 +1,5 @@
-const BaseStatement = require("./BaseStatement").BaseStatement;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const BreakResult = require("../runtime/BreakResult").BreakResult;
 
-class DoWhileStatement extends BaseStatement {
+export default class DoWhileStatement extends BaseStatement {
    
     constructor(condition, statements) {
         super();
@@ -90,6 +85,4 @@ class DoWhileStatement extends BaseStatement {
     }
 }
 
-
-exports.DoWhileStatement = DoWhileStatement;
 

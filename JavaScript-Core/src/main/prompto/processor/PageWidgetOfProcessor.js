@@ -1,9 +1,8 @@
-const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
 
-class PageWidgetOfProcessor extends AnnotationProcessor {
+export default class PageWidgetOfProcessor extends AnnotationProcessor {
+
     constructor() {
         super("@PageWidgetOf");
-        return this;
     }
 
     processCategory(annotation, context, declaration) {
@@ -18,5 +17,3 @@ class PageWidgetOfProcessor extends AnnotationProcessor {
         // TODO check resource
     }
 }
-
-exports.PageWidgetOfProcessor = PageWidgetOfProcessor;

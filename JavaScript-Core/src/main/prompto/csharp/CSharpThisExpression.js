@@ -1,9 +1,8 @@
-const CSharpExpression = require("./CSharpExpression").CSharpExpression;
 
-class CSharpThisExpression extends CSharpExpression {
+export default class CSharpThisExpression extends CSharpExpression {
+
     constructor() {
         super();
-        return this;
     }
 
     toDialect(writer) {
@@ -14,5 +13,3 @@ class CSharpThisExpression extends CSharpExpression {
         return "this";
     }
 }
-
-exports.CSharpThisExpression = CSharpThisExpression;

@@ -1,12 +1,9 @@
-const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-const IJsxExpression = require("./IJsxExpression").IJsxExpression;
-const Literal = require("../literal/Literal").Literal;
 
-class JsxExpression extends IJsxExpression {
+export default class JsxExpression extends IJsxExpression {
+
     constructor(expression) {
         super();
         this.expression = expression;
-        return this;
     }
 
     check(context) {
@@ -56,5 +53,3 @@ class JsxExpression extends IJsxExpression {
         this.expression.transpile(transpiler);
     }
 }
-
-exports.JsxExpression = JsxExpression;

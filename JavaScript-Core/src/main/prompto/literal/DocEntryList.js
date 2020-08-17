@@ -1,11 +1,11 @@
-class DocEntryList {
+export default class DocEntryList {
+
     constructor(entries, entry) {
         this.items = entries || [];
         entry = entry || null;
         if(entry!==null) {
             this.items.push(entry);
         }
-        return this;
     }
 
     toDialect(writer) {
@@ -46,5 +46,3 @@ class DocEntryList {
         this.items.push(entry);
     }
 }
-
-exports.DocEntryList = DocEntryList;

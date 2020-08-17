@@ -1,11 +1,5 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const AttributeDeclaration = require("./AttributeDeclaration").AttributeDeclaration;
-const CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
-const EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-const TestMethodDeclaration = require("./TestMethodDeclaration").TestMethodDeclaration;
 
-class DeclarationList extends ObjectList {
+export default class DeclarationList extends ObjectList {
 
     constructor(items, item) {
         items = items || [];
@@ -92,5 +86,3 @@ class DeclarationList extends ObjectList {
     }
 }
 
-
-exports.DeclarationList = DeclarationList;

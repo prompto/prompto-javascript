@@ -1,7 +1,4 @@
-class CmpOp {
-    constructor() {
-        return this;
-    }
+export default class CmpOp {
 
     toDialect(writer) {
         writer.append(this.toString());
@@ -33,5 +30,3 @@ CmpOp.LTE.toString = () => "<=";
 CmpOp.LTE.transpile = transpiler => {
     transpiler.append("lte");
 };
-
-exports.CmpOp = CmpOp;

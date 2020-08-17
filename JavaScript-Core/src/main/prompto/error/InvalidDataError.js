@@ -1,7 +1,7 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
+import ExecutionError from "./ExecutionError"
+import { TextLiteral } from "../literal/index"
 
-function InvalidDataError(message) {
+export default function InvalidDataError(message) {
 	ExecutionError.call(this, message);
 	return this;
 }
@@ -12,5 +12,3 @@ InvalidDataError.prototype.constructor = InvalidDataError;
 InvalidDataError.prototype.getExpression = function(context) {
 	return new TextLiteral("'" + this.message + "'");
 };
-
-exports.InvalidDataError = InvalidDataError;

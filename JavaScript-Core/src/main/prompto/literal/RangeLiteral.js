@@ -1,10 +1,9 @@
-const IntegerType = require("../type/IntegerType").IntegerType;
 
 class RangeLiteral {
+
     constructor(first, last) {
         this.first = first;
         this.last = last;
-        return this;
     }
 
     toString() {
@@ -51,5 +50,4 @@ class RangeLiteral {
     }
 }
 
-exports.RangeLiteral = RangeLiteral;
 

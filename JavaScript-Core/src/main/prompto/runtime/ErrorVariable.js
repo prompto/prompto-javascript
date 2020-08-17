@@ -1,15 +1,8 @@
-const Variable = require("./Variable").Variable;
-const Identifier = require("../grammar/Identifier").Identifier;
-let EnumeratedCategoryType = null;
 
-exports.resolve = () => {
-    EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-};
+export default class ErrorVariable extends Variable {
 
-class ErrorVariable extends Variable {
     constructor(id) {
         super(id, new EnumeratedCategoryType(new Identifier("Error")));
-        return this;
     }
 
     toString() {
@@ -21,4 +14,3 @@ class ErrorVariable extends Variable {
     }
 }
 
-exports.ErrorVariable = ErrorVariable;

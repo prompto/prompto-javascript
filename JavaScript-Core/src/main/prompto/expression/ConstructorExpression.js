@@ -1,24 +1,12 @@
-const Expression = require("./Expression").Expression;
-let CategoryType = null;
-const Identifier = require("../grammar/Identifier").Identifier;
-const DocumentType = require("../type/DocumentType").DocumentType;
-const NotMutableError = require("../error/NotMutableError").NotMutableError;
-const AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-const Argument = require("../grammar/Argument").Argument;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-const NativeCategoryDeclaration = require("../declaration/NativeCategoryDeclaration").NativeCategoryDeclaration;
-const ConcreteWidgetDeclaration = require("../declaration/ConcreteWidgetDeclaration").ConcreteWidgetDeclaration;
-const NativeWidgetDeclaration = require("../declaration/NativeWidgetDeclaration").NativeWidgetDeclaration;
-const getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
+import { Expression, UnresolvedIdentifier, InstanceExpression } from "./index"
+import { ArgumentList, Argument, Identifier } from "../grammar/index"
+import { AttributeParameter } from "../param/index"
+import { CategoryType, DocumentType } from "../type/index"
+import { NotMutableError } from "../error/index"
+import { ConcreteWidgetDeclaration, NativeWidgetDeclaration } from "../declaration/index"
+import { getTypeName } from "../utils/index"
 
-exports.resolve = () => {
-    CategoryType = require("../type/CategoryType").CategoryType;
-};
-
-
-class ConstructorExpression extends Expression {
+export default class ConstructorExpression extends Expression {
   
     constructor(type, copyFrom, args, checked) {
         super();
@@ -204,5 +192,3 @@ class ConstructorExpression extends Expression {
             transpiler.append("null");
     }
 }
-
-exports.ConstructorExpression = ConstructorExpression;

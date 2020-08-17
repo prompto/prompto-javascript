@@ -1,9 +1,9 @@
-const BaseType = require("./BaseType").BaseType;
+import BaseType from "./BaseType"
 
-class NativeType extends BaseType {
+export default class NativeType extends BaseType {
+
     constructor(id) {
         super(id);
-        return this;
     }
 
     getSortedComparator(context, key, desc) {
@@ -66,6 +66,5 @@ class NativeType extends BaseType {
 }
 
 
-exports.NativeType = NativeType;
 
 

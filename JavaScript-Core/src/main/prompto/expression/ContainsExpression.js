@@ -1,16 +1,5 @@
-const Expression = require("./Expression").Expression;
-const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-const MemberSelector = require("../expression/MemberSelector").MemberSelector;
-const NullValue = require("../value/NullValue").NullValue;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const MatchOp = require("../store/MatchOp").MatchOp;
-const ContOp = require("../grammar/ContOp").ContOp;
-const Instance = require("../value/Value").Instance;
-const Value = require("../value/Value").Value;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-class ContainsExpression extends Expression {
+export default class ContainsExpression extends Expression {
   
     constructor(left, operator, right) {
         super();
@@ -272,5 +261,3 @@ class ContainsExpression extends Expression {
         }
     }
 }
-
-exports.ContainsExpression = ContainsExpression;

@@ -1,10 +1,6 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-const Identifier = require("../grammar/Identifier").Identifier;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const VoidType = require("../type/VoidType").VoidType;
 
-class TestMethodDeclaration extends BaseDeclaration {
+export default class TestMethodDeclaration extends BaseDeclaration {
 
     constructor(id, stmts, exps, error) {
         super(id);
@@ -291,5 +287,3 @@ const NativeErrorNames = {
     READ_WRITE: "ReadWriteError"
 };
 
-
-exports.TestMethodDeclaration = TestMethodDeclaration;

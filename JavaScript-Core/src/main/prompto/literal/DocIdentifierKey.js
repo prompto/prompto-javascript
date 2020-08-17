@@ -1,6 +1,5 @@
-const TextValue = require("../value/TextValue").TextValue;
 
-class DocIdentifierKey {
+export default class DocIdentifierKey {
   
     constructor(id) {
         this.id = id;
@@ -23,5 +22,3 @@ class DocIdentifierKey {
     }
 }
 
-
-exports.DocIdentifierKey = DocIdentifierKey;

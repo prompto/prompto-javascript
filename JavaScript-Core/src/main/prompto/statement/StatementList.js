@@ -1,17 +1,8 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const TypeMap = require("../type/TypeMap").TypeMap;
-const VoidType = require("../type/VoidType").VoidType;
-const Dialect = require("../parser/Dialect").Dialect;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const NativeCall = require("./NativeCall").NativeCall;
-const JavaScriptNativeCall = require("../javascript/JavaScriptNativeCall").JavaScriptNativeCall;
 
-class StatementList extends ObjectList {
+export default class StatementList extends ObjectList {
+
     constructor(statement) {
-        super();
-        this.add(statement);
-        return this;
+        super(null, statement);
     }
 
     check(context, returnType) {
@@ -164,5 +155,3 @@ class StatementList extends ObjectList {
         return statement ? statement.locateSectionAtLine(line) : null;
     }
 }
-
-exports.StatementList = StatementList;

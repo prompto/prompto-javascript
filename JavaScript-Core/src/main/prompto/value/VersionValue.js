@@ -1,15 +1,10 @@
-const Value = require("./Value").Value;
-let VersionType = null;
 
-exports.resolve = () => {
-    VersionType = require("../type/VersionType").VersionType;
-};
 
-class VersionValue extends Value {
+export default class VersionValue extends Value {
+
     constructor(version) {
         super(VersionType.instance);
         this.version = version;
-        return this;
     }
 
     get major() { return this.version.major; }
@@ -37,7 +32,5 @@ class VersionValue extends Value {
     }
 }
 
-
-exports.VersionValue = VersionValue;
 
 

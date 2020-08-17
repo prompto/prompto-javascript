@@ -1,13 +1,13 @@
-const NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+
 if(global && !global.Event)
     global.Event = () => {};
 
-class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
+export default class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
+
     constructor(identifier, module) {
         super();
         this.identifier = identifier;
         this.module = module || null;
-        return this;
     }
 
     resolve() {
@@ -73,8 +73,3 @@ class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
         }
     }
 }
-
-JavaScriptNativeCategoryBinding.prototype.creator = JavaScriptNativeCategoryBinding;
-
-exports.JavaScriptNativeCategoryBinding = JavaScriptNativeCategoryBinding;
-

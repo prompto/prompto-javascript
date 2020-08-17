@@ -1,10 +1,8 @@
-const CssType = require("../type/CssType").CssType;
-const CssValue = require("../value/CssValue").CssValue;
 
-class CssExpression {
+export default class CssExpression {
+
     constructor() {
         this.fields = [];
-        return this;
     }
 
     check(context) {
@@ -44,5 +42,3 @@ class CssExpression {
         return false;
     }
 }
-
-exports.CssExpression = CssExpression;

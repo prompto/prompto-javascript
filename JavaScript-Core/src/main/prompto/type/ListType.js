@@ -1,18 +1,11 @@
-const ContainerType = require("./ContainerType").ContainerType;
-let SetType = null;
-let IntegerType = null;
-const BooleanType = require("./BooleanType").BooleanType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const ListValue = require("../value/ListValue").ListValue;
-const List = require("../intrinsic/List").List;
+import ContainerType from "./ContainerType"
+import { IntegerType, SetType, BooleanType } from "./index"
+import { Identifier } from "../grammar/index"
+import { List } from "../intrinsic/index"
+import { ListValue } from "../value/index"
+import { JoinListMethodDeclaration } from "../builtins/ContainerTypeBuiltins";
 
-
-exports.resolve = () => {
-    IntegerType = require("./IntegerType").IntegerType;
-    SetType = require("./SetType").SetType;
-};
-
-class ListType extends ContainerType {
+export default class ListType extends ContainerType {
   
     constructor(itemType) {
         super(new Identifier(itemType.name+"[]"), itemType);
@@ -247,7 +240,6 @@ class ListType extends ContainerType {
     getMemberMethods(context, name) {
         switch (name) {
             case "join":
-                const JoinListMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinListMethodDeclaration;
                 return [new JoinListMethodDeclaration()];
             default:
                 return ContainerType.prototype.getMemberMethods.call(context, name);
@@ -255,6 +247,4 @@ class ListType extends ContainerType {
     }
 }
 
-
-exports.ListType = ListType;
 

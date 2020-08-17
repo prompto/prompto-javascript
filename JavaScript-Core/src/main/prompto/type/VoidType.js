@@ -1,10 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class VoidType extends NativeType {
+export default class VoidType extends NativeType {
+
     constructor() {
         super(new Identifier("Void"));
-        return this;
     }
 
     isAssignableFrom(context, other) {
@@ -16,4 +14,3 @@ class VoidType extends NativeType {
 VoidType.instance = new VoidType();
 
 
-exports.VoidType = VoidType;

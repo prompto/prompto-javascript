@@ -1,17 +1,12 @@
-const QueryBuilder = require("../store/Store").QueryBuilder;
-const AndPredicate = require("./AndPredicate").AndPredicate;
-const OrPredicate = require("./OrPredicate").OrPredicate;
-const NotPredicate = require("./NotPredicate").NotPredicate;
-const MatchPredicate = require("./MatchPredicate").MatchPredicate;
 
-class MemQueryBuilder extends QueryBuilder {
+export default class MemQueryBuilder extends QueryBuilder {
+
     constructor() {
         super();
         this.orderBys = null;
         this.predicates = null;
         this.first = null;
         this.last = null;
-        return this;
     }
 
     verify(fieldInfo, matchOp, value) {
@@ -60,5 +55,3 @@ class MemQueryBuilder extends QueryBuilder {
         this.orderBys.push({info: info, descending: descending});
     }
 }
-
-exports.MemQueryBuilder = MemQueryBuilder;

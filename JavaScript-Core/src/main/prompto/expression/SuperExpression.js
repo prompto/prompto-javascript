@@ -1,15 +1,7 @@
-const ThisExpression = require("./ThisExpression").ThisExpression;
-const InstanceContext = require("../runtime/Context").InstanceContext;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const AnyType = require("../type/AnyType").AnyType;
 
-class SuperExpression extends ThisExpression {
-    constructor() {
-        super();
-        return this;
-    }
+export default class SuperExpression extends ThisExpression {
 
-    check(context) {
+   check(context) {
         return this.getSuperType(context);
     }
 
@@ -36,5 +28,3 @@ class SuperExpression extends ThisExpression {
         transpiler.append(type.name).append(".prototype");
     }
 }
-
-exports.SuperExpression = SuperExpression;

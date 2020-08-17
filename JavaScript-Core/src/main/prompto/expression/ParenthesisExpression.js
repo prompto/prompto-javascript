@@ -1,6 +1,5 @@
-const Expression = require("./Expression").Expression;
 
-class ParenthesisExpression extends Expression {
+export default class ParenthesisExpression extends Expression {
   
     constructor(expression) {
         super();
@@ -54,5 +53,3 @@ class ParenthesisExpression extends Expression {
         this.expression.transpileQuery(transpiler, builderName);
     }
 }
-
-exports.ParenthesisExpression = ParenthesisExpression;

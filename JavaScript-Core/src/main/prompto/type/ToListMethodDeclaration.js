@@ -1,7 +1,5 @@
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-const ListType = require("./ListType").ListType;
 
-class ToListMethodDeclaration extends BuiltInMethodDeclaration {
+export default class ToListMethodDeclaration extends BuiltInMethodDeclaration {
     constructor(itemType) {
         super("toList");
         this.itemType = itemType;
@@ -26,5 +24,3 @@ class ToListMethodDeclaration extends BuiltInMethodDeclaration {
         transpiler.append("toList()");
     }
 }
-
-exports.ToListMethodDeclaration = ToListMethodDeclaration;

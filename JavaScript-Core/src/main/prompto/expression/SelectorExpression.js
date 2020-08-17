@@ -1,11 +1,5 @@
-const Expression = require("./Expression").Expression;
-let UnresolvedIdentifier;
 
-exports.resolve = () => {
-    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-}
-
-class SelectorExpression extends Expression {
+export default class SelectorExpression extends Expression {
     constructor(parent) {
         super();
         this.parent = parent || null;
@@ -19,6 +13,3 @@ class SelectorExpression extends Expression {
             return this.parent.check(context);
     }
 }
-
-
-exports.SelectorExpression = SelectorExpression;

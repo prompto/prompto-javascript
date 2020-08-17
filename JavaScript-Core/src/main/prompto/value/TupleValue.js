@@ -1,18 +1,9 @@
-const InternalError = require("../error/InternalError").InternalError;
-const BaseValueList = require("./BaseValueList").BaseValueList;
-const BooleanValue = require("./BooleanValue").BooleanValue;
-let TupleType = null;
-let SetValue = null;
 
-exports.resolve = () => {
-    TupleType = require("../type/TupleType").TupleType;
-    SetValue = require("./SetValue").SetValue;
-};
 
-class TupleValue extends BaseValueList {
+export default class TupleValue extends BaseValueList {
+
     constructor(items, item, mutable) {
         super(TupleType.instance, items, item, mutable);
-        return this;
     }
 
     toString() {
@@ -24,15 +15,6 @@ class TupleValue extends BaseValueList {
         super.toDialect(writer);
         writer.append(')');
     }
-
-    /*
-
-    @Override
-    protected TupleValue newInstance(List<Object> items) {
-        return new TupleValue(items);
-    }
-
-    */
 
     Add(context, value) {
         if (value instanceof BaseValueList) {
@@ -64,5 +46,3 @@ class TupleValue extends BaseValueList {
         return result;
     }
 }
-
-exports.TupleValue = TupleValue;

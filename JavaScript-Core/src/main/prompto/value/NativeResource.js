@@ -1,6 +1,5 @@
-const NativeInstance = require("./NativeInstance").NativeInstance;
 
-class NativeResource extends NativeInstance {
+export default class NativeResource extends NativeInstance {
   
     constructor(context, declaration) {
         super(context, declaration);
@@ -39,4 +38,3 @@ class NativeResource extends NativeInstance {
     }
 }
 
-exports.NativeResource = NativeResource;

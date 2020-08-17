@@ -1,19 +1,20 @@
-exports.IdentifierList = require('./IdentifierList').IdentifierList;
-exports.Identifier = require('./Identifier').Identifier;
-exports.MethodDeclarationList = require("./MethodDeclarationList").MethodDeclarationList;
-exports.Annotation = require("./Annotation").Annotation;
-exports.ContOp = require("./ContOp").ContOp;
-exports.CmpOp = require("./CmpOp").CmpOp;
-exports.EqOp = require("./EqOp").EqOp;
-exports.OrderByClause = require("./OrderByClause").OrderByClause;
-exports.OrderByClauseList = require("./OrderByClauseList").OrderByClauseList;
-exports.Operator = require("./Operator").Operator;
-exports.Argument = require("./Argument").Argument;
-exports.ArgumentList = require("./ArgumentList").ArgumentList;
-exports.NativeSymbolList = require("./NativeSymbolList").NativeSymbolList;
-exports.CategorySymbolList = require("./CategorySymbolList").CategorySymbolList;
-exports.NativeCategoryBindingList = require("./NativeCategoryBindingList").NativeCategoryBindingList;
-exports.NamedInstance = require("./NamedInstance").NamedInstance;
-
-require('./Argument').resolve();
-require('./ArgumentList').resolve();
+export {default as IdentifierList} from './IdentifierList';
+export {default as Identifier} from './Identifier';
+// export {default as  MethodDeclarationList} from"./MethodDeclarationList";
+// export {default as  Annotation} from"./Annotation";
+// export {default as  ContOp} from"./ContOp";
+// export {default as  CmpOp} from"./CmpOp";
+// export {default as  EqOp} from"./EqOp";
+// export {default as  OrderByClause} from"./OrderByClause";
+// export {default as  OrderByClauseList} from"./OrderByClauseList";
+// export {default as  Operator} from"./Operator";
+export {default as Argument} from "./Argument";
+export {default as ArgumentList} from "./ArgumentList";
+// export {default as  NativeSymbolList} from"./NativeSymbolList";
+// export {default as  CategorySymbolList} from"./CategorySymbolList";
+// export {default as  NativeCategoryBindingList} from"./NativeCategoryBindingList";
+// export {default as  NamedInstance} from"./NamedInstance";
+/*
+require('./Argument';
+require('./ArgumentList';
+*/

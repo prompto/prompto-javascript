@@ -1,9 +1,9 @@
-class PythonStatement {
+export default class PythonStatement {
+
     constructor(expression, isReturn) {
         this.expression = expression;
         this.isReturn = isReturn;
         this.module = null;
-        return this;
     }
 
     toString() {
@@ -18,5 +18,3 @@ class PythonStatement {
             this.module.toDialect(writer);
     }
 }
-
-exports.PythonStatement = PythonStatement;

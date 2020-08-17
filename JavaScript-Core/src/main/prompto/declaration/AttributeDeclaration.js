@@ -1,15 +1,15 @@
-const BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-const ContainerType = require("../type/ContainerType").ContainerType;
-const AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
+import BaseDeclaration from "./BaseDeclaration"
+import { AttributeInfo } from "../store/index"
+import { ContainerType } from "../type/index"
 
-class AttributeDeclaration extends BaseDeclaration {
+export default class AttributeDeclaration extends BaseDeclaration {
+
     constructor(id, type, constraint, indexTypes) {
         super(id);
         this.type = type;
         this.constraint = constraint;
         this.indexTypes = indexTypes;
         this.storable = false;
-        return this;
     }
 
     getDeclarationType() {
@@ -118,5 +118,3 @@ class AttributeDeclaration extends BaseDeclaration {
             this.constraint.declare(transpiler, this.name, this.type);
     }
 }
-
-exports.AttributeDeclaration = AttributeDeclaration;

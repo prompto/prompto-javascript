@@ -1,13 +1,9 @@
-const PropertyValidator = require("./PropertyValidator").PropertyValidator;
-const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-const MethodType = require("../type/MethodType").MethodType;
-const AnyType = require("../type/AnyType").AnyType;
 
-class TypeSetValidator extends PropertyValidator {
+export default class TypeSetValidator extends PropertyValidator {
+
     constructor(types) {
         super();
         this.types = types;
-        return this;
     }
 
     getType(context) {
@@ -30,6 +26,3 @@ class TypeSetValidator extends PropertyValidator {
             .reduce((reduced, current) => reduced.concat(current), []);
     }
 }
-
-
-exports.TypeSetValidator = TypeSetValidator;

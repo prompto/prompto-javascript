@@ -1,27 +1,12 @@
-const CategoryDeclaration = require("./CategoryDeclaration").CategoryDeclaration;
-const SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
-const GetterMethodDeclaration = require("./GetterMethodDeclaration").GetterMethodDeclaration;
-let MethodDeclarationMap = null;
-const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const $DataStore = require("../store/DataStore").$DataStore;
-const $Root = require("../intrinsic/$Root").$Root;
-let EnumeratedCategoryDeclaration = null;
-let EnumeratedNativeDeclaration = null;
+import CategoryDeclaration from "./CategoryDeclaration"
 
-exports.resolve = () => {
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    EnumeratedCategoryDeclaration = require("./EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-    EnumeratedNativeDeclaration = require("./EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-}
+export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
-class ConcreteCategoryDeclaration extends CategoryDeclaration {
     constructor(id, attributes, derivedFrom, methods) {
         super(id, attributes);
         this.derivedFrom = derivedFrom || null;
         this.methodsMap = null;
         this.methods = methods || [];
-        return this;
     }
 
     isWidget(context) {
@@ -617,5 +602,3 @@ class ConcreteCategoryDeclaration extends CategoryDeclaration {
         return null;
     }
 }
-
-exports.ConcreteCategoryDeclaration = ConcreteCategoryDeclaration;

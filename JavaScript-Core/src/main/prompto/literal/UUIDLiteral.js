@@ -1,16 +1,13 @@
-const Literal = require("./Literal").Literal;
-const UUIDValue = require("../value/UUIDValue").UUIDValue;
-const UUIDType = require("../type/UUIDType").UUIDType;
 
 /*jshint evil:true*/
 function parse(text) {
 	return eval(text);
 }
 
-class UUIDLiteral extends Literal {
+export default class UUIDLiteral extends Literal {
+
     constructor(text) {
         super(text, new UUIDValue(parse(text)));
-        return this;
     }
 
     check(context) {
@@ -28,4 +25,3 @@ class UUIDLiteral extends Literal {
 }
 
 
-exports.UUIDLiteral = UUIDLiteral;

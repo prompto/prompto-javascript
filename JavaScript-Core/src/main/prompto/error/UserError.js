@@ -1,6 +1,5 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
 
-function UserError(expression) {
+export default function UserError(expression) {
 	ExecutionError.call(this);
 	this.expression = expression;
 	return this;
@@ -12,5 +11,3 @@ UserError.prototype.constructor = UserError;
 UserError.prototype.getExpression = function(context) {
 	return this.expression;
 };
-
-exports.UserError = UserError;

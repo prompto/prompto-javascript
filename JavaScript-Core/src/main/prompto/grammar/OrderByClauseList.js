@@ -1,13 +1,9 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const Dialect = require("../parser/Dialect").Dialect;
 
-class OrderByClauseList extends ObjectList {
+export default class OrderByClauseList extends ObjectList {
 
     constructor(clause) {
-        super();
-        if(clause)
-            this.push(clause);
-    }
+        super(null, clause);
+   }
 
     toDialect(writer) {
         writer.append("order by ");
@@ -46,6 +42,3 @@ class OrderByClauseList extends ObjectList {
         });
     }
 }
-
-
-exports.OrderByClauseList = OrderByClauseList;

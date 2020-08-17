@@ -1,15 +1,10 @@
-const BaseType = require("./BaseType").BaseType;
-const DocumentType = require("./DocumentType").DocumentType;
-const Document = require("../intrinsic/Document").Document;
-const List = require("../intrinsic/List").List;
-const Identifier = require("../grammar/Identifier").Identifier;
 
 /* transient type for holding child property structure */
-class PropertiesType extends BaseType {
+export default class PropertiesType extends BaseType {
+
     constructor(properties) {
         super(new Identifier("Properties"));
         this.properties = properties;
-        return this;
     }
 
     isAssignableFrom(context, other) {
@@ -51,5 +46,3 @@ class PropertiesType extends BaseType {
     }
 }
 
-
-exports.PropertiesType = PropertiesType;

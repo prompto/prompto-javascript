@@ -1,11 +1,8 @@
-const Literal = require("./Literal").Literal;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
 
-class BooleanLiteral extends Literal {
+export default class BooleanLiteral extends Literal {
+
     constructor(text) {
         super(text, BooleanValue.Parse(text));
-        return this;
     }
 
     check(context) {
@@ -20,6 +17,3 @@ class BooleanLiteral extends Literal {
         transpiler.append(this.text);
     }
 }
-
-
-exports.BooleanLiteral = BooleanLiteral;

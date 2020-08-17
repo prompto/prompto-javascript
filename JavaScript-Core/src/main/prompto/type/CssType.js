@@ -1,7 +1,5 @@
-const NativeType = require("./NativeType").NativeType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class CssType extends NativeType {
+export default class CssType extends NativeType {
 
     constructor() {
         super(new Identifier("Css"));
@@ -17,5 +15,3 @@ class CssType extends NativeType {
 }
 
 CssType.instance = new CssType();
-
-exports.CssType = CssType;

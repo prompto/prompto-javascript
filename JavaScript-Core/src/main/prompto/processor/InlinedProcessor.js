@@ -1,9 +1,8 @@
-const AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
 
-class InlinedProcessor extends AnnotationProcessor {
+export default class InlinedProcessor extends AnnotationProcessor {
+
     constructor() {
         super("@Inlined");
-        return this;
     }
 
     processCategory(annotation, context, declaration) {
@@ -11,5 +10,3 @@ class InlinedProcessor extends AnnotationProcessor {
     }
 }
 
-
-exports.InlinedProcessor = InlinedProcessor;

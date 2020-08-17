@@ -1,10 +1,4 @@
-const BaseType = require("./BaseType").BaseType;
-const ListType = require("./ListType").ListType;
-const TextType = require("./TextType").TextType;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const List = require("../intrinsic/List").List;
-
-class EnumeratedNativeType extends BaseType {
+export default class EnumeratedNativeType extends BaseType {
 
     constructor(name, derivedFrom) {
         super(name);
@@ -103,5 +97,3 @@ class EnumeratedNativeType extends BaseType {
 }
 
 
-
-exports.EnumeratedNativeType = EnumeratedNativeType;

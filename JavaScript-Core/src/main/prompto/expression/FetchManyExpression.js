@@ -1,16 +1,5 @@
-const Expression = require("./Expression").Expression;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const AnyType = require("../type/AnyType").AnyType;
-const CursorType = require("../type/CursorType").CursorType;
-const $DataStore = require("../store/DataStore").$DataStore;
-const AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
-const TypeFamily = require("../store/TypeFamily").TypeFamily;
-const MatchOp = require("../store/MatchOp").MatchOp;
-const CursorValue = require("../value/CursorValue").CursorValue;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
 
-class FetchManyExpression extends Expression {
+export default class FetchManyExpression extends Expression {
 
     constructor(typ, first, last, predicate, orderBy) {
         super();
@@ -220,5 +209,3 @@ class FetchManyExpression extends Expression {
     }
 }
 
-
-exports.FetchManyExpression = FetchManyExpression;

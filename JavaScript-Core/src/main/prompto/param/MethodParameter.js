@@ -1,13 +1,8 @@
-const Parameter = require("./Parameter").Parameter;
-const MethodType = require("../type/MethodType").MethodType;
-const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-const ArrowValue = require("../value/ArrowValue").ArrowValue;
 
-class MethodParameter extends Parameter {
+export default class MethodParameter extends Parameter {
+
     constructor(id) {
         super(id);
-        return this;
     }
 
     getSignature(dialect) {
@@ -87,4 +82,3 @@ class MethodParameter extends Parameter {
 }
 
 
-exports.MethodParameter = MethodParameter;

@@ -1,15 +1,10 @@
-const Value = require("./Value").Value;
-let IntegerValue = null; // circular dependency
-let DecimalType = null;
-const decimalTostring = require("../utils/Utils").decimalToString;
-const DivideByZeroError = require("../error/DivideByZeroError").DivideByZeroError;
+import Value from "./Value"
+import { IntegerValue } from "./index"
+import { SyntaxError, DivideByZeroError } from "../error/index"
+import { DecimalType } from "../type/index"
+import { decimalTostring } from "../utils/index"
 
-exports.resolve = () => {
-	IntegerValue = require("./IntegerValue").IntegerValue;
-    DecimalType = require("../type/DecimalType").DecimalType;
-};
-
-class DecimalValue extends Value {
+export default class DecimalValue extends Value {
 
     constructor(value) {
         super(DecimalType.instance);
@@ -119,17 +114,7 @@ class DecimalValue extends Value {
         }
     }
 
-    /*
-
-
-    @Override
-    public Object ConvertTo(Class<?> type) {
-        return value;
-    }
-
-    */
-
-    equals(obj) {
+   equals(obj) {
         if (obj instanceof IntegerValue || obj instanceof DecimalValue) {
             return this.value == obj.value;
         } else {
@@ -138,5 +123,4 @@ class DecimalValue extends Value {
     }
 }
 
-exports.DecimalValue = DecimalValue;
 

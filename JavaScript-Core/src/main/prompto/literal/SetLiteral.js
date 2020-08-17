@@ -1,23 +1,11 @@
-const Literal = require("./Literal").Literal;
-const SetValue = require("../value/SetValue").SetValue;
-const SetType = require("../type/SetType").SetType;
-const MissingType = require("../type/MissingType").MissingType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const CharacterType = require("../type/CharacterType").CharacterType;
-const TextType = require("../type/TextType").TextType;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const TextValue = require("../value/TextValue").TextValue;
-const ExpressionList = require("../utils/ExpressionList").ExpressionList;
-const inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
 
-class SetLiteral extends Literal {
+export default class SetLiteral extends Literal {
+
     constructor(expressions) {
         expressions = expressions || new ExpressionList();
         super("<" + expressions.toString() + ">", new SetValue(MissingType.instance));
         this.itemType = null;
         this.expressions = expressions;
-        return this;
     }
 
     check(context) {
@@ -73,4 +61,3 @@ class SetLiteral extends Literal {
     }
 }
 
-exports.SetLiteral = SetLiteral;

@@ -1,7 +1,6 @@
-const $DataStore = require("../store/DataStore").$DataStore;
-const StoredDocument = require("./StoredDocument").StoredDocument;
 
-class StorableDocument {
+export default class StorableDocument {
+
     constructor(categories, dbIdListener) {
         if(!categories)
             throw new Error("!!!");
@@ -9,7 +8,6 @@ class StorableDocument {
         this.category = categories;
         this.dbIdListener = dbIdListener;
         this.document = null;
-        return this;
     }
 
     isDirty() {
@@ -49,4 +47,3 @@ class StorableDocument {
     }
 }
 
-exports.StorableDocument = StorableDocument;

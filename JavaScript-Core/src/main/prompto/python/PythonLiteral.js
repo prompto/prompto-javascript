@@ -1,7 +1,7 @@
-class PythonLiteral {
+export default class PythonLiteral {
+
     constructor(text) {
         this.text = text;
-        return this;
     }
 
     toString() {
@@ -12,5 +12,3 @@ class PythonLiteral {
         writer.append(this.text);
     }
 }
-
-exports.PythonLiteral = PythonLiteral;

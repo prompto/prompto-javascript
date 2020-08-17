@@ -1,13 +1,10 @@
-const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-const ParameterList = require("../param/ParameterList").ParameterList;
-const InternalError = require("../error/InternalError").InternalError;
-let BuiltInContext = null;
+import BaseMethodDeclaration from "./BaseMethodDeclaration"
+import { ParameterList } from "../param/index"
+import { BuiltInContext } from "../runtime/index"
+import {  } from "../error/index"
 
-exports.resolve = () => {
-    BuiltInContext = require("../runtime/Context").BuiltInContext;
-};
 
-class BuiltInMethodDeclaration extends BaseMethodDeclaration {
+export default class BuiltInMethodDeclaration extends BaseMethodDeclaration {
 
     constructor(name) {
         let args = null;
@@ -33,5 +30,3 @@ class BuiltInMethodDeclaration extends BaseMethodDeclaration {
         throw new Error("Need to override transpileCall in " + this.constructor.name);
     }
 }
-
-exports.BuiltInMethodDeclaration = BuiltInMethodDeclaration;

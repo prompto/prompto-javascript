@@ -1,11 +1,9 @@
-const Value = require("./Value").Value;
-const CodeType = require("../type/CodeType").CodeType;
 
-class CodeValue extends Value {
+export default class CodeValue extends Value {
+
     constructor(expression) {
         super(CodeType.instance);
         this.expression = expression;
-        return this;
     }
 
     check(context) {
@@ -25,5 +23,3 @@ class CodeValue extends Value {
     }
 }
 
-
-exports.CodeValue = CodeValue; 

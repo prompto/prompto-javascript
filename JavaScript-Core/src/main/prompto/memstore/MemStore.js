@@ -1,10 +1,6 @@
-const Store = require("../store/Store").Store;
-const MemQueryBuilder = require("./MemQueryBuilder").MemQueryBuilder;
-let StorableDocument = null;
-exports.Cursor = require("../intrinsic/Cursor").Cursor;
 
 // a utility class for running unit tests only
-class MemStore extends Store {
+export default class MemStore extends Store {
 
     constructor() {
         super();
@@ -171,7 +167,3 @@ function StoredIterable(docs, totalCount) {
     return this;
 }
 
-
-
-
-exports.MemStore = MemStore;

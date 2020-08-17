@@ -1,10 +1,8 @@
-const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-const CategoryType = require("../type/CategoryType").CategoryType;
 
-class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
+export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
+
     constructor(id, attributes, methods) {
         super(id, attributes, null, methods);
-        return this;
     }
 
     categoryTypeToEDialect(writer) {
@@ -44,5 +42,3 @@ class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
         transpiler.flush();
     }
 }
-
-exports.SingletonCategoryDeclaration = SingletonCategoryDeclaration;

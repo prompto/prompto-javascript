@@ -1,9 +1,6 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
-const antlr4 = require("antlr4/index");
-const EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
-const EParser = require("./EParser").EParser;
-const EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
+import antlr4 from "antlr4/index";
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -34,7 +31,7 @@ ECleverParser.prototype.constructor = ECleverParser;
 ECleverParser.prototype.parse = function() {
 	return this.parse_declaration_list();
 };
-	
+
 ECleverParser.prototype.parse_declaration_list = function() {
 	return this.doParse(this.declaration_list, true);
 };
@@ -56,4 +53,4 @@ ECleverParser.prototype.doParse = function(rule, addLF) {
     return builder.getNodeValue(tree);
 };
 
-exports.ECleverParser = ECleverParser;
+export {ECleverParser};

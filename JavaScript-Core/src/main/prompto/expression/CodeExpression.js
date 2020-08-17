@@ -1,12 +1,9 @@
-const Expression = require("./Expression").Expression;
-const CodeValue = require("../value/CodeValue").CodeValue;
-const CodeType = require("../type/CodeType").CodeType;
 
-class CodeExpression extends Expression {
+export default class CodeExpression extends Expression {
+
     constructor(expression) {
         super();
         this.expression = expression;
-        return this;
     }
 
     toString() {
@@ -66,5 +63,3 @@ class CodeExpression extends Expression {
     }
 }
 
-
-exports.CodeExpression = CodeExpression;

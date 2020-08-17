@@ -1,6 +1,5 @@
-const Value = require("./Value").Value;
 
-class TypeValue extends Value{
+export default class TypeValue extends Value{
   
     constructor(value) {
         super(null); // TODO type of type
@@ -16,5 +15,3 @@ class TypeValue extends Value{
     }
 }
 
-
-exports.TypeValue = TypeValue;

@@ -1,18 +1,5 @@
-const Expression = require("./Expression").Expression;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-const InstanceExpression = require("./InstanceExpression").InstanceExpression;
-const ArrowExpression = require("./ArrowExpression").ArrowExpression;
-const InternalError = require("../error/InternalError").InternalError;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const DocumentType = require("../type/DocumentType").DocumentType;
-const ListValue = require("../value/ListValue").ListValue;
-const SetValue = require("../value/SetValue").SetValue;
-const ListType = require("../type/ListType").ListType;
-const SetType = require("../type/SetType").SetType;
-const List = require("../intrinsic/List").List;
 
-class SortedExpression extends Expression {
+export default class SortedExpression extends Expression {
  
     constructor(source, desc, key) {
         super();
@@ -131,6 +118,3 @@ class SortedExpression extends Expression {
         transpiler.append(")");
     }
 }
-
-
-exports.SortedExpression = SortedExpression;

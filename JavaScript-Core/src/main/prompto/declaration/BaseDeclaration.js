@@ -1,6 +1,6 @@
-const Section = require("../parser/Section").Section;
+import { Section } from "../parser/index"
 
-class BaseDeclaration extends Section {
+export default class BaseDeclaration extends Section {
 
     constructor(id) {
         super();
@@ -41,5 +41,3 @@ class BaseDeclaration extends Section {
         return null;
     }
 }
-
-exports.BaseDeclaration = BaseDeclaration;

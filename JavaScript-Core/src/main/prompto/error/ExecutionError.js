@@ -1,7 +1,12 @@
-var PromptoError = require("./PromptoError").PromptoError;
-var ErrorVariable = require("../runtime/ErrorVariable").ErrorVariable;
+import PromptoError from "./PromptoError"
+import { ErrorVariable } from "../runtime/index"
+import { ArgumentList, Argument } from "../grammar/index"
+import { UnresolvedParameter } from "../param/index"
+import { TextLiteral } from "../literal/index"
+import { ConstructorExpression } from "../expression/index"
+import { CategoryType } from "../type/index"
 
-function ExecutionError(message) {
+export default function ExecutionError(message) {
 	PromptoError.call(this, message);
 	return this;
 }
@@ -12,12 +17,6 @@ ExecutionError.prototype.constructor = ExecutionError;
 ExecutionError.prototype.interpret = function(context, errorName) {
     var exp = this.getExpression(context);
     if(exp==null) {
-        var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-        var Argument = require("../grammar/Argument").Argument;
-        var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
-        var TextLiteral = require("../literal/TextLiteral").TextLiteral;
-        var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
-        var CategoryType = require("../type/CategoryType").CategoryType;
         var args = new ArgumentList();
         args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
         args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
@@ -29,5 +28,3 @@ ExecutionError.prototype.interpret = function(context, errorName) {
     context.setValue(errorName, error);
     return error;
 };
-
-exports.ExecutionError = ExecutionError;

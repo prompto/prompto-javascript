@@ -1,10 +1,9 @@
-const Section = require("../parser/Section").Section;
 
-class Identifier extends Section {
+export default class Identifier extends Section {
+
     constructor(name) {
         super();
         this.name = name;
-        return this;
     }
 
     toString() {
@@ -18,5 +17,3 @@ class Identifier extends Section {
             return this.name==other.name;
     }
 }
-
-exports.Identifier = Identifier;

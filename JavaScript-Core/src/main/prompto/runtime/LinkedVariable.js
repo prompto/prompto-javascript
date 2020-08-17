@@ -1,10 +1,10 @@
 
 /* used for downcast */
-class LinkedVariable {
+export default class LinkedVariable {
+
     constructor(type, linked) {
         this.type = type;
         this.linked = linked;
-        return this;
     }
 
     getType(context) {
@@ -15,5 +15,3 @@ class LinkedVariable {
         return this.linked.name;
     }
 }
-
-exports.LinkedVariable = LinkedVariable;

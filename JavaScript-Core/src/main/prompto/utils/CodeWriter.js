@@ -1,4 +1,4 @@
-const Context = require("../runtime/Context").Context;
+import { Context } from "../runtime/index"
 
 class Indenter {
 
@@ -35,7 +35,7 @@ class Indenter {
     }
 }
 
-class CodeWriter {
+export default class CodeWriter {
 
     constructor(dialect, context, indenter) {
         this.dialect = dialect;
@@ -109,5 +109,3 @@ class CodeWriter {
         this.dialect.toDialect(this, o);
     }
 }
-
-exports.CodeWriter = CodeWriter

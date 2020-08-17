@@ -1,22 +1,5 @@
-const EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-const EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-const ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-const ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-const ClosureValue = require("../value/ClosureValue").ClosureValue;
-const ProblemListener = require("../problem/ProblemListener").ProblemListener;
-const ProblemCollector = require("../problem/ProblemCollector").ProblemCollector;
-const MethodType = require("../type/MethodType").MethodType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const Variable = require("./Variable").Variable;
-const WidgetField = require("./WidgetField").WidgetField;
-const LinkedValue = require("./LinkedValue").LinkedValue;
-const InternalError = require("../error/InternalError").InternalError;
 
-class Context {
+export default class Context {
   
     constructor() {
         this.globals = null;
@@ -541,56 +524,6 @@ class Context {
     }
 }
 
-class MethodDeclarationMap {
-    constructor(name) {
-        this.name = name;
-        this.protos = {};
-        return this;
-    }
-
-    register(declaration, problemListener) {
-        const proto = declaration.getProto();
-        const current = this.protos[proto] || null;
-        if(current!==null)
-            problemListener.reportDuplicate(declaration.id);
-        this.protos[proto] = declaration;
-    }
-
-    unregister(proto) {
-        delete this.protos[proto];
-        return Object.getOwnPropertyNames(this.protos).length === 0;
-    }
-
-    hasProto(proto) {
-        return !!this.protos[proto];
-    }
-
-    registerIfMissing(declaration) {
-        const proto = declaration.getProto();
-        if(!(proto in this.protos)) {
-            this.protos[proto] = declaration;
-        }
-    }
-
-    getFirst() {
-        for(const proto in this.protos) {
-            return this.protos[proto];
-        }
-    }
-
-    getAll() {
-        return Object.getOwnPropertyNames(this.protos).map(function(proto) { return this.protos[proto]; }, this);
-    }
-
-    isEmpty() {
-        return this.size()===0;
-    }
-
-    size() {
-        return Object.getOwnPropertyNames(this.protos).length;
-    }
-}
-
 class ResourceContext extends Context {
     constructor() {
         super();
@@ -759,9 +692,4 @@ class DocumentContext extends Context {
 }
 
 
-exports.Context = Context;
-exports.BuiltInContext = BuiltInContext;
-exports.InstanceContext = InstanceContext;
-exports.DocumentContext = DocumentContext;
-exports.ResourceContext = ResourceContext;
-exports.MethodDeclarationMap = MethodDeclarationMap;
+export {Context, BuiltInContext, InstanceContext, DocumentContext, ResourceContext};

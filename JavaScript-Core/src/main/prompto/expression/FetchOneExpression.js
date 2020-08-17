@@ -1,15 +1,5 @@
-const Expression = require("./Expression").Expression;
-const Identifier = require("../grammar/Identifier").Identifier;
-const AnyType = require("../type/AnyType").AnyType;
-const CategoryType = require("../type/CategoryType").CategoryType;
-const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-const NullValue = require("../value/NullValue").NullValue;
-const $DataStore = require("../store/DataStore").$DataStore;
-const MatchOp = require("../store/MatchOp").MatchOp;
-const TypeFamily = require("../store/TypeFamily").TypeFamily;
-const AttributeInfo = require("../store/AttributeInfo").AttributeInfo;
 
-class FetchOneExpression extends Expression {
+export default class FetchOneExpression extends Expression {
  
     constructor(typ, predicate, start, end) {
         super();
@@ -142,5 +132,3 @@ class FetchOneExpression extends Expression {
         return builder.build();
     }
 }
-
-exports.FetchOneExpression = FetchOneExpression;

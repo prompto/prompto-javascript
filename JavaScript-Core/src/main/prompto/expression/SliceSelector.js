@@ -1,14 +1,10 @@
-const SelectorExpression = require("./SelectorExpression").SelectorExpression;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
 
 class SliceSelector extends SelectorExpression {
+
     constructor(parent, first, last) {
         super(parent);
         this.first = first || null;
         this.last = last || null;
-        return this;
     }
 
     toString() {
@@ -77,6 +73,3 @@ class SliceSelector extends SelectorExpression {
 
     }
 }
-
-
-exports.SliceSelector = SliceSelector;

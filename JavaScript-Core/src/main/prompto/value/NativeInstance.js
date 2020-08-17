@@ -1,12 +1,6 @@
-const CategoryType = require("../type/CategoryType").CategoryType;
-const Identifier = require("../grammar/Identifier").Identifier;
-const TypeUtils = require("../utils/TypeUtils");
-const Instance = require("./Value").Instance;
-const $DataStore = require("../store/DataStore").$DataStore;
-const NotMutableError = require("../error/NotMutableError").NotMutableError;
-const Variable = require("../runtime/Variable").Variable;
 
-class NativeInstance extends Instance {
+export default class NativeInstance extends Instance {
+
     constructor(context, declaration, instance) {
         super(new CategoryType(declaration.id));
         this.declaration = declaration;
@@ -16,7 +10,6 @@ class NativeInstance extends Instance {
             this.storable = $DataStore.instance.newStorableDocument(categories, null);
         }
         this.instance = instance || this.makeInstance();
-        return this;
     }
 
     makeInstance() {
@@ -109,4 +102,3 @@ function getActiveSetters() {
 }
 
 
-exports.NativeInstance = NativeInstance;

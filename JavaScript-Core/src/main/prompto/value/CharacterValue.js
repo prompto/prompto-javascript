@@ -1,18 +1,15 @@
-const Value = require("./Value").Value;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const CharacterType = require("../type/CharacterType").CharacterType;
-let TextValue = null; // circular dependency
-const removeAccents = require("../utils/Utils").removeAccents;
+import Value from "./Value"
+import { IntegerValue, TextValue } from "./index"
+import { SyntaxError } from "../error/index"
+import { CharacterType } from "../type/index"
+import { removeAccents } from "../utils/index"
 
-exports.resolve = () => {
-    TextValue = require("./TextValue").TextValue;
-}
 
-class CharacterValue extends Value {
+export default class CharacterValue extends Value {
+
     constructor(value) {
         super(CharacterType.instance);
         this.value = value;
-        return this;
     }
 
     static isWhitespace(c) {
@@ -23,7 +20,7 @@ class CharacterValue extends Value {
         if ("codePoint"==name) {
             return new IntegerValue(this.value.charCodeAt(0));
         } else {
-            return Value.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 
@@ -87,6 +84,5 @@ whitespace["\t".charCodeAt(0)] = true;
 whitespace["\r".charCodeAt(0)] = true;
 whitespace["\n".charCodeAt(0)] = true;
 
-exports.CharacterValue = CharacterValue;
 
 

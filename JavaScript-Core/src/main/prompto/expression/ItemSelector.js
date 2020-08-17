@@ -1,9 +1,6 @@
-const SelectorExpression = require("./SelectorExpression").SelectorExpression;
-const Value = require("../value/Value").Value;
-const NullValue = require("../value/NullValue").NullValue;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
 
-class ItemSelector extends SelectorExpression {
+export default class ItemSelector extends SelectorExpression {
+
     constructor(parent, item) {
         super(parent);
         this.item = item;
@@ -55,5 +52,3 @@ class ItemSelector extends SelectorExpression {
         return parentType.transpileItem(transpiler, itemType, this.item);
     }
 }
-
-exports.ItemSelector = ItemSelector;

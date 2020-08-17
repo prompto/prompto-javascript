@@ -1,9 +1,8 @@
-const PythonNativeCall = require("./PythonNativeCall").PythonNativeCall;
 
-class Python3NativeCall extends PythonNativeCall {
+export default class Python3NativeCall extends PythonNativeCall {
+
     constructor(statement, module) {
         super(statement, module);
-        return this;
     }
 
     toDialect(writer) {
@@ -12,5 +11,3 @@ class Python3NativeCall extends PythonNativeCall {
     }
 }
 
-
-exports.Python3NativeCall = Python3NativeCall;

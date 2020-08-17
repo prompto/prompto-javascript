@@ -1,16 +1,5 @@
-const Value = require("./Value").Value;
-const Dictionary = require("../intrinsic/Dictionary").Dictionary;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-const NullValue = require("./NullValue").NullValue;
-const SetValue = require("./SetValue").SetValue;
-const ListValue = require("./ListValue").ListValue;
-const TextValue = require("./TextValue").TextValue;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const InternalError = require("../error/InternalError").InternalError;
-const DictionaryType = require("../type/DictionaryType").DictionaryType;
-const TextType = require("../type/TextType").TextType;
 
-class DictionaryValue extends Value {
+export default class DictionaryValue extends Value {
  
     constructor(itemType, dict, mutable) {
         super(new DictionaryType(itemType));
@@ -159,4 +148,3 @@ class KVPValue extends Value {
     }
 }
 
-exports.DictionaryValue = DictionaryValue;

@@ -1,31 +1,5 @@
-let CategoryType = null;
-const NotStorableError = require("../error/NotStorableError").NotStorableError;
-const NotMutableError = require("../error/NotMutableError").NotMutableError;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const Variable = require("../runtime/Variable").Variable;
-const Identifier = require("../grammar/Identifier").Identifier;
-const Operator = require("../grammar/Operator").Operator;
-const NullValue = require("./NullValue").NullValue;
-const DecimalValue = require("./DecimalValue").DecimalValue;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const DocumentValue = require("./DocumentValue").DocumentValue;
-const TextValue = require("./TextValue").TextValue;
-const Value = require("./Value").Value;
-const Instance = require("./Value").Instance;
-let NativeInstance = null;
-const $DataStore = require("../store/DataStore").$DataStore;
-const TypeUtils = require("../utils/TypeUtils");
-let EnumeratedNativeDeclaration = null;
-let EnumeratedCategoryDeclaration = null;
 
-exports.resolve = () => {
-    CategoryType = require("../type/CategoryType").CategoryType;
-    NativeInstance = require("./NativeInstance").NativeInstance;
-    EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-};
-
-class ConcreteInstance extends Instance {
+export default class ConcreteInstance extends Instance {
 
     constructor(context, declaration) {
         super(new CategoryType(declaration.id));
@@ -309,5 +283,4 @@ function getActiveSetters() {
 }
 
 
-exports.ConcreteInstance = ConcreteInstance;
 

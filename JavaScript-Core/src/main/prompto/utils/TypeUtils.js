@@ -1,12 +1,7 @@
-const MissingType = require("../type/MissingType").MissingType;
-const NativeType = require("../type/NativeType").NativeType;
-const AnyType = require("../type/AnyType").AnyType;
-const NullValue = require("../value/NullValue").NullValue;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const TextValue = require("../value/TextValue").TextValue;
+import { TextValue, IntegerValue, DecimalValue, NullValue } from "../value/index"
+import { MissingType, AnyType, NativeType } from "../type/index"
 
-const convertFromJavaScript = value => {
+export function convertFromJavaScript(value) {
     if(value==null) {
         return NullValue.instance;
     } else if(typeof(value)=='string') {
@@ -19,17 +14,17 @@ const convertFromJavaScript = value => {
     } else {
         throw "Not implemented yet in convertFromJavaScript:" + typeof(value);
     }
-};
+}
 
 
-const inferExpressionsType = (context, expressions) => {
+export function inferExpressionsType(context, expressions) {
     if (expressions.length == 0)
         return MissingType.instance;
     const types = expressions.map(e => e.check(context));
     return inferElementType(context, types);
-};
+}
 
-const inferElementType = (context, types) => {
+export function inferElementType(context, types) {
     if (types.length == 0)
         return MissingType.instance;
     let lastType = null;
@@ -53,7 +48,7 @@ const inferElementType = (context, types) => {
         }
     }
     return lastType;
-};
+}
 
 
 function inferCommonRootType(context, type1, type2) {
@@ -90,7 +85,3 @@ function inferCommonCategoryType(context, type1, type2, trySwap) {
         return null;
 }
 
-
-exports.convertFromJavaScript = convertFromJavaScript;
-exports.inferExpressionsType = inferExpressionsType;
-exports.inferElementType = inferElementType;

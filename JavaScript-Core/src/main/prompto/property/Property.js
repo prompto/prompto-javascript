@@ -1,11 +1,10 @@
-const AlwaysValidator = require("./AlwaysValidator").AlwaysValidator;
 
-class Property {
+export default class Property {
+
     constructor() {
         this.name = null;
         this.help = null;
         this._validator = AlwaysValidator.instance;
-        return this;
     }
 
     get validator() {
@@ -39,5 +38,3 @@ class Property {
         this._validator = set ? this._validator.required() : this._validator.optional();
     }
 }
-
-exports.Property = Property;

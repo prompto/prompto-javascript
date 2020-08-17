@@ -1,15 +1,5 @@
-const Expression = require("./Expression").Expression;
-const AnyType = require("../type/AnyType").AnyType;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const DecimalType = require("../type/DecimalType").DecimalType;
-const NativeType = require("../type/NativeType").NativeType;
-const IterableType = require("../type/IterableType").IterableType;
-const MethodType = require("../type/MethodType").MethodType;
-const MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
 
-function getTargetType(context, itype, mutable) {
+export default function getTargetType(context, itype, mutable) {
     if (itype instanceof IterableType) {
         const itemType = getTargetType(context, itype.itemType);
         if (itemType)
@@ -131,5 +121,3 @@ class CastExpression extends Expression {
         this.expression.toDialect(writer);
     }
 }
-
-exports.CastExpression = CastExpression;

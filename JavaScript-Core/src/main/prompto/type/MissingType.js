@@ -1,10 +1,10 @@
-const NativeType = require("./NativeType").NativeType;
-const Identifier = require("../grammar/Identifier").Identifier;
+import NativeType from "./NativeType"
+import { Identifier } from "../grammar/index"
 
-class MissingType extends NativeType {
+export default class MissingType extends NativeType {
+
     constructor() {
         super(new Identifier("*"));
-        return this;
     }
 
     isAssignableFrom(context, other) {
@@ -13,5 +13,3 @@ class MissingType extends NativeType {
 }
 
 MissingType.instance = new MissingType();
-
-exports.MissingType = MissingType;

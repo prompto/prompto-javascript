@@ -1,11 +1,10 @@
-const CSharpExpression = require("./CSharpExpression").CSharpExpression;
 
-class CSharpIdentifierExpression extends CSharpExpression {
+export default class CSharpIdentifierExpression extends CSharpExpression {
+
     constructor(parent, identifier) {
         super();
         this.parent = parent;
         this.identifier = identifier;
-        return this;
     }
 
     toString() {
@@ -32,5 +31,3 @@ class CSharpIdentifierExpression extends CSharpExpression {
         writer.append(this.identifier);
     }
 }
-
-exports.CSharpIdentifierExpression = CSharpIdentifierExpression;

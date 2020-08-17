@@ -1,17 +1,10 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const TupleType = require("../type/TupleType").TupleType;
-const AnyType = require("../type/AnyType").AnyType;
-const VoidType = require("../type/VoidType").VoidType;
-const Variable = require("../runtime/Variable").Variable;
-const TupleValue = require("../value/TupleValue").TupleValue;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
 
-class AssignTupleStatement extends SimpleStatement {
+export default class AssignTupleStatement extends SimpleStatement {
+
     constructor(names, expression) {
         super();
         this.names = names;
         this.expression = expression;
-        return this;
     }
 
     check(context) {
@@ -76,6 +69,3 @@ class AssignTupleStatement extends SimpleStatement {
         this.expression.toDialect(writer);
     }
 }
-
-
-exports.AssignTupleStatement = AssignTupleStatement;

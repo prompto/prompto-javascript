@@ -1,11 +1,5 @@
-const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-const EnumeratedCategoryType = require("../type/EnumeratedCategoryType").EnumeratedCategoryType;
-const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
-const Identifier = require("../grammar/Identifier").Identifier;
-const List = require("../intrinsic/List").List;
 
-
-class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
+export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
 
     constructor(id, attrs, derived, symbols) {
         super(id, attrs, derived, null);
@@ -194,5 +188,3 @@ class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
         this.transpileSymbols(transpiler);
     }
 }
-
-exports.EnumeratedCategoryDeclaration = EnumeratedCategoryDeclaration;

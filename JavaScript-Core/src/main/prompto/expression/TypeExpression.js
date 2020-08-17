@@ -1,12 +1,9 @@
-const Expression = require("./Expression").Expression;
-const TypeType = require("../type/TypeType").TypeType;
-const TypeValue = require("../value/TypeValue").TypeValue;
 
-class TypeExpression extends Expression {
+export default class TypeExpression extends Expression {
+
     constructor(value) {
         super();
         this.value = value;
-        return this;
     }
 
     toDialect(writer) {
@@ -37,5 +34,3 @@ class TypeExpression extends Expression {
         return this.value.getStaticMemberValue(context, name);
     }
 }
-
-exports.TypeExpression = TypeExpression;

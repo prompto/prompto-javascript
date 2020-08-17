@@ -1,29 +1,12 @@
-const BaseMethodDeclaration = require("./BaseMethodDeclaration").BaseMethodDeclaration;
-const StrictSet = require("../intrinsic/StrictSet").StrictSet;
-const ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const Argument = require("../grammar/Argument").Argument;
-let UnresolvedIdentifier = null;
-let UnresolvedParameter = null;
-let CategoryParameter = null;
-let AttributeParameter = null;
 
-exports.resolve = () => {
-    UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-    UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
-    CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-    AttributeParameter = require("../param/AttributeParameter").AttributeParameter;
-};
+export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
 
-
-class DispatchMethodDeclaration extends BaseMethodDeclaration {
     constructor(context, call, declaration, declarations) {
         super(declaration.id, declaration.parameters, declaration.returnType);
         this.context = context;
         this.call = call;
         this.declaration = declaration;
         this.declarations = declarations;
-        return this;
     }
 
     getTranspiledName(context) {
@@ -136,5 +119,3 @@ class DispatchMethodDeclaration extends BaseMethodDeclaration {
     }
 }
 
-
-exports.DispatchMethodDeclaration = DispatchMethodDeclaration;

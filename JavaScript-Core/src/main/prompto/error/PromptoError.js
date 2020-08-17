@@ -1,4 +1,4 @@
-function PromptoError() {
+export default function PromptoError() {
     var tmp = Error.apply(this, arguments);
     this.message = tmp.message
     tmp.name = this.name = 'PromptoError'
@@ -9,6 +9,3 @@ function PromptoError() {
     });
     return this;
 }
-
-
-exports.PromptoError = PromptoError;

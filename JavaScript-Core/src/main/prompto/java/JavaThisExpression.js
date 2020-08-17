@@ -1,9 +1,8 @@
-const JavaExpression = require("./JavaExpression").JavaExpression;
 
-class JavaThisExpression extends JavaExpression {
+export default class JavaThisExpression extends JavaExpression {
+
     constructor() {
         super();
-        return this;
     }
 
     toString() {
@@ -14,5 +13,3 @@ class JavaThisExpression extends JavaExpression {
         writer.append("this");
     }
 }
-
-exports.JavaThisExpression = JavaThisExpression;

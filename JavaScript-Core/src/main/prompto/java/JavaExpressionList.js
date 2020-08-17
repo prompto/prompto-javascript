@@ -1,13 +1,13 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
+import {ObjectList} from "../utils/ObjectList";
 
-class JavaExpressionList extends ObjectList {
+export default class JavaExpressionList extends ObjectList {
+
     constructor(expression) {
         super();
         expression = expression || null;
         if(expression!==null) {
             this.add(expression);
         }
-        return this;
     }
 
     toDialect(writer) {
@@ -20,5 +20,3 @@ class JavaExpressionList extends ObjectList {
         }
     }
 }
-
-exports.JavaExpressionList = JavaExpressionList;

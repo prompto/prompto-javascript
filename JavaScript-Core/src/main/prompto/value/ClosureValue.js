@@ -1,6 +1,5 @@
-const Value = require("./Value").Value;
 
-class ClosureValue extends Value {
+export default class ClosureValue extends Value {
  
     constructor(context, type) {
         super(type);
@@ -30,4 +29,3 @@ class ClosureValue extends Value {
 }
 
 
-exports.ClosureValue = ClosureValue;

@@ -1,4 +1,4 @@
-class DictEntry {
+export default class DictEntry {
   
     constructor(key, value) {
         this.key = key;
@@ -26,4 +26,3 @@ class DictEntry {
 }
 
 
-exports.DictEntry = DictEntry;

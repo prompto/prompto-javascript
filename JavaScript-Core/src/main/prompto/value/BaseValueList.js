@@ -1,12 +1,9 @@
-const Value = require("./Value").Value;
-const Container = require("./Value").Container;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const InternalError = require("../error/InternalError").InternalError;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
+import Container from "./Container"
+import { Value, IntegerValue } from "./index"
+import { PromptoError, SyntaxError, IndexOutOfRangeError, InternalError } from "../error/index"
 
 /* an abstract list of values, common to ListValue and TupleValue */
-class BaseValueList extends Container {
+export default class BaseValueList extends Container {
   
     constructor(type, items, item, mutable) {
         super(type);
@@ -201,5 +198,3 @@ class ListIterator {
         return this.items[++this.index];
     }
 }
-
-exports.BaseValueList = BaseValueList;

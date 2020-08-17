@@ -1,9 +1,9 @@
 /* do NOT delete this file, it is NOT generated */
 /* it has to be located in the generated folder */
 /* to work around jest resolver issues */
-const Parser = require("antlr4").Parser;
+import {Parser} from "antlr4";
 
-function AbstractParser(input) {
+export default function AbstractParser(input) {
 	Parser.call(this, input);
 	return this;
 }
@@ -70,5 +70,3 @@ AbstractParser.prototype.addErrorListener = function(listener) {
     Parser.prototype.addErrorListener.call(this, listener);
     this._input.tokenSource.addErrorListener(listener); // lexer
 };
-
-exports.AbstractParser = AbstractParser;

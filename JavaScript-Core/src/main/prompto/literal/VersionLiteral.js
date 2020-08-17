@@ -1,13 +1,9 @@
-const Literal = require("./Literal").Literal;
-const VersionType = require("../type/VersionType").VersionType;
-const VersionValue = require("../value/VersionValue").VersionValue;
-const Version = require("../intrinsic/Version").Version;
 
-class VersionLiteral extends Literal {
+export default class VersionLiteral extends Literal {
+
     constructor(text) {
         const version = Version.parse(text.substring(2,text.length-1));
         super(text, new VersionValue(version));
-        return this;
     }
 
     check(context) {
@@ -23,5 +19,4 @@ class VersionLiteral extends Literal {
     }
 }
 
-exports.VersionLiteral = VersionLiteral;
 

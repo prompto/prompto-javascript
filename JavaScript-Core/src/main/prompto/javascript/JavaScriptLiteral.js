@@ -1,8 +1,8 @@
-class JavaScriptLiteral {
+export default class JavaScriptLiteral {
+
     constructor(text) {
         this.text = text;
         this.value = eval(text);
-        return this;
     }
 
     interpret(context) {
@@ -21,5 +21,3 @@ class JavaScriptLiteral {
         transpiler.append(this.text);
     }
 }
-
-exports.JavaScriptLiteral = JavaScriptLiteral;

@@ -1,7 +1,5 @@
-const TextValue = require("../value/TextValue").TextValue;
-const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
 
-class DictIdentifierKey {
+export default class DictIdentifierKey {
  
     constructor(id) {
         this.id = id;
@@ -25,6 +23,3 @@ class DictIdentifierKey {
         }
     }
 }
-
-
-exports.DictIdentifierKey = DictIdentifierKey;

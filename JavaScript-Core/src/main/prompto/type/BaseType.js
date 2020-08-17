@@ -1,19 +1,5 @@
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-let EnumeratedNativeType = null;
-let VoidType = null;
-let TextType = null;
-let BooleanType = null;
-let NullType = null;
 
-exports.resolve = () => {
-    EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
-    BooleanType = require("./BooleanType").BooleanType;
-    VoidType = require("./VoidType").VoidType;
-    TextType = require("./TextType").TextType;
-    NullType = require("./NullType").NullType;
-}
-
-class BaseType {
+export default class BaseType {
  
     constructor(id) {
         this.id = id;
@@ -437,5 +423,3 @@ class BaseType {
     }
 }
 
-
-exports.BaseType = BaseType;

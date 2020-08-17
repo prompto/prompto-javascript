@@ -1,13 +1,5 @@
-const Expression = require("./Expression").Expression;
-const Variable = require("../runtime/Variable").Variable;
-const IteratorType = require("../type/IteratorType").IteratorType;
-const IterableValue = require("../value/IterableValue").IterableValue;
-const UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
-const ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
-const InternalError = require("../error/InternalError").InternalError;
 
-
-class IteratorExpression extends Expression {
+export default class IteratorExpression extends Expression {
   
     constructor(name, source, expression) {
         super();
@@ -110,6 +102,3 @@ class IteratorExpression extends Expression {
         return expression instanceof UnresolvedCall;
     }
 }
-
-
-exports.IteratorExpression = IteratorExpression;

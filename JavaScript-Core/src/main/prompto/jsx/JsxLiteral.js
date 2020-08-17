@@ -1,10 +1,8 @@
-const TextType = require("../type/TextType").TextType;
-const VoidType = require("../type/VoidType").VoidType;
 
-class JsxLiteral {
+export default class JsxLiteral {
+
     constructor(text) {
         this.text = text;
-        return this;
     }
 
     check(context) {
@@ -35,5 +33,3 @@ class JsxLiteral {
         transpiler.append(this.text);
     }
 }
-
-exports.JsxLiteral = JsxLiteral;

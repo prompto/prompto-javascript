@@ -1,10 +1,5 @@
-const NullType = require("../type/NullType").NullType;
-const NullValue = require("../value/NullValue").NullValue;
 
-class NullLiteral {
-    constructor() {
-       return this;
-    }
+export default class NullLiteral {
 
     check(context) {
         return NullType.instance;
@@ -40,5 +35,3 @@ class NullLiteral {
 }
 
 NullLiteral.instance = new NullLiteral();
-
-exports.NullLiteral = NullLiteral;

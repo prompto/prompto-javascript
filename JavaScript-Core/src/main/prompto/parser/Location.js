@@ -1,4 +1,5 @@
-class Location {
+export default class Location {
+
     constructor(token, isEnd) {
         this.tokenIndex = token.tokenIndex;
         this.line = token.line;
@@ -14,5 +15,3 @@ class Location {
         return { tokenIndex: this.tokenIndex, line: this.line, column: this.column };
     }
 }
-
-exports.Location = Location;

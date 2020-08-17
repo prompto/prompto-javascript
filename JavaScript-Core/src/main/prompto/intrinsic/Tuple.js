@@ -1,8 +1,8 @@
-var List = require("./List").List;
-var StrictSet = require("./StrictSet").StrictSet;
-var equalObjects = require("../utils/Utils").equalObjects;
+// var List = require("./List").List;
+// var StrictSet = require("./StrictSet").StrictSet;
+// var equalObjects = require("../utils/Utils").equalObjects;
 
-function Tuple(mutable, items) {
+export default function Tuple(mutable, items) {
 	List.call(this, mutable, items);
 	return this;
 }

@@ -1,27 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const PeriodType = require("./PeriodType").PeriodType;
-const IntegerType = require("./IntegerType").IntegerType;
-const TextType = require("./TextType").TextType;
-let DateType = null;
-let TimeType = null;
-const DateTime = require("../intrinsic/DateTime").DateTime;
-const DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
-const Identifier = require("../grammar/Identifier").Identifier;
-const LocalDate = require("../intrinsic/LocalDate").LocalDate;
-const LocalTime = require("../intrinsic/LocalTime").LocalTime;
 
+export default class DateTimeType extends NativeType {
 
-exports.resolve = () => {
-    DateType = require("./DateType").DateType;
-    TimeType = require("./TimeType").TimeType;
-};
-
-
-class DateTimeType extends NativeType {
     constructor() {
         super(new Identifier("DateTime"));
-        return this;
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
@@ -195,4 +176,3 @@ class DateTimeType extends NativeType {
 DateTimeType.instance = new DateTimeType();
 
 
-exports.DateTimeType = DateTimeType;

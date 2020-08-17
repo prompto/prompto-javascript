@@ -1,21 +1,21 @@
-const argument = require("../param/index");
-const constraint = require("../constraint/index");
-const instance = require("../instance/index");
-const declaration = require("../declaration/index");
-const expression = require("../expression/index");
-const javascript = require("../javascript/index");
-const statement = require("../statement/index");
-const literal = require("../literal/index");
-const grammar = require("../grammar/index");
-const param = require("../param/index");
-const utils = require("../utils/index");
-const parser = require("../parser/index");
-const type = require("../type/index");
-const jsx = require("../jsx/index");
-const css = require("../css/index");
-const java = require("../java/index");
-const csharp = require("../csharp/index");
-const python = require("../python/index");
+import argument from "../param/index";
+import constraint from "../constraint/index";
+import instance from "../instance/index";
+import declaration from "../declaration/index";
+import expression from "../expression/index";
+import javascript from "../javascript/index";
+import statement from "../statement/index";
+import literal from "../literal/index";
+import grammar from "../grammar/index";
+import param from "../param/index";
+import utils from "../utils/index";
+import parser from "../parser/index";
+import type from "../type/index";
+import jsx from "../jsx/index";
+import css from "../css/index";
+import java from "../java/index";
+import csharp from "../csharp/index";
+import python from "../python/index";
 
 function EPromptoBuilder(eparser) {
     parser.EParserListener.call(this);
@@ -29,7 +29,7 @@ function EPromptoBuilder(eparser) {
 EPromptoBuilder.prototype = Object.create(parser.EParserListener.prototype);
 EPromptoBuilder.prototype.constructor = EPromptoBuilder;
 
- 
+
 EPromptoBuilder.prototype.setNodeValue = function(node, value) {
     if(node["%id"]===undefined)
         node["%id"] = this.nextNodeId++;
@@ -3047,4 +3047,4 @@ EPromptoBuilder.prototype.readValidToken = function(idx, allowWS) {
 };
 
 
-exports.EPromptoBuilder = EPromptoBuilder;
+export {EPromptoBuilder};

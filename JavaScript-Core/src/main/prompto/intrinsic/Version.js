@@ -1,4 +1,4 @@
-function Version(major, minor, fix) {
+export default function Version(major, minor, fix) {
     this.major = major;
     this.minor = minor;
     this.fix = fix;
@@ -56,5 +56,3 @@ Version.prototype.cmp = function(value) {
     var b = value.asInt();
     return a > b ? 1 : (a == b ? 0 : -1);
 };
-
-exports.Version = Version;

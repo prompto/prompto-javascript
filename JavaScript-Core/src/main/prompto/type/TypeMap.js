@@ -1,7 +1,5 @@
-const VoidType = require("./VoidType").VoidType;
-const NullType = require("./NullType").NullType;
 
-class TypeMap {
+export default class TypeMap {
   
     inferType(context, section) {
         const keys = Object.keys(this);
@@ -45,4 +43,3 @@ class TypeMap {
     }
 }
 
-exports.TypeMap = TypeMap;

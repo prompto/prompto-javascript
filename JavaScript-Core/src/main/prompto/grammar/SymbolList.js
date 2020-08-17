@@ -1,12 +1,10 @@
-const ObjectList = require("../utils/ObjectList").ObjectList;
-const MissingType = require("../type/MissingType").MissingType;
 
-class SymbolList extends ObjectList {
+export default class SymbolList extends ObjectList {
+
     constructor(symbol) {
         super(MissingType.instance);
         if(symbol)
             this.add(symbol);
-        return this;
     }
 
     getIterator(context) {
@@ -35,6 +33,3 @@ class SymbolListIterator {
         return this.symbols[this.idx++].interpret(this.context);
     }
 }
-
-
-exports.SymbolList = SymbolList;

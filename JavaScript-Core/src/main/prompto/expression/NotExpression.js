@@ -1,10 +1,5 @@
-const Expression = require("./Expression").Expression;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-const Dialect = require("../parser/Dialect").Dialect;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const BooleanType = require("../type/BooleanType").BooleanType;
 
-class NotExpression extends Expression {
+export default class NotExpression extends Expression {
  
     constructor(expression) {
         super();
@@ -107,6 +102,3 @@ class NotExpression extends Expression {
     }
 }
 
-
-
-exports.NotExpression = NotExpression;

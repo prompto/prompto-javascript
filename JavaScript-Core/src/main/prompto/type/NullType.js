@@ -1,10 +1,10 @@
-const BaseType = require("./BaseType").BaseType;
-const Identifier = require("../grammar/Identifier").Identifier;
+import BaseType from "./BaseType"
+import { Identifier } from "../grammar/index"
 
-class NullType extends BaseType {
+export default class NullType extends BaseType {
+
     constructor() {
         super(new Identifier("Null"));
-        return this;
     }
 
     checkUnique(context) {
@@ -30,4 +30,3 @@ class NullType extends BaseType {
 
 NullType.instance = new NullType();
 
-exports.NullType = NullType;

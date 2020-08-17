@@ -1,6 +1,5 @@
-const BaseType = require("./BaseType").BaseType;
 
-class MethodType extends BaseType {
+export default class MethodType extends BaseType {
   
     constructor(method) {
         super(method.id);
@@ -53,4 +52,3 @@ class MethodType extends BaseType {
     }
 }
 
-exports.MethodType = MethodType;

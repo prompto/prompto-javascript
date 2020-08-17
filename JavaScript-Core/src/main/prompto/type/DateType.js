@@ -1,17 +1,5 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const PeriodType = require("./PeriodType").PeriodType;
-const TimeType = require("./TimeType").TimeType;
-const DateTimeType = require("./DateTimeType").DateTimeType;
-const IntegerType = require("./IntegerType").IntegerType;
-const RangeType = require("./RangeType").RangeType;
-const DateRange = require("../value/DateRange").DateRange;
-const DateValue = require("../value/DateValue").DateValue;
-const Identifier = require("../grammar/Identifier").Identifier;
-const LocalDate = require("../intrinsic/LocalDate").LocalDate;
-const DateTime = require("../intrinsic/DateTime").DateTime;
 
-class DateType extends NativeType {
+export default class DateType extends NativeType {
  
     constructor() {
         super(new Identifier("Date"));
@@ -197,4 +185,3 @@ class DateType extends NativeType {
 DateType.instance = new DateType();
 
 
-exports.DateType = DateType;

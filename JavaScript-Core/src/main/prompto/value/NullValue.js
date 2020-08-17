@@ -1,10 +1,10 @@
-const Value = require("./Value").Value;
-const NullType = require("../type/NullType").NullType;
+import Value from "./Value"
+import { NullType } from "../type/index"
 
-class NullValue extends Value {
+export default class NullValue extends Value {
+
     constructor() {
         super(NullType.instance);
-        return this;
     }
 
     toString() {
@@ -22,4 +22,3 @@ class NullValue extends Value {
 
 NullValue.instance = new NullValue();
 
-exports.NullValue = NullValue;

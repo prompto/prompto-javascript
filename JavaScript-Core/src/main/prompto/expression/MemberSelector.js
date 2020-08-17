@@ -1,24 +1,9 @@
-const SelectorExpression = require("./SelectorExpression").SelectorExpression;
-let UnresolvedIdentifier = null;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const NullValue = require("../value/NullValue").NullValue;
-const Dialect = require("../parser/Dialect").Dialect;
-const MethodType = require("../type/MethodType").MethodType;
-const VoidType = require("../type/VoidType").VoidType;
-let ParenthesisExpression = null;
-let UnresolvedCall = null;
 
-exports.resolve = () => {
-    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-    ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
-    UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
-};
+export default class MemberSelector extends SelectorExpression {
 
-class MemberSelector extends SelectorExpression {
     constructor(parent, id) {
         super(parent);
         this.id = id;
-        return this;
     }
 
     get name() {
@@ -122,6 +107,3 @@ class MemberSelector extends SelectorExpression {
             return this.parent;
     }
 }
-
-exports.MemberSelector = MemberSelector;
-

@@ -1,9 +1,8 @@
-const PythonNativeCategoryBinding = require("./PythonNativeCategoryBinding").PythonNativeCategoryBinding;
 
-class Python3NativeCategoryBinding extends PythonNativeCategoryBinding {
+export default class Python3NativeCategoryBinding extends PythonNativeCategoryBinding {
+
     constructor(binding) {
         super(binding.identifier, binding.module);
-        return this;
     }
 
     toDialect(writer) {
@@ -14,5 +13,4 @@ class Python3NativeCategoryBinding extends PythonNativeCategoryBinding {
     }
 }
 
-exports.Python3NativeCategoryBinding = Python3NativeCategoryBinding;
 

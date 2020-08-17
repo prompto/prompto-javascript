@@ -1,12 +1,5 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-const SetType = require("./SetType").SetType;
-const ListType = require("./ListType").ListType;
-const IntegerType = require("./IntegerType").IntegerType;
-const AnyType = require("./AnyType").AnyType;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-class TupleType extends NativeType {
+export default class TupleType extends NativeType {
 
     constructor() {
         super(new Identifier("Tuple"));
@@ -159,5 +152,4 @@ class TupleType extends NativeType {
 
 TupleType.instance = new TupleType();
 
-exports.TupleType = TupleType;
 

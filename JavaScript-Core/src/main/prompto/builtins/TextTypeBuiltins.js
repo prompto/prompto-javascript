@@ -1,19 +1,5 @@
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const TextType = require("../type/TextType").TextType;
-const TextValue = require("../value/TextValue").TextValue;
-const ListType = require("../type/ListType").ListType;
-const ListValue = require("../value/ListValue").ListValue;
-const Identifier = require("../grammar/Identifier").Identifier;
-const CategoryParameter = require("../param/CategoryParameter").CategoryParameter;
-const TextLiteral = require("../literal/TextLiteral").TextLiteral;
-const IntegerLiteral = require("../literal/IntegerLiteral").IntegerLiteral;
-const List = require("../intrinsic/List").List;
 
-
+// don't use export default since more builtins are expected
 class ToLowerCaseMethodDeclaration extends BuiltInMethodDeclaration {
 
     constructor() {
@@ -264,13 +250,13 @@ class IndexOfMethodDeclaration extends BuiltInMethodDeclaration {
     }
 }
 
-exports.StartsWithMethodDeclaration = StartsWithMethodDeclaration;
-exports.EndsWithMethodDeclaration = EndsWithMethodDeclaration;
-exports.ToLowerCaseMethodDeclaration = ToLowerCaseMethodDeclaration;
-exports.ToUpperCaseMethodDeclaration = ToUpperCaseMethodDeclaration;
-exports.ToCapitalizedMethodDeclaration = ToCapitalizedMethodDeclaration;
-exports.TrimMethodDeclaration = TrimMethodDeclaration;
-exports.ReplaceMethodDeclaration = ReplaceMethodDeclaration;
-exports.ReplaceAllMethodDeclaration = ReplaceAllMethodDeclaration;
-exports.SplitMethodDeclaration = SplitMethodDeclaration;
-exports.IndexOfMethodDeclaration = IndexOfMethodDeclaration;
+export {StartsWithMethodDeclaration};
+export {EndsWithMethodDeclaration};
+export {ToLowerCaseMethodDeclaration};
+export {ToUpperCaseMethodDeclaration};
+export {ToCapitalizedMethodDeclaration};
+export {TrimMethodDeclaration};
+export {ReplaceMethodDeclaration};
+export {ReplaceAllMethodDeclaration};
+export {SplitMethodDeclaration};
+export {IndexOfMethodDeclaration};

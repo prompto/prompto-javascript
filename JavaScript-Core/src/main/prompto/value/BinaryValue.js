@@ -1,6 +1,5 @@
-const Value = require("./Value").Value;
 
-class BinaryValue extends Value {
+export default class BinaryValue extends Value {
     constructor(itype, mimeType, data) {
         super(itype);
         this.mimeType = mimeType;
@@ -8,5 +7,3 @@ class BinaryValue extends Value {
         return this;
     }
 }
-
-exports.BinaryValue = BinaryValue;

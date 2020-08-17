@@ -1,10 +1,6 @@
-const Value = require("./Value").Value;
-const TextValue = require("./TextValue").TextValue;
-const UUIDType = require("../type/UUIDType").UUIDType;
-const UUID = require("../intrinsic/UUID").UUID;
-const InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
 
-class UUIDValue extends Value {
+
+export default class UUIDValue extends Value {
    
     constructor(value) {
         if(typeof(value) == 'string') {
@@ -38,6 +34,6 @@ class UUIDValue extends Value {
 }
 
 
-exports.UUIDValue = UUIDValue;
+export {UUIDValue};
 
 

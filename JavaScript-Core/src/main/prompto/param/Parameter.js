@@ -1,10 +1,5 @@
-const NamedInstance = require("../grammar/NamedInstance").NamedInstance;
-const IntegerValue = require("../value/IntegerValue").IntegerValue;
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const IntegerType = require("../type/IntegerType").IntegerType;
-const DecimalType = require("../type/DecimalType").DecimalType;
 
-class Parameter extends NamedInstance {
+export default class Parameter extends NamedInstance {
  
     constructor(id) {
         super();
@@ -56,5 +51,3 @@ class Parameter extends NamedInstance {
             expression.transpile(transpiler);
     }
 }
-
-exports.Parameter = Parameter;

@@ -1,16 +1,5 @@
-const Expression = require("./Expression").Expression;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const IterableType = require("../type/IterableType").IterableType;
-const Variable = require("../runtime/Variable").Variable;
-const InternalError = require("../error/InternalError").InternalError;
-const NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-const IdentifierList = require("../grammar/IdentifierList").IdentifierList;
-const ListType = require("../type/ListType").ListType;
-const AnyType = require("../type/AnyType").AnyType;
 
-
-class FilteredExpression extends Expression {
+export default class FilteredExpression extends Expression {
  
     constructor(itemId, source, predicate) {
         super();
@@ -148,4 +137,3 @@ class FilteredExpression extends Expression {
     }
 }
 
-exports.FilteredExpression = FilteredExpression;

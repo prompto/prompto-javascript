@@ -1,17 +1,5 @@
-const Value = require("./Value").Value;
-const PeriodValue = require("./PeriodValue").PeriodValue;
-let DateValue = null;
-const TimeValue = require("./TimeValue").TimeValue;
-const IntegerValue = require("./IntegerValue").IntegerValue;
-const TextValue = require("./TextValue").TextValue;
-let DateTimeType = null;
 
-exports.resolve = () => {
-    DateValue = require("./DateValue").DateValue;
-    DateTimeType = require("../type/DateTimeType").DateTimeType;
-};
-
-class DateTimeValue extends Value {
+export default class DateTimeValue extends Value {
   
     constructor(value) {
         super(DateTimeType.instance);
@@ -114,4 +102,3 @@ class DateTimeValue extends Value {
     }
 }
 
-exports.DateTimeValue = DateTimeValue;

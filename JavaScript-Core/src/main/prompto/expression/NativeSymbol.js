@@ -1,13 +1,10 @@
-const Symbol = require("./Symbol").Symbol;
-const Dialect = require("../parser/Dialect").Dialect;
-const TextValue = require("../value/TextValue").TextValue;
 
-class NativeSymbol extends Symbol {
+export default class NativeSymbol extends Symbol {
+
     constructor(id, expression) {
         super(id);
         this.expression = expression;
         this.type = null;
-        return this;
     }
 
     toString() {
@@ -69,6 +66,3 @@ class NativeSymbol extends Symbol {
             return Symbol.prototype.getMemberValue.call(context, name, autoCreate);
     }
 }
-
-
-exports.NativeSymbol = NativeSymbol;

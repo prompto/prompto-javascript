@@ -1,18 +1,8 @@
-const RangeValue = require("./RangeValue").RangeValue;
-const DateValue = require("./DateValue").DateValue;
-const LocalDate = require("../intrinsic/LocalDate").LocalDate;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
 
-let DateType = null;
+export default class DateRange extends RangeValue {
 
-exports.resolve = () => {
-    DateType = require("../type/DateType").DateType;
-};
-
-class DateRange extends RangeValue {
     constructor(left, right) {
         super(DateType.instance, left, right);
-        return this;
     }
 
     size() {
@@ -31,5 +21,3 @@ class DateRange extends RangeValue {
     }
 }
 
-
-exports.DateRange = DateRange;

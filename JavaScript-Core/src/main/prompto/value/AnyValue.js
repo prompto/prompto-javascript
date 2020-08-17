@@ -1,11 +1,9 @@
-const Value = require("./Value").Value;
-const AnyType = require("../type/AnyType").AnyType;
 
-class AnyValue extends Value {
+export default class AnyValue extends Value {
+
     constructor() {
         super(AnyType.instance);
         this.text = null;
-        return this;
     }
 
     toString() {
@@ -15,5 +13,4 @@ class AnyValue extends Value {
 
 AnyValue.prototype.constructor = Value;
 
-exports.AnyValue = AnyValue;
 

@@ -1,36 +1,6 @@
-const SimpleStatement = require("./SimpleStatement").SimpleStatement;
-const MethodFinder = require("../runtime/MethodFinder").MethodFinder;
-const MethodSelector = require("../expression/MethodSelector").MethodSelector;
-const ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-const AbstractMethodDeclaration = require("../declaration/AbstractMethodDeclaration").AbstractMethodDeclaration;
-const ConcreteMethodDeclaration = require("../declaration/ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-const DispatchMethodDeclaration = require("../declaration/DispatchMethodDeclaration").DispatchMethodDeclaration;
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-let MethodDeclarationMap = null;
-const ClosureDeclaration = require("../declaration/ClosureDeclaration").ClosureDeclaration;
-const ClosureValue = require("../value/ClosureValue").ClosureValue;
-const ArrowDeclaration = require("../declaration/ArrowDeclaration").ArrowDeclaration;
-const ArrowValue = require("../value/ArrowValue").ArrowValue;
-const NotMutableError = require("../error/NotMutableError").NotMutableError;
-const PromptoError = require("../error/PromptoError").PromptoError;
-let InstanceContext = null;
-let ThisExpression = null;
-const MethodType = require("../type/MethodType").MethodType;
-const VoidType = require("../type/VoidType").VoidType;
-const Dialect = require("../parser/Dialect").Dialect;
-const BooleanValue = require("../value/BooleanValue").BooleanValue;
-const Identifier = require("../grammar/Identifier").Identifier;
-const CodeParameter = require("../param/CodeParameter").CodeParameter;
-const CodeWriter = require("../utils/CodeWriter").CodeWriter;
-
-exports.resolve = () => {
-    InstanceContext = require("../runtime/Context").InstanceContext;
-    ThisExpression = require("../expression/ThisExpression").ThisExpression;
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-};
 
 
-class MethodCall extends SimpleStatement {
+export default class MethodCall extends SimpleStatement {
   
     constructor(selector, args) {
         super();
@@ -361,6 +331,3 @@ class MethodCall extends SimpleStatement {
 }
 
 var fullDeclareCounter = 0;
-
-
-exports.MethodCall = MethodCall;

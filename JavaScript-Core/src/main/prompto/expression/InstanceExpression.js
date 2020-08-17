@@ -1,29 +1,5 @@
-const Expression = require("./Expression").Expression;
-const Variable = require("../runtime/Variable").Variable;
-const LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
-const Parameter = require("../param/Parameter").Parameter;
-const Dialect = require("../parser/Dialect").Dialect;
-let CategoryDeclaration = null;
-const VoidType = require("../type/VoidType").VoidType;
-const BooleanType = require("../type/BooleanType").BooleanType;
-const MethodType = require("../type/MethodType").MethodType;
-const ClosureValue = require("../value/ClosureValue").ClosureValue;
-const AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-let MethodDeclarationMap = null;
-let InstanceContext = null;
-let EqualsExpression = null;
-const EqOp = require("../grammar/EqOp").EqOp;
-let BooleanLiteral = null;
 
-exports.resolve = () => {
-    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    InstanceContext = require("../runtime/Context").InstanceContext;
-    EqualsExpression = require("./EqualsExpression").EqualsExpression;
-    BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
-}
-
-class InstanceExpression extends Expression {
+export default class InstanceExpression extends Expression {
   
     constructor(id) {
         super();
@@ -164,5 +140,3 @@ class InstanceExpression extends Expression {
     }
 }
 
-
-exports.InstanceExpression = InstanceExpression;

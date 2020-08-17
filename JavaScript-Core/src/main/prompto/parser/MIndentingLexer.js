@@ -1,5 +1,3 @@
-const MLexer = require("./MLexer").MLexer;
-const Dialect = require("./Dialect").Dialect;
 
 function MIndentingLexer(input) {
     MLexer.call(this, input);
@@ -57,7 +55,7 @@ MIndentingLexer.prototype.interpretEOF = function(eof) {
 	}
 	this.tokens.push(eof);
 };
-  
+
 MIndentingLexer.prototype.interpretLFTAB = function(lftab) {
 	// count TABs following LF
 	const indentCount = this.countIndents(lftab.text);
@@ -116,5 +114,5 @@ MIndentingLexer.prototype.interpretAnyToken = function(token) {
 	this.tokens.push(token);
 };
 
-exports.MIndentingLexer = MIndentingLexer;
+export {MIndentingLexer};
 

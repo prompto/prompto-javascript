@@ -1,12 +1,8 @@
-const NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
-const ResourceType = require("../type/ResourceType").ResourceType;
-const NativeResource = require("../value/NativeResource").NativeResource;
-const ResourceContext = require("../runtime/Context").ResourceContext;
 
-class NativeResourceDeclaration extends NativeCategoryDeclaration {
+export default class NativeResourceDeclaration extends NativeCategoryDeclaration {
+
     constructor(id, attributes, categoryBindings, attributeBindings, methods) {
         super(id, attributes, categoryBindings, attributeBindings, methods);
-        return this;
     }
 
     getType(context) {
@@ -36,5 +32,3 @@ class NativeResourceDeclaration extends NativeCategoryDeclaration {
 }
 
 
-
-exports.NativeResourceDeclaration = NativeResourceDeclaration;

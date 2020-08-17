@@ -1,17 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const Identifier = require("../grammar/Identifier").Identifier;
-let UUIDValue = null;
-const UUID = require("../intrinsic/UUID").UUID;
 
-exports.resolve = () => {
-    UUIDValue = require("../value/UUIDValue").UUIDValue;
-}
+export default class UUIDType extends NativeType {
 
-
-class UUIDType extends NativeType {
     constructor() {
         super(new Identifier("Uuid"));
-        return this;
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
@@ -32,5 +23,3 @@ class UUIDType extends NativeType {
 }
 
 UUIDType.instance = new UUIDType();
-
-exports.UUIDType = UUIDType;

@@ -1,3 +1,3 @@
-exports.MatchingPatternConstraint = require("./../constraint/MatchingPatternConstraint").MatchingPatternConstraint;
-exports.MatchingCollectionConstraint = require("./../constraint/MatchingCollectionConstraint").MatchingCollectionConstraint;
-exports.MatchingExpressionConstraint = require("./../constraint/MatchingExpressionConstraint").MatchingExpressionConstraint;
+export {default as MatchingPatternConstraint} from "./MatchingPatternConstraint";
+//export {default as MatchingCollectionConstraint} from "./MatchingCollectionConstraint";
+//export {default as MatchingExpressionConstraint} from "./MatchingExpressionConstraint";

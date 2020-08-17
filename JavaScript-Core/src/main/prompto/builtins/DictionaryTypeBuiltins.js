@@ -1,7 +1,4 @@
-const BuiltInMethodDeclaration = require("../declaration/BuiltInMethodDeclaration").BuiltInMethodDeclaration;
-const DictionaryType = require("../type/DictionaryType").DictionaryType;
-const TextType = require("../type/TextType").TextType;
-
+// don't use export default since more builtins are expected
 class SwapMethodDeclaration extends BuiltInMethodDeclaration {
 
     constructor() {
@@ -23,4 +20,4 @@ class SwapMethodDeclaration extends BuiltInMethodDeclaration {
     }
 }
 
-exports.SwapMethodDeclaration = SwapMethodDeclaration;
+export { SwapMethodDeclaration };

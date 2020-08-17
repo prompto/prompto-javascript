@@ -1,8 +1,8 @@
-class Operator {
+export default class Operator {
+
     constructor(name, token) {
         this.name = name;
         this.token = token;
-        return this;
     }
 
     toString() {
@@ -20,5 +20,3 @@ Operator.MULTIPLY = new Operator("MULTIPLY", "*");
 Operator.DIVIDE = new Operator("DIVIDE", "/");
 Operator.IDIVIDE = new Operator("IDIVIDE", "\\");
 Operator.MODULO = new Operator("MODULO", "%");
-
-exports.Operator = Operator;

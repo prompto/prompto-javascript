@@ -1,12 +1,9 @@
-const IJsxExpression = require("./IJsxExpression").IJsxExpression;
-const TextType = require("../type/TextType").TextType;
-const Entities = require('html-entities').XmlEntities;
 
-class JsxText extends IJsxExpression {
+export default class JsxText extends IJsxExpression {
+
     constructor(text) {
         super();
         this.text = text;
-        return this;
     }
 
     check(context) {
@@ -27,5 +24,3 @@ class JsxText extends IJsxExpression {
         transpiler.append(JSON.stringify(text));
     }
 }
-
-exports.JsxText = JsxText;

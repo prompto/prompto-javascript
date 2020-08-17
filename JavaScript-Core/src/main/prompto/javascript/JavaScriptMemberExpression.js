@@ -1,10 +1,9 @@
-const JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
 
-class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
+export default class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
+
     constructor(id) {
         super();
         this.id = id;
-        return this;
     }
 
     toString() {
@@ -47,5 +46,3 @@ class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
         return o[this.id.name];
     }
 }
-
-exports.JavaScriptMemberExpression = JavaScriptMemberExpression;

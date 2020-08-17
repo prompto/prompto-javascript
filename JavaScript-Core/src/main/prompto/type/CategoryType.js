@@ -1,51 +1,5 @@
-const UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-const Identifier = require("../grammar/Identifier").Identifier;
-let ArgumentList = null;
-let Argument = null;
-let CategoryDeclaration = null;
-let ConcreteCategoryDeclaration = null;
-let SingletonCategoryDeclaration = null;
-let EnumeratedNativeDeclaration = null;
-let EnumeratedCategoryDeclaration = null;
-let EnumeratedCategoryType = null;
-let EnumeratedNativeType = null;
-const ValueExpression = require("../expression/ValueExpression").ValueExpression;
-const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-const Operator = require("../grammar/Operator").Operator;
-const BaseType = require("./BaseType").BaseType;
-const VoidType = require("./VoidType").VoidType;
-const NativeType = require("./NativeType").NativeType;
-const NullType = require("./NullType").NullType;
-const TextType = require("./TextType").TextType;
-const AnyType = require("./AnyType").AnyType;
-const MissingType = require("./MissingType").MissingType;
-const MethodType = require("./MethodType").MethodType;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const MethodCall = require("../statement/MethodCall").MethodCall;
-const MethodSelector = require("../expression/MethodSelector").MethodSelector;
-const MethodFinder = require("../runtime/MethodFinder").MethodFinder;
-const $DataStore = require("../store/DataStore").$DataStore;
-const InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
-const Score = require("../runtime/Score").Score;
-const compareValues = require("../utils/Utils").compareValues;
-let MethodDeclarationMap = null;
 
-exports.resolve = () => {
-    ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-    Argument = require("../grammar/Argument").Argument;
-    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-    ConcreteCategoryDeclaration = require("../declaration/ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-    SingletonCategoryDeclaration = require("../declaration/SingletonCategoryDeclaration").SingletonCategoryDeclaration;
-    EnumeratedNativeDeclaration = require("../declaration/EnumeratedNativeDeclaration").EnumeratedNativeDeclaration;
-    EnumeratedCategoryDeclaration = require("../declaration/EnumeratedCategoryDeclaration").EnumeratedCategoryDeclaration;
-    EnumeratedCategoryType = require("./EnumeratedCategoryType").EnumeratedCategoryType;
-    EnumeratedNativeType = require("./EnumeratedNativeType").EnumeratedNativeType;
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-};
-
-
-class CategoryType extends BaseType {
+export default class CategoryType extends BaseType {
   
     constructor(id, mutable) {
         super(id);
@@ -741,6 +695,3 @@ class CategoryType extends BaseType {
         transpiler.append(")");
     }
 }
-
-
-exports.CategoryType = CategoryType;

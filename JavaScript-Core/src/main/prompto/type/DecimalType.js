@@ -1,17 +1,8 @@
-const NativeType = require("./NativeType").NativeType;
-const BooleanType = require("./BooleanType").BooleanType;
-let IntegerType = null; // circular dependency
-const DecimalValue = require("../value/DecimalValue").DecimalValue;
-const Identifier = require("../grammar/Identifier").Identifier;
 
-exports.resolve = () => {
-	IntegerType = require("./IntegerType").IntegerType;
-}
+export default class DecimalType extends NativeType {
 
-class DecimalType extends NativeType {
     constructor() {
         super(new Identifier("Decimal"));
-        return this;
     }
 
     declare(transpiler) {
@@ -231,5 +222,3 @@ class DecimalType extends NativeType {
 
 DecimalType.instance = new DecimalType();
 
-
-exports.DecimalType = DecimalType;

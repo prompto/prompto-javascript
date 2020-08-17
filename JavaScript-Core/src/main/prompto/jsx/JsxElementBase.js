@@ -1,13 +1,5 @@
-const IJsxExpression = require("./IJsxExpression").IJsxExpression;
-const JsxType = require("../type/JsxType").JsxType;
-const isCharacterUpperCase = require("../utils/Utils").isCharacterUpperCase;
-const CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-const OCleverParser = require("../parser/OCleverParser").OCleverParser;
-const WidgetPropertiesProcessor = require("../processor/WidgetPropertiesProcessor").WidgetPropertiesProcessor;
-const TypeLiteral = require("../literal/TypeLiteral").TypeLiteral;
-const AnyType = require("../type/AnyType").AnyType;
 
-class JsxElementBase extends IJsxExpression {
+export default class JsxElementBase extends IJsxExpression {
   
     constructor(id, properties) {
         super();
@@ -328,4 +320,3 @@ const HTML_PROPERTY_TYPES = `{
 let HTML_PROPERTIES_MAP = null;
 let HTML_TEST_MODE = false;
 
-exports.JsxElementBase = JsxElementBase;

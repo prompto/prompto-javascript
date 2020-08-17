@@ -1,16 +1,11 @@
-const ConcreteCategoryDeclaration = require("./ConcreteCategoryDeclaration").ConcreteCategoryDeclaration;
-const getTypeName = require("../javascript/JavaScriptUtils").getTypeName;
-const NativeInstance = require("../value/NativeInstance").NativeInstance;
-const JavaScriptNativeCategoryBinding = require("../javascript/JavaScriptNativeCategoryBinding").JavaScriptNativeCategoryBinding;
-const CategoryType = require("../type/CategoryType").CategoryType;
 
-class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
+export default class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
+
     constructor(id, attributes, categoryBindings, attributeBindings, methods) {
         super(id, attributes, null, methods);
         this.categoryBindings = categoryBindings;
         this.attributeBindings = attributeBindings;
         this.bound = null;
-        return this;
     }
 
     register(context) {
@@ -144,5 +139,3 @@ class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
         return null;
     }
 }
-
-exports.NativeCategoryDeclaration = NativeCategoryDeclaration;

@@ -1,17 +1,8 @@
-const RangeValue = require("./RangeValue").RangeValue;
-const IndexOutOfRangeError = require("../error/IndexOutOfRangeError").IndexOutOfRangeError;
-let CharacterValue = null;
-let CharacterType = null;
 
-exports.resolve = () => {
-    CharacterValue = require("./CharacterValue").CharacterValue;
-    CharacterType = require("../type/CharacterType").CharacterType;
-}
+export default class CharacterRange extends RangeValue {
 
-class CharacterRange extends RangeValue {
     constructor(left, right) {
         super(CharacterType.instance, left, right);
-        return this;
     }
 
     size() {
@@ -27,14 +18,3 @@ class CharacterRange extends RangeValue {
         }
     }
 }
-
-/*
-@Override
-public RangeValue<CharacterValue> newInstance(CharacterValue left, CharacterValue right) {
-	return new CharacterRange(left, right);
-}
-
-
-*/
-
-exports.CharacterRange = CharacterRange;

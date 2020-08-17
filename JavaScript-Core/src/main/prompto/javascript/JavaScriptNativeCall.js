@@ -1,10 +1,9 @@
-const NativeCall = require("../statement/NativeCall").NativeCall;
 
-class JavaScriptNativeCall extends NativeCall {
+export default class JavaScriptNativeCall extends NativeCall {
+
     constructor(statement, module) {
         super();
         this.statement = statement;
-        return this;
     }
 
     toString() {
@@ -32,6 +31,3 @@ class JavaScriptNativeCall extends NativeCall {
         this.statement.declare(transpiler);
     }
 }
-
-exports.JavaScriptNativeCall = JavaScriptNativeCall;
-

@@ -1,6 +1,6 @@
-const Location = require("./Location").Location;
 
-class Section {
+
+export default class Section {
 
     constructor(section) {
         section = section || { path : "", start : null, end : null, dialect : null, breakpoint : null };
@@ -32,5 +32,3 @@ class Section {
         return { path : this.path, start : this.start.asObject(), end : this.end.asObject(), dialect : this.dialect.name, breakpoint : this.breakpoint };
     }
 }
-
-exports.Section = Section;

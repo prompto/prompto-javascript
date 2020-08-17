@@ -1,10 +1,9 @@
-const NativeCall = require("../statement/NativeCall").NativeCall;
 
-class JavaNativeCall extends NativeCall {
+export default class JavaNativeCall extends NativeCall {
+
     constructor(statement) {
         super();
         this.statement = statement;
-        return this;
     }
 
     toDialect(writer) {
@@ -12,6 +11,3 @@ class JavaNativeCall extends NativeCall {
         this.statement.toDialect(writer);
     }
 }
-
-exports.JavaNativeCall = JavaNativeCall;
-

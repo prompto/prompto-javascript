@@ -1,11 +1,9 @@
-const NotMutableError = require("../error/NotMutableError").NotMutableError;
-const AnyType = require("../type/AnyType").AnyType;
 
-class ItemInstance {
+export default class ItemInstance {
+
     constructor(item) {
         this.parent = null;
         this.item = item;
-        return this;
     }
 
     toString() {
@@ -92,6 +90,3 @@ class ItemInstance {
         transpiler.append(", true)");
     }
 }
-
-
-exports.ItemInstance = ItemInstance;

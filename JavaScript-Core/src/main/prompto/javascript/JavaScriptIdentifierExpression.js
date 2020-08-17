@@ -1,8 +1,5 @@
-const JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
-const PromptoError = require("../error/PromptoError").PromptoError;
-const $DataStore = require("../store/DataStore").$DataStore;
 
-class JavaScriptIdentifierExpression extends JavaScriptExpression {
+export default class JavaScriptIdentifierExpression extends JavaScriptExpression {
    
     constructor(id) {
         super();
@@ -99,5 +96,3 @@ class JavaScriptIdentifierExpression extends JavaScriptExpression {
         }
     }
 }
-
-exports.JavaScriptIdentifierExpression = JavaScriptIdentifierExpression;

@@ -1,11 +1,10 @@
-const Expression = require("./Expression").Expression;
 
-class PlusExpression extends Expression {
+export default class PlusExpression extends Expression {
+
     constructor(left, right) {
         super();
         this.left = left;
         this.right = right;
-        return this;
     }
 
     toString() {
@@ -42,6 +41,3 @@ class PlusExpression extends Expression {
         return lt.transpileAdd(transpiler, rt, true, this.left, this.right);
     }
 }
-
-exports.PlusExpression = PlusExpression;
-

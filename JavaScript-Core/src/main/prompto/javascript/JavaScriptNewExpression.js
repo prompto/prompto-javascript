@@ -1,6 +1,5 @@
-const JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
 
-class JavaScriptNewExpression extends JavaScriptExpression {
+export default class JavaScriptNewExpression extends JavaScriptExpression {
 
     constructor(method) {
         super();
@@ -25,5 +24,3 @@ class JavaScriptNewExpression extends JavaScriptExpression {
         this.method.toDialect(writer);
     }
 }
-
-exports.JavaScriptNewExpression = JavaScriptNewExpression;

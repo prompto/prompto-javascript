@@ -1,26 +1,11 @@
-const SyntaxError = require("../error/SyntaxError").SyntaxError;
-const SelectorExpression = require("./SelectorExpression").SelectorExpression;
-let MemberSelector = null;
-let MethodSelector = null;
-let UnresolvedCall = null;
-let UnresolvedIdentifier = null;
-const AnyType = require("../type/AnyType").AnyType;
-const ProblemListener = require("../problem/ProblemListener").ProblemListener;
-
-exports.resolve = () => {
-    MemberSelector = require("./MemberSelector").MemberSelector;
-    MethodSelector = require("./MethodSelector").MethodSelector;
-    UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
-    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-}
 
 
-class UnresolvedSelector extends SelectorExpression {
+export default class UnresolvedSelector extends SelectorExpression {
+
     constructor(parent, id) {
         super(parent);
         this.id = id;
         this.resolved = null;
-        return this;
     }
 
     get name() {
@@ -136,7 +121,4 @@ class UnresolvedSelector extends SelectorExpression {
         this.resolved.transpile(transpiler);
     }
 }
-
-
-exports.UnresolvedSelector = UnresolvedSelector;
 

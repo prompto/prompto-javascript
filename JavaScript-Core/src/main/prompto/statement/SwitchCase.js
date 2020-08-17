@@ -1,11 +1,10 @@
-const Section = require("../parser/Section").Section;
 
-class SwitchCase extends Section {
+export default class SwitchCase extends Section {
+
     constructor(expression, statements) {
         super();
         this.expression = expression;
         this.statements = statements;
-        return this;
     }
 
     checkReturnType(context) {
@@ -30,5 +29,3 @@ class SwitchCase extends Section {
         return this.statements ? this.statements.locateSectionAtLine(line) : null;
     }
 }
-
-exports.SwitchCase = SwitchCase;

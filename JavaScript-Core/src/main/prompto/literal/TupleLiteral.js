@@ -1,11 +1,6 @@
-const Literal = require("./Literal").Literal;
-const TupleType = require("../type/TupleType").TupleType;
-const TupleValue = require("../value/TupleValue").TupleValue;
-const ExpressionList = require("../utils/ExpressionList").ExpressionList;
-const List = require("../intrinsic/List").List;
-const Tuple = require("../intrinsic/Tuple").Tuple;
 
-class TupleLiteral extends Literal {
+export default class TupleLiteral extends Literal {
+
     constructor(mutable, expressions) {
         if(typeof(mutable)!=typeof(true))
             throw "mutable!";
@@ -13,7 +8,6 @@ class TupleLiteral extends Literal {
         super("(" + expressions.toString() + ")", new TupleValue());
         this.mutable = mutable;
         this.expressions = expressions;
-        return this;
     }
 
     check(context) {
@@ -58,6 +52,3 @@ class TupleLiteral extends Literal {
             writer.append("()");
     }
 }
-
-
-exports.TupleLiteral = TupleLiteral;

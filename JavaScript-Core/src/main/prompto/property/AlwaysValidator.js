@@ -1,11 +1,5 @@
-const PropertyValidator = require("./PropertyValidator").PropertyValidator;
-const AnyType = require("../type/AnyType").AnyType;
 
-class AlwaysValidator extends PropertyValidator {
-    constructor() {
-        super();
-        return this;
-    }
+export default class AlwaysValidator extends PropertyValidator {
 
     getType(context) {
         return AnyType.instance;
@@ -18,5 +12,3 @@ class AlwaysValidator extends PropertyValidator {
 
 
 AlwaysValidator.instance = new AlwaysValidator();
-
-exports.AlwaysValidator = AlwaysValidator;

@@ -1,7 +1,5 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
 
-function InvalidResourceError(message) {
+export default function InvalidResourceError(message) {
 	ExecutionError.call(this, message);
 	return this;
 }
@@ -12,5 +10,3 @@ InvalidResourceError.prototype.constructor = InvalidResourceError;
 InvalidResourceError.prototype.getExpression = function(context) {
 	return new TextLiteral(this.message);
 };
-
-exports.InvalidResourceError = InvalidResourceError;

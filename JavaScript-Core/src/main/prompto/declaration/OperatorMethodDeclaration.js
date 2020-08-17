@@ -1,9 +1,6 @@
-const ConcreteMethodDeclaration = require("./ConcreteMethodDeclaration").ConcreteMethodDeclaration;
-const ParameterList = require("../param/ParameterList").ParameterList;
-const Identifier = require("../grammar/Identifier").Identifier;
-const VoidType = require("../type/VoidType").VoidType;
 
-class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
+export default class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
+
     constructor(op, arg, returnType, stmts) {
         super(
             new Identifier("operator_" + op.name),
@@ -12,7 +9,6 @@ class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
             stmts
         );
         this.operator = op;
-        return this;
     }
 
     memberCheck(declaration, context) {
@@ -57,5 +53,3 @@ class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
         writer.dedent().append("}").newLine();
     }
 }
-
-exports.OperatorMethodDeclaration = OperatorMethodDeclaration;

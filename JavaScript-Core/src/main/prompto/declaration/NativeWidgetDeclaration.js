@@ -1,9 +1,8 @@
-const NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
 
-class NativeWidgetDeclaration extends NativeCategoryDeclaration {
+export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
+
     constructor(name, categoryBindings, methods) {
         super(name, null, categoryBindings, null, methods);
-        return this;
     }
 
     isWidget(context) {
@@ -59,8 +58,3 @@ class NativeWidgetDeclaration extends NativeCategoryDeclaration {
         return true;
     }
 }
-
-NativeWidgetDeclaration.prototype.constructor = NativeCategoryDeclaration;
-
-
-exports.NativeWidgetDeclaration = NativeWidgetDeclaration;

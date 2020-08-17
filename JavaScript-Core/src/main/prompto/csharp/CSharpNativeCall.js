@@ -1,10 +1,9 @@
-const NativeCall = require("../statement/NativeCall").NativeCall;
 
-class CSharpNativeCall extends NativeCall {
+export default class CSharpNativeCall extends NativeCall {
+
     constructor(statement) {
         super();
         this.statement = statement;
-        return this;
     }
 
     toDialect(writer) {
@@ -13,5 +12,3 @@ class CSharpNativeCall extends NativeCall {
     }
 }
 
-
-exports.CSharpNativeCall = CSharpNativeCall;

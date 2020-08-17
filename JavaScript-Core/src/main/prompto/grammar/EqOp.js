@@ -1,7 +1,7 @@
-class EqOp {
+export default class EqOp {
+
     constructor(name) {
         this.name = name
-        return this;
     }
 
     toDialect(writer) {
@@ -110,5 +110,3 @@ EqOp.NOT_CONTAINS.toMDialect = EqOp.NOT_CONTAINS.toEDialect;
 EqOp.NOT_CONTAINS.toEString = () => 'not contains';
 EqOp.NOT_CONTAINS.toOString = EqOp.NOT_CONTAINS.toEString;
 EqOp.NOT_CONTAINS.toMString = EqOp.NOT_CONTAINS.toEString;
-
-exports.EqOp = EqOp;

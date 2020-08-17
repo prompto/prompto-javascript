@@ -1,10 +1,9 @@
-const NativeType = require("./NativeType").NativeType;
 
-class IterableType extends NativeType {
+export default class IterableType extends NativeType {
+
     constructor(id, itemType) {
         super(id);
         this.itemType = itemType;
-        return this;
     }
 
     isMoreSpecificThan(context, other) {
@@ -13,5 +12,4 @@ class IterableType extends NativeType {
     }
 }
 
-exports.IterableType = IterableType;
 

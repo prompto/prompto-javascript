@@ -1,5 +1,3 @@
-class NativeCategoryBinding {
+export default class NativeCategoryBinding {
 }
 
-
-exports.NativeCategoryBinding = NativeCategoryBinding;

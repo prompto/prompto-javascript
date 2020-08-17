@@ -1,11 +1,10 @@
-const TextValue = require("../value/TextValue").TextValue;
 
 /*jshint evil:true*/
 function unescape(text) {
     return eval(text);
 }
 
-class DocTextKey {
+export default class DocTextKey {
   
     constructor(text) {
         this.text = text;
@@ -27,5 +26,3 @@ class DocTextKey {
         return new TextValue(this.stringValue());
     }
 }
-
-exports.DocTextKey = DocTextKey;
