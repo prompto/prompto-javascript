@@ -46,3 +46,4 @@ export {default as CategorySymbol} from "./CategorySymbol";
 export {default as UnresolvedSelector} from "./UnresolvedSelector";
 export {default as ArrowExpression} from "./ArrowExpression";
 export {default as ValueExpression} from "./ValueExpression";
+export default {}

@@ -25,3 +25,4 @@ export {default as DispatchMethodDeclaration} from "./DispatchMethodDeclaration"
 export {default as BuiltInMethodDeclaration} from "./BuiltInMethodDeclaration";
 export {default as ArrowDeclaration} from "./ArrowDeclaration";
 export {default as ClosureDeclaration} from "./ClosureDeclaration";
+export default {}

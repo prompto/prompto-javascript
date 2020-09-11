@@ -1,3 +1,7 @@
+import { Identifier } from "../grammar/index"
+import { Variable } from "../runtime/index"
+import { InvalidDataError } from "../error/index"
+import { StrictSet } from "../intrinsic/index"
 
 export default class MatchingCollectionConstraint {
 

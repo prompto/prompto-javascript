@@ -1,3 +1,7 @@
+import { Identifier } from "../grammar/index"
+import { Variable } from "../runtime/index"
+import { AnyType } from "../type/index"
+import { InvalidDataError } from "../error/index"
 
 export default class MatchingExpressionConstraint {
 
