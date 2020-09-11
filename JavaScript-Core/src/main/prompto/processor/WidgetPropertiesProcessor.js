@@ -1,3 +1,10 @@
+import AnnotationProcessor from "./AnnotationProcessor"
+import { PropertiesType, AnyType, TextType, TypeType } from "../type/index"
+import { TextLiteral, BooleanLiteral, DocumentLiteral, TypeLiteral, SetLiteral } from "../literal/index"
+import { InternalError } from "../error/index"
+import { Identifier } from "../grammar/index"
+import { PropertyMap, Property, ValueSetValidator, TypeSetValidator, TypeValidator } from "../property/index"
+import { NullValue, BooleanValue } from "../value/index"
 
 export default class WidgetPropertiesProcessor extends AnnotationProcessor {
   

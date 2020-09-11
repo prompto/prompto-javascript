@@ -8,3 +8,4 @@ export {default as JsxProperty} from "./JsxProperty";
 export {default as JsxLiteral} from "./JsxLiteral";
 export {default as JsxCode} from "./JsxCode";
 export {default as JsxText} from "./JsxText";
+export default {}

@@ -24,7 +24,7 @@ export {default as IteratorValue} from './IteratorValue';
 export {default as CursorValue} from './CursorValue';
 export {default as TypeValue} from './TypeValue';
 export {default as ClosureValue} from './ClosureValue';
-// export {default as JsxValue} from './JsxValue';
+export {default as JsxValue} from './JsxValue';
 export {default as IntegerRange} from './IntegerRange';
 export {default as CharacterRange} from './CharacterRange';
 export {default as Instance} from './Instance';

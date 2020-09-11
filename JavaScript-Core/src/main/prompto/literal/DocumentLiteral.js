@@ -1,4 +1,8 @@
-
+import Literal from "./Literal"
+import { DocEntryList } from "./index"
+import { DocumentValue, DecimalValue, TextValue } from "../value/index"
+import { Document } from "../intrinsic/index"
+import { DocumentType, DecimalType, IntegerType, TextType, CharacterType } from "../type/index"
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.

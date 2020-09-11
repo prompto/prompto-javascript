@@ -1,3 +1,9 @@
+import Literal from "./Literal"
+import { TypeType } from "../type/index"
+import { TypeValue } from "../value/index"
+import { Dialect } from "../parser/index"
+import { MethodDeclarationMap } from "../runtime/index"
+import { Type } from "../intrinsic/index"
 
 export default class TypeLiteral extends Literal {
   

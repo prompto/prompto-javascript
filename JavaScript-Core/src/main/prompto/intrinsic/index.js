@@ -14,4 +14,5 @@ export {default as StrictSet} from "./StrictSet";
 // export {default as Tuple} from "./Tuple";
 export {default as UUID} from "./UUID";
 export {default as Version} from "./Version";
+export {default as Type} from "./Type";
 export default {}

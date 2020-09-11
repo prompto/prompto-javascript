@@ -1,3 +1,4 @@
+import { AlwaysValidator } from "./index"
 
 export default class Property {
 

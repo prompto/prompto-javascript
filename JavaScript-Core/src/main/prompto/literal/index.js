@@ -1,3 +1,4 @@
+export {default as Literal} from './Literal';
 // export {default as NullLiteral} from './NullLiteral';
 export {default as BooleanLiteral} from './BooleanLiteral';
 // export {default as CharacterLiteral} from './CharacterLiteral';
@@ -9,10 +10,10 @@ export {default as IntegerLiteral} from './IntegerLiteral';
 export {default as TextLiteral} from './TextLiteral';
 // export {default as TupleLiteral} from './TupleLiteral';
 // export {default as ListLiteral} from './ListLiteral';
-// export {default as SetLiteral} from './SetLiteral';
+export {default as SetLiteral} from './SetLiteral';
 // export {default as RangeLiteral} from './RangeLiteral';
-// export {default as DocumentLiteral} from './DocumentLiteral';
-// export {default as DocEntryList} from './DocEntryList';
+export {default as DocumentLiteral} from './DocumentLiteral';
+export {default as DocEntryList} from './DocEntryList';
 // export {default as DocEntry} from './DocEntry';
 // export {default as DocTextKey} from './DocTextKey';
 // export {default as DocIdentifierKey} from './DocIdentifierKey';
@@ -27,6 +28,4 @@ export {default as TextLiteral} from './TextLiteral';
 // export {default as PeriodLiteral} from './PeriodLiteral';
 // export {default as VersionLiteral} from './VersionLiteral';
 // export {default as UUIDLiteral} from './UUIDLiteral';
-// export {default as TypeLiteral} from './TypeLiteral';
-/*
-require('./TextLiteral';*/
+export {default as TypeLiteral} from './TypeLiteral';

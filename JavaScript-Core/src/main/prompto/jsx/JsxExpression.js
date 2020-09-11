@@ -1,3 +1,6 @@
+import IJsxExpression from "./IJsxExpression"
+import { ArrowExpression } from "../expression/index"
+import { Literal } from "../literal/index"
 
 export default class JsxExpression extends IJsxExpression {
 

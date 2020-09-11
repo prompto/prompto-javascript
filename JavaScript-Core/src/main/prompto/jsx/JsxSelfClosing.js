@@ -1,3 +1,4 @@
+import JsxElementBase from "./JsxElementBase"
 
 export default class JsxSelfClosing extends JsxElementBase {
 

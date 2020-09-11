@@ -1,3 +1,4 @@
+import PropertyValidator from "./PropertyValidator"
 
 export default class RequiredValidator extends PropertyValidator {
 

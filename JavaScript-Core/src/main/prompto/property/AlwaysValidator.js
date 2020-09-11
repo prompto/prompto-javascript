@@ -1,3 +1,5 @@
+import PropertyValidator from "./PropertyValidator"
+import { AnyType } from "../type/index"
 
 export default class AlwaysValidator extends PropertyValidator {
 
@@ -9,6 +11,5 @@ export default class AlwaysValidator extends PropertyValidator {
         // accept any property
     }
 }
-
 
 AlwaysValidator.instance = new AlwaysValidator();

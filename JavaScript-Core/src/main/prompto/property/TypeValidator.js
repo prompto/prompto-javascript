@@ -1,3 +1,6 @@
+import PropertyValidator from "./PropertyValidator"
+import { MethodType } from "../type/index"
+import { MethodDeclarationMap } from "../runtime/index"
 
 export default class TypeValidator extends PropertyValidator {
 

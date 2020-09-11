@@ -1,3 +1,7 @@
+import BaseType from "./BaseType"
+import { DocumentType } from "./index"
+import { Identifier } from "../grammar/index"
+import { Document, List } from "../intrinsic/index"
 
 /* transient type for holding child property structure */
 export default class PropertiesType extends BaseType {

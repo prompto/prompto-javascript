@@ -1,3 +1,5 @@
+import JsxElementBase from "./JsxElementBase"
+import { JsxType } from "../type/index"
 
 export default class JsxElement extends JsxElementBase {
 

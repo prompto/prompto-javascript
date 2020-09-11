@@ -1,3 +1,4 @@
+import { TextType, VoidType } from "../type/index"
 
 export default class JsxLiteral {
 
