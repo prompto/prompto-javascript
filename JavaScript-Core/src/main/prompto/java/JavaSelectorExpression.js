@@ -1,3 +1,4 @@
+import JavaExpression from "./JavaExpression"
 
 export default class JavaSelectorExpression extends JavaExpression {
 

@@ -1,3 +1,4 @@
+import JavaLiteral from "./JavaLiteral"
 
 export default class JavaIntegerLiteral extends JavaLiteral {
 

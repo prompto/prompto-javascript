@@ -4,9 +4,9 @@ export {default as declaration} from  './declaration/index';
 export {default as error} from  './error/index';
 export {default as expression} from  './expression/index';
 export {default as grammar} from  './grammar/index';
-export {default as instance} from  './instance/index'; /*
+export {default as instance} from  './instance/index'; 
 export {default as intrinsic} from  './intrinsic/index';
-export {default as java} from  './java/index';
+export {default as java} from  './java/index'; /*
 export {default as jsx} from  './jsx/index';
 export {default as literal} from  './literal/index';
 export {default as memstore} from  './memstore/index';

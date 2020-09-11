@@ -11,4 +11,4 @@ export {default as JavaExpressionList} from'./JavaExpressionList';
 export {default as JavaThisExpression} from'./JavaThisExpression';
 export {default as JavaMethodExpression} from'./JavaMethodExpression';
 export {default as JavaNativeCategoryBinding} from"./JavaNativeCategoryBinding";
-
+export default {}

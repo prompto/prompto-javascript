@@ -1,3 +1,4 @@
+import JavaSelectorExpression from "./JavaSelectorExpression"
 
 export default class JavaItemExpression extends JavaSelectorExpression {
 

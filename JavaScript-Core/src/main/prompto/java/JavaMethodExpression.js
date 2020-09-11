@@ -1,3 +1,5 @@
+import JavaSelectorExpression from "./JavaSelectorExpression"
+import { JavaExpressionList } from "./index"
 
 export default class JavaMethodExpression extends JavaSelectorExpression {
 
