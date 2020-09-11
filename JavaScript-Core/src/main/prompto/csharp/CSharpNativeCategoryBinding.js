@@ -1,3 +1,4 @@
+import NativeCategoryBinding from "../grammar/NativeCategoryBinding"
 
 export default class CSharpNativeCategoryBinding extends NativeCategoryBinding {
 

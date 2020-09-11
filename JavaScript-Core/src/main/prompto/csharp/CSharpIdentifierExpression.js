@@ -1,3 +1,4 @@
+import CSharpExpression from "./CSharpExpression"
 
 export default class CSharpIdentifierExpression extends CSharpExpression {
 

@@ -1,12 +1,13 @@
+import ObjectList from "../utils/ObjectList"
 
 export default class CSharpExpressionList extends ObjectList {
+  
     constructor(expression) {
         super();
         expression = expression || null;
         if(expression!==null) {
             this.add(expression);
         }
-        return this;
     }
 
     toDialect(writer) {

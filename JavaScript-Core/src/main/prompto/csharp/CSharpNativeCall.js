@@ -1,3 +1,4 @@
+import NativeCall from "../statement/NativeCall"
 
 export default class CSharpNativeCall extends NativeCall {
 
