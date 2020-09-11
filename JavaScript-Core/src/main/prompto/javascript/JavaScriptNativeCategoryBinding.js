@@ -1,3 +1,4 @@
+import NativeCategoryBinding from "../grammar/NativeCategoryBinding"
 
 if(global && !global.Event)
     global.Event = () => {};

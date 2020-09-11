@@ -1,3 +1,5 @@
+import Value from "./Value"
+import { IteratorType } from "../type/index"
 
 /* thin wrapper to expose an iterator as a prompto value */
 export default class IteratorValue extends Value {

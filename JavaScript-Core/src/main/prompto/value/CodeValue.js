@@ -1,3 +1,5 @@
+import Value from "./Value"
+import { CodeType } from "../type/index"
 
 export default class CodeValue extends Value {
 

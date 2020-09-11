@@ -1,3 +1,4 @@
+import Section from "../parser/Section"
 
 export default class BaseStatement extends Section {
   

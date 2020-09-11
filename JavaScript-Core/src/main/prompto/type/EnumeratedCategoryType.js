@@ -1,3 +1,6 @@
+import CategoryType from "./CategoryType"
+import { TextType, ListType } from "./index"
+import { SymbolOfMethodDeclaration } from "../builtins/EnumeratedCategoryTypeBuiltins"
 
 export default class EnumeratedCategoryType extends CategoryType {
   
@@ -19,7 +22,7 @@ export default class EnumeratedCategoryType extends CategoryType {
         if ("name"==name) {
             return TextType.instance;
         } else {
-            return CategoryType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -27,7 +30,7 @@ export default class EnumeratedCategoryType extends CategoryType {
         if ("symbols"==name) {
             return new ListType(this);
         } else {
-            return CategoryType.prototype.checkStaticMember.call(this, context, section, name);
+            return super.checkStaticMember(context, section, name);
         }
     }
 
@@ -36,14 +39,14 @@ export default class EnumeratedCategoryType extends CategoryType {
             const decl = transpiler.context.getRegisteredDeclaration(this.name);
             transpiler.declare(decl);
         } else
-            BaseType.prototype.declareStaticMember.call(this, transpiler, section, name);
+            super.declareStaticMember(transpiler, section, name);
     }
 
     transpileStaticMember(transpiler, name) {
         if ("symbols"==name) {
             transpiler.append(name);
         } else {
-            return BaseType.prototype.transpileStaticMember.call(this, transpiler, name);
+            return super.transpileStaticMember(transpiler, name);
         }
     }
 
@@ -62,7 +65,6 @@ export default class EnumeratedCategoryType extends CategoryType {
     getStaticMemberMethods(context, name) {
         switch (name) {
             case "symbolOf":
-                const SymbolOfMethodDeclaration = require("../builtins/EnumeratedCategoryTypeBuiltins").SymbolOfMethodDeclaration;
                 return [new SymbolOfMethodDeclaration(this)];
             default:
                 return [];

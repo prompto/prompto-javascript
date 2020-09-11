@@ -1,5 +1,15 @@
+import CategoryType from "../type/CategoryType"
+import { NativeInstance, NullValue } from "../value/index"
+import { AnyNativeCategoryDeclaration } from "../declaration/index"
+import { AnyType, ListType, DocumentType, IntegerType, DecimalType, BooleanType, TextType, PeriodType, 
+    IteratorType, DateTimeType, DateType, TimeType, VersionType, UUIDType } from "../type/index"
+import { ListValue, DocumentValue, Value, IteratorValue } from "../value/index"
+import { Identifier } from "../grammar/index"
+import { getTypeName } from "../utils/index"
+import { InternalError } from "../error/index"
+import { LocalTime, LocalDate, DateTime, Period, UUID, Version } from "../intrinsic/index"
 
-export default class JavaScriptType extends type.CategoryType {
+export default class JavaScriptType extends CategoryType {
   
     constructor(name) {
         super(name);
@@ -43,7 +53,7 @@ export default class JavaScriptType extends type.CategoryType {
             res = this.convertCategory(context, value, klass, returnType);
         if(res)
             return res;
-        else if(returnType==type.AnyType.instance) {
+        else if(returnType==AnyType.instance) {
             return new NativeInstance(AnyNativeCategoryDeclaration.instance, value);
         } else {
             // when running under nodeunit, process.stdout is sometimes a WriteStream rather than a Socket
@@ -66,7 +76,7 @@ export default class JavaScriptType extends type.CategoryType {
     }
 
     convertIterator(context, value, klass, returnType) {
-        if(returnType instanceof type.IteratorType && value.hasNext!==undefined && value.next!==undefined) {
+        if(returnType instanceof IteratorType && value.hasNext!==undefined && value.next!==undefined) {
             const self = this;
             const converting = {
                 hasNext : function() { return value.hasNext(); },
@@ -90,9 +100,9 @@ export default class JavaScriptType extends type.CategoryType {
     }
 
     convertList(context, value, klass, returnType) {
-        const maybeList = returnType instanceof type.ListType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+        const maybeList = returnType instanceof ListType || returnType instanceof AnyType || (returnType && returnType.toString()==="Any");
         if(maybeList && (klass==="Array" || klass==="List")) {
-            const itemType = returnType instanceof type.ListType ? returnType.itemType : type.AnyType.instance;
+            const itemType = returnType instanceof ListType ? returnType.itemType : AnyType.instance;
             const items = value.map(function(item) {
                 klass = getTypeName(item);
                 return this.doConvertJavaScriptValueToPromptoValue(context, item, klass, itemType);
@@ -103,13 +113,13 @@ export default class JavaScriptType extends type.CategoryType {
     }
 
     convertDocument(context, value, klass, returnType) {
-        const maybeDoc = returnType instanceof type.DocumentType || returnType instanceof type.AnyType || (returnType && returnType.toString()==="Any");
+        const maybeDoc = returnType instanceof DocumentType || returnType instanceof AnyType || (returnType && returnType.toString()==="Any");
         if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
             const doc = new DocumentValue();
             Object.getOwnPropertyNames(value).forEach(function(name) {
                 let item = value[name];
                 klass = getTypeName(item);
-                item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, type.AnyType.instance);
+                item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, AnyType.instance);
                 doc.setMember(context, new Identifier(name), item);
             }, this);
             return doc;
@@ -123,9 +133,9 @@ export default class JavaScriptType extends type.CategoryType {
             return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
         } else if(klass=='number') {
             if (Number.isInteger(value)) {
-                return type.IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
+                return IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
             } else {
-                return type.DecimalType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
+                return DecimalType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
             }
         } else
             return null;
@@ -141,16 +151,16 @@ export default class JavaScriptType extends type.CategoryType {
 
 
 JavaScriptType.scriptToTypeMap = {
-    'string': type.TextType.instance,
-    'boolean': type.BooleanType.instance,
-    'Date' : type.DateTimeType.instance,
-    'object': type.AnyType.instance
+    'string': TextType.instance,
+    'boolean': BooleanType.instance,
+    'Date' : DateTimeType.instance,
+    'object': AnyType.instance
 };
 
 // workaround webpack name mangling
-JavaScriptType.scriptToTypeMap[intrinsic.LocalDate.name] = type.DateType.instance;
-JavaScriptType.scriptToTypeMap[intrinsic.LocalTime.name] = type.TimeType.instance;
-JavaScriptType.scriptToTypeMap[intrinsic.DateTime.name] = type.DateTimeType.instance;
-JavaScriptType.scriptToTypeMap[intrinsic.Period.name] = type.PeriodType.instance;
-JavaScriptType.scriptToTypeMap[intrinsic.UUID.name] = type.UUIDType.instance;
-JavaScriptType.scriptToTypeMap[intrinsic.Version.name] = type.VersionType.instance;
+JavaScriptType.scriptToTypeMap[LocalDate.name] = DateType.instance;
+JavaScriptType.scriptToTypeMap[LocalTime.name] = TimeType.instance;
+JavaScriptType.scriptToTypeMap[DateTime.name] = DateTimeType.instance;
+JavaScriptType.scriptToTypeMap[Period.name] = PeriodType.instance;
+JavaScriptType.scriptToTypeMap[UUID.name] = UUIDType.instance;
+JavaScriptType.scriptToTypeMap[Version.name] = VersionType.instance;

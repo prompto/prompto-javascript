@@ -1,3 +1,10 @@
+import BaseStatement from "./BaseStatement"
+import { Dialect } from "../parser/index"
+import { VoidType, MethodType, CategoryType } from "../type/index"
+import { CodeWriter } from "../utils/index"
+import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from "../expression/index"
+import { MethodCall } from "../statement/index"
+import { CategoryDeclaration } from "../declaration/index"
 
 export default class UnresolvedCall extends BaseStatement {
  

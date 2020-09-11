@@ -1,3 +1,4 @@
+import NativeType from "./NativeType"
 
 export default class IterableType extends NativeType {
 

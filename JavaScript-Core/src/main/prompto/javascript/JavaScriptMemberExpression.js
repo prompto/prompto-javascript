@@ -1,3 +1,4 @@
+import JavaScriptSelectorExpression from "./JavaScriptSelectorExpression"
 
 export default class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
 

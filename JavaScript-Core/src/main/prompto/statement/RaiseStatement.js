@@ -1,3 +1,8 @@
+import SimpleStatement from "./SimpleStatement"
+import { Dialect } from "../parser/index"
+import { Identifier } from "../grammar/index"
+import { VoidType, CategoryType } from "../type/index"
+import { UserError } from "../error/index"
 
 export default class RaiseStatement extends SimpleStatement {
 

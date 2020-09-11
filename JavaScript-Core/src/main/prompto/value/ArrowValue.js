@@ -1,3 +1,4 @@
+import ContextualExpression from "./ContextualExpression"
 
 export default class ArrowValue extends ContextualExpression {
 

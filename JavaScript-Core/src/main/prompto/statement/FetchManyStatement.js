@@ -1,3 +1,7 @@
+import FetchManyExpression from "../expression/FetchManyExpression"
+import { Variable } from "../runtime/index"
+import { VoidType, CursorType } from "../type/index"
+import { Dialect } from "../parser/index"
 
 export default class FetchManyStatement extends FetchManyExpression {
 

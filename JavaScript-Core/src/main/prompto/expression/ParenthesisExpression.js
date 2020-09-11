@@ -1,3 +1,4 @@
+import Expression from "./Expression"
 
 export default class ParenthesisExpression extends Expression {
   

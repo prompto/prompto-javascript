@@ -1,3 +1,5 @@
+import { $DataStore } from "../store/index"
+import { StoredDocument } from "./index"
 
 export default class StorableDocument {
 

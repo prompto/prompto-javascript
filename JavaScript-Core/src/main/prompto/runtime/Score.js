@@ -1,7 +1,11 @@
-export default class Score(value, name) {
-	this.value = value;
-	this.name = name;
-	return this;
+export default class Score {
+
+	constructor(value, name) {
+		this.value = value;
+		this.name = name;
+		return this;
+	}
+
 }
 
 Score.BETTER = new Score(1, "BETTER");

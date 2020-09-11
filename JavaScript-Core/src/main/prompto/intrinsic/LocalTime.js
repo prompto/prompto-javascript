@@ -1,4 +1,4 @@
-// var Period = require("./Period").Period;
+import { Period } from "./index"
 
 export default function LocalTime(value) {
     value = value != null ? value : ((new Date().valueOf()) % ( 24 * 60 * 60 * 1000));

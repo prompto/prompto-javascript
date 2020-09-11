@@ -129,5 +129,4 @@ $Root.prototype.toDocument = function() {
     return doc;
 };
 
-exports.Category = Category;
-exports.$Root = $Root;
+export { Category, $Root }

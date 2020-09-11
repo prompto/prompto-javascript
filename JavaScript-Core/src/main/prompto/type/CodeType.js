@@ -1,3 +1,5 @@
+import NativeType from "./NativeType"
+import { Identifier } from "../grammar/index"
 
 export default class CodeType extends NativeType {
 

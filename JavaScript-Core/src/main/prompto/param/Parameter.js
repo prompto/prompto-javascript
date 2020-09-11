@@ -1,3 +1,6 @@
+import NamedInstance from "../grammar/NamedInstance"
+import { IntegerValue, DecimalValue } from "../value/index"
+import { IntegerType, DecimalType } from "../type/index"
 
 export default class Parameter extends NamedInstance {
  

@@ -1,4 +1,10 @@
 import CategoryDeclaration from "./CategoryDeclaration"
+import { SetterMethodDeclaration, GetterMethodDeclaration, EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from "./index"
+import { MethodDeclarationMap } from "../runtime/index"
+import { $Root } from "../intrinsic/index"
+import { ConcreteInstance } from "../value/index"
+import { CategoryType } from "../type/index"
+import { $DataStore } from "../store/index"
 
 export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 

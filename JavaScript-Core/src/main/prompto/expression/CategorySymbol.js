@@ -1,3 +1,9 @@
+import Symbol from "./Symbol"
+import { ConstructorExpression } from "./index"
+import { TextValue } from "../value/index"
+import { TextLiteral } from "../literal/index"
+import { AttributeParameter } from "../param/index"
+import { Argument, ArgumentList, Identifier } from "../grammar/index"
 
 export default class CategorySymbol extends Symbol {
 

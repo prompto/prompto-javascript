@@ -1,3 +1,4 @@
+import { EParserFactory, OParserFactory, MParserFactory } from "./index"
 
 export default function Dialect(name) {
     this.name = name;

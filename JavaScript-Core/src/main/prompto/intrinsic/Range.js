@@ -1,9 +1,5 @@
-// var equalObjects = require("../utils/Utils").equalObjects;
-// var StrictSet = require("./StrictSet").StrictSet;
-// var LocalDate = require("./LocalDate").LocalDate;
-// var LocalTime = require("./LocalTime").LocalTime;
-// var List = require("./List").List;
-
+import { StrictSet, List, LocalDate, LocalTime } from "./index"
+import { equalObjects } from "../utils/index"
 
 function Range(first, last) {
     this.first = first;

@@ -1,3 +1,7 @@
+import ContainerType from "./ContainerType"
+import { TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from "./index"
+import { Identifier } from "../grammar/index"
+import { Dictionary, StrictSet, List } from "../intrinsic/index"
 
 export default class DictionaryType extends ContainerType {
 

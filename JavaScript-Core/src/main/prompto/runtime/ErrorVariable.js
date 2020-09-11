@@ -1,3 +1,6 @@
+import Variable from "./Variable"
+import { Identifier } from "../grammar/index"
+import { EnumeratedCategoryType } from "../type/index"
 
 export default class ErrorVariable extends Variable {
 

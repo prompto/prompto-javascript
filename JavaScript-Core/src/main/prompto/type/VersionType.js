@@ -1,3 +1,8 @@
+import NativeType from "./NativeType"
+import { BooleanType } from "./index"
+import { Identifier } from "../grammar/index"
+import { Version } from "../intrinsic/index"
+import { VersionValue } from "../value/index"
 
 export default class VersionType extends NativeType {
 

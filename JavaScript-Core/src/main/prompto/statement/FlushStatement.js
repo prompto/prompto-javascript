@@ -1,4 +1,6 @@
-
+import SimpleStatement from "./SimpleStatement"
+import { $DataStore } from "../store/index"
+import { VoidType } from "../type/index"
 
 export default class FlushStatement extends SimpleStatement {
 

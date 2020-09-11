@@ -1,3 +1,12 @@
+import Instance from "./Instance"
+import { Value, NullValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from "./index"
+import { CategoryType, DecimalType } from "../type/index"
+import { Variable } from "../runtime/index"
+import { Identifier, Operator } from "../grammar/index"
+import { $DataStore } from "../store/index"
+import { EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from "../declaration/index"
+import { NotStorableError, NotMutableError } from "../error/index"
+import { convertFromJavaScript } from "../utils/index"
 
 export default class ConcreteInstance extends Instance {
 
@@ -37,7 +46,7 @@ export default class ConcreteInstance extends Instance {
         let dbId = this.getDbId();
         if(dbId==null) {
             dbId = this.storable.getOrCreateDbId();
-            const value = TypeUtils.convertFromJavaScript(dbId);
+            const value = convertFromJavaScript(dbId);
             this.values["dbId"] = value;
         }
         return dbId;

@@ -1,5 +1,13 @@
-const VOWELS = "AEIO"; // sufficient here
+import Expression from "./Expression"
+import { InstanceExpression, UnresolvedIdentifier } from "./index"
+import { EqOp } from "../grammar/index"
+import { MatchOp } from "../store/index"
+import { Variable, LinkedVariable, LinkedValue } from "../runtime/index"
+import { ContainerType, TextType, CharacterType, BooleanType, NullType, IntegerType, DecimalType } from "../type/index"
+import { NullValue, BooleanValue, Value, TypeValue, Instance } from "../value/index"
+import { CodeWriter } from "../utils/index"
 
+const VOWELS = "AEIO"; // sufficient here
 
 export default class EqualsExpression extends Expression {
   

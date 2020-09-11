@@ -1,3 +1,4 @@
+import BaseType from "./BaseType"
 
 export default class MethodType extends BaseType {
   

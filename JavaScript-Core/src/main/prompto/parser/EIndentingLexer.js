@@ -1,5 +1,6 @@
+import {  } from "./ELexer"
 
-function EIndentingLexer(input) {
+export default function EIndentingLexer(input) {
 	ELexer.call(this, input);
 	this.tokens = [];
 	this.indents = [0];
@@ -114,5 +115,4 @@ EIndentingLexer.prototype.interpretAnyToken = function(token) {
 	this.tokens.push(token);
 };
 
-export {EIndentingLexer};
 

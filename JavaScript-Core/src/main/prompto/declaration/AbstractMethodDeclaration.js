@@ -1,3 +1,5 @@
+import BaseMethodDeclaration from "./BaseMethodDeclaration"
+import { VoidType } from "../type/index"
 
 export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 

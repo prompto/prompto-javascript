@@ -1,3 +1,5 @@
+import ObjectList from "../utils/ObjectList"
+import { Dialect } from "../parser/index"
 
 export default class IdentifierList extends ObjectList {
 

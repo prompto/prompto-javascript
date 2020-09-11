@@ -1,3 +1,6 @@
+import BaseStatement from "./BaseStatement"
+import { VoidType } from "../type/index"
+import { Dialect } from "../parser/index"
 
 export default class CommentStatement extends BaseStatement {
 

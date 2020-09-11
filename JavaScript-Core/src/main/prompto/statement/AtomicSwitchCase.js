@@ -1,3 +1,5 @@
+import SwitchCase from "./SwitchCase"
+import { VoidType } from "../type/index"
 
 export default class AtomicSwitchCase extends SwitchCase {
 
@@ -6,7 +8,7 @@ export default class AtomicSwitchCase extends SwitchCase {
     }
 
     checkSwitchType(context, type) {
-        const thisType = this.expression ? this.expression.check(context) : VoidType.instnce;
+        const thisType = this.expression ? this.expression.check(context) : VoidType.instance;
         if(!type.isAssignableFrom(context, thisType)) {
             context.problemListener.reportIncompatibleTypes(this, type, thisType);
         }

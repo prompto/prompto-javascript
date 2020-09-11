@@ -1,3 +1,6 @@
+import Parameter from "./Parameter"
+import { MethodType } from "../type/index"
+import { equalObjects } from "../utils/index"
 
 export default class CategoryParameter extends Parameter {
     
@@ -22,7 +25,7 @@ export default class CategoryParameter extends Parameter {
     }
 
     equals(other) {
-        return other === this || (other instanceof CategoryParameter && utils.equalObjects(this.type, other.type));
+        return other === this || (other instanceof CategoryParameter && equalObjects(this.type, other.type));
     }
 
     checkValue(context, expression) {

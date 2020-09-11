@@ -1,6 +1,7 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
 import antlr4 from "antlr4/index";
+import { MParser } from "./MParser"
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -19,7 +20,7 @@ function createInput(input) {
 	return input;
 }
 
-function MCleverParser(input) {
+export default function MCleverParser(input) {
 	MParser.call(this,createInput(input));
 	this.path = "";
 	return this;
@@ -50,5 +51,3 @@ MCleverParser.prototype.doParse = function(rule, addLF) {
     walker.walk(builder, tree);
     return builder.getNodeValue(tree);
 };
-
-export {MCleverParser};

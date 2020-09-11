@@ -1,3 +1,4 @@
+import JavaScriptExpression from "./JavaScriptExpression"
 
 export default class JavaScriptNewExpression extends JavaScriptExpression {
 

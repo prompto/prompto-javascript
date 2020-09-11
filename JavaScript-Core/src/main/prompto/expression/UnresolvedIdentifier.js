@@ -1,3 +1,12 @@
+import Expression from "./Expression"
+import { InstanceExpression, MethodSelector, ConstructorExpression, TypeExpression, SymbolExpression } from "./index"
+import { VoidType, CategoryType, EnumeratedCategoryType, NativeType } from "../type/index"
+import { ProblemListener } from "../problem/index"
+import { PromptoError } from "../error/index"
+import { MethodCall } from "../statement/index"
+import { EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration } from "../declaration/index"
+import { Dialect } from "../parser/index"
+
 export default class UnresolvedIdentifier extends Expression {
  
     constructor(id) {

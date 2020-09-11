@@ -1,3 +1,7 @@
+import NativeType from "./NativeType"
+import { IntegerType, ListType, SetType, AnyType, BooleanType } from "./index"
+import { Identifier } from "../grammar/index"
+import { JoinTupleMethodDeclaration } from "../builtins/ContainerTypeBuiltins"
 
 export default class TupleType extends NativeType {
 
@@ -83,7 +87,7 @@ export default class TupleType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -94,7 +98,7 @@ export default class TupleType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -142,10 +146,9 @@ export default class TupleType extends NativeType {
     getMemberMethods(context, name) {
         switch (name) {
             case "join":
-                const JoinTupleMethodDeclaration = require("../builtins/ContainerTypeBuiltins").JoinTupleMethodDeclaration;
                 return [new JoinTupleMethodDeclaration()];
             default:
-                return NativeType.prototype.getMemberMethods.call(context, name);
+                return super.getMemberMethods(context, name);
         }
     }
 }

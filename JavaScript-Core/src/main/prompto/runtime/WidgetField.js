@@ -1,3 +1,4 @@
+import Variable from "./Variable"
 
 export default class WidgetField extends Variable {
 

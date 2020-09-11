@@ -1,3 +1,4 @@
+import { VoidType, NullType } from "./index"
 
 export default class TypeMap {
   

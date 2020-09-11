@@ -1,3 +1,10 @@
+import Section from "../parser/Section"
+import { Specificity } from "./index"
+import { InstanceExpression, ArrowExpression, MemberSelector } from "../expression/index"
+import { MethodType, CategoryType, VoidType } from "../type/index"
+import { ContextualExpression } from "../value/index"
+import { Variable } from "../runtime/index"
+import { PromptoError } from "../error/index"
 
 export default class Argument extends Section {
 

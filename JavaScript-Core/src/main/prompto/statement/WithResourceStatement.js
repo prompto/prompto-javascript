@@ -1,3 +1,4 @@
+import BaseStatement from "./BaseStatement"
 
 export default class WithResourceStatement extends BaseStatement {
 

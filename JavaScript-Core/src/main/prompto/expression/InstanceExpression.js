@@ -1,3 +1,13 @@
+import Expression from "./Expression"
+import { EqualsExpression } from "./index"
+import { MethodDeclarationMap, InstanceContext, Variable, LinkedVariable } from "../runtime/index"
+import { Dialect } from "../parser/index"
+import { Parameter } from "../param/index"
+import { AttributeDeclaration, CategoryDeclaration } from "../declaration/index"
+import { MethodType, BooleanType, VoidType } from "../type/index"
+import { ClosureValue } from "../value/index"
+import { EqOp } from "../grammar/index"
+import { BooleanLiteral } from "../literal/index"
 
 export default class InstanceExpression extends Expression {
   

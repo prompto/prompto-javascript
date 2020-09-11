@@ -1,3 +1,6 @@
+import BaseDeclaration from "./BaseDeclaration"
+import { EnumeratedNativeType } from "../type/index"
+import { List } from "../intrinsic/index"
 
 export default class EnumeratedNativeDeclaration extends BaseDeclaration {
 

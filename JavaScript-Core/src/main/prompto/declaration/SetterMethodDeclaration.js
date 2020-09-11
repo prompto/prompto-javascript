@@ -1,5 +1,7 @@
+import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
+import { AttributeParameter } from "../param/index"
 
-class SetterMethodDeclaration extends ConcreteMethodDeclaration {
+export default class SetterMethodDeclaration extends ConcreteMethodDeclaration {
 
     constructor(id, statements) {
         super(id, null, null, statements);

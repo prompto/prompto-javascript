@@ -1,3 +1,5 @@
+import ProblemCollector from './ProblemCollector'
+import { SyntaxError } from "../error/index"
 
 export default class ProblemListener extends ProblemCollector {
    

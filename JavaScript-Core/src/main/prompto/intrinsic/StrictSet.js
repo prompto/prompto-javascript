@@ -1,4 +1,4 @@
-// var List = require("./List").List;
+import { List } from "./index"
 
 export default function StrictSet(values) {
     this.set = new Set(values);

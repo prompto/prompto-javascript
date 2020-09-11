@@ -1,3 +1,5 @@
+import { SyntaxError } from "../error/index"
+import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from "./index"
 
 export default class BaseType {
  

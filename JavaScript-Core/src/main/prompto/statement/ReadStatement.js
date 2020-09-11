@@ -1,3 +1,7 @@
+import ReadAllExpression from "../expression/ReadAllExpression"
+import { Dialect } from "../parser/index"
+import { Variable } from "../runtime/index"
+import { VoidType, TextType } from "../type/index"
 
 export default class ReadStatement extends ReadAllExpression {
 

@@ -1,3 +1,9 @@
+import BaseStatement from "./BaseStatement"
+import { StatementList } from "./index"
+import { VoidType, BooleanType, TypeMap } from "../type/index"
+import { BooleanValue } from "../value/index"
+import { ObjectList } from "../utils/index"
+import { EqualsExpression } from "../expression/index"
 
 export default class IfStatement extends BaseStatement {
   

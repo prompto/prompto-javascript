@@ -1,3 +1,4 @@
+import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
 
 export default class GetterMethodDeclaration extends ConcreteMethodDeclaration {
 

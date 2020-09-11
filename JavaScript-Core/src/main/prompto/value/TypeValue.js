@@ -1,5 +1,6 @@
+import Value from "./Value"
 
-export default class TypeValue extends Value{
+export default class TypeValue extends Value {
   
     constructor(value) {
         super(null); // TODO type of type

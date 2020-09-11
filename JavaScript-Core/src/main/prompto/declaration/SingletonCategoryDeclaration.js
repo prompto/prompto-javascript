@@ -1,3 +1,5 @@
+import ConcreteCategoryDeclaration from "./ConcreteCategoryDeclaration"
+import { CategoryType } from "../type/index"
 
 export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
 

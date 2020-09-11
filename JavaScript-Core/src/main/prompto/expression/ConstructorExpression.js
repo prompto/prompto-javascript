@@ -3,7 +3,7 @@ import { ArgumentList, Argument, Identifier } from "../grammar/index"
 import { AttributeParameter } from "../param/index"
 import { CategoryType, DocumentType } from "../type/index"
 import { NotMutableError } from "../error/index"
-import { ConcreteWidgetDeclaration, NativeWidgetDeclaration } from "../declaration/index"
+import { ConcreteWidgetDeclaration, NativeWidgetDeclaration, NativeCategoryDeclaration } from "../declaration/index"
 import { getTypeName } from "../utils/index"
 
 export default class ConstructorExpression extends Expression {

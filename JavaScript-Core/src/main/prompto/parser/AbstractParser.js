@@ -3,7 +3,7 @@
 /* to work around jest resolver issues */
 import {Parser} from "antlr4";
 
-export default function AbstractParser(input) {
+function AbstractParser(input) {
 	Parser.call(this, input);
 	return this;
 }
@@ -70,3 +70,5 @@ AbstractParser.prototype.addErrorListener = function(listener) {
     Parser.prototype.addErrorListener.call(this, listener);
     this._input.tokenSource.addErrorListener(listener); // lexer
 };
+
+export { AbstractParser } 

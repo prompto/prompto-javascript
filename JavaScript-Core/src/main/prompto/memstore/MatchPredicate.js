@@ -1,3 +1,4 @@
+import { MatchOp } from "../store/index"
 
 export default class MatchPredicate {
 

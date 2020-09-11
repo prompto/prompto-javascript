@@ -1,3 +1,4 @@
+/*eslint no-unused-vars: "off"*/
 import {default as constraint} from  './constraint/index';
 /*import {default as csharp} from  './csharp/index';
 import {default as declaration} from  './declaration/index';

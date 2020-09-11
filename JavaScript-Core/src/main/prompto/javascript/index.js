@@ -13,4 +13,5 @@ export {default as JavaScriptMemberExpression} from'./JavaScriptMemberExpression
 export {default as JavaScriptNewExpression} from'./JavaScriptNewExpression';
 export {default as JavaScriptThisExpression} from'./JavaScriptThisExpression';
 export {default as JavaScriptNativeCategoryBinding} from"./JavaScriptNativeCategoryBinding";
+export {default as JavaScriptType} from"./JavaScriptType";
 export {default as JavaScriptModule} from"./JavaScriptModule";

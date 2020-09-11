@@ -2,7 +2,7 @@ import Value from "./Value"
 import { IntegerValue } from "./index"
 import { SyntaxError, DivideByZeroError } from "../error/index"
 import { DecimalType } from "../type/index"
-import { decimalTostring } from "../utils/index"
+import { decimalToString } from "../utils/index"
 
 export default class DecimalValue extends Value {
 
@@ -16,7 +16,7 @@ export default class DecimalValue extends Value {
     }
 
     toString() {
-        return decimalTostring(this.value);
+        return decimalToString(this.value);
     }
 
     convertToJavaScript() {

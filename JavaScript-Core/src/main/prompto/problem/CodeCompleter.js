@@ -1,3 +1,4 @@
+import ProblemListener from './ProblemListener'
 
 export default class CodeCompleter extends ProblemListener {
 

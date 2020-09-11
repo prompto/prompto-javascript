@@ -1,3 +1,8 @@
+import BaseStatement from "./BaseStatement"
+import { BooleanType } from "../type/index"
+import { BooleanValue } from "../value/index"
+import { InvalidDataError } from "../error/index"
+import { BreakResult } from "../runtime/index"
 
 export default class DoWhileStatement extends BaseStatement {
    

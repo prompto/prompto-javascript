@@ -1,3 +1,6 @@
+import BaseType from "./BaseType"
+import { TextType } from "./index"
+import { Identifier } from "../grammar/index"
 
 export default class EntryType extends BaseType {
 

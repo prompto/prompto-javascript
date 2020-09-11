@@ -1,3 +1,4 @@
+import NativeCategoryDeclaration from "./NativeCategoryDeclaration"
 
 export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 

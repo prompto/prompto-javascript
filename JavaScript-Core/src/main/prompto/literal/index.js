@@ -1,7 +1,7 @@
 // export {default as NullLiteral} from './NullLiteral';
-// export {default as BooleanLiteral} from './BooleanLiteral';
+export {default as BooleanLiteral} from './BooleanLiteral';
 // export {default as CharacterLiteral} from './CharacterLiteral';
-// import {default as IntegerLiteral} from './IntegerLiteral';
+export {default as IntegerLiteral} from './IntegerLiteral';
 // export {default as MinIntegerLiteral} from './MinIntegerLiteral';
 // export {default as MaxIntegerLiteral} from './MaxIntegerLiteral';
 // export {default as HexaLiteral} from './HexaLiteral';

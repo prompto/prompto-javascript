@@ -1,4 +1,6 @@
-
+import Value from "./Value"
+import { PeriodValue, IntegerValue, TextValue } from "./index"
+import { TimeType } from "../type/index"
 
 export default class TimeValue extends Value {
  

@@ -1,3 +1,6 @@
+import SimpleStatement from "./SimpleStatement"
+import { BreakResult } from "../runtime/index"
+import { VoidType } from "../type/index"
 
 export default class BreakStatement extends SimpleStatement {
 

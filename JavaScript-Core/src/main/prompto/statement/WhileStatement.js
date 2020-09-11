@@ -1,3 +1,8 @@
+import BaseStatement from "./BaseStatement"
+import { BooleanType } from "../type/index"
+import { BooleanValue } from "../value/index"
+import { BreakResult } from "../runtime/index"
+import { InvalidDataError } from "../error/index"
 
 export default class WhileStatement extends BaseStatement {
    

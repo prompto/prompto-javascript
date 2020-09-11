@@ -1,3 +1,7 @@
+import IterableType from "./IterableType"
+import { IntegerType } from "./index"
+import { Identifier } from "../grammar/index"
+import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration"
 
 export default class IteratorType extends IterableType {
 

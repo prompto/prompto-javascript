@@ -1,3 +1,8 @@
+import BaseStatement from "./BaseStatement"
+import { VoidType, MethodType } from "../type/index"
+import { ClosureValue } from "../value/index"
+import { ConcreteMethodDeclaration } from "../declaration/index"
+import { Variable } from "../runtime/index"
 
 export default class DeclarationStatement extends BaseStatement {
 

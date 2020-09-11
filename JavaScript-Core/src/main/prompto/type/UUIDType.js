@@ -1,3 +1,7 @@
+import NativeType from "./NativeType"
+import { Identifier } from "../grammar/index"
+import { UUID } from "../intrinsic/index"
+import { UUIDValue } from "../value/index"
 
 export default class UUIDType extends NativeType {
 

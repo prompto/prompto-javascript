@@ -1,3 +1,5 @@
+import Value from "./Value"
+import { BooleanType } from "../type/index"
 
 export default class BooleanValue extends Value {
   

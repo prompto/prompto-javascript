@@ -1,3 +1,4 @@
+import CategoryType from "./CategoryType"
 
 export default class ResourceType extends CategoryType {
  

@@ -1,3 +1,7 @@
+import RangeValue from "./RangeValue"
+import { CharacterValue } from "./index"
+import { IndexOutOfRangeError } from "../error/index"
+import { CharacterType } from "../type/index"
 
 export default class CharacterRange extends RangeValue {
 

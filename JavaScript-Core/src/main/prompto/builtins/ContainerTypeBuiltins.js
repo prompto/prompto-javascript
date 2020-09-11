@@ -1,3 +1,10 @@
+import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
+import { CategoryParameter } from "../param/index"
+import { TextType } from "../type/index"
+import { TextValue } from "../value/index"
+import { Identifier } from "../grammar/index"
+import { TextLiteral } from "../literal/index"
+
 // don't use export default since more builtins are expected
 class BaseJoinMethodDeclaration extends BuiltInMethodDeclaration {
 

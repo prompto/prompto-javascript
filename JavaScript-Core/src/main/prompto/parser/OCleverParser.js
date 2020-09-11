@@ -1,6 +1,7 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
 import antlr4 from "antlr4/index";
+import { OParser } from "./OParser"
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -19,7 +20,7 @@ function createInput(input) {
 	return input;
 }
 
-function OCleverParser(input) {
+export default function OCleverParser(input) {
 	OParser.call(this,createInput(input));
 	this.path = "";
 	return this;
@@ -53,6 +54,3 @@ OCleverParser.prototype.doParse = function(rule) {
     walker.walk(builder, tree);
     return builder.getNodeValue(tree);
 };
-
-
-export {OCleverParser};

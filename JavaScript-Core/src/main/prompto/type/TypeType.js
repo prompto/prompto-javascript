@@ -1,3 +1,5 @@
+import BaseType from "./BaseType"
+import { Identifier } from "../grammar/index"
 
 export default class TypeType extends BaseType {
 

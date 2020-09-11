@@ -1,3 +1,5 @@
+import JavaScriptLiteral from "./JavaScriptLiteral"
+import { IntegerType } from "../type/index"
 
 export default class JavaScriptIntegerLiteral extends JavaScriptLiteral {
 

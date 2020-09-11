@@ -1,3 +1,10 @@
+import SelectorExpression from "./SelectorExpression"
+import { UnresolvedIdentifier, ParenthesisExpression } from "./index"
+import { Dialect } from "../parser/index"
+import { UnresolvedCall } from "../statement/index"
+import { MethodType, VoidType } from "../type/index"
+import { NullValue } from "../value/index"
+import { NullReferenceError } from "../error/index"
 
 export default class MemberSelector extends SelectorExpression {
 

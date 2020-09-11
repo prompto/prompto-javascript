@@ -1,3 +1,9 @@
+import Expression from "./Expression"
+import { AnyType, CursorType, IntegerType } from "../type/index"
+import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from "../store/index"
+import { CursorValue } from "../value/index"
+import { CategoryDeclaration } from "../declaration/index"
+import { InvalidDataError } from "../error/index"
 
 export default class FetchManyExpression extends Expression {
 

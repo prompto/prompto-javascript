@@ -1,5 +1,6 @@
+import { MLexer } from "./MLexer"
 
-function MIndentingLexer(input) {
+export default function MIndentingLexer(input) {
     MLexer.call(this, input);
 	this.tokens = [];
 	this.indents = [0];
@@ -114,5 +115,4 @@ MIndentingLexer.prototype.interpretAnyToken = function(token) {
 	this.tokens.push(token);
 };
 
-export {MIndentingLexer};
 

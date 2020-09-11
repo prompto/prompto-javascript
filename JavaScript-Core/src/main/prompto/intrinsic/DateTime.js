@@ -1,6 +1,4 @@
-// var Period = require("./Period").Period;
-// var LocalDate = require("./LocalDate").LocalDate;
-// var LocalTime = require("./LocalTime").LocalTime;
+import { LocalDate, LocalTime, Period } from "./index"
 
 export default function DateTime(date, tzOffset) {
     this.date = date;

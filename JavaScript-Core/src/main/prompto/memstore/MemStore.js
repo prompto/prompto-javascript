@@ -1,3 +1,5 @@
+import Store from "../store/Store"
+import { MemQueryBuilder, StorableDocument } from "./index"
 
 // a utility class for running unit tests only
 export default class MemStore extends Store {
@@ -144,8 +146,6 @@ export default class MemStore extends Store {
     }
 
     newStorableDocument(categories, dbIdListener) {
-        if(!StorableDocument)
-            StorableDocument = require("./StorableDocument").StorableDocument;
         return new StorableDocument(categories, dbIdListener);
     }
 }

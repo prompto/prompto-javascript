@@ -1,3 +1,6 @@
+import { Score } from "./index"
+import { CategoryType } from "../type/index"
+import { PromptoError } from "../error/index"
 
 export default class MethodFinder {
     

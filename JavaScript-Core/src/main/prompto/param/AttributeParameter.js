@@ -1,3 +1,4 @@
+import Parameter from "./Parameter"
 
 export default class AttributeParameter extends Parameter {
 

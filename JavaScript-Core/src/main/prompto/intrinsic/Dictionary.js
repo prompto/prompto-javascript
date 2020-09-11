@@ -1,6 +1,5 @@
-// var List = require("./List").List;
-// var StrictSet = require("./StrictSet").StrictSet;
-// var NotMutableError = require("../error/NotMutableError").NotMutableError;
+import { StrictSet, List } from "./index"
+import { NotMutableError } from "../error/index"
 
 export default function Dictionary(mutable, entries) {
     if(entries)

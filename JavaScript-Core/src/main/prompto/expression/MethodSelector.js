@@ -1,3 +1,11 @@
+import MemberSelector from "./MemberSelector"
+import { UnresolvedIdentifier, InstanceExpression, CategorySymbol } from "./index"
+import { Identifier, NamedInstance } from "../grammar/index"
+import { MethodType, CategoryType, TypeType } from "../type/index"
+import { MethodDeclarationMap } from "../runtime/index"
+import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from "../value/index"
+import { SingletonCategoryDeclaration } from "../declaration/index"
+import { NullReferenceError } from "../error/index"
 
 export default class MethodSelector extends MemberSelector {
   

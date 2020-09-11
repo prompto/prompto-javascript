@@ -1,3 +1,5 @@
+import SimpleStatement from "./SimpleStatement"
+import { VoidType, CodeType } from "../type/index"
 
 export default class AssignInstanceStatement extends SimpleStatement {
   

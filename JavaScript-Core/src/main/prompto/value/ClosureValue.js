@@ -1,3 +1,4 @@
+import Value from "./Value"
 
 export default class ClosureValue extends Value {
  

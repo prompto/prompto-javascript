@@ -1,9 +1,11 @@
+import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
+import { ListType } from "../type/index"
 
 export default class ToListMethodDeclaration extends BuiltInMethodDeclaration {
+
     constructor(itemType) {
         super("toList");
         this.itemType = itemType;
-        return this;
     }
 
     interpret(context) {

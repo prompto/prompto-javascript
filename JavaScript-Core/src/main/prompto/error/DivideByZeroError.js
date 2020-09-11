@@ -1,3 +1,4 @@
+import ExecutionError from "./ExecutionError"
 
 export default function DivideByZeroError() {
 	ExecutionError.call(this);

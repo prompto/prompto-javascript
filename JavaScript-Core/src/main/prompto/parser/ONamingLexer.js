@@ -1,5 +1,6 @@
+import { OLexer } from "./OLexer"
 
-function ONamingLexer(input) {
+export default function ONamingLexer(input) {
 	OLexer.call(this, input);
 	this.dialect = Dialect.O;
 	return this;
@@ -7,5 +8,3 @@ function ONamingLexer(input) {
 
 ONamingLexer.prototype = Object.create(OLexer.prototype);
 ONamingLexer.prototype.constructor = ONamingLexer;
-
-export {ONamingLexer};

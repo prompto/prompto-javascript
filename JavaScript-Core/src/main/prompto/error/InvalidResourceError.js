@@ -1,3 +1,5 @@
+import ExecutionError from "./ExecutionError"
+import { TextLiteral } from "../literal/index"
 
 export default function InvalidResourceError(message) {
 	ExecutionError.call(this, message);

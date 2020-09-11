@@ -1,9 +1,11 @@
+import NativeType from "./NativeType"
+import { Identifier } from "../grammar/index"
+import { BooleanValue } from "../value/index"
 
 export default class BooleanType extends NativeType {
  
     constructor() {
         super(new Identifier("Boolean"));
-        this.family = TypeFamily.BOOLEAN;
     }
 
     checkAnd(context, other) {

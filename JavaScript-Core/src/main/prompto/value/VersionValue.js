@@ -1,4 +1,6 @@
-
+import Value from "./Value"
+import { VersionType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class VersionValue extends Value {
 

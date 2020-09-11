@@ -1,7 +1,6 @@
-// var StrictSet = require("./StrictSet").StrictSet;
-// var Document = require("./Document").Document;
-// var NotMutableError = require("../error/NotMutableError").NotMutableError;
-// var equalObjects = require("../utils/Utils").equalObjects;
+import { StrictSet, Document } from "./index"
+import { NotMutableError } from "../error/index"
+import { equalObjects } from "../utils/index"
 
 export default function List(mutable, items) {
     Array.call(this);

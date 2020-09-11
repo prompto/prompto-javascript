@@ -1,3 +1,7 @@
+import ConcreteCategoryDeclaration from "./ConcreteCategoryDeclaration"
+import { EnumeratedCategoryType } from "../type/index"
+import { List } from "../intrinsic/index"
+import { Identifier, IdentifierList } from "../grammar/index"
 
 export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
 

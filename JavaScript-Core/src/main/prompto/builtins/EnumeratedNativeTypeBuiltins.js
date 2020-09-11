@@ -1,4 +1,8 @@
-
+import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
+import { CategoryParameter } from "../param/index"
+import { TextType } from "../type/index"
+import { Identifier } from "../grammar/index"
+import { EnumeratedNativeDeclaration } from "../declaration/index"
 
 // don't use export default since more builtins are expected
 class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {

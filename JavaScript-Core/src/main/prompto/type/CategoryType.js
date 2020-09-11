@@ -1,3 +1,15 @@
+import BaseType from "./BaseType"
+import { AnyType, NativeType, TextType, MethodType, VoidType, NullType, MissingType,
+    EnumeratedCategoryType, EnumeratedNativeType } from "./index"
+import { CategoryDeclaration, ConcreteCategoryDeclaration, SingletonCategoryDeclaration, 
+    EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from "../declaration/index"
+import { PromptoError } from "../error/index"
+import { UnresolvedIdentifier, ValueExpression, MethodSelector, ArrowExpression, InstanceExpression } from "../expression/index"
+import { Operator, Identifier, Argument, ArgumentList } from "../grammar/index"
+import { MethodDeclarationMap, MethodFinder, Score } from "../runtime/index"
+import { MethodCall } from "../statement/index"
+import { $DataStore } from "../store/index"
+import { compareValues } from "../utils/index"
 
 export default class CategoryType extends BaseType {
   

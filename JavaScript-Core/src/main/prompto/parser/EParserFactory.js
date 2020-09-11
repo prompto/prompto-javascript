@@ -1,9 +1,9 @@
 import antlr4 from "antlr4/index";
+import { EIndentingLexer, ECleverParser } from "./index"
 
-export function EParserFactory() {
+export default function EParserFactory() {
 	
 	this.newLexer = data => new EIndentingLexer(new antlr4.InputStream(data));
-
 	this.newParser = (path, data) => new ECleverParser(path, data);
 
 }

@@ -1,3 +1,5 @@
+import SwitchCase from "./SwitchCase"
+import { VoidType, ContainerType } from "../type/index"
 
 export default class CollectionSwitchCase extends SwitchCase {
 
@@ -7,7 +9,7 @@ export default class CollectionSwitchCase extends SwitchCase {
 
     checkSwitchType(context, type) {
         let thisType = this.expression ? this.expression.check(context) : VoidType.instance;
-        if(thisType instanceof CollectionType) {
+        if(thisType instanceof ContainerType) {
             thisType = thisType.itemType;
         }
         if(!type.isAssignableFrom(context, thisType)) {

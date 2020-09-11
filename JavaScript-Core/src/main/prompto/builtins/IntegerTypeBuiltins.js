@@ -1,7 +1,7 @@
 import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
 import { CategoryParameter } from "../param/index"
 import { TextType } from "../type/index"
-import {  } from "../value/index"
+import { TextValue } from "../value/index"
 import { Identifier } from "../grammar/index"
 
 

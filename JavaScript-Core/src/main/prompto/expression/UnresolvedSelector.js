@@ -1,4 +1,8 @@
-
+import SelectorExpression from "./SelectorExpression"
+import { UnresolvedIdentifier, MemberSelector, MethodSelector } from "./index"
+import { UnresolvedCall } from "../statement/index"
+import { AnyType } from "../type/index"
+import { ProblemListener } from "../problem/index"
 
 export default class UnresolvedSelector extends SelectorExpression {
 

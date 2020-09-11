@@ -1,3 +1,11 @@
+import BaseSwitchStatement from "./BaseSwitchStatement"
+import { ArgumentList, Argument, Identifier } from "../grammar/index"
+import { EnumeratedCategoryType, VoidType, CategoryType } from "../type/index"
+import { ErrorVariable } from "../runtime/index"
+import { ExecutionError } from "../error/index"
+import { UnresolvedParameter } from "../param/index"
+import { ConstructorExpression } from "../expression/index"
+import { TextLiteral } from "../literal/index"
 
 export default class SwitchErrorStatement extends BaseSwitchStatement {
 

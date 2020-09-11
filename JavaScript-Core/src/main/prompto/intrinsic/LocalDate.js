@@ -1,9 +1,4 @@
-// var Period = require("./Period").Period;
-// var DateTime = null;
-
-exports.resolve = function() {
-    DateTime = require("./DateTime").DateTime;
-};
+import { DateTime, Period } from "./index"
 
 export default function LocalDate(value) {
     var date = new Date(value);

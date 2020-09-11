@@ -1,3 +1,9 @@
+import BaseMethodDeclaration from "./BaseMethodDeclaration"
+import { ContextualExpression } from "../value/index"
+import { UnresolvedIdentifier } from "../expression/index"
+import { ArgumentList, Argument } from "../grammar/index"
+import { StrictSet } from "../intrinsic/index"
+import { UnresolvedParameter, AttributeParameter, CategoryParameter } from "../param/index"
 
 export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
 

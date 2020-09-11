@@ -1,3 +1,9 @@
+import ObjectList from "../utils/ObjectList"
+import { PromptoError, NullReferenceError } from "../error/index"
+import { VoidType, TypeMap } from "../type/index"
+import { JavaScriptNativeCall } from "../javascript/index"
+import { Dialect } from "../parser/index"
+import { NativeCall } from "./index"
 
 export default class StatementList extends ObjectList {
 

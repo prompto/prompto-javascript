@@ -1,3 +1,5 @@
+import ExecutionError from "./ExecutionError"
+
 export default function NotStorableError() {
 	ExecutionError.call(this);
 	return this;

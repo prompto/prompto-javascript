@@ -1,3 +1,5 @@
+import QueryBuilder from "../store/QueryBuilder"
+import { MatchPredicate, AndPredicate, OrPredicate, NotPredicate } from "./index"
 
 export default class MemQueryBuilder extends QueryBuilder {
 

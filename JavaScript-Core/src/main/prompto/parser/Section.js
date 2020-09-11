@@ -1,4 +1,4 @@
-
+import { Location } from "./index"
 
 export default class Section {
 

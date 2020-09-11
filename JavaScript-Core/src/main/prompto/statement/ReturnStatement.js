@@ -1,3 +1,7 @@
+import SimpleStatement from "./SimpleStatement"
+import { VoidType } from "../type/index"
+import { NullValue } from "../value/index"
+import { VoidResult } from "../runtime/index"
 
 export default class ReturnStatement extends SimpleStatement {
   

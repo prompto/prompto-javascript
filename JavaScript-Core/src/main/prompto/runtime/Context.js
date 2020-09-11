@@ -1,5 +1,11 @@
+import { ProblemListener, ProblemCollector } from "../problem/index"
+import { MethodDeclarationMap, Variable, LinkedValue, WidgetField } from "./index"
+import { AttributeDeclaration, EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration, ConcreteCategoryDeclaration } from "../declaration/index"
+import { DecimalType, MethodType } from "../type/index"
+import { IntegerValue, DecimalValue, ClosureValue, ConcreteInstance } from "../value/index"
+import { InternalError } from "../error/index"
 
-export default class Context {
+class Context {
   
     constructor() {
         this.globals = null;

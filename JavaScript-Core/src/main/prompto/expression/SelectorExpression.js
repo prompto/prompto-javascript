@@ -1,3 +1,5 @@
+import Expression from "./Expression"
+import { UnresolvedIdentifier } from "./index"
 
 export default class SelectorExpression extends Expression {
     constructor(parent) {

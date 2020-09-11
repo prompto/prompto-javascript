@@ -1,3 +1,6 @@
+import Literal from "./Literal"
+import { BooleanValue } from "../value/index"
+import { BooleanType } from "../type/index"
 
 export default class BooleanLiteral extends Literal {
 

@@ -1,3 +1,9 @@
+import Expression from "./Expression"
+import { Dialect } from "../parser/index"
+import { ReturnStatement, StatementList } from "../statement/index"
+import { Variable } from "../runtime/index"
+import { IntegerValue, BooleanValue } from "../value/index"
+import { VoidType } from "../type/index"
 
 export default class ArrowExpression extends Expression {
   

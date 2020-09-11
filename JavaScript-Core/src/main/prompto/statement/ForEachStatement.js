@@ -1,3 +1,9 @@
+import BaseStatement from "./BaseStatement"
+import { Variable, BreakResult } from "../runtime/index"
+import { IntegerType, ListType, DictionaryType } from "../type/index"
+import { InternalError } from "../error/index"
+import { StrictSet } from "../intrinsic/index"
+import { IntegerValue } from "../value/index"
 
 export default class ForEachStatement extends BaseStatement {
 

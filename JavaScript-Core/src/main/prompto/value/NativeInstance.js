@@ -1,3 +1,10 @@
+import Instance from "./Instance"
+import { CategoryType } from "../type/index"
+import { Variable } from "../runtime/index"
+import { Identifier } from "../grammar/index"
+import { $DataStore } from "../store/index"
+import { NotMutableError } from "../error/index"
+import { convertFromJavaScript } from "../utils/index"
 
 export default class NativeInstance extends Instance {
 
@@ -49,7 +56,7 @@ export default class NativeInstance extends Instance {
             return getter.interpret(context);
         } else {
             const value = this.instance[attrName];
-            return TypeUtils.convertFromJavaScript(value);
+            return convertFromJavaScript(value);
         }
     }
 

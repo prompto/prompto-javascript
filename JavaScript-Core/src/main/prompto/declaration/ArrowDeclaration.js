@@ -1,3 +1,4 @@
+import AbstractMethodDeclaration from "./AbstractMethodDeclaration"
 
 export default class ArrowDeclaration extends AbstractMethodDeclaration {
 

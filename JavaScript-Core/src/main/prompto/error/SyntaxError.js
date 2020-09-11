@@ -1,3 +1,4 @@
+import PromptoError from "./PromptoError"
 
 export default function SyntaxError(message) {
 	PromptoError.call(this, message);

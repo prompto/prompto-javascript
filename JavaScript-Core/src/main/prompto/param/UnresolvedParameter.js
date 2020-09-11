@@ -1,3 +1,8 @@
+import { VoidType } from "../type/index"
+import { ProblemCollector } from "../problem/index"
+import { AttributeParameter, MethodParameter } from "./index"
+import { MethodDeclarationMap } from "../runtime/index"
+import { AttributeDeclaration } from "../declaration/index"
 
 export default class UnresolvedParameter {
   

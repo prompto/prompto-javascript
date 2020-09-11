@@ -1,3 +1,7 @@
+import FetchOneExpression from "../expression/FetchOneExpression"
+import { Variable } from "../runtime/index"
+import { VoidType } from "../type/index"
+import { Dialect } from "../parser/index"
 
 export default class FetchOneStatement extends FetchOneExpression {
 

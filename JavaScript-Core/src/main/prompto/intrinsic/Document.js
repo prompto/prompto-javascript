@@ -1,6 +1,5 @@
-// var equalArrays = require("../utils/Utils").equalArrays;
-// var StrictSet = require("./StrictSet").StrictSet;
-// var List = require("./List").List;
+import { StrictSet, List } from "./index"
+import { equalArrays } from "../utils/index"
 
 export default function Document(entries) {
     if(entries)

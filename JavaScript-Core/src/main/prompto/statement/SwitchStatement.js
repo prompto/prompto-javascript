@@ -1,3 +1,4 @@
+import BaseSwitchStatement from "./BaseSwitchStatement"
 
 export default class SwitchStatement extends BaseSwitchStatement {
  

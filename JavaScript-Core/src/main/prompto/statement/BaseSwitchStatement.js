@@ -1,3 +1,6 @@
+import BaseStatement from "./BaseStatement"
+import { SwitchCaseList } from "./index"
+import { VoidType, TypeMap } from "../type/index"
 
 export default class BaseSwitchStatement extends BaseStatement {
 

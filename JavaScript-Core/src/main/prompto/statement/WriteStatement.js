@@ -1,3 +1,7 @@
+import SimpleStatement from "./SimpleStatement"
+import { ResourceContext } from "../runtime/index"
+import { VoidType, ResourceType } from "../type/index"
+import { NullReferenceError, InvalidResourceError } from "../error/index"
 
 export default class WriteStatement extends SimpleStatement {
 

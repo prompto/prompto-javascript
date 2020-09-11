@@ -1,3 +1,7 @@
+import NativeType from "./NativeType"
+import { IntegerType, BooleanType } from "./index"
+import { Identifier } from "../grammar/index"
+import { DecimalValue } from "../value/index"
 
 export default class DecimalType extends NativeType {
 
@@ -15,7 +19,7 @@ export default class DecimalType extends NativeType {
     }
 
     isAssignableFrom(context, other) {
-        return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || (other == IntegerType.instance);
     }
 
@@ -23,7 +27,7 @@ export default class DecimalType extends NativeType {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -32,7 +36,7 @@ export default class DecimalType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
@@ -41,14 +45,14 @@ export default class DecimalType extends NativeType {
             transpiler.append(" + ");
             right.transpile(transpiler);
         } else
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
     checkSubtract(context, other) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
         }
     }
 
@@ -57,7 +61,7 @@ export default class DecimalType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
     }
 
     transpileSubtract(transpiler, other, left, right) {
@@ -66,14 +70,14 @@ export default class DecimalType extends NativeType {
             transpiler.append(" - ");
             right.transpile(transpiler);
         } else
-            return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
     }
 
     checkMultiply(context, other, tryReverse) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkMultiply.call(this, context, other, tryReverse);
+            return super.checkMultiply(context, other, tryReverse);
         }
     }
 
@@ -82,7 +86,7 @@ export default class DecimalType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
     transpileMultiply(transpiler, other, tryReverse, left, right) {
@@ -91,14 +95,14 @@ export default class DecimalType extends NativeType {
             transpiler.append(" * ");
             right.transpile(transpiler);
         } else
-            return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
     checkDivide(context, other) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkDivide.call(this, context, other);
+            return super.checkDivide(context, other);
         }
     }
 
@@ -107,7 +111,7 @@ export default class DecimalType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
+            return super.declareDivide(transpiler, other, left, right);
     }
 
     transpileDivide(transpiler, other, left, right) {
@@ -118,14 +122,14 @@ export default class DecimalType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileDivide.call(this, transpiler, other, left, right);
+            return super.transpileDivide(transpiler, other, left, right);
     }
 
     checkIntDivide(context, other) {
         if(other === IntegerType.instance) {
             return IntegerType.instance;
         } else {
-            return NativeType.prototype.checkIntDivide.call(this, context, other);
+            return super.checkIntDivide(context, other);
         }
     }
 
@@ -134,7 +138,7 @@ export default class DecimalType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareIntDivide.call(this, transpiler, other, left, right);
+            return super.declareIntDivide(transpiler, other, left, right);
     }
 
     transpileIntDivide(transpiler, other, left, right) {
@@ -145,14 +149,14 @@ export default class DecimalType extends NativeType {
             right.transpile(transpiler);
             transpiler.append("))");
         } else
-            return NativeType.prototype.transpileIntDivide.call(this, transpiler, other, left, right);
+            return super.transpileIntDivide(transpiler, other, left, right);
     }
 
     checkModulo(context, other) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkModulo.call(this, context, other);
+            return super.checkModulo(context, other);
         }
     }
 
@@ -160,7 +164,7 @@ export default class DecimalType extends NativeType {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return;
         } else {
-            return NativeType.prototype.declareModulo.call(this, transpiler, other, left, right);
+            return super.declareModulo(transpiler, other, left, right);
         }
     }
 
@@ -170,7 +174,7 @@ export default class DecimalType extends NativeType {
             transpiler.append(" % ");
             right.transpile(transpiler);
         } else
-            return NativeType.prototype.transpileModulo.call(this, transpiler, other, left, right);
+            return super.transpileModulo(transpiler, other, left, right);
     }
 
     checkMinus(context) {
@@ -197,7 +201,7 @@ export default class DecimalType extends NativeType {
         if(other instanceof IntegerType || other instanceof DecimalType) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkCompare.call(this, context, other, section);
+            return super.checkCompare(context, other, section);
         }
     }
 

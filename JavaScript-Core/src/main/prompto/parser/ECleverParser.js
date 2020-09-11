@@ -1,6 +1,7 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
 import antlr4 from "antlr4/index";
+import { EParser } from "./EParser"
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
@@ -19,7 +20,7 @@ function createInput(input) {
 	return input;
 }
 
-function ECleverParser(input) {
+export default function ECleverParser(input) {
 	EParser.call(this,createInput(input));
 	this.path = "";
 	return this;
@@ -52,5 +53,3 @@ ECleverParser.prototype.doParse = function(rule, addLF) {
     walker.walk(builder, tree);
     return builder.getNodeValue(tree);
 };
-
-export {ECleverParser};

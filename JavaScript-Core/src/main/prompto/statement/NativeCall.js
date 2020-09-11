@@ -1,3 +1,5 @@
+import SimpleStatement from "./SimpleStatement"
+import { VoidType } from "../type/index"
 
 export default class NativeCall extends SimpleStatement {
 

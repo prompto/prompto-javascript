@@ -1,3 +1,8 @@
+import IterableType from "./IterableType"
+import { Identifier } from "../grammar/index"
+import { Variable } from "../runtime/index"
+import { NativeType, IntegerType } from "./index"
+import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration"
 
 export default class CursorType extends IterableType {
 

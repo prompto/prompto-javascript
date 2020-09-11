@@ -1,3 +1,5 @@
+import JavaScriptExpression from "./JavaScriptExpression"
+import { ThisExpression } from "../expression/index"
 
 export default class JavaScriptThisExpression extends JavaScriptExpression {
 

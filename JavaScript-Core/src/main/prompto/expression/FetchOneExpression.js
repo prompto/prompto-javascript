@@ -1,3 +1,9 @@
+import Expression from "./Expression"
+import { AnyType, CategoryType } from "../type/index"
+import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from "../store/index"
+import { NullValue } from "../value/index"
+import { CategoryDeclaration } from "../declaration/index"
+import { Identifier } from "../grammar/index"
 
 export default class FetchOneExpression extends Expression {
  

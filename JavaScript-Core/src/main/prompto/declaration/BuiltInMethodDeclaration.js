@@ -1,8 +1,7 @@
 import BaseMethodDeclaration from "./BaseMethodDeclaration"
 import { ParameterList } from "../param/index"
 import { BuiltInContext } from "../runtime/index"
-import {  } from "../error/index"
-
+import { InternalError } from "../error/index"
 
 export default class BuiltInMethodDeclaration extends BaseMethodDeclaration {
 

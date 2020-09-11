@@ -1,3 +1,8 @@
+import BaseType from "./BaseType"
+import { TextType, ListType } from "./index"
+import { List } from "../intrinsic/index"
+import { SymbolOfMethodDeclaration } from "../builtins/EnumeratedNativeTypeBuiltins"
+
 export default class EnumeratedNativeType extends BaseType {
 
     constructor(name, derivedFrom) {
@@ -15,7 +20,7 @@ export default class EnumeratedNativeType extends BaseType {
         } else if ("name"==name) {
             return TextType.instance;
         } else {
-            return BaseType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -23,7 +28,7 @@ export default class EnumeratedNativeType extends BaseType {
         if ("symbols"==name) {
             return new ListType(this);
         } else {
-            return BaseType.prototype.checkStaticMember.call(this, context, section, name);
+            return super.checkStaticMember(context, section, name);
         }
     }
 
@@ -49,7 +54,7 @@ export default class EnumeratedNativeType extends BaseType {
         if ("value"==name || "name"==name) {
             transpiler.append(name);
         } else {
-            return BaseType.prototype.transpileMember.call(this, transpiler, name);
+            return super.transpileMember(transpiler, name);
         }
     }
 
@@ -65,7 +70,7 @@ export default class EnumeratedNativeType extends BaseType {
         if ("symbols"==name) {
             transpiler.append(name);
         } else {
-            return BaseType.prototype.transpileStaticMember.call(this, transpiler, name);
+            return super.transpileStaticMember(transpiler, name);
         }
     }
 
@@ -88,10 +93,9 @@ export default class EnumeratedNativeType extends BaseType {
     getStaticMemberMethods(context, name) {
         switch (name) {
             case "symbolOf":
-                const SymbolOfMethodDeclaration = require("../builtins/EnumeratedNativeTypeBuiltins").SymbolOfMethodDeclaration;
                 return [new SymbolOfMethodDeclaration(this)];
             default:
-                return BaseType.prototype.getStaticMemberMethods.call(this, context, name);
+                return super.getStaticMemberMethods(context, name);
         }
     }
 }

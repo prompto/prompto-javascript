@@ -1,3 +1,4 @@
+import NamedInstance from "../grammar/NamedInstance"
 
 export default class Variable extends NamedInstance {
 
