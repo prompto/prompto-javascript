@@ -7,13 +7,13 @@ export {default as grammar} from  './grammar/index';
 export {default as instance} from  './instance/index'; 
 export {default as intrinsic} from  './intrinsic/index';
 export {default as java} from  './java/index'; 
-export {default as jsx} from  './jsx/index'; /*
-export {default as literal} from  './literal/index';
-export {default as memstore} from  './memstore/index';
-export {default as param} from  './param/index';
-export {default as parser} from  './parser/index';
-export {default as problem} from  './problem/index';
-export {default as runtime} from  './runtime/index';
+export {default as jsx} from  './jsx/index'; 
+export {default as literal} from  './literal/index'; 
+export {default as memstore} from  './memstore/index'; 
+export {default as param} from  './param/index'; /*
+export {default as parser} from  './parser/index'; */
+export {default as problem} from  './problem/index'; 
+export {default as runtime} from  './runtime/index'; /*
 export {default as statement} from  './statement/index';
 export {default as store} from  './store/index';
 export {default as type} from  './type/index';

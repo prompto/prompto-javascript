@@ -14,3 +14,4 @@ export {default as MethodFinder} from './MethodFinder';
 export {default as LinkedValue} from './LinkedValue';
 export {default as LinkedVariable} from './LinkedVariable';
 export {default as WidgetField} from './WidgetField';
+export default {}

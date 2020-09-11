@@ -6,3 +6,4 @@ export {default as CodeParameter} from "./CodeParameter";
 export {default as MethodParameter} from "./MethodParameter";
 export {default as UnresolvedParameter} from "./UnresolvedParameter";
 export {default as ParameterList} from "./ParameterList";
+export default {}

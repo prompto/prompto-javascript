@@ -29,3 +29,4 @@ export {default as DocEntryList} from './DocEntryList';
 // export {default as VersionLiteral} from './VersionLiteral';
 // export {default as UUIDLiteral} from './UUIDLiteral';
 export {default as TypeLiteral} from './TypeLiteral';
+export default {}
