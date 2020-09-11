@@ -1,3 +1,5 @@
+import { NotMutableError } from "../error/index"
+import { AnyType } from "../type/index"
 
 export default class ItemInstance {
 

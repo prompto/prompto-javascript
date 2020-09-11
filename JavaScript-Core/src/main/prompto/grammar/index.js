@@ -15,3 +15,4 @@ export {default as ArgumentList} from "./ArgumentList"
 // export {default as  NativeCategoryBindingList} from"./NativeCategoryBindingList";
 export {default as NamedInstance} from"./NamedInstance"
 export {default as Specificity} from "./Specificity"
+export default {}

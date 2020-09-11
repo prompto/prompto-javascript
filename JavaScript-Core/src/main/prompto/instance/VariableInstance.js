@@ -1,3 +1,5 @@
+import { Variable } from "../runtime/index"
+import { VoidType, CategoryType, DocumentType, CodeType } from "../type/index"
 
 export default class VariableInstance {
   

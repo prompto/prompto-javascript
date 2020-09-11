@@ -1,3 +1,4 @@
+import { NotMutableError } from "../error/index"
 
 export default class MemberInstance {
    
