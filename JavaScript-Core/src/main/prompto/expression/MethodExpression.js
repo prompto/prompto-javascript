@@ -1,3 +1,8 @@
+import Expression from "./Expression"
+import { Dialect } from "../parser/index"
+import { MethodType } from "../type/index"
+import { ClosureValue } from "../value/index"
+import { MethodDeclarationMap, InstanceContext } from "../runtime/index"
 
 export default class MethodExpression extends Expression {
 

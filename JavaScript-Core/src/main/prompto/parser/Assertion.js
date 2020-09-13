@@ -1,3 +1,5 @@
+import { BooleanType } from "../type/index"
+import { EqualsExpression } from "../expression/index"
 
 export default class Assertion {
 

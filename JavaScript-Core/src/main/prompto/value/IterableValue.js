@@ -1,7 +1,12 @@
+import Value from "./Value"
+import { IntegerValue, ListValue } from "./index"
+import { IteratorType } from "../type/index"
+import { Variable } from "../runtime/index"
 
 export default class IterableValue extends Value {
 
     constructor(context, name, itemType, source, length, expression) {
+        // TODO should this not be IterableType ?
         super(new IteratorType(itemType));
         this.context = context;
         this.name = name;

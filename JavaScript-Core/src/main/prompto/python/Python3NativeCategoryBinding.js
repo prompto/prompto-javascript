@@ -1,3 +1,4 @@
+import PythonNativeCategoryBinding from "./PythonNativeCategoryBinding"
 
 export default class Python3NativeCategoryBinding extends PythonNativeCategoryBinding {
 

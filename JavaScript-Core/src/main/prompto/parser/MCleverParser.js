@@ -1,6 +1,6 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const fs = isNodeJs ? require("fs") : {}; // nodejs only
-import antlr4 from "antlr4/index";
+import antlr4 from "antlr4";
 import { MParser } from "./MParser"
 
 function createInput(input) {

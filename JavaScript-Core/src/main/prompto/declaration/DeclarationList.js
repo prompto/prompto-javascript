@@ -1,3 +1,5 @@
+import ObjectList from "../utils/ObjectList"
+import { AttributeDeclaration, CategoryDeclaration, BaseMethodDeclaration, TestMethodDeclaration, EnumeratedNativeDeclaration } from "./index"
 
 export default class DeclarationList extends ObjectList {
 

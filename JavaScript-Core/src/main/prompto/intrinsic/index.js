@@ -1,6 +1,6 @@
 export { $Root } from "./$Root";
 export {default as Any} from "./Any";
-// export {default as Blob} from "./Blob";
+export {default as Blob} from "./Blob";
 // export {default as Cursor} from "./Cursor";
 export {default as DateTime} from "./DateTime";
 export {default as Dictionary} from "./Dictionary";

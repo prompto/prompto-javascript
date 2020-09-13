@@ -1,3 +1,6 @@
+import Symbol from "./Symbol"
+import { Dialect } from "../parser/index"
+import { TextValue } from "../value/index"
 import { SyntaxError } from "../error/index"
 
 export default class NativeSymbol extends Symbol {

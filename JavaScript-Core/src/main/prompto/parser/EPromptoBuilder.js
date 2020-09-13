@@ -17,7 +17,7 @@ import java from "../java/index";
 import csharp from "../csharp/index";
 import python from "../python/index";
 
-function EPromptoBuilder(eparser) {
+export default function EPromptoBuilder(eparser) {
     parser.EParserListener.call(this);
     this.input = eparser.getTokenStream();
     this.path = eparser.path;
@@ -3046,5 +3046,3 @@ EPromptoBuilder.prototype.readValidToken = function(idx, allowWS) {
     }
 };
 
-
-export {EPromptoBuilder};

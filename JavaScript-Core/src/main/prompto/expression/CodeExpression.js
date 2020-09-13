@@ -1,3 +1,6 @@
+import Expression from "./Expression"
+import { CodeType } from "../type/index"
+import { CodeValue } from "../value/index"
 
 export default class CodeExpression extends Expression {
 

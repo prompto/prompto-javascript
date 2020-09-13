@@ -15,3 +15,5 @@ export {default as JavaScriptThisExpression} from'./JavaScriptThisExpression';
 export {default as JavaScriptNativeCategoryBinding} from"./JavaScriptNativeCategoryBinding";
 export {default as JavaScriptType} from"./JavaScriptType";
 export {default as JavaScriptModule} from"./JavaScriptModule";
+
+export default {}

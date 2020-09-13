@@ -18,3 +18,4 @@ export {default as PythonNativeCategoryBinding} from "./PythonNativeCategoryBind
 export {default as Python2NativeCategoryBinding} from "./Python2NativeCategoryBinding";
 export {default as Python3NativeCategoryBinding} from "./Python3NativeCategoryBinding";
 
+export default {}

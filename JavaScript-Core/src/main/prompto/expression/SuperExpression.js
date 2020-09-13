@@ -1,3 +1,6 @@
+import ThisExpression from "./ThisExpression"
+import { AnyType, CategoryType } from "../type/index"
+import { InstanceContext } from "../runtime/index"
 
 export default class SuperExpression extends ThisExpression {
 

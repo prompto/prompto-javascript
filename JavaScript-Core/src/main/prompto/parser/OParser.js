@@ -1,6 +1,6 @@
 // Generated from OParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-import antlr4 from 'antlr4/index';
+import antlr4 from 'antlr4';
 
 import {OParserListener} from './OParserListener';
 import {AbstractParser} from './AbstractParser';

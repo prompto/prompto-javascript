@@ -2,7 +2,7 @@ export {default as PromptoError} from'./PromptoError';
 export {default as UserError} from'./UserError';
 export {default as InternalError} from'./InternalError';
 export {default as SyntaxError} from'./SyntaxError';
-// export {default as ReadWriteError} from'./ReadWriteError';
+export {default as ReadWriteError} from'./ReadWriteError';
 export {default as NotStorableError} from'./NotStorableError';
 export {default as ExecutionError} from'./ExecutionError';
 export {default as InvalidDataError} from'./InvalidDataError';

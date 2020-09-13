@@ -1,4 +1,9 @@
-import { SyntaxError } from "../error/index"
+import Expression from "./Expression"
+import { UnresolvedIdentifier, ArrowExpression, InstanceExpression } from "./index"
+import { CategoryType, DocumentType, ListType, SetType } from "../type/index"
+import { ListValue, SetValue } from "../value/index"
+import { List } from "../intrinsic/index"
+import { SyntaxError, NullReferenceError, InternalError } from "../error/index"
 
 export default class SortedExpression extends Expression {
  

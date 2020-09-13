@@ -1,5 +1,10 @@
+import Expression from "./Expression"
+import { AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType } from "../type/index"
+import { IntegerValue, DecimalValue } from "../value/index"
+import { MethodDeclarationMap } from "../runtime/index"
 
-export default function getTargetType(context, itype, mutable) {
+
+function getTargetType(context, itype, mutable) {
     if (itype instanceof IterableType) {
         const itemType = getTargetType(context, itype.itemType);
         if (itemType)
@@ -35,13 +40,13 @@ function getTargetAtomicType(context, itype) {
 }
 
 
-class CastExpression extends Expression {
+export default class CastExpression extends Expression {
+
     constructor(expression, type, mutable) {
         super();
         this.expression = expression;
         this.type = type.anyfy();
         this.mutable = mutable;
-        return this;
     }
 
     check(context) {

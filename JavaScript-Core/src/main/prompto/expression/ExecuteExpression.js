@@ -1,4 +1,6 @@
-import { SyntaxError } from "../error/index"
+import Expression from "./Expression"
+import { CodeValue } from "../value/index"
+import { SyntaxError, PromptoError } from "../error/index"
 
 export default class ExecuteExpression extends Expression {
 

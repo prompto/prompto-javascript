@@ -1,3 +1,8 @@
+import BaseDeclaration from "./BaseDeclaration"
+import { VoidType } from "../type/index"
+import { PromptoError } from "../error/index"
+import { Identifier } from "../grammar/index"
+
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
 export default class TestMethodDeclaration extends BaseDeclaration {

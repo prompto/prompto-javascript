@@ -1,3 +1,5 @@
+import ExecutionError from "./ExecutionError"
+
 export default function ReadWriteError(message) {
     ExecutionError.call(this, message);
     return this;

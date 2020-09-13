@@ -1,4 +1,4 @@
-import antlr4 from "antlr4/index";
+import antlr4 from "antlr4";
 import { ONamingLexer, OCleverParser } from "./index"
 
 export default function OParserFactory() {

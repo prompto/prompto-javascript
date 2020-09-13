@@ -1,3 +1,4 @@
+import PythonExpression from "./PythonExpression"
 
 export default class PythonSelfExpression extends PythonExpression {
 

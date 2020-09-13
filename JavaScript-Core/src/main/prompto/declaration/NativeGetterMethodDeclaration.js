@@ -1,3 +1,4 @@
+import GetterMethodDeclaration from "./GetterMethodDeclaration"
 
 export default class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
 

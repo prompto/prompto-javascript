@@ -1,4 +1,4 @@
-import antlr4 from "antlr4/index";
+import antlr4 from "antlr4";
 import { EIndentingLexer, ECleverParser } from "./index"
 
 export default function EParserFactory() {

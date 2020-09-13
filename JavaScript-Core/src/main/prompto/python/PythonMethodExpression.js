@@ -1,3 +1,5 @@
+import PythonSelectorExpression from "./PythonSelectorExpression"
+import { PythonArgumentList } from "./index"
 
 export default class PythonMethodExpression extends PythonSelectorExpression {
 

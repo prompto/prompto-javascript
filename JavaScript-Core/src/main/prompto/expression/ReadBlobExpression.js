@@ -1,3 +1,7 @@
+import Expression from "./Expression"
+import { BlobValue } from "../value/index"
+import { ResourceType, BlobType } from "../type/index"
+import { NullReferenceError, InvalidResourceError} from "../error/index"
 
 export default class ReadBlobExpression extends Expression {
 

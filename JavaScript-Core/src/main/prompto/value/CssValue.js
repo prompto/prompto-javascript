@@ -1,3 +1,5 @@
+import Value from "./Value"
+import { CssType } from "../type/index"
 
 export default class CssValue extends Value {
 

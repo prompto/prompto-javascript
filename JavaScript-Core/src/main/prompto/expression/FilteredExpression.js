@@ -1,4 +1,9 @@
-import { SyntaxError } from "../error/index"
+import Expression from "./Expression"
+import { ArrowExpression } from "./index"
+import { Variable } from "../runtime/index"
+import { IdentifierList } from "../grammar/index"
+import { IterableType, ListType, AnyType, BooleanType } from "../type/index"
+import { SyntaxError, NullReferenceError, InternalError } from "../error/index"
 
 export default class FilteredExpression extends Expression {
  

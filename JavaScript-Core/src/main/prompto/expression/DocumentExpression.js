@@ -1,3 +1,8 @@
+import Expression from "./Expression"
+import { DocumentType } from "../type/index"
+import { DocumentValue, BlobValue, ConcreteInstance } from "../value/index"
+import { Blob, Document } from "../intrinsic/index"
+import { ReadWriteError } from "../error/index"
 
 export default class DocumentExpression extends Expression {
  

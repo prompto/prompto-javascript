@@ -1,4 +1,6 @@
-import { SyntaxError } from "../error/index"
+import SelectorExpression from "./SelectorExpression"
+import { Value, NullValue } from "../value/index"
+import { SyntaxError, NullReferenceError } from "../error/index"
 
 export default class ItemSelector extends SelectorExpression {
 

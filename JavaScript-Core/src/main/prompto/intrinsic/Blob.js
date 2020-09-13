@@ -1,6 +1,5 @@
-// var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
-// var stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
-// var Document = require("./Document").Document;
+import { utf8BufferToString, stringToUtf8Buffer } from "../utils/index"
+import Document from "./Document"
 
 export default function Blob() {
     this.zipped = null;

@@ -1,3 +1,7 @@
+import NativeCategoryDeclaration from "./NativeCategoryDeclaration"
+import { ResourceType } from "../type/index"
+import { NativeResource } from "../value/index"
+import { ResourceContext } from "../runtime/index"
 
 export default class NativeResourceDeclaration extends NativeCategoryDeclaration {
 

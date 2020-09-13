@@ -1,3 +1,6 @@
+import Expression from "./Expression"
+import { CategoryType } from "../type/index"
+import { NullValue, ConcreteInstance, NativeInstance } from "../value/index"
 
 export default class MutableExpression extends Expression {
 

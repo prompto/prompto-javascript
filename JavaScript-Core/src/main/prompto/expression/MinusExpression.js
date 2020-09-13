@@ -1,3 +1,4 @@
+import Expression from "./Expression"
 
 export default class MinusExpression extends Expression {
 
@@ -36,5 +37,3 @@ export default class MinusExpression extends Expression {
         return type.transpileMinus(transpiler, this.expression);
     }
 }
-
-export {MinusExpression};

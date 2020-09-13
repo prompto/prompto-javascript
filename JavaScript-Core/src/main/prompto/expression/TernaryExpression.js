@@ -1,3 +1,7 @@
+import Expression from "./Expression"
+import { Dialect } from "../parser/index"
+import { BooleanType, TypeMap } from "../type/index"
+import { BooleanValue } from "../value/index"
 
 export default class TernaryExpression extends Expression {
 

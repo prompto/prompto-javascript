@@ -1,3 +1,4 @@
+import NativeInstance from "./NativeInstance"
 
 export default class NativeResource extends NativeInstance {
   

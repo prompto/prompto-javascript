@@ -1,3 +1,6 @@
+import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
+import { NullValue, IntegerValue, DecimalValue } from "../value/index"
+import { VoidType, IntegerType, DecimalType } from "../type/index"
 
 export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
 

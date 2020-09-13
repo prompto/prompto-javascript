@@ -1,4 +1,4 @@
-import antlr4 from 'antlr4/index';
+import antlr4 from 'antlr4';
 
 export default class ProblemCollector extends antlr4.error.ErrorListener {
    

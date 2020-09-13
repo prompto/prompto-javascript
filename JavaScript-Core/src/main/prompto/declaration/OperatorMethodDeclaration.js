@@ -1,3 +1,7 @@
+import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
+import { VoidType } from "../type/index"
+import { ParameterList } from "../param/index"
+import { Identifier } from "../grammar/index"
 
 export default class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
 

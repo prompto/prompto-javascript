@@ -1,3 +1,10 @@
+import Expression from "./Expression"
+import { ParenthesisExpression } from "./index"
+import { Variable } from "../runtime/index"
+import { IteratorType } from "../type/index"
+import { IterableValue } from "../value/index"
+import { UnresolvedCall } from "../statement/index"
+import { InternalError } from "../error/index"
 
 export default class IteratorExpression extends Expression {
   

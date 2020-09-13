@@ -1,4 +1,10 @@
+import Expression from "./Expression"
 import { SyntaxError } from "../error/index"
+import { ContOp } from "../grammar/index"
+import { MatchOp } from "../store/index"
+import { UnresolvedIdentifier, InstanceExpression, MemberSelector } from "../expression/index"
+import { Value, NullValue, BooleanValue, Instance } from "../value/index"
+import { CodeWriter } from "../utils/index"
 
 export default class ContainsExpression extends Expression {
   

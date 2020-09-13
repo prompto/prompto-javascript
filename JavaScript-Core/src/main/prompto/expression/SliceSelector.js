@@ -1,6 +1,10 @@
-import { SyntaxError } from "../error/index"
+import SelectorExpression from "./SelectorExpression"
+import { IntegerType } from "../type/index"
+import { IntegerValue } from "../value/index"
 
-class SliceSelector extends SelectorExpression {
+import { SyntaxError, NullReferenceError } from "../error/index"
+
+export default class SliceSelector extends SelectorExpression {
 
     constructor(parent, first, last) {
         super(parent);
