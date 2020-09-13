@@ -1,3 +1,4 @@
+import { SyntaxError } from "../error/index"
 
 class SliceSelector extends SelectorExpression {
 

@@ -6,6 +6,7 @@ import { Variable, LinkedVariable, LinkedValue } from "../runtime/index"
 import { ContainerType, TextType, CharacterType, BooleanType, NullType, IntegerType, DecimalType } from "../type/index"
 import { NullValue, BooleanValue, Value, TypeValue, Instance } from "../value/index"
 import { CodeWriter } from "../utils/index"
+import { SyntaxError } from "../error/index"
 
 const VOWELS = "AEIO"; // sufficient here
 

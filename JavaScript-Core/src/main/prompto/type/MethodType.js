@@ -1,4 +1,5 @@
 import BaseType from "./BaseType"
+import { SyntaxError } from "../error/index"
 
 export default class MethodType extends BaseType {
   

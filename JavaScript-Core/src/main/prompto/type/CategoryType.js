@@ -10,6 +10,7 @@ import { MethodDeclarationMap, MethodFinder, Score } from "../runtime/index"
 import { MethodCall } from "../statement/index"
 import { $DataStore } from "../store/index"
 import { compareValues } from "../utils/index"
+import { SyntaxError } from "../error/index"
 
 export default class CategoryType extends BaseType {
   

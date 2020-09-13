@@ -5,7 +5,7 @@ import { MethodType, CategoryType, TypeType } from "../type/index"
 import { MethodDeclarationMap } from "../runtime/index"
 import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from "../value/index"
 import { SingletonCategoryDeclaration } from "../declaration/index"
-import { NullReferenceError } from "../error/index"
+import { NullReferenceError, SyntaxError } from "../error/index"
 
 export default class MethodSelector extends MemberSelector {
   

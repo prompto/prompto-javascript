@@ -8,6 +8,7 @@ import { MethodType, BooleanType, VoidType } from "../type/index"
 import { ClosureValue } from "../value/index"
 import { EqOp } from "../grammar/index"
 import { BooleanLiteral } from "../literal/index"
+import { SyntaxError } from "../error/index"
 
 export default class InstanceExpression extends Expression {
   

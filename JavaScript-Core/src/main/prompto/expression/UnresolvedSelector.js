@@ -3,6 +3,7 @@ import { UnresolvedIdentifier, MemberSelector, MethodSelector } from "./index"
 import { UnresolvedCall } from "../statement/index"
 import { AnyType } from "../type/index"
 import { ProblemListener } from "../problem/index"
+import { SyntaxError } from "../error/index"
 
 export default class UnresolvedSelector extends SelectorExpression {
 

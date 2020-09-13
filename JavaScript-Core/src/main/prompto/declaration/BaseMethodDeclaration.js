@@ -2,6 +2,7 @@ import BaseDeclaration from "./BaseDeclaration"
 import { ArgumentList, Argument } from "../grammar/index"
 import { ParameterList } from "../param/index"
 import { ProblemListener } from "../problem/index"
+import { SyntaxError } from "../error/index"
 
 export default class BaseMethodDeclaration extends BaseDeclaration {
 

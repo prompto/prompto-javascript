@@ -1,6 +1,7 @@
 import CategoryType from "./CategoryType"
 import { TextType, ListType } from "./index"
 import { SymbolOfMethodDeclaration } from "../builtins/EnumeratedCategoryTypeBuiltins"
+import { SyntaxError } from "../error/index"
 
 export default class EnumeratedCategoryType extends CategoryType {
   

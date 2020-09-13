@@ -2,6 +2,7 @@ import SimpleStatement from "./SimpleStatement"
 import { VoidType, AnyType, TupleType } from "../type/index"
 import { Variable } from "../runtime/index"
 import { IntegerValue, TupleValue } from "../value/index"
+import { SyntaxError } from "../error/index"
 
 export default class AssignTupleStatement extends SimpleStatement {
 

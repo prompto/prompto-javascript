@@ -2,6 +2,7 @@ import BaseMethodDeclaration from "./BaseMethodDeclaration"
 import { CategoryParameter, CodeParameter } from "../param/index"
 import { StatementList, DeclarationStatement } from "../statement/index"
 import { VoidType, DictionaryType, TextType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
 

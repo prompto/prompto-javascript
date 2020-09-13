@@ -1,5 +1,6 @@
 import Value from "./Value"
 import { BooleanType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class BooleanValue extends Value {
   

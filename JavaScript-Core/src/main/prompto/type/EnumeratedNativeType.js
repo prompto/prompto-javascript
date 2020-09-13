@@ -2,6 +2,7 @@ import BaseType from "./BaseType"
 import { TextType, ListType } from "./index"
 import { List } from "../intrinsic/index"
 import { SymbolOfMethodDeclaration } from "../builtins/EnumeratedNativeTypeBuiltins"
+import { SyntaxError } from "../error/index"
 
 export default class EnumeratedNativeType extends BaseType {
 

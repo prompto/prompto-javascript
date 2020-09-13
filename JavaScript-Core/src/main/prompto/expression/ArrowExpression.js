@@ -4,6 +4,7 @@ import { ReturnStatement, StatementList } from "../statement/index"
 import { Variable } from "../runtime/index"
 import { IntegerValue, BooleanValue } from "../value/index"
 import { VoidType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class ArrowExpression extends Expression {
   

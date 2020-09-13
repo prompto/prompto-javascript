@@ -1,7 +1,7 @@
 import BaseValueList from "./BaseValueList"
 import { BooleanValue, SetValue } from "./index"
 import { TupleType } from "../type/index"
-import { InternalError } from "../error/index"
+import { InternalError, SyntaxError } from "../error/index"
 
 export default class TupleValue extends BaseValueList {
 

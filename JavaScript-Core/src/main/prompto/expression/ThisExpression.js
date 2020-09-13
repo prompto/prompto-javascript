@@ -1,6 +1,7 @@
 import Expression from "./Expression"
 import { InstanceContext, DocumentContext } from "../runtime/index"
 import { DocumentType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class ThisExpression extends Expression {
 

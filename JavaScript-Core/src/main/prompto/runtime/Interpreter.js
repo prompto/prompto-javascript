@@ -1,3 +1,4 @@
+import { SyntaxError } from "../error/index"
 
 const argsType = new DictionaryType(TextType.instance);
 

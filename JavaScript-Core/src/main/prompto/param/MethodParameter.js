@@ -2,6 +2,7 @@ import Parameter from "./Parameter"
 import { MethodType } from "../type/index"
 import { ArrowValue, ContextualExpression } from "../value/index"
 import { ArrowExpression } from "../expression/index"
+import { SyntaxError } from "../error/index"
 
 export default class MethodParameter extends Parameter {
 

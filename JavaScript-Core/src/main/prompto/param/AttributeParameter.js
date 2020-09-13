@@ -1,4 +1,5 @@
 import Parameter from "./Parameter"
+import { SyntaxError } from "../error/index"
 
 export default class AttributeParameter extends Parameter {
 

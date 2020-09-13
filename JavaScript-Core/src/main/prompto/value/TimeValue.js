@@ -1,6 +1,7 @@
 import Value from "./Value"
 import { PeriodValue, IntegerValue, TextValue } from "./index"
 import { TimeType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class TimeValue extends Value {
  

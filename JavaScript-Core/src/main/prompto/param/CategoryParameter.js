@@ -1,6 +1,7 @@
 import Parameter from "./Parameter"
 import { MethodType } from "../type/index"
 import { equalObjects } from "../utils/index"
+import { SyntaxError } from "../error/index"
 
 export default class CategoryParameter extends Parameter {
     

@@ -3,6 +3,7 @@ import { getTypeName } from "../utils/index"
 import { NativeInstance } from "../value/index"
 import { JavaScriptNativeCategoryBinding } from "../javascript/index"
 import { CategoryType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
 

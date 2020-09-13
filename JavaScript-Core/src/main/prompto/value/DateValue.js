@@ -1,6 +1,7 @@
 import Value from "./Value"
 import { TimeValue, PeriodValue, IntegerValue, DateTimeValue, TextValue } from "./index"
 import { DateType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class DateValue extends Value {
   

@@ -1,5 +1,6 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const path = isNodeJs ? require('path') : null;
+import { SyntaxError } from "../error/index"
 
 export default class JavaScriptModule {
 

@@ -38,4 +38,5 @@ export {default as EnumeratedCategoryType} from './EnumeratedCategoryType';
 export {default as TypeType} from './TypeType';
 export {default as PropertiesType} from './PropertiesType';
 export {default as TypeMap} from './TypeMap';
+
 export default {}

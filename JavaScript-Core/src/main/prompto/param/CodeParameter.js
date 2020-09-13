@@ -1,5 +1,6 @@
 import Parameter from "./Parameter"
 import { CodeType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class CodeParameter extends Parameter {
 

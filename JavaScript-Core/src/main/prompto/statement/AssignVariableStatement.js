@@ -1,6 +1,7 @@
 import SimpleStatement from "./SimpleStatement"
 import { VoidType, ResourceType } from "../type/index"
 import { Variable } from "../runtime/index"
+import { SyntaxError } from "../error/index"
 
 export default class AssignVariableStatement extends SimpleStatement {
 

@@ -1,5 +1,6 @@
 import { NotMutableError } from "../error/index"
 import { AnyType } from "../type/index"
+import { SyntaxError } from "../error/index"
 
 export default class ItemInstance {
 

@@ -5,6 +5,7 @@ import { CodeWriter } from "../utils/index"
 import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from "../expression/index"
 import { MethodCall } from "../statement/index"
 import { CategoryDeclaration } from "../declaration/index"
+import { SyntaxError } from "../error/index"
 
 export default class UnresolvedCall extends BaseStatement {
  

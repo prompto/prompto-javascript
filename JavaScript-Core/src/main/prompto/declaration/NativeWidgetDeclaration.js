@@ -1,4 +1,5 @@
 import NativeCategoryDeclaration from "./NativeCategoryDeclaration"
+import { SyntaxError } from "../error/index"
 
 export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 

@@ -3,6 +3,7 @@ import { Argument } from "./index"
 import { AndExpression, UnresolvedIdentifier } from "../expression/index"
 import { ContextualExpression } from "../value/index"
 import { AttributeParameter } from "../param/index"
+import { SyntaxError } from "../error/index"
 
 export default class ArgumentList extends ObjectList {
 

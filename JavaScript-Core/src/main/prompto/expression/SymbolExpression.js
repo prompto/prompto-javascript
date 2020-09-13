@@ -1,4 +1,5 @@
 import Expression from "./Expression"
+import { SyntaxError } from "../error/index"
 
 export default class SymbolExpression extends Expression {
 

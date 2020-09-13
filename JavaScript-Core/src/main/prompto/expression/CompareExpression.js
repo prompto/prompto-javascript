@@ -1,3 +1,4 @@
+import { SyntaxError } from "../error/index"
 
 export default class CompareExpression extends Expression {
   

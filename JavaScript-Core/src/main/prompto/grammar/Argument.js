@@ -4,7 +4,7 @@ import { InstanceExpression, ArrowExpression, MemberSelector } from "../expressi
 import { MethodType, CategoryType, VoidType } from "../type/index"
 import { ContextualExpression } from "../value/index"
 import { Variable } from "../runtime/index"
-import { PromptoError } from "../error/index"
+import { PromptoError, SyntaxError } from "../error/index"
 
 export default class Argument extends Section {
 
