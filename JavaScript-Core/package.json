@@ -4,11 +4,14 @@
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
   "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "babel-jest": "^26.3.0",
     "eslint": "^7.6.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-es5": "^1.4.1",
     "fibers": "5.0.0",
-    "jest": "^24.7.1",
+    "jest": "^26.4.2",
     "webpack": "4.30.0",
     "webpack-cli": "^3.3.5",
     "webpack-conditional-loader": "^1.0.12"
