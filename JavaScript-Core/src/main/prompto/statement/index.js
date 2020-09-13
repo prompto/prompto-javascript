@@ -33,6 +33,4 @@ export {default as RemoteCall} from "./RemoteCall";
 export {default as FetchOneStatement} from "./FetchOneStatement";
 export {default as FetchManyStatement} from "./FetchManyStatement";
 export {default as ReadStatement} from "./ReadStatement";
-
-// require("./MethodCall";
-// require("./DeclarationStatement";
+export default {}

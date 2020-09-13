@@ -32,3 +32,4 @@ export {default as NativeInstance} from './NativeInstance';
 export {default as ConcreteInstance} from './ConcreteInstance';
 export {default as ArrowValue} from './ArrowValue';
 export {default as ContextualExpression} from './ContextualExpression';
+export default {}
