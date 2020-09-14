@@ -1,4 +1,4 @@
-import ObjectList from "./ObjectList"
+import ObjectList from "../utils/ObjectList"
 
 // TODO move to /expression
 export default class ExpressionList extends ObjectList {

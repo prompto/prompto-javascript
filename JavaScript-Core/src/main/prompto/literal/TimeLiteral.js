@@ -1,3 +1,7 @@
+import Literal from "./Literal"
+import { TimeType } from "../type/index"
+import { TimeValue } from "../value/index"
+import { LocalTime } from "../intrinsic/index"
 
 export default class TimeLiteral extends Literal {
 

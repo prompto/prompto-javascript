@@ -18,7 +18,7 @@ export {default as Container} from './Container';
 export {default as ListValue} from './ListValue';
 export {default as SetValue} from './SetValue';
 export {default as TupleValue} from './TupleValue';
-// export {default as DictionaryValue} from './DictionaryValue';
+export {default as DictionaryValue} from './DictionaryValue';
 export {default as DocumentValue} from './DocumentValue';
 export {default as IterableValue} from './IterableValue';
 export {default as IteratorValue} from './IteratorValue';

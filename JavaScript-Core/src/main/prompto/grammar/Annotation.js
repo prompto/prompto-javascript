@@ -1,3 +1,5 @@
+import Section from "../parser/Section"
+import { AnnotationProcessors } from "../processor/index"
 
 export default class Annotation extends Section {
 

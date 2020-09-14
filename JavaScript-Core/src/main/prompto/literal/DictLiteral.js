@@ -1,3 +1,9 @@
+import Literal from "./Literal"
+import { DictEntryList } from "./index"
+import { DictionaryValue, DecimalValue, TextValue } from "../value/index"
+import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType } from "../type/index"
+import { inferElementType } from "../utils/index"
+import { Dictionary } from "../intrinsic/index"
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.

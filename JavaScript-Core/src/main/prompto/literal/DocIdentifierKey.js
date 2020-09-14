@@ -1,3 +1,4 @@
+import { TextValue } from "../value/index"
 
 export default class DocIdentifierKey {
   

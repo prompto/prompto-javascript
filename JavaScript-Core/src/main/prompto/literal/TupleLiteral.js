@@ -1,3 +1,8 @@
+import Literal from "./Literal"
+import { TupleType } from "../type/index"
+import { TupleValue } from "../value/index"
+import { List, Tuple } from "../intrinsic/index"
+import { ExpressionList } from "../expression/index"
 
 export default class TupleLiteral extends Literal {
 

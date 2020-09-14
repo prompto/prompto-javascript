@@ -1,5 +1,6 @@
+import { IntegerType } from "../type/index";
 
-class RangeLiteral {
+export default class RangeLiteral {
 
     constructor(first, last) {
         this.first = first;

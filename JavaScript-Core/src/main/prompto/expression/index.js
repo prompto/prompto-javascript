@@ -1,4 +1,5 @@
 export {default as Expression} from './Expression';
+export {default as ExpressionList} from './ExpressionList';
 export {default as UnresolvedIdentifier} from './UnresolvedIdentifier';
 export {default as InstanceExpression} from './InstanceExpression';
 export {default as ItemSelector} from './ItemSelector';

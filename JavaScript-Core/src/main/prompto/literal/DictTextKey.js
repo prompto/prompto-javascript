@@ -1,3 +1,4 @@
+import { TextValue } from "../value/index"
 
 /*jshint evil:true*/
 function unescape(text) {

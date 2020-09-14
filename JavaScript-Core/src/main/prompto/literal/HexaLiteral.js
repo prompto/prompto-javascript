@@ -1,3 +1,6 @@
+import Literal from "./Literal"
+import { IntegerType } from "../type/index"
+import { IntegerValue } from "../value/index"
 
 /* jshint bitwise:false*/
 function parseHexa(text) {

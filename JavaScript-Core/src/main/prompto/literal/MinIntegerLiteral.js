@@ -1,5 +1,6 @@
+import IntegerLiteral from "./IntegerLiteral"
 
-class MinIntegerLiteral extends IntegerLiteral {
+export default class MinIntegerLiteral extends IntegerLiteral {
 
     constructor() {
         super("MIN_INTEGER", -0x20000000000000);

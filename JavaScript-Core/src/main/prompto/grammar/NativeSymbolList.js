@@ -1,3 +1,4 @@
+import SymbolList from "./SymbolList"
 
 export default class NativeSymbolList extends SymbolList {
 

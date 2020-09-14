@@ -1,3 +1,4 @@
+import SymbolList from "./SymbolList"
 
 export default class CategorySymbolList extends SymbolList {
 

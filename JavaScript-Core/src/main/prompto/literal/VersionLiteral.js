@@ -1,3 +1,7 @@
+import Literal from "./Literal"
+import { VersionType } from "../type/index"
+import { VersionValue } from "../value/index"
+import { Version } from "../intrinsic/index"
 
 export default class VersionLiteral extends Literal {
 

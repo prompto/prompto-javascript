@@ -1,5 +1,5 @@
+import { InlinedProcessor, PageWidgetOfProcessor, WidgetFieldProcessor, WidgetPropertiesProcessor } from "./index"
 
-/* global Map */
 const processors = new Map();
 
 function forId(id) {
@@ -42,7 +42,7 @@ function registerAll() {
     register(new InlinedProcessor());
 }
 
-export var AnnotationProcessors = {
+export default {
     forId: forId,
     forName: forName,
     register: register,

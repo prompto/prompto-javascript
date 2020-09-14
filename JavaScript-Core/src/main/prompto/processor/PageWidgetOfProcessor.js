@@ -1,3 +1,4 @@
+import AnnotationProcessor from "./AnnotationProcessor"
 
 export default class PageWidgetOfProcessor extends AnnotationProcessor {
 

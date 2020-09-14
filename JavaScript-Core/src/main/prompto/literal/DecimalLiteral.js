@@ -1,3 +1,6 @@
+import Literal from "./Literal"
+import { DecimalType } from "../type/index"
+import { DecimalValue } from "../value/index"
 
 export default class DecimalLiteral extends Literal {
 

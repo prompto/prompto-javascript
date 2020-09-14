@@ -1,3 +1,4 @@
+import ObjectList from "../utils/ObjectList"
 
 export default class MethodDeclarationList extends ObjectList {
 

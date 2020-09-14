@@ -1,6 +1,6 @@
-// var List = require("./List").List;
-// var StrictSet = require("./StrictSet").StrictSet;
-// var equalObjects = require("../utils/Utils").equalObjects;
+import List from "./List"
+import { StrictSet } from "./index"
+import { equalObjects } from "../utils/index"
 
 export default function Tuple(mutable, items) {
 	List.call(this, mutable, items);
@@ -40,7 +40,3 @@ Tuple.prototype.toString = function() {
 };
 
 Tuple.prototype.getText = Tuple.prototype.toString;
-
-
-
-exports.Tuple = Tuple;

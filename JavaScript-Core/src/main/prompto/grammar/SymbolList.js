@@ -1,3 +1,5 @@
+import ObjectList from "../utils/ObjectList"
+import { MissingType } from "../type/index"
 
 export default class SymbolList extends ObjectList {
 
@@ -18,11 +20,11 @@ export default class SymbolList extends ObjectList {
 }
 
 class SymbolListIterator {
+
     constructor(symbols, context) {
         this.symbols = symbols;
         this.context = context;
         this.idx = 0;
-        return this;
     }
 
     hasNext() {
