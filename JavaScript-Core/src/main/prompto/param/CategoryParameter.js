@@ -34,7 +34,7 @@ export default class CategoryParameter extends Parameter {
         if(this.resolved instanceof MethodType)
             return expression.interpretReference(context);
         else
-            return Parameter.prototype.checkValue.call(this, context, expression);
+            return super.checkValue(context, expression);
     }
 
     transpileCall(transpiler, expression) {

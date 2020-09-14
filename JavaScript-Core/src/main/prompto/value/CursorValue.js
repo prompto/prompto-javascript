@@ -74,10 +74,10 @@ export default class CursorValue extends Value {
 }
 
 class CursorIterator extends IteratorValue {
+
     constructor(cursor) {
         super(cursor.type.itemType, cursor.iterable.iterator());
         this.cursor = cursor;
-        return this;
     }
 
     next() {

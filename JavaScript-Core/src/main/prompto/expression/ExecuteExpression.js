@@ -73,5 +73,3 @@ export default class ExecuteExpression extends Expression {
     }
 }
 
-
-export {ExecuteExpression};

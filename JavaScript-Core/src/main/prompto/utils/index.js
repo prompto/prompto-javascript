@@ -1,4 +1,4 @@
-// export {default as CmdLineParser} from './CmdLineParser';
+export {default as CmdLineParser} from './CmdLineParser';
 export {default as ObjectList} from './ObjectList';
 export {default as ExpressionList} from '../expression/ExpressionList';
 export {default as CodeWriter} from './CodeWriter';

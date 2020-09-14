@@ -17,7 +17,7 @@ import java from "../java/index";
 import csharp from "../csharp/index";
 import python from "../python/index";
 
-function OPromptoBuilder(oparser) {
+export default function OPromptoBuilder(oparser) {
 	parser.OParserListener.call(this);
 	this.input = oparser.getTokenStream();
 	this.path = oparser.path;
@@ -2992,5 +2992,3 @@ OPromptoBuilder.prototype.readValidToken = function(idx) {
 	}
 };
 
-
-export {OPromptoBuilder};

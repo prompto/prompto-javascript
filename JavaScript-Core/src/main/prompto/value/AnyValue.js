@@ -1,3 +1,5 @@
+import Value from "./Value"
+import { AnyType } from "../type/index"
 
 export default class AnyValue extends Value {
 
@@ -10,7 +12,5 @@ export default class AnyValue extends Value {
         return "{id:" + this.id + ", text:" + this.text + "}";
     }
 }
-
-AnyValue.prototype.constructor = Value;
 
 

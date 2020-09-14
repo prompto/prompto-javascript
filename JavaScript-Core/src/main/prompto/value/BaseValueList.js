@@ -148,7 +148,7 @@ export default class BaseValueList extends Container {
         if ("count"==name) {
             return new IntegerValue(this.items.length);
         } else {
-            return Container.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 
@@ -183,11 +183,11 @@ export default class BaseValueList extends Container {
 }
 
 class ListIterator {
+
     constructor(items, context) {
         this.items = items;
         this.context = context;
         this.index = -1;
-        return this;
     }
 
     hasNext() {

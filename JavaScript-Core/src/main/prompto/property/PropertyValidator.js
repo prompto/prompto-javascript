@@ -1,3 +1,5 @@
+import { RequiredValidator } from "./index"
+
 export default class PropertyValidator {
 
     isRequired() {
@@ -9,7 +11,6 @@ export default class PropertyValidator {
     }
 
     required() {
-        const RequiredValidator = require("./RequiredValidator").RequiredValidator;
         return new RequiredValidator(this);
     }
 

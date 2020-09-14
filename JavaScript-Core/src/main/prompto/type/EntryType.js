@@ -15,7 +15,7 @@ export default class EntryType extends BaseType {
         } else if ("value"==name) {
             return this.itemType;
         } else {
-            return BaseType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -25,7 +25,7 @@ export default class EntryType extends BaseType {
         else if ("value"==name)
             this.itemType.declare(transpiler);
         else
-            return BaseType.prototype.declareMember.call(this, transpiler, section, name);
+            return super.declareMember(transpiler, section, name);
     }
 
     transpileMember(transpiler, name) {

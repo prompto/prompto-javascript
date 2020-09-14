@@ -531,19 +531,19 @@ class Context {
 }
 
 class ResourceContext extends Context {
+
     constructor() {
         super();
-        return this;
     }
 }
 
 class InstanceContext extends Context {
+
     constructor(instance, type) {
         super();
         this.instance = instance || null;
         this.instanceType = type !== null ? type : instance.type;
         this.widgetFields = null;
-        return this;
     }
 
     getClosestInstanceContext() {
@@ -556,7 +556,7 @@ class InstanceContext extends Context {
             if(field)
                 return field;
         }
-        const actual = Context.prototype.getRegistered.call(this, name);
+        const actual = super.getRegistered(name);
         if (actual)
             return actual;
         const decl = this.getDeclaration();
@@ -602,7 +602,7 @@ class InstanceContext extends Context {
                     return methods;
             }
         }
-        return Context.prototype.getTypedDeclaration.call(this, klass, name)
+        return super.getTypedDeclaration(klass, name)
     }
 
     readRegisteredValue(name) {
@@ -626,7 +626,7 @@ class InstanceContext extends Context {
             return this;
         // params and variables have precedence over members
         // so first look in context values
-        const context = Context.prototype.contextForValue.call(this, name);
+        const context = super.contextForValue(name);
         if(context !== null) {
             return context;
         }
@@ -662,24 +662,24 @@ class InstanceContext extends Context {
 }
 
 class BuiltInContext extends Context {
+
     constructor(value) {
         super();
         this.value = value;
-        return this;
     }
 }
 
 class DocumentContext extends Context {
+
     constructor(document) {
         super();
         this.document = document;
-        return this;
     }
 
     contextForValue(name) {
         // params and variables have precedence over members
         // so first look in context values
-        const context = Context.prototype.contextForValue.call(this, name);
+        const context = super.contextForValue(name);
         if (context !== null)
             return context;
         // since any name is valid in the context of a document

@@ -60,7 +60,7 @@ export default class TextValue extends Value {
         if ("count"==name) {
             return new IntegerValue(this.value.length);
         } else {
-            return Value.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 

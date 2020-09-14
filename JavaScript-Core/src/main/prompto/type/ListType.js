@@ -36,7 +36,7 @@ export default class ListType extends ContainerType {
     }
 
     isAssignableFrom(context, other) {
-        return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || ((other instanceof ListType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
 
@@ -57,7 +57,7 @@ export default class ListType extends ContainerType {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType)) {
             return this;
         } else {
-            return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -66,7 +66,7 @@ export default class ListType extends ContainerType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -77,7 +77,7 @@ export default class ListType extends ContainerType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -85,7 +85,7 @@ export default class ListType extends ContainerType {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
             return this;
         } else {
-            return ContainerType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
         }
     }
 
@@ -94,7 +94,7 @@ export default class ListType extends ContainerType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
         }
     }
 
@@ -105,7 +105,7 @@ export default class ListType extends ContainerType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
         }
     }
 
@@ -113,7 +113,7 @@ export default class ListType extends ContainerType {
         if(itemType==IntegerType.instance) {
             return this.itemType;
         } else {
-            return ContainerType.prototype.checkItem.call(this, context, itemType, expression);
+            return super.checkItem(context, itemType, expression);
         }
     }
 
@@ -122,7 +122,7 @@ export default class ListType extends ContainerType {
             this.itemType.declare(transpiler);
             item.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareItem.call(this, transpiler, itemType, item);
+            return super.declareItem(transpiler, itemType, item);
         }
     }
 
@@ -132,7 +132,7 @@ export default class ListType extends ContainerType {
             item.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileItem.call(this, transpiler, itemType, item);
+            return super.transpileItem(transpiler, itemType, item);
         }
     }
 
@@ -148,7 +148,7 @@ export default class ListType extends ContainerType {
         if(other === IntegerType.instance) {
             return this;
         } else {
-            return ContainerType.prototype.checkMultiply.call(this, context, other, tryReverse);
+            return super.checkMultiply(context, other, tryReverse);
         }
     }
 
@@ -159,7 +159,7 @@ export default class ListType extends ContainerType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareMultiply(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -171,7 +171,7 @@ export default class ListType extends ContainerType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileMultiply(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -242,7 +242,7 @@ export default class ListType extends ContainerType {
             case "join":
                 return [new JoinListMethodDeclaration()];
             default:
-                return ContainerType.prototype.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, name);
         }
     }
 }

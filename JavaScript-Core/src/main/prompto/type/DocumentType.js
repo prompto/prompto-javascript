@@ -43,7 +43,7 @@ export default class DocumentType extends NativeType {
         if(other instanceof DocumentType) {
             return this;
         } else {
-            return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -52,7 +52,7 @@ export default class DocumentType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -63,7 +63,7 @@ export default class DocumentType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -71,7 +71,7 @@ export default class DocumentType extends NativeType {
         if (value instanceof Document)
             return new DocumentValue(value);
         else
-            return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
     declare(transpiler) {

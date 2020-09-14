@@ -93,11 +93,11 @@ export default class RangeValue extends Value {
 }
 
 class RangeIterator {
+
     constructor(context, range) {
         this.context = context;
         this.range = range;
         this.index = 0;
-        return this;
     }
 
     hasNext() {

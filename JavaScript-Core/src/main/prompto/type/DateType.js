@@ -11,7 +11,7 @@ export default class DateType extends NativeType {
     }
 
     isAssignableFrom(context, other) {
-        return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || (other == DateTimeType.instance);
     }
 
@@ -21,7 +21,7 @@ export default class DateType extends NativeType {
         } else if(other === TimeType.instance) {
             return DateTimeType.instance;
         } else {
-            return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -48,7 +48,7 @@ export default class DateType extends NativeType {
             if(other == TimeType.instance)
                 transpiler.register(DateTime);
         } else
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
@@ -61,7 +61,7 @@ export default class DateType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
     checkSubtract(context, other) {
@@ -70,7 +70,7 @@ export default class DateType extends NativeType {
         } else if (other === DateType.instance) {
             return PeriodType.instance;
         } else {
-            return NativeType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
         }
     }
 
@@ -79,7 +79,7 @@ export default class DateType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
     }
 
     transpileSubtract(transpiler, other, left, right) {
@@ -94,14 +94,14 @@ export default class DateType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
     }
 
     checkCompare(context, other, section) {
         if (other === DateType.instance || other instanceof DateTimeType) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkCompare.call(this, context, other, section);
+            return super.checkCompare(context, other, section);
         }
     }
 
@@ -122,7 +122,7 @@ export default class DateType extends NativeType {
         if (other === DateType.instance) {
             return new RangeType(this);
         } else {
-            return NativeType.prototype.checkRange.call(this, context, other);
+            return super.checkRange(context, other);
         }
     }
 
@@ -132,7 +132,7 @@ export default class DateType extends NativeType {
             transpiler.require(module.Range);
             transpiler.require(module.DateRange);
         } else {
-            return NativeType.prototype.declareRange.call(this, transpiler, other);
+            return super.declareRange(transpiler, other);
         }
     }
 
@@ -154,7 +154,7 @@ export default class DateType extends NativeType {
         } else if ("dayOfYear"==name) {
             return IntegerType.instance;
         } else {
-            return NativeType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -182,7 +182,7 @@ export default class DateType extends NativeType {
         if (left instanceof DateValue && right instanceof DateValue) {
             return new DateRange(left, right);
         } else {
-            return NativeType.prototype.newRange.call(this, left, right);
+            return super.newRange(left, right);
         }
     }
 }

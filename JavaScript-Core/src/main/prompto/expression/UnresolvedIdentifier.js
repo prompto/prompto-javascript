@@ -46,7 +46,7 @@ export default class UnresolvedIdentifier extends Expression {
 
     checkAttribute(context) {
         const decl = context.findAttribute(this.name);
-        return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
+        return decl ? decl : super.checkAttribute(context);
     }
 
     checkQuery(context) {

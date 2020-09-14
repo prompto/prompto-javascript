@@ -1,3 +1,11 @@
+import { DictionaryType, TextType } from "../type/index"
+import { CmdLineParser } from "../utils/index"
+import { TextValue, DictionaryValue } from "../value/index"
+import { Identifier, Argument, ArgumentList } from "../grammar/index"
+import { ValueExpression, MethodSelector } from "../expression/index"
+import { MethodCall } from "../statement/index"
+import { UnresolvedParameter } from "../param/index"
+import { DictLiteral } from "../literal/index"
 import { SyntaxError } from "../error/index"
 
 const argsType = new DictionaryType(TextType.instance);
@@ -100,7 +108,7 @@ function identicalArguments(args, argTypes) {
 	return true;
 }
 
-class Interpreter {
+export default class Interpreter {
     static interpret(context, methodName, cmdLineArgs) {
         try {
             const method = locateMethod(context, methodName, cmdLineArgs);
@@ -134,6 +142,5 @@ class Interpreter {
 }
 
 export {locateMethod};
-export {Interpreter};
 
 

@@ -26,7 +26,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
     }
 
     getLocalAttributes() {
-        let attributes = ConcreteCategoryDeclaration.prototype.getLocalAttributes.call(this);
+        let attributes = super.getLocalAttributes();
         if(!attributes)
             attributes = new IdentifierList();
         if(!attributes.hasAttribute("name"))
@@ -38,7 +38,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         if("name"==name)
             return true;
         else
-            return ConcreteCategoryDeclaration.prototype.hasAttribute.call(this, context, name);
+            return super.hasAttribute(context, name);
     }
 
     setSymbols(symbols) {

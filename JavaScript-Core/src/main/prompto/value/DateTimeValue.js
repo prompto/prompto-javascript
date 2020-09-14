@@ -90,7 +90,7 @@ export default class DateTimeValue extends Value {
         } catch (error) {
             // don't do anything
         }
-        return Value.prototype.getMemberValue.call(this, context, name);
+        return super.getMemberValue(context, name);
     }
 
     equals(obj) {

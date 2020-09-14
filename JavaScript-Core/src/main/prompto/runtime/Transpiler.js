@@ -1,3 +1,5 @@
+import { CategoryDeclaration } from "../declaration/index"
+import { List, StrictSet } from "../intrinsic/index"
 
 const coreNodeClasses = new Set(["Socket"]);
 

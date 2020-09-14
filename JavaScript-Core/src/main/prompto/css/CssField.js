@@ -1,8 +1,8 @@
 export default class CssField {
+
     constructor(name, value) {
         this.name = name;
         this.value = value;
-        return this;
     }
 
     toDialect(writer) {

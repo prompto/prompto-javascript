@@ -94,7 +94,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     hasAttribute(context, name) {
-        if (CategoryDeclaration.prototype.hasAttribute.call(this, context, name)) {
+        if (super.hasAttribute(context, name)) {
             return true;
         } else {
             return this.hasDerivedAttribute(context, name);
@@ -156,7 +156,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         context = context.newInstanceContext(null, this.getType(context), false);
         this.checkDerived(context);
         this.checkMethods(context);
-        return CategoryDeclaration.prototype.check.call(this, context);
+        return super.check(context);
     }
 
     checkMethods(context) {
@@ -242,7 +242,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     getAllAttributes(context) {
-        const local = CategoryDeclaration.prototype.getAllAttributes.call(this, context) || new Set();
+        const local = super.getAllAttributes(context) || new Set();
         if(this.derivedFrom!=null) {
             this.derivedFrom.forEach(function (id) {
                 const derived = this.getAncestorAttributes(context, id);

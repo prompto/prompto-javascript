@@ -39,7 +39,7 @@ export default class MethodParameter extends Parameter {
 
     checkValue(context, expression) {
         const isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
-        return isArrow ? this.checkArrowValue(context, expression) : Parameter.prototype.checkValue.call(this, context, expression);
+        return isArrow ? this.checkArrowValue(context, expression) : super.checkValue(context, expression);
     }
 
     checkArrowValue(context, expression) {

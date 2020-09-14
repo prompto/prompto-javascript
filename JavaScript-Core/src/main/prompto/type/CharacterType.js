@@ -25,7 +25,7 @@ export default class CharacterType extends NativeType {
         if ("codePoint"==name) {
             return IntegerType.instance;
         } else {
-            return NativeType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -63,7 +63,7 @@ export default class CharacterType extends NativeType {
         if(other === IntegerType.instance) {
             return TextType.instance;
         }
-        return NativeType.prototype.checkMultiply.apply(this, context, other, tryReverse);
+        return super.checkMultiply.apply(this, context, other, tryReverse);
     }
 
     declareMultiply(transpiler, other, tryReverse, left, right) {
@@ -71,7 +71,7 @@ export default class CharacterType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
     transpileMultiply(transpiler, other, tryReverse, left, right) {
@@ -81,14 +81,14 @@ export default class CharacterType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
     checkCompare(context, other, section) {
         if(other instanceof CharacterType || other instanceof TextType) {
             return BooleanType.instance;
         }
-        return NativeType.prototype.checkCompare.apply(this, context, other, section);
+        return super.checkCompare.apply(this, context, other, section);
     }
 
     declareCompare(context, other) {
@@ -105,7 +105,7 @@ export default class CharacterType extends NativeType {
         if(other instanceof CharacterType) {
             return new RangeType(this);
         } else {
-            return NativeType.prototype.checkRange.call(this, context, other);
+            return super.checkRange(context, other);
         }
     }
 
@@ -116,7 +116,7 @@ export default class CharacterType extends NativeType {
             transpiler.require(module.IntegerRange);
             transpiler.require(module.CharacterRange);
         } else {
-            return NativeType.prototype.declareRange.call(this, transpiler, other);
+            return super.declareRange(transpiler, other);
         }
     }
 
@@ -132,7 +132,7 @@ export default class CharacterType extends NativeType {
         if(left instanceof CharacterValue && right instanceof CharacterValue) {
             return new CharacterRange(left, right);
         } else {
-            return CharacterType.prototype.newRange.call(this, left, right);
+            return  super.newRange(left, right);
         }
     }
 }

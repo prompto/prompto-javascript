@@ -39,6 +39,6 @@ export default class TypeValidator extends PropertyValidator {
             if(decls instanceof MethodDeclarationMap)
                 return decls.getAll();
         }
-        return PropertyValidator.constructor.getMethodDeclarations.call(this, context);
+        return super.getMethodDeclarations(context);
     }
 }

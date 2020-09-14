@@ -123,7 +123,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return BaseType.prototype.checkMultiply.call(this, context, other, tryReverse);
+            return super.checkMultiply(context, other, tryReverse);
     }
 
     declareMultiply(transpiler, other, tryReverse, left, right) {
@@ -133,7 +133,7 @@ export default class CategoryType extends BaseType {
             right.declare(transpiler);
             type.declare(transpiler);
         } else
-            return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
     transpileMultiply(transpiler, other, tryReverse, left, right) {
@@ -144,7 +144,7 @@ export default class CategoryType extends BaseType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileMultiply(transpiler, other, tryReverse, left, right);
 
     }
 
@@ -153,7 +153,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return BaseType.prototype.checkDivide.call(this, context, other);
+            return super.checkDivide(context, other);
     }
 
     declareDivide(transpiler, other, left, right) {
@@ -163,7 +163,7 @@ export default class CategoryType extends BaseType {
             right.declare(transpiler);
             type.declare(transpiler);
         } else
-            return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
+            return super.declareDivide(transpiler, other, left, right);
     }
 
     transpileDivide(transpiler, other, left, right) {
@@ -178,7 +178,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return BaseType.prototype.checkIntDivide.call(this, context, other);
+            return super.checkIntDivide(context, other);
     }
 
     declareIntDivide(transpiler, other, left, right) {
@@ -188,7 +188,7 @@ export default class CategoryType extends BaseType {
             right.declare(transpiler);
             type.declare(transpiler);
         } else
-            return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
+            return super.declareDivide(transpiler, other, left, right);
     }
 
     transpileIntDivide(transpiler, other, left, right) {
@@ -203,7 +203,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return BaseType.prototype.checkModulo.call(this, context, other);
+            return super.checkModulo(context, other);
     }
 
     declareModulo(transpiler, other, left, right) {
@@ -213,7 +213,7 @@ export default class CategoryType extends BaseType {
             right.declare(transpiler);
             type.declare(transpiler);
         } else
-            return NativeType.prototype.declareModulo.call(this, transpiler, other, left, right);
+            return super.declareModulo(transpiler, other, left, right);
     }
 
     transpileModulo(transpiler, other, left, right) {
@@ -228,7 +228,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return BaseType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
     }
 
     declareAdd(transpiler, other, tryReverse, left, right) {
@@ -238,7 +238,7 @@ export default class CategoryType extends BaseType {
             right.declare(transpiler);
             type.declare(transpiler);
         } else
-            return BaseType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
@@ -253,7 +253,7 @@ export default class CategoryType extends BaseType {
         if(type!=null)
             return type;
         else
-            return BaseType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
     }
 
     declareSubtract(transpiler, other, left, right) {
@@ -263,7 +263,7 @@ export default class CategoryType extends BaseType {
             right.declare(transpiler);
             type.declare(transpiler);
         } else
-            return NativeType.prototype.declareDivide.call(this, transpiler, other, left, right);
+            return super.declareDivide(transpiler, other, left, right);
     }
 
     transpileSubtract(transpiler, other, left, right) {
@@ -382,11 +382,11 @@ export default class CategoryType extends BaseType {
             const singleton = context.loadSingleton(this);
             return singleton.getMemberValue(context, name);
         } else
-            return BaseType.prototype.getStaticMemberValue.call(this, context, name);
+            return super.getStaticMemberValue(context, name);
     }
 
     isAssignableFrom(context, other) {
-        return BaseType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || ((other instanceof CategoryType) && this.isAssignableFromCategory(context, other));
     }
 
@@ -602,7 +602,7 @@ export default class CategoryType extends BaseType {
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
         const decl = this.getDeclaration(context);
         if (decl == null)
-            return BaseType.prototype.convertPythonValueToPromptoValue(context, value, returnType);
+            return super.convertPythonValueToPromptoValue(context, value, returnType);
         if(decl instanceof EnumeratedNativeDeclaration || decl instanceof EnumeratedCategoryDeclaration)
             return this.loadEnumValue(context, decl, value);
         if ($DataStore.instance.isDbIdType(typeof(value)))

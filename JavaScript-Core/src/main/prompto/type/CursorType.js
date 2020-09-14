@@ -1,7 +1,7 @@
 import IterableType from "./IterableType"
+import { IntegerType } from "./index"
 import { Identifier } from "../grammar/index"
 import { Variable } from "../runtime/index"
-import { NativeType, IntegerType } from "./index"
 import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration"
 
 export default class CursorType extends IterableType {
@@ -15,7 +15,7 @@ export default class CursorType extends IterableType {
     }
 
     isAssignableFrom(context, other) {
-        return IterableType.prototype.isAssignableFrom.call(this, context, other)
+        return  super.isAssignableFrom(context, other)
             || ((other instanceof CursorType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
 
@@ -52,7 +52,7 @@ export default class CursorType extends IterableType {
         else if ("totalCount"===name)
             return IntegerType.instance;
         else
-            return IterableType.prototype.checkMember.call(this, context, section, name);
+            return  super.checkMember(context, section, name);
     }
 
     declareMember(transpiler, section, name) {
@@ -72,7 +72,7 @@ export default class CursorType extends IterableType {
             case "toList":
                 return [new ToListMethodDeclaration(this.itemType)];
             default:
-                return NativeType.prototype.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, name);
         }
     }
 }

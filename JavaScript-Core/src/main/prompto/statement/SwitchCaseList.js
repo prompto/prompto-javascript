@@ -1,12 +1,12 @@
 
 export default class SwitchCaseList extends ObjectList {
+
     constructor(item) {
         super();
         item = item || null;
         if (item != null) {
             this.add(item);
         }
-        return this;
     }
 
     locateSectionAtLine(line) {

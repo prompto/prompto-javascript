@@ -36,7 +36,7 @@ export default class MethodSelector extends MemberSelector {
         if(this.parent==null) {
             return this.name;
         } else {
-            return MemberSelector.prototype.toString.call(this) + "." + this.name;
+            return super.toString() + "." + this.name;
         }
     }
 

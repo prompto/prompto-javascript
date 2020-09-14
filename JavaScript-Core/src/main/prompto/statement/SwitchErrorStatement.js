@@ -33,7 +33,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         }
         const local = context.newLocalContext();
         local.registerValue(new ErrorVariable(this.errorId));
-        const section = BaseSwitchStatement.prototype.collectReturnTypes.call(this, local, types);
+        const section = super.collectReturnTypes(local, types);
         if(this.alwaysInstructions!=null) {
             type = this.alwaysInstructions.check(context, null);
             if(type!=VoidType.instance) {

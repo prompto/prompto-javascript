@@ -56,7 +56,7 @@ export default class TextType extends NativeType {
         if(other instanceof IntegerType) {
             return TextType.instance;
         }
-        return NativeType.prototype.checkMultiply.call(this, context, other, tryReverse);
+        return super.checkMultiply(context, other, tryReverse);
     }
 
     declareMultiply(transpiler, other, tryReverse, left, right) {
@@ -64,7 +64,7 @@ export default class TextType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
     transpileMultiply(transpiler, other, tryReverse, left, right) {
@@ -74,14 +74,14 @@ export default class TextType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
     checkCompare(context, other, section) {
         if(other instanceof TextType || other instanceof CharacterType) {
             return BooleanType.instance;
         }
-        return NativeType.prototype.checkCompare.call(this, context, other, section);
+        return super.checkCompare(context, other, section);
     }
 
     declareCompare(context, other) {
@@ -98,7 +98,7 @@ export default class TextType extends NativeType {
         if(other==IntegerType.instance) {
             return CharacterType.instance;
         } else {
-            return NativeType.prototype.checkItem.call(this, context, other, expression);
+            return super.checkItem(context, other, expression);
         }
     }
 
@@ -116,7 +116,7 @@ export default class TextType extends NativeType {
        if ("count"==name) {
            return IntegerType.instance;
        } else {
-           return NativeType.prototype.checkMember.call(this, context, section, name);
+           return super.checkMember(context, section, name);
        }
     }
 
@@ -138,7 +138,7 @@ export default class TextType extends NativeType {
         if(other instanceof TextType || other instanceof CharacterType) {
             return BooleanType.instance;
         }
-        return NativeType.prototype.checkContains.call(this, context, section, other);
+        return super.checkContains(context, section, other);
     }
 
     declareContains(transpiler, other, container, item) {

@@ -22,7 +22,7 @@ export default class PeriodType extends NativeType {
         if(other instanceof PeriodType) {
             return this;
         } else {
-            return NativeType.prototype.checkAdd(this, context, other, tryReverse);
+            return super.checkAdd(this, context, other, tryReverse);
         }
     }
 
@@ -39,7 +39,7 @@ export default class PeriodType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -50,7 +50,7 @@ export default class PeriodType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -58,7 +58,7 @@ export default class PeriodType extends NativeType {
         if(other === PeriodType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkSubtract(this, context, other);
+            return super.checkSubtract(this, context, other);
         }
     }
 
@@ -67,7 +67,7 @@ export default class PeriodType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
     }
 
     transpileSubtract(transpiler, other, left, right) {
@@ -77,14 +77,14 @@ export default class PeriodType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
     }
 
     checkMultiply(context, other, tryReverse) {
         if(other === IntegerType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkMultiply(this, context, other, tryReverse);
+            return super.checkMultiply(this, context, other, tryReverse);
         }
     }
 
@@ -93,7 +93,7 @@ export default class PeriodType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
     transpileMultiply(transpiler, other, tryReverse, left, right) {
@@ -103,7 +103,7 @@ export default class PeriodType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileMultiply.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
     checkMinus(context) {

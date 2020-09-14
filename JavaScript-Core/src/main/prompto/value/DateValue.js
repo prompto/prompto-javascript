@@ -70,7 +70,7 @@ export default class DateValue extends Value {
         } else if ("dayOfYear"==name) {
             return new IntegerValue(this.value.getDayOfYear());
         } else {
-            return Value.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 

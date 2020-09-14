@@ -14,14 +14,14 @@ export default class VersionType extends NativeType {
         if(value instanceof Version)
             return new VersionValue(value);
         else
-            return NativeType.prototype.convertJavaScriptValueToPromptoValue.call(this, context, value, returnType);
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
     checkCompare(context, other, section) {
         if (other instanceof VersionType) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkCompare.call(this, context, other, section);
+            return super.checkCompare(context, other, section);
         }
     }
 

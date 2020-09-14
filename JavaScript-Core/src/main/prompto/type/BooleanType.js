@@ -12,7 +12,7 @@ export default class BooleanType extends NativeType {
         if(other instanceof BooleanType) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkAnd.call(this, context, other);
+            return super.checkAnd(context, other);
         }
     }
 
@@ -20,7 +20,7 @@ export default class BooleanType extends NativeType {
         if(other instanceof BooleanType) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkOr.call(this, context, other);
+            return super.checkOr(context, other);
         }
     }
 

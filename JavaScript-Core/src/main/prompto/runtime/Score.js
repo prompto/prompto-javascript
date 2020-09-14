@@ -3,7 +3,6 @@ export default class Score {
 	constructor(value, name) {
 		this.value = value;
 		this.name = name;
-		return this;
 	}
 
 }

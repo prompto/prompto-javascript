@@ -28,7 +28,7 @@ export default class FetchManyStatement extends FetchManyExpression {
     }
 
     interpret(context) {
-        const record = FetchManyExpression.prototype.interpret.call(this, context);
+        const record = super.interpret(context);
         context = context.newChildContext();
         context.registerValue(new Variable(this.name, new CursorType(this.typ)));
         context.setValue(this.name, record);

@@ -46,7 +46,7 @@ export default class RemoteCall extends UnresolvedCall {
 
     interpret(context) {
         const resultType = this.resolveAndCheck(context);
-        const resultValue = UnresolvedCall.prototype.interpret.call(this, context);
+        const resultValue = super.interpret(context);
         context = context.newChildContext();
         if (this.resultName != null) {
             context.registerValue(new Variable(this.resultName, resultType));

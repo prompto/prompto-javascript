@@ -1,9 +1,9 @@
 export {default as Value} from './Value';
 export {default as NullValue} from './NullValue';
-// export {default as AnyValue} from './AnyValue';
+export {default as AnyValue} from './AnyValue';
 export {default as BooleanValue} from './BooleanValue';
 export {default as BlobValue} from './BlobValue';
-// export {default as ImageValue} from './ImageValue';
+export {default as ImageValue} from './ImageValue';
 export {default as IntegerValue} from './IntegerValue';
 export {default as DecimalValue} from './DecimalValue';
 export {default as CharacterValue} from './CharacterValue';

@@ -58,7 +58,7 @@ export default class TimeValue extends Value {
         } else if ("millisecond"==name) {
             return new IntegerValue(this.value.getMillisecond());
         } else {
-            return Value.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 

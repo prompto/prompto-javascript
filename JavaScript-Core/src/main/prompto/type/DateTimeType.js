@@ -23,7 +23,7 @@ export default class DateTimeType extends NativeType {
         if (other === PeriodType.instance) {
             return this;
         } else {
-            return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -40,7 +40,7 @@ export default class DateTimeType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
@@ -50,7 +50,7 @@ export default class DateTimeType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
     checkSubtract(context, other) {
@@ -59,7 +59,7 @@ export default class DateTimeType extends NativeType {
         } else if(other === DateTimeType.instance) {
             return PeriodType.instance;
         } else {
-            return NativeType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
         }
     }
 
@@ -68,7 +68,7 @@ export default class DateTimeType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
     }
 
     transpileSubtract(transpiler, other, left, right) {
@@ -83,14 +83,14 @@ export default class DateTimeType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
     }
 
     checkCompare(context, other, section) {
         if(other === DateTimeType.instance || other instanceof DateType) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkCompare.call(this, context, other, section);
+            return super.checkCompare(context, other, section);
         }
     }
 
@@ -133,7 +133,7 @@ export default class DateTimeType extends NativeType {
         } else if ("time"===name) {
             return TimeType.instance;
         } else {
-            return NativeType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 

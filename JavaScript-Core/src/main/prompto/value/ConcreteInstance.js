@@ -1,5 +1,5 @@
 import Instance from "./Instance"
-import { Value, NullValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from "./index"
+import { NullValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from "./index"
 import { CategoryType, DecimalType } from "../type/index"
 import { Variable } from "../runtime/index"
 import { Identifier, Operator } from "../grammar/index"
@@ -210,7 +210,7 @@ export default class ConcreteInstance extends Instance {
         try {
             return this.interpretOperator(context, value, Operator.MULTIPLY);
         } catch(e) {
-            return Value.prototype.Multiply.call(this, context, value);
+            return super.Multiply(context, value);
         }
     }
 
@@ -218,7 +218,7 @@ export default class ConcreteInstance extends Instance {
         try {
             return this.interpretOperator(context, value, Operator.DIVIDE);
         } catch(e) {
-            return Value.prototype.Divide.call(this, context, value);
+            return super.Divide(context, value);
         }
     }
 
@@ -226,7 +226,7 @@ export default class ConcreteInstance extends Instance {
         try {
             return this.interpretOperator(context, value, Operator.IDIVIDE);
         } catch(e) {
-            return Value.prototype.IntDivide.call(this, context, value);
+            return super.IntDivide(context, value);
         }
     }
 
@@ -234,7 +234,7 @@ export default class ConcreteInstance extends Instance {
         try {
             return this.interpretOperator(context, value, Operator.MODULO);
         } catch(e) {
-            return Value.prototype.Modulo.call(this, context, value);
+            return super.Modulo(context, value);
         }
     }
 
@@ -242,7 +242,7 @@ export default class ConcreteInstance extends Instance {
         try {
             return this.interpretOperator(context, value, Operator.PLUS);
         } catch(e) {
-            return Value.prototype.Add.call(this, context, value);
+            return super.Add(context, value);
         }
     }
 
@@ -250,7 +250,7 @@ export default class ConcreteInstance extends Instance {
         try {
             return this.interpretOperator(context, value, Operator.MINUS);
         } catch(e) {
-            return Value.prototype.Subtract.call(this, context, value);
+            return super.Subtract(context, value);
         }
     }
 

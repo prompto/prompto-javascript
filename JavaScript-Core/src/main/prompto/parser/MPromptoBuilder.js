@@ -18,7 +18,7 @@ import csharp from "../csharp/index";
 import python from "../python/index";
 
 
-function MPromptoBuilder(pparser) {
+export default function MPromptoBuilder(pparser) {
     parser.MParserListener.call(this);
     this.input = pparser.getTokenStream();
     this.path = pparser.path;
@@ -2974,4 +2974,3 @@ MPromptoBuilder.prototype.readValidToken = function(idx, allowWS) {
     }
 };
 
-export {MPromptoBuilder};

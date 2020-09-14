@@ -65,9 +65,6 @@ export default class JavaScriptStatement {
 }
 
 class $context {
-    constructor() {
-        return this;
-    }
 
     transpile(transpiler) {
         transpiler.append("var $context = context;").newLine();

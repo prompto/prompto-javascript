@@ -17,7 +17,7 @@ export default class RangeType extends ContainerType {
         if (other == IntegerType.instance) {
             return this.itemType;
         } else {
-            return ContainerType.prototype.checkItem.call(this, context, other, expression);
+            return super.checkItem(context, other, expression);
         }
     }
 

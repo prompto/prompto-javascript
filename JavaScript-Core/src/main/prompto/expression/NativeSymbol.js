@@ -67,6 +67,6 @@ export default class NativeSymbol extends Symbol {
         else if("value" === name)
             return this.expression.interpret(context);
         else
-            return Symbol.prototype.getMemberValue.call(context, name, autoCreate);
+            return super.getMemberValue(context, name, autoCreate);
     }
 }

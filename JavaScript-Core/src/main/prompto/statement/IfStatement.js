@@ -116,27 +116,24 @@ export default class IfStatement extends BaseStatement {
     }
 }
 
-export {IfStatement};
 
 class IfElementList extends ObjectList {
+
     constructor(item) {
         super();
         item = item || null;
         if (item != null) {
             this.add(item);
         }
-        return this;
     }
 }
 
-export {IfElementList};
-
 class IfElement extends BaseStatement {
+
     constructor(condition, statements) {
         super();
         this.condition = condition;
         this.statements = statements;
-        return this;
     }
 
     check(context) {

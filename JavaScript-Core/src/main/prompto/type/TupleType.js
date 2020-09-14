@@ -14,7 +14,7 @@ export default class TupleType extends NativeType {
     }
 
     isAssignableFrom(context, other) {
-        return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || (other instanceof ListType) || (other instanceof SetType);
     }
 
@@ -22,7 +22,7 @@ export default class TupleType extends NativeType {
         if(other==IntegerType.instance) {
             return AnyType.instance;
         } else {
-            return NativeType.prototype.checkItem.call(this, context, other);
+            return super.checkItem(context, other);
         }
     }
 
@@ -30,7 +30,7 @@ export default class TupleType extends NativeType {
         if(itemType===IntegerType.instance) {
             item.declare(transpiler);
         } else {
-            return NativeType.prototype.declareItem.call(this, transpiler, itemType, item);
+            return super.declareItem(transpiler, itemType, item);
         }
     }
 
@@ -40,7 +40,7 @@ export default class TupleType extends NativeType {
             item.transpile(transpiler);
             transpiler.append("-1]");
         } else {
-            return NativeType.prototype.transpileItem.call(this, transpiler, itemType, item);
+            return super.transpileItem(transpiler, itemType, item);
         }
     }
 
@@ -56,13 +56,13 @@ export default class TupleType extends NativeType {
         if ("count"==name) {
             return IntegerType.instance;
         } else {
-            return NativeType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
     declareMember(transpiler, section, name) {
         if ("count" !== name) {
-            return NativeType.prototype.declareMember.call(this, transpiler, section, name);
+            return super.declareMember(transpiler, section, name);
         }
     }
 
@@ -70,7 +70,7 @@ export default class TupleType extends NativeType {
         if ("count" == name) {
             transpiler.append("length");
         } else {
-            return NativeType.prototype.transpileMember.call(this, transpiler, name);
+            return super.transpileMember(transpiler, name);
         }
     }
 
@@ -78,7 +78,7 @@ export default class TupleType extends NativeType {
         if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
             return this;
         } else {
-            return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 

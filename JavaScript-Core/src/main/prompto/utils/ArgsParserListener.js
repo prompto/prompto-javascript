@@ -1,6 +1,6 @@
 // Generated from ArgsParser.g4 by ANTLR 4.7.1
 // jshint ignore: start
-import antlr4 from 'antlr4/index';
+import antlr4 from 'antlr4';
 
 // This class defines a complete listener for a parse tree produced by ArgsParser.
 class ArgsParserListener extends antlr4.tree.ParseTreeListener {

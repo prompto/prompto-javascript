@@ -1,3 +1,6 @@
+import NativeType from "./NativeType"
+import { JsxType } from "./index"
+import { Identifier } from "../grammar/index"
 
 export default class HtmlType extends NativeType {
 
@@ -9,7 +12,7 @@ export default class HtmlType extends NativeType {
         if(other===JsxType.instance)
             return true;
         else
-            return NativeType.prototype.isAssignableFrom.call(this, context, other);
+            return super.isAssignableFrom(context, other);
     }
 
     declare(transpiler) {

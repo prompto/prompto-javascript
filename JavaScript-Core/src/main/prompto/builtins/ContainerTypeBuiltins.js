@@ -43,9 +43,9 @@ class JoinListMethodDeclaration extends BaseJoinMethodDeclaration {
 }
 
 class JoinSetMethodDeclaration extends BaseJoinMethodDeclaration {
+
     constructor() {
         super();
-        return this;
     }
 
     getItems(context) {

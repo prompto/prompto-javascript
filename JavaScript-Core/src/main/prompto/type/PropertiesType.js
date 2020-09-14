@@ -15,17 +15,17 @@ export default class PropertiesType extends BaseType {
         if(other instanceof DocumentType)
             return true;
         else
-            return BaseType.prototype.isAssignableFrom.call(this, context, other);
+            return super.isAssignableFrom(context, other);
     }
 
     getMemberMethods(context, name) {
         const prop = this.properties.get(name);
-        return prop ? prop.validator.getMethodDeclarations(context) : BaseType.prototype.getMemberMethods.call(this, context, name);
+        return prop ? prop.validator.getMethodDeclarations(context) :  super.getMemberMethods(context, name);
     }
 
     checkMember(context, section, name) {
         const prop = this.properties.get(name);
-        return prop ? prop.validator.getType(context) : BaseType.prototype.checkMember.call(this, context, section, name);
+        return prop ? prop.validator.getType(context) :  super.checkMember(context, section, name);
     }
 
     declare(transpiler) {

@@ -6,7 +6,6 @@ export default class Container extends Value {
 
     constructor(type) {
         super(type);
-        return this;
     }
 
     toDocumentValue(context) {

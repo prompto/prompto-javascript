@@ -28,7 +28,7 @@ export default class FetchOneStatement extends FetchOneExpression {
     }
 
     interpret(context) {
-        const record = FetchOneExpression.prototype.interpret.call(this, context);
+        const record = super.interpret(context);
         context = context.newChildContext();
         context.registerValue(new Variable(this.name, this.typ));
         context.setValue(this.name, record);

@@ -13,7 +13,7 @@ export default class ContainerType extends IterableType {
         if(other.isAssignableFrom(context, this.itemType)) {
             return BooleanType.instance;
         } else {
-            return IterableType.prototype.checkContains.call(this, context, section, other);
+            return  super.checkContains(context, section, other);
         }
     }
 
@@ -22,13 +22,13 @@ export default class ContainerType extends IterableType {
             const IntegerType = require("./IntegerType").IntegerType;
             return IntegerType.instance;
         } else {
-            return IterableType.prototype.checkMember.call(this, context, section, name);
+            return  super.checkMember(context, section, name);
         }
     }
 
     declareMember(transpiler, section, name) {
         if ("count" !== name) {
-            return IterableType.prototype.declareMember.call(this, transpiler, section, name);
+            return  super.declareMember(transpiler, section, name);
         }
     }
 
@@ -36,7 +36,7 @@ export default class ContainerType extends IterableType {
         if ("count" == name) {
             transpiler.append("length");
         } else {
-            return IterableType.prototype.transpileMember.call(this, transpiler, name);
+            return  super.transpileMember(transpiler, name);
         }
     }
 

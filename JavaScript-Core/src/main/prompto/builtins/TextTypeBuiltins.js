@@ -146,12 +146,12 @@ class StartsWithMethodDeclaration extends BuiltInMethodDeclaration {
 }
 
 class EndsWithMethodDeclaration extends BuiltInMethodDeclaration {
+
     constructor() {
         super(
             "endsWith",
             new CategoryParameter(TextType.instance, new Identifier("value"))
         );
-        return this;
     }
 
     interpret(context) {

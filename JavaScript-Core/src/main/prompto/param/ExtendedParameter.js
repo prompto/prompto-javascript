@@ -1,4 +1,8 @@
+import CategoryParameter from "./CategoryParameter"
+import { AttributeDeclaration, ConcreteCategoryDeclaration } from "../declaration/index"
+import { IdentifierList } from "../grammar/index"
 import { SyntaxError } from "../error/index"
+import { equalObjects, equalArrays } from "../utils/index"
 
 export default class ExtendedParameter extends CategoryParameter {
 
@@ -21,9 +25,9 @@ export default class ExtendedParameter extends CategoryParameter {
         if(!(obj instanceof ExtendedParameter)) {
             return false;
         }
-        return utils.equalObjects(this.type, obj.type) && 
+        return equalObjects(this.type, obj.type) &&
             this.name===obj.name && 
-            utils.equalArrays(this.attributes, obj.attributes);
+            equalArrays(this.attributes, obj.attributes);
     }
 
     register(context) {

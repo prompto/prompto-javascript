@@ -52,7 +52,7 @@ export default class DictionaryValue extends Value {
             }, this);
             return new ListValue(this.type.itemType, list);
         } else {
-            return Value.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 
@@ -113,12 +113,12 @@ export default class DictionaryValue extends Value {
 }
 
 class KVPIterator {
+
     constructor(context, dict) {
         this.context = context;
         this.dict = dict;
         this.keys = this.dict.$keys;
         this.index = 0;
-        return this;
     }
 
     hasNext() {
@@ -132,11 +132,11 @@ class KVPIterator {
 }
 
 class KVPValue extends Value {
+
     constructor(key, value) {
         super(null); // TODO check that this is safe
         this.key = key;
         this.value = value;
-        return this;
     }
 
     getMemberValue(context, name) {

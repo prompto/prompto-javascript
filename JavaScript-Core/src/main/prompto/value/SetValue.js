@@ -28,7 +28,7 @@ export default class SetValue extends Value {
         if ("count"==name) {
             return new IntegerValue(this.items.length);
         } else {
-            return Value.prototype.getMemberValue.call(this, context, name);
+            return super.getMemberValue(context, name);
         }
     }
 
@@ -58,7 +58,7 @@ export default class SetValue extends Value {
             set.addItems(value.items);
             return new SetValue(this.type.itemType, set);
         } else {
-            return Value.prototype.Add.apply(this, context, value);
+            return super.Add.apply(this, context, value);
         }
     }
 
@@ -77,7 +77,7 @@ export default class SetValue extends Value {
             }
             return new SetValue(this.type.itemType, set);
         } else {
-            return Value.prototype.Subtract.apply(this, context, value);
+            return super.Subtract.apply(this, context, value);
         }
     }
 

@@ -23,7 +23,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     isAssignableFrom(context, other) {
-        return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || ((other instanceof DictionaryType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
 
@@ -43,7 +43,7 @@ export default class DictionaryType extends ContainerType {
         if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             return this;
         } else {
-            return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -52,7 +52,7 @@ export default class DictionaryType extends ContainerType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -63,7 +63,7 @@ export default class DictionaryType extends ContainerType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -71,7 +71,7 @@ export default class DictionaryType extends ContainerType {
         if(other==TextType.instance) {
             return BooleanType.instance;
         } else {
-            return ContainerType.prototype.checkContains.call(this, context, other);
+            return super.checkContains(context, other);
         }
     }
 
@@ -116,7 +116,7 @@ export default class DictionaryType extends ContainerType {
         if(other==TextType.instance) {
             return this.itemType;
         } else {
-            return ContainerType.prototype.checkItem.call(this, context, other, expression);
+            return super.checkItem(context, other, expression);
         }
     }
 
@@ -150,7 +150,7 @@ export default class DictionaryType extends ContainerType {
         } else if ("values"==name) {
             return new ListType(this.itemType);
         } else {
-            return ContainerType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -179,7 +179,7 @@ export default class DictionaryType extends ContainerType {
             const SwapMethodDeclaration = require("../builtins/DictionaryTypeBuiltins").SwapMethodDeclaration;
             return [new SwapMethodDeclaration()];
         } else
-            return ContainerType.prototype.getMemberMethods.call(context, name);
+            return super.getMemberMethods.call(context, name);
     }
 }
 

@@ -38,7 +38,7 @@ export default class SetType extends ContainerType {
         if((other instanceof SetType || other instanceof ListType) && this.itemType.isAssignableFrom(context, other.itemType)) {
             return this;
         } else {
-            return ContainerType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -47,7 +47,7 @@ export default class SetType extends ContainerType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -58,7 +58,7 @@ export default class SetType extends ContainerType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -66,7 +66,7 @@ export default class SetType extends ContainerType {
         if((other instanceof SetType || other instanceof ListType) && this.itemType.equals(other.itemType)) {
             return this;
         } else {
-            return ContainerType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
         }
     }
 
@@ -75,7 +75,7 @@ export default class SetType extends ContainerType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return ContainerType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
         }
     }
 
@@ -86,7 +86,7 @@ export default class SetType extends ContainerType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return ContainerType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
         }
     }
 
@@ -94,7 +94,7 @@ export default class SetType extends ContainerType {
         if(other==IntegerType.instance) {
             return this.itemType;
         } else {
-            return ContainerType.prototype.checkItem.call(this, context, other, expression);
+            return super.checkItem(context, other, expression);
         }
     }
 
@@ -154,12 +154,12 @@ export default class SetType extends ContainerType {
             case "join":
                 return [new JoinSetMethodDeclaration()];
             default:
-                return ContainerType.prototype.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, name);
         }
     }
 
     isAssignableFrom(context, other) {
-        return ContainerType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || ((other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
 }

@@ -28,7 +28,7 @@ export default class ReadStatement extends ReadAllExpression {
     }
 
     interpret(context) {
-        const result = ReadAllExpression.prototype.interpret.call(this, context);
+        const result = super.interpret(context);
         context = context.newChildContext();
         context.registerValue(new Variable(this.name, TextType.instance));
         context.setValue(this.name, result);

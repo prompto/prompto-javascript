@@ -11,7 +11,7 @@ export default class TimeType extends NativeType {
     }
 
     isAssignableFrom(context, other) {
-        return NativeType.prototype.isAssignableFrom.call(this, context, other)
+        return super.isAssignableFrom(context, other)
             || (other == DateTimeType.instance);
     }
 
@@ -27,7 +27,7 @@ export default class TimeType extends NativeType {
         if (other === PeriodType.instance) {
             return this; // ignore date section
         } else {
-            return NativeType.prototype.checkAdd.call(this, context, other, tryReverse);
+            return super.checkAdd(context, other, tryReverse);
         }
     }
 
@@ -44,7 +44,7 @@ export default class TimeType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
-            return NativeType.prototype.declareAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.declareAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -55,7 +55,7 @@ export default class TimeType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
-            return NativeType.prototype.transpileAdd.call(this, transpiler, other, tryReverse, left, right);
+            return super.transpileAdd(transpiler, other, tryReverse, left, right);
         }
     }
 
@@ -65,7 +65,7 @@ export default class TimeType extends NativeType {
         } else if (other === PeriodType.instance) {
             return this; // ignore date section
         } else {
-            return NativeType.prototype.checkSubtract.call(this, context, other);
+            return super.checkSubtract(context, other);
         }
     }
 
@@ -74,7 +74,7 @@ export default class TimeType extends NativeType {
             left.declare(transpiler);
             right.declare(transpiler);
         } else
-            return NativeType.prototype.declareSubtract.call(this, transpiler, other, left, right);
+            return super.declareSubtract(transpiler, other, left, right);
     }
 
     transpileSubtract(transpiler, other, left, right) {
@@ -89,14 +89,14 @@ export default class TimeType extends NativeType {
             right.transpile(transpiler);
             transpiler.append(")");
         } else
-            return NativeType.prototype.transpileSubtract.call(this, transpiler, other, left, right);
+            return super.transpileSubtract(transpiler, other, left, right);
     }
 
     checkCompare(context, other, section) {
         if (other === TimeType.instance) {
             return BooleanType.instance;
         } else {
-            return NativeType.prototype.checkCompare.call(this, context, other, section);
+            return super.checkCompare(context, other, section);
         }
     }
 
@@ -117,7 +117,7 @@ export default class TimeType extends NativeType {
         if (other === TimeType.instance) {
             return new RangeType(this);
         } else {
-            return NativeType.prototype.checkRange.call(this, context, other);
+            return super.checkRange(context, other);
         }
     }
 
@@ -127,7 +127,7 @@ export default class TimeType extends NativeType {
             transpiler.require(module.Range);
             transpiler.require(module.TimeRange);
         } else {
-            return NativeType.prototype.declareRange.call(this, transpiler, other);
+            return super.declareRange(transpiler, other);
         }
     }
 
@@ -149,7 +149,7 @@ export default class TimeType extends NativeType {
         } else if ("millisecond" == name) {
             return IntegerType.instance;
         } else {
-            return NativeType.prototype.checkMember.call(this, context, section, name);
+            return super.checkMember(context, section, name);
         }
     }
 
@@ -177,7 +177,7 @@ export default class TimeType extends NativeType {
         if (left instanceof TimeValue && right instanceof TimeValue) {
             return new TimeRange(left, right);
         } else {
-            return NativeType.prototype.newRange.call(this, left, right);
+            return super.newRange(left, right);
         }
     }
 

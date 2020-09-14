@@ -42,7 +42,7 @@ export default class ListValue extends BaseValueList {
             const items2 = this.items.concat(items1);
             return new ListValue(this.type.itemType, items2);
         } else {
-            return BaseValueList.prototype.Add.apply(this, context, value);
+            return super.Add.apply(this, context, value);
         }
     }
 
@@ -55,7 +55,7 @@ export default class ListValue extends BaseValueList {
             const items = this.items.filter(item => !value.items.has(item));
             return new ListValue(this.type.itemType, items);
         } else {
-            return BaseValueList.prototype.Subtract.apply(this, context, value);
+            return super.Subtract.apply(this, context, value);
         }
     }
 
@@ -69,7 +69,7 @@ export default class ListValue extends BaseValueList {
                 return new ListValue(this.type.itemType, items);
             }
         } else {
-            return BaseValueList.prototype.Multiply.apply(this, context, value);
+            return super.Multiply.apply(this, context, value);
         }
     }
 

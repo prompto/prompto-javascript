@@ -14,7 +14,7 @@ export default class IteratorType extends IterableType {
     }
 
     isAssignableFrom(context, other) {
-        return IterableType.prototype.isAssignableFrom.call(this, context, other)
+        return  super.isAssignableFrom(context, other)
             || ((other instanceof IteratorType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
 
@@ -34,7 +34,7 @@ export default class IteratorType extends IterableType {
         if ("count"===name)
             return IntegerType.instance;
         else
-            return IterableType.prototype.checkMember.call(this, context, section, name);
+            return  super.checkMember(context, section, name);
     }
 
     declare(transpiler) {
@@ -46,7 +46,7 @@ export default class IteratorType extends IterableType {
             case "toList":
                 return [new ToListMethodDeclaration(this.itemType)];
             default:
-                return IterableType.prototype.getMemberMethods.call(context, name);
+                return  super.getMemberMethods.call(context, name);
         }
     }
 }
