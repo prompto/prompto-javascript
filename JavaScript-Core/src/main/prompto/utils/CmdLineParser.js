@@ -1,6 +1,7 @@
 import antlr4 from "antlr4";
-import ArgsLexer from "./ArgsLexer";
-import ArgsParser from "./ArgsParser";
+import {ArgsLexer} from "./ArgsLexer";
+import {ArgsParser} from "./ArgsParser";
+import {ArgsParserListener} from "./ArgsParserListener";
 
 class CmdLineBuilder extends ArgsParserListener {
 
@@ -41,9 +42,9 @@ export default class CmdLineParser {
             input = "";
         }
         const stream = new antlr4.InputStream(input);
-        const lexer = new al.ArgsLexer(stream);
+        const lexer = new ArgsLexer(stream);
         const tokens = new antlr4.CommonTokenStream(lexer);
-        const parser = new ap.ArgsParser(tokens);
+        const parser = new ArgsParser(tokens);
         const tree = parser.parse();
         const builder = new CmdLineBuilder();
         const walker = new antlr4.tree.ParseTreeWalker();

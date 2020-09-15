@@ -1,4 +1,4 @@
-import { Section } from "../parser/index"
+import Section from "../parser/Section"
 
 export default class BaseDeclaration extends Section {
 

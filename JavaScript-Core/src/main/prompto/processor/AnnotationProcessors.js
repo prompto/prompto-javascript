@@ -49,4 +49,3 @@ export default {
     registerAll: registerAll
 };
 
-registerAll();

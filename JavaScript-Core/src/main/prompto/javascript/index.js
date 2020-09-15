@@ -1,19 +1,19 @@
-export {default as JavaScriptStatement} from'./JavaScriptStatement';
-export {default as JavaScriptNativeCall} from'./JavaScriptNativeCall';
-export {default as JavaScriptItemExpression} from'./JavaScriptItemExpression';
-export {default as JavaScriptIdentifierExpression} from'./JavaScriptIdentifierExpression';
-export {default as JavaScriptBooleanLiteral} from'./JavaScriptBooleanLiteral';
-export {default as JavaScriptCharacterLiteral} from'./JavaScriptCharacterLiteral';
-export {default as JavaScriptTextLiteral} from'./JavaScriptTextLiteral';
-export {default as JavaScriptIntegerLiteral} from'./JavaScriptIntegerLiteral';
-export {default as JavaScriptDecimalLiteral} from'./JavaScriptDecimalLiteral';
-export {default as JavaScriptExpressionList} from'./JavaScriptExpressionList';
-export {default as JavaScriptMethodExpression} from'./JavaScriptMethodExpression';
-export {default as JavaScriptMemberExpression} from'./JavaScriptMemberExpression';
-export {default as JavaScriptNewExpression} from'./JavaScriptNewExpression';
-export {default as JavaScriptThisExpression} from'./JavaScriptThisExpression';
-export {default as JavaScriptNativeCategoryBinding} from"./JavaScriptNativeCategoryBinding";
-export {default as JavaScriptType} from"./JavaScriptType";
-export {default as JavaScriptModule} from"./JavaScriptModule";
+export {default as JavaScriptStatement} from './JavaScriptStatement.js';
+export {default as JavaScriptNativeCall} from './JavaScriptNativeCall.js';
+export {default as JavaScriptItemExpression} from './JavaScriptItemExpression.js';
+export {default as JavaScriptIdentifierExpression} from './JavaScriptIdentifierExpression.js';
+export {default as JavaScriptBooleanLiteral} from './JavaScriptBooleanLiteral.js';
+export {default as JavaScriptCharacterLiteral} from './JavaScriptCharacterLiteral.js';
+export {default as JavaScriptTextLiteral} from './JavaScriptTextLiteral.js';
+export {default as JavaScriptIntegerLiteral} from './JavaScriptIntegerLiteral.js';
+export {default as JavaScriptDecimalLiteral} from './JavaScriptDecimalLiteral.js';
+export {default as JavaScriptExpressionList} from './JavaScriptExpressionList.js';
+export {default as JavaScriptMethodExpression} from './JavaScriptMethodExpression.js';
+export {default as JavaScriptMemberExpression} from './JavaScriptMemberExpression.js';
+export {default as JavaScriptNewExpression} from './JavaScriptNewExpression.js';
+export {default as JavaScriptThisExpression} from './JavaScriptThisExpression.js';
+export {default as JavaScriptNativeCategoryBinding} from './JavaScriptNativeCategoryBinding.js';
+export {default as JavaScriptType} from './JavaScriptType.js';
+export {default as JavaScriptModule} from './JavaScriptModule.js';
 
 export default {}

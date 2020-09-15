@@ -1,6 +1,7 @@
 {
   "name": "prompto-runtime",
   "version": "1.0.0",
+  "type": "module",
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
   "devDependencies": {
@@ -18,6 +19,7 @@
   },
   "dependencies": {
     "antlr4": "4.7.1",
+    "esm": "^3.2.25",
     "html-entities": "1.2.1",
     "jszip-sync": "3.2.1-sync",
     "sync-request": "3.0.1"

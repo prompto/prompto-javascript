@@ -10,9 +10,10 @@ import { InternalError } from "../error/index"
 import { LocalTime, LocalDate, DateTime, Period, UUID, Version } from "../intrinsic/index"
 
 export default class JavaScriptType extends CategoryType {
-  
+
     constructor(name) {
         super(name);
+        initializeTypeMap();
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
@@ -150,17 +151,22 @@ export default class JavaScriptType extends CategoryType {
 }
 
 
-JavaScriptType.scriptToTypeMap = {
-    'string': TextType.instance,
-    'boolean': BooleanType.instance,
-    'Date' : DateTimeType.instance,
-    'object': AnyType.instance
-};
+let scriptToTypeMap = null;
 
-// workaround webpack name mangling
-JavaScriptType.scriptToTypeMap[LocalDate.name] = DateType.instance;
-JavaScriptType.scriptToTypeMap[LocalTime.name] = TimeType.instance;
-JavaScriptType.scriptToTypeMap[DateTime.name] = DateTimeType.instance;
-JavaScriptType.scriptToTypeMap[Period.name] = PeriodType.instance;
-JavaScriptType.scriptToTypeMap[UUID.name] = UUIDType.instance;
-JavaScriptType.scriptToTypeMap[Version.name] = VersionType.instance;
+function initializeTypeMap() {
+    if(scriptToTypeMap)
+        return;
+    scriptToTypeMap = {
+        'string': TextType.instance,
+        'boolean': BooleanType.instance,
+        'Date' : DateTimeType.instance,
+        'object': AnyType.instance
+    };
+    // workaround webpack name mangling
+    scriptToTypeMap[LocalDate.name] = DateType.instance;
+    scriptToTypeMap[LocalTime.name] = TimeType.instance;
+    scriptToTypeMap[DateTime.name] = DateTimeType.instance;
+    scriptToTypeMap[Period.name] = PeriodType.instance;
+    scriptToTypeMap[UUID.name] = UUIDType.instance;
+    scriptToTypeMap[Version.name] = VersionType.instance;
+}

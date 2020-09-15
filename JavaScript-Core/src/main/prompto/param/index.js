@@ -1,9 +1,9 @@
-export {default as Parameter} from "./Parameter";
-export {default as AttributeParameter} from "./AttributeParameter";
-export {default as CategoryParameter} from "./CategoryParameter";
-export {default as ExtendedParameter} from "./ExtendedParameter";
-export {default as CodeParameter} from "./CodeParameter";
-export {default as MethodParameter} from "./MethodParameter";
-export {default as UnresolvedParameter} from "./UnresolvedParameter";
-export {default as ParameterList} from "./ParameterList";
+export {default as Parameter} from './Parameter.js';
+export {default as AttributeParameter} from './AttributeParameter.js';
+export {default as CategoryParameter} from './CategoryParameter.js';
+export {default as ExtendedParameter} from './ExtendedParameter.js';
+export {default as CodeParameter} from './CodeParameter.js';
+export {default as MethodParameter} from './MethodParameter.js';
+export {default as UnresolvedParameter} from './UnresolvedParameter.js';
+export {default as ParameterList} from './ParameterList.js';
 export default {}
