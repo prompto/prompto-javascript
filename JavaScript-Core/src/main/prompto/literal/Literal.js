@@ -34,6 +34,10 @@ Literal.prototype.toString = function() {
 };
 
 
+Literal.prototype.checkReference = function(context) {
+    return this.check(context);
+};
+
 Literal.prototype.checkAttribute = function(context) {
     context.problemListener.reportMissingAttribute(this, this.toString());
 };

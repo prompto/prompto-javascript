@@ -1,9 +1,15 @@
+var Literal = require("./Literal").Literal;
 var NullType = require("../type/NullType").NullType;
 var NullValue = require("../value/NullValue").NullValue;
 
 function NullLiteral() {
-   return this;
+    Literal.call(this, "<null>", NullValue.instance);
+    return this;
 }
+
+NullLiteral.prototype = Object.create(Literal.prototype);
+NullLiteral.prototype.constructor = NullLiteral;
+
 
 NullLiteral.instance = new NullLiteral();
 
