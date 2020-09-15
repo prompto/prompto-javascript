@@ -1,5 +1,5 @@
-import CSharpSelectorExpression from "./CSharpSelectorExpression"
-import { CSharpExpressionList } from "./index"
+import CSharpSelectorExpression from './CSharpSelectorExpression.js'
+import { CSharpExpressionList } from './index.js'
 
 export default class CSharpMethodExpression extends CSharpSelectorExpression {
 

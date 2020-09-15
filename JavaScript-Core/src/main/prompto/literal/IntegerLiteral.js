@@ -1,6 +1,6 @@
-import Literal from "./Literal"
-import { IntegerType } from "../type/index"
-import { IntegerValue } from "../value/index"
+import Literal from './Literal.js'
+import { IntegerType } from '../type/index.js'
+import { IntegerValue } from '../value/index.js'
 
 function parse(value) {
 	return parseInt(value);

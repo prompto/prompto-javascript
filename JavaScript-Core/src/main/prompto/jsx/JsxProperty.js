@@ -1,5 +1,5 @@
-import Section from "../parser/Section"
-import { BooleanType, VoidType } from "../type/index"
+import Section from '../parser/Section.js'
+import { BooleanType, VoidType } from '../type/index.js'
 
 export default class JsxProperty extends Section {
 

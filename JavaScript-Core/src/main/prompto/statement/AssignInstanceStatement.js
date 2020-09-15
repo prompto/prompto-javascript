@@ -1,5 +1,5 @@
-import SimpleStatement from "./SimpleStatement"
-import { VoidType, CodeType } from "../type/index"
+import SimpleStatement from './SimpleStatement.js'
+import { VoidType, CodeType } from '../type/index.js'
 
 export default class AssignInstanceStatement extends SimpleStatement {
   

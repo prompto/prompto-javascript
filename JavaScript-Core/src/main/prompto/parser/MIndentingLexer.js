@@ -1,4 +1,4 @@
-import { MLexer } from "./MLexer"
+import { MLexer } from './MLexer.js'
 
 export default function MIndentingLexer(input) {
     MLexer.call(this, input);

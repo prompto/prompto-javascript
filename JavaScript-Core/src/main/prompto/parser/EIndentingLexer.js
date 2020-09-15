@@ -1,4 +1,4 @@
-import { ELexer } from "./ELexer"
+import { ELexer } from './ELexer.js'
 
 export default function EIndentingLexer(input) {
 	ELexer.call(this, input);

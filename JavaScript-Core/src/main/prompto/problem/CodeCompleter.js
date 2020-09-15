@@ -1,4 +1,4 @@
-import ProblemListener from './ProblemListener'
+import ProblemListener from './ProblemListener.js'
 
 export default class CodeCompleter extends ProblemListener {
 

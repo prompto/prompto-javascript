@@ -1,11 +1,11 @@
-import BaseSwitchStatement from "./BaseSwitchStatement"
-import { ArgumentList, Argument, Identifier } from "../grammar/index"
-import { EnumeratedCategoryType, VoidType, CategoryType } from "../type/index"
-import { ErrorVariable } from "../runtime/index"
-import { ExecutionError } from "../error/index"
-import { UnresolvedParameter } from "../param/index"
-import { ConstructorExpression } from "../expression/index"
-import { TextLiteral } from "../literal/index"
+import BaseSwitchStatement from './BaseSwitchStatement.js'
+import { ArgumentList, Argument, Identifier } from '../grammar/index.js'
+import { EnumeratedCategoryType, VoidType, CategoryType } from '../type/index.js'
+import { ErrorVariable } from '../runtime/index.js'
+import { ExecutionError } from '../error/index.js'
+import { UnresolvedParameter } from '../param/index.js'
+import { ConstructorExpression } from '../expression/index.js'
+import { TextLiteral } from '../literal/index.js'
 
 export default class SwitchErrorStatement extends BaseSwitchStatement {
 

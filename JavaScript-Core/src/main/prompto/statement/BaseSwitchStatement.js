@@ -1,6 +1,6 @@
-import BaseStatement from "./BaseStatement"
-import { SwitchCaseList } from "./index"
-import { VoidType, TypeMap } from "../type/index"
+import BaseStatement from './BaseStatement.js'
+import { SwitchCaseList } from './index.js'
+import { VoidType, TypeMap } from '../type/index.js'
 
 export default class BaseSwitchStatement extends BaseStatement {
 

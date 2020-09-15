@@ -1,8 +1,8 @@
-import { VoidType } from "../type/index"
-import { ProblemCollector } from "../problem/index"
-import { AttributeParameter, MethodParameter } from "./index"
-import { MethodDeclarationMap } from "../runtime/index"
-import { AttributeDeclaration } from "../declaration/index"
+import { VoidType } from '../type/index.js'
+import { ProblemCollector } from '../problem/index.js'
+import { AttributeParameter, MethodParameter } from './index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
+import { AttributeDeclaration } from '../declaration/index.js'
 
 export default class UnresolvedParameter {
   

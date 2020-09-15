@@ -1,7 +1,7 @@
-import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
-import { VoidType } from "../type/index"
-import { ParameterList } from "../param/index"
-import { Identifier } from "../grammar/index"
+import ConcreteMethodDeclaration from './ConcreteMethodDeclaration.js'
+import { VoidType } from '../type/index.js'
+import { ParameterList } from '../param/index.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class OperatorMethodDeclaration extends ConcreteMethodDeclaration {
 

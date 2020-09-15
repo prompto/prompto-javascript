@@ -1,6 +1,6 @@
-import BaseStatement from "./BaseStatement"
-import { VoidType } from "../type/index"
-import { Dialect } from "../parser/index"
+import BaseStatement from './BaseStatement.js'
+import { VoidType } from '../type/index.js'
+import { Dialect } from '../parser/index.js'
 
 export default class CommentStatement extends BaseStatement {
 

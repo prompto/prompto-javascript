@@ -1,7 +1,7 @@
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-const fs = isNodeJs ? require("fs") : {}; // nodejs only
-import antlr4 from "antlr4";
-import { OParser } from "./OParser"
+const fs = isNodeJs ? import("fs") : {}; // nodejs only
+import antlr4 from 'antlr4';
+import { OParser } from './OParser.js'
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {

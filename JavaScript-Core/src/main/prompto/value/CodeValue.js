@@ -1,5 +1,5 @@
-import Value from "./Value"
-import { CodeType } from "../type/index"
+import Value from './Value.js'
+import { CodeType } from '../type/index.js'
 
 export default class CodeValue extends Value {
 

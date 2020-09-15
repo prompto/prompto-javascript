@@ -1,13 +1,13 @@
-import CategoryType from "../type/CategoryType"
-import { NativeInstance, NullValue } from "../value/index"
-import { AnyNativeCategoryDeclaration } from "../declaration/index"
+import CategoryType from '../type/CategoryType.js'
+import { NativeInstance, NullValue } from '../value/index.js'
+import { AnyNativeCategoryDeclaration } from '../declaration/index.js'
 import { AnyType, ListType, DocumentType, IntegerType, DecimalType, BooleanType, TextType, PeriodType, 
-    IteratorType, DateTimeType, DateType, TimeType, VersionType, UUIDType } from "../type/index"
-import { ListValue, DocumentValue, Value, IteratorValue } from "../value/index"
-import { Identifier } from "../grammar/index"
-import { getTypeName } from "../utils/index"
-import { InternalError } from "../error/index"
-import { LocalTime, LocalDate, DateTime, Period, UUID, Version } from "../intrinsic/index"
+    IteratorType, DateTimeType, DateType, TimeType, VersionType, UUIDType } from '../type/index.js'
+import { ListValue, DocumentValue, Value, IteratorValue } from '../value/index.js'
+import { Identifier } from '../grammar/index.js'
+import { getTypeName } from '../utils/index.js'
+import { InternalError } from '../error/index.js'
+import { LocalTime, LocalDate, DateTime, Period, UUID, Version } from '../intrinsic/index.js'
 
 export default class JavaScriptType extends CategoryType {
 

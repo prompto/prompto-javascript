@@ -1,7 +1,7 @@
-import SimpleStatement from "./SimpleStatement"
-import { VoidType, ResourceType } from "../type/index"
-import { Variable } from "../runtime/index"
-import { SyntaxError } from "../error/index"
+import SimpleStatement from './SimpleStatement.js'
+import { VoidType, ResourceType } from '../type/index.js'
+import { Variable } from '../runtime/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class AssignVariableStatement extends SimpleStatement {
 

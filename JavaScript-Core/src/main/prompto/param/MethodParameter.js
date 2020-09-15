@@ -1,8 +1,8 @@
-import Parameter from "./Parameter"
-import { MethodType } from "../type/index"
-import { ArrowValue, ContextualExpression } from "../value/index"
-import { ArrowExpression } from "../expression/index"
-import { SyntaxError } from "../error/index"
+import Parameter from './Parameter.js'
+import { MethodType } from '../type/index.js'
+import { ArrowValue, ContextualExpression } from '../value/index.js'
+import { ArrowExpression } from '../expression/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class MethodParameter extends Parameter {
 

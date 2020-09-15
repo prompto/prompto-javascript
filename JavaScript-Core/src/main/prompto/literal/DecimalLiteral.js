@@ -1,6 +1,6 @@
-import Literal from "./Literal"
-import { DecimalType } from "../type/index"
-import { DecimalValue } from "../value/index"
+import Literal from './Literal.js'
+import { DecimalType } from '../type/index.js'
+import { DecimalValue } from '../value/index.js'
 
 export default class DecimalLiteral extends Literal {
 

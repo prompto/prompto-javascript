@@ -1,5 +1,5 @@
-import Section from "../parser/Section"
-import { AnnotationProcessors } from "../processor/index"
+import Section from '../parser/Section.js'
+import { AnnotationProcessors } from '../processor/index.js'
 
 export default class Annotation extends Section {
 

@@ -1,4 +1,4 @@
-import ExecutionError from "./ExecutionError"
+import ExecutionError from './ExecutionError.js'
 
 export default function NotMutableError() {
 	ExecutionError.call(this);

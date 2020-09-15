@@ -1,8 +1,8 @@
-import Value from "./Value"
-import { IntegerValue, ListValue } from "./index"
-import { SyntaxError, IndexOutOfRangeError } from "../error/index"
-import { SetType } from "../type/index"
-import { StrictSet } from "../intrinsic/index"
+import Value from './Value.js'
+import { IntegerValue, ListValue } from './index.js'
+import { SyntaxError, IndexOutOfRangeError } from '../error/index.js'
+import { SetType } from '../type/index.js'
+import { StrictSet } from '../intrinsic/index.js'
 
 export default class SetValue extends Value {
 

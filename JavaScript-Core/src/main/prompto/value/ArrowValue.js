@@ -1,4 +1,4 @@
-import ContextualExpression from "./ContextualExpression"
+import ContextualExpression from './ContextualExpression.js'
 
 export default class ArrowValue extends ContextualExpression {
 

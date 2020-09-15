@@ -1,7 +1,7 @@
-import BaseMethodDeclaration from "./BaseMethodDeclaration"
-import { ParameterList } from "../param/index"
-import { BuiltInContext } from "../runtime/index"
-import { InternalError } from "../error/index"
+import BaseMethodDeclaration from './BaseMethodDeclaration.js'
+import { ParameterList } from '../param/index.js'
+import { BuiltInContext } from '../runtime/index.js'
+import { InternalError } from '../error/index.js'
 
 export default class BuiltInMethodDeclaration extends BaseMethodDeclaration {
 

@@ -1,5 +1,5 @@
-import JavaSelectorExpression from "./JavaSelectorExpression"
-import { JavaExpressionList } from "./index"
+import JavaSelectorExpression from './JavaSelectorExpression.js'
+import { JavaExpressionList } from './index.js'
 
 export default class JavaMethodExpression extends JavaSelectorExpression {
 

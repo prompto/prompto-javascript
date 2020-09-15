@@ -1,5 +1,5 @@
-import ExecutionError from "./ExecutionError"
-import { TextLiteral } from "../literal/index"
+import ExecutionError from './ExecutionError.js'
+import { TextLiteral } from '../literal/index.js'
 
 export default function InvalidResourceError(message) {
 	ExecutionError.call(this, message);

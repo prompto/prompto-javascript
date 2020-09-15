@@ -1,5 +1,5 @@
-import ObjectList from "../utils/ObjectList"
-import { CodeParameter } from "./index"
+import ObjectList from '../utils/ObjectList.js'
+import { CodeParameter } from './index.js'
 
 export default class ParameterList extends ObjectList {
 

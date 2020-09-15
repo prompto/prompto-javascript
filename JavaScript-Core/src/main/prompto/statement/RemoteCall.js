@@ -1,7 +1,7 @@
-import UnresolvedCall from "./UnresolvedCall"
-import { Dialect } from "../parser/index"
-import { Variable } from "../runtime/index"
-import { VoidType } from "../type/index"
+import UnresolvedCall from './UnresolvedCall.js'
+import { Dialect } from '../parser/index.js'
+import { Variable } from '../runtime/index.js'
+import { VoidType } from '../type/index.js'
 
 export default class RemoteCall extends UnresolvedCall {
 

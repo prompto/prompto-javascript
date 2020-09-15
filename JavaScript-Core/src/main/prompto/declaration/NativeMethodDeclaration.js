@@ -1,6 +1,6 @@
-import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
-import { NullValue, IntegerValue, DecimalValue } from "../value/index"
-import { VoidType, IntegerType, DecimalType } from "../type/index"
+import ConcreteMethodDeclaration from './ConcreteMethodDeclaration.js'
+import { NullValue, IntegerValue, DecimalValue } from '../value/index.js'
+import { VoidType, IntegerType, DecimalType } from '../type/index.js'
 
 export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
 

@@ -1,6 +1,6 @@
-import ThisExpression from "./ThisExpression"
-import { AnyType, CategoryType } from "../type/index"
-import { InstanceContext } from "../runtime/index"
+import ThisExpression from './ThisExpression.js'
+import { AnyType, CategoryType } from '../type/index.js'
+import { InstanceContext } from '../runtime/index.js'
 
 export default class SuperExpression extends ThisExpression {
 

@@ -1,7 +1,7 @@
-import { Identifier } from "../grammar/index"
-import { Variable } from "../runtime/index"
-import { AnyType } from "../type/index"
-import { InvalidDataError } from "../error/index"
+import { Identifier } from '../grammar/index.js'
+import { Variable } from '../runtime/index.js'
+import { AnyType } from '../type/index.js'
+import { InvalidDataError } from '../error/index.js'
 
 export default class MatchingExpressionConstraint {
 

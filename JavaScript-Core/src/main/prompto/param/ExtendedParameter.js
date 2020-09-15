@@ -1,8 +1,8 @@
-import CategoryParameter from "./CategoryParameter"
-import { AttributeDeclaration, ConcreteCategoryDeclaration } from "../declaration/index"
-import { IdentifierList } from "../grammar/index"
-import { SyntaxError } from "../error/index"
-import { equalObjects, equalArrays } from "../utils/index"
+import CategoryParameter from './CategoryParameter.js'
+import { AttributeDeclaration, ConcreteCategoryDeclaration } from '../declaration/index.js'
+import { IdentifierList } from '../grammar/index.js'
+import { SyntaxError } from '../error/index.js'
+import { equalObjects, equalArrays } from '../utils/index.js'
 
 export default class ExtendedParameter extends CategoryParameter {
 

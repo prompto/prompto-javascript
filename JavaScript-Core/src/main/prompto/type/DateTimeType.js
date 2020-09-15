@@ -1,8 +1,8 @@
-import NativeType from "./NativeType"
-import { DateType, TimeType, PeriodType, IntegerType, BooleanType, TextType } from "./index"
-import { Identifier } from "../grammar/index"
-import { DateTimeValue } from "../value/index"
-import { LocalDate, LocalTime, DateTime } from "../intrinsic/index"
+import NativeType from './NativeType.js'
+import { DateType, TimeType, PeriodType, IntegerType, BooleanType, TextType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { DateTimeValue } from '../value/index.js'
+import { LocalDate, LocalTime, DateTime } from '../intrinsic/index.js'
 
 export default class DateTimeType extends NativeType {
 

@@ -1,12 +1,12 @@
-import { DictionaryType, TextType } from "../type/index"
-import { CmdLineParser } from "../utils/index"
-import { TextValue, DictionaryValue } from "../value/index"
-import { Identifier, Argument, ArgumentList } from "../grammar/index"
-import { ValueExpression, MethodSelector } from "../expression/index"
-import { MethodCall } from "../statement/index"
-import { UnresolvedParameter } from "../param/index"
-import { DictLiteral } from "../literal/index"
-import { SyntaxError } from "../error/index"
+import { DictionaryType, TextType } from '../type/index.js'
+import { CmdLineParser } from '../utils/index.js'
+import { TextValue, DictionaryValue } from '../value/index.js'
+import { Identifier, Argument, ArgumentList } from '../grammar/index.js'
+import { ValueExpression, MethodSelector } from '../expression/index.js'
+import { MethodCall } from '../statement/index.js'
+import { UnresolvedParameter } from '../param/index.js'
+import { DictLiteral } from '../literal/index.js'
+import { SyntaxError } from '../error/index.js'
 
 const argsType = new DictionaryType(TextType.instance);
 

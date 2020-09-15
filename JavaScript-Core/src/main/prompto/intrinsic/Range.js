@@ -1,5 +1,5 @@
-import { StrictSet, List, LocalDate, LocalTime } from "./index"
-import { equalObjects } from "../utils/index"
+import { StrictSet, List, LocalDate, LocalTime } from './index.js'
+import { equalObjects } from '../utils/index.js'
 
 function Range(first, last) {
     this.first = first;

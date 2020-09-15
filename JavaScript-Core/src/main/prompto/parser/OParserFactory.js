@@ -1,5 +1,5 @@
-import antlr4 from "antlr4";
-import { ONamingLexer, OCleverParser } from "./index"
+import antlr4 from 'antlr4';
+import { ONamingLexer, OCleverParser } from './index.js'
 
 export default function OParserFactory() {
 	

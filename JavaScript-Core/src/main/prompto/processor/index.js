@@ -1,9 +1,9 @@
-export {default as InlinedProcessor} from "./InlinedProcessor"
-export {default as PageWidgetOfProcessor} from "./PageWidgetOfProcessor"
-export {default as WidgetFieldProcessor} from "./WidgetFieldProcessor"
-export {default as WidgetPropertiesProcessor} from "./WidgetPropertiesProcessor"
-export {default as AnnotationProcessors} from "./AnnotationProcessors"
+export {default as InlinedProcessor} from './InlinedProcessor.js'
+export {default as PageWidgetOfProcessor} from './PageWidgetOfProcessor.js'
+export {default as WidgetFieldProcessor} from './WidgetFieldProcessor.js'
+export {default as WidgetPropertiesProcessor} from './WidgetPropertiesProcessor.js'
+export {default as AnnotationProcessors} from './AnnotationProcessors.js'
 export default {}
 
-import AnnotationProcessors from "./AnnotationProcessors"
+import AnnotationProcessors from './AnnotationProcessors.js'
 AnnotationProcessors.registerAll();

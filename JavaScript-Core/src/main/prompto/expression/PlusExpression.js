@@ -1,4 +1,4 @@
-import Expression from "./Expression"
+import Expression from './Expression.js'
 
 export default class PlusExpression extends Expression {
 

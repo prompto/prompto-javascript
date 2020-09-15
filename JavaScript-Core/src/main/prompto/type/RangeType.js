@@ -1,7 +1,7 @@
-import ContainerType from "./ContainerType"
-import { BooleanType, IntegerType } from "./index"
-import { Identifier } from "../grammar/index"
-import { StrictSet } from "../intrinsic/index"
+import ContainerType from './ContainerType.js'
+import { BooleanType, IntegerType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { StrictSet } from '../intrinsic/index.js'
 
 export default class RangeType extends ContainerType {
 

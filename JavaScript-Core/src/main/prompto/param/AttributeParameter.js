@@ -1,5 +1,5 @@
-import Parameter from "./Parameter"
-import { SyntaxError } from "../error/index"
+import Parameter from './Parameter.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class AttributeParameter extends Parameter {
 

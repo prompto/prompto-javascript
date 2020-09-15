@@ -1,5 +1,5 @@
-import { NullType } from "../type/index"
-import { NullValue } from "../value/index"
+import { NullType } from '../type/index.js'
+import { NullValue } from '../value/index.js'
 
 export default class NullLiteral {
 

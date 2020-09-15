@@ -1,4 +1,4 @@
-import SetterMethodDeclaration from "./SetterMethodDeclaration"
+import SetterMethodDeclaration from './SetterMethodDeclaration.js'
 
 export default class NativeSetterMethodDeclaration extends SetterMethodDeclaration {
 

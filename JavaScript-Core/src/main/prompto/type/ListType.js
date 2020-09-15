@@ -1,9 +1,9 @@
-import ContainerType from "./ContainerType"
-import { IntegerType, SetType, BooleanType } from "./index"
-import { Identifier } from "../grammar/index"
-import { List } from "../intrinsic/index"
-import { ListValue } from "../value/index"
-import { JoinListMethodDeclaration } from "../builtins/ContainerTypeBuiltins";
+import ContainerType from './ContainerType.js'
+import { IntegerType, SetType, BooleanType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { List } from '../intrinsic/index.js'
+import { ListValue } from '../value/index.js'
+import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js';
 
 export default class ListType extends ContainerType {
   

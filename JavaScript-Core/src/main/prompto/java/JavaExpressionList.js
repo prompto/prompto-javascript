@@ -1,4 +1,4 @@
-import ObjectList from "../utils/ObjectList";
+import ObjectList from '../utils/ObjectList.js';
 
 export default class JavaExpressionList extends ObjectList {
 

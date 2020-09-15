@@ -1,6 +1,6 @@
-import SelectorExpression from "./SelectorExpression"
-import { Value, NullValue } from "../value/index"
-import { SyntaxError, NullReferenceError } from "../error/index"
+import SelectorExpression from './SelectorExpression.js'
+import { Value, NullValue } from '../value/index.js'
+import { SyntaxError, NullReferenceError } from '../error/index.js'
 
 export default class ItemSelector extends SelectorExpression {
 

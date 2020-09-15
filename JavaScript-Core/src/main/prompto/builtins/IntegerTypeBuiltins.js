@@ -1,8 +1,8 @@
-import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
-import { CategoryParameter } from "../param/index"
-import { TextType } from "../type/index"
-import { TextValue } from "../value/index"
-import { Identifier } from "../grammar/index"
+import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
+import { CategoryParameter } from '../param/index.js'
+import { TextType } from '../type/index.js'
+import { TextValue } from '../value/index.js'
+import { Identifier } from '../grammar/index.js'
 
 
 // don't use export default since more builtins are expected

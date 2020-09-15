@@ -1,4 +1,4 @@
-import { InlinedProcessor, PageWidgetOfProcessor, WidgetFieldProcessor, WidgetPropertiesProcessor } from "./index"
+import { InlinedProcessor, PageWidgetOfProcessor, WidgetFieldProcessor, WidgetPropertiesProcessor } from './index.js'
 
 const processors = new Map();
 

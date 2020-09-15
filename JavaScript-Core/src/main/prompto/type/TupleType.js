@@ -1,7 +1,7 @@
-import NativeType from "./NativeType"
-import { IntegerType, ListType, SetType, AnyType, BooleanType } from "./index"
-import { Identifier } from "../grammar/index"
-import { JoinTupleMethodDeclaration } from "../builtins/ContainerTypeBuiltins"
+import NativeType from './NativeType.js'
+import { IntegerType, ListType, SetType, AnyType, BooleanType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { JoinTupleMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js'
 
 export default class TupleType extends NativeType {
 

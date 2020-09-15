@@ -1,6 +1,6 @@
-import Value from "./Value"
-import { BooleanType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import Value from './Value.js'
+import { BooleanType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class BooleanValue extends Value {
   

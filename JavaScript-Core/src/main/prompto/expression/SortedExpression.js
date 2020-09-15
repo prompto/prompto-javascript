@@ -1,9 +1,9 @@
-import Expression from "./Expression"
-import { UnresolvedIdentifier, ArrowExpression, InstanceExpression } from "./index"
-import { CategoryType, DocumentType, ListType, SetType } from "../type/index"
-import { ListValue, SetValue } from "../value/index"
-import { List } from "../intrinsic/index"
-import { SyntaxError, NullReferenceError, InternalError } from "../error/index"
+import Expression from './Expression.js'
+import { UnresolvedIdentifier, ArrowExpression, InstanceExpression } from './index.js'
+import { CategoryType, DocumentType, ListType, SetType } from '../type/index.js'
+import { ListValue, SetValue } from '../value/index.js'
+import { List } from '../intrinsic/index.js'
+import { SyntaxError, NullReferenceError, InternalError } from '../error/index.js'
 
 export default class SortedExpression extends Expression {
  

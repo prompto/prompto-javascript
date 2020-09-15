@@ -1,6 +1,6 @@
-import SimpleStatement from "./SimpleStatement"
-import { BreakResult } from "../runtime/index"
-import { VoidType } from "../type/index"
+import SimpleStatement from './SimpleStatement.js'
+import { BreakResult } from '../runtime/index.js'
+import { VoidType } from '../type/index.js'
 
 export default class BreakStatement extends SimpleStatement {
 

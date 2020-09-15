@@ -1,9 +1,9 @@
-import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
-import { CategoryParameter } from "../param/index"
-import { TextType } from "../type/index"
-import { Identifier } from "../grammar/index"
-import { EnumeratedCategoryDeclaration } from "../declaration/index"
-import { SyntaxError } from "../error/index"
+import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
+import { CategoryParameter } from '../param/index.js'
+import { TextType } from '../type/index.js'
+import { Identifier } from '../grammar/index.js'
+import { EnumeratedCategoryDeclaration } from '../declaration/index.js'
+import { SyntaxError } from '../error/index.js'
 
 // don't use export default since more builtins are expected
 class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {

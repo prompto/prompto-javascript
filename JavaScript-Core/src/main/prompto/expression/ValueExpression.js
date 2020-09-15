@@ -1,4 +1,4 @@
-import Value from "../value/Value"
+import Value from '../value/Value.js'
 
 export default class ValueExpression extends Value {
 

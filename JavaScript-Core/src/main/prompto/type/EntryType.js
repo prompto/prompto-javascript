@@ -1,6 +1,6 @@
-import BaseType from "./BaseType"
-import { TextType } from "./index"
-import { Identifier } from "../grammar/index"
+import BaseType from './BaseType.js'
+import { TextType } from './index.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class EntryType extends BaseType {
 

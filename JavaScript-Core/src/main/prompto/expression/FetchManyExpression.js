@@ -1,9 +1,9 @@
-import Expression from "./Expression"
-import { AnyType, CursorType, IntegerType } from "../type/index"
-import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from "../store/index"
-import { CursorValue } from "../value/index"
-import { CategoryDeclaration } from "../declaration/index"
-import { InvalidDataError } from "../error/index"
+import Expression from './Expression.js'
+import { AnyType, CursorType, IntegerType } from '../type/index.js'
+import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store/index.js'
+import { CursorValue } from '../value/index.js'
+import { CategoryDeclaration } from '../declaration/index.js'
+import { InvalidDataError } from '../error/index.js'
 
 export default class FetchManyExpression extends Expression {
 

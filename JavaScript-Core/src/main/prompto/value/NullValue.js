@@ -1,5 +1,5 @@
-import Value from "./Value"
-import { NullType } from "../type/index"
+import Value from './Value.js'
+import { NullType } from '../type/index.js'
 
 export default class NullValue extends Value {
 

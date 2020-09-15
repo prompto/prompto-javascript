@@ -1,5 +1,5 @@
-import { NotMutableError } from "../error/index";
-import Document from "./Document";
+import { NotMutableError } from '../error/index.js';
+import Document from './Document.js';
 
 function Category(klass) {
     this.klass = klass;

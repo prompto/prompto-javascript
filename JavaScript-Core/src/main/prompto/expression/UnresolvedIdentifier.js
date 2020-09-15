@@ -1,11 +1,11 @@
-import Expression from "./Expression"
-import { InstanceExpression, MethodSelector, ConstructorExpression, TypeExpression, SymbolExpression } from "./index"
-import { VoidType, CategoryType, EnumeratedCategoryType, NativeType } from "../type/index"
-import { ProblemListener } from "../problem/index"
-import { PromptoError } from "../error/index"
-import { MethodCall } from "../statement/index"
-import { EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration } from "../declaration/index"
-import { Dialect } from "../parser/index"
+import Expression from './Expression.js'
+import { InstanceExpression, MethodSelector, ConstructorExpression, TypeExpression, SymbolExpression } from './index.js'
+import { VoidType, CategoryType, EnumeratedCategoryType, NativeType } from '../type/index.js'
+import { ProblemListener } from '../problem/index.js'
+import { PromptoError } from '../error/index.js'
+import { MethodCall } from '../statement/index.js'
+import { EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration } from '../declaration/index.js'
+import { Dialect } from '../parser/index.js'
 
 export default class UnresolvedIdentifier extends Expression {
  

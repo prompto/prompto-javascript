@@ -1,7 +1,7 @@
-import Expression from "./Expression"
-import { AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType } from "../type/index"
-import { IntegerValue, DecimalValue } from "../value/index"
-import { MethodDeclarationMap } from "../runtime/index"
+import Expression from './Expression.js'
+import { AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType } from '../type/index.js'
+import { IntegerValue, DecimalValue } from '../value/index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
 
 
 function getTargetType(context, itype, mutable) {

@@ -1,7 +1,7 @@
-import BaseValueList from "./BaseValueList"
-import { BooleanValue, SetValue } from "./index"
-import { TupleType } from "../type/index"
-import { InternalError, SyntaxError } from "../error/index"
+import BaseValueList from './BaseValueList.js'
+import { BooleanValue, SetValue } from './index.js'
+import { TupleType } from '../type/index.js'
+import { InternalError, SyntaxError } from '../error/index.js'
 
 export default class TupleValue extends BaseValueList {
 

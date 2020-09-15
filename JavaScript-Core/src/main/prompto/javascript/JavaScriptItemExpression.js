@@ -1,4 +1,4 @@
-import JavaScriptSelectorExpression from "./JavaScriptSelectorExpression"
+import JavaScriptSelectorExpression from './JavaScriptSelectorExpression.js'
 
 export default class JavaScriptItemExpression extends JavaScriptSelectorExpression {
 

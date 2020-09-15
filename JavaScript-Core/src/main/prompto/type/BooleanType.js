@@ -1,6 +1,6 @@
-import NativeType from "./NativeType"
-import { Identifier } from "../grammar/index"
-import { BooleanValue } from "../value/index"
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
+import { BooleanValue } from '../value/index.js'
 
 export default class BooleanType extends NativeType {
  

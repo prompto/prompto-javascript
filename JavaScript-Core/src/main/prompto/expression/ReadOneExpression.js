@@ -1,8 +1,8 @@
-import Expression from "./Expression"
-import { ResourceContext } from "../runtime/index"
-import { ResourceType, TextType } from "../type/index"
-import { TextValue } from "../value/index"
-import { NullReferenceError, InvalidResourceError } from "../error/index"
+import Expression from './Expression.js'
+import { ResourceContext } from '../runtime/index.js'
+import { ResourceType, TextType } from '../type/index.js'
+import { TextValue } from '../value/index.js'
+import { NullReferenceError, InvalidResourceError } from '../error/index.js'
 
 export default class ReadOneExpression extends Expression {
 

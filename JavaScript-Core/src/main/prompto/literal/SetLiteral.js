@@ -1,8 +1,8 @@
-import Literal from "./Literal"
-import { ExpressionList } from "../utils/index"
-import { SetValue, DecimalValue, TextValue } from "../value/index"
-import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from "../type/index"
-import { inferExpressionsType } from "../utils/index"
+import Literal from './Literal.js'
+import { ExpressionList } from '../utils/index.js'
+import { SetValue, DecimalValue, TextValue } from '../value/index.js'
+import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from '../type/index.js'
+import { inferExpressionsType } from '../utils/index.js'
 
 export default class SetLiteral extends Literal {
 

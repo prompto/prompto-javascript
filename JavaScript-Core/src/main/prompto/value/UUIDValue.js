@@ -1,8 +1,8 @@
-import Value from "./Value"
-import { TextValue } from "./index"
-import { InvalidDataError } from "../error/index"
-import { UUID } from "../intrinsic/index"
-import { UUIDType } from "../type/index"
+import Value from './Value.js'
+import { TextValue } from './index.js'
+import { InvalidDataError } from '../error/index.js'
+import { UUID } from '../intrinsic/index.js'
+import { UUIDType } from '../type/index.js'
 
 export default class UUIDValue extends Value {
    

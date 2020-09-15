@@ -1,7 +1,7 @@
-import Value from "./Value"
-import { PeriodValue, DateValue, TextValue, TimeValue, IntegerValue } from "./index"
-import { DateTimeType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import Value from './Value.js'
+import { PeriodValue, DateValue, TextValue, TimeValue, IntegerValue } from './index.js'
+import { DateTimeType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class DateTimeValue extends Value {
   

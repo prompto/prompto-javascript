@@ -1,5 +1,5 @@
-import SimpleStatement from "./SimpleStatement"
-import { VoidType } from "../type/index"
+import SimpleStatement from './SimpleStatement.js'
+import { VoidType } from '../type/index.js'
 
 export default class NativeCall extends SimpleStatement {
 

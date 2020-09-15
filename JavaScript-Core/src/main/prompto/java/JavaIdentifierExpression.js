@@ -1,4 +1,4 @@
-import JavaExpression from "./JavaExpression"
+import JavaExpression from './JavaExpression.js'
 
 export default class JavaIdentifierExpression extends JavaExpression {
 

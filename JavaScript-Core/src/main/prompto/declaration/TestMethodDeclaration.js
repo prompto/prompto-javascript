@@ -1,7 +1,7 @@
-import BaseDeclaration from "./BaseDeclaration"
-import { VoidType } from "../type/index"
-import { PromptoError } from "../error/index"
-import { Identifier } from "../grammar/index"
+import BaseDeclaration from './BaseDeclaration.js'
+import { VoidType } from '../type/index.js'
+import { PromptoError } from '../error/index.js'
+import { Identifier } from '../grammar/index.js'
 
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 

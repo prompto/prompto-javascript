@@ -1,4 +1,4 @@
-import PythonExpression from "./PythonExpression"
+import PythonExpression from './PythonExpression.js'
 
 export default class PythonSelectorExpression extends PythonExpression {
 

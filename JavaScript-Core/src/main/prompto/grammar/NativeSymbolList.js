@@ -1,4 +1,4 @@
-import SymbolList from "./SymbolList"
+import SymbolList from './SymbolList.js'
 
 export default class NativeSymbolList extends SymbolList {
 

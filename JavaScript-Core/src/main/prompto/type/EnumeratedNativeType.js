@@ -1,8 +1,8 @@
-import BaseType from "./BaseType"
-import { TextType, ListType } from "./index"
-import { List } from "../intrinsic/index"
-import { SymbolOfMethodDeclaration } from "../builtins/EnumeratedNativeTypeBuiltins"
-import { SyntaxError } from "../error/index"
+import BaseType from './BaseType.js'
+import { TextType, ListType } from './index.js'
+import { List } from '../intrinsic/index.js'
+import { SymbolOfMethodDeclaration } from '../builtins/EnumeratedNativeTypeBuiltins.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class EnumeratedNativeType extends BaseType {
 

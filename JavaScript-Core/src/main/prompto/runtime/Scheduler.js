@@ -1,4 +1,4 @@
-import { ApplicationContext } from "./index"
+import { ApplicationContext } from './index.js'
 
 export default class Scheduler {
  

@@ -1,7 +1,7 @@
-import ContainerType from "./ContainerType"
-import { TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from "./index"
-import { Identifier } from "../grammar/index"
-import { Dictionary, StrictSet, List } from "../intrinsic/index"
+import ContainerType from './ContainerType.js'
+import { TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { Dictionary, StrictSet, List } from '../intrinsic/index.js'
 
 export default class DictionaryType extends ContainerType {
 

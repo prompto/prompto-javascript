@@ -1,4 +1,4 @@
-import NativeType from "./NativeType"
+import NativeType from './NativeType.js'
 
 export default class IterableType extends NativeType {
 

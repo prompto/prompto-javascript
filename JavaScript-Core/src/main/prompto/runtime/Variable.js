@@ -1,4 +1,4 @@
-import NamedInstance from "../grammar/NamedInstance"
+import NamedInstance from '../grammar/NamedInstance.js'
 
 export default class Variable extends NamedInstance {
 

@@ -1,7 +1,7 @@
-import FetchOneExpression from "../expression/FetchOneExpression"
-import { Variable } from "../runtime/index"
-import { VoidType } from "../type/index"
-import { Dialect } from "../parser/index"
+import FetchOneExpression from '../expression/FetchOneExpression.js'
+import { Variable } from '../runtime/index.js'
+import { VoidType } from '../type/index.js'
+import { Dialect } from '../parser/index.js'
 
 export default class FetchOneStatement extends FetchOneExpression {
 

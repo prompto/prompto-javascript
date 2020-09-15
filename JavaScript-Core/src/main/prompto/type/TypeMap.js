@@ -1,4 +1,4 @@
-import { VoidType, NullType } from "./index"
+import { VoidType, NullType } from './index.js'
 
 export default class TypeMap {
   

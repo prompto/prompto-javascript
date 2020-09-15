@@ -1,6 +1,6 @@
-import BaseDeclaration from "./BaseDeclaration"
-import { EnumeratedNativeType } from "../type/index"
-import { List } from "../intrinsic/index"
+import BaseDeclaration from './BaseDeclaration.js'
+import { EnumeratedNativeType } from '../type/index.js'
+import { List } from '../intrinsic/index.js'
 
 export default class EnumeratedNativeDeclaration extends BaseDeclaration {
 

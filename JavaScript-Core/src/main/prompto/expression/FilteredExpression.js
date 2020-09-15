@@ -1,9 +1,9 @@
-import Expression from "./Expression"
-import { ArrowExpression } from "./index"
-import { Variable } from "../runtime/index"
-import { IdentifierList } from "../grammar/index"
-import { IterableType, ListType, AnyType, BooleanType } from "../type/index"
-import { SyntaxError, NullReferenceError, InternalError } from "../error/index"
+import Expression from './Expression.js'
+import { ArrowExpression } from './index.js'
+import { Variable } from '../runtime/index.js'
+import { IdentifierList } from '../grammar/index.js'
+import { IterableType, ListType, AnyType, BooleanType } from '../type/index.js'
+import { SyntaxError, NullReferenceError, InternalError } from '../error/index.js'
 
 export default class FilteredExpression extends Expression {
  

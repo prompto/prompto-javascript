@@ -1,4 +1,4 @@
-import AbstractMethodDeclaration from "./AbstractMethodDeclaration"
+import AbstractMethodDeclaration from './AbstractMethodDeclaration.js'
 
 export default class ClosureDeclaration extends AbstractMethodDeclaration {
 

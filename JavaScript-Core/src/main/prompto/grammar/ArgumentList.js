@@ -1,9 +1,9 @@
-import ObjectList from "../utils/ObjectList"
-import { Argument } from "./index"
-import { AndExpression, UnresolvedIdentifier } from "../expression/index"
-import { ContextualExpression } from "../value/index"
-import { AttributeParameter } from "../param/index"
-import { SyntaxError } from "../error/index"
+import ObjectList from '../utils/ObjectList.js'
+import { Argument } from './index.js'
+import { AndExpression, UnresolvedIdentifier } from '../expression/index.js'
+import { ContextualExpression } from '../value/index.js'
+import { AttributeParameter } from '../param/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class ArgumentList extends ObjectList {
 

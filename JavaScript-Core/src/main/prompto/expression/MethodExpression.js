@@ -1,8 +1,8 @@
-import Expression from "./Expression"
-import { Dialect } from "../parser/index"
-import { MethodType } from "../type/index"
-import { ClosureValue } from "../value/index"
-import { MethodDeclarationMap, InstanceContext } from "../runtime/index"
+import Expression from './Expression.js'
+import { Dialect } from '../parser/index.js'
+import { MethodType } from '../type/index.js'
+import { ClosureValue } from '../value/index.js'
+import { MethodDeclarationMap, InstanceContext } from '../runtime/index.js'
 
 export default class MethodExpression extends Expression {
 

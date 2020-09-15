@@ -1,15 +1,15 @@
-import SimpleStatement from "./SimpleStatement"
-import { Dialect } from "../parser/index"
-import { Identifier, ArgumentList } from "../grammar/index"
-import { MethodFinder, MethodDeclarationMap, InstanceContext } from "../runtime/index"
+import SimpleStatement from './SimpleStatement.js'
+import { Dialect } from '../parser/index.js'
+import { Identifier, ArgumentList } from '../grammar/index.js'
+import { MethodFinder, MethodDeclarationMap, InstanceContext } from '../runtime/index.js'
 import { AbstractMethodDeclaration, ConcreteMethodDeclaration, BuiltInMethodDeclaration, 
-    DispatchMethodDeclaration, ArrowDeclaration, ClosureDeclaration } from "../declaration/index"
-import { VoidType, MethodType } from "../type/index"
-import { ThisExpression, MethodSelector } from "../expression/index"
-import { SyntaxError, PromptoError, NotMutableError } from "../error/index"
-import { CodeParameter } from "../param/index"
-import { BooleanValue, ArrowValue, ClosureValue } from "../value/index"
-import { CodeWriter } from "../utils/index"
+    DispatchMethodDeclaration, ArrowDeclaration, ClosureDeclaration } from '../declaration/index.js'
+import { VoidType, MethodType } from '../type/index.js'
+import { ThisExpression, MethodSelector } from '../expression/index.js'
+import { SyntaxError, PromptoError, NotMutableError } from '../error/index.js'
+import { CodeParameter } from '../param/index.js'
+import { BooleanValue, ArrowValue, ClosureValue } from '../value/index.js'
+import { CodeWriter } from '../utils/index.js'
 
 export default class MethodCall extends SimpleStatement {
   

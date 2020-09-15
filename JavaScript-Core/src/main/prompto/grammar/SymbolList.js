@@ -1,5 +1,5 @@
-import ObjectList from "../utils/ObjectList"
-import { MissingType } from "../type/index"
+import ObjectList from '../utils/ObjectList.js'
+import { MissingType } from '../type/index.js'
 
 export default class SymbolList extends ObjectList {
 

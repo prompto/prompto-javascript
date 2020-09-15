@@ -1,8 +1,8 @@
-import Value from "./Value"
-import { TextValue, IntegerValue, SetValue, NullValue, ListValue } from "./index"
-import { DictionaryType, TextType } from "../type/index"
-import { StrictSet, Dictionary } from "../intrinsic/index"
-import { SyntaxError, InternalError } from "../error/index"
+import Value from './Value.js'
+import { TextValue, IntegerValue, SetValue, NullValue, ListValue } from './index.js'
+import { DictionaryType, TextType } from '../type/index.js'
+import { StrictSet, Dictionary } from '../intrinsic/index.js'
+import { SyntaxError, InternalError } from '../error/index.js'
 
 export default class DictionaryValue extends Value {
  

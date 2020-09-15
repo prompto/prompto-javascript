@@ -1,5 +1,5 @@
-import { Variable } from "../runtime/index"
-import { VoidType, CategoryType, DocumentType, CodeType } from "../type/index"
+import { Variable } from '../runtime/index.js'
+import { VoidType, CategoryType, DocumentType, CodeType } from '../type/index.js'
 
 export default class VariableInstance {
   

@@ -22,7 +22,7 @@ export default class ProblemCollector extends antlr4.error.ErrorListener {
             };
         else
             return {
-                path : "",
+                path : '',
                 startLine : 1,
                 startColumn : 1,
                 endLine : 99999,

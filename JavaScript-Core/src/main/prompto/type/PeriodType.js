@@ -1,8 +1,8 @@
-import NativeType from "./NativeType"
-import { IntegerType } from "./index"
-import { Identifier } from "../grammar/index"
-import { PeriodValue } from "../value/index"
-import { Period } from "../intrinsic/index"
+import NativeType from './NativeType.js'
+import { IntegerType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { PeriodValue } from '../value/index.js'
+import { Period } from '../intrinsic/index.js'
 
 
 export default class PeriodType extends NativeType {

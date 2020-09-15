@@ -1,6 +1,6 @@
-import Parameter from "./Parameter"
-import { CodeType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import Parameter from './Parameter.js'
+import { CodeType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class CodeParameter extends Parameter {
 

@@ -1,6 +1,6 @@
-import Literal from "./Literal"
-import { BooleanValue } from "../value/index"
-import { BooleanType } from "../type/index"
+import Literal from './Literal.js'
+import { BooleanValue } from '../value/index.js'
+import { BooleanType } from '../type/index.js'
 
 export default class BooleanLiteral extends Literal {
 

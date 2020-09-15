@@ -1,7 +1,7 @@
-import BaseType from "./BaseType"
-import { DocumentType } from "./index"
-import { Identifier } from "../grammar/index"
-import { Document, List } from "../intrinsic/index"
+import BaseType from './BaseType.js'
+import { DocumentType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { Document, List } from '../intrinsic/index.js'
 
 /* transient type for holding child property structure */
 export default class PropertiesType extends BaseType {

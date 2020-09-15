@@ -1,8 +1,8 @@
-import SelectorExpression from "./SelectorExpression"
-import { IntegerType } from "../type/index"
-import { IntegerValue } from "../value/index"
+import SelectorExpression from './SelectorExpression.js'
+import { IntegerType } from '../type/index.js'
+import { IntegerValue } from '../value/index.js'
 
-import { SyntaxError, NullReferenceError } from "../error/index"
+import { SyntaxError, NullReferenceError } from '../error/index.js'
 
 export default class SliceSelector extends SelectorExpression {
 

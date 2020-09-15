@@ -1,12 +1,12 @@
-import Instance from "./Instance"
-import { NullValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from "./index"
-import { CategoryType, DecimalType } from "../type/index"
-import { Variable } from "../runtime/index"
-import { Identifier, Operator } from "../grammar/index"
-import { $DataStore } from "../store/index"
-import { EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from "../declaration/index"
-import { NotStorableError, NotMutableError } from "../error/index"
-import { convertFromJavaScript } from "../utils/index"
+import Instance from './Instance.js'
+import { NullValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from './index.js'
+import { CategoryType, DecimalType } from '../type/index.js'
+import { Variable } from '../runtime/index.js'
+import { Identifier, Operator } from '../grammar/index.js'
+import { $DataStore } from '../store/index.js'
+import { EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from '../declaration/index.js'
+import { NotStorableError, NotMutableError } from '../error/index.js'
+import { convertFromJavaScript } from '../utils/index.js'
 
 export default class ConcreteInstance extends Instance {
 

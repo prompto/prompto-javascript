@@ -1,8 +1,8 @@
-import NativeType from "./NativeType"
-import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from "./index"
-import { Identifier } from "../grammar/index"
-import { IntegerValue, IntegerRange } from "../value/index"
-import { FormatMethodDeclaration } from "../builtins/IntegerTypeBuiltins"
+import NativeType from './NativeType.js'
+import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { IntegerValue, IntegerRange } from '../value/index.js'
+import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins.js'
 
 
 export default class IntegerType extends NativeType {

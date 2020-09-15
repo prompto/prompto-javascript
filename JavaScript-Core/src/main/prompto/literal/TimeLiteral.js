@@ -1,7 +1,7 @@
-import Literal from "./Literal"
-import { TimeType } from "../type/index"
-import { TimeValue } from "../value/index"
-import { LocalTime } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { TimeType } from '../type/index.js'
+import { TimeValue } from '../value/index.js'
+import { LocalTime } from '../intrinsic/index.js'
 
 export default class TimeLiteral extends Literal {
 

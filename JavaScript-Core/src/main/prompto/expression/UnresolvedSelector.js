@@ -1,9 +1,9 @@
-import SelectorExpression from "./SelectorExpression"
-import { UnresolvedIdentifier, MemberSelector, MethodSelector } from "./index"
-import { UnresolvedCall } from "../statement/index"
-import { AnyType } from "../type/index"
-import { ProblemListener } from "../problem/index"
-import { SyntaxError } from "../error/index"
+import SelectorExpression from './SelectorExpression.js'
+import { UnresolvedIdentifier, MemberSelector, MethodSelector } from './index.js'
+import { UnresolvedCall } from '../statement/index.js'
+import { AnyType } from '../type/index.js'
+import { ProblemListener } from '../problem/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class UnresolvedSelector extends SelectorExpression {
 

@@ -1,4 +1,4 @@
-import { OLexer } from "./OLexer"
+import { OLexer } from './OLexer.js'
 
 export default function ONamingLexer(input) {
 	OLexer.call(this, input);

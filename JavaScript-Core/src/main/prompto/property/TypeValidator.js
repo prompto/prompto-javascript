@@ -1,6 +1,6 @@
-import PropertyValidator from "./PropertyValidator"
-import { MethodType } from "../type/index"
-import { MethodDeclarationMap } from "../runtime/index"
+import PropertyValidator from './PropertyValidator.js'
+import { MethodType } from '../type/index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
 
 export default class TypeValidator extends PropertyValidator {
 

@@ -1,9 +1,9 @@
-import BaseValueList from "./BaseValueList"
-import { SetValue, IntegerValue } from "./index"
-import { SyntaxError } from "../error/index"
-import { ListType } from "../type/index"
-import { List } from "../intrinsic/index"
-import { multiplyArray } from "../utils/Utils"
+import BaseValueList from './BaseValueList.js'
+import { SetValue, IntegerValue } from './index.js'
+import { SyntaxError } from '../error/index.js'
+import { ListType } from '../type/index.js'
+import { List } from '../intrinsic/index.js'
+import { multiplyArray } from '../utils/Utils.js'
 
 export default class ListValue extends BaseValueList {
  

@@ -1,4 +1,4 @@
-import PythonLiteral from "./PythonLiteral"
+import PythonLiteral from './PythonLiteral.js'
 
 export default class PythonIntegerLiteral extends PythonLiteral {
 

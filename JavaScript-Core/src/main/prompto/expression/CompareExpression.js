@@ -1,9 +1,9 @@
-import Expression from "./Expression"
-import { CmpOp } from "../grammar/index"
-import { MatchOp } from "../store/index"
-import { SyntaxError, InvalidDataError } from "../error/index"
-import { BooleanValue, Instance } from "../value/index"
-import { CodeWriter } from "../utils/index"
+import Expression from './Expression.js'
+import { CmpOp } from '../grammar/index.js'
+import { MatchOp } from '../store/index.js'
+import { SyntaxError, InvalidDataError } from '../error/index.js'
+import { BooleanValue, Instance } from '../value/index.js'
+import { CodeWriter } from '../utils/index.js'
 
 export default class CompareExpression extends Expression {
   

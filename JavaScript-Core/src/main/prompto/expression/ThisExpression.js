@@ -1,7 +1,7 @@
-import Expression from "./Expression"
-import { InstanceContext, DocumentContext } from "../runtime/index"
-import { DocumentType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import Expression from './Expression.js'
+import { InstanceContext, DocumentContext } from '../runtime/index.js'
+import { DocumentType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class ThisExpression extends Expression {
 

@@ -1,5 +1,5 @@
-import BinaryValue from "./BinaryValue"
-import { ImageType } from "../type/index"
+import BinaryValue from './BinaryValue.js'
+import { ImageType } from '../type/index.js'
 
 export default class ImageValue extends BinaryValue {
 

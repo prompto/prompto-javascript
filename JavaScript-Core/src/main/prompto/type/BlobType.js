@@ -1,5 +1,5 @@
-import BinaryType from "./BinaryType"
-import { Identifier } from "../grammar/index"
+import BinaryType from './BinaryType.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class BlobType extends BinaryType {
 

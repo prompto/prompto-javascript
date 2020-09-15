@@ -1,5 +1,5 @@
-import BinaryValue from "./BinaryValue"
-import { BlobType } from "../type/index"
+import BinaryValue from './BinaryValue.js'
+import { BlobType } from '../type/index.js'
 
 export default class BlobValue extends BinaryValue {
 

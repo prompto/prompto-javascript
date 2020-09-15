@@ -1,8 +1,8 @@
-import Value from "./Value"
-import { IntegerValue, CharacterValue } from "./index"
-import { TextType } from "../type/index"
-import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from "../error/index"
-import { removeAccents } from "../utils/index"
+import Value from './Value.js'
+import { IntegerValue, CharacterValue } from './index.js'
+import { TextType } from '../type/index.js'
+import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from '../error/index.js'
+import { removeAccents } from '../utils/index.js'
 
 export default class TextValue extends Value {
 

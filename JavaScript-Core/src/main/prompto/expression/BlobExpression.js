@@ -1,9 +1,9 @@
-import Expression from "./Expression"
-import { BlobType } from "../type/index"
-import { Blob, Document } from "../intrinsic/index"
-import { BlobValue } from "../value/index"
-import { ReadWriteError } from "../error/index"
-import { getUtf8CharLength, utf8BufferToString, stringToUtf8Buffer } from "../utils/index"
+import Expression from './Expression.js'
+import { BlobType } from '../type/index.js'
+import { Blob, Document } from '../intrinsic/index.js'
+import { BlobValue } from '../value/index.js'
+import { ReadWriteError } from '../error/index.js'
+import { getUtf8CharLength, utf8BufferToString, stringToUtf8Buffer } from '../utils/index.js'
 
 export default class BlobExpression extends Expression {
 

@@ -1,12 +1,12 @@
-import Expression from "./Expression"
-import { InstanceExpression, UnresolvedIdentifier } from "./index"
-import { EqOp } from "../grammar/index"
-import { MatchOp } from "../store/index"
-import { Variable, LinkedVariable, LinkedValue } from "../runtime/index"
-import { ContainerType, TextType, CharacterType, BooleanType, NullType, IntegerType, DecimalType } from "../type/index"
-import { NullValue, BooleanValue, Value, TypeValue, Instance } from "../value/index"
-import { CodeWriter } from "../utils/index"
-import { SyntaxError } from "../error/index"
+import Expression from './Expression.js'
+import { InstanceExpression, UnresolvedIdentifier } from './index.js'
+import { EqOp } from '../grammar/index.js'
+import { MatchOp } from '../store/index.js'
+import { Variable, LinkedVariable, LinkedValue } from '../runtime/index.js'
+import { ContainerType, TextType, CharacterType, BooleanType, NullType, IntegerType, DecimalType } from '../type/index.js'
+import { NullValue, BooleanValue, Value, TypeValue, Instance } from '../value/index.js'
+import { CodeWriter } from '../utils/index.js'
+import { SyntaxError } from '../error/index.js'
 
 const VOWELS = "AEIO"; // sufficient here
 

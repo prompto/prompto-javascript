@@ -1,7 +1,7 @@
-import Literal from "./Literal"
-import { UUIDType } from "../type/index"
-import { UUIDValue } from "../value/index"
-import { UUID } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { UUIDType } from '../type/index.js'
+import { UUIDValue } from '../value/index.js'
+import { UUID } from '../intrinsic/index.js'
 
 /*jshint evil:true*/
 function parse(text) {

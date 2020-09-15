@@ -1,7 +1,7 @@
-import Expression from "./Expression"
-import { Dialect } from "../parser/index"
-import { BooleanType, TypeMap } from "../type/index"
-import { BooleanValue } from "../value/index"
+import Expression from './Expression.js'
+import { Dialect } from '../parser/index.js'
+import { BooleanType, TypeMap } from '../type/index.js'
+import { BooleanValue } from '../value/index.js'
 
 export default class TernaryExpression extends Expression {
 

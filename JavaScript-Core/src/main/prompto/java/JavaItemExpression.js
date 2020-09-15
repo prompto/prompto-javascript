@@ -1,4 +1,4 @@
-import JavaSelectorExpression from "./JavaSelectorExpression"
+import JavaSelectorExpression from './JavaSelectorExpression.js'
 
 export default class JavaItemExpression extends JavaSelectorExpression {
 

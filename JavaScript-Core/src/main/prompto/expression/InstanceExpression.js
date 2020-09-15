@@ -1,14 +1,14 @@
-import Expression from "./Expression"
-import { EqualsExpression } from "./index"
-import { MethodDeclarationMap, InstanceContext, Variable, LinkedVariable } from "../runtime/index"
-import { Dialect } from "../parser/index"
-import { Parameter } from "../param/index"
-import { AttributeDeclaration, CategoryDeclaration } from "../declaration/index"
-import { MethodType, BooleanType, VoidType } from "../type/index"
-import { ClosureValue } from "../value/index"
-import { EqOp } from "../grammar/index"
-import { BooleanLiteral } from "../literal/index"
-import { SyntaxError } from "../error/index"
+import Expression from './Expression.js'
+import { EqualsExpression } from './index.js'
+import { MethodDeclarationMap, InstanceContext, Variable, LinkedVariable } from '../runtime/index.js'
+import { Dialect } from '../parser/index.js'
+import { Parameter } from '../param/index.js'
+import { AttributeDeclaration, CategoryDeclaration } from '../declaration/index.js'
+import { MethodType, BooleanType, VoidType } from '../type/index.js'
+import { ClosureValue } from '../value/index.js'
+import { EqOp } from '../grammar/index.js'
+import { BooleanLiteral } from '../literal/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class InstanceExpression extends Expression {
   

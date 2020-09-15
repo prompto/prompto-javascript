@@ -1,8 +1,8 @@
-import Expression from "./Expression"
-import { DocumentType } from "../type/index"
-import { DocumentValue, BlobValue, ConcreteInstance } from "../value/index"
-import { Blob, Document } from "../intrinsic/index"
-import { ReadWriteError } from "../error/index"
+import Expression from './Expression.js'
+import { DocumentType } from '../type/index.js'
+import { DocumentValue, BlobValue, ConcreteInstance } from '../value/index.js'
+import { Blob, Document } from '../intrinsic/index.js'
+import { ReadWriteError } from '../error/index.js'
 
 export default class DocumentExpression extends Expression {
  

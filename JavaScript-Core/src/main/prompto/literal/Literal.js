@@ -1,4 +1,4 @@
-import Section from "../parser/Section"
+import Section from '../parser/Section.js'
 
 export default class Literal extends Section {
   

@@ -1,4 +1,4 @@
-import { IntegerType } from "../type/index";
+import { IntegerType } from '../type/index.js';
 
 export default class RangeLiteral {
 

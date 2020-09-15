@@ -1,10 +1,10 @@
-import Section from "../parser/Section"
-import { Specificity } from "./index"
-import { InstanceExpression, ArrowExpression, MemberSelector } from "../expression/index"
-import { MethodType, CategoryType, VoidType } from "../type/index"
-import { ContextualExpression } from "../value/index"
-import { Variable } from "../runtime/index"
-import { PromptoError, SyntaxError } from "../error/index"
+import Section from '../parser/Section.js'
+import { Specificity } from './index.js'
+import { InstanceExpression, ArrowExpression, MemberSelector } from '../expression/index.js'
+import { MethodType, CategoryType, VoidType } from '../type/index.js'
+import { ContextualExpression } from '../value/index.js'
+import { Variable } from '../runtime/index.js'
+import { PromptoError, SyntaxError } from '../error/index.js'
 
 export default class Argument extends Section {
 

@@ -1,5 +1,5 @@
-import { TextValue } from "./index"
-import { SyntaxError } from "../error/index"
+import { TextValue } from './index.js'
+import { SyntaxError } from '../error/index.js'
 
 let id = 0;
 

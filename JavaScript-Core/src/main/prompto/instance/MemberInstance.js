@@ -1,4 +1,4 @@
-import { NotMutableError } from "../error/index"
+import { NotMutableError } from '../error/index.js'
 
 export default class MemberInstance {
    

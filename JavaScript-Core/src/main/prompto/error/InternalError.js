@@ -1,4 +1,4 @@
-import PromptoError from "./PromptoError"
+import PromptoError from './PromptoError.js'
 
 export default function InternalError(message) {
 	PromptoError.call(this, message);

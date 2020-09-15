@@ -1,9 +1,9 @@
-import BaseStatement from "./BaseStatement"
-import { Variable, BreakResult } from "../runtime/index"
-import { IntegerType, ListType, DictionaryType } from "../type/index"
-import { InternalError } from "../error/index"
-import { StrictSet } from "../intrinsic/index"
-import { IntegerValue } from "../value/index"
+import BaseStatement from './BaseStatement.js'
+import { Variable, BreakResult } from '../runtime/index.js'
+import { IntegerType, ListType, DictionaryType } from '../type/index.js'
+import { InternalError } from '../error/index.js'
+import { StrictSet } from '../intrinsic/index.js'
+import { IntegerValue } from '../value/index.js'
 
 export default class ForEachStatement extends BaseStatement {
 

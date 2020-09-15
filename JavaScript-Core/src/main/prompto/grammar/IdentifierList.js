@@ -1,5 +1,5 @@
-import ObjectList from "../utils/ObjectList"
-import { Dialect } from "../parser/index"
+import ObjectList from '../utils/ObjectList.js'
+import { Dialect } from '../parser/index.js'
 
 export default class IdentifierList extends ObjectList {
 

@@ -1,6 +1,6 @@
-import SimpleStatement from "./SimpleStatement"
-import { $DataStore } from "../store/index"
-import { VoidType } from "../type/index"
+import SimpleStatement from './SimpleStatement.js'
+import { $DataStore } from '../store/index.js'
+import { VoidType } from '../type/index.js'
 
 export default class FlushStatement extends SimpleStatement {
 

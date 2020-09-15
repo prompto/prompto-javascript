@@ -1,5 +1,5 @@
-import JavaScriptLiteral from "./JavaScriptLiteral"
-import { TextType } from "../type/index"
+import JavaScriptLiteral from './JavaScriptLiteral.js'
+import { TextType } from '../type/index.js'
 
 export default class JavaScriptTextLiteral extends JavaScriptLiteral {
 

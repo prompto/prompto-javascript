@@ -1,8 +1,8 @@
-import SimpleStatement from "./SimpleStatement"
-import { VoidType, AnyType, TupleType } from "../type/index"
-import { Variable } from "../runtime/index"
-import { IntegerValue, TupleValue } from "../value/index"
-import { SyntaxError } from "../error/index"
+import SimpleStatement from './SimpleStatement.js'
+import { VoidType, AnyType, TupleType } from '../type/index.js'
+import { Variable } from '../runtime/index.js'
+import { IntegerValue, TupleValue } from '../value/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class AssignTupleStatement extends SimpleStatement {
 

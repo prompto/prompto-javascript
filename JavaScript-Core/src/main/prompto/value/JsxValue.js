@@ -1,5 +1,5 @@
-import Value from "./Value"
-import { JsxType } from "../type/index"
+import Value from './Value.js'
+import { JsxType } from '../type/index.js'
 
 export default class JsxValue extends Value {
 

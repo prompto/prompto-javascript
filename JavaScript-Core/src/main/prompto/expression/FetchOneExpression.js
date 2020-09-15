@@ -1,9 +1,9 @@
-import Expression from "./Expression"
-import { AnyType, CategoryType } from "../type/index"
-import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from "../store/index"
-import { NullValue } from "../value/index"
-import { CategoryDeclaration } from "../declaration/index"
-import { Identifier } from "../grammar/index"
+import Expression from './Expression.js'
+import { AnyType, CategoryType } from '../type/index.js'
+import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store/index.js'
+import { NullValue } from '../value/index.js'
+import { CategoryDeclaration } from '../declaration/index.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class FetchOneExpression extends Expression {
  

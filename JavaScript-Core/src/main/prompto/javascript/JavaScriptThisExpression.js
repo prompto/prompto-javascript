@@ -1,5 +1,5 @@
-import JavaScriptExpression from "./JavaScriptExpression"
-import { ThisExpression } from "../expression/index"
+import JavaScriptExpression from './JavaScriptExpression.js'
+import { ThisExpression } from '../expression/index.js'
 
 export default class JavaScriptThisExpression extends JavaScriptExpression {
 

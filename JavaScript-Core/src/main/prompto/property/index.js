@@ -1,8 +1,8 @@
-export {default as AlwaysValidator} from './AlwaysValidator';
-export {default as TypeValidator} from './TypeValidator';
-export {default as TypeSetValidator} from './TypeSetValidator';
-export {default as ValueSetValidator} from './ValueSetValidator';
-export {default as RequiredValidator} from './RequiredValidator';
-export {default as PropertyValidator} from './PropertyValidator';
-export {default as Property} from './Property';
-export {default as PropertyMap} from './PropertyMap';
+export {default as AlwaysValidator} from './AlwaysValidator.js';
+export {default as TypeValidator} from './TypeValidator.js';
+export {default as TypeSetValidator} from './TypeSetValidator.js';
+export {default as ValueSetValidator} from './ValueSetValidator.js';
+export {default as RequiredValidator} from './RequiredValidator.js';
+export {default as PropertyValidator} from './PropertyValidator.js';
+export {default as Property} from './Property.js';
+export {default as PropertyMap} from './PropertyMap.js';

@@ -1,4 +1,4 @@
-import CategoryType from "./CategoryType"
+import CategoryType from './CategoryType.js'
 
 export default class ResourceType extends CategoryType {
  

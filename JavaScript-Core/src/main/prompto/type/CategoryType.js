@@ -1,16 +1,16 @@
-import BaseType from "./BaseType"
+import BaseType from './BaseType.js'
 import { AnyType, NativeType, TextType, MethodType, VoidType, NullType, MissingType,
-    EnumeratedCategoryType, EnumeratedNativeType } from "./index"
+    EnumeratedCategoryType, EnumeratedNativeType } from './index.js'
 import { CategoryDeclaration, ConcreteCategoryDeclaration, SingletonCategoryDeclaration, 
-    EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from "../declaration/index"
-import { PromptoError } from "../error/index"
-import { UnresolvedIdentifier, ValueExpression, MethodSelector, ArrowExpression, InstanceExpression } from "../expression/index"
-import { Operator, Identifier, Argument, ArgumentList } from "../grammar/index"
-import { MethodDeclarationMap, MethodFinder, Score } from "../runtime/index"
-import { MethodCall } from "../statement/index"
-import { $DataStore } from "../store/index"
-import { compareValues } from "../utils/index"
-import { SyntaxError } from "../error/index"
+    EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from '../declaration/index.js'
+import { PromptoError } from '../error/index.js'
+import { UnresolvedIdentifier, ValueExpression, MethodSelector, ArrowExpression, InstanceExpression } from '../expression/index.js'
+import { Operator, Identifier, Argument, ArgumentList } from '../grammar/index.js'
+import { MethodDeclarationMap, MethodFinder, Score } from '../runtime/index.js'
+import { MethodCall } from '../statement/index.js'
+import { $DataStore } from '../store/index.js'
+import { compareValues } from '../utils/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class CategoryType extends BaseType {
   

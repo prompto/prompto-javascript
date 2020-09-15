@@ -1,11 +1,11 @@
-import MemberSelector from "./MemberSelector"
-import { UnresolvedIdentifier, InstanceExpression, CategorySymbol } from "./index"
-import { Identifier, NamedInstance } from "../grammar/index"
-import { MethodType, CategoryType, TypeType } from "../type/index"
-import { MethodDeclarationMap } from "../runtime/index"
-import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from "../value/index"
-import { SingletonCategoryDeclaration } from "../declaration/index"
-import { NullReferenceError, SyntaxError } from "../error/index"
+import MemberSelector from './MemberSelector.js'
+import { UnresolvedIdentifier, InstanceExpression, CategorySymbol } from './index.js'
+import { Identifier, NamedInstance } from '../grammar/index.js'
+import { MethodType, CategoryType, TypeType } from '../type/index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
+import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value/index.js'
+import { SingletonCategoryDeclaration } from '../declaration/index.js'
+import { NullReferenceError, SyntaxError } from '../error/index.js'
 
 export default class MethodSelector extends MemberSelector {
   

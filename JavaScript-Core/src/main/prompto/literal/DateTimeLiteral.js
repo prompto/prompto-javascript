@@ -1,7 +1,7 @@
-import Literal from "./Literal"
-import { DateTimeType } from "../type/index"
-import { DateTimeValue } from "../value/index"
-import { DateTime } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { DateTimeType } from '../type/index.js'
+import { DateTimeValue } from '../value/index.js'
+import { DateTime } from '../intrinsic/index.js'
 
 export default class DateTimeLiteral extends Literal {
 

@@ -1,7 +1,7 @@
-import ConcreteCategoryDeclaration from "./ConcreteCategoryDeclaration"
-import { EnumeratedCategoryType } from "../type/index"
-import { List } from "../intrinsic/index"
-import { Identifier, IdentifierList } from "../grammar/index"
+import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration.js'
+import { EnumeratedCategoryType } from '../type/index.js'
+import { List } from '../intrinsic/index.js'
+import { Identifier, IdentifierList } from '../grammar/index.js'
 
 export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
 

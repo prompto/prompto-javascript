@@ -1,10 +1,10 @@
-import Expression from "./Expression"
-import { Dialect } from "../parser/index"
-import { ReturnStatement, StatementList } from "../statement/index"
-import { Variable } from "../runtime/index"
-import { IntegerValue, BooleanValue } from "../value/index"
-import { VoidType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import Expression from './Expression.js'
+import { Dialect } from '../parser/index.js'
+import { ReturnStatement, StatementList } from '../statement/index.js'
+import { Variable } from '../runtime/index.js'
+import { IntegerValue, BooleanValue } from '../value/index.js'
+import { VoidType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class ArrowExpression extends Expression {
   

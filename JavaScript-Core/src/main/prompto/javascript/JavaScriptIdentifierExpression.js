@@ -1,6 +1,6 @@
-import JavaScriptExpression from "./JavaScriptExpression"
-import { $DataStore } from "../store/index"
-import { PromptoError, SyntaxError } from "../error/index"
+import JavaScriptExpression from './JavaScriptExpression.js'
+import { $DataStore } from '../store/index.js'
+import { PromptoError, SyntaxError } from '../error/index.js'
 
 export default class JavaScriptIdentifierExpression extends JavaScriptExpression {
    

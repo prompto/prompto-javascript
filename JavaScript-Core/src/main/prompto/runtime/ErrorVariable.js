@@ -1,6 +1,6 @@
-import Variable from "./Variable"
-import { Identifier } from "../grammar/index"
-import { EnumeratedCategoryType } from "../type/index"
+import Variable from './Variable.js'
+import { Identifier } from '../grammar/index.js'
+import { EnumeratedCategoryType } from '../type/index.js'
 
 export default class ErrorVariable extends Variable {
 

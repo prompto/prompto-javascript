@@ -1,5 +1,5 @@
-import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
-import { ListType } from "../type/index"
+import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
+import { ListType } from '../type/index.js'
 
 export default class ToListMethodDeclaration extends BuiltInMethodDeclaration {
 

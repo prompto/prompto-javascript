@@ -1,4 +1,4 @@
-import IntegerLiteral from "./IntegerLiteral"
+import IntegerLiteral from './IntegerLiteral.js'
 
 export default class MaxIntegerLiteral extends IntegerLiteral {
 

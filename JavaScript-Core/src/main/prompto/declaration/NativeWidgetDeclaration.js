@@ -1,5 +1,5 @@
-import NativeCategoryDeclaration from "./NativeCategoryDeclaration"
-import { SyntaxError } from "../error/index"
+import NativeCategoryDeclaration from './NativeCategoryDeclaration.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 

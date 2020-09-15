@@ -1,6 +1,6 @@
-import NamedInstance from "../grammar/NamedInstance"
-import { IntegerValue, DecimalValue } from "../value/index"
-import { IntegerType, DecimalType } from "../type/index"
+import NamedInstance from '../grammar/NamedInstance.js'
+import { IntegerValue, DecimalValue } from '../value/index.js'
+import { IntegerType, DecimalType } from '../type/index.js'
 
 export default class Parameter extends NamedInstance {
  

@@ -1,7 +1,7 @@
-import Expression from "./Expression"
-import { ResourceType, TextType } from "../type/index"
-import { NullReferenceError, InvalidResourceError } from "../error/index"
-import { TextValue } from "../value/index"
+import Expression from './Expression.js'
+import { ResourceType, TextType } from '../type/index.js'
+import { NullReferenceError, InvalidResourceError } from '../error/index.js'
+import { TextValue } from '../value/index.js'
 
 export default class ReadAllExpression extends Expression {
 

@@ -1,4 +1,4 @@
-import CSharpExpression from "./CSharpExpression"
+import CSharpExpression from './CSharpExpression.js'
 
 export default class CSharpThisExpression extends CSharpExpression {
 

@@ -1,4 +1,4 @@
-import Value from "./Value"
+import Value from './Value.js'
 
 export default class BinaryValue extends Value {
 

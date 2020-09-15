@@ -1,8 +1,8 @@
-import BaseDeclaration from "./BaseDeclaration"
-import { AttributeDeclaration } from "./index"
-import { CategoryType } from "../type/index"
-import { NullValue } from "../value/index"
-import { convertFromJavaScript } from "../utils/index"
+import BaseDeclaration from './BaseDeclaration.js'
+import { AttributeDeclaration } from './index.js'
+import { CategoryType } from '../type/index.js'
+import { NullValue } from '../value/index.js'
+import { convertFromJavaScript } from '../utils/index.js'
 
 export default class CategoryDeclaration extends BaseDeclaration {
 

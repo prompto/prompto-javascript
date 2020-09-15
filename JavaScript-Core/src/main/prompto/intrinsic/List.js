@@ -1,6 +1,6 @@
-import { StrictSet, Document } from "./index"
-import { NotMutableError } from "../error/index"
-import { equalObjects } from "../utils/index"
+import { StrictSet, Document } from './index.js'
+import { NotMutableError } from '../error/index.js'
+import { equalObjects } from '../utils/index.js'
 
 export default function List(mutable, items) {
     Array.call(this);

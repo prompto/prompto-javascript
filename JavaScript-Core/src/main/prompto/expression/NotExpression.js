@@ -1,8 +1,8 @@
-import Expression from "./Expression"
-import { Dialect } from "../parser/index"
-import { BooleanType } from "../type/index"
-import { BooleanValue } from "../value/index"
-import { CodeWriter } from "../utils/index"
+import Expression from './Expression.js'
+import { Dialect } from '../parser/index.js'
+import { BooleanType } from '../type/index.js'
+import { BooleanValue } from '../value/index.js'
+import { CodeWriter } from '../utils/index.js'
 
 export default class NotExpression extends Expression {
  

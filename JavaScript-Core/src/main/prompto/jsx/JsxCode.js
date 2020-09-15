@@ -1,5 +1,5 @@
-import IJsxExpression from "./IJsxExpression"
-import { JsxType } from "../type/index"
+import IJsxExpression from './IJsxExpression.js'
+import { JsxType } from '../type/index.js'
 
 export default class JsxCode extends IJsxExpression {
 

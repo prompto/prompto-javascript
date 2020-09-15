@@ -1,8 +1,8 @@
-import BaseStatement from "./BaseStatement"
-import { Dialect } from "../parser/index"
-import { VoidType, AnyType } from "../type/index"
-import { NullValue, Instance, Container } from "../value/index"
-import { $DataStore } from "../store/index"
+import BaseStatement from './BaseStatement.js'
+import { Dialect } from '../parser/index.js'
+import { VoidType, AnyType } from '../type/index.js'
+import { NullValue, Instance, Container } from '../value/index.js'
+import { $DataStore } from '../store/index.js'
 
 export default class StoreStatement extends BaseStatement {
  

@@ -1,10 +1,10 @@
-import { Expression, UnresolvedIdentifier, InstanceExpression } from "./index"
-import { ArgumentList, Argument, Identifier } from "../grammar/index"
-import { AttributeParameter } from "../param/index"
-import { CategoryType, DocumentType } from "../type/index"
-import { NotMutableError } from "../error/index"
-import { ConcreteWidgetDeclaration, NativeWidgetDeclaration, NativeCategoryDeclaration } from "../declaration/index"
-import { getTypeName } from "../utils/index"
+import { Expression, UnresolvedIdentifier, InstanceExpression } from './index.js'
+import { ArgumentList, Argument, Identifier } from '../grammar/index.js'
+import { AttributeParameter } from '../param/index.js'
+import { CategoryType, DocumentType } from '../type/index.js'
+import { NotMutableError } from '../error/index.js'
+import { ConcreteWidgetDeclaration, NativeWidgetDeclaration, NativeCategoryDeclaration } from '../declaration/index.js'
+import { getTypeName } from '../utils/index.js'
 
 export default class ConstructorExpression extends Expression {
   

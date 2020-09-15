@@ -1,6 +1,6 @@
-import IJsxExpression from "./IJsxExpression"
-import { TextType } from "../type/index"
-import { XmlEntities } from 'html-entities'
+import IJsxExpression from './IJsxExpression.js'
+import { TextType } from '../type/index.js'
+const XmlEntities = require('html-entities').XmlEntities;
 
 export default class JsxText extends IJsxExpression {
 

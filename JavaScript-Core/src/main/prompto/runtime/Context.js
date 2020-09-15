@@ -1,9 +1,9 @@
-import { ProblemListener, ProblemCollector } from "../problem/index"
-import { MethodDeclarationMap, Variable, LinkedValue, WidgetField } from "./index"
-import { AttributeDeclaration, EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration, ConcreteCategoryDeclaration } from "../declaration/index"
-import { DecimalType, MethodType } from "../type/index"
-import { IntegerValue, DecimalValue, ClosureValue, ConcreteInstance } from "../value/index"
-import { InternalError } from "../error/index"
+import { ProblemListener, ProblemCollector } from '../problem/index.js'
+import { MethodDeclarationMap, Variable, LinkedValue, WidgetField } from './index.js'
+import { AttributeDeclaration, EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration, ConcreteCategoryDeclaration } from '../declaration/index.js'
+import { DecimalType, MethodType } from '../type/index.js'
+import { IntegerValue, DecimalValue, ClosureValue, ConcreteInstance } from '../value/index.js'
+import { InternalError } from '../error/index.js'
 
 class Context {
   

@@ -1,6 +1,6 @@
-import { NotMutableError } from "../error/index"
-import { AnyType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import { NotMutableError } from '../error/index.js'
+import { AnyType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class ItemInstance {
 

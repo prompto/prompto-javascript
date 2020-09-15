@@ -1,7 +1,7 @@
-import Expression from "./Expression"
-import { BlobValue } from "../value/index"
-import { ResourceType, BlobType } from "../type/index"
-import { NullReferenceError, InvalidResourceError} from "../error/index"
+import Expression from './Expression.js'
+import { BlobValue } from '../value/index.js'
+import { ResourceType, BlobType } from '../type/index.js'
+import { NullReferenceError, InvalidResourceError} from '../error/index.js'
 
 export default class ReadBlobExpression extends Expression {
 

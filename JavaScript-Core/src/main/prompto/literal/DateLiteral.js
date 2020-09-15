@@ -1,7 +1,7 @@
-import Literal from "./Literal"
-import { DateType } from "../type/index"
-import { DateValue } from "../value/index"
-import { LocalDate } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { DateType } from '../type/index.js'
+import { DateValue } from '../value/index.js'
+import { LocalDate } from '../intrinsic/index.js'
 
 export default class DateLiteral extends Literal {
 

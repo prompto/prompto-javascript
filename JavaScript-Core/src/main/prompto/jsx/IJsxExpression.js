@@ -1,5 +1,5 @@
-import Section from "../parser/Section"
-import { JsxValue } from "../value/index"
+import Section from '../parser/Section.js'
+import { JsxValue } from '../value/index.js'
 
 export default class IJsxExpression extends Section {
 

@@ -1,5 +1,5 @@
-import JavaScriptLiteral from "./JavaScriptLiteral"
-import { CharacterType } from "../type/index"
+import JavaScriptLiteral from './JavaScriptLiteral.js'
+import { CharacterType } from '../type/index.js'
 
 export default class JavaScriptCharacterLiteral extends JavaScriptLiteral {
 

@@ -1,9 +1,9 @@
-import ConcreteCategoryDeclaration from "./ConcreteCategoryDeclaration"
-import { getTypeName } from "../utils/index"
-import { NativeInstance } from "../value/index"
-import { JavaScriptNativeCategoryBinding } from "../javascript/index"
-import { CategoryType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration.js'
+import { getTypeName } from '../utils/index.js'
+import { NativeInstance } from '../value/index.js'
+import { JavaScriptNativeCategoryBinding } from '../javascript/index.js'
+import { CategoryType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
 

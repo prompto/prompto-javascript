@@ -1,4 +1,4 @@
-import BaseSwitchStatement from "./BaseSwitchStatement"
+import BaseSwitchStatement from './BaseSwitchStatement.js'
 
 export default class SwitchStatement extends BaseSwitchStatement {
  

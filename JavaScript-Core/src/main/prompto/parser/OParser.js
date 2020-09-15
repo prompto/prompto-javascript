@@ -2,10 +2,10 @@
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
-import {OParserListener} from './OParserListener';
-import {AbstractParser} from './AbstractParser';
+import {OParserListener} from './OParserListener.js';
+import {AbstractParser} from './AbstractParser.js';
 
-var grammarFileName = "OParser.g4";
+var grammarFileName = 'OParser.g4';
 
 var serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964",
     "\u0003\u00b7\u0b2c\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004\u0004",

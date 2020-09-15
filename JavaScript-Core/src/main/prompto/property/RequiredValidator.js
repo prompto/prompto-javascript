@@ -1,4 +1,4 @@
-import PropertyValidator from "./PropertyValidator"
+import PropertyValidator from './PropertyValidator.js'
 
 export default class RequiredValidator extends PropertyValidator {
 

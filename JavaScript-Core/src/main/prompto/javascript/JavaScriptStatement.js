@@ -1,8 +1,8 @@
-import { JavaScriptType } from "./index"
-import { AnyType, VoidType } from "../type/index"
-import { Identifier } from "../grammar/index"
-import { getTypeName } from "../utils/index"
-import { $DataStore } from "../store/index"
+import { JavaScriptType } from './index.js'
+import { AnyType, VoidType } from '../type/index.js'
+import { Identifier } from '../grammar/index.js'
+import { getTypeName } from '../utils/index.js'
+import { $DataStore } from '../store/index.js'
 
 export default class JavaScriptStatement {
   

@@ -1,5 +1,5 @@
-import Value from "./Value"
-import { AnyType } from "../type/index"
+import Value from './Value.js'
+import { AnyType } from '../type/index.js'
 
 export default class AnyValue extends Value {
 

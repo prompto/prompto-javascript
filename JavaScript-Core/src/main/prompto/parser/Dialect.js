@@ -1,4 +1,4 @@
-import { EParserFactory, OParserFactory, MParserFactory } from "./index"
+import { EParserFactory, OParserFactory, MParserFactory } from './index.js'
 
 export default function Dialect(name) {
     this.name = name;

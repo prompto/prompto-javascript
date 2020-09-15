@@ -1,4 +1,4 @@
-import Variable from "./Variable"
+import Variable from './Variable.js'
 
 export default class WidgetField extends Variable {
 

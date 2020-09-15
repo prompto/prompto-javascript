@@ -1,9 +1,9 @@
-import BaseMethodDeclaration from "./BaseMethodDeclaration"
-import { ContextualExpression } from "../value/index"
-import { UnresolvedIdentifier } from "../expression/index"
-import { ArgumentList, Argument } from "../grammar/index"
-import { StrictSet } from "../intrinsic/index"
-import { UnresolvedParameter, AttributeParameter, CategoryParameter } from "../param/index"
+import BaseMethodDeclaration from './BaseMethodDeclaration.js'
+import { ContextualExpression } from '../value/index.js'
+import { UnresolvedIdentifier } from '../expression/index.js'
+import { ArgumentList, Argument } from '../grammar/index.js'
+import { StrictSet } from '../intrinsic/index.js'
+import { UnresolvedParameter, AttributeParameter, CategoryParameter } from '../param/index.js'
 
 export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
 

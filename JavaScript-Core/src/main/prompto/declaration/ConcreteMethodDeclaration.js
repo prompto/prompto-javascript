@@ -1,8 +1,8 @@
-import BaseMethodDeclaration from "./BaseMethodDeclaration"
-import { CategoryParameter, CodeParameter } from "../param/index"
-import { StatementList, DeclarationStatement } from "../statement/index"
-import { VoidType, DictionaryType, TextType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import BaseMethodDeclaration from './BaseMethodDeclaration.js'
+import { CategoryParameter, CodeParameter } from '../param/index.js'
+import { StatementList, DeclarationStatement } from '../statement/index.js'
+import { VoidType, DictionaryType, TextType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
 

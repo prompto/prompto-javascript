@@ -1,4 +1,4 @@
-import BaseStatement from "./BaseStatement"
+import BaseStatement from './BaseStatement.js'
 
 export default class WithResourceStatement extends BaseStatement {
 

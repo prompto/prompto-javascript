@@ -1,7 +1,7 @@
-import ReadAllExpression from "../expression/ReadAllExpression"
-import { Dialect } from "../parser/index"
-import { Variable } from "../runtime/index"
-import { VoidType, TextType } from "../type/index"
+import ReadAllExpression from '../expression/ReadAllExpression.js'
+import { Dialect } from '../parser/index.js'
+import { Variable } from '../runtime/index.js'
+import { VoidType, TextType } from '../type/index.js'
 
 export default class ReadStatement extends ReadAllExpression {
 

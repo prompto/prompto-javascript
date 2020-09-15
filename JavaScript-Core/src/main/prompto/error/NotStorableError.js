@@ -1,4 +1,4 @@
-import ExecutionError from "./ExecutionError"
+import ExecutionError from './ExecutionError.js'
 
 export default function NotStorableError() {
 	ExecutionError.call(this);

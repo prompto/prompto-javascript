@@ -1,8 +1,8 @@
-import NativeType from "./NativeType"
-import { BooleanType } from "./index"
-import { Identifier } from "../grammar/index"
-import { Version } from "../intrinsic/index"
-import { VersionValue } from "../value/index"
+import NativeType from './NativeType.js'
+import { BooleanType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { Version } from '../intrinsic/index.js'
+import { VersionValue } from '../value/index.js'
 
 export default class VersionType extends NativeType {
 

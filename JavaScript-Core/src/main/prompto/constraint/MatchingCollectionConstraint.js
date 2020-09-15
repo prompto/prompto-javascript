@@ -1,7 +1,7 @@
-import { Identifier } from "../grammar/index"
-import { Variable } from "../runtime/index"
-import { InvalidDataError } from "../error/index"
-import { StrictSet } from "../intrinsic/index"
+import { Identifier } from '../grammar/index.js'
+import { Variable } from '../runtime/index.js'
+import { InvalidDataError } from '../error/index.js'
+import { StrictSet } from '../intrinsic/index.js'
 
 export default class MatchingCollectionConstraint {
 

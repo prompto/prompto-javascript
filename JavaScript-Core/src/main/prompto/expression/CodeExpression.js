@@ -1,6 +1,6 @@
-import Expression from "./Expression"
-import { CodeType } from "../type/index"
-import { CodeValue } from "../value/index"
+import Expression from './Expression.js'
+import { CodeType } from '../type/index.js'
+import { CodeValue } from '../value/index.js'
 
 export default class CodeExpression extends Expression {
 

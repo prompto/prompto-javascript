@@ -1,5 +1,5 @@
-import { StrictSet, List } from "./index"
-import { NotMutableError } from "../error/index"
+import { StrictSet, List } from './index.js'
+import { NotMutableError } from '../error/index.js'
 
 export default function Dictionary(mutable, entries) {
     if(entries)

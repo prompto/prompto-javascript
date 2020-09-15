@@ -1,4 +1,4 @@
-import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
+import ConcreteMethodDeclaration from './ConcreteMethodDeclaration.js'
 
 export default class GetterMethodDeclaration extends ConcreteMethodDeclaration {
 

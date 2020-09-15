@@ -1,11 +1,11 @@
-import BaseStatement from "./BaseStatement"
-import { Dialect } from "../parser/index"
-import { VoidType, MethodType, CategoryType } from "../type/index"
-import { CodeWriter } from "../utils/index"
-import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from "../expression/index"
-import { MethodCall } from "../statement/index"
-import { CategoryDeclaration } from "../declaration/index"
-import { SyntaxError } from "../error/index"
+import BaseStatement from './BaseStatement.js'
+import { Dialect } from '../parser/index.js'
+import { VoidType, MethodType, CategoryType } from '../type/index.js'
+import { CodeWriter } from '../utils/index.js'
+import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from '../expression/index.js'
+import { MethodCall } from '../statement/index.js'
+import { CategoryDeclaration } from '../declaration/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class UnresolvedCall extends BaseStatement {
  

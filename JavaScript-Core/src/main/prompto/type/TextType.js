@@ -1,11 +1,11 @@
-import NativeType from "./NativeType"
-import { CharacterType, IntegerType, BooleanType } from "./index"
-import { TextValue } from "../value/index"
-import { Identifier } from "../grammar/index"
-import { TypeFamily } from "../store/index"
+import NativeType from './NativeType.js'
+import { CharacterType, IntegerType, BooleanType } from './index.js'
+import { TextValue } from '../value/index.js'
+import { Identifier } from '../grammar/index.js'
+import { TypeFamily } from '../store/index.js'
 import { StartsWithMethodDeclaration, EndsWithMethodDeclaration, IndexOfMethodDeclaration,
     ReplaceMethodDeclaration, ReplaceAllMethodDeclaration, TrimMethodDeclaration, SplitMethodDeclaration,
-    ToCapitalizedMethodDeclaration, ToLowerCaseMethodDeclaration, ToUpperCaseMethodDeclaration } from "../builtins/TextTypeBuiltins"
+    ToCapitalizedMethodDeclaration, ToLowerCaseMethodDeclaration, ToUpperCaseMethodDeclaration } from '../builtins/TextTypeBuiltins.js'
 
 export default class TextType extends NativeType {
 

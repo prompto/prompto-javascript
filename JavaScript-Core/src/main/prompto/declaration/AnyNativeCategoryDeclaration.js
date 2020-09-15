@@ -1,5 +1,5 @@
-import NativeCategoryDeclaration from "./NativeCategoryDeclaration"
-import { Identifier } from "../grammar/index"
+import NativeCategoryDeclaration from './NativeCategoryDeclaration.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class AnyNativeCategoryDeclaration extends NativeCategoryDeclaration {
 

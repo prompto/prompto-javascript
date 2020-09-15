@@ -1,6 +1,6 @@
-import Literal from "./Literal"
-import { CharacterType } from "../type/index"
-import { CharacterValue } from "../value/index"
+import Literal from './Literal.js'
+import { CharacterType } from '../type/index.js'
+import { CharacterValue } from '../value/index.js'
 
 /*jshint evil:true*/
 function unescape(text) {

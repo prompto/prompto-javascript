@@ -1,4 +1,4 @@
-import { RequiredValidator } from "./index"
+import { RequiredValidator } from './index.js'
 
 export default class PropertyValidator {
 

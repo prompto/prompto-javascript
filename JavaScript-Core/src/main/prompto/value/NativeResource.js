@@ -1,4 +1,4 @@
-import NativeInstance from "./NativeInstance"
+import NativeInstance from './NativeInstance.js'
 
 export default class NativeResource extends NativeInstance {
   

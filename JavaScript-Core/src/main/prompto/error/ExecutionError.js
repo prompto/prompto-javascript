@@ -1,10 +1,10 @@
-import PromptoError from "./PromptoError"
-import { ErrorVariable } from "../runtime/index"
-import { ArgumentList, Argument } from "../grammar/index"
-import { UnresolvedParameter } from "../param/index"
-import { TextLiteral } from "../literal/index"
-import { ConstructorExpression } from "../expression/index"
-import { CategoryType } from "../type/index"
+import PromptoError from './PromptoError.js'
+import { ErrorVariable } from '../runtime/index.js'
+import { ArgumentList, Argument } from '../grammar/index.js'
+import { UnresolvedParameter } from '../param/index.js'
+import { TextLiteral } from '../literal/index.js'
+import { ConstructorExpression } from '../expression/index.js'
+import { CategoryType } from '../type/index.js'
 
 export default function ExecutionError(message) {
 	PromptoError.call(this, message);

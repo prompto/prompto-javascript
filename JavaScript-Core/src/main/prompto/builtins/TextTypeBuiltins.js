@@ -1,10 +1,10 @@
-import BuiltInMethodDeclaration from "../declaration/BuiltInMethodDeclaration"
-import { TextType, ListType, BooleanType, IntegerType } from "../type/index"
-import { TextValue, ListValue, BooleanValue, IntegerValue } from "../value/index"
-import { CategoryParameter } from "../param/index"
-import { Identifier } from "../grammar/index"
-import { TextLiteral, IntegerLiteral } from "../literal/index"
-import { List } from "../intrinsic/index"
+import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
+import { TextType, ListType, BooleanType, IntegerType } from '../type/index.js'
+import { TextValue, ListValue, BooleanValue, IntegerValue } from '../value/index.js'
+import { CategoryParameter } from '../param/index.js'
+import { Identifier } from '../grammar/index.js'
+import { TextLiteral, IntegerLiteral } from '../literal/index.js'
+import { List } from '../intrinsic/index.js'
 
 // don't use export default since more builtins are expected
 class ToLowerCaseMethodDeclaration extends BuiltInMethodDeclaration {

@@ -1,6 +1,6 @@
-import Value from "./Value"
-import { ListValue } from "./index"
-import { AnyType } from "../type/index"
+import Value from './Value.js'
+import { ListValue } from './index.js'
+import { AnyType } from '../type/index.js'
 
 export default class Container extends Value {
 

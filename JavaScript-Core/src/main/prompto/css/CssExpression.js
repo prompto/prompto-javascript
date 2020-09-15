@@ -1,5 +1,5 @@
-import { CssType } from "../type/index"
-import { CssValue } from "../value/index"
+import { CssType } from '../type/index.js'
+import { CssValue } from '../value/index.js'
 
 export default class CssExpression {
 

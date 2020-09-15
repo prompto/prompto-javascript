@@ -1,5 +1,5 @@
-import BaseMethodDeclaration from "./BaseMethodDeclaration"
-import { VoidType } from "../type/index"
+import BaseMethodDeclaration from './BaseMethodDeclaration.js'
+import { VoidType } from '../type/index.js'
 
 export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 

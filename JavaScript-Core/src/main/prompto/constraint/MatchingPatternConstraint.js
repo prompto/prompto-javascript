@@ -1,6 +1,6 @@
-import { InvalidDataError } from "../error/index"
-import { Identifier } from "../grammar/index"
-import { Variable } from "../runtime/index"
+import { InvalidDataError } from '../error/index.js'
+import { Identifier } from '../grammar/index.js'
+import { Variable } from '../runtime/index.js'
 
 export default class MatchingPatternConstraint {
 

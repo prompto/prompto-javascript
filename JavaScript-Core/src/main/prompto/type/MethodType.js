@@ -1,5 +1,5 @@
-import BaseType from "./BaseType"
-import { SyntaxError } from "../error/index"
+import BaseType from './BaseType.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class MethodType extends BaseType {
   

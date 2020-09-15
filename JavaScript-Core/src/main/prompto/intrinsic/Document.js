@@ -1,5 +1,5 @@
-import { StrictSet, List } from "./index"
-import { equalArrays } from "../utils/index"
+import { StrictSet, List } from './index.js'
+import { equalArrays } from '../utils/index.js'
 
 export default function Document(entries) {
     if(entries)

@@ -1,10 +1,10 @@
-import Symbol from "./Symbol"
-import { ConstructorExpression } from "./index"
-import { TextValue } from "../value/index"
-import { TextLiteral } from "../literal/index"
-import { AttributeParameter } from "../param/index"
-import { Argument, ArgumentList, Identifier } from "../grammar/index"
-import { SyntaxError } from "../error/index"
+import Symbol from './Symbol.js'
+import { ConstructorExpression } from './index.js'
+import { TextValue } from '../value/index.js'
+import { TextLiteral } from '../literal/index.js'
+import { AttributeParameter } from '../param/index.js'
+import { Argument, ArgumentList, Identifier } from '../grammar/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class CategorySymbol extends Symbol {
 

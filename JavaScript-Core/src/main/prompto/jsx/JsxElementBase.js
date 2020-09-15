@@ -1,10 +1,10 @@
-import IJsxExpression from "./IJsxExpression"
-import { isCharacterUpperCase } from "../utils/index"
-import { JsxType, AnyType } from "../type/index"
-import { CategoryDeclaration } from "../declaration/index"
-import { OCleverParser } from "../parser/index"
-import { TypeLiteral } from "../literal/index"
-import { WidgetPropertiesProcessor } from "../processor/index"
+import IJsxExpression from './IJsxExpression.js'
+import { isCharacterUpperCase } from '../utils/index.js'
+import { JsxType, AnyType } from '../type/index.js'
+import { CategoryDeclaration } from '../declaration/index.js'
+import { OCleverParser } from '../parser/index.js'
+import { TypeLiteral } from '../literal/index.js'
+import { WidgetPropertiesProcessor } from '../processor/index.js'
 
 export default class JsxElementBase extends IJsxExpression {
   

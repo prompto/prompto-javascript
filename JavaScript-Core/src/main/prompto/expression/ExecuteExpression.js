@@ -1,6 +1,6 @@
-import Expression from "./Expression"
-import { CodeValue } from "../value/index"
-import { SyntaxError, PromptoError } from "../error/index"
+import Expression from './Expression.js'
+import { CodeValue } from '../value/index.js'
+import { SyntaxError, PromptoError } from '../error/index.js'
 
 export default class ExecuteExpression extends Expression {
 

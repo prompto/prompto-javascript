@@ -1,8 +1,8 @@
-import BaseStatement from "./BaseStatement"
-import { BooleanType } from "../type/index"
-import { BooleanValue } from "../value/index"
-import { BreakResult } from "../runtime/index"
-import { InvalidDataError } from "../error/index"
+import BaseStatement from './BaseStatement.js'
+import { BooleanType } from '../type/index.js'
+import { BooleanValue } from '../value/index.js'
+import { BreakResult } from '../runtime/index.js'
+import { InvalidDataError } from '../error/index.js'
 
 export default class WhileStatement extends BaseStatement {
    

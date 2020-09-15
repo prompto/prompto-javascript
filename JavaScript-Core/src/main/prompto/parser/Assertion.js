@@ -1,5 +1,5 @@
-import { BooleanType } from "../type/index"
-import { EqualsExpression } from "../expression/index"
+import { BooleanType } from '../type/index.js'
+import { EqualsExpression } from '../expression/index.js'
 
 export default class Assertion {
 

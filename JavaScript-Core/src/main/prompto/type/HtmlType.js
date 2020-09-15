@@ -1,6 +1,6 @@
-import NativeType from "./NativeType"
-import { JsxType } from "./index"
-import { Identifier } from "../grammar/index"
+import NativeType from './NativeType.js'
+import { JsxType } from './index.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class HtmlType extends NativeType {
 

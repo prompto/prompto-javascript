@@ -1,7 +1,7 @@
-import NativeType from "./NativeType"
-import { IntegerType, BooleanType } from "./index"
-import { Identifier } from "../grammar/index"
-import { DecimalValue } from "../value/index"
+import NativeType from './NativeType.js'
+import { IntegerType, BooleanType } from './index.js'
+import { Identifier } from '../grammar/index.js'
+import { DecimalValue } from '../value/index.js'
 
 export default class DecimalType extends NativeType {
 

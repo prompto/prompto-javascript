@@ -1,7 +1,7 @@
-import Parameter from "./Parameter"
-import { MethodType } from "../type/index"
-import { equalObjects } from "../utils/index"
-import { SyntaxError } from "../error/index"
+import Parameter from './Parameter.js'
+import { MethodType } from '../type/index.js'
+import { equalObjects } from '../utils/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class CategoryParameter extends Parameter {
     

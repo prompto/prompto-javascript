@@ -1,7 +1,7 @@
-import NativeCategoryDeclaration from "./NativeCategoryDeclaration"
-import { ResourceType } from "../type/index"
-import { NativeResource } from "../value/index"
-import { ResourceContext } from "../runtime/index"
+import NativeCategoryDeclaration from './NativeCategoryDeclaration.js'
+import { ResourceType } from '../type/index.js'
+import { NativeResource } from '../value/index.js'
+import { ResourceContext } from '../runtime/index.js'
 
 export default class NativeResourceDeclaration extends NativeCategoryDeclaration {
 

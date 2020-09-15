@@ -1,4 +1,4 @@
-import JavaLiteral from "./JavaLiteral"
+import JavaLiteral from './JavaLiteral.js'
 
 export default class JavaDecimalLiteral extends JavaLiteral {
 

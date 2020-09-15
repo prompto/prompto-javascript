@@ -1,6 +1,6 @@
-import { Score } from "./index"
-import { CategoryType } from "../type/index"
-import { PromptoError, SyntaxError } from "../error/index"
+import { Score } from './index.js'
+import { CategoryType } from '../type/index.js'
+import { PromptoError, SyntaxError } from '../error/index.js'
 
 export default class MethodFinder {
     

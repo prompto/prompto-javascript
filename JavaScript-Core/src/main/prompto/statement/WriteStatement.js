@@ -1,7 +1,7 @@
-import SimpleStatement from "./SimpleStatement"
-import { ResourceContext } from "../runtime/index"
-import { VoidType, ResourceType } from "../type/index"
-import { NullReferenceError, InvalidResourceError } from "../error/index"
+import SimpleStatement from './SimpleStatement.js'
+import { ResourceContext } from '../runtime/index.js'
+import { VoidType, ResourceType } from '../type/index.js'
+import { NullReferenceError, InvalidResourceError } from '../error/index.js'
 
 export default class WriteStatement extends SimpleStatement {
 

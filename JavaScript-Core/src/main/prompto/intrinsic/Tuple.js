@@ -1,6 +1,6 @@
-import List from "./List"
-import { StrictSet } from "./index"
-import { equalObjects } from "../utils/index"
+import List from './List.js'
+import { StrictSet } from './index.js'
+import { equalObjects } from '../utils/index.js'
 
 export default function Tuple(mutable, items) {
 	List.call(this, mutable, items);

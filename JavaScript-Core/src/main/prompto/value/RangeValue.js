@@ -1,7 +1,7 @@
-import Value from "./Value"
-import { IntegerValue } from "./index"
-import { SyntaxError, IndexOutOfRangeError, InternalError } from "../error/index"
-import { RangeType } from "../type/index"
+import Value from './Value.js'
+import { IntegerValue } from './index.js'
+import { SyntaxError, IndexOutOfRangeError, InternalError } from '../error/index.js'
+import { RangeType } from '../type/index.js'
 
 export default class RangeValue extends Value {
    

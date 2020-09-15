@@ -1,5 +1,5 @@
-import Expression from "./Expression"
-import { SyntaxError } from "../error/index"
+import Expression from './Expression.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class SymbolExpression extends Expression {
 

@@ -1,6 +1,6 @@
-import Expression from "./Expression"
-import { CategoryType } from "../type/index"
-import { NullValue, ConcreteInstance, NativeInstance } from "../value/index"
+import Expression from './Expression.js'
+import { CategoryType } from '../type/index.js'
+import { NullValue, ConcreteInstance, NativeInstance } from '../value/index.js'
 
 export default class MutableExpression extends Expression {
 

@@ -1,5 +1,5 @@
-import { TextValue } from "../value/index"
-import { InstanceExpression } from "../expression/index"
+import { TextValue } from '../value/index.js'
+import { InstanceExpression } from '../expression/index.js'
 
 export default class DictIdentifierKey {
  

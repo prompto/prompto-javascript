@@ -1,4 +1,4 @@
-import NativeCall from "../statement/NativeCall"
+import NativeCall from '../statement/NativeCall.js'
 
 export default class JavaScriptNativeCall extends NativeCall {
 

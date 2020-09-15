@@ -1,5 +1,5 @@
-import NativeType from "./NativeType"
-import { Identifier } from "../grammar/index"
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
 
 export default class CodeType extends NativeType {
 

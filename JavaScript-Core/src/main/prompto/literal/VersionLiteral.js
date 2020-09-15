@@ -1,7 +1,7 @@
-import Literal from "./Literal"
-import { VersionType } from "../type/index"
-import { VersionValue } from "../value/index"
-import { Version } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { VersionType } from '../type/index.js'
+import { VersionValue } from '../value/index.js'
+import { Version } from '../intrinsic/index.js'
 
 export default class VersionLiteral extends Literal {
 

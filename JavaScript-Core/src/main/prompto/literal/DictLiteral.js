@@ -1,9 +1,9 @@
-import Literal from "./Literal"
-import { DictEntryList } from "./index"
-import { DictionaryValue, DecimalValue, TextValue } from "../value/index"
-import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType } from "../type/index"
-import { inferElementType } from "../utils/index"
-import { Dictionary } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { DictEntryList } from './index.js'
+import { DictionaryValue, DecimalValue, TextValue } from '../value/index.js'
+import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType } from '../type/index.js'
+import { inferElementType } from '../utils/index.js'
+import { Dictionary } from '../intrinsic/index.js'
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.

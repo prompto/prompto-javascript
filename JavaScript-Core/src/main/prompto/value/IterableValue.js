@@ -1,7 +1,7 @@
-import Value from "./Value"
-import { IntegerValue, ListValue } from "./index"
-import { IteratorType } from "../type/index"
-import { Variable } from "../runtime/index"
+import Value from './Value.js'
+import { IntegerValue, ListValue } from './index.js'
+import { IteratorType } from '../type/index.js'
+import { Variable } from '../runtime/index.js'
 
 export default class IterableValue extends Value {
 

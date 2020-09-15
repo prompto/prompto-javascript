@@ -1,9 +1,9 @@
-import BaseStatement from "./BaseStatement"
-import { VoidType, MethodType } from "../type/index"
-import { ClosureValue } from "../value/index"
-import { ConcreteMethodDeclaration } from "../declaration/index"
-import { Variable } from "../runtime/index"
-import { SyntaxError } from "../error/index"
+import BaseStatement from './BaseStatement.js'
+import { VoidType, MethodType } from '../type/index.js'
+import { ClosureValue } from '../value/index.js'
+import { ConcreteMethodDeclaration } from '../declaration/index.js'
+import { Variable } from '../runtime/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class DeclarationStatement extends BaseStatement {
 

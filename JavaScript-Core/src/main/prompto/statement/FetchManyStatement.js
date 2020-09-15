@@ -1,7 +1,7 @@
-import FetchManyExpression from "../expression/FetchManyExpression"
-import { Variable } from "../runtime/index"
-import { VoidType, CursorType } from "../type/index"
-import { Dialect } from "../parser/index"
+import FetchManyExpression from '../expression/FetchManyExpression.js'
+import { Variable } from '../runtime/index.js'
+import { VoidType, CursorType } from '../type/index.js'
+import { Dialect } from '../parser/index.js'
 
 export default class FetchManyStatement extends FetchManyExpression {
 

@@ -1,5 +1,5 @@
-import Store from "../store/Store"
-import { MemQueryBuilder, StorableDocument } from "./index"
+import Store from '../store/Store.js'
+import { MemQueryBuilder, StorableDocument } from './index.js'
 
 // a utility class for running unit tests only
 export default class MemStore extends Store {

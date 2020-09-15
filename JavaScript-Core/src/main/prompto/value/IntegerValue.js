@@ -1,7 +1,7 @@
-import Value from "./Value"
-import { DecimalValue } from "./index"
-import { SyntaxError, DivideByZeroError } from "../error/index"
-import { IntegerType } from "../type/index"
+import Value from './Value.js'
+import { DecimalValue } from './index.js'
+import { SyntaxError, DivideByZeroError } from '../error/index.js'
+import { IntegerType } from '../type/index.js'
 
 
 export default class IntegerValue extends Value {

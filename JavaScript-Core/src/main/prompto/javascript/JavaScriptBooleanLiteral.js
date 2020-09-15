@@ -1,5 +1,5 @@
-import JavaScriptLiteral from "./JavaScriptLiteral"
-import { BooleanType } from "../type/index"
+import JavaScriptLiteral from './JavaScriptLiteral.js'
+import { BooleanType } from '../type/index.js'
 
 export default class JavaScriptBooleanLiteral extends JavaScriptLiteral {
 

@@ -1,4 +1,4 @@
-import { Context } from "../runtime/index"
+import { Context } from '../runtime/index.js'
 
 class Indenter {
 

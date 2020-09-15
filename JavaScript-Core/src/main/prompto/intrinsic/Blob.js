@@ -1,5 +1,5 @@
-import { utf8BufferToString, stringToUtf8Buffer } from "../utils/index"
-import Document from "./Document"
+import { utf8BufferToString, stringToUtf8Buffer } from '../utils/index.js'
+import Document from './Document.js'
 
 export default function Blob() {
     this.zipped = null;

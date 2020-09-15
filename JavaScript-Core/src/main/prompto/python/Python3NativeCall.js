@@ -1,4 +1,4 @@
-import PythonNativeCall from "./PythonNativeCall"
+import PythonNativeCall from './PythonNativeCall.js'
 
 export default class Python3NativeCall extends PythonNativeCall {
 

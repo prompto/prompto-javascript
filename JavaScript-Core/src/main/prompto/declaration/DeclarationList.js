@@ -1,5 +1,5 @@
-import ObjectList from "../utils/ObjectList"
-import { AttributeDeclaration, CategoryDeclaration, BaseMethodDeclaration, TestMethodDeclaration, EnumeratedNativeDeclaration } from "./index"
+import ObjectList from '../utils/ObjectList.js'
+import { AttributeDeclaration, CategoryDeclaration, BaseMethodDeclaration, TestMethodDeclaration, EnumeratedNativeDeclaration } from './index.js'
 
 export default class DeclarationList extends ObjectList {
 

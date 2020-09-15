@@ -1,5 +1,5 @@
-import SwitchCase from "./SwitchCase"
-import { VoidType } from "../type/index"
+import SwitchCase from './SwitchCase.js'
+import { VoidType } from '../type/index.js'
 
 export default class AtomicSwitchCase extends SwitchCase {
 

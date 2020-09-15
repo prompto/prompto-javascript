@@ -1,7 +1,7 @@
-import Symbol from "./Symbol"
-import { Dialect } from "../parser/index"
-import { TextValue } from "../value/index"
-import { SyntaxError } from "../error/index"
+import Symbol from './Symbol.js'
+import { Dialect } from '../parser/index.js'
+import { TextValue } from '../value/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class NativeSymbol extends Symbol {
 

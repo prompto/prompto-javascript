@@ -1,9 +1,9 @@
-import Value from "./Value"
-import { IntegerValue, NullValue, TextValue, SetValue, ListValue } from "./index"
-import { DocumentType, AnyType, TextType } from "../type/index"
-import { Document, StrictSet } from "../intrinsic/index"
-import { SyntaxError } from "../error/index"
-import { equalArrays } from "../utils/index"
+import Value from './Value.js'
+import { IntegerValue, NullValue, TextValue, SetValue, ListValue } from './index.js'
+import { DocumentType, AnyType, TextType } from '../type/index.js'
+import { Document, StrictSet } from '../intrinsic/index.js'
+import { SyntaxError } from '../error/index.js'
+import { equalArrays } from '../utils/index.js'
 
 export default class DocumentValue extends Value {
  

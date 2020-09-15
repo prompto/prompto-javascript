@@ -1,5 +1,5 @@
-import ConcreteMethodDeclaration from "./ConcreteMethodDeclaration"
-import { AttributeParameter } from "../param/index"
+import ConcreteMethodDeclaration from './ConcreteMethodDeclaration.js'
+import { AttributeParameter } from '../param/index.js'
 
 export default class SetterMethodDeclaration extends ConcreteMethodDeclaration {
 

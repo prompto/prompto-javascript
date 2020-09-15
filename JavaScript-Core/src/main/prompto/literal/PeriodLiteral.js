@@ -1,7 +1,7 @@
-import Literal from "./Literal"
-import { PeriodType } from "../type/index"
-import { PeriodValue } from "../value/index"
-import { Period } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { PeriodType } from '../type/index.js'
+import { PeriodValue } from '../value/index.js'
+import { Period } from '../intrinsic/index.js'
 
 export default class PeriodLiteral extends Literal {
 

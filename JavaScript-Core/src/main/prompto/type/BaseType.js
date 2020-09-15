@@ -1,5 +1,5 @@
-import { SyntaxError } from "../error/index"
-import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from "./index"
+import { SyntaxError } from '../error/index.js'
+import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from './index.js'
 
 export default class BaseType {
  

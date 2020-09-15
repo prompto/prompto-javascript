@@ -1,6 +1,6 @@
-import Expression from "./Expression"
-import { TypeType } from "../type/index"
-import { TypeValue } from "../value/index"
+import Expression from './Expression.js'
+import { TypeType } from '../type/index.js'
+import { TypeValue } from '../value/index.js'
 
 export default class TypeExpression extends Expression {
 

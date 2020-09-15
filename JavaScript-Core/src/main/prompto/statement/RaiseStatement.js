@@ -1,8 +1,8 @@
-import SimpleStatement from "./SimpleStatement"
-import { Dialect } from "../parser/index"
-import { Identifier } from "../grammar/index"
-import { VoidType, CategoryType } from "../type/index"
-import { UserError, SyntaxError } from "../error/index"
+import SimpleStatement from './SimpleStatement.js'
+import { Dialect } from '../parser/index.js'
+import { Identifier } from '../grammar/index.js'
+import { VoidType, CategoryType } from '../type/index.js'
+import { UserError, SyntaxError } from '../error/index.js'
 
 export default class RaiseStatement extends SimpleStatement {
 

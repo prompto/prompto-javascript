@@ -1,6 +1,6 @@
-import IJsxExpression from "./IJsxExpression"
-import { ArrowExpression } from "../expression/index"
-import { Literal } from "../literal/index"
+import IJsxExpression from './IJsxExpression.js'
+import { ArrowExpression } from '../expression/index.js'
+import { Literal } from '../literal/index.js'
 
 export default class JsxExpression extends IJsxExpression {
 

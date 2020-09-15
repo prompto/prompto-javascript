@@ -1,4 +1,4 @@
-import { Location } from "./index"
+import { Location } from './index.js'
 
 export default class Section {
 

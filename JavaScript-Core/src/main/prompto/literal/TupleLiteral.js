@@ -1,8 +1,8 @@
-import Literal from "./Literal"
-import { TupleType } from "../type/index"
-import { TupleValue } from "../value/index"
-import { List, Tuple } from "../intrinsic/index"
-import { ExpressionList } from "../expression/index"
+import Literal from './Literal.js'
+import { TupleType } from '../type/index.js'
+import { TupleValue } from '../value/index.js'
+import { List, Tuple } from '../intrinsic/index.js'
+import { ExpressionList } from '../expression/index.js'
 
 export default class TupleLiteral extends Literal {
 

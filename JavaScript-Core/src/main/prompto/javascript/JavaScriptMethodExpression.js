@@ -1,7 +1,7 @@
-import JavaScriptSelectorExpression from "./JavaScriptSelectorExpression"
-import { JavaScriptExpressionList } from "./index"
-import { NativeInstance } from "../value/index"
-import { SyntaxError } from "../error/index"
+import JavaScriptSelectorExpression from './JavaScriptSelectorExpression.js'
+import { JavaScriptExpressionList } from './index.js'
+import { NativeInstance } from '../value/index.js'
+import { SyntaxError } from '../error/index.js'
 
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const isWorker = typeof window === 'undefined' && typeof importScripts === 'function';

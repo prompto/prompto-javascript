@@ -1,7 +1,7 @@
-import NativeType from "./NativeType"
-import { Identifier } from "../grammar/index"
-import { UUID } from "../intrinsic/index"
-import { UUIDValue } from "../value/index"
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
+import { UUID } from '../intrinsic/index.js'
+import { UUIDValue } from '../value/index.js'
 
 export default class UUIDType extends NativeType {
 

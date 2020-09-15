@@ -1,5 +1,5 @@
-import Expression from "./Expression"
-import { UnresolvedIdentifier } from "./index"
+import Expression from './Expression.js'
+import { UnresolvedIdentifier } from './index.js'
 
 export default class SelectorExpression extends Expression {
 

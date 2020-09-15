@@ -1,6 +1,6 @@
-import Container from "./Container"
-import { Value, IntegerValue } from "./index"
-import { PromptoError, SyntaxError, IndexOutOfRangeError, InternalError } from "../error/index"
+import Container from './Container.js'
+import { Value, IntegerValue } from './index.js'
+import { PromptoError, SyntaxError, IndexOutOfRangeError, InternalError } from '../error/index.js'
 
 /* an abstract list of values, common to ListValue and TupleValue */
 export default class BaseValueList extends Container {

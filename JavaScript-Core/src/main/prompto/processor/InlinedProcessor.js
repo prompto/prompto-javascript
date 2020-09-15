@@ -1,4 +1,4 @@
-import AnnotationProcessor from "./AnnotationProcessor"
+import AnnotationProcessor from './AnnotationProcessor.js'
 
 export default class InlinedProcessor extends AnnotationProcessor {
 

@@ -1,9 +1,9 @@
-import Literal from "./Literal"
-import { TypeType } from "../type/index"
-import { TypeValue } from "../value/index"
-import { Dialect } from "../parser/index"
-import { MethodDeclarationMap } from "../runtime/index"
-import { Type } from "../intrinsic/index"
+import Literal from './Literal.js'
+import { TypeType } from '../type/index.js'
+import { TypeValue } from '../value/index.js'
+import { Dialect } from '../parser/index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
+import { Type } from '../intrinsic/index.js'
 
 export default class TypeLiteral extends Literal {
   

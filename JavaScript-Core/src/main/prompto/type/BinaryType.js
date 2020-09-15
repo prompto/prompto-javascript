@@ -1,5 +1,5 @@
-import NativeType from "./NativeType"
-import { TextType } from "./index"
+import NativeType from './NativeType.js'
+import { TextType } from './index.js'
 
 export default class BinaryType extends NativeType {
 

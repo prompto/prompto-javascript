@@ -1,4 +1,4 @@
-import { List } from "./index"
+import { List } from './index.js'
 
 export default function StrictSet(values) {
     this.set = new Set(values);

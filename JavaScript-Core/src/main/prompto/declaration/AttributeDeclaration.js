@@ -1,6 +1,6 @@
-import BaseDeclaration from "./BaseDeclaration"
-import { AttributeInfo } from "../store/index"
-import { ContainerType } from "../type/index"
+import BaseDeclaration from './BaseDeclaration.js'
+import { AttributeInfo } from '../store/index.js'
+import { ContainerType } from '../type/index.js'
 
 export default class AttributeDeclaration extends BaseDeclaration {
 

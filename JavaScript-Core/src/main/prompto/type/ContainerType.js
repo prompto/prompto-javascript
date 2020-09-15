@@ -1,6 +1,6 @@
-import IterableType from "./IterableType"
-import { BooleanType } from "./index"
-import { Variable } from "../runtime/index"
+import IterableType from './IterableType.js'
+import { BooleanType } from './index.js'
+import { Variable } from '../runtime/index.js'
 
 export default class ContainerType extends IterableType {
   

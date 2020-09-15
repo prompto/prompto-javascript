@@ -1,10 +1,10 @@
-import CategoryDeclaration from "./CategoryDeclaration"
-import { SetterMethodDeclaration, GetterMethodDeclaration, EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from "./index"
-import { MethodDeclarationMap } from "../runtime/index"
-import { $Root } from "../intrinsic/index"
-import { ConcreteInstance } from "../value/index"
-import { CategoryType } from "../type/index"
-import { $DataStore } from "../store/index"
+import CategoryDeclaration from './CategoryDeclaration.js'
+import { SetterMethodDeclaration, GetterMethodDeclaration, EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from './index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
+import { $Root } from '../intrinsic/index.js'
+import { ConcreteInstance } from '../value/index.js'
+import { CategoryType } from '../type/index.js'
+import { $DataStore } from '../store/index.js'
 
 export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 

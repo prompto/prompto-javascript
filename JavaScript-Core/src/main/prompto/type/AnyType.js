@@ -1,7 +1,7 @@
-import NativeType from "./NativeType"
-import { Identifier } from "../grammar/index"
-import { DocumentType } from "./index"
-import { Any } from "../intrinsic/index"
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
+import { DocumentType } from './index.js'
+import { Any } from '../intrinsic/index.js'
 
 export default class AnyType extends NativeType {
  

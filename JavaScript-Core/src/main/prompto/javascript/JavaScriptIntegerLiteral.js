@@ -1,5 +1,5 @@
-import JavaScriptLiteral from "./JavaScriptLiteral"
-import { IntegerType } from "../type/index"
+import JavaScriptLiteral from './JavaScriptLiteral.js'
+import { IntegerType } from '../type/index.js'
 
 export default class JavaScriptIntegerLiteral extends JavaScriptLiteral {
 

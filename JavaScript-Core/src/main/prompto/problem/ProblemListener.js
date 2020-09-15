@@ -1,5 +1,5 @@
-import ProblemCollector from './ProblemCollector'
-import { SyntaxError } from "../error/index"
+import ProblemCollector from './ProblemCollector.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class ProblemListener extends ProblemCollector {
    

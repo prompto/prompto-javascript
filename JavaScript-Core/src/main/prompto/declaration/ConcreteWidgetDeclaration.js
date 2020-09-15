@@ -1,6 +1,6 @@
-import ConcreteCategoryDeclaration from "./ConcreteCategoryDeclaration"
-import { IdentifierList } from "../grammar/index"
-import { CategoryType } from "../type/index"
+import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration.js'
+import { IdentifierList } from '../grammar/index.js'
+import { CategoryType } from '../type/index.js'
 
 export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
 

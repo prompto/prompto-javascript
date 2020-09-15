@@ -1,4 +1,4 @@
-import { DateTime, Period } from "./index"
+import { DateTime, Period } from './index.js'
 
 export default function LocalDate(value) {
     var date = new Date(value);

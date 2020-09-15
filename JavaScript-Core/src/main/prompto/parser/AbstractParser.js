@@ -1,14 +1,14 @@
 /* do NOT delete this file, it is NOT generated */
 /* it has to be located in the generated folder */
 /* to work around jest resolver issues */
-import {Parser} from "antlr4";
+import antlr4 from 'antlr4';
 
 function AbstractParser(input) {
-	Parser.call(this, input);
+	antlr4.Parser.call(this, input);
 	return this;
 }
 
-AbstractParser.prototype = Object.create(Parser.prototype);
+AbstractParser.prototype = Object.create(antlr4.Parser.prototype);
 AbstractParser.prototype.constructor = AbstractParser;
 
 AbstractParser.prototype.isText = (token, text) => text === token.text;
@@ -62,12 +62,12 @@ AbstractParser.prototype.lastHiddenTokenType = function() {
 };
 
 AbstractParser.prototype.removeErrorListeners = function() {
-    Parser.prototype.removeErrorListeners.call(this);
+	antlr4.Parser.prototype.removeErrorListeners.call(this);
     this._input.tokenSource.removeErrorListeners(); // lexer
 };
 
 AbstractParser.prototype.addErrorListener = function(listener) {
-    Parser.prototype.addErrorListener.call(this, listener);
+	antlr4.Parser.prototype.addErrorListener.call(this, listener);
     this._input.tokenSource.addErrorListener(listener); // lexer
 };
 

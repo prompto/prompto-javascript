@@ -1,4 +1,4 @@
-import { Period } from "./index"
+import { Period } from './index.js'
 
 export default function LocalTime(value) {
     value = value != null ? value : ((new Date().valueOf()) % ( 24 * 60 * 60 * 1000));

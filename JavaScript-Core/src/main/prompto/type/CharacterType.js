@@ -1,8 +1,8 @@
-import NativeType from "./NativeType"
-import { IntegerType, BooleanType, TextType, RangeType } from "./index"
-import { InvalidDataError } from "../error/index"
-import { Identifier } from "../grammar/index"
-import { CharacterValue, CharacterRange } from "../value/index"
+import NativeType from './NativeType.js'
+import { IntegerType, BooleanType, TextType, RangeType } from './index.js'
+import { InvalidDataError } from '../error/index.js'
+import { Identifier } from '../grammar/index.js'
+import { CharacterValue, CharacterRange } from '../value/index.js'
 
 export default class CharacterType extends NativeType {
 

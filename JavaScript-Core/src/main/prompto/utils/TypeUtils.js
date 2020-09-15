@@ -1,6 +1,6 @@
-import { TextValue, IntegerValue, DecimalValue, NullValue } from "../value/index"
-import { MissingType, AnyType, NativeType } from "../type/index"
-import { SyntaxError } from "../error/index"
+import { TextValue, IntegerValue, DecimalValue, NullValue } from '../value/index.js'
+import { MissingType, AnyType, NativeType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export function convertFromJavaScript(value) {
     if(value==null) {

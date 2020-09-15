@@ -1,9 +1,9 @@
-import BaseStatement from "./BaseStatement"
-import { StatementList } from "./index"
-import { VoidType, BooleanType, TypeMap } from "../type/index"
-import { BooleanValue } from "../value/index"
-import { ObjectList } from "../utils/index"
-import { EqualsExpression } from "../expression/index"
+import BaseStatement from './BaseStatement.js'
+import { StatementList } from './index.js'
+import { VoidType, BooleanType, TypeMap } from '../type/index.js'
+import { BooleanValue } from '../value/index.js'
+import { ObjectList } from '../utils/index.js'
+import { EqualsExpression } from '../expression/index.js'
 
 export default class IfStatement extends BaseStatement {
   

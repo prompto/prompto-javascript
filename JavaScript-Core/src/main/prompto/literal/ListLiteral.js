@@ -1,9 +1,9 @@
-import Literal from "./Literal"
-import { ListType, MissingType, CharacterType, TextType, DecimalType, IntegerType } from "../type/index"
-import { ListValue, TextValue, DecimalValue } from "../value/index"
-import { List } from "../intrinsic/index"
-import { ExpressionList } from "../expression/index"
-import { inferExpressionsType } from "../utils/index"
+import Literal from './Literal.js'
+import { ListType, MissingType, CharacterType, TextType, DecimalType, IntegerType } from '../type/index.js'
+import { ListValue, TextValue, DecimalValue } from '../value/index.js'
+import { List } from '../intrinsic/index.js'
+import { ExpressionList } from '../expression/index.js'
+import { inferExpressionsType } from '../utils/index.js'
 
 export default class ListLiteral extends Literal {
 
