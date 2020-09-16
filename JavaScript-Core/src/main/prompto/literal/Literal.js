@@ -1,4 +1,4 @@
-import Section from '../parser/Section.js'
+const Section = await import('../parser/Section.js');
 
 export default class Literal extends Section {
   
@@ -25,6 +25,10 @@ export default class Literal extends Section {
 
     toString() {
         return this.text;
+    }
+
+    checkReference(context) {
+        return this.check(context);
     }
 
     checkAttribute(context) {

@@ -1,7 +1,8 @@
+import Literal from "./Literal.js"
 import { NullType } from '../type/index.js'
 import { NullValue } from '../value/index.js'
 
-export default class NullLiteral {
+export default class NullLiteral extends Literal {
 
     check(context) {
         return NullType.instance;
