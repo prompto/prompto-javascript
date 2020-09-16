@@ -1,4 +1,5 @@
-import { Expression, UnresolvedIdentifier, InstanceExpression } from './index.js'
+import Expression from './Expression.js';
+import { UnresolvedIdentifier, InstanceExpression } from './index.js'
 import { ArgumentList, Argument, Identifier } from '../grammar/index.js'
 import { AttributeParameter } from '../param/index.js'
 import { CategoryType, DocumentType } from '../type/index.js'
