@@ -2,7 +2,7 @@ import NativeType from './NativeType.js'
 import { IntegerType, BooleanType, TextType, RangeType } from './index.js'
 import { InvalidDataError } from '../error/index.js'
 import { Identifier } from '../grammar/index.js'
-import { CharacterValue } from '../value/index.js'
+import { CharacterValue, CharacterRangeValue } from '../value/index.js'
 import { Range, CharacterRange, IntegerRange } from "../intrinsic/index.js"
 
 export default class CharacterType extends NativeType {
@@ -130,7 +130,7 @@ export default class CharacterType extends NativeType {
 
     newRange(left, right) {
         if(left instanceof CharacterValue && right instanceof CharacterValue) {
-            return new CharacterRange(left, right);
+            return new CharacterRangeValue(left, right);
         } else {
             return  super.newRange(left, right);
         }

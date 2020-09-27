@@ -1,7 +1,7 @@
 import NativeType from './NativeType.js'
 import { DateTimeType, PeriodType, IntegerType, BooleanType, RangeType } from './index.js'
 import { Identifier } from '../grammar/index.js'
-import { TimeValue } from '../value/index.js'
+import { TimeValue, TimeRangeValue } from '../value/index.js'
 import { LocalTime, Range, TimeRange } from '../intrinsic/index.js'
 
 export default class TimeType extends NativeType {
@@ -174,7 +174,7 @@ export default class TimeType extends NativeType {
 
     newRange(left, right) {
         if (left instanceof TimeValue && right instanceof TimeValue) {
-            return new TimeRange(left, right);
+            return new TimeRangeValue(left, right);
         } else {
             return super.newRange(left, right);
         }

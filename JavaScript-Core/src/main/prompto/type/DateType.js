@@ -1,7 +1,7 @@
 import NativeType from './NativeType.js'
 import { DateTimeType, TimeType, PeriodType, IntegerType, BooleanType, RangeType } from './index.js'
 import { Identifier } from '../grammar/index.js'
-import { DateValue } from '../value/index.js'
+import { DateValue, DateRangeValue } from '../value/index.js'
 import { LocalDate, Range, DateRange, DateTime } from '../intrinsic/index.js'
 
 export default class DateType extends NativeType {
@@ -179,7 +179,7 @@ export default class DateType extends NativeType {
 
     newRange(left, right) {
         if (left instanceof DateValue && right instanceof DateValue) {
-            return new DateRange(left, right);
+            return new DateRangeValue(left, right);
         } else {
             return super.newRange(left, right);
         }

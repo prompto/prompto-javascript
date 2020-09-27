@@ -30,7 +30,7 @@ export {default as JsxValue} from './JsxValue.js';
 export {default as IntegerRangeValue} from './IntegerRangeValue.js';
 export {default as DateRangeValue} from './DateRangeValue.js';
 export {default as TimeRangeValue} from './TimeRangeValue.js';
-export {default as CharacterRange} from './CharacterRangeValue.js';
+export {default as CharacterRangeValue} from './CharacterRangeValue.js';
 export {default as Instance} from './Instance.js';
 export {default as NativeInstance} from './NativeInstance.js';
 export {default as NativeResource} from './NativeResource.js';
