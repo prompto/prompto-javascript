@@ -6,6 +6,9 @@ function Buffer() {
 Object.defineProperty(Buffer.prototype, "text", {
     get : function() {
         return this.data;
+    },
+    set : function(text) {
+        this.data = text;
     }
 });
 

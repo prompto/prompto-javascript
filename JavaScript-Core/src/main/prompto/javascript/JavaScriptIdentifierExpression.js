@@ -79,7 +79,7 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
         } else {
             try {
                 const m = module.resolve();
-                const o = m[this.id.name];
+                const o = m[this.id.name] || m["default"];
                 if (o) {
                     return o;
                 } else {

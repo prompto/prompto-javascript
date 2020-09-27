@@ -418,7 +418,7 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
     transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");
     transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; };");
-    transpiler.lines.push("var intrinsic = {};");
+    transpiler.lines.push("var intrinsic = global.intrinsic = {};");
     return transpiler;
 }
 

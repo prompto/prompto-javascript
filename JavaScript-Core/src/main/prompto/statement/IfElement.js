@@ -1,7 +1,7 @@
-import BaseStatement from "./BaseStatement";
-import {BooleanType} from "../type";
-import {StatementList} from "./index";
-import {EqualsExpression} from "../expression";
+import BaseStatement from "./BaseStatement.js";
+import {StatementList} from "./index.js";
+import {BooleanType} from "../type/index.js";
+import {EqualsExpression} from "../expression/index.js";
 
 export default class IfElement extends BaseStatement {
 

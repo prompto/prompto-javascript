@@ -1,6 +1,6 @@
 import antlr4 from 'antlr4';
 import { OParser } from './OParser.js'
-import { ONamingLexer, OPromptoBuilder } from "./index"
+import { ONamingLexer, OPromptoBuilder } from "./index.js"
 import { importFsIfNode } from '../utils/index.js'
 const fs = importFsIfNode();
 

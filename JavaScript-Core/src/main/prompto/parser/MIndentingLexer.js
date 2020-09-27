@@ -1,5 +1,5 @@
 import { MLexer } from './MLexer.js'
-import { Dialect } from "./index";
+import { Dialect } from "./index.js";
 
 export default function MIndentingLexer(input) {
     MLexer.call(this, input);

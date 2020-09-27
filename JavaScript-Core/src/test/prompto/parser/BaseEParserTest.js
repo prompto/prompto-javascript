@@ -153,7 +153,7 @@ exports.loadDependency = function(libraryName) {
     var files = exports.listLibraryFiles(libraryName);
     if (files) files.map(function (file) {
         var resourceName = libraryName + path.sep + file;
-        decls = exports.parseResource(resourceName);
+        var decls = exports.parseResource(resourceName);
         if(!allDecls)
             allDecls = decls;
         else
@@ -189,7 +189,7 @@ exports.runTranspiledTests = function(fileName, options) {
 }
 
 function runTests(fileName, runner, options) {
-    decls = exports.parseResource(fileName)
+    var decls = exports.parseResource(fileName);
     if(options && options.register)
         decls.register(BaseParserTest.coreContext);
     decls
@@ -203,7 +203,7 @@ function runTests(fileName, runner, options) {
 
 function runTest(decl, runner, options) {
     Out.reset()
-    intrinsic = prompto.intrinsic;
+    global.intrinsic = prompto.intrinsic;
     runner(BaseParserTest.coreContext, decl.name);
     var expected = decl.name + " test successful";
     var actual = Out.read();

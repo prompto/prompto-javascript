@@ -1,4 +1,4 @@
-export {default as Statement} from './BaseStatement.js';
+export {default as BaseStatement} from './BaseStatement.js';
 export {default as SimpleStatement} from './SimpleStatement.js';
 export {default as CommentStatement} from './CommentStatement.js';
 export {default as StatementList} from './StatementList.js';
