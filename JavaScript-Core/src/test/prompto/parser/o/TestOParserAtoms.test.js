@@ -242,7 +242,7 @@ test('MethodCallWith ', () => {
 	expect(as.name).toEqual("value");
 	var exp = as.expression;
 	expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     mc.toDialect(writer);
     expect( writer.toString()).toEqual("print(value = \"person\" + p.name)");
 });
@@ -260,7 +260,7 @@ test('Method1Parameter1Statement ', () => {
         new prompto.grammar.Identifier("p"));
 	expect(ad.parameters[0].equals(arg)).toBeTruthy();
 	expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     ad.statements[0].toDialect(writer);
 	expect(writer.toString()).toEqual("print(value = \"person\" + p.name)");
 });
@@ -279,7 +279,7 @@ test('Method1Extended1Statement ', () => {
         new prompto.grammar.Identifier("o"), idlist);
 	expect(ad.parameters[0].equals(expected)).toBeTruthy();
 	expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print(value = \"object\" + o.name)");
 });
@@ -296,7 +296,7 @@ test('Method1Array1Statement ', () => {
 	var expected = new prompto.param.CategoryParameter(type, new prompto.grammar.Identifier("options"));
 	expect(ad.parameters[0].equals(expected)).toBeTruthy();
 	expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     ad.statements[0].toDialect(writer);
 	expect(writer.toString()).toEqual("print(value = \"array\" + options)");
 });
@@ -463,7 +463,7 @@ test('SimpleListLiteral ', () => {
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
 	expect(literal).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     literal.toDialect(writer)
 	expect( writer.toString()).toEqual("[john, 123]");
 	expect(literal instanceof prompto.literal.ListLiteral).toBeTruthy();
@@ -488,7 +488,7 @@ test('SimpleDictLiteral ', () => {
 	var literal = parser.parse_literal_expression();
 	expect(literal).toBeTruthy();
 	expect(literal instanceof prompto.literal.DictLiteral).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     literal.toDialect(writer)
 	expect( writer.toString()).toEqual("<\"john\":1234, eric:5678>");
 });
@@ -587,7 +587,7 @@ test('NativeSymbol ', () => {
 	var symbol = parser.parse_native_symbol();
 	expect(symbol).toBeTruthy();
 	expect(symbol instanceof prompto.expression.NativeSymbol).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     symbol.expression.toDialect(writer);
 	expect( writer.toString()).toEqual( "\"1\"");
 });
@@ -598,7 +598,7 @@ test('ExpressionMethod ', () => {
 	var parser = new OTestParser(statement);
 	var stmt = parser.parse_statement();
 	expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     stmt.toDialect(writer);
 	expect( writer.toString()).toEqual("x = print(value = \"1\")");
 });
@@ -609,7 +609,7 @@ test('Method ', () => {
 	var parser = new OTestParser(statement);
 	var stmt = parser.parse_statement();
 	expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
+	var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O)
     stmt.toDialect(writer);
 	expect( writer.toString()).toEqual("print(\"a\", value = \"1\")");
 });
