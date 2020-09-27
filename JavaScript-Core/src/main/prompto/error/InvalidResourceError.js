@@ -1,14 +1,14 @@
 import ExecutionError from './ExecutionError.js'
 import { TextLiteral } from '../literal/index.js'
 
-export default function InvalidResourceError(message) {
-	ExecutionError.call(this, message);
-	return this;
+export default class InvalidResourceError extends ExecutionError {
+
+	constructor(message) {
+		super(message);
+	}
+
+	etExpression(context) {
+		return new TextLiteral(this.message);
+	}
+
 }
-
-InvalidResourceError.prototype = Object.create(ExecutionError.prototype);
-InvalidResourceError.prototype.constructor = InvalidResourceError;
-
-InvalidResourceError.prototype.getExpression = function(context) {
-	return new TextLiteral(this.message);
-};

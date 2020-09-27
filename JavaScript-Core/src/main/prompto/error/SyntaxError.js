@@ -1,9 +1,9 @@
 import PromptoError from './PromptoError.js'
 
-export default function SyntaxError(message) {
-	PromptoError.call(this, message);
-	return this;
-}
+export default class SyntaxError extends PromptoError {
 
-SyntaxError.prototype = Object.create(PromptoError.prototype);
-SyntaxError.prototype.constructor = SyntaxError;
+	constructor(message) {
+		super(message);
+	}
+
+}

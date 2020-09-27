@@ -1,30 +1,31 @@
 import PromptoError from './PromptoError.js'
-import { ErrorVariable } from '../runtime/index.js'
-import { ArgumentList, Argument } from '../grammar/index.js'
-import { UnresolvedParameter } from '../param/index.js'
-import { TextLiteral } from '../literal/index.js'
-import { ConstructorExpression } from '../expression/index.js'
-import { CategoryType } from '../type/index.js'
 
-export default function ExecutionError(message) {
-	PromptoError.call(this, message);
-	return this;
-}
+export default class ExecutionError extends PromptoError {
 
-ExecutionError.prototype = Object.create(PromptoError.prototype);
-ExecutionError.prototype.constructor = ExecutionError;
-
-ExecutionError.prototype.interpret = function(context, errorName) {
-    var exp = this.getExpression(context);
-    if(exp==null) {
-        var args = new ArgumentList();
-        args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
-        args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
-        exp = new ConstructorExpression(new CategoryType("Error"), args);
+    constructor(message) {
+        super(message);
     }
-    if(context.getRegisteredValue(errorName)==null)
-        context.registerValue(new ErrorVariable(errorName));
-    var error = exp.interpret(context);
-    context.setValue(errorName, error);
-    return error;
-};
+
+    interpret(context, errorName) {
+        // use dynamic import to avoid reentrant import
+        const ErrorVariable = import('../runtime/ErrorVariable.js').default;
+        const UnresolvedParameter = import('../param/UnresolvedParameter.js').default;
+        const TextLiteral = import('../literal/TextLiteral.js').default;
+        const ConstructorExpression = import('../expression/ConstructorExpression.js').default;
+        const CategoryType = import('../type/CategoryType.js').default;
+        const Argument = import('../grammar/Argument.js').default;
+        const ArgumentList = import('../grammar/ArgumentList.js').default;
+        let exp = this.getExpression(context);
+        if (exp == null) {
+            var args = new ArgumentList();
+            args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
+            args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
+            exp = new ConstructorExpression(new CategoryType("Error"), args);
+        }
+        if (context.getRegisteredValue(errorName) == null)
+            context.registerValue(new ErrorVariable(errorName));
+        var error = exp.interpret(context);
+        context.setValue(errorName, error);
+        return error;
+    }
+}

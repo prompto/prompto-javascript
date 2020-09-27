@@ -1,9 +1,9 @@
 import PromptoError from './PromptoError.js'
 
-export default function InternalError(message) {
-	PromptoError.call(this, message);
-	return this;
-}
+export default class InternalError extends PromptoError {
 
-InternalError.prototype = Object.create(PromptoError.prototype);
-InternalError.prototype.constructor = InternalError;
+	constructor(message) {
+		super(message);
+	}
+
+}

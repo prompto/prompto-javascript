@@ -1,13 +1,8 @@
 import ExecutionError from './ExecutionError.js'
 
-export default function DivideByZeroError() {
-	ExecutionError.call(this);
-	return this;
+export default class DivideByZeroError extends ExecutionError {
+
+	getExpression(context) {
+		return context.getRegisteredValue("DIVIDE_BY_ZERO");
+	}
 }
-
-DivideByZeroError.prototype = Object.create(ExecutionError.prototype);
-DivideByZeroError.prototype.constructor = DivideByZeroError;
-
-DivideByZeroError.prototype.getExpression = function(context) {
-	return context.getRegisteredValue("DIVIDE_BY_ZERO");
-};

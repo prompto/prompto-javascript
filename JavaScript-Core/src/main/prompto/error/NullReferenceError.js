@@ -1,13 +1,8 @@
 import ExecutionError from './ExecutionError.js'
 
-export default function NullReferenceError() {
-	ExecutionError.call(this);
-	return this;
+export default class NullReferenceError extends ExecutionError {
+
+	getExpression(context) {
+		return context.getRegisteredValue("NULL_REFERENCE");
+	}
 }
-
-NullReferenceError.prototype = Object.create(ExecutionError.prototype);
-NullReferenceError.prototype.constructor = NullReferenceError;
-
-NullReferenceError.prototype.getExpression = function(context) {
-	return context.getRegisteredValue("NULL_REFERENCE");
-};
