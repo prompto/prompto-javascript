@@ -11,9 +11,27 @@ import { LocalTime, LocalDate, DateTime, Period, UUID, Version } from '../intrin
 
 export default class JavaScriptType extends CategoryType {
 
+    static initializeTypeMap() {
+        if(JavaScriptType.scriptToTypeMap)
+            return;
+        const map = {
+            'string': TextType.instance,
+            'boolean': BooleanType.instance,
+            'Date' : DateTimeType.instance,
+            'object': AnyType.instance
+        };
+        // workaround webpack name mangling
+        map[LocalDate.name] = DateType.instance;
+        map[LocalTime.name] = TimeType.instance;
+        map[DateTime.name] = DateTimeType.instance;
+        map[Period.name] = PeriodType.instance;
+        map[UUID.name] = UUIDType.instance;
+        map[Version.name] = VersionType.instance;
+        JavaScriptType.scriptToTypeMap = map;
+    }
+
     constructor(name) {
         super(name);
-        initializeTypeMap();
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
@@ -148,25 +166,4 @@ export default class JavaScriptType extends CategoryType {
         else
             return null;
     }
-}
-
-
-let scriptToTypeMap = null;
-
-function initializeTypeMap() {
-    if(scriptToTypeMap)
-        return;
-    scriptToTypeMap = {
-        'string': TextType.instance,
-        'boolean': BooleanType.instance,
-        'Date' : DateTimeType.instance,
-        'object': AnyType.instance
-    };
-    // workaround webpack name mangling
-    scriptToTypeMap[LocalDate.name] = DateType.instance;
-    scriptToTypeMap[LocalTime.name] = TimeType.instance;
-    scriptToTypeMap[DateTime.name] = DateTimeType.instance;
-    scriptToTypeMap[Period.name] = PeriodType.instance;
-    scriptToTypeMap[UUID.name] = UUIDType.instance;
-    scriptToTypeMap[Version.name] = VersionType.instance;
 }
