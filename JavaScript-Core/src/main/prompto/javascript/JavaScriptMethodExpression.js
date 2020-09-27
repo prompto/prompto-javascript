@@ -108,7 +108,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
 function stringToFunction(str) {
     const arr = str.split(".");
     /* global self, window */
-    let fn = isNodeJs ? this : isWorker ? self : window;
+    let fn = isNodeJs ? global : isWorker ? self : window;
     for (let i = 0, len = arr.length; i < len; i++) {
         fn = fn[arr[i]];
     }

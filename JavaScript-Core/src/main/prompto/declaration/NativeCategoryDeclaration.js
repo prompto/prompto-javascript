@@ -4,6 +4,7 @@ import { NativeInstance } from '../value/index.js'
 import { JavaScriptNativeCategoryBinding } from '../javascript/index.js'
 import { CategoryType } from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
+const Any = require('../intrinsic/Any.js').default;
 
 export default class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
 
@@ -111,7 +112,7 @@ export default class NativeCategoryDeclaration extends ConcreteCategoryDeclarati
     declare(transpiler) {
         transpiler.declare(this);
         if(this.name==="Any")
-            transpiler.register(require("../intrinsic/Any").Any);
+            transpiler.register(Any);
     }
 
     transpile(transpiler) {

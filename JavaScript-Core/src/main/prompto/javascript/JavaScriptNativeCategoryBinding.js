@@ -20,7 +20,7 @@ export default class JavaScriptNativeCategoryBinding extends NativeCategoryBindi
                 return null;
             }
         } else {
-            return m[this.identifier] || null;
+            return m[this.identifier] || m["default"] || null;
         }
     }
 
@@ -41,7 +41,7 @@ export default class JavaScriptNativeCategoryBinding extends NativeCategoryBindi
                 return null;
             }
         } else {
-            return m[this.identifier] || null;
+            return m[this.identifier] || m["default"] || null;
         }
     }
 
