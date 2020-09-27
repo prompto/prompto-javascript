@@ -2,12 +2,15 @@ import NativeType from './NativeType.js'
 import { NullType, AnyType, MissingType, SetType, TextType, ListType, IntegerType } from './index.js'
 import { ValueExpression, MethodSelector } from '../expression/index.js'
 import { Identifier, ArgumentList, Argument } from '../grammar/index.js'
-import { List, StrictSet, Document } from '../intrinsic/index.js'
 import { MethodDeclarationMap } from '../runtime/index.js'
 import { MethodCall } from '../statement/index.js'
 import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value/index.js'
 import { TextLiteral } from '../literal/index.js'
 import { equalArrays, compareValues } from '../utils/index.js'
+// ensure babel does not inject _xxx.default
+const StrictSet = require('../intrinsic/StrictSet.js').default;
+const List = require('../intrinsic/StrictSet.js').default;
+const Document = require('../intrinsic/Document.js').default;
 
 export default class DocumentType extends NativeType {
  

@@ -1,5 +1,5 @@
 import { NotMutableError } from '../error/index.js';
-import Document from './Document.js';
+const Document = require('./Document.js').default;
 
 function Category(klass) {
     this.klass = klass;

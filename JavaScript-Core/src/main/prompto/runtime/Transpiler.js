@@ -1,5 +1,6 @@
 import { CategoryDeclaration } from '../declaration/index.js'
-import { List, StrictSet } from '../intrinsic/index.js'
+const StrictSet = require('../intrinsic/StrictSet.js').default;
+const List = require('../intrinsic/StrictSet.js').default;
 import { equalObjects } from '../utils/index.js'
 
 const coreNodeClasses = new Set(["Socket"]);
