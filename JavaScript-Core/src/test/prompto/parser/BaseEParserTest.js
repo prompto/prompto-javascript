@@ -203,6 +203,7 @@ function runTests(fileName, runner, options) {
 
 function runTest(decl, runner, options) {
     Out.reset()
+    // below is required for interpreted tests, but will be overridden in transpiled tests
     global.intrinsic = prompto.intrinsic;
     runner(BaseParserTest.coreContext, decl.name);
     var expected = decl.name + " test successful";
