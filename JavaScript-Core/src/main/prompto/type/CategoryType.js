@@ -11,7 +11,8 @@ import { MethodCall } from '../statement/index.js'
 import { $DataStore } from '../store/index.js'
 import { compareValues } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
-import { Any, $Root } from '../intrinsic/index.js'
+const Any = require('../intrinsic/Any.js').default;
+const Category = require('../intrinsic/$Root.js').Category;
 
 export default class CategoryType extends BaseType {
   
@@ -336,7 +337,7 @@ export default class CategoryType extends BaseType {
 
     declareMember(transpiler, section, name) {
         if( "category" === name ) {
-            transpiler.require($Root.Category);
+            transpiler.require(Category);
         }
         // TODO visit attributes
     }
