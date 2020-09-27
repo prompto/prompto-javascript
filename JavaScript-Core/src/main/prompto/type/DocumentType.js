@@ -9,7 +9,7 @@ import { TextLiteral } from '../literal/index.js'
 import { equalArrays, compareValues } from '../utils/index.js'
 // ensure babel does not inject _xxx.default
 const StrictSet = require('../intrinsic/StrictSet.js').default;
-const List = require('../intrinsic/StrictSet.js').default;
+const List = require('../intrinsic/List.js').default;
 const Document = require('../intrinsic/Document.js').default;
 
 export default class DocumentType extends NativeType {
