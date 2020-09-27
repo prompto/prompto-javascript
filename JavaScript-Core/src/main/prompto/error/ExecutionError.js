@@ -1,4 +1,19 @@
 import PromptoError from './PromptoError.js'
+let ErrorVariable = null
+let UnresolvedParameter = null;
+let TextLiteral = null;
+let ConstructorExpression = null;
+let CategoryType = null;
+let Argument = null;
+let ArgumentList = null;
+// use dynamic import to avoid reentrant import
+import('../runtime/ErrorVariable.js').then(module => ErrorVariable=module.default);
+import('../param/UnresolvedParameter.js').then(module => UnresolvedParameter=module.default);
+import('../literal/TextLiteral.js').then(module => TextLiteral=module.default);
+import('../expression/ConstructorExpression.js').then(module => ConstructorExpression=module.default);
+import('../type/CategoryType.js').then(module => CategoryType=module.default);
+import('../grammar/Argument.js').then(module => Argument=module.default);
+import('../grammar/ArgumentList.js').then(module => ArgumentList=module.default);
 
 export default class ExecutionError extends PromptoError {
 
@@ -7,15 +22,7 @@ export default class ExecutionError extends PromptoError {
     }
 
     interpret(context, errorName) {
-        // use dynamic import to avoid reentrant import
-        const ErrorVariable = import('../runtime/ErrorVariable.js').default;
-        const UnresolvedParameter = import('../param/UnresolvedParameter.js').default;
-        const TextLiteral = import('../literal/TextLiteral.js').default;
-        const ConstructorExpression = import('../expression/ConstructorExpression.js').default;
-        const CategoryType = import('../type/CategoryType.js').default;
-        const Argument = import('../grammar/Argument.js').default;
-        const ArgumentList = import('../grammar/ArgumentList.js').default;
-        let exp = this.getExpression(context);
+       let exp = this.getExpression(context);
         if (exp == null) {
             var args = new ArgumentList();
             args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
