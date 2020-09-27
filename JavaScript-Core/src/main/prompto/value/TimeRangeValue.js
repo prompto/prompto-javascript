@@ -1,5 +1,10 @@
+import RangeValue from "./RangeValue.js"
+import { TimeType } from "../type/index.js"
+import { IndexOutOfRangeError } from "../error/index.js"
+import { TimeValue } from "../value/index.js"
+import { LocalTime } from "../intrinsic/index.js"
 
-export default class TimeRange extends RangeValue {
+export default class TimeRangeValue extends RangeValue {
 
     constructor(left, right) {
         super(TimeType.instance, left, right);

@@ -1,5 +1,10 @@
+import RangeValue from "./RangeValue.js"
+import { DateType } from "../type/index.js"
+import { IndexOutOfRangeError } from "../error/index.js"
+import { DateValue } from "../value/index.js"
+import { LocalDate } from "../intrinsic/index.js"
 
-export default class DateRange extends RangeValue {
+export default class DateRangeValue extends RangeValue {
 
     constructor(left, right) {
         super(DateType.instance, left, right);

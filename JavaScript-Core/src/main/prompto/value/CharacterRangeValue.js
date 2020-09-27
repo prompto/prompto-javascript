@@ -3,7 +3,7 @@ import { CharacterValue } from './index.js'
 import { IndexOutOfRangeError } from '../error/index.js'
 import { CharacterType } from '../type/index.js'
 
-export default class CharacterRange extends RangeValue {
+export default class CharacterRangeValue extends RangeValue {
 
     constructor(left, right) {
         super(CharacterType.instance, left, right);

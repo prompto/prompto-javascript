@@ -3,7 +3,7 @@ import { IntegerValue } from './index.js'
 import { IntegerType } from '../type/index.js'
 import { IndexOutOfRangeError } from '../error/index.js'
 
-export default class IntegerRange extends RangeValue {
+export default class IntegerRangeValue extends RangeValue {
 
     constructor(left, right) {
         super(IntegerType.instance, left, right);
@@ -22,6 +22,6 @@ export default class IntegerRange extends RangeValue {
     }
 
     newInstance(left, right) {
-        return new IntegerRange(left, right);
+        return new IntegerRangeValue(left, right);
     }
 }

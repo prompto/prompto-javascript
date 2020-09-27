@@ -1,7 +1,7 @@
 import NativeType from './NativeType.js'
 import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from './index.js'
 import { Identifier } from '../grammar/index.js'
-import { IntegerValue } from '../value/index.js'
+import { IntegerValue, IntegerRangeValue } from '../value/index.js'
 import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins.js'
 import { isAnInteger } from '../utils/index.js'
 import { Range, IntegerRange } from '../intrinsic/index.js'
@@ -251,7 +251,7 @@ export default class IntegerType extends NativeType {
 
     newRange(left, right) {
         if(left instanceof IntegerValue && right instanceof IntegerValue) {
-            return new IntegerRange(left, right);
+            return new IntegerRangeValue(left, right);
         } else {
             return super.newRange(left, right);
         }
