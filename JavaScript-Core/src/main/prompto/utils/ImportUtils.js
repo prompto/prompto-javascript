@@ -2,12 +2,20 @@ function isNodeJs() {
     return typeof window === 'undefined' && typeof importScripts === 'undefined';
 }
 
+let path = null;
+let fs = null;
+
+if(isNodeJs()) {
+    import("path").then(module => path = module);
+    import("fs").then(module => fs = module);
+}
+
 function importPathIfNode() {
-    return isNodeJs() ? import("path") : null;
+    return path;
 }
 
 function importFsIfNode() {
-    return isNodeJs() ? import("fs") : null;
+    return fs;
 }
 
 export { importPathIfNode, importFsIfNode }
