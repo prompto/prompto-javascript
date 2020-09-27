@@ -1,4 +1,4 @@
-import { NotMutableError } from '../error/index.js';
+const NotMutableError = require('../error/NotMutableError.js').default;
 const Document = require('./Document.js').default;
 
 function Category(klass) {
