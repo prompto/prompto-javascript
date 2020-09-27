@@ -1,9 +1,7 @@
 import ContainerType from './ContainerType.js'
 import { ListType, IntegerType, BooleanType } from './index.js'
 import { Identifier } from '../grammar/index.js'
-import {  } from '../error/index.js'
-import {  } from '../intrinsic/index.js'
-import {  } from '../value/index.js'
+import { StrictSet } from '../intrinsic/index.js'
 import { JoinSetMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js'
 
 export default class SetType extends ContainerType {
@@ -125,7 +123,6 @@ export default class SetType extends ContainerType {
     }
 
     declareContainsAllOrAny(transpiler, other, container, items) {
-        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);

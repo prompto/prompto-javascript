@@ -1,4 +1,5 @@
 import BaseType from './BaseType.js'
+import { ArrowExpression } from "../expression/index.js"
 
 export default class NativeType extends BaseType {
 
@@ -14,7 +15,6 @@ export default class NativeType extends BaseType {
     }
 
     getExpressionSortedComparator(context, expression, desc) {
-        const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
         if(expression instanceof ArrowExpression)
             return expression.getSortedComparator(context, this, desc);
         else
@@ -57,7 +57,6 @@ export default class NativeType extends BaseType {
     }
 
     transpileSortedComparator(transpiler, key, desc) {
-        const ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
         if(key instanceof ArrowExpression)
             return key.transpileSortedComparator(transpiler, this, desc);
         else if(desc)

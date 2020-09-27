@@ -39,5 +39,3 @@ export {default as EnumeratedCategoryType} from './EnumeratedCategoryType.js';
 export {default as TypeType} from './TypeType.js';
 export {default as PropertiesType} from './PropertiesType.js';
 export {default as TypeMap} from './TypeMap.js';
-
-export default {}

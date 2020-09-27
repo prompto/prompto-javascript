@@ -3,6 +3,10 @@ import { NullType } from '../type/index.js'
 
 export default class NullValue extends Value {
 
+    static init() {
+        NullValue.instance = new NullValue();
+    }
+
     constructor() {
         super(NullType.instance);
     }
@@ -19,6 +23,4 @@ export default class NullValue extends Value {
         return null; // <- YES!
     }
 }
-
-NullValue.instance = new NullValue();
 

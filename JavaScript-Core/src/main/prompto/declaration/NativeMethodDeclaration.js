@@ -12,7 +12,7 @@ export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
 
     check(context, isStart) {
         /* eslint no-unused-vars: [ "off"] */
-        const intrinsic = require("../intrinsic");
+        const intrinsic = require("../intrinsic/index.js");
         if(isStart) {
             context = context.newLocalContext();
             this.registerParameters(context);
@@ -25,7 +25,7 @@ export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
 
     interpret(context) {
         /* eslint no-unused-vars: [ "off"] */
-        const intrinsic = require("../intrinsic");
+        const intrinsic = require("../intrinsic/index.js");
         context.enterMethod(this);
         try {
             const result = this.statements.interpretNative(context, this.returnType);

@@ -1,6 +1,7 @@
 import NativeType from './NativeType.js'
 import { IntegerType, ListType, SetType, AnyType, BooleanType } from './index.js'
 import { Identifier } from '../grammar/index.js'
+import { StrictSet } from '../intrinsic/index.js'
 import { JoinTupleMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js'
 
 export default class TupleType extends NativeType {
@@ -119,7 +120,6 @@ export default class TupleType extends NativeType {
     }
 
     declareContainsAllOrAny(transpiler, other, container, items) {
-        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);

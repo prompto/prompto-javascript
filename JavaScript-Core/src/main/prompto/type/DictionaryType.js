@@ -2,6 +2,7 @@ import ContainerType from './ContainerType.js'
 import { TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { Dictionary, StrictSet, List } from '../intrinsic/index.js'
+import { SwapMethodDeclaration } from "../builtins/DictionaryTypeBuiltins.js";
 
 export default class DictionaryType extends ContainerType {
 
@@ -176,7 +177,6 @@ export default class DictionaryType extends ContainerType {
 
     getMemberMethods(context, name) {
         if (name === "swap" ) {
-            const SwapMethodDeclaration = require("../builtins/DictionaryTypeBuiltins").SwapMethodDeclaration;
             return [new SwapMethodDeclaration()];
         } else
             return super.getMemberMethods.call(context, name);

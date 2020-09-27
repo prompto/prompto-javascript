@@ -9,10 +9,9 @@ export {default as List} from './List.js';
 export {default as LocalDate} from './LocalDate.js';
 export {default as LocalTime} from './LocalTime.js';
 export {default as Period} from './Period.js';
-export { CharacterRange, DateRange, IntegerRange, TimeRange } from './Range.js';
+export { Range, CharacterRange, DateRange, IntegerRange, TimeRange } from './Range.js';
 export {default as StrictSet} from './StrictSet.js';
 export {default as Tuple} from './Tuple.js';
 export {default as UUID} from './UUID.js';
 export {default as Version} from './Version.js';
 export {default as Type} from './Type.js';
-export default {}

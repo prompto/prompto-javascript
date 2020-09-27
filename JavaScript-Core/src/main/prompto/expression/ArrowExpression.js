@@ -1,10 +1,11 @@
 import Expression from './Expression.js'
 import { Dialect } from '../parser/index.js'
 import { ReturnStatement, StatementList } from '../statement/index.js'
-import { Variable } from '../runtime/index.js'
+import { Variable, Context } from '../runtime/index.js'
 import { IntegerValue, BooleanValue } from '../value/index.js'
 import { VoidType } from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
+import { CodeWriter } from '../utils/index.js'
 
 export default class ArrowExpression extends Expression {
   
@@ -18,8 +19,6 @@ export default class ArrowExpression extends Expression {
 
     toString(writer) {
         if(!writer) {
-            const Context = require("../runtime/Context").Context;
-            const CodeWriter = require("../utils/CodeWriter").CodeWriter;
             writer = new CodeWriter(Dialect.E, Context.newGlobalsContext());
         }
         try {

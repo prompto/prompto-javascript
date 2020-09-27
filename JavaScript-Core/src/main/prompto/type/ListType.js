@@ -1,9 +1,10 @@
 import ContainerType from './ContainerType.js'
 import { IntegerType, SetType, BooleanType } from './index.js'
 import { Identifier } from '../grammar/index.js'
-import { List } from '../intrinsic/index.js'
+import { List, StrictSet } from '../intrinsic/index.js'
 import { ListValue } from '../value/index.js'
 import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js';
+import { multiplyArray } from '../utils/index.js'
 
 export default class ListType extends ContainerType {
   
@@ -154,7 +155,6 @@ export default class ListType extends ContainerType {
 
     declareMultiply(transpiler, other, tryReverse, left, right) {
         if(other === IntegerType.instance) {
-            const multiplyArray = require("../utils/Utils").multiplyArray;
             transpiler.require(multiplyArray);
             left.declare(transpiler);
             right.declare(transpiler);
@@ -213,7 +213,6 @@ export default class ListType extends ContainerType {
     }
 
     declareContainsAllOrAny(transpiler, other, container, items) {
-        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);

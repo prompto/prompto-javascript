@@ -10,18 +10,6 @@ export default class BaseSwitchStatement extends BaseStatement {
         this.defaultCase = defaultCase || null;
     }
 
-    /*
-
-    public void addSwitchCase(SwitchCase switchCase) {
-        switchCases.add(switchCase);
-    }
-
-    public void setDefaultCase(StatementList defaultCase) {
-        this.defaultCase = defaultCase;
-    }
-
-    */
-
     check(context) {
         this.checkSwitchCasesType(context);
         return this.checkReturnType(context);

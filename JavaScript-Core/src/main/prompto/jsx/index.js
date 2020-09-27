@@ -8,4 +8,3 @@ export {default as JsxProperty} from './JsxProperty.js';
 export {default as JsxLiteral} from './JsxLiteral.js';
 export {default as JsxCode} from './JsxCode.js';
 export {default as JsxText} from './JsxText.js';
-export default {}

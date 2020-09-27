@@ -1,5 +1,5 @@
 import { TextValue, IntegerValue, DecimalValue, NullValue } from '../value/index.js'
-import { MissingType, AnyType, NativeType } from '../type/index.js'
+import { MissingType, AnyType, NativeType, CategoryType } from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
 
 export function convertFromJavaScript(value) {
@@ -53,7 +53,6 @@ export function inferElementType(context, types) {
 
 
 function inferCommonRootType(context, type1, type2) {
-    const CategoryType = require("../type/CategoryType").CategoryType;
     if ((type1 instanceof CategoryType) && (type2 instanceof CategoryType))
         return inferCommonCategoryType(context, type1, type2, true);
     else if(type1 instanceof NativeType || type2 instanceof NativeType)
@@ -64,7 +63,6 @@ function inferCommonRootType(context, type1, type2) {
 
 
 function inferCommonCategoryType(context, type1, type2, trySwap) {
-    const CategoryType = require("../type/CategoryType").CategoryType;
     const decl1 = context.getRegisteredDeclaration(type1.id.name);
     if (decl1.derivedFrom != null) {
         for (let i = 0; i < decl1.derivedFrom.length; i++) {

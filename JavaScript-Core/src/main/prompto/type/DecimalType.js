@@ -2,6 +2,8 @@ import NativeType from './NativeType.js'
 import { IntegerType, BooleanType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { DecimalValue } from '../value/index.js'
+import { isADecimal } from '../utils/index.js'
+
 
 export default class DecimalType extends NativeType {
 
@@ -10,7 +12,6 @@ export default class DecimalType extends NativeType {
     }
 
     declare(transpiler) {
-        const isADecimal = require("../utils/Utils").isADecimal;
         transpiler.require(isADecimal);
     }
 

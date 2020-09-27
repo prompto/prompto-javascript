@@ -10,7 +10,7 @@ export {default as IfStatement} from './IfStatement.js';
 export {default as IfElement} from './IfStatement.js';
 export {default as IfElementList} from './IfStatement.js';
 export {default as SwitchCase} from './SwitchCase.js';
-export {default as SwitchCaseList} from './BaseSwitchStatement.js';
+export {default as SwitchCaseList} from './SwitchCaseList.js';
 export {default as AtomicSwitchCase} from './AtomicSwitchCase.js';
 export {default as CollectionSwitchCase} from './CollectionSwitchCase.js';
 export {default as SwitchStatement} from './SwitchStatement.js';
@@ -33,4 +33,3 @@ export {default as RemoteCall} from './RemoteCall.js';
 export {default as FetchOneStatement} from './FetchOneStatement.js';
 export {default as FetchManyStatement} from './FetchManyStatement.js';
 export {default as ReadStatement} from './ReadStatement.js';
-export default {}

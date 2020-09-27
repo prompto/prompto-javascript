@@ -36,4 +36,3 @@ export {default as ConcreteInstance} from './ConcreteInstance.js';
 export {default as CodeValue} from './CodeValue.js';
 export {default as ArrowValue} from './ArrowValue.js';
 export {default as ContextualExpression} from './ContextualExpression.js';
-export default {}

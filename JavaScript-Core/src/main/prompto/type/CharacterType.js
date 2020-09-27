@@ -2,7 +2,8 @@ import NativeType from './NativeType.js'
 import { IntegerType, BooleanType, TextType, RangeType } from './index.js'
 import { InvalidDataError } from '../error/index.js'
 import { Identifier } from '../grammar/index.js'
-import { CharacterValue, CharacterRange } from '../value/index.js'
+import { CharacterValue } from '../value/index.js'
+import { Range, CharacterRange, IntegerRange } from "../intrinsic/index.js"
 
 export default class CharacterType extends NativeType {
 
@@ -111,10 +112,9 @@ export default class CharacterType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === CharacterType.instance) {
-            const module = require("../intrinsic/Range");
-            transpiler.require(module.Range);
-            transpiler.require(module.IntegerRange);
-            transpiler.require(module.CharacterRange);
+            transpiler.require(Range);
+            transpiler.require(IntegerRange);
+            transpiler.require(CharacterRange);
         } else {
             return super.declareRange(transpiler, other);
         }

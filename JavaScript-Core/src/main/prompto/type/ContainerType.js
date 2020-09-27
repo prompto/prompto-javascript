@@ -1,5 +1,5 @@
 import IterableType from './IterableType.js'
-import { BooleanType } from './index.js'
+import { BooleanType, IntegerType } from './index.js'
 import { Variable } from '../runtime/index.js'
 
 export default class ContainerType extends IterableType {
@@ -19,7 +19,6 @@ export default class ContainerType extends IterableType {
 
     checkMember(context, section, name) {
         if ("count" == name) {
-            const IntegerType = require("./IntegerType").IntegerType;
             return IntegerType.instance;
         } else {
             return  super.checkMember(context, section, name);

@@ -1,5 +1,6 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
 import { ListType } from '../type/index.js'
+import List from "../intrinsic/List.js"
 
 export default class ToListMethodDeclaration extends BuiltInMethodDeclaration {
 
@@ -18,7 +19,6 @@ export default class ToListMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     declareCall(transpiler) {
-        const List = require("../intrinsic/List").List;
         transpiler.require(List);
     }
 

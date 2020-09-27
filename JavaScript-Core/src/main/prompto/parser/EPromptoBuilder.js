@@ -1,32 +1,31 @@
-import argument from '../param/index.js';
-import constraint from '../constraint/index.js';
-import instance from '../instance/index.js';
-import declaration from '../declaration/index.js';
-import expression from '../expression/index.js';
-import javascript from '../javascript/index.js';
-import statement from '../statement/index.js';
-import literal from '../literal/index.js';
-import grammar from '../grammar/index.js';
-import param from '../param/index.js';
-import utils from '../utils/index.js';
-import parser from '../parser/index.js';
-import type from '../type/index.js';
-import jsx from '../jsx/index.js';
-import css from '../css/index.js';
-import java from '../java/index.js';
-import csharp from '../csharp/index.js';
-import python from '../python/index.js';
+import { EParserListener } from './EParserListener.js';
+import * as parser from './index.js';
+import * as constraint from '../constraint/index.js';
+import * as instance from '../instance/index.js';
+import * as declaration from '../declaration/index.js';
+import * as expression from '../expression/index.js';
+import * as javascript from '../javascript/index.js';
+import * as statement from '../statement/index.js';
+import * as literal from '../literal/index.js';
+import * as grammar from '../grammar/index.js';
+import * as param from '../param/index.js';
+import * as type from '../type/index.js';
+import * as jsx from '../jsx/index.js';
+import * as css from '../css/index.js';
+import * as java from '../java/index.js';
+import * as csharp from '../csharp/index.js';
+import * as python from '../python/index.js';
 
-export default function EPromptoBuilder(eparser) {
-    parser.EParserListener.call(this);
-    this.input = eparser.getTokenStream();
-    this.path = eparser.path;
+export default function EPromptoBuilder(parser) {
+    EParserListener.call(this);
+    this.input = parser.getTokenStream();
+    this.path = parser.path;
     this.nodeValues = {};
     this.nextNodeId = 0;
     return this;
 }
 
-EPromptoBuilder.prototype = Object.create(parser.EParserListener.prototype);
+EPromptoBuilder.prototype = Object.create(EParserListener.prototype);
 EPromptoBuilder.prototype.constructor = EPromptoBuilder;
 
 
@@ -745,8 +744,8 @@ EPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
     const name = this.getNodeValue(ctx.name);
     const attrs = this.getNodeValue(ctx.attrs);
     const arg = attrs ?
-        new argument.ExtendedParameter(typ, name, attrs) :
-        new argument.CategoryParameter(typ, name);
+        new param.ExtendedParameter(typ, name, attrs) :
+        new param.CategoryParameter(typ, name);
     const exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -791,7 +790,7 @@ EPromptoBuilder.prototype.exitFull_argument_list = function(ctx) {
 EPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
     const name = this.getNodeValue(ctx.name);
     const exp = this.getNodeValue(ctx.exp);
-    const arg = new argument.UnresolvedParameter(name);
+    const arg = new param.UnresolvedParameter(name);
     this.setNodeValue(ctx, new grammar.Argument(arg, exp));
 };
 
@@ -1052,7 +1051,7 @@ EPromptoBuilder.prototype.exitAssertion = function(ctx) {
 };
 
 EPromptoBuilder.prototype.exitAssertion_list = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.assertion().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -1615,7 +1614,7 @@ EPromptoBuilder.prototype.exitValue_token = function(ctx) {
 
 EPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
     const name = this.getNodeValue(ctx.variable_identifier());
-    const arg = new argument.UnresolvedParameter(name);
+    const arg = new param.UnresolvedParameter(name);
     const exp = this.getNodeValue(ctx.literal_expression());
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -1828,7 +1827,7 @@ EPromptoBuilder.prototype.exitLiteralListLiteral = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitLiteral_list_literal = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.atomic_literal().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -2279,7 +2278,7 @@ EPromptoBuilder.prototype.exitExecuteExpression = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitExpression_list = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.expression().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -2289,7 +2288,7 @@ EPromptoBuilder.prototype.exitExpression_list = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitExpression_tuple = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.expression().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -2306,7 +2305,7 @@ EPromptoBuilder.prototype.exitCodeExpression = function(ctx) {
 
 EPromptoBuilder.prototype.exitCode_argument = function(ctx) {
     const name = this.getNodeValue(ctx.name);
-    this.setNodeValue(ctx, new argument.CodeParameter(name));
+    this.setNodeValue(ctx, new param.CodeParameter(name));
 };
 
 
@@ -2450,7 +2449,7 @@ EPromptoBuilder.prototype.exitAnyListType = function(ctx) {
 
 EPromptoBuilder.prototype.exitAnyDictType = function(ctx) {
     const typ = this.getNodeValue(ctx.typ);
-    this.setNodeValue(ctx, new type.DictType(typ));
+    this.setNodeValue(ctx, new type.DictionaryType(typ));
 };
 
 
@@ -2885,7 +2884,7 @@ EPromptoBuilder.prototype.exitJsxSelfClosing = function(ctx) {
 
 
 EPromptoBuilder.prototype.exitJsxText = function(ctx) {
-    const text = parser.ParserUtils.getFullText(ctx.text);
+    const text = parser.getFullText(ctx.text);
     this.setNodeValue(ctx, new jsx.JsxText(text));
 };
 

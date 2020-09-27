@@ -1,3 +1,5 @@
+export {default as Location} from './Location.js';
+export {default as Section} from './Section.js';
 export {EParserListener} from './EParserListener.js';
 export {OParserListener} from './OParserListener.js';
 export {MParserListener} from './MParserListener.js';
@@ -18,10 +20,7 @@ export {default as OPromptoBuilder} from './OPromptoBuilder.js';
 export {default as MPromptoBuilder} from './MPromptoBuilder.js';
 export {default as Dialect} from './Dialect.js';
 export {default as Assertion} from './Assertion.js';
-export {default as Section} from './Section.js';
-export {default as Location} from './Location.js';
 export {default as EParserFactory} from './EParserFactory.js';
 export {default as OParserFactory} from './OParserFactory.js';
 export {default as MParserFactory} from './MParserFactory.js';
 export { getFullText } from './ParserUtils.js';
-export default {}

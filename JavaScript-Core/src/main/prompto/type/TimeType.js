@@ -2,7 +2,7 @@ import NativeType from './NativeType.js'
 import { DateTimeType, PeriodType, IntegerType, BooleanType, RangeType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { TimeValue } from '../value/index.js'
-import { LocalTime, TimeRange } from '../intrinsic/index.js'
+import { LocalTime, Range, TimeRange } from '../intrinsic/index.js'
 
 export default class TimeType extends NativeType {
  
@@ -123,9 +123,8 @@ export default class TimeType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === TimeType.instance) {
-            const module = require("../intrinsic/Range");
-            transpiler.require(module.Range);
-            transpiler.require(module.TimeRange);
+            transpiler.require(Range);
+            transpiler.require(TimeRange);
         } else {
             return super.declareRange(transpiler, other);
         }

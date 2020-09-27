@@ -2,6 +2,7 @@ import UnresolvedCall from './UnresolvedCall.js'
 import { Dialect } from '../parser/index.js'
 import { Variable } from '../runtime/index.js'
 import { VoidType } from '../type/index.js'
+import RemoteRunner from "../intrinsic/RemoteRunner.js"
 
 export default class RemoteCall extends UnresolvedCall {
 
@@ -59,8 +60,7 @@ export default class RemoteCall extends UnresolvedCall {
     declare(transpiler) {
         const resultType = this.resolveAndCheck(transpiler.context);
         this.resolved.declare(transpiler);
-        const runner = require("../intrinsic/RemoteRunner").RemoteRunner;
-        transpiler.require(runner);
+        transpiler.require(RemoteRunner);
         transpiler = transpiler.newChildTranspiler();
         if (this.resultName != null)
             transpiler.context.registerValue(new Variable(this.resultName, resultType));

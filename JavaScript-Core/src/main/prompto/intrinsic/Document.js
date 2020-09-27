@@ -1,5 +1,6 @@
-import { StrictSet, List } from './index.js'
-import { equalArrays } from '../utils/index.js'
+const List = require('./List.js').default;
+const StrictSet = require('./StrictSet.js').default;
+const equalArrays = require('../utils/Utils.js').equalArrays;
 
 export default function Document(entries) {
     if(entries)

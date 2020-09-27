@@ -47,4 +47,3 @@ export {default as CategorySymbol} from './CategorySymbol.js';
 export {default as UnresolvedSelector} from './UnresolvedSelector.js';
 export {default as ArrowExpression} from './ArrowExpression.js';
 export {default as ValueExpression} from './ValueExpression.js';
-export default {}

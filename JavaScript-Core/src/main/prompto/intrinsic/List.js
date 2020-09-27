@@ -1,6 +1,7 @@
-import { StrictSet, Document } from './index.js'
-import { NotMutableError } from '../error/index.js'
-import { equalObjects } from '../utils/index.js'
+const StrictSet = require('./StrictSet.js').default;
+const Document = require('./Document.js').default;
+const NotMutableError = require('../error/NotMutableError.js').default;
+const equalObjects = require('../utils/Utils.js').equalObjects;
 
 export default function List(mutable, items) {
     Array.call(this);

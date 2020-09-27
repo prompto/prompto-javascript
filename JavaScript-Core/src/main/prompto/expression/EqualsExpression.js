@@ -5,7 +5,7 @@ import { MatchOp } from '../store/index.js'
 import { Variable, LinkedVariable, LinkedValue } from '../runtime/index.js'
 import { ContainerType, TextType, CharacterType, BooleanType, NullType, IntegerType, DecimalType } from '../type/index.js'
 import { NullValue, BooleanValue, Value, TypeValue, Instance } from '../value/index.js'
-import { CodeWriter } from '../utils/index.js'
+import { CodeWriter, removeAccents } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
 
 const VOWELS = "AEIO"; // sufficient here
@@ -216,7 +216,6 @@ export default class EqualsExpression extends Expression {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
         if(this.operator === EqOp.ROUGHLY) {
-            const removeAccents = require("../utils/Utils").removeAccents;
             transpiler.require(removeAccents);
         }
     }

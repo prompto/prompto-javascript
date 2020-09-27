@@ -253,3 +253,4 @@ export function getTypeName(value) {
     }
 }
 
+export default {}

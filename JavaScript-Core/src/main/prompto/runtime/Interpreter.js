@@ -8,8 +8,6 @@ import { UnresolvedParameter } from '../param/index.js'
 import { DictLiteral } from '../literal/index.js'
 import { SyntaxError } from '../error/index.js'
 
-const argsType = new DictionaryType(TextType.instance);
-
 function parseCmdLineArgs(cmdLineArgs) {
 	try {
 		const args = CmdLineParser.parse(cmdLineArgs);
@@ -20,6 +18,7 @@ function parseCmdLineArgs(cmdLineArgs) {
 			valueArgs[key] = value;
 		});
 		const dict = new DictionaryValue(TextType.instance, valueArgs, false);
+		const argsType = new DictionaryType(TextType.instance);
 		return new ValueExpression(argsType, dict);
 	} catch(e) {
 		// TODO
@@ -38,7 +37,7 @@ function buildAssignments(method, cmdLineArgs) {
 }
 
 
-function locateMethod(context, methodName, cmdLineArgs) {
+export function locateMethod(context, methodName, cmdLineArgs) {
 	const map = context.getRegisteredDeclaration(methodName);
 	if(map==null) {
 		throw new SyntaxError("Could not find a \"" + methodName + "\" method.");
@@ -89,6 +88,7 @@ function isSingleTextDictArgument(args) {
 	if(typ==null) {
 		return false;
 	}
+	const argsType = new DictionaryType(TextType.instance);
 	return typ.equals(argsType);
 }
 
@@ -109,6 +109,7 @@ function identicalArguments(args, argTypes) {
 }
 
 export default class Interpreter {
+
     static interpret(context, methodName, cmdLineArgs) {
         try {
             const method = locateMethod(context, methodName, cmdLineArgs);
@@ -141,6 +142,5 @@ export default class Interpreter {
     }
 }
 
-export {locateMethod};
 
 

@@ -1,11 +1,19 @@
-export {default as CmdLineParser} from './CmdLineParser.js';
-export {default as ObjectList} from './ObjectList.js';
-export {default as ExpressionList} from '../expression/ExpressionList.js';
-export {default as CodeWriter} from './CodeWriter.js';
-export { convertFromJavaScript, inferExpressionsType, inferElementType } from './TypeUtils.js';
-export { getTypeName,
-    removeAccents, isCharacterUpperCase,
-    decimalToString,
-    equalObjects, equalArrays, compareValues,
+import CmdLineParser from './CmdLineParser.js';
+import CodeWriter from './CodeWriter.js';
+import { convertFromJavaScript, inferExpressionsType, inferElementType } from './TypeUtils.js';
+import { getTypeName,
+    isCharacterUpperCase, isABoolean, isACharacter, isADecimal, isAnInteger, isAText,
+    decimalToString, removeAccents, multiplyArray,
+    equalObjects, equalArrays, compareValues, arrayContains,
     stringToUtf8Buffer, getUtf8CharLength, utf8BufferToString } from './Utils.js';
-export default {}
+import ImportUtils from './ImportUtils.js';
+const importPathIfNode = ImportUtils.importPathIfNode;
+const importFsIfNode = ImportUtils.importFsIfNode;
+
+export { importPathIfNode, importFsIfNode,
+    equalObjects, equalArrays, arrayContains, compareValues, isCharacterUpperCase,
+    inferExpressionsType, inferElementType, getTypeName,
+    isABoolean, isACharacter, isADecimal, isAnInteger, isAText,
+    decimalToString, removeAccents, multiplyArray,
+    stringToUtf8Buffer, utf8BufferToString, getUtf8CharLength,
+    convertFromJavaScript, CodeWriter, CmdLineParser }

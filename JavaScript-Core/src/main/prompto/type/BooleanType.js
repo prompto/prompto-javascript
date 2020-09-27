@@ -1,9 +1,10 @@
 import NativeType from './NativeType.js'
 import { Identifier } from '../grammar/index.js'
 import { BooleanValue } from '../value/index.js'
+import { isABoolean } from '../utils/index.js'
 
 export default class BooleanType extends NativeType {
- 
+
     constructor() {
         super(new Identifier("Boolean"));
     }
@@ -37,7 +38,6 @@ export default class BooleanType extends NativeType {
     }
 
     declare(transpiler) {
-        const isABoolean = require("../utils/Utils").isABoolean;
         transpiler.require(isABoolean);
     }
 

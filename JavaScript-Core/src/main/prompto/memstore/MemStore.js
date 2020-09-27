@@ -1,7 +1,7 @@
 import Store from '../store/Store.js'
 import { MemQueryBuilder, StorableDocument } from './index.js'
 
-// a utility class for running unit tests only
+// a utility class for running tests only
 export default class MemStore extends Store {
 
     constructor() {
@@ -66,7 +66,7 @@ export default class MemStore extends Store {
         docs = this.sort(query, docs);
         docs = this.slice(query, docs);
         const iterable = new StoredIterable(docs, totalCount);
-        return new exports.Cursor(mutable, iterable)
+        return new MemStore.Cursor(mutable, iterable)
     }
 
     fetchManyAsync(query, mutable, andThen) {
@@ -167,3 +167,4 @@ function StoredIterable(docs, totalCount) {
     return this;
 }
 
+export { MemStore }

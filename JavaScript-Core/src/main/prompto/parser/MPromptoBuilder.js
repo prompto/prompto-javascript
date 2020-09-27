@@ -1,33 +1,32 @@
-import argument from '../param/index.js';
-import constraint from '../constraint/index.js';
-import instance from '../instance/index.js';
-import declaration from '../declaration/index.js';
-import expression from '../expression/index.js';
-import javascript from '../javascript/index.js';
-import statement from '../statement/index.js';
-import literal from '../literal/index.js';
-import grammar from '../grammar/index.js';
-import utils from '../utils/index.js';
-import param from '../param/index.js';
-import parser from '../parser/index.js';
-import type from '../type/index.js';
-import jsx from '../jsx/index.js';
-import css from '../css/index.js';
-import java from '../java/index.js';
-import csharp from '../csharp/index.js';
-import python from '../python/index.js';
+import { MParserListener } from './MParserListener.js';
+import * as parser from '../parser/index.js';
+import * as constraint from '../constraint/index.js';
+import * as instance from '../instance/index.js';
+import * as declaration from '../declaration/index.js';
+import * as expression from '../expression/index.js';
+import * as javascript from '../javascript/index.js';
+import * as statement from '../statement/index.js';
+import * as literal from '../literal/index.js';
+import * as grammar from '../grammar/index.js';
+import * as param from '../param/index.js';
+import * as type from '../type/index.js';
+import * as jsx from '../jsx/index.js';
+import * as css from '../css/index.js';
+import * as java from '../java/index.js';
+import * as csharp from '../csharp/index.js';
+import * as python from '../python/index.js';
 
 
-export default function MPromptoBuilder(pparser) {
-    parser.MParserListener.call(this);
-    this.input = pparser.getTokenStream();
-    this.path = pparser.path;
+export default function MPromptoBuilder(parser) {
+    MParserListener.call(this);
+    this.input = parser.getTokenStream();
+    this.path = parser.path;
     this.nodeValues = {};
     this.nextNodeId = 0;
     return this;
 }
 
-MPromptoBuilder.prototype = Object.create(parser.MParserListener.prototype);
+MPromptoBuilder.prototype = Object.create(MParserListener.prototype);
 MPromptoBuilder.prototype.constructor = MPromptoBuilder;
 
 
@@ -720,8 +719,8 @@ MPromptoBuilder.prototype.exitTyped_argument = function(ctx) {
     const name = this.getNodeValue(ctx.name);
     const attrs = this.getNodeValue(ctx.attrs);
     const arg = attrs ?
-        new argument.ExtendedParameter(typ, name, attrs) :
-        new argument.CategoryParameter(typ, name);
+        new param.ExtendedParameter(typ, name, attrs) :
+        new param.CategoryParameter(typ, name);
     const exp = this.getNodeValue(ctx.value);
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -768,7 +767,7 @@ MPromptoBuilder.prototype.exitExpressionAssignmentList = function(ctx) {
 MPromptoBuilder.prototype.exitArgument_assignment = function(ctx) {
     const name = this.getNodeValue(ctx.name);
     const exp = this.getNodeValue(ctx.exp);
-    const arg = new argument.UnresolvedParameter(name);
+    const arg = new param.UnresolvedParameter(name);
     this.setNodeValue(ctx, new grammar.Argument(arg, exp));
 };
 
@@ -1021,7 +1020,7 @@ MPromptoBuilder.prototype.exitAssertion = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitAssertion_list = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.assertion().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -1599,7 +1598,7 @@ MPromptoBuilder.prototype.exitValue_token = function(ctx) {
 
 MPromptoBuilder.prototype.exitNamed_argument = function(ctx) {
     const name = this.getNodeValue(ctx.variable_identifier());
-    const arg = new argument.UnresolvedParameter(name);
+    const arg = new param.UnresolvedParameter(name);
     const exp = this.getNodeValue(ctx.literal_expression());
     arg.defaultExpression = exp || null;
     this.setNodeValue(ctx, arg);
@@ -1817,7 +1816,7 @@ MPromptoBuilder.prototype.exitLiteralListLiteral = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitLiteral_list_literal = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.atomic_literal().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -2249,7 +2248,7 @@ MPromptoBuilder.prototype.exitExecuteExpression = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitExpression_list = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.expression().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -2259,7 +2258,7 @@ MPromptoBuilder.prototype.exitExpression_list = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitExpression_tuple = function(ctx) {
-    const items = new utils.ExpressionList();
+    const items = new expression.ExpressionList();
     ctx.expression().forEach(function(r) {
         const item = this.getNodeValue(r);
         items.add(item);
@@ -2282,7 +2281,7 @@ MPromptoBuilder.prototype.exitCategory_or_any_type = function(ctx) {
 
 MPromptoBuilder.prototype.exitCode_argument = function(ctx) {
     const name = this.getNodeValue(ctx.name);
-    this.setNodeValue(ctx, new argument.CodeParameter(name));
+    this.setNodeValue(ctx, new param.CodeParameter(name));
 };
 
 
@@ -2812,7 +2811,7 @@ MPromptoBuilder.prototype.exitJsxSelfClosing = function(ctx) {
 
 
 MPromptoBuilder.prototype.exitJsxText = function(ctx) {
-    const text = parser.ParserUtils.getFullText(ctx.text);
+    const text = parser.getFullText(ctx.text);
     this.setNodeValue(ctx, new jsx.JsxText(text));
 };
 

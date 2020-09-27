@@ -29,4 +29,3 @@ export {default as PeriodLiteral} from './PeriodLiteral.js';
 export {default as VersionLiteral} from './VersionLiteral.js';
 export {default as UUIDLiteral} from './UUIDLiteral.js';
 export {default as TypeLiteral} from './TypeLiteral.js';
-export default {}

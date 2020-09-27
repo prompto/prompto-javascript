@@ -1,5 +1,6 @@
-import { StrictSet, List } from './index.js'
-import { NotMutableError } from '../error/index.js'
+const List = require('./List.js').default;
+const StrictSet = require('./StrictSet.js').default;
+const NotMutableError = require('../error/NotMutableError.js').default;
 
 export default function Dictionary(mutable, entries) {
     if(entries)

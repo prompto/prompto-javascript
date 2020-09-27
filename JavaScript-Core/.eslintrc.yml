@@ -8,6 +8,7 @@ globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
   Set: readonly
+parser: babel-eslint
 parserOptions:
   sourceType: module
 plugins:

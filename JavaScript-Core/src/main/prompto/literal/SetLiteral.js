@@ -1,8 +1,9 @@
 import Literal from './Literal.js'
-import { ExpressionList } from '../utils/index.js'
+import { ExpressionList } from '../expression/index.js'
 import { SetValue, DecimalValue, TextValue } from '../value/index.js'
 import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from '../type/index.js'
 import { inferExpressionsType } from '../utils/index.js'
+import StrictSet from "../intrinsic/StrictSet.js"
 
 export default class SetLiteral extends Literal {
 
@@ -22,7 +23,6 @@ export default class SetLiteral extends Literal {
     }
 
     declare(transpiler) {
-        const StrictSet = require("../intrinsic/StrictSet").StrictSet;
         transpiler.require(StrictSet);
         this.expressions.declare(transpiler);
     }

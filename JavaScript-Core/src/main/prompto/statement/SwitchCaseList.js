@@ -1,3 +1,4 @@
+import ObjectList from '../utils/ObjectList.js'
 
 export default class SwitchCaseList extends ObjectList {
 

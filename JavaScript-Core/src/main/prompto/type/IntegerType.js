@@ -1,9 +1,10 @@
 import NativeType from './NativeType.js'
 import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from './index.js'
 import { Identifier } from '../grammar/index.js'
-import { IntegerValue, IntegerRange } from '../value/index.js'
+import { IntegerValue } from '../value/index.js'
 import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins.js'
-
+import { isAnInteger } from '../utils/index.js'
+import { Range, IntegerRange } from '../intrinsic/index.js'
 
 export default class IntegerType extends NativeType {
 
@@ -17,8 +18,7 @@ export default class IntegerType extends NativeType {
     }
 
     declare(transpiler) {
-        const isAnInteger = require("../utils/Utils").isAnInteger;
-        transpiler.require(isAnInteger);
+         transpiler.require(isAnInteger);
     }
 
     transpile(transpiler) {
@@ -234,9 +234,8 @@ export default class IntegerType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === IntegerType.instance) {
-            const module = require("../intrinsic/Range");
-            transpiler.require(module.Range);
-            transpiler.require(module.IntegerRange);
+            transpiler.require(Range);
+            transpiler.require(IntegerRange);
         } else {
             return super.declareRange(transpiler, other);
         }

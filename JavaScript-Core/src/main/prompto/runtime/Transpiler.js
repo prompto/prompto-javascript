@@ -1,5 +1,6 @@
 import { CategoryDeclaration } from '../declaration/index.js'
 import { List, StrictSet } from '../intrinsic/index.js'
+import { equalObjects } from '../utils/index.js'
 
 const coreNodeClasses = new Set(["Socket"]);
 
@@ -395,7 +396,6 @@ function unpatchObject() {
 
 function newTranspiler(context) {
     const transpiler = new Transpiler(context);
-    const equalObjects = require("../utils/Utils").equalObjects;
     transpiler.require(equalObjects);
     transpiler.require(print);
     transpiler.require(divide);
@@ -415,9 +415,9 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
-    transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); }");
-    transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; }");
-    transpiler.lines.push("intrinsic = {}");
+    transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");
+    transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; };");
+    transpiler.lines.push("var intrinsic = {};");
     return transpiler;
 }
 

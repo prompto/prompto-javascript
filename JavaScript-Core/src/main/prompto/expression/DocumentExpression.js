@@ -3,6 +3,7 @@ import { DocumentType } from '../type/index.js'
 import { DocumentValue, BlobValue, ConcreteInstance } from '../value/index.js'
 import { Blob, Document } from '../intrinsic/index.js'
 import { ReadWriteError } from '../error/index.js'
+import { ECleverParser } from "../parser/index.js"
 
 export default class DocumentExpression extends Expression {
  
@@ -58,7 +59,6 @@ export default class DocumentExpression extends Expression {
             let field = value["type"] || null;
             if (field == null)
                 throw new Error("Expecting a 'type' field!");
-            const ECleverParser = require("../parser/ECleverParser").ECleverParser;
             const itype = new ECleverParser(field).parse_standalone_type();
             if (itype != DocumentType.instance)
                 throw new Error("Expecting a DocumentValue type!");

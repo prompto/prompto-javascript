@@ -4,6 +4,7 @@ import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store/index.j
 import { CursorValue } from '../value/index.js'
 import { CategoryDeclaration } from '../declaration/index.js'
 import { InvalidDataError } from '../error/index.js'
+import { Cursor } from "../intrinsic/index.js";
 
 export default class FetchManyExpression extends Expression {
 
@@ -166,7 +167,6 @@ export default class FetchManyExpression extends Expression {
     }
 
     declare(transpiler) {
-        const Cursor = require("../intrinsic/Cursor").Cursor;
         transpiler.require(Cursor);
         transpiler.require(MatchOp);
         transpiler.require($DataStore);

@@ -17,5 +17,3 @@ export {default as PythonArgumentList} from './PythonArgumentList.js';
 export {default as PythonNativeCategoryBinding} from './PythonNativeCategoryBinding.js';
 export {default as Python2NativeCategoryBinding} from './Python2NativeCategoryBinding.js';
 export {default as Python3NativeCategoryBinding} from './Python3NativeCategoryBinding.js';
-
-export default {}

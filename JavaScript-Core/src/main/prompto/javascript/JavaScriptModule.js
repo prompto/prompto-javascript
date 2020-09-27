@@ -1,6 +1,5 @@
-const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-const path = isNodeJs ? import('path') : null;
 import { SyntaxError } from '../error/index.js'
+import { importPathIfNode } from '../utils/index.js'
 
 export default class JavaScriptModule {
 
@@ -76,6 +75,7 @@ export default class JavaScriptModule {
 
     resolve_runtime() {
         try {
+            const path = importPathIfNode();
             const folder = path.sep + "JavaScript-Core" + path.sep;
             const idx = module.filename.lastIndexOf(folder);
             const rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
@@ -90,6 +90,7 @@ export default class JavaScriptModule {
 
     resolve_path(part, replace) {
         try {
+            const path = importPathIfNode();
             const folder = path.sep + part + path.sep;
             const idx = module.filename.lastIndexOf(folder);
             let rootPath = module.filename.substring(0, idx + 1);
@@ -176,6 +177,7 @@ export default class JavaScriptModule {
 
     transpile_runtime(transpiler, name) {
         try {
+            const path = importPathIfNode();
             const folder = path.sep + "JavaScript-Core" + path.sep;
             const idx = module.filename.lastIndexOf(folder);
             const rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
@@ -197,6 +199,7 @@ export default class JavaScriptModule {
 
     transpile_path(transpiler, name, part, replace) {
         try {
+            const path = importPathIfNode();
             const folder = path.sep + part + path.sep;
             const idx = module.filename.lastIndexOf(folder);
             let rootPath = module.filename.substring(0, idx + 1);

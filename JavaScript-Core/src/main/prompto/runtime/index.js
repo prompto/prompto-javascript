@@ -13,4 +13,3 @@ export {default as MethodFinder} from './MethodFinder.js';
 export {default as LinkedValue} from './LinkedValue.js';
 export {default as LinkedVariable} from './LinkedVariable.js';
 export {default as WidgetField} from './WidgetField.js';
-export default {}

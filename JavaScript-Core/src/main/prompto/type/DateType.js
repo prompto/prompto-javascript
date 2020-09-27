@@ -2,10 +2,10 @@ import NativeType from './NativeType.js'
 import { DateTimeType, TimeType, PeriodType, IntegerType, BooleanType, RangeType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { DateValue } from '../value/index.js'
-import { LocalDate, DateRange, DateTime } from '../intrinsic/index.js'
+import { LocalDate, Range, DateRange, DateTime } from '../intrinsic/index.js'
 
 export default class DateType extends NativeType {
- 
+
     constructor() {
         super(new Identifier("Date"));
     }
@@ -128,9 +128,8 @@ export default class DateType extends NativeType {
 
     declareRange(transpiler, other) {
         if(other === DateType.instance) {
-            const module = require("../intrinsic/Range");
-            transpiler.require(module.Range);
-            transpiler.require(module.DateRange);
+            transpiler.require(Range);
+            transpiler.require(DateRange);
         } else {
             return super.declareRange(transpiler, other);
         }

@@ -1,8 +1,9 @@
 import NativeType from './NativeType.js'
-import { CharacterType, IntegerType, BooleanType } from './index.js'
+import { CharacterType, IntegerType, BooleanType, DecimalType } from './index.js'
 import { TextValue } from '../value/index.js'
 import { Identifier } from '../grammar/index.js'
 import { TypeFamily } from '../store/index.js'
+import { isAText } from '../utils/index.js'
 import { StartsWithMethodDeclaration, EndsWithMethodDeclaration, IndexOfMethodDeclaration,
     ReplaceMethodDeclaration, ReplaceAllMethodDeclaration, TrimMethodDeclaration, SplitMethodDeclaration,
     ToCapitalizedMethodDeclaration, ToLowerCaseMethodDeclaration, ToUpperCaseMethodDeclaration } from '../builtins/TextTypeBuiltins.js'
@@ -20,7 +21,6 @@ export default class TextType extends NativeType {
     }
 
     declare(transpiler) {
-        const isAText = require("../utils/Utils").isAText;
         transpiler.require(isAText);
     }
 
@@ -39,7 +39,6 @@ export default class TextType extends NativeType {
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
-        const DecimalType = require("./DecimalType").DecimalType;
         // can add anything to text
         left.transpile(transpiler);
         transpiler.append(" + ");

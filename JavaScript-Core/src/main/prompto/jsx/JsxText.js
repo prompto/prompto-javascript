@@ -1,6 +1,6 @@
 import IJsxExpression from './IJsxExpression.js'
 import { TextType } from '../type/index.js'
-const XmlEntities = require('html-entities').XmlEntities;
+import HtmlEntities from 'html-entities'
 
 export default class JsxText extends IJsxExpression {
 
@@ -23,7 +23,7 @@ export default class JsxText extends IJsxExpression {
 
     transpile(transpiler) {
         // convert html entities
-        const text = (new XmlEntities()).decode(this.text);
+        const text = (new HtmlEntities.XmlEntities()).decode(this.text);
         transpiler.append(JSON.stringify(text));
     }
 }

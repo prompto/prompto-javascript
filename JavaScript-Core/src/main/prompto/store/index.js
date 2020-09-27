@@ -3,4 +3,3 @@ export {default as $DataStore} from './DataStore.js';
 export {default as MatchOp} from './MatchOp.js';
 export {default as TypeFamily} from './TypeFamily.js';
 export {default as AttributeInfo} from './AttributeInfo.js';
-export default {}

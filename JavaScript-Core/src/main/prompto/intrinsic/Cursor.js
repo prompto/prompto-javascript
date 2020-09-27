@@ -1,4 +1,4 @@
-import { List } from './index.js'
+const List = require('./List.js').default;
 
 export default function Cursor(mutable, iterable) {
     this.mutable = mutable || false;

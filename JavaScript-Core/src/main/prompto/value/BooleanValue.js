@@ -9,6 +9,13 @@ export default class BooleanValue extends Value {
         this.value = value;
     }
 
+    static init() {
+        BooleanValue.TRUE = new BooleanValue(true);
+        BooleanValue.FALSE = new BooleanValue(false);
+        BooleanValue.TRUE.not = BooleanValue.FALSE;
+        BooleanValue.FALSE.not = BooleanValue.TRUE;
+    }
+
     static ValueOf(value) {
         return value ? BooleanValue.TRUE : BooleanValue.FALSE;
     }
@@ -65,9 +72,4 @@ export default class BooleanValue extends Value {
             json[fieldName] = this.value;
     }
 }
-
-BooleanValue.TRUE = new BooleanValue(true);
-BooleanValue.FALSE = new BooleanValue(false);
-BooleanValue.TRUE.not = BooleanValue.FALSE;
-BooleanValue.FALSE.not = BooleanValue.TRUE;
 

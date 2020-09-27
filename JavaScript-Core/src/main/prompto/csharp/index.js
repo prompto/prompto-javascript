@@ -11,4 +11,3 @@ export {default as CSharpExpressionList} from './CSharpExpressionList.js';
 export {default as CSharpThisExpression} from './CSharpThisExpression.js';
 export {default as CSharpIdentifierExpression} from './CSharpIdentifierExpression.js';
 export {default as CSharpNativeCategoryBinding} from "./CSharpNativeCategoryBinding.js";
-export default {}

@@ -1,11 +1,13 @@
-const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-const fs = isNodeJs ? import("fs") : {}; // nodejs only
 import antlr4 from 'antlr4';
 import { MParser } from './MParser.js'
+import MIndentingLexer from './MIndentingLexer.js'
+import MPromptoBuilder from './MPromptoBuilder.js'
+import { importFsIfNode } from '../utils/index.js'
+const fs = importFsIfNode();
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
-		if(isNodeJs && fs.existsSync(input)) {
+		if(fs && fs.existsSync && fs.existsSync(input)) {
 			input = new antlr4.FileStream(input);
 		} else {
 			input = new antlr4.InputStream(input);

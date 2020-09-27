@@ -311,7 +311,7 @@ test('SimpleArgumentAssignment', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E);
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E);
     as.toDialect(writer);
     expect(writer.toString()).toEqual("p.name as value");
 });
@@ -324,7 +324,7 @@ test('ComplexArgumentAssignment', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     as.toDialect(writer);
     expect(writer.toString()).toEqual("\"person\" + p.name as value");
 });
@@ -338,7 +338,7 @@ test('ArgumentAssignmentList1Arg', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     as.toDialect(writer);
     expect(writer.toString()).toEqual("\"person\" + p.name as value");
 });
@@ -355,7 +355,7 @@ test('MethodCallWith', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     mc.toDialect(writer);
     expect(writer.toString()).toEqual("print with \"person\" + p.name as value");
 });
@@ -373,7 +373,7 @@ test('Method1Parameter1Statement', () => {
     var expected = new prompto.param.CategoryParameter(type, new prompto.grammar.Identifier("p"));
     expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print with \"person\" + p.name as value");
 });
@@ -393,7 +393,7 @@ test('Method1Extended1Statement', () => {
         new prompto.grammar.IdentifierList(new prompto.grammar.Identifier("name")));
     expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print with \"object\" + o.name as value");
 });
@@ -413,7 +413,7 @@ test('Method1Array1Statement', () => {
         new prompto.grammar.Identifier("options"));
     expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print with \"array\" + args as value");
 });
@@ -627,7 +627,7 @@ test('SimpleDictLiteral', () => {
     var literal = parser.parse_literal_expression();
     expect(literal).toBeTruthy();
     expect(literal instanceof prompto.literal.DictLiteral).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     literal.toDialect(writer);
     expect(writer.toString()).toEqual("<\"john\":1234, eric:5678>");
 });
@@ -721,7 +721,7 @@ test('NativeSymbol', () => {
     var symbol = parser.parse_native_symbol();
     expect(symbol).toBeTruthy();
     expect(symbol instanceof prompto.expression.NativeSymbol).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     symbol.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -732,7 +732,7 @@ test('ExpressionWith', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -743,7 +743,7 @@ test('MethodUnresolved', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt instanceof prompto.statement.UnresolvedCall).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -754,7 +754,7 @@ test('MethodExpression', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt instanceof prompto.statement.UnresolvedCall).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -765,7 +765,7 @@ test('MethodWith', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -776,7 +776,7 @@ test('Instance', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_expression();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -787,7 +787,7 @@ test('AssignableInstance', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_assignable();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });

@@ -6,4 +6,3 @@ export {default as CodeParameter} from './CodeParameter.js';
 export {default as MethodParameter} from './MethodParameter.js';
 export {default as UnresolvedParameter} from './UnresolvedParameter.js';
 export {default as ParameterList} from './ParameterList.js';
-export default {}

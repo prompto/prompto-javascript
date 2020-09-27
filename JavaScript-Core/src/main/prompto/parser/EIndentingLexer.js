@@ -1,4 +1,5 @@
 import { ELexer } from './ELexer.js'
+import { Dialect } from './index.js'
 
 export default function EIndentingLexer(input) {
 	ELexer.call(this, input);

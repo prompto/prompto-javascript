@@ -1,4 +1,4 @@
-const Section = await import('../parser/Section.js');
+import Section from '../parser/Section.js';
 
 export default class Literal extends Section {
   
