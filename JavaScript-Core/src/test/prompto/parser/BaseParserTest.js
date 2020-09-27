@@ -246,7 +246,6 @@ exports.executeTest = function(context, testName) {
 }
 
 exports.executeMethod = function(context, methodName, cmdLineArgs) {
-    prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
     methodName = methodName || "main";
     var method = locateMethod(context, methodName, cmdLineArgs);
     prompto.store.$DataStore.instance = null; // make sure Store implementation is not transpiled
@@ -270,9 +269,8 @@ function wrapAndExtract(js, methodName, context) {
     // call it to inject/extract data
     var objs = wrapper(context);
     if(objs.store) {
-        var MemStoreModule = require("../../../main/prompto/memstore/MemStore");
-        objs.store.instance = prompto.store.$DataStore.instance = new MemStoreModule.MemStore();
-        MemStoreModule.Cursor = objs.cursor;
+        objs.store.instance = prompto.store.$DataStore.instance = new prompto.memstore.MemStore();
+        prompto.memstore.MemStore.Cursor = objs.cursor;
     }
     return objs.method;
 }

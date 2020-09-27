@@ -1,4 +1,7 @@
-var MemStoreModule = require("./src/main/prompto/memstore/MemStore");
-MemStoreModule.Cursor = Cursor;
-$DataStore.instance = new MemStoreModule.MemStore();
+import MemStore from "./src/main/prompto/memstore/MemStore.js"
+import DataStore from "./src/main/prompto/store/DataStore.js"
+
+MemStore.Cursor = Cursor;
+DataStore.instance = $DataStore.instance = new MemStore();
+
 main$Text_dict();

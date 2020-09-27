@@ -1,8 +1,10 @@
 import { MemStore } from '../memstore/index.js'
 
-export default function $DataStore() {
+export default class $DataStore {
 
+    static init() {
+        $DataStore.instance = new MemStore();
+    }
 }
 
-$DataStore.instance = new MemStore();
-
+$DataStore.instance = null;
