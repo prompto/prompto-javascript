@@ -1,89 +1,86 @@
 var antlr4 = require("antlr4");
 var prompto = require("../../../../main/prompto/index");
 
-function OTestParser(code) {
-	prompto.parser.OCleverParser.call(this, code);
-	return this;
+class OTestParser extends prompto.parser.OCleverParser {
+	constructor(code) {
+		super(code);
+	}
+
+	value(tree) {
+		var builder = new prompto.parser.OPromptoBuilder(this);
+		var walker = new antlr4.tree.ParseTreeWalker();
+		walker.walk(builder, tree);
+		return builder.getNodeValue(tree);
+	}
+
+	parse_instance_expression() {
+		return this.value(this.instance_expression());
+	}
+
+	parse_range_literal() {
+		return this.value(this.range_literal());
+	}
+
+	parse_tuple_literal() {
+		return this.value(this.tuple_literal());
+	}
+
+	parse_attribute_declaration() {
+		return this.value(this.attribute_declaration());
+	}
+
+	parse_category_declaration() {
+		return this.value(this.category_declaration());
+	}
+
+	parse_typed_argument() {
+		return this.value(this.typed_argument());
+	}
+
+	parse_argument_list() {
+		return this.value(this.argument_list());
+	}
+
+	parse_method_call_statement() {
+		return this.value(this.method_call_statement());
+	}
+
+	parse_native_method_declaration() {
+		return this.value(this.native_method_declaration());
+	}
+
+	parse_concrete_method_declaration() {
+		return this.value(this.concrete_method_declaration());
+	}
+
+	parse_constructor_expression() {
+		return this.value(this.constructor_expression());
+	}
+
+	parse_assign_instance_statement() {
+		return this.value(this.assign_instance_statement());
+	}
+
+	parse_native_statement() {
+		return this.value(this.native_statement());
+	}
+
+	parse_literal_expression() {
+		return this.value(this.literal_expression());
+	}
+
+	parse_native_symbol() {
+		return this.value(this.native_symbol());
+	}
+
+	parse_statement() {
+		return this.value(this.statement());
+	}
+
+	parse_expression() {
+		return this.value(this.expression());
+	}
 }
-
-OTestParser.prototype = Object.create(prompto.parser.OCleverParser.prototype);
-OTestParser.prototype.constructor = OTestParser;
-
-OTestParser.prototype.value = function (tree) {
-	var builder = new prompto.parser.OPromptoBuilder(this);
-	var walker = new antlr4.tree.ParseTreeWalker();
-	walker.walk(builder, tree);
-	return builder.getNodeValue(tree);
-};
-
-OTestParser.prototype.parse_instance_expression = function() {
-	return this.value(this.instance_expression());
-};
-
-OTestParser.prototype.parse_range_literal = function() {
-	return this.value(this.range_literal());
-};
-
-OTestParser.prototype.parse_tuple_literal = function() {
-	return this.value(this.tuple_literal());
-};
-
-OTestParser.prototype.parse_attribute_declaration = function() {
-	return this.value(this.attribute_declaration());
-};
-
-OTestParser.prototype.parse_category_declaration = function() {
-	return this.value(this.category_declaration());
-};
-
-OTestParser.prototype.parse_typed_argument = function() {
-	return this.value(this.typed_argument());
-};
-
-OTestParser.prototype.parse_argument_list = function() {
-	return this.value(this.argument_list());
-};
-
-OTestParser.prototype.parse_method_call_statement = function() {
-	return this.value(this.method_call_statement());
-};
-
-OTestParser.prototype.parse_native_method_declaration = function() {
-	return this.value(this.native_method_declaration());
-};
-
-OTestParser.prototype.parse_concrete_method_declaration = function() {
-	return this.value(this.concrete_method_declaration());
-};
-
-OTestParser.prototype.parse_constructor_expression = function() {
-	return this.value(this.constructor_expression());
-};
-
-OTestParser.prototype.parse_assign_instance_statement = function() {
-	return this.value(this.assign_instance_statement());
-};
-
-OTestParser.prototype.parse_native_statement = function() {
-	return this.value(this.native_statement());
-};
-
-OTestParser.prototype.parse_literal_expression = function() {
-	return this.value(this.literal_expression());
-};
-
-OTestParser.prototype.parse_native_symbol = function() {
-	return this.value(this.native_symbol());
-};
-
-OTestParser.prototype.parse_statement = function() {
-	return this.value(this.statement());
-};
-
-OTestParser.prototype.parse_expression = function() {
-	return this.value(this.expression());
-};
-
 
 
 test('Tuple ', () => {

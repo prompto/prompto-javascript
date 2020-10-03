@@ -1,5 +1,5 @@
 import antlr4 from 'antlr4';
-import { MParser } from './MParser.js'
+import MParser from './MParser.js'
 import MIndentingLexer from './MIndentingLexer.js'
 import MPromptoBuilder from './MPromptoBuilder.js'
 import { importFsIfNode } from '../utils/index.js'
@@ -22,34 +22,37 @@ function createInput(input) {
 	return input;
 }
 
-export default function MCleverParser(input) {
-	MParser.call(this,createInput(input));
-	this.path = "";
-	return this;
+export default class MCleverParser extends MParser {
+
+	constructor(input) {
+		super(createInput(input));
+		this.path = "";
+		return this;
+	}
+
+	parse() {
+		return this.parse_declaration_list();
+	}
+
+	parse_declaration_list() {
+		return this.doParse(this.declaration_list, true);
+	}
+
+	arse_repl_input() {
+		return this.doParse(this.repl, true);
+	}
+
+	equalToken() {
+		return MParser.EQUAL;
+	}
+
+	doParse(rule, addLF) {
+		this.getTokenStream().tokenSource.addLF = addLF;
+		const tree = rule.bind(this)();
+		const builder = new MPromptoBuilder(this);
+		const walker = new antlr4.tree.ParseTreeWalker();
+		walker.walk(builder, tree);
+		return builder.getNodeValue(tree);
+	}
+
 }
-
-MCleverParser.prototype = Object.create(MParser.prototype);
-MCleverParser.prototype.constructor = MCleverParser;
-
-MCleverParser.prototype.parse = function() {
-	return this.parse_declaration_list();
-};
-
-MCleverParser.prototype.parse_declaration_list = function() {
-	return this.doParse(this.declaration_list, true);
-};
-
-MCleverParser.prototype.parse_repl_input = function() {
-	return this.doParse(this.repl, true);
-};
-
-MCleverParser.prototype.equalToken = () => MParser.EQUAL;
-
-MCleverParser.prototype.doParse = function(rule, addLF) {
-    this.getTokenStream().tokenSource.addLF = addLF;
-    const tree = rule.bind(this)();
-    const builder = new MPromptoBuilder(this);
-    const walker = new antlr4.tree.ParseTreeWalker();
-    walker.walk(builder, tree);
-    return builder.getNodeValue(tree);
-};
