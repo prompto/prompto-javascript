@@ -1,8 +1,8 @@
 export {default as Location} from './Location.js';
 export {default as Section} from './Section.js';
-export {EParserListener} from './EParserListener.js';
-export {OParserListener} from './OParserListener.js';
-export {MParserListener} from './MParserListener.js';
+export {default as EParserListener} from './EParserListener.js';
+export {default as OParserListener} from './OParserListener.js';
+export {default as MParserListener} from './MParserListener.js';
 export {default as EParser} from './EParser.js';
 export {default as OParser} from './OParser.js';
 export {default as MParser} from './MParser.js';

@@ -1,4 +1,4 @@
-import { ELexer } from './ELexer.js'
+import { default as ELexer } from './ELexer.js'
 import { Dialect } from './index.js'
 
 export default class EIndentingLexer extends ELexer {

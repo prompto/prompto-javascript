@@ -1,7 +1,7 @@
 import antlr4 from 'antlr4';
-import {ArgsLexer} from './ArgsLexer.js';
-import {ArgsParser} from './ArgsParser.js';
-import {ArgsParserListener} from './ArgsParserListener.js';
+import ArgsLexer from './ArgsLexer.js';
+import ArgsParser from './ArgsParser.js';
+import ArgsParserListener from './ArgsParserListener.js';
 
 class CmdLineBuilder extends ArgsParserListener {
 
