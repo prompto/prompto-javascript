@@ -58,7 +58,7 @@ export default class MPromptoBuilder extends MParserListener {
     }
 
 
-    getHiddenTokensText = hidden => {
+    getHiddenTokensText(hidden) {
         if (hidden == null || hidden.length === 0)
             return null;
         else
@@ -83,7 +83,9 @@ export default class MPromptoBuilder extends MParserListener {
         return within;
     }
 
-    isNotIndent = tree => !tree.symbol || tree.symbol.type != parser.MParser.INDENT
+    isNotIndent(tree) {
+        return !tree.symbol || tree.symbol.type != parser.MParser.INDENT;
+    }
 
     readAnnotations(ctxs) {
         const annotations = ctxs.map(function (csc) {
@@ -170,11 +172,6 @@ export default class MPromptoBuilder extends MParserListener {
     exitBlob_expression(ctx) {
         const exp = this.getNodeValue(ctx.expression());
         this.setNodeValue(ctx, new expression.BlobExpression(exp));
-    }
-
-
-    exitBlobType(ctx) {
-        this.setNodeValue(ctx, type.BlobType.instance);
     }
 
 
@@ -2734,11 +2731,6 @@ export default class MPromptoBuilder extends MParserListener {
         const item = this.getNodeValue(ctx.item);
         const arg = new python.PythonOrdinalArgument(item);
         this.setNodeValue(ctx, new python.PythonArgumentList(arg));
-    }
-
-    exitPythonOrdinalOnlyArgumentList(ctx) {
-        const ordinal = this.getNodeValue(ctx.ordinal);
-        this.setNodeValue(ctx, ordinal);
     }
 
 

@@ -56,7 +56,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
 
-    getHiddenTokensText = hidden => {
+    getHiddenTokensText(hidden) {
         if (hidden == null || hidden.length === 0)
             return null;
         else
@@ -81,7 +81,9 @@ export default class EPromptoBuilder extends EParserListener {
         return within;
     }
 
-    isNotIndent = tree => !tree.symbol || tree.symbol.type != parser.EParser.INDENT
+    isNotIndent(tree) {
+        return !tree.symbol || tree.symbol.type != parser.EParser.INDENT;
+    }
 
     readAnnotations(ctxs) {
         const annotations = ctxs.map(function (csc) {
@@ -171,11 +173,6 @@ export default class EPromptoBuilder extends EParserListener {
     exitBlobExpression(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
-    }
-
-
-    exitBlobType(ctx) {
-        this.setNodeValue(ctx, type.BlobType.instance);
     }
 
 
@@ -327,36 +324,6 @@ export default class EPromptoBuilder extends EParserListener {
         const value = this.getNodeValue(ctx.value);
         const entry = new literal.DictEntry(key, value);
         this.setNodeValue(ctx, entry);
-    }
-
-
-    exitDoc_entry_list(ctx) {
-        const items = new literal.DocEntryList(null, null);
-        ctx.doc_entry().forEach(function (r) {
-            const item = this.getNodeValue(r);
-            items.add(item);
-        }, this);
-        this.setNodeValue(ctx, items);
-    }
-
-
-    exitDoc_entry(ctx) {
-        const key = this.getNodeValue(ctx.key);
-        const value = this.getNodeValue(ctx.value);
-        const entry = new literal.DocEntry(key, value);
-        this.setNodeValue(ctx, entry);
-    }
-
-
-    exitDocKeyIdentifier(ctx) {
-        const text = ctx.name.getText();
-        this.setNodeValue(ctx, new literal.DocIdentifierKey(new grammar.Identifier(text)));
-    }
-
-
-    exitDocKeyText(ctx) {
-        const text = ctx.name.text;
-        this.setNodeValue(ctx, new literal.DocTextKey(text));
     }
 
 

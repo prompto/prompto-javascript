@@ -165,12 +165,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitBlobType(ctx) {
-        this.setNodeValue(ctx, type.BlobType.instance);
-    }
-
-
-    exitBooleanLiteral(ctx) {
+   exitBooleanLiteral(ctx) {
         this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.getText()));
     }
 
@@ -2012,7 +2007,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitOperator_method_declaration = function (ctx) {
+    exitOperator_method_declaration(ctx) {
         const op = this.getNodeValue(ctx.op);
         const arg = this.getNodeValue(ctx.arg);
         const typ = this.getNodeValue(ctx.typ);
@@ -2740,12 +2735,6 @@ export default class OPromptoBuilder extends OParserListener {
         const arg = new python.PythonOrdinalArgument(item);
         this.setNodeValue(ctx, new python.PythonArgumentList(arg));
     }
-
-    exitPythonOrdinalOnlyArgumentList(ctx) {
-        const ordinal = this.getNodeValue(ctx.ordinal);
-        this.setNodeValue(ctx, ordinal);
-    }
-
 
     exitPythonSelectorExpression(ctx) {
         const parent = this.getNodeValue(ctx.parent);

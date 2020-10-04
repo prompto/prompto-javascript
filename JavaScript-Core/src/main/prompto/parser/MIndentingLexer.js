@@ -87,7 +87,7 @@ export default class MIndentingLexer extends MLexer {
 		}
 	}
 
-	deriveToken = (token, type) => {
+	deriveToken(token, type) {
 		const res = token.clone();
 		res.type = type;
 		if (token.type === MLexer.EOF)
@@ -95,7 +95,7 @@ export default class MIndentingLexer extends MLexer {
 		return res;
 	}
 
-	countIndents = text => {
+	countIndents(text) {
 		let count = 0;
 		for (let i = 0; i < text.length; i++) {
 			switch (text[i]) {
