@@ -6,8 +6,8 @@ let path = null;
 let fs = null;
 
 if(isNodeJs()) {
-    import("path").then(module => path = module);
-    import("fs").then(module => fs = module);
+    import(/* webpackMode: "weak" */"path").then(module => path = module);
+    import(/* webpackMode: "weak" */"fs").then(module => fs = module);
 }
 
 function importPathIfNode() {

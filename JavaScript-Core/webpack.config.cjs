@@ -18,7 +18,11 @@ module.exports = {
             {
                 test: /\.(js)$/,
                 exclude: [/node_modules/,/antlr4/],
-                use: ["eslint-loader", 'webpack-conditional-loader']
+                use: [
+                        'babel-loader',
+                        "eslint-loader",
+                        'webpack-conditional-loader'
+                    ]
             }
         ]
     },

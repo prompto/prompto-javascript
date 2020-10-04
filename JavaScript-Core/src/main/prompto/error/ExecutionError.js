@@ -7,13 +7,13 @@ let CategoryType = null;
 let Argument = null;
 let ArgumentList = null;
 // use dynamic import to avoid reentrant import
-import('../runtime/ErrorVariable.js').then(module => ErrorVariable=module.default);
-import('../param/UnresolvedParameter.js').then(module => UnresolvedParameter=module.default);
-import('../literal/TextLiteral.js').then(module => TextLiteral=module.default);
-import('../expression/ConstructorExpression.js').then(module => ConstructorExpression=module.default);
-import('../type/CategoryType.js').then(module => CategoryType=module.default);
-import('../grammar/Argument.js').then(module => Argument=module.default);
-import('../grammar/ArgumentList.js').then(module => ArgumentList=module.default);
+import(/* webpackMode: "eager" */'../runtime/ErrorVariable.js').then(module => ErrorVariable=module.default);
+import(/* webpackMode: "eager" */'../param/UnresolvedParameter.js').then(module => UnresolvedParameter=module.default);
+import(/* webpackMode: "eager" */'../literal/TextLiteral.js').then(module => TextLiteral=module.default);
+import(/* webpackMode: "eager" */'../expression/ConstructorExpression.js').then(module => ConstructorExpression=module.default);
+import(/* webpackMode: "eager" */'../type/CategoryType.js').then(module => CategoryType=module.default);
+import(/* webpackMode: "eager" */'../grammar/Argument.js').then(module => Argument=module.default);
+import(/* webpackMode: "eager" */'../grammar/ArgumentList.js').then(module => ArgumentList=module.default);
 
 export default class ExecutionError extends PromptoError {
 

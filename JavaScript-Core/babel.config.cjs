@@ -10,4 +10,6 @@ module.exports = {
             },
         ],
     ],
+    plugins: ["@babel/plugin-proposal-class-properties"],
+    compact : true
 };
