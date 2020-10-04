@@ -4,8 +4,6 @@ const antlr4 = require('antlr4');
 const OParserListener = require('./OParserListener').default;
 const AbstractParser = require('./AbstractParser.js').default;
 
-const grammarFileName = "OParser.g4";
-
 
 const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u5964\u0003\u00b7\u0b2c\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004",
@@ -2112,6 +2110,8 @@ const ruleNames =  [ "enum_category_declaration", "enum_native_declaration",
                      "css_field", "css_identifier", "css_value", "css_text" ];
 
 export default class OParser extends AbstractParser {
+
+	static grammarFileName = "OParser.g4";
 
     constructor(input) {
         super(input);
