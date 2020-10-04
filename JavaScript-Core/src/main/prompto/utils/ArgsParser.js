@@ -1,7 +1,7 @@
 // Generated from ArgsParser.g4 by ANTLR 4.8
 // jshint ignore: start
-const antlr4 = require('antlr4');
-const ArgsParserListener = require('./ArgsParserListener').default;
+import antlr4 from 'antlr4';
+import ArgsParserListener from './ArgsParserListener.js';
 
 const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u5964\u0003\u0007\u001e\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004",
@@ -31,22 +31,19 @@ const decisionsToDFA = atn.decisionToState.map( (ds, index) => new antlr4.dfa.DF
 
 const sharedContextCache = new antlr4.PredictionContextCache();
 
-const literalNames = [ null, null, "'='", "'-'", "' '" ];
-
-const symbolicNames = [ null, "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
-
-const ruleNames =  [ "parse", "entry", "key", "value" ];
-
 export default class ArgsParser extends antlr4.Parser {
 
-	static grammarFileName = "ArgsParser.g4";
+    static grammarFileName = "ArgsParser.g4";
+    static literalNames = [ null, null, "'='", "'-'", "' '" ];
+    static symbolicNames = [ null, "STRING", "EQUALS", "DASH", "WS", "ELEMENT" ];
+    static ruleNames = [ "parse", "entry", "key", "value" ];
 
     constructor(input) {
         super(input);
         this._interp = new antlr4.atn.ParserATNSimulator(this, atn, decisionsToDFA, sharedContextCache);
-        this.ruleNames = ruleNames;
-        this.literalNames = literalNames;
-        this.symbolicNames = symbolicNames;
+        this.ruleNames = ArgsParser.ruleNames;
+        this.literalNames = ArgsParser.literalNames;
+        this.symbolicNames = ArgsParser.symbolicNames;
     }
 
     get atn() {

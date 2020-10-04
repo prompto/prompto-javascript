@@ -1,6 +1,6 @@
 // Generated from MLexer.g4 by ANTLR 4.8
 // jshint ignore: start
-const antlr4 = require('antlr4');
+import antlr4 from 'antlr4';
 
 
 
@@ -1424,5 +1424,4 @@ MLexer.VERSION_LITERAL = 184;
 MLexer.JSX_TEXT = 185;
 
 
-module.exports.MLexer = MLexer;
 

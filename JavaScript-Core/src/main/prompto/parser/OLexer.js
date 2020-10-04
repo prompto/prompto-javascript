@@ -1,6 +1,6 @@
 // Generated from OLexer.g4 by ANTLR 4.8
 // jshint ignore: start
-const antlr4 = require('antlr4');
+import antlr4 from 'antlr4';
 
 
 
@@ -1420,5 +1420,4 @@ OLexer.VERSION_LITERAL = 180;
 OLexer.JSX_TEXT = 181;
 
 
-module.exports.OLexer = OLexer;
 

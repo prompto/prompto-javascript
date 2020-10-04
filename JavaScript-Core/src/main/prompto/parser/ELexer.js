@@ -1,6 +1,6 @@
 // Generated from ELexer.g4 by ANTLR 4.8
 // jshint ignore: start
-const antlr4 = require('antlr4');
+import antlr4 from 'antlr4';
 
 
 
@@ -1435,5 +1435,4 @@ ELexer.VERSION_LITERAL = 184;
 ELexer.JSX_TEXT = 185;
 
 
-module.exports.ELexer = ELexer;
 

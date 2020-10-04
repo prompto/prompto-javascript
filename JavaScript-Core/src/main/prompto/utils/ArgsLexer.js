@@ -1,6 +1,6 @@
 // Generated from ArgsLexer.g4 by ANTLR 4.8
 // jshint ignore: start
-const antlr4 = require('antlr4');
+import antlr4 from 'antlr4';
 
 
 
@@ -72,5 +72,4 @@ ArgsLexer.WS = 4;
 ArgsLexer.ELEMENT = 5;
 
 
-module.exports.ArgsLexer = ArgsLexer;
 
