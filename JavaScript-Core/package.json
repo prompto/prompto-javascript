@@ -20,7 +20,8 @@
     "jest": "^26.4.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.12",
-    "webpack-conditional-loader": "^1.0.12"
+    "webpack-conditional-loader": "^1.0.12",
+    "terser-webpack-plugin": "^4.2.2"
   },
   "dependencies": {
     "antlr4": "4.8.0",

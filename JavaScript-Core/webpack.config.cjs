@@ -1,5 +1,14 @@
-var path = require('path');
-var target_dir = path.resolve(__dirname, "../../prompto-factory/CodeFactory/CodeFactory/src/main/resources/js/lib/")
+const TerserPlugin = require('terser-webpack-plugin');
+const path = require('path');
+const target_dir = path.resolve(__dirname, "../../prompto-factory/CodeFactory/CodeFactory/src/main/resources/js/lib/")
+
+const terser_options = {
+    // do not mangle ProblemCollector to allow deriving it
+    // terserOptions: { mangle: { keep_classnames: true, reserved: [ "ProblemCollector" ] } },
+    // do not generate LICENSE file
+    extractComments: false
+};
+const terser_plugin = new TerserPlugin(terser_options);
 
 module.exports = {
     entry: './src/main/index-full.js',
@@ -12,6 +21,9 @@ module.exports = {
         module: "empty",
         net: "empty",
         fs: "empty"
+    },
+    optimization: {
+        minimizer : [ terser_plugin ]
     },
     module: {
         rules: [
