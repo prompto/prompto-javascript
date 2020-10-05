@@ -30,7 +30,7 @@ function parseTokenNames(lexer) {
 	var tokens = parseTokens(lexer);
 	var s = "";
 	for(var i=0; i<tokens.length; i++) {
-		s += ELexer.prototype.symbolicNames[tokens[i].type] + " ";
+		s += ELexer.symbolicNames[tokens[i].type] + " ";
 	}
 	return s.substring(0,s.length-1);
 }
@@ -58,7 +58,7 @@ function parseTokenNamesFromResource(input) {
 function tokenNamesAsString(tokenTypes) {
 	var s = "";
 	for(var i=0;i<tokenTypes.length;i++) {
-		s += ELexer.prototype.symbolicNames[tokenTypes[i]]  + " ";
+		s += ELexer.symbolicNames[tokenTypes[i]]  + " ";
 	}
 	return s.substring(0,s.length-1);
 }

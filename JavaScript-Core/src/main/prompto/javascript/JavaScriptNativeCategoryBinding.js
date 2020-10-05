@@ -1,83 +1,76 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+import NativeCategoryBinding from '../grammar/NativeCategoryBinding.js'
+
 if(global && !global.Event)
-    global.Event = function() {};
+    global.Event = () => {};
 
-function JavaScriptNativeCategoryBinding(identifier, module) {
-    NativeCategoryBinding.call(this);
-    this.identifier = identifier;
-    this.module = module || null;
-    return this;
+export default class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
+
+    constructor(identifier, module) {
+        super();
+        this.identifier = identifier;
+        this.module = module || null;
+    }
+
+    resolve() {
+        const m = this.resolve_module();
+        if(m==null) {
+            try {
+                return eval(this.identifier);
+            } catch(e) {
+                return null;
+            }
+        } else {
+            return m[this.identifier] || m["default"] || null;
+        }
+    }
+
+    resolve_module(context) {
+        if (this.module == null) {
+            return null;
+        } else {
+            return this.module.resolve();
+        }
+    }
+
+    resolveWidget(context) {
+        const m = this.resolve_widget_module();
+        if(m==null) {
+            try {
+                return eval(this.identifier);
+            } catch(e) {
+                return null;
+            }
+        } else {
+            return m[this.identifier] || m["default"] || null;
+        }
+    }
+
+    resolve_widget_module(context) {
+        if (this.module == null) {
+            return null;
+        } else {
+            return eval(this.module.toString());
+        }
+    }
+
+    toDialect(writer) {
+        writer.append("JavaScript: ");
+        writer.append(this.identifier);
+        if(this.module!=null)
+            this.module.toDialect(writer);
+    }
+
+    transpile(transpiler) {
+        if(this.module)
+            this.module.transpile(transpiler, this.identifier);
+    }
+
+    transpileWidget(transpiler) {
+        // assumption is that required module is already imported through other means
+        if(this.module!=null) {
+            transpiler.append("var ").append(this.identifier).append(" = ");
+            this.module.transpileWidget(transpiler);
+            transpiler.append(".").append(this.identifier).append(";").newLine();
+        }
+    }
 }
-
-JavaScriptNativeCategoryBinding.prototype = Object.create(NativeCategoryBinding.prototype);
-JavaScriptNativeCategoryBinding.prototype.creator = JavaScriptNativeCategoryBinding;
-
-JavaScriptNativeCategoryBinding.prototype.resolve = function() {
-    var m = this.resolve_module();
-    if(m==null) {
-        try {
-            return eval(this.identifier);
-        } catch(e) {
-            return null;
-        }
-    } else {
-        return m[this.identifier] || null;
-    }
-};
-
-JavaScriptNativeCategoryBinding.prototype.resolve_module = function(context) {
-    if (this.module == null) {
-        return null;
-    } else {
-        return this.module.resolve();
-    }
-};
-
-
-JavaScriptNativeCategoryBinding.prototype.resolveWidget = function(context) {
-    var m = this.resolve_widget_module();
-    if(m==null) {
-        try {
-            return eval(this.identifier);
-        } catch(e) {
-            return null;
-        }
-    } else {
-        return m[this.identifier] || null;
-    }
-};
-
-
-JavaScriptNativeCategoryBinding.prototype.resolve_widget_module = function(context) {
-    if (this.module == null) {
-        return null;
-    } else {
-        return eval(this.module.toString());
-    }
-};
-
-
-JavaScriptNativeCategoryBinding.prototype.toDialect = function(writer) {
-    writer.append("JavaScript: ");
-    writer.append(this.identifier);
-    if(this.module!=null)
-        this.module.toDialect(writer);
-};
-
-JavaScriptNativeCategoryBinding.prototype.transpile = function(transpiler) {
-    if(this.module)
-        this.module.transpile(transpiler, this.identifier);
-};
-
-
-JavaScriptNativeCategoryBinding.prototype.transpileWidget = function(transpiler) {
-    // assumption is that required module is already imported through other means
-    if(this.module!=null) {
-        transpiler.append("var ").append(this.identifier).append(" = ");
-        this.module.transpileWidget(transpiler);
-        transpiler.append(".").append(this.identifier).append(";").newLine();
-    }
-};
-
-exports.JavaScriptNativeCategoryBinding = JavaScriptNativeCategoryBinding;
-

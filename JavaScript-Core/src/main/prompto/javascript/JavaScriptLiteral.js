@@ -1,24 +1,23 @@
-function JavaScriptLiteral(text) {
-    this.text = text;
-    this.value = eval(text);
-    return this;
+export default class JavaScriptLiteral {
+
+    constructor(text) {
+        this.text = text;
+        this.value = eval(text);
+    }
+
+    interpret(context) {
+        return this.value;
+    }
+
+    toString() {
+        return this.text;
+    }
+
+    toDialect(writer) {
+        writer.append(this.text);
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
 }
-
-JavaScriptLiteral.prototype.interpret = function(context) {
-    return this.value;
-};
-
-JavaScriptLiteral.prototype.toString = function() {
-    return this.text;
-};
-
-JavaScriptLiteral.prototype.toDialect = function(writer) {
-    writer.append(this.text);
-};
-
-
-JavaScriptLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
-
-exports.JavaScriptLiteral = JavaScriptLiteral;

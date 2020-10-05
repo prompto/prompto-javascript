@@ -1,29 +1,24 @@
-var DictionaryType = require("../type/DictionaryType").DictionaryType;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
-var Argument = require("../grammar/Argument").Argument;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var UnresolvedParameter = require("../param/UnresolvedParameter").UnresolvedParameter;
-var Identifier = require("../grammar/Identifier").Identifier;
-var DictLiteral = require("../literal/DictLiteral").DictLiteral;
-var MethodCall = require("../statement/MethodCall").MethodCall;
-var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var CmdLineParser = require("../utils/CmdLineParser").CmdLineParser;
-var DictionaryValue = require("../value/DictionaryValue").DictionaryValue;
-var ValueExpression = require("../expression/ValueExpression").ValueExpression;
-
-var argsType = new DictionaryType(TextType.instance);
+import { DictionaryType, TextType } from '../type/index.js'
+import { CmdLineParser } from '../utils/index.js'
+import { TextValue, DictionaryValue } from '../value/index.js'
+import { Identifier, Argument, ArgumentList } from '../grammar/index.js'
+import { ValueExpression, MethodSelector } from '../expression/index.js'
+import { MethodCall } from '../statement/index.js'
+import { UnresolvedParameter } from '../param/index.js'
+import { DictLiteral } from '../literal/index.js'
+import { SyntaxError } from '../error/index.js'
 
 function parseCmdLineArgs(cmdLineArgs) {
 	try {
-		var args = CmdLineParser.parse(cmdLineArgs);
-		var valueArgs = {};
-		Object.keys(args).forEach(function(s) {
-            var key = new TextValue(s);
-			var value = new TextValue(args[s]);
+		const args = CmdLineParser.parse(cmdLineArgs);
+		const valueArgs = {};
+		Object.keys(args).forEach(s => {
+            const key = new TextValue(s);
+			const value = new TextValue(args[s]);
 			valueArgs[key] = value;
 		});
-		var dict = new DictionaryValue(TextType.instance, valueArgs, false);
+		const dict = new DictionaryValue(TextType.instance, valueArgs, false);
+		const argsType = new DictionaryType(TextType.instance);
 		return new ValueExpression(argsType, dict);
 	} catch(e) {
 		// TODO
@@ -32,18 +27,18 @@ function parseCmdLineArgs(cmdLineArgs) {
 }
 
 function buildAssignments(method, cmdLineArgs) {
-	var assignments = new ArgumentList();
+	const assignments = new ArgumentList();
 	if(method.parameters.length==1) {
-		var id = method.parameters[0].id;
-		var value = parseCmdLineArgs(cmdLineArgs);
+		const id = method.parameters[0].id;
+		const value = parseCmdLineArgs(cmdLineArgs);
 		assignments.add(new Argument(new UnresolvedParameter(id), value));
 	}
 	return assignments;
 }
 
 
-function locateMethod(context, methodName, cmdLineArgs) {
-	var map = context.getRegisteredDeclaration(methodName);
+export function locateMethod(context, methodName, cmdLineArgs) {
+	const map = context.getRegisteredDeclaration(methodName);
 	if(map==null) {
 		throw new SyntaxError("Could not find a \"" + methodName + "\" method.");
 	}
@@ -59,16 +54,16 @@ function locateMethodInMap(map, cmdLineArgs) {
 }
 
 function locateMethodWithArgs(map) {
-    var protos = Object.keys(map.protos);
+    const protos = Object.keys(map.protos);
 	// try exact match first
-    for(var i=0;i<protos.length;i++) {
+    for(let i=0;i<protos.length;i++) {
         var method = map.protos[protos[i]];
         if(identicalArguments(method.parameters, arguments))
             return method;
     }
 	// match Text{} argument, will pass null
 	if(arguments.length==1) {
-        for(i=0;i<protos.length;i++) {
+        for(let i=0;i<protos.length;i++) {
             method = map.protos[protos[i]];
             if (isSingleTextDictArgument(method.parameters))
                 return method;
@@ -76,7 +71,7 @@ function locateMethodWithArgs(map) {
         }
 	}
 	// match no argument, will ignore options
-    for(i=0;i<protos.length;i++) {
+    for(let i=0;i<protos.length;i++) {
         method = map.protos[protos[i]];
 		if(method.parameters.length==0)
 			return method;
@@ -88,11 +83,12 @@ function isSingleTextDictArgument(args) {
 	if(args.length!=1) {
 		return false;
 	}
-	var arg = args[0];
-	var typ = arg.type ||null
+	const arg = args[0];
+	const typ = arg.type ||null;
 	if(typ==null) {
 		return false;
 	}
+	const argsType = new DictionaryType(TextType.instance);
 	return typ.equals(argsType);
 }
 
@@ -100,8 +96,8 @@ function identicalArguments(args, argTypes) {
 	if(args.length!=argTypes.length-1) {
 		return false;
 	}
-	for(var i=0;i<args.length;i++) {
-		var typ = args[i].typ || null;
+	for(let i=0;i<args.length;i++) {
+		const typ = args[i].typ || null;
 		if(typ==null) {
 			return false;
 		}
@@ -112,42 +108,39 @@ function identicalArguments(args, argTypes) {
 	return true;
 }
 
-function Interpreter() {
-}
+export default class Interpreter {
 
-Interpreter.interpret = function(context, methodName, cmdLineArgs) {
-	try {
-		var method = locateMethod(context, methodName, cmdLineArgs);
-		var assignments = buildAssignments(method, cmdLineArgs);
-		var call = new MethodCall(new MethodSelector(null, new Identifier(methodName)),assignments);
-		call.interpret(context);
-	} finally {
-		context.terminated();
-	}
-};
+    static interpret(context, methodName, cmdLineArgs) {
+        try {
+            const method = locateMethod(context, methodName, cmdLineArgs);
+            const assignments = buildAssignments(method, cmdLineArgs);
+            const call = new MethodCall(new MethodSelector(null, new Identifier(methodName)),assignments);
+            call.interpret(context);
+        } finally {
+            context.terminated();
+        }
+    }
 
+    static interpretTests(context) {
+        for(const name in context.tests) {
+            const test = context.tests[name];
+            const local = context.newLocalContext();
+            test.interpret(local);
+        }
+    }
 
-Interpreter.interpretTests = function(context) {
-    for(var name in context.tests) {
-        var test = context.tests[name];
-        var local = context.newLocalContext();
+    static interpretTest(context, name) {
+        const test = context.getRegisteredTest(name);
+        const local = context.newLocalContext();
         test.interpret(local);
     }
-};
 
-Interpreter.interpretTest = function(context, name) {
-    var test = context.getRegisteredTest(name);
-    var local = context.newLocalContext();
-    test.interpret(local);
-};
+    static executeTest(context, name) {
+        const test = context.getRegisteredTest(name);
+        const local = context.newLocalContext();
+        test.interpret(local);
+    }
+}
 
-Interpreter.executeTest = function(context, name) {
-    var test = context.getRegisteredTest(name);
-    var local = context.newLocalContext();
-    test.interpret(local);
-};
-
-exports.locateMethod = locateMethod;
-exports.Interpreter = Interpreter;
 
 

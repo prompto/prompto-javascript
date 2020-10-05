@@ -1,39 +1,31 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
-var MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-var MethodType = require("../type/MethodType").MethodType;
-var AnyType = require("../type/AnyType").AnyType;
+import PropertyValidator from './PropertyValidator.js'
+import { MethodType, AnyType } from '../type/index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
 
-function TypeSetValidator(types) {
-    PropertyValidator.call(this);
-    this.types = types;
-    return this;
+export default class TypeSetValidator extends PropertyValidator {
+
+    constructor(types) {
+        super();
+        this.types = types;
+    }
+
+    getType(context) {
+        return AnyType.instance;
+    }
+
+    validate(context, property) {
+        const actual = property.check(context);
+        if(!Array.from(this.types).some(type => type.isAssignableFrom(context, actual), this))
+            context.problemListener.reportIllegalAssignment(property, this.types, actual);
+    }
+
+    getMethodDeclarations(context) {
+        return Array.from(this.types)
+            .filter(t => t instanceof MethodType)
+            .map(function(t) {
+                const decls = context.getRegisteredDeclaration(this.type.name);
+                return decls instanceof MethodDeclarationMap ? decls.getAll() : [];
+            })
+            .reduce((reduced, current) => reduced.concat(current), []);
+    }
 }
-
-TypeSetValidator.prototype = Object.create(PropertyValidator.prototype);
-TypeSetValidator.prototype.constructor = TypeSetValidator;
-
-
-TypeSetValidator.prototype.getType = function(context) {
-    return AnyType.instance;
-};
-
-
-TypeSetValidator.prototype.validate = function(context, property) {
-    var actual = property.check(context);
-    if(!Array.from(this.types).some(function(type) { return type.isAssignableFrom(context, actual); }, this))
-        context.problemListener.reportIllegalAssignment(property, this.types, actual);
-};
-
-
-TypeSetValidator.prototype.getMethodDeclarations = function(context) {
-    return Array.from(this.types)
-        .filter(function(t) { return t instanceof MethodType; })
-        .map(function(t) {
-            var decls = context.getRegisteredDeclaration(this.type.name);
-            return decls instanceof MethodDeclarationMap ? decls.getAll() : [];
-        })
-        .reduce(function(reduced, current) { return reduced.concat(current); }, []);
-};
-
-
-exports.TypeSetValidator = TypeSetValidator;

@@ -1,12 +1,9 @@
-var PromptoError = require("./PromptoError").PromptoError;
+import PromptoError from './PromptoError.js'
 
-function SyntaxError(message) {
-	PromptoError.call(this, message);
-	return this;
+export default class SyntaxError extends PromptoError {
+
+	constructor(message) {
+		super(message);
+	}
+
 }
-
-SyntaxError.prototype = Object.create(PromptoError.prototype);
-SyntaxError.prototype.constructor = SyntaxError;
-
-exports.SyntaxError = SyntaxError;
-

@@ -1,100 +1,93 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var InvalidDataError = require("../error/InvalidDataError").InvalidDataError;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var BooleanValue = require("../value/BooleanValue").BooleanValue;
-var BreakResult = require("../runtime/BreakResult").BreakResult;
+import BaseStatement from './BaseStatement.js'
+import { BooleanType } from '../type/index.js'
+import { BooleanValue } from '../value/index.js'
+import { InvalidDataError } from '../error/index.js'
+import { BreakResult } from '../runtime/index.js'
 
-function DoWhileStatement(condition, statements) {
-	BaseStatement.call(this);
-	this.condition = condition;
-	this.statements = statements;
-	return this;
-}
-
-DoWhileStatement.prototype = Object.create(BaseStatement.prototype);
-DoWhileStatement.prototype.constructor = DoWhileStatement;
-
-
-DoWhileStatement.prototype.declare = function(transpiler) {
-    this.condition.declare(transpiler);
-    transpiler = transpiler.newChildTranspiler();
-    this.statements.declare(transpiler);
-};
-
-
-DoWhileStatement.prototype.transpile = function(transpiler) {
-    transpiler.append("do {").indent();
-    var child = transpiler.newChildTranspiler();
-    this.statements.transpile(child);
-    child.dedent().flush();
-    transpiler.append("} while(");
-    this.condition.transpile(transpiler);
-    transpiler.append(")");
-};
-
-
-DoWhileStatement.prototype.check = function (context) {
-    var cond = this.condition.check(context);
-    if (cond != BooleanType.instance) {
-        context.problemListener.reportError(this, "Expected a Boolean condition!");
+export default class DoWhileStatement extends BaseStatement {
+   
+    constructor(condition, statements) {
+        super();
+        this.condition = condition;
+        this.statements = statements;
     }
-    var child = context.newChildContext();
-    return this.statements.check(child, null);
-};
 
-DoWhileStatement.prototype.interpret = function(context) {
-	do {
-		var child = context.newChildContext();
-		var value = this.statements.interpret(child);
-        if(value==BreakResult.instance)
-            break;
-		if(value!=null)
-			return value;
-	} while(this.interpretCondition(context));
-	return null;
+    declare(transpiler) {
+        this.condition.declare(transpiler);
+        transpiler = transpiler.newChildTranspiler();
+        this.statements.declare(transpiler);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("do {").indent();
+        const child = transpiler.newChildTranspiler();
+        this.statements.transpile(child);
+        child.dedent().flush();
+        transpiler.append("} while(");
+        this.condition.transpile(transpiler);
+        transpiler.append(")");
+    }
+
+    check(context) {
+        const cond = this.condition.check(context);
+        if (cond != BooleanType.instance) {
+            context.problemListener.reportError(this, "Expected a Boolean condition!");
+        }
+        const child = context.newChildContext();
+        return this.statements.check(child, null);
+    }
+
+    interpret(context) {
+        do {
+            const child = context.newChildContext();
+            const value = this.statements.interpret(child);
+            if(value==BreakResult.instance)
+                break;
+            if(value!=null)
+                return value;
+        } while(this.interpretCondition(context));
+        return null;
+    }
+
+    interpretCondition(context) {
+        const value = this.condition.interpret(context);
+        if(!(value instanceof BooleanValue)) {
+            throw new InvalidDataError("Expected a Boolean, got:" + typeof(value));
+        }
+        return value.value;
+    }
+
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
+
+    toMDialect(writer) {
+        this.toEDialect(writer);
+    }
+
+    toEDialect(writer) {
+        writer.append("do:").newLine().indent();
+        this.statements.toDialect(writer);
+        writer.dedent().append("while ");
+        this.condition.toDialect(writer);
+        writer.newLine();
+    }
+
+    toODialect(writer) {
+        writer.append("do {").newLine().indent();
+        this.statements.toDialect(writer);
+        writer.dedent().append("} while (");
+        this.condition.toDialect(writer);
+        writer.append(");").newLine();
+    }
+
+    canReturn() {
+        return true;
+    }
+
+    locateSectionAtLine(line) {
+        return this.statements.locateSectionAtLine(line) || this;
+    }
 }
 
-DoWhileStatement.prototype.interpretCondition = function(context) {
-	var value = this.condition.interpret(context);
-	if(!(value instanceof BooleanValue)) {
-		throw new InvalidDataError("Expected a Boolean, got:" + typeof(value));
-	}
-	return value.value;
-};
-
-DoWhileStatement.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
-
-DoWhileStatement.prototype.toMDialect = function(writer) {
-    this.toEDialect(writer);
-};
-
-DoWhileStatement.prototype.toEDialect = function(writer) {
-    writer.append("do:").newLine().indent();
-    this.statements.toDialect(writer);
-    writer.dedent().append("while ");
-    this.condition.toDialect(writer);
-    writer.newLine();
-};
-
-DoWhileStatement.prototype.toODialect = function(writer) {
-    writer.append("do {").newLine().indent();
-    this.statements.toDialect(writer);
-    writer.dedent().append("} while (");
-    this.condition.toDialect(writer);
-    writer.append(");").newLine();
-};
-
-DoWhileStatement.prototype.canReturn = function() {
-    return true;
-};
-
-
-DoWhileStatement.prototype.locateSectionAtLine = function(line) {
-    return this.statements.locateSectionAtLine(line) || this;
-};
-
-
-exports.DoWhileStatement = DoWhileStatement;
 

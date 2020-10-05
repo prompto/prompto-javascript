@@ -1,11 +1,11 @@
 
-function NotPredicate(pred) {
-    this.pred = pred;
-    return this;
+export default class NotPredicate {
+
+    constructor(pred) {
+        this.pred = pred;
+    }
+
+    matches(stored) {
+        return !this.pred.matches(stored);
+    }
 }
-
-NotPredicate.prototype.matches = function(stored) {
-    return !this.pred.matches(stored);
-};
-
-exports.NotPredicate = NotPredicate;

@@ -1,83 +1,75 @@
-var Expression = require("./Expression").Expression;
-var CodeValue = require("../value/CodeValue").CodeValue;
-var PromptoError = require("../error/PromptoError").PromptoError;
+import Expression from './Expression.js'
+import { CodeValue } from '../value/index.js'
+import { SyntaxError, PromptoError } from '../error/index.js'
 
-function ExecuteExpression(id) {
-	Expression.call(this);
-	this.id = id;
-	return this;
-}
+export default class ExecuteExpression extends Expression {
 
+    constructor(id) {
+        super();
+        this.id = id;
+    }
 
-ExecuteExpression.prototype  = Object.create(Expression.prototype);
-ExecuteExpression.prototype.constructor = ExecuteExpression;
-
-Object.defineProperty(ExecuteExpression.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
-ExecuteExpression.prototype.toString = function() {
-	return "execute: " + this.name;
-};
+    toString() {
+        return "execute: " + this.name;
+    }
 
-ExecuteExpression.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
 
-ExecuteExpression.prototype.toEDialect = function(writer) {
-    writer.append("execute: ");
-    writer.append(this.name);
-};
+    toEDialect(writer) {
+        writer.append("execute: ");
+        writer.append(this.name);
+    }
 
-ExecuteExpression.prototype.toODialect = function(writer) {
-    writer.append("execute(");
-    writer.append(this.name);
-    writer.append(")");
-};
+    toODialect(writer) {
+        writer.append("execute(");
+        writer.append(this.name);
+        writer.append(")");
+    }
 
-ExecuteExpression.prototype.toMDialect = function(writer) {
-    this.toODialect(writer);
-};
+    toMDialect(writer) {
+        this.toODialect(writer);
+    }
 
-ExecuteExpression.prototype.check = function(context) {
-	try {
-		var value = context.getValue(this.id);
-		if(value instanceof CodeValue) {
-			return value.checkCode(context);
-		} else {
-			throw new SyntaxError("Expected code, got:" + value.toString());
-		}
-	} catch(e) {
-		if(e instanceof PromptoError) {
-			throw new SyntaxError(e.message);
-		}
-	}
-};
+    check(context) {
+        try {
+            const value = context.getValue(this.id);
+            if(value instanceof CodeValue) {
+                return value.checkCode(context);
+            } else {
+                throw new SyntaxError("Expected code, got:" + value.toString());
+            }
+        } catch(e) {
+            if(e instanceof PromptoError) {
+                throw new SyntaxError(e.message);
+            }
+        }
+    }
 
-ExecuteExpression.prototype.interpret = function(context) {
-	var value = context.getValue(this.id);
-	if(value instanceof CodeValue) {
-		return value.interpret(context);
-	} else {
-		throw new SyntaxError("Expected code, got:" + value.toString());
-	}
-};
+    interpret(context) {
+        const value = context.getValue(this.id);
+        if(value instanceof CodeValue) {
+            return value.interpret(context);
+        } else {
+            throw new SyntaxError("Expected code, got:" + value.toString());
+        }
+    }
 
+    declare(transpiler) {
+        const value = transpiler.context.getValue(this.id);
+        value.declareCode(transpiler);
+    }
 
-ExecuteExpression.prototype.declare = function(transpiler) {
-	var value = transpiler.context.getValue(this.id);
-	value.declareCode(transpiler);
-};
+    transpile(transpiler) {
+        transpiler.append("(");
+        const value = transpiler.context.getValue(this.id);
+        value.transpileCode(transpiler);
+        transpiler.append(")");
+    }
+}
 
-
-ExecuteExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("(");
-    var value = transpiler.context.getValue(this.id);
-    value.transpileCode(transpiler);
-    transpiler.append(")");
-};
-
-
-exports.ExecuteExpression = ExecuteExpression;

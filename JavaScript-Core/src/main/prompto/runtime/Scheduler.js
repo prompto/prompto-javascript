@@ -1,52 +1,49 @@
-var ApplicationContext = require("./ApplicationContext").ApplicationContext;
+import { ApplicationContext } from './index.js'
 
-function Scheduler() {
-    return this;
+export default class Scheduler {
+ 
+    static schedule(method, executeAt, repeatEvery, jobName) {
+        const runner = method.interpret ? () => { method.interpret(ApplicationContext.get()); } : method;
+        const jobId = ++Scheduler.lastJobId;
+        const delay = executeAt.date.valueOf() - (new Date()).valueOf();
+        const timerTask = repeatEvery != null ? Scheduler.makeRepeatingTask(runner, jobId, repeatEvery) : Scheduler.makeSingleTask(runner, jobId);
+        Scheduler.timers[jobId] = { id: setTimeout(timerTask, delay), cancel: function(id) { clearTimeout(id); } };
+        return jobId;
+    }
+
+    static makeSingleTask(runner, jobId) {
+        return () => {
+            try {
+                runner();
+            } finally {
+                delete Scheduler.timers[jobId];
+            }
+        };
+    }
+
+    static makeRepeatingTask(runner, jobId, repeatEvery) {
+        return () => {
+            try {
+                runner();
+            } finally {
+                const interval = repeatEvery.totalMilliseconds(); // TODO
+                Scheduler.timers[jobId] = { id: setInterval(() => {
+                        runner();
+                }, interval), cancel: function(id) { clearInterval(id); } };
+            }
+        };
+    }
+
+    static cancel(jobId) {
+      const timer = Scheduler.timers[jobId];
+      if(!timer)
+          console.log("Timer not found: " + jobId);
+      else {
+          delete Scheduler.timers[jobId];
+          timer.cancel(timer.id);
+      }
+    }
 }
 
 Scheduler.lastJobId = 0;
 Scheduler.timers = [];
-
-Scheduler.schedule = function(method, executeAt, repeatEvery, jobName) {
-    var runner = method.interpret ? function() { method.interpret(ApplicationContext.get()); } : method;
-    var jobId = ++Scheduler.lastJobId;
-    var delay = executeAt.date.valueOf() - (new Date()).valueOf();
-    var timerTask = repeatEvery != null ? Scheduler.makeRepeatingTask(runner, jobId, repeatEvery) : Scheduler.makeSingleTask(runner, jobId);
-    Scheduler.timers[jobId] = { id: setTimeout(timerTask, delay), cancel: function(id) { clearTimeout(id); } };
-    return jobId;
-};
-
-Scheduler.makeSingleTask = function(runner, jobId) {
-    return function() {
-        try {
-            runner();
-        } finally {
-            delete Scheduler.timers[jobId];
-        }
-    };
-};
-
-Scheduler.makeRepeatingTask = function(runner, jobId, repeatEvery) {
-    return function() {
-        try {
-            runner();
-        } finally {
-            var interval = repeatEvery.totalMilliseconds(); // TODO
-            Scheduler.timers[jobId] = { id: setInterval(function() {
-                    runner();
-            }, interval), cancel: function(id) { clearInterval(id); } };
-        }
-    };
-};
-
-Scheduler.cancel = function(jobId) {
-  var timer = Scheduler.timers[jobId];
-  if(!timer)
-      console.log("Timer not found: " + jobId);
-  else {
-      delete Scheduler.timers[jobId];
-      timer.cancel(timer.id);
-  }
-};
-
-exports.Scheduler = Scheduler;

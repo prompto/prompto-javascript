@@ -1,21 +1,13 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
 
-function CodeType()  {
-	NativeType.call(this, new Identifier("Code"));
-	return this;
+export default class CodeType extends NativeType {
+
+    constructor() {
+        super(new Identifier("Code"));
+    }
 }
-
-CodeType.prototype = Object.create(NativeType.prototype);
-CodeType.prototype.constructor = CodeType;
 
 CodeType.instance = new CodeType();
 
-/*
-@Override
-public Class<?> toJavaClass() {
-	return null;
-}
-*/
 
-exports.CodeType = CodeType;

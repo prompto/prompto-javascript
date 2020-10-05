@@ -1,50 +1,29 @@
-var EParserFactory = null;
-var OParserFactory = null;
-var MParserFactory = null;
+import { EParserFactory, OParserFactory, MParserFactory } from './index.js'
 
-exports.resolve = function() {
-    EParserFactory = require("./EParserFactory").EParserFactory;
-    OParserFactory = require("./OParserFactory").OParserFactory;
-    MParserFactory = require("./MParserFactory").MParserFactory;
-}
-
-function Dialect(name) {
+export default function Dialect(name) {
     this.name = name;
 	return this;
 }
 
 Dialect.E = new Dialect("E");
-Dialect.E.getParserFactory = function() {
-	return new EParserFactory();
-};
-Dialect.E.toDialect = function(w, o) {
+Dialect.E.getParserFactory = () => new EParserFactory();
+Dialect.E.toDialect = (w, o) => {
     o.toEDialect(w);
 };
-Dialect.E.toString = function(o) {
-    return o.toEString();
-};
+Dialect.E.toString = o => o.toEString();
 
 
 Dialect.O = new Dialect("O");
-Dialect.O.getParserFactory = function() {
-	return new OParserFactory();
-};
-Dialect.O.toDialect = function(w, o) {
+Dialect.O.getParserFactory = () => new OParserFactory();
+Dialect.O.toDialect = (w, o) => {
     o.toODialect(w);
 };
-Dialect.O.toString = function(o) {
-    return o.toOString();
-};
+Dialect.O.toString = o => o.toOString();
 
 Dialect.M = new Dialect("M");
-Dialect.M.getParserFactory = function() {
-    return new MParserFactory();
-};
-Dialect.M.toDialect = function(w, o) {
+Dialect.M.getParserFactory = () => new MParserFactory();
+Dialect.M.toDialect = (w, o) => {
     o.toMDialect(w);
 };
-Dialect.M.toString = function(o) {
-    return o.toMString();
-};
+Dialect.M.toString = o => o.toMString();
 
-exports.Dialect = Dialect;

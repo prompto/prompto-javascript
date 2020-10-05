@@ -1,11 +1,9 @@
-var PromptoError = require("./PromptoError").PromptoError;
+import PromptoError from './PromptoError.js'
 
-function InternalError(message) {
-	PromptoError.call(this, message);
-	return this;
+export default class InternalError extends PromptoError {
+
+	constructor(message) {
+		super(message);
+	}
+
 }
-
-InternalError.prototype = Object.create(InternalError.prototype);
-InternalError.prototype.constructor = InternalError;
-
-exports.InternalError = InternalError;

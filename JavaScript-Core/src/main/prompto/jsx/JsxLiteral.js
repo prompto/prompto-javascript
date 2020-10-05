@@ -1,41 +1,36 @@
-var TextType = require("../type/TextType").TextType;
-var VoidType = require("../type/VoidType").VoidType;
+import { TextType, VoidType } from '../type/index.js'
 
-function JsxLiteral(text) {
-	this.text = text;
-	return this;
+export default class JsxLiteral {
+
+    constructor(text) {
+        this.text = text;
+    }
+
+    check(context) {
+        return TextType.instance;
+    }
+
+    checkProto(context, proto) {
+        return VoidType.instance;
+    }
+
+    toString() {
+        return this.text;
+    }
+
+    isLiteral(context) {
+        return true;
+    }
+
+    toDialect(writer) {
+        writer.append(this.text);
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
 }
-
-
-JsxLiteral.prototype.check = function(context) {
-	return TextType.instance;
-};
-
-JsxLiteral.prototype.checkProto = function(context, proto) {
-	return VoidType.instance;
-};
-
-JsxLiteral.prototype.toString = function() {
-	return this.text;
-};
-
-
-JsxLiteral.prototype.isLiteral = function(context) {
-	return true;
-};
-
-
-JsxLiteral.prototype.toDialect = function(writer) {
-	writer.append(this.text);
-};
-
-JsxLiteral.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-
-JsxLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
-
-exports.JsxLiteral = JsxLiteral;

@@ -1,11 +1,8 @@
-var PythonLiteral = require("./PythonLiteral").PythonLiteral;
+import PythonLiteral from './PythonLiteral.js'
 
-function PythonDecimalLiteral(text) {
-    PythonLiteral.call(this, text);
-    return this;
+export default class PythonDecimalLiteral extends PythonLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
-
-PythonDecimalLiteral.prototype = Object.create(PythonLiteral.prototype);
-PythonDecimalLiteral.prototype.constructor = PythonDecimalLiteral;
-
-exports.PythonDecimalLiteral = PythonDecimalLiteral;

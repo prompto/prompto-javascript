@@ -1,6 +1,6 @@
-var List = require("./List").List;
+const List = require('./List.js').default;
 
-function StrictSet(values) {
+export default function StrictSet(values) {
     this.set = new Set(values);
     return this;
 }
@@ -161,8 +161,3 @@ StrictSet.prototype.filtered = function(filterFunction) {
     var filtered = Array.from(this.set).filter(filterFunction);
     return new StrictSet(filtered);
 };
-
-
-
-
-exports.StrictSet = StrictSet;

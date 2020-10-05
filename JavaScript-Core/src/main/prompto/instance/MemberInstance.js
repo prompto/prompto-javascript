@@ -1,95 +1,80 @@
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
+import { NotMutableError } from '../error/index.js'
 
-function MemberInstance(id) {
-	this.parent = null;
-	this.id = id;
-	return this;
-}
+export default class MemberInstance {
+   
+    constructor(id) {
+        this.parent = null;
+        this.id = id;
+    }
 
-Object.defineProperty(MemberInstance.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
+    toString() {
+        return this.parent.toString() + "." + this.name;
+    }
 
-MemberInstance.prototype.toString = function() {
-	return this.parent.toString() + "." + this.name;
-};
+    toDialect(writer) {
+        this.parent.toDialect(writer);
+        writer.append(".");
+        writer.append(this.name);
+    }
 
-MemberInstance.prototype.toDialect = function(writer) {
-    this.parent.toDialect(writer);
-    writer.append(".");
-    writer.append(this.name);
-};
+    interpret(context) {
+        const root = this.parent.interpret(context);
+        return root.getMemberValue(context, this.name, true);
+    }
 
+    checkAssignValue(context, valueType, section) {
+        return this.parent.checkAssignMember(context, this.id, valueType, section);
+    }
 
-MemberInstance.prototype.interpret = function(context) {
-    var root = this.parent.interpret(context);
-    return root.getMemberValue(context, this.name, true);
-};
+    checkAssignMember(context, id, valueType, section) {
+        this.parent.checkAssignMember(context, this.id, section);
+        return valueType; // TODO
+    }
 
+    checkAssignItem(context, itemType, valueType, section) {
+        return valueType; // TODO
+    }
 
-MemberInstance.prototype.checkAssignValue = function(context, valueType, section) {
-	return this.parent.checkAssignMember(context, this.id, valueType, section);
-};
+    assign(context, expression) {
+        const root = this.parent.interpret(context);
+        if(!root.mutable)
+            throw new NotMutableError();
+        const value = expression.interpret(context);
+        root.setMember(context, this.name, value);
+    }
 
-MemberInstance.prototype.checkAssignMember = function(context, id, valueType, section) {
-	this.parent.checkAssignMember(context, this.id, section);
-    return valueType; // TODO
-};
+    check(context) {
+        const parentType = this.parent.check(context);
+        return parentType.checkMember(context, this.id, this.name);
+    }
 
-MemberInstance.prototype.checkAssignItem = function(context, itemType, valueType, section) {
-    return valueType; // TODO
-};
+    declare(transpiler) {
+        this.parent.declare(transpiler);
+    }
 
+    transpile(transpiler) {
+        this.parent.transpile(transpiler);
+        transpiler.append(".").append(this.name);
+    }
 
-MemberInstance.prototype.assign = function(context, expression) {
-    var root = this.parent.interpret(context);
-    if(!root.mutable)
-        throw new NotMutableError();
-	var value = expression.interpret(context);
-    root.setMember(context, this.name, value);
-};
+    declareAssign(transpiler, expression) {
+        this.parent.declare(transpiler);
+        expression.declare(transpiler);
+    }
 
+    transpileAssign(transpiler, expression) {
+        const parentType = this.parent.check(transpiler.context);
+        this.parent.transpileAssignParent(transpiler);
+        parentType.transpileAssignMemberValue(transpiler, this.name, expression);
+    }
 
-MemberInstance.prototype.check = function(context) {
-    var parentType = this.parent.check(context);
-    return parentType.checkMember(context, this.id, this.name);
-};
-
-
-
-MemberInstance.prototype.declare = function(transpiler) {
-    this.parent.declare(transpiler);
-};
-
-
-MemberInstance.prototype.transpile = function(transpiler) {
-    this.parent.transpile(transpiler);
-    transpiler.append(".").append(this.name);
-};
-
-
-MemberInstance.prototype.declareAssign = function(transpiler, expression) {
-    this.parent.declare(transpiler);
-    expression.declare(transpiler);
-};
-
-
-
-MemberInstance.prototype.transpileAssign = function(transpiler, expression) {
-    var parentType = this.parent.check(transpiler.context);
-    this.parent.transpileAssignParent(transpiler);
-    parentType.transpileAssignMemberValue(transpiler, this.name, expression);
-};
-
-
-MemberInstance.prototype.transpileAssignParent = function(transpiler) {
-    var parentType = this.parent.check(transpiler.context);
-    this.parent.transpileAssignParent(transpiler);
-    parentType.transpileAssignMember(transpiler, this.name);
-};
-
-
-exports.MemberInstance = MemberInstance;
+    transpileAssignParent(transpiler) {
+        const parentType = this.parent.check(transpiler.context);
+        this.parent.transpileAssignParent(transpiler);
+        parentType.transpileAssignMember(transpiler, this.name);
+    }
+}

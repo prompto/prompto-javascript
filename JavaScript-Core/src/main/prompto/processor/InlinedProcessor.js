@@ -1,17 +1,13 @@
-var AnnotationProcessor = require("./AnnotationProcessor").AnnotationProcessor;
+import AnnotationProcessor from './AnnotationProcessor.js'
 
-function InlinedProcessor() {
-    AnnotationProcessor.call(this, "@Inlined");
-    return this;
+export default class InlinedProcessor extends AnnotationProcessor {
+
+    constructor() {
+        super("@Inlined");
+    }
+
+    processCategory(annotation, context, declaration) {
+        // nothing to do
+    }
 }
 
-InlinedProcessor.prototype = Object.create(AnnotationProcessor.prototype);
-InlinedProcessor.prototype.constructor = InlinedProcessor;
-
-
-InlinedProcessor.prototype.processCategory = function(annotation, context, declaration) {
-    // nothing to do
-};
-
-
-exports.InlinedProcessor = InlinedProcessor;

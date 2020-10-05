@@ -1,18 +1,10 @@
-var ProblemCollector = require('./ProblemCollector').ProblemCollector;
-var SyntaxError = require("../error/SyntaxError").SyntaxError;
+import ProblemCollector from './ProblemCollector.js'
+import { SyntaxError } from '../error/index.js'
 
-function ProblemListener() {
-    ProblemCollector.call(this);
-    return this;
+export default class ProblemListener extends ProblemCollector {
+   
+    collectProblem(problem) {
+        if(problem.type == "error")
+            throw new SyntaxError(problem.message);
+    }
 }
-
-ProblemListener.prototype = Object.create(ProblemCollector.prototype);
-ProblemListener.prototype.constructor = ProblemListener;
-
-ProblemListener.prototype.collectProblem = function(problem) {
-    if(problem.type == "error")
-        throw new SyntaxError(problem.message);
-};
-
-
-exports.ProblemListener = ProblemListener;

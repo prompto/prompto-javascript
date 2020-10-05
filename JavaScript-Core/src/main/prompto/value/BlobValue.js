@@ -1,12 +1,9 @@
-var BinaryValue = require("./BinaryValue").BinaryValue;
-var BlobType = require("../type/BlobType").BlobType;
+import BinaryValue from './BinaryValue.js'
+import { BlobType } from '../type/index.js'
 
-function BlobValue(mimeType, data) {
-    BinaryValue.call(this, BlobType.instance, mimeType, data);
-    return this;
+export default class BlobValue extends BinaryValue {
+
+    constructor(mimeType, data) {
+        super(BlobType.instance, mimeType, data);
+    }
 }
-
-BlobValue.prototype = Object.create(BinaryValue.prototype);
-BlobValue.prototype.constructor = BlobValue;
-
-exports.BlobValue = BlobValue;

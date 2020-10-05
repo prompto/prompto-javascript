@@ -1,43 +1,32 @@
-function CmpOp() {
-	return this;
-}
+export default class CmpOp {
 
-CmpOp.prototype.toDialect = function(writer) {
-    writer.append(this.toString());
-};
+    toDialect(writer) {
+        writer.append(this.toString());
+    }
+}
 
 
 CmpOp.GT = new CmpOp();
-CmpOp.GT.toString = function() {
-    return ">";
-};
-CmpOp.GT.transpile = function(transpiler) {
+CmpOp.GT.toString = () => ">";
+CmpOp.GT.transpile = transpiler => {
     transpiler.append("gt");
 };
 
 CmpOp.GTE = new CmpOp();
-CmpOp.GTE.toString = function() {
-    return ">=";
-};
-CmpOp.GTE.transpile = function(transpiler) {
+CmpOp.GTE.toString = () => ">=";
+CmpOp.GTE.transpile = transpiler => {
     transpiler.append("gte");
 };
 
 
 CmpOp.LT = new CmpOp();
-CmpOp.LT.toString = function() {
-    return "<";
-};
-CmpOp.LT.transpile = function(transpiler) {
+CmpOp.LT.toString = () => "<";
+CmpOp.LT.transpile = transpiler => {
     transpiler.append("lt");
 };
 
 CmpOp.LTE = new CmpOp();
-CmpOp.LTE.toString = function() {
-    return "<=";
-};
-CmpOp.LTE.transpile = function(transpiler) {
+CmpOp.LTE.toString = () => "<=";
+CmpOp.LTE.transpile = transpiler => {
     transpiler.append("lte");
 };
-
-exports.CmpOp = CmpOp;

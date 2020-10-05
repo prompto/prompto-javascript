@@ -1,4 +1,4 @@
-function Period(data) {
+export default function Period(data) {
     var names = ["years", "months", "weeks", "days", "hours", "minutes", "seconds", "millis"];
     for(var i=0;i<names.length; i++) {
         this[names[i]] = data[i] || null;
@@ -220,5 +220,3 @@ Period.prototype.totalMilliseconds = function() {
 Period.prototype.getText = Period.prototype.toString;
 Period.prototype.toDocument = Period.prototype.toString;
 
-
-exports.Period = Period;

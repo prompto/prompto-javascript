@@ -1,28 +1,24 @@
-var Literal = require("./Literal").Literal;
-var DateTimeType = require("../type/DateTimeType").DateTimeType;
-var DateTimeValue = require("../value/DateTimeValue").DateTimeValue;
-var DateTime = require("../intrinsic/DateTime").DateTime;
+import Literal from './Literal.js'
+import { DateTimeType } from '../type/index.js'
+import { DateTimeValue } from '../value/index.js'
+import { DateTime } from '../intrinsic/index.js'
 
-function DateTimeLiteral(text) {
-    var dt = DateTime.parse(text.substring(1,text.length-1));
-	Literal.call(this, text, new DateTimeValue(dt));
-	return this;
+export default class DateTimeLiteral extends Literal {
+
+    constructor(text) {
+        const dt = DateTime.parse(text.substring(1,text.length-1));
+        super(text, new DateTimeValue(dt));
+    }
+
+    check(context) {
+        return DateTimeType.instance;
+    }
+
+    declare(transpiler) {
+        transpiler.require(DateTime);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("DateTime.parse(").append(this.text).append(")");
+    }
 }
-
-DateTimeLiteral.prototype = Object.create(Literal.prototype);
-DateTimeLiteral.prototype.constructor = DateTimeLiteral;
-
-DateTimeLiteral.prototype.check = function(context) {
-	return DateTimeType.instance;
-};
-
-DateTimeLiteral.prototype.declare = function(transpiler) {
-    transpiler.require(DateTime);
-};
-
-
-DateTimeLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("DateTime.parse(").append(this.text).append(")");
-};
-
-exports.DateTimeLiteral = DateTimeLiteral;

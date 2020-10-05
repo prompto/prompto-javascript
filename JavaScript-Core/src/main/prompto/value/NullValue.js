@@ -1,26 +1,26 @@
-var Value = require("./Value").Value;
-var NullType = require("../type/NullType").NullType;
+import Value from './Value.js'
+import { NullType } from '../type/index.js'
 
-function NullValue() {
-    Value.call(this, NullType.instance);
-    return this;
+export default class NullValue extends Value {
+
+    static init() {
+        NullValue.instance = new NullValue();
+    }
+
+    constructor() {
+        super(NullType.instance);
+    }
+
+    toString() {
+        return "null";
+    }
+
+    getStorableData() {
+        return null; // <- YES!
+    }
+
+    convertToJavaScript() {
+        return null; // <- YES!
+    }
 }
 
-NullValue.prototype = Object.create(Value.prototype);
-NullValue.prototype.constructor = NullValue;
-
-NullValue.prototype.toString = function() {
-    return "null";
-};
-
-NullValue.prototype.getStorableData = function() {
-    return null; // <- YES!
-};
-
-NullValue.prototype.convertToJavaScript = function() {
-    return null; // <- YES!
-};
-
-NullValue.instance = new NullValue();
-
-exports.NullValue = NullValue;

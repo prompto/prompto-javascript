@@ -1,4 +1,4 @@
-function Type(name) {
+export default function Type(name) {
 	this.name = name;
 	return this;
 }
@@ -6,5 +6,3 @@ function Type(name) {
 Type.prototype.toString = function() {
 	return this.name;
 };
-
-exports.Type = Type;

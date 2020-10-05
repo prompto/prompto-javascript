@@ -1,15 +1,8 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
+import ExecutionError from './ExecutionError.js'
 
-function NotMutableError() {
-	ExecutionError.call(this);
-	return this;
+export default class NotMutableError extends ExecutionError {
+
+	getExpression(context) {
+		return context.getRegisteredValue("NOT_MUTABLE");
+	}
 }
-
-NotMutableError.prototype = Object.create(ExecutionError.prototype);
-NotMutableError.prototype.constructor = NotMutableError;
-
-NotMutableError.prototype.getExpression = function(context) {
-	return context.getRegisteredValue("NOT_MUTABLE");
-};
-
-exports.NotMutableError = NotMutableError;

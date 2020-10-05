@@ -1,22 +1,20 @@
-var ContextualExpression = require("./ContextualExpression").ContextualExpression;
+import ContextualExpression from './ContextualExpression.js'
 
-function ArrowValue(method, calling, arrow) {
-    ContextualExpression.call(this, calling, arrow);
-    this.method = method;
-    return this;
+export default class ArrowValue extends ContextualExpression {
+
+    constructor(method, calling, arrow) {
+        super(calling, arrow);
+        this.method = method;
+    }
+
+    interpret(context) {
+        const parent = context.getParentContext();
+        try {
+            context.setParentContext(this.calling);
+            return this.expression.interpret(context);
+        } finally {
+            context.setParentContext(parent);
+        }
+    }
 }
 
-ArrowValue.prototype = Object.create(ContextualExpression.prototype);
-ArrowValue.prototype.constructor = ArrowValue;
-
-ArrowValue.prototype.interpret = function(context) {
-    var parent = context.getParentContext();
-    try {
-        context.setParentContext(this.calling);
-        return this.expression.interpret(context);
-    } finally {
-        context.setParentContext(parent);
-    }
-};
-
-exports.ArrowValue = ArrowValue;

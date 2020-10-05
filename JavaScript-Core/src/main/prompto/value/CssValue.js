@@ -1,13 +1,11 @@
-var Value = require("./Value").Value;
-var CssType = require("../type/CssType").CssType;
+import Value from './Value.js'
+import { CssType } from '../type/index.js'
 
-function CssValue(expression) {
-    Value.call(this, CssType.instance);
-	this.expression = expression;
-	return this;
+export default class CssValue extends Value {
+
+    constructor(expression) {
+        super(CssType.instance);
+        this.expression = expression;
+    }
 }
 
-CssValue.prototype = Object.create(Value.prototype);
-CssValue.prototype.constructor = CssValue;
-
-exports.CssValue = CssValue;

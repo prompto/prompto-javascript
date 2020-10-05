@@ -1,35 +1,32 @@
-var BaseType = require("./BaseType").BaseType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import BaseType from './BaseType.js'
+import { Identifier } from '../grammar/index.js'
 
-function NullType() {
-    BaseType.call(this, new Identifier("Null"));
-    return this;
+export default class NullType extends BaseType {
+
+    constructor() {
+        super(new Identifier("Null"));
+    }
+
+    checkUnique(context) {
+        // ok
+    }
+
+    checkExists(context) {
+        // ok
+    }
+
+    isAssignableFrom(context, other) {
+        return true;
+    }
+
+    isMoreSpecificThan(context, other) {
+        return false;
+    }
+
+    equals(other) {
+        return other==this;
+    }
 }
-
-NullType.prototype = Object.create(BaseType.prototype);
-NullType.prototype.constructor = NullType;
 
 NullType.instance = new NullType();
 
-NullType.prototype.checkUnique = function(context) {
-    // ok
-};
-
-NullType.prototype.checkExists = function(context) {
-    // ok
-};
-
-NullType.prototype.isAssignableFrom = function(context, other) {
-    return true;
-};
-
-NullType.prototype.isMoreSpecificThan = function(context, other) {
-    return false;
-};
-
-
-NullType.prototype.equals = function(other) {
-    return other==this;
-};
-
-exports.NullType = NullType;

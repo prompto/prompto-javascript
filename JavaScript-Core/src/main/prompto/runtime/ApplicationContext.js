@@ -1,27 +1,21 @@
-var Context = require("./Context").Context;
-var instance = null;
+import { Context } from './index.js'
 
+export default class ApplicationContext {
+ 
+    static set(context) {
+        const current = ApplicationContext.instance;
+        ApplicationContext.instance = context;
+        return current;
+    }
 
-function ApplicationContext() {
-    return this;
+    static get() {
+        return ApplicationContext.instance;
+    }
+
+    static init() {
+        return ApplicationContext.set(Context.newGlobalsContext());
+    }
 }
 
+ApplicationContext.instance = null;
 
-ApplicationContext.set = function(context) {
-    var current = instance;
-    instance = context;
-    return current;
-};
-
-
-ApplicationContext.get = function() {
-    return instance;
-};
-
-
-ApplicationContext.init = function() {
-    return ApplicationContext.set(Context.newGlobalsContext());
-};
-
-
-exports.ApplicationContext = ApplicationContext;

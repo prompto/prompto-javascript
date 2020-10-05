@@ -1,11 +1,5 @@
-var Section = require("../parser/Section").Section;
+import Section from '../parser/Section.js'
 
-function NamedInstance() {
-    Section.call(this);
-    return this;
+export default class NamedInstance extends Section {
+
 }
-
-NamedInstance.prototype = Object.create(Section.prototype);
-NamedInstance.prototype.constructor = NamedInstance;
-
-exports.NamedInstance = NamedInstance;

@@ -1,11 +1,8 @@
-var SymbolList = require("./SymbolList").SymbolList;
+import SymbolList from './SymbolList.js'
 
-function NativeSymbolList(symbol) {
-	SymbolList.call(this, symbol);
-	return this;
+export default class NativeSymbolList extends SymbolList {
+
+    constructor(symbol) {
+        super(symbol);
+    }
 }
-
-NativeSymbolList.prototype = Object.create(SymbolList.prototype);
-NativeSymbolList.prototype.constructor = NativeSymbolList;
-
-exports.NativeSymbolList = NativeSymbolList;

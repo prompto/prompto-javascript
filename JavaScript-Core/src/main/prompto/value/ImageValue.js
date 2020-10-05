@@ -1,12 +1,9 @@
-var BinaryValue = require("./BinaryValue").BinaryValue;
-var ImageType = require("../type/ImageType").ImageType;
+import BinaryValue from './BinaryValue.js'
+import { ImageType } from '../type/index.js'
 
-function ImageValue(mimeType, data) {
-    BinaryValue.call(this, ImageType.instance, mimeType, data);
-    return this;
+export default class ImageValue extends BinaryValue {
+
+    constructor(mimeType, data) {
+        super(ImageType.instance, mimeType, data);
+    }
 }
-
-ImageValue.prototype = Object.create(BinaryValue.prototype);
-ImageValue.prototype.constructor = ImageValue;
-
-exports.ImageValue = ImageValue;

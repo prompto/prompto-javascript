@@ -1,12 +1,12 @@
 
-function OrPredicate(left, right) {
-    this.left = left;
-    this.right = right;
-    return this;
+export default class OrPredicate {
+
+    constructor(left, right) {
+        this.left = left;
+        this.right = right;
+    }
+
+    matches(stored) {
+        return this.left.matches(stored) || this.right.matches(stored);
+    }
 }
-
-OrPredicate.prototype.matches = function(stored) {
-    return this.left.matches(stored) || this.right.matches(stored);
-};
-
-exports.OrPredicate = OrPredicate;

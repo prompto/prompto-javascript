@@ -17,8 +17,8 @@ var it = new Encoder();
 
 Object.defineProperty(module.exports, 'EncodeType', {
   enumerable: true,
-  get: function () { return it.EncodeType; },
-  set: function (val) { return it.EncodeType = val; }
+  get: function () { return it.EncodeType; } /*,
+  set: function (val) { return it.EncodeType = val; } */
 });
 [ 'HTML2Numerical',
   'NumericalToHTML',

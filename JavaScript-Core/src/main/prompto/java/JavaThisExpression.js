@@ -1,19 +1,16 @@
-var JavaExpression = require("./JavaExpression").JavaExpression;
+import JavaExpression from './JavaExpression.js'
 
-function JavaThisExpression() {
-    JavaExpression.call(this);
-	return this;
+export default class JavaThisExpression extends JavaExpression {
+
+    constructor() {
+        super();
+    }
+
+    toString() {
+        return "this";
+    }
+
+    toDialect(writer) {
+        writer.append("this");
+    }
 }
-
-JavaThisExpression.prototype = Object.create(JavaExpression.prototype);
-JavaThisExpression.prototype.constructor = JavaThisExpression;
-
-JavaThisExpression.prototype.toString = function() {
-	return "this";
-};
-
-JavaThisExpression.prototype.toDialect = function(writer) {
-    writer.append("this");
-};
-
-exports.JavaThisExpression = JavaThisExpression;

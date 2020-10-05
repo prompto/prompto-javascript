@@ -1,14 +1,11 @@
-var BinaryType = require("./BinaryType").BinaryType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import BinaryType from './BinaryType.js'
+import { Identifier } from '../grammar/index.js'
 
-function BlobType() {
-    BinaryType.call(this, new Identifier("Blob"));
-    return this;
+export default class BlobType extends BinaryType {
+
+    constructor() {
+        super(new Identifier("Blob"));
+    }
 }
 
-BlobType.prototype = Object.create(BinaryType.prototype);
-BlobType.prototype.constructor = BlobType;
-
 BlobType.instance = new BlobType();
-
-exports.BlobType = BlobType;

@@ -1,6 +1,3 @@
-function NativeCategoryBinding() {
-    return this;
+export default class NativeCategoryBinding {
 }
 
-
-exports.NativeCategoryBinding = NativeCategoryBinding;

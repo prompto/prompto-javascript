@@ -1,17 +1,13 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var TextType = require("../type/TextType").TextType;
+import JavaScriptLiteral from './JavaScriptLiteral.js'
+import { TextType } from '../type/index.js'
 
-function JavaScriptTextLiteral(text) {
-    JavaScriptLiteral.call(this, text);
-    return this;
+export default class JavaScriptTextLiteral extends JavaScriptLiteral {
+
+    constructor(text) {
+        super(text);
+    }
+
+    check(context) {
+        return TextType.instance;
+    }
 }
-
-JavaScriptTextLiteral.prototype = Object.create(JavaScriptLiteral.prototype);
-JavaScriptTextLiteral.prototype.constructor = JavaScriptTextLiteral;
-
-JavaScriptTextLiteral.prototype.check = function(context) {
-    return TextType.instance;
-};
-
-exports.JavaScriptTextLiteral = JavaScriptTextLiteral;
-

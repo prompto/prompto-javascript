@@ -1,28 +1,26 @@
-var Literal = require("./Literal").Literal;
-var VersionType = require("../type/VersionType").VersionType;
-var VersionValue = require("../value/VersionValue").VersionValue;
-var Version = require("../intrinsic/Version").Version;
+import Literal from './Literal.js'
+import { VersionType } from '../type/index.js'
+import { VersionValue } from '../value/index.js'
+import { Version } from '../intrinsic/index.js'
 
-function VersionLiteral(text) {
-    var version = Version.parse(text.substring(2,text.length-1));
-	Literal.call(this, text, new VersionValue(version));
-	return this;
+export default class VersionLiteral extends Literal {
+
+    constructor(text) {
+        const version = Version.parse(text.substring(2,text.length-1));
+        super(text, new VersionValue(version));
+    }
+
+    check(context) {
+        return VersionType.instance;
+    }
+
+    declare(transpiler) {
+        transpiler.require(Version);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("Version.parse(").append(this.text).append(")");
+    }
 }
 
-VersionLiteral.prototype = Object.create(Literal.prototype);
-VersionLiteral.prototype.constructor = VersionLiteral;
-
-VersionLiteral.prototype.check = function(context) {
-	return VersionType.instance;
-};
-
-VersionLiteral.prototype.declare = function(transpiler) {
-    transpiler.require(Version);
-};
-
-VersionLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("Version.parse(").append(this.text).append(")");
-};
-
-exports.VersionLiteral = VersionLiteral;
 

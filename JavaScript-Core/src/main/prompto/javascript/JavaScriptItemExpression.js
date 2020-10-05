@@ -1,16 +1,13 @@
-var JavaScriptSelectorExpression = require("./JavaScriptSelectorExpression").JavaScriptSelectorExpression;
+import JavaScriptSelectorExpression from './JavaScriptSelectorExpression.js'
 
-function JavaScriptItemExpression(item) {
-	JavaScriptSelectorExpression.call(this);
-	this.item = item || null;
-	return this;
+export default class JavaScriptItemExpression extends JavaScriptSelectorExpression {
+
+    constructor(item) {
+        super();
+        this.item = item || null;
+    }
+
+    toString() {
+        return this.parent.toString() + "[" + this.item.toString() + "]";
+    }
 }
-
-JavaScriptItemExpression.prototype = Object.create(JavaScriptSelectorExpression.prototype);
-JavaScriptItemExpression.prototype.constructor = JavaScriptItemExpression;
-
-JavaScriptItemExpression.prototype.toString = function() {
-	return this.parent.toString() + "[" + this.item.toString() + "]";
-};
-
-exports.JavaScriptItemExpression = JavaScriptItemExpression;

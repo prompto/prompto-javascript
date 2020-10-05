@@ -1,11 +1,8 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
+import ObjectList from '../utils/ObjectList.js'
 
-function MethodDeclarationList(method) {
-    ObjectList.call(this, null, method);
-	return this;
+export default class MethodDeclarationList extends ObjectList {
+
+    constructor(method) {
+        super(null, method);
+    }
 }
-
-MethodDeclarationList.prototype = Object.create(ObjectList.prototype);
-MethodDeclarationList.prototype.constructor = MethodDeclarationList;
-
-exports.MethodDeclarationList = MethodDeclarationList;

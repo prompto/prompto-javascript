@@ -1,19 +1,18 @@
-function PropertyMap() {
-    this.entries = {};
-    return this;
+export default class PropertyMap {
+
+    constructor() {
+        this.entries = {};
+    }
+
+    set(name, type) {
+        this.entries[name] = type;
+    }
+
+    get(name) {
+        return this.entries[name] || null;
+    }
+
+    has(name) {
+        return !!this.entries[name];
+    }
 }
-
-PropertyMap.prototype.set = function(name, type) {
-    this.entries[name] = type;
-};
-
-
-PropertyMap.prototype.get = function(name) {
-    return this.entries[name] || null;
-};
-
-PropertyMap.prototype.has = function(name) {
-    return !!this.entries[name];
-};
-
-exports.PropertyMap = PropertyMap;

@@ -1,30 +1,26 @@
-var Literal = require("./Literal").Literal;
-var TimeType = require("../type/TimeType").TimeType;
-var TimeValue = require("../value/TimeValue").TimeValue;
-var LocalTime = require("../intrinsic/LocalTime").LocalTime;
+import Literal from './Literal.js'
+import { TimeType } from '../type/index.js'
+import { TimeValue } from '../value/index.js'
+import { LocalTime } from '../intrinsic/index.js'
 
-function TimeLiteral(text) {
-	var lt = LocalTime.parse(text.substring(1,text.length-1));
-	Literal.call(this, text, new TimeValue(lt));
-	return this;
+export default class TimeLiteral extends Literal {
+
+    constructor(text) {
+        const lt = LocalTime.parse(text.substring(1,text.length-1));
+        super(text, new TimeValue(lt));
+    }
+
+    check(context) {
+        return TimeType.instance;
+    }
+
+    declare(transpiler) {
+        transpiler.require(LocalTime);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("LocalTime.parse(").append(this.text).append(")");
+    }
 }
 
-TimeLiteral.prototype = Object.create(Literal.prototype);
-TimeLiteral.prototype.constructor = TimeLiteral;
-
-TimeLiteral.prototype.check = function(context) {
-	return TimeType.instance;
-};
-
-
-TimeLiteral.prototype.declare = function(transpiler) {
-    transpiler.require(LocalTime);
-};
-
-
-TimeLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("LocalTime.parse(").append(this.text).append(")");
-};
-
-exports.TimeLiteral = TimeLiteral;
 

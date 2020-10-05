@@ -1,14 +1,15 @@
-function PythonModule(ids) {
-    this.ids = ids;
-}
+export default class PythonModule {
 
-PythonModule.prototype.toDialect = function(writer) {
-    writer.append(" from module: ");
-    this.ids.forEach(function(id) {
-        writer.append(id);
-        writer.append('.');
-    });
-    writer.trimLast(1);
-}
+    constructor(ids) {
+        this.ids = ids;
+    }
 
-exports.PythonModule = PythonModule;
+    toDialect(writer) {
+        writer.append(" from module: ");
+        this.ids.forEach(id => {
+            writer.append(id);
+            writer.append('.');
+        });
+        writer.trimLast(1);
+    }
+}

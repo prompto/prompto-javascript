@@ -1,11 +1,8 @@
-var JavaLiteral = require("./JavaLiteral").JavaLiteral;
+import JavaLiteral from './JavaLiteral.js'
 
-function JavaCharacterLiteral(text) {
-    JavaLiteral.call(this, text);
-    return this;
+export default class JavaCharacterLiteral extends JavaLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
-
-JavaCharacterLiteral.prototype = Object.create(JavaLiteral.prototype);
-JavaCharacterLiteral.prototype.constructor = JavaCharacterLiteral;
-
-exports.JavaCharacterLiteral = JavaCharacterLiteral;

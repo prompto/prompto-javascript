@@ -1,11 +1,9 @@
-var PythonLiteral = require("./PythonLiteral").PythonLiteral;
+import PythonLiteral from './PythonLiteral.js'
 
-function PythonCharacterLiteral(text) {
-	PythonLiteral.call(this, text);
-	return this;
+export default class PythonCharacterLiteral extends PythonLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
 
-PythonCharacterLiteral.prototype = Object.create(PythonLiteral.prototype);
-PythonCharacterLiteral.prototype.constructor = PythonCharacterLiteral;
-
-exports.PythonCharacterLiteral = PythonCharacterLiteral;

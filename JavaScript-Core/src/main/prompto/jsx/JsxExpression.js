@@ -1,69 +1,58 @@
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var IJsxExpression = require("./IJsxExpression").IJsxExpression;
-var Literal = require("../literal/Literal").Literal;
+import IJsxExpression from './IJsxExpression.js'
+import { ArrowExpression } from '../expression/index.js'
+import { Literal } from '../literal/index.js'
 
-function JsxExpression(expression) {
-    IJsxExpression.call(this);
-    this.expression = expression;
-	return this;
-}
+export default class JsxExpression extends IJsxExpression {
 
+    constructor(expression) {
+        super();
+        this.expression = expression;
+    }
 
-JsxExpression.prototype = Object.create(IJsxExpression.prototype);
-JsxExpression.prototype.constructor = JsxExpression;
-
-
-JsxExpression.prototype.check = function(context) {
-	return this.expression.check(context);
-};
-
-JsxExpression.prototype.checkProto = function(context, proto) {
-    if(this.expression instanceof ArrowExpression)
-        return proto.checkArrowExpression(context, this.expression);
-    else
+    check(context) {
         return this.expression.check(context);
-};
+    }
 
+    checkProto(context, proto) {
+        if(this.expression instanceof ArrowExpression)
+            return proto.checkArrowExpression(context, this.expression);
+        else
+            return this.expression.check(context);
+    }
 
-JsxExpression.prototype.declareProto = function(transpiler, proto) {
-    if(this.expression instanceof ArrowExpression)
-        return proto.declareArrowExpression(transpiler, this.expression);
-    else
-        return this.expression.declare(transpiler);
-};
+    declareProto(transpiler, proto) {
+        if(this.expression instanceof ArrowExpression)
+            return proto.declareArrowExpression(transpiler, this.expression);
+        else
+            return this.expression.declare(transpiler);
+    }
 
+    transpileProto(transpiler, proto) {
+        if(this.expression instanceof ArrowExpression)
+            return proto.transpileArrowExpression(transpiler, this.expression);
+        else
+            return this.expression.transpile(transpiler);
+    }
 
-JsxExpression.prototype.transpileProto = function(transpiler, proto) {
-    if(this.expression instanceof ArrowExpression)
-        return proto.transpileArrowExpression(transpiler, this.expression);
-    else
-        return this.expression.transpile(transpiler);
-};
+    isLiteral() {
+        return this.expression instanceof Literal;
+    }
 
+    toString() {
+        return this.expression.toString();
+    }
 
-JsxExpression.prototype.isLiteral = function() {
-    return this.expression instanceof Literal;
-};
+    toDialect(writer) {
+        writer.append("{");
+        this.expression.toDialect(writer);
+        writer.append("}");
+    }
 
+    declare(transpiler) {
+        this.expression.declare(transpiler);
+    }
 
-JsxExpression.prototype.toString = function() {
-    return this.expression.toString();
-};
-
-JsxExpression.prototype.toDialect = function(writer) {
-	writer.append("{");
-    this.expression.toDialect(writer);
-	writer.append("}");
-};
-
-
-JsxExpression.prototype.declare = function(transpiler) {
-    this.expression.declare(transpiler);
-};
-
-
-JsxExpression.prototype.transpile = function(transpiler) {
-    this.expression.transpile(transpiler);
-};
-
-exports.JsxExpression = JsxExpression;
+    transpile(transpiler) {
+        this.expression.transpile(transpiler);
+    }
+}

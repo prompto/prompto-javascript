@@ -1,68 +1,58 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TypeFamily = require("../store/TypeFamily").TypeFamily;
-var BooleanValue = null;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
+import { BooleanValue } from '../value/index.js'
+import { isABoolean } from '../utils/index.js'
+import { TypeFamily } from '../store/index.js'
 
-exports.resolve = function() {
-    BooleanValue = require("../value/BooleanValue").BooleanValue;
+export default class BooleanType extends NativeType {
+
+    constructor() {
+        super(new Identifier("Boolean"));
+        this.family = TypeFamily.BOOLEAN;
+    }
+
+    checkAnd(context, other) {
+        if(other instanceof BooleanType) {
+            return BooleanType.instance;
+        } else {
+            return super.checkAnd(context, other);
+        }
+    }
+
+    checkOr(context, other) {
+        if(other instanceof BooleanType) {
+            return BooleanType.instance;
+        } else {
+            return super.checkOr(context, other);
+        }
+    }
+
+    checkNot(context) {
+        return BooleanType.instance;
+    }
+
+    convertJavaScriptValueToPromptoValue(context, value, returnType) {
+        if (typeof(value)=='boolean') {
+            return BooleanValue.ValueOf(value);
+        } else {
+            return value; // TODO for now
+        }
+    }
+
+    declare(transpiler) {
+        transpiler.require(isABoolean);
+    }
+
+    transpile(transpiler) {
+        transpiler.append('"Boolean"');
+    }
+
+    transpileSorted(transpiler, desc, key) {
+        if(desc)
+            transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? -1 : 1; }");
+        else
+            transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? 1 : -1; }");
+    }
 }
-
-function BooleanType()  {
-	NativeType.call(this, new Identifier("Boolean"));
-	this.family = TypeFamily.BOOLEAN;
-	return this;
-}
-
-BooleanType.prototype = Object.create(NativeType.prototype);
-BooleanType.prototype.constructor = BooleanType;
 
 BooleanType.instance = new BooleanType();
-
-BooleanType.prototype.checkAnd = function(context, other) {
-	if(other instanceof BooleanType) {
-		return BooleanType.instance;
-	} else {
-		return NativeType.prototype.checkAnd.call(this, context, other);
-	}
-};
-
-BooleanType.prototype.checkOr = function(context, other) {
-	if(other instanceof BooleanType) {
-		return BooleanType.instance;
-	} else {
-		return NativeType.prototype.checkOr.call(this, context, other);
-	}
-};
-
-BooleanType.prototype.checkNot = function(context) {
-	return BooleanType.instance;
-};
-
-
-BooleanType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-	if (typeof(value)=='boolean') {
-		return BooleanValue.ValueOf(value);
-	} else {
-		return value; // TODO for now
-	}
-};
-
-BooleanType.prototype.declare = function(transpiler) {
-    var isABoolean = require("../utils/Utils").isABoolean;
-    transpiler.require(isABoolean);
-};
-
-
-BooleanType.prototype.transpile = function(transpiler) {
-    transpiler.append('"Boolean"');
-};
-
-BooleanType.prototype.transpileSorted = function(transpiler, desc, key) {
-    if(desc)
-        transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? -1 : 1; }");
-    else
-        transpiler.append("function(o1, o2) { return o1 === o2 ? 0 : o1 > o2 ? 1 : -1; }");
-};
-
-
-exports.BooleanType = BooleanType;

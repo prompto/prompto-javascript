@@ -1,81 +1,76 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var Dialect = require("../parser/Dialect").Dialect;
+import ObjectList from '../utils/ObjectList.js'
+import { Dialect } from '../parser/index.js'
 
-function IdentifierList(item) {
-    ObjectList.call(this);
-	item = item || null;
-	if(item!==null) {
-		this.add(item);
-	}
-	return this;
-}
+export default class IdentifierList extends ObjectList {
 
-IdentifierList.prototype = Object.create(ObjectList.prototype);
-IdentifierList.prototype.constructor = IdentifierList;
-
-
-IdentifierList.prototype.names = function() {
-    return this.map(function(id) { return id.name; } );
-};
-
-
-IdentifierList.prototype.hasAttribute = function(name) {
-    for(var i = 0; i < this.length; i++) {
-        if(this[i].name===name)
-            return true;
+    constructor(item) {
+        super();
+        item = item || null;
+        if(item!==null) {
+            this.add(item);
+        }
     }
-    return false;
-};
 
-IdentifierList.prototype.toDialect = function(writer, finalAnd) {
-    finalAnd = finalAnd || false;
-    switch(writer.dialect) {
-        case Dialect.E:
-            this.toEDialect(writer, finalAnd);
-            break;
-        case Dialect.O:
-            this.toODialect(writer);
-            break;
-        case Dialect.M:
-            this.toMDialect(writer);
-            break;
+    names() {
+        return this.map(id => id.name );
     }
-};
 
-IdentifierList.prototype.toEDialect = function(writer, finalAnd) {
-    switch(this.length) {
-        case 0:
-            return;
-        case 1:
-            writer.append(this[0].name);
-            break;
-        default:
-            for(var i=0;i<this.length;i++) {
-                if(finalAnd && i==this.length-1)
-                    break;
-                writer.append(this[i].name);
+    hasAttribute(name) {
+        for(let i = 0; i < this.length; i++) {
+            if(this[i].name===name)
+                return true;
+        }
+        return false;
+    }
+
+    toDialect(writer, finalAnd) {
+        finalAnd = finalAnd || false;
+        switch(writer.dialect) {
+            case Dialect.E:
+                this.toEDialect(writer, finalAnd);
+                break;
+            case Dialect.O:
+                this.toODialect(writer);
+                break;
+            case Dialect.M:
+                this.toMDialect(writer);
+                break;
+        }
+    }
+
+    toEDialect(writer, finalAnd) {
+        switch(this.length) {
+            case 0:
+                return;
+            case 1:
+                writer.append(this[0].name);
+                break;
+            default:
+                for(let i=0;i<this.length;i++) {
+                    if(finalAnd && i==this.length-1)
+                        break;
+                    writer.append(this[i].name);
+                    writer.append(", ");
+                }
+                writer.trimLast(2);
+                if(finalAnd) {
+                    writer.append(" and ");
+                    writer.append(this[this.length-1].name);
+                }
+        }
+    }
+
+    toODialect(writer) {
+        if(this.length>0) {
+            this.forEach(id => {
+                writer.append(id.name);
                 writer.append(", ");
-            }
+            });
             writer.trimLast(2);
-            if(finalAnd) {
-                writer.append(" and ");
-                writer.append(this[this.length-1].name);
-            }
+        }
     }
-};
 
-IdentifierList.prototype.toODialect = function(writer) {
-    if(this.length>0) {
-        this.forEach(function(id) {
-            writer.append(id.name);
-            writer.append(", ");
-        });
-        writer.trimLast(2);
+    toMDialect(writer) {
+        this.toODialect(writer);
     }
-};
-
-IdentifierList.prototype.toMDialect = function(writer) {
-    this.toODialect(writer);
-};
-
-exports.IdentifierList = IdentifierList;
+}

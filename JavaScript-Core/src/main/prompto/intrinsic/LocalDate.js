@@ -1,11 +1,7 @@
-var Period = require("./Period").Period;
-var DateTime = null;
+const DateTime = require('./DateTime.js').default;
+const Period = require('./Period.js').default;
 
-exports.resolve = function() {
-    DateTime = require("./DateTime").DateTime;
-};
-
-function LocalDate(value) {
+export default function LocalDate(value) {
     var date = new Date(value);
     date.__proto__ = LocalDate.prototype;
     return date;
@@ -105,5 +101,3 @@ LocalDate.prototype.getDayOfYear = function() {
     var numDays = (this - first) / (1000 * 60 * 60 * 24);
     return 1 + Math.floor(numDays);
 };
-
-exports.LocalDate = LocalDate;

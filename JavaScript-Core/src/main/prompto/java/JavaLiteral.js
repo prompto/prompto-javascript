@@ -1,15 +1,14 @@
-var JavaLiteral = function(text) {
-    this.text = text;
-    return this;
-};
+export default class JavaLiteral {
 
-JavaLiteral.prototype.toString = function() {
-    return this.text;
-};
+    constructor(text) {
+        this.text = text;
+    }
 
-JavaLiteral.prototype.toDialect = function(writer) {
-    writer.append(this.text);
-};
+    toString() {
+        return this.text;
+    }
 
-
-exports.JavaLiteral = JavaLiteral
+    toDialect(writer) {
+        writer.append(this.text);
+    }
+}

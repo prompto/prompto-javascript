@@ -4,7 +4,8 @@
 * @see http://www.ietf.org/rfc/rfc4122.txt
 **/
 
-function UUID() {
+export default function UUID() {
+    return this;
 }
 
 UUID.maxFromBits = function(bits) {
@@ -234,5 +235,3 @@ UUID.fromBinary = function(binary) {
     }
     return UUID.fromBytes(ints);
 };
-
-exports.UUID = UUID;

@@ -1,8 +1,8 @@
-var equalArrays = require("../utils/Utils").equalArrays;
-var StrictSet = require("./StrictSet").StrictSet;
-var List = require("./List").List;
+const List = require('./List.js').default;
+const StrictSet = require('./StrictSet.js').default;
+const equalArrays = require('../utils/Utils.js').equalArrays;
 
-function Document(entries) {
+export default function Document(entries) {
     if(entries)
         Object.getOwnPropertyNames(entries).forEach(function(name) { this[name] = entries[name]; }, this);
     return this;
@@ -152,5 +152,3 @@ Object.defineProperty(Object.prototype, "getMember", {
         // pass
     }
 });
-
-exports.Document = Document;

@@ -1,14 +1,11 @@
-var BinaryType = require("./BinaryType").BinaryType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import BinaryType from './BinaryType.js'
+import { Identifier } from '../grammar/index.js'
 
-function ImageType() {
-    BinaryType.call(this, new Identifier("Image"));
-    return this;
+export default class ImageType extends BinaryType {
+
+    constructor() {
+        super(new Identifier("Image"));
+    }
 }
 
-ImageType.prototype = Object.create(BinaryType.prototype);
-ImageType.prototype.constructor = ImageType;
-
 ImageType.instance = new ImageType();
-
-exports.ImageType = ImageType;

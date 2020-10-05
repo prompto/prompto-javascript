@@ -1,8 +1,8 @@
-var utf8BufferToString = require("../utils/Utils").utf8BufferToString;
-var stringToUtf8Buffer = require("../utils/Utils").stringToUtf8Buffer;
-var Document = require("./Document").Document;
+const Document = require('./Document.js').default;
+const utf8BufferToString = require('../utils/Utils.js').utf8BufferToString;
+const stringToUtf8Buffer = require('../utils/Utils.js').stringToUtf8Buffer;
 
-function Blob() {
+export default function Blob() {
     this.zipped = null;
     this.file = null;
     return this;
@@ -98,6 +98,3 @@ Blob.prototype.zippedToDocument = function() {
     instance.fromJson(value, parts);
     return instance;
 };
-
-
-exports.Blob = Blob;

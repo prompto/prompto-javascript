@@ -1,61 +1,54 @@
-var Expression = require("./Expression").Expression;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var ResourceContext = require("../runtime/Context").ResourceContext;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-var TextType = require("../type/TextType").TextType;
-var TextValue = require("../value/TextValue").TextValue;
+import Expression from './Expression.js'
+import { ResourceContext } from '../runtime/index.js'
+import { ResourceType, TextType } from '../type/index.js'
+import { TextValue } from '../value/index.js'
+import { NullReferenceError, InvalidResourceError } from '../error/index.js'
 
-function ReadOneExpression(resource) {
-    Expression.call(this);
-	this.resource = resource;
-	return this;
+export default class ReadOneExpression extends Expression {
+
+    constructor(resource) {
+        super();
+        this.resource = resource;
+    }
+
+    toString() {
+        return "read one from " + this.resource.toString();
+    }
+
+    toDialect(writer) {
+        writer.append("read one from ");
+        this.resource.toDialect(writer);
+    }
+
+    check(context) {
+        if(!(context instanceof ResourceContext))
+            context.problemListener.reportNotAResourceContext(this.resource);
+        const sourceType = this.resource.check(context);
+        if(!(sourceType instanceof ResourceType))
+            context.problemListener.reportNotAResource(this.resource);
+        return TextType.instance;
+    }
+
+    interpret(context) {
+        if(!(context instanceof ResourceContext))
+            context.problemListener.reportNotAResourceContext(this.resource);
+        const res = this.resource.interpret(context);
+        if(res==null) {
+            throw new NullReferenceError();
+        }
+        if(!res.isReadable || !res.isReadable()) {
+            throw new InvalidResourceError("Not readable");
+        }
+        const s = res.readLine();
+        return new TextValue(s);
+    }
+
+    declare(transpiler) {
+        this.resource.declare(transpiler);
+    }
+
+    transpile(transpiler) {
+        this.resource.transpile(transpiler);
+        transpiler.append(".readLine()");
+    }
 }
-
-ReadOneExpression.prototype = Object.create(Expression.prototype);
-ReadOneExpression.prototype.constructor = ReadOneExpression;
-
-ReadOneExpression.prototype.toString = function() {
-	return "read one from " + this.resource.toString();
-};
-
-ReadOneExpression.prototype.toDialect = function(writer) {
-    writer.append("read one from ");
-    this.resource.toDialect(writer);
-};
-
-ReadOneExpression.prototype.check = function(context) {
-    if(!(context instanceof ResourceContext))
-        context.problemListener.reportNotAResourceContext(this.resource);
-    var sourceType = this.resource.check(context);
-	if(!(sourceType instanceof ResourceType))
-        context.problemListener.reportNotAResource(this.resource);
-	return TextType.instance;
-};
-
-ReadOneExpression.prototype.interpret = function(context) {
-    if(!(context instanceof ResourceContext))
-        context.problemListener.reportNotAResourceContext(this.resource);
-    var res = this.resource.interpret(context);
-	if(res==null) {
-		throw new NullReferenceError();
-	}
-	if(!res.isReadable || !res.isReadable()) {
-		throw new InvalidResourceError("Not readable");
-	}
-    var s = res.readLine();
-    return new TextValue(s);
-};
-
-
-ReadOneExpression.prototype.declare = function(transpiler) {
-    this.resource.declare(transpiler);
-};
-
-ReadOneExpression.prototype.transpile = function(transpiler) {
-    this.resource.transpile(transpiler);
-    transpiler.append(".readLine()");
-};
-
-
-exports.ReadOneExpression = ReadOneExpression;

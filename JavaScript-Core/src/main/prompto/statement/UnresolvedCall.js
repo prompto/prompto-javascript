@@ -1,196 +1,174 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
-var UnresolvedIdentifier = require("../expression/UnresolvedIdentifier").UnresolvedIdentifier;
-var MethodCall = require("./MethodCall").MethodCall;
-var MemberSelector = require("../expression/MemberSelector").MemberSelector;
-var MethodSelector = require("../expression/MethodSelector").MethodSelector;
-var UnresolvedSelector = require("../expression/UnresolvedSelector").UnresolvedSelector;
-var SelectorExpression = require("../expression/SelectorExpression").SelectorExpression;
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var ConstructorExpression = require("../expression/ConstructorExpression").ConstructorExpression;
-var CategoryType = require("../type/CategoryType").CategoryType;
-var MethodType = require("../type/MethodType").MethodType;
-var VoidType = require("../type/VoidType").VoidType;
-var CodeWriter = require("../utils/CodeWriter").CodeWriter;
-var Dialect = require("../parser/Dialect").Dialect;
+import BaseStatement from './BaseStatement.js'
+import { Dialect } from '../parser/index.js'
+import { VoidType, MethodType, CategoryType } from '../type/index.js'
+import { CodeWriter } from '../utils/index.js'
+import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from '../expression/index.js'
+import { MethodCall } from '../statement/index.js'
+import { CategoryDeclaration } from '../declaration/index.js'
+import { SyntaxError } from '../error/index.js'
 
-function UnresolvedCall(callable, args) {
-    BaseStatement.call(this);
-    this.resolved = null;
-    this.callable = callable;
-    this.args = args || null;
-    return this;
-}
-
-UnresolvedCall.prototype  = Object.create(BaseStatement.prototype);
-UnresolvedCall.prototype.constructor = UnresolvedCall;
-
-
-UnresolvedCall.prototype.isSimple = function() {
-    return true;
-};
-
-
-UnresolvedCall.prototype.toDialect = function(writer) {
-    try {
-        this.resolve(writer.context);
-        this.resolved.toDialect(writer);
-    } catch(error) {
-        this.callable.toDialect(writer);
-        if(this.args!=null)
-           this.args.toDialect(writer);
-        else if(writer.dialect !== Dialect.E)
-            writer.append("()");
+export default class UnresolvedCall extends BaseStatement {
+ 
+    constructor(callable, args) {
+        super();
+        this.resolved = null;
+        this.callable = callable;
+        this.args = args || null;
     }
-};
 
-
-UnresolvedCall.prototype.toString = function() {
-    return this.callable.toString() + (this.args!=null ? this.args.toString() : "");
-};
-
-UnresolvedCall.prototype.check = function(context) {
-    return this.resolveAndCheck(context);
-};
-
-
-UnresolvedCall.prototype.resolveAndCheck = function(context) {
-    this.resolve(context);
-    return this.resolved ? this.resolved.check(context) : VoidType.instance;
-};
-
-UnresolvedCall.prototype.interpret = function(context) {
-    this.resolve(context);
-    return this.resolved ? this.resolved.interpret(context) : null;
-};
-
-UnresolvedCall.prototype.interpretAssert = function(context, testMethodDeclaration) {
-    this.resolve(context);
-    if (this.resolved && this.resolved.interpretAssert)
-        return this.resolved.interpretAssert(context, testMethodDeclaration);
-    else {
-        var expected = this.getExpected(context, this.dialect);
-        throw new SyntaxError("Cannot test '" + expected + "'");
+    isSimple() {
+        return true;
     }
-};
 
-UnresolvedCall.prototype.getExpected = function(context, dialect, escapeMode) {
-    var writer = new CodeWriter(this.dialect, context);
-    writer.escapeMode = escapeMode;
-    this.toDialect(writer);
-    return writer.toString();
-};
-
-
-UnresolvedCall.prototype.transpileFound = function(transpiler, dialect) {
-    transpiler.append("'<unknown>'");
-};
-
-
-UnresolvedCall.prototype.resolve = function(context) {
-    if(this.resolved===null) {
-        if(this.callable instanceof UnresolvedIdentifier) {
-            this.resolved = this.resolveUnresolvedIdentifier(context);
-        } else if(this.callable instanceof UnresolvedSelector) {
-            this.resolved = this.resolveUnresolvedSelector(context);
-        } else if (this.callable instanceof MemberSelector) {
-            this.resolved = this.resolveMember(context);
+    toDialect(writer) {
+        try {
+            this.resolve(writer.context);
+            this.resolved.toDialect(writer);
+        } catch(error) {
+            this.callable.toDialect(writer);
+            if(this.args!=null)
+               this.args.toDialect(writer);
+            else if(writer.dialect !== Dialect.E)
+                writer.append("()");
         }
-        if(this.resolved)
-            return this.resolved;
-        else
-            context.problemListener.reportUnknownMethod(this.callable);
     }
-};
 
-
-UnresolvedCall.prototype.resolveUnresolvedSelector = function(context) {
-    this.callable.resolveMethod(context, this.args);
-    return this.callable.resolved;
-};
-
-
-UnresolvedCall.prototype.resolveUnresolvedIdentifier = function(context) {
-    var id = this.callable.id;
-    var call, decl = null;
-    // if this happens in the context of a member method, then we need to check for category members first
-    var instance = context.getClosestInstanceContext();
-    if(instance!=null) {
-        decl = this.resolveUnresolvedMember(instance, id.name);
-        if(decl!=null)
-            call = new MethodCall(new MethodSelector(null, id), this.args);
+    toString() {
+        return this.callable.toString() + (this.args!=null ? this.args.toString() : "");
     }
-    // could be a local instance
-    if(call==null) {
-        var named = context.getRegisteredValue(id.name);
-        if(named !== null) {
-            var type = named.getType(context);
-            if(type != null) {
-                type = type.resolve(context);
-                if(type instanceof MethodType) {
-                    call = new MethodCall(new MethodSelector(null, id), this.args);
-                    call.variableName = id.name;
+
+    check(context) {
+        return this.resolveAndCheck(context);
+    }
+
+    resolveAndCheck(context) {
+        this.resolve(context);
+        return this.resolved ? this.resolved.check(context) : VoidType.instance;
+    }
+
+    interpret(context) {
+        this.resolve(context);
+        return this.resolved ? this.resolved.interpret(context) : null;
+    }
+
+    interpretAssert(context, testMethodDeclaration) {
+        this.resolve(context);
+        if (this.resolved && this.resolved.interpretAssert)
+            return this.resolved.interpretAssert(context, testMethodDeclaration);
+        else {
+            const expected = this.getExpected(context, this.dialect);
+            throw new SyntaxError("Cannot test '" + expected + "'");
+        }
+    }
+
+    getExpected(context, dialect, escapeMode) {
+        const writer = new CodeWriter(this.dialect, context);
+        writer.escapeMode = escapeMode;
+        this.toDialect(writer);
+        return writer.toString();
+    }
+
+    transpileFound(transpiler, dialect) {
+        transpiler.append("'<unknown>'");
+    }
+
+    resolve(context) {
+        if(this.resolved===null) {
+            if(this.callable instanceof UnresolvedIdentifier) {
+                this.resolved = this.resolveUnresolvedIdentifier(context);
+            } else if(this.callable instanceof UnresolvedSelector) {
+                this.resolved = this.resolveUnresolvedSelector(context);
+            } else if (this.callable instanceof MemberSelector) {
+                this.resolved = this.resolveMember(context);
+            }
+            if(this.resolved)
+                return this.resolved;
+            else
+                context.problemListener.reportUnknownMethod(this.callable);
+        }
+    }
+
+    resolveUnresolvedSelector(context) {
+        this.callable.resolveMethod(context, this.args);
+        return this.callable.resolved;
+    }
+
+    resolveUnresolvedIdentifier(context) {
+        const id = this.callable.id;
+        let call, decl = null;
+        // if this happens in the context of a member method, then we need to check for category members first
+        const instance = context.getClosestInstanceContext();
+        if(instance!=null) {
+            decl = this.resolveUnresolvedMember(instance, id.name);
+            if(decl!=null)
+                call = new MethodCall(new MethodSelector(null, id), this.args);
+        }
+        // could be a local instance
+        if(call==null) {
+            const named = context.getRegisteredValue(id.name);
+            if(named !== null) {
+                let type = named.getType(context);
+                if(type != null) {
+                    type = type.resolve(context);
+                    if(type instanceof MethodType) {
+                        call = new MethodCall(new MethodSelector(null, id), this.args);
+                        call.variableName = id.name;
+                    }
                 }
             }
         }
-    }
-    // could be a declaration
-    if(call==null) {
-        decl = context.getRegisteredDeclaration(id.name);
-        if (decl === null) {
-            context.problemListener.reportUnknownMethod(id);
-            return null;
+        // could be a declaration
+        if(call==null) {
+            decl = context.getRegisteredDeclaration(id.name);
+            if (decl === null) {
+                context.problemListener.reportUnknownMethod(id);
+                return null;
+            }
+            if (decl instanceof CategoryDeclaration) {
+                call = new ConstructorExpression(new CategoryType(id), null, this.args, false);
+            } else {
+                call = new MethodCall(new MethodSelector(null, id), this.args);
+            }
         }
-        if (decl instanceof CategoryDeclaration) {
-            call = new ConstructorExpression(new CategoryType(id), null, this.args, false);
-        } else {
-            call = new MethodCall(new MethodSelector(null, id), this.args);
-        }
+        call.copySectionFrom(this);
+        return call;
     }
-    call.copySectionFrom(this);
-    return call;
-};
 
-UnresolvedCall.prototype.resolveUnresolvedMember = function(context, name) {
-    var decl = context.getRegisteredDeclaration(context.instanceType.name);
-    var methods = decl.getMemberMethodsMap(context, name);
-    if(methods!=null && !methods.isEmpty())
-        return methods;
-    else
-        return null;
-};
-
-
-UnresolvedCall.prototype.resolveMember = function(context) {
-    var call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
-    call.copySectionFrom(this);
-    return call;
-};
-
-
-UnresolvedCall.prototype.declare = function(transpiler) {
-    this.resolve(transpiler.context);
-    if(this.resolved)
-        this.resolved.declare(transpiler);
-};
-
-
-UnresolvedCall.prototype.transpile = function(transpiler) {
-    this.resolve(transpiler.context);
-    if(this.resolved)
-        this.resolved.transpile(transpiler);
-};
-
-
-
-UnresolvedCall.prototype.setParent = function(parent) {
-    if(parent) {
-        if(this.callable instanceof UnresolvedIdentifier)
-            this.callable = new MethodSelector(parent, this.callable.id);
-        else if(this.callable instanceof SelectorExpression)
-            this.callable.parent = parent;
+    resolveUnresolvedMember(context, name) {
+        const decl = context.getRegisteredDeclaration(context.instanceType.name);
+        const methods = decl.getMemberMethodsMap(context, name);
+        if(methods!=null && !methods.isEmpty())
+            return methods;
         else
-            throw new Error("Should never happen!");
+            return null;
     }
-};
 
-exports.UnresolvedCall = UnresolvedCall;
+    resolveMember(context) {
+        const call = new MethodCall(new MethodSelector(this.callable.parent, this.callable.id), this.args);
+        call.copySectionFrom(this);
+        return call;
+    }
+
+    declare(transpiler) {
+        this.resolve(transpiler.context);
+        if(this.resolved)
+            this.resolved.declare(transpiler);
+    }
+
+    transpile(transpiler) {
+        this.resolve(transpiler.context);
+        if(this.resolved)
+            this.resolved.transpile(transpiler);
+    }
+
+    setParent(parent) {
+        if(parent) {
+            if(this.callable instanceof UnresolvedIdentifier)
+                this.callable = new MethodSelector(parent, this.callable.id);
+            else if(this.callable instanceof SelectorExpression)
+                this.callable.parent = parent;
+            else
+                throw new Error("Should never happen!");
+        }
+    }
+}

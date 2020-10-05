@@ -1,11 +1,8 @@
-var SymbolList = require("./SymbolList").SymbolList;
+import SymbolList from './SymbolList.js'
 
-function CategorySymbolList(symbol) {
-	SymbolList.call(this, symbol);
-	return this;
+export default class CategorySymbolList extends SymbolList {
+
+    constructor(symbol) {
+        super(symbol);
+    }
 }
-
-CategorySymbolList.prototype = Object.create(SymbolList.prototype);
-CategorySymbolList.prototype.constructor = CategorySymbolList;
-
-exports.CategorySymbolList = CategorySymbolList;

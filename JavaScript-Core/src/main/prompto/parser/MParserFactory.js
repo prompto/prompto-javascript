@@ -1,15 +1,10 @@
-var antlr4 = require("antlr4/index");
-var SIndentingLexer = require("./MIndentingLexer").MIndentingLexer;
-var SCleverParser = require("./MCleverParser").MCleverParser;
+import antlr4 from 'antlr4';
+import { MIndentingLexer, MCleverParser } from './index.js'
 
-antlr4.MParserFactory = function() {
+export default function MParserFactory() {
 	
-	this.newLexer = function(data) {
-		return new SIndentingLexer(new antlr4.InputStream(data));
-	};
+	this.newLexer = data => new MIndentingLexer(new antlr4.InputStream(data));
 
-	this.newParser = function(path, data) {
-		return new SCleverParser(path, data);
-	};
+	this.newParser = (path, data) => new MCleverParser(path, data);
 
-};
+}

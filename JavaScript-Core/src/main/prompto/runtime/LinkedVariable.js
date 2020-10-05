@@ -1,19 +1,17 @@
 
 /* used for downcast */
-function LinkedVariable (type, linked) {
-    this.type = type;
-    this.linked = linked;
-    return this;
-}
+export default class LinkedVariable {
 
-LinkedVariable.prototype.getType = function(context) {
-    return this.type;
-};
+    constructor(type, linked) {
+        this.type = type;
+        this.linked = linked;
+    }
 
-Object.defineProperty(LinkedVariable.prototype, "name", {
-    get : function() {
+    getType(context) {
+        return this.type;
+    }
+
+    get name() {
         return this.linked.name;
     }
-});
-
-exports.LinkedVariable = LinkedVariable;
+}

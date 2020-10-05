@@ -1,11 +1,10 @@
-var JavaExpression = require("./JavaExpression").JavaExpression;
+import JavaExpression from './JavaExpression.js'
 
-function JavaSelectorExpression(parent) {
-	JavaExpression.call(this);
-	this.parent = parent || null;
-	return this;
+export default class JavaSelectorExpression extends JavaExpression {
+
+    constructor(parent) {
+        super();
+        this.parent = parent || null;
+    }
 }
-JavaSelectorExpression.prototype = Object.create(JavaExpression.prototype);
-JavaSelectorExpression.prototype.constructor = JavaSelectorExpression;
 
-exports.JavaSelectorExpression = JavaSelectorExpression;

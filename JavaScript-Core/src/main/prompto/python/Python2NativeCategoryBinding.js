@@ -1,19 +1,17 @@
-var PythonNativeCategoryBinding = require("./PythonNativeCategoryBinding").PythonNativeCategoryBinding;
+import PythonNativeCategoryBinding from './PythonNativeCategoryBinding.js'
 
-function Python2NativeCategoryBinding(binding) {
-	PythonNativeCategoryBinding.call(this, binding.identifier, binding.module);
-	return this;
+export default class Python2NativeCategoryBinding extends PythonNativeCategoryBinding {
+
+    constructor(binding) {
+        super(binding.identifier, binding.module);
+    }
+
+    toDialect(writer) {
+        writer.append("Python2: ");
+        writer.append(this.identifier);
+        if(this.module!=null)
+            this.module.toDialect(writer);
+    }
 }
 
-Python2NativeCategoryBinding.prototype = Object.create(PythonNativeCategoryBinding.prototype);
-Python2NativeCategoryBinding.prototype.constructor = Python2NativeCategoryBinding;
-
-Python2NativeCategoryBinding.prototype.toDialect = function(writer) {
-    writer.append("Python2: ");
-    writer.append(this.identifier);
-    if(this.module!=null)
-        this.module.toDialect(writer);
-};
-
-exports.Python2NativeCategoryBinding = Python2NativeCategoryBinding;
 

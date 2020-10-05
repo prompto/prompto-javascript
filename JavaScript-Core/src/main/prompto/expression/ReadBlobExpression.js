@@ -1,61 +1,55 @@
-var Expression = require("./Expression").Expression;
-var ResourceType = require("../type/ResourceType").ResourceType;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var InvalidResourceError = require("../error/InvalidResourceError").InvalidResourceError;
-var BlobType = require("../type/BlobType").BlobType;
-var BlobValue = require("../value/BlobValue").BlobValue;
+import Expression from './Expression.js'
+import { BlobValue } from '../value/index.js'
+import { ResourceType, BlobType } from '../type/index.js'
+import { NullReferenceError, InvalidResourceError} from '../error/index.js'
 
-function ReadBlobExpression(resource) {
-    Expression.call(this);
-	this.resource = resource;
-	return this;
-}
+export default class ReadBlobExpression extends Expression {
 
-ReadBlobExpression.prototype = Object.create(Expression.prototype);
-ReadBlobExpression.prototype.constructor = ReadBlobExpression;
-
-ReadBlobExpression.prototype.toString = function() {
-	return "read Blob from " + this.resource.toString();
-};
-
-ReadBlobExpression.prototype.toDialect = function(writer) {
-    writer.append("read Blob from ");
-    this.resource.toDialect(writer);
-};
-
-ReadBlobExpression.prototype.check = function(context) {
-    context = context.newResourceContext();
-    var sourceType = this.resource.check(context);
-	if(!(sourceType instanceof ResourceType))
-        context.problemListener.reportNotAResource(this.resource);
-	return BlobType.instance;
-};
-
-ReadBlobExpression.prototype.interpret = function(context) {
-    context = context.newResourceContext();
-    var res = this.resource.interpret(context);
-	if(res==null) {
-		throw new NullReferenceError();
-	}
-	if(!res.isReadable || !res.isReadable()) {
-		throw new InvalidResourceError("Not readable");
-	}
-    try {
-        var b = res.readBinary();
-        return new BlobValue(b.mimeType, b.data);
-    } finally {
-        res.close();
+    constructor(resource) {
+        super();
+        this.resource = resource;
     }
-};
 
-ReadBlobExpression.prototype.declare = function(transpiler) {
-    this.resource.declare(transpiler);
-};
+    toString() {
+        return "read Blob from " + this.resource.toString();
+    }
 
+    toDialect(writer) {
+        writer.append("read Blob from ");
+        this.resource.toDialect(writer);
+    }
 
-ReadBlobExpression.prototype.transpile = function(transpiler) {
-    this.resource.transpile(transpiler);
-    transpiler.append(".readBinary()");
-};
+    check(context) {
+        context = context.newResourceContext();
+        const sourceType = this.resource.check(context);
+        if(!(sourceType instanceof ResourceType))
+            context.problemListener.reportNotAResource(this.resource);
+        return BlobType.instance;
+    }
 
-exports.ReadBlobExpression = ReadBlobExpression;
+    interpret(context) {
+        context = context.newResourceContext();
+        const res = this.resource.interpret(context);
+        if(res==null) {
+            throw new NullReferenceError();
+        }
+        if(!res.isReadable || !res.isReadable()) {
+            throw new InvalidResourceError("Not readable");
+        }
+        try {
+            const b = res.readBinary();
+            return new BlobValue(b.mimeType, b.data);
+        } finally {
+            res.close();
+        }
+    }
+
+    declare(transpiler) {
+        this.resource.declare(transpiler);
+    }
+
+    transpile(transpiler) {
+        this.resource.transpile(transpiler);
+        transpiler.append(".readBinary()");
+    }
+}

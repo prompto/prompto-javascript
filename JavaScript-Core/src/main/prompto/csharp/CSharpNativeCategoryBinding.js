@@ -1,17 +1,14 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+import NativeCategoryBinding from '../grammar/NativeCategoryBinding.js'
 
-function CSharpNativeCategoryBinding(expression) {
-	NativeCategoryBinding.call(this);
-	this.expression = expression;
-	return this;
+export default class CSharpNativeCategoryBinding extends NativeCategoryBinding {
+
+    constructor(expression) {
+        super();
+        this.expression = expression;
+    }
+
+    toDialect(writer) {
+        writer.append("C#: ");
+        this.expression.toDialect(writer);
+    }
 }
-
-CSharpNativeCategoryBinding.prototype = Object.create(NativeCategoryBinding.prototype);
-CSharpNativeCategoryBinding.prototype.constructor = CSharpNativeCategoryBinding;
-
-CSharpNativeCategoryBinding.prototype.toDialect = function(writer) {
-    writer.append("C#: ");
-    this.expression.toDialect(writer);
-};
-
-exports.CSharpNativeCategoryBinding = CSharpNativeCategoryBinding;

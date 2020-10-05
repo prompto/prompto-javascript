@@ -1,3 +1,3 @@
-exports.ProblemListener = require("./../problem/ProblemListener").ProblemListener;
-exports.ProblemCollector = require("./../problem/ProblemCollector").ProblemCollector;
-exports.CodeCompleter = require("./CodeCompleter").CodeCompleter;
+export {default as ProblemListener} from './ProblemListener.js';
+export {default as ProblemCollector} from './ProblemCollector.js';
+export {default as CodeCompleter} from './CodeCompleter.js';

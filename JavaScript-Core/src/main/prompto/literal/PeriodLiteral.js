@@ -1,29 +1,25 @@
-var Literal = require("./Literal").Literal;
-var PeriodType = require("../type/PeriodType").PeriodType;
-var PeriodValue = require("../value/PeriodValue").PeriodValue;
-var Period = require("../intrinsic/Period").Period;
+import Literal from './Literal.js'
+import { PeriodType } from '../type/index.js'
+import { PeriodValue } from '../value/index.js'
+import { Period } from '../intrinsic/index.js'
 
-function PeriodLiteral(text) {
-	Literal.call(this, text, new PeriodValue(Period.parse(text.substring(1,text.length-1))));
-	return this;
+export default class PeriodLiteral extends Literal {
+
+    constructor(text) {
+        super(text, new PeriodValue(Period.parse(text.substring(1,text.length-1))));
+    }
+
+    check(context) {
+        return PeriodType.instance;
+    }
+
+    declare(transpiler) {
+        transpiler.require(Period);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("Period.parse(").append(this.text).append(")");
+    }
 }
 
-PeriodLiteral.prototype = Object.create(Literal.prototype);
-PeriodLiteral.prototype.constructor = PeriodLiteral;
-
-PeriodLiteral.prototype.check = function(context) {
-	return PeriodType.instance;
-};
-
-
-PeriodLiteral.prototype.declare = function(transpiler) {
-    transpiler.require(Period);
-};
-
-
-PeriodLiteral.prototype.transpile = function(transpiler) {
-	transpiler.append("Period.parse(").append(this.text).append(")");
-};
-
-exports.PeriodLiteral = PeriodLiteral;
 

@@ -2,109 +2,108 @@ var antlr4 = require("antlr4");
 var prompto = require("../../../../main/prompto/index");
 
 
-function ETestParser(code, addLF) {
-    prompto.parser.ECleverParser.call(this, code);
-    var lexer = this.getTokenStream().tokenSource;
-    lexer.addLF = addLF;
-    return this;
+class ETestParser extends prompto.parser.ECleverParser {
+
+    constructor(code, addLF) {
+        super(code);
+        var lexer = this.getTokenStream().tokenSource;
+        lexer.addLF = addLF;
+    }
+
+    value = function (tree) {
+        var builder = new prompto.parser.EPromptoBuilder(this);
+        var walker = new antlr4.tree.ParseTreeWalker();
+        walker.walk(builder, tree);
+        return builder.getNodeValue(tree);
+    }
+
+    parse_atomic_literal() {
+        return this.value(this.atomic_literal());
+    }
+
+    parse_assignable() {
+        return this.value(this.assignable_instance());
+    }
+
+
+    parse_argument_assignment_list() {
+        return this.value(this.argument_assignment_list());
+    }
+
+    parse_argument_assignment() {
+        return this.value(this.argument_assignment());
+    }
+
+
+    parse_instance_expression() {
+        return this.value(this.instance_expression());
+    }
+
+    parse_range_literal() {
+        return this.value(this.range_literal());
+    }
+
+    parse_tuple_literal() {
+        return this.value(this.tuple_literal());
+    }
+
+    parse_attribute_declaration() {
+        return this.value(this.attribute_declaration());
+    }
+
+    parse_category_declaration() {
+        return this.value(this.category_declaration());
+    }
+
+    parse_typed_argument() {
+        return this.value(this.typed_argument());
+    }
+
+    parse_argument_list() {
+        return this.value(this.full_argument_list());
+    }
+
+    parse_method_call() {
+        return this.value(this.method_call_statement());
+    }
+
+    parse_native_method_declaration() {
+        return this.value(this.native_method_declaration());
+    }
+
+    parse_concrete_method_declaration() {
+        return this.value(this.concrete_method_declaration());
+    }
+
+    parse_constructor_expression() {
+        return this.value(this.constructor_expression());
+    }
+
+    parse_assign_instance_statement() {
+        return this.value(this.assign_instance_statement());
+    }
+
+    parse_native_statement() {
+        return this.value(this.native_statement());
+    }
+
+    parse_literal_expression() {
+        return this.value(this.literal_expression());
+    }
+
+    parse_native_symbol() {
+        return this.value(this.native_symbol());
+    }
+
+    parse_statement() {
+        return this.value(this.statement());
+    }
+
+    parse_expression() {
+        return this.value(this.expression());
+    }
+
 }
-
-ETestParser.prototype = Object.create(prompto.parser.ECleverParser.prototype);
-ETestParser.prototype.constructor = ETestParser;
-
-ETestParser.prototype.value = function (tree) {
-    var builder = new prompto.parser.EPromptoBuilder(this);
-    var walker = new antlr4.tree.ParseTreeWalker();
-    walker.walk(builder, tree);
-    return builder.getNodeValue(tree);
-};
-
-ETestParser.prototype.parse_atomic_literal = function () {
-    return this.value(this.atomic_literal());
-};
-
-ETestParser.prototype.parse_assignable = function () {
-    return this.value(this.assignable_instance());
-};
-
-
-ETestParser.prototype.parse_argument_assignment_list = function () {
-    return this.value(this.argument_assignment_list());
-};
-
-ETestParser.prototype.parse_argument_assignment = function () {
-    return this.value(this.argument_assignment());
-};
-
-
-ETestParser.prototype.parse_instance_expression = function () {
-    return this.value(this.instance_expression());
-};
-
-ETestParser.prototype.parse_range_literal = function () {
-    return this.value(this.range_literal());
-};
-
-ETestParser.prototype.parse_tuple_literal = function () {
-    return this.value(this.tuple_literal());
-};
-
-ETestParser.prototype.parse_attribute_declaration = function () {
-    return this.value(this.attribute_declaration());
-};
-
-ETestParser.prototype.parse_category_declaration = function () {
-    return this.value(this.category_declaration());
-};
-
-ETestParser.prototype.parse_typed_argument = function () {
-    return this.value(this.typed_argument());
-};
-
-ETestParser.prototype.parse_argument_list = function () {
-    return this.value(this.full_argument_list());
-};
-
-ETestParser.prototype.parse_method_call = function () {
-    return this.value(this.method_call_statement());
-};
-
-ETestParser.prototype.parse_native_method_declaration = function () {
-    return this.value(this.native_method_declaration());
-};
-
-ETestParser.prototype.parse_concrete_method_declaration = function () {
-    return this.value(this.concrete_method_declaration());
-};
-
-ETestParser.prototype.parse_constructor_expression = function () {
-    return this.value(this.constructor_expression());
-};
-
-ETestParser.prototype.parse_assign_instance_statement = function () {
-    return this.value(this.assign_instance_statement());
-};
-
-ETestParser.prototype.parse_native_statement = function () {
-    return this.value(this.native_statement());
-};
-
-ETestParser.prototype.parse_literal_expression = function () {
-    return this.value(this.literal_expression());
-};
-
-ETestParser.prototype.parse_native_symbol = function () {
-    return this.value(this.native_symbol());
-};
-
-ETestParser.prototype.parse_statement = function () {
-    return this.value(this.statement());
-};
-
-ETestParser.prototype.parse_expression = function () {
-    return this.value(this.expression());
-};
-
 
 test('Integer', () => {
     var statement = "1";
@@ -311,7 +310,7 @@ test('SimpleArgumentAssignment', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E);
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E);
     as.toDialect(writer);
     expect(writer.toString()).toEqual("p.name as value");
 });
@@ -324,7 +323,7 @@ test('ComplexArgumentAssignment', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     as.toDialect(writer);
     expect(writer.toString()).toEqual("\"person\" + p.name as value");
 });
@@ -338,7 +337,7 @@ test('ArgumentAssignmentList1Arg', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     as.toDialect(writer);
     expect(writer.toString()).toEqual("\"person\" + p.name as value");
 });
@@ -355,7 +354,7 @@ test('MethodCallWith', () => {
     expect(as.name).toEqual("value");
     var exp = as.expression;
     expect(exp instanceof prompto.expression.PlusExpression).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     mc.toDialect(writer);
     expect(writer.toString()).toEqual("print with \"person\" + p.name as value");
 });
@@ -373,7 +372,7 @@ test('Method1Parameter1Statement', () => {
     var expected = new prompto.param.CategoryParameter(type, new prompto.grammar.Identifier("p"));
     expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print with \"person\" + p.name as value");
 });
@@ -393,7 +392,7 @@ test('Method1Extended1Statement', () => {
         new prompto.grammar.IdentifierList(new prompto.grammar.Identifier("name")));
     expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print with \"object\" + o.name as value");
 });
@@ -413,7 +412,7 @@ test('Method1Array1Statement', () => {
         new prompto.grammar.Identifier("options"));
     expect(prompto.utils.arrayContains(ad.parameters, expected)).toBeTruthy();
     expect(ad.statements).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     ad.statements[0].toDialect(writer);
     expect(writer.toString()).toEqual("print with \"array\" + args as value");
 });
@@ -627,7 +626,7 @@ test('SimpleDictLiteral', () => {
     var literal = parser.parse_literal_expression();
     expect(literal).toBeTruthy();
     expect(literal instanceof prompto.literal.DictLiteral).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     literal.toDialect(writer);
     expect(writer.toString()).toEqual("<\"john\":1234, eric:5678>");
 });
@@ -721,7 +720,7 @@ test('NativeSymbol', () => {
     var symbol = parser.parse_native_symbol();
     expect(symbol).toBeTruthy();
     expect(symbol instanceof prompto.expression.NativeSymbol).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     symbol.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -732,7 +731,7 @@ test('ExpressionWith', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -743,7 +742,7 @@ test('MethodUnresolved', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt instanceof prompto.statement.UnresolvedCall).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -754,7 +753,7 @@ test('MethodExpression', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt instanceof prompto.statement.UnresolvedCall).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -765,7 +764,7 @@ test('MethodWith', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_statement();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -776,7 +775,7 @@ test('Instance', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_expression();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });
@@ -787,7 +786,7 @@ test('AssignableInstance', () => {
     var parser = new ETestParser(statement, false);
     var stmt = parser.parse_assignable();
     expect(stmt).toBeTruthy();
-    writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.E)
     stmt.toDialect(writer);
     expect(writer.toString()).toEqual(statement);
 });

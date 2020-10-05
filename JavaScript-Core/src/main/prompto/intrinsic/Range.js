@@ -1,9 +1,8 @@
-var equalObjects = require("../utils/Utils").equalObjects;
-var StrictSet = require("./StrictSet").StrictSet;
-var LocalDate = require("./LocalDate").LocalDate;
-var LocalTime = require("./LocalTime").LocalTime;
-var List = require("./List").List;
-
+const StrictSet = require('./StrictSet.js').default;
+const List = require('./List.js').default;
+const LocalDate = require('./LocalDate.js').default;
+const LocalTime = require('./LocalTime.js').default;
+const equalObjects = require('../utils/Utils.js').equalObjects;
 
 function Range(first, last) {
     this.first = first;
@@ -212,8 +211,4 @@ TimeRange.prototype.has = function(value) {
 };
 
 
-exports.Range = Range;
-exports.IntegerRange = IntegerRange;
-exports.CharacterRange = CharacterRange;
-exports.DateRange = DateRange;
-exports.TimeRange = TimeRange;
+export { Range, IntegerRange, CharacterRange, DateRange, TimeRange };

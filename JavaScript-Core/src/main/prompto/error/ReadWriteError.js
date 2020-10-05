@@ -1,15 +1,8 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
+import ExecutionError from './ExecutionError.js'
 
-function ReadWriteError(message) {
-    ExecutionError.call(this, message);
-    return this;
+export default class ReadWriteError extends ExecutionError {
+
+    getExpression(context) {
+        return context.getRegisteredValue("READ_WRITE");
+    }
 }
-
-ReadWriteError.prototype = Object.create(ExecutionError.prototype);
-ReadWriteError.prototype.constructor = ReadWriteError;
-
-ReadWriteError.prototype.getExpression = function(context) {
-    return context.getRegisteredValue("READ_WRITE");
-};
-
-exports.ReadWriteError = ReadWriteError;

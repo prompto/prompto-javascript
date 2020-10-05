@@ -1,16 +1,14 @@
-var ExecutionError = require("./ExecutionError").ExecutionError;
-var TextLiteral = require("../literal/TextLiteral").TextLiteral;
+import ExecutionError from './ExecutionError.js'
+import { TextLiteral } from '../literal/index.js'
 
-function InvalidDataError(message) {
-	ExecutionError.call(this, message);
-	return this;
+export default class InvalidDataError extends ExecutionError {
+
+	constructor(message) {
+		super(message);
+	}
+
+	getExpression(context) {
+		return new TextLiteral("'" + this.message + "'");
+	}
+
 }
-
-InvalidDataError.prototype = Object.create(ExecutionError.prototype);
-InvalidDataError.prototype.constructor = InvalidDataError;
-
-InvalidDataError.prototype.getExpression = function(context) {
-	return new TextLiteral("'" + this.message + "'");
-};
-
-exports.InvalidDataError = InvalidDataError;

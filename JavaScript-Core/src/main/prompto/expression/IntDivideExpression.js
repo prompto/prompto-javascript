@@ -1,50 +1,44 @@
-var Expression = require("./Expression").Expression;
+import Expression from './Expression.js'
 
-function IntDivideExpression(left, right) {
-	Expression.call(this);
-	this.left = left;
-	this.right = right;
-	return this;
+export default class IntDivideExpression extends Expression {
+
+    constructor(left, right) {
+        super();
+        this.left = left;
+        this.right = right;
+    }
+
+    toString() {
+        return this.left.toString() + " \\ " + this.right.toString();
+    }
+
+    toDialect(writer) {
+        this.left.toDialect(writer);
+        writer.append(" \\ ");
+        this.right.toDialect(writer);
+    }
+
+    check(context) {
+        const lt = this.left.check(context);
+        const rt = this.right.check(context);
+        return lt.checkIntDivide(context,rt);
+    }
+
+    interpret(context) {
+        const lval = this.left.interpret(context);
+        const rval = this.right.interpret(context);
+        return lval.IntDivide(context, rval);
+    }
+
+    declare(transpiler) {
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
+        return lt.declareIntDivide(transpiler, rt, this.left, this.right);
+    }
+
+    transpile(transpiler) {
+        const lt = this.left.check(transpiler.context);
+        const rt = this.right.check(transpiler.context);
+        return lt.transpileIntDivide(transpiler, rt, this.left, this.right);
+    }
 }
-
-IntDivideExpression.prototype = Object.create(Expression.prototype);
-IntDivideExpression.prototype.constructor = IntDivideExpression;
-
-IntDivideExpression.prototype.toString = function() {
-	return this.left.toString() + " \\ " + this.right.toString();
-};
-
-IntDivideExpression.prototype.toDialect = function(writer) {
-    this.left.toDialect(writer);
-    writer.append(" \\ ");
-    this.right.toDialect(writer);
-};
-
-IntDivideExpression.prototype.check = function(context) {
-	var lt = this.left.check(context);
-	var rt = this.right.check(context);
-	return lt.checkIntDivide(context,rt);
-};
-
-IntDivideExpression.prototype.interpret = function(context) {
-	var lval = this.left.interpret(context);
-	var rval = this.right.interpret(context);
-	return lval.IntDivide(context, rval);
-};
-
-
-IntDivideExpression.prototype.declare = function(transpiler) {
-    var lt = this.left.check(transpiler.context);
-    var rt = this.right.check(transpiler.context);
-    return lt.declareIntDivide(transpiler, rt, this.left, this.right);
-};
-
-
-IntDivideExpression.prototype.transpile = function(transpiler) {
-    var lt = this.left.check(transpiler.context);
-    var rt = this.right.check(transpiler.context);
-    return lt.transpileIntDivide(transpiler, rt, this.left, this.right);
-};
-
-
-exports.IntDivideExpression = IntDivideExpression;

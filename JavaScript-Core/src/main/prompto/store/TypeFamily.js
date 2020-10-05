@@ -1,11 +1,13 @@
-function TypeFamily(name) {
-    this.name = name;
-    return this;
-}
+export default class TypeFamily {
 
-TypeFamily.prototype.toTranspiled = function() {
-    return "new TypeFamily('" + this.name + "')";
-};
+    constructor(name) {
+        this.name = name;
+    }
+
+    toTranspiled() {
+        return "new TypeFamily('" + this.name + "')";
+    }
+}
 
 // non storable
 TypeFamily.BOOLEAN = new TypeFamily("BOOLEAN");
@@ -44,5 +46,3 @@ TypeFamily.CSS = new TypeFamily("CSS");
 TypeFamily.HTML = new TypeFamily("HTML");
 // volatile
 TypeFamily.MISSING = new TypeFamily("MISSING");
-
-exports.TypeFamily = TypeFamily;

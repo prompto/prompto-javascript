@@ -1,8 +1,8 @@
-var List = require("./List").List;
-var StrictSet = require("./StrictSet").StrictSet;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
+const List = require('./List.js').default;
+const StrictSet = require('./StrictSet.js').default;
+const NotMutableError = require('../error/NotMutableError.js').default;
 
-function Dictionary(mutable, entries) {
+export default function Dictionary(mutable, entries) {
     if(entries)
         Object.getOwnPropertyNames(entries).forEach(function(name) {
             this[name] = entries[name];
@@ -139,5 +139,3 @@ Dictionary.prototype.setItem = function (item, value) {
     else
         this[item] = value;
 };
-
-exports.Dictionary = Dictionary;

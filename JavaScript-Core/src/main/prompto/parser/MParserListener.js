@@ -1,4164 +1,4158 @@
-// Generated from MParser.g4 by ANTLR 4.7.1
+// Generated from MParser.g4 by ANTLR 4.8
 // jshint ignore: start
-var antlr4 = require('antlr4/index');
+import antlr4 from 'antlr4';
 
 // This class defines a complete listener for a parse tree produced by MParser.
-function MParserListener() {
-	antlr4.tree.ParseTreeListener.call(this);
-	return this;
+export default class MParserListener extends antlr4.tree.ParseTreeListener {
+
+	// Enter a parse tree produced by MParser#enum_category_declaration.
+	enterEnum_category_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#enum_category_declaration.
+	exitEnum_category_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#enum_native_declaration.
+	enterEnum_native_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#enum_native_declaration.
+	exitEnum_native_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_symbol.
+	enterNative_symbol(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_symbol.
+	exitNative_symbol(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#category_symbol.
+	enterCategory_symbol(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#category_symbol.
+	exitCategory_symbol(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#attribute_declaration.
+	enterAttribute_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#attribute_declaration.
+	exitAttribute_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#index_clause.
+	enterIndex_clause(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#index_clause.
+	exitIndex_clause(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#concrete_widget_declaration.
+	enterConcrete_widget_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#concrete_widget_declaration.
+	exitConcrete_widget_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_widget_declaration.
+	enterNative_widget_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_widget_declaration.
+	exitNative_widget_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#concrete_category_declaration.
+	enterConcrete_category_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#concrete_category_declaration.
+	exitConcrete_category_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#singleton_category_declaration.
+	enterSingleton_category_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#singleton_category_declaration.
+	exitSingleton_category_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#derived_list.
+	enterDerived_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#derived_list.
+	exitDerived_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#operator_method_declaration.
+	enterOperator_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#operator_method_declaration.
+	exitOperator_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#setter_method_declaration.
+	enterSetter_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#setter_method_declaration.
+	exitSetter_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_setter_declaration.
+	enterNative_setter_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_setter_declaration.
+	exitNative_setter_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#getter_method_declaration.
+	enterGetter_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#getter_method_declaration.
+	exitGetter_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_getter_declaration.
+	enterNative_getter_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_getter_declaration.
+	exitNative_getter_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_category_declaration.
+	enterNative_category_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_category_declaration.
+	exitNative_category_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_resource_declaration.
+	enterNative_resource_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_resource_declaration.
+	exitNative_resource_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_category_bindings.
+	enterNative_category_bindings(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_category_bindings.
+	exitNative_category_bindings(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NativeCategoryBindingListItem.
+	enterNativeCategoryBindingListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NativeCategoryBindingListItem.
+	exitNativeCategoryBindingListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NativeCategoryBindingList.
+	enterNativeCategoryBindingList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NativeCategoryBindingList.
+	exitNativeCategoryBindingList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#abstract_method_declaration.
+	enterAbstract_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#abstract_method_declaration.
+	exitAbstract_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#concrete_method_declaration.
+	enterConcrete_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#concrete_method_declaration.
+	exitConcrete_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_method_declaration.
+	enterNative_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_method_declaration.
+	exitNative_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#test_method_declaration.
+	enterTest_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#test_method_declaration.
+	exitTest_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#assertion.
+	enterAssertion(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#assertion.
+	exitAssertion(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#typed_argument.
+	enterTyped_argument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#typed_argument.
+	exitTyped_argument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MethodCallStatement.
+	enterMethodCallStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MethodCallStatement.
+	exitMethodCallStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AssignInstanceStatement.
+	enterAssignInstanceStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AssignInstanceStatement.
+	exitAssignInstanceStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AssignTupleStatement.
+	enterAssignTupleStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AssignTupleStatement.
+	exitAssignTupleStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#StoreStatement.
+	enterStoreStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#StoreStatement.
+	exitStoreStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FetchStatement.
+	enterFetchStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FetchStatement.
+	exitFetchStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ReadStatement.
+	enterReadStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ReadStatement.
+	exitReadStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FlushStatement.
+	enterFlushStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FlushStatement.
+	exitFlushStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#BreakStatement.
+	enterBreakStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#BreakStatement.
+	exitBreakStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ReturnStatement.
+	enterReturnStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ReturnStatement.
+	exitReturnStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IfStatement.
+	enterIfStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IfStatement.
+	exitIfStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SwitchStatement.
+	enterSwitchStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SwitchStatement.
+	exitSwitchStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ForEachStatement.
+	enterForEachStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ForEachStatement.
+	exitForEachStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#WhileStatement.
+	enterWhileStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#WhileStatement.
+	exitWhileStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DoWhileStatement.
+	enterDoWhileStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DoWhileStatement.
+	exitDoWhileStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#RaiseStatement.
+	enterRaiseStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#RaiseStatement.
+	exitRaiseStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TryStatement.
+	enterTryStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TryStatement.
+	exitTryStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#WriteStatement.
+	enterWriteStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#WriteStatement.
+	exitWriteStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#WithResourceStatement.
+	enterWithResourceStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#WithResourceStatement.
+	exitWithResourceStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#WithSingletonStatement.
+	enterWithSingletonStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#WithSingletonStatement.
+	exitWithSingletonStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ClosureStatement.
+	enterClosureStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ClosureStatement.
+	exitClosureStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CommentStatement.
+	enterCommentStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CommentStatement.
+	exitCommentStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#flush_statement.
+	enterFlush_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#flush_statement.
+	exitFlush_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#store_statement.
+	enterStore_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#store_statement.
+	exitStore_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#method_call_expression.
+	enterMethod_call_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#method_call_expression.
+	exitMethod_call_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#method_call_statement.
+	enterMethod_call_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#method_call_statement.
+	exitMethod_call_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#with_resource_statement.
+	enterWith_resource_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#with_resource_statement.
+	exitWith_resource_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#with_singleton_statement.
+	enterWith_singleton_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#with_singleton_statement.
+	exitWith_singleton_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#switch_statement.
+	enterSwitch_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#switch_statement.
+	exitSwitch_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AtomicSwitchCase.
+	enterAtomicSwitchCase(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AtomicSwitchCase.
+	exitAtomicSwitchCase(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CollectionSwitchCase.
+	enterCollectionSwitchCase(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CollectionSwitchCase.
+	exitCollectionSwitchCase(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#for_each_statement.
+	enterFor_each_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#for_each_statement.
+	exitFor_each_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#do_while_statement.
+	enterDo_while_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#do_while_statement.
+	exitDo_while_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#while_statement.
+	enterWhile_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#while_statement.
+	exitWhile_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#if_statement.
+	enterIf_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#if_statement.
+	exitIf_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ElseIfStatementList.
+	enterElseIfStatementList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ElseIfStatementList.
+	exitElseIfStatementList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ElseIfStatementListItem.
+	enterElseIfStatementListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ElseIfStatementListItem.
+	exitElseIfStatementListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#raise_statement.
+	enterRaise_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#raise_statement.
+	exitRaise_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#try_statement.
+	enterTry_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#try_statement.
+	exitTry_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CatchAtomicStatement.
+	enterCatchAtomicStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CatchAtomicStatement.
+	exitCatchAtomicStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CatchCollectionStatement.
+	enterCatchCollectionStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CatchCollectionStatement.
+	exitCatchCollectionStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#break_statement.
+	enterBreak_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#break_statement.
+	exitBreak_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#return_statement.
+	enterReturn_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#return_statement.
+	exitReturn_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IntDivideExpression.
+	enterIntDivideExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IntDivideExpression.
+	exitIntDivideExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#HasAnyExpression.
+	enterHasAnyExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#HasAnyExpression.
+	exitHasAnyExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#HasExpression.
+	enterHasExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#HasExpression.
+	exitHasExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TernaryExpression.
+	enterTernaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TernaryExpression.
+	exitTernaryExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotEqualsExpression.
+	enterNotEqualsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotEqualsExpression.
+	exitNotEqualsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#InExpression.
+	enterInExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#InExpression.
+	exitInExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxExpression.
+	enterJsxExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxExpression.
+	exitJsxExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotExpression.
+	enterNotExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotExpression.
+	exitNotExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#GreaterThanExpression.
+	enterGreaterThanExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#GreaterThanExpression.
+	exitGreaterThanExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OrExpression.
+	enterOrExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OrExpression.
+	exitOrExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CodeExpression.
+	enterCodeExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CodeExpression.
+	exitCodeExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#LessThanOrEqualExpression.
+	enterLessThanOrEqualExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#LessThanOrEqualExpression.
+	exitLessThanOrEqualExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotHasAnyExpression.
+	enterNotHasAnyExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotHasAnyExpression.
+	exitNotHasAnyExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AndExpression.
+	enterAndExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AndExpression.
+	exitAndExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArrowExpression.
+	enterArrowExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArrowExpression.
+	exitArrowExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotHasExpression.
+	enterNotHasExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotHasExpression.
+	exitNotHasExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ClosureExpression.
+	enterClosureExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ClosureExpression.
+	exitClosureExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotHasAllExpression.
+	enterNotHasAllExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotHasAllExpression.
+	exitNotHasAllExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ContainsExpression.
+	enterContainsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ContainsExpression.
+	exitContainsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FilteredListExpression.
+	enterFilteredListExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FilteredListExpression.
+	exitFilteredListExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotContainsExpression.
+	enterNotContainsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotContainsExpression.
+	exitNotContainsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MultiplyExpression.
+	enterMultiplyExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MultiplyExpression.
+	exitMultiplyExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#RoughlyEqualsExpression.
+	enterRoughlyEqualsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#RoughlyEqualsExpression.
+	exitRoughlyEqualsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ExecuteExpression.
+	enterExecuteExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ExecuteExpression.
+	exitExecuteExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#GreaterThanOrEqualExpression.
+	enterGreaterThanOrEqualExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#GreaterThanOrEqualExpression.
+	exitGreaterThanOrEqualExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NotInExpression.
+	enterNotInExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NotInExpression.
+	exitNotInExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IteratorExpression.
+	enterIteratorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IteratorExpression.
+	exitIteratorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IsNotExpression.
+	enterIsNotExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IsNotExpression.
+	exitIsNotExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DivideExpression.
+	enterDivideExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DivideExpression.
+	exitDivideExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IsExpression.
+	enterIsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IsExpression.
+	exitIsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MinusExpression.
+	enterMinusExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MinusExpression.
+	exitMinusExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AddExpression.
+	enterAddExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AddExpression.
+	exitAddExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#HasAllExpression.
+	enterHasAllExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#HasAllExpression.
+	exitHasAllExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#InstanceExpression.
+	enterInstanceExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#InstanceExpression.
+	exitInstanceExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MutableInstanceExpression.
+	enterMutableInstanceExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MutableInstanceExpression.
+	exitMutableInstanceExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CssExpression.
+	enterCssExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CssExpression.
+	exitCssExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CastExpression.
+	enterCastExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CastExpression.
+	exitCastExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ModuloExpression.
+	enterModuloExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ModuloExpression.
+	exitModuloExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#LessThanExpression.
+	enterLessThanExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#LessThanExpression.
+	exitLessThanExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#EqualsExpression.
+	enterEqualsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#EqualsExpression.
+	exitEqualsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#closure_expression.
+	enterClosure_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#closure_expression.
+	exitClosure_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MethodExpression.
+	enterMethodExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MethodExpression.
+	exitMethodExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ParenthesisExpression.
+	enterParenthesisExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ParenthesisExpression.
+	exitParenthesisExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#LiteralExpression.
+	enterLiteralExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#LiteralExpression.
+	exitLiteralExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IdentifierExpression.
+	enterIdentifierExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IdentifierExpression.
+	exitIdentifierExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ThisExpression.
+	enterThisExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ThisExpression.
+	exitThisExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SuperExpression.
+	enterSuperExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SuperExpression.
+	exitSuperExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SelectorExpression.
+	enterSelectorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SelectorExpression.
+	exitSelectorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SelectableExpression.
+	enterSelectableExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SelectableExpression.
+	exitSelectableExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MutableSelectableExpression.
+	enterMutableSelectableExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MutableSelectableExpression.
+	exitMutableSelectableExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MutableSelectorExpression.
+	enterMutableSelectorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MutableSelectorExpression.
+	exitMutableSelectorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#method_expression.
+	enterMethod_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#method_expression.
+	exitMethod_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MemberSelector.
+	enterMemberSelector(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MemberSelector.
+	exitMemberSelector(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MethodSelector.
+	enterMethodSelector(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MethodSelector.
+	exitMethodSelector(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SliceSelector.
+	enterSliceSelector(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SliceSelector.
+	exitSliceSelector(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ItemSelector.
+	enterItemSelector(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ItemSelector.
+	exitItemSelector(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#blob_expression.
+	enterBlob_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#blob_expression.
+	exitBlob_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#document_expression.
+	enterDocument_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#document_expression.
+	exitDocument_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ConstructorFrom.
+	enterConstructorFrom(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ConstructorFrom.
+	exitConstructorFrom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ConstructorNoFrom.
+	enterConstructorNoFrom(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ConstructorNoFrom.
+	exitConstructorNoFrom(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#copy_from.
+	enterCopy_from(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#copy_from.
+	exitCopy_from(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ExpressionAssignmentList.
+	enterExpressionAssignmentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ExpressionAssignmentList.
+	exitExpressionAssignmentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArgumentAssignmentList.
+	enterArgumentAssignmentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArgumentAssignmentList.
+	exitArgumentAssignmentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArgumentAssignmentListItem.
+	enterArgumentAssignmentListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArgumentAssignmentListItem.
+	exitArgumentAssignmentListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#argument_assignment.
+	enterArgument_assignment(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#argument_assignment.
+	exitArgument_assignment(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#write_statement.
+	enterWrite_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#write_statement.
+	exitWrite_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#filtered_list_suffix.
+	enterFiltered_list_suffix(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#filtered_list_suffix.
+	exitFiltered_list_suffix(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FetchOne.
+	enterFetchOne(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FetchOne.
+	exitFetchOne(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FetchMany.
+	enterFetchMany(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FetchMany.
+	exitFetchMany(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FetchOneAsync.
+	enterFetchOneAsync(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FetchOneAsync.
+	exitFetchOneAsync(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FetchManyAsync.
+	enterFetchManyAsync(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FetchManyAsync.
+	exitFetchManyAsync(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#read_statement.
+	enterRead_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#read_statement.
+	exitRead_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#sorted_expression.
+	enterSorted_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#sorted_expression.
+	exitSorted_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#assign_instance_statement.
+	enterAssign_instance_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#assign_instance_statement.
+	exitAssign_instance_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MemberInstance.
+	enterMemberInstance(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MemberInstance.
+	exitMemberInstance(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ItemInstance.
+	enterItemInstance(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ItemInstance.
+	exitItemInstance(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#assign_tuple_statement.
+	enterAssign_tuple_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#assign_tuple_statement.
+	exitAssign_tuple_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#lfs.
+	enterLfs(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#lfs.
+	exitLfs(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#lfp.
+	enterLfp(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#lfp.
+	exitLfp(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ws_plus.
+	enterWs_plus(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ws_plus.
+	exitWs_plus(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#indent.
+	enterIndent(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#indent.
+	exitIndent(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#dedent.
+	enterDedent(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#dedent.
+	exitDedent(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#type_literal.
+	enterType_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#type_literal.
+	exitType_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#null_literal.
+	enterNull_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#null_literal.
+	exitNull_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#repl.
+	enterRepl(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#repl.
+	exitRepl(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#FullDeclarationList.
+	enterFullDeclarationList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#FullDeclarationList.
+	exitFullDeclarationList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#declarations.
+	enterDeclarations(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#declarations.
+	exitDeclarations(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#declaration.
+	enterDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#declaration.
+	exitDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#annotation_constructor.
+	enterAnnotation_constructor(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#annotation_constructor.
+	exitAnnotation_constructor(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#annotation_identifier.
+	enterAnnotation_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#annotation_identifier.
+	exitAnnotation_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#annotation_argument.
+	enterAnnotation_argument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#annotation_argument.
+	exitAnnotation_argument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#annotation_argument_name.
+	enterAnnotation_argument_name(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#annotation_argument_name.
+	exitAnnotation_argument_name(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AnnotationLiteralValue.
+	enterAnnotationLiteralValue(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AnnotationLiteralValue.
+	exitAnnotationLiteralValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AnnotationTypeValue.
+	enterAnnotationTypeValue(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AnnotationTypeValue.
+	exitAnnotationTypeValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#resource_declaration.
+	enterResource_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#resource_declaration.
+	exitResource_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#enum_declaration.
+	enterEnum_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#enum_declaration.
+	exitEnum_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_symbol_list.
+	enterNative_symbol_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_symbol_list.
+	exitNative_symbol_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#category_symbol_list.
+	enterCategory_symbol_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#category_symbol_list.
+	exitCategory_symbol_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#symbol_list.
+	enterSymbol_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#symbol_list.
+	exitSymbol_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MatchingList.
+	enterMatchingList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MatchingList.
+	exitMatchingList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MatchingSet.
+	enterMatchingSet(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MatchingSet.
+	exitMatchingSet(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MatchingRange.
+	enterMatchingRange(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MatchingRange.
+	exitMatchingRange(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MatchingPattern.
+	enterMatchingPattern(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MatchingPattern.
+	exitMatchingPattern(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MatchingExpression.
+	enterMatchingExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MatchingExpression.
+	exitMatchingExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#list_literal.
+	enterList_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#list_literal.
+	exitList_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#set_literal.
+	enterSet_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#set_literal.
+	exitSet_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#expression_list.
+	enterExpression_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#expression_list.
+	exitExpression_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#range_literal.
+	enterRange_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#range_literal.
+	exitRange_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IteratorType.
+	enterIteratorType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IteratorType.
+	exitIteratorType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SetType.
+	enterSetType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SetType.
+	exitSetType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ListType.
+	enterListType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ListType.
+	exitListType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DictType.
+	enterDictType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DictType.
+	exitDictType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CursorType.
+	enterCursorType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CursorType.
+	exitCursorType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PrimaryType.
+	enterPrimaryType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PrimaryType.
+	exitPrimaryType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NativeType.
+	enterNativeType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NativeType.
+	exitNativeType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CategoryType.
+	enterCategoryType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CategoryType.
+	exitCategoryType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#BooleanType.
+	enterBooleanType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#BooleanType.
+	exitBooleanType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CssType.
+	enterCssType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CssType.
+	exitCssType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CharacterType.
+	enterCharacterType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CharacterType.
+	exitCharacterType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TextType.
+	enterTextType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TextType.
+	exitTextType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ImageType.
+	enterImageType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ImageType.
+	exitImageType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IntegerType.
+	enterIntegerType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IntegerType.
+	exitIntegerType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DecimalType.
+	enterDecimalType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DecimalType.
+	exitDecimalType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DocumentType.
+	enterDocumentType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DocumentType.
+	exitDocumentType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DateType.
+	enterDateType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DateType.
+	exitDateType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DateTimeType.
+	enterDateTimeType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DateTimeType.
+	exitDateTimeType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TimeType.
+	enterTimeType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TimeType.
+	exitTimeType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PeriodType.
+	enterPeriodType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PeriodType.
+	exitPeriodType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#VersionType.
+	enterVersionType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#VersionType.
+	exitVersionType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CodeType.
+	enterCodeType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CodeType.
+	exitCodeType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#BlobType.
+	enterBlobType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#BlobType.
+	exitBlobType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#UUIDType.
+	enterUUIDType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#UUIDType.
+	exitUUIDType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#HtmlType.
+	enterHtmlType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#HtmlType.
+	exitHtmlType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#category_type.
+	enterCategory_type(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#category_type.
+	exitCategory_type(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#mutable_category_type.
+	enterMutable_category_type(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#mutable_category_type.
+	exitMutable_category_type(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#code_type.
+	enterCode_type(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#code_type.
+	exitCode_type(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ConcreteCategoryDeclaration.
+	enterConcreteCategoryDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ConcreteCategoryDeclaration.
+	exitConcreteCategoryDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NativeCategoryDeclaration.
+	enterNativeCategoryDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NativeCategoryDeclaration.
+	exitNativeCategoryDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SingletonCategoryDeclaration.
+	enterSingletonCategoryDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SingletonCategoryDeclaration.
+	exitSingletonCategoryDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ConcreteWidgetDeclaration.
+	enterConcreteWidgetDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ConcreteWidgetDeclaration.
+	exitConcreteWidgetDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NativeWidgetDeclaration.
+	enterNativeWidgetDeclaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NativeWidgetDeclaration.
+	exitNativeWidgetDeclaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#type_identifier_list.
+	enterType_identifier_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#type_identifier_list.
+	exitType_identifier_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#method_identifier.
+	enterMethod_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#method_identifier.
+	exitMethod_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#identifier_or_keyword.
+	enterIdentifier_or_keyword(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#identifier_or_keyword.
+	exitIdentifier_or_keyword(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#nospace_hyphen_identifier_or_keyword.
+	enterNospace_hyphen_identifier_or_keyword(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#nospace_hyphen_identifier_or_keyword.
+	exitNospace_hyphen_identifier_or_keyword(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#nospace_identifier_or_keyword.
+	enterNospace_identifier_or_keyword(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#nospace_identifier_or_keyword.
+	exitNospace_identifier_or_keyword(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#VariableIdentifier.
+	enterVariableIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#VariableIdentifier.
+	exitVariableIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TypeIdentifier.
+	enterTypeIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TypeIdentifier.
+	exitTypeIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SymbolIdentifier.
+	enterSymbolIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SymbolIdentifier.
+	exitSymbolIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#member_identifier.
+	enterMember_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#member_identifier.
+	exitMember_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#variable_identifier.
+	enterVariable_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#variable_identifier.
+	exitVariable_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#attribute_identifier.
+	enterAttribute_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#attribute_identifier.
+	exitAttribute_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#type_identifier.
+	enterType_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#type_identifier.
+	exitType_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#symbol_identifier.
+	enterSymbol_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#symbol_identifier.
+	exitSymbol_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#argument_list.
+	enterArgument_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#argument_list.
+	exitArgument_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CodeArgument.
+	enterCodeArgument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CodeArgument.
+	exitCodeArgument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorArgument.
+	enterOperatorArgument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorArgument.
+	exitOperatorArgument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#operator_argument.
+	enterOperator_argument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#operator_argument.
+	exitOperator_argument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#named_argument.
+	enterNamed_argument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#named_argument.
+	exitNamed_argument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#code_argument.
+	enterCode_argument(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#code_argument.
+	exitCode_argument(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#category_or_any_type.
+	enterCategory_or_any_type(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#category_or_any_type.
+	exitCategory_or_any_type(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AnyListType.
+	enterAnyListType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AnyListType.
+	exitAnyListType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AnyType.
+	enterAnyType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AnyType.
+	exitAnyType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#AnyDictType.
+	enterAnyDictType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#AnyDictType.
+	exitAnyDictType(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#member_method_declaration_list.
+	enterMember_method_declaration_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#member_method_declaration_list.
+	exitMember_method_declaration_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#member_method_declaration.
+	enterMember_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#member_method_declaration.
+	exitMember_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_member_method_declaration_list.
+	enterNative_member_method_declaration_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_member_method_declaration_list.
+	exitNative_member_method_declaration_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_member_method_declaration.
+	enterNative_member_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_member_method_declaration.
+	exitNative_member_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaCategoryBinding.
+	enterJavaCategoryBinding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaCategoryBinding.
+	exitJavaCategoryBinding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpCategoryBinding.
+	enterCSharpCategoryBinding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpCategoryBinding.
+	exitCSharpCategoryBinding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#Python2CategoryBinding.
+	enterPython2CategoryBinding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#Python2CategoryBinding.
+	exitPython2CategoryBinding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#Python3CategoryBinding.
+	enterPython3CategoryBinding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#Python3CategoryBinding.
+	exitPython3CategoryBinding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaScriptCategoryBinding.
+	enterJavaScriptCategoryBinding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaScriptCategoryBinding.
+	exitJavaScriptCategoryBinding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_category_binding.
+	enterPython_category_binding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_category_binding.
+	exitPython_category_binding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_module.
+	enterPython_module(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_module.
+	exitPython_module(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_category_binding.
+	enterJavascript_category_binding(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_category_binding.
+	exitJavascript_category_binding(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_module.
+	enterJavascript_module(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_module.
+	exitJavascript_module(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#variable_identifier_list.
+	enterVariable_identifier_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#variable_identifier_list.
+	exitVariable_identifier_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#attribute_identifier_list.
+	enterAttribute_identifier_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#attribute_identifier_list.
+	exitAttribute_identifier_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#method_declaration.
+	enterMethod_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#method_declaration.
+	exitMethod_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#comment_statement.
+	enterComment_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#comment_statement.
+	exitComment_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#native_statement_list.
+	enterNative_statement_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#native_statement_list.
+	exitNative_statement_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaNativeStatement.
+	enterJavaNativeStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaNativeStatement.
+	exitJavaNativeStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpNativeStatement.
+	enterCSharpNativeStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpNativeStatement.
+	exitCSharpNativeStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#Python2NativeStatement.
+	enterPython2NativeStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#Python2NativeStatement.
+	exitPython2NativeStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#Python3NativeStatement.
+	enterPython3NativeStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#Python3NativeStatement.
+	exitPython3NativeStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaScriptNativeStatement.
+	enterJavaScriptNativeStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaScriptNativeStatement.
+	exitJavaScriptNativeStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_native_statement.
+	enterPython_native_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_native_statement.
+	exitPython_native_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_native_statement.
+	enterJavascript_native_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_native_statement.
+	exitJavascript_native_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#statement_list.
+	enterStatement_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#statement_list.
+	exitStatement_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#assertion_list.
+	enterAssertion_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#assertion_list.
+	exitAssertion_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#switch_case_statement_list.
+	enterSwitch_case_statement_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#switch_case_statement_list.
+	exitSwitch_case_statement_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#catch_statement_list.
+	enterCatch_statement_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#catch_statement_list.
+	exitCatch_statement_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#LiteralRangeLiteral.
+	enterLiteralRangeLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#LiteralRangeLiteral.
+	exitLiteralRangeLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#LiteralListLiteral.
+	enterLiteralListLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#LiteralListLiteral.
+	exitLiteralListLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#LiteralSetLiteral.
+	enterLiteralSetLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#LiteralSetLiteral.
+	exitLiteralSetLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MinIntegerLiteral.
+	enterMinIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MinIntegerLiteral.
+	exitMinIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#MaxIntegerLiteral.
+	enterMaxIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#MaxIntegerLiteral.
+	exitMaxIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IntegerLiteral.
+	enterIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IntegerLiteral.
+	exitIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#HexadecimalLiteral.
+	enterHexadecimalLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#HexadecimalLiteral.
+	exitHexadecimalLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CharacterLiteral.
+	enterCharacterLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CharacterLiteral.
+	exitCharacterLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DateLiteral.
+	enterDateLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DateLiteral.
+	exitDateLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TimeLiteral.
+	enterTimeLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TimeLiteral.
+	exitTimeLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TextLiteral.
+	enterTextLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TextLiteral.
+	exitTextLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DecimalLiteral.
+	enterDecimalLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DecimalLiteral.
+	exitDecimalLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DateTimeLiteral.
+	enterDateTimeLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DateTimeLiteral.
+	exitDateTimeLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#BooleanLiteral.
+	enterBooleanLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#BooleanLiteral.
+	exitBooleanLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PeriodLiteral.
+	enterPeriodLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PeriodLiteral.
+	exitPeriodLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#VersionLiteral.
+	enterVersionLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#VersionLiteral.
+	exitVersionLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#UUIDLiteral.
+	enterUUIDLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#UUIDLiteral.
+	exitUUIDLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SymbolLiteral.
+	enterSymbolLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SymbolLiteral.
+	exitSymbolLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TypeLiteral.
+	enterTypeLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TypeLiteral.
+	exitTypeLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#NullLiteral.
+	enterNullLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#NullLiteral.
+	exitNullLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#literal_list_literal.
+	enterLiteral_list_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#literal_list_literal.
+	exitLiteral_list_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#this_expression.
+	enterThis_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#this_expression.
+	exitThis_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#super_expression.
+	enterSuper_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#super_expression.
+	exitSuper_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#parenthesis_expression.
+	enterParenthesis_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#parenthesis_expression.
+	exitParenthesis_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#literal_expression.
+	enterLiteral_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#literal_expression.
+	exitLiteral_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#collection_literal.
+	enterCollection_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#collection_literal.
+	exitCollection_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#tuple_literal.
+	enterTuple_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#tuple_literal.
+	exitTuple_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#dict_literal.
+	enterDict_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#dict_literal.
+	exitDict_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#document_literal.
+	enterDocument_literal(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#document_literal.
+	exitDocument_literal(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#expression_tuple.
+	enterExpression_tuple(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#expression_tuple.
+	exitExpression_tuple(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#doc_entry_list.
+	enterDoc_entry_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#doc_entry_list.
+	exitDoc_entry_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#doc_entry.
+	enterDoc_entry(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#doc_entry.
+	exitDoc_entry(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DocKeyIdentifier.
+	enterDocKeyIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DocKeyIdentifier.
+	exitDocKeyIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DocKeyText.
+	enterDocKeyText(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DocKeyText.
+	exitDocKeyText(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#dict_entry_list.
+	enterDict_entry_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#dict_entry_list.
+	exitDict_entry_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#dict_entry.
+	enterDict_entry(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#dict_entry.
+	exitDict_entry(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DictKeyIdentifier.
+	enterDictKeyIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DictKeyIdentifier.
+	exitDictKeyIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#DictKeyText.
+	enterDictKeyText(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DictKeyText.
+	exitDictKeyText(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SliceFirstAndLast.
+	enterSliceFirstAndLast(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SliceFirstAndLast.
+	exitSliceFirstAndLast(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SliceFirstOnly.
+	enterSliceFirstOnly(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SliceFirstOnly.
+	exitSliceFirstOnly(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#SliceLastOnly.
+	enterSliceLastOnly(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#SliceLastOnly.
+	exitSliceLastOnly(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#assign_variable_statement.
+	enterAssign_variable_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#assign_variable_statement.
+	exitAssign_variable_statement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ChildInstance.
+	enterChildInstance(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ChildInstance.
+	exitChildInstance(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#RootInstance.
+	enterRootInstance(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#RootInstance.
+	exitRootInstance(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IsATypeExpression.
+	enterIsATypeExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IsATypeExpression.
+	exitIsATypeExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#IsOtherExpression.
+	enterIsOtherExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#IsOtherExpression.
+	exitIsOtherExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArrowExpressionBody.
+	enterArrowExpressionBody(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArrowExpressionBody.
+	exitArrowExpressionBody(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArrowStatementsBody.
+	enterArrowStatementsBody(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArrowStatementsBody.
+	exitArrowStatementsBody(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#arrow_prefix.
+	enterArrow_prefix(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#arrow_prefix.
+	exitArrow_prefix(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArrowSingleArg.
+	enterArrowSingleArg(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArrowSingleArg.
+	exitArrowSingleArg(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArrowListArg.
+	enterArrowListArg(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArrowListArg.
+	exitArrowListArg(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#sorted_key.
+	enterSorted_key(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#sorted_key.
+	exitSorted_key(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#read_blob_expression.
+	enterRead_blob_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#read_blob_expression.
+	exitRead_blob_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#read_all_expression.
+	enterRead_all_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#read_all_expression.
+	exitRead_all_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#read_one_expression.
+	enterRead_one_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#read_one_expression.
+	exitRead_one_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#order_by_list.
+	enterOrder_by_list(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#order_by_list.
+	exitOrder_by_list(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#order_by.
+	enterOrder_by(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#order_by.
+	exitOrder_by(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorPlus.
+	enterOperatorPlus(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorPlus.
+	exitOperatorPlus(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorMinus.
+	enterOperatorMinus(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorMinus.
+	exitOperatorMinus(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorMultiply.
+	enterOperatorMultiply(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorMultiply.
+	exitOperatorMultiply(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorDivide.
+	enterOperatorDivide(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorDivide.
+	exitOperatorDivide(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorIDivide.
+	enterOperatorIDivide(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorIDivide.
+	exitOperatorIDivide(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OperatorModulo.
+	enterOperatorModulo(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OperatorModulo.
+	exitOperatorModulo(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#keyword.
+	enterKeyword(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#keyword.
+	exitKeyword(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#new_token.
+	enterNew_token(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#new_token.
+	exitNew_token(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#key_token.
+	enterKey_token(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#key_token.
+	exitKey_token(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#module_token.
+	enterModule_token(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#module_token.
+	exitModule_token(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#value_token.
+	enterValue_token(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#value_token.
+	exitValue_token(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#symbols_token.
+	enterSymbols_token(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#symbols_token.
+	exitSymbols_token(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#assign.
+	enterAssign(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#assign.
+	exitAssign(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#multiply.
+	enterMultiply(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#multiply.
+	exitMultiply(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#divide.
+	enterDivide(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#divide.
+	exitDivide(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#idivide.
+	enterIdivide(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#idivide.
+	exitIdivide(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#modulo.
+	enterModulo(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#modulo.
+	exitModulo(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptReturnStatement.
+	enterJavascriptReturnStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptReturnStatement.
+	exitJavascriptReturnStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptStatement.
+	enterJavascriptStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptStatement.
+	exitJavascriptStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptSelectorExpression.
+	enterJavascriptSelectorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptSelectorExpression.
+	exitJavascriptSelectorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptPrimaryExpression.
+	enterJavascriptPrimaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptPrimaryExpression.
+	exitJavascriptPrimaryExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_primary_expression.
+	enterJavascript_primary_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_primary_expression.
+	exitJavascript_primary_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_this_expression.
+	enterJavascript_this_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_this_expression.
+	exitJavascript_this_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_new_expression.
+	enterJavascript_new_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_new_expression.
+	exitJavascript_new_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaScriptMethodExpression.
+	enterJavaScriptMethodExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaScriptMethodExpression.
+	exitJavaScriptMethodExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaScriptMemberExpression.
+	enterJavaScriptMemberExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaScriptMemberExpression.
+	exitJavaScriptMemberExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaScriptItemExpression.
+	enterJavaScriptItemExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaScriptItemExpression.
+	exitJavaScriptItemExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_method_expression.
+	enterJavascript_method_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_method_expression.
+	exitJavascript_method_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptArgumentList.
+	enterJavascriptArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptArgumentList.
+	exitJavascriptArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptArgumentListItem.
+	enterJavascriptArgumentListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptArgumentListItem.
+	exitJavascriptArgumentListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_item_expression.
+	enterJavascript_item_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_item_expression.
+	exitJavascript_item_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_parenthesis_expression.
+	enterJavascript_parenthesis_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_parenthesis_expression.
+	exitJavascript_parenthesis_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_identifier_expression.
+	enterJavascript_identifier_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_identifier_expression.
+	exitJavascript_identifier_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptIntegerLiteral.
+	enterJavascriptIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptIntegerLiteral.
+	exitJavascriptIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptDecimalLiteral.
+	enterJavascriptDecimalLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptDecimalLiteral.
+	exitJavascriptDecimalLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptTextLiteral.
+	enterJavascriptTextLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptTextLiteral.
+	exitJavascriptTextLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptBooleanLiteral.
+	enterJavascriptBooleanLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptBooleanLiteral.
+	exitJavascriptBooleanLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavascriptCharacterLiteral.
+	enterJavascriptCharacterLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavascriptCharacterLiteral.
+	exitJavascriptCharacterLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#javascript_identifier.
+	enterJavascript_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#javascript_identifier.
+	exitJavascript_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonReturnStatement.
+	enterPythonReturnStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonReturnStatement.
+	exitPythonReturnStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonStatement.
+	enterPythonStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonStatement.
+	exitPythonStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonSelectorExpression.
+	enterPythonSelectorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonSelectorExpression.
+	exitPythonSelectorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonPrimaryExpression.
+	enterPythonPrimaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonPrimaryExpression.
+	exitPythonPrimaryExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonSelfExpression.
+	enterPythonSelfExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonSelfExpression.
+	exitPythonSelfExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonParenthesisExpression.
+	enterPythonParenthesisExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonParenthesisExpression.
+	exitPythonParenthesisExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonIdentifierExpression.
+	enterPythonIdentifierExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonIdentifierExpression.
+	exitPythonIdentifierExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonLiteralExpression.
+	enterPythonLiteralExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonLiteralExpression.
+	exitPythonLiteralExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonGlobalMethodExpression.
+	enterPythonGlobalMethodExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonGlobalMethodExpression.
+	exitPythonGlobalMethodExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_self_expression.
+	enterPython_self_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_self_expression.
+	exitPython_self_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonMethodExpression.
+	enterPythonMethodExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonMethodExpression.
+	exitPythonMethodExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonItemExpression.
+	enterPythonItemExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonItemExpression.
+	exitPythonItemExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_method_expression.
+	enterPython_method_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_method_expression.
+	exitPython_method_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonOrdinalOnlyArgumentList.
+	enterPythonOrdinalOnlyArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonOrdinalOnlyArgumentList.
+	exitPythonOrdinalOnlyArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonNamedOnlyArgumentList.
+	enterPythonNamedOnlyArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonNamedOnlyArgumentList.
+	exitPythonNamedOnlyArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonArgumentList.
+	enterPythonArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonArgumentList.
+	exitPythonArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonOrdinalArgumentList.
+	enterPythonOrdinalArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonOrdinalArgumentList.
+	exitPythonOrdinalArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonOrdinalArgumentListItem.
+	enterPythonOrdinalArgumentListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonOrdinalArgumentListItem.
+	exitPythonOrdinalArgumentListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonNamedArgumentList.
+	enterPythonNamedArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonNamedArgumentList.
+	exitPythonNamedArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonNamedArgumentListItem.
+	enterPythonNamedArgumentListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonNamedArgumentListItem.
+	exitPythonNamedArgumentListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_parenthesis_expression.
+	enterPython_parenthesis_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_parenthesis_expression.
+	exitPython_parenthesis_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonChildIdentifier.
+	enterPythonChildIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonChildIdentifier.
+	exitPythonChildIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonPromptoIdentifier.
+	enterPythonPromptoIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonPromptoIdentifier.
+	exitPythonPromptoIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonIdentifier.
+	enterPythonIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonIdentifier.
+	exitPythonIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonIntegerLiteral.
+	enterPythonIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonIntegerLiteral.
+	exitPythonIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonDecimalLiteral.
+	enterPythonDecimalLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonDecimalLiteral.
+	exitPythonDecimalLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonTextLiteral.
+	enterPythonTextLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonTextLiteral.
+	exitPythonTextLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonBooleanLiteral.
+	enterPythonBooleanLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonBooleanLiteral.
+	exitPythonBooleanLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#PythonCharacterLiteral.
+	enterPythonCharacterLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#PythonCharacterLiteral.
+	exitPythonCharacterLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#python_identifier.
+	enterPython_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#python_identifier.
+	exitPython_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaReturnStatement.
+	enterJavaReturnStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaReturnStatement.
+	exitJavaReturnStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaStatement.
+	enterJavaStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaStatement.
+	exitJavaStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaSelectorExpression.
+	enterJavaSelectorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaSelectorExpression.
+	exitJavaSelectorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaPrimaryExpression.
+	enterJavaPrimaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaPrimaryExpression.
+	exitJavaPrimaryExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_primary_expression.
+	enterJava_primary_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_primary_expression.
+	exitJava_primary_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_this_expression.
+	enterJava_this_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_this_expression.
+	exitJava_this_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_new_expression.
+	enterJava_new_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_new_expression.
+	exitJava_new_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaMethodExpression.
+	enterJavaMethodExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaMethodExpression.
+	exitJavaMethodExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaItemExpression.
+	enterJavaItemExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaItemExpression.
+	exitJavaItemExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_method_expression.
+	enterJava_method_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_method_expression.
+	exitJava_method_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaArgumentListItem.
+	enterJavaArgumentListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaArgumentListItem.
+	exitJavaArgumentListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaArgumentList.
+	enterJavaArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaArgumentList.
+	exitJavaArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_item_expression.
+	enterJava_item_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_item_expression.
+	exitJava_item_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_parenthesis_expression.
+	enterJava_parenthesis_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_parenthesis_expression.
+	exitJava_parenthesis_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaIdentifier.
+	enterJavaIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaIdentifier.
+	exitJavaIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaChildIdentifier.
+	enterJavaChildIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaChildIdentifier.
+	exitJavaChildIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaClassIdentifier.
+	enterJavaClassIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaClassIdentifier.
+	exitJavaClassIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaChildClassIdentifier.
+	enterJavaChildClassIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaChildClassIdentifier.
+	exitJavaChildClassIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaIntegerLiteral.
+	enterJavaIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaIntegerLiteral.
+	exitJavaIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaDecimalLiteral.
+	enterJavaDecimalLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaDecimalLiteral.
+	exitJavaDecimalLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaTextLiteral.
+	enterJavaTextLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaTextLiteral.
+	exitJavaTextLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaBooleanLiteral.
+	enterJavaBooleanLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaBooleanLiteral.
+	exitJavaBooleanLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JavaCharacterLiteral.
+	enterJavaCharacterLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JavaCharacterLiteral.
+	exitJavaCharacterLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#java_identifier.
+	enterJava_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#java_identifier.
+	exitJava_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpReturnStatement.
+	enterCSharpReturnStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpReturnStatement.
+	exitCSharpReturnStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpStatement.
+	enterCSharpStatement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpStatement.
+	exitCSharpStatement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpSelectorExpression.
+	enterCSharpSelectorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpSelectorExpression.
+	exitCSharpSelectorExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpPrimaryExpression.
+	enterCSharpPrimaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpPrimaryExpression.
+	exitCSharpPrimaryExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_primary_expression.
+	enterCsharp_primary_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_primary_expression.
+	exitCsharp_primary_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_this_expression.
+	enterCsharp_this_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_this_expression.
+	exitCsharp_this_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_new_expression.
+	enterCsharp_new_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_new_expression.
+	exitCsharp_new_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpMethodExpression.
+	enterCSharpMethodExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpMethodExpression.
+	exitCSharpMethodExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpItemExpression.
+	enterCSharpItemExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpItemExpression.
+	exitCSharpItemExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_method_expression.
+	enterCsharp_method_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_method_expression.
+	exitCsharp_method_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpArgumentList.
+	enterCSharpArgumentList(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpArgumentList.
+	exitCSharpArgumentList(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpArgumentListItem.
+	enterCSharpArgumentListItem(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpArgumentListItem.
+	exitCSharpArgumentListItem(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_item_expression.
+	enterCsharp_item_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_item_expression.
+	exitCsharp_item_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_parenthesis_expression.
+	enterCsharp_parenthesis_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_parenthesis_expression.
+	exitCsharp_parenthesis_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpIdentifier.
+	enterCSharpIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpIdentifier.
+	exitCSharpIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpChildIdentifier.
+	enterCSharpChildIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpChildIdentifier.
+	exitCSharpChildIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpPromptoIdentifier.
+	enterCSharpPromptoIdentifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpPromptoIdentifier.
+	exitCSharpPromptoIdentifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpIntegerLiteral.
+	enterCSharpIntegerLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpIntegerLiteral.
+	exitCSharpIntegerLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpDecimalLiteral.
+	enterCSharpDecimalLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpDecimalLiteral.
+	exitCSharpDecimalLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpTextLiteral.
+	enterCSharpTextLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpTextLiteral.
+	exitCSharpTextLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpBooleanLiteral.
+	enterCSharpBooleanLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpBooleanLiteral.
+	exitCSharpBooleanLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CSharpCharacterLiteral.
+	enterCSharpCharacterLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CSharpCharacterLiteral.
+	exitCSharpCharacterLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#csharp_identifier.
+	enterCsharp_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#csharp_identifier.
+	exitCsharp_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_expression.
+	enterJsx_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_expression.
+	exitJsx_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxSelfClosing.
+	enterJsxSelfClosing(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxSelfClosing.
+	exitJsxSelfClosing(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxElement.
+	enterJsxElement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxElement.
+	exitJsxElement(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_fragment.
+	enterJsx_fragment(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_fragment.
+	exitJsx_fragment(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_fragment_start.
+	enterJsx_fragment_start(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_fragment_start.
+	exitJsx_fragment_start(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_fragment_end.
+	enterJsx_fragment_end(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_fragment_end.
+	exitJsx_fragment_end(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_self_closing.
+	enterJsx_self_closing(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_self_closing.
+	exitJsx_self_closing(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_opening.
+	enterJsx_opening(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_opening.
+	exitJsx_opening(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_closing.
+	enterJsx_closing(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_closing.
+	exitJsx_closing(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_element_name.
+	enterJsx_element_name(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_element_name.
+	exitJsx_element_name(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_identifier.
+	enterJsx_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_identifier.
+	exitJsx_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_attribute.
+	enterJsx_attribute(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_attribute.
+	exitJsx_attribute(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxLiteral.
+	enterJsxLiteral(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxLiteral.
+	exitJsxLiteral(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxValue.
+	enterJsxValue(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxValue.
+	exitJsxValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_children.
+	enterJsx_children(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_children.
+	exitJsx_children(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxText.
+	enterJsxText(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxText.
+	exitJsxText(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxChild.
+	enterJsxChild(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxChild.
+	exitJsxChild(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#JsxCode.
+	enterJsxCode(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#JsxCode.
+	exitJsxCode(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_text.
+	enterJsx_text(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_text.
+	exitJsx_text(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#jsx_char.
+	enterJsx_char(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#jsx_char.
+	exitJsx_char(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#css_expression.
+	enterCss_expression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#css_expression.
+	exitCss_expression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#css_field.
+	enterCss_field(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#css_field.
+	exitCss_field(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#css_identifier.
+	enterCss_identifier(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#css_identifier.
+	exitCss_identifier(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CssValue.
+	enterCssValue(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CssValue.
+	exitCssValue(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#CssText.
+	enterCssText(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#CssText.
+	exitCssText(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#css_text.
+	enterCss_text(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#css_text.
+	exitCss_text(ctx) {
+	}
+
+
+
 }
-
-MParserListener.prototype = Object.create(antlr4.tree.ParseTreeListener.prototype);
-MParserListener.prototype.constructor = MParserListener;
-
-// Enter a parse tree produced by MParser#enum_category_declaration.
-MParserListener.prototype.enterEnum_category_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#enum_category_declaration.
-MParserListener.prototype.exitEnum_category_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#enum_native_declaration.
-MParserListener.prototype.enterEnum_native_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#enum_native_declaration.
-MParserListener.prototype.exitEnum_native_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_symbol.
-MParserListener.prototype.enterNative_symbol = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_symbol.
-MParserListener.prototype.exitNative_symbol = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#category_symbol.
-MParserListener.prototype.enterCategory_symbol = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#category_symbol.
-MParserListener.prototype.exitCategory_symbol = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#attribute_declaration.
-MParserListener.prototype.enterAttribute_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#attribute_declaration.
-MParserListener.prototype.exitAttribute_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#index_clause.
-MParserListener.prototype.enterIndex_clause = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#index_clause.
-MParserListener.prototype.exitIndex_clause = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#concrete_widget_declaration.
-MParserListener.prototype.enterConcrete_widget_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#concrete_widget_declaration.
-MParserListener.prototype.exitConcrete_widget_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_widget_declaration.
-MParserListener.prototype.enterNative_widget_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_widget_declaration.
-MParserListener.prototype.exitNative_widget_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#concrete_category_declaration.
-MParserListener.prototype.enterConcrete_category_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#concrete_category_declaration.
-MParserListener.prototype.exitConcrete_category_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#singleton_category_declaration.
-MParserListener.prototype.enterSingleton_category_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#singleton_category_declaration.
-MParserListener.prototype.exitSingleton_category_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#derived_list.
-MParserListener.prototype.enterDerived_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#derived_list.
-MParserListener.prototype.exitDerived_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#operator_method_declaration.
-MParserListener.prototype.enterOperator_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#operator_method_declaration.
-MParserListener.prototype.exitOperator_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#setter_method_declaration.
-MParserListener.prototype.enterSetter_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#setter_method_declaration.
-MParserListener.prototype.exitSetter_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_setter_declaration.
-MParserListener.prototype.enterNative_setter_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_setter_declaration.
-MParserListener.prototype.exitNative_setter_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#getter_method_declaration.
-MParserListener.prototype.enterGetter_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#getter_method_declaration.
-MParserListener.prototype.exitGetter_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_getter_declaration.
-MParserListener.prototype.enterNative_getter_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_getter_declaration.
-MParserListener.prototype.exitNative_getter_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_category_declaration.
-MParserListener.prototype.enterNative_category_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_category_declaration.
-MParserListener.prototype.exitNative_category_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_resource_declaration.
-MParserListener.prototype.enterNative_resource_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_resource_declaration.
-MParserListener.prototype.exitNative_resource_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_category_bindings.
-MParserListener.prototype.enterNative_category_bindings = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_category_bindings.
-MParserListener.prototype.exitNative_category_bindings = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NativeCategoryBindingListItem.
-MParserListener.prototype.enterNativeCategoryBindingListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NativeCategoryBindingListItem.
-MParserListener.prototype.exitNativeCategoryBindingListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NativeCategoryBindingList.
-MParserListener.prototype.enterNativeCategoryBindingList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NativeCategoryBindingList.
-MParserListener.prototype.exitNativeCategoryBindingList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#abstract_method_declaration.
-MParserListener.prototype.enterAbstract_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#abstract_method_declaration.
-MParserListener.prototype.exitAbstract_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#concrete_method_declaration.
-MParserListener.prototype.enterConcrete_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#concrete_method_declaration.
-MParserListener.prototype.exitConcrete_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_method_declaration.
-MParserListener.prototype.enterNative_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_method_declaration.
-MParserListener.prototype.exitNative_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#test_method_declaration.
-MParserListener.prototype.enterTest_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#test_method_declaration.
-MParserListener.prototype.exitTest_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#assertion.
-MParserListener.prototype.enterAssertion = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#assertion.
-MParserListener.prototype.exitAssertion = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#typed_argument.
-MParserListener.prototype.enterTyped_argument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#typed_argument.
-MParserListener.prototype.exitTyped_argument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MethodCallStatement.
-MParserListener.prototype.enterMethodCallStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MethodCallStatement.
-MParserListener.prototype.exitMethodCallStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AssignInstanceStatement.
-MParserListener.prototype.enterAssignInstanceStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AssignInstanceStatement.
-MParserListener.prototype.exitAssignInstanceStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AssignTupleStatement.
-MParserListener.prototype.enterAssignTupleStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AssignTupleStatement.
-MParserListener.prototype.exitAssignTupleStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#StoreStatement.
-MParserListener.prototype.enterStoreStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#StoreStatement.
-MParserListener.prototype.exitStoreStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FetchStatement.
-MParserListener.prototype.enterFetchStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FetchStatement.
-MParserListener.prototype.exitFetchStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ReadStatement.
-MParserListener.prototype.enterReadStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ReadStatement.
-MParserListener.prototype.exitReadStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FlushStatement.
-MParserListener.prototype.enterFlushStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FlushStatement.
-MParserListener.prototype.exitFlushStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#BreakStatement.
-MParserListener.prototype.enterBreakStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#BreakStatement.
-MParserListener.prototype.exitBreakStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ReturnStatement.
-MParserListener.prototype.enterReturnStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ReturnStatement.
-MParserListener.prototype.exitReturnStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IfStatement.
-MParserListener.prototype.enterIfStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IfStatement.
-MParserListener.prototype.exitIfStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SwitchStatement.
-MParserListener.prototype.enterSwitchStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SwitchStatement.
-MParserListener.prototype.exitSwitchStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ForEachStatement.
-MParserListener.prototype.enterForEachStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ForEachStatement.
-MParserListener.prototype.exitForEachStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#WhileStatement.
-MParserListener.prototype.enterWhileStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#WhileStatement.
-MParserListener.prototype.exitWhileStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DoWhileStatement.
-MParserListener.prototype.enterDoWhileStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DoWhileStatement.
-MParserListener.prototype.exitDoWhileStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#RaiseStatement.
-MParserListener.prototype.enterRaiseStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#RaiseStatement.
-MParserListener.prototype.exitRaiseStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TryStatement.
-MParserListener.prototype.enterTryStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TryStatement.
-MParserListener.prototype.exitTryStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#WriteStatement.
-MParserListener.prototype.enterWriteStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#WriteStatement.
-MParserListener.prototype.exitWriteStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#WithResourceStatement.
-MParserListener.prototype.enterWithResourceStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#WithResourceStatement.
-MParserListener.prototype.exitWithResourceStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#WithSingletonStatement.
-MParserListener.prototype.enterWithSingletonStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#WithSingletonStatement.
-MParserListener.prototype.exitWithSingletonStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ClosureStatement.
-MParserListener.prototype.enterClosureStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ClosureStatement.
-MParserListener.prototype.exitClosureStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CommentStatement.
-MParserListener.prototype.enterCommentStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CommentStatement.
-MParserListener.prototype.exitCommentStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#flush_statement.
-MParserListener.prototype.enterFlush_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#flush_statement.
-MParserListener.prototype.exitFlush_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#store_statement.
-MParserListener.prototype.enterStore_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#store_statement.
-MParserListener.prototype.exitStore_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#method_call_expression.
-MParserListener.prototype.enterMethod_call_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#method_call_expression.
-MParserListener.prototype.exitMethod_call_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#method_call_statement.
-MParserListener.prototype.enterMethod_call_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#method_call_statement.
-MParserListener.prototype.exitMethod_call_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#with_resource_statement.
-MParserListener.prototype.enterWith_resource_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#with_resource_statement.
-MParserListener.prototype.exitWith_resource_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#with_singleton_statement.
-MParserListener.prototype.enterWith_singleton_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#with_singleton_statement.
-MParserListener.prototype.exitWith_singleton_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#switch_statement.
-MParserListener.prototype.enterSwitch_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#switch_statement.
-MParserListener.prototype.exitSwitch_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AtomicSwitchCase.
-MParserListener.prototype.enterAtomicSwitchCase = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AtomicSwitchCase.
-MParserListener.prototype.exitAtomicSwitchCase = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CollectionSwitchCase.
-MParserListener.prototype.enterCollectionSwitchCase = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CollectionSwitchCase.
-MParserListener.prototype.exitCollectionSwitchCase = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#for_each_statement.
-MParserListener.prototype.enterFor_each_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#for_each_statement.
-MParserListener.prototype.exitFor_each_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#do_while_statement.
-MParserListener.prototype.enterDo_while_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#do_while_statement.
-MParserListener.prototype.exitDo_while_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#while_statement.
-MParserListener.prototype.enterWhile_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#while_statement.
-MParserListener.prototype.exitWhile_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#if_statement.
-MParserListener.prototype.enterIf_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#if_statement.
-MParserListener.prototype.exitIf_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ElseIfStatementList.
-MParserListener.prototype.enterElseIfStatementList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ElseIfStatementList.
-MParserListener.prototype.exitElseIfStatementList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ElseIfStatementListItem.
-MParserListener.prototype.enterElseIfStatementListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ElseIfStatementListItem.
-MParserListener.prototype.exitElseIfStatementListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#raise_statement.
-MParserListener.prototype.enterRaise_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#raise_statement.
-MParserListener.prototype.exitRaise_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#try_statement.
-MParserListener.prototype.enterTry_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#try_statement.
-MParserListener.prototype.exitTry_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CatchAtomicStatement.
-MParserListener.prototype.enterCatchAtomicStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CatchAtomicStatement.
-MParserListener.prototype.exitCatchAtomicStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CatchCollectionStatement.
-MParserListener.prototype.enterCatchCollectionStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CatchCollectionStatement.
-MParserListener.prototype.exitCatchCollectionStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#break_statement.
-MParserListener.prototype.enterBreak_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#break_statement.
-MParserListener.prototype.exitBreak_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#return_statement.
-MParserListener.prototype.enterReturn_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#return_statement.
-MParserListener.prototype.exitReturn_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IntDivideExpression.
-MParserListener.prototype.enterIntDivideExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IntDivideExpression.
-MParserListener.prototype.exitIntDivideExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#HasAnyExpression.
-MParserListener.prototype.enterHasAnyExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#HasAnyExpression.
-MParserListener.prototype.exitHasAnyExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#HasExpression.
-MParserListener.prototype.enterHasExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#HasExpression.
-MParserListener.prototype.exitHasExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TernaryExpression.
-MParserListener.prototype.enterTernaryExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TernaryExpression.
-MParserListener.prototype.exitTernaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotEqualsExpression.
-MParserListener.prototype.enterNotEqualsExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotEqualsExpression.
-MParserListener.prototype.exitNotEqualsExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#InExpression.
-MParserListener.prototype.enterInExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#InExpression.
-MParserListener.prototype.exitInExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxExpression.
-MParserListener.prototype.enterJsxExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxExpression.
-MParserListener.prototype.exitJsxExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotExpression.
-MParserListener.prototype.enterNotExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotExpression.
-MParserListener.prototype.exitNotExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#GreaterThanExpression.
-MParserListener.prototype.enterGreaterThanExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#GreaterThanExpression.
-MParserListener.prototype.exitGreaterThanExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OrExpression.
-MParserListener.prototype.enterOrExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OrExpression.
-MParserListener.prototype.exitOrExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CodeExpression.
-MParserListener.prototype.enterCodeExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CodeExpression.
-MParserListener.prototype.exitCodeExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#LessThanOrEqualExpression.
-MParserListener.prototype.enterLessThanOrEqualExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#LessThanOrEqualExpression.
-MParserListener.prototype.exitLessThanOrEqualExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotHasAnyExpression.
-MParserListener.prototype.enterNotHasAnyExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotHasAnyExpression.
-MParserListener.prototype.exitNotHasAnyExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AndExpression.
-MParserListener.prototype.enterAndExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AndExpression.
-MParserListener.prototype.exitAndExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArrowExpression.
-MParserListener.prototype.enterArrowExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArrowExpression.
-MParserListener.prototype.exitArrowExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotHasExpression.
-MParserListener.prototype.enterNotHasExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotHasExpression.
-MParserListener.prototype.exitNotHasExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ClosureExpression.
-MParserListener.prototype.enterClosureExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ClosureExpression.
-MParserListener.prototype.exitClosureExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotHasAllExpression.
-MParserListener.prototype.enterNotHasAllExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotHasAllExpression.
-MParserListener.prototype.exitNotHasAllExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ContainsExpression.
-MParserListener.prototype.enterContainsExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ContainsExpression.
-MParserListener.prototype.exitContainsExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FilteredListExpression.
-MParserListener.prototype.enterFilteredListExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FilteredListExpression.
-MParserListener.prototype.exitFilteredListExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotContainsExpression.
-MParserListener.prototype.enterNotContainsExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotContainsExpression.
-MParserListener.prototype.exitNotContainsExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MultiplyExpression.
-MParserListener.prototype.enterMultiplyExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MultiplyExpression.
-MParserListener.prototype.exitMultiplyExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#RoughlyEqualsExpression.
-MParserListener.prototype.enterRoughlyEqualsExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#RoughlyEqualsExpression.
-MParserListener.prototype.exitRoughlyEqualsExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ExecuteExpression.
-MParserListener.prototype.enterExecuteExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ExecuteExpression.
-MParserListener.prototype.exitExecuteExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#GreaterThanOrEqualExpression.
-MParserListener.prototype.enterGreaterThanOrEqualExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#GreaterThanOrEqualExpression.
-MParserListener.prototype.exitGreaterThanOrEqualExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NotInExpression.
-MParserListener.prototype.enterNotInExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NotInExpression.
-MParserListener.prototype.exitNotInExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IteratorExpression.
-MParserListener.prototype.enterIteratorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IteratorExpression.
-MParserListener.prototype.exitIteratorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IsNotExpression.
-MParserListener.prototype.enterIsNotExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IsNotExpression.
-MParserListener.prototype.exitIsNotExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DivideExpression.
-MParserListener.prototype.enterDivideExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DivideExpression.
-MParserListener.prototype.exitDivideExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IsExpression.
-MParserListener.prototype.enterIsExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IsExpression.
-MParserListener.prototype.exitIsExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MinusExpression.
-MParserListener.prototype.enterMinusExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MinusExpression.
-MParserListener.prototype.exitMinusExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AddExpression.
-MParserListener.prototype.enterAddExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AddExpression.
-MParserListener.prototype.exitAddExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#HasAllExpression.
-MParserListener.prototype.enterHasAllExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#HasAllExpression.
-MParserListener.prototype.exitHasAllExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#InstanceExpression.
-MParserListener.prototype.enterInstanceExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#InstanceExpression.
-MParserListener.prototype.exitInstanceExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MutableInstanceExpression.
-MParserListener.prototype.enterMutableInstanceExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MutableInstanceExpression.
-MParserListener.prototype.exitMutableInstanceExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CssExpression.
-MParserListener.prototype.enterCssExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CssExpression.
-MParserListener.prototype.exitCssExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CastExpression.
-MParserListener.prototype.enterCastExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CastExpression.
-MParserListener.prototype.exitCastExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ModuloExpression.
-MParserListener.prototype.enterModuloExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ModuloExpression.
-MParserListener.prototype.exitModuloExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#LessThanExpression.
-MParserListener.prototype.enterLessThanExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#LessThanExpression.
-MParserListener.prototype.exitLessThanExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#EqualsExpression.
-MParserListener.prototype.enterEqualsExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#EqualsExpression.
-MParserListener.prototype.exitEqualsExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#closure_expression.
-MParserListener.prototype.enterClosure_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#closure_expression.
-MParserListener.prototype.exitClosure_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MethodExpression.
-MParserListener.prototype.enterMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MethodExpression.
-MParserListener.prototype.exitMethodExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ParenthesisExpression.
-MParserListener.prototype.enterParenthesisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ParenthesisExpression.
-MParserListener.prototype.exitParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#LiteralExpression.
-MParserListener.prototype.enterLiteralExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#LiteralExpression.
-MParserListener.prototype.exitLiteralExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IdentifierExpression.
-MParserListener.prototype.enterIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IdentifierExpression.
-MParserListener.prototype.exitIdentifierExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ThisExpression.
-MParserListener.prototype.enterThisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ThisExpression.
-MParserListener.prototype.exitThisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SuperExpression.
-MParserListener.prototype.enterSuperExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SuperExpression.
-MParserListener.prototype.exitSuperExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SelectorExpression.
-MParserListener.prototype.enterSelectorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SelectorExpression.
-MParserListener.prototype.exitSelectorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SelectableExpression.
-MParserListener.prototype.enterSelectableExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SelectableExpression.
-MParserListener.prototype.exitSelectableExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MutableSelectableExpression.
-MParserListener.prototype.enterMutableSelectableExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MutableSelectableExpression.
-MParserListener.prototype.exitMutableSelectableExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MutableSelectorExpression.
-MParserListener.prototype.enterMutableSelectorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MutableSelectorExpression.
-MParserListener.prototype.exitMutableSelectorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#method_expression.
-MParserListener.prototype.enterMethod_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#method_expression.
-MParserListener.prototype.exitMethod_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MemberSelector.
-MParserListener.prototype.enterMemberSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MemberSelector.
-MParserListener.prototype.exitMemberSelector = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MethodSelector.
-MParserListener.prototype.enterMethodSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MethodSelector.
-MParserListener.prototype.exitMethodSelector = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SliceSelector.
-MParserListener.prototype.enterSliceSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SliceSelector.
-MParserListener.prototype.exitSliceSelector = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ItemSelector.
-MParserListener.prototype.enterItemSelector = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ItemSelector.
-MParserListener.prototype.exitItemSelector = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#blob_expression.
-MParserListener.prototype.enterBlob_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#blob_expression.
-MParserListener.prototype.exitBlob_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#document_expression.
-MParserListener.prototype.enterDocument_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#document_expression.
-MParserListener.prototype.exitDocument_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ConstructorFrom.
-MParserListener.prototype.enterConstructorFrom = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ConstructorFrom.
-MParserListener.prototype.exitConstructorFrom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ConstructorNoFrom.
-MParserListener.prototype.enterConstructorNoFrom = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ConstructorNoFrom.
-MParserListener.prototype.exitConstructorNoFrom = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#copy_from.
-MParserListener.prototype.enterCopy_from = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#copy_from.
-MParserListener.prototype.exitCopy_from = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ExpressionAssignmentList.
-MParserListener.prototype.enterExpressionAssignmentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ExpressionAssignmentList.
-MParserListener.prototype.exitExpressionAssignmentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArgumentAssignmentList.
-MParserListener.prototype.enterArgumentAssignmentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArgumentAssignmentList.
-MParserListener.prototype.exitArgumentAssignmentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArgumentAssignmentListItem.
-MParserListener.prototype.enterArgumentAssignmentListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArgumentAssignmentListItem.
-MParserListener.prototype.exitArgumentAssignmentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#argument_assignment.
-MParserListener.prototype.enterArgument_assignment = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#argument_assignment.
-MParserListener.prototype.exitArgument_assignment = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#write_statement.
-MParserListener.prototype.enterWrite_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#write_statement.
-MParserListener.prototype.exitWrite_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#filtered_list_suffix.
-MParserListener.prototype.enterFiltered_list_suffix = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#filtered_list_suffix.
-MParserListener.prototype.exitFiltered_list_suffix = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FetchOne.
-MParserListener.prototype.enterFetchOne = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FetchOne.
-MParserListener.prototype.exitFetchOne = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FetchMany.
-MParserListener.prototype.enterFetchMany = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FetchMany.
-MParserListener.prototype.exitFetchMany = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FetchOneAsync.
-MParserListener.prototype.enterFetchOneAsync = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FetchOneAsync.
-MParserListener.prototype.exitFetchOneAsync = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FetchManyAsync.
-MParserListener.prototype.enterFetchManyAsync = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FetchManyAsync.
-MParserListener.prototype.exitFetchManyAsync = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#read_statement.
-MParserListener.prototype.enterRead_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#read_statement.
-MParserListener.prototype.exitRead_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#sorted_expression.
-MParserListener.prototype.enterSorted_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#sorted_expression.
-MParserListener.prototype.exitSorted_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#assign_instance_statement.
-MParserListener.prototype.enterAssign_instance_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#assign_instance_statement.
-MParserListener.prototype.exitAssign_instance_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MemberInstance.
-MParserListener.prototype.enterMemberInstance = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MemberInstance.
-MParserListener.prototype.exitMemberInstance = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ItemInstance.
-MParserListener.prototype.enterItemInstance = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ItemInstance.
-MParserListener.prototype.exitItemInstance = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#assign_tuple_statement.
-MParserListener.prototype.enterAssign_tuple_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#assign_tuple_statement.
-MParserListener.prototype.exitAssign_tuple_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#lfs.
-MParserListener.prototype.enterLfs = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#lfs.
-MParserListener.prototype.exitLfs = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#lfp.
-MParserListener.prototype.enterLfp = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#lfp.
-MParserListener.prototype.exitLfp = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ws_plus.
-MParserListener.prototype.enterWs_plus = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ws_plus.
-MParserListener.prototype.exitWs_plus = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#indent.
-MParserListener.prototype.enterIndent = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#indent.
-MParserListener.prototype.exitIndent = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#dedent.
-MParserListener.prototype.enterDedent = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#dedent.
-MParserListener.prototype.exitDedent = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#type_literal.
-MParserListener.prototype.enterType_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#type_literal.
-MParserListener.prototype.exitType_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#null_literal.
-MParserListener.prototype.enterNull_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#null_literal.
-MParserListener.prototype.exitNull_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#repl.
-MParserListener.prototype.enterRepl = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#repl.
-MParserListener.prototype.exitRepl = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#FullDeclarationList.
-MParserListener.prototype.enterFullDeclarationList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#FullDeclarationList.
-MParserListener.prototype.exitFullDeclarationList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#declarations.
-MParserListener.prototype.enterDeclarations = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#declarations.
-MParserListener.prototype.exitDeclarations = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#declaration.
-MParserListener.prototype.enterDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#declaration.
-MParserListener.prototype.exitDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#annotation_constructor.
-MParserListener.prototype.enterAnnotation_constructor = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#annotation_constructor.
-MParserListener.prototype.exitAnnotation_constructor = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#annotation_identifier.
-MParserListener.prototype.enterAnnotation_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#annotation_identifier.
-MParserListener.prototype.exitAnnotation_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#annotation_argument.
-MParserListener.prototype.enterAnnotation_argument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#annotation_argument.
-MParserListener.prototype.exitAnnotation_argument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#annotation_argument_name.
-MParserListener.prototype.enterAnnotation_argument_name = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#annotation_argument_name.
-MParserListener.prototype.exitAnnotation_argument_name = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AnnotationLiteralValue.
-MParserListener.prototype.enterAnnotationLiteralValue = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AnnotationLiteralValue.
-MParserListener.prototype.exitAnnotationLiteralValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AnnotationTypeValue.
-MParserListener.prototype.enterAnnotationTypeValue = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AnnotationTypeValue.
-MParserListener.prototype.exitAnnotationTypeValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#resource_declaration.
-MParserListener.prototype.enterResource_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#resource_declaration.
-MParserListener.prototype.exitResource_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#enum_declaration.
-MParserListener.prototype.enterEnum_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#enum_declaration.
-MParserListener.prototype.exitEnum_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_symbol_list.
-MParserListener.prototype.enterNative_symbol_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_symbol_list.
-MParserListener.prototype.exitNative_symbol_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#category_symbol_list.
-MParserListener.prototype.enterCategory_symbol_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#category_symbol_list.
-MParserListener.prototype.exitCategory_symbol_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#symbol_list.
-MParserListener.prototype.enterSymbol_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#symbol_list.
-MParserListener.prototype.exitSymbol_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MatchingList.
-MParserListener.prototype.enterMatchingList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MatchingList.
-MParserListener.prototype.exitMatchingList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MatchingSet.
-MParserListener.prototype.enterMatchingSet = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MatchingSet.
-MParserListener.prototype.exitMatchingSet = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MatchingRange.
-MParserListener.prototype.enterMatchingRange = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MatchingRange.
-MParserListener.prototype.exitMatchingRange = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MatchingPattern.
-MParserListener.prototype.enterMatchingPattern = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MatchingPattern.
-MParserListener.prototype.exitMatchingPattern = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MatchingExpression.
-MParserListener.prototype.enterMatchingExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MatchingExpression.
-MParserListener.prototype.exitMatchingExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#list_literal.
-MParserListener.prototype.enterList_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#list_literal.
-MParserListener.prototype.exitList_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#set_literal.
-MParserListener.prototype.enterSet_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#set_literal.
-MParserListener.prototype.exitSet_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#expression_list.
-MParserListener.prototype.enterExpression_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#expression_list.
-MParserListener.prototype.exitExpression_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#range_literal.
-MParserListener.prototype.enterRange_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#range_literal.
-MParserListener.prototype.exitRange_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IteratorType.
-MParserListener.prototype.enterIteratorType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IteratorType.
-MParserListener.prototype.exitIteratorType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SetType.
-MParserListener.prototype.enterSetType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SetType.
-MParserListener.prototype.exitSetType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ListType.
-MParserListener.prototype.enterListType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ListType.
-MParserListener.prototype.exitListType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DictType.
-MParserListener.prototype.enterDictType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DictType.
-MParserListener.prototype.exitDictType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CursorType.
-MParserListener.prototype.enterCursorType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CursorType.
-MParserListener.prototype.exitCursorType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PrimaryType.
-MParserListener.prototype.enterPrimaryType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PrimaryType.
-MParserListener.prototype.exitPrimaryType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NativeType.
-MParserListener.prototype.enterNativeType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NativeType.
-MParserListener.prototype.exitNativeType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CategoryType.
-MParserListener.prototype.enterCategoryType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CategoryType.
-MParserListener.prototype.exitCategoryType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#BooleanType.
-MParserListener.prototype.enterBooleanType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#BooleanType.
-MParserListener.prototype.exitBooleanType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CssType.
-MParserListener.prototype.enterCssType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CssType.
-MParserListener.prototype.exitCssType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CharacterType.
-MParserListener.prototype.enterCharacterType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CharacterType.
-MParserListener.prototype.exitCharacterType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TextType.
-MParserListener.prototype.enterTextType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TextType.
-MParserListener.prototype.exitTextType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ImageType.
-MParserListener.prototype.enterImageType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ImageType.
-MParserListener.prototype.exitImageType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IntegerType.
-MParserListener.prototype.enterIntegerType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IntegerType.
-MParserListener.prototype.exitIntegerType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DecimalType.
-MParserListener.prototype.enterDecimalType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DecimalType.
-MParserListener.prototype.exitDecimalType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DocumentType.
-MParserListener.prototype.enterDocumentType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DocumentType.
-MParserListener.prototype.exitDocumentType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DateType.
-MParserListener.prototype.enterDateType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DateType.
-MParserListener.prototype.exitDateType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DateTimeType.
-MParserListener.prototype.enterDateTimeType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DateTimeType.
-MParserListener.prototype.exitDateTimeType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TimeType.
-MParserListener.prototype.enterTimeType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TimeType.
-MParserListener.prototype.exitTimeType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PeriodType.
-MParserListener.prototype.enterPeriodType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PeriodType.
-MParserListener.prototype.exitPeriodType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#VersionType.
-MParserListener.prototype.enterVersionType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#VersionType.
-MParserListener.prototype.exitVersionType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CodeType.
-MParserListener.prototype.enterCodeType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CodeType.
-MParserListener.prototype.exitCodeType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#BlobType.
-MParserListener.prototype.enterBlobType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#BlobType.
-MParserListener.prototype.exitBlobType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#UUIDType.
-MParserListener.prototype.enterUUIDType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#UUIDType.
-MParserListener.prototype.exitUUIDType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#HtmlType.
-MParserListener.prototype.enterHtmlType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#HtmlType.
-MParserListener.prototype.exitHtmlType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#category_type.
-MParserListener.prototype.enterCategory_type = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#category_type.
-MParserListener.prototype.exitCategory_type = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#mutable_category_type.
-MParserListener.prototype.enterMutable_category_type = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#mutable_category_type.
-MParserListener.prototype.exitMutable_category_type = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#code_type.
-MParserListener.prototype.enterCode_type = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#code_type.
-MParserListener.prototype.exitCode_type = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ConcreteCategoryDeclaration.
-MParserListener.prototype.enterConcreteCategoryDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ConcreteCategoryDeclaration.
-MParserListener.prototype.exitConcreteCategoryDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NativeCategoryDeclaration.
-MParserListener.prototype.enterNativeCategoryDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NativeCategoryDeclaration.
-MParserListener.prototype.exitNativeCategoryDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SingletonCategoryDeclaration.
-MParserListener.prototype.enterSingletonCategoryDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SingletonCategoryDeclaration.
-MParserListener.prototype.exitSingletonCategoryDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ConcreteWidgetDeclaration.
-MParserListener.prototype.enterConcreteWidgetDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ConcreteWidgetDeclaration.
-MParserListener.prototype.exitConcreteWidgetDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NativeWidgetDeclaration.
-MParserListener.prototype.enterNativeWidgetDeclaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NativeWidgetDeclaration.
-MParserListener.prototype.exitNativeWidgetDeclaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#type_identifier_list.
-MParserListener.prototype.enterType_identifier_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#type_identifier_list.
-MParserListener.prototype.exitType_identifier_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#method_identifier.
-MParserListener.prototype.enterMethod_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#method_identifier.
-MParserListener.prototype.exitMethod_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#identifier_or_keyword.
-MParserListener.prototype.enterIdentifier_or_keyword = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#identifier_or_keyword.
-MParserListener.prototype.exitIdentifier_or_keyword = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#nospace_hyphen_identifier_or_keyword.
-MParserListener.prototype.enterNospace_hyphen_identifier_or_keyword = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#nospace_hyphen_identifier_or_keyword.
-MParserListener.prototype.exitNospace_hyphen_identifier_or_keyword = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#nospace_identifier_or_keyword.
-MParserListener.prototype.enterNospace_identifier_or_keyword = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#nospace_identifier_or_keyword.
-MParserListener.prototype.exitNospace_identifier_or_keyword = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#VariableIdentifier.
-MParserListener.prototype.enterVariableIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#VariableIdentifier.
-MParserListener.prototype.exitVariableIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TypeIdentifier.
-MParserListener.prototype.enterTypeIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TypeIdentifier.
-MParserListener.prototype.exitTypeIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SymbolIdentifier.
-MParserListener.prototype.enterSymbolIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SymbolIdentifier.
-MParserListener.prototype.exitSymbolIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#member_identifier.
-MParserListener.prototype.enterMember_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#member_identifier.
-MParserListener.prototype.exitMember_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#variable_identifier.
-MParserListener.prototype.enterVariable_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#variable_identifier.
-MParserListener.prototype.exitVariable_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#attribute_identifier.
-MParserListener.prototype.enterAttribute_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#attribute_identifier.
-MParserListener.prototype.exitAttribute_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#type_identifier.
-MParserListener.prototype.enterType_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#type_identifier.
-MParserListener.prototype.exitType_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#symbol_identifier.
-MParserListener.prototype.enterSymbol_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#symbol_identifier.
-MParserListener.prototype.exitSymbol_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#argument_list.
-MParserListener.prototype.enterArgument_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#argument_list.
-MParserListener.prototype.exitArgument_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CodeArgument.
-MParserListener.prototype.enterCodeArgument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CodeArgument.
-MParserListener.prototype.exitCodeArgument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorArgument.
-MParserListener.prototype.enterOperatorArgument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorArgument.
-MParserListener.prototype.exitOperatorArgument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#operator_argument.
-MParserListener.prototype.enterOperator_argument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#operator_argument.
-MParserListener.prototype.exitOperator_argument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#named_argument.
-MParserListener.prototype.enterNamed_argument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#named_argument.
-MParserListener.prototype.exitNamed_argument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#code_argument.
-MParserListener.prototype.enterCode_argument = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#code_argument.
-MParserListener.prototype.exitCode_argument = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#category_or_any_type.
-MParserListener.prototype.enterCategory_or_any_type = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#category_or_any_type.
-MParserListener.prototype.exitCategory_or_any_type = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AnyListType.
-MParserListener.prototype.enterAnyListType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AnyListType.
-MParserListener.prototype.exitAnyListType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AnyType.
-MParserListener.prototype.enterAnyType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AnyType.
-MParserListener.prototype.exitAnyType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#AnyDictType.
-MParserListener.prototype.enterAnyDictType = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#AnyDictType.
-MParserListener.prototype.exitAnyDictType = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#member_method_declaration_list.
-MParserListener.prototype.enterMember_method_declaration_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#member_method_declaration_list.
-MParserListener.prototype.exitMember_method_declaration_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#member_method_declaration.
-MParserListener.prototype.enterMember_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#member_method_declaration.
-MParserListener.prototype.exitMember_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_member_method_declaration_list.
-MParserListener.prototype.enterNative_member_method_declaration_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_member_method_declaration_list.
-MParserListener.prototype.exitNative_member_method_declaration_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_member_method_declaration.
-MParserListener.prototype.enterNative_member_method_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_member_method_declaration.
-MParserListener.prototype.exitNative_member_method_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaCategoryBinding.
-MParserListener.prototype.enterJavaCategoryBinding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaCategoryBinding.
-MParserListener.prototype.exitJavaCategoryBinding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpCategoryBinding.
-MParserListener.prototype.enterCSharpCategoryBinding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpCategoryBinding.
-MParserListener.prototype.exitCSharpCategoryBinding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#Python2CategoryBinding.
-MParserListener.prototype.enterPython2CategoryBinding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#Python2CategoryBinding.
-MParserListener.prototype.exitPython2CategoryBinding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#Python3CategoryBinding.
-MParserListener.prototype.enterPython3CategoryBinding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#Python3CategoryBinding.
-MParserListener.prototype.exitPython3CategoryBinding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaScriptCategoryBinding.
-MParserListener.prototype.enterJavaScriptCategoryBinding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaScriptCategoryBinding.
-MParserListener.prototype.exitJavaScriptCategoryBinding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_category_binding.
-MParserListener.prototype.enterPython_category_binding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_category_binding.
-MParserListener.prototype.exitPython_category_binding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_module.
-MParserListener.prototype.enterPython_module = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_module.
-MParserListener.prototype.exitPython_module = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_category_binding.
-MParserListener.prototype.enterJavascript_category_binding = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_category_binding.
-MParserListener.prototype.exitJavascript_category_binding = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_module.
-MParserListener.prototype.enterJavascript_module = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_module.
-MParserListener.prototype.exitJavascript_module = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#variable_identifier_list.
-MParserListener.prototype.enterVariable_identifier_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#variable_identifier_list.
-MParserListener.prototype.exitVariable_identifier_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#attribute_identifier_list.
-MParserListener.prototype.enterAttribute_identifier_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#attribute_identifier_list.
-MParserListener.prototype.exitAttribute_identifier_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#method_declaration.
-MParserListener.prototype.enterMethod_declaration = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#method_declaration.
-MParserListener.prototype.exitMethod_declaration = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#comment_statement.
-MParserListener.prototype.enterComment_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#comment_statement.
-MParserListener.prototype.exitComment_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#native_statement_list.
-MParserListener.prototype.enterNative_statement_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#native_statement_list.
-MParserListener.prototype.exitNative_statement_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaNativeStatement.
-MParserListener.prototype.enterJavaNativeStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaNativeStatement.
-MParserListener.prototype.exitJavaNativeStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpNativeStatement.
-MParserListener.prototype.enterCSharpNativeStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpNativeStatement.
-MParserListener.prototype.exitCSharpNativeStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#Python2NativeStatement.
-MParserListener.prototype.enterPython2NativeStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#Python2NativeStatement.
-MParserListener.prototype.exitPython2NativeStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#Python3NativeStatement.
-MParserListener.prototype.enterPython3NativeStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#Python3NativeStatement.
-MParserListener.prototype.exitPython3NativeStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaScriptNativeStatement.
-MParserListener.prototype.enterJavaScriptNativeStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaScriptNativeStatement.
-MParserListener.prototype.exitJavaScriptNativeStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_native_statement.
-MParserListener.prototype.enterPython_native_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_native_statement.
-MParserListener.prototype.exitPython_native_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_native_statement.
-MParserListener.prototype.enterJavascript_native_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_native_statement.
-MParserListener.prototype.exitJavascript_native_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#statement_list.
-MParserListener.prototype.enterStatement_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#statement_list.
-MParserListener.prototype.exitStatement_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#assertion_list.
-MParserListener.prototype.enterAssertion_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#assertion_list.
-MParserListener.prototype.exitAssertion_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#switch_case_statement_list.
-MParserListener.prototype.enterSwitch_case_statement_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#switch_case_statement_list.
-MParserListener.prototype.exitSwitch_case_statement_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#catch_statement_list.
-MParserListener.prototype.enterCatch_statement_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#catch_statement_list.
-MParserListener.prototype.exitCatch_statement_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#LiteralRangeLiteral.
-MParserListener.prototype.enterLiteralRangeLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#LiteralRangeLiteral.
-MParserListener.prototype.exitLiteralRangeLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#LiteralListLiteral.
-MParserListener.prototype.enterLiteralListLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#LiteralListLiteral.
-MParserListener.prototype.exitLiteralListLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#LiteralSetLiteral.
-MParserListener.prototype.enterLiteralSetLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#LiteralSetLiteral.
-MParserListener.prototype.exitLiteralSetLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MinIntegerLiteral.
-MParserListener.prototype.enterMinIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MinIntegerLiteral.
-MParserListener.prototype.exitMinIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#MaxIntegerLiteral.
-MParserListener.prototype.enterMaxIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#MaxIntegerLiteral.
-MParserListener.prototype.exitMaxIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IntegerLiteral.
-MParserListener.prototype.enterIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IntegerLiteral.
-MParserListener.prototype.exitIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#HexadecimalLiteral.
-MParserListener.prototype.enterHexadecimalLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#HexadecimalLiteral.
-MParserListener.prototype.exitHexadecimalLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CharacterLiteral.
-MParserListener.prototype.enterCharacterLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CharacterLiteral.
-MParserListener.prototype.exitCharacterLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DateLiteral.
-MParserListener.prototype.enterDateLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DateLiteral.
-MParserListener.prototype.exitDateLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TimeLiteral.
-MParserListener.prototype.enterTimeLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TimeLiteral.
-MParserListener.prototype.exitTimeLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TextLiteral.
-MParserListener.prototype.enterTextLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TextLiteral.
-MParserListener.prototype.exitTextLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DecimalLiteral.
-MParserListener.prototype.enterDecimalLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DecimalLiteral.
-MParserListener.prototype.exitDecimalLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DateTimeLiteral.
-MParserListener.prototype.enterDateTimeLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DateTimeLiteral.
-MParserListener.prototype.exitDateTimeLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#BooleanLiteral.
-MParserListener.prototype.enterBooleanLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#BooleanLiteral.
-MParserListener.prototype.exitBooleanLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PeriodLiteral.
-MParserListener.prototype.enterPeriodLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PeriodLiteral.
-MParserListener.prototype.exitPeriodLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#VersionLiteral.
-MParserListener.prototype.enterVersionLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#VersionLiteral.
-MParserListener.prototype.exitVersionLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#UUIDLiteral.
-MParserListener.prototype.enterUUIDLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#UUIDLiteral.
-MParserListener.prototype.exitUUIDLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SymbolLiteral.
-MParserListener.prototype.enterSymbolLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SymbolLiteral.
-MParserListener.prototype.exitSymbolLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#TypeLiteral.
-MParserListener.prototype.enterTypeLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#TypeLiteral.
-MParserListener.prototype.exitTypeLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#NullLiteral.
-MParserListener.prototype.enterNullLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#NullLiteral.
-MParserListener.prototype.exitNullLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#literal_list_literal.
-MParserListener.prototype.enterLiteral_list_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#literal_list_literal.
-MParserListener.prototype.exitLiteral_list_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#this_expression.
-MParserListener.prototype.enterThis_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#this_expression.
-MParserListener.prototype.exitThis_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#super_expression.
-MParserListener.prototype.enterSuper_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#super_expression.
-MParserListener.prototype.exitSuper_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#parenthesis_expression.
-MParserListener.prototype.enterParenthesis_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#parenthesis_expression.
-MParserListener.prototype.exitParenthesis_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#literal_expression.
-MParserListener.prototype.enterLiteral_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#literal_expression.
-MParserListener.prototype.exitLiteral_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#collection_literal.
-MParserListener.prototype.enterCollection_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#collection_literal.
-MParserListener.prototype.exitCollection_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#tuple_literal.
-MParserListener.prototype.enterTuple_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#tuple_literal.
-MParserListener.prototype.exitTuple_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#dict_literal.
-MParserListener.prototype.enterDict_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#dict_literal.
-MParserListener.prototype.exitDict_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#document_literal.
-MParserListener.prototype.enterDocument_literal = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#document_literal.
-MParserListener.prototype.exitDocument_literal = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#expression_tuple.
-MParserListener.prototype.enterExpression_tuple = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#expression_tuple.
-MParserListener.prototype.exitExpression_tuple = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#doc_entry_list.
-MParserListener.prototype.enterDoc_entry_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#doc_entry_list.
-MParserListener.prototype.exitDoc_entry_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#doc_entry.
-MParserListener.prototype.enterDoc_entry = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#doc_entry.
-MParserListener.prototype.exitDoc_entry = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DocKeyIdentifier.
-MParserListener.prototype.enterDocKeyIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DocKeyIdentifier.
-MParserListener.prototype.exitDocKeyIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DocKeyText.
-MParserListener.prototype.enterDocKeyText = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DocKeyText.
-MParserListener.prototype.exitDocKeyText = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#dict_entry_list.
-MParserListener.prototype.enterDict_entry_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#dict_entry_list.
-MParserListener.prototype.exitDict_entry_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#dict_entry.
-MParserListener.prototype.enterDict_entry = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#dict_entry.
-MParserListener.prototype.exitDict_entry = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DictKeyIdentifier.
-MParserListener.prototype.enterDictKeyIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DictKeyIdentifier.
-MParserListener.prototype.exitDictKeyIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#DictKeyText.
-MParserListener.prototype.enterDictKeyText = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#DictKeyText.
-MParserListener.prototype.exitDictKeyText = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SliceFirstAndLast.
-MParserListener.prototype.enterSliceFirstAndLast = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SliceFirstAndLast.
-MParserListener.prototype.exitSliceFirstAndLast = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SliceFirstOnly.
-MParserListener.prototype.enterSliceFirstOnly = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SliceFirstOnly.
-MParserListener.prototype.exitSliceFirstOnly = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#SliceLastOnly.
-MParserListener.prototype.enterSliceLastOnly = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#SliceLastOnly.
-MParserListener.prototype.exitSliceLastOnly = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#assign_variable_statement.
-MParserListener.prototype.enterAssign_variable_statement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#assign_variable_statement.
-MParserListener.prototype.exitAssign_variable_statement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ChildInstance.
-MParserListener.prototype.enterChildInstance = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ChildInstance.
-MParserListener.prototype.exitChildInstance = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#RootInstance.
-MParserListener.prototype.enterRootInstance = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#RootInstance.
-MParserListener.prototype.exitRootInstance = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IsATypeExpression.
-MParserListener.prototype.enterIsATypeExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IsATypeExpression.
-MParserListener.prototype.exitIsATypeExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#IsOtherExpression.
-MParserListener.prototype.enterIsOtherExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#IsOtherExpression.
-MParserListener.prototype.exitIsOtherExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArrowExpressionBody.
-MParserListener.prototype.enterArrowExpressionBody = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArrowExpressionBody.
-MParserListener.prototype.exitArrowExpressionBody = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArrowStatementsBody.
-MParserListener.prototype.enterArrowStatementsBody = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArrowStatementsBody.
-MParserListener.prototype.exitArrowStatementsBody = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#arrow_prefix.
-MParserListener.prototype.enterArrow_prefix = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#arrow_prefix.
-MParserListener.prototype.exitArrow_prefix = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArrowSingleArg.
-MParserListener.prototype.enterArrowSingleArg = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArrowSingleArg.
-MParserListener.prototype.exitArrowSingleArg = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#ArrowListArg.
-MParserListener.prototype.enterArrowListArg = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#ArrowListArg.
-MParserListener.prototype.exitArrowListArg = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#sorted_key.
-MParserListener.prototype.enterSorted_key = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#sorted_key.
-MParserListener.prototype.exitSorted_key = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#read_blob_expression.
-MParserListener.prototype.enterRead_blob_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#read_blob_expression.
-MParserListener.prototype.exitRead_blob_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#read_all_expression.
-MParserListener.prototype.enterRead_all_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#read_all_expression.
-MParserListener.prototype.exitRead_all_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#read_one_expression.
-MParserListener.prototype.enterRead_one_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#read_one_expression.
-MParserListener.prototype.exitRead_one_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#order_by_list.
-MParserListener.prototype.enterOrder_by_list = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#order_by_list.
-MParserListener.prototype.exitOrder_by_list = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#order_by.
-MParserListener.prototype.enterOrder_by = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#order_by.
-MParserListener.prototype.exitOrder_by = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorPlus.
-MParserListener.prototype.enterOperatorPlus = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorPlus.
-MParserListener.prototype.exitOperatorPlus = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorMinus.
-MParserListener.prototype.enterOperatorMinus = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorMinus.
-MParserListener.prototype.exitOperatorMinus = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorMultiply.
-MParserListener.prototype.enterOperatorMultiply = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorMultiply.
-MParserListener.prototype.exitOperatorMultiply = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorDivide.
-MParserListener.prototype.enterOperatorDivide = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorDivide.
-MParserListener.prototype.exitOperatorDivide = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorIDivide.
-MParserListener.prototype.enterOperatorIDivide = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorIDivide.
-MParserListener.prototype.exitOperatorIDivide = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#OperatorModulo.
-MParserListener.prototype.enterOperatorModulo = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#OperatorModulo.
-MParserListener.prototype.exitOperatorModulo = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#keyword.
-MParserListener.prototype.enterKeyword = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#keyword.
-MParserListener.prototype.exitKeyword = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#new_token.
-MParserListener.prototype.enterNew_token = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#new_token.
-MParserListener.prototype.exitNew_token = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#key_token.
-MParserListener.prototype.enterKey_token = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#key_token.
-MParserListener.prototype.exitKey_token = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#module_token.
-MParserListener.prototype.enterModule_token = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#module_token.
-MParserListener.prototype.exitModule_token = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#value_token.
-MParserListener.prototype.enterValue_token = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#value_token.
-MParserListener.prototype.exitValue_token = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#symbols_token.
-MParserListener.prototype.enterSymbols_token = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#symbols_token.
-MParserListener.prototype.exitSymbols_token = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#assign.
-MParserListener.prototype.enterAssign = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#assign.
-MParserListener.prototype.exitAssign = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#multiply.
-MParserListener.prototype.enterMultiply = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#multiply.
-MParserListener.prototype.exitMultiply = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#divide.
-MParserListener.prototype.enterDivide = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#divide.
-MParserListener.prototype.exitDivide = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#idivide.
-MParserListener.prototype.enterIdivide = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#idivide.
-MParserListener.prototype.exitIdivide = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#modulo.
-MParserListener.prototype.enterModulo = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#modulo.
-MParserListener.prototype.exitModulo = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptReturnStatement.
-MParserListener.prototype.enterJavascriptReturnStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptReturnStatement.
-MParserListener.prototype.exitJavascriptReturnStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptStatement.
-MParserListener.prototype.enterJavascriptStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptStatement.
-MParserListener.prototype.exitJavascriptStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptSelectorExpression.
-MParserListener.prototype.enterJavascriptSelectorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptSelectorExpression.
-MParserListener.prototype.exitJavascriptSelectorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptPrimaryExpression.
-MParserListener.prototype.enterJavascriptPrimaryExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptPrimaryExpression.
-MParserListener.prototype.exitJavascriptPrimaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_primary_expression.
-MParserListener.prototype.enterJavascript_primary_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_primary_expression.
-MParserListener.prototype.exitJavascript_primary_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_this_expression.
-MParserListener.prototype.enterJavascript_this_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_this_expression.
-MParserListener.prototype.exitJavascript_this_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_new_expression.
-MParserListener.prototype.enterJavascript_new_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_new_expression.
-MParserListener.prototype.exitJavascript_new_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaScriptMethodExpression.
-MParserListener.prototype.enterJavaScriptMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaScriptMethodExpression.
-MParserListener.prototype.exitJavaScriptMethodExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaScriptMemberExpression.
-MParserListener.prototype.enterJavaScriptMemberExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaScriptMemberExpression.
-MParserListener.prototype.exitJavaScriptMemberExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaScriptItemExpression.
-MParserListener.prototype.enterJavaScriptItemExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaScriptItemExpression.
-MParserListener.prototype.exitJavaScriptItemExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_method_expression.
-MParserListener.prototype.enterJavascript_method_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_method_expression.
-MParserListener.prototype.exitJavascript_method_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptArgumentList.
-MParserListener.prototype.enterJavascriptArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptArgumentList.
-MParserListener.prototype.exitJavascriptArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptArgumentListItem.
-MParserListener.prototype.enterJavascriptArgumentListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptArgumentListItem.
-MParserListener.prototype.exitJavascriptArgumentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_item_expression.
-MParserListener.prototype.enterJavascript_item_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_item_expression.
-MParserListener.prototype.exitJavascript_item_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_parenthesis_expression.
-MParserListener.prototype.enterJavascript_parenthesis_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_parenthesis_expression.
-MParserListener.prototype.exitJavascript_parenthesis_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_identifier_expression.
-MParserListener.prototype.enterJavascript_identifier_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_identifier_expression.
-MParserListener.prototype.exitJavascript_identifier_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptIntegerLiteral.
-MParserListener.prototype.enterJavascriptIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptIntegerLiteral.
-MParserListener.prototype.exitJavascriptIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptDecimalLiteral.
-MParserListener.prototype.enterJavascriptDecimalLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptDecimalLiteral.
-MParserListener.prototype.exitJavascriptDecimalLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptTextLiteral.
-MParserListener.prototype.enterJavascriptTextLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptTextLiteral.
-MParserListener.prototype.exitJavascriptTextLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptBooleanLiteral.
-MParserListener.prototype.enterJavascriptBooleanLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptBooleanLiteral.
-MParserListener.prototype.exitJavascriptBooleanLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavascriptCharacterLiteral.
-MParserListener.prototype.enterJavascriptCharacterLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavascriptCharacterLiteral.
-MParserListener.prototype.exitJavascriptCharacterLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#javascript_identifier.
-MParserListener.prototype.enterJavascript_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#javascript_identifier.
-MParserListener.prototype.exitJavascript_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonReturnStatement.
-MParserListener.prototype.enterPythonReturnStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonReturnStatement.
-MParserListener.prototype.exitPythonReturnStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonStatement.
-MParserListener.prototype.enterPythonStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonStatement.
-MParserListener.prototype.exitPythonStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonSelectorExpression.
-MParserListener.prototype.enterPythonSelectorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonSelectorExpression.
-MParserListener.prototype.exitPythonSelectorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonPrimaryExpression.
-MParserListener.prototype.enterPythonPrimaryExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonPrimaryExpression.
-MParserListener.prototype.exitPythonPrimaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonSelfExpression.
-MParserListener.prototype.enterPythonSelfExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonSelfExpression.
-MParserListener.prototype.exitPythonSelfExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonParenthesisExpression.
-MParserListener.prototype.enterPythonParenthesisExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonParenthesisExpression.
-MParserListener.prototype.exitPythonParenthesisExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonIdentifierExpression.
-MParserListener.prototype.enterPythonIdentifierExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonIdentifierExpression.
-MParserListener.prototype.exitPythonIdentifierExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonLiteralExpression.
-MParserListener.prototype.enterPythonLiteralExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonLiteralExpression.
-MParserListener.prototype.exitPythonLiteralExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonGlobalMethodExpression.
-MParserListener.prototype.enterPythonGlobalMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonGlobalMethodExpression.
-MParserListener.prototype.exitPythonGlobalMethodExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_self_expression.
-MParserListener.prototype.enterPython_self_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_self_expression.
-MParserListener.prototype.exitPython_self_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonMethodExpression.
-MParserListener.prototype.enterPythonMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonMethodExpression.
-MParserListener.prototype.exitPythonMethodExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonItemExpression.
-MParserListener.prototype.enterPythonItemExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonItemExpression.
-MParserListener.prototype.exitPythonItemExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_method_expression.
-MParserListener.prototype.enterPython_method_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_method_expression.
-MParserListener.prototype.exitPython_method_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonOrdinalOnlyArgumentList.
-MParserListener.prototype.enterPythonOrdinalOnlyArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonOrdinalOnlyArgumentList.
-MParserListener.prototype.exitPythonOrdinalOnlyArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonNamedOnlyArgumentList.
-MParserListener.prototype.enterPythonNamedOnlyArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonNamedOnlyArgumentList.
-MParserListener.prototype.exitPythonNamedOnlyArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonArgumentList.
-MParserListener.prototype.enterPythonArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonArgumentList.
-MParserListener.prototype.exitPythonArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonOrdinalArgumentList.
-MParserListener.prototype.enterPythonOrdinalArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonOrdinalArgumentList.
-MParserListener.prototype.exitPythonOrdinalArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonOrdinalArgumentListItem.
-MParserListener.prototype.enterPythonOrdinalArgumentListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonOrdinalArgumentListItem.
-MParserListener.prototype.exitPythonOrdinalArgumentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonNamedArgumentList.
-MParserListener.prototype.enterPythonNamedArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonNamedArgumentList.
-MParserListener.prototype.exitPythonNamedArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonNamedArgumentListItem.
-MParserListener.prototype.enterPythonNamedArgumentListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonNamedArgumentListItem.
-MParserListener.prototype.exitPythonNamedArgumentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_parenthesis_expression.
-MParserListener.prototype.enterPython_parenthesis_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_parenthesis_expression.
-MParserListener.prototype.exitPython_parenthesis_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonChildIdentifier.
-MParserListener.prototype.enterPythonChildIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonChildIdentifier.
-MParserListener.prototype.exitPythonChildIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonPromptoIdentifier.
-MParserListener.prototype.enterPythonPromptoIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonPromptoIdentifier.
-MParserListener.prototype.exitPythonPromptoIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonIdentifier.
-MParserListener.prototype.enterPythonIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonIdentifier.
-MParserListener.prototype.exitPythonIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonIntegerLiteral.
-MParserListener.prototype.enterPythonIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonIntegerLiteral.
-MParserListener.prototype.exitPythonIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonDecimalLiteral.
-MParserListener.prototype.enterPythonDecimalLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonDecimalLiteral.
-MParserListener.prototype.exitPythonDecimalLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonTextLiteral.
-MParserListener.prototype.enterPythonTextLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonTextLiteral.
-MParserListener.prototype.exitPythonTextLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonBooleanLiteral.
-MParserListener.prototype.enterPythonBooleanLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonBooleanLiteral.
-MParserListener.prototype.exitPythonBooleanLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#PythonCharacterLiteral.
-MParserListener.prototype.enterPythonCharacterLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#PythonCharacterLiteral.
-MParserListener.prototype.exitPythonCharacterLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#python_identifier.
-MParserListener.prototype.enterPython_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#python_identifier.
-MParserListener.prototype.exitPython_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaReturnStatement.
-MParserListener.prototype.enterJavaReturnStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaReturnStatement.
-MParserListener.prototype.exitJavaReturnStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaStatement.
-MParserListener.prototype.enterJavaStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaStatement.
-MParserListener.prototype.exitJavaStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaSelectorExpression.
-MParserListener.prototype.enterJavaSelectorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaSelectorExpression.
-MParserListener.prototype.exitJavaSelectorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaPrimaryExpression.
-MParserListener.prototype.enterJavaPrimaryExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaPrimaryExpression.
-MParserListener.prototype.exitJavaPrimaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_primary_expression.
-MParserListener.prototype.enterJava_primary_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_primary_expression.
-MParserListener.prototype.exitJava_primary_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_this_expression.
-MParserListener.prototype.enterJava_this_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_this_expression.
-MParserListener.prototype.exitJava_this_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_new_expression.
-MParserListener.prototype.enterJava_new_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_new_expression.
-MParserListener.prototype.exitJava_new_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaMethodExpression.
-MParserListener.prototype.enterJavaMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaMethodExpression.
-MParserListener.prototype.exitJavaMethodExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaItemExpression.
-MParserListener.prototype.enterJavaItemExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaItemExpression.
-MParserListener.prototype.exitJavaItemExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_method_expression.
-MParserListener.prototype.enterJava_method_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_method_expression.
-MParserListener.prototype.exitJava_method_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaArgumentListItem.
-MParserListener.prototype.enterJavaArgumentListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaArgumentListItem.
-MParserListener.prototype.exitJavaArgumentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaArgumentList.
-MParserListener.prototype.enterJavaArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaArgumentList.
-MParserListener.prototype.exitJavaArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_item_expression.
-MParserListener.prototype.enterJava_item_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_item_expression.
-MParserListener.prototype.exitJava_item_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_parenthesis_expression.
-MParserListener.prototype.enterJava_parenthesis_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_parenthesis_expression.
-MParserListener.prototype.exitJava_parenthesis_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaIdentifier.
-MParserListener.prototype.enterJavaIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaIdentifier.
-MParserListener.prototype.exitJavaIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaChildIdentifier.
-MParserListener.prototype.enterJavaChildIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaChildIdentifier.
-MParserListener.prototype.exitJavaChildIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaClassIdentifier.
-MParserListener.prototype.enterJavaClassIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaClassIdentifier.
-MParserListener.prototype.exitJavaClassIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaChildClassIdentifier.
-MParserListener.prototype.enterJavaChildClassIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaChildClassIdentifier.
-MParserListener.prototype.exitJavaChildClassIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaIntegerLiteral.
-MParserListener.prototype.enterJavaIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaIntegerLiteral.
-MParserListener.prototype.exitJavaIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaDecimalLiteral.
-MParserListener.prototype.enterJavaDecimalLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaDecimalLiteral.
-MParserListener.prototype.exitJavaDecimalLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaTextLiteral.
-MParserListener.prototype.enterJavaTextLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaTextLiteral.
-MParserListener.prototype.exitJavaTextLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaBooleanLiteral.
-MParserListener.prototype.enterJavaBooleanLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaBooleanLiteral.
-MParserListener.prototype.exitJavaBooleanLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JavaCharacterLiteral.
-MParserListener.prototype.enterJavaCharacterLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JavaCharacterLiteral.
-MParserListener.prototype.exitJavaCharacterLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#java_identifier.
-MParserListener.prototype.enterJava_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#java_identifier.
-MParserListener.prototype.exitJava_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpReturnStatement.
-MParserListener.prototype.enterCSharpReturnStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpReturnStatement.
-MParserListener.prototype.exitCSharpReturnStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpStatement.
-MParserListener.prototype.enterCSharpStatement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpStatement.
-MParserListener.prototype.exitCSharpStatement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpSelectorExpression.
-MParserListener.prototype.enterCSharpSelectorExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpSelectorExpression.
-MParserListener.prototype.exitCSharpSelectorExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpPrimaryExpression.
-MParserListener.prototype.enterCSharpPrimaryExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpPrimaryExpression.
-MParserListener.prototype.exitCSharpPrimaryExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_primary_expression.
-MParserListener.prototype.enterCsharp_primary_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_primary_expression.
-MParserListener.prototype.exitCsharp_primary_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_this_expression.
-MParserListener.prototype.enterCsharp_this_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_this_expression.
-MParserListener.prototype.exitCsharp_this_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_new_expression.
-MParserListener.prototype.enterCsharp_new_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_new_expression.
-MParserListener.prototype.exitCsharp_new_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpMethodExpression.
-MParserListener.prototype.enterCSharpMethodExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpMethodExpression.
-MParserListener.prototype.exitCSharpMethodExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpItemExpression.
-MParserListener.prototype.enterCSharpItemExpression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpItemExpression.
-MParserListener.prototype.exitCSharpItemExpression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_method_expression.
-MParserListener.prototype.enterCsharp_method_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_method_expression.
-MParserListener.prototype.exitCsharp_method_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpArgumentList.
-MParserListener.prototype.enterCSharpArgumentList = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpArgumentList.
-MParserListener.prototype.exitCSharpArgumentList = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpArgumentListItem.
-MParserListener.prototype.enterCSharpArgumentListItem = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpArgumentListItem.
-MParserListener.prototype.exitCSharpArgumentListItem = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_item_expression.
-MParserListener.prototype.enterCsharp_item_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_item_expression.
-MParserListener.prototype.exitCsharp_item_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_parenthesis_expression.
-MParserListener.prototype.enterCsharp_parenthesis_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_parenthesis_expression.
-MParserListener.prototype.exitCsharp_parenthesis_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpIdentifier.
-MParserListener.prototype.enterCSharpIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpIdentifier.
-MParserListener.prototype.exitCSharpIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpChildIdentifier.
-MParserListener.prototype.enterCSharpChildIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpChildIdentifier.
-MParserListener.prototype.exitCSharpChildIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpPromptoIdentifier.
-MParserListener.prototype.enterCSharpPromptoIdentifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpPromptoIdentifier.
-MParserListener.prototype.exitCSharpPromptoIdentifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpIntegerLiteral.
-MParserListener.prototype.enterCSharpIntegerLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpIntegerLiteral.
-MParserListener.prototype.exitCSharpIntegerLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpDecimalLiteral.
-MParserListener.prototype.enterCSharpDecimalLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpDecimalLiteral.
-MParserListener.prototype.exitCSharpDecimalLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpTextLiteral.
-MParserListener.prototype.enterCSharpTextLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpTextLiteral.
-MParserListener.prototype.exitCSharpTextLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpBooleanLiteral.
-MParserListener.prototype.enterCSharpBooleanLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpBooleanLiteral.
-MParserListener.prototype.exitCSharpBooleanLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CSharpCharacterLiteral.
-MParserListener.prototype.enterCSharpCharacterLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CSharpCharacterLiteral.
-MParserListener.prototype.exitCSharpCharacterLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#csharp_identifier.
-MParserListener.prototype.enterCsharp_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#csharp_identifier.
-MParserListener.prototype.exitCsharp_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_expression.
-MParserListener.prototype.enterJsx_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_expression.
-MParserListener.prototype.exitJsx_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxSelfClosing.
-MParserListener.prototype.enterJsxSelfClosing = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxSelfClosing.
-MParserListener.prototype.exitJsxSelfClosing = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxElement.
-MParserListener.prototype.enterJsxElement = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxElement.
-MParserListener.prototype.exitJsxElement = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_fragment.
-MParserListener.prototype.enterJsx_fragment = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_fragment.
-MParserListener.prototype.exitJsx_fragment = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_fragment_start.
-MParserListener.prototype.enterJsx_fragment_start = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_fragment_start.
-MParserListener.prototype.exitJsx_fragment_start = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_fragment_end.
-MParserListener.prototype.enterJsx_fragment_end = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_fragment_end.
-MParserListener.prototype.exitJsx_fragment_end = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_self_closing.
-MParserListener.prototype.enterJsx_self_closing = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_self_closing.
-MParserListener.prototype.exitJsx_self_closing = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_opening.
-MParserListener.prototype.enterJsx_opening = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_opening.
-MParserListener.prototype.exitJsx_opening = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_closing.
-MParserListener.prototype.enterJsx_closing = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_closing.
-MParserListener.prototype.exitJsx_closing = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_element_name.
-MParserListener.prototype.enterJsx_element_name = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_element_name.
-MParserListener.prototype.exitJsx_element_name = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_identifier.
-MParserListener.prototype.enterJsx_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_identifier.
-MParserListener.prototype.exitJsx_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_attribute.
-MParserListener.prototype.enterJsx_attribute = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_attribute.
-MParserListener.prototype.exitJsx_attribute = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxLiteral.
-MParserListener.prototype.enterJsxLiteral = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxLiteral.
-MParserListener.prototype.exitJsxLiteral = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxValue.
-MParserListener.prototype.enterJsxValue = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxValue.
-MParserListener.prototype.exitJsxValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_children.
-MParserListener.prototype.enterJsx_children = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_children.
-MParserListener.prototype.exitJsx_children = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxText.
-MParserListener.prototype.enterJsxText = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxText.
-MParserListener.prototype.exitJsxText = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxChild.
-MParserListener.prototype.enterJsxChild = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxChild.
-MParserListener.prototype.exitJsxChild = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#JsxCode.
-MParserListener.prototype.enterJsxCode = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#JsxCode.
-MParserListener.prototype.exitJsxCode = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_text.
-MParserListener.prototype.enterJsx_text = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_text.
-MParserListener.prototype.exitJsx_text = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#jsx_char.
-MParserListener.prototype.enterJsx_char = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#jsx_char.
-MParserListener.prototype.exitJsx_char = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#css_expression.
-MParserListener.prototype.enterCss_expression = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#css_expression.
-MParserListener.prototype.exitCss_expression = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#css_field.
-MParserListener.prototype.enterCss_field = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#css_field.
-MParserListener.prototype.exitCss_field = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#css_identifier.
-MParserListener.prototype.enterCss_identifier = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#css_identifier.
-MParserListener.prototype.exitCss_identifier = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CssValue.
-MParserListener.prototype.enterCssValue = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CssValue.
-MParserListener.prototype.exitCssValue = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#CssText.
-MParserListener.prototype.enterCssText = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#CssText.
-MParserListener.prototype.exitCssText = function(ctx) {
-};
-
-
-// Enter a parse tree produced by MParser#css_text.
-MParserListener.prototype.enterCss_text = function(ctx) {
-};
-
-// Exit a parse tree produced by MParser#css_text.
-MParserListener.prototype.exitCss_text = function(ctx) {
-};
-
-
-
-exports.MParserListener = MParserListener;

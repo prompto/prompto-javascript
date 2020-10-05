@@ -1,11 +1,9 @@
-var CSharpExpression = require("./CSharpExpression").CSharpExpression;
+import CSharpExpression from './CSharpExpression.js'
 
-function CSharpSelectorExpression(parent) {
-    CSharpExpression.call(this);
-    this.parent = parent || null;
-    return this;
+export default class CSharpSelectorExpression extends CSharpExpression {
+
+    constructor(parent) {
+        super();
+        this.parent = parent || null;
+    }
 }
-CSharpSelectorExpression.prototype = Object.create(CSharpExpression.prototype);
-CSharpSelectorExpression.prototype.constructor = CSharpSelectorExpression;
-
-exports.CSharpSelectorExpression = CSharpSelectorExpression;

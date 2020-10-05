@@ -1,115 +1,111 @@
-var CategoryType = require("../type/CategoryType").CategoryType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var TypeUtils = require("../utils/TypeUtils");
-var Instance = require("./Value").Instance;
-var $DataStore = require("../store/DataStore").$DataStore;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var Variable = require("../runtime/Variable").Variable;
+import Instance from './Instance.js'
+import { CategoryType } from '../type/index.js'
+import { Variable } from '../runtime/index.js'
+import { Identifier } from '../grammar/index.js'
+import { $DataStore } from '../store/index.js'
+import { NotMutableError } from '../error/index.js'
+import { convertFromJavaScript } from '../utils/index.js'
 
-function NativeInstance(context, declaration, instance) {
-    Instance.call(this, new CategoryType(declaration.id));
-	this.declaration = declaration;
-    this.storable = false;
-    if(declaration.storable && $DataStore.instance) {
-        var categories = declaration.collectCategories(context);
-        this.storable = $DataStore.instance.newStorableDocument(categories, null);
+export default class NativeInstance extends Instance {
+
+    constructor(context, declaration, instance) {
+        super(new CategoryType(declaration.id));
+        this.declaration = declaration;
+        this.storable = false;
+        if(declaration.storable && $DataStore.instance) {
+            const categories = declaration.collectCategories(context);
+            this.storable = $DataStore.instance.newStorableDocument(categories, null);
+        }
+        this.instance = instance || this.makeInstance();
     }
-	this.instance = instance || this.makeInstance();
-	return this;
+
+    makeInstance() {
+        const bound = this.declaration.getBoundFunction(true);
+        return new bound();
+    }
+
+    getType() {
+        return new CategoryType(this.declaration.id);
+    }
+
+    getMemberValue(context, attrName) {
+        if("category" === attrName)
+            return this.getCategory(context);
+        const stacked = getActiveGetters()[attrName] || null;
+        const first = stacked==null;
+        if(first)
+            getActiveGetters()[attrName] = context;
+        try {
+            return this.doGetMember(context, attrName, first);
+        } finally {
+            if(first) {
+                delete getActiveGetters()[attrName];
+            }
+        }
+    }
+
+    getCategory(context) {
+        const decl = context.getRegisteredDeclaration(new Identifier("Category"));
+        return new NativeInstance(context, decl, this.declaration);
+    }
+
+    doGetMember(context, attrName, allowGetter) {
+        const getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
+        if(getter!=null) {
+            context = context.newInstanceContext(this, null).newChildContext();
+            return getter.interpret(context);
+        } else {
+            const value = this.instance[attrName];
+            return convertFromJavaScript(value);
+        }
+    }
+
+    setMember(context, attrName, value) {
+        if(!this.mutable)
+            throw new NotMutableError();
+        const stacked = getActiveSetters()[attrName] || null;
+        const first = stacked==null;
+        if(first)
+            getActiveSetters()[attrName] = context;
+        try {
+            this.doSetMember(context, attrName, value, first);
+        } finally {
+            if(first) {
+                delete getActiveSetters()[attrName];
+            }
+        }
+    }
+
+    doSetMember(context, attrName, value, allowSetter) {
+        const decl = context.getRegisteredDeclaration(attrName);
+        const setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
+        if(setter!=null) {
+            // use attribute name as parameter name for incoming value
+            context = context.newInstanceContext(this, null).newChildContext();
+            context.registerValue(new Variable(attrName, decl.getType()));
+            context.setValue(attrName, value);
+            value = setter.interpret(context);
+        }
+        if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
+            this.storable.setData(attrName, value.getStorableData(), null);
+        this.instance[attrName] = value.convertToJavaScript();
+    }
 }
-
-NativeInstance.prototype = Object.create(Instance.prototype);
-NativeInstance.prototype.constructor = NativeInstance;
-
-NativeInstance.prototype.makeInstance = function() {
-	var bound = this.declaration.getBoundFunction(true);
-	return new bound();
-};
-
-NativeInstance.prototype.getType = function() {
-	return new CategoryType(this.declaration.id);
-};
 
 // don't call getters from getters, so register them
 // TODO: thread local storage
 
-var activeGetters = {};
+const activeGetters = {};
 
 function getActiveGetters() {
     return activeGetters;
 }
 
-NativeInstance.prototype.getMemberValue = function(context, attrName) {
-    if("category" === attrName)
-        return this.getCategory(context);
-    var stacked = getActiveGetters()[attrName] || null;
-    var first = stacked==null;
-    if(first)
-        getActiveGetters()[attrName] = context;
-    try {
-        return this.doGetMember(context, attrName, first);
-    } finally {
-        if(first) {
-            delete getActiveGetters()[attrName];
-        }
-    }
-};
-
-
-NativeInstance.prototype.getCategory = function(context) {
-    var decl = context.getRegisteredDeclaration(new Identifier("Category"));
-    return new NativeInstance(context, decl, this.declaration);
-};
-
-
-NativeInstance.prototype.doGetMember = function(context, attrName, allowGetter) {
-    var getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
-    if(getter!=null) {
-        context = context.newInstanceContext(this, null).newChildContext();
-        return getter.interpret(context);
-    } else {
-        var value = this.instance[attrName];
-        return TypeUtils.convertFromJavaScript(value);
-    }
-};
-
 // don't call setters from setters, so register them
-var activeSetters = {};
+const activeSetters = {};
 
 function getActiveSetters() {
     return activeSetters;
 }
 
-NativeInstance.prototype.setMember = function(context, attrName, value) {
-    if(!this.mutable)
-        throw new NotMutableError();
-    var stacked = getActiveSetters()[attrName] || null;
-    var first = stacked==null;
-    if(first)
-        getActiveSetters()[attrName] = context;
-    try {
-        this.doSetMember(context, attrName, value, first);
-    } finally {
-        if(first) {
-            delete getActiveSetters()[attrName];
-        }
-    }
-};
 
-NativeInstance.prototype.doSetMember = function(context, attrName, value, allowSetter) {
-    var decl = context.getRegisteredDeclaration(attrName);
-    var setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
-    if(setter!=null) {
-        // use attribute name as parameter name for incoming value
-        context = context.newInstanceContext(this, null).newChildContext();
-        context.registerValue(new Variable(attrName, decl.getType()));
-        context.setValue(attrName, value);
-        value = setter.interpret(context);
-    }
-    if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-        this.storable.setData(attrName, value.getStorableData(), null);
-	this.instance[attrName] = value.convertToJavaScript();
-};
-
-
-exports.NativeInstance = NativeInstance;

@@ -1,11 +1,9 @@
-var CSharpLiteral = require("./CSharpLiteral").CSharpLiteral;
+import CSharpLiteral from './CSharpLiteral.js'
 
-function CSharpDecimalLiteral(text) {
-    CSharpLiteral.call(this, text);
-    return this;
+export default class CSharpDecimalLiteral extends CSharpLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
 
-CSharpDecimalLiteral.prototype = Object.create(CSharpLiteral.prototype);
-CSharpDecimalLiteral.prototype.constructor = CSharpDecimalLiteral;
-
-exports.CSharpDecimalLiteral = CSharpDecimalLiteral;

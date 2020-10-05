@@ -1,37 +1,34 @@
-var CSharpExpression = require("./CSharpExpression").CSharpExpression;
+import CSharpExpression from './CSharpExpression.js'
 
-function CSharpIdentifierExpression(parent, identifier) {
-	CSharpExpression.call(this);
-	this.parent = parent;
-	this.identifier = identifier;
-	return this;
-}
+export default class CSharpIdentifierExpression extends CSharpExpression {
 
-CSharpIdentifierExpression.prototype = Object.create(CSharpExpression.prototype);
-CSharpIdentifierExpression.prototype.constructor = CSharpIdentifierExpression;
-
-CSharpIdentifierExpression.prototype.toString = function() {
-	if(this.parent===null) {
-		return this.identifier;
-	} else {
-		return this.parent.toString() + "." + this.identifier;
-	}
-}
-
-CSharpIdentifierExpression.parse = function(ids) {
-	var result = null;
-	ids.split("\\.").forEach(function(part) {
-		result = new CSharpIdentifierExpression(result, part);
-	}, this);
-	return result;
-};
-
-CSharpIdentifierExpression.prototype.toDialect = function(writer) {
-    if(this.parent!=null) {
-        this.parent.toDialect(writer);
-        writer.append('.');
+    constructor(parent, identifier) {
+        super();
+        this.parent = parent;
+        this.identifier = identifier;
     }
-    writer.append(this.identifier);
-};
 
-exports.CSharpIdentifierExpression = CSharpIdentifierExpression;
+    toString() {
+        if(this.parent===null) {
+            return this.identifier;
+        } else {
+            return this.parent.toString() + "." + this.identifier;
+        }
+    }
+
+    static parse(ids) {
+        let result = null;
+        ids.split("\\.").forEach(part => {
+            result = new CSharpIdentifierExpression(result, part);
+        }, this);
+        return result;
+    }
+
+    toDialect(writer) {
+        if(this.parent!=null) {
+            this.parent.toDialect(writer);
+            writer.append('.');
+        }
+        writer.append(this.identifier);
+    }
+}

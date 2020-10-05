@@ -1,28 +1,27 @@
-var TextValue = require("../value/TextValue").TextValue;
-var InstanceExpression = require("../expression/InstanceExpression").InstanceExpression;
+import { TextValue } from '../value/index.js'
+import { InstanceExpression } from '../expression/index.js'
 
-function DictIdentifierKey(id) {
-    this.id = id;
-    return this;
-}
-
-DictIdentifierKey.prototype.toString = function() {
-    return this.id.toString();
-};
-
-DictIdentifierKey.prototype.transpile = function(transpiler) {
-    transpiler.append("[").append(this.id.name).append("]");
-};
-
-DictIdentifierKey.prototype.interpret = function(context) {
-    var value = new InstanceExpression(this.id).interpret(context);
-    if(value instanceof TextValue)
-        return value;
-    else {
-        context.problemListener.reportIllegalValue(this, "Expected a Text, got " + value.type.typeName);
-        return null;
+export default class DictIdentifierKey {
+ 
+    constructor(id) {
+        this.id = id;
     }
-};
 
+    toString() {
+        return this.id.toString();
+    }
 
-exports.DictIdentifierKey = DictIdentifierKey;
+    transpile(transpiler) {
+        transpiler.append("[").append(this.id.name).append("]");
+    }
+
+    interpret(context) {
+        const value = new InstanceExpression(this.id).interpret(context);
+        if(value instanceof TextValue)
+            return value;
+        else {
+            context.problemListener.reportIllegalValue(this, "Expected a Text, got " + value.type.typeName);
+            return null;
+        }
+    }
+}

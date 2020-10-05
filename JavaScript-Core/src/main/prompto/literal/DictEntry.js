@@ -1,29 +1,28 @@
-function DictEntry(key, value) {
-	this.key = key;
-	this.value = value;
-	return this;
+export default class DictEntry {
+  
+    constructor(key, value) {
+        this.key = key;
+        this.value = value;
+   }
+
+    toString() {
+        return this.key.toString() + ':' + this.value.toString();
+    }
+
+    toDialect(writer) {
+        writer.append(this.key.toString()).append(':');
+        this.value.toDialect(writer);
+    }
+
+    declare(transpiler) {
+        this.value.declare(transpiler);
+    }
+
+    transpile(transpiler) {
+        this.key.transpile(transpiler);
+        transpiler.append(':');
+        this.value.transpile(transpiler);
+    }
 }
 
-DictEntry.prototype.toString = function() {
-	return this.key.toString() + ':' + this.value.toString();
-};
 
-DictEntry.prototype.toDialect = function(writer) {
-    writer.append(this.key.toString()).append(':');
-    this.value.toDialect(writer);
-};
-
-
-DictEntry.prototype.declare = function(transpiler) {
-    this.value.declare(transpiler);
-};
-
-
-DictEntry.prototype.transpile = function(transpiler) {
-    this.key.transpile(transpiler);
-    transpiler.append(':');
-    this.value.transpile(transpiler);
-};
-
-
-exports.DictEntry = DictEntry;

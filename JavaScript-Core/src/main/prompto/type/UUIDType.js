@@ -1,37 +1,29 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
-var UUIDValue = null;
-var UUID = require("../intrinsic/UUID").UUID;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
+import { UUID } from '../intrinsic/index.js'
+import { UUIDValue } from '../value/index.js'
 
-exports.resolve = function() {
-    UUIDValue = require("../value/UUIDValue").UUIDValue;
-}
+export default class UUIDType extends NativeType {
 
-
-function UUIDType()  {
-	NativeType.call(this, new Identifier("Uuid"));
-	return this;
-}
-
-UUIDType.prototype = Object.create(NativeType.prototype);
-UUIDType.prototype.constructor = UUIDType;
-
-UUIDType.prototype.convertJavaScriptValueToPromptoValue = function(context, value, returnType) {
-    if(value instanceof UUID || typeof(value) == 'string') {
-        return new UUIDValue(value);
-    } else {
-        return value; // TODO for now
+    constructor() {
+        super(new Identifier("Uuid"));
     }
-};
 
-UUIDType.prototype.declare = function(transpiler) {
-    transpiler.register(UUID);
-};
+    convertJavaScriptValueToPromptoValue(context, value, returnType) {
+        if(value instanceof UUID || typeof(value) == 'string') {
+            return new UUIDValue(value);
+        } else {
+            return value; // TODO for now
+        }
+    }
 
-UUIDType.prototype.transpile = function(transpiler) {
-    transpiler.append("Uuid");
-};
+    declare(transpiler) {
+        transpiler.register(UUID);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("Uuid");
+    }
+}
 
 UUIDType.instance = new UUIDType();
-
-exports.UUIDType = UUIDType;

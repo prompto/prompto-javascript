@@ -1,45 +1,40 @@
-var CodeType = require("../type/CodeType").CodeType;
-var Parameter = require("./Parameter").Parameter;
+import Parameter from './Parameter.js'
+import { CodeType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
-function CodeParameter(id) {
-	Parameter.call(this, id);
-	return this;
+export default class CodeParameter extends Parameter {
+
+    constructor(id) {
+        super(id);
+    }
+
+    getProto() {
+        return CodeType.instance.name;
+    }
+
+    register(context) {
+        const actual = context.getRegisteredValue(this.name);
+        if(actual!=null) {
+            throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
+        }
+        context.registerValue(this);
+    }
+
+    check(context) {
+        // nothing to do
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    getType(context) {
+        return CodeType.instance;
+    }
+
+    toDialect(writer) {
+        writer.append(CodeType.instance.name);
+        writer.append(" ");
+        writer.append(this.name);
+    }
 }
-
-CodeParameter.prototype = Object.create(Parameter.prototype);
-CodeParameter.prototype.constructor = CodeParameter;
-
-
-CodeParameter.prototype.getProto = function() {
-	return CodeType.instance.name;
-};
-
-
-CodeParameter.prototype.register = function(context) {
-	var actual = context.getRegisteredValue(this.name);
-	if(actual!=null) {
-		throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
-	}
-	context.registerValue(this);
-};
-
-CodeParameter.prototype.check = function(context) {
-	// nothing to do
-};
-
-CodeParameter.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-CodeParameter.prototype.getType = function(context) {
-	return CodeType.instance;
-};
-
-CodeParameter.prototype.toDialect = function(writer) {
-    writer.append(CodeType.instance.name);
-    writer.append(" ");
-    writer.append(this.name);
-};
-
-
-exports.CodeParameter = CodeParameter;

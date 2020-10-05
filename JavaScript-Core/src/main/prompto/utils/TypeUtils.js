@@ -1,12 +1,8 @@
-var MissingType = require("../type/MissingType").MissingType;
-var NativeType = require("../type/NativeType").NativeType;
-var AnyType = require("../type/AnyType").AnyType;
-var NullValue = require("../value/NullValue").NullValue;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var TextValue = require("../value/TextValue").TextValue;
+import { TextValue, IntegerValue, DecimalValue, NullValue } from '../value/index.js'
+import { MissingType, AnyType, NativeType, CategoryType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
-var convertFromJavaScript = function(value) {
+export function convertFromJavaScript(value) {
     if(value==null) {
         return NullValue.instance;
     } else if(typeof(value)=='string') {
@@ -19,22 +15,22 @@ var convertFromJavaScript = function(value) {
     } else {
         throw "Not implemented yet in convertFromJavaScript:" + typeof(value);
     }
-};
+}
 
 
-var inferExpressionsType = function(context, expressions) {
+export function inferExpressionsType(context, expressions) {
     if (expressions.length == 0)
         return MissingType.instance;
-    var types = expressions.map(function(e) { return e.check(context); });
+    const types = expressions.map(e => e.check(context));
     return inferElementType(context, types);
 }
 
-var inferElementType = function(context, types) {
+export function inferElementType(context, types) {
     if (types.length == 0)
         return MissingType.instance;
-    var lastType = null;
-    for (var i = 0; i < types.length; i++) {
-        var elemType = types[i];
+    let lastType = null;
+    for (let i = 0; i < types.length; i++) {
+        const elemType = types[i];
         if (lastType == null) {
             lastType = elemType;
         } else if (!lastType.equals(elemType)) {
@@ -44,7 +40,7 @@ var inferElementType = function(context, types) {
             } else if (elemType.isAssignableFrom(context, lastType)) {
                 lastType = elemType; // elemType is less specific
             } else {
-                var common = inferCommonRootType(context, lastType, elemType);
+                const common = inferCommonRootType(context, lastType, elemType);
                 if(common!=null)
                     lastType = common;
                 else
@@ -53,11 +49,10 @@ var inferElementType = function(context, types) {
         }
     }
     return lastType;
-};
+}
 
 
 function inferCommonRootType(context, type1, type2) {
-    var CategoryType = require("../type/CategoryType").CategoryType;
     if ((type1 instanceof CategoryType) && (type2 instanceof CategoryType))
         return inferCommonCategoryType(context, type1, type2, true);
     else if(type1 instanceof NativeType || type2 instanceof NativeType)
@@ -68,18 +63,17 @@ function inferCommonRootType(context, type1, type2) {
 
 
 function inferCommonCategoryType(context, type1, type2, trySwap) {
-    var CategoryType = require("../type/CategoryType").CategoryType;
-    var decl1 = context.getRegisteredDeclaration(type1.id.name);
+    const decl1 = context.getRegisteredDeclaration(type1.id.name);
     if (decl1.derivedFrom != null) {
-        for (var i = 0; i < decl1.derivedFrom.length; i++) {
+        for (let i = 0; i < decl1.derivedFrom.length; i++) {
             var parentType = new CategoryType(decl1.derivedFrom[i]);
             if (parentType.isAssignableFrom(context, type2))
                 return parentType;
         }
         // climb up the tree
-        for (i = 0; i < decl1.derivedFrom.length; i++) {
+        for (let i = 0; i < decl1.derivedFrom.length; i++) {
             parentType = new CategoryType(decl1.derivedFrom[i]);
-            var commonType = inferCommonCategoryType(context, parentType, type2, false)
+            const commonType = inferCommonCategoryType(context, parentType, type2, false);
             if (commonType != null)
                 return commonType;
         }
@@ -90,7 +84,3 @@ function inferCommonCategoryType(context, type1, type2, trySwap) {
         return null;
 }
 
-
-exports.convertFromJavaScript = convertFromJavaScript;
-exports.inferExpressionsType = inferExpressionsType;
-exports.inferElementType = inferElementType;

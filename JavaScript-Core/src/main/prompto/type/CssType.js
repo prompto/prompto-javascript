@@ -1,24 +1,19 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
 
-function CssType () {
-    NativeType.call(this, new Identifier("Css"));
-    return this;
+export default class CssType extends NativeType {
+
+    constructor() {
+        super(new Identifier("Css"));
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append("Object");
+    }
 }
 
-CssType.prototype = Object.create(NativeType.prototype);
-CssType.prototype.constructor = CssType;
-
-CssType.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-
-
-CssType.prototype.transpile = function(transpiler) {
-    transpiler.append("Object");
-};
-
 CssType.instance = new CssType();
-
-exports.CssType = CssType;

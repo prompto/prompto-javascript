@@ -1,46 +1,41 @@
-var AlwaysValidator = require("./AlwaysValidator").AlwaysValidator;
+import { AlwaysValidator } from './index.js'
 
-function Property() {
-    this.name = null;
-    this.help = null;
-    this._validator = AlwaysValidator.instance;
-    return this;
-}
+export default class Property {
 
-Object.defineProperty(Property.prototype, "validator", {
-    get : function() {
+    constructor() {
+        this.name = null;
+        this.help = null;
+        this._validator = AlwaysValidator.instance;
+    }
+
+    get validator() {
         return this._validator;
-    },
-    set : function(validator) {
+    }
+
+    set validator(validator) {
         if(this._validator.isRequired())
             this._validator = validator.required();
         else
             this._validator = validator.optional();
     }
-});
 
+    validate(context, jsxProperty) {
+        this._validator.validate(context, jsxProperty);
+    }
 
-Property.prototype.validate = function(context, jsxProperty) {
-    this._validator.validate(context, jsxProperty);
-};
+    declare(transpiler, jsxProperty) {
+        this._validator.declare(transpiler, jsxProperty);
+    }
 
+    transpile(transpiler, jsxProperty) {
+        this._validator.transpile(transpiler, jsxProperty);
+    }
 
-Property.prototype.declare = function(transpiler, jsxProperty) {
-    this._validator.declare(transpiler, jsxProperty);
-};
+    isRequired() {
+        return this._validator.isRequired();
+    }
 
-
-Property.prototype.transpile = function(transpiler, jsxProperty) {
-    this._validator.transpile(transpiler, jsxProperty);
-};
-
-Property.prototype.isRequired = function() {
-    return this._validator.isRequired();
-};
-
-
-Property.prototype.setRequired = function(set) {
-    this._validator = set ? this._validator.required() : this._validator.optional();
-};
-
-exports.Property = Property;
+    setRequired(set) {
+        this._validator = set ? this._validator.required() : this._validator.optional();
+    }
+}

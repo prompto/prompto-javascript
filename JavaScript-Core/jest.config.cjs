@@ -3,7 +3,7 @@
 
 module.exports = {
   // All imported modules in your tests should be mocked automatically
-  // automock: false,
+  automock: false,
 
   // Stop running tests after `n` failures
   // bail: 0,
@@ -15,7 +15,7 @@ module.exports = {
   // cacheDirectory: "/private/var/folders/7z/rdw_873x3_s5zr8pb81k9z7c0000gn/T/jest_dx",
 
   // Automatically clear mock calls and instances between every test
-  clearMocks: true,
+  // clearMocks: true,
 
   // Indicates whether the coverage information should be collected while executing the test
   // collectCoverage: false,
@@ -58,7 +58,7 @@ module.exports = {
   // globalTeardown: null,
 
   // A set of global variables that need to be available in all test environments
-  // globals: {},
+  globals: { intrinsic: {} },
 
   // An array of directory names to be searched recursively up from the requiring module's location
   // moduleDirectories: [

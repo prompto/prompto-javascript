@@ -1,14 +1,12 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+import NativeCategoryBinding from '../grammar/NativeCategoryBinding.js'
 
-function PythonNativeCategoryBinding(identifier, module) {
-	NativeCategoryBinding.call(this);
-	this.identifier = identifier;
-	this.module = module;
-	return this;
+export default class PythonNativeCategoryBinding extends NativeCategoryBinding {
+
+    constructor(identifier, module) {
+        super();
+        this.identifier = identifier;
+        this.module = module;
+    }
 }
 
-PythonNativeCategoryBinding.prototype = Object.create(NativeCategoryBinding.prototype);
-PythonNativeCategoryBinding.prototype.constructor = PythonNativeCategoryBinding;
-
-exports.PythonNativeCategoryBinding = PythonNativeCategoryBinding;
 

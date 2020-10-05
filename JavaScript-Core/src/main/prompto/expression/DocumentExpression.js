@@ -1,113 +1,103 @@
-var Expression = require("./Expression").Expression;
-var DocumentType = require("../type/DocumentType").DocumentType;
-var DocumentValue = require("../value/DocumentValue").DocumentValue;
-var ConcreteInstance = require("../value/ConcreteInstance").ConcreteInstance;
-var BlobValue = require("../value/BlobValue").BlobValue;
-var ReadWriteError = require("../error/ReadWriteError").ReadWriteError;
-var Document = require("../intrinsic/Document").Document;
-var Blob = require("../intrinsic/Blob").Blob;
+import Expression from './Expression.js'
+import { DocumentType } from '../type/index.js'
+import { DocumentValue, BlobValue, ConcreteInstance } from '../value/index.js'
+import { Blob, Document } from '../intrinsic/index.js'
+import { ReadWriteError } from '../error/index.js'
+import { ECleverParser } from "../parser/index.js"
 
-function DocumentExpression(source) {
-    Expression.call(this);
-    this.source = source;
-	return this;
+export default class DocumentExpression extends Expression {
+ 
+    constructor(source) {
+        super();
+        this.source = source;
+    }
+
+    check(context) {
+        return DocumentType.instance;
+    }
+
+    toString(context) {
+        return "new Document()";
+    }
+
+    interpret(context) {
+        if(!this.source)
+            return new DocumentValue();
+        else {
+            const value = this.source.interpret(context);
+            return this.documentFromValue(context, value);
+        }
+    }
+
+    declare(transpiler) {
+        transpiler.require(Document);
+    }
+
+    transpile(transpiler) {
+        if(this.source) {
+            this.source.transpile(transpiler);
+            transpiler.append(".toDocument()");
+        } else
+            transpiler.append("new Document()");
+    }
+
+    documentFromValue(context, value) {
+        if (value instanceof BlobValue)
+            return this.documentFromBlob(context, value);
+        else if (value instanceof ConcreteInstance)
+            return value.toDocumentValue(context);
+        else
+            throw new Error("documentFromValue not supported for " + typeof(value));
+    }
+
+    documentFromBlob(context, blob) {
+        if("application/zip"!=blob.mimeType)
+            throw new Error("documentFromBlob not supported for " + blob.mimeType);
+        try {
+            const parts = Blob.readParts(blob.data);
+            const value = Blob.readValue(parts);
+            let field = value["type"] || null;
+            if (field == null)
+                throw new Error("Expecting a 'type' field!");
+            const itype = new ECleverParser(field).parse_standalone_type();
+            if (itype != DocumentType.instance)
+                throw new Error("Expecting a DocumentValue type!");
+            field = value["value"] || null;
+            if (field == null)
+                throw new Error("Expecting a 'value' field!");
+            return itype.readJSONValue(context, field, parts);
+        } catch (e) {
+            throw new ReadWriteError(e.message);
+        }
+    }
+
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
+
+    toEDialect(writer) {
+        writer.append("Document");
+        if (this.source) {
+            writer.append(" from ");
+            this.source.toDialect(writer);
+        }
+    }
+
+    toMDialect(writer) {
+        writer.append("Document(");
+        if (this.source) {
+            writer.append(" from = ");
+            this.source.toDialect(writer);
+        }
+        writer.append(")");
+    }
+
+    toODialect(writer) {
+        writer.append("Document(");
+        if (this.source) {
+            writer.append(" from = ");
+            this.source.toDialect(writer);
+        }
+        writer.append(")");
+    }
 }
-
-DocumentExpression.prototype  = Object.create(Expression.prototype);
-DocumentExpression.prototype.constructor = DocumentExpression;
-
-DocumentExpression.prototype.check = function(context) {
-	return DocumentType.instance;
-};
-
-DocumentExpression.prototype.toString = function(context) {
-    return "new Document()";
-};
-
-DocumentExpression.prototype.interpret = function(context) {
-    if(!this.source)
-        return new DocumentValue();
-    else {
-        var value = this.source.interpret(context);
-        return this.documentFromValue(context, value);
-    }
-};
-
-DocumentExpression.prototype.declare = function(transpiler) {
-    transpiler.require(Document);
-};
-
-
-DocumentExpression.prototype.transpile = function(transpiler) {
-    if(this.source) {
-        this.source.transpile(transpiler);
-        transpiler.append(".toDocument()");
-    } else
-        transpiler.append("new Document()");
-};
-
-DocumentExpression.prototype.documentFromValue = function(context, value) {
-    if (value instanceof BlobValue)
-        return this.documentFromBlob(context, value);
-    else if (value instanceof ConcreteInstance)
-        return value.toDocumentValue(context);
-    else
-        throw new Error("documentFromValue not supported for " + typeof(value));
-};
-
-DocumentExpression.prototype.documentFromBlob = function(context, blob) {
-    if("application/zip"!=blob.mimeType)
-        throw new Error("documentFromBlob not supported for " + blob.mimeType);
-    try {
-        var parts = Blob.readParts(blob.data);
-        var value = Blob.readValue(parts);
-        var field = value["type"] || null;
-        if (field == null)
-            throw new Error("Expecting a 'type' field!");
-        var ECleverParser = require("../parser/ECleverParser").ECleverParser;
-        var itype = new ECleverParser(field).parse_standalone_type();
-        if (itype != DocumentType.instance)
-            throw new Error("Expecting a DocumentValue type!");
-        field = value["value"] || null;
-        if (field == null)
-            throw new Error("Expecting a 'value' field!");
-        return itype.readJSONValue(context, field, parts);
-    } catch (e) {
-        throw new ReadWriteError(e.message);
-    }
-};
-
-
-
-
-DocumentExpression.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
-
-DocumentExpression.prototype.toEDialect = function(writer) {
-    writer.append("Document");
-    if (this.source) {
-        writer.append(" from ");
-        this.source.toDialect(writer);
-    }
-};
-
-DocumentExpression.prototype.toMDialect = function(writer) {
-    writer.append("Document(");
-    if (this.source) {
-        writer.append(" from = ");
-        this.source.toDialect(writer);
-    }
-    writer.append(")");
-};
-
-DocumentExpression.prototype.toODialect = function(writer) {
-    writer.append("Document(");
-    if (this.source) {
-        writer.append(" from = ");
-        this.source.toDialect(writer);
-    }
-    writer.append(")");
-};
-
-exports.DocumentExpression = DocumentExpression;

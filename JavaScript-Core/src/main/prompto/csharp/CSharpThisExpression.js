@@ -1,19 +1,16 @@
-var CSharpExpression = require("./CSharpExpression").CSharpExpression;
+import CSharpExpression from './CSharpExpression.js'
 
-function CSharpThisExpression() {
-    CSharpExpression.call(this);
-	return this;
+export default class CSharpThisExpression extends CSharpExpression {
+
+    constructor() {
+        super();
+    }
+
+    toDialect(writer) {
+        return writer.append("this");
+    }
+
+    toString() {
+        return "this";
+    }
 }
-
-CSharpThisExpression.prototype = Object.create(CSharpExpression.prototype);
-CSharpThisExpression.prototype.constructor = CSharpThisExpression;
-
-CSharpThisExpression.prototype.toDialect = function(writer) {
-    return writer.append("this");
-};
-
-CSharpThisExpression.prototype.toString = function() {
-	return "this";
-};
-
-exports.CSharpThisExpression = CSharpThisExpression;

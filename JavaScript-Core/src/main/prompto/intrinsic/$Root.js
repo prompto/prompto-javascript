@@ -1,5 +1,5 @@
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var Document = require("./Document").Document;
+const NotMutableError = require('../error/NotMutableError.js').default;
+const Document = require('./Document.js').default;
 
 function Category(klass) {
     this.klass = klass;
@@ -129,5 +129,4 @@ $Root.prototype.toDocument = function() {
     return doc;
 };
 
-exports.Category = Category;
-exports.$Root = $Root;
+export { Category, $Root }

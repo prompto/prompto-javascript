@@ -1,13 +1,11 @@
-var Value = require("./Value").Value;
-var JsxType = require("../type/JsxType").JsxType;
+import Value from './Value.js'
+import { JsxType } from '../type/index.js'
 
-function JsxValue(expression) {
-    Value.call(this, JsxType.instance);
-	this.expression = expression;
-	return this;
+export default class JsxValue extends Value {
+
+    constructor(expression) {
+        super(JsxType.instance);
+        this.expression = expression;
+    }
 }
 
-JsxValue.prototype = Object.create(Value.prototype);
-JsxValue.prototype.constructor = JsxValue;
-
-exports.JsxValue = JsxValue;

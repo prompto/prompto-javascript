@@ -1,13 +1,10 @@
-var Value = require("./Value").Value;
+import Value from './Value.js'
 
-function BinaryValue(itype, mimeType, data) {
-    Value.call(this, itype);
-    this.mimeType = mimeType;
-    this.data = data;
-    return this;
+export default class BinaryValue extends Value {
+
+    constructor(itype, mimeType, data) {
+        super(itype);
+        this.mimeType = mimeType;
+        this.data = data;
+    }
 }
-
-BinaryValue.prototype = Object.create(Value.prototype);
-BinaryValue.prototype.constructor = BinaryValue;
-
-exports.BinaryValue = BinaryValue;

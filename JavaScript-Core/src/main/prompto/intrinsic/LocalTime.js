@@ -1,6 +1,6 @@
-var Period = require("./Period").Period;
+const Period = require('./Period.js').default;
 
-function LocalTime(value) {
+export default function LocalTime(value) {
     value = value != null ? value : ((new Date().valueOf()) % ( 24 * 60 * 60 * 1000));
     var time = new Date(value);
     time.__proto__ = LocalTime.prototype;
@@ -105,5 +105,3 @@ LocalTime.prototype.getMillisecond = function(value) {
     return this.getUTCMilliseconds();
 };
 
-
-exports.LocalTime = LocalTime;

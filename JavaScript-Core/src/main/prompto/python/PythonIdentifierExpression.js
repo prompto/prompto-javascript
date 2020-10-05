@@ -1,38 +1,35 @@
-var PythonExpression = require("./PythonExpression").PythonExpression;
+import PythonExpression from './PythonExpression.js'
 
-function PythonIdentifierExpression(parent, identifier) {
-	PythonExpression.call(this);
-	this.parent = parent;
-	this.identifier = identifier;
-	return this;
-}
+export default class PythonIdentifierExpression extends PythonExpression {
 
-PythonIdentifierExpression.prototype = Object.create(PythonExpression.prototype);
-PythonIdentifierExpression.prototype.constructor = PythonIdentifierExpression;
-
-PythonIdentifierExpression.prototype.toString = function() {
-	if(this.parent===null) {
-		return this.identifier;
-	} else {
-		return this.parent.toString() + "." + this.identifier;
-	}
-}
-
-PythonIdentifierExpression.parse = function(ids) {
-	var result = null;
-	ids.split("\\.").forEach(function(part) {
-		result = new PythonIdentifierExpression(result, part);
-	});
-	return result;
-};
-
-PythonIdentifierExpression.prototype.toDialect = function(writer) {
-    if(this.parent!=null) {
-        this.parent.toDialect(writer);
-        writer.append('.');
+    constructor(parent, identifier) {
+        super();
+        this.parent = parent;
+        this.identifier = identifier;
     }
-    writer.append(this.identifier);
-};
 
+    toString() {
+        if(this.parent===null) {
+            return this.identifier;
+        } else {
+            return this.parent.toString() + "." + this.identifier;
+        }
+    }
 
-exports.PythonIdentifierExpression = PythonIdentifierExpression;
+    static parse(ids) {
+        let result = null;
+        ids.split("\\.").forEach(part => {
+            result = new PythonIdentifierExpression(result, part);
+        });
+        return result;
+    }
+
+    toDialect(writer) {
+        if(this.parent!=null) {
+            this.parent.toDialect(writer);
+            writer.append('.');
+        }
+        writer.append(this.identifier);
+    }
+}
+

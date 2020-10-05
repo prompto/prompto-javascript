@@ -1,246 +1,252 @@
-var CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-var List = require("../intrinsic/List").List;
-var StrictSet = require("../intrinsic/StrictSet").StrictSet;
+import { CategoryDeclaration } from '../declaration/index.js'
+const StrictSet = require('../intrinsic/StrictSet.js').default;
+const List = require('../intrinsic/StrictSet.js').default;
+import { equalObjects } from '../utils/index.js'
 
-function Transpiler(context) {
-    this.context = context;
-    this.declared = new Set();
-    this.required = new Set();
-    this.registered = new Set();
-    this.escapeMode = 0;
-    this.lines = [];
-    this.line = "";
-    this.indents = "";
-    return this;
-}
+const coreNodeClasses = new Set(["Socket"]);
 
-Transpiler.prototype.toString = function() {
-    this.appendAllRequired();
-    this.appendAllRegistered();
-    this.appendAllDeclared();
-    return this.lines.join("\n");
-};
+export default class Transpiler {
 
-
-Transpiler.prototype.copyTranspiler = function(context) {
-    var transpiler = new Transpiler(context);
-    transpiler.declared = this.declared;
-    transpiler.required = this.required;
-    transpiler.registered = this.registered;
-    transpiler.escapeMode = this.escapeMode;
-    transpiler.lines = this.lines;
-    transpiler.line = this.line;
-    transpiler.indents = this.indents;
-    transpiler.parent = this;
-    return transpiler;
-};
-
-Transpiler.prototype.newLocalTranspiler = function() {
-    var context = this.context.newLocalContext();
-    return this.copyTranspiler(context);
-};
-
-Transpiler.prototype.newChildTranspiler = function(context) {
-    if(!context)
-        context = this.context.newChildContext();
-    return this.copyTranspiler(context);
-};
-
-Transpiler.prototype.newResourceTranspiler = function() {
-    var context = this.context.newResourceContext();
-    return this.copyTranspiler(context);
-};
-
-
-Transpiler.prototype.newGetterTranspiler = function(name) {
-    var transpiler = this.newChildTranspiler();
-    transpiler.getterName = name;
-    return transpiler;
-};
-
-
-Transpiler.prototype.newSetterTranspiler = function(name) {
-    var transpiler = this.newChildTranspiler();
-    transpiler.setterName = name;
-    return transpiler;
-};
-
-
-Transpiler.prototype.newInstanceTranspiler = function(type) {
-    var context = this.context.newInstanceContext(null, type, true);
-    return this.copyTranspiler(context);
-};
-
-
-Transpiler.prototype.newDocumentTranspiler = function() {
-    var context = this.context.newDocumentContext(null, false);
-    return this.copyTranspiler(context);
-};
-
-
-Transpiler.prototype.flush = function() {
-    if(this.parent) {
-        this.parent.line = this.line;
-        this.parent.indents = this.indents;
-        this.parent.escapeMode = this.escapeMode;
+    constructor(context) {
+        this.context = context;
+        this.declared = new Set();
+        this.required = new Set();
+        this.registered = new Set();
+        this.escapeMode = 0;
+        this.lines = [];
+        this.line = "";
+        this.indents = "";
     }
-};
 
-Transpiler.prototype.declare = function(decl) {
-    this.declared.add(decl);
-};
+    toString() {
+        this.appendAllRequired();
+        this.appendAllRegistered();
+        this.appendAllDeclared();
+        return this.lines.join("\n");
+    }
 
+    copyTranspiler(context) {
+        const transpiler = new Transpiler(context);
+        transpiler.declared = this.declared;
+        transpiler.required = this.required;
+        transpiler.registered = this.registered;
+        transpiler.escapeMode = this.escapeMode;
+        transpiler.lines = this.lines;
+        transpiler.line = this.line;
+        transpiler.indents = this.indents;
+        transpiler.parent = this;
+        return transpiler;
+    }
 
-Transpiler.prototype.appendAllDeclared = function() {
-    var list = [];
-    var set = new Set();
-    this.declared.forEach(function(decl) {
-        if(decl instanceof CategoryDeclaration)
-            decl.ensureDeclarationOrder(this.context, list, set);
+    newLocalTranspiler() {
+        const context = this.context.newLocalContext();
+        return this.copyTranspiler(context);
+    }
+
+    newChildTranspiler(context) {
+        if(!context)
+            context = this.context.newChildContext();
+        return this.copyTranspiler(context);
+    }
+
+    newResourceTranspiler() {
+        const context = this.context.newResourceContext();
+        return this.copyTranspiler(context);
+    }
+
+    newGetterTranspiler(name) {
+        const transpiler = this.newChildTranspiler();
+        transpiler.getterName = name;
+        return transpiler;
+    }
+
+    newSetterTranspiler(name) {
+        const transpiler = this.newChildTranspiler();
+        transpiler.setterName = name;
+        return transpiler;
+    }
+
+    newInstanceTranspiler(type) {
+        const context = this.context.newInstanceContext(null, type, true);
+        return this.copyTranspiler(context);
+    }
+
+    newDocumentTranspiler() {
+        const context = this.context.newDocumentContext(null, false);
+        return this.copyTranspiler(context);
+    }
+
+    flush() {
+        if(this.parent) {
+            this.parent.line = this.line;
+            this.parent.indents = this.indents;
+            this.parent.escapeMode = this.escapeMode;
+        }
+    }
+
+    declare(decl) {
+        this.declared.add(decl);
+    }
+
+    appendAllDeclared() {
+        const list = [];
+        const set = new Set();
+        this.declared.forEach(function(decl) {
+            if(decl instanceof CategoryDeclaration)
+                decl.ensureDeclarationOrder(this.context, list, set);
+            else
+                list.push(decl);
+        }, this);
+        list.forEach(function(decl) {
+            this.appendOneDeclared(decl);
+        }, this);
+    }
+
+    appendOneDeclared(decl) {
+        const transpiler = this.newLocalTranspiler();
+        decl.transpile(transpiler);
+        transpiler.flush();
+        if(this.line!==this.indents) {
+            this.lines.push(this.line);
+            this.line = this.indents;
+        }
+        this.lines.push("");
+    }
+
+    require(fn) {
+        this.required.add(fn);
+    }
+
+    appendAllRequired() {
+        this.required.forEach(function(fn) {
+            this.appendOneRequired(fn);
+        }, this);
+    }
+
+    register(f) {
+        this.required.add(f);
+        this.registered.add(f);
+    }
+
+    appendAllRegistered() {
+        this.registered.forEach(function(f) {
+            this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
+        }, this);
+    }
+
+    getTranspiled(object) {
+        if(object===null)
+            return "null";
+        else if(object.toTranspiled)
+            return object.toTranspiled();
         else
-            list.push(decl);
-    }, this);
-    list.forEach(function(decl) {
-        this.appendOneDeclared(decl);
-    }, this);
-};
+            return object.toString();
+    }
 
+    appendOneRequired(fn) {
+        if(coreNodeClasses.has(fn.name))
+            return;
+        this.lines.push(fn.toString());
+        Object.keys(fn).forEach(function (key) {
+            this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
+        }, this);
+        if(fn.prototype.__proto__) {
+            const proto = fn.prototype.__proto__;
+            if(proto.constructor.name!=="Object")
+                this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
+        }
+        Object.keys(fn.prototype).forEach(function (key) {
+            const value = key==="constructor" ? fn.name : fn.prototype[key].toString();
+            if(value.indexOf("native code")<0)
+                this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
+            else // for now assume this is a redirect on the same type
+                this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
+        }, this);
+        Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
+            const desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
+            if(desc.get || desc.set) {
+                this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
+                if(desc.get) {
+                    this.lines.push("    get: " + desc.get.toString() + (desc.set ? "," : ""));
+                }
+                if(desc.set) {
+                    this.lines.push("    set: " + desc.set.toString());
+                }
+                this.lines.push("});")
+            }
+        }, this);
+    }
 
-Transpiler.prototype.appendOneDeclared = function(decl) {
-    var transpiler = this.newLocalTranspiler();
-    decl.transpile(transpiler);
-    transpiler.flush();
-    if(this.line!==this.indents) {
+    append(text) {
+        this.line += text;
+        return this;
+    }
+
+    trimLast(count) {
+        this.line = this.line.substring(0, this.line.length - count);
+        return this;
+    }
+
+    newLine() {
         this.lines.push(this.line);
         this.line = this.indents;
+        return this;
     }
-    this.lines.push("");
-};
 
-
-Transpiler.prototype.require = function(fn) {
-    this.required.add(fn);
-};
-
-
-
-Transpiler.prototype.appendAllRequired = function() {
-    this.required.forEach(function(fn) {
-        this.appendOneRequired(fn);
-    }, this);
-};
-
-
-Transpiler.prototype.register = function(f) {
-    this.required.add(f);
-    this.registered.add(f);
-};
-
-
-Transpiler.prototype.appendAllRegistered = function() {
-    this.registered.forEach(function(f) {
-        this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
-    }, this);
-};
-
-
-Transpiler.prototype.getTranspiled = function(object) {
-    if(object===null)
-        return "null";
-    else if(object.toTranspiled)
-        return object.toTranspiled();
-    else
-        return object.toString();
-};
-
-var coreNodeClasses = new Set(["Socket"]);
-
-Transpiler.prototype.appendOneRequired = function(fn) {
-    if(coreNodeClasses.has(fn.name))
-        return;
-    this.lines.push(fn.toString());
-    Object.keys(fn).forEach(function (key) {
-        this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
-    }, this);
-    if(fn.prototype.__proto__) {
-        var proto = fn.prototype.__proto__;
-        if(proto.constructor.name!=="Object")
-            this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
+    escape() {
+        this.escapeMode++;
+        return this;
     }
-    Object.keys(fn.prototype).forEach(function (key) {
-        var value = key==="constructor" ? fn.name : fn.prototype[key].toString();
-        if(value.indexOf("native code")<0)
-            this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
-        else // for now assume this is a redirect on the same type
-            this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
-    }, this);
-    Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
-        var desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
-        if(desc.get || desc.set) {
-            this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
-            if(desc.get) {
-                this.lines.push("    get: " + desc.get.toString() + (desc.set ? "," : ""));
-            }
-            if(desc.set) {
-                this.lines.push("    set: " + desc.set.toString());
-            }
-            this.lines.push("});")
+
+    unescape() {
+        this.escapeMode--;
+        return this;
+    }
+
+    indent(indentOnly) {
+        if(!indentOnly)
+            this.lines.push(this.line);
+        this.indents += '\t';
+        this.line = this.indents;
+        return this;
+    }
+
+    dedent() {
+        if(this.line!==this.indents)
+            this.lines.push(this.line);
+        if(this.indents.length==0) {
+            throw new Error("Illegal dedent!");
         }
-    }, this);
-};
-
-Transpiler.prototype.append = function(text) {
-    this.line += text;
-    return this;
-};
-
-Transpiler.prototype.trimLast = function(count) {
-    this.line = this.line.substring(0, this.line.length - count);
-    return this;
-};
-
-Transpiler.prototype.newLine = function() {
-    this.lines.push(this.line);
-    this.line = this.indents;
-    return this;
-};
-
-Transpiler.prototype.escape = function() {
-    this.escapeMode++;
-    return this;
-};
-
-Transpiler.prototype.unescape = function() {
-    this.escapeMode--;
-    return this;
-};
-
-Transpiler.prototype.indent = function(indentOnly) {
-    if(!indentOnly)
-        this.lines.push(this.line);
-    this.indents += '\t';
-    this.line = this.indents;
-    return this;
-};
-
-Transpiler.prototype.dedent = function() {
-    if(this.line!==this.indents)
-        this.lines.push(this.line);
-    if(this.indents.length==0) {
-        throw new Error("Illegal dedent!");
+        this.indents = this.indents.slice(1);
+        this.line = this.indents;
+        return this;
     }
-    this.indents = this.indents.slice(1);
-    this.line = this.indents;
-    return this;
-};
+
+    static transpile(context, thing) {
+        try {
+            patchObject();
+            const transpiler = newTranspiler(context);
+            thing.declare(transpiler);
+            return transpiler.toString();
+        } finally {
+            context.terminated();
+            unpatchObject();
+        }
+    }
+
+    printTestName(testName) {
+        this.append("print('").append(testName).append(' test ');
+        return this;
+    }
+}
 
 function ObjectUtils() {
 
 }
 
-ObjectUtils.values = function(o) {
-    var values = [];
-    for(var name in o) { values.push(o[name]); }
+ObjectUtils.values = o => {
+    const values = [];
+    for(const name in o) { values.push(o[name]); }
     return values;
 };
 
@@ -251,7 +257,7 @@ ObjectUtils.stringSplitToList = function(separator) {
 ObjectUtils.stringHasAll = function(items) {
     if(StrictSet && items instanceof StrictSet)
         items = Array.from(items.set.values());
-    for(var i=0;i<items.length;i++) {
+    for(let i=0;i<items.length;i++) {
         if(!this.includes(items[i]))
             return false;
     }
@@ -262,7 +268,7 @@ ObjectUtils.stringHasAll = function(items) {
 ObjectUtils.stringHasAny = function(items) {
     if(StrictSet && items instanceof StrictSet)
         items = Array.from(items.set.values());
-    for(var i=0;i<items.length;i++) {
+    for(let i=0;i<items.length;i++) {
         if(this.includes(items[i]))
             return true;
     }
@@ -290,14 +296,14 @@ ObjectUtils.stringSlice = function(start, last) {
 };
 
 ObjectUtils.formatInteger = function(format) {
-    var value = "000000000000" + this;
+    const value = "000000000000" + this;
     return value.substr(value.length - format.length);
 };
 
 ObjectUtils.decimalToString = function() {
     // mimic 0.0######
-    var s = this.toString();
-    var i = s.indexOf('.');
+    const s = this.toString();
+    let i = s.indexOf('.');
     if(i>=0) {
         // fix IEEE issue
         i = s.indexOf('000000', i);
@@ -310,7 +316,7 @@ ObjectUtils.decimalToString = function() {
 };
 
 function print(msg) {
-    var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
+    const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
     if(isNodeJs)
         process.stdout.write(msg);
     else
@@ -390,8 +396,7 @@ function unpatchObject() {
 }
 
 function newTranspiler(context) {
-    var transpiler = new Transpiler(context);
-    var equalObjects = require("../utils/Utils").equalObjects;
+    const transpiler = new Transpiler(context);
     transpiler.require(equalObjects);
     transpiler.require(print);
     transpiler.require(divide);
@@ -411,28 +416,10 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
-    transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); }");
-    transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; }");
-    transpiler.lines.push("intrinsic = {}");
+    transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");
+    transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; };");
+    transpiler.lines.push("var intrinsic = global.intrinsic = {};");
     return transpiler;
 }
 
-Transpiler.transpile = function(context, thing) {
-    try {
-        patchObject();
-        var transpiler = newTranspiler(context);
-        thing.declare(transpiler);
-        return transpiler.toString();
-    } finally {
-        context.terminated();
-        unpatchObject();
-    }
-};
 
-Transpiler.prototype.printTestName = function(testName) {
-    this.append("print('").append(testName).append(' test ');
-    return this;
-};
-
-
-exports.Transpiler = Transpiler;

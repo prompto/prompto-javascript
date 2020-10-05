@@ -1,55 +1,38 @@
-var Value = require("./Value").Value;
-var VersionType = null;
+import Value from './Value.js'
+import { VersionType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
-exports.resolve = function() {
-    VersionType = require("../type/VersionType").VersionType;
-};
+export default class VersionValue extends Value {
 
-function VersionValue(version) {
-    Value.call(this, VersionType.instance);
-    this.version = version;
-	return this;
+    constructor(version) {
+        super(VersionType.instance);
+        this.version = version;
+    }
+
+    get major() { return this.version.major; }
+    get minor() { return this.version.major; }
+    get fix() { return this.version.major; }
+
+    toString() {
+        return this.version.toString();
+    }
+
+    compareToValue(context, value) {
+        if (value instanceof VersionValue) {
+            return this.version.cmp(value.version);
+        } else {
+            throw new SyntaxError("Illegal comparison: VersionValue and " + typeof(value));
+        }
+    }
+
+    equals(obj) {
+        if (obj instanceof VersionValue) {
+            return this.version.equals(obj.version);
+        } else {
+            return false;
+        }
+    }
 }
 
-VersionValue.prototype = Object.create(Value.prototype);
-VersionValue.prototype.constructor = VersionValue;
-
-Object.defineProperty(VersionValue.prototype, "major", {
-    get: function() { return this.version.major; }
-});
-
-Object.defineProperty(VersionValue.prototype, "minor", {
-    get: function() { return this.version.major; }
-});
-
-Object.defineProperty(VersionValue.prototype, "fix", {
-    get: function() { return this.version.major; }
-});
-
-VersionValue.prototype.toString = function() {
-    return this.version.toString();
-};
-
-
-
-VersionValue.prototype.compareToValue = function(context, value) {
-    if (value instanceof VersionValue) {
-        return this.version.cmp(value.version);
-    } else {
-        throw new SyntaxError("Illegal comparison: VersionValue and " + typeof(value));
-    }
-};
-
-
-VersionValue.prototype.equals = function(obj) {
-    if (obj instanceof VersionValue) {
-        return this.version.equals(obj.version);
-    } else {
-        return false;
-    }
-};
-
-
-exports.VersionValue = VersionValue;
 
 

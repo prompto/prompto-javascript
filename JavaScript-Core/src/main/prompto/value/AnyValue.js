@@ -1,18 +1,16 @@
-var Value = require("./Value").Value;
-var AnyType = require("../type/AnyType").AnyType;
+import Value from './Value.js'
+import { AnyType } from '../type/index.js'
 
-function AnyValue() {
-    Value.call(this, AnyType.instance);
-    this.text = null;
-    return this;
+export default class AnyValue extends Value {
+
+    constructor() {
+        super(AnyType.instance);
+        this.text = null;
+    }
+
+    toString() {
+        return "{id:" + this.id + ", text:" + this.text + "}";
+    }
 }
 
-AnyValue.prototype = Object.create(Value.prototype);
-AnyValue.prototype.constructor = Value;
-
-AnyValue.prototype.toString = function() {
-    return "{id:" + this.id + ", text:" + this.text + "}";
-};
-
-exports.AnyValue = AnyValue;
 

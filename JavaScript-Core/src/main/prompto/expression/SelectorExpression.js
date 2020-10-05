@@ -1,26 +1,17 @@
-var Expression = require("./Expression").Expression;
-var UnresolvedIdentifier;
+import Expression from './Expression.js'
+import { UnresolvedIdentifier } from './index.js'
 
-exports.resolve = function() {
-    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
+export default class SelectorExpression extends Expression {
+
+    constructor(parent) {
+        super();
+        this.parent = parent || null;
+    }
+
+    checkParent(context) {
+        if (this.parent instanceof UnresolvedIdentifier)
+            return this.parent.checkMember(context);
+        else
+            return this.parent.check(context);
+    }
 }
-
-function SelectorExpression(parent) {
-    Expression.call(this);
-	this.parent = parent || null;
-	return this;
-}
-
-SelectorExpression.prototype = Object.create(Expression.prototype);
-SelectorExpression.prototype.constructor = SelectorExpression;
-
-
-SelectorExpression.prototype.checkParent = function(context) {
-    if (this.parent instanceof UnresolvedIdentifier)
-        return this.parent.checkMember(context);
-    else
-        return this.parent.check(context);
-};
-
-
-exports.SelectorExpression = SelectorExpression;

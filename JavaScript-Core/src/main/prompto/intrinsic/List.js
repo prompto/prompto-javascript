@@ -1,9 +1,9 @@
-var StrictSet = require("./StrictSet").StrictSet;
-var Document = require("./Document").Document;
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var equalObjects = require("../utils/Utils").equalObjects;
+const StrictSet = require('./StrictSet.js').default;
+const Document = require('./Document.js').default;
+const NotMutableError = require('../error/NotMutableError.js').default;
+const equalObjects = require('../utils/Utils.js').equalObjects;
 
-function List(mutable, items) {
+export default function List(mutable, items) {
     Array.call(this);
     if(items)
         this.addItems(items);
@@ -207,5 +207,3 @@ List.prototype.toDocument = function() {
     });
     return new List(false, items);
 };
-
-exports.List = List;

@@ -1,12 +1,11 @@
-function CSharpLiteral(text) {
-    this.text = text;
-    return this;
+export default class CSharpLiteral {
+
+    constructor(text) {
+        this.text = text;
+    }
+
+    toDialect(writer) {
+        return writer.append(this.text);
+    }
 }
 
-
-CSharpLiteral.prototype.toDialect = function(writer) {
-    return writer.append(this.text);
-};
-
-
-exports.CSharpLiteral = CSharpLiteral;

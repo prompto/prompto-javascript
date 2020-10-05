@@ -1,15 +1,12 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
 
-function JsxType () {
-    NativeType.call(this, new Identifier("Jsx"));
-    return this;
+export default class JsxType extends NativeType {
+
+    constructor() {
+        super(new Identifier("Jsx"));
+    }
 }
-
-JsxType.prototype = Object.create(NativeType.prototype);
-JsxType.prototype.constructor = JsxType;
 
 
 JsxType.instance = new JsxType();
-
-exports.JsxType = JsxType;

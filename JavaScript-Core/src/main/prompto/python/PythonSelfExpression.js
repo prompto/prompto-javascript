@@ -1,19 +1,12 @@
-var PythonExpression = require("./PythonExpression").PythonExpression;
+import PythonExpression from './PythonExpression.js'
 
-function PythonSelfExpression() {
-    PythonExpression.call(this);
-	return this;
+export default class PythonSelfExpression extends PythonExpression {
+
+    toString() {
+        return "self";
+    }
+
+    toDialect(writer) {
+        writer.append("self");
+    }
 }
-
-PythonSelfExpression.prototype = Object.create(PythonExpression.prototype);
-PythonSelfExpression.prototype.constructor = PythonSelfExpression;
-
-PythonSelfExpression.prototype.toString = function() {
-	return "self";
-};
-
-PythonSelfExpression.prototype.toDialect = function(writer) {
-    writer.append("self");
-};
-
-exports.PythonSelfExpression = PythonSelfExpression;

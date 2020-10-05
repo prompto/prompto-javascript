@@ -1,27 +1,25 @@
-var TextValue = require("../value/TextValue").TextValue;
+import { TextValue } from '../value/index.js'
 
-function DocIdentifierKey(id) {
-    this.id = id;
-    return this;
+export default class DocIdentifierKey {
+  
+    constructor(id) {
+        this.id = id;
+   }
+
+    toString() {
+        return this.id.name;
+    }
+
+    stringValue() {
+        return this.id.name;
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.id.name);
+    }
+
+    interpret(context) {
+        return new TextValue(this.stringValue());
+    }
 }
 
-DocIdentifierKey.prototype.toString = function() {
-    return this.id.name;
-};
-
-DocIdentifierKey.prototype.stringValue = function() {
-    return this.id.name;
-};
-
-
-DocIdentifierKey.prototype.transpile = function(transpiler) {
-    transpiler.append(this.id.name);
-};
-
-
-DocIdentifierKey.prototype.interpret = function(context) {
-    return new TextValue(this.stringValue());
-};
-
-
-exports.DocIdentifierKey = DocIdentifierKey;

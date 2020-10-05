@@ -1,86 +1,79 @@
-var ObjectList = require("../utils/ObjectList").ObjectList;
-var CodeParameter = require("./CodeParameter").CodeParameter;
+import ObjectList from '../utils/ObjectList.js'
+import { CodeParameter } from './index.js'
 
-function ParameterList() {
-	ObjectList.call(this);
-    for (var i=0; i < arguments.length; i++) {
-		this.add(arguments[i]);
-	}
-	return this;
-}
+export default class ParameterList extends ObjectList {
 
-ParameterList.prototype = Object.create(ObjectList.prototype);
-ParameterList.prototype.constructor = ParameterList;
-
-ParameterList.prototype.register = function(context) {
-    this.forEach(function(arg) {
-        arg.register(context);
-    });
-};
-
-ParameterList.prototype.check = function(context) {
-    this.forEach(function(arg) {
-        arg.check(context);
-    });
-};
-
-ParameterList.prototype.declare = function(transpiler) {
-    this.forEach(function(arg) {
-        arg.declare(transpiler);
-    });
-};
-
-ParameterList.prototype.find = function(name) {
-    return this.filter(function(param) {
-        return name === param.name;
-    })[0] || null;
-};
-
-ParameterList.prototype.toDialect = function(writer) {
-    if(this.length==0)
-        return;
-    writer.toDialect(this);
-};
-
-ParameterList.prototype.toEDialect = function(writer) {
-    writer.append("receiving ");
-    for(var i=0;i<this.length-1;i++) {
-        this[i].toDialect(writer);
-        writer.append(", ");
+    constructor() {
+        super();
+        for (let i=0; i < arguments.length; i++) {
+            this.add(arguments[i]);
+        }
     }
-    if(this.length>1) {
-        writer.trimLast(2);
-        writer.append(" and ");
-    }
-    this[this.length-1].toDialect(writer);
-    writer.append(" ");
-};
 
-ParameterList.prototype.toODialect = function(writer) {
-    if(this.length>0) {
-        this.forEach(function(arg) {
-            arg.toDialect(writer);
+    register(context) {
+        this.forEach(arg => {
+            arg.register(context);
+        });
+    }
+
+    check(context) {
+        this.forEach(arg => {
+            arg.check(context);
+        });
+    }
+
+    declare(transpiler) {
+        this.forEach(arg => {
+            arg.declare(transpiler);
+        });
+    }
+
+    find(name) {
+        return this.filter(param => name === param.name)[0] || null;
+    }
+
+    toDialect(writer) {
+        if(this.length==0)
+            return;
+        writer.toDialect(this);
+    }
+
+    toEDialect(writer) {
+        writer.append("receiving ");
+        for(let i=0;i<this.length-1;i++) {
+            this[i].toDialect(writer);
             writer.append(", ");
-        });
-        writer.trimLast(2);
+        }
+        if(this.length>1) {
+            writer.trimLast(2);
+            writer.append(" and ");
+        }
+        this[this.length-1].toDialect(writer);
+        writer.append(" ");
     }
-};
 
-ParameterList.prototype.toMDialect = function(writer) {
-    this.toODialect(writer);
-};
-
-ParameterList.prototype.transpile = function(transpiler) {
-    var args = this.filter(function(arg) {
-        return !(arg instanceof CodeParameter);
-    })
-    if(args.length>0) {
-        args.forEach(function (arg) {
-            arg.transpile(transpiler);
-            transpiler.append(", ");
-        });
-        transpiler.trimLast(2);
+    toODialect(writer) {
+        if(this.length>0) {
+            this.forEach(arg => {
+                arg.toDialect(writer);
+                writer.append(", ");
+            });
+            writer.trimLast(2);
+        }
     }
-};
 
-exports.ParameterList = ParameterList;
+    toMDialect(writer) {
+        this.toODialect(writer);
+    }
+
+    transpile(transpiler) {
+        const args = this.filter(arg => !(arg instanceof CodeParameter));
+        if(args.length>0) {
+            args.forEach(arg => {
+                arg.transpile(transpiler);
+                transpiler.append(", ");
+            });
+            transpiler.trimLast(2);
+        }
+    }
+}

@@ -1,85 +1,83 @@
-var BaseStatement = require("./BaseStatement").BaseStatement;
+import BaseStatement from './BaseStatement.js'
 
-function WithResourceStatement(resource, statements) {
-	BaseStatement.call(this);
-	this.resource = resource;
-	this.statements = statements;
-}
+export default class WithResourceStatement extends BaseStatement {
 
-WithResourceStatement.prototype = Object.create(BaseStatement.prototype);
-WithResourceStatement.prototype.constructor = WithResourceStatement;
+    constructor(resource, statements) {
+        super();
+        this.resource = resource;
+        this.statements = statements;
+    }
 
-WithResourceStatement.prototype.check = function(context) {
-	context = context.newResourceContext();
-	this.resource.checkResource(context);
-	return this.statements.check(context);
-};
+    check(context) {
+        context = context.newResourceContext();
+        this.resource.checkResource(context);
+        return this.statements.check(context);
+    }
 
-WithResourceStatement.prototype.interpret = function(context) {
-	context = context.newResourceContext();
-	try {
-		this.resource.interpret(context);
-		return this.statements.interpret(context);
-	} finally {
-		var res = context.getValue(this.resource.id);
-		if(res.close) {
-			res.close();
-		}
-	}
-};
+    interpret(context) {
+        context = context.newResourceContext();
+        try {
+            this.resource.interpret(context);
+            return this.statements.interpret(context);
+        } finally {
+            const res = context.getValue(this.resource.id);
+            if(res.close) {
+                res.close();
+            }
+        }
+    }
 
-WithResourceStatement.prototype.declare = function(transpiler) {
-    transpiler = transpiler.newResourceTranspiler();
-    this.resource.declare(transpiler);
-    this.statements.declare(transpiler);
-};
+    declare(transpiler) {
+        transpiler = transpiler.newResourceTranspiler();
+        this.resource.declare(transpiler);
+        this.statements.declare(transpiler);
+    }
 
-WithResourceStatement.prototype.transpile = function(transpiler) {
-    transpiler = transpiler.newResourceTranspiler();
-    this.resource.transpile(transpiler);
-    transpiler.append(";").newLine();
-    transpiler.append("try {").indent();
-    this.statements.transpile(transpiler);
-    transpiler.dedent().append("} finally {").indent();
-    this.resource.transpileClose(transpiler);
-    transpiler.dedent().append("}");
-    transpiler.flush();
-    return true;
-};
+    transpile(transpiler) {
+        transpiler = transpiler.newResourceTranspiler();
+        this.resource.transpile(transpiler);
+        transpiler.append(";").newLine();
+        transpiler.append("try {").indent();
+        this.statements.transpile(transpiler);
+        transpiler.dedent().append("} finally {").indent();
+        this.resource.transpileClose(transpiler);
+        transpiler.dedent().append("}");
+        transpiler.flush();
+        return true;
+    }
 
-WithResourceStatement.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
 
-WithResourceStatement.prototype.toEDialect = function(writer) {
-    writer.append("with ");
-    this.resource.toDialect(writer);
-    writer.append(", do:").newLine().indent();
-    this.statements.toDialect(writer);
-    writer.dedent();
-}
+    toEDialect(writer) {
+        writer.append("with ");
+        this.resource.toDialect(writer);
+        writer.append(", do:").newLine().indent();
+        this.statements.toDialect(writer);
+        writer.dedent();
+    }
 
-WithResourceStatement.prototype.toODialect = function(writer) {
-    writer.append("with (");
-    this.resource.toDialect(writer);
-    writer.append(")");
-    var oneLine = this.statements.length==1 && this.statements[0].isSimple();
-    if(!oneLine)
-        writer.append(" {");
-    writer.newLine().indent();
-    this.statements.toDialect(writer);
-    writer.dedent();
-    if(!oneLine) {
-        writer.append("}").newLine();
+    toODialect(writer) {
+        writer.append("with (");
+        this.resource.toDialect(writer);
+        writer.append(")");
+        const oneLine = this.statements.length==1 && this.statements[0].isSimple();
+        if(!oneLine)
+            writer.append(" {");
+        writer.newLine().indent();
+        this.statements.toDialect(writer);
+        writer.dedent();
+        if(!oneLine) {
+            writer.append("}").newLine();
+        }
+    }
+
+    toMDialect(writer) {
+        writer.append("with ");
+        this.resource.toDialect(writer);
+        writer.append(":").newLine().indent();
+        this.statements.toDialect(writer);
+        writer.dedent();
     }
 }
-
-WithResourceStatement.prototype.toMDialect = function(writer) {
-    writer.append("with ");
-    this.resource.toDialect(writer);
-    writer.append(":").newLine().indent();
-    this.statements.toDialect(writer);
-    writer.dedent();
-}
-
-exports.WithResourceStatement = WithResourceStatement;

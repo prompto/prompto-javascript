@@ -1,4 +1,2 @@
-function JavaScriptExpression() {
+export default class JavaScriptExpression {
 }
-
-exports.JavaScriptExpression = JavaScriptExpression;

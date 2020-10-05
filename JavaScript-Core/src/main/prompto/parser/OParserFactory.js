@@ -1,15 +1,10 @@
-var antlr4 = require("antlr4/index");
-var ONamingLexer = require("./ONamingLexer").ONamingLexer;
-var OCleverParser = require("./OCleverParser").OCleverParser;
+import antlr4 from 'antlr4';
+import { ONamingLexer, OCleverParser } from './index.js'
 
-exports.OopsParserFactory =  function() {
+export default function OParserFactory() {
 	
-	this.newLexer = function(data) {
-		return new ONamingLexer(new antlr4.InputStream(data));
-	};
+	this.newLexer = data => new ONamingLexer(new antlr4.InputStream(data));
 
-	this.newParser = function(path, data) {
-		return new OCleverParser(path, data);
-	};
+	this.newParser = (path, data) => new OCleverParser(path, data);
 
-};
+}

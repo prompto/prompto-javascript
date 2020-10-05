@@ -1,14 +1,11 @@
-var NativeCategoryDeclaration = require("./NativeCategoryDeclaration").NativeCategoryDeclaration;
-var Identifier = require("../grammar/Identifier").Identifier;
+import NativeCategoryDeclaration from './NativeCategoryDeclaration.js'
+import { Identifier } from '../grammar/index.js'
 
-function AnyNativeCategoryDeclaration() {
-    NativeCategoryDeclaration.call(this, new Identifier("Any"), [], [], [], []);
-    return this;
+export default class AnyNativeCategoryDeclaration extends NativeCategoryDeclaration {
+
+    constructor() {
+        super(new Identifier("Any"), [], [], [], []);
+    }
 }
 
-AnyNativeCategoryDeclaration.prototype = Object.create(NativeCategoryDeclaration.prototype);
-AnyNativeCategoryDeclaration.prototype.constructor = AnyNativeCategoryDeclaration;
-
 AnyNativeCategoryDeclaration.instance = new AnyNativeCategoryDeclaration();
-
-exports.AnyNativeCategoryDeclaration = AnyNativeCategoryDeclaration;

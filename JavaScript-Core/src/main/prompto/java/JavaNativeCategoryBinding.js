@@ -1,17 +1,14 @@
-var NativeCategoryBinding = require("./../grammar/NativeCategoryBinding").NativeCategoryBinding;
+import NativeCategoryBinding from '../grammar/NativeCategoryBinding.js'
 
-function JavaNativeCategoryBinding(expression) {
-	NativeCategoryBinding.call(this);
-	this.expression = expression;
-	return this;
+export default class JavaNativeCategoryBinding extends NativeCategoryBinding {
+
+    constructor(expression) {
+        super();
+        this.expression = expression;
+    }
+
+    toDialect(writer) {
+        writer.append("Java: ");
+        this.expression.toDialect(writer);
+    }
 }
-
-JavaNativeCategoryBinding.prototype = Object.create(NativeCategoryBinding.prototype);
-JavaNativeCategoryBinding.prototype.creator = JavaNativeCategoryBinding;
-
-JavaNativeCategoryBinding.prototype.toDialect = function(writer) {
-    writer.append("Java: ");
-    this.expression.toDialect(writer);
-};
-
-exports.JavaNativeCategoryBinding = JavaNativeCategoryBinding;

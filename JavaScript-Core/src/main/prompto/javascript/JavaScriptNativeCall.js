@@ -1,38 +1,34 @@
-var NativeCall = require("../statement/NativeCall").NativeCall;
+import NativeCall from '../statement/NativeCall.js'
 
-function JavaScriptNativeCall(statement, module) {
-	NativeCall.call(this);
-	this.statement = statement;
-	return this;
+export default class JavaScriptNativeCall extends NativeCall {
+
+    constructor(statement, module) {
+        super();
+        this.statement = statement;
+    }
+
+    toString() {
+        return this.statement.toString();
+    }
+
+    check(context) {
+        return this.statement.check(context);
+    }
+
+    interpret(context, returnType) {
+        return this.statement.interpret(context, returnType);
+    }
+
+    toDialect(writer) {
+        writer.append("JavaScript: ");
+        this.statement.toDialect(writer);
+    }
+
+    transpile(transpiler) {
+        this.statement.transpile(transpiler);
+    }
+
+    declare(transpiler) {
+        this.statement.declare(transpiler);
+    }
 }
-
-JavaScriptNativeCall.prototype = Object.create(NativeCall.prototype);
-JavaScriptNativeCall.prototype.constructor = JavaScriptNativeCall;
-
-JavaScriptNativeCall.prototype.toString = function() {
-	return this.statement.toString();
-};
-
-JavaScriptNativeCall.prototype.check = function(context) {
-	return this.statement.check(context);
-};
-
-JavaScriptNativeCall.prototype.interpret = function(context, returnType) {
-	return this.statement.interpret(context, returnType);
-};
-
-JavaScriptNativeCall.prototype.toDialect = function(writer) {
-    writer.append("JavaScript: ");
-    this.statement.toDialect(writer);
-};
-
-JavaScriptNativeCall.prototype.transpile = function(transpiler) {
-    this.statement.transpile(transpiler);
-};
-
-JavaScriptNativeCall.prototype.declare = function(transpiler) {
-    this.statement.declare(transpiler);
-};
-
-exports.JavaScriptNativeCall = JavaScriptNativeCall;
-

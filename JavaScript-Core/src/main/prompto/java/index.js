@@ -1,14 +1,13 @@
-exports.JavaStatement = require('./JavaStatement').JavaStatement;
-exports.JavaNativeCall = require('./JavaNativeCall').JavaNativeCall;
-exports.JavaItemExpression = require('./JavaItemExpression').JavaItemExpression;
-exports.JavaIdentifierExpression = require('./JavaIdentifierExpression').JavaIdentifierExpression;
-exports.JavaBooleanLiteral = require('./JavaBooleanLiteral').JavaBooleanLiteral;
-exports.JavaCharacterLiteral = require('./JavaCharacterLiteral').JavaCharacterLiteral;
-exports.JavaTextLiteral = require('./JavaTextLiteral').JavaTextLiteral;
-exports.JavaIntegerLiteral = require('./JavaIntegerLiteral').JavaIntegerLiteral;
-exports.JavaDecimalLiteral = require('./JavaDecimalLiteral').JavaDecimalLiteral;
-exports.JavaExpressionList = require('./JavaExpressionList').JavaExpressionList;
-exports.JavaThisExpression = require('./JavaThisExpression').JavaThisExpression;
-exports.JavaMethodExpression = require('./JavaMethodExpression').JavaMethodExpression;
-exports.JavaNativeCategoryBinding = require("./JavaNativeCategoryBinding").JavaNativeCategoryBinding;
-
+export {default as JavaStatement} from './JavaStatement.js';
+export {default as JavaNativeCall} from './JavaNativeCall.js';
+export {default as JavaItemExpression} from './JavaItemExpression.js';
+export {default as JavaIdentifierExpression} from './JavaIdentifierExpression.js';
+export {default as JavaBooleanLiteral} from './JavaBooleanLiteral.js';
+export {default as JavaCharacterLiteral} from './JavaCharacterLiteral.js';
+export {default as JavaTextLiteral} from './JavaTextLiteral.js';
+export {default as JavaIntegerLiteral} from './JavaIntegerLiteral.js';
+export {default as JavaDecimalLiteral} from './JavaDecimalLiteral.js';
+export {default as JavaExpressionList} from './JavaExpressionList.js';
+export {default as JavaThisExpression} from './JavaThisExpression.js';
+export {default as JavaMethodExpression} from './JavaMethodExpression.js';
+export {default as JavaNativeCategoryBinding} from './JavaNativeCategoryBinding.js';

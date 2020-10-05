@@ -1,11 +1,8 @@
-var JavaLiteral = require("./JavaLiteral").JavaLiteral;
+import JavaLiteral from './JavaLiteral.js'
 
-function JavaBooleanLiteral(text) {
-	JavaLiteral.call(this, text);
-	return this;
+export default class JavaBooleanLiteral extends JavaLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
-
-JavaBooleanLiteral.prototype = Object.create(JavaLiteral.prototype);
-JavaBooleanLiteral.prototype.constructor = JavaBooleanLiteral;
-
-exports.JavaBooleanLiteral = JavaBooleanLiteral;

@@ -1,29 +1,26 @@
-var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
-var ThisExpression = require("../expression/ThisExpression").ThisExpression;
+import JavaScriptExpression from './JavaScriptExpression.js'
+import { ThisExpression } from '../expression/index.js'
 
-function JavaScriptThisExpression() {
-    JavaScriptExpression.call(this);
-	this.expression = new ThisExpression();
-	return this;
+export default class JavaScriptThisExpression extends JavaScriptExpression {
+
+    constructor() {
+        super();
+        this.expression = new ThisExpression();
+    }
+
+    interpret(context) {
+        return this.expression.interpret(context);
+    }
+
+    toDialect(writer) {
+        return writer.append("this");
+    }
+
+    transpile(transpiler) {
+        transpiler.append("this");
+    }
+
+    toString() {
+        return "this";
+    }
 }
-
-JavaScriptThisExpression.prototype = Object.create(JavaScriptExpression.prototype);
-JavaScriptThisExpression.prototype.constructor = JavaScriptThisExpression;
-
-JavaScriptThisExpression.prototype.interpret = function(context) {
-    return this.expression.interpret(context);
-};
-
-JavaScriptThisExpression.prototype.toDialect = function(writer) {
-    return writer.append("this");
-};
-
-JavaScriptThisExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("this");
-};
-
-JavaScriptThisExpression.prototype.toString = function() {
-	return "this";
-};
-
-exports.JavaScriptThisExpression = JavaScriptThisExpression;

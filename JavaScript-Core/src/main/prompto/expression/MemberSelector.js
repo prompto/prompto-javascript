@@ -1,139 +1,116 @@
-var SelectorExpression = require("./SelectorExpression").SelectorExpression;
-var UnresolvedIdentifier = null;
-var NullReferenceError = require("../error/NullReferenceError").NullReferenceError;
-var NullValue = require("../value/NullValue").NullValue;
-var Dialect = require("../parser/Dialect").Dialect;
-var MethodType = require("../type/MethodType").MethodType;
-var VoidType = require("../type/VoidType").VoidType;
-var ParenthesisExpression = null;
-var UnresolvedCall = null;
+import SelectorExpression from './SelectorExpression.js'
+import { UnresolvedIdentifier, ParenthesisExpression } from './index.js'
+import { Dialect } from '../parser/index.js'
+import { UnresolvedCall } from '../statement/index.js'
+import { MethodType, VoidType } from '../type/index.js'
+import { NullValue } from '../value/index.js'
+import { NullReferenceError } from '../error/index.js'
 
-exports.resolve = function() {
-    UnresolvedIdentifier = require("./UnresolvedIdentifier").UnresolvedIdentifier;
-    ParenthesisExpression = require("./ParenthesisExpression").ParenthesisExpression;
-    UnresolvedCall = require("../statement/UnresolvedCall").UnresolvedCall;
-};
+export default class MemberSelector extends SelectorExpression {
 
-function MemberSelector(parent, id) {
-	SelectorExpression.call(this, parent);
-	this.id = id;
-	return this;
-}
+    constructor(parent, id) {
+        super(parent);
+        this.id = id;
+    }
 
-MemberSelector.prototype = Object.create(SelectorExpression.prototype);
-MemberSelector.prototype.constructor = MemberSelector;
-
-Object.defineProperty(MemberSelector.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
+    toDialect(writer) {
+        if (writer.dialect == Dialect.E)
+            this.toEDialect(writer);
+        else
+            this.toOMDialect(writer);
+    }
 
-MemberSelector.prototype.toDialect = function(writer) {
-    if (writer.dialect == Dialect.E)
-        this.toEDialect(writer);
-    else
-        this.toOMDialect(writer);
-};
-
-
-MemberSelector.prototype.toEDialect = function(writer) {
-    try {
-        var type = this.check(writer.context);
-        if (type instanceof MethodType) {
-            writer.append("Method: ");
+    toEDialect(writer) {
+        try {
+            const type = this.check(writer.context);
+            if (type instanceof MethodType) {
+                writer.append("Method: ");
+            }
+        } catch (e) {
+            // gracefully skip exceptions
         }
-    } catch (e) {
-        // gracefully skip exceptions
+       this.parentAndMemberToDialect(writer);
     }
-   this.parentAndMemberToDialect(writer);
-};
 
-
-MemberSelector.prototype.toOMDialect = function(writer) {
-    this.parentAndMemberToDialect(writer);
-};
-
-
-MemberSelector.prototype.parentAndMemberToDialect = function(writer) {
-    // ensure singletons are not treated as constructors
-    try {
-        this.resolveParent(writer.context);
-    } catch(e) {
-        // ignore
+    toOMDialect(writer) {
+        this.parentAndMemberToDialect(writer);
     }
-    if (writer.dialect == Dialect.E)
-        this.parentToEDialect(writer);
-    else
-        this.parentToOMDialect(writer);
-    writer.append(".");
-    writer.append(this.name);
-};
 
+    parentAndMemberToDialect(writer) {
+        // ensure singletons are not treated as constructors
+        try {
+            this.resolveParent(writer.context);
+        } catch(e) {
+            // ignore
+        }
+        if (writer.dialect == Dialect.E)
+            this.parentToEDialect(writer);
+        else
+            this.parentToOMDialect(writer);
+        writer.append(".");
+        writer.append(this.name);
+    }
 
-MemberSelector.prototype.parentToEDialect = function(writer) {
-    if(this.parent instanceof UnresolvedCall) {
-        writer.append('(');
-        this.parent.toDialect(writer);
-        writer.append(')');
-    } else
-        this.parent.parentToDialect(writer);
-};
+    parentToEDialect(writer) {
+        if(this.parent instanceof UnresolvedCall) {
+            writer.append('(');
+            this.parent.toDialect(writer);
+            writer.append(')');
+        } else
+            this.parent.parentToDialect(writer);
+    }
 
+    parentToOMDialect(writer) {
+        if(this.parent instanceof ParenthesisExpression && this.parent.expression instanceof UnresolvedCall)
+            this.parent.expression.toDialect(writer);
+        else
+            this.parent.parentToDialect(writer);
+    }
 
-MemberSelector.prototype.parentToOMDialect = function(writer) {
-    if(this.parent instanceof ParenthesisExpression && this.parent.expression instanceof UnresolvedCall)
-        this.parent.expression.toDialect(writer);
-    else
-        this.parent.parentToDialect(writer);
-};
+    declare(transpiler) {
+        const parent = this.resolveParent(transpiler.context);
+        parent.declareParent(transpiler);
+        const parentType = this.checkParent(transpiler.context);
+        return parentType.declareMember(transpiler, this, this.name);
+    }
 
+    transpile(transpiler) {
+        const parent = this.resolveParent(transpiler.context);
+        parent.transpileParent(transpiler);
+        transpiler.append(".");
+        const parentType = this.checkParent(transpiler.context);
+        parentType.transpileMember(transpiler, this.name);
+        return false;
+    }
 
-MemberSelector.prototype.declare = function(transpiler) {
-    var parent = this.resolveParent(transpiler.context);
-    parent.declareParent(transpiler);
-    var parentType = this.checkParent(transpiler.context);
-    return parentType.declareMember(transpiler, this, this.name);
-};
+    toString() {
+        return this.parent.toString() + "." + this.name;
+    }
 
+    check(context) {
+        const parentType = this.checkParent(context);
+        return parentType ? parentType.checkMember(context, this.id, this.name) : VoidType.instance;
+    }
 
-MemberSelector.prototype.transpile = function(transpiler) {
-    var parent = this.resolveParent(transpiler.context);
-    parent.transpileParent(transpiler);
-    transpiler.append(".");
-    var parentType = this.checkParent(transpiler.context);
-    parentType.transpileMember(transpiler, this.name);
-    return false;
-};
+    interpret(context) {
+        // resolve parent to keep clarity
+        const parent = this.resolveParent(context);
+        const instance = parent.interpret(context);
+        if (instance == null || instance == NullValue.instance)
+            throw new NullReferenceError();
+        else
+            return instance.getMemberValue(context, this.name, true);
+    }
 
-MemberSelector.prototype.toString = function() {
-	return this.parent.toString() + "." + this.name;
-};
-
-MemberSelector.prototype.check = function(context) {
-    var parentType = this.checkParent(context);
-    return parentType ? parentType.checkMember(context, this.id, this.name) : VoidType.instance;
-};
-
-MemberSelector.prototype.interpret = function(context) {
-    // resolve parent to keep clarity
-    var parent = this.resolveParent(context);
-    var instance = parent.interpret(context);
-    if (instance == null || instance == NullValue.instance)
-        throw new NullReferenceError();
-    else
-        return instance.getMemberValue(context, this.name, true);
-};
-
-
-MemberSelector.prototype.resolveParent = function(context) {
-    if(this.parent instanceof UnresolvedIdentifier) {
-        this.parent.checkMember(context);
-        return this.parent.resolved;
-    } else
-        return this.parent;
-};
-
-exports.MemberSelector = MemberSelector;
-
+    resolveParent(context) {
+        if(this.parent instanceof UnresolvedIdentifier) {
+            this.parent.checkMember(context);
+            return this.parent.resolved;
+        } else
+            return this.parent;
+    }
+}

@@ -1,80 +1,68 @@
-var Literal = require("./Literal").Literal;
-var SetValue = require("../value/SetValue").SetValue;
-var SetType = require("../type/SetType").SetType;
-var MissingType = require("../type/MissingType").MissingType;
-var DecimalType = require("../type/DecimalType").DecimalType;
-var IntegerType = require("../type/IntegerType").IntegerType;
-var CharacterType = require("../type/CharacterType").CharacterType;
-var TextType = require("../type/TextType").TextType;
-var DecimalValue = require("../value/DecimalValue").DecimalValue;
-var TextValue = require("../value/TextValue").TextValue;
-var ExpressionList = require("../utils/ExpressionList").ExpressionList;
-var inferExpressionsType = require("../utils/TypeUtils").inferExpressionsType;
+import Literal from './Literal.js'
+import { ExpressionList } from '../expression/index.js'
+import { SetValue, DecimalValue, TextValue } from '../value/index.js'
+import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from '../type/index.js'
+import { inferExpressionsType } from '../utils/index.js'
+import StrictSet from "../intrinsic/StrictSet.js"
 
-function SetLiteral(expressions) {
-    expressions = expressions || new ExpressionList();
-	Literal.call(this, "<" + expressions.toString() + ">", new SetValue(MissingType.instance));
-	this.itemType = null;
-    this.expressions = expressions;
-	return this;
+export default class SetLiteral extends Literal {
+
+    constructor(expressions) {
+        expressions = expressions || new ExpressionList();
+        super("<" + expressions.toString() + ">", new SetValue(MissingType.instance));
+        this.itemType = null;
+        this.expressions = expressions;
+    }
+
+    check(context) {
+        if(this.itemType==null) {
+            this.itemType = inferExpressionsType(context, this.expressions);
+            this.type = new SetType(this.itemType);
+        }
+        return this.type;
+    }
+
+    declare(transpiler) {
+        transpiler.require(StrictSet);
+        this.expressions.declare(transpiler);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("new StrictSet([");
+        this.expressions.transpile(transpiler);
+        transpiler.append("])");
+    }
+
+    interpret(context) {
+        const self = this;
+        this.check(context); // force computation of itemType
+        const value = new SetValue(this.itemType);
+        this.expressions.forEach(expression => {
+            let item = expression.interpret(context);
+            item = self.interpretPromotion(item);
+            value.add(item);
+        });
+        return value;
+    }
+
+    interpretPromotion(item) {
+        if (item == null)
+            return item;
+        if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
+            return new DecimalValue(item.DecimalValue());
+        else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
+            return new TextValue(item.value);
+        else
+            return item;
+    }
+
+    toDialect(writer) {
+        if(this.expressions!=null) {
+            writer.append('<');
+            this.expressions.toDialect(writer);
+            writer.append('>');
+        } else
+            writer.append("< >");
+    }
 }
 
-SetLiteral.prototype = Object.create(Literal.prototype);
-SetLiteral.prototype.constructor = SetLiteral;
-
-
-SetLiteral.prototype.check = function(context) {
-	if(this.itemType==null) {
-		this.itemType = inferExpressionsType(context, this.expressions);
-        this.type = new SetType(this.itemType);
-	}
-	return this.type;
-};
-
-
-SetLiteral.prototype.declare = function(transpiler) {
-    var StrictSet = require("../intrinsic/StrictSet").StrictSet;
-    transpiler.require(StrictSet);
-    this.expressions.declare(transpiler);
-};
-
-
-SetLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("new StrictSet([");
-    this.expressions.transpile(transpiler);
-    transpiler.append("])");
-};
-
-SetLiteral.prototype.interpret = function(context) {
-    var self = this;
-    this.check(context); // force computation of itemType
-    var value = new SetValue(this.itemType);
-    this.expressions.forEach(function(expression) {
-        var item = expression.interpret(context);
-        item = self.interpretPromotion(item);
-        value.add(item);
-    });
-    return value;
-};
-
-SetLiteral.prototype.interpretPromotion = function(item) {
-    if (item == null)
-        return item;
-    if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
-        return new DecimalValue(item.DecimalValue());
-    else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
-        return new TextValue(item.value);
-    else
-        return item;
-};
-
-SetLiteral.prototype.toDialect = function(writer) {
-    if(this.expressions!=null) {
-        writer.append('<');
-        this.expressions.toDialect(writer);
-        writer.append('>');
-    } else
-        writer.append("< >");
-};
-
-exports.SetLiteral = SetLiteral;

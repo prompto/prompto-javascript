@@ -1,12 +1,8 @@
-var SetterMethodDeclaration = require("./SetterMethodDeclaration").SetterMethodDeclaration;
+import SetterMethodDeclaration from './SetterMethodDeclaration.js'
 
-function NativeSetterMethodDeclaration(id, statements) {
-    SetterMethodDeclaration.call(this, id, statements);
-    return this;
+export default class NativeSetterMethodDeclaration extends SetterMethodDeclaration {
+
+    constructor(id, statements) {
+        super(id, statements);
+    }
 }
-
-NativeSetterMethodDeclaration.prototype = Object.create(SetterMethodDeclaration.prototype);
-NativeSetterMethodDeclaration.prototype.contructor = NativeSetterMethodDeclaration;
-
-
-exports.NativeSetterMethodDeclaration = NativeSetterMethodDeclaration;

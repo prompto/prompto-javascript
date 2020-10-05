@@ -1,97 +1,89 @@
-var Parameter = require("./Parameter").Parameter;
-var MethodType = require("../type/MethodType").MethodType;
-var ContextualExpression = require("../value/ContextualExpression").ContextualExpression;
-var ArrowExpression = require("../expression/ArrowExpression").ArrowExpression;
-var ArrowValue = require("../value/ArrowValue").ArrowValue;
+import Parameter from './Parameter.js'
+import { MethodType } from '../type/index.js'
+import { ArrowValue, ContextualExpression } from '../value/index.js'
+import { ArrowExpression } from '../expression/index.js'
+import { SyntaxError } from '../error/index.js'
 
-function MethodParameter(id) {
-	Parameter.call(this, id);
-	return this;
+export default class MethodParameter extends Parameter {
+
+    constructor(id) {
+        super(id);
+    }
+
+    getSignature(dialect) {
+        return this.name;
+    }
+
+    toString() {
+        return this.name;
+    }
+
+    getProto() {
+        return this.name;
+    }
+
+    register(context) {
+        const actual = context.getRegisteredValue(this.name);
+        if(actual!=null) {
+            throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
+        }
+        context.registerValue(this);
+    }
+
+    check(context) {
+        const actual = context.getRegisteredDeclaration(this.name);
+        if(actual==null) {
+            throw new SyntaxError("Unknown method: \"" + this.name + "\"");
+        }
+    }
+
+    checkValue(context, expression) {
+        const isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+        return isArrow ? this.checkArrowValue(context, expression) : super.checkValue(context, expression);
+    }
+
+    checkArrowValue(context, expression) {
+        return new ArrowValue(this.getDeclaration(context), expression.calling, expression.expression); // TODO check
+    }
+
+    getType(context) {
+        const method = this.getDeclaration(context);
+        return new MethodType(method);
+    }
+
+    getDeclaration(context) {
+        const methods = context.getRegisteredDeclaration(this.name);
+        if (methods)
+            return methods.getFirst();
+        else
+            return null;
+    }
+
+    declare(transpiler) {
+        // nothing to do ?
+    }
+
+    getTranspiledName(context) {
+        const method = this.getDeclaration(context);
+        return method.getTranspiledName(context);
+    }
+
+    transpileCall(transpiler, expression) {
+        if(!this.transpileArrowExpressionCall(transpiler, expression))
+            expression.transpile(transpiler);
+    }
+
+    transpileArrowExpressionCall(transpiler, expression) {
+        if(!(expression instanceof ContextualExpression) || !(expression.expression instanceof ArrowExpression))
+            return false;
+        const target = this.getType(transpiler.context);
+        target.transpileArrowExpression(transpiler, expression.expression);
+        return true;
+    }
+
+    equals(other) {
+        return other === this || (other instanceof MethodParameter && this.name === other.name);
+    }
 }
 
-MethodParameter.prototype = Object.create(Parameter.prototype);
-MethodParameter.prototype.constructor = MethodParameter;
 
-MethodParameter.prototype.getSignature = function(dialect) {
-	return this.name;
-};
-
-MethodParameter.prototype.toString = function() {
-	return this.name;
-};
-
-MethodParameter.prototype.getProto = function() {
-	return this.name;
-};
-
-
-MethodParameter.prototype.register = function(context) {
-	var actual = context.getRegisteredValue(this.name);
-	if(actual!=null) {
-		throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
-	}
-	context.registerValue(this);
-};
-
-MethodParameter.prototype.check = function(context) {
-	var actual = context.getRegisteredDeclaration(this.name);
-	if(actual==null) {
-		throw new SyntaxError("Unknown method: \"" + this.name + "\"");
-	}
-};
-
-
-MethodParameter.prototype.checkValue = function(context, expression) {
-	var isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
-	return isArrow ? this.checkArrowValue(context, expression) : Parameter.prototype.checkValue.call(this, context, expression);
-};
-
-
-MethodParameter.prototype.checkArrowValue = function(context, expression) {
-	return new ArrowValue(this.getDeclaration(context), expression.calling, expression.expression); // TODO check
-};
-
-
-MethodParameter.prototype.getType = function(context) {
-    var method = this.getDeclaration(context);
-    return new MethodType(method);
-};
-
-MethodParameter.prototype.getDeclaration = function(context) {
-    var methods = context.getRegisteredDeclaration(this.name);
-    if (methods)
-        return methods.getFirst();
-    else
-        return null;
-};
-
-MethodParameter.prototype.declare = function(transpiler) {
-    // nothing to do ?
-};
-
-MethodParameter.prototype.getTranspiledName = function(context) {
-    var method = this.getDeclaration(context);
-    return method.getTranspiledName(context);
-};
-
-
-MethodParameter.prototype.transpileCall = function(transpiler, expression) {
-	if(!this.transpileArrowExpressionCall(transpiler, expression))
-		expression.transpile(transpiler);
-};
-
-MethodParameter.prototype.transpileArrowExpressionCall = function(transpiler, expression) {
-	if(!(expression instanceof ContextualExpression) || !(expression.expression instanceof ArrowExpression))
-		return false;
-	var target = this.getType(transpiler.context);
-	target.transpileArrowExpression(transpiler, expression.expression);
-	return true;
-}
-
-
-MethodParameter.prototype.equals = function(other) {
-    return other === this || (other instanceof MethodParameter && this.name === other.name);
-};
-
-
-exports.MethodParameter = MethodParameter;

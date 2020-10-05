@@ -1,16 +1,13 @@
-var PythonNativeCall = require("./PythonNativeCall").PythonNativeCall;
+import PythonNativeCall from './PythonNativeCall.js'
 
-function Python2NativeCall(statement, module) {
-	PythonNativeCall.call(this, statement, module);
-	return this;
+export default class Python2NativeCall extends PythonNativeCall {
+
+    constructor(statement, module) {
+        super(statement, module);
+    }
+
+    toDialect(writer) {
+        writer.append("Python2: ");
+        super.toDialect(writer);
+    }
 }
-
-Python2NativeCall.prototype = Object.create(PythonNativeCall.prototype);
-Python2NativeCall.prototype.constructor = Python2NativeCall;
-
-Python2NativeCall.prototype.toDialect = function(writer) {
-    writer.append("Python2: ");
-    PythonNativeCall.prototype.toDialect.call(this, writer);
-};
-
-exports.Python2NativeCall = Python2NativeCall;

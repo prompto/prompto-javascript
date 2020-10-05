@@ -1,8 +1,8 @@
-var Period = require("./Period").Period;
-var LocalDate = require("./LocalDate").LocalDate;
-var LocalTime = require("./LocalTime").LocalTime;
+const LocalDate = require('./LocalDate.js').default;
+const LocalTime = require('./LocalTime.js').default;
+const Period = require('./Period.js').default;
 
-function DateTime(date, tzOffset) {
+export default function DateTime(date, tzOffset) {
     this.date = date;
     // can't just use native Date since it's tzOffset is bound to the running location
     this.tzOffset = tzOffset;
@@ -249,6 +249,3 @@ DateTime.prototype.getTime = function() {
     epoch = epoch % (24 * 60 * 60 * 1000);
     return new LocalTime(new Date(epoch));
 };
-
-
-exports.DateTime = DateTime;

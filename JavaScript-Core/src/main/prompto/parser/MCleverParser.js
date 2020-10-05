@@ -1,13 +1,13 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? require("fs") : {}; // nodejs only
-var antlr4 = require("antlr4/index");
-var MIndentingLexer = require("./MIndentingLexer").MIndentingLexer;
-var MParser = require("./MParser").MParser;
-var MPromptoBuilder = require("./MPromptoBuilder").MPromptoBuilder;
+import antlr4 from 'antlr4';
+import MParser from './MParser.js'
+import MIndentingLexer from './MIndentingLexer.js'
+import MPromptoBuilder from './MPromptoBuilder.js'
+import { importFsIfNode } from '../utils/index.js'
+const fs = importFsIfNode();
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
-		if(isNodeJs && fs.existsSync(input)) {
+		if(fs && fs.existsSync && fs.existsSync(input)) {
 			input = new antlr4.FileStream(input);
 		} else {
 			input = new antlr4.InputStream(input);
@@ -22,38 +22,37 @@ function createInput(input) {
 	return input;
 }
 
-function MCleverParser(input) {
-	MParser.call(this,createInput(input));
-	this.path = "";
-	return this;
+export default class MCleverParser extends MParser {
+
+	constructor(input) {
+		super(createInput(input));
+		this.path = "";
+		return this;
+	}
+
+	parse() {
+		return this.parse_declaration_list();
+	}
+
+	parse_declaration_list() {
+		return this.doParse(this.declaration_list, true);
+	}
+
+	arse_repl_input() {
+		return this.doParse(this.repl, true);
+	}
+
+	equalToken() {
+		return MParser.EQUAL;
+	}
+
+	doParse(rule, addLF) {
+		this.getTokenStream().tokenSource.addLF = addLF;
+		const tree = rule.bind(this)();
+		const builder = new MPromptoBuilder(this);
+		const walker = new antlr4.tree.ParseTreeWalker();
+		walker.walk(builder, tree);
+		return builder.getNodeValue(tree);
+	}
+
 }
-
-MCleverParser.prototype = Object.create(MParser.prototype);
-MCleverParser.prototype.constructor = MCleverParser;
-
-MCleverParser.prototype.parse = function() {
-	return this.parse_declaration_list();
-};
-	
-MCleverParser.prototype.parse_declaration_list = function() {
-	return this.doParse(this.declaration_list, true);
-};
-
-MCleverParser.prototype.parse_repl_input = function() {
-	return this.doParse(this.repl, true);
-};
-
-MCleverParser.prototype.equalToken = function() {
-    return MParser.EQUAL;
-};
-
-MCleverParser.prototype.doParse = function(rule, addLF) {
-    this.getTokenStream().tokenSource.addLF = addLF;
-    var tree = rule.bind(this)();
-    var builder = new MPromptoBuilder(this);
-    var walker = new antlr4.tree.ParseTreeWalker();
-    walker.walk(builder, tree);
-    return builder.getNodeValue(tree);
-};
-
-exports.MCleverParser = MCleverParser;

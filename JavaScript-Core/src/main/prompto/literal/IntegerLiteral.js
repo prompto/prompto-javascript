@@ -1,59 +1,26 @@
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var Literal = require("./Literal").Literal;
-var IntegerType = require("../type/IntegerType").IntegerType;
+import Literal from './Literal.js'
+import { IntegerType } from '../type/index.js'
+import { IntegerValue } from '../value/index.js'
 
 function parse(value) {
 	return parseInt(value);
 }
 
-function IntegerLiteral(text, value) {
-	Literal.call(this, text, new IntegerValue(value || parse(text)));
-	return this;
+export default class IntegerLiteral extends Literal {
+
+    constructor(text, value) {
+        super(text, new IntegerValue(value || parse(text)));
+    }
+
+    check(context) {
+        return IntegerType.instance;
+    }
+
+    declare(transpiler) {
+        // nothing to do;
+    }
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
 }
-
-IntegerLiteral.prototype = Object.create(Literal.prototype);
-IntegerLiteral.prototype.constructor = IntegerLiteral;
-
-IntegerLiteral.prototype.check = function(context) {
-	return IntegerType.instance;
-};
-
-
-IntegerLiteral.prototype.declare = function(transpiler) {
-    // nothing to do;
-};
-
-
-IntegerLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append(this.text);
-};
-
-function MinIntegerLiteral() {
-    IntegerLiteral.call(this, "MIN_INTEGER", -0x20000000000000);
-    return this;
-}
-
-MinIntegerLiteral.prototype = Object.create(IntegerLiteral.prototype);
-MinIntegerLiteral.prototype.constructor = MinIntegerLiteral;
-
-MinIntegerLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("-0x20000000000000");
-};
-
-
-function MaxIntegerLiteral() {
-    IntegerLiteral.call(this, "MAX_INTEGER", 0x20000000000000);
-    return this;
-}
-
-MaxIntegerLiteral.prototype = Object.create(IntegerLiteral.prototype);
-MaxIntegerLiteral.prototype.constructor = MaxIntegerLiteral;
-
-
-MaxIntegerLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("0x20000000000000");
-};
-
-exports.IntegerLiteral = IntegerLiteral;
-exports.MinIntegerLiteral = MinIntegerLiteral;
-exports.MaxIntegerLiteral = MaxIntegerLiteral;

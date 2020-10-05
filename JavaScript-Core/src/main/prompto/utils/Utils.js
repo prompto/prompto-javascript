@@ -1,5 +1,4 @@
-/* global ArrayBuffer, Uint8Array */
-function equalObjects(o1, o2) {
+export function equalObjects(o1, o2) {
     if(Object.is(o1, o2))
         return true;
     else
@@ -7,7 +6,7 @@ function equalObjects(o1, o2) {
 
 }
 
-function equalArrays(o1, o2) {
+export function equalArrays(o1, o2) {
 	o1 = o1 || null;
 	o2 = o2 || null;
 	if(o1===o2) {
@@ -19,7 +18,7 @@ function equalArrays(o1, o2) {
 	if(o1.length !== o2.length) {
 		return false;
 	}
-	for(var i=0;i<o1.length;i++) {
+	for(let i=0;i<o1.length;i++) {
 		if(!equalObjects(o1[i], o2[i])) {
 			return false;
 		}
@@ -27,8 +26,8 @@ function equalArrays(o1, o2) {
 	return true;
 }
 
-function arrayContains(a, o) {
-	for(var i=0;i<a.length;i++) {
+export function arrayContains(a, o) {
+	for(let i=0;i<a.length;i++) {
 		if(equalObjects(a[i], o)) {
 			return true;
 		}
@@ -36,7 +35,7 @@ function arrayContains(a, o) {
 	return false;
 }
 
-function removeAccents(s) {
+export function removeAccents(s) {
     return s.replace(/[ÁÀÃÂÄ]/gi,"A")
         .replace(/[áàãâä]/gi,"a")
         .replace(/[ÉÈËÊ]/gi,"E")
@@ -53,36 +52,28 @@ function removeAccents(s) {
         .replace(/[ñ]/gi, "n");
 }
 
-function getUtf8StringLength(s) {
+export function getUtf8StringLength(s) {
     return s.split('')
-        .map(function (c) {
-            return c.charCodeAt(0);
-        })
+        .map(c => c.charCodeAt(0))
         .map(getUtf8CharLength)
-        .reduce(function(prev, cur) {
-            return prev + cur;
-        }, 0);
+        .reduce((prev, cur) => prev + cur, 0);
 }
 
 /* the below inspired by MDN StringView.js */
 
-function getUtf8CharLength(c) {
+export function getUtf8CharLength(c) {
     return c < 0x80 ? 1 : c < 0x800 ? 2 : c < 0x10000 ? 3 : c < 0x200000 ? 4 : c < 0x4000000 ? 5 : 6;
 }
 
-function stringToUtf8Buffer(s) {
-    var codes = s.split('')
-        .map(function (c) {
-            return c.charCodeAt(0);
-        });
-    var size = codes.map(getUtf8CharLength)
-        .reduce(function(prev, cur) {
-            return prev + cur;
-        }, 0);
-    var buffer = new ArrayBuffer(size);
-    var view = new Uint8Array(buffer);
-    var idx = 0;
-    codes.forEach(function(c) {
+export function stringToUtf8Buffer(s) {
+    const codes = s.split('')
+        .map(c => c.charCodeAt(0));
+    const size = codes.map(getUtf8CharLength)
+        .reduce((prev, cur) => prev + cur, 0);
+    const buffer = new ArrayBuffer(size);
+    const view = new Uint8Array(buffer);
+    let idx = 0;
+    codes.forEach(c => {
         if (c < 0x80 /* 128 */) {
             /* one byte */
             view[idx++] = c;
@@ -121,15 +112,15 @@ function stringToUtf8Buffer(s) {
     return buffer;
 }
 
-function utf8BufferToString(buffer) {
+export function utf8BufferToString(buffer) {
     // work around jest/node sandbox issue where instanceof ArrayBuffer will fail
     if(buffer instanceof ArrayBuffer || Object.getPrototypeOf(buffer).constructor.name===ArrayBuffer.name)
         buffer = new Uint8Array(buffer);
-    var chars = [];
-    var idx = 0;
+    const chars = [];
+    let idx = 0;
     while(idx<buffer.length) {
-        var byte = buffer[idx];
-        var code = 0;
+        const byte = buffer[idx];
+        let code = 0;
         if (byte > 251 && byte < 254 && idx + 5 < buffer.length) {
             /* (byte - 252 << 30) may be not safe in ECMAScript! So...: */
             /* six bytes */
@@ -165,18 +156,18 @@ function utf8BufferToString(buffer) {
 }
 
 
-function multiplyArray(items, count) {
-    var result = [];
+export function multiplyArray(items, count) {
+    let result = [];
     while(--count>=0) {
         result = result.concat(items);
     }
     return result;
 }
 
-function decimalToString(d) {
+export function decimalToString(d) {
     // mimic 0.0######
-    var s = d.toString();
-    var i = s.indexOf('.');
+    const s = d.toString();
+    let i = s.indexOf('.');
     if(i>=0) {
         // fix IEEE issue
         i = s.indexOf('000000', i);
@@ -188,31 +179,31 @@ function decimalToString(d) {
         return s + ".0";
 }
 
-function isABoolean(o) {
+export function isABoolean(o) {
     return typeof(o) === "boolean";
 }
 
-function isAnInteger(o) {
+export function isAnInteger(o) {
     return typeof(o) === "number" && Number.isInteger(o);
 }
 
-function isADecimal(o) {
+export function isADecimal(o) {
     return typeof(o) === "number" && !Number.isInteger(o);
 }
 
-function isAText(o) {
+export function isAText(o) {
     return typeof(o) === 'string' || o instanceof String;
 }
 
-function isACharacter(o) {
+export function isACharacter(o) {
     return isAText(o) && o.length===1;
 }
 
-function isCharacterUpperCase(char) {
+export function isCharacterUpperCase(char) {
     return !!/[A-Z]/.exec(char[0]);
 }
 
-function compareValues(value1, value2) {
+export function compareValues(value1, value2) {
     if(value1==null && value2==null) {
         return 0;
     } else if(value1==null) {
@@ -224,26 +215,42 @@ function compareValues(value1, value2) {
     } else if(value2.compareTo) {
         return -value2.compareTo(value1);
     } else {
-        var s1 = value1.toString();
-        var s2 = value2.toString();
+        const s1 = value1.toString();
+        const s2 = value2.toString();
         return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
     }
 }
 
-exports.multiplyArray = multiplyArray;
-exports.equalObjects = equalObjects;
-exports.equalArrays = equalArrays;
-exports.arrayContains = arrayContains;
-exports.removeAccents = removeAccents;
-exports.getUtf8StringLength = getUtf8StringLength;
-exports.getUtf8CharLength = getUtf8CharLength;
-exports.stringToUtf8Buffer = stringToUtf8Buffer;
-exports.utf8BufferToString = utf8BufferToString;
-exports.decimalToString = decimalToString;
-exports.isABoolean = isABoolean;
-exports.isAnInteger = isAnInteger;
-exports.isADecimal = isADecimal;
-exports.isAText = isAText;
-exports.isACharacter = isACharacter;
-exports.isCharacterUpperCase = isCharacterUpperCase;
-exports.compareValues = compareValues;
+// borrowed from http://www.2ality.com/2011/11/improving-typeof.html
+export function getTypeName(value) {
+    if (value === null) {
+        return "null";
+    }
+    const t = typeof(value);
+    switch(t) {
+        case "function":
+            if(value.name)
+                return value.name;
+        // no-break
+        case "object":
+            if (value.constructor) {
+                if (value.constructor.name) {
+                    return value.constructor.name;
+                } else {
+                    // Internet Explorer
+                    // Anonymous functions are stringified as follows: 'function () {}'
+                    // => the regex below does not match
+                    const match = value.constructor.toString().match(/^function (.+)\(.*$/);
+                    if (match) {
+                        return match[1];
+                    }
+                }
+            }
+            // fallback, for nameless constructors etc.
+            return Object.prototype.toString.call(value).match(/^\[object (.+)\]$/)[1];
+        default:
+            return t;
+    }
+}
+
+export default {}

@@ -1,10 +1,6 @@
-var WidgetFieldProcessor = require("./WidgetFieldProcessor").WidgetFieldProcessor;
-var WidgetPropertiesProcessor = require("./WidgetPropertiesProcessor").WidgetPropertiesProcessor;
-var PageWidgetOfProcessor = require("./PageWidgetOfProcessor").PageWidgetOfProcessor;
-var InlinedProcessor = require("./InlinedProcessor").InlinedProcessor;
+import { InlinedProcessor, PageWidgetOfProcessor, WidgetFieldProcessor, WidgetPropertiesProcessor } from './index.js'
 
-/* global Map */
-var processors = new Map();
+const processors = new Map();
 
 function forId(id) {
     return forName(id.name);
@@ -23,11 +19,11 @@ function forName(name) {
 
 function loadByName(name) {
     try {
-        var simpleName = name.substring(1) + "Processor";
-        var idx = module.filename.lastIndexOf("/");
-        var modulePath = module.filename.substring(0, idx + 1) + simpleName + ".js";
-        var script = eval("require('" + modulePath + "')");
-        var processor = new script[simpleName]();
+        const simpleName = name.substring(1) + "Processor";
+        const idx = module.filename.lastIndexOf("/");
+        const modulePath = module.filename.substring(0, idx + 1) + simpleName + ".js";
+        const script = eval("require('" + modulePath + "')");
+        const processor = new script[simpleName]();
         processors.set(name, processor);
         return processor;
     } catch (e) {
@@ -46,11 +42,10 @@ function registerAll() {
     register(new InlinedProcessor());
 }
 
-exports.AnnotationProcessors =  {
+export default {
     forId: forId,
     forName: forName,
     register: register,
     registerAll: registerAll
 };
 
-registerAll();

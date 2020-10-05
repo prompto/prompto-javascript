@@ -1,65 +1,57 @@
-var Expression = require("./Expression").Expression;
-var InstanceContext = require("../runtime/Context").InstanceContext;
-var DocumentContext = require("../runtime/Context").DocumentContext;
-var DocumentType = require("../type/DocumentType").DocumentType;
+import Expression from './Expression.js'
+import { InstanceContext, DocumentContext } from '../runtime/index.js'
+import { DocumentType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
-function ThisExpression() {
-    Expression.call(this);
-    return this;
+export default class ThisExpression extends Expression {
+
+   check(context) {
+        if (context instanceof DocumentContext)
+            return DocumentType.instance;
+        if (context != null && !(context instanceof InstanceContext))
+            context = context.getClosestInstanceContext ();
+        if (context instanceof InstanceContext)
+            return context.instanceType;
+        else
+            throw new SyntaxError ("Not in an instance context!");
+    }
+
+    interpret(context) {
+        if (context instanceof DocumentContext)
+            return context.document;
+        if (context != null && !(context instanceof InstanceContext))
+            context = context.getClosestInstanceContext ();
+        if (context instanceof InstanceContext)
+            return context.instance;
+        else
+            throw new SyntaxError ("Not in an instance context!");
+    }
+
+    toDialect(writer) {
+        writer.toDialect(this);
+    }
+
+    toEDialect(writer) {
+        writer.append("self");
+    }
+
+    toODialect(writer) {
+        writer.append("this");
+    }
+
+    toMDialect(writer) {
+        writer.append("self");
+    }
+
+    toString() {
+        return "this";
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpile(transpiler) {
+        transpiler.append("this");
+    }
 }
-
-ThisExpression.prototype = Object.create(Expression.prototype);
-ThisExpression.prototype.constructor = ThisExpression;
-
-ThisExpression.prototype.check = function(context) {
-    if (context instanceof DocumentContext)
-        return DocumentType.instance;
-    if (context != null && !(context instanceof InstanceContext))
-        context = context.getClosestInstanceContext ();
-    if (context instanceof InstanceContext)
-        return context.instanceType;
-    else
-        throw new SyntaxError ("Not in an instance context!");
-};
-
-
-ThisExpression.prototype.interpret = function(context) {
-    if (context instanceof DocumentContext)
-        return context.document;
-    if (context != null && !(context instanceof InstanceContext))
-        context = context.getClosestInstanceContext ();
-    if (context instanceof InstanceContext)
-        return context.instance;
-    else
-        throw new SyntaxError ("Not in an instance context!");
-};
-
-ThisExpression.prototype.toDialect = function(writer) {
-    writer.toDialect(this);
-};
-
-ThisExpression.prototype.toEDialect = function(writer) {
-    writer.append("self");
-};
-
-ThisExpression.prototype.toODialect = function(writer) {
-    writer.append("this");
-};
-
-ThisExpression.prototype.toMDialect = function(writer) {
-    writer.append("self");
-};
-
-ThisExpression.prototype.toString = function() {
-    return "this";
-};
-
-ThisExpression.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-ThisExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("this");
-};
-
-exports.ThisExpression = ThisExpression;

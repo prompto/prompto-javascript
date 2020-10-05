@@ -1,11 +1,10 @@
-var PythonExpression = require("./PythonExpression").PythonExpression;
+import PythonExpression from './PythonExpression.js'
 
-function PythonSelectorExpression(parent) {
-    PythonExpression.call(this);
-    this.parent = parent || null;
-    return this;
+export default class PythonSelectorExpression extends PythonExpression {
+
+    constructor(parent) {
+        super();
+        this.parent = parent || null;
+    }
 }
-PythonSelectorExpression.prototype = Object.create(PythonExpression.prototype);
-PythonSelectorExpression.prototype.constructor = PythonSelectorExpression;
 
-exports.PythonSelectorExpression = PythonSelectorExpression;

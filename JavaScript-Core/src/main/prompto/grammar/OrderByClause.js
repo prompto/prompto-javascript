@@ -1,52 +1,43 @@
-var Section = require("../parser/Section").Section;
+import Section from '../parser/Section.js'
 
-function OrderByClause(ids, descending) {
-    Section.call(this);
-    this.ids = ids;
-    this.descending = descending || false;
-    return this;
+export default class OrderByClause extends Section {
+
+    constructor(ids, descending) {
+        super();
+        this.ids = ids;
+        this.descending = descending || false;
+    }
+
+    toDialect(writer) {
+        this.ids.forEach(id => {
+            writer.append(id.toString());
+            writer.append(".");
+        });
+        writer.trimLast(1);
+        if(this.descending)
+            writer.append(" descending");
+    }
+
+    checkQuery(context) {
+        const id = this.ids[0];
+        const decl = context.findAttribute(id.name);
+        if(decl==null)
+            context.problemListener.reportUnknownAttribute(id);
+    }
+
+    interpretQuery(context, query) {
+        const id = this.ids[0];
+        const info = context.findAttribute(id.name).getAttributeInfo();
+        query.addOrderByClause(info, this.descending);
+    }
+
+    declare(transpiler) {
+        // nothing to do
+    }
+
+    transpileQuery(transpiler, builder) {
+        const id = this.ids[0];
+        const info = transpiler.context.findAttribute(id.name).getAttributeInfo();
+        transpiler.append(builder).append(".addOrderByClause(").append(info.toTranspiled()).append(", ").append(this.descending).append(");").newLine();
+    }
 }
-
-
-OrderByClause.prototype = Object.create(Section.prototype);
-OrderByClause.prototype.constructor = OrderByClause;
-
-
-OrderByClause.prototype.toDialect = function(writer) {
-    this.ids.forEach(function(id) {
-        writer.append(id.toString());
-        writer.append(".");
-    });
-    writer.trimLast(1);
-    if(this.descending)
-        writer.append(" descending");
-};
-
-
-OrderByClause.prototype.checkQuery = function(context) {
-    var id = this.ids[0];
-    var decl = context.findAttribute(id.name);
-    if(decl==null)
-        context.problemListener.reportUnknownAttribute(id);
-};
-
-
-OrderByClause.prototype.interpretQuery = function(context, query) {
-    var id = this.ids[0];
-    var info = context.findAttribute(id.name).getAttributeInfo();
-    query.addOrderByClause(info, this.descending);
-};
-
-
-OrderByClause.prototype.declare = function(transpiler) {
-    // nothing to do
-};
-
-
-OrderByClause.prototype.transpileQuery = function(transpiler, builder) {
-    var id = this.ids[0];
-    var info = transpiler.context.findAttribute(id.name).getAttributeInfo();
-    transpiler.append(builder).append(".addOrderByClause(").append(info.toTranspiled()).append(", ").append(this.descending).append(");").newLine();
-};
-
-exports.OrderByClause = OrderByClause;

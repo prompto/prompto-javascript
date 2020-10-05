@@ -1,11 +1,8 @@
-var CSharpLiteral = require("./CSharpLiteral").CSharpLiteral;
+import CSharpLiteral from './CSharpLiteral.js'
 
-function CSharpCharacterLiteral(text) {
-    CSharpLiteral.call(this, text);
-    return this;
+export default class CSharpCharacterLiteral extends CSharpLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
-
-CSharpCharacterLiteral.prototype = Object.create(CSharpLiteral.prototype);
-CSharpCharacterLiteral.prototype.constructor = CSharpCharacterLiteral;
-
-exports.CSharpCharacterLiteral = CSharpCharacterLiteral;

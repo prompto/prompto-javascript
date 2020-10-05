@@ -1,10 +1,10 @@
-var List = require("./List").List;
-var StrictSet = require("./StrictSet").StrictSet;
-var equalObjects = require("../utils/Utils").equalObjects;
+const List = require('./List.js').default;
+const StrictSet = require('./StrictSet.js').default;
+const equalObjects = require('../utils/Utils.js').equalObjects;
 
-function Tuple(mutable, items) {
-	List.call(this, mutable, items);
-	return this;
+export default function Tuple(mutable, items) {
+    List.call(this, mutable, items);
+    return this;
 }
 
 Tuple.prototype = Object.create(List.prototype);
@@ -36,11 +36,7 @@ Tuple.prototype.equals = function(o) {
 };
 
 Tuple.prototype.toString = function() {
-	return "(" + this.join(", ") + ")";
+    return "(" + this.join(", ") + ")";
 };
 
 Tuple.prototype.getText = Tuple.prototype.toString;
-
-
-
-exports.Tuple = Tuple;

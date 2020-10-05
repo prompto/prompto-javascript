@@ -1,20 +1,18 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
 
-function VoidType() {
-	NativeType.call(this, new Identifier("Void"));
-	return this;
+export default class VoidType extends NativeType {
+
+    constructor() {
+        super(new Identifier("Void"));
+    }
+
+    isAssignableFrom(context, other) {
+        // illegal, but happens during syntax checking, if error is collected rather than thrown
+        return false;
+    }
 }
-
-VoidType.prototype = Object.create(NativeType.prototype);
-VoidType.prototype.constructor = VoidType;
-
-VoidType.prototype.isAssignableFrom = function(context, other) {
-    // illegal, but happens during syntax checking, if error is collected rather than thrown
-	return false;
-};
 
 VoidType.instance = new VoidType();
 
 
-exports.VoidType = VoidType;

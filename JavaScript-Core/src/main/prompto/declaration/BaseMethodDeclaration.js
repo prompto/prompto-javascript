@@ -1,132 +1,117 @@
-var BaseDeclaration = require("./BaseDeclaration").BaseDeclaration;
-var ParameterList = require("../param/ParameterList").ParameterList;
-var ArgumentList = require("../grammar/ArgumentList").ArgumentList;
-var Argument = require("../grammar/Argument").Argument;
-var ProblemListener = require("../problem/ProblemListener").ProblemListener;
+import BaseDeclaration from './BaseDeclaration.js'
+import { ArgumentList, Argument } from '../grammar/index.js'
+import { ParameterList } from '../param/index.js'
+import { ProblemListener } from '../problem/index.js'
+import { SyntaxError } from '../error/index.js'
 
+export default class BaseMethodDeclaration extends BaseDeclaration {
 
-function BaseMethodDeclaration(id, parameters, returnType) {
-    BaseDeclaration.call(this, id);
-    this.parameters = parameters || new ParameterList();
-    this.returnType = returnType || null;
-    this.memberOf = null;
-    this.closureOf = null;
-    return this;
-}
-
-BaseMethodDeclaration.prototype  = Object.create(BaseDeclaration.prototype);
-BaseMethodDeclaration.prototype.constructor = BaseMethodDeclaration;
-
-
-BaseMethodDeclaration.prototype.getDeclarationType = function() {
-    return "Method";
-};
-
-BaseMethodDeclaration.prototype.getSignature = function(context) {
-    var s = [];
-    this.parameters.map(function(arg) {
-        s.push(arg.getProto());
-    });
-    return "(" + s.join(", ") + ")";
-};
-
-BaseMethodDeclaration.prototype.getProto = function(context) {
-    return this.parameters.map(function(arg) {
-        return arg.getProto(context);
-    }).join("/");
-};
-
-BaseMethodDeclaration.prototype.getTranspiledName = function(context) {
-    // if this is a template instance, name is already transpiled
-    if(this.name.indexOf("$")>0)
-        return this.name;
-    else
-        return [this.name].concat(this.parameters.map(function(arg) { return arg.getTranspiledName(context); })).join("$");
-};
-
-
-BaseMethodDeclaration.prototype.transpileProlog = function(transpiler) {
-    if (this.memberOf)
-        transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName(transpiler.context)).append(" = function (");
-    else
-        transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
-    this.parameters.transpile(transpiler);
-    transpiler.append(") {").indent();
-};
-
-
-BaseMethodDeclaration.prototype.transpileEpilog = function(transpiler) {
-    transpiler.dedent().append("}");
-    if(this.memberOf)
-        transpiler.append(";");
-    transpiler.newLine();
-};
-
-
-BaseMethodDeclaration.prototype.unregister = function(context) {
-    context.unregisterMethodDeclaration (this, this.getProto(context));
-};
-
-
-BaseMethodDeclaration.prototype.register = function(context) {
-    context.registerMethodDeclaration(this);
-};
-
-
-BaseMethodDeclaration.prototype.registerParameters = function(context) {
-    if(this.parameters!=null) {
-        this.parameters.register(context);
+    constructor(id, parameters, returnType) {
+        super(id);
+        this.parameters = parameters || new ParameterList();
+        this.returnType = returnType || null;
+        this.memberOf = null;
+        this.closureOf = null;
     }
-};
 
-
-BaseMethodDeclaration.prototype.declareArguments = function(transpiler) {
-    if(this.parameters!=null) {
-        this.parameters.declare(transpiler);
+    getDeclarationType() {
+        return "Method";
     }
-};
 
-BaseMethodDeclaration.prototype.isAssignableTo = function(context, args, checkInstance, allowDerived) {
-    var listener = context.problemListener;
-    try {
-        context.problemListener = new ProblemListener();
-        var local = context.newLocalContext();
-        this.registerParameters(local);
-        var argsList = new ArgumentList(args);
-        for(var i=0; i<this.parameters.length; i++) {
-            var parameter = this.parameters[i];
-            var idx = argsList.findIndex(parameter.id.name);
-            var argument = idx>=0 ? argsList[idx] : null;
-            if(argument==null) { // missing argument
-                if(parameter.defaultExpression!=null)
-                    argument = new Argument(parameter, parameter.defaultExpression);
-                else
+    getSignature(context) {
+        const s = [];
+        this.parameters.map(arg => {
+            s.push(arg.getProto());
+        });
+        return "(" + s.join(", ") + ")";
+    }
+
+    getProto(context) {
+        return this.parameters.map(arg => arg.getProto(context)).join("/");
+    }
+
+    getTranspiledName(context) {
+        // if this is a template instance, name is already transpiled
+        if(this.name.indexOf("$")>0)
+            return this.name;
+        else
+            return [this.name].concat(this.parameters.map(arg => arg.getTranspiledName(context))).join("$");
+    }
+
+    transpileProlog(transpiler) {
+        if (this.memberOf)
+            transpiler.append(this.memberOf.name).append(".prototype.").append(this.getTranspiledName(transpiler.context)).append(" = function (");
+        else
+            transpiler.append("function ").append(this.getTranspiledName(transpiler.context)).append(" (");
+        this.parameters.transpile(transpiler);
+        transpiler.append(") {").indent();
+    }
+
+    transpileEpilog(transpiler) {
+        transpiler.dedent().append("}");
+        if(this.memberOf)
+            transpiler.append(";");
+        transpiler.newLine();
+    }
+
+    unregister(context) {
+        context.unregisterMethodDeclaration (this, this.getProto(context));
+    }
+
+    register(context) {
+        context.registerMethodDeclaration(this);
+    }
+
+    registerParameters(context) {
+        if(this.parameters!=null) {
+            this.parameters.register(context);
+        }
+    }
+
+    declareArguments(transpiler) {
+        if(this.parameters!=null) {
+            this.parameters.declare(transpiler);
+        }
+    }
+
+    isAssignableTo(context, args, checkInstance, allowDerived) {
+        const listener = context.problemListener;
+        try {
+            context.problemListener = new ProblemListener();
+            const local = context.newLocalContext();
+            this.registerParameters(local);
+            const argsList = new ArgumentList(args);
+            for(let i=0; i<this.parameters.length; i++) {
+                const parameter = this.parameters[i];
+                const idx = argsList.findIndex(parameter.id.name);
+                let argument = idx>=0 ? argsList[idx] : null;
+                if(argument==null) { // missing argument
+                    if(parameter.defaultExpression!=null)
+                        argument = new Argument(parameter, parameter.defaultExpression);
+                    else
+                        return false;
+                }
+                if(!argument.isAssignableToArgument(local, parameter, this, checkInstance, allowDerived)) {
                     return false;
+                }
+                if(idx>=0)
+                    argsList.remove(idx);
             }
-            if(!argument.isAssignableToArgument(local, parameter, this, checkInstance, allowDerived)) {
+            return argsList.length===0;
+        } catch (e) {
+            if(e instanceof SyntaxError) {
                 return false;
+            } else {
+                throw e;
             }
-            if(idx>=0)
-                argsList.remove(idx);
+        } finally {
+            context.problemListener = listener;
         }
-        return argsList.length===0;
-    } catch (e) {
-        if(e instanceof SyntaxError) {
-            return false;
-        } else {
-            throw e;
-        }
-    } finally {
-        context.problemListener = listener;
     }
-};
 
-
-
-BaseMethodDeclaration.prototype.isEligibleAsMain = function() {
-    return false;
-};
-
-exports.BaseMethodDeclaration = BaseMethodDeclaration;
+    isEligibleAsMain() {
+        return false;
+    }
+}
 
 

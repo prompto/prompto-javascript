@@ -1,6 +1,5 @@
 var yaml = require("js-yaml");
 
-
 exports.yamlRead = function (text) {
     var docs = yaml.safeLoadAll(text);
     return convert(docs);

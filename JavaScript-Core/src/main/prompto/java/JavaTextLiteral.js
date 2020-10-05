@@ -1,11 +1,8 @@
-var JavaLiteral = require("./JavaLiteral").JavaLiteral;
+import JavaLiteral from './JavaLiteral.js'
 
-function JavaTextLiteral(text) {
-	JavaLiteral.call(this, text);
-	return this;
+export default class JavaTextLiteral extends JavaLiteral {
+
+    constructor(text) {
+        super(text);
+    }
 }
-
-JavaTextLiteral.prototype = Object.create(JavaLiteral.prototype);
-JavaTextLiteral.prototype.constructor = JavaTextLiteral;
-
-exports.JavaTextLiteral = JavaTextLiteral;

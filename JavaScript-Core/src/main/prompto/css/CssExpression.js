@@ -1,46 +1,46 @@
-var CssType = require("../type/CssType").CssType;
-var CssValue = require("../value/CssValue").CssValue;
+import { CssType } from '../type/index.js'
+import { CssValue } from '../value/index.js'
 
-function CssExpression() {
-    this.fields = [];
-    return this;
+export default class CssExpression {
+
+    constructor() {
+        this.fields = [];
+    }
+
+    check(context) {
+        return CssType.instance;
+    }
+
+    interpret(context) {
+        return new CssValue(this);
+    }
+
+    toDialect(writer) {
+        writer.append("{");
+        this.fields.forEach(field => {
+            field.toDialect(writer);
+        }, this);
+        writer.append("}");
+    }
+
+    addField(field) {
+        this.fields.push(field);
+    }
+
+    declare(transpiler) {
+        this.fields.forEach(field => {
+            field.declare(transpiler);
+        }, this);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("{");
+        this.fields.forEach(field => {
+            field.transpile(transpiler);
+            transpiler.append(", ");
+        }, this);
+        transpiler.trimLast(", ".length);
+        transpiler.append("}");
+        return false;
+    }
 }
-
-CssExpression.prototype.check = function(context) {
-    return CssType.instance;
-}
-
-CssExpression.prototype.interpret = function(context) {
-    return new CssValue(this);
-}
-
-CssExpression.prototype.toDialect = function(writer) {
-    writer.append("{");
-    this.fields.forEach(function(field) {
-        field.toDialect(writer);
-    }, this);
-    writer.append("}");
-}
-
-CssExpression.prototype.addField = function(field) {
-    this.fields.push(field);
-}
-
-CssExpression.prototype.declare = function(transpiler) {
-    this.fields.forEach(function(field) {
-        field.declare(transpiler);
-    }, this);
-}
-
-CssExpression.prototype.transpile = function(transpiler) {
-    transpiler.append("{");
-    this.fields.forEach(function(field) {
-        field.transpile(transpiler);
-        transpiler.append(", ");
-    }, this);
-    transpiler.trimLast(", ".length);
-    transpiler.append("}");
-    return false;
-}
-
-exports.CssExpression = CssExpression;

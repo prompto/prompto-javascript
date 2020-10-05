@@ -1,11 +1,13 @@
-function Score(value, name) {
-	this.value = value;
-	this.name = name;
-	return this;
+export default class Score {
+
+	constructor(value, name) {
+		this.value = value;
+		this.name = name;
+	}
+
 }
 
 Score.BETTER = new Score(1, "BETTER");
 Score.WORSE = new Score(-1, "WORSE");
 Score.SIMILAR = new Score(0, "SIMILAR");
 
-exports.Score = Score;

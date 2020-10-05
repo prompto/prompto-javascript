@@ -1,76 +1,74 @@
 /* do NOT delete this file, it is NOT generated */
 /* it has to be located in the generated folder */
 /* to work around jest resolver issues */
-var Parser = require("antlr4").Parser;
+import antlr4 from 'antlr4';
 
-function AbstractParser(input) {
-	Parser.call(this, input);
-	return this;
+export default class AbstractParser extends antlr4.Parser {
+
+	constructor(input) {
+		super(input);
+	}
+
+	isText(token, text) {
+		return text === token.text;
+	}
+
+	was(type) {
+		return this.lastHiddenTokenType() === type;
+	}
+
+	wasNot(type) {
+		return this.lastHiddenTokenType() !== type;
+	}
+
+	wasNotWhiteSpace() {
+		return this.lastHiddenTokenType() !== this["WS"];
+	}
+
+	willBe(type) {
+		return this.getTokenStream().LA(1) === type;
+	}
+
+	willNotBe(type) {
+		return this.getTokenStream().LA(1) !== type;
+	}
+
+	nextHiddenTokenType() {
+		const bts = this.getTokenStream();
+		const hidden = bts.getHiddenTokensToRight(bts.index - 1);
+		if (hidden === null || hidden.length === 0) {
+			return 0;
+		} else {
+			return hidden[0].type;
+		}
+	}
+
+	willBeAOrAn() {
+		return this.willBeText("a") || this.willBeText("an");
+	}
+
+	willBeText(text) {
+		return text === this.getTokenStream().LT(1).text;
+	}
+
+	lastHiddenTokenType() {
+		const bts = this.getTokenStream();
+		const hidden = bts.getHiddenTokensToLeft(bts.index);
+		if (hidden === null || hidden.length === 0) {
+			return 0;
+		} else {
+			return hidden[hidden.length - 1].type;
+		}
+	}
+
+	removeErrorListeners() {
+		antlr4.Parser.prototype.removeErrorListeners.call(this);
+		this._input.tokenSource.removeErrorListeners(); // lexer
+	}
+
+	addErrorListener(listener) {
+		antlr4.Parser.prototype.addErrorListener.call(this, listener);
+		this._input.tokenSource.addErrorListener(listener); // lexer
+	}
+
 }
-
-AbstractParser.prototype = Object.create(Parser.prototype);
-AbstractParser.prototype.constructor = AbstractParser;
-
-AbstractParser.prototype.isText = function(token, text) {
-	return text === token.text;
-};
-
-AbstractParser.prototype.was = function(type) {
-	return this.lastHiddenTokenType()===type;
-};
-
-AbstractParser.prototype.wasNot = function(type) {
-	return this.lastHiddenTokenType()!==type;
-};
-
-AbstractParser.prototype.wasNotWhiteSpace = function() {
-    return this.lastHiddenTokenType()!==this["WS"];
-};
-
-AbstractParser.prototype.willBe = function(type) {
-	return this.getTokenStream().LA(1)===type;
-};
-
-AbstractParser.prototype.willNotBe = function(type) {
-	return this.getTokenStream().LA(1)!==type;
-};
-
-AbstractParser.prototype.nextHiddenTokenType = function() {
-	var bts = this.getTokenStream();
-	var hidden = bts.getHiddenTokensToRight(bts.index-1);
-	if(hidden===null || hidden.length===0) {
-		return 0;
-	} else {
-		return hidden[0].type;
-	}
-};
-
-AbstractParser.prototype.willBeAOrAn = function() {
-    return this.willBeText("a") || this.willBeText("an");
-};
-
-AbstractParser.prototype.willBeText = function(text) {
-    return text===this.getTokenStream().LT(1).text;
-};
-
-AbstractParser.prototype.lastHiddenTokenType = function() {
-	var bts = this.getTokenStream();
-	var hidden = bts.getHiddenTokensToLeft(bts.index);
-	if(hidden===null || hidden.length===0) {
-		return 0;
-	} else {
-		return hidden[hidden.length-1].type;
-	}
-};
-
-AbstractParser.prototype.removeErrorListeners = function() {
-    Parser.prototype.removeErrorListeners.call(this);
-    this._input.tokenSource.removeErrorListeners(); // lexer
-};
-
-AbstractParser.prototype.addErrorListener = function(listener) {
-    Parser.prototype.addErrorListener.call(this, listener);
-    this._input.tokenSource.addErrorListener(listener); // lexer
-};
-
-exports.AbstractParser = AbstractParser;

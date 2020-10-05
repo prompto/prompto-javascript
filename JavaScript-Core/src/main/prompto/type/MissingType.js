@@ -1,18 +1,15 @@
-var NativeType = require("./NativeType").NativeType;
-var Identifier = require("../grammar/Identifier").Identifier;
+import NativeType from './NativeType.js'
+import { Identifier } from '../grammar/index.js'
 
-function MissingType() {
-	NativeType.call(this, new Identifier("*"));
-	return this;
+export default class MissingType extends NativeType {
+
+    constructor() {
+        super(new Identifier("*"));
+    }
+
+    isAssignableFrom(context, other) {
+        return true;
+    }
 }
 
-MissingType.prototype = Object.create(NativeType.prototype);
-MissingType.prototype.constructor = MissingType;
-
 MissingType.instance = new MissingType();
-	
-MissingType.prototype.isAssignableFrom = function(context, other) {
-	return true;
-};
-
-exports.MissingType = MissingType;

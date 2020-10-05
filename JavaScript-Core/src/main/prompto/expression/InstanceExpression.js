@@ -1,184 +1,153 @@
-var Expression = require("./Expression").Expression;
-var Variable = require("../runtime/Variable").Variable;
-var LinkedVariable = require("../runtime/LinkedVariable").LinkedVariable;
-var Parameter = require("../param/Parameter").Parameter;
-var Dialect = require("../parser/Dialect").Dialect;
-var CategoryDeclaration = null;
-var VoidType = require("../type/VoidType").VoidType;
-var BooleanType = require("../type/BooleanType").BooleanType;
-var MethodType = require("../type/MethodType").MethodType;
-var ClosureValue = require("../value/ClosureValue").ClosureValue;
-var AttributeDeclaration = require("../declaration/AttributeDeclaration").AttributeDeclaration;
-var MethodDeclarationMap = null;
-var InstanceContext = null;
-var EqualsExpression = null;
-var EqOp = require("../grammar/EqOp").EqOp;
-var BooleanLiteral = null;
+import Expression from './Expression.js'
+import { EqualsExpression } from './index.js'
+import { MethodDeclarationMap, InstanceContext, Variable, LinkedVariable } from '../runtime/index.js'
+import { Dialect } from '../parser/index.js'
+import { Parameter } from '../param/index.js'
+import { AttributeDeclaration, CategoryDeclaration } from '../declaration/index.js'
+import { MethodType, BooleanType, VoidType } from '../type/index.js'
+import { ClosureValue } from '../value/index.js'
+import { EqOp } from '../grammar/index.js'
+import { BooleanLiteral } from '../literal/index.js'
+import { SyntaxError } from '../error/index.js'
 
-exports.resolve = function() {
-    CategoryDeclaration = require("../declaration/CategoryDeclaration").CategoryDeclaration;
-    MethodDeclarationMap = require("../runtime/Context").MethodDeclarationMap;
-    InstanceContext = require("../runtime/Context").InstanceContext;
-    EqualsExpression = require("./EqualsExpression").EqualsExpression;
-    BooleanLiteral = require("../literal/BooleanLiteral").BooleanLiteral;
-}
+export default class InstanceExpression extends Expression {
+  
+    constructor(id) {
+        super();
+        this.copySectionFrom(id);
+        this.id = id;
+    }
 
-function InstanceExpression(id) {
-    Expression.call(this);
-    this.copySectionFrom.call(this, id);
-    this.id = id;
-    return this;
-}
-
-
-InstanceExpression.prototype = Object.create(Expression.prototype);
-InstanceExpression.prototype.constructor = InstanceExpression;
-
-
-Object.defineProperty(InstanceExpression.prototype, "name", {
-    get : function() {
+    get name() {
         return this.id.name;
     }
-});
 
-
-InstanceExpression.prototype.toString = function() {
-    return this.name;
-};
-
-InstanceExpression.prototype.declare = function(transpiler) {
-    var named = transpiler.context.getRegistered(this.name);
-    if(named instanceof MethodDeclarationMap) {
-        var decl = named.getFirst();
-        // don't declare member methods
-        if(decl.memberOf!=null)
-            return;
-        // don't declare closures
-        if(decl.declarationStatement)
-            return;
-        decl.declare(transpiler);
+    toString() {
+        return this.name;
     }
-};
 
-
-InstanceExpression.prototype.transpile = function(transpiler) {
-    var context = transpiler.context.contextForValue(this.name);
-    if(context instanceof InstanceContext) {
-        context.instanceType.transpileInstance(transpiler);
-        transpiler.append(".");
+    declare(transpiler) {
+        const named = transpiler.context.getRegistered(this.name);
+        if(named instanceof MethodDeclarationMap) {
+            const decl = named.getFirst();
+            // don't declare member methods
+            if(decl.memberOf!=null)
+                return;
+            // don't declare closures
+            if(decl.declarationStatement)
+                return;
+            decl.declare(transpiler);
+        }
     }
-    var named = transpiler.context.getRegistered(this.name);
-    if(named instanceof MethodDeclarationMap) {
-        transpiler.append(named.getFirst().getTranspiledName());
-        // need to bind instance methods
+
+    transpile(transpiler) {
+        const context = transpiler.context.contextForValue(this.name);
         if(context instanceof InstanceContext) {
-            transpiler.append(".bind(");
             context.instanceType.transpileInstance(transpiler);
-            transpiler.append(")");
+            transpiler.append(".");
         }
-    } else {
-        if (transpiler.getterName === this.name)
-            transpiler.append("$");
-        transpiler.append(this.name);
-    }
-};
-
-
-InstanceExpression.prototype.toDialect = function(writer, requireMethod) {
-    if(requireMethod === undefined)
-        requireMethod = true;
-    if(requireMethod && this.requiresMethod(writer))
-        writer.append("Method: ");
-    writer.append(this.name);
-};
-
-InstanceExpression.prototype.requiresMethod = function(writer) {
-    if(writer.dialect!=Dialect.E)
-        return false;
-    var o = writer.context.getRegistered(this.name);
-    if(o instanceof MethodDeclarationMap)
-        return true;
-    return false;
-};
-
-InstanceExpression.prototype.check = function(context) {
-    var named = context.getRegistered(this.id.name);
-    if(named==null) {
-        named = context.getRegisteredDeclaration(this.id.name);
-    }
-    if (named instanceof Variable) { // local variable
-        return named.getType(context);
-    } else if(named instanceof LinkedVariable) { // local variable
-        return named.getType(context);
-    } else if (named instanceof Parameter) { // named argument
-        return named.getType(context);
-    } else if(named instanceof CategoryDeclaration) { // any p with x
-        return named.getType(context);
-    } else if(named instanceof AttributeDeclaration) { // in category method
-        return named.getType(context);
-    } else if(named instanceof MethodDeclarationMap) { // global method or closure
-        return new MethodType(named.getFirst());
-    } else {
-        context.problemListener.reportUnknownVariable(this.id);
-        return VoidType.instance;
-    }
-};
-
-
-InstanceExpression.prototype.checkAttribute = function(context) {
-    var decl = context.findAttribute(this.name);
-    return decl ? decl : Expression.prototype.checkAttribute.call(this, context);
-};
-
-
-InstanceExpression.prototype.checkQuery = function(context) {
-    return this.check(context);
-};
-
-
-
-InstanceExpression.prototype.interpret = function(context) {
-    if(context.hasValue(this.id)) {
-        return context.getValue(this.id);
-    } else {
-        var named = context.getRegistered(this.id);
-        if (named instanceof MethodDeclarationMap) {
-            var decl = named.getFirst();
-            return new ClosureValue(context, new MethodType(decl))
+        const named = transpiler.context.getRegistered(this.name);
+        if(named instanceof MethodDeclarationMap) {
+            transpiler.append(named.getFirst().getTranspiledName());
+            // need to bind instance methods
+            if(context instanceof InstanceContext) {
+                transpiler.append(".bind(");
+                context.instanceType.transpileInstance(transpiler);
+                transpiler.append(")");
+            }
         } else {
-            throw new SyntaxError("No method with name:" + this.name);
+            if (transpiler.getterName === this.name)
+                transpiler.append("$");
+            transpiler.append(this.name);
         }
     }
-};
 
+    toDialect(writer, requireMethod) {
+        if(requireMethod === undefined)
+            requireMethod = true;
+        if(requireMethod && this.requiresMethod(writer))
+            writer.append("Method: ");
+        writer.append(this.name);
+    }
 
-InstanceExpression.prototype.toPredicate = function(context) {
-    var decl = context.findAttribute(this.id.name);
-    if(!decl)
-        context.problemListener.reportUnknownIdentifier(this.id);
-    else if(decl.getType()!=BooleanType.instance)
-        context.problemListener.reportError(this.id, "Expected a Boolean, got: " + decl.getType());
-    else
-        return new EqualsExpression(this, EqOp.EQUALS, new BooleanLiteral("true"));
-};
+    requiresMethod(writer) {
+        if(writer.dialect!=Dialect.E)
+            return false;
+        const o = writer.context.getRegistered(this.name);
+        if(o instanceof MethodDeclarationMap)
+            return true;
+        return false;
+    }
 
+    check(context) {
+        let named = context.getRegistered(this.id.name);
+        if(named==null) {
+            named = context.getRegisteredDeclaration(this.id.name);
+        }
+        if (named instanceof Variable) { // local variable
+            return named.getType(context);
+        } else if(named instanceof LinkedVariable) { // local variable
+            return named.getType(context);
+        } else if (named instanceof Parameter) { // named argument
+            return named.getType(context);
+        } else if(named instanceof CategoryDeclaration) { // any p with x
+            return named.getType(context);
+        } else if(named instanceof AttributeDeclaration) { // in category method
+            return named.getType(context);
+        } else if(named instanceof MethodDeclarationMap) { // global method or closure
+            return new MethodType(named.getFirst());
+        } else {
+            context.problemListener.reportUnknownVariable(this.id);
+            return VoidType.instance;
+        }
+    }
 
-InstanceExpression.prototype.interpretQuery = function(context, builder) {
-    var predicate = this.toPredicate(context);
-    predicate && predicate.interpretQuery(context, builder);
-};
+    checkAttribute(context) {
+        const decl = context.findAttribute(this.name);
+        return decl ? decl : super.checkAttribute(context);
+    }
 
+    checkQuery(context) {
+        return this.check(context);
+    }
 
-InstanceExpression.prototype.declareQuery = function(transpiler) {
-    var predicate = this.toPredicate(transpiler.context);
-    predicate && predicate.declareQuery(transpiler);
-};
+    interpret(context) {
+        if(context.hasValue(this.id)) {
+            return context.getValue(this.id);
+        } else {
+            const named = context.getRegistered(this.id);
+            if (named instanceof MethodDeclarationMap) {
+                const decl = named.getFirst();
+                return new ClosureValue(context, new MethodType(decl))
+            } else {
+                throw new SyntaxError("No method with name:" + this.name);
+            }
+        }
+    }
 
+    toPredicate(context) {
+        const decl = context.findAttribute(this.id.name);
+        if(!decl)
+            context.problemListener.reportUnknownIdentifier(this.id);
+        else if(decl.getType()!=BooleanType.instance)
+            context.problemListener.reportError(this.id, "Expected a Boolean, got: " + decl.getType());
+        else
+            return new EqualsExpression(this, EqOp.EQUALS, new BooleanLiteral("true"));
+    }
 
-InstanceExpression.prototype.transpileQuery = function(transpiler, builderName) {
-    var predicate = this.toPredicate(transpiler.context);
-    predicate && predicate.transpileQuery(transpiler, builderName);
-};
+    interpretQuery(context, builder) {
+        const predicate = this.toPredicate(context);
+        predicate && predicate.interpretQuery(context, builder);
+    }
 
+    declareQuery(transpiler) {
+        const predicate = this.toPredicate(transpiler.context);
+        predicate && predicate.declareQuery(transpiler);
+    }
 
-exports.InstanceExpression = InstanceExpression;
+    transpileQuery(transpiler, builderName) {
+        const predicate = this.toPredicate(transpiler.context);
+        predicate && predicate.transpileQuery(transpiler, builderName);
+    }
+}
+

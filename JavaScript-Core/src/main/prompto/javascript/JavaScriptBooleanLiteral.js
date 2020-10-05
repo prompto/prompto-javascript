@@ -1,16 +1,13 @@
-var JavaScriptLiteral = require("./JavaScriptLiteral").JavaScriptLiteral;
-var BooleanType = require("../type/BooleanType").BooleanType;
+import JavaScriptLiteral from './JavaScriptLiteral.js'
+import { BooleanType } from '../type/index.js'
 
-function JavaScriptBooleanLiteral(text) {
-	JavaScriptLiteral.call(this, text);
-	return this;
+export default class JavaScriptBooleanLiteral extends JavaScriptLiteral {
+
+    constructor(text) {
+        super(text);
+    }
+
+    check(context) {
+        return BooleanType.instance;
+    }
 }
-
-JavaScriptBooleanLiteral.prototype = Object.create(JavaScriptLiteral.prototype);
-JavaScriptBooleanLiteral.prototype.constructor = JavaScriptBooleanLiteral;
-
-JavaScriptBooleanLiteral.prototype.check = function(context) {
-	return BooleanType.instance;
-};
-
-exports.JavaScriptBooleanLiteral = JavaScriptBooleanLiteral;

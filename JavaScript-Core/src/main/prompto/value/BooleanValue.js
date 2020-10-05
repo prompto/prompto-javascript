@@ -1,83 +1,75 @@
-var BooleanType = require("../type/BooleanType").BooleanType;
-var Value = require("./Value").Value;
+import Value from './Value.js'
+import { BooleanType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
-function BooleanValue(value) {
-	Value.call(this, BooleanType.instance);
-	this.value = value;
-	return this;
+export default class BooleanValue extends Value {
+  
+    constructor(value) {
+        super(BooleanType.instance);
+        this.value = value;
+    }
+
+    static init() {
+        BooleanValue.TRUE = new BooleanValue(true);
+        BooleanValue.FALSE = new BooleanValue(false);
+        BooleanValue.TRUE.not = BooleanValue.FALSE;
+        BooleanValue.FALSE.not = BooleanValue.TRUE;
+    }
+
+    static ValueOf(value) {
+        return value ? BooleanValue.TRUE : BooleanValue.FALSE;
+    }
+
+    static Parse(text) {
+        const bool = text==="true";
+        return BooleanValue.ValueOf(bool);
+    }
+
+    getStorableData() {
+        return this.value;
+    }
+
+    getValue() {
+        return this.value;
+    }
+
+    And(value) {
+        if(value instanceof BooleanValue) {
+            return BooleanValue.ValueOf(this.value && value.value);
+        } else {
+            throw new SyntaxError("Illegal: Boolean and " + typeof(value));
+        }
+    }
+
+    Or(value) {
+        if(value instanceof BooleanValue) {
+            return BooleanValue.ValueOf(this.value || value.value);
+        } else {
+            throw new SyntaxError("Illegal: Boolean or " + typeof(value));
+        }
+    }
+
+    Not() {
+        return this.not;
+    }
+
+    toString() {
+        return this.value.toString();
+    }
+
+    equals(obj) {
+        if (obj instanceof BooleanValue) {
+            return this.value == obj.value;
+        } else {
+            return false;
+        }
+    }
+
+    toJson(context, json, instanceId, fieldName, withType, binaries) {
+        if(Array.isArray(json))
+            json.push(this.value);
+        else
+            json[fieldName] = this.value;
+    }
 }
 
-BooleanValue.prototype = Object.create(Value.prototype);
-BooleanValue.prototype.constructor = BooleanValue;
-
-BooleanValue.TRUE = new BooleanValue(true);
-BooleanValue.FALSE = new BooleanValue(false);
-BooleanValue.TRUE.not = BooleanValue.FALSE;
-BooleanValue.FALSE.not = BooleanValue.TRUE;
-
-BooleanValue.ValueOf = function(value) {
-	return value ? BooleanValue.TRUE : BooleanValue.FALSE;
-};
-
-
-BooleanValue.Parse = function(text) {
-	var bool = text==="true";
-	return BooleanValue.ValueOf(bool);
-};
-
-
-BooleanValue.prototype.getStorableData = function() {
-	return this.value;
-};
-
-
-BooleanValue.prototype.getValue = function() {
-	return this.value;
-};
-
-
-BooleanValue.prototype.And = function(value) {
-	if(value instanceof BooleanValue) {
-		return BooleanValue.ValueOf(this.value && value.value);
-	} else {
-		throw new SyntaxError("Illegal: Boolean and " + typeof(value));
-	}
-};
-
-
-BooleanValue.prototype.Or = function(value) {
-	if(value instanceof BooleanValue) {
-		return BooleanValue.ValueOf(this.value || value.value);
-	} else {
-		throw new SyntaxError("Illegal: Boolean or " + typeof(value));
-	}
-};
-
-
-BooleanValue.prototype.Not = function() {
-	return this.not;
-};
-
-
-BooleanValue.prototype.toString = function() {
-	return this.value.toString();
-};
-
-
-BooleanValue.prototype.equals = function(obj) {
-	if (obj instanceof BooleanValue) {
-		return this.value == obj.value;
-	} else {
-		return false;
-	}
-};
-
-
-BooleanValue.prototype.toJson = function(context, json, instanceId, fieldName, withType, binaries) {
-	if(Array.isArray(json))
-		json.push(this.value);
-	else
-		json[fieldName] = this.value;
-};
-
-exports.BooleanValue = BooleanValue;

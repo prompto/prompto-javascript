@@ -1,16 +1,9 @@
-var Section = require("../parser/Section").Section;
-var JsxValue = require("../value/JsxValue").JsxValue;
+import Section from '../parser/Section.js'
+import { JsxValue } from '../value/index.js'
 
-function IJsxExpression() {
-    Section.call(this);
-    return this;
+export default class IJsxExpression extends Section {
+
+    interpret(context) {
+        return new JsxValue(this);
+    }
 }
-
-IJsxExpression.prototype = Object.create(Section.prototype);
-IJsxExpression.prototype.constructor = IJsxExpression;
-
-IJsxExpression.prototype.interpret = function(context) {
-    return new JsxValue(this);
-};
-
-exports.IJsxExpression = IJsxExpression;

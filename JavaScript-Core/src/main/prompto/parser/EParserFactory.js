@@ -1,15 +1,9 @@
-var antlr4 = require("antlr4/index");
-var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
-var ECleverParser = require("./ECleverParser").ECleverParser;
+import antlr4 from 'antlr4';
+import { EIndentingLexer, ECleverParser } from './index.js'
 
-exports.EParserFactory = function() {
+export default function EParserFactory() {
 	
-	this.newLexer = function(data) {
-		return new EIndentingLexer(new antlr4.InputStream(data));
-	};
+	this.newLexer = data => new EIndentingLexer(new antlr4.InputStream(data));
+	this.newParser = (path, data) => new ECleverParser(path, data);
 
-	this.newParser = function(path, data) {
-		return new ECleverParser(path, data);
-	};
-
-};
+}

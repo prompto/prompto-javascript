@@ -1,100 +1,95 @@
-var NotMutableError = require("../error/NotMutableError").NotMutableError;
-var AnyType = require("../type/AnyType").AnyType;
+import { NotMutableError } from '../error/index.js'
+import { AnyType } from '../type/index.js'
+import { SyntaxError } from '../error/index.js'
 
-function ItemInstance(item) {
-	this.parent = null;
-	this.item = item;
-	return this;
-}
-	
-ItemInstance.prototype.toString = function() {
-	return this.parent.toString() + "[" + this.item.toString() + "]";
-};
+export default class ItemInstance {
 
-ItemInstance.prototype.toDialect = function(writer) {
-    this.parent.toDialect(writer);
-    writer.append('[');
-    this.item.toDialect(writer);
-    writer.append(']');
-}
-
-ItemInstance.prototype.check = function(context) {
-    var parentType = this.parent.check(context);
-    var itemType = this.item.check(context);
-    return parentType.checkItem(context, itemType);
-};
-
-
-ItemInstance.prototype.checkAssignValue = function(context, valueType, section) {
-    var itemType = this.item.check(context);
-	return this.parent.checkAssignItem(context, itemType, valueType, section);
-};
-
-ItemInstance.prototype.checkAssignMember = function(context, name, valueType, section) {
-    return AnyType.instance
-};
-
-ItemInstance.prototype.checkAssignItem = function(context, itemType, valueType, section) {
-    return AnyType.instance
-};
-
-ItemInstance.prototype.assign = function(context, expression) {
-	var root = this.parent.interpret(context);
-	if(!root.mutable)
-		throw new NotMutableError();
-	var item = this.item.interpret(context);
-    var value = expression.interpret(context);
-    if (root.setItemInContext) {
-        root.setItemInContext(context, item, value);
-    } else {
-        throw new SyntaxError("Unknown item/key: " + typeof(item));
+    constructor(item) {
+        this.parent = null;
+        this.item = item;
     }
-};
 
-ItemInstance.prototype.interpret = function(context) {
-    var root = this.parent.interpret(context);
-    var item = this.item.interpret(context);
-    if (root.getItemInContext) {
-		return root.getItemInContext(context, item);
-	} else {
-		throw new SyntaxError("Unknown item/key: " + typeof(item));
-	}
-};
+    toString() {
+        return this.parent.toString() + "[" + this.item.toString() + "]";
+    }
 
+    toDialect(writer) {
+        this.parent.toDialect(writer);
+        writer.append('[');
+        this.item.toDialect(writer);
+        writer.append(']');
+    }
 
-ItemInstance.prototype.declare = function(transpiler) {
-    this.parent.declare(transpiler);
-    this.item.declare(transpiler);
-};
+    check(context) {
+        const parentType = this.parent.check(context);
+        const itemType = this.item.check(context);
+        return parentType.checkItem(context, itemType);
+    }
 
+    checkAssignValue(context, valueType, section) {
+        const itemType = this.item.check(context);
+        return this.parent.checkAssignItem(context, itemType, valueType, section);
+    }
 
-ItemInstance.prototype.transpile = function(transpiler) {
-    this.parent.transpile(transpiler);
-    transpiler.append(".item(");
-    this.item.transpile(transpiler);
-    transpiler.append(")");
-};
+    checkAssignMember(context, name, valueType, section) {
+        return AnyType.instance
+    }
 
+    checkAssignItem(context, itemType, valueType, section) {
+        return AnyType.instance
+    }
 
-ItemInstance.prototype.declareAssign = function(transpiler, expression) {
-    this.parent.declare(transpiler);
-    this.item.declare(transpiler);
-    expression.declare(transpiler);
-};
+    assign(context, expression) {
+        const root = this.parent.interpret(context);
+        if(!root.mutable)
+            throw new NotMutableError();
+        const item = this.item.interpret(context);
+        const value = expression.interpret(context);
+        if (root.setItemInContext) {
+            root.setItemInContext(context, item, value);
+        } else {
+            throw new SyntaxError("Unknown item/key: " + typeof(item));
+        }
+    }
 
-ItemInstance.prototype.transpileAssign = function(transpiler, expression) {
-    var parentType = this.parent.check(transpiler.context);
-    this.parent.transpileAssignParent(transpiler);
-    parentType.transpileAssignItemValue(transpiler, this.item, expression);
-};
+    interpret(context) {
+        const root = this.parent.interpret(context);
+        const item = this.item.interpret(context);
+        if (root.getItemInContext) {
+            return root.getItemInContext(context, item);
+        } else {
+            throw new SyntaxError("Unknown item/key: " + typeof(item));
+        }
+    }
 
+    declare(transpiler) {
+        this.parent.declare(transpiler);
+        this.item.declare(transpiler);
+    }
 
-ItemInstance.prototype.transpileAssignParent = function(transpiler) {
-    this.parent.transpileAssignParent(transpiler);
-    transpiler.append(".getItem(");
-    this.item.transpile(transpiler);
-    transpiler.append(", true)");
-};
+    transpile(transpiler) {
+        this.parent.transpile(transpiler);
+        transpiler.append(".item(");
+        this.item.transpile(transpiler);
+        transpiler.append(")");
+    }
 
+    declareAssign(transpiler, expression) {
+        this.parent.declare(transpiler);
+        this.item.declare(transpiler);
+        expression.declare(transpiler);
+    }
 
-exports.ItemInstance = ItemInstance;
+    transpileAssign(transpiler, expression) {
+        const parentType = this.parent.check(transpiler.context);
+        this.parent.transpileAssignParent(transpiler);
+        parentType.transpileAssignItemValue(transpiler, this.item, expression);
+    }
+
+    transpileAssignParent(transpiler) {
+        this.parent.transpileAssignParent(transpiler);
+        transpiler.append(".getItem(");
+        this.item.transpile(transpiler);
+        transpiler.append(", true)");
+    }
+}

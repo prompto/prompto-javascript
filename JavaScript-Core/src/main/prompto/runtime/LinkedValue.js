@@ -1,9 +1,10 @@
 
 
 /* used to ensure downcast local resolves to actual value */
-function LinkedValue(context) {
-	this.context = context;
-    return this;
-}
+export default class LinkedValue {
 
-exports.LinkedValue = LinkedValue;
+	constructor(context) {
+		this.context = context;
+	}
+
+}

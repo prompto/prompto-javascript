@@ -1,26 +1,24 @@
-var Literal = require("./Literal").Literal;
-var DateType = require("../type/DateType").DateType;
-var DateValue = require("../value/DateValue").DateValue;
-var LocalDate = require("../intrinsic/LocalDate").LocalDate;
+import Literal from './Literal.js'
+import { DateType } from '../type/index.js'
+import { DateValue } from '../value/index.js'
+import { LocalDate } from '../intrinsic/index.js'
 
-function DateLiteral(text) {
-	Literal.call(this, text, new DateValue(LocalDate.parse(text.substring(1,text.length-1))));
-	return this;
+export default class DateLiteral extends Literal {
+
+    constructor(text) {
+        super(text, new DateValue(LocalDate.parse(text.substring(1,text.length-1))));
+    }
+
+    check(context) {
+        return DateType.instance;
+    }
+
+    declare(transpiler) {
+        transpiler.require(LocalDate);
+    }
+
+    transpile(transpiler) {
+        transpiler.append("LocalDate.parse(").append(this.text).append(")");
+    }
 }
 
-DateLiteral.prototype = Object.create(Literal.prototype);
-DateLiteral.prototype.constructor = DateLiteral;
-
-DateLiteral.prototype.check = function(context) {
-	return DateType.instance;
-};
-
-DateLiteral.prototype.declare = function(transpiler) {
-    transpiler.require(LocalDate);
-};
-
-DateLiteral.prototype.transpile = function(transpiler) {
-    transpiler.append("LocalDate.parse(").append(this.text).append(")");
-};
-
-exports.DateLiteral = DateLiteral;

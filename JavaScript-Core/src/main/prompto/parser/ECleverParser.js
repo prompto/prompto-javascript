@@ -1,13 +1,12 @@
-var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-var fs = isNodeJs ? require("fs") : {}; // nodejs only
-var antlr4 = require("antlr4/index");
-var EIndentingLexer = require("./EIndentingLexer").EIndentingLexer;
-var EParser = require("./EParser").EParser;
-var EPromptoBuilder = require("./EPromptoBuilder").EPromptoBuilder;
+import antlr4 from 'antlr4';
+import EParser from './EParser.js'
+import { EIndentingLexer, EPromptoBuilder } from './index.js'
+import { importFsIfNode } from '../utils/index.js'
+const fs = importFsIfNode();
 
 function createInput(input) {
 	if(typeof(input)==='string' || input instanceof String) {
-		if(isNodeJs && fs.existsSync(input)) {
+		if(fs && fs.existsSync && fs.existsSync(input)) {
 			input = new antlr4.FileStream(input);
 		} else {
 			input = new antlr4.InputStream(input);
@@ -22,38 +21,36 @@ function createInput(input) {
 	return input;
 }
 
-function ECleverParser(input) {
-	EParser.call(this,createInput(input));
-	this.path = "";
-	return this;
+export default class ECleverParser extends EParser {
+
+	constructor(input) {
+		super(createInput(input));
+		this.path = "";
+	}
+
+	parse() {
+		return this.parse_declaration_list();
+	}
+
+	parse_declaration_list() {
+		return this.doParse(this.declaration_list, true);
+	}
+
+	parse_repl_input() {
+		return this.doParse(this.repl, true);
+	}
+
+	parse_standalone_type() {
+		return this.doParse(this.category_or_any_type, false);
+	}
+
+	doParse(rule, addLF) {
+		this.getTokenStream().tokenSource.addLF = addLF;
+		const tree = rule.bind(this)();
+		const builder = new EPromptoBuilder(this);
+		const walker = new antlr4.tree.ParseTreeWalker();
+		walker.walk(builder, tree);
+		return builder.getNodeValue(tree);
+	}
+
 }
-
-ECleverParser.prototype = Object.create(EParser.prototype);
-ECleverParser.prototype.constructor = ECleverParser;
-
-ECleverParser.prototype.parse = function() {
-	return this.parse_declaration_list();
-};
-	
-ECleverParser.prototype.parse_declaration_list = function() {
-	return this.doParse(this.declaration_list, true);
-};
-
-ECleverParser.prototype.parse_repl_input = function() {
-	return this.doParse(this.repl, true);
-};
-
-ECleverParser.prototype.parse_standalone_type = function() {
-    return this.doParse(this.category_or_any_type, false);
-};
-
-ECleverParser.prototype.doParse = function(rule, addLF) {
-    this.getTokenStream().tokenSource.addLF = addLF;
-    var tree = rule.bind(this)();
-    var builder = new EPromptoBuilder(this);
-    var walker = new antlr4.tree.ParseTreeWalker();
-    walker.walk(builder, tree);
-    return builder.getNodeValue(tree);
-};
-
-exports.ECleverParser = ECleverParser;

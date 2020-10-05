@@ -1,11 +1,10 @@
-var JavaScriptExpression = require("./JavaScriptExpression").JavaScriptExpression;
+import JavaScriptExpression from './JavaScriptExpression.js'
 
-function JavaScriptSelectorExpression(parent) {
-	JavaScriptExpression.call(this);
-	this.parent = parent || null;
-	return this;
+export default class JavaScriptSelectorExpression extends JavaScriptExpression {
+
+    constructor(parent) {
+        super();
+        this.parent = parent || null;
+    }
 }
-JavaScriptSelectorExpression.prototype = Object.create(JavaScriptExpression.prototype);
-JavaScriptSelectorExpression.prototype.constructor = JavaScriptSelectorExpression;
 
-exports.JavaScriptSelectorExpression = JavaScriptSelectorExpression;

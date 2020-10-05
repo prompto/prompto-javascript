@@ -1,25 +1,15 @@
-var PropertyValidator = require("./PropertyValidator").PropertyValidator;
-var AnyType = require("../type/AnyType").AnyType;
+import PropertyValidator from './PropertyValidator.js'
+import { AnyType } from '../type/index.js'
 
-function AlwaysValidator() {
-    PropertyValidator.call(this);
-    return this;
+export default class AlwaysValidator extends PropertyValidator {
+
+    getType(context) {
+        return AnyType.instance;
+    }
+
+    validate(context, property) {
+        // accept any property
+    }
 }
 
-AlwaysValidator.prototype = Object.create(PropertyValidator.prototype);
-AlwaysValidator.prototype.constructor = AlwaysValidator;
-
-
-AlwaysValidator.prototype.getType = function(context) {
-    return AnyType.instance;
-};
-
-
-AlwaysValidator.prototype.validate = function(context, property) {
-    // accept any property
-};
-
-
 AlwaysValidator.instance = new AlwaysValidator();
-
-exports.AlwaysValidator = AlwaysValidator;

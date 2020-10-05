@@ -1,11 +1,10 @@
-var PythonLiteral = require("./PythonLiteral").PythonLiteral;
+import PythonLiteral from './PythonLiteral.js'
 
-function PythonBooleanLiteral(text) {
-    PythonLiteral.call(this, text);
-    return this;
+export default class PythonBooleanLiteral extends PythonLiteral {
+
+    constructor(text) {
+        super(text);
+    }
+
 }
 
-PythonBooleanLiteral.prototype = Object.create(PythonLiteral.prototype);
-PythonBooleanLiteral.prototype.constructor = PythonBooleanLiteral;
-
-exports.PythonBooleanLiteral = PythonBooleanLiteral;

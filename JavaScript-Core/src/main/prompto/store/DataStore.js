@@ -1,9 +1,10 @@
-var MemStore = require("../memstore/MemStore").MemStore;
+import { MemStore } from '../memstore/index.js'
 
-function $DataStore() {
+export default class $DataStore {
 
+    static init() {
+        $DataStore.instance = new MemStore();
+    }
 }
 
-$DataStore.instance = new MemStore();
-
-exports.$DataStore = $DataStore;
+$DataStore.instance = null;

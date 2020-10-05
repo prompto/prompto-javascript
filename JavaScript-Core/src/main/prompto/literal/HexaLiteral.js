@@ -1,13 +1,13 @@
-var Literal = require("./Literal").Literal;
-var IntegerValue = require("../value/IntegerValue").IntegerValue;
-var IntegerType = require("../type/IntegerType").IntegerType;
+import Literal from './Literal.js'
+import { IntegerType } from '../type/index.js'
+import { IntegerValue } from '../value/index.js'
 
 /* jshint bitwise:false*/
 function parseHexa(text) {
-	var value = 0;
-	for(var i=2;i<text.length; i++) {
+	let value = 0;
+	for(let i=2;i<text.length; i++) {
 		value <<= 4;
-		var c = text[i];
+		const c = text[i];
 		if(c>='0' && c<='9') {
 			value += (c.charCodeAt(0) - '0'.charCodeAt(0));
 		} else if(c>='a' && c<='f') {
@@ -21,17 +21,15 @@ function parseHexa(text) {
 	return new IntegerValue(value);
 }
 
-function HexaLiteral(text) {
-	Literal.call(this, text, parseHexa(text));
-	return this;
+export default class HexaLiteral extends Literal {
+
+    constructor(text) {
+        super(text, parseHexa(text));
+    }
+
+    check(context) {
+        return IntegerType.instance;
+    }
 }
 
-HexaLiteral.prototype = Object.create(Literal.prototype);
-HexaLiteral.prototype.constructor = HexaLiteral;
-
 HexaLiteral.parseHexa = parseHexa;
-HexaLiteral.prototype.check = function(context) {
-	return IntegerType.instance;
-};
-
-exports.HexaLiteral = HexaLiteral;
