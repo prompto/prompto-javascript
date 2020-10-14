@@ -34,3 +34,11 @@ test('Transpiled ForEachIntegerList', () => {
 	checkTranspiledOutput('iterate/forEachIntegerList.pec');
 });
 
+test('Interpreted ForEachIntegerSet', () => {
+	checkInterpretedOutput('iterate/forEachIntegerSet.pec');
+});
+
+test('Transpiled ForEachIntegerSet', () => {
+	checkTranspiledOutput('iterate/forEachIntegerSet.pec');
+});
+

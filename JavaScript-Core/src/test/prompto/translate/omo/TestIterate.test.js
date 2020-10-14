@@ -12,3 +12,7 @@ test('ForEachIntegerRange', () => {
 	compareResourceOMO('iterate/forEachIntegerRange.poc');
 });
 
+test('ForEachIntegerSet', () => {
+	compareResourceOMO('iterate/forEachIntegerSet.poc');
+});
+

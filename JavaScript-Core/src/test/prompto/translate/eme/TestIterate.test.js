@@ -12,3 +12,7 @@ test('ForEachIntegerList', () => {
 	compareResourceEME('iterate/forEachIntegerList.pec');
 });
 
+test('ForEachIntegerSet', () => {
+	compareResourceEME('iterate/forEachIntegerSet.pec');
+});
+

@@ -12,3 +12,7 @@ test('ForEachIntegerRange', () => {
 	compareResourceOEO('iterate/forEachIntegerRange.poc');
 });
 
+test('ForEachIntegerSet', () => {
+	compareResourceOEO('iterate/forEachIntegerSet.poc');
+});
+
