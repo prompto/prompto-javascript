@@ -87,10 +87,6 @@ export default class EnumeratedNativeType extends BaseType {
         }
     }
 
-    isAssignableFrom(context, other) {
-        return this.id.name === other.id.name;
-    }
-
     getStaticMemberMethods(context, name) {
         switch (name) {
             case "symbolOf":
