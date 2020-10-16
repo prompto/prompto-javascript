@@ -2002,8 +2002,15 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitNative_member_method_declaration(ctx) {
-        const value = this.getNodeValue(ctx.getChild(0));
-        this.setNodeValue(ctx, value);
+        const comments = this.readComments(ctx.comment_statement());
+        const annotations = this.readAnnotations(ctx.annotation_constructor());
+        const ctx_ = ctx.children[ctx.getChildCount() - 1];
+        const decl = this.getNodeValue(ctx_);
+        if (decl != null) {
+            decl.comments = comments;
+            decl.annotations = annotations;
+            this.setNodeValue(ctx, decl);
+        }
     }
 
 

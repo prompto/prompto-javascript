@@ -76,3 +76,7 @@ test('Category', () => {
 	compareResourceOEO('annotations/category.poc');
 });
 
+test('Inlined', () => {
+	compareResourceOEO('annotations/inlined.poc');
+});
+

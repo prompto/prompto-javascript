@@ -8,3 +8,7 @@ test('Category', () => {
 	compareResourceEME('annotations/category.pec');
 });
 
+test('Inlined', () => {
+	compareResourceEME('annotations/inlined.pec');
+});
+

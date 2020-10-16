@@ -69,6 +69,16 @@ export default class NativeCategoryDeclaration extends ConcreteCategoryDeclarati
         writer.newLine();
         this.categoryBindings.toDialect(writer);
         this.methods.forEach(method => {
+            if(method.comments) {
+                method.comments.forEach(cmt => {
+                    cmt.toDialect(writer);
+                });
+            }
+            if(method.annotations) {
+                method.annotations.forEach(ann => {
+                    ann.toDialect(writer);
+                });
+            }
             const w = writer.newMemberWriter();
             method.toDialect(w);
             writer.newLine();
