@@ -9,7 +9,7 @@ export default class PeriodValue extends Value {
     constructor(value) {
         super(PeriodType.instance);
         this.value = value;
-        ["years", "months", "weeks", "days", "hours", "minutes", "seconds", "millis"].forEach(function(name) {
+        ["years", "months", "weeks", "days", "hours", "minutes", "seconds", "milliseconds"].forEach(function(name) {
             Object.defineProperty(this, name, {
                 get: function () {
                     return this.value[name];
@@ -64,6 +64,17 @@ export default class PeriodValue extends Value {
         } else {
             return false;
         }
+    }
+
+    getMemberValue(context, name) {
+        try {
+            if ("years"===name || "months"===name || "weeks"===name || "days"===name || "hours"===name || "minutes"===name || "seconds"===name || "milliseconds"===name) {
+                return new IntegerValue(this.value[name]);
+            }
+        } catch (error) {
+            // don't do anything
+        }
+        return super.getMemberValue(context, name);
     }
 
     toDocumentValue(context) {

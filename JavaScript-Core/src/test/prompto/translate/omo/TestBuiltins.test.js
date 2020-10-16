@@ -88,6 +88,38 @@ test('ListJoin', () => {
 	compareResourceOMO('builtins/listJoin.poc');
 });
 
+test('PeriodDays', () => {
+	compareResourceOMO('builtins/periodDays.poc');
+});
+
+test('PeriodHours', () => {
+	compareResourceOMO('builtins/periodHours.poc');
+});
+
+test('PeriodMillis', () => {
+	compareResourceOMO('builtins/periodMillis.poc');
+});
+
+test('PeriodMinutes', () => {
+	compareResourceOMO('builtins/periodMinutes.poc');
+});
+
+test('PeriodMonths', () => {
+	compareResourceOMO('builtins/periodMonths.poc');
+});
+
+test('PeriodSeconds', () => {
+	compareResourceOMO('builtins/periodSeconds.poc');
+});
+
+test('PeriodWeeks', () => {
+	compareResourceOMO('builtins/periodWeeks.poc');
+});
+
+test('PeriodYears', () => {
+	compareResourceOMO('builtins/periodYears.poc');
+});
+
 test('SetCount', () => {
 	compareResourceOMO('builtins/setCount.poc');
 });

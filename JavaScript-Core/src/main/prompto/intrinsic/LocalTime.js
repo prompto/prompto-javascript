@@ -58,8 +58,8 @@ LocalTime.prototype.addPeriod = function(period) {
     time.setUTCMinutes(minute);
     var second = this.getUTCSeconds() + (period.seconds || 0);
     time.setUTCSeconds(second);
-    var millis = this.getUTCMilliseconds() + (period.millis || 0);
-    time.setUTCMilliseconds(millis);
+    var milliseconds = this.getUTCMilliseconds() + (period.milliseconds || 0);
+    time.setUTCMilliseconds(milliseconds);
     return time;
 };
 
@@ -81,8 +81,8 @@ LocalTime.prototype.subtractPeriod = function(period) {
     time.setUTCMinutes(minute);
     var second = this.getUTCSeconds() - (period.seconds || 0);
     time.setUTCSeconds(second);
-    var millis = this.getUTCMilliseconds() - (period.millis || 0);
-    time.setUTCMilliseconds(millis);
+    var milliseconds = this.getUTCMilliseconds() - (period.milliseconds || 0);
+    time.setUTCMilliseconds(milliseconds);
     return time;
 };
 

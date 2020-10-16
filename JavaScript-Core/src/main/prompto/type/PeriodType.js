@@ -118,6 +118,42 @@ export default class PeriodType extends NativeType {
         value.transpile(transpiler);
         transpiler.append(".minus()");
     }
+
+    checkMember(context, section, name) {
+        if ("years"===name) {
+            return IntegerType.instance;
+        } else if ("months"===name) {
+            return IntegerType.instance;
+        } else if ("weeks"===name) {
+            return IntegerType.instance;
+        } else if ("days"===name) {
+            return IntegerType.instance;
+        } else if ("hours"===name) {
+            return IntegerType.instance;
+        } else if ("minutes"===name) {
+            return IntegerType.instance;
+        } else if ("seconds"===name) {
+            return IntegerType.instance;
+        } else if ("milliseconds"===name) {
+            return IntegerType.instance;
+        } else {
+            return super.checkMember(context, section, name);
+        }
+    }
+
+    declareMember(transpiler, section, name) {
+        if (!("years"===name || "months"===name || "weeks"===name || "days"===name || "hours"===name || "minutes"===name || "seconds"===name || "milliseconds"===name)) {
+            super.declareMember(transpiler, section, name);
+        }
+    }
+
+    transpileMember(transpiler, name) {
+        if ("years"===name || "months"===name || "weeks"===name || "days"===name || "hours"===name || "minutes"===name || "seconds"===name || "milliseconds"===name) {
+            transpiler.append(name);
+        } else {
+            super.transpileMember(transpiler, name);
+        }
+    }
 }
 
 PeriodType.instance = new PeriodType();

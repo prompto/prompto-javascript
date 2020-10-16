@@ -83,8 +83,8 @@ DateTime.prototype.addPeriod = function (period) {
     date.setUTCMinutes(minute);
     var second = this.date.getUTCSeconds() + (period.seconds || 0);
     date.setUTCSeconds(second);
-    var millis = this.date.getUTCMilliseconds() + (period.millis || 0);
-    date.setUTCMilliseconds(millis);
+    var milliseconds = this.date.getUTCMilliseconds() + (period.milliseconds || 0);
+    date.setUTCMilliseconds(milliseconds);
     return new DateTime(date, this.tzOffset);
 };
 
@@ -117,8 +117,8 @@ DateTime.prototype.subtractPeriod = function(period) {
     date.setUTCMinutes(minute);
     var second = this.date.getUTCSeconds() - (period.seconds || 0);
     date.setUTCSeconds(second);
-    var millis = this.date.getUTCMilliseconds() - (period.millis || 0);
-    date.setUTCMilliseconds(millis);
+    var milliseconds = this.date.getUTCMilliseconds() - (period.milliseconds || 0);
+    date.setUTCMilliseconds(milliseconds);
     return new DateTime(date, this.tzOffset);
 };
 

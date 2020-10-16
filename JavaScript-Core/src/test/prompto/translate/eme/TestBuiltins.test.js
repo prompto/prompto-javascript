@@ -160,8 +160,40 @@ test('ListText', () => {
 	compareResourceEME('builtins/listText.pec');
 });
 
+test('PeriodDays', () => {
+	compareResourceEME('builtins/periodDays.pec');
+});
+
+test('PeriodHours', () => {
+	compareResourceEME('builtins/periodHours.pec');
+});
+
+test('PeriodMillis', () => {
+	compareResourceEME('builtins/periodMillis.pec');
+});
+
+test('PeriodMinutes', () => {
+	compareResourceEME('builtins/periodMinutes.pec');
+});
+
+test('PeriodMonths', () => {
+	compareResourceEME('builtins/periodMonths.pec');
+});
+
+test('PeriodSeconds', () => {
+	compareResourceEME('builtins/periodSeconds.pec');
+});
+
 test('PeriodText', () => {
 	compareResourceEME('builtins/periodText.pec');
+});
+
+test('PeriodWeeks', () => {
+	compareResourceEME('builtins/periodWeeks.pec');
+});
+
+test('PeriodYears', () => {
+	compareResourceEME('builtins/periodYears.pec');
 });
 
 test('SetCount', () => {

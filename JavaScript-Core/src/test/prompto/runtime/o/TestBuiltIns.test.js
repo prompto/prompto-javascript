@@ -170,6 +170,70 @@ test('Transpiled ListJoin', () => {
 	checkTranspiledOutput('builtins/listJoin.poc');
 });
 
+test('Interpreted PeriodDays', () => {
+	checkInterpretedOutput('builtins/periodDays.poc');
+});
+
+test('Transpiled PeriodDays', () => {
+	checkTranspiledOutput('builtins/periodDays.poc');
+});
+
+test('Interpreted PeriodHours', () => {
+	checkInterpretedOutput('builtins/periodHours.poc');
+});
+
+test('Transpiled PeriodHours', () => {
+	checkTranspiledOutput('builtins/periodHours.poc');
+});
+
+test('Interpreted PeriodMillis', () => {
+	checkInterpretedOutput('builtins/periodMillis.poc');
+});
+
+test('Transpiled PeriodMillis', () => {
+	checkTranspiledOutput('builtins/periodMillis.poc');
+});
+
+test('Interpreted PeriodMinutes', () => {
+	checkInterpretedOutput('builtins/periodMinutes.poc');
+});
+
+test('Transpiled PeriodMinutes', () => {
+	checkTranspiledOutput('builtins/periodMinutes.poc');
+});
+
+test('Interpreted PeriodMonths', () => {
+	checkInterpretedOutput('builtins/periodMonths.poc');
+});
+
+test('Transpiled PeriodMonths', () => {
+	checkTranspiledOutput('builtins/periodMonths.poc');
+});
+
+test('Interpreted PeriodSeconds', () => {
+	checkInterpretedOutput('builtins/periodSeconds.poc');
+});
+
+test('Transpiled PeriodSeconds', () => {
+	checkTranspiledOutput('builtins/periodSeconds.poc');
+});
+
+test('Interpreted PeriodWeeks', () => {
+	checkInterpretedOutput('builtins/periodWeeks.poc');
+});
+
+test('Transpiled PeriodWeeks', () => {
+	checkTranspiledOutput('builtins/periodWeeks.poc');
+});
+
+test('Interpreted PeriodYears', () => {
+	checkInterpretedOutput('builtins/periodYears.poc');
+});
+
+test('Transpiled PeriodYears', () => {
+	checkTranspiledOutput('builtins/periodYears.poc');
+});
+
 test('Interpreted SetCount', () => {
 	checkInterpretedOutput('builtins/setCount.poc');
 });

@@ -160,8 +160,40 @@ test('ListText', () => {
 	compareResourceEOE('builtins/listText.pec');
 });
 
+test('PeriodDays', () => {
+	compareResourceEOE('builtins/periodDays.pec');
+});
+
+test('PeriodHours', () => {
+	compareResourceEOE('builtins/periodHours.pec');
+});
+
+test('PeriodMillis', () => {
+	compareResourceEOE('builtins/periodMillis.pec');
+});
+
+test('PeriodMinutes', () => {
+	compareResourceEOE('builtins/periodMinutes.pec');
+});
+
+test('PeriodMonths', () => {
+	compareResourceEOE('builtins/periodMonths.pec');
+});
+
+test('PeriodSeconds', () => {
+	compareResourceEOE('builtins/periodSeconds.pec');
+});
+
 test('PeriodText', () => {
 	compareResourceEOE('builtins/periodText.pec');
+});
+
+test('PeriodWeeks', () => {
+	compareResourceEOE('builtins/periodWeeks.pec');
+});
+
+test('PeriodYears', () => {
+	compareResourceEOE('builtins/periodYears.pec');
 });
 
 test('SetCount', () => {
