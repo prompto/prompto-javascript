@@ -1,6 +1,6 @@
 export { $Root } from './$Root.js';
 export {default as Any} from './Any.js';
-export {default as Blob} from './Blob.js';
+export {default as BlobRef} from './BlobRef.js';
 export {default as Cursor} from './Cursor.js';
 export {default as DateTime} from './DateTime.js';
 export {default as Dictionary} from './Dictionary.js';

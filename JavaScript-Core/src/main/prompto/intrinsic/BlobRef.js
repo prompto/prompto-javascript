@@ -2,14 +2,14 @@ const Document = require('./Document.js').default;
 const utf8BufferToString = require('../utils/Utils.js').utf8BufferToString;
 const stringToUtf8Buffer = require('../utils/Utils.js').stringToUtf8Buffer;
 
-export default function Blob() {
+export default function BlobRef() {
     this.zipped = null;
     this.file = null;
     return this;
 }
 
-Blob.fromFile = function(file) {
-    var blob = new Blob();
+BlobRef.fromFile = function(file) {
+    var blob = new BlobRef();
     blob.mimeType = file.type ? file.type : "application/octet-stream";
     blob.file = file;
     return blob;
@@ -17,7 +17,7 @@ Blob.fromFile = function(file) {
 
 // TODO move the below to an Archive type
 
-Blob.fromValue = function(value) {
+BlobRef.fromValue = function(value) {
     var binaries = {};
     // create json type-aware object graph and collect binaries
     var values = {}; // need a temporary parent
@@ -26,14 +26,14 @@ Blob.fromValue = function(value) {
     // add it
     binaries["value.json"] = stringToUtf8Buffer(json);
     // zip binaries
-    var zipped = Blob.zipDatas(binaries)
+    var zipped = BlobRef.zipDatas(binaries)
     // done
-    var blob = new Blob();
+    var blob = new BlobRef();
     blob.zipped = zipped;
     return blob;
 };
 
-Blob.zipDatas = function(datas) {
+BlobRef.zipDatas = function(datas) {
     var JSZip = require("jszip-sync");
     var zip = new JSZip();
     return zip.sync(function() {
@@ -49,7 +49,7 @@ Blob.zipDatas = function(datas) {
 };
 
 
-Blob.readParts = function(zipped) {
+BlobRef.readParts = function(zipped) {
     var JSZip = require("jszip-sync");
     var zip = new JSZip();
     return zip.sync(function() {
@@ -66,7 +66,7 @@ Blob.readParts = function(zipped) {
     });
 };
 
-Blob.readValue = function(parts) {
+BlobRef.readValue = function(parts) {
     var data = parts["value.json"] || null;
     if (data == null)
         throw new Error("Expecting a 'value.json' part!");
@@ -75,16 +75,16 @@ Blob.readValue = function(parts) {
 };
 
 
-Blob.prototype.toDocument = function() {
+BlobRef.prototype.toDocument = function() {
     if (this.zipped)
         return this.zippedToDocument();
     else
         return null;
 };
 
-Blob.prototype.zippedToDocument = function() {
-    var parts = Blob.readParts(this.zipped);
-    var value = Blob.readValue(parts);
+BlobRef.prototype.zippedToDocument = function() {
+    var parts = BlobRef.readParts(this.zipped);
+    var value = BlobRef.readValue(parts);
     var typeName = value["type"] || null;
     if (typeName == null)
         throw new Error("Expecting a 'type' field!");

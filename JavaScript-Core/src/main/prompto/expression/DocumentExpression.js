@@ -1,7 +1,7 @@
 import Expression from './Expression.js'
 import { DocumentType } from '../type/index.js'
 import { DocumentValue, BlobValue, ConcreteInstance } from '../value/index.js'
-import { Blob, Document } from '../intrinsic/index.js'
+import { BlobRef, Document } from '../intrinsic/index.js'
 import { ReadWriteError } from '../error/index.js'
 import { ECleverParser } from "../parser/index.js"
 
@@ -54,8 +54,8 @@ export default class DocumentExpression extends Expression {
         if("application/zip"!=blob.mimeType)
             throw new Error("documentFromBlob not supported for " + blob.mimeType);
         try {
-            const parts = Blob.readParts(blob.data);
-            const value = Blob.readValue(parts);
+            const parts = BlobRef.readParts(blob.data);
+            const value = BlobRef.readValue(parts);
             let field = value["type"] || null;
             if (field == null)
                 throw new Error("Expecting a 'type' field!");

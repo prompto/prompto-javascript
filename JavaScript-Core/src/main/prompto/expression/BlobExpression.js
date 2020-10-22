@@ -1,6 +1,6 @@
 import Expression from './Expression.js'
 import { BlobType } from '../type/index.js'
-import { Blob, Document } from '../intrinsic/index.js'
+import { BlobRef, Document } from '../intrinsic/index.js'
 import { BlobValue } from '../value/index.js'
 import { ReadWriteError } from '../error/index.js'
 import { getUtf8CharLength, utf8BufferToString, stringToUtf8Buffer } from '../utils/index.js'
@@ -21,7 +21,7 @@ export default class BlobExpression extends Expression {
         const value = this.source.interpret(context);
         try {
             const datas = BlobExpression.collectDatas(context, value);
-            const zipped = Blob.zipDatas(datas);
+            const zipped = BlobRef.zipDatas(datas);
             return new BlobValue("application/zip", zipped);
         } catch (e) {
             throw new ReadWriteError(e.message);
@@ -30,7 +30,7 @@ export default class BlobExpression extends Expression {
 
     declare(transpiler) {
         this.source.declare(transpiler);
-        transpiler.require(Blob);
+        transpiler.require(BlobRef);
         transpiler.require(Document);
         transpiler.require(getUtf8CharLength);
         transpiler.require(stringToUtf8Buffer);
@@ -38,7 +38,7 @@ export default class BlobExpression extends Expression {
     }
 
     transpile(transpiler) {
-        transpiler.append("Blob.fromValue(");
+        transpiler.append("BlobRef.fromValue(");
         this.source.transpile(transpiler);
         transpiler.append(")");
     }
