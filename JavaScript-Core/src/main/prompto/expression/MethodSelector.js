@@ -177,8 +177,7 @@ export default class MethodSelector extends MemberSelector {
             }
         }
         if (type instanceof CategoryType) {
-            const decl = context.getRegisteredDeclaration(type.name);
-            context = context.newInstanceContext(null, type, decl instanceof SingletonCategoryDeclaration);
+            context = context.newInstanceContext(null, type, false);
             return context.newChildContext();
         } else
             return context.newChildContext();
