@@ -152,3 +152,12 @@ Object.defineProperty(Object.prototype, "getMember", {
         // pass
     }
 });
+
+Object.defineProperty(Object.prototype, "item", {
+    get: function() {
+        return Document.prototype.item;
+    },
+    set: function() {
+        // pass
+    }
+});
