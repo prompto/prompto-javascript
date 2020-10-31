@@ -1,6 +1,5 @@
 var path = require("path");
 var fs = require("fs");
-
 import * as prompto from "../../../main/prompto/index.js";
 
 var antlr4 = require("antlr4");

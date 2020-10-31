@@ -126,7 +126,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     transpileItem(transpiler, itemType, item) {
-        transpiler.append(".item(");
+        transpiler.append(".getItem(");
         item.transpile(transpiler);
         transpiler.append(")");
     }

@@ -61,17 +61,24 @@ List.prototype.item = function(idx) {
         return this[idx-1];
 };
 
-List.prototype.getItem = function (idx, create) {
-    if(idx==null)
-        throw new ReferenceError();
-    else if(idx<1 || idx>this.length)
-        throw new RangeError();
-    else {
-        if(!this[idx - 1] && create)
-            this[idx - 1] = new Document();
-        return this[idx - 1] || null;
+// override property set on Object.prototype
+Object.defineProperty(List.prototype, "getItem", {
+    get: function() {
+        return function (idx, create) {
+            if (idx == null)
+                throw new ReferenceError();
+            else if (idx < 1 || idx > this.length)
+                throw new RangeError();
+            else {
+                if (!this[idx - 1] && create)
+                    this[idx - 1] = new Document();
+                return this[idx - 1] || null;
+            }
+        };
+    },
+    set: function () {
     }
-};
+});
 
 List.prototype.setItem = function (idx, value) {
     if(!this.mutable)
@@ -207,3 +214,4 @@ List.prototype.toDocument = function() {
     });
     return new List(false, items);
 };
+

@@ -67,6 +67,7 @@ Document.prototype.getText = function() {
         return this.toString();
 };
 
+
 Document.prototype.getMember = function(name, create) {
     if(this.hasOwnProperty(name))
         return this[name];
@@ -78,13 +79,13 @@ Document.prototype.getMember = function(name, create) {
 };
 
 
-Document.prototype.item = function(index) {
-    return this[index];
+Document.prototype.setMember = function(name, value) {
+    this[name] = value;
 };
 
 
-Document.prototype.setMember = function(name, value) {
-    this[name] = value;
+Document.prototype.getItem = function(index) {
+    return this[index];
 };
 
 
@@ -153,9 +154,9 @@ Object.defineProperty(Object.prototype, "getMember", {
     }
 });
 
-Object.defineProperty(Object.prototype, "item", {
+Object.defineProperty(Object.prototype, "getItem", {
     get: function() {
-        return Document.prototype.item;
+        return Document.prototype.getItem;
     },
     set: function() {
         // pass

@@ -118,7 +118,7 @@ export default class DocumentType extends NativeType {
     }
 
     transpileItem(transpiler, type, item) {
-        transpiler.append(".item(");
+        transpiler.append(".getItem(");
         item.transpile(transpiler);
         transpiler.append(")");
     }
