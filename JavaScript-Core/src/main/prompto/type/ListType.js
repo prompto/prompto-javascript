@@ -129,18 +129,18 @@ export default class ListType extends ContainerType {
 
     transpileItem(transpiler, itemType, item) {
         if(itemType===IntegerType.instance) {
-            transpiler.append(".item(");
+            transpiler.append(".item((");
             item.transpile(transpiler);
-            transpiler.append(")");
+            transpiler.append(")-1)");
         } else {
             return super.transpileItem(transpiler, itemType, item);
         }
     }
 
     transpileAssignItemValue(transpiler, item, expression) {
-        transpiler.append(".setItem(");
+        transpiler.append(".setItem((");
         item.transpile(transpiler);
-        transpiler.append(", ");
+        transpiler.append(")-1, ");
         expression.transpile(transpiler);
         transpiler.append(")");
     }
