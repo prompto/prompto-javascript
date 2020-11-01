@@ -178,7 +178,7 @@ class Context {
                 const info = {};
                 info.name = decl.name;
                 info.symbols = decl.symbols.map(s => s.name);
-                catalog.enumerations.push(info);
+                catalog.enumerations.push({ type: "Document", value: info});
             } else if(decl instanceof CategoryDeclaration) {
                 if(decl.isWidget(this))
                     catalog.widgets.push(name);
@@ -189,10 +189,10 @@ class Context {
                 method.name = decl.name;
                 method.protos = [];
                 for (const proto in decl.protos) {
-                    const main = decl.protos[proto].isEligibleAsMain();
-                    method.protos.push({proto: proto, main: main});
+                    const eligibleAsMain = decl.protos[proto].isEligibleAsMain();
+                    method.protos.push({ type: "Document", value: { proto: proto, eligibleAsMain: eligibleAsMain } });
                 }
-                catalog.methods.push(method);
+                catalog.methods.push({ type: "Document", value: method });
             }
         }
         for(const name in this.tests)
@@ -210,7 +210,7 @@ class Context {
             delete catalog.methods;
         if(catalog.tests.length <= 0)
             delete catalog.tests;
-        return catalog;
+        return { type: "Document", value: catalog };
     }
 
     findAttribute(name) {
