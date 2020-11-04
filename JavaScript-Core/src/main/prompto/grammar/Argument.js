@@ -15,7 +15,7 @@ export default class Argument extends Section {
    }
 
     get id() {
-        return this.parameter.id;
+        return this.parameter ? this.parameter.id : null;
     }
 
     get name() {
