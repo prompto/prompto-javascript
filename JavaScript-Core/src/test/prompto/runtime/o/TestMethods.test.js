@@ -90,6 +90,14 @@ test('Transpiled Extended', () => {
 	checkTranspiledOutput('methods/extended.poc');
 });
 
+test('Interpreted Homonym2', () => {
+	checkInterpretedOutput('methods/homonym2.poc');
+});
+
+test('Transpiled Homonym2', () => {
+	checkTranspiledOutput('methods/homonym2.poc');
+});
+
 test('Interpreted ImplicitMember', () => {
 	checkInterpretedOutput('methods/implicitMember.poc');
 });

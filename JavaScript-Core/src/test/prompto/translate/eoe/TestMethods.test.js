@@ -52,6 +52,10 @@ test('Homonym', () => {
 	compareResourceEOE('methods/homonym.pec');
 });
 
+test('Homonym2', () => {
+	compareResourceEOE('methods/homonym2.pec');
+});
+
 test('ImplicitAnd', () => {
 	compareResourceEOE('methods/implicitAnd.pec');
 });

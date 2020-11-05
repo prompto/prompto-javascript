@@ -48,6 +48,10 @@ test('Global', () => {
 	compareResourceOEO('methods/global.poc');
 });
 
+test('Homonym2', () => {
+	compareResourceOEO('methods/homonym2.poc');
+});
+
 test('ImplicitMember', () => {
 	compareResourceOEO('methods/implicitMember.poc');
 });

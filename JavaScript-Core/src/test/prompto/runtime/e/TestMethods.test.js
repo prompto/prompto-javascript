@@ -98,6 +98,14 @@ test('Transpiled Homonym', () => {
 	checkTranspiledOutput('methods/homonym.pec');
 });
 
+test('Interpreted Homonym2', () => {
+	checkInterpretedOutput('methods/homonym2.pec');
+});
+
+test('Transpiled Homonym2', () => {
+	checkTranspiledOutput('methods/homonym2.pec');
+});
+
 test('Interpreted ImplicitAnd', () => {
 	checkInterpretedOutput('methods/implicitAnd.pec');
 });
