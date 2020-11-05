@@ -68,7 +68,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
             const args = new ArgumentList();
             args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral(typeof(e))));
             args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral(e.message)));
-            error = new ConstructorExpression(new CategoryType("Error"), args);
+            error = new ConstructorExpression(new CategoryType("Error"), args, null);
         }
         if(context.getRegisteredValue(this.errorId)==null) {
             context.registerValue(new ErrorVariable(this.errorId));

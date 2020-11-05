@@ -174,7 +174,7 @@ export default class UnresolvedIdentifier extends Expression {
 
     resolveConstructor(context) {
         try {
-            const method = new ConstructorExpression(new CategoryType(this.id), null, null, true);
+            const method = new ConstructorExpression(new CategoryType(this.id), null, null);
             method.check(context);
             return method;
         } catch(e) {

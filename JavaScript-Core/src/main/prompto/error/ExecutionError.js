@@ -27,7 +27,7 @@ export default class ExecutionError extends PromptoError {
             var args = new ArgumentList();
             args.add(new Argument(new UnresolvedParameter("name"), new TextLiteral('"' + this.name + '"')));
             args.add(new Argument(new UnresolvedParameter("text"), new TextLiteral('"' + this.message + '"')));
-            exp = new ConstructorExpression(new CategoryType("Error"), args);
+            exp = new ConstructorExpression(new CategoryType("Error"), args, null);
         }
         if (context.getRegisteredValue(errorName) == null)
             context.registerValue(new ErrorVariable(errorName));

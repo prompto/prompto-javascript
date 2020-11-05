@@ -9,12 +9,12 @@ import { getTypeName } from '../utils/index.js'
 
 export default class ConstructorExpression extends Expression {
   
-    constructor(type, copyFrom, args, checked) {
+    constructor(type, copyFrom, args) {
         super();
         this.type = type;
         this.copyFrom = copyFrom;
         this.args = args;
-        this.checked = checked;
+        this.checked = false;
     }
 
     checkFirstHomonym(context, decl) {
