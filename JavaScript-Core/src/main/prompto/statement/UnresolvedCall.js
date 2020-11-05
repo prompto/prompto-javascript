@@ -95,43 +95,59 @@ export default class UnresolvedCall extends BaseStatement {
 
     resolveUnresolvedIdentifier(context) {
         const id = this.callable.id;
-        let call, decl = null;
-        // if this happens in the context of a member method, then we need to check for category members first
-        const instance = context.getClosestInstanceContext();
-        if(instance!=null) {
-            decl = this.resolveUnresolvedMember(instance, id.name);
-            if(decl!=null)
-                call = new MethodCall(new MethodSelector(null, id), this.args);
-        }
-        // could be a local instance
-        if(call==null) {
-            const named = context.getRegisteredValue(id.name);
-            if(named !== null) {
-                let type = named.getType(context);
-                if(type != null) {
-                    type = type.resolve(context);
-                    if(type instanceof MethodType) {
-                        call = new MethodCall(new MethodSelector(null, id), this.args);
-                        call.variableName = id.name;
-                    }
-                }
-            }
-        }
-        // could be a declaration
-        if(call==null) {
-            decl = context.getRegisteredDeclaration(id.name);
-            if (decl === null) {
-                context.problemListener.reportUnknownMethod(id);
-                return null;
-            }
-            if (decl instanceof CategoryDeclaration) {
-                call = new ConstructorExpression(new CategoryType(id), null, this.args, false);
-            } else {
-                call = new MethodCall(new MethodSelector(null, id), this.args);
-            }
-        }
-        call.copySectionFrom(this);
+        let call = this.resolveUnresolvedMemberMethod(context, id);
+        if (call === null)
+            call = this.resolveUnresolvedMethodReference(context, id);
+        if (call === null)
+            call = this.resolveUnresolvedDeclaration(context, id);
+        if (call === null)
+            context.problemListener.reportUnknownMethod(id);
+        else
+            call.copySectionFrom(this);
         return call;
+    }
+
+
+    resolveUnresolvedMemberMethod(context, id) {
+        while (context!==null) {
+            const instance = context.getClosestInstanceContext();
+            if (instance == null)
+                return null;
+            const decl = this.resolveUnresolvedMember(instance, id.name);
+            if (decl != null)
+                return new MethodCall(new MethodSelector(null, id), this.args);
+            else
+                context = instance.getParentContext();
+        }
+        return null;
+    }
+
+
+    resolveUnresolvedMethodReference(context, id) {
+        const named = context.getRegisteredValue(id.name);
+        if(named === null)
+            return null;
+        let type = named.getType(context);
+        if(type !== null) {
+            type = type.resolve(context);
+            if(type instanceof MethodType) {
+                const call = new MethodCall(new MethodSelector(null, id), this.args);
+                call.variableName = id.name;
+                return call;
+            }
+        }
+        return null;
+    }
+
+
+    resolveUnresolvedDeclaration(context, id) {
+        const decl = context.getRegisteredDeclaration(id.name);
+        if (decl === null)
+            return null;
+        else if (decl instanceof CategoryDeclaration)
+            return new ConstructorExpression(new CategoryType(id), null, this.args);
+        else
+            return new MethodCall(new MethodSelector(null, id), this.args);
     }
 
     resolveUnresolvedMember(context, name) {
