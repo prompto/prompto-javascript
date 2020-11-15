@@ -4,6 +4,8 @@ import { MatchOp } from '../store/index.js'
 import { SyntaxError, InvalidDataError } from '../error/index.js'
 import { BooleanValue, Instance } from '../value/index.js'
 import { CodeWriter } from '../utils/index.js'
+import { TypeFamily } from '../store/index.js'
+import { LocalDate, DateTime } from '../intrinsic/index.js'
 
 export default class CompareExpression extends Expression {
   
@@ -116,8 +118,12 @@ export default class CompareExpression extends Expression {
         const info = decl.getAttributeInfo();
         if (value instanceof Instance)
             value = value.getMemberValue(context, "dbId", false);
-        const matchOp = this.getMatchOp();
-        query.verify(info, matchOp, value == null ? null : value.getStorableData());
+        let data = value == null ? null : value.getStorableData();
+        if(info.family === TypeFamily.DATETIME && data instanceof LocalDate)
+            data = DateTime.fromDateAndTime(data, null);
+        else if(info.family === TypeFamily.DATE && data instanceof DateTime)
+            data = data.getDate();
+        query.verify(info, this.getMatchOp(), data);
         if (this.operator == CmpOp.GTE || this.operator==CmpOp.LTE)
             query.not();
     }

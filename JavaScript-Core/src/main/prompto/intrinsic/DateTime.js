@@ -69,6 +69,14 @@ DateTime.parse = function(text) {
     return new DateTime(date, tzOffset);
 };
 
+
+DateTime.fromDateAndTime = function (date, time) {
+    var date_ = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 0, 0, 0, 0));
+    var tzOffset = 0; // in seconds
+    return new DateTime(date_, tzOffset);
+};
+
+
 DateTime.prototype.addPeriod = function (period) {
     var date = new Date();
     var year = this.date.getUTCFullYear() + (period.years || 0);
