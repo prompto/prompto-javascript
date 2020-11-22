@@ -2371,14 +2371,14 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitAnyListType(ctx) {
-        const type = this.getNodeValue(ctx.typ);
-        this.setNodeValue(ctx, new type.ListType(type));
+        const typ = this.getNodeValue(ctx.typ);
+        this.setNodeValue(ctx, new type.ListType(typ));
     }
 
 
     exitAnyDictType(ctx) {
-        const type = this.getNodeValue(ctx.typ);
-        this.setNodeValue(ctx, new type.DictType(type));
+        const typ = this.getNodeValue(ctx.typ);
+        this.setNodeValue(ctx, new type.DictType(typ));
     }
 
 
