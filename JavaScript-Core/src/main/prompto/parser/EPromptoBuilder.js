@@ -2408,7 +2408,7 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitAnyDictType(ctx) {
-        const typ = this.getNodeValue(ctx.typ);
+        const typ = this.getNodeValue(ctx.any_type());
         this.setNodeValue(ctx, new type.DictionaryType(typ));
     }
 
