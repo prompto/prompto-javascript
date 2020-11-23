@@ -112,6 +112,22 @@ function replaceAll(s, a, b) {
     return s.split(a).join(b);
 }
 
+exports.compareResourceOO = function(resourceName) {
+    var expected = exports.getResourceAsString(resourceName);
+    // console.log(expected);
+    // parse O source code
+    var dlo = parseOString(expected);
+    var context = prompto.runtime.Context.newGlobalsContext();
+    dlo.register(context);
+    // rewrite as o
+    var writer = new prompto.utils.CodeWriter(prompto.parser.Dialect.O, context);
+    dlo.toDialect(writer);
+    var actual = writer.toString();
+    // console.log(actual);
+    // ensure equivalent
+    assertEquivalent(expected, actual);
+};
+
 exports.compareResourceEOE = function(resourceName) {
     var expected = exports.getResourceAsString(resourceName);
     // console.log(expected);

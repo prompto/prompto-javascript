@@ -94,7 +94,7 @@ export default class IfElement extends BaseStatement {
             if (context !== writer.context)
                 writer = writer.newChildWriter(context);
         }
-        const curly = this.statements!=null && this.statements.length>1;
+        const curly = this.needsCurlyBraces();
         if(curly)
             writer.append("{").newLine();
         else
@@ -104,6 +104,15 @@ export default class IfElement extends BaseStatement {
         writer.dedent();
         if(curly)
             writer.append("}");
+    }
+
+    needsCurlyBraces() {
+        if(!this.statements)
+            return false;
+        if(this.statements.length > 1)
+            return true;
+        else
+            return !this.statements[0].isSimple();
     }
 }
 
