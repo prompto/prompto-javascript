@@ -110,6 +110,10 @@ export default class DictionaryValue extends Value {
         swapped.mutable = false;
         return new DictionaryValue(TextType.instance, swapped, false);
     }
+
+    remove(key) {
+        this.dict.remove(key.value);
+    }
 }
 
 class KVPIterator {
