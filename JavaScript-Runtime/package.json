@@ -19,9 +19,9 @@
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.12",
     "webpack-conditional-loader": "^1.0.12"
- },
+  },
   "dependencies": {
-    "antlr4": "4.7.1",
+    "antlr4": "4.9.0",
     "js-yaml": "3.13.1",
     "jszip-sync": "3.2.1-sync",
     "sync-request": "3.0.1"

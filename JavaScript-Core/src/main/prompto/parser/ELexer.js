@@ -1,4 +1,4 @@
-// Generated from ELexer.g4 by ANTLR 4.8
+// Generated from ELexer.g4 by ANTLR 4.9
 // jshint ignore: start
 import antlr4 from 'antlr4';
 
