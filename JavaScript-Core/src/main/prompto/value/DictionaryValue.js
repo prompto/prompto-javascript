@@ -111,9 +111,15 @@ export default class DictionaryValue extends Value {
         return new DictionaryValue(TextType.instance, swapped, false);
     }
 
-    remove(key) {
-        this.dict.remove(key.value);
+    removeKey(key) {
+        this.dict.removeKey(key.value);
     }
+
+
+    removeValue(value) {
+        this.dict.removeValue(value);
+    }
+
 }
 
 class KVPIterator {

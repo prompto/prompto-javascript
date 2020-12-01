@@ -4,6 +4,7 @@ import { Identifier } from '../grammar/index.js'
 import { List, StrictSet } from '../intrinsic/index.js'
 import { ListValue } from '../value/index.js'
 import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js';
+import { RemoveItemMethodDeclaration, RemoveValueMethodDeclaration } from '../builtins/ListTypeBuiltins.js';
 import { multiplyArray } from '../utils/index.js'
 
 export default class ListType extends ContainerType {
@@ -240,6 +241,10 @@ export default class ListType extends ContainerType {
         switch (name) {
             case "join":
                 return [new JoinListMethodDeclaration()];
+            case "removeItem":
+                return [new RemoveItemMethodDeclaration()];
+            case "removeValue" :
+                return [new RemoveValueMethodDeclaration()];
             default:
                 return super.getMemberMethods.call(context, name);
         }

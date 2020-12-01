@@ -59,6 +59,16 @@ export default class ListValue extends BaseValueList {
         }
     }
 
+    removeItem(item) {
+        this.items.splice(item.value -1, 1);
+    }
+
+    removeValue(value) {
+        const idx = this.items.indexOf(value);
+        if(idx > -1)
+            this.items.splice(idx, 1);
+    }
+
     Multiply(context, value) {
         if (value instanceof IntegerValue) {
             const count = value.value;

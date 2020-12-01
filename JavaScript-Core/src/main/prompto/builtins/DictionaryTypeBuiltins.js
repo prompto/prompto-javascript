@@ -1,5 +1,5 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
-import { DictionaryType, TextType, VoidType } from '../type/index.js'
+import { DictionaryType, TextType, AnyType, VoidType } from '../type/index.js'
 import { CategoryParameter } from "../param";
 import { Identifier } from "../grammar";
 
@@ -26,19 +26,19 @@ class SwapMethodDeclaration extends BuiltInMethodDeclaration {
 }
 
 
-class RemoveMethodDeclaration extends BuiltInMethodDeclaration {
+class RemoveKeyMethodDeclaration extends BuiltInMethodDeclaration {
 
     constructor() {
-        super("swap", new CategoryParameter(TextType.instance, new Identifier("key")));
+        super("removeKey", new CategoryParameter(TextType.instance, new Identifier("key")));
 
     }
 
     interpret(context) {
-        const value = this.getValue(context);
-        if(!value.mutable)
+        const dict = this.getValue(context);
+        if(!dict.mutable)
             context.problemListener.reportNotMutable(new Identifier("dict"), "dict"); // TODO locate the incorrect code
         const key = context.getValue(new Identifier("key"));
-        value.remove(key);
+        dict.removeKey(key);
         return null;
     }
 
@@ -47,10 +47,38 @@ class RemoveMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     transpileCall(transpiler, assignments) {
-        transpiler.append("remove(");
+        transpiler.append("removeKey(");
         assignments[0].transpile(transpiler, null);
         transpiler.append(")");
     }
 }
 
-export { SwapMethodDeclaration, RemoveMethodDeclaration };
+
+class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration {
+
+    constructor() {
+        super("removeValue", new CategoryParameter(AnyType.instance, new Identifier("value")));
+
+    }
+
+    interpret(context) {
+        const dict = this.getValue(context);
+        if(!dict.mutable)
+            context.problemListener.reportNotMutable(new Identifier("dict"), "dict"); // TODO locate the incorrect code
+        const value = context.getValue(new Identifier("value"));
+        dict.removeValue(value);
+        return null;
+    }
+
+    check(context) {
+        return VoidType.instance;
+    }
+
+    transpileCall(transpiler, assignments) {
+        transpiler.append("removeValue(");
+        assignments[0].transpile(transpiler, null);
+        transpiler.append(")");
+    }
+}
+
+export { SwapMethodDeclaration, RemoveKeyMethodDeclaration, RemoveValueMethodDeclaration };

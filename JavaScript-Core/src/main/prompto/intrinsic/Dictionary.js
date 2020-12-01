@@ -65,8 +65,14 @@ Dictionary.prototype.swap = function() {
 };
 
 
-Dictionary.prototype.remove = function(key) {
+Dictionary.prototype.removeKey = function(key) {
     delete this[key];
+};
+
+
+Dictionary.prototype.removeValue = function(value) {
+    var keys = this.$keys.filter(function(key) { return this[key].equals(value); }, this);
+    keys.forEach(function(key) { delete this[key]; }, this);
 };
 
 
