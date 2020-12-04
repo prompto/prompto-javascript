@@ -1,5 +1,7 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration.js'
 import { CategoryType } from '../type/index.js'
+import { ConcreteMethodDeclaration } from '../declaration/index.js'
+import { MethodDeclarationMap } from '../runtime/index.js'
 
 export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
 
@@ -17,6 +19,18 @@ export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclar
 
     categoryTypeToMDialect(writer) {
         writer.append("singleton");
+    }
+
+
+    getConstructorMethod(context) {
+        this.registerMethods(context);
+        const decl = this.methodsMap["$constructor"];
+        if(decl instanceof MethodDeclarationMap) {
+            const method = decl.getFirst();
+            if(method instanceof ConcreteMethodDeclaration)
+                return method;
+        }
+        return null;
     }
 
     transpile(transpiler) {
@@ -40,6 +54,8 @@ export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclar
             method.transpile(m);
             m.flush();
         }, this);
+        if(this.getConstructorMethod(transpiler.context)!=null)
+            transpiler.append(this.name).append(".instance.$constructor();").newLine();
         instance.flush();
         transpiler.flush();
     }

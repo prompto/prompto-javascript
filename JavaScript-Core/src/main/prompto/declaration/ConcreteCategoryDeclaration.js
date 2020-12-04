@@ -191,7 +191,9 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
                 context.problemListener.reportDuplicateGetter(method.id);
             this.methodsMap[key] = method;
         } else {
-           const key = method.name;
+            let key = method.name;
+            if(key==="constructor")
+                key = "$constructor";
             actual = this.methodsMap[key] || null;
             if(actual==null) {
                 actual = new MethodDeclarationMap(method.name);

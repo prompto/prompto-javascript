@@ -34,6 +34,8 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
         // if this is a template instance, name is already transpiled
         if(this.name.indexOf("$")>0)
             return this.name;
+        else if(this.name==="constructor")
+            return "$constructor";
         else
             return [this.name].concat(this.parameters.map(arg => arg.getTranspiledName(context))).join("$");
     }

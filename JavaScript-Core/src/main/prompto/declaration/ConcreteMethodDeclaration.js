@@ -1,7 +1,9 @@
 import BaseMethodDeclaration from './BaseMethodDeclaration.js'
 import { CategoryParameter, CodeParameter } from '../param/index.js'
 import { StatementList, DeclarationStatement } from '../statement/index.js'
+import { SingletonCategoryDeclaration } from '../declaration/index.js'
 import { VoidType, DictionaryType, TextType } from '../type/index.js'
+import { InstanceContext } from '../runtime/index.js';
 import { SyntaxError } from '../error/index.js'
 
 export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
@@ -57,12 +59,33 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     checkChild(context) {
+        this.checkConstructor(context);
         if(this.parameters!=null) {
             this.parameters.check(context);
         }
         const child = context.newChildContext();
         this.registerParameters(child);
         return this.checkStatements(child);
+    }
+
+    checkConstructor(context) {
+        if("constructor" === this.name) {
+            this.checkSingletonContext(context);
+            this.checkSingletonParameters(context);
+        }
+    }
+
+    checkSingletonParameters(context) {
+        if(this.parameters!=null && this.parameters.length > 0)
+            context.problemListener.reportIllegalConstructorParameters(this);
+    }
+
+    checkSingletonContext(context) {
+        if(context instanceof InstanceContext) {
+            if(context.getDeclaration() instanceof SingletonCategoryDeclaration)
+                return;
+        }
+        context.problemListener.reportIllegalConstructor(this.id);
     }
 
     checkStatements(context) {
