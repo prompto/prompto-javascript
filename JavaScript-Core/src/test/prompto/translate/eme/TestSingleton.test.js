@@ -4,6 +4,10 @@ test('Attribute', () => {
 	compareResourceEME('singleton/attribute.pec');
 });
 
+test('Constructor', () => {
+	compareResourceEME('singleton/constructor.pec');
+});
+
 test('Internal', () => {
 	compareResourceEME('singleton/internal.pec');
 });

@@ -18,6 +18,14 @@ test('Transpiled Attribute', () => {
 	checkTranspiledOutput('singleton/attribute.poc');
 });
 
+test('Interpreted Constructor', () => {
+	checkInterpretedOutput('singleton/constructor.poc');
+});
+
+test('Transpiled Constructor', () => {
+	checkTranspiledOutput('singleton/constructor.poc');
+});
+
 test('Interpreted Internal', () => {
 	checkInterpretedOutput('singleton/internal.poc');
 });

@@ -18,6 +18,14 @@ test('Transpiled Attribute', () => {
 	checkTranspiledOutput('singleton/attribute.pec');
 });
 
+test('Interpreted Constructor', () => {
+	checkInterpretedOutput('singleton/constructor.pec');
+});
+
+test('Transpiled Constructor', () => {
+	checkTranspiledOutput('singleton/constructor.pec');
+});
+
 test('Interpreted Internal', () => {
 	checkInterpretedOutput('singleton/internal.pec');
 });

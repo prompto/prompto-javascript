@@ -4,6 +4,10 @@ test('Attribute', () => {
 	compareResourceOEO('singleton/attribute.poc');
 });
 
+test('Constructor', () => {
+	compareResourceOEO('singleton/constructor.poc');
+});
+
 test('Internal', () => {
 	compareResourceOEO('singleton/internal.poc');
 });
