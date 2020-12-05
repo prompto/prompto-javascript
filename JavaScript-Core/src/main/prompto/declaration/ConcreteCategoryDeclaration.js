@@ -124,7 +124,8 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     hasMethod(context, name) {
         this.registerMethods(context);
-        if(this.methodsMap[name])
+        const key = this.getMethodKey(name);
+        if(this.methodsMap[key])
             return true;
         if(this.hasDerivedMethod(context, name))
             return true;
@@ -180,18 +181,18 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         let actual;
         if(method instanceof SetterMethodDeclaration) {
             const key = "setter:" + method.name;
-            actual = this.methodsMap[key] || null;
+            actual = this.methodsMap.get(key) || null;
             if(actual!=null)
                 context.problemListener.reportDuplicateSetter(method.id);
-            this.methodsMap[key] = method;
+            this.methodsMap.set(key, method);
         } else if(method instanceof GetterMethodDeclaration) {
-            const key = "getter:"+method.name;
+            const key = "getter:" + method.name;
             actual = this.methodsMap[key] || null;
             if(actual!=null)
                 context.problemListener.reportDuplicateGetter(method.id);
             this.methodsMap[key] = method;
         } else {
-            let key = method.name;
+            const key = this.getMethodKey(method.name);
             actual = this.methodsMap[key] || null;
             if(actual==null) {
                 actual = new MethodDeclarationMap(method.name);
@@ -199,6 +200,10 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
             }
             actual.register(method, context.problemListener);
         }
+    }
+
+    getMethodKey(name) {
+        return name === "constructor" ? "$constructor" : name;
     }
 
     checkDerived(context) {
@@ -345,7 +350,8 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         if(this.methodsMap==null) {
             return;
         }
-        const actual = this.methodsMap[result.name] || null;
+        const key = this.getMethodKey(result.name);
+        const actual = this.methodsMap[key] || null;
         if(actual==null) {
             return;
         }
