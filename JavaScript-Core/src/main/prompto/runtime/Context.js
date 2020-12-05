@@ -519,7 +519,7 @@ class Context {
                     throw new InternalError("No such singleton:" + type.name);
                 value = new ConcreteInstance(this, decl);
                 value.mutable = true; // a singleton is protected by "with x do", so always mutable in that context
-                const method = decl.getConstructorMethod(this);
+                const method = decl.getInitializeMethod(this);
                 if(method!=null) {
                     const instance = this.newInstanceContext(value, false);
                     const child = instance.newChildContext();

@@ -4,8 +4,8 @@ test('Attribute', () => {
 	compareResourceEME('singleton/attribute.pec');
 });
 
-test('Constructor', () => {
-	compareResourceEME('singleton/constructor.pec');
+test('Initialize', () => {
+	compareResourceEME('singleton/initialize.pec');
 });
 
 test('Internal', () => {

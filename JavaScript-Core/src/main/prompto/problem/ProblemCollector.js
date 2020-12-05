@@ -146,12 +146,12 @@ export default class ProblemCollector extends antlr4.error.ErrorListener {
         this.reportWarning(section, message);
     }
 
-    reportIllegalConstructor(section) {
-        this.reportError(section, "Constructor method is only allowed in singletons!");
+    reportIllegalInitialize(section) {
+        this.reportError(section, "Initialize method is only allowed in singletons!");
     }
 
-    reportIllegalConstructorParameters(section) {
-        this.reportError(section, "Constructor method cannot have parameters!");
+    reportIllegalInitializeParameters(section) {
+        this.reportError(section, "Initialize method cannot have parameters!");
     }
 
     reportMissingClosingTag(opening) {

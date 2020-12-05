@@ -4,8 +4,8 @@ test('Attribute', () => {
 	compareResourceOEO('singleton/attribute.poc');
 });
 
-test('Constructor', () => {
-	compareResourceOEO('singleton/constructor.poc');
+test('Initialize', () => {
+	compareResourceOEO('singleton/initialize.poc');
 });
 
 test('Internal', () => {

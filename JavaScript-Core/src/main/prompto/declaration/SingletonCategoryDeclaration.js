@@ -22,9 +22,9 @@ export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclar
     }
 
 
-    getConstructorMethod(context) {
+    getInitializeMethod(context) {
         this.registerMethods(context);
-        const decl = this.methodsMap["$constructor"];
+        const decl = this.methodsMap["initialize"];
         if(decl instanceof MethodDeclarationMap) {
             const method = decl.getFirst();
             if(method instanceof ConcreteMethodDeclaration)
@@ -54,8 +54,8 @@ export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclar
             method.transpile(m);
             m.flush();
         }, this);
-        if(this.getConstructorMethod(transpiler.context)!=null)
-            transpiler.append(this.name).append(".instance.$constructor();").newLine();
+        if(this.getInitializeMethod(transpiler.context)!=null)
+            transpiler.append(this.name).append(".instance.initialize();").newLine();
         instance.flush();
         transpiler.flush();
     }

@@ -192,8 +192,6 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
             this.methodsMap[key] = method;
         } else {
             let key = method.name;
-            if(key==="constructor")
-                key = "$constructor";
             actual = this.methodsMap[key] || null;
             if(actual==null) {
                 actual = new MethodDeclarationMap(method.name);

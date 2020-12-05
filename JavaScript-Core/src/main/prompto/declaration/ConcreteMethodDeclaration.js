@@ -59,7 +59,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     checkChild(context) {
-        this.checkConstructor(context);
+        this.checkSingletonInitialize(context);
         if(this.parameters!=null) {
             this.parameters.check(context);
         }
@@ -68,24 +68,24 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         return this.checkStatements(child);
     }
 
-    checkConstructor(context) {
-        if("constructor" === this.name) {
-            this.checkSingletonContext(context);
-            this.checkSingletonParameters(context);
+    checkSingletonInitialize(context) {
+        if("initialize" === this.name) {
+            this.checkSingletonInitializeContext(context);
+            this.checkSingletonInitializeParameters(context);
         }
     }
 
-    checkSingletonParameters(context) {
+    checkSingletonInitializeParameters(context) {
         if(this.parameters!=null && this.parameters.length > 0)
-            context.problemListener.reportIllegalConstructorParameters(this);
+            context.problemListener.reportIllegalInitializeParameters(this);
     }
 
-    checkSingletonContext(context) {
+    checkSingletonInitializeContext(context) {
         if(context instanceof InstanceContext) {
             if(context.getDeclaration() instanceof SingletonCategoryDeclaration)
                 return;
         }
-        context.problemListener.reportIllegalConstructor(this.id);
+        context.problemListener.reportIllegalInitialize(this.id);
     }
 
     checkStatements(context) {
