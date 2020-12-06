@@ -18,6 +18,14 @@ test('Transpiled Attribute', () => {
 	checkTranspiledOutput('singleton/attribute.pec');
 });
 
+test('Interpreted Dictionary', () => {
+	checkInterpretedOutput('singleton/dictionary.pec');
+});
+
+test('Transpiled Dictionary', () => {
+	checkTranspiledOutput('singleton/dictionary.pec');
+});
+
 test('Interpreted Initialize', () => {
 	checkInterpretedOutput('singleton/initialize.pec');
 });

@@ -118,6 +118,11 @@ export default class VariableInstance {
     }
 
     transpileAssignParent(transpiler) {
+        const context = transpiler.context.contextForValue(this.id.name);
+        if(context.instanceType) {
+            context.instanceType.transpileInstance(transpiler);
+            transpiler.append(".");
+        }
         transpiler.append(this.name);
     }
 

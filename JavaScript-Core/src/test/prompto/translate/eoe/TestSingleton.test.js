@@ -4,6 +4,10 @@ test('Attribute', () => {
 	compareResourceEOE('singleton/attribute.pec');
 });
 
+test('Dictionary', () => {
+	compareResourceEOE('singleton/dictionary.pec');
+});
+
 test('Initialize', () => {
 	compareResourceEOE('singleton/initialize.pec');
 });

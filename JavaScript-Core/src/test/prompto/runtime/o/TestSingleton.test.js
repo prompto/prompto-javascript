@@ -18,6 +18,14 @@ test('Transpiled Attribute', () => {
 	checkTranspiledOutput('singleton/attribute.poc');
 });
 
+test('Interpreted Dictionary', () => {
+	checkInterpretedOutput('singleton/dictionary.poc');
+});
+
+test('Transpiled Dictionary', () => {
+	checkTranspiledOutput('singleton/dictionary.poc');
+});
+
 test('Interpreted Initialize', () => {
 	checkInterpretedOutput('singleton/initialize.poc');
 });

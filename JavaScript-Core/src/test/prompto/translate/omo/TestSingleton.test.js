@@ -4,6 +4,10 @@ test('Attribute', () => {
 	compareResourceOMO('singleton/attribute.poc');
 });
 
+test('Dictionary', () => {
+	compareResourceOMO('singleton/dictionary.poc');
+});
+
 test('Initialize', () => {
 	compareResourceOMO('singleton/initialize.poc');
 });
