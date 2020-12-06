@@ -23,8 +23,10 @@ function createInput(input) {
 
 export default class OCleverParser extends OParser {
 
-	constructor(input) {
+	constructor(input, debug) {
 		super(createInput(input));
+		if(debug)
+			this._interp.debug = true;
 		this.path = "";
 	}
 
