@@ -34,7 +34,7 @@ export default class VariableInstance {
     }
 
     checkAssignValue(context, valueType, section) {
-        const actual = context.getRegisteredValue(this.id);
+        const actual = context.getRegisteredValue(this.name);
         if(actual==null) {
             context.registerValue(new Variable(this.id, valueType));
             return valueType;
@@ -46,7 +46,7 @@ export default class VariableInstance {
     }
 
     checkAssignMember(context, id, valueType, section) {
-        const actual = context.getRegisteredValue(this.id);
+        const actual = context.getRegisteredValue(this.name);
         if(actual==null) {
             context.problemListener.reportUnknownVariable(section, this.id);
             return VoidType.instance;
@@ -65,9 +65,11 @@ export default class VariableInstance {
     }
 
     checkAssignItem(context, itemType, valueType, section) {
-        const actual = context.getRegisteredValue(this.id);
-        if(actual==null)
+        const actual = context.getRegisteredValue(this.name);
+        if(actual==null) {
             context.problemListener.reportUnknownVariable(section, this.id);
+            return VoidType.instance;
+        }
         const parentType = actual.getType(context);
         return parentType.checkItem(context, itemType);
     }
