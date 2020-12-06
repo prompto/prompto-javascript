@@ -4,6 +4,10 @@ test('Attribute', () => {
 	compareResourceOEO('singleton/attribute.poc');
 });
 
+test('Dictionary', () => {
+	compareResourceOEO('singleton/dictionary.poc');
+});
+
 test('Initialize', () => {
 	compareResourceOEO('singleton/initialize.poc');
 });
