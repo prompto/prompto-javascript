@@ -181,10 +181,10 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         let actual;
         if(method instanceof SetterMethodDeclaration) {
             const key = "setter:" + method.name;
-            actual = this.methodsMap.get(key) || null;
+            actual = this.methodsMap[key] || null;
             if(actual!=null)
                 context.problemListener.reportDuplicateSetter(method.id);
-            this.methodsMap.set(key, method);
+            this.methodsMap[key] = method;
         } else if(method instanceof GetterMethodDeclaration) {
             const key = "getter:" + method.name;
             actual = this.methodsMap[key] || null;
