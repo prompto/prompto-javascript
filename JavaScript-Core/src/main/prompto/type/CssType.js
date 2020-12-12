@@ -1,5 +1,6 @@
-import NativeType from './NativeType.js'
-import { Identifier } from '../grammar/index.js'
+import NativeType from './NativeType.js';
+import { Identifier } from '../grammar/index.js';
+import { Any } from "../intrinsic/index.js";
 
 export default class CssType extends NativeType {
 
@@ -25,12 +26,12 @@ export default class CssType extends NativeType {
 
 
     declareAdd(transpiler) {
-        // nothing to do
+        transpiler.require(Any);
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
         if (other === CssType.instance) {
-            transpiler.append("Object.assign({},");
+            transpiler.append("Object.assign(new Any(),");
             left.transpile(transpiler);
             transpiler.append(",");
             right.transpile(transpiler);
