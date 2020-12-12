@@ -231,6 +231,8 @@ exports.compareResourceOMO = function(resourceName) {
 
 
 exports.execute = function(decls, methodName, args) {
+    // preserve test framework assumptions (such as jasmineUtils.isA)
+    var savedObjectToString = Object.prototype.toString;
     try {
         var context = prompto.runtime.Context.newGlobalsContext();
         decls.register(context);
@@ -247,6 +249,8 @@ exports.execute = function(decls, methodName, args) {
             process.stdout.write(e.message);
         else
             throw e;
+    } finally {
+        Object.prototype.toString = savedObjectToString;
     }
 };
 

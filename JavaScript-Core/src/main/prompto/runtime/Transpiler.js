@@ -244,9 +244,17 @@ function ObjectUtils() {
 
 }
 
-ObjectUtils.values = o => {
+ObjectUtils.objectToString = function() {
+    const parts = Object.getOwnPropertyNames(this).map(name => name + ": " + (this[name] ? this[name].toString() : "null"), this);
+    return '{ ' + parts.join(', ') + ' }';
+};
+
+
+ObjectUtils.values = function(o) {
     const values = [];
-    for(const name in o) { values.push(o[name]); }
+    for(const name in o) {
+        values.push(o[name]);
+    }
     return values;
 };
 
@@ -407,6 +415,7 @@ function newTranspiler(context) {
     transpiler.lines.push("ReferenceError.prototype.getText = function() { return 'Null reference!'; };");
     transpiler.lines.push("RangeError.prototype.getText = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
+    transpiler.lines.push("Object.prototype.toString = " + ObjectUtils.objectToString.toString() + ";");
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
     transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
