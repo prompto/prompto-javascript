@@ -3,8 +3,12 @@ import { CssValue } from '../value/index.js'
 
 export default class CssExpression {
 
-    constructor() {
-        this.fields = [];
+    constructor(fields) {
+        this.fields = fields || [];
+    }
+
+    toString() {
+        return "{ " + this.fields.map(field => field.toString()).join(", ") + " }";
     }
 
     check(context) {
@@ -25,6 +29,13 @@ export default class CssExpression {
 
     addField(field) {
         this.fields.push(field);
+    }
+
+    plus(expression) {
+        const replacing = new Set(expression.fields.map(field => field.name));
+        const filtered = this.fields.filter(field => !replacing.has(field.name));
+        const fields = filtered.concat(expression.fields);
+        return new CssExpression(fields);
     }
 
     declare(transpiler) {

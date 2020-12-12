@@ -4,6 +4,10 @@ export default class CssText {
         this.text = text;
     }
 
+    toString() {
+        return this.text;
+    }
+
     toDialect(writer) {
         writer.append(this.text);
     }

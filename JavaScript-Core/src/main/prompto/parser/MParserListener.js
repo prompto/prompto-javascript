@@ -1382,6 +1382,15 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by MParser#comment_statement.
+	enterComment_statement(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#comment_statement.
+	exitComment_statement(ctx) {
+	}
+
+
 	// Enter a parse tree produced by MParser#repl.
 	enterRepl(ctx) {
 	}
@@ -2243,15 +2252,6 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by MParser#method_declaration.
 	exitMethod_declaration(ctx) {
-	}
-
-
-	// Enter a parse tree produced by MParser#comment_statement.
-	enterComment_statement(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#comment_statement.
-	exitComment_statement(ctx) {
 	}
 
 

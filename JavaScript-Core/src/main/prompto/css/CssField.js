@@ -5,6 +5,10 @@ export default class CssField {
         this.value = value;
     }
 
+    toString() {
+        return this.name + ": " + this.value.toString();
+    }
+
     toDialect(writer) {
         writer.append(this.name).append(":");
         this.value.toDialect(writer);
