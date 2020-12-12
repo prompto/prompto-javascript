@@ -4,6 +4,10 @@ test('AddCharacter', () => {
 	compareResourceEME('add/addCharacter.pec');
 });
 
+test('AddCss', () => {
+	compareResourceEME('add/addCss.pec');
+});
+
 test('AddDate', () => {
 	compareResourceEME('add/addDate.pec');
 });

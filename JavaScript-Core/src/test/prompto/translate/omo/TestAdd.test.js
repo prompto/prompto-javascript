@@ -4,6 +4,10 @@ test('AddCharacter', () => {
 	compareResourceOMO('add/addCharacter.poc');
 });
 
+test('AddCss', () => {
+	compareResourceOMO('add/addCss.poc');
+});
+
 test('AddDate', () => {
 	compareResourceOMO('add/addDate.poc');
 });

@@ -18,6 +18,14 @@ test('Transpiled AddCharacter', () => {
 	checkTranspiledOutput('add/addCharacter.poc');
 });
 
+test('Interpreted AddCss', () => {
+	checkInterpretedOutput('add/addCss.poc');
+});
+
+test('Transpiled AddCss', () => {
+	checkTranspiledOutput('add/addCss.poc');
+});
+
 test('Interpreted AddDate', () => {
 	checkInterpretedOutput('add/addDate.poc');
 });

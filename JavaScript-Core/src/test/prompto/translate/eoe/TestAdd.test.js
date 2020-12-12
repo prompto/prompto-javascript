@@ -4,6 +4,10 @@ test('AddCharacter', () => {
 	compareResourceEOE('add/addCharacter.pec');
 });
 
+test('AddCss', () => {
+	compareResourceEOE('add/addCss.pec');
+});
+
 test('AddDate', () => {
 	compareResourceEOE('add/addDate.pec');
 });

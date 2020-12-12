@@ -4,6 +4,10 @@ test('AddCharacter', () => {
 	compareResourceOEO('add/addCharacter.poc');
 });
 
+test('AddCss', () => {
+	compareResourceOEO('add/addCss.poc');
+});
+
 test('AddDate', () => {
 	compareResourceOEO('add/addDate.poc');
 });
