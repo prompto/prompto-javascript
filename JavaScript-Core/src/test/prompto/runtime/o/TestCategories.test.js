@@ -58,6 +58,14 @@ test('Transpiled CopyFromStored', () => {
 	checkTranspiledOutput('categories/copyFromStored.poc');
 });
 
+test('Interpreted Equals', () => {
+	checkInterpretedOutput('categories/equals.poc');
+});
+
+test('Transpiled Equals', () => {
+	checkTranspiledOutput('categories/equals.poc');
+});
+
 test('Interpreted PopulateFalse', () => {
 	checkInterpretedOutput('categories/populateFalse.poc');
 });

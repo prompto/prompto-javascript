@@ -24,6 +24,10 @@ test('CopyFromStored', () => {
 	compareResourceOEO('categories/copyFromStored.poc');
 });
 
+test('Equals', () => {
+	compareResourceOEO('categories/equals.poc');
+});
+
 test('PopulateFalse', () => {
 	compareResourceOEO('categories/populateFalse.poc');
 });
