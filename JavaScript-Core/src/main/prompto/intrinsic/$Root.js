@@ -37,8 +37,6 @@ $Root.prototype.equals = function(other) {
             else
                 return false;
         }
-        if(this[name] && !this[name].equals)
-            console.log(name);
         if (!this[name].equals(other[name]))
             return false;
     }
