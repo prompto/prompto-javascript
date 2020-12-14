@@ -410,9 +410,11 @@ function newTranspiler(context) {
     transpiler.lines.push("RangeError.prototype.getText = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; };");
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
+    transpiler.lines.push("Boolean.prototype.equals = function(value) { return this == value; };");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
     transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
     transpiler.lines.push("Number.prototype.getText = Number.prototype.toString;");
+    transpiler.lines.push("Number.prototype.equals = function(value) { return this == value; };");
     transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
     transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
     transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
