@@ -1,35 +1,35 @@
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
-test('ContainsAllList', () => {
-	compareResourceOMO('contains/containsAllList.poc');
+test('HasAllList', () => {
+	compareResourceOMO('contains/hasAllList.poc');
 });
 
-test('ContainsAllSet', () => {
-	compareResourceOMO('contains/containsAllSet.poc');
+test('HasAllSet', () => {
+	compareResourceOMO('contains/hasAllSet.poc');
 });
 
-test('ContainsAllText', () => {
-	compareResourceOMO('contains/containsAllText.poc');
+test('HasAllText', () => {
+	compareResourceOMO('contains/hasAllText.poc');
 });
 
-test('ContainsAllTuple', () => {
-	compareResourceOMO('contains/containsAllTuple.poc');
+test('HasAllTuple', () => {
+	compareResourceOMO('contains/hasAllTuple.poc');
 });
 
-test('ContainsAnyList', () => {
-	compareResourceOMO('contains/containsAnyList.poc');
+test('HasAnyList', () => {
+	compareResourceOMO('contains/hasAnyList.poc');
 });
 
-test('ContainsAnySet', () => {
-	compareResourceOMO('contains/containsAnySet.poc');
+test('HasAnySet', () => {
+	compareResourceOMO('contains/hasAnySet.poc');
 });
 
-test('ContainsAnyText', () => {
-	compareResourceOMO('contains/containsAnyText.poc');
+test('HasAnyText', () => {
+	compareResourceOMO('contains/hasAnyText.poc');
 });
 
-test('ContainsAnyTuple', () => {
-	compareResourceOMO('contains/containsAnyTuple.poc');
+test('HasAnyTuple', () => {
+	compareResourceOMO('contains/hasAnyTuple.poc');
 });
 
 test('InCharacterRange', () => {

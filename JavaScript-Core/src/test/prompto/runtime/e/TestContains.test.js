@@ -10,100 +10,100 @@ afterEach( () => {
 	Out.restore();
 });
 
-test('Interpreted ContainsAllDict', () => {
-	checkInterpretedOutput('contains/containsAllDict.pec');
+test('Interpreted HasAllDict', () => {
+	checkInterpretedOutput('contains/hasAllDict.pec');
 });
 
-test('Transpiled ContainsAllDict', () => {
-	checkTranspiledOutput('contains/containsAllDict.pec');
+test('Transpiled HasAllDict', () => {
+	checkTranspiledOutput('contains/hasAllDict.pec');
 });
 
-test('Interpreted ContainsAllList', () => {
-	checkInterpretedOutput('contains/containsAllList.pec');
+test('Interpreted HasAllList', () => {
+	checkInterpretedOutput('contains/hasAllList.pec');
 });
 
-test('Transpiled ContainsAllList', () => {
-	checkTranspiledOutput('contains/containsAllList.pec');
+test('Transpiled HasAllList', () => {
+	checkTranspiledOutput('contains/hasAllList.pec');
 });
 
-test('Interpreted ContainsAllRange', () => {
-	checkInterpretedOutput('contains/containsAllRange.pec');
+test('Interpreted HasAllRange', () => {
+	checkInterpretedOutput('contains/hasAllRange.pec');
 });
 
-test('Transpiled ContainsAllRange', () => {
-	checkTranspiledOutput('contains/containsAllRange.pec');
+test('Transpiled HasAllRange', () => {
+	checkTranspiledOutput('contains/hasAllRange.pec');
 });
 
-test('Interpreted ContainsAllSet', () => {
-	checkInterpretedOutput('contains/containsAllSet.pec');
+test('Interpreted HasAllSet', () => {
+	checkInterpretedOutput('contains/hasAllSet.pec');
 });
 
-test('Transpiled ContainsAllSet', () => {
-	checkTranspiledOutput('contains/containsAllSet.pec');
+test('Transpiled HasAllSet', () => {
+	checkTranspiledOutput('contains/hasAllSet.pec');
 });
 
-test('Interpreted ContainsAllText', () => {
-	checkInterpretedOutput('contains/containsAllText.pec');
+test('Interpreted HasAllText', () => {
+	checkInterpretedOutput('contains/hasAllText.pec');
 });
 
-test('Transpiled ContainsAllText', () => {
-	checkTranspiledOutput('contains/containsAllText.pec');
+test('Transpiled HasAllText', () => {
+	checkTranspiledOutput('contains/hasAllText.pec');
 });
 
-test('Interpreted ContainsAllTuple', () => {
-	checkInterpretedOutput('contains/containsAllTuple.pec');
+test('Interpreted HasAllTuple', () => {
+	checkInterpretedOutput('contains/hasAllTuple.pec');
 });
 
-test('Transpiled ContainsAllTuple', () => {
-	checkTranspiledOutput('contains/containsAllTuple.pec');
+test('Transpiled HasAllTuple', () => {
+	checkTranspiledOutput('contains/hasAllTuple.pec');
 });
 
-test('Interpreted ContainsAnyDict', () => {
-	checkInterpretedOutput('contains/containsAnyDict.pec');
+test('Interpreted HasAnyDict', () => {
+	checkInterpretedOutput('contains/hasAnyDict.pec');
 });
 
-test('Transpiled ContainsAnyDict', () => {
-	checkTranspiledOutput('contains/containsAnyDict.pec');
+test('Transpiled HasAnyDict', () => {
+	checkTranspiledOutput('contains/hasAnyDict.pec');
 });
 
-test('Interpreted ContainsAnyList', () => {
-	checkInterpretedOutput('contains/containsAnyList.pec');
+test('Interpreted HasAnyList', () => {
+	checkInterpretedOutput('contains/hasAnyList.pec');
 });
 
-test('Transpiled ContainsAnyList', () => {
-	checkTranspiledOutput('contains/containsAnyList.pec');
+test('Transpiled HasAnyList', () => {
+	checkTranspiledOutput('contains/hasAnyList.pec');
 });
 
-test('Interpreted ContainsAnyRange', () => {
-	checkInterpretedOutput('contains/containsAnyRange.pec');
+test('Interpreted HasAnyRange', () => {
+	checkInterpretedOutput('contains/hasAnyRange.pec');
 });
 
-test('Transpiled ContainsAnyRange', () => {
-	checkTranspiledOutput('contains/containsAnyRange.pec');
+test('Transpiled HasAnyRange', () => {
+	checkTranspiledOutput('contains/hasAnyRange.pec');
 });
 
-test('Interpreted ContainsAnySet', () => {
-	checkInterpretedOutput('contains/containsAnySet.pec');
+test('Interpreted HasAnySet', () => {
+	checkInterpretedOutput('contains/hasAnySet.pec');
 });
 
-test('Transpiled ContainsAnySet', () => {
-	checkTranspiledOutput('contains/containsAnySet.pec');
+test('Transpiled HasAnySet', () => {
+	checkTranspiledOutput('contains/hasAnySet.pec');
 });
 
-test('Interpreted ContainsAnyText', () => {
-	checkInterpretedOutput('contains/containsAnyText.pec');
+test('Interpreted HasAnyText', () => {
+	checkInterpretedOutput('contains/hasAnyText.pec');
 });
 
-test('Transpiled ContainsAnyText', () => {
-	checkTranspiledOutput('contains/containsAnyText.pec');
+test('Transpiled HasAnyText', () => {
+	checkTranspiledOutput('contains/hasAnyText.pec');
 });
 
-test('Interpreted ContainsAnyTuple', () => {
-	checkInterpretedOutput('contains/containsAnyTuple.pec');
+test('Interpreted HasAnyTuple', () => {
+	checkInterpretedOutput('contains/hasAnyTuple.pec');
 });
 
-test('Transpiled ContainsAnyTuple', () => {
-	checkTranspiledOutput('contains/containsAnyTuple.pec');
+test('Transpiled HasAnyTuple', () => {
+	checkTranspiledOutput('contains/hasAnyTuple.pec');
 });
 
 test('Interpreted InCharacterRange', () => {

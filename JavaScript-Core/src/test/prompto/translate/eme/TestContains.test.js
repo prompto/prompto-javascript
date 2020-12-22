@@ -1,51 +1,51 @@
 var compareResourceEME = require("../../parser/BaseParserTest").compareResourceEME;
 
-test('ContainsAllDict', () => {
-	compareResourceEME('contains/containsAllDict.pec');
+test('HasAllDict', () => {
+	compareResourceEME('contains/hasAllDict.pec');
 });
 
-test('ContainsAllList', () => {
-	compareResourceEME('contains/containsAllList.pec');
+test('HasAllList', () => {
+	compareResourceEME('contains/hasAllList.pec');
 });
 
-test('ContainsAllRange', () => {
-	compareResourceEME('contains/containsAllRange.pec');
+test('HasAllRange', () => {
+	compareResourceEME('contains/hasAllRange.pec');
 });
 
-test('ContainsAllSet', () => {
-	compareResourceEME('contains/containsAllSet.pec');
+test('HasAllSet', () => {
+	compareResourceEME('contains/hasAllSet.pec');
 });
 
-test('ContainsAllText', () => {
-	compareResourceEME('contains/containsAllText.pec');
+test('HasAllText', () => {
+	compareResourceEME('contains/hasAllText.pec');
 });
 
-test('ContainsAllTuple', () => {
-	compareResourceEME('contains/containsAllTuple.pec');
+test('HasAllTuple', () => {
+	compareResourceEME('contains/hasAllTuple.pec');
 });
 
-test('ContainsAnyDict', () => {
-	compareResourceEME('contains/containsAnyDict.pec');
+test('HasAnyDict', () => {
+	compareResourceEME('contains/hasAnyDict.pec');
 });
 
-test('ContainsAnyList', () => {
-	compareResourceEME('contains/containsAnyList.pec');
+test('HasAnyList', () => {
+	compareResourceEME('contains/hasAnyList.pec');
 });
 
-test('ContainsAnyRange', () => {
-	compareResourceEME('contains/containsAnyRange.pec');
+test('HasAnyRange', () => {
+	compareResourceEME('contains/hasAnyRange.pec');
 });
 
-test('ContainsAnySet', () => {
-	compareResourceEME('contains/containsAnySet.pec');
+test('HasAnySet', () => {
+	compareResourceEME('contains/hasAnySet.pec');
 });
 
-test('ContainsAnyText', () => {
-	compareResourceEME('contains/containsAnyText.pec');
+test('HasAnyText', () => {
+	compareResourceEME('contains/hasAnyText.pec');
 });
 
-test('ContainsAnyTuple', () => {
-	compareResourceEME('contains/containsAnyTuple.pec');
+test('HasAnyTuple', () => {
+	compareResourceEME('contains/hasAnyTuple.pec');
 });
 
 test('InCharacterRange', () => {

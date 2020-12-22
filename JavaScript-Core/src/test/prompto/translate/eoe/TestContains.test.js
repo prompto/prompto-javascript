@@ -1,51 +1,51 @@
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
-test('ContainsAllDict', () => {
-	compareResourceEOE('contains/containsAllDict.pec');
+test('HasAllDict', () => {
+	compareResourceEOE('contains/hasAllDict.pec');
 });
 
-test('ContainsAllList', () => {
-	compareResourceEOE('contains/containsAllList.pec');
+test('HasAllList', () => {
+	compareResourceEOE('contains/hasAllList.pec');
 });
 
-test('ContainsAllRange', () => {
-	compareResourceEOE('contains/containsAllRange.pec');
+test('HasAllRange', () => {
+	compareResourceEOE('contains/hasAllRange.pec');
 });
 
-test('ContainsAllSet', () => {
-	compareResourceEOE('contains/containsAllSet.pec');
+test('HasAllSet', () => {
+	compareResourceEOE('contains/hasAllSet.pec');
 });
 
-test('ContainsAllText', () => {
-	compareResourceEOE('contains/containsAllText.pec');
+test('HasAllText', () => {
+	compareResourceEOE('contains/hasAllText.pec');
 });
 
-test('ContainsAllTuple', () => {
-	compareResourceEOE('contains/containsAllTuple.pec');
+test('HasAllTuple', () => {
+	compareResourceEOE('contains/hasAllTuple.pec');
 });
 
-test('ContainsAnyDict', () => {
-	compareResourceEOE('contains/containsAnyDict.pec');
+test('HasAnyDict', () => {
+	compareResourceEOE('contains/hasAnyDict.pec');
 });
 
-test('ContainsAnyList', () => {
-	compareResourceEOE('contains/containsAnyList.pec');
+test('HasAnyList', () => {
+	compareResourceEOE('contains/hasAnyList.pec');
 });
 
-test('ContainsAnyRange', () => {
-	compareResourceEOE('contains/containsAnyRange.pec');
+test('HasAnyRange', () => {
+	compareResourceEOE('contains/hasAnyRange.pec');
 });
 
-test('ContainsAnySet', () => {
-	compareResourceEOE('contains/containsAnySet.pec');
+test('HasAnySet', () => {
+	compareResourceEOE('contains/hasAnySet.pec');
 });
 
-test('ContainsAnyText', () => {
-	compareResourceEOE('contains/containsAnyText.pec');
+test('HasAnyText', () => {
+	compareResourceEOE('contains/hasAnyText.pec');
 });
 
-test('ContainsAnyTuple', () => {
-	compareResourceEOE('contains/containsAnyTuple.pec');
+test('HasAnyTuple', () => {
+	compareResourceEOE('contains/hasAnyTuple.pec');
 });
 
 test('InCharacterRange', () => {

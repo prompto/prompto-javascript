@@ -10,68 +10,68 @@ afterEach( () => {
 	Out.restore();
 });
 
-test('Interpreted ContainsAllList', () => {
-	checkInterpretedOutput('contains/containsAllList.poc');
+test('Interpreted HasAllList', () => {
+	checkInterpretedOutput('contains/hasAllList.poc');
 });
 
-test('Transpiled ContainsAllList', () => {
-	checkTranspiledOutput('contains/containsAllList.poc');
+test('Transpiled HasAllList', () => {
+	checkTranspiledOutput('contains/hasAllList.poc');
 });
 
-test('Interpreted ContainsAllSet', () => {
-	checkInterpretedOutput('contains/containsAllSet.poc');
+test('Interpreted HasAllSet', () => {
+	checkInterpretedOutput('contains/hasAllSet.poc');
 });
 
-test('Transpiled ContainsAllSet', () => {
-	checkTranspiledOutput('contains/containsAllSet.poc');
+test('Transpiled HasAllSet', () => {
+	checkTranspiledOutput('contains/hasAllSet.poc');
 });
 
-test('Interpreted ContainsAllText', () => {
-	checkInterpretedOutput('contains/containsAllText.poc');
+test('Interpreted HasAllText', () => {
+	checkInterpretedOutput('contains/hasAllText.poc');
 });
 
-test('Transpiled ContainsAllText', () => {
-	checkTranspiledOutput('contains/containsAllText.poc');
+test('Transpiled HasAllText', () => {
+	checkTranspiledOutput('contains/hasAllText.poc');
 });
 
-test('Interpreted ContainsAllTuple', () => {
-	checkInterpretedOutput('contains/containsAllTuple.poc');
+test('Interpreted HasAllTuple', () => {
+	checkInterpretedOutput('contains/hasAllTuple.poc');
 });
 
-test('Transpiled ContainsAllTuple', () => {
-	checkTranspiledOutput('contains/containsAllTuple.poc');
+test('Transpiled HasAllTuple', () => {
+	checkTranspiledOutput('contains/hasAllTuple.poc');
 });
 
-test('Interpreted ContainsAnyList', () => {
-	checkInterpretedOutput('contains/containsAnyList.poc');
+test('Interpreted HasAnyList', () => {
+	checkInterpretedOutput('contains/hasAnyList.poc');
 });
 
-test('Transpiled ContainsAnyList', () => {
-	checkTranspiledOutput('contains/containsAnyList.poc');
+test('Transpiled HasAnyList', () => {
+	checkTranspiledOutput('contains/hasAnyList.poc');
 });
 
-test('Interpreted ContainsAnySet', () => {
-	checkInterpretedOutput('contains/containsAnySet.poc');
+test('Interpreted HasAnySet', () => {
+	checkInterpretedOutput('contains/hasAnySet.poc');
 });
 
-test('Transpiled ContainsAnySet', () => {
-	checkTranspiledOutput('contains/containsAnySet.poc');
+test('Transpiled HasAnySet', () => {
+	checkTranspiledOutput('contains/hasAnySet.poc');
 });
 
-test('Interpreted ContainsAnyText', () => {
-	checkInterpretedOutput('contains/containsAnyText.poc');
+test('Interpreted HasAnyText', () => {
+	checkInterpretedOutput('contains/hasAnyText.poc');
 });
 
-test('Transpiled ContainsAnyText', () => {
-	checkTranspiledOutput('contains/containsAnyText.poc');
+test('Transpiled HasAnyText', () => {
+	checkTranspiledOutput('contains/hasAnyText.poc');
 });
 
-test('Interpreted ContainsAnyTuple', () => {
-	checkInterpretedOutput('contains/containsAnyTuple.poc');
+test('Interpreted HasAnyTuple', () => {
+	checkInterpretedOutput('contains/hasAnyTuple.poc');
 });
 
-test('Transpiled ContainsAnyTuple', () => {
-	checkTranspiledOutput('contains/containsAnyTuple.poc');
+test('Transpiled HasAnyTuple', () => {
+	checkTranspiledOutput('contains/hasAnyTuple.poc');
 });
 
 test('Interpreted InCharacterRange', () => {
