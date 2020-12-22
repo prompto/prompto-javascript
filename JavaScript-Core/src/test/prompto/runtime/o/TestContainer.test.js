@@ -11,210 +11,210 @@ afterEach( () => {
 });
 
 test('Interpreted HasAllList', () => {
-	checkInterpretedOutput('contains/hasAllList.poc');
+	checkInterpretedOutput('container/hasAllList.poc');
 });
 
 test('Transpiled HasAllList', () => {
-	checkTranspiledOutput('contains/hasAllList.poc');
+	checkTranspiledOutput('container/hasAllList.poc');
 });
 
 test('Interpreted HasAllSet', () => {
-	checkInterpretedOutput('contains/hasAllSet.poc');
+	checkInterpretedOutput('container/hasAllSet.poc');
 });
 
 test('Transpiled HasAllSet', () => {
-	checkTranspiledOutput('contains/hasAllSet.poc');
+	checkTranspiledOutput('container/hasAllSet.poc');
 });
 
 test('Interpreted HasAllText', () => {
-	checkInterpretedOutput('contains/hasAllText.poc');
+	checkInterpretedOutput('container/hasAllText.poc');
 });
 
 test('Transpiled HasAllText', () => {
-	checkTranspiledOutput('contains/hasAllText.poc');
+	checkTranspiledOutput('container/hasAllText.poc');
 });
 
 test('Interpreted HasAllTuple', () => {
-	checkInterpretedOutput('contains/hasAllTuple.poc');
+	checkInterpretedOutput('container/hasAllTuple.poc');
 });
 
 test('Transpiled HasAllTuple', () => {
-	checkTranspiledOutput('contains/hasAllTuple.poc');
+	checkTranspiledOutput('container/hasAllTuple.poc');
 });
 
 test('Interpreted HasAnyList', () => {
-	checkInterpretedOutput('contains/hasAnyList.poc');
+	checkInterpretedOutput('container/hasAnyList.poc');
 });
 
 test('Transpiled HasAnyList', () => {
-	checkTranspiledOutput('contains/hasAnyList.poc');
+	checkTranspiledOutput('container/hasAnyList.poc');
 });
 
 test('Interpreted HasAnySet', () => {
-	checkInterpretedOutput('contains/hasAnySet.poc');
+	checkInterpretedOutput('container/hasAnySet.poc');
 });
 
 test('Transpiled HasAnySet', () => {
-	checkTranspiledOutput('contains/hasAnySet.poc');
+	checkTranspiledOutput('container/hasAnySet.poc');
 });
 
 test('Interpreted HasAnyText', () => {
-	checkInterpretedOutput('contains/hasAnyText.poc');
+	checkInterpretedOutput('container/hasAnyText.poc');
 });
 
 test('Transpiled HasAnyText', () => {
-	checkTranspiledOutput('contains/hasAnyText.poc');
+	checkTranspiledOutput('container/hasAnyText.poc');
 });
 
 test('Interpreted HasAnyTuple', () => {
-	checkInterpretedOutput('contains/hasAnyTuple.poc');
+	checkInterpretedOutput('container/hasAnyTuple.poc');
 });
 
 test('Transpiled HasAnyTuple', () => {
-	checkTranspiledOutput('contains/hasAnyTuple.poc');
+	checkTranspiledOutput('container/hasAnyTuple.poc');
 });
 
 test('Interpreted InCharacterRange', () => {
-	checkInterpretedOutput('contains/inCharacterRange.poc');
+	checkInterpretedOutput('container/inCharacterRange.poc');
 });
 
 test('Transpiled InCharacterRange', () => {
-	checkTranspiledOutput('contains/inCharacterRange.poc');
+	checkTranspiledOutput('container/inCharacterRange.poc');
 });
 
 test('Interpreted InDateRange', () => {
-	checkInterpretedOutput('contains/inDateRange.poc');
+	checkInterpretedOutput('container/inDateRange.poc');
 });
 
 test('Transpiled InDateRange', () => {
-	checkTranspiledOutput('contains/inDateRange.poc');
+	checkTranspiledOutput('container/inDateRange.poc');
 });
 
 test('Interpreted InDict', () => {
-	checkInterpretedOutput('contains/inDict.poc');
+	checkInterpretedOutput('container/inDict.poc');
 });
 
 test('Transpiled InDict', () => {
-	checkTranspiledOutput('contains/inDict.poc');
+	checkTranspiledOutput('container/inDict.poc');
 });
 
 test('Interpreted InIntegerRange', () => {
-	checkInterpretedOutput('contains/inIntegerRange.poc');
+	checkInterpretedOutput('container/inIntegerRange.poc');
 });
 
 test('Transpiled InIntegerRange', () => {
-	checkTranspiledOutput('contains/inIntegerRange.poc');
+	checkTranspiledOutput('container/inIntegerRange.poc');
 });
 
 test('Interpreted InList', () => {
-	checkInterpretedOutput('contains/inList.poc');
+	checkInterpretedOutput('container/inList.poc');
 });
 
 test('Transpiled InList', () => {
-	checkTranspiledOutput('contains/inList.poc');
+	checkTranspiledOutput('container/inList.poc');
 });
 
 test('Interpreted InSet', () => {
-	checkInterpretedOutput('contains/inSet.poc');
+	checkInterpretedOutput('container/inSet.poc');
 });
 
 test('Transpiled InSet', () => {
-	checkTranspiledOutput('contains/inSet.poc');
+	checkTranspiledOutput('container/inSet.poc');
 });
 
 test('Interpreted InText', () => {
-	checkInterpretedOutput('contains/inText.poc');
+	checkInterpretedOutput('container/inText.poc');
 });
 
 test('Transpiled InText', () => {
-	checkTranspiledOutput('contains/inText.poc');
+	checkTranspiledOutput('container/inText.poc');
 });
 
 test('Interpreted InTextEnum', () => {
-	checkInterpretedOutput('contains/inTextEnum.poc');
+	checkInterpretedOutput('container/inTextEnum.poc');
 });
 
 test('Transpiled InTextEnum', () => {
-	checkTranspiledOutput('contains/inTextEnum.poc');
+	checkTranspiledOutput('container/inTextEnum.poc');
 });
 
 test('Interpreted InTimeRange', () => {
-	checkInterpretedOutput('contains/inTimeRange.poc');
+	checkInterpretedOutput('container/inTimeRange.poc');
 });
 
 test('Transpiled InTimeRange', () => {
-	checkTranspiledOutput('contains/inTimeRange.poc');
+	checkTranspiledOutput('container/inTimeRange.poc');
 });
 
 test('Interpreted InTuple', () => {
-	checkInterpretedOutput('contains/inTuple.poc');
+	checkInterpretedOutput('container/inTuple.poc');
 });
 
 test('Transpiled InTuple', () => {
-	checkTranspiledOutput('contains/inTuple.poc');
+	checkTranspiledOutput('container/inTuple.poc');
 });
 
 test('Interpreted NinCharacterRange', () => {
-	checkInterpretedOutput('contains/ninCharacterRange.poc');
+	checkInterpretedOutput('container/ninCharacterRange.poc');
 });
 
 test('Transpiled NinCharacterRange', () => {
-	checkTranspiledOutput('contains/ninCharacterRange.poc');
+	checkTranspiledOutput('container/ninCharacterRange.poc');
 });
 
 test('Interpreted NinDateRange', () => {
-	checkInterpretedOutput('contains/ninDateRange.poc');
+	checkInterpretedOutput('container/ninDateRange.poc');
 });
 
 test('Transpiled NinDateRange', () => {
-	checkTranspiledOutput('contains/ninDateRange.poc');
+	checkTranspiledOutput('container/ninDateRange.poc');
 });
 
 test('Interpreted NinDict', () => {
-	checkInterpretedOutput('contains/ninDict.poc');
+	checkInterpretedOutput('container/ninDict.poc');
 });
 
 test('Transpiled NinDict', () => {
-	checkTranspiledOutput('contains/ninDict.poc');
+	checkTranspiledOutput('container/ninDict.poc');
 });
 
 test('Interpreted NinIntegerRange', () => {
-	checkInterpretedOutput('contains/ninIntegerRange.poc');
+	checkInterpretedOutput('container/ninIntegerRange.poc');
 });
 
 test('Transpiled NinIntegerRange', () => {
-	checkTranspiledOutput('contains/ninIntegerRange.poc');
+	checkTranspiledOutput('container/ninIntegerRange.poc');
 });
 
 test('Interpreted NinList', () => {
-	checkInterpretedOutput('contains/ninList.poc');
+	checkInterpretedOutput('container/ninList.poc');
 });
 
 test('Transpiled NinList', () => {
-	checkTranspiledOutput('contains/ninList.poc');
+	checkTranspiledOutput('container/ninList.poc');
 });
 
 test('Interpreted NinSet', () => {
-	checkInterpretedOutput('contains/ninSet.poc');
+	checkInterpretedOutput('container/ninSet.poc');
 });
 
 test('Transpiled NinSet', () => {
-	checkTranspiledOutput('contains/ninSet.poc');
+	checkTranspiledOutput('container/ninSet.poc');
 });
 
 test('Interpreted NinText', () => {
-	checkInterpretedOutput('contains/ninText.poc');
+	checkInterpretedOutput('container/ninText.poc');
 });
 
 test('Transpiled NinText', () => {
-	checkTranspiledOutput('contains/ninText.poc');
+	checkTranspiledOutput('container/ninText.poc');
 });
 
 test('Interpreted NinTimeRange', () => {
-	checkInterpretedOutput('contains/ninTimeRange.poc');
+	checkInterpretedOutput('container/ninTimeRange.poc');
 });
 
 test('Transpiled NinTimeRange', () => {
-	checkTranspiledOutput('contains/ninTimeRange.poc');
+	checkTranspiledOutput('container/ninTimeRange.poc');
 });
 

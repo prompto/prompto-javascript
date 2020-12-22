@@ -1,122 +1,122 @@
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
 test('HasAllDict', () => {
-	compareResourceEOE('contains/hasAllDict.pec');
+	compareResourceEOE('container/hasAllDict.pec');
 });
 
 test('HasAllList', () => {
-	compareResourceEOE('contains/hasAllList.pec');
+	compareResourceEOE('container/hasAllList.pec');
 });
 
 test('HasAllRange', () => {
-	compareResourceEOE('contains/hasAllRange.pec');
+	compareResourceEOE('container/hasAllRange.pec');
 });
 
 test('HasAllSet', () => {
-	compareResourceEOE('contains/hasAllSet.pec');
+	compareResourceEOE('container/hasAllSet.pec');
 });
 
 test('HasAllText', () => {
-	compareResourceEOE('contains/hasAllText.pec');
+	compareResourceEOE('container/hasAllText.pec');
 });
 
 test('HasAllTuple', () => {
-	compareResourceEOE('contains/hasAllTuple.pec');
+	compareResourceEOE('container/hasAllTuple.pec');
 });
 
 test('HasAnyDict', () => {
-	compareResourceEOE('contains/hasAnyDict.pec');
+	compareResourceEOE('container/hasAnyDict.pec');
 });
 
 test('HasAnyList', () => {
-	compareResourceEOE('contains/hasAnyList.pec');
+	compareResourceEOE('container/hasAnyList.pec');
 });
 
 test('HasAnyRange', () => {
-	compareResourceEOE('contains/hasAnyRange.pec');
+	compareResourceEOE('container/hasAnyRange.pec');
 });
 
 test('HasAnySet', () => {
-	compareResourceEOE('contains/hasAnySet.pec');
+	compareResourceEOE('container/hasAnySet.pec');
 });
 
 test('HasAnyText', () => {
-	compareResourceEOE('contains/hasAnyText.pec');
+	compareResourceEOE('container/hasAnyText.pec');
 });
 
 test('HasAnyTuple', () => {
-	compareResourceEOE('contains/hasAnyTuple.pec');
+	compareResourceEOE('container/hasAnyTuple.pec');
 });
 
 test('InCharacterRange', () => {
-	compareResourceEOE('contains/inCharacterRange.pec');
+	compareResourceEOE('container/inCharacterRange.pec');
 });
 
 test('InDateRange', () => {
-	compareResourceEOE('contains/inDateRange.pec');
+	compareResourceEOE('container/inDateRange.pec');
 });
 
 test('InDict', () => {
-	compareResourceEOE('contains/inDict.pec');
+	compareResourceEOE('container/inDict.pec');
 });
 
 test('InIntegerRange', () => {
-	compareResourceEOE('contains/inIntegerRange.pec');
+	compareResourceEOE('container/inIntegerRange.pec');
 });
 
 test('InList', () => {
-	compareResourceEOE('contains/inList.pec');
+	compareResourceEOE('container/inList.pec');
 });
 
 test('InSet', () => {
-	compareResourceEOE('contains/inSet.pec');
+	compareResourceEOE('container/inSet.pec');
 });
 
 test('InText', () => {
-	compareResourceEOE('contains/inText.pec');
+	compareResourceEOE('container/inText.pec');
 });
 
 test('InTextEnum', () => {
-	compareResourceEOE('contains/inTextEnum.pec');
+	compareResourceEOE('container/inTextEnum.pec');
 });
 
 test('InTimeRange', () => {
-	compareResourceEOE('contains/inTimeRange.pec');
+	compareResourceEOE('container/inTimeRange.pec');
 });
 
 test('InTuple', () => {
-	compareResourceEOE('contains/inTuple.pec');
+	compareResourceEOE('container/inTuple.pec');
 });
 
 test('NinCharacterRange', () => {
-	compareResourceEOE('contains/ninCharacterRange.pec');
+	compareResourceEOE('container/ninCharacterRange.pec');
 });
 
 test('NinDateRange', () => {
-	compareResourceEOE('contains/ninDateRange.pec');
+	compareResourceEOE('container/ninDateRange.pec');
 });
 
 test('NinDict', () => {
-	compareResourceEOE('contains/ninDict.pec');
+	compareResourceEOE('container/ninDict.pec');
 });
 
 test('NinIntegerRange', () => {
-	compareResourceEOE('contains/ninIntegerRange.pec');
+	compareResourceEOE('container/ninIntegerRange.pec');
 });
 
 test('NinList', () => {
-	compareResourceEOE('contains/ninList.pec');
+	compareResourceEOE('container/ninList.pec');
 });
 
 test('NinSet', () => {
-	compareResourceEOE('contains/ninSet.pec');
+	compareResourceEOE('container/ninSet.pec');
 });
 
 test('NinText', () => {
-	compareResourceEOE('contains/ninText.pec');
+	compareResourceEOE('container/ninText.pec');
 });
 
 test('NinTimeRange', () => {
-	compareResourceEOE('contains/ninTimeRange.pec');
+	compareResourceEOE('container/ninTimeRange.pec');
 });
 

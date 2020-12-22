@@ -1,106 +1,106 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
 test('HasAllList', () => {
-	compareResourceOEO('contains/hasAllList.poc');
+	compareResourceOEO('container/hasAllList.poc');
 });
 
 test('HasAllSet', () => {
-	compareResourceOEO('contains/hasAllSet.poc');
+	compareResourceOEO('container/hasAllSet.poc');
 });
 
 test('HasAllText', () => {
-	compareResourceOEO('contains/hasAllText.poc');
+	compareResourceOEO('container/hasAllText.poc');
 });
 
 test('HasAllTuple', () => {
-	compareResourceOEO('contains/hasAllTuple.poc');
+	compareResourceOEO('container/hasAllTuple.poc');
 });
 
 test('HasAnyList', () => {
-	compareResourceOEO('contains/hasAnyList.poc');
+	compareResourceOEO('container/hasAnyList.poc');
 });
 
 test('HasAnySet', () => {
-	compareResourceOEO('contains/hasAnySet.poc');
+	compareResourceOEO('container/hasAnySet.poc');
 });
 
 test('HasAnyText', () => {
-	compareResourceOEO('contains/hasAnyText.poc');
+	compareResourceOEO('container/hasAnyText.poc');
 });
 
 test('HasAnyTuple', () => {
-	compareResourceOEO('contains/hasAnyTuple.poc');
+	compareResourceOEO('container/hasAnyTuple.poc');
 });
 
 test('InCharacterRange', () => {
-	compareResourceOEO('contains/inCharacterRange.poc');
+	compareResourceOEO('container/inCharacterRange.poc');
 });
 
 test('InDateRange', () => {
-	compareResourceOEO('contains/inDateRange.poc');
+	compareResourceOEO('container/inDateRange.poc');
 });
 
 test('InDict', () => {
-	compareResourceOEO('contains/inDict.poc');
+	compareResourceOEO('container/inDict.poc');
 });
 
 test('InIntegerRange', () => {
-	compareResourceOEO('contains/inIntegerRange.poc');
+	compareResourceOEO('container/inIntegerRange.poc');
 });
 
 test('InList', () => {
-	compareResourceOEO('contains/inList.poc');
+	compareResourceOEO('container/inList.poc');
 });
 
 test('InSet', () => {
-	compareResourceOEO('contains/inSet.poc');
+	compareResourceOEO('container/inSet.poc');
 });
 
 test('InText', () => {
-	compareResourceOEO('contains/inText.poc');
+	compareResourceOEO('container/inText.poc');
 });
 
 test('InTextEnum', () => {
-	compareResourceOEO('contains/inTextEnum.poc');
+	compareResourceOEO('container/inTextEnum.poc');
 });
 
 test('InTimeRange', () => {
-	compareResourceOEO('contains/inTimeRange.poc');
+	compareResourceOEO('container/inTimeRange.poc');
 });
 
 test('InTuple', () => {
-	compareResourceOEO('contains/inTuple.poc');
+	compareResourceOEO('container/inTuple.poc');
 });
 
 test('NinCharacterRange', () => {
-	compareResourceOEO('contains/ninCharacterRange.poc');
+	compareResourceOEO('container/ninCharacterRange.poc');
 });
 
 test('NinDateRange', () => {
-	compareResourceOEO('contains/ninDateRange.poc');
+	compareResourceOEO('container/ninDateRange.poc');
 });
 
 test('NinDict', () => {
-	compareResourceOEO('contains/ninDict.poc');
+	compareResourceOEO('container/ninDict.poc');
 });
 
 test('NinIntegerRange', () => {
-	compareResourceOEO('contains/ninIntegerRange.poc');
+	compareResourceOEO('container/ninIntegerRange.poc');
 });
 
 test('NinList', () => {
-	compareResourceOEO('contains/ninList.poc');
+	compareResourceOEO('container/ninList.poc');
 });
 
 test('NinSet', () => {
-	compareResourceOEO('contains/ninSet.poc');
+	compareResourceOEO('container/ninSet.poc');
 });
 
 test('NinText', () => {
-	compareResourceOEO('contains/ninText.poc');
+	compareResourceOEO('container/ninText.poc');
 });
 
 test('NinTimeRange', () => {
-	compareResourceOEO('contains/ninTimeRange.poc');
+	compareResourceOEO('container/ninTimeRange.poc');
 });
 
