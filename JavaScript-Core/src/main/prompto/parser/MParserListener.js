@@ -662,15 +662,6 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#NotEqualsExpression.
-	enterNotEqualsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#NotEqualsExpression.
-	exitNotEqualsExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#InExpression.
 	enterInExpression(ctx) {
 	}
@@ -698,12 +689,12 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#GreaterThanExpression.
-	enterGreaterThanExpression(ctx) {
+	// Enter a parse tree produced by MParser#CompareExpression.
+	enterCompareExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by MParser#GreaterThanExpression.
-	exitGreaterThanExpression(ctx) {
+	// Exit a parse tree produced by MParser#CompareExpression.
+	exitCompareExpression(ctx) {
 	}
 
 
@@ -725,24 +716,6 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#LessThanOrEqualExpression.
-	enterLessThanOrEqualExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#LessThanOrEqualExpression.
-	exitLessThanOrEqualExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by MParser#NotHasAnyExpression.
-	enterNotHasAnyExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#NotHasAnyExpression.
-	exitNotHasAnyExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#AndExpression.
 	enterAndExpression(ctx) {
 	}
@@ -761,30 +734,12 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#NotHasExpression.
-	enterNotHasExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#NotHasExpression.
-	exitNotHasExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#ClosureExpression.
 	enterClosureExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by MParser#ClosureExpression.
 	exitClosureExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by MParser#NotHasAllExpression.
-	enterNotHasAllExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#NotHasAllExpression.
-	exitNotHasAllExpression(ctx) {
 	}
 
 
@@ -806,30 +761,12 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#NotContainsExpression.
-	enterNotContainsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#NotContainsExpression.
-	exitNotContainsExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#MultiplyExpression.
 	enterMultiplyExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by MParser#MultiplyExpression.
 	exitMultiplyExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by MParser#RoughlyEqualsExpression.
-	enterRoughlyEqualsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#RoughlyEqualsExpression.
-	exitRoughlyEqualsExpression(ctx) {
 	}
 
 
@@ -842,39 +779,12 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#GreaterThanOrEqualExpression.
-	enterGreaterThanOrEqualExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#GreaterThanOrEqualExpression.
-	exitGreaterThanOrEqualExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by MParser#NotInExpression.
-	enterNotInExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#NotInExpression.
-	exitNotInExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#IteratorExpression.
 	enterIteratorExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by MParser#IteratorExpression.
 	exitIteratorExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by MParser#IsNotExpression.
-	enterIsNotExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#IsNotExpression.
-	exitIsNotExpression(ctx) {
 	}
 
 
@@ -968,21 +878,39 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#LessThanExpression.
-	enterLessThanExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#LessThanExpression.
-	exitLessThanExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#EqualsExpression.
 	enterEqualsExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by MParser#EqualsExpression.
 	exitEqualsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ArrowFilterExpression.
+	enterArrowFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ArrowFilterExpression.
+	exitArrowFilterExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#ExplicitFilterExpression.
+	enterExplicitFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#ExplicitFilterExpression.
+	exitExplicitFilterExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#OtherFilterExpression.
+	enterOtherFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#OtherFilterExpression.
+	exitOtherFilterExpression(ctx) {
 	}
 
 

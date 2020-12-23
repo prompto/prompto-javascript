@@ -707,15 +707,6 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#NotEqualsExpression.
-	enterNotEqualsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#NotEqualsExpression.
-	exitNotEqualsExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#InExpression.
 	enterInExpression(ctx) {
 	}
@@ -752,12 +743,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#GreaterThanExpression.
-	enterGreaterThanExpression(ctx) {
+	// Enter a parse tree produced by OParser#CompareExpression.
+	enterCompareExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by OParser#GreaterThanExpression.
-	exitGreaterThanExpression(ctx) {
+	// Exit a parse tree produced by OParser#CompareExpression.
+	exitCompareExpression(ctx) {
 	}
 
 
@@ -779,24 +770,6 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#LessThanOrEqualExpression.
-	enterLessThanOrEqualExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#LessThanOrEqualExpression.
-	exitLessThanOrEqualExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#NotHasAnyExpression.
-	enterNotHasAnyExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#NotHasAnyExpression.
-	exitNotHasAnyExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#AndExpression.
 	enterAndExpression(ctx) {
 	}
@@ -815,30 +788,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#NotHasExpression.
-	enterNotHasExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#NotHasExpression.
-	exitNotHasExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#ClosureExpression.
 	enterClosureExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by OParser#ClosureExpression.
 	exitClosureExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#NotHasAllExpression.
-	enterNotHasAllExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#NotHasAllExpression.
-	exitNotHasAllExpression(ctx) {
 	}
 
 
@@ -851,39 +806,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#NotContainsExpression.
-	enterNotContainsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#NotContainsExpression.
-	exitNotContainsExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#MultiplyExpression.
 	enterMultiplyExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by OParser#MultiplyExpression.
 	exitMultiplyExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#RoughlyEqualsExpression.
-	enterRoughlyEqualsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#RoughlyEqualsExpression.
-	exitRoughlyEqualsExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#IsNotAnExpression.
-	enterIsNotAnExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#IsNotAnExpression.
-	exitIsNotAnExpression(ctx) {
 	}
 
 
@@ -896,39 +824,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#GreaterThanOrEqualExpression.
-	enterGreaterThanOrEqualExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#GreaterThanOrEqualExpression.
-	exitGreaterThanOrEqualExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#NotInExpression.
-	enterNotInExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#NotInExpression.
-	exitNotInExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#IteratorExpression.
 	enterIteratorExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by OParser#IteratorExpression.
 	exitIteratorExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#IsNotExpression.
-	enterIsNotExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#IsNotExpression.
-	exitIsNotExpression(ctx) {
 	}
 
 
@@ -1022,21 +923,39 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#LessThanExpression.
-	enterLessThanExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#LessThanExpression.
-	exitLessThanExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#EqualsExpression.
 	enterEqualsExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by OParser#EqualsExpression.
 	exitEqualsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by OParser#ArrowFilterExpression.
+	enterArrowFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#ArrowFilterExpression.
+	exitArrowFilterExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by OParser#ExplicitFilterExpression.
+	enterExplicitFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#ExplicitFilterExpression.
+	exitExplicitFilterExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by OParser#OtherFilterExpression.
+	enterOtherFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#OtherFilterExpression.
+	exitOtherFilterExpression(ctx) {
 	}
 
 

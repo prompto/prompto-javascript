@@ -680,12 +680,30 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#TernaryExpression.
+	enterTernaryExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#TernaryExpression.
+	exitTernaryExpression(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#InExpression.
 	enterInExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by EParser#InExpression.
 	exitInExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#DocumentExpression.
+	enterDocumentExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#DocumentExpression.
+	exitDocumentExpression(ctx) {
 	}
 
 
@@ -698,12 +716,30 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#GreaterThanExpression.
-	enterGreaterThanExpression(ctx) {
+	// Enter a parse tree produced by EParser#NotExpression.
+	enterNotExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by EParser#GreaterThanExpression.
-	exitGreaterThanExpression(ctx) {
+	// Exit a parse tree produced by EParser#NotExpression.
+	exitNotExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#InvocationExpression.
+	enterInvocationExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#InvocationExpression.
+	exitInvocationExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#CompareExpression.
+	enterCompareExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#CompareExpression.
+	exitCompareExpression(ctx) {
 	}
 
 
@@ -716,21 +752,30 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#CodeExpression.
+	enterCodeExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#CodeExpression.
+	exitCodeExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#AmbiguousExpression.
+	enterAmbiguousExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#AmbiguousExpression.
+	exitAmbiguousExpression(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#ReadOneExpression.
 	enterReadOneExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by EParser#ReadOneExpression.
 	exitReadOneExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#NotHasAnyExpression.
-	enterNotHasAnyExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#NotHasAnyExpression.
-	exitNotHasAnyExpression(ctx) {
 	}
 
 
@@ -770,12 +815,12 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#NotHasExpression.
-	enterNotHasExpression(ctx) {
+	// Enter a parse tree produced by EParser#ClosureExpression.
+	enterClosureExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by EParser#NotHasExpression.
-	exitNotHasExpression(ctx) {
+	// Exit a parse tree produced by EParser#ClosureExpression.
+	exitClosureExpression(ctx) {
 	}
 
 
@@ -788,12 +833,12 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#NotHasAllExpression.
-	enterNotHasAllExpression(ctx) {
+	// Enter a parse tree produced by EParser#BlobExpression.
+	enterBlobExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by EParser#NotHasAllExpression.
-	exitNotHasAllExpression(ctx) {
+	// Exit a parse tree produced by EParser#BlobExpression.
+	exitBlobExpression(ctx) {
 	}
 
 
@@ -803,222 +848,6 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by EParser#ContainsExpression.
 	exitContainsExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#NotContainsExpression.
-	enterNotContainsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#NotContainsExpression.
-	exitNotContainsExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#RoughlyEqualsExpression.
-	enterRoughlyEqualsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#RoughlyEqualsExpression.
-	exitRoughlyEqualsExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#ExecuteExpression.
-	enterExecuteExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#ExecuteExpression.
-	exitExecuteExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#GreaterThanOrEqualExpression.
-	enterGreaterThanOrEqualExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#GreaterThanOrEqualExpression.
-	exitGreaterThanOrEqualExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#IteratorExpression.
-	enterIteratorExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#IteratorExpression.
-	exitIteratorExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#IsNotExpression.
-	enterIsNotExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#IsNotExpression.
-	exitIsNotExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#DivideExpression.
-	enterDivideExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#DivideExpression.
-	exitDivideExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#IsExpression.
-	enterIsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#IsExpression.
-	exitIsExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#AddExpression.
-	enterAddExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#AddExpression.
-	exitAddExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#InstanceExpression.
-	enterInstanceExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#InstanceExpression.
-	exitInstanceExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#MutableInstanceExpression.
-	enterMutableInstanceExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#MutableInstanceExpression.
-	exitMutableInstanceExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#ReadAllExpression.
-	enterReadAllExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#ReadAllExpression.
-	exitReadAllExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#CastExpression.
-	enterCastExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#CastExpression.
-	exitCastExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#ModuloExpression.
-	enterModuloExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#ModuloExpression.
-	exitModuloExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#TernaryExpression.
-	enterTernaryExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#TernaryExpression.
-	exitTernaryExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#NotEqualsExpression.
-	enterNotEqualsExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#NotEqualsExpression.
-	exitNotEqualsExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#DocumentExpression.
-	enterDocumentExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#DocumentExpression.
-	exitDocumentExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#NotExpression.
-	enterNotExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#NotExpression.
-	exitNotExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#InvocationExpression.
-	enterInvocationExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#InvocationExpression.
-	exitInvocationExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#CodeExpression.
-	enterCodeExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#CodeExpression.
-	exitCodeExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#AmbiguousExpression.
-	enterAmbiguousExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#AmbiguousExpression.
-	exitAmbiguousExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#LessThanOrEqualExpression.
-	enterLessThanOrEqualExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#LessThanOrEqualExpression.
-	exitLessThanOrEqualExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#ClosureExpression.
-	enterClosureExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#ClosureExpression.
-	exitClosureExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#BlobExpression.
-	enterBlobExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#BlobExpression.
-	exitBlobExpression(ctx) {
 	}
 
 
@@ -1058,12 +887,21 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#NotInExpression.
-	enterNotInExpression(ctx) {
+	// Enter a parse tree produced by EParser#ExecuteExpression.
+	enterExecuteExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by EParser#NotInExpression.
-	exitNotInExpression(ctx) {
+	// Exit a parse tree produced by EParser#ExecuteExpression.
+	exitExecuteExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#IteratorExpression.
+	enterIteratorExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#IteratorExpression.
+	exitIteratorExpression(ctx) {
 	}
 
 
@@ -1076,12 +914,39 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#DivideExpression.
+	enterDivideExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#DivideExpression.
+	exitDivideExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#IsExpression.
+	enterIsExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#IsExpression.
+	exitIsExpression(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#MinusExpression.
 	enterMinusExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by EParser#MinusExpression.
 	exitMinusExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#AddExpression.
+	enterAddExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#AddExpression.
+	exitAddExpression(ctx) {
 	}
 
 
@@ -1094,6 +959,33 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#InstanceExpression.
+	enterInstanceExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#InstanceExpression.
+	exitInstanceExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#MutableInstanceExpression.
+	enterMutableInstanceExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#MutableInstanceExpression.
+	exitMutableInstanceExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#ReadAllExpression.
+	enterReadAllExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#ReadAllExpression.
+	exitReadAllExpression(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#CssExpression.
 	enterCssExpression(ctx) {
 	}
@@ -1103,12 +995,21 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#LessThanExpression.
-	enterLessThanExpression(ctx) {
+	// Enter a parse tree produced by EParser#CastExpression.
+	enterCastExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by EParser#LessThanExpression.
-	exitLessThanExpression(ctx) {
+	// Exit a parse tree produced by EParser#CastExpression.
+	exitCastExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#ModuloExpression.
+	enterModuloExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#ModuloExpression.
+	exitModuloExpression(ctx) {
 	}
 
 
@@ -1118,6 +1019,33 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by EParser#EqualsExpression.
 	exitEqualsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#ArrowFilterExpression.
+	enterArrowFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#ArrowFilterExpression.
+	exitArrowFilterExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#ExplicitFilterExpression.
+	enterExplicitFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#ExplicitFilterExpression.
+	exitExplicitFilterExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#OtherFilterExpression.
+	enterOtherFilterExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#OtherFilterExpression.
+	exitOtherFilterExpression(ctx) {
 	}
 
 
