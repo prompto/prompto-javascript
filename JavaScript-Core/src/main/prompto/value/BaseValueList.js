@@ -15,6 +15,10 @@ export default class BaseValueList extends Container {
         this.mutable = mutable || false;
     }
 
+    toArray() {
+        return this.items;
+    }
+
     toString() {
         return "[" + this.items.join(", ") + "]";
     }

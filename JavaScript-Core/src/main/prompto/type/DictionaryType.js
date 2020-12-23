@@ -89,24 +89,24 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkContainsAllOrAny(context, other) {
+    checkHasAllOrAny(context, other) {
         return BooleanType.instance;
     }
 
-    declareContainsAllOrAny(transpiler, other, container, items) {
+    declareHasAllOrAny(transpiler, other, container, items) {
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
     }
 
-    transpileContainsAll(transpiler, other, container, items) {
+    transpileHasAllValue(transpiler, other, container, items) {
         container.transpile(transpiler);
         transpiler.append(".hasAll(");
         items.transpile(transpiler);
         transpiler.append(")");
     }
 
-    transpileContainsAny(transpiler, other, container, items) {
+    transpileHasAnyValue(transpiler, other, container, items) {
         container.transpile(transpiler);
         transpiler.append(".hasAny(");
         items.transpile(transpiler);

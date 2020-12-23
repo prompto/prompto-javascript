@@ -1,15 +1,19 @@
-import Value from './Value.js'
+import Container from './Container.js'
 import { IntegerValue, ListValue } from './index.js'
 import { SyntaxError, IndexOutOfRangeError } from '../error/index.js'
 import { SetType } from '../type/index.js'
 import { StrictSet } from '../intrinsic/index.js'
 
-export default class SetValue extends Value {
+export default class SetValue extends Container {
 
     constructor(itemType, items) {
         super(new SetType(itemType));
         this.itemType = itemType;
         this.items = items || new StrictSet();
+    }
+
+    toArray() {
+        return this.items.toArray();
     }
 
     add(item) {

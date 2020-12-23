@@ -269,32 +269,46 @@ export default class BaseType {
             throw new SyntaxError(this.name + " cannot transpile contain " + other.name);
     }
 
-    checkContainsAllOrAny(context, other) {
+    checkHasAllOrAny(context, other) {
         if(other instanceof EnumeratedNativeType)
-            return this.checkContainsAllOrAny(context, other.derivedFrom);
+            return this.checkHasAllOrAny(context, other.derivedFrom);
         else
-            throw new SyntaxError(this.name + " cannot contain all or any " + other.name);
+            throw new SyntaxError(this.name + " cannot have all or any " + other.name);
     }
 
-    declareContainsAllOrAny(transpiler, other, container, item) {
+    declareHasAllOrAny(transpiler, other, container, item) {
         if(other instanceof EnumeratedNativeType)
-            return this.declareContainsAllOrAny(transpiler, other.derivedFrom, container, item);
+            return this.declareHasAllOrAny(transpiler, other.derivedFrom, container, item);
         else
-            throw new SyntaxError(this.name + " cannot declare contain all or any " + other.name);
+            throw new SyntaxError(this.name + " cannot declare have all or any " + other.name);
     }
 
-    transpileContainsAll(transpiler, other, container, item) {
+    transpileHasAllValue(transpiler, other, container, item) {
         if(other instanceof EnumeratedNativeType)
-            return this.transpileContainsAll(transpiler, other.derivedFrom, container, item);
+            return this.transpileHasAllValue(transpiler, other.derivedFrom, container, item);
         else
-            throw new SyntaxError(this.name + " cannot transpile contain all " + other.name);
+            throw new SyntaxError(this.name + " cannot transpile has all " + other.name);
     }
 
-    transpileContainsAny(transpiler, other, container, item) {
+    transpileHasAnyValue(transpiler, other, container, item) {
         if(other instanceof EnumeratedNativeType)
-            return this.transpileContainsAny(transpiler, other.derivedFrom, container, item);
+            return this.transpileHasAnyValue(transpiler, other.derivedFrom, container, item);
         else
-            throw new SyntaxError(this.name + " cannot transpile contain any " + other.name);
+            throw new SyntaxError(this.name + " cannot transpile has any " + other.name);
+    }
+
+    transpileHasAllPredicate(transpiler, other, container, predicate) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileHasAllPredicate(transpiler, other.derivedFrom, container, predicate);
+        else
+            throw new SyntaxError(this.name + " cannot transpile has all " + other.name);
+    }
+
+    transpileHasAnyPredicate(transpiler, other, container, predicate) {
+        if(other instanceof EnumeratedNativeType)
+            return this.transpileHasAnyPredicate(transpiler, other.derivedFrom, container, predicate);
+        else
+            throw new SyntaxError(this.name + " cannot transpile has any " + other.name);
     }
 
     checkItem(context, itemType, expression) {

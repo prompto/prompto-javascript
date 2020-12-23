@@ -14,4 +14,8 @@ export default class PredicateExpression extends Expression {
         throw new Error("Override!");
     }
 
+    containsToDialect(writer) {
+        throw new Error("Override!");
+    }
+
 }

@@ -56,7 +56,7 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
             writer.append(")");
         } else {
             writer.append(" ")
-                .append(this.itemId)
+                .append(this.itemId.name)
                 .append(" where ");
             this.predicate.toDialect(writer);
         }

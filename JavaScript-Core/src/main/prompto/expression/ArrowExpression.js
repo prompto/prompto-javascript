@@ -92,6 +92,16 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
 
+    containsToDialect(writer) {
+        writer.append("where ");
+        if (writer.dialect === Dialect.O)
+            writer.append("( ");
+        this.toDialect(writer)
+        if (writer.dialect === Dialect.O)
+            writer.append(" ) ");
+    }
+
+
     bodyToDialect(writer) {
         if(this.statements.length==1 && this.statements[0] instanceof ReturnStatement)
             this.statements[0].expression.toDialect(writer);

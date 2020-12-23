@@ -1,14 +1,14 @@
 import Expression from './Expression.js'
-import { SyntaxError } from '../error/index.js'
-import { ContOp } from '../grammar/index.js'
-import { MatchOp } from '../store/index.js'
-import { UnresolvedIdentifier, InstanceExpression, MemberSelector, PredicateExpression } from '../expression/index.js'
-import { Value, NullValue, BooleanValue, Instance } from '../value/index.js'
-import { IterableType } from '../type/index.js'
-import { CodeWriter } from '../utils/index.js'
+import {SyntaxError} from '../error/index.js'
+import {ContOp} from '../grammar/index.js'
+import {MatchOp} from '../store/index.js'
+import {UnresolvedIdentifier, InstanceExpression, MemberSelector, PredicateExpression} from '../expression/index.js'
+import {Value, NullValue, BooleanValue, Instance, Container} from '../value/index.js'
+import {IterableType} from '../type/index.js'
+import {CodeWriter} from '../utils/index.js'
 
 export default class ContainsExpression extends Expression {
-  
+
     constructor(left, operator, right) {
         super();
         this.left = left;
@@ -25,7 +25,10 @@ export default class ContainsExpression extends Expression {
         writer.append(" ");
         this.operator.toDialect(writer);
         writer.append(" ");
-        this.right.toDialect(writer);
+        if (this.right instanceof PredicateExpression)
+            this.right.containsToDialect(writer);
+        else
+            this.right.toDialect(writer);
     }
 
     check(context) {
@@ -62,57 +65,104 @@ export default class ContainsExpression extends Expression {
             case ContOp.NOT_HAS:
                 return lt.checkContains(context, this, rt);
             default:
-                return lt.checkContainsAllOrAny(context, rt);
+                return lt.checkHasAllOrAny(context, rt);
         }
     }
 
     interpret(context) {
-        const lval = this.left.interpret(context);
-        const rval = this.right.interpret(context);
-        return this.interpretValues(context, lval, rval);
+        if (this.right instanceof PredicateExpression)
+            return this.interpretPredicate(context);
+        else {
+            const lval = this.left.interpret(context);
+            const rval = this.right.interpret(context);
+            return this.interpretValues(context, lval, rval);
+        }
     }
+
+
+    interpretPredicate(context) {
+        const lval = this.left.interpret(context);
+        if (!(lval instanceof Container))
+            throw new SyntaxError("Expecting a collection!");
+        const itemType = lval.type.itemType;
+        const arrow = this.right.toArrowExpression();
+        const predicate = arrow.getFilter(context, itemType);
+        return this.interpretContainerPredicate(context, lval, predicate);
+    }
+
+
+    interpretContainerPredicate(context, container, predicate) {
+        let result;
+        switch (this.operator) {
+            case ContOp.HAS_ALL:
+            case ContOp.NOT_HAS_ALL:
+                result = this.allMatch(context, container, predicate);
+                break;
+            case ContOp.HAS_ANY:
+            case ContOp.NOT_HAS_ANY:
+                result = this.anyMatch(context, container, predicate);
+                break;
+        }
+        if (typeof (result) === "boolean") {
+            if (this.operator.name.startsWith("NOT_"))
+                result = !result;
+            return BooleanValue.ValueOf(result);
+        }
+        const lowerName = this.operator.name.toLowerCase().replace(/_/g, ' ');
+        throw new SyntaxError("Illegal filter: " + typeof (container) + " " + lowerName)
+    }
+
+
+    allMatch(context, container, predicate) {
+        return container.toArray().every(predicate);
+    }
+
+
+    anyMatch(context, container, predicate) {
+        return container.toArray().some(predicate);
+    }
+
 
     interpretValues(context, lval, rval) {
         let result = null;
         switch (this.operator) {
-        case ContOp.IN:
-        case ContOp.NOT_IN:
-            if(rval==NullValue.instance)
-                result = false;
-            else if(rval.hasItem)
-                result = rval.hasItem(context, lval);
-            break;
-        case ContOp.HAS:
-        case ContOp.NOT_HAS:
-            if(lval==NullValue.instance)
-                result = false;
-            else if(lval.hasItem)
-                result = lval.hasItem(context, rval);
-            break;
-        case ContOp.HAS_ALL:
-        case ContOp.NOT_HAS_ALL:
-            if(lval==NullValue.instance || rval==NullValue.instance)
-                result = false;
-            else if (lval.hasItem && rval.hasItem)
-                result = this.containsAll(context, lval, rval);
-            break;
-        case ContOp.HAS_ANY:
-        case ContOp.NOT_HAS_ANY:
-            if(lval==NullValue.instance || rval==NullValue.instance)
-                result = false;
-            else if (lval.hasItem && rval.hasItem)
-                result = this.containsAny(context, lval, rval);
-            break;
+            case ContOp.IN:
+            case ContOp.NOT_IN:
+                if (rval == NullValue.instance)
+                    result = false;
+                else if (rval.hasItem)
+                    result = rval.hasItem(context, lval);
+                break;
+            case ContOp.HAS:
+            case ContOp.NOT_HAS:
+                if (lval == NullValue.instance)
+                    result = false;
+                else if (lval.hasItem)
+                    result = lval.hasItem(context, rval);
+                break;
+            case ContOp.HAS_ALL:
+            case ContOp.NOT_HAS_ALL:
+                if (lval == NullValue.instance || rval == NullValue.instance)
+                    result = false;
+                else if (lval.hasItem && rval.hasItem)
+                    result = this.containsAll(context, lval, rval);
+                break;
+            case ContOp.HAS_ANY:
+            case ContOp.NOT_HAS_ANY:
+                if (lval == NullValue.instance || rval == NullValue.instance)
+                    result = false;
+                else if (lval.hasItem && rval.hasItem)
+                    result = this.containsAny(context, lval, rval);
+                break;
         }
-        if (result != null)
-        {
-            if (this.operator.name.indexOf("NOT_")==0) {
+        if (result != null) {
+            if (this.operator.name.indexOf("NOT_") == 0) {
                 result = !result;
             }
             return BooleanValue.ValueOf(result);
         }
         // error management
-        if (this.operator.name.lastIndexOf("IN")==this.operator.name.length-"IN".length) {
+        if (this.operator.name.lastIndexOf("IN") == this.operator.name.length - "IN".length) {
             const tmp = lval;
             lval = rval;
             rval = tmp;
@@ -123,7 +173,7 @@ export default class ContainsExpression extends Expression {
 
     containsAll(context, container, items) {
         const iterItems = items.getIterator(context);
-        while(iterItems.hasNext()) {
+        while (iterItems.hasNext()) {
             const item = iterItems.next();
             if (item instanceof Value) {
                 if (!container.hasItem(context, item)) {
@@ -131,23 +181,22 @@ export default class ContainsExpression extends Expression {
                 }
             } else
                 context.problemListener.reportIllegalContains();
-                // throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
+            // throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
         }
         return true;
     }
 
     containsAny(context, container, items) {
         const iterItems = items.getIterator(context);
-        while(iterItems.hasNext()) {
+        while (iterItems.hasNext()) {
             const item = iterItems.next();
-            if (item instanceof Value)
-            {
+            if (item instanceof Value) {
                 if (container.hasItem(context, item)) {
                     return true;
                 }
             } else
                 context.problemListener.reportIllegalContains();
-                // throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
+            // throw new SyntaxError("Illegal contains: " + typeof(container) + " + " + typeof(item));
         }
         return false;
     }
@@ -156,10 +205,10 @@ export default class ContainsExpression extends Expression {
         const lval = this.left.interpret(context);
         const rval = this.right.interpret(context);
         const result = this.interpretValues(context, lval, rval);
-        if(result==BooleanValue.TRUE)
+        if (result == BooleanValue.TRUE)
             return true;
         const expected = this.getExpected(context, test.dialect);
-        const actual = lval.toString() + " " + this.operator.toString() +  " " + rval.toString();
+        const actual = lval.toString() + " " + this.operator.toString() + " " + rval.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
@@ -181,7 +230,7 @@ export default class ContainsExpression extends Expression {
 
     checkQuery(context) {
         const decl = this.left.checkAttribute(context);
-        if(decl && !decl.storable)
+        if (decl && !decl.storable)
             context.problemListener.reportNotStorable(this, decl.name);
         const rt = this.right.check(context);
         return this.checkOperator(context, decl.getType(), rt);
@@ -189,7 +238,7 @@ export default class ContainsExpression extends Expression {
 
     interpretQuery(context, query) {
         const decl = this.left.checkAttribute(context);
-        if(!decl || !decl.storable)
+        if (!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
         const info = decl.getAttributeInfo();
         let value = this.right.interpret(context);
@@ -198,13 +247,13 @@ export default class ContainsExpression extends Expression {
         const data = value.getStorableData();
         const matchOp = this.getMatchOp(context, decl.getType(), value.type, this.operator, false);
         query.verify(info, matchOp, data);
-        if (this.operator.name.indexOf("NOT_")==0)
+        if (this.operator.name.indexOf("NOT_") == 0)
             query.not();
     }
 
     transpileQuery(transpiler, builder) {
         const decl = this.left.checkAttribute(transpiler.context);
-        if(!decl || !decl.storable)
+        if (!decl || !decl.storable)
             throw new SyntaxError("Unable to transpile predicate");
         const info = decl.getAttributeInfo();
         const type = this.right.check(transpiler.context);
@@ -213,7 +262,7 @@ export default class ContainsExpression extends Expression {
         transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
         this.right.transpile(transpiler);
         transpiler.append(");").newLine();
-        if (this.operator.name.indexOf("NOT_")==0)
+        if (this.operator.name.indexOf("NOT_") == 0)
             transpiler.append(builder).append(".not();").newLine();
     }
 
@@ -245,9 +294,26 @@ export default class ContainsExpression extends Expression {
     }
 
     declare(transpiler) {
+        if (this.right instanceof PredicateExpression)
+            return this.declarePredicate(transpiler);
+        else
+            return this.declareValue(transpiler);
+    }
+
+
+    declarePredicate(transpiler) {
+        this.left.declare(transpiler);
+        const manyType = this.left.check(transpiler.context);
+        const itemType = manyType.itemType;
+        const arrow = this.right.toArrowExpression();
+        arrow.declareFilter(transpiler, itemType);
+    }
+
+
+    declareValue(transpiler) {
         const lt = this.left.check(transpiler.context);
         const rt = this.right.check(transpiler.context);
-        switch(this.operator) {
+        switch (this.operator) {
             case ContOp.IN:
             case ContOp.NOT_IN:
                 return rt.declareContains(transpiler, lt, this.right, this.left);
@@ -255,14 +321,42 @@ export default class ContainsExpression extends Expression {
             case ContOp.NOT_HAS:
                 return lt.declareContains(transpiler, rt, this.left, this.right);
             default:
-                return lt.declareContainsAllOrAny(transpiler, rt, this.left, this.right);
+                return lt.declareHasAllOrAny(transpiler, rt, this.left, this.right);
         }
     }
 
     transpile(transpiler) {
+        if (this.right instanceof PredicateExpression)
+            return this.transpilePredicate(transpiler);
+        else
+            return this.transpileValue(transpiler);
+    }
+
+    transpilePredicate(transpiler) {
+        const lt = this.left.check(transpiler.context);
+        switch (this.operator) {
+            case ContOp.NOT_HAS_ALL:
+                transpiler.append("!");
+                // no-break
+            case ContOp.HAS_ALL:
+                lt.transpileHasAllPredicate(transpiler, this.left, this.right);
+                return false;
+            case ContOp.NOT_HAS_ANY:
+                transpiler.append("!");
+                // no-break
+            case ContOp.HAS_ANY:
+                lt.transpileHasAnyPredicate(transpiler, this.left, this.right);
+                return false;
+            default:
+                throw new Error("Unsupported " + this.operator);
+        }
+    }
+
+
+    transpileValue(transpiler) {
         const lt = this.left.check(transpiler.context);
         const rt = this.right.check(transpiler.context);
-        switch(this.operator) {
+        switch (this.operator) {
             case ContOp.NOT_IN:
                 transpiler.append("!");
                 // no-break
@@ -277,12 +371,12 @@ export default class ContainsExpression extends Expression {
                 transpiler.append("!");
                 // no-break
             case ContOp.HAS_ALL:
-                return lt.transpileContainsAll(transpiler, rt, this.left, this.right);
+                return lt.transpileHasAllValue(transpiler, rt, this.left, this.right);
             case ContOp.NOT_HAS_ANY:
                 transpiler.append("!");
                 // no-break
             case ContOp.HAS_ANY:
-                return lt.transpileContainsAny(transpiler, rt, this.left, this.right);
+                return lt.transpileHasAnyValue(transpiler, rt, this.left, this.right);
             default:
                 throw new Error("Unsupported " + this.operator);
         }

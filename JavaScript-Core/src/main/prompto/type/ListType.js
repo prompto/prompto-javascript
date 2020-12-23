@@ -209,27 +209,47 @@ export default class ListType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkContainsAllOrAny(context, other) {
+    checkHasAllOrAny(context, other) {
         return BooleanType.instance;
     }
 
-    declareContainsAllOrAny(transpiler, other, container, items) {
+    declareHasAllOrAny(transpiler, other, container, items) {
         transpiler.require(StrictSet);
         container.declare(transpiler);
         items.declare(transpiler);
     }
 
-    transpileContainsAll(transpiler, other, container, items) {
+    transpileHasAllValue(transpiler, other, container, items) {
         container.transpile(transpiler);
         transpiler.append(".hasAll(");
         items.transpile(transpiler);
         transpiler.append(")");
     }
 
-    transpileContainsAny(transpiler, other, container, items) {
+    transpileHasAnyValue(transpiler, other, container, items) {
         container.transpile(transpiler);
         transpiler.append(".hasAny(");
         items.transpile(transpiler);
+        transpiler.append(")");
+    }
+
+    transpileHasAllPredicate(transpiler, container, predicate) {
+        container.transpile(transpiler);
+        transpiler.append(".every(");
+        const arrow = predicate.toArrowExpression();
+        const type = container.check(transpiler.context);
+        const itemType = type.itemType;
+        arrow.transpileFilter(transpiler, itemType);
+        transpiler.append(")");
+    }
+
+    transpileHasAnyPredicate(transpiler, container, predicate) {
+        container.transpile(transpiler);
+        transpiler.append(".some(");
+        const arrow = predicate.toArrowExpression();
+        const type = container.check(transpiler.context);
+        const itemType = type.itemType;
+        arrow.transpileFilter(transpiler, itemType);
         transpiler.append(")");
     }
 
