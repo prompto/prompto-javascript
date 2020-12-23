@@ -1,13 +1,12 @@
-import Expression from './Expression.js'
+import PredicateExpression from './PredicateExpression.js'
 import { Dialect } from '../parser/index.js'
 import { ReturnStatement, StatementList } from '../statement/index.js'
 import { Variable, Context } from '../runtime/index.js'
 import { IntegerValue, BooleanValue } from '../value/index.js'
-import { VoidType } from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
 import { CodeWriter } from '../utils/index.js'
 
-export default class ArrowExpression extends Expression {
+export default class ArrowExpression extends PredicateExpression {
   
     constructor(args, argsSuite, arrowSuite) {
         super();
@@ -15,6 +14,10 @@ export default class ArrowExpression extends Expression {
         this.argsSuite = argsSuite;
         this.arrowSuite = arrowSuite;
         this.statements = null;
+    }
+
+    toArrowExpression() {
+        return this;
     }
 
     toString(writer) {
@@ -37,6 +40,14 @@ export default class ArrowExpression extends Expression {
         return this.statements.interpret(context);
     }
 
+    checkFilter(context, itemType) {
+        if (!this.args || this.args.length != 1)
+            throw new SyntaxError("Expecting 1 parameter only!");
+        context = context.newChildContext();
+        context.registerValue(new Variable(this.args[0], itemType));
+        return this.statements.check(context, null);
+    }
+
     declare(transpiler) {
         this.statements.declare(transpiler);
     }
@@ -55,6 +66,31 @@ export default class ArrowExpression extends Expression {
             writer.append(this.arrowSuite);
         this.bodyToDialect(writer);
     }
+
+    filteredToDialect(writer, source) {
+        if(this.args==null || this.args.length!=1)
+            throw new SyntaxError("Expecting 1 parameter only!");
+        const sourceType = source.check(writer.context);
+        const itemType = sourceType.itemType;
+        writer = writer.newChildWriter();
+        writer.context.registerValue(new Variable(this.args[0], itemType));
+        switch(writer.dialect) {
+            case Dialect.E:
+            case Dialect.M:
+                source.toDialect(writer);
+                writer.append(" filtered where ");
+                this.toDialect(writer);
+                break;
+            case Dialect.O:
+                writer.append("filtered (");
+                source.toDialect(writer);
+                writer.append(") where (");
+                this.toDialect(writer);
+                writer.append(")");
+                break;
+        }
+    }
+
 
     bodyToDialect(writer) {
         if(this.statements.length==1 && this.statements[0] instanceof ReturnStatement)
@@ -75,30 +111,6 @@ export default class ArrowExpression extends Expression {
             writer.append("(");
             writer.append(this.args.join(", "));
             writer.append(")");
-        }
-    }
-
-    filterToDialect(writer, source) {
-        if(this.args==null || this.args.length==0)
-            throw new SyntaxError("Expecting 1 parameter only!");
-        const sourceType = source.check(writer.context);
-        const itemType = sourceType ? sourceType.itemType : VoidType.instance;
-        writer = writer.newChildWriter();
-        writer.context.registerValue(new Variable(this.args[0], itemType));
-        switch(writer.dialect) {
-            case Dialect.E:
-            case Dialect.M:
-                source.toDialect(writer);
-                writer.append(" filtered where ");
-                this.toDialect(writer);
-                break;
-            case Dialect.O:
-                writer.append("filtered (");
-                source.toDialect(writer);
-                writer.append(") where (");
-                this.toDialect(writer);
-                writer.append(")");
-                break;
         }
     }
 

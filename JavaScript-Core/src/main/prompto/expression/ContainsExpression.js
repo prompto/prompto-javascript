@@ -2,8 +2,9 @@ import Expression from './Expression.js'
 import { SyntaxError } from '../error/index.js'
 import { ContOp } from '../grammar/index.js'
 import { MatchOp } from '../store/index.js'
-import { UnresolvedIdentifier, InstanceExpression, MemberSelector } from '../expression/index.js'
+import { UnresolvedIdentifier, InstanceExpression, MemberSelector, PredicateExpression } from '../expression/index.js'
 import { Value, NullValue, BooleanValue, Instance } from '../value/index.js'
+import { IterableType } from '../type/index.js'
 import { CodeWriter } from '../utils/index.js'
 
 export default class ContainsExpression extends Expression {
@@ -28,6 +29,25 @@ export default class ContainsExpression extends Expression {
     }
 
     check(context) {
+        if (this.right instanceof PredicateExpression)
+            return this.checkPredicate(context);
+        else
+            return this.checkValue(context);
+    }
+
+
+    checkPredicate(context) {
+        const lt = this.left.check(context);
+        if (lt instanceof IterableType) {
+            const itemType = lt.itemType;
+            const arrow = this.right.toArrowExpression();
+            return arrow.checkFilter(context, itemType);
+        } else
+            throw new SyntaxError("Expecting collection");
+    }
+
+
+    checkValue(context) {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);

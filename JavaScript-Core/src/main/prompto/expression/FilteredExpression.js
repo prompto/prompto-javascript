@@ -1,21 +1,21 @@
 import Expression from './Expression.js'
-import { ArrowExpression } from './index.js'
-import { Variable } from '../runtime/index.js'
-import { IdentifierList } from '../grammar/index.js'
 import { IterableType, ListType, AnyType, BooleanType } from '../type/index.js'
-import { SyntaxError, NullReferenceError, InternalError } from '../error/index.js'
+import { NullReferenceError, InternalError } from '../error/index.js'
 
 export default class FilteredExpression extends Expression {
  
-    constructor(itemId, source, predicate) {
+    constructor(source, predicate) {
         super();
-        this.itemId = itemId;
         this.source = source;
         this.predicate = predicate;
     }
 
     toString(dialect) {
-        return this.source.toString() + " filtered with " + this.itemId + " where " + this.predicate.toString();
+        return this.source.toString() + " filtered with " + this.predicate.toString();
+    }
+
+    toDialect(writer) {
+        this.predicate.filteredToDialect(writer, this.source);
     }
 
     check(context) {
@@ -25,17 +25,10 @@ export default class FilteredExpression extends Expression {
             return new ListType(AnyType.instance);
         }
         const itemType = sourceType.itemType;
-        if(this.itemId!=null) {
-            const child = context.newChildContext();
-            child.registerValue(new Variable(this.itemId, itemType));
-            const filterType = this.predicate.check(child);
-            if (filterType != BooleanType.instance) {
-                context.problemListener.reportError(this, "Filtering expression must return a boolean !");
-            }
-        } else if(this.predicate instanceof ArrowExpression) {
-            // TODO
-        } else
-            context.problemListener.reportError(this, "Expected an arrow expression!");
+        const arrow = this.predicate.toArrowExpression();
+        const filterType = arrow.checkFilter(context, itemType);
+        if (filterType != BooleanType.instance)
+            context.problemListener.reportError(this, "Filtering expression must return a boolean !");
         return new ListType(itemType);
     }
 
@@ -52,27 +45,16 @@ export default class FilteredExpression extends Expression {
             throw new InternalError("Illegal fetch source: " + this.source);
         }
         const itemType = sourceType.itemType;
-        const arrow = this.toArrowExpression();
+        const arrow = this.predicate.toArrowExpression();
         const filter = arrow.getFilter(context, itemType);
         return iterable.filter(filter)
-    }
-
-    toArrowExpression() {
-        if(this.itemId!=null) {
-            const arrow = new ArrowExpression(new IdentifierList(this.itemId), null, null);
-            arrow.setExpression(this.predicate);
-            return arrow;
-        } else if(this.predicate instanceof ArrowExpression)
-            return this.predicate;
-        else
-            throw new SyntaxError("Not a valid filter!");
     }
 
     declare(transpiler) {
         this.source.declare(transpiler);
         const listType = this.source.check(transpiler.context);
         const itemType = listType.itemType;
-        const arrow = this.toArrowExpression();
+        const arrow = this.predicate.toArrowExpression();
         arrow.declareFilter(transpiler, itemType);
     }
 
@@ -81,7 +63,7 @@ export default class FilteredExpression extends Expression {
         const itemType = listType.itemType;
         this.source.transpile(transpiler);
         transpiler.append(".filtered((");
-        const arrow = this.toArrowExpression();
+        const arrow = this.predicate.toArrowExpression();
         arrow.transpileFilter(transpiler, itemType);
         transpiler.append(")");
         if(transpiler.context.getClosestInstanceContext()!=null)
@@ -90,56 +72,5 @@ export default class FilteredExpression extends Expression {
         transpiler.flush();
     }
 
-    toDialect(writer) {
-        writer.toDialect(this);
-    }
-
-    toEDialect(writer) {
-        if (this.itemId)
-            this.toEDialectExplicit(writer);
-        else if (this.predicate instanceof ArrowExpression)
-            this.predicate.filterToDialect(writer, this.source);
-        else
-            throw new SyntaxError("Expected an arrow expression!");
-    }
-
-    toEDialectExplicit(writer) {
-        writer = writer.newChildWriter();
-        const sourceType = this.source.check(writer.context);
-        const itemType = sourceType.itemType;
-        writer.context.registerValue(new Variable(this.itemId, itemType));
-        this.source.toDialect(writer);
-        writer.append(" filtered with ");
-        writer.append(this.itemId.name);
-        writer.append(" where ");
-        this.predicate.toDialect(writer);
-    }
-
-    toODialect(writer) {
-        if (this.itemId)
-            this.toODialectExplicit(writer);
-        else if (this.predicate instanceof ArrowExpression)
-            this.predicate.filterToDialect(writer, this.source);
-        else
-            throw new SyntaxError("Expected an arrow expression!");
-    }
-
-    toODialectExplicit(writer) {
-        writer = writer.newChildWriter();
-        const sourceType = this.source.check(writer.context);
-        const itemType = sourceType.itemType;
-        writer.context.registerValue(new Variable(this.itemId, itemType));
-        writer.append("filtered (");
-        this.source.toDialect(writer);
-        writer.append(") with (");
-        writer.append(this.itemId.name);
-        writer.append(") where (");
-        this.predicate.toDialect(writer);
-        writer.append(")");
-    }
-
-    toMDialect(writer) {
-        this.toEDialect(writer);
-    }
 }
 

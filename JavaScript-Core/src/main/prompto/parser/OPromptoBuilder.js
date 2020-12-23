@@ -1,4 +1,5 @@
 import OParserListener from './OParserListener.js';
+import OLexer from './OLexer.js';
 import * as parser from '../parser/index.js';
 import * as constraint from '../constraint/index.js';
 import * as instance from '../instance/index.js';
@@ -17,13 +18,13 @@ import * as csharp from '../csharp/index.js';
 import * as python from '../python/index.js';
 
 export default class OPromptoBuilder extends OParserListener {
+
     constructor(parser) {
         super();
         this.input = parser.getTokenStream();
         this.path = parser.path;
         this.nodeValues = {}
         this.nextNodeId = 0;
-        return this;
     }
 
 
@@ -669,28 +670,16 @@ export default class OPromptoBuilder extends OParserListener {
         const left = this.getNodeValue(ctx.left);
         const type = this.getNodeValue(ctx.right);
         const right = new expression.TypeExpression(type);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.IS_A, right));
-    }
-
-    exitIsNotAnExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const type = this.getNodeValue(ctx.right);
-        const right = new expression.TypeExpression(type);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.IS_NOT_A, right));
+        const op = ctx.NOT() ? grammar.EqOp.IS_NOT_A : grammar.EqOp.IS_A;
+        this.setNodeValue(ctx, new expression.EqualsExpression(left, op, right))
     }
 
     exitIsExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.IS, right));
+        const op = ctx.NOT() ? grammar.EqOp.IS_NOT : grammar.EqOp.IS;
+        this.setNodeValue(ctx, new expression.EqualsExpression(left, op, right));
     }
-
-    exitIsNotExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.IS_NOT, right));
-    }
-
 
     exitItemSelector(ctx) {
         const exp = this.getNodeValue(ctx.exp);
@@ -1053,12 +1042,6 @@ export default class OPromptoBuilder extends OParserListener {
     exitRootInstance(ctx) {
         const name = this.getNodeValue(ctx.variable_identifier());
         this.setNodeValue(ctx, new instance.VariableInstance(name));
-    }
-
-    exitRoughlyEqualsExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.ROUGHLY, right));
     }
 
 
@@ -1706,42 +1689,45 @@ export default class OPromptoBuilder extends OParserListener {
     exitEqualsExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.EQUALS, right));
+        let op = null;
+        switch(ctx.op.type) {
+            case OLexer.EQ2:
+                op = grammar.EqOp.EQUALS;
+                break;
+            case OLexer.XEQ:
+                op = grammar.EqOp.NOT_EQUALS;
+                break;
+            case OLexer.TEQ:
+                op = grammar.EqOp.ROUGHLY;
+                break;
+            default:
+                throw new Error("Operator " + ctx.op.type);
+        }
+        this.setNodeValue(ctx, new expression.EqualsExpression(left, op, right));
     }
 
 
-    exitNotEqualsExpression(ctx) {
+    exitCompareExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_EQUALS, right));
-    }
-
-
-    exitGreaterThanExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.GT, right));
-    }
-
-
-    exitGreaterThanOrEqualExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.GTE, right));
-    }
-
-
-    exitLessThanExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.LT, right));
-    }
-
-
-    exitLessThanOrEqualExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.CompareExpression(left, grammar.CmpOp.LTE, right));
+        let op = null;
+        switch(ctx.op.type) {
+            case OLexer.LT:
+                op = grammar.CmpOp.LT;
+                break;
+            case OLexer.LTE:
+                op = grammar.CmpOp.LTE;
+                break;
+            case OLexer.GT:
+                op = grammar.CmpOp.GT;
+                break;
+            case OLexer.GTE:
+                op = grammar.CmpOp.GTE;
+                break;
+            default:
+                throw new Error("Operator " + ctx.op.type);
+        }
+        this.setNodeValue(ctx, new expression.CompareExpression(left, op, right));
     }
 
 
@@ -1810,14 +1796,8 @@ export default class OPromptoBuilder extends OParserListener {
     exitInExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.IN, right));
-    }
-
-
-    exitNotInExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_IN, right));
+        const op = ctx.NOT() ? grammar.ContOp.NOT_IN : grammar.ContOp.IN;
+        this.setNodeValue(ctx, new expression.ContainsExpression(left, op, right));
     }
 
 
@@ -1829,56 +1809,33 @@ export default class OPromptoBuilder extends OParserListener {
     exitHasExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS, right));
+        const op = ctx.NOT() ? grammar.ContOp.NOT_HAS : grammar.ContOp.HAS;
+        this.setNodeValue(ctx, new expression.ContainsExpression(left, op, right));
     }
 
-
-    exitNotHasExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS, right));
-    }
 
 
     exitHasAllExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ALL, right));
-    }
-
-
-    exitNotHasAllExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ALL, right));
+        const op = ctx.NOT() ? grammar.ContOp.NOT_HAS_ALL : grammar.ContOp.HAS_ALL;
+        this.setNodeValue(ctx, new expression.ContainsExpression(left, op, right));
     }
 
 
     exitHasAnyExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.HAS_ANY, right));
-    }
-
-
-    exitNotHasAnyExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.ContainsExpression(left, grammar.ContOp.NOT_HAS_ANY, right));
+        const op = ctx.NOT() ? grammar.ContOp.NOT_HAS_ANY : grammar.ContOp.HAS_ANY;
+        this.setNodeValue(ctx, new expression.ContainsExpression(left, op, right));
     }
 
 
     exitContainsExpression(ctx) {
         const left = this.getNodeValue(ctx.left);
         const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.CONTAINS, right));
-    }
-
-
-    exitNotContainsExpression(ctx) {
-        const left = this.getNodeValue(ctx.left);
-        const right = this.getNodeValue(ctx.right);
-        this.setNodeValue(ctx, new expression.EqualsExpression(left, grammar.EqOp.NOT_CONTAINS, right));
+        const op = ctx.NOT() ? grammar.EqOp.NOT_CONTAINS : grammar.EqOp.CONTAINS;
+        this.setNodeValue(ctx, new expression.EqualsExpression(left, op, right));
     }
 
 
@@ -2212,10 +2169,34 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     exitFiltered_list_expression(ctx) {
-        const itemName = this.getNodeValue(ctx.name);
         const source = this.getNodeValue(ctx.source);
+        const itemName = this.getNodeValue(ctx.name);
         const predicate = this.getNodeValue(ctx.predicate);
-        this.setNodeValue(ctx, new expression.FilteredExpression(itemName, source, predicate));
+        let exp;
+        if(itemName)
+            exp = new expression.ExplicitPredicateExpression(itemName, predicate);
+        else if(predicate instanceof expression.PredicateExpression)
+            exp = predicate;
+        else
+            throw new Error("What?");
+        this.setNodeValue(ctx, new expression.FilteredExpression(source, exp));
+    }
+
+
+    exitArrowFilterExpression(ctx) {
+        this.setNodeValue(ctx, this.getNodeValue(ctx.arrow_expression()));
+    }
+
+
+    exitExplicitFilterExpression(ctx) {
+        const name = this.getNodeValue(ctx.variable_identifier());
+        const predicate = this.getNodeValue(ctx.expression());
+        this.setNodeValue(ctx, new expression.ExplicitPredicateExpression(name, predicate));
+    }
+
+
+    exitOtherFilterExpression(ctx) {
+        this.setNodeValue(ctx, this.getNodeValue(ctx.expression()));
     }
 
 
