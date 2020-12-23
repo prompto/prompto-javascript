@@ -4,6 +4,14 @@ test('HasAllDict', () => {
 	compareResourceEOE('container/hasAllDict.pec');
 });
 
+test('HasAllFromList', () => {
+	compareResourceEOE('container/hasAllFromList.pec');
+});
+
+test('HasAllFromSet', () => {
+	compareResourceEOE('container/hasAllFromSet.pec');
+});
+
 test('HasAllList', () => {
 	compareResourceEOE('container/hasAllList.pec');
 });
@@ -26,6 +34,14 @@ test('HasAllTuple', () => {
 
 test('HasAnyDict', () => {
 	compareResourceEOE('container/hasAnyDict.pec');
+});
+
+test('HasAnyFromList', () => {
+	compareResourceEOE('container/hasAnyFromList.pec');
+});
+
+test('HasAnyFromSet', () => {
+	compareResourceEOE('container/hasAnyFromSet.pec');
 });
 
 test('HasAnyList', () => {

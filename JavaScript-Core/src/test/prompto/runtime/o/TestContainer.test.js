@@ -10,6 +10,22 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted HasAllFromList', () => {
+	checkInterpretedOutput('container/hasAllFromList.poc');
+});
+
+test('Transpiled HasAllFromList', () => {
+	checkTranspiledOutput('container/hasAllFromList.poc');
+});
+
+test('Interpreted HasAllFromSet', () => {
+	checkInterpretedOutput('container/hasAllFromSet.poc');
+});
+
+test('Transpiled HasAllFromSet', () => {
+	checkTranspiledOutput('container/hasAllFromSet.poc');
+});
+
 test('Interpreted HasAllList', () => {
 	checkInterpretedOutput('container/hasAllList.poc');
 });
@@ -40,6 +56,22 @@ test('Interpreted HasAllTuple', () => {
 
 test('Transpiled HasAllTuple', () => {
 	checkTranspiledOutput('container/hasAllTuple.poc');
+});
+
+test('Interpreted HasAnyFromList', () => {
+	checkInterpretedOutput('container/hasAnyFromList.poc');
+});
+
+test('Transpiled HasAnyFromList', () => {
+	checkTranspiledOutput('container/hasAnyFromList.poc');
+});
+
+test('Interpreted HasAnyFromSet', () => {
+	checkInterpretedOutput('container/hasAnyFromSet.poc');
+});
+
+test('Transpiled HasAnyFromSet', () => {
+	checkTranspiledOutput('container/hasAnyFromSet.poc');
 });
 
 test('Interpreted HasAnyList', () => {

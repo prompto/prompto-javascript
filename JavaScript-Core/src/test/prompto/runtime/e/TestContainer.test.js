@@ -18,6 +18,22 @@ test('Transpiled HasAllDict', () => {
 	checkTranspiledOutput('container/hasAllDict.pec');
 });
 
+test('Interpreted HasAllFromList', () => {
+	checkInterpretedOutput('container/hasAllFromList.pec');
+});
+
+test('Transpiled HasAllFromList', () => {
+	checkTranspiledOutput('container/hasAllFromList.pec');
+});
+
+test('Interpreted HasAllFromSet', () => {
+	checkInterpretedOutput('container/hasAllFromSet.pec');
+});
+
+test('Transpiled HasAllFromSet', () => {
+	checkTranspiledOutput('container/hasAllFromSet.pec');
+});
+
 test('Interpreted HasAllList', () => {
 	checkInterpretedOutput('container/hasAllList.pec');
 });
@@ -64,6 +80,22 @@ test('Interpreted HasAnyDict', () => {
 
 test('Transpiled HasAnyDict', () => {
 	checkTranspiledOutput('container/hasAnyDict.pec');
+});
+
+test('Interpreted HasAnyFromList', () => {
+	checkInterpretedOutput('container/hasAnyFromList.pec');
+});
+
+test('Transpiled HasAnyFromList', () => {
+	checkTranspiledOutput('container/hasAnyFromList.pec');
+});
+
+test('Interpreted HasAnyFromSet', () => {
+	checkInterpretedOutput('container/hasAnyFromSet.pec');
+});
+
+test('Transpiled HasAnyFromSet', () => {
+	checkTranspiledOutput('container/hasAnyFromSet.pec');
 });
 
 test('Interpreted HasAnyList', () => {

@@ -1,5 +1,13 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('HasAllFromList', () => {
+	compareResourceOEO('container/hasAllFromList.poc');
+});
+
+test('HasAllFromSet', () => {
+	compareResourceOEO('container/hasAllFromSet.poc');
+});
+
 test('HasAllList', () => {
 	compareResourceOEO('container/hasAllList.poc');
 });
@@ -14,6 +22,14 @@ test('HasAllText', () => {
 
 test('HasAllTuple', () => {
 	compareResourceOEO('container/hasAllTuple.poc');
+});
+
+test('HasAnyFromList', () => {
+	compareResourceOEO('container/hasAnyFromList.poc');
+});
+
+test('HasAnyFromSet', () => {
+	compareResourceOEO('container/hasAnyFromSet.poc');
 });
 
 test('HasAnyList', () => {

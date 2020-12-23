@@ -12,6 +12,22 @@ test('FilterFromSet', () => {
 	compareResourceOEO('arrow/filterFromSet.poc');
 });
 
+test('HasAllFromList', () => {
+	compareResourceOEO('arrow/hasAllFromList.poc');
+});
+
+test('HasAllFromSet', () => {
+	compareResourceOEO('arrow/hasAllFromSet.poc');
+});
+
+test('HasAnyFromList', () => {
+	compareResourceOEO('arrow/hasAnyFromList.poc');
+});
+
+test('HasAnyFromSet', () => {
+	compareResourceOEO('arrow/hasAnyFromSet.poc');
+});
+
 test('SortCategory1Arg', () => {
 	compareResourceOEO('arrow/sortCategory1Arg.poc');
 });

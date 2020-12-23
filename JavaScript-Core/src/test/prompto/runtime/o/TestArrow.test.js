@@ -34,6 +34,38 @@ test('Transpiled FilterFromSet', () => {
 	checkTranspiledOutput('arrow/filterFromSet.poc');
 });
 
+test('Interpreted HasAllFromList', () => {
+	checkInterpretedOutput('arrow/hasAllFromList.poc');
+});
+
+test('Transpiled HasAllFromList', () => {
+	checkTranspiledOutput('arrow/hasAllFromList.poc');
+});
+
+test('Interpreted HasAllFromSet', () => {
+	checkInterpretedOutput('arrow/hasAllFromSet.poc');
+});
+
+test('Transpiled HasAllFromSet', () => {
+	checkTranspiledOutput('arrow/hasAllFromSet.poc');
+});
+
+test('Interpreted HasAnyFromList', () => {
+	checkInterpretedOutput('arrow/hasAnyFromList.poc');
+});
+
+test('Transpiled HasAnyFromList', () => {
+	checkTranspiledOutput('arrow/hasAnyFromList.poc');
+});
+
+test('Interpreted HasAnyFromSet', () => {
+	checkInterpretedOutput('arrow/hasAnyFromSet.poc');
+});
+
+test('Transpiled HasAnyFromSet', () => {
+	checkTranspiledOutput('arrow/hasAnyFromSet.poc');
+});
+
 test('Interpreted SortCategory1Arg', () => {
 	checkInterpretedOutput('arrow/sortCategory1Arg.poc');
 });
