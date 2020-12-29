@@ -28,8 +28,11 @@ export default class MethodType extends BaseType {
         return false;
     }
 
-    checkArrowExpression(expression) {
-        return this; // TODO check
+    checkArrowExpression(context, expression) {
+        context = context.newChildContext(null);
+        this.method.registerParameters(context);
+        expression.check(context);
+        return this;
     }
 
     declare(transpiler) {
