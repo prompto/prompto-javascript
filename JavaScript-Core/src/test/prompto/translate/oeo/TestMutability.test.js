@@ -1,5 +1,9 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('DowncastMutable', () => {
+	compareResourceOEO('mutability/downcastMutable.poc');
+});
+
 test('Immutable', () => {
 	compareResourceOEO('mutability/immutable.poc');
 });

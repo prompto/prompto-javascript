@@ -10,6 +10,14 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted DowncastMutable', () => {
+	checkInterpretedOutput('mutability/downcastMutable.poc');
+});
+
+test('Transpiled DowncastMutable', () => {
+	checkTranspiledOutput('mutability/downcastMutable.poc');
+});
+
 test('Interpreted Immutable', () => {
 	checkInterpretedOutput('mutability/immutable.poc');
 });
