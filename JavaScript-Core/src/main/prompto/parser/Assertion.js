@@ -12,7 +12,7 @@ export default class Assertion {
         if(type!==BooleanType.instance)
             context.problemListener.reportIllegalNonBoolean(this.expression, type);
         if(this.expression instanceof EqualsExpression)
-            context = this.expression.downCast(context, false);
+            context = this.expression.downcast(context, false);
         return context;
     }
 

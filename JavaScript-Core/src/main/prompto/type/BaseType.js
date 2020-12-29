@@ -19,6 +19,10 @@ export default class BaseType {
         return this;
     }
 
+    isMutable(context) {
+        return false;
+    }
+
     asMutable(context, mutable) {
         if(mutable)
             context.problemListener.reportError(this, this.name + " cannot be mutable");

@@ -50,7 +50,14 @@ export default class CategoryParameter extends Parameter {
         if(actual===context) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }
-        context.registerValue(this);
+        this.resolve(context);
+        if(this.resolved === this.type)
+            context.registerValue(this);
+        else {
+            const param = new CategoryParameter(this.resolved, this.id);
+            param.setMutable(this.mutable);
+            context.registerValue(param);
+        }
         if(this.defaultExpression!=null)
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }

@@ -21,6 +21,10 @@ export default class CategoryType extends BaseType {
         this.mutable = mutable || false;
     }
 
+    isMutable(context) {
+        return this.mutable;
+    }
+
     asMutable(context, mutable) {
         if(mutable == this.mutable)
             return this;

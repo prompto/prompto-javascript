@@ -132,16 +132,19 @@ export default class EqualsExpression extends Expression {
             return false;
     }
 
-    downCast(context, setValue) {
+    downcast(context, setValue) {
         if(this.operator==EqOp.IS_A) {
             const id = this.readLeftId();
             if(id!=null) {
-                const type = this.right.value;
+                let targetType = this.right.value;
                 let value = context.getRegisteredValue(id.name);
                 if(value==null && !setValue) // need a thing to avoid NPE
-                    value = new Variable(id.name, type);
+                    value = new Variable(id.name, targetType);
+                const sourceType = value.getType(context);
+                if(sourceType.isMutable(context))
+                    targetType = targetType.asMutable(context, true);
                 const local = context.newChildContext();
-                value = new LinkedVariable(type, value);
+                value = new LinkedVariable(targetType, value);
                 local.registerValue(value, false);
                 if(setValue)
                     local.setValue(id, new LinkedValue(context));

@@ -18,7 +18,7 @@ export default class IfElement extends BaseStatement {
                 context.problemListener.reportError(this, "Expected a Boolean condition!");
             }
         }
-        context = this.downCast(context, false);
+        context = this.downcast(context, false);
         let statements = this.statements;
         if(!statements) {
             context.problemListener.reportError(this, "Expected a statement!");
@@ -32,7 +32,7 @@ export default class IfElement extends BaseStatement {
             this.condition.declare(transpiler);
         let context = transpiler.context;
         if(this.condition instanceof EqualsExpression)
-            context = this.condition.downCast(transpiler.context, false);
+            context = this.condition.downcast(transpiler.context, false);
         if(context!=transpiler.context)
             transpiler = transpiler.newChildTranspiler(context);
         else
@@ -43,7 +43,7 @@ export default class IfElement extends BaseStatement {
     transpile(transpiler) {
         let context = transpiler.context;
         if(this.condition instanceof EqualsExpression)
-            context = this.condition.downCast(context, false);
+            context = this.condition.downcast(context, false);
         if(context!=transpiler.context)
             transpiler = transpiler.newChildTranspiler(context);
         else
@@ -52,16 +52,16 @@ export default class IfElement extends BaseStatement {
         transpiler.flush();
     }
 
-    downCast(context, setValue) {
+    downcast(context, setValue) {
         const parent = context;
         if(this.condition instanceof EqualsExpression)
-            context = this.condition.downCast(context, setValue);
+            context = this.condition.downcast(context, setValue);
         context = parent!=context ? context : context.newChildContext();
         return context;
     }
 
     interpret(context) {
-        context = this.downCast(context, true);
+        context = this.downcast(context, true);
         return this.statements.interpret(context);
     }
 
@@ -74,7 +74,7 @@ export default class IfElement extends BaseStatement {
         if(this.condition!=null) {
             writer.append("if ");
             this.condition.toDialect(writer);
-            context = this.downCast(context, false);
+            context = this.downcast(context, false);
             if (context !== writer.context)
                 writer = writer.newChildWriter(context);
         }
@@ -90,7 +90,7 @@ export default class IfElement extends BaseStatement {
             writer.append("if (");
             this.condition.toDialect(writer);
             writer.append(") ");
-            context = this.downCast(context, false);
+            context = this.downcast(context, false);
             if (context !== writer.context)
                 writer = writer.newChildWriter(context);
         }
