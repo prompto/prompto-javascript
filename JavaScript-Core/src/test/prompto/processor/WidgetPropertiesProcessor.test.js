@@ -193,7 +193,7 @@ test('Loads Html properties', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     registerDummyCallbacks(context);
     prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(false);
-    var props = prompto.jsx.JsxElementBase.getHtmlProperties(context);
+    var props = prompto.jsx.JsxElementBase.getHtmlPropertyMap(context);
     expect(props).not.toBeNull();
 });
 

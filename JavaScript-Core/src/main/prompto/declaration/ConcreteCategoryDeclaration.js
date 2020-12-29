@@ -162,9 +162,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     checkMethods(context) {
         this.registerMethods(context);
-        for (let i = 0; i < this.methods.length; i++) {
-            this.methods[i].checkChild(context);
-        }
+        this.methods.forEach( m => m.checkChild(context) );
     }
 
     registerMethods(context) {

@@ -11,20 +11,20 @@ export default class ParameterList extends ObjectList {
     }
 
     register(context) {
-        this.forEach(arg => {
-            arg.register(context);
+        this.forEach(param => {
+            param.register(context);
         });
     }
 
     check(context) {
-        this.forEach(arg => {
-            arg.check(context);
+        this.forEach(param => {
+            param.check(context);
         });
     }
 
     declare(transpiler) {
-        this.forEach(arg => {
-            arg.declare(transpiler);
+        this.forEach(param => {
+            param.declare(transpiler);
         });
     }
 
@@ -54,8 +54,8 @@ export default class ParameterList extends ObjectList {
 
     toODialect(writer) {
         if(this.length>0) {
-            this.forEach(arg => {
-                arg.toDialect(writer);
+            this.forEach(param => {
+                param.toDialect(writer);
                 writer.append(", ");
             });
             writer.trimLast(2);
@@ -67,10 +67,10 @@ export default class ParameterList extends ObjectList {
     }
 
     transpile(transpiler) {
-        const args = this.filter(arg => !(arg instanceof CodeParameter));
-        if(args.length>0) {
-            args.forEach(arg => {
-                arg.transpile(transpiler);
+        const params = this.filter(param => !(param instanceof CodeParameter));
+        if(params.length>0) {
+            params.forEach(param => {
+                param.transpile(transpiler);
                 transpiler.append(", ");
             });
             transpiler.trimLast(2);
