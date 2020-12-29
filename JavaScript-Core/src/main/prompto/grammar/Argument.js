@@ -160,8 +160,8 @@ export default class Argument extends Section {
         let expression = this.expression;
         const parameter = this.findParameter(methodDeclaration);
         const requiredType = parameter.getType(context);
-        const checkArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
-        let actualType = checkArrow ? requiredType.checkArrowExpression(context, expression) : expression.check(context.getCallingContext());
+        const isArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+        const actualType = isArrow ? requiredType.checkArrowExpression(expression.calling, expression.expression) : expression.check(context.getCallingContext());
         if(checkInstance && actualType instanceof CategoryType) {
             const value = expression.interpret(context.getCallingContext());
             if(value && value.getType) {

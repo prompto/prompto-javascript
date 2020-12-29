@@ -29,7 +29,7 @@ export default class MethodType extends BaseType {
     }
 
     checkArrowExpression(context, expression) {
-        context = context.newChildContext(null);
+        context = context.newChildContext();
         this.method.registerParameters(context);
         expression.check(context);
         return this;
