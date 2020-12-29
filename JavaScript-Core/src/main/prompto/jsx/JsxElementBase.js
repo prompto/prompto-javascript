@@ -19,17 +19,13 @@ export default class JsxElementBase extends IJsxExpression {
     }
 
     check(context) {
-        if (this.isHtmlTag())
-            this.checkHtmlProperties(context);
-        else {
-            const propertyMap = this.getWidgetPropertyMap(context);
-            this.checkWidgetProperties(context, propertyMap);
-        }
+        const propertyMap = this.getPropertyMap(context);
+        this.checkWidgetProperties(context, propertyMap);
         return JsxType.instance;
     }
 
     getPropertyMap(context) {
-        return this.isHtmlTag() ? JsxElementBase.getHtmlProperties(context, this.id.name) : this.getWidgetPropertyMap(context);
+        return this.isHtmlTag() ? JsxElementBase.getHtmlPropertyMap(context, this.id.name) : this.getWidgetPropertyMap(context);
     }
 
     getWidgetPropertyMap(context) {
@@ -43,7 +39,7 @@ export default class JsxElementBase extends IJsxExpression {
             return null;
     }
 
-    static getHtmlProperties(context, name) {
+    static getHtmlPropertyMap(context, name) {
         if(HTML_PROPERTIES_MAP==null) {
             const parser = new OCleverParser(HTML_PROPERTY_TYPES);
             const types = parser.parse_document_literal();
@@ -60,7 +56,7 @@ export default class JsxElementBase extends IJsxExpression {
     checkWidgetProperties(context, propertyMap) {
         const actualNames = new Set();
         if(this.properties!==null)
-            this.properties.forEach(function(jsxprop) {
+            this.properties.forEach( jsxprop => {
                 if(actualNames.has(jsxprop.id.name))
                     context.problemListener.reportDuplicateProperty(jsxprop, jsxprop.id.name);
                 else
@@ -68,49 +64,26 @@ export default class JsxElementBase extends IJsxExpression {
                 this.checkWidgetProperty(context, propertyMap, jsxprop);
             }, this);
         if(propertyMap!==null) {
-            for(const name in propertyMap.entries) {
+            Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
                 const prop = propertyMap.entries[name];
                 if(prop.isRequired() && !actualNames.has(name))
                     context.problemListener.reportMissingProperty(this, name);
-            }
+            }, this);
         }
     }
 
     checkWidgetProperty(context, propertyMap, jsxProp) {
-        const name = jsxProp.id.name;
         if(propertyMap) {
+            const name = jsxProp.id.name;
             let property = propertyMap.get(name);
-            if(property==null)
-                property = JsxElementBase.getHtmlProperties(context).get(name);
+            if(property==null && !this.isHtmlTag(context))
+                property = JsxElementBase.getHtmlPropertyMap(context).get(name);
             if(property==null)
                 context.problemListener.reportUnknownProperty(jsxProp, name);
             else
                 property.validate(context, jsxProp)
         } else
             jsxProp.check(context);
-    }
-
-    checkHtmlProperties(context) {
-        const propertyMap = JsxElementBase.getHtmlProperties(context);
-        const actualNames = new Set();
-        if(this.properties!==null)
-            this.properties.forEach(jsxProp => {
-                if(actualNames.has(jsxProp.id.name))
-                    context.problemListener.reportDuplicateProperty(jsxProp, jsxProp.id.name);
-                else
-                    actualNames.add(jsxProp.id.name);
-                jsxProp.check(context);
-                const property = propertyMap.get(jsxProp.id.name);
-                if(property==null)
-                    context.problemListener.reportUnknownProperty(jsxProp, jsxProp.id.name);
-                else
-                    property.validate(context, jsxProp)
-            });
-        Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
-            const prop = propertyMap.entries[name];
-            if(prop.isRequired() && !actualNames.has(name))
-                context.problemListener.reportMissingProperty(this, name);
-        }, this);
     }
 
     declare(transpiler) {
@@ -134,7 +107,7 @@ export default class JsxElementBase extends IJsxExpression {
         const name = jsxProp.id.name;
         let property = propertyMap ? propertyMap.get(name) : null;
         if(!property && !this.isHtmlTag())
-            property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
+            property = JsxElementBase.getHtmlPropertyMap(transpiler.context).get(name);
         if(property)
             property.declare(transpiler, jsxProp);
         else
@@ -172,7 +145,7 @@ export default class JsxElementBase extends IJsxExpression {
         const name = jsxProp.id.name;
         let property = propertyMap ? propertyMap.get(name) : null;
         if(!property && !this.isHtmlTag())
-            property = JsxElementBase.getHtmlProperties(transpiler.context).get(name);
+            property = JsxElementBase.getHtmlPropertyMap(transpiler.context).get(name);
         if(property)
             property.transpile(transpiler, jsxProp);
         else
