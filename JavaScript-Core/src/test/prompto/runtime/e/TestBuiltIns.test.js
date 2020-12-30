@@ -298,6 +298,22 @@ test('Transpiled IntegerText', () => {
 	checkTranspiledOutput('builtins/integerText.pec');
 });
 
+test('Interpreted IteratorToList', () => {
+	checkInterpretedOutput('builtins/iteratorToList.pec');
+});
+
+test('Transpiled IteratorToList', () => {
+	checkTranspiledOutput('builtins/iteratorToList.pec');
+});
+
+test('Interpreted IteratorToSet', () => {
+	checkInterpretedOutput('builtins/iteratorToSet.pec');
+});
+
+test('Transpiled IteratorToSet', () => {
+	checkTranspiledOutput('builtins/iteratorToSet.pec');
+});
+
 test('Interpreted ListCount', () => {
 	checkInterpretedOutput('builtins/listCount.pec');
 });
@@ -312,6 +328,14 @@ test('Interpreted ListText', () => {
 
 test('Transpiled ListText', () => {
 	checkTranspiledOutput('builtins/listText.pec');
+});
+
+test('Interpreted ListToSet', () => {
+	checkInterpretedOutput('builtins/listToSet.pec');
+});
+
+test('Transpiled ListToSet', () => {
+	checkTranspiledOutput('builtins/listToSet.pec');
 });
 
 test('Interpreted PeriodDays', () => {
@@ -400,6 +424,14 @@ test('Interpreted SetText', () => {
 
 test('Transpiled SetText', () => {
 	checkTranspiledOutput('builtins/setText.pec');
+});
+
+test('Interpreted SetToList', () => {
+	checkInterpretedOutput('builtins/setToList.pec');
+});
+
+test('Transpiled SetToList', () => {
+	checkTranspiledOutput('builtins/setToList.pec');
 });
 
 test('Interpreted TextCapitalize', () => {

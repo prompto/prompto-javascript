@@ -152,12 +152,24 @@ test('IntegerText', () => {
 	compareResourceEOE('builtins/integerText.pec');
 });
 
+test('IteratorToList', () => {
+	compareResourceEOE('builtins/iteratorToList.pec');
+});
+
+test('IteratorToSet', () => {
+	compareResourceEOE('builtins/iteratorToSet.pec');
+});
+
 test('ListCount', () => {
 	compareResourceEOE('builtins/listCount.pec');
 });
 
 test('ListText', () => {
 	compareResourceEOE('builtins/listText.pec');
+});
+
+test('ListToSet', () => {
+	compareResourceEOE('builtins/listToSet.pec');
 });
 
 test('PeriodDays', () => {
@@ -202,6 +214,10 @@ test('SetCount', () => {
 
 test('SetText', () => {
 	compareResourceEOE('builtins/setText.pec');
+});
+
+test('SetToList', () => {
+	compareResourceEOE('builtins/setToList.pec');
 });
 
 test('TextCapitalize', () => {
