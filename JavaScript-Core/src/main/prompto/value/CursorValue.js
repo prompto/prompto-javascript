@@ -71,6 +71,10 @@ export default class CursorValue extends Value {
             result.add(iter.next());
         return result;
     }
+
+    toSetValue(context) {
+        return this.toListValue(context).toSetValue(context);
+    }
 }
 
 class CursorIterator extends IteratorValue {

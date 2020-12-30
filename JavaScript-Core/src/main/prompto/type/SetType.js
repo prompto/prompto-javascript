@@ -3,6 +3,7 @@ import { ListType, IntegerType, BooleanType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { JoinSetMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js'
 import { List, StrictSet } from "../intrinsic/index.js";
+import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration";
 
 export default class SetType extends ContainerType {
  
@@ -177,6 +178,8 @@ export default class SetType extends ContainerType {
 
     getMemberMethods(context, name) {
         switch (name) {
+            case "toList":
+                return [new ToListMethodDeclaration(this.itemType)];
             case "join":
                 return [new JoinSetMethodDeclaration()];
             default:

@@ -1,7 +1,8 @@
 import Value from './Value.js'
-import { IntegerValue, ListValue } from './index.js'
+import { IntegerValue, ListValue, SetValue } from './index.js'
 import { IteratorType } from '../type/index.js'
 import { Variable } from '../runtime/index.js'
+import { StrictSet } from '../intrinsic/index.js'
 
 export default class IterableValue extends Value {
 
@@ -51,6 +52,14 @@ export default class IterableValue extends Value {
         return list.filter(filter);
     }
 
+    toString() {
+        const values = [];
+        const iterator = this.getIterator();
+        while(iterator.hasNext())
+            values.push(iterator.next());
+        return values.join(", ");
+    }
+
     toListValue() {
         const items = [];
         const iterator = this.getIterator();
@@ -59,11 +68,13 @@ export default class IterableValue extends Value {
         return new ListValue(this.itemType, items);
     }
 
-    toString() {
-        const values = [];
+    toSetValue() {
+        const items = new StrictSet();
         const iterator = this.getIterator();
         while(iterator.hasNext())
-            values.push(iterator.next());
-        return values.join(", ");
+            items.add(iterator.next());
+        return new SetValue(this.itemType, items);
     }
+
+
 }

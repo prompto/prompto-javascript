@@ -2,6 +2,7 @@ import IterableType from './IterableType.js'
 import { IntegerType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import ToListMethodDeclaration from '../builtins/ToListMethodDeclaration.js'
+import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.js'
 
 export default class IteratorType extends IterableType {
 
@@ -45,6 +46,8 @@ export default class IteratorType extends IterableType {
         switch (name) {
             case "toList":
                 return [new ToListMethodDeclaration(this.itemType)];
+            case "toSet":
+                return [new ToSetMethodDeclaration(this.itemType)];
             default:
                 return  super.getMemberMethods.call(context, name);
         }

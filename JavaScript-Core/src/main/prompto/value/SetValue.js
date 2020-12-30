@@ -102,5 +102,10 @@ export default class SetValue extends Container {
             return false;
         }
     }
+
+    toListValue() {
+        return new ListValue(this.itemType, this.items.toArray());
+    }
+
 }
 

@@ -16,7 +16,7 @@ List.prototype.constructor = List;
 
 List.prototype.addItems = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-        items = Array.from(items.set.values());
+        items = items.toArray();
     this.push.apply(this, items);
     return this; // enable fluid API
 };
@@ -24,7 +24,7 @@ List.prototype.addItems = function(items) {
 
 List.prototype.add = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
-        items = Array.from(items.set.values());
+        items = items.toArray();
     var concat = new List(false);
     concat.addItems(this);
     concat.addItems(items);
@@ -168,7 +168,10 @@ List.prototype.iterate = function (fn, instance) {
             return array;
         },
         toList: function() {
-            return self;
+            return new List(false, this.toArray());
+        },
+        toSet: function() {
+            return new StrictSet(this.toArray());
         },
         getText: function() {
             return this.toArray().join(", ");
@@ -227,3 +230,6 @@ List.prototype.toDocument = function() {
     return new List(false, items);
 };
 
+List.prototype.toSet = function() {
+    return new StrictSet(this);
+};

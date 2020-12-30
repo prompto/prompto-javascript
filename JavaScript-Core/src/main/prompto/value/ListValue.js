@@ -4,6 +4,7 @@ import { SyntaxError } from '../error/index.js'
 import { ListType } from '../type/index.js'
 import { List } from '../intrinsic/index.js'
 import { multiplyArray } from '../utils/Utils.js'
+import { StrictSet } from '../intrinsic/index.js'
 
 export default class ListValue extends BaseValueList {
  
@@ -92,6 +93,12 @@ export default class ListValue extends BaseValueList {
     filter(filter) {
         const items = this.items.filter(filter);
         return new ListValue(this.type.itemType, items);
+    }
+
+    toSetValue(context) {
+        const items = new StrictSet();
+        this.items.forEach(item => items.add(item));
+        return new SetValue(this.type.itemType, items);
     }
 }
 
