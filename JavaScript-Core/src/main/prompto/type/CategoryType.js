@@ -703,8 +703,9 @@ export default class CategoryType extends BaseType {
         expression.transpile(transpiler);
         transpiler.append(", ")
             .append(decl.storable)
-            .append(", false"); // not mutable
+            .append(", ");
         const type = expression.check(transpiler.context);
+        transpiler.append("" + type.isMutable());
         if(type instanceof EnumeratedCategoryType || type instanceof EnumeratedNativeType)
             transpiler.append(", true"); // set isEnum flag
         else
