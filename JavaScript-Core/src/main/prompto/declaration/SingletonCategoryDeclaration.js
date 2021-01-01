@@ -55,7 +55,7 @@ export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclar
             m.flush();
         }, this);
         if(this.getInitializeMethod(transpiler.context)!=null)
-            transpiler.append(this.name).append(".instance.initialize();").newLine();
+            transpiler.addInitializer(this.name + ".instance.initialize();");
         instance.flush();
         transpiler.flush();
     }

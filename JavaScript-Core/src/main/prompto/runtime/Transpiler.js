@@ -14,6 +14,7 @@ export default class Transpiler {
         this.registered = new Set();
         this.escapeMode = 0;
         this.lines = [];
+        this.initializers = [];
         this.line = "";
         this.indents = "";
     }
@@ -22,6 +23,7 @@ export default class Transpiler {
         this.appendAllRequired();
         this.appendAllRegistered();
         this.appendAllDeclared();
+        this.appendAllInitializers();
         return this.lines.join("\n");
     }
 
@@ -32,6 +34,7 @@ export default class Transpiler {
         transpiler.registered = this.registered;
         transpiler.escapeMode = this.escapeMode;
         transpiler.lines = this.lines;
+        transpiler.initializers = this.initializers;
         transpiler.line = this.line;
         transpiler.indents = this.indents;
         transpiler.parent = this;
@@ -132,6 +135,15 @@ export default class Transpiler {
         this.registered.forEach(function(f) {
             this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
         }, this);
+    }
+
+    addInitializer(line) {
+        this.initializers.push(line);
+    }
+
+    appendAllInitializers() {
+        if(this.initializers.length)
+            this.lines = this.lines.concat(this.initializers);
     }
 
     getTranspiled(object) {
