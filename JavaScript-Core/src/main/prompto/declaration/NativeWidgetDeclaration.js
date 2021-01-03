@@ -11,6 +11,10 @@ export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
         return true;
     }
 
+    getPageWidgetOf() {
+        return null;
+    }
+
     getProperties(context) {
         if(typeof(this.properties)=="undefined") {
             this.properties = null;

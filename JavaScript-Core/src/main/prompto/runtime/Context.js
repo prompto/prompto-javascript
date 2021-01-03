@@ -180,19 +180,24 @@ class Context {
                 info.symbols = decl.symbols.map(s => s.name);
                 catalog.enumerations.push({ type: "Document", value: info});
             } else if(decl instanceof CategoryDeclaration) {
-                if(decl.isWidget(this))
-                    catalog.widgets.push(name);
-                else
+                if(decl.isWidget(this)) {
+                    const info = {};
+                    info.name = decl.name;
+                    info.pageWidgetOf = decl.getPageWidgetOf();
+                    catalog.widgets.push({ type: "Document", value: info});
+                } else
                     catalog.categories.push(name);
             } else if(decl instanceof MethodDeclarationMap) {
                 const method = {};
                 method.name = decl.name;
                 method.protos = [];
                 for (const proto in decl.protos) {
-                    const eligibleAsMain = decl.protos[proto].isEligibleAsMain();
-                    method.protos.push({ type: "Document", value: { proto: proto, eligibleAsMain: eligibleAsMain } });
+                    const info = {};
+                    info.proto = proto;
+                    info.eligibleAsMain = decl.protos[proto].isEligibleAsMain();
+                    method.protos.push({ type: "Document", value: info});
                 }
-                catalog.methods.push({ type: "Document", value: method });
+                catalog.methods.push({ type: "Document", value: method});
             }
         }
         for(const name in this.tests)

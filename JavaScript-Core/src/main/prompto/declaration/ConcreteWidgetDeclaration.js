@@ -1,6 +1,7 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration.js'
 import { IdentifierList } from '../grammar/index.js'
 import { CategoryType } from '../type/index.js'
+import { TextLiteral } from '../literal/index.js'
 
 export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
 
@@ -12,6 +13,19 @@ export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclarati
     isWidget(context) {
         return true;
     }
+
+    getPageWidgetOf() {
+        if(this.annotations) {
+            const annotations = this.annotations.filter(function(a) { return a.id.name==="@PageWidgetOf" });
+            if(annotations.length > 0) {
+                var expression = annotations[0].getDefaultArgument();
+                if (expression instanceof TextLiteral) {
+                    return expression.value.toString();
+                }
+            }
+            return null;
+        }
+     }
 
     getProperties(context) {
         if(typeof(this.properties)=="undefined") {
