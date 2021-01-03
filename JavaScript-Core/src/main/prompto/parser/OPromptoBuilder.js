@@ -795,6 +795,7 @@ export default class OPromptoBuilder extends OParserListener {
     exitMethod_call_expression(ctx) {
         const name = this.getNodeValue(ctx.name);
         const caller = new expression.UnresolvedIdentifier(name);
+        caller.copySectionFrom(name);
         const args = this.getNodeValue(ctx.args);
         this.setNodeValue(ctx, new statement.UnresolvedCall(caller, args));
     }
