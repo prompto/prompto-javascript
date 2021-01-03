@@ -19,7 +19,7 @@ export default class ValueSetValidator extends PropertyValidator {
             if(text.startsWith("\"") && text.endsWith("\""))
                 text = text.substring(1, text.length - 1);
             if(!this.values.has(text)) {
-                const message = "Illegal value " + text + ", expected one of " + this.values;
+                const message = "Illegal value " + (text ? text : "<null>") + ", expected one of <" + Array.from(this.values).join(", ") + ">";
                 context.problemListener.reportIllegalValue(property, message);
             }
         }

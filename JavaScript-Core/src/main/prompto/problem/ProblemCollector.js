@@ -142,6 +142,10 @@ export default class ProblemCollector extends antlr4.error.ErrorListener {
         this.reportWarning(section, message);
     }
 
+    reportIllegalValue(section, message) {
+        this.reportWarning(section, message);
+    }
+
     reportIllegalOperation(section, message) {
         this.reportWarning(section, message);
     }

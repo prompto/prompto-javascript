@@ -1,9 +1,11 @@
+import Section from "../parser/Section";
 import { TextValue } from '../value/index.js'
 import { InstanceExpression } from '../expression/index.js'
 
-export default class DictIdentifierKey {
+export default class DictIdentifierKey extends Section {
  
     constructor(id) {
+        super();
         this.id = id;
     }
 
