@@ -563,11 +563,12 @@ export default class CategoryType extends BaseType {
 
     getMemberMethods(context, name) {
         const decl = this.getDeclaration(context);
-       if (!(decl instanceof ConcreteCategoryDeclaration))
-            throw new SyntaxError("Unknown category:" + this.name);
-        else {
+       if (!(decl instanceof ConcreteCategoryDeclaration)) {
+           context.problemListener.reportUnknownCategory(this.id);
+           return null;
+       } else {
             const methods = decl.getMemberMethodsMap(context, name);
-            return methods.getAll();
+            return methods ? methods.getAll() : null;
         }
     }
 
@@ -579,9 +580,11 @@ export default class CategoryType extends BaseType {
             return decl.getType(context).getMemberMethods(context, name);
         else if (decl instanceof ConcreteCategoryDeclaration) {
             const methods = decl.getMemberMethodsMap(context, name);
-            return methods.getAll();
-        } else
-            throw new SyntaxError("Unknown category:" + this.name);
+            return methods ? methods.getAll() : null;
+        } else {
+            context.problemListener.reportUnknownCategory(this.id);
+            return null;
+        }
     }
 
     /* look for a method which takes this category as sole parameter */

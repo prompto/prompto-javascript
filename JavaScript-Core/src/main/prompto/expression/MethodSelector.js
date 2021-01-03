@@ -90,7 +90,7 @@ export default class MethodSelector extends MemberSelector {
 
     getMemberCandidates(context, checkInstance) {
         const parentType = this.checkParentType(context, checkInstance);
-        const methods = parentType.getMemberMethods(context, this.name);
+        const methods = parentType ? parentType.getMemberMethods(context, this.name) : [];
         return new Set(methods);
     }
 
