@@ -1,4 +1,4 @@
-// Generated from MParser.g4 by ANTLR 4.9
+// Generated from MParser.g4 by ANTLR 4.9.1
 // jshint ignore: start
 import antlr4 from 'antlr4';
 import MParserListener from './MParserListener.js';
@@ -3574,7 +3574,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 779;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,26,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,26,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -4781,7 +4781,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1069;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,53,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,53,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -5181,7 +5181,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1247;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,68,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,68,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -5735,7 +5735,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1276;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,71,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,71,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -5795,7 +5795,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1287;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,72,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,72,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -6192,7 +6192,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1366;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,81,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,81,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -6785,7 +6785,7 @@ export default class MParser extends AbstractParser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 1516;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,99,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,99,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1513;
@@ -6852,7 +6852,7 @@ export default class MParser extends AbstractParser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 1527;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,101,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,101,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1524;
@@ -7017,7 +7017,7 @@ export default class MParser extends AbstractParser {
 	        }
 	        this.state = 1551; 
 	        this._errHandler.sync(this);
-	        let _alt = 1+1;
+	        var _alt = 1+1;
 	        do {
 	        	switch (_alt) {
 	        	case 1+1:
@@ -7134,7 +7134,7 @@ export default class MParser extends AbstractParser {
 	        this.declaration();
 	        this.state = 1572;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,107,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,107,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1567;
@@ -7538,7 +7538,7 @@ export default class MParser extends AbstractParser {
 	        this.native_symbol();
 	        this.state = 1640;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,116,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,116,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1635;
@@ -7576,7 +7576,7 @@ export default class MParser extends AbstractParser {
 	        this.category_symbol();
 	        this.state = 1649;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,117,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,117,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1644;
@@ -7933,7 +7933,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1727;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,127,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,127,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -8358,7 +8358,7 @@ export default class MParser extends AbstractParser {
 	        this.type_identifier();
 	        this.state = 1776;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,133,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,133,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1772;
@@ -9059,7 +9059,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 1851;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,144,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,144,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -9128,7 +9128,7 @@ export default class MParser extends AbstractParser {
 	        this.member_method_declaration();
 	        this.state = 1860;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,145,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,145,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1855;
@@ -9242,7 +9242,7 @@ export default class MParser extends AbstractParser {
 	        this.native_member_method_declaration();
 	        this.state = 1892;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,149,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,149,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1887;
@@ -9449,7 +9449,7 @@ export default class MParser extends AbstractParser {
 	        this.python_identifier();
 	        this.state = 1940;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,155,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,155,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1936;
@@ -9487,7 +9487,7 @@ export default class MParser extends AbstractParser {
 	        this.javascript_identifier();
 	        this.state = 1948;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,156,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,156,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1944;
@@ -9548,7 +9548,7 @@ export default class MParser extends AbstractParser {
 	        this.javascript_identifier();
 	        this.state = 1965;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,159,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,159,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1961;
@@ -9717,7 +9717,7 @@ export default class MParser extends AbstractParser {
 	        this.native_statement();
 	        this.state = 2000;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,164,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,164,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 1995;
@@ -9901,7 +9901,7 @@ export default class MParser extends AbstractParser {
 	        this.statement();
 	        this.state = 2035;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,170,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,170,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2030;
@@ -9939,7 +9939,7 @@ export default class MParser extends AbstractParser {
 	        this.assertion();
 	        this.state = 2044;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,171,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,171,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2039;
@@ -9977,7 +9977,7 @@ export default class MParser extends AbstractParser {
 	        this.switch_case_statement();
 	        this.state = 2053;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,172,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,172,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2048;
@@ -10015,7 +10015,7 @@ export default class MParser extends AbstractParser {
 	        this.catch_statement();
 	        this.state = 2062;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,173,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,173,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2057;
@@ -11247,7 +11247,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2233;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,194,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,194,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -11587,7 +11587,7 @@ export default class MParser extends AbstractParser {
 	        this.order_by();
 	        this.state = 2289;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,200,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,200,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2285;
@@ -11626,7 +11626,7 @@ export default class MParser extends AbstractParser {
 	        this.variable_identifier();
 	        this.state = 2297;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,201,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,201,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2293;
@@ -12087,7 +12087,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2354;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,205,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,205,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -12346,7 +12346,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2393;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,209,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,209,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -12743,7 +12743,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2432;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,213,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,213,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13014,7 +13014,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2475;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,218,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,218,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13078,7 +13078,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2491;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,219,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,219,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13185,7 +13185,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2508;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,221,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,221,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13509,7 +13509,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2541;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,225,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,225,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13746,7 +13746,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2576;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,229,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,229,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13860,7 +13860,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2595;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,230,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,230,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -13920,7 +13920,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2605;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,231,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,231,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -14242,7 +14242,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2638;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,235,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,235,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -14479,7 +14479,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2673;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,239,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,239,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -14609,7 +14609,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2694;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,241,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,241,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -15212,7 +15212,7 @@ export default class MParser extends AbstractParser {
 	        this.identifier_or_keyword();
 	        this.state = 2781;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,252,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,252,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2778;
@@ -15324,7 +15324,7 @@ export default class MParser extends AbstractParser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 2799; 
 	        this._errHandler.sync(this);
-	        let _alt = 1;
+	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
@@ -15597,7 +15597,7 @@ export default class MParser extends AbstractParser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 2813; 
 	        this._errHandler.sync(this);
-	        let _alt = 1;
+	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
@@ -15882,7 +15882,7 @@ export default class MParser extends AbstractParser {
 	        this._ctx.stop = this._input.LT(-1);
 	        this.state = 2848;
 	        this._errHandler.sync(this);
-	        let _alt = this._interp.adaptivePredict(this._input,263,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,263,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -15897,7 +15897,7 @@ export default class MParser extends AbstractParser {
 	                }
 	                this.state = 2842; 
 	                this._errHandler.sync(this);
-	                let _alt = 1;
+	                var _alt = 1;
 	                do {
 	                	switch (_alt) {
 	                	case 1:
@@ -15984,7 +15984,7 @@ export default class MParser extends AbstractParser {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 2859; 
 	        this._errHandler.sync(this);
-	        let _alt = 1+1;
+	        var _alt = 1+1;
 	        do {
 	        	switch (_alt) {
 	        	case 1+1:
