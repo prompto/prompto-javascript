@@ -1,5 +1,4 @@
-import { VoidType, NullType } from './index.js'
-import {AnyType, CategoryType, NativeType} from "./index";
+import { VoidType, NullType, AnyType, CategoryType, NativeType, DecimalType } from './index.js'
 
 export default class TypeMap {
 
@@ -24,12 +23,10 @@ export default class TypeMap {
         // first pass: get less specific type
         for(let i=0;i<keys.length;i++) {
             const current = this[keys[i]];
-            if(current == NullType.instance) {
-                continue;
-            } else if(inferred==null) {
+            if(inferred == null || inferred == NullType.instance) {
                 inferred = current;
             } else if(inferred.isAssignableFrom(context, current)) {
-                continue;
+                inferred = current == DecimalType.instance ? current : inferred;
             } else if(current.isAssignableFrom(context, inferred)) {
                 inferred = current;
             } else {
@@ -41,7 +38,7 @@ export default class TypeMap {
             }
         }
         if(inferred==null)
-            return NullType.instance;
+            return VoidType.instance;
         // second pass: check compatibility
         keys.forEach(function(k) {
             const type = this[k];

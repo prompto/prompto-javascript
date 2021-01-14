@@ -39,16 +39,14 @@ export default class DictLiteral extends Literal {
     }
 
     inferElementType(context) {
-        const items = this.entries.items;
-        if(items.length==0) {
+        if(this.entries.items.length === 0)
             return MissingType.instance;
-        }
         const types = new TypeMap();
-        items.forEach(entry => {
+        this.entries.items.forEach(entry => {
             const elemType = entry.value.check(context);
             types.add(elemType);
         });
-        return types.inferType(context);
+        return types.inferType(context, this);
     }
 
     interpret(context) {
