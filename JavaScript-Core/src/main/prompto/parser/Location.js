@@ -13,7 +13,7 @@ export default class Location {
         this.line = token.line;
         this.column = token.column;
         this.start = token.start;
-        if(isEnd && token.text!==null) {
+        if(isEnd && token.text) {
             this.start += token.text.length;
             this.column += token.text.length;
         }
