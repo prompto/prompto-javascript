@@ -1,8 +1,7 @@
 import Literal from './Literal.js'
 import { DictEntryList } from './index.js'
 import { DictionaryValue, DecimalValue, TextValue } from '../value/index.js'
-import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType } from '../type/index.js'
-import { inferElementType } from '../utils/index.js'
+import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType, TypeMap } from '../type/index.js'
 import { Dictionary } from '../intrinsic/index.js'
 
 // we can only compute keys by evaluating key expressions in context
@@ -44,12 +43,12 @@ export default class DictLiteral extends Literal {
         if(items.length==0) {
             return MissingType.instance;
         }
-        const types = [];
+        const types = new TypeMap();
         items.forEach(entry => {
             const elemType = entry.value.check(context);
-            types.push(elemType);
+            types.add(elemType);
         });
-        return inferElementType(context, types);
+        return types.inferType(context);
     }
 
     interpret(context) {

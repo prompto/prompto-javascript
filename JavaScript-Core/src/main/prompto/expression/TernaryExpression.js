@@ -35,8 +35,8 @@ export default class TernaryExpression extends Expression {
         const trueType = this.ifTrue.check(context);
         const falseType = this.ifFalse.check(context);
         const types = new TypeMap();
-        types[trueType.name] = trueType;
-        types[falseType.name] = falseType;
+        types.add(trueType);
+        types.add(falseType);
         return types.inferType(context, this);
     }
 

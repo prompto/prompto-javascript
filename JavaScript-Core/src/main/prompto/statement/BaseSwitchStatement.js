@@ -34,14 +34,14 @@ export default class BaseSwitchStatement extends BaseStatement {
             const type = switchCase.checkReturnType(context);
             if(type!=VoidType.instance) {
                 section = switchCase;
-                types[type.name] = type;
+                types.add(type);
             }
         });
         if(this.defaultCase!=null) {
             const type = this.defaultCase.check(context, null);
             if(type!=VoidType.instance) {
                 section = this.defaultCase;
-                types[type.name] = type;
+                types.add(type);
             }
         }
         return section;

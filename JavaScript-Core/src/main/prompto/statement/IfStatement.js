@@ -34,7 +34,7 @@ export default class IfStatement extends BaseStatement {
             const type = element.check(context);
             if(type!==VoidType.instance) {
                 section = element;
-                types[type.name] = type;
+                types.add(type);
             }
         });
         return types.inferType(context, section);

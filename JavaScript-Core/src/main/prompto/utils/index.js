@@ -1,6 +1,6 @@
 import CmdLineParser from './CmdLineParser.js';
 import CodeWriter from './CodeWriter.js';
-import { convertFromJavaScript, inferExpressionsType, inferElementType } from './TypeUtils.js';
+import { convertFromJavaScript, inferExpressionsType } from './TypeUtils.js';
 import { getTypeName,
     isCharacterUpperCase, isABoolean, isACharacter, isADecimal, isAnInteger, isAText,
     decimalToString, removeAccents, multiplyArray,
@@ -12,8 +12,8 @@ const importFsIfNode = ImportUtils.importFsIfNode;
 
 export { importPathIfNode, importFsIfNode,
     equalObjects, equalArrays, arrayContains, compareValues, isCharacterUpperCase,
-    inferExpressionsType, inferElementType, getTypeName,
+    convertFromJavaScript, inferExpressionsType, getTypeName,
     isABoolean, isACharacter, isADecimal, isAnInteger, isAText,
     decimalToString, removeAccents, multiplyArray,
     stringToUtf8Buffer, utf8BufferToString, getUtf8CharLength,
-    convertFromJavaScript, CodeWriter, CmdLineParser }
+    CodeWriter, CmdLineParser }

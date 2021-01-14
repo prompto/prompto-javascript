@@ -1,6 +1,6 @@
 import ObjectList from '../utils/ObjectList.js'
 import {PromptoError, NullReferenceError} from '../error/index.js'
-import {VoidType, TypeMap} from '../type/index.js'
+import {VoidType, MissingType, TypeMap} from '../type/index.js'
 import {JavaScriptNativeCall} from '../javascript/index.js'
 import {Dialect, Section} from '../parser/index.js'
 import {NativeCall} from './index.js'
@@ -14,7 +14,7 @@ export default class StatementList extends ObjectList {
     asSection() {
         switch (this.length) {
             case 0:
-                return null;
+                return MissingType.instance;
             case 1:
                 return this[0];
             default:
@@ -67,7 +67,7 @@ export default class StatementList extends ObjectList {
                     type = VoidType.instance;
                 if (type !== VoidType.instance) {
                     section = stmt;
-                    types[type.name] = type;
+                    types.add(type);
                 }
             }, this);
             return types.inferType(context, section);
