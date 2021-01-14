@@ -2,6 +2,12 @@ import { Location } from './index.js'
 
 export default class Section {
 
+    static merge(s1, s2) {
+        const section = Section();
+        section.setSectionFrom(s1.path, Location.min(s1.start, s2.start), Location.max(s1.end, s2.end), s1.dialect);
+        return section;
+    }
+
     constructor(section) {
         section = section || { path : "", start : null, end : null, dialect : null, breakpoint : null };
         this.copySectionFrom(section);

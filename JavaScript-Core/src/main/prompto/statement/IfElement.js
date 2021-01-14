@@ -1,5 +1,6 @@
 import BaseStatement from "./BaseStatement.js";
 import {StatementList} from "./index.js";
+import {Section} from "../parser/index.js";
 import {BooleanType} from "../type/index.js";
 import {EqualsExpression} from "../expression/index.js";
 
@@ -9,6 +10,10 @@ export default class IfElement extends BaseStatement {
         super();
         this.condition = condition;
         this.statements = statements;
+        if(condition==null)
+            this.copySectionFrom(statements.asSection());
+        else
+            this.copySectionFrom(Section.merge(condition, statements.asSection()));
     }
 
     check(context) {
