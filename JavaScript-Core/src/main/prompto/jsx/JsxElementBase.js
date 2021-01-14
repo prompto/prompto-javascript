@@ -289,6 +289,7 @@ const HTML_PROPERTY_TYPES = `{
     value: { type: Text, help: "Value to be used for form submission"},
     width: { type: Integer, help: "Horizontal dimension"},
     wrap: { values: <null, "hard", "soft">, help: "How the value of the form control is to be wrapped for form submission"},
+    dangerouslySetInnerHTML : { type: Document, help: "Sets node.innerHtml"},
     onClick: ClickEventCallback,
     onContextMenu: ClickEventCallback,
     onChange: InputChangedCallback,
