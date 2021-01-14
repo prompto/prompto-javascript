@@ -4,10 +4,12 @@ module.exports = {
         [
             '@babel/preset-env',
             {
-                targets: "> 0.25%, not dead"
+                targets: {
+                    node: 'current',
+                },
             },
         ],
     ],
-    plugins: ["@babel/plugin-proposal-class-properties", "@babel/plugin-transform-classes"],
+    plugins: ["@babel/plugin-proposal-class-properties"],
     compact : true
 };

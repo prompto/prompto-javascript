@@ -23,14 +23,13 @@ module.exports = {
         fs: "empty"
     },
     optimization: {
-        minimize: true,
         minimizer : [ terser_plugin ]
     },
     module: {
         rules: [
             {
                 test: /\.(js)$/,
-                exclude: [/node_modules(?!\/antlr4)/],
+                exclude: [/node_modules/,/antlr4/],
                 use: [
                         'babel-loader',
                         "eslint-loader",
