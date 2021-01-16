@@ -60,6 +60,10 @@ test('Member', () => {
 	compareResourceOEO('methods/member.poc');
 });
 
+test('MemberRef', () => {
+	compareResourceOEO('methods/memberRef.poc');
+});
+
 test('Override', () => {
 	compareResourceOEO('methods/override.poc');
 });

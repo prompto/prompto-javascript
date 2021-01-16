@@ -114,6 +114,14 @@ test('Transpiled Member', () => {
 	checkTranspiledOutput('methods/member.poc');
 });
 
+test('Interpreted MemberRef', () => {
+	checkInterpretedOutput('methods/memberRef.poc');
+});
+
+test('Transpiled MemberRef', () => {
+	checkTranspiledOutput('methods/memberRef.poc');
+});
+
 test('Interpreted Override', () => {
 	checkInterpretedOutput('methods/override.poc');
 });

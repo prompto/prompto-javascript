@@ -138,6 +138,14 @@ test('Transpiled MemberCall', () => {
 	checkTranspiledOutput('methods/memberCall.pec');
 });
 
+test('Interpreted MemberRef', () => {
+	checkInterpretedOutput('methods/memberRef.pec');
+});
+
+test('Transpiled MemberRef', () => {
+	checkTranspiledOutput('methods/memberRef.pec');
+});
+
 test('Interpreted Override', () => {
 	checkInterpretedOutput('methods/override.pec');
 });

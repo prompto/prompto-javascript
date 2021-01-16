@@ -72,6 +72,10 @@ test('MemberCall', () => {
 	compareResourceEME('methods/memberCall.pec');
 });
 
+test('MemberRef', () => {
+	compareResourceEME('methods/memberRef.pec');
+});
+
 test('Override', () => {
 	compareResourceEME('methods/override.pec');
 });
