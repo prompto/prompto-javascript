@@ -788,21 +788,21 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#ClosureExpression.
-	enterClosureExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#ClosureExpression.
-	exitClosureExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by OParser#ContainsExpression.
 	enterContainsExpression(ctx) {
 	}
 
 	// Exit a parse tree produced by OParser#ContainsExpression.
 	exitContainsExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by OParser#TypeExpression.
+	enterTypeExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#TypeExpression.
+	exitTypeExpression(ctx) {
 	}
 
 
@@ -968,12 +968,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#closure_expression.
-	enterClosure_expression(ctx) {
+	// Enter a parse tree produced by OParser#type_expression.
+	enterType_expression(ctx) {
 	}
 
-	// Exit a parse tree produced by OParser#closure_expression.
-	exitClosure_expression(ctx) {
+	// Exit a parse tree produced by OParser#type_expression.
+	exitType_expression(ctx) {
 	}
 
 

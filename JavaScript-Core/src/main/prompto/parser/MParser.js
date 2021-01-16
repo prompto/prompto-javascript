@@ -2051,7 +2051,7 @@ export default class MParser extends AbstractParser {
                          "do_while_statement", "while_statement", "if_statement", 
                          "else_if_statement_list", "raise_statement", "try_statement", 
                          "catch_statement", "break_statement", "return_statement", 
-                         "expression", "filter_expression", "closure_expression", 
+                         "expression", "filter_expression", "type_expression", 
                          "selectable_expression", "instance_expression", 
                          "mutable_instance_expression", "method_expression", 
                          "instance_selector", "blob_expression", "document_expression", 
@@ -5170,11 +5170,11 @@ export default class MParser extends AbstractParser {
 	            break;
 
 	        case 10:
-	            localctx = new ClosureExpressionContext(this, localctx);
+	            localctx = new TypeExpressionContext(this, localctx);
 	            this._ctx = localctx;
 	            _prevctx = localctx;
 	            this.state = 1152;
-	            localctx.exp = this.closure_expression();
+	            localctx.exp = this.type_expression();
 	            break;
 
 	        }
@@ -5625,9 +5625,9 @@ export default class MParser extends AbstractParser {
 
 
 
-	closure_expression() {
-	    let localctx = new Closure_expressionContext(this, this._ctx, this.state);
-	    this.enterRule(localctx, 94, MParser.RULE_closure_expression);
+	type_expression() {
+	    let localctx = new Type_expressionContext(this, this._ctx, this.state);
+	    this.enterRule(localctx, 94, MParser.RULE_type_expression);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 1259;
@@ -16257,7 +16257,7 @@ MParser.RULE_break_statement = 43;
 MParser.RULE_return_statement = 44;
 MParser.RULE_expression = 45;
 MParser.RULE_filter_expression = 46;
-MParser.RULE_closure_expression = 47;
+MParser.RULE_type_expression = 47;
 MParser.RULE_selectable_expression = 48;
 MParser.RULE_instance_expression = 49;
 MParser.RULE_mutable_instance_expression = 50;
@@ -20925,35 +20925,6 @@ class ArrowExpressionContext extends ExpressionContext {
 
 MParser.ArrowExpressionContext = ArrowExpressionContext;
 
-class ClosureExpressionContext extends ExpressionContext {
-
-    constructor(parser, ctx) {
-        super(parser);
-        this.exp = null; // Closure_expressionContext;
-        super.copyFrom(ctx);
-    }
-
-	closure_expression() {
-	    return this.getTypedRuleContext(Closure_expressionContext,0);
-	};
-
-	enterRule(listener) {
-	    if(listener instanceof MParserListener ) {
-	        listener.enterClosureExpression(this);
-		}
-	}
-
-	exitRule(listener) {
-	    if(listener instanceof MParserListener ) {
-	        listener.exitClosureExpression(this);
-		}
-	}
-
-
-}
-
-MParser.ClosureExpressionContext = ClosureExpressionContext;
-
 class ContainsExpressionContext extends ExpressionContext {
 
     constructor(parser, ctx) {
@@ -21031,6 +21002,35 @@ class FilteredListExpressionContext extends ExpressionContext {
 }
 
 MParser.FilteredListExpressionContext = FilteredListExpressionContext;
+
+class TypeExpressionContext extends ExpressionContext {
+
+    constructor(parser, ctx) {
+        super(parser);
+        this.exp = null; // Type_expressionContext;
+        super.copyFrom(ctx);
+    }
+
+	type_expression() {
+	    return this.getTypedRuleContext(Type_expressionContext,0);
+	};
+
+	enterRule(listener) {
+	    if(listener instanceof MParserListener ) {
+	        listener.enterTypeExpression(this);
+		}
+	}
+
+	exitRule(listener) {
+	    if(listener instanceof MParserListener ) {
+	        listener.exitTypeExpression(this);
+		}
+	}
+
+
+}
+
+MParser.TypeExpressionContext = TypeExpressionContext;
 
 class MultiplyExpressionContext extends ExpressionContext {
 
@@ -21715,7 +21715,7 @@ class ArrowFilterExpressionContext extends Filter_expressionContext {
 
 MParser.ArrowFilterExpressionContext = ArrowFilterExpressionContext;
 
-class Closure_expressionContext extends antlr4.ParserRuleContext {
+class Type_expressionContext extends antlr4.ParserRuleContext {
 
     constructor(parser, parent, invokingState) {
         if(parent===undefined) {
@@ -21726,7 +21726,7 @@ class Closure_expressionContext extends antlr4.ParserRuleContext {
         }
         super(parent, invokingState);
         this.parser = parser;
-        this.ruleIndex = MParser.RULE_closure_expression;
+        this.ruleIndex = MParser.RULE_type_expression;
         this.name = null; // Type_identifierContext
     }
 
@@ -21736,13 +21736,13 @@ class Closure_expressionContext extends antlr4.ParserRuleContext {
 
 	enterRule(listener) {
 	    if(listener instanceof MParserListener ) {
-	        listener.enterClosure_expression(this);
+	        listener.enterType_expression(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof MParserListener ) {
-	        listener.exitClosure_expression(this);
+	        listener.exitType_expression(this);
 		}
 	}
 
@@ -37253,7 +37253,7 @@ MParser.Break_statementContext = Break_statementContext;
 MParser.Return_statementContext = Return_statementContext; 
 MParser.ExpressionContext = ExpressionContext; 
 MParser.Filter_expressionContext = Filter_expressionContext; 
-MParser.Closure_expressionContext = Closure_expressionContext; 
+MParser.Type_expressionContext = Type_expressionContext; 
 MParser.Selectable_expressionContext = Selectable_expressionContext; 
 MParser.Instance_expressionContext = Instance_expressionContext; 
 MParser.Mutable_instance_expressionContext = Mutable_instance_expressionContext; 

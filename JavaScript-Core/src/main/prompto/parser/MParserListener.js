@@ -734,15 +734,6 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#ClosureExpression.
-	enterClosureExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by MParser#ClosureExpression.
-	exitClosureExpression(ctx) {
-	}
-
-
 	// Enter a parse tree produced by MParser#ContainsExpression.
 	enterContainsExpression(ctx) {
 	}
@@ -758,6 +749,15 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by MParser#FilteredListExpression.
 	exitFilteredListExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by MParser#TypeExpression.
+	enterTypeExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TypeExpression.
+	exitTypeExpression(ctx) {
 	}
 
 
@@ -914,12 +914,12 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by MParser#closure_expression.
-	enterClosure_expression(ctx) {
+	// Enter a parse tree produced by MParser#type_expression.
+	enterType_expression(ctx) {
 	}
 
-	// Exit a parse tree produced by MParser#closure_expression.
-	exitClosure_expression(ctx) {
+	// Exit a parse tree produced by MParser#type_expression.
+	exitType_expression(ctx) {
 	}
 
 
