@@ -40,7 +40,7 @@ export default class CategoryParameter extends Parameter {
     transpileCall(transpiler, expression) {
         this.resolve(transpiler.context);
         if(this.resolved instanceof MethodType)
-            expression.transpileReference(transpiler);
+            expression.transpileReference(transpiler, this.resolved);
         else
             super.transpileCall(transpiler, expression);
     }

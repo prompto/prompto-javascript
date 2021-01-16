@@ -1590,8 +1590,8 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitClosureExpression(ctx) {
-        const name = this.getNodeValue(ctx.name);
-        this.setNodeValue(ctx, new expression.MethodExpression(name));
+        const exp = this.getNodeValue(ctx.exp);
+        this.setNodeValue(ctx, new expression.MethodExpression(exp));
     }
 
 

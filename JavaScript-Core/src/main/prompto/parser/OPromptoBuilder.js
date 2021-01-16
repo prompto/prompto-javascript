@@ -1589,13 +1589,13 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitClosure_expression(ctx) {
+    exitType_expression(ctx) {
         const name = this.getNodeValue(ctx.name);
-        this.setNodeValue(ctx, new expression.MethodExpression(name));
+        this.setNodeValue(ctx, new expression.TypeExpression(new type.CategoryType(name)))
     }
 
 
-    exitClosureExpression(ctx) {
+    exitTypeExpression(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }

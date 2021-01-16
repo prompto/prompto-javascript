@@ -38,7 +38,7 @@ export default class Expression extends Section {
         throw new Error("transpile not implemented by " + this.constructor.name);
     }
 
-    transpileReference(transpiler) {
+    transpileReference(transpiler, method) {
         this.transpile(transpiler);
     }
 

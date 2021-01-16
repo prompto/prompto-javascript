@@ -30,12 +30,13 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
         return this.parameters.map(arg => arg.getProto(context)).join("/");
     }
 
-    getTranspiledName(context) {
+    getTranspiledName(context, methodName) {
+        methodName = methodName || this.name;
         // if this is a template instance, name is already transpiled
-        if(this.name.indexOf("$")>0)
-            return this.name;
+        if(methodName.indexOf("$")>0)
+            return methodName;
         else
-            return [this.name].concat(this.parameters.map(arg => arg.getTranspiledName(context))).join("$");
+            return [methodName].concat(this.parameters.map(arg => arg.getTranspiledName(context))).join("$");
     }
 
     transpileProlog(transpiler) {

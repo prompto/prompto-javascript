@@ -170,7 +170,7 @@ export default class MethodCall extends SimpleStatement {
         this.doTranspile(transpiler, false);
     }
 
-    transpileReference(transpiler) {
+    transpileReference(transpiler, method) {
         this.doTranspile(transpiler, true);
     }
 

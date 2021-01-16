@@ -3,7 +3,7 @@ import { UnresolvedIdentifier, ParenthesisExpression } from './index.js'
 import { Dialect } from '../parser/index.js'
 import { UnresolvedCall } from '../statement/index.js'
 import { MethodType, VoidType } from '../type/index.js'
-import { NullValue } from '../value/index.js'
+import { Instance, NullValue, ClosureValue } from '../value/index.js'
 import { NullReferenceError } from '../error/index.js'
 
 export default class MemberSelector extends SelectorExpression {
@@ -87,6 +87,14 @@ export default class MemberSelector extends SelectorExpression {
         return false;
     }
 
+    transpileReference(transpiler, method) {
+        const parent = this.resolveParent(transpiler.context);
+        parent.transpileParent(transpiler);
+        transpiler.append(".");
+        transpiler.append(method.method.getTranspiledName(transpiler.context, this.name));
+        return false;
+    }
+
     toString() {
         return this.parent.toString() + "." + this.name;
     }
@@ -113,4 +121,21 @@ export default class MemberSelector extends SelectorExpression {
         } else
             return this.parent;
     }
+
+    interpretReference(context) {
+        // resolve parent to keep clarity
+        const parent = this.resolveParent(context);
+        const instance = parent.interpret(context);
+        if (instance == null || instance == NullValue.instance)
+            throw new NullReferenceError();
+        else if (instance instanceof Instance) {
+            const category = instance.declaration;
+            const methods = category.getMemberMethodsMap(context, this.id);
+            const method = methods.getFirst();
+            // TODO check prototype
+            return new ClosureValue(context.newInstanceContext(instance, null, true), new MethodType(method));
+        } else
+            throw new SyntaxError("Should never get here!");
+    }
+
 }
