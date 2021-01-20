@@ -150,6 +150,7 @@ export default class UnresolvedCall extends BaseStatement {
             return new MethodCall(new MethodSelector(null, id), this.args);
     }
 
+    // noinspection JSMethodCanBeStatic
     resolveUnresolvedMember(context, name) {
         const decl = context.getRegisteredDeclaration(context.instanceType.name);
         const methods = decl.getMemberMethodsMap(context, name);

@@ -5,7 +5,7 @@ import { MethodType, CategoryType, TypeType } from '../type/index.js'
 import { MethodDeclarationMap } from '../runtime/index.js'
 import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value/index.js'
 import { SingletonCategoryDeclaration } from '../declaration/index.js'
-import { NullReferenceError, SyntaxError } from '../error/index.js'
+import { NullReferenceError } from '../error/index.js'
 
 export default class MethodSelector extends MemberSelector {
   
@@ -109,27 +109,16 @@ export default class MethodSelector extends MemberSelector {
             id = this.parent.id;
         if(id!=null) {
             // don't get Singleton values
+            // noinspection JSUnresolvedVariable
             const first = id.name.substring(0, 1);
-            if(first.toLowerCase()==first) {
+            if(first.toLowerCase() === first) {
                 const value = context.getValue(id);
-                if(value!=null && value!=NullValue.instance)
+                if(value!=null && value !== NullValue.instance)
                     return value.type;
             }
         }
         // TODO check result instance
         return this.checkParent(context);
-    }
-
-    getCategoryCandidates(context) {
-        const parentType = this.checkParent(context);
-        if(!(parentType instanceof CategoryType)) {
-            throw new SyntaxError(this.parent.toString() + " is not a category");
-        }
-        const cd = context.getRegisteredDeclaration(parentType.name);
-        if(cd===null) {
-            throw new SyntaxError("Unknown category:" + parentType.name);
-        }
-        return cd.getMemberMethods(context, this.name);
     }
 
     newLocalContext(context, declaration) {
@@ -142,6 +131,7 @@ export default class MethodSelector extends MemberSelector {
         }
     }
 
+    // noinspection JSMethodCanBeStatic
     newLocalInstanceContext(context, declaration) {
         let instance = context.getClosestInstanceContext();
         if(instance!=null) {
@@ -185,7 +175,7 @@ export default class MethodSelector extends MemberSelector {
 
     newInstanceContext(context) {
         let value = this.parent.interpret(context);
-        if(value==null || value==NullValue.instance) {
+        if(value === null || value === NullValue.instance) {
             throw new NullReferenceError();
         }
         if(value instanceof TypeValue) {
