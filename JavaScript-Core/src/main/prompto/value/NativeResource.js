@@ -22,8 +22,8 @@ export default class NativeResource extends NativeInstance {
         return this.instance.readFully();
     }
 
-    writeFully(data) {
-        this.instance.writeFully(data);
+    writeFully(data, callback) {
+        this.instance.writeFully(data, callback);
     }
 
     readLine() {

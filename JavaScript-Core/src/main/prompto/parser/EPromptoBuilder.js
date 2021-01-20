@@ -2157,9 +2157,8 @@ export default class EPromptoBuilder extends EParserListener {
         const start = this.getNodeValue(ctx.xstart);
         const stop = this.getNodeValue(ctx.xstop);
         const orderBy = this.getNodeValue(ctx.orderby);
-        const name = this.getNodeValue(ctx.name);
-        const stmts = this.getNodeValue(ctx.stmts);
-        this.setNodeValue(ctx, new statement.FetchManyStatement(category, start, stop, predicate, orderBy, name, stmts));
+        const thenWith = grammar.ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
+        this.setNodeValue(ctx, new statement.FetchManyStatement(category, start, stop, predicate, orderBy, thenWith));
     }
 
 
@@ -2173,9 +2172,15 @@ export default class EPromptoBuilder extends EParserListener {
     exitFetchOneAsync(ctx) {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
+        const thenWith = grammar.ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
+        this.setNodeValue(ctx, new statement.FetchOneStatement(category, predicate, thenWith));
+    }
+
+
+    exitThen(ctx) {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
-        this.setNodeValue(ctx, new statement.FetchOneStatement(category, predicate, name, stmts));
+        this.setNodeValue(ctx, new grammar.ThenWith(name, stmts));
     }
 
 
@@ -2324,9 +2329,8 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitRead_statement(ctx) {
         const source = this.getNodeValue(ctx.source);
-        const name = this.getNodeValue(ctx.name);
-        const stmts = this.getNodeValue(ctx.stmts);
-        this.setNodeValue(ctx, new statement.ReadStatement(source, name, stmts));
+        const thenWith = grammar.ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
+        this.setNodeValue(ctx, new statement.ReadStatement(source, thenWith));
     }
 
 
@@ -2376,7 +2380,8 @@ export default class EPromptoBuilder extends EParserListener {
     exitWrite_statement(ctx) {
         const what = this.getNodeValue(ctx.what);
         const target = this.getNodeValue(ctx.target);
-        this.setNodeValue(ctx, new statement.WriteStatement(what, target));
+        const thenWith = this.getNodeValue(ctx.then());
+        this.setNodeValue(ctx, new statement.WriteStatement(what, target, thenWith));
     }
 
 

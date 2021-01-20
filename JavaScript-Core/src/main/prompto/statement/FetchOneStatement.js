@@ -1,14 +1,11 @@
 import FetchOneExpression from '../expression/FetchOneExpression.js'
 import { Variable } from '../runtime/index.js'
-import { VoidType } from '../type/index.js'
-import { Dialect } from '../parser/index.js'
 
 export default class FetchOneStatement extends FetchOneExpression {
 
-    constructor(typ, predicate, name, andThen) {
+    constructor(typ, predicate, thenWith) {
         super(typ, predicate);
-        this.name = name;
-        this.andThen = andThen;
+        this.thenWith = thenWith;
     }
 
     canReturn() {
@@ -21,52 +18,32 @@ export default class FetchOneStatement extends FetchOneExpression {
 
     check(context) {
         super.check(context);
-        context = context.newChildContext();
-        context.registerValue(new Variable(this.name, this.typ));
-        this.andThen.check(context, null);
-        return VoidType.instance;
+        return this.thenWith.check(context, this.typ);
     }
 
     interpret(context) {
         const record = super.interpret(context);
-        context = context.newChildContext();
-        context.registerValue(new Variable(this.name, this.typ));
-        context.setValue(this.name, record);
-        this.andThen.interpret(context);
-        return null;
+        return this.thenWith.interpret(context, record);
     }
 
     toDialect(writer) {
         super.toDialect(writer);
-        writer.append(" then with ").append(this.name.name);
-        if (writer.dialect === Dialect.O)
-            writer.append(" {");
-        else
-            writer.append(":");
-        writer = writer.newChildWriter();
-        writer.context.registerValue(new Variable(this.name, this.typ));
-        writer.newLine().indent();
-        this.andThen.toDialect(writer);
-        writer.dedent();
-        if (writer.dialect === Dialect.O)
-            writer.append("}").newLine();
+        this.thenWith.toDialect(writer, this.typ);
     }
 
     declare(transpiler) {
         super.declare(transpiler);
-        transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, this.typ));
-        this.andThen.declare(transpiler);
+        return this.thenWith.declare(transpiler, this.typ);
     }
 
     transpile(transpiler) {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         transpiler.append("$DataStore.instance.fetchOneAsync(builder.build(), function(stored) {").indent();
-        this.transpileConvert(transpiler, this.name.name);
+        this.transpileConvert(transpiler, this.thenWith.name.name);
         transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, this.typ));
-        this.andThen.transpile(transpiler);
+        transpiler.context.registerValue(new Variable(this.thenWith.name, this.typ));
+        this.thenWith.statements.transpile(transpiler);
         transpiler.dedent().append("}.bind(this));").dedent().append("}).bind(this)()");
         transpiler.flush();
         return false;

@@ -15,3 +15,4 @@ export {default as CategorySymbolList} from './CategorySymbolList.js';
 export {default as NativeCategoryBindingList} from './NativeCategoryBindingList.js';
 export {default as NamedInstance} from './NamedInstance.js';
 export {default as Specificity} from './Specificity.js';
+export {default as ThenWith} from './ThenWith.js';

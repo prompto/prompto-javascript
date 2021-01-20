@@ -38,14 +38,14 @@ Url.prototype.readFully = function() {
 };
 
 Url.prototype.checkStatus = function(xhr) {
-    if (xhr.status != 200) {
+    if (xhr.status !== 200) {
+        var rwe;
         try {
-            var rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
-            throw new rwe("Request failed, status: " + xhr.status +", " + xhr.statusText);
+            rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
         } catch(error) {
             throw new Error("Request failed, status: " + xhr.status +", " + xhr.statusText);
         }
-
+        throw new rwe("Request failed, status: " + xhr.status +", " + xhr.statusText);
     }
 };
 
@@ -68,7 +68,7 @@ Url.prototype.readFullyAsync = function(callback) {
         xhr.onload = function() {
             self.checkStatus(xhr);
             callback(xhr.responseText);
-        }
+        };
         xhr.send();
     }
 };
@@ -92,9 +92,9 @@ Url.prototype.readLine = function() {
         return this.lines.shift();
     else
         return null;
-}
+};
 
-Url.prototype.writeFully = function(data) {
+Url.prototype.writeFully = function(data, callback) {
 
 };
 

@@ -1,14 +1,20 @@
-import SimpleStatement from './SimpleStatement.js'
+import BaseStatement from './BaseStatement.js'
 import { ResourceContext } from '../runtime/index.js'
-import { VoidType, ResourceType } from '../type/index.js'
+import { VoidType, ResourceType, TextType } from '../type/index.js'
+import { TextValue } from '../value/index.js'
 import { NullReferenceError, InvalidResourceError } from '../error/index.js'
 
-export default class WriteStatement extends SimpleStatement {
+export default class WriteStatement extends BaseStatement {
 
-    constructor(content, resource) {
+    constructor(content, resource, thenWith) {
         super();
         this.content = content;
         this.resource = resource;
+        this.thenWith = thenWith;
+    }
+
+    isSimple() {
+        return this.thenWith === null;
     }
 
     toString() {
@@ -20,7 +26,10 @@ export default class WriteStatement extends SimpleStatement {
         const resourceType = this.resource.check(context);
         if(!(resourceType instanceof ResourceType))
             context.problemListener.reportNotAResource(this.resource);
-        return VoidType.instance;
+        if(this.thenWith)
+            return this.thenWith.check(context, TextType.instance);
+        else
+            return VoidType.instance;
     }
 
     interpret(context) {
@@ -34,14 +43,16 @@ export default class WriteStatement extends SimpleStatement {
         }
         const str = this.content.interpret(resContext).toString();
         try {
-            if(context==resContext) {
+            if(context===resContext) {
                 res.writeLine(str);
+            } else if(this.thenWith) {
+                res.writeFully(str, text => this.thenWith.interpret(context, new TextValue(text)));
             } else {
                 res.writeFully(str);
             }
             return null;
         } finally {
-            if(resContext!=context)
+            if(resContext!==context)
                 res.close();
         }
     }
@@ -51,6 +62,8 @@ export default class WriteStatement extends SimpleStatement {
             transpiler = transpiler.newResourceTranspiler();
         this.resource.declare(transpiler);
         this.content.declare(transpiler);
+        if(this.thenWith)
+            this.thenWith.declare(transpiler, TextType.instance);
     }
 
     transpile(transpiler) {
@@ -75,6 +88,10 @@ export default class WriteStatement extends SimpleStatement {
         transpiler.append("try {").indent();
         transpiler.append("$res.writeFully(");
         this.content.transpile(transpiler);
+        if(this.thenWith) {
+            transpiler.append(", ");
+            this.thenWith.transpile(transpiler, TextType.instance);
+        }
         transpiler.append(");");
         transpiler.dedent().append("} finally {").indent();
         transpiler.append("$res.close();").newLine();
@@ -84,6 +101,8 @@ export default class WriteStatement extends SimpleStatement {
 
     toDialect(writer) {
         writer.toDialect(this);
+        if(this.thenWith)
+            this.thenWith.toDialect(writer, TextType.instance);
     }
 
     toEDialect(writer) {

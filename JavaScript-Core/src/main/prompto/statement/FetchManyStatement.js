@@ -1,14 +1,12 @@
 import FetchManyExpression from '../expression/FetchManyExpression.js'
 import { Variable } from '../runtime/index.js'
-import { VoidType, CursorType } from '../type/index.js'
-import { Dialect } from '../parser/index.js'
+import { CursorType } from '../type/index.js'
 
 export default class FetchManyStatement extends FetchManyExpression {
 
-    constructor(typ, predicate, first, last, orderBy, name, andThen) {
+    constructor(typ, predicate, first, last, orderBy, thenWith) {
         super(typ, predicate, first, last, orderBy);
-        this.name = name;
-        this.andThen = andThen;
+        this.thenWith = thenWith;
     }
 
     canReturn() {
@@ -21,52 +19,37 @@ export default class FetchManyStatement extends FetchManyExpression {
 
     check(context) {
         super.check(context);
-        context = context.newChildContext();
-        context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-        this.andThen.check(context, null);
-        return VoidType.instance;
+        return this.thenWith.check(context, new CursorType(this.typ));
     }
 
     interpret(context) {
         const record = super.interpret(context);
-        context = context.newChildContext();
-        context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-        context.setValue(this.name, record);
-        this.andThen.interpret(context);
-        return null;
+        return this.thenWith.interpret(context, record);
     }
 
     toDialect(writer) {
         super.toDialect(writer);
-        writer.append(" then with ").append(this.name.name);
-        if (writer.dialect === Dialect.O)
-            writer.append(" {");
-        else
-            writer.append(":");
-        writer = writer.newChildWriter();
-        writer.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-        writer.newLine().indent();
-        this.andThen.toDialect(writer);
-        writer.dedent();
-        if (writer.dialect === Dialect.O)
-            writer.append("}").newLine();
+        this.thenWith.toDialect(writer, new CursorType(this.typ));
     }
 
     declare(transpiler) {
         super.declare(transpiler);
-        transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-        this.andThen.declare(transpiler);
+        this.thenWith.declare(transpiler, new CursorType(this.typ));
     }
 
     transpile(transpiler) {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         const mutable = this.typ ? this.typ.mutable : false;
-        transpiler.append("$DataStore.instance.fetchManyAsync(builder.build(), ").append(mutable).append(", function(").append(this.name.name).append(") {").indent();
+        transpiler.append("$DataStore.instance.fetchManyAsync(builder.build(), ")
+            .append(mutable)
+            .append(", function(")
+            .append(this.thenWith.name.name)
+            .append(") {")
+            .indent();
         transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, new CursorType(this.typ)));
-        this.andThen.transpile(transpiler);
+        transpiler.context.registerValue(new Variable(this.thenWith.name, new CursorType(this.typ)));
+        this.thenWith.statements.transpile(transpiler);
         transpiler.dedent().append("}.bind(this));").dedent().append("}).bind(this)()");
         transpiler.flush();
         return false;

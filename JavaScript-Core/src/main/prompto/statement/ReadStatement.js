@@ -1,14 +1,11 @@
 import ReadAllExpression from '../expression/ReadAllExpression.js'
-import { Dialect } from '../parser/index.js'
-import { Variable } from '../runtime/index.js'
-import { VoidType, TextType } from '../type/index.js'
+import { TextType } from '../type/index.js'
 
 export default class ReadStatement extends ReadAllExpression {
 
-    constructor(source, name, andThen) {
+    constructor(source, thenWith) {
         super(source);
-        this.name = name;
-        this.andThen = andThen;
+        this.thenWith = thenWith;
     }
 
     canReturn() {
@@ -21,53 +18,30 @@ export default class ReadStatement extends ReadAllExpression {
 
     check(context) {
         super.check(context);
-        context = context.newChildContext();
-        context.registerValue(new Variable(this.name, TextType.instance));
-        this.andThen.check(context, null);
-        return VoidType.instance;
+        return this.thenWith.check(context, TextType.instance);
     }
 
     interpret(context) {
         const result = super.interpret(context);
-        context = context.newChildContext();
-        context.registerValue(new Variable(this.name, TextType.instance));
-        context.setValue(this.name, result);
-        this.andThen.interpret(context);
-        return null;
+        return this.thenWith.interpret(context, result);
     }
 
     toDialect(writer) {
         super.toDialect(writer);
-        writer.append(" then with ").append(this.name.name);
-        if (writer.dialect === Dialect.O)
-            writer.append(" {");
-        else
-            writer.append(":");
-        writer = writer.newChildWriter();
-        writer.context.registerValue(new Variable(this.name, TextType.instance));
-        writer.newLine().indent();
-        this.andThen.toDialect(writer);
-        writer.dedent();
-        if (writer.dialect === Dialect.O)
-            writer.append("}").newLine();
+        this.thenWith.toDialect(writer, TextType.instance);
     }
 
     declare(transpiler) {
         super.declare(transpiler);
-        transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, TextType.instance));
-        this.andThen.declare(transpiler);
+        this.thenWith.declare(transpiler, TextType.instance);
     }
 
     transpile(transpiler) {
         this.resource.transpile(transpiler);
-        transpiler.append(".readFullyAsync(function(").append(this.name.name).append(") {").indent();
-        transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, TextType.instance));
-        this.andThen.transpile(transpiler);
-        transpiler.dedent().append("}.bind(this))")
-        transpiler.flush();
-        return false;
+        transpiler.append(".readFullyAsync(");
+        this.thenWith.transpile(transpiler, TextType.instance);
+        transpiler.append(");");
+         return false;
     }
 
     locateSectionAtLine(line) {
