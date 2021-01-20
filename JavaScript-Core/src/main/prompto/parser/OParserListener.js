@@ -1148,6 +1148,15 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by OParser#then.
+	enterThen(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#then.
+	exitThen(ctx) {
+	}
+
+
 	// Enter a parse tree produced by OParser#read_statement.
 	enterRead_statement(ctx) {
 	}

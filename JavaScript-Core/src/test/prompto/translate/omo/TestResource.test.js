@@ -16,6 +16,10 @@ test('WriteResource', () => {
 	compareResourceOMO('resource/writeResource.poc');
 });
 
+test('WriteResourceThen', () => {
+	compareResourceOMO('resource/writeResourceThen.poc');
+});
+
 test('WriteWithResource', () => {
 	compareResourceOMO('resource/writeWithResource.poc');
 });

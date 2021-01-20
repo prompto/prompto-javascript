@@ -42,6 +42,14 @@ test('Transpiled WriteResource', () => {
 	checkTranspiledOutput('resource/writeResource.pec');
 });
 
+test('Interpreted WriteResourceThen', () => {
+	checkInterpretedOutput('resource/writeResourceThen.pec');
+});
+
+test('Transpiled WriteResourceThen', () => {
+	checkTranspiledOutput('resource/writeResourceThen.pec');
+});
+
 test('Interpreted WriteWithResource', () => {
 	checkInterpretedOutput('resource/writeWithResource.pec');
 });

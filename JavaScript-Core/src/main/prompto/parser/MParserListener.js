@@ -1193,6 +1193,15 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by MParser#then.
+	enterThen(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#then.
+	exitThen(ctx) {
+	}
+
+
 	// Enter a parse tree produced by MParser#read_statement.
 	enterRead_statement(ctx) {
 	}

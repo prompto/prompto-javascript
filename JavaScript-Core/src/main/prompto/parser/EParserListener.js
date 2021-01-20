@@ -1301,6 +1301,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#then.
+	enterThen(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#then.
+	exitThen(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#read_statement.
 	enterRead_statement(ctx) {
 	}

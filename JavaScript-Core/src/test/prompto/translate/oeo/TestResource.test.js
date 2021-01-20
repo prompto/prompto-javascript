@@ -16,6 +16,10 @@ test('WriteResource', () => {
 	compareResourceOEO('resource/writeResource.poc');
 });
 
+test('WriteResourceThen', () => {
+	compareResourceOEO('resource/writeResourceThen.poc');
+});
+
 test('WriteWithResource', () => {
 	compareResourceOEO('resource/writeWithResource.poc');
 });

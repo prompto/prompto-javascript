@@ -16,6 +16,10 @@ test('WriteResource', () => {
 	compareResourceEME('resource/writeResource.pec');
 });
 
+test('WriteResourceThen', () => {
+	compareResourceEME('resource/writeResourceThen.pec');
+});
+
 test('WriteWithResource', () => {
 	compareResourceEME('resource/writeWithResource.pec');
 });
