@@ -72,25 +72,33 @@ export default class ConstructorExpression extends Expression {
 
     check(context) {
         // need to update type, since it was arbitrarily set to CategoryType
-        const cd = context.getRegisteredDeclaration(this.type.name);
-        if(cd==null)
+        const decl = context.getRegisteredDeclaration(this.type.name);
+        if(decl==null)
             context.problemListener.reportUnknownCategory(this.type.id);
-        this.checkFirstHomonym(context, cd);
-        cd.checkConstructorContext(context);
+        this.checkFirstHomonym(context, decl);
+        decl.checkConstructorContext(context);
         if(this.copyFrom!=null) {
             const cft = this.copyFrom.check(context);
-            if(!(cft instanceof CategoryType) && cft!=DocumentType.instance)
+            if(!(cft instanceof CategoryType) && cft !== DocumentType.instance)
                 context.problemListener.reportInvalidCopySource(this.copyFrom);
-                // throw new SyntaxError("Cannot copy from " + cft.getName());
         }
         if(this.args!=null) {
-            this.args.forEach(argument => {
-                if(!cd.hasAttribute(context, argument.name))
-                    context.problemListener.reportUnknownAttribute(argument.id);
-                argument.check(context);
-            });
+            this.args.forEach(argument => this.checkArgument(context, decl, argument));
         }
-        return cd.getType().asMutable(context, this.type.mutable);
+        return decl.getType().asMutable(context, this.type.mutable);
+    }
+
+    // noinspection JSMethodCanBeStatic
+    checkArgument (context, declaration, argument) {
+        let id = argument.id;
+        if(id === null) {
+            const exp = argument.expression();
+            if (exp instanceof InstanceExpression)
+                id = exp.id;
+        }
+        if(!declaration.hasAttribute(context, id.name))
+            context.problemListener.reportUnknownAttribute(id);
+        argument.check(context);
     }
 
     interpret(context) {
