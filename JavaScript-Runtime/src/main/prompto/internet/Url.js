@@ -1,13 +1,15 @@
+var HttpHeader = require("./HttpHeader").HttpHeader;
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
 if(!isNodeJs) {
     /* global XMLHttpRequest */
 }
 
-function Url(path, encoding, method) {
+function Url(path, encoding, httpMethod, httpHeaders) {
     this.path = path;
     this.encoding = encoding || "utf-8";
-    this.httpRequestMethod = method || "GET";
+    this.httpMethod = httpMethod || "GET";
+    this.httpHeaders = httpHeaders || [ new HttpHeader("Content-Type", "application/x-www-form-urlencoded")];
     return this;
 }
 
@@ -26,7 +28,7 @@ Url.prototype.readFully = function() {
     if(isNodeJs) {
         // need a synchronous call here, highly discouraged in main thread
         var request = eval("require('sync-request')");
-        var method = this.httpRequestMethod || "GET";
+        var method = this.httpMethod || "GET";
         var res = request(method, this.path);
         return res.getBody().toString();
     } else {
@@ -57,7 +59,7 @@ Url.prototype.readFullyAsync = function(callback) {
             callback(result);
         } else {
             var request = eval("require('then-request')");
-            var method = this.httpRequestMethod || "GET";
+            var method = this.httpMethod || "GET";
             request(method, this.path, null, function(x, res) {
                 callback(res.getBody());
             });
@@ -74,12 +76,13 @@ Url.prototype.readFullyAsync = function(callback) {
 };
 
 Url.prototype.createHttpRequest = function(async) {
-    var method = this.httpRequestMethod || "GET";
+    var method = this.httpMethod || "GET";
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/plain');
     xhr.open(method, this.path, async);
-    xhr.setRequestHeader("Access-Control-Allow-Origin", "*");
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    this.httpHeaders.forEach(function(header) {
+        xhr.setRequestHeader(header.name, header.text);
+    });
     return xhr;
 };
 

@@ -1,5 +1,6 @@
 exports.Html = require('./Html');
 exports.Url = require('./Url').Url;
+exports.HttpHeader = require('./HttpHeader').HttpHeader;
 // the below is needed for webpack only, nodejs uses Html.js
 exports.HtmlEncoder = require('./HtmlEncoder');
 exports.htmlEncode = exports.HtmlEncoder.htmlEncode;
