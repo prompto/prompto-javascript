@@ -1,4 +1,3 @@
-var HttpHeader = require("./HttpHeader").HttpHeader;
 var isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
 if(!isNodeJs) {
@@ -90,7 +89,9 @@ Url.prototype.throwError = function(message) {
     var rwe = null;
     try {
         rwe = eval("prompto.error.ReadWriteError"); // assume it's already defined
-    } catch (error) { }
+    } catch (error) {
+        rwe = null;
+    }
     if(rwe)
         throw new rwe(message);
     else
@@ -149,6 +150,7 @@ Url.prototype.writeFully = function(data, callback) {
 };
 
 Url.prototype.serialize = function(data) {
+    var writeJSONValue = eval("writeJSONValue");
 	return JSON.stringify(writeJSONValue(data));
 };
 
