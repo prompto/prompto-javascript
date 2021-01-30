@@ -40,6 +40,10 @@ export default class UnresolvedParameter {
         return this.name;
     }
 
+    getSignature(dialect) {
+        return this.id.name;
+    }
+
     getType(context) {
         this.resolveAndCheck(context);
         return this.resolved.getType(context);

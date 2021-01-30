@@ -15,6 +15,10 @@ export default class AttributeParameter extends Parameter {
         return this.id.name;
     }
 
+    getSignature(dialect) {
+        return this.id.name;
+    }
+
     getTranspiledName(context) {
         return this.id.name;
     }

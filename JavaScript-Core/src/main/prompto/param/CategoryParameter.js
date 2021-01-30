@@ -21,6 +21,10 @@ export default class CategoryParameter extends Parameter {
         return this.type.name;
     }
 
+    getSignature(dialect) {
+        return this.type.name + " " + this.id.name;
+    }
+
     getTranspiledName(context) {
         return this.type.getTranspiledName(context);
     }
@@ -89,7 +93,7 @@ export default class CategoryParameter extends Parameter {
     }
 
     toEDialect(writer) {
-        const anonymous = "any"==this.type.name;
+        const anonymous = "any" === this.type.name;
         this.type.toDialect(writer, true);
         if(anonymous) {
             writer.append(' ');
