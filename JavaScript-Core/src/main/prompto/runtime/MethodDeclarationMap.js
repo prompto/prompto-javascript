@@ -31,7 +31,7 @@ export default class MethodDeclarationMap {
 
     getFirst() {
         const proto = Object.getOwnPropertyNames(this.protos)[0];
-        return proto ? this.protos[proto] : null;
+        return (proto || proto === "") ? this.protos[proto] : null;
     }
 
     getAll() {
