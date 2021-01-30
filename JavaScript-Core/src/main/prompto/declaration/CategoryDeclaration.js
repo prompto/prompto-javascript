@@ -100,7 +100,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
                 localMap = new MethodDeclarationMap();
                 maps.set(method.name, localMap);
             }
-            localMap.registerIfMissing(method);
+            localMap.registerOrReplace(method);
         });
     }
 
