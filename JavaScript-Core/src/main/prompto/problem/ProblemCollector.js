@@ -159,7 +159,7 @@ export default class ProblemCollector extends antlr4.error.ErrorListener {
     }
 
     reportIllegalWidgetConstructor(section, name) {
-        this.reportError(section, "Cannot instantiate widget: " + name + " (widgets are instantiated during rendering)");
+        this.reportWarning(section, "Cannot instantiate widget: " + name + " (widgets are instantiated during rendering)");
     }
 
     reportIllegalAbstractConstructor(section, name, missingMethod) {

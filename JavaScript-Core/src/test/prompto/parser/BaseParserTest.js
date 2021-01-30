@@ -239,7 +239,7 @@ exports.execute = function(decls, methodName, args) {
         decls.register(context);
         decls.check(context);
         if(context.hasTests()) {
-            Object.getOwnPropertyNames(context.tests).forEach( name => exports.executeTest(context, test));
+            Object.getOwnPropertyNames(context.tests).forEach( name => exports.executeTest(context, name));
         } else {
             exports.executeMethod(context, methodName, args);
         }
