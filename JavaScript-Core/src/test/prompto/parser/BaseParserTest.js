@@ -1,3 +1,4 @@
+var yaml = require("js-yaml");
 var path = require("path");
 var fs = require("fs");
 import * as prompto from "../../../main/prompto/index.js";
@@ -15,14 +16,14 @@ prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(true);
 
 function getPromptoFolder() {
     var prompto = module.filename;
-    while (path.basename(prompto).indexOf("prompto-") != 0) {
+    while (path.basename(prompto).indexOf("prompto-") !== 0) {
         var parent = path.dirname(prompto);
-        if (parent == prompto)
+        if (parent === prompto)
             throw "Could not find prompto root!";
         prompto = parent;
     }
     return prompto;
-};
+}
 
 function getResourcesFolder() {
     var prompto = getPromptoFolder();
@@ -53,9 +54,9 @@ exports.getResourceAsString = function(fileName) {
     if(!fs.existsSync(fullPath))
         fullPath = path.normalize(librariesFolder + path.sep + fileName);
     return fs.readFileSync(fullPath).toString();
-}
+};
 
-function readExpected(fileName) {
+function readExpectedOutput(fileName) {
 	var idx = fileName.lastIndexOf('.');
 	fileName = fileName.substring(0, idx) + ".txt";
 	fileName = fileName.replace("/", path.sep);
@@ -68,7 +69,7 @@ function readExpected(fileName) {
 
 exports.checkSameOutput = function(resource) {
 	var read = Out.read();
-	var expected = readExpected(resource);
+	var expected = readExpectedOutput(resource);
 	if(expected.length===1) {
 		expect(read).toEqual(expected[0]);
 	} else {
@@ -103,7 +104,7 @@ function assertEquivalent( expected, actual) {
 
 function removeWhitespace(s) {
     s = replaceAll(s, "\n", "");
-    s = replaceAll(s, "\t", "")
+    s = replaceAll(s, "\t", "");
     s = replaceAll(s, " ", "");
     return s;
 }
@@ -238,9 +239,7 @@ exports.execute = function(decls, methodName, args) {
         decls.register(context);
         decls.check(context);
         if(context.hasTests()) {
-            for(var test in context.tests) {
-                exports.executeTest(context, test);
-            }
+            Object.getOwnPropertyNames(context.tests).forEach( name => exports.executeTest(context, test));
         } else {
             exports.executeMethod(context, methodName, args);
         }
@@ -262,7 +261,7 @@ exports.executeTest = function(context, testName) {
     var fn = wrapAndExtract(js, testMethod.cleanId(), context);
     // call test
     fn();
-}
+};
 
 exports.executeMethod = function(context, methodName, cmdLineArgs) {
     methodName = methodName || "main";
@@ -274,7 +273,7 @@ exports.executeMethod = function(context, methodName, cmdLineArgs) {
     // call method
     cmdLineArgs = cmdLineArgs || new prompto.intrinsic.Dictionary();
     fn(cmdLineArgs);
-}
+};
 
 
 function writeToTempFile(js) {
@@ -314,7 +313,7 @@ function createWrapper(js, methodName) {
 
 exports.interpret = function(decls, methodName, args, rethrow) {
     try {
-        var context = prompto.runtime.Context.newGlobalsContext();
+        const context = prompto.runtime.Context.newGlobalsContext();
         decls.register(context);
         decls.check(context);
         if(context.hasTests())
@@ -334,4 +333,35 @@ exports.interpret = function(decls, methodName, args, rethrow) {
             throw e;
     }
 };
+
+exports.checkSameProblems = function(fileName, parser) {
+    var decls = parser(fileName);
+    const context = prompto.runtime.Context.newGlobalsContext();
+    decls.register(context);
+    const collector = new prompto.problem.ProblemCollector();
+    context.problemListener = collector;
+    decls.check(context);
+    const expected = readExpectedProblems(fileName);
+    const actual = readActualProblems(collector);
+    expect(actual).toEqual(expected);
+
+};
+
+function readActualProblems(collector) {
+    return collector.problems.map(p => {
+        delete p.path;
+        return p;
+    });
+}
+
+function readExpectedProblems(fileName) {
+    const idx = fileName.lastIndexOf(".");
+    fileName = fileName.substring(0, idx) + ".problems.yml";
+    fileName = fileName.replace("/", path.sep);
+    let fullPath = path.normalize(resourcesFolder + path.sep + fileName);
+    if(!fs.existsSync(fullPath))
+        fullPath = path.normalize(librariesFolder + path.sep + fileName);
+    const text = fs.readFileSync(fullPath).toString();
+    return yaml.loadAll(text)[0];
+}
 

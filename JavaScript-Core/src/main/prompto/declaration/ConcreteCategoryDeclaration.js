@@ -204,6 +204,10 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         return name === "constructor" ? "$constructor" : name;
     }
 
+    getLocalMethods() {
+        return this.methods;
+    }
+
     checkDerived(context) {
         if(this.derivedFrom!=null) {
             this.derivedFrom.map( id => {

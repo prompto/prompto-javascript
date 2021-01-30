@@ -3,6 +3,7 @@ import { AttributeDeclaration } from './index.js'
 import { CategoryType } from '../type/index.js'
 import { NullValue } from '../value/index.js'
 import { convertFromJavaScript } from '../utils/index.js'
+import { MethodDeclarationMap } from "../runtime/index.js";
 
 export default class CategoryDeclaration extends BaseDeclaration {
 
@@ -29,7 +30,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
         if(this.derivedFrom == null)
             return false;
         else
-            return this.derivedFrom.find(name=>{
+            return this.derivedFrom.find(name => {
                 const decl = context.getRegisteredDeclaration(name);
                 return decl && decl.isStorable(context);
             });
@@ -67,6 +68,49 @@ export default class CategoryDeclaration extends BaseDeclaration {
             return new Set(attributes);
         else
             return null;
+    }
+
+    getLocalMethods() {
+        throw new Error("Should never get there!");
+    }
+
+    getAllMethods(context) {
+        const maps = new Map();
+        this.collectAllMethods(context, maps);
+        return maps;
+    }
+
+    collectAllMethods(context, maps) {
+        this.collectInheritedMethods(context, maps);
+        this.collectLocalMethods(context, maps);
+    }
+
+    collectInheritedMethods(context, maps) {
+        if(this.derivedFrom)
+            this.derivedFrom.forEach(name => {
+                const decl = context.getRegisteredDeclaration(name);
+                decl.collectAllMethods(context, maps);
+            });
+    }
+
+    collectLocalMethods(context, maps) {
+        this.getLocalMethods().forEach( method => {
+            let localMap = maps.get(method.name);
+            if(!localMap) {
+                localMap = new MethodDeclarationMap();
+                maps.set(method.name, localMap);
+            }
+            localMap.registerIfMissing(method);
+        });
+    }
+
+    getAbstractMethods(context) {
+        let abstract = [];
+        this.getAllMethods(context).forEach((v,k) => {
+            const toAdd = v.getAll().filter(m => m.isAbstract());
+            abstract = abstract.concat(toAdd);
+        });
+        return abstract;
     }
 
     register(context) {

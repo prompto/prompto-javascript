@@ -2,8 +2,9 @@ import Expression from './Expression.js';
 import { UnresolvedIdentifier, InstanceExpression } from './index.js'
 import { ArgumentList, Argument, Identifier } from '../grammar/index.js'
 import { AttributeParameter } from '../param/index.js'
-import { CategoryType, DocumentType } from '../type/index.js'
+import { CategoryType, DocumentType, VoidType } from '../type/index.js'
 import { NotMutableError } from '../error/index.js'
+import { Dialect } from '../parser/index.js'
 import { ConcreteWidgetDeclaration, NativeWidgetDeclaration, NativeCategoryDeclaration } from '../declaration/index.js'
 import { getTypeName } from '../utils/index.js'
 
@@ -73,19 +74,42 @@ export default class ConstructorExpression extends Expression {
     check(context) {
         // need to update type, since it was arbitrarily set to CategoryType
         const decl = context.getRegisteredDeclaration(this.type.name);
-        if(decl==null)
+        if (decl == null) {
             context.problemListener.reportUnknownCategory(this.type.id);
+            return VoidType.instance;
+        }
         this.checkFirstHomonym(context, decl);
         decl.checkConstructorContext(context);
+        this.checkConstructable(context, decl);
+        this.checkCopyFrom(context);
+        this.checkArguments(context, decl);
+        return this.getActualType(context, decl);
+    }
+
+    checkConstructable(context, declaration) {
+        if(declaration.isWidget(context))
+            context.problemListener.reportIllegalWidgetConstructor(this, declaration.name);
+        declaration.getAbstractMethods(context).forEach(method => context.problemListener.reportIllegalAbstractConstructor(this, declaration.name, method.getSignature(Dialect.O)));
+
+    }
+
+    getActualType(context, declaration) {
+        return declaration.getType().asMutable(context, this.type.mutable);
+    }
+
+    checkCopyFrom(context) {
         if(this.copyFrom!=null) {
             const cft = this.copyFrom.check(context);
             if(!(cft instanceof CategoryType) && cft !== DocumentType.instance)
                 context.problemListener.reportInvalidCopySource(this.copyFrom);
         }
+    }
+
+
+    checkArguments(context, declaration) {
         if(this.args!=null) {
-            this.args.forEach(argument => this.checkArgument(context, decl, argument));
+            this.args.forEach(argument => this.checkArgument(context, declaration, argument));
         }
-        return decl.getType().asMutable(context, this.type.mutable);
     }
 
     // noinspection JSMethodCanBeStatic

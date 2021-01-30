@@ -158,6 +158,14 @@ export default class ProblemCollector extends antlr4.error.ErrorListener {
         this.reportError(section, "Initialize method cannot have parameters!");
     }
 
+    reportIllegalWidgetConstructor(section, name) {
+        this.reportError(section, "Cannot instantiate widget: " + name + " (widgets are instantiated during rendering)");
+    }
+
+    reportIllegalAbstractConstructor(section, name, missingMethod) {
+        this.reportError(section, "Cannot instantiate abstract category: " + name + ", missing method: " + missingMethod);
+    }
+
     reportMissingClosingTag(opening) {
         this.reportError(opening.id, "Missing closing tag '&lt;/" + opening.id.name + ">");
     }

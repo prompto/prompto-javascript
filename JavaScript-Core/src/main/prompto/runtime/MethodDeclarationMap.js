@@ -22,17 +22,16 @@ export default class MethodDeclarationMap {
         return !!this.protos[proto];
     }
 
-    registerIfMissing(declaration) {
-        const proto = declaration.getProto();
+    registerIfMissing(method) {
+        const proto = method.getProto();
         if (!(proto in this.protos)) {
-            this.protos[proto] = declaration;
+            this.protos[proto] = method;
         }
     }
 
     getFirst() {
-        for (const proto in this.protos) {
-            return this.protos[proto];
-        }
+        const proto = Object.getOwnPropertyNames(this.protos)[0];
+        return proto ? this.protos[proto] : null;
     }
 
     getAll() {

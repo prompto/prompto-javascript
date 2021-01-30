@@ -5,6 +5,7 @@ var getResource = BaseParserTest.getResource;
 var checkSameOutput = BaseParserTest.checkSameOutput;
 var execute = BaseParserTest.execute;
 var interpret = BaseParserTest.interpret;
+var checkSameProblems = BaseParserTest.checkSameProblems;
 
 function parse(input) {
 	var parser = new prompto.parser.OCleverParser(input);
@@ -44,3 +45,6 @@ exports.checkTranspiledOutput = function(fileName) {
     checkSameOutput(fileName);
 };
 
+exports.checkProblems = function(fileName) {
+	checkSameProblems(fileName, exports.parseResource);
+};

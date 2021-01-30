@@ -8,6 +8,10 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         this.returnType = returnType || VoidType.instance;
     }
 
+    isAbstract() {
+        return true;
+    }
+
     memberCheck(declaration, context) {
         // TODO Auto-generated method stub
     }

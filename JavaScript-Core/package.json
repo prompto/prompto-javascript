@@ -21,7 +21,8 @@
     "terser-webpack-plugin": "^4.2.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.12",
-    "webpack-conditional-loader": "^1.0.12"
+    "webpack-conditional-loader": "^1.0.12",
+    "js-yaml": "^4.0.0"
   },
   "dependencies": {
     "antlr4": "4.9.1",

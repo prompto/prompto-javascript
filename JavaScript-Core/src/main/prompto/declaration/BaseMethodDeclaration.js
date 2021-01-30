@@ -14,16 +14,20 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
         this.closureOf = null;
     }
 
+    isAbstract() {
+        return false;
+    }
+
     getDeclarationType() {
         return "Method";
     }
 
-    getSignature(context) {
+    getSignature(dialect) {
         const s = [];
-        this.parameters.map(arg => {
-            s.push(arg.getProto());
+        this.parameters.forEach(param => {
+            s.push(param.getSignature(dialect));
         });
-        return "(" + s.join(", ") + ")";
+        return this.name + "(" + s.join(", ") + ")";
     }
 
     getProto(context) {
