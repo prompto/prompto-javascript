@@ -24,9 +24,8 @@ Url.prototype.close = function() {
 };
 
 Url.prototype.readFully = function() {
-    if(isNodeJs)
-        return this.readFullyNodeJs();
-    else if(this.path.startsWith("http"))
+	var protocol = this.getProtocol();
+	if(protocol.startsWith("http"))
         return this.readFullyHttp();
     else
         this.throwError("Url only supports HTTP protocol in browser.");
@@ -43,7 +42,7 @@ Url.prototype.readFullyNodeJs = function() {
 Url.prototype.readFullyHttp = function() {
     var xhr = this.createHttpRequest(false);
     xhr.send();
-    this.checkStatus(xhr);
+	this.checkHttpStatus(xhr);
     return xhr.responseText;
 };
 
@@ -101,20 +100,27 @@ Url.prototype.throwError = function(message) {
 Url.prototype.createHttpRequest = function(async) {
     var xhr = new XMLHttpRequest();
     xhr.overrideMimeType('text/plain');
-	var httpMethod = this._getHttpMethod();
+	var httpMethod = this.getHttpMethod();
 	xhr.open(httpMethod, this.path, async);
 	// Accept-Charset is not allowed in browsers, so ignore this.encoding
 	var httpHeaders = { Accept: "application/json, text/plain", "Content-Type": "application/x-www-form-urlencoded" };
-    this.httpHeaders.forEach(function(header) {
-		httpHeaders[header.name] = header.text;
-    });
+	if(this.httpHeaders) {
+        this.httpHeaders.forEach(function(header) {
+            httpHeaders[header.name] = header.text;
+        });
+	}
 	for(var name in httpHeaders) {
 		xhr.setRequestHeader(name, httpHeaders[name]);
 	}
     return xhr;
 };
 
-Url.prototype._getHttpMethod = function() {
+Url.prototype.getProtocol = function() {
+	var idx = this.path.indexOf(":");
+	return idx < 0 ? "http" : this.path.substring(0, idx);
+};
+
+Url.prototype.getHttpMethod = function() {
 	if(this.httpMethod) {
 		// fetch value from enum
 		if(this.httpMethod.value)
