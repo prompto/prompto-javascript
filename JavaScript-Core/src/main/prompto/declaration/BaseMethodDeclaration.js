@@ -1,7 +1,7 @@
 import BaseDeclaration from './BaseDeclaration.js'
 import { ArgumentList, Argument } from '../grammar/index.js'
 import { ParameterList } from '../param/index.js'
-import { ProblemListener } from '../problem/index.js'
+import { ProblemRaiser } from '../problem/index.js'
 import { SyntaxError } from '../error/index.js'
 
 export default class BaseMethodDeclaration extends BaseDeclaration {
@@ -80,9 +80,8 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
     }
 
     isAssignableTo(context, args, checkInstance, allowDerived) {
-        const listener = context.problemListener;
         try {
-            context.problemListener = new ProblemListener();
+            context.pushProblemListener(new ProblemRaiser());
             const local = context.newLocalContext();
             this.registerParameters(local);
             const argsList = new ArgumentList(args);
@@ -110,7 +109,7 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
                 throw e;
             }
         } finally {
-            context.problemListener = listener;
+            context.popProblemListener();
         }
     }
 

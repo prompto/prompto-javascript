@@ -2,7 +2,7 @@ import SelectorExpression from './SelectorExpression.js'
 import { UnresolvedIdentifier, MemberSelector, MethodSelector } from './index.js'
 import { UnresolvedCall } from '../statement/index.js'
 import { AnyType } from '../type/index.js'
-import { ProblemListener } from '../problem/index.js'
+import { ProblemRaiser } from '../problem/index.js'
 import { SyntaxError } from '../error/index.js'
 
 export default class UnresolvedSelector extends SelectorExpression {
@@ -71,9 +71,8 @@ export default class UnresolvedSelector extends SelectorExpression {
     }
 
     tryResolveMember(context) {
-        const listener = context.problemListener;
+        context.pushProblemListener(new ProblemRaiser());
         try {
-            context.problemListener = new ProblemListener();
             let resolvedParent = this.parent;
             if(resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
@@ -88,14 +87,13 @@ export default class UnresolvedSelector extends SelectorExpression {
             else
                 throw e;
         } finally {
-            context.problemListener = listener;
+            context.popProblemListener();
         }
     }
 
     tryResolveMethod(context, assignments) {
-        const listener = context.problemListener;
+        context.pushProblemListener(new ProblemRaiser());
         try {
-            context.problemListener = new ProblemListener();
             let resolvedParent = this.parent;
             if (resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
@@ -110,7 +108,7 @@ export default class UnresolvedSelector extends SelectorExpression {
             else
                 throw e;
         } finally {
-            context.problemListener = listener;
+            context.popProblemListener();
         }
     }
 

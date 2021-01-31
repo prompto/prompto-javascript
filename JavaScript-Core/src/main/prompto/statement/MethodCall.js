@@ -10,6 +10,8 @@ import { SyntaxError, PromptoError, NotMutableError } from '../error/index.js'
 import { CodeParameter } from '../param/index.js'
 import { BooleanValue, ArrowValue, ClosureValue } from '../value/index.js'
 import { CodeWriter } from '../utils/index.js'
+import { ProblemCollector } from '../problem/index.js'
+
 
 export default class MethodCall extends SimpleStatement {
   
@@ -58,8 +60,11 @@ export default class MethodCall extends SimpleStatement {
             this.selector.parent = new ThisExpression();
         const local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
         // don't bubble up problems
+        let listener = local.problemListener;
+        if(listener instanceof ProblemCollector)
+            listener = new ProblemCollector();
+        local.pushProblemListener(listener);
         try {
-            local.pushProblemListener();
             return this.checkDeclaration(declaration, context, local);
         } finally {
             local.popProblemListener();

@@ -1,4 +1,4 @@
-import { ProblemListener, ProblemCollector } from '../problem/index.js'
+import { ProblemRaiser } from '../problem/index.js'
 import { MethodDeclarationMap, Variable, LinkedValue, WidgetField } from './index.js'
 import { AttributeDeclaration, EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration, ConcreteCategoryDeclaration } from '../declaration/index.js'
 import { DecimalType, MethodType } from '../type/index.js'
@@ -17,7 +17,7 @@ class Context {
         this.instances = {};
         this.values = {};
         this.nativeBindings = {};
-        this.problemListener = new ProblemListener();
+        this.problemListener = new ProblemRaiser();
     }
 
     static newGlobalsContext() {
@@ -128,10 +128,6 @@ class Context {
         return context;
     }
 
-    newMemberContext(type) {
-        return this.newInstanceContext(null, type, false);
-    }
-
     clone() {
         const context = new Context();
         context.globals = context;
@@ -147,22 +143,22 @@ class Context {
         return context;
     }
 
-    pushProblemListener() {
+    pushProblemListener(listener) {
         if (this.problemListeners)
             this.problemListeners.push(this.problemListener);
         else
             this.problemListeners = [this.problemListener];
-        this.problemListener = this.problemListener instanceof ProblemListener ? new ProblemListener() : new ProblemCollector();
+        this.problemListener = listener;
     }
 
     popProblemListener() {
         this.problemListener = this.problemListeners.pop();
-        if(this.problemListeners.length==0)
+        if(this.problemListeners.length === 0)
             delete this.problemListeners;
     }
 
     getCatalog() {
-        if (this != this.globals)
+        if (this !== this.globals)
             return this.globals.getCatalog();
         else
             return this.getLocalCatalog();
@@ -170,7 +166,7 @@ class Context {
 
     getLocalCatalog() {
         const catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
-        for(const name in this.declarations) {
+        for(const name in Object.getOwnPropertyNames(this.declarations)) {
             const decl = this.declarations[name];
             if(decl instanceof AttributeDeclaration)
                 catalog.attributes.push(name);
@@ -191,7 +187,7 @@ class Context {
                 const method = {};
                 method.name = decl.name;
                 method.protos = [];
-                for (const proto in decl.protos) {
+                for (const proto in Object.getOwnPropertyNames(decl.protos)) {
                     const info = {};
                     info.proto = proto;
                     info.eligibleAsMain = decl.protos[proto].isEligibleAsMain();
@@ -200,7 +196,7 @@ class Context {
                 catalog.methods.push({ type: "Document", value: method});
             }
         }
-        for(const name in this.tests)
+        for(const name in Object.getOwnPropertyNames(this.tests))
             catalog.tests.push(name);
         // minimize for UI optimization
         if(catalog.attributes.length <= 0)
@@ -228,7 +224,7 @@ class Context {
     getAllAttributes() {
         if(this===this.globals) {
             let list = [];
-            for(const name in this.declarations) {
+            for(const name in Object.getOwnPropertyNames(this.declarations)) {
                 if(this.declarations[name] instanceof AttributeDeclaration)
                     list.push(this.declarations[name]);
             }
@@ -354,9 +350,7 @@ class Context {
     }
 
     hasTests() {
-        for(const test in this.tests)
-            return true;
-        return false;
+        return Object.getOwnPropertyNames(this.tests).length > 0;
     }
 
     getTestDeclaration(testName) {
@@ -588,9 +582,9 @@ class InstanceContext extends Context {
         const widgetField = this.widgetFields[id.name];
         if(widgetField) {
             // we control reentrance by registering which processor created the widgetField
-            if(widgetField.createdBy == createdBy)
+            if(widgetField.createdBy === createdBy)
                 return;
-            this.getProblemListener().reportDuplicate(id);
+            this.problemListener.reportDuplicate(id);
         } else
             this.widgetFields[id.name] = new WidgetField(id.name, type, createdBy);
     }

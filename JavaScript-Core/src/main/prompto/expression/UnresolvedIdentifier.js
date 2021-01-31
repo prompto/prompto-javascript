@@ -1,7 +1,7 @@
 import Expression from './Expression.js'
 import { InstanceExpression, MethodSelector, ConstructorExpression, TypeExpression, SymbolExpression } from './index.js'
 import { VoidType, CategoryType, EnumeratedCategoryType, NativeType } from '../type/index.js'
-import { ProblemListener } from '../problem/index.js'
+import { ProblemRaiser } from '../problem/index.js'
 import { PromptoError } from '../error/index.js'
 import { MethodCall } from '../statement/index.js'
 import { EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration } from '../declaration/index.js'
@@ -101,14 +101,13 @@ export default class UnresolvedIdentifier extends Expression {
         if(updateSelectorParent)
             this.resolved = null;
         if(this.resolved==null) {
-            // ignore resolution problems during resolution
-            const listener = context.problemListener;
+            // ignore problems encountered during resolution
+            context.pushProblemListener(new ProblemRaiser());
             try {
-                context.problemListener = new ProblemListener();
                 this.resolved = this.doResolve(context, forMember, updateSelectorParent);
             } finally {
                 // restore listener
-                context.problemListener = listener;
+                context.popProblemListener();
             }
         }
         if(this.resolved==null)
