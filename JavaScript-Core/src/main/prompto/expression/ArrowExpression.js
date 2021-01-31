@@ -41,7 +41,7 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
     checkFilter(context, itemType) {
-        if (!this.args || this.args.length != 1)
+        if (!this.args || this.args.length !== 1)
             throw new SyntaxError("Expecting 1 parameter only!");
         context = context.newChildContext();
         context.registerValue(new Variable(this.args[0], itemType));
@@ -68,7 +68,7 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
     filteredToDialect(writer, source) {
-        if(this.args==null || this.args.length!=1)
+        if(this.args==null || this.args.length !== 1)
             throw new SyntaxError("Expecting 1 parameter only!");
         const sourceType = source.check(writer.context);
         const itemType = sourceType.itemType;
@@ -96,14 +96,14 @@ export default class ArrowExpression extends PredicateExpression {
         writer.append("where ");
         if (writer.dialect === Dialect.O)
             writer.append("( ");
-        this.toDialect(writer)
+        this.toDialect(writer);
         if (writer.dialect === Dialect.O)
             writer.append(" ) ");
     }
 
 
     bodyToDialect(writer) {
-        if(this.statements.length==1 && this.statements[0] instanceof ReturnStatement)
+        if(this.statements.length === 1 && this.statements[0] instanceof ReturnStatement)
             this.statements[0].expression.toDialect(writer);
         else {
             writer.append("{").newLine().indent();
@@ -113,9 +113,9 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
     argsToDialect(writer) {
-        if(this.args==null || this.args.length==0)
+        if(this.args==null || this.args.length === 0)
             writer.append("()");
-        else if(this.args.length==1)
+        else if(this.args.length === 1)
             writer.append(this.args[0].name);
         else {
             writer.append("(");
@@ -151,7 +151,7 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
     declareFilter(transpiler, itemType) {
-        if(this.args.length!=1)
+        if(this.args.length !== 1)
             throw new SyntaxError("Expecting 1 parameter only!");
         transpiler = transpiler.newChildTranspiler(null);
         transpiler.context.registerValue(new Variable(this.args[0], itemType));
@@ -159,7 +159,7 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
     transpileFilter(transpiler, itemType) {
-        if(this.args.length!=1)
+        if(this.args.length !== 1)
             throw new SyntaxError("Expecting 1 parameter only!");
         transpiler = transpiler.newChildTranspiler(null);
         transpiler.context.registerValue(new Variable(this.args[0], itemType));
