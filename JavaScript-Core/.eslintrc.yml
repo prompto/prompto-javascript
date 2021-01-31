@@ -3,6 +3,7 @@ env:
   es6: true
   node: true
   amd: true
+  jest/globals: true
 extends: 'eslint:recommended'
 globals:
   Atomics: readonly
@@ -13,6 +14,7 @@ parserOptions:
   sourceType: module
 plugins:
   - es5
+  - jest
 rules:
   no-unused-vars: ["error", {vars: "all", args: "none"}]
   no-prototype-builtins: [ "off" ]
