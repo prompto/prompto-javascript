@@ -27,12 +27,12 @@ export default class MethodCall extends SimpleStatement {
         this.selector.toDialect(writer);
         if (this.args != null)
             this.args.toDialect(writer);
-        else if (writer.dialect!= Dialect.E)
+        else if (writer.dialect !== Dialect.E)
             writer.append("()");
     }
 
     requiresInvoke(writer) {
-        if (writer.dialect != Dialect.E || (this.args != null && this.args.length > 0))
+        if (writer.dialect !== Dialect.E || (this.args != null && this.args.length > 0))
             return false;
         try {
             const finder = new MethodFinder(writer.context, this);
