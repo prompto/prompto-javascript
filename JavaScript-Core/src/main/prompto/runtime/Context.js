@@ -166,7 +166,7 @@ class Context {
 
     getLocalCatalog() {
         const catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
-        for(const name in Object.getOwnPropertyNames(this.declarations)) {
+        Object.getOwnPropertyNames(this.declarations).forEach( name => {
             const decl = this.declarations[name];
             if(decl instanceof AttributeDeclaration)
                 catalog.attributes.push(name);
@@ -187,17 +187,16 @@ class Context {
                 const method = {};
                 method.name = decl.name;
                 method.protos = [];
-                for (const proto in Object.getOwnPropertyNames(decl.protos)) {
+                Object.getOwnPropertyNames(decl.protos).forEach(proto => {
                     const info = {};
                     info.proto = proto;
                     info.eligibleAsMain = decl.protos[proto].isEligibleAsMain();
                     method.protos.push({ type: "Document", value: info});
-                }
+                });
                 catalog.methods.push({ type: "Document", value: method});
             }
-        }
-        for(const name in Object.getOwnPropertyNames(this.tests))
-            catalog.tests.push(name);
+        });
+        Object.getOwnPropertyNames(this.tests).forEach(name => catalog.tests.push(name));
         // minimize for UI optimization
         if(catalog.attributes.length <= 0)
             delete catalog.attributes;
@@ -224,10 +223,10 @@ class Context {
     getAllAttributes() {
         if(this===this.globals) {
             let list = [];
-            for(const name in Object.getOwnPropertyNames(this.declarations)) {
+            Object.getOwnPropertyNames(this.declarations).forEach(name => {
                 if(this.declarations[name] instanceof AttributeDeclaration)
                     list.push(this.declarations[name]);
-            }
+            });
             if(this.parent)
                 list = list.concat(this.parent.getAllAttributes());
             return list;
