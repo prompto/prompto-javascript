@@ -24,6 +24,13 @@ Url.prototype.close = function() {
 };
 
 Url.prototype.readFully = function() {
+    if (isNodeJs)
+        return this.readFullyNodeJs();
+    else
+        return this.readFullyBrowser();
+};
+
+Url.prototype.readFullyBrowser = function() {
 	var protocol = this.getProtocol();
 	if(protocol.startsWith("http"))
         return this.readFullyHttp();
@@ -47,9 +54,15 @@ Url.prototype.readFullyHttp = function() {
 };
 
 Url.prototype.readFullyAsync = function(callback) {
-    if(isNodeJs)
+    if (isNodeJs)
         return this.readFullyAsyncNodeJs(callback);
-    else if(this.path.startsWith("http"))
+    else
+        return this.readFullyAsyncBrowser(callback);
+};
+
+Url.prototype.readFullyAsyncBrowser = function(callback) {
+    var protocol = this.getProtocol();
+    if(protocol.startsWith("http"))
         return this.readFullyAsyncHttp(callback);
     else
         this.throwError("Url only supports HTTP protocol in browser.");

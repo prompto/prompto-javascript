@@ -46,7 +46,7 @@ Document.prototype.toString = function() {
 
 
 Document.prototype.equals = function(other) {
-    if(this==other)
+    if(this===other)
         return true;
     if(!(other instanceof Document))
         return false;
