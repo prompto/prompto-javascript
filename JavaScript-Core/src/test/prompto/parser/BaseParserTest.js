@@ -341,7 +341,7 @@ exports.checkSameProblems = function(fileName, parser) {
     context.problemListener = collector;
     decls.register(context);
     const decl = decls.length === 1 ? decls[0] : decls.filter(d => d.name === "main")[0];
-    decl.check(context);
+    decl.check(context, true);
     const expected = readExpectedProblems(fileName);
     const actual = readActualProblems(collector);
     expect(actual).toEqual(expected);

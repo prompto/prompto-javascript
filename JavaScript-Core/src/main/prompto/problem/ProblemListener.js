@@ -128,8 +128,8 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportWarning(section, "Duplicate property: " + name);
     }
 
-    reportNoMatchingPrototype(method) {
-        this.reportError(method, "No matching prototype for: " + method.toString());
+    reportNoMatchingPrototype(section, call, expected) {
+        this.reportError(section, "No matching prototype for: " + call + ", expected: " + expected.join(", "));
     }
 
     reportTooManyPrototypes(method) {
@@ -182,6 +182,10 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
 
     reportIllegalAbstractConstructor(section, name, missingMethod) {
         this.reportError(section, "Cannot instantiate abstract category: " + name + ", missing method: " + missingMethod);
+    }
+
+    reportIllegalAbstractMethodCall(section, methodSignature) {
+        this.reportError(section, "Cannot call abstract method: " + methodSignature);
     }
 
     reportMissingClosingTag(opening) {

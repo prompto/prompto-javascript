@@ -56,8 +56,9 @@ export default class MethodSelector extends MemberSelector {
             let type = named.getType(context);
             if (type != null) {
                 type = type.resolve(context);
-                if (type instanceof MethodType)
-                    return type.method;
+                if (type instanceof MethodType) {
+                    return type.method.asReference();
+                }
             }
         }
         return null;

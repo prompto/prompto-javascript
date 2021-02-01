@@ -11,6 +11,7 @@ import { MethodCall } from '../statement/index.js'
 import { $DataStore } from '../store/index.js'
 import { compareValues } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
+import { Section } from '../parser/index.js'
 const Any = require('../intrinsic/Any.js').default;
 const Category = require('../intrinsic/$Root.js').Category;
 
@@ -26,7 +27,7 @@ export default class CategoryType extends BaseType {
     }
 
     asMutable(context, mutable) {
-        if(mutable == this.mutable)
+        if(mutable === this.mutable)
             return this;
         else
             return new CategoryType(this.id, mutable);
@@ -55,9 +56,11 @@ export default class CategoryType extends BaseType {
             else
                 context.problemListener.reportUnknownCategory(this.id);
             return AnyType.instance; // don't propagate error
-        } else if(decl instanceof MethodDeclarationMap)
-            return new MethodType(decl.getFirst());
-        else
+        } else if(decl instanceof MethodDeclarationMap) {
+            const method = new MethodType(decl.getFirst());
+            method.copySectionFrom(this);
+            return method;
+        } else
             return decl.getType(context);
     }
 
@@ -328,7 +331,7 @@ export default class CategoryType extends BaseType {
                 throw new SyntaxError("Unknown attribute:" + name);
             }
             return ad.getType(context);
-        } else if ("text" == name) {
+        } else if ("text" === name) {
             return TextType.instance
         } else if (decl.hasMethod(context, name)) {
             const method = decl.getMemberMethodsMap(context, name).getFirst();
@@ -447,7 +450,7 @@ export default class CategoryType extends BaseType {
         // an anonymous category extends 1 and only 1 category
         const baseId = otherDecl.derivedFrom[0];
         // check we derive from root category (if not extending 'Any')
-        if("any"!=baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
+        if("any" !== baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
             return false;
         const allAttributes = otherDecl.getAllAttributes(context);
         for(const attr of allAttributes) {
@@ -479,7 +482,7 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    scoreMostSpecific(context, t1, t2) {
+    compareSpecifity(context, t1, t2) {
         if(t1.equals(t2)) {
             return Score.SIMILAR;
         } else if(this.equals(t1)) {
@@ -503,17 +506,16 @@ export default class CategoryType extends BaseType {
     }
 
     getSortedComparator(context, key, desc) {
-        key = key || null;
-        if (key == null)
-            key = new UnresolvedIdentifier(new Identifier("key"));
-        const keyname = key.toString();
+        const keyId = this.getKeyIdentifier(key);
+        if(!key)
+            key = new UnresolvedIdentifier(keyId);
         const decl = this.getDeclaration(context);
-        if (decl.hasAttribute(context, keyname)) {
-            return this.getAttributeSortedComparator(context, keyname, desc);
-        } else if (decl.hasMethod(context, keyname)) {
-            return this.getMemberMethodSortedComparator(context, keyname, desc);
+        if (decl.hasAttribute(context, keyId.toString())) {
+            return this.getAttributeSortedComparator(context, keyId.toString(), desc);
+        } else if (decl.hasMethod(context, keyId.toString())) {
+            return this.getMemberMethodSortedComparator(context, keyId.toString(), desc);
         } else {
-            const method = this.findGlobalMethod(context, keyname);
+            const method = this.findGlobalMethod(context, keyId);
             if(method!=null) {
                 return this.getGlobalMethodSortedComparator(context, method, desc);
             } else if(key instanceof ArrowExpression) {
@@ -588,14 +590,15 @@ export default class CategoryType extends BaseType {
     }
 
     /* look for a method which takes this category as sole parameter */
-    findGlobalMethod(context, name, returnDecl) {
+    findGlobalMethod(context, id, returnDecl) {
         try {
             const exp = new ValueExpression(this, this.newInstance(context));
             const arg = new Argument(null, exp);
             const args = new ArgumentList([arg]);
-            const call = new MethodCall(new MethodSelector(null, new Identifier(name)), args);
+            const call = new MethodCall(new MethodSelector(null, id), args);
+            call.copySectionFrom(id);
             const finder = new MethodFinder(context, call);
-            const decl = finder.findMethod(true);
+            const decl = finder.findBest(true);
             return decl==null ? null : returnDecl ? decl : call;
         } catch (e) {
             if(e instanceof PromptoError) {
@@ -622,12 +625,10 @@ export default class CategoryType extends BaseType {
     }
 
     declareSorted(transpiler, key) {
-        const keyname = key ? key.toString() : "key";
+        const keyId = this.getKeyIdentifier(key);
         let decl = this.getDeclaration(transpiler.context);
-        if (decl.hasAttribute(transpiler.context, keyname) || decl.hasMethod(transpiler.context, keyname, null)) {
-            return;
-        } else {
-            decl = this.findGlobalMethod(transpiler.context, keyname, true);
+        if (!(decl.hasAttribute(transpiler.context, keyId.toString()) || decl.hasMethod(transpiler.context, keyId.toString(), null))) {
+            decl = this.findGlobalMethod(transpiler.context, keyId, true);
             if (decl != null) {
                 decl.declare(transpiler);
             } else if(key instanceof ArrowExpression) {
@@ -638,15 +639,28 @@ export default class CategoryType extends BaseType {
         }
     }
 
+    getKeyIdentifier(key) {
+        if(key instanceof InstanceExpression)
+            return key.id;
+        else if(key instanceof Section) {
+            const keyId = new Identifier(key.toString());
+            keyId.copySectionFrom(key);
+            return keyId;
+        } else if(key != null)
+            return new Identifier(key.toString());
+        else
+            return new Identifier("key");
+    }
+
     transpileSortedComparator(transpiler, key, desc) {
-        const keyname = key ? key.toString() : "key";
+        const keyId = this.getKeyIdentifier(key);
         let decl = this.getDeclaration(transpiler.context);
-        if (decl.hasAttribute(transpiler.context, keyname)) {
+        if (decl.hasAttribute(transpiler.context, keyId.toString())) {
             this.transpileAttributeSortedComparator(transpiler, key, desc);
-        } else if (decl.hasMethod(transpiler.context, keyname, null)) {
+        } else if (decl.hasMethod(transpiler.context, keyId.toString(), null)) {
             this.transpileMemberMethodSortedComparator(transpiler, key, desc);
         } else {
-            decl = this.findGlobalMethod(transpiler.context, keyname, true);
+            decl = this.findGlobalMethod(transpiler.context, keyId, true);
             if (decl != null) {
                 this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
             } else if(key instanceof ArrowExpression) {

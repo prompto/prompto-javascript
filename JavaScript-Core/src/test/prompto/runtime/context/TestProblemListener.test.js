@@ -1,5 +1,7 @@
 var checkProblems = require("../../parser/BaseEParserTest").checkProblems;
 
+// TODO move this to generated TestProblems
+
 test('NoError', () => {
     var code = "define name as Text attribute\n";
     checkProblems(code);
@@ -79,42 +81,3 @@ test('KnownAttribute', () => {
     checkProblems(code);
 });
 
-test('UnknownMethod', () => {
-    var code = "define m as method doing:\n" +
-        "\tprint \"abc\"\n";
-    checkProblems(code, "Unknown method: print");
-});
-
-test('KnownMethod', () => {
-    var code = "define print as method receiving Text value doing:\n" +
-        "\ta = 3\n" +
-        "define m as method doing:\n" +
-        "\tprint \"abc\"\n";
-    checkProblems(code);
-});
-
-test('NoMatchingPrototype', () => {
-    var code = "define print as method receiving Text value doing:\n" +
-        "\ta = 3\n" +
-        "define m2 as method doing:\n" +
-        "\tprint 22\n";
-    checkProblems(code, "No matching prototype for: print 22");
-});
-
-test('NoMatchingPrototype2', () => {
-    var code = "define name as Text attribute\n" +
-        "define Customer as category with attribute name\n" +
-        "define print as method receiving Text value doing:\n" +
-        "\ta = 3\n" +
-        "define printCustomer as method receiving Customer c doing:\n" +
-        "\tprint c\n";
-    checkProblems(code, "No matching prototype for: print c");
-});
-
-test('MatchingPrototype', () => {
-    var code = "define print as method receiving Text value doing:\n" +
-        "\ta = 3\n" +
-        "define m2 as method doing:\n" +
-        "\tprint \"abc\"\n";
-    checkProblems(code);
-});

@@ -10,6 +10,7 @@ export default class UnresolvedSelector extends SelectorExpression {
     constructor(parent, id) {
         super(parent);
         this.id = id;
+        this.copySectionFrom(id);
         this.resolved = null;
     }
 

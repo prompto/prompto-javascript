@@ -1,9 +1,11 @@
-import { SyntaxError } from '../error/index.js'
-import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from './index.js'
+import Section from "../parser/Section.js";
+import { SyntaxError } from '../error/index.js';
+import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from './index.js';
 
-export default class BaseType {
+export default class BaseType extends Section {
  
     constructor(id) {
+        super();
         this.id = id;
     }
 

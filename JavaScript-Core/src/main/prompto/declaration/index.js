@@ -1,4 +1,4 @@
-export {default as Declaration} from './BaseDeclaration.js';
+export {default as Declaration} from './Declaration.js';
 export {default as AttributeDeclaration} from './AttributeDeclaration.js';
 export {default as CategoryDeclaration} from './CategoryDeclaration.js';
 export {default as ConcreteCategoryDeclaration} from './ConcreteCategoryDeclaration.js';

@@ -170,6 +170,7 @@ Url.prototype.writeFully = function(data, callback) {
 
 Url.prototype.serialize = function(data) {
     if(typeof(window) === "object") {
+        /* eslint no-undef : [ "off" ] */
         return JSON.stringify(window.writeJSONValue(data));
     } else
         return null;

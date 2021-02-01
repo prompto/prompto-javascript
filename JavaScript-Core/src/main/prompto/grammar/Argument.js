@@ -1,10 +1,9 @@
 import Section from '../parser/Section.js'
-import { Specificity } from './index.js'
 import { InstanceExpression, ArrowExpression, MemberSelector } from '../expression/index.js'
 import { MethodType, CategoryType, VoidType } from '../type/index.js'
 import { ContextualExpression } from '../value/index.js'
 import { Variable } from '../runtime/index.js'
-import { PromptoError, SyntaxError } from '../error/index.js'
+import { SyntaxError } from '../error/index.js'
 
 export default class Argument extends Section {
 
@@ -111,7 +110,7 @@ export default class Argument extends Section {
     }
 
     equals(obj) {
-        if(obj==this) {
+        if(obj===this) {
             return true;
         } else if(obj==null) {
             return false;
@@ -183,7 +182,7 @@ export default class Argument extends Section {
         let argument = this.parameter;
         // when 1st argument, can be unnamed
         if(argument===null) {
-            if(declaration.parameters.length==0) {
+            if(declaration.parameters.length === 0) {
                 throw new SyntaxError("Method has no argument");
             }
             argument = declaration.parameters[0];
@@ -195,47 +194,13 @@ export default class Argument extends Section {
         }
     }
 
-    isAssignableToArgument(context, argument, declaration, checkInstance, allowDerived) {
-        return this.computeSpecificity(context, argument, declaration, checkInstance, allowDerived)!==Specificity.INCOMPATIBLE;
-    }
 
-    computeSpecificity(context, parameter, declaration, checkInstance, allowDerived) {
-        try {
-            const requiredType = parameter.getType(context).resolve(context, null);
-            let actualType = this.checkActualType(context, requiredType, this.expression, checkInstance).resolve(context, null);
-            // retrieve actual runtime type
-            if(checkInstance && (actualType instanceof CategoryType)) {
-                const value = this.expression.interpret(context.getCallingContext());
-                if(value && value.getType) {
-                    actualType = value.getType();
-                }
-            }
-            if(actualType.equals(requiredType)) {
-                return Specificity.EXACT;
-            } else if(requiredType.isAssignableFrom(context, actualType)) {
-                return Specificity.INHERITED;
-            } else if(allowDerived && actualType.isAssignableFrom(context, requiredType)) {
-                return Specificity.DERIVED;
-            }
-            actualType = this.resolve(context, declaration, checkInstance).check(context);
-            if(requiredType.isAssignableFrom(context, actualType)) {
-                return Specificity.IMPLICIT;
-            } else if(allowDerived && actualType.isAssignableFrom(context, requiredType)) {
-                return Specificity.IMPLICIT;
-            }
-        } catch(error) {
-            if(!(error instanceof PromptoError )) {
-                throw error;
-            }
-        }
-        return Specificity.INCOMPATIBLE;
-    }
-
-    checkActualType(context, requiredType, expression, checkInstance) {
+    checkActualType(context, requiredType, checkInstance) {
+        const expression = this.expression;
         let actualType = null;
-        const isArrow = this.isArrowExpression(requiredType, expression);
+        const isArrow = Argument.isArrowExpression(requiredType, expression);
         if(isArrow)
-            actualType = this.checkArrowExpression(context, requiredType, expression);
+            actualType = Argument.checkArrowExpression(context, requiredType, expression);
         else if(requiredType instanceof MethodType)
             actualType = expression.checkReference(context.getCallingContext());
         else
@@ -248,7 +213,7 @@ export default class Argument extends Section {
         return actualType;
     }
 
-    isArrowExpression(requiredType, expression) {
+    static isArrowExpression(requiredType, expression) {
         if(!(requiredType instanceof MethodType))
             return false;
         if(expression instanceof ArrowExpression)
@@ -257,7 +222,7 @@ export default class Argument extends Section {
             return expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
     }
 
-    checkArrowExpression(context, requiredType, expression) {
+    static checkArrowExpression(context, requiredType, expression) {
         context = expression instanceof ContextualExpression ? expression.calling : context.getCallingContext();
         const arrow = expression instanceof ArrowExpression ? expression : expression.expression;
         return requiredType.checkArrowExpression(context, arrow);

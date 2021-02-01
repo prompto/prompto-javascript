@@ -36,7 +36,7 @@ export default class MethodCall extends SimpleStatement {
             return false;
         try {
             const finder = new MethodFinder(writer.context, this);
-            const declaration = finder.findMethod(false);
+            const declaration = finder.findBest(false);
             /* if method is a reference, need to prefix with invoke */
             return declaration instanceof AbstractMethodDeclaration || declaration.closureOf !== null;
         } catch(e) {
@@ -46,34 +46,52 @@ export default class MethodCall extends SimpleStatement {
     }
 
     toString() {
-        return this.selector.toString() + " " + (this.args!==null ? this.args.toString() : "");
+        return this.selector.toString() + "(" + (this.args!==null ? this.args.toString() : "") + ")";
     }
 
     check(context, updateSelectorParent) {
         const finder = new MethodFinder(context, this);
-        const declaration = finder.findMethod(false);
-        if(!declaration) {
-            context.problemListener.reportUnknownMethod(this.selector.id);
+        const declaration = finder.findBest(false);
+        if(!declaration)
             return VoidType.instance;
-        }
         if(updateSelectorParent && declaration.memberOf && !this.selector.parent)
             this.selector.parent = new ThisExpression();
-        const local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
-        // don't bubble up problems
-        let listener = local.problemListener;
-        if(listener instanceof ProblemCollector)
-            listener = new ProblemCollector();
-        local.pushProblemListener(listener);
-        try {
-            return this.checkDeclaration(declaration, context, local);
-        } finally {
-            local.popProblemListener();
+        if(declaration.isAbstract()) {
+            this.checkAbstractOnly(context, declaration);
+            return declaration.returnType || VoidType.instance;
+        } else {
+            const local = this.isLocalClosure(context) ? context : this.selector.newLocalCheckContext(context, declaration);
+            // don't bubble up problems
+            let listener = local.problemListener;
+            if (listener instanceof ProblemCollector)
+                listener = new ProblemCollector();
+            local.pushProblemListener(listener);
+            try {
+                return this.checkDeclaration(declaration, context, local);
+            } finally {
+                local.popProblemListener();
+            }
+        }
+    }
+
+    checkAbstractOnly(context, declaration) {
+        if (declaration.isReference())
+            return;
+        if (declaration.memberOf !== null)
+            return;
+        // if a global method, need to check for runtime dispatch
+        const finder = new MethodFinder(context, this);
+        let potential = finder.findPotential();
+        potential = [...potential].filter(m => !m.isAbstract());
+        if (potential.length === 0) {
+            // raise error if direct call to pure abstract method
+            context.problemListener.reportIllegalAbstractMethodCall(this, declaration.getSignature());
         }
     }
 
     checkReference(context) {
         const finder = new MethodFinder(context, this);
-        const method = finder.findMethod(false);
+        const method = finder.findBest(false);
         if(method)
             return new MethodType(method);
         else
@@ -119,24 +137,39 @@ export default class MethodCall extends SimpleStatement {
     }
 
     declare(transpiler) {
+        transpiler.context.pushProblemListener(new ProblemCollector());
+        try {
+            this.doDeclare(transpiler);
+        } finally {
+            transpiler.context.popProblemListener();
+        }
+    }
+
+    doDeclare(transpiler) {
         const finder = new MethodFinder(transpiler.context, this);
-        const declarations = finder.findCompatibleMethods(false, true);
-        const first = declarations.size===1 ? declarations.values().next().value : null;
-        if(declarations.size===1 && first instanceof BuiltInMethodDeclaration) {
-            if(first.declareCall)
-                first.declareCall(transpiler);
-        } else {
-            if(!this.isLocalClosure(transpiler.context)) {
-                declarations.forEach(function(declaration) {
-                    const local = this.selector.newLocalCheckContext(transpiler.context, declaration);
-                    this.declareDeclaration(transpiler, declaration, local);
-                }, this);
-            }
-            if(declarations.size>1 && !this.dispatcher) {
-                const declaration = finder.findMethod(false);
-                const sorted = finder.sortMostSpecificFirst(declarations);
-                this.dispatcher = new DispatchMethodDeclaration(transpiler.context, this, declaration, sorted);
-                transpiler.declare(this.dispatcher);
+        const candidates = finder.findCandidates(false);
+        if(candidates.length === 0)
+            transpiler.context.reportUnknownMethod(this.selector.id, this.toString());
+        else {
+            const compatibles = finder.filterCompatible(candidates,false, true);
+            const first = compatibles.size === 1 ? compatibles.values().next().value : null;
+            if (compatibles.size === 1 && first instanceof BuiltInMethodDeclaration) {
+                if (first.declareCall)
+                    first.declareCall(transpiler);
+            } else {
+                if (!this.isLocalClosure(transpiler.context)) {
+                    compatibles.forEach(function (declaration) {
+                        const local = this.selector.newLocalCheckContext(transpiler.context, declaration);
+                        // noinspection JSPotentiallyInvalidUsageOfClassThis
+                        this.declareDeclaration(transpiler, declaration, local);
+                    }, this);
+                }
+                if (compatibles.size > 1 && !this.dispatcher) {
+                    const declaration = finder.findBest(false);
+                    const sorted = finder.sortMostSpecificFirst(compatibles);
+                    this.dispatcher = new DispatchMethodDeclaration(transpiler.context, this, declaration, sorted);
+                    transpiler.declare(this.dispatcher);
+                }
             }
         }
     }
@@ -181,12 +214,17 @@ export default class MethodCall extends SimpleStatement {
 
     doTranspile(transpiler, refOnly) {
         const finder = new MethodFinder(transpiler.context, this);
-        const declarations = finder.findCompatibleMethods(false, true);
-        if (declarations.size === 1) {
-            const first = declarations.values().next().value;
-            this.transpileSingle(transpiler, first, false, refOnly);
-        } else
-            this.transpileMultiple(transpiler, declarations, refOnly);
+        const candidates = finder.findCandidates(false);
+        if(candidates.length === 0)
+            transpiler.context.reportUnknownMethod(this.selector.id, this.toString());
+        else {
+            const compatibles = finder.filterCompatible(candidates, false, true);
+            if (compatibles.size === 1) {
+                const first = compatibles.values().next().value;
+                this.transpileSingle(transpiler, first, false, refOnly);
+            } else
+                this.transpileMultiple(transpiler, compatibles, refOnly);
+        }
     }
 
     transpileSingle(transpiler, declaration, allowDerived, refOnly) {
@@ -309,7 +347,7 @@ export default class MethodCall extends SimpleStatement {
         else {
             // look for declared method
             const finder = new MethodFinder(context, this);
-            return finder.findMethod(true);
+            return finder.findBest(true);
         }
     }
 

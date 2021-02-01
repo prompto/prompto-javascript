@@ -9,23 +9,26 @@ export default class MethodFinder {
         this.methodCall = methodCall;
    }
 
-    findCompatibleMethods(checkInstance, allowDerived) {
-        const candidates = this.methodCall.selector.getCandidates(this.context, checkInstance);
-        if(candidates.size==0)
-            this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id);
-        return this.filterCompatible(candidates, checkInstance, allowDerived);
-    }
+   findCandidates(checkInstance) {
+       return this.methodCall.selector.getCandidates(this.context, checkInstance);
+   }
 
-    findMethod(checkInstance) {
-        const compatibles = this.findCompatibleMethods(checkInstance, false);
-        switch(compatibles.size) {
-        case 0:
-            this.context.problemListener.reportNoMatchingPrototype(this.methodCall);
+   findBest(checkInstance) {
+        const candidates = this.findCandidates(checkInstance);
+        if(candidates.size === 0) {
+            this.context.problemListener.reportUnknownMethod(this.methodCall, this.methodCall.toString());
             return null;
-        case 1:
-            return compatibles.values().next().value;
-        default:
-            return this.findMostSpecific(compatibles, checkInstance);
+        } else {
+            const compatibles = this.filterCompatible(candidates, checkInstance, false);
+            switch (compatibles.size) {
+                case 0:
+                    this.context.problemListener.reportNoMatchingPrototype(this.methodCall, this.methodCall.toString(), [...candidates].map(m => m.getSignature()));
+                    return null;
+                case 1:
+                    return compatibles.values().next().value;
+                default:
+                    return this.findMostSpecific(compatibles, checkInstance);
+            }
         }
     }
 
@@ -36,7 +39,8 @@ export default class MethodFinder {
             if(candidate==null)
                 candidate = c;
             else {
-                const score = this.scoreMostSpecific(candidate, c, checkInstance);
+                // noinspection JSPotentiallyInvalidUsageOfClassThis
+                const score = this.compareSpecifity(candidate, c, checkInstance);
                 switch(score) {
                 case Score.WORSE:
                     candidate = c;
@@ -62,7 +66,7 @@ export default class MethodFinder {
         // console.error("sorting:"+ declarations.map(function(decl) { return decl.getProto(); }).join(","));
         declarations.sort((d1, d2) => {
             // console.error( d1.getProto() + "/" + d2.getProto() );
-            const score = self.scoreMostSpecific(d2, d1, false, true);
+            const score = self.compareSpecifity(d2, d1, false, true);
             // console.error( "-> " + score.name );
             return score.value;
         });
@@ -70,7 +74,7 @@ export default class MethodFinder {
         return declarations;
     }
 
-    scoreMostSpecific(decl1, decl2, checkInstance, allowDerived) {
+    compareSpecifity(decl1, decl2, checkInstance, allowDerived) {
         try {
             const ctx1 = this.context.newLocalContext();
             decl1.registerParameters(ctx1);
@@ -92,24 +96,22 @@ export default class MethodFinder {
                         const value = as1.expression.interpret(this.context); // in the named case as1==as2, so only evaluate 1
                         if(value.getType) {
                             const actual = value.getType();
-                            const score = actual.scoreMostSpecific(this.context, typ1, typ2);
+                            const score = actual.compareSpecifity(this.context, typ1, typ2);
                             if(score!==Score.SIMILAR) {
                                 return score;
                             }
                         }
                     }
                     if(typ1.isMoreSpecificThan(ctx2, typ2)) {
-                        // console.error(typ1.name + " is more specific than " + typ2.name);
                         return Score.BETTER;
                     }
                     if(typ2.isMoreSpecificThan(ctx1, typ1)) {
-                        // console.error(typ2.name + " is more specific than " + typ1.name);
                         return Score.WORSE;
                     }
                 } else {
                     // specific case for single anonymous argument
-                    const sp1 = as1.computeSpecificity(ctx1, arg1, decl1, checkInstance, allowDerived);
-                    const sp2 = as2.computeSpecificity(ctx2, arg2, decl2, checkInstance, allowDerived);
+                    const sp1 = decl1.computeSpecificity(ctx1, arg1, as1, checkInstance, allowDerived);
+                    const sp2 = decl2.computeSpecificity(ctx2, arg2, as2, checkInstance, allowDerived);
                     if(sp1.moreSpecificThan(sp2)) {
                         return Score.BETTER;
                     }
@@ -130,8 +132,8 @@ export default class MethodFinder {
         const compatibles = new Set();
         candidates.forEach(function(declaration) {
             try {
-                const assignments = this.methodCall.makeArguments(this.context, declaration);
-                if(declaration.isAssignableTo(this.context, assignments, checkInstance, allowDerived)) {
+                const args = this.methodCall.makeArguments(this.context, declaration);
+                if(declaration.isAssignableTo(this.context, args, checkInstance, allowDerived)) {
                     compatibles.add(declaration);
                 }
             } catch(e) {
@@ -143,5 +145,31 @@ export default class MethodFinder {
         }, this);
         return compatibles;
     }
+
+    findPotential(checkInstance) {
+        const candidates = this.findCandidates(false);
+        if(candidates.length === 0)
+            this.context.problemListener.reportUnknownMethod(this.methodCall, this.methodCall.toString());
+        return this.filterPotential(candidates);
+    }
+
+    filterPotential(candidates) {
+        const potential = new Set();
+        candidates.forEach(declaration => {
+            try {
+                const args = this.methodCall.makeArguments(this.context, declaration);
+                if(declaration.isAssignableFrom(this.context, args)) {
+                    potential.add(declaration);
+                }
+            } catch(e) {
+                if(!(e instanceof SyntaxError)) {
+                    throw e;
+                }
+                // else OK
+            }
+        }, this);
+        return potential;
+    }
+
 }
 
