@@ -335,12 +335,13 @@ exports.interpret = function(decls, methodName, args, rethrow) {
 };
 
 exports.checkSameProblems = function(fileName, parser) {
-    var decls = parser(fileName);
+    const decls = parser(fileName);
     const context = prompto.runtime.Context.newGlobalsContext();
-    decls.register(context);
     const collector = new prompto.problem.ProblemCollector();
     context.problemListener = collector;
-    decls.check(context);
+    decls.register(context);
+    const decl = decls.length === 1 ? decls[0] : decls.filter(d => d.name === "main")[0];
+    decl.check(context);
     const expected = readExpectedProblems(fileName);
     const actual = readActualProblems(collector);
     expect(actual).toEqual(expected);
@@ -362,6 +363,7 @@ function readExpectedProblems(fileName) {
     if(!fs.existsSync(fullPath))
         fullPath = path.normalize(librariesFolder + path.sep + fileName);
     const text = fs.readFileSync(fullPath).toString();
-    return yaml.loadAll(text)[0];
+    const docs = yaml.loadAll(text);
+    return docs.length > 0 ? docs[0] : [];
 }
 
