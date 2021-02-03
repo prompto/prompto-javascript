@@ -213,7 +213,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
             this.derivedFrom.map( id => {
                 const cd = context.getRegisteredDeclaration(id.name) || null;
                 if (cd == null)
-                    context.problemListener.reportUnknownCategory(id);
+                    context.problemListener.reportUnknownCategory(id, id.name);
                 else if(!(cd instanceof CategoryDeclaration))
                     context.problemListener.reportInvalidCategory(id);
             });
@@ -226,7 +226,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         }
         for(let i=0;i<this.derivedFrom.length;i++) {
             const ancestor = this.derivedFrom[i].name;
-            if(ancestor==categoryType.name) {
+            if(ancestor === categoryType.name) {
                 return true;
             }
             if(ConcreteCategoryDeclaration.isAncestorDerivedFrom(ancestor,context,categoryType)) {

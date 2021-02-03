@@ -411,7 +411,7 @@ class Context {
     getValue(id) {
         const context = this.contextForValue(id.name);
         if(context===null)
-            this.problemListener.reportUnknownVariable(id);
+            this.problemListener.reportUnknownVariable(id, id.name);
         return context.readValue(id);
     }
 
@@ -428,7 +428,7 @@ class Context {
     setValue(id, value) {
         const context = this.contextForValue(id.name);
         if(context===null)
-            this.problemListener.reportUnknownVariable(id);
+            this.problemListener.reportUnknownVariable(id, id.name);
         context.writeValue(id, value);
     }
 

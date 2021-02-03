@@ -123,7 +123,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
             this.attributes.forEach(id => {
                 const ad = context.getRegisteredDeclaration(id.name);
                 if (ad == null)
-                    context.problemListener.reportUnknownAttribute(id);
+                    context.problemListener.reportUnknownAttribute(id, id.name);
                 else if (!(ad instanceof AttributeDeclaration))
                     context.problemListener.reportInvalidAttribute(id)
             });

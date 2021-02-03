@@ -84,7 +84,7 @@ export default class UnresolvedCall extends BaseStatement {
             if(this.resolved)
                 return this.resolved;
             else
-                context.problemListener.reportUnknownMethod(this.callable);
+                context.problemListener.reportUnknownMethod(this.callable, this.callable.toString());
         }
     }
 
@@ -101,7 +101,7 @@ export default class UnresolvedCall extends BaseStatement {
         if (call === null)
             call = this.resolveUnresolvedDeclaration(context, id);
         if (call === null)
-            context.problemListener.reportUnknownMethod(id);
+            context.problemListener.reportUnknownMethod(id, id.name);
         else
             call.copySectionFrom(this);
         return call;

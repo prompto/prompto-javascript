@@ -17,7 +17,7 @@ export default class MethodExpression extends Expression {
     }
 
     toDialect(writer) {
-        if(writer.dialect==Dialect.E)
+        if(writer.dialect === Dialect.E)
             writer.append("Method: ");
         if(this.expression instanceof UnresolvedSelector) {
             writer.append(this.expression.toString());
@@ -32,7 +32,7 @@ export default class MethodExpression extends Expression {
         if (decl != null) {
             return new MethodType(decl);
         } else {
-            context.problemListener.reportUnknownMethod(this.id);
+            context.problemListener.reportUnknownMethod(this, this.expression.toString());
         }
     }
 
@@ -83,7 +83,7 @@ export default class MethodExpression extends Expression {
                     const decl = named.getFirst();
                     return new ClosureValue(context, new MethodType(decl))
                 } else {
-                    context.problemListener.reportUnknownMethod(id);
+                    context.problemListener.reportUnknownMethod(id, id.name);
                 }
             }
         } else

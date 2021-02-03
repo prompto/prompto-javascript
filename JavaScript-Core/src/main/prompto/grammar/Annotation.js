@@ -53,7 +53,7 @@ export default class Annotation extends Section {
         if(processor) {
             processor.processCategory(this, context, declaration);
         } else {
-            context.problemListener.reportUnknownAnnotation(this);
+            context.problemListener.reportUnknownAnnotation(this, this.name);
         }
     }
 }

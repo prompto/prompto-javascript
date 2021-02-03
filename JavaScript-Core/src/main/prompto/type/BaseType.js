@@ -341,26 +341,26 @@ export default class BaseType extends Section {
     }
 
     checkMember(context, section, name) {
-        if("text" == name)
+        if("text" === name)
             return TextType.instance;
         else {
-            context.problemListener.reportUnknownAttribute(section, this, name);
+            context.problemListener.reportUnknownAttribute(section, name);
             return VoidType.instance;
         }
     }
 
     checkStaticMember(context, section, name) {
-        context.problemListener.reportUnknownAttribute(section, this, name);
+        context.problemListener.reportUnknownAttribute(section, name);
         return VoidType.instance;
     }
 
     declareMember(transpiler, section, name) {
         if("text" !== name)
-            transpiler.context.problemListener.reportUnknownAttribute(section, section, name);
+            transpiler.context.problemListener.reportUnknownAttribute(section, name);
     }
 
     transpileMember(transpiler, name) {
-        if("text" == name)
+        if("text" === name)
             transpiler.append("getText()");
         else
             throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);

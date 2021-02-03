@@ -54,7 +54,7 @@ export default class CategoryType extends BaseType {
             if(onError)
                 onError(type);
             else
-                context.problemListener.reportUnknownCategory(this.id);
+                context.problemListener.reportUnknownCategory(this.id, this.name);
             return AnyType.instance; // don't propagate error
         } else if(decl instanceof MethodDeclarationMap) {
             const method = new MethodType(decl.getFirst());
@@ -119,7 +119,7 @@ export default class CategoryType extends BaseType {
         const decl = context.getRegisteredDeclaration(this.name) || null;
         if(decl==null) {
             if(context.problemListener)
-                context.problemListener.reportUnknownCategory(this.id);
+                context.problemListener.reportUnknownCategory(this.id, this.name);
             else
                 throw new SyntaxError("Unknown category: \"" + this.name + "\"");
         }
@@ -309,7 +309,7 @@ export default class CategoryType extends BaseType {
             return new CategoryType(new Identifier("Category"));
         const decl = context.getRegisteredDeclaration(this.name);
         if (decl == null) {
-            context.problemListener.reportUnknownCategory(this.id);
+            context.problemListener.reportUnknownCategory(this.id, this.name);
             return VoidType.instance;
         }
         if (decl instanceof EnumeratedNativeDeclaration) {
@@ -317,7 +317,7 @@ export default class CategoryType extends BaseType {
         } else if (decl instanceof CategoryDeclaration) {
             return this.checkCategoryMember(context, section, decl, name);
         } else {
-            context.problemListener.reportUnknownCategory(this.id);
+            context.problemListener.reportUnknownCategory(this.id, this.name);
             return VoidType.instance;
         }
     }
@@ -337,7 +337,7 @@ export default class CategoryType extends BaseType {
             const method = decl.getMemberMethodsMap(context, name).getFirst();
             return new MethodType(method);
         } else {
-            context.problemListener.reportUnknownAttribute(section);
+            context.problemListener.reportUnknownAttribute(section, name);
             return AnyType.instance;
         }
     }
@@ -359,14 +359,14 @@ export default class CategoryType extends BaseType {
     checkStaticMember(context, section, id) {
         const decl = context.getRegisteredDeclaration(this.name);
         if(decl==null) {
-            context.problemListener.reportUnknownIdentifier(this.name, this);
+            context.problemListener.reportUnknownIdentifier(section, this.name);
             return null;
         } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
             return decl.getType(context).checkStaticMember(context, section, id);
         } else if(decl instanceof SingletonCategoryDeclaration) {
             return this.checkCategoryMember(context, section, decl, id);
         } else {
-            context.getProblemListener().reportUnknownAttribute(id);
+            context.getProblemListener().reportUnknownAttribute(id, id.name);
             return null;
         }
     }
@@ -566,7 +566,7 @@ export default class CategoryType extends BaseType {
     getMemberMethods(context, name) {
         const decl = this.getDeclaration(context);
        if (!(decl instanceof ConcreteCategoryDeclaration)) {
-           context.problemListener.reportUnknownCategory(this.id);
+           context.problemListener.reportUnknownCategory(this.id, name);
            return null;
        } else {
             const methods = decl.getMemberMethodsMap(context, name);
@@ -584,7 +584,7 @@ export default class CategoryType extends BaseType {
             const methods = decl.getMemberMethodsMap(context, name);
             return methods ? methods.getAll() : null;
         } else {
-            context.problemListener.reportUnknownCategory(this.id);
+            context.problemListener.reportUnknownCategory(this.id, this.name);
             return null;
         }
     }

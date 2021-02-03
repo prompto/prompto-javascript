@@ -76,40 +76,40 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportError(id, "Invalid " + type + ": " + id.name);
     }
 
-    reportUnknownAttribute(id) {
-        this.reportUnknown(id, "attribute");
+    reportUnknownAttribute(section, name) {
+        this.reportUnknown(section, name, "attribute");
     }
 
-    reportUnknownCategory(id) {
-        this.reportUnknown(id, "category");
+    reportUnknownCategory(section, name) {
+        this.reportUnknown(section, name, "category");
     }
 
-    reportUnknownMethod(id) {
-        this.reportUnknown(id, "method");
+    reportUnknownMethod(section, name) {
+        this.reportUnknown(section, name, "method");
     }
 
-    reportUnknownVariable(id) {
-        this.reportUnknown(id, "variable");
+    reportUnknownVariable(section, name) {
+        this.reportUnknown(section, name, "variable");
     }
 
-    reportUnknownAnnotation(id) {
-        this.reportUnknown(id, "annotation");
+    reportUnknownAnnotation(section, name) {
+        this.reportUnknown(section, name, "annotation");
     }
 
-    reportUnknownIdentifier(id) {
-        this.reportUnknown(id, "identifier");
+    reportUnknownIdentifier(section, name) {
+        this.reportUnknown(section, name, "identifier");
     }
 
-    reportEmptyVariable(id) {
-        this.reportError(id, "Empty variable: " + id.name);
-    }
-
-    reportUnknown(id, type) {
-        this.reportError(id, "Unknown " + type + ": " + id.name);
+    reportUnknown(section, name, type) {
+        this.reportError(section, "Unknown " + type + ": " + name);
     }
 
     reportUnknownProperty(section, name) {
         this.reportWarning(section, "Unknown property: " + name);
+    }
+
+    reportEmptyVariable(id) {
+        this.reportError(id, "Empty variable: " + id.name);
     }
 
     reportMissingProperty(section, name) {

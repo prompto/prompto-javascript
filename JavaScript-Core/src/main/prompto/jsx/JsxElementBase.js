@@ -31,7 +31,7 @@ export default class JsxElementBase extends IJsxExpression {
     getWidgetPropertyMap(context) {
         const decl = context.getRegisteredDeclaration(this.id.name);
         if (decl == null) {
-            context.problemListener.reportUnknownIdentifier(this.id);
+            context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
             return null;
         } else if(decl instanceof CategoryDeclaration && decl.isWidget())
             return decl.getProperties(context);
@@ -90,7 +90,7 @@ export default class JsxElementBase extends IJsxExpression {
         if (!this.isHtmlTag()) {
             const decl = transpiler.context.getRegisteredDeclaration(this.id.name);
             if(decl==null)
-                transpiler.context.problemListener.reportUnknownIdentifier(this.id);
+                transpiler.context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
             else
                 decl.declare(transpiler.newLocalTranspiler());
         }

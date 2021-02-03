@@ -71,7 +71,7 @@ export default class CategoryParameter extends Parameter {
         if(this.resolved)
             this.resolved.checkExists(context);
         else
-            context.problemListener.reportUnknownCategory(this.type.id);
+            context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
     }
 
     resolve(context) {

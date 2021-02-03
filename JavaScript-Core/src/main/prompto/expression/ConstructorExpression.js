@@ -40,7 +40,7 @@ export default class ConstructorExpression extends Expression {
     toDialect(writer) {
         const cd = writer.context.getRegisteredDeclaration(this.type.name);
         if(cd==null)
-            writer.context.problemListener.reportUnknownCategory(this.type.id);
+            writer.context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
         this.checkFirstHomonym(writer.context, cd);
         writer.toDialect(this);
     }
@@ -75,7 +75,7 @@ export default class ConstructorExpression extends Expression {
         // need to update type, since it was arbitrarily set to CategoryType
         const decl = context.getRegisteredDeclaration(this.type.name);
         if (decl == null) {
-            context.problemListener.reportUnknownCategory(this.type.id);
+            context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
             return VoidType.instance;
         }
         this.checkFirstHomonym(context, decl);
@@ -121,7 +121,7 @@ export default class ConstructorExpression extends Expression {
                 id = exp.id;
         }
         if(!declaration.hasAttribute(context, id.name))
-            context.problemListener.reportUnknownAttribute(id);
+            context.problemListener.reportUnknownAttribute(id, id);
         argument.check(context);
     }
 

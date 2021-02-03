@@ -111,7 +111,7 @@ export default class UnresolvedIdentifier extends Expression {
             }
         }
         if(this.resolved==null)
-            context.problemListener.reportUnknownIdentifier(this.id);
+            context.problemListener.reportUnknownIdentifier(this.id, this.name);
         return this.resolved;
     }
 

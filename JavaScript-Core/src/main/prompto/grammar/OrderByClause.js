@@ -22,7 +22,7 @@ export default class OrderByClause extends Section {
         const id = this.ids[0];
         const decl = context.findAttribute(id.name);
         if(decl==null)
-            context.problemListener.reportUnknownAttribute(id);
+            context.problemListener.reportUnknownAttribute(id, id.name);
     }
 
     interpretQuery(context, query) {

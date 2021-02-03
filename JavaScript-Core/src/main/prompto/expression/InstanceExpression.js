@@ -71,12 +71,10 @@ export default class InstanceExpression extends Expression {
     }
 
     requiresMethod(writer) {
-        if(writer.dialect!=Dialect.E)
+        if(writer.dialect !== Dialect.E)
             return false;
         const o = writer.context.getRegistered(this.name);
-        if(o instanceof MethodDeclarationMap)
-            return true;
-        return false;
+        return o instanceof MethodDeclarationMap;
     }
 
     check(context) {
@@ -97,7 +95,7 @@ export default class InstanceExpression extends Expression {
         } else if(named instanceof MethodDeclarationMap) { // global method or closure
             return new MethodType(named.getFirst());
         } else {
-            context.problemListener.reportUnknownVariable(this.id);
+            context.problemListener.reportUnknownVariable(this.id, this.name);
             return VoidType.instance;
         }
     }
@@ -126,10 +124,10 @@ export default class InstanceExpression extends Expression {
     }
 
     toPredicate(context) {
-        const decl = context.findAttribute(this.id.name);
+        const decl = context.findAttribute(this.name);
         if(!decl)
-            context.problemListener.reportUnknownIdentifier(this.id);
-        else if(decl.getType()!=BooleanType.instance)
+            context.problemListener.reportUnknownIdentifier(this.id, this.name);
+        else if(decl.getType() !== BooleanType.instance)
             context.problemListener.reportError(this.id, "Expected a Boolean, got: " + decl.getType());
         else
             return new EqualsExpression(this, EqOp.EQUALS, new BooleanLiteral("true"));
