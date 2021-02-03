@@ -7,6 +7,10 @@ export default class IterableType extends NativeType {
         this.itemType = itemType;
     }
 
+    checkExists(context) {
+        this.itemType.checkExists(context);
+    }
+
     isMoreSpecificThan(context, other) {
         return (other instanceof IterableType &&
             this.itemType.isMoreSpecificThan(context, other.itemType));

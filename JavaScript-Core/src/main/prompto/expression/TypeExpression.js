@@ -18,6 +18,7 @@ export default class TypeExpression extends Expression {
     }
 
     check(context) {
+        this.value.checkExists(context);
         return new TypeType(this.value);
     }
 

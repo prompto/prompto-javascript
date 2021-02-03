@@ -28,7 +28,15 @@ test('NoMatchingPrototype problems', () => {
 	checkProblems('problems/noMatchingPrototype.poc');
 });
 
+test('UnknownItemType problems', () => {
+	checkProblems('problems/unknownItemType.poc');
+});
+
 test('UnknownMethod problems', () => {
 	checkProblems('problems/unknownMethod.poc');
+});
+
+test('UnknownType problems', () => {
+	checkProblems('problems/unknownType.poc');
 });
 
