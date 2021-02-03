@@ -45,6 +45,13 @@ export default class VersionType extends NativeType {
         right.transpile(transpiler);
         transpiler.append(")");
     }
+
+    transpileJsxCode(transpiler, expression = expression) {
+        transpiler.append("StringOrNull(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    }
+
 }
 
 VersionType.instance = new VersionType();

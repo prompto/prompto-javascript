@@ -443,5 +443,9 @@ export default class BaseType extends Section {
     toDialect(writer) {
         writer.append(this.name);
     }
+
+    transpileJsxCode(transpiler, expression) {
+        expression.transpile(transpiler);
+    }
 }
 

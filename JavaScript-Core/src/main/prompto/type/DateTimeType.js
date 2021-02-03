@@ -176,6 +176,13 @@ export default class DateTimeType extends NativeType {
             super.transpileMember(transpiler, name);
         }
     }
+
+    transpileJsxCode(transpiler, expression) {
+        transpiler.append("StringOrNull(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    }
+
 }
 
 DateTimeType.instance = new DateTimeType();

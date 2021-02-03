@@ -154,6 +154,13 @@ export default class PeriodType extends NativeType {
             super.transpileMember(transpiler, name);
         }
     }
+
+    transpileJsxCode(transpiler, expression = expression) {
+        transpiler.append("StringOrNull(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    }
+
 }
 
 PeriodType.instance = new PeriodType();

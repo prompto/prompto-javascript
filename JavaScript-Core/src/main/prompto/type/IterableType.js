@@ -15,6 +15,13 @@ export default class IterableType extends NativeType {
         return (other instanceof IterableType &&
             this.itemType.isMoreSpecificThan(context, other.itemType));
     }
+
+    transpileJsxCode(transpiler, expression = expression) {
+        transpiler.append("ArrayOrNull(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    }
+
 }
 
 

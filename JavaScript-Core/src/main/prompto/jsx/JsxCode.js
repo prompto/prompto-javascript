@@ -27,6 +27,7 @@ export default class JsxCode extends IJsxExpression {
     }
 
     transpile(transpiler) {
-        this.expression.transpile(transpiler);
+        const type = this.expression.check(transpiler.context);
+        type.transpileJsxCode(transpiler);
     }
 }

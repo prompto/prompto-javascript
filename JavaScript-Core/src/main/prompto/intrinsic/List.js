@@ -14,13 +14,16 @@ export default function List(mutable, items) {
 List.prototype = Object.create(Array.prototype);
 List.prototype.constructor = List;
 
+List.prototype.toArray = function() {
+    return this;
+};
+
 List.prototype.addItems = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = items.toArray();
     this.push.apply(this, items);
     return this; // enable fluid API
 };
-
 
 List.prototype.add = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
@@ -31,7 +34,6 @@ List.prototype.add = function(items) {
     return concat;
 };
 
-
 List.prototype.remove = function(items) {
     var excluded = (typeof(StrictSet) !== 'undefined' && items instanceof StrictSet) ? items : new Set(items);
     var remaining = this.filter(function(item) { return !excluded.has(item); });
@@ -40,18 +42,15 @@ List.prototype.remove = function(items) {
     return concat;
 };
 
-
 List.prototype.removeItem = function(item) {
     this.splice(item - 1, 1);
 };
-
 
 List.prototype.removeValue = function(value) {
     var idx = this.indexOf(value);
     if(idx > -1)
         this.splice(idx, 1);
 };
-
 
 List.prototype.sorted = function(sortFunction) {
     var sorted = Array.from(this).sort(sortFunction);
@@ -62,7 +61,6 @@ List.prototype.filtered = function(filterFunction) {
     var filtered = this.filter(filterFunction);
     return new List(false, filtered);
 };
-
 
 List.prototype.item = function(idx) {
     if(idx==null)

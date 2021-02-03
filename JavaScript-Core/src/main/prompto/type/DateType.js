@@ -184,6 +184,13 @@ export default class DateType extends NativeType {
             return super.newRange(left, right);
         }
     }
+
+    transpileJsxCode(transpiler, expression = expression) {
+        transpiler.append("StringOrNull(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    }
+
 }
 
 DateType.instance = new DateType();

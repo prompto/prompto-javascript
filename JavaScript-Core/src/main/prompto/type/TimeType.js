@@ -183,6 +183,13 @@ export default class TimeType extends NativeType {
     toString(value) {
         return "'" + value.toString() + "'";
     }
+
+    transpileJsxCode(transpiler, expression = expression) {
+        transpiler.append("StringOrNull(");
+        expression.transpile(transpiler);
+        transpiler.append(")");
+    }
+
 }
 
 TimeType.instance = new TimeType();
