@@ -14,7 +14,7 @@ export default class CursorValue extends Value {
     }
 
     isEmpty() {
-        return this.length()==0;
+        return this.length() === 0;
     }
 
     count() {
@@ -39,15 +39,15 @@ export default class CursorValue extends Value {
     readItemType(stored) {
         const categories = stored["category"] || null;
         const category = categories[categories.length-1];
-        const typ = new CategoryType(new Identifier(category));
-        typ.mutable = this.mutable;
-        return typ;
+        const type = new CategoryType(new Identifier(category));
+        type.mutable = this.mutable;
+        return type;
     }
 
     getMemberValue(context, name) {
-        if ("count" == name)
+        if ("count" === name)
             return new IntegerValue(this.count());
-        else if ("totalCount" == name)
+        else if ("totalCount" === name)
             return new IntegerValue(this.totalCount());
         else
             throw new InvalidDataError("No such member:" + name);
@@ -64,7 +64,7 @@ export default class CursorValue extends Value {
         return result;
     }
 
-    toListValue(context) {
+    toListValue() {
         const result = new ListValue(this.type.itemType);
         const iter = this.getIterator();
         while(iter.hasNext())
@@ -72,8 +72,8 @@ export default class CursorValue extends Value {
         return result;
     }
 
-    toSetValue(context) {
-        return this.toListValue(context).toSetValue(context);
+    toSetValue() {
+        return this.toListValue().toSetValue();
     }
 }
 

@@ -95,7 +95,7 @@ export default class ListValue extends BaseValueList {
         return new ListValue(this.type.itemType, items);
     }
 
-    toSetValue(context) {
+    toSetValue() {
         const items = new StrictSet();
         this.items.forEach(item => items.add(item));
         return new SetValue(this.type.itemType, items);

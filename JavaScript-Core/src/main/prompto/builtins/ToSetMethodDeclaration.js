@@ -11,7 +11,7 @@ export default class ToSetMethodDeclaration extends BuiltInMethodDeclaration {
 
     interpret(context) {
         const value = this.getValue(context);
-        return value.toSetValue(context);
+        return value.toSetValue();
     }
 
     check(context) {

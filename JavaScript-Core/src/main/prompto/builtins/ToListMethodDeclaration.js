@@ -11,7 +11,7 @@ export default class ToListMethodDeclaration extends BuiltInMethodDeclaration {
 
     interpret(context) {
         const value = this.getValue(context);
-        return value.toListValue(context);
+        return value.toListValue();
     }
 
     check(context) {
