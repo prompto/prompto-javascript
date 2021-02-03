@@ -12,6 +12,14 @@ test('AbstractMethod problems', () => {
 	checkProblems('problems/abstractMethod.poc');
 });
 
+test('CallbackArgument problems', () => {
+	checkProblems('problems/callbackArgument.poc');
+});
+
+test('CallbackList problems', () => {
+	checkProblems('problems/callbackList.poc');
+});
+
 test('DeepAbstractCategory problems', () => {
 	checkProblems('problems/deepAbstractCategory.poc');
 });
