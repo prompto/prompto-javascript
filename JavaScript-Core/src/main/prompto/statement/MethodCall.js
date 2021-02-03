@@ -149,7 +149,7 @@ export default class MethodCall extends SimpleStatement {
         const finder = new MethodFinder(transpiler.context, this);
         const candidates = finder.findCandidates(false);
         if(candidates.length === 0)
-            transpiler.context.reportUnknownMethod(this.selector.id, this.toString());
+            transpiler.context.reportUnknownMethod(this.selector.id, this.selector.name);
         else {
             const compatibles = finder.filterCompatible(candidates,false, true);
             const first = compatibles.size === 1 ? compatibles.values().next().value : null;
@@ -216,7 +216,7 @@ export default class MethodCall extends SimpleStatement {
         const finder = new MethodFinder(transpiler.context, this);
         const candidates = finder.findCandidates(false);
         if(candidates.length === 0)
-            transpiler.context.reportUnknownMethod(this.selector.id, this.toString());
+            transpiler.context.reportUnknownMethod(this.selector.id, this.selector.name);
         else {
             const compatibles = finder.filterCompatible(candidates, false, true);
             if (compatibles.size === 1) {

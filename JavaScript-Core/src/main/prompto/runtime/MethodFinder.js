@@ -16,7 +16,7 @@ export default class MethodFinder {
    findBest(checkInstance) {
         const candidates = this.findCandidates(checkInstance);
         if(candidates.size === 0) {
-            this.context.problemListener.reportUnknownMethod(this.methodCall, this.methodCall.toString());
+            this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id, this.methodCall.selector.name);
             return null;
         } else {
             const compatibles = this.filterCompatible(candidates, checkInstance, false);
@@ -149,7 +149,7 @@ export default class MethodFinder {
     findPotential(checkInstance) {
         const candidates = this.findCandidates(false);
         if(candidates.length === 0)
-            this.context.problemListener.reportUnknownMethod(this.methodCall, this.methodCall.toString());
+            this.context.problemListener.reportUnknownMethod(this.methodCall.selector.id, this.methodCall.selector.name);
         return this.filterPotential(candidates);
     }
 

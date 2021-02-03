@@ -40,6 +40,10 @@ test('UnknownItemType problems', () => {
 	checkProblems('problems/unknownItemType.poc');
 });
 
+test('UnknownMemberMethod problems', () => {
+	checkProblems('problems/unknownMemberMethod.poc');
+});
+
 test('UnknownMethod problems', () => {
 	checkProblems('problems/unknownMethod.poc');
 });
