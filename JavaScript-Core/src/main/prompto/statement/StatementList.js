@@ -137,7 +137,7 @@ export default class StatementList extends ObjectList {
     }
 
     toDialect(writer) {
-        if (this.length == 0) {
+        if (this.length === 0) {
             switch (writer.dialect) {
                 case Dialect.E:
                 case Dialect.M:
@@ -149,7 +149,7 @@ export default class StatementList extends ObjectList {
             this.forEach(stmt => {
                 stmt.toDialect(writer);
                 if (stmt.isSimple()) {
-                    if (writer.dialect == Dialect.O && !(stmt instanceof NativeCall))
+                    if (writer.dialect === Dialect.O && !(stmt instanceof NativeCall))
                         writer.append(';');
                     writer.newLine();
                 }

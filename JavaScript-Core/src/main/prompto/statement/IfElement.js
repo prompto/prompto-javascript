@@ -109,10 +109,11 @@ export default class IfElement extends BaseStatement {
         writer.dedent();
         if(curly)
             writer.append("}");
+        return curly;
     }
 
     needsCurlyBraces() {
-        if(!this.statements)
+        if(!this.statements || this.statements.length === 0)
             return false;
         if(this.statements.length > 1)
             return true;

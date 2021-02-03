@@ -94,8 +94,7 @@ export default class IfStatement extends BaseStatement {
                     writer.append(" ");
                 writer.append("else ");
             }
-            this.elements[i].toODialect(writer);
-            curly = this.elements[i].statements.length>1;
+            curly = this.elements[i].toODialect(writer);
         }
         if(curly)
             writer.newLine();
