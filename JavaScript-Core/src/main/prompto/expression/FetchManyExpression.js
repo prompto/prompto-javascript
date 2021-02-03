@@ -8,9 +8,9 @@ import { Cursor } from "../intrinsic/index.js";
 
 export default class FetchManyExpression extends Expression {
 
-    constructor(typ, first, last, predicate, orderBy) {
+    constructor(type, first, last, predicate, orderBy) {
         super();
-        this.typ = typ;
+        this.type = type;
         this.predicate = predicate;
         this.first = first;
         this.last = last;
@@ -25,10 +25,10 @@ export default class FetchManyExpression extends Expression {
         writer.append("fetch ");
         if(this.first==null)
             writer.append("all ");
-        if(this.typ!=null) {
-            if(this.typ.mutable)
+        if(this.type!=null) {
+            if(this.type.mutable)
                 writer.append("mutable ");
-            writer.append(this.typ.name);
+            writer.append(this.type.name);
             writer.append(" ");
         }
         if(this.first!=null) {
@@ -51,11 +51,11 @@ export default class FetchManyExpression extends Expression {
         writer.append("fetch ");
         if(this.first==null)
             writer.append("all ");
-        if(this.typ!=null) {
+        if(this.type!=null) {
             writer.append("( ");
-            if(this.typ.mutable)
+            if(this.type.mutable)
                 writer.append("mutable ");
-            writer.append(this.typ.name);
+            writer.append(this.type.name);
             writer.append(" ) ");
         }
         if(this.first!=null) {
@@ -85,10 +85,10 @@ export default class FetchManyExpression extends Expression {
         } else
             writer.append("all ");
         writer.append("( ");
-        if(this.typ!=null) {
-            if(this.typ.mutable)
+        if(this.type!=null) {
+            if(this.type.mutable)
                 writer.append("mutable ");
-            writer.append(this.typ.name);
+            writer.append(this.type.name);
             writer.append(" ");
         }
         writer.append(") ");
@@ -102,21 +102,21 @@ export default class FetchManyExpression extends Expression {
     }
 
     check(context) {
-        let typ = this.typ;
-        if (typ==null)
-            typ = AnyType.instance;
+        let type = this.type;
+        if (type==null)
+            type = AnyType.instance;
         else {
-            const decl = context.getRegisteredDeclaration(this.typ.name);
+            const decl = context.getRegisteredDeclaration(this.type.name);
             if (decl == null  || !(decl instanceof CategoryDeclaration))
-                context.problemListener.reportUnknownCategory(typ.id);
+                context.problemListener.reportUnknownCategory(type.id, type.name);
             if(!(decl.isStorable && decl.isStorable(context)))
-                context.problemListener.reportNotStorable(this.typ.id, this.typ.name);
+                context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);
         }
         this.checkFilter(context);
         this.checkOrderBy(context);
         this.checkSlice(context);
-        return new CursorType(typ);
+        return new CursorType(type);
     }
 
     checkFilter(context) {
@@ -135,22 +135,22 @@ export default class FetchManyExpression extends Expression {
     interpret(context) {
         const store = $DataStore.instance;
         const query = this.buildFetchManyQuery(context, store);
-        const typ = this.typ==null ? AnyType.instance : this.typ;
-        const cursor = store.fetchMany(query, typ.mutable);
-        return new CursorValue(context, typ, cursor.iterable);
+        const type = this.type || AnyType.instance;
+        const cursor = store.fetchMany(query, type.mutable);
+        return new CursorValue(context, type, cursor.iterable);
     }
 
     buildFetchManyQuery(context, store) {
         const builder = store.newQueryBuilder();
         builder.setFirst(this.interpretLimit(context, this.first));
         builder.setLast(this.interpretLimit(context, this.last));
-        if (this.typ != null) {
+        if (this.type != null) {
             const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
-            builder.verify(info, MatchOp.HAS, this.typ.name);
+            builder.verify(info, MatchOp.HAS, this.type.name);
         }
         if (this.predicate != null)
             this.predicate.interpretQuery(context, builder);
-        if (this.typ != null && this.predicate != null)
+        if (this.type != null && this.predicate != null)
             builder.and();
         if (this.orderBy != null)
             this.orderBy.interpretQuery(context, builder);
@@ -172,8 +172,8 @@ export default class FetchManyExpression extends Expression {
         transpiler.require($DataStore);
         transpiler.require(AttributeInfo);
         transpiler.require(TypeFamily);
-        if (this.typ)
-            this.typ.declare(transpiler);
+        if (this.type)
+            this.type.declare(transpiler);
         if (this.predicate)
             this.predicate.declare(transpiler);
         if (this.first)
@@ -187,18 +187,18 @@ export default class FetchManyExpression extends Expression {
     transpile(transpiler) {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
-        const mutable = this.typ ? this.typ.mutable : false;
+        const mutable = this.type ? this.type.mutable : false;
         transpiler.append("return $DataStore.instance.fetchMany(builder.build(), ").append(mutable).append(");").newLine().dedent();
         transpiler.append("})()");
     }
 
     transpileQuery(transpiler) {
         transpiler.append("var builder = $DataStore.instance.newQueryBuilder();").newLine();
-        if (this.typ != null)
-            transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
+        if (this.type != null)
+            transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.type.name).append("');").newLine();
         if (this.predicate != null)
             this.predicate.transpileQuery(transpiler, "builder");
-        if (this.typ != null && this.predicate != null)
+        if (this.type != null && this.predicate != null)
             transpiler.append("builder.and();").newLine();
         if (this.first) {
             transpiler.append("builder.setFirst(");

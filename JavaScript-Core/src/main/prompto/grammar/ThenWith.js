@@ -13,9 +13,9 @@ export default class ThenWith {
         this.statements = statements;
     }
 
-    check(context, typ) {
+    check(context, type) {
         context = context.newChildContext();
-        context.registerValue(new Variable(this.name, typ));
+        context.registerValue(new Variable(this.name, type));
         this.statements.check(context, null);
         return VoidType.instance;
     }
@@ -28,14 +28,14 @@ export default class ThenWith {
         return null;
     }
 
-    toDialect(writer, typ) {
+    toDialect(writer, type) {
         writer.append(" then with ").append(this.name.name);
         if (writer.dialect === Dialect.O)
             writer.append(" {");
         else
             writer.append(":");
         writer = writer.newChildWriter();
-        writer.context.registerValue(new Variable(this.name, typ));
+        writer.context.registerValue(new Variable(this.name, type));
         writer.newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent();
@@ -43,19 +43,19 @@ export default class ThenWith {
             writer.append("}").newLine();
     }
 
-    declare(transpiler, typ) {
+    declare(transpiler, type) {
         transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, typ));
+        transpiler.context.registerValue(new Variable(this.name, type));
         this.statements.declare(transpiler);
     }
 
-    transpile(transpiler, typ) {
+    transpile(transpiler, type) {
         transpiler.append("function(")
             .append(this.name.name)
             .append(") {")
             .indent();
         transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.name, typ));
+        transpiler.context.registerValue(new Variable(this.name, type));
         this.statements.transpile(transpiler);
         transpiler.dedent()
             .append("}.bind(this)");

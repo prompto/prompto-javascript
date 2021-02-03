@@ -3,8 +3,8 @@ import { Variable } from '../runtime/index.js'
 
 export default class FetchOneStatement extends FetchOneExpression {
 
-    constructor(typ, predicate, thenWith) {
-        super(typ, predicate);
+    constructor(type, predicate, thenWith) {
+        super(type, predicate);
         this.thenWith = thenWith;
     }
 
@@ -18,7 +18,7 @@ export default class FetchOneStatement extends FetchOneExpression {
 
     check(context) {
         super.check(context);
-        return this.thenWith.check(context, this.typ);
+        return this.thenWith.check(context, this.type);
     }
 
     interpret(context) {
@@ -28,12 +28,12 @@ export default class FetchOneStatement extends FetchOneExpression {
 
     toDialect(writer) {
         super.toDialect(writer);
-        this.thenWith.toDialect(writer, this.typ);
+        this.thenWith.toDialect(writer, this.type);
     }
 
     declare(transpiler) {
         super.declare(transpiler);
-        return this.thenWith.declare(transpiler, this.typ);
+        return this.thenWith.declare(transpiler, this.type);
     }
 
     transpile(transpiler) {
@@ -42,7 +42,7 @@ export default class FetchOneStatement extends FetchOneExpression {
         transpiler.append("$DataStore.instance.fetchOneAsync(builder.build(), function(stored) {").indent();
         this.transpileConvert(transpiler, this.thenWith.name.name);
         transpiler = transpiler.newChildTranspiler(transpiler.context);
-        transpiler.context.registerValue(new Variable(this.thenWith.name, this.typ));
+        transpiler.context.registerValue(new Variable(this.thenWith.name, this.type));
         this.thenWith.statements.transpile(transpiler);
         transpiler.dedent().append("}.bind(this));").dedent().append("}).bind(this)()");
         transpiler.flush();

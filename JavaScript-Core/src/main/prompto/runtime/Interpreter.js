@@ -46,7 +46,7 @@ export function locateMethod(context, methodName, cmdLineArgs) {
 }
 
 function locateMethodInMap(map, cmdLineArgs) {
-	if(cmdLineArgs==null || cmdLineArgs.length==0) {
+	if(cmdLineArgs==null || cmdLineArgs.length === 0) {
 		return locateMethodWithArgs(map);
 	} else {
 		return locateMethodWithArgs(map, new DictionaryType(TextType.instance));
@@ -62,7 +62,7 @@ function locateMethodWithArgs(map) {
             return method;
     }
 	// match Text{} argument, will pass null
-	if(arguments.length==1) {
+	if(arguments.length === 1) {
         for(let i=0;i<protos.length;i++) {
             method = map.protos[protos[i]];
             if (isSingleTextDictArgument(method.parameters))
@@ -73,35 +73,35 @@ function locateMethodWithArgs(map) {
 	// match no argument, will ignore options
     for(let i=0;i<protos.length;i++) {
         method = map.protos[protos[i]];
-		if(method.parameters.length==0)
+		if(method.parameters.length === 0)
 			return method;
 	}
 	throw new SyntaxError("Could not find a compatible \"" + map.name + "\" method.");
 }
 
 function isSingleTextDictArgument(args) {
-	if(args.length!=1) {
+	if(args.length !== 1) {
 		return false;
 	}
 	const arg = args[0];
-	const typ = arg.type ||null;
-	if(typ==null) {
+	const type = arg.type ||null;
+	if(type == null) {
 		return false;
 	}
 	const argsType = new DictionaryType(TextType.instance);
-	return typ.equals(argsType);
+	return type.equals(argsType);
 }
 
 function identicalArguments(args, argTypes) {
-	if(args.length!=argTypes.length-1) {
+	if(args.length !== argTypes.length-1) {
 		return false;
 	}
 	for(let i=0;i<args.length;i++) {
-		const typ = args[i].typ || null;
-		if(typ==null) {
+		const type = args[i].type || null;
+		if(type==null) {
 			return false;
 		}
-		if(!typ.equals(argTypes[i+1])) {
+		if(!type.equals(argTypes[i+1])) {
 			return false;
 		}
 	}

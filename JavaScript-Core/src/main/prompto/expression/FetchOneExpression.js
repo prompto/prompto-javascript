@@ -7,9 +7,9 @@ import { Identifier } from '../grammar/index.js'
 
 export default class FetchOneExpression extends Expression {
  
-    constructor(typ, predicate, start, end) {
+    constructor(type, predicate, start, end) {
         super();
-        this.typ = typ;
+        this.type = type;
         this.predicate = predicate;
         this.start = start;
         this.end = end;
@@ -21,10 +21,10 @@ export default class FetchOneExpression extends Expression {
 
     toEDialect(writer) {
         writer.append("fetch one ");
-        if(this.typ!=null) {
-            if(this.typ.mutable)
+        if(this.type!=null) {
+            if(this.type.mutable)
                 writer.append("mutable ");
-            writer.append(this.typ.name);
+            writer.append(this.type.name);
             writer.append(" ");
         }
         writer.append("where ");
@@ -33,11 +33,11 @@ export default class FetchOneExpression extends Expression {
 
     toODialect(writer) {
         writer.append("fetch one ");
-        if(this.typ!=null) {
+        if(this.type!=null) {
             writer.append("(");
-            if(this.typ.mutable)
+            if(this.type.mutable)
                 writer.append("mutable ");
-            writer.append(this.typ.name);
+            writer.append(this.type.name);
             writer.append(") ");
         }
         writer.append("where (");
@@ -47,10 +47,10 @@ export default class FetchOneExpression extends Expression {
 
     toMDialect(writer) {
         writer.append("fetch one ");
-        if(this.typ!=null) {
-            if(this.typ.mutable)
+        if(this.type!=null) {
+            if(this.type.mutable)
                 writer.append("mutable ");
-            writer.append(this.typ.name);
+            writer.append(this.type.name);
             writer.append(" ");
         }
         writer.append("where ");
@@ -58,16 +58,16 @@ export default class FetchOneExpression extends Expression {
     }
 
     check(context) {
-        if(this.typ!=null) {
-            const decl = context.getRegisteredDeclaration(this.typ.name);
+        if(this.type!=null) {
+            const decl = context.getRegisteredDeclaration(this.type.name);
             if (decl == null || !(decl instanceof CategoryDeclaration))
-                context.problemListener.reportUnknownCategory(this.typ.id);
+                context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
             if(!(decl.isStorable && decl.isStorable(context)))
-                context.problemListener.reportNotStorable(this.typ.id, this.typ.name);
+                context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);
         }
         this.predicate.checkQuery(context);
-        return this.typ || AnyType.instance;
+        return this.type || AnyType.instance;
     }
 
     interpret(context) {
@@ -78,10 +78,10 @@ export default class FetchOneExpression extends Expression {
             return NullValue.instance;
         else {
             const typeName = stored.getData("category").slice(-1)[0];
-            const typ = new CategoryType(new Identifier(typeName));
-            if (this.typ != null)
-                typ.mutable = this.typ.mutable;
-            return typ.newInstanceFromStored(context, stored);
+            const type = new CategoryType(new Identifier(typeName));
+            if (this.type != null)
+                type.mutable = this.type.mutable;
+            return type.newInstanceFromStored(context, stored);
         }
     }
 
@@ -90,8 +90,8 @@ export default class FetchOneExpression extends Expression {
         transpiler.require($DataStore);
         transpiler.require(AttributeInfo);
         transpiler.require(TypeFamily);
-        if (this.typ != null)
-            this.typ.declare(transpiler);
+        if (this.type != null)
+            this.type.declare(transpiler);
         if (this.predicate != null)
             this.predicate.declareQuery(transpiler);
     }
@@ -109,30 +109,30 @@ export default class FetchOneExpression extends Expression {
         transpiler.append("if(stored===null)").indent().append("return null;").dedent();
         transpiler.append("var name = stored.getData('category').slice(-1)[0];").newLine();
         transpiler.append("var type = eval(name);").newLine();
-        transpiler.append("var ").append(varName).append(" = new type(null, {}, ").append(this.typ!=null && this.typ.mutable).append(");").newLine();
+        transpiler.append("var ").append(varName).append(" = new type(null, {}, ").append(this.type!=null && this.type.mutable).append(");").newLine();
         transpiler.append(varName).append(".fromStored(stored);").newLine();
     }
 
     transpileQuery(transpiler) {
         transpiler.append("var builder = $DataStore.instance.newQueryBuilder();").newLine();
-        if (this.typ != null)
-            transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.typ.name).append("');").newLine();
+        if (this.type != null)
+            transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.type.name).append("');").newLine();
         if (this.predicate != null)
             this.predicate.transpileQuery(transpiler, "builder");
-        if (this.typ != null && this.predicate != null)
+        if (this.type != null && this.predicate != null)
             transpiler.append("builder.and();").newLine();
     }
 
     buildFetchOneQuery(context, store) {
         const builder = store.newQueryBuilder();
-        if (this.typ != null) {
+        if (this.type != null) {
             const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
-            builder.verify(info, MatchOp.CONTAINS, this.typ.name);
+            builder.verify(info, MatchOp.CONTAINS, this.type.name);
         }
         if (this.predicate != null) {
             this.predicate.interpretQuery(context, builder);
         }
-        if (this.typ != null && this.predicate != null) {
+        if (this.type != null && this.predicate != null) {
             builder.and();
         }
         return builder.build();
