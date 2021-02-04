@@ -2896,9 +2896,11 @@ export default class OPromptoBuilder extends OParserListener {
 
 
     buildSection(node, section) {
-        const first = this.findFirstValidToken(node.start.tokenIndex);
-        const last = this.findLastValidToken(node.stop.tokenIndex);
-        section.setSectionFrom(this.path, first, last, parser.Dialect.O);
+        if(!section.dialect) {
+            const first = this.findFirstValidToken(node.start.tokenIndex);
+            const last = this.findLastValidToken(node.stop.tokenIndex);
+            section.setSectionFrom(this.path, first, last, parser.Dialect.O);
+        }
     }
 
     findFirstValidToken(idx) {

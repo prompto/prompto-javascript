@@ -478,7 +478,7 @@ export default class EPromptoBuilder extends EParserListener {
         else if (ctx.INDEX() != null)
             indices = new grammar.IdentifierList();
         if (ctx.index != null)
-            indices.push(this.getNodeValue(ctx.index))
+            indices.push(this.getNodeValue(ctx.index));
         const decl = new declaration.AttributeDeclaration(id, type, match, indices);
         decl.storable = ctx.STORABLE() != null;
         this.setNodeValue(ctx, decl);
@@ -2955,9 +2955,11 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     buildSection(node, section) {
-        const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof jsx.JsxText);
-        const last = this.findLastValidToken(node.stop.tokenIndex, section instanceof jsx.JsxText);
-        section.setSectionFrom(this.path, first, last, parser.Dialect.E);
+        if(!section.dialect) {
+            const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof jsx.JsxText);
+            const last = this.findLastValidToken(node.stop.tokenIndex, section instanceof jsx.JsxText);
+            section.setSectionFrom(this.path, first, last, parser.Dialect.E);
+        }
     }
 
     findFirstValidToken(idx, allowWS) {

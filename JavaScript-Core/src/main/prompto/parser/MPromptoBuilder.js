@@ -2900,9 +2900,11 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     buildSection(node, section) {
-        const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof jsx.JsxText);
-        const last = this.findLastValidToken(node.stop.tokenIndex, section instanceof jsx.JsxText);
-        section.setSectionFrom(this.path, first, last, parser.Dialect.M);
+        if(!section.dialect) {
+            const first = this.findFirstValidToken(node.start.tokenIndex, section instanceof jsx.JsxText);
+            const last = this.findLastValidToken(node.stop.tokenIndex, section instanceof jsx.JsxText);
+            section.setSectionFrom(this.path, first, last, parser.Dialect.M);
+        }
     }
 
     findFirstValidToken(idx, allowWS) {
