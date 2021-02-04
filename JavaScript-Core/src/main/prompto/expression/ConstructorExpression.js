@@ -116,7 +116,7 @@ export default class ConstructorExpression extends Expression {
     checkArgument (context, declaration, argument) {
         let id = argument.id;
         if(id === null) {
-            const exp = argument.expression();
+            const exp = argument.expression;
             if (exp instanceof InstanceExpression)
                 id = exp.id;
         }
