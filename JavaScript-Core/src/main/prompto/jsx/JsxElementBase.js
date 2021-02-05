@@ -5,6 +5,7 @@ import { CategoryDeclaration } from '../declaration/index.js'
 import { OCleverParser } from '../parser/index.js'
 import { TypeLiteral } from '../literal/index.js'
 import { WidgetPropertiesProcessor } from '../processor/index.js'
+import {Dialect} from "../parser/index";
 
 export default class JsxElementBase extends IJsxExpression {
   
@@ -14,19 +15,35 @@ export default class JsxElementBase extends IJsxExpression {
         this.properties = properties;
     }
 
-    isHtmlTag(context) {
-        return !isCharacterUpperCase(this.id.name[0]);
-    }
-
     check(context) {
-        const propertyMap = this.getPropertyMap(context);
-        this.checkWidgetProperties(context, propertyMap);
+        if(this.isHtmlTag())
+            this.checkHtmlTag(context);
+        else
+            this.checkWidgetTag(context);
         return JsxType.instance;
     }
 
-    getPropertyMap(context) {
-        return this.isHtmlTag() ? JsxElementBase.getHtmlPropertyMap(context, this.id.name) : this.getWidgetPropertyMap(context);
+    isHtmlTag() {
+        return !isCharacterUpperCase(this.id.name[0]);
     }
+
+    checkHtmlTag(context) {
+        this.checkWidgetProperties(context, JsxElementBase.getHtmlPropertyMap(context, this.id.name));
+    }
+
+    checkWidgetTag(context) {
+        this.checkConstructable(context);
+        this.checkWidgetProperties(context, this.getWidgetPropertyMap(context));
+    }
+
+    checkConstructable(context) {
+        const decl = context.getRegisteredDeclaration(this.id.name);
+        if (decl == null || !decl.isWidget(context))
+            context.problemListener.reportUnknownWidget(this, this.id.name);
+        if(decl!=null)
+            decl.getAbstractMethods(context).forEach(method => context.problemListener.reportIllegalAbstractWidget(this, decl.name, method.getSignature(Dialect.O)));
+    }
+
 
     getWidgetPropertyMap(context) {
         const decl = context.getRegisteredDeclaration(this.id.name);
@@ -39,7 +56,7 @@ export default class JsxElementBase extends IJsxExpression {
             return null;
     }
 
-    static getHtmlPropertyMap(context, name) {
+    static getHtmlPropertyMap(context, tagName) {
         if(HTML_PROPERTIES_MAP==null) {
             const parser = new OCleverParser(HTML_PROPERTY_TYPES);
             const types = parser.parse_document_literal();
@@ -97,6 +114,7 @@ export default class JsxElementBase extends IJsxExpression {
         if(this.properties!=null) {
             const propertyMap = this.getPropertyMap(transpiler.context);
             this.properties.forEach(function (jsxprop) {
+                // noinspection JSPotentiallyInvalidUsageOfClassThis
                 this.declareProperty(transpiler, propertyMap, jsxprop);
             }, this);
         }
@@ -132,6 +150,7 @@ export default class JsxElementBase extends IJsxExpression {
             const propertyMap = this.getPropertyMap(transpiler.context);
             transpiler.append("{");
             this.properties.forEach(function(jsxProp) {
+                // noinspection JSPotentiallyInvalidUsageOfClassThis
                 this.transpileProperty(transpiler, propertyMap, jsxProp);
                 transpiler.append(", ");
             }, this);
@@ -161,6 +180,7 @@ export default class JsxElementBase extends IJsxExpression {
         HTML_PROPERTIES_MAP = null;
         HTML_TEST_MODE = mode;
     }
+
 }
 
 // ensure this stays in sync with Java version

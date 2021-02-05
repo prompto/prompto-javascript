@@ -84,6 +84,10 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportUnknown(section, name, "category");
     }
 
+    reportUnknownWidget(section, name) {
+        this.reportUnknown(section, name, "widget");
+    }
+
     reportUnknownMethod(section, name) {
         this.reportUnknown(section, name, "method");
     }
@@ -180,8 +184,12 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportWarning(section, "Cannot instantiate widget: " + name + " (widgets are instantiated during rendering)");
     }
 
-    reportIllegalAbstractConstructor(section, name, missingMethod) {
+    reportIllegalAbstractCategory(section, name, missingMethod) {
         this.reportError(section, "Cannot instantiate abstract category: " + name + ", missing method: " + missingMethod);
+    }
+
+    reportIllegalAbstractWidget(section, name, missingMethod) {
+        this.reportError(section, "Cannot instantiate abstract widget: " + name + ", missing method: " + missingMethod);
     }
 
     reportIllegalAbstractMethodCall(section, methodSignature) {

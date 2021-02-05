@@ -12,6 +12,10 @@ test('AbstractMethod problems', () => {
 	checkProblems('problems/abstractMethod.poc');
 });
 
+test('AbstractWidget problems', () => {
+	checkProblems('problems/abstractWidget.poc');
+});
+
 test('CallbackArgument problems', () => {
 	checkProblems('problems/callbackArgument.poc');
 });
@@ -28,12 +32,20 @@ test('DeepAbstractMethod problems', () => {
 	checkProblems('problems/deepAbstractMethod.poc');
 });
 
+test('DeepAbstractWidget problems', () => {
+	checkProblems('problems/deepAbstractWidget.poc');
+});
+
 test('DeepUnknownMethod problems', () => {
 	checkProblems('problems/deepUnknownMethod.poc');
 });
 
 test('NoMatchingPrototype problems', () => {
 	checkProblems('problems/noMatchingPrototype.poc');
+});
+
+test('UnknownAttributeParameter problems', () => {
+	checkProblems('problems/unknownAttributeParameter.poc');
 });
 
 test('UnknownItemType problems', () => {

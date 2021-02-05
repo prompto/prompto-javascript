@@ -84,7 +84,7 @@ export default class UnresolvedParameter {
             context.problemListener = listener;
         }
         if(this.resolved==null)
-            context.problemListener.reportUnknownVariable(this.id, this.name);
+            context.problemListener.reportUnknownAttribute(this.id, this.name);
         else
             this.resolved.setMutable(this.mutable);
     }
