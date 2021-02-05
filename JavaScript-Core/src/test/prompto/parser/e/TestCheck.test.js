@@ -80,16 +80,6 @@ test('valid Category is checked', () => {
 });
 
 
-test('Method with undeclared attribute parameter throws', () => {
-	var decls = parseString("define printName as method receiving name doing:\r\n" +
-			"\tprint with \"name\" + name as value");
-    decls.register(context);
-	expect(() => {
-		decls.check(context);
-	}).toThrowError(new SyntaxError("Unknown variable: name"));
-});
-
-
 test('valid Method is checked', () => {
 	var decls = parseString("define print as native method receiving Text value doing:\r\n" +
 				"\tJava: System.out.println(value);\r\n" +
