@@ -45,6 +45,10 @@ export default class JsxElementBase extends IJsxExpression {
     }
 
 
+    getPropertyMap(context) {
+        return this.isHtmlTag() ? JsxElementBase.getHtmlPropertyMap(context, this.id.name) : this.getWidgetPropertyMap(context);
+    }
+
     getWidgetPropertyMap(context) {
         const decl = context.getRegisteredDeclaration(this.id.name);
         if (decl == null) {
