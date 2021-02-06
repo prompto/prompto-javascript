@@ -20,7 +20,7 @@ export default class StoreStatement extends BaseStatement {
     toDialect(writer) {
         if(this.del) {
             writer.append("delete ");
-            if (writer.dialect == Dialect.E)
+            if (writer.dialect === Dialect.E)
                 this.del.toDialect(writer);
             else {
                 writer.append('(');
@@ -32,7 +32,7 @@ export default class StoreStatement extends BaseStatement {
         }
         if (this.add) {
             writer.append ("store ");
-            if (writer.dialect == Dialect.E)
+            if (writer.dialect === Dialect.E)
                 this.add.toDialect(writer);
             else {
                 writer.append('(');
@@ -41,7 +41,7 @@ export default class StoreStatement extends BaseStatement {
             }
         }
         if(this.andThen) {
-            if(writer.dialect == Dialect.O) {
+            if(writer.dialect === Dialect.O) {
                 writer.append(" then {").newLine().indent();
                 this.andThen.toDialect(writer);
                 writer.dedent().append("}").newLine();
@@ -58,12 +58,12 @@ export default class StoreStatement extends BaseStatement {
     }
 
     equals(other) {
-        if (other == this)
+        if (other === this)
             return true;
         else if (other == null)
             return false;
         else if (!(other instanceof StoreStatement))
-            return false
+            return false;
         else
             return this.add.equals(other.add);
     }
@@ -89,7 +89,7 @@ export default class StoreStatement extends BaseStatement {
         let type = exp.check(context);
         if(type.itemType)
             type = type.itemType;
-        if(type == AnyType.instance)
+        if(type === AnyType.instance)
             return;
         else if(!type.isStorable(context)) {
             let name = exp.toString();
@@ -170,25 +170,25 @@ export default class StoreStatement extends BaseStatement {
         const idsToDel = new Set();
         this.del.forEach(exp => {
             const value = exp.interpret(context);
-            if (value == NullValue.instance)
+            if (value === NullValue.instance)
                 return;
             else if(value instanceof Instance) {
                 const dbId = value.getMemberValue(context, "dbId");
-                if (dbId !=null && dbId!=NullValue.instance)
+                if (dbId !=null && dbId !== NullValue.instance)
                     idsToDel.add(dbId.getStorableData());
             } else if(value instanceof Container) {
                 value.items.map(item => {
-                    if (value == NullValue.instance)
+                    if (item === NullValue.instance)
                         return;
-                    else if (value instanceof Instance) {
-                        const dbId = value.getMemberValue(context, "dbId");
-                        if (dbId != null && dbId != NullValue.instance)
+                    else if (item instanceof Instance) {
+                        const dbId = item.getMemberValue(context, "dbId");
+                        if (dbId != null && dbId !== NullValue.instance)
                             idsToDel.push(dbId.getStorableData());
                     }
                 });
             }
         });
-        if(idsToDel.length==0)
+        if(idsToDel.length === 0)
             return null;
         else
             return idsToDel;
@@ -202,7 +202,7 @@ export default class StoreStatement extends BaseStatement {
             const value = exp.interpret(context);
             value.collectStorables(storablesToAdd)
         });
-        if (storablesToAdd.length == 0)
+        if (storablesToAdd.length === 0)
             return null;
         else
             return storablesToAdd;
