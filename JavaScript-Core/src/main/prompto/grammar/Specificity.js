@@ -16,7 +16,6 @@ export default class Specificity {
 }
 
 Specificity.INCOMPATIBLE = new Specificity(0, "INCOMPATIBLE");
-Specificity.IMPLICIT = new Specificity(1, "IMPLICIT");
-Specificity.INHERITED = new Specificity(2, "INHERITED");
-Specificity.EXACT = new Specificity(3, "EXACT");
-Specificity.DERIVED = new Specificity(4, "DERIVED");
+Specificity.INHERITED = new Specificity(1, "INHERITED");
+Specificity.EXACT = new Specificity(2, "EXACT");
+Specificity.DERIVED = new Specificity(3, "DERIVED");

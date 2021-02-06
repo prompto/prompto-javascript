@@ -52,10 +52,6 @@ test('Homonym2', () => {
 	compareResourceOEO('methods/homonym2.poc');
 });
 
-test('ImplicitMember', () => {
-	compareResourceOEO('methods/implicitMember.poc');
-});
-
 test('Member', () => {
 	compareResourceOEO('methods/member.poc');
 });
@@ -74,10 +70,6 @@ test('Parameter', () => {
 
 test('Polymorphic_abstract', () => {
 	compareResourceOEO('methods/polymorphic_abstract.poc');
-});
-
-test('Polymorphic_implicit', () => {
-	compareResourceOEO('methods/polymorphic_implicit.poc');
 });
 
 test('Polymorphic_named', () => {

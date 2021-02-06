@@ -148,12 +148,6 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
             } else if(allowDerived && actualType.isAssignableFrom(context, requiredType)) {
                 return Specificity.DERIVED;
             }
-            actualType = argument.resolve(context, this, checkInstance).check(context);
-            if(requiredType.isAssignableFrom(context, actualType)) {
-                return Specificity.IMPLICIT;
-            } else if(allowDerived && actualType.isAssignableFrom(context, requiredType)) {
-                return Specificity.IMPLICIT;
-            }
         } catch(error) {
             if(!(error instanceof PromptoError )) {
                 throw error;

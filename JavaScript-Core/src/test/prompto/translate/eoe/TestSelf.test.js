@@ -4,7 +4,3 @@ test('SelfAsParameter', () => {
 	compareResourceEOE('self/selfAsParameter.pec');
 });
 
-test('SelfMember', () => {
-	compareResourceEOE('self/selfMember.pec');
-});
-

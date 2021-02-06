@@ -60,10 +60,6 @@ test('ImplicitAnd', () => {
 	compareResourceEOE('methods/implicitAnd.pec');
 });
 
-test('ImplicitMember', () => {
-	compareResourceEOE('methods/implicitMember.pec');
-});
-
 test('Member', () => {
 	compareResourceEOE('methods/member.pec');
 });
@@ -86,10 +82,6 @@ test('Parameter', () => {
 
 test('Polymorphic_abstract', () => {
 	compareResourceEOE('methods/polymorphic_abstract.pec');
-});
-
-test('Polymorphic_implicit', () => {
-	compareResourceEOE('methods/polymorphic_implicit.pec');
 });
 
 test('Polymorphic_named', () => {

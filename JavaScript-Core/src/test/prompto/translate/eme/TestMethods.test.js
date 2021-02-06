@@ -60,10 +60,6 @@ test('ImplicitAnd', () => {
 	compareResourceEME('methods/implicitAnd.pec');
 });
 
-test('ImplicitMember', () => {
-	compareResourceEME('methods/implicitMember.pec');
-});
-
 test('Member', () => {
 	compareResourceEME('methods/member.pec');
 });
@@ -86,10 +82,6 @@ test('Parameter', () => {
 
 test('Polymorphic_abstract', () => {
 	compareResourceEME('methods/polymorphic_abstract.pec');
-});
-
-test('Polymorphic_implicit', () => {
-	compareResourceEME('methods/polymorphic_implicit.pec');
 });
 
 test('Polymorphic_named', () => {

@@ -18,11 +18,3 @@ test('Transpiled SelfAsParameter', () => {
 	checkTranspiledOutput('self/selfAsParameter.pec');
 });
 
-test('Interpreted SelfMember', () => {
-	checkInterpretedOutput('self/selfMember.pec');
-});
-
-test('Transpiled SelfMember', () => {
-	checkTranspiledOutput('self/selfMember.pec');
-});
-

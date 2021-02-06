@@ -114,14 +114,6 @@ test('Transpiled ImplicitAnd', () => {
 	checkTranspiledOutput('methods/implicitAnd.pec');
 });
 
-test('Interpreted ImplicitMember', () => {
-	checkInterpretedOutput('methods/implicitMember.pec');
-});
-
-test('Transpiled ImplicitMember', () => {
-	checkTranspiledOutput('methods/implicitMember.pec');
-});
-
 test('Interpreted Member', () => {
 	checkInterpretedOutput('methods/member.pec');
 });
@@ -168,14 +160,6 @@ test('Interpreted Polymorphic_abstract', () => {
 
 test('Transpiled Polymorphic_abstract', () => {
 	checkTranspiledOutput('methods/polymorphic_abstract.pec');
-});
-
-test('Interpreted Polymorphic_implicit', () => {
-	checkInterpretedOutput('methods/polymorphic_implicit.pec');
-});
-
-test('Transpiled Polymorphic_implicit', () => {
-	checkTranspiledOutput('methods/polymorphic_implicit.pec');
 });
 
 test('Interpreted Polymorphic_named', () => {

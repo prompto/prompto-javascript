@@ -98,14 +98,6 @@ test('Transpiled Homonym2', () => {
 	checkTranspiledOutput('methods/homonym2.poc');
 });
 
-test('Interpreted ImplicitMember', () => {
-	checkInterpretedOutput('methods/implicitMember.poc');
-});
-
-test('Transpiled ImplicitMember', () => {
-	checkTranspiledOutput('methods/implicitMember.poc');
-});
-
 test('Interpreted Member', () => {
 	checkInterpretedOutput('methods/member.poc');
 });
@@ -144,14 +136,6 @@ test('Interpreted Polymorphic_abstract', () => {
 
 test('Transpiled Polymorphic_abstract', () => {
 	checkTranspiledOutput('methods/polymorphic_abstract.poc');
-});
-
-test('Interpreted Polymorphic_implicit', () => {
-	checkInterpretedOutput('methods/polymorphic_implicit.poc');
-});
-
-test('Transpiled Polymorphic_implicit', () => {
-	checkTranspiledOutput('methods/polymorphic_implicit.poc');
 });
 
 test('Interpreted Polymorphic_named', () => {

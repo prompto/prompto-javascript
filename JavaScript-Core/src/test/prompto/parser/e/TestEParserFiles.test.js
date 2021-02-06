@@ -29,19 +29,6 @@ test('Attribute', () => {
 });
 
 
-test('ImplicitMember', () => {
-	var stmts = parseResource("methods/implicitMember.pec");
-	expect(stmts).toBeTruthy();
-	expect(stmts.length).toEqual(6);
-});
-
-
-test('PolymorphicImplicit', () => {
-	var stmts = parseResource("methods/polymorphic_implicit.pec");
-	expect(stmts).toBeTruthy();
-	expect(stmts.length).toEqual(12);
-});
-
 test('EnumeratedCategory', () => {
 	var stmts = parseResource("enums/categoryEnum.pec");
 	expect(stmts).toBeTruthy();
