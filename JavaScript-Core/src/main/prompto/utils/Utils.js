@@ -191,6 +191,10 @@ export function isADecimal(o) {
     return typeof(o) === "number" && !Number.isInteger(o);
 }
 
+export function isANumber(o) {
+    return typeof(o) === "number";
+}
+
 export function isAText(o) {
     return typeof(o) === 'string' || o instanceof String;
 }

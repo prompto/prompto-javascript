@@ -6,7 +6,7 @@ import { MethodDeclarationMap } from '../runtime/index.js'
 import { MethodCall } from '../statement/index.js'
 import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value/index.js'
 import { TextLiteral } from '../literal/index.js'
-import { equalArrays, compareValues } from '../utils/index.js'
+import { equalArrays, compareValues, isANumber } from '../utils/index.js'
 // ensure babel does not inject _xxx.default
 const StrictSet = require('../intrinsic/StrictSet.js').default;
 const List = require('../intrinsic/List.js').default;
@@ -30,11 +30,11 @@ export default class DocumentType extends NativeType {
     }
 
     checkMember(context, section, name) {
-        if ("count"==name) {
+        if ("count"===name) {
             return IntegerType.instance;
-        } else if("keys"==name) {
+        } else if("keys"===name) {
             return new SetType(TextType.instance);
-        } else if ("values"==name) {
+        } else if ("values"===name) {
             return new ListType(AnyType.instance);
         } else if (name === "text")
             return TextType.instance;
@@ -62,7 +62,7 @@ export default class DocumentType extends NativeType {
     transpileAdd(transpiler, other, tryReverse, left, right) {
         if(other instanceof DocumentType) {
             left.transpile(transpiler);
-            transpiler.append(".add(");
+            transpiler.append(".$safe_add(");
             right.transpile(transpiler);
             transpiler.append(")");
         } else {
@@ -90,7 +90,7 @@ export default class DocumentType extends NativeType {
     declareMember(transpiler, section, name) {
         if("keys"===name) {
             transpiler.require(StrictSet);
-        } else if("values"==name) {
+        } else if("values"===name) {
             transpiler.require(List);
         } else
             ; // nothing to do
@@ -98,14 +98,24 @@ export default class DocumentType extends NativeType {
 
     transpileMember(transpiler, name) {
         if ("count"===name) {
-            transpiler.append("length");
-        } else if("keys"===name || "values"==name) {
-            transpiler.append(name);
+            transpiler.append("$safe_length");
+        } else if("keys"===name || "values"===name) {
+            transpiler.append("$safe_" + name);
         } else if ("text" === name) {
             transpiler.append("getText()");
         } else {
-            transpiler.append("getMember('").append(name).append("', false)");
+            transpiler.append("$safe_getMember('").append(name).append("', false)");
         }
+    }
+
+    transpileAssignMember(transpiler, name) {
+        transpiler.append(".$safe_getMember('").append(name).append("', true)");
+    }
+
+    transpileAssignMemberValue(transpiler, name, expression) {
+        transpiler.append(".$safe_setMember('").append(name).append("', ");
+        expression.transpile(transpiler);
+        transpiler.append(")");
     }
 
     checkItem(context, itemType) {
@@ -115,26 +125,17 @@ export default class DocumentType extends NativeType {
     declareItem(transpiler, type, item) {
         type.declare(transpiler);
         item.declare(transpiler);
+        transpiler.require(isANumber);
     }
 
     transpileItem(transpiler, type, item) {
-        transpiler.append(".getItem(");
+        transpiler.append(".$safe_getItem(");
         item.transpile(transpiler);
         transpiler.append(")");
     }
 
-    transpileAssignMember(transpiler, name) {
-        transpiler.append(".getMember('").append(name).append("', true)");
-    }
-
-    transpileAssignMemberValue(transpiler, name, expression) {
-        transpiler.append(".setMember('").append(name).append("', ");
-        expression.transpile(transpiler);
-        transpiler.append(")");
-    }
-
     transpileAssignItemValue(transpiler, item, expression) {
-        transpiler.append(".setItem(");
+        transpiler.append(".$safe_setItem(");
         item.transpile(transpiler);
         transpiler.append(", ");
         expression.transpile(transpiler);

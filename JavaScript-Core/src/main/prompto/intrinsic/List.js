@@ -1,5 +1,4 @@
 const StrictSet = require('./StrictSet.js').default;
-const Document = require('./Document.js').default;
 const NotMutableError = require('../error/NotMutableError.js').default;
 const equalObjects = require('../utils/Utils.js').equalObjects;
 
@@ -62,7 +61,7 @@ List.prototype.filtered = function(filterFunction) {
     return new List(false, filtered);
 };
 
-List.prototype.item = function(idx) {
+List.prototype.getItem = function(idx) {
     if(idx==null)
         throw new ReferenceError();
     else if(idx<1 || idx>this.length)
@@ -70,25 +69,6 @@ List.prototype.item = function(idx) {
     else
         return this[idx-1];
 };
-
-// override property set on Object.prototype
-Object.defineProperty(List.prototype, "getItem", {
-    get: function() {
-        return function (idx, create) {
-            if (idx == null)
-                throw new ReferenceError();
-            else if (idx < 1 || idx > this.length)
-                throw new RangeError();
-            else {
-                if (!this[idx - 1] && create)
-                    this[idx - 1] = new Document();
-                return this[idx - 1] || null;
-            }
-        };
-    },
-    set: function () {
-    }
-});
 
 List.prototype.setItem = function (idx, value) {
     if(!this.mutable)
@@ -121,7 +101,7 @@ List.prototype.hasAny = function(items, noCheckEquals) {
 
 
 List.prototype.slice1Based = function(start, last) {
-    if(start && start != 0) {
+    if(start && start !== 0) {
         if (start < 1 || start > this.length)
             throw new RangeError();
         start = start - 1;

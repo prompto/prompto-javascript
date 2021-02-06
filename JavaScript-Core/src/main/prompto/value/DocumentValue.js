@@ -36,7 +36,7 @@ export default class DocumentValue extends Value {
 
     getMemberValue(context, name, autoCreate) {
         if ("count"===name) {
-            return new IntegerValue(this.values.$length);
+            return new IntegerValue(this.values.$safe_length);
         } else if ("keys"===name) {
             const keys = new StrictSet();
             this.getMemberNames().forEach(name => {
@@ -83,7 +83,7 @@ export default class DocumentValue extends Value {
 
     Add(context, value) {
         if (value instanceof DocumentValue) {
-            return new DocumentValue(this.values.add(value.values));
+            return new DocumentValue(this.values.$safe_add(value.values));
         } else {
             throw new SyntaxError("Illegal: Document + " + typeof(value));
         }

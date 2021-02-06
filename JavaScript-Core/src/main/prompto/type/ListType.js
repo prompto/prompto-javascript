@@ -113,7 +113,7 @@ export default class ListType extends ContainerType {
     }
 
     checkItem(context, itemType, expression) {
-        if(itemType==IntegerType.instance) {
+        if(itemType===IntegerType.instance) {
             return this.itemType;
         } else {
             return super.checkItem(context, itemType, expression);

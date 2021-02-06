@@ -47,19 +47,11 @@ export default class AnyType extends NativeType {
     }
 
     transpileAssignMemberValue(transpiler, name, expression) {
-        // required to support Document members
-        transpiler.append(".setMember('").append(name).append("', ");
-        expression.transpile(transpiler);
-        transpiler.append(")");
+        DocumentType.instance.transpileAssignMemberValue(transpiler, name, expression);
     }
 
     transpileAssignItemValue(transpiler, item, expression) {
-        // required to support Document members
-        transpiler.append(".setItem(");
-        item.transpile(transpiler);
-        transpiler.append(", ");
-        expression.transpile(transpiler);
-        transpiler.append(")");
+        DocumentType.instance.transpileAssignItemValue(transpiler, item, expression);
     }
 }
 

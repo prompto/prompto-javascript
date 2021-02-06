@@ -1,6 +1,7 @@
 const List = require('./List.js').default;
 const StrictSet = require('./StrictSet.js').default;
 const equalArrays = require('../utils/Utils.js').equalArrays;
+const isANumber = require('../utils/Utils.js').isANumber;
 
 export default function Document(entries) {
     if(entries)
@@ -8,8 +9,7 @@ export default function Document(entries) {
     return this;
 }
 
-
-Object.defineProperty(Document.prototype, "$keys", {
+Object.defineProperty(Document.prototype, "$user_keys", {
     get : function() {
         return Object.getOwnPropertyNames(this).filter(function(name) {
             return name!=="mutable";
@@ -18,22 +18,22 @@ Object.defineProperty(Document.prototype, "$keys", {
 });
 
 
-Object.defineProperty(Document.prototype, "length", {
+Object.defineProperty(Document.prototype, "$safe_length", {
     get : function() {
-        return this.$keys.length;
+        return this.$user_keys.length;
     }
 });
 
-Object.defineProperty(Document.prototype, "keys", {
+Object.defineProperty(Document.prototype, "$safe_keys", {
     get : function() {
-        return new StrictSet(this.$keys);
+        return new StrictSet(this.$user_keys);
     }
 });
 
 
-Object.defineProperty(Document.prototype, "values", {
+Object.defineProperty(Document.prototype, "$safe_values", {
     get : function() {
-        var names = this.$keys.map(function(name) {
+        var names = this.$user_keys.map(function(name) {
             return this[name];
         }, this);
         return new List(false, names);
@@ -67,8 +67,7 @@ Document.prototype.getText = function() {
         return this.toString();
 };
 
-
-Document.prototype.getMember = function(name, create) {
+Document.prototype.$safe_getMember = function(name, create) {
     if(this.hasOwnProperty(name))
         return this[name];
     else if(create) {
@@ -78,32 +77,38 @@ Document.prototype.getMember = function(name, create) {
         return null;
 };
 
-
-Document.prototype.setMember = function(name, value) {
+Document.prototype.$safe_setMember = function(name, value) {
     this[name] = value;
 };
 
 
-Document.prototype.getItem = function(index) {
-    return this[index];
+Document.prototype.$safe_getItem = function(item) {
+    if(isANumber(item))
+        return this[item - 1] || null;
+    else
+        return this[item] || null;
 };
 
 
-Document.prototype.setItem = function(index, value) {
-    this[index] = value;
+Document.prototype.$safe_setItem = function(item, value) {
+    if(isANumber(item))
+        this[item - 1] = value;
+    else
+        this[item] = value;
 };
 
+var setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf : function(obj, proto) { obj.__proto__ = proto; };
 
-Document.prototype.add = function(doc) {
-    var result = Object.assign({}, this, doc);
-    result.__proto__ = Document.prototype;
+Document.prototype.$safe_add = function(other) {
+    var result = Object.assign({}, this, other);
+    setPrototypeOf(result, Document.prototype);
     return result;
 };
 
 
 Document.prototype.toDocument = function() {
     var result = Object.assign({}, this);
-    result.__proto__ = Document.prototype;
+    setPrototypeOf(result, Document.prototype);
     return result;
 };
 
@@ -144,21 +149,18 @@ Document.prototype.readJsonField = function(node, parts) {
         throw new Error(typeof(node).toString());
 };
 
-// ensure objects created from Documents exhibit the same behaviour
-Object.defineProperty(Object.prototype, "getMember", {
-    get: function() {
-        return Document.prototype.getMember;
-    },
-    set: function() {
-        // pass
-    }
-});
 
-Object.defineProperty(Object.prototype, "getItem", {
-    get: function() {
-        return Document.prototype.getItem;
-    },
-    set: function() {
-        // pass
+// ensure objects created from Documents exhibit the same behaviour
+
+Object.getOwnPropertyNames(Document.prototype).forEach( function(name) {
+    if(name.startsWith("$safe_")) {
+        Object.defineProperty(Object.prototype, name, {
+            get: function() {
+                        return Document.prototype[name];
+            },
+            set: function() {
+                // pass
+            }
+        });
     }
 });
