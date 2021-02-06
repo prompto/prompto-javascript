@@ -35,22 +35,22 @@ export default class DocumentValue extends Value {
     }
 
     getMemberValue(context, name, autoCreate) {
-        if ("count"==name) {
-            return new IntegerValue(this.values.length);
-        } else if ("keys"==name) {
+        if ("count"===name) {
+            return new IntegerValue(this.values.$length);
+        } else if ("keys"===name) {
             const keys = new StrictSet();
             this.getMemberNames().forEach(name => {
                 keys.add(new TextValue(name));
             });
             return new SetValue(TextType.instance, keys);
-        } else if ("values"==name) {
+        } else if ("values"===name) {
             const list = this.getMemberNames().map(function (name) {
                 return this.values[name];
             }, this);
             return new ListValue(AnyType.instance, list);
         } else if(this.values.hasOwnProperty(name))
             return this.values[name] || null;
-        else if("text" == name)
+        else if("text" === name)
             return new TextValue(this.toString());
         else if(autoCreate) {
             const result = new DocumentValue();
@@ -90,7 +90,7 @@ export default class DocumentValue extends Value {
     }
 
     equals(other) {
-        if(this==other)
+        if(this===other)
             return true;
         if(!(other instanceof DocumentValue))
             return false;
@@ -111,7 +111,7 @@ export default class DocumentValue extends Value {
             const value = this.values[key];
             if(typeof(value) === 'function')
                 continue;
-            if (value == null || value == undefined)
+            if (value === null || value === undefined)
                 values[key] = null;
             else {
                 const id = this; // TODO create identifier
@@ -125,7 +125,7 @@ export default class DocumentValue extends Value {
         const values = {};
         Object.getOwnPropertyNames(this.values).forEach(function(key) {
             const value = this.values[key];
-            if (value == null || value == undefined)
+            if (value === null || value === undefined)
                 values[key] = null;
             else {
                 const id = this; // TODO create identifier
