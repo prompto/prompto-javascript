@@ -198,10 +198,13 @@ export default class Argument extends Section {
     checkActualType(context, requiredType, checkInstance) {
         const expression = this.expression;
         let actualType = null;
-        const isArrow = Argument.isArrowExpression(requiredType, expression);
-        if(isArrow)
-            actualType = Argument.checkArrowExpression(context, requiredType, expression);
-        else if(requiredType instanceof MethodType)
+        const isArrow = Argument.isArrowExpression(expression);
+        if(isArrow) {
+            if(requiredType instanceof MethodType)
+                actualType = Argument.checkArrowExpression(context, requiredType, expression);
+            else
+                actualType = VoidType.instance;
+        } else if(requiredType instanceof MethodType)
             actualType = expression.checkReference(context.getCallingContext());
         else
             actualType = expression.check(context.getCallingContext());
@@ -213,9 +216,7 @@ export default class Argument extends Section {
         return actualType;
     }
 
-    static isArrowExpression(requiredType, expression) {
-        if(!(requiredType instanceof MethodType))
-            return false;
+    static isArrowExpression(expression) {
         if(expression instanceof ArrowExpression)
             return true;
         else

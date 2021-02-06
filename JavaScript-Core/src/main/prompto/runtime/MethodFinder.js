@@ -1,6 +1,7 @@
 import { Score } from './index.js'
 import { CategoryType } from '../type/index.js'
 import { PromptoError, SyntaxError } from '../error/index.js'
+import { ProblemRaiser } from '../problem/index.js';
 
 export default class MethodFinder {
     
@@ -129,6 +130,15 @@ export default class MethodFinder {
     }
 
     filterCompatible(candidates, checkInstance, allowDerived) {
+        try {
+            this.context.pushProblemListener(new ProblemRaiser());
+            return this.doFilterCompatible(candidates, checkInstance, allowDerived);
+        } finally {
+            this.context.popProblemListener();
+        }
+    }
+
+    doFilterCompatible(candidates, checkInstance, allowDerived) {
         const compatibles = new Set();
         candidates.forEach(function(declaration) {
             try {

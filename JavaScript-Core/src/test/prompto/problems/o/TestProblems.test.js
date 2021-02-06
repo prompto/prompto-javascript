@@ -44,6 +44,10 @@ test('NoMatchingPrototype problems', () => {
 	checkProblems('problems/noMatchingPrototype.poc');
 });
 
+test('SetReactState problems', () => {
+	checkProblems('problems/setReactState.poc');
+});
+
 test('UnknownAttributeParameter problems', () => {
 	checkProblems('problems/unknownAttributeParameter.poc');
 });
