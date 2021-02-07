@@ -49,7 +49,7 @@ export default class BaseType extends Section {
     }
 
     isAssignableFrom(context, other) {
-        return this==other || this.equals(other) || other==NullType.instance;
+        return this === other || this.equals(other) || other === NullType.instance;
     }
 
     getMemberMethods(context, name) {
