@@ -376,6 +376,8 @@ export default class EqualsExpression extends Expression {
         } else if(right instanceof MethodType) {
             transpiler.append("isAMethod(");
             this.left.transpile(transpiler);
+            transpiler.append(", ");
+            right.transpileMethodType(transpiler);
             transpiler.append(")");
         } else {
             this.left.transpile(transpiler);

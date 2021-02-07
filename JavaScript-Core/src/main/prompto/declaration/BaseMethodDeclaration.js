@@ -3,9 +3,9 @@ import { ArgumentList, Argument } from '../grammar/index.js'
 import { ParameterList } from '../param/index.js'
 import { ProblemRaiser } from '../problem/index.js'
 import { SyntaxError } from '../error/index.js'
-import {Specificity} from "../grammar/index";
-import {CategoryType} from "../type";
-import {PromptoError} from "../error/index";
+import {Specificity} from "../grammar/index.js";
+import {CategoryType, VoidType} from "../type/index.js";
+import {PromptoError} from "../error/index.js";
 
 export default class BaseMethodDeclaration extends BaseDeclaration {
 
@@ -53,7 +53,7 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
         if(methodName.indexOf("$")>0)
             return methodName;
         else
-            return [methodName].concat(this.parameters.map(arg => arg.getTranspiledName(context))).join("$");
+            return [methodName].concat(this.parameters.map(param => param.getTranspiledName(context))).join("$");
     }
 
     transpileProlog(transpiler) {
@@ -70,6 +70,22 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
         if(this.memberOf)
             transpiler.append(";");
         transpiler.newLine();
+    }
+
+    transpileMethodType(transpiler) {
+        let returnType = this.returnType;
+        if(returnType === null)
+            returnType = this.check(transpiler.context, true) || VoidType.instance;
+        transpiler.append("[");
+        if(this.parameters.length > 0) {
+            this.parameters.forEach(param => transpiler.append("'")
+                .append(param.getType().name)
+                .append("', "));
+            transpiler.trimLast(2);
+        }
+        transpiler.append("], '")
+            .append(returnType.name)
+            .append("'");
     }
 
     unregister(context) {

@@ -203,8 +203,24 @@ export function isACharacter(o) {
     return isAText(o) && o.length===1;
 }
 
-export function isAMethod(o) {
-    return typeof(o) === 'function';
+export function isAMethod(o, params, result) {
+    if(typeof o !== 'function')
+        return false;
+    function countParams(o) {
+        let str = o.toString();
+        str = str.replace(/\/\*[\s\S]*?\*\//g, '')
+            .replace(/\/\/(.)*/g, '')
+            .replace(/{[\s\S]*}/, '')
+            .replace(/=>/g, '')
+            .trim();
+        const lpar = str.indexOf("(");
+        const rpar = str.indexOf(")", lpar + 1);
+        str = str.substring( lpar + 1, rpar);
+        let args = str.split(",");
+        args = args.filter(s => s.trim().length > 0);
+        return args.length;
+    }
+    return params.length === countParams(o);
 }
 
 export function isCharacterUpperCase(char) {

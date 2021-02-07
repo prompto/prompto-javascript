@@ -9,8 +9,8 @@ export default class MethodType extends BaseType {
    }
 
     equals(other) {
-        return (other==this) ||
-            ((other instanceof MethodType) && (this.method.getProto()==other.method.getProto()));
+        return (other === this) ||
+            ((other instanceof MethodType) && (this.method.getProto() === other.method.getProto()));
     }
 
     checkExists(context) {
@@ -54,6 +54,10 @@ export default class MethodType extends BaseType {
         expression.transpile(transpiler);
         transpiler.append("}");
         transpiler.flush();
+    }
+
+    transpileMethodType(transpiler) {
+        this.method.transpileMethodType(transpiler);
     }
 }
 

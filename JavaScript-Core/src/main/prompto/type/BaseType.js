@@ -45,7 +45,7 @@ export default class BaseType extends Section {
     }
 
     equals(other) {
-        return (other instanceof BaseType) && this.name==other.name;
+        return (other instanceof BaseType) && this.name === other.name;
     }
 
     isAssignableFrom(context, other) {
