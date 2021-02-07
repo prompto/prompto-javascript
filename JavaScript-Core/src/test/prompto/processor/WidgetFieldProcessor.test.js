@@ -7,5 +7,5 @@ test('Transpiles WidgetField', () => {
     decls.register(context);
     var decl = context.getRegisteredDeclaration("Container");
     var js = prompto.runtime.Transpiler.transpile(context, decl);
-    expect(js).toEqual(expect.stringContaining("this.state.getMember('stuff"));
+    expect(js).toEqual(expect.stringContaining("this.state.$safe_getMember('stuff"));
 });
