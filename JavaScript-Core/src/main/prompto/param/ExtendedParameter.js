@@ -47,7 +47,7 @@ export default class ExtendedParameter extends CategoryParameter {
         if(this.attributes!==null) {
             this.attributes.forEach(attr => {
                 const actual = context.getRegisteredDeclaration(attr);
-                if (!(actual instanceof AttributeDeclaration)) {
+                if (!(actual instanceof AttributeDeclaration) && attr.name !== "text") {
                     throw new SyntaxError("Unknown attribute: \"" + attr + "\"");
                 }
             });

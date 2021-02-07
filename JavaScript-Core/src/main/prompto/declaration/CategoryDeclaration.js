@@ -122,9 +122,10 @@ export default class CategoryDeclaration extends BaseDeclaration {
         if(this.attributes!=null) {
             this.attributes.forEach(id => {
                 const ad = context.getRegisteredDeclaration(id.name);
-                if (ad == null)
-                    context.problemListener.reportUnknownAttribute(id, id.name);
-                else if (!(ad instanceof AttributeDeclaration))
+                if (ad === null) {
+                    if(id.name !== "text")
+                        context.problemListener.reportUnknownAttribute(id, id.name);
+                } else if (!(ad instanceof AttributeDeclaration))
                     context.problemListener.reportInvalidAttribute(id)
             });
         }
@@ -198,7 +199,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
             writer.append("storable ");
         this.categoryTypeToEDialect(writer);
         if(hasAttributes) {
-            if(this.attributes.length==1)
+            if(this.attributes.length===1)
                 writer.append(" with attribute ");
             else
                 writer.append(" with attributes ");
