@@ -3,9 +3,18 @@ import { InstanceExpression, UnresolvedIdentifier } from './index.js'
 import { EqOp } from '../grammar/index.js'
 import { MatchOp } from '../store/index.js'
 import { Variable, LinkedVariable, LinkedValue } from '../runtime/index.js'
-import { ContainerType, TextType, CharacterType, BooleanType, NullType, IntegerType, DecimalType } from '../type/index.js'
+import {
+    ContainerType,
+    TextType,
+    CharacterType,
+    BooleanType,
+    NullType,
+    IntegerType,
+    DecimalType,
+    MethodType
+} from '../type/index.js'
 import { NullValue, BooleanValue, Value, TypeValue, Instance } from '../value/index.js'
-import { CodeWriter, removeAccents } from '../utils/index.js'
+import { CodeWriter, removeAccents, isAMethod } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
 
 const VOWELS = "AEIO"; // sufficient here
@@ -28,7 +37,7 @@ export default class EqualsExpression extends Expression {
         writer.append(" ");
         this.operator.toDialect(writer);
         // make this a AN
-        if(this.operator==EqOp.IS_A || this.operator==EqOp.IS_NOT_A) {
+        if(this.operator === EqOp.IS_A || this.operator ===  EqOp.IS_NOT_A) {
             const name = this.right.toString();
             if(VOWELS.indexOf(name.charAt(0))>=0)
                 writer.append("n");
@@ -44,12 +53,12 @@ export default class EqualsExpression extends Expression {
     }
 
     checkOperator(context, lt, rt) {
-        if(this.operator==EqOp.CONTAINS || this.operator==EqOp.NOT_CONTAINS) {
+        if(this.operator === EqOp.CONTAINS || this.operator === EqOp.NOT_CONTAINS) {
             if(lt instanceof ContainerType)
                 lt = lt.itemType;
             if(rt instanceof ContainerType)
                 rt = rt.itemType;
-            if(lt!=TextType.instance || !(rt==TextType.instance || rt==CharacterType.instance))
+            if(lt !== TextType.instance || !(rt === TextType.instance || rt === CharacterType.instance))
                 throw new SyntaxError("'contains' only operates on textual value!");
         }
         return BooleanType.instance; // can compare all objects
@@ -65,10 +74,10 @@ export default class EqualsExpression extends Expression {
         let equal = false;
         switch(this.operator) {
             case EqOp.IS:
-                equal = lval==rval;
+                equal = lval === rval;
                 break;
             case EqOp.IS_NOT:
-                equal = lval!=rval;
+                equal = lval !== rval;
                 break;
             case EqOp.IS_A:
                 equal = this.isA(context,lval,rval);
@@ -112,9 +121,9 @@ export default class EqualsExpression extends Expression {
     }
 
     areEqual(context, lval, rval) {
-        if(lval==rval) {
+        if(lval === rval) {
             return true;
-        } else if(lval==NullValue.instance || rval==NullValue.instance) {
+        } else if(lval === NullValue.instance || rval === NullValue.instance) {
             return false;
         } else {
             return lval.equals(rval);
@@ -126,17 +135,17 @@ export default class EqualsExpression extends Expression {
             const actual = lval.type;
             if(actual === NullType.instance)
                 return false;
-            const toCheck = rval.value;
+            const toCheck = rval.value.resolve(context);
             return toCheck.isAssignableFrom(context, actual);
         } else
             return false;
     }
 
     downcast(context, setValue) {
-        if(this.operator==EqOp.IS_A) {
+        if(this.operator === EqOp.IS_A) {
             const id = this.readLeftId();
             if(id!=null) {
-                let targetType = this.right.value;
+                let targetType = this.right.value.resolve(context);
                 let value = context.getRegisteredValue(id.name);
                 if(value==null && !setValue) // need a thing to avoid NPE
                     value = new Variable(id.name, targetType);
@@ -167,7 +176,7 @@ export default class EqualsExpression extends Expression {
         const lval = this.left.interpret(context) || NullValue.instance;
         const rval = this.right.interpret(context) || NullValue.instance;
         const result = this.interpretValues(context, lval, rval);
-        if(result==BooleanValue.TRUE)
+        if(result === BooleanValue.TRUE)
             return true;
         const expected = this.getExpected(context, test.dialect);
         const actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
@@ -194,7 +203,7 @@ export default class EqualsExpression extends Expression {
         const data = value.getStorableData();
         const match = this.getMatchOp();
         query.verify(info, match, data);
-        if (this.operator == EqOp.NOT_EQUALS || this.operator == EqOp.IS_NOT || this.operator == EqOp.NOT_CONTAINS)
+        if (this.operator === EqOp.NOT_EQUALS || this.operator === EqOp.IS_NOT || this.operator === EqOp.NOT_CONTAINS)
             query.not();
     }
 
@@ -218,8 +227,10 @@ export default class EqualsExpression extends Expression {
     declare(transpiler) {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
-        if(this.operator === EqOp.ROUGHLY) {
+        if (this.operator === EqOp.ROUGHLY) {
             transpiler.require(removeAccents);
+        } else if (this.operator === EqOp.IS_A || this.operator === EqOp.IS_NOT_A) {
+            transpiler.require(isAMethod);
         }
     }
 
@@ -341,24 +352,29 @@ export default class EqualsExpression extends Expression {
     }
 
     transpileIsA(transpiler) {
-        if(this.right.value===BooleanType.instance) {
+        const right = this.right.value.resolve(transpiler.context);
+        if(right===BooleanType.instance) {
             transpiler.append("isABoolean(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(this.right.value===IntegerType.instance) {
+        } else if(right===IntegerType.instance) {
             transpiler.append("isAnInteger(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(this.right.value===DecimalType.instance) {
+        } else if(right===DecimalType.instance) {
             transpiler.append("isADecimal(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(this.right.value===TextType.instance) {
+        } else if(right===TextType.instance) {
             transpiler.append("isAText(");
             this.left.transpile(transpiler);
             transpiler.append(")");
-        } else if(this.right.value===CharacterType.instance) {
+        } else if(right===CharacterType.instance) {
             transpiler.append("isACharacter(");
+            this.left.transpile(transpiler);
+            transpiler.append(")");
+        } else if(right instanceof MethodType) {
+            transpiler.append("isAMethod(");
             this.left.transpile(transpiler);
             transpiler.append(")");
         } else {
@@ -384,7 +400,7 @@ export default class EqualsExpression extends Expression {
         transpiler.append(builder).append(".verify(").append(info.toTranspiled()).append(", MatchOp.").append(matchOp.name).append(", ");
         this.right.transpile(transpiler);
         transpiler.append(");").newLine();
-        if (this.operator == EqOp.NOT_EQUALS || this.operator == EqOp.IS_NOT || this.operator == EqOp.NOT_CONTAINS)
+        if (this.operator === EqOp.NOT_EQUALS || this.operator === EqOp.IS_NOT || this.operator === EqOp.NOT_CONTAINS)
             transpiler.append(builder).append(".not();").newLine();
     }
 }

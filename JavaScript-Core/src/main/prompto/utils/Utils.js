@@ -203,6 +203,10 @@ export function isACharacter(o) {
     return isAText(o) && o.length===1;
 }
 
+export function isAMethod(o) {
+    return typeof(o) === 'function';
+}
+
 export function isCharacterUpperCase(char) {
     return !!/[A-Z]/.exec(char[0]);
 }

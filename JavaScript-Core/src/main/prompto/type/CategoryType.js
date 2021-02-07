@@ -46,7 +46,7 @@ export default class CategoryType extends BaseType {
     }
 
     resolve(context, onError) {
-        const type = this.anyfy();
+        let type = this.anyfy();
         if(type instanceof NativeType)
             return type;
         const decl = context.getRegisteredDeclaration(type.name);
@@ -60,8 +60,10 @@ export default class CategoryType extends BaseType {
             const method = new MethodType(decl.getFirst());
             method.copySectionFrom(this);
             return method;
-        } else
-            return decl.getType(context);
+        } else {
+            type = decl.getType(context);
+            return type.equals(this) ? this : type;
+        }
     }
 
     toDialect(writer, skipMutable) {
@@ -81,12 +83,16 @@ export default class CategoryType extends BaseType {
     }
 
     declare(transpiler) {
-        if(this.name==="Any") {
-            transpiler.require(Any);
-        } else  {
-            const decl = this.getDeclaration(transpiler.context);
-            decl.declare(transpiler);
-        }
+        const actual = this.resolve(transpiler.context);
+        if(actual === this) {
+            if (this.name === "Any") {
+                transpiler.require(Any);
+            } else {
+                const decl = this.getDeclaration(transpiler.context);
+                decl.declare(transpiler);
+            }
+        } else if(actual)
+            actual.declare(transpiler);
     }
 
     transpile(transpiler) {
@@ -301,7 +307,7 @@ export default class CategoryType extends BaseType {
     }
 
     checkExists(context) {
-        this.getDeclaration(context);
+        this.resolve(context);
     }
 
     checkMember(context, section, name) {
