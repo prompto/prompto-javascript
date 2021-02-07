@@ -4,6 +4,10 @@ test('AutoDowncast', () => {
 	compareResourceOMO('cast/autoDowncast.poc');
 });
 
+test('AutoDowncastMethod', () => {
+	compareResourceOMO('cast/autoDowncastMethod.poc');
+});
+
 test('CastChild', () => {
 	compareResourceOMO('cast/castChild.poc');
 });

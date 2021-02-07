@@ -18,6 +18,14 @@ test('Transpiled AutoDowncast', () => {
 	checkTranspiledOutput('cast/autoDowncast.poc');
 });
 
+test('Interpreted AutoDowncastMethod', () => {
+	checkInterpretedOutput('cast/autoDowncastMethod.poc');
+});
+
+test('Transpiled AutoDowncastMethod', () => {
+	checkTranspiledOutput('cast/autoDowncastMethod.poc');
+});
+
 test('Interpreted CastChild', () => {
 	checkInterpretedOutput('cast/castChild.poc');
 });
