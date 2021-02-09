@@ -40,6 +40,10 @@ test('DeepUnknownMethod problems', () => {
 	checkProblems('problems/deepUnknownMethod.poc');
 });
 
+test('IllegalOperation problems', () => {
+	checkProblems('problems/illegalOperation.poc');
+});
+
 test('NoMatchingPrototype problems', () => {
 	checkProblems('problems/noMatchingPrototype.poc');
 });
