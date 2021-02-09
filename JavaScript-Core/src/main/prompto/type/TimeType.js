@@ -23,11 +23,11 @@ export default class TimeType extends NativeType {
         }
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if (other === PeriodType.instance) {
             return this; // ignore date section
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 

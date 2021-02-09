@@ -24,7 +24,7 @@ export default class AssignTupleStatement extends SimpleStatement {
             } else {
                 // need to check type compatibility
                 const actualType = actual.getType(context);
-                actualType.checkAssignableFrom(context, AnyType.instance);
+                actualType.checkAssignableFrom(context, this, AnyType.instance);
             }
         }, this);
         return VoidType.instance;

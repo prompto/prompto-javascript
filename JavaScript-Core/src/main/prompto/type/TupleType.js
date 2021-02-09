@@ -75,11 +75,11 @@ export default class TupleType extends NativeType {
         }
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
             return this;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 

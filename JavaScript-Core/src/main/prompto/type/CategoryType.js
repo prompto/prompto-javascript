@@ -237,7 +237,7 @@ export default class CategoryType extends BaseType {
         transpiler.append(")");
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         const type = this.checkOperator(context, other, tryReverse, Operator.PLUS);
         if(type!=null)
             return type;

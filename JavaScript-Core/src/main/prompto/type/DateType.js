@@ -12,16 +12,16 @@ export default class DateType extends NativeType {
 
     isAssignableFrom(context, other) {
         return super.isAssignableFrom(context, other)
-            || (other == DateTimeType.instance);
+            || (other === DateTimeType.instance);
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if (other === PeriodType.instance) {
             return this; // ignore time section
         } else if(other === TimeType.instance) {
             return DateTimeType.instance;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 
@@ -42,19 +42,19 @@ export default class DateType extends NativeType {
     }
 
     declareAdd(transpiler, other, tryReverse, left, right) {
-        if (other === PeriodType.instance || other == TimeType.instance) {
+        if (other === PeriodType.instance || other === TimeType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
-            if(other == TimeType.instance)
+            if(other === TimeType.instance)
                 transpiler.register(DateTime);
         } else
             return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
-        if (other === PeriodType.instance || other == TimeType.instance) {
+        if (other === PeriodType.instance || other === TimeType.instance) {
             left.transpile(transpiler);
-            if(other == TimeType.instance)
+            if(other === TimeType.instance)
                 transpiler.append(".addTime(");
             else
                 transpiler.append(".addPeriod(");
@@ -144,13 +144,13 @@ export default class DateType extends NativeType {
     }
 
     checkMember(context, section, name) {
-        if ("year"==name) {
+        if ("year" === name) {
             return IntegerType.instance;
-        } else if ("month"==name) {
+        } else if ("month" === name) {
             return IntegerType.instance;
-        } else if ("dayOfMonth"==name) {
+        } else if ("dayOfMonth" === name) {
             return IntegerType.instance;
-        } else if ("dayOfYear"==name) {
+        } else if ("dayOfYear" === name) {
             return IntegerType.instance;
         } else {
             return super.checkMember(context, section, name);
@@ -158,19 +158,19 @@ export default class DateType extends NativeType {
     }
 
     declareMember(transpiler, section, name) {
-        if (!("year"==name || "month"==name || "dayOfMonth"==name || "dayOfYear"==name)) {
+        if (!("year" === name || "month" === name || "dayOfMonth" === name || "dayOfYear" === name)) {
             super.declareMember(transpiler, section, name);
         }
     }
 
     transpileMember(transpiler, name) {
-        if ("year"==name) {
+        if ("year" === name) {
             transpiler.append("getYear()");
-        } else if ("month"==name) {
+        } else if ("month" === name) {
             transpiler.append("getMonth()");
-        } else if ("dayOfMonth"==name) {
+        } else if ("dayOfMonth" === name) {
             transpiler.append("getDayOfMonth()");
-        } else if ("dayOfYear"==name) {
+        } else if ("dayOfYear" === name) {
             transpiler.append("getDayOfYear()");
         } else {
             super.transpileMember(transpiler, name);

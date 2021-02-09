@@ -169,7 +169,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
     }
 
     reportIllegalOperation(section, message) {
-        this.reportWarning(section, message);
+        this.reportError(section, message);
     }
 
     reportIllegalInitialize(section) {
@@ -230,7 +230,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
     }
 
     reportAssigningVoidType(section) {
-        this.reportError(section, "Cannot assign void type");
+        this.reportError(section, "Cannot assign Void expression");
     }
 
     reportReturningVoidType(section) {

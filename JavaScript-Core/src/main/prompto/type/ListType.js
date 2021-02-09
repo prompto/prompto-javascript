@@ -56,11 +56,11 @@ export default class ListType extends ContainerType {
         return this.itemType.equals(obj.itemType);
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType)) {
             return this;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 

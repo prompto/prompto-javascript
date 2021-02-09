@@ -18,11 +18,11 @@ export default class PeriodType extends NativeType {
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other instanceof PeriodType) {
             return this;
         } else {
-            return super.checkAdd(this, context, other, tryReverse);
+            return super.checkAdd(this, context, section, other, tryReverse);
         }
     }
 

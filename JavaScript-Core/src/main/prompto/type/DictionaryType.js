@@ -40,11 +40,11 @@ export default class DictionaryType extends ContainerType {
         }
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             return this;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 

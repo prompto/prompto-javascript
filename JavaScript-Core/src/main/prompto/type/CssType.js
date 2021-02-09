@@ -8,11 +8,11 @@ export default class CssType extends NativeType {
         super(new Identifier("Css"));
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if (other === CssType.instance) {
             return this;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 

@@ -21,7 +21,7 @@ export default class PlusExpression extends Expression {
     check(context) {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
-        return lt.checkAdd(context,rt, true);
+        return lt.checkAdd(context, this, rt, true);
     }
 
     interpret(context) {

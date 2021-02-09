@@ -132,7 +132,7 @@ export default class Argument extends Section {
             const actualType = actual.getType(context);
             const newType = this.expression.check(context);
             const section = this.toSection();
-            actualType.checkAssignableFrom(context, newType, section);
+            actualType.checkAssignableFrom(context, section, newType);
         }
         return VoidType.instance;
     }

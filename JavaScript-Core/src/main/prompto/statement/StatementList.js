@@ -45,7 +45,7 @@ export default class StatementList extends ObjectList {
     }
 
     checkStatements(context, returnType, nativeOnly) {
-        if (returnType == VoidType.instance) {
+        if (returnType === VoidType.instance) {
             if (nativeOnly) {
                 this.filter(stmt => stmt instanceof JavaScriptNativeCall, this)
                     .forEach(function (stmt) {

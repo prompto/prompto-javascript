@@ -89,7 +89,7 @@ export default class CharacterType extends NativeType {
         if(other instanceof CharacterType || other instanceof TextType) {
             return BooleanType.instance;
         }
-        return super.checkCompare.apply(this, context, other, section);
+        return super.checkCompare.apply(this, context, section, other);
     }
 
     declareCompare(context, other) {

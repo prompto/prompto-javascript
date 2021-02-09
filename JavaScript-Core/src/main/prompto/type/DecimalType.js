@@ -21,14 +21,14 @@ export default class DecimalType extends NativeType {
 
     isAssignableFrom(context, other) {
         return super.isAssignableFrom(context, other)
-            || (other == IntegerType.instance);
+            || (other === IntegerType.instance);
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 
@@ -192,7 +192,7 @@ export default class DecimalType extends NativeType {
     }
 
     transpileMember(transpiler, name) {
-        if("text" == name)
+        if("text" === name)
             transpiler.append("toDecimalString()");
         else
             super.transpileMember(transpiler, name);

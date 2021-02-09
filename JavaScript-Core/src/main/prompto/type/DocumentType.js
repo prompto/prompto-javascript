@@ -42,11 +42,11 @@ export default class DocumentType extends NativeType {
             return AnyType.instance;
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other instanceof DocumentType) {
             return this;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 

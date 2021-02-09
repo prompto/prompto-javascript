@@ -40,7 +40,7 @@ export default class VariableInstance {
             return valueType;
         } else {
             // need to check type compatibility
-            actual.type.checkAssignableFrom(context, valueType, section);
+            actual.type.checkAssignableFrom(context, section, valueType);
             return actual.type;
         }
     }

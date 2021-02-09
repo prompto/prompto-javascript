@@ -32,19 +32,19 @@ export default class AssignVariableStatement extends SimpleStatement {
         } else {
             // need to check type compatibility
             const actualType = actual.getType(context);
-            actualType.checkAssignableFrom(context, type, this);
+            actualType.checkAssignableFrom(context, this, type);
         }
         return VoidType.instance;
     }
 
     equals(obj) {
-        if(obj==this) {
+        if(obj === this) {
             return true;
         }
         if(!(obj instanceof AssignVariableStatement)) {
             return false;
         }
-        return this.name==obj.name && this.expression==obj.expression;
+        return this.name === obj.name && this.expression === obj.expression;
     }
 
     check(context) {
@@ -56,7 +56,7 @@ export default class AssignVariableStatement extends SimpleStatement {
             // need to check type compatibility
             const actualType = actual.getType(context);
             const newType = this.expression.check(context);
-            actualType.checkAssignableFrom(context, newType, this);
+            actualType.checkAssignableFrom(context, this, newType);
         }
         return VoidType.instance;
     }

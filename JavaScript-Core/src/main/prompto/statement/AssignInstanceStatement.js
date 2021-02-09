@@ -21,8 +21,8 @@ export default class AssignInstanceStatement extends SimpleStatement {
 
     check(context) {
         const valueType = this.expression.check(context);
-        if(valueType===VoidType.instance)
-            context.problemListener.reportAssigningVoidType(this.expression);
+        if(valueType === VoidType.instance)
+            context.problemListener.reportAssigningVoidType(this);
         this.instance.checkAssignValue(context, valueType, this);
         // Code expressions need to be interpreted as part of full check
         if (valueType === CodeType.instance) {

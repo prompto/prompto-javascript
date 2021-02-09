@@ -72,13 +72,18 @@ export default class BaseType extends Section {
         throw new SyntaxError("Cannot transpile assign item value from " + this.name);
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other instanceof EnumeratedNativeType)
-            return this.checkAdd(context, other.derivedFrom, tryReverse);
+            return this.checkAdd(context, section, other.derivedFrom, tryReverse);
         else if(tryReverse)
-            return other.checkAdd(context, this, false);
-        else
-            throw new SyntaxError("Cannot add " + this.name + " to " + other.name);
+            return other.checkAdd(context, section, this, false);
+        else {
+            const left = tryReverse ? this : other;
+            const right = tryReverse ? other : this;
+            const msg = "Cannot add " + left.name + " and " + right.name;
+            context.problemListener.reportIllegalOperation(section, msg);
+            return VoidType.instance;
+        }
     }
 
     declareAdd(transpiler, other, tryReverse, left, right) {
@@ -231,9 +236,9 @@ export default class BaseType extends Section {
             throw new SyntaxError("Cannot transpile negate of " + this.name );
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if(other instanceof EnumeratedNativeType)
-            return this.checkCompare(context, other.derivedFrom, section);
+            return this.checkCompare(context, section, other.derivedFrom);
         else
             context.problemListener.reportError(section, "Cannot compare " + this.name + " to " + other.name);
     }
@@ -391,7 +396,7 @@ export default class BaseType extends Section {
         throw new SyntaxError("Cannot transpile iterate over " + this.name);
     }
 
-    checkAssignableFrom(context, other, section) {
+    checkAssignableFrom(context, section, other) {
         if (!this.isAssignableFrom(context, other))
             context.problemListener.reportIncompatibleTypes(section, this, other);
     }

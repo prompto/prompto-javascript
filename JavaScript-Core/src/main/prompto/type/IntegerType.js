@@ -25,11 +25,11 @@ export default class IntegerType extends NativeType {
         transpiler.append('"Integer"');
     }
 
-    checkAdd(context, other, tryReverse) {
+    checkAdd(context, section, other, tryReverse) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return other;
         } else {
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
         }
     }
 
