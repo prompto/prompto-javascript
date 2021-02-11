@@ -315,11 +315,12 @@ const HTML_PROPERTY_TYPES = `{
     wrap: { values: <null, "hard", "soft">, help: "How the value of the form control is to be wrapped for form submission"},
     dangerouslySetInnerHTML : { type: Document, help: "Sets node.innerHtml"},
     onClick: ClickEventCallback,
+    onSubmit: SubmitEventCallback,
     onContextMenu: ClickEventCallback,
     onChange: InputChangedCallback,
     key: Any,
     ref: Text 
-}`; // TODO: 'key' is for React only
+}`; // TODO: 'key' and 'ref' are for React only
 
 
 let HTML_PROPERTIES_MAP = null;
