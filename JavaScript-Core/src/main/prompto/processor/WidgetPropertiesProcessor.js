@@ -129,7 +129,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
                             .filter(l => l !== NullValue.instance)
                             .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name)), this);
                         prop.validator = new TypeSetValidator(new Set(types));
-                        if(types.length==value.items.set.size)
+                        if(types.length === value.items.set.size)
                             prop.validator = prop.validator.required();
                         break;
                     }
@@ -142,7 +142,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
                             .filter(l => l !== NullValue.instance)
                             .map(l => l.toString());
                         prop.validator = new ValueSetValidator(new Set(texts));
-                        if(texts.length==value.items.set.size)
+                        if(texts.length === value.items.set.size)
                             prop.validator = prop.validator.required();
                         break;
                     }
@@ -166,7 +166,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
             if(types.indexOf(null)>=0)
                 return null; // TODO something went wrong
             prop.validator = new TypeSetValidator(new Set(types));
-            if(types.length==value.items.set.size)
+            if(types.length === value.items.set.size)
                 prop.validator = prop.validator.required();
             return prop;
         } else if(itemType === AnyType.instance || itemType === TextType.instance) {
@@ -174,7 +174,7 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
                 .filter(l => l !== NullValue.instance)
                 .map(l => l.toString());
             prop.validator = new ValueSetValidator(new Set(texts));
-            if(texts.length==value.items.set.size)
+            if(texts.length === value.items.set.size)
                 prop.validator = prop.validator.required();
             return prop;
         } else {
