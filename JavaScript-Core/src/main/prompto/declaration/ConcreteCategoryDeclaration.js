@@ -70,7 +70,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     methodsToMDialect(writer) {
         writer.indent();
-        if(this.methods==null || this.methods.length==0)
+        if(this.methods==null || this.methods.length === 0)
             writer.append("pass").newLine();
         else {
             writer.newLine();
@@ -127,9 +127,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         const key = this.getMethodKey(name);
         if(this.methodsMap[key])
             return true;
-        if(this.hasDerivedMethod(context, name))
-            return true;
-        return false;
+        return this.hasDerivedMethod(context, name);
     }
 
     hasDerivedMethod(context, name) {
@@ -609,9 +607,9 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
     locateSectionAtLine(line) {
         for(let i=0;i<this.methods.length;i++) {
-            const s = this.methods[i].locateSectionAtLine(line);
-            if(s)
-                return s;
+            const section = this.methods[i].locateSectionAtLine(line);
+            if(section !== null)
+                return section;
         }
         return null;
     }

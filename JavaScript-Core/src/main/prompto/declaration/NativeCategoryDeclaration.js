@@ -149,9 +149,9 @@ export default class NativeCategoryDeclaration extends ConcreteCategoryDeclarati
 
     locateSectionAtLine(line) {
         for(let i=0;i<this.methods.length;i++) {
-            const s = this.methods[i].locateSectionAtLine(line);
-            if(s)
-                return s;
+            const section = this.methods[i].locateSectionAtLine(line);
+            if(section)
+                return section;
         }
         return null;
     }
