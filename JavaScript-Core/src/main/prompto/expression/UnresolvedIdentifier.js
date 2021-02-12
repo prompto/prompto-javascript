@@ -126,12 +126,14 @@ export default class UnresolvedIdentifier extends Expression {
         if(resolved)
             return resolved;
         resolved = this.resolveInstance(context);
+        if(resolved !== null)
+            resolved.copySectionFrom(this);
         return resolved;
     }
 
     resolveTypeOrConstructor(context, forMember) {
         // is first char uppercase?
-        if (this.id.name[0].toUpperCase() != this.id.name[0])
+        if (this.id.name[0].toUpperCase() !== this.id.name[0])
             return null;
         if (forMember) {
             return this.resolveType(context);
@@ -155,7 +157,7 @@ export default class UnresolvedIdentifier extends Expression {
     }
 
     resolveMethodCall(context, updateSelectorParent) {
-        if(this.id.dialect!=Dialect.E)
+        if(this.id.dialect !== Dialect.E)
             return null;
         try {
             const selector = new MethodSelector(null, this.id);
@@ -196,7 +198,7 @@ export default class UnresolvedIdentifier extends Expression {
         } else {
             const allTypes = NativeType.getAll();
             for(let i=0;i<allTypes.length;i++) {
-                if (this.name == allTypes[i].name) {
+                if (this.name === allTypes[i].name) {
                     return new TypeExpression(allTypes[i]);
                 }
             }
@@ -205,7 +207,7 @@ export default class UnresolvedIdentifier extends Expression {
     }
 
     resolveSymbol(context) {
-        if(this.id.name==this.id.name.toUpperCase()) {
+        if(this.id.name === this.id.name.toUpperCase()) {
             return new SymbolExpression(this.id);
         } else {
             return null;

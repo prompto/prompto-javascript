@@ -1,5 +1,5 @@
 import Expression from './Expression.js'
-import { AnyType, CategoryType } from '../type/index.js'
+import { AnyType, CategoryType, VoidType } from '../type/index.js'
 import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store/index.js'
 import { NullValue } from '../value/index.js'
 import { CategoryDeclaration } from '../declaration/index.js'
@@ -60,8 +60,10 @@ export default class FetchOneExpression extends Expression {
     check(context) {
         if(this.type!=null) {
             const decl = context.getRegisteredDeclaration(this.type.name);
-            if (decl == null || !(decl instanceof CategoryDeclaration))
+            if (decl == null || !(decl instanceof CategoryDeclaration)) {
                 context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
+                return VoidType.instance;
+            }
             if(!(decl.isStorable && decl.isStorable(context)))
                 context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);

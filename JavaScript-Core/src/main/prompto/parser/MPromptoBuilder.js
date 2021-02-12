@@ -2387,7 +2387,9 @@ export default class MPromptoBuilder extends MParserListener {
     exitCatchAtomicStatement(ctx) {
         const name = this.getNodeValue(ctx.name);
         const stmts = this.getNodeValue(ctx.stmts);
-        this.setNodeValue(ctx, new statement.AtomicSwitchCase(new expression.SymbolExpression(name), stmts));
+        const symbol = new expression.SymbolExpression(name);
+        symbol.copySectionFrom(name);
+        this.setNodeValue(ctx, new statement.AtomicSwitchCase(symbol, stmts));
     }
 
 
