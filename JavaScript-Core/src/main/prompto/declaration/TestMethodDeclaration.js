@@ -2,6 +2,8 @@ import BaseDeclaration from './BaseDeclaration.js'
 import { VoidType } from '../type/index.js'
 import { PromptoError } from '../error/index.js'
 import { Identifier } from '../grammar/index.js'
+import { StatementList } from '../statement/index.js'
+import { ExpressionList } from '../expression/index.js'
 
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
@@ -12,6 +14,20 @@ export default class TestMethodDeclaration extends BaseDeclaration {
         this.statements = stmts;
         this.assertions = exps;
         this.error = error;
+    }
+
+    locateSectionAtLine(line) {
+        if(this.statements instanceof StatementList) {
+            const section = this.statements.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.assertions instanceof ExpressionList) {
+            const section = this.assertions.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        return null;
     }
 
     getDeclarationType() {

@@ -10,10 +10,9 @@ export default class SwitchCaseList extends ObjectList {
         }
     }
 
-    locateSectionAtLine(line) {
+    locateSectionAtLine(line, checkExpression) {
         for (let i = 0; i < this.length; i++) {
-            const switchCase = this[i];
-            const section = switchCase.locateSectionAtLine(line);
+            const section = this[i].locateSectionAtLine(line, checkExpression);
             if (section)
                 return section;
         }

@@ -14,6 +14,10 @@ export default class BaseDeclaration extends Section {
         return this.id.name;
     }
 
+    locateSectionAtLine(line) {
+        return null;
+    }
+
     unregister(context) {
         context.unregisterDeclaration (this);
     }
@@ -28,7 +32,7 @@ export default class BaseDeclaration extends Section {
 
     fetchBody(parser) {
         let section = null;
-        if(section==null && this.comments && this.comments.length > 0)
+        if(/*section === null &&*/this.comments && this.comments.length > 0)
             section = this.comments[0];
         if(section==null && this.annotations && this.annotations.length > 0)
             section = this.annotations[0];
@@ -37,7 +41,4 @@ export default class BaseDeclaration extends Section {
         return parser.getTokenStream().getText({ start: section.start.tokenIndex, stop: this.end.tokenIndex + 1 });
     }
 
-    locateSectionAtLine(line) {
-        return null;
-    }
 }

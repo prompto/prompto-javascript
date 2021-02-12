@@ -4,6 +4,8 @@ import { IntegerType, ListType, DictionaryType } from '../type/index.js'
 import { InternalError } from '../error/index.js'
 import { StrictSet } from '../intrinsic/index.js'
 import { IntegerValue } from '../value/index.js'
+import {Section} from "../parser";
+import {StatementList} from "./index";
 
 export default class ForEachStatement extends BaseStatement {
 
@@ -13,6 +15,18 @@ export default class ForEachStatement extends BaseStatement {
         this.v2 = v2 || null;
         this.source = source;
         this.statements = statements;
+    }
+
+    locateSectionAtLine(line) {
+        if(this.source instanceof Section) {
+            const section = this.source.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     check(context) {
@@ -54,7 +68,7 @@ export default class ForEachStatement extends BaseStatement {
             let value = iterator.next();
             child.setValue(this.v1, value);
             value = this.statements.interpret(child);
-            if(value==BreakResult.instance)
+            if(value === BreakResult.instance)
                 break;
             if (value != null) {
                 return value;
@@ -283,7 +297,4 @@ export default class ForEachStatement extends BaseStatement {
         transpiler.newLine();
     }
 
-    locateSectionAtLine(line) {
-        return this.statements.locateSectionAtLine(line) || this;
-    }
 }

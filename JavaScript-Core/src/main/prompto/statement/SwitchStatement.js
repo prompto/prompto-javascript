@@ -1,4 +1,5 @@
 import BaseSwitchStatement from './BaseSwitchStatement.js'
+import {StatementList} from "./index";
 
 export default class SwitchStatement extends BaseSwitchStatement {
  
@@ -9,6 +10,20 @@ export default class SwitchStatement extends BaseSwitchStatement {
 
     canReturn() {
         return true;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else {
+            let section = this.switchCases.locateSectionAtLine(line, true);
+            if(section !== null)
+                return section;
+            if(this.defaultCase instanceof StatementList)
+                return this.defaultCase.locateSectionAtLine(line);
+            else
+                return null;
+        }
     }
 
     checkSwitchType(context) {

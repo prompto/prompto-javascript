@@ -1,10 +1,18 @@
 import ObjectList from '../utils/ObjectList.js'
 
-// TODO move to /expression
 export default class ExpressionList extends ObjectList {
 
     constructor(items, item) {
         super(items, item);
+    }
+
+    locateSectionAtLine(line) {
+        for(let i = 0;i < this.length; i++) {
+            const section = this[i].locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        return null;
     }
 
     toDialect(writer) {

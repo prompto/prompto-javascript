@@ -1,4 +1,5 @@
 import BaseStatement from './BaseStatement.js'
+import {StatementList} from "./index";
 
 export default class WithSingletonStatement extends BaseStatement {
 
@@ -6,6 +7,13 @@ export default class WithSingletonStatement extends BaseStatement {
         super();
         this.type = type;
         this.statements = statements;
+    }
+
+    locateSectionAtLine(line) {
+        if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     check(context) {

@@ -3,6 +3,7 @@ import { Dialect } from '../parser/index.js'
 import { VoidType, AnyType } from '../type/index.js'
 import { NullValue, Instance, Container } from '../value/index.js'
 import { $DataStore } from '../store/index.js'
+import {StatementList} from "./index";
 
 export default class StoreStatement extends BaseStatement {
  
@@ -11,6 +12,15 @@ export default class StoreStatement extends BaseStatement {
         this.del = del;
         this.add = add;
         this.andThen = andThen;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else if(this.andThen instanceof StatementList)
+            return this.andThen.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     isSimple() {

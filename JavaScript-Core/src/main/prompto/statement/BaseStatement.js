@@ -34,8 +34,5 @@ export default class BaseStatement extends Section {
         this.transpile(transpiler);
     }
 
-    locateSectionAtLine(line) {
-        return this;
-    }
 }
 

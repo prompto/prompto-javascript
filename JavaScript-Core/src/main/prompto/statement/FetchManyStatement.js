@@ -1,12 +1,22 @@
 import FetchManyExpression from '../expression/FetchManyExpression.js'
 import { Variable } from '../runtime/index.js'
 import { CursorType } from '../type/index.js'
+import {StatementList} from "./index";
 
 export default class FetchManyStatement extends FetchManyExpression {
 
     constructor(type, predicate, first, last, orderBy, thenWith) {
         super(type, predicate, first, last, orderBy);
         this.thenWith = thenWith;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     canReturn() {
@@ -55,8 +65,5 @@ export default class FetchManyStatement extends FetchManyExpression {
         return false;
     }
 
-    locateSectionAtLine(line) {
-        return this;
-    }
 }
 

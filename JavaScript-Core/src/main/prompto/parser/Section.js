@@ -9,8 +9,11 @@ export default class Section {
     }
 
     constructor(section) {
-        section = section || { path : "", start : null, end : null, dialect : null, breakpoint : null };
-        this.copySectionFrom(section);
+        this.path = "";
+        this.start = null;
+        this.end = null;
+        this.dialect = null;
+        this.breakpoint = null;
     }
 
     copySectionFrom(section) {
@@ -31,6 +34,10 @@ export default class Section {
 
     containsLine(line) {
         return this.start.line <= line && this.end.line >= line;
+    }
+
+    locateSectionAtLine(line) {
+        return (this.start.line <= line && this.end.line >= line) ? this : null;
     }
 
     asObject() {

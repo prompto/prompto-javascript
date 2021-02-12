@@ -1,11 +1,21 @@
 import FetchOneExpression from '../expression/FetchOneExpression.js'
 import { Variable } from '../runtime/index.js'
+import {StatementList} from "./index";
 
 export default class FetchOneStatement extends FetchOneExpression {
 
     constructor(type, predicate, thenWith) {
         super(type, predicate);
         this.thenWith = thenWith;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     canReturn() {
@@ -49,7 +59,4 @@ export default class FetchOneStatement extends FetchOneExpression {
         return false;
     }
 
-    locateSectionAtLine(line) {
-        return this;
-    }
 }

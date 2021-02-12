@@ -6,6 +6,7 @@ import { ExecutionError } from '../error/index.js'
 import { UnresolvedParameter } from '../param/index.js'
 import { ConstructorExpression } from '../expression/index.js'
 import { TextLiteral } from '../literal/index.js'
+import {StatementList} from "./index";
 
 export default class SwitchErrorStatement extends BaseSwitchStatement {
 
@@ -14,6 +15,27 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         this.errorId = errorId;
         this.statements = statements || null;
         this.alwaysInstructions = alwaysStmts || null;
+    }
+
+    locateSectionAtLine(line) {
+        let section;
+        if(this.statements instanceof StatementList) {
+            section = this.statements.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        section = this.switchCases.locateSectionAtLine(line, false);
+        if(section !== null)
+            return section;
+        if(this.defaultCase instanceof StatementList) {
+            section = this.defaultCase.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.alwaysInstructions instanceof StatementList)
+            return this.alwaysInstructions.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     checkSwitchCasesType(context) {
@@ -28,7 +50,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
 
     collectReturnTypes(context, types) {
         let type = this.statements.check(context, null);
-        if(type!=VoidType.instance) {
+        if(type !== VoidType.instance) {
             types[type.name] = type;
         }
         const local = context.newLocalContext();
@@ -36,7 +58,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         const section = super.collectReturnTypes(local, types);
         if(this.alwaysInstructions!=null) {
             type = this.alwaysInstructions.check(context, null);
-            if(type!=VoidType.instance) {
+            if(type !== VoidType.instance) {
                 types[type.name] = type;
             }
         }

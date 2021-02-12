@@ -32,14 +32,14 @@ export default class BaseSwitchStatement extends BaseStatement {
         let section = null;
         this.switchCases.forEach(switchCase => {
             const type = switchCase.checkReturnType(context);
-            if(type!=VoidType.instance) {
+            if(type !== VoidType.instance) {
                 section = switchCase;
                 types.add(type);
             }
         });
         if(this.defaultCase!=null) {
             const type = this.defaultCase.check(context, null);
-            if(type!=VoidType.instance) {
+            if(type !== VoidType.instance) {
                 section = this.defaultCase;
                 types.add(type);
             }
@@ -80,9 +80,6 @@ export default class BaseSwitchStatement extends BaseStatement {
         return true;
     }
 
-    locateSectionAtLine(line) {
-        return this.switchCases.locateSectionAtLine(line) || (this.defaultCase ? this.defaultCase.locateSectionAtLine(line) : null) || this;
-    }
 }
 
 

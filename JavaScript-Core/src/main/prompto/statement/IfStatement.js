@@ -19,6 +19,15 @@ export default class IfStatement extends BaseStatement {
         }
     }
 
+    locateSectionAtLine(line) {
+        for(let i=0;i<this.elements.length;i++) {
+            const stmt = this.elements[i].locateSectionAtLine(line);
+            if(stmt !== null)
+                return stmt;
+        }
+        return null;
+    }
+
     addAdditional(condition, statements) {
         this.elements.add(new IfElement(condition, statements));
     }

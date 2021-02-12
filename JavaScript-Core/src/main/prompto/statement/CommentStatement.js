@@ -9,6 +9,10 @@ export default class CommentStatement extends BaseStatement {
         this.text = text;
     }
 
+    locateSectionAtLine(line) {
+        return null;
+    }
+
     check(context) {
         return VoidType.instance;
     }

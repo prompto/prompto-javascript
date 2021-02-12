@@ -3,6 +3,8 @@ import { BooleanType } from '../type/index.js'
 import { BooleanValue } from '../value/index.js'
 import { InvalidDataError } from '../error/index.js'
 import { BreakResult } from '../runtime/index.js'
+import {Section} from "../parser";
+import {StatementList} from "./index";
 
 export default class DoWhileStatement extends BaseStatement {
    
@@ -10,6 +12,18 @@ export default class DoWhileStatement extends BaseStatement {
         super();
         this.condition = condition;
         this.statements = statements;
+    }
+
+    locateSectionAtLine(line) {
+        if(this.statements instanceof StatementList) {
+            const section = this.statements.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.condition instanceof Section)
+           return this.condition.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     declare(transpiler) {
@@ -85,9 +99,6 @@ export default class DoWhileStatement extends BaseStatement {
         return true;
     }
 
-    locateSectionAtLine(line) {
-        return this.statements.locateSectionAtLine(line) || this;
-    }
 }
 
 

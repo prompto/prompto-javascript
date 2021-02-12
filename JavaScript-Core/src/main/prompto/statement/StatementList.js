@@ -22,6 +22,15 @@ export default class StatementList extends ObjectList {
         }
     }
 
+    locateSectionAtLine(line) {
+        for(let i = 0;i < this.length; i++) {
+            const section = this[i].locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        return null;
+    }
+
     check(context, returnType) {
         return this.checkStatements(context, returnType, false);
     }
@@ -171,8 +180,4 @@ export default class StatementList extends ObjectList {
         });
     }
 
-    locateSectionAtLine(line) {
-        const statement = this.find(s => s.containsLine(line));
-        return statement ? statement.locateSectionAtLine(line) : null;
-    }
 }

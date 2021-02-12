@@ -1,4 +1,5 @@
 import Section from '../parser/Section.js'
+import { StatementList } from "./index.js";
 
 export default class SwitchCase extends Section {
 
@@ -6,6 +7,18 @@ export default class SwitchCase extends Section {
         super();
         this.expression = expression;
         this.statements = statements;
+    }
+
+    locateSectionAtLine(line, checkExpression) {
+        if(checkExpression && this.expression instanceof Section) {
+            const section = this.expression.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line)
+        else
+            return null;
     }
 
     checkReturnType(context) {
@@ -26,7 +39,4 @@ export default class SwitchCase extends Section {
             this.statements.declare(transpiler);
     }
 
-    locateSectionAtLine(line) {
-        return this.statements ? this.statements.locateSectionAtLine(line) : null;
-    }
 }

@@ -1,4 +1,5 @@
 import BaseStatement from './BaseStatement.js'
+import {StatementList} from "./index";
 
 export default class WithResourceStatement extends BaseStatement {
 
@@ -6,6 +7,15 @@ export default class WithResourceStatement extends BaseStatement {
         super();
         this.resource = resource;
         this.statements = statements;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     check(context) {

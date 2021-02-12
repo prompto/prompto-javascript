@@ -1,11 +1,21 @@
 import ReadAllExpression from '../expression/ReadAllExpression.js'
 import { TextType } from '../type/index.js'
+import {StatementList} from "./index";
 
 export default class ReadStatement extends ReadAllExpression {
 
     constructor(source, thenWith) {
         super(source);
         this.thenWith = thenWith;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else if(this.thenWith instanceof StatementList)
+            return this.thenWith.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     canReturn() {
@@ -44,8 +54,5 @@ export default class ReadStatement extends ReadAllExpression {
          return false;
     }
 
-    locateSectionAtLine(line) {
-        return this;
-    }
 }
 

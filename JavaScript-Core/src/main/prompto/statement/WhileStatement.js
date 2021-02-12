@@ -3,6 +3,8 @@ import { BooleanType } from '../type/index.js'
 import { BooleanValue } from '../value/index.js'
 import { BreakResult } from '../runtime/index.js'
 import { InvalidDataError } from '../error/index.js'
+import {Section} from "../parser";
+import {StatementList} from "./index";
 
 export default class WhileStatement extends BaseStatement {
    
@@ -10,6 +12,18 @@ export default class WhileStatement extends BaseStatement {
         super();
         this.condition = condition;
         this.statements = statements;
+    }
+
+    locateSectionAtLine(line) {
+        if(this.condition instanceof Section) {
+            const section = this.condition.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     declare(transpiler) {
@@ -32,7 +46,7 @@ export default class WhileStatement extends BaseStatement {
 
     check(context) {
         const cond = this.condition.check(context);
-        if(cond!=BooleanType.instance) {
+        if(cond !== BooleanType.instance) {
             context.problemListener.reportError(this, "Expected a Boolean condition!");
         }
         const child = context.newChildContext();
@@ -43,7 +57,7 @@ export default class WhileStatement extends BaseStatement {
         while(this.interpretCondition(context)) {
             const child = context.newChildContext();
             const value = this.statements.interpret(child);
-            if(value==BreakResult.instance)
+            if(value === BreakResult.instance)
                 break;
             if(value!=null)
                 return value;
@@ -87,8 +101,5 @@ export default class WhileStatement extends BaseStatement {
         return true;
     }
 
-    locateSectionAtLine(line) {
-        return this.statements.locateSectionAtLine(line) || this;
-    }
 }
 

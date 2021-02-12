@@ -3,6 +3,7 @@ import { ResourceContext } from '../runtime/index.js'
 import { VoidType, ResourceType, TextType } from '../type/index.js'
 import { TextValue } from '../value/index.js'
 import { NullReferenceError, InvalidResourceError } from '../error/index.js'
+import {StatementList} from "./index";
 
 export default class WriteStatement extends BaseStatement {
 
@@ -11,6 +12,15 @@ export default class WriteStatement extends BaseStatement {
         this.content = content;
         this.resource = resource;
         this.thenWith = thenWith;
+    }
+
+    locateSectionAtLine(line) {
+        if(line === this.start.line)
+            return this;
+        else if(this.thenWith instanceof StatementList)
+            return this.thenWith.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     isSimple() {

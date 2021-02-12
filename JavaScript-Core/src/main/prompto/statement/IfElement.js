@@ -16,6 +16,18 @@ export default class IfElement extends BaseStatement {
             this.copySectionFrom(Section.merge(condition, statements.asSection()));
     }
 
+    locateSectionAtLine(line) {
+        if(this.condition instanceof Section) {
+            const section = this.condition.locateSectionAtLine(line);
+            if(section !== null)
+                return section;
+        }
+        if(this.statements instanceof StatementList)
+            return this.statements.locateSectionAtLine(line);
+        else
+            return null;
+    }
+
     check(context) {
         if(this.condition) {
             const type = this.condition.check(context);

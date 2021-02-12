@@ -1,8 +1,9 @@
 import UnresolvedCall from './UnresolvedCall.js'
-import { Dialect } from '../parser/index.js'
+import {Dialect} from '../parser/index.js'
 import { Variable } from '../runtime/index.js'
 import { VoidType } from '../type/index.js'
 import RemoteRunner from "../intrinsic/RemoteRunner.js"
+import {StatementList} from "./index";
 
 export default class RemoteCall extends UnresolvedCall {
 
@@ -10,6 +11,13 @@ export default class RemoteCall extends UnresolvedCall {
         super(caller, assignments);
         this.resultName = resultName;
         this.andThen = andThen;
+    }
+
+    locateSectionAtLine(line) {
+        if(this.andThen instanceof StatementList)
+            return this.andThen.locateSectionAtLine(line);
+        else
+            return null;
     }
 
     isSimple() {

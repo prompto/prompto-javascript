@@ -18,6 +18,10 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         }, this);
     }
 
+    locateSectionAtLine(line) {
+        return this.statements.locateSectionAtLine(line);
+    }
+
     check(context, isStart) {
         if(this.canBeChecked(context, isStart)) {
             return this.fullCheck(context, isStart);
@@ -116,13 +120,13 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     isEligibleAsMain() {
-        if(this.parameters.length==0)
+        if(this.parameters.length === 0)
             return true;
-        else if(this.parameters.length==1) {
+        else if(this.parameters.length === 1) {
             const arg = this.parameters[0];
             if( arg instanceof CategoryParameter
                 && arg.type instanceof DictionaryType
-                && arg.type.itemType==TextType.instance )
+                && arg.type.itemType === TextType.instance )
                     return true;
         }
         return false;
@@ -132,7 +136,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         writer.append("def ").append(this.name).append(" (");
         this.parameters.toDialect(writer);
         writer.append(")");
-        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+        if(this.returnType!=null && this.returnType !== VoidType.instance) {
             writer.append("->");
             this.returnType.toDialect(writer);
         }
@@ -144,7 +148,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     toEDialect(writer) {
         writer.append("define ").append(this.name).append(" as method ");
         this.parameters.toDialect(writer);
-        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+        if(this.returnType!=null && this.returnType !== VoidType.instance) {
             writer.append("returning ");
             this.returnType.toDialect(writer);
             writer.append(" ");
@@ -155,7 +159,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     toODialect(writer) {
-        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+        if(this.returnType!=null && this.returnType !== VoidType.instance) {
             this.returnType.toDialect(writer);
             writer.append(" ");
         }
@@ -227,7 +231,4 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         });
     }
 
-    locateSectionAtLine(line) {
-        return this.statements.locateSectionAtLine(line);
-    }
 }

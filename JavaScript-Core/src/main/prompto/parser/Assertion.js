@@ -7,6 +7,10 @@ export default class Assertion {
         this.expression = expression;
     }
 
+    locateSectionAtLine(line) {
+        return this.expression.locateSectionAtLine(line);
+    }
+
     check(context) {
         const type = this.expression.check(context);
         if(type!==BooleanType.instance)
