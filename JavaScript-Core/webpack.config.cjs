@@ -1,3 +1,4 @@
+const CompressionPlugin = require('compression-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const path = require('path');
 const target_dir = path.resolve(__dirname, "../../prompto-factory/CodeFactory/CodeFactory/src/main/resources/js/lib/")
@@ -42,5 +43,8 @@ module.exports = {
     performance: {
         hints: false
     },
+    plugins: [
+        new CompressionPlugin()
+    ],
     devtool: "source-map"
 };
