@@ -322,11 +322,11 @@ export default class BaseType extends Section {
             throw new SyntaxError(this.name + " cannot transpile has any " + other.name);
     }
 
-    checkItem(context, itemType, expression) {
+    checkItem(context, itemType, section) {
         if(itemType instanceof EnumeratedNativeType)
-            return this.checkItem(context, itemType.derivedFrom, expression);
+            return this.checkItem(context, itemType.derivedFrom, section);
         else {
-            context.problemListener.reportInvalidItem(this, itemType, expression);
+            context.problemListener.reportInvalidItem(this, itemType, null, section);
             return VoidType.instance;
         }
     }

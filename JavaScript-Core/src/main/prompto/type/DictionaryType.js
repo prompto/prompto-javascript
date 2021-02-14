@@ -1,5 +1,5 @@
 import ContainerType from './ContainerType.js'
-import { TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from './index.js'
+import { VoidType, TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { Dictionary, StrictSet, List } from '../intrinsic/index.js'
 import { SwapMethodDeclaration, RemoveKeyMethodDeclaration, RemoveValueMethodDeclaration } from "../builtins/DictionaryTypeBuiltins.js";
@@ -31,7 +31,7 @@ export default class DictionaryType extends ContainerType {
     equals(obj) {
         if (obj == null) {
             return false;
-        } else if (obj == this) {
+        } else if (obj === this) {
             return true;
         } else if (!(obj instanceof DictionaryType)) {
             return false;
@@ -69,7 +69,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     checkContains(context, section, other) {
-        if(other==TextType.instance) {
+        if(other === TextType.instance) {
             return BooleanType.instance;
         } else {
             return super.checkContains(context, other);
@@ -113,11 +113,12 @@ export default class DictionaryType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkItem(context, other, expression) {
-        if(other==TextType.instance) {
+    checkItem(context, other, section) {
+        if(other === TextType.instance) {
             return this.itemType;
         } else {
-            return super.checkItem(context, other, expression);
+            context.problemListener.reportIllegalItemType(section, other, [TextType.instance]);
+            return VoidType.instance;
         }
     }
 

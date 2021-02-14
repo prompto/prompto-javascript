@@ -71,7 +71,7 @@ export default class VariableInstance {
             return VoidType.instance;
         }
         const parentType = actual.getType(context);
-        return parentType.checkItem(context, itemType);
+        return parentType.checkItem(context, itemType, section);
     }
 
     assign(context, expression) {

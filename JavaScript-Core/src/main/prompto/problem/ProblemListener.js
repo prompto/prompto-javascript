@@ -152,6 +152,10 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportError(source, "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString());
     }
 
+    reportIllegalItemType(section, itemType, expected) {
+        this.reportError(section, "Illegal item type, expected: [" + expected.map(t=>t.name).join(", ") + "], got: " + itemType.name);
+    }
+
     reportInvalidCast(expression, target, actual) {
         this.reportError(expression, "Cannot cast " + actual.toString() + " to " + target.toString());
     }

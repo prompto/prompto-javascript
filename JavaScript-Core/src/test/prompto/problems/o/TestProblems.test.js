@@ -60,6 +60,10 @@ test('UnknownCastType problems', () => {
 	checkProblems('problems/unknownCastType.poc');
 });
 
+test('UnknownDictItemType problems', () => {
+	checkProblems('problems/unknownDictItemType.poc');
+});
+
 test('UnknownItemType problems', () => {
 	checkProblems('problems/unknownItemType.poc');
 });
