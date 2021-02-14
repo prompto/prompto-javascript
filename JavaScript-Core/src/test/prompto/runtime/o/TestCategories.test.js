@@ -74,3 +74,11 @@ test('Transpiled PopulateFalse', () => {
 	checkTranspiledOutput('categories/populateFalse.poc');
 });
 
+test('Interpreted ResourceAttribute', () => {
+	checkInterpretedOutput('categories/resourceAttribute.poc');
+});
+
+test('Transpiled ResourceAttribute', () => {
+	checkTranspiledOutput('categories/resourceAttribute.poc');
+});
+

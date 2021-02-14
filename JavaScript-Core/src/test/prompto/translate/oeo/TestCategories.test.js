@@ -32,3 +32,7 @@ test('PopulateFalse', () => {
 	compareResourceOEO('categories/populateFalse.poc');
 });
 
+test('ResourceAttribute', () => {
+	compareResourceOEO('categories/resourceAttribute.poc');
+});
+

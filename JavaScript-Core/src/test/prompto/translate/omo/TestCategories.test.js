@@ -32,3 +32,7 @@ test('PopulateFalse', () => {
 	compareResourceOMO('categories/populateFalse.poc');
 });
 
+test('ResourceAttribute', () => {
+	compareResourceOMO('categories/resourceAttribute.poc');
+});
+
