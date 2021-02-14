@@ -10,7 +10,8 @@ function getTargetType(context, itype, mutable) {
         if (itemType)
             return itype.withItemType(itemType).asMutable(context, mutable);
         else
-            return AnyType.instance;
+            context.problemListener.reportUnknownCategory(itype.itemType.id, itype.itemType);
+            return null;
     } else if (itype instanceof NativeType) {
         return itype.asMutable(context, mutable)
     } else {
@@ -26,7 +27,7 @@ function getTargetType(context, itype, mutable) {
 function getTargetAtomicType(context, itype) {
     const decl = context.getRegisteredDeclaration(itype.id);
     if (decl == null) {
-        context.problemListener.reportUnknownIdentifier(itype.id, itype);
+        context.problemListener.reportUnknownCategory(itype.id, itype);
         return null;
     } else if (decl instanceof MethodDeclarationMap) {
         if (decl.size() === 1)

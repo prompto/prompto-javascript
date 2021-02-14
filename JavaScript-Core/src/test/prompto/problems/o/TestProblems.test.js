@@ -56,6 +56,10 @@ test('UnknownAttributeParameter problems', () => {
 	checkProblems('problems/unknownAttributeParameter.poc');
 });
 
+test('UnknownCastItemType problems', () => {
+	checkProblems('problems/unknownCastItemType.poc');
+});
+
 test('UnknownCastType problems', () => {
 	checkProblems('problems/unknownCastType.poc');
 });
