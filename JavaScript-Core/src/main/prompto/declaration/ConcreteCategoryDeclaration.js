@@ -16,7 +16,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     isWidget(context) {
-        if(this.derivedFrom==null || this.derivedFrom.length!=1)
+        if(this.derivedFrom==null || this.derivedFrom.length !== 1)
             return false;
         const derived = context.getRegisteredDeclaration(this.derivedFrom[0]);
         return derived && derived.isWidget(context);

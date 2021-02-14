@@ -89,7 +89,7 @@ export default class ConstructorExpression extends Expression {
     checkConstructable(context, declaration) {
         if(declaration.isWidget(context))
             context.problemListener.reportIllegalWidgetConstructor(this, declaration.name);
-        declaration.getAbstractMethods(context).forEach(method => context.problemListener.reportIllegalAbstractCategory(this, declaration.name, method.getSignature(Dialect.O)));
+        declaration.getAbstractMethods(context, this).forEach(method => context.problemListener.reportIllegalAbstractCategory(this, declaration.name, method.getSignature(Dialect.O)));
 
     }
 

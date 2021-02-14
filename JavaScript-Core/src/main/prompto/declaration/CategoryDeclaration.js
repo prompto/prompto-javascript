@@ -74,22 +74,25 @@ export default class CategoryDeclaration extends BaseDeclaration {
         throw new Error("Should never get there!");
     }
 
-    getAllMethods(context) {
+    getAllMethods(context, section) {
         const maps = new Map();
-        this.collectAllMethods(context, maps);
+        this.collectAllMethods(context, section, maps);
         return maps;
     }
 
-    collectAllMethods(context, maps) {
-        this.collectInheritedMethods(context, maps);
+    collectAllMethods(context, section, maps) {
+        this.collectInheritedMethods(context, section, maps);
         this.collectLocalMethods(context, maps);
     }
 
-    collectInheritedMethods(context, maps) {
+    collectInheritedMethods(context, section, maps) {
         if(this.derivedFrom)
             this.derivedFrom.forEach(name => {
                 const decl = context.getRegisteredDeclaration(name);
-                decl.collectAllMethods(context, maps);
+                if(decl === null)
+                    context.problemListener.reportInconsistentHierarchy(section, this.name, name);
+                else
+                    decl.collectAllMethods(context, section, maps);
             });
     }
 
@@ -104,9 +107,9 @@ export default class CategoryDeclaration extends BaseDeclaration {
         });
     }
 
-    getAbstractMethods(context) {
+    getAbstractMethods(context, section) {
         let abstract = [];
-        this.getAllMethods(context).forEach((v,k) => {
+        this.getAllMethods(context, section).forEach((v,k) => {
             const toAdd = v.getAll().filter(m => m.isAbstract());
             abstract = abstract.concat(toAdd);
         });

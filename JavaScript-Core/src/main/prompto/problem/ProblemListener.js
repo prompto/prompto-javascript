@@ -229,6 +229,10 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportError(section, "Type " + type.name + " has no super type");
     }
 
+    reportInconsistentHierarchy(section, category, culprit) {
+        this.reportError(section, "Inconsistent hierarchy for " + category + ", unknown parent type: " + culprit);
+    }
+
     reportAssigningVoidType(section) {
         this.reportError(section, "Cannot assign Void expression");
     }

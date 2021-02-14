@@ -56,6 +56,10 @@ test('UnknownAttributeParameter problems', () => {
 	checkProblems('problems/unknownAttributeParameter.poc');
 });
 
+test('UnknownCastType problems', () => {
+	checkProblems('problems/unknownCastType.poc');
+});
+
 test('UnknownItemType problems', () => {
 	checkProblems('problems/unknownItemType.poc');
 });
@@ -66,6 +70,10 @@ test('UnknownMemberMethod problems', () => {
 
 test('UnknownMethod problems', () => {
 	checkProblems('problems/unknownMethod.poc');
+});
+
+test('UnknownParentType problems', () => {
+	checkProblems('problems/unknownParentType.poc');
 });
 
 test('UnknownType problems', () => {

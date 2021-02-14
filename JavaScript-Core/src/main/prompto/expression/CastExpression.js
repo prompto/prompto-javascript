@@ -1,5 +1,5 @@
 import Expression from './Expression.js'
-import { AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType } from '../type/index.js'
+import { VoidType, AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType } from '../type/index.js'
 import { IntegerValue, DecimalValue } from '../value/index.js'
 import { MethodDeclarationMap } from '../runtime/index.js'
 
@@ -29,7 +29,7 @@ function getTargetAtomicType(context, itype) {
         context.problemListener.reportUnknownIdentifier(itype.id, itype);
         return null;
     } else if (decl instanceof MethodDeclarationMap) {
-        if (decl.size() == 1)
+        if (decl.size() === 1)
             return new MethodType(decl.getFirst());
         else {
             context.problemListener.reportAmbiguousIdentifier(itype.id, itype);
@@ -58,6 +58,8 @@ export default class CastExpression extends Expression {
             return AnyType.instance;
         }
         const target = getTargetType(context, this.type, this.mutable);
+        if(target === null)
+            return VoidType.instance;
         // check Any
         if(actual === AnyType.instance)
             return target;
