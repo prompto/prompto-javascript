@@ -1,3 +1,5 @@
+#!/bin/bash
+
 declare -i RESULT=0
 
 echo "Testing JavaScript-Core..."
