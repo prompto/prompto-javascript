@@ -38,7 +38,7 @@ export default class BaseDeclaration extends Section {
             section = this.annotations[0];
         if(section==null)
             section = this;
-        return parser.getTokenStream().getText({ start: section.start.tokenIndex, stop: this.end.tokenIndex + 1 });
+        return parser.getTokenStream().getText({ start: section.startLocation.tokenIndex, stop: this.endLocation.tokenIndex + 1 });
     }
 
 }

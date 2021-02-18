@@ -32,10 +32,10 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         if(section)
             return {
                 path : section.path,
-                startLine : section.start && section.start.line,
-                startColumn : section.start && section.start.column,
-                endLine : section.end && section.end.line,
-                endColumn : section.end && section.end.column
+                startLine : section.startLocation && section.startLocation.line,
+                startColumn : section.startLocation && section.startLocation.column,
+                endLine : section.endLocation && section.endLocation.line,
+                endColumn : section.endLocation && section.endLocation.column
             };
         else
             return {

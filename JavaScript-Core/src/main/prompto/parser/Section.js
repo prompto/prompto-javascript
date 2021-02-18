@@ -4,44 +4,53 @@ export default class Section {
 
     static merge(s1, s2) {
         const section = new Section();
-        section.setSectionFrom(s1.path, Location.min(s1.start, s2.start), Location.max(s1.end, s2.end), s1.dialect);
+        section.setSectionFrom(s1.path, Location.min(s1.startLocation, s2.startLocation), Location.max(s1.endLocation, s2.endLocation), s1.dialect);
         return section;
     }
 
     constructor(section) {
         this.path = "";
-        this.start = null;
-        this.end = null;
+        this.startLocation = null;
+        this.endLocation = null;
         this.dialect = null;
-        this.breakpoint = null;
+        this.isBreakpoint = null;
     }
 
     copySectionFrom(section) {
         this.path = section.path;
-        this.start = section.start;
-        this.end = section.end;
+        this.startLocation = section.startLocation;
+        this.endLocation = section.endLocation;
         this.dialect = section.dialect;
-        this.breakpoint = section.breakpoint;
+        this.isBreakpoint = section.isBreakpoint || null;
     }
 
     setSectionFrom(path, start, end, dialect) {
         this.path = path;
-        this.start = new Location(start);
-        this.end = new Location(end, true);
+        this.startLocation = new Location(start);
+        this.endLocation = new Location(end, true);
         this.dialect = dialect;
-        this.breakpoint = false;
+        this.isBreakpoint = false;
     }
 
     containsLine(line) {
-        return this.start.line <= line && this.end.line >= line;
+        return this.startLocation.line <= line && this.endLocation.line >= line;
     }
 
     locateSectionAtLine(line) {
-        return (this.start.line <= line && this.end.line >= line) ? this : null;
+        return (this.startLocation.line <= line && this.endLocation.line >= line) ? this : null;
     }
 
-    asObject() {
+    serialize() {
         // return an object that can pass through PostMessage and is aligned on server-side debugger Section definition
-        return { path : this.path, start : this.start.asObject(), end : this.end.asObject(), dialect : this.dialect.name, breakpoint : this.breakpoint };
+        return {
+            type: "Section",
+            value: {
+                path: this.path,
+                startLocation: this.startLocation.serialize(),
+                endLocation: this.endLocation.serialize(),
+                dialect: this.dialect.name,
+                isBreakpoint: this.isBreakpoint
+            }
+        };
     }
 }

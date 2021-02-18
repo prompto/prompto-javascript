@@ -12,14 +12,18 @@ export default class Location {
         this.tokenIndex = token.tokenIndex;
         this.line = token.line;
         this.column = token.column;
-        this.start = token.start;
-        if(isEnd && token.text) {
-            this.start += token.text.length;
+        if(isEnd && token.text)
             this.column += token.text.length;
-        }
     }
 
-    asObject() {
-        return { tokenIndex: this.tokenIndex, line: this.line, column: this.column };
+    serialize() {
+        return {
+            type: "Location",
+            value: {
+                tokenIndex: this.tokenIndex,
+                line: this.line,
+                column: this.column
+            }
+        };
     }
 }
