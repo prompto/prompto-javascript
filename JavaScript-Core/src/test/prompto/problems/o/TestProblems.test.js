@@ -16,6 +16,10 @@ test('AbstractWidget problems', () => {
 	checkProblems('problems/abstractWidget.poc');
 });
 
+test('AttributeCallback problems', () => {
+	checkProblems('problems/attributeCallback.poc');
+});
+
 test('CallbackArgument problems', () => {
 	checkProblems('problems/callbackArgument.poc');
 });
