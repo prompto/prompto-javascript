@@ -14,7 +14,7 @@ export default class IntegerType extends NativeType {
 
     isAssignableFrom(context, other) {
         return super.isAssignableFrom(context, other)
-            || (other == DecimalType.instance);
+            || (other === DecimalType.instance);
     }
 
     declare(transpiler) {
