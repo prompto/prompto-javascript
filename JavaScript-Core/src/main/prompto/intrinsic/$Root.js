@@ -1,5 +1,6 @@
 const NotMutableError = require('../error/NotMutableError.js').default;
 const Document = require('./Document.js').default;
+const equalArrays = require("../utils/Utils.js").equalArrays;
 
 function Category(klass) {
     this.klass = klass;
@@ -29,19 +30,17 @@ $Root.prototype.equals = function(other) {
     if (this.$categories[this.$categories.length - 1] !== other.$categories[other.$categories.length - 1])
         return false;
     const thisNames = this.getAttributeNames();
-    for (let i = 0; i < thisNames.length; i++) {
-        const name = thisNames[i];
-        if (this[name] === null) {
-            if(other[name] == null)
-                continue;
-            else
-                return false;
-        }
-        if (!this[name].equals(other[name]))
-            return false;
-    }
-
-    return true;
+    var otherNames = other.getAttributeNames();
+    if(!equalArrays(thisNames, otherNames))
+        return false;
+    return thisNames.every(function(name) {
+        var thisVal = this[name];
+        var otherVal = other[name];
+        if (thisVal === null)
+            return otherVal == null;
+        else
+            return thisVal === otherVal || (thisVal.equals && thisVal.equals(otherVal));
+    }, this);
 };
 
 

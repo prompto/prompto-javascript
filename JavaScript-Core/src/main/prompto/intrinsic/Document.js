@@ -17,7 +17,6 @@ Object.defineProperty(Document.prototype, "$user_keys", {
     }
 });
 
-
 Object.defineProperty(Document.prototype, "$safe_length", {
     get : function() {
         return this.$user_keys.length;
@@ -55,7 +54,12 @@ Document.prototype.equals = function(other) {
     if(!equalArrays(thisNames, otherNames))
         return false;
     return thisNames.every(function(name) {
-        return this[name]===other[name] || (this[name].equals && this[name].equals(other[name]));
+        var thisVal = this[name];
+        var otherVal = other[name];
+        if (thisVal === null)
+            return otherVal == null;
+        else
+            return thisVal === otherVal || (thisVal.equals && thisVal.equals(otherVal));
     }, this);
 };
 
@@ -151,12 +155,11 @@ Document.prototype.readJsonField = function(node, parts) {
 
 
 // ensure objects created from Documents exhibit the same behaviour
-
 Object.getOwnPropertyNames(Document.prototype).forEach( function(name) {
     if(name.startsWith("$safe_")) {
         Object.defineProperty(Object.prototype, name, {
             get: function() {
-                        return Document.prototype[name];
+                 return Document.prototype[name];
             },
             set: function() {
                 // pass
