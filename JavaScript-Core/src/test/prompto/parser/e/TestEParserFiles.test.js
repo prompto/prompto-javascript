@@ -25,7 +25,7 @@ test('Specified', () => {
 test('Attribute', () => {
 	var stmts = parseResource("methods/attribute.pec");
 	expect(stmts).toBeTruthy();
-	expect(stmts.length).toEqual(6);
+	expect(stmts.length).toEqual(7);
 });
 
 

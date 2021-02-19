@@ -40,8 +40,9 @@ export default class VariableInstance {
             return valueType;
         } else {
             // need to check type compatibility
-            actual.type.checkAssignableFrom(context, section, valueType);
-            return actual.type;
+            const type = actual.getType(context);
+            type.checkAssignableFrom(context, section, valueType);
+            return type;
         }
     }
 
