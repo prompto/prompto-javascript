@@ -5,6 +5,7 @@ import { $Root } from '../intrinsic/index.js'
 import { ConcreteInstance } from '../value/index.js'
 import { CategoryType } from '../type/index.js'
 import { $DataStore } from '../store/index.js'
+import { equalArrays } from "../utils/index.js";
 
 export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
@@ -422,6 +423,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     declare(transpiler) {
+        transpiler.require(equalArrays);
         transpiler.declare(this);
         transpiler = transpiler.newInstanceTranspiler(this.getType(transpiler.context));
         if (this.derivedFrom != null) {
