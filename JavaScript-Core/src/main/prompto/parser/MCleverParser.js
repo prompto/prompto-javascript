@@ -38,7 +38,7 @@ export default class MCleverParser extends MParser {
 		return this.doParse(this.declaration_list, true);
 	}
 
-	arse_repl_input() {
+	parse_repl_input() {
 		return this.doParse(this.repl, true);
 	}
 
