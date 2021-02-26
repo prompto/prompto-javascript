@@ -8,6 +8,10 @@ test('Native', () => {
 	compareResourceOEO('widget/native.poc');
 });
 
+test('WithDocumentLiteral', () => {
+	compareResourceOEO('widget/withDocumentLiteral.poc');
+});
+
 test('WithEvent', () => {
 	compareResourceOEO('widget/withEvent.poc');
 });
