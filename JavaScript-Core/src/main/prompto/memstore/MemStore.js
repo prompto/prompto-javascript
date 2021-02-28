@@ -1,5 +1,6 @@
 import Store from '../store/Store.js'
 import { MemQueryBuilder, StorableDocument } from './index.js'
+import {Cursor} from "../intrinsic/index.js";
 
 // a utility class for running tests only
 export default class MemStore extends Store {
@@ -22,7 +23,7 @@ export default class MemStore extends Store {
     }
 
     isDbIdType(type) {
-        return type==typeof(this.nextDbId);
+        return type === typeof(this.nextDbId);
     }
 
     store(todel, toadd, andThen) {
@@ -66,7 +67,7 @@ export default class MemStore extends Store {
         docs = this.sort(query, docs);
         docs = this.slice(query, docs);
         const iterable = new StoredIterable(docs, totalCount);
-        return new MemStore.Cursor(mutable, iterable)
+        return new Cursor(mutable, iterable)
     }
 
     fetchManyAsync(query, mutable, andThen) {
@@ -75,7 +76,7 @@ export default class MemStore extends Store {
     }
 
     slice(query, docs) {
-        if(docs.length==0 || (query.first==null && query.last==null))
+        if(docs.length === 0 || (query.first==null && query.last==null))
             return docs;
         let firstValue = query.first;
         if(firstValue==null || firstValue<1)
