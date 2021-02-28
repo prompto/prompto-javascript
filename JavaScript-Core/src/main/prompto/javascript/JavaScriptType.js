@@ -1,15 +1,21 @@
 import CategoryType from '../type/CategoryType.js'
 import { NativeInstance, NullValue } from '../value/index.js'
 import { AnyNativeCategoryDeclaration } from '../declaration/index.js'
-import { AnyType, ListType, DocumentType, IntegerType, DecimalType, BooleanType, TextType, PeriodType, 
-    IteratorType, DateTimeType, DateType, TimeType, VersionType, UUIDType } from '../type/index.js'
+import {
+    AnyType, ListType, DocumentType, IntegerType, DecimalType, BooleanType, TextType, PeriodType,
+    IteratorType, DateTimeType, DateType, TimeType, VersionType, UUIDType
+} from '../type/index.js'
 import { ListValue, DocumentValue, Value, IteratorValue } from '../value/index.js'
 import { Identifier } from '../grammar/index.js'
 import { getTypeName } from '../utils/index.js'
 import { InternalError } from '../error/index.js'
-import { LocalTime, LocalDate, DateTime, Period, UUID, Version } from '../intrinsic/index.js'
+import {LocalTime, LocalDate, DateTime, Period, UUID, Version} from '../intrinsic/index.js'
 
 export default class JavaScriptType extends CategoryType {
+
+    static init() {
+        JavaScriptType.initializeTypeMap();
+    }
 
     static initializeTypeMap() {
         if(JavaScriptType.scriptToTypeMap)
@@ -72,12 +78,12 @@ export default class JavaScriptType extends CategoryType {
             res = this.convertCategory(context, value, klass, returnType);
         if(res)
             return res;
-        else if(returnType==AnyType.instance) {
+        else if(returnType === AnyType.instance) {
             return new NativeInstance(AnyNativeCategoryDeclaration.instance, value);
         } else {
             // when running under nodeunit, process.stdout is sometimes a WriteStream rather than a Socket
             // so need to adjust accordingly to prevent TestNative.testPrinter to fail
-            if(klass=='WriteStream') {
+            if(klass === 'WriteStream') {
                 res = this.convertCategory(context, value, "Socket", returnType);
                 if(res)
                     return res;
@@ -150,7 +156,7 @@ export default class JavaScriptType extends CategoryType {
         const promptoType = JavaScriptType.scriptToTypeMap[klass] || null;
         if (promptoType != null) {
             return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
-        } else if(klass=='number') {
+        } else if(klass === 'number') {
             if (Number.isInteger(value)) {
                 return IntegerType.instance.convertJavaScriptValueToPromptoValue(context, value, returnType);
             } else {
