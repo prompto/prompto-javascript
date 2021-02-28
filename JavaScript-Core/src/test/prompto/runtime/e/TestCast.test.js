@@ -58,6 +58,14 @@ test('Transpiled CastDocument', () => {
 	checkTranspiledOutput('cast/castDocument.pec');
 });
 
+test('Interpreted CastDocumentList', () => {
+	checkInterpretedOutput('cast/castDocumentList.pec');
+});
+
+test('Transpiled CastDocumentList', () => {
+	checkTranspiledOutput('cast/castDocumentList.pec');
+});
+
 test('Interpreted CastInteger', () => {
 	checkInterpretedOutput('cast/castInteger.pec');
 });

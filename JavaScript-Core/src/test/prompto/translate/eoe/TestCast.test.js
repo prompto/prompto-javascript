@@ -24,6 +24,10 @@ test('CastDocument', () => {
 	compareResourceEOE('cast/castDocument.pec');
 });
 
+test('CastDocumentList', () => {
+	compareResourceEOE('cast/castDocumentList.pec');
+});
+
 test('CastInteger', () => {
 	compareResourceEOE('cast/castInteger.pec');
 });
