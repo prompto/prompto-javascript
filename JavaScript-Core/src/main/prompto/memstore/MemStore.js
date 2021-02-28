@@ -1,6 +1,5 @@
 import Store from '../store/Store.js'
 import { MemQueryBuilder, StorableDocument } from './index.js'
-import {Cursor} from "../intrinsic/index.js";
 
 // a utility class for running tests only
 export default class MemStore extends Store {
@@ -67,7 +66,7 @@ export default class MemStore extends Store {
         docs = this.sort(query, docs);
         docs = this.slice(query, docs);
         const iterable = new StoredIterable(docs, totalCount);
-        return new Cursor(mutable, iterable)
+        return new MemStore.Cursor(mutable, iterable)
     }
 
     fetchManyAsync(query, mutable, andThen) {
