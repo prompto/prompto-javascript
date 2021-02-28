@@ -35,7 +35,7 @@ function register(processor) {
     processors.set(processor.name, processor);
 }
 
-function registerAll() {
+function init() {
     register(new WidgetFieldProcessor());
     register(new WidgetPropertiesProcessor());
     register(new PageWidgetOfProcessor());
@@ -46,6 +46,6 @@ export default {
     forId: forId,
     forName: forName,
     register: register,
-    registerAll: registerAll
+    init: init
 };
 

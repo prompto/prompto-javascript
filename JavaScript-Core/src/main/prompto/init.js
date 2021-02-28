@@ -7,6 +7,6 @@ export default function initAll() {
     NullValue.init();
     BooleanValue.init();
     $DataStore.init();
-    AnnotationProcessors.registerAll();
-    JavaScriptType.initializeTypeMap();
+    JavaScriptType.init();
+    AnnotationProcessors.init();
 }
