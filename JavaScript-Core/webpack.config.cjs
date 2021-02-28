@@ -4,10 +4,9 @@ const path = require('path');
 const target_dir = path.resolve(__dirname, "../../prompto-factory/CodeFactory/CodeFactory/src/main/resources/js/lib/")
 
 const terser_options = {
-    // do not mangle ProblemCollector to allow deriving it
-    // terserOptions: { mangle: { keep_classnames: true, reserved: [ "ProblemCollector" ] } },
     // do not generate LICENSE file
-    extractComments: false
+    extractComments: false,
+    terserOptions: { mangle: { reserved: [ "LocalDate", "LocalTime", "DateTime", "Period", "UUID", "Version", "List", "Document", "StrictSet", "Dictionary" ] } }
 };
 const terser_plugin = new TerserPlugin(terser_options);
 
