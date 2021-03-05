@@ -14,11 +14,11 @@ export default class ValueSetValidator extends PropertyValidator {
 
     validate(context, property) {
         const value = property.value;
-        if(value.isLiteral()) {
+        if(value && value.isLiteral()) {
             let text = value.toString();
-            if(text.startsWith("\"") && text.endsWith("\""))
+            if (text.startsWith("\"") && text.endsWith("\""))
                 text = text.substring(1, text.length - 1);
-            if(!this.values.has(text)) {
+            if (!this.values.has(text)) {
                 const message = "Illegal value " + (text ? text : "<null>") + ", expected one of <" + Array.from(this.values).join(", ") + ">";
                 context.problemListener.reportIllegalValue(property, message);
             }
