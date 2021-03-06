@@ -9,7 +9,7 @@ export default class SetValue extends Container {
     constructor(itemType, items) {
         super(new SetType(itemType));
         this.itemType = itemType;
-        this.items = items || new StrictSet();
+        this.items = items instanceof StrictSet ? items : new StrictSet(items);
     }
 
     toArray() {
