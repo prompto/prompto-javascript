@@ -25,3 +25,27 @@ widget Container {
     expect(listener.problems.length).toBe(0);
 });
 
+it("validates a hybrid set of values", () => {
+    const code = `
+@WidgetProperties({fluid: <"sm", "md", "lg", "xl", true, null>})
+widget Thing;
+
+widget Container {
+    method render() {
+        return <>
+                <Thing fluid />
+                <Thing fluid={true} />
+                <Thing fluid="sm" />
+            </>;
+    }
+}
+`;
+    var decls = parseString(code);
+    var context = prompto.runtime.Context.newGlobalsContext();
+    decls.register(context);
+    var listener = new prompto.problem.ProblemCollector();
+    context.problemListener = listener;
+    decls.check(context);
+    expect(listener.problems.length).toBe(0);
+});
+

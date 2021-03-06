@@ -1,5 +1,5 @@
 import AnnotationProcessor from './AnnotationProcessor.js'
-import { PropertiesType, AnyType, TextType, TypeType } from '../type/index.js'
+import {PropertiesType, AnyType, TextType, TypeType, IntegerType} from '../type/index.js'
 import { TextLiteral, BooleanLiteral, DocumentLiteral, TypeLiteral, SetLiteral } from '../literal/index.js'
 import { InternalError } from '../error/index.js'
 import { Identifier } from '../grammar/index.js'
@@ -157,18 +157,29 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         const itemType = value.itemType || null;
         if(itemType instanceof TypeType)
             return this.newTypeSetValidator(annotation, context, value);
-        else if(itemType === TextType.instance)
+        else if(itemType === TextType.instance || itemType === IntegerType.instance)
             return this.newValueSetValidator(annotation, context, value);
-        else if(itemType === AnyType.instance)
-            return this.newValidatorSetValidator(annotation, context, value);
-        else
+        else if(itemType === AnyType.instance) {
+            if(this.setContainsType(context, value))
+                return this.newValidatorSetValidator(annotation, context, value);
+            else
+                return this.newValueSetValidator(annotation, context, value);
+        } else {
+            console.log("No validator for type: " + itemType);
             return null;
+        }
+    }
+
+    setContainsType(context, value) {
+        const items = value.items.toArray();
+        return items.some(v => v instanceof TypeValue);
     }
 
     newValidatorSetValidator(annotation, context, value) {
         let validators = Array.from(value.items.set)
             .filter(l => l !== NullValue.instance)
             .map(l => this.newValidatorFromValue(annotation, context, l), this)
+            .filter(v => v !== null)
             .map(v => v.optional());
         let validator = new ValidatorSetValidator(validators);
         if(validators.length === value.items.set.size) // no null
@@ -184,8 +195,10 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
             return this.newValueSetValidator(annotation, context, value);
         } else if(value instanceof TypeValue)
            return new TypeValidator(value.value);
-        else
+        else {
+            console.log("No validator for type: " + value.type);
             return null;
+        }
     }
 
     newValueSetValidator(annotation, context, value){
