@@ -9,7 +9,7 @@ export default class ValueSetValidator extends PropertyValidator {
     }
 
     toString() {
-        return this.values.toString();
+        return "<" + Array.from(this.values).join(", ") + ">";
     }
 
     getType(context) {

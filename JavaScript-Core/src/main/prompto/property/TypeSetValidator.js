@@ -10,7 +10,7 @@ export default class TypeSetValidator extends PropertyValidator {
     }
 
     toString() {
-        return this.types.toString();
+        return "<" + Array.from(this.types).join(", ") + ">";
     }
 
     // noinspection JSUnusedLocalSymbols
