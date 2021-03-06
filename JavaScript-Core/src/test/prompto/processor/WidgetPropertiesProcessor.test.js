@@ -1,5 +1,5 @@
-var prompto = require("../../../main/prompto/index");
-var parseResource = require("../parser/BaseOParserTest").parseResource;
+var prompto = require("../../../main/prompto/index.js");
+var parseResource = require("../parser/BaseOParserTest.js").parseResource;
 
 test('Transpiles WidgetProps1', () => {
     var decls = parseResource("annotations/WidgetProps1.poc");

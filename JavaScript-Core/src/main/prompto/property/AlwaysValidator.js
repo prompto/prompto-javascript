@@ -7,8 +7,9 @@ export default class AlwaysValidator extends PropertyValidator {
         return AnyType.instance;
     }
 
-    validate(context, property) {
+    validate(context, jsxProp) {
         // accept any property
+        return true;
     }
 }
 

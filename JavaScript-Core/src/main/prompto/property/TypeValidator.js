@@ -9,14 +9,23 @@ export default class TypeValidator extends PropertyValidator {
         this.type = type.anyfy();
     }
 
+    toString() {
+        return this.type.toString();
+    }
+
     getType(context) {
         return this.type;
     }
 
     validate(context, jsxProp) {
         const actual = this.type instanceof MethodType ? jsxProp.checkProto(context, this.type) : jsxProp.check(context);
-        if(!this.type.isAssignableFrom(context, actual.anyfy()))
+        if(this.type.isAssignableFrom(context, actual.anyfy()))
+            return true;
+        else {
             context.problemListener.reportIllegalAssignment(jsxProp, this.type, actual);
+            return false;
+        }
+
     }
 
     declare(transpiler, jsxProp) {

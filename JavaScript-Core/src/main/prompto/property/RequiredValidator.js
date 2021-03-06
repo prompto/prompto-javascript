@@ -7,6 +7,10 @@ export default class RequiredValidator extends PropertyValidator {
         this.validator = validator;
     }
 
+    toString() {
+        return this.validator.toString();
+    }
+
     isRequired() {
         return true;
     }
@@ -23,7 +27,7 @@ export default class RequiredValidator extends PropertyValidator {
         return this.validator.getType(context);
     }
 
-    validate(context, property) {
-        this.validator.validate(context, property);
+    validate(context, jsxProp) {
+        return this.validator.validate(context, jsxProp);
     }
 }

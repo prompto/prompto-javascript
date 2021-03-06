@@ -3,8 +3,8 @@ import { PropertiesType, AnyType, TextType, TypeType } from '../type/index.js'
 import { TextLiteral, BooleanLiteral, DocumentLiteral, TypeLiteral, SetLiteral } from '../literal/index.js'
 import { InternalError } from '../error/index.js'
 import { Identifier } from '../grammar/index.js'
-import { PropertyMap, Property, ValueSetValidator, TypeSetValidator, TypeValidator } from '../property/index.js'
-import { NullValue, BooleanValue } from '../value/index.js'
+import { PropertyMap, Property, ValueSetValidator, TypeSetValidator, TypeValidator, ValidatorSetValidator } from '../property/index.js'
+import {NullValue, BooleanValue, SetValue, TextValue, IntegerValue, DecimalValue, TypeValue} from '../value/index.js'
 
 export default class WidgetPropertiesProcessor extends AnnotationProcessor {
   
@@ -74,18 +74,18 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         prop.name = entry.key.toString();
         const value = entry.value;
         if(value instanceof TypeLiteral)
-            return this.loadPropertyTypeLiteral(annotation, context, entry, prop, value);
+            return this.loadPropertyFromTypeLiteral(annotation, context, entry, prop, value);
         else if(value instanceof SetLiteral)
-            return this.loadPropertySetLiteral(annotation, context, entry, prop, value);
+            return this.loadPropertyFromSetLiteral(annotation, context, entry, prop, value);
         else if(value instanceof DocumentLiteral)
-            return this.loadPropertyDocumentLiteral(annotation, context, entry, prop, value);
+            return this.loadPropertyFromDocumentLiteral(annotation, context, entry, prop, value);
         else {
             context.problemListener.reportIllegalAnnotation(annotation, "WidgetProperties expects a Document of types as unique parameter");
             return null;
         }
     }
 
-    loadPropertyDocumentLiteral(annotation, context, entry, prop, literal) {
+    loadPropertyFromDocumentLiteral(annotation, context, entry, prop, literal) {
         const children = literal.entries;
         for(let i=0; i<children.items.length; i++) {
             const child = children.items[i];
@@ -108,11 +108,8 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
                     return null;
                 case "type":
                     if(value instanceof TypeLiteral) {
-                        const type = value.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
-                        if (type) {
-                            prop.validator = new TypeValidator(type);
-                            break;
-                        }
+                        this.loadPropertyFromTypeLiteral(annotation, context, entry, prop, value);
+                        break;
                     } else if(value instanceof DocumentLiteral) {
                         const embedded = this.loadProperties(annotation, context, value);
                         if (embedded) {
@@ -124,26 +121,14 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
                     return null;
                 case "types":
                     if(value instanceof SetLiteral) {
-                        value = value.interpret(context);
-                        const types = Array.from(value.items.set)
-                            .filter(l => l !== NullValue.instance)
-                            .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name)), this);
-                        prop.validator = new TypeSetValidator(new Set(types));
-                        if(types.length === value.items.set.size)
-                            prop.validator = prop.validator.required();
+                        this.loadPropertyFromSetLiteral(annotation, context, entry, prop, value);
                         break;
                     }
                     context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
                     return null;
                 case "values":
                     if(value instanceof SetLiteral) {
-                        value = value.interpret(context);
-                        const texts = Array.from(value.items.set)
-                            .filter(l => l !== NullValue.instance)
-                            .map(l => l.toString());
-                        prop.validator = new ValueSetValidator(new Set(texts));
-                        if(texts.length === value.items.set.size)
-                            prop.validator = prop.validator.required();
+                        this.loadPropertyFromSetLiteral(annotation, context, entry, prop, value);
                         break;
                     }
                     context.problemListener.reportIllegalAnnotation(child.key, "Expected a Set value for 'values'.");
@@ -156,26 +141,11 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         return prop;
     }
 
-    loadPropertySetLiteral(annotation, context, entry, prop, literal) {
+    loadPropertyFromSetLiteral(annotation, context, entry, prop, literal) {
         const value = literal.interpret(context);
-        const itemType = value.itemType || null;
-        if(itemType instanceof TypeType) {
-            const types = Array.from(value.items.set)
-                .filter(l => l !== NullValue.instance)
-                .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) ), this);
-            if(types.indexOf(null)>=0)
-                return null; // TODO something went wrong
-            prop.validator = new TypeSetValidator(new Set(types));
-            if(types.length === value.items.set.size)
-                prop.validator = prop.validator.required();
-            return prop;
-        } else if(itemType === AnyType.instance || itemType === TextType.instance) {
-            const texts = Array.from(value.items.set)
-                .filter(l => l !== NullValue.instance)
-                .map(l => l.toString());
-            prop.validator = new ValueSetValidator(new Set(texts));
-            if(texts.length === value.items.set.size)
-                prop.validator = prop.validator.required();
+        const validator = this.newValidatorFromSetValue(annotation, context, value);
+        if(validator) {
+            prop.validator = validator;
             return prop;
         } else {
             context.problemListener.reportIllegalAnnotation(entry.key, "Expected a set of Types.");
@@ -183,7 +153,65 @@ export default class WidgetPropertiesProcessor extends AnnotationProcessor {
         }
     }
 
-    loadPropertyTypeLiteral(annotation, context, entry, prop, literal) {
+    newValidatorFromSetValue(annotation, context, value) {
+        const itemType = value.itemType || null;
+        if(itemType instanceof TypeType)
+            return this.newTypeSetValidator(annotation, context, value);
+        else if(itemType === TextType.instance)
+            return this.newValueSetValidator(annotation, context, value);
+        else if(itemType === AnyType.instance)
+            return this.newValidatorSetValidator(annotation, context, value);
+        else
+            return null;
+    }
+
+    newValidatorSetValidator(annotation, context, value) {
+        let validators = Array.from(value.items.set)
+            .filter(l => l !== NullValue.instance)
+            .map(l => this.newValidatorFromValue(annotation, context, l), this)
+            .map(v => v.optional());
+        let validator = new ValidatorSetValidator(validators);
+        if(validators.length === value.items.set.size) // no null
+            validator = validator.required();
+        return validator;
+    }
+
+    newValidatorFromValue(annotation, context, value) {
+        if(value instanceof SetValue)
+            return this.newValidatorFromSetValue(annotation, context, value);
+        else if(value instanceof TextValue || value instanceof IntegerValue || value instanceof DecimalValue) {
+            value = new SetValue(value.type, [value]);
+            return this.newValueSetValidator(annotation, context, value);
+        } else if(value instanceof TypeValue)
+           return new TypeValidator(value.value);
+        else
+            return null;
+    }
+
+    newValueSetValidator(annotation, context, value){
+        const texts = Array.from(value.items.set)
+            .filter(l => l !== NullValue.instance)
+            .map(l => l.toString());
+        let validator = new ValueSetValidator(new Set(texts));
+        if(texts.length === value.items.set.size) // no null
+            validator = validator.required();
+        return validator;
+    }
+
+    newTypeSetValidator(annotation, context, value) {
+        const types = Array.from(value.items.set)
+            .filter(l => l !== NullValue.instance)
+            .map(l => l.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name) ), this);
+        if(types.indexOf(null)>=0)
+            return null; // TODO something went wrong
+        let validator = new TypeSetValidator(new Set(types));
+        if(types.length === value.items.set.size)
+            validator = validator.required();
+        return validator;
+    }
+
+
+    loadPropertyFromTypeLiteral(annotation, context, entry, prop, literal) {
         const type = literal.value.resolve(context, t => context.problemListener.reportIllegalAnnotation(annotation, "Unkown type: " + t.name));
         if(!type)
             return null;
