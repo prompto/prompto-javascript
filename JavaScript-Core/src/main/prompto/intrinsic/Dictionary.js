@@ -94,10 +94,13 @@ Dictionary.prototype.toString = function() {
 
 Dictionary.prototype.getText = Dictionary.prototype.toString;
 
+Dictionary.prototype.toJson = function() {
+    return new Document(this).toJson();
+};
 
 Dictionary.prototype.equals = function(dict) {
     var keys = this.$keys;
-    if (this.length != dict.length)
+    if (this.length !== dict.length)
         return false;
     for (var i = 0; i < keys.length; i++) {
         var key = keys[i];
@@ -150,6 +153,6 @@ Dictionary.prototype.setItem = function (item, value) {
         this[item] = value;
 };
 
-Dictionary.prototype.toJson = function() {
-    return new Document(this).toJson();
+Dictionary.prototype.toJsonNode = function() {
+    return new Document(this).toJsonNode();
 };

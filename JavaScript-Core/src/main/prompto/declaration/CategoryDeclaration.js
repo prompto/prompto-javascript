@@ -1,8 +1,7 @@
 import BaseDeclaration from './BaseDeclaration.js'
 import { AttributeDeclaration } from './index.js'
 import { CategoryType } from '../type/index.js'
-import { NullValue } from '../value/index.js'
-import { convertFromJavaScript } from '../utils/index.js'
+import { NullValue, DbIdValue } from '../value/index.js'
 import { MethodDeclarationMap } from "../runtime/index.js";
 
 export default class CategoryDeclaration extends BaseDeclaration {
@@ -41,7 +40,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
         instance.mutable = true;
         try {
             const dbId = stored.dbId;
-            const value = convertFromJavaScript(dbId);
+            const value = new DbIdValue(dbId);
             instance.setMember(context, "dbId", value);
             const allAttributes = this.getAllAttributes(context);
             allAttributes.forEach(name => {

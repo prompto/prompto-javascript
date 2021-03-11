@@ -1,3 +1,7 @@
+
+const convertToJson = require('../utils/Utils.js').convertToJson;
+const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
+
 const NotMutableError = require('../error/NotMutableError.js').default;
 const Document = require('./Document.js').default;
 const equalArrays = require("../utils/Utils.js").equalArrays;
@@ -151,4 +155,18 @@ $Root.prototype.toDocument = function() {
     return doc;
 };
 
+$Root.prototype.toJson = function() {
+    return convertToJson(this);
+};
+
+$Root.prototype.toJsonNode = function() {
+    var value = {};
+    var names = this.getAttributeNames();
+    names.forEach(function(name) {
+        value[name] = convertToJsonNode(this[name]);
+    }, this);
+    if(this.hasOwnProperty("dbId"))
+        value.dbId = this.dbId ? "" + this.dbId : null;
+    return value;
+};
 export { Category, $Root }

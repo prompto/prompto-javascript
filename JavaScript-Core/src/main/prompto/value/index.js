@@ -1,4 +1,5 @@
 export {default as Value} from './Value.js';
+export {default as DbIdValue} from './DbIdValue.js';
 export {default as NullValue} from './NullValue.js';
 export {default as AnyValue} from './AnyValue.js';
 export {default as BooleanValue} from './BooleanValue.js';

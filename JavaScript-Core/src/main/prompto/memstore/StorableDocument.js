@@ -27,7 +27,7 @@ export default class StorableDocument {
     getOrCreateDbId() {
         let dbId = this.getDbId();
         if (dbId == null) {
-            dbId = ++$DataStore.instance.nextDbId;
+            dbId = $DataStore.instance.nextDbId++;
             if(this.dbIdListener)
                 this.dbIdListener(dbId);
             this.setData("dbId", dbId, dbId);

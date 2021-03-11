@@ -6,7 +6,7 @@ import { MethodDeclarationMap } from '../runtime/index.js'
 import { MethodCall } from '../statement/index.js'
 import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value/index.js'
 import { TextLiteral } from '../literal/index.js'
-import { equalArrays, compareValues, isANumber } from '../utils/index.js'
+import {equalArrays, compareValues, isANumber, convertToJson, convertToJsonNode} from '../utils/index.js'
 // ensure babel does not inject _xxx.default
 const StrictSet = require('../intrinsic/StrictSet.js').default;
 const List = require('../intrinsic/List.js').default;
@@ -97,6 +97,10 @@ export default class DocumentType extends NativeType {
                 break;
             case "values":
                 transpiler.require(List);
+                break;
+            case "json":
+                transpiler.require(convertToJson);
+                transpiler.require(convertToJsonNode);
                 break;
         }
     }

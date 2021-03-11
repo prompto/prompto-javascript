@@ -1,7 +1,7 @@
 import IterableType from './IterableType.js'
 import { BooleanType, IntegerType } from './index.js'
 import { Variable } from '../runtime/index.js'
-import { convertToJson } from '../utils/index'
+import {convertToJson, convertToJsonNode} from '../utils/index'
 
 export default class ContainerType extends IterableType {
   
@@ -32,6 +32,7 @@ export default class ContainerType extends IterableType {
                 break;
             case "json":
                 transpiler.require(convertToJson);
+                transpiler.require(convertToJsonNode);
                 break;
             default:
                super.declareMember(transpiler, section, name);

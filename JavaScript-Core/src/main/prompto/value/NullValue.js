@@ -22,5 +22,10 @@ export default class NullValue extends Value {
     convertToJavaScript() {
         return null; // <- YES!
     }
+
+    toJsonNode() {
+        return null; // <- YES!
+    }
+
 }
 

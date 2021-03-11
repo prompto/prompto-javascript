@@ -1,5 +1,6 @@
 const List = require('./List.js').default;
 const convertToJson = require('../utils/Utils.js').convertToJson;
+const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
 
 export default function StrictSet(values) {
     this.set = new Set(values);
@@ -25,7 +26,11 @@ StrictSet.prototype.join = function(separator) {
 StrictSet.prototype.getText = StrictSet.prototype.toString;
 
 StrictSet.prototype.toJson = function() {
-    return JSON.stringify(Array.from(this.set.values()).map(function(item) { return convertToJson(item); }));
+    return convertToJson(this);
+};
+
+StrictSet.prototype.toJsonNode = function() {
+    return Array.from(this.set.values()).map(function(item) { return convertToJsonNode(item); });
 };
 
 StrictSet.prototype.iterator = function() {

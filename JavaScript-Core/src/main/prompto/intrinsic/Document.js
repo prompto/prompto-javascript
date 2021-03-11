@@ -2,6 +2,8 @@ const List = require('./List.js').default;
 const StrictSet = require('./StrictSet.js').default;
 const equalArrays = require('../utils/Utils.js').equalArrays;
 const isANumber = require('../utils/Utils.js').isANumber;
+const convertToJson = require('../utils/Utils.js').convertToJson;
+const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
 
 export default function Document(entries) {
     if(entries)
@@ -43,8 +45,17 @@ Document.prototype.toString = function() {
     return JSON.stringify(this);
 };
 
+Document.prototype.toJson = function() {
+    return convertToJson(this);
+};
 
-Document.prototype.toJson = function() { return this; };
+Document.prototype.toJsonNode = function() {
+    var value = {};
+    Object.getOwnPropertyNames(this).forEach(function(name) {
+        value[name] = convertToJsonNode(this[name]);
+    }, this);
+    return value;
+};
 
 
 Document.prototype.equals = function(other) {

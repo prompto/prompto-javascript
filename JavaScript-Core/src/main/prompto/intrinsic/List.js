@@ -2,6 +2,7 @@ const StrictSet = require('./StrictSet.js').default;
 const NotMutableError = require('../error/NotMutableError.js').default;
 const equalObjects = require('../utils/Utils.js').equalObjects;
 const convertToJson = require('../utils/Utils.js').convertToJson;
+const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
 
 export default function List(mutable, items) {
     Array.call(this);
@@ -200,7 +201,12 @@ List.prototype.toString = function() {
 List.prototype.getText = List.prototype.toString;
 
 List.prototype.toJson = function() {
-    return JSON.stringify(this.map(function(item) { return convertToJson(item); }));
+    return convertToJson(this);
+};
+
+
+List.prototype.toJsonNode = function() {
+    return this.map(function(item) { return convertToJsonNode(item); });
 };
 
 List.prototype.toDocument = function() {

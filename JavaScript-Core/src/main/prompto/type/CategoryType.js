@@ -9,10 +9,10 @@ import { Operator, Identifier, Argument, ArgumentList } from '../grammar/index.j
 import { MethodDeclarationMap, MethodFinder, Score } from '../runtime/index.js'
 import { MethodCall } from '../statement/index.js'
 import { $DataStore } from '../store/index.js'
-import { compareValues } from '../utils/index.js'
+import {compareValues, convertToJson, convertToJsonNode} from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
 import { Section } from '../parser/index.js'
-import { Document, Any } from '../intrinsic/index.js'
+import { Any } from '../intrinsic/index.js'
 import { Category } from '../intrinsic/$Root.js'
 
 
@@ -362,7 +362,8 @@ export default class CategoryType extends BaseType {
                 transpiler.require(Category);
                 break;
             case "json":
-                transpiler.require(Document);
+                transpiler.require(convertToJson);
+                transpiler.require(convertToJsonNode);
                 break;
         }
         // TODO visit attributes
@@ -374,7 +375,7 @@ export default class CategoryType extends BaseType {
                 transpiler.append("getText()");
                 break;
             case "json":
-                transpiler.append("toDocument().toJson()");
+                transpiler.append("toJson()");
                 break;
             default:
                 transpiler.append(name);

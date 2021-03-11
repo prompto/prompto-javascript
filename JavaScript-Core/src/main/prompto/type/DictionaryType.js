@@ -7,6 +7,7 @@ import {
     RemoveKeyMethodDeclaration,
     RemoveValueMethodDeclaration
 } from "../builtins/DictionaryTypeBuiltins.js";
+import {convertToJson, convertToJsonNode} from "../utils";
 
 export default class DictionaryType extends ContainerType {
 
@@ -170,6 +171,8 @@ export default class DictionaryType extends ContainerType {
                 transpiler.require(List);
                 break;
             case "json":
+                transpiler.require(convertToJson);
+                transpiler.require(convertToJsonNode);
                 transpiler.require(Document);
                 break;
             case "count":

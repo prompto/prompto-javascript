@@ -7,6 +7,7 @@ import { $DataStore } from '../store/index.js'
 import { EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from '../declaration/index.js'
 import { NotStorableError, NotMutableError } from '../error/index.js'
 import { convertFromJavaScript } from '../utils/index.js'
+import { $Root } from "../intrinsic/$Root.js";
 
 export default class ConcreteInstance extends Instance {
 
@@ -51,6 +52,10 @@ export default class ConcreteInstance extends Instance {
         return dbId;
     }
 
+    getAttributeNames() {
+        return $Root.prototype.getAttributeNames.bind(this.values)();
+    }
+
     getStorableData() {
         // this is called when storing the instance as a field value
         // if this is an enum then we simply store the symbol name
@@ -76,9 +81,7 @@ export default class ConcreteInstance extends Instance {
             this.getOrCreateDbId();
             set.add(this.storable);
         }
-        for(const field in this.values) {
-            this.values[field].collectStorables(set);
-        }
+        this.getAttributeNames().forEach(name => this.values[name].collectStorables(set));
     }
 
     getMemberValue(context, attrName) {
@@ -160,13 +163,13 @@ export default class ConcreteInstance extends Instance {
     }
 
     autocast(decl, value) {
-        if(value instanceof IntegerValue && decl.getType()==DecimalType.instance)
+        if(value instanceof IntegerValue && decl.getType() === DecimalType.instance)
             value = new DecimalValue(value.DecimalValue());
         return value;
     }
 
     equals(obj) {
-        if(obj==this) {
+        if(obj === this) {
             return true;
         } else if(!(obj instanceof ConcreteInstance)) {
             return false;
@@ -175,13 +178,13 @@ export default class ConcreteInstance extends Instance {
         } else {
             const names = Object.getOwnPropertyNames(this.values);
             const otherNames = Object.getOwnPropertyNames(obj.values);
-            if(names.length!=otherNames.length) {
+            if(names.length !== otherNames.length) {
                 return false;
             }
             for(let i=0;i<names.length;i++) {
                 const v1 = this.values[names[i]] || null;
                 const v2 = obj.values[names[i]];
-                if(v1==v2) {
+                if(v1 === v2) {
                     continue;
                 } else if(v1==null || v2==null) {
                     return false;
@@ -206,7 +209,7 @@ export default class ConcreteInstance extends Instance {
     toString() {
         const props = [];
         for(const name in this.values) {
-            if("dbId" !== name)
+            if("dbId" !== name && typeof(this[name]) !== 'function')
                 props.push(name + ":" + this.values[name].toString())
         }
         return "{" + props.join(", ") + "}";

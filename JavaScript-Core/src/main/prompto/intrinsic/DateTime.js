@@ -258,3 +258,7 @@ DateTime.prototype.getTime = function() {
     epoch = epoch % (24 * 60 * 60 * 1000);
     return new LocalTime(new Date(epoch));
 };
+
+DateTime.prototype.toJsonNode = function() {
+    return this.toString();
+};

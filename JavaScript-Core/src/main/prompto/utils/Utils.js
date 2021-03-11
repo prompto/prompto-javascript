@@ -278,17 +278,27 @@ export function getTypeName(value) {
     }
 }
 
-export function convertToJson(o) {
+export function convertToJsonNode(o) {
     var type = typeof(o);
     switch(type) {
+        case 'undefined':
+            return null;
         case 'boolean':
         case 'number':
         case 'string':
             return o;
         default:
-            return o && o.toJson ? o.toJson() : JSON.stringify(o);
+            if(o == null)
+                return null;
+            else
+                return o.toJsonNode ? o.toJsonNode() : JSON.stringify(o);
     }
 }
 
+
+export function convertToJson(o) {
+    var node = convertToJsonNode(o);
+    return JSON.stringify(node);
+}
 
 export default {}

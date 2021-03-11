@@ -1,6 +1,7 @@
 import Section from "../parser/Section.js";
 import { SyntaxError } from '../error/index.js';
 import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from './index.js';
+import { convertToJson, convertToJsonNode } from '../utils/index.js';
 
 export default class BaseType extends Section {
  
@@ -362,8 +363,16 @@ export default class BaseType extends Section {
     }
 
     declareMember(transpiler, section, name) {
-        if("text" !== name)
-            transpiler.context.problemListener.reportUnknownAttribute(section, name);
+        switch(name) {
+            case "text":
+                break;
+            case "json":
+                transpiler.require(convertToJson);
+                transpiler.require(convertToJsonNode);
+                break;
+            default:
+                transpiler.context.problemListener.reportUnknownAttribute(section, name);
+        }
     }
 
     transpileMember(transpiler, name) {
