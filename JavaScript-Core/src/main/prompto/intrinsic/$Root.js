@@ -110,7 +110,7 @@ $Root.prototype.setMember = function(name, value, storable, mutable, isEnum) {
 };
 
 $Root.prototype.fromStored = function(stored) {
-    this.dbId = stored.dbId;
+	this.dbId = stored.getData("dbId");
     var names = this.getAttributeNames();
     names.forEach( function(name) {
         var value = stored.getData(name);
