@@ -149,7 +149,7 @@ Document.prototype.toJsonBlob = function(json, instanceId, fieldName, withType, 
         json[fieldName] = doc;
 };
 
-Document.prototype.fromJson = function(node, parts) {
+Document.prototype.fromJsonBlob = function(node, parts) {
     for (var key in node) {
         this[key] = this.readJsonField(node[key], parts);
     }

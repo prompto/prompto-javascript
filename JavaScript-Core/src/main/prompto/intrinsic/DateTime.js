@@ -245,7 +245,6 @@ DateTime.prototype.getTzName = function() {
     return "Z";
 };
 
-
 DateTime.prototype.getDate = function() {
     let epoch = this.date.valueOf();
     epoch = epoch - ( epoch % (24 * 60 * 60 * 1000) );

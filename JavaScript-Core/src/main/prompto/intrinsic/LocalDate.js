@@ -70,7 +70,6 @@ LocalDate.prototype.subtractDate = function(value) {
 };
 
 
-
 LocalDate.prototype.subtractPeriod = function(value) {
     var date = new LocalDate();
     var year = this.getUTCFullYear() - (value.years || 0);

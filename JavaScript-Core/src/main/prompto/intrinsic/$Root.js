@@ -74,7 +74,7 @@ $Root.prototype.getOrCreateDbId = function() {
 
 $Root.prototype.getAttributeNames = function() {
     return Object.getOwnPropertyNames(this).filter(function(name) {
-        return name!=="dbId" && name!=="$mutable" && name!=="$storable" && name!=="$categories" && typeof(this[name])!='function';
+        return name!=="dbId" && !name.startsWith('$') && typeof(this[name])!='function';
     }, this);
 };
 

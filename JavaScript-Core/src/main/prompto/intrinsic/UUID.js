@@ -188,7 +188,7 @@ UUID.lastFromTime = function(time) {
 UUID.fromString = function(strId) {
     var p = new RegExp("([0-9a-f]{8})-([0-9a-f]{4})-([0-9a-f]{4})-([0-9a-f]{2})([0-9a-f]{2})-([0-9a-f]{12})");
     var r = p.exec(strId);
-    if (r.length==7) {
+    if (r.length === 7) {
         r.splice(0, 1);
         var ints = r.map(function (s) {
             return parseInt(s, 16);

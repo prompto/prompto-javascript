@@ -153,7 +153,7 @@ StrictSet.prototype.hasAny = function(items, noCheckEquals) {
 StrictSet.prototype.equals = function(other) {
     if(!(other instanceof StrictSet))
         return false;
-    else if(this.length!=other.length)
+    else if(this.length !== other.length)
         return false;
     else {
         var iter = this.set.values();
