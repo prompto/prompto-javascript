@@ -21,7 +21,7 @@ BlobRef.fromValue = function(value) {
     var binaries = {};
     // create json type-aware object graph and collect binaries
     var values = {}; // need a temporary parent
-    value.toJson(values, null, "value", true, binaries);
+    value.toJsonBlob(values, null, "value", true, binaries);
     var json = JSON.stringify(values["value"]);
     // add it
     binaries["value.json"] = stringToUtf8Buffer(json);
