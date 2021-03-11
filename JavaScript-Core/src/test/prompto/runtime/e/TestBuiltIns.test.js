@@ -10,6 +10,14 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted BooleanJson', () => {
+	checkInterpretedOutput('builtins/booleanJson.pec');
+});
+
+test('Transpiled BooleanJson', () => {
+	checkTranspiledOutput('builtins/booleanJson.pec');
+});
+
 test('Interpreted BooleanText', () => {
 	checkInterpretedOutput('builtins/booleanText.pec');
 });
@@ -26,6 +34,14 @@ test('Transpiled CategoryCategory', () => {
 	checkTranspiledOutput('builtins/categoryCategory.pec');
 });
 
+test('Interpreted CategoryJson', () => {
+	checkInterpretedOutput('builtins/categoryJson.pec');
+});
+
+test('Transpiled CategoryJson', () => {
+	checkTranspiledOutput('builtins/categoryJson.pec');
+});
+
 test('Interpreted CategoryText', () => {
 	checkInterpretedOutput('builtins/categoryText.pec');
 });
@@ -40,6 +56,14 @@ test('Interpreted CharCodePoint', () => {
 
 test('Transpiled CharCodePoint', () => {
 	checkTranspiledOutput('builtins/charCodePoint.pec');
+});
+
+test('Interpreted CharJson', () => {
+	checkInterpretedOutput('builtins/charJson.pec');
+});
+
+test('Transpiled CharJson', () => {
+	checkTranspiledOutput('builtins/charJson.pec');
 });
 
 test('Interpreted CharText', () => {
@@ -72,6 +96,14 @@ test('Interpreted DateDayOfYear', () => {
 
 test('Transpiled DateDayOfYear', () => {
 	checkTranspiledOutput('builtins/dateDayOfYear.pec');
+});
+
+test('Interpreted DateJson', () => {
+	checkInterpretedOutput('builtins/dateJson.pec');
+});
+
+test('Transpiled DateJson', () => {
+	checkTranspiledOutput('builtins/dateJson.pec');
 });
 
 test('Interpreted DateMonth', () => {
@@ -120,6 +152,14 @@ test('Interpreted DateTimeHour', () => {
 
 test('Transpiled DateTimeHour', () => {
 	checkTranspiledOutput('builtins/dateTimeHour.pec');
+});
+
+test('Interpreted DateTimeJson', () => {
+	checkInterpretedOutput('builtins/dateTimeJson.pec');
+});
+
+test('Transpiled DateTimeJson', () => {
+	checkTranspiledOutput('builtins/dateTimeJson.pec');
 });
 
 test('Interpreted DateTimeMilli', () => {
@@ -186,6 +226,14 @@ test('Transpiled DateYear', () => {
 	checkTranspiledOutput('builtins/dateYear.pec');
 });
 
+test('Interpreted DecimalJson', () => {
+	checkInterpretedOutput('builtins/decimalJson.pec');
+});
+
+test('Transpiled DecimalJson', () => {
+	checkTranspiledOutput('builtins/decimalJson.pec');
+});
+
 test('Interpreted DecimalText', () => {
 	checkInterpretedOutput('builtins/decimalText.pec');
 });
@@ -200,6 +248,14 @@ test('Interpreted DictCount', () => {
 
 test('Transpiled DictCount', () => {
 	checkTranspiledOutput('builtins/dictCount.pec');
+});
+
+test('Interpreted DictJson', () => {
+	checkInterpretedOutput('builtins/dictJson.pec');
+});
+
+test('Transpiled DictJson', () => {
+	checkTranspiledOutput('builtins/dictJson.pec');
 });
 
 test('Interpreted DictKeys', () => {
@@ -232,6 +288,14 @@ test('Interpreted DocumentCount', () => {
 
 test('Transpiled DocumentCount', () => {
 	checkTranspiledOutput('builtins/documentCount.pec');
+});
+
+test('Interpreted DocumentJson', () => {
+	checkInterpretedOutput('builtins/documentJson.pec');
+});
+
+test('Transpiled DocumentJson', () => {
+	checkTranspiledOutput('builtins/documentJson.pec');
 });
 
 test('Interpreted DocumentKeys', () => {
@@ -290,6 +354,14 @@ test('Transpiled IntegerFormat', () => {
 	checkTranspiledOutput('builtins/integerFormat.pec');
 });
 
+test('Interpreted IntegerJson', () => {
+	checkInterpretedOutput('builtins/integerJson.pec');
+});
+
+test('Transpiled IntegerJson', () => {
+	checkTranspiledOutput('builtins/integerJson.pec');
+});
+
 test('Interpreted IntegerText', () => {
 	checkInterpretedOutput('builtins/integerText.pec');
 });
@@ -322,6 +394,14 @@ test('Transpiled ListCount', () => {
 	checkTranspiledOutput('builtins/listCount.pec');
 });
 
+test('Interpreted ListJson', () => {
+	checkInterpretedOutput('builtins/listJson.pec');
+});
+
+test('Transpiled ListJson', () => {
+	checkTranspiledOutput('builtins/listJson.pec');
+});
+
 test('Interpreted ListText', () => {
 	checkInterpretedOutput('builtins/listText.pec');
 });
@@ -352,6 +432,14 @@ test('Interpreted PeriodHours', () => {
 
 test('Transpiled PeriodHours', () => {
 	checkTranspiledOutput('builtins/periodHours.pec');
+});
+
+test('Interpreted PeriodJson', () => {
+	checkInterpretedOutput('builtins/periodJson.pec');
+});
+
+test('Transpiled PeriodJson', () => {
+	checkTranspiledOutput('builtins/periodJson.pec');
 });
 
 test('Interpreted PeriodMillis', () => {
@@ -418,6 +506,14 @@ test('Transpiled SetCount', () => {
 	checkTranspiledOutput('builtins/setCount.pec');
 });
 
+test('Interpreted SetJson', () => {
+	checkInterpretedOutput('builtins/setJson.pec');
+});
+
+test('Transpiled SetJson', () => {
+	checkTranspiledOutput('builtins/setJson.pec');
+});
+
 test('Interpreted SetText', () => {
 	checkInterpretedOutput('builtins/setText.pec');
 });
@@ -456,6 +552,14 @@ test('Interpreted TextEndsWith', () => {
 
 test('Transpiled TextEndsWith', () => {
 	checkTranspiledOutput('builtins/textEndsWith.pec');
+});
+
+test('Interpreted TextJson', () => {
+	checkInterpretedOutput('builtins/textJson.pec');
+});
+
+test('Transpiled TextJson', () => {
+	checkTranspiledOutput('builtins/textJson.pec');
 });
 
 test('Interpreted TextLowercase', () => {
@@ -530,6 +634,14 @@ test('Transpiled TimeHour', () => {
 	checkTranspiledOutput('builtins/timeHour.pec');
 });
 
+test('Interpreted TimeJson', () => {
+	checkInterpretedOutput('builtins/timeJson.pec');
+});
+
+test('Transpiled TimeJson', () => {
+	checkTranspiledOutput('builtins/timeJson.pec');
+});
+
 test('Interpreted TimeMilli', () => {
 	checkInterpretedOutput('builtins/timeMilli.pec');
 });
@@ -576,6 +688,14 @@ test('Interpreted TupleText', () => {
 
 test('Transpiled TupleText', () => {
 	checkTranspiledOutput('builtins/tupleText.pec');
+});
+
+test('Interpreted UuidJson', () => {
+	checkInterpretedOutput('builtins/uuidJson.pec');
+});
+
+test('Transpiled UuidJson', () => {
+	checkTranspiledOutput('builtins/uuidJson.pec');
 });
 
 test('Interpreted UuidText', () => {

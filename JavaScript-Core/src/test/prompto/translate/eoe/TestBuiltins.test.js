@@ -1,5 +1,9 @@
 var compareResourceEOE = require("../../parser/BaseParserTest").compareResourceEOE;
 
+test('BooleanJson', () => {
+	compareResourceEOE('builtins/booleanJson.pec');
+});
+
 test('BooleanText', () => {
 	compareResourceEOE('builtins/booleanText.pec');
 });
@@ -8,12 +12,20 @@ test('CategoryCategory', () => {
 	compareResourceEOE('builtins/categoryCategory.pec');
 });
 
+test('CategoryJson', () => {
+	compareResourceEOE('builtins/categoryJson.pec');
+});
+
 test('CategoryText', () => {
 	compareResourceEOE('builtins/categoryText.pec');
 });
 
 test('CharCodePoint', () => {
 	compareResourceEOE('builtins/charCodePoint.pec');
+});
+
+test('CharJson', () => {
+	compareResourceEOE('builtins/charJson.pec');
 });
 
 test('CharText', () => {
@@ -30,6 +42,10 @@ test('DateDayOfMonth', () => {
 
 test('DateDayOfYear', () => {
 	compareResourceEOE('builtins/dateDayOfYear.pec');
+});
+
+test('DateJson', () => {
+	compareResourceEOE('builtins/dateJson.pec');
 });
 
 test('DateMonth', () => {
@@ -54,6 +70,10 @@ test('DateTimeDayOfYear', () => {
 
 test('DateTimeHour', () => {
 	compareResourceEOE('builtins/dateTimeHour.pec');
+});
+
+test('DateTimeJson', () => {
+	compareResourceEOE('builtins/dateTimeJson.pec');
 });
 
 test('DateTimeMilli', () => {
@@ -96,12 +116,20 @@ test('DateYear', () => {
 	compareResourceEOE('builtins/dateYear.pec');
 });
 
+test('DecimalJson', () => {
+	compareResourceEOE('builtins/decimalJson.pec');
+});
+
 test('DecimalText', () => {
 	compareResourceEOE('builtins/decimalText.pec');
 });
 
 test('DictCount', () => {
 	compareResourceEOE('builtins/dictCount.pec');
+});
+
+test('DictJson', () => {
+	compareResourceEOE('builtins/dictJson.pec');
 });
 
 test('DictKeys', () => {
@@ -118,6 +146,10 @@ test('DictValues', () => {
 
 test('DocumentCount', () => {
 	compareResourceEOE('builtins/documentCount.pec');
+});
+
+test('DocumentJson', () => {
+	compareResourceEOE('builtins/documentJson.pec');
 });
 
 test('DocumentKeys', () => {
@@ -148,6 +180,10 @@ test('IntegerFormat', () => {
 	compareResourceEOE('builtins/integerFormat.pec');
 });
 
+test('IntegerJson', () => {
+	compareResourceEOE('builtins/integerJson.pec');
+});
+
 test('IntegerText', () => {
 	compareResourceEOE('builtins/integerText.pec');
 });
@@ -164,6 +200,10 @@ test('ListCount', () => {
 	compareResourceEOE('builtins/listCount.pec');
 });
 
+test('ListJson', () => {
+	compareResourceEOE('builtins/listJson.pec');
+});
+
 test('ListText', () => {
 	compareResourceEOE('builtins/listText.pec');
 });
@@ -178,6 +218,10 @@ test('PeriodDays', () => {
 
 test('PeriodHours', () => {
 	compareResourceEOE('builtins/periodHours.pec');
+});
+
+test('PeriodJson', () => {
+	compareResourceEOE('builtins/periodJson.pec');
 });
 
 test('PeriodMillis', () => {
@@ -212,6 +256,10 @@ test('SetCount', () => {
 	compareResourceEOE('builtins/setCount.pec');
 });
 
+test('SetJson', () => {
+	compareResourceEOE('builtins/setJson.pec');
+});
+
 test('SetText', () => {
 	compareResourceEOE('builtins/setText.pec');
 });
@@ -230,6 +278,10 @@ test('TextCount', () => {
 
 test('TextEndsWith', () => {
 	compareResourceEOE('builtins/textEndsWith.pec');
+});
+
+test('TextJson', () => {
+	compareResourceEOE('builtins/textJson.pec');
 });
 
 test('TextLowercase', () => {
@@ -268,6 +320,10 @@ test('TimeHour', () => {
 	compareResourceEOE('builtins/timeHour.pec');
 });
 
+test('TimeJson', () => {
+	compareResourceEOE('builtins/timeJson.pec');
+});
+
 test('TimeMilli', () => {
 	compareResourceEOE('builtins/timeMilli.pec');
 });
@@ -290,6 +346,10 @@ test('TupleCount', () => {
 
 test('TupleText', () => {
 	compareResourceEOE('builtins/tupleText.pec');
+});
+
+test('UuidJson', () => {
+	compareResourceEOE('builtins/uuidJson.pec');
 });
 
 test('UuidText', () => {
