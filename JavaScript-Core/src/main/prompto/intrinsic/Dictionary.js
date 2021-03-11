@@ -1,5 +1,6 @@
 const List = require('./List.js').default;
 const StrictSet = require('./StrictSet.js').default;
+const Document = require('./Document.js').default;
 const NotMutableError = require('../error/NotMutableError.js').default;
 
 export default function Dictionary(mutable, entries) {
