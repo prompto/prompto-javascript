@@ -23,6 +23,10 @@ export default class TextValue extends Value {
         return this.value;
     }
 
+    toJsonNode() {
+        return this.value;
+    }
+
     Add(context, value) {
         return new TextValue(this.value + value.toString());
     }

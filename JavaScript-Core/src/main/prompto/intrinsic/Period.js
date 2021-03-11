@@ -1,3 +1,4 @@
+
 export default function Period(data) {
     var names = ["years", "months", "weeks", "days", "hours", "minutes", "seconds", "milliseconds"];
     for(var i=0;i<names.length; i++) {
@@ -23,19 +24,21 @@ Period.parse = function (text) {
             var c = text[i];
             // leading 'P' is mandatory
             if (!inPeriod) {
-                if (c == 'P') {
+                if (c === 'P') {
                     inPeriod = true;
                     continue;
                 } else {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
                 }
             }
             // check for time section
-            if (c == 'T') {
+            if (c === 'T') {
                 if (!inTime) {
                     inTime = true;
                     continue;
                 } else {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
                 }
             }
@@ -43,14 +46,17 @@ Period.parse = function (text) {
             var step = inTime ? steps.indexOf(c, 4) : steps.indexOf(c);
             if (step >= 0) {
                 if (step <= lastStep) {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
                 } else if (step > 3 && !inTime) {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
-                } else if (value == null) {
+                } else if (value === null) {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
-                } else if (step == 6) { // millis '.'
+                } else if (step === 6) { // millis '.'
                     inMillis = true;
-                } else if (step == 7 && !inMillis) {
+                } else if (step === 7 && !inMillis) {
                     step = 6;
                 }
                 data[step] = value;
@@ -58,16 +64,19 @@ Period.parse = function (text) {
                 value = null;
                 continue;
             }
-            if (c == '-') {
+            if (c === '-') {
                 if (value != null) {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
                 }
                 if (isNeg || inMillis) {
+                    // noinspection ExceptionCaughtLocallyJS
                     throw new Exception();
                 }
                 isNeg = true;
             }
             if (c < '0' || c > '9') {
+                // noinspection ExceptionCaughtLocallyJS
                 throw new Exception();
             }
             if (value != null) {
@@ -83,6 +92,7 @@ Period.parse = function (text) {
         }
         // must terminate by a value type
         if (value != null) {
+            // noinspection ExceptionCaughtLocallyJS
             throw new Error("Failed parsing period literal: " + text);
         }
         return new Period(data);
@@ -93,14 +103,14 @@ Period.parse = function (text) {
 
 
 Period.prototype.equals = function(obj) {
-    return this.years == obj.years &&
-        this.months == obj.months &&
-        this.weeks == obj.weeks &&
-        this.days == obj.days &&
-        this.hours == obj.hours &&
-        this.minutes == obj.minutes &&
-        this.seconds == obj.seconds &&
-        this.milliseconds == obj.milliseconds;
+    return this.years === obj.years &&
+        this.months === obj.months &&
+        this.weeks === obj.weeks &&
+        this.days === obj.days &&
+        this.hours === obj.hours &&
+        this.minutes === obj.minutes &&
+        this.seconds === obj.seconds &&
+        this.milliseconds === obj.milliseconds;
 };
 
 
@@ -151,9 +161,9 @@ Period.prototype.subtract = function(period) {
 
 Period.prototype.multiply = function(value) {
     var count = value;
-    if (count == 0) {
+    if (count === 0) {
         return new Period([]);
-    } else if (count == 1) {
+    } else if (count === 1) {
         return this;
     } else {
         var data = [];
@@ -219,4 +229,5 @@ Period.prototype.totalMilliseconds = function() {
 
 Period.prototype.getText = Period.prototype.toString;
 Period.prototype.toDocument = Period.prototype.toString;
+Period.prototype.toJson = function() { return JSON.stringify(this.toString()); };
 

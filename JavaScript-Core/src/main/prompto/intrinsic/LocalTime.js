@@ -1,3 +1,4 @@
+
 const Period = require('./Period.js').default;
 
 export default function LocalTime(value) {
@@ -25,9 +26,10 @@ LocalTime.prototype.toString = function() {
 
 LocalTime.prototype.getText = LocalTime.prototype.toString;
 LocalTime.prototype.toDocument = LocalTime.prototype.toString;
+LocalTime.prototype.toJson = function() { return JSON.stringify(this.toString()); };
 
 LocalTime.prototype.equals = function(obj) {
-    return obj instanceof LocalTime && this.valueOf() == obj.valueOf();
+    return obj instanceof LocalTime && this.valueOf() === obj.valueOf();
 };
 
 

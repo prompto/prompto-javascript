@@ -30,16 +30,19 @@ export default class DocumentType extends NativeType {
     }
 
     checkMember(context, section, name) {
-        if ("count"===name) {
-            return IntegerType.instance;
-        } else if("keys"===name) {
-            return new SetType(TextType.instance);
-        } else if ("values"===name) {
-            return new ListType(AnyType.instance);
-        } else if (name === "text")
-            return TextType.instance;
-        else
-            return AnyType.instance;
+        switch(name) {
+            case "count":
+                return IntegerType.instance;
+            case "keys":
+                return new SetType(TextType.instance);
+            case "values":
+                return new ListType(AnyType.instance);
+            case "text":
+            case "json":
+                return TextType.instance;
+            default:
+                return AnyType.instance;
+        }
     }
 
     checkAdd(context, section, other, tryReverse) {
@@ -88,23 +91,33 @@ export default class DocumentType extends NativeType {
     }
 
     declareMember(transpiler, section, name) {
-        if("keys"===name) {
-            transpiler.require(StrictSet);
-        } else if("values"===name) {
-            transpiler.require(List);
-        } else
-            ; // nothing to do
+        switch(name) {
+            case "keys":
+                transpiler.require(StrictSet);
+                break;
+            case "values":
+                transpiler.require(List);
+                break;
+        }
     }
 
     transpileMember(transpiler, name) {
-        if ("count"===name) {
+        switch(name) {
+            case "count":
             transpiler.append("$safe_length");
-        } else if("keys"===name || "values"===name) {
-            transpiler.append("$safe_" + name);
-        } else if ("text" === name) {
-            transpiler.append("getText()");
-        } else {
-            transpiler.append("$safe_getMember('").append(name).append("', false)");
+            break;
+            case "keys":
+            case "values":
+                transpiler.append("$safe_" + name);
+                break;
+            case "text":
+                transpiler.append("getText()");
+                break;
+            case "json":
+                transpiler.append("toJson()");
+                break;
+            default:
+                transpiler.append("$safe_getMember('").append(name).append("', false)");
         }
     }
 

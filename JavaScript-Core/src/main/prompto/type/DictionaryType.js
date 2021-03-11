@@ -1,8 +1,12 @@
 import ContainerType from './ContainerType.js'
-import { VoidType, TextType, BooleanType, IntegerType, ListType, SetType, EntryType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { Dictionary, StrictSet, List } from '../intrinsic/index.js'
-import { SwapMethodDeclaration, RemoveKeyMethodDeclaration, RemoveValueMethodDeclaration } from "../builtins/DictionaryTypeBuiltins.js";
+import {VoidType, TextType, BooleanType, IntegerType, ListType, SetType, EntryType} from './index.js'
+import {Identifier} from '../grammar/index.js'
+import {Dictionary, StrictSet, List, Document} from '../intrinsic/index.js'
+import {
+    SwapMethodDeclaration,
+    RemoveKeyMethodDeclaration,
+    RemoveValueMethodDeclaration
+} from "../builtins/DictionaryTypeBuiltins.js";
 
 export default class DictionaryType extends ContainerType {
 
@@ -41,7 +45,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     checkAdd(context, section, other, tryReverse) {
-        if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
+        if (other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             return this;
         } else {
             return super.checkAdd(context, section, other, tryReverse);
@@ -49,7 +53,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     declareAdd(transpiler, other, tryReverse, left, right) {
-        if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
+        if (other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             left.declare(transpiler);
             right.declare(transpiler);
         } else {
@@ -58,7 +62,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     transpileAdd(transpiler, other, tryReverse, left, right) {
-        if(other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
+        if (other instanceof DictionaryType && this.itemType.equals(other.itemType)) {
             left.transpile(transpiler);
             transpiler.append(".add(");
             right.transpile(transpiler);
@@ -69,7 +73,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     checkContains(context, section, other) {
-        if(other === TextType.instance) {
+        if (other === TextType.instance) {
             return BooleanType.instance;
         } else {
             return super.checkContains(context, other);
@@ -114,7 +118,7 @@ export default class DictionaryType extends ContainerType {
     }
 
     checkItem(context, other, section) {
-        if(other === TextType.instance) {
+        if (other === TextType.instance) {
             return this.itemType;
         } else {
             context.problemListener.reportIllegalItemType(section, other, [TextType.instance]);
@@ -145,34 +149,50 @@ export default class DictionaryType extends ContainerType {
     }
 
     checkMember(context, section, name) {
-        if ("count"==name) {
-            return IntegerType.instance;
-        } else if("keys"==name) {
-            return new SetType(TextType.instance);
-        } else if ("values"==name) {
-            return new ListType(this.itemType);
-        } else {
-            return super.checkMember(context, section, name);
+        switch (name) {
+            case "count":
+                return IntegerType.instance;
+            case "keys":
+                return new SetType(TextType.instance);
+            case "values":
+                return new ListType(this.itemType);
+            default:
+                return super.checkMember(context, section, name);
         }
     }
 
     declareMember(transpiler, section, name) {
-        if("keys"===name) {
-            transpiler.require(StrictSet);
-        } else if("values"==name) {
-            transpiler.require(List);
-        } else if ("count"!==name) {
-            super.declareMember(transpiler, section, name);
+        switch (name) {
+            case "keys":
+                transpiler.require(StrictSet);
+                break;
+            case "values":
+                transpiler.require(List);
+                break;
+            case "json":
+                transpiler.require(Document);
+                break;
+            case "count":
+                break;
+            default:
+                super.declareMember(transpiler, section, name);
         }
     }
 
     transpileMember(transpiler, name) {
-        if ("count"===name) {
-            transpiler.append("length");
-        } else if("keys"===name || "values"==name) {
-            transpiler.append(name);
-        } else {
-            super.transpileMember(transpiler, name);
+        switch(name) {
+            case "count":
+                transpiler.append("length");
+                break;
+            case "keys":
+            case "values":
+                transpiler.append(name);
+                break;
+            case "json":
+                transpiler.append("toJson()");
+                break;
+            default:
+             super.transpileMember(transpiler, name);
         }
     }
 

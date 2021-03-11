@@ -1,6 +1,7 @@
 import IterableType from './IterableType.js'
 import { BooleanType, IntegerType } from './index.js'
 import { Variable } from '../runtime/index.js'
+import { convertToJson } from '../utils/index'
 
 export default class ContainerType extends IterableType {
   
@@ -18,7 +19,7 @@ export default class ContainerType extends IterableType {
     }
 
     checkMember(context, section, name) {
-        if ("count" == name) {
+        if ("count" === name) {
             return IntegerType.instance;
         } else {
             return  super.checkMember(context, section, name);
@@ -26,16 +27,22 @@ export default class ContainerType extends IterableType {
     }
 
     declareMember(transpiler, section, name) {
-        if ("count" !== name) {
-            return  super.declareMember(transpiler, section, name);
+        switch(name) {
+            case "count":
+                break;
+            case "json":
+                transpiler.require(convertToJson);
+                break;
+            default:
+               super.declareMember(transpiler, section, name);
         }
     }
 
     transpileMember(transpiler, name) {
-        if ("count" == name) {
+        if ("count" === name) {
             transpiler.append("length");
         } else {
-            return  super.transpileMember(transpiler, name);
+            return super.transpileMember(transpiler, name);
         }
     }
 

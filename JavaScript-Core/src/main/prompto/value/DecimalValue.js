@@ -19,6 +19,10 @@ export default class DecimalValue extends Value {
         return decimalToString(this.value);
     }
 
+    toJsonNode() {
+        return this.value;
+    }
+
     convertToJavaScript() {
         return this.value;
     }

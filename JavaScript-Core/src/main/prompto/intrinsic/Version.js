@@ -1,3 +1,4 @@
+
 export default function Version(major, minor, fix) {
     this.major = major;
     this.minor = minor;
@@ -18,7 +19,7 @@ Version.parse = function(text) {
 
 
 Version.prototype.equals = function(obj) {
-    return obj instanceof Version && this.asInt() == obj.asInt();
+    return obj instanceof Version && this.asInt() === obj.asInt();
 };
 
 
@@ -54,5 +55,8 @@ Version.prototype.lte = function(other) {
 Version.prototype.cmp = function(value) {
     var a = this.asInt();
     var b = value.asInt();
-    return a > b ? 1 : (a == b ? 0 : -1);
+    return a > b ? 1 : (a === b ? 0 : -1);
 };
+
+
+Version.prototype.toJson = function() { return JSON.stringify(this.toString()); };

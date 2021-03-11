@@ -17,6 +17,10 @@ export default class VersionValue extends Value {
         return this.version.toString();
     }
 
+    toJsonNode() {
+        return this.version.toString();
+    }
+
     compareToValue(context, value) {
         if (value instanceof VersionValue) {
             return this.version.cmp(value.version);

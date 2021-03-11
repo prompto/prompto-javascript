@@ -35,29 +35,36 @@ export default class DocumentValue extends Value {
     }
 
     getMemberValue(context, name, autoCreate) {
-        if ("count"===name) {
-            return new IntegerValue(this.values.$safe_length);
-        } else if ("keys"===name) {
-            const keys = new StrictSet();
-            this.getMemberNames().forEach(name => {
-                keys.add(new TextValue(name));
-            });
-            return new SetValue(TextType.instance, keys);
-        } else if ("values"===name) {
-            const list = this.getMemberNames().map(function (name) {
-                return this.values[name];
-            }, this);
-            return new ListValue(AnyType.instance, list);
-        } else if(this.values.hasOwnProperty(name))
-            return this.values[name] || null;
-        else if("text" === name)
-            return new TextValue(this.toString());
-        else if(autoCreate) {
-            const result = new DocumentValue();
-            this.values[name] = result;
-            return result;
-        } else
-            return NullValue.instance;
+        switch(name) {
+            case "count":
+                return new IntegerValue(this.values.$safe_length);
+            case "keys": {
+                const keys = new StrictSet();
+                this.getMemberNames().forEach(name => {
+                    keys.add(new TextValue(name));
+                });
+                return new SetValue(TextType.instance, keys);
+            }
+            case "values": {
+                const list = this.getMemberNames().map(function (name) {
+                    return this.values[name];
+                }, this);
+                return new ListValue(AnyType.instance, list);
+            }
+            case "json":
+                return super.getMemberValue(context, name, autoCreate);
+            default:
+                if (this.values.hasOwnProperty(name))
+                    return this.values[name] || null;
+                else if ("text" === name)
+                    return new TextValue(this.toString());
+                else if (autoCreate) {
+                    const result = new DocumentValue();
+                    this.values[name] = result;
+                    return result;
+                } else
+                    return NullValue.instance;
+        }
     }
 
     setMember(context, name, value) {
@@ -142,6 +149,16 @@ export default class DocumentValue extends Value {
     declare(transpiler) {
         transpiler.require(Document);
     }
+
+    toJsonNode() {
+        const node = {};
+        Object.getOwnPropertyNames(this.values).forEach(function(key) {
+            const value = this.values[key];
+            node[key] = value ? value.toJsonNode() : null;
+        }, this);
+        return node;
+    }
+
 }
 
 

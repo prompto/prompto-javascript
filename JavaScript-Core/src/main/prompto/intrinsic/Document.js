@@ -5,7 +5,7 @@ const isANumber = require('../utils/Utils.js').isANumber;
 
 export default function Document(entries) {
     if(entries)
-        Object.getOwnPropertyNames(entries).forEach(function(name) { this[name] = entries[name]; }, this);
+        Object.getOwnPropertyNames(entries).filter(function(name) { return name !== "mutable"; }).forEach(function(name) { this[name] = entries[name]; }, this);
     return this;
 }
 
@@ -42,6 +42,9 @@ Object.defineProperty(Document.prototype, "$safe_values", {
 Document.prototype.toString = function() {
     return JSON.stringify(this);
 };
+
+
+Document.prototype.toJson = function() { return this; };
 
 
 Document.prototype.equals = function(other) {
@@ -117,7 +120,7 @@ Document.prototype.toDocument = function() {
 };
 
 
-Document.prototype.toJson = function(json, instanceId, fieldName, withType, binaries) {
+Document.prototype.toJsonBlob = function(json, instanceId, fieldName, withType, binaries) {
     var values = {};
     Object.getOwnPropertyNames(this).forEach(function (key) {
         var value = this[key];
@@ -125,7 +128,7 @@ Document.prototype.toJson = function(json, instanceId, fieldName, withType, bina
             values[key] = value;
         else {
             var id = this; // TODO create identifier
-            value.toJson(values, id, key, withType, binaries);
+            value.toJsonBlob(values, id, key, withType, binaries);
         }
     }, this);
     var doc = withType ? {type: "Document", value: values} : values;

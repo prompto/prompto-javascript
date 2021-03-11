@@ -14,6 +14,10 @@ export default class DateValue extends Value {
         return this.value.toString();
     }
 
+    toJsonNode() {
+        return this.value.toString();
+    }
+
     getStorableData() {
         return this.value;
     }

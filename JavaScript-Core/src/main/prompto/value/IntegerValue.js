@@ -19,6 +19,10 @@ export default class IntegerValue extends Value {
         return this.value.toString();
     }
 
+    toJsonNode() {
+        return this.value;
+    }
+
     getStorableData() {
         return this.value;
     }

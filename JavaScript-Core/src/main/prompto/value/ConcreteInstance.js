@@ -46,8 +46,7 @@ export default class ConcreteInstance extends Instance {
         let dbId = this.getDbId();
         if(dbId==null) {
             dbId = this.storable.getOrCreateDbId();
-            const value = convertFromJavaScript(dbId);
-            this.values["dbId"] = value;
+            this.values["dbId"] = convertFromJavaScript(dbId);
         }
         return dbId;
     }
@@ -85,14 +84,21 @@ export default class ConcreteInstance extends Instance {
     getMemberValue(context, attrName) {
         /* if(typeof(attrName) != typeof(""))
             throw "What?"; */
-        if("category" === attrName)
+        if ("category" === attrName)
             return this.getCategory(context);
+        else if ("json" === attrName)
+            return super.getMemberValue(context, attrName);
+        else
+            return this.getAttributeValue(context, attrName);
+    }
+
+    getAttributeValue(context, attrName) {
         const stacked = getActiveGetters()[attrName] || null;
         const first = stacked==null;
         if(first)
             getActiveGetters()[attrName] = context;
         try {
-            return this.doGetMember(context, attrName, first);
+            return this.doGetAttributeValue(context, attrName, first);
         } finally {
             if(first) {
                 delete getActiveGetters()[attrName];
@@ -105,14 +111,14 @@ export default class ConcreteInstance extends Instance {
         return new NativeInstance(context, decl, this.declaration);
     }
 
-    doGetMember(context, attrName, allowGetter) {
+    doGetAttributeValue(context, attrName, allowGetter) {
         const getter = allowGetter ? this.declaration.findGetter(context, attrName) : null;
         if (getter != null) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
         } else if (this.declaration.hasAttribute(context, attrName) || "dbId" === attrName) {
             return this.values[attrName] || NullValue.instance;
-        } else if ("text" == attrName) {
+        } else if ("text" === attrName) {
             return new TextValue(this.toString());
         } else
             return NullValue.instance;
@@ -128,7 +134,7 @@ export default class ConcreteInstance extends Instance {
         if(first)
             getActiveSetters()[attrName] = context;
         try {
-            this.doSetMember(context, attrName, value, first);
+            this.doSetAttributeValue(context, attrName, value, first);
         } finally {
             if(first) {
                 delete getActiveSetters()[attrName];
@@ -136,7 +142,7 @@ export default class ConcreteInstance extends Instance {
         }
     }
 
-    doSetMember(context, attrName, value, allowSetter) {
+    doSetAttributeValue(context, attrName, value, allowSetter) {
         const decl = context.getRegisteredDeclaration(attrName);
         const setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
         if(setter!=null) {
@@ -199,9 +205,9 @@ export default class ConcreteInstance extends Instance {
 
     toString() {
         const props = [];
-        for(const p in this.values) {
-            if("dbId"!=p)
-                props.push(p + ":" + this.values[p].toString())
+        for(const name in this.values) {
+            if("dbId" !== name)
+                props.push(name + ":" + this.values[name].toString())
         }
         return "{" + props.join(", ") + "}";
     }
@@ -270,6 +276,14 @@ export default class ConcreteInstance extends Instance {
             doc.values[name] = this.values[name].toDocumentValue(context);
         }, this);
         return doc;
+    }
+
+    toJsonNode() {
+        const node = {};
+        Object.getOwnPropertyNames(this.values).map(name => {
+            node[name] = this.values[name].toJsonNode();
+        }, this);
+        return node;
     }
 }
 

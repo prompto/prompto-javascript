@@ -18,6 +18,10 @@ export default class PeriodValue extends Value {
         }, this)
     }
 
+    toJsonNode() {
+        return this.value.toString();
+    }
+
     totalMilliseconds() {
         return this.value.totalMilliseconds();
     }

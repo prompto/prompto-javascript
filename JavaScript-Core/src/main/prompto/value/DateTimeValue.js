@@ -22,6 +22,11 @@ export default class DateTimeValue extends Value {
         return this.value.toString();
     }
 
+    toJsonNode() {
+        return this.value.toString();
+    }
+
+
     Add(context, value) {
         if (value instanceof PeriodValue) {
             const result = this.value.addPeriod(value.value);

@@ -107,5 +107,9 @@ export default class SetValue extends Container {
         return new ListValue(this.itemType, this.items.toArray());
     }
 
+    toJsonNode() {
+        return this.items.toArray().map(item => item.toJsonNode());
+    }
+
 }
 

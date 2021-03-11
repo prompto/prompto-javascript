@@ -19,11 +19,11 @@ DateTime.parse = function(text) {
     text = text.substring(4);
     var month = 1;
     var day = 1;
-    if(text[0]=='-') {
+    if(text[0] === '-') {
         text = text.substring(1); // skip "-"
         month = parseInt(text.substring(0,2));
         text = text.substring(2);
-        if(text[0]=='-') {
+        if(text[0] === '-') {
             text = text.substring(1); // skip "-"
             day = parseInt(text.substring(0,2));
             text = text.substring(2);
@@ -33,19 +33,19 @@ DateTime.parse = function(text) {
     var minute = 0;
     var second = 0;
     var milli = 0;
-    if(text[0]=='T') {
+    if(text[0] === 'T') {
         text = text.substring(1); // skip "T"
         hour = parseInt(text.substring(0,2));
         text = text.substring(2);
-        if(text[0]==':') {
+        if(text[0] === ':') {
             text = text.substring(1); // skip ":"
             minute = parseInt(text.substring(0,2));
             text = text.substring(2);
-            if(text[0]==':') {
+            if(text[0] === ':') {
                 text = text.substring(1); // skip ":"
                 second = parseInt(text.substring(0, 2));
                 text = text.substring(2);
-                if (text[0] == '.') {
+                if (text[0] === '.') {
                     text = text.substring(1); // skip "."
                     milli = parseInt(text.substring(0, 3));
                     text = text.substring(3);
@@ -55,12 +55,12 @@ DateTime.parse = function(text) {
     }
     var date = new Date(Date.UTC(year, month-1, day, hour, minute, second, milli));
     var tzOffset = 0; // in seconds
-    if(text[0]=='+' || text[0]=='-') {
-        var sign = text[0]=='+' ? 1 : -1;
+    if(text[0] === '+' || text[0] === '-') {
+        var sign = text[0] === '+' ? 1 : -1;
         text = text.substring(1); // skip "+/-"
         tzOffset = parseInt(text.substring(0, 2)) * 60 * 60;
         text = text.substring(2);
-        if (text[0] == ':') {
+        if (text[0] === ':') {
             text = text.substring(1); // skip ":"
             tzOffset += parseInt(text.substring(0, 2)) * 60;
         }
@@ -146,7 +146,7 @@ DateTime.prototype.toString = function() {
     s += ("00" + this.date.getUTCSeconds()).slice(-2);
     s += ".";
     s += ("000" + this.date.getUTCMilliseconds()).slice(-3);
-    if(this.tzOffset == 0)
+    if(this.tzOffset === 0)
         return s + "Z";
     var offset = this.tzOffset;
     if (offset > 0)
@@ -164,10 +164,11 @@ DateTime.prototype.toString = function() {
 
 DateTime.prototype.getText = DateTime.prototype.toString;
 DateTime.prototype.toDocument = DateTime.prototype.toString;
+DateTime.prototype.toJson = function() { return JSON.stringify(this.toString()); };
 
 
 DateTime.prototype.equals = function(value) {
-    return value instanceof DateTime && this.date.valueOf() == value.date.valueOf() && this.tzOffset == value.tzOffset;
+    return value instanceof DateTime && this.date.valueOf() === value.date.valueOf() && this.tzOffset === value.tzOffset;
 };
 
 DateTime.prototype.gt = function(other) {
@@ -193,7 +194,7 @@ DateTime.prototype.lte = function(other) {
 DateTime.prototype.compareTo = function(date, tzOffset) {
     var a = this.date.valueOf() + this.tzOffset * 60000;
     var b = date.valueOf() + tzOffset * 60000;
-    return a > b ? 1 : (a == b ? 0 : -1);
+    return a > b ? 1 : (a === b ? 0 : -1);
 };
 
 

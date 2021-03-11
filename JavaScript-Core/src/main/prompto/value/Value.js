@@ -68,10 +68,17 @@ export default class Value {
     }
 
     getMemberValue(context, name) {
-        if("text" == name)
+        if("text" === name)
             return new TextValue(this.toString());
-        else
+        else if("json" === name) {
+            const node = this.toJsonNode();
+            return new TextValue(JSON.stringify(node));
+        } else
             throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
+    }
+
+    toJsonNode() {
+        throw new SyntaxError("toJsonNode not supported by " + this.constructor.name);
     }
 
     ConvertTo(type) {

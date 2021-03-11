@@ -12,8 +12,9 @@ import { $DataStore } from '../store/index.js'
 import { compareValues } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
 import { Section } from '../parser/index.js'
-const Any = require('../intrinsic/Any.js').default;
-const Category = require('../intrinsic/$Root.js').Category;
+import { Document, Any } from '../intrinsic/index.js'
+import { Category } from '../intrinsic/$Root.js'
+
 
 export default class CategoryType extends BaseType {
   
@@ -311,8 +312,15 @@ export default class CategoryType extends BaseType {
     }
 
     checkMember(context, section, name) {
-        if( "category" === name)
+        if ("category" === name)
             return new CategoryType(new Identifier("Category"));
+        else if ("json" === name)
+            return TextType.instance;
+        else
+            return this.checkAttribute(context, section, name);
+    }
+
+    checkAttribute(context, section, name) {
         const decl = context.getRegisteredDeclaration(this.name);
         if (decl == null) {
             context.problemListener.reportUnknownCategory(this.id, this.name);
@@ -321,14 +329,14 @@ export default class CategoryType extends BaseType {
         if (decl instanceof EnumeratedNativeDeclaration) {
             return decl.getType(context).checkMember(context, section, name);
         } else if (decl instanceof CategoryDeclaration) {
-            return this.checkCategoryMember(context, section, decl, name);
+            return this.checkCategoryAttribute(context, section, decl, name);
         } else {
             context.problemListener.reportUnknownCategory(this.id, this.name);
             return VoidType.instance;
         }
     }
 
-    checkCategoryMember(context, section, decl, name) {
+    checkCategoryAttribute(context, section, decl, name) {
         if(decl.storable && "dbId" === name)
             return AnyType.instance;
         else if (decl.hasAttribute(context, name)) {
@@ -349,17 +357,28 @@ export default class CategoryType extends BaseType {
     }
 
     declareMember(transpiler, section, name) {
-        if( "category" === name ) {
-            transpiler.require(Category);
+        switch(name) {
+            case "category":
+                transpiler.require(Category);
+                break;
+            case "json":
+                transpiler.require(Document);
+                break;
         }
         // TODO visit attributes
     }
 
     transpileMember(transpiler, name) {
-        if ("text" === name)
-            transpiler.append("getText()");
-        else
-            transpiler.append(name);
+        switch(name) {
+            case "text":
+                transpiler.append("getText()");
+                break;
+            case "json":
+                transpiler.append("toDocument().toJson()");
+                break;
+            default:
+                transpiler.append(name);
+        }
     }
 
     checkStaticMember(context, section, id) {
@@ -370,7 +389,7 @@ export default class CategoryType extends BaseType {
         } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
             return decl.getType(context).checkStaticMember(context, section, id);
         } else if(decl instanceof SingletonCategoryDeclaration) {
-            return this.checkCategoryMember(context, section, decl, id);
+            return this.checkCategoryAttribute(context, section, decl, id);
         } else {
             context.getProblemListener().reportUnknownAttribute(id, id.name);
             return null;

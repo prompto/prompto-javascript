@@ -241,7 +241,7 @@ export function compareValues(value1, value2) {
     } else {
         const s1 = value1.toString();
         const s2 = value2.toString();
-        return s1 > s2 ? 1 : s1 == s2 ? 0 : -1;
+        return s1 > s2 ? 1 : s1 === s2 ? 0 : -1;
     }
 }
 
@@ -251,6 +251,7 @@ export function getTypeName(value) {
         return "null";
     }
     const t = typeof(value);
+    // noinspection FallThroughInSwitchStatementJS
     switch(t) {
         case "function":
             if(value.name)
@@ -276,5 +277,18 @@ export function getTypeName(value) {
             return t;
     }
 }
+
+export function convertToJson(o) {
+    var type = typeof(o);
+    switch(type) {
+        case 'boolean':
+        case 'number':
+        case 'string':
+            return o;
+        default:
+            return o && o.toJson ? o.toJson() : JSON.stringify(o);
+    }
+}
+
 
 export default {}

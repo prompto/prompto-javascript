@@ -17,11 +17,15 @@ export default class CharacterValue extends Value {
     }
 
     getMemberValue(context, name) {
-        if ("codePoint"==name) {
+        if ("codePoint" === name) {
             return new IntegerValue(this.value.charCodeAt(0));
         } else {
             return super.getMemberValue(context, name);
         }
+    }
+
+    toJsonNode() {
+        return this.value;
     }
 
     Add(context, value) {

@@ -226,7 +226,7 @@ export default class Transpiler {
     dedent() {
         if(this.line!==this.indents)
             this.lines.push(this.line);
-        if(this.indents.length==0) {
+        if(this.indents.length === 0) {
             throw new Error("Illegal dedent!");
         }
         this.indents = this.indents.slice(1);
@@ -422,16 +422,19 @@ function newTranspiler(context) {
     transpiler.lines.push("RangeError.prototype.getText = function() { return 'Index out of range!'; };");
     transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; }");
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
+    transpiler.lines.push("Boolean.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("Boolean.prototype.equals = function(value) { return this === value; };");
     transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
     transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
     transpiler.lines.push("Number.prototype.getText = Number.prototype.toString;");
+    transpiler.lines.push("Number.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("Number.prototype.equals = function(value) { return this === value; };");
     transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
     transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
     transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
     transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
+    transpiler.lines.push("String.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");
     transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; };");
     transpiler.lines.push("String.prototype.equals = function(value) { return this === value; };");

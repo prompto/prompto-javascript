@@ -37,16 +37,18 @@ export default class DictionaryValue extends Value {
     }
 
     getMemberValue(context, name) {
-        if ("count"==name) {
+        if ("count" === name) {
             return new IntegerValue(this.dict.length);
-        } else if ("keys"==name) {
+        } else if ("json" === name) {
+            return super.getMemberValue(context, name);
+        } else if ("keys" === name) {
             const keys = new StrictSet();
             const iter = this.dict.keys.iterator();
             while(iter.hasNext()) {
                 keys.add(new TextValue(iter.next()));
             }
             return new SetValue(TextType.instance, keys);
-        } else if ("values"==name) {
+        } else if ("values" === name) {
             const list = this.dict.$keys.map(function(name) {
                 return this.dict[name];
             }, this);
@@ -120,6 +122,15 @@ export default class DictionaryValue extends Value {
         this.dict.removeValue(value);
     }
 
+    toJsonNode() {
+        const dict = {};
+        this.dict.$keys.forEach(function(key) {
+            dict[key] = this.dict[key].toJsonNode();
+        }, this);
+        return dict;
+
+    }
+
 }
 
 class KVPIterator {
@@ -150,9 +161,9 @@ class KVPValue extends Value {
     }
 
     getMemberValue(context, name) {
-        if ("key"==name) {
+        if ("key" === name) {
             return new TextValue(this.key);
-        } else if ("value"==name) {
+        } else if ("value" === name) {
             if (this.value.interpret) {
                 this.value = this.value.interpret(context);
             }

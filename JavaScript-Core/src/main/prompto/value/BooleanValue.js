@@ -33,6 +33,10 @@ export default class BooleanValue extends Value {
         return this.value;
     }
 
+    toJsonNode() {
+        return this.value;
+    }
+
     And(value) {
         if(value instanceof BooleanValue) {
             return BooleanValue.ValueOf(this.value && value.value);

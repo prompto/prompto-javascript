@@ -348,6 +348,8 @@ export default class BaseType extends Section {
     checkMember(context, section, name) {
         if("text" === name)
             return TextType.instance;
+        else if("json" === name)
+            return TextType.instance;
         else {
             context.problemListener.reportUnknownAttribute(section, name);
             return VoidType.instance;
@@ -365,10 +367,16 @@ export default class BaseType extends Section {
     }
 
     transpileMember(transpiler, name) {
-        if("text" === name)
-            transpiler.append("getText()");
-        else
-            throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
+        switch(name) {
+            case "text":
+                transpiler.append("getText()");
+                break;
+            case "json":
+                transpiler.append("toJson()");
+                break;
+            default:
+                throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
+        }
     }
 
     checkSlice(context) {

@@ -100,6 +100,11 @@ export default class ListValue extends BaseValueList {
         this.items.forEach(item => items.add(item));
         return new SetValue(this.type.itemType, items);
     }
+
+    toJsonNode() {
+        return this.items.map(item => item.toJsonNode());
+    }
+
 }
 
 
