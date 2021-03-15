@@ -17,11 +17,11 @@ export default class VersionType extends NativeType {
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if (other instanceof VersionType) {
             return BooleanType.instance;
         } else {
-            return super.checkCompare(context, other, section);
+            return super.checkCompare(context, section, other);
         }
     }
 

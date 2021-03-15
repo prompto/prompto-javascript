@@ -76,11 +76,11 @@ export default class TextType extends NativeType {
             return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if(other instanceof TextType || other instanceof CharacterType) {
             return BooleanType.instance;
         }
-        return super.checkCompare(context, other, section);
+        return super.checkCompare(context, section, other);
     }
 
     declareCompare(context, other) {
@@ -94,7 +94,7 @@ export default class TextType extends NativeType {
     }
 
     checkItem(context, other, expression) {
-        if(other==IntegerType.instance) {
+        if(other === IntegerType.instance) {
             return CharacterType.instance;
         } else {
             return super.checkItem(context, other, expression);

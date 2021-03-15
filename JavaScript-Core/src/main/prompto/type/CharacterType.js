@@ -85,7 +85,7 @@ export default class CharacterType extends NativeType {
             return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if(other instanceof CharacterType || other instanceof TextType) {
             return BooleanType.instance;
         }

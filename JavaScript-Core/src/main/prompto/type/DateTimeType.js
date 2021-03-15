@@ -86,11 +86,11 @@ export default class DateTimeType extends NativeType {
             return super.transpileSubtract(transpiler, other, left, right);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if(other === DateTimeType.instance || other instanceof DateType) {
             return BooleanType.instance;
         } else {
-            return super.checkCompare(context, other, section);
+            return super.checkCompare(context, section, other);
         }
     }
 

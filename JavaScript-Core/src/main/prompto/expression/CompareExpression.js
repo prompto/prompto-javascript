@@ -35,7 +35,7 @@ export default class CompareExpression extends Expression {
     }
 
     checkOperator(context, lt, rt) {
-        return lt.checkCompare(context, rt, this);
+        return lt.checkCompare(context, this, rt);
     }
 
     interpret(context) {

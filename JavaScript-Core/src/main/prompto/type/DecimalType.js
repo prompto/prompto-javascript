@@ -198,11 +198,11 @@ export default class DecimalType extends NativeType {
             super.transpileMember(transpiler, name);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if(other instanceof IntegerType || other instanceof DecimalType) {
             return BooleanType.instance;
         } else {
-            return super.checkCompare(context, other, section);
+            return super.checkCompare(context, section, other);
         }
     }
 

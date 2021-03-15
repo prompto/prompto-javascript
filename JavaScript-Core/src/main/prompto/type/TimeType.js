@@ -92,11 +92,11 @@ export default class TimeType extends NativeType {
             return super.transpileSubtract(transpiler, other, left, right);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if (other === TimeType.instance) {
             return BooleanType.instance;
         } else {
-            return super.checkCompare(context, other, section);
+            return super.checkCompare(context, section, other);
         }
     }
 

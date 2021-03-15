@@ -241,7 +241,7 @@ export default class BaseType extends Section {
         if(other instanceof EnumeratedNativeType)
             return this.checkCompare(context, section, other.derivedFrom);
         else
-            context.problemListener.reportError(section, "Cannot compare " + this.name + " to " + other.name);
+            context.problemListener.reportError(section, "Cannot compare " + this.name + " and " + other.name);
     }
 
     declareCompare(transpiler, other) {

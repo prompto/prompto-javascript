@@ -206,11 +206,11 @@ export default class IntegerType extends NativeType {
         value.transpile(transpiler);
     }
 
-    checkCompare(context, other, section) {
+    checkCompare(context, section, other) {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return BooleanType.instance;
         } else {
-            return super.checkCompare(context, other, section);
+            return super.checkCompare(context, section, other);
         }
     }
 
