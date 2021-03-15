@@ -44,6 +44,14 @@ test('DeepUnknownMethod problems', () => {
 	checkProblems('problems/deepUnknownMethod.poc');
 });
 
+test('IllegalComparison problems', () => {
+	checkProblems('problems/illegalComparison.poc');
+});
+
+test('IllegalItemType problems', () => {
+	checkProblems('problems/illegalItemType.poc');
+});
+
 test('IllegalOperation problems', () => {
 	checkProblems('problems/illegalOperation.poc');
 });
@@ -82,6 +90,10 @@ test('UnknownMemberMethod problems', () => {
 
 test('UnknownMethod problems', () => {
 	checkProblems('problems/unknownMethod.poc');
+});
+
+test('UnknownParameter problems', () => {
+	checkProblems('problems/unknownParameter.poc');
 });
 
 test('UnknownParentType problems', () => {

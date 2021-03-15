@@ -1,5 +1,5 @@
 import NativeType from './NativeType.js'
-import { CharacterType, IntegerType, BooleanType, DecimalType } from './index.js'
+import {CharacterType, IntegerType, BooleanType, DecimalType, VoidType} from './index.js'
 import { TextValue } from '../value/index.js'
 import { Identifier } from '../grammar/index.js'
 import { TypeFamily } from '../store/index.js'
@@ -93,11 +93,12 @@ export default class TextType extends NativeType {
         right.transpile(transpiler);
     }
 
-    checkItem(context, other, expression) {
-        if(other === IntegerType.instance) {
+    checkItem(context, itemType, section) {
+        if(itemType === IntegerType.instance) {
             return CharacterType.instance;
         } else {
-            return super.checkItem(context, other, expression);
+            context.problemListener.reportIllegalItemType(section, itemType, [IntegerType.instance]);
+            return VoidType.instance;
         }
     }
 

@@ -240,8 +240,10 @@ export default class BaseType extends Section {
     checkCompare(context, section, other) {
         if(other instanceof EnumeratedNativeType)
             return this.checkCompare(context, section, other.derivedFrom);
-        else
+        else {
             context.problemListener.reportError(section, "Cannot compare " + this.name + " and " + other.name);
+            return BooleanType.instance;
+        }
     }
 
     declareCompare(transpiler, other) {
@@ -327,7 +329,7 @@ export default class BaseType extends Section {
         if(itemType instanceof EnumeratedNativeType)
             return this.checkItem(context, itemType.derivedFrom, section);
         else {
-            context.problemListener.reportInvalidItem(this, itemType, null, section);
+            context.problemListener.reportError(section, "Invalid [] operator for: " + this.name);
             return VoidType.instance;
         }
     }

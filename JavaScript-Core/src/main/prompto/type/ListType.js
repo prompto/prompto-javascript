@@ -1,5 +1,5 @@
 import ContainerType from './ContainerType.js'
-import { IntegerType, SetType, BooleanType } from './index.js'
+import {IntegerType, SetType, BooleanType, VoidType} from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { List, StrictSet } from '../intrinsic/index.js'
 import { ListValue } from '../value/index.js'
@@ -112,11 +112,12 @@ export default class ListType extends ContainerType {
         }
     }
 
-    checkItem(context, itemType, expression) {
+    checkItem(context, itemType, section) {
         if(itemType===IntegerType.instance) {
             return this.itemType;
         } else {
-            return super.checkItem(context, itemType, expression);
+            context.problemListener.reportIllegalItemType(section, itemType, [IntegerType.instance]);
+            return VoidType.instance;
         }
     }
 
