@@ -367,3 +367,39 @@ function readExpectedProblems(fileName) {
     return docs.length > 0 ? docs[0] : [];
 }
 
+function parseSuggestionsSource(fileName, lexerClass, parserClass, builderClass) {
+    const input = exports.getResource(fileName);
+    const lexer = new lexerClass(input);
+    const tokens = new antlr4.CommonTokenStream(lexer);
+    const parser = new parserClass(tokens);
+    const tree = parser.declaration_list();
+    const builder = new builderClass(parser);
+    const walker = new antlr4.tree.ParseTreeWalker();
+    walker.walk(builder, tree);
+    const decls = builder.getNodeValue(tree);
+    return { lexer, parser, tree, decls };
+}
+
+function parseExpectedSuggestions(fileName) {
+    const idx = fileName.lastIndexOf(".");
+    const dialect = fileName.substring(fileName.length - 2, fileName.length - 1);
+    fileName = fileName.substring(0, idx) + "." + dialect + ".suggestions.yml";
+    fileName = fileName.replace("/", path.sep);
+    let fullPath = path.normalize(resourcesFolder + path.sep + fileName);
+    if(!fs.existsSync(fullPath))
+        fullPath = path.normalize(librariesFolder + path.sep + fileName);
+    const text = fs.readFileSync(fullPath).toString();
+    const docs = yaml.loadAll(text);
+    return docs.length > 0 ? docs[0] : [];
+}
+
+
+exports.checkSameSuggestions = function(fileName, lexerClass, parserClass, builderClass, suggesterClass) {
+    const { lexer, parser, tree, decls } = parseSuggestionsSource(fileName, lexerClass, parserClass, builderClass);
+    var context = prompto.runtime.Context.newGlobalsContext();
+    decls.register(context);
+    const { insertionPoint, suggestions } = parseExpectedSuggestions(fileName);
+    const suggester = new suggesterClass(lexer, parser, tree);
+    const suggested = suggester.suggestionsAt(context, insertionPoint);
+    expect(suggested).toEqual(suggestions);
+}
