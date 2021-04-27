@@ -398,8 +398,8 @@ exports.checkSameSuggestions = function(fileName, lexerClass, parserClass, build
     const { lexer, parser, tree, decls } = parseSuggestionsSource(fileName, lexerClass, parserClass, builderClass);
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
-    const { insertionPoint, suggestions } = parseExpectedSuggestions(fileName);
-    const suggester = new suggesterClass(lexer, parser, tree);
-    const suggested = suggester.suggestionsAt(context, insertionPoint);
+    const { caret, suggestions } = parseExpectedSuggestions(fileName);
+    const suggester = new suggesterClass(lexerClass, parser, tree);
+    const suggested = suggester.suggestionsAt(caret, context);
     expect(suggested).toEqual(suggestions);
 }
