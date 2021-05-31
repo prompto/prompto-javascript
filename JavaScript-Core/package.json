@@ -5,8 +5,6 @@
   "description": "prompto runtime for javascript",
   "repository": "prompto/prompto-javascript.git",
   "devDependencies": {
-    "ini": "1.3.8",
-    "node-notifier": "8.0.2",
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-dynamic-import": "^7.10.4",
@@ -15,6 +13,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
     "babel-loader": "^8.1.0",
+    "browserslist": "4.16.6",
     "compression-webpack-plugin": "^6.0.4",
     "elliptic": ">=6.5.4",
     "eslint": "^7.19.0",
@@ -22,12 +21,18 @@
     "eslint-plugin-es5": "^1.5.0",
     "eslint-plugin-jest": "^24.1.3",
     "fibers": "5.0.0",
+    "ini": "1.3.8",
     "jest": "^26.4.2",
     "js-yaml": "^4.0.0",
+    "lodash": "4.17.21",
+    "node-notifier": "8.0.2",
+    "ssri": "^6.0.2",
     "terser-webpack-plugin": "^4.2.2",
     "webpack": "^4.30.0",
     "webpack-cli": "^3.3.12",
-    "webpack-conditional-loader": "^1.0.12"
+    "webpack-conditional-loader": "^1.0.12",
+    "ws": "7.4.6",
+    "y18n": "^5.0.8"
   },
   "dependencies": {
     "antlr4": "4.9.2",
