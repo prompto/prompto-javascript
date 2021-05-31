@@ -19,7 +19,3 @@ test('Interpreted Path', () => {
 	runInterpretedTests('path/path.pec');
 });
 
-test('Transpiled Path', () => {
-	runTranspiledTests('path/path.pec');
-});
-
