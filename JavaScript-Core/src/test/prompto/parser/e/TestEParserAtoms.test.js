@@ -647,13 +647,13 @@ test('SimpleDate', () => {
 
 
 test('SimpleTime', () => {
-    var statement = "'15:03:10'";
-    var parser = new ETestParser(statement, false);
+    var literal = "'15:03:10'";
+    var parser = new ETestParser(literal, false);
     var literal = parser.parse_literal_expression();
     expect(literal).toBeTruthy();
     expect(literal instanceof prompto.literal.TimeLiteral).toBeTruthy();
     expect(literal.text).toEqual("'15:03:10'");
-    var expected = new Date();
+    var expected = new Date(0);
     expected.setUTCHours(15);
     expected.setUTCMinutes(3);
     expected.setUTCSeconds(10);
