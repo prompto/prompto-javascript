@@ -10,4 +10,35 @@ export default class JavaScriptItemExpression extends JavaScriptSelectorExpressi
     toString() {
         return this.parent.toString() + "[" + this.item.toString() + "]";
     }
+
+    interpret(context) {
+        const o = this.parent.interpret(context);
+        if(o!=null) {
+            return this.interpret_item(context, o);
+        } else {
+            return null;
+        }
+    }
+
+    transpile(transpiler) {
+        this.parent.transpile(transpiler);
+        transpiler.append("[");
+        this.item.transpile(transpiler);
+        transpiler.append("]");
+    }
+
+    getRoot() {
+        return this.parent.getRoot();
+    }
+
+    toDialect(writer) {
+        this.parent.toDialect(writer);
+        writer.append('[');
+        this.item.toDialect(writer);
+        writer.append(']');
+    }
+
+    interpret_item(context, o) {
+        return o[this.item.interpret(context)];
+    }
 }

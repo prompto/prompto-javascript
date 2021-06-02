@@ -1235,6 +1235,11 @@ export default class EPromptoBuilder extends EParserListener {
         this.setNodeValue(ctx, new javascript.JavaScriptItemExpression(exp));
     }
 
+    exitJavaScriptItemExpression(ctx) {
+        this.setNodeValue(ctx, this.getNodeValue(ctx.exp));
+    }
+
+
     exitJavaItemExpression(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
