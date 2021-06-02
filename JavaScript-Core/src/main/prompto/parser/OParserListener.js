@@ -2129,12 +2129,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#JavaScriptCategoryBinding.
-	enterJavaScriptCategoryBinding(ctx) {
+	// Enter a parse tree produced by OParser#JavascriptCategoryBinding.
+	enterJavascriptCategoryBinding(ctx) {
 	}
 
-	// Exit a parse tree produced by OParser#JavaScriptCategoryBinding.
-	exitJavaScriptCategoryBinding(ctx) {
+	// Exit a parse tree produced by OParser#JavascriptCategoryBinding.
+	exitJavascriptCategoryBinding(ctx) {
 	}
 
 
@@ -2255,12 +2255,12 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#JavaScriptNativeStatement.
-	enterJavaScriptNativeStatement(ctx) {
+	// Enter a parse tree produced by OParser#JavascriptNativeStatement.
+	enterJavascriptNativeStatement(ctx) {
 	}
 
-	// Exit a parse tree produced by OParser#JavaScriptNativeStatement.
-	exitJavaScriptNativeStatement(ctx) {
+	// Exit a parse tree produced by OParser#JavascriptNativeStatement.
+	exitJavascriptNativeStatement(ctx) {
 	}
 
 
@@ -3065,30 +3065,30 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by OParser#JavaScriptMethodExpression.
-	enterJavaScriptMethodExpression(ctx) {
+	// Enter a parse tree produced by OParser#JavascriptMethodExpression.
+	enterJavascriptMethodExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by OParser#JavaScriptMethodExpression.
-	exitJavaScriptMethodExpression(ctx) {
-	}
-
-
-	// Enter a parse tree produced by OParser#JavaScriptMemberExpression.
-	enterJavaScriptMemberExpression(ctx) {
-	}
-
-	// Exit a parse tree produced by OParser#JavaScriptMemberExpression.
-	exitJavaScriptMemberExpression(ctx) {
+	// Exit a parse tree produced by OParser#JavascriptMethodExpression.
+	exitJavascriptMethodExpression(ctx) {
 	}
 
 
-	// Enter a parse tree produced by OParser#JavaScriptItemExpression.
-	enterJavaScriptItemExpression(ctx) {
+	// Enter a parse tree produced by OParser#JavascriptMemberExpression.
+	enterJavascriptMemberExpression(ctx) {
 	}
 
-	// Exit a parse tree produced by OParser#JavaScriptItemExpression.
-	exitJavaScriptItemExpression(ctx) {
+	// Exit a parse tree produced by OParser#JavascriptMemberExpression.
+	exitJavascriptMemberExpression(ctx) {
+	}
+
+
+	// Enter a parse tree produced by OParser#JavascriptItemExpression.
+	enterJavascriptItemExpression(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#JavascriptItemExpression.
+	exitJavascriptItemExpression(ctx) {
 	}
 
 

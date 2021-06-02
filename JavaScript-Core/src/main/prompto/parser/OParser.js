@@ -9152,7 +9152,7 @@ export default class OParser extends AbstractParser {
 	            localctx.binding = this.python_category_binding();
 	            break;
 	        case OParser.JAVASCRIPT:
-	            localctx = new JavaScriptCategoryBindingContext(this, localctx);
+	            localctx = new JavascriptCategoryBindingContext(this, localctx);
 	            this.enterOuterAlt(localctx, 5);
 	            this.state = 1918;
 	            this.match(OParser.JAVASCRIPT);
@@ -9576,7 +9576,7 @@ export default class OParser extends AbstractParser {
 	            this.python_native_statement();
 	            break;
 	        case OParser.JAVASCRIPT:
-	            localctx = new JavaScriptNativeStatementContext(this, localctx);
+	            localctx = new JavascriptNativeStatementContext(this, localctx);
 	            this.enterOuterAlt(localctx, 5);
 	            this.state = 2007;
 	            this.match(OParser.JAVASCRIPT);
@@ -12074,7 +12074,7 @@ export default class OParser extends AbstractParser {
 	        var la_ = this._interp.adaptivePredict(this._input,216,this._ctx);
 	        switch(la_) {
 	        case 1:
-	            localctx = new JavaScriptMethodExpressionContext(this, localctx);
+	            localctx = new JavascriptMethodExpressionContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 2371;
 	            this.match(OParser.DOT);
@@ -12083,7 +12083,7 @@ export default class OParser extends AbstractParser {
 	            break;
 
 	        case 2:
-	            localctx = new JavaScriptMemberExpressionContext(this, localctx);
+	            localctx = new JavascriptMemberExpressionContext(this, localctx);
 	            this.enterOuterAlt(localctx, 2);
 	            this.state = 2373;
 	            this.match(OParser.DOT);
@@ -12092,7 +12092,7 @@ export default class OParser extends AbstractParser {
 	            break;
 
 	        case 3:
-	            localctx = new JavaScriptItemExpressionContext(this, localctx);
+	            localctx = new JavascriptItemExpressionContext(this, localctx);
 	            this.enterOuterAlt(localctx, 3);
 	            this.state = 2375;
 	            localctx.exp = this.javascript_item_expression();
@@ -27306,7 +27306,7 @@ class CSharpCategoryBindingContext extends Native_category_bindingContext {
 
 OParser.CSharpCategoryBindingContext = CSharpCategoryBindingContext;
 
-class JavaScriptCategoryBindingContext extends Native_category_bindingContext {
+class JavascriptCategoryBindingContext extends Native_category_bindingContext {
 
     constructor(parser, ctx) {
         super(parser);
@@ -27324,20 +27324,20 @@ class JavaScriptCategoryBindingContext extends Native_category_bindingContext {
 
 	enterRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.enterJavaScriptCategoryBinding(this);
+	        listener.enterJavascriptCategoryBinding(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.exitJavaScriptCategoryBinding(this);
+	        listener.exitJavascriptCategoryBinding(this);
 		}
 	}
 
 
 }
 
-OParser.JavaScriptCategoryBindingContext = JavaScriptCategoryBindingContext;
+OParser.JavascriptCategoryBindingContext = JavascriptCategoryBindingContext;
 
 class Python_category_bindingContext extends antlr4.ParserRuleContext {
 
@@ -27902,7 +27902,7 @@ class JavaNativeStatementContext extends Native_statementContext {
 
 OParser.JavaNativeStatementContext = JavaNativeStatementContext;
 
-class JavaScriptNativeStatementContext extends Native_statementContext {
+class JavascriptNativeStatementContext extends Native_statementContext {
 
     constructor(parser, ctx) {
         super(parser);
@@ -27919,20 +27919,20 @@ class JavaScriptNativeStatementContext extends Native_statementContext {
 
 	enterRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.enterJavaScriptNativeStatement(this);
+	        listener.enterJavascriptNativeStatement(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.exitJavaScriptNativeStatement(this);
+	        listener.exitJavascriptNativeStatement(this);
 		}
 	}
 
 
 }
 
-OParser.JavaScriptNativeStatementContext = JavaScriptNativeStatementContext;
+OParser.JavascriptNativeStatementContext = JavascriptNativeStatementContext;
 
 class Python2NativeStatementContext extends Native_statementContext {
 
@@ -32083,7 +32083,7 @@ class Javascript_selector_expressionContext extends antlr4.ParserRuleContext {
 }
 
 
-class JavaScriptMemberExpressionContext extends Javascript_selector_expressionContext {
+class JavascriptMemberExpressionContext extends Javascript_selector_expressionContext {
 
     constructor(parser, ctx) {
         super(parser);
@@ -32101,22 +32101,22 @@ class JavaScriptMemberExpressionContext extends Javascript_selector_expressionCo
 
 	enterRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.enterJavaScriptMemberExpression(this);
+	        listener.enterJavascriptMemberExpression(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.exitJavaScriptMemberExpression(this);
+	        listener.exitJavascriptMemberExpression(this);
 		}
 	}
 
 
 }
 
-OParser.JavaScriptMemberExpressionContext = JavaScriptMemberExpressionContext;
+OParser.JavascriptMemberExpressionContext = JavascriptMemberExpressionContext;
 
-class JavaScriptItemExpressionContext extends Javascript_selector_expressionContext {
+class JavascriptItemExpressionContext extends Javascript_selector_expressionContext {
 
     constructor(parser, ctx) {
         super(parser);
@@ -32130,22 +32130,22 @@ class JavaScriptItemExpressionContext extends Javascript_selector_expressionCont
 
 	enterRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.enterJavaScriptItemExpression(this);
+	        listener.enterJavascriptItemExpression(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.exitJavaScriptItemExpression(this);
+	        listener.exitJavascriptItemExpression(this);
 		}
 	}
 
 
 }
 
-OParser.JavaScriptItemExpressionContext = JavaScriptItemExpressionContext;
+OParser.JavascriptItemExpressionContext = JavascriptItemExpressionContext;
 
-class JavaScriptMethodExpressionContext extends Javascript_selector_expressionContext {
+class JavascriptMethodExpressionContext extends Javascript_selector_expressionContext {
 
     constructor(parser, ctx) {
         super(parser);
@@ -32163,20 +32163,20 @@ class JavaScriptMethodExpressionContext extends Javascript_selector_expressionCo
 
 	enterRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.enterJavaScriptMethodExpression(this);
+	        listener.enterJavascriptMethodExpression(this);
 		}
 	}
 
 	exitRule(listener) {
 	    if(listener instanceof OParserListener ) {
-	        listener.exitJavaScriptMethodExpression(this);
+	        listener.exitJavascriptMethodExpression(this);
 		}
 	}
 
 
 }
 
-OParser.JavaScriptMethodExpressionContext = JavaScriptMethodExpressionContext;
+OParser.JavascriptMethodExpressionContext = JavascriptMethodExpressionContext;
 
 class Javascript_method_expressionContext extends antlr4.ParserRuleContext {
 
