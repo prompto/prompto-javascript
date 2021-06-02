@@ -1201,7 +1201,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, child);
     }
 
-    exitJavaScriptMemberExpression(ctx) {
+    exitJavascriptMemberExpression(ctx) {
         const id = this.getNodeValue(ctx.name);
         this.setNodeValue(ctx, new javascript.JavaScriptMemberExpression(id));
     }
@@ -1257,7 +1257,7 @@ export default class OPromptoBuilder extends OParserListener {
     }
 
 
-    exitJavaScriptNativeStatement(ctx) {
+    exitJavascriptNativeStatement(ctx) {
         const stmt = this.getNodeValue(ctx.javascript_native_statement());
         this.setNodeValue(ctx, stmt);
     }
@@ -1313,7 +1313,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new java.JavaThisExpression());
     }
 
-    exitJavaScriptMethodExpression(ctx) {
+    exitJavascriptMethodExpression(ctx) {
         const method = this.getNodeValue(ctx.method);
         this.setNodeValue(ctx, method);
     }
@@ -1413,7 +1413,7 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new java.JavaNativeCategoryBinding(map));
     }
 
-    exitJavaScriptCategoryBinding(ctx) {
+    exitJavascriptCategoryBinding(ctx) {
         this.setNodeValue(ctx, this.getNodeValue(ctx.binding));
     }
 
