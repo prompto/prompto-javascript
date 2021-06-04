@@ -10,6 +10,7 @@ var execute = BaseParserTest.execute;
 var executeTest = BaseParserTest.executeTest;
 var interpret = BaseParserTest.interpret;
 var interpretTest = prompto.runtime.Interpreter.interpretTest;
+var checkSameSuggestions = BaseParserTest.checkSameSuggestions;
 
 var Out = require("../runtime/utils/Out").Out;
 
@@ -145,6 +146,15 @@ exports.checkTranspiledOutput = function(fileName) {
     exports.executeResource(fileName);
     checkSameOutput(fileName);
 };
+
+exports.checkProblems = function(fileName) {
+    checkSameProblems(fileName, exports.parseResource);
+};
+
+exports.checkSuggestions = function(fileName) {
+    checkSameSuggestions(fileName, prompto.parser.EIndentingLexer, prompto.parser.ECleverParser, prompto.parser.EPromptoBuilder, prompto.suggest.ESuggester);
+};
+
 
 exports.loadDependency = function(libraryName) {
     if (BaseParserTest.coreContext == null)

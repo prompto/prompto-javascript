@@ -6,6 +6,7 @@ var checkSameOutput = BaseParserTest.checkSameOutput;
 var execute = BaseParserTest.execute;
 var interpret = BaseParserTest.interpret;
 var checkSameProblems = BaseParserTest.checkSameProblems;
+var checkSameSuggestions = BaseParserTest.checkSameSuggestions;
 
 function parse(input) {
 	var parser = new prompto.parser.OCleverParser(input);
@@ -47,4 +48,8 @@ exports.checkTranspiledOutput = function(fileName) {
 
 exports.checkProblems = function(fileName) {
 	checkSameProblems(fileName, exports.parseResource);
+};
+
+exports.checkSuggestions = function(fileName) {
+	checkSameSuggestions(fileName, prompto.parser.ONamingLexer, prompto.parser.OCleverParser, prompto.parser.OPromptoBuilder, prompto.suggest.OSuggester);
 };
