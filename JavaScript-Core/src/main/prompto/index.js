@@ -16,11 +16,12 @@ import * as problem from './problem/index.js';
 import * as runtime from './runtime/index.js';
 import * as statement from './statement/index.js';
 import * as store from './store/index.js';
+import * as suggest from './suggest/index.js';
 import * as type from './type/index.js';
 import * as value from './value/index.js';
 import * as utils from './utils/index.js';
 
-export { csharp, declaration, error, expression, grammar, intrinsic, java, jsx, literal, store, memstore, param, parser, problem, runtime, statement, type, utils, value };
+export { csharp, declaration, error, expression, grammar, intrinsic, java, jsx, literal, store, memstore, param, parser, problem, runtime, statement, suggest, type, utils, value };
 
 import initAll from "./init.js"
 initAll();

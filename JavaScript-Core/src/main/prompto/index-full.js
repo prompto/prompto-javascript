@@ -16,6 +16,7 @@ import * as problem from './problem/index.js';
 import * as runtime from './runtime/index.js';
 import * as statement from './statement/index.js';
 import * as store from './store/index.js';
+import * as suggest from './suggest/index.js';
 import * as type from './type/index.js';
 import * as value from './value/index.js';
 
@@ -27,7 +28,7 @@ import * as internet from '../../../../JavaScript-Runtime/src/main/prompto/inter
 import * as io from '../../../../JavaScript-Runtime/src/main/prompto/io/index.js';
 import * as reader from '../../../../JavaScript-Runtime/src/main/prompto/reader/index.js';
 
-export { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store, memstore, param, parser, problem, runtime, statement, type, utils, value, internet, io, reader };
+export { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store, memstore, param, parser, problem, runtime, statement, suggest, type, utils, value, internet, io, reader };
 
 import initAll from "./init.js"
 initAll();

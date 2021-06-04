@@ -1,6 +1,3 @@
-import {ONamingLexer, OCleverParser, OPromptoBuilder} from "../../../main/prompto/parser";
-import OSuggester from "../../../main/prompto/suggestions/OSuggester";
-
 var antlr4 = require("antlr4");
 var prompto = require("../../../main/prompto/index");
 var BaseParserTest = require("./BaseParserTest");
@@ -54,5 +51,5 @@ exports.checkProblems = function(fileName) {
 };
 
 exports.checkSuggestions = function(fileName) {
-	checkSameSuggestions(fileName, ONamingLexer, OCleverParser, OPromptoBuilder, OSuggester);
+	checkSameSuggestions(fileName, prompto.parser.ONamingLexer, prompto.parser.OCleverParser, prompto.parser.OPromptoBuilder, prompto.suggest.OSuggester);
 };

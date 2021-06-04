@@ -393,7 +393,6 @@ function parseExpectedSuggestions(fileName) {
     return docs.length > 0 ? docs[0] : [];
 }
 
-
 exports.checkSameSuggestions = function(fileName, lexerClass, parserClass, builderClass, suggesterClass) {
     const { lexer, parser, tree, decls } = parseSuggestionsSource(fileName, lexerClass, parserClass, builderClass);
     var context = prompto.runtime.Context.newGlobalsContext();

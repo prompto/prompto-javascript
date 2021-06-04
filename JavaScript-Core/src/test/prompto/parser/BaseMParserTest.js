@@ -5,6 +5,7 @@ var getResource = BaseParserTest.getResource;
 var checkSameOutput = BaseParserTest.checkSameOutput;
 var execute = BaseParserTest.execute;
 var interpret = BaseParserTest.interpret;
+var checkSameSuggestions = BaseParserTest.checkSameSuggestions;
 
 function parse(input) {
 	var parser = new prompto.parser.MCleverParser(input);
@@ -43,4 +44,9 @@ exports.checkInterpretedOutput = function(fileName) {
 exports.checkTranspiledOutput = function(fileName) {
     exports.executeResource(fileName);
     checkSameOutput(fileName);
+};
+
+
+exports.checkSuggestions = function(fileName) {
+    checkSameSuggestions(fileName, prompto.parser.MIndentingLexer, prompto.parser.MCleverParser, prompto.parser.MPromptoBuilder, prompto.suggest.MSuggester);
 };
