@@ -1,5 +1,21 @@
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
+test('ReadInDoWhile', () => {
+	compareResourceOMO('resource/readInDoWhile.poc');
+});
+
+test('ReadInForEach', () => {
+	compareResourceOMO('resource/readInForEach.poc');
+});
+
+test('ReadInIf', () => {
+	compareResourceOMO('resource/readInIf.poc');
+});
+
+test('ReadInWhile', () => {
+	compareResourceOMO('resource/readInWhile.poc');
+});
+
 test('ReadResource', () => {
 	compareResourceOMO('resource/readResource.poc');
 });

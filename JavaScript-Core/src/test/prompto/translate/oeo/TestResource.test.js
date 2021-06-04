@@ -1,5 +1,21 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('ReadInDoWhile', () => {
+	compareResourceOEO('resource/readInDoWhile.poc');
+});
+
+test('ReadInForEach', () => {
+	compareResourceOEO('resource/readInForEach.poc');
+});
+
+test('ReadInIf', () => {
+	compareResourceOEO('resource/readInIf.poc');
+});
+
+test('ReadInWhile', () => {
+	compareResourceOEO('resource/readInWhile.poc');
+});
+
 test('ReadResource', () => {
 	compareResourceOEO('resource/readResource.poc');
 });

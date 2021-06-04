@@ -10,6 +10,38 @@ afterEach( () => {
 	Out.restore();
 });
 
+test('Interpreted ReadInDoWhile', () => {
+	checkInterpretedOutput('resource/readInDoWhile.poc');
+});
+
+test('Transpiled ReadInDoWhile', () => {
+	checkTranspiledOutput('resource/readInDoWhile.poc');
+});
+
+test('Interpreted ReadInForEach', () => {
+	checkInterpretedOutput('resource/readInForEach.poc');
+});
+
+test('Transpiled ReadInForEach', () => {
+	checkTranspiledOutput('resource/readInForEach.poc');
+});
+
+test('Interpreted ReadInIf', () => {
+	checkInterpretedOutput('resource/readInIf.poc');
+});
+
+test('Transpiled ReadInIf', () => {
+	checkTranspiledOutput('resource/readInIf.poc');
+});
+
+test('Interpreted ReadInWhile', () => {
+	checkInterpretedOutput('resource/readInWhile.poc');
+});
+
+test('Transpiled ReadInWhile', () => {
+	checkTranspiledOutput('resource/readInWhile.poc');
+});
+
 test('Interpreted ReadResource', () => {
 	checkInterpretedOutput('resource/readResource.poc');
 });

@@ -1,7 +1,7 @@
 import Expression from './Expression.js'
 import { ResourceContext } from '../runtime/index.js'
 import { ResourceType, TextType } from '../type/index.js'
-import { TextValue } from '../value/index.js'
+import { NullValue, TextValue } from '../value/index.js'
 import { NullReferenceError, InvalidResourceError } from '../error/index.js'
 
 export default class ReadOneExpression extends Expression {
@@ -21,7 +21,7 @@ export default class ReadOneExpression extends Expression {
     }
 
     check(context) {
-        if(!(context instanceof ResourceContext))
+        if(!context.isWithResourceContext())
             context.problemListener.reportNotAResourceContext(this.resource);
         const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
@@ -30,7 +30,7 @@ export default class ReadOneExpression extends Expression {
     }
 
     interpret(context) {
-        if(!(context instanceof ResourceContext))
+        if(!context.isWithResourceContext())
             context.problemListener.reportNotAResourceContext(this.resource);
         const res = this.resource.interpret(context);
         if(res==null) {
@@ -40,7 +40,7 @@ export default class ReadOneExpression extends Expression {
             throw new InvalidResourceError("Not readable");
         }
         const s = res.readLine();
-        return new TextValue(s);
+        return s == null ? NullValue.instance : new TextValue(s);
     }
 
     declare(transpiler) {

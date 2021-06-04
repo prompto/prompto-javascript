@@ -65,6 +65,10 @@ class Context {
         return context === this.parent || (this.parent && this.parent.isChildOf(context));
     }
 
+    isWithResourceContext() {
+        return this.parent !== null && this.parent !== this && this.parent.isWithResourceContext()
+    }
+
     newResourceContext() {
         const context = new ResourceContext();
         context.globals = this.globals;
@@ -539,7 +543,12 @@ class ResourceContext extends Context {
     constructor() {
         super();
     }
+
+    isWithResourceContext() {
+        return true;
+    }
 }
+
 
 class InstanceContext extends Context {
 
