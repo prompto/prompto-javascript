@@ -1,5 +1,4 @@
 import BaseSuggester from "./BaseSuggester.js";
-import { AnnotationProcessors } from "../processor/index.js";
 import { OLexer } from "../parser/index.js";
 
 

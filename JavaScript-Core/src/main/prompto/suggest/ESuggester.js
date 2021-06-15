@@ -1,9 +1,8 @@
 import BaseSuggester from "./BaseSuggester.js";
-import { AnnotationProcessors } from "../processor/index.js";
 import { ELexer } from "../parser/index.js";
 
 
-export default class OSuggester extends BaseSuggester {
+export default class ESuggester extends BaseSuggester {
 
     getStartState() {
         return 160; // first state in EParser.declaration_list()

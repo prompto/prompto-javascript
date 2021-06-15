@@ -1,5 +1,4 @@
 import Expression from './Expression.js'
-import { ResourceContext } from '../runtime/index.js'
 import { ResourceType, TextType } from '../type/index.js'
 import { NullValue, TextValue } from '../value/index.js'
 import { NullReferenceError, InvalidResourceError } from '../error/index.js'

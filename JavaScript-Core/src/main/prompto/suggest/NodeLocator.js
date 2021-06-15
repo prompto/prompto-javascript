@@ -7,6 +7,7 @@ export default class NodeLocator {
         try {
             this._locateNodeBefore(tree, caret);
         } catch(e) {
+            return tree;
         }
         return this.nodeBefore || tree;
     }
@@ -32,8 +33,6 @@ export default class NodeLocator {
         if (token instanceof antlr4.CommonToken) {
             if(token.line > caret.line || (token.line === caret.line && token.column >= caret.column - 1))
                 throw new Error("after caret");
-            else
-                this.nodeBefore = tree;
         }
     }
 
