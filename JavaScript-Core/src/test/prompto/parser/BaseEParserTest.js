@@ -10,6 +10,7 @@ var execute = BaseParserTest.execute;
 var executeTest = BaseParserTest.executeTest;
 var interpret = BaseParserTest.interpret;
 var interpretTest = prompto.runtime.Interpreter.interpretTest;
+var checkSameProblems = BaseParserTest.checkSameProblems;
 var checkSameSuggestions = BaseParserTest.checkSameSuggestions;
 
 var Out = require("../runtime/utils/Out").Out;
@@ -40,7 +41,7 @@ exports.executeResource = function(fileName, methodName, args) {
 };
 
 
-exports.checkProblems = function(code, expected) {
+exports.checkProblemsInline = function(code, expected) {
     var listener = new prompto.problem.ProblemCollector();
     var parser = new prompto.parser.ECleverParser(code);
     parser.removeErrorListeners();

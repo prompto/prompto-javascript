@@ -1,34 +1,34 @@
-var checkProblems = require("../../parser/BaseEParserTest").checkProblems;
+var checkProblemsInline = require("../../parser/BaseEParserTest").checkProblemsInline;
 
 // TODO move this to generated TestProblems
 
 test('NoError', () => {
     var code = "define name as Text attribute\n";
-    checkProblems(code);
+    checkProblemsInline(code);
 });
 
 test('LexerError', () => {
     var code = "\"abc";
-    checkProblems(code, "mismatched input '\"' expecting {<EOF>, LF, COMMENT, 'define', ARONDBASE_IDENTIFIER}");
+    checkProblemsInline(code, "mismatched input '\"' expecting {<EOF>, LF, COMMENT, 'define', ARONDBASE_IDENTIFIER}");
 });
 
 test('SyntaxError', () => {
     var code = "define id as Text attribute\n" +
                "define name as";
-    checkProblems(code, "no viable alternative at input 'define name as'");
+    checkProblemsInline(code, "no viable alternative at input 'define name as'");
 });
 
 test('DuplicateAttribute', () => {
     var code = "define name as Text attribute\n" +
         "define name as Text attribute\n";
-    checkProblems(code, "Duplicate name: name");
+    checkProblemsInline(code, "Duplicate name: name");
 });
 
 test('DuplicateCategory', () => {
     var code = "define name as Text attribute\n" +
         "define Person as category with attribute name\n" +
         "define Person as category with attribute name\n";
-    checkProblems(code, "Duplicate name: Person");
+    checkProblemsInline(code, "Duplicate name: Person");
 });
 
 test('DuplicateTest', () => {
@@ -40,7 +40,7 @@ test('DuplicateTest', () => {
                 "\ta = 0\n" +
                 "and verifying:\n" +
                 "\ta = 0\n";
-    checkProblems(code, "Duplicate name: \"find id\"");
+    checkProblemsInline(code, "Duplicate name: \"find id\"");
 });
 
 
@@ -49,7 +49,7 @@ test('DuplicateMethod', () => {
             "\treturn 0\n" +
             "define print as method doing:\n" +
             "\treturn 0\n";
-    checkProblems(code, "Duplicate name: print");
+    checkProblemsInline(code, "Duplicate name: print");
 });
 
 test('NonDuplicateMethod', () => {
@@ -57,27 +57,27 @@ test('NonDuplicateMethod', () => {
         "\treturn 0\n" +
         "define print as method receiving Text t doing:\n" +
         "\treturn 0\n";
-    checkProblems(code);
+    checkProblemsInline(code);
 });
 
 test('UnknownCategory', () => {
     var code = "define customer as Customer attribute\n";
-    checkProblems(code, "Unknown category: Customer");
+    checkProblemsInline(code, "Unknown category: Customer");
 });
 
 test('KnownCategory', () => {
     var code = "define customer as Text attribute\n";
-    checkProblems(code);
+    checkProblemsInline(code);
 });
 
 test('UnknownAttribute', () => {
     var code = "define Customer as category with attribute cool\n";
-    checkProblems(code, "Unknown attribute: cool");
+    checkProblemsInline(code, "Unknown attribute: cool");
 });
 
 test('KnownAttribute', () => {
     var code = "define name as Text attribute\n" +
         "define Customer as category with attribute name\n";
-    checkProblems(code);
+    checkProblemsInline(code);
 });
 
