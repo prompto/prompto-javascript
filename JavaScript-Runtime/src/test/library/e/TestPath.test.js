@@ -9,6 +9,7 @@ beforeEach( () => {
 	Out.init();
 	BaseParserTest.coreContext = null;
 	loadDependency("path");
+	loadDependency("core");
 });
 
 afterEach( () => {
