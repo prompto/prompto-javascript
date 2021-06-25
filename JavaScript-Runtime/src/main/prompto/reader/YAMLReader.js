@@ -6,7 +6,9 @@ exports.yamlRead = function (text) {
 };
 
 function convert(obj) {
-    if(Array.isArray(obj))
+    if (node === null)
+        return null;
+    else if(Array.isArray(obj))
         return convertList(obj);
     else if(typeof(obj)===typeof({}))
         return convertDocument(obj);
