@@ -8,7 +8,7 @@ if(isNodeJs) {
     var path = require("path");
     var zlib = require('zlib');
 
-    function createTempFile(prefix, suffix, tmpdir) {
+    exports.createTempFile = function(prefix, suffix, tmpdir) {
         prefix = (typeof prefix !== 'undefined') ? prefix : 'tmp.';
         suffix = (typeof suffix !== 'undefined') ? suffix : '';
         tmpdir = tmpdir ? tmpdir : os.tmpdir();
@@ -44,7 +44,7 @@ if(isNodeJs) {
     exports.compressToTempPath = function (path) {
         var inflated = fs.createReadStream(path);
         try {
-            var deflatedFile = createTempFile("deflated", ".gz");
+            var deflatedFile = exports.createTempFile("deflated", ".gz");
             var deflated = fs.createWriteStream(deflatedFile);
             try {
                 inflated.pipe(zlib.createDeflate()).pipe(deflated);
@@ -59,7 +59,7 @@ if(isNodeJs) {
     exports.decompressToTempPath = function (path) {
         var deflated = fs.createReadStream(path);
         try {
-            var inflatedFile = createTempFile("inflated", ".raw");
+            var inflatedFile = exports.createTempFile("inflated", ".raw");
             var inflated = fs.createWriteStream(inflatedFile);
             try {
                 inflated.pipe(zlib.createInflate()).pipe(deflated);
