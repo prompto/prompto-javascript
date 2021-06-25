@@ -26,9 +26,12 @@ const utils = Object.assign({}, utils_core, utils_runtime);
 
 import * as internet from '../../../../JavaScript-Runtime/src/main/prompto/internet/index.js';
 import * as io from '../../../../JavaScript-Runtime/src/main/prompto/io/index.js';
+import * as path from '../../../../JavaScript-Runtime/src/main/prompto/path/index.js';
 import * as reader from '../../../../JavaScript-Runtime/src/main/prompto/reader/index.js';
+import * as writer from '../../../../JavaScript-Runtime/src/main/prompto/writer/index.js';
 
-export { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store, memstore, param, parser, problem, runtime, statement, suggest, type, utils, value, internet, io, reader };
+export { constraint, csharp, declaration, error, expression, grammar, instance, intrinsic, java, jsx, literal, store,
+    memstore, param, parser, problem, runtime, statement, suggest, type, utils, value, internet, io, path, reader, writer };
 
 import initAll from "./init.js"
 initAll();
