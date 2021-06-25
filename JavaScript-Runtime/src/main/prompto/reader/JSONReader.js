@@ -8,7 +8,7 @@ function toValue(node) {
         return null;
     else if (Array.isArray(node))
         return toList(node);
-    else if (typeof(node) === "object")
+    else if (typeof(node) === typeof({}))
         return toDocument(node);
     else
         return node;
