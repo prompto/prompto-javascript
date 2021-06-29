@@ -6,7 +6,7 @@ exports.yamlRead = function (text) {
 };
 
 function convert(obj) {
-    if (node === null)
+    if (obj === null)
         return null;
     else if(Array.isArray(obj))
         return convertList(obj);
