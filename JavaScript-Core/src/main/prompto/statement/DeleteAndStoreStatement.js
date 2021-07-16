@@ -1,16 +1,17 @@
 import BaseStatement from './BaseStatement.js'
 import { Dialect } from '../parser/index.js'
 import { VoidType, AnyType } from '../type/index.js'
-import { NullValue, Instance, Container } from '../value/index.js'
+import { NullValue, Instance, Container, DocumentValue } from '../value/index.js'
 import { $DataStore } from '../store/index.js'
 import {StatementList} from "./index";
 
-export default class StoreStatement extends BaseStatement {
+export default class DeleteAndStoreStatement extends BaseStatement {
  
-    constructor(del, add, andThen) {
+    constructor(del, add, meta, andThen) {
         super();
         this.del = del;
         this.add = add;
+        this.meta = meta;
         this.andThen = andThen;
     }
 
@@ -50,6 +51,17 @@ export default class StoreStatement extends BaseStatement {
                 writer.append(')');
             }
         }
+        if(this.meta) {
+            if(writer.dialect === Dialect.E) {
+                writer.append(" with ");
+                this.meta.toDialect(writer);
+                writer.append(" as metadata");
+            } else {
+                writer.append(" with metadata(");
+                this.meta.toDialect(writer);
+                writer.append(')');
+            }
+        }
         if(this.andThen) {
             if(writer.dialect === Dialect.O) {
                 writer.append(" then {").newLine().indent();
@@ -72,7 +84,7 @@ export default class StoreStatement extends BaseStatement {
             return true;
         else if (other == null)
             return false;
-        else if (!(other instanceof StoreStatement))
+        else if (!(other instanceof DeleteAndStoreStatement))
             return false;
         else
             return this.add.equals(other.add);
@@ -119,8 +131,17 @@ export default class StoreStatement extends BaseStatement {
     interpret(context) {
         const idsToDelete = this.getIdsToDelete(context);
         const storablesToAdd = this.getStorablesToAdd(context);
+        let auditMeta = null;
+        if(this.meta) {
+            const docValue = this.meta.interpret(context);
+            if(docValue instanceof DocumentValue ) {
+                auditMeta = $DataStore.instance.newAuditMetadata();
+                const doc = docValue.getStorableData();
+                doc.$user_keys.forEach(key => auditMeta[key] = doc[key]);
+            }
+        }
         if (idsToDelete || storablesToAdd)
-            $DataStore.instance.store(idsToDelete, storablesToAdd);
+            $DataStore.instance.deleteAndStore(idsToDelete, storablesToAdd, auditMeta);
         if(this.andThen)
             this.andThen.interpret(context);
     }
@@ -132,10 +153,12 @@ export default class StoreStatement extends BaseStatement {
     }
 
     transpile(transpiler) {
-        transpiler.append("$DataStore.instance.store").append(this.andThen?"Async":"").append("(");
+        transpiler.append("$DataStore.instance.deleteAndStore").append(this.andThen?"Async":"").append("(");
         this.transpileIdsToDelete(transpiler);
         transpiler.append(", ");
         this.transpileStorablesToAdd(transpiler);
+        transpiler.append(", ");
+        this.transpileMeta(transpiler);
         if(this.andThen) {
             transpiler.append(", function() {").indent();
             this.andThen.transpile(transpiler);
@@ -172,6 +195,13 @@ export default class StoreStatement extends BaseStatement {
             transpiler.append("return Array.from(storablesToAdd);").newLine();
             transpiler.dedent().append("})()");
         }
+    }
+
+    transpileMeta(transpiler) {
+        if (!this.meta)
+            transpiler.append("null");
+        else
+            this.meta.transpile(transpiler);
     }
 
     getIdsToDelete(context) {

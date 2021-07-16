@@ -1,3 +1,4 @@
+import { Document } from "../intrinsic/index.js"
 
 export default class Store {
   
@@ -13,8 +14,12 @@ export default class Store {
         throw new Error("Must override newStorableDocument!");
     }
 
-    store(add, del) {
-        throw new Error("Must override store!");
+    deleteAndStore(add, del, meta) {
+        throw new Error("Must override deleteAndStore!");
+    }
+
+    deleteAndStoresync(add, del, meta, andThen) {
+        throw new Error("Must override deleteAndStoresync!");
     }
 
     fetchUnique(dbId) {
@@ -27,6 +32,26 @@ export default class Store {
 
     fetchMany(query) {
         throw new Error("Must override fetchMany!");
+    }
+
+    fetchLatestAuditMetadataId(dbId) {
+        throw new Error("Must override fetchLatestAuditMetadataId!");
+    }
+
+    fetchAllAuditMetadataIds(dbId) {
+        throw new Error("Must override fetchAllAuditMetadataIds!");
+    }
+
+    fetchAuditMetadata(dbId) {
+        throw new Error("Must override fetchAuditMetadata!");
+    }
+
+    fetchAuditMetadataAsDocument(dbId) {
+        const auditMeta = this.fetchAuditMetadata(dbId);
+        const result = auditMeta ? new Document() : null;
+        if(result)
+            Object.keys(auditMeta).forEach(key => result[key] = auditMeta[key]);
+         return result;
     }
 }
 

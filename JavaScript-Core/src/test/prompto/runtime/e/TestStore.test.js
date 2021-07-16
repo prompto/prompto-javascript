@@ -34,6 +34,14 @@ test('Transpiled AsyncStore', () => {
 	checkTranspiledOutput('store/asyncStore.pec');
 });
 
+test('Interpreted AuditRecord', () => {
+	checkInterpretedOutput('store/auditRecord.pec');
+});
+
+test('Transpiled AuditRecord', () => {
+	checkTranspiledOutput('store/auditRecord.pec');
+});
+
 test('Interpreted DeleteRecords', () => {
 	checkInterpretedOutput('store/deleteRecords.pec');
 });

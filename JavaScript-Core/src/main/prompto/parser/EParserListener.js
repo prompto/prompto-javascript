@@ -2867,6 +2867,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#metadata.
+	enterMetadata(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#metadata.
+	exitMetadata(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#ArrowExpressionBody.
 	enterArrowExpressionBody(ctx) {
 	}

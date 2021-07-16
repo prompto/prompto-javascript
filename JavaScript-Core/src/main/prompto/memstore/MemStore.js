@@ -1,5 +1,6 @@
 import Store from '../store/Store.js'
-import { MemQueryBuilder, StorableDocument } from './index.js'
+import { MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata } from './index.js'
+import { DateTime, List } from '../intrinsic/index.js'
 
 // a utility class for running tests only
 export default class MemStore extends Store {
@@ -7,8 +8,12 @@ export default class MemStore extends Store {
     constructor() {
         super();
         this.sequences = {};
-        this.iterDocuments = {};
+        this.documents = {};
         this.nextDbId = 1;
+        this.audits = {};
+        this.nextAuditId = 1;
+        this.auditMetadatas = {};
+        this.nextAuditMetadataId = 1;
     }
 
     nextSequenceValue(name) {
@@ -25,30 +30,67 @@ export default class MemStore extends Store {
         return type === typeof(this.nextDbId);
     }
 
-    store(todel, toadd, andThen) {
-        if(todel) {
-            todel.forEach(function(dbId) {
-                delete this.iterDocuments[dbId];
-            }, this);
-        }
-        if(toadd) {
-            toadd.forEach(function(doc) {
-                const data = doc.document;
-                if(data.dbId)
-                    this.iterDocuments[data.dbId] = data;
-            }, this);
-        }
+    deleteAndStore(todel, toadd, auditMeta, andThen) {
+        auditMeta = this.storeAuditMetadata(auditMeta);
+        if(todel)
+            todel.forEach(dbId => this.doDelete(dbId, auditMeta), this);
+        if(toadd)
+            toadd.forEach(doc => this.doStore(doc, auditMeta), this);
         if(andThen)
             andThen();
     }
 
+    newAuditMetadata() {
+        const meta = new AuditMetadata();
+        meta.dbId = this.nextAuditMetadataId++;
+        meta.utcTimestamp = DateTime.now();
+        return meta;
+    }
+
+    storeAuditMetadata(auditMeta) {
+        if(auditMeta==null)
+            auditMeta = this.newAuditMetadata();
+        this.auditMetadatas[auditMeta.dbId] = auditMeta;
+        return auditMeta;
+
+    }
+
+    doDelete(dbId, auditMeta) {
+        delete this.documents[dbId];
+        const audit = this.newAuditRecord(auditMeta);
+        audit.instanceId = dbId;
+        audit.operation = "DELETE";
+        this.audits[audit.dbId] = audit;
+    }
+
+    doStore(doc, auditMeta) {
+        const data = doc.document;
+        if(data.dbId) {
+            const isInsert = this.documents[data.dbId] || false;
+            this.documents[data.dbId] = data;
+            const audit = this.newAuditRecord(auditMeta);
+            audit.instanceId = data.dbId;
+            audit.operation = isInsert ? "INSERT" : "UPDATE";
+            audit.instance = doc;
+            this.audits[audit.dbId] = audit;
+        }
+    }
+
+    newAuditRecord(auditMeta) {
+        const audit = new AuditRecord();
+        audit.dbId = this.nextAuditId++;
+        audit.auditMetadataId = auditMeta.dbId;
+        audit.utcTimestamp = auditMeta.utcTimestamp;
+        return audit;
+    }
+
     fetchUnique(dbId) {
-        return this.iterDocuments[dbId] || null;
+        return this.documents[dbId] || null;
     }
 
     fetchOne(query) {
-        for (const dbId in this.iterDocuments) {
-            const doc = this.iterDocuments[dbId];
+        for (const dbId in this.documents) {
+            const doc = this.documents[dbId];
             if(doc.matches(query.predicate))
                 return doc;
         }
@@ -133,8 +175,8 @@ export default class MemStore extends Store {
 
     fetchMatching(query) {
         const docs = [];
-        for (const dbId in this.iterDocuments) {
-            const doc = this.iterDocuments[dbId];
+        for (const dbId in this.documents) {
+            const doc = this.documents[dbId];
             if(doc.matches(query.predicate))
                 docs.push(doc);
         }
@@ -148,10 +190,24 @@ export default class MemStore extends Store {
     newStorableDocument(categories, dbIdListener) {
         return new StorableDocument(categories, dbIdListener);
     }
+
+    fetchLatestAuditMetadataId(dbId) {
+        const found = Object.values(this.audits).filter(a => a.instanceId === dbId )[0] || null;
+        return found ? found.auditMetadataId : null;
+    }
+
+    fetchAllAuditMetadataIds(dbId) {
+        const items = Object.values(this.audits).filter(a => a.instanceId === dbId ).map(a => a.dbId);
+        return new List(false, items);
+    }
+
+    fetchAuditMetadata(dbId) {
+        return this.auditMetadatas[dbId] || null;
+    }
 }
 
 
-MemStore.prototype.storeAsync = MemStore.prototype.store;
+MemStore.prototype.deleteAndStoreAsync = MemStore.prototype.deleteAndStore;
 
 
 function StoredIterable(docs, totalCount) {

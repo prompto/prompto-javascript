@@ -136,8 +136,9 @@ export default class MPromptoBuilder extends MParserListener {
     exitStore_statement(ctx) {
         const del = this.getNodeValue(ctx.to_del);
         const add = this.getNodeValue(ctx.to_add);
+        const meta = this.getNodeValue(ctx.with_meta);
         const stmts = this.getNodeValue(ctx.stmts);
-        const stmt = new statement.StoreStatement(del, add, stmts);
+        const stmt = new statement.DeleteAndStoreStatement(del, add, meta, stmts);
         this.setNodeValue(ctx, stmt);
     }
 
