@@ -187,8 +187,8 @@ export default class MemStore extends Store {
         return new MemQueryBuilder();
     }
 
-    newStorableDocument(categories, dbIdListener) {
-        return new StorableDocument(categories, dbIdListener);
+    newStorableDocument(categories, dbIdFactory) {
+        return new StorableDocument(categories, dbIdFactory);
     }
 
     fetchLatestAuditMetadataId(dbId) {

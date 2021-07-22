@@ -10,7 +10,7 @@ export default class Store {
         throw new Error("Must override newQueryBuilder!");
     }
 
-    newStorableDocument() {
+    newStorableDocument(categories, dbIdFactory) {
         throw new Error("Must override newStorableDocument!");
     }
 
@@ -18,8 +18,8 @@ export default class Store {
         throw new Error("Must override deleteAndStore!");
     }
 
-    deleteAndStoresync(add, del, meta, andThen) {
-        throw new Error("Must override deleteAndStoresync!");
+    deleteAndStoreAsync(add, del, meta, andThen) {
+        throw new Error("Must override deleteAndStoreAsync!");
     }
 
     fetchUnique(dbId) {

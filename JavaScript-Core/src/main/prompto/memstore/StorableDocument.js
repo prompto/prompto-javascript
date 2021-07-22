@@ -3,12 +3,12 @@ import { StoredDocument } from './index.js'
 
 export default class StorableDocument {
 
-    constructor(categories, dbIdListener) {
+    constructor(categories, dbIdFactory) {
         if(!categories)
             throw new Error("!!!");
         // use reserved keyword explicitly
         this.category = categories;
-        this.dbIdListener = dbIdListener;
+        this.dbIdFactory = dbIdFactory;
         this.document = null;
     }
 
@@ -27,10 +27,16 @@ export default class StorableDocument {
     getOrCreateDbId() {
         let dbId = this.getDbId();
         if (dbId == null) {
-            dbId = $DataStore.instance.nextDbId++;
-            if(this.dbIdListener)
-                this.dbIdListener(dbId);
-            this.setData("dbId", dbId, dbId);
+            if(this.dbIdFactory)
+                dbId = this.dbIdFactory.provider();
+            if(dbId != null)
+                this.setDbId(dbId);
+            else {
+                dbId = $DataStore.instance.nextDbId++;
+                if(this.dbIdFactory)
+                    this.dbIdFactory.listener(dbId);
+                this.setData("dbId", dbId, dbId);
+            }
         }
         return dbId;
     }

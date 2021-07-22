@@ -477,8 +477,9 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         transpiler.indent();
         const categories = this.collectCategories(transpiler.context);
         if(this.storable) {
-            transpiler.append("if(!this.$storable) {").newLine().indent()
-                .append("this.$storable = $DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'],  this.dbIdListener.bind(this));").newLine()
+            transpiler.append("if(!this.$storable) {").indent()
+                .append("var dbIdFactory = { provider: this.getDbId.bind(this), listener: this.setDbId.bind(this) };").newLine()
+                .append("this.$storable = $DataStore.instance.newStorableDocument(['").append(categories.join("', '")).append("'], dbIdFactory);").newLine()
                 .dedent().append("}").newLine();
         }
         this.transpileGetterSetterAttributes(transpiler);

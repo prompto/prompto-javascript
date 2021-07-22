@@ -17,7 +17,11 @@ export default class ConcreteInstance extends Instance {
         this.storable = null;
         if(declaration.storable) {
             const categories = declaration.collectCategories(context);
-            this.storable = $DataStore.instance.newStorableDocument(categories);
+            const dbIdFactory = {
+                provider: this.getDbId.bind(this),
+                listener: this.setDbId.bind(this)
+            };
+            this.storable = $DataStore.instance.newStorableDocument(categories, dbIdFactory);
         }
         this.mutable = false;
         this.values = {};
@@ -47,9 +51,13 @@ export default class ConcreteInstance extends Instance {
         let dbId = this.getDbId();
         if(dbId==null) {
             dbId = this.storable.getOrCreateDbId();
-            this.values["dbId"] = convertFromJavaScript(dbId);
+            this.setDbId(dbId);
         }
         return dbId;
+    }
+
+    setDbId(dbId) {
+        this.values["dbId"] = convertFromJavaScript(dbId);
     }
 
     getAttributeNames() {
