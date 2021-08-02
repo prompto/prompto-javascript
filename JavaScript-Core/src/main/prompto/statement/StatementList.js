@@ -70,6 +70,8 @@ export default class StatementList extends ObjectList {
             let section = null;
             const stmts = nativeOnly ? this.filter(stmt => stmt instanceof JavaScriptNativeCall, this) : this;
             const types = new TypeMap();
+            if(returnType !== null)
+                types.add(returnType);
             stmts.forEach(function (stmt) {
                 let type = this.checkStatement(context, stmt);
                 if (!stmt.canReturn())
@@ -79,7 +81,11 @@ export default class StatementList extends ObjectList {
                     types.add(type);
                 }
             }, this);
-            return types.inferType(context, section);
+            let type = types.inferType(context, section);
+            if(returnType !== null)
+                return returnType;
+            else
+                return type;
         }
     }
 
