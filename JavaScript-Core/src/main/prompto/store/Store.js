@@ -34,6 +34,14 @@ export default class Store {
         throw new Error("Must override fetchMany!");
     }
 
+    isAuditEnabled() {
+        throw new Error("Must override isAuditEnabled!");
+    }
+
+    newAuditMetadata() {
+        throw new Error("Must override newAuditMetadata!");
+    }
+
     fetchLatestAuditMetadataId(dbId) {
         throw new Error("Must override fetchLatestAuditMetadataId!");
     }

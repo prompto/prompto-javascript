@@ -40,6 +40,10 @@ export default class MemStore extends Store {
             andThen();
     }
 
+    isAuditEnabled() {
+        return true;
+    }
+
     newAuditMetadata() {
         const meta = new AuditMetadata();
         meta.dbId = this.nextAuditMetadataId++;
