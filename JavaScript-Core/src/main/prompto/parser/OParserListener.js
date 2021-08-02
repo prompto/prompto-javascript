@@ -2732,6 +2732,15 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by OParser#metadata.
+	enterMetadata(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#metadata.
+	exitMetadata(ctx) {
+	}
+
+
 	// Enter a parse tree produced by OParser#ArrowExpressionBody.
 	enterArrowExpressionBody(ctx) {
 	}

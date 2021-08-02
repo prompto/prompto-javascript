@@ -17,7 +17,7 @@ export {default as SwitchStatement} from './SwitchStatement.js';
 export {default as SwitchErrorStatement} from './SwitchErrorStatement.js';
 export {default as RaiseStatement} from './RaiseStatement.js';
 export {default as FlushStatement} from './FlushStatement.js';
-export {default as StoreStatement} from './StoreStatement.js';
+export {default as DeleteAndStoreStatement} from './DeleteAndStoreStatement.js';
 export {default as ForEachStatement} from './ForEachStatement.js';
 export {default as DoWhileStatement} from './DoWhileStatement.js';
 export {default as WhileStatement} from './WhileStatement.js';

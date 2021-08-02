@@ -20,4 +20,9 @@ export default class DbIdValue extends Value {
         return this.value;
     }
 
+    convertToJavaScript() {
+        return this.value;
+    }
+
+
 }

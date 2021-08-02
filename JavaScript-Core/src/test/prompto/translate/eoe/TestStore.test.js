@@ -12,6 +12,10 @@ test('AsyncStore', () => {
 	compareResourceEOE('store/asyncStore.pec');
 });
 
+test('AuditRecord', () => {
+	compareResourceEOE('store/auditRecord.pec');
+});
+
 test('DeleteRecords', () => {
 	compareResourceEOE('store/deleteRecords.pec');
 });
