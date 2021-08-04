@@ -21,7 +21,7 @@ export default class WithResourceStatement extends BaseStatement {
     check(context) {
         context = context.newResourceContext();
         this.resource.checkResource(context);
-        return this.statements.check(context);
+        return this.statements.check(context, null);
     }
 
     interpret(context) {
