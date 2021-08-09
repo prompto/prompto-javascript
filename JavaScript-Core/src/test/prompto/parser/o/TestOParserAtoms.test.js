@@ -83,7 +83,7 @@ class OTestParser extends prompto.parser.OCleverParser {
 }
 
 
-test('Tuple ', () => {
+test('parses Tuple ', () => {
 	var statement = "(1,\"John\",'12:12:12')";
 	var parser = new OTestParser(statement);
 	var tl = parser.parse_tuple_literal();
@@ -95,7 +95,7 @@ test('Tuple ', () => {
 });
 
 
-test('Range ', () => {
+test('parses Range ', () => {
 	var statement = "[1..100]";
 	var parser = new OTestParser(statement);
 	var rl = parser.parse_range_literal();
@@ -106,7 +106,7 @@ test('Range ', () => {
 });
 
 
-test('Attribute ', () => {
+test('parses Attribute ', () => {
 	var statement = "attribute id : Integer; ";
 	var parser = new OTestParser(statement);
 	var ad = parser.parse_attribute_declaration();
@@ -117,7 +117,7 @@ test('Attribute ', () => {
 });
 
 
-test('ArrayAttribute ', () => {
+test('parses ArrayAttribute ', () => {
 	var statement = "attribute id : Integer[]; ";
 	var parser = new OTestParser(statement);
 	var ad = parser.parse_attribute_declaration();
@@ -128,7 +128,7 @@ test('ArrayAttribute ', () => {
 });
 
 
-test('Category1Attribute ', () => {
+test('parses Category1Attribute ', () => {
 	var statement = "category Person ( id );";
 	var parser = new OTestParser(statement);
 	var cd = parser.parse_category_declaration();
@@ -140,7 +140,7 @@ test('Category1Attribute ', () => {
 });
 
 
-test('Category2Attributes ', () => {
+test('parses Category2Attributes ', () => {
 	var statement = "category Person ( id, name );";
 	var parser = new OTestParser(statement);
 	var cd = parser.parse_category_declaration();
@@ -153,7 +153,7 @@ test('Category2Attributes ', () => {
 });
 
 
-test('Category1Derived1Attribute ', () => {
+test('parses Category1Derived1Attribute ', () => {
 	var statement = "category Employee( company ) extends Person ;";
 	var parser = new OTestParser(statement);
 	var cd = parser.parse_category_declaration();
@@ -166,7 +166,7 @@ test('Category1Derived1Attribute ', () => {
 });
 
 
-test('Category2DerivedNoAttribute ', () => {
+test('parses Category2DerivedNoAttribute ', () => {
 	var statement = "category Entrepreneur extends Person, Company;";
 	var parser = new OTestParser(statement);
 	var cd = parser.parse_category_declaration();
@@ -179,7 +179,7 @@ test('Category2DerivedNoAttribute ', () => {
 });
 
 
-test('MemberExpression ', () => {
+test('parses MemberExpression ', () => {
 	var statement = "p.name";
 	var parser = new OTestParser(statement);
 	var e = parser.parse_instance_expression();
@@ -190,7 +190,7 @@ test('MemberExpression ', () => {
 });
 
 
-test('Argument ', () => {
+test('parses Argument ', () => {
 	var statement = "Person p";
 	var parser = new OTestParser(statement);
 	var a = parser.parse_typed_argument();
@@ -201,7 +201,7 @@ test('Argument ', () => {
 });
 
 
-test('List1Argument ', () => {
+test('parses List1Argument ', () => {
 	var statement = "Person p";
 	var parser = new OTestParser(statement);
 	var l = parser.parse_argument_list();
@@ -210,7 +210,7 @@ test('List1Argument ', () => {
 });
 
 
-test('List2ArgumentsComma ', () => {
+test('parses List2ArgumentsComma ', () => {
 	var statement = "Person p, Employee e";
 	var parser = new OTestParser(statement);
 	var l = parser.parse_argument_list();
@@ -220,7 +220,7 @@ test('List2ArgumentsComma ', () => {
 
 
 
-test('MethodCallExpression ', () => {
+test('parses MethodCallExpression ', () => {
 	var statement = "print (\"person\" + p.name );";
 	var parser = new OTestParser(statement);
 	var ac = parser.parse_method_call_statement();
@@ -228,7 +228,7 @@ test('MethodCallExpression ', () => {
 });
 
 
-test('MethodCallWith ', () => {
+test('parses MethodCallWith ', () => {
 	var statement = "print( value = \"person\" + p.name );";
 	var parser = new OTestParser(statement);
 	var mc = parser.parse_method_call_statement();
@@ -245,7 +245,7 @@ test('MethodCallWith ', () => {
 });
 
 
-test('Method1Parameter1Statement ', () => {
+test('parses Method1Parameter1Statement ', () => {
 	var statement = "method printName ( Person p ) { print ( value = \"person\" + p.name); }";
 	var parser = new OTestParser(statement);
 	var ad = parser.parse_concrete_method_declaration();
@@ -263,7 +263,7 @@ test('Method1Parameter1Statement ', () => {
 });
 
 
-test('Method1Extended1Statement ', () => {
+test('parses Method1Extended1Statement ', () => {
 	var statement = "method printName ( Object(name) o ) { print ( value = \"object\" + o.name ); }";
 	var parser = new OTestParser(statement);
 	var ad = parser.parse_concrete_method_declaration();
@@ -282,7 +282,7 @@ test('Method1Extended1Statement ', () => {
 });
 
 
-test('Method1Array1Statement ', () => {
+test('parses Method1Array1Statement ', () => {
 	var statement = "method printName ( Option[] options ) { print ( value = \"array\" + options ); }";
 	var parser = new OTestParser(statement);
 	var ad = parser.parse_concrete_method_declaration();
@@ -299,7 +299,7 @@ test('Method1Array1Statement ', () => {
 });
 
 
-test('Constructor1Attribute ', () => {
+test('parses Constructor1Attribute ', () => {
 	var statement = "Company(id=1)";
 	var parser = new OTestParser(statement);
 	var c = parser.parse_constructor_expression();
@@ -307,7 +307,7 @@ test('Constructor1Attribute ', () => {
 });
 
 
-test('ConstructorFrom1Attribute ', () => {
+test('parses ConstructorFrom1Attribute ', () => {
 	var statement = "Company(entity,id=1)";
 	var parser = new OTestParser(statement);
 	var c = parser.parse_constructor_expression();
@@ -315,7 +315,7 @@ test('ConstructorFrom1Attribute ', () => {
 });
 
 
-test('Constructor2AttributesComma ', () => {
+test('parses Constructor2AttributesComma ', () => {
 	var statement = "Company(id=1, name=\"IBM\")";
 	var parser = new OTestParser(statement);
 	var c = parser.parse_constructor_expression();
@@ -338,7 +338,7 @@ test('Constructor2AttributesComma ', () => {
 });
 
 
-test('AssignmentConstructor ', () => {
+test('parses AssignmentConstructor ', () => {
 	var statement = "c = Company ( id = 1, name = \"IBM\" );";
 	var parser = new OTestParser(statement);
 	var a = parser.parse_assign_instance_statement();
@@ -347,7 +347,7 @@ test('AssignmentConstructor ', () => {
 });
 
 
-test('NativeJava ', () => {
+test('parses NativeJava ', () => {
 	var statement = "Java: System.out.println(value);";
 	var parser = new OTestParser(statement);
 	var call = parser.parse_native_statement();
@@ -356,7 +356,7 @@ test('NativeJava ', () => {
 });
 
 
-test('NativeCSharp ', () => {
+test('parses NativeCSharp ', () => {
 	var statement = "C#: Console.println(value);";
 	var parser = new OTestParser(statement);
 	var call = parser.parse_native_statement();
@@ -365,7 +365,7 @@ test('NativeCSharp ', () => {
 });
 
 
-test('NativeMethod ', () => {
+test('parses NativeMethod ', () => {
 	var statement = "native method print (String value) {\r\n"
 			+ "\tJava: System.out.println(value); \r\n"
 			+ "\tC#: Console.println(value); }";
@@ -377,7 +377,7 @@ test('NativeMethod ', () => {
 });
 
 
-test('BooleanLiteral ', () => {
+test('parses BooleanLiteral ', () => {
 	var statement = "true";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -395,7 +395,7 @@ test('BooleanLiteral ', () => {
 });
 
 
-test('TextLiteral ', () => {
+test('parses TextLiteral ', () => {
 	var statement = "\"hello\"";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -406,7 +406,7 @@ test('TextLiteral ', () => {
 });
 
 
-test('IntegerLiteral ', () => {
+test('parses IntegerLiteral ', () => {
 	var statement = "1234";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -417,12 +417,12 @@ test('IntegerLiteral ', () => {
 });
 
 
-test('ParseHexa ', () => {
+test('parses ParseHexa ', () => {
 	expect( prompto.literal.HexaLiteral.parseHexa("0x0A11").IntegerValue()).toEqual(0x0A11);
 });
 
 
-test('HexaLiteral ', () => {
+test('parses HexaLiteral ', () => {
 	var statement = "0x0A11";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -433,7 +433,7 @@ test('HexaLiteral ', () => {
 });
 
 
-test('DecimalLiteral ', () => {
+test('parses DecimalLiteral ', () => {
 	var statement = "1234.13";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -444,7 +444,7 @@ test('DecimalLiteral ', () => {
 });
 
 
-test('EmptyListLiteral ', () => {
+test('parses EmptyListLiteral ', () => {
 	var statement = "[]";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -455,7 +455,7 @@ test('EmptyListLiteral ', () => {
 });
 
 
-test('SimpleListLiteral ', () => {
+test('parses SimpleListLiteral ', () => {
 	var statement = "[ john, 123]";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -469,7 +469,7 @@ test('SimpleListLiteral ', () => {
 });
 
 
-test('EmptyDictLiteral ', () => {
+test('parses EmptyDictLiteral ', () => {
 	var statement = "<:>";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -479,7 +479,7 @@ test('EmptyDictLiteral ', () => {
 });
 
 
-test('SimpleDictLiteral ', () => {
+test('parses SimpleDictLiteral ', () => {
 	var statement = "< \"john\" : 1234, eric : 5678 >";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -491,7 +491,7 @@ test('SimpleDictLiteral ', () => {
 });
 
 
-test('SimpleDate ', () => {
+test('parses SimpleDate ', () => {
 	var statement = "'2012-10-09'";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -505,7 +505,7 @@ test('SimpleDate ', () => {
 });
 
 
-test('SimpleTime ', () => {
+test('parses SimpleTime ', () => {
 	var statement = "'15:03:10'";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -519,7 +519,7 @@ test('SimpleTime ', () => {
 });
 
 
-test('DateTime ', () => {
+test('parses DateTime ', () => {
 	var statement = "'2012-10-09T15:18:17'";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -536,7 +536,7 @@ test('DateTime ', () => {
 });
 
 
-test('DateTimeWithMillis ', () => {
+test('parses DateTimeWithMillis ', () => {
 	var statement = "'2012-10-09T15:18:17.487'";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -547,7 +547,7 @@ test('DateTimeWithMillis ', () => {
 });
 
 
-test('DateTimeWithTZ ', () => {
+test('parses DateTimeWithTZ ', () => {
 	var statement = "'2012-10-09T15:18:17+02:00'";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -567,7 +567,7 @@ test('DateTimeWithTZ ', () => {
 });
 
 
-test('Period ', () => {
+test('parses Period ', () => {
 	var statement = "'P3Y'";
 	var parser = new OTestParser(statement);
 	var literal = parser.parse_literal_expression();
@@ -578,7 +578,7 @@ test('Period ', () => {
 });
 
 
-test('NativeSymbol ', () => {
+test('parses NativeSymbol ', () => {
 	var statement = "ENTITY_1 = \"1\";";
 	var parser = new OTestParser(statement);
 	var symbol = parser.parse_native_symbol();
@@ -590,7 +590,7 @@ test('NativeSymbol ', () => {
 });
 
 
-test('ExpressionMethod ', () => {
+test('parses ExpressionMethod ', () => {
 	var statement = "x = print ( value = \"1\" );";
 	var parser = new OTestParser(statement);
 	var stmt = parser.parse_statement();
@@ -601,7 +601,7 @@ test('ExpressionMethod ', () => {
 });
 
 
-test('Method ', () => {
+test('parses Method ', () => {
 	var statement = "print (\"a\", value = \"1\");";
 	var parser = new OTestParser(statement);
 	var stmt = parser.parse_statement();
@@ -612,10 +612,26 @@ test('Method ', () => {
 });
 
 
-test('InstanceExpression ', () => {
+test('parses InstanceExpression ', () => {
 	var statement = "prefix";
 	var parser = new OTestParser(statement);
 	var exp = parser.parse_expression();
 	expect(exp instanceof prompto.expression.InstanceExpression).toBeTruthy();
-}); 
+});
 
+test('parses VersionLiterals ', () => {
+	[ "'v1.3'", "'v1.3.15'", "'v1.3-alpha'", "'v1.3-beta'", "'v1.3-candidate'",
+		"'v1.3.15-alpha'", "'v1.3.15-beta'", "'v1.3.15-candidate'",
+		"'latest'", "'development'" ].forEach(parsesVersionLiteral);
+	var statement = "prefix";
+	var parser = new OTestParser(statement);
+	var exp = parser.parse_expression();
+	expect(exp instanceof prompto.expression.InstanceExpression).toBeTruthy();
+});
+
+function parsesVersionLiteral(literal) {
+	var parser = new OTestParser(literal);
+	var exp = parser.parse_expression();
+	expect(exp instanceof prompto.literal.VersionLiteral).toBeTruthy();
+	expect("'" + exp.value.toString() + "'").toEqual(literal);
+}

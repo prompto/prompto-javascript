@@ -6,7 +6,7 @@ import { Version } from '../intrinsic/index.js'
 export default class VersionLiteral extends Literal {
 
     constructor(text) {
-        const version = Version.parse(text.substring(2,text.length-1));
+        const version = Version.parse(text.substring(1,text.length-1));
         super(text, new VersionValue(version));
     }
 

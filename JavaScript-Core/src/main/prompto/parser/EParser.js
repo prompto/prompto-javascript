@@ -1534,14 +1534,14 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u00a9\u0002\u0002\u0890\u08a7\u0007\u00aa\u0002\u0002\u0891\u0893\u0007",
     "#\u0002\u0002\u0892\u0891\u0003\u0002\u0002\u0002\u0892\u0893\u0003",
     "\u0002\u0002\u0002\u0893\u0894\u0003\u0002\u0002\u0002\u0894\u08a7\u0007",
-    "\u00b3\u0002\u0002\u0895\u08a7\u0007\u00b4\u0002\u0002\u0896\u08a7\u0007",
-    "\u00a8\u0002\u0002\u0897\u08a7\u0007\u00b8\u0002\u0002\u0898\u08a7\u0007",
-    "\u00b7\u0002\u0002\u0899\u08a7\u0007\u00b1\u0002\u0002\u089a\u089c\u0007",
+    "\u00b4\u0002\u0002\u0895\u08a7\u0007\u00b5\u0002\u0002\u0896\u08a7\u0007",
+    "\u00a8\u0002\u0002\u0897\u08a7\u0007\u00b9\u0002\u0002\u0898\u08a7\u0007",
+    "\u00b8\u0002\u0002\u0899\u08a7\u0007\u00b1\u0002\u0002\u089a\u089c\u0007",
     "#\u0002\u0002\u089b\u089a\u0003\u0002\u0002\u0002\u089b\u089c\u0003",
     "\u0002\u0002\u0002\u089c\u089d\u0003\u0002\u0002\u0002\u089d\u08a7\u0007",
-    "\u00b5\u0002\u0002\u089e\u08a7\u0007\u00b6\u0002\u0002\u089f\u08a7\u0007",
-    "\u00a7\u0002\u0002\u08a0\u08a7\u0007\u00b9\u0002\u0002\u08a1\u08a7\u0007",
-    "\u00ba\u0002\u0002\u08a2\u08a7\u0007\u00b2\u0002\u0002\u08a3\u08a7\u0005",
+    "\u00b6\u0002\u0002\u089e\u08a7\u0007\u00b7\u0002\u0002\u089f\u08a7\u0007",
+    "\u00a7\u0002\u0002\u08a0\u08a7\u0007\u00ba\u0002\u0002\u08a1\u08a7\u0007",
+    "\u00b3\u0002\u0002\u08a2\u08a7\u0007\u00b2\u0002\u0002\u08a3\u08a7\u0005",
     "\u00eav\u0002\u08a4\u08a7\u0005\u009cO\u0002\u08a5\u08a7\u0005\u009e",
     "P\u0002\u08a6\u088f\u0003\u0002\u0002\u0002\u08a6\u0890\u0003\u0002",
     "\u0002\u0002\u08a6\u0892\u0003\u0002\u0002\u0002\u08a6\u0895\u0003\u0002",
@@ -1725,8 +1725,8 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u09d0\u018d\u0003\u0002\u0002\u0002\u09d1\u09d2\u0007\u0016\u0002\u0002",
     "\u09d2\u09d3\u0005\u017e\u00c0\u0002\u09d3\u09d4\u0007\u0017\u0002\u0002",
     "\u09d4\u018f\u0003\u0002\u0002\u0002\u09d5\u09d6\u0005\u0194\u00cb\u0002",
-    "\u09d6\u0191\u0003\u0002\u0002\u0002\u09d7\u09dd\u0007\u00b3\u0002\u0002",
-    "\u09d8\u09dd\u0007\u00b5\u0002\u0002\u09d9\u09dd\u0007\u00b1\u0002\u0002",
+    "\u09d6\u0191\u0003\u0002\u0002\u0002\u09d7\u09dd\u0007\u00b4\u0002\u0002",
+    "\u09d8\u09dd\u0007\u00b6\u0002\u0002\u09d9\u09dd\u0007\u00b1\u0002\u0002",
     "\u09da\u09dd\u0007\u00a7\u0002\u0002\u09db\u09dd\u0007\u00a8\u0002\u0002",
     "\u09dc\u09d7\u0003\u0002\u0002\u0002\u09dc\u09d8\u0003\u0002\u0002\u0002",
     "\u09dc\u09d9\u0003\u0002\u0002\u0002\u09dc\u09da\u0003\u0002\u0002\u0002",
@@ -1789,7 +1789,7 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0a3b\u0a38\u0003\u0002\u0002\u0002\u0a3c\u0a3f\u0003\u0002\u0002\u0002",
     "\u0a3d\u0a3b\u0003\u0002\u0002\u0002\u0a3d\u0a3e\u0003\u0002\u0002\u0002",
     "\u0a3e\u01ab\u0003\u0002\u0002\u0002\u0a3f\u0a3d\u0003\u0002\u0002\u0002",
-    "\u0a40\u0a46\u0007\u00b3\u0002\u0002\u0a41\u0a46\u0007\u00b5\u0002\u0002",
+    "\u0a40\u0a46\u0007\u00b4\u0002\u0002\u0a41\u0a46\u0007\u00b6\u0002\u0002",
     "\u0a42\u0a46\u0007\u00b1\u0002\u0002\u0a43\u0a46\u0007\u00a7\u0002\u0002",
     "\u0a44\u0a46\u0007\u00a8\u0002\u0002\u0a45\u0a40\u0003\u0002\u0002\u0002",
     "\u0a45\u0a41\u0003\u0002\u0002\u0002\u0a45\u0a42\u0003\u0002\u0002\u0002",
@@ -1847,7 +1847,7 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0a9c\u0a9a\u0003\u0002\u0002\u0002\u0a9d\u0aa0\u0003\u0002\u0002\u0002",
     "\u0a9e\u0a9c\u0003\u0002\u0002\u0002\u0a9e\u0a9f\u0003\u0002\u0002\u0002",
     "\u0a9f\u01c7\u0003\u0002\u0002\u0002\u0aa0\u0a9e\u0003\u0002\u0002\u0002",
-    "\u0aa1\u0aa7\u0007\u00b3\u0002\u0002\u0aa2\u0aa7\u0007\u00b5\u0002\u0002",
+    "\u0aa1\u0aa7\u0007\u00b4\u0002\u0002\u0aa2\u0aa7\u0007\u00b6\u0002\u0002",
     "\u0aa3\u0aa7\u0007\u00b1\u0002\u0002\u0aa4\u0aa7\u0007\u00a7\u0002\u0002",
     "\u0aa5\u0aa7\u0007\u00a8\u0002\u0002\u0aa6\u0aa1\u0003\u0002\u0002\u0002",
     "\u0aa6\u0aa2\u0003\u0002\u0002\u0002\u0aa6\u0aa3\u0003\u0002\u0002\u0002",
@@ -1901,7 +1901,7 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0af5\u0af2\u0003\u0002\u0002\u0002\u0af6\u0af9\u0003\u0002\u0002\u0002",
     "\u0af7\u0af5\u0003\u0002\u0002\u0002\u0af7\u0af8\u0003\u0002\u0002\u0002",
     "\u0af8\u01e1\u0003\u0002\u0002\u0002\u0af9\u0af7\u0003\u0002\u0002\u0002",
-    "\u0afa\u0b00\u0007\u00b3\u0002\u0002\u0afb\u0b00\u0007\u00b5\u0002\u0002",
+    "\u0afa\u0b00\u0007\u00b4\u0002\u0002\u0afb\u0b00\u0007\u00b6\u0002\u0002",
     "\u0afc\u0b00\u0007\u00b1\u0002\u0002\u0afd\u0b00\u0007\u00a7\u0002\u0002",
     "\u0afe\u0b00\u0007\u00a8\u0002\u0002\u0aff\u0afa\u0003\u0002\u0002\u0002",
     "\u0aff\u0afb\u0003\u0002\u0002\u0002\u0aff\u0afc\u0003\u0002\u0002\u0002",
@@ -2106,10 +2106,10 @@ export default class EParser extends AbstractParser {
                              "MIN_INTEGER", "MAX_INTEGER", "SYMBOL_IDENTIFIER", 
                              "TYPE_IDENTIFIER", "VARIABLE_IDENTIFIER", "NATIVE_IDENTIFIER", 
                              "DOLLAR_IDENTIFIER", "ARONDBASE_IDENTIFIER", 
-                             "TEXT_LITERAL", "UUID_LITERAL", "INTEGER_LITERAL", 
-                             "HEXA_LITERAL", "DECIMAL_LITERAL", "DATETIME_LITERAL", 
-                             "TIME_LITERAL", "DATE_LITERAL", "PERIOD_LITERAL", 
-                             "VERSION_LITERAL", "JSX_TEXT" ];
+                             "TEXT_LITERAL", "UUID_LITERAL", "VERSION_LITERAL", 
+                             "INTEGER_LITERAL", "HEXA_LITERAL", "DECIMAL_LITERAL", 
+                             "DATETIME_LITERAL", "TIME_LITERAL", "DATE_LITERAL", 
+                             "PERIOD_LITERAL", "JSX_TEXT" ];
     static ruleNames = [ "enum_category_declaration", "enum_native_declaration", 
                          "native_symbol", "category_symbol", "attribute_declaration", 
                          "concrete_widget_declaration", "native_widget_declaration", 
@@ -3998,6 +3998,7 @@ export default class EParser extends AbstractParser {
 	        case EParser.VARIABLE_IDENTIFIER:
 	        case EParser.TEXT_LITERAL:
 	        case EParser.UUID_LITERAL:
+	        case EParser.VERSION_LITERAL:
 	        case EParser.INTEGER_LITERAL:
 	        case EParser.HEXA_LITERAL:
 	        case EParser.DECIMAL_LITERAL:
@@ -4005,7 +4006,6 @@ export default class EParser extends AbstractParser {
 	        case EParser.TIME_LITERAL:
 	        case EParser.DATE_LITERAL:
 	        case EParser.PERIOD_LITERAL:
-	        case EParser.VERSION_LITERAL:
 	            this.state = 880;
 	            localctx.stmts = this.statement_list();
 	            break;
@@ -4578,6 +4578,7 @@ export default class EParser extends AbstractParser {
 	        case EParser.VARIABLE_IDENTIFIER:
 	        case EParser.TEXT_LITERAL:
 	        case EParser.UUID_LITERAL:
+	        case EParser.VERSION_LITERAL:
 	        case EParser.INTEGER_LITERAL:
 	        case EParser.HEXA_LITERAL:
 	        case EParser.DECIMAL_LITERAL:
@@ -4585,7 +4586,6 @@ export default class EParser extends AbstractParser {
 	        case EParser.TIME_LITERAL:
 	        case EParser.DATE_LITERAL:
 	        case EParser.PERIOD_LITERAL:
-	        case EParser.VERSION_LITERAL:
 	            localctx = new UnresolvedWithArgsStatementContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 997;
@@ -5344,7 +5344,7 @@ export default class EParser extends AbstractParser {
 	        this.state = 1207;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)))) !== 0)) {
+	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)))) !== 0)) {
 	            this.state = 1206;
 	            localctx.exp = this.expression(0);
 	        }
@@ -7786,6 +7786,7 @@ export default class EParser extends AbstractParser {
 	            case EParser.TYPE_IDENTIFIER:
 	            case EParser.TEXT_LITERAL:
 	            case EParser.UUID_LITERAL:
+	            case EParser.VERSION_LITERAL:
 	            case EParser.INTEGER_LITERAL:
 	            case EParser.HEXA_LITERAL:
 	            case EParser.DECIMAL_LITERAL:
@@ -7793,7 +7794,6 @@ export default class EParser extends AbstractParser {
 	            case EParser.TIME_LITERAL:
 	            case EParser.DATE_LITERAL:
 	            case EParser.PERIOD_LITERAL:
-	            case EParser.VERSION_LITERAL:
 	                this.state = 1707;
 	                localctx.exp = this.annotation_argument_value();
 	                break;
@@ -7942,6 +7942,7 @@ export default class EParser extends AbstractParser {
 	        case EParser.SYMBOL_IDENTIFIER:
 	        case EParser.TEXT_LITERAL:
 	        case EParser.UUID_LITERAL:
+	        case EParser.VERSION_LITERAL:
 	        case EParser.INTEGER_LITERAL:
 	        case EParser.HEXA_LITERAL:
 	        case EParser.DECIMAL_LITERAL:
@@ -7949,7 +7950,6 @@ export default class EParser extends AbstractParser {
 	        case EParser.TIME_LITERAL:
 	        case EParser.DATE_LITERAL:
 	        case EParser.PERIOD_LITERAL:
-	        case EParser.VERSION_LITERAL:
 	            localctx = new AnnotationLiteralValueContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 1730;
@@ -8258,7 +8258,7 @@ export default class EParser extends AbstractParser {
 	        this.state = 1783;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)))) !== 0)) {
+	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)))) !== 0)) {
 	            this.state = 1782;
 	            this.expression_list();
 	        }
@@ -8300,7 +8300,7 @@ export default class EParser extends AbstractParser {
 	        this.state = 1792;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)))) !== 0)) {
+	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)))) !== 0)) {
 	            this.state = 1791;
 	            this.expression_list();
 	        }
@@ -10884,6 +10884,7 @@ export default class EParser extends AbstractParser {
 	        case EParser.SYMBOL_IDENTIFIER:
 	        case EParser.TEXT_LITERAL:
 	        case EParser.UUID_LITERAL:
+	        case EParser.VERSION_LITERAL:
 	        case EParser.INTEGER_LITERAL:
 	        case EParser.HEXA_LITERAL:
 	        case EParser.DECIMAL_LITERAL:
@@ -10891,7 +10892,6 @@ export default class EParser extends AbstractParser {
 	        case EParser.TIME_LITERAL:
 	        case EParser.DATE_LITERAL:
 	        case EParser.PERIOD_LITERAL:
-	        case EParser.VERSION_LITERAL:
 	            this.enterOuterAlt(localctx, 1);
 	            this.state = 2235;
 	            this.atomic_literal();
@@ -11005,7 +11005,7 @@ export default class EParser extends AbstractParser {
 	        this.state = 2252;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)))) !== 0)) {
+	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)))) !== 0)) {
 	            this.state = 2251;
 	            this.expression_tuple();
 	        }
@@ -11133,7 +11133,7 @@ export default class EParser extends AbstractParser {
 	        this.state = 2285;
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
-	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)))) !== 0)) {
+	        if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)))) !== 0)) {
 	            this.state = 2277;
 	            this.expression(0);
 	            this.state = 2282;
@@ -16015,6 +16015,7 @@ export default class EParser extends AbstractParser {
 	        case EParser.ARONDBASE_IDENTIFIER:
 	        case EParser.TEXT_LITERAL:
 	        case EParser.UUID_LITERAL:
+	        case EParser.VERSION_LITERAL:
 	        case EParser.INTEGER_LITERAL:
 	        case EParser.HEXA_LITERAL:
 	        case EParser.DECIMAL_LITERAL:
@@ -16022,7 +16023,6 @@ export default class EParser extends AbstractParser {
 	        case EParser.TIME_LITERAL:
 	        case EParser.DATE_LITERAL:
 	        case EParser.PERIOD_LITERAL:
-	        case EParser.VERSION_LITERAL:
 	        case EParser.JSX_TEXT:
 	            localctx = new JsxTextContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
@@ -16043,7 +16043,7 @@ export default class EParser extends AbstractParser {
 	            this.state = 2918;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
-	            if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)))) !== 0)) {
+	            if(((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (EParser.LPAR - 20)) | (1 << (EParser.LBRAK - 20)) | (1 << (EParser.LCURL - 20)) | (1 << (EParser.MINUS - 20)) | (1 << (EParser.LT - 20)) | (1 << (EParser.LTGT - 20)) | (1 << (EParser.LTCOLONGT - 20)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (EParser.METHOD_COLON - 64)) | (1 << (EParser.CODE - 64)) | (1 << (EParser.DOCUMENT - 64)) | (1 << (EParser.BLOB - 64)) | (1 << (EParser.TYPE - 64)) | (1 << (EParser.CATEGORY - 64)))) !== 0) || ((((_la - 104)) & ~0x1f) == 0 && ((1 << (_la - 104)) & ((1 << (EParser.EXECUTE - 104)) | (1 << (EParser.FETCH - 104)) | (1 << (EParser.INVOKE_COLON - 104)) | (1 << (EParser.MUTABLE - 104)) | (1 << (EParser.NOT - 104)) | (1 << (EParser.NOTHING - 104)))) !== 0) || ((((_la - 138)) & ~0x1f) == 0 && ((1 << (_la - 138)) & ((1 << (EParser.READ - 138)) | (1 << (EParser.RESOURCE - 138)) | (1 << (EParser.SELF - 138)) | (1 << (EParser.SORTED - 138)) | (1 << (EParser.SUPER - 138)) | (1 << (EParser.THIS - 138)) | (1 << (EParser.BOOLEAN_LITERAL - 138)) | (1 << (EParser.CHAR_LITERAL - 138)) | (1 << (EParser.MIN_INTEGER - 138)) | (1 << (EParser.MAX_INTEGER - 138)) | (1 << (EParser.SYMBOL_IDENTIFIER - 138)))) !== 0) || ((((_la - 170)) & ~0x1f) == 0 && ((1 << (_la - 170)) & ((1 << (EParser.TYPE_IDENTIFIER - 170)) | (1 << (EParser.VARIABLE_IDENTIFIER - 170)) | (1 << (EParser.TEXT_LITERAL - 170)) | (1 << (EParser.UUID_LITERAL - 170)) | (1 << (EParser.VERSION_LITERAL - 170)) | (1 << (EParser.INTEGER_LITERAL - 170)) | (1 << (EParser.HEXA_LITERAL - 170)) | (1 << (EParser.DECIMAL_LITERAL - 170)) | (1 << (EParser.DATETIME_LITERAL - 170)) | (1 << (EParser.TIME_LITERAL - 170)) | (1 << (EParser.DATE_LITERAL - 170)) | (1 << (EParser.PERIOD_LITERAL - 170)))) !== 0)) {
 	                this.state = 2917;
 	                localctx.exp = this.expression(0);
 	            }
@@ -16679,14 +16679,14 @@ EParser.DOLLAR_IDENTIFIER = 173;
 EParser.ARONDBASE_IDENTIFIER = 174;
 EParser.TEXT_LITERAL = 175;
 EParser.UUID_LITERAL = 176;
-EParser.INTEGER_LITERAL = 177;
-EParser.HEXA_LITERAL = 178;
-EParser.DECIMAL_LITERAL = 179;
-EParser.DATETIME_LITERAL = 180;
-EParser.TIME_LITERAL = 181;
-EParser.DATE_LITERAL = 182;
-EParser.PERIOD_LITERAL = 183;
-EParser.VERSION_LITERAL = 184;
+EParser.VERSION_LITERAL = 177;
+EParser.INTEGER_LITERAL = 178;
+EParser.HEXA_LITERAL = 179;
+EParser.DECIMAL_LITERAL = 180;
+EParser.DATETIME_LITERAL = 181;
+EParser.TIME_LITERAL = 182;
+EParser.DATE_LITERAL = 183;
+EParser.PERIOD_LITERAL = 184;
 EParser.JSX_TEXT = 185;
 
 EParser.RULE_enum_category_declaration = 0;

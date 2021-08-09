@@ -94,15 +94,13 @@ export default class Transpiler {
     appendAllDeclared() {
         const list = [];
         const set = new Set();
-        this.declared.forEach(function(decl) {
+        this.declared.forEach( decl => {
             if(decl instanceof CategoryDeclaration)
                 decl.ensureDeclarationOrder(this.context, list, set);
             else
                 list.push(decl);
         }, this);
-        list.forEach(function(decl) {
-            this.appendOneDeclared(decl);
-        }, this);
+        list.forEach( this.appendOneDeclared , this);
     }
 
     appendOneDeclared(decl) {
@@ -121,9 +119,7 @@ export default class Transpiler {
     }
 
     appendAllRequired() {
-        this.required.forEach(function(fn) {
-            this.appendOneRequired(fn);
-        }, this);
+        this.required.forEach( fn => this.appendOneRequired(fn) , this);
     }
 
     register(f) {
@@ -132,9 +128,7 @@ export default class Transpiler {
     }
 
     appendAllRegistered() {
-        this.registered.forEach(function(f) {
-            this.append("intrinsic." + f.name + " = " + f.name + ";").newLine();
-        }, this);
+        this.registered.forEach( f => this.append("intrinsic." + f.name + " = " + f.name + ";").newLine() , this);
     }
 
     addInitializer(line) {
@@ -159,22 +153,20 @@ export default class Transpiler {
         if(coreNodeClasses.has(fn.name))
             return;
         this.lines.push(fn.toString());
-        Object.keys(fn).forEach(function (key) {
-            this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";");
-        }, this);
+        Object.keys(fn).forEach( key => this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";"), this);
         if(fn.prototype.__proto__) {
             const proto = fn.prototype.__proto__;
             if(proto.constructor.name!=="Object")
                 this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
         }
-        Object.keys(fn.prototype).forEach(function (key) {
+        Object.keys(fn.prototype).filter(key => key !== "toTranspiled").forEach( key => {
             const value = key==="constructor" ? fn.name : fn.prototype[key].toString();
             if(value.indexOf("native code")<0)
                 this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
             else // for now assume this is a redirect on the same type
                 this.lines.push(fn.name + ".prototype." + key + " = " + fn.name + ".prototype." + fn.prototype[key].name + ";");
         }, this);
-        Object.getOwnPropertyNames(fn.prototype).forEach(function(name) {
+        Object.getOwnPropertyNames(fn.prototype).forEach( name => {
             const desc = Object.getOwnPropertyDescriptor(fn.prototype, name);
             if(desc.get || desc.set) {
                 this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
