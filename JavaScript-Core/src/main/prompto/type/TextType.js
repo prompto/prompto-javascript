@@ -113,7 +113,7 @@ export default class TextType extends NativeType {
     }
 
     checkMember(context, section, name) {
-       if ("count"==name) {
+       if ("count" === name) {
            return IntegerType.instance;
        } else {
            return super.checkMember(context, section, name);
@@ -127,7 +127,7 @@ export default class TextType extends NativeType {
     }
 
     transpileMember(transpiler, name) {
-        if ("count"==name) {
+        if ("count" === name) {
             transpiler.append("length");
         } else {
             super.transpileMember(transpiler, name);

@@ -61,7 +61,7 @@ export default class TextValue extends Value {
     }
 
     getMemberValue(context, name) {
-        if ("count"==name) {
+        if ("count"===name) {
             return new IntegerValue(this.value.length);
         } else {
             return super.getMemberValue(context, name);
