@@ -4,6 +4,10 @@ test('CodeValue', () => {
 	compareResourceOMO('css/codeValue.poc');
 });
 
+test('CompositeValue', () => {
+	compareResourceOMO('css/compositeValue.poc');
+});
+
 test('HyphenName', () => {
 	compareResourceOMO('css/hyphenName.poc');
 });

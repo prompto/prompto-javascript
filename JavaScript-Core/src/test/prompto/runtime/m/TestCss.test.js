@@ -18,6 +18,14 @@ test('Transpiled CodeValue', () => {
 	checkTranspiledOutput('css/codeValue.pmc');
 });
 
+test('Interpreted CompositeValue', () => {
+	checkInterpretedOutput('css/compositeValue.pmc');
+});
+
+test('Transpiled CompositeValue', () => {
+	checkTranspiledOutput('css/compositeValue.pmc');
+});
+
 test('Interpreted HyphenName', () => {
 	checkInterpretedOutput('css/hyphenName.pmc');
 });

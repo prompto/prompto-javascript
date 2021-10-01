@@ -4,6 +4,10 @@ test('CodeValue', () => {
 	compareResourceEOE('css/codeValue.pec');
 });
 
+test('CompositeValue', () => {
+	compareResourceEOE('css/compositeValue.pec');
+});
+
 test('HyphenName', () => {
 	compareResourceEOE('css/hyphenName.pec');
 });

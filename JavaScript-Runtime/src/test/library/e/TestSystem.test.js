@@ -9,7 +9,6 @@ beforeEach( () => {
 	Out.init();
 	BaseParserTest.coreContext = null;
 	loadDependency("system");
-	loadDependency("core");
 });
 
 afterEach( () => {

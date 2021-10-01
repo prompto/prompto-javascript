@@ -43,6 +43,14 @@ test('Transpiled Attributes', () => {
 	runTranspiledTests('core/attributes.pec');
 });
 
+test('Interpreted Audit', () => {
+	runInterpretedTests('core/audit.pec');
+});
+
+test('Transpiled Audit', () => {
+	runTranspiledTests('core/audit.pec');
+});
+
 test('Interpreted Category', () => {
 	runInterpretedTests('core/category.pec');
 });

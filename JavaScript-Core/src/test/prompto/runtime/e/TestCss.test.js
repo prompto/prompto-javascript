@@ -18,6 +18,14 @@ test('Transpiled CodeValue', () => {
 	checkTranspiledOutput('css/codeValue.pec');
 });
 
+test('Interpreted CompositeValue', () => {
+	checkInterpretedOutput('css/compositeValue.pec');
+});
+
+test('Transpiled CompositeValue', () => {
+	checkTranspiledOutput('css/compositeValue.pec');
+});
+
 test('Interpreted HyphenName', () => {
 	checkInterpretedOutput('css/hyphenName.pec');
 });
