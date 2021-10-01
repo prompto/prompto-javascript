@@ -29,6 +29,8 @@ Version.prototype.toString = function() {
 
 Version.prototype.qualifierToString = function() {
     switch(this.qualifier) {
+        case 0:
+            return "";
         case -3:
             return "alpha";
         case -2:
@@ -119,6 +121,8 @@ Version.parseVersionNumber = function(literal) {
 
 Version.parseQualifier = function(literal) {
     switch(literal) {
+        case "":
+            return 0;
         case "alpha":
             return -3;
         case "beta":
