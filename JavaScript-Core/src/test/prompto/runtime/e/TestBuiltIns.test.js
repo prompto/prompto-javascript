@@ -706,3 +706,11 @@ test('Transpiled UuidText', () => {
 	checkTranspiledOutput('builtins/uuidText.pec');
 });
 
+test('Interpreted VersionMembers', () => {
+	checkInterpretedOutput('builtins/versionMembers.pec');
+});
+
+test('Transpiled VersionMembers', () => {
+	checkTranspiledOutput('builtins/versionMembers.pec');
+});
+

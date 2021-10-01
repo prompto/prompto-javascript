@@ -356,3 +356,7 @@ test('UuidText', () => {
 	compareResourceEME('builtins/uuidText.pec');
 });
 
+test('VersionMembers', () => {
+	compareResourceEME('builtins/versionMembers.pec');
+});
+
