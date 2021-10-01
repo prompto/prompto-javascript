@@ -2940,8 +2940,8 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitCss_field(ctx) {
         const name = ctx.name.getText();
-        const value = this.getNodeValue(ctx.value);
-        this.setNodeValue(ctx, new css.CssField(name, value));
+        const values = ctx.css_value().map(x => this.getNodeValue(x), this);
+        this.setNodeValue(ctx, new css.CssField(name, values));
     }
 
 

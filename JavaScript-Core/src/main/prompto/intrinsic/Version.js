@@ -76,9 +76,9 @@ Version.prototype.toJson = function() { return JSON.stringify(this.toString()); 
 
 Version.prototype.toTranspiled = function() {
     if(this === Version.LATEST)
-        return "new Version(OxFF, OxFF, OxFF, OxFF)";
+        return "new Version(0xFF, 0xFF, 0xFF, 0xFF)";
     else if(this === Version.DEVELOPMENT)
-        return "new Version(OxFE, OxFE, OxFE, OxFE)";
+        return "new Version(0xFE, 0xFE, 0xFE, 0xFE)";
     else
         throw new Error("Should never get there!");
 };
