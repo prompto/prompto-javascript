@@ -76,15 +76,15 @@ Version.prototype.toJson = function() { return JSON.stringify(this.toString()); 
 
 Version.prototype.toTranspiled = function() {
     if(this === Version.LATEST)
-        return "new Version(-1, -1, -1, -1)";
+        return "new Version(OxFF, OxFF, OxFF, OxFF)";
     else if(this === Version.DEVELOPMENT)
-        return "new Version(0xEF, 0xEF, 0xEF, 0xEF)";
+        return "new Version(OxFE, OxFE, OxFE, OxFE)";
     else
         throw new Error("Should never get there!");
 };
 
-Version.LATEST = new Version(-1, -1, -1, -1);
-Version.DEVELOPMENT = new Version(0xEF, 0xEF, 0xEF, 0xEF);
+Version.LATEST = new Version(0xFF, 0xFF, 0xFF, 0xFF);
+Version.DEVELOPMENT = new Version(0xFE, 0xFE, 0xFE, 0xFE);
 
 Version.parse = function(literal) {
     if (literal === "latest")
