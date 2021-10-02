@@ -39,9 +39,9 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
     }
 
     checkSwitchCasesType(context) {
-        const local = context.newLocalContext();
-        local.registerValue(new ErrorVariable(this.errorId));
-        super.checkSwitchCasesType(local);
+        const child = context.newChildContext();
+        child.registerValue(new ErrorVariable(this.errorId));
+        super.checkSwitchCasesType(child);
     }
 
     checkSwitchType(context) {
@@ -53,9 +53,9 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         if(type !== VoidType.instance) {
             types[type.name] = type;
         }
-        const local = context.newLocalContext();
-        local.registerValue(new ErrorVariable(this.errorId));
-        const section = super.collectReturnTypes(local, types);
+        const child = context.newChildContext();
+        child.registerValue(new ErrorVariable(this.errorId));
+        const section = super.collectReturnTypes(child, types);
         if(this.alwaysInstructions!=null) {
             type = this.alwaysInstructions.check(context, null);
             if(type !== VoidType.instance) {
@@ -169,34 +169,34 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
 
     declare(transpiler) {
         this.statements.declare(transpiler);
-        transpiler = transpiler.newLocalTranspiler();
-        transpiler.context.registerValue(new ErrorVariable(this.errorId));
-        this.declareSwitch(transpiler);
+        const child = transpiler.newChildTranspiler();
+        child.context.registerValue(new ErrorVariable(this.errorId));
+        this.declareSwitch(child);
     }
 
     transpile(transpiler) {
         transpiler.append("try {").indent();
         this.statements.transpile(transpiler);
         transpiler.dedent().append("} catch(").append(this.errorId.name).append(") {").indent();
-        transpiler = transpiler.newLocalTranspiler();
-        transpiler.context.registerValue(new ErrorVariable(this.errorId));
-        transpiler.append("switch(translateError(").append(this.errorId.name).append(")) {").indent();
+        const child = transpiler.newChildTranspiler();
+        child.context.registerValue(new ErrorVariable(this.errorId));
+        child.append("switch(translateError(").append(this.errorId.name).append(")) {").indent();
         this.switchCases.forEach(switchCase => {
-            switchCase.transpileError(transpiler);
+            switchCase.transpileError(child);
         }, this);
         if(this.defaultCase!=null) {
-            transpiler.append("default:").indent();
-            this.defaultCase.transpile(transpiler);
-            transpiler.dedent();
+            child.append("default:").indent();
+            this.defaultCase.transpile(child);
+            child.dedent();
         }
-        transpiler.dedent().append("}");
+        child.dedent().append("}");
         if(this.alwaysInstructions) {
-            transpiler.append(" finally {").indent();
-            this.alwaysInstructions.transpile(transpiler);
-            transpiler.dedent().append("}");
+            child.append(" finally {").indent();
+            this.alwaysInstructions.transpile(child);
+            child.dedent().append("}");
         }
-        transpiler.dedent().append("}");
-        transpiler.flush();
+        child.dedent().append("}");
+        child.flush();
         return true;
     }
 }
