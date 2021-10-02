@@ -20,6 +20,10 @@ test('IndexOutOfRange_sliceText', () => {
 	compareResourceEOE('errors/indexOutOfRange-sliceText.pec');
 });
 
+test('MemberInCatch', () => {
+	compareResourceEOE('errors/memberInCatch.pec');
+});
+
 test('NullDict', () => {
 	compareResourceEOE('errors/nullDict.pec');
 });

@@ -50,6 +50,14 @@ test('Transpiled IndexOutOfRange_sliceText', () => {
 	checkTranspiledOutput('errors/indexOutOfRange-sliceText.pec');
 });
 
+test('Interpreted MemberInCatch', () => {
+	checkInterpretedOutput('errors/memberInCatch.pec');
+});
+
+test('Transpiled MemberInCatch', () => {
+	checkTranspiledOutput('errors/memberInCatch.pec');
+});
+
 test('Interpreted NullDict', () => {
 	checkInterpretedOutput('errors/nullDict.pec');
 });

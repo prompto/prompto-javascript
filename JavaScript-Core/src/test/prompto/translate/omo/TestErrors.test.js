@@ -20,6 +20,10 @@ test('IndexOutOfRange_sliceText', () => {
 	compareResourceOMO('errors/indexOutOfRange-sliceText.poc');
 });
 
+test('MemberInCatch', () => {
+	compareResourceOMO('errors/memberInCatch.poc');
+});
+
 test('NullDict', () => {
 	compareResourceOMO('errors/nullDict.poc');
 });

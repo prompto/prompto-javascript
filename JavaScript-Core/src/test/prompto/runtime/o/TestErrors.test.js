@@ -50,6 +50,14 @@ test('Transpiled IndexOutOfRange_sliceText', () => {
 	checkTranspiledOutput('errors/indexOutOfRange-sliceText.poc');
 });
 
+test('Interpreted MemberInCatch', () => {
+	checkInterpretedOutput('errors/memberInCatch.poc');
+});
+
+test('Transpiled MemberInCatch', () => {
+	checkTranspiledOutput('errors/memberInCatch.poc');
+});
+
 test('Interpreted NullDict', () => {
 	checkInterpretedOutput('errors/nullDict.poc');
 });
