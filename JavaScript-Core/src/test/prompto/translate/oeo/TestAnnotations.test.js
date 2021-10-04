@@ -36,6 +36,10 @@ test('WidgetProps12', () => {
 	compareResourceOEO('annotations/WidgetProps12.poc');
 });
 
+test('WidgetProps13', () => {
+	compareResourceOEO('annotations/WidgetProps13.poc');
+});
+
 test('WidgetProps2', () => {
 	compareResourceOEO('annotations/WidgetProps2.poc');
 });

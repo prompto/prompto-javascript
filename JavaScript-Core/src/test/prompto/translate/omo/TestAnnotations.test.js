@@ -36,6 +36,10 @@ test('WidgetProps12', () => {
 	compareResourceOMO('annotations/WidgetProps12.poc');
 });
 
+test('WidgetProps13', () => {
+	compareResourceOMO('annotations/WidgetProps13.poc');
+});
+
 test('WidgetProps2', () => {
 	compareResourceOMO('annotations/WidgetProps2.poc');
 });
