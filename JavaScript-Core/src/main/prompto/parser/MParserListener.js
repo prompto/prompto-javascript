@@ -1589,6 +1589,15 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by MParser#TypeType.
+	enterTypeType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#TypeType.
+	exitTypeType(ctx) {
+	}
+
+
 	// Enter a parse tree produced by MParser#PrimaryType.
 	enterPrimaryType(ctx) {
 	}

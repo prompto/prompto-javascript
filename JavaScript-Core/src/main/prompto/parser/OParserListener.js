@@ -1598,6 +1598,15 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by OParser#TypeType.
+	enterTypeType(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#TypeType.
+	exitTypeType(ctx) {
+	}
+
+
 	// Enter a parse tree produced by OParser#PrimaryType.
 	enterPrimaryType(ctx) {
 	}

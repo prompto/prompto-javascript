@@ -1733,6 +1733,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#TypeType.
+	enterTypeType(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#TypeType.
+	exitTypeType(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#PrimaryType.
 	enterPrimaryType(ctx) {
 	}
