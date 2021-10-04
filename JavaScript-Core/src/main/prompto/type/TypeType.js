@@ -8,6 +8,16 @@ export default class TypeType extends BaseType {
         this.type = type;
     }
 
+    toString() {
+        return "Type<" + this.type.toString() + ">";
+    }
+
+    toDialect(writer) {
+        writer.append("Type<");
+        this.type.toDialect(writer);
+        writer.append(">");
+    }
+
     checkMember(context, section, name) {
         return this.type.checkStaticMember(context, section, name);
     }

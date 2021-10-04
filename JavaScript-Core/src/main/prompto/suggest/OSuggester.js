@@ -45,7 +45,8 @@ export default class OSuggester extends BaseSuggester {
         OLexer.TEXT,
         OLexer.TIME,
         OLexer.UUID,
-        OLexer.VERSION
+        OLexer.VERSION,
+        OLexer.TYPE
     ]);
 
     deduplicate_type(tokens, context) {

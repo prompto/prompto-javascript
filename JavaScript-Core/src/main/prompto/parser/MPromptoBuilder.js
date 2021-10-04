@@ -643,13 +643,19 @@ export default class MPromptoBuilder extends MParserListener {
 
 
     exitType_literal(ctx) {
-        const type = this.getNodeValue(ctx.category_or_any_type());
-        this.setNodeValue(ctx, new literal.TypeLiteral(type));
+        const typ = this.getNodeValue(ctx.category_or_any_type());
+        this.setNodeValue(ctx, new literal.TypeLiteral(typ));
     }
 
 
     exitTypeLiteral(ctx) {
         this.setNodeValue(ctx, this.getNodeValue(ctx.type_literal()));
+    }
+
+
+    exitTypeType(ctx) {
+        const typ = this.getNodeValue(ctx.t);
+        this.setNodeValue(ctx, new type.TypeType(typ));
     }
 
 

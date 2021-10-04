@@ -45,7 +45,8 @@ export default class MSuggester extends BaseSuggester {
         MLexer.TEXT,
         MLexer.TIME,
         MLexer.UUID,
-        MLexer.VERSION
+        MLexer.VERSION,
+        MLexer.TYPE
     ]);
 
     deduplicate_type(tokens, context) {

@@ -45,7 +45,8 @@ export default class ESuggester extends BaseSuggester {
         ELexer.TEXT,
         ELexer.TIME,
         ELexer.UUID,
-        ELexer.VERSION
+        ELexer.VERSION,
+        ELexer.TYPE
     ]);
 
     deduplicate_type(tokens, context) {
