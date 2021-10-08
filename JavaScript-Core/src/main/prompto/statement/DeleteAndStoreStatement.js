@@ -3,7 +3,8 @@ import { Dialect } from '../parser/index.js'
 import { VoidType, AnyType } from '../type/index.js'
 import { NullValue, Instance, Container, DocumentValue } from '../value/index.js'
 import { $DataStore } from '../store/index.js'
-import {StatementList} from "./index";
+import { StatementList } from "./index";
+const Document = require('../intrinsic/Document.js').default;
 
 export default class DeleteAndStoreStatement extends BaseStatement {
  
@@ -134,11 +135,8 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         let auditMeta = null;
         if(this.meta) {
             const docValue = this.meta.interpret(context);
-            if(docValue instanceof DocumentValue ) {
-                auditMeta = $DataStore.instance.newAuditMetadata();
-                const doc = docValue.getStorableData();
-                doc.$user_keys.forEach(key => auditMeta[key] = doc[key]);
-            }
+            if(docValue instanceof DocumentValue )
+                auditMeta = docValue.getStorableData();
         }
         if (idsToDelete || storablesToAdd)
             $DataStore.instance.deleteAndStore(idsToDelete, storablesToAdd, auditMeta);
@@ -150,6 +148,8 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         transpiler.require($DataStore);
         if(this.andThen)
             this.andThen.declare(transpiler);
+        if(this.meta)
+            transpiler.require(Document);
     }
 
     transpile(transpiler) {
@@ -202,7 +202,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             transpiler.append("null");
         else
             this.meta.transpile(transpiler);
-    }
+   }
 
     getIdsToDelete(context) {
         if(!this.del)

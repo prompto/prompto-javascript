@@ -1,6 +1,6 @@
 import Store from '../store/Store.js'
 import { MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata } from './index.js'
-import { DateTime, List } from '../intrinsic/index.js'
+import {DateTime, Document, List} from '../intrinsic/index.js'
 
 // a utility class for running tests only
 export default class MemStore extends Store {
@@ -10,10 +10,10 @@ export default class MemStore extends Store {
         this.sequences = {};
         this.documents = {};
         this.nextDbId = 1;
-        this.audits = {};
-        this.nextAuditId = 1;
+        this.auditRecords = {};
+        this.nextAuditDbId = 1;
         this.auditMetadatas = {};
-        this.nextAuditMetadataId = 1;
+        this.nextAuditMetadataDbId = 1;
     }
 
     nextSequenceValue(name) {
@@ -46,13 +46,17 @@ export default class MemStore extends Store {
 
     newAuditMetadata() {
         const meta = new AuditMetadata();
-        meta.dbId = this.nextAuditMetadataId++;
+        meta.dbId = this.nextAuditMetadataDbId++;
         meta.utcTimestamp = DateTime.now();
         return meta;
     }
 
     storeAuditMetadata(auditMeta) {
-        if(auditMeta==null)
+        if(auditMeta && !auditMeta.dbId) {
+            const doc = auditMeta;
+            auditMeta = this.newAuditMetadata();
+            doc.$user_keys.forEach(key => auditMeta[key] = doc[key]);
+        } else if(auditMeta==null)
             auditMeta = this.newAuditMetadata();
         this.auditMetadatas[auditMeta.dbId] = auditMeta;
         return auditMeta;
@@ -62,28 +66,28 @@ export default class MemStore extends Store {
     doDelete(dbId, auditMeta) {
         delete this.documents[dbId];
         const audit = this.newAuditRecord(auditMeta);
-        audit.instanceId = dbId;
+        audit.instanceDbId = dbId;
         audit.operation = "DELETE";
-        this.audits[audit.dbId] = audit;
+        this.auditRecords[audit.dbId] = audit;
     }
 
     doStore(doc, auditMeta) {
         const data = doc.document;
         if(data.dbId) {
-            const isInsert = this.documents[data.dbId] || false;
+            const isUpdate = this.documents[data.dbId] || false;
             this.documents[data.dbId] = data;
             const audit = this.newAuditRecord(auditMeta);
-            audit.instanceId = data.dbId;
-            audit.operation = isInsert ? "INSERT" : "UPDATE";
+            audit.instanceDbId = data.dbId;
+            audit.operation = isUpdate ? "UPDATE" : "INSERT";
             audit.instance = doc;
-            this.audits[audit.dbId] = audit;
+            this.auditRecords[audit.dbId] = audit;
         }
     }
 
     newAuditRecord(auditMeta) {
         const audit = new AuditRecord();
-        audit.dbId = this.nextAuditId++;
-        audit.auditMetadataId = auditMeta.dbId;
+        audit.dbId = this.nextAuditDbId++;
+        audit.metadataDbId = auditMeta.dbId;
         audit.utcTimestamp = auditMeta.utcTimestamp;
         return audit;
     }
@@ -196,18 +200,57 @@ export default class MemStore extends Store {
     }
 
     fetchLatestAuditMetadataId(dbId) {
-        const found = Object.values(this.audits).filter(a => a.instanceId === dbId )[0] || null;
-        return found ? found.auditMetadataId : null;
+        const found = Object.values(this.auditRecords).filter(a => a.instanceDbId === dbId )[0] || null;
+        return found ? found.metadataDbId : null;
     }
 
     fetchAllAuditMetadataIds(dbId) {
-        const items = Object.values(this.audits).filter(a => a.instanceId === dbId ).map(a => a.dbId);
+        const items = Object.values(this.auditRecords).filter(a => a.instanceDbId === dbId ).map(a => a.metadataDbId);
         return new List(false, items);
     }
 
     fetchAuditMetadata(dbId) {
         return this.auditMetadatas[dbId] || null;
     }
+
+    fetchAuditMetadataAsDocument(dbId) {
+        const auditMeta = this.fetchAuditMetadata(dbId);
+        const result = auditMeta ? new Document() : null;
+        if (result)
+            Object.keys(auditMeta).forEach(key => result[key] = auditMeta[key]);
+        return result;
+    }
+
+    fetchLatestAuditRecord(dbId) {
+        const audits = this.fetchAllAuditRecords(dbId);
+        return audits.length > 0 ? audits[0] : null;
+    }
+
+    fetchLatestAuditRecordAsDocument(dbId) {
+        const record = this.fetchLatestAuditRecord(dbId);
+        return record === null ? null : record.asDocument();
+    }
+
+    fetchAllAuditRecords(dbId) {
+        return Object.values(this.auditRecords).filter(a => a.instanceDbId === dbId).sort((a1, a2) => a2.utcTimestamp.compareTo(a1.utcTimestamp));
+    }
+
+    fetchAllAuditRecordsAsDocuments(dbId) {
+        return this.fetchAllAuditRecords(dbId).map(a => a.asDocument());
+    }
+
+    fetchDbIdsAffectedByAuditMetadataId(dbId) {
+        return Object.values(this.auditRecords).filter(a => a.metadataDbId === dbId).map(a => a.instanceDbId);
+    }
+
+    fetchAuditRecordsMatching(auditPredicates, instancePredicates){
+        return Object.values(this.auditRecords).filter(a => a.matches(auditPredicates, instancePredicates));
+    }
+
+    fetchAuditRecordsMatchingAsDocuments(auditPredicates, instancePredicates){
+        return this.fetchAuditRecordsMatching(auditPredicates, instancePredicates).map(a => a.asDocument());
+    }
+
 }
 
 

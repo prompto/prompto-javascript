@@ -1,5 +1,3 @@
-import { Document } from "../intrinsic/index.js"
-
 export default class Store {
   
     nextSequenceValue(name) {
@@ -55,11 +53,35 @@ export default class Store {
     }
 
     fetchAuditMetadataAsDocument(dbId) {
-        const auditMeta = this.fetchAuditMetadata(dbId);
-        const result = auditMeta ? new Document() : null;
-        if(result)
-            Object.keys(auditMeta).forEach(key => result[key] = auditMeta[key]);
-         return result;
+        throw new Error("Must override fetchAuditMetadataAsDocument!");
+    }
+
+    fetchLatestAuditRecord(dbId) {
+        throw new Error("Must override fetchLatestAuditRecord!");
+    }
+
+    fetchLatestAuditRecordAsDocument(dbId) {
+        throw new Error("Must override fetchLatestAuditRecordAsDocument!");
+    }
+
+    fetchAllAuditRecords(dbId) {
+        throw new Error("Must override fetchAllAuditRecords!");
+    }
+
+    fetchAllAuditRecordsAsDocuments(dbId) {
+        throw new Error("Must override fetchAllAuditRecordsAsDocuments!");
+    }
+
+    fetchDbIdsAffectedByAuditMetadataId(dbId) {
+        throw new Error("Must override fetchDbIdsAffectedByAuditMetadataId!");
+    }
+
+    fetchAuditRecordsMatching(auditPredicates, instancePredicates){
+        throw new Error("Must override fetchAuditRecordsMatching!");
+    }
+
+    fetchAuditRecordsMatchingAsDocuments(auditPredicates, instancePredicates){
+        throw new Error("Must override fetchAuditRecordsMatchingAsDocuments!");
     }
 }
 
