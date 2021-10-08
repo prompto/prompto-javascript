@@ -18,7 +18,7 @@ export default class MemberSelector extends SelectorExpression {
     }
 
     toDialect(writer) {
-        if (writer.dialect == Dialect.E)
+        if (writer.dialect === Dialect.E)
             this.toEDialect(writer);
         else
             this.toOMDialect(writer);
@@ -47,7 +47,7 @@ export default class MemberSelector extends SelectorExpression {
         } catch(e) {
             // ignore
         }
-        if (writer.dialect == Dialect.E)
+        if (writer.dialect === Dialect.E)
             this.parentToEDialect(writer);
         else
             this.parentToOMDialect(writer);
@@ -108,10 +108,10 @@ export default class MemberSelector extends SelectorExpression {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);
-        if (instance == null || instance == NullValue.instance)
+        if (instance == null || instance === NullValue.instance)
             throw new NullReferenceError();
         else
-            return instance.getMemberValue(context, this.name, true);
+            return instance.getMemberValue(context, this.name, false);
     }
 
     resolveParent(context) {
@@ -126,7 +126,7 @@ export default class MemberSelector extends SelectorExpression {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);
-        if (instance == null || instance == NullValue.instance)
+        if (instance == null || instance === NullValue.instance)
             throw new NullReferenceError();
         else if (instance instanceof Instance) {
             const category = instance.declaration;
