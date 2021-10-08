@@ -1,12 +1,11 @@
 import Instance from './Instance.js'
-import { NullValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from './index.js'
+import { NullValue, DbIdValue, DecimalValue, TextValue, IntegerValue, DocumentValue, NativeInstance } from './index.js'
 import { CategoryType, DecimalType } from '../type/index.js'
 import { Variable } from '../runtime/index.js'
 import { Identifier, Operator } from '../grammar/index.js'
 import { $DataStore } from '../store/index.js'
 import { EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from '../declaration/index.js'
 import { NotStorableError, NotMutableError } from '../error/index.js'
-import { convertFromJavaScript } from '../utils/index.js'
 import { $Root } from "../intrinsic/$Root.js";
 
 export default class ConcreteInstance extends Instance {
@@ -57,7 +56,7 @@ export default class ConcreteInstance extends Instance {
     }
 
     setDbId(dbId) {
-        this.values["dbId"] = convertFromJavaScript(dbId);
+        this.values["dbId"] = new DbIdValue(dbId);
     }
 
     getAttributeNames() {
