@@ -26,6 +26,7 @@ export default class MSuggester extends BaseSuggester {
     }
 
     static TYPE_IDENTIFIER_TOKENS = new Set([
+        MLexer.DBID,
         MLexer.ANY,
         MLexer.BOOLEAN,
         MLexer.BLOB,

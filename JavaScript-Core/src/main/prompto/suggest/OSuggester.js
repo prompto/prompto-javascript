@@ -26,6 +26,7 @@ export default class OSuggester extends BaseSuggester {
     }
 
     static TYPE_IDENTIFIER_TOKENS = new Set([
+        OLexer.DBID,
         OLexer.ANY,
         OLexer.BOOLEAN,
         OLexer.BLOB,

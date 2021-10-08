@@ -26,6 +26,7 @@ export default class ESuggester extends BaseSuggester {
     }
 
     static TYPE_IDENTIFIER_TOKENS = new Set([
+        ELexer.DBID,
         ELexer.ANY,
         ELexer.BOOLEAN,
         ELexer.BLOB,
