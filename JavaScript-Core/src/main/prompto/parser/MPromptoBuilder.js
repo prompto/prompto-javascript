@@ -226,6 +226,10 @@ export default class MPromptoBuilder extends MParserListener {
         this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
     }
 
+    exitDbIdType(ctx) {
+        this.setNodeValue(ctx, type.DbIdType.instance);
+    }
+
     exitTernaryExpression(ctx) {
         const condition = this.getNodeValue(ctx.test);
         const ifTrue = this.getNodeValue(ctx.ifTrue);

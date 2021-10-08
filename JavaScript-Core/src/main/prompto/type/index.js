@@ -1,5 +1,6 @@
 export {default as VoidType} from './VoidType.js';
 export {default as NullType} from './NullType.js';
+export {default as DbIdType} from './/DbIdType.js';
 export {default as AnyType} from './AnyType.js';
 export {default as MissingType} from './MissingType.js';
 export {default as NativeType} from './NativeType.js';

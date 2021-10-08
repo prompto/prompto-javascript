@@ -77,28 +77,24 @@ export default class OPromptoBuilder extends OParserListener {
             return hidden.map(token => token.text).join("");
     }
 
-
     readAnnotations(ctxs) {
         const annotations = ctxs.map(function (csc) {
             return this.getNodeValue(csc);
         }, this);
-        return (annotations.length == 0) ? null : annotations;
+        return (annotations.length === 0) ? null : annotations;
     }
-
 
     readComments(ctxs) {
         const comments = ctxs.map(function (csc) {
             return this.getNodeValue(csc);
         }, this);
-        return (comments.length == 0) ? null : comments;
+        return (comments.length === 0) ? null : comments;
     }
-
 
     exitSelectableExpression(ctx) {
         const e = this.getNodeValue(ctx.parent);
         this.setNodeValue(ctx, e);
     }
-
 
     exitSelectorExpression(ctx) {
         const selector = this.getNodeValue(ctx.selector);
@@ -118,7 +114,6 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, set_);
     }
 
-
     exitStoreStatement(ctx) {
         this.setNodeValue(ctx, this.getNodeValue(ctx.stmt));
     }
@@ -132,88 +127,76 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, stmt);
     }
 
-
     exitAtomicLiteral(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
-
 
     exitCollectionLiteral(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-
     exitCommentStatement(ctx) {
         this.setNodeValue(ctx, this.getNodeValue(ctx.comment_statement()));
     }
 
-
     exitComment_statement(ctx) {
         this.setNodeValue(ctx, new statement.CommentStatement(ctx.getText()));
     }
-
 
     exitListLiteral(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         this.setNodeValue(ctx, exp);
     }
 
-
     exitBlob_expression(ctx) {
         const exp = this.getNodeValue(ctx.expression());
         this.setNodeValue(ctx, new expression.BlobExpression(exp));
     }
 
-
    exitBooleanLiteral(ctx) {
         this.setNodeValue(ctx, new literal.BooleanLiteral(ctx.getText()));
     }
-
 
     exitBreakStatement(ctx) {
         this.setNodeValue(ctx, new statement.BreakStatement());
     }
 
-
     exitMinIntegerLiteral(ctx) {
         this.setNodeValue(ctx, new literal.MinIntegerLiteral());
     }
-
 
     exitMaxIntegerLiteral(ctx) {
         this.setNodeValue(ctx, new literal.MaxIntegerLiteral());
     }
 
-
     exitIntegerLiteral(ctx) {
         this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.getText()));
     }
-
 
     exitDecimalLiteral(ctx) {
         this.setNodeValue(ctx, new literal.DecimalLiteral(ctx.getText()));
     }
 
-
     exitHexadecimalLiteral(ctx) {
         this.setNodeValue(ctx, new literal.HexaLiteral(ctx.getText()));
     }
-
 
     exitCharacterLiteral(ctx) {
         this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.getText()));
     }
 
-
     exitDateLiteral(ctx) {
         this.setNodeValue(ctx, new literal.DateLiteral(ctx.getText()));
     }
 
-
     exitDateTimeLiteral(ctx) {
         this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
+    }
+
+    exitDbIdType(ctx) {
+        this.setNodeValue(ctx, type.DbIdType.instance);
     }
 
     exitTernaryExpression(ctx) {

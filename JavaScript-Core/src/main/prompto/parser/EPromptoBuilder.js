@@ -210,7 +210,6 @@ export default class EPromptoBuilder extends EParserListener {
         this.setNodeValue(ctx, new literal.HexaLiteral(ctx.getText()));
     }
 
-
     exitCharacterLiteral(ctx) {
         this.setNodeValue(ctx, new literal.CharacterLiteral(ctx.getText()));
     }
@@ -219,9 +218,12 @@ export default class EPromptoBuilder extends EParserListener {
         this.setNodeValue(ctx, new literal.DateLiteral(ctx.getText()));
     }
 
-
     exitDateTimeLiteral(ctx) {
         this.setNodeValue(ctx, new literal.DateTimeLiteral(ctx.getText()));
+    }
+
+    exitDbIdType(ctx) {
+        this.setNodeValue(ctx, type.DbIdType.instance);
     }
 
     exitTernaryExpression(ctx) {
