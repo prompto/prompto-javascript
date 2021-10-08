@@ -8,7 +8,7 @@ export default class StorableDocument {
             throw new Error("!!!");
         // use reserved keyword explicitly
         this.category = categories;
-        this.dbIdFactory = dbIdFactory;
+        this.$dbIdFactory = dbIdFactory;
         this.document = null;
     }
 
@@ -27,14 +27,14 @@ export default class StorableDocument {
     getOrCreateDbId() {
         let dbId = this.getDbId();
         if (dbId == null) {
-            if(this.dbIdFactory)
-                dbId = this.dbIdFactory.provider();
+            if(this.$dbIdFactory)
+                dbId = this.$dbIdFactory.provider();
             if(dbId != null)
                 this.setDbId(dbId);
             else {
                 dbId = $DataStore.instance.nextDbId++;
-                if(this.dbIdFactory)
-                    this.dbIdFactory.listener(dbId);
+                if(this.$dbIdFactory)
+                    this.$dbIdFactory.listener(dbId);
                 this.setData("dbId", dbId, dbId);
             }
         }
