@@ -7,13 +7,14 @@ import { MethodCall } from '../statement/index.js'
 import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value/index.js'
 import { TextLiteral } from '../literal/index.js'
 import {equalArrays, compareValues, isANumber, convertToJson, convertToJsonNode} from '../utils/index.js'
+import JavaScriptClassType from "../javascript/JavaScriptClassType";
 // ensure babel does not inject _xxx.default
 const StrictSet = require('../intrinsic/StrictSet.js').default;
 const List = require('../intrinsic/List.js').default;
 const Document = require('../intrinsic/Document.js').default;
 
 export default class DocumentType extends NativeType {
- 
+
     constructor() {
         super(new Identifier("Document"));
     }
@@ -76,8 +77,10 @@ export default class DocumentType extends NativeType {
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
         if (value instanceof Document)
             return new DocumentValue(value);
-        else
-            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
+        else {
+            const klass = new JavaScriptClassType(typeof (value));
+            return klass.convertDocument(context, value, typeof (value), this);
+        }
     }
 
     declare(transpiler) {
@@ -327,6 +330,7 @@ export default class DocumentType extends NativeType {
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }
+
 }
 
 DocumentType.instance = new DocumentType();
