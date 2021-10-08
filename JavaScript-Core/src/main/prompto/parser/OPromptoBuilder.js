@@ -2722,6 +2722,14 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new python.PythonArgumentList(arg));
     }
 
+    exitPythonOrdinalArgumentListItem(ctx) {
+        const item = this.getNodeValue(ctx.item);
+        const arg = new python.PythonOrdinalArgument(item);
+        const items = this.getNodeValue(ctx.items);
+        items.add(arg);
+        this.setNodeValue(ctx, items);
+    }
+
     exitPythonSelectorExpression(ctx) {
         const parent = this.getNodeValue(ctx.parent);
         const selector = this.getNodeValue(ctx.child);
