@@ -141,7 +141,7 @@ export default class JavaScriptClassType extends CategoryType {
         const maybeDoc = returnType instanceof DocumentType || returnType instanceof AnyType || (returnType && returnType.toString()==="Any");
         if(maybeDoc && (klass==="object" || klass==="Object" || klass==="Document")) {
             const doc = new DocumentValue();
-            Object.getOwnPropertyNames(value).forEach(function(name) {
+            Object.getOwnPropertyNames(value).filter(name =>!name.startsWith("$")).forEach(function(name) {
                 let item = value[name];
                 klass = getTypeName(item);
                 item = this.doConvertJavaScriptValueToPromptoValue(context, item, klass, AnyType.instance);
