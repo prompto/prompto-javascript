@@ -1,7 +1,7 @@
 import BaseDeclaration from './BaseDeclaration.js'
 import { AttributeDeclaration } from './index.js'
 import { CategoryType } from '../type/index.js'
-import { NullValue, DbIdValue } from '../value/index.js'
+import { NullValue } from '../value/index.js'
 import { MethodDeclarationMap } from "../runtime/index.js";
 
 export default class CategoryDeclaration extends BaseDeclaration {
