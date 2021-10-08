@@ -1,5 +1,5 @@
 import Value from './Value.js'
-import { DecimalValue } from './index.js'
+import { DecimalValue, DbIdValue } from './index.js'
 import { SyntaxError, DivideByZeroError } from '../error/index.js'
 import { IntegerType } from '../type/index.js'
 
@@ -127,6 +127,8 @@ export default class IntegerValue extends Value {
         if (obj instanceof IntegerValue) {
             return this.value === obj.value;
         } else if (obj instanceof DecimalValue) {
+            return this.value === obj.value;
+        } else if (obj instanceof DbIdValue) {
             return this.value === obj.value;
         } else {
             return false;

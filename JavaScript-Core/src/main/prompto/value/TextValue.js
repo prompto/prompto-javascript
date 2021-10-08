@@ -1,5 +1,5 @@
 import Value from './Value.js'
-import { IntegerValue, CharacterValue } from './index.js'
+import { IntegerValue, CharacterValue, DbIdValue } from './index.js'
 import { TextType } from '../type/index.js'
 import { SyntaxError, IndexOutOfRangeError, InvalidDataError } from '../error/index.js'
 import { removeAccents } from '../utils/index.js'
@@ -120,7 +120,9 @@ export default class TextValue extends Value {
 
     equals(obj) {
         if (obj instanceof TextValue) {
-            return this.value == obj.value;
+            return this.value === obj.value;
+        } else if (obj instanceof DbIdValue) {
+            return this.value === obj.value;
         } else {
             return false;
         }
@@ -128,7 +130,7 @@ export default class TextValue extends Value {
 
     Roughly(context, obj) {
         if (obj instanceof TextValue || obj instanceof CharacterValue) {
-            return removeAccents(this.value.toLowerCase()) == removeAccents(obj.value.toLowerCase());
+            return removeAccents(this.value.toLowerCase()) === removeAccents(obj.value.toLowerCase());
         } else {
             return false;
         }
