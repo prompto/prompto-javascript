@@ -1769,6 +1769,15 @@ export default class MParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by MParser#DbIdType.
+	enterDbIdType(ctx) {
+	}
+
+	// Exit a parse tree produced by MParser#DbIdType.
+	exitDbIdType(ctx) {
+	}
+
+
 	// Enter a parse tree produced by MParser#HtmlType.
 	enterHtmlType(ctx) {
 	}

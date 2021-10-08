@@ -1778,6 +1778,15 @@ export default class OParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by OParser#DbIdType.
+	enterDbIdType(ctx) {
+	}
+
+	// Exit a parse tree produced by OParser#DbIdType.
+	exitDbIdType(ctx) {
+	}
+
+
 	// Enter a parse tree produced by OParser#HtmlType.
 	enterHtmlType(ctx) {
 	}

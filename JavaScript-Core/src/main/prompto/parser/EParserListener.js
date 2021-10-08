@@ -1913,6 +1913,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#DbIdType.
+	enterDbIdType(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#DbIdType.
+	exitDbIdType(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#HtmlType.
 	enterHtmlType(ctx) {
 	}
