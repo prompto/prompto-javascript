@@ -1,12 +1,12 @@
 import {NullValue, BooleanValue} from "./value/index.js"
 import AnnotationProcessors from './processor/AnnotationProcessors.js'
-import JavaScriptType from "./javascript/JavaScriptType.js"
+import JavaScriptClassType from "./javascript/JavaScriptClassType.js"
 import $DataStore from "./store/DataStore.js"
 
 export default function initAll() {
     NullValue.init();
     BooleanValue.init();
     $DataStore.init();
-    JavaScriptType.init();
+    JavaScriptClassType.init();
     AnnotationProcessors.init();
 }
