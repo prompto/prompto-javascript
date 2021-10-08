@@ -11,14 +11,14 @@ import { getTypeName } from '../utils/index.js'
 import { InternalError } from '../error/index.js'
 import {LocalTime, LocalDate, DateTime, Period, UUID, Version} from '../intrinsic/index.js'
 
-export default class JavaScriptType extends CategoryType {
+export default class JavaScriptClassType extends CategoryType {
 
     static init() {
-        JavaScriptType.initializeTypeMap();
+        JavaScriptClassType.initializeTypeMap();
     }
 
     static initializeTypeMap() {
-        if(JavaScriptType.scriptToTypeMap)
+        if(JavaScriptClassType.scriptToTypeMap)
             return;
         const map = {
             'string': TextType.instance,
@@ -33,7 +33,7 @@ export default class JavaScriptType extends CategoryType {
         map[Period.name] = PeriodType.instance;
         map[UUID.name] = UUIDType.instance;
         map[Version.name] = VersionType.instance;
-        JavaScriptType.scriptToTypeMap = map;
+        JavaScriptClassType.scriptToTypeMap = map;
     }
 
     constructor(name) {
@@ -153,7 +153,7 @@ export default class JavaScriptType extends CategoryType {
     }
 
     convertNative(context, value, klass, returnType) {
-        const promptoType = JavaScriptType.scriptToTypeMap[klass] || null;
+        const promptoType = JavaScriptClassType.scriptToTypeMap[klass] || null;
         if (promptoType != null) {
             return promptoType.convertJavaScriptValueToPromptoValue(context, value, returnType);
         } else if(klass === 'number') {
