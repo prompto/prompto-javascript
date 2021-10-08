@@ -39,9 +39,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
         const instance = this.newInstance(context);
         instance.mutable = true;
         try {
-            const dbId = stored.dbId;
-            const value = new DbIdValue(dbId);
-            instance.setMember(context, "dbId", value);
+            instance.setDbId(stored.dbId);
             const allAttributes = this.getAllAttributes(context);
             allAttributes.forEach(name => {
                 const decl = context.getRegisteredDeclaration(name);
