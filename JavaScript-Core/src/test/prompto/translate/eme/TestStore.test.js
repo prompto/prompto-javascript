@@ -12,8 +12,24 @@ test('AsyncStore', () => {
 	compareResourceEME('store/asyncStore.pec');
 });
 
-test('AuditRecord', () => {
-	compareResourceEME('store/auditRecord.pec');
+test('AuditDelete', () => {
+	compareResourceEME('store/auditDelete.pec');
+});
+
+test('AuditInsert', () => {
+	compareResourceEME('store/auditInsert.pec');
+});
+
+test('AuditMany', () => {
+	compareResourceEME('store/auditMany.pec');
+});
+
+test('AuditMatching', () => {
+	compareResourceEME('store/auditMatching.pec');
+});
+
+test('AuditUpdate', () => {
+	compareResourceEME('store/auditUpdate.pec');
 });
 
 test('DeleteRecords', () => {

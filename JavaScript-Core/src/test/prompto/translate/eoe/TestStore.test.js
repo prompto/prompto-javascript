@@ -12,8 +12,24 @@ test('AsyncStore', () => {
 	compareResourceEOE('store/asyncStore.pec');
 });
 
-test('AuditRecord', () => {
-	compareResourceEOE('store/auditRecord.pec');
+test('AuditDelete', () => {
+	compareResourceEOE('store/auditDelete.pec');
+});
+
+test('AuditInsert', () => {
+	compareResourceEOE('store/auditInsert.pec');
+});
+
+test('AuditMany', () => {
+	compareResourceEOE('store/auditMany.pec');
+});
+
+test('AuditMatching', () => {
+	compareResourceEOE('store/auditMatching.pec');
+});
+
+test('AuditUpdate', () => {
+	compareResourceEOE('store/auditUpdate.pec');
 });
 
 test('DeleteRecords', () => {

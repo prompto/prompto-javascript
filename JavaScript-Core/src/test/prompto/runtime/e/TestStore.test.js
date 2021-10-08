@@ -34,12 +34,44 @@ test('Transpiled AsyncStore', () => {
 	checkTranspiledOutput('store/asyncStore.pec');
 });
 
-test('Interpreted AuditRecord', () => {
-	checkInterpretedOutput('store/auditRecord.pec');
+test('Interpreted AuditDelete', () => {
+	checkInterpretedOutput('store/auditDelete.pec');
 });
 
-test('Transpiled AuditRecord', () => {
-	checkTranspiledOutput('store/auditRecord.pec');
+test('Transpiled AuditDelete', () => {
+	checkTranspiledOutput('store/auditDelete.pec');
+});
+
+test('Interpreted AuditInsert', () => {
+	checkInterpretedOutput('store/auditInsert.pec');
+});
+
+test('Transpiled AuditInsert', () => {
+	checkTranspiledOutput('store/auditInsert.pec');
+});
+
+test('Interpreted AuditMany', () => {
+	checkInterpretedOutput('store/auditMany.pec');
+});
+
+test('Transpiled AuditMany', () => {
+	checkTranspiledOutput('store/auditMany.pec');
+});
+
+test('Interpreted AuditMatching', () => {
+	checkInterpretedOutput('store/auditMatching.pec');
+});
+
+test('Transpiled AuditMatching', () => {
+	checkTranspiledOutput('store/auditMatching.pec');
+});
+
+test('Interpreted AuditUpdate', () => {
+	checkInterpretedOutput('store/auditUpdate.pec');
+});
+
+test('Transpiled AuditUpdate', () => {
+	checkTranspiledOutput('store/auditUpdate.pec');
 });
 
 test('Interpreted DeleteRecords', () => {
