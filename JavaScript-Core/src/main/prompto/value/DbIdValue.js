@@ -1,10 +1,10 @@
 import Value from "./Value";
-import {IntegerType} from "../type";
+import { DbIdType } from "../type";
 
 export default class DbIdValue extends Value {
 
     constructor(value) {
-        super(IntegerType.instance);
+        super(DbIdType.instance);
         this.value = value;
     }
 
@@ -22,6 +22,14 @@ export default class DbIdValue extends Value {
 
     convertToJavaScript() {
         return this.value;
+    }
+
+    toJson(context, json, instanceId, fieldName, withType, binaries) {
+        const value = withType ? { type: DbIdType.instance.name, value: this.value } : this.value;
+        if(Array.isArray(json))
+            json.push(value);
+        else
+            json[fieldName] = value;
     }
 
 

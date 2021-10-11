@@ -1,6 +1,6 @@
 import Value from './Value.js'
 import { PeriodValue, IntegerValue, TextValue } from './index.js'
-import { TimeType } from '../type/index.js'
+import { TimeType} from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
 
 export default class TimeValue extends Value {
@@ -83,5 +83,14 @@ export default class TimeValue extends Value {
     toDocumentValue(context) {
         return new TextValue(this.toString());
     }
+
+    toJson(context, json, instanceId, fieldName, withType, binaries) {
+        const value = withType ? { type: TimeType.instance.name, value: this.value.toString() } : this.value.toString();
+        if(Array.isArray(json))
+            json.push(value);
+        else
+            json[fieldName] = value;
+    }
+
 }
 

@@ -1,6 +1,6 @@
 import Value from './Value.js'
 import { TimeValue, PeriodValue, IntegerValue, DateTimeValue, TextValue } from './index.js'
-import { DateType } from '../type/index.js'
+import { DateType} from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
 
 export default class DateValue extends Value {
@@ -65,13 +65,13 @@ export default class DateValue extends Value {
     }
 
     getMemberValue(context, name) {
-        if ("year"==name) {
+        if ("year" === name) {
             return new IntegerValue(this.value.getYear());
-        } else if ("month"==name) {
+        } else if ("month" === name) {
             return new IntegerValue(this.value.getMonth());
-        } else if ("dayOfMonth"==name) {
+        } else if ("dayOfMonth" === name) {
             return new IntegerValue(this.value.getUTCDate());
-        } else if ("dayOfYear"==name) {
+        } else if ("dayOfYear" === name) {
             return new IntegerValue(this.value.getDayOfYear());
         } else {
             return super.getMemberValue(context, name);
@@ -89,6 +89,15 @@ export default class DateValue extends Value {
     toDocumentValue(context) {
         return new TextValue(this.toString());
     }
+
+    toJson(context, json, instanceId, fieldName, withType, binaries) {
+        const value = withType ? { type: DateType.instance.name, value: this.value.toString() } : this.value.toString();
+        if(Array.isArray(json))
+            json.push(value);
+        else
+            json[fieldName] = value;
+    }
+
 }
 
 

@@ -1,7 +1,7 @@
 import Value from './Value.js'
 import { IntegerValue } from './index.js'
 import { SyntaxError, DivideByZeroError } from '../error/index.js'
-import { DecimalType } from '../type/index.js'
+import { DecimalType} from '../type/index.js'
 import { decimalToString } from '../utils/index.js'
 
 export default class DecimalValue extends Value {
@@ -96,7 +96,7 @@ export default class DecimalValue extends Value {
 
     Modulo(context, value) {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            if (value.DecimalValue() == 0.0) {
+            if (value.DecimalValue() === 0.0) {
                 throw new DivideByZeroError();
             } else {
                 return new DecimalValue(this.DecimalValue() % value.DecimalValue());
@@ -112,7 +112,7 @@ export default class DecimalValue extends Value {
 
     compareToValue(context, value) {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
+            return this.value > value.value ? 1 : this.value === value.value ? 0 : -1;
         } else {
             throw new SyntaxError("Illegal comparison: IntegerValue and " + typeof(value));
         }
@@ -120,11 +120,20 @@ export default class DecimalValue extends Value {
 
    equals(obj) {
         if (obj instanceof IntegerValue || obj instanceof DecimalValue) {
-            return this.value == obj.value;
+            return this.value === obj.value;
         } else {
             return false;
         }
     }
+
+    toJson(context, json, instanceId, fieldName, withType, binaries) {
+        const value = withType ? { type: DecimalType.instance.name, value: this.value.toString() } : this.value.toString();
+        if(Array.isArray(json))
+            json.push(value);
+        else
+            json[fieldName] = value;
+    }
+
 }
 
 

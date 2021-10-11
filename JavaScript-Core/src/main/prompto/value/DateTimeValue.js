@@ -63,29 +63,29 @@ export default class DateTimeValue extends Value {
     getMemberValue(context, name) {
         try {
             let value = null;
-            if ("year" == name) {
+            if ("year" === name) {
                 value = this.value.getYear();
-            } else if ("month" == name) {
+            } else if ("month" === name) {
                 value = this.value.getMonth();
-            } else if ("dayOfMonth" == name) {
+            } else if ("dayOfMonth" === name) {
                 value = this.value.getDayOfMonth();
-            } else if ("dayOfYear" == name) {
+            } else if ("dayOfYear" === name) {
                 value = this.value.getDayOfYear();
-            } else if ("hour" == name) {
+            } else if ("hour" === name) {
                 value = this.value.getHour();
-            } else if ("minute" == name) {
+            } else if ("minute" === name) {
                 value = this.value.getMinute();
-            } else if ("second" == name) {
+            } else if ("second" === name) {
                 value = this.value.getSecond();
-            } else if ("millisecond" == name) {
+            } else if ("millisecond" === name) {
                 value = this.value.getMillisecond();
-            } else if ("tzOffset" == name) {
+            } else if ("tzOffset" === name) {
                 value = this.value.getTzOffset();
-            } else if ("tzName" == name) {
+            } else if ("tzName" === name) {
                 value = this.value.getTzName();
-            } else if ("date" == name) {
+            } else if ("date" === name) {
                 return new DateValue(this.value.getDate());
-            } else if ("time" == name) {
+            } else if ("time" === name) {
                 return new TimeValue(this.value.getTime());
             }
             if(typeof(value) === typeof(0))
@@ -109,5 +109,14 @@ export default class DateTimeValue extends Value {
     toDocumentValue(context) {
         return new TextValue(this.toString());
     }
+
+    toJson(context, json, instanceId, fieldName, withType, binaries) {
+        const value = withType ? { type: DateTimeType.instance.name, value: this.value.toString() } : this.value.toString();
+        if(Array.isArray(json))
+            json.push(value);
+        else
+            json[fieldName] = value;
+    }
+
 }
 

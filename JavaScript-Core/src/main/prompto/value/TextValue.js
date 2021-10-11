@@ -145,10 +145,11 @@ export default class TextValue extends Value {
     }
 
     toJson(context, json, instanceId, fieldName, withType, binaries) {
+        const value = withType ? { type: TextType.instance.name, value: this.value } : this.value;
         if(Array.isArray(json))
-            json.push(this.value);
+            json.push(value);
         else
-            json[fieldName] = this.value;
+            json[fieldName] = value;
     }
 }
 
