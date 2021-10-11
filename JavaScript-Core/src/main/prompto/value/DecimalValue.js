@@ -72,7 +72,7 @@ export default class DecimalValue extends Value {
 
     Divide(context, value) {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
-            if (value.DecimalValue() == 0.0) {
+            if (value.DecimalValue() === 0.0) {
                 throw new DivideByZeroError();
             } else {
                 return new DecimalValue(this.DecimalValue() / value.DecimalValue());
@@ -84,7 +84,7 @@ export default class DecimalValue extends Value {
 
     IntDivide(context, value) {
         if (value instanceof IntegerValue) {
-            if (value.IntegerValue() == 0) {
+            if (value.IntegerValue() === 0) {
                 throw new DivideByZeroError();
             } else {
                 return new IntegerValue(this.DecimalValue() / value.IntegerValue());
@@ -127,11 +127,10 @@ export default class DecimalValue extends Value {
     }
 
     toJson(context, json, instanceId, fieldName, withType, binaries) {
-        const value = withType ? { type: DecimalType.instance.name, value: this.value.toString() } : this.value.toString();
         if(Array.isArray(json))
-            json.push(value);
+            json.push(this.value);
         else
-            json[fieldName] = value;
+            json[fieldName] = this.value;
     }
 
 }
