@@ -32,6 +32,14 @@ test('AuditUpdate', () => {
 	compareResourceEOE('store/auditUpdate.pec');
 });
 
+test('DeleteAudit', () => {
+	compareResourceEOE('store/deleteAudit.pec');
+});
+
+test('DeleteMeta', () => {
+	compareResourceEOE('store/deleteMeta.pec');
+});
+
 test('DeleteRecords', () => {
 	compareResourceEOE('store/deleteRecords.pec');
 });

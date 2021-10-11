@@ -74,6 +74,22 @@ test('Transpiled AuditUpdate', () => {
 	checkTranspiledOutput('store/auditUpdate.pec');
 });
 
+test('Interpreted DeleteAudit', () => {
+	checkInterpretedOutput('store/deleteAudit.pec');
+});
+
+test('Transpiled DeleteAudit', () => {
+	checkTranspiledOutput('store/deleteAudit.pec');
+});
+
+test('Interpreted DeleteMeta', () => {
+	checkInterpretedOutput('store/deleteMeta.pec');
+});
+
+test('Transpiled DeleteMeta', () => {
+	checkTranspiledOutput('store/deleteMeta.pec');
+});
+
 test('Interpreted DeleteRecords', () => {
 	checkInterpretedOutput('store/deleteRecords.pec');
 });

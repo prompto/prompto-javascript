@@ -32,6 +32,14 @@ test('AuditUpdate', () => {
 	compareResourceEME('store/auditUpdate.pec');
 });
 
+test('DeleteAudit', () => {
+	compareResourceEME('store/deleteAudit.pec');
+});
+
+test('DeleteMeta', () => {
+	compareResourceEME('store/deleteMeta.pec');
+});
+
 test('DeleteRecords', () => {
 	compareResourceEME('store/deleteRecords.pec');
 });
