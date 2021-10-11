@@ -51,7 +51,7 @@ export default class DocumentExpression extends Expression {
     }
 
     documentFromBlob(context, blob) {
-        if("application/zip"!=blob.mimeType)
+        if("application/zip"!==blob.mimeType)
             throw new Error("documentFromBlob not supported for " + blob.mimeType);
         try {
             const parts = BlobRef.readParts(blob.data);
@@ -60,7 +60,7 @@ export default class DocumentExpression extends Expression {
             if (field == null)
                 throw new Error("Expecting a 'type' field!");
             const itype = new ECleverParser(field).parse_standalone_type();
-            if (itype != DocumentType.instance)
+            if (itype !== DocumentType.instance)
                 throw new Error("Expecting a DocumentValue type!");
             field = value["value"] || null;
             if (field == null)
