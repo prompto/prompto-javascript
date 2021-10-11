@@ -251,6 +251,22 @@ export default class MemStore extends Store {
         return this.fetchAuditRecordsMatching(auditPredicates, instancePredicates).map(a => a.asDocument());
     }
 
+    deleteAuditRecord(dbId){
+        if(this.auditRecords[dbId]) {
+            delete this.auditRecords[dbId];
+            return true;
+        } else
+            return false;
+    }
+
+    deleteAuditMetadata(dbId){
+        if(this.auditMetadatas[dbId]) {
+            delete this.auditMetadatas[dbId];
+            return true;
+        } else
+            return false;
+    }
+
 }
 
 

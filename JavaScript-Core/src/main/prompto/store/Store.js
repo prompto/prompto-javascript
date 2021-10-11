@@ -83,6 +83,14 @@ export default class Store {
     fetchAuditRecordsMatchingAsDocuments(auditPredicates, instancePredicates){
         throw new Error("Must override fetchAuditRecordsMatchingAsDocuments!");
     }
+
+    deleteAuditRecord(dbId){
+        throw new Error("Must override deleteAuditRecord!");
+    }
+
+    deleteAuditMetadata(dbId){
+        throw new Error("Must override deleteAuditMetadata!");
+    }
 }
 
 
