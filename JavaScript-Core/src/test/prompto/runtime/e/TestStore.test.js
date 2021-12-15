@@ -154,6 +154,14 @@ test('Transpiled FetchIn', () => {
 	checkTranspiledOutput('store/fetchIn.pec');
 });
 
+test('Interpreted FetchInclude', () => {
+	checkInterpretedOutput('store/fetchInclude.pec');
+});
+
+test('Transpiled FetchInclude', () => {
+	checkTranspiledOutput('store/fetchInclude.pec');
+});
+
 test('Interpreted FetchLesser', () => {
 	checkInterpretedOutput('store/fetchLesser.pec');
 });

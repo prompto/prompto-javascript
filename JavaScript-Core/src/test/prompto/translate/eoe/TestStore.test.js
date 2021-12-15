@@ -72,6 +72,10 @@ test('FetchIn', () => {
 	compareResourceEOE('store/fetchIn.pec');
 });
 
+test('FetchInclude', () => {
+	compareResourceEOE('store/fetchInclude.pec');
+});
+
 test('FetchLesser', () => {
 	compareResourceEOE('store/fetchLesser.pec');
 });
