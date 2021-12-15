@@ -7,12 +7,13 @@ import { Identifier } from '../grammar/index.js'
 
 export default class FetchOneExpression extends Expression {
  
-    constructor(type, predicate, start, end) {
+    constructor(type, predicate, start, end, include) {
         super();
         this.type = type;
         this.predicate = predicate;
         this.start = start;
         this.end = end;
+        this.include = include
     }
 
     toDialect(writer) {
@@ -29,6 +30,19 @@ export default class FetchOneExpression extends Expression {
         }
         writer.append("where ");
         this.predicate.toDialect(writer);
+        if(this.include!=null) {
+            writer.append(" include ");
+            if (this.include.length === 1)
+                writer.append(this.include[0].name);
+            else {
+                for(let i = 0; i < this.include.length - 1; i++) {
+                    writer.append(this.include[i].name).append(", ");
+                    writer.trimLast(", ".length);
+                    writer.append(" and ");
+                    writer.append(this.include[this.include.length - 1].name);
+                }
+            }
+        }
     }
 
     toODialect(writer) {
@@ -43,6 +57,12 @@ export default class FetchOneExpression extends Expression {
         writer.append("where (");
         this.predicate.toDialect(writer);
         writer.append(")");
+        if(this.include != null) {
+            writer.append("include (");
+            this.include.forEach(id => writer.append(id.name).append(", "));
+            writer.trimLast(", ".length);
+            writer.append(")");
+        }
     }
 
     toMDialect(writer) {
@@ -55,6 +75,12 @@ export default class FetchOneExpression extends Expression {
         }
         writer.append("where ");
         this.predicate.toDialect(writer);
+        if(this.include != null) {
+            writer.append("include ");
+            this.include.forEach(id => writer.append(id.name).append(", "));
+            writer.trimLast(", ".length);
+            writer.append(" ");
+        }
     }
 
     check(context) {
@@ -123,6 +149,12 @@ export default class FetchOneExpression extends Expression {
             this.predicate.transpileQuery(transpiler, "builder");
         if (this.type != null && this.predicate != null)
             transpiler.append("builder.and();").newLine();
+        if (this.include != null) {
+            transpiler.append("builder.project([");
+            this.include.forEach(id => transpiler.append('"').append(id.name).append('"').append(", "));
+            transpiler.trimLast(", ".length);
+            transpiler.append("]);").newLine();
+        }
     }
 
     buildFetchOneQuery(context, store) {
@@ -136,6 +168,9 @@ export default class FetchOneExpression extends Expression {
         }
         if (this.type != null && this.predicate != null) {
             builder.and();
+        }
+        if (this.include != null) {
+            builder.project(this.include);
         }
         return builder.build();
     }

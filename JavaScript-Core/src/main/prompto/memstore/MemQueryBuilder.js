@@ -9,6 +9,7 @@ export default class MemQueryBuilder extends QueryBuilder {
         this.predicates = null;
         this.first = null;
         this.last = null;
+        this.projection = null;
     }
 
     verify(fieldInfo, matchOp, value) {
@@ -47,8 +48,13 @@ export default class MemQueryBuilder extends QueryBuilder {
             predicate: this.predicates==null ? null : this.predicates.pop(),
             first: this.first,
             last: this.last,
+            projection: this.projection,
             orderBys : this.orderBys
         };
+    }
+
+    project(projection) {
+        this.projection = projection;
     }
 
     addOrderByClause(info, descending) {

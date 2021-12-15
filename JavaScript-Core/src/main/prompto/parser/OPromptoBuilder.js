@@ -171,6 +171,11 @@ export default class OPromptoBuilder extends OParserListener {
         this.setNodeValue(ctx, new literal.MaxIntegerLiteral());
     }
 
+    exitInclude_list(ctx) {
+        const include = ctx.variable_identifier().map(c => this.getNodeValue(c), this);
+        this.setNodeValue(ctx, include)
+    }
+
     exitIntegerLiteral(ctx) {
         this.setNodeValue(ctx, new literal.IntegerLiteral(ctx.getText()));
     }
@@ -2126,8 +2131,9 @@ export default class OPromptoBuilder extends OParserListener {
         const predicate = this.getNodeValue(ctx.predicate);
         const start = this.getNodeValue(ctx.xstart);
         const stop = this.getNodeValue(ctx.xstop);
+        const include = this.getNodeValue(ctx.include);
         const orderBy = this.getNodeValue(ctx.orderby);
-        this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, orderBy));
+        this.setNodeValue(ctx, new expression.FetchManyExpression(category, start, stop, predicate, include, orderBy));
     }
 
 
@@ -2136,24 +2142,27 @@ export default class OPromptoBuilder extends OParserListener {
         const predicate = this.getNodeValue(ctx.predicate);
         const start = this.getNodeValue(ctx.xstart);
         const stop = this.getNodeValue(ctx.xstop);
+        const include = this.getNodeValue(ctx.include);
         const orderBy = this.getNodeValue(ctx.orderby);
         const thenWith = grammar.ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
-        this.setNodeValue(ctx, new statement.FetchManyStatement(category, start, stop, predicate, orderBy, thenWith));
+        this.setNodeValue(ctx, new statement.FetchManyStatement(category, start, stop, predicate, include, orderBy, thenWith));
     }
 
 
     exitFetchOne(ctx) {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
-        this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate));
+        const include = this.getNodeValue(ctx.include);
+        this.setNodeValue(ctx, new expression.FetchOneExpression(category, predicate, include));
     }
 
 
     exitFetchOneAsync(ctx) {
         const category = this.getNodeValue(ctx.typ);
         const predicate = this.getNodeValue(ctx.predicate);
+        const include = this.getNodeValue(ctx.include);
         const thenWith = grammar.ThenWith.OrEmpty(this.getNodeValue(ctx.then()));
-        this.setNodeValue(ctx, new statement.FetchOneStatement(category, predicate, thenWith));
+        this.setNodeValue(ctx, new statement.FetchOneStatement(category, predicate, include, thenWith));
     }
 
 

@@ -8,12 +8,13 @@ import { Cursor } from "../intrinsic/index.js";
 
 export default class FetchManyExpression extends Expression {
 
-    constructor(type, first, last, predicate, orderBy) {
+    constructor(type, first, last, predicate, include, orderBy) {
         super();
         this.type = type;
         this.predicate = predicate;
         this.first = first;
         this.last = last;
+        this.include = include;
         this.orderBy = orderBy;
     }
 
@@ -42,7 +43,20 @@ export default class FetchManyExpression extends Expression {
             this.predicate.toDialect(writer);
             writer.append(" ");
         }
-        if(this.orderBy!=null) {
+        if(this.include!=null) {
+            writer.append(" include ");
+            if (this.include.length === 1)
+                writer.append(this.include[0].name);
+            else {
+                for(let i = 0; i < this.include.length - 1; i++) {
+                    writer.append(this.include[i].name).append(", ");
+                    writer.trimLast(", ".length);
+                    writer.append(" and ");
+                    writer.append(this.include[this.include.length - 1].name);
+                }
+            }
+        }
+        if (this.orderBy != null) {
             this.orderBy.toDialect(writer);
         }
     }
@@ -68,6 +82,12 @@ export default class FetchManyExpression extends Expression {
         if(this.predicate!=null) {
             writer.append("where ( ");
             this.predicate.toDialect(writer);
+            writer.append(") ");
+        }
+        if(this.include != null) {
+            writer.append("include (");
+            this.include.forEach(id => writer.append(id.name).append(", "));
+            writer.trimLast(", ".length);
             writer.append(") ");
         }
         if(this.orderBy!=null)
@@ -97,6 +117,12 @@ export default class FetchManyExpression extends Expression {
             this.predicate.toDialect(writer);
             writer.append(" ");
         }
+        if(this.include != null) {
+            writer.append("include ");
+            this.include.forEach(id => writer.append(id.name).append(", "));
+            writer.trimLast(", ".length);
+            writer.append(" ");
+        }
         if(this.orderBy!=null)
             this.orderBy.toDialect(writer);
     }
@@ -113,15 +139,19 @@ export default class FetchManyExpression extends Expression {
                 context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);
         }
-        this.checkFilter(context);
+        this.checkPredicate(context);
+        this.checkInclude(context);
         this.checkOrderBy(context);
         this.checkSlice(context);
         return new CursorType(type);
     }
 
-    checkFilter(context) {
+    checkPredicate(context) {
         if(this.predicate)
             this.predicate.checkQuery(context);
+    }
+
+    checkInclude(context) {
     }
 
     checkOrderBy(context) {
@@ -152,6 +182,8 @@ export default class FetchManyExpression extends Expression {
             this.predicate.interpretQuery(context, builder);
         if (this.type != null && this.predicate != null)
             builder.and();
+        if (this.include != null)
+            builder.project(this.include);
         if (this.orderBy != null)
             this.orderBy.interpretQuery(context, builder);
         return builder.build();
@@ -161,7 +193,7 @@ export default class FetchManyExpression extends Expression {
         if (exp == null)
             return null;
         const value = exp.interpret(context);
-        if(value.type!=IntegerType.instance)
+        if(value.type!==IntegerType.instance)
             throw new InvalidDataError("Expecting an Integer, got:" + value.type.name);
         return value.getStorableData();
     }
@@ -209,6 +241,12 @@ export default class FetchManyExpression extends Expression {
             transpiler.append("builder.setLast(");
             this.last.transpile(transpiler);
             transpiler.append(");").newLine();
+        }
+        if (this.include != null) {
+            transpiler.append("builder.project([");
+            this.include.forEach(id => transpiler.append('"').append(id.name).append('"').append(", "));
+            transpiler.trimLast(", ".length);
+            transpiler.append("]);").newLine();
         }
         if (this.orderBy)
             this.orderBy.transpileQuery(transpiler, "builder");

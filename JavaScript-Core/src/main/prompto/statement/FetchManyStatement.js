@@ -5,8 +5,8 @@ import {StatementList} from "./index";
 
 export default class FetchManyStatement extends FetchManyExpression {
 
-    constructor(type, predicate, first, last, orderBy, thenWith) {
-        super(type, predicate, first, last, orderBy);
+    constructor(type, predicate, first, last, include, orderBy, thenWith) {
+        super(type, predicate, first, last, include, orderBy);
         this.thenWith = thenWith;
     }
 

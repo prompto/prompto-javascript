@@ -44,9 +44,11 @@ export default class CategoryDeclaration extends BaseDeclaration {
             allAttributes.forEach(name => {
                 const decl = context.getRegisteredDeclaration(name);
                 if (decl.storable) {
-                    const data = stored.getData(name);
-                    const value = data==null ? NullValue.instance : decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null);
-                    instance.setMember(context, name, value);
+                    if(stored.hasData(name)) {
+                        const data = stored.getData(name);
+                        const value = decl.getType(context).convertJavaScriptValueToPromptoValue(context, data, null);
+                        instance.setMember(context, name, value);
+                    }
                 }
             }, this);
         } finally {

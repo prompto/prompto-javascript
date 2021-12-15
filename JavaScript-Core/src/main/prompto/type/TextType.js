@@ -206,7 +206,7 @@ export default class TextType extends NativeType {
         if (typeof(value) == 'string') {
             return new TextValue(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 

@@ -100,7 +100,7 @@ export default class MemStore extends Store {
         for (const dbId in this.documents) {
             const doc = this.documents[dbId];
             if(doc.matches(query.predicate))
-                return doc;
+                return query.projection == null ? doc : doc.project(query.projection);
         }
         return null;
     }
@@ -115,6 +115,8 @@ export default class MemStore extends Store {
         const totalCount = docs.length;
         docs = this.sort(query, docs);
         docs = this.slice(query, docs);
+        if(query.projection!=null)
+            docs = docs.map(doc => doc.project(query.projection));
         const iterable = new StoredIterable(docs, totalCount);
         return new MemStore.Cursor(mutable, iterable)
     }

@@ -35,7 +35,7 @@ export default class BooleanType extends NativeType {
         if (typeof(value)=='boolean') {
             return BooleanValue.ValueOf(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 

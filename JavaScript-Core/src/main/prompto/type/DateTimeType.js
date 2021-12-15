@@ -16,7 +16,7 @@ export default class DateTimeType extends NativeType {
         if(value instanceof DateTime)
             return new DateTimeValue(value);
         else
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
     checkAdd(context, section, other, tryReverse) {

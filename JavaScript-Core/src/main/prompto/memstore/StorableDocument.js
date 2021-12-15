@@ -46,6 +46,14 @@ export default class StorableDocument {
             this.document.dbId = dbId;
     }
 
+    hasData(name) {
+        return this.document && name in this.document;
+    }
+
+    getData(name) {
+        return (this.document || {})[name] || null;
+    }
+
     setData(name, value, dbId) {
         if(!this.document) {
             this.document = new StoredDocument(this.category);

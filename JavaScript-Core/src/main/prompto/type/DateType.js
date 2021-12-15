@@ -29,7 +29,7 @@ export default class DateType extends NativeType {
         if (value instanceof LocalDate) {
             return new DateValue(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 

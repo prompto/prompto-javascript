@@ -28,6 +28,10 @@ export default class QueryBuilder {
         throw new Error("Must override setLast!");
     }
 
+    project(projection) {
+        throw new Error("Must override projection!");
+    }
+
     addOrderByClause(field, descending) {
         throw new Error("Must override addOrderByClause!");
     }

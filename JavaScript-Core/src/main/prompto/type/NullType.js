@@ -24,7 +24,7 @@ export default class NullType extends BaseType {
     }
 
     equals(other) {
-        return other==this;
+        return other===this;
     }
 }
 

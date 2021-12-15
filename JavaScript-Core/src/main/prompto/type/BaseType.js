@@ -2,6 +2,8 @@ import Section from "../parser/Section.js";
 import { SyntaxError } from '../error/index.js';
 import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from './index.js';
 import { convertToJson, convertToJsonNode } from '../utils/index.js';
+let NullValue;
+import("../value/NullValue").then(res => NullValue = res.default);
 
 export default class BaseType extends Section {
  
@@ -461,7 +463,10 @@ export default class BaseType extends Section {
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
-        return value; // TODO for now
+        if(value == null)
+            return NullValue.instance;
+        else
+            throw new Error("Unsupported for type " + this.name);
     }
 
     toDialect(writer) {

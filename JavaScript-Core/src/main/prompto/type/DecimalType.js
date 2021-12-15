@@ -220,7 +220,7 @@ export default class DecimalType extends NativeType {
         if (typeof(value)=='number') {
             return new DecimalValue(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 }

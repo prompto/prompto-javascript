@@ -19,7 +19,7 @@ export default class TimeType extends NativeType {
         if (value instanceof LocalTime) {
             return new TimeValue(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 

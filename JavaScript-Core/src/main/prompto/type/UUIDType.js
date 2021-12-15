@@ -13,7 +13,7 @@ export default class UUIDType extends NativeType {
         if(value instanceof UUID || typeof(value) == 'string') {
             return new UUIDValue(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 

@@ -261,7 +261,7 @@ export default class IntegerType extends NativeType {
         if (typeof(value)=='number') {
             return new IntegerValue(value);
         } else {
-            return value; // TODO for now
+            return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
         }
     }
 

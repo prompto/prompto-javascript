@@ -4,8 +4,8 @@ import {StatementList} from "./index";
 
 export default class FetchOneStatement extends FetchOneExpression {
 
-    constructor(type, predicate, thenWith) {
-        super(type, predicate);
+    constructor(type, predicate, include, thenWith) {
+        super(type, predicate, include);
         this.thenWith = thenWith;
     }
 
