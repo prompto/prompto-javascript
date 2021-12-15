@@ -18,12 +18,28 @@ test('Transpiled AsyncFetchMany', () => {
 	checkTranspiledOutput('store/asyncFetchMany.pec');
 });
 
+test('Interpreted AsyncFetchManyInclude', () => {
+	checkInterpretedOutput('store/asyncFetchManyInclude.pec');
+});
+
+test('Transpiled AsyncFetchManyInclude', () => {
+	checkTranspiledOutput('store/asyncFetchManyInclude.pec');
+});
+
 test('Interpreted AsyncFetchOne', () => {
 	checkInterpretedOutput('store/asyncFetchOne.pec');
 });
 
 test('Transpiled AsyncFetchOne', () => {
 	checkTranspiledOutput('store/asyncFetchOne.pec');
+});
+
+test('Interpreted AsyncFetchOneInclude', () => {
+	checkInterpretedOutput('store/asyncFetchOneInclude.pec');
+});
+
+test('Transpiled AsyncFetchOneInclude', () => {
+	checkTranspiledOutput('store/asyncFetchOneInclude.pec');
 });
 
 test('Interpreted AsyncStore', () => {
@@ -154,14 +170,6 @@ test('Transpiled FetchIn', () => {
 	checkTranspiledOutput('store/fetchIn.pec');
 });
 
-test('Interpreted FetchInclude', () => {
-	checkInterpretedOutput('store/fetchInclude.pec');
-});
-
-test('Transpiled FetchInclude', () => {
-	checkTranspiledOutput('store/fetchInclude.pec');
-});
-
 test('Interpreted FetchLesser', () => {
 	checkInterpretedOutput('store/fetchLesser.pec');
 });
@@ -176,6 +184,14 @@ test('Interpreted FetchLesserEqual', () => {
 
 test('Transpiled FetchLesserEqual', () => {
 	checkTranspiledOutput('store/fetchLesserEqual.pec');
+});
+
+test('Interpreted FetchManyInclude', () => {
+	checkInterpretedOutput('store/fetchManyInclude.pec');
+});
+
+test('Transpiled FetchManyInclude', () => {
+	checkTranspiledOutput('store/fetchManyInclude.pec');
 });
 
 test('Interpreted FetchNotBoolean', () => {
@@ -208,6 +224,14 @@ test('Interpreted FetchNotIn', () => {
 
 test('Transpiled FetchNotIn', () => {
 	checkTranspiledOutput('store/fetchNotIn.pec');
+});
+
+test('Interpreted FetchOneInclude', () => {
+	checkInterpretedOutput('store/fetchOneInclude.pec');
+});
+
+test('Transpiled FetchOneInclude', () => {
+	checkTranspiledOutput('store/fetchOneInclude.pec');
 });
 
 test('Interpreted FetchOr', () => {

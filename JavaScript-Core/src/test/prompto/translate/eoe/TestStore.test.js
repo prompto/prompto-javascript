@@ -4,8 +4,16 @@ test('AsyncFetchMany', () => {
 	compareResourceEOE('store/asyncFetchMany.pec');
 });
 
+test('AsyncFetchManyInclude', () => {
+	compareResourceEOE('store/asyncFetchManyInclude.pec');
+});
+
 test('AsyncFetchOne', () => {
 	compareResourceEOE('store/asyncFetchOne.pec');
+});
+
+test('AsyncFetchOneInclude', () => {
+	compareResourceEOE('store/asyncFetchOneInclude.pec');
 });
 
 test('AsyncStore', () => {
@@ -72,16 +80,16 @@ test('FetchIn', () => {
 	compareResourceEOE('store/fetchIn.pec');
 });
 
-test('FetchInclude', () => {
-	compareResourceEOE('store/fetchInclude.pec');
-});
-
 test('FetchLesser', () => {
 	compareResourceEOE('store/fetchLesser.pec');
 });
 
 test('FetchLesserEqual', () => {
 	compareResourceEOE('store/fetchLesserEqual.pec');
+});
+
+test('FetchManyInclude', () => {
+	compareResourceEOE('store/fetchManyInclude.pec');
 });
 
 test('FetchNotBoolean', () => {
@@ -98,6 +106,10 @@ test('FetchNotHas', () => {
 
 test('FetchNotIn', () => {
 	compareResourceEOE('store/fetchNotIn.pec');
+});
+
+test('FetchOneInclude', () => {
+	compareResourceEOE('store/fetchOneInclude.pec');
 });
 
 test('FetchOr', () => {
