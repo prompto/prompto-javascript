@@ -7,12 +7,10 @@ import { Identifier } from '../grammar/index.js'
 
 export default class FetchOneExpression extends Expression {
  
-    constructor(type, predicate, start, end, include) {
+    constructor(type, predicate, include) {
         super();
         this.type = type;
         this.predicate = predicate;
-        this.start = start;
-        this.end = end;
         this.include = include
     }
 
