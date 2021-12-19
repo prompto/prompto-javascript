@@ -1301,6 +1301,15 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
+	// Enter a parse tree produced by EParser#include_list.
+	enterInclude_list(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#include_list.
+	exitInclude_list(ctx) {
+	}
+
+
 	// Enter a parse tree produced by EParser#then.
 	enterThen(ctx) {
 	}
@@ -2990,15 +2999,6 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 
 	// Exit a parse tree produced by EParser#order_by.
 	exitOrder_by(ctx) {
-	}
-
-
-	// Enter a parse tree produced by EParser#include_list.
-	enterInclude_list(ctx) {
-	}
-
-	// Exit a parse tree produced by EParser#include_list.
-	exitInclude_list(ctx) {
 	}
 
 

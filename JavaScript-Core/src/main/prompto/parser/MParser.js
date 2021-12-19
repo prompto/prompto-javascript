@@ -1617,7 +1617,7 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0002\u0002\u091b\u091e\u0003\u0002\u0002\u0002\u091c\u091a\u0003\u0002",
     "\u0002\u0002\u091d\u091f\t\r\u0002\u0002\u091e\u091d\u0003\u0002\u0002",
     "\u0002\u091e\u091f\u0003\u0002\u0002\u0002\u091f\u015d\u0003\u0002\u0002",
-    "\u0002\u0920\u0925\u0005\u00e0q\u0002\u0921\u0922\u0007\u0016\u0002",
+    "\u0002\u0920\u0925\u0005\u00e0q\u0002\u0921\u0922\u0007\u0014\u0002",
     "\u0002\u0922\u0924\u0005\u00e0q\u0002\u0923\u0921\u0003\u0002\u0002",
     "\u0002\u0924\u0927\u0003\u0002\u0002\u0002\u0925\u0923\u0003\u0002\u0002",
     "\u0002\u0925\u0926\u0003\u0002\u0002\u0002\u0926\u015f\u0003\u0002\u0002",
@@ -11759,7 +11759,7 @@ export default class MParser extends AbstractParser {
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                this.state = 2335;
-	                this.match(MParser.DOT);
+	                this.match(MParser.COMMA);
 	                this.state = 2336;
 	                this.variable_identifier(); 
 	            }
@@ -31378,14 +31378,14 @@ class Include_listContext extends antlr4.ParserRuleContext {
 	    }
 	};
 
-	DOT = function(i) {
+	COMMA = function(i) {
 		if(i===undefined) {
 			i = null;
 		}
 	    if(i===null) {
-	        return this.getTokens(MParser.DOT);
+	        return this.getTokens(MParser.COMMA);
 	    } else {
-	        return this.getToken(MParser.DOT, i);
+	        return this.getToken(MParser.COMMA, i);
 	    }
 	};
 
