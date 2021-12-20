@@ -60,6 +60,10 @@ test('IsABoolean', () => {
 	compareResourceOEO('equals/isABoolean.poc');
 });
 
+test('IsADictionary', () => {
+	compareResourceOEO('equals/isADictionary.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOEO('equals/isBoolean.poc');
 });

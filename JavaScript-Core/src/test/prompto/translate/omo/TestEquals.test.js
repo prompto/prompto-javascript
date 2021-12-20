@@ -60,6 +60,10 @@ test('IsABoolean', () => {
 	compareResourceOMO('equals/isABoolean.poc');
 });
 
+test('IsADictionary', () => {
+	compareResourceOMO('equals/isADictionary.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOMO('equals/isBoolean.poc');
 });

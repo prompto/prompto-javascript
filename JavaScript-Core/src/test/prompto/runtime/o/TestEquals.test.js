@@ -130,6 +130,14 @@ test('Transpiled IsABoolean', () => {
 	checkTranspiledOutput('equals/isABoolean.poc');
 });
 
+test('Interpreted IsADictionary', () => {
+	checkInterpretedOutput('equals/isADictionary.poc');
+});
+
+test('Transpiled IsADictionary', () => {
+	checkTranspiledOutput('equals/isADictionary.poc');
+});
+
 test('Interpreted IsBoolean', () => {
 	checkInterpretedOutput('equals/isBoolean.poc');
 });

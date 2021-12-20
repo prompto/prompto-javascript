@@ -1,5 +1,9 @@
 var compareResourceOEO = require("../../parser/BaseParserTest").compareResourceOEO;
 
+test('ReactState1', () => {
+	compareResourceOEO('annotations/ReactState1.poc');
+});
+
 test('ReactWidgetProps1', () => {
 	compareResourceOEO('annotations/ReactWidgetProps1.poc');
 });

@@ -1,5 +1,9 @@
 var compareResourceOMO = require("../../parser/BaseParserTest").compareResourceOMO;
 
+test('ReactState1', () => {
+	compareResourceOMO('annotations/ReactState1.poc');
+});
+
 test('ReactWidgetProps1', () => {
 	compareResourceOMO('annotations/ReactWidgetProps1.poc');
 });
