@@ -28,6 +28,10 @@ export default class DictionaryType extends ContainerType {
         transpiler.require(Dictionary);
     }
 
+    transpile(transpiler) {
+        transpiler.append("Dictionary");
+    }
+
     isAssignableFrom(context, other) {
         return super.isAssignableFrom(context, other)
             || ((other instanceof DictionaryType) && this.itemType.isAssignableFrom(context, other.itemType));
