@@ -16,6 +16,10 @@ test('AsyncFetchOneInclude', () => {
 	compareResourceEOE('store/asyncFetchOneInclude.pec');
 });
 
+test('AsyncFetchOneNull', () => {
+	compareResourceEOE('store/asyncFetchOneNull.pec');
+});
+
 test('AsyncStore', () => {
 	compareResourceEOE('store/asyncStore.pec');
 });

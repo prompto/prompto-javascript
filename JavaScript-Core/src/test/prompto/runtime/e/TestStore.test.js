@@ -42,6 +42,14 @@ test('Transpiled AsyncFetchOneInclude', () => {
 	checkTranspiledOutput('store/asyncFetchOneInclude.pec');
 });
 
+test('Interpreted AsyncFetchOneNull', () => {
+	checkInterpretedOutput('store/asyncFetchOneNull.pec');
+});
+
+test('Transpiled AsyncFetchOneNull', () => {
+	checkTranspiledOutput('store/asyncFetchOneNull.pec');
+});
+
 test('Interpreted AsyncStore', () => {
 	checkInterpretedOutput('store/asyncStore.pec');
 });

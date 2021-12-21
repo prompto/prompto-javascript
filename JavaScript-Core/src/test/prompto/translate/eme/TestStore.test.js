@@ -16,6 +16,10 @@ test('AsyncFetchOneInclude', () => {
 	compareResourceEME('store/asyncFetchOneInclude.pec');
 });
 
+test('AsyncFetchOneNull', () => {
+	compareResourceEME('store/asyncFetchOneNull.pec');
+});
+
 test('AsyncStore', () => {
 	compareResourceEME('store/asyncStore.pec');
 });
