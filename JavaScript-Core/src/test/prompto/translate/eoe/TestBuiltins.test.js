@@ -200,6 +200,10 @@ test('ListCount', () => {
 	compareResourceEOE('builtins/listCount.pec');
 });
 
+test('ListIndexOf', () => {
+	compareResourceEOE('builtins/listIndexOf.pec');
+});
+
 test('ListJson', () => {
 	compareResourceEOE('builtins/listJson.pec');
 });

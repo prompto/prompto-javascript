@@ -200,6 +200,10 @@ test('ListCount', () => {
 	compareResourceEME('builtins/listCount.pec');
 });
 
+test('ListIndexOf', () => {
+	compareResourceEME('builtins/listIndexOf.pec');
+});
+
 test('ListJson', () => {
 	compareResourceEME('builtins/listJson.pec');
 });

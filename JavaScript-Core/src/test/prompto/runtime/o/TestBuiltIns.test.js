@@ -162,6 +162,14 @@ test('Transpiled ListCount', () => {
 	checkTranspiledOutput('builtins/listCount.poc');
 });
 
+test('Interpreted ListIndexOf', () => {
+	checkInterpretedOutput('builtins/listIndexOf.poc');
+});
+
+test('Transpiled ListIndexOf', () => {
+	checkTranspiledOutput('builtins/listIndexOf.poc');
+});
+
 test('Interpreted ListJoin', () => {
 	checkInterpretedOutput('builtins/listJoin.poc');
 });

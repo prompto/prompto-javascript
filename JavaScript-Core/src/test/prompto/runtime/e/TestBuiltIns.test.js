@@ -394,6 +394,14 @@ test('Transpiled ListCount', () => {
 	checkTranspiledOutput('builtins/listCount.pec');
 });
 
+test('Interpreted ListIndexOf', () => {
+	checkInterpretedOutput('builtins/listIndexOf.pec');
+});
+
+test('Transpiled ListIndexOf', () => {
+	checkTranspiledOutput('builtins/listIndexOf.pec');
+});
+
 test('Interpreted ListJson', () => {
 	checkInterpretedOutput('builtins/listJson.pec');
 });

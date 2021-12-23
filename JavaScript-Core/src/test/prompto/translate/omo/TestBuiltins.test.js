@@ -84,6 +84,10 @@ test('ListCount', () => {
 	compareResourceOMO('builtins/listCount.poc');
 });
 
+test('ListIndexOf', () => {
+	compareResourceOMO('builtins/listIndexOf.poc');
+});
+
 test('ListJoin', () => {
 	compareResourceOMO('builtins/listJoin.poc');
 });
