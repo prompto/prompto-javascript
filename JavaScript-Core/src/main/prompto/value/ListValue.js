@@ -1,5 +1,5 @@
 import BaseValueList from './BaseValueList.js'
-import { SetValue, IntegerValue } from './index.js'
+import { NullValue, SetValue, IntegerValue } from './index.js'
 import { SyntaxError } from '../error/index.js'
 import { ListType } from '../type/index.js'
 import { List } from '../intrinsic/index.js'
@@ -65,9 +65,23 @@ export default class ListValue extends BaseValueList {
     }
 
     removeValue(value) {
-        const idx = this.items.indexOf(value);
+        const idx = this.findIndex(value);
         if(idx > -1)
             this.items.splice(idx, 1);
+    }
+
+    indexOfValue(value) {
+        const idx = this.findIndex(value);
+        return idx < 0 ? NullValue.instance : new IntegerValue(idx + 1);
+    }
+
+    findIndex(value) {
+        for(let i=0;i<this.items.length;i++) {
+            const item = this.items[i];
+            if(item===value || (item && item.equals && item.equals(value)))
+                return i;
+        }
+        return -1;
     }
 
     Multiply(context, value) {

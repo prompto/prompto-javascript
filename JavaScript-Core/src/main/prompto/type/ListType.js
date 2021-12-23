@@ -4,7 +4,7 @@ import { Identifier } from '../grammar/index.js'
 import { List, StrictSet } from '../intrinsic/index.js'
 import { ListValue } from '../value/index.js'
 import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js';
-import { RemoveItemMethodDeclaration, RemoveValueMethodDeclaration } from '../builtins/ListTypeBuiltins.js';
+import { IndexOfMethodDeclaration, RemoveItemMethodDeclaration, RemoveValueMethodDeclaration } from '../builtins/ListTypeBuiltins.js';
 import { multiplyArray } from '../utils/index.js'
 import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.js'
 
@@ -265,6 +265,8 @@ export default class ListType extends ContainerType {
                 return [new ToSetMethodDeclaration(this.itemType)];
             case "join":
                 return [new JoinListMethodDeclaration()];
+            case "indexOf":
+                return [new IndexOfMethodDeclaration()];
             case "removeItem":
                 return [new RemoveItemMethodDeclaration()];
             case "removeValue" :

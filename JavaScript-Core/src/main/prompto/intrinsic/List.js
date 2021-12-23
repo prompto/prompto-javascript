@@ -53,6 +53,11 @@ List.prototype.removeValue = function(value) {
         this.splice(idx, 1);
 };
 
+List.prototype.indexOfValue = function(value) {
+    var idx = this.indexOf(value);
+    return idx < 0 ? null : idx + 1;
+};
+
 List.prototype.sorted = function(sortFunction) {
     var sorted = Array.from(this).sort(sortFunction);
     return new List(false, sorted);

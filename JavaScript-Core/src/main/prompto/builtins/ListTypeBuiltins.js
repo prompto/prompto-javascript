@@ -1,7 +1,32 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
 import { CategoryParameter } from '../param/index.js'
-import {AnyType, IntegerType, VoidType} from "../type";
-import {Identifier} from "../grammar";
+import { AnyType, IntegerType, VoidType } from "../type";
+import { Identifier } from "../grammar";
+
+
+class IndexOfMethodDeclaration extends BuiltInMethodDeclaration {
+
+    constructor() {
+        super("indexOf", new CategoryParameter(AnyType.instance, new Identifier("value")));
+
+    }
+
+    interpret(context) {
+        const list = this.getValue(context);
+        const value = context.getValue(new Identifier("value"));
+        return list.indexOfValue(value);
+    }
+
+    check(context) {
+        return IntegerType.instance;
+    }
+
+    transpileCall(transpiler, assignments) {
+        transpiler.append("indexOfValue(");
+        assignments[0].transpile(transpiler, null);
+        transpiler.append(")");
+    }
+}
 
 class RemoveItemMethodDeclaration extends BuiltInMethodDeclaration {
 
@@ -58,4 +83,4 @@ class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration {
     }
 }
 
-export { RemoveItemMethodDeclaration, RemoveValueMethodDeclaration };
+export { IndexOfMethodDeclaration, RemoveItemMethodDeclaration, RemoveValueMethodDeclaration };
