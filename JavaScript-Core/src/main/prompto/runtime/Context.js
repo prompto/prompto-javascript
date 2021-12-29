@@ -172,21 +172,27 @@ class Context {
         const catalog = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
         Object.getOwnPropertyNames(this.declarations).forEach( name => {
             const decl = this.declarations[name];
-            if(decl instanceof AttributeDeclaration)
-                catalog.attributes.push(name);
-            else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
+            if(decl instanceof AttributeDeclaration) {
+                const info = {};
+                info.dbId = decl
+                info.name = decl.name;
+                info.dialect = decl.dialect.name;
+                catalog.attributes.push({ type: "Document", value: info});
+            } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
                 const info = {};
                 info.name = decl.name;
+                info.dialect = decl.dialect.name;
                 info.symbols = decl.symbols.map(s => s.name);
                 catalog.enumerations.push({ type: "Document", value: info});
             } else if(decl instanceof CategoryDeclaration) {
+                const info = {};
+                info.name = decl.name;
+                info.dialect = decl.dialect.name;
                 if(decl.isWidget(this)) {
-                    const info = {};
-                    info.name = decl.name;
                     info.pageWidgetOf = decl.getPageWidgetOf();
                     catalog.widgets.push({ type: "Document", value: info});
                 } else
-                    catalog.categories.push(name);
+                    catalog.categories.push({ type: "Document", value: info});
             } else if(decl instanceof MethodDeclarationMap) {
                 const method = {};
                 method.name = decl.name;
@@ -194,13 +200,20 @@ class Context {
                 Object.getOwnPropertyNames(decl.protos).forEach(proto => {
                     const info = {};
                     info.proto = proto;
+                    info.dialect = decl.protos[proto].dialect.name;
                     info.eligibleAsMain = decl.protos[proto].isEligibleAsMain();
                     method.protos.push({ type: "Document", value: info});
                 });
                 catalog.methods.push({ type: "Document", value: method});
             }
-        });
-        Object.getOwnPropertyNames(this.tests).forEach(name => catalog.tests.push(name));
+        }, this);
+        Object.getOwnPropertyNames(this.tests).forEach(name => {
+            const decl = this.tests[name];
+            const info = {};
+            info.name = decl.name;
+            info.dialect = decl.dialect.name;
+            catalog.tests.push({ type: "Document", value: info})
+        }, this);
         // minimize for UI optimization
         if(catalog.attributes.length <= 0)
             delete catalog.attributes;
