@@ -8,7 +8,7 @@ export default class DbIdType extends NativeType {
      }
 
     isAssignableFrom(context, other) {
-        return other instanceof NativeType;
+        return super.isAssignableFrom(context, other) || other instanceof NativeType;
     }
 
     declare(transpiler) {
