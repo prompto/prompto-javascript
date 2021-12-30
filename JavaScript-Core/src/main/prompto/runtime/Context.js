@@ -174,18 +174,20 @@ class Context {
             const decl = this.declarations[name];
             if(decl instanceof AttributeDeclaration) {
                 const info = {};
-                info.dbId = decl
+                info.dbId = decl.dbId;
                 info.name = decl.name;
                 info.dialect = decl.dialect.name;
                 catalog.attributes.push({ type: "Document", value: info});
             } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
                 const info = {};
+                info.dbId = decl.dbId;
                 info.name = decl.name;
                 info.dialect = decl.dialect.name;
                 info.symbols = decl.symbols.map(s => s.name);
                 catalog.enumerations.push({ type: "Document", value: info});
             } else if(decl instanceof CategoryDeclaration) {
                 const info = {};
+                info.dbId = decl.dbId;
                 info.name = decl.name;
                 info.dialect = decl.dialect.name;
                 if(decl.isWidget(this)) {
@@ -199,6 +201,8 @@ class Context {
                 method.protos = [];
                 Object.getOwnPropertyNames(decl.protos).forEach(proto => {
                     const info = {};
+                    info.dbId = decl.dbId;
+                    info.name = decl.name;
                     info.proto = proto;
                     info.dialect = decl.protos[proto].dialect.name;
                     info.eligibleAsMain = decl.protos[proto].isEligibleAsMain();
@@ -210,6 +214,7 @@ class Context {
         Object.getOwnPropertyNames(this.tests).forEach(name => {
             const decl = this.tests[name];
             const info = {};
+            info.dbId = decl.dbId;
             info.name = decl.name;
             info.dialect = decl.dialect.name;
             catalog.tests.push({ type: "Document", value: info})
