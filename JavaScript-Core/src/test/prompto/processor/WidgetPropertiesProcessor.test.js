@@ -198,7 +198,7 @@ test('Loads Html properties', () => {
 });
 
 function registerDummyCallbacks(context) {
-    [ "ClickEventCallback", "MouseEventCallback", "InputChangedCallback" ].forEach( function(name) {
+    [ "MouseEventCallback", "InputChangedCallback" ].forEach( function(name) {
         var decl = new prompto.declaration.AbstractMethodDeclaration(new prompto.grammar.Identifier(name));
         decl.register(context);
     });
