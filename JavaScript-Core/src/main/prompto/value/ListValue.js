@@ -70,6 +70,14 @@ export default class ListValue extends BaseValueList {
             this.items.splice(idx, 1);
     }
 
+    addValue(value) {
+        this.items.push(value);
+    }
+
+    insertValue(value, atIndex) {
+        this.items.splice(atIndex.value -1, 0, value);
+    }
+
     indexOfValue(value) {
         const idx = this.findIndex(value);
         return idx < 0 ? NullValue.instance : new IntegerValue(idx + 1);
