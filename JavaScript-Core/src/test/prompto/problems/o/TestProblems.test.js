@@ -80,6 +80,10 @@ test('UnknownDictItemType problems', () => {
 	checkProblems('problems/unknownDictItemType.poc');
 });
 
+test('UnknownIdentifier problems', () => {
+	checkProblems('problems/unknownIdentifier.poc');
+});
+
 test('UnknownItemType problems', () => {
 	checkProblems('problems/unknownItemType.poc');
 });
