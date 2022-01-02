@@ -20,6 +20,12 @@ export default class DocEntryList {
         writer.append('}');
     }
 
+    check(context) {
+        this.items.forEach(item => {
+            item.check(context);
+        });
+    }
+
     declare(transpiler) {
         this.items.forEach(item => {
             item.declare(transpiler);

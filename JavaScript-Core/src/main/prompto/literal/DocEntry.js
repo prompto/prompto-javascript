@@ -14,6 +14,11 @@ export default class DocEntry {
         this.value.toDialect(writer);
     }
 
+    check(context) {
+        this.key.check(context);
+        this.value.check(context);
+    }
+
     declare(transpiler) {
         this.value.declare(transpiler);
     }

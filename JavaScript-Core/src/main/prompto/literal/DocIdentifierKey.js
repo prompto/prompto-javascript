@@ -14,12 +14,17 @@ export default class DocIdentifierKey {
         return this.id.name;
     }
 
-    transpile(transpiler) {
-        transpiler.append(this.id.name);
+    check(context) {
+        // nothing to do
     }
 
     interpret(context) {
         return new TextValue(this.stringValue());
     }
+
+    transpile(transpiler) {
+        transpiler.append(this.id.name);
+    }
+
 }
 

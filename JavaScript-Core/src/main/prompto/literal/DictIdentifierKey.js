@@ -1,9 +1,10 @@
 import Section from "../parser/Section";
 import { TextValue } from '../value/index.js'
 import { InstanceExpression } from '../expression/index.js'
+import { TextType } from "../type/index.js";
 
 export default class DictIdentifierKey extends Section {
- 
+
     constructor(id) {
         super();
         this.id = id;
@@ -13,8 +14,13 @@ export default class DictIdentifierKey extends Section {
         return this.id.toString();
     }
 
-    transpile(transpiler) {
-        transpiler.append("[").append(this.id.name).append("]");
+    check(context) {
+        const named = context.getRegisteredValue(this.id.toString());
+        if (named === null) {
+            context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
+        } else if (named.getType(context) !== TextType.instance) {
+            context.problemListener.reportIllegalValue(this, "Expected a Text, got " + named.getType(context).typeName);
+        }
     }
 
     interpret(context) {
@@ -26,4 +32,9 @@ export default class DictIdentifierKey extends Section {
             return null;
         }
     }
+
+    transpile(transpiler) {
+        transpiler.append("[").append(this.id.name).append("]");
+    }
+
 }

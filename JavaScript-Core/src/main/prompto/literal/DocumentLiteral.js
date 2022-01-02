@@ -29,6 +29,7 @@ export default class DocumentLiteral extends Literal {
     }
 
     check(context) {
+        this.entries.check(context);
         return DocumentType.instance;
     }
 

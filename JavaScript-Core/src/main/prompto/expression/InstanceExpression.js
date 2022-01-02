@@ -79,8 +79,11 @@ export default class InstanceExpression extends Expression {
 
     check(context) {
         let named = context.getRegistered(this.id.name);
-        if(named==null) {
+        if(named==null)
             named = context.getRegisteredDeclaration(this.id.name);
+        if(named==null){
+            context.problemListener.reportUnknownIdentifier(this.id, this.name);
+            return null;
         }
         if (named instanceof Variable) { // local variable
             return named.getType(context);
@@ -95,7 +98,7 @@ export default class InstanceExpression extends Expression {
         } else if(named instanceof MethodDeclarationMap) { // global method or closure
             return new MethodType(named.getFirst());
         } else {
-            context.problemListener.reportUnknownVariable(this.id, this.name);
+            context.problemListener.reportUnknownIdentifier(this.id, this.name);
             return VoidType.instance;
         }
     }

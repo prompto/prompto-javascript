@@ -19,11 +19,16 @@ export default class DocTextKey {
         return unescape(this.text);
     }
 
-    transpile(transpiler) {
-        transpiler.append(this.text);
+    check(context) {
+        // nothing to do
     }
 
     interpret(context) {
         return new TextValue(this.stringValue());
     }
-}
+
+    transpile(transpiler) {
+        transpiler.append(this.text);
+    }
+
+ }
