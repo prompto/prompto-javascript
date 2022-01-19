@@ -760,6 +760,8 @@ export default class MPromptoBuilder extends MParserListener {
     exitExpressionAssignmentList(ctx) {
         const exp = this.getNodeValue(ctx.exp);
         const assign = new grammar.Argument(null, exp);
+        if(exp instanceof parser.Section)
+            assign.copySectionFrom(exp);
         this.setNodeValue(ctx, new grammar.ArgumentList([assign]));
     }
 

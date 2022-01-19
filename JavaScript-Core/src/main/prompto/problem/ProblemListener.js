@@ -121,7 +121,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
     }
 
     reportMissingAttribute(section, actual) {
-        this.reportError(section, "Expected an attribute, got: " + actual);
+        this.reportError(section, "Expected an attribute, found: " + actual);
     }
 
     reportSwitchMissingStatement(section) {

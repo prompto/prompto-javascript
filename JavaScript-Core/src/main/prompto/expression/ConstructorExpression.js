@@ -114,15 +114,14 @@ export default class ConstructorExpression extends Expression {
 
     // noinspection JSMethodCanBeStatic
     checkArgument (context, declaration, argument) {
-        let id = argument.id;
-        if(id === null) {
-            const exp = argument.expression;
-            if (exp instanceof InstanceExpression)
-                id = exp.id;
-        }
-        if(!declaration.hasAttribute(context, id.name))
-            context.problemListener.reportUnknownAttribute(id, id);
-        argument.check(context);
+        const id = argument.id;
+        if(id === null)
+            context.problemListener.reportMissingAttribute(argument, argument.toString());
+        else if(declaration.hasAttribute(context, id.name)) {
+            context = context.newChildContext();
+            argument.check(context);
+        } else
+            context.problemListener.reportUnknownAttribute(id, id.name);
     }
 
     interpret(context) {

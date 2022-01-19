@@ -770,8 +770,11 @@ export default class EPromptoBuilder extends EParserListener {
         if (items === null) {
             items = new grammar.ArgumentList();
         }
-        items.insert(0, new grammar.Argument(null, exp));
-        const item = this.getNodeValue(ctx.item) || null;
+        let item = new grammar.Argument(null, exp);
+        if(exp instanceof parser.Section)
+            item.copySectionFrom(exp);
+        items.insert(0, item);
+        item = this.getNodeValue(ctx.item) || null;
         if (item !== null) {
             items.add(item);
         } else {
