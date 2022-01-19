@@ -56,6 +56,10 @@ test('IllegalOperation problems', () => {
 	checkProblems('problems/illegalOperation.poc');
 });
 
+test('MissingAttribute problems', () => {
+	checkProblems('problems/missingAttribute.poc');
+});
+
 test('NoMatchingPrototype problems', () => {
 	checkProblems('problems/noMatchingPrototype.poc');
 });
