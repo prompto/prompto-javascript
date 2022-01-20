@@ -15,7 +15,8 @@ jobs:
       - run:
           name: Run Core tests
           command: >-
-            echo $(pwd) &&
+            echo "PWD=" $(pwd) &&
+            echo "CIRCLE_WORKING_DIRECTORY=" ${CIRCLE_WORKING_DIRECTORY} &&
             cd JavaScript-Core &&
             yarn install &&
             yarn test
