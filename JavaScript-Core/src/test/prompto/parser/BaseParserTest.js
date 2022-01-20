@@ -20,7 +20,7 @@ function getPromptoFolder() {
     while (path.basename(prompto).indexOf("prompto-") !== 0 && prompto!==root) {
         var parent = path.dirname(prompto);
         if (parent === prompto)
-            throw "Could not find prompto root of " + module.filename + " @ prompto-javascript or " + root;
+            fail("Could not find prompto root of " + module.filename + " @ prompto-javascript or " + root);
         prompto = parent;
     }
     return prompto;
