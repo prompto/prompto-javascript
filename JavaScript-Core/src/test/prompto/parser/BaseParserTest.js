@@ -15,7 +15,8 @@ global.ReactBootstrap = { Button: function() { this.render = function() { return
 prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(true);
 
 function getPromptoFolder() {
-    var root = process.env.PROMPTO_ROOT;	
+    var root = process.env.PROMPTO_ROOT;
+    console.log("ROOT = " + root);	
     var prompto = module.filename;
     while (path.basename(prompto).indexOf("prompto-") !== 0 && prompto!==root) {
         var parent = path.dirname(prompto);
