@@ -16,14 +16,14 @@ jobs:
           name: Run Core tests
           command: >-
             cd JavaScript-Core &&
-            npm install &&
-            npm test
+            yarn install &&
+            yarn test
       - run:
           name: Run Runtime tests
           command: >-
             cd JavaScript-Runtime &&
-            npm install &&
-            npm test
+            yarn install &&
+            yarn test
 
 workflows:
   regular:
