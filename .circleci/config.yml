@@ -12,12 +12,12 @@ jobs:
           name: Checkout git submodules
           command: |
             git submodule update --init --recursive
-#      - run:
-#          name: Run Core tests
-#          command: >-
-#            cd JavaScript-Core &&
-#            PROMPTO_ROOT=$(pwd) &&
-#            yarn install &&
+      - run:
+          name: Run Core tests
+          command: >-
+            cd JavaScript-Core &&
+            PROMPTO_ROOT=$(pwd) &&
+            yarn install
 #            yarn test
       - run:
           name: Run Runtime tests
