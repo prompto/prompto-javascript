@@ -14,15 +14,17 @@ jobs:
             git submodule update --init --recursive
       - run:
           name: Run Core tests
+          environment:
+            PROMPTO_ROOT: $(pwd)
           command: >-
-            PROMPTO_ROOT=$(pwd) &&
             cd JavaScript-Core &&
             yarn install &&
             yarn test
       - run:
           name: Run Runtime tests
+          environment:
+            PROMPTO_ROOT: $(pwd)
           command: >-
-            PROMPTO_ROOT=$(pwd) &&
             cd JavaScript-Runtime &&
             yarn install &&
             yarn test
