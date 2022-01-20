@@ -15,15 +15,15 @@ jobs:
       - run:
           name: Run Core tests
           command: >-
-            echo "PWD=" $(pwd) &&
-            echo "CIRCLE_WORKING_DIRECTORY=" ${CIRCLE_WORKING_DIRECTORY} &&
             cd JavaScript-Core &&
+            PROMPTO_ROOT=$(pwd) &&
             yarn install &&
             yarn test
       - run:
           name: Run Runtime tests
           command: >-
             cd JavaScript-Runtime &&
+            PROMPTO_ROOT=$(pwd) &&
             yarn install &&
             yarn test
 
