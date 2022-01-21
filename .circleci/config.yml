@@ -15,16 +15,18 @@ jobs:
       - run:
           name: Run Core tests
           environment:
-            PROMPTO_ROOT: $(pwd)
+            PROMPTO_ROOT: 
           command: >-
+            echo $(pwd) >> $PROMPTO_ROOT &&
             cd JavaScript-Core &&
             yarn install &&
             yarn test
       - run:
           name: Run Runtime tests
           environment:
-            PROMPTO_ROOT: $(pwd)
+            PROMPTO_ROOT: 
           command: >-
+            echo $(pwd) >> $PROMPTO_ROOT &&
             cd JavaScript-Runtime &&
             yarn install &&
             yarn test
