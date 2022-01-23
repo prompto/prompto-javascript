@@ -3,13 +3,13 @@ import { StoredDocument } from './index.js'
 
 export default class StorableDocument {
 
-    constructor(categories, dbIdFactory) {
+    constructor(categories, dbIdFactory, document) {
         if(!categories)
             throw new Error("!!!");
         // use reserved keyword explicitly
         this.category = categories;
         this.$dbIdFactory = dbIdFactory;
-        this.document = null;
+        this.document = document || null;
     }
 
     isDirty() {

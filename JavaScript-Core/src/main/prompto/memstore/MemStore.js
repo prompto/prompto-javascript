@@ -1,5 +1,5 @@
 import Store from '../store/Store.js'
-import { MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata } from './index.js'
+import {MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata, StoredDocument} from './index.js'
 import {DateTime, Document, List} from '../intrinsic/index.js'
 
 // a utility class for running tests only
@@ -71,15 +71,20 @@ export default class MemStore extends Store {
         this.auditRecords[audit.dbId] = audit;
     }
 
-    doStore(doc, auditMeta) {
-        const data = doc.document;
+    doStore(storable, auditMeta) {
+        let data = storable.document;
         if(data.dbId) {
-            const isUpdate = this.documents[data.dbId] || false;
-            this.documents[data.dbId] = data;
+            const previous = this.documents[data.dbId] || null;
+            const toStore = new StoredDocument(data.category);
+            if(previous)
+                Object.assign(toStore, previous, data);
+            else
+                Object.assign(toStore, data);
+            this.documents[data.dbId] = toStore;
             const audit = this.newAuditRecord(auditMeta);
             audit.instanceDbId = data.dbId;
-            audit.operation = isUpdate ? "UPDATE" : "INSERT";
-            audit.instance = doc;
+            audit.operation = previous != null ? "UPDATE" : "INSERT";
+            audit.instance = storable;
             this.auditRecords[audit.dbId] = audit;
         }
     }

@@ -5,11 +5,13 @@ import { IntegerValue, IntegerRangeValue } from '../value/index.js'
 import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins.js'
 import { isAnInteger } from '../utils/index.js'
 import { Range, IntegerRange } from '../intrinsic/index.js'
+import {TypeFamily} from "../store";
 
 export default class IntegerType extends NativeType {
 
     constructor() {
         super(new Identifier("Integer"));
+        this.family = TypeFamily.INTEGER;
     }
 
     isAssignableFrom(context, other) {
