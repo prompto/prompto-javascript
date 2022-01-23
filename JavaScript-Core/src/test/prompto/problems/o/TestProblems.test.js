@@ -60,6 +60,10 @@ test('MissingAttribute problems', () => {
 	checkProblems('problems/missingAttribute.poc');
 });
 
+test('MissingAttributeMember problems', () => {
+	checkProblems('problems/missingAttributeMember.poc');
+});
+
 test('MissingAttributeValue problems', () => {
 	checkProblems('problems/missingAttributeValue.poc');
 });
