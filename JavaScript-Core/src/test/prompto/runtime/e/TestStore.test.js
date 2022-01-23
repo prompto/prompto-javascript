@@ -290,6 +290,14 @@ test('Transpiled SimpleRecord', () => {
 	checkTranspiledOutput('store/simpleRecord.pec');
 });
 
+test('Interpreted SimpleUpdate', () => {
+	checkInterpretedOutput('store/simpleUpdate.pec');
+});
+
+test('Transpiled SimpleUpdate', () => {
+	checkTranspiledOutput('store/simpleUpdate.pec');
+});
+
 test('Interpreted SlicedRecords', () => {
 	checkInterpretedOutput('store/slicedRecords.pec');
 });

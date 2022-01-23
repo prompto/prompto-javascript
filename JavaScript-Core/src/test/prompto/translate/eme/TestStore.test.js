@@ -140,6 +140,10 @@ test('SimpleRecord', () => {
 	compareResourceEME('store/simpleRecord.pec');
 });
 
+test('SimpleUpdate', () => {
+	compareResourceEME('store/simpleUpdate.pec');
+});
+
 test('SlicedRecords', () => {
 	compareResourceEME('store/slicedRecords.pec');
 });

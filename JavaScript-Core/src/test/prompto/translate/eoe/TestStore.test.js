@@ -140,6 +140,10 @@ test('SimpleRecord', () => {
 	compareResourceEOE('store/simpleRecord.pec');
 });
 
+test('SimpleUpdate', () => {
+	compareResourceEOE('store/simpleUpdate.pec');
+});
+
 test('SlicedRecords', () => {
 	compareResourceEOE('store/slicedRecords.pec');
 });
