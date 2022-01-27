@@ -18,6 +18,14 @@ test('Transpiled AbstractMember', () => {
 	checkTranspiledOutput('methods/abstractMember.poc');
 });
 
+test('Interpreted AbstractMemberItem', () => {
+	checkInterpretedOutput('methods/abstractMemberItem.poc');
+});
+
+test('Transpiled AbstractMemberItem', () => {
+	checkTranspiledOutput('methods/abstractMemberItem.poc');
+});
+
 test('Interpreted Anonymous', () => {
 	checkInterpretedOutput('methods/anonymous.poc');
 });

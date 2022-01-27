@@ -4,6 +4,10 @@ test('AbstractMember', () => {
 	compareResourceOMO('methods/abstractMember.poc');
 });
 
+test('AbstractMemberItem', () => {
+	compareResourceOMO('methods/abstractMemberItem.poc');
+});
+
 test('Anonymous', () => {
 	compareResourceOMO('methods/anonymous.poc');
 });

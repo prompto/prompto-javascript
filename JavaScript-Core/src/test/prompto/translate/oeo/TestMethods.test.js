@@ -4,6 +4,10 @@ test('AbstractMember', () => {
 	compareResourceOEO('methods/abstractMember.poc');
 });
 
+test('AbstractMemberItem', () => {
+	compareResourceOEO('methods/abstractMemberItem.poc');
+});
+
 test('Anonymous', () => {
 	compareResourceOEO('methods/anonymous.poc');
 });
