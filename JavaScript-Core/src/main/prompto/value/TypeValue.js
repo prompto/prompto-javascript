@@ -1,9 +1,10 @@
 import Value from './Value.js'
+import { TypeType } from "../type/index.js";
 
 export default class TypeValue extends Value {
   
     constructor(value) {
-        super(null); // TODO type of type
+        super(new TypeType(value));
         this.value = value;
     }
 
