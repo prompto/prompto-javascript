@@ -1,11 +1,12 @@
 import MemberSelector from './MemberSelector.js'
-import { UnresolvedIdentifier, InstanceExpression, CategorySymbol } from './index.js'
+import { CategorySymbol } from './index.js'
 import { Identifier, NamedInstance } from '../grammar/index.js'
 import { MethodType, CategoryType, TypeType } from '../type/index.js'
 import { MethodDeclarationMap } from '../runtime/index.js'
 import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value/index.js'
 import { SingletonCategoryDeclaration } from '../declaration/index.js'
 import { NullReferenceError } from '../error/index.js'
+import { SuperExpression } from '../expression/index.js'
 
 export default class MethodSelector extends MemberSelector {
   
@@ -97,29 +98,19 @@ export default class MethodSelector extends MemberSelector {
 
     checkParentType(context, checkInstance) {
         if(checkInstance)
-            return this.checkParentInstance(context);
+            return this.interpretParentInstance(context);
         else
             return this.checkParent(context);
     }
 
-    checkParentInstance(context) {
-        let id = null;
-        if(this.parent instanceof UnresolvedIdentifier)
-            id = this.parent.id;
-        else if(this.parent instanceof InstanceExpression)
-            id = this.parent.id;
-        if(id!=null) {
-            // don't get Singleton values
-            // noinspection JSUnresolvedVariable
-            const first = id.name.substring(0, 1);
-            if(first.toLowerCase() === first) {
-                const value = context.getValue(id);
-                if(value!=null && value !== NullValue.instance)
-                    return value.type;
-            }
-        }
-        // TODO check result instance
-        return this.checkParent(context);
+    interpretParentInstance(context) {
+        const value = this.parent.interpret(context);
+        if(value === null || value === NullValue.instance)
+            throw new NullReferenceError();
+        if(this.parent instanceof SuperExpression)
+            return value.type.getSuperType(context, this);
+        else
+            return value.type;
     }
 
     newLocalContext(context, declaration) {

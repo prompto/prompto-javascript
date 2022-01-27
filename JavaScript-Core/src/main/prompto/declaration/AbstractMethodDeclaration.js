@@ -12,8 +12,8 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         return true;
     }
 
-    memberCheck(declaration, context) {
-        // TODO Auto-generated method stub
+    interpret(context) {
+        throw "Should never get there!";
     }
 
     check(context, isStart) {
@@ -48,7 +48,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         writer.append(" (");
         this.parameters.toDialect(writer);
         writer.append(")");
-        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+        if(this.returnType!=null && this.returnType !== VoidType.instance) {
             writer.append("->");
             this.returnType.toDialect(writer);
         }
@@ -59,7 +59,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         writer.append(this.name);
         writer.append(" as abstract method ");
         this.parameters.toDialect(writer);
-        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+        if(this.returnType!=null && this.returnType !== VoidType.instance) {
             writer.append("returning ");
             this.returnType.toDialect(writer);
         }
@@ -67,7 +67,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 
     toODialect(writer) {
         writer.append("abstract ");
-        if(this.returnType!=null && this.returnType!=VoidType.instance) {
+        if(this.returnType!=null && this.returnType !== VoidType.instance) {
             this.returnType.toDialect(writer);
             writer.append(" ");
         }
