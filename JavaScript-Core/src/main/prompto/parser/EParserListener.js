@@ -212,12 +212,21 @@ export default class EParserListener extends antlr4.tree.ParseTreeListener {
 	}
 
 
-	// Enter a parse tree produced by EParser#abstract_method_declaration.
-	enterAbstract_method_declaration(ctx) {
+	// Enter a parse tree produced by EParser#abstract_global_method_declaration.
+	enterAbstract_global_method_declaration(ctx) {
 	}
 
-	// Exit a parse tree produced by EParser#abstract_method_declaration.
-	exitAbstract_method_declaration(ctx) {
+	// Exit a parse tree produced by EParser#abstract_global_method_declaration.
+	exitAbstract_global_method_declaration(ctx) {
+	}
+
+
+	// Enter a parse tree produced by EParser#abstract_member_method_declaration.
+	enterAbstract_member_method_declaration(ctx) {
+	}
+
+	// Exit a parse tree produced by EParser#abstract_member_method_declaration.
+	exitAbstract_member_method_declaration(ctx) {
 	}
 
 
