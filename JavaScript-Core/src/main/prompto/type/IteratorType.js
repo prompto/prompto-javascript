@@ -31,25 +31,25 @@ export default class IteratorType extends IterableType {
         return this.itemType;
     }
 
-    checkMember(context, section, name) {
-        if ("count"===name)
+    checkMember(context, section, id) {
+        if ("count" === id.name)
             return IntegerType.instance;
         else
-            return  super.checkMember(context, section, name);
+            return  super.checkMember(context, section, id);
     }
 
     declare(transpiler) {
         this.itemType.declare(transpiler);
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "toList":
                 return [new ToListMethodDeclaration(this.itemType)];
             case "toSet":
                 return [new ToSetMethodDeclaration(this.itemType)];
             default:
-                return  super.getMemberMethods.call(context, name);
+                return  super.getMemberMethods.call(context, id);
         }
     }
 }

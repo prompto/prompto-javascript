@@ -55,11 +55,11 @@ export default class BaseType extends Section {
         return this === other || this.equals(other) || other === NullType.instance;
     }
 
-    getMemberMethods(context, name) {
+    getMemberMethods(context, id) {
         return [];
     }
 
-    getStaticMemberMethods(context, name) {
+    getStaticMemberMethods(context, id) {
         return [];
     }
 
@@ -350,24 +350,24 @@ export default class BaseType extends Section {
             throw new SyntaxError("Cannot transpile item from: " + this.name);
     }
 
-    checkMember(context, section, name) {
-        if("text" === name)
+    checkMember(context, section, id) {
+        if("text" === id.name)
             return TextType.instance;
-        else if("json" === name)
+        else if("json" === id.name)
             return TextType.instance;
         else {
-            context.problemListener.reportUnknownAttribute(section, name);
+            context.problemListener.reportUnknownAttribute(section, id.name);
             return VoidType.instance;
         }
     }
 
-    checkStaticMember(context, section, name) {
-        context.problemListener.reportUnknownAttribute(section, name);
+    checkStaticMember(context, section, id) {
+        context.problemListener.reportUnknownAttribute(section, id.name);
         return VoidType.instance;
     }
 
-    declareMember(transpiler, section, name) {
-        switch(name) {
+    declareMember(transpiler, section, id) {
+        switch(id.name) {
             case "text":
                 break;
             case "json":
@@ -375,12 +375,12 @@ export default class BaseType extends Section {
                 transpiler.require(convertToJsonNode);
                 break;
             default:
-                transpiler.context.problemListener.reportUnknownAttribute(section, name);
+                transpiler.context.problemListener.reportUnknownAttribute(section, id.name);
         }
     }
 
-    transpileMember(transpiler, name) {
-        switch(name) {
+    transpileMember(transpiler, id) {
+        switch(id.name) {
             case "text":
                 transpiler.append("getText()");
                 break;
@@ -388,7 +388,7 @@ export default class BaseType extends Section {
                 transpiler.append("toJson()");
                 break;
             default:
-                throw new SyntaxError("Cannot transpile member: " + name + " from " + this.name);
+                throw new SyntaxError("Cannot transpile member: " + id.name + " from " + this.name);
         }
     }
 

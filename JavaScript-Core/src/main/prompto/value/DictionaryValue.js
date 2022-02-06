@@ -36,25 +36,29 @@ export default class DictionaryValue extends Value {
         }
     }
 
-    getMemberValue(context, name) {
-        if ("count" === name) {
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "count":
             return new IntegerValue(this.dict.length);
-        } else if ("json" === name) {
-            return super.getMemberValue(context, name);
-        } else if ("keys" === name) {
-            const keys = new StrictSet();
-            const iter = this.dict.keys.iterator();
-            while(iter.hasNext()) {
-                keys.add(new TextValue(iter.next()));
+            case "json":
+            return super.getMemberValue(context, id);
+            case "keys": {
+                const keys = new StrictSet();
+                const iter = this.dict.keys.iterator();
+                while (iter.hasNext()) {
+                    keys.add(new TextValue(iter.next()));
+                }
+                return new SetValue(TextType.instance, keys);
             }
-            return new SetValue(TextType.instance, keys);
-        } else if ("values" === name) {
-            const list = this.dict.$keys.map(function(name) {
-                return this.dict[name];
-            }, this);
-            return new ListValue(this.type.itemType, list);
-        } else {
-            return super.getMemberValue(context, name);
+            case "values":
+            {
+                const list = this.dict.$keys.map(name => {
+                    return this.dict[name];
+                }, this);
+                return new ListValue(this.type.itemType, list);
+            }
+            default:
+                return super.getMemberValue(context, id);
         }
     }
 
@@ -160,16 +164,17 @@ class KVPValue extends Value {
         this.value = value;
     }
 
-    getMemberValue(context, name) {
-        if ("key" === name) {
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "key":
             return new TextValue(this.key);
-        } else if ("value" === name) {
+            case "value":
             if (this.value.interpret) {
                 this.value = this.value.interpret(context);
             }
             return this.value;
-        } else {
-            throw new SyntaxError("No such member:" + name);
+            default:
+                return super.getMemberValue(context, id);
         }
     }
 }

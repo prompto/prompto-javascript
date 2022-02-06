@@ -27,7 +27,7 @@ export default class ConstructorExpression extends Expression {
                 let id = null;
                 if (assign.expression instanceof UnresolvedIdentifier || assign.expression instanceof InstanceExpression)
                     id = assign.expression.id;
-                if (id && decl.hasAttribute(context, id.name)) {
+                if (id && decl.hasAttribute(context, id)) {
                     assign.parameter = new AttributeParameter(id);
                     assign._expression = null;
                 }
@@ -38,7 +38,7 @@ export default class ConstructorExpression extends Expression {
     }
 
     toDialect(writer) {
-        const cd = writer.context.getRegisteredDeclaration(this.type.name);
+        const cd = writer.context.getRegisteredDeclaration(this.type.id);
         if(cd==null)
             writer.context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
         this.checkFirstHomonym(writer.context, cd);
@@ -73,7 +73,7 @@ export default class ConstructorExpression extends Expression {
 
     check(context) {
         // need to update type, since it was arbitrarily set to CategoryType
-        const decl = context.getRegisteredDeclaration(this.type.name);
+        const decl = context.getRegisteredDeclaration(this.type.id);
         if (decl == null) {
             context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
             return VoidType.instance;
@@ -117,7 +117,7 @@ export default class ConstructorExpression extends Expression {
         const id = argument.id;
         if(id === null)
             context.problemListener.reportMissingAttribute(argument, argument.toString());
-        else if(declaration.hasAttribute(context, id.name)) {
+        else if(declaration.hasAttribute(context, id)) {
             context = context.newChildContext();
             argument.check(context);
         } else
@@ -125,7 +125,7 @@ export default class ConstructorExpression extends Expression {
     }
 
     interpret(context) {
-        const cd = context.getRegisteredDeclaration(this.type.name);
+        const cd = context.getRegisteredDeclaration(this.type.id);
         this.checkFirstHomonym(context, cd);
         const instance = this.type.newInstance(context);
         instance.mutable = true;
@@ -133,13 +133,16 @@ export default class ConstructorExpression extends Expression {
             const copyObj = this.copyFrom.interpret(context);
             if((copyObj.getMemberValue || null)!=null) {
                 const names = copyObj.getMemberNames();
-                names.forEach(function(name) {
-                    if(name !== "dbId" && cd.hasAttribute(context, name)) {
-                        const value = copyObj.getMemberValue(context, name);
-                        if(value!=null && value.mutable && !this.type.mutable)
-                            throw new NotMutableError();
-                        // TODO convert Document member to attribute type
-                        instance.setMember(context, name, value);
+                names.forEach(name => {
+                    if(name !== "dbId") {
+                        const id = new Identifier(name);
+                        if (cd.hasAttribute(context, id)) {
+                            const value = copyObj.getMemberValue(context, id);
+                            if (value != null && value.mutable && !this.type.mutable)
+                                throw new NotMutableError();
+                            // TODO convert Document member to attribute type
+                            instance.setMember(context, id, value);
+                        }
                     }
                 }, this);
             }
@@ -149,7 +152,7 @@ export default class ConstructorExpression extends Expression {
                 const value = argument.expression.interpret(context);
                 if(value!=null && value.mutable && !this.type.mutable)
                     throw new NotMutableError();
-                instance.setMember(context, argument.name, value);
+                instance.setMember(context, argument.id, value);
             }, this);
         }
         instance.mutable = this.type.mutable;
@@ -157,7 +160,7 @@ export default class ConstructorExpression extends Expression {
     }
 
     declare(transpiler) {
-        const cd = transpiler.context.getRegisteredDeclaration(this.type.name);
+        const cd = transpiler.context.getRegisteredDeclaration(this.type.id);
         cd.declare(transpiler);
         if(this.copyFrom)
             this.copyFrom.declare(transpiler);
@@ -166,7 +169,7 @@ export default class ConstructorExpression extends Expression {
     }
 
     transpile(transpiler) {
-        const decl = transpiler.context.getRegisteredDeclaration(this.type.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.type.id);
         if (decl instanceof NativeWidgetDeclaration)
             this.transpileNativeWidget(transpiler, decl);
         else if (decl instanceof ConcreteWidgetDeclaration)

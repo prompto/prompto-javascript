@@ -73,7 +73,7 @@ export default class UnresolvedParameter {
         try {
             context.problemListener = new ProblemCollector();
             // try out various solutions
-            const named = context.getRegisteredDeclaration(this.name);
+            const named = context.getRegisteredDeclaration(this.id);
             if (named instanceof AttributeDeclaration) {
                 this.resolved = new AttributeParameter(this.id);
             } else if (named instanceof MethodDeclarationMap) {

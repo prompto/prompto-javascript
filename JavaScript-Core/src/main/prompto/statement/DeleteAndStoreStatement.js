@@ -3,8 +3,11 @@ import { Dialect } from '../parser/index.js'
 import { VoidType, AnyType } from '../type/index.js'
 import { NullValue, Instance, Container, DocumentValue } from '../value/index.js'
 import { $DataStore } from '../store/index.js'
-import { StatementList } from "./index";
+import { StatementList } from "./index.js";
+import { Identifier } from "../grammar/index.js";
 const Document = require('../intrinsic/Document.js').default;
+
+const DBID_IDENTIFIER = new Identifier("dbId");
 
 export default class DeleteAndStoreStatement extends BaseStatement {
  
@@ -213,7 +216,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             if (value === NullValue.instance)
                 return;
             else if(value instanceof Instance) {
-                const dbId = value.getMemberValue(context, "dbId");
+                const dbId = value.getMemberValue(context, DBID_IDENTIFIER);
                 if (dbId !=null && dbId !== NullValue.instance)
                     idsToDel.add(dbId.getStorableData());
             } else if(value instanceof Container) {
@@ -221,7 +224,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
                     if (item === NullValue.instance)
                         return;
                     else if (item instanceof Instance) {
-                        const dbId = item.getMemberValue(context, "dbId");
+                        const dbId = item.getMemberValue(context, DBID_IDENTIFIER);
                         if (dbId != null && dbId !== NullValue.instance)
                             idsToDel.push(dbId.getStorableData());
                     }

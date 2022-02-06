@@ -132,10 +132,10 @@ export default class FetchManyExpression extends Expression {
         if (type==null)
             type = AnyType.instance;
         else {
-            const decl = context.getRegisteredDeclaration(this.type.name);
+            const decl = context.getRegisteredDeclaration(this.type.id);
             if (decl == null  || !(decl instanceof CategoryDeclaration))
                 context.problemListener.reportUnknownCategory(type.id, type.name);
-            if(!(decl.isStorable && decl.isStorable(context)))
+            if(!(decl && decl.isStorable && decl.isStorable(context)))
                 context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);
         }

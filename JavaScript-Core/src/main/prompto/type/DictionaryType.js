@@ -153,8 +153,8 @@ export default class DictionaryType extends ContainerType {
         return new EntryType(this.itemType);
     }
 
-    checkMember(context, section, name) {
-        switch (name) {
+    checkMember(context, section, id) {
+        switch (id.name) {
             case "count":
                 return IntegerType.instance;
             case "keys":
@@ -162,12 +162,12 @@ export default class DictionaryType extends ContainerType {
             case "values":
                 return new ListType(this.itemType);
             default:
-                return super.checkMember(context, section, name);
+                return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        switch (name) {
+    declareMember(transpiler, section, id) {
+        switch (id.name) {
             case "keys":
                 transpiler.require(StrictSet);
                 break;
@@ -182,29 +182,29 @@ export default class DictionaryType extends ContainerType {
             case "count":
                 break;
             default:
-                super.declareMember(transpiler, section, name);
+                super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        switch(name) {
+    transpileMember(transpiler, id) {
+        switch(id.name) {
             case "count":
                 transpiler.append("length");
                 break;
             case "keys":
             case "values":
-                transpiler.append(name);
+                transpiler.append(id.name);
                 break;
             case "json":
                 transpiler.append("toJson()");
                 break;
             default:
-             super.transpileMember(transpiler, name);
+             super.transpileMember(transpiler, id);
         }
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "swap" :
                 return [new SwapMethodDeclaration()];
             case "removeKey":
@@ -212,7 +212,7 @@ export default class DictionaryType extends ContainerType {
             case "removeValue":
                 return [new RemoveValueMethodDeclaration()];
             default:
-                return super.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, id);
         }
     }
 }

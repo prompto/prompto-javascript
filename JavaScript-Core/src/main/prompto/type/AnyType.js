@@ -17,8 +17,8 @@ export default class AnyType extends NativeType {
         return DocumentType.instance.checkItem(context, item);
     }
 
-    checkMember(context, section, name) {
-        return DocumentType.instance.checkMember(context, section, name);
+    checkMember(context, section, id) {
+        return DocumentType.instance.checkMember(context, section, id);
     }
 
     declare(transpiler) {
@@ -38,16 +38,16 @@ export default class AnyType extends NativeType {
         DocumentType.instance.transpileItem(transpiler, type, item);
     }
 
-    declareMember(transpiler, name) {
-        DocumentType.instance.declareMember(transpiler, name);
+    declareMember(transpiler, section, id) {
+        DocumentType.instance.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, name) {
-        DocumentType.instance.transpileMember(transpiler, name);
+    transpileMember(transpiler, id) {
+        DocumentType.instance.transpileMember(transpiler, id);
     }
 
-    transpileAssignMemberValue(transpiler, name, expression) {
-        DocumentType.instance.transpileAssignMemberValue(transpiler, name, expression);
+    transpileAssignMemberValue(transpiler, id, expression) {
+        DocumentType.instance.transpileAssignMemberValue(transpiler, id, expression);
     }
 
     transpileAssignItemValue(transpiler, item, expression) {

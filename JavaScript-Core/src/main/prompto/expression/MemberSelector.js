@@ -75,7 +75,7 @@ export default class MemberSelector extends SelectorExpression {
         const parent = this.resolveParent(transpiler.context);
         parent.declareParent(transpiler);
         const parentType = this.checkParent(transpiler.context);
-        return parentType.declareMember(transpiler, this, this.name);
+        return parentType.declareMember(transpiler, this, this.id);
     }
 
     transpile(transpiler) {
@@ -83,7 +83,7 @@ export default class MemberSelector extends SelectorExpression {
         parent.transpileParent(transpiler);
         transpiler.append(".");
         const parentType = this.checkParent(transpiler.context);
-        parentType.transpileMember(transpiler, this.name);
+        parentType.transpileMember(transpiler, this.id);
         return false;
     }
 
@@ -101,7 +101,7 @@ export default class MemberSelector extends SelectorExpression {
 
     check(context) {
         const parentType = this.checkParent(context);
-        return parentType ? parentType.checkMember(context, this.id, this.name) : VoidType.instance;
+        return parentType ? parentType.checkMember(context, this.id, this.id) : VoidType.instance;
     }
 
     interpret(context) {
@@ -111,7 +111,7 @@ export default class MemberSelector extends SelectorExpression {
         if (instance == null || instance === NullValue.instance)
             throw new NullReferenceError();
         else
-            return instance.getMemberValue(context, this.name, false);
+            return instance.getMemberValue(context, this.id, false);
     }
 
     resolveParent(context) {

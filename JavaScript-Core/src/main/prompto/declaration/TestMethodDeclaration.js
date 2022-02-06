@@ -230,7 +230,7 @@ export default class TestMethodDeclaration extends BaseDeclaration {
         if (expectedError!=null && expectedError.equals (actual))
             this.printSuccess (context);
         else {
-            const actualName = actual.getMemberValue (context, "name").toString ();
+            const actualName = actual.getMemberValue (context, new Identifier("name")).toString ();
             const expectedName = this.error == null ? "SUCCESS" : this.error.name;
             this.printMissingError (context, expectedName, actualName);
         }

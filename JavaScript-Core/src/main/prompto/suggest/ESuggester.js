@@ -5,7 +5,7 @@ import { ELexer } from "../parser/index.js";
 export default class ESuggester extends BaseSuggester {
 
     getStartState() {
-        return 162; // first state in EParser.declaration_list()
+        return 164; // first state in EParser.declaration_list()
     }
 
     suggestionsAt(caret, context) {

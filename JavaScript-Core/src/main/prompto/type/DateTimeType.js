@@ -1,8 +1,8 @@
 import NativeType from './NativeType.js'
-import { DateType, TimeType, PeriodType, IntegerType, BooleanType, TextType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { DateTimeValue } from '../value/index.js'
-import { LocalDate, LocalTime, DateTime } from '../intrinsic/index.js'
+import {DateType, TimeType, PeriodType, IntegerType, BooleanType, TextType} from './index.js'
+import {Identifier} from '../grammar/index.js'
+import {DateTimeValue} from '../value/index.js'
+import {LocalDate, LocalTime, DateTime} from '../intrinsic/index.js'
 
 export default class DateTimeType extends NativeType {
 
@@ -13,7 +13,7 @@ export default class DateTimeType extends NativeType {
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
         if (value instanceof Date)
             value = new DateTime(value, 0);
-        if(value instanceof DateTime)
+        if (value instanceof DateTime)
             return new DateTimeValue(value);
         else
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
@@ -56,7 +56,7 @@ export default class DateTimeType extends NativeType {
     checkSubtract(context, other) {
         if (other === PeriodType.instance) {
             return this;
-        } else if(other === DateTimeType.instance) {
+        } else if (other === DateTimeType.instance) {
             return PeriodType.instance;
         } else {
             return super.checkSubtract(context, other);
@@ -87,7 +87,7 @@ export default class DateTimeType extends NativeType {
     }
 
     checkCompare(context, section, other) {
-        if(other === DateTimeType.instance || other instanceof DateType) {
+        if (other === DateTimeType.instance || other instanceof DateType) {
             return BooleanType.instance;
         } else {
             return super.checkCompare(context, section, other);
@@ -107,73 +107,80 @@ export default class DateTimeType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, name) {
-        if ("year"===name) {
-            return IntegerType.instance;
-        } else if ("month"===name) {
-            return IntegerType.instance;
-        } else if ("dayOfMonth"===name) {
-            return IntegerType.instance;
-        } else if ("dayOfYear"===name) {
-            return IntegerType.instance;
-        } else if ("hour"===name) {
-            return IntegerType.instance;
-        } else if ("minute"===name) {
-            return IntegerType.instance;
-        } else if ("second"===name) {
-            return IntegerType.instance;
-        } else if ("millisecond"===name) {
-            return IntegerType.instance;
-        } else if ("tzOffset"===name) {
-            return IntegerType.instance;
-        } else if ("tzName"===name) {
-            return TextType.instance;
-        } else if ("date"===name) {
-            return DateType.instance;
-        } else if ("time"===name) {
-            return TimeType.instance;
-        } else {
-            return super.checkMember(context, section, name);
+    checkMember(context, section, id) {
+        switch (id.name) {
+            case "year":
+            case "month":
+            case "dayOfMonth":
+            case "dayOfYear":
+            case "hour":
+            case "minute":
+            case "second":
+            case "millisecond":
+            case "tzOffset":
+                return IntegerType.instance;
+            case "tzName":
+                return TextType.instance;
+            case "date":
+                return DateType.instance;
+            case "time":
+                return TimeType.instance;
+            default:
+                return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if("date"===name) {
+    declareMember(transpiler, section, id) {
+        switch (id.name) {
+            case "year":
+            case "month":
+            case "dayOfMonth":
+            case "dayOfYear":
+            case "hour":
+            case "minute":
+            case "second":
+            case "millisecond":
+            case "tzOffset":
+                break;
+            case "date":
             transpiler.register(LocalDate);
-        } else if("time"===name) {
+            break;
+            case "time":
             transpiler.register(LocalTime);
-        } else if (!("year"===name || "month"===name || "dayOfMonth"===name || "dayOfYear"===name || "hour"===name || "minute"===name || "second"===name || "millisecond"===name || "tzOffset"===name || "tzName"===name)) {
-            super.declareMember(transpiler, section, name);
+            break;
+            default:
+                super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("year"===name) {
+    transpileMember(transpiler, id) {
+        const name = id.name;
+        if ("year" === name) {
             transpiler.append("getYear()");
-        } else if ("month"===name) {
+        } else if ("month" === name) {
             transpiler.append("getMonth()");
-        } else if ("dayOfMonth"===name) {
+        } else if ("dayOfMonth" === name) {
             transpiler.append("getDayOfMonth()");
-        } else if ("dayOfYear"===name) {
+        } else if ("dayOfYear" === name) {
             transpiler.append("getDayOfYear()");
-        } else if ("hour"===name) {
+        } else if ("hour" === name) {
             transpiler.append("getHour()");
-        } else if ("minute"===name) {
+        } else if ("minute" === name) {
             transpiler.append("getMinute()");
-        } else if ("second"===name) {
+        } else if ("second" === name) {
             transpiler.append("getSecond()");
-        } else if ("millisecond"===name) {
+        } else if ("millisecond" === name) {
             transpiler.append("getMillisecond()");
-        } else if ("tzOffset"===name) {
+        } else if ("tzOffset" === name) {
             transpiler.append("getTzOffset()");
-        } else if ("tzName"===name) {
+        } else if ("tzName" === name) {
             transpiler.append("getTzName()");
-        } else if ("date"===name) {
+        } else if ("date" === name) {
             transpiler.append("getDate()");
-        } else if ("time"===name) {
+        } else if ("time" === name) {
             transpiler.append("getTime()");
         } else {
-            super.transpileMember(transpiler, name);
+            super.transpileMember(transpiler, id);
         }
     }
 

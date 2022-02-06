@@ -1,11 +1,11 @@
 import NativeType from './NativeType.js'
-import { DateTimeType, PeriodType, IntegerType, BooleanType, RangeType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { TimeValue, TimeRangeValue } from '../value/index.js'
-import { LocalTime, Range, TimeRange } from '../intrinsic/index.js'
+import {DateTimeType, PeriodType, IntegerType, BooleanType, RangeType} from './index.js'
+import {Identifier} from '../grammar/index.js'
+import {TimeValue, TimeRangeValue} from '../value/index.js'
+import {LocalTime, Range, TimeRange} from '../intrinsic/index.js'
 
 export default class TimeType extends NativeType {
- 
+
     constructor() {
         super(new Identifier("TimeValue"));
     }
@@ -122,7 +122,7 @@ export default class TimeType extends NativeType {
     }
 
     declareRange(transpiler, other) {
-        if(other === TimeType.instance) {
+        if (other === TimeType.instance) {
             transpiler.require(Range);
             transpiler.require(TimeRange);
         } else {
@@ -138,37 +138,46 @@ export default class TimeType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, name) {
-        if ("hour" == name) {
-            return IntegerType.instance;
-        } else if ("minute" == name) {
-            return IntegerType.instance;
-        } else if ("second" == name) {
-            return IntegerType.instance;
-        } else if ("millisecond" == name) {
-            return IntegerType.instance;
-        } else {
-            return super.checkMember(context, section, name);
+    checkMember(context, section, id) {
+        switch (id.name) {
+            case "hour":
+            case "minute":
+            case "second":
+            case "millisecond":
+                return IntegerType.instance;
+            default:
+                return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if (!("hour"===name || "minute"===name || "second"===name || "millisecond"===name)) {
-            super.declareMember(transpiler, section, name);
+    declareMember(transpiler, section, id) {
+        switch (id.name) {
+            case "hour":
+            case "minute":
+            case "second":
+            case "millisecond":
+                break;
+            default:
+                super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("hour"==name) {
-            transpiler.append("getHour()");
-        } else if ("minute"==name) {
-            transpiler.append("getMinute()");
-        } else if ("second"==name) {
-            transpiler.append("getSecond()");
-        } else if ("millisecond"==name) {
-            transpiler.append("getMillisecond()");
-        } else {
-            super.transpileMember(transpiler, name);
+    transpileMember(transpiler, id) {
+        switch (id.name) {
+            case "hour":
+                transpiler.append("getHour()");
+                break;
+            case "minute":
+                transpiler.append("getMinute()");
+                break;
+            case "second":
+                transpiler.append("getSecond()");
+                break;
+            case "millisecond":
+                transpiler.append("getMillisecond()");
+                break;
+            default:
+                super.transpileMember(transpiler, id);
         }
     }
 

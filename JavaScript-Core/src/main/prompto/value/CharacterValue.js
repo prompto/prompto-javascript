@@ -16,11 +16,11 @@ export default class CharacterValue extends Value {
         return !!whitespace[c.charCodeAt(0)];
     }
 
-    getMemberValue(context, name) {
-        if ("codePoint" === name) {
+    getMemberValue(context, id) {
+        if ("codePoint" === id.name) {
             return new IntegerValue(this.value.charCodeAt(0));
         } else {
-            return super.getMemberValue(context, name);
+            return super.getMemberValue(context, id);
         }
     }
 

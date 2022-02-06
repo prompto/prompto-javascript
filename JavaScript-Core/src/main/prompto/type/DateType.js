@@ -1,8 +1,8 @@
 import NativeType from './NativeType.js'
-import { DateTimeType, TimeType, PeriodType, IntegerType, BooleanType, RangeType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { DateValue, DateRangeValue } from '../value/index.js'
-import { LocalDate, Range, DateRange, DateTime } from '../intrinsic/index.js'
+import {DateTimeType, TimeType, PeriodType, IntegerType, BooleanType, RangeType} from './index.js'
+import {Identifier} from '../grammar/index.js'
+import {DateValue, DateRangeValue} from '../value/index.js'
+import {LocalDate, Range, DateRange, DateTime} from '../intrinsic/index.js'
 
 export default class DateType extends NativeType {
 
@@ -18,7 +18,7 @@ export default class DateType extends NativeType {
     checkAdd(context, section, other, tryReverse) {
         if (other === PeriodType.instance) {
             return this; // ignore time section
-        } else if(other === TimeType.instance) {
+        } else if (other === TimeType.instance) {
             return DateTimeType.instance;
         } else {
             return super.checkAdd(context, section, other, tryReverse);
@@ -45,7 +45,7 @@ export default class DateType extends NativeType {
         if (other === PeriodType.instance || other === TimeType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
-            if(other === TimeType.instance)
+            if (other === TimeType.instance)
                 transpiler.register(DateTime);
         } else
             return super.declareAdd(transpiler, other, tryReverse, left, right);
@@ -54,7 +54,7 @@ export default class DateType extends NativeType {
     transpileAdd(transpiler, other, tryReverse, left, right) {
         if (other === PeriodType.instance || other === TimeType.instance) {
             left.transpile(transpiler);
-            if(other === TimeType.instance)
+            if (other === TimeType.instance)
                 transpiler.append(".addTime(");
             else
                 transpiler.append(".addPeriod(");
@@ -127,7 +127,7 @@ export default class DateType extends NativeType {
     }
 
     declareRange(transpiler, other) {
-        if(other === DateType.instance) {
+        if (other === DateType.instance) {
             transpiler.require(Range);
             transpiler.require(DateRange);
         } else {
@@ -143,37 +143,46 @@ export default class DateType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, name) {
-        if ("year" === name) {
-            return IntegerType.instance;
-        } else if ("month" === name) {
-            return IntegerType.instance;
-        } else if ("dayOfMonth" === name) {
-            return IntegerType.instance;
-        } else if ("dayOfYear" === name) {
-            return IntegerType.instance;
-        } else {
-            return super.checkMember(context, section, name);
+    checkMember(context, section, id) {
+        switch (id.name) {
+            case "year":
+            case "month":
+            case "dayOfMonth":
+            case "dayOfYear":
+                return IntegerType.instance;
+            default:
+                return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if (!("year" === name || "month" === name || "dayOfMonth" === name || "dayOfYear" === name)) {
-            super.declareMember(transpiler, section, name);
+    declareMember(transpiler, section, id) {
+        switch (id.name) {
+            case "year":
+            case "month":
+            case "dayOfMonth":
+            case "dayOfYear":
+                break;
+            default:
+                super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("year" === name) {
-            transpiler.append("getYear()");
-        } else if ("month" === name) {
-            transpiler.append("getMonth()");
-        } else if ("dayOfMonth" === name) {
-            transpiler.append("getDayOfMonth()");
-        } else if ("dayOfYear" === name) {
-            transpiler.append("getDayOfYear()");
-        } else {
-            super.transpileMember(transpiler, name);
+    transpileMember(transpiler, id) {
+        switch (id.name) {
+            case "year":
+                transpiler.append("getYear()");
+                break;
+            case "month":
+                transpiler.append("getMonth()");
+                break;
+            case "dayOfMonth":
+                transpiler.append("getDayOfMonth()");
+                break;
+            case "dayOfYear":
+                transpiler.append("getDayOfYear()");
+                break;
+            default:
+                super.transpileMember(transpiler, id);
         }
     }
 

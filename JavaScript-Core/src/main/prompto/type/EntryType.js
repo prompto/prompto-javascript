@@ -9,26 +9,26 @@ export default class EntryType extends BaseType {
         this.itemType = itemType;
     }
 
-    checkMember(context, section, name) {
-        if ("key"==name) {
+    checkMember(context, section, id) {
+        if ("key" === id.name) {
             return TextType.instance;
-        } else if ("value"==name) {
+        } else if ("value" === id.name) {
             return this.itemType;
         } else {
-            return super.checkMember(context, section, name);
+            return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if ("key"==name)
+    declareMember(transpiler, section, id) {
+        if ("key" === id.name)
             return;
-        else if ("value"==name)
+        else if ("value" === id.name)
             this.itemType.declare(transpiler);
         else
-            return super.declareMember(transpiler, section, name);
+            return super.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, name) {
-        transpiler.append(name);
+    transpileMember(transpiler, id) {
+        transpiler.append(id.name);
     }
 }

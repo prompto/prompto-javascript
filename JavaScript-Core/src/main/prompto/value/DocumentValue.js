@@ -34,8 +34,8 @@ export default class DocumentValue extends Value {
         return this.values.hasOwnProperty(name);
     }
 
-    getMemberValue(context, name, autoCreate) {
-        switch(name) {
+    getMemberValue(context, id, autoCreate) {
+        switch(id.name) {
             case "count":
                 return new IntegerValue(this.values.$safe_length);
             case "keys": {
@@ -52,15 +52,15 @@ export default class DocumentValue extends Value {
                 return new ListValue(AnyType.instance, list);
             }
             case "json":
-                return super.getMemberValue(context, name, autoCreate);
+                return super.getMemberValue(context, id, autoCreate);
             default:
-                if (this.values.hasOwnProperty(name))
-                    return this.values[name] || null;
-                else if ("text" === name)
+                if (this.values.hasOwnProperty(id.name))
+                    return this.values[id.name] || null;
+                else if ("text" === id.name)
                     return new TextValue(this.toString());
                 else if (autoCreate) {
                     const result = new DocumentValue();
-                    this.values[name] = result;
+                    this.values[id.name] = result;
                     return result;
                 } else
                     return NullValue.instance;

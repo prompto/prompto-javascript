@@ -27,7 +27,7 @@ export default class InstanceExpression extends Expression {
     }
 
     declare(transpiler) {
-        const named = transpiler.context.getRegistered(this.name);
+        const named = transpiler.context.getRegistered(this.id);
         if(named instanceof MethodDeclarationMap) {
             const decl = named.getFirst();
             // don't declare member methods
@@ -41,12 +41,12 @@ export default class InstanceExpression extends Expression {
     }
 
     transpile(transpiler) {
-        const context = transpiler.context.contextForValue(this.name);
+        const context = transpiler.context.contextForValue(this.id);
         if(context instanceof InstanceContext) {
             context.instanceType.transpileInstance(transpiler);
             transpiler.append(".");
         }
-        const named = transpiler.context.getRegistered(this.name);
+        const named = transpiler.context.getRegistered(this.id);
         if(named instanceof MethodDeclarationMap) {
             transpiler.append(named.getFirst().getTranspiledName());
             // need to bind instance methods
@@ -73,14 +73,14 @@ export default class InstanceExpression extends Expression {
     requiresMethod(writer) {
         if(writer.dialect !== Dialect.E)
             return false;
-        const o = writer.context.getRegistered(this.name);
+        const o = writer.context.getRegistered(this.id);
         return o instanceof MethodDeclarationMap;
     }
 
     check(context) {
-        let named = context.getRegistered(this.id.name);
+        let named = context.getRegistered(this.id);
         if(named==null)
-            named = context.getRegisteredDeclaration(this.id.name);
+            named = context.getRegisteredDeclaration(this.id);
         if(named==null){
             context.problemListener.reportUnknownIdentifier(this.id, this.name);
             return null;

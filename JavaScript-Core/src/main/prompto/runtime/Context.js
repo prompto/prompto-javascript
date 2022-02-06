@@ -256,40 +256,40 @@ class Context {
             return this.globals.getAllAttributes();
     }
 
-    getRegistered(name) {
+    getRegistered(id) {
         // resolve upwards, since local names override global ones
-        let actual = this.declarations[name] || null;
+        let actual = this.declarations[id.name] || null;
         if(actual!==null) {
             return actual;
         }
-        actual = this.instances[name] || null;
+        actual = this.instances[id.name] || null;
         if(actual!==null) {
             return actual;
         } else if(this.parent!==null) {
-            return this.parent.getRegistered(name);
+            return this.parent.getRegistered(id);
         } else if(this.globals!==this) {
-            return this.globals.getRegistered(name);
+            return this.globals.getRegistered(id);
         } else {
             return null;
         }
     }
 
-    getRegisteredDeclaration(name) {
+    getRegisteredDeclaration(id) {
         // resolve upwards, since local names override global ones
-        const actual = this.declarations[name] || null;
+        const actual = this.declarations[id.name] || null;
         if(actual!==null) {
             return actual;
         } else if(this.parent!==null) {
-            return this.parent.getRegisteredDeclaration(name);
+            return this.parent.getRegisteredDeclaration(id);
         } else if(this.globals!==this) {
-            return this.globals.getRegisteredDeclaration(name);
+            return this.globals.getRegisteredDeclaration(id);
         } else {
             return null;
         }
     }
 
-    getTypedDeclaration(klass, name) {
-        const decl = this.getRegisteredDeclaration(name);
+    getTypedDeclaration(klass, id) {
+        const decl = this.getRegisteredDeclaration(id);
         if(decl==null || !klass.prototype.isPrototypeOf(decl))
             return null;
         else
@@ -313,7 +313,7 @@ class Context {
     }
 
     checkDuplicate(declaration) {
-        const actual = this.getRegistered(declaration.name) || null;
+        const actual = this.getRegistered(declaration.id) || null;
         if (actual !== null && actual !== declaration)
             this.problemListener.reportDuplicate(declaration.id);
         return actual === null;
@@ -343,7 +343,7 @@ class Context {
     }
 
     checkDuplicateMethod(declaration) {
-        const actual = this.getRegistered(declaration.name) || null;
+        const actual = this.getRegistered(declaration.id) || null;
         if (actual !== null && !(actual instanceof MethodDeclarationMap))
             this.problemListener.reportDuplicate(declaration.id);
         return actual;
@@ -398,16 +398,16 @@ class Context {
             return this.globals.getNativeBinding(type);
     }
 
-    getRegisteredValue(name) {
-        const context = this.contextForValue(name);
+    getRegisteredValue(id) {
+        const context = this.contextForValue(id);
         if (context === null)
             return null;
         else
-            return context.readRegisteredValue(name);
+            return context.readRegisteredValue(id);
     }
 
-    readRegisteredValue(name) {
-        return this.instances[name] || null;
+    readRegisteredValue(id) {
+        return this.instances[id.name] || null;
     }
 
     registerValue(value, checkDuplicate) {
@@ -426,12 +426,18 @@ class Context {
         delete this.instances[value.name];
     }
 
+    getInstance(id, includeParent) {
+        const named = this.parent === null || !includeParent ? null : this.parent.getInstance(id, true);
+        return named !== null ? named : this.instances[id.name] || null;
+    }
+
+
     hasValue(id) {
-        return this.contextForValue(id.name) !== null;
+        return this.contextForValue(id) !== null;
     }
 
     getValue(id) {
-        const context = this.contextForValue(id.name);
+        const context = this.contextForValue(id);
         if(context===null)
             this.problemListener.reportUnknownVariable(id, id.name);
         return context.readValue(id);
@@ -448,7 +454,7 @@ class Context {
     }
 
     setValue(id, value) {
-        const context = this.contextForValue(id.name);
+        const context = this.contextForValue(id);
         if(context===null)
             this.problemListener.reportUnknownVariable(id, id.name);
         context.writeValue(id, value);
@@ -472,15 +478,15 @@ class Context {
         return value;
     }
 
-    contextForValue(name) {
+    contextForValue(id) {
         // resolve upwards, since local names override global ones
-        const actual = this.instances[name] || null;
+        const actual = this.instances[id.name] || null;
         if(actual!==null) {
             return this;
         } else if(this.parent!==null) {
-            return this.parent.contextForValue(name);
+            return this.parent.contextForValue(id);
         } else if(this.globals!==this) {
-            return this.globals.contextForValue(name);
+            return this.globals.contextForValue(id);
         } else {
             return null;
         }
@@ -581,23 +587,23 @@ class InstanceContext extends Context {
         return this;
     }
 
-    getRegistered(name) {
+    getRegistered(id) {
         if(this.widgetFields) {
-            const field = this.widgetFields[name];
+            const field = this.widgetFields[id.name];
             if(field)
                 return field;
         }
-        const actual = super.getRegistered(name);
+        const actual = super.getRegistered(id);
         if (actual)
             return actual;
         const decl = this.getDeclaration();
         if (decl==null)
             return null;
-        const methods = decl.getMemberMethodsMap(this, name);
+        const methods = decl.getMemberMethodsMap(this, id);
         if(methods && !methods.isEmpty())
             return methods;
-        else if(decl.hasAttribute(this, name))
-            return this.getTypedDeclaration(typeof(AttributeDeclaration), name);
+        else if(decl.hasAttribute(this, id))
+            return this.getTypedDeclaration(typeof(AttributeDeclaration), id);
         else
             return null;
     }
@@ -624,16 +630,16 @@ class InstanceContext extends Context {
             this.problemListener.reportUnknownIdentifier(id, id.name);
     }
 
-    getTypedDeclaration(klass, name) {
+    getTypedDeclaration(klass, id) {
         if (klass === MethodDeclarationMap) {
             const decl = this.getDeclaration();
             if (decl) {
-                const methods = decl.getMemberMethodsMap(this, name);
+                const methods = decl.getMemberMethodsMap(this, id);
                 if (methods && !methods.isEmpty())
                     return methods;
             }
         }
-        return super.getTypedDeclaration(klass, name)
+        return super.getTypedDeclaration(klass, id)
     }
 
     readRegisteredValue(name) {
@@ -650,19 +656,19 @@ class InstanceContext extends Context {
         return actual;
     }
 
-    contextForValue(name) {
-        if("this" === name)
+    contextForValue(id) {
+        if("this" === id.name)
             return this;
-        else if(this.widgetFields!=null && this.widgetFields[name])
+        else if(this.widgetFields!=null && this.widgetFields[id.name])
             return this;
         // params and variables have precedence over members
         // so first look in context values
-        const context = super.contextForValue(name);
+        const context = super.contextForValue(id);
         if(context !== null) {
             return context;
         }
         const decl = this.getDeclaration();
-        if(decl.hasAttribute(this, name) || decl.hasMethod(this, name)) {
+        if(decl.hasAttribute(this, id) || decl.hasMethod(this, id)) {
             return this;
         } else {
             return null;
@@ -673,22 +679,22 @@ class InstanceContext extends Context {
         if(this.instance !== null)
             return this.instance.declaration;
         else
-            return this.getTypedDeclaration(CategoryDeclaration, this.instanceType.name);
+            return this.getTypedDeclaration(CategoryDeclaration, this.instanceType.id);
     }
 
     readValue(id) {
         const decl = this.getDeclaration();
-        if(decl.hasAttribute(this, id.name)) {
-            return this.instance.getMemberValue(this.calling, id.name);
-        } else if(decl.hasMethod(this, id.name)) {
-            const method = decl.getMemberMethodsMap(this, id.name).getFirst();
+        if(decl.hasAttribute(this, id)) {
+            return this.instance.getMemberValue(this.calling, id);
+        } else if(decl.hasMethod(this, id)) {
+            const method = decl.getMemberMethodsMap(this, id).getFirst();
             return new ClosureValue(this, new MethodType(method));
         } else
             return null;
     }
 
     writeValue(id, value) {
-        this.instance.setMember(this.calling, id.name, value);
+        this.instance.setMember(this.calling, id, value);
     }
 }
 

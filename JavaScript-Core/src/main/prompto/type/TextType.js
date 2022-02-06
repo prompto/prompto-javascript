@@ -112,25 +112,25 @@ export default class TextType extends NativeType {
         transpiler.append("-1]");
     }
 
-    checkMember(context, section, name) {
-       if ("count" === name) {
+    checkMember(context, section, id) {
+       if ("count" === id.name) {
            return IntegerType.instance;
        } else {
-           return super.checkMember(context, section, name);
+           return super.checkMember(context, section, id);
        }
     }
 
-    declareMember(transpiler, section, name) {
-        if ("count"!==name) {
-            super.declareMember(transpiler, section, name);
+    declareMember(transpiler, section, id) {
+        if ("count" !== id.name) {
+            super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("count" === name) {
+    transpileMember(transpiler, id) {
+        if ("count" === id.name) {
             transpiler.append("length");
         } else {
-            super.transpileMember(transpiler, name);
+            super.transpileMember(transpiler, id);
         }
     }
 
@@ -210,8 +210,8 @@ export default class TextType extends NativeType {
         }
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "startsWith":
                 return [new StartsWithMethodDeclaration()];
             case "endsWith":
@@ -233,7 +233,7 @@ export default class TextType extends NativeType {
             case "indexOf":
                 return [new IndexOfMethodDeclaration()];
             default:
-                return super.getMemberMethods(context, name);
+                return super.getMemberMethods(context, id);
         }
     }
 }

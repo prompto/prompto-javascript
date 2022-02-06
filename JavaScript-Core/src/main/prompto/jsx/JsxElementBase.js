@@ -37,7 +37,7 @@ export default class JsxElementBase extends IJsxExpression {
     }
 
     checkConstructable(context) {
-        const decl = context.getRegisteredDeclaration(this.id.name);
+        const decl = context.getRegisteredDeclaration(this.id);
         if (decl == null || !decl.isWidget(context))
             context.problemListener.reportUnknownWidget(this, this.id.name);
         if(decl!=null)
@@ -50,7 +50,7 @@ export default class JsxElementBase extends IJsxExpression {
     }
 
     getWidgetPropertyMap(context) {
-        const decl = context.getRegisteredDeclaration(this.id.name);
+        const decl = context.getRegisteredDeclaration(this.id);
         if (decl == null) {
             context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
             return null;
@@ -109,7 +109,7 @@ export default class JsxElementBase extends IJsxExpression {
 
     declare(transpiler) {
         if (!this.isHtmlTag()) {
-            const decl = transpiler.context.getRegisteredDeclaration(this.id.name);
+            const decl = transpiler.context.getRegisteredDeclaration(this.id);
             if(decl==null)
                 transpiler.context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
             else

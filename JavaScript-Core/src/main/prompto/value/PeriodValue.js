@@ -70,15 +70,22 @@ export default class PeriodValue extends Value {
         }
     }
 
-    getMemberValue(context, name) {
-        try {
-            if ("years"===name || "months"===name || "weeks"===name || "days"===name || "hours"===name || "minutes"===name || "seconds"===name || "milliseconds"===name) {
-                return new IntegerValue(this.value[name]);
-            }
-        } catch (error) {
-            // don't do anything
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "years":
+            case "months":
+            case "weeks":
+            case "days":
+            case "hours":
+            case "minutes":
+            case "seconds":
+            case "milliseconds":
+                return new IntegerValue(this.value[id.name]);
+            default:
+                return super.getMemberValue(context, id);
         }
-        return super.getMemberValue(context, name);
+
+
     }
 
     toDocumentValue(context) {

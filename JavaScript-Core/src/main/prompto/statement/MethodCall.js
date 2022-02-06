@@ -147,9 +147,12 @@ export default class MethodCall extends SimpleStatement {
 
     doDeclare(transpiler) {
         const finder = new MethodFinder(transpiler.context, this);
+        const reference = finder.findBestReference(false, new Set());
+        if(reference !== null)
+            return; // already declared
         const candidates = finder.findCandidates(false);
         if(candidates.length === 0)
-            transpiler.context.reportUnknownMethod(this.selector.id, this.selector.name);
+            transpiler.context.problemListener.reportUnknownMethod(this.selector.id, this.selector.name);
         else {
             const compatibles = finder.filterCompatible(candidates,false, true);
             const first = compatibles.size === 1 ? compatibles.values().next().value : null;
@@ -214,16 +217,27 @@ export default class MethodCall extends SimpleStatement {
 
     doTranspile(transpiler, refOnly) {
         const finder = new MethodFinder(transpiler.context, this);
+        const decl = finder.findBestReference(false, new Set());
+        if(decl != null) {
+            this.transpileSelector(transpiler, decl);
+            this.transpileAssignments(transpiler, decl, false);
+            return;
+        }
         const candidates = finder.findCandidates(false);
         if(candidates.length === 0)
-            transpiler.context.reportUnknownMethod(this.selector.id, this.selector.name);
+            transpiler.context.problemListener.reportUnknownMethod(this.selector.id, this.selector.name);
         else {
             const compatibles = finder.filterCompatible(candidates, false, true);
-            if (compatibles.size === 1) {
-                const first = compatibles.values().next().value;
-                this.transpileSingle(transpiler, first, false, refOnly);
-            } else
-                this.transpileMultiple(transpiler, compatibles, refOnly);
+            switch (compatibles.size) {
+                case 0:
+                    transpiler.context.problemListener.reportUnknownMethod(this.selector.id, this.selector.name);
+                    break;
+                case 1:
+                    this.transpileSingle(transpiler, compatibles.values().next().value, false, refOnly);
+                    break;
+                default:
+                    this.transpileMultiple(transpiler, compatibles, refOnly);
+            }
         }
     }
 
@@ -299,19 +313,27 @@ export default class MethodCall extends SimpleStatement {
     }
 
     interpret(context) {
-        const declaration = this.findDeclaration(context);
+        const finder = new MethodFinder(context, this);
+        const declaration = finder.findBest(true);
+        if(!declaration)
+            context.problemListener.reportUnknownMethod(this, this.toString());
         const local = this.selector.newLocalContext(context, declaration);
         declaration.registerParameters(local);
-        const args = this.makeArguments(context, declaration);
+        this.assignArguments(context, local, declaration);
+        return declaration.interpret(local, true);
+    }
+
+    assignArguments(calling, local, declaration) {
+        const args = this.makeArguments(calling, declaration);
         args.forEach(argument => {
             const expression = argument.resolve(local, declaration, true);
             const parameter = argument.parameter;
-            const value = parameter.checkValue(context, expression);
+            const value = parameter.checkValue(calling, expression);
             if(value!=null && parameter.mutable && !value.mutable)
                 throw new NotMutableError();
             local.setValue(argument.id, value);
         });
-        return declaration.interpret(local, true);
+
     }
 
     interpretReference(context) {

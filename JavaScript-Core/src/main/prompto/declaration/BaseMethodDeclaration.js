@@ -102,7 +102,7 @@ export default class BaseMethodDeclaration extends BaseDeclaration {
         }
     }
 
-    declareArguments(transpiler) {
+    declareParameters(transpiler) {
         if(this.parameters!=null) {
             this.parameters.declare(transpiler);
         }

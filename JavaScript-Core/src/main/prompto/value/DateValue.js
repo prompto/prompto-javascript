@@ -64,17 +64,18 @@ export default class DateValue extends Value {
         return a > b ? 1 : (a == b ? 0 : -1);
     }
 
-    getMemberValue(context, name) {
-        if ("year" === name) {
-            return new IntegerValue(this.value.getYear());
-        } else if ("month" === name) {
-            return new IntegerValue(this.value.getMonth());
-        } else if ("dayOfMonth" === name) {
-            return new IntegerValue(this.value.getUTCDate());
-        } else if ("dayOfYear" === name) {
-            return new IntegerValue(this.value.getDayOfYear());
-        } else {
-            return super.getMemberValue(context, name);
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "year":
+                return new IntegerValue(this.value.getYear());
+            case "month":
+                return new IntegerValue(this.value.getMonth());
+            case "dayOfMonth":
+                return new IntegerValue(this.value.getUTCDate());
+            case "dayOfYear":
+                return new IntegerValue(this.value.getDayOfYear());
+            default:
+                return super.getMemberValue(context, id);
         }
     }
 

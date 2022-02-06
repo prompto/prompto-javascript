@@ -18,11 +18,11 @@ export default class ContainerType extends IterableType {
         }
     }
 
-    checkMember(context, section, name) {
-        if ("count" === name) {
+    checkMember(context, section, id) {
+        if ("count" === id.name) {
             return IntegerType.instance;
         } else {
-            return  super.checkMember(context, section, name);
+            return  super.checkMember(context, section, id);
         }
     }
 
@@ -39,11 +39,11 @@ export default class ContainerType extends IterableType {
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("count" === name) {
+    transpileMember(transpiler, id) {
+        if ("count" === id.name) {
             transpiler.append("length");
         } else {
-            return super.transpileMember(transpiler, name);
+            return super.transpileMember(transpiler, id);
         }
     }
 

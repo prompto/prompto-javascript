@@ -18,7 +18,7 @@ class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     interpret(context) {
-        const decl = context.getRegistered(this.enumType.name);
+        const decl = context.getRegistered(this.enumType.id);
         if(!(decl instanceof EnumeratedNativeDeclaration))
             throw new SyntaxError(this.enumType.typeName + " is not an enumerated type!");
         const name = context.getValue(new Identifier("name")).getStorableData();

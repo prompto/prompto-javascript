@@ -267,12 +267,12 @@ export default class IntegerType extends NativeType {
         }
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "format":
                 return [new FormatMethodDeclaration()];
             default:
-                return super.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, id);
         }
     }
 }

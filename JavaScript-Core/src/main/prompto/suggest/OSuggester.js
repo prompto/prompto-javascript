@@ -5,7 +5,7 @@ import { OLexer } from "../parser/index.js";
 export default class OSuggester extends BaseSuggester {
 
     getStartState() {
-        return 152; // first state in OParser.declaration_list()
+        return 154; // first state in OParser.declaration_list()
     }
 
     suggestionsAt(caret, context) {

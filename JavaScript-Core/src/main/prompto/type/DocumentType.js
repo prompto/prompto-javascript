@@ -30,8 +30,8 @@ export default class DocumentType extends NativeType {
             return super.isMoreSpecificThan(context, other);
     }
 
-    checkMember(context, section, name) {
-        switch(name) {
+    checkMember(context, section, id) {
+        switch(id.name) {
             case "count":
                 return IntegerType.instance;
             case "keys":
@@ -93,8 +93,8 @@ export default class DocumentType extends NativeType {
         transpiler.append('Document')
     }
 
-    declareMember(transpiler, section, name) {
-        switch(name) {
+    declareMember(transpiler, section, id) {
+        switch(id.name) {
             case "keys":
                 transpiler.require(StrictSet);
                 break;
@@ -108,14 +108,14 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, name) {
-        switch(name) {
+    transpileMember(transpiler, id) {
+        switch(id.name) {
             case "count":
             transpiler.append("$safe_length");
             break;
             case "keys":
             case "values":
-                transpiler.append("$safe_" + name);
+                transpiler.append("$safe_" + id.name);
                 break;
             case "text":
                 transpiler.append("getText()");
@@ -124,16 +124,16 @@ export default class DocumentType extends NativeType {
                 transpiler.append("toJson()");
                 break;
             default:
-                transpiler.append("$safe_getMember('").append(name).append("', false)");
+                transpiler.append("$safe_getMember('").append(id.name).append("', false)");
         }
     }
 
-    transpileAssignMember(transpiler, name) {
-        transpiler.append(".$safe_getMember('").append(name).append("', true)");
+    transpileAssignMember(transpiler, id) {
+        transpiler.append(".$safe_getMember('").append(id.name).append("', true)");
     }
 
-    transpileAssignMemberValue(transpiler, name, expression) {
-        transpiler.append(".$safe_setMember('").append(name).append("', ");
+    transpileAssignMemberValue(transpiler, id, expression) {
+        transpiler.append(".$safe_setMember('").append(id.name).append("', ");
         expression.transpile(transpiler);
         transpiler.append(")");
     }
@@ -165,8 +165,8 @@ export default class DocumentType extends NativeType {
     declareSorted(transpiler, key) {
         if (key == null)
             key = new TextLiteral('"key"');
-        const keyname = key.toString();
-        const decl = this.findGlobalMethod(transpiler.context, keyname, true);
+        const keyId = key instanceof Identifier ? key : new Identifier(key.toString());
+        const decl = this.findGlobalMethod(transpiler.context, keyId, true);
         if (decl != null) {
             decl.declare(transpiler);
         } else {
@@ -178,8 +178,8 @@ export default class DocumentType extends NativeType {
     transpileSortedComparator(transpiler, key, desc) {
         if (key == null)
             key = new TextLiteral('"key"');
-        const keyname = key.toString();
-        const decl = this.findGlobalMethod(transpiler.context, keyname, false);
+        const keyId = key instanceof Identifier ? key : new Identifier(key.toString());
+        const decl = this.findGlobalMethod(transpiler.context, keyId, false);
         if (decl != null) {
             this.transpileGlobalMethodSortedComparator(transpiler, decl.getTranspiledName(transpiler.context), desc);
         } else if (key instanceof TextLiteral) {
@@ -273,8 +273,8 @@ export default class DocumentType extends NativeType {
         key = key || null;
         if (key == null)
             key = new TextLiteral('"key"');
-        const keyname = key.toString();
-        const call = this.findGlobalMethod(context, keyname, true);
+        const keyId = key instanceof Identifier ? key : new Identifier(key.toString());
+        const call = this.findGlobalMethod(context, keyId, true);
         if (call) {
             return this.getGlobalMethodSortedComparator(context, call, desc);
         } else if (key instanceof TextLiteral) {
@@ -285,8 +285,8 @@ export default class DocumentType extends NativeType {
     }
 
     /* look for a method which takes Document as sole parameter */
-    findGlobalMethod(context, name, returnCall) {
-        const methods = context.getRegisteredDeclaration(name);
+    findGlobalMethod(context, id, returnCall) {
+        const methods = context.getRegisteredDeclaration(id);
         if (!(methods instanceof MethodDeclarationMap))
             return null;
         else if (!methods.protos[DocumentType.instance.name])
@@ -295,7 +295,7 @@ export default class DocumentType extends NativeType {
             const exp = new ValueExpression(this, new DocumentValue());
             const arg = new Argument(null, exp);
             const args = new ArgumentList([arg]);
-            return new MethodCall(new MethodSelector(null, new Identifier(name)), args);
+            return new MethodCall(new MethodSelector(null, id), args);
         } else
             return methods.protos[DocumentType.instance.name];
     }
@@ -313,10 +313,10 @@ export default class DocumentType extends NativeType {
     }
 
     getEntrySortedComparator(context, key, desc) {
-        const name = key.value.getStorableData();
+        const id = new Identifier(key.value.getStorableData());
         return (o1, o2) => {
-            const value1 = o1.getMemberValue(context, name);
-            const value2 = o2.getMemberValue(context, name);
+            const value1 = o1.getMemberValue(context, id);
+            const value2 = o2.getMemberValue(context, id);
             return desc ? compareValues(value2, value1) : compareValues(value1, value2);
         };
     }

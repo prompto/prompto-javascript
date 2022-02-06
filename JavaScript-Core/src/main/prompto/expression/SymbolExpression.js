@@ -17,7 +17,7 @@ export default class SymbolExpression extends Expression {
     }
 
     check(context) {
-        const symbol = context.getRegisteredValue(this.name);
+        const symbol = context.getRegisteredValue(this.id);
         if(symbol==null) {
             throw new SyntaxError("Unknown symbol:" + this.name);
         }
@@ -25,7 +25,7 @@ export default class SymbolExpression extends Expression {
     }
 
     interpret(context) {
-        const symbol = context.getRegisteredValue(this.name);
+        const symbol = context.getRegisteredValue(this.id);
         if(symbol==null) {
             throw new SyntaxError("Unknown symbol:" + this.name);
         }
@@ -33,12 +33,12 @@ export default class SymbolExpression extends Expression {
     }
 
     declare(transpiler) {
-        const symbol = transpiler.context.getRegisteredValue(this.name);
+        const symbol = transpiler.context.getRegisteredValue(this.id);
         symbol.declare(transpiler);
     }
 
     transpile(transpiler) {
-        const symbol = transpiler.context.getRegisteredValue(this.name);
+        const symbol = transpiler.context.getRegisteredValue(this.id);
         symbol.transpile(transpiler);
     }
 }

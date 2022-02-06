@@ -31,7 +31,7 @@ export default class ExtendedParameter extends CategoryParameter {
     }
 
     register(context) {
-        const actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.id);
         if(actual!==null) {
             throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
         }
@@ -55,7 +55,7 @@ export default class ExtendedParameter extends CategoryParameter {
     }
 
     getType(context) {
-        const decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.id);
         return decl ? decl.getType(context) : this.type;
     }
 

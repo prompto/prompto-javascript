@@ -6,7 +6,7 @@ test('Transpiles WidgetProps1', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("some stuff"));
 });
@@ -23,7 +23,7 @@ test('Transpiles WidgetProps2 with warnings', () => {
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("123.54"));
     expect(warning).toEqual("invalid");
@@ -35,7 +35,7 @@ test('Transpiles WidgetProps3', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("some stuff"));
 });
@@ -52,7 +52,7 @@ test('Transpiles WidgetProps4 with warnings', () => {
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("123.54"));
     expect(warning).toEqual("invalid");
@@ -64,7 +64,7 @@ test('Transpiles WidgetChildProps1', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("some stuff"));
 });
@@ -75,7 +75,7 @@ test('Transpiles ReactWidgetProps1', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("1961-02-25"));
 });
@@ -86,7 +86,7 @@ test('Transpiles Required', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("Hello"));
 });
@@ -103,7 +103,7 @@ test('Transpiles Required with warnings', () => {
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("stuff"));
     expect(warning).toEqual("invalid");
@@ -115,7 +115,7 @@ test('Transpiles TypeSet', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("Hello"));
 });
@@ -132,7 +132,7 @@ test('Transpiles TypeSet with warnings', () => {
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("stuff"));
     expect(warning).toEqual("invalid");
@@ -144,7 +144,7 @@ test('Transpiles ValueSet', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("John"));
 });
@@ -161,7 +161,7 @@ test('Transpiles ValueSet with warnings', () => {
     context.problemListener = listener;
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("stuff"));
     expect(warning).toEqual("invalid");
@@ -174,7 +174,7 @@ test('Transpiles Callback', () => {
     decls.register(context);
     prompto.jsx.JsxElementBase.set_HTML_TEST_MODE(false);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("stuff"));
 });
@@ -184,7 +184,7 @@ test('Transpiles Arrow', () => {
     var context = prompto.runtime.Context.newGlobalsContext();
     decls.register(context);
     decls.check(context);
-    var decl = context.getRegisteredDeclaration("Container");
+    var decl = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Container"));
     var js = prompto.runtime.Transpiler.transpile(context, decl);
     expect(js).toEqual(expect.stringContaining("stuff"));
 });

@@ -14,7 +14,7 @@ export default class VariableInstance {
     toDialect(writer, expression) {
         if(expression!=null) try {
             const type = expression.check(writer.context);
-            const actual = writer.context.getRegisteredValue(this.name);
+            const actual = writer.context.getRegisteredValue(this.id);
             if(actual==null)
                 writer.context.registerValue(new Variable(this.id, type));
         } catch(e) {
@@ -34,7 +34,7 @@ export default class VariableInstance {
     }
 
     checkAssignValue(context, valueType, section) {
-        const actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.id);
         if(actual==null) {
             context.registerValue(new Variable(this.id, valueType));
             return valueType;
@@ -47,7 +47,7 @@ export default class VariableInstance {
     }
 
     checkAssignMember(context, id, valueType, section) {
-        const actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.id);
         if(actual==null) {
             context.problemListener.reportUnknownVariable(section, this.id.name);
             return VoidType.instance;
@@ -58,7 +58,7 @@ export default class VariableInstance {
         else {
             if(thisType instanceof CategoryType && !thisType.mutable)
                 context.problemListener.reportNotMutable(section, this.name);
-            const requiredType = thisType.checkMember(context, section, id.name);
+            const requiredType = thisType.checkMember(context, section, id);
             if (requiredType && !requiredType.isAssignableFrom(context, valueType))
                 context.problemListener.reportIncompatibleTypes(section, requiredType, valueType);
             return valueType;
@@ -66,7 +66,7 @@ export default class VariableInstance {
     }
 
     checkAssignItem(context, itemType, valueType, section) {
-        const actual = context.getRegisteredValue(this.name);
+        const actual = context.getRegisteredValue(this.id);
         if(actual==null) {
             context.problemListener.reportUnknownVariable(section, this.name);
             return VoidType.instance;
@@ -77,7 +77,7 @@ export default class VariableInstance {
 
     assign(context, expression) {
         const value = expression.interpret(context);
-        if(context.getRegisteredValue(this.name)==null) {
+        if(context.getRegisteredValue(this.id)==null) {
             const type = expression.check(context);
             context.registerValue(new Variable(this.id, type));
         }
@@ -89,7 +89,7 @@ export default class VariableInstance {
     }
 
     declareAssign(transpiler, expression) {
-        if(transpiler.context.getRegisteredValue(this.name)==null) {
+        if(transpiler.context.getRegisteredValue(this.id)==null) {
             const valueType = expression.check(transpiler.context);
             transpiler.context.registerValue(new Variable(this.id, valueType));
             // Code expressions need to be interpreted as part of full check
@@ -102,12 +102,12 @@ export default class VariableInstance {
     }
 
     transpileAssign(transpiler, expression) {
-        if(transpiler.context.getRegisteredValue(this.name)==null) {
+        if(transpiler.context.getRegisteredValue(this.id)==null) {
             const type = expression.check(transpiler.context);
             transpiler.context.registerValue(new Variable(this.id, type));
             transpiler.append("var ");
         }
-        const context = transpiler.context.contextForValue(this.id.name);
+        const context = transpiler.context.contextForValue(this.id);
         if(context.instanceType) {
             context.instanceType.transpileInstance(transpiler);
             transpiler.append(".setMember('").append(this.name).append("', ");
@@ -121,7 +121,7 @@ export default class VariableInstance {
     }
 
     transpileAssignParent(transpiler) {
-        const context = transpiler.context.contextForValue(this.id.name);
+        const context = transpiler.context.contextForValue(this.id);
         if(context.instanceType) {
             context.instanceType.transpileInstance(transpiler);
             transpiler.append(".");

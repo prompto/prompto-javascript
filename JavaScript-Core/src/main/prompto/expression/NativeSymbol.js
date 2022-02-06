@@ -61,12 +61,12 @@ export default class NativeSymbol extends Symbol {
         transpiler.newLine();
     }
 
-    getMemberValue(context, name, autoCreate) {
-        if("name" === name)
+    getMemberValue(context, id, autoCreate) {
+        if("name" === id.name)
             return new TextValue(this.name);
-        else if("value" === name)
+        else if("value" === id.name)
             return this.expression.interpret(context);
         else
-            return super.getMemberValue(context, name, autoCreate);
+            return super.getMemberValue(context, id.name, autoCreate);
     }
 }

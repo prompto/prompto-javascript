@@ -188,7 +188,7 @@ export default class UnresolvedIdentifier extends Expression {
     }
 
     resolveType(context) {
-        const decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.id);
         if(decl instanceof EnumeratedCategoryDeclaration) {
             return new TypeExpression(new EnumeratedCategoryType(this.id));
         } else if(decl instanceof CategoryDeclaration) {

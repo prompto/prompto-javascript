@@ -123,7 +123,7 @@ export default class Argument extends Section {
     }
 
     check(context) {
-        const actual = context.getRegisteredValue(this.parameter.name);
+        const actual = context.getRegisteredValue(this.parameter.id);
         if(actual==null) {
             const actualType = this.expression.check(context);
             context.registerValue(new Variable(this.parameter.id, actualType));
@@ -155,24 +155,21 @@ export default class Argument extends Section {
     }
 
     resolve(context, methodDeclaration, checkInstance, allowDerived) {
-        // since we support implicit members, it's time to resolve them
-        let expression = this.expression;
         const parameter = this.findParameter(methodDeclaration);
+        return this.resolve_(context, parameter, checkInstance, allowDerived);
+    }
+
+    resolve_(context, parameter, checkInstance, allowDerived) {
+        // since we support implicit members, it's time to resolve them
         const requiredType = parameter.getType(context);
-        const isArrow = requiredType instanceof MethodType && expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
-        let actualType = isArrow ? requiredType.checkArrowExpression(expression.calling, expression.expression) : expression.check(context.getCallingContext());
-        if(checkInstance && actualType instanceof CategoryType) {
-            const value = expression.interpret(context.getCallingContext());
-            if(value && value.getType) {
-                actualType = value.getType();
-            }
-        }
+        const actualType = this.checkActualType(context, requiredType, checkInstance);
         let assignable = requiredType.isAssignableFrom(context, actualType);
         // when in dispatch, allow derived
-        if(!assignable && allowDerived)
+        if (!assignable && allowDerived)
             assignable = actualType.isAssignableFrom(context, requiredType);
         // try passing member
-        if(!assignable && (actualType instanceof CategoryType)) {
+        let expression = this.expression;
+        if (!assignable && (actualType instanceof CategoryType)) {
             expression = new MemberSelector(expression, this.parameter.id);
         }
         return expression;

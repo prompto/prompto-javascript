@@ -91,27 +91,27 @@ export default class ConcreteInstance extends Instance {
         this.getAttributeNames().forEach(name => this.values[name].collectStorables(set));
     }
 
-    getMemberValue(context, attrName) {
-        /* if(typeof(attrName) != typeof(""))
-            throw "What?"; */
-        if ("category" === attrName)
-            return this.getCategory(context);
-        else if ("json" === attrName)
-            return super.getMemberValue(context, attrName);
-        else
-            return this.getAttributeValue(context, attrName);
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "category":
+                return this.getCategory(context);
+            case "json":
+                return super.getMemberValue(context, id);
+            default:
+                return this.getAttributeValue(context, id);
+        }
     }
 
-    getAttributeValue(context, attrName) {
-        const stacked = getActiveGetters()[attrName] || null;
+    getAttributeValue(context, id) {
+        const stacked = getActiveGetters()[id.name] || null;
         const first = stacked==null;
         if(first)
-            getActiveGetters()[attrName] = context;
+            getActiveGetters()[id.name] = context;
         try {
-            return this.doGetAttributeValue(context, attrName, first);
+            return this.doGetAttributeValue(context, id, first);
         } finally {
             if(first) {
-                delete getActiveGetters()[attrName];
+                delete getActiveGetters()[id.name];
             }
         }
     }
@@ -121,52 +121,49 @@ export default class ConcreteInstance extends Instance {
         return new NativeInstance(context, decl, this.declaration);
     }
 
-    doGetAttributeValue(context, attrName, allowGetter) {
-        const getter = allowGetter ? this.declaration.findGetter(context, attrName) : null;
+    doGetAttributeValue(context, id, allowGetter) {
+        const getter = allowGetter ? this.declaration.findGetter(context, id) : null;
         if (getter != null) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
-        } else if (this.declaration.hasAttribute(context, attrName) || "dbId" === attrName) {
-            return this.values[attrName] || NullValue.instance;
-        } else if ("text" === attrName) {
+        } else if (this.declaration.hasAttribute(context, id) || "dbId" === id.name) {
+            return this.values[id.name] || NullValue.instance;
+        } else if ("text" === id.name) {
             return new TextValue(this.toString());
         } else
             return NullValue.instance;
     }
 
-    setMember(context, attrName, value) {
-        /* if(typeof(attrName) != typeof(""))
-            throw "What?"; */
+    setMember(context, id, value) {
         if(!this.mutable)
             throw new NotMutableError();
-        const stacked = getActiveSetters()[attrName] || null;
+        const stacked = getActiveSetters()[id.name] || null;
         const first = stacked==null;
         if(first)
-            getActiveSetters()[attrName] = context;
+            getActiveSetters()[id.name] = context;
         try {
-            this.doSetAttributeValue(context, attrName, value, first);
+            this.doSetAttributeValue(context, id, value, first);
         } finally {
             if(first) {
-                delete getActiveSetters()[attrName];
+                delete getActiveSetters()[id.name];
             }
         }
     }
 
-    doSetAttributeValue(context, attrName, value, allowSetter) {
-        const decl = context.getRegisteredDeclaration(attrName);
-        const setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
+    doSetAttributeValue(context, id, value, allowSetter) {
+        const decl = context.getRegisteredDeclaration(id);
+        const setter = allowSetter ? this.declaration.findSetter(context, id) : null;
         if(setter!=null) {
             // use attribute name as parameter name for incoming value
             context = context.newInstanceContext(this, null).newChildContext();
-            const id = new Identifier(attrName);
             context.registerValue(new Variable(id, decl.getType()));
             context.setValue(id, value);
             value = setter.interpret(context);
         }
         value = this.autocast(decl, value);
-        this.values[attrName] = value;
+        this.values[id.name] = value;
         if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-            this.storable.setData(attrName, value.getStorableData(), this.getDbId());
+            this.storable.setData(id.name, value.getStorableData(), this.getDbId());
     }
 
     autocast(decl, value) {

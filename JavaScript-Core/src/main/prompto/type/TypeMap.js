@@ -59,7 +59,7 @@ export default class TypeMap {
     }
 
     inferCommonCategoryType(context, type1, type2, trySwap) {
-        const decl1 = context.getRegisteredDeclaration(type1.id.name);
+        const decl1 = context.getRegisteredDeclaration(type1.id);
         if (decl1.derivedFrom != null) {
             for (let i = 0; i < decl1.derivedFrom.length; i++) {
                 var parentType = new CategoryType(decl1.derivedFrom[i]);

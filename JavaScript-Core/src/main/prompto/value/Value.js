@@ -67,14 +67,14 @@ export default class Value {
         throw new SyntaxError("Compare not supported by " + this.constructor.name);
     }
 
-    getMemberValue(context, name) {
-        if("text" === name)
+    getMemberValue(context, id) {
+        if("text" === id.name)
             return new TextValue(this.toString());
-        else if("json" === name) {
+        else if("json" === id.name) {
             const node = this.toJsonNode();
             return new TextValue(JSON.stringify(node));
         } else
-            throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
+            throw new SyntaxError("No member support for " + id.name + " in " + this.constructor.name);
     }
 
     toJsonNode() {

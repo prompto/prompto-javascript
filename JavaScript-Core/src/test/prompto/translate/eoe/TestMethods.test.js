@@ -80,16 +80,16 @@ test('Parameter', () => {
 	compareResourceEOE('methods/parameter.pec');
 });
 
-test('Polymorphic_abstract', () => {
-	compareResourceEOE('methods/polymorphic_abstract.pec');
+test('PolymorphicAbstract', () => {
+	compareResourceEOE('methods/polymorphicAbstract.pec');
 });
 
-test('Polymorphic_named', () => {
-	compareResourceEOE('methods/polymorphic_named.pec');
+test('PolymorphicNamed', () => {
+	compareResourceEOE('methods/polymorphicNamed.pec');
 });
 
-test('Polymorphic_runtime', () => {
-	compareResourceEOE('methods/polymorphic_runtime.pec');
+test('PolymorphicRuntime', () => {
+	compareResourceEOE('methods/polymorphicRuntime.pec');
 });
 
 test('Return', () => {

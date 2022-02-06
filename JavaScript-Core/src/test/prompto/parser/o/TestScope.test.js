@@ -4,11 +4,11 @@ var parseString = require("../../parser/BaseOParserTest").parseString;
 test('Attribute', () => {
 	expect(() => {
 		var context = prompto.runtime.Context.newGlobalsContext();
-		expect(context.getRegisteredDeclaration("id")).toBeNull();
+		expect(context.getRegisteredDeclaration(new prompto.grammar.Identifier("id"))).toBeNull();
 		var stmts = parseString("attribute id: Integer;");
 		expect(stmts).toBeTruthy();
 		stmts.register(context);
-		var actual = context.getRegisteredDeclaration("id");
+		var actual = context.getRegisteredDeclaration(new prompto.grammar.Identifier("id"));
 		expect(actual).toBeTruthy();
 		expect(actual instanceof prompto.declaration.AttributeDeclaration).toBeTruthy();
         stmts = parseString("attribute id: Integer;");
@@ -19,11 +19,11 @@ test('Attribute', () => {
 test('Category', () => {
 	expect(() => {
 		var context = prompto.runtime.Context.newGlobalsContext();
-		expect(context.getRegisteredDeclaration("Person")).toBeNull();
+		expect(context.getRegisteredDeclaration(new prompto.grammar.Identifier("Person"))).toBeNull();
 		var stmts = parseString("category Person(id, name);");
 		expect(stmts).toBeTruthy();
 		stmts.register(context);
-		var actual = context.getRegisteredDeclaration("Person");
+		var actual = context.getRegisteredDeclaration(new prompto.grammar.Identifier("Person"));
 		expect(actual).toBeTruthy();
 		expect(actual instanceof prompto.declaration.CategoryDeclaration).toBeTruthy();
         stmts = parseString("category Person(id, name);");
@@ -33,13 +33,13 @@ test('Category', () => {
 
 test('Method', () => {
 	var context = prompto.runtime.Context.newGlobalsContext();
-	expect(context.getRegisteredDeclaration("printName")).toBeNull();
+	expect(context.getRegisteredDeclaration(new prompto.grammar.Identifier("printName"))).toBeNull();
 	var stmts = parseString("attribute name: Text;"
 	+ "method printName( name ) {"
 	+ "print (value=name); }");
 	expect(stmts).toBeTruthy();
 	stmts.register(context);
-	var actual = context.getRegisteredDeclaration("printName");
+	var actual = context.getRegisteredDeclaration(new prompto.grammar.Identifier("printName"));
 	expect(actual).toBeTruthy();
 	expect(actual instanceof prompto.runtime.MethodDeclarationMap).toBeTruthy();
 	stmts = parseString("method printName (Person p ) {"

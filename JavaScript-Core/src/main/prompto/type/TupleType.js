@@ -53,25 +53,25 @@ export default class TupleType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, name) {
-        if ("count"==name) {
+    checkMember(context, section, id) {
+        if ("count" === id.name) {
             return IntegerType.instance;
         } else {
-            return super.checkMember(context, section, name);
+            return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if ("count" !== name) {
-            return super.declareMember(transpiler, section, name);
+    declareMember(transpiler, section, id) {
+        if ("count" !== id.name) {
+            return super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("count" == name) {
+    transpileMember(transpiler, id) {
+        if ("count" === id.name) {
             transpiler.append("length");
         } else {
-            return super.transpileMember(transpiler, name);
+            return super.transpileMember(transpiler, id);
         }
     }
 
@@ -143,12 +143,12 @@ export default class TupleType extends NativeType {
         return BooleanType.instance;
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "join":
                 return [new JoinTupleMethodDeclaration()];
             default:
-                return super.getMemberMethods(context, name);
+                return super.getMemberMethods(context, id);
         }
     }
 }

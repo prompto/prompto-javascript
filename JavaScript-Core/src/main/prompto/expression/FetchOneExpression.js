@@ -83,7 +83,7 @@ export default class FetchOneExpression extends Expression {
 
     check(context) {
         if(this.type!=null) {
-            const decl = context.getRegisteredDeclaration(this.type.name);
+            const decl = context.getRegisteredDeclaration(this.type.id);
             if (decl == null || !(decl instanceof CategoryDeclaration)) {
                 context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
                 return VoidType.instance;

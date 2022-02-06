@@ -22,25 +22,25 @@ export default class CharacterType extends NativeType {
             throw new InvalidDataError("Cannot convert " + value.toString() + " to CharacterValue");
     }
 
-    checkMember(context, section, name) {
-        if ("codePoint"==name) {
+    checkMember(context, section, id) {
+        if ("codePoint" === id.name) {
             return IntegerType.instance;
         } else {
-            return super.checkMember(context, section, name);
+            return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if ("codePoint"!==name) {
-            super.declareMember(transpiler, section, name);
+    declareMember(transpiler, section, id) {
+        if ("codePoint" !== id.name) {
+            super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("codePoint"==name) {
+    transpileMember(transpiler, id) {
+        if ("codePoint" === id.name) {
             transpiler.append("charCodeAt(0)");
         } else {
-            super.transpileMember(transpiler, name);
+            super.transpileMember(transpiler, id);
         }
     }
 

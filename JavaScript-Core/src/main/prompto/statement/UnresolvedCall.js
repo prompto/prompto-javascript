@@ -113,7 +113,7 @@ export default class UnresolvedCall extends BaseStatement {
             const instance = context.getClosestInstanceContext();
             if (instance == null)
                 return null;
-            const decl = this.resolveUnresolvedMember(instance, id.name);
+            const decl = this.resolveUnresolvedMember(instance, id);
             if (decl != null)
                 return new MethodCall(new MethodSelector(null, id), this.args);
             else
@@ -124,7 +124,7 @@ export default class UnresolvedCall extends BaseStatement {
 
 
     resolveUnresolvedMethodReference(context, id) {
-        const named = context.getRegisteredValue(id.name);
+        const named = context.getRegisteredValue(id);
         if(named === null)
             return null;
         let type = named.getType(context);
@@ -141,7 +141,7 @@ export default class UnresolvedCall extends BaseStatement {
 
 
     resolveUnresolvedDeclaration(context, id) {
-        const decl = context.getRegisteredDeclaration(id.name);
+        const decl = context.getRegisteredDeclaration(id);
         if (decl === null)
             return null;
         else if (decl instanceof CategoryDeclaration)
@@ -151,9 +151,9 @@ export default class UnresolvedCall extends BaseStatement {
     }
 
     // noinspection JSMethodCanBeStatic
-    resolveUnresolvedMember(context, name) {
-        const decl = context.getRegisteredDeclaration(context.instanceType.name);
-        const methods = decl.getMemberMethodsMap(context, name);
+    resolveUnresolvedMember(context, id) {
+        const decl = context.getRegisteredDeclaration(context.instanceType.id);
+        const methods = decl.getMemberMethodsMap(context, id);
         if(methods!=null && !methods.isEmpty())
             return methods;
         else

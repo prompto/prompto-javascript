@@ -46,7 +46,7 @@ export default class TextValue extends Value {
 
     compareToValue(context, value) {
         if(value instanceof TextValue || value instanceof CharacterValue) {
-            return this.value > value.value ? 1 : this.value == value.value ? 0 : -1;
+            return this.value > value.value ? 1 : this.value === value.value ? 0 : -1;
         } else {
             throw new SyntaxError("Illegal: Compare TextValue with " + typeof(value));
         }
@@ -60,11 +60,11 @@ export default class TextValue extends Value {
         }
     }
 
-    getMemberValue(context, name) {
-        if ("count"===name) {
+    getMemberValue(context, id) {
+        if ("count" === id.name) {
             return new IntegerValue(this.value.length);
         } else {
-            return super.getMemberValue(context, name);
+            return super.getMemberValue(context, id);
         }
     }
 

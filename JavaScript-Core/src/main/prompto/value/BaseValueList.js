@@ -148,11 +148,11 @@ export default class BaseValueList extends Container {
         }
     }
 
-    getMemberValue(context, name) {
-        if ("count"==name) {
+    getMemberValue(context, id) {
+        if ("count" === id.name) {
             return new IntegerValue(this.items.length);
         } else {
-            return super.getMemberValue(context, name);
+            return super.getMemberValue(context, id);
         }
     }
 

@@ -60,42 +60,35 @@ export default class DateTimeValue extends Value {
         }
     }
 
-    getMemberValue(context, name) {
-        try {
-            let value = null;
-            if ("year" === name) {
-                value = this.value.getYear();
-            } else if ("month" === name) {
-                value = this.value.getMonth();
-            } else if ("dayOfMonth" === name) {
-                value = this.value.getDayOfMonth();
-            } else if ("dayOfYear" === name) {
-                value = this.value.getDayOfYear();
-            } else if ("hour" === name) {
-                value = this.value.getHour();
-            } else if ("minute" === name) {
-                value = this.value.getMinute();
-            } else if ("second" === name) {
-                value = this.value.getSecond();
-            } else if ("millisecond" === name) {
-                value = this.value.getMillisecond();
-            } else if ("tzOffset" === name) {
-                value = this.value.getTzOffset();
-            } else if ("tzName" === name) {
-                value = this.value.getTzName();
-            } else if ("date" === name) {
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "year":
+                return new IntegerValue(this.value.getYear());
+            case "month":
+                return new IntegerValue(this.value.getMonth());
+            case "dayOfMonth":
+                return new IntegerValue(this.value.getDayOfMonth());
+            case "dayOfYear":
+                return new IntegerValue(this.value.getDayOfYear());
+            case "hour":
+                return new IntegerValue(this.value.getHour());
+            case "minute":
+                return new IntegerValue(this.value.getMinute());
+            case "second":
+                return new IntegerValue(this.value.getSecond());
+            case "millisecond":
+                return new IntegerValue(this.value.getMillisecond());
+            case "tzOffset":
+                return new IntegerValue(this.value.getTzOffset());
+            case "tzName":
+                return new TextValue(this.value.getTzName());
+            case "date":
                 return new DateValue(this.value.getDate());
-            } else if ("time" === name) {
+            case "time":
                 return new TimeValue(this.value.getTime());
-            }
-            if(typeof(value) === typeof(0))
-                return new IntegerValue(value);
-            else if(typeof(value) === typeof("z"))
-                return new TextValue(value);
-        } catch (error) {
-            // don't do anything
-        }
-        return super.getMemberValue(context, name);
+            default:
+                return super.getMemberValue(context, id);
+         }
     }
 
     equals(obj) {

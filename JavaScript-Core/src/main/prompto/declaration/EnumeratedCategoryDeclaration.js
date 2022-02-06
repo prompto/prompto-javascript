@@ -34,11 +34,11 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         return attributes;
     }
 
-    hasAttribute(context, name) {
-        if("name"==name)
+    hasAttribute(context, id) {
+        if("name" === id.name)
             return true;
         else
-            return super.hasAttribute(context, name);
+            return super.hasAttribute(context, id);
     }
 
     setSymbols(symbols) {
@@ -94,7 +94,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         else
             writer.append("category");
         if(this.attributes!=null && this.attributes.length>0) {
-            if(this.attributes.length==1)
+            if(this.attributes.length === 1)
                 writer.append(" with attribute ");
             else
                 writer.append(" with attributes ");
@@ -184,7 +184,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         transpiler.newLine();
         transpiler.append(this.name).append(".prototype.toString = function() { return this.name; };").newLine();
         transpiler.append(this.name).append(".prototype.equals = function(other) { return this==other; };").newLine();
-        if(this.hasAttribute(transpiler.context, "text"))
+        if(this.hasAttribute(transpiler.context, new Identifier("text")))
             transpiler.append(this.name).append(".prototype.getText = function() { return this.text; };").newLine();
         else
             transpiler.append(this.name).append(".prototype.getText = ").append(this.name).append(".prototype.toString;").newLine();

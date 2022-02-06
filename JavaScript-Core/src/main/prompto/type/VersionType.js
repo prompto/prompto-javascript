@@ -1,8 +1,8 @@
 import NativeType from './NativeType.js'
-import { BooleanType, IntegerType, TextType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { Version } from '../intrinsic/index.js'
-import { VersionValue } from '../value/index.js'
+import {BooleanType, IntegerType, TextType} from './index.js'
+import {Identifier} from '../grammar/index.js'
+import {Version} from '../intrinsic/index.js'
+import {VersionValue} from '../value/index.js'
 
 export default class VersionType extends NativeType {
 
@@ -11,7 +11,7 @@ export default class VersionType extends NativeType {
     }
 
     convertJavaScriptValueToPromptoValue(context, value, returnType) {
-        if(value instanceof Version)
+        if (value instanceof Version)
             return new VersionValue(value);
         else
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
@@ -38,29 +38,43 @@ export default class VersionType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, name) {
-        if ("major" === name || "minor" === name || "fix" === name) {
-            return IntegerType.instance;
-        } else if ("qualifier" === name) {
-            return TextType.instance;
-        } else {
-            return super.checkMember(context, section, name);
+    checkMember(context, section, id) {
+        switch (id.name) {
+            case "major":
+            case "minor":
+            case "fix":
+                return IntegerType.instance;
+            case "qualifier":
+                return TextType.instance;
+            default:
+                return super.checkMember(context, section, id);
         }
     }
 
-    declareMember(transpiler, section, name) {
-        if ("count"!==name && "minor"!==name && "fix"!==name && "qualifier"!==name) {
-            super.declareMember(transpiler, section, name);
+    declareMember(transpiler, section, id) {
+        switch (id.name) {
+            case "major":
+            case "minor":
+            case "fix":
+            case "qualifier":
+                break;
+            default:
+                super.declareMember(transpiler, section, id);
         }
     }
 
-    transpileMember(transpiler, name) {
-        if ("major" === name || "minor" === name || "fix" === name) {
-            transpiler.append(name);
-        } else if ("qualifier" === name) {
-            transpiler.append("qualifierToString()");
-        } else {
-            super.transpileMember(transpiler, name);
+    transpileMember(transpiler, id) {
+        switch (id.name) {
+            case "major":
+            case "minor":
+            case "fix":
+                transpiler.append(id.name);
+                break;
+            case "qualifier":
+                transpiler.append("qualifierToString()");
+                break;
+            default:
+                super.transpileMember(transpiler, id);
         }
     }
 

@@ -146,9 +146,9 @@ export default class EqualsExpression extends Expression {
             const id = this.readLeftId();
             if(id!=null) {
                 let targetType = this.right.value.resolve(context);
-                let value = context.getRegisteredValue(id.name);
+                let value = context.getRegisteredValue(id);
                 if(value==null && !setValue) // need a thing to avoid NPE
-                    value = new Variable(id.name, targetType);
+                    value = new Variable(id, targetType);
                 const sourceType = value.getType(context);
                 if(sourceType.isMutable(context))
                     targetType = targetType.asMutable(context, true);

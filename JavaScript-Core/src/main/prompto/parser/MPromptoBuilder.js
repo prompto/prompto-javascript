@@ -950,7 +950,7 @@ export default class MPromptoBuilder extends MParserListener {
     }
 
 
-    exitAbstract_method_declaration(ctx) {
+    exitAbstract_global_method_declaration(ctx) {
         const typ = this.getNodeValue(ctx.typ);
         if (typ instanceof type.CategoryType)
             typ.mutable = ctx.MUTABLE() != null;
@@ -959,6 +959,14 @@ export default class MPromptoBuilder extends MParserListener {
         this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, typ));
     }
 
+    exitAbstract_member_method_declaration(ctx) {
+        const typ = this.getNodeValue(ctx.typ);
+        if (typ instanceof type.CategoryType)
+            typ.mutable = ctx.MUTABLE() != null;
+        const name = this.getNodeValue(ctx.name);
+        const args = this.getNodeValue(ctx.args);
+        this.setNodeValue(ctx, new declaration.AbstractMethodDeclaration(name, args, typ));
+    }
 
     exitConcrete_method_declaration(ctx) {
         const typ = this.getNodeValue(ctx.typ);

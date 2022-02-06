@@ -5,6 +5,7 @@ import { IteratorType } from '../type/index.js'
 import { IterableValue } from '../value/index.js'
 import { UnresolvedCall } from '../statement/index.js'
 import { InternalError } from '../error/index.js'
+import Identifier from "../../../generated/prompto/grammar/Identifier";
 
 export default class IteratorExpression extends Expression {
   
@@ -26,7 +27,7 @@ export default class IteratorExpression extends Expression {
     interpret(context) {
         const elemType = this.source.check(context).checkIterator(context, this.source);
         const items = this.source.interpret(context);
-        const length = items.getMemberValue(context, "count", false);
+        const length = items.getMemberValue(context, new Identifier("count"), false);
         const iterator = this.getIterator(context, items);
         return new IterableValue(context, this.name, elemType, iterator, length, this.expression);
     }

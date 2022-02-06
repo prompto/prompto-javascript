@@ -1,10 +1,10 @@
 import Value from './Value.js'
-import { PeriodValue, IntegerValue, TextValue } from './index.js'
-import { TimeType} from '../type/index.js'
-import { SyntaxError } from '../error/index.js'
+import {PeriodValue, IntegerValue, TextValue} from './index.js'
+import {TimeType} from '../type/index.js'
+import {SyntaxError} from '../error/index.js'
 
 export default class TimeValue extends Value {
- 
+
     constructor(value) {
         super(TimeType.instance);
         this.value = value;
@@ -30,7 +30,7 @@ export default class TimeValue extends Value {
         if (value instanceof PeriodValue) {
             return new TimeValue(this.value.addPeriod(value));
         } else {
-            throw new SyntaxError("Illegal: TimeValue + " + typeof(value));
+            throw new SyntaxError("Illegal: TimeValue + " + typeof (value));
         }
     }
 
@@ -40,7 +40,7 @@ export default class TimeValue extends Value {
         } else if (value instanceof TimeValue) {
             return new PeriodValue(this.value.subtractTime(value.value));
         } else {
-            throw new SyntaxError("Illegal: TimeValue - " + typeof(value));
+            throw new SyntaxError("Illegal: TimeValue - " + typeof (value));
         }
     }
 
@@ -48,28 +48,29 @@ export default class TimeValue extends Value {
         if (value instanceof TimeValue) {
             return this.cmp(value);
         } else {
-            throw new SyntaxError("Illegal comparison: TimeValue and " + typeof(value));
+            throw new SyntaxError("Illegal comparison: TimeValue and " + typeof (value));
         }
     }
 
-    getMemberValue(context, name) {
-        if ("hour"==name) {
-            return new IntegerValue(this.value.getHour());
-        } else if ("minute"==name) {
-            return new IntegerValue(this.value.getMinute());
-        } else if ("second"==name) {
-            return new IntegerValue(this.value.getSecond());
-        } else if ("millisecond"==name) {
-            return new IntegerValue(this.value.getMillisecond());
-        } else {
-            return super.getMemberValue(context, name);
+    getMemberValue(context, id) {
+        switch (id.name) {
+            case "hour":
+                return new IntegerValue(this.value.getHour());
+            case "minute":
+                return new IntegerValue(this.value.getMinute());
+            case "second":
+                return new IntegerValue(this.value.getSecond());
+            case "millisecond":
+                return new IntegerValue(this.value.getMillisecond());
+            default:
+                return super.getMemberValue(context, id);
         }
     }
 
     cmp(obj) {
         const a = this.value.valueOf();
         const b = obj.value.valueOf();
-        return a > b ? 1 : (a == b ? 0 : -1) ;
+        return a > b ? 1 : (a === b ? 0 : -1);
     }
 
     equals(obj) {
@@ -85,8 +86,8 @@ export default class TimeValue extends Value {
     }
 
     toJson(context, json, instanceId, fieldName, withType, binaries) {
-        const value = withType ? { type: TimeType.instance.name, value: this.value.toString() } : this.value.toString();
-        if(Array.isArray(json))
+        const value = withType ? {type: TimeType.instance.name, value: this.value.toString()} : this.value.toString();
+        if (Array.isArray(json))
             json.push(value);
         else
             json[fieldName] = value;

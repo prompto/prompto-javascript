@@ -44,13 +44,15 @@ export default class CursorValue extends Value {
         return type;
     }
 
-    getMemberValue(context, name) {
-        if ("count" === name)
-            return new IntegerValue(this.count());
-        else if ("totalCount" === name)
-            return new IntegerValue(this.totalCount());
-        else
-            throw new InvalidDataError("No such member:" + name);
+    getMemberValue(context, id) {
+        switch(id.name) {
+            case "count":
+                return new IntegerValue(this.count());
+            case "totalCount":
+                return new IntegerValue(this.totalCount());
+            default:
+                return super.getMemberValue(context, id);
+        }
     }
 
     filter(filter) {

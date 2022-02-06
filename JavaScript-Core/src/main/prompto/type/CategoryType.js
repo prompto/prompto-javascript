@@ -50,7 +50,7 @@ export default class CategoryType extends BaseType {
         let type = this.anyfy();
         if(type instanceof NativeType)
             return type;
-        const decl = context.getRegisteredDeclaration(type.name);
+        const decl = context.getRegisteredDeclaration(type.id);
         if(!decl) {
             if(onError)
                 onError(type);
@@ -116,14 +116,14 @@ export default class CategoryType extends BaseType {
     }
 
     checkUnique(context) {
-        const actual = context.getRegisteredDeclaration(this.name) || null;
+        const actual = context.getRegisteredDeclaration(this.id) || null;
         if(actual!=null) {
             throw new SyntaxError("Duplicate name: \"" + this.name + "\"");
         }
     }
 
     getDeclaration(context) {
-        const decl = context.getRegisteredDeclaration(this.name) || null;
+        const decl = context.getRegisteredDeclaration(this.id) || null;
         if(decl==null) {
             if(context.problemListener)
                 context.problemListener.reportUnknownCategory(this.id, this.name);
@@ -311,53 +311,53 @@ export default class CategoryType extends BaseType {
         this.resolve(context);
     }
 
-    checkMember(context, section, name) {
-        if ("category" === name)
+    checkMember(context, section, id) {
+        if ("category" === id.name)
             return new CategoryType(new Identifier("Category"));
-        else if ("json" === name)
+        else if ("json" === id.name)
             return TextType.instance;
         else
-            return this.checkAttribute(context, section, name);
+            return this.checkAttribute(context, section, id);
     }
 
-    checkAttribute(context, section, name) {
-        const decl = context.getRegisteredDeclaration(this.name);
+    checkAttribute(context, section, id) {
+        const decl = context.getRegisteredDeclaration(this.id);
         if (decl == null) {
             context.problemListener.reportUnknownCategory(this.id, this.name);
             return VoidType.instance;
         }
         if (decl instanceof EnumeratedNativeDeclaration) {
-            return decl.getType(context).checkMember(context, section, name);
+            return decl.getType(context).checkMember(context, section, id);
         } else if (decl instanceof CategoryDeclaration) {
-            return this.checkCategoryAttribute(context, section, decl, name);
+            return this.checkCategoryAttribute(context, section, decl, id);
         } else {
             context.problemListener.reportUnknownCategory(this.id, this.name);
             return VoidType.instance;
         }
     }
 
-    checkCategoryAttribute(context, section, decl, name) {
-        if(decl.storable && "dbId" === name)
+    checkCategoryAttribute(context, section, decl, id) {
+        if(decl.storable && "dbId" === id.name)
             return AnyType.instance;
-        else if (decl.hasAttribute(context, name)) {
-            const ad = context.getRegisteredDeclaration(name);
+        else if (decl.hasAttribute(context, id)) {
+            const ad = context.getRegisteredDeclaration(id);
             if (ad == null) {
-                throw new SyntaxError("Unknown attribute:" + name);
+                throw new SyntaxError("Unknown attribute:" + id.name);
             }
             return ad.getType(context);
-        } else if ("text" === name) {
+        } else if ("text" === id.name) {
             return TextType.instance
-        } else if (decl.hasMethod(context, name)) {
-            const method = decl.getMemberMethodsMap(context, name).getFirst();
+        } else if (decl.hasMethod(context, id)) {
+            const method = decl.getMemberMethodsMap(context, id).getFirst();
             return new MethodType(method);
         } else {
-            context.problemListener.reportUnknownAttribute(section, name);
+            context.problemListener.reportUnknownAttribute(section, id.name);
             return AnyType.instance;
         }
     }
 
-    declareMember(transpiler, section, name) {
-        switch(name) {
+    declareMember(transpiler, id) {
+        switch(id.name) {
             case "category":
                 transpiler.require(Category);
                 break;
@@ -369,8 +369,8 @@ export default class CategoryType extends BaseType {
         // TODO visit attributes
     }
 
-    transpileMember(transpiler, name) {
-        switch(name) {
+    transpileMember(transpiler, id) {
+        switch(id.name) {
             case "text":
                 transpiler.append("getText()");
                 break;
@@ -378,12 +378,12 @@ export default class CategoryType extends BaseType {
                 transpiler.append("toJson()");
                 break;
             default:
-                transpiler.append(name);
+                transpiler.append(id.name);
         }
     }
 
     checkStaticMember(context, section, id) {
-        const decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.id);
         if(decl==null) {
             context.problemListener.reportUnknownIdentifier(section, this.name);
             return null;
@@ -397,25 +397,25 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    declareStaticMember(transpiler, section, name) {
+    declareStaticMember(transpiler, section, id) {
         // TODO visit attributes
     }
 
-    transpileStaticMember(transpiler, name) {
+    transpileStaticMember(transpiler, id) {
         if(this.getDeclaration(transpiler.context) instanceof SingletonCategoryDeclaration)
             transpiler.append("instance.");
-        transpiler.append(name);
+        transpiler.append(id.name);
     }
 
-    getStaticMemberValue(context, name) {
+    getStaticMemberValue(context, id) {
         const decl = this.getDeclaration(context);
         if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
-            return decl.getType(context).getStaticMemberValue(context, name);
+            return decl.getType(context).getStaticMemberValue(context, id);
         else if(decl instanceof SingletonCategoryDeclaration) {
             const singleton = context.loadSingleton(this);
-            return singleton.getMemberValue(context, name);
+            return singleton.getMemberValue(context, id);
         } else
-            return super.getStaticMemberValue(context, name);
+            return super.getStaticMemberValue(context, id);
     }
 
     isAssignableFrom(context, other) {
@@ -478,9 +478,9 @@ export default class CategoryType extends BaseType {
         // check we derive from root category (if not extending 'Any')
         if("any" !== baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
             return false;
-        const allAttributes = otherDecl.getAllAttributes(context);
-        for(const attr of allAttributes) {
-            if(!thisDecl.hasAttribute(context, attr.name)) {
+        const allAttributeIds = otherDecl.getAllAttributes(context);
+        for(const id of allAttributeIds) {
+            if(!thisDecl.hasAttribute(context, id)) {
                 return false;
             }
         }
@@ -488,7 +488,7 @@ export default class CategoryType extends BaseType {
     }
 
     isAnonymous() {
-        return this.name[0]==this.name[0].toLowerCase(); // since it's the name of the argument
+        return this.name[0] === this.name[0].toLowerCase(); // since it's the name of the argument
     }
 
     isMoreSpecificThan(context, other) {
@@ -500,7 +500,7 @@ export default class CategoryType extends BaseType {
         if(other.isAnonymous()) {
             return true;
         }
-        const thisDecl = context.getRegisteredDeclaration(this.name);
+        const thisDecl = context.getRegisteredDeclaration(this.id);
         if(thisDecl.isDerivedFrom(context, other)) {
             return true;
         } else {
@@ -527,27 +527,29 @@ export default class CategoryType extends BaseType {
     }
 
     newInstance(context) {
-        const decl = context.getRegisteredDeclaration(this.name);
+        const decl = context.getRegisteredDeclaration(this.id);
         return decl.newInstance(context);
     }
 
     getSortedComparator(context, key, desc) {
-        const keyId = this.getKeyIdentifier(key);
-        if(!key)
-            key = new UnresolvedIdentifier(keyId);
-        const decl = this.getDeclaration(context);
-        if (decl.hasAttribute(context, keyId.toString())) {
-            return this.getAttributeSortedComparator(context, keyId.toString(), desc);
-        } else if (decl.hasMethod(context, keyId.toString())) {
-            return this.getMemberMethodSortedComparator(context, keyId.toString(), desc);
+        if(key instanceof ArrowExpression) {
+            return key.getSortedComparator(context, this, desc);
         } else {
-            const method = this.findGlobalMethod(context, keyId);
-            if(method!=null) {
-                return this.getGlobalMethodSortedComparator(context, method, desc);
-            } else if(key instanceof ArrowExpression) {
-                return key.getSortedComparator(context, this, desc);
+            const keyId = this.getKeyIdentifier(key);
+            if (!key)
+                key = new UnresolvedIdentifier(keyId);
+            const decl = this.getDeclaration(context);
+            if (decl.hasAttribute(context, keyId.toString())) {
+                return this.getAttributeSortedComparator(context, keyId.toString(), desc);
+            } else if (decl.hasMethod(context, keyId.toString())) {
+                return this.getMemberMethodSortedComparator(context, keyId.toString(), desc);
             } else {
-                return this.getExpressionSortedComparator(context, key, desc);
+                const method = this.findGlobalMethod(context, keyId);
+                if (method != null) {
+                    return this.getGlobalMethodSortedComparator(context, method, desc);
+                } else {
+                    return this.getExpressionSortedComparator(context, key, desc);
+                }
             }
         }
     }
@@ -589,25 +591,25 @@ export default class CategoryType extends BaseType {
         return cmp.bind(this);
     }
 
-    getMemberMethods(context, name) {
+    getMemberMethods(context, id) {
         const decl = this.getDeclaration(context);
        if (!(decl instanceof ConcreteCategoryDeclaration)) {
-           context.problemListener.reportUnknownCategory(this.id, name);
+           context.problemListener.reportUnknownCategory(this.id, id);
            return null;
        } else {
-            const methods = decl.getMemberMethodsMap(context, name);
+            const methods = decl.getMemberMethodsMap(context, id);
             return methods ? methods.getAll() : null;
         }
     }
 
-    getStaticMemberMethods(context, name) {
+    getStaticMemberMethods(context, id) {
         const decl = this.getDeclaration(context);
         if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
-            return decl.getType(context).getStaticMemberMethods(context, name);
+            return decl.getType(context).getStaticMemberMethods(context, id);
         else if(decl instanceof SingletonCategoryDeclaration)
-            return decl.getType(context).getMemberMethods(context, name);
+            return decl.getType(context).getMemberMethods(context, id);
         else if (decl instanceof ConcreteCategoryDeclaration) {
-            const methods = decl.getMemberMethodsMap(context, name);
+            const methods = decl.getMemberMethodsMap(context, id);
             return methods ? methods.getAll() : null;
         } else {
             context.problemListener.reportUnknownCategory(this.id, this.name);
@@ -647,13 +649,13 @@ export default class CategoryType extends BaseType {
     }
 
     loadEnumValue(context, value, name) {
-        return context.getRegisteredValue(name);
+        return context.getRegisteredValue(new Identifier(name));
     }
 
     declareSorted(transpiler, key) {
         const keyId = this.getKeyIdentifier(key);
         let decl = this.getDeclaration(transpiler.context);
-        if (!(decl.hasAttribute(transpiler.context, keyId.toString()) || decl.hasMethod(transpiler.context, keyId.toString(), null))) {
+        if (!(decl.hasAttribute(transpiler.context, keyId) || decl.hasMethod(transpiler.context, keyId, null))) {
             decl = this.findGlobalMethod(transpiler.context, keyId, true);
             if (decl != null) {
                 decl.declare(transpiler);

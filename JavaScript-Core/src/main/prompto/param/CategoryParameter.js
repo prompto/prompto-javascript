@@ -2,6 +2,8 @@ import Parameter from './Parameter.js'
 import { MethodType } from '../type/index.js'
 import { equalObjects } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
+import { ContextualExpression, ArrowValue } from '../value/index.js'
+import { ArrowExpression } from '../expression/index.js'
 
 export default class CategoryParameter extends Parameter {
     
@@ -34,6 +36,27 @@ export default class CategoryParameter extends Parameter {
     }
 
     checkValue(context, expression) {
+        const isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
+        if (isArrow)
+            return this.checkArrowValue(context, expression);
+        else
+            return this.checkSimpleValue(context, expression);
+    }
+
+    checkArrowValue(context, expression) {
+        const decl = this.getAbstractMethodDeclaration(context);
+        return new ArrowValue (decl, expression.calling, expression.expression); // TODO check
+    }
+
+    getAbstractMethodDeclaration(context) {
+        const methods = context.getRegisteredDeclaration(this.type.id);
+        if(methods !== null)
+            return methods.getAll().filter(decl => decl.isAbstract())[0] || null;
+        else
+            return null;
+    }
+
+checkSimpleValue(context, expression) {
         this.resolve(context);
         if(this.resolved instanceof MethodType)
             return expression.interpretReference(context);
@@ -43,14 +66,25 @@ export default class CategoryParameter extends Parameter {
 
     transpileCall(transpiler, expression) {
         this.resolve(transpiler.context);
-        if(this.resolved instanceof MethodType)
-            expression.transpileReference(transpiler, this.resolved);
-        else
+        if (!this.transpileArrowExpressionCall(transpiler, expression))
             super.transpileCall(transpiler, expression);
     }
 
+    transpileArrowExpressionCall(transpiler, expression) {
+        if(this.resolved instanceof MethodType) {
+            if(expression instanceof ContextualExpression)
+                expression = expression.expression;
+            if(expression instanceof ArrowExpression)
+                this.resolved.transpileArrowExpression(transpiler, expression);
+            else
+                expression.transpileReference(transpiler, this.resolved);
+            return true;
+        }
+        return false;
+    }
+
     register(context) {
-        const actual = context.contextForValue(this.name);
+        const actual = context.contextForValue(this.id);
         if(actual===context) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }
@@ -89,7 +123,11 @@ export default class CategoryParameter extends Parameter {
     }
 
     getType(context) {
-        return this.type;
+        if(context) {
+            this.resolve(context);
+            return this.resolved;
+        } else
+            return this.type;
     }
 
     toEDialect(writer) {

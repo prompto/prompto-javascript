@@ -44,7 +44,7 @@ export default class TypeValidator extends PropertyValidator {
 
     getMethodDeclarations(context) {
         if(this.type instanceof MethodType) {
-            const decls = context.getRegisteredDeclaration(this.type.name);
+            const decls = context.getRegisteredDeclaration(this.type.id);
             if(decls instanceof MethodDeclarationMap)
                 return decls.getAll().map(m => m.asReference());
         }

@@ -5,7 +5,7 @@ import { MLexer } from "../parser/index.js";
 export default class MSuggester extends BaseSuggester {
 
     getStartState() {
-        return 156; // first state in MParser.declaration_list()
+        return 158; // first state in MParser.declaration_list()
     }
 
     suggestionsAt(caret, context) {

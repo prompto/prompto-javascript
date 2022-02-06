@@ -34,18 +34,18 @@ export default class CategorySymbol extends Symbol {
     }
 
     check(context) {
-        const cd = context.getRegisteredDeclaration(this.type.name);
+        const cd = context.getRegisteredDeclaration(this.type.id);
         if(cd==null) {
             throw new SyntaxError("Unknown category " + this.type.name);
         }
         if(this.args!=null) {
             context = context.newLocalContext();
-            this.args.forEach(function(argument) {
-                if(!cd.hasAttribute(context, argument.name)) {
-                    throw new SyntaxError("\"" + argument.name + "\" is not an attribute of " + this.type.name);
+            this.args.forEach(arg => {
+                if(!cd.hasAttribute(context, arg.id)) {
+                    throw new SyntaxError("'" + arg.name + "' is not an attribute of '" + this.type.name + "'");
                 }
-                argument.check(context);
-            });
+                arg.check(context);
+            }, this);
         }
         return this.type;
     }
@@ -62,10 +62,10 @@ export default class CategorySymbol extends Symbol {
                 context = context.newLocalContext();
                 this.args.forEach(argument => {
                     const value = argument.expression.interpret(context);
-                    instance.setMember(context, argument.name, value);
+                    instance.setMember(context, argument.id, value);
                 });
             }
-            instance.setMember(context, "name", new TextValue(this.name));
+            instance.setMember(context, new Identifier("name"), new TextValue(this.name));
             instance.mutable = false;
             this.instance = instance;
         }

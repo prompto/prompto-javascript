@@ -12,8 +12,8 @@ export default class TypeValue extends Value {
         return this.value.toString();
     }
 
-    getMemberValue(context, name, autoCreate) {
-        return this.value.getStaticMemberValue(context, name);
+    getMemberValue(context, id, autoCreate) {
+        return this.value.getStaticMemberValue(context, id);
     }
 }
 

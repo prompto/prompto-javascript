@@ -259,8 +259,8 @@ export default class ListType extends ContainerType {
         return this.itemType;
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "toSet":
                 return [new ToSetMethodDeclaration(this.itemType)];
             case "join":
@@ -276,7 +276,7 @@ export default class ListType extends ContainerType {
             case "insertValue" :
                 return [new InsertValueMethodDeclaration()];
             default:
-                return super.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, id);
         }
     }
 }

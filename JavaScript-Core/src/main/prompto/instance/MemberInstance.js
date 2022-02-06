@@ -23,7 +23,7 @@ export default class MemberInstance {
 
     interpret(context) {
         const root = this.parent.interpret(context);
-        return root.getMemberValue(context, this.name, true);
+        return root.getMemberValue(context, this.id, true);
     }
 
     checkAssignValue(context, valueType, section) {
@@ -44,7 +44,7 @@ export default class MemberInstance {
         if(!root.mutable)
             throw new NotMutableError();
         const value = expression.interpret(context);
-        root.setMember(context, this.name, value);
+        root.setMember(context, this.id, value);
     }
 
     check(context) {
@@ -69,12 +69,12 @@ export default class MemberInstance {
     transpileAssign(transpiler, expression) {
         const parentType = this.parent.check(transpiler.context);
         this.parent.transpileAssignParent(transpiler);
-        parentType.transpileAssignMemberValue(transpiler, this.name, expression);
+        parentType.transpileAssignMemberValue(transpiler, this.id, expression);
     }
 
     transpileAssignParent(transpiler) {
         const parentType = this.parent.check(transpiler.context);
         this.parent.transpileAssignParent(transpiler);
-        parentType.transpileAssignMember(transpiler, this.name);
+        parentType.transpileAssignMember(transpiler, this.id);
     }
 }

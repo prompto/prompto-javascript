@@ -1,8 +1,7 @@
 import MemberSelector from './MemberSelector.js'
 import { CategorySymbol } from './index.js'
-import { Identifier, NamedInstance } from '../grammar/index.js'
-import { MethodType, CategoryType, TypeType } from '../type/index.js'
-import { MethodDeclarationMap } from '../runtime/index.js'
+import { Identifier } from '../grammar/index.js'
+import { CategoryType, TypeType } from '../type/index.js'
 import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value/index.js'
 import { SingletonCategoryDeclaration } from '../declaration/index.js'
 import { NullReferenceError } from '../error/index.js'
@@ -37,63 +36,8 @@ export default class MethodSelector extends MemberSelector {
         if(this.parent==null) {
             return this.name;
         } else {
-            return super.toString() + "." + this.name;
+            return super.toString();
         }
-    }
-
-    getCandidates(context, checkInstance) {
-        const decl = this.getMethodInstance(context);
-        if(decl!=null)
-            return new Set([decl]);
-        else if(this.parent===null)
-            return this.getGlobalCandidates(context);
-        else
-            return this.getMemberCandidates(context, checkInstance);
-    }
-
-    getMethodInstance(context) {
-        const named = context.getRegistered(this.id);
-        if (named instanceof NamedInstance) {
-            let type = named.getType(context);
-            if (type != null) {
-                type = type.resolve(context);
-                if (type instanceof MethodType) {
-                    return type.method.asReference();
-                }
-            }
-        }
-        return null;
-    }
-
-    getGlobalCandidates(context) {
-        const result = new Set();
-        // if called from a member method, could be a member method called without this/self
-        const instance = context.getClosestInstanceContext();
-        if(instance!=null) {
-            const type = instance.instanceType;
-            const cd = context.getRegisteredDeclaration(type.name);
-            if(cd!=null) {
-                const members = cd.getMemberMethodsMap(context, this.name);
-                if(members!=null) {
-                    members.getAll().forEach(method => {
-                        result.add(method);
-                    });
-                }
-            }
-        }
-        const methods = context.getRegisteredDeclaration(this.name);
-        if(methods instanceof MethodDeclarationMap) {
-            methods.getAll().forEach(method => {
-                result.add(method);
-            });
-        }
-        return result;
-    }
-
-    getMemberCandidates(context, checkInstance) {
-        const parentType = this.checkParentType(context, checkInstance);
-        const methods = parentType ? parentType.getMemberMethods(context, this.name) : [];
-        return new Set(methods);
     }
 
     checkParentType(context, checkInstance) {

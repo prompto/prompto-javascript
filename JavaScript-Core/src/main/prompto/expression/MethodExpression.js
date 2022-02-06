@@ -105,8 +105,7 @@ export default class MethodExpression extends Expression {
             }
         }
         if(expression instanceof UnresolvedIdentifier) {
-            const id = expression.id;
-            const named = transpiler.context.getRegistered(id.name);
+            const named = transpiler.context.getRegistered(expression.id);
             const decl = named.getFirst();
             // don't declare closures
             if(!decl.declarationStatement)
@@ -131,10 +130,10 @@ export default class MethodExpression extends Expression {
         }
         if(expression instanceof UnresolvedIdentifier) {
             const id = this.expression.id;
-            const named = transpiler.context.getRegistered(id.name);
+            const named = transpiler.context.getRegistered(id);
             if(named instanceof MethodDeclarationMap) {
                 const decl = named.getFirst();
-                const context = transpiler.context.contextForValue(id.name);
+                const context = transpiler.context.contextForValue(id);
                 if (context instanceof InstanceContext) {
                     if(parent != null)
                         parent.transpile(transpiler);

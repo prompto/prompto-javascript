@@ -35,7 +35,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
     }
 
     declare(transpiler) {
-        this.declareArguments(transpiler);
+        this.declareParameters(transpiler);
     }
 
     transpile(transpiler) {

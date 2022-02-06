@@ -122,7 +122,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
     check(context) {
         if(this.attributes!=null) {
             this.attributes.forEach(id => {
-                const ad = context.getRegisteredDeclaration(id.name);
+                const ad = context.getRegisteredDeclaration(id);
                 if (ad === null) {
                     if(id.name !== "text")
                         context.problemListener.reportUnknownAttribute(id, id.name);
@@ -137,14 +137,15 @@ export default class CategoryDeclaration extends BaseDeclaration {
         return new CategoryType(this.id);
     }
 
-    hasAttribute(context, name) {
-        if (name === "dbId")
+    hasAttribute(context, id) {
+        if ("dbId" === id.name)
             return this.storable;
         else if (this.attributes == null)
             return false;
         else {
+            const name = id.name;
             for (let i = 0; i < this.attributes.length; i++ ) {
-                if (name === this.attributes[i].name)
+                if ( name === this.attributes[i].name)
                     return true;
             }
             return false;

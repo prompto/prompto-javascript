@@ -40,11 +40,11 @@ export default class IterableValue extends Value {
         return this.expression.interpret(child);
     }
 
-    getMemberValue(context, name) {
-        if ("count" === name)
+    getMemberValue(context, id) {
+        if ("count" === id.name)
             return new IntegerValue(this.count);
         else
-            return super.getMemberValue(context, name);
+            return super.getMemberValue(context, id);
     }
 
     filter(filter) {

@@ -7,12 +7,12 @@ export default class BinaryType extends NativeType {
         super(name);
     }
 
-    checkMember(context, section, name) {
-        if ("mimeType" === name ) {
+    checkMember(context, section, id) {
+        if ("mimeType" === id.name ) {
             return TextType.instance;
-        } else if ("url" === name ) {
+        } else if ("url" === id.name ) {
             return TextType.instance;
         } else
-            return super.checkMember(context, section, name);
+            return super.checkMember(context, section, id);
     }
 }

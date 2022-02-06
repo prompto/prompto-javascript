@@ -189,7 +189,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         else {
             transpiler = transpiler.newLocalTranspiler();
             transpiler.declare(this);
-            this.declareArguments(transpiler);
+            this.declareParameters(transpiler);
         }
         this.registerParameters(transpiler.context);
         this.statements.declare(transpiler);
@@ -204,7 +204,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     }
 
     declareChild(transpiler) {
-        this.declareArguments(transpiler);
+        this.declareParameters(transpiler);
         transpiler = transpiler.newChildTranspiler();
         this.registerParameters(transpiler.context);
         return this.statements.declare(transpiler);

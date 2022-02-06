@@ -154,28 +154,28 @@ test('Transpiled Parameter', () => {
 	checkTranspiledOutput('methods/parameter.pec');
 });
 
-test('Interpreted Polymorphic_abstract', () => {
-	checkInterpretedOutput('methods/polymorphic_abstract.pec');
+test('Interpreted PolymorphicAbstract', () => {
+	checkInterpretedOutput('methods/polymorphicAbstract.pec');
 });
 
-test('Transpiled Polymorphic_abstract', () => {
-	checkTranspiledOutput('methods/polymorphic_abstract.pec');
+test('Transpiled PolymorphicAbstract', () => {
+	checkTranspiledOutput('methods/polymorphicAbstract.pec');
 });
 
-test('Interpreted Polymorphic_named', () => {
-	checkInterpretedOutput('methods/polymorphic_named.pec');
+test('Interpreted PolymorphicNamed', () => {
+	checkInterpretedOutput('methods/polymorphicNamed.pec');
 });
 
-test('Transpiled Polymorphic_named', () => {
-	checkTranspiledOutput('methods/polymorphic_named.pec');
+test('Transpiled PolymorphicNamed', () => {
+	checkTranspiledOutput('methods/polymorphicNamed.pec');
 });
 
-test('Interpreted Polymorphic_runtime', () => {
-	checkInterpretedOutput('methods/polymorphic_runtime.pec');
+test('Interpreted PolymorphicRuntime', () => {
+	checkInterpretedOutput('methods/polymorphicRuntime.pec');
 });
 
-test('Transpiled Polymorphic_runtime', () => {
-	checkTranspiledOutput('methods/polymorphic_runtime.pec');
+test('Transpiled PolymorphicRuntime', () => {
+	checkTranspiledOutput('methods/polymorphicRuntime.pec');
 });
 
 test('Interpreted Specified', () => {

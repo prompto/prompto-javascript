@@ -28,7 +28,7 @@ function parseCmdLineArgs(cmdLineArgs) {
 
 function buildAssignments(method, cmdLineArgs) {
 	const assignments = new ArgumentList();
-	if(method.parameters.length==1) {
+	if(method.parameters.length === 1) {
 		const id = method.parameters[0].id;
 		const value = parseCmdLineArgs(cmdLineArgs);
 		assignments.add(new Argument(new UnresolvedParameter(id), value));
@@ -38,7 +38,7 @@ function buildAssignments(method, cmdLineArgs) {
 
 
 export function locateMethod(context, methodName, cmdLineArgs) {
-	const map = context.getRegisteredDeclaration(methodName);
+	const map = context.getRegisteredDeclaration(new Identifier(methodName));
 	if(map==null) {
 		throw new SyntaxError("Could not find a \"" + methodName + "\" method.");
 	}

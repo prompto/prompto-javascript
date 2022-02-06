@@ -17,11 +17,11 @@ export default class RangeValue extends Value {
         }
     }
 
-    getMemberValue(context, name) {
-        if("count" == name)
+    getMemberValue(context, id) {
+        if("count" === id.name)
             return new IntegerValue(this.size());
         else
-            throw new SyntaxError("No member support for " + name + " in " + this.constructor.name);
+            return super.getMemberValue(context, id);
     }
 
     toString() {

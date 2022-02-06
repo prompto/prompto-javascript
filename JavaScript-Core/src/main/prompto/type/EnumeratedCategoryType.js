@@ -19,52 +19,52 @@ export default class EnumeratedCategoryType extends CategoryType {
         // TODO
     }
 
-    checkMember(context, section, name) {
-        if ("name"==name) {
+    checkMember(context, section, id) {
+        if ("name" === id.name) {
             return TextType.instance;
         } else {
-            return super.checkMember(context, section, name);
+            return super.checkMember(context, section, id);
         }
     }
 
-    checkStaticMember(context, section, name) {
-        if ("symbols"==name) {
+    checkStaticMember(context, section, id) {
+        if ("symbols" === id.name) {
             return new ListType(this);
         } else {
-            return super.checkStaticMember(context, section, name);
+            return super.checkStaticMember(context, section, id);
         }
     }
 
-    declareStaticMember(transpiler, section, name) {
-        if("symbols"==name) {
-            const decl = transpiler.context.getRegisteredDeclaration(this.name);
+    declareStaticMember(transpiler, section, id) {
+        if("symbols" === id.name) {
+            const decl = transpiler.context.getRegisteredDeclaration(this.id);
             transpiler.declare(decl);
         } else
-            super.declareStaticMember(transpiler, section, name);
+            super.declareStaticMember(transpiler, section, id);
     }
 
-    transpileStaticMember(transpiler, name) {
-        if ("symbols"==name) {
-            transpiler.append(name);
+    transpileStaticMember(transpiler, id) {
+        if ("symbols" === id.name) {
+            transpiler.append(id.name);
         } else {
-            return super.transpileStaticMember(transpiler, name);
+            return super.transpileStaticMember(transpiler, id);
         }
     }
 
-    getStaticMemberValue(context, name) {
-        const decl = context.getRegisteredDeclaration(this.name);
+    getStaticMemberValue(context, id) {
+        const decl = context.getRegisteredDeclaration(this.id);
         if (!decl || !decl.symbols) {
-            throw new SyntaxError(name + " is not an enumerated type!");
+            throw new SyntaxError(id.name + " is not an enumerated type!");
         }
-        if ("symbols" == name) {
+        if ("symbols" === id.name) {
             return decl.symbols;
         } else {
-            throw new SyntaxError("Unknown member:" + name);
+            throw new SyntaxError("Unknown member:" + id.name);
         }
     }
 
-    getStaticMemberMethods(context, name) {
-        switch (name) {
+    getStaticMemberMethods(context, id) {
+        switch (id.name) {
             case "symbolOf":
                 return [new SymbolOfMethodDeclaration(this)];
             default:

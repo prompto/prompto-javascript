@@ -28,18 +28,18 @@ export default class NativeInstance extends Instance {
         return new CategoryType(this.declaration.id);
     }
 
-    getMemberValue(context, attrName) {
-        if("category" === attrName)
+    getMemberValue(context, id) {
+        if("category" === id.name)
             return this.getCategory(context);
-        const stacked = getActiveGetters()[attrName] || null;
+        const stacked = getActiveGetters()[id.name] || null;
         const first = stacked==null;
         if(first)
-            getActiveGetters()[attrName] = context;
+            getActiveGetters()[id.name] = context;
         try {
-            return this.doGetMember(context, attrName, first);
+            return this.doGetMember(context, id, first);
         } finally {
             if(first) {
-                delete getActiveGetters()[attrName];
+                delete getActiveGetters()[id.name];
             }
         }
     }
@@ -49,46 +49,46 @@ export default class NativeInstance extends Instance {
         return new NativeInstance(context, decl, this.declaration);
     }
 
-    doGetMember(context, attrName, allowGetter) {
-        const getter = allowGetter ? this.declaration.findGetter(context,attrName) : null;
+    doGetMember(context, id, allowGetter) {
+        const getter = allowGetter ? this.declaration.findGetter(context, id) : null;
         if(getter!=null) {
             context = context.newInstanceContext(this, null).newChildContext();
             return getter.interpret(context);
         } else {
-            const value = this.instance[attrName];
+            const value = this.instance[id.name];
             return convertFromJavaScript(value);
         }
     }
 
-    setMember(context, attrName, value) {
+    setMember(context, id, value) {
         if(!this.mutable)
             throw new NotMutableError();
-        const stacked = getActiveSetters()[attrName] || null;
+        const stacked = getActiveSetters()[id.name] || null;
         const first = stacked==null;
         if(first)
-            getActiveSetters()[attrName] = context;
+            getActiveSetters()[id.name] = context;
         try {
-            this.doSetMember(context, attrName, value, first);
+            this.doSetMember(context, id, value, first);
         } finally {
             if(first) {
-                delete getActiveSetters()[attrName];
+                delete getActiveSetters()[id.name];
             }
         }
     }
 
-    doSetMember(context, attrName, value, allowSetter) {
-        const decl = context.getRegisteredDeclaration(attrName);
-        const setter = allowSetter ? this.declaration.findSetter(context,attrName) : null;
+    doSetMember(context, id, value, allowSetter) {
+        const decl = context.getRegisteredDeclaration(id);
+        const setter = allowSetter ? this.declaration.findSetter(context, id) : null;
         if(setter!=null) {
             // use attribute name as parameter name for incoming value
             context = context.newInstanceContext(this, null).newChildContext();
-            context.registerValue(new Variable(attrName, decl.getType()));
-            context.setValue(attrName, value);
+            context.registerValue(new Variable(id, decl.getType()));
+            context.setValue(id, value);
             value = setter.interpret(context);
         }
         if (this.storable && decl.storable) // TODO convert object graph if(value instanceof IInstance)
-            this.storable.setData(attrName, value.getStorableData(), null);
-        this.instance[attrName] = value.convertToJavaScript();
+            this.storable.setData(id.name, value.getStorableData(), null);
+        this.instance[id.name] = value.convertToJavaScript();
     }
 }
 

@@ -18,21 +18,21 @@ export default class TypeType extends BaseType {
         writer.append(">");
     }
 
-    checkMember(context, section, name) {
-        return this.type.checkStaticMember(context, section, name);
+    checkMember(context, section, id) {
+        return this.type.checkStaticMember(context, section, id);
     }
 
-    declareMember(transpiler, section, name) {
+    declareMember(transpiler, section, id) {
         this.type.declare(transpiler);
-        this.type.declareStaticMember(transpiler, section, name);
+        this.type.declareStaticMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, name) {
-        this.type.transpileStaticMember(transpiler, name);
+    transpileMember(transpiler, id) {
+        this.type.transpileStaticMember(transpiler, id);
     }
 
-    getMemberMethods(context, section, name) {
-        return this.type.getStaticMemberMethods(context, section, name);
+    getMemberMethods(context, id) {
+        return this.type.getStaticMemberMethods(context, id);
     }
 }
 

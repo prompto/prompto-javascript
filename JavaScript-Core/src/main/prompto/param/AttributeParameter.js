@@ -33,28 +33,28 @@ export default class AttributeParameter extends Parameter {
     }
 
     check(context) {
-        const actual = context.getRegisteredDeclaration(this.name);
+        const actual = context.getRegisteredDeclaration(this.id);
         if(actual==null)
             throw new SyntaxError("Unknown attribute: \"" + this.name + "\"");
     }
 
     getType(context) {
-        const named = context.getRegisteredDeclaration(this.name);
+        const named = context.getRegisteredDeclaration(this.id);
         return named.getType(context);
     }
 
     checkValue(context, value) {
-        const actual = context.getRegisteredDeclaration(this.name);
+        const actual = context.getRegisteredDeclaration(this.id);
         return actual.checkValue(context,value);
     }
 
     declare(transpiler) {
-        const decl = transpiler.context.getRegisteredDeclaration(this.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.id);
         decl.declare(transpiler);
     }
 
     transpileCall(transpiler, expression) {
-        const decl = transpiler.context.getRegisteredDeclaration(this.name);
+        const decl = transpiler.context.getRegisteredDeclaration(this.id);
         if(decl.constraint) {
             transpiler.append("$check_").append(this.name).append("(");
             super.transpileCall(transpiler, expression);

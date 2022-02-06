@@ -96,7 +96,7 @@ export default class SetType extends ContainerType {
     }
 
     checkItem(context, other, expression) {
-        if(other==IntegerType.instance) {
+        if(other === IntegerType.instance) {
             return this.itemType;
         } else {
             return super.checkItem(context, other, expression);
@@ -176,14 +176,14 @@ export default class SetType extends ContainerType {
         return this.itemType;
     }
 
-    getMemberMethods(context, name) {
-        switch (name) {
+    getMemberMethods(context, id) {
+        switch (id.name) {
             case "toList":
                 return [new ToListMethodDeclaration(this.itemType)];
             case "join":
                 return [new JoinSetMethodDeclaration()];
             default:
-                return super.getMemberMethods.call(context, name);
+                return super.getMemberMethods.call(context, id);
         }
     }
 
