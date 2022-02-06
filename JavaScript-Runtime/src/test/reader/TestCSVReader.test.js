@@ -1,7 +1,7 @@
 var csvIterate = require("../../main/prompto/reader/CSVReader").csvIterate;
-var DocumentJs = require("../../../../JavaScript-Core/src/main/prompto/intrinsic/Document");
+var prompto = require("../../../../JavaScript-Core/src/main/prompto/index.js");
 intrinsic = {
-    Document: DocumentJs["default"]
+    Document: prompto.intrinsic.Document
 };
 
 test('NullRetursnEmptyIterator', () => {
