@@ -26,17 +26,9 @@ export default class ContainerType extends IterableType {
         }
     }
 
-    declareMember(transpiler, section, name) {
-        switch(name) {
-            case "count":
-                break;
-            case "json":
-                transpiler.require(convertToJson);
-                transpiler.require(convertToJsonNode);
-                break;
-            default:
-               super.declareMember(transpiler, section, name);
-        }
+    declareMember(transpiler, section, id) {
+        if(id.name !== "count")
+           super.declareMember(transpiler, section, id);
     }
 
     transpileMember(transpiler, id) {
