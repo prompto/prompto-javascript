@@ -47,7 +47,7 @@ export default class IdentifierList extends ObjectList {
                 break;
             default:
                 for(let i=0;i<this.length;i++) {
-                    if(finalAnd && i==this.length-1)
+                    if(finalAnd && i === this.length-1)
                         break;
                     writer.append(this[i].name);
                     writer.append(", ");
