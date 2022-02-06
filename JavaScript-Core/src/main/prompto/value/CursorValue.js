@@ -1,7 +1,6 @@
 import Value from './Value.js'
 import { IntegerValue, ListValue, IteratorValue } from './index.js'
 import { CursorType, CategoryType } from '../type/index.js'
-import { InvalidDataError } from '../error/index.js'
 import { Identifier } from '../grammar/index.js'
 
 export default class CursorValue extends Value {

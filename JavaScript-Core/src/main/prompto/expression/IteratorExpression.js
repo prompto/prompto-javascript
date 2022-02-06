@@ -5,7 +5,7 @@ import { IteratorType } from '../type/index.js'
 import { IterableValue } from '../value/index.js'
 import { UnresolvedCall } from '../statement/index.js'
 import { InternalError } from '../error/index.js'
-import Identifier from "../../../generated/prompto/grammar/Identifier";
+import { Identifier } from "../grammar/index.js";
 
 export default class IteratorExpression extends Expression {
   
