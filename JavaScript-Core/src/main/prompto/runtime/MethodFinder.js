@@ -88,7 +88,7 @@ export default class MethodFinder {
             const named = this.context.getInstance(selector.id, true);
             if(named === null)
                 return null;
-            const type = named.getType(this.context).resolve(context);
+            const type = named.getType(this.context).resolve(this.context);
             if(type instanceof MethodType)
                 return type.method.asReference();
         }
