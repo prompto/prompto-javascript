@@ -1,7 +1,6 @@
 import IterableType from './IterableType.js'
 import { BooleanType, IntegerType } from './index.js'
 import { Variable } from '../runtime/index.js'
-import {convertToJson, convertToJsonNode} from '../utils/index'
 
 export default class ContainerType extends IterableType {
   
