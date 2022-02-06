@@ -427,8 +427,8 @@ class Context {
     }
 
     getInstance(id, includeParent) {
-        const named = this.parent === null || !includeParent ? null : this.parent.getInstance(id, true);
-        return named !== null ? named : this.instances[id.name] || null;
+        const named = this.instances[id.name] || null;
+        return named !== null ? named : (this.parent === null || !includeParent ? null : this.parent.getInstance(id, true));
     }
 
 

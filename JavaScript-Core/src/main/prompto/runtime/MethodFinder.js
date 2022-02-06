@@ -85,10 +85,10 @@ export default class MethodFinder {
                     return this.getArrowDeclaration(value);
             }
         } else {
-            const named = this.context.getInstance(selector.id, false);
+            const named = this.context.getInstance(selector.id, true);
             if(named === null)
                 return null;
-            const type = named.getType(this.context);
+            const type = named.getType(this.context).resolve(context);
             if(type instanceof MethodType)
                 return type.method.asReference();
         }
