@@ -5,6 +5,10 @@ export default class MethodDeclarationMap {
         this.protos = {};
     }
 
+    get name() {
+        return this.id.name;
+    }
+
     registerOrReplace(declaration) {
         const proto = declaration.getProto();
         this.protos[proto] = declaration;

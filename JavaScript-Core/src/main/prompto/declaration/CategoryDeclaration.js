@@ -98,7 +98,7 @@ export default class CategoryDeclaration extends BaseDeclaration {
         this.getLocalMethods().forEach( method => {
             let localMap = maps.get(method.name);
             if(!localMap) {
-                localMap = new MethodDeclarationMap();
+                localMap = new MethodDeclarationMap(method.id);
                 maps.set(method.name, localMap);
             }
             localMap.registerOrReplace(method);

@@ -191,7 +191,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
             const key = this.getMethodKey(method.name);
             actual = this.methodsMap[key] || null;
             if(actual==null) {
-                actual = new MethodDeclarationMap(method.name);
+                actual = new MethodDeclarationMap(method.id);
                 this.methodsMap[key] = actual;
             }
             actual.register(method, context.problemListener);

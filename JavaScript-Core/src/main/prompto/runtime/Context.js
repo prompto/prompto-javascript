@@ -336,7 +336,7 @@ class Context {
     registerMethodDeclaration(declaration) {
         let actual = this.checkDuplicateMethod(declaration);
         if (actual === null) {
-            actual = new MethodDeclarationMap(declaration.name);
+            actual = new MethodDeclarationMap(declaration.id);
             this.declarations[declaration.name] = actual;
         }
         actual.register(declaration, this.problemListener);
