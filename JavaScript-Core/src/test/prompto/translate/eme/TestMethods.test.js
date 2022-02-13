@@ -84,6 +84,10 @@ test('PolymorphicAbstract', () => {
 	compareResourceEME('methods/polymorphicAbstract.pec');
 });
 
+test('PolymorphicMember', () => {
+	compareResourceEME('methods/polymorphicMember.pec');
+});
+
 test('PolymorphicNamed', () => {
 	compareResourceEME('methods/polymorphicNamed.pec');
 });

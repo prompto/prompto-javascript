@@ -106,6 +106,14 @@ test('Transpiled Homonym2', () => {
 	checkTranspiledOutput('methods/homonym2.poc');
 });
 
+test('Interpreted LocalMember', () => {
+	checkInterpretedOutput('methods/localMember.poc');
+});
+
+test('Transpiled LocalMember', () => {
+	checkTranspiledOutput('methods/localMember.poc');
+});
+
 test('Interpreted Member', () => {
 	checkInterpretedOutput('methods/member.poc');
 });
@@ -144,6 +152,14 @@ test('Interpreted PolymorphicAbstract', () => {
 
 test('Transpiled PolymorphicAbstract', () => {
 	checkTranspiledOutput('methods/polymorphicAbstract.poc');
+});
+
+test('Interpreted PolymorphicMember', () => {
+	checkInterpretedOutput('methods/polymorphicMember.poc');
+});
+
+test('Transpiled PolymorphicMember', () => {
+	checkTranspiledOutput('methods/polymorphicMember.poc');
 });
 
 test('Interpreted PolymorphicNamed', () => {

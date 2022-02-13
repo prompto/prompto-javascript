@@ -56,6 +56,10 @@ test('Homonym2', () => {
 	compareResourceOEO('methods/homonym2.poc');
 });
 
+test('LocalMember', () => {
+	compareResourceOEO('methods/localMember.poc');
+});
+
 test('Member', () => {
 	compareResourceOEO('methods/member.poc');
 });
@@ -74,6 +78,10 @@ test('Parameter', () => {
 
 test('PolymorphicAbstract', () => {
 	compareResourceOEO('methods/polymorphicAbstract.poc');
+});
+
+test('PolymorphicMember', () => {
+	compareResourceOEO('methods/polymorphicMember.poc');
 });
 
 test('PolymorphicNamed', () => {

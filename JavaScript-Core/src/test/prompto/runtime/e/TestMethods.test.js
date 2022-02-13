@@ -162,6 +162,14 @@ test('Transpiled PolymorphicAbstract', () => {
 	checkTranspiledOutput('methods/polymorphicAbstract.pec');
 });
 
+test('Interpreted PolymorphicMember', () => {
+	checkInterpretedOutput('methods/polymorphicMember.pec');
+});
+
+test('Transpiled PolymorphicMember', () => {
+	checkTranspiledOutput('methods/polymorphicMember.pec');
+});
+
 test('Interpreted PolymorphicNamed', () => {
 	checkInterpretedOutput('methods/polymorphicNamed.pec');
 });
