@@ -14,10 +14,10 @@ export default class MethodDeclarationMap {
         this.protos[proto] = declaration;
     }
 
-    register(declaration, problemListener) {
+    register(declaration, problemListener, override) {
         const proto = declaration.getProto();
         const current = this.protos[proto] || null;
-        if (current !== null)
+        if (current !== null && !override)
             problemListener.reportDuplicate(declaration.id);
         this.protos[proto] = declaration;
     }

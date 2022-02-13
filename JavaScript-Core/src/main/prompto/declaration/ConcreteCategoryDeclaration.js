@@ -207,7 +207,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
     }
 
     getMemberMethods(context, id, allowAbstract) {
-        this.registerMethods();
+        this.registerMethods(context);
         const result = new MethodDeclarationMap(id);
         this.collectMemberMethods(context, result, allowAbstract);
         return result;

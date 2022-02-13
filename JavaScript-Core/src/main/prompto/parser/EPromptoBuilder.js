@@ -98,7 +98,7 @@ export default class EPromptoBuilder extends EParserListener {
         const comments = ctxs.map(function (csc) {
             return this.getNodeValue(csc);
         }, this);
-        return (comments.length == 0) ? null : comments;
+        return (comments.length === 0) ? null : comments;
     }
 
 
@@ -2511,9 +2511,14 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitInvocation_expression(ctx) {
-        const name = this.getNodeValue(ctx.name);
-        const select = new expression.MethodSelector(null, name);
-        this.setNodeValue(ctx, new statement.MethodCall(select));
+        let select = null;
+        const exp = this.getNodeValue(ctx.exp);
+        if(exp instanceof expression.UnresolvedIdentifier)
+            select = new expression.MethodSelector(null, exp.id);
+        else if(exp instanceof expression.MemberSelector)
+            select = new expression.MethodSelector(exp.parent, exp.id);
+        if(select !== null)
+            this.setNodeValue(ctx, new statement.MethodCall(select));
     }
 
 
