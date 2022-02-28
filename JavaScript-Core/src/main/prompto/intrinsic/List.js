@@ -16,7 +16,7 @@ List.prototype = Object.create(Array.prototype);
 List.prototype.constructor = List;
 
 List.prototype.toArray = function() {
-    return this;
+    return Array.from(this);
 };
 
 List.prototype.addItems = function(items) {
@@ -29,18 +29,15 @@ List.prototype.addItems = function(items) {
 List.prototype.add = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = items.toArray();
-    var concat = new List(false);
-    concat.addItems(this);
-    concat.addItems(items);
-    return concat;
+    var result = new List(false, this);
+    result.addItems(items);
+    return result;
 };
 
 List.prototype.remove = function(items) {
     var excluded = (typeof(StrictSet) !== 'undefined' && items instanceof StrictSet) ? items : new Set(items);
     var remaining = this.filter(function(item) { return !excluded.has(item); });
-    var concat = new List(false);
-    concat.addItems(remaining);
-    return concat;
+    return new List(false, remaining);
 };
 
 List.prototype.removeItem = function(item) {
@@ -235,3 +232,18 @@ List.prototype.toDocument = function() {
 List.prototype.toSet = function() {
     return new StrictSet(this);
 };
+
+(function() {
+    var $isArray = Array.isArray;
+    Array.isArray = function(obj) {
+        return $isArray(obj) || obj instanceof List;
+    }
+    var $concat = Array.prototype.concat;
+    Array.prototype.concat = function() {
+        for(var i=0; i<arguments.length; i++) {
+            if(arguments[i] instanceof List)
+                arguments[i] = Array.from(arguments[i]);
+        }
+        return $concat.apply(this, arguments);
+    }
+})();
