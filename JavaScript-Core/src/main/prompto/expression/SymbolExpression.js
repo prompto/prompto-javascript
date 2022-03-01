@@ -1,5 +1,6 @@
 import Expression from './Expression.js'
-import { SyntaxError } from '../error/index.js'
+import { VoidType } from "../type/index.js";
+import { NullValue } from "../value/index.js";
 
 export default class SymbolExpression extends Expression {
 
@@ -19,17 +20,19 @@ export default class SymbolExpression extends Expression {
     check(context) {
         const symbol = context.getRegisteredValue(this.id);
         if(symbol==null) {
-            throw new SyntaxError("Unknown symbol:" + this.name);
-        }
-        return symbol.check(context);
+            context.problemListener.reportUnknownIdentifier(this, this.name);
+            return VoidType.instance;
+        } else
+            return symbol.check(context);
     }
 
     interpret(context) {
         const symbol = context.getRegisteredValue(this.id);
         if(symbol==null) {
-            throw new SyntaxError("Unknown symbol:" + this.name);
-        }
-        return symbol.interpret(context);
+            context.problemListener.reportUnknownIdentifier(this, this.name);
+            return NullValue.instance;
+        } else
+            return symbol.interpret(context);
     }
 
     declare(transpiler) {
