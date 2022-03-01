@@ -116,6 +116,10 @@ test('UnknownParentType problems', () => {
 	checkProblems('problems/unknownParentType.poc');
 });
 
+test('UnknownSymbol problems', () => {
+	checkProblems('problems/unknownSymbol.poc');
+});
+
 test('UnknownType problems', () => {
 	checkProblems('problems/unknownType.poc');
 });
