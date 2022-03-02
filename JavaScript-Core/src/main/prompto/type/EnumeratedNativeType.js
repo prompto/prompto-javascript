@@ -33,6 +33,10 @@ export default class EnumeratedNativeType extends BaseType {
         }
     }
 
+    isMoreSpecificThan(context, type) {
+        return false;
+    }
+
     declare(transpiler) {
         const decl = transpiler.context.getRegisteredDeclaration(this.id);
         transpiler.declare(decl);

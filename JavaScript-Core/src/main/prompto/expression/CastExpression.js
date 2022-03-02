@@ -76,14 +76,17 @@ export default class CastExpression extends Expression {
 
     interpret(context) {
         let value = this.expression.interpret(context);
-        const target = getTargetType(context, this.type);
         if(value) {
-            if (value instanceof IntegerValue && target === DecimalType.instance) {
-                value = new DecimalValue(value.DecimalValue());
-            } else if (value instanceof DecimalValue && target === IntegerType.instance) {
-                value = new IntegerValue(value.IntegerValue());
-            } else if (target.isMoreSpecificThan(context, value.type)) {
-                value.type = this.type;
+            const target = getTargetType(context, this.type);
+            if(!target.equals(value.type)) {
+                if (value instanceof IntegerValue && target === DecimalType.instance) {
+                    value = new DecimalValue(value.DecimalValue());
+                } else if (value instanceof DecimalValue && target === IntegerType.instance) {
+                    value = new IntegerValue(value.IntegerValue());
+                } else if (target.isMoreSpecificThan(context, value.type)) {
+                    value.type = this.type;
+                } else
+                    context.problemListener.reportInvalidCast(this, this.type, value.type);
             }
         }
         return value;
