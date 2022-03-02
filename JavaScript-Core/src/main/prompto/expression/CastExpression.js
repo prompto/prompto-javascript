@@ -83,9 +83,9 @@ export default class CastExpression extends Expression {
                     value = new DecimalValue(value.DecimalValue());
                 } else if (value instanceof DecimalValue && target === IntegerType.instance) {
                     value = new IntegerValue(value.IntegerValue());
-                } else if (target.isAssignableFrom(context, value.type)) {
+                } else if (value.type.isAssignableFrom(context, target)) {
                     value.type = this.type;
-                } else if(!value.type.isAssignableFrom(context, target))
+                } else if (!target.isAssignableFrom(context, value.type))
                     context.problemListener.reportInvalidCast(this, this.type, value.type);
             }
         }
