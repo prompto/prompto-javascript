@@ -12,6 +12,10 @@ test('CastChild', () => {
 	compareResourceOEO('cast/castChild.poc');
 });
 
+test('CastEnum', () => {
+	compareResourceOEO('cast/castEnum.poc');
+});
+
 test('CastMethod', () => {
 	compareResourceOEO('cast/castMethod.poc');
 });

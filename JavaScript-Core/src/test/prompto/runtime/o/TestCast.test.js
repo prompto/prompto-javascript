@@ -34,6 +34,14 @@ test('Transpiled CastChild', () => {
 	checkTranspiledOutput('cast/castChild.poc');
 });
 
+test('Interpreted CastEnum', () => {
+	checkInterpretedOutput('cast/castEnum.poc');
+});
+
+test('Transpiled CastEnum', () => {
+	checkTranspiledOutput('cast/castEnum.poc');
+});
+
 test('Interpreted CastMethod', () => {
 	checkInterpretedOutput('cast/castMethod.poc');
 });
