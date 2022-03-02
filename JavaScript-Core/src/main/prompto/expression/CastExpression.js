@@ -1,6 +1,6 @@
 import Expression from './Expression.js'
 import { VoidType, AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType } from '../type/index.js'
-import { IntegerValue, DecimalValue } from '../value/index.js'
+import { IntegerValue, DecimalValue, NullValue } from '../value/index.js'
 import { MethodDeclarationMap } from '../runtime/index.js'
 
 
@@ -76,16 +76,16 @@ export default class CastExpression extends Expression {
 
     interpret(context) {
         let value = this.expression.interpret(context);
-        if(value) {
+        if(value && value !== NullValue.instance) {
             const target = getTargetType(context, this.type);
             if(!target.equals(value.type)) {
                 if (value instanceof IntegerValue && target === DecimalType.instance) {
                     value = new DecimalValue(value.DecimalValue());
                 } else if (value instanceof DecimalValue && target === IntegerType.instance) {
                     value = new IntegerValue(value.IntegerValue());
-                } else if (target.isMoreSpecificThan(context, value.type)) {
+                } else if (target.isAssignableFrom(context, value.type)) {
                     value.type = this.type;
-                } else
+                } else if(!value.type.isAssignableFrom(context, target))
                     context.problemListener.reportInvalidCast(this, this.type, value.type);
             }
         }
