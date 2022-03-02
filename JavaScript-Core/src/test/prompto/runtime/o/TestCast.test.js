@@ -66,6 +66,14 @@ test('Transpiled CastNull', () => {
 	checkTranspiledOutput('cast/castNull.poc');
 });
 
+test('Interpreted CastParent', () => {
+	checkInterpretedOutput('cast/castParent.poc');
+});
+
+test('Transpiled CastParent', () => {
+	checkTranspiledOutput('cast/castParent.poc');
+});
+
 test('Interpreted IsAChild', () => {
 	checkInterpretedOutput('cast/isAChild.poc');
 });

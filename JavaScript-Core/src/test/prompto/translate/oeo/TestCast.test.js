@@ -28,6 +28,10 @@ test('CastNull', () => {
 	compareResourceOEO('cast/castNull.poc');
 });
 
+test('CastParent', () => {
+	compareResourceOEO('cast/castParent.poc');
+});
+
 test('IsAChild', () => {
 	compareResourceOEO('cast/isAChild.poc');
 });
