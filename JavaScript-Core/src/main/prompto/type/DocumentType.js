@@ -1,5 +1,5 @@
 import NativeType from './NativeType.js'
-import { NullType, AnyType, MissingType, SetType, TextType, ListType, IntegerType } from './index.js'
+import { NullType, AnyType, MissingType, SetType, TextType, ListType, IntegerType, CategoryType } from './index.js'
 import { ValueExpression, MethodSelector } from '../expression/index.js'
 import { Identifier, ArgumentList, Argument } from '../grammar/index.js'
 import { MethodDeclarationMap } from '../runtime/index.js'
@@ -21,6 +21,12 @@ export default class DocumentType extends NativeType {
 
     withItemType(itemType) {
         return this;
+    }
+
+    isAssignableFrom(context, other) {
+        return super.isAssignableFrom(context, other)
+            || other === AnyType.instance
+            || (other instanceof CategoryType && "Any" === other.name);
     }
 
     isMoreSpecificThan(context, other) {

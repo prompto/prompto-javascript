@@ -50,7 +50,7 @@ export default class NativeType extends BaseType {
     }
 
     isMoreSpecificThan(context, other) {
-        return  other === MissingType.instance || other === AnyType.instance;;
+        return  other === MissingType.instance || other === AnyType.instance;
     }
 
     equals(obj) {
