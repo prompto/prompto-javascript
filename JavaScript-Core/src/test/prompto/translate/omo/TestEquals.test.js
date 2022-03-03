@@ -64,6 +64,14 @@ test('IsADictionary', () => {
 	compareResourceOMO('equals/isADictionary.poc');
 });
 
+test('IsAParentInstance', () => {
+	compareResourceOMO('equals/isAParentInstance.poc');
+});
+
+test('IsAnInstance', () => {
+	compareResourceOMO('equals/isAnInstance.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOMO('equals/isBoolean.poc');
 });

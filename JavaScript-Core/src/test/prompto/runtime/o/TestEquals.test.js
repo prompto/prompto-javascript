@@ -138,6 +138,22 @@ test('Transpiled IsADictionary', () => {
 	checkTranspiledOutput('equals/isADictionary.poc');
 });
 
+test('Interpreted IsAParentInstance', () => {
+	checkInterpretedOutput('equals/isAParentInstance.poc');
+});
+
+test('Transpiled IsAParentInstance', () => {
+	checkTranspiledOutput('equals/isAParentInstance.poc');
+});
+
+test('Interpreted IsAnInstance', () => {
+	checkInterpretedOutput('equals/isAnInstance.poc');
+});
+
+test('Transpiled IsAnInstance', () => {
+	checkTranspiledOutput('equals/isAnInstance.poc');
+});
+
 test('Interpreted IsBoolean', () => {
 	checkInterpretedOutput('equals/isBoolean.poc');
 });

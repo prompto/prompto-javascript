@@ -64,6 +64,14 @@ test('IsADictionary', () => {
 	compareResourceOEO('equals/isADictionary.poc');
 });
 
+test('IsAParentInstance', () => {
+	compareResourceOEO('equals/isAParentInstance.poc');
+});
+
+test('IsAnInstance', () => {
+	compareResourceOEO('equals/isAnInstance.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOEO('equals/isBoolean.poc');
 });
