@@ -223,6 +223,19 @@ export function isAMethod(o, params, result) {
     return params.length === countParams(o);
 }
 
+export function isAnEnum(o) {
+    if(typeof o !== 'object')
+        return false;
+    var proto = Object.getPrototypeOf(o);
+    return proto && proto.constructor && proto.constructor.symbolOf && proto.constructor.symbols;
+}
+
+export function isInstanceOf(obj, type) {
+    // eslint-disable-next-line no-undef
+    return obj instanceof type || (obj instanceof $Root && obj.$categories.indexOf(type)>=0);
+}
+
+
 export function isCharacterUpperCase(char) {
     return !!/[A-Z]/.exec(char[0]);
 }

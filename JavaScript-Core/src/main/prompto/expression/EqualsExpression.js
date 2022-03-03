@@ -11,10 +11,11 @@ import {
     NullType,
     IntegerType,
     DecimalType,
-    MethodType
+    MethodType,
+    CategoryType
 } from '../type/index.js'
 import { NullValue, BooleanValue, Value, TypeValue, Instance } from '../value/index.js'
-import { CodeWriter, removeAccents, isAMethod } from '../utils/index.js'
+import { CodeWriter, removeAccents, isAMethod, isInstanceOf } from '../utils/index.js'
 import { SyntaxError } from '../error/index.js'
 
 const VOWELS = "AEIO"; // sufficient here
@@ -231,6 +232,7 @@ export default class EqualsExpression extends Expression {
             transpiler.require(removeAccents);
         } else if (this.operator === EqOp.IS_A || this.operator === EqOp.IS_NOT_A) {
             transpiler.require(isAMethod);
+            transpiler.require(isInstanceOf);
         }
     }
 
@@ -378,6 +380,12 @@ export default class EqualsExpression extends Expression {
             this.left.transpile(transpiler);
             transpiler.append(", ");
             right.transpileMethodType(transpiler);
+            transpiler.append(")");
+        } else if(right instanceof CategoryType) {
+            transpiler.append("isInstanceOf(");
+            this.left.transpile(transpiler);
+            transpiler.append(", ");
+            this.right.transpile(transpiler);
             transpiler.append(")");
         } else {
             this.left.transpile(transpiler);
