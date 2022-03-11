@@ -138,6 +138,14 @@ test('Transpiled ReturnLongValue', () => {
 	checkTranspiledOutput('native/returnLongValue.poc');
 });
 
+test('Interpreted ReturnNullValue', () => {
+	checkInterpretedOutput('native/returnNullValue.poc');
+});
+
+test('Transpiled ReturnNullValue', () => {
+	checkTranspiledOutput('native/returnNullValue.poc');
+});
+
 test('Interpreted ReturnStringLiteral', () => {
 	checkInterpretedOutput('native/returnStringLiteral.poc');
 });

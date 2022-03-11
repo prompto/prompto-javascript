@@ -68,6 +68,10 @@ test('ReturnLongValue', () => {
 	compareResourceOEO('native/returnLongValue.poc');
 });
 
+test('ReturnNullValue', () => {
+	compareResourceOEO('native/returnNullValue.poc');
+});
+
 test('ReturnStringLiteral', () => {
 	compareResourceOEO('native/returnStringLiteral.poc');
 });
