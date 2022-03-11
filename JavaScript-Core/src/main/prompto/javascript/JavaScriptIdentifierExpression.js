@@ -60,6 +60,8 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
     interpret_instance(context) {
         if (context == null) {
             return null;
+        } else if("null" === this.id.name) {
+            return null;
         } else {
             try {
                 return context.getValue(this.id);
