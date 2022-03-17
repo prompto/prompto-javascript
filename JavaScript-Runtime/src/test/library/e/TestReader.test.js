@@ -32,6 +32,14 @@ test('Transpiled Json', () => {
 	runTranspiledTests('reader/json.pec');
 });
 
+test('Interpreted Xml', () => {
+	runInterpretedTests('reader/xml.pec');
+});
+
+test('Transpiled Xml', () => {
+	runTranspiledTests('reader/xml.pec');
+});
+
 test('Interpreted Yaml', () => {
 	runInterpretedTests('reader/yaml.pec');
 });

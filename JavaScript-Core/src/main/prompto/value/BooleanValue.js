@@ -25,6 +25,10 @@ export default class BooleanValue extends Value {
         return BooleanValue.ValueOf(bool);
     }
 
+    convertToJavaScript() {
+        return this.value;
+    }
+
     getStorableData() {
         return this.value;
     }

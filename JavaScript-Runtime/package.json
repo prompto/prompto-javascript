@@ -38,7 +38,8 @@
     "antlr4": "4.9.1",
     "js-yaml": "3.13.1",
     "jszip-sync": "3.2.1-sync",
-    "sync-request": "3.0.1"
+    "sync-request": "3.0.1",
+    "xmlbuilder2": "^3.0.2"
   },
   "scripts": {
     "test": "jest"
