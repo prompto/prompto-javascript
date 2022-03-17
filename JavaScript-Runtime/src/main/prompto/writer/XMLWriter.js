@@ -35,17 +35,17 @@ XmlSerializer.prototype.setElementAttributes = function(element, doc) {
 
 XmlSerializer.prototype.convertValue = function(parent, value) {
     if(value !== null) {
-        if (value instanceof intrinsic.List)
+        if (intrinsic.List && value instanceof intrinsic.List)
             value.forEach(function (item) {
                 this.convertValue(parent, item);
             }, this);
-        else if (value instanceof intrinsic.StrictSet)
+        else if (intrinsic.StrictSet && value instanceof intrinsic.StrictSet)
             value.toArray().forEach(function (item) {
                 this.convertValue(parent, item);
             }, this);
-        else if (value instanceof intrinsic.Dictionary)
+        else if (intrinsic.Dictionary && value instanceof intrinsic.Dictionary)
             this.convertDict(parent, value)
-        else if (value instanceof intrinsic.Document)
+        else if (intrinsic.Document && value instanceof intrinsic.Document)
             this.convertDocument(parent, value)
         else
             this.setElementText(parent, value.toString());
