@@ -24,7 +24,7 @@
     "ini": "^2.0.0",
     "jest": "^26.4.2",
     "lodash": "4.17.21",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "node-notifier": "8.0.2",
     "serialize-javascript": "^6.0.0",
     "ssri": "^8.0.1",
