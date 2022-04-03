@@ -1,4 +1,4 @@
-var antlr4 = require("antlr4");
+import antlr4 from "antlr4";
 var prompto = require("../../../../main/prompto/index");
 var ECleverParser = prompto.parser.ECleverParser;
 var EPromptoBuilder = prompto.parser.EPromptoBuilder;

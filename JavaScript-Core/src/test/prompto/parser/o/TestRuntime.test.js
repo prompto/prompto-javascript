@@ -1,12 +1,9 @@
+import antlr4 from "antlr4";
+var prompto = require("../../../../main/prompto/index");
 var Out = require("../../runtime/utils/Out").Out;
 
 var os = require("os");
-var antlr4 = require("antlr4");
-var prompto = require("../../../../main/prompto/index");
-var parseString = require("../../parser/BaseOParserTest").parseString;
-var parseResource = require("../../parser/BaseOParserTest").parseResource;
 var interpretResource = require("../../parser/BaseOParserTest").interpretResource;
-var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
 
 beforeEach(() => {
 	Out.init();
@@ -44,7 +41,7 @@ test('Return', () => {
 
 test('DateTimeTZName', () => {
 	interpretResource("builtins/dateTimeTZName.poc");
-	var tzName = "UTC"; // TimeZone.getTimeZone("UTC").getDisplayName(Locale.ENGLISH);
+	// var tzName = "UTC"; // TimeZone.getTimeZone("UTC").getDisplayName(Locale.ENGLISH);
 	// test.equal(Out.read(), "tzName=" + tzName);
 });
 

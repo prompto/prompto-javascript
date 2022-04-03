@@ -1,4 +1,3 @@
-var antlr4 = require("antlr4");
 var prompto = require("../../../../main/prompto/index");
 var ELexer = prompto.parser.ELexer;
 var tokenNamesAsString = require("../BaseELexerTest").tokenNamesAsString;

@@ -1,6 +1,5 @@
-var antlr4 = require("antlr4");
+import antlr4 from "antlr4";
 var prompto = require("../../../main/prompto/index");
-var BaseParserTest = require("./BaseParserTest");
 
 var ELexer = prompto.parser.ELexer;
 var EIndentingLexer = prompto.parser.EIndentingLexer;
@@ -17,15 +16,6 @@ function parseTokens(lexer) {
 	return result;
 }
 
-function parseTokenTypes(lexer) {
-	var tokens = parseTokens(lexer);
-	var result = [];
-	for(var i = 0; i<tokens.length; i++) {
-		result[i] = tokens[i].type;
-	}
-	return result;
-};
-
 function parseTokenNames(lexer) {
 	var tokens = parseTokens(lexer);
 	var s = "";
@@ -40,18 +30,8 @@ function newTokenStreamFromString(input) {
 	return new EIndentingLexer(stream);
 }
 
-function newTokenStreamFromResource(resourceName) {
-	var stream = new antlr4.FileStream(resourceName);
-	return new EIndentingLexer(stream);
-}
-
 function parseTokenNamesFromString(input) {
 	var lexer = newTokenStreamFromString(input);
-	return parseTokenNames(lexer);
-}
-
-function parseTokenNamesFromResource(input) {
-	var lexer = newTokenStreamFromResource(input);
 	return parseTokenNames(lexer);
 }
 

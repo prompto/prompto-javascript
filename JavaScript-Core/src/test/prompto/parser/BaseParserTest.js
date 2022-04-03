@@ -3,7 +3,7 @@ var path = require("path");
 var fs = require("fs");
 import * as prompto from "../../../main/prompto/index.js";
 
-var antlr4 = require("antlr4");
+import antlr4 from "antlr4";
 var Out = require("../runtime/utils/Out").Out;
 
 var locateMethod = prompto.runtime.locateMethod;
