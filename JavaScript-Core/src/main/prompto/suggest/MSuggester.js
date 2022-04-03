@@ -1,11 +1,12 @@
 import BaseSuggester from "./BaseSuggester.js";
-import { MLexer } from "../parser/index.js";
+import {MLexer, MParser} from "../parser/index.js";
 
 
 export default class MSuggester extends BaseSuggester {
 
     getStartState() {
-        return 158; // first state in MParser.declaration_list()
+        const startState = this.parser.atn.ruleToStartState[MParser.RULE_declaration_list];
+        return startState.stateNumber;
     }
 
     suggestionsAt(caret, context) {

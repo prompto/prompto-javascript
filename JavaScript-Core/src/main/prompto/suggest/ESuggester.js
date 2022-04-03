@@ -1,11 +1,12 @@
 import BaseSuggester from "./BaseSuggester.js";
-import { ELexer } from "../parser/index.js";
+import {ELexer, EParser} from "../parser/index.js";
 
 
 export default class ESuggester extends BaseSuggester {
 
     getStartState() {
-        return 164; // first state in EParser.declaration_list()
+        const startState = this.parser.atn.ruleToStartState[EParser.RULE_declaration_list];
+        return startState.stateNumber;
     }
 
     suggestionsAt(caret, context) {

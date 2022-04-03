@@ -1,11 +1,12 @@
 import BaseSuggester from "./BaseSuggester.js";
-import { OLexer } from "../parser/index.js";
+import { OLexer, OParser } from "../parser/index.js";
 
 
 export default class OSuggester extends BaseSuggester {
 
     getStartState() {
-        return 154; // first state in OParser.declaration_list()
+        const startState = this.parser.atn.ruleToStartState[OParser.RULE_declaration_list];
+        return startState.stateNumber;
     }
 
     suggestionsAt(caret, context) {
