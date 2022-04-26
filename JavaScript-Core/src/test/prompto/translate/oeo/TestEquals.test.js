@@ -72,6 +72,10 @@ test('IsAnInstance', () => {
 	compareResourceOEO('equals/isAnInstance.poc');
 });
 
+test('IsAnInstanceTernary', () => {
+	compareResourceOEO('equals/isAnInstanceTernary.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOEO('equals/isBoolean.poc');
 });

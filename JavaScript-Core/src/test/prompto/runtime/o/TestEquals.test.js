@@ -154,6 +154,14 @@ test('Transpiled IsAnInstance', () => {
 	checkTranspiledOutput('equals/isAnInstance.poc');
 });
 
+test('Interpreted IsAnInstanceTernary', () => {
+	checkInterpretedOutput('equals/isAnInstanceTernary.poc');
+});
+
+test('Transpiled IsAnInstanceTernary', () => {
+	checkTranspiledOutput('equals/isAnInstanceTernary.poc');
+});
+
 test('Interpreted IsBoolean', () => {
 	checkInterpretedOutput('equals/isBoolean.poc');
 });

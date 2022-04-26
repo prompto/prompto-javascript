@@ -72,6 +72,10 @@ test('IsAnInstance', () => {
 	compareResourceOMO('equals/isAnInstance.poc');
 });
 
+test('IsAnInstanceTernary', () => {
+	compareResourceOMO('equals/isAnInstanceTernary.poc');
+});
+
 test('IsBoolean', () => {
 	compareResourceOMO('equals/isBoolean.poc');
 });
