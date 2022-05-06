@@ -327,7 +327,7 @@ const HTML_PROPERTY_TYPES = `{
     onKeyDown: KeyboardEventCallback,
     onKeyUp: KeyboardEventCallback,
     onSubmit: SubmitEventCallback,
-    onChange: InputChangedCallback,
+    onChange: InputChangedEventCallback,
     key: Any,
     ref: Text 
 }`; // TODO: 'key' and 'ref' are for React only
