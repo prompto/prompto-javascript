@@ -324,6 +324,8 @@ const HTML_PROPERTY_TYPES = `{
     onMouseOut: MouseEventCallback,
     onMouseOver: MouseEventCallback,
     onMouseUp: MouseEventCallback,
+    onKeyDown: KeyboardEventCallback,
+    onKeyUp: KeyboardEventCallback,
     onSubmit: SubmitEventCallback,
     onChange: InputChangedCallback,
     key: Any,
