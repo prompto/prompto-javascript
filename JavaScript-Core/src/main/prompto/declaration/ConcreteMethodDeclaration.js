@@ -12,6 +12,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         super(id, args, returnType);
         this.statements = statements || new StatementList();
         this.declarationOf = null;
+        this.beingChecked = false;
         this.statements.forEach(function(stmt) {
             if(stmt instanceof DeclarationStatement)
                 stmt.declaration.closureOf = this;
@@ -24,7 +25,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
 
     check(context, isStart) {
         if(this.canBeChecked(context, isStart)) {
-            return this.fullCheck(context, isStart);
+            return this.recursiveCheck(context, isStart);
         } else {
             return VoidType.instance;
         }
@@ -51,6 +52,23 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         return false;
     }
 
+    recursiveCheck(context, isStart) {
+        if(this.beingChecked) {
+            if(this.returnType)
+                return this.returnType;
+            else {
+                context.problemListener.reportUntypedRecursiveMethod(this.id, this.name, this.getProto(context));
+                return VoidType.instance;
+            }
+        } else {
+            this.beingChecked = true;
+            try {
+                return this.fullCheck(context, isStart);
+            } finally {
+                this.beingChecked = false;
+            }
+        }
+    }
     fullCheck(context, isStart) {
         if(isStart) {
             context = context.newLocalContext();

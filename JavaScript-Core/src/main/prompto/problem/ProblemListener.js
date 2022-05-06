@@ -257,5 +257,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
         this.reportError(section, name + " is not storable");
     }
 
-
+    reportUntypedRecursiveMethod(section, name, proto) {
+        this.reportError(section, name + " is recursive but has no return type");
+    }
 }
