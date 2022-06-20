@@ -170,14 +170,14 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         if(!this.del)
             transpiler.append("null");
         else {
-            transpiler.append("function() { ").indent();
+            transpiler.append("(function() { ").indent();
             transpiler.append("var idsToDelete = new Set();").newLine();
             this.del.forEach(exp => {
                 exp.transpile(transpiler);
                 transpiler.append(".collectDbIds(idsToDelete);").newLine();
             }, this);
             transpiler.append("return Array.from(idsToDelete);").newLine();
-            transpiler.dedent().append("}.bind(this)()");
+            transpiler.dedent().append("}).bind(this)()");
         }
     }
 
@@ -185,14 +185,14 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         if (!this.add)
             transpiler.append("null");
         else {
-            transpiler.append("function() { ").indent();
+            transpiler.append("(function() { ").indent();
             transpiler.append("var storablesToAdd = new Set();").newLine();
             this.add.forEach(exp => {
                 exp.transpile(transpiler);
                 transpiler.append(".collectStorables(storablesToAdd);").newLine();
             }, this);
             transpiler.append("return Array.from(storablesToAdd);").newLine();
-            transpiler.dedent().append("}.bind(this)()");
+            transpiler.dedent().append("}).bind(this)()");
         }
     }
 
@@ -205,9 +205,9 @@ export default class DeleteAndStoreStatement extends BaseStatement {
 
     transpileFuture(transpiler) {
         if(this.andThen) {
-            transpiler.append(", function() {").indent();
+            transpiler.append(", (function() {").indent();
             this.andThen.transpile(transpiler);
-            transpiler.dedent().append("}.bind(this)");
+            transpiler.dedent().append("}).bind(this)");
         }
     }
 
