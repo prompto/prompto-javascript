@@ -161,12 +161,8 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         transpiler.append(", ");
         this.transpileStorablesToAdd(transpiler);
         transpiler.append(", ");
-        this.transpileMeta(transpiler);
-        if(this.andThen) {
-            transpiler.append(", function() {").indent();
-            this.andThen.transpile(transpiler);
-            transpiler.dedent().append("}.bind(this)");
-        }
+        this.transpileMetadata(transpiler);
+        this.transpileFuture(transpiler);
         transpiler.append(")");
     }
 
@@ -174,14 +170,14 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         if(!this.del)
             transpiler.append("null");
         else {
-            transpiler.append("(function() { ").indent();
+            transpiler.append("function() { ").indent();
             transpiler.append("var idsToDelete = new Set();").newLine();
             this.del.forEach(exp => {
                 exp.transpile(transpiler);
                 transpiler.append(".collectDbIds(idsToDelete);").newLine();
             }, this);
             transpiler.append("return Array.from(idsToDelete);").newLine();
-            transpiler.dedent().append("})()");
+            transpiler.dedent().append("}.bind(this)()");
         }
     }
 
@@ -189,23 +185,31 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         if (!this.add)
             transpiler.append("null");
         else {
-            transpiler.append("(function() { ").indent();
+            transpiler.append("function() { ").indent();
             transpiler.append("var storablesToAdd = new Set();").newLine();
             this.add.forEach(exp => {
                 exp.transpile(transpiler);
                 transpiler.append(".collectStorables(storablesToAdd);").newLine();
             }, this);
             transpiler.append("return Array.from(storablesToAdd);").newLine();
-            transpiler.dedent().append("})()");
+            transpiler.dedent().append("}.bind(this)()");
         }
     }
 
-    transpileMeta(transpiler) {
+    transpileMetadata(transpiler) {
         if (!this.meta)
             transpiler.append("null");
         else
             this.meta.transpile(transpiler);
    }
+
+    transpileFuture(transpiler) {
+        if(this.andThen) {
+            transpiler.append(", function() {").indent();
+            this.andThen.transpile(transpiler);
+            transpiler.dedent().append("}.bind(this)");
+        }
+    }
 
     getIdsToDelete(context) {
         if(!this.del)
