@@ -33,7 +33,7 @@ export default class UnresolvedParameter {
     }
 
     check(context) {
-        this.resolveAndCheck(context);
+        return this.resolveAndCheck(context);
     }
 
     getProto() {
@@ -66,7 +66,12 @@ export default class UnresolvedParameter {
     }
 
     resolveAndCheck(context) {
-        if(this.resolved!=null)
+        this.resolve(context);
+        return this.resolved ? this.resolved.check(context) : null;
+    }
+
+    resolve(context) {
+        if (this.resolved)
             return;
         // ignore problems during resolution
         const listener = context.problemListener;
@@ -83,9 +88,9 @@ export default class UnresolvedParameter {
             // restore listener
             context.problemListener = listener;
         }
-        if(this.resolved==null)
+        if(!this.resolved)
             context.problemListener.reportUnknownAttribute(this.id, this.name);
-        else
+         else
             this.resolved.setMutable(this.mutable);
     }
 

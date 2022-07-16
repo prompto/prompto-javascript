@@ -44,6 +44,10 @@ test('DeepUnknownMethod problems', () => {
 	checkProblems('problems/deepUnknownMethod.poc');
 });
 
+test('IllegalAttributeType problems', () => {
+	checkProblems('problems/illegalAttributeType.poc');
+});
+
 test('IllegalComparison problems', () => {
 	checkProblems('problems/illegalComparison.poc');
 });
@@ -56,12 +60,12 @@ test('IllegalOperation problems', () => {
 	checkProblems('problems/illegalOperation.poc');
 });
 
-test('MissingAttribute problems', () => {
-	checkProblems('problems/missingAttribute.poc');
-});
-
 test('MissingAttributeMember problems', () => {
 	checkProblems('problems/missingAttributeMember.poc');
+});
+
+test('MissingAttributeName problems', () => {
+	checkProblems('problems/missingAttributeName.poc');
 });
 
 test('MissingAttributeValue problems', () => {
@@ -74,6 +78,10 @@ test('NoMatchingPrototype problems', () => {
 
 test('SetReactState problems', () => {
 	checkProblems('problems/setReactState.poc');
+});
+
+test('UnknownAttribute problems', () => {
+	checkProblems('problems/unknownAttribute.poc');
 });
 
 test('UnknownAttributeParameter problems', () => {
@@ -94,6 +102,10 @@ test('UnknownDictItemType problems', () => {
 
 test('UnknownIdentifier problems', () => {
 	checkProblems('problems/unknownIdentifier.poc');
+});
+
+test('UnknownIdentifierMember problems', () => {
+	checkProblems('problems/unknownIdentifierMember.poc');
 });
 
 test('UnknownItemType problems', () => {

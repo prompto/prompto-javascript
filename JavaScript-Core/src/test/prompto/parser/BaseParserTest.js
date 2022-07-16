@@ -343,8 +343,8 @@ exports.checkSameProblems = function(fileName, parser) {
     decls.register(context);
     const decl = decls[decls.length-1];
     decl.check(context, true);
-    const expected = readExpectedProblems(fileName);
-    const actual = readActualProblems(collector);
+    const expected = readExpectedProblems(fileName) || [];
+    const actual = readActualProblems(collector) || [];
     expect(actual).toEqual(expected);
 
 };

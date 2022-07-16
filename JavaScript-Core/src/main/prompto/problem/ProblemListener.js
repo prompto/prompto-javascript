@@ -226,7 +226,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
     }
 
     reportIncompatibleTypes(section, left, right) {
-        this.reportError(section, "Type " + left.name + " is not compatible with " + right.name);
+        this.reportError(section, "Type " + right.name + " is not compatible with " + left.name);
     }
 
     reportNoSuperType(section, type) {

@@ -35,7 +35,8 @@ export default class AttributeParameter extends Parameter {
     check(context) {
         const actual = context.getRegisteredDeclaration(this.id);
         if(actual==null)
-            throw new SyntaxError("Unknown attribute: \"" + this.name + "\"");
+            context.problemListener.reportUnknownAttribute(this, this.name);
+        return actual ? actual.getType(context) : null;
     }
 
     getType(context) {

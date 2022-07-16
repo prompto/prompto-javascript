@@ -123,18 +123,27 @@ export default class Argument extends Section {
     }
 
     check(context) {
-        const actual = context.getRegisteredValue(this.parameter.id);
-        if(actual==null) {
-            const actualType = this.expression.check(context);
-            context.registerValue(new Variable(this.parameter.id, actualType));
-        } else {
-            // need to check type compatibility
-            const actualType = actual.getType(context);
-            const newType = this.expression.check(context);
-            const section = this.toSection();
-            actualType.checkAssignableFrom(context, section, newType);
+        if (!this._expression)
+            this.checkParameterOnly(context);
+        else
+            this.checkParameterAndExpression(context);
+    }
+
+    checkParameterOnly(context) {
+        const registered = context.getRegisteredValue(this.parameter.id);
+        if (!registered)
+            context.problemListener.reportUnknownIdentifier(this, this.parameter.id.name);
+        else {
+            const requiredType = this.parameter.check(context);
+            const actualType = registered.getType(context);
+            requiredType.checkAssignableFrom(context, this, actualType);
         }
-        return VoidType.instance;
+    }
+
+    checkParameterAndExpression(context) {
+        const requiredType = this.parameter.check(context);
+        const actualType = this.expression.check(context);
+        requiredType.checkAssignableFrom(context, this, actualType);
     }
 
     toSection() {
