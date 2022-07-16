@@ -8,8 +8,12 @@ test('EmbeddedIf', () => {
 	compareResourceEOE('condition/embeddedIf.pec');
 });
 
-test('ReturnIf', () => {
-	compareResourceEOE('condition/returnIf.pec');
+test('ReturnTextIf', () => {
+	compareResourceEOE('condition/returnTextIf.pec');
+});
+
+test('ReturnVoidIf', () => {
+	compareResourceEOE('condition/returnVoidIf.pec');
 });
 
 test('SimpleIf', () => {

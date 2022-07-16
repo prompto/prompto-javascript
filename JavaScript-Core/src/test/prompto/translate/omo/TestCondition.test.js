@@ -12,8 +12,12 @@ test('LocalScope', () => {
 	compareResourceOMO('condition/localScope.poc');
 });
 
-test('ReturnIf', () => {
-	compareResourceOMO('condition/returnIf.poc');
+test('ReturnTextIf', () => {
+	compareResourceOMO('condition/returnTextIf.poc');
+});
+
+test('ReturnVoidIf', () => {
+	compareResourceOMO('condition/returnVoidIf.poc');
 });
 
 test('SimpleIf', () => {

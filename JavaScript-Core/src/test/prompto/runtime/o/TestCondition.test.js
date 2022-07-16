@@ -34,12 +34,20 @@ test('Transpiled LocalScope', () => {
 	checkTranspiledOutput('condition/localScope.poc');
 });
 
-test('Interpreted ReturnIf', () => {
-	checkInterpretedOutput('condition/returnIf.poc');
+test('Interpreted ReturnTextIf', () => {
+	checkInterpretedOutput('condition/returnTextIf.poc');
 });
 
-test('Transpiled ReturnIf', () => {
-	checkTranspiledOutput('condition/returnIf.poc');
+test('Transpiled ReturnTextIf', () => {
+	checkTranspiledOutput('condition/returnTextIf.poc');
+});
+
+test('Interpreted ReturnVoidIf', () => {
+	checkInterpretedOutput('condition/returnVoidIf.poc');
+});
+
+test('Transpiled ReturnVoidIf', () => {
+	checkTranspiledOutput('condition/returnVoidIf.poc');
 });
 
 test('Interpreted SimpleIf', () => {

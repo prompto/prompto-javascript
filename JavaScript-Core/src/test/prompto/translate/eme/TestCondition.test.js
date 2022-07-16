@@ -8,8 +8,12 @@ test('EmbeddedIf', () => {
 	compareResourceEME('condition/embeddedIf.pec');
 });
 
-test('ReturnIf', () => {
-	compareResourceEME('condition/returnIf.pec');
+test('ReturnTextIf', () => {
+	compareResourceEME('condition/returnTextIf.pec');
+});
+
+test('ReturnVoidIf', () => {
+	compareResourceEME('condition/returnVoidIf.pec');
 });
 
 test('SimpleIf', () => {

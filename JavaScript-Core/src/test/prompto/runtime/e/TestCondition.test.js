@@ -26,12 +26,20 @@ test('Transpiled EmbeddedIf', () => {
 	checkTranspiledOutput('condition/embeddedIf.pec');
 });
 
-test('Interpreted ReturnIf', () => {
-	checkInterpretedOutput('condition/returnIf.pec');
+test('Interpreted ReturnTextIf', () => {
+	checkInterpretedOutput('condition/returnTextIf.pec');
 });
 
-test('Transpiled ReturnIf', () => {
-	checkTranspiledOutput('condition/returnIf.pec');
+test('Transpiled ReturnTextIf', () => {
+	checkTranspiledOutput('condition/returnTextIf.pec');
+});
+
+test('Interpreted ReturnVoidIf', () => {
+	checkInterpretedOutput('condition/returnVoidIf.pec');
+});
+
+test('Transpiled ReturnVoidIf', () => {
+	checkTranspiledOutput('condition/returnVoidIf.pec');
 });
 
 test('Interpreted SimpleIf', () => {
