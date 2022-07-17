@@ -56,7 +56,7 @@ export default class CategoryParameter extends Parameter {
             return null;
     }
 
-checkSimpleValue(context, expression) {
+    checkSimpleValue(context, expression) {
         this.resolve(context);
         if(this.resolved instanceof MethodType)
             return expression.interpretReference(context);
@@ -106,6 +106,7 @@ checkSimpleValue(context, expression) {
             this.resolved.checkExists(context);
         else
             context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
+        return this.type;
     }
 
     resolve(context) {
