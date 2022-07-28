@@ -96,6 +96,10 @@ test('ForEachIntegerSetWithIndex', () => {
 	compareResourceOMO('loops/forEachIntegerSetWithIndex.poc');
 });
 
+test('ForEachTextCharacter', () => {
+	compareResourceOMO('loops/forEachTextCharacter.poc');
+});
+
 test('ForEachTimeRange', () => {
 	compareResourceOMO('loops/forEachTimeRange.poc');
 });

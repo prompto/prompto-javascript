@@ -96,6 +96,10 @@ test('ForEachIntegerSetWithIndex', () => {
 	compareResourceOEO('loops/forEachIntegerSetWithIndex.poc');
 });
 
+test('ForEachTextCharacter', () => {
+	compareResourceOEO('loops/forEachTextCharacter.poc');
+});
+
 test('ForEachTimeRange', () => {
 	compareResourceOEO('loops/forEachTimeRange.poc');
 });

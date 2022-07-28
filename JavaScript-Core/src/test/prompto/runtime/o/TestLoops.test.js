@@ -202,6 +202,14 @@ test('Transpiled ForEachIntegerSetWithIndex', () => {
 	checkTranspiledOutput('loops/forEachIntegerSetWithIndex.poc');
 });
 
+test('Interpreted ForEachTextCharacter', () => {
+	checkInterpretedOutput('loops/forEachTextCharacter.poc');
+});
+
+test('Transpiled ForEachTextCharacter', () => {
+	checkTranspiledOutput('loops/forEachTextCharacter.poc');
+});
+
 test('Interpreted ForEachTimeRange', () => {
 	checkInterpretedOutput('loops/forEachTimeRange.poc');
 });
