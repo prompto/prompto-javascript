@@ -2,7 +2,6 @@ import Section from '../parser/Section.js'
 import { InstanceExpression, ArrowExpression, MemberSelector } from '../expression/index.js'
 import { MethodType, CategoryType, VoidType } from '../type/index.js'
 import { ContextualExpression } from '../value/index.js'
-import { Variable } from '../runtime/index.js'
 import { SyntaxError } from '../error/index.js'
 
 export default class Argument extends Section {
