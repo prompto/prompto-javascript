@@ -430,6 +430,7 @@ function newTranspiler(context) {
     transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");
     transpiler.lines.push("String.prototype.contains = function(value) { return this.indexOf(value) >= 0; };");
     transpiler.lines.push("String.prototype.equals = function(value) { return this === value; };");
+    transpiler.lines.push("String.prototype.iterator = function() { var s = this; return { idx: 0, hasNext: function() { return this.idx < s.length; }, next: function() { return s[this.idx++]; } }; };");
     transpiler.lines.push("var intrinsic = global.intrinsic = {};");
     return transpiler;
 }

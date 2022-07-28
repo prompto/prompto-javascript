@@ -189,6 +189,10 @@ export default class TextType extends NativeType {
         }
     }
 
+    checkIterator(context, source) {
+        return CharacterType.instance;
+    }
+
     transpileSlice(transpiler, first, last) {
         transpiler.append(".slice1Based(");
         if(first) {
