@@ -2952,7 +2952,7 @@ export default class OPromptoBuilder extends OParserListener {
         const token = this.input.get(idx);
         const text = token.text;
         // ignore trailing whitespace
-        if (text !== null && text.replace(/(\n|\r|\t|' ')/g, "").length > 0) {
+        if (text !== null && text.replace(/(\n|\r|\t| )/g, "").length > 0) {
             return token;
         } else {
             return null;
