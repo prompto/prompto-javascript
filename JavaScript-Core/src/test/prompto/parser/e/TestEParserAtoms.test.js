@@ -536,6 +536,15 @@ test('BooleanLiteral', () => {
     expect(literal.getValue().getValue()).toEqual(false);
 });
 
+test('parses CharacterLiteral ', () => {
+    var statement = "' '";
+    var parser = new ETestParser(statement);
+    var literal = parser.parse_literal_expression();
+    expect(literal).toBeTruthy();
+    expect(literal instanceof prompto.literal.CharacterLiteral).toBeTruthy();
+    expect( literal.toString()).toEqual("' '");
+    expect( literal.getValue().getValue()).toEqual(" ");
+});
 
 test('TextLiteral', () => {
     var statement = "\"hello\"";

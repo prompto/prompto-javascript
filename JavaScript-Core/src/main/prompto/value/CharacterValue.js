@@ -61,6 +61,10 @@ export default class CharacterValue extends Value {
         return this.value;
     }
 
+    getValue() {
+        return this.value;
+    }
+
     toString() {
         return this.value;
     }
