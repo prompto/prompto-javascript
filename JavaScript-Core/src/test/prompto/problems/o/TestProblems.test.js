@@ -44,6 +44,10 @@ test('DeepUnknownMethod problems', () => {
 	checkProblems('problems/deepUnknownMethod.poc');
 });
 
+test('EmptyPropertyValue problems', () => {
+	checkProblems('problems/emptyPropertyValue.poc');
+});
+
 test('IllegalAttributeType problems', () => {
 	checkProblems('problems/illegalAttributeType.poc');
 });
