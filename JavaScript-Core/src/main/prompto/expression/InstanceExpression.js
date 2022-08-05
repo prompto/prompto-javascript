@@ -4,7 +4,7 @@ import { MethodDeclarationMap, InstanceContext, Variable, LinkedVariable } from 
 import { Dialect } from '../parser/index.js'
 import { Parameter } from '../param/index.js'
 import { AttributeDeclaration, CategoryDeclaration } from '../declaration/index.js'
-import { MethodType, BooleanType, VoidType } from '../type/index.js'
+import { MethodType, BooleanType, VoidType, NullType } from '../type/index.js'
 import { ClosureValue } from '../value/index.js'
 import { EqOp } from '../grammar/index.js'
 import { BooleanLiteral } from '../literal/index.js'
@@ -93,9 +93,12 @@ export default class InstanceExpression extends Expression {
             return named.getType(context);
         } else if(named instanceof MethodDeclarationMap) { // global method or closure
             return new MethodType(named.getFirst());
+        } else if (named) {
+            context.problemListener.reportIllegalAssignment(this.id, this.name);
+            return VoidType.instance;
         } else {
             context.problemListener.reportUnknownIdentifier(this.id, this.name);
-            return VoidType.instance;
+            return NullType.instance;
         }
     }
 

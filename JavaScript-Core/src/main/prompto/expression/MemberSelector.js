@@ -2,7 +2,7 @@ import SelectorExpression from './SelectorExpression.js'
 import { UnresolvedIdentifier, ParenthesisExpression } from './index.js'
 import { Dialect } from '../parser/index.js'
 import { UnresolvedCall } from '../statement/index.js'
-import { MethodType, VoidType } from '../type/index.js'
+import { MethodType, VoidType, NullType } from '../type/index.js'
 import { Instance, NullValue, ClosureValue } from '../value/index.js'
 import { NullReferenceError } from '../error/index.js'
 
@@ -101,7 +101,10 @@ export default class MemberSelector extends SelectorExpression {
 
     check(context) {
         const parentType = this.checkParent(context);
-        return parentType ? parentType.checkMember(context, this.id, this.id) : VoidType.instance;
+        if(parentType && parentType !== NullType.instance)
+            return parentType.checkMember(context, this.id, this.id);
+        else
+            return VoidType.instance;
     }
 
     interpret(context) {
