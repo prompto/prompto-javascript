@@ -81,10 +81,6 @@ export default class InstanceExpression extends Expression {
         let named = context.getRegistered(this.id);
         if(named==null)
             named = context.getRegisteredDeclaration(this.id);
-        if(named==null){
-            context.problemListener.reportUnknownIdentifier(this.id, this.name);
-            return null;
-        }
         if (named instanceof Variable) { // local variable
             return named.getType(context);
         } else if(named instanceof LinkedVariable) { // local variable
