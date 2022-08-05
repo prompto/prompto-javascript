@@ -161,7 +161,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener {
     }
 
     reportIllegalAssignment(expression, expected, actual) {
-        this.reportError(expression, "Illegal expression type, expected: " + expected.name + ", got: " + actual.name);
+        this.reportError(expression, "Type " + actual.name + " is not compatible with " + expected.name);
     }
 
     reportIllegalAnnotation(section, message) {

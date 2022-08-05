@@ -1,6 +1,7 @@
 import IJsxExpression from './IJsxExpression.js'
 import { ArrowExpression } from '../expression/index.js'
 import { Literal } from '../literal/index.js'
+import { VoidType } from '../type/index.js'
 
 export default class JsxExpression extends IJsxExpression {
 
@@ -10,27 +11,29 @@ export default class JsxExpression extends IJsxExpression {
     }
 
     check(context) {
-        return this.expression.check(context);
+        return this.expression ? this.expression.check(context) : VoidType.instance;
     }
 
     checkProto(context, proto) {
         if(this.expression instanceof ArrowExpression)
             return proto.checkArrowExpression(context, this.expression);
-        else
+        else if(this.expression)
             return this.expression.check(context);
+        else
+            return VoidType.instance;
     }
 
     declareProto(transpiler, proto) {
         if(this.expression instanceof ArrowExpression)
             return proto.declareArrowExpression(transpiler, this.expression);
-        else
+        else if(this.expression)
             return this.expression.declare(transpiler);
     }
 
     transpileProto(transpiler, proto) {
         if(this.expression instanceof ArrowExpression)
             return proto.transpileArrowExpression(transpiler, this.expression);
-        else
+        else if(this.expression)
             return this.expression.transpile(transpiler);
     }
 
@@ -39,20 +42,23 @@ export default class JsxExpression extends IJsxExpression {
     }
 
     toString() {
-        return this.expression.toString();
+        return this.expression ? this.expression.toString() : "";
     }
 
     toDialect(writer) {
         writer.append("{");
-        this.expression.toDialect(writer);
+        if(this.expression)
+            this.expression.toDialect(writer);
         writer.append("}");
     }
 
     declare(transpiler) {
-        this.expression.declare(transpiler);
+        if(this.expression)
+            this.expression.declare(transpiler);
     }
 
     transpile(transpiler) {
-        this.expression.transpile(transpiler);
+        if(this.expression)
+            this.expression.transpile(transpiler);
     }
 }

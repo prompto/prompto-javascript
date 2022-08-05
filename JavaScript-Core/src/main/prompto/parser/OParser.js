@@ -6,7 +6,7 @@ import AbstractParser from './AbstractParser.js';
 
 
 const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
-    "\u5964\u0003\u00b9\u0b80\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004",
+    "\u5964\u0003\u00b9\u0b81\u0004\u0002\t\u0002\u0004\u0003\t\u0003\u0004",
     "\u0004\t\u0004\u0004\u0005\t\u0005\u0004\u0006\t\u0006\u0004\u0007\t",
     "\u0007\u0004\b\t\b\u0004\t\t\t\u0004\n\t\n\u0004\u000b\t\u000b\u0004",
     "\f\t\f\u0004\r\t\r\u0004\u000e\t\u000e\u0004\u000f\t\u000f\u0004\u0010",
@@ -400,20 +400,20 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0b21\n\u00fc\f\u00fc\u000e\u00fc\u0b24\u000b\u00fc\u0003\u00fd\u0003",
     "\u00fd\u0007\u00fd\u0b28\n\u00fd\f\u00fd\u000e\u00fd\u0b2b\u000b\u00fd",
     "\u0003\u00fe\u0003\u00fe\u0003\u00fe\u0005\u00fe\u0b30\n\u00fe\u0003",
-    "\u00fe\u0003\u00fe\u0003\u00ff\u0003\u00ff\u0003\u00ff\u0003\u00ff\u0003",
-    "\u00ff\u0005\u00ff\u0b39\n\u00ff\u0003\u0100\u0006\u0100\u0b3c\n\u0100",
-    "\r\u0100\u000e\u0100\u0b3d\u0003\u0101\u0003\u0101\u0003\u0101\u0003",
-    "\u0101\u0005\u0101\u0b44\n\u0101\u0003\u0101\u0005\u0101\u0b47\n\u0101",
-    "\u0003\u0102\u0006\u0102\u0b4a\n\u0102\r\u0102\u000e\u0102\u0b4b\u0003",
-    "\u0103\u0003\u0103\u0005\u0103\u0b50\n\u0103\u0003\u0104\u0003\u0104",
-    "\u0006\u0104\u0b54\n\u0104\r\u0104\u000e\u0104\u0b55\u0003\u0104\u0003",
-    "\u0104\u0003\u0105\u0003\u0105\u0003\u0105\u0006\u0105\u0b5d\n\u0105",
-    "\r\u0105\u000e\u0105\u0b5e\u0003\u0105\u0003\u0105\u0003\u0106\u0003",
-    "\u0106\u0003\u0106\u0003\u0106\u0005\u0106\u0b67\n\u0106\u0003\u0106",
-    "\u0003\u0106\u0006\u0106\u0b6b\n\u0106\r\u0106\u000e\u0106\u0b6c\u0007",
-    "\u0106\u0b6f\n\u0106\f\u0106\u000e\u0106\u0b72\u000b\u0106\u0003\u0107",
-    "\u0003\u0107\u0003\u0107\u0003\u0107\u0003\u0107\u0005\u0107\u0b79\n",
-    "\u0107\u0003\u0108\u0006\u0108\u0b7c\n\u0108\r\u0108\u000e\u0108\u0b7d",
+    "\u00fe\u0003\u00fe\u0003\u00ff\u0003\u00ff\u0003\u00ff\u0005\u00ff\u0b37",
+    "\n\u00ff\u0003\u00ff\u0005\u00ff\u0b3a\n\u00ff\u0003\u0100\u0006\u0100",
+    "\u0b3d\n\u0100\r\u0100\u000e\u0100\u0b3e\u0003\u0101\u0003\u0101\u0003",
+    "\u0101\u0003\u0101\u0005\u0101\u0b45\n\u0101\u0003\u0101\u0005\u0101",
+    "\u0b48\n\u0101\u0003\u0102\u0006\u0102\u0b4b\n\u0102\r\u0102\u000e\u0102",
+    "\u0b4c\u0003\u0103\u0003\u0103\u0005\u0103\u0b51\n\u0103\u0003\u0104",
+    "\u0003\u0104\u0006\u0104\u0b55\n\u0104\r\u0104\u000e\u0104\u0b56\u0003",
+    "\u0104\u0003\u0104\u0003\u0105\u0003\u0105\u0003\u0105\u0006\u0105\u0b5e",
+    "\n\u0105\r\u0105\u000e\u0105\u0b5f\u0003\u0105\u0003\u0105\u0003\u0106",
+    "\u0003\u0106\u0003\u0106\u0003\u0106\u0005\u0106\u0b68\n\u0106\u0003",
+    "\u0106\u0003\u0106\u0006\u0106\u0b6c\n\u0106\r\u0106\u000e\u0106\u0b6d",
+    "\u0007\u0106\u0b70\n\u0106\f\u0106\u000e\u0106\u0b73\u000b\u0106\u0003",
+    "\u0107\u0003\u0107\u0003\u0107\u0003\u0107\u0003\u0107\u0005\u0107\u0b7a",
+    "\n\u0107\u0003\u0108\u0006\u0108\u0b7d\n\u0108\r\u0108\u000e\u0108\u0b7e",
     "\u0003\u0108\u0002\u001a\u0014(Pbln\u008a\u00c0\u00f2\u0146\u017e\u018a",
     "\u0198\u01a4\u01a6\u01aa\u01b2\u01be\u01c4\u01c6\u01ce\u01da\u01e0\u020a",
     "\u0109\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a",
@@ -440,7 +440,7 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u00ab\u0005\u0002XX\u008c\u008c\u00ab\u00ab\u0005\u0002\u008c\u008c",
     "\u0094\u0094\u00ab\u00ab\u0004\u0002\u0090\u0090\u009a\u009a\u0004\u0002",
     "OO__\n\u0002\u0007\f335=?GIsuuw\u0098\u009a\u00a4\u0004\u0002##{{\u0005",
-    "\u0002\u0016\u0017%%\'\'\u0004\u0002\u000e\u000e\u0016\u0017\u0002\u0c3c",
+    "\u0002\u0016\u0017%%\'\'\u0004\u0002\u000e\u000e\u0016\u0017\u0002\u0c3e",
     "\u0002\u0210\u0003\u0002\u0002\u0002\u0004\u0221\u0003\u0002\u0002\u0002",
     "\u0006\u022a\u0003\u0002\u0002\u0002\b\u0230\u0003\u0002\u0002\u0002",
     "\n\u0236\u0003\u0002\u0002\u0002\f\u024b\u0003\u0002\u0002\u0002\u000e",
@@ -565,11 +565,11 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u0002\u0002\u0002\u01f0\u0b01\u0003\u0002\u0002\u0002\u01f2\u0b0d\u0003",
     "\u0002\u0002\u0002\u01f4\u0b18\u0003\u0002\u0002\u0002\u01f6\u0b1d\u0003",
     "\u0002\u0002\u0002\u01f8\u0b25\u0003\u0002\u0002\u0002\u01fa\u0b2c\u0003",
-    "\u0002\u0002\u0002\u01fc\u0b38\u0003\u0002\u0002\u0002\u01fe\u0b3b\u0003",
-    "\u0002\u0002\u0002\u0200\u0b46\u0003\u0002\u0002\u0002\u0202\u0b49\u0003",
-    "\u0002\u0002\u0002\u0204\u0b4f\u0003\u0002\u0002\u0002\u0206\u0b51\u0003",
-    "\u0002\u0002\u0002\u0208\u0b59\u0003\u0002\u0002\u0002\u020a\u0b66\u0003",
-    "\u0002\u0002\u0002\u020c\u0b78\u0003\u0002\u0002\u0002\u020e\u0b7b\u0003",
+    "\u0002\u0002\u0002\u01fc\u0b39\u0003\u0002\u0002\u0002\u01fe\u0b3c\u0003",
+    "\u0002\u0002\u0002\u0200\u0b47\u0003\u0002\u0002\u0002\u0202\u0b4a\u0003",
+    "\u0002\u0002\u0002\u0204\u0b50\u0003\u0002\u0002\u0002\u0206\u0b52\u0003",
+    "\u0002\u0002\u0002\u0208\u0b5a\u0003\u0002\u0002\u0002\u020a\u0b67\u0003",
+    "\u0002\u0002\u0002\u020c\u0b79\u0003\u0002\u0002\u0002\u020e\u0b7c\u0003",
     "\u0002\u0002\u0002\u0210\u0211\u0007e\u0002\u0002\u0211\u0212\u0007",
     "X\u0002\u0002\u0212\u0217\u0005\u00e2r\u0002\u0213\u0214\u0007\u0012",
     "\u0002\u0002\u0214\u0215\u0005\u0108\u0085\u0002\u0215\u0216\u0007\u0013",
@@ -1935,52 +1935,53 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u00fd\u0002\u0b2d\u0b2e\u0007+\u0002\u0002\u0b2e\u0b30\u0005\u01fc",
     "\u00ff\u0002\u0b2f\u0b2d\u0003\u0002\u0002\u0002\u0b2f\u0b30\u0003\u0002",
     "\u0002\u0002\u0b30\u0b31\u0003\u0002\u0002\u0002\u0b31\u0b32\u0005\u0098",
-    "M\u0002\u0b32\u01fb\u0003\u0002\u0002\u0002\u0b33\u0b39\u0007\u00af",
-    "\u0002\u0002\u0b34\u0b35\u0007\u0016\u0002\u0002\u0b35\u0b36\u0005b",
-    "2\u0002\u0b36\u0b37\u0007\u0017\u0002\u0002\u0b37\u0b39\u0003\u0002",
-    "\u0002\u0002\u0b38\u0b33\u0003\u0002\u0002\u0002\u0b38\u0b34\u0003\u0002",
-    "\u0002\u0002\u0b39\u01fd\u0003\u0002\u0002\u0002\u0b3a\u0b3c\u0005\u0200",
-    "\u0101\u0002\u0b3b\u0b3a\u0003\u0002\u0002\u0002\u0b3c\u0b3d\u0003\u0002",
-    "\u0002\u0002\u0b3d\u0b3b\u0003\u0002\u0002\u0002\u0b3d\u0b3e\u0003\u0002",
-    "\u0002\u0002\u0b3e\u01ff\u0003\u0002\u0002\u0002\u0b3f\u0b47\u0005\u0202",
-    "\u0102\u0002\u0b40\u0b47\u0005\u01e8\u00f5\u0002\u0b41\u0b43\u0007\u0016",
-    "\u0002\u0002\u0b42\u0b44\u0005b2\u0002\u0b43\u0b42\u0003\u0002\u0002",
-    "\u0002\u0b43\u0b44\u0003\u0002\u0002\u0002\u0b44\u0b45\u0003\u0002\u0002",
-    "\u0002\u0b45\u0b47\u0007\u0017\u0002\u0002\u0b46\u0b3f\u0003\u0002\u0002",
-    "\u0002\u0b46\u0b40\u0003\u0002\u0002\u0002\u0b46\u0b41\u0003\u0002\u0002",
-    "\u0002\u0b47\u0201\u0003\u0002\u0002\u0002\u0b48\u0b4a\u0005\u0204\u0103",
-    "\u0002\u0b49\u0b48\u0003\u0002\u0002\u0002\u0b4a\u0b4b\u0003\u0002\u0002",
-    "\u0002\u0b4b\u0b49\u0003\u0002\u0002\u0002\u0b4b\u0b4c\u0003\u0002\u0002",
-    "\u0002\u0b4c\u0203\u0003\u0002\u0002\u0002\u0b4d\u0b50\n\u000e\u0002",
-    "\u0002\u0b4e\u0b50\u0007\u00b9\u0002\u0002\u0b4f\u0b4d\u0003\u0002\u0002",
-    "\u0002\u0b4f\u0b4e\u0003\u0002\u0002\u0002\u0b50\u0205\u0003\u0002\u0002",
-    "\u0002\u0b51\u0b53\u0007\u0016\u0002\u0002\u0b52\u0b54\u0005\u0208\u0105",
-    "\u0002\u0b53\u0b52\u0003\u0002\u0002\u0002\u0b54\u0b55\u0003\u0002\u0002",
-    "\u0002\u0b55\u0b53\u0003\u0002\u0002\u0002\u0b55\u0b56\u0003\u0002\u0002",
-    "\u0002\u0b56\u0b57\u0003\u0002\u0002\u0002\u0b57\u0b58\u0007\u0017\u0002",
-    "\u0002\u0b58\u0207\u0003\u0002\u0002\u0002\u0b59\u0b5a\u0005\u020a\u0106",
-    "\u0002\u0b5a\u0b5c\u0007\r\u0002\u0002\u0b5b\u0b5d\u0005\u020c\u0107",
-    "\u0002\u0b5c\u0b5b\u0003\u0002\u0002\u0002\u0b5d\u0b5e\u0003\u0002\u0002",
-    "\u0002\u0b5e\u0b5c\u0003\u0002\u0002\u0002\u0b5e\u0b5f\u0003\u0002\u0002",
-    "\u0002\u0b5f\u0b60\u0003\u0002\u0002\u0002\u0b60\u0b61\u0007\u000e\u0002",
-    "\u0002\u0b61\u0209\u0003\u0002\u0002\u0002\u0b62\u0b63\b\u0106\u0001",
-    "\u0002\u0b63\u0b67\u0005\u00d4k\u0002\u0b64\u0b65\u0007\u001f\u0002",
-    "\u0002\u0b65\u0b67\u0005\u00d8m\u0002\u0b66\u0b62\u0003\u0002\u0002",
-    "\u0002\u0b66\u0b64\u0003\u0002\u0002\u0002\u0b67\u0b70\u0003\u0002\u0002",
-    "\u0002\u0b68\u0b6a\f\u0003\u0002\u0002\u0b69\u0b6b\u0005\u00d6l\u0002",
-    "\u0b6a\u0b69\u0003\u0002\u0002\u0002\u0b6b\u0b6c\u0003\u0002\u0002\u0002",
-    "\u0b6c\u0b6a\u0003\u0002\u0002\u0002\u0b6c\u0b6d\u0003\u0002\u0002\u0002",
-    "\u0b6d\u0b6f\u0003\u0002\u0002\u0002\u0b6e\u0b68\u0003\u0002\u0002\u0002",
-    "\u0b6f\u0b72\u0003\u0002\u0002\u0002\u0b70\u0b6e\u0003\u0002\u0002\u0002",
-    "\u0b70\u0b71\u0003\u0002\u0002\u0002\u0b71\u020b\u0003\u0002\u0002\u0002",
-    "\u0b72\u0b70\u0003\u0002\u0002\u0002\u0b73\u0b74\u0007\u0016\u0002\u0002",
-    "\u0b74\u0b75\u0005b2\u0002\u0b75\u0b76\u0007\u0017\u0002\u0002\u0b76",
-    "\u0b79\u0003\u0002\u0002\u0002\u0b77\u0b79\u0005\u020e\u0108\u0002\u0b78",
-    "\u0b73\u0003\u0002\u0002\u0002\u0b78\u0b77\u0003\u0002\u0002\u0002\u0b79",
-    "\u020d\u0003\u0002\u0002\u0002\u0b7a\u0b7c\n\u000f\u0002\u0002\u0b7b",
-    "\u0b7a\u0003\u0002\u0002\u0002\u0b7c\u0b7d\u0003\u0002\u0002\u0002\u0b7d",
+    "M\u0002\u0b32\u01fb\u0003\u0002\u0002\u0002\u0b33\u0b3a\u0007\u00af",
+    "\u0002\u0002\u0b34\u0b36\u0007\u0016\u0002\u0002\u0b35\u0b37\u0005b",
+    "2\u0002\u0b36\u0b35\u0003\u0002\u0002\u0002\u0b36\u0b37\u0003\u0002",
+    "\u0002\u0002\u0b37\u0b38\u0003\u0002\u0002\u0002\u0b38\u0b3a\u0007\u0017",
+    "\u0002\u0002\u0b39\u0b33\u0003\u0002\u0002\u0002\u0b39\u0b34\u0003\u0002",
+    "\u0002\u0002\u0b3a\u01fd\u0003\u0002\u0002\u0002\u0b3b\u0b3d\u0005\u0200",
+    "\u0101\u0002\u0b3c\u0b3b\u0003\u0002\u0002\u0002\u0b3d\u0b3e\u0003\u0002",
+    "\u0002\u0002\u0b3e\u0b3c\u0003\u0002\u0002\u0002\u0b3e\u0b3f\u0003\u0002",
+    "\u0002\u0002\u0b3f\u01ff\u0003\u0002\u0002\u0002\u0b40\u0b48\u0005\u0202",
+    "\u0102\u0002\u0b41\u0b48\u0005\u01e8\u00f5\u0002\u0b42\u0b44\u0007\u0016",
+    "\u0002\u0002\u0b43\u0b45\u0005b2\u0002\u0b44\u0b43\u0003\u0002\u0002",
+    "\u0002\u0b44\u0b45\u0003\u0002\u0002\u0002\u0b45\u0b46\u0003\u0002\u0002",
+    "\u0002\u0b46\u0b48\u0007\u0017\u0002\u0002\u0b47\u0b40\u0003\u0002\u0002",
+    "\u0002\u0b47\u0b41\u0003\u0002\u0002\u0002\u0b47\u0b42\u0003\u0002\u0002",
+    "\u0002\u0b48\u0201\u0003\u0002\u0002\u0002\u0b49\u0b4b\u0005\u0204\u0103",
+    "\u0002\u0b4a\u0b49\u0003\u0002\u0002\u0002\u0b4b\u0b4c\u0003\u0002\u0002",
+    "\u0002\u0b4c\u0b4a\u0003\u0002\u0002\u0002\u0b4c\u0b4d\u0003\u0002\u0002",
+    "\u0002\u0b4d\u0203\u0003\u0002\u0002\u0002\u0b4e\u0b51\n\u000e\u0002",
+    "\u0002\u0b4f\u0b51\u0007\u00b9\u0002\u0002\u0b50\u0b4e\u0003\u0002\u0002",
+    "\u0002\u0b50\u0b4f\u0003\u0002\u0002\u0002\u0b51\u0205\u0003\u0002\u0002",
+    "\u0002\u0b52\u0b54\u0007\u0016\u0002\u0002\u0b53\u0b55\u0005\u0208\u0105",
+    "\u0002\u0b54\u0b53\u0003\u0002\u0002\u0002\u0b55\u0b56\u0003\u0002\u0002",
+    "\u0002\u0b56\u0b54\u0003\u0002\u0002\u0002\u0b56\u0b57\u0003\u0002\u0002",
+    "\u0002\u0b57\u0b58\u0003\u0002\u0002\u0002\u0b58\u0b59\u0007\u0017\u0002",
+    "\u0002\u0b59\u0207\u0003\u0002\u0002\u0002\u0b5a\u0b5b\u0005\u020a\u0106",
+    "\u0002\u0b5b\u0b5d\u0007\r\u0002\u0002\u0b5c\u0b5e\u0005\u020c\u0107",
+    "\u0002\u0b5d\u0b5c\u0003\u0002\u0002\u0002\u0b5e\u0b5f\u0003\u0002\u0002",
+    "\u0002\u0b5f\u0b5d\u0003\u0002\u0002\u0002\u0b5f\u0b60\u0003\u0002\u0002",
+    "\u0002\u0b60\u0b61\u0003\u0002\u0002\u0002\u0b61\u0b62\u0007\u000e\u0002",
+    "\u0002\u0b62\u0209\u0003\u0002\u0002\u0002\u0b63\u0b64\b\u0106\u0001",
+    "\u0002\u0b64\u0b68\u0005\u00d4k\u0002\u0b65\u0b66\u0007\u001f\u0002",
+    "\u0002\u0b66\u0b68\u0005\u00d8m\u0002\u0b67\u0b63\u0003\u0002\u0002",
+    "\u0002\u0b67\u0b65\u0003\u0002\u0002\u0002\u0b68\u0b71\u0003\u0002\u0002",
+    "\u0002\u0b69\u0b6b\f\u0003\u0002\u0002\u0b6a\u0b6c\u0005\u00d6l\u0002",
+    "\u0b6b\u0b6a\u0003\u0002\u0002\u0002\u0b6c\u0b6d\u0003\u0002\u0002\u0002",
+    "\u0b6d\u0b6b\u0003\u0002\u0002\u0002\u0b6d\u0b6e\u0003\u0002\u0002\u0002",
+    "\u0b6e\u0b70\u0003\u0002\u0002\u0002\u0b6f\u0b69\u0003\u0002\u0002\u0002",
+    "\u0b70\u0b73\u0003\u0002\u0002\u0002\u0b71\u0b6f\u0003\u0002\u0002\u0002",
+    "\u0b71\u0b72\u0003\u0002\u0002\u0002\u0b72\u020b\u0003\u0002\u0002\u0002",
+    "\u0b73\u0b71\u0003\u0002\u0002\u0002\u0b74\u0b75\u0007\u0016\u0002\u0002",
+    "\u0b75\u0b76\u0005b2\u0002\u0b76\u0b77\u0007\u0017\u0002\u0002\u0b77",
+    "\u0b7a\u0003\u0002\u0002\u0002\u0b78\u0b7a\u0005\u020e\u0108\u0002\u0b79",
+    "\u0b74\u0003\u0002\u0002\u0002\u0b79\u0b78\u0003\u0002\u0002\u0002\u0b7a",
+    "\u020d\u0003\u0002\u0002\u0002\u0b7b\u0b7d\n\u000f\u0002\u0002\u0b7c",
     "\u0b7b\u0003\u0002\u0002\u0002\u0b7d\u0b7e\u0003\u0002\u0002\u0002\u0b7e",
-    "\u020f\u0003\u0002\u0002\u0002\u011f\u0217\u021b\u0236\u023d\u0245\u0247",
+    "\u0b7c\u0003\u0002\u0002\u0002\u0b7e\u0b7f\u0003\u0002\u0002\u0002\u0b7f",
+    "\u020f\u0003\u0002\u0002\u0002\u0120\u0217\u021b\u0236\u023d\u0245\u0247",
     "\u024f\u025c\u0264\u0268\u0272\u027e\u0284\u0287\u028a\u0293\u029b\u02a0",
     "\u02a6\u02ae\u02b3\u02b9\u02be\u02c7\u02cc\u02d1\u02da\u02df\u02f3\u02f8",
     "\u02fb\u0301\u0308\u030b\u0311\u0317\u031a\u0320\u0325\u032a\u032d\u0333",
@@ -2003,8 +2004,8 @@ const serializedATN = ["\u0003\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786",
     "\u09e3\u09ed\u09f7\u0a07\u0a11\u0a18\u0a20\u0a27\u0a30\u0a39\u0a41\u0a4b",
     "\u0a50\u0a5c\u0a6f\u0a79\u0a81\u0a88\u0a91\u0a9a\u0aa2\u0aac\u0ab1\u0abd",
     "\u0acb\u0ad2\u0ada\u0ae1\u0ae5\u0aea\u0aee\u0af3\u0afb\u0b07\u0b13\u0b22",
-    "\u0b29\u0b2f\u0b38\u0b3d\u0b43\u0b46\u0b4b\u0b4f\u0b55\u0b5e\u0b66\u0b6c",
-    "\u0b70\u0b78\u0b7d"].join("");
+    "\u0b29\u0b2f\u0b36\u0b39\u0b3e\u0b44\u0b47\u0b4c\u0b50\u0b56\u0b5f\u0b67",
+    "\u0b6d\u0b71\u0b79\u0b7e"].join("");
 
 
 const atn = new antlr4.atn.ATNDeserializer().deserialize(serializedATN);
@@ -15400,8 +15401,9 @@ export default class OParser extends AbstractParser {
 	jsx_attribute_value() {
 	    let localctx = new Jsx_attribute_valueContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 506, OParser.RULE_jsx_attribute_value);
+	    var _la = 0; // Token type
 	    try {
-	        this.state = 2870;
+	        this.state = 2871;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case OParser.TEXT_LITERAL:
@@ -15415,9 +15417,15 @@ export default class OParser extends AbstractParser {
 	            this.enterOuterAlt(localctx, 2);
 	            this.state = 2866;
 	            this.match(OParser.LCURL);
-	            this.state = 2867;
-	            localctx.exp = this.expression(0);
 	            this.state = 2868;
+	            this._errHandler.sync(this);
+	            _la = this._input.LA(1);
+	            if(((((_la - 16)) & ~0x1f) == 0 && ((1 << (_la - 16)) & ((1 << (OParser.LPAR - 16)) | (1 << (OParser.LBRAK - 16)) | (1 << (OParser.LCURL - 16)) | (1 << (OParser.XMARK - 16)) | (1 << (OParser.MINUS - 16)) | (1 << (OParser.LT - 16)) | (1 << (OParser.LTGT - 16)) | (1 << (OParser.LTCOLONGT - 16)))) !== 0) || ((((_la - 49)) & ~0x1f) == 0 && ((1 << (_la - 49)) & ((1 << (OParser.BOOLEAN - 49)) | (1 << (OParser.CSS - 49)) | (1 << (OParser.CHARACTER - 49)) | (1 << (OParser.TEXT - 49)) | (1 << (OParser.INTEGER - 49)) | (1 << (OParser.DECIMAL - 49)) | (1 << (OParser.DATE - 49)) | (1 << (OParser.TIME - 49)) | (1 << (OParser.DATETIME - 49)) | (1 << (OParser.PERIOD - 49)) | (1 << (OParser.VERSION - 49)) | (1 << (OParser.CODE - 49)) | (1 << (OParser.DOCUMENT - 49)) | (1 << (OParser.BLOB - 49)) | (1 << (OParser.IMAGE - 49)) | (1 << (OParser.UUID - 49)) | (1 << (OParser.DBID - 49)) | (1 << (OParser.ITERATOR - 49)) | (1 << (OParser.CURSOR - 49)) | (1 << (OParser.HTML - 49)) | (1 << (OParser.TYPE - 49)) | (1 << (OParser.ANY - 49)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (OParser.CATEGORY - 86)) | (1 << (OParser.EXECUTE - 86)) | (1 << (OParser.FETCH - 86)) | (1 << (OParser.FILTERED - 86)))) !== 0) || ((((_la - 122)) & ~0x1f) == 0 && ((1 << (_la - 122)) & ((1 << (OParser.MUTABLE - 122)) | (1 << (OParser.NULL - 122)) | (1 << (OParser.READ - 122)) | (1 << (OParser.RESOURCE - 122)) | (1 << (OParser.SELF - 122)) | (1 << (OParser.SORTED - 122)) | (1 << (OParser.SUPER - 122)) | (1 << (OParser.THIS - 122)))) !== 0) || ((((_la - 163)) & ~0x1f) == 0 && ((1 << (_la - 163)) & ((1 << (OParser.BOOLEAN_LITERAL - 163)) | (1 << (OParser.CHAR_LITERAL - 163)) | (1 << (OParser.MIN_INTEGER - 163)) | (1 << (OParser.MAX_INTEGER - 163)) | (1 << (OParser.SYMBOL_IDENTIFIER - 163)) | (1 << (OParser.TYPE_IDENTIFIER - 163)) | (1 << (OParser.VARIABLE_IDENTIFIER - 163)) | (1 << (OParser.TEXT_LITERAL - 163)) | (1 << (OParser.UUID_LITERAL - 163)) | (1 << (OParser.VERSION_LITERAL - 163)) | (1 << (OParser.INTEGER_LITERAL - 163)) | (1 << (OParser.HEXA_LITERAL - 163)) | (1 << (OParser.DECIMAL_LITERAL - 163)) | (1 << (OParser.DATETIME_LITERAL - 163)) | (1 << (OParser.TIME_LITERAL - 163)) | (1 << (OParser.DATE_LITERAL - 163)) | (1 << (OParser.PERIOD_LITERAL - 163)))) !== 0)) {
+	                this.state = 2867;
+	                localctx.exp = this.expression(0);
+	            }
+
+	            this.state = 2870;
 	            this.match(OParser.RCURL);
 	            break;
 	        default:
@@ -15444,21 +15452,21 @@ export default class OParser extends AbstractParser {
 	    this.enterRule(localctx, 508, OParser.RULE_jsx_children);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 2873; 
+	        this.state = 2874; 
 	        this._errHandler.sync(this);
 	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
-	        		this.state = 2872;
+	        		this.state = 2873;
 	        		this.jsx_child();
 	        		break;
 	        	default:
 	        		throw new antlr4.error.NoViableAltException(this);
 	        	}
-	        	this.state = 2875; 
+	        	this.state = 2876; 
 	        	this._errHandler.sync(this);
-	        	_alt = this._interp.adaptivePredict(this._input,273, this._ctx);
+	        	_alt = this._interp.adaptivePredict(this._input,274, this._ctx);
 	        } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -15481,7 +15489,7 @@ export default class OParser extends AbstractParser {
 	    this.enterRule(localctx, 510, OParser.RULE_jsx_child);
 	    var _la = 0; // Token type
 	    try {
-	        this.state = 2884;
+	        this.state = 2885;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case OParser.SPACE:
@@ -15665,29 +15673,29 @@ export default class OParser extends AbstractParser {
 	        case OParser.JSX_TEXT:
 	            localctx = new JsxTextContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 2877;
+	            this.state = 2878;
 	            localctx.text = this.jsx_text();
 	            break;
 	        case OParser.LT:
 	            localctx = new JsxChildContext(this, localctx);
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 2878;
+	            this.state = 2879;
 	            localctx.jsx = this.jsx_element();
 	            break;
 	        case OParser.LCURL:
 	            localctx = new JsxCodeContext(this, localctx);
 	            this.enterOuterAlt(localctx, 3);
-	            this.state = 2879;
+	            this.state = 2880;
 	            this.match(OParser.LCURL);
-	            this.state = 2881;
+	            this.state = 2882;
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	            if(((((_la - 16)) & ~0x1f) == 0 && ((1 << (_la - 16)) & ((1 << (OParser.LPAR - 16)) | (1 << (OParser.LBRAK - 16)) | (1 << (OParser.LCURL - 16)) | (1 << (OParser.XMARK - 16)) | (1 << (OParser.MINUS - 16)) | (1 << (OParser.LT - 16)) | (1 << (OParser.LTGT - 16)) | (1 << (OParser.LTCOLONGT - 16)))) !== 0) || ((((_la - 49)) & ~0x1f) == 0 && ((1 << (_la - 49)) & ((1 << (OParser.BOOLEAN - 49)) | (1 << (OParser.CSS - 49)) | (1 << (OParser.CHARACTER - 49)) | (1 << (OParser.TEXT - 49)) | (1 << (OParser.INTEGER - 49)) | (1 << (OParser.DECIMAL - 49)) | (1 << (OParser.DATE - 49)) | (1 << (OParser.TIME - 49)) | (1 << (OParser.DATETIME - 49)) | (1 << (OParser.PERIOD - 49)) | (1 << (OParser.VERSION - 49)) | (1 << (OParser.CODE - 49)) | (1 << (OParser.DOCUMENT - 49)) | (1 << (OParser.BLOB - 49)) | (1 << (OParser.IMAGE - 49)) | (1 << (OParser.UUID - 49)) | (1 << (OParser.DBID - 49)) | (1 << (OParser.ITERATOR - 49)) | (1 << (OParser.CURSOR - 49)) | (1 << (OParser.HTML - 49)) | (1 << (OParser.TYPE - 49)) | (1 << (OParser.ANY - 49)))) !== 0) || ((((_la - 86)) & ~0x1f) == 0 && ((1 << (_la - 86)) & ((1 << (OParser.CATEGORY - 86)) | (1 << (OParser.EXECUTE - 86)) | (1 << (OParser.FETCH - 86)) | (1 << (OParser.FILTERED - 86)))) !== 0) || ((((_la - 122)) & ~0x1f) == 0 && ((1 << (_la - 122)) & ((1 << (OParser.MUTABLE - 122)) | (1 << (OParser.NULL - 122)) | (1 << (OParser.READ - 122)) | (1 << (OParser.RESOURCE - 122)) | (1 << (OParser.SELF - 122)) | (1 << (OParser.SORTED - 122)) | (1 << (OParser.SUPER - 122)) | (1 << (OParser.THIS - 122)))) !== 0) || ((((_la - 163)) & ~0x1f) == 0 && ((1 << (_la - 163)) & ((1 << (OParser.BOOLEAN_LITERAL - 163)) | (1 << (OParser.CHAR_LITERAL - 163)) | (1 << (OParser.MIN_INTEGER - 163)) | (1 << (OParser.MAX_INTEGER - 163)) | (1 << (OParser.SYMBOL_IDENTIFIER - 163)) | (1 << (OParser.TYPE_IDENTIFIER - 163)) | (1 << (OParser.VARIABLE_IDENTIFIER - 163)) | (1 << (OParser.TEXT_LITERAL - 163)) | (1 << (OParser.UUID_LITERAL - 163)) | (1 << (OParser.VERSION_LITERAL - 163)) | (1 << (OParser.INTEGER_LITERAL - 163)) | (1 << (OParser.HEXA_LITERAL - 163)) | (1 << (OParser.DECIMAL_LITERAL - 163)) | (1 << (OParser.DATETIME_LITERAL - 163)) | (1 << (OParser.TIME_LITERAL - 163)) | (1 << (OParser.DATE_LITERAL - 163)) | (1 << (OParser.PERIOD_LITERAL - 163)))) !== 0)) {
-	                this.state = 2880;
+	                this.state = 2881;
 	                localctx.exp = this.expression(0);
 	            }
 
-	            this.state = 2883;
+	            this.state = 2884;
 	            this.match(OParser.RCURL);
 	            break;
 	        default:
@@ -15714,21 +15722,21 @@ export default class OParser extends AbstractParser {
 	    this.enterRule(localctx, 512, OParser.RULE_jsx_text);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 2887; 
+	        this.state = 2888; 
 	        this._errHandler.sync(this);
 	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
-	        		this.state = 2886;
+	        		this.state = 2887;
 	        		this.jsx_char();
 	        		break;
 	        	default:
 	        		throw new antlr4.error.NoViableAltException(this);
 	        	}
-	        	this.state = 2889; 
+	        	this.state = 2890; 
 	        	this._errHandler.sync(this);
-	        	_alt = this._interp.adaptivePredict(this._input,276, this._ctx);
+	        	_alt = this._interp.adaptivePredict(this._input,277, this._ctx);
 	        } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -15751,13 +15759,13 @@ export default class OParser extends AbstractParser {
 	    this.enterRule(localctx, 514, OParser.RULE_jsx_char);
 	    var _la = 0; // Token type
 	    try {
-	        this.state = 2893;
+	        this.state = 2894;
 	        this._errHandler.sync(this);
-	        var la_ = this._interp.adaptivePredict(this._input,277,this._ctx);
+	        var la_ = this._interp.adaptivePredict(this._input,278,this._ctx);
 	        switch(la_) {
 	        case 1:
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 2891;
+	            this.state = 2892;
 	            _la = this._input.LA(1);
 	            if(_la<=0 || ((((_la - 20)) & ~0x1f) == 0 && ((1 << (_la - 20)) & ((1 << (OParser.LCURL - 20)) | (1 << (OParser.RCURL - 20)) | (1 << (OParser.GT - 20)) | (1 << (OParser.LT - 20)))) !== 0)) {
 	            this._errHandler.recoverInline(this);
@@ -15770,7 +15778,7 @@ export default class OParser extends AbstractParser {
 
 	        case 2:
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 2892;
+	            this.state = 2893;
 	            this.match(OParser.JSX_TEXT);
 	            break;
 
@@ -15797,19 +15805,19 @@ export default class OParser extends AbstractParser {
 	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 2895;
+	        this.state = 2896;
 	        this.match(OParser.LCURL);
-	        this.state = 2897; 
+	        this.state = 2898; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 2896;
+	            this.state = 2897;
 	            localctx.field = this.css_field();
-	            this.state = 2899; 
+	            this.state = 2900; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        } while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << OParser.JAVA) | (1 << OParser.CSHARP) | (1 << OParser.PYTHON2) | (1 << OParser.PYTHON3) | (1 << OParser.JAVASCRIPT) | (1 << OParser.SWIFT) | (1 << OParser.MINUS))) !== 0) || ((((_la - 49)) & ~0x1f) == 0 && ((1 << (_la - 49)) & ((1 << (OParser.BOOLEAN - 49)) | (1 << (OParser.CHARACTER - 49)) | (1 << (OParser.TEXT - 49)) | (1 << (OParser.INTEGER - 49)) | (1 << (OParser.DECIMAL - 49)) | (1 << (OParser.DATE - 49)) | (1 << (OParser.TIME - 49)) | (1 << (OParser.DATETIME - 49)) | (1 << (OParser.PERIOD - 49)) | (1 << (OParser.VERSION - 49)) | (1 << (OParser.CODE - 49)) | (1 << (OParser.DOCUMENT - 49)) | (1 << (OParser.BLOB - 49)) | (1 << (OParser.IMAGE - 49)) | (1 << (OParser.UUID - 49)) | (1 << (OParser.DBID - 49)) | (1 << (OParser.ITERATOR - 49)) | (1 << (OParser.CURSOR - 49)) | (1 << (OParser.HTML - 49)) | (1 << (OParser.ABSTRACT - 49)) | (1 << (OParser.ALL - 49)) | (1 << (OParser.ALWAYS - 49)) | (1 << (OParser.AND - 49)) | (1 << (OParser.ANY - 49)) | (1 << (OParser.AS - 49)) | (1 << (OParser.ASC - 49)) | (1 << (OParser.ATTR - 49)) | (1 << (OParser.ATTRIBUTE - 49)) | (1 << (OParser.ATTRIBUTES - 49)))) !== 0) || ((((_la - 81)) & ~0x1f) == 0 && ((1 << (_la - 81)) & ((1 << (OParser.BINDINGS - 81)) | (1 << (OParser.BREAK - 81)) | (1 << (OParser.BY - 81)) | (1 << (OParser.CASE - 81)) | (1 << (OParser.CATCH - 81)) | (1 << (OParser.CATEGORY - 81)) | (1 << (OParser.CLASS - 81)) | (1 << (OParser.CONTAINS - 81)) | (1 << (OParser.DEF - 81)) | (1 << (OParser.DEFAULT - 81)) | (1 << (OParser.DEFINE - 81)) | (1 << (OParser.DELETE - 81)) | (1 << (OParser.DESC - 81)) | (1 << (OParser.DO - 81)) | (1 << (OParser.DOING - 81)) | (1 << (OParser.EACH - 81)) | (1 << (OParser.ELSE - 81)) | (1 << (OParser.ENUM - 81)) | (1 << (OParser.ENUMERATED - 81)) | (1 << (OParser.EXCEPT - 81)) | (1 << (OParser.EXECUTE - 81)) | (1 << (OParser.EXPECTING - 81)) | (1 << (OParser.EXTENDS - 81)) | (1 << (OParser.FETCH - 81)) | (1 << (OParser.FILTERED - 81)) | (1 << (OParser.FINALLY - 81)) | (1 << (OParser.FLUSH - 81)) | (1 << (OParser.FOR - 81)) | (1 << (OParser.FROM - 81)) | (1 << (OParser.GETTER - 81)) | (1 << (OParser.HAS - 81)) | (1 << (OParser.IF - 81)))) !== 0) || ((((_la - 113)) & ~0x1f) == 0 && ((1 << (_la - 113)) & ((1 << (OParser.IN - 113)) | (1 << (OParser.INDEX - 113)) | (1 << (OParser.IS - 113)) | (1 << (OParser.MATCHING - 113)) | (1 << (OParser.METHOD - 113)) | (1 << (OParser.METHODS - 113)) | (1 << (OParser.MODULO - 113)) | (1 << (OParser.MUTABLE - 113)) | (1 << (OParser.NATIVE - 113)) | (1 << (OParser.NONE - 113)) | (1 << (OParser.NOT - 113)) | (1 << (OParser.NOTHING - 113)) | (1 << (OParser.NULL - 113)) | (1 << (OParser.ON - 113)) | (1 << (OParser.ONE - 113)) | (1 << (OParser.OPERATOR - 113)) | (1 << (OParser.OR - 113)) | (1 << (OParser.ORDER - 113)) | (1 << (OParser.OTHERWISE - 113)) | (1 << (OParser.PASS - 113)) | (1 << (OParser.RAISE - 113)) | (1 << (OParser.READ - 113)) | (1 << (OParser.RECEIVING - 113)) | (1 << (OParser.RESOURCE - 113)) | (1 << (OParser.RETURN - 113)) | (1 << (OParser.RETURNING - 113)) | (1 << (OParser.ROWS - 113)) | (1 << (OParser.SELF - 113)) | (1 << (OParser.SETTER - 113)) | (1 << (OParser.SINGLETON - 113)))) !== 0) || ((((_la - 145)) & ~0x1f) == 0 && ((1 << (_la - 145)) & ((1 << (OParser.SORTED - 145)) | (1 << (OParser.STORABLE - 145)) | (1 << (OParser.STORE - 145)) | (1 << (OParser.SUPER - 145)) | (1 << (OParser.SWITCH - 145)) | (1 << (OParser.TEST - 145)) | (1 << (OParser.THIS - 145)) | (1 << (OParser.THROW - 145)) | (1 << (OParser.TO - 145)) | (1 << (OParser.TRY - 145)) | (1 << (OParser.VERIFYING - 145)) | (1 << (OParser.WIDGET - 145)) | (1 << (OParser.WITH - 145)) | (1 << (OParser.WHEN - 145)) | (1 << (OParser.WHERE - 145)) | (1 << (OParser.WHILE - 145)) | (1 << (OParser.WRITE - 145)) | (1 << (OParser.SYMBOL_IDENTIFIER - 145)) | (1 << (OParser.TYPE_IDENTIFIER - 145)) | (1 << (OParser.VARIABLE_IDENTIFIER - 145)))) !== 0));
-	        this.state = 2901;
+	        this.state = 2902;
 	        this.match(OParser.RCURL);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -15833,21 +15841,21 @@ export default class OParser extends AbstractParser {
 	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 2903;
-	        localctx.name = this.css_identifier(0);
 	        this.state = 2904;
+	        localctx.name = this.css_identifier(0);
+	        this.state = 2905;
 	        this.match(OParser.COLON);
-	        this.state = 2906; 
+	        this.state = 2907; 
 	        this._errHandler.sync(this);
 	        _la = this._input.LA(1);
 	        do {
-	            this.state = 2905;
+	            this.state = 2906;
 	            localctx.values = this.css_value();
-	            this.state = 2908; 
+	            this.state = 2909; 
 	            this._errHandler.sync(this);
 	            _la = this._input.LA(1);
 	        } while((((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << OParser.SPACE) | (1 << OParser.WS) | (1 << OParser.LF) | (1 << OParser.COMMENT) | (1 << OParser.JAVA) | (1 << OParser.CSHARP) | (1 << OParser.PYTHON2) | (1 << OParser.PYTHON3) | (1 << OParser.JAVASCRIPT) | (1 << OParser.SWIFT) | (1 << OParser.COLON) | (1 << OParser.COMMA) | (1 << OParser.RANGE) | (1 << OParser.DOT) | (1 << OParser.LPAR) | (1 << OParser.RPAR) | (1 << OParser.LBRAK) | (1 << OParser.RBRAK) | (1 << OParser.LCURL) | (1 << OParser.QMARK) | (1 << OParser.XMARK) | (1 << OParser.AMP) | (1 << OParser.AMP2) | (1 << OParser.PIPE) | (1 << OParser.PIPE2) | (1 << OParser.PLUS) | (1 << OParser.MINUS) | (1 << OParser.STAR) | (1 << OParser.SLASH))) !== 0) || ((((_la - 32)) & ~0x1f) == 0 && ((1 << (_la - 32)) & ((1 << (OParser.BSLASH - 32)) | (1 << (OParser.PERCENT - 32)) | (1 << (OParser.SHARP - 32)) | (1 << (OParser.GT - 32)) | (1 << (OParser.GTE - 32)) | (1 << (OParser.LT - 32)) | (1 << (OParser.LTE - 32)) | (1 << (OParser.LTGT - 32)) | (1 << (OParser.LTCOLONGT - 32)) | (1 << (OParser.EQ - 32)) | (1 << (OParser.XEQ - 32)) | (1 << (OParser.EQ2 - 32)) | (1 << (OParser.TEQ - 32)) | (1 << (OParser.TILDE - 32)) | (1 << (OParser.LARROW - 32)) | (1 << (OParser.RARROW - 32)) | (1 << (OParser.EGT - 32)) | (1 << (OParser.BOOLEAN - 32)) | (1 << (OParser.CSS - 32)) | (1 << (OParser.CHARACTER - 32)) | (1 << (OParser.TEXT - 32)) | (1 << (OParser.INTEGER - 32)) | (1 << (OParser.DECIMAL - 32)) | (1 << (OParser.DATE - 32)) | (1 << (OParser.TIME - 32)) | (1 << (OParser.DATETIME - 32)) | (1 << (OParser.PERIOD - 32)) | (1 << (OParser.VERSION - 32)) | (1 << (OParser.METHOD_COLON - 32)) | (1 << (OParser.CODE - 32)) | (1 << (OParser.DOCUMENT - 32)) | (1 << (OParser.BLOB - 32)))) !== 0) || ((((_la - 64)) & ~0x1f) == 0 && ((1 << (_la - 64)) & ((1 << (OParser.IMAGE - 64)) | (1 << (OParser.UUID - 64)) | (1 << (OParser.DBID - 64)) | (1 << (OParser.ITERATOR - 64)) | (1 << (OParser.CURSOR - 64)) | (1 << (OParser.HTML - 64)) | (1 << (OParser.TYPE - 64)) | (1 << (OParser.ABSTRACT - 64)) | (1 << (OParser.ALL - 64)) | (1 << (OParser.ALWAYS - 64)) | (1 << (OParser.AND - 64)) | (1 << (OParser.ANY - 64)) | (1 << (OParser.AS - 64)) | (1 << (OParser.ASC - 64)) | (1 << (OParser.ATTR - 64)) | (1 << (OParser.ATTRIBUTE - 64)) | (1 << (OParser.ATTRIBUTES - 64)) | (1 << (OParser.BINDINGS - 64)) | (1 << (OParser.BREAK - 64)) | (1 << (OParser.BY - 64)) | (1 << (OParser.CASE - 64)) | (1 << (OParser.CATCH - 64)) | (1 << (OParser.CATEGORY - 64)) | (1 << (OParser.CLASS - 64)) | (1 << (OParser.CONTAINS - 64)) | (1 << (OParser.DEF - 64)) | (1 << (OParser.DEFAULT - 64)) | (1 << (OParser.DEFINE - 64)) | (1 << (OParser.DELETE - 64)) | (1 << (OParser.DESC - 64)) | (1 << (OParser.DO - 64)) | (1 << (OParser.DOING - 64)))) !== 0) || ((((_la - 96)) & ~0x1f) == 0 && ((1 << (_la - 96)) & ((1 << (OParser.EACH - 96)) | (1 << (OParser.ELSE - 96)) | (1 << (OParser.ENUM - 96)) | (1 << (OParser.ENUMERATED - 96)) | (1 << (OParser.EXCEPT - 96)) | (1 << (OParser.EXECUTE - 96)) | (1 << (OParser.EXPECTING - 96)) | (1 << (OParser.EXTENDS - 96)) | (1 << (OParser.FETCH - 96)) | (1 << (OParser.FILTERED - 96)) | (1 << (OParser.FINALLY - 96)) | (1 << (OParser.FLUSH - 96)) | (1 << (OParser.FOR - 96)) | (1 << (OParser.FROM - 96)) | (1 << (OParser.GETTER - 96)) | (1 << (OParser.HAS - 96)) | (1 << (OParser.IF - 96)) | (1 << (OParser.IN - 96)) | (1 << (OParser.INCLUDE - 96)) | (1 << (OParser.INDEX - 96)) | (1 << (OParser.INVOKE_COLON - 96)) | (1 << (OParser.IS - 96)) | (1 << (OParser.MATCHING - 96)) | (1 << (OParser.METHOD - 96)) | (1 << (OParser.METHODS - 96)) | (1 << (OParser.MODULO - 96)) | (1 << (OParser.MUTABLE - 96)) | (1 << (OParser.NATIVE - 96)) | (1 << (OParser.NONE - 96)) | (1 << (OParser.NOT - 96)) | (1 << (OParser.NOTHING - 96)) | (1 << (OParser.NULL - 96)))) !== 0) || ((((_la - 128)) & ~0x1f) == 0 && ((1 << (_la - 128)) & ((1 << (OParser.ON - 128)) | (1 << (OParser.ONE - 128)) | (1 << (OParser.OPERATOR - 128)) | (1 << (OParser.OR - 128)) | (1 << (OParser.ORDER - 128)) | (1 << (OParser.OTHERWISE - 128)) | (1 << (OParser.PASS - 128)) | (1 << (OParser.RAISE - 128)) | (1 << (OParser.READ - 128)) | (1 << (OParser.RECEIVING - 128)) | (1 << (OParser.RESOURCE - 128)) | (1 << (OParser.RETURN - 128)) | (1 << (OParser.RETURNING - 128)) | (1 << (OParser.ROWS - 128)) | (1 << (OParser.SELF - 128)) | (1 << (OParser.SETTER - 128)) | (1 << (OParser.SINGLETON - 128)) | (1 << (OParser.SORTED - 128)) | (1 << (OParser.STORABLE - 128)) | (1 << (OParser.STORE - 128)) | (1 << (OParser.SUPER - 128)) | (1 << (OParser.SWITCH - 128)) | (1 << (OParser.TEST - 128)) | (1 << (OParser.THEN - 128)) | (1 << (OParser.THIS - 128)) | (1 << (OParser.THROW - 128)) | (1 << (OParser.TO - 128)) | (1 << (OParser.TRY - 128)) | (1 << (OParser.VERIFYING - 128)) | (1 << (OParser.WIDGET - 128)) | (1 << (OParser.WITH - 128)) | (1 << (OParser.WHEN - 128)))) !== 0) || ((((_la - 160)) & ~0x1f) == 0 && ((1 << (_la - 160)) & ((1 << (OParser.WHERE - 160)) | (1 << (OParser.WHILE - 160)) | (1 << (OParser.WRITE - 160)) | (1 << (OParser.BOOLEAN_LITERAL - 160)) | (1 << (OParser.CHAR_LITERAL - 160)) | (1 << (OParser.MIN_INTEGER - 160)) | (1 << (OParser.MAX_INTEGER - 160)) | (1 << (OParser.SYMBOL_IDENTIFIER - 160)) | (1 << (OParser.TYPE_IDENTIFIER - 160)) | (1 << (OParser.VARIABLE_IDENTIFIER - 160)) | (1 << (OParser.NATIVE_IDENTIFIER - 160)) | (1 << (OParser.DOLLAR_IDENTIFIER - 160)) | (1 << (OParser.ARONDBASE_IDENTIFIER - 160)) | (1 << (OParser.TEXT_LITERAL - 160)) | (1 << (OParser.UUID_LITERAL - 160)) | (1 << (OParser.VERSION_LITERAL - 160)) | (1 << (OParser.INTEGER_LITERAL - 160)) | (1 << (OParser.HEXA_LITERAL - 160)) | (1 << (OParser.DECIMAL_LITERAL - 160)) | (1 << (OParser.DATETIME_LITERAL - 160)) | (1 << (OParser.TIME_LITERAL - 160)) | (1 << (OParser.DATE_LITERAL - 160)) | (1 << (OParser.PERIOD_LITERAL - 160)) | (1 << (OParser.JSX_TEXT - 160)))) !== 0));
-	        this.state = 2910;
+	        this.state = 2911;
 	        this.match(OParser.SEMI);
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
@@ -15876,7 +15884,7 @@ export default class OParser extends AbstractParser {
 	    this.enterRecursionRule(localctx, 520, OParser.RULE_css_identifier, _p);
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 2916;
+	        this.state = 2917;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case OParser.JAVA:
@@ -15996,22 +16004,22 @@ export default class OParser extends AbstractParser {
 	        case OParser.SYMBOL_IDENTIFIER:
 	        case OParser.TYPE_IDENTIFIER:
 	        case OParser.VARIABLE_IDENTIFIER:
-	            this.state = 2913;
+	            this.state = 2914;
 	            this.identifier_or_keyword();
 	            break;
 	        case OParser.MINUS:
-	            this.state = 2914;
-	            this.match(OParser.MINUS);
 	            this.state = 2915;
+	            this.match(OParser.MINUS);
+	            this.state = 2916;
 	            this.nospace_identifier_or_keyword();
 	            break;
 	        default:
 	            throw new antlr4.error.NoViableAltException(this);
 	        }
 	        this._ctx.stop = this._input.LT(-1);
-	        this.state = 2926;
+	        this.state = 2927;
 	        this._errHandler.sync(this);
-	        var _alt = this._interp.adaptivePredict(this._input,282,this._ctx)
+	        var _alt = this._interp.adaptivePredict(this._input,283,this._ctx)
 	        while(_alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER) {
 	            if(_alt===1) {
 	                if(this._parseListeners!==null) {
@@ -16020,30 +16028,30 @@ export default class OParser extends AbstractParser {
 	                _prevctx = localctx;
 	                localctx = new Css_identifierContext(this, _parentctx, _parentState);
 	                this.pushNewRecursionContext(localctx, _startState, OParser.RULE_css_identifier);
-	                this.state = 2918;
+	                this.state = 2919;
 	                if (!( this.precpred(this._ctx, 1))) {
 	                    throw new antlr4.error.FailedPredicateException(this, "this.precpred(this._ctx, 1)");
 	                }
-	                this.state = 2920; 
+	                this.state = 2921; 
 	                this._errHandler.sync(this);
 	                var _alt = 1;
 	                do {
 	                	switch (_alt) {
 	                	case 1:
-	                		this.state = 2919;
+	                		this.state = 2920;
 	                		this.nospace_hyphen_identifier_or_keyword();
 	                		break;
 	                	default:
 	                		throw new antlr4.error.NoViableAltException(this);
 	                	}
-	                	this.state = 2922; 
+	                	this.state = 2923; 
 	                	this._errHandler.sync(this);
-	                	_alt = this._interp.adaptivePredict(this._input,281, this._ctx);
+	                	_alt = this._interp.adaptivePredict(this._input,282, this._ctx);
 	                } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER ); 
 	            }
-	            this.state = 2928;
+	            this.state = 2929;
 	            this._errHandler.sync(this);
-	            _alt = this._interp.adaptivePredict(this._input,282,this._ctx);
+	            _alt = this._interp.adaptivePredict(this._input,283,this._ctx);
 	        }
 
 	    } catch( error) {
@@ -16066,17 +16074,17 @@ export default class OParser extends AbstractParser {
 	    let localctx = new Css_valueContext(this, this._ctx, this.state);
 	    this.enterRule(localctx, 522, OParser.RULE_css_value);
 	    try {
-	        this.state = 2934;
+	        this.state = 2935;
 	        this._errHandler.sync(this);
 	        switch(this._input.LA(1)) {
 	        case OParser.LCURL:
 	            localctx = new CssValueContext(this, localctx);
 	            this.enterOuterAlt(localctx, 1);
-	            this.state = 2929;
-	            this.match(OParser.LCURL);
 	            this.state = 2930;
-	            localctx.exp = this.expression(0);
+	            this.match(OParser.LCURL);
 	            this.state = 2931;
+	            localctx.exp = this.expression(0);
+	            this.state = 2932;
 	            this.match(OParser.RCURL);
 	            break;
 	        case OParser.SPACE:
@@ -16261,7 +16269,7 @@ export default class OParser extends AbstractParser {
 	        case OParser.JSX_TEXT:
 	            localctx = new CssTextContext(this, localctx);
 	            this.enterOuterAlt(localctx, 2);
-	            this.state = 2933;
+	            this.state = 2934;
 	            localctx.text = this.css_text();
 	            break;
 	        default:
@@ -16289,13 +16297,13 @@ export default class OParser extends AbstractParser {
 	    var _la = 0; // Token type
 	    try {
 	        this.enterOuterAlt(localctx, 1);
-	        this.state = 2937; 
+	        this.state = 2938; 
 	        this._errHandler.sync(this);
 	        var _alt = 1;
 	        do {
 	        	switch (_alt) {
 	        	case 1:
-	        		this.state = 2936;
+	        		this.state = 2937;
 	        		_la = this._input.LA(1);
 	        		if(_la<=0 || (((_la) & ~0x1f) == 0 && ((1 << _la) & ((1 << OParser.SEMI) | (1 << OParser.LCURL) | (1 << OParser.RCURL))) !== 0)) {
 	        		this._errHandler.recoverInline(this);
@@ -16308,9 +16316,9 @@ export default class OParser extends AbstractParser {
 	        	default:
 	        		throw new antlr4.error.NoViableAltException(this);
 	        	}
-	        	this.state = 2939; 
+	        	this.state = 2940; 
 	        	this._errHandler.sync(this);
-	        	_alt = this._interp.adaptivePredict(this._input,284, this._ctx);
+	        	_alt = this._interp.adaptivePredict(this._input,285, this._ctx);
 	        } while ( _alt!=2 && _alt!=antlr4.atn.ATN.INVALID_ALT_NUMBER );
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
