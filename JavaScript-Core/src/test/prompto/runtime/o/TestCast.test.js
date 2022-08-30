@@ -90,6 +90,22 @@ test('Transpiled IsAText', () => {
 	checkTranspiledOutput('cast/isAText.poc');
 });
 
+test('Interpreted MutableEntity', () => {
+	checkInterpretedOutput('cast/mutableEntity.poc');
+});
+
+test('Transpiled MutableEntity', () => {
+	checkTranspiledOutput('cast/mutableEntity.poc');
+});
+
+test('Interpreted MutableList', () => {
+	checkInterpretedOutput('cast/mutableList.poc');
+});
+
+test('Transpiled MutableList', () => {
+	checkTranspiledOutput('cast/mutableList.poc');
+});
+
 test('Interpreted NullIsNotAText', () => {
 	checkInterpretedOutput('cast/nullIsNotAText.poc');
 });

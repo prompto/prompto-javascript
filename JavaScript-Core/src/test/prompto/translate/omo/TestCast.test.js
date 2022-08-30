@@ -40,6 +40,14 @@ test('IsAText', () => {
 	compareResourceOMO('cast/isAText.poc');
 });
 
+test('MutableEntity', () => {
+	compareResourceOMO('cast/mutableEntity.poc');
+});
+
+test('MutableList', () => {
+	compareResourceOMO('cast/mutableList.poc');
+});
+
 test('NullIsNotAText', () => {
 	compareResourceOMO('cast/nullIsNotAText.poc');
 });

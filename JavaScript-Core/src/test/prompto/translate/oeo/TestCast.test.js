@@ -40,6 +40,14 @@ test('IsAText', () => {
 	compareResourceOEO('cast/isAText.poc');
 });
 
+test('MutableEntity', () => {
+	compareResourceOEO('cast/mutableEntity.poc');
+});
+
+test('MutableList', () => {
+	compareResourceOEO('cast/mutableList.poc');
+});
+
 test('NullIsNotAText', () => {
 	compareResourceOEO('cast/nullIsNotAText.poc');
 });
