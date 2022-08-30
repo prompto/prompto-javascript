@@ -29,7 +29,7 @@ List.prototype.addItems = function(items) {
 List.prototype.add = function(items) {
     if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = items.toArray();
-    var result = new List(false, this);
+    var result = new List(this.mutable, this);
     result.addItems(items);
     return result;
 };
@@ -37,7 +37,7 @@ List.prototype.add = function(items) {
 List.prototype.remove = function(items) {
     var excluded = (typeof(StrictSet) !== 'undefined' && items instanceof StrictSet) ? items : new Set(items);
     var remaining = this.filter(function(item) { return !excluded.has(item); });
-    return new List(false, remaining);
+    return new List(this.mutable, remaining);
 };
 
 List.prototype.removeItem = function(item) {

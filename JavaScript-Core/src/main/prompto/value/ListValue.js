@@ -37,11 +37,10 @@ export default class ListValue extends BaseValueList {
     Add(context, value) {
         if (value instanceof ListValue) {
             const items = this.items.concat(value.items);
-            return new ListValue(this.type.itemType, items);
+            return new ListValue(this.type.itemType, items, null, this.mutable);
         } else if(value instanceof SetValue) {
-            const items1 = Array.from(value.items.set.values());
-            const items2 = this.items.concat(items1);
-            return new ListValue(this.type.itemType, items2);
+            const items = this.items.concat(Array.from(value.items.set.values()));
+            return new ListValue(this.type.itemType, items, null, this.mutable);
         } else {
             return super.Add.apply(this, context, value);
         }

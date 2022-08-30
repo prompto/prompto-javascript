@@ -10,12 +10,20 @@ import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.js'
 
 export default class ListType extends ContainerType {
   
-    constructor(itemType) {
+    constructor(itemType, mutable) {
         super(new Identifier(itemType.name+"[]"), itemType);
+        this.mutable = mutable || false;
     }
 
     withItemType(itemType) {
-        return new ListType(itemType);
+        return new ListType(itemType, this.mutable);
+    }
+
+    asMutable(context, mutable) {
+        if(mutable === this.mutable)
+            return this;
+        else
+            return new ListType(this.itemType, mutable);
     }
 
     declare(transpiler) {

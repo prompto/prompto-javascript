@@ -8,10 +8,8 @@ import { inferExpressionsType } from '../utils/index.js'
 export default class ListLiteral extends Literal {
 
     constructor(mutable, expressions) {
-        if(typeof(mutable)!=typeof(true))
-            throw "mutable!";
         expressions = expressions || new ExpressionList();
-        super("[" + expressions.toString() + "]", new ListValue(MissingType.instance));
+        super("[" + expressions.toString() + "]", new ListValue(MissingType.instance, null, null, mutable ));
         this.itemType = null;
         this.mutable = mutable;
         this.expressions = expressions;
@@ -20,7 +18,7 @@ export default class ListLiteral extends Literal {
     check(context) {
         if(this.itemType==null) {
             this.itemType = inferExpressionsType(context, this.expressions);
-            this.type = new ListType(this.itemType);
+            this.type = new ListType(this.itemType, this.mutable);
         }
         return this.type;
     }
@@ -43,9 +41,9 @@ export default class ListLiteral extends Literal {
     interpretPromotion(item) {
         if (item == null)
             return item;
-        if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
+        if (DecimalType.instance === this.itemType && item.type === IntegerType.instance)
             return new DecimalValue(item.DecimalValue());
-        else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
+        else if (TextType.instance === this.itemType && item.type === CharacterType.instance)
             return new TextValue(item.value);
         else
             return item;
