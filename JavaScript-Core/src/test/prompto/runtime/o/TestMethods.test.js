@@ -106,6 +106,14 @@ test('Transpiled Homonym2', () => {
 	checkTranspiledOutput('methods/homonym2.poc');
 });
 
+test('Interpreted InheritedMember', () => {
+	checkInterpretedOutput('methods/inheritedMember.poc');
+});
+
+test('Transpiled InheritedMember', () => {
+	checkTranspiledOutput('methods/inheritedMember.poc');
+});
+
 test('Interpreted LocalMember', () => {
 	checkInterpretedOutput('methods/localMember.poc');
 });

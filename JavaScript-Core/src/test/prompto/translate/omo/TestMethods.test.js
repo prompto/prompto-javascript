@@ -56,6 +56,10 @@ test('Homonym2', () => {
 	compareResourceOMO('methods/homonym2.poc');
 });
 
+test('InheritedMember', () => {
+	compareResourceOMO('methods/inheritedMember.poc');
+});
+
 test('LocalMember', () => {
 	compareResourceOMO('methods/localMember.poc');
 });
