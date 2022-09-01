@@ -530,11 +530,12 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         transpiler.dedent();
         transpiler.append("}");
         transpiler.newLine();
-        const parent = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom[0] : null;
-        if(parent)
-            transpiler.append(this.name).append(".prototype = Object.create(").append(parent).append(".prototype);").newLine();
-        else
-            transpiler.append(this.name).append(".prototype = Object.create($Root.prototype);").newLine();
+        const parents = this.derivedFrom && this.derivedFrom.length ? this.derivedFrom : [new Identifier("$Root")];
+        transpiler.append(this.name).append(".prototype = Object.create(").append(parents[0]).append(".prototype);").newLine();
+        const reversed = parents.reverse(); // fulfill MRO
+        transpiler.append(this.name).append(".prototype = Object.assign(").append(this.name).append(".prototype");
+        reversed.forEach(p => transpiler.append(", ").append(p.toString()).append(".prototype"));
+        transpiler.append(");").newLine();
         transpiler.append(this.name).append(".prototype.constructor = ").append(this.name).append(";").newLine();
     }
 
