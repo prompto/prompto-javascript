@@ -342,7 +342,8 @@ export default class CategoryType extends BaseType {
         else if (decl.hasAttribute(context, id)) {
             const ad = context.getRegisteredDeclaration(id);
             if (ad == null) {
-                throw new SyntaxError("Unknown attribute:" + id.name);
+                context.problemListener.reportUnknownAttribute(section, id.name);
+                return VoidType.instance;
             }
             return ad.getType(context);
         } else if ("text" === id.name) {
@@ -352,7 +353,7 @@ export default class CategoryType extends BaseType {
             return new MethodType(method);
         } else {
             context.problemListener.reportUnknownAttribute(section, id.name);
-            return AnyType.instance;
+            return VoidType.instance;
         }
     }
 
@@ -386,14 +387,14 @@ export default class CategoryType extends BaseType {
         const decl = context.getRegisteredDeclaration(this.id);
         if(decl==null) {
             context.problemListener.reportUnknownIdentifier(section, this.name);
-            return null;
+            return VoidType.instance;
         } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
             return decl.getType(context).checkStaticMember(context, section, id);
         } else if(decl instanceof SingletonCategoryDeclaration) {
             return this.checkCategoryAttribute(context, section, decl, id);
         } else {
             context.getProblemListener().reportUnknownAttribute(id, id.name);
-            return null;
+            return VoidType.instance;
         }
     }
 
