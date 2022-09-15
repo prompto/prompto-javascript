@@ -5,7 +5,7 @@ import { NullValue, Instance, Container, DocumentValue } from '../value/index.js
 import { $DataStore } from '../store/index.js'
 import { StatementList } from "./index.js";
 import { Identifier } from "../grammar/index.js";
-const Document = require('../intrinsic/Document.js').default;
+import Document from '../intrinsic/Document.js';
 
 const DBID_IDENTIFIER = new Identifier("dbId");
 

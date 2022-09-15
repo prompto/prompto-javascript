@@ -1,9 +1,6 @@
-const convertToJson = require('../utils/Utils.js').convertToJson;
-const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
-
-const NotMutableError = require('../error/NotMutableError.js').default;
-const Document = require('./Document.js').default;
-const equalArrays = require("../utils/Utils.js").equalArrays;
+import { convertToJson, convertToJsonNode, equalArrays } from '../utils/Utils.js';
+import NotMutableError from '../error/NotMutableError.js';
+import Document from './Document.js';
 
 function Category(klass) {
     this.klass = klass;

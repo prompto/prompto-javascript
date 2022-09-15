@@ -1,8 +1,8 @@
-const StrictSet = require('./StrictSet.js').default;
-const List = require('./List.js').default;
-const LocalDate = require('./LocalDate.js').default;
-const LocalTime = require('./LocalTime.js').default;
-const equalObjects = require('../utils/Utils.js').equalObjects;
+import StrictSet from './StrictSet.js';
+import List from './List.js';
+import LocalDate from './LocalDate.js';
+import LocalTime from './LocalTime.js';
+import { equalObjects } from '../utils/Utils.js';
 
 function Range(first, last) {
     this.first = first;

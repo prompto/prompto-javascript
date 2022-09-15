@@ -1,6 +1,6 @@
-const LocalDate = require('./LocalDate.js').default;
-const LocalTime = require('./LocalTime.js').default;
-const Period = require('./Period.js').default;
+import LocalDate from './LocalDate.js';
+import LocalTime from './LocalTime.js';
+import Period from './Period.js';
 
 export default function DateTime(date, tzOffset) {
     this.date = date;

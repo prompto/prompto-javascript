@@ -1,9 +1,6 @@
-const List = require('./List.js').default;
-const StrictSet = require('./StrictSet.js').default;
-const equalArrays = require('../utils/Utils.js').equalArrays;
-const isANumber = require('../utils/Utils.js').isANumber;
-const convertToJson = require('../utils/Utils.js').convertToJson;
-const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
+import List from './List.js';
+import StrictSet from './StrictSet.js';
+import { equalArrays, isANumber, convertToJson, convertToJsonNode } from '../utils/Utils.js';
 
 export default function Document(entries) {
     if(entries)

@@ -1,5 +1,5 @@
-const DateTime = require('./DateTime.js').default;
-const Period = require('./Period.js').default;
+import DateTime from './DateTime.js';
+import Period from './Period.js';
 
 export default function LocalDate(value) {
     var date = new Date(value);

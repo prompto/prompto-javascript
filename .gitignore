@@ -12,3 +12,4 @@ transpiled.js
 generated
 JavaScript-Core/src/generated-saved
 JavaScript-Core/src/test/prompto/perf/*
+JavaScript-Core/.clinic

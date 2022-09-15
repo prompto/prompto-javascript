@@ -1,5 +1,5 @@
-const StrictSet = require('./StrictSet.js').default;
-const List = require('./List.js').default;
+import StrictSet from './StrictSet.js';
+import List from './List.js';
 
 export default function Cursor(mutable, iterable) {
     this.mutable = mutable || false;

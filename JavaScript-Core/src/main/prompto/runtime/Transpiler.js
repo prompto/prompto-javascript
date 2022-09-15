@@ -1,6 +1,6 @@
 import { CategoryDeclaration } from '../declaration/index.js'
-const StrictSet = require('../intrinsic/StrictSet.js').default;
-const List = require('../intrinsic/StrictSet.js').default;
+import StrictSet from '../intrinsic/StrictSet.js';
+import List from '../intrinsic/List.js';
 import { equalObjects } from '../utils/index.js'
 
 const coreNodeClasses = new Set(["Socket"]);
@@ -152,15 +152,15 @@ export default class Transpiler {
     appendOneRequired(fn) {
         if(coreNodeClasses.has(fn.name))
             return;
-        this.lines.push(fn.toString());
-        Object.keys(fn).forEach( key => this.lines.push(fn.name + "." + key + " = " + this.getTranspiled(fn[key]) + ";"), this);
+        this.lines.push(this.resolveImports(fn.toString()));
+        Object.keys(fn).forEach( key => this.lines.push(fn.name + "." + key + " = " + this.resolveImports(this.getTranspiled(fn[key])) + ";"), this);
         if(fn.prototype.__proto__) {
             const proto = fn.prototype.__proto__;
             if(proto.constructor.name!=="Object")
                 this.lines.push(fn.name + ".prototype.__proto__ = " + proto.constructor.name + ".prototype;");
         }
         Object.keys(fn.prototype).filter(key => key !== "toTranspiled").forEach( key => {
-            const value = key==="constructor" ? fn.name : fn.prototype[key].toString();
+            const value = key==="constructor" ? fn.name : this.resolveImports(fn.prototype[key].toString());
             if(value.indexOf("native code")<0)
                 this.lines.push(fn.name + ".prototype." + key + " = " + value + ";");
             else // for now assume this is a redirect on the same type
@@ -171,14 +171,50 @@ export default class Transpiler {
             if(desc.get || desc.set) {
                 this.lines.push("Object.defineProperty(" + fn.name + ".prototype, '" + name + "', {");
                 if(desc.get) {
-                    this.lines.push("    get: " + desc.get.toString() + (desc.set ? "," : ""));
+                    this.lines.push("    get: " + this.resolveImports(desc.get.toString()) + (desc.set ? "," : ""));
                 }
                 if(desc.set) {
-                    this.lines.push("    set: " + desc.set.toString());
+                    this.lines.push("    set: " + this.resolveImports(desc.set.toString()));
                 }
                 this.lines.push("});")
             }
         }, this);
+    }
+
+    resolveImports(body) {
+        body = this.resolveDefaultImports(body);
+        body = this.resolveChildImports(body);
+        return body;
+    }
+
+    resolveChildImports(body) {
+        body = this.resolveChildImport(body, "Utils");
+        return body;
+    }
+
+    resolveChildImport(body, parent) {
+        const pattern = new RegExp("_" + parent + "\\.[a-z]*", 'g');
+        let matches = body.match(pattern);
+        while(matches !== null) {
+            const match = matches[0];
+            const replaceBy = match.substring(match.indexOf(".") + 1);
+            body = body.replaceAll(match, replaceBy);
+            matches = body.match(pattern);
+        }
+        return body;
+
+    }
+
+    resolveDefaultImports(body) {
+        const pattern = /_[^.]*\.default/g;
+        let matches = body.match(pattern);
+        while(matches !== null) {
+            const match = matches[0];
+            const replaceBy = match.substring(1, match.length - 8);
+            body = body.replaceAll(match, replaceBy);
+            matches = body.match(pattern);
+        }
+        return body;
     }
 
     append(text) {
@@ -261,7 +297,7 @@ ObjectUtils.stringSplitToList = function(separator) {
 };
 
 ObjectUtils.stringHasAll = function(items) {
-    if(StrictSet && items instanceof StrictSet)
+    if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = Array.from(items.set.values());
     for(let i=0;i<items.length;i++) {
         if(!this.includes(items[i]))
@@ -272,7 +308,7 @@ ObjectUtils.stringHasAll = function(items) {
 
 
 ObjectUtils.stringHasAny = function(items) {
-    if(StrictSet && items instanceof StrictSet)
+    if(typeof(StrictSet) !== 'undefined' && items instanceof StrictSet)
         items = Array.from(items.set.values());
     for(let i=0;i<items.length;i++) {
         if(this.includes(items[i]))
@@ -412,19 +448,19 @@ function newTranspiler(context) {
     transpiler.lines.push("TypeError.prototype.getText = function() { return 'Null reference!'; };");
     transpiler.lines.push("ReferenceError.prototype.getText = function() { return 'Null reference!'; };");
     transpiler.lines.push("RangeError.prototype.getText = function() { return 'Index out of range!'; };");
-    transpiler.lines.push("if(!Object.values) { Object.values = " + ObjectUtils.values.toString() + "; }");
+    transpiler.lines.push("if(!Object.values) { Object.values = " + transpiler.resolveImports(ObjectUtils.values.toString() + "; }"));
     transpiler.lines.push("Boolean.prototype.getText = Boolean.prototype.toString;");
     transpiler.lines.push("Boolean.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("Boolean.prototype.equals = function(value) { return this === value; };");
-    transpiler.lines.push("Number.prototype.formatInteger = " + ObjectUtils.formatInteger.toString() + ";");
-    transpiler.lines.push("Number.prototype.toDecimalString = " + ObjectUtils.decimalToString.toString() + ";");
+    transpiler.lines.push("Number.prototype.formatInteger = " + transpiler.resolveImports(ObjectUtils.formatInteger.toString() + ";"));
+    transpiler.lines.push("Number.prototype.toDecimalString = " + transpiler.resolveImports(ObjectUtils.decimalToString.toString() + ";"));
     transpiler.lines.push("Number.prototype.getText = Number.prototype.toString;");
     transpiler.lines.push("Number.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("Number.prototype.equals = function(value) { return this === value; };");
-    transpiler.lines.push("String.prototype.hasAll = " + ObjectUtils.stringHasAll.toString() + ";");
-    transpiler.lines.push("String.prototype.hasAny = " + ObjectUtils.stringHasAny.toString() + ";");
-    transpiler.lines.push("String.prototype.splitToList = " + ObjectUtils.stringSplitToList.toString() + ";");
-    transpiler.lines.push("String.prototype.slice1Based = " + ObjectUtils.stringSlice.toString() + ";");
+    transpiler.lines.push("String.prototype.hasAll = " + transpiler.resolveImports(ObjectUtils.stringHasAll.toString() + ";"));
+    transpiler.lines.push("String.prototype.hasAny = " + transpiler.resolveImports(ObjectUtils.stringHasAny.toString() + ";"));
+    transpiler.lines.push("String.prototype.splitToList = " + transpiler.resolveImports(ObjectUtils.stringSplitToList.toString() + ";"));
+    transpiler.lines.push("String.prototype.slice1Based = " + transpiler.resolveImports(ObjectUtils.stringSlice.toString() + ";"));
     transpiler.lines.push("String.prototype.getText = String.prototype.toString;");
     transpiler.lines.push("String.prototype.toJson = function() { return JSON.stringify(this); };");
     transpiler.lines.push("String.prototype.indexOf1Based = function(value, fromIndex) { return 1 + this.indexOf(value, fromIndex); };");

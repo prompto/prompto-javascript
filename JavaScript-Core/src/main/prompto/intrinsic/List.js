@@ -1,8 +1,6 @@
-const StrictSet = require('./StrictSet.js').default;
-const NotMutableError = require('../error/NotMutableError.js').default;
-const equalObjects = require('../utils/Utils.js').equalObjects;
-const convertToJson = require('../utils/Utils.js').convertToJson;
-const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
+import StrictSet from './StrictSet.js';
+import NotMutableError from '../error/NotMutableError.js';
+import { equalObjects, convertToJson, convertToJsonNode } from '../utils/Utils.js';
 
 export default function List(mutable, items) {
     Array.call(this);

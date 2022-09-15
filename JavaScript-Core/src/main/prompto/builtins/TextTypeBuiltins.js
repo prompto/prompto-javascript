@@ -4,7 +4,7 @@ import { TextValue, ListValue, BooleanValue, IntegerValue } from '../value/index
 import { CategoryParameter } from '../param/index.js'
 import { Identifier } from '../grammar/index.js'
 import { TextLiteral, IntegerLiteral } from '../literal/index.js'
-import { List } from '../intrinsic/index.js'
+import { List, StrictSet } from '../intrinsic/index.js'
 
 // don't use export default since more builtins are expected
 class ToLowerCaseMethodDeclaration extends BuiltInMethodDeclaration {
@@ -108,7 +108,8 @@ class SplitMethodDeclaration extends BuiltInMethodDeclaration {
     }
 
     declareCall(transpiler) {
-        transpiler.require(List);
+        transpiler.register(List);
+        transpiler.register(StrictSet);
     }
 
     transpileCall(transpiler, assignments) {

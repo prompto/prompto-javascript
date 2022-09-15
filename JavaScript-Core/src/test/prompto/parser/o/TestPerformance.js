@@ -299,6 +299,7 @@ widget EnterCredentialsPhase extends ReactWidget {
     }
 
 }`;
+
 for(let i=0; i<10; i++) {
     const before_parse_ms = Date.now();
     let parser = new OTestParser(code);
@@ -306,3 +307,4 @@ for(let i=0; i<10; i++) {
     const after_parse_ms = Date.now();
     console.log("Run " + i + ": " + (after_parse_ms - before_parse_ms));
 }
+

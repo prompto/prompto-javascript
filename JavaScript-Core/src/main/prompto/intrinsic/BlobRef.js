@@ -1,6 +1,5 @@
-const Document = require('./Document.js').default;
-const utf8BufferToString = require('../utils/Utils.js').utf8BufferToString;
-const stringToUtf8Buffer = require('../utils/Utils.js').stringToUtf8Buffer;
+import Document from './Document.js';
+import { utf8BufferToString, stringToUtf8Buffer } from '../utils/Utils.js';
 
 export default function BlobRef() {
     this.zipped = null;

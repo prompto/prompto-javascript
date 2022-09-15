@@ -8,10 +8,9 @@ import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from 
 import { TextLiteral } from '../literal/index.js'
 import {equalArrays, compareValues, isANumber, convertToJson, convertToJsonNode} from '../utils/index.js'
 import JavaScriptClassType from "../javascript/JavaScriptClassType.js";
-// ensure babel does not inject _xxx.default
-const StrictSet = require('../intrinsic/StrictSet.js').default;
-const List = require('../intrinsic/List.js').default;
-const Document = require('../intrinsic/Document.js').default;
+import StrictSet from '../intrinsic/StrictSet.js';
+import List from '../intrinsic/List.js';
+import Document from '../intrinsic/Document.js';
 
 export default class DocumentType extends NativeType {
 

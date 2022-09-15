@@ -1,6 +1,5 @@
-const List = require('./List.js').default;
-const convertToJson = require('../utils/Utils.js').convertToJson;
-const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
+import List from './List.js';
+import { convertToJson, convertToJsonNode } from '../utils/Utils.js';
 
 export default function StrictSet(values) {
     this.set = new Set(values);

@@ -4,7 +4,7 @@ import { NativeInstance } from '../value/index.js'
 import { JavaScriptNativeCategoryBinding } from '../javascript/index.js'
 import { CategoryType } from '../type/index.js'
 import { SyntaxError } from '../error/index.js'
-const Any = require('../intrinsic/Any.js').default;
+import Any from '../intrinsic/Any.js';
 
 export default class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
 
