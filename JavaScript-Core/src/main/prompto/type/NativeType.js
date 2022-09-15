@@ -2,9 +2,9 @@ import BaseType from './BaseType.js'
 import { ArrowExpression } from "../expression/index.js"
 
 let MissingType = null;
-import("../type/MissingType").then(res => MissingType = res.default);
+import("../type/MissingType.js").then(res => MissingType = res.default);
 let AnyType = null;
-import("../type/AnyType").then(res => AnyType = res.default);
+import("../type/AnyType.js").then(res => AnyType = res.default);
 
 export default class NativeType extends BaseType {
 

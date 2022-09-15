@@ -3,7 +3,7 @@ import { SyntaxError } from '../error/index.js';
 import { NullType, VoidType, BooleanType, TextType, EnumeratedNativeType } from './index.js';
 import { convertToJson, convertToJsonNode } from '../utils/index.js';
 let NullValue;
-import("../value/NullValue").then(res => NullValue = res.default);
+import("../value/NullValue.js").then(res => NullValue = res.default);
 
 export default class BaseType extends Section {
  
