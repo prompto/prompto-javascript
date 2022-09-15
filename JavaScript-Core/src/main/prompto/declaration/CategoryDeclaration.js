@@ -2,6 +2,7 @@ import BaseDeclaration from './BaseDeclaration.js'
 import { AttributeDeclaration } from './index.js'
 import { CategoryType } from '../type/index.js'
 import { MethodDeclarationMap } from "../runtime/index.js";
+import {TextLiteral} from "../literal";
 
 export default class CategoryDeclaration extends BaseDeclaration {
 
@@ -18,6 +19,19 @@ export default class CategoryDeclaration extends BaseDeclaration {
 
     isWidget(context) {
         return false;
+    }
+
+    getPageWidgetOf() {
+        if(this.annotations) {
+            const annotations = this.annotations.filter(function(a) { return a.id.name==="@PageWidgetOf" });
+            if(annotations.length > 0) {
+                var expression = annotations[0].getDefaultArgument();
+                if (expression instanceof TextLiteral) {
+                    return expression.value.toString();
+                }
+            }
+            return null;
+        }
     }
 
     isStorable(context) {
