@@ -6,7 +6,7 @@ import { ExecutionError } from '../error/index.js'
 import { UnresolvedParameter } from '../param/index.js'
 import { ConstructorExpression } from '../expression/index.js'
 import { TextLiteral } from '../literal/index.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class SwitchErrorStatement extends BaseSwitchStatement {
 

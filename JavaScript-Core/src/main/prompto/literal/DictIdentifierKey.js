@@ -1,4 +1,4 @@
-import Section from "../parser/Section";
+import Section from "../parser/Section.js";
 import { TextValue } from '../value/index.js'
 import { InstanceExpression } from '../expression/index.js'
 import { TextType } from "../type/index.js";

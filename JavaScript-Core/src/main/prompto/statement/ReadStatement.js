@@ -1,6 +1,6 @@
 import ReadAllExpression from '../expression/ReadAllExpression.js'
 import { TextType } from '../type/index.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class ReadStatement extends ReadAllExpression {
 

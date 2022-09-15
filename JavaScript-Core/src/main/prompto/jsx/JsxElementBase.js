@@ -5,7 +5,7 @@ import { CategoryDeclaration } from '../declaration/index.js'
 import { OCleverParser } from '../parser/index.js'
 import { TypeLiteral } from '../literal/index.js'
 import { WidgetPropertiesProcessor } from '../processor/index.js'
-import {Dialect} from "../parser/index";
+import {Dialect} from "../parser/index.js";
 
 export default class JsxElementBase extends IJsxExpression {
   

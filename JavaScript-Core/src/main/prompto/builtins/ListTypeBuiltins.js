@@ -1,7 +1,7 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
 import { CategoryParameter } from '../param/index.js'
-import { AnyType, IntegerType, VoidType } from "../type";
-import { Identifier } from "../grammar";
+import { AnyType, IntegerType, VoidType } from "../type/index.js";
+import { Identifier } from "../grammar/index.js";
 
 
 class IndexOfMethodDeclaration extends BuiltInMethodDeclaration {

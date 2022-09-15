@@ -1,7 +1,7 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration.js'
 import { DictionaryType, TextType, AnyType, VoidType } from '../type/index.js'
-import { CategoryParameter } from "../param";
-import { Identifier } from "../grammar";
+import { CategoryParameter } from "../param/index.js";
+import { Identifier } from "../grammar/index.js";
 
 // don't use export default since more builtins are expected
 class SwapMethodDeclaration extends BuiltInMethodDeclaration {

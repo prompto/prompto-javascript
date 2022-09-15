@@ -1,5 +1,5 @@
-import Value from "./Value";
-import { DbIdType } from "../type";
+import Value from "./Value.js";
+import { DbIdType } from "../type/index.js";
 
 export default class DbIdValue extends Value {
 

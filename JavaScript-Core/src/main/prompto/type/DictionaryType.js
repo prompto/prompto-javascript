@@ -7,7 +7,7 @@ import {
     RemoveKeyMethodDeclaration,
     RemoveValueMethodDeclaration
 } from "../builtins/DictionaryTypeBuiltins.js";
-import {convertToJson, convertToJsonNode} from "../utils";
+import {convertToJson, convertToJsonNode} from "../utils/index.js";
 
 export default class DictionaryType extends ContainerType {
 

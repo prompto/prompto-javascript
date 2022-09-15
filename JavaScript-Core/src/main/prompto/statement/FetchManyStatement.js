@@ -1,7 +1,7 @@
 import FetchManyExpression from '../expression/FetchManyExpression.js'
 import { Variable } from '../runtime/index.js'
 import { CursorType } from '../type/index.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class FetchManyStatement extends FetchManyExpression {
 

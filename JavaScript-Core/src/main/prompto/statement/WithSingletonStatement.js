@@ -1,5 +1,5 @@
 import BaseStatement from './BaseStatement.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class WithSingletonStatement extends BaseStatement {
 

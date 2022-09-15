@@ -1,6 +1,6 @@
 import FetchOneExpression from '../expression/FetchOneExpression.js'
 import { Variable } from '../runtime/index.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class FetchOneStatement extends FetchOneExpression {
 

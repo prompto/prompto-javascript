@@ -3,7 +3,7 @@ import {Dialect} from '../parser/index.js'
 import { Variable } from '../runtime/index.js'
 import { VoidType } from '../type/index.js'
 import RemoteRunner from "../intrinsic/RemoteRunner.js"
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class RemoteCall extends UnresolvedCall {
 

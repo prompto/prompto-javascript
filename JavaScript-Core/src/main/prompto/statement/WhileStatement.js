@@ -3,8 +3,8 @@ import { BooleanType } from '../type/index.js'
 import { BooleanValue } from '../value/index.js'
 import { BreakResult } from '../runtime/index.js'
 import { InvalidDataError } from '../error/index.js'
-import {Section} from "../parser";
-import {StatementList} from "./index";
+import {Section} from "../parser/index.js";
+import {StatementList} from "./index.js";
 
 export default class WhileStatement extends BaseStatement {
    

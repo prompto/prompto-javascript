@@ -1,4 +1,3 @@
-
 const convertToJson = require('../utils/Utils.js').convertToJson;
 const convertToJsonNode = require('../utils/Utils.js').convertToJsonNode;
 

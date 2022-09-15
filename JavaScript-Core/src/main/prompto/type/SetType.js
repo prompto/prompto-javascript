@@ -3,7 +3,7 @@ import { ListType, IntegerType, BooleanType } from './index.js'
 import { Identifier } from '../grammar/index.js'
 import { JoinSetMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js'
 import { List, StrictSet } from "../intrinsic/index.js";
-import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration";
+import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration.js";
 
 export default class SetType extends ContainerType {
  

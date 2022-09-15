@@ -4,8 +4,8 @@ import { IntegerType, ListType, DictionaryType } from '../type/index.js'
 import { InternalError } from '../error/index.js'
 import { StrictSet } from '../intrinsic/index.js'
 import { IntegerValue } from '../value/index.js'
-import {Section} from "../parser";
-import {StatementList} from "./index";
+import {Section} from "../parser/index.js";
+import {StatementList} from "./index.js";
 
 export default class ForEachStatement extends BaseStatement {
 

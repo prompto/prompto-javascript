@@ -1,7 +1,7 @@
 import Value from './Value.js'
 import { IteratorType } from '../type/index.js'
-import {ListValue, SetValue} from "./index";
-import {StrictSet} from "../intrinsic";
+import {ListValue, SetValue} from "./index.js";
+import {StrictSet} from "../intrinsic/index.js";
 
 /* thin wrapper to expose an iterator as a prompto value */
 export default class IteratorValue extends Value {

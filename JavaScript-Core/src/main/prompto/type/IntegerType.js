@@ -5,7 +5,7 @@ import { IntegerValue, IntegerRangeValue } from '../value/index.js'
 import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins.js'
 import { isAnInteger } from '../utils/index.js'
 import { Range, IntegerRange } from '../intrinsic/index.js'
-import {TypeFamily} from "../store";
+import {TypeFamily} from "../store/index.js";
 
 export default class IntegerType extends NativeType {
 

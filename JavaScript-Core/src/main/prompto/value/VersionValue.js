@@ -1,7 +1,7 @@
 import Value from './Value.js'
 import {VersionType} from '../type/index.js'
 import {SyntaxError} from '../error/index.js'
-import {IntegerValue, TextValue} from "./index";
+import {IntegerValue, TextValue} from "./index.js";
 
 export default class VersionValue extends Value {
 

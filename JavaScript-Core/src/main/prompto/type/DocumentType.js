@@ -7,7 +7,7 @@ import { MethodCall } from '../statement/index.js'
 import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value/index.js'
 import { TextLiteral } from '../literal/index.js'
 import {equalArrays, compareValues, isANumber, convertToJson, convertToJsonNode} from '../utils/index.js'
-import JavaScriptClassType from "../javascript/JavaScriptClassType";
+import JavaScriptClassType from "../javascript/JavaScriptClassType.js";
 // ensure babel does not inject _xxx.default
 const StrictSet = require('../intrinsic/StrictSet.js').default;
 const List = require('../intrinsic/List.js').default;

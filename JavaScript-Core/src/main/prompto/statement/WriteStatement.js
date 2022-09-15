@@ -3,7 +3,7 @@ import { ResourceContext } from '../runtime/index.js'
 import { VoidType, ResourceType, TextType } from '../type/index.js'
 import { TextValue } from '../value/index.js'
 import { NullReferenceError, InvalidResourceError } from '../error/index.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class WriteStatement extends BaseStatement {
 

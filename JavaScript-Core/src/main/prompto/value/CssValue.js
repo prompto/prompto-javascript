@@ -1,6 +1,6 @@
 import Value from './Value.js'
 import { CssType } from '../type/index.js'
-import { SyntaxError } from "../error";
+import { SyntaxError } from "../error/index.js";
 
 export default class CssValue extends Value {
 

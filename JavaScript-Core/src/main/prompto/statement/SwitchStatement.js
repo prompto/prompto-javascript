@@ -1,5 +1,5 @@
 import BaseSwitchStatement from './BaseSwitchStatement.js'
-import {StatementList} from "./index";
+import {StatementList} from "./index.js";
 
 export default class SwitchStatement extends BaseSwitchStatement {
  
