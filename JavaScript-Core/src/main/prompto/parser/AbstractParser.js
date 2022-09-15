@@ -29,6 +29,15 @@ export default class AbstractParser extends antlr4.Parser {
 		return this.getTokenStream().LA(1) === type;
 	}
 
+	willBeIn() {
+		const next = this.getTokenStream().LA(1);
+		for(let i=0;i<arguments.length;i++) {
+			if(next === arguments[i])
+				return true;
+		}
+		return false;
+	}
+
 	willNotBe(type) {
 		return this.getTokenStream().LA(1) !== type;
 	}

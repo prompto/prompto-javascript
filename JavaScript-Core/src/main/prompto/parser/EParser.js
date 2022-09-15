@@ -2437,7 +2437,7 @@ export default class EParser extends AbstractParser {
     invocation_trailer_sempred(localctx, predIndex) {
     	switch(predIndex) {
     		case 23:
-    			return this.willBe(EParser.LF);
+    			return this.willBeIn(EParser.LF, EParser.DEDENT);
     		default:
     			throw "No predicate with index:" + predIndex;
     	}
@@ -6261,8 +6261,8 @@ export default class EParser extends AbstractParser {
 	    try {
 	        this.enterOuterAlt(localctx, 1);
 	        this.state = 1388;
-	        if (!( this.willBe(EParser.LF))) {
-	            throw new antlr4.error.FailedPredicateException(this, "$parser.willBe(EParser.LF)");
+	        if (!( this.willBeIn(EParser.LF, EParser.DEDENT))) {
+	            throw new antlr4.error.FailedPredicateException(this, "$parser.willBeIn(EParser.LF, EParser.DEDENT)");
 	        }
 	    } catch (re) {
 	    	if(re instanceof antlr4.error.RecognitionException) {
