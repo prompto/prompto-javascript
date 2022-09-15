@@ -5,7 +5,7 @@ version: 2.1
 jobs:
   build-and-test:
     docker:
-      - image: cimg/node:14.12
+      - image: cimg/node:16.17
     steps:
       - checkout
       - run:
