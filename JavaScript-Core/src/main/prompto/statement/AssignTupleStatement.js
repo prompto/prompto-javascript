@@ -1,8 +1,8 @@
-import SimpleStatement from './SimpleStatement.js'
-import { VoidType, AnyType, TupleType } from '../type/index.js'
-import { Variable } from '../runtime/index.js'
-import { IntegerValue, TupleValue } from '../value/index.js'
-import { SyntaxError } from '../error/index.js'
+import SimpleStatement from '../../../main/prompto/statement/SimpleStatement.ts'
+import { VoidType, AnyType, TupleType } from '../type'
+import { Variable } from '../runtime'
+import { IntegerValue, TupleValue } from '../value'
+import { SyntaxError } from '../error'
 
 export default class AssignTupleStatement extends SimpleStatement {
 
@@ -12,7 +12,7 @@ export default class AssignTupleStatement extends SimpleStatement {
         this.expression = expression;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const type = this.expression.check(context);
         if(type!=TupleType.instance) {
             throw new SyntaxError("Expecting a tuple expression, got " + type.getName());
@@ -30,7 +30,7 @@ export default class AssignTupleStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.expression.declare(transpiler);
         this.names.forEach(name => {
             const actual = transpiler.context.getRegistered(name);
@@ -39,7 +39,7 @@ export default class AssignTupleStatement extends SimpleStatement {
          }, this);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("var [");
         this.names.forEach(name => {
             transpiler.append(name).append(", ");
@@ -52,7 +52,7 @@ export default class AssignTupleStatement extends SimpleStatement {
         this.expression.transpile(transpiler);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const object = this.expression.interpret(context);
         if(!(object instanceof TupleValue)) {
             throw new SyntaxError("Expecting a tuple expression, got " + typeof(object));
@@ -68,7 +68,7 @@ export default class AssignTupleStatement extends SimpleStatement {
         return null;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.names.toDialect(writer, false);
         writer.append(" = ");
         this.expression.toDialect(writer);

@@ -1,5 +1,5 @@
 import JavaScriptLiteral from './JavaScriptLiteral.js'
-import { DecimalType } from '../type/index.js'
+import { DecimalType } from '../type'
 
 export default class JavaScriptDecimalLiteral extends JavaScriptLiteral {
 
@@ -7,7 +7,7 @@ export default class JavaScriptDecimalLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context) {
+    check(context: Context): Type {
         return DecimalType.instance;
     }
 

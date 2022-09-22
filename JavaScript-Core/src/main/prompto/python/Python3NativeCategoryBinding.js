@@ -6,7 +6,7 @@ export default class Python3NativeCategoryBinding extends PythonNativeCategoryBi
         super(binding.identifier, binding.module);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("Python3: ");
         writer.append(this.identifier);
         if(this.module!=null)

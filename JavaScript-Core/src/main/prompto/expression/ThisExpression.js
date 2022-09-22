@@ -1,11 +1,11 @@
-import Expression from './Expression.js'
-import { InstanceContext, DocumentContext } from '../runtime/index.js'
-import { DocumentType } from '../type/index.js'
-import { SyntaxError } from '../error/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { InstanceContext, DocumentContext } from '../runtime'
+import { DocumentType } from '../type'
+import { SyntaxError } from '../error'
 
-export default class ThisExpression extends Expression {
+export default class ThisExpression extends BaseExpression {
 
-   check(context) {
+   check(context: Context): Type {
         if (context instanceof DocumentContext)
             return DocumentType.instance;
         if (context != null && !(context instanceof InstanceContext))
@@ -16,7 +16,7 @@ export default class ThisExpression extends Expression {
             throw new SyntaxError ("Not in an instance context!");
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if (context instanceof DocumentContext)
             return context.document;
         if (context != null && !(context instanceof InstanceContext))
@@ -27,19 +27,19 @@ export default class ThisExpression extends Expression {
             throw new SyntaxError ("Not in an instance context!");
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("self");
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("this");
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("self");
     }
 
@@ -47,11 +47,11 @@ export default class ThisExpression extends Expression {
         return "this";
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("this");
     }
 }

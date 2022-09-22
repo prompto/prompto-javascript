@@ -1,8 +1,8 @@
-import { JavaScriptType } from './index.js'
-import { AnyType, VoidType } from '../type/index.js'
-import { Identifier } from '../grammar/index.js'
-import { getTypeName } from '../utils/index.js'
-import { $DataStore } from '../store/index.js'
+import { JavaScriptType } from './index.ts'
+import { AnyType, VoidType } from '../type'
+import { Identifier } from '../grammar'
+import { getTypeName } from '../utils'
+import { $DataStore } from '../store'
 
 export default class JavaScriptStatement {
   
@@ -16,7 +16,7 @@ export default class JavaScriptStatement {
         return "" + (this.isReturn ? "return " : "") + this.expression.toString() + ";";
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.isReturn ? AnyType.instance : VoidType.instance;
     }
 
@@ -33,7 +33,7 @@ export default class JavaScriptStatement {
         return result;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.isReturn)
             writer.append("return ");
         this.expression.toDialect(writer);
@@ -42,7 +42,7 @@ export default class JavaScriptStatement {
             this.module.toDialect(writer);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // TODO module
         const str = this.expression.toString();
         if(str.startsWith("$context"))
@@ -51,7 +51,7 @@ export default class JavaScriptStatement {
             transpiler.require($DataStore);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if(this.module!=null) {
             const rootName = this.expression.getRoot();
             this.module.transpile(transpiler, rootName);
@@ -66,7 +66,7 @@ export default class JavaScriptStatement {
 
 class $context {
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("var $context = context;").newLine();
     }
 }

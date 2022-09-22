@@ -1,6 +1,6 @@
 import StrictSet from './StrictSet.js';
 import NotMutableError from '../error/NotMutableError.js';
-import { equalObjects, convertToJson, convertToJsonNode } from '../utils/Utils.js';
+import { equalObjects, convertToJson, convertToJsonNode } from '../../../main/prompto/utils/Utils.ts';
 
 export default function List(mutable, items) {
     Array.call(this);

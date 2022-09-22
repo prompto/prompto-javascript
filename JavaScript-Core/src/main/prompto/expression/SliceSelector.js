@@ -1,8 +1,8 @@
 import SelectorExpression from './SelectorExpression.js'
-import { IntegerType } from '../type/index.js'
-import { IntegerValue } from '../value/index.js'
+import { IntegerType } from '../type'
+import { IntegerValue } from '../value'
 
-import { SyntaxError, NullReferenceError } from '../error/index.js'
+import { SyntaxError, NullReferenceError } from '../error'
 
 export default class SliceSelector extends SelectorExpression {
 
@@ -18,7 +18,7 @@ export default class SliceSelector extends SelectorExpression {
                 (this.last==null?"":this.last.toString()) + "]";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.parent.toDialect(writer);
         writer.append('[');
         if (this.first != null)
@@ -29,7 +29,7 @@ export default class SliceSelector extends SelectorExpression {
         writer.append(']');
     }
 
-    check(context) {
+    check(context: Context): Type {
         const firstType = this.first!=null ? this.first.check(context) : null;
         const lastType = this.last!=null ? this.last.check(context) : null;
         if(firstType!=null && !(firstType instanceof IntegerType)) {
@@ -42,7 +42,7 @@ export default class SliceSelector extends SelectorExpression {
         return parentType.checkSlice(context);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         let o = this.parent.interpret(context);
         if (o == null) {
             throw new NullReferenceError();
@@ -64,14 +64,14 @@ export default class SliceSelector extends SelectorExpression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.parent.declare(transpiler);
         const parentType = this.parent.check(transpiler.context);
         return parentType.declareSlice(transpiler, this.first, this.last);
 
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.parent.transpile(transpiler);
         const parentType = this.parent.check(transpiler.context);
         return parentType.transpileSlice(transpiler, this.first, this.last);

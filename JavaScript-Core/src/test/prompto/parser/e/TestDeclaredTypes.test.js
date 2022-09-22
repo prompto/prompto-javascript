@@ -1,4 +1,4 @@
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 var parseString = require("../../parser/BaseEParserTest").parseString;
 
 var Identifier = prompto.grammar.Identifier;

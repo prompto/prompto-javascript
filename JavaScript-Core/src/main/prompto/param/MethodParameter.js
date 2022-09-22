@@ -1,8 +1,8 @@
-import Parameter from './Parameter.js'
-import { MethodType } from '../type/index.js'
-import { ArrowValue, ContextualExpression } from '../value/index.js'
-import { ArrowExpression } from '../expression/index.js'
-import { SyntaxError } from '../error/index.js'
+import Parameter from '../../../main/prompto/param/Parameter.ts'
+import { MethodType } from '../type'
+import { ArrowValue, ContextualExpression } from '../value'
+import { ArrowExpression } from '../expression'
+import { SyntaxError } from '../error'
 
 export default class MethodParameter extends Parameter {
 
@@ -22,7 +22,7 @@ export default class MethodParameter extends Parameter {
         return this.name;
     }
 
-    register(context) {
+    register(context: Context): void {
         const actual = context.getRegisteredValue(this.name);
         if(actual!=null) {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
@@ -30,7 +30,7 @@ export default class MethodParameter extends Parameter {
         context.registerValue(this);
     }
 
-    check(context) {
+    check(context: Context): Type {
         const actual = context.getRegisteredDeclaration(this.name);
         if(actual==null) {
             throw new SyntaxError("Unknown method: \"" + this.name + "\"");
@@ -59,7 +59,7 @@ export default class MethodParameter extends Parameter {
             return null;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do ?
     }
 

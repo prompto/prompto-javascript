@@ -1,4 +1,4 @@
-import { NotMutableError } from '../error/index.js'
+import { NotMutableError } from '../error'
 
 export default class MemberInstance {
    
@@ -15,13 +15,13 @@ export default class MemberInstance {
         return this.parent.toString() + "." + this.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.parent.toDialect(writer);
         writer.append(".");
         writer.append(this.name);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const root = this.parent.interpret(context);
         return root.getMemberValue(context, this.id, true);
     }
@@ -47,16 +47,16 @@ export default class MemberInstance {
         root.setMember(context, this.id, value);
     }
 
-    check(context) {
+    check(context: Context): Type {
         const parentType = this.parent.check(context);
         return parentType.checkMember(context, this.id, this.name);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.parent.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.parent.transpile(transpiler);
         transpiler.append(".").append(this.name);
     }

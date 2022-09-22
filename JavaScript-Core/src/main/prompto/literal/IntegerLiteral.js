@@ -1,6 +1,6 @@
-import Literal from './Literal.js'
-import { IntegerType } from '../type/index.js'
-import { IntegerValue } from '../value/index.js'
+import Literal from './Literal.ts'
+import { IntegerType } from '../type'
+import { IntegerValue } from '../value'
 
 function parse(value) {
 	return parseInt(value);
@@ -12,15 +12,15 @@ export default class IntegerLiteral extends Literal {
         super(text, new IntegerValue(value || parse(text)));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return IntegerType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do;
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 }

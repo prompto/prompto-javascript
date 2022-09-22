@@ -1,4 +1,4 @@
-import Value from '../value/Value.js'
+import Value from '../value/Value.ts'
 
 export default class ValueExpression extends Value {
 
@@ -9,11 +9,11 @@ export default class ValueExpression extends Value {
         this.sliceable = value.slice ? value : null;
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.type;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if(this.value.interpret) {
             return this.value.interpret(context);
         } else {
@@ -21,13 +21,13 @@ export default class ValueExpression extends Value {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if(this.value.declare) {
             return this.value.declare(transpiler);
         }
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if (this.value.transpile) {
             return this.value.transpile(transpiler);
         }

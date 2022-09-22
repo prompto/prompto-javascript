@@ -1,5 +1,5 @@
 import antlr4 from "antlr4";
-import * as prompto from "../../../../main/prompto/index.js";
+import * as prompto from "../../../../main/prompto";
 
 class OTestParser extends prompto.parser.OCleverParser {
     constructor(code) {

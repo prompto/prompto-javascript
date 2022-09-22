@@ -1,6 +1,6 @@
-import NativeType from './NativeType.js'
-import { JsxType } from './index.js'
-import { Identifier } from '../grammar/index.js'
+import NativeType from './NativeType.ts'
+import { JsxType } from './index.ts'
+import { Identifier } from '../grammar'
 
 export default class HtmlType extends NativeType {
 
@@ -15,11 +15,11 @@ export default class HtmlType extends NativeType {
             return super.isAssignableFrom(context, other);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('Html');
     }
 }

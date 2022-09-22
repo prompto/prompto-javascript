@@ -1,9 +1,9 @@
-import Literal from './Literal.js'
-import { TypeType } from '../type/index.js'
-import { TypeValue } from '../value/index.js'
-import { Dialect } from '../parser/index.js'
-import { MethodDeclarationMap } from '../runtime/index.js'
-import { Type } from '../intrinsic/index.js'
+import Literal from './Literal.ts'
+import { TypeType } from '../type'
+import { TypeValue } from '../value'
+import { Dialect } from '../parser'
+import { MethodDeclarationMap } from '../runtime'
+import { Type } from '../intrinsic'
 
 export default class TypeLiteral extends Literal {
   
@@ -11,15 +11,15 @@ export default class TypeLiteral extends Literal {
         super(type.toString(), type);
     }
 
-    check(context) {
+    check(context: Context): Type {
         return new TypeType(this.value);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return new TypeValue(this.value);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(writer.dialect===Dialect.E) {
             const decl = writer.context.getRegisteredDeclaration(this.value.id);
             if(decl instanceof MethodDeclarationMap)
@@ -30,15 +30,15 @@ export default class TypeLiteral extends Literal {
         this.value.toDialect(writer);
     }
 
-    parentToDialect(writer) {
+    parenttoDialect(writer: CodeWriter): void {
         this.value.toDialect(writer);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(Type);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("new Type('").append(this.value.toString()).append("')");
         return false;
     }

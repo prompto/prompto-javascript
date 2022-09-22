@@ -5,7 +5,7 @@ export default class PythonNamedArgument {
         this.expression = expression;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.name);
         writer.append(" = ");
         this.expression.toDialect(writer);

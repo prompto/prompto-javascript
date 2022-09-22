@@ -1,9 +1,9 @@
-import Expression from './Expression.js'
-import { ResourceType, TextType } from '../type/index.js'
-import { NullReferenceError, InvalidResourceError } from '../error/index.js'
-import { TextValue } from '../value/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { ResourceType, TextType } from '../type'
+import { NullReferenceError, InvalidResourceError } from '../error'
+import { TextValue } from '../value'
 
-export default class ReadAllExpression extends Expression {
+export default class ReadAllExpression extends BaseExpression {
 
     constructor(resource) {
         super();
@@ -14,12 +14,12 @@ export default class ReadAllExpression extends Expression {
         return "read all from " + this.resource.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("read all from ");
         this.resource.toDialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         context = context.newResourceContext();
         const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
@@ -27,7 +27,7 @@ export default class ReadAllExpression extends Expression {
         return TextType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         context = context.newResourceContext();
         const res = this.resource.interpret(context);
         if(res==null) {
@@ -44,11 +44,11 @@ export default class ReadAllExpression extends Expression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.resource.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.resource.transpile(transpiler);
         transpiler.append(".readFully()");
     }

@@ -1,6 +1,6 @@
-import SimpleStatement from './SimpleStatement.js'
-import { BreakResult } from '../runtime/index.js'
-import { VoidType } from '../type/index.js'
+import SimpleStatement from '../../../main/prompto/statement/SimpleStatement.ts'
+import { BreakResult } from '../runtime'
+import { VoidType } from '../type'
 
 export default class BreakStatement extends SimpleStatement {
 
@@ -8,7 +8,7 @@ export default class BreakStatement extends SimpleStatement {
         return "break"
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("break");
     }
 
@@ -16,19 +16,19 @@ export default class BreakStatement extends SimpleStatement {
         return (obj instanceof BreakStatement);
     }
 
-    check(context) {
+    check(context: Context): Type {
         return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return BreakResult.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("break");
     }
 

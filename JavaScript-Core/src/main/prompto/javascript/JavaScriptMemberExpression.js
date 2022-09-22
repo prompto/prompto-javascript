@@ -11,7 +11,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
         return this.parent.toString() + "." + this.id.name;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const o = this.parent.interpret(context);
         if(o!=null) {
             return this.interpret_field(o);
@@ -20,7 +20,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
         }
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if (this.parent !== null) {
             this.parent.transpile(transpiler);
             transpiler.append(".");
@@ -35,7 +35,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
             return this.id.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if (this.parent !== null) {
             this.parent.toDialect(writer);
             writer.append('.');

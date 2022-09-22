@@ -8,7 +8,7 @@ export default class DictEntryList {
         }
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append('<');
         if(this.items.length>0) {
             this.items.forEach(item => {
@@ -21,13 +21,13 @@ export default class DictEntryList {
         writer.append('>');
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.items.forEach(item => {
             item.declare(transpiler);
         });
      }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('{');
         if(this.items.length>0) {
             this.items.forEach(item => {

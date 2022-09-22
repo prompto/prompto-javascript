@@ -1,5 +1,5 @@
-import ObjectList from '../utils/ObjectList.js'
-import { Dialect } from '../parser/index.js'
+import ObjectList from '../utils/ObjectList.ts'
+import { Dialect } from '../parser'
 
 export default class OrderByClauseList extends ObjectList {
 
@@ -7,7 +7,7 @@ export default class OrderByClauseList extends ObjectList {
         super(null, clause);
    }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("order by ");
         if(writer.dialect==Dialect.O)
             writer.append("( ");
@@ -32,7 +32,7 @@ export default class OrderByClauseList extends ObjectList {
         });
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.forEach(clause => {
             clause.declare(transpiler);
         });

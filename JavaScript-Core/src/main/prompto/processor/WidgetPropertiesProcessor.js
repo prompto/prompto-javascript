@@ -1,10 +1,10 @@
 import AnnotationProcessor from './AnnotationProcessor.js'
-import {PropertiesType, AnyType, TextType, TypeType, IntegerType} from '../type/index.js'
-import { TextLiteral, BooleanLiteral, DocumentLiteral, TypeLiteral, SetLiteral } from '../literal/index.js'
-import { InternalError } from '../error/index.js'
-import { Identifier } from '../grammar/index.js'
-import { PropertyMap, Property, ValueSetValidator, TypeSetValidator, TypeValidator, ValidatorSetValidator } from '../property/index.js'
-import {NullValue, BooleanValue, SetValue, TextValue, IntegerValue, DecimalValue, TypeValue} from '../value/index.js'
+import {PropertiesType, AnyType, TextType, TypeType, IntegerType} from '../type'
+import { TextLiteral, BooleanLiteral, DocumentLiteral, TypeLiteral, SetLiteral } from '../literal'
+import { InternalError } from '../error'
+import { Identifier } from '../grammar'
+import { PropertyMap, Property, ValueSetValidator, TypeSetValidator, TypeValidator, ValidatorSetValidator } from '../property'
+import {NullValue, BooleanValue, SetValue, TextValue, IntegerValue, DecimalValue, TypeValue} from '../value'
 
 export default class WidgetPropertiesProcessor extends AnnotationProcessor {
   

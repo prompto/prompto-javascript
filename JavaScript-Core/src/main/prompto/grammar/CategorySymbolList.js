@@ -1,4 +1,4 @@
-import SymbolList from './SymbolList.js'
+import SymbolList from './SymbolList.ts'
 
 export default class CategorySymbolList extends SymbolList {
 

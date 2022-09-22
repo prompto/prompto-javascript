@@ -1,4 +1,4 @@
-import JsxElementBase from './JsxElementBase.js'
+import JsxElementBase from './JsxElementBase.ts'
 
 export default class JsxSelfClosing extends JsxElementBase {
 
@@ -8,7 +8,7 @@ export default class JsxSelfClosing extends JsxElementBase {
         this.elementSuite = elementSuite;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("<").append(this.id.name);
         if(this.nameSuite!=null)
             writer.appendRaw(this.nameSuite);

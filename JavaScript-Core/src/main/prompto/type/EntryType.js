@@ -1,6 +1,6 @@
-import BaseType from './BaseType.js'
-import { TextType } from './index.js'
-import { Identifier } from '../grammar/index.js'
+import BaseType from '../../../main/prompto/type/BaseType.ts'
+import { TextType } from './index.ts'
+import { Identifier } from '../grammar'
 
 export default class EntryType extends BaseType {
 

@@ -1,4 +1,4 @@
-import Section from '../parser/Section.js'
+import Section from '../parser/Section.ts'
 
 export default class OrderByClause extends Section {
 
@@ -8,7 +8,7 @@ export default class OrderByClause extends Section {
         this.descending = descending || false;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.ids.forEach(id => {
             writer.append(id.toString());
             writer.append(".");
@@ -31,7 +31,7 @@ export default class OrderByClause extends Section {
         query.addOrderByClause(info, this.descending);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 

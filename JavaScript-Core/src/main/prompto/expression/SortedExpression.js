@@ -1,11 +1,11 @@
-import Expression from './Expression.js'
-import { UnresolvedIdentifier, ArrowExpression, InstanceExpression } from './index.js'
-import { CategoryType, DocumentType, ListType, SetType } from '../type/index.js'
-import { ListValue, SetValue } from '../value/index.js'
-import { List } from '../intrinsic/index.js'
-import { SyntaxError, NullReferenceError, InternalError } from '../error/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { UnresolvedIdentifier, ArrowExpression, InstanceExpression } from './index.ts'
+import { CategoryType, DocumentType, ListType, SetType } from '../type'
+import { ListValue, SetValue } from '../value'
+import { List } from '../intrinsic'
+import { SyntaxError, NullReferenceError, InternalError } from '../error'
 
-export default class SortedExpression extends Expression {
+export default class SortedExpression extends BaseExpression {
  
     constructor(source, desc, key) {
         super();
@@ -19,11 +19,11 @@ export default class SortedExpression extends Expression {
             (this.key == null ? "" : " with " + this.key.toString() + " as key");
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("sorted ");
         if (this.desc)
             writer.append("descending ");
@@ -50,7 +50,7 @@ export default class SortedExpression extends Expression {
         }
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("sorted ");
         if (this.desc)
             writer.append("desc ");
@@ -66,7 +66,7 @@ export default class SortedExpression extends Expression {
         writer.append(")");
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.toODialect(writer);
     }
 
@@ -79,7 +79,7 @@ export default class SortedExpression extends Expression {
             return writer;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const type = this.source.check(context);
         if (!(type instanceof ListType || type instanceof SetType)) {
             context.problemListener.reportCannotSort(this.source);
@@ -87,7 +87,7 @@ export default class SortedExpression extends Expression {
         return type;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const type = this.source.check(context);
         if (!(type instanceof ListType || type instanceof SetType)) {
             throw new SyntaxError("Unsupported type: " + type);
@@ -109,14 +109,14 @@ export default class SortedExpression extends Expression {
         return new ListValue(itemType, items);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(List);
         this.source.declare(transpiler);
         const type = this.source.check(transpiler.context);
         type.itemType.declareSorted(transpiler, this.key);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const type = this.source.check(transpiler.context);
         this.source.transpile(transpiler);
         transpiler.append(".sorted(");

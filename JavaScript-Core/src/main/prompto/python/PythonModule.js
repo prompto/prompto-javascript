@@ -4,7 +4,7 @@ export default class PythonModule {
         this.ids = ids;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(" from module: ");
         this.ids.forEach(id => {
             writer.append(id);

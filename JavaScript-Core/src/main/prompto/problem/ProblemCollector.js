@@ -1,4 +1,4 @@
-import ProblemListener from "./ProblemListener.js";
+import ProblemListener from "./ProblemListener.ts";
 
 // can't use a class for Problem because it must remain serializable
 // so can't have a Problem.toString() function

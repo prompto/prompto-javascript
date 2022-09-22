@@ -1,8 +1,8 @@
-import Expression from './Expression.js'
-import { CodeValue } from '../value/index.js'
-import { SyntaxError, PromptoError } from '../error/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { CodeValue } from '../value'
+import { SyntaxError, PromptoError } from '../error'
 
-export default class ExecuteExpression extends Expression {
+export default class ExecuteExpression extends BaseExpression {
 
     constructor(id) {
         super();
@@ -17,26 +17,26 @@ export default class ExecuteExpression extends Expression {
         return "execute: " + this.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("execute: ");
         writer.append(this.name);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("execute(");
         writer.append(this.name);
         writer.append(")");
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.toODialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         try {
             const value = context.getValue(this.id);
             if(value instanceof CodeValue) {
@@ -51,7 +51,7 @@ export default class ExecuteExpression extends Expression {
         }
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const value = context.getValue(this.id);
         if(value instanceof CodeValue) {
             return value.interpret(context);
@@ -60,12 +60,12 @@ export default class ExecuteExpression extends Expression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         const value = transpiler.context.getValue(this.id);
         value.declareCode(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("(");
         const value = transpiler.context.getValue(this.id);
         value.transpileCode(transpiler);

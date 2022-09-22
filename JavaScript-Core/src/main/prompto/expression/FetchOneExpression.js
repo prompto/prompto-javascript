@@ -1,11 +1,11 @@
-import Expression from './Expression.js'
-import { AnyType, CategoryType, VoidType } from '../type/index.js'
-import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store/index.js'
-import { NullValue } from '../value/index.js'
-import { CategoryDeclaration } from '../declaration/index.js'
-import { Identifier } from '../grammar/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { AnyType, CategoryType, VoidType } from '../type'
+import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store'
+import { NullValue } from '../value'
+import { CategoryDeclaration } from '../declaration'
+import { Identifier } from '../grammar'
 
-export default class FetchOneExpression extends Expression {
+export default class FetchOneExpression extends BaseExpression {
  
     constructor(type, predicate, include) {
         super();
@@ -14,11 +14,11 @@ export default class FetchOneExpression extends Expression {
         this.include = include
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("fetch one ");
         if(this.type!=null) {
             if(this.type.mutable)
@@ -43,7 +43,7 @@ export default class FetchOneExpression extends Expression {
         }
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("fetch one ");
         if(this.type!=null) {
             writer.append("(");
@@ -63,7 +63,7 @@ export default class FetchOneExpression extends Expression {
         }
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("fetch one ");
         if(this.type!=null) {
             if(this.type.mutable)
@@ -81,7 +81,7 @@ export default class FetchOneExpression extends Expression {
         }
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(this.type!=null) {
             const decl = context.getRegisteredDeclaration(this.type.id);
             if (decl == null || !(decl instanceof CategoryDeclaration)) {
@@ -96,7 +96,7 @@ export default class FetchOneExpression extends Expression {
         return this.type || AnyType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const store = $DataStore.instance;
         const query = this.buildFetchOneQuery(context, store);
         const stored = store.fetchOne (query);
@@ -111,7 +111,7 @@ export default class FetchOneExpression extends Expression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(MatchOp);
         transpiler.require($DataStore);
         transpiler.require(AttributeInfo);
@@ -122,7 +122,7 @@ export default class FetchOneExpression extends Expression {
             this.predicate.declareQuery(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         transpiler.append("var stored = $DataStore.instance.fetchOne(builder.build());").newLine();

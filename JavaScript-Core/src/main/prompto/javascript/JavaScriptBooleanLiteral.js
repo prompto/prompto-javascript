@@ -1,5 +1,5 @@
 import JavaScriptLiteral from './JavaScriptLiteral.js'
-import { BooleanType } from '../type/index.js'
+import { BooleanType } from '../type'
 
 export default class JavaScriptBooleanLiteral extends JavaScriptLiteral {
 
@@ -7,7 +7,7 @@ export default class JavaScriptBooleanLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context) {
+    check(context: Context): Type {
         return BooleanType.instance;
     }
 }

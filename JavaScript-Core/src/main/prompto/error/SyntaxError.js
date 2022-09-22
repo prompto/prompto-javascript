@@ -1,4 +1,4 @@
-import PromptoError from './PromptoError.js'
+import PromptoError from './PromptoError'
 
 export default class SyntaxError extends PromptoError {
 

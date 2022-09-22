@@ -1,11 +1,11 @@
-import Expression from './Expression.js'
-import { UnresolvedIdentifier, UnresolvedSelector } from './index.js'
-import { Dialect } from '../parser/index.js'
-import { MethodType, CategoryType } from '../type/index.js'
-import { Instance, ClosureValue, NullValue } from '../value/index.js'
-import { MethodDeclarationMap, InstanceContext } from '../runtime/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { UnresolvedIdentifier, UnresolvedSelector } from '../expression'
+import { Dialect } from '../parser'
+import { MethodType, CategoryType } from '../type'
+import { Instance, ClosureValue, NullValue } from '../value'
+import { MethodDeclarationMap, InstanceContext } from '../runtime'
 
-export default class MethodExpression extends Expression {
+export default class MethodExpression extends BaseExpression {
 
     constructor(expression) {
         super();
@@ -16,7 +16,7 @@ export default class MethodExpression extends Expression {
         return "Method: " + this.expression.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(writer.dialect === Dialect.E)
             writer.append("Method: ");
         if(this.expression instanceof UnresolvedSelector) {
@@ -27,7 +27,7 @@ export default class MethodExpression extends Expression {
             throw new Error("Unsupported!");
     }
 
-    check(context) {
+    check(context: Context): Type {
         const decl = this.getDeclaration(context);
         if (decl != null) {
             return new MethodType(decl);
@@ -90,7 +90,7 @@ export default class MethodExpression extends Expression {
             throw new Error("Unsupported!");
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         let expression = this.expression;
         if(expression instanceof UnresolvedSelector) {
             const parent = expression.parent;
@@ -114,7 +114,7 @@ export default class MethodExpression extends Expression {
             throw new Error("Unsupported!");
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         let expression = this.expression;
         let parent = null;
         if(expression instanceof UnresolvedSelector) {

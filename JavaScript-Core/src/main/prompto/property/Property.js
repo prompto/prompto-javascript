@@ -1,4 +1,4 @@
-import { AlwaysValidator } from './index.js'
+import { AlwaysValidator } from './index.ts'
 
 export default class Property {
 

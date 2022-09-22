@@ -1,4 +1,4 @@
-import NativeCategoryBinding from '../grammar/NativeCategoryBinding.js'
+import NativeCategoryBinding from '../grammar/NativeCategoryBinding.ts'
 
 export default class JavaNativeCategoryBinding extends NativeCategoryBinding {
 
@@ -7,7 +7,7 @@ export default class JavaNativeCategoryBinding extends NativeCategoryBinding {
         this.expression = expression;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("Java: ");
         this.expression.toDialect(writer);
     }

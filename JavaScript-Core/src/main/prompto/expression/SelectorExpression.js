@@ -1,7 +1,7 @@
-import Expression from './Expression.js'
-import { UnresolvedIdentifier } from './index.js'
+import BaseExpression from './BaseExpression.ts'
+import { UnresolvedIdentifier } from '../expression'
 
-export default class SelectorExpression extends Expression {
+export default class SelectorExpression extends BaseExpression {
 
     constructor(parent) {
         super();

@@ -1,4 +1,4 @@
-import NativeCategoryBinding from '../grammar/NativeCategoryBinding.js'
+import NativeCategoryBinding from '../../../main/prompto/grammar/NativeCategoryBinding.ts'
 
 export default class PythonNativeCategoryBinding extends NativeCategoryBinding {
 

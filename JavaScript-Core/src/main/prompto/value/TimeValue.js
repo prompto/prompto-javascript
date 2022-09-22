@@ -1,7 +1,7 @@
-import Value from './Value.js'
-import {PeriodValue, IntegerValue, TextValue} from './index.js'
-import {TimeType} from '../type/index.js'
-import {SyntaxError} from '../error/index.js'
+import Value from '../../../main/prompto/value/Value.ts'
+import {PeriodValue, IntegerValue, TextValue} from './index.ts'
+import {TimeType} from '../type'
+import {SyntaxError} from '../error'
 
 export default class TimeValue extends Value {
 
@@ -18,7 +18,7 @@ export default class TimeValue extends Value {
         return this.value.toString();
     }
 
-    getStorableData() {
+    getStorableData(): any {
         return this.value;
     }
 

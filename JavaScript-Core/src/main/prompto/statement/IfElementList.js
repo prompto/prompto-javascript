@@ -1,4 +1,4 @@
-import ObjectList from "../utils/ObjectList.js";
+import ObjectList from "../../../main/prompto/utils/ObjectList.ts";
 
 export default class IfElementList extends ObjectList {
 

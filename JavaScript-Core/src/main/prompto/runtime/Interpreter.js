@@ -1,12 +1,12 @@
-import { DictionaryType, TextType } from '../type/index.js'
-import { CmdLineParser } from '../utils/index.js'
-import { TextValue, DictionaryValue } from '../value/index.js'
-import { Identifier, Argument, ArgumentList } from '../grammar/index.js'
-import { ValueExpression, MethodSelector } from '../expression/index.js'
-import { MethodCall } from '../statement/index.js'
-import { UnresolvedParameter } from '../param/index.js'
-import { DictLiteral } from '../literal/index.js'
-import { SyntaxError } from '../error/index.js'
+import { DictionaryType, TextType } from '../type'
+import { CmdLineParser } from '../utils'
+import { TextValue, DictionaryValue } from '../value'
+import { Identifier, Argument, ArgumentList } from '../grammar'
+import { ValueExpression, MethodSelector } from '../expression'
+import { MethodCall } from '../statement'
+import { UnresolvedParameter } from '../param'
+import { DictLiteral } from '../literal'
+import { SyntaxError } from '../error'
 
 function parseCmdLineArgs(cmdLineArgs) {
 	try {

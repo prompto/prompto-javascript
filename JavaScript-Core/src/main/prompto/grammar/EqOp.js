@@ -4,7 +4,7 @@ export default class EqOp {
         this.name = name
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 

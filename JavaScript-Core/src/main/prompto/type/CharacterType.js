@@ -1,9 +1,9 @@
-import NativeType from './NativeType.js'
-import { IntegerType, BooleanType, TextType, RangeType } from './index.js'
-import { InvalidDataError } from '../error/index.js'
-import { Identifier } from '../grammar/index.js'
-import { CharacterValue, CharacterRangeValue } from '../value/index.js'
-import { Range, CharacterRange, IntegerRange } from "../intrinsic/index.js"
+import NativeType from '../../../main/prompto/type/NativeType.ts'
+import { IntegerType, BooleanType, TextType, RangeType } from './index.ts'
+import { InvalidDataError } from '../error'
+import { Identifier } from '../grammar'
+import { CharacterValue, CharacterRangeValue } from '../value'
+import { Range, CharacterRange, IntegerRange } from "../intrinsic"
 
 export default class CharacterType extends NativeType {
 
@@ -11,7 +11,7 @@ export default class CharacterType extends NativeType {
         super(new Identifier("Character"));
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 

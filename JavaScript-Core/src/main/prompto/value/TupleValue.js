@@ -1,7 +1,7 @@
-import BaseValueList from './BaseValueList.js'
-import { BooleanValue, SetValue } from './index.js'
-import { TupleType } from '../type/index.js'
-import { InternalError, SyntaxError } from '../error/index.js'
+import BaseValueList from '../../../main/prompto/value/BaseValueList.ts'
+import { BooleanValue, SetValue } from '../value'
+import { TupleType } from '../type'
+import { InternalError, SyntaxError } from '../error'
 
 export default class TupleValue extends BaseValueList {
 
@@ -13,7 +13,7 @@ export default class TupleValue extends BaseValueList {
         return "(" + this.items.join(", ") + ")";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append('(');
         super.toDialect(writer);
         writer.append(')');

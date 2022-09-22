@@ -1,10 +1,10 @@
 import ThisExpression from './ThisExpression.js'
-import { AnyType, CategoryType } from '../type/index.js'
-import { InstanceContext } from '../runtime/index.js'
+import { AnyType, CategoryType } from '../type'
+import { InstanceContext } from '../runtime'
 
 export default class SuperExpression extends ThisExpression {
 
-   check(context) {
+   check(context: Context): Type {
         return this.getSuperType(context);
     }
 
@@ -22,11 +22,11 @@ export default class SuperExpression extends ThisExpression {
             context.problemListener.reportNoSuperType(this, AnyType.instance);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("super");
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const type = this.getSuperType(transpiler.context);
         transpiler.append(type.name).append(".prototype");
     }

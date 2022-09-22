@@ -2,7 +2,7 @@ import antlr4 from 'antlr4';
 import MParser from './MParser.js'
 import MIndentingLexer from './MIndentingLexer.js'
 import MPromptoBuilder from './MPromptoBuilder.js'
-import { importFsIfNode } from '../utils/index.js'
+import { importFsIfNode } from '../utils'
 const fs = importFsIfNode();
 
 function createInput(input) {
@@ -24,10 +24,10 @@ function createInput(input) {
 
 export default class MCleverParser extends MParser {
 
-	constructor(input) {
+	constructor(input, debug?: boolean) {
 		super(createInput(input));
-		this.path = "";
-		return this;
+		if(debug)
+			this._interp.debug = true;
 	}
 
 	parse() {

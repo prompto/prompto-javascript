@@ -1,5 +1,5 @@
 import BinaryType from './BinaryType.js'
-import { Identifier } from '../grammar/index.js'
+import { Identifier } from '../grammar'
 
 export default class ImageType extends BinaryType {
 

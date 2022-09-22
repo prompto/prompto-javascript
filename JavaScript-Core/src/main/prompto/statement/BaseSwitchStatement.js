@@ -1,6 +1,6 @@
-import BaseStatement from './BaseStatement.js'
-import { SwitchCaseList } from './index.js'
-import { VoidType, TypeMap } from '../type/index.js'
+import BaseStatement from './BaseStatement.ts'
+import { SwitchCaseList } from './index.ts'
+import { VoidType, TypeMap } from '../type'
 
 export default class BaseSwitchStatement extends BaseStatement {
 
@@ -10,7 +10,7 @@ export default class BaseSwitchStatement extends BaseStatement {
         this.defaultCase = defaultCase || null;
     }
 
-    check(context) {
+    check(context: Context): Type {
         this.checkSwitchCasesType(context);
         return this.checkReturnType(context);
     }
@@ -72,7 +72,7 @@ export default class BaseSwitchStatement extends BaseStatement {
         }
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 

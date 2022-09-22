@@ -11,7 +11,7 @@ export default class JavaScriptItemExpression extends JavaScriptSelectorExpressi
         return this.parent.toString() + "[" + this.item.toString() + "]";
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const o = this.parent.interpret(context);
         if(o!=null) {
             return this.interpret_item(context, o);
@@ -20,7 +20,7 @@ export default class JavaScriptItemExpression extends JavaScriptSelectorExpressi
         }
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.parent.transpile(transpiler);
         transpiler.append("[");
         this.item.transpile(transpiler);
@@ -31,7 +31,7 @@ export default class JavaScriptItemExpression extends JavaScriptSelectorExpressi
         return this.parent.getRoot();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.parent.toDialect(writer);
         writer.append('[');
         this.item.toDialect(writer);

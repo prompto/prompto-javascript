@@ -1,4 +1,4 @@
-var prompto = require("../../../main/prompto/index");
+var prompto = require("../../../main/prompto");
 var parseResource = require("../parser/BaseOParserTest").parseResource;
 
 test('Transpiles WidgetField', () => {

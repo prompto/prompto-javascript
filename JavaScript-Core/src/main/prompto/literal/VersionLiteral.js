@@ -1,7 +1,7 @@
-import Literal from './Literal.js'
-import { VersionType } from '../type/index.js'
-import { VersionValue } from '../value/index.js'
-import { Version } from '../intrinsic/index.js'
+import Literal from '../../../main/prompto/literal/Literal.ts'
+import { VersionType } from '../type'
+import { VersionValue } from '../value'
+import { Version } from '../intrinsic'
 
 export default class VersionLiteral extends Literal {
 
@@ -10,15 +10,15 @@ export default class VersionLiteral extends Literal {
         super(text, new VersionValue(version));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return VersionType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(Version);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("Version.parse(").append(this.text).append(")");
     }
 }

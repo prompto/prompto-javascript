@@ -1,7 +1,7 @@
-import NativeType from './NativeType.js'
-import { Identifier } from '../grammar/index.js'
-import { DocumentType } from './index.js'
-import { Any } from '../intrinsic/index.js'
+import NativeType from './NativeType.ts'
+import { Identifier } from '../grammar'
+import { DocumentType } from '../type'
+import { Any } from '../intrinsic'
 
 export default class AnyType extends NativeType {
  
@@ -21,12 +21,12 @@ export default class AnyType extends NativeType {
         return DocumentType.instance.checkMember(context, section, id);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(Any);
         DocumentType.instance.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('Any');
     }
 

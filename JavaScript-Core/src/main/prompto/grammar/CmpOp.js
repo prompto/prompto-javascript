@@ -1,6 +1,6 @@
 export default class CmpOp {
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.toString());
     }
 }

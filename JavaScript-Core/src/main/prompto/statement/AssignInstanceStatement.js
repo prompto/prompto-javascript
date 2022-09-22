@@ -1,5 +1,5 @@
-import SimpleStatement from './SimpleStatement.js'
-import { VoidType, CodeType } from '../type/index.js'
+import SimpleStatement from '../../../main/prompto/statement/SimpleStatement.ts'
+import { VoidType, CodeType } from '../type'
 
 export default class AssignInstanceStatement extends SimpleStatement {
   
@@ -9,7 +9,7 @@ export default class AssignInstanceStatement extends SimpleStatement {
         this.expression = expression;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.instance.toDialect(writer, this.expression);
         writer.append(" = ");
         this.expression.toDialect(writer);
@@ -19,7 +19,7 @@ export default class AssignInstanceStatement extends SimpleStatement {
         return this.instance.toString() + " = " + this.expression.toString();
     }
 
-    check(context) {
+    check(context: Context): Type {
         const valueType = this.expression.check(context);
         if(valueType === VoidType.instance)
             context.problemListener.reportAssigningVoidType(this);
@@ -31,16 +31,16 @@ export default class AssignInstanceStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         this.instance.assign(context, this.expression);
         return null;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.instance.declareAssign(transpiler, this.expression);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const valueType = this.expression.check(transpiler.context);
         // don't assign Code expressions
         if (valueType === CodeType.instance) {

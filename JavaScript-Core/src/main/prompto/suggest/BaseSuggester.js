@@ -1,4 +1,4 @@
-import { AnnotationProcessors } from "../processor/index.js";
+import { AnnotationProcessors } from "../processor";
 import NodeLocator from "./NodeLocator.js";
 
 export default class BaseSuggester {

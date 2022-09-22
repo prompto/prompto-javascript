@@ -1,7 +1,7 @@
-import Section from "../parser/Section.js";
-import { TextValue } from '../value/index.js'
-import { InstanceExpression } from '../expression/index.js'
-import { TextType } from "../type/index.js";
+import Section from "../parser/Section.ts";
+import { TextValue } from '../value'
+import { InstanceExpression } from '../expression'
+import { TextType } from "../type";
 
 export default class DictIdentifierKey extends Section {
 
@@ -14,7 +14,7 @@ export default class DictIdentifierKey extends Section {
         return this.id.toString();
     }
 
-    check(context) {
+    check(context: Context): Type {
         const named = context.getRegisteredValue(this.id.toString());
         if (named === null) {
             context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
@@ -23,7 +23,7 @@ export default class DictIdentifierKey extends Section {
         }
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const value = new InstanceExpression(this.id).interpret(context);
         if(value instanceof TextValue)
             return value;
@@ -33,7 +33,7 @@ export default class DictIdentifierKey extends Section {
         }
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("[").append(this.id.name).append("]");
     }
 

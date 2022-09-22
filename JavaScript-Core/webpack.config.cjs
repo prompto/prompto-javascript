@@ -11,16 +11,11 @@ const terser_options = {
 const terser_plugin = new TerserPlugin(terser_options);
 
 module.exports = {
-    entry: './src/main/index-full.js',
+    entry: './src/main/index.ts',
     output: {
         globalObject: 'this',
         path: target_dir,
         filename: 'prompto.core.bundle.js'
-    },
-    node: {
-        module: "empty",
-        net: "empty",
-        fs: "empty"
     },
     optimization: {
         minimizer : [ terser_plugin ]
@@ -28,12 +23,10 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js)$/,
-                exclude: [/node_modules/,/antlr4/],
+                test: /\.ts$/,
+                exclude: /(node_modules | antlr4)/,
                 use: [
-                        'babel-loader',
-                        "eslint-loader",
-                        'webpack-conditional-loader'
+                        'ts-loader'
                     ]
             }
         ]

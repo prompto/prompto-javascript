@@ -1,6 +1,6 @@
-import { NotMutableError } from '../error/index.js'
-import { AnyType } from '../type/index.js'
-import { SyntaxError } from '../error/index.js'
+import { NotMutableError } from '../error'
+import { AnyType } from '../type'
+import { SyntaxError } from '../error'
 
 export default class ItemInstance {
 
@@ -13,14 +13,14 @@ export default class ItemInstance {
         return this.parent.toString() + "[" + this.item.toString() + "]";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.parent.toDialect(writer);
         writer.append('[');
         this.item.toDialect(writer);
         writer.append(']');
     }
 
-    check(context) {
+    check(context: Context): Type {
         const parentType = this.parent.check(context);
         const itemType = this.item.check(context);
         return parentType.checkItem(context, itemType);
@@ -52,7 +52,7 @@ export default class ItemInstance {
         }
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const root = this.parent.interpret(context);
         const item = this.item.interpret(context);
         if (root.getItemInContext) {
@@ -62,12 +62,12 @@ export default class ItemInstance {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.parent.declare(transpiler);
         this.item.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.parent.transpile(transpiler);
         transpiler.append(".item(");
         this.item.transpile(transpiler);

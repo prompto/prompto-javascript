@@ -1,7 +1,7 @@
-import SimpleStatement from './SimpleStatement.js'
-import { VoidType, ResourceType } from '../type/index.js'
-import { Variable } from '../runtime/index.js'
-import { SyntaxError } from '../error/index.js'
+import SimpleStatement from '../../../main/prompto/statement/SimpleStatement.ts'
+import { VoidType, ResourceType } from '../type'
+import { Variable } from '../runtime'
+import { SyntaxError } from '../error'
 
 export default class AssignVariableStatement extends SimpleStatement {
 
@@ -15,7 +15,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         return this.id.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.name);
         writer.append(" = ");
         this.expression.toDialect(writer);
@@ -47,7 +47,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         return this.name === obj.name && this.expression === obj.expression;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const actual = context.getRegisteredValue(this.name);
         if(actual==null) {
             const actualType = this.expression.check(context);
@@ -61,7 +61,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if(context.getRegisteredValue(this.name)==null) {
             const actualType = this.expression.check(context);
             context.registerValue(new Variable(this.id, actualType));
@@ -70,7 +70,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         return null;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         const actual = transpiler.context.getRegisteredValue(this.name);
         if(actual==null) {
             const actualType = this.expression.check(transpiler.context);
@@ -79,7 +79,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         this.expression.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const actual = transpiler.context.getRegisteredValue(this.name);
         if(actual==null) {
             const actualType = this.expression.check(transpiler.context);

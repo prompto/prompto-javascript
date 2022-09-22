@@ -1,9 +1,9 @@
-import BaseStatement from './BaseStatement.js'
-import { ResourceContext } from '../runtime/index.js'
-import { VoidType, ResourceType, TextType } from '../type/index.js'
-import { TextValue } from '../value/index.js'
-import { NullReferenceError, InvalidResourceError } from '../error/index.js'
-import {StatementList} from "./index.js";
+import BaseStatement from './BaseStatement.ts'
+import { ResourceContext } from '../runtime'
+import { VoidType, ResourceType, TextType } from '../type'
+import { TextValue } from '../value'
+import { NullReferenceError, InvalidResourceError } from '../error'
+import {StatementList} from "../statement";
 
 export default class WriteStatement extends BaseStatement {
 
@@ -31,7 +31,7 @@ export default class WriteStatement extends BaseStatement {
         return "write " + this.content.toString() + " to " + this.resource.toString();
     }
 
-    check(context) {
+    check(context: Context): Type {
         context = context instanceof ResourceContext ? context : context.newResourceContext();
         const resourceType = this.resource.check(context);
         if(!(resourceType instanceof ResourceType))
@@ -42,7 +42,7 @@ export default class WriteStatement extends BaseStatement {
             return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const resContext = context instanceof ResourceContext ? context : context.newResourceContext();
         const res = this.resource.interpret(resContext);
         if(res==null) {
@@ -67,7 +67,7 @@ export default class WriteStatement extends BaseStatement {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if(!(transpiler.context instanceof ResourceContext))
             transpiler = transpiler.newResourceTranspiler();
         this.resource.declare(transpiler);
@@ -76,7 +76,7 @@ export default class WriteStatement extends BaseStatement {
             this.thenWith.declare(transpiler, TextType.instance);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if (transpiler.context instanceof ResourceContext)
             this.transpileLine(transpiler);
         else
@@ -109,27 +109,27 @@ export default class WriteStatement extends BaseStatement {
         transpiler.flush();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
         if(this.thenWith)
             this.thenWith.toDialect(writer, TextType.instance);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("write ");
         this.content.toDialect(writer);
         writer.append(" to ");
         this.resource.toDialect(writer);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("write (");
         this.content.toDialect(writer);
         writer.append(") to ");
         this.resource.toDialect(writer);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.toEDialect(writer);
     }
 }

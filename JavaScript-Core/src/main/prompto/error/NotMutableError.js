@@ -1,5 +1,5 @@
-import ExecutionError from './ExecutionError.js'
-import { Identifier } from "../grammar/index.js";
+import ExecutionError from '../../../main/prompto/error/ExecutionError.ts'
+import { Identifier } from "../grammar";
 
 export default class NotMutableError extends ExecutionError {
 

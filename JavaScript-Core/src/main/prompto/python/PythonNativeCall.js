@@ -1,4 +1,4 @@
-import NativeCall from '../statement/NativeCall.js'
+import NativeCall from '../statement/NativeCall.ts'
 
 export default class PythonNativeCall extends NativeCall {
 
@@ -7,7 +7,7 @@ export default class PythonNativeCall extends NativeCall {
         this.statement = statement;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.statement.toDialect(writer);
     }
 }

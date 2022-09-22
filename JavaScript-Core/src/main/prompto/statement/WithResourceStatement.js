@@ -1,5 +1,5 @@
-import BaseStatement from './BaseStatement.js'
-import {StatementList} from "./index.js";
+import BaseStatement from './BaseStatement.ts'
+import {StatementList} from "./index.ts";
 
 export default class WithResourceStatement extends BaseStatement {
 
@@ -18,13 +18,13 @@ export default class WithResourceStatement extends BaseStatement {
             return null;
     }
 
-    check(context) {
+    check(context: Context): Type {
         context = context.newResourceContext();
         this.resource.checkResource(context);
         return this.statements.check(context, null);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         context = context.newResourceContext();
         try {
             this.resource.interpret(context);
@@ -37,13 +37,13 @@ export default class WithResourceStatement extends BaseStatement {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler = transpiler.newResourceTranspiler();
         this.resource.declare(transpiler);
         this.statements.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler = transpiler.newResourceTranspiler();
         this.resource.transpile(transpiler);
         transpiler.append(";").newLine();
@@ -56,11 +56,11 @@ export default class WithResourceStatement extends BaseStatement {
         return true;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("with ");
         this.resource.toDialect(writer);
         writer.append(", do:").newLine().indent();
@@ -68,7 +68,7 @@ export default class WithResourceStatement extends BaseStatement {
         writer.dedent();
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("with (");
         this.resource.toDialect(writer);
         writer.append(")");
@@ -83,7 +83,7 @@ export default class WithResourceStatement extends BaseStatement {
         }
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("with ");
         this.resource.toDialect(writer);
         writer.append(":").newLine().indent();

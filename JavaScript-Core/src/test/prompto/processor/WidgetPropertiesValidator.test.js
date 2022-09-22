@@ -1,4 +1,4 @@
-var prompto = require("../../../main/prompto/index.js");
+var prompto = require("../../../main/prompto");
 var parseString = require("../parser/BaseOParserTest.js").parseString;
 
 it("validates a mixed set of Type and values", () => {

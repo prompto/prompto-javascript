@@ -1,5 +1,5 @@
 import JavaScriptLiteral from './JavaScriptLiteral.js'
-import { TextType } from '../type/index.js'
+import { TextType } from '../type'
 
 export default class JavaScriptTextLiteral extends JavaScriptLiteral {
 
@@ -7,7 +7,7 @@ export default class JavaScriptTextLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context) {
+    check(context: Context): Type {
         return TextType.instance;
     }
 }

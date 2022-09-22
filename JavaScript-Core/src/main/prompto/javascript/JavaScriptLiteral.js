@@ -5,7 +5,7 @@ export default class JavaScriptLiteral {
         this.value = eval(text);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return this.value;
     }
 
@@ -13,11 +13,11 @@ export default class JavaScriptLiteral {
         return this.text;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.text);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 }

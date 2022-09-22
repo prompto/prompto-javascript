@@ -1,8 +1,8 @@
-import Literal from './Literal.js'
-import { TupleType } from '../type/index.js'
-import { TupleValue } from '../value/index.js'
-import { List, Tuple } from '../intrinsic/index.js'
-import { ExpressionList } from '../expression/index.js'
+import Literal from '../../../main/prompto/literal/Literal.ts'
+import { TupleType } from '../type'
+import { TupleValue } from '../value'
+import { List, Tuple } from '../intrinsic'
+import { ExpressionList } from '../expression'
 
 export default class TupleLiteral extends Literal {
 
@@ -15,23 +15,23 @@ export default class TupleLiteral extends Literal {
         this.expressions = expressions;
     }
 
-    check(context) {
+    check(context: Context): Type {
         return TupleType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(List);
         transpiler.require(Tuple);
         this.expressions.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("new Tuple(").append(this.mutable).append(", [");
         this.expressions.transpile(transpiler);
         transpiler.append("])");
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if(this.expressions.length>0) {
             const tuple = new TupleValue();
             this.expressions.forEach(expression => {
@@ -44,7 +44,7 @@ export default class TupleLiteral extends Literal {
             return this.value;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.mutable)
             writer.append("mutable ");
         if(this.expressions!=null) {

@@ -1,4 +1,4 @@
-import { Context } from './index.js'
+import { Context } from './index.ts'
 
 export default class ApplicationContext {
  

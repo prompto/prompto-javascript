@@ -1,4 +1,4 @@
-import NamedInstance from "../grammar/NamedInstance.js";
+import NamedInstance from "../../../main/prompto/grammar/NamedInstance.ts";
 
 /* used for downcast */
 

@@ -1,5 +1,5 @@
-import NativeType from './NativeType.js'
-import { Identifier } from '../grammar/index.js'
+import NativeType from './NativeType.ts'
+import { Identifier } from '../grammar'
 
 export default class VoidType extends NativeType {
 

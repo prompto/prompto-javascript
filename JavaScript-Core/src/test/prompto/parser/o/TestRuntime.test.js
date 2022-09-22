@@ -1,5 +1,5 @@
 import antlr4 from "antlr4";
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 var Out = require("../../runtime/utils/Out").Out;
 
 var os = require("os");

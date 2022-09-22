@@ -1,11 +1,11 @@
-import BaseStatement from './BaseStatement.js'
-import { Variable, BreakResult } from '../runtime/index.js'
-import { IntegerType, ListType, DictionaryType } from '../type/index.js'
-import { InternalError } from '../error/index.js'
-import { StrictSet } from '../intrinsic/index.js'
-import { IntegerValue } from '../value/index.js'
-import {Section} from "../parser/index.js";
-import {StatementList} from "./index.js";
+import BaseStatement from '../../../main/prompto/statement/BaseStatement.ts'
+import { Variable, BreakResult } from '../runtime'
+import { IntegerType, ListType, DictionaryType } from '../type'
+import { InternalError } from '../error'
+import { StrictSet } from '../intrinsic'
+import { IntegerValue } from '../value'
+import {Section} from "../parser";
+import {StatementList} from "./index.ts";
 
 export default class ForEachStatement extends BaseStatement {
 
@@ -29,7 +29,7 @@ export default class ForEachStatement extends BaseStatement {
             return null;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const srcType = this.source.check(context);
         const elemType = srcType.checkIterator(context, this.source);
         return this.checkItemIterator(elemType, context);
@@ -45,7 +45,7 @@ export default class ForEachStatement extends BaseStatement {
         return this.statements.check(child, null);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const srcType = this.source.check(context);
         const elemType = srcType.checkIterator(context, this.source);
         return this.interpretItemIterator(elemType, context);
@@ -104,7 +104,7 @@ export default class ForEachStatement extends BaseStatement {
         return null;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer = writer.newChildWriter();
         const srcType = this.source.check(writer.context);
         const elemType = srcType.checkIterator(writer.context, this.source);
@@ -115,7 +115,7 @@ export default class ForEachStatement extends BaseStatement {
         writer.toDialect(this);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("for each (");
         writer.append(this.v1.name);
         if(this.v2 !== null) {
@@ -138,7 +138,7 @@ export default class ForEachStatement extends BaseStatement {
         }
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("for each ");
         writer.append(this.v1.name);
         if(this.v2 !== null) {
@@ -154,7 +154,7 @@ export default class ForEachStatement extends BaseStatement {
         writer.dedent();
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("for ");
         writer.append(this.v1.name);
         if(this.v2!=null) {
@@ -174,7 +174,7 @@ export default class ForEachStatement extends BaseStatement {
         return true;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         const srcType = this.source.check(transpiler.context);
         if(srcType instanceof DictionaryType)
             transpiler.require(StrictSet);
@@ -189,7 +189,7 @@ export default class ForEachStatement extends BaseStatement {
         this.statements.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if(this.v2)
             this.transpileWithIndex(transpiler);
         else

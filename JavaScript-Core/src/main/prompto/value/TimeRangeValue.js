@@ -1,8 +1,8 @@
 import RangeValue from "./RangeValue.js"
-import { TimeType } from "../type/index.js"
-import { IndexOutOfRangeError } from "../error/index.js"
-import { TimeValue } from "../value/index.js"
-import { LocalTime } from "../intrinsic/index.js"
+import { TimeType } from "../type"
+import { IndexOutOfRangeError } from "../error"
+import { TimeValue } from "./index.ts"
+import { LocalTime } from "../intrinsic"
 
 export default class TimeRangeValue extends RangeValue {
 

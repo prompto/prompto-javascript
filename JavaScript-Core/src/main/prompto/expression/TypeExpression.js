@@ -1,15 +1,15 @@
-import Expression from './Expression.js'
-import { TypeType } from '../type/index.js'
-import { TypeValue } from '../value/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { TypeType } from '../type'
+import { TypeValue } from '../value'
 
-export default class TypeExpression extends Expression {
+export default class TypeExpression extends BaseExpression {
 
     constructor(value) {
         super();
         this.value = value;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.value.toString());
     }
 
@@ -17,20 +17,20 @@ export default class TypeExpression extends Expression {
         return this.value.toString();
     }
 
-    check(context) {
+    check(context: Context): Type {
         this.value.checkExists(context);
         return new TypeType(this.value);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return new TypeValue(this.value);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.value.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.value.transpile(transpiler);
     }
 

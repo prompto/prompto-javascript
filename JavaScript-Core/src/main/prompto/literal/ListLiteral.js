@@ -1,9 +1,9 @@
-import Literal from './Literal.js'
-import { ListType, MissingType, CharacterType, TextType, DecimalType, IntegerType } from '../type/index.js'
-import { ListValue, TextValue, DecimalValue } from '../value/index.js'
-import { List } from '../intrinsic/index.js'
-import { ExpressionList } from '../expression/index.js'
-import { inferExpressionsType } from '../utils/index.js'
+import Literal from './Literal.ts'
+import { ListType, MissingType, CharacterType, TextType, DecimalType, IntegerType } from '../type'
+import { ListValue, TextValue, DecimalValue } from '../value'
+import { List } from '../intrinsic'
+import { ExpressionList } from '../expression'
+import { inferExpressionsType } from '../utils'
 
 export default class ListLiteral extends Literal {
 
@@ -15,7 +15,7 @@ export default class ListLiteral extends Literal {
         this.expressions = expressions;
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(this.itemType==null) {
             this.itemType = inferExpressionsType(context, this.expressions);
             this.type = new ListType(this.itemType, this.mutable);
@@ -23,7 +23,7 @@ export default class ListLiteral extends Literal {
         return this.type;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if(this.expressions.length) {
             const self = this;
             this.check(context); // force computation of itemType
@@ -49,7 +49,7 @@ export default class ListLiteral extends Literal {
             return item;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.mutable)
             writer.append("mutable ");
         if(this.expressions!=null) {
@@ -60,13 +60,13 @@ export default class ListLiteral extends Literal {
             writer.append("[]");
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(List);
         if(this.expressions!=null)
             this.expressions.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("new List(").append(this.mutable).append(", [");
         if(this.expressions!=null) {
             this.expressions.transpile(transpiler);

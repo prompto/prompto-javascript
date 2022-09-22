@@ -1,7 +1,7 @@
-import Value from './Value.js'
-import { PeriodValue, DateValue, TextValue, TimeValue, IntegerValue } from './index.js'
-import { DateTimeType } from '../type/index.js'
-import { SyntaxError } from '../error/index.js'
+import Value from './Value.ts'
+import { PeriodValue, DateValue, TextValue, TimeValue, IntegerValue } from './index.ts'
+import { DateTimeType } from '../type'
+import { SyntaxError } from '../error'
 
 export default class DateTimeValue extends Value {
   
@@ -10,7 +10,7 @@ export default class DateTimeValue extends Value {
         this.value = value;
    }
 
-    getStorableData() {
+    getStorableData(): any {
         return this.value;
     }
 

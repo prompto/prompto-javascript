@@ -1,11 +1,11 @@
-import NativeType from './NativeType.js'
-import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { IntegerValue, IntegerRangeValue } from '../value/index.js'
-import { FormatMethodDeclaration } from '../builtins/IntegerTypeBuiltins.js'
-import { isAnInteger } from '../utils/index.js'
-import { Range, IntegerRange } from '../intrinsic/index.js'
-import {TypeFamily} from "../store/index.js";
+import NativeType from '../../../main/prompto/type/NativeType.ts'
+import { DecimalType, TextType, BooleanType, CharacterType, RangeType, ListType, PeriodType } from './index.ts'
+import { Identifier } from '../grammar'
+import { IntegerValue, IntegerRangeValue } from '../value'
+import { FormatMethodDeclaration } from '../../../main/prompto/builtins/IntegerTypeBuiltins.ts'
+import { isAnInteger } from '../utils'
+import { Range, IntegerRange } from '../intrinsic'
+import {TypeFamily} from "../store";
 
 export default class IntegerType extends NativeType {
 
@@ -19,11 +19,11 @@ export default class IntegerType extends NativeType {
             || (other === DecimalType.instance);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
          transpiler.require(isAnInteger);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('"Integer"');
     }
 

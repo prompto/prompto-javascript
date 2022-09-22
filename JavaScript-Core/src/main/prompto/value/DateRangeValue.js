@@ -1,8 +1,8 @@
 import RangeValue from "./RangeValue.js"
-import { DateType } from "../type/index.js"
-import { IndexOutOfRangeError } from "../error/index.js"
-import { DateValue } from "../value/index.js"
-import { LocalDate } from "../intrinsic/index.js"
+import { DateType } from "../type"
+import { IndexOutOfRangeError } from "../error"
+import { DateValue } from "./index.ts"
+import { LocalDate } from "../intrinsic"
 
 export default class DateRangeValue extends RangeValue {
 

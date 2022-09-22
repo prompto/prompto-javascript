@@ -1,7 +1,7 @@
-import Literal from './Literal.js'
-import { DateType } from '../type/index.js'
-import { DateValue } from '../value/index.js'
-import { LocalDate } from '../intrinsic/index.js'
+import Literal from './Literal.ts'
+import { DateType } from '../type'
+import { DateValue } from '../value'
+import { LocalDate } from '../intrinsic'
 
 export default class DateLiteral extends Literal {
 
@@ -9,15 +9,15 @@ export default class DateLiteral extends Literal {
         super(text, new DateValue(LocalDate.parse(text.substring(1,text.length-1))));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return DateType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(LocalDate);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("LocalDate.parse(").append(this.text).append(")");
     }
 }

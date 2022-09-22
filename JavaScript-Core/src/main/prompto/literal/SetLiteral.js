@@ -1,8 +1,8 @@
-import Literal from './Literal.js'
-import { ExpressionList } from '../expression/index.js'
-import { SetValue, DecimalValue, TextValue } from '../value/index.js'
-import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from '../type/index.js'
-import { inferExpressionsType } from '../utils/index.js'
+import Literal from '../../../main/prompto/literal/Literal.ts'
+import { ExpressionList } from '../expression'
+import { SetValue, DecimalValue, TextValue } from '../value'
+import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from '../type'
+import { inferExpressionsType } from '../utils'
 import StrictSet from "../intrinsic/StrictSet.js"
 
 export default class SetLiteral extends Literal {
@@ -14,7 +14,7 @@ export default class SetLiteral extends Literal {
         this.expressions = expressions;
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(this.itemType==null) {
             this.itemType = inferExpressionsType(context, this.expressions);
             this.type = new SetType(this.itemType);
@@ -22,18 +22,18 @@ export default class SetLiteral extends Literal {
         return this.type;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(StrictSet);
         this.expressions.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("new StrictSet([");
         this.expressions.transpile(transpiler);
         transpiler.append("])");
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const self = this;
         this.check(context); // force computation of itemType
         const value = new SetValue(this.itemType);
@@ -56,7 +56,7 @@ export default class SetLiteral extends Literal {
             return item;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.expressions!=null) {
             writer.append('<');
             this.expressions.toDialect(writer);

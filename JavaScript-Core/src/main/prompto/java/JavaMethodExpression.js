@@ -1,5 +1,5 @@
 import JavaSelectorExpression from './JavaSelectorExpression.js'
-import { JavaExpressionList } from './index.js'
+import { JavaExpressionList } from '../java'
 
 export default class JavaMethodExpression extends JavaSelectorExpression {
 
@@ -13,7 +13,7 @@ export default class JavaMethodExpression extends JavaSelectorExpression {
         return this.parent.toString() + "." + this.name + "(" + this.args.toString() + ")";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.parent.toDialect(writer);
         writer.append('.');
         writer.append(this.name);

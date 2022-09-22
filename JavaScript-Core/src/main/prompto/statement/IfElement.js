@@ -1,8 +1,8 @@
-import BaseStatement from "./BaseStatement.js";
-import {StatementList} from "./index.js";
-import {Section} from "../parser/index.js";
-import {BooleanType} from "../type/index.js";
-import {EqualsExpression} from "../expression/index.js";
+import BaseStatement from "./BaseStatement.ts";
+import {StatementList} from "./index.ts";
+import {Section} from "../parser";
+import {BooleanType} from "../type";
+import {EqualsExpression} from "../expression";
 
 export default class IfElement extends BaseStatement {
 
@@ -28,7 +28,7 @@ export default class IfElement extends BaseStatement {
             return null;
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(this.condition) {
             const type = this.condition.check(context);
             if(type!=BooleanType.instance) {
@@ -44,7 +44,7 @@ export default class IfElement extends BaseStatement {
         return statements.check(context, null);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if(this.condition)
             this.condition.declare(transpiler);
         let context = transpiler.context;
@@ -57,7 +57,7 @@ export default class IfElement extends BaseStatement {
         this.statements.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         let context = transpiler.context;
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downcast(context, false);
@@ -77,16 +77,16 @@ export default class IfElement extends BaseStatement {
         return context;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         context = this.downcast(context, true);
         return this.statements.interpret(context);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.toEDialect(writer);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         let context = writer.context;
         if(this.condition!=null) {
             writer.append("if ");
@@ -100,7 +100,7 @@ export default class IfElement extends BaseStatement {
         writer.dedent();
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         let context = writer.context;
         if(this.condition!=null)
         {

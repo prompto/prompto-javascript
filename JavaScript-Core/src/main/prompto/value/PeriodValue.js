@@ -1,7 +1,7 @@
-import Value from './Value.js'
-import { IntegerValue, TextValue } from './index.js'
-import { SyntaxError } from '../error/index.js'
-import { PeriodType } from '../type/index.js'
+import Value from './Value.ts'
+import { IntegerValue, TextValue } from './index.ts'
+import { SyntaxError } from '../error'
+import { PeriodType } from '../type'
 
 
 export default class PeriodValue extends Value {

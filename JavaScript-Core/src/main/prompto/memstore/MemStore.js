@@ -1,6 +1,6 @@
 import Store from '../store/Store.js'
-import {MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata, StoredDocument} from './index.js'
-import {DateTime, Document, List} from '../intrinsic/index.js'
+import {MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata, StoredDocument} from '../memstore'
+import {DateTime, Document, List} from '../intrinsic'
 
 // a utility class for running tests only
 export default class MemStore extends Store {

@@ -10,7 +10,7 @@ export default class JavaThisExpression extends JavaExpression {
         return "this";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("this");
     }
 }

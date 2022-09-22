@@ -1,6 +1,6 @@
-import Value from './Value.js'
-import { CssType } from '../type/index.js'
-import { SyntaxError } from "../error/index.js";
+import Value from '../../../main/prompto/value/Value.ts'
+import { CssType } from '../type'
+import { SyntaxError } from "../error";
 
 export default class CssValue extends Value {
 

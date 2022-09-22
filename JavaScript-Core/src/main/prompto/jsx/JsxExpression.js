@@ -1,7 +1,7 @@
-import IJsxExpression from './IJsxExpression.js'
-import { ArrowExpression } from '../expression/index.js'
-import { Literal } from '../literal/index.js'
-import { VoidType } from '../type/index.js'
+import IJsxExpression from './IJsxExpression.ts'
+import { ArrowExpression } from '../expression'
+import { Literal } from '../literal'
+import { VoidType } from '../type'
 
 export default class JsxExpression extends IJsxExpression {
 
@@ -10,7 +10,7 @@ export default class JsxExpression extends IJsxExpression {
         this.expression = expression;
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.expression ? this.expression.check(context) : VoidType.instance;
     }
 
@@ -45,19 +45,19 @@ export default class JsxExpression extends IJsxExpression {
         return this.expression ? this.expression.toString() : "";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("{");
         if(this.expression)
             this.expression.toDialect(writer);
         writer.append("}");
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if(this.expression)
             this.expression.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if(this.expression)
             this.expression.transpile(transpiler);
     }

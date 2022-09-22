@@ -1,11 +1,11 @@
-import BaseStatement from './BaseStatement.js'
-import { Dialect } from '../parser/index.js'
-import { VoidType, MethodType, CategoryType } from '../type/index.js'
-import { CodeWriter } from '../utils/index.js'
-import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from '../expression/index.js'
-import { MethodCall } from '../statement/index.js'
-import { CategoryDeclaration } from '../declaration/index.js'
-import { SyntaxError } from '../error/index.js'
+import BaseStatement from './BaseStatement.ts'
+import { Dialect } from '../parser'
+import { VoidType, MethodType, CategoryType } from '../type'
+import { CodeWriter } from '../utils'
+import { UnresolvedIdentifier, UnresolvedSelector, MemberSelector, MethodSelector, ConstructorExpression, SelectorExpression } from '../expression'
+import { MethodCall } from '../statement'
+import { CategoryDeclaration } from '../declaration'
+import { SyntaxError } from '../error'
 
 export default class UnresolvedCall extends BaseStatement {
  
@@ -20,7 +20,7 @@ export default class UnresolvedCall extends BaseStatement {
         return true;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         try {
             this.resolve(writer.context);
             this.resolved.toDialect(writer);
@@ -37,16 +37,16 @@ export default class UnresolvedCall extends BaseStatement {
         return this.callable.toString() + (this.args!=null ? this.args.toString() : "");
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.resolveAndCheck(context);
     }
 
-    resolveAndCheck(context) {
+    resolveAndcheck(context: Context): Type {
         this.resolve(context);
         return this.resolved ? this.resolved.check(context) : VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         this.resolve(context);
         return this.resolved ? this.resolved.interpret(context) : null;
     }
@@ -166,13 +166,13 @@ export default class UnresolvedCall extends BaseStatement {
         return call;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.resolve(transpiler.context);
         if(this.resolved)
             this.resolved.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.resolve(transpiler.context);
         if(this.resolved)
             this.resolved.transpile(transpiler);

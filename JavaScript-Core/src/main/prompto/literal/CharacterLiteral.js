@@ -1,6 +1,6 @@
-import Literal from './Literal.js'
-import { CharacterType } from '../type/index.js'
-import { CharacterValue } from '../value/index.js'
+import Literal from './Literal.ts'
+import { CharacterType } from '../type'
+import { CharacterValue } from '../value'
 
 /*jshint evil:true*/
 function unescape(text) {
@@ -13,15 +13,15 @@ export default class CharacterLiteral extends Literal {
         super(text, new CharacterValue(unescape(text)));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return CharacterType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 }

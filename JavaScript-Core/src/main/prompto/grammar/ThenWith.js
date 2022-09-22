@@ -1,6 +1,6 @@
-import {Variable} from "../runtime/index.js";
-import {VoidType} from "../type/index.js";
-import {Dialect} from "../parser/index.js";
+import {Variable} from "../runtime";
+import {VoidType} from "../type";
+import {Dialect} from "../parser";
 
 export default class ThenWith {
 

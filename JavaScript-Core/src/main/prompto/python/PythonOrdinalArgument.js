@@ -4,7 +4,7 @@ export default class PythonOrdinalArgument {
         this.expression = expression;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.expression.toDialect(writer);
     }
 }

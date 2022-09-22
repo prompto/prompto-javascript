@@ -1,5 +1,5 @@
-import Value from './Value.js'
-import { JsxType } from '../type/index.js'
+import Value from '../../../main/prompto/value/Value.ts'
+import { JsxType } from '../type'
 
 export default class JsxValue extends Value {
 

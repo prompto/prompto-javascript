@@ -1,5 +1,5 @@
 import PropertyValidator from './PropertyValidator.js'
-import { AnyType } from '../type/index.js'
+import { AnyType } from '../type'
 
 export default class AlwaysValidator extends PropertyValidator {
 

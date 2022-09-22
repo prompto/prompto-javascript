@@ -2,7 +2,7 @@ import StrictSet from './StrictSet.js';
 import List from './List.js';
 import LocalDate from './LocalDate.js';
 import LocalTime from './LocalTime.js';
-import { equalObjects } from '../utils/Utils.js';
+import { equalObjects } from '../../../main/prompto/utils/Utils.ts';
 
 function Range(first, last) {
     this.first = first;

@@ -1,8 +1,8 @@
-import IterableType from './IterableType.js'
-import { IntegerType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { Variable } from '../runtime/index.js'
-import ToListMethodDeclaration from '../builtins/ToListMethodDeclaration.js'
+import IterableType from '../../../main/prompto/type/IterableType.ts'
+import { IntegerType } from './index.ts'
+import { Identifier } from '../grammar'
+import { Variable } from '../runtime'
+import ToListMethodDeclaration from '../../../main/prompto/builtins/ToListMethodDeclaration.ts'
 
 export default class CursorType extends IterableType {
 

@@ -9,16 +9,16 @@ export default class DictEntry {
         return this.key.toString() + ':' + this.value.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.key.toString()).append(':');
         this.value.toDialect(writer);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.value.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.key.transpile(transpiler);
         transpiler.append(':');
         this.value.transpile(transpiler);

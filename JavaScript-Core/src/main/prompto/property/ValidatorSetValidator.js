@@ -1,6 +1,6 @@
 import PropertyValidator from "./PropertyValidator.js";
-import { AnyType } from "../type/index.js";
-import { ProblemCollector } from "../problem/index.js";
+import { AnyType } from "../type";
+import { ProblemCollector } from "../problem";
 
 export default class ValidatorSetValidator extends PropertyValidator {
 

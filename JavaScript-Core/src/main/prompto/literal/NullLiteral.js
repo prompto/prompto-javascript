@@ -1,38 +1,38 @@
-import Literal from "./Literal.js"
-import { NullType } from '../type/index.js'
-import { NullValue } from '../value/index.js'
+import Literal from "../../../main/prompto/literal/Literal.ts"
+import { NullType } from '../type'
+import { NullValue } from '../value'
 
 export default class NullLiteral extends Literal {
 
-    check(context) {
+    check(context: Context): Type {
         return NullType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return NullValue.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("null");
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("nothing");
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("null");
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("None");
     }
 }

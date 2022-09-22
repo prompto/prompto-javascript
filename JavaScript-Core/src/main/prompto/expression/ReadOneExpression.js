@@ -1,9 +1,9 @@
-import Expression from './Expression.js'
-import { ResourceType, TextType } from '../type/index.js'
-import { NullValue, TextValue } from '../value/index.js'
-import { NullReferenceError, InvalidResourceError } from '../error/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { ResourceType, TextType } from '../type'
+import { NullValue, TextValue } from '../value'
+import { NullReferenceError, InvalidResourceError } from '../error'
 
-export default class ReadOneExpression extends Expression {
+export default class ReadOneExpression extends BaseExpression {
 
     constructor(resource) {
         super();
@@ -14,12 +14,12 @@ export default class ReadOneExpression extends Expression {
         return "read one from " + this.resource.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("read one from ");
         this.resource.toDialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(!context.isWithResourceContext())
             context.problemListener.reportNotAResourceContext(this.resource);
         const sourceType = this.resource.check(context);
@@ -28,7 +28,7 @@ export default class ReadOneExpression extends Expression {
         return TextType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if(!context.isWithResourceContext())
             context.problemListener.reportNotAResourceContext(this.resource);
         const res = this.resource.interpret(context);
@@ -42,11 +42,11 @@ export default class ReadOneExpression extends Expression {
         return s == null ? NullValue.instance : new TextValue(s);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.resource.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.resource.transpile(transpiler);
         transpiler.append(".readLine()");
     }

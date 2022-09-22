@@ -6,7 +6,7 @@ export default class Python2NativeCall extends PythonNativeCall {
         super(statement, module);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("Python2: ");
         super.toDialect(writer);
     }

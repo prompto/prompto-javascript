@@ -1,4 +1,4 @@
-import { MemStore } from '../memstore/index.js'
+import { MemStore } from '../memstore'
 
 export default class $DataStore {
 

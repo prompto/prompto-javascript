@@ -1,9 +1,9 @@
 import SelectorExpression from './SelectorExpression.js'
-import { UnresolvedIdentifier, MemberSelector, MethodSelector } from './index.js'
-import { UnresolvedCall } from '../statement/index.js'
-import { AnyType } from '../type/index.js'
-import { ProblemRaiser } from '../problem/index.js'
-import { SyntaxError } from '../error/index.js'
+import { UnresolvedIdentifier, MemberSelector, MethodSelector } from '../expression'
+import { UnresolvedCall } from '../statement'
+import { AnyType } from '../type'
+import { ProblemRaiser } from '../problem'
+import { SyntaxError } from '../error'
 
 export default class UnresolvedSelector extends SelectorExpression {
 
@@ -22,7 +22,7 @@ export default class UnresolvedSelector extends SelectorExpression {
         return this.parent ? this.parent.toString() + '.' + this.name : this.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         try {
             this.resolve(writer.context, false);
         } catch (e) {
@@ -32,13 +32,13 @@ export default class UnresolvedSelector extends SelectorExpression {
             this.resolved.toDialect(writer);
         else {
             if (this.parent)
-                this.parent.parentToDialect(writer);
+                this.parent.parenttoDialect(writer: CodeWriter): void;
             writer.append('.');
             writer.append(this.name);
         }
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.resolveAndCheck(context, false);
     }
 
@@ -46,7 +46,7 @@ export default class UnresolvedSelector extends SelectorExpression {
         return this.resolveAndCheck(context, false);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         this.resolveAndCheck(context, false);
         return this.resolved.interpret(context);
     }
@@ -113,13 +113,13 @@ export default class UnresolvedSelector extends SelectorExpression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if (this.resolved == null)
             this.resolve(transpiler.context, false);
         this.resolved.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if (this.resolved == null)
             this.resolve(transpiler.context, false);
         this.resolved.transpile(transpiler);

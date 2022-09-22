@@ -1,4 +1,4 @@
-import { MatchOp } from '../store/index.js'
+import { MatchOp } from '../store'
 
 export default class MatchPredicate {
 

@@ -1,8 +1,8 @@
-import SimpleStatement from './SimpleStatement.js'
-import { Dialect } from '../parser/index.js'
-import { Identifier } from '../grammar/index.js'
-import { VoidType, CategoryType } from '../type/index.js'
-import { UserError, SyntaxError } from '../error/index.js'
+import SimpleStatement from './SimpleStatement.ts'
+import { Dialect } from '../parser'
+import { Identifier } from '../grammar'
+import { VoidType, CategoryType } from '../type'
+import { UserError, SyntaxError } from '../error'
 
 export default class RaiseStatement extends SimpleStatement {
 
@@ -25,7 +25,7 @@ export default class RaiseStatement extends SimpleStatement {
         }
     }
 
-    check(context) {
+    check(context: Context): Type {
         const type = this.expression.check(context);
         if(!new CategoryType(new Identifier("Error")).isAssignableFrom(context, type)) {
             throw new SyntaxError(type.name + " does not extend Error");
@@ -33,20 +33,20 @@ export default class RaiseStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         throw new UserError(this.expression);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.expression.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("throw ");
         this.expression.transpile(transpiler);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         switch(writer.dialect) {
             case Dialect.E:
             case Dialect.M:

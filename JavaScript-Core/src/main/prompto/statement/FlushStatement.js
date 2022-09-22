@@ -1,38 +1,38 @@
-import SimpleStatement from './SimpleStatement.js'
-import { $DataStore } from '../store/index.js'
-import { VoidType } from '../type/index.js'
+import SimpleStatement from './SimpleStatement.ts'
+import { $DataStore } from '../store'
+import { VoidType } from '../type'
 
 export default class FlushStatement extends SimpleStatement {
 
-    check(context) {
+    check(context: Context): Type {
         return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         $DataStore.instance.flush();
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require($DataStore);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("$DataStore.instance.flush()");
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("flush");
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("flush()");
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("flush()");
     }
 }

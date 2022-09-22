@@ -1,9 +1,9 @@
-import ContainerType from './ContainerType.js'
-import { ListType, IntegerType, BooleanType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { JoinSetMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js'
-import { List, StrictSet } from "../intrinsic/index.js";
-import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration.js";
+import ContainerType from './ContainerType.ts'
+import { ListType, IntegerType, BooleanType } from './index.ts'
+import { Identifier } from '../grammar'
+import { JoinSetMethodDeclaration } from '../builtins/ContainerTypeBuiltins.ts'
+import { List, StrictSet } from "../intrinsic";
+import ToListMethodDeclaration from "../builtins/ToListMethodDeclaration.ts";
 
 export default class SetType extends ContainerType {
  
@@ -16,7 +16,7 @@ export default class SetType extends ContainerType {
         return new SetType(itemType);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(List);
         transpiler.register(StrictSet);
         this.itemType.declare(transpiler);

@@ -1,21 +1,21 @@
 import MParserListener from './MParserListener.js';
 import MLexer from './MLexer.js';
-import * as parser from '../parser/index.js';
-import * as constraint from '../constraint/index.js';
-import * as instance from '../instance/index.js';
-import * as declaration from '../declaration/index.js';
-import * as expression from '../expression/index.js';
-import * as javascript from '../javascript/index.js';
-import * as statement from '../statement/index.js';
-import * as literal from '../literal/index.js';
-import * as grammar from '../grammar/index.js';
-import * as param from '../param/index.js';
-import * as type from '../type/index.js';
-import * as jsx from '../jsx/index.js';
-import * as css from '../css/index.js';
-import * as java from '../java/index.js';
-import * as csharp from '../csharp/index.js';
-import * as python from '../python/index.js';
+import * as parser from './index.ts';
+import * as constraint from '../constraint';
+import * as instance from '../instance';
+import * as declaration from '../declaration';
+import * as expression from '../expression';
+import * as javascript from '../javascript';
+import * as statement from '../statement';
+import * as literal from '../literal';
+import * as grammar from '../grammar';
+import * as param from '../param';
+import * as type from '../type';
+import * as jsx from '../jsx';
+import * as css from '../css';
+import * as java from '../java';
+import * as csharp from '../csharp';
+import * as python from '../python';
 
 
 export default class MPromptoBuilder extends MParserListener {

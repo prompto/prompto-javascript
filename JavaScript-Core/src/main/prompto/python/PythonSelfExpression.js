@@ -6,7 +6,7 @@ export default class PythonSelfExpression extends PythonExpression {
         return "self";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("self");
     }
 }

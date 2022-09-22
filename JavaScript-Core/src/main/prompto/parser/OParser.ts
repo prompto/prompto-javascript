@@ -1,9 +1,12 @@
 // Generated from OParser.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
-import OParserListener from "./OParserListener.js";
+import antlr4 from 'antlr4';
+import OParserListener from "./OParserListener";
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
+// eslint-disable-next-line no-unused-vars
 type int = number;
+
+import AbstractParser from './AbstractParser';
 
 export default class OParser extends AbstractParser {
 	public static readonly SPACE = 1;

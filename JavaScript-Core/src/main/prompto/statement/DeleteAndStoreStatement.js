@@ -1,13 +1,11 @@
-import BaseStatement from './BaseStatement.js'
-import { Dialect } from '../parser/index.js'
-import { VoidType, AnyType } from '../type/index.js'
-import { NullValue, Instance, Container, DocumentValue } from '../value/index.js'
-import { $DataStore } from '../store/index.js'
-import { StatementList } from "./index.js";
-import { Identifier } from "../grammar/index.js";
+import BaseStatement from './BaseStatement.ts'
+import { Dialect } from '../parser'
+import { VoidType, AnyType } from '../type'
+import { NullValue, Instance, Container, DocumentValue } from '../value'
+import { $DataStore } from '../store'
+import { StatementList } from "../statement";
+import { Identifier } from "../grammar";
 import Document from '../intrinsic/Document.js';
-
-const DBID_IDENTIFIER = new Identifier("dbId");
 
 export default class DeleteAndStoreStatement extends BaseStatement {
  
@@ -32,7 +30,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         return this.andThen==null;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.del) {
             writer.append("delete ");
             if (writer.dialect === Dialect.E)
@@ -94,7 +92,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             return this.add.equals(other.add);
     }
 
-    check(context) {
+    check(context: Context): Type {
         this.checkDeletables(context);
         this.checkStorables(context);
         this.checkFuture(context);
@@ -132,7 +130,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         }
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const idsToDelete = this.getIdsToDelete(context);
         const storablesToAdd = this.getStorablesToAdd(context);
         let auditMeta = null;
@@ -147,7 +145,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             this.andThen.interpret(context);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require($DataStore);
         if(this.andThen)
             this.andThen.declare(transpiler);
@@ -155,7 +153,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             transpiler.require(Document);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("$DataStore.instance.deleteAndStore").append(this.andThen?"Async":"").append("(");
         this.transpileIdsToDelete(transpiler);
         transpiler.append(", ");

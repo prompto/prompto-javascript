@@ -1,5 +1,5 @@
-import BinaryValue from './BinaryValue.js'
-import { ImageType } from '../type/index.js'
+import BinaryValue from '../../../main/prompto/value/BinaryValue.ts'
+import { ImageType } from '../type'
 
 export default class ImageValue extends BinaryValue {
 

@@ -2,7 +2,7 @@ import antlr4 from "antlr4";
 var Out = require("../../runtime/utils/Out").Out;
 
 var os = require("os");
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 var interpretResource = require("../../parser/BaseEParserTest").interpretResource;
 
 beforeEach(() => {

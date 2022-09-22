@@ -1,13 +1,13 @@
-import Expression from './Expression.js'
-import { ParenthesisExpression } from './index.js'
-import { Variable } from '../runtime/index.js'
-import { IteratorType } from '../type/index.js'
-import { IterableValue } from '../value/index.js'
-import { UnresolvedCall } from '../statement/index.js'
-import { InternalError } from '../error/index.js'
-import { Identifier } from "../grammar/index.js";
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { ParenthesisExpression } from '../expression'
+import { Variable } from '../runtime'
+import { IteratorType } from '../type'
+import { IterableValue } from '../value'
+import { UnresolvedCall } from '../statement'
+import { InternalError } from '../error'
+import { Identifier } from "../grammar";
 
-export default class IteratorExpression extends Expression {
+export default class IteratorExpression extends BaseExpression {
   
     constructor(name, source, expression) {
         super();
@@ -16,7 +16,7 @@ export default class IteratorExpression extends Expression {
         this.expression = expression;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const elemType = this.source.check(context).checkIterator(context, this.source);
         const child = context.newChildContext();
         child.registerValue(new Variable(this.name, elemType));
@@ -24,7 +24,7 @@ export default class IteratorExpression extends Expression {
         return new IteratorType(itemType);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const elemType = this.source.check(context).checkIterator(context, this.source);
         const items = this.source.interpret(context);
         const length = items.getMemberValue(context, new Identifier("count"), false);
@@ -32,13 +32,13 @@ export default class IteratorExpression extends Expression {
         return new IterableValue(context, this.name, elemType, iterator, length, this.expression);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.source.declare(transpiler);
         const sourceType = this.source.check(transpiler.context);
         sourceType.declareIterator(transpiler, this.name, this.expression);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const srcType = this.source.check(transpiler.context);
         /*var resultType = */srcType.checkIterator(transpiler.context, this.source);
         this.source.transpile(transpiler);
@@ -54,7 +54,7 @@ export default class IteratorExpression extends Expression {
             throw new InternalError("Should never get there!");
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         const srcType = this.source.check(writer.context);
         writer = writer.newChildWriter();
         const resultType = srcType.checkIterator(writer.context, this.source);
@@ -62,7 +62,7 @@ export default class IteratorExpression extends Expression {
         writer.toDialect(this);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         const expression = IteratorExpression.extractFromParenthesisIfPossible(this.expression);
         expression.toDialect(writer);
         writer.append(" for each ");
@@ -71,7 +71,7 @@ export default class IteratorExpression extends Expression {
         this.source.toDialect(writer);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         const expression = IteratorExpression.extractFromParenthesisIfPossible(this.expression);
         expression.toDialect(writer);
         writer.append(" for each ( ");
@@ -81,7 +81,7 @@ export default class IteratorExpression extends Expression {
         writer.append(" )");
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         const expression = IteratorExpression.encloseInParenthesisIfRequired(this.expression);
         expression.toDialect(writer);
         writer.append(" for each ");

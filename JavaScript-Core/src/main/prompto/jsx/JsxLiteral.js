@@ -1,4 +1,4 @@
-import { TextType, VoidType } from '../type/index.js'
+import { TextType, VoidType } from '../type'
 
 export default class JsxLiteral {
 
@@ -6,7 +6,7 @@ export default class JsxLiteral {
         this.text = text;
     }
 
-    check(context) {
+    check(context: Context): Type {
         return TextType.instance;
     }
 
@@ -22,15 +22,15 @@ export default class JsxLiteral {
         return true;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.text);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 }

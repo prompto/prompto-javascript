@@ -1,7 +1,7 @@
-import Value from './Value.js'
-import { IntegerValue, ListValue, IteratorValue } from './index.js'
-import { CursorType, CategoryType } from '../type/index.js'
-import { Identifier } from '../grammar/index.js'
+import Value from './Value.ts'
+import { IntegerValue, ListValue, IteratorValue } from './index.ts'
+import { CursorType, CategoryType } from '../type'
+import { Identifier } from '../grammar'
 
 export default class CursorValue extends Value {
 

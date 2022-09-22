@@ -1,8 +1,8 @@
-import NativeType from './NativeType.js'
-import {IntegerType} from './index.js'
-import {Identifier} from '../grammar/index.js'
-import {PeriodValue} from '../value/index.js'
-import {Period} from '../intrinsic/index.js'
+import NativeType from '../../../main/prompto/type/NativeType.ts'
+import {IntegerType} from '../type'
+import {Identifier} from '../grammar'
+import {PeriodValue} from '../value'
+import {Period} from '../intrinsic'
 
 
 export default class PeriodType extends NativeType {
@@ -26,11 +26,11 @@ export default class PeriodType extends NativeType {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(Period);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('Period')
     }
 

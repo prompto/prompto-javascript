@@ -1,4 +1,4 @@
-import { IntegerType } from '../type/index.js';
+import { IntegerType } from '../type';
 
 export default class RangeLiteral {
 
@@ -11,7 +11,7 @@ export default class RangeLiteral {
         return "[" + this.first.toString() + ".." + this.last.toString() + "]";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("[");
         this.first.toDialect(writer);
         writer.append("..");
@@ -19,13 +19,13 @@ export default class RangeLiteral {
         writer.append("]");
     }
 
-    check(context) {
+    check(context: Context): Type {
         const firstType = this.first.check(context);
         const lastType = this.last.check(context);
         return firstType.checkRange(context,lastType);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         let type = this.first.check(context);
         if("IntegerLimits"==type.name) {
             type = IntegerType.instance;
@@ -35,7 +35,7 @@ export default class RangeLiteral {
         return type.newRange(of,ol);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.first.declare(transpiler);
         const firstType = this.first.check(transpiler.context);
         firstType.declare(transpiler);
@@ -45,7 +45,7 @@ export default class RangeLiteral {
         return firstType.declareRange(transpiler, lastType);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const firstType = this.first.check(transpiler.context);
         return firstType.transpileRange(transpiler, this.first, this.last);
     }

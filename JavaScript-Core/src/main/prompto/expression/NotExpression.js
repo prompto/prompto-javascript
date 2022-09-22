@@ -1,10 +1,10 @@
-import Expression from './Expression.js'
-import { Dialect } from '../parser/index.js'
-import { BooleanType } from '../type/index.js'
-import { BooleanValue } from '../value/index.js'
-import { CodeWriter } from '../utils/index.js'
+import BaseExpression from './BaseExpression.ts'
+import { Dialect } from '../parser'
+import { BooleanType } from '../type'
+import { BooleanValue } from '../value'
+import { CodeWriter } from '../utils'
 
-export default class NotExpression extends Expression {
+export default class NotExpression extends BaseExpression {
  
     constructor(expression) {
         super();
@@ -19,24 +19,24 @@ export default class NotExpression extends Expression {
         return dialect==Dialect.O ? "! ": "not ";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
         this.expression.toDialect(writer);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("not ");
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("not ");
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("!");
     }
 
-    check(context) {
+    check(context: Context): Type {
         const type = this.expression.check(context);
         if (type)
             return type.checkNot(context);
@@ -54,22 +54,22 @@ export default class NotExpression extends Expression {
         this.expression.checkQuery(context);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.expression.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("!(");
         this.expression.transpile(transpiler);
         transpiler.append(")");
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const val = this.expression.interpret(context);
         return val.Not();
     }
 
-    interpretAssert(context, test) {
+    interpretAssert(context: Context, test: TextMethodDeclaration): boolean {
         const result = this.interpret(context);
         if(result==BooleanValue.TRUE)
             return true;

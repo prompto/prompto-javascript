@@ -1,5 +1,5 @@
-import { Variable } from '../runtime/index.js'
-import { VoidType, CategoryType, DocumentType, CodeType } from '../type/index.js'
+import { Variable } from '../runtime'
+import { VoidType, CategoryType, DocumentType, CodeType } from '../type'
 
 export default class VariableInstance {
   
@@ -28,7 +28,7 @@ export default class VariableInstance {
         return this.name;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const actual = context.getRegisteredValue(this.id);
         return actual.type;
     }
@@ -84,7 +84,7 @@ export default class VariableInstance {
         context.setValue(this.id, value);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return context.getValue(this.id);
     }
 
@@ -129,11 +129,11 @@ export default class VariableInstance {
         transpiler.append(this.name);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.name);
     }
 }

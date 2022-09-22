@@ -1,4 +1,4 @@
-import PromptoError from './PromptoError.js'
+import PromptoError from './PromptoError.ts'
 
 export default class InternalError extends PromptoError {
 

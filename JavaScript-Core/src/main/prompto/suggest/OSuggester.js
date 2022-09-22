@@ -1,5 +1,5 @@
 import BaseSuggester from "./BaseSuggester.js";
-import { OLexer, OParser } from "../parser/index.js";
+import { OLexer, OParser } from "../parser";
 
 
 export default class OSuggester extends BaseSuggester {

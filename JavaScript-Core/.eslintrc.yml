@@ -3,18 +3,20 @@ env:
   es6: true
   node: true
   amd: true
-  jest/globals: true
-extends: 'eslint:recommended'
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:@typescript-eslint/recommended-requiring-type-checking
 globals:
   Atomics: readonly
   SharedArrayBuffer: readonly
   Set: readonly
-parser: babel-eslint
+parser: "@typescript-eslint/parser"
 parserOptions:
   sourceType: module
+  project: ['./tsconfig.json']
 plugins:
-  - es5
-  - jest
+  - "@typescript-eslint"
 rules:
   no-unused-vars: ["error", {vars: "all", args: "none"}]
   no-prototype-builtins: [ "off" ]

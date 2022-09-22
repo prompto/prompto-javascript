@@ -1,5 +1,5 @@
-import NativeType from './NativeType.js'
-import { Identifier } from '../grammar/index.js'
+import NativeType from '../../../main/prompto/type/NativeType.ts'
+import { Identifier } from '../grammar'
 
 export default class MissingType extends NativeType {
 

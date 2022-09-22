@@ -1,5 +1,5 @@
-import IJsxExpression from './IJsxExpression.js'
-import { JsxType } from '../type/index.js'
+import IJsxExpression from './IJsxExpression.ts'
+import { JsxType } from '../type'
 
 export default class JsxCode extends IJsxExpression {
 
@@ -9,12 +9,12 @@ export default class JsxCode extends IJsxExpression {
         this.suite = suite;
     }
 
-    check(context) {
+    check(context: Context): Type {
         this.expression.check(context);
         return JsxType.instance;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("{");
         this.expression.toDialect(writer);
         writer.append("}");
@@ -22,11 +22,11 @@ export default class JsxCode extends IJsxExpression {
             writer.appendRaw(this.suite);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.expression.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const type = this.expression.check(transpiler.context);
         type.transpileJsxCode(transpiler, this.expression);
     }

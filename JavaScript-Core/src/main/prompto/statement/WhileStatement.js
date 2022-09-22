@@ -1,10 +1,10 @@
-import BaseStatement from './BaseStatement.js'
-import { BooleanType } from '../type/index.js'
-import { BooleanValue } from '../value/index.js'
-import { BreakResult } from '../runtime/index.js'
-import { InvalidDataError } from '../error/index.js'
-import {Section} from "../parser/index.js";
-import {StatementList} from "./index.js";
+import BaseStatement from './BaseStatement.ts'
+import { BooleanType } from '../type'
+import { BooleanValue } from '../value'
+import { BreakResult } from '../runtime'
+import { InvalidDataError } from '../error'
+import {Section} from "../parser";
+import {StatementList} from "../statement";
 
 export default class WhileStatement extends BaseStatement {
    
@@ -26,13 +26,13 @@ export default class WhileStatement extends BaseStatement {
             return null;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.condition.declare(transpiler);
         transpiler = transpiler.newChildTranspiler();
         this.statements.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("while(");
         this.condition.transpile(transpiler);
         transpiler.append(") {");
@@ -44,7 +44,7 @@ export default class WhileStatement extends BaseStatement {
         return true;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const cond = this.condition.check(context);
         if(cond !== BooleanType.instance) {
             context.problemListener.reportError(this, "Expected a Boolean condition!");
@@ -53,7 +53,7 @@ export default class WhileStatement extends BaseStatement {
         return this.statements.check(child, null);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         while(this.interpretCondition(context)) {
             const child = context.newChildContext();
             const value = this.statements.interpret(child);
@@ -73,15 +73,15 @@ export default class WhileStatement extends BaseStatement {
         return value.value;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.toEDialect(writer);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("while ");
         this.condition.toDialect(writer);
         writer.append(" :").newLine().indent();
@@ -89,7 +89,7 @@ export default class WhileStatement extends BaseStatement {
         writer.dedent();
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("while (");
         this.condition.toDialect(writer);
         writer.append(") {").newLine().indent();

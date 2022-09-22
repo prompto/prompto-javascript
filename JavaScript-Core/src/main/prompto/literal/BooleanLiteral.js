@@ -1,6 +1,6 @@
-import Literal from './Literal.js'
-import { BooleanValue } from '../value/index.js'
-import { BooleanType } from '../type/index.js'
+import Literal from './Literal.ts'
+import { BooleanValue } from '../value'
+import { BooleanType } from '../type'
 
 export default class BooleanLiteral extends Literal {
 
@@ -8,15 +8,15 @@ export default class BooleanLiteral extends Literal {
         super(text, BooleanValue.Parse(text));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return BooleanType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 }

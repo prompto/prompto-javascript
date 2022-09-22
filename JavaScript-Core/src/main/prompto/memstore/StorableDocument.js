@@ -1,5 +1,5 @@
-import { $DataStore } from '../store/index.js'
-import { StoredDocument } from './index.js'
+import { $DataStore } from '../store'
+import { StoredDocument } from './index.ts'
 
 export default class StorableDocument {
 

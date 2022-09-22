@@ -1,4 +1,4 @@
-import NamedInstance from '../grammar/NamedInstance.js'
+import NamedInstance from '../../../main/prompto/grammar/NamedInstance.ts'
 
 export default class Variable extends NamedInstance {
 
@@ -16,7 +16,7 @@ export default class Variable extends NamedInstance {
         return this.name;
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.name);
     }
 

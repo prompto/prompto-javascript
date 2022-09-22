@@ -1,5 +1,5 @@
 import JavaScriptExpression from './JavaScriptExpression.js'
-import { ThisExpression } from '../expression/index.js'
+import { ThisExpression } from '../expression'
 
 export default class JavaScriptThisExpression extends JavaScriptExpression {
 
@@ -8,15 +8,15 @@ export default class JavaScriptThisExpression extends JavaScriptExpression {
         this.expression = new ThisExpression();
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return this.expression.interpret(context);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         return writer.append("this");
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("this");
     }
 

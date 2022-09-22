@@ -1,12 +1,12 @@
-import NativeType from './NativeType.js'
-import { NullType, AnyType, MissingType, SetType, TextType, ListType, IntegerType, CategoryType } from './index.js'
-import { ValueExpression, MethodSelector } from '../expression/index.js'
-import { Identifier, ArgumentList, Argument } from '../grammar/index.js'
-import { MethodDeclarationMap } from '../runtime/index.js'
-import { MethodCall } from '../statement/index.js'
-import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value/index.js'
-import { TextLiteral } from '../literal/index.js'
-import {equalArrays, compareValues, isANumber, convertToJson, convertToJsonNode} from '../utils/index.js'
+import NativeType from './NativeType.ts'
+import { NullType, AnyType, MissingType, SetType, TextType, ListType, IntegerType, CategoryType } from './index.ts'
+import { ValueExpression, MethodSelector } from '../expression'
+import { Identifier, ArgumentList, Argument } from '../grammar'
+import { MethodDeclarationMap } from '../runtime'
+import { MethodCall } from '../statement'
+import { DocumentValue, NullValue, IntegerValue, DecimalValue, TextValue } from '../value'
+import { TextLiteral } from '../literal'
+import {equalArrays, compareValues, isANumber, convertToJson, convertToJsonNode} from '../utils'
 import JavaScriptClassType from "../javascript/JavaScriptClassType.js";
 import StrictSet from '../intrinsic/StrictSet.js';
 import List from '../intrinsic/List.js';
@@ -88,13 +88,13 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(Document);
         transpiler.register(List);
         transpiler.require(equalArrays);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('Document')
     }
 

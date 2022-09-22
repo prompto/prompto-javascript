@@ -1,9 +1,9 @@
 import UnresolvedCall from './UnresolvedCall.js'
-import {Dialect} from '../parser/index.js'
-import { Variable } from '../runtime/index.js'
-import { VoidType } from '../type/index.js'
+import {Dialect} from '../parser'
+import { Variable } from '../runtime'
+import { VoidType } from '../type'
 import RemoteRunner from "../intrinsic/RemoteRunner.js"
-import {StatementList} from "./index.js";
+import {StatementList} from "./index.ts";
 
 export default class RemoteCall extends UnresolvedCall {
 
@@ -24,7 +24,7 @@ export default class RemoteCall extends UnresolvedCall {
         return false;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         const resultType = this.resolveAndCheck(writer.context);
         super.toDialect(writer);
         writer.append(" then");
@@ -44,7 +44,7 @@ export default class RemoteCall extends UnresolvedCall {
             writer.append("}").newLine();
     }
 
-    check(context) {
+    check(context: Context): Type {
         const resultType = this.resolveAndCheck(context);
         context = context.newChildContext();
         if (this.resultName != null)
@@ -53,7 +53,7 @@ export default class RemoteCall extends UnresolvedCall {
         return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const resultType = this.resolveAndCheck(context);
         const resultValue = super.interpret(context);
         context = context.newChildContext();
@@ -65,7 +65,7 @@ export default class RemoteCall extends UnresolvedCall {
         return null;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         const resultType = this.resolveAndCheck(transpiler.context);
         this.resolved.declare(transpiler);
         transpiler.require(RemoteRunner);
@@ -75,7 +75,7 @@ export default class RemoteCall extends UnresolvedCall {
         this.andThen.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const resultType = this.resolveAndCheck(transpiler.context);
         transpiler = transpiler.append("RemoteRunner.run(function() {").indent().append("return ");
         this.resolved.transpile(transpiler);

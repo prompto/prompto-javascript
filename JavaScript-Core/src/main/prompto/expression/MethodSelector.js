@@ -1,11 +1,11 @@
 import MemberSelector from './MemberSelector.js'
-import { CategorySymbol } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { CategoryType, TypeType } from '../type/index.js'
-import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value/index.js'
-import { SingletonCategoryDeclaration } from '../declaration/index.js'
-import { NullReferenceError } from '../error/index.js'
-import { SuperExpression } from '../expression/index.js'
+import { CategorySymbol } from './index.ts'
+import { Identifier } from '../grammar'
+import { CategoryType, TypeType } from '../type'
+import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value'
+import { SingletonCategoryDeclaration } from '../declaration'
+import { NullReferenceError } from '../error'
+import { SuperExpression } from './index.ts'
 
 export default class MethodSelector extends MemberSelector {
   
@@ -13,11 +13,11 @@ export default class MethodSelector extends MemberSelector {
         super(parent, id);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.parent==null)
             writer.append(this.name);
         else
-            super.parentAndMemberToDialect(writer);
+            super.parentAndMembertoDialect(writer: CodeWriter): void;
     }
 
     newFullSelector(counter) {
@@ -25,7 +25,7 @@ export default class MethodSelector extends MemberSelector {
         return new MethodSelector(this.parent, new Identifier(name));
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if(this.parent!=null)
             super.transpile(transpiler);
         else

@@ -1,6 +1,6 @@
 // Generated from MParser.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
+import antlr4 from 'antlr4';
 
 
 import { Enum_category_declarationContext } from "./MParser.js";

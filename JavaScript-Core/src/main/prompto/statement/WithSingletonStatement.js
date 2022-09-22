@@ -1,5 +1,5 @@
-import BaseStatement from './BaseStatement.js'
-import {StatementList} from "./index.js";
+import BaseStatement from '../../../main/prompto/statement/BaseStatement.ts'
+import {StatementList} from "../statement";
 
 export default class WithSingletonStatement extends BaseStatement {
 
@@ -16,13 +16,13 @@ export default class WithSingletonStatement extends BaseStatement {
             return null;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const instanceContext = context.newInstanceContext(null, this.type, true);
         const childContext = instanceContext.newChildContext();
         return this.statements.check(childContext, null);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         // TODO synchronize
         const instance = context.loadSingleton(this.type);
         const instanceContext = context.newInstanceContext(instance, null, true);
@@ -30,14 +30,14 @@ export default class WithSingletonStatement extends BaseStatement {
         return this.statements.interpret(childContext);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.type.declare(transpiler);
         transpiler = transpiler.newInstanceTranspiler(this.type);
         transpiler = transpiler.newChildTranspiler();
         return this.statements.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const instance = transpiler.newInstanceTranspiler(this.type);
         const child = instance.newChildTranspiler();
         this.statements.transpile(child);
@@ -46,11 +46,11 @@ export default class WithSingletonStatement extends BaseStatement {
         return true;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("with ");
         this.type.toDialect(writer);
         writer.append(", do:").newLine().indent();
@@ -58,7 +58,7 @@ export default class WithSingletonStatement extends BaseStatement {
         writer.dedent();
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("with (");
         this.type.toDialect(writer);
         writer.append(")");
@@ -72,7 +72,7 @@ export default class WithSingletonStatement extends BaseStatement {
             writer.append("}").newLine();
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("with ");
         this.type.toDialect(writer);
         writer.append(":").newLine().indent();

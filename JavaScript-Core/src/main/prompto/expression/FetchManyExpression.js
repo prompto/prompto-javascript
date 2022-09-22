@@ -1,12 +1,12 @@
-import Expression from './Expression.js'
-import { AnyType, CursorType, IntegerType } from '../type/index.js'
-import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store/index.js'
-import { CursorValue } from '../value/index.js'
-import { CategoryDeclaration } from '../declaration/index.js'
-import { InvalidDataError } from '../error/index.js'
-import { Cursor } from "../intrinsic/index.js";
+import BaseExpression from './BaseExpression.ts'
+import { AnyType, CursorType, IntegerType } from '../type'
+import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store'
+import { CursorValue } from '../value'
+import { CategoryDeclaration } from '../declaration'
+import { InvalidDataError } from '../error'
+import { Cursor } from "../intrinsic";
 
-export default class FetchManyExpression extends Expression {
+export default class FetchManyExpression extends BaseExpression {
 
     constructor(type, first, last, predicate, include, orderBy) {
         super();
@@ -18,11 +18,11 @@ export default class FetchManyExpression extends Expression {
         this.orderBy = orderBy;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("fetch ");
         if(this.first==null)
             writer.append("all ");
@@ -61,7 +61,7 @@ export default class FetchManyExpression extends Expression {
         }
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("fetch ");
         if(this.first==null)
             writer.append("all ");
@@ -94,7 +94,7 @@ export default class FetchManyExpression extends Expression {
             this.orderBy.toDialect(writer);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("fetch ");
         if(this.first!=null) {
             writer.append("rows ");
@@ -127,7 +127,7 @@ export default class FetchManyExpression extends Expression {
             this.orderBy.toDialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         let type = this.type;
         if (type==null)
             type = AnyType.instance;
@@ -162,7 +162,7 @@ export default class FetchManyExpression extends Expression {
     checkSlice(context) {
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const store = $DataStore.instance;
         const query = this.buildFetchManyQuery(context, store);
         const type = this.type || AnyType.instance;
@@ -198,7 +198,7 @@ export default class FetchManyExpression extends Expression {
         return value.getStorableData();
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(Cursor);
         transpiler.require(MatchOp);
         transpiler.require($DataStore);
@@ -216,7 +216,7 @@ export default class FetchManyExpression extends Expression {
             this.orderBy.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         const mutable = this.type ? this.type.mutable : false;

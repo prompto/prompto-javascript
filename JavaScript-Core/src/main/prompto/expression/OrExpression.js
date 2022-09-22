@@ -1,9 +1,9 @@
-import Expression from './Expression.js'
-import { Dialect } from '../parser/index.js'
-import { BooleanValue } from '../value/index.js'
-import { CodeWriter } from '../utils/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { Dialect } from '../parser'
+import { BooleanValue } from '../value'
+import { CodeWriter } from '../utils'
 
-export default class OrExpression extends Expression {
+export default class OrExpression extends BaseExpression {
   
     constructor(left, right) {
         super();
@@ -15,7 +15,7 @@ export default class OrExpression extends Expression {
         return this.left.toString() + " or " + this.right.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
@@ -23,25 +23,25 @@ export default class OrExpression extends Expression {
         return dialect==Dialect.O ? " || " : " or ";
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         this.left.toDialect(writer);
         writer.append(this.operatorToDialect(writer.dialect));
         this.right.toDialect(writer);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         this.left.toDialect(writer);
         writer.append(this.operatorToDialect(writer.dialect));
         this.right.toDialect(writer);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.left.toDialect(writer);
         writer.append(this.operatorToDialect(writer.dialect));
         this.right.toDialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return lt.checkOr(context, rt);
@@ -60,24 +60,24 @@ export default class OrExpression extends Expression {
         this.right.checkQuery(context);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.left.transpile(transpiler);
         transpiler.append(" || ");
         this.right.transpile(transpiler);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const lval = this.left.interpret(context);
         const rval = this.right.interpret(context);
         return lval.Or(rval);
     }
 
-    interpretAssert(context, test) {
+    interpretAssert(context: Context, test: TextMethodDeclaration): boolean {
         const lval = this.left.interpret(context);
         const rval = this.right.interpret(context);
         const result = lval.Or(rval);

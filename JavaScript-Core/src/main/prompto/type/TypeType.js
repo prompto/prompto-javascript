@@ -1,5 +1,5 @@
-import BaseType from './BaseType.js'
-import { Identifier } from '../grammar/index.js'
+import BaseType from '../../../main/prompto/type/BaseType.ts'
+import { Identifier } from '../grammar'
 
 export default class TypeType extends BaseType {
 
@@ -12,7 +12,7 @@ export default class TypeType extends BaseType {
         return "Type<" + this.type.toString() + ">";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("Type<");
         this.type.toDialect(writer);
         writer.append(">");

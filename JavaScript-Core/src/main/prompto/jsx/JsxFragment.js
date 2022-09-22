@@ -1,5 +1,5 @@
-import IJsxExpression from './IJsxExpression.js'
-import { JsxType } from '../type/index.js'
+import IJsxExpression from './IJsxExpression.ts'
+import { JsxType } from '../type'
 
 export default class JsxFragment extends IJsxExpression {
 
@@ -8,7 +8,7 @@ export default class JsxFragment extends IJsxExpression {
         this.openingSuite = openingSuite;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("<>");
         if(this.openingSuite!=null)
             writer.appendRaw(this.openingSuite);
@@ -19,7 +19,7 @@ export default class JsxFragment extends IJsxExpression {
         writer.append("</>");
     }
 
-    check(context) {
+    check(context: Context): Type {
         if (this.children != null)
             this.children.forEach(child => {
                 child.check(context);
@@ -27,14 +27,14 @@ export default class JsxFragment extends IJsxExpression {
         return JsxType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if (this.children != null)
             this.children.forEach(child => {
                 child.declare(transpiler);
             });
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if (this.children != null && this.children.length > 0) {
             transpiler.append("React.createElement(React.Fragment, null");
             this.children.forEach(child => {

@@ -1,4 +1,4 @@
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 var antlr4 = require("antlr4");
 var parseResource = require("../../parser/BaseEParserTest").parseResource;
 var getResourceAsString = require("../../parser/BaseParserTest").getResourceAsString;

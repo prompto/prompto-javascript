@@ -1,4 +1,4 @@
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 var Out = require("../../runtime/utils/Out").Out;
 var parseString = require("../../parser/BaseOParserTest").parseString;
 var SyntaxError = prompto.error.SyntaxError;

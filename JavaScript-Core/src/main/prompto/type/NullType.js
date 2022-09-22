@@ -1,5 +1,5 @@
-import BaseType from './BaseType.js'
-import { Identifier } from '../grammar/index.js'
+import BaseType from './BaseType.ts'
+import { Identifier } from '../grammar'
 
 export default class NullType extends BaseType {
 

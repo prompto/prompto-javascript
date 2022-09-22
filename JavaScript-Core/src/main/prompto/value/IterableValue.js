@@ -1,8 +1,8 @@
-import Value from './Value.js'
-import { IntegerValue, ListValue, SetValue } from './index.js'
-import { IteratorType } from '../type/index.js'
-import { Variable } from '../runtime/index.js'
-import { StrictSet } from '../intrinsic/index.js'
+import Value from '../../../main/prompto/value/Value.ts'
+import { IntegerValue, ListValue, SetValue } from './index.ts'
+import { IteratorType } from '../type'
+import { Variable } from '../runtime'
+import { StrictSet } from '../intrinsic'
 
 export default class IterableValue extends Value {
 

@@ -1,5 +1,5 @@
 var antlr4 = require("antlr4");
-var prompto = require("../../../main/prompto/index");
+var prompto = require("../../../main/prompto");
 var BaseParserTest = require("./BaseParserTest");
 var getResource = BaseParserTest.getResource;
 var checkSameOutput = BaseParserTest.checkSameOutput;

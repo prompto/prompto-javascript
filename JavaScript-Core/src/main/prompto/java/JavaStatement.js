@@ -9,7 +9,7 @@ export default class JavaStatement {
         return "" + (this.isReturn ? "return " : "") + this.expression.toString() + ";";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.isReturn)
             writer.append("return ");
         this.expression.toDialect(writer);

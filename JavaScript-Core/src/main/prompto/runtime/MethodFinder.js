@@ -1,10 +1,10 @@
-import { Score } from './index.js'
-import { CategoryType, MethodType } from '../type/index.js'
-import { PromptoError, SyntaxError } from '../error/index.js'
-import { ProblemRaiser } from '../problem/index.js';
-import { ClosureValue, ArrowValue } from '../value/index.js';
-import { ConcreteCategoryDeclaration, ClosureDeclaration, ArrowDeclaration } from '../declaration/index.js'
-import { MethodDeclarationMap } from '../runtime/index.js';
+import { Score } from './index.ts'
+import { CategoryType, MethodType } from '../type'
+import { PromptoError, SyntaxError } from '../error'
+import { ProblemRaiser } from '../problem';
+import { ClosureValue, ArrowValue } from '../value';
+import { ConcreteCategoryDeclaration, ClosureDeclaration, ArrowDeclaration } from '../declaration'
+import { MethodDeclarationMap } from './index.ts';
 
 export default class MethodFinder {
     

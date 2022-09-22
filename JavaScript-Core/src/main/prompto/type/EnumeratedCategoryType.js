@@ -1,7 +1,7 @@
-import CategoryType from './CategoryType.js'
-import { TextType, ListType } from './index.js'
-import { SymbolOfMethodDeclaration } from '../builtins/EnumeratedCategoryTypeBuiltins.js'
-import { SyntaxError } from '../error/index.js'
+import CategoryType from './CategoryType.ts'
+import { TextType, ListType } from '../type'
+import { SymbolOfMethodDeclaration } from '../builtins/EnumeratedCategoryTypeBuiltins.ts'
+import { SyntaxError } from '../error'
 
 export default class EnumeratedCategoryType extends CategoryType {
   

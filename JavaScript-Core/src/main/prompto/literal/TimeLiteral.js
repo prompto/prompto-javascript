@@ -1,7 +1,7 @@
-import Literal from './Literal.js'
-import { TimeType } from '../type/index.js'
-import { TimeValue } from '../value/index.js'
-import { LocalTime } from '../intrinsic/index.js'
+import Literal from './Literal.ts'
+import { TimeType } from '../type'
+import { TimeValue } from '../value'
+import { LocalTime } from '../intrinsic'
 
 export default class TimeLiteral extends Literal {
 
@@ -10,15 +10,15 @@ export default class TimeLiteral extends Literal {
         super(text, new TimeValue(lt));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return TimeType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(LocalTime);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("LocalTime.parse(").append(this.text).append(")");
     }
 }

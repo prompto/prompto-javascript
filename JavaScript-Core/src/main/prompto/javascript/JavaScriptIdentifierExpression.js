@@ -1,6 +1,6 @@
 import JavaScriptExpression from './JavaScriptExpression.js'
-import { $DataStore } from '../store/index.js'
-import { PromptoError, SyntaxError } from '../error/index.js'
+import { $DataStore } from '../store'
+import { PromptoError, SyntaxError } from '../error'
 
 export default class JavaScriptIdentifierExpression extends JavaScriptExpression {
    
@@ -13,11 +13,11 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
         return this.id.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.id.name);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if ("$store" === this.id.name)
             transpiler.append("$DataStore.instance");
         else

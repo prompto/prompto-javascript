@@ -1,4 +1,4 @@
-import ObjectList from '../utils/ObjectList.js'
+import ObjectList from '../../../main/prompto/utils/ObjectList.ts'
 
 export default class PythonArgumentList extends ObjectList {
 
@@ -10,7 +10,7 @@ export default class PythonArgumentList extends ObjectList {
         }
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.length>0) {
             this.forEach(arg => {
                 arg.toDialect(writer);

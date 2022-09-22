@@ -1,7 +1,7 @@
-import BaseType from './BaseType.js'
-import { DocumentType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { Document, List } from '../intrinsic/index.js'
+import BaseType from '../../../main/prompto/type/BaseType.ts'
+import { DocumentType } from '../type'
+import { Identifier } from '../grammar'
+import { Document, List } from '../intrinsic'
 
 /* transient type for holding child property structure */
 export default class PropertiesType extends BaseType {
@@ -28,7 +28,7 @@ export default class PropertiesType extends BaseType {
         return prop ? prop.validator.getType(context) :  super.checkMember(context, section, id);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(Document);
         transpiler.register(List);
     }

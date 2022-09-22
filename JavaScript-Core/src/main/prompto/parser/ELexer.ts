@@ -1,6 +1,6 @@
 // Generated from ELexer.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
+import antlr4 from 'antlr4';
 
 export default class ELexer extends antlr4.Lexer {
 	public static readonly INDENT = 1;
@@ -192,10 +192,7 @@ export default class ELexer extends antlr4.Lexer {
 	public static readonly JSX_TEXT = 187;
 	public static readonly EOF = antlr4.Token.EOF;
 
-	// tslint:disable:no-trailing-whitespace
-	public static readonly channelNames: string[] = [
-    	"DEFAULT_TOKEN_CHANNEL", "HIDDEN"
-	];
+	public static readonly channelNames: string[] = [ "DEFAULT_TOKEN_CHANNEL", "HIDDEN" ];
 	public static readonly literalNames = [ null, null, null, null, null, null, 
                                          "'\\t'", "' '", null, "'Java:'", 
                                          "'C#:'", "'Python2:'", "'Python3:'", 
@@ -301,10 +298,7 @@ export default class ELexer extends antlr4.Lexer {
                                           "DATETIME_LITERAL", "TIME_LITERAL", 
                                           "DATE_LITERAL", "PERIOD_LITERAL", 
                                           "JSX_TEXT" ];
-	// tslint:disable:no-trailing-whitespace
-	public static readonly modeNames: string[] = [
-		"DEFAULT_MODE",
-	];
+	public static readonly modeNames: string[] = [ "DEFAULT_MODE", ];
 
 	public static readonly ruleNames: string[] = [
 		"LF_TAB", "LF_MORE", "LF", "TAB", "WS", "COMMENT", "JAVA", "CSHARP", "PYTHON2", 

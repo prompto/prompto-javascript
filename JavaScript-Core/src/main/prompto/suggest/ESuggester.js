@@ -1,5 +1,5 @@
 import BaseSuggester from "./BaseSuggester.js";
-import {ELexer, EParser} from "../parser/index.js";
+import {ELexer, EParser} from "../parser";
 
 
 export default class ESuggester extends BaseSuggester {

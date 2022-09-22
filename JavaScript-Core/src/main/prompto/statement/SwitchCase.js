@@ -1,5 +1,5 @@
-import Section from '../parser/Section.js'
-import { StatementList } from "./index.js";
+import Section from '../parser/Section.ts'
+import { StatementList } from "../statement";
 
 export default class SwitchCase extends Section {
 
@@ -28,11 +28,11 @@ export default class SwitchCase extends Section {
             context.problemListener.reportSwitchMissingStatement(this);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return this.statements.interpret(context);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if(this.expression)
             this.expression.declare(transpiler);
         if(this.statements)

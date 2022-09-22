@@ -1,7 +1,7 @@
 import RangeValue from './RangeValue.js'
-import { IntegerValue } from './index.js'
-import { IntegerType } from '../type/index.js'
-import { IndexOutOfRangeError } from '../error/index.js'
+import { IntegerValue } from '../value'
+import { IntegerType } from '../type'
+import { IndexOutOfRangeError } from '../error'
 
 export default class IntegerRangeValue extends RangeValue {
 

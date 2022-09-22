@@ -1,4 +1,4 @@
-import { convertToJson, convertToJsonNode, equalArrays } from '../utils/Utils.js';
+import { convertToJsonString, convertToJsonNode, equalArrays } from '../utils/Utils.ts';
 import NotMutableError from '../error/NotMutableError.js';
 import Document from './Document.js';
 

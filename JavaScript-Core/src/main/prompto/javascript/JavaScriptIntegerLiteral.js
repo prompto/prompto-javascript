@@ -1,5 +1,5 @@
 import JavaScriptLiteral from './JavaScriptLiteral.js'
-import { IntegerType } from '../type/index.js'
+import { IntegerType } from '../type'
 
 export default class JavaScriptIntegerLiteral extends JavaScriptLiteral {
 
@@ -7,7 +7,7 @@ export default class JavaScriptIntegerLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context) {
+    check(context: Context): Type {
         return IntegerType.instance;
     }
 

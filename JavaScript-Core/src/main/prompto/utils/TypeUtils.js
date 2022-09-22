@@ -1,5 +1,5 @@
-import { TextValue, IntegerValue, DecimalValue, NullValue } from '../value/index.js'
-import { MissingType, TypeMap } from '../type/index.js'
+import { TextValue, IntegerValue, DecimalValue, NullValue } from '../value'
+import { MissingType, TypeMap } from '../type'
 
 export function convertFromJavaScript(value) {
     if(value==null) {

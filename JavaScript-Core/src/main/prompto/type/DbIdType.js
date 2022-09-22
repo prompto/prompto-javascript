@@ -1,5 +1,5 @@
-import NativeType from './NativeType.js'
-import { Identifier } from '../grammar/index.js'
+import NativeType from './NativeType.ts'
+import { Identifier } from '../grammar'
 
 export default class DbIdType extends NativeType {
  
@@ -11,11 +11,11 @@ export default class DbIdType extends NativeType {
         return super.isAssignableFrom(context, other) || other instanceof NativeType;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('DbId');
     }
 

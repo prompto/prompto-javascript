@@ -1,10 +1,10 @@
-import Instance from './Instance.js'
-import { CategoryType } from '../type/index.js'
-import { Variable } from '../runtime/index.js'
-import { Identifier } from '../grammar/index.js'
-import { $DataStore } from '../store/index.js'
-import { NotMutableError } from '../error/index.js'
-import { convertFromJavaScript } from '../utils/index.js'
+import Instance from './Instance.ts'
+import { CategoryType } from '../type'
+import { Variable } from '../runtime'
+import { Identifier } from '../grammar'
+import { $DataStore } from '../store'
+import { NotMutableError } from '../error'
+import { convertFromJavaScript } from '../utils'
 
 export default class NativeInstance extends Instance {
 

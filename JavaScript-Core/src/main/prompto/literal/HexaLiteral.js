@@ -1,6 +1,6 @@
-import Literal from './Literal.js'
-import { IntegerType } from '../type/index.js'
-import { IntegerValue } from '../value/index.js'
+import Literal from '../../../main/prompto/literal/Literal.ts'
+import { IntegerType } from '../type'
+import { IntegerValue } from '../value'
 
 /* jshint bitwise:false*/
 function parseHexa(text) {
@@ -27,7 +27,7 @@ export default class HexaLiteral extends Literal {
         super(text, parseHexa(text));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return IntegerType.instance;
     }
 }

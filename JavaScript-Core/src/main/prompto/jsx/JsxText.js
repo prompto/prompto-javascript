@@ -1,5 +1,5 @@
-import IJsxExpression from './IJsxExpression.js'
-import { TextType } from '../type/index.js'
+import IJsxExpression from '../../../main/prompto/jsx/IJsxExpression.ts'
+import { TextType } from '../type'
 import HtmlEntities from 'html-entities'
 
 export default class JsxText extends IJsxExpression {
@@ -9,19 +9,19 @@ export default class JsxText extends IJsxExpression {
         this.text = text;
     }
 
-    check(context) {
+    check(context: Context): Type {
         return TextType.instance;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.text);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         // convert html entities
         const text = (new HtmlEntities.XmlEntities()).decode(this.text);
         transpiler.append(JSON.stringify(text));

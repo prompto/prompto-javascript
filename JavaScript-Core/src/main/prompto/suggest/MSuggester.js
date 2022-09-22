@@ -1,5 +1,5 @@
 import BaseSuggester from "./BaseSuggester.js";
-import {MLexer, MParser} from "../parser/index.js";
+import {MLexer, MParser} from "../parser";
 
 
 export default class MSuggester extends BaseSuggester {

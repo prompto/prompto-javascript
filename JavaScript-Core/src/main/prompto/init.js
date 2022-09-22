@@ -1,4 +1,4 @@
-import {NullValue, BooleanValue} from "./value/index.js"
+import {NullValue, BooleanValue} from "../../main/prompto/value"
 import AnnotationProcessors from './processor/AnnotationProcessors.js'
 import JavaScriptClassType from "./javascript/JavaScriptClassType.js"
 import $DataStore from "./store/DataStore.js"

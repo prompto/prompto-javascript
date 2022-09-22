@@ -1,7 +1,7 @@
-import Literal from './Literal.js'
-import { UUIDType } from '../type/index.js'
-import { UUIDValue } from '../value/index.js'
-import { UUID } from '../intrinsic/index.js'
+import Literal from './Literal.ts'
+import { UUIDType } from '../type'
+import { UUIDValue } from '../value'
+import { UUID } from '../intrinsic'
 
 /*jshint evil:true*/
 function parse(text) {
@@ -14,15 +14,15 @@ export default class UUIDLiteral extends Literal {
         super(text, new UUIDValue(parse(text)));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return UUIDType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(UUID);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("UUID.fromString(").append(this.text).append(")");
     }
 }

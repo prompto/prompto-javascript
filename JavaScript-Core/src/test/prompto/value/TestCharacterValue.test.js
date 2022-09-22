@@ -1,4 +1,4 @@
-var prompto = require("../../../main/prompto/index");
+var prompto = require("../../../main/prompto");
 
 var CharacterValue = prompto.value.CharacterValue;
 

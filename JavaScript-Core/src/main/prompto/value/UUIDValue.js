@@ -1,8 +1,8 @@
-import Value from './Value.js'
-import { TextValue } from './index.js'
-import { InvalidDataError } from '../error/index.js'
-import { UUID } from '../intrinsic/index.js'
-import { UUIDType } from '../type/index.js'
+import Value from '../../../main/prompto/value/Value.ts'
+import { TextValue } from '../value'
+import { InvalidDataError } from '../error'
+import { UUID } from '../intrinsic'
+import { UUIDType } from '../type'
 
 export default class UUIDValue extends Value {
    
@@ -24,7 +24,7 @@ export default class UUIDValue extends Value {
         return this.value.toString();
     }
 
-    getStorableData() {
+    getStorableData(): any {
         return this.value.toString();
     }
 

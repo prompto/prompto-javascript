@@ -1,6 +1,6 @@
-import NativeType from './NativeType.js';
-import { Identifier } from '../grammar/index.js';
-import { Any } from "../intrinsic/index.js";
+import NativeType from '../../../main/prompto/type/NativeType.ts';
+import { Identifier } from '../grammar';
+import { Any } from "../intrinsic";
 
 export default class CssType extends NativeType {
 
@@ -16,11 +16,11 @@ export default class CssType extends NativeType {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("Object");
     }
 

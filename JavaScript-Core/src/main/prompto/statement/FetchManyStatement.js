@@ -1,7 +1,7 @@
 import FetchManyExpression from '../expression/FetchManyExpression.js'
-import { Variable } from '../runtime/index.js'
-import { CursorType } from '../type/index.js'
-import {StatementList} from "./index.js";
+import { Variable } from '../runtime'
+import { CursorType } from '../type'
+import {StatementList} from "../statement";
 
 export default class FetchManyStatement extends FetchManyExpression {
 
@@ -27,27 +27,27 @@ export default class FetchManyStatement extends FetchManyExpression {
         return false;
     }
 
-    check(context) {
+    check(context: Context): Type {
         super.check(context);
         return this.thenWith.check(context, new CursorType(this.type));
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const record = super.interpret(context);
         return this.thenWith.interpret(context, record);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         super.toDialect(writer);
         this.thenWith.toDialect(writer, new CursorType(this.type));
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         super.declare(transpiler);
         this.thenWith.declare(transpiler, new CursorType(this.type));
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         const mutable = this.type ? this.type.mutable : false;

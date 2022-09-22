@@ -1,5 +1,5 @@
 import SwitchCase from './SwitchCase.js'
-import { VoidType } from '../type/index.js'
+import { VoidType } from '../type'
 
 export default class AtomicSwitchCase extends SwitchCase {
 
@@ -19,11 +19,11 @@ export default class AtomicSwitchCase extends SwitchCase {
         return value.equals(thisValue);
     }
 
-    caseToMDialect(writer) {
+    casetoMDialect(writer: CodeWriter): void {
         this.caseToEDialect(writer);
     }
 
-    caseToODialect(writer) {
+    casetoODialect(writer: CodeWriter): void {
         writer.append("case ");
         this.expression && this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -31,7 +31,7 @@ export default class AtomicSwitchCase extends SwitchCase {
         writer.dedent();
     }
 
-    catchToODialect(writer) {
+    catchtoODialect(writer: CodeWriter): void {
         writer.append("catch (");
         this.expression && this.expression.toDialect(writer);
         writer.append(") {").newLine().indent();
@@ -39,7 +39,7 @@ export default class AtomicSwitchCase extends SwitchCase {
         writer.dedent().append("} ");
     }
 
-    caseToEDialect(writer) {
+    casetoEDialect(writer: CodeWriter): void {
         writer.append("when ");
         this.expression && this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -55,11 +55,11 @@ export default class AtomicSwitchCase extends SwitchCase {
         writer.dedent();
     }
 
-    catchToEDialect(writer) {
+    catchtoEDialect(writer: CodeWriter): void {
         this.caseToEDialect(writer); // no difference
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("case ");
         this.expression && this.expression.transpile(transpiler);
         transpiler.append(":").indent();

@@ -1,8 +1,8 @@
-import CategoryParameter from './CategoryParameter.js'
-import { AttributeDeclaration, ConcreteCategoryDeclaration } from '../declaration/index.js'
-import { IdentifierList } from '../grammar/index.js'
-import { SyntaxError } from '../error/index.js'
-import { equalObjects, equalArrays } from '../utils/index.js'
+import CategoryParameter from './CategoryParameter.ts'
+import { AttributeDeclaration, ConcreteCategoryDeclaration } from '../declaration'
+import { IdentifierList } from '../grammar'
+import { SyntaxError } from '../error'
+import { equalObjects, equalArrays } from '../utils'
 
 export default class ExtendedParameter extends CategoryParameter {
 
@@ -30,7 +30,7 @@ export default class ExtendedParameter extends CategoryParameter {
             equalArrays(this.attributes, obj.attributes);
     }
 
-    register(context) {
+    register(context: Context): void {
         const actual = context.getRegisteredValue(this.id);
         if(actual!==null) {
             throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
@@ -42,7 +42,7 @@ export default class ExtendedParameter extends CategoryParameter {
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }
 
-    check(context) {
+    check(context: Context): Type {
         this.type.checkExists(context);
         if(this.attributes!==null) {
             this.attributes.forEach(attr => {
@@ -59,7 +59,7 @@ export default class ExtendedParameter extends CategoryParameter {
         return decl ? decl.getType(context) : this.type;
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         this.type.toDialect(writer);
         writer.append(' ');
         writer.append(this.name);
@@ -77,7 +77,7 @@ export default class ExtendedParameter extends CategoryParameter {
         }
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         this.type.toDialect(writer);
         writer.append('(');
         this.attributes.toDialect(writer, false);
@@ -86,7 +86,7 @@ export default class ExtendedParameter extends CategoryParameter {
         writer.append(this.name);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append(this.name);
         writer.append(':');
         this.type.toDialect(writer);

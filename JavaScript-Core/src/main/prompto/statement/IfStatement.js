@@ -1,7 +1,7 @@
-import BaseStatement from './BaseStatement.js'
-import { IfElement, IfElementList } from './index.js'
-import { VoidType, TypeMap } from '../type/index.js'
-import { BooleanValue } from '../value/index.js'
+import BaseStatement from '../../../main/prompto/statement/BaseStatement.ts'
+import { IfElement, IfElementList } from '../statement'
+import { VoidType, TypeMap } from '../type'
+import { BooleanValue } from '../value'
 
 export default class IfStatement extends BaseStatement {
   
@@ -36,7 +36,7 @@ export default class IfStatement extends BaseStatement {
         this.elements.add(new IfElement(null, statements));
     }
 
-    check(context) {
+    check(context: Context): Type {
         const types = new TypeMap();
         let section = null;
         this.elements.forEach(element => {
@@ -49,7 +49,7 @@ export default class IfStatement extends BaseStatement {
         return types.inferType(context, section);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         for(let i=0;i<this.elements.length;i++) {
             const element = this.elements[i];
             const condition = element.condition || null;
@@ -61,13 +61,13 @@ export default class IfStatement extends BaseStatement {
         return null;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.elements.forEach(element => {
             element.declare(transpiler);
         });
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         for(let i=0;i<this.elements.length;i++) {
             const element = this.elements[i];
             if (i > 0)
@@ -87,15 +87,15 @@ export default class IfStatement extends BaseStatement {
         return true;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.toDialect(this);
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         this.toEDialect(writer);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         let curly = false;
         for(let i=0;i<this.elements.length; i++) {
             if(i>0) {
@@ -109,7 +109,7 @@ export default class IfStatement extends BaseStatement {
             writer.newLine();
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         for(let i=0;i<this.elements.length; i++) {
             if(i>0)
                 writer.append("else ");

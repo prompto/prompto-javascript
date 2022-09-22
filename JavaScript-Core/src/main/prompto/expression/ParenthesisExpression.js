@@ -1,6 +1,6 @@
-import Expression from './Expression.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
 
-export default class ParenthesisExpression extends Expression {
+export default class ParenthesisExpression extends BaseExpression {
   
     constructor(expression) {
         super();
@@ -11,27 +11,27 @@ export default class ParenthesisExpression extends Expression {
         return "(" + this.expression.toString() + ")";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("(");
         this.expression.toDialect(writer);
         writer.append(")");
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.expression.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("(");
         this.expression.transpile(transpiler);
         transpiler.append(")");
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.expression.check(context);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return this.expression.interpret(context);
     }
 

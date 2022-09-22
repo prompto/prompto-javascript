@@ -1,5 +1,5 @@
 import OLexer from './OLexer.js'
-import { Dialect } from "./index.js";
+import { Dialect } from "../parser";
 
 export default class ONamingLexer extends OLexer {
 

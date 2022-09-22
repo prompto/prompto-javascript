@@ -1,12 +1,12 @@
 import BaseSwitchStatement from './BaseSwitchStatement.js'
-import { ArgumentList, Argument, Identifier } from '../grammar/index.js'
-import { EnumeratedCategoryType, VoidType, CategoryType } from '../type/index.js'
-import { ErrorVariable } from '../runtime/index.js'
-import { ExecutionError } from '../error/index.js'
-import { UnresolvedParameter } from '../param/index.js'
-import { ConstructorExpression } from '../expression/index.js'
-import { TextLiteral } from '../literal/index.js'
-import {StatementList} from "./index.js";
+import { ArgumentList, Argument, Identifier } from '../grammar'
+import { EnumeratedCategoryType, VoidType, CategoryType } from '../type'
+import { ErrorVariable } from '../runtime'
+import { ExecutionError } from '../error'
+import { UnresolvedParameter } from '../param'
+import { ConstructorExpression } from '../expression'
+import { TextLiteral } from '../literal'
+import {StatementList} from "../statement";
 
 export default class SwitchErrorStatement extends BaseSwitchStatement {
 
@@ -65,7 +65,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         return section;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         let result = null;
         try {
             result = this.statements.interpret(context);
@@ -102,13 +102,13 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         return error;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer = writer.newLocalWriter();
         writer.context.registerValue(new ErrorVariable(this.errorId));
         super.toDialect(writer);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("try (").append(this.errorId.name).append(") {").newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent().append("} ");
@@ -128,7 +128,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         writer.newLine();
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("try ").append(this.errorId.name).append(":").newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent();
@@ -148,7 +148,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         writer.newLine();
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("switch on ").append(this.errorId.name).append(" doing:").newLine().indent();
         this.statements.toDialect(writer);
         writer.dedent();
@@ -167,14 +167,14 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.statements.declare(transpiler);
         const child = transpiler.newChildTranspiler();
         child.context.registerValue(new ErrorVariable(this.errorId));
         this.declareSwitch(child);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("try {").indent();
         this.statements.transpile(transpiler);
         transpiler.dedent().append("} catch(").append(this.errorId.name).append(") {").indent();

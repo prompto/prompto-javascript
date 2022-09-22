@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "esModuleInterop":true,
+    "target": "ES2020",
+    "lib": [
+      "es2021"
+    ],
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "declaration": false,
+    "preserveConstEnums": true,
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "src/main/*.ts",
+    "globals.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

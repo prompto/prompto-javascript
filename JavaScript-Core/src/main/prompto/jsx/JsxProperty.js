@@ -1,5 +1,5 @@
-import Section from '../parser/Section.js'
-import { BooleanType, VoidType } from '../type/index.js'
+import Section from '../parser/Section.ts'
+import { BooleanType, VoidType } from '../type'
 
 export default class JsxProperty extends Section {
 
@@ -10,7 +10,7 @@ export default class JsxProperty extends Section {
         this.suite = suite;
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(this.value!=null)
             return this.value.check(context);
         else
@@ -34,7 +34,7 @@ export default class JsxProperty extends Section {
             this.value.transpileProto(transpiler, proto);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.id.name);
         if(this.value!=null) {
             writer.append("=");
@@ -46,12 +46,12 @@ export default class JsxProperty extends Section {
             writer.append(" ");
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         if(this.value!=null)
             this.value.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         let name = this.id.name;
         if(name.indexOf('-')>=0)
             name = '"' + name + '"';

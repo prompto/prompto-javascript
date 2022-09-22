@@ -1,5 +1,5 @@
 import MLexer from './MLexer.js'
-import { Dialect } from "./index.js";
+import { Dialect } from "./index.ts";
 
 export default class MIndentingLexer extends MLexer {
 

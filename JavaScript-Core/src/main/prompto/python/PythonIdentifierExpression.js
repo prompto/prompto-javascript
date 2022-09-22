@@ -24,7 +24,7 @@ export default class PythonIdentifierExpression extends PythonExpression {
         return result;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.parent!=null) {
             this.parent.toDialect(writer);
             writer.append('.');

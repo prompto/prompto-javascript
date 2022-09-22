@@ -1,4 +1,4 @@
-import ExecutionError from './ExecutionError.js'
+import ExecutionError from './ExecutionError.ts'
 
 export default class UserError extends ExecutionError {
 

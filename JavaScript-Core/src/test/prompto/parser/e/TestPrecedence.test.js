@@ -1,5 +1,5 @@
 import antlr4 from "antlr4";
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 
 function parse_expression(code) {
 	var parser = new prompto.parser.ECleverParser(code);

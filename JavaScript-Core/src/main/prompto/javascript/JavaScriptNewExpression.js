@@ -15,12 +15,12 @@ export default class JavaScriptNewExpression extends JavaScriptExpression {
         return this.method.interpretNew(context, module);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('new ');
         this.method.transpile(transpiler);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append('new ');
         this.method.toDialect(writer);
     }

@@ -1,4 +1,4 @@
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 var parseString = require("../../parser/BaseOParserTest").parseString;
 
 test('Attribute', () => {

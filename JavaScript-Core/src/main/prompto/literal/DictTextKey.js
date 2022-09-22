@@ -1,4 +1,4 @@
-import { TextValue } from '../value/index.js'
+import { TextValue } from '../value'
 
 /*jshint evil:true*/
 function unescape(text) {
@@ -19,15 +19,15 @@ export default class DictTextKey {
         return unescape(this.text);
     }
 
-    check(context) {
+    check(context: Context): Type {
         // nothing to do
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return new TextValue(this.stringValue());
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 

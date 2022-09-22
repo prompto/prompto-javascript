@@ -25,7 +25,7 @@ export default class JavaIdentifierExpression extends JavaExpression {
         }
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.parent!=null) {
             this.parent.toDialect(writer);
             writer.append(this.isChildClass ? '$' : '.');

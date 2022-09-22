@@ -1,4 +1,4 @@
-import ObjectList from '../utils/ObjectList.js'
+import ObjectList from '../utils/ObjectList.ts'
 
 export default class MethodDeclarationList extends ObjectList {
 

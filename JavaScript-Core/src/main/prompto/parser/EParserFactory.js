@@ -1,5 +1,5 @@
 import antlr4 from 'antlr4';
-import { EIndentingLexer, ECleverParser } from './index.js'
+import { EIndentingLexer, ECleverParser } from '../parser'
 
 export default function EParserFactory() {
 	

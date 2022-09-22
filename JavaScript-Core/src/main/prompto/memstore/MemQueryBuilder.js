@@ -1,5 +1,5 @@
-import QueryBuilder from '../store/QueryBuilder.js'
-import { MatchPredicate, AndPredicate, OrPredicate, NotPredicate } from './index.js'
+import QueryBuilder from '../store/QueryBuilder.ts'
+import { MatchPredicate, AndPredicate, OrPredicate, NotPredicate } from './index.ts'
 
 export default class MemQueryBuilder extends QueryBuilder {
 

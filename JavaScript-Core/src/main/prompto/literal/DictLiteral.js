@@ -1,8 +1,8 @@
-import Literal from './Literal.js'
-import { DictEntryList } from './index.js'
-import { DictionaryValue, DecimalValue, TextValue } from '../value/index.js'
-import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType, TypeMap } from '../type/index.js'
-import { Dictionary } from '../intrinsic/index.js'
+import Literal from './Literal.ts'
+import { DictEntryList } from './index.ts'
+import { DictionaryValue, DecimalValue, TextValue } from '../value'
+import { MissingType, DecimalType, IntegerType, TextType, CharacterType, DictionaryType, TypeMap } from '../type'
+import { Dictionary } from '../intrinsic'
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
@@ -15,24 +15,24 @@ export default class DictLiteral extends Literal {
         this.itemType = null;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.mutable)
             writer.append("mutable ");
         this.entries.toDialect(writer);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(Dictionary);
         this.entries.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("new Dictionary(").append(this.mutable).append(", ");
         this.entries.transpile(transpiler);
         transpiler.append(")");
     }
 
-    check(context) {
+    check(context: Context): Type {
         if(this.itemType==null)
             this.itemType = this.inferElementType(context);
         return new DictionaryType(this.itemType);
@@ -49,7 +49,7 @@ export default class DictLiteral extends Literal {
         return types.inferType(context, this);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         if(this.entries.items.length>0) {
             this.check(context); /// force computation of itemType
             const dict = new Dictionary();

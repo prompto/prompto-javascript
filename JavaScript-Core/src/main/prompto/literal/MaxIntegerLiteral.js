@@ -6,7 +6,7 @@ export default class MaxIntegerLiteral extends IntegerLiteral {
         super("MAX_INTEGER", 0x20000000000000);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("0x20000000000000");
     }
 }

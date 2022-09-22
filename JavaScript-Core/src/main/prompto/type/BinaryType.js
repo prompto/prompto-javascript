@@ -1,5 +1,5 @@
-import NativeType from './NativeType.js'
-import { TextType } from './index.js'
+import NativeType from '../../../main/prompto/type/NativeType.ts'
+import { TextType } from './index.ts'
 
 export default class BinaryType extends NativeType {
 

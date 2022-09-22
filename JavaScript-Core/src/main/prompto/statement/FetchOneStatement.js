@@ -1,6 +1,6 @@
 import FetchOneExpression from '../expression/FetchOneExpression.js'
-import { Variable } from '../runtime/index.js'
-import {StatementList} from "./index.js";
+import { Variable } from '../runtime'
+import {StatementList} from "../statement";
 
 export default class FetchOneStatement extends FetchOneExpression {
 
@@ -26,27 +26,27 @@ export default class FetchOneStatement extends FetchOneExpression {
         return false;
     }
 
-    check(context) {
+    check(context: Context): Type {
         super.check(context);
         return this.thenWith.check(context, this.type);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const record = super.interpret(context);
         return this.thenWith.interpret(context, record);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         super.toDialect(writer);
         this.thenWith.toDialect(writer, this.type);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         super.declare(transpiler);
         return this.thenWith.declare(transpiler, this.type);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("(function() {").indent();
         this.transpileQuery(transpiler);
         transpiler.append("$DataStore.instance.fetchOneAsync(builder.build(), function(stored) {").indent();

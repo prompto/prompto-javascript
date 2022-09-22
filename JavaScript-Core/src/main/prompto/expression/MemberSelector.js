@@ -1,10 +1,10 @@
 import SelectorExpression from './SelectorExpression.js'
-import { UnresolvedIdentifier, ParenthesisExpression } from './index.js'
-import { Dialect } from '../parser/index.js'
-import { UnresolvedCall } from '../statement/index.js'
-import { MethodType, VoidType, NullType } from '../type/index.js'
-import { Instance, NullValue, ClosureValue } from '../value/index.js'
-import { NullReferenceError } from '../error/index.js'
+import { UnresolvedIdentifier, ParenthesisExpression } from '../expression'
+import { Dialect } from '../parser'
+import { UnresolvedCall } from '../statement'
+import { MethodType, VoidType, NullType } from '../type'
+import { Instance, NullValue, ClosureValue } from '../value'
+import { NullReferenceError } from '../error'
 
 export default class MemberSelector extends SelectorExpression {
 
@@ -17,14 +17,14 @@ export default class MemberSelector extends SelectorExpression {
         return this.id.name;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if (writer.dialect === Dialect.E)
             this.toEDialect(writer);
         else
             this.toOMDialect(writer);
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         try {
             const type = this.check(writer.context);
             if (type instanceof MethodType) {
@@ -33,14 +33,14 @@ export default class MemberSelector extends SelectorExpression {
         } catch (e) {
             // gracefully skip exceptions
         }
-       this.parentAndMemberToDialect(writer);
+       this.parentAndMembertoDialect(writer: CodeWriter): void;
     }
 
     toOMDialect(writer) {
-        this.parentAndMemberToDialect(writer);
+        this.parentAndMembertoDialect(writer: CodeWriter): void;
     }
 
-    parentAndMemberToDialect(writer) {
+    parentAndMembertoDialect(writer: CodeWriter): void {
         // ensure singletons are not treated as constructors
         try {
             this.resolveParent(writer.context);
@@ -55,30 +55,30 @@ export default class MemberSelector extends SelectorExpression {
         writer.append(this.name);
     }
 
-    parentToEDialect(writer) {
+    parenttoEDialect(writer: CodeWriter): void {
         if(this.parent instanceof UnresolvedCall) {
             writer.append('(');
             this.parent.toDialect(writer);
             writer.append(')');
         } else
-            this.parent.parentToDialect(writer);
+            this.parent.parenttoDialect(writer: CodeWriter): void;
     }
 
     parentToOMDialect(writer) {
         if(this.parent instanceof ParenthesisExpression && this.parent.expression instanceof UnresolvedCall)
             this.parent.expression.toDialect(writer);
         else
-            this.parent.parentToDialect(writer);
+            this.parent.parenttoDialect(writer: CodeWriter): void;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         const parent = this.resolveParent(transpiler.context);
         parent.declareParent(transpiler);
         const parentType = this.checkParent(transpiler.context);
         return parentType.declareMember(transpiler, this, this.id);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const parent = this.resolveParent(transpiler.context);
         parent.transpileParent(transpiler);
         transpiler.append(".");
@@ -99,7 +99,7 @@ export default class MemberSelector extends SelectorExpression {
         return this.parent.toString() + "." + this.name;
     }
 
-    check(context) {
+    check(context: Context): Type {
         const parentType = this.checkParent(context);
         if(parentType && parentType !== NullType.instance)
             return parentType.checkMember(context, this.id, this.id);
@@ -107,7 +107,7 @@ export default class MemberSelector extends SelectorExpression {
             return VoidType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);

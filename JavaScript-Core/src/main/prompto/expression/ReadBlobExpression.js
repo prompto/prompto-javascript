@@ -1,9 +1,9 @@
-import Expression from './Expression.js'
-import { BlobValue } from '../value/index.js'
-import { ResourceType, BlobType } from '../type/index.js'
-import { NullReferenceError, InvalidResourceError} from '../error/index.js'
+import BaseExpression from './BaseExpression.ts'
+import { BlobValue } from '../value'
+import { ResourceType, BlobType } from '../type'
+import { NullReferenceError, InvalidResourceError} from '../error'
 
-export default class ReadBlobExpression extends Expression {
+export default class ReadBlobExpression extends BaseExpression {
 
     constructor(resource) {
         super();
@@ -14,12 +14,12 @@ export default class ReadBlobExpression extends Expression {
         return "read Blob from " + this.resource.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("read Blob from ");
         this.resource.toDialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         context = context.newResourceContext();
         const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
@@ -27,7 +27,7 @@ export default class ReadBlobExpression extends Expression {
         return BlobType.instance;
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         context = context.newResourceContext();
         const res = this.resource.interpret(context);
         if(res==null) {
@@ -44,11 +44,11 @@ export default class ReadBlobExpression extends Expression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.resource.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.resource.transpile(transpiler);
         transpiler.append(".readBinary()");
     }

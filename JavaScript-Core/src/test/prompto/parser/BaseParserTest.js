@@ -1,7 +1,7 @@
 var yaml = require("js-yaml");
 var path = require("path");
 var fs = require("fs");
-import * as prompto from "../../../main/prompto/index.js";
+import * as prompto from "../../../main/prompto";
 
 import antlr4 from "antlr4";
 var Out = require("../runtime/utils/Out").Out;

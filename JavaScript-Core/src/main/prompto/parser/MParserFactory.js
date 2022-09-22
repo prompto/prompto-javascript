@@ -1,5 +1,5 @@
 import antlr4 from 'antlr4';
-import { MIndentingLexer, MCleverParser } from './index.js'
+import { MIndentingLexer, MCleverParser } from '../parser'
 
 export default function MParserFactory() {
 	

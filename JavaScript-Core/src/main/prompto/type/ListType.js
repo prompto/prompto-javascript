@@ -1,12 +1,12 @@
-import ContainerType from './ContainerType.js'
-import {IntegerType, SetType, BooleanType, VoidType} from './index.js'
-import { Identifier } from '../grammar/index.js'
-import { List, StrictSet } from '../intrinsic/index.js'
-import { ListValue } from '../value/index.js'
-import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins.js';
-import { IndexOfMethodDeclaration, RemoveItemMethodDeclaration, RemoveValueMethodDeclaration, AddValueMethodDeclaration, InsertValueMethodDeclaration } from '../builtins/ListTypeBuiltins.js';
-import { multiplyArray } from '../utils/index.js'
-import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.js'
+import ContainerType from '../../../main/prompto/type/ContainerType.ts'
+import {IntegerType, SetType, BooleanType, VoidType} from '../type'
+import { Identifier } from '../grammar'
+import { List, StrictSet } from '../intrinsic'
+import { ListValue } from '../value'
+import { JoinListMethodDeclaration } from '../builtins/ContainerTypeBuiltins.ts';
+import { IndexOfMethodDeclaration, RemoveItemMethodDeclaration, RemoveValueMethodDeclaration, AddValueMethodDeclaration, InsertValueMethodDeclaration } from '../../../main/prompto/builtins/ListTypeBuiltins.ts';
+import { multiplyArray } from '../utils'
+import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.ts'
 
 export default class ListType extends ContainerType {
   
@@ -26,12 +26,12 @@ export default class ListType extends ContainerType {
             return new ListType(this.itemType, mutable);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(List);
         this.itemType.declare(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('List')
     }
 

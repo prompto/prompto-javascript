@@ -1,7 +1,7 @@
 import antlr4 from 'antlr4';
 import OParser from './OParser.js'
-import { ONamingLexer, OPromptoBuilder } from "./index.js"
-import { importFsIfNode } from '../utils/index.js'
+import { ONamingLexer, OPromptoBuilder } from "../parser"
+import { importFsIfNode } from '../utils'
 const fs = importFsIfNode();
 
 function createInput(input) {
@@ -27,7 +27,6 @@ export default class OCleverParser extends OParser {
 		super(createInput(input));
 		if(debug)
 			this._interp.debug = true;
-		this.path = "";
 	}
 
 	parse() {

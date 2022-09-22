@@ -1,6 +1,6 @@
-import Literal from './Literal.js'
-import { DecimalType } from '../type/index.js'
-import { DecimalValue } from '../value/index.js'
+import Literal from '../../../main/prompto/literal/Literal.ts'
+import { DecimalType } from '../type'
+import { DecimalValue } from '../value'
 
 export default class DecimalLiteral extends Literal {
 
@@ -8,15 +8,15 @@ export default class DecimalLiteral extends Literal {
         super(text, DecimalValue.Parse(text));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return DecimalType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         // nothing to do;
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.text);
     }
 }

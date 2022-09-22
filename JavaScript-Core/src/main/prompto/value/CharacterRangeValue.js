@@ -1,7 +1,7 @@
 import RangeValue from './RangeValue.js'
-import { CharacterValue } from './index.js'
-import { IndexOutOfRangeError } from '../error/index.js'
-import { CharacterType } from '../type/index.js'
+import { CharacterValue } from '../value'
+import { IndexOutOfRangeError } from '../error'
+import { CharacterType } from '../type'
 
 export default class CharacterRangeValue extends RangeValue {
 

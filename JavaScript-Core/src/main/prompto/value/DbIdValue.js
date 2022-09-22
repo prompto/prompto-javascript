@@ -1,5 +1,5 @@
-import Value from "./Value.js";
-import { DbIdType } from "../type/index.js";
+import Value from "./Value.ts";
+import { DbIdType } from "../type";
 
 export default class DbIdValue extends Value {
 
@@ -16,7 +16,7 @@ export default class DbIdValue extends Value {
         return this.value.toString();
     }
 
-    getStorableData() {
+    getStorableData(): any {
         return this.value;
     }
 

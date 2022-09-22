@@ -1,5 +1,5 @@
-import Value from './Value.js'
-import { TypeType } from "../type/index.js";
+import Value from './Value.ts'
+import { TypeType } from "../type";
 
 export default class TypeValue extends Value {
   

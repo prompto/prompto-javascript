@@ -1,7 +1,7 @@
-import Value from './Value.js'
-import { AnyType } from '../type/index.js'
+import Value from '../../../main/prompto/value/Value.ts'
+import { AnyType } from '../type'
 
-export default class AnyValue extends Value {
+export default class AnyValue extends BaseValue {
 
     constructor() {
         super(AnyType.instance);

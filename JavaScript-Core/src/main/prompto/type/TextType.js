@@ -1,12 +1,12 @@
-import NativeType from './NativeType.js'
-import {CharacterType, IntegerType, BooleanType, DecimalType, VoidType} from './index.js'
-import { TextValue } from '../value/index.js'
-import { Identifier } from '../grammar/index.js'
-import { TypeFamily } from '../store/index.js'
-import { isAText } from '../utils/index.js'
+import NativeType from './NativeType.ts'
+import {CharacterType, IntegerType, BooleanType, DecimalType, VoidType} from './index.ts'
+import { TextValue } from '../value'
+import { Identifier } from '../grammar'
+import { TypeFamily } from '../store'
+import { isAText } from '../utils'
 import { StartsWithMethodDeclaration, EndsWithMethodDeclaration, IndexOfMethodDeclaration,
     ReplaceMethodDeclaration, ReplaceAllMethodDeclaration, TrimMethodDeclaration, SplitMethodDeclaration,
-    ToCapitalizedMethodDeclaration, ToLowerCaseMethodDeclaration, ToUpperCaseMethodDeclaration } from '../builtins/TextTypeBuiltins.js'
+    ToCapitalizedMethodDeclaration, ToLowerCaseMethodDeclaration, ToUpperCaseMethodDeclaration } from '../../../main/prompto/builtins/TextTypeBuiltins.ts'
 
 export default class TextType extends NativeType {
 
@@ -20,11 +20,11 @@ export default class TextType extends NativeType {
             || (other == CharacterType.instance);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(isAText);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append('"Text"');
     }
 

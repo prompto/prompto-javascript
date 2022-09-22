@@ -1,7 +1,7 @@
 var Out = require("../../runtime/utils/Out").Out;
 var interpretResource = require("../../parser/BaseOParserTest").interpretResource;
 var checkOutput = require("../../parser/BaseOParserTest").checkOutput;
-var prompto = require("../../../../main/prompto/index");
+var prompto = require("../../../../main/prompto");
 
 beforeEach( () => {
 	Out.init();

@@ -1,9 +1,12 @@
 // Generated from MParser.g4 by ANTLR 4.11.2-SNAPSHOT
 
-import { default as antlr4 } from 'antlr4';
-import MParserListener from "./MParserListener.js";
+import antlr4 from 'antlr4';
+import MParserListener from "./MParserListener";
 // for running tests with parameters, TODO: discuss strategy for typed parameters in CI
+// eslint-disable-next-line no-unused-vars
 type int = number;
+
+import AbstractParser from './AbstractParser';
 
 export default class MParser extends AbstractParser {
 	public static readonly INDENT = 1;

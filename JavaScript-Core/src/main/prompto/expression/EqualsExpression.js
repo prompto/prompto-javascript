@@ -1,8 +1,8 @@
-import Expression from './Expression.js'
-import { InstanceExpression, UnresolvedIdentifier } from './index.js'
-import { EqOp } from '../grammar/index.js'
-import { MatchOp } from '../store/index.js'
-import { Variable, LinkedVariable, LinkedValue } from '../runtime/index.js'
+import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import { InstanceExpression, UnresolvedIdentifier } from './index.ts'
+import { EqOp } from '../grammar'
+import { MatchOp } from '../store'
+import { Variable, LinkedVariable, LinkedValue } from '../runtime'
 import {
     ContainerType,
     TextType,
@@ -13,14 +13,14 @@ import {
     DecimalType,
     MethodType,
     CategoryType
-} from '../type/index.js'
-import { NullValue, BooleanValue, Value, TypeValue, Instance } from '../value/index.js'
-import { CodeWriter, removeAccents, isAMethod, isInstanceOf } from '../utils/index.js'
-import { SyntaxError } from '../error/index.js'
+} from '../type'
+import { NullValue, BooleanValue, Value, TypeValue, Instance } from '../value'
+import { CodeWriter, removeAccents, isAMethod, isInstanceOf } from '../utils'
+import { SyntaxError } from '../error'
 
 const VOWELS = "AEIO"; // sufficient here
 
-export default class EqualsExpression extends Expression {
+export default class EqualsExpression extends BaseExpression {
   
     constructor(left, operator, right) {
         super();
@@ -33,7 +33,7 @@ export default class EqualsExpression extends Expression {
         return this.left.toString() + " " + this.operator.toString() + " " + this.right.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.left.toDialect(writer);
         writer.append(" ");
         this.operator.toDialect(writer);
@@ -47,7 +47,7 @@ export default class EqualsExpression extends Expression {
         this.right.toDialect(writer);
     }
 
-    check(context) {
+    check(context: Context): Type {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
@@ -65,7 +65,7 @@ export default class EqualsExpression extends Expression {
         return BooleanType.instance; // can compare all objects
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const lval = this.left.interpret(context) || NullValue.instance;
         const rval = this.right.interpret(context) || NullValue.instance;
         return this.interpretValues(context, lval, rval);
@@ -173,7 +173,7 @@ export default class EqualsExpression extends Expression {
             return null;
     }
 
-    interpretAssert(context, test) {
+    interpretAssert(context: Context, test: TextMethodDeclaration): boolean {
         const lval = this.left.interpret(context) || NullValue.instance;
         const rval = this.right.interpret(context) || NullValue.instance;
         const result = this.interpretValues(context, lval, rval);
@@ -225,7 +225,7 @@ export default class EqualsExpression extends Expression {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.left.declare(transpiler);
         this.right.declare(transpiler);
         if (this.operator === EqOp.ROUGHLY) {
@@ -236,7 +236,7 @@ export default class EqualsExpression extends Expression {
         }
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         switch (this.operator) {
             case EqOp.EQUALS:
                 this.transpileEquals(transpiler);

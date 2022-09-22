@@ -1,5 +1,5 @@
-import Value from './Value.js'
-import { CodeType } from '../type/index.js'
+import Value from '../../../main/prompto/value/Value.ts'
+import { CodeType } from '../type'
 
 export default class CodeValue extends Value {
 
@@ -8,11 +8,11 @@ export default class CodeValue extends Value {
         this.expression = expression;
     }
 
-    check(context) {
+    check(context: Context): Type {
         return this.expression.checkCode (context);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         return this.expression.interpretCode (context);
     }
 

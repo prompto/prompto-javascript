@@ -1,7 +1,7 @@
 import JavaScriptSelectorExpression from './JavaScriptSelectorExpression.js'
-import { JavaScriptExpressionList } from './index.js'
-import { NativeInstance } from '../value/index.js'
-import { SyntaxError } from '../error/index.js'
+import { JavaScriptExpressionList } from '../javascript'
+import { NativeInstance } from '../value'
+import { SyntaxError } from '../error'
 
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 const isWorker = typeof window === 'undefined' && typeof importScripts === 'function';
@@ -26,7 +26,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
         return m.method.apply(m.instance, args);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if (this.parent !== null) {
             this.parent.transpile(transpiler);
             transpiler.append(".");
@@ -92,7 +92,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
             throw new SyntaxError("Could not resolve member method: " + this.toString());
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.parent!=null) {
             this.parent.toDialect(writer);
             writer.append('.');

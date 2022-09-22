@@ -1,7 +1,7 @@
-import NativeType from './NativeType.js'
-import { Identifier } from '../grammar/index.js'
-import { UUID } from '../intrinsic/index.js'
-import { UUIDValue } from '../value/index.js'
+import NativeType from '../../../main/prompto/type/NativeType.ts'
+import { Identifier } from '../grammar'
+import { UUID } from '../intrinsic'
+import { UUIDValue } from '../value'
 
 export default class UUIDType extends NativeType {
 
@@ -17,11 +17,11 @@ export default class UUIDType extends NativeType {
         }
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.register(UUID);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("Uuid");
     }
 

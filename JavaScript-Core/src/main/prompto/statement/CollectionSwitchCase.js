@@ -1,5 +1,5 @@
 import SwitchCase from './SwitchCase.js'
-import { VoidType, ContainerType } from '../type/index.js'
+import { VoidType, ContainerType } from '../type'
 
 export default class CollectionSwitchCase extends SwitchCase {
 
@@ -19,18 +19,18 @@ export default class CollectionSwitchCase extends SwitchCase {
 
     matches(context, value) {
         const thisValue = this.expression.interpret(context);
-        if(thisValue.hasItem) {
-            return thisValue.hasItem(context, value);
+        if(thisValue.hasValue) {
+            return thisValue.hasValue(context, value);
         } else {
             return false;
         }
     }
 
-    caseToMDialect(writer) {
+    casetoMDialect(writer: CodeWriter): void {
         this.caseToEDialect(writer);
     }
 
-    caseToODialect(writer) {
+    casetoODialect(writer: CodeWriter): void {
         writer.append("case in ");
         this.expression && this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -38,7 +38,7 @@ export default class CollectionSwitchCase extends SwitchCase {
         writer.dedent();
     }
 
-    caseToEDialect(writer) {
+    casetoEDialect(writer: CodeWriter): void {
         writer.append("when in ");
         this.expression && this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -46,7 +46,7 @@ export default class CollectionSwitchCase extends SwitchCase {
         writer.dedent();
     }
 
-    catchToODialect(writer) {
+    catchtoODialect(writer: CodeWriter): void {
         writer.append("catch (");
         this.expression && this.expression.toDialect(writer);
         writer.append(") {").newLine().indent();
@@ -54,7 +54,7 @@ export default class CollectionSwitchCase extends SwitchCase {
         writer.dedent().append("} ");
     }
 
-    catchToMDialect(writer) {
+    catchtoMDialect(writer: CodeWriter): void {
         writer.append("except in ");
         this.expression && this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -62,11 +62,11 @@ export default class CollectionSwitchCase extends SwitchCase {
         writer.dedent();
     }
 
-    catchToEDialect(writer) {
+    catchtoEDialect(writer: CodeWriter): void {
         this.caseToEDialect(writer); // no difference
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         this.expression && this.expression.expressions.forEach(expression => {
             transpiler.append("case ");
             expression.transpile(transpiler);

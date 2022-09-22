@@ -1,5 +1,5 @@
 import BaseSwitchStatement from './BaseSwitchStatement.js'
-import {StatementList} from "./index.js";
+import {StatementList} from "../statement";
 
 export default class SwitchStatement extends BaseSwitchStatement {
  
@@ -30,12 +30,12 @@ export default class SwitchStatement extends BaseSwitchStatement {
         return this.expression.check(context);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const switchValue = this.expression.interpret(context);
         return this.interpretSwitch(context, switchValue, null);
     }
 
-    toODialect(writer) {
+    toODialect(writer: CodeWriter): void {
         writer.append("switch(");
         this.expression.toDialect(writer);
         writer.append(") {").newLine();
@@ -50,7 +50,7 @@ export default class SwitchStatement extends BaseSwitchStatement {
         writer.append("}").newLine();
     }
 
-    toEDialect(writer) {
+    toEDialect(writer: CodeWriter): void {
         writer.append("switch on ");
         this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -65,7 +65,7 @@ export default class SwitchStatement extends BaseSwitchStatement {
         writer.dedent();
     }
 
-    toMDialect(writer) {
+    toMDialect(writer: CodeWriter): void {
         writer.append("switch on ");
         this.expression.toDialect(writer);
         writer.append(":").newLine().indent();
@@ -80,12 +80,12 @@ export default class SwitchStatement extends BaseSwitchStatement {
         writer.dedent();
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.expression.declare(transpiler);
         this.declareSwitch(transpiler);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("switch (");
         this.expression.transpile(transpiler);
         transpiler.append(") {").newLine();

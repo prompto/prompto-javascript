@@ -1,4 +1,4 @@
-var prompto = require("../../../main/prompto/index");
+var prompto = require("../../../main/prompto");
 var DateTime = prompto.intrinsic.DateTime;
 
 test('DateWithTZWithNoTZ', () => {

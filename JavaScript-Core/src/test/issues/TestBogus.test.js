@@ -1,5 +1,5 @@
 import antlr4 from "antlr4";
-var prompto = require("../../main/prompto/index");
+var prompto = require("../../main/prompto");
 var execute = require("../prompto/parser/BaseParserTest").execute;
 
 test('explore bogus.pec', () => {

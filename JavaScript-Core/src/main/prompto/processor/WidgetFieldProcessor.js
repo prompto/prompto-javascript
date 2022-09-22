@@ -1,7 +1,7 @@
 import AnnotationProcessor from './AnnotationProcessor.js'
-import { TextLiteral, TypeLiteral } from '../literal/index.js'
-import { TypeExpression } from '../expression/index.js'
-import { Identifier } from '../grammar/index.js'
+import { TextLiteral, TypeLiteral } from '../literal'
+import { TypeExpression } from '../expression'
+import { Identifier } from '../grammar'
 
 export default class WidgetFieldProcessor extends AnnotationProcessor {
 

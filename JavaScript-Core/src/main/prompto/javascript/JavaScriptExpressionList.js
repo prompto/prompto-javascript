@@ -1,4 +1,4 @@
-import ObjectList from '../utils/ObjectList.js'
+import ObjectList from '../../../main/prompto/utils/ObjectList.ts'
 
 export default class JavaScriptExpressionList extends ObjectList {
 
@@ -6,7 +6,7 @@ export default class JavaScriptExpressionList extends ObjectList {
         super(null, expression);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.length > 0) {
             this.forEach(exp => {
                 exp.toDialect(writer);
@@ -16,7 +16,7 @@ export default class JavaScriptExpressionList extends ObjectList {
         }
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         if(this.length > 0) {
             this.forEach(exp => {
                 exp.transpile(transpiler);

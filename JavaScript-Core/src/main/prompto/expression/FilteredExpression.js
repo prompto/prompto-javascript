@@ -1,8 +1,8 @@
-import Expression from './Expression.js'
-import { IterableType, ListType, AnyType, BooleanType } from '../type/index.js'
-import { NullReferenceError, InternalError } from '../error/index.js'
+import BaseExpression from './BaseExpression.ts'
+import { IterableType, ListType, AnyType, BooleanType } from '../type'
+import { NullReferenceError, InternalError } from '../error'
 
-export default class FilteredExpression extends Expression {
+export default class FilteredExpression extends BaseExpression {
  
     constructor(source, predicate) {
         super();
@@ -14,11 +14,11 @@ export default class FilteredExpression extends Expression {
         return this.source.toString() + " filtered with " + this.predicate.toString();
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         this.predicate.filteredToDialect(writer, this.source);
     }
 
-    check(context) {
+    check(context: Context): Type {
         const sourceType = this.source.check(context);
         if(!(sourceType instanceof IterableType)) {
             context.problemListener.reportError(this, "Expecting an iterable type as data source !");
@@ -32,7 +32,7 @@ export default class FilteredExpression extends Expression {
         return new ListType(itemType);
     }
 
-    interpret(context) {
+    interpret(context: Context): Value {
         const sourceType = this.source.check(context);
         if(!(sourceType instanceof IterableType)) {
             throw new InternalError("Illegal source type: " + sourceType.name);
@@ -50,7 +50,7 @@ export default class FilteredExpression extends Expression {
         return iterable.filter(filter)
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.source.declare(transpiler);
         const listType = this.source.check(transpiler.context);
         const itemType = listType.itemType;
@@ -58,7 +58,7 @@ export default class FilteredExpression extends Expression {
         arrow.declareFilter(transpiler, itemType);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         const listType = this.source.check(transpiler.context);
         const itemType = listType.itemType;
         this.source.transpile(transpiler);

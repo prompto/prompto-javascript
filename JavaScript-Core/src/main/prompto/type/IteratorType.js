@@ -1,8 +1,8 @@
-import IterableType from './IterableType.js'
-import { IntegerType } from './index.js'
-import { Identifier } from '../grammar/index.js'
-import ToListMethodDeclaration from '../builtins/ToListMethodDeclaration.js'
-import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.js'
+import IterableType from '../../../main/prompto/type/IterableType.ts'
+import { IntegerType } from './index.ts'
+import { Identifier } from '../grammar'
+import ToListMethodDeclaration from '../builtins/ToListMethodDeclaration.ts'
+import ToSetMethodDeclaration from '../builtins/ToSetMethodDeclaration.ts'
 
 export default class IteratorType extends IterableType {
 
@@ -38,7 +38,7 @@ export default class IteratorType extends IterableType {
             return  super.checkMember(context, section, id);
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         this.itemType.declare(transpiler);
     }
 

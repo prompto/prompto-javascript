@@ -1,4 +1,4 @@
-import Section from '../parser/Section.js'
+import Section from '../parser/Section.ts'
 
 export default class JsxClosing extends Section {
 
@@ -13,7 +13,7 @@ export default class JsxClosing extends Section {
             context.problemListener.reportInvalidClosingTag(this.id, opening.id);
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append("</").append(this.id.name).append(">");
         if(this.suite!=null)
             writer.appendRaw(this.suite);

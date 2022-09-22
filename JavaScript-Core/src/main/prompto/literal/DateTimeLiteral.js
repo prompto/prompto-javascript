@@ -1,7 +1,7 @@
-import Literal from './Literal.js'
-import { DateTimeType } from '../type/index.js'
-import { DateTimeValue } from '../value/index.js'
-import { DateTime } from '../intrinsic/index.js'
+import Literal from './Literal.ts'
+import { DateTimeType } from '../type'
+import { DateTimeValue } from '../value'
+import { DateTime } from '../intrinsic'
 
 export default class DateTimeLiteral extends Literal {
 
@@ -10,15 +10,15 @@ export default class DateTimeLiteral extends Literal {
         super(text, new DateTimeValue(dt));
     }
 
-    check(context) {
+    check(context: Context): Type {
         return DateTimeType.instance;
     }
 
-    declare(transpiler) {
+    declare(transpiler: Transpiler): void {
         transpiler.require(DateTime);
     }
 
-    transpile(transpiler) {
+    transpile(transpiler: Transpiler): void {
         transpiler.append("DateTime.parse(").append(this.text).append(")");
     }
 }

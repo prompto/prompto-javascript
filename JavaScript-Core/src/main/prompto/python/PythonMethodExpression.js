@@ -1,5 +1,5 @@
 import PythonSelectorExpression from './PythonSelectorExpression.js'
-import { PythonArgumentList } from './index.js'
+import { PythonArgumentList } from './index.ts'
 
 export default class PythonMethodExpression extends PythonSelectorExpression {
 
@@ -13,7 +13,7 @@ export default class PythonMethodExpression extends PythonSelectorExpression {
         return this.parent.toString() + "." + this.name + "(" + this.args.toString() + ")";
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         if(this.parent!=null) {
             this.parent.toDialect(writer);
             writer.append('.');

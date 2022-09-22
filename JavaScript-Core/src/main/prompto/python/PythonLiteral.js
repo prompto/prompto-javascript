@@ -8,7 +8,7 @@ export default class PythonLiteral {
         return this.text;
     }
 
-    toDialect(writer) {
+    toDialect(writer: CodeWriter): void {
         writer.append(this.text);
     }
 }
