@@ -15,7 +15,7 @@ jobs:
       - run:
           name: Run Core tests
           environment:
-            PROMPTO_ROOT: 
+            PROMPTO_ROOT: ""
           command: >-
             PROMPTO_ROOT=$(pwd) &&
             cd JavaScript-Core &&
@@ -24,7 +24,7 @@ jobs:
       - run:
           name: Run Runtime tests
           environment:
-            PROMPTO_ROOT: 
+            PROMPTO_ROOT: ""
           command: >-
             PROMPTO_ROOT=$(pwd) &&
             cd JavaScript-Runtime &&
@@ -35,7 +35,7 @@ workflows:
   regular:
     jobs:
       - build-and-test:
-        filters:
-          branches:
-            ignore: typescript-migration
+          filters:
+            branches:
+              ignore: typescript-migration
 
