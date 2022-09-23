@@ -34,4 +34,8 @@ jobs:
 workflows:
   regular:
     jobs:
-      - build-and-test
+      - build-and-test:
+        filters:
+          branches:
+            ignore: typescript-migration
+
