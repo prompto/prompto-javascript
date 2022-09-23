@@ -4,7 +4,7 @@ export {default as MethodDeclarationList} from './MethodDeclarationList';
 export {default as Annotation} from './Annotation';
 export {default as ContOp} from './ContOp';
 export {default as CmpOp} from './CmpOp';
-export {default as EqOp} from './EqOp';
+export {default as EqOp} from '../../../main/prompto/grammar/EqOp';
 export {default as OrderByClause} from './OrderByClause';
 export {default as OrderByClauseList} from './OrderByClauseList';
 export {default as Operator} from './Operator';

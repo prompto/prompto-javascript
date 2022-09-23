@@ -24,7 +24,7 @@ export {default as DocumentValue} from './DocumentValue';
 export {default as IterableValue} from './IterableValue';
 export {default as IteratorValue} from './IteratorValue';
 export {default as CursorValue} from './CursorValue';
-export {default as TypeValue} from './TypeValue';
+export {default as TypeValue} from '../../../main/prompto/value/TypeValue';
 export {default as ClosureValue} from './ClosureValue';
 export {default as CssValue} from './CssValue';
 export {default as JsxValue} from './JsxValue';

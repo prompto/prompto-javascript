@@ -63,4 +63,6 @@ export default interface Type {
     transpileHasAnyValue(transpiler: Transpiler, itemType: Type, left: Expression, right: Expression): void;
 
     readJSONValue(context: Context, node: JsonNode, parts: Map<string, Uint8Array>): Value;
+
+    getStaticMemberValue(context: Context, id: Identifier): Value | null;
 }

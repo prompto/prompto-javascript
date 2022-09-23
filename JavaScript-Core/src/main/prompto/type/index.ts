@@ -38,6 +38,6 @@ export {default as CssType} from './CssType';
 export {default as HtmlType} from './HtmlType';
 export {default as EnumeratedNativeType} from '../../../main/prompto/type/EnumeratedNativeType';
 export {default as EnumeratedCategoryType} from './EnumeratedCategoryType';
-export {default as TypeType} from './TypeType';
+export {default as TypeType} from '../../../main/prompto/type/TypeType';
 export {default as PropertiesType} from './PropertiesType';
 export {default as TypeMap} from '../../../main/prompto/type/TypeMap';

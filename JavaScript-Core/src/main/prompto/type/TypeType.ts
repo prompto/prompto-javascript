@@ -1,10 +1,14 @@
-import BaseType from '../../../main/prompto/type/BaseType.ts'
+import BaseType from './BaseType'
 import { Identifier } from '../grammar'
+import Type from "./Type";
+import {TypeFamily} from "../store";
 
 export default class TypeType extends BaseType {
 
-    constructor(type) {
-        super(new Identifier("Type"));
+    type: Type;
+
+    constructor(type: Type) {
+        super(new Identifier("Type"), TypeFamily.TYPE);
         this.type = type;
     }
 

@@ -1,10 +1,12 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
-import { TypeType } from '../type'
+import BaseExpression from './BaseExpression'
+import {Type, TypeType} from '../type'
 import { TypeValue } from '../value'
 
 export default class TypeExpression extends BaseExpression {
 
-    constructor(value) {
+    value: Type;
+
+    constructor(value: Type) {
         super();
         this.value = value;
     }
