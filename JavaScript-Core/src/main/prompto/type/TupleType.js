@@ -14,7 +14,7 @@ export default class TupleType extends NativeType {
         return this;
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || (other instanceof ListType) || (other instanceof SetType);
     }
@@ -53,7 +53,7 @@ export default class TupleType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("count" === id.name) {
             return IntegerType.instance;
         } else {
@@ -67,7 +67,7 @@ export default class TupleType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         if ("count" === id.name) {
             transpiler.append("length");
         } else {
@@ -75,7 +75,7 @@ export default class TupleType extends NativeType {
         }
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
             return this;
         } else {
@@ -83,7 +83,7 @@ export default class TupleType extends NativeType {
         }
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -92,7 +92,7 @@ export default class TupleType extends NativeType {
         }
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === TupleType.instance || other instanceof ListType || other instanceof SetType) {
             left.transpile(transpiler);
             transpiler.append(".add(");
@@ -139,7 +139,7 @@ export default class TupleType extends NativeType {
         transpiler.append(")");
     }
 
-    checkHasAllOrAny(context, other) {
+    checkHasAllOrAny(context: Context, section: Section, other: Type): Type {
         return BooleanType.instance;
     }
 

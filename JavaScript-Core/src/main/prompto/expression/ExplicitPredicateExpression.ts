@@ -1,20 +1,27 @@
 import PredicateExpression from './PredicateExpression'
 import { ArrowExpression } from '../expression'
-import { IdentifierList } from "../grammar"
+import {Identifier, IdentifierList} from "../grammar"
 import { Dialect } from "../parser"
-import { Variable } from "../runtime"
+import {Context, Variable} from "../runtime"
+import {Value} from "../value";
+import {CodeWriter} from "../utils";
+import Expression from "./Expression";
+import {ContainerType, Type} from "../type";
 
 export default class ExplicitPredicateExpression extends PredicateExpression {
 
-    constructor(itemId, predicate) {
+    itemId: Identifier;
+    predicate: Expression;
+
+    constructor(itemId: Identifier, predicate: Expression) {
         super();
         this.itemId = itemId;
         this.predicate = predicate;
     }
 
 
-    toArrowExpression() {
-        const arrow = new ArrowExpression(new IdentifierList(this.itemId), null, null);
+    toArrowExpression(): ArrowExpression {
+        const arrow = new ArrowExpression(new IdentifierList(null, this.itemId), null, null);
         arrow.setExpression(this.predicate);
         return arrow;
     }
@@ -24,11 +31,11 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
     }
 
     
-    filteredToDialect(writer, source) {
+    filteredToDialect(writer: CodeWriter, source: Expression): void {
         writer = writer.newChildWriter()
         const sourceType = source.check(writer.context);
-        const itemType = sourceType.itemType;
-        writer.context.registerValue(new Variable(this.itemId, itemType));
+        const itemType = (sourceType as unknown as ContainerType).itemType;
+        writer.context.registerInstance(new Variable(this.itemId, itemType), true);
         if (writer.dialect === Dialect.O) {
             writer.append("filtered (");
             source.toDialect(writer);
@@ -63,9 +70,9 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
     }
 
 
-    checkFilter(context, itemType) {
+    checkFilter(context: Context, itemType: Type): Type {
         const child = context.newChildContext();
-        child.registerValue(new Variable(this.itemId, itemType));
+        child.registerInstance(new Variable(this.itemId, itemType), true);
         return this.predicate.check(child);
     }
 

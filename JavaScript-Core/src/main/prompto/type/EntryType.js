@@ -9,7 +9,7 @@ export default class EntryType extends BaseType {
         this.itemType = itemType;
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("key" === id.name) {
             return TextType.instance;
         } else if ("value" === id.name) {
@@ -28,7 +28,7 @@ export default class EntryType extends BaseType {
             return super.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         transpiler.append(id.name);
     }
 }

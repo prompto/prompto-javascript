@@ -22,7 +22,7 @@ export default class CharacterType extends NativeType {
             throw new InvalidDataError("Cannot convert " + value.toString() + " to CharacterValue");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("codePoint" === id.name) {
             return IntegerType.instance;
         } else {
@@ -36,7 +36,7 @@ export default class CharacterType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         if ("codePoint" === id.name) {
             transpiler.append("charCodeAt(0)");
         } else {
@@ -48,12 +48,12 @@ export default class CharacterType extends NativeType {
         return TextType.instance;
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         left.declare(transpiler);
         right.declare(transpiler);
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         // can add anything to text
         left.transpile(transpiler);
         transpiler.append(" + ");
@@ -67,7 +67,7 @@ export default class CharacterType extends NativeType {
         return super.checkMultiply.apply(this, context, other, tryReverse);
     }
 
-    declareMultiply(transpiler, other, tryReverse, left, right) {
+    declareMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === IntegerType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -75,7 +75,7 @@ export default class CharacterType extends NativeType {
             return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    transpileMultiply(transpiler, other, tryReverse, left, right) {
+    transpileMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === IntegerType.instance) {
             left.transpile(transpiler);
             transpiler.append(".repeat(");

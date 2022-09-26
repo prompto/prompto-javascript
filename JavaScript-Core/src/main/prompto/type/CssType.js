@@ -8,7 +8,7 @@ export default class CssType extends NativeType {
         super(new Identifier("Css"));
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if (other === CssType.instance) {
             return this;
         } else {
@@ -29,7 +29,7 @@ export default class CssType extends NativeType {
         transpiler.require(Any);
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === CssType.instance) {
             transpiler.append("Object.assign(new Any(),");
             left.transpile(transpiler);

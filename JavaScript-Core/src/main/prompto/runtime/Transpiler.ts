@@ -275,6 +275,10 @@ export default class Transpiler {
         return body;
     }
 
+    appendBoolean(value: boolean): Transpiler {
+        return this.append(value ? "true" : "false");
+    }
+
     append(text: string): Transpiler {
         this.line += text;
         return this;

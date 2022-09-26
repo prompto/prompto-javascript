@@ -7,7 +7,7 @@ export default class DbIdType extends NativeType {
         super(new Identifier("DbId"));
      }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other) || other instanceof NativeType;
     }
 

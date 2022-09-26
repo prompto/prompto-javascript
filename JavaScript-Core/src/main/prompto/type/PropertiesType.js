@@ -11,7 +11,7 @@ export default class PropertiesType extends BaseType {
         this.properties = properties;
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         if(other instanceof DocumentType)
             return true;
         else
@@ -23,7 +23,7 @@ export default class PropertiesType extends BaseType {
         return prop ? prop.validator.getMethodDeclarations(context) :  super.getMemberMethods(context, id);
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         const prop = this.properties.get(id.name);
         return prop ? prop.validator.getType(context) :  super.checkMember(context, section, id);
     }
@@ -41,7 +41,7 @@ export default class PropertiesType extends BaseType {
             super.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         if ("text" === id.name) {
             transpiler.append("getText()");
         } else {

@@ -19,7 +19,7 @@ export default class DateTimeType extends NativeType {
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if (other === PeriodType.instance) {
             return this;
         } else {
@@ -35,7 +35,7 @@ export default class DateTimeType extends NativeType {
         transpiler.append('DateTime');
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -43,7 +43,7 @@ export default class DateTimeType extends NativeType {
             return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".addPeriod(");
@@ -53,7 +53,7 @@ export default class DateTimeType extends NativeType {
             return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         if (other === PeriodType.instance) {
             return this;
         } else if (other === DateTimeType.instance) {
@@ -63,7 +63,7 @@ export default class DateTimeType extends NativeType {
         }
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === PeriodType.instance || other === DateTimeType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -71,7 +71,7 @@ export default class DateTimeType extends NativeType {
             return super.declareSubtract(transpiler, other, left, right);
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".subtractPeriod(");
@@ -107,7 +107,7 @@ export default class DateTimeType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         switch (id.name) {
             case "year":
             case "month":
@@ -153,7 +153,7 @@ export default class DateTimeType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         const name = id.name;
         if ("year" === name) {
             transpiler.append("getYear()");

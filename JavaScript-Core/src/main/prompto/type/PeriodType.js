@@ -18,7 +18,7 @@ export default class PeriodType extends NativeType {
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if (other instanceof PeriodType) {
             return this;
         } else {
@@ -34,7 +34,7 @@ export default class PeriodType extends NativeType {
         transpiler.append('Period')
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -43,7 +43,7 @@ export default class PeriodType extends NativeType {
         }
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".add(");
@@ -54,7 +54,7 @@ export default class PeriodType extends NativeType {
         }
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         if (other === PeriodType.instance) {
             return this;
         } else {
@@ -62,7 +62,7 @@ export default class PeriodType extends NativeType {
         }
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -70,7 +70,7 @@ export default class PeriodType extends NativeType {
             return super.declareSubtract(transpiler, other, left, right);
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".subtract(");
@@ -88,7 +88,7 @@ export default class PeriodType extends NativeType {
         }
     }
 
-    declareMultiply(transpiler, other, tryReverse, left, right) {
+    declareMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === IntegerType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -96,7 +96,7 @@ export default class PeriodType extends NativeType {
             return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    transpileMultiply(transpiler, other, tryReverse, left, right) {
+    transpileMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === IntegerType.instance) {
             left.transpile(transpiler);
             transpiler.append(".multiply(");
@@ -119,7 +119,7 @@ export default class PeriodType extends NativeType {
         transpiler.append(".minus()");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         switch (id.name) {
             case "years":
             case "months":
@@ -151,7 +151,7 @@ export default class PeriodType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         switch (id.name) {
             case "years":
             case "months":

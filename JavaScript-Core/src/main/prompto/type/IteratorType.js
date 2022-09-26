@@ -14,7 +14,7 @@ export default class IteratorType extends IterableType {
         return new IteratorType(itemType);
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return  super.isAssignableFrom(context, other)
             || ((other instanceof IteratorType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
@@ -31,7 +31,7 @@ export default class IteratorType extends IterableType {
         return this.itemType;
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("count" === id.name)
             return IntegerType.instance;
         else

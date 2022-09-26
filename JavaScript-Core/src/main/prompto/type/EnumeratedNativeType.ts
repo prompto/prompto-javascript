@@ -61,7 +61,7 @@ export default class EnumeratedNativeType extends BaseType {
             super.declareMember(transpiler, section, id.name);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         if ("value" === id.name || "name" === id.name) {
             transpiler.append(id.name);
         } else {
@@ -69,7 +69,7 @@ export default class EnumeratedNativeType extends BaseType {
         }
     }
 
-    declareStaticMember(transpiler, section, id) {
+    declareStaticMember(context: Context, id: Identifier): void {
         if("symbols" === id.name) {
             const decl = transpiler.context.getRegisteredDeclaration(this.id);
             transpiler.declare(decl);

@@ -20,7 +20,7 @@ export default class ContainerType extends IterableType {
         }
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("count" === id.name) {
             return IntegerType.instance;
         } else {
@@ -33,7 +33,7 @@ export default class ContainerType extends IterableType {
            super.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         if ("count" === id.name) {
             transpiler.append("length");
         } else {

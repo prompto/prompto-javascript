@@ -38,7 +38,7 @@ export default class VersionType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         switch (id.name) {
             case "major":
             case "minor":
@@ -63,7 +63,7 @@ export default class VersionType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         switch (id.name) {
             case "major":
             case "minor":

@@ -1,20 +1,29 @@
 import BaseType from './BaseType'
 import { AnyType, NativeType, TextType, MethodType, VoidType, NullType, MissingType,
     EnumeratedCategoryType, EnumeratedNativeType } from '../type'
-import { CategoryDeclaration, ConcreteCategoryDeclaration, SingletonCategoryDeclaration, 
-    EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from '../declaration'
+import {
+    CategoryDeclaration, ConcreteCategoryDeclaration, SingletonCategoryDeclaration,
+    EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration, Declaration, MethodDeclaration, AttributeDeclaration
+} from '../declaration'
 import {ExecutionError, InternalError, PromptoError} from '../error'
-import { UnresolvedIdentifier, ValueExpression, MethodSelector, ArrowExpression, InstanceExpression } from '../expression'
+import {
+    UnresolvedIdentifier,
+    ValueExpression,
+    MethodSelector,
+    ArrowExpression,
+    InstanceExpression,
+    Expression
+} from '../expression'
 import { Operator, Identifier, Argument, ArgumentList } from '../grammar'
-import {Context, MethodDeclarationMap, MethodFinder, Score} from '../runtime'
+import {Context, MethodDeclarationMap, MethodFinder, Score, Transpiler} from '../runtime'
 import { MethodCall } from '../statement'
-import {$DataStore, TypeFamily} from '../store'
-import {CodeWriter, compareValues, convertToJsonNode} from '../utils'
+import {$DataStore, Stored, TypeFamily} from '../store'
+import {CodeWriter, compareValues, convertToJsonNode, convertToJsonString} from '../utils'
 import { SyntaxError } from '../error'
 import { Section } from '../parser'
 import { Any } from '../intrinsic'
 import { Category } from '../intrinsic/$Root.js'
-import {ConcreteInstance} from "../value";
+import {ConcreteInstance, Instance, Value} from "../value";
 import Type from "./Type";
 
 
@@ -40,21 +49,25 @@ export default class CategoryType extends BaseType {
 
     isStorable(context: Context): boolean {
         const decl = this.getDeclaration(context);
-        return decl ? decl.isStorable(context) : false;
+        if (decl instanceof CategoryDeclaration)
+            return decl.isStorable(context);
+        else
+            return false;
     }
 
     anyfy(): Type {
         if (this.name == "Any")
             return AnyType.instance;
         else
-            return this as Type;
+            return this;
     }
 
-    resolve(context, onError) {
+    resolve(context: Context, onError?: (type: Type) => void): Type {
         let type = this.anyfy();
         if(type instanceof NativeType)
             return type;
-        const decl = context.getRegisteredDeclaration(type.id);
+        // @ts-ignore
+        const decl = context.getRegisteredDeclaration<Declaration>(Declaration, type.id);
         if(!decl) {
             if(onError)
                 onError(type);
@@ -62,7 +75,7 @@ export default class CategoryType extends BaseType {
                 context.problemListener.reportUnknownCategory(this.id, this.name);
             return AnyType.instance; // don't propagate error
         } else if(decl instanceof MethodDeclarationMap) {
-            const method = new MethodType(decl.getFirst());
+            const method = new MethodType(decl.getFirst()!);
             method.copySectionFrom(this);
             return method;
         } else {
@@ -77,7 +90,7 @@ export default class CategoryType extends BaseType {
         writer.append(this.name);
     }
 
-    getSuperType(context, section) {
+    getSuperType(context: Context, section: Section): CategoryType | null {
         const decl = this.getDeclaration(context);
         if(decl instanceof CategoryDeclaration) {
             const derived = decl.derivedFrom;
@@ -85,6 +98,7 @@ export default class CategoryType extends BaseType {
                 return new CategoryType(derived[0]);
         }
         context.problemListener.reportNoSuperType(section, this);
+        return null;
     }
 
     declare(transpiler: Transpiler): void {
@@ -104,7 +118,7 @@ export default class CategoryType extends BaseType {
         transpiler.append(this.name);
     }
 
-    transpileInstance(transpiler) {
+    transpileInstance(transpiler: Transpiler): void {
         const decl = this.getDeclaration(transpiler.context);
         if(decl instanceof SingletonCategoryDeclaration)
             transpiler.append(this.name).append(".instance");
@@ -112,32 +126,35 @@ export default class CategoryType extends BaseType {
             transpiler.append("this");
     }
 
-    newInstanceFromStored(context, stored) {
+    newInstanceFromStored(context: Context, stored: Stored): Instance<unknown> {
         const decl = this.getDeclaration(context);
-        const inst = decl.newInstanceFromStored(context, stored);
-        inst.mutable = this.mutable;
-        return inst;
+        if (decl instanceof CategoryDeclaration) {
+            const inst = decl.newInstanceFromStored(context, stored);
+            inst.mutable = this.mutable;
+            return inst;
+        } else
+            throw new SyntaxError("Should never get there!");
     }
 
-    checkUnique(context) {
-        const actual = context.getRegisteredDeclaration(this.id) || null;
-        if(actual!=null) {
+    checkUnique(context: Context): void {
+        const actual = context.getRegistered(this.id) || null;
+        if(actual) {
             throw new SyntaxError("Duplicate name: \"" + this.name + "\"");
         }
     }
 
-    getDeclaration(context) {
-        const decl = context.getRegisteredDeclaration(this.id) || null;
-        if(decl==null) {
+    getDeclaration(context: Context): Declaration {
+        const decl = context.getRegistered(this.id) || null;
+        if(!decl) {
             if(context.problemListener)
                 context.problemListener.reportUnknownCategory(this.id, this.name);
             else
                 throw new SyntaxError("Unknown category: \"" + this.name + "\"");
         }
-        return decl;
+        return decl as Declaration;
     }
 
-    checkMultiply(context, other, tryReverse) {
+    checkMultiply(context: Context, other: Type, tryReverse: boolean): Type {
         const type = this.checkOperator(context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null)
             return type;
@@ -145,7 +162,7 @@ export default class CategoryType extends BaseType {
             return super.checkMultiply(context, other, tryReverse);
     }
 
-    declareMultiply(transpiler, other, tryReverse, left, right) {
+    declareMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         const type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null) {
             left.declare(transpiler);
@@ -155,7 +172,7 @@ export default class CategoryType extends BaseType {
             return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    transpileMultiply(transpiler, other, tryReverse, left, right) {
+    transpileMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void  {
         const type = this.checkOperator(transpiler.context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null) {
             left.transpile(transpiler);
@@ -167,7 +184,7 @@ export default class CategoryType extends BaseType {
 
     }
 
-    checkDivide(context, other) {
+    checkDivide(context: Context, other: Type): Type {
         const type = this.checkOperator(context, other, false, Operator.DIVIDE);
         if(type!=null)
             return type;
@@ -175,7 +192,7 @@ export default class CategoryType extends BaseType {
             return super.checkDivide(context, other);
     }
 
-    declareDivide(transpiler, other, left, right) {
+    declareDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         const type = this.checkOperator(transpiler.context, other, false, Operator.DIVIDE);
         if(type!=null) {
             left.declare(transpiler);
@@ -185,14 +202,14 @@ export default class CategoryType extends BaseType {
             return super.declareDivide(transpiler, other, left, right);
     }
 
-    transpileDivide(transpiler, other, left, right) {
+    transpileDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         left.transpile(transpiler);
         transpiler.append(".operator_DIVIDE").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
         right.transpile(transpiler);
         transpiler.append(")");
     }
 
-    checkIntDivide(context, other) {
+    checkIntDivide(context: Context, other: Type): Type {
         const type = this.checkOperator(context, other, false, Operator.IDIVIDE);
         if(type!=null)
             return type;
@@ -200,7 +217,7 @@ export default class CategoryType extends BaseType {
             return super.checkIntDivide(context, other);
     }
 
-    declareIntDivide(transpiler, other, left, right) {
+    declareIntDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         const type = this.checkOperator(transpiler.context, other, false, Operator.IDIVIDE);
         if(type!=null) {
             left.declare(transpiler);
@@ -210,14 +227,14 @@ export default class CategoryType extends BaseType {
             return super.declareDivide(transpiler, other, left, right);
     }
 
-    transpileIntDivide(transpiler, other, left, right) {
+    transpileIntDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         left.transpile(transpiler);
         transpiler.append(".operator_IDIVIDE").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
         right.transpile(transpiler);
         transpiler.append(")");
     }
 
-    checkModulo(context, other) {
+    checkModulo(context: Context, other: Type): Type {
         const type = this.checkOperator(context, other, false, Operator.MODULO);
         if(type!=null)
             return type;
@@ -225,7 +242,7 @@ export default class CategoryType extends BaseType {
             return super.checkModulo(context, other);
     }
 
-    declareModulo(transpiler, other, left, right) {
+    declareModulo(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         const type = this.checkOperator(transpiler.context, other, false, Operator.MODULO);
         if(type!=null) {
             left.declare(transpiler);
@@ -235,22 +252,22 @@ export default class CategoryType extends BaseType {
             return super.declareModulo(transpiler, other, left, right);
     }
 
-    transpileModulo(transpiler, other, left, right) {
+    transpileModulo(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         left.transpile(transpiler);
         transpiler.append(".operator_MODULO").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
         right.transpile(transpiler);
         transpiler.append(")");
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         const type = this.checkOperator(context, other, tryReverse, Operator.PLUS);
         if(type!=null)
             return type;
         else
-            return super.checkAdd(context, other, tryReverse);
+            return super.checkAdd(context, section, other, tryReverse);
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         const type = this.checkOperator(transpiler.context, other, tryReverse, Operator.PLUS);
         if(type!=null) {
             left.declare(transpiler);
@@ -260,14 +277,14 @@ export default class CategoryType extends BaseType {
             return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         left.transpile(transpiler);
         transpiler.append(".operator_PLUS").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
         right.transpile(transpiler);
         transpiler.append(")");
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         const type = this.checkOperator(context, other, false, Operator.MINUS);
         if(type!=null)
             return type;
@@ -275,7 +292,7 @@ export default class CategoryType extends BaseType {
             return super.checkSubtract(context, other);
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         const type = this.checkOperator(transpiler.context, other, false, Operator.MINUS);
         if(type!=null) {
             left.declare(transpiler);
@@ -285,14 +302,14 @@ export default class CategoryType extends BaseType {
             return super.declareDivide(transpiler, other, left, right);
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         left.transpile(transpiler);
         transpiler.append(".operator_MINUS").append("$").append(other.getTranspiledName(transpiler.context)).append("(");
         right.transpile(transpiler);
         transpiler.append(")");
     }
 
-    checkOperator(context, other, tryReverse, operator) {
+    checkOperator(context: Context, other: Type, tryReverse: boolean, operator: Operator): Type | null {
         const actual = this.getDeclaration(context);
         if(actual instanceof ConcreteCategoryDeclaration) try {
             const method = actual.getOperatorMethod(context, operator, other);
@@ -311,11 +328,11 @@ export default class CategoryType extends BaseType {
             throw new SyntaxError("Unsupported operation: " + this.name + " " + operator.token + " " + other.name);
     }
 
-    checkExists(context) {
+    checkExists(context: Context): void {
         this.resolve(context);
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("category" === id.name)
             return new CategoryType(new Identifier("Category"));
         else if ("json" === id.name)
@@ -324,9 +341,9 @@ export default class CategoryType extends BaseType {
             return this.checkAttribute(context, section, id);
     }
 
-    checkAttribute(context, section, id) {
-        const decl = context.getRegisteredDeclaration(this.id);
-        if (decl == null) {
+    checkAttribute(context: Context, section: Section, id: Identifier): Type {
+        const decl = context.getRegistered(this.id);
+        if (!decl) {
             context.problemListener.reportUnknownCategory(this.id, this.name);
             return VoidType.instance;
         }
@@ -340,41 +357,41 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    checkCategoryAttribute(context, section, decl, id) {
+    checkCategoryAttribute(context: Context, section: Section, decl: CategoryDeclaration, id: Identifier): Type {
         if(decl.storable && "dbId" === id.name)
             return AnyType.instance;
         else if (decl.hasAttribute(context, id)) {
-            const ad = context.getRegisteredDeclaration(id);
+            const ad = context.getRegisteredDeclaration<AttributeDeclaration>(AttributeDeclaration, id);
             if (ad == null) {
                 context.problemListener.reportUnknownAttribute(section, id.name);
                 return VoidType.instance;
             }
-            return ad.getType(context);
+            return ad.getType();
         } else if ("text" === id.name) {
             return TextType.instance
         } else if (decl.hasMethod(context, id)) {
             const method = decl.getMemberMethodsMap(context, id).getFirst();
-            return new MethodType(method);
+            return new MethodType(method!); // the map can't be empty
         } else {
             context.problemListener.reportUnknownAttribute(section, id.name);
             return VoidType.instance;
         }
     }
 
-    declareMember(transpiler, id) {
+    declareMember(transpiler: Transpiler, id: Identifier): void {
         switch(id.name) {
             case "category":
                 transpiler.require(Category);
                 break;
             case "json":
-                transpiler.require(convertToJson);
+                transpiler.require(convertToJsonString);
                 transpiler.require(convertToJsonNode);
                 break;
         }
         // TODO visit attributes
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         switch(id.name) {
             case "text":
                 transpiler.append("getText()");
@@ -387,9 +404,9 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    checkStaticMember(context, section, id) {
-        const decl = context.getRegisteredDeclaration(this.id);
-        if(decl==null) {
+    checkStaticMember(context: Context, section: Section, id: Identifier): Type {
+        const decl = context.getRegistered(this.id);
+        if(!decl) {
             context.problemListener.reportUnknownIdentifier(section, this.name);
             return VoidType.instance;
         } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
@@ -397,22 +414,22 @@ export default class CategoryType extends BaseType {
         } else if(decl instanceof SingletonCategoryDeclaration) {
             return this.checkCategoryAttribute(context, section, decl, id);
         } else {
-            context.getProblemListener().reportUnknownAttribute(id, id.name);
+            context.problemListener.reportUnknownAttribute(id, id.name);
             return VoidType.instance;
         }
     }
 
-    declareStaticMember(transpiler, section, id) {
+    declareStaticMember(transpiler: Transpiler, id: Identifier): void {
         // TODO visit attributes
     }
 
-    transpileStaticMember(transpiler, id) {
+    transpileStaticMember(transpiler: Transpiler, id: Identifier): void {
         if(this.getDeclaration(transpiler.context) instanceof SingletonCategoryDeclaration)
             transpiler.append("instance.");
         transpiler.append(id.name);
     }
 
-    getStaticMemberValue(context, id) {
+    getStaticMemberValue(context: Context, id: Identifier): Value {
         const decl = this.getDeclaration(context);
         if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
             return decl.getType(context).getStaticMemberValue(context, id);
@@ -423,18 +440,18 @@ export default class CategoryType extends BaseType {
             return super.getStaticMemberValue(context, id);
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || ((other instanceof CategoryType) && this.isAssignableFromCategory(context, other));
     }
 
-    isAssignableFromCategory(context, other) {
-        return "Any"===this.name
+    isAssignableFromCategory(context: Context, other: CategoryType): boolean {
+        return "Any" == this.name
                 || other.isDerivedFrom(context, this)
                 || other.isDerivedFromAnonymous(context, this);
     }
 
-    isDerivedFrom(context, other) {
+    isDerivedFrom(context: Context, other: CategoryType): boolean {
         try {
             const thisDecl = this.getDeclaration(context);
             if (thisDecl instanceof CategoryDeclaration)
@@ -445,7 +462,7 @@ export default class CategoryType extends BaseType {
         return false; // TODO
     }
 
-    isDerivedFromCategory(context, decl, other) {
+    isDerivedFromCategory(context: Context, decl: CategoryDeclaration, other: CategoryType): boolean {
         if(decl.derivedFrom==null) {
             return false;
         }
@@ -458,7 +475,7 @@ export default class CategoryType extends BaseType {
         return false;
     }
 
-    isDerivedFromAnonymous(context, other) {
+    isDerivedFromAnonymous(context: Context, other: Type): boolean {
         if (!(other instanceof CategoryType) || !other.isAnonymous())
             return false;
         try {
@@ -468,6 +485,7 @@ export default class CategoryType extends BaseType {
                 if (otherDecl instanceof CategoryDeclaration)
                     return this.isDerivedFromAnonymousCategory(context, thisDecl, otherDecl);
             }
+            return false;
         } catch (e) {
             if (e instanceof SyntaxError) {
                 return false;
@@ -477,14 +495,16 @@ export default class CategoryType extends BaseType {
         }
     }
 
-    isDerivedFromAnonymousCategory(context, thisDecl, otherDecl) {
+    isDerivedFromAnonymousCategory(context: Context, section: Section, thisDecl: CategoryDeclaration, otherDecl: CategoryDeclaration): boolean {
         // an anonymous category extends 1 and only 1 category
-        const baseId = otherDecl.derivedFrom[0];
+        const baseId = otherDecl.derivedFrom![0];
         // check we derive from root category (if not extending 'Any')
-        if("any" !== baseId.name && !thisDecl.isDerivedFrom(context,new CategoryType(baseId)))
+        if("any" !== baseId.name && !thisDecl.isDerivedFrom(context, new CategoryType(baseId)))
             return false;
-        const allAttributeIds = otherDecl.getAllAttributes(context);
-        for(const id of allAttributeIds) {
+        const allAttributeIds = otherDecl.getAllAttributes(context, section);
+        if (!allAttributeIds)
+            return false;
+        for(const id of allAttributeIds?.values()) {
             if(!thisDecl.hasAttribute(context, id)) {
                 return false;
             }
@@ -492,11 +512,11 @@ export default class CategoryType extends BaseType {
         return true;
     }
 
-    isAnonymous() {
+    isAnonymous(): boolean {
         return this.name[0] === this.name[0].toLowerCase(); // since it's the name of the argument
     }
 
-    isMoreSpecificThan(context, other) {
+    isMoreSpecificThan(context: Context, other: Type): boolean {
         if(other instanceof NullType || other instanceof AnyType || other instanceof MissingType)
             return true;
         if(!(other instanceof CategoryType)) {
@@ -505,15 +525,15 @@ export default class CategoryType extends BaseType {
         if(other.isAnonymous()) {
             return true;
         }
-        const thisDecl = context.getRegisteredDeclaration(this.id);
-        if(thisDecl.isDerivedFrom(context, other)) {
+        const thisDecl = context.getRegisteredCategoryDeclaration(this.id);
+        if(thisDecl && thisDecl.isDerivedFrom(context, other)) {
             return true;
         } else {
             return false;
         }
     }
 
-    compareSpecifity(context, t1, t2) {
+    compareSpecifity(context: Context, t1: Type, t2: Type): Score {
         if(t1.equals(t2)) {
             return Score.SIMILAR;
         } else if(this.equals(t1)) {
@@ -539,7 +559,7 @@ export default class CategoryType extends BaseType {
             throw new InternalError("Could not instantiate " + this.name);
     }
 
-    getSortedComparator(context, key, desc) {
+    getSortedComparator(context: Context, key: Expression, desc: boolean) {
         if(key instanceof ArrowExpression) {
             return key.getSortedComparator(context, this, desc);
         } else {
@@ -547,23 +567,26 @@ export default class CategoryType extends BaseType {
             if (!key)
                 key = new UnresolvedIdentifier(keyId);
             const decl = this.getDeclaration(context);
-            if (decl.hasAttribute(context, keyId.toString())) {
-                return this.getAttributeSortedComparator(context, keyId.toString(), desc);
-            } else if (decl.hasMethod(context, keyId.toString())) {
-                return this.getMemberMethodSortedComparator(context, keyId.toString(), desc);
-            } else {
-                const method = this.findGlobalMethod(context, keyId);
-                if (method != null) {
-                    return this.getGlobalMethodSortedComparator(context, method, desc);
+            if (decl instanceof CategoryDeclaration) {
+                if (decl.hasAttribute(context, keyId)) {
+                    return this.getAttributeSortedComparator(context, keyId, desc);
+                } else if (decl.hasMethod(context, keyId)) {
+                    return this.getMemberMethodSortedComparator(context, keyId, desc);
                 } else {
-                    return this.getExpressionSortedComparator(context, key, desc);
+                    const method = this.findGlobalMethod(context, keyId);
+                    if (method != null) {
+                        return this.getGlobalMethodSortedComparator(context, method, desc);
+                    } else {
+                        return this.getExpressionSortedComparator(context, key, desc);
+                    }
                 }
-            }
+            } else
+                return null;
         }
     }
 
-    getExpressionSortedComparator(context, exp, desc) {
-        return (o1, o2) => {
+    getExpressionSortedComparator(context: Context, exp: Expression, desc: boolean) {
+        return (o1: Value, o2: Value) => {
             let ctx = context.newInstanceContext(o1, null);
             const value1 = exp.interpret(ctx);
             ctx = context.newInstanceContext(o2, null);
@@ -572,17 +595,17 @@ export default class CategoryType extends BaseType {
         };
     }
 
-    getAttributeSortedComparator(context, name, desc) {
+    getAttributeSortedComparator(context: Context, id: Identifier, desc: boolean) {
         if(desc)
-            return (o1, o2) => {
-                const value1 = o1.getMemberValue(context, name);
-                const value2 = o2.getMemberValue(context, name);
+            return (o1: Value, o2: Value) => {
+                const value1 = o1.getMemberValue(context, id);
+                const value2 = o2.getMemberValue(context, id);
                 return compareValues(value2, value1);
             };
         else
-            return (o1, o2) => {
-                const value1 = o1.getMemberValue(context, name);
-                const value2 = o2.getMemberValue(context, name);
+            return (o1: Value, o2: Value) => {
+                const value1 = o1.getMemberValue(context, id);
+                const value2 = o2.getMemberValue(context, id);
                 return compareValues(value1, value2);
             };
     }
@@ -599,18 +622,18 @@ export default class CategoryType extends BaseType {
         return cmp.bind(this);
     }
 
-    getMemberMethods(context, id) {
+    getMemberMethods(context: Context, id: Identifier): MethodDeclaration[] {
         const decl = this.getDeclaration(context);
        if (!(decl instanceof ConcreteCategoryDeclaration)) {
            context.problemListener.reportUnknownCategory(this.id, id);
-           return null;
+           return [];
        } else {
             const methods = decl.getMemberMethodsMap(context, id);
-            return methods ? methods.getAll() : null;
+            return methods ? methods.getAll() : [];
         }
     }
 
-    getStaticMemberMethods(context, id) {
+    getStaticMemberMethods(context: Context, id: Identifier): MethodDeclaration[] {
         const decl = this.getDeclaration(context);
         if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration)
             return decl.getType(context).getStaticMemberMethods(context, id);

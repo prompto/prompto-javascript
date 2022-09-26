@@ -492,10 +492,10 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
                             .append(id.name)
                             .append(" : null")
                             .append(", ")
-                            .append(decl.storable ? "true" : "false")
+                            .appendBoolean(decl.storable)
                             .append(", mutable")
                             .append(", ")
-                            .append(isEnum ? "true" : "false")
+                            .appendBoolean(isEnum)
                             .append(");").newLine();
             }, this);
         }

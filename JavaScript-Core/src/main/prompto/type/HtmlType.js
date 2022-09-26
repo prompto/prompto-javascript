@@ -8,7 +8,7 @@ export default class HtmlType extends NativeType {
         super(new Identifier("Html"));
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         if(other===JsxType.instance)
             return true;
         else

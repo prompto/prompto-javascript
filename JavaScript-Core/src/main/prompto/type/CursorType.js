@@ -14,7 +14,7 @@ export default class CursorType extends IterableType {
         return new CursorType(itemType);
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return  super.isAssignableFrom(context, other)
             || ((other instanceof CursorType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
@@ -46,7 +46,7 @@ export default class CursorType extends IterableType {
         transpiler.flush();
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("count" === id.name)
             return IntegerType.instance;
         else if ("totalCount" === id.name)
@@ -60,7 +60,7 @@ export default class CursorType extends IterableType {
             super.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         if("count"===id.name || "totalCount"===id.name) {
             transpiler.append(id.name);
         } else

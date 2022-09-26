@@ -1,20 +1,25 @@
-import BaseExpression from './BaseExpression.ts'
-import { AnyType, CursorType, IntegerType } from '../type'
+import FetchOneExpression from './FetchOneExpression'
+import {AnyType, CursorType, IntegerType, Type} from '../type'
 import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store'
-import { CursorValue } from '../value'
+import {CursorValue, Value} from '../value'
 import { CategoryDeclaration } from '../declaration'
 import { InvalidDataError } from '../error'
 import { Cursor } from "../intrinsic";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
+import {Expression } from "./index";
+import {IdentifierList, OrderByClauseList} from "../grammar";
 
-export default class FetchManyExpression extends BaseExpression {
+export default class FetchManyExpression extends FetchOneExpression {
 
-    constructor(type, first, last, predicate, include, orderBy) {
-        super();
-        this.type = type;
-        this.predicate = predicate;
+    first: Expression | null;
+    last: Expression | null;
+    orderBy: OrderByClauseList | null;
+
+    constructor(type: Type | null, first: Expression | null, last: Expression | null, predicate: Expression | null, include: IdentifierList | null, orderBy: OrderByClauseList | null) {
+        super(type,  predicate,  include);
         this.first = first;
         this.last = last;
-        this.include = include;
         this.orderBy = orderBy;
     }
 

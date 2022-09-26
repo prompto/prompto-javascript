@@ -19,12 +19,12 @@ export default class DecimalType extends NativeType {
         transpiler.append('"Decimal"')
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || (other === IntegerType.instance);
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
@@ -32,7 +32,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -40,7 +40,7 @@ export default class DecimalType extends NativeType {
             return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.transpile(transpiler);
             transpiler.append(" + ");
@@ -49,7 +49,7 @@ export default class DecimalType extends NativeType {
             return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
@@ -57,7 +57,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -65,7 +65,7 @@ export default class DecimalType extends NativeType {
             return super.declareSubtract(transpiler, other, left, right);
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.transpile(transpiler);
             transpiler.append(" - ");
@@ -82,7 +82,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    declareMultiply(transpiler, other, tryReverse, left, right) {
+    declareMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -90,7 +90,7 @@ export default class DecimalType extends NativeType {
             return super.declareMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    transpileMultiply(transpiler, other, tryReverse, left, right) {
+    transpileMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.transpile(transpiler);
             transpiler.append(" * ");
@@ -99,7 +99,7 @@ export default class DecimalType extends NativeType {
             return super.transpileMultiply(transpiler, other, tryReverse, left, right);
     }
 
-    checkDivide(context, other) {
+    checkDivide(context: Context, other: Type): Type {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
@@ -107,7 +107,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    declareDivide(transpiler, other, left, right) {
+    declareDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -115,7 +115,7 @@ export default class DecimalType extends NativeType {
             return super.declareDivide(transpiler, other, left, right);
     }
 
-    transpileDivide(transpiler, other, left, right) {
+    transpileDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             transpiler.append("divide(");
             left.transpile(transpiler);
@@ -126,7 +126,7 @@ export default class DecimalType extends NativeType {
             return super.transpileDivide(transpiler, other, left, right);
     }
 
-    checkIntDivide(context, other) {
+    checkIntDivide(context: Context, other: Type): Type {
         if(other === IntegerType.instance) {
             return IntegerType.instance;
         } else {
@@ -134,7 +134,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    declareIntDivide(transpiler, other, left, right) {
+    declareIntDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -142,7 +142,7 @@ export default class DecimalType extends NativeType {
             return super.declareIntDivide(transpiler, other, left, right);
     }
 
-    transpileIntDivide(transpiler, other, left, right) {
+    transpileIntDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === IntegerType.instance ) {
             transpiler.append("Math.floor(divide(");
             left.transpile(transpiler);
@@ -153,7 +153,7 @@ export default class DecimalType extends NativeType {
             return super.transpileIntDivide(transpiler, other, left, right);
     }
 
-    checkModulo(context, other) {
+    checkModulo(context: Context, other: Type): Type {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {
@@ -161,7 +161,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    declareModulo(transpiler, other, left, right) {
+    declareModulo(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return;
         } else {
@@ -169,7 +169,7 @@ export default class DecimalType extends NativeType {
         }
     }
 
-    transpileModulo(transpiler, other, left, right) {
+    transpileModulo(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             left.transpile(transpiler);
             transpiler.append(" % ");

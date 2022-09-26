@@ -11,11 +11,12 @@ import {IntegerValue, DecimalValue, ClosureValue, ConcreteInstance, Value, Docum
 import { InternalError } from '../error'
 import { Debugger } from "../debug";
 import {Identifier, Named, NamedInstance } from "../grammar";
-import {Catalog, Chapters} from "./Catalog";
+import {Catalog, CatalogInfo, CategoryInfo, Chapters, EnumerationInfo, MethodsInfo, WidgetInfo} from "./Catalog";
 import {Constructor} from "../utils/Generics";
 import MethodDeclaration from "../declaration/MethodDeclaration";
 import {Statement} from "../statement";
 import {context} from "../../../../../../../antlr4/ericvergnaud/antlr4/runtime/JavaScript";
+import {AttributeInfo} from "../store";
 
 export class Context {
 
@@ -34,7 +35,7 @@ export class Context {
     debugger: Debugger | null;
     declarations: Map<string, Declaration>;
     tests: Map<string, TestMethodDeclaration>;
-    instances: Map<string, Named>;
+    instances: Map<string, NamedInstance>;
     values: Map<string, Value>;
     nativeBindings: Map<string, NativeCategoryDeclaration>;
     problemListener: ProblemListener;
@@ -129,7 +130,7 @@ export class Context {
         return context;
     }
 
-    newInstanceContext(instance: Instance, type: Type, isChild = false): InstanceContext {
+    newInstanceContext(instance: Instance<never>, type: Type | null, isChild = false): InstanceContext {
         const context = new InstanceContext(this.globals, instance, type);
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
@@ -176,16 +177,16 @@ export class Context {
     getLocalCatalog(): Catalog {
         const chapters: Chapters = { attributes : [], methods : [], categories : [], enumerations : [], tests : [], widgets: []};
         this.declarations.forEach((decl, key) => {
-            const record = { type: "Document", value: decl.toDeclarationInfo()};
+            const record = { type: "Document", value: decl.toDeclarationInfo(this)};
             if(decl instanceof AttributeDeclaration) {
-                chapters.attributes?.push(record);
+                chapters.attributes?.push(record as CatalogInfo<AttributeInfo>);
             } else if(decl instanceof EnumeratedCategoryDeclaration || decl instanceof EnumeratedNativeDeclaration) {
-                chapters.enumerations?.push(record);
+                chapters.enumerations?.push(record as CatalogInfo<EnumerationInfo>);
            } else if(decl instanceof CategoryDeclaration) {
                 if((decl as CategoryDeclaration).isWidget(this)) {
-                    chapters.widgets?.push(record);
+                    chapters.widgets?.push(record as CatalogInfo<WidgetInfo>);
                 } else {
-                    chapters.categories?.push(record);
+                    chapters.categories?.push(record as CatalogInfo<CategoryInfo>);
                 }
                 /*
                 const info = {};
@@ -199,7 +200,7 @@ export class Context {
                     catalog.categories.push({ type: "Document", value: info});
                  */
             } else if(decl instanceof MethodDeclarationMap) {
-                chapters.methods?.push(record);
+                chapters.methods?.push(record as CatalogInfo<MethodsInfo>);
                 /*
                 const method = {};
                 method.name = decl.name;
@@ -330,7 +331,7 @@ export class Context {
     }
 
     unregisterTestDeclaration(declaration: TestMethodDeclaration): void {
-        this.tests.delete(declaration.getName());
+        this.tests.delete(declaration.name);
     }
 
     unregisterMethodDeclaration(declaration: MethodDeclaration, proto: string): void {
@@ -342,20 +343,22 @@ export class Context {
         }
     }
 
-    registerMethodDeclaration(declaration: Declaration): void {
+    registerMethodDeclaration(declaration: MethodDeclaration): void {
         let actual = this.checkDuplicateMethod(declaration);
         if (actual == null) {
             actual = new MethodDeclarationMap(declaration.id);
             this.declarations.set(declaration.name, actual);
         }
-        actual.register(declaration, this.problemListener);
+        actual.register(declaration, this.problemListener, false);
     }
 
-    checkDuplicateMethod(declaration: Declaration): MethodDeclarationMap | null {
+    checkDuplicateMethod(declaration: MethodDeclaration): MethodDeclarationMap | null {
         const actual = this.getRegistered(declaration.id) || null;
-        if (actual !== null && !(actual instanceof MethodDeclarationMap))
+        if (actual instanceof MethodDeclarationMap) {
             this.problemListener.reportDuplicate(declaration.id, declaration.id);
-        return actual;
+            return actual;
+        } else
+            return null;
     }
 
     registerTestDeclaration(declaration: TestMethodDeclaration): void {
@@ -414,7 +417,7 @@ export class Context {
         return this.instances.get(id.name) || null;
     }
 
-    registerInstance(variable: Named, checkDuplicate: boolean): void {
+    registerInstance(variable: NamedInstance, checkDuplicate: boolean): void {
         if(checkDuplicate === undefined)
             checkDuplicate = true;
         if(checkDuplicate) {
@@ -437,7 +440,7 @@ export class Context {
 
 
     hasValue(id: Identifier): boolean {
-        return this.contextForValue(id.name) !== null;
+        return this.contextForValue(id) !== null;
     }
 
     getValue(id: Identifier): Value | null {
@@ -542,7 +545,7 @@ export class Context {
     loadSingleton(type: Type): ConcreteInstance {
         if(this == this.globals) {
             let value = this.values.get(type.name) || null;
-            if(value == null) {
+            if(!value) {
                 const decl = this.declarations.get(type.name) || null;
                 if(!(decl instanceof SingletonCategoryDeclaration))
                     throw new InternalError("No such singleton:" + type.name);
@@ -579,14 +582,14 @@ export class ResourceContext extends Context {
 
 export class InstanceContext extends Context {
 
-    instance: Instance;
+    instance: Instance<never>;
     instanceType: Type;
     widgetFields: Map<string, WidgetField> | null;
 
-    constructor(globals: Context, instance: Instance, type: Type) {
+    constructor(globals: Context, instance: Instance<never>, type: Type | null) {
         super(globals);
         this.instance = instance || null;
-        this.instanceType = type !== null ? type : instance.type;
+        this.instanceType = type || instance.type;
         this.widgetFields = null;
     }
 

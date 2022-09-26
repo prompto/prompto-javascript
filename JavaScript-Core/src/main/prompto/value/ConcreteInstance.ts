@@ -4,14 +4,21 @@ import { CategoryType, DecimalType } from '../type'
 import {Context, Variable} from '../runtime'
 import { Identifier, Operator } from '../grammar'
 import { $DataStore } from '../store'
-import { EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration } from '../declaration'
+import {EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration, ConcreteCategoryDeclaration} from '../declaration'
 import { NotStorableError, NotMutableError } from '../error'
 import { $Root } from "../../../main/prompto/intrinsic/$Root.js";
+import Value from "./Value";
+import {JsonNode} from "../json";
+import {jsonStringifyReplacerSortKeys} from "eslint-webpack-plugin/types/utils";
 
-export default class ConcreteInstance extends Instance {
+export default class ConcreteInstance extends Instance<Map<string, Value>> {
 
-    constructor(context, declaration) {
-        super(new CategoryType(declaration.id));
+    declaration: ConcreteCategoryDeclaration;
+    storable: boolean;
+    mutable: boolean;
+
+    constructor(context: Context, declaration: ConcreteCategoryDeclaration) {
+        super(new CategoryType(declaration.id), new Map<string, Value>());
         this.declaration = declaration;
         this.storable = null;
         if(declaration.storable) {
@@ -285,12 +292,12 @@ export default class ConcreteInstance extends Instance {
         return doc;
     }
 
-    toJsonNode() {
-        const node = {};
-        Object.getOwnPropertyNames(this.values).map(name => {
-            node[name] = this.values[name].toJsonNode();
-        }, this);
-        return node;
+    toJsonNode(): JsonNode {
+        const node = new Map<string, JsonNode>();
+        this.value.forEach((value, key) => {
+            node.set(key, value.toJsonNode());
+        })
+       return node;
     }
 }
 

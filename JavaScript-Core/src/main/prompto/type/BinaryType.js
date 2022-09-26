@@ -7,7 +7,7 @@ export default class BinaryType extends NativeType {
         super(name);
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("mimeType" === id.name ) {
             return TextType.instance;
         } else if ("url" === id.name ) {

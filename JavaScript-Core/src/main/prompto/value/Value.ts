@@ -3,6 +3,7 @@ import {Context} from "../runtime";
 import {CodeWriter} from "../utils";
 import {Storable} from "../store";
 import {JsonNode, JsonParent} from "../json";
+import {Identifier} from "../grammar";
 
 export default interface Value {
     type: Type;
@@ -20,6 +21,7 @@ export default interface Value {
     toJsonStream(context: Context, values: JsonParent, instanceId: never | null, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
     toJsonNode(): JsonNode;
 
+    getMemberValue(context: Context, id: Identifier): Value | null;
 }
 
 

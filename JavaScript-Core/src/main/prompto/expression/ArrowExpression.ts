@@ -2,10 +2,10 @@ import PredicateExpression from './PredicateExpression'
 import { Dialect } from '../parser'
 import { ReturnStatement, StatementList } from '../statement'
 import {Variable, Context, Transpiler} from '../runtime'
-import {IntegerValue, BooleanValue, Value} from '../value'
+import {IntegerValue, BooleanValue, Value, NullValue} from '../value'
 import { SyntaxError } from '../error'
 import { CodeWriter } from '../utils'
-import {IdentifierList} from "../grammar";
+import {Identifier, IdentifierList} from "../grammar";
 import {IterableType, Type} from "../type";
 import {Expression} from "./index";
 
@@ -40,11 +40,12 @@ export default class ArrowExpression extends PredicateExpression {
     }
 
     check(context: Context, returnType: Type | null): Type {
-        return this.statements.check(context, returnType || null);
+        return this.statements!.check(context, returnType || null);
     }
 
-    interpret(context: Context): Value | null {
-        return this.statements.interpret(context);
+    interpret(context: Context): Value {
+        const value = this.statements!.interpret(context);
+        return value || NullValue.instance;
     }
 
     checkFilter(context: Context, itemType: Type): Type {
@@ -133,12 +134,12 @@ export default class ArrowExpression extends PredicateExpression {
         }
     }
 
-    setExpression(expression) {
+    setExpression(expression: Expression): void {
         const stmt = new ReturnStatement(expression, true);
-        this.statements = new StatementList(stmt);
+        this.statements = new StatementList(undefined, stmt);
     }
 
-    registerArrowArgs(context, itemType) {
+    registerArrowArgs(context: Context, itemType: Type): Context {
         this.args.forEach(arg => context.registerInstance(new Variable(arg, itemType), true));
         return context;
     }
@@ -147,7 +148,7 @@ export default class ArrowExpression extends PredicateExpression {
         const local = this.registerArrowArgs(context.newLocalContext(), itemType);
         const filter = (o: Value) => {
             local.setValue(this.args[0], o);
-            const result = this.statements.interpret(local);
+            const result = this.statements!.interpret(local);
             if(result instanceof BooleanValue)
                 return result.value;
             else
@@ -156,26 +157,26 @@ export default class ArrowExpression extends PredicateExpression {
         return filter.bind(this);
     }
 
-    declareFilter(transpiler, itemType) {
+    declareFilter(transpiler: Transpiler, itemType: Type): void {
         if(this.args.length !== 1)
             throw new SyntaxError("Expecting 1 parameter only!");
-        transpiler = transpiler.newChildTranspiler(null);
-        transpiler.context.registerValue(new Variable(this.args[0], itemType));
-        this.statements.declare(transpiler);
+        transpiler = transpiler.newChildTranspiler();
+        transpiler.context.registerInstance(new Variable(this.args[0], itemType), true);
+        this.statements!.declare(transpiler);
     }
 
-    transpileFilter(transpiler, itemType) {
+    transpileFilter(transpiler: Transpiler, itemType: Type) {
         if(this.args.length !== 1)
             throw new SyntaxError("Expecting 1 parameter only!");
-        transpiler = transpiler.newChildTranspiler(null);
-        transpiler.context.registerValue(new Variable(this.args[0], itemType));
-        transpiler.append("function(").append(this.args[0]).append(") { ");
-        this.statements.transpile(transpiler);
+        transpiler = transpiler.newChildTranspiler();
+        transpiler.context.registerInstance(new Variable(this.args[0], itemType), true);
+        transpiler.append("function(").append(this.args[0].name).append(") { ");
+        this.statements!.transpile(transpiler);
         transpiler.append(" }");
         transpiler.flush();
     }
 
-    getSortedComparator(context, itemType, descending) {
+    getSortedComparator(context: Context, itemType: Type, descending: boolean) {
         switch(this.args.length) {
             case 1:
                 return this.getSortedComparator1Arg(context, itemType, descending);
@@ -186,24 +187,24 @@ export default class ArrowExpression extends PredicateExpression {
         }
     }
 
-    getSortedComparator1Arg(context, itemType, descending) {
+    getSortedComparator1Arg(context: Context, itemType: Type, descending: boolean) {
         const local = this.registerArrowArgs(context.newLocalContext(), itemType);
-        const cmp = function(o1, o2) {
+        const cmp = (o1: Value, o2: Value) => {
             local.setValue(this.args[0], o1);
-            const key1 = this.statements.interpret(local);
+            const key1 = this.statements!.interpret(local);
             local.setValue(this.args[0], o2);
-            const key2 = this.statements.interpret(local);
-            return descending ? key2.compareToValue(context, key1) : key1.compareToValue(context, key2);
+            const key2 = this.statements!.interpret(local);
+            return descending ? key2!.CompareTo(context, key1!) : key1!.CompareTo(context, key2!);
         };
         return cmp.bind(this);
     }
 
-    getSortedComparator2Args(context, itemType, descending) {
+    getSortedComparator2Args(context: Context, itemType: Type, descending: boolean) {
         const local = this.registerArrowArgs(context.newLocalContext(), itemType);
-        const cmp = function(o1, o2) {
+        const cmp = (o1: Value, o2: Value) => {
             local.setValue(this.args[0], o1);
             local.setValue(this.args[1], o2);
-            const result = this.statements.interpret(local);
+            const result = this.statements!.interpret(local);
             if(!(result instanceof IntegerValue))
                 throw new SyntaxError("Expecting an Integer as result of key body!");
             return descending ? -result.value : result.value;
@@ -211,7 +212,7 @@ export default class ArrowExpression extends PredicateExpression {
         return cmp.bind(this);
     }
 
-    transpileSortedComparator(transpiler, itemType, descending) {
+    transpileSortedComparator(transpiler: Transpiler, itemType: Type, descending: boolean) {
         switch(this.args.length) {
             case 1:
                 this.transpileSortedComparator1Arg(transpiler, itemType, descending);
@@ -224,14 +225,14 @@ export default class ArrowExpression extends PredicateExpression {
         }
     }
 
-    transpileSortedComparator1Arg(transpiler, itemType, descending) {
+    transpileSortedComparator1Arg(transpiler: Transpiler, itemType: Type, descending: boolean) {
         transpiler = transpiler.newLocalTranspiler();
         this.registerArrowArgs(transpiler.context, itemType);
         transpiler.append("function(o1, o2) { ");
         transpiler.append("var $key = function(");
-        transpiler.append(this.args[0]);
+        transpiler.append(this.args[0].name);
         transpiler.append(") { ");
-        this.statements.transpile(transpiler);
+        this.statements!.transpile(transpiler);
         transpiler.append(" }; ");
         transpiler.append("o1 = $key(o1); ");
         transpiler.append("o2 = $key(o2); ");
@@ -243,7 +244,7 @@ export default class ArrowExpression extends PredicateExpression {
         transpiler.flush();
     }
 
-    transpileSortedComparator2Args(transpiler, itemType, descending) {
+    transpileSortedComparator2Args(transpiler: Transpiler, itemType: Type, descending: boolean) {
         transpiler = transpiler.newLocalTranspiler();
         this.registerArrowArgs(transpiler.context, itemType);
         if(descending) {
@@ -254,7 +255,7 @@ export default class ArrowExpression extends PredicateExpression {
         transpiler.append("function(");
         transpiler.append(this.args.join(", "));
         transpiler.append(") {");
-        this.statements.transpile(transpiler);
+        this.statements!.transpile(transpiler);
         transpiler.append("}");
         if(descending) {
             transpiler.append(")(");

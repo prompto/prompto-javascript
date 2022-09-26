@@ -1,4 +1,4 @@
-import FetchOneExpression from '../expression/FetchOneExpression.js'
+import FetchOneExpression from '../expression/FetchOneExpression.ts'
 import { Variable } from '../runtime'
 import {StatementList} from "../statement";
 

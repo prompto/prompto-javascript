@@ -7,7 +7,7 @@ export default class MissingType extends NativeType {
         super(new Identifier("*"));
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return true;
     }
 }

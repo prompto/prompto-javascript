@@ -9,6 +9,7 @@ import {MethodDeclaration} from "../declaration";
 import {Expression} from "../expression";
 import {Value} from "../value";
 import {TypeFamily} from "../store";
+import {JsonNode} from "../json";
 let NullValue: object;
 void import("../value/NullValue").then(res => NullValue = res.default);
 
@@ -31,7 +32,7 @@ export default abstract class BaseType extends Section implements Type {
         return false;
     }
 
-    anyfy() {
+    anyfy(): Type {
         return this;
     }
 
@@ -66,8 +67,10 @@ export default abstract class BaseType extends Section implements Type {
     }
 
     isAssignableFrom(context: Context, other: Type): boolean {
-        return this === other || this.equals(other) || other === NullType.instance;
+        return this == other || this.equals(other) || other === NullType.instance;
     }
+
+    abstract isMoreSpecificThan(context: Context, other: Type): boolean;
 
     getMemberMethods(context: Context, id: Identifier): MethodDeclaration[] {
         return [];
@@ -75,6 +78,10 @@ export default abstract class BaseType extends Section implements Type {
 
     getStaticMemberMethods(context: Context, id: Identifier): MethodDeclaration[] {
         return [];
+    }
+
+    getStaticMemberValue(context: Context, id: Identifier): Value {
+        throw new SyntaxError("Cannot access static member value");
     }
 
     abstract declare(transpiler: Transpiler): void;
@@ -301,9 +308,9 @@ export default abstract class BaseType extends Section implements Type {
             throw new SyntaxError(this.name + " cannot transpile contain " + other.name);
     }
 
-    checkHasAllOrAny(context: Context, other: Type): Type {
+    checkHasAllOrAny(context: Context, section: Section, other: Type): Type {
         if(other instanceof EnumeratedNativeType)
-            return this.checkHasAllOrAny(context, other.derivedFrom);
+            return this.checkHasAllOrAny(context, section, other.derivedFrom);
         else
             throw new SyntaxError(this.name + " cannot have all or any " + other.name);
     }
@@ -470,7 +477,7 @@ export default abstract class BaseType extends Section implements Type {
         throw new SyntaxError("Cannot logically negate " + this.name);
     }
 
-    readJSONValue(context: Context, node: any, parts: any[]): Value {
+    readJSONValue(context: Context, node: JsonNode, parts: Map<string, Uint8Array>): Value {
         throw new Error("Unsupported!")
     }
 

@@ -161,6 +161,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
             });
     }
 
+    abstract getMemberMethodsMap(context: Context, id: Identifier): MethodDeclarationMap;
     abstract getLocalMethods(): MethodDeclaration[];
 
     collectLocalMethods(context: Context, section: Section, maps: Map<string, MethodDeclarationMap>): void {

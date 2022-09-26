@@ -22,7 +22,7 @@ export default class DocumentType extends NativeType {
         return this;
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || other === AnyType.instance
             || (other instanceof CategoryType && "Any" === other.name);
@@ -35,7 +35,7 @@ export default class DocumentType extends NativeType {
             return super.isMoreSpecificThan(context, other);
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         switch(id.name) {
             case "count":
                 return IntegerType.instance;
@@ -51,7 +51,7 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if(other instanceof DocumentType) {
             return this;
         } else {
@@ -59,7 +59,7 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other instanceof DocumentType) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -68,7 +68,7 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other instanceof DocumentType) {
             left.transpile(transpiler);
             transpiler.append(".$safe_add(");
@@ -113,7 +113,7 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         switch(id.name) {
             case "count":
             transpiler.append("$safe_length");

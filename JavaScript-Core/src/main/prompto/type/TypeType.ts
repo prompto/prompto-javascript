@@ -22,7 +22,7 @@ export default class TypeType extends BaseType {
         writer.append(">");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         return this.type.checkStaticMember(context, section, id);
     }
 
@@ -31,7 +31,7 @@ export default class TypeType extends BaseType {
         this.type.declareStaticMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         this.type.transpileStaticMember(transpiler, id);
     }
 

@@ -7,7 +7,7 @@ export default class VoidType extends NativeType {
         super(new Identifier("Void"));
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         // illegal, but happens during syntax checking, if error is collected rather than thrown
         return false;
     }

@@ -19,7 +19,7 @@ export default class EnumeratedCategoryType extends CategoryType {
         // TODO
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         if ("name" === id.name) {
             return TextType.instance;
         } else {
@@ -27,7 +27,7 @@ export default class EnumeratedCategoryType extends CategoryType {
         }
     }
 
-    checkStaticMember(context, section, id) {
+    checkStaticMember(context: Context, section: Section, id: Identifier): void {
         if ("symbols" === id.name) {
             return new ListType(this);
         } else {
@@ -35,7 +35,7 @@ export default class EnumeratedCategoryType extends CategoryType {
         }
     }
 
-    declareStaticMember(transpiler, section, id) {
+    declareStaticMember(context: Context, id: Identifier): void {
         if("symbols" === id.name) {
             const decl = transpiler.context.getRegisteredDeclaration(this.id);
             transpiler.declare(decl);

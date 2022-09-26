@@ -10,7 +10,7 @@ export default class TimeType extends NativeType {
         super(new Identifier("TimeValue"));
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || (other == DateTimeType.instance);
     }
@@ -23,7 +23,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if (other === PeriodType.instance) {
             return this; // ignore date section
         } else {
@@ -39,7 +39,7 @@ export default class TimeType extends NativeType {
         transpiler.append('Time');
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -48,7 +48,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".addPeriod(");
@@ -59,7 +59,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         if (other === TimeType.instance) {
             return PeriodType.instance; // ignore date section
         } else if (other === PeriodType.instance) {
@@ -69,7 +69,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === TimeType.instance || other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -77,7 +77,7 @@ export default class TimeType extends NativeType {
             return super.declareSubtract(transpiler, other, left, right);
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === TimeType.instance) {
             left.transpile(transpiler);
             transpiler.append(".subtractTime(");
@@ -138,7 +138,7 @@ export default class TimeType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         switch (id.name) {
             case "hour":
             case "minute":
@@ -162,7 +162,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         switch (id.name) {
             case "hour":
                 transpiler.append("getHour()");

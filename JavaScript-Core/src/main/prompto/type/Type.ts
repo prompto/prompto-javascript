@@ -13,6 +13,8 @@ export default interface Type {
     get name(): string;
     family: TypeFamily;
 
+    getTranspiledName(context: Context): string;
+
     equals(other: Type): boolean;
     anyfy(): Type;
     resolve(context: Context, param?: any): Type;
@@ -57,12 +59,15 @@ export default interface Type {
 
     checkHasAllOrAny(context: Context, section: Section, itemType: Type): Type;
     declareHasAllOrAny(transpiler: Transpiler, itemType: Type, left: Expression, right: Expression): void;
-    transpileHasAllPredicate(transpiler: Transpiler, left: Expression, right: Expression): void;
-    transpileHasAnyPredicate(transpiler: Transpiler, left: Expression, right: Expression): void;
+    transpileHasAllPredicate(transpiler: Transpiler, itemType: Type, left: Expression, right: Expression): void;
+    transpileHasAnyPredicate(transpiler: Transpiler, itemType: Type, left: Expression, right: Expression): void;
     transpileHasAllValue(transpiler: Transpiler, itemType: Type, left: Expression, right: Expression): void;
     transpileHasAnyValue(transpiler: Transpiler, itemType: Type, left: Expression, right: Expression): void;
 
     readJSONValue(context: Context, node: JsonNode, parts: Map<string, Uint8Array>): Value;
 
-    getStaticMemberValue(context: Context, id: Identifier): Value | null;
+    getStaticMemberValue(context: Context, id: Identifier): Value;
+
+    checkMember(context: Context, section: Section, id: Identifier): Type;
+    checkStaticMember(context: Context, section: Section, id: Identifier): Type;
 }

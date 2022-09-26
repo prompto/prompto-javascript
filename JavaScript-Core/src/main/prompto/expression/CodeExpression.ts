@@ -54,7 +54,7 @@ export default class CodeExpression extends BaseExpression {
         return this.expression.check(context);
     }
 
-    interpretCode(context: Context): Value | null {
+    interpretCode(context: Context): Value {
         return this.expression.interpret(context);
     }
 

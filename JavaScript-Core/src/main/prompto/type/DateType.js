@@ -10,12 +10,12 @@ export default class DateType extends NativeType {
         super(new Identifier("Date"));
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || (other === DateTimeType.instance);
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if (other === PeriodType.instance) {
             return this; // ignore time section
         } else if (other === TimeType.instance) {
@@ -41,7 +41,7 @@ export default class DateType extends NativeType {
         transpiler.append('Date');
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance || other === TimeType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -51,7 +51,7 @@ export default class DateType extends NativeType {
             return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance || other === TimeType.instance) {
             left.transpile(transpiler);
             if (other === TimeType.instance)
@@ -64,7 +64,7 @@ export default class DateType extends NativeType {
             return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         if (other === PeriodType.instance) {
             return this; // ignore time section
         } else if (other === DateType.instance) {
@@ -74,7 +74,7 @@ export default class DateType extends NativeType {
         }
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === PeriodType.instance || other === DateType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -82,7 +82,7 @@ export default class DateType extends NativeType {
             return super.declareSubtract(transpiler, other, left, right);
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".subtractPeriod(");
@@ -143,7 +143,7 @@ export default class DateType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         switch (id.name) {
             case "year":
             case "month":
@@ -167,7 +167,7 @@ export default class DateType extends NativeType {
         }
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         switch (id.name) {
             case "year":
                 transpiler.append("getYear()");

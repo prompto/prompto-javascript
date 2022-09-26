@@ -14,7 +14,7 @@ import {
 import {CodeWriter, getTypeName} from '../utils'
 import {Context, Transpiler} from "../runtime";
 import Expression from "./Expression";
-import {DocumentValue, Instance, NullValue, Value} from "../value";
+import {ConcreteInstance, DocumentValue, Instance, NullValue, Value} from "../value";
 
 export default class ConstructorExpression extends BaseExpression {
 
@@ -145,7 +145,7 @@ export default class ConstructorExpression extends BaseExpression {
         if(cd) {
             this.checkFirstHomonym(context, cd);
             const instance = this.type.newInstance(context);
-            instance.mutable = true;
+            (instance as ConcreteInstance).mutable = true;
             if (this.copyFrom != null) {
                 const copyObj = this.copyFrom.interpret(context);
                 if (copyObj instanceof Instance)
@@ -161,7 +161,7 @@ export default class ConstructorExpression extends BaseExpression {
                     instance.setMember(context, arg.id, value);
                 }, this);
             }
-            instance.mutable = this.type.mutable;
+            (instance as ConcreteInstance).mutable = this.type.mutable;
             return instance;
         } else
             return NullValue.instance;
@@ -244,7 +244,7 @@ export default class ConstructorExpression extends BaseExpression {
         transpiler.append(", ");
         this.transpileAssignments(transpiler);
         transpiler.append(", ");
-        transpiler.append(this.type.mutable ? "true" : "false");
+        transpiler.appendBoolean(this.type.mutable);
         transpiler.append(")");
         transpiler.flush();
     }

@@ -46,7 +46,7 @@ export default class ListType extends ContainerType {
         return new ListValue(this.itemType, values);
     }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return super.isAssignableFrom(context, other)
             || ((other instanceof ListType) && this.itemType.isAssignableFrom(context, other.itemType));
     }
@@ -64,7 +64,7 @@ export default class ListType extends ContainerType {
         return this.itemType.equals(obj.itemType);
     }
 
-    checkAdd(context, section, other, tryReverse) {
+    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(context, other.itemType)) {
             return this;
         } else {
@@ -72,7 +72,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    declareAdd(transpiler, other, tryReverse, left, right) {
+    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(transpiler.context, other.itemType)) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -81,7 +81,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    transpileAdd(transpiler, other, tryReverse, left, right) {
+    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.isAssignableFrom(transpiler.context, other.itemType)) {
             left.transpile(transpiler);
             transpiler.append(".add(");
@@ -92,7 +92,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    checkSubtract(context, other) {
+    checkSubtract(context: Context, other: Type): Type {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
             return this;
         } else {
@@ -100,7 +100,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    declareSubtract(transpiler, other, left, right) {
+    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -109,7 +109,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    transpileSubtract(transpiler, other, left, right) {
+    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
         if((other instanceof ListType || other instanceof SetType) && this.itemType.equals(other.itemType)) {
             left.transpile(transpiler);
             transpiler.append(".remove(");
@@ -164,7 +164,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    declareMultiply(transpiler, other, tryReverse, left, right) {
+    declareMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === IntegerType.instance) {
             transpiler.require(multiplyArray);
             left.declare(transpiler);
@@ -174,7 +174,7 @@ export default class ListType extends ContainerType {
         }
     }
 
-    transpileMultiply(transpiler, other, tryReverse, left, right) {
+    transpileMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
         if(other === IntegerType.instance) {
             transpiler.append("multiplyArray(");
             left.transpile(transpiler);
@@ -219,7 +219,7 @@ export default class ListType extends ContainerType {
         transpiler.append(")");
     }
 
-    checkHasAllOrAny(context, other) {
+    checkHasAllOrAny(context: Context, section: Section, other: Type): Type {
         return BooleanType.instance;
     }
 

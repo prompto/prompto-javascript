@@ -1,13 +1,19 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
-import { AnyType, CategoryType, VoidType } from '../type'
-import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store'
-import { NullValue } from '../value'
-import { CategoryDeclaration } from '../declaration'
-import { Identifier } from '../grammar'
+import BaseExpression from './BaseExpression'
+import {AnyType, CategoryType, Type, VoidType} from '../type'
+import {$DataStore, TypeFamily, AttributeInfo, MatchOp, Store} from '../store'
+import {NullValue, Value} from '../value'
+import {Identifier, IdentifierList} from '../grammar'
+import {Expression, Predicate} from "./index";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
 export default class FetchOneExpression extends BaseExpression {
- 
-    constructor(type, predicate, include) {
+
+    type: Type | null;
+    predicate: Expression;
+    include: IdentifierList | null;
+
+    constructor(type: Type | null, predicate: Expression, include: IdentifierList | null) {
         super();
         this.type = type;
         this.predicate = predicate;
@@ -82,9 +88,9 @@ export default class FetchOneExpression extends BaseExpression {
     }
 
     check(context: Context): Type {
-        if(this.type!=null) {
-            const decl = context.getRegisteredDeclaration(this.type.id);
-            if (decl == null || !(decl instanceof CategoryDeclaration)) {
+        if(this.type) {
+            const decl = context.getRegisteredCategoryDeclaration(this.type.id);
+            if (!decl) {
                 context.problemListener.reportUnknownCategory(this.type.id, this.type.name);
                 return VoidType.instance;
             }
@@ -92,7 +98,8 @@ export default class FetchOneExpression extends BaseExpression {
                 context.problemListener.reportNotStorable(this.type.id, this.type.name);
             context = context.newInstanceContext(null, decl.getType(context), true);
         }
-        this.predicate.checkQuery(context);
+        if (this.predicate.isPredicate())
+            (this.predicate as Predicate).checkQuery(context);
         return this.type || AnyType.instance;
     }
 
@@ -104,9 +111,7 @@ export default class FetchOneExpression extends BaseExpression {
             return NullValue.instance;
         else {
             const typeName = stored.getData("category").slice(-1)[0];
-            const type = new CategoryType(new Identifier(typeName));
-            if (this.type != null)
-                type.mutable = this.type.mutable;
+            const type = new CategoryType(new Identifier(typeName), this.type ? this.type.mutable : false);
             return type.newInstanceFromStored(context, stored);
         }
     }
@@ -118,8 +123,8 @@ export default class FetchOneExpression extends BaseExpression {
         transpiler.require(TypeFamily);
         if (this.type != null)
             this.type.declare(transpiler);
-        if (this.predicate != null)
-            this.predicate.declareQuery(transpiler);
+        if (this.predicate.isPredicate())
+            (this.predicate as Predicate).declareQuery(transpiler);
     }
 
     transpile(transpiler: Transpiler): void {
@@ -131,21 +136,21 @@ export default class FetchOneExpression extends BaseExpression {
         transpiler.append("})()");
     }
 
-    transpileConvert(transpiler, varName) {
+    transpileConvert(transpiler: Transpiler, varName: string): void {
         transpiler.append("var ").append(varName).append(" = null;").newLine();
         transpiler.append("if(stored!=null) {").indent();
         transpiler.append("var name = stored.getData('category').slice(-1)[0];").newLine();
         transpiler.append("var type = eval(name);").newLine();
-        transpiler.append(varName).append(" = new type(null, {}, ").append(this.type!=null && this.type.mutable).append(");").newLine();
+        transpiler.append(varName).append(" = new type(null, {}, ").appendBoolean(this.type!=null && this.type.mutable).append(");").newLine();
         transpiler.append(varName).append(".fromStored(stored);").dedent().append("}").newLine();
     }
 
-    transpileQuery(transpiler) {
+    transpileQuery(transpiler: Transpiler): void {
         transpiler.append("var builder = $DataStore.instance.newQueryBuilder();").newLine();
         if (this.type != null)
             transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.type.name).append("');").newLine();
-        if (this.predicate != null)
-            this.predicate.transpileQuery(transpiler, "builder");
+        if (this.predicate && this.predicate.isPredicate())
+            (this.predicate as Predicate).transpileQuery(transpiler, "builder");
         if (this.type != null && this.predicate != null)
             transpiler.append("builder.and();").newLine();
         if (this.include != null) {
@@ -156,16 +161,16 @@ export default class FetchOneExpression extends BaseExpression {
         }
     }
 
-    buildFetchOneQuery(context, store) {
+    buildFetchOneQuery(context: Context, store: Store): void {
         const builder = store.newQueryBuilder();
         if (this.type != null) {
             const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
             builder.verify(info, MatchOp.CONTAINS, this.type.name);
         }
-        if (this.predicate != null) {
-            this.predicate.interpretQuery(context, builder);
+        if (this.predicate && this.predicate.isPredicate()) {
+            (this.predicate as Predicate).interpretQuery(context, builder);
         }
-        if (this.type != null && this.predicate != null) {
+        if (this.type && this.predicate) {
             builder.and();
         }
         if (this.include != null) {

@@ -1,4 +1,4 @@
-import FetchManyExpression from '../expression/FetchManyExpression.js'
+import FetchManyExpression from '../expression/FetchManyExpression.ts'
 import { Variable } from '../runtime'
 import { CursorType } from '../type'
 import {StatementList} from "../statement";

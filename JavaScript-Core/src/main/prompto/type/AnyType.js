@@ -9,7 +9,7 @@ export default class AnyType extends NativeType {
         super(new Identifier("any"));
      }
 
-    isAssignableFrom(context, other) {
+    isAssignableFrom(context: Context, other: Type): boolean {
         return true;
     }
 
@@ -17,7 +17,7 @@ export default class AnyType extends NativeType {
         return DocumentType.instance.checkItem(context, item);
     }
 
-    checkMember(context, section, id) {
+    checkMember(context: Context, section: Section, id: Identifier): Type {
         return DocumentType.instance.checkMember(context, section, id);
     }
 
@@ -42,7 +42,7 @@ export default class AnyType extends NativeType {
         DocumentType.instance.declareMember(transpiler, section, id);
     }
 
-    transpileMember(transpiler, id) {
+    transpileMember(transpiler: Transpiler, id: Identifier): void {
         DocumentType.instance.transpileMember(transpiler, id);
     }
 
