@@ -1,16 +1,16 @@
 import BaseType from './BaseType'
 import { SyntaxError } from '../error'
-import {MethodDeclaration} from "../declaration";
+import {IMethodDeclaration} from "../declaration";
 import {Context, MethodDeclarationMap, Transpiler} from "../runtime";
 import {ArrowExpression} from "../expression";
 import {TypeFamily} from "../store";
-import Type from "./Type";
+import IType from "./IType";
 
 export default class MethodType extends BaseType {
 
-    method: MethodDeclaration;
+    method: IMethodDeclaration;
 
-    constructor(method: MethodDeclaration) {
+    constructor(method: IMethodDeclaration) {
         super(method.id, TypeFamily.MISSING);
         this.method = method;
    }
@@ -31,7 +31,7 @@ export default class MethodType extends BaseType {
         }
     }
 
-    isMoreSpecificThan(context: Context, other: Type): boolean {
+    isMoreSpecificThan(context: Context, other: IType): boolean {
         return false;
     }
 

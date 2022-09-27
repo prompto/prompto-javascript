@@ -1,14 +1,14 @@
 import BaseExpression from './BaseExpression'
 import {Identifier} from "../grammar";
 import {Context} from "../runtime";
-import {Storable} from "../store";
-import Named from "../grammar/Named";
-import {MissingType, Type} from "../type";
-import Value from "../value/Value";
+import {IStorable} from "../store";
+import INamed from "../grammar/INamed";
+import {MissingType, IType} from "../type";
+import IValue from "../value/IValue";
 import { JsonParent, JsonNode } from '../json';
 import {CodeWriter} from "../utils";
 
-export default abstract class EnumSymbol<T extends Type> extends BaseExpression implements Named, Value {
+export default abstract class EnumSymbol<T extends IType> extends BaseExpression implements INamed, IValue {
 
     id: Identifier;
     type: T = MissingType.instance;
@@ -40,7 +40,7 @@ export default abstract class EnumSymbol<T extends Type> extends BaseExpression 
         return this.id.name;
     }
 
-    collectStorables(storables: Set<Storable>): void {
+    collectStorables(storables: Set<IStorable>): void {
         // nothing to do
     }
 
@@ -48,7 +48,7 @@ export default abstract class EnumSymbol<T extends Type> extends BaseExpression 
         return value instanceof EnumSymbol && this.name == value.name;
     }
 
-    toDocumentValue(context: Context): Value {
+    toDocumentValue(context: Context): IValue {
         return this;
     }
 
@@ -78,7 +78,7 @@ export default abstract class EnumSymbol<T extends Type> extends BaseExpression 
 
     abstract toDialect(writer: CodeWriter): void;
 
-    CompareTo(context: Context, other: Value): number {
+    CompareTo(context: Context, other: IValue): number {
         throw new Error('Method not implemented.');
     }
 

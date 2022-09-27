@@ -1,9 +1,9 @@
 import ConcreteMethodDeclaration from './ConcreteMethodDeclaration'
-import {Type, VoidType} from '../type'
-import {Parameter, ParameterList} from '../param'
+import {IType, VoidType} from '../type'
+import {IParameter, ParameterList} from '../param'
 import {Identifier, Operator} from '../grammar'
 import {StatementList} from "../statement";
-import {MethodDeclaration} from "./index";
+import {IMethodDeclaration} from "./index";
 import {Context} from "../runtime";
 import {CodeWriter} from "../utils";
 
@@ -11,7 +11,7 @@ export default class OperatorMethodDeclaration extends ConcreteMethodDeclaration
 
     operator: Operator;
 
-    constructor(operator: Operator, param: Parameter, returnType: Type | null, stmts: StatementList) {
+    constructor(operator: Operator, param: IParameter, returnType: IType | null, stmts: StatementList) {
         super(
             new Identifier("operator_" + operator.name),
             new ParameterList(param),
@@ -21,7 +21,7 @@ export default class OperatorMethodDeclaration extends ConcreteMethodDeclaration
         this.operator = operator;
     }
 
-    memberCheck(context: Context, declaration: MethodDeclaration): void {
+    memberCheck(context: Context, declaration: IMethodDeclaration): void {
         // TODO Auto-generated method stub
     }
 

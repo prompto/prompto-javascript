@@ -5,7 +5,7 @@ import { ContextualExpression } from '../value'
 import { AttributeParameter } from '../param'
 import { SyntaxError } from '../error'
 import {Context, Transpiler} from "../runtime";
-import {MethodDeclaration} from "../declaration";
+import {IMethodDeclaration} from "../declaration";
 import {CodeWriter} from "../utils";
 
 export default class ArgumentList extends ObjectList<Argument> {
@@ -63,7 +63,7 @@ export default class ArgumentList extends ObjectList<Argument> {
         return null;
     }
 
-    makeArguments(context: Context, declaration: MethodDeclaration): ArgumentList {
+    makeArguments(context: Context, declaration: IMethodDeclaration): ArgumentList {
         const local = new ArgumentList(this);
         const args = new ArgumentList();
         for(let i=0; i<declaration.parameters.length; i++) {
@@ -133,7 +133,7 @@ export default class ArgumentList extends ObjectList<Argument> {
         this.toODialect(writer);
     }
 
-    declare(transpiler: Transpiler, methodDeclaration: MethodDeclaration | null): void {
+    declare(transpiler: Transpiler, methodDeclaration: IMethodDeclaration | null): void {
         this.forEach(arg => {
             arg.declare(transpiler, methodDeclaration);
         });

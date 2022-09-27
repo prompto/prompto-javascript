@@ -2,11 +2,11 @@ import SimpleStatement from './SimpleStatement'
 import { VoidType } from '../type'
 import { NullValue } from '../value'
 import { VoidResult } from '../runtime'
-import {Expression} from "../expression";
+import {IExpression} from "../expression";
 
 export default class ReturnStatement extends SimpleStatement {
 
-    expression: Expression;
+    expression: IExpression;
 
     constructor(expression, fromArrowExpression) {
         super();

@@ -1,9 +1,9 @@
 import ObjectList from '../utils/ObjectList'
-import { CodeParameter, Parameter} from './index'
+import { CodeParameter, IParameter} from './index'
 
-export default class ParameterList extends ObjectList<Parameter> {
+export default class ParameterList extends ObjectList<IParameter> {
 
-    constructor(...params: Parameter[]) {
+    constructor(...params: IParameter[]) {
         super();
         for (let i=0; i < params.length; i++) {
             this.add(params[i]);

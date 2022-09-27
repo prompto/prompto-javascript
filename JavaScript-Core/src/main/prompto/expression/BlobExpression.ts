@@ -1,28 +1,28 @@
 import BaseExpression from './BaseExpression'
-import {BlobType, Type} from '../type'
+import {BlobType, IType} from '../type'
 import { BlobRef, Document } from '../intrinsic'
-import {BlobValue, Value} from '../value'
+import {BlobValue, IValue} from '../value'
 import { ReadWriteError } from '../error'
 import {getUtf8CharLength, utf8BufferToString, stringToUtf8Buffer, CodeWriter} from '../utils'
-import {Expression} from "./index";
+import {IExpression} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {JsonNode} from "../json";
 
 export default class BlobExpression extends BaseExpression {
 
-    source: Expression;
+    source: IExpression;
 
-    constructor(source: Expression) {
+    constructor(source: IExpression) {
         super();
         this.source = source;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.source.check(context);
         return BlobType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.source.interpret(context);
         try {
             const datas = BlobExpression.collectDatas(context, value);
@@ -48,7 +48,7 @@ export default class BlobExpression extends BaseExpression {
         transpiler.append(")");
     }
 
-    static collectDatas(context: Context, value: Value): Map<string, never> {
+    static collectDatas(context: Context, value: IValue): Map<string, never> {
         const binaries = new Map<string, never>();
         // create json type-aware object graph and collect binaries
         const values = new Map<string, JsonNode>(); // need a temporary parent

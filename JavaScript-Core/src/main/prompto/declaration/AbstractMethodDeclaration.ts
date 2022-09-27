@@ -1,15 +1,15 @@
 import BaseMethodDeclaration from './BaseMethodDeclaration'
-import {Type, VoidType} from '../type'
+import {IType, VoidType} from '../type'
 import {Identifier} from "../grammar";
 import {ParameterList} from "../param";
 import {Context, Transpiler} from "../runtime";
-import {Value} from "../value";
+import {IValue} from "../value";
 import {CodeWriter} from "../utils";
-import {DeclarationInfo} from "../runtime/Catalog";
+import {IDeclarationInfo} from "../runtime/Catalog";
 
 export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 
-    constructor(id: Identifier, parameters: ParameterList, returnType?: Type | null) {
+    constructor(id: Identifier, parameters: ParameterList, returnType?: IType | null) {
         super(id, parameters, returnType || VoidType.instance);
     }
 
@@ -17,19 +17,19 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         return true;
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         return this.returnType!;
     }
 
-    toDeclarationInfo(): DeclarationInfo {
+    toDeclarationInfo(): IDeclarationInfo {
         throw "Should never get there!";
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         throw "Should never get there!";
     }
 
-    check(context: Context, isStart: boolean): Type {
+    check(context: Context, isStart: boolean): IType {
         if(this.parameters!=null) {
             this.parameters.check(context);
         }

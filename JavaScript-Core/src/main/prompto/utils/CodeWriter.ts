@@ -1,6 +1,6 @@
 import { Context } from '../runtime'
 import {Dialect} from "../parser";
-import Writable from "./Writable";
+import IWritable from "../../../main/prompto/utils/IWritable";
 import IType from "../type";
 
 class Indenter {
@@ -115,7 +115,7 @@ export default class CodeWriter {
         return new CodeWriter (this.dialect, this.context.newChildContext(), this.indenter);
     }
 
-    toDialect(writable: Writable) {
+    toDialect(writable: IWritable) {
         this.dialect.toDialect(this, writable);
     }
 }

@@ -1,31 +1,31 @@
 import Container from './Container'
 import { IntegerValue, ListValue } from './index'
 import { SyntaxError, IndexOutOfRangeError } from '../error'
-import {SetType, Type} from '../type'
+import {SetType, IType} from '../type'
 import { StrictSet, Iterator } from '../intrinsic'
-import Value from "./Value";
+import IValue from "./IValue";
 import {Identifier} from "../grammar";
 import {Context} from "../runtime";
 import {JsonNode} from "../json";
 
-export default class SetValue extends Container<StrictSet<Value>> {
+export default class SetValue extends Container<StrictSet<IValue>> {
 
-    constructor(itemType: Type, items?: Value[] | StrictSet<Value>) {
-        let value: StrictSet<Value>;
-        if (items instanceof StrictSet<Value>)
+    constructor(itemType: IType, items?: IValue[] | StrictSet<IValue>) {
+        let value: StrictSet<IValue>;
+        if (items instanceof StrictSet<IValue>)
             value = items;
         else if(Array.isArray(items))
-            value = new StrictSet<Value>(items);
+            value = new StrictSet<IValue>(items);
         else
-            value = new StrictSet<Value>();
+            value = new StrictSet<IValue>();
         super(new SetType(itemType), value, false);
     }
 
-    get items(): Value[] {
+    get items(): IValue[] {
         return this.value.toArray();
     }
 
-    add(item: Value): void {
+    add(item: IValue): void {
         this.value.add(item);
     }
 
@@ -37,7 +37,7 @@ export default class SetValue extends Container<StrictSet<Value>> {
         return this.value.length;
     }
 
-    getMemberValue(context: Context, id: Identifier): Value {
+    getMemberValue(context: Context, id: Identifier): IValue {
         if ("count" === id.name) {
             return new IntegerValue(this.value.length);
         } else {
@@ -49,11 +49,11 @@ export default class SetValue extends Container<StrictSet<Value>> {
         return this.value.length === 0;
     }
 
-    hasValue(context: Context, value: Value): boolean {
+    hasValue(context: Context, value: IValue): boolean {
         return this.value.has(value);
     }
 
-    getItemInContext(context: Context, index: Value): Value {
+    getItemInContext(context: Context, index: IValue): IValue {
         if (index instanceof IntegerValue) {
             const idx = index.IntegerValue();
             const items = this.items;
@@ -64,7 +64,7 @@ export default class SetValue extends Container<StrictSet<Value>> {
             throw new SyntaxError("No such item:" + index.toString());
     }
 
-    Add(context: Context, value: Value): Value {
+    Add(context: Context, value: IValue): IValue {
         if (value instanceof SetValue || value instanceof ListValue) {
             const set = new StrictSet();
             set.addItems(this.value);
@@ -75,7 +75,7 @@ export default class SetValue extends Container<StrictSet<Value>> {
         }
     }
 
-    Subtract(context: Context, value: Value): Value {
+    Subtract(context: Context, value: IValue): IValue {
         if (value instanceof ListValue)
             value = new SetValue(this.itemType, value.items);
         if (value instanceof SetValue) {
@@ -92,13 +92,13 @@ export default class SetValue extends Container<StrictSet<Value>> {
         }
     }
 
-    filter(filter: (value: Value) => boolean) {
+    filter(filter: (value: IValue) => boolean) {
         const items = this.items.filter(filter);
         const result = new StrictSet(items);
         return new SetValue(this.itemType, result);
     }
 
-    getIterator(context: Context): Iterator<Value> {
+    getIterator(context: Context): Iterator<IValue> {
         return this.value.iterator();
     }
 

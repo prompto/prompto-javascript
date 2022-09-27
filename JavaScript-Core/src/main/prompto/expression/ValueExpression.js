@@ -1,6 +1,6 @@
-import Value from '../value/Value.ts'
+import IValue from '../../../main/prompto/value/IValue.ts'
 
-export default class ValueExpression extends Value {
+export default class ValueExpression extends IValue {
 
     constructor(type, value) {
         super(type);
@@ -13,7 +13,7 @@ export default class ValueExpression extends Value {
         return this.type;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(this.value.interpret) {
             return this.value.interpret(context);
         } else {

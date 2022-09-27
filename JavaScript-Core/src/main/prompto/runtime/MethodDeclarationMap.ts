@@ -1,19 +1,19 @@
-import {Declaration, MethodDeclaration} from "../declaration";
+import {IDeclaration, IMethodDeclaration} from "../declaration";
 import {Annotation, Identifier} from "../grammar";
 import {CommentStatement} from "../statement";
 import {Context} from "./Context";
-import {Type} from "../type";
-import {DeclarationInfo} from "./Catalog";
+import {IType} from "../type";
+import {IDeclarationInfo} from "./Catalog";
 import {CodeWriter} from "../utils";
 import {Transpiler} from "./index";
 import {ProblemListener} from "../problem";
 
-export default class MethodDeclarationMap implements Declaration {
+export default class MethodDeclarationMap implements IDeclaration {
 
     annotations: Annotation[] | null;
     comments: CommentStatement[] | null;
     id: Identifier;
-    protos = new Map<string, MethodDeclaration>();
+    protos = new Map<string, IMethodDeclaration>();
 
     constructor(id: Identifier) {
         this.id = id;
@@ -31,11 +31,11 @@ export default class MethodDeclarationMap implements Declaration {
         throw new Error("Should never get there!");
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         throw new Error("Should never get there!");
     }
 
-    toDeclarationInfo(): DeclarationInfo {
+    toDeclarationInfo(): IDeclarationInfo {
         throw new Error("Should never get there!");
     }
 
@@ -55,12 +55,12 @@ export default class MethodDeclarationMap implements Declaration {
         throw new Error("Should never get there!");
     }
 
-    registerOrReplace(method: MethodDeclaration): void {
+    registerOrReplace(method: IMethodDeclaration): void {
         const proto = method.getProto();
         this.protos.set(proto, method);
     }
 
-    register(method: MethodDeclaration, problemListener: ProblemListener, override: boolean): void {
+    register(method: IMethodDeclaration, problemListener: ProblemListener, override: boolean): void {
         const proto = method.getProto();
         const current = this.protos.get(proto) || null;
         if (current !== null && !override)
@@ -77,18 +77,18 @@ export default class MethodDeclarationMap implements Declaration {
         return this.protos.has(proto);
     }
 
-    registerIfMissing(method: MethodDeclaration) {
+    registerIfMissing(method: IMethodDeclaration) {
         const proto = method.getProto();
         if (!this.protos.has(proto)) {
             this.protos.set(proto, method);
         }
     }
 
-    getFirst(): MethodDeclaration | null {
+    getFirst(): IMethodDeclaration | null {
         return this.protos.size == 0 ? null : this.protos.get(this.protos.keys().next().value as string)!;
     }
 
-    getAll(): MethodDeclaration[] {
+    getAll(): IMethodDeclaration[] {
         return Array.from(this.protos.values());
     }
 

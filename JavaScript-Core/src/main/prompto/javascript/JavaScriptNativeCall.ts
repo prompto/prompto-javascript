@@ -1,6 +1,6 @@
 import NativeCall from '../statement/NativeCall'
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../type";
+import {IType} from "../type";
 import {CodeWriter} from "../utils";
 
 export default class JavaScriptNativeCall extends NativeCall {
@@ -14,7 +14,7 @@ export default class JavaScriptNativeCall extends NativeCall {
         return this.statement.toString();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.statement.check(context);
     }
 

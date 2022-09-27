@@ -1,22 +1,22 @@
 import FetchOneExpression from './FetchOneExpression'
-import {AnyType, CursorType, IntegerType, Type} from '../type'
+import {AnyType, CursorType, IntegerType, IType} from '../type'
 import { $DataStore, TypeFamily, AttributeInfo, MatchOp } from '../store'
-import {CursorValue, Value} from '../value'
+import {CursorValue, IValue} from '../value'
 import { CategoryDeclaration } from '../declaration'
 import { InvalidDataError } from '../error'
 import { Cursor } from "../intrinsic";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
-import {Expression } from "./index";
+import {IExpression } from "./index";
 import {IdentifierList, OrderByClauseList} from "../grammar";
 
 export default class FetchManyExpression extends FetchOneExpression {
 
-    first: Expression | null;
-    last: Expression | null;
+    first: IExpression | null;
+    last: IExpression | null;
     orderBy: OrderByClauseList | null;
 
-    constructor(type: Type | null, first: Expression | null, last: Expression | null, predicate: Expression | null, include: IdentifierList | null, orderBy: OrderByClauseList | null) {
+    constructor(type: IType | null, first: IExpression | null, last: IExpression | null, predicate: IExpression | null, include: IdentifierList | null, orderBy: OrderByClauseList | null) {
         super(type,  predicate,  include);
         this.first = first;
         this.last = last;
@@ -132,7 +132,7 @@ export default class FetchManyExpression extends FetchOneExpression {
             this.orderBy.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         let type = this.type;
         if (type==null)
             type = AnyType.instance;
@@ -167,7 +167,7 @@ export default class FetchManyExpression extends FetchOneExpression {
     checkSlice(context) {
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const store = $DataStore.instance;
         const query = this.buildFetchManyQuery(context, store);
         const type = this.type || AnyType.instance;

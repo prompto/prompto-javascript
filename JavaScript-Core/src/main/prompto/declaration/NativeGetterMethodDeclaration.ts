@@ -2,7 +2,7 @@ import GetterMethodDeclaration from './GetterMethodDeclaration'
 import {Identifier} from "../grammar";
 import {StatementList} from "../statement";
 import {Context} from "../runtime";
-import {Value} from "../value";
+import {IValue} from "../value";
 
 export default class NativeGetterMethodDeclaration extends GetterMethodDeclaration {
 
@@ -10,7 +10,7 @@ export default class NativeGetterMethodDeclaration extends GetterMethodDeclarati
         super(id, statements);
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         context.enterMethod(this);
         try {
             return this.statements.interpretNative(context, this.returnType);

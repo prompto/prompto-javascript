@@ -5,7 +5,7 @@ import {
     AnyType, ListType, DocumentType, IntegerType, DecimalType, BooleanType, TextType, PeriodType,
     IteratorType, DateTimeType, DateType, TimeType, VersionType, UUIDType
 } from '../type'
-import { ListValue, DocumentValue, Value, IteratorValue } from '../value'
+import { ListValue, DocumentValue, IValue, IteratorValue } from '../value'
 import { Identifier } from '../grammar'
 import { getTypeName } from '../utils'
 import { InternalError } from '../error'
@@ -167,7 +167,7 @@ export default class JavaScriptClassType extends CategoryType {
     }
 
     convertValue(value) {
-        if(value instanceof Value)
+        if(value instanceof IValue)
             return value;
         else
             return null;

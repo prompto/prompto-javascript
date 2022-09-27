@@ -1,10 +1,10 @@
 import {Context} from "../runtime";
-import {Type} from "../type";
+import {IType} from "../type";
 import Identifier from "./Identifier";
 
-export default interface Named {
+export default interface INamed {
     id: Identifier;
     get name(): string;
-    getType(context: Context): Type;
+    getType(context: Context): IType;
 
 }

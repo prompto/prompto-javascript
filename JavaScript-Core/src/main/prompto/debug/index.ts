@@ -1,1 +1,1 @@
-export { default as Debugger } from './Debugger';
+export { default as IDebugger } from './IDebugger';

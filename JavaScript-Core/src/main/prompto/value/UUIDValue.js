@@ -1,10 +1,10 @@
-import Value from '../../../main/prompto/value/Value.ts'
+import IValue from './IValue.ts'
 import { TextValue } from '../value'
 import { InvalidDataError } from '../error'
 import { UUID } from '../intrinsic'
 import { UUIDType } from '../type'
 
-export default class UUIDValue extends Value {
+export default class UUIDValue extends IValue {
    
     constructor(value) {
         if(typeof(value) == 'string') {

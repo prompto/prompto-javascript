@@ -7,7 +7,7 @@ import { SyntaxError } from '../error'
 import { Any } from '../intrinsic';
 import {Context, Transpiler} from "../runtime";
 import {Identifier, IdentifierList, NativeCategoryBindingList} from "../grammar";
-import {MethodDeclaration} from "./index";
+import {IMethodDeclaration} from "./index";
 import {Section} from "../parser";
 
 export default class NativeCategoryDeclaration extends ConcreteCategoryDeclaration {
@@ -16,7 +16,7 @@ export default class NativeCategoryDeclaration extends ConcreteCategoryDeclarati
     // attributeBindings: NativeAttributeBinding[];
     bound?: (() => any) | null;
 
-    constructor(id: Identifier, attributes: IdentifierList | null, categoryBindings: NativeCategoryBindingList, attributeBindings: any, methods: MethodDeclaration[] | null) {
+    constructor(id: Identifier, attributes: IdentifierList | null, categoryBindings: NativeCategoryBindingList, attributeBindings: any, methods: IMethodDeclaration[] | null) {
         super(id, attributes, null, methods);
         this.categoryBindings = categoryBindings;
         // this.attributeBindings = attributeBindings;

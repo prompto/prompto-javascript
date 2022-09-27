@@ -1,16 +1,16 @@
 import { Context, Transpiler } from "../runtime";
 import { CodeWriter } from "../utils";
 import {Section} from "../parser";
-import {Type} from "../type";
-import {Value} from "../value";
+import {IType} from "../type";
+import {IValue} from "../value";
 
-export default interface Statement {
+export default interface IStatement {
 
     canReturn(): boolean;
     isSimple(): boolean;
-    check(context: Context): Type;
+    check(context: Context): IType;
     checkReference(context: Context): boolean;
-    interpret(context: Context): Value | null;
+    interpret(context: Context): IValue | null;
     transpile(transpiler: Transpiler): void;
     declare(transpiler: Transpiler): void;
     declareParent(transpiler: Transpiler): void;

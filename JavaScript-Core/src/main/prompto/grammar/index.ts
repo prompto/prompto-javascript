@@ -14,7 +14,7 @@ export {default as NativeSymbolList} from './NativeSymbolList';
 export {default as CategorySymbolList} from './CategorySymbolList';
 export {default as NativeCategoryBinding} from './NativeCategoryBinding';
 export {default as NativeCategoryBindingList} from './NativeCategoryBindingList';
-export {default as Named} from './Named';
+export {default as INamed} from './INamed';
 export {default as NamedInstance} from './NamedInstance';
 export {default as Specificity} from './Specificity';
 export {default as ThenWith} from './ThenWith';

@@ -1,14 +1,14 @@
 import BaseValue from './BaseValue'
-import {Type, TypeType} from "../type";
+import {IType, TypeType} from "../type";
 import {Identifier} from "../grammar";
-import Value from "./Value";
+import IValue from "./IValue";
 import {Context} from "../runtime";
 import {NullValue} from "./index";
 import {JsonNode, JsonParent} from "../json";
 
-export default class TypeValue extends BaseValue<Type> {
+export default class TypeValue extends BaseValue<IType> {
   
-    constructor(value: Type) {
+    constructor(value: IType) {
         super(new TypeType(value), value);
     }
 
@@ -16,7 +16,7 @@ export default class TypeValue extends BaseValue<Type> {
         return this.value.toString();
     }
 
-    getMemberValue(context: Context, id: Identifier, autoCreate: boolean): Value {
+    getMemberValue(context: Context, id: Identifier, autoCreate: boolean): IValue {
         const value = this.value.getStaticMemberValue(context, id);
         return value ? value : NullValue.instance;
     }

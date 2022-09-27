@@ -1,12 +1,12 @@
 import BaseStatement from './BaseStatement'
-import {VoidType, MethodType, Type} from '../type'
-import {ClosureValue, Value} from '../value'
-import {ConcreteMethodDeclaration, Declaration} from '../declaration'
+import {VoidType, MethodType, IType} from '../type'
+import {ClosureValue, IValue} from '../value'
+import {ConcreteMethodDeclaration, IDeclaration} from '../declaration'
 import {Context, Transpiler, Variable} from '../runtime'
 import { SyntaxError } from '../error'
-import {CodeWriter, Writable} from "../utils";
+import {CodeWriter, IWritable} from "../utils";
 
-export default class DeclarationStatement<D extends Declaration> extends BaseStatement implements Writable {
+export default class DeclarationStatement<D extends IDeclaration> extends BaseStatement implements IWritable {
 
     declaration: D;
 
@@ -40,7 +40,7 @@ export default class DeclarationStatement<D extends Declaration> extends BaseSta
         this.declaration.toODialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
             this.declaration.checkChild(context);
             context.registerMethodDeclaration(this.declaration);
@@ -50,7 +50,7 @@ export default class DeclarationStatement<D extends Declaration> extends BaseSta
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         if(this.declaration instanceof ConcreteMethodDeclaration) {
             const method = this.declaration;
             context.registerMethodDeclaration(method);

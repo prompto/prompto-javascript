@@ -1,9 +1,9 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration'
-import {DictionaryType, TextType, AnyType, VoidType, Type} from '../type'
+import {DictionaryType, TextType, AnyType, VoidType, IType} from '../type'
 import { CategoryParameter } from "../param";
 import {ArgumentList, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
-import {DictionaryValue, Value} from "../value";
+import {DictionaryValue, IValue} from "../value";
 
 export class SwapMethodDeclaration extends BuiltInMethodDeclaration<DictionaryValue> {
 
@@ -12,12 +12,12 @@ export class SwapMethodDeclaration extends BuiltInMethodDeclaration<DictionaryVa
 
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const dict = this.getValue(context);
         return dict.swap(context);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return new DictionaryType(TextType.instance);
     }
 
@@ -35,7 +35,7 @@ export class RemoveKeyMethodDeclaration extends BuiltInMethodDeclaration<Diction
 
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         const dict = this.getValue(context);
         if(!dict.mutable)
             context.problemListener.reportNotMutable(new Identifier("dict"), "dict"); // TODO locate the incorrect code
@@ -44,7 +44,7 @@ export class RemoveKeyMethodDeclaration extends BuiltInMethodDeclaration<Diction
         return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 
@@ -63,7 +63,7 @@ export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<Dicti
 
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         const dict = this.getValue(context);
         if(!dict.mutable)
             context.problemListener.reportNotMutable(new Identifier("dict"), "dict"); // TODO locate the incorrect code
@@ -72,7 +72,7 @@ export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<Dicti
         return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 

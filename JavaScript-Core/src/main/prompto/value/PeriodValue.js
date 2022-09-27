@@ -1,10 +1,10 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import { IntegerValue, TextValue } from './index.ts'
 import { SyntaxError } from '../error'
 import { PeriodType } from '../type'
 
 
-export default class PeriodValue extends Value {
+export default class PeriodValue extends IValue {
  
     constructor(value) {
         super(PeriodType.instance);

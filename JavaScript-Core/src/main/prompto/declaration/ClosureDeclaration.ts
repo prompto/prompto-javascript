@@ -1,5 +1,5 @@
 import AbstractMethodDeclaration from './AbstractMethodDeclaration'
-import {ClosureValue, Value} from "../value";
+import {ClosureValue, IValue} from "../value";
 import {Context} from "../runtime";
 
 export default class ClosureDeclaration extends AbstractMethodDeclaration {
@@ -15,7 +15,7 @@ export default class ClosureDeclaration extends AbstractMethodDeclaration {
         this.closure = closure;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.closure.interpret(context);
     }
 }

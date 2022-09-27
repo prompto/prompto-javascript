@@ -1,9 +1,9 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import { IntegerValue } from '../value'
 import { SyntaxError, IndexOutOfRangeError, InternalError } from '../error'
 import { RangeType } from '../type'
 
-export default class RangeValue extends Value {
+export default class RangeValue extends IValue {
    
     constructor(itemType, left, right) {
         super(new RangeType(itemType));
@@ -47,7 +47,7 @@ export default class RangeValue extends Value {
         if (index instanceof IntegerValue) {
             try {
                 const value = this.getItem(index.IntegerValue());
-                if (value instanceof Value) {
+                if (value instanceof IValue) {
                     return value;
                 } else {
                     throw new InternalError("Item not a value!");

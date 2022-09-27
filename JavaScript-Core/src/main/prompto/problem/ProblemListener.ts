@@ -1,24 +1,24 @@
 import antlr4 from 'antlr4';
-import Problem from "./Problem";
+import IProblem from "../../../main/prompto/problem/IProblem";
 import {Section} from "../parser";
 import ProblemType from "./ProblemType";
 import AbstractParser from "../parser/AbstractParser";
 import {Identifier} from "../grammar";
 import {MethodCall} from "../statement";
-import {Expression} from "../expression";
-import {Type} from "../type";
+import {IExpression} from "../expression";
+import {IType} from "../type";
 import {JsxElement} from "../jsx";
 
 export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.Token> {
 
-    problems: Problem[];
+    problems: IProblem[];
 
     constructor() {
         super();
         this.problems = [];
     }
 
-    collectProblem(problem: Problem): void {
+    collectProblem(problem: IProblem): void {
         throw new Error("Should never get there!");
     }
 
@@ -39,7 +39,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
 
 
     // noinspection JSMethodCanBeStatic
-    readSection(section: Section): Problem {
+    readSection(section: Section): IProblem {
         return {
                 type: ProblemType.EMPTY,
                 message: "",
@@ -145,27 +145,27 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
         this.reportError(section, "Too many prototypes for: " + method.toString());
     }
 
-    reportCannotIterate(section: Section, source: Expression): void {
+    reportCannotIterate(section: Section, source: IExpression): void {
         this.reportError(section, "Cannot iterate over: " + source.toString());
     }
 
-    reportCannotSort(section: Section, source: Expression): void {
+    reportCannotSort(section: Section, source: IExpression): void {
         this.reportError(section, "Cannot sort: " + source.toString());
     }
 
-    reportInvalidItem(section: Section, parentType: Type, itemType: Type): void {
+    reportInvalidItem(section: Section, parentType: IType, itemType: IType): void {
         this.reportError(section, "Type: " + parentType.toString() + " cannot read item of type: " + itemType.toString());
     }
 
-    reportIllegalItemType(section: Section, itemType: Type, expected: Type[]): void {
+    reportIllegalItemType(section: Section, itemType: IType, expected: IType[]): void {
         this.reportError(section, "Illegal item type, expected: [" + expected.map(t=>t.name).join(", ") + "], got: " + itemType.name);
     }
 
-    reportInvalidCast(section: Section, target: Type, actual: Type): void {
+    reportInvalidCast(section: Section, target: IType, actual: IType): void {
         this.reportError(section, "Cannot cast " + actual.toString() + " to " + target.toString());
     }
 
-    reportIllegalAssignment(section: Section, expected: Type, actual: Type): void {
+    reportIllegalAssignment(section: Section, expected: IType, actual: IType): void {
         this.reportError(section, "Type " + actual.name + " is not compatible with " + expected.name);
     }
 
@@ -214,7 +214,7 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
     }
 
     // noinspection JSUnusedGlobalSymbols
-    reportInvalidMember(section: Section, type: Type, name: string): void {
+    reportInvalidMember(section: Section, type: IType, name: string): void {
         this.reportError(section, "Invalid member '" + name + "' in " + type.name + " type");
     }
 
@@ -230,11 +230,11 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
         this.reportError(section, "Not a resource context");
     }
 
-    reportIncompatibleTypes(section: Section, left: Type, right: Type): void {
+    reportIncompatibleTypes(section: Section, left: IType, right: IType): void {
         this.reportError(section, "Type " + right.name + " is not compatible with " + left.name);
     }
 
-    reportNoSuperType(section: Section, type: Type): void {
+    reportNoSuperType(section: Section, type: IType): void {
         this.reportError(section, "Type " + type.name + " has no super type");
     }
 

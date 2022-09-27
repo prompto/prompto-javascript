@@ -2,24 +2,24 @@ import { Identifier } from '../grammar'
 import {Context, Transpiler, Variable} from '../runtime'
 import { InvalidDataError } from '../error'
 import { StrictSet } from '../intrinsic'
-import Constraint from "./Constraint";
+import IConstraint from "./IConstraint";
 import {CodeWriter} from "../utils";
-import {Expression} from "../expression";
-import {Container, Value} from "../value";
-import {Type} from "../type";
+import {IExpression} from "../expression";
+import {Container, IValue} from "../value";
+import {IType} from "../type";
 
-export default class MatchingCollectionConstraint implements Constraint {
+export default class MatchingCollectionConstraint implements IConstraint {
 
-    collection:Expression;
+    collection:IExpression;
     container?: Container<never>;
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     transpiler: (transpiler: Transpiler) => void = (t: Transpiler) => {};
 
-    constructor(collection:Expression) {
+    constructor(collection:IExpression) {
         this.collection = collection;
     }
 
-    checkValue(context: Context, value: Value): void {
+    checkValue(context: Context, value: IValue): void {
         if(!this.container) {
             const container = this.collection.interpret(context);
             if (container instanceof Container<never>)
@@ -40,7 +40,7 @@ export default class MatchingCollectionConstraint implements Constraint {
         // nothing to do
     }
 
-    declareChecker(transpiler: Transpiler, name: string, type: Type): void {
+    declareChecker(transpiler: Transpiler, name: string, type: IType): void {
         transpiler = transpiler.newChildTranspiler();
         const id = new Identifier("value");
         transpiler.context.registerInstance(new Variable(id, type), true);
@@ -55,7 +55,7 @@ export default class MatchingCollectionConstraint implements Constraint {
     }
 
 
-    transpileChecker(transpiler: Transpiler, name: string, type: Type): void {
+    transpileChecker(transpiler: Transpiler, name: string, type: IType): void {
         transpiler.append("function $check_").append(name).append("(value) {").indent();
         transpiler = transpiler.newChildTranspiler();
         const id = new Identifier("value");

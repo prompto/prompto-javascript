@@ -1,5 +1,5 @@
 import Container from './Container'
-import { Value, IntegerValue } from './index'
+import { IValue, IntegerValue } from './index'
 import { PromptoError, SyntaxError, IndexOutOfRangeError, InternalError } from '../error'
 import {ContainerType} from "../type";
 import {Context} from "../runtime";
@@ -8,10 +8,10 @@ import {CodeWriter} from "../utils";
 import { Iterator } from "../intrinsic";
 
 /* an abstract list of values, common to ListValue and TupleValue */
-export default abstract class BaseValueList<T extends BaseValueList<T>> extends Container<Value[]> {
+export default abstract class BaseValueList<T extends BaseValueList<T>> extends Container<IValue[]> {
 
-    constructor(type: ContainerType, mutable: boolean, items?: Value[], item?: Value) {
-        let value: Value[];
+    constructor(type: ContainerType, mutable: boolean, items?: IValue[], item?: IValue) {
+        let value: IValue[];
         if(items && item)
             value = items.concat([item]);
         else if(items)
@@ -23,7 +23,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         super(type, value, mutable);
     }
 
-    get items(): Value[] {
+    get items(): IValue[] {
         return this.value;
     }
 
@@ -31,15 +31,15 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         return "[" + this.value.join(", ") + "]";
     }
 
-    add(o: Value): void {
+    add(o: IValue): void {
         this.value.push(o);
     }
 
-    setItem(index: number, value: Value): void {
+    setItem(index: number, value: IValue): void {
         this.value[index] = value;
     }
 
-    setItemInContext(context: Context, index: Value, value: Value): void {
+    setItemInContext(context: Context, index: IValue, value: IValue): void {
         if (index instanceof IntegerValue) {
             const idx = index.IntegerValue() - 1;
             if (idx > this.value.length) {
@@ -50,7 +50,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
             throw new SyntaxError("No such item:" + index.toString())
     }
 
-    get(index: number): Value {
+    get(index: number): IValue {
         return this.value[index];
     }
 
@@ -69,7 +69,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         return this.newInstance(items);
     }
 
-    abstract newInstance(value: Value[]): T;
+    abstract newInstance(value: IValue[]): T;
 
     checkFirst(fi: IntegerValue | null): number {
         const value = (fi == null) ? 1 : fi.IntegerValue();
@@ -90,7 +90,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         return value;
     }
 
-    hasValue(context: Context, value: Value): boolean {
+    hasValue(context: Context, value: IValue): boolean {
         for (let i=0;i<this.value.length;i++) {
             if (this.value[i].equals(value))
                 return true;
@@ -98,7 +98,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         return false;
     }
 
-    getItemInContext(context: Context, index: Value): Value | null {
+    getItemInContext(context: Context, index: IValue): IValue | null {
         if (index instanceof IntegerValue) {
             try {
                 const idx = index.IntegerValue() - 1;
@@ -154,7 +154,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         }
     }
 
-    getMemberValue(context: Context, id: Identifier): Value {
+    getMemberValue(context: Context, id: Identifier): IValue {
         if ("count" === id.name) {
             return new IntegerValue(this.value.length);
         } else {
@@ -162,7 +162,7 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
         }
     }
 
-    getIterator(context: Context): Iterator<Value> {
+    getIterator(context: Context): Iterator<IValue> {
         return new ListIterator(this.value, context);
     }
 
@@ -181,13 +181,13 @@ export default abstract class BaseValueList<T extends BaseValueList<T>> extends 
 
 }
 
-class ListIterator implements Iterator<Value> {
+class ListIterator implements Iterator<IValue> {
 
-    items: Value[];
+    items: IValue[];
     context: Context;
     index: number;
 
-    constructor(items: Value[], context: Context) {
+    constructor(items: IValue[], context: Context) {
         this.items = items;
         this.context = context;
         this.index = -1;

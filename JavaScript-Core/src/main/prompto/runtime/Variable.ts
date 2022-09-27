@@ -1,10 +1,14 @@
-import NamedInstance from '../../../main/prompto/grammar/NamedInstance.ts'
+import NamedInstance from '../grammar/NamedInstance'
+import {Identifier} from "../grammar";
+import {IType} from "../type";
+import {Context, Transpiler} from "./index";
 
 export default class Variable extends NamedInstance {
 
-    constructor(id, type) {
-        super();
-        this.id = id;
+    type: IType;
+
+    constructor(id: Identifier, type: IType) {
+        super(id);
         this.type = type;
      }
 
@@ -20,7 +24,7 @@ export default class Variable extends NamedInstance {
         transpiler.append(this.name);
     }
 
-    getType(context) {
+    getType(context: Context) {
         return this.type;
     }
 }

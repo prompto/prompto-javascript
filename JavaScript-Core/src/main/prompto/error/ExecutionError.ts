@@ -5,7 +5,7 @@ import {UnresolvedParameter} from "../param";
 import {TextLiteral} from "../literal";
 import {ConstructorExpression} from "../expression";
 import {CategoryType} from "../type";
-import {Value} from "../value";
+import {IValue} from "../value";
 
 
 export default abstract class ExecutionError extends PromptoError {
@@ -14,7 +14,7 @@ export default abstract class ExecutionError extends PromptoError {
         super(message);
     }
 
-    interpret(context: Context, errorName: Identifier): Value {
+    interpret(context: Context, errorName: Identifier): IValue {
        let exp = this.getExpression(context);
         if (!exp) {
             const args = new ArgumentList();

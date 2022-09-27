@@ -1,23 +1,23 @@
 import { InvalidDataError } from '../error'
 import { Identifier } from '../grammar'
 import {Context, Transpiler, Variable} from '../runtime'
-import Constraint from "./Constraint";
-import {Expression} from "../expression";
-import {TextValue, Value} from "../value";
+import IConstraint from "./IConstraint";
+import {IExpression} from "../expression";
+import {TextValue, IValue} from "../value";
 import {CodeWriter} from "../utils";
 
-export default class MatchingPatternConstraint implements Constraint {
+export default class MatchingPatternConstraint implements IConstraint {
 
-    expression: Expression;
+    expression: IExpression;
     pattern?: RegExp;
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     transpiler: (transpiler: Transpiler) => void = (t: Transpiler) => {};
 
-    constructor(expression: Expression) {
+    constructor(expression: IExpression) {
         this.expression = expression;
     }
 
-    checkValue(context: Context, value: Value): void {
+    checkValue(context: Context, value: IValue): void {
         if(!this.pattern) {
             const toMatch = this.expression.interpret(context);
             if(toMatch instanceof TextValue)
@@ -39,7 +39,7 @@ export default class MatchingPatternConstraint implements Constraint {
     declare(transpiler: Transpiler): void {
     }
 
-    declareChecker(transpiler: Transpiler, name: string, type: Value): void {
+    declareChecker(transpiler: Transpiler, name: string, type: IValue): void {
         transpiler = transpiler.newChildTranspiler();
         const id = new Identifier("value");
         transpiler.context.registerInstance(new Variable(id, type), true);
@@ -52,7 +52,7 @@ export default class MatchingPatternConstraint implements Constraint {
         this.transpiler(transpiler);
     }
 
-    transpileChecker(transpiler: Transpiler, name: string, type: Value): void {
+    transpileChecker(transpiler: Transpiler, name: string, type: IValue): void {
         transpiler.append("function $check_").append(name).append("(value) {").indent();
         transpiler = transpiler.newChildTranspiler();
         const id = new Identifier("value");

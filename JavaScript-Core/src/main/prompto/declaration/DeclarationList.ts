@@ -1,9 +1,9 @@
 import ObjectList from '../../../main/prompto/utils/ObjectList.js'
 import { AttributeDeclaration, CategoryDeclaration, BaseMethodDeclaration, TestMethodDeclaration, EnumeratedNativeDeclaration } from '../declaration'
-import Declaration from "./Declaration";
-import {DeclarationInfo} from "../runtime/Catalog";
+import IDeclaration from "./IDeclaration";
+import {IDeclarationInfo} from "../runtime/Catalog";
 
-export default class DeclarationList extends ObjectList<Declaration<DeclarationInfo>> {
+export default class DeclarationList extends ObjectList<IDeclaration<IDeclarationInfo>> {
 
     constructor(items, item) {
         items = items || [];

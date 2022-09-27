@@ -1,7 +1,7 @@
-import QueryBuilder from '../store/QueryBuilder.ts'
+import IQueryBuilder from '../store/IQueryBuilder.ts'
 import { MatchPredicate, AndPredicate, OrPredicate, NotPredicate } from './index.ts'
 
-export default class MemQueryBuilder extends QueryBuilder {
+export default class MemQueryBuilder extends IQueryBuilder {
 
     constructor() {
         super();

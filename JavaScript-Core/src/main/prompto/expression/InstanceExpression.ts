@@ -1,14 +1,17 @@
 import BaseExpression from './BaseExpression'
-import { EqualsExpression } from './index'
-import { MethodDeclarationMap, InstanceContext, Variable, LinkedVariable } from '../runtime'
+import {EqualsExpression, IPredicate} from './index'
+import {MethodDeclarationMap, InstanceContext, Variable, LinkedVariable, Transpiler, Context} from '../runtime'
 import { Dialect } from '../parser'
-import { Parameter } from '../param'
-import { AttributeDeclaration, CategoryDeclaration } from '../declaration'
-import { MethodType, BooleanType, VoidType, NullType } from '../type'
-import { ClosureValue } from '../value'
+import { IParameter } from '../param'
+import {AttributeDeclaration, CategoryDeclaration, ConcreteMethodDeclaration, IDeclaration} from '../declaration'
+import {MethodType, BooleanType, VoidType, NullType, IType} from '../type'
+import {ClosureValue, IValue} from '../value'
 import {EqOp, Identifier} from '../grammar'
 import { BooleanLiteral } from '../literal'
 import { SyntaxError } from '../error'
+import {CodeWriter} from "../utils";
+import BaseParameter from "../param/BaseParameter";
+import {IQueryBuilder} from "../store";
 
 export default class InstanceExpression extends BaseExpression {
 
@@ -32,12 +35,16 @@ export default class InstanceExpression extends BaseExpression {
         const named = transpiler.context.getRegistered(this.id);
         if(named instanceof MethodDeclarationMap) {
             const decl = named.getFirst();
+            if(!decl)
+                return;
             // don't declare member methods
             if(decl.memberOf!=null)
                 return;
             // don't declare closures
-            if(decl.declarationStatement)
-                return;
+            if(decl instanceof ConcreteMethodDeclaration) {
+                if (decl.declarationOf)
+                    return;
+            }
             decl.declare(transpiler);
         }
     }
@@ -50,7 +57,7 @@ export default class InstanceExpression extends BaseExpression {
         }
         const named = transpiler.context.getRegistered(this.id);
         if(named instanceof MethodDeclarationMap) {
-            transpiler.append(named.getFirst().getTranspiledName());
+            transpiler.append(named.getFirst()!.getTranspiledName(transpiler.context));
             // need to bind instance methods
             if(context instanceof InstanceContext) {
                 transpiler.append(".bind(");
@@ -64,7 +71,8 @@ export default class InstanceExpression extends BaseExpression {
         }
     }
 
-    toDialect(writer, requireMethod) {
+
+    toDialect(writer: CodeWriter, requireMethod?: boolean): void {
         if(requireMethod === undefined)
             requireMethod = true;
         if(requireMethod && this.requiresMethod(writer))
@@ -72,84 +80,95 @@ export default class InstanceExpression extends BaseExpression {
         writer.append(this.name);
     }
 
-    requiresMethod(writer) {
+    requiresMethod(writer: CodeWriter): boolean {
         if(writer.dialect !== Dialect.E)
             return false;
         const o = writer.context.getRegistered(this.id);
         return o instanceof MethodDeclarationMap;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         let named = context.getRegistered(this.id);
-        if(named==null)
-            named = context.getRegisteredDeclaration(this.id);
+        if(!named) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            named = context.getRegisteredDeclaration<IDeclaration>(IDeclaration, this.id);
+        }
+        if(!named) {
+            context.problemListener.reportUnknownIdentifier(this.id, this.name);
+            return NullType.instance;
+        }
         if (named instanceof Variable) { // local variable
             return named.getType(context);
         } else if(named instanceof LinkedVariable) { // local variable
             return named.getType(context);
-        } else if (named instanceof Parameter) { // named argument
+        } else if (named instanceof BaseParameter) { // named argument
             return named.getType(context);
         } else if(named instanceof CategoryDeclaration) { // any p with x
             return named.getType(context);
         } else if(named instanceof AttributeDeclaration) { // in category method
             return named.getType(context);
         } else if(named instanceof MethodDeclarationMap) { // global method or closure
-            return new MethodType(named.getFirst());
+            return new MethodType(named.getFirst()!);
         } else if (named) {
-            context.problemListener.reportIllegalAssignment(this.id, this.name);
+            context.problemListener.reportIllegalAssignment(this.id, this.id, this.name);
             return VoidType.instance;
-        } else {
-            context.problemListener.reportUnknownIdentifier(this.id, this.name);
+        } else
             return NullType.instance;
-        }
     }
 
-    checkAttribute(context) {
+    checkAttribute(context: Context): AttributeDeclaration | null {
         const decl = context.findAttribute(this.name);
         return decl ? decl : super.checkAttribute(context);
     }
 
-    checkQuery(context) {
+    checkQuery(context: Context): IType {
         return this.check(context);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(context.hasValue(this.id)) {
-            return context.getValue(this.id);
+            return context.readValue(this.id)!;
         } else {
             const named = context.getRegistered(this.id);
             if (named instanceof MethodDeclarationMap) {
                 const decl = named.getFirst();
-                return new ClosureValue(context, new MethodType(decl))
+                return new ClosureValue(context, new MethodType(decl!))
             } else {
                 throw new SyntaxError("No method with name:" + this.name);
             }
         }
     }
 
-    toPredicate(context) {
+    toPredicate(context: Context): IPredicate | null {
         const decl = context.findAttribute(this.name);
-        if(!decl)
+        if(!decl) {
             context.problemListener.reportUnknownIdentifier(this.id, this.name);
-        else if(decl.getType() !== BooleanType.instance)
-            context.problemListener.reportError(this.id, "Expected a Boolean, got: " + decl.getType());
-        else
+            return null;
+        } else if(decl.getType() != BooleanType.instance) {
+            context.problemListener.reportError(this.id, "Expected a Boolean, got: " + decl.getType().name);
+            return null;
+        } else
             return new EqualsExpression(this, EqOp.EQUALS, new BooleanLiteral("true"));
     }
 
-    interpretQuery(context, builder) {
+    interpretQuery(context: Context, builder: IQueryBuilder): void {
         const predicate = this.toPredicate(context);
-        predicate && predicate.interpretQuery(context, builder);
+        if(predicate)
+            predicate.interpretQuery(context, builder);
     }
 
-    declareQuery(transpiler) {
+    declareQuery(transpiler: Transpiler): void {
         const predicate = this.toPredicate(transpiler.context);
-        predicate && predicate.declareQuery(transpiler);
+        if(predicate)
+            predicate.declareQuery(transpiler);
     }
 
-    transpileQuery(transpiler, builderName) {
+    transpileQuery(transpiler: Transpiler, builderName: string): void {
         const predicate = this.toPredicate(transpiler.context);
-        predicate && predicate.transpileQuery(transpiler, builderName);
+        if(predicate)
+            predicate.transpileQuery(transpiler, builderName);
     }
 }
 

@@ -1,15 +1,15 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration';
-import {ListType, Type} from '../type';
+import {ListType, IType} from '../type';
 import { List } from "../intrinsic";
-import { Value, ListValue } from "../value";
+import { IValue, ListValue } from "../value";
 import {Context, Transpiler} from "../runtime";
 
-export default class ToListMethodDeclaration<T extends Value> extends BuiltInMethodDeclaration<T> {
+export default class ToListMethodDeclaration<T extends IValue> extends BuiltInMethodDeclaration<T> {
 
-    itemType: Type;
+    itemType: IType;
     reader: (value: T) => ListValue;
 
-    constructor(itemType: Type, reader: (value: T) => ListValue) {
+    constructor(itemType: IType, reader: (value: T) => ListValue) {
         super("toList");
         this.itemType = itemType;
         this.reader = reader;
@@ -20,7 +20,7 @@ export default class ToListMethodDeclaration<T extends Value> extends BuiltInMet
         return this.reader(value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return new ListType(this.itemType);
     }
 

@@ -2,7 +2,7 @@ import { BooleanType } from '../type'
 import { SyntaxError } from '../error'
 import BaseValue from "./BaseValue";
 import {Context} from "../runtime";
-import Value from "./Value";
+import IValue from "./IValue";
 
 export default class BooleanValue extends BaseValue<boolean> {
 
@@ -41,7 +41,7 @@ export default class BooleanValue extends BaseValue<boolean> {
         return this.value;
     }
 
-    And(context: Context, value: Value) {
+    And(context: Context, value: IValue) {
         if(value instanceof BooleanValue) {
             return BooleanValue.ValueOf(this.value && value.value);
         } else {
@@ -49,7 +49,7 @@ export default class BooleanValue extends BaseValue<boolean> {
         }
     }
 
-    Or(context: Context, value: Value) {
+    Or(context: Context, value: IValue) {
         if(value instanceof BooleanValue) {
             return BooleanValue.ValueOf(this.value || value.value);
         } else {

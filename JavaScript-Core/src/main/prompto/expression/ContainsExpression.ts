@@ -1,25 +1,25 @@
 import BaseExpression from './BaseExpression'
 import {SyntaxError} from '../error'
 import {ContOp, Identifier} from '../grammar'
-import {MatchOp, QueryBuilder} from '../store'
+import {MatchOp, IQueryBuilder} from '../store'
 import {UnresolvedIdentifier, InstanceExpression, MemberSelector, PredicateExpression} from '../expression'
-import {Value, NullValue, BooleanValue, Instance, Container} from '../value'
-import {IterableType, Type, VoidType} from '../type'
+import {IValue, NullValue, BooleanValue, Instance, Container} from '../value'
+import {IterableType, IType, VoidType} from '../type'
 import {CodeWriter} from '../utils'
-import Expression from "./Expression";
+import IExpression from "./IExpression";
 import {Context, Transpiler} from "../runtime";
 import {TestMethodDeclaration} from "../declaration";
 import {Dialect} from "../parser";
-import Assertion from "./Assertion";
-import Predicate from "./Predicate";
+import IAssertion from "./IAssertion";
+import IPredicate from "./IPredicate";
 
-export default class ContainsExpression extends BaseExpression implements Predicate, Assertion{
+export default class ContainsExpression extends BaseExpression implements IPredicate, IAssertion{
 
-    left: Expression;
+    left: IExpression;
     operator: ContOp;
-    right: Expression;
+    right: IExpression;
 
-    constructor(left: Expression, operator: ContOp, right: Expression) {
+    constructor(left: IExpression, operator: ContOp, right: IExpression) {
         super();
         this.left = left;
         this.operator = operator;
@@ -41,7 +41,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
             this.right.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if (this.right instanceof PredicateExpression)
             return this.checkPredicate(context);
         else
@@ -49,7 +49,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
     }
 
 
-    checkPredicate(context: Context): Type {
+    checkPredicate(context: Context): IType {
         const lt = this.left.check(context);
         if (lt instanceof IterableType) {
             const itemType = lt.itemType;
@@ -60,13 +60,13 @@ export default class ContainsExpression extends BaseExpression implements Predic
     }
 
 
-    checkValue(context: Context): Type {
+    checkValue(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
     }
 
-    checkOperator(context: Context, lt: Type, rt: Type): Type {
+    checkOperator(context: Context, lt: IType, rt: IType): IType {
         switch (this.operator) {
             case ContOp.IN:
             case ContOp.NOT_IN:
@@ -79,7 +79,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
         }
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if (this.right instanceof PredicateExpression)
             return this.interpretPredicate(context);
         else {
@@ -90,7 +90,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
     }
 
 
-    interpretPredicate(context: Context): Value {
+    interpretPredicate(context: Context): IValue {
         const lval = this.left.interpret(context);
         if (lval instanceof Container)  {
             const itemType = lval.itemType;
@@ -102,7 +102,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
     }
 
 
-    interpretContainerPredicate(context: Context, container: Container<never>, predicate: (o: Value) => boolean): Value {
+    interpretContainerPredicate(context: Context, container: Container<never>, predicate: (o: IValue) => boolean): IValue {
         let result: boolean | null = null;
         switch (this.operator) {
             case ContOp.HAS_ALL:
@@ -124,17 +124,17 @@ export default class ContainsExpression extends BaseExpression implements Predic
     }
 
 
-    allMatch(context: Context, container: Container<never>, predicate: (o: Value) => boolean): boolean {
+    allMatch(context: Context, container: Container<never>, predicate: (o: IValue) => boolean): boolean {
         return container.items.every(predicate);
     }
 
 
-    anyMatch(context: Context, container: Container<never>, predicate: (o: Value) => boolean): boolean {
+    anyMatch(context: Context, container: Container<never>, predicate: (o: IValue) => boolean): boolean {
         return container.items.some(predicate);
     }
 
 
-    interpretValues(context: Context, lval: Value, rval: Value): Value {
+    interpretValues(context: Context, lval: IValue, rval: IValue): IValue {
         let result: boolean | null = null;
         switch (this.operator) {
             case ContOp.IN:
@@ -231,7 +231,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
         return writer.toString();
     }
 
-    checkQuery(context: Context): Type {
+    checkQuery(context: Context): IType {
         const decl = this.left.checkAttribute(context);
         if (decl) {
             if (decl.storable) {
@@ -244,7 +244,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
         return VoidType.instance;
     }
 
-    interpretQuery(context: Context, query: QueryBuilder): void {
+    interpretQuery(context: Context, query: IQueryBuilder): void {
         const decl = this.left.checkAttribute(context);
         if (!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");
@@ -279,12 +279,12 @@ export default class ContainsExpression extends BaseExpression implements Predic
             transpiler.append(builderName).append(".not();").newLine();
     }
 
-    getAttributeType(context: Context, id: Identifier): Type | null {
+    getAttributeType(context: Context, id: Identifier): IType | null {
         const named = context.getRegistered(id);
         return named ? named.getType(context) : null;
     }
 
-    getMatchOp(context: Context, fieldType: Type, valueType: Type, operator: ContOp, reverse: boolean): MatchOp {
+    getMatchOp(context: Context, fieldType: IType, valueType: IType, operator: ContOp, reverse: boolean): MatchOp {
         if (reverse) {
             const reversed = operator.reverse();
             if (!reversed)
@@ -300,7 +300,7 @@ export default class ContainsExpression extends BaseExpression implements Predic
             throw new SyntaxError("Unsupported operator: " + operator.toString());
     }
 
-    readFieldName(exp: Expression): string | null {
+    readFieldName(exp: IExpression): string | null {
         if (exp instanceof UnresolvedIdentifier || exp instanceof InstanceExpression || exp instanceof MemberSelector)
             return exp.toString();
         else

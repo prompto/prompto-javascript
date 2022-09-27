@@ -1,19 +1,19 @@
 import ContextualExpression from './ContextualExpression'
-import {MethodDeclaration} from "../declaration";
+import {IMethodDeclaration} from "../declaration";
 import {Context} from "../runtime";
 import {ArrowExpression} from "../expression";
-import Value from "./Value";
+import IValue from "./IValue";
 
 export default class ArrowValue extends ContextualExpression {
 
-    method: MethodDeclaration;
+    method: IMethodDeclaration;
 
-    constructor(method: MethodDeclaration, calling: Context, expression: ArrowExpression) {
+    constructor(method: IMethodDeclaration, calling: Context, expression: ArrowExpression) {
         super(calling, expression);
         this.method = method;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const parent = context.getParentContext();
         try {
             context.setParentContext(this.calling);

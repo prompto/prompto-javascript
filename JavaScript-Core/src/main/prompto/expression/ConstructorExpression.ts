@@ -2,7 +2,7 @@ import BaseExpression from './BaseExpression';
 import { UnresolvedIdentifier, InstanceExpression } from '../expression'
 import { ArgumentList, Argument, Identifier } from '../grammar'
 import { AttributeParameter } from '../param'
-import {CategoryType, DocumentType, Type, VoidType} from '../type'
+import {CategoryType, DocumentType, IType, VoidType} from '../type'
 import { NotMutableError } from '../error'
 import {Dialect, Section} from '../parser'
 import {
@@ -13,17 +13,17 @@ import {
 } from '../declaration'
 import {CodeWriter, getTypeName} from '../utils'
 import {Context, Transpiler} from "../runtime";
-import Expression from "./Expression";
-import {ConcreteInstance, DocumentValue, Instance, NullValue, Value} from "../value";
+import IExpression from "../../../main/prompto/expression/IExpression";
+import {ConcreteInstance, DocumentValue, Instance, NullValue, IValue} from "../value";
 
 export default class ConstructorExpression extends BaseExpression {
 
     type: CategoryType;
-    copyFrom: Expression | null;
+    copyFrom: IExpression | null;
     args: ArgumentList;
     checked?: boolean;
 
-    constructor(type: CategoryType, copyFrom: Expression | null, args: ArgumentList) {
+    constructor(type: CategoryType, copyFrom: IExpression | null, args: ArgumentList) {
         super();
         this.type = type;
         this.copyFrom = copyFrom;
@@ -86,7 +86,7 @@ export default class ConstructorExpression extends BaseExpression {
             this.args.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         // need to update type, since it was arbitrarily set to CategoryType
         const decl = context.getRegisteredCategoryDeclaration(this.type.id);
         if (decl) {
@@ -109,7 +109,7 @@ export default class ConstructorExpression extends BaseExpression {
 
     }
 
-    getActualType(context: Context, declaration: CategoryDeclaration): Type {
+    getActualType(context: Context, declaration: CategoryDeclaration): IType {
         return declaration.getType(context).asMutable(context, this.type.mutable);
     }
 
@@ -140,7 +140,7 @@ export default class ConstructorExpression extends BaseExpression {
             context.problemListener.reportUnknownAttribute(id, id.name);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const cd = context.getRegisteredCategoryDeclaration(this.type.id);
         if(cd) {
             this.checkFirstHomonym(context, cd);
@@ -222,7 +222,7 @@ export default class ConstructorExpression extends BaseExpression {
     }
 
     transpileConcreteWidget(transpiler: Transpiler, decl: ConcreteWidgetDeclaration): void {
-        transpiler = transpiler.newInstanceTranspiler(this.type as unknown as Type);
+        transpiler = transpiler.newInstanceTranspiler(this.type as unknown as IType);
         transpiler.append("new ").append(this.type.name).append("()");
         transpiler.flush();
     }
@@ -235,7 +235,7 @@ export default class ConstructorExpression extends BaseExpression {
     }
 
     transpileConcrete(transpiler: Transpiler): void {
-        transpiler = transpiler.newInstanceTranspiler(this.type as unknown as Type);
+        transpiler = transpiler.newInstanceTranspiler(this.type as unknown as IType);
         transpiler.append("new ").append(this.type.name).append("(");
         if(this.copyFrom!=null)
             this.copyFrom.transpile(transpiler);

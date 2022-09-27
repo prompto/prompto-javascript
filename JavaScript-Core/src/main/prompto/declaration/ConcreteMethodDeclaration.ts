@@ -2,12 +2,12 @@ import BaseMethodDeclaration from './BaseMethodDeclaration'
 import {CategoryParameter, CodeParameter, ParameterList, ValueCodeParameter} from '../param'
 import { StatementList, DeclarationStatement } from '../statement'
 import {SingletonCategoryDeclaration} from './index'
-import {VoidType, DictionaryType, TextType, Type} from '../type'
+import {VoidType, DictionaryType, TextType, IType} from '../type'
 import {Context, InstanceContext, Transpiler} from '../runtime';
 import { SyntaxError } from '../error'
 import {Identifier} from "../grammar";
 import {Section} from "../parser";
-import {CodeValue, Value} from "../value";
+import {CodeValue, IValue} from "../value";
 import {CodeWriter} from "../utils";
 
 export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
@@ -17,7 +17,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
     declarationOf?: DeclarationStatement<never>;
     codeParameters?: Map<string, ValueCodeParameter>;
 
-    constructor(id: Identifier, params: ParameterList | null, returnType: Type | null, statements: StatementList) {
+    constructor(id: Identifier, params: ParameterList | null, returnType: IType | null, statements: StatementList) {
         super(id, params, returnType);
         this.statements = statements || new StatementList();
         this.beingChecked = false;
@@ -33,7 +33,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         return this.statements.locateSectionAtLine(line);
     }
 
-    check(context: Context, isStart: boolean): Type {
+    check(context: Context, isStart: boolean): IType {
         if(this.canBeChecked(context, isStart)) {
             return this.recursiveCheck(context, isStart);
         } else {
@@ -54,7 +54,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         return this.parameters ? !!this.parameters.find(param => param instanceof CodeParameter) : false;
     }
 
-    recursiveCheck(context: Context, isStart: boolean): Type {
+    recursiveCheck(context: Context, isStart: boolean): IType {
         if(this.beingChecked) {
             if(this.returnType)
                 return this.returnType;
@@ -72,7 +72,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         }
     }
 
-    fullCheck(context: Context, isStart: boolean): Type {
+    fullCheck(context: Context, isStart: boolean): IType {
         if(isStart) {
             context = context.newLocalContext();
             this.registerParameters(context);
@@ -83,7 +83,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         return this.checkStatements(context);
     }
 
-    checkChild(context: Context): Type {
+    checkChild(context: Context): IType {
         this.checkSingletonInitialize(context);
         if(this.parameters!=null) {
             this.parameters.check(context);
@@ -113,7 +113,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         context.problemListener.reportIllegalInitialize(this.id);
     }
 
-    checkStatements(context: Context): Type {
+    checkStatements(context: Context): IType {
         try {
             return this.statements.check(context, this.returnType);
         } catch(e) {
@@ -124,7 +124,7 @@ export default class ConcreteMethodDeclaration extends BaseMethodDeclaration {
         }
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         context.enterMethod(this);
         try {
             return this.statements.interpret(context);

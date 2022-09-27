@@ -1,28 +1,28 @@
 import BaseDeclaration from './BaseDeclaration'
-import {Type, VoidType} from '../type'
+import {IType, VoidType} from '../type'
 import {ExecutionError, PromptoError} from '../error'
 import { Identifier } from '../grammar'
-import {Statement, StatementList} from '../statement'
+import {IStatement, StatementList} from '../statement'
 import {AssertionList, SymbolExpression} from '../expression'
 import {Context, Transpiler} from "../runtime";
-import {TestInfo} from "../runtime/Catalog";
+import {ITestInfo} from "../runtime/Catalog";
 import {Section} from "../parser";
 import {CodeWriter} from "../utils";
-import {Instance, TextValue, Value} from "../value";
-import {CategoryDeclaration, Declaration, MethodDeclaration} from "./index";
+import {Instance, TextValue, IValue} from "../value";
+import {CategoryDeclaration, IDeclaration, IMethodDeclaration} from "./index";
 import {ParameterList} from "../param";
 
 const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
 
-export default class TestMethodDeclaration extends BaseDeclaration implements MethodDeclaration {
+export default class TestMethodDeclaration extends BaseDeclaration implements IMethodDeclaration {
 
     statements: StatementList;
     assertions: AssertionList;
     error: SymbolExpression | null;
-    closureOf: Declaration | null = null;
+    closureOf: IDeclaration | null = null;
     memberOf: CategoryDeclaration | null = null;
     parameters: ParameterList | null = null;
-    returnType: Type | null = null;
+    returnType: IType | null = null;
 
     constructor(id: Identifier, stmts: StatementList, assertions: AssertionList, error: SymbolExpression | null) {
         super(id);
@@ -130,14 +130,14 @@ export default class TestMethodDeclaration extends BaseDeclaration implements Me
         transpiler.flush();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         context = context.newLocalContext();
         this.statements.forEach(stmt => this.checkStatement(context, stmt), this);
         this.assertions.forEach(exp => exp.checkAssert(context), this);
         return VoidType.instance;
     }
 
-    checkStatement(context: Context, statement: Statement): void {
+    checkStatement(context: Context, statement: IStatement): void {
         const type = statement.check(context);
         if(statement.canReturn() && type!=null && type!=VoidType.instance) // null indicates SyntaxError
             context.problemListener.reportIllegalReturn(statement.asSection());
@@ -151,11 +151,11 @@ export default class TestMethodDeclaration extends BaseDeclaration implements Me
         context.unregisterTestDeclaration (this);
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         if (this.interpretBody (context)) {
             this.interpretNoError (context);
             this.interpretAsserts (context);
@@ -241,7 +241,7 @@ export default class TestMethodDeclaration extends BaseDeclaration implements Me
         }
     }
 
-    private getErrorName(context: Context, error: ExecutionError, actual: Value): string {
+    private getErrorName(context: Context, error: ExecutionError, actual: IValue): string {
         if(actual instanceof Instance) {
             const actualValue = actual.getMemberValue(context, new Identifier("name")) as TextValue;
             return actualValue.getValue();
@@ -312,11 +312,11 @@ export default class TestMethodDeclaration extends BaseDeclaration implements Me
         }
     }
 
-    toDeclarationInfo(context: Context): TestInfo {
+    toDeclarationInfo(context: Context): ITestInfo {
         return { name: this.name, dialect: this.dialect.name };
     }
 
-    checkChild(context: Context): Type {
+    checkChild(context: Context): IType {
         throw new Error("Should never get there!");
     }
 

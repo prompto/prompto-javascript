@@ -1,8 +1,8 @@
-import Value from '../../../main/prompto/value/Value.ts'
+import IValue from '../../../main/prompto/value/IValue.ts'
 import { CssType } from '../type'
 import { SyntaxError } from "../error";
 
-export default class CssValue extends Value {
+export default class CssValue extends IValue {
 
     constructor(expression) {
         super(CssType.instance);

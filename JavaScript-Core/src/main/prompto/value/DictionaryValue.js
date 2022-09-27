@@ -1,10 +1,10 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import { TextValue, IntegerValue, SetValue, NullValue, ListValue } from './index.ts'
 import { DictionaryType, TextType } from '../type'
 import { StrictSet, Dictionary } from '../intrinsic'
 import { SyntaxError, InternalError } from '../error'
 
-export default class DictionaryValue extends Value {
+export default class DictionaryValue extends IValue {
  
     constructor(itemType, dict, mutable) {
         super(new DictionaryType(itemType));
@@ -73,7 +73,7 @@ export default class DictionaryValue extends Value {
         if (index instanceof TextValue)
         {
             const value = this.dict[index] || NullValue.instance;
-            if (value instanceof Value) {
+            if (value instanceof IValue) {
                 return value;
             } else {
                 throw new InternalError("Item not a value!");
@@ -156,7 +156,7 @@ class KVPIterator {
     }
 }
 
-class KVPValue extends Value {
+class KVPValue extends IValue {
 
     constructor(key, value) {
         super(null); // TODO check that this is safe

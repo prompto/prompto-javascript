@@ -1,13 +1,13 @@
 import BaseType from './BaseType'
 import { Identifier } from '../grammar'
-import Type from "./Type";
+import IType from "../../../main/prompto/type/IType";
 import {TypeFamily} from "../store";
 
 export default class TypeType extends BaseType {
 
-    type: Type;
+    type: IType;
 
-    constructor(type: Type) {
+    constructor(type: IType) {
         super(new Identifier("Type"), TypeFamily.TYPE);
         this.type = type;
     }
@@ -22,7 +22,7 @@ export default class TypeType extends BaseType {
         writer.append(">");
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         return this.type.checkStaticMember(context, section, id);
     }
 

@@ -1,20 +1,20 @@
 import Section from '../parser/Section'
-import {InstanceExpression, ArrowExpression, MemberSelector, Expression} from '../expression'
-import {MethodType, CategoryType, VoidType, Type} from '../type'
+import {InstanceExpression, ArrowExpression, MemberSelector, IExpression} from '../expression'
+import {MethodType, CategoryType, VoidType, IType} from '../type'
 import { ContextualExpression } from '../value'
 import { SyntaxError } from '../error'
-import {Parameter} from "../param";
+import {IParameter} from "../param";
 import {CodeWriter, equalObjects} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {MethodDeclaration} from "../declaration";
+import {IMethodDeclaration} from "../declaration";
 import {Identifier} from "./index";
 
 export default class Argument extends Section {
 
-    parameter: Parameter | null;
-    _expression: Expression | null;
+    parameter: IParameter | null;
+    _expression: IExpression | null;
 
-    constructor(parameter: Parameter | null, expression: Expression | null) {
+    constructor(parameter: IParameter | null, expression: IExpression | null) {
         super();
         this.parameter = parameter;
         this._expression = expression;
@@ -28,11 +28,11 @@ export default class Argument extends Section {
         return this.parameter ? this.parameter.name : null;
     }
 
-    get expression(): Expression {
+    get expression(): IExpression {
         return this._expression ? this._expression : new InstanceExpression(this.id);
     }
 
-    set expression(expression: Expression) {
+    set expression(expression: IExpression) {
         this._expression = expression;
     }
 
@@ -76,12 +76,12 @@ export default class Argument extends Section {
         }
     }
 
-    declare(transpiler: Transpiler, methodDeclaration: MethodDeclaration | null): void {
+    declare(transpiler: Transpiler, methodDeclaration: IMethodDeclaration | null): void {
         if(this._expression && !this.declareArrowExpression(transpiler, methodDeclaration))
             this._expression.declare(transpiler);
     }
 
-    declareArrowExpression(transpiler: Transpiler, methodDeclaration: MethodDeclaration | null): boolean {
+    declareArrowExpression(transpiler: Transpiler, methodDeclaration: IMethodDeclaration | null): boolean {
         if(this.parameter==null || methodDeclaration==null)
             return false;
         const parameter = this.findParameter(methodDeclaration);
@@ -94,12 +94,12 @@ export default class Argument extends Section {
             return false;
     }
 
-    transpile(transpiler: Transpiler, methodDeclaration?: MethodDeclaration): void {
+    transpile(transpiler: Transpiler, methodDeclaration?: IMethodDeclaration): void {
         if(this._expression && !this.transpileArrowExpression(transpiler, methodDeclaration))
             this._expression.transpile(transpiler);
     }
 
-    transpileArrowExpression(transpiler: Transpiler, methodDeclaration?: MethodDeclaration): boolean {
+    transpileArrowExpression(transpiler: Transpiler, methodDeclaration?: IMethodDeclaration): boolean {
         // TODO Auto-generated method stub
         return false;
     }
@@ -158,16 +158,16 @@ export default class Argument extends Section {
         }
     }
 
-    findParameter(methodDeclaration: MethodDeclaration): Parameter {
+    findParameter(methodDeclaration: IMethodDeclaration): IParameter {
         return methodDeclaration.parameters.find(this.parameter.name);
     }
 
-    resolve(context: Context, methodDeclaration: MethodDeclaration, checkInstance: boolean, allowDerived: boolean): Expression {
+    resolve(context: Context, methodDeclaration: IMethodDeclaration, checkInstance: boolean, allowDerived: boolean): IExpression {
         const parameter = this.findParameter(methodDeclaration);
         return this.resolve_(context, parameter, checkInstance, allowDerived);
     }
 
-    resolve_(context: Context, parameter: Parameter, checkInstance: boolean, allowDerived: boolean): Expression {
+    resolve_(context: Context, parameter: IParameter, checkInstance: boolean, allowDerived: boolean): IExpression {
         // since we support implicit members, it's time to resolve them
         const requiredType = parameter.getType(context);
         const actualType = this.checkActualType(context, requiredType, checkInstance);
@@ -183,7 +183,7 @@ export default class Argument extends Section {
         return expression;
     }
 
-    makeAssignment(context: Context, methodDeclaration: MethodDeclaration): void {
+    makeAssignment(context: Context, methodDeclaration: IMethodDeclaration): void {
         let argument = this.parameter;
         // when 1st argument, can be unnamed
         if(argument===null) {
@@ -200,9 +200,9 @@ export default class Argument extends Section {
     }
 
 
-    checkActualType(context: Context, requiredType: Type, checkInstance: boolean): Type | null {
+    checkActualType(context: Context, requiredType: IType, checkInstance: boolean): IType | null {
         const expression = this.expression;
-        let actualType: Type | null;
+        let actualType: IType | null;
         const isArrow = Argument.isArrowExpression(expression);
         if(isArrow) {
             if(requiredType instanceof MethodType)
@@ -221,14 +221,14 @@ export default class Argument extends Section {
         return actualType;
     }
 
-    static isArrowExpression(expression: Expression): boolean {
+    static isArrowExpression(expression: IExpression): boolean {
         if(expression instanceof ArrowExpression)
             return true;
         else
             return expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
     }
 
-    static checkArrowExpression(context: Context, requiredType: Type, expression: Expression): Type {
+    static checkArrowExpression(context: Context, requiredType: IType, expression: IExpression): IType {
         context = expression instanceof ContextualExpression ? expression.calling : context.getCallingContext();
         const arrow = expression instanceof ArrowExpression ? expression : expression.expression;
         return requiredType.checkArrowExpression(context, arrow);

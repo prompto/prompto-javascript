@@ -1,21 +1,21 @@
 import BaseDeclaration from './BaseDeclaration'
 import { AttributeInfo } from '../store'
-import {ContainerType, Type} from '../type'
+import {ContainerType, IType} from '../type'
 import {catalog, Context, Transpiler} from '../runtime';
 import {Identifier, IdentifierList} from "../grammar";
-import {Constraint} from "../constraint";
+import {IConstraint} from "../constraint";
 import {CodeWriter} from "../utils";
-import {Expression} from "../expression";
-import {Value} from "../value";
+import {IExpression} from "../expression";
+import {IValue} from "../value";
 
 export default class AttributeDeclaration extends BaseDeclaration {
 
-    type: Type;
-    constraint: Constraint | null;
+    type: IType;
+    constraint: IConstraint | null;
     indexTypes: IdentifierList | null;
     storable: boolean;
 
-    constructor(id: Identifier, type: Type, constraint: Constraint | null, indexTypes: IdentifierList | null) {
+    constructor(id: Identifier, type: IType, constraint: IConstraint | null, indexTypes: IdentifierList | null) {
         super(id);
         this.type = type;
         this.constraint = constraint;
@@ -31,7 +31,7 @@ export default class AttributeDeclaration extends BaseDeclaration {
         return { name: this.name, dialect: this.dialect.name };
     }
 
-    getType(): Type {
+    getType(context?: Context): IType {
         return this.type;
     }
 
@@ -107,12 +107,12 @@ export default class AttributeDeclaration extends BaseDeclaration {
         context.registerDeclaration(this);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.type.checkExists(context);
         return this.type;
     }
 
-    checkValue(context: Context, expression: Expression): Value {
+    checkValue(context: Context, expression: IExpression): IValue {
         const value = expression.interpret(context);
         if(this.constraint)
             this.constraint.checkValue(context, value);

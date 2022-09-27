@@ -1,13 +1,13 @@
-import {Expression} from "../expression";
+import {IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {Transpiler} from "../runtime";
 import {CssValue} from "../value";
 
 export default class CssCode implements CssValue {
 
-    expression: Expression;
+    expression: IExpression;
 
-    constructor(expression: Expression) {
+    constructor(expression: IExpression) {
         this.expression = expression;
     }
 

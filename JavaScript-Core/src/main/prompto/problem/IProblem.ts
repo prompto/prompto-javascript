@@ -1,6 +1,6 @@
 import ProblemType from "./ProblemType";
 
-export default interface Problem {
+export default interface IProblem {
     type: ProblemType;
     message: string;
     path :string;

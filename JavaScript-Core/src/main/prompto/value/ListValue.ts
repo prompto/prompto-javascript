@@ -1,21 +1,21 @@
 import BaseValueList from './BaseValueList'
-import {NullValue, SetValue, IntegerValue, Value} from './index'
+import {NullValue, SetValue, IntegerValue, IValue} from './index'
 import { SyntaxError } from '../error'
-import {ListType, Type} from '../type'
+import {ListType, IType} from '../type'
 import { List } from '../intrinsic'
 import { multiplyArray } from '../utils/Utils'
 import { StrictSet } from '../intrinsic'
-import {Storable} from "../store";
+import {IStorable} from "../store";
 import {Context} from "../runtime";
 import {CodeWriter} from "../utils";
 
 export default class ListValue extends BaseValueList<ListValue> {
  
-    constructor(itemType: Type, mutable = false, items?: Value[], item?: Value) {
+    constructor(itemType: IType, mutable = false, items?: IValue[], item?: IValue) {
         super(new ListType(itemType), mutable, items, item);
     }
 
-    newInstance(items: Value[]): ListValue {
+    newInstance(items: IValue[]): ListValue {
         return new ListValue(this.itemType, false, items);
     }
 
@@ -23,7 +23,7 @@ export default class ListValue extends BaseValueList<ListValue> {
         return this.value.map(item => item.getStorableData()) as never;
     }
 
-    collectStorables(storables: Set<Storable>): void {
+    collectStorables(storables: Set<IStorable>): void {
         this.value.forEach(item => item.collectStorables(storables));
     }
 
@@ -32,7 +32,7 @@ export default class ListValue extends BaseValueList<ListValue> {
         return new List(this.mutable, items) as never;
     }
 
-    Add(context: Context, value: Value): Value {
+    Add(context: Context, value: IValue): IValue {
         if (value instanceof ListValue) {
             const items = this.value.concat(value.value);
             return new ListValue(this.itemType, this.mutable, items);
@@ -44,7 +44,7 @@ export default class ListValue extends BaseValueList<ListValue> {
         }
     }
 
-    Subtract(context: Context, value: Value): Value {
+    Subtract(context: Context, value: IValue): IValue {
         if (value instanceof ListValue)
             value = new SetValue(this.itemType, value.items);
         if(value instanceof SetValue) {
@@ -59,26 +59,26 @@ export default class ListValue extends BaseValueList<ListValue> {
         this.items.splice(item.value -1, 1);
     }
 
-    removeValue(value: Value): void {
+    removeValue(value: IValue): void {
         const idx = this.findIndex(value);
         if(idx > -1)
             this.items.splice(idx, 1);
     }
 
-    addValue(value: Value): void {
+    addValue(value: IValue): void {
         this.items.push(value);
     }
 
-    insertValue(value: Value, atIndex: IntegerValue): void {
+    insertValue(value: IValue, atIndex: IntegerValue): void {
         this.items.splice(atIndex.value -1, 0, value);
     }
 
-    indexOfValue(value: Value): Value {
+    indexOfValue(value: IValue): IValue {
         const idx = this.findIndex(value);
         return idx < 0 ? NullValue.instance : new IntegerValue(idx + 1);
     }
 
-    findIndex(value: Value): number {
+    findIndex(value: IValue): number {
         for(let i=0;i<this.items.length;i++) {
             const item = this.items[i];
             if(item===value || (item && item.equals && item.equals(value)))
@@ -87,7 +87,7 @@ export default class ListValue extends BaseValueList<ListValue> {
         return -1;
     }
 
-    Multiply(context: Context, value: Value): Value {
+    Multiply(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             const count = value.value;
             if (count < 0) {
@@ -107,7 +107,7 @@ export default class ListValue extends BaseValueList<ListValue> {
         writer.append(']');
     }
 
-    filter(filter: (value: Value) => boolean): ListValue {
+    filter(filter: (value: IValue) => boolean): ListValue {
         const items = this.items.filter(filter);
         return new ListValue(this.itemType, false, items);
     }

@@ -1,6 +1,6 @@
 import CmdLineParser from './CmdLineParser';
 import CodeWriter from './CodeWriter';
-import Writable from './Writable';
+import IWritable from './IWritable';
 import { convertFromJavaScript, inferExpressionsType } from './TypeUtils';
 import { getTypeName,
     isCharacterUpperCase, isABoolean, isACharacter, isADecimal, isAnInteger, isANumber, isAText, isAMethod, isInstanceOf,
@@ -14,5 +14,5 @@ export {  equalObjects, equalArrays, arrayContains, compareValues, isCharacterUp
     isABoolean, isACharacter, isADecimal, isAnInteger, isANumber, isAText, isAMethod, isInstanceOf,
     decimalToString, removeAccents, multiplyArray, convertToJsonString, convertToJsonNode,
     stringToUtf8Buffer, utf8BufferToString, getUtf8CharLength,
-    CodeWriter, Writable, CmdLineParser,
+    CodeWriter, IWritable, CmdLineParser,
     fileExists }

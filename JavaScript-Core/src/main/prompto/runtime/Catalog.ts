@@ -1,54 +1,54 @@
 /* eslint-disable @typescript-eslint/no-empty-interface */
-export interface CatalogInfo<T extends DeclarationInfo> {
+export interface ICatalogInfo<T extends IDeclarationInfo> {
     type: string;
     value: T;
 }
 
-export interface DeclarationInfo {
+export interface IDeclarationInfo {
     name: string;
     dialect: string;
 }
 
-export interface AttributeInfo extends DeclarationInfo {
+export interface IAttributeInfo extends IDeclarationInfo {
 
 }
 
-export interface CategoryInfo extends DeclarationInfo {
+export interface ICategoryInfo extends IDeclarationInfo {
 
 }
 
-export interface EnumerationInfo extends DeclarationInfo {
+export interface IEnumerationInfo extends IDeclarationInfo {
     symbols: string[]
 }
 
-export interface MethodsInfo extends DeclarationInfo {
-    methods: MethodInfo[];
+export interface IMethodsInfo extends IDeclarationInfo {
+    methods: IMethodInfo[];
 }
 
-export interface MethodInfo extends DeclarationInfo {
+export interface IMethodInfo extends IDeclarationInfo {
     proto: string;
     eligibleAsMain: boolean;
 }
 
-export interface TestInfo extends DeclarationInfo {
+export interface ITestInfo extends IDeclarationInfo {
 
 }
 
-export interface WidgetInfo extends DeclarationInfo {
+export interface IWidgetInfo extends IDeclarationInfo {
 
 }
 
 
-export interface Chapters {
-    attributes?: CatalogInfo<AttributeInfo>[];
-    categories?: CatalogInfo<CategoryInfo>[];
-    enumerations?: CatalogInfo<EnumerationInfo>[];
-    methods?: CatalogInfo<MethodsInfo>[];
-    tests?: CatalogInfo<TestInfo>[];
-    widgets?: CatalogInfo<WidgetInfo>[];
+export interface IChapters {
+    attributes?: ICatalogInfo<IAttributeInfo>[];
+    categories?: ICatalogInfo<ICategoryInfo>[];
+    enumerations?: ICatalogInfo<IEnumerationInfo>[];
+    methods?: ICatalogInfo<IMethodsInfo>[];
+    tests?: ICatalogInfo<ITestInfo>[];
+    widgets?: ICatalogInfo<IWidgetInfo>[];
 }
 
-export interface Catalog {
+export interface ICatalog {
     type: string;
-    value: Chapters;
+    value: IChapters;
 }

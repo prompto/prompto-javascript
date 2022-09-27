@@ -1,6 +1,6 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration'
-import {TextType, ListType, BooleanType, IntegerType, Type} from '../type'
-import {TextValue, ListValue, BooleanValue, IntegerValue, Value} from '../value'
+import {TextType, ListType, BooleanType, IntegerType, IType} from '../type'
+import {TextValue, ListValue, BooleanValue, IntegerValue, IValue} from '../value'
 import { CategoryParameter } from '../param'
 import {ArgumentList, Identifier} from '../grammar'
 import { TextLiteral, IntegerLiteral } from '../literal'
@@ -13,13 +13,13 @@ export class ToLowerCaseMethodDeclaration extends BuiltInMethodDeclaration<TextV
         super("toLowerCase");
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getValue(context);
         const data = value.getStorableData();
         return new TextValue(data.toLowerCase());
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 
@@ -34,12 +34,12 @@ export class ToUpperCaseMethodDeclaration extends BuiltInMethodDeclaration<TextV
         super("toUpperCase");
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getValue(context).getStorableData();
         return new TextValue(value.toUpperCase());
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 
@@ -54,13 +54,13 @@ export class TrimMethodDeclaration extends BuiltInMethodDeclaration<TextValue> {
         super("trim");
      }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let value = this.getValue(context).getStorableData();
         value = value.trim();
         return new TextValue(value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 
@@ -75,7 +75,7 @@ export class ToCapitalizedMethodDeclaration extends BuiltInMethodDeclaration<Tex
         super("toCapitalized");
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let value = this.getValue(context).getStorableData();
         value = value.replace( /(^|\s)([a-z])/g , (m: string, p1: string, p2: string) => p1 + p2.toUpperCase() );
         return new TextValue(value);
@@ -85,7 +85,7 @@ export class ToCapitalizedMethodDeclaration extends BuiltInMethodDeclaration<Tex
         transpiler.append("replace( /(^|\\s)([a-z])/g , function(m, p1, p2){ return p1 + p2.toUpperCase(); } )");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 }
@@ -96,7 +96,7 @@ export class SplitMethodDeclaration extends BuiltInMethodDeclaration<TextValue> 
         super("split", new CategoryParameter(TextType.instance, new Identifier("separator"), new TextLiteral('" "')) );
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getValue(context).getStorableData();
         const sepValue = context.getValue(new Identifier("separator")) as TextValue;
         const sepData = sepValue.getStorableData();
@@ -105,7 +105,7 @@ export class SplitMethodDeclaration extends BuiltInMethodDeclaration<TextValue> 
         return new ListValue(TextType.instance, false, texts);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return new ListType(TextType.instance);
     }
 
@@ -130,7 +130,7 @@ export class StartsWithMethodDeclaration extends BuiltInMethodDeclaration<TextVa
         super("startsWith", new CategoryParameter(TextType.instance, new Identifier("value")));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getValue(context).getStorableData();
         const findValue = context.getValue(new Identifier("value")) as TextValue;
         const findData = findValue.getStorableData();
@@ -138,7 +138,7 @@ export class StartsWithMethodDeclaration extends BuiltInMethodDeclaration<TextVa
         return BooleanValue.ValueOf(startsWith);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return BooleanType.instance;
     }
 
@@ -158,7 +158,7 @@ export class EndsWithMethodDeclaration extends BuiltInMethodDeclaration<TextValu
         );
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getValue(context).getStorableData();
         const findValue = context.getValue(new Identifier("value")) as TextValue;
         const findData = findValue.getStorableData();
@@ -166,7 +166,7 @@ export class EndsWithMethodDeclaration extends BuiltInMethodDeclaration<TextValu
         return BooleanValue.ValueOf(endsWith);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return BooleanType.instance;
     }
 
@@ -183,7 +183,7 @@ export class ReplaceMethodDeclaration extends BuiltInMethodDeclaration<TextValue
         super("replace", new CategoryParameter(TextType.instance, new Identifier("toReplace")), new CategoryParameter(TextType.instance, new Identifier("replaceWith")));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let value = this.getValue(context).getStorableData();
         const toReplaceValue = context.getValue(new Identifier("toReplace")) as TextValue;
         const toReplaceData = toReplaceValue.getStorableData();
@@ -193,7 +193,7 @@ export class ReplaceMethodDeclaration extends BuiltInMethodDeclaration<TextValue
         return new TextValue(value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 
@@ -212,7 +212,7 @@ export class ReplaceAllMethodDeclaration extends BuiltInMethodDeclaration<TextVa
         super("replaceAll", new CategoryParameter(TextType.instance, new Identifier("toReplace")), new CategoryParameter(TextType.instance, new Identifier("replaceWith")));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let value = this.getValue(context).getStorableData();
         const toReplaceValue = context.getValue(new Identifier("toReplace")) as TextValue;
         const toReplaceData = toReplaceValue.getStorableData();
@@ -222,7 +222,7 @@ export class ReplaceAllMethodDeclaration extends BuiltInMethodDeclaration<TextVa
         return new TextValue(value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 
@@ -242,7 +242,7 @@ export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<TextValue
             new CategoryParameter(IntegerType.instance, new Identifier("fromIndex"), new IntegerLiteral("1")));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getValue(context).getStorableData();
         const toFindValue = context.getValue(new Identifier("value")) as TextValue;
         const toFindData = toFindValue.getStorableData();
@@ -252,7 +252,7 @@ export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<TextValue
         return new IntegerValue(index + 1);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return IntegerType.instance;
     }
 

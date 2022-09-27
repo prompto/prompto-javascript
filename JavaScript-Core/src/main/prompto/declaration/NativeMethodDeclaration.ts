@@ -1,6 +1,6 @@
 import ConcreteMethodDeclaration from './ConcreteMethodDeclaration'
-import {NullValue, IntegerValue, DecimalValue, Value} from '../value'
-import {VoidType, IntegerType, DecimalType, Type} from '../type'
+import {NullValue, IntegerValue, DecimalValue, IValue} from '../value'
+import {VoidType, IntegerType, DecimalType, IType} from '../type'
 import {Context} from "../runtime";
 import {Identifier} from "../grammar";
 import {StatementList} from "../statement";
@@ -11,11 +11,11 @@ import * as intrinsic from "../intrinsic";
 
 export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
 
-    constructor(id: Identifier, params: ParameterList, returnType: Type, statements: StatementList) {
+    constructor(id: Identifier, params: ParameterList, returnType: IType, statements: StatementList) {
         super(id, params, returnType, statements);
     }
 
-    check(context: Context, isStart: boolean): Type {
+    check(context: Context, isStart: boolean): IType {
         if(isStart) {
             context = context.newLocalContext();
             this.registerParameters(context);
@@ -26,7 +26,7 @@ export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
         return this.returnType==null ? checked : this.returnType;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         context.enterMethod(this);
         try {
             const result = this.statements.interpretNative(context, this.returnType);
@@ -36,7 +36,7 @@ export default class NativeMethodDeclaration extends ConcreteMethodDeclaration {
         }
     }
 
-    castToReturnType(context: Context, value: Value | null): Value {
+    castToReturnType(context: Context, value: IValue | null): IValue {
         // can only cast to specified type, and if required
         if(value==null)
             value = NullValue.instance;

@@ -1,4 +1,4 @@
-import Value from './Value'
+import IValue from '../../../main/prompto/value/IValue'
 import BaseValue from "./BaseValue";
 import {Context} from "../runtime";
 import {MethodType} from "../type";
@@ -12,7 +12,7 @@ export default class ClosureValue extends BaseValue<MethodType> {
         this.context = context;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const parentMost = this.context.getParentMostContext();
         const savedParent = parentMost.getParentContext();
         if(!context.isChildOf(parentMost))
@@ -26,7 +26,7 @@ export default class ClosureValue extends BaseValue<MethodType> {
         }
     }
 
-    doInterpret(context: Context): Value {
+    doInterpret(context: Context): IValue {
         return this.value.method.interpret(context);
     }
 

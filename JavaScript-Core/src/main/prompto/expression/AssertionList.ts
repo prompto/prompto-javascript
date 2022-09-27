@@ -1,11 +1,11 @@
 import ObjectList from "../utils/ObjectList";
-import Assertion from "./Assertion";
+import IAssertion from "../../../main/prompto/expression/IAssertion";
 import {Section} from "../parser";
 import {Transpiler} from "../runtime";
 
-export default class AssertionList extends ObjectList<Assertion> {
+export default class AssertionList extends ObjectList<IAssertion> {
 
-    constructor(items?: Assertion[], item?: Assertion) {
+    constructor(items?: IAssertion[], item?: IAssertion) {
         super(items, item);
     }
 

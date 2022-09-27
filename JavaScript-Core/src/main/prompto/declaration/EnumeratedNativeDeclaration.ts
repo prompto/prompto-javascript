@@ -1,25 +1,25 @@
 import BaseDeclaration from './BaseDeclaration'
-import {EnumeratedNativeType, Type} from '../type'
+import {EnumeratedNativeType, IType} from '../type'
 import { List } from '../intrinsic'
 import {NativeSymbol} from "../expression";
 import {Context, Transpiler} from "../runtime";
 import {Identifier, NativeSymbolList} from "../grammar";
 import {CodeWriter} from "../utils";
-import {EnumerationInfo} from "../runtime/Catalog";
+import {IEnumerationInfo} from "../runtime/Catalog";
 
 export default class EnumeratedNativeDeclaration extends BaseDeclaration {
 
     type: EnumeratedNativeType;
     symbols: NativeSymbolList;
 
-    constructor(id: Identifier, derivedFrom: Type, symbols?: NativeSymbolList) {
+    constructor(id: Identifier, derivedFrom: IType, symbols?: NativeSymbolList) {
         super(id);
         this.type = new EnumeratedNativeType(id, derivedFrom);
         this.symbols = symbols || new NativeSymbolList();
         this.symbols.forEach(symbol => symbol.type = this.type, this);
     }
 
-    toDeclarationInfo(): EnumerationInfo {
+    toDeclarationInfo(): IEnumerationInfo {
         return { name: this.name, dialect: this.dialect.name, symbols: this.symbols.map(s => s.name)};
     }
 
@@ -82,7 +82,7 @@ export default class EnumeratedNativeDeclaration extends BaseDeclaration {
         });
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.symbols.forEach(symbol => {
             symbol.check(context);
         });
@@ -99,7 +99,7 @@ export default class EnumeratedNativeDeclaration extends BaseDeclaration {
         transpiler.append(this.name).append(".symbolOf = function(name) { return eval(name); };").newLine();
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         return this.type;
     }
 

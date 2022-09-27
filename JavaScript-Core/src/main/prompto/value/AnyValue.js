@@ -1,4 +1,4 @@
-import Value from '../../../main/prompto/value/Value.ts'
+import IValue from './IValue.ts'
 import { AnyType } from '../type'
 
 export default class AnyValue extends BaseValue {

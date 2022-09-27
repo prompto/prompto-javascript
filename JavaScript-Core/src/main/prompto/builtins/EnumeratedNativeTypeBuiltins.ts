@@ -1,26 +1,26 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration'
 import { CategoryParameter } from '../param'
-import {TextType, Type} from '../type'
+import {TextType, IType} from '../type'
 import {ArgumentList, Identifier} from '../grammar'
 import { EnumeratedNativeDeclaration } from '../declaration'
 import { SyntaxError } from '../error'
 import {Context, Transpiler} from "../runtime";
-import {TextValue, Value} from "../value";
+import {TextValue, IValue} from "../value";
 
-export class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration<Value> {
+export class SymbolOfMethodDeclaration extends BuiltInMethodDeclaration<IValue> {
 
-    enumType: Type;
+    enumType: IType;
 
-    constructor(enumType: Type) {
+    constructor(enumType: IType) {
         super("symbolOf", new CategoryParameter(TextType.instance, new Identifier("name")));
         this.enumType = enumType;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.enumType;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const decl = context.getRegistered(this.enumType.id);
         if(decl instanceof EnumeratedNativeDeclaration) {
             const value = context.getValue(new Identifier("name")) as TextValue;

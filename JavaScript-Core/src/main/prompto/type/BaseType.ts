@@ -2,18 +2,18 @@ import Section from "../parser/Section";
 import { SyntaxError } from '../error';
 import {NullType, VoidType, BooleanType, TextType, EnumeratedNativeType} from './index';
 import {CodeWriter, convertToJsonString, convertToJsonNode} from '../utils';
-import Type from "./Type";
+import IType from "./IType";
 import {CmpOp, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
-import {MethodDeclaration} from "../declaration";
-import {Expression} from "../expression";
-import {Value} from "../value";
+import {IMethodDeclaration} from "../declaration";
+import {IExpression} from "../expression";
+import {IValue} from "../value";
 import {TypeFamily} from "../store";
 import {JsonNode} from "../json";
 let NullValue: object;
 void import("../value/NullValue").then(res => NullValue = res.default);
 
-export default abstract class BaseType extends Section implements Type {
+export default abstract class BaseType extends Section implements IType {
 
     id: Identifier;
     family: TypeFamily;
@@ -32,11 +32,11 @@ export default abstract class BaseType extends Section implements Type {
         return false;
     }
 
-    anyfy(): Type {
+    anyfy(): IType {
         return this;
     }
 
-    resolve(context: Context, onError: (type: Type) => void): Type {
+    resolve(context: Context, onError: (type: IType) => void): IType {
         return this;
     }
 
@@ -44,7 +44,7 @@ export default abstract class BaseType extends Section implements Type {
         return false;
     }
 
-    asMutable(context: Context, mutable: boolean): Type {
+    asMutable(context: Context, mutable: boolean): IType {
         if(mutable)
             context.problemListener.reportError(this, this.name + " cannot be mutable");
         return this;
@@ -66,21 +66,21 @@ export default abstract class BaseType extends Section implements Type {
         return (other instanceof BaseType) && this.name == other.name;
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return this == other || this.equals(other) || other === NullType.instance;
     }
 
-    abstract isMoreSpecificThan(context: Context, other: Type): boolean;
+    abstract isMoreSpecificThan(context: Context, other: IType): boolean;
 
-    getMemberMethods(context: Context, id: Identifier): MethodDeclaration[] {
+    getMemberMethods(context: Context, id: Identifier): IMethodDeclaration[] {
         return [];
     }
 
-    getStaticMemberMethods(context: Context, id: Identifier): MethodDeclaration[] {
+    getStaticMemberMethods(context: Context, id: Identifier): IMethodDeclaration[] {
         return [];
     }
 
-    getStaticMemberValue(context: Context, id: Identifier): Value {
+    getStaticMemberValue(context: Context, id: Identifier): IValue {
         throw new SyntaxError("Cannot access static member value");
     }
 
@@ -88,17 +88,17 @@ export default abstract class BaseType extends Section implements Type {
 
     abstract transpile(transpiler: Transpiler): void;
 
-    transpileAssignMemberValue(transpiler: Transpiler, name: string, expression: Expression): void {
+    transpileAssignMemberValue(transpiler: Transpiler, name: string, expression: IExpression): void {
         throw new SyntaxError("Cannot transpile assign member value from " + this.name);
     }
 
-    transpileAssignItemValue(transpiler: Transpiler, item: number, expression: Expression): void {
+    transpileAssignItemValue(transpiler: Transpiler, item: number, expression: IExpression): void {
         throw new SyntaxError("Cannot transpile assign item value from " + this.name);
     }
 
     abstract checkExists(context: Context): void;
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkAdd(context, section, other.derivedFrom, tryReverse);
         else if(tryReverse)
@@ -112,7 +112,7 @@ export default abstract class BaseType extends Section implements Type {
         }
     }
 
-    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareAdd(transpiler, other.derivedFrom, tryReverse, left, right);
         else if(tryReverse)
@@ -121,7 +121,7 @@ export default abstract class BaseType extends Section implements Type {
             throw new SyntaxError("Cannot declare add " + this.name + " to " + other.name);
     }
 
-    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    transpileAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileAdd(transpiler, other.derivedFrom, tryReverse, left, right);
         else if(tryReverse)
@@ -130,91 +130,91 @@ export default abstract class BaseType extends Section implements Type {
             throw new SyntaxError("Cannot transpile add " + this.name + " to " + other.name);
     }
 
-    checkSubtract(context: Context, other: Type): Type {
+    checkSubtract(context: Context, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkSubtract(context, other.derivedFrom);
         else
             throw new SyntaxError("Cannot substract " + this.name + " from " + other.name);
     }
 
-    declareSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    declareSubtract(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareSubtract(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot declare substract " + this.name + " to " + other.name);
     }
 
-    transpileSubtract(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    transpileSubtract(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.transpileSubtract(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot transpile substract " + this.name + " to " + other.name);
     }
 
-    checkDivide(context: Context, other: Type): Type {
+    checkDivide(context: Context, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkDivide(context, other.derivedFrom);
         else
             throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
     }
 
-    declareDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    declareDivide(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareDivide(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot declare divide " + this.name + " to " + other.name);
     }
 
-    transpileDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    transpileDivide(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.transpileDivide(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot transpile divide " + this.name + " to " + other.name);
     }
 
-    checkIntDivide(context: Context, other: Type): Type {
+    checkIntDivide(context: Context, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkIntDivide(context, other.derivedFrom);
         else
             throw new SyntaxError("Cannot divide " + this.name + " with " + other.name);
     }
 
-    declareIntDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    declareIntDivide(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareIntDivide(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot declare int divide " + this.name + " to " + other.name);
     }
 
-    transpileIntDivide(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    transpileIntDivide(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.transpileIntDivide(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot transpile int divide " + this.name + " to " + other.name);
     }
 
-    checkModulo(context: Context, other: Type): Type {
+    checkModulo(context: Context, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkModulo(context, other.derivedFrom);
         else
             throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
     }
 
-    declareModulo(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    declareModulo(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareModulo(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot declare modulo " + this.name + " to " + other.name);
     }
 
-    transpileModulo(transpiler: Transpiler, other: Type, left: Expression, right: Expression): void {
+    transpileModulo(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.transpileModulo(transpiler, other.derivedFrom, left, right);
         else
             throw new SyntaxError("Cannot transpile modulo " + this.name + " to " + other.name);
     }
 
-    checkMultiply(context: Context, other: Type, tryReverse: boolean): Type {
+    checkMultiply(context: Context, other: IType, tryReverse: boolean): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkMultiply(context, other.derivedFrom, tryReverse);
         else if(tryReverse)
@@ -223,7 +223,7 @@ export default abstract class BaseType extends Section implements Type {
             throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
     }
 
-    declareMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    declareMultiply(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
         else if(tryReverse)
@@ -232,7 +232,7 @@ export default abstract class BaseType extends Section implements Type {
             throw new SyntaxError("Cannot declare multiply " + this.name + " to " + other.name);
     }
 
-    transpileMultiply(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    transpileMultiply(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.transpileMultiply(transpiler, other.derivedFrom, tryReverse, left, right);
         else if(tryReverse)
@@ -241,28 +241,28 @@ export default abstract class BaseType extends Section implements Type {
             throw new SyntaxError("Cannot transpile multiply " + this.name + " to " + other.name);
     }
 
-    checkMinus(context: Context): Type {
+    checkMinus(context: Context): IType {
         if(this instanceof EnumeratedNativeType)
             return this.derivedFrom.checkMinus(context);
         else
             throw new SyntaxError("Cannot negate " + this.name);
     }
 
-    declareMinus(transpiler: Transpiler, expression: Expression): void {
+    declareMinus(transpiler: Transpiler, expression: IExpression): void {
         if(this instanceof EnumeratedNativeType)
             this.derivedFrom.declareMinus(transpiler, expression);
         else
             throw new SyntaxError("Cannot declare negate " + this.name);
     }
 
-    transpileMinus(transpiler: Transpiler, expression: Expression): void {
+    transpileMinus(transpiler: Transpiler, expression: IExpression): void {
         if(this instanceof EnumeratedNativeType)
             this.derivedFrom.transpileMinus(transpiler, expression);
         else
             throw new SyntaxError("Cannot transpile negate of " + this.name );
     }
 
-    checkCompare(context: Context, section: Section, other: Type): Type {
+    checkCompare(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkCompare(context, section, other.derivedFrom);
         else {
@@ -271,21 +271,21 @@ export default abstract class BaseType extends Section implements Type {
         }
     }
 
-    declareCompare(transpiler: Transpiler, other: Type): void {
+    declareCompare(transpiler: Transpiler, other: IType): void {
         if(other instanceof EnumeratedNativeType)
             this.declareCompare(transpiler, other.derivedFrom);
         else
             throw new SyntaxError(this.name + " cannot declare compare " + other.name);
     }
 
-    transpileCompare(transpiler: Transpiler, other: Type, operator: CmpOp, left: Expression, right: Expression): void {
+    transpileCompare(transpiler: Transpiler, other: IType, operator: CmpOp, left: IExpression, right: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileCompare(transpiler, other.derivedFrom, operator, left, right);
         else
             throw new SyntaxError(this.name + " cannot transpile compare " + other.name);
     }
 
-    checkContains(context: Context, section: Section, other: Type): Type {
+    checkContains(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkContains(context, section, other.derivedFrom);
         else {
@@ -294,63 +294,63 @@ export default abstract class BaseType extends Section implements Type {
         }
     }
 
-    declareContains(transpiler: Transpiler, other: Type, container: Expression, item: Expression): void {
+    declareContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             this.declareContains(transpiler, other.derivedFrom, container, item);
         else
             throw new SyntaxError(this.name + " cannot declare contain " + other.name);
     }
 
-    transpileContains(transpiler: Transpiler, other: Type, container: Expression, item: Expression): void {
+    transpileContains(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileContains(transpiler, other.derivedFrom, container, item);
         else
             throw new SyntaxError(this.name + " cannot transpile contain " + other.name);
     }
 
-    checkHasAllOrAny(context: Context, section: Section, other: Type): Type {
+    checkHasAllOrAny(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
             return this.checkHasAllOrAny(context, section, other.derivedFrom);
         else
             throw new SyntaxError(this.name + " cannot have all or any " + other.name);
     }
 
-    declareHasAllOrAny(transpiler: Transpiler, other: Type, container: Expression, item: Expression): void {
+    declareHasAllOrAny(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.declareHasAllOrAny(transpiler, other.derivedFrom, container, item);
         else
             throw new SyntaxError(this.name + " cannot declare have all or any " + other.name);
     }
 
-    transpileHasAllValue(transpiler: Transpiler, other: Type, container: Expression, item: Expression): void {
+    transpileHasAllValue(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileHasAllValue(transpiler, other.derivedFrom, container, item);
         else
             throw new SyntaxError(this.name + " cannot transpile has all " + other.name);
     }
 
-    transpileHasAnyValue(transpiler: Transpiler, other: Type, container: Expression, item: Expression): void {
+    transpileHasAnyValue(transpiler: Transpiler, other: IType, container: IExpression, item: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileHasAnyValue(transpiler, other.derivedFrom, container, item);
         else
             throw new SyntaxError(this.name + " cannot transpile has any " + other.name);
     }
 
-    transpileHasAllPredicate(transpiler: Transpiler, other: Type, container: Expression, predicate: Expression): void {
+    transpileHasAllPredicate(transpiler: Transpiler, other: IType, container: IExpression, predicate: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileHasAllPredicate(transpiler, other.derivedFrom, container, predicate);
         else
             throw new SyntaxError(this.name + " cannot transpile has all " + other.name);
     }
 
-    transpileHasAnyPredicate(transpiler: Transpiler, other: Type, container: Expression, predicate: Expression): void {
+    transpileHasAnyPredicate(transpiler: Transpiler, other: IType, container: IExpression, predicate: IExpression): void {
         if(other instanceof EnumeratedNativeType)
             return this.transpileHasAnyPredicate(transpiler, other.derivedFrom, container, predicate);
         else
             throw new SyntaxError(this.name + " cannot transpile has any " + other.name);
     }
 
-    checkItem(context: Context, section: Section, itemType: Type): Type {
+    checkItem(context: Context, section: Section, itemType: IType): IType {
         if(itemType instanceof EnumeratedNativeType)
             return this.checkItem(context, section, itemType.derivedFrom);
         else {
@@ -359,21 +359,21 @@ export default abstract class BaseType extends Section implements Type {
         }
     }
 
-    declareItem(transpiler: Transpiler, itemType: Type, item: Expression): void {
+    declareItem(transpiler: Transpiler, itemType: IType, item: IExpression): void {
         if(itemType instanceof EnumeratedNativeType)
             return this.declareItem(transpiler, itemType.derivedFrom, item);
         else
             throw new SyntaxError("Cannot declare item from: " + this.name);
     }
 
-    transpileItem(transpiler: Transpiler, itemType: Type, item: Expression): void {
+    transpileItem(transpiler: Transpiler, itemType: IType, item: IExpression): void {
         if(itemType instanceof EnumeratedNativeType)
             return this.transpileItem(transpiler, itemType.derivedFrom, item);
         else
             throw new SyntaxError("Cannot transpile item from: " + this.name);
     }
 
-    checkMember(context: Context, section: Section, id: Identifier) : Type {
+    checkMember(context: Context, section: Section, id: Identifier) : IType {
         if("text" === id.name)
             return TextType.instance;
         else if("json" === id.name)
@@ -384,7 +384,7 @@ export default abstract class BaseType extends Section implements Type {
         }
     }
 
-    checkStaticMember(context: Context, section: Section, id: Identifier) : Type {
+    checkStaticMember(context: Context, section: Section, id: Identifier) : IType {
         context.problemListener.reportUnknownAttribute(section, id.name);
         return VoidType.instance;
     }
@@ -415,49 +415,49 @@ export default abstract class BaseType extends Section implements Type {
         }
     }
 
-    checkSlice(context: Context): Type {
+    checkSlice(context: Context): IType {
         throw new SyntaxError("Cannot slice " + this.name);
     }
 
-    declareSlice(transpiler: Transpiler, first: Expression, last: Expression): void {
+    declareSlice(transpiler: Transpiler, first: IExpression, last: IExpression): void {
         throw new SyntaxError("Cannot declare slice for " + this.name);
     }
 
-    transpileSlice(transpiler: Transpiler, first: Expression, last: Expression): void {
+    transpileSlice(transpiler: Transpiler, first: IExpression, last: IExpression): void {
         throw new SyntaxError("Cannot transpile slice for " + this.name);
     }
 
-    checkIterator(context: Context, source: Expression): Type {
+    checkIterator(context: Context, source: IExpression): IType {
         context.problemListener.reportCannotIterate(this, source);
         return VoidType.instance;
     }
 
-    declareIterator(transpiler: Transpiler, id: Identifier, expression: Expression): void {
+    declareIterator(transpiler: Transpiler, id: Identifier, expression: IExpression): void {
         throw new SyntaxError("Cannot declare iterate over " + this.name);
     }
 
-    transpileIterator(transpiler: Transpiler, id: Identifier, expression: Expression): void {
+    transpileIterator(transpiler: Transpiler, id: Identifier, expression: IExpression): void {
         throw new SyntaxError("Cannot transpile iterate over " + this.name);
     }
 
-    checkAssignableFrom(context: Context, section: Section, other: Type): void {
+    checkAssignableFrom(context: Context, section: Section, other: IType): void {
         if (!this.isAssignableFrom(context, other))
             context.problemListener.reportIncompatibleTypes(section, this, other);
     }
 
-    checkRange(context: Context, other: Type): void {
+    checkRange(context: Context, other: IType): void {
         throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
     }
 
-    declareRange(context: Context, other: Type): void {
+    declareRange(context: Context, other: IType): void {
         throw new SyntaxError("Cannot declare range of " + this.name + " and " + other.name);
     }
 
-    transpileRange(transpiler: Transpiler, other: Type, first: Expression, last: Expression): void {
+    transpileRange(transpiler: Transpiler, other: IType, first: IExpression, last: IExpression): void {
         throw new SyntaxError("Cannot transpile range of " + this.name);
     }
 
-    checkAnd(context: Context, section: Section, other: Type): Type {
+    checkAnd(context: Context, section: Section, other: IType): IType {
         throw new SyntaxError("Cannot logically combine " + this.name + " and " + other.name);
     }
 
@@ -469,15 +469,15 @@ export default abstract class BaseType extends Section implements Type {
         throw new SyntaxError("Cannot declare 'and' of " + this.name);
     }
 
-    checkOr(context: Context, other: Type): Type {
+    checkOr(context: Context, other: IType): IType {
         throw new SyntaxError("Cannot logically combine " + this.name + " or " + other.name);
     }
 
-    checkNot(context: Context): Type {
+    checkNot(context: Context): IType {
         throw new SyntaxError("Cannot logically negate " + this.name);
     }
 
-    readJSONValue(context: Context, node: JsonNode, parts: Map<string, Uint8Array>): Value {
+    readJSONValue(context: Context, node: JsonNode, parts: Map<string, Uint8Array>): IValue {
         throw new Error("Unsupported!")
     }
 
@@ -489,10 +489,10 @@ export default abstract class BaseType extends Section implements Type {
         throw new Error("Unsupported for type " + this.name);
     }
 
-    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: Type): Value {
+    convertJavaScriptValueToPromptoValue(context: Context, value: any, returnType: IType): IValue {
         if(value == null) {
             const obj = NullValue;
-            return obj[ "instance" as keyof typeof obj] as Value;
+            return obj[ "instance" as keyof typeof obj] as IValue;
         } else
             throw new Error("Unsupported for type " + this.name);
     }
@@ -501,7 +501,7 @@ export default abstract class BaseType extends Section implements Type {
         writer.append(this.name);
     }
 
-    transpileJsxCode(transpiler: Transpiler, expression: Expression): void {
+    transpileJsxCode(transpiler: Transpiler, expression: IExpression): void {
         expression.transpile(transpiler);
     }
 }

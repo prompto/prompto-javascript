@@ -1,13 +1,13 @@
-import CssValue from "./CssValue";
+import ICssValue from "./ICssValue";
 import {CodeWriter} from "../utils";
 import {Transpiler} from "../runtime";
 
 export default class CssField {
 
     name: string;
-    values: CssValue[];
+    values: ICssValue[];
 
-    constructor(name: string, values: CssValue[]) {
+    constructor(name: string, values: ICssValue[]) {
         this.name = name;
         this.values = values;
     }

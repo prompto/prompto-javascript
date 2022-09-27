@@ -1,9 +1,9 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import {VersionType} from '../type'
 import {SyntaxError} from '../error'
 import {IntegerValue, TextValue} from "../value";
 
-export default class VersionValue extends Value {
+export default class VersionValue extends IValue {
 
     constructor(version) {
         super(VersionType.instance);

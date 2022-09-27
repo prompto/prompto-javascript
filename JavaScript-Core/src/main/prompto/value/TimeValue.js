@@ -1,9 +1,9 @@
-import Value from '../../../main/prompto/value/Value.ts'
+import IValue from '../../../main/prompto/value/IValue.ts'
 import {PeriodValue, IntegerValue, TextValue} from './index.ts'
 import {TimeType} from '../type'
 import {SyntaxError} from '../error'
 
-export default class TimeValue extends Value {
+export default class TimeValue extends IValue {
 
     constructor(value) {
         super(TimeType.instance);

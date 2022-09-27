@@ -1,10 +1,10 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration'
-import {EnumeratedCategoryType, Type} from '../type'
+import {EnumeratedCategoryType, IType} from '../type'
 import { List } from '../intrinsic'
 import { Identifier, IdentifierList } from '../grammar'
 import {CategorySymbol} from "../expression";
 import {Context, Transpilable, Transpiler} from "../runtime";
-import {EnumerationInfo} from "../runtime/Catalog";
+import {IEnumerationInfo} from "../runtime/Catalog";
 import {CodeWriter} from "../utils";
 
 export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
@@ -17,7 +17,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         this.setSymbols(symbols);
     }
 
-    toDeclarationInfo(): EnumerationInfo {
+    toDeclarationInfo(): IEnumerationInfo {
         return { name: this.name, dialect: this.dialect.name, symbols: this.symbols.map(s => s.name)};
     }
 
@@ -66,7 +66,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         });
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         super.check(context);
         this.symbols.forEach(symbol => {
             symbol.check(context);
@@ -74,7 +74,7 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         return this.getType(context);
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         return new EnumeratedCategoryType(this.id);
     }
 

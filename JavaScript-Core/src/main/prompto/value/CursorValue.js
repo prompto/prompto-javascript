@@ -1,9 +1,9 @@
-import Value from './Value.ts'
+import IValue from '../../../main/prompto/value/IValue.ts'
 import { IntegerValue, ListValue, IteratorValue } from './index.ts'
 import { CursorType, CategoryType } from '../type'
 import { Identifier } from '../grammar'
 
-export default class CursorValue extends Value {
+export default class CursorValue extends IValue {
 
     constructor(context, itemType, iterable) {
         super(new CursorType(itemType));

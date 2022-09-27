@@ -3,12 +3,12 @@ import { ResourceType } from '../type'
 import { NativeResource } from '../value'
 import {Context, ResourceContext} from '../runtime'
 import {Identifier, IdentifierList, NativeCategoryBindingList} from "../grammar";
-import {MethodDeclaration} from "./index";
+import {IMethodDeclaration} from "./index";
 import {CodeWriter} from "../utils";
 
 export default class NativeResourceDeclaration extends NativeCategoryDeclaration {
 
-    constructor(id: Identifier, attributes: IdentifierList, categoryBindings: NativeCategoryBindingList, attributeBindings: any, methods: MethodDeclaration[]) {
+    constructor(id: Identifier, attributes: IdentifierList, categoryBindings: NativeCategoryBindingList, attributeBindings: any, methods: IMethodDeclaration[]) {
         super(id, attributes, categoryBindings, attributeBindings, methods);
     }
 

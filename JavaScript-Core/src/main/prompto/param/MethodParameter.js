@@ -1,10 +1,10 @@
-import Parameter from '../../../main/prompto/param/Parameter.ts'
+import IParameter from '../../../main/prompto/param/IParameter.ts'
 import { MethodType } from '../type'
 import { ArrowValue, ContextualExpression } from '../value'
 import { ArrowExpression } from '../expression'
 import { SyntaxError } from '../error'
 
-export default class MethodParameter extends Parameter {
+export default class MethodParameter extends IParameter {
 
     constructor(id) {
         super(id);

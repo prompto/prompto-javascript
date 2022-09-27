@@ -7,18 +7,18 @@ import { $DataStore } from '../store'
 import {EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration, ConcreteCategoryDeclaration} from '../declaration'
 import { NotStorableError, NotMutableError } from '../error'
 import { $Root } from "../../../main/prompto/intrinsic/$Root.js";
-import Value from "./Value";
+import IValue from "../../../main/prompto/value/IValue";
 import {JsonNode} from "../json";
 import {jsonStringifyReplacerSortKeys} from "eslint-webpack-plugin/types/utils";
 
-export default class ConcreteInstance extends Instance<Map<string, Value>> {
+export default class ConcreteInstance extends Instance<Map<string, IValue>> {
 
     declaration: ConcreteCategoryDeclaration;
     storable: boolean;
     mutable: boolean;
 
     constructor(context: Context, declaration: ConcreteCategoryDeclaration) {
-        super(new CategoryType(declaration.id), new Map<string, Value>());
+        super(new CategoryType(declaration.id), new Map<string, IValue>());
         this.declaration = declaration;
         this.storable = null;
         if(declaration.storable) {

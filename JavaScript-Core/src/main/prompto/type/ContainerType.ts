@@ -1,11 +1,11 @@
 import IterableType from './IterableType'
 import { BooleanType, IntegerType } from './index'
 import { Variable } from '../runtime'
-import Type from "./Type";
+import IType from "../../../main/prompto/type/IType";
 
 export default class ContainerType extends IterableType {
 
-    itemType: Type;
+    itemType: IType;
 
     constructor(id, itemType) {
         super(id);
@@ -20,7 +20,7 @@ export default class ContainerType extends IterableType {
         }
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         if ("count" === id.name) {
             return IntegerType.instance;
         } else {

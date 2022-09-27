@@ -1,11 +1,11 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import { IntegerValue, TextValue } from '../value'
 import { SyntaxError } from '../error'
 import { CharacterType } from '../type'
 import { removeAccents } from '../utils'
 
 
-export default class CharacterValue extends Value {
+export default class CharacterValue extends IValue {
 
     constructor(value) {
         super(CharacterType.instance);

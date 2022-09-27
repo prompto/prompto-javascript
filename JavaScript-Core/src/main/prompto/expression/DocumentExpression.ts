@@ -1,23 +1,23 @@
 import BaseExpression from './BaseExpression'
-import {DocumentType, Type} from '../type'
-import {DocumentValue, BlobValue, ConcreteInstance, Value} from '../value'
+import {DocumentType, IType} from '../type'
+import {DocumentValue, BlobValue, ConcreteInstance, IValue} from '../value'
 import { BlobRef, Document } from '../intrinsic'
 import { ReadWriteError } from '../error'
 import { ECleverParser } from "../parser"
-import {Expression} from "./index";
+import {IExpression} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
 
 export default class DocumentExpression extends BaseExpression {
 
-    source: Expression | null;
+    source: IExpression | null;
 
-    constructor(source: Expression | null) {
+    constructor(source: IExpression | null) {
         super();
         this.source = source;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return DocumentType.instance;
     }
 
@@ -25,7 +25,7 @@ export default class DocumentExpression extends BaseExpression {
         return "new Document()";
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(!this.source)
             return new DocumentValue();
         else {
@@ -46,7 +46,7 @@ export default class DocumentExpression extends BaseExpression {
             transpiler.append("new Document()");
     }
 
-    documentFromValue(context: Context, value: Value): DocumentValue {
+    documentFromValue(context: Context, value: IValue): DocumentValue {
         if (value instanceof BlobValue)
             return this.documentFromBlob(context, value);
         else if (value instanceof ConcreteInstance)
@@ -69,7 +69,7 @@ export default class DocumentExpression extends BaseExpression {
             if (!field)
                 throw new Error("Expecting a 'type' field!");
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-            const type = new ECleverParser(field).parse_standalone_type() as Type;
+            const type = new ECleverParser(field).parse_standalone_type() as IType;
             if (type != DocumentType.instance)
                 throw new Error("Expecting a DocumentValue type!");
             field = value!["value" as keyof typeof value] || null;

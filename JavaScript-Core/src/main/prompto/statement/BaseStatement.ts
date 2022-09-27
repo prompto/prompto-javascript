@@ -1,7 +1,7 @@
-import Statement from "./Statement";
+import IStatement from "./IStatement";
 import Section from '../parser/Section'
 
-export default class BaseStatement extends Section implements Statement {
+export default class BaseStatement extends Section implements IStatement {
   
     canReturn() {
         return false;

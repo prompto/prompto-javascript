@@ -1,20 +1,20 @@
 import BaseExpression from './BaseExpression'
 import { Dialect } from '../parser'
-import {BooleanValue, Value} from '../value'
+import {BooleanValue, IValue} from '../value'
 import { CodeWriter } from '../utils'
-import {Expression} from "./index";
+import {IExpression} from "./index";
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../type";
-import Predicate from "./Predicate";
+import {IType} from "../type";
+import IPredicate from "./IPredicate";
 import {TestMethodDeclaration} from "../declaration";
-import {QueryBuilder} from "../store";
+import {IQueryBuilder} from "../store";
 
-export default class AndExpression extends BaseExpression implements Predicate {
+export default class AndExpression extends BaseExpression implements IPredicate {
 
-    left: Expression;
-    right: Expression;
+    left: IExpression;
+    right: IExpression;
 
-    constructor(left: Expression, right: Expression) {
+    constructor(left: IExpression, right: IExpression) {
         super();
         this.left = left;
         this.right = right;
@@ -46,7 +46,7 @@ export default class AndExpression extends BaseExpression implements Predicate {
         this.right.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return lt.checkAnd(context, this, rt);
@@ -54,16 +54,16 @@ export default class AndExpression extends BaseExpression implements Predicate {
 
     checkQuery(context: Context): void {
         if(this.left.isPredicate())
-            (this.left as unknown as Predicate).checkQuery(context);
+            (this.left as unknown as IPredicate).checkQuery(context);
         else
             context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.left.toString());
         if(this.right.isPredicate())
-            (this.right as unknown as Predicate).checkQuery(context);
+            (this.right as unknown as IPredicate).checkQuery(context);
         else
             context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const lval = this.left.interpret(context);
         if(lval instanceof BooleanValue) {
             if (!lval.value)
@@ -115,13 +115,13 @@ export default class AndExpression extends BaseExpression implements Predicate {
         transpiler.append(")");
     }
 
-    interpretQuery(context: Context, query: QueryBuilder): void {
+    interpretQuery(context: Context, query: IQueryBuilder): void {
         if(this.left.isPredicate())
-            (this.left as unknown as Predicate).interpretQuery(context, query);
+            (this.left as unknown as IPredicate).interpretQuery(context, query);
         else
             context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.left.toString());
         if(this.right.isPredicate())
-            (this.right as unknown as Predicate).interpretQuery(context, query);
+            (this.right as unknown as IPredicate).interpretQuery(context, query);
         else
             context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
         query.and();
@@ -129,22 +129,22 @@ export default class AndExpression extends BaseExpression implements Predicate {
 
     declareQuery(transpiler: Transpiler): void {
         if(this.left.isPredicate())
-            (this.left as unknown as Predicate).declareQuery(transpiler);
+            (this.left as unknown as IPredicate).declareQuery(transpiler);
         else
             transpiler.context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.left.toString());
         if(this.right.isPredicate())
-            (this.right as unknown as Predicate).declareQuery(transpiler);
+            (this.right as unknown as IPredicate).declareQuery(transpiler);
         else
             transpiler.context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
     }
 
     transpileQuery(transpiler: Transpiler, builderName: string): void {
         if(this.left.isPredicate())
-            (this.left as unknown as Predicate).transpileQuery(transpiler, builderName);
+            (this.left as unknown as IPredicate).transpileQuery(transpiler, builderName);
         else
             transpiler.context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.left.toString());
         if(this.right.isPredicate())
-            (this.right as unknown as Predicate).transpileQuery(transpiler, builderName);
+            (this.right as unknown as IPredicate).transpileQuery(transpiler, builderName);
         else
             transpiler.context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.right.toString());
         transpiler.append(builderName).append(".and();").newLine();

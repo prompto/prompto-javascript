@@ -1,16 +1,16 @@
 import { VoidType } from '../type'
 import { ProblemCollector } from '../problem'
-import {AttributeParameter, MethodParameter, Parameter} from '../param'
+import {AttributeParameter, MethodParameter, IParameter} from '../param'
 import {Context, MethodDeclarationMap} from '../runtime'
 import { AttributeDeclaration } from '../declaration'
 import {CodeWriter} from "../utils";
 import {Identifier} from "../grammar";
 
-export default class UnresolvedParameter implements Parameter {
+export default class UnresolvedParameter implements IParameter {
 
     id: Identifier;
     mutable = false;
-    resolved: Parameter | null;
+    resolved: IParameter | null;
 
     constructor(id: Identifier) {
         this.id = id;

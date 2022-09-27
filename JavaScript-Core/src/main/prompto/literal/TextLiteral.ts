@@ -1,5 +1,5 @@
 import Literal from './Literal'
-import {TextType, Type} from '../type'
+import {TextType, IType} from '../type'
 import { TextValue } from '../value'
 import {Context, Transpiler} from "../runtime";
 
@@ -14,7 +14,7 @@ export default class TextLiteral extends Literal<TextValue> {
         super(text, new TextValue(unescape(text)));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 

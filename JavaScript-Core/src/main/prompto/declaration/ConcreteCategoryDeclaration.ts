@@ -4,12 +4,12 @@ import {
     GetterMethodDeclaration,
     EnumeratedNativeDeclaration,
     EnumeratedCategoryDeclaration,
-    MethodDeclaration, OperatorMethodDeclaration, AttributeDeclaration
+    IMethodDeclaration, OperatorMethodDeclaration, AttributeDeclaration
 } from '../declaration'
 import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
 import $Root from '../intrinsic/$Root.js'
 import {ConcreteInstance} from '../value'
-import {CategoryType, Type} from '../type'
+import {CategoryType, IType} from '../type'
 import { $DataStore } from '../store'
 import {CodeWriter, equalArrays} from "../utils";
 import {Identifier, IdentifierList, Operator} from "../grammar";
@@ -18,10 +18,10 @@ import BaseDeclaration from "./BaseDeclaration";
 
 export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
 
-    methods: MethodDeclaration[];
+    methods: IMethodDeclaration[];
     methodsMap?: Map<string, MethodDeclarationMap>;
 
-    constructor(id: Identifier, attributes: IdentifierList | null, derivedFrom: IdentifierList | null, methods: MethodDeclaration[] | null) {
+    constructor(id: Identifier, attributes: IdentifierList | null, derivedFrom: IdentifierList | null, methods: IMethodDeclaration[] | null) {
         super(id, attributes, derivedFrom);
         this.methods = methods || [];
     }
@@ -148,7 +148,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         return actual ? actual.hasMethod(context, id) : false;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         context = context.newInstanceContext(null, this.getType(context), false);
         this.checkDerived(context);
         this.checkMethods(context);
@@ -170,7 +170,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         }
     }
 
-    registerMethod(context: Context, method: MethodDeclaration): void {
+    registerMethod(context: Context, method: IMethodDeclaration): void {
         let key: string;
         let proto: string;
         if (method instanceof SetterMethodDeclaration) {
@@ -249,7 +249,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         }
     }
 
-    isDerivedFrom(context: Context, categoryType: Type): boolean {
+    isDerivedFrom(context: Context, categoryType: IType): boolean {
         if(this.derivedFrom==null) {
             return false;
         }
@@ -265,7 +265,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
         return false;
     }
 
-    static isAncestorDerivedFrom(context: Context, ancestor: Identifier, categoryType: Type): boolean {
+    static isAncestorDerivedFrom(context: Context, ancestor: Identifier, categoryType: IType): boolean {
         const actual = context.getRegisteredCategoryDeclaration(ancestor);
         return actual ? actual.isDerivedFrom(context, categoryType) : false;
     }
@@ -361,7 +361,7 @@ export default class ConcreteCategoryDeclaration extends CategoryDeclaration {
             actual.registerMemberMethods(context, result);
     }
 
-    getOperatorMethod(context: Context, operator: Operator, type: Type): OperatorMethodDeclaration | null {
+    getOperatorMethod(context: Context, operator: Operator, type: IType): OperatorMethodDeclaration | null {
         const methodName = "operator_" + operator.name;
         const methods = this.getMemberMethodsMap(context, new Identifier(methodName));
         if(methods==null)

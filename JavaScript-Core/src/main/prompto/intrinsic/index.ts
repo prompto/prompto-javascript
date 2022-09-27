@@ -1,5 +1,4 @@
-export { $Root } from '../../../main/prompto/intrinsic/$Root';
-export {default as Iterator} from './Iterator';
+export { $Root } from './$Root';
 export {default as Any} from './Any';
 export {default as BlobRef} from './BlobRef';
 export {default as Cursor} from './Cursor';

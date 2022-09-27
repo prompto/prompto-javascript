@@ -1,13 +1,13 @@
 import Section from '../parser/Section';
-import {Expression} from "../expression";
+import {IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../type";
-import {Value} from "../value";
+import {IType} from "../type";
+import {IValue} from "../value";
 import {Dialect} from "../parser";
 import {AttributeDeclaration, TestMethodDeclaration} from "../declaration";
 
-export default abstract class Literal<T extends Value> extends Section implements Expression {
+export default abstract class Literal<T extends IValue> extends Section implements IExpression {
 
     text: string;
     value: T;
@@ -44,11 +44,11 @@ export default abstract class Literal<T extends Value> extends Section implement
         return this.text;
     }
 
-    checkReference(context: Context): Type {
+    checkReference(context: Context): IType {
         return this.check(context);
     }
 
-    abstract check(context: Context): Type;
+    abstract check(context: Context): IType;
 
     checkAttribute(context: Context): AttributeDeclaration | null {
         context.problemListener.reportMissingAttribute(this, this.toString());
@@ -66,7 +66,7 @@ export default abstract class Literal<T extends Value> extends Section implement
         this.transpile(transpiler);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.value;
     }
 

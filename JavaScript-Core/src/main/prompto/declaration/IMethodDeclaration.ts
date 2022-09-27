@@ -1,26 +1,26 @@
-import Declaration from "./Declaration";
+import IDeclaration from "./IDeclaration";
 import { ParameterList } from "../param";
-import { Type } from "../type";
+import { IType } from "../type";
 import {Section} from "../parser";
 import {Context, Transpiler} from "../runtime";
-import {Value} from "../value";
+import {IValue} from "../value";
 import {CategoryDeclaration} from "./index";
 
-export default interface MethodDeclaration extends Declaration {
+export default interface IMethodDeclaration extends IDeclaration {
 
     parameters: ParameterList | null;
-    returnType: Type | null;
+    returnType: IType | null;
     memberOf: CategoryDeclaration | null;
-    closureOf: Declaration | null;
+    closureOf: IDeclaration | null;
 
     isAbstract(): boolean;
     getProto(context?: Context): string;
     locateSectionAtLine(line: number): Section | null;
     registerParameters(context: Context): void;
     transpileMethodType(transpiler: Transpiler): void;
-    interpret(context: Context): Value | null;
+    interpret(context: Context): IValue | null;
 
-    checkChild(context: Context): Type;
+    checkChild(context: Context): IType;
 
     getTranspiledName(context: Context): string;
 }

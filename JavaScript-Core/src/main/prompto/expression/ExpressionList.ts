@@ -1,12 +1,12 @@
 import ObjectList from '../utils/ObjectList'
-import {Expression} from "./index";
+import {IExpression} from "./index";
 import {CodeWriter} from "../utils";
 import {Transpiler} from "../runtime";
 import {Section} from "../parser";
 
-export default class ExpressionList extends ObjectList<Expression> {
+export default class ExpressionList extends ObjectList<IExpression> {
 
-    constructor(items?: Expression[], item?: Expression) {
+    constructor(items?: IExpression[], item?: IExpression) {
         super(items, item);
     }
 

@@ -1,4 +1,4 @@
-import SelectorExpression from './SelectorExpression.js'
+import SelectorExpression from '../../../main/prompto/expression/SelectorExpression.ts'
 import { UnresolvedIdentifier, ParenthesisExpression } from '../expression'
 import { Dialect } from '../parser'
 import { UnresolvedCall } from '../statement'

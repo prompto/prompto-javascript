@@ -5,8 +5,8 @@ import {CategoryDeclaration} from '../declaration'
 import { StrictSet, List } from '../intrinsic';
 import { equalObjects } from '../utils'
 import {Context} from "./Context";
-import {Type} from "../type";
-import Transpilable from './Transpilable';
+import {IType} from "../type";
+import ITranspilable from '../../../main/prompto/runtime/ITranspilable';
 
 const coreNodeClasses = new Set<string>(["Socket"]);
 
@@ -14,7 +14,7 @@ export default class Transpiler {
 
     parent: Transpiler | null;
     context: Context;
-    declared: Set<Transpilable>;
+    declared: Set<ITranspilable>;
     required: Set<Function>;
     registered: Set<Function>;
     escapeMode: number;
@@ -27,7 +27,7 @@ export default class Transpiler {
 
     constructor(context: Context) {
         this.context = context;
-        this.declared = new Set<Transpilable>();
+        this.declared = new Set<ITranspilable>();
         this.required = new Set<Function>();
         this.registered = new Set<Function>();
         this.escapeMode = 0;
@@ -87,7 +87,7 @@ export default class Transpiler {
         return transpiler;
     }
 
-    newInstanceTranspiler(type: Type): Transpiler {
+    newInstanceTranspiler(type: IType): Transpiler {
         const context = this.context.newInstanceContext(null, type, true);
         return this.copyTranspiler(context);
     }
@@ -105,13 +105,13 @@ export default class Transpiler {
         }
     }
 
-    declare(decl: Transpilable): void {
+    declare(decl: ITranspilable): void {
         this.declared.add(decl);
     }
 
     appendAllDeclared() {
-        const list: Transpilable[] = [];
-        const set = new Set<Transpilable>();
+        const list: ITranspilable[] = [];
+        const set = new Set<ITranspilable>();
         this.declared.forEach( decl => {
             if(decl instanceof CategoryDeclaration)
                 decl.ensureDeclarationOrder(this.context, list, set);
@@ -121,7 +121,7 @@ export default class Transpiler {
         list.forEach(decl => this.appendOneDeclared(decl) , this);
     }
 
-    appendOneDeclared(decl: Transpilable): void {
+    appendOneDeclared(decl: ITranspilable): void {
         const transpiler = this.newLocalTranspiler();
         decl.transpile(transpiler);
         transpiler.flush();
@@ -324,7 +324,7 @@ export default class Transpiler {
         return this;
     }
 
-    static transpile(context: Context, thing: Transpilable): string {
+    static transpile(context: Context, thing: ITranspilable): string {
         try {
             patchObject();
             const transpiler = newTranspiler(context);

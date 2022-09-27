@@ -1,10 +1,10 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import { IteratorType } from '../type'
 import {ListValue, SetValue} from "../value";
 import {StrictSet} from "../intrinsic";
 
 /* thin wrapper to expose an iterator as a prompto value */
-export default class IteratorValue extends Value {
+export default class IteratorValue extends IValue {
 
     constructor(itemType, iterator) {
         super(new IteratorType(itemType));

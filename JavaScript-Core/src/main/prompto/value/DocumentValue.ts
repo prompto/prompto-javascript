@@ -7,7 +7,7 @@ import { equalArrays } from '../utils'
 import {JsonNode, JsonObject, JsonParent} from '../json'
 import {Context, Transpiler} from '../runtime'
 import {Identifier} from "../grammar";
-import Value from "./Value";
+import IValue from "../../../main/prompto/value/IValue";
 
 export default class DocumentValue extends BaseValue<Document> {
 
@@ -37,7 +37,7 @@ export default class DocumentValue extends BaseValue<Document> {
         return this.values.hasOwnProperty(name);
     }
 
-    getMemberValue(context: Context, id: Identifier, autocreate?: boolean): Value {
+    getMemberValue(context: Context, id: Identifier, autocreate?: boolean): IValue {
         switch(id.name) {
             case "count":
                 return new IntegerValue(this.values.$safe_length);

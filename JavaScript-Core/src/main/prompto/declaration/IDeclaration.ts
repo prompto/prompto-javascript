@@ -1,17 +1,17 @@
-import { Writable } from "../utils";
-import { DeclarationInfo } from "../runtime/Catalog";
-import Named from "../grammar/Named";
+import { IWritable } from "../utils";
+import { IDeclarationInfo } from "../runtime/Catalog";
+import INamed from "../grammar/INamed";
 import {Context, Transpiler} from "../runtime";
 import {CommentStatement} from "../statement";
 import {Annotation} from "../grammar";
 
-export default interface Declaration extends Writable, Named {
+export default interface IDeclaration extends IWritable, INamed {
 
   comments: CommentStatement[] | null;
   annotations: Annotation[] | null;
 
   getDeclarationType(): string;
-  toDeclarationInfo(context: Context): DeclarationInfo;
+  toDeclarationInfo(context: Context): IDeclarationInfo;
   declare(transpiler: Transpiler): void;
   transpile(transpiler: Transpiler): void;
 

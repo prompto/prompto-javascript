@@ -1,22 +1,22 @@
 import BaseValue from "./BaseValue";
-import {Value, DocumentValue, ListValue} from '../value'
-import {AnyType, ContainerType, Type} from '../type'
+import {IValue, DocumentValue, ListValue} from '../value'
+import {AnyType, ContainerType, IType} from '../type'
 import {Context} from "../runtime";
 import {JsonNode, JsonParent} from "../json";
 import {Iterator} from "../intrinsic";
 
-export default abstract class Container<T extends Iterable<Value>> extends BaseValue<T> {
+export default abstract class Container<T extends Iterable<IValue>> extends BaseValue<T> {
 
     constructor(type: ContainerType, value: T, mutable: boolean) {
         super(type, value, mutable);
     }
 
-    get itemType(): Type {
+    get itemType(): IType {
         return (this.type as ContainerType).itemType;
     }
 
-    abstract get items(): Value[];
-    abstract getIterator(context: Context): Iterator<Value>;
+    abstract get items(): IValue[];
+    abstract getIterator(context: Context): Iterator<IValue>;
 
     toJson(context: Context, json: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: never[]): void {
         const values: JsonNode[] = [];
@@ -32,6 +32,6 @@ export default abstract class Container<T extends Iterable<Value>> extends BaseV
         return new ListValue(AnyType.instance, false, values);
     }
 
-    abstract hasValue(context: Context, value: Value): boolean;
+    abstract hasValue(context: Context, value: IValue): boolean;
 
 }

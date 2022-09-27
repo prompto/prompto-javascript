@@ -371,7 +371,7 @@ export default class MPromptoBuilder extends MParserListener {
 
     exitDocKeyIdentifier(ctx) {
         const text = ctx.name.getText();
-        this.setNodeValue(ctx, new literal.DocIdentifierKey(new grammar.Identifier(text)));
+        this.setNodeValue(ctx, new literal.IDocIdentifierKey(new grammar.Identifier(text)));
     }
 
 

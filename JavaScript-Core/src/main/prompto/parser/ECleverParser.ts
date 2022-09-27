@@ -4,8 +4,8 @@ import EParser from './EParser';
 import EIndentingLexer from './EIndentingLexer';
 import EPromptoBuilder from '../parser/EPromptoBuilder';
 import { fileExists } from '../utils';
-import { Declaration, DeclarationList } from "../declaration";
-import { Statement } from "../statement";
+import { IDeclaration, DeclarationList } from "../declaration";
+import { IStatement } from "../statement";
 
 function createInput(data?: string, stream?: CharStream, lexer?: Lexer): CommonTokenStream {
 
@@ -31,7 +31,7 @@ function createInput(data?: string, stream?: CharStream, lexer?: Lexer): CommonT
 		throw new Error("Invalid source!");
 }
 
-type ReplLine = Statement | Declaration;
+type ReplLine = IStatement | IDeclaration;
 
 export default class ECleverParser extends EParser {
 

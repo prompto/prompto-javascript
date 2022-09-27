@@ -1,7 +1,7 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration'
 import { CategoryParameter } from '../param'
-import {TextType, Type} from '../type'
-import {IntegerValue, TextValue, Value} from '../value'
+import {TextType, IType} from '../type'
+import {IntegerValue, TextValue, IValue} from '../value'
 import {ArgumentList, Identifier} from '../grammar'
 import {Context, Transpiler} from "../runtime";
 
@@ -11,7 +11,7 @@ export class FormatMethodDeclaration extends BuiltInMethodDeclaration<IntegerVal
         super("format", new CategoryParameter(TextType.instance, new Identifier("format")));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const intValue = this.getValue(context);
         const intData = intValue.getStorableData();
         const formatValue = context.getValue(new Identifier("format")) as TextValue;
@@ -20,7 +20,7 @@ export class FormatMethodDeclaration extends BuiltInMethodDeclaration<IntegerVal
         return new TextValue(value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 

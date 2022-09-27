@@ -3,7 +3,7 @@ import { IntegerValue } from './index'
 import { SyntaxError, DivideByZeroError } from '../error'
 import { DecimalType} from '../type'
 import { decimalToString } from '../utils'
-import Value from "./Value";
+import IValue from "./IValue";
 import {Context} from "../runtime";
 import {JsonParent} from "../json";
 
@@ -42,7 +42,7 @@ export default class DecimalValue extends BaseValue<number> {
         return this.value;
     }
 
-    Add(context: Context, value: Value): Value {
+    Add(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             return new DecimalValue(this.value + value.IntegerValue());
         } else if (value instanceof DecimalValue) {
@@ -52,7 +52,7 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    Subtract(context: Context, value: Value): Value {
+    Subtract(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             return new DecimalValue(this.value - value.IntegerValue());
         } else if (value instanceof DecimalValue) {
@@ -62,7 +62,7 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    Multiply(context: Context, value: Value): Value {
+    Multiply(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             return new DecimalValue(this.value * value.IntegerValue());
         } else if (value instanceof DecimalValue) {
@@ -72,7 +72,7 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    Divide(context: Context, value: Value): Value {
+    Divide(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
             if (value.DecimalValue() === 0.0) {
                 throw new DivideByZeroError();
@@ -84,7 +84,7 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    IntDivide(context: Context, value: Value): Value {
+    IntDivide(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue) {
             if (value.IntegerValue() === 0) {
                 throw new DivideByZeroError();
@@ -96,7 +96,7 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    Modulo(context: Context, value: Value): Value {
+    Modulo(context: Context, value: IValue): IValue {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
             if (value.DecimalValue() === 0.0) {
                 throw new DivideByZeroError();
@@ -108,11 +108,11 @@ export default class DecimalValue extends BaseValue<number> {
         }
     }
 
-    Minus(context: Context): Value {
+    Minus(context: Context): IValue {
         return new DecimalValue(-this.value);
     }
 
-    compareToValue(context: Context, value: Value): number {
+    compareToValue(context: Context, value: IValue): number {
         if (value instanceof IntegerValue || value instanceof DecimalValue) {
             return this.value > value.value ? 1 : this.value === value.value ? 0 : -1;
         } else {

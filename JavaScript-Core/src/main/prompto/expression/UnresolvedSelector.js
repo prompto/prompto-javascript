@@ -1,4 +1,4 @@
-import SelectorExpression from './SelectorExpression.js'
+import SelectorExpression from './SelectorExpression.ts'
 import { UnresolvedIdentifier, MemberSelector, MethodSelector } from '../expression'
 import { UnresolvedCall } from '../statement'
 import { AnyType } from '../type'

@@ -1,6 +1,6 @@
 import EnumSymbol from './EnumSymbol'
 import { ConstructorExpression } from '../expression'
-import {ConcreteInstance, Instance, TextValue, Value} from '../value'
+import {ConcreteInstance, Instance, TextValue, IValue} from '../value'
 import { TextLiteral } from '../literal'
 import { AttributeParameter } from '../param'
 import { Argument, ArgumentList, Identifier } from '../grammar'
@@ -54,7 +54,7 @@ export default class CategorySymbol extends EnumSymbol<CategoryType> {
         return this.type;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.makeInstance(context);
     }
 
@@ -76,7 +76,7 @@ export default class CategorySymbol extends EnumSymbol<CategoryType> {
         return this.instance!;
     }
 
-    getMemberValue(context: Context, id: Identifier, autoCreate: boolean): Value {
+    getMemberValue(context: Context, id: Identifier, autoCreate: boolean): IValue {
         const instance = this.makeInstance(context);
         return instance.getMemberValue(context, id, autoCreate);
     }

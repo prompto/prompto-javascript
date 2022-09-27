@@ -1,8 +1,8 @@
 import ObjectList from '../utils/ObjectList'
 import NativeCategoryBinding from "./NativeCategoryBinding";
-import { Writable, CodeWriter } from "../utils";
+import { IWritable, CodeWriter } from "../utils";
 
-export default class NativeCategoryBindingList extends ObjectList<NativeCategoryBinding> implements Writable {
+export default class NativeCategoryBindingList extends ObjectList<NativeCategoryBinding> implements IWritable {
 
     constructor(binding?: NativeCategoryBinding) {
         super(undefined, binding);

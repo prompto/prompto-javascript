@@ -1,10 +1,10 @@
 import BaseExpression from './BaseExpression'
-import {CodeValue, Value} from '../value'
+import {CodeValue, IValue} from '../value'
 import { SyntaxError } from '../error'
 import {Identifier} from "../grammar";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../type";
+import {IType} from "../type";
 
 export default class ExecuteExpression extends BaseExpression {
 
@@ -42,12 +42,12 @@ export default class ExecuteExpression extends BaseExpression {
         this.toODialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const value = this.getCodeValue(context);
         return value.check(context);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = this.getCodeValue(context);
         return value.interpret(context);
     }

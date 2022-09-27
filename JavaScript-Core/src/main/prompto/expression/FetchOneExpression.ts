@@ -1,19 +1,19 @@
 import BaseExpression from './BaseExpression'
-import {AnyType, CategoryType, Type, VoidType} from '../type'
+import {AnyType, CategoryType, IType, VoidType} from '../type'
 import {$DataStore, TypeFamily, AttributeInfo, MatchOp, Store} from '../store'
-import {NullValue, Value} from '../value'
+import {NullValue, IValue} from '../value'
 import {Identifier, IdentifierList} from '../grammar'
-import {Expression, Predicate} from "./index";
+import {IExpression, IPredicate} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
 
 export default class FetchOneExpression extends BaseExpression {
 
-    type: Type | null;
-    predicate: Expression;
+    type: IType | null;
+    predicate: IExpression;
     include: IdentifierList | null;
 
-    constructor(type: Type | null, predicate: Expression, include: IdentifierList | null) {
+    constructor(type: IType | null, predicate: IExpression, include: IdentifierList | null) {
         super();
         this.type = type;
         this.predicate = predicate;
@@ -87,7 +87,7 @@ export default class FetchOneExpression extends BaseExpression {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.type) {
             const decl = context.getRegisteredCategoryDeclaration(this.type.id);
             if (!decl) {
@@ -99,11 +99,11 @@ export default class FetchOneExpression extends BaseExpression {
             context = context.newInstanceContext(null, decl.getType(context), true);
         }
         if (this.predicate.isPredicate())
-            (this.predicate as Predicate).checkQuery(context);
+            (this.predicate as IPredicate).checkQuery(context);
         return this.type || AnyType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const store = $DataStore.instance;
         const query = this.buildFetchOneQuery(context, store);
         const stored = store.fetchOne (query);
@@ -124,7 +124,7 @@ export default class FetchOneExpression extends BaseExpression {
         if (this.type != null)
             this.type.declare(transpiler);
         if (this.predicate.isPredicate())
-            (this.predicate as Predicate).declareQuery(transpiler);
+            (this.predicate as IPredicate).declareQuery(transpiler);
     }
 
     transpile(transpiler: Transpiler): void {
@@ -150,7 +150,7 @@ export default class FetchOneExpression extends BaseExpression {
         if (this.type != null)
             transpiler.append("builder.verify(new AttributeInfo('category', TypeFamily.TEXT, true, null), MatchOp.CONTAINS, '").append(this.type.name).append("');").newLine();
         if (this.predicate && this.predicate.isPredicate())
-            (this.predicate as Predicate).transpileQuery(transpiler, "builder");
+            (this.predicate as IPredicate).transpileQuery(transpiler, "builder");
         if (this.type != null && this.predicate != null)
             transpiler.append("builder.and();").newLine();
         if (this.include != null) {
@@ -168,7 +168,7 @@ export default class FetchOneExpression extends BaseExpression {
             builder.verify(info, MatchOp.CONTAINS, this.type.name);
         }
         if (this.predicate && this.predicate.isPredicate()) {
-            (this.predicate as Predicate).interpretQuery(context, builder);
+            (this.predicate as IPredicate).interpretQuery(context, builder);
         }
         if (this.type && this.predicate) {
             builder.and();

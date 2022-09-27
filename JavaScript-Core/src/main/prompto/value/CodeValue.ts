@@ -1,8 +1,8 @@
 import BaseValue from './BaseValue'
-import {CodeType, Type} from '../type'
-import {CodeExpression, Expression} from "../expression";
+import {CodeType, IType} from '../type'
+import {CodeExpression, IExpression} from "../expression";
 import {Context, Transpiler} from "../runtime";
-import Value from "./Value";
+import IValue from "../../../main/prompto/value/IValue";
 
 export default class CodeValue extends BaseValue<CodeExpression> {
 
@@ -10,11 +10,11 @@ export default class CodeValue extends BaseValue<CodeExpression> {
         super(CodeType.instance, expression);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.value.checkCode (context);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.value.interpretCode (context);
     }
 

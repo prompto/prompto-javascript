@@ -1,7 +1,7 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration'
 import {Identifier, IdentifierList} from '../grammar'
 import { CategoryType } from '../type'
-import {MethodDeclaration} from "./index";
+import {IMethodDeclaration} from "./index";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {JsxProperty} from "../jsx";
@@ -10,7 +10,7 @@ export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclarati
 
     properties?: JsxProperty[] | null;
 
-    constructor(id: Identifier, derivedFrom: Identifier | null, methods: MethodDeclaration[] | null) {
+    constructor(id: Identifier, derivedFrom: Identifier | null, methods: IMethodDeclaration[] | null) {
         const derivedFromList = derivedFrom ? new IdentifierList(null, derivedFrom) : null;
         super(id, null, derivedFromList, methods);
     }

@@ -1,21 +1,21 @@
 import BaseMethodDeclaration from './BaseMethodDeclaration'
 import { StrictSet } from '../intrinsic'
-import {UnresolvedParameter, AttributeParameter, CategoryParameter, Parameter, ParameterList} from '../param'
+import {UnresolvedParameter, AttributeParameter, CategoryParameter, IParameter, ParameterList} from '../param'
 import {Context, Transpiler} from "../runtime";
 import {MethodCall} from "../statement";
-import {MethodDeclaration} from "./index";
-import {Type} from "../type";
-import {Value} from "../value";
+import {IMethodDeclaration} from "./index";
+import {IType} from "../type";
+import {IValue} from "../value";
 import {CodeWriter} from "../utils";
 
 export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
 
     context: Context;
     methodCall: MethodCall;
-    declaration: MethodDeclaration;
-    declarations: MethodDeclaration[];
+    declaration: IMethodDeclaration;
+    declarations: IMethodDeclaration[];
 
-    constructor(context: Context, methodCall: MethodCall, declaration: MethodDeclaration, declarations: MethodDeclaration[]) {
+    constructor(context: Context, methodCall: MethodCall, declaration: IMethodDeclaration, declarations: IMethodDeclaration[]) {
         super(declaration.id, declaration.parameters, declaration.returnType);
         this.context = context;
         this.methodCall = methodCall;
@@ -50,14 +50,14 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
         }
     }
 
-    collectCommonParams(): StrictSet<Parameter> {
-        let common: StrictSet<Parameter> | null = null;
+    collectCommonParams(): StrictSet<IParameter> {
+        let common: StrictSet<IParameter> | null = null;
         for(let i=0; i<this.declarations.length; i++) {
             const declaration = this.declarations[i];
             if(i==0)
-                common = new StrictSet<Parameter>(declaration.parameters);
+                common = new StrictSet<IParameter>(declaration.parameters);
             else {
-                const current = new StrictSet<Parameter>(declaration.parameters);
+                const current = new StrictSet<IParameter>(declaration.parameters);
                 common = common!.intersect(current);
                 if(common.length===0)
                     break;
@@ -66,7 +66,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
         return common!;
     }
 
-    transpileCall(transpiler: Transpiler, declaration: MethodDeclaration): void {
+    transpileCall(transpiler: Transpiler, declaration: IMethodDeclaration): void {
         this.methodCall.transpileSelector(transpiler, declaration);
         transpiler.append("(");
         this.parameters.forEach(param => {
@@ -77,7 +77,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
         transpiler.append(")");
     }
 
-    transpileTest(transpiler: Transpiler, common: StrictSet<Parameter>, declaration: MethodDeclaration): void {
+    transpileTest(transpiler: Transpiler, common: StrictSet<IParameter>, declaration: IMethodDeclaration): void {
         const args = this.methodCall.args;
         if(args)
             for(let i = 0, count = 0; i<args.length; i++) {
@@ -88,7 +88,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
                     transpiler.append(" && ");
                 if(incoming instanceof UnresolvedParameter)
                     incoming = incoming.resolved;
-                let outgoing: Parameter | null = incoming==null ? declaration.parameters![0] : this.findCorrespondingParameter(transpiler.context, declaration.parameters!, common, incoming);
+                let outgoing: IParameter | null = incoming==null ? declaration.parameters![0] : this.findCorrespondingParameter(transpiler.context, declaration.parameters!, common, incoming);
                 if(outgoing instanceof UnresolvedParameter)
                     outgoing = outgoing.resolved;
                 if(incoming==null)
@@ -104,7 +104,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
             }
     }
 
-    findCorrespondingParameter(context: Context, params: ParameterList, common: StrictSet<Parameter>, incoming: Parameter): Parameter {
+    findCorrespondingParameter(context: Context, params: ParameterList, common: StrictSet<IParameter>, incoming: IParameter): IParameter {
         for(let i=0; i<params.length; i++) {
             const outgoing = params[i];
             if (common.has(outgoing))
@@ -119,11 +119,11 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
         throw new Error("Could not find matching argument for: " + incoming.toString() + " in " + params.toString());
     }
 
-    check(context: Context, isStart: boolean): Type {
+    check(context: Context, isStart: boolean): IType {
         throw new Error("Should never get there!");
     }
 
-    checkChild(context: Context): Type {
+    checkChild(context: Context): IType {
         throw new Error("Should never get there!");
     }
 
@@ -131,7 +131,7 @@ export default class DispatchMethodDeclaration extends BaseMethodDeclaration {
         throw new Error("Should never get there!");
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         throw new Error("Should never get there!");
     }
 

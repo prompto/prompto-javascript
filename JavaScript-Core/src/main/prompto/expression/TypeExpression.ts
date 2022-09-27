@@ -1,12 +1,12 @@
 import BaseExpression from './BaseExpression'
-import {Type, TypeType} from '../type'
+import {IType, TypeType} from '../type'
 import { TypeValue } from '../value'
 
 export default class TypeExpression extends BaseExpression {
 
-    value: Type;
+    value: IType;
 
-    constructor(value: Type) {
+    constructor(value: IType) {
         super();
         this.value = value;
     }
@@ -19,7 +19,7 @@ export default class TypeExpression extends BaseExpression {
         return this.value.toString();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.value.checkExists(context);
         return new TypeType(this.value);
     }

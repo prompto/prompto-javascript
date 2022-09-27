@@ -1,13 +1,13 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration'
 import { CategoryType } from '../type'
-import {ConcreteMethodDeclaration, MethodDeclaration} from '../declaration'
+import {ConcreteMethodDeclaration, IMethodDeclaration} from '../declaration'
 import {Context, Transpiler} from '../runtime'
 import {Identifier, IdentifierList} from "../grammar";
 import {CodeWriter} from "../utils";
 
 export default class SingletonCategoryDeclaration extends ConcreteCategoryDeclaration {
 
-    constructor(id: Identifier, attributes: IdentifierList, methods: MethodDeclaration[]) {
+    constructor(id: Identifier, attributes: IdentifierList, methods: IMethodDeclaration[]) {
         super(id, attributes, null, methods);
     }
 

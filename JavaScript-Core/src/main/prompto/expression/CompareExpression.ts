@@ -1,24 +1,24 @@
 import BaseExpression from './BaseExpression'
 import {CmpOp, Identifier} from '../grammar'
-import {MatchOp, QueryBuilder} from '../store'
+import {MatchOp, IQueryBuilder} from '../store'
 import { SyntaxError, InvalidDataError } from '../error'
-import {BooleanValue, Instance, Value} from '../value'
+import {BooleanValue, Instance, IValue} from '../value'
 import { CodeWriter } from '../utils'
 import { TypeFamily } from '../store'
 import { LocalDate, DateTime } from '../intrinsic'
-import {Expression} from "./index";
+import {IExpression} from "./index";
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../type";
+import {IType} from "../type";
 import {TestMethodDeclaration} from "../declaration";
 import {Dialect} from "../parser";
 
 export default class CompareExpression extends BaseExpression {
 
-    left: Expression;
+    left: IExpression;
     operator: CmpOp;
-    right: Expression;
+    right: IExpression;
 
-    constructor(left: Expression, operator: CmpOp, right: Expression) {
+    constructor(left: IExpression, operator: CmpOp, right: IExpression) {
         super();
         this.left = left;
         this.operator = operator;
@@ -37,17 +37,17 @@ export default class CompareExpression extends BaseExpression {
         this.right.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
     }
 
-    checkOperator(context: Context, lt: Type, rt: Type): Type {
+    checkOperator(context: Context, lt: IType, rt: IType): IType {
         return lt.checkCompare(context, this, rt);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const lval = this.left.interpret(context);
         const rval = this.right.interpret(context);
         return this.compare(context, lval, rval);
@@ -67,7 +67,7 @@ export default class CompareExpression extends BaseExpression {
         return lt.transpileCompare(transpiler, rt, this.operator, this.left, this.right);
     }
 
-    compare(context: Context, lval: Value, rval: Value): BooleanValue {
+    compare(context: Context, lval: IValue, rval: IValue): BooleanValue {
         const cmp = lval.CompareTo(context, rval);
         switch (this.operator) {
             case CmpOp.GT:
@@ -109,7 +109,7 @@ export default class CompareExpression extends BaseExpression {
         transpiler.append(")");
     }
 
-    checkQuery(context: Context): Type {
+    checkQuery(context: Context): IType {
         const decl = this.left.checkAttribute(context);
         if(!decl || !decl.storable)
             context.problemListener.reportNotStorable(this, decl!.name);
@@ -117,7 +117,7 @@ export default class CompareExpression extends BaseExpression {
         return this.checkOperator(context, decl!.getType(), rt);
     }
 
-    interpretQuery(context: Context, query: QueryBuilder): void {
+    interpretQuery(context: Context, query: IQueryBuilder): void {
         const decl = this.left.checkAttribute(context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");

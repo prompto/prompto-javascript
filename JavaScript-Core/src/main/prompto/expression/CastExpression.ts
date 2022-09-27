@@ -1,12 +1,12 @@
 import BaseExpression from './BaseExpression'
-import {VoidType, AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType, Type} from '../type'
-import {IntegerValue, DecimalValue, NullValue, Value} from '../value'
+import {VoidType, AnyType, NativeType, MethodType, IntegerType, DecimalType, IterableType, IType} from '../type'
+import {IntegerValue, DecimalValue, NullValue, IValue} from '../value'
 import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
-import {Expression} from "./index";
+import {IExpression} from "./index";
 import {CodeWriter} from "../utils";
 
 
-function getTargetType(context: Context, itype: Type, mutable: boolean): Type | null {
+function getTargetType(context: Context, itype: IType, mutable: boolean): IType | null {
     if (itype instanceof IterableType) {
         const itemType = getTargetType(context, itype.itemType, itype.itemType.mutable);
         if (itemType)
@@ -27,7 +27,7 @@ function getTargetType(context: Context, itype: Type, mutable: boolean): Type | 
 }
 
 
-function getTargetAtomicType(context: Context, itype: Type): Type | null {
+function getTargetAtomicType(context: Context, itype: IType): IType | null {
     const decl = context.getRegistered(itype.id);
     if (!decl) {
         context.problemListener.reportUnknownCategory(itype.id, itype.name);
@@ -46,18 +46,18 @@ function getTargetAtomicType(context: Context, itype: Type): Type | null {
 
 export default class CastExpression extends BaseExpression {
 
-    expression: Expression;
-    type: Type;
+    expression: IExpression;
+    type: IType;
     mutable: boolean;
 
-    constructor(expression: Expression, type: Type, mutable: boolean) {
+    constructor(expression: IExpression, type: IType, mutable: boolean) {
         super();
         this.expression = expression;
         this.type = type.anyfy();
         this.mutable = mutable;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         let actual = this.expression.check(context);
         if(actual)
             actual = actual.anyfy();
@@ -81,7 +81,7 @@ export default class CastExpression extends BaseExpression {
         return target; // don't propagate the issue
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let value = this.expression.interpret(context);
         if(value && value != NullValue.instance) {
             const target = getTargetType(context, this.type, this.mutable);

@@ -1,10 +1,10 @@
 import Section from '../parser/Section'
-import Named from "./Named";
+import INamed from "./INamed";
 import Identifier from "./Identifier";
 import {Context} from "../runtime";
-import {Type} from "../type";
+import {IType} from "../type";
 
-export default abstract class NamedInstance extends Section implements Named {
+export default abstract class NamedInstance extends Section implements INamed {
 
     id: Identifier;
 
@@ -17,6 +17,6 @@ export default abstract class NamedInstance extends Section implements Named {
         return this.id.name;
     }
 
-    abstract getType(context: Context): Type;
+    abstract getType(context: Context): IType;
 
 }

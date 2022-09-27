@@ -1,7 +1,7 @@
 import BaseExpression from './BaseExpression'
-import {Assertion, Expression, InstanceExpression, Predicate, TypeExpression, UnresolvedIdentifier} from './index'
+import {IAssertion, IExpression, InstanceExpression, IPredicate, TypeExpression, UnresolvedIdentifier} from './index'
 import {EqOp, Identifier} from '../grammar'
-import {MatchOp, QueryBuilder} from '../store'
+import {MatchOp, IQueryBuilder} from '../store'
 import {Variable, LinkedVariable, LinkedValue, Context, Transpiler} from '../runtime'
 import {
     ContainerType,
@@ -12,9 +12,9 @@ import {
     IntegerType,
     DecimalType,
     MethodType,
-    CategoryType, Type, VoidType
+    CategoryType, IType, VoidType
 } from '../type'
-import {NullValue, BooleanValue, Value, TypeValue, Instance, Container, TextValue} from '../value'
+import {NullValue, BooleanValue, IValue, TypeValue, Instance, Container, TextValue} from '../value'
 import { CodeWriter, removeAccents, isAMethod, isInstanceOf } from '../utils'
 import { SyntaxError } from '../error'
 import BaseValue from "../value/BaseValue";
@@ -23,13 +23,13 @@ import {Dialect} from "../parser";
 
 const VOWELS = "AEIO"; // sufficient here
 
-export default class EqualsExpression extends BaseExpression implements Predicate, Assertion {
+export default class EqualsExpression extends BaseExpression implements IPredicate, IAssertion {
 
-    left: Expression;
+    left: IExpression;
     operator: EqOp;
-    right: Expression;
+    right: IExpression;
 
-    constructor(left: Expression, operator: EqOp, right: Expression) {
+    constructor(left: IExpression, operator: EqOp, right: IExpression) {
         super();
         this.left = left;
         this.operator = operator;
@@ -54,13 +54,13 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         this.right.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
         return this.checkOperator(context, lt, rt);
     }
 
-    checkOperator(context: Context, lt: Type, rt: Type): Type {
+    checkOperator(context: Context, lt: IType, rt: IType): IType {
         if(this.operator === EqOp.CONTAINS || this.operator === EqOp.NOT_CONTAINS) {
             if(lt instanceof ContainerType)
                 lt = lt.itemType;
@@ -72,13 +72,13 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         return BooleanType.instance; // can compare all objects
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const lval = this.left.interpret(context) || NullValue.instance;
         const rval = this.right.interpret(context) || NullValue.instance;
         return this.interpretValues(context, lval, rval);
     }
 
-    interpretValues(context: Context, lval: Value, rval: Value): Value {
+    interpretValues(context: Context, lval: IValue, rval: IValue): IValue {
         let equal = false;
         switch(this.operator) {
             case EqOp.IS:
@@ -112,7 +112,7 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         return BooleanValue.ValueOf(equal);
     }
 
-    contains(context: Context, lval: Value, rval: Value): boolean {
+    contains(context: Context, lval: IValue, rval: IValue): boolean {
         if(lval instanceof Container) {
             return lval.Contains(context, rval);
         } else {
@@ -120,7 +120,7 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         }
     }
 
-    roughly(context: Context, lval: Value, rval: Value): boolean {
+    roughly(context: Context, lval: IValue, rval: IValue): boolean {
         if(lval instanceof TextValue) {
             return lval.Roughly(context, rval);
         } else {
@@ -128,7 +128,7 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         }
     }
 
-    areEqual(context: Context, lval: Value, rval: Value): boolean {
+    areEqual(context: Context, lval: IValue, rval: IValue): boolean {
         if(lval === rval) {
             return true;
         } else if(lval === NullValue.instance || rval === NullValue.instance) {
@@ -138,7 +138,7 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         }
     }
 
-    isA(context: Context, lval: Value, rval: Value): boolean {
+    isA(context: Context, lval: IValue, rval: IValue): boolean {
         if(lval instanceof BaseValue && rval instanceof TypeValue) {
             const actual = lval.type;
             if(actual == NullType.instance)
@@ -186,13 +186,13 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         const result = this.interpretValues(context, lval, rval);
         if(result === BooleanValue.TRUE)
             return true;
-        const expected = (this as unknown as Assertion).getExpected(context, test.dialect, 0);
+        const expected = (this as unknown as IAssertion).getExpected(context, test.dialect, 0);
         const actual = lval.toString() + " " + this.operator.toString(test.dialect) + " " + rval.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
 
-    checkQuery(context: Context): Type {
+    checkQuery(context: Context): IType {
         const decl = this.left.checkAttribute(context);
         if(decl && decl.storable) {
             const rt = this.right.check(context);
@@ -203,7 +203,7 @@ export default class EqualsExpression extends BaseExpression implements Predicat
         }
     }
 
-    interpretQuery(context: Context, query: QueryBuilder): void {
+    interpretQuery(context: Context, query: IQueryBuilder): void {
         const decl = this.left.checkAttribute(context);
         if(!decl || !decl.storable)
             throw new SyntaxError("Unable to interpret predicate");

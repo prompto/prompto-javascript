@@ -1,4 +1,4 @@
-import SelectorExpression from './SelectorExpression.js'
+import SelectorExpression from './SelectorExpression.ts'
 import { IntegerType } from '../type'
 import { IntegerValue } from '../value'
 

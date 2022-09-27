@@ -1,16 +1,16 @@
 import BaseMethodDeclaration from './BaseMethodDeclaration'
-import {Parameter, ParameterList} from '../param'
+import {IParameter, ParameterList} from '../param'
 import {BuiltInContext, Context, Transpiler} from '../runtime'
 import { InternalError } from '../error'
 import {ArgumentList, Identifier} from "../grammar";
-import {Value} from "../value";
-import {DeclarationInfo} from "../runtime/Catalog";
-import {Type} from "../type";
+import {IValue} from "../value";
+import {IDeclarationInfo} from "../runtime/Catalog";
+import {IType} from "../type";
 import {CodeWriter} from "../utils";
 
-export default abstract class BuiltInMethodDeclaration<T extends Value> extends BaseMethodDeclaration {
+export default abstract class BuiltInMethodDeclaration<T extends IValue> extends BaseMethodDeclaration {
 
-    constructor(name: string, ...args: Parameter[]) {
+    constructor(name: string, ...args: IParameter[]) {
         let params = null;
         if ( args.length > 1 ) {
             params = new ParameterList();
@@ -39,11 +39,11 @@ export default abstract class BuiltInMethodDeclaration<T extends Value> extends 
         throw new Error("Need to override transpileCall in " + this.constructor.name);
     }
 
-    toDeclarationInfo(): DeclarationInfo {
+    toDeclarationInfo(): IDeclarationInfo {
         throw new Error("TBD!");
     }
 
-    getType(): Type {
+    getType(): IType {
         throw new Error("TBD!");
     }
 

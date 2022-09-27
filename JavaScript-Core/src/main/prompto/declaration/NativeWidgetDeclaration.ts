@@ -1,7 +1,7 @@
 import NativeCategoryDeclaration from './NativeCategoryDeclaration'
 import { SyntaxError } from '../error'
 import {Identifier, NativeCategoryBindingList} from "../grammar";
-import {MethodDeclaration} from "./index";
+import {IMethodDeclaration} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {JsxProperty} from "../jsx";
 import {CodeWriter} from "../utils";
@@ -10,7 +10,7 @@ export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 
     properties?: JsxProperty[] | null;
 
-    constructor(id: Identifier, categoryBindings: NativeCategoryBindingList, methods: MethodDeclaration[]) {
+    constructor(id: Identifier, categoryBindings: NativeCategoryBindingList, methods: IMethodDeclaration[]) {
         super(id, null, categoryBindings, null, methods);
     }
 

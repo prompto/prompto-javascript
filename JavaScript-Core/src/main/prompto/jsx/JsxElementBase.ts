@@ -1,6 +1,6 @@
 import IJsxExpression from '../../../main/prompto/jsx/IJsxExpression'
 import { isCharacterUpperCase } from '../utils'
-import {JsxType, AnyType, Type} from '../type'
+import {JsxType, AnyType, IType} from '../type'
 import { CategoryDeclaration } from '../declaration'
 import { OCleverParser } from '../parser'
 import { TypeLiteral } from '../literal'
@@ -25,7 +25,7 @@ export default class JsxElementBase extends IJsxExpression {
         return this.id.name;
     }
     
-    check(context: Context): Type { {
+    check(context: Context): IType { {
         if(this.isHtmlTag())
             this.checkHtmlTag(context);
         else

@@ -1,9 +1,9 @@
-import Value from './Value.ts'
+import IValue from './IValue.ts'
 import { TimeValue, PeriodValue, IntegerValue, DateTimeValue, TextValue } from './index.ts'
 import { DateType} from '../type'
 import { SyntaxError } from '../error'
 
-export default class DateValue extends Value {
+export default class DateValue extends IValue {
   
     constructor(value) {
         super(DateType.instance);

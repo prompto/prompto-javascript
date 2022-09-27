@@ -368,7 +368,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitDocKeyIdentifier = (ctx: contexts.DocKeyIdentifierContext) => {
         const text = ctx.name.getText();
-        this.setNodeValue(ctx, new literal.DocIdentifierKey(new grammar.Identifier(text)));
+        this.setNodeValue(ctx, new literal.IDocIdentifierKey(new grammar.Identifier(text)));
     }
 
 
@@ -483,7 +483,7 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitPrimaryType = (ctx: contexts.PrimaryTypeContext) => {
-        const type = this.getNodeValue<type.Type>(ctx._p);
+        const type = this.getNodeValue<type.IType>(ctx._p);
         this.setNodeValue(ctx, type);
     }
 
@@ -504,12 +504,12 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitNativeType = (ctx: contexts.NativeTypeContext) => {
-        const type = this.getNodeValue<type.Type>(ctx._n);
+        const type = this.getNodeValue<type.IType>(ctx._n);
         this.setNodeValue(ctx, type);
     }
 
     exitCategoryType = (ctx: contexts.CategoryTypeContext) => {
-        const type = this.getNodeValue<type.Type>(ctx._c);
+        const type = this.getNodeValue<type.IType>(ctx._c);
         this.setNodeValue(ctx, type);
     }
 
@@ -521,7 +521,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitListType = (ctx: contexts.ListTypeContext) => {
-        const typ = this.getNodeValue<type.Type>(ctx._l);
+        const typ = this.getNodeValue<type.IType>(ctx._l);
         this.setNodeValue(ctx, new type.ListType(typ));
     }
 
@@ -536,7 +536,7 @@ export default class EPromptoBuilder extends EParserListener {
     }
 
     exitDictType = (ctx: contexts.DictTypeContext) => {
-        const typ = this.getNodeValue<type.Type>(ctx._d);
+        const typ = this.getNodeValue<type.IType>(ctx._d);
         this.setNodeValue(ctx, new type.DictionaryType(typ));
     }
 
@@ -589,19 +589,19 @@ export default class EPromptoBuilder extends EParserListener {
 
 
     exitConcreteCategoryDeclaration = (ctx: contexts.ConcreteCategoryDeclarationContext) => {
-        const decl = this.getNodeValue<declaration.Declaration>(ctx._decl);
+        const decl = this.getNodeValue<declaration.IDeclaration>(ctx._decl);
         this.setNodeValue(ctx, decl);
     }
 
 
     exitConcreteWidgetDeclaration = (ctx: contexts.ConcreteWidgetDeclarationContext) => {
-        const decl = this.getNodeValue<declaration.Declaration>(ctx._decl);
+        const decl = this.getNodeValue<declaration.IDeclaration>(ctx._decl);
         this.setNodeValue(ctx, decl);
     }
 
 
     exitNativeWidgetDeclaration = (ctx: contexts.NativeWidgetDeclarationContext) => {
-        const decl = this.getNodeValue<declaration.Declaration>(ctx._decl);
+        const decl = this.getNodeValue<declaration.IDeclaration>(ctx._decl);
         this.setNodeValue(ctx, decl);
     }
 

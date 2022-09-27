@@ -1,12 +1,12 @@
 import Section from '../parser/Section'
-import {CodeWriter, Writable} from "../utils";
+import {CodeWriter, IWritable} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {Type} from "../type";
-import {Value} from "../value";
-import {AttributeDeclaration, MethodDeclaration} from "../declaration";
-import {Expression} from "./index";
+import {IType} from "../type";
+import {IValue} from "../value";
+import {AttributeDeclaration, IMethodDeclaration} from "../declaration";
+import {IExpression} from "./index";
 
-export default abstract class BaseExpression extends Section implements Expression, Writable {
+export default abstract class BaseExpression extends Section implements IExpression, IWritable {
 
     isPredicate(): boolean {
         return false;
@@ -36,11 +36,11 @@ export default abstract class BaseExpression extends Section implements Expressi
         this.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         throw new Error("check not implemented by " + this.constructor.name);
     }
 
-    checkReference(context: Context): Type {
+    checkReference(context: Context): IType {
         return this.check(context);
     }
 
@@ -49,11 +49,11 @@ export default abstract class BaseExpression extends Section implements Expressi
         return null;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         throw new Error("interpret not implemented by " + this.constructor.name);
     }
 
-    interpretReference(context: Context): Value {
+    interpretReference(context: Context): IValue {
        return this.interpret(context);
     }
 
@@ -65,7 +65,7 @@ export default abstract class BaseExpression extends Section implements Expressi
         throw new Error("transpile not implemented by " + this.constructor.name);
     }
 
-    transpileReference(transpiler: Transpiler, method: MethodDeclaration): void {
+    transpileReference(transpiler: Transpiler, method: IMethodDeclaration): void {
         this.transpile(transpiler);
     }
 

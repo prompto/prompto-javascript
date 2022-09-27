@@ -1,8 +1,8 @@
-import CssValue from "./CssValue";
+import ICssValue from "./ICssValue";
 import {CodeWriter} from "../utils";
 import {Transpiler} from "../runtime";
 
-export default class CssText implements CssValue {
+export default class CssText implements ICssValue {
 
     text: string;
 

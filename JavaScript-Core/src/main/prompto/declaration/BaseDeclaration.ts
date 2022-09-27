@@ -1,14 +1,14 @@
-import Declaration from "./Declaration";
+import IDeclaration from "../../../main/prompto/declaration/IDeclaration";
 import Section from '../parser/Section'
 import { Annotation, Identifier } from "../grammar";
 import { CommentStatement } from "../statement";
 import { Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
 import AbstractParser from "../parser/AbstractParser";
-import {Type} from "../type";
-import {DeclarationInfo} from "../runtime/Catalog";
+import {IType} from "../type";
+import {IDeclarationInfo} from "../runtime/Catalog";
 
-export default abstract class BaseDeclaration extends Section implements Declaration {
+export default abstract class BaseDeclaration extends Section implements IDeclaration {
 
     id: Identifier;
     declaring: boolean;
@@ -23,7 +23,7 @@ export default abstract class BaseDeclaration extends Section implements Declara
         this.annotations = null;
     }
 
-    abstract getType(context: Context): Type;
+    abstract getType(context: Context): IType;
     abstract getDeclarationType(): string;
     abstract declare(transpiler: Transpiler): void;
     abstract transpile(transpiler: Transpiler): void;
@@ -66,6 +66,6 @@ export default abstract class BaseDeclaration extends Section implements Declara
     abstract toEDialect(writer: CodeWriter): void;
     abstract toODialect(writer: CodeWriter): void;
     abstract toMDialect(writer: CodeWriter): void;
-    abstract toDeclarationInfo(context: Context): DeclarationInfo;
+    abstract toDeclarationInfo(context: Context): IDeclarationInfo;
 
 }

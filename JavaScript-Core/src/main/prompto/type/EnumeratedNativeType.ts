@@ -6,13 +6,13 @@ import { SyntaxError } from '../error'
 import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import {Section} from "../parser";
-import Type from "./Type";
+import IType from "./IType";
 
 export default class EnumeratedNativeType extends BaseType {
 
-    derivedFrom: Type;
+    derivedFrom: IType;
 
-    constructor(id: Identifier, derivedFrom: Type) {
+    constructor(id: Identifier, derivedFrom: IType) {
         super(id);
         this.derivedFrom = derivedFrom;
     }
@@ -21,7 +21,7 @@ export default class EnumeratedNativeType extends BaseType {
         // TODO
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         if ("value" === id.name) {
             return this.derivedFrom;
         } else if ("name" === id.name) {
@@ -31,7 +31,7 @@ export default class EnumeratedNativeType extends BaseType {
         }
     }
 
-    checkStaticMember(context: Context, section: Section, id: Identifier): Type {
+    checkStaticMember(context: Context, section: Section, id: Identifier): IType {
         if ("symbols" === id.name) {
             return new ListType(this);
         } else {
@@ -39,7 +39,7 @@ export default class EnumeratedNativeType extends BaseType {
         }
     }
 
-    isMoreSpecificThan(context: Context, type: Type): boolean {
+    isMoreSpecificThan(context: Context, type: IType): boolean {
         return false;
     }
 

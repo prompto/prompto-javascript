@@ -1,15 +1,15 @@
 import BaseExpression from './BaseExpression'
-import {CodeType, Type} from '../type'
-import {CodeValue, Value} from '../value'
-import {Expression} from "./index";
+import {CodeType, IType} from '../type'
+import {CodeValue, IValue} from '../value'
+import {IExpression} from "./index";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 
 export default class CodeExpression extends BaseExpression {
 
-    expression: Expression;
+    expression: IExpression;
 
-    constructor(expression: Expression) {
+    constructor(expression: IExpression) {
         super();
         this.expression = expression;
     }
@@ -33,11 +33,11 @@ export default class CodeExpression extends BaseExpression {
         this.toODialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return CodeType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return new CodeValue(this);
     }
 
@@ -50,11 +50,11 @@ export default class CodeExpression extends BaseExpression {
     }
 
     // expression can only be checked and evaluated in the context of an execute:
-    checkCode(context: Context): Type {
+    checkCode(context: Context): IType {
         return this.expression.check(context);
     }
 
-    interpretCode(context: Context): Value {
+    interpretCode(context: Context): IValue {
         return this.expression.interpret(context);
     }
 

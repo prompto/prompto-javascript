@@ -1,26 +1,26 @@
 import BaseDeclaration from './BaseDeclaration'
-import MethodDeclaration from "./MethodDeclaration";
+import IMethodDeclaration from "../../../main/prompto/declaration/IMethodDeclaration";
 import {ArgumentList, Argument, Identifier} from '../grammar'
-import {Parameter, ParameterList} from '../param'
+import {IParameter, ParameterList} from '../param'
 import { ProblemRaiser } from '../problem'
 import { SyntaxError } from '../error'
 import { Specificity } from "../grammar";
-import {CategoryType, Type, VoidType} from "../type";
+import {CategoryType, IType, VoidType} from "../type";
 import { PromptoError } from "../error";
-import {CategoryDeclaration, Declaration} from "./index";
+import {CategoryDeclaration, IDeclaration} from "./index";
 import {Dialect} from "../parser";
 import {Context, Transpiler} from "../runtime";
-import {Value} from "../value";
-import {MethodInfo} from "../runtime/Catalog";
+import {IValue} from "../value";
+import {IMethodInfo} from "../runtime/Catalog";
 
-export default abstract class BaseMethodDeclaration extends BaseDeclaration implements MethodDeclaration {
+export default abstract class BaseMethodDeclaration extends BaseDeclaration implements IMethodDeclaration {
 
     parameters: ParameterList;
-    returnType: Type | null;
+    returnType: IType | null;
     memberOf: CategoryDeclaration | null;
-    closureOf: Declaration | null;
+    closureOf: IDeclaration | null;
 
-    constructor(id: Identifier, parameters: ParameterList | null, returnType: Type | null) {
+    constructor(id: Identifier, parameters: ParameterList | null, returnType: IType | null) {
         super(id);
         this.parameters = parameters || new ParameterList();
         this.returnType = returnType || null;
@@ -28,11 +28,11 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
         this.closureOf = null;
     }
 
-    toDeclarationInfo(context: Context): MethodInfo {
+    toDeclarationInfo(context: Context): IMethodInfo {
         return { name: this.name, dialect: this.dialect.name, proto: this.getProto(context), eligibleAsMain: this.isEligibleAsMain() };
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         return this.returnType || VoidType.instance;
     }
 
@@ -116,9 +116,9 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
         }
     }
 
-    abstract check(context: Context, isStart: boolean): Type;
-    abstract checkChild(context: Context): Type;
-    abstract interpret(context: Context): Value | null;
+    abstract check(context: Context, isStart: boolean): IType;
+    abstract checkChild(context: Context): IType;
+    abstract interpret(context: Context): IValue | null;
 
     declareParameters(transpiler: Transpiler): void {
         if(this.parameters) {
@@ -160,11 +160,11 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
         }
     }
 
-    isArgumentAssignableTo(context: Context, parameter: Parameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): boolean {
+    isArgumentAssignableTo(context: Context, parameter: IParameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): boolean {
         return this.computeSpecificity(context, parameter, argument, checkInstance, allowDerived) !== Specificity.INCOMPATIBLE;
     }
 
-    computeSpecificity(context: Context, parameter: Parameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): Specificity {
+    computeSpecificity(context: Context, parameter: IParameter, argument: Argument, checkInstance: boolean, allowDerived: boolean): Specificity {
         try {
             const requiredType = parameter.getType(context).resolve(context, null);
             let actualType = argument.checkActualType(context, requiredType, checkInstance)!.resolve(context, null);
@@ -223,7 +223,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
         }
     }
 
-    static isArgumentAssignableFrom(context: Context, parameter: Parameter, argument: Argument): boolean {
+    static isArgumentAssignableFrom(context: Context, parameter: IParameter, argument: Argument): boolean {
         try {
             const requiredType = parameter.getType(context);
             let actualType = argument.checkActualType(context, requiredType, false);

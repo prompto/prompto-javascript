@@ -1,9 +1,9 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration'
 import { CategoryParameter } from '../param'
-import {AnyType, IntegerType, Type, VoidType} from "../type";
+import {AnyType, IntegerType, IType, VoidType} from "../type";
 import {ArgumentList, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
-import {IntegerValue, ListValue, Value} from "../value";
+import {IntegerValue, ListValue, IValue} from "../value";
 
 
 export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<ListValue> {
@@ -12,13 +12,13 @@ export class IndexOfMethodDeclaration extends BuiltInMethodDeclaration<ListValue
         super("indexOf", new CategoryParameter(AnyType.instance, new Identifier("value")));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const list = this.getValue(context);
         const value = context.getValue(new Identifier("value"));
         return list.indexOfValue(value!);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return IntegerType.instance;
     }
 
@@ -35,7 +35,7 @@ export class RemoveItemMethodDeclaration extends BuiltInMethodDeclaration<ListVa
         super("removeItem", new CategoryParameter(IntegerType.instance, new Identifier("item")));
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         const list = this.getValue(context);
         if(!list.mutable)
             context.problemListener.reportNotMutable(new Identifier("list"), "list"); // TODO locate the incorrect code
@@ -44,7 +44,7 @@ export class RemoveItemMethodDeclaration extends BuiltInMethodDeclaration<ListVa
         return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 
@@ -62,7 +62,7 @@ export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<ListV
         super("removeValue", new CategoryParameter(AnyType.instance, new Identifier("value")));
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         const list = this.getValue(context);
         if(!list.mutable)
             context.problemListener.reportNotMutable(new Identifier("list"), "list"); // TODO locate the incorrect code
@@ -71,7 +71,7 @@ export class RemoveValueMethodDeclaration extends BuiltInMethodDeclaration<ListV
         return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 
@@ -88,7 +88,7 @@ export class AddValueMethodDeclaration extends BuiltInMethodDeclaration<ListValu
         super("addValue", new CategoryParameter(AnyType.instance, new Identifier("value")));
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         const list = this.getValue(context);
         if(!list.mutable)
             context.problemListener.reportNotMutable(new Identifier("list"), "list"); // TODO locate the incorrect code
@@ -97,7 +97,7 @@ export class AddValueMethodDeclaration extends BuiltInMethodDeclaration<ListValu
         return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 
@@ -114,17 +114,17 @@ export class InsertValueMethodDeclaration extends BuiltInMethodDeclaration<ListV
         super("insertValue", new CategoryParameter(AnyType.instance, new Identifier("value")), new CategoryParameter(IntegerType.instance, new Identifier("atIndex")));
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         const list = this.getValue(context);
         if(!list.mutable)
             context.problemListener.reportNotMutable(new Identifier("list"), "list"); // TODO locate the incorrect code
-        const value = context.getValue(new Identifier("value")) as Value;
+        const value = context.getValue(new Identifier("value")) as IValue;
         const atIndex = context.getValue(new Identifier("atIndex")) as IntegerValue;
         list.insertValue(value, atIndex);
         return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 

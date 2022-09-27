@@ -1,14 +1,14 @@
 import NativeType from './NativeType'
-import Type from "./Type";
+import IType from "./IType";
 import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
-import {Expression} from "../expression";
+import {IExpression} from "../expression";
 
 export default abstract class IterableType extends NativeType {
 
-    itemType: Type;
+    itemType: IType;
 
-    constructor(id: Identifier, itemType: Type) {
+    constructor(id: Identifier, itemType: IType) {
         super(id);
         this.itemType = itemType;
     }
@@ -17,18 +17,18 @@ export default abstract class IterableType extends NativeType {
         this.itemType.checkExists(context);
     }
 
-    isMoreSpecificThan(context: Context, other: Type): boolean {
+    isMoreSpecificThan(context: Context, other: IType): boolean {
         return (other instanceof IterableType &&
             this.itemType.isMoreSpecificThan(context, other.itemType));
     }
 
-    transpileJsxCode(transpiler: Transpiler, expression: Expression): void {
+    transpileJsxCode(transpiler: Transpiler, expression: IExpression): void {
         transpiler.append("ArrayOrNull(");
         expression.transpile(transpiler);
         transpiler.append(")");
     }
 
-    abstract withItemType(itemType: Type): Type;
+    abstract withItemType(itemType: IType): IType;
 }
 
 

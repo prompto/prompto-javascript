@@ -1,10 +1,10 @@
-import Value from '../../../main/prompto/value/Value.ts'
+import IValue from '../../../main/prompto/value/IValue.ts'
 import { IntegerValue, ListValue, SetValue } from './index.ts'
 import { IteratorType } from '../type'
 import { Variable } from '../runtime'
 import { StrictSet } from '../intrinsic'
 
-export default class IterableValue extends Value {
+export default class IterableValue extends IValue {
 
     constructor(context, name, itemType, source, length, expression) {
         // TODO should this not be IterableType ?

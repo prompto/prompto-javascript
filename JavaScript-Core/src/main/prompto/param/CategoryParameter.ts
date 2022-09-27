@@ -1,13 +1,13 @@
-import Parameter from './Parameter'
-import {MethodType, Type} from '../type'
+import IParameter from './IParameter'
+import {MethodType, IType} from '../type'
 import { equalObjects } from '../utils'
 import { SyntaxError } from '../error'
 import { ContextualExpression, ArrowValue } from '../value'
 import { ArrowExpression } from '../expression'
 
-export default class CategoryParameter extends Parameter {
+export default class CategoryParameter extends IParameter {
 
-    type: Type;
+    type: IType;
 
     constructor(type, id, defaultExpression) {
         super(id);
@@ -102,7 +102,7 @@ export default class CategoryParameter extends Parameter {
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.resolve(context);
         if (this.resolved)
             this.resolved.checkExists(context);

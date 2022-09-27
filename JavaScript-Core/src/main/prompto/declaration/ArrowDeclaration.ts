@@ -1,6 +1,6 @@
 import AbstractMethodDeclaration from './AbstractMethodDeclaration'
 import {Context} from "../runtime";
-import {ArrowValue, Value} from "../value";
+import {ArrowValue, IValue} from "../value";
 
 export default class ArrowDeclaration extends AbstractMethodDeclaration {
 
@@ -11,7 +11,7 @@ export default class ArrowDeclaration extends AbstractMethodDeclaration {
         this.arrow = arrow;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.arrow.interpret(context);
     }
 }

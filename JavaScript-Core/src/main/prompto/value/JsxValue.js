@@ -1,7 +1,7 @@
-import Value from '../../../main/prompto/value/Value.ts'
+import IValue from '../../../main/prompto/value/IValue.ts'
 import { JsxType } from '../type'
 
-export default class JsxValue extends Value {
+export default class JsxValue extends IValue {
 
     constructor(expression) {
         super(JsxType.instance);

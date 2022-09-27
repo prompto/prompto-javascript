@@ -1,11 +1,11 @@
 import ProblemListener from './ProblemListener'
 import {SyntaxError} from '../error'
-import Problem from "./Problem";
+import IProblem from "../../../main/prompto/problem/IProblem";
 import ProblemType from "./ProblemType";
 
 export default class ProblemRaiser extends ProblemListener {
    
-    collectProblem(problem: Problem): void {
+    collectProblem(problem: IProblem): void {
         if(problem.type == ProblemType.ERROR)
             throw new SyntaxError(problem.message);
     }

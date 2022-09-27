@@ -1,18 +1,18 @@
 import ObjectList from '../utils/ObjectList'
 import {PromptoError, NullReferenceError} from '../error'
-import {VoidType, TypeMap, Type} from '../type'
+import {VoidType, TypeMap, IType} from '../type'
 import {JavaScriptNativeCall} from '../javascript'
 import {Dialect, Section} from '../parser'
-import {NativeCall, Statement} from './index'
+import {NativeCall, IStatement} from './index'
 import {Context, Transpiler} from "../runtime";
-import {Value} from "../value";
+import {IValue} from "../value";
 import {CodeWriter} from "../utils";
 
-export default class StatementList extends ObjectList<Statement> {
+export default class StatementList extends ObjectList<IStatement> {
 
     nativeStatement?: JavaScriptNativeCall;
 
-    constructor(statements?: Statement[], statement?: Statement) {
+    constructor(statements?: IStatement[], statement?: IStatement) {
         super(statements, statement);
     }
 
@@ -45,22 +45,22 @@ export default class StatementList extends ObjectList<Statement> {
         return null;
     }
 
-    check(context: Context, returnType: Type | null): Type {
+    check(context: Context, returnType: IType | null): IType {
         return this.checkStatements(context, returnType, false);
     }
 
-    checkNative(context: Context, returnType: Type | null): Type {
+    checkNative(context: Context, returnType: IType | null): IType {
         return this.checkStatements(context, returnType, true);
     }
 
-    checkStatements(context: Context, returnType: Type | null, nativeOnly: boolean): Type {
+    checkStatements(context: Context, returnType: IType | null, nativeOnly: boolean): IType {
         if (nativeOnly)
             return this.checkNativeStatements(context, returnType);
         else
             return this.checkPromptoStatements(context, returnType);
     }
 
-    checkNativeStatements(context: Context, returnType: Type | null): Type {
+    checkNativeStatements(context: Context, returnType: IType | null): IType {
         const stmt = this.findNativeStatement();
         if (returnType == VoidType.instance) {
             if(stmt)
@@ -89,7 +89,7 @@ export default class StatementList extends ObjectList<Statement> {
         }
     }
 
-    checkPromptoStatements(context: Context, returnType: Type | null): Type {
+    checkPromptoStatements(context: Context, returnType: IType | null): IType {
         if (returnType == VoidType.instance) {
             this.forEach(stmt =>  this.checkStatement(context, stmt), this);
             return VoidType.instance;
@@ -115,7 +115,7 @@ export default class StatementList extends ObjectList<Statement> {
         }
     }
 
-    checkStatement(context: Context, statement: Statement): Type {
+    checkStatement(context: Context, statement: IStatement): IType {
         try {
             return statement.check(context);
         } catch (e) {
@@ -129,7 +129,7 @@ export default class StatementList extends ObjectList<Statement> {
         }
     }
 
-    interpret(context: Context): Value | null {
+    interpret(context: Context): IValue | null {
         try {
             return this.doInterpret(context);
         } catch (e) {
@@ -143,7 +143,7 @@ export default class StatementList extends ObjectList<Statement> {
         }
     }
 
-    doInterpret(context: Context): Value | null {
+    doInterpret(context: Context): IValue | null {
         for (let i = 0; i < this.length; i++) {
             const stmt = this[i];
             context.enterStatement(stmt);
@@ -160,7 +160,7 @@ export default class StatementList extends ObjectList<Statement> {
         return null;
     }
 
-    interpretNative(context: Context, returnType: Type | null): Value | null {
+    interpretNative(context: Context, returnType: IType | null): IValue | null {
         try {
             return this.doInterpretNative(context, returnType);
         } catch (e) {
@@ -174,7 +174,7 @@ export default class StatementList extends ObjectList<Statement> {
         }
     }
 
-    doInterpretNative(context: Context, returnType: Type | null): Value | null {
+    doInterpretNative(context: Context, returnType: IType | null): IValue | null {
         for (let i = 0; i < this.length; i++) {
             const stmt = this[i];
             if (!(stmt instanceof JavaScriptNativeCall))

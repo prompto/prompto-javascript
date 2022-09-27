@@ -3,17 +3,17 @@ import { ArrowExpression } from '../expression'
 import {Identifier, IdentifierList} from "../grammar"
 import { Dialect } from "../parser"
 import {Context, Variable} from "../runtime"
-import {Value} from "../value";
+import {IValue} from "../value";
 import {CodeWriter} from "../utils";
-import Expression from "./Expression";
-import {ContainerType, Type} from "../type";
+import IExpression from "../../../main/prompto/expression/IExpression";
+import {ContainerType, IType} from "../type";
 
 export default class ExplicitPredicateExpression extends PredicateExpression {
 
     itemId: Identifier;
-    predicate: Expression;
+    predicate: IExpression;
 
-    constructor(itemId: Identifier, predicate: Expression) {
+    constructor(itemId: Identifier, predicate: IExpression) {
         super();
         this.itemId = itemId;
         this.predicate = predicate;
@@ -31,7 +31,7 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
     }
 
     
-    filteredToDialect(writer: CodeWriter, source: Expression): void {
+    filteredToDialect(writer: CodeWriter, source: IExpression): void {
         writer = writer.newChildWriter()
         const sourceType = source.check(writer.context);
         const itemType = (sourceType as unknown as ContainerType).itemType;
@@ -70,13 +70,13 @@ export default class ExplicitPredicateExpression extends PredicateExpression {
     }
 
 
-    checkFilter(context: Context, itemType: Type): Type {
+    checkFilter(context: Context, itemType: IType): IType {
         const child = context.newChildContext();
         child.registerInstance(new Variable(this.itemId, itemType), true);
         return this.predicate.check(child);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.toArrowExpression().interpret(context);
     }
 

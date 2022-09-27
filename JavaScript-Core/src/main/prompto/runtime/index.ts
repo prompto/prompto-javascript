@@ -1,9 +1,9 @@
 export { Context, BuiltInContext, ResourceContext, InstanceContext, DocumentContext } from './Context';
 export {default as BreakResult} from './BreakResult';
 export {default as VoidResult} from './VoidResult';
-export {default as MethodDeclarationMap} from '../../../main/prompto/runtime/MethodDeclarationMap';
+export {default as MethodDeclarationMap} from './MethodDeclarationMap';
 export {default as Interpreter, locateMethod} from './Interpreter';
-export {default as Transpilable} from './Transpilable';
+export {default as Transpilable} from './ITranspilable';
 export {default as Transpiler} from './Transpiler';
 export {default as Scheduler} from './Scheduler';
 export {default as ApplicationContext} from './ApplicationContext';

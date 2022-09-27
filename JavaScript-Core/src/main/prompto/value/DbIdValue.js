@@ -1,7 +1,7 @@
-import Value from "./Value.ts";
+import IValue from "../../../main/prompto/value/IValue.ts";
 import { DbIdType } from "../type";
 
-export default class DbIdValue extends Value {
+export default class DbIdValue extends IValue {
 
     constructor(value) {
         super(DbIdType.instance);

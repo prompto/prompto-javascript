@@ -1,5 +1,5 @@
 import { TextValue } from '../value'
-import DocKey from "./DocKey";
+import IDocumentKey from "./IDocumentKey";
 import {Context, Transpiler} from "../runtime";
 
 /*jshint evil:true*/
@@ -7,7 +7,7 @@ function unescape(text: string) {
     return eval(text) as string;
 }
 
-export default class DocTextKey implements DocKey {
+export default class DocTextKey implements IDocumentKey {
 
     text: string;
 

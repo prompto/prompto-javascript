@@ -2,18 +2,18 @@ import BaseDeclaration from './BaseDeclaration'
 import {
     AbstractMethodDeclaration,
     AttributeDeclaration,
-    MethodDeclaration
+    IMethodDeclaration
 } from '../declaration'
-import {CategoryType, Type} from '../type'
+import {CategoryType, IType} from '../type'
 import {Context, MethodDeclarationMap} from "../runtime";
 import {TextLiteral} from "../literal";
 import {Annotation, Identifier, IdentifierList} from "../grammar";
-import {DeclarationInfo} from "../runtime/Catalog";
+import {IDeclarationInfo} from "../runtime/Catalog";
 import {Instance} from "../value";
-import {Stored} from "../store";
+import {IStored} from "../store";
 import {Section} from "../parser";
 import {CodeWriter} from "../utils";
-import Transpilable from "../runtime/Transpilable";
+import ITranspilable from "../../../main/prompto/runtime/ITranspilable";
 
 export default abstract class CategoryDeclaration extends BaseDeclaration {
 
@@ -28,7 +28,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
         this.storable = false;
     }
 
-    toDeclarationInfo(): DeclarationInfo {
+    toDeclarationInfo(): IDeclarationInfo {
         return { name: this.name, dialect: this.dialect.name};
     }
 
@@ -69,7 +69,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
 
     abstract newInstance(context: Context): Instance<never>;
 
-    newInstanceFromStored(context: Context, stored: Stored): Instance<never> {
+    newInstanceFromStored(context: Context, stored: IStored): Instance<never> {
         const instance = this.newInstance(context);
         instance.mutable = true;
         try {
@@ -162,7 +162,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
     }
 
     abstract getMemberMethodsMap(context: Context, id: Identifier): MethodDeclarationMap;
-    abstract getLocalMethods(): MethodDeclaration[];
+    abstract getLocalMethods(): IMethodDeclaration[];
 
     collectLocalMethods(context: Context, section: Section, maps: Map<string, MethodDeclarationMap>): void {
         this.getLocalMethods().forEach( method => {
@@ -191,7 +191,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
 
     abstract registerMethods(context: Context): void;
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.attributes!=null) {
             this.attributes.forEach(id => {
                 const ad = context.getRegistered(id);
@@ -205,7 +205,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
         return new CategoryType(this.id);
     }
 
-    getType(context: Context): Type {
+    getType(context: Context): IType {
         return new CategoryType(this.id);
     }
 
@@ -226,7 +226,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
 
     abstract hasMethod(context: Context, id: Identifier): boolean;
 
-    isDerivedFrom(context: Context, categoryType: Type) {
+    isDerivedFrom(context: Context, categoryType: IType) {
         return false;
     }
 
@@ -295,7 +295,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
         writer.newLine();
     }
 
-    methodsToEDialect(writer: CodeWriter, methods: MethodDeclaration[]): void {
+    methodsToEDialect(writer: CodeWriter, methods: IMethodDeclaration[]): void {
         writer.indent();
         methods.forEach(method => {
             writer.newLine();
@@ -311,7 +311,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
         writer.dedent();
     }
 
-    methodsToODialect(writer: CodeWriter, methods: MethodDeclaration[]): void {
+    methodsToODialect(writer: CodeWriter, methods: IMethodDeclaration[]): void {
         methods.forEach(method => {
             if(method.comments) {
                 method.comments.forEach(cmt => cmt.toDialect(writer));
@@ -367,7 +367,7 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
     }
     abstract categoryTypeToMDialect(writer: CodeWriter): void;
 
-    ensureDeclarationOrder(context: Context, list: Transpilable[], set: Set<Transpilable>) {
+    ensureDeclarationOrder(context: Context, list: ITranspilable[], set: Set<ITranspilable>) {
         if(set.has(this))
             return;
         if (this.derivedFrom != null) {

@@ -1,4 +1,4 @@
-import Variable from './Variable.js'
+import Variable from './Variable.ts'
 import { Identifier } from '../grammar'
 import { EnumeratedCategoryType } from '../type'
 

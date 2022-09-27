@@ -1,22 +1,22 @@
-import Value from "./Value";
+import IValue from "../../../main/prompto/value/IValue";
 import { TextValue } from './index'
 import { SyntaxError } from '../error'
-import {Type} from "../type";
+import {IType} from "../type";
 import {Context, Transpiler} from "../runtime";
-import {Storable} from "../store";
+import {IStorable} from "../store";
 import {Identifier} from "../grammar";
 import {JsonNode, JsonParent} from "../json";
 
-export default abstract class BaseValue<T> implements Value {
+export default abstract class BaseValue<T> implements IValue {
 
     static id = 0;
 
     id: number;
-    type: Type;
+    type: IType;
     value: T;
     mutable: boolean;
 
-    constructor(type: Type, value: T, mutable = false) {
+    constructor(type: IType, value: T, mutable = false) {
         this.id = ++BaseValue.id;
         this.type = type;
         this.value = value;
@@ -31,7 +31,7 @@ export default abstract class BaseValue<T> implements Value {
         return this == value;
     }
 
-    getMemberValue(context: Context, id: Identifier, autocreate?: boolean): Value {
+    getMemberValue(context: Context, id: Identifier, autocreate?: boolean): IValue {
         if("text" === id.name)
             return new TextValue(this.toString());
         else if("json" === id.name) {
@@ -44,12 +44,12 @@ export default abstract class BaseValue<T> implements Value {
     abstract toJsonNode(): JsonNode;
     abstract toJsonStream(context: Context, values: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
 
-    toDocumentValue(context: Context): Value {
+    toDocumentValue(context: Context): IValue {
         return this;
     }
 
     abstract getStorableData(): any;
-    collectStorables(storables: Set<Storable>): void {
+    collectStorables(storables: Set<IStorable>): void {
         // nothing to do
     }
 
@@ -66,58 +66,58 @@ export default abstract class BaseValue<T> implements Value {
         throw new SyntaxError("convertToJavaScript not implemented by " + this.constructor.name);
     }
 
-    And(context: Context, value: Value): Value {
+    And(context: Context, value: IValue): IValue {
         throw new SyntaxError("Logical and not supported by " + this.constructor.name);
     }
 
-    Or(context: Context, value: Value): Value {
+    Or(context: Context, value: IValue): IValue {
         throw new SyntaxError("Logical or not supported by " + this.constructor.name);
     }
 
-    Not(context: Context): Value {
+    Not(context: Context): IValue {
         throw new SyntaxError("Logical negation not supported by " + this.constructor.name);
     }
-    Add(context: Context, value: Value): Value {
+    Add(context: Context, value: IValue): IValue {
         throw new SyntaxError("Add not supported by " + this.constructor.name);
     }
 
-    Subtract(context: Context, value: Value): Value {
+    Subtract(context: Context, value: IValue): IValue {
         throw new SyntaxError("Subtract not supported by " + this.constructor.name);
     }
 
-    Multiply(context: Context, value: Value): Value {
+    Multiply(context: Context, value: IValue): IValue {
         throw new SyntaxError("Multiply not supported by " + this.constructor.name);
     }
 
-    Divide(context: Context, value: Value): Value {
+    Divide(context: Context, value: IValue): IValue {
         throw new SyntaxError("Divide not supported by " + this.constructor.name);
     }
 
-    IntDivide(context: Context, value: Value): Value {
+    IntDivide(context: Context, value: IValue): IValue {
         throw new SyntaxError("IntDivide not supported by " + this.constructor.name);
     }
 
-    Modulo(context: Context, value: Value): Value {
+    Modulo(context: Context, value: IValue): IValue {
         throw new SyntaxError("Modulo not supported by " + this.constructor.name);
     }
 
-    Minus(context: Context): Value {
+    Minus(context: Context): IValue {
         throw new SyntaxError("Minus not supported by " + this.constructor.name);
     }
 
-    Contains(context: Context, value: Value): boolean {
+    Contains(context: Context, value: IValue): boolean {
         throw new SyntaxError("Contains not supported by " + this.constructor.name);
     }
 
-    CompareTo(context: Context, value: Value): number  {
+    CompareTo(context: Context, value: IValue): number  {
         throw new SyntaxError("CompareTo not supported by " + this.constructor.name);
     }
 
-    ConvertTo(type: Type): Value {
+    ConvertTo(type: IType): IValue {
         return this;
     }
 
-    Roughly(context: Context, value: Value): boolean {
+    Roughly(context: Context, value: IValue): boolean {
         return this.equals(value);
     }
 

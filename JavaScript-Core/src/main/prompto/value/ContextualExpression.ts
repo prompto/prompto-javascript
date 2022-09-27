@@ -1,34 +1,34 @@
 import BaseValue from "./BaseValue";
-import {Type, VoidType} from "../type";
-import {Expression} from "../expression";
+import {IType, VoidType} from "../type";
+import {IExpression} from "../expression";
 import {Context, Transpiler} from "../runtime";
-import Value from "./Value";
-import {MethodDeclaration} from "../declaration";
+import IValue from "../../../main/prompto/value/IValue";
+import {IMethodDeclaration} from "../declaration";
 
 export default class ContextualExpression extends BaseValue<any> {
 
     calling: Context;
-    expression: Expression;
+    expression: IExpression;
 
-    constructor(calling: Context, expression: Expression) {
+    constructor(calling: Context, expression: IExpression) {
         super(VoidType.instance, null); // TODO check that this is not a problem
         this.calling = calling;
         this.expression = expression;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.expression.check(this.calling);
     }
 
-    checkReference(context: Context): Type {
+    checkReference(context: Context): IType {
         return this.expression.checkReference(this.calling);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.expression.interpret(this.calling);
     }
 
-    interpretReference(context: Context): Value {
+    interpretReference(context: Context): IValue {
         return this.expression.interpretReference(this.calling);
     }
 
@@ -38,7 +38,7 @@ export default class ContextualExpression extends BaseValue<any> {
         transpiler.flush();
     }
 
-    transpileReference(transpiler: Transpiler, method: MethodDeclaration): void {
+    transpileReference(transpiler: Transpiler, method: IMethodDeclaration): void {
         transpiler = transpiler.newChildTranspiler(this.calling);
         this.expression.transpileReference(transpiler, method);
         transpiler.flush();

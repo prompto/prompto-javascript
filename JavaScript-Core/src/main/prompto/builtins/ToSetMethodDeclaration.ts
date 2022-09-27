@@ -1,16 +1,16 @@
 import BuiltInMethodDeclaration from '../declaration/BuiltInMethodDeclaration'
-import {SetType, Type} from '../type'
+import {SetType, IType} from '../type'
 import { StrictSet } from "../intrinsic"
-import {SetValue, Value} from "../value";
+import {SetValue, IValue} from "../value";
 import {Context, Transpiler} from "../runtime";
 import {ArgumentList} from "../grammar";
 
-export default class ToSetMethodDeclaration<T extends Value> extends BuiltInMethodDeclaration<T> {
+export default class ToSetMethodDeclaration<T extends IValue> extends BuiltInMethodDeclaration<T> {
 
-    itemType: Type;
+    itemType: IType;
     reader: (value: T) => SetValue;
 
-    constructor(itemType: Type, reader: (value: T) => SetValue ) {
+    constructor(itemType: IType, reader: (value: T) => SetValue ) {
         super("toSet");
         this.itemType = itemType;
         this.reader = reader;
@@ -21,7 +21,7 @@ export default class ToSetMethodDeclaration<T extends Value> extends BuiltInMeth
         return this.reader(value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return new SetType(this.itemType);
     }
 

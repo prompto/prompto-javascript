@@ -1,30 +1,30 @@
 import { VoidType, NullType, AnyType, CategoryType, NativeType, DecimalType } from '../type'
-import Type from "./Type";
+import IType from "./IType";
 import {Context} from "../runtime";
 import {Section} from "../parser";
 import {CategoryDeclaration} from "../declaration";
 
 export default class TypeMap {
 
-    types = new Map<string, Type>();
+    types = new Map<string, IType>();
 
-    add(type: Type) {
+    add(type: IType) {
         this.types.set(type.name, type);
     }
 
-    inferType(context: Context, section: Section) : Type {
+    inferType(context: Context, section: Section) : IType {
         switch (this.types.size) {
             case 0:
                 return VoidType.instance;
             case 1:
-                return this.types.values().next().value as Type;
+                return this.types.values().next().value as IType;
             default:
                 return this.doInferType(context, section);
         }
     }
 
-    doInferType(context: Context, section: Section): Type {
-        let inferred: Type | null = null;
+    doInferType(context: Context, section: Section): IType {
+        let inferred: IType | null = null;
         // first pass: get less specific type
         this.types.forEach((type, ) => {
             if(!inferred || inferred == NullType.instance) {
@@ -53,7 +53,7 @@ export default class TypeMap {
             return VoidType.instance;
     }
 
-    inferCommonBaseType(context: Context, type1: Type, type2: Type): Type | null {
+    inferCommonBaseType(context: Context, type1: IType, type2: IType): IType | null {
         if ((type1 instanceof CategoryType) && (type2 instanceof CategoryType))
             return this.inferCommonCategoryType(context, type1, type2, true);
         else if(type1 instanceof NativeType || type2 instanceof NativeType)
@@ -62,7 +62,7 @@ export default class TypeMap {
             return null;
     }
 
-    inferCommonCategoryType(context: Context, type1: Type, type2: Type, trySwap: boolean): Type | null {
+    inferCommonCategoryType(context: Context, type1: IType, type2: IType, trySwap: boolean): IType | null {
         const decl1 = context.getRegisteredCategoryDeclaration(type1.id);
         if (decl1) {
             if(decl1.derivedFrom) {

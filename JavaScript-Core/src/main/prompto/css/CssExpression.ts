@@ -1,5 +1,5 @@
-import {CssType, Type} from '../type'
-import {CssValue, Value} from '../value'
+import {CssType, IType} from '../type'
+import {CssValue, IValue} from '../value'
 import {CssField} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
@@ -16,11 +16,11 @@ export default class CssExpression implements CssValue {
         return "{ " + this.fields.map(field => field.toString()).join(", ") + " }";
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return CssType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return new CssValue(this);
     }
 
