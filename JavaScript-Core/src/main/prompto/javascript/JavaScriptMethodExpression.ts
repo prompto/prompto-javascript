@@ -1,15 +1,25 @@
-import JavaScriptSelectorExpression from './JavaScriptSelectorExpression.js'
-import { JavaScriptExpressionList } from '../javascript'
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/ban-types,@typescript-eslint/no-unsafe-return,@typescript-eslint/no-unsafe-member-access */
+import JavaScriptSelectorExpression from './JavaScriptSelectorExpression'
+import {JavaScriptExpressionList, JavaScriptModule} from '../javascript'
 import { NativeInstance } from '../value'
 import { SyntaxError } from '../error'
+import {Identifier} from "../grammar";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
-const isNodeJs = typeof window === 'undefined' && typeof importScripts === 'undefined';
-const isWorker = typeof window === 'undefined' && typeof importScripts === 'function';
+interface InstanceAndMethod {
+    instance: any;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    method: Function;
+}
 
 export default class JavaScriptMethodExpression extends JavaScriptSelectorExpression {
 
-    constructor(id, args) {
-        super();
+    id: Identifier;
+    args: JavaScriptExpressionList;
+
+    constructor(id: Identifier, args: JavaScriptExpressionList | null) {
+        super(null);
         this.id = id;
         this.args = args || new JavaScriptExpressionList();
     }
@@ -18,7 +28,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
         return (this.parent === null ? "" : (this.parent.toString() + ".")) + this.id.name + "(" + this.args.toString() + ")";
     }
 
-    interpret(context, module) {
+    interpret(context: Context, module: JavaScriptModule) {
         const m = this.findInstanceAndMethod(context, module);
         if(!m)
             throw new SyntaxError("Could not find function: "+ this.id.name + (module ? " in module: " + module.toString() : ""));
@@ -43,7 +53,7 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
             return this.id.name;
     }
 
-    findInstanceAndMethod(context, module) {
+    findInstanceAndMethod(context: Context, module: JavaScriptModule): InstanceAndMethod {
         if (this.parent === null) {
             return this.findGlobal(context, module);
         } else {
@@ -51,45 +61,51 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
         }
     }
 
-    interpretNew(context, module) {
+    interpretNew(context: Context, module: JavaScriptModule) {
         const m = this.findInstanceAndMethod(context, module);
         if(!m)
             throw new SyntaxError("Could not find function: "+ this.id.name);
         const args = this.args.computeArguments(context);
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         return args.length ? new m.method(args) : new m.method();
     }
 
-    findGlobal(context, module) {
+    findGlobal(context: Context, module: JavaScriptModule): InstanceAndMethod {
         if(module!=null)
             return this.findInModule(context, module);
         else
             return { instance: null, method: stringToFunction(this.id.name) };
     }
 
-    findInModule(context, module) {
+    findInModule(context: Context, module: JavaScriptModule): InstanceAndMethod {
         try {
             const m = module.resolve();
-            if(m[this.id.name])
-                return { instance: null, method: m[this.id.name] };
-            else
-                throw true;
+            if(m) {
+                const key = this.id.name as keyof typeof m;
+                if (m[key])
+                    return {instance: null, method: m[key]};
+            }
+            throw true;
         } catch (e) {
             throw new SyntaxError("Could not resolve module method: " + module.toString() + " " + this.id.name);
         }
     }
 
-    findMember(context, module) {
-        let i = this.parent.interpret(context, module);
+    findMember(context: Context, module: JavaScriptModule): InstanceAndMethod {
+        let i = this.parent!.interpret(context, module);
         if(i===null) {
             throw "Null reference";
         }
         if(i instanceof NativeInstance) {
             i = i.instance;
         }
-        if(i[this.id.name])
-            return { instance:i, method: i[this.id.name] };
-        else
-            throw new SyntaxError("Could not resolve member method: " + this.toString());
+        if(i) {
+            const key = this.id.name as keyof typeof i;
+            if(i[key])
+                return { instance:i, method: i[key] };
+        }
+        throw new SyntaxError("Could not resolve member method: " + this.toString());
     }
 
     toDialect(writer: CodeWriter): void {
@@ -105,12 +121,11 @@ export default class JavaScriptMethodExpression extends JavaScriptSelectorExpres
     }
 }
 
-function stringToFunction(str) {
+function stringToFunction(str: string): Function {
     const arr = str.split(".");
-    /* global self, window */
-    let fn = isNodeJs ? global : isWorker ? self : window;
+    let fn = global;
     for (let i = 0, len = arr.length; i < len; i++) {
-        fn = fn[arr[i]];
+        fn = fn[arr[i] as keyof typeof fn];
     }
-    return fn;
+    return fn as unknown as Function;
 }

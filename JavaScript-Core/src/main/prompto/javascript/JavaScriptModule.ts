@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-assignment */
 import { SyntaxError } from '../error'
 import { importPathIfNode } from '../utils/ImportUtils'
 import {Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
 export default class JavaScriptModule {
 
@@ -87,14 +89,13 @@ export default class JavaScriptModule {
     }
 
     transpileWidget(transpiler: Transpiler): void {
-        let ids = this.ids;
-        if("js"==ids[ids.length-1]) {
-            ids = ids.pop()
-        }
+        const ids = this.ids;
+        if("js"==ids[ids.length-1])
+            ids.pop();
         transpiler.append(ids.join("."));
     }
 
-    transpile(transpiler, name) {
+    transpile(transpiler: Transpiler, name: string) {
         if(this.transpile_intrinsic(transpiler, name))
             return;
         else if(this.transpile_webpack(transpiler, name))
@@ -113,24 +114,25 @@ export default class JavaScriptModule {
             throw new SyntaxError("Cannot locate module: " + this.toString());
     }
 
-    transpile_intrinsic(transpiler, name) {
+    transpile_intrinsic(transpiler: Transpiler, name: string) {
         return this.ids[0]==="prompto" && this.ids[1]==="intrinsic";
     }
 
-    transpile_webpack(transpiler, name) {
+    transpile_webpack(transpiler: Transpiler, name: string) {
         try {
             // get a copy of the path identifiers
-            const ids = [].concat(this.ids);
+            const ids = this.ids.concat([]);
             // drop the 'js' extension
             if(ids[ids.length-1]=="js")
                 ids.pop();
             // last id is the function, forget it
             ids.pop();
             // eval root module
-            let m = eval(ids.shift());
+            let m = eval(ids.shift()!);
             // drill down
             ids.forEach(id => {
-                m = m ? m[id] || null : null;
+                if(m)
+                    m = m[id as keyof typeof m];
             });
             if(!m)
                 return false;
@@ -143,7 +145,7 @@ export default class JavaScriptModule {
         }
     }
 
-    transpile_module(transpiler, name) {
+    transpile_module(transpiler: Transpiler, name: string) {
         try {
             const modulePath = this.toString();
             const m = eval("require('" + modulePath + "')");
@@ -158,9 +160,9 @@ export default class JavaScriptModule {
         }
     }
 
-    transpile_runtime(transpiler, name) {
+    transpile_runtime(transpiler: Transpiler, name: string) {
         try {
-            const path = importPathIfNode();
+            const path = importPathIfNode()!;
             const folder = path.sep + "JavaScript-Core" + path.sep;
             const idx = module.filename.lastIndexOf(folder);
             const rootPath = module.filename.substring(0, idx + 1) + "JavaScript-Runtime" + path.sep + "src" + path.sep + "main" + path.sep;
@@ -180,14 +182,14 @@ export default class JavaScriptModule {
         }
     }
 
-    transpile_path(transpiler, name, part, replace) {
+    transpile_path(transpiler: Transpiler, name: string, part: string, replaceBy?: string) {
         try {
-            const path = importPathIfNode();
+            const path = importPathIfNode()!;
             const folder = path.sep + part + path.sep;
             const idx = module.filename.lastIndexOf(folder);
             let rootPath = module.filename.substring(0, idx + 1);
-            if(replace)
-                rootPath = rootPath + replace + "/";
+            if(replaceBy)
+                rootPath = rootPath + replaceBy + "/";
             const modulePath = rootPath + this.toString();
             const m = eval("require('" + modulePath + "')");
             if(!m)

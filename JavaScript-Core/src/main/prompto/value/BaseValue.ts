@@ -54,8 +54,16 @@ export default abstract class BaseValue<T> implements IValue {
             throw new SyntaxError("No member support for " + member.name + " in " + this.constructor.name);
     }
 
+    SetMemberValue(context: Context, member: Identifier, value: IValue) {
+        throw new SyntaxError("No member support for " + member.name + " in " + this.constructor.name);
+    }
+
 
     GetItemValue(context: Context, item: IValue, autoCreate?: boolean): IValue {
+        throw new SyntaxError("No item support for " + item.toString() + " in " + this.constructor.name);
+    }
+
+    SetItemValue(context: Context, item: IValue, value: IValue) {
         throw new SyntaxError("No item support for " + item.toString() + " in " + this.constructor.name);
     }
 

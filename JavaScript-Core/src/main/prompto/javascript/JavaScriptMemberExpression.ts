@@ -1,20 +1,26 @@
-import JavaScriptSelectorExpression from './JavaScriptSelectorExpression.js'
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import JavaScriptSelectorExpression from './JavaScriptSelectorExpression'
+import {Identifier} from "../grammar";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
 export default class JavaScriptMemberExpression extends JavaScriptSelectorExpression {
 
-    constructor(id) {
-        super();
+    id: Identifier;
+
+    constructor(id: Identifier) {
+        super(null);
         this.id = id;
     }
 
     toString() {
-        return this.parent.toString() + "." + this.id.name;
+        return this.parent!.toString() + "." + this.id.name;
     }
 
-    interpret(context: Context): IValue {
-        const o = this.parent.interpret(context);
-        if(o!=null) {
-            return this.interpret_field(o);
+    interpret(context: Context): any {
+        const o = this.parent!.interpret(context);
+        if(o) {
+            return this.interpret_field(o as object);
         } else {
             return null;
         }
@@ -43,7 +49,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
         writer.append(this.id.name);
     }
 
-    interpret_field(o) {
-        return o[this.id.name];
+    interpret_field(o: object) {
+        return o[this.id.name as keyof typeof o];
     }
 }

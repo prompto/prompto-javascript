@@ -2,12 +2,17 @@ import NativeCall from '../statement/NativeCall'
 import {Context, Transpiler} from "../runtime";
 import {IType} from "../type";
 import {CodeWriter} from "../utils";
+import {JavaScriptModule, JavaScriptStatement} from "./index";
 
 export default class JavaScriptNativeCall extends NativeCall {
 
-    constructor(statement, module) {
+    statement: JavaScriptStatement;
+    module?: JavaScriptModule;
+
+    constructor(statement: JavaScriptStatement, module?: JavaScriptModule) {
         super();
         this.statement = statement;
+        this.module = module;
     }
 
     toString() {
@@ -18,7 +23,7 @@ export default class JavaScriptNativeCall extends NativeCall {
         return this.statement.check(context);
     }
 
-    interpret(context, returnType) {
+    interpret(context: Context, returnType: IType) {
         return this.statement.interpret(context, returnType);
     }
 

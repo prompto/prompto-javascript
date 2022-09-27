@@ -1,15 +1,21 @@
-import { JavaScriptType } from './index.ts'
-import { AnyType, VoidType } from '../type'
+import {JavaScriptClassType, JavaScriptExpression, JavaScriptModule} from './index'
+import {AnyType, IType, VoidType} from '../type'
 import { Identifier } from '../grammar'
-import { getTypeName } from '../utils'
+import {CodeWriter, getTypeName} from '../utils'
 import { $DataStore } from '../store'
+import {Context, Transpiler} from "../runtime";
+import {IValue} from "../value";
+import ITranspilable from "../runtime/ITranspilable";
 
 export default class JavaScriptStatement {
-  
-    constructor(expression, isReturn) {
+
+    expression: JavaScriptExpression;
+    isReturn: boolean;
+    module?: JavaScriptModule;
+
+    constructor(expression: JavaScriptExpression, isReturn: boolean) {
         this.expression = expression;
         this.isReturn = isReturn || false;
-        this.module = null;
    }
 
     toString() {
@@ -20,17 +26,18 @@ export default class JavaScriptStatement {
         return this.isReturn ? AnyType.instance : VoidType.instance;
     }
 
-    interpret(context, returnType) {
-        let result = this.expression.interpret(context, this.module);
+    interpret(context: Context, returnType: IType): IValue | null {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        const nativeResult: any = this.expression.interpret(context, this.module);
         if (!this.isReturn) {
             return null;
         }
-        if(result !== null) {
-            const id = new Identifier(getTypeName(result));
-            const type = new JavaScriptType(id);
-            result = type.convertJavaScriptValueToPromptoValue(context, result, returnType);
-        }
-        return result;
+        if(nativeResult) {
+            const id = new Identifier(getTypeName(nativeResult)!);
+            const type = new JavaScriptClassType(id);
+            return type.convertJavaScriptValueToPromptoValue(context, nativeResult, returnType);
+        } else
+            return null;
     }
 
     toDialect(writer: CodeWriter): void {
@@ -52,19 +59,21 @@ export default class JavaScriptStatement {
     }
 
     transpile(transpiler: Transpiler): void {
-        if(this.module!=null) {
+        if(this.module) {
             const rootName = this.expression.getRoot();
             this.module.transpile(transpiler, rootName);
         }
         if(this.isReturn)
             transpiler.append("return ");
-        if(!this.expression.transpile)
-            throw new Error(this.expression.toString());
         this.expression.transpile(transpiler);
     }
 }
 
-class $context {
+class $context implements ITranspilable {
+
+    declare(transpiler: Transpiler): void {
+        //
+    }
 
     transpile(transpiler: Transpiler): void {
         transpiler.append("var $context = context;").newLine();

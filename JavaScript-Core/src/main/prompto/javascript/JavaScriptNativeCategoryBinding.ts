@@ -11,13 +11,12 @@ if(global && !global.Event)
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     global.Event = () => {};
 
-export default class JavaScriptNativeCategoryBinding extends INativeCategoryBinding {
+export default class JavaScriptNativeCategoryBinding implements INativeCategoryBinding {
 
     identifier: string;
     module: JavaScriptModule | null;
 
     constructor(identifier: string, module: JavaScriptModule | null) {
-        super();
         this.identifier = identifier;
         this.module = module;
     }

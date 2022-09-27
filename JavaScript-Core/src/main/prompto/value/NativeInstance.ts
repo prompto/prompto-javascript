@@ -6,7 +6,9 @@ import { $DataStore } from '../store'
 import { NotMutableError } from '../error'
 import { convertFromJavaScript } from '../utils'
 
-export default class NativeInstance extends Instance {
+export default class NativeInstance extends Instance<any> {
+
+    instance: any;
 
     constructor(context, declaration, instance) {
         super(new CategoryType(declaration.id));

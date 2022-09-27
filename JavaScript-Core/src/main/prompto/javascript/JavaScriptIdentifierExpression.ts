@@ -1,10 +1,17 @@
-import JavaScriptExpression from './JavaScriptExpression.js'
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import JavaScriptExpression from './JavaScriptExpression'
 import { $DataStore } from '../store'
 import { PromptoError, SyntaxError } from '../error'
+import {Context, Transpiler} from "../runtime";
+import {Identifier} from "../grammar";
+import {CodeWriter} from "../utils";
+import {JavaScriptModule} from "./index";
 
 export default class JavaScriptIdentifierExpression extends JavaScriptExpression {
-   
-    constructor(id) {
+
+    id: Identifier;
+
+    constructor(id: Identifier) {
         super();
         this.id = id;
     }
@@ -28,7 +35,7 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
         return this.id.name;
     }
 
-    interpret(context, module) {
+    interpret(context: Context, module: JavaScriptModule): any | null {
         let o = this.interpret_prompto(context);
         if (o != null) {
             return o;
@@ -48,7 +55,7 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
         return null;
     }
 
-    interpret_prompto(context) {
+    interpret_prompto(context: Context): any | null {
         if ("$context" === this.id.name)
             return context;
         else if ("$store" === this.id.name)
@@ -57,7 +64,7 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
             return null;
     }
 
-    interpret_instance(context) {
+    interpret_instance(context: Context): any | null {
         if (context == null) {
             return null;
         } else if("null" === this.id.name) {
@@ -75,13 +82,13 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
         }
     }
 
-    interpret_module(module) {
+    interpret_module(module: JavaScriptModule): any | null {
         if (module == null) {
             return null;
         } else {
             try {
-                const m = module.resolve();
-                const o = m[this.id.name] || m["default"];
+                const m = module.resolve() as object;
+                const o = m[this.id.name as keyof typeof m] || m["default" as keyof typeof m];
                 if (o) {
                     return o;
                 } else {
@@ -93,8 +100,9 @@ export default class JavaScriptIdentifierExpression extends JavaScriptExpression
         }
     }
 
-    interpret_global() {
+    interpret_global(): any | null {
         try {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-return
             return eval(this.id.name);
         } catch (e) {
             return null;
