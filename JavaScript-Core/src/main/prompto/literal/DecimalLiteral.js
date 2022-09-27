@@ -8,7 +8,7 @@ export default class DecimalLiteral extends Literal {
         super(text, DecimalValue.Parse(text));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return DecimalType.instance;
     }
 

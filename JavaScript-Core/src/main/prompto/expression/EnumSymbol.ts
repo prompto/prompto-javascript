@@ -82,5 +82,30 @@ export default abstract class EnumSymbol<T extends IType> extends BaseExpression
         throw new Error('Method not implemented.');
     }
 
+    GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean | undefined): IValue {
+        throw new Error('Method not implemented.');
+    }
+    GetItemValue(context: Context, item: IValue, autoCreate?: boolean | undefined): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Multiply(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Divide(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    IntDivide(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Modulo(context: Context, other: IValue): IValue {
+        throw new Error('Method not implemented.');
+    }
+    Minus(context: Context): IValue {
+        throw new Error('Method not implemented.');
+    }
+    isIterable(): boolean {
+        throw new Error('Method not implemented.');
+    }
+
 
 }

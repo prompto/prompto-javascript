@@ -15,7 +15,7 @@ export default class NullValue extends BaseValue<any> {
         return "null";
     }
 
-    getStorableData(): any {
+   getStorableData(): any {
         return null; // <- YES!
     }
 

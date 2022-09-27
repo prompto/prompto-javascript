@@ -30,7 +30,7 @@ export default class SwitchStatement extends BaseSwitchStatement {
         return this.expression.check(context);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const switchValue = this.expression.interpret(context);
         return this.interpretSwitch(context, switchValue, null);
     }

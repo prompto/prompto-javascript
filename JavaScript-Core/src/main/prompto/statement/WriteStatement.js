@@ -31,7 +31,7 @@ export default class WriteStatement extends BaseStatement {
         return "write " + this.content.toString() + " to " + this.resource.toString();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         context = context instanceof ResourceContext ? context : context.newResourceContext();
         const resourceType = this.resource.check(context);
         if(!(resourceType instanceof ResourceType))
@@ -42,7 +42,7 @@ export default class WriteStatement extends BaseStatement {
             return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const resContext = context instanceof ResourceContext ? context : context.newResourceContext();
         const res = this.resource.interpret(resContext);
         if(res==null) {

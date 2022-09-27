@@ -2,6 +2,7 @@ import Section from '../parser/Section'
 import { AnnotationProcessors } from '../processor'
 import Identifier from "./Identifier";
 import { DocEntryList } from "../literal";
+import {IExpression} from "../expression";
 
 export default class Annotation extends Section {
 
@@ -18,8 +19,8 @@ export default class Annotation extends Section {
         return this.id.name;
     }
 
-    getDefaultArgument() {
-        if(this.entries != null && this.entries.items.length===1)
+    getDefaultArgument(): IExpression | null {
+        if(this.entries && this.entries.items.length===1)
             return this.entries.items[0].value;
         else
             return null;

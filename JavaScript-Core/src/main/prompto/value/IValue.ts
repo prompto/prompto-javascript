@@ -10,11 +10,26 @@ export default interface IValue {
     mutable: boolean;
     toDialect?: (writer: CodeWriter) => void;
 
+    // use uppercase methods for direct prompto equivalents
+    GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean): IValue;
+    GetItemValue(context: Context, item: IValue, autoCreate?: boolean): IValue;
     CompareTo(context: Context, other: IValue): number;
+    Add(context: Context, other: IValue): IValue;
+    Subtract(context: Context, other: IValue): IValue;
+    Multiply(context: Context, other: IValue): IValue;
     Divide(context: Context, other: IValue): IValue;
     IntDivide(context: Context, other: IValue): IValue;
+    Modulo(context: Context, other: IValue): IValue;
+    Minus(context: Context): IValue;
+    And(context: Context, other: IValue): IValue;
+    Or(context: Context, other: IValue): IValue;
+    Not(context: Context): IValue;
 
+    // use lowercase for internals
     equals(other: IValue): boolean;
+    isResource(): boolean;
+    isIterable(): boolean;
+    isSliceable(): boolean;
     getStorableData(): any;
     collectStorables(storables: Set<IStorable>): void;
     convertToJavaScript(): any;
@@ -22,11 +37,8 @@ export default interface IValue {
     toJsonStream(context: Context, values: JsonParent, instanceId: never | null, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
     toJsonNode(): JsonNode;
 
-    getMemberValue(context: Context, id: Identifier): IValue | null;
 
-    getItemInContext(context: Context, item: IValue): IValue;
 
-    isIterable(): boolean;
 }
 
 

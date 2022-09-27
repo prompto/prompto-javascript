@@ -1,14 +1,20 @@
-import SelectorExpression from '../../../main/prompto/expression/SelectorExpression.ts'
+import SelectorBase from '../../../main/prompto/expression/SelectorBase'
 import { UnresolvedIdentifier, ParenthesisExpression } from '../expression'
 import { Dialect } from '../parser'
 import { UnresolvedCall } from '../statement'
-import { MethodType, VoidType, NullType } from '../type'
-import { Instance, NullValue, ClosureValue } from '../value'
+import {MethodType, VoidType, NullType, IType} from '../type'
+import {Instance, NullValue, ClosureValue, IValue} from '../value'
 import { NullReferenceError } from '../error'
+import IExpression from "./IExpression";
+import {Identifier} from "../grammar";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
 
-export default class MemberSelector extends SelectorExpression {
+export default class MemberSelector extends SelectorBase {
 
-    constructor(parent, id) {
+    id: Identifier;
+
+    constructor(parent: IExpression | null, id: Identifier) {
         super(parent);
         this.id = id;
     }
@@ -33,11 +39,11 @@ export default class MemberSelector extends SelectorExpression {
         } catch (e) {
             // gracefully skip exceptions
         }
-       this.parentAndMembertoDialect(writer: CodeWriter): void;
+       this.parentAndMembertoDialect(writer);
     }
 
-    toOMDialect(writer) {
-        this.parentAndMembertoDialect(writer: CodeWriter): void;
+    toOMDialect(writer: CodeWriter) {
+        this.parentAndMembertoDialect(writer);
     }
 
     parentAndMembertoDialect(writer: CodeWriter): void {
@@ -55,27 +61,27 @@ export default class MemberSelector extends SelectorExpression {
         writer.append(this.name);
     }
 
-    parenttoEDialect(writer: CodeWriter): void {
+    parentToEDialect(writer: CodeWriter): void {
         if(this.parent instanceof UnresolvedCall) {
             writer.append('(');
-            this.parent.toDialect(writer);
+            this.parent?.toDialect(writer);
             writer.append(')');
         } else
-            this.parent.parenttoDialect(writer: CodeWriter): void;
+            this.parent!.parentToDialect(writer);
     }
 
-    parentToOMDialect(writer) {
+    parentToOMDialect(writer: CodeWriter): void {
         if(this.parent instanceof ParenthesisExpression && this.parent.expression instanceof UnresolvedCall)
             this.parent.expression.toDialect(writer);
         else
-            this.parent.parenttoDialect(writer: CodeWriter): void;
+            this.parent!.parentToDialect(writer);
     }
 
     declare(transpiler: Transpiler): void {
         const parent = this.resolveParent(transpiler.context);
-        parent.declareParent(transpiler);
+        parent?.declareParent(transpiler);
         const parentType = this.checkParent(transpiler.context);
-        return parentType.declareMember(transpiler, this, this.id);
+        return parentType.declareMember(transpiler, this.id);
     }
 
     transpile(transpiler: Transpiler): void {
@@ -84,22 +90,20 @@ export default class MemberSelector extends SelectorExpression {
         transpiler.append(".");
         const parentType = this.checkParent(transpiler.context);
         parentType.transpileMember(transpiler, this.id);
-        return false;
     }
 
-    transpileReference(transpiler, method) {
+    transpileReference(transpiler: Transpiler, method: MethodType): void {
         const parent = this.resolveParent(transpiler.context);
         parent.transpileParent(transpiler);
         transpiler.append(".");
-        transpiler.append(method.method.getTranspiledName(transpiler.context, this.name));
-        return false;
+        transpiler.append(method.method.getTranspiledName(transpiler.context));
     }
 
     toString() {
-        return this.parent.toString() + "." + this.name;
+        return this.parent!.toString() + "." + this.name;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const parentType = this.checkParent(context);
         if(parentType && parentType !== NullType.instance)
             return parentType.checkMember(context, this.id, this.id);
@@ -107,36 +111,36 @@ export default class MemberSelector extends SelectorExpression {
             return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);
         if (instance == null || instance === NullValue.instance)
             throw new NullReferenceError();
         else
-            return instance.getMemberValue(context, this.id, false);
+            return instance.GetMemberValue(context, this.id, false);
     }
 
-    resolveParent(context) {
+    resolveParent(context: Context): IExpression {
         if(this.parent instanceof UnresolvedIdentifier) {
             this.parent.checkMember(context);
-            return this.parent.resolved;
+            return this.parent.resolved!;
         } else
-            return this.parent;
+            return this.parent!;
     }
 
-    interpretReference(context) {
+    interpretReference(context: Context): IValue {
         // resolve parent to keep clarity
         const parent = this.resolveParent(context);
         const instance = parent.interpret(context);
-        if (instance == null || instance === NullValue.instance)
+        if (!instance || instance === NullValue.instance)
             throw new NullReferenceError();
-        else if (instance instanceof Instance) {
+        else if (instance instanceof Instance<never>) {
             const category = instance.declaration;
             const methods = category.getMemberMethodsMap(context, this.id);
             const method = methods.getFirst();
             // TODO check prototype
-            return new ClosureValue(context.newInstanceContext(instance, null, true), new MethodType(method));
+            return new ClosureValue(context.newInstanceContext(instance, null, true), new MethodType(method!));
         } else
             throw new SyntaxError("Should never get here!");
     }

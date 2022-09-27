@@ -1,4 +1,4 @@
-import ReadAllExpression from '../expression/ReadAllExpression.js'
+import ReadAllExpression from '../expression/ReadAllExpression.ts'
 import { TextType } from '../type'
 import {StatementList} from "../statement";
 
@@ -26,12 +26,12 @@ export default class ReadStatement extends ReadAllExpression {
         return false;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         super.check(context);
         return this.thenWith.check(context, TextType.instance);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const result = super.interpret(context);
         return this.thenWith.interpret(context, result);
     }

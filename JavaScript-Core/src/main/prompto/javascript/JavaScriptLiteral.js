@@ -5,7 +5,7 @@ export default class JavaScriptLiteral {
         this.value = eval(text);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.value;
     }
 

@@ -39,7 +39,7 @@ export default class SetType extends ContainerType {
         return this.itemType.equals(obj.itemType);
     }
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): Type {
         if((other instanceof SetType || other instanceof ListType) && this.itemType.isAssignableFrom(context, other.itemType)) {
             return this;
         } else {

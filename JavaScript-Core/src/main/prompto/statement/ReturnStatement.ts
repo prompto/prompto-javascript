@@ -57,7 +57,7 @@ export default class ReturnStatement extends SimpleStatement {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.expression==null)
             return VoidType.instance;
         const type = this.expression.check(context);
@@ -66,7 +66,7 @@ export default class ReturnStatement extends SimpleStatement {
         return type;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(this.expression==null)
             return VoidResult.instance;
         else

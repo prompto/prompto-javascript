@@ -7,7 +7,7 @@ export default class JavaScriptIntegerLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return IntegerType.instance;
     }
 

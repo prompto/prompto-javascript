@@ -1,4 +1,4 @@
-import SelectorExpression from './SelectorExpression'
+import SelectorBase from './SelectorBase'
 import { IValue, NullValue } from '../value'
 import { NullReferenceError } from '../error'
 import {IExpression} from "./index";
@@ -6,7 +6,7 @@ import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {IType} from "../type";
 
-export default class ItemSelector extends SelectorExpression {
+export default class ItemSelector extends SelectorBase {
 
     item: IExpression;
 
@@ -45,7 +45,7 @@ export default class ItemSelector extends SelectorExpression {
         if (item == null || item == NullValue.instance) {
             throw new NullReferenceError();
         }
-        return o.getItemInContext(context, item);
+        return o.GetItemValue(context, item);
     }
 
     declare(transpiler: Transpiler): void {

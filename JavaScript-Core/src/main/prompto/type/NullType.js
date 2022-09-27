@@ -15,7 +15,7 @@ export default class NullType extends BaseType {
         // ok
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return true;
     }
 

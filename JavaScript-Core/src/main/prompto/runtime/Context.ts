@@ -130,7 +130,7 @@ export class Context {
         return context;
     }
 
-    newInstanceContext(instance: Instance<never>, type: IType | null, isChild = false): InstanceContext {
+    newInstanceContext(instance: Instance<any> | null, type: IType | null, isChild = false): InstanceContext {
         const context = new InstanceContext(this.globals, instance, type);
         context.calling = isChild ? this.calling : this;
         context.parent = isChild ? this : null;
@@ -582,14 +582,14 @@ export class ResourceContext extends Context {
 
 export class InstanceContext extends Context {
 
-    instance: Instance<never>;
+    instance: Instance<any> | null;
     instanceType: CategoryType;
     widgetFields: Map<string, WidgetField> | null;
 
-    constructor(globals: Context, instance: Instance<never>, type: CategoryType | null) {
+    constructor(globals: Context, instance: Instance<any> | null, type: CategoryType | null) {
         super(globals);
         this.instance = instance || null;
-        this.instanceType = type || instance.type as unknown as CategoryType;
+        this.instanceType = type || instance!.type as unknown as CategoryType;
         this.widgetFields = null;
     }
 

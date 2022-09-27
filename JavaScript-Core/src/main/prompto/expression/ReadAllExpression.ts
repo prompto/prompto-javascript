@@ -1,11 +1,18 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
-import { ResourceType, TextType } from '../type'
+import BaseExpression from './BaseExpression'
+import {IType, ResourceType, TextType} from '../type'
 import { NullReferenceError, InvalidResourceError } from '../error'
-import { TextValue } from '../value'
+import {IValue, TextValue} from '../value'
+import {IExpression} from "./index";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
+import IResource from "../value/IResource";
+import {Section} from "../parser";
 
 export default class ReadAllExpression extends BaseExpression {
 
-    constructor(resource) {
+    resource: IExpression;
+
+    constructor(resource: IExpression) {
         super();
         this.resource = resource;
     }
@@ -19,21 +26,25 @@ export default class ReadAllExpression extends BaseExpression {
         this.resource.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         context = context.newResourceContext();
         const sourceType = this.resource.check(context);
         if(!(sourceType instanceof ResourceType))
-            context.problemListener.reportNotAResource(this.resource);
+            context.problemListener.reportNotAResource(this.asSection());
         return TextType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         context = context.newResourceContext();
-        const res = this.resource.interpret(context);
-        if(res==null) {
+        const value = this.resource.interpret(context);
+        if(!value) {
             throw new NullReferenceError();
         }
-        if(!res.isReadable || !res.isReadable()) {
+        if(!value.isResource()) {
+            throw new InvalidResourceError("Not a resource");
+        }
+        const res = value as unknown as IResource;
+        if(!res.isReadable()) {
             throw new InvalidResourceError("Not readable");
         }
         try {
@@ -51,5 +62,9 @@ export default class ReadAllExpression extends BaseExpression {
     transpile(transpiler: Transpiler): void {
         this.resource.transpile(transpiler);
         transpiler.append(".readFully()");
+    }
+
+    private asSection(): Section {
+        return this.resource instanceof Section ? this.resource : this;
     }
 }

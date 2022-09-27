@@ -12,7 +12,7 @@ export default class AssignTupleStatement extends SimpleStatement {
         this.expression = expression;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const type = this.expression.check(context);
         if(type!=TupleType.instance) {
             throw new SyntaxError("Expecting a tuple expression, got " + type.getName());
@@ -52,7 +52,7 @@ export default class AssignTupleStatement extends SimpleStatement {
         this.expression.transpile(transpiler);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const object = this.expression.interpret(context);
         if(!(object instanceof TupleValue)) {
             throw new SyntaxError("Expecting a tuple expression, got " + typeof(object));

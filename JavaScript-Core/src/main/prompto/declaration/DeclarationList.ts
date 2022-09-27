@@ -63,7 +63,7 @@ export default class DeclarationList extends ObjectList<IDeclaration<IDeclaratio
         });
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.forEach(decl => {
             if(decl instanceof BaseMethodDeclaration)
                 decl.check(context, true);

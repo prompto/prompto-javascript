@@ -32,7 +32,7 @@ export default class DictLiteral extends Literal {
         transpiler.append(")");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.itemType==null)
             this.itemType = this.inferElementType(context);
         return new DictionaryType(this.itemType);
@@ -49,7 +49,7 @@ export default class DictLiteral extends Literal {
         return types.inferType(context, this);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(this.entries.items.length>0) {
             this.check(context); /// force computation of itemType
             const dict = new Dictionary();

@@ -1,22 +1,29 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
-import { UnresolvedIdentifier, ArrowExpression, InstanceExpression } from './index.ts'
-import { CategoryType, DocumentType, ListType, SetType } from '../type'
-import { ListValue, SetValue } from '../value'
+import BaseExpression from './BaseExpression'
+import {UnresolvedIdentifier, ArrowExpression, InstanceExpression, IExpression} from './index'
+import {CategoryType, ContainerType, DocumentType, IterableType, IType, ListType, SetType, VoidType} from '../type'
+import {Container, IValue, ListValue, NullValue} from '../value'
 import { List } from '../intrinsic'
-import { SyntaxError, NullReferenceError, InternalError } from '../error'
+import { NullReferenceError, InternalError } from '../error'
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {Section} from "../parser";
 
 export default class SortedExpression extends BaseExpression {
- 
-    constructor(source, desc, key) {
+
+    source: IExpression;
+    descending: boolean;
+    key?: IExpression;
+
+    constructor(source: IExpression, descending: boolean, key?: IExpression) {
         super();
         this.source = source;
-        this.desc = desc;
-        this.key = key || null;
+        this.descending = descending;
+        this.key = key;
     }
 
     toString() {
-        return "sorted " + (this.desc ? "descending " : "") + this.source.toString() +
-            (this.key == null ? "" : " with " + this.key.toString() + " as key");
+        return "sorted " + (this.descending ? "descending " : "") + this.source.toString() +
+            (this.key ? " with " + this.key.toString() + " as key" : "");
     }
 
     toDialect(writer: CodeWriter): void {
@@ -25,17 +32,16 @@ export default class SortedExpression extends BaseExpression {
 
     toEDialect(writer: CodeWriter): void {
         writer.append("sorted ");
-        if (this.desc)
+        if (this.descending)
             writer.append("descending ");
         this.source.toDialect(writer);
         if (this.key != null) {
-            const type = this.source.check(writer.context);
-            const itemType = type.itemType;
+            const itemType = this.getItemType(writer.context);
             writer = this.contextualizeWriter(writer, itemType);
             writer.append(" with ");
             let keyExp = this.key;
             if (keyExp instanceof UnresolvedIdentifier) try {
-                keyExp = keyExp.resolve(writer.context, false);
+                keyExp = keyExp.resolve(writer.context, false, false)!;
             } catch (e) {
                 // TODO add warning
             }
@@ -50,15 +56,20 @@ export default class SortedExpression extends BaseExpression {
         }
     }
 
+    getItemType(context: Context): IType {
+        const type = this.source.check(context);
+        return type instanceof ContainerType ? type.itemType : VoidType.instance;
+    }
+
     toODialect(writer: CodeWriter): void {
         writer.append("sorted ");
-        if (this.desc)
+        if (this.descending)
             writer.append("desc ");
         writer.append("(");
         this.source.toDialect(writer);
         if (this.key != null) {
             const type = this.source.check(writer.context);
-            const itemType = type.itemType;
+            const itemType = (type as IterableType).itemType;
             writer = this.contextualizeWriter(writer, itemType);
             writer.append(", key = ");
             this.key.toDialect(writer);
@@ -70,7 +81,7 @@ export default class SortedExpression extends BaseExpression {
         this.toODialect(writer);
     }
 
-    contextualizeWriter(writer, itemType) {
+    contextualizeWriter(writer: CodeWriter, itemType: IType): CodeWriter {
         if (itemType instanceof CategoryType)
             return writer.newInstanceWriter(itemType);
         else if (itemType instanceof DocumentType)
@@ -79,48 +90,47 @@ export default class SortedExpression extends BaseExpression {
             return writer;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const type = this.source.check(context);
         if (!(type instanceof ListType || type instanceof SetType)) {
-            context.problemListener.reportCannotSort(this.source);
+            context.problemListener.reportCannotSort(this.asSection(), this.source);
         }
         return type;
     }
 
-    interpret(context: Context): Value {
-        const type = this.source.check(context);
-        if (!(type instanceof ListType || type instanceof SetType)) {
-            throw new SyntaxError("Unsupported type: " + type);
-        }
-        const coll = this.source.interpret(context);
-        if (coll == null) {
+    interpret(context: Context): IValue {
+        const itemType = this.getItemType(context);
+        const value = this.source.interpret(context);
+        if (!value || value==NullValue.instance) {
             throw new NullReferenceError();
         }
-        if (!(coll instanceof ListValue || coll instanceof SetValue)) {
-            throw new InternalError("Unexpected type:" + typeof (coll));
+        if (!(value instanceof Container)) {
+            throw new InternalError("Unexpected type:" + typeof (value));
         }
-        let items = coll instanceof ListValue ? coll.items : coll.items.set.values();
-        items = Array.from(items);
-        const itemType = type.itemType;
+        const items = value.items;
         if (items.length > 1) {
-            const cmp = itemType.getSortedComparator(context, this.key, this.desc);
+            const cmp = itemType.getSortedComparator(context, this.descending, this.key);
             items.sort(cmp);
         }
-        return new ListValue(itemType, items);
+        return new ListValue(itemType, false, items);
     }
 
     declare(transpiler: Transpiler): void {
         transpiler.require(List);
         this.source.declare(transpiler);
-        const type = this.source.check(transpiler.context);
-        type.itemType.declareSorted(transpiler, this.key);
+        const itemType = this.getItemType(transpiler.context);
+        itemType.declareSorted(transpiler, this.key);
     }
 
     transpile(transpiler: Transpiler): void {
-        const type = this.source.check(transpiler.context);
         this.source.transpile(transpiler);
         transpiler.append(".sorted(");
-        type.itemType.transpileSortedComparator(transpiler, this.key, this.desc);
+        const itemType = this.getItemType(transpiler.context);
+        itemType.transpileSortedComparator(transpiler, this.key, this.descending);
         transpiler.append(")");
+    }
+
+    private asSection(): Section {
+        return this.source instanceof Section ? this.source : this;
     }
 }

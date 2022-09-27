@@ -15,7 +15,7 @@ export default class TextType extends NativeType {
         this.family = TypeFamily.TEXT;
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other)
             || (other == CharacterType.instance);
     }

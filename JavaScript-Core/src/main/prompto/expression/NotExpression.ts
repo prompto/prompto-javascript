@@ -1,12 +1,18 @@
-import BaseExpression from './BaseExpression.ts'
+import BaseExpression from './BaseExpression'
 import { Dialect } from '../parser'
-import { BooleanType } from '../type'
-import { BooleanValue } from '../value'
+import {BooleanType, IType} from '../type'
+import {BooleanValue, IValue} from '../value'
 import { CodeWriter } from '../utils'
+import {IAssertion, IExpression, IPredicate} from "./index";
+import {Context, Transpiler} from "../runtime";
+import {TestMethodDeclaration} from "../declaration";
+import {IQueryBuilder} from "../store";
 
-export default class NotExpression extends BaseExpression {
- 
-    constructor(expression) {
+export default class NotExpression extends BaseExpression implements IPredicate, IAssertion {
+
+    expression: IExpression;
+
+    constructor(expression: IExpression) {
         super();
         this.expression = expression;
     }
@@ -15,7 +21,7 @@ export default class NotExpression extends BaseExpression {
         return "not " + this.expression.toString();
     }
 
-    operatorToDialect(dialect) {
+    operatorToDialect(dialect: Dialect) {
         return dialect==Dialect.O ? "! ": "not ";
     }
 
@@ -36,7 +42,7 @@ export default class NotExpression extends BaseExpression {
         writer.append("!");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const type = this.expression.check(context);
         if (type)
             return type.checkNot(context);
@@ -44,14 +50,6 @@ export default class NotExpression extends BaseExpression {
             context.problemListener.reportError(this, "Could not check expression to negate");
             return BooleanType.instance; // don't propagate error
         }
-    }
-
-    checkQuery(context) {
-        if (!this.expression["checkQuery"]) {
-            context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.expression.toString());
-            return;
-        }
-        this.expression.checkQuery(context);
     }
 
     declare(transpiler: Transpiler): void {
@@ -64,46 +62,60 @@ export default class NotExpression extends BaseExpression {
         transpiler.append(")");
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const val = this.expression.interpret(context);
-        return val.Not();
+        return val.Not(context);
     }
 
-    interpretAssert(context: Context, test: TextMethodDeclaration): boolean {
+    interpretAssert(context: Context, test: TestMethodDeclaration): boolean {
         const result = this.interpret(context);
         if(result==BooleanValue.TRUE)
             return true;
-        const expected = this.getExpected(context, test.dialect);
+        const expected = this.getExpected(context, test.dialect, 0);
         const actual = this.operatorToDialect(test.dialect) + result.toString();
         test.printFailedAssertion(context, expected, actual);
         return false;
     }
 
-    interpretQuery(context, query) {
-        if (!this.expression["interpretQuery"])
+    checkQuery(context: Context) {
+        if(this.expression.isPredicate())
+            (this.expression as IPredicate).checkQuery(context);
+        else
             context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.expression.toString());
-        this.expression.interpretQuery(context, query);
+    }
+
+    interpretQuery(context: Context, query: IQueryBuilder) {
+        if(this.expression.isPredicate())
+            (this.expression as IPredicate).interpretQuery(context, query);
+        else
+            context.problemListener.reportIllegalOperation(this, "Not a predicate: " + this.expression.toString());
         query.not();
     }
 
-    declareQuery(transpiler) {
-        this.expression.declareQuery(transpiler);
+    declareQuery(transpiler: Transpiler) {
+        if(this.expression.isPredicate())
+            (this.expression as IPredicate).declareQuery(transpiler);
     }
 
-    transpileQuery(transpiler, builderName) {
-        this.expression.transpileQuery(transpiler, builderName);
+    transpileQuery(transpiler: Transpiler, builderName: string) {
+        if(this.expression.isPredicate())
+            (this.expression as IPredicate).transpileQuery(transpiler, builderName);
         transpiler.append(builderName).append(".not();").newLine();
     }
 
-    getExpected(context, dialect, escapeMode) {
+    getExpected(context: Context, dialect: Dialect, escapeMode: number) {
         const writer = new CodeWriter(dialect, context);
         writer.escapeMode = escapeMode;
         this.toDialect(writer);
         return writer.toString();
     }
 
-    transpileFound(transpiler, dialect) {
+    transpileFound(transpiler: Transpiler, dialect: Dialect) {
         this.transpile(transpiler);
+    }
+
+    checkAssert(context: Context): Context {
+        return context;
     }
 }
 

@@ -4,11 +4,11 @@ import { VoidType } from '../type'
 
 export default class FlushStatement extends SimpleStatement {
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         $DataStore.instance.flush();
     }
 

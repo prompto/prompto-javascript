@@ -7,7 +7,7 @@ export default class JavaScriptBooleanLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return BooleanType.instance;
     }
 }

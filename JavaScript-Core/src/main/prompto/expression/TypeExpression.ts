@@ -1,6 +1,9 @@
 import BaseExpression from './BaseExpression'
 import {IType, TypeType} from '../type'
-import { TypeValue } from '../value'
+import {IValue, TypeValue} from '../value'
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {Identifier} from "../grammar";
 
 export default class TypeExpression extends BaseExpression {
 
@@ -24,7 +27,7 @@ export default class TypeExpression extends BaseExpression {
         return new TypeType(this.value);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return new TypeValue(this.value);
     }
 
@@ -36,7 +39,7 @@ export default class TypeExpression extends BaseExpression {
         this.value.transpile(transpiler);
     }
 
-    getMemberValue(context, name) {
-        return this.value.getStaticMemberValue(context, name);
+    getMemberValue(context: Context, member: Identifier) {
+        return this.value.getStaticMemberValue(context, member);
     }
 }

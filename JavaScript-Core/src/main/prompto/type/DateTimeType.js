@@ -19,7 +19,7 @@ export default class DateTimeType extends NativeType {
             return super.convertJavaScriptValueToPromptoValue(context, value, returnType);
     }
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         if (other === PeriodType.instance) {
             return this;
         } else {
@@ -35,7 +35,7 @@ export default class DateTimeType extends NativeType {
         transpiler.append('DateTime');
     }
 
-    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -43,7 +43,7 @@ export default class DateTimeType extends NativeType {
             return super.declareAdd(transpiler, other, tryReverse, left, right);
     }
 
-    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    transpileAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".addPeriod(");
@@ -53,7 +53,7 @@ export default class DateTimeType extends NativeType {
             return super.transpileAdd(transpiler, other, tryReverse, left, right);
     }
 
-    checkSubtract(context: Context, other: Type): Type {
+    checkSubtract(context: Context, other: IType): Type {
         if (other === PeriodType.instance) {
             return this;
         } else if (other === DateTimeType.instance) {

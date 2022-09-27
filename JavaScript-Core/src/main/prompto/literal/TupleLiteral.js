@@ -15,7 +15,7 @@ export default class TupleLiteral extends Literal {
         this.expressions = expressions;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TupleType.instance;
     }
 
@@ -31,7 +31,7 @@ export default class TupleLiteral extends Literal {
         transpiler.append("])");
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(this.expressions.length>0) {
             const tuple = new TupleValue();
             this.expressions.forEach(expression => {

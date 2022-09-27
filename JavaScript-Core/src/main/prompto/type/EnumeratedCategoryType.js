@@ -19,7 +19,7 @@ export default class EnumeratedCategoryType extends CategoryType {
         // TODO
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         if ("name" === id.name) {
             return TextType.instance;
         } else {

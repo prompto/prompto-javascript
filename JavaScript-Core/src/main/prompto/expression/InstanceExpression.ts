@@ -2,7 +2,6 @@ import BaseExpression from './BaseExpression'
 import {EqualsExpression, IPredicate} from './index'
 import {MethodDeclarationMap, InstanceContext, Variable, LinkedVariable, Transpiler, Context} from '../runtime'
 import { Dialect } from '../parser'
-import { IParameter } from '../param'
 import {AttributeDeclaration, CategoryDeclaration, ConcreteMethodDeclaration, IDeclaration} from '../declaration'
 import {MethodType, BooleanType, VoidType, NullType, IType} from '../type'
 import {ClosureValue, IValue} from '../value'
@@ -112,7 +111,7 @@ export default class InstanceExpression extends BaseExpression {
         } else if(named instanceof MethodDeclarationMap) { // global method or closure
             return new MethodType(named.getFirst()!);
         } else if (named) {
-            context.problemListener.reportIllegalAssignment(this.id, this.id, this.name);
+            context.problemListener.reportIllegalAssignment(this, named.getType(context), named.getType(context));
             return VoidType.instance;
         } else
             return NullType.instance;

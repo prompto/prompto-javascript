@@ -9,7 +9,6 @@ import { NotStorableError, NotMutableError } from '../error'
 import { $Root } from "../../../main/prompto/intrinsic/$Root.js";
 import IValue from "../../../main/prompto/value/IValue";
 import {JsonNode} from "../json";
-import {jsonStringifyReplacerSortKeys} from "eslint-webpack-plugin/types/utils";
 
 export default class ConcreteInstance extends Instance<Map<string, IValue>> {
 
@@ -226,7 +225,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         return "{" + props.join(", ") + "}";
     }
 
-    Multiply(context, value) {
+    Multiply(context, value): IValue {
         try {
             return this.interpretOperator(context, value, Operator.MULTIPLY);
         } catch(e) {
@@ -234,7 +233,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Divide(context, value) {
+    Divide(context, value): IValue {
         try {
             return this.interpretOperator(context, value, Operator.DIVIDE);
         } catch(e) {
@@ -242,7 +241,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    IntDivide(context, value) {
+    IntDivide(context, value): IValue {
         try {
             return this.interpretOperator(context, value, Operator.IDIVIDE);
         } catch(e) {
@@ -250,7 +249,7 @@ export default class ConcreteInstance extends Instance<Map<string, IValue>> {
         }
     }
 
-    Modulo(context, value) {
+    Modulo(context, value): IValue {
         try {
             return this.interpretOperator(context, value, Operator.MODULO);
         } catch(e) {

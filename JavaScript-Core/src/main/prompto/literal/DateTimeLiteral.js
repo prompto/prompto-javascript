@@ -10,7 +10,7 @@ export default class DateTimeLiteral extends Literal {
         super(text, new DateTimeValue(dt));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return DateTimeType.instance;
     }
 

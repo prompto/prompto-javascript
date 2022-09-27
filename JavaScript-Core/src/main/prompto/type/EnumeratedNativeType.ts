@@ -53,12 +53,12 @@ export default class EnumeratedNativeType extends BaseType {
         transpiler.append(this.name);
     }
 
-    declareMember(transpiler, section, id) {
+    declareMember(transpiler: Transpiler, id: Identifier) {
         if("value" === id.name || "name" === id.name) {
             const decl = transpiler.context.getRegisteredDeclaration(this.id);
             transpiler.declare(decl);
         } else
-            super.declareMember(transpiler, section, id.name);
+            super.declareMember(transpiler, id.name);
     }
 
     transpileMember(transpiler: Transpiler, id: Identifier): void {

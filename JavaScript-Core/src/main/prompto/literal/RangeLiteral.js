@@ -19,13 +19,13 @@ export default class RangeLiteral {
         writer.append("]");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const firstType = this.first.check(context);
         const lastType = this.last.check(context);
         return firstType.checkRange(context,lastType);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let type = this.first.check(context);
         if("IntegerLimits"==type.name) {
             type = IntegerType.instance;

@@ -42,7 +42,7 @@ export default class DoWhileStatement extends BaseStatement {
         transpiler.append(")");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const cond = this.condition.check(context);
         if (cond != BooleanType.instance) {
             context.problemListener.reportError(this, "Expected a Boolean condition!");
@@ -51,7 +51,7 @@ export default class DoWhileStatement extends BaseStatement {
         return this.statements.check(child, null);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         do {
             const child = context.newChildContext();
             const value = this.statements.interpret(child);

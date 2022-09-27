@@ -92,7 +92,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
             return this.add.equals(other.add);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.checkDeletables(context);
         this.checkStorables(context);
         this.checkFuture(context);
@@ -130,7 +130,7 @@ export default class DeleteAndStoreStatement extends BaseStatement {
         }
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const idsToDelete = this.getIdsToDelete(context);
         const storablesToAdd = this.getStorablesToAdd(context);
         let auditMeta = null;

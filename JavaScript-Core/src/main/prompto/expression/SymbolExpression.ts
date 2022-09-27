@@ -2,8 +2,9 @@ import BaseExpression from './BaseExpression'
 import {IType, VoidType} from "../type";
 import {NullValue, IValue} from "../value";
 import {Identifier} from "../grammar";
-import {Context} from "../runtime";
+import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
+import EnumSymbol from "./EnumSymbol";
 
 export default class SymbolExpression extends BaseExpression {
 
@@ -23,31 +24,36 @@ export default class SymbolExpression extends BaseExpression {
     }
 
     check(context: Context): IType {
-        const symbol = context.getRegisteredValue(this.id);
-        if(symbol==null) {
+        const symbol = context.getRegisteredInstance(this.id);
+        if(symbol instanceof EnumSymbol)
+            return symbol.check(context);
+        else {
             context.problemListener.reportUnknownIdentifier(this, this.name);
             return VoidType.instance;
-        } else
-            return symbol.check(context);
+        }
     }
 
     interpret(context: Context): IValue {
-        const symbol = context.getRegisteredValue(this.id);
-        if(symbol==null) {
+        const symbol = context.getRegisteredInstance(this.id);
+        if(symbol instanceof EnumSymbol)
+            return symbol.interpret(context);
+        else {
             context.problemListener.reportUnknownIdentifier(this, this.name);
             return NullValue.instance;
-        } else
-            return symbol.interpret(context);
+        }
+
     }
 
     declare(transpiler: Transpiler): void {
-        const symbol = transpiler.context.getRegisteredValue(this.id);
-        symbol.declare(transpiler);
+        const symbol = transpiler.context.getRegisteredInstance(this.id);
+        if(symbol instanceof EnumSymbol)
+            symbol.declare(transpiler);
     }
 
     transpile(transpiler: Transpiler): void {
-        const symbol = transpiler.context.getRegisteredValue(this.id);
-        symbol.transpile(transpiler);
+        const symbol = transpiler.context.getRegisteredInstance(this.id);
+        if(symbol instanceof EnumSymbol)
+            symbol.transpile(transpiler);
     }
 }
 

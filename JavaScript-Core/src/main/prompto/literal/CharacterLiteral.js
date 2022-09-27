@@ -13,7 +13,7 @@ export default class CharacterLiteral extends Literal {
         super(text, new CharacterValue(unescape(text)));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return CharacterType.instance;
     }
 

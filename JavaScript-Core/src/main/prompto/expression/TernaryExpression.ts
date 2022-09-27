@@ -1,12 +1,18 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
-import { Dialect } from '../parser'
-import { BooleanType, TypeMap } from '../type'
-import { BooleanValue } from '../value'
-import { EqualsExpression } from "./index.ts";
+import BaseExpression from './BaseExpression'
+import {Dialect, Section} from '../parser'
+import {BooleanType, IType, TypeMap} from '../type'
+import {BooleanValue, IValue} from '../value'
+import {EqualsExpression, IExpression} from "./index";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
 
 export default class TernaryExpression extends BaseExpression {
 
-    constructor(condition, ifTrue, ifFalse) {
+    condition: IExpression;
+    ifTrue: IExpression;
+    ifFalse: IExpression;
+
+    constructor(condition: IExpression, ifTrue: IExpression, ifFalse: IExpression) {
         super();
         this.condition = condition;
         this.ifTrue = ifTrue;
@@ -29,10 +35,10 @@ export default class TernaryExpression extends BaseExpression {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const type = this.condition.check(context);
         if(!(type instanceof BooleanType))
-            context.problemListener.reportIllegalAssignment(this.condition, BooleanType.instance, type);
+            context.problemListener.reportIllegalAssignment(this.asSection(), BooleanType.instance, type);
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downcast(context, false);
         const types = new TypeMap();
@@ -41,7 +47,7 @@ export default class TernaryExpression extends BaseExpression {
         return types.inferType(context, this);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const test = this.condition.interpret(context);
         if(this.condition instanceof EqualsExpression)
             context = this.condition.downcast(context, true);
@@ -54,7 +60,7 @@ export default class TernaryExpression extends BaseExpression {
     declare(transpiler: Transpiler): void {
         this.condition.declare(transpiler);
         if(this.condition instanceof EqualsExpression) {
-            var context = this.condition.downcast(transpiler.context, false);
+            const context = this.condition.downcast(transpiler.context, false);
             transpiler = transpiler.newChildTranspiler(context);
         }
         this.ifTrue.declare(transpiler);
@@ -65,7 +71,7 @@ export default class TernaryExpression extends BaseExpression {
         transpiler.append("(");
         this.condition.transpile(transpiler);
         if(this.condition instanceof EqualsExpression) {
-            var context = this.condition.downcast(transpiler.context, false);
+            const context = this.condition.downcast(transpiler.context, false);
             transpiler = transpiler.newChildTranspiler(context);
         }
         transpiler.append(" ? ");
@@ -74,5 +80,9 @@ export default class TernaryExpression extends BaseExpression {
         this.ifFalse.transpile(transpiler);
         transpiler.append(")");
         transpiler.flush();
+    }
+
+    private asSection(): Section {
+        return this.condition instanceof Section ? this.condition : this;
     }
 }

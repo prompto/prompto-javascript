@@ -47,7 +47,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         return this.name === obj.name && this.expression === obj.expression;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const actual = context.getRegisteredValue(this.name);
         if(actual==null) {
             const actualType = this.expression.check(context);
@@ -61,7 +61,7 @@ export default class AssignVariableStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(context.getRegisteredValue(this.name)==null) {
             const actualType = this.expression.check(context);
             context.registerValue(new Variable(this.id, actualType));

@@ -33,7 +33,7 @@ export default class AttributeParameter extends BaseParameter {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const actual = context.getRegisteredDeclaration(this.id);
         if(actual==null)
             context.problemListener.reportUnknownAttribute(this, this.name);

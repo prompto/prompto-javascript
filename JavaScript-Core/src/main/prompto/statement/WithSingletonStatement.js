@@ -16,13 +16,13 @@ export default class WithSingletonStatement extends BaseStatement {
             return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const instanceContext = context.newInstanceContext(null, this.type, true);
         const childContext = instanceContext.newChildContext();
         return this.statements.check(childContext, null);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         // TODO synchronize
         const instance = context.loadSingleton(this.type);
         const instanceContext = context.newInstanceContext(instance, null, true);

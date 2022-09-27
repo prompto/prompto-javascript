@@ -21,7 +21,7 @@ export default class MemberInstance {
         writer.append(this.name);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const root = this.parent.interpret(context);
         return root.getMemberValue(context, this.id, true);
     }
@@ -47,7 +47,7 @@ export default class MemberInstance {
         root.setMember(context, this.id, value);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const parentType = this.parent.check(context);
         return parentType.checkMember(context, this.id, this.name);
     }

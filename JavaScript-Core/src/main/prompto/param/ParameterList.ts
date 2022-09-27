@@ -16,7 +16,7 @@ export default class ParameterList extends ObjectList<IParameter> {
         });
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.forEach(param => {
             param.check(context);
         });

@@ -19,7 +19,7 @@ export default class AssignInstanceStatement extends SimpleStatement {
         return this.instance.toString() + " = " + this.expression.toString();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const valueType = this.expression.check(context);
         if(valueType === VoidType.instance)
             context.problemListener.reportAssigningVoidType(this);
@@ -31,7 +31,7 @@ export default class AssignInstanceStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         this.instance.assign(context, this.expression);
         return null;
     }

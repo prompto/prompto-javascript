@@ -7,7 +7,7 @@ export default class JavaScriptCharacterLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return CharacterType.instance;
     }
 }

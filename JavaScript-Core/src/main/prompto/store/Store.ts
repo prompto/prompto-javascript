@@ -1,10 +1,13 @@
+import {IQueryBuilder, IStored} from "./index";
+import IQuery from "./IQuery";
+
 export default class Store {
   
     nextSequenceValue(name) {
         throw new Error("Must override nextSequenceValue!");
     }
 
-    newQueryBuilder() {
+    newQueryBuilder(): IQueryBuilder {
         throw new Error("Must override newQueryBuilder!");
     }
 
@@ -24,7 +27,7 @@ export default class Store {
         throw new Error("Must override fetchUnique!");
     }
 
-    fetchOne(query) {
+    fetchOne(query: IQuery): IStored | null {
         throw new Error("Must override fetchOne!");
     }
 

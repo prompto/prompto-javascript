@@ -27,7 +27,7 @@ export default class HexaLiteral extends Literal {
         super(text, parseHexa(text));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return IntegerType.instance;
     }
 }

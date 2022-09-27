@@ -8,7 +8,7 @@ export default class JavaScriptThisExpression extends JavaScriptExpression {
         this.expression = new ThisExpression();
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.expression.interpret(context);
     }
 

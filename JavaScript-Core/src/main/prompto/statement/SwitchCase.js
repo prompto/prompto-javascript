@@ -28,7 +28,7 @@ export default class SwitchCase extends Section {
             context.problemListener.reportSwitchMissingStatement(this);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this.statements.interpret(context);
     }
 

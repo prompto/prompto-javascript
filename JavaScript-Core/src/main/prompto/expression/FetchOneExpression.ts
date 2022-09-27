@@ -6,6 +6,7 @@ import {Identifier, IdentifierList} from '../grammar'
 import {IExpression, IPredicate} from "./index";
 import {Context, Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
+import IQuery from "../store/IQuery";
 
 export default class FetchOneExpression extends BaseExpression {
 
@@ -107,13 +108,12 @@ export default class FetchOneExpression extends BaseExpression {
         const store = $DataStore.instance;
         const query = this.buildFetchOneQuery(context, store);
         const stored = store.fetchOne (query);
-        if (stored == null)
-            return NullValue.instance;
-        else {
-            const typeName = stored.getData("category").slice(-1)[0];
+        if (stored) {
+            const typeName = stored.getData<string>("category").slice(-1)[0];
             const type = new CategoryType(new Identifier(typeName), this.type ? this.type.mutable : false);
             return type.newInstanceFromStored(context, stored);
-        }
+        } else
+            return NullValue.instance;
     }
 
     declare(transpiler: Transpiler): void {
@@ -161,7 +161,7 @@ export default class FetchOneExpression extends BaseExpression {
         }
     }
 
-    buildFetchOneQuery(context: Context, store: Store): void {
+    buildFetchOneQuery(context: Context, store: Store): IQuery {
         const builder = store.newQueryBuilder();
         if (this.type != null) {
             const info = new AttributeInfo("category", TypeFamily.TEXT, true, null);
@@ -173,8 +173,8 @@ export default class FetchOneExpression extends BaseExpression {
         if (this.type && this.predicate) {
             builder.and();
         }
-        if (this.include != null) {
-            builder.project(this.include);
+        if (this.include) {
+            builder.project(this.include.map(id => id.name));
         }
         return builder.build();
     }

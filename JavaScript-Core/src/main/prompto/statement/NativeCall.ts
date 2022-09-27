@@ -7,7 +7,7 @@ export default class NativeCall extends SimpleStatement {
         return this.statement.toString();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 

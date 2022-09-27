@@ -27,12 +27,12 @@ export default class FetchManyStatement extends FetchManyExpression {
         return false;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         super.check(context);
         return this.thenWith.check(context, new CursorType(this.type));
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const record = super.interpret(context);
         return this.thenWith.interpret(context, record);
     }

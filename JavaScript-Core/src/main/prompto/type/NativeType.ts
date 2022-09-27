@@ -8,6 +8,8 @@ import("../type/AnyType").then(res => AnyType = res.default);
 
 export default class NativeType extends BaseType {
 
+    static all: NativeType[] | null = null;
+
     constructor(id) {
         super(id);
     }

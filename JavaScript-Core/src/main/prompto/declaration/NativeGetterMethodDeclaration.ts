@@ -21,7 +21,7 @@ export default class NativeGetterMethodDeclaration extends GetterMethodDeclarati
     }
 
     /*
-    castToReturnType(context: Context, value: Value | null): Value {
+    castToReturnType(context: Context, value: IValue | null): IValue {
         // can only cast to specified type, and if required
         if(this.returnType!=null && !(this.returnType.isAssignableFrom(context, value.type))) {
             // only cast if implemented, on a per type basis

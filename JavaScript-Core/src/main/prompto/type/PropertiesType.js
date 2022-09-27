@@ -11,7 +11,7 @@ export default class PropertiesType extends BaseType {
         this.properties = properties;
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         if(other instanceof DocumentType)
             return true;
         else

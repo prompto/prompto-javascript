@@ -14,7 +14,7 @@ export default class UUIDLiteral extends Literal {
         super(text, new UUIDValue(parse(text)));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return UUIDType.instance;
     }
 

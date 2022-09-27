@@ -10,7 +10,7 @@ export default class DateType extends NativeType {
         super(new Identifier("Date"));
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other)
             || (other === DateTimeType.instance);
     }

@@ -10,7 +10,7 @@ export default class TimeLiteral extends Literal {
         super(text, new TimeValue(lt));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TimeType.instance;
     }
 

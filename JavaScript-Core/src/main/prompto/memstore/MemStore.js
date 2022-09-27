@@ -1,4 +1,4 @@
-import Store from '../store/Store.js'
+import Store from '../../../main/prompto/store/Store.ts'
 import {MemQueryBuilder, StorableDocument, AuditRecord, AuditMetadata, StoredDocument} from '../memstore'
 import {DateTime, Document, List} from '../intrinsic'
 

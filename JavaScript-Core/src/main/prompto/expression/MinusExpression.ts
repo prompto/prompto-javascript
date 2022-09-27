@@ -1,8 +1,15 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import BaseExpression from './BaseExpression'
+import {IExpression} from "./index";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {IType} from "../type";
+import {IValue} from "../value";
 
 export default class MinusExpression extends BaseExpression {
 
-    constructor(expression) {
+    expression: IExpression;
+    
+    constructor(expression: IExpression) {
         super();
         this.expression = expression;
     }
@@ -16,12 +23,12 @@ export default class MinusExpression extends BaseExpression {
         this.expression.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const type = this.expression.check(context);
         return type.checkMinus(context);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const val = this.expression.interpret(context);
         return val.Minus(context);
     }

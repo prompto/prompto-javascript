@@ -36,7 +36,7 @@ export default class IfStatement extends BaseStatement {
         this.elements.add(new IfElement(null, statements));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const types = new TypeMap();
         let section = null;
         this.elements.forEach(element => {
@@ -49,7 +49,7 @@ export default class IfStatement extends BaseStatement {
         return types.inferType(context, section);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         for(let i=0;i<this.elements.length;i++) {
             const element = this.elements[i];
             const condition = element.condition || null;

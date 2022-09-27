@@ -7,7 +7,7 @@ export default class JavaScriptDecimalLiteral extends JavaScriptLiteral {
         super(text);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return DecimalType.instance;
     }
 

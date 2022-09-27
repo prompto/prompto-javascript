@@ -1,4 +1,4 @@
-import Instance from './Instance.ts'
+import Instance from './Instance'
 import { CategoryType } from '../type'
 import { Variable } from '../runtime'
 import { Identifier } from '../grammar'

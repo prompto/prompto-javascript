@@ -2109,19 +2109,19 @@ export default class MPromptoBuilder extends MParserListener {
     exitSliceFirstAndLast(ctx) {
         const first = this.getNodeValue(ctx.first);
         const last = this.getNodeValue(ctx.last);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, first, last));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, first, last));
     }
 
 
     exitSliceFirstOnly(ctx) {
         const first = this.getNodeValue(ctx.first);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, first, null));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, first, null));
     }
 
 
     exitSliceLastOnly(ctx) {
         const last = this.getNodeValue(ctx.last);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, null, last));
     }
 
 

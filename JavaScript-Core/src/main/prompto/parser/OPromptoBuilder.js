@@ -2084,19 +2084,19 @@ export default class OPromptoBuilder extends OParserListener {
     exitSliceFirstAndLast = (ctx: contexts.SliceFirstAndLastContext) => {
         const first = this.getNodeValue(ctx.first);
         const last = this.getNodeValue(ctx.last);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, first, last));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, first, last));
     }
 
 
     exitSliceFirstOnly = (ctx: contexts.SliceFirstOnlyContext) => {
         const first = this.getNodeValue(ctx.first);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, first, null));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, first, null));
     }
 
 
     exitSliceLastOnly = (ctx: contexts.SliceLastOnlyContext) => {
         const last = this.getNodeValue(ctx.last);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, null, last));
     }
 
 

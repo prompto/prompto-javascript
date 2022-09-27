@@ -20,7 +20,7 @@ export default class ItemInstance {
         writer.append(']');
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const parentType = this.parent.check(context);
         const itemType = this.item.check(context);
         return parentType.checkItem(context, itemType);
@@ -52,7 +52,7 @@ export default class ItemInstance {
         }
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const root = this.parent.interpret(context);
         const item = this.item.interpret(context);
         if (root.getItemInContext) {

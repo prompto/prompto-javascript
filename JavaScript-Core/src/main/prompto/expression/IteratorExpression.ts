@@ -2,7 +2,7 @@
 import { ParenthesisExpression } from '../expression'
 import {Context, Transpiler, Variable} from '../runtime'
 import { IteratorType, IType } from '../type'
-import { Iterable, Iterator, IterableValue, IValue} from '../value'
+import {IIterable, IIterator, IterableValue, IValue} from '../value'
 import { UnresolvedCall } from '../statement'
 import { InternalError } from '../error'
 import { Identifier } from "../grammar";
@@ -33,7 +33,7 @@ export default class IteratorExpression extends BaseExpression {
     interpret(context: Context): IValue {
         const elemType = this.source.check(context).checkIterator(context, this, this.source);
         const items = this.source.interpret(context);
-        const length = items.getMemberValue(context, new Identifier("count"));
+        const length = items.GetMemberValue(context, new Identifier("count"));
         const iterator = this.getIterator(context, items);
         return new IterableValue(context, this.id, elemType, iterator, length, this.expression);
     }
@@ -53,9 +53,9 @@ export default class IteratorExpression extends BaseExpression {
         transpiler.flush()
     }
 
-    getIterator(context: Context, source: IValue) {
+    getIterator(context: Context, source: IValue): IIterator<IValue> {
         if (source.isIterable())
-            return (source as Iterable<IValue>).getIterator();
+            return (source as unknown as IIterable<IValue>).getIterator();
         else
             throw new InternalError("Should never get there!");
     }
@@ -63,8 +63,8 @@ export default class IteratorExpression extends BaseExpression {
     toDialect(writer: CodeWriter): void {
         const srcType = this.source.check(writer.context);
         writer = writer.newChildWriter();
-        const resultType = srcType.checkIterator(writer.context, this.source);
-        writer.context.registerValue(new Variable(this.name, resultType));
+        const resultType = srcType.checkIterator(writer.context, this, this.source);
+        writer.context.registerInstance(new Variable(this.id, resultType), true);
         writer.toDialect(this);
     }
 
@@ -72,7 +72,7 @@ export default class IteratorExpression extends BaseExpression {
         const expression = IteratorExpression.extractFromParenthesisIfPossible(this.expression);
         expression.toDialect(writer);
         writer.append(" for each ");
-        writer.append(this.name.toString());
+        writer.append(this.id.name);
         writer.append(" in ");
         this.source.toDialect(writer);
     }
@@ -82,7 +82,7 @@ export default class IteratorExpression extends BaseExpression {
         const expression = IteratorExpression.extractFromParenthesisIfPossible(this.expression);
         expression.toDialect(writer);
         writer.append(" for each ( ");
-        writer.append(this.name.toString());
+        writer.append(this.id.name);
         writer.append(" in ");
         this.source.toDialect(writer);
         writer.append(" )");
@@ -92,19 +92,19 @@ export default class IteratorExpression extends BaseExpression {
         const expression = IteratorExpression.encloseInParenthesisIfRequired(this.expression);
         expression.toDialect(writer);
         writer.append(" for each ");
-        writer.append(this.name.toString());
+        writer.append(this.id.name);
         writer.append(" in ");
         this.source.toDialect(writer);
     }
 
-    static encloseInParenthesisIfRequired(expression) {
+    static encloseInParenthesisIfRequired(expression: IExpression): IExpression {
         if(IteratorExpression.mustBeEnclosedInParenthesis(expression))
             return new ParenthesisExpression(expression);
         else
             return expression;
     }
 
-    static extractFromParenthesisIfPossible(expression) {
+    static extractFromParenthesisIfPossible(expression: IExpression): IExpression {
         if(expression instanceof ParenthesisExpression) {
             const enclosed = expression.expression;
             if(IteratorExpression.mustBeEnclosedInParenthesis(enclosed))
@@ -113,7 +113,7 @@ export default class IteratorExpression extends BaseExpression {
         return expression;
     }
 
-    static mustBeEnclosedInParenthesis(expression) {
+    static mustBeEnclosedInParenthesis(expression: IExpression): boolean {
         return expression instanceof UnresolvedCall;
     }
 }

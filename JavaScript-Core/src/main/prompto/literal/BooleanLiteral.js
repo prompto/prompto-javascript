@@ -8,7 +8,7 @@ export default class BooleanLiteral extends Literal {
         super(text, BooleanValue.Parse(text));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return BooleanType.instance;
     }
 

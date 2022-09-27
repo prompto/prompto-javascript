@@ -28,7 +28,7 @@ export default class IfElement extends BaseStatement {
             return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.condition) {
             const type = this.condition.check(context);
             if(type!=BooleanType.instance) {
@@ -77,7 +77,7 @@ export default class IfElement extends BaseStatement {
         return context;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         context = this.downcast(context, true);
         return this.statements.interpret(context);
     }

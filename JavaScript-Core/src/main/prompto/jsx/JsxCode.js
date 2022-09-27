@@ -9,7 +9,7 @@ export default class JsxCode extends IJsxExpression {
         this.suite = suite;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.expression.check(context);
         return JsxType.instance;
     }

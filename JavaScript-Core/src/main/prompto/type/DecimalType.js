@@ -19,12 +19,12 @@ export default class DecimalType extends NativeType {
         transpiler.append('"Decimal"')
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other)
             || (other === IntegerType.instance);
     }
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): Type {
         if(other === IntegerType.instance || other === DecimalType.instance) {
             return this;
         } else {

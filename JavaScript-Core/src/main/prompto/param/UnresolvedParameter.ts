@@ -38,7 +38,7 @@ export default class UnresolvedParameter implements IParameter {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.resolveAndCheck(context);
     }
 

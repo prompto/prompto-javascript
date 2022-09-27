@@ -151,7 +151,7 @@ export default class EPromptoBuilder extends EParserListener {
 
     exitUnresolvedSelector = (ctx: contexts.UnresolvedSelectorContext) => {
         const parent = this.getNodeValue<expression.BaseExpression>(ctx._parent);
-        const selector = this.getNodeValue<expression.SelectorExpression>(ctx._selector);
+        const selector = this.getNodeValue<expression.SelectorBase>(ctx._selector);
         selector.parent = parent;
         this.setNodeValue(ctx, selector);
     }
@@ -2100,19 +2100,19 @@ export default class EPromptoBuilder extends EParserListener {
     exitSliceFirstAndLast = (ctx: contexts.SliceFirstAndLastContext) => {
         const first = this.getNodeValue(ctx.first);
         const last = this.getNodeValue(ctx.last);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, first, last));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, first, last));
     }
 
 
     exitSliceFirstOnly = (ctx: contexts.SliceFirstOnlyContext) => {
         const first = this.getNodeValue(ctx.first);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, first, null));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, first, null));
     }
 
 
     exitSliceLastOnly = (ctx: contexts.SliceLastOnlyContext) => {
         const last = this.getNodeValue(ctx.last);
-        this.setNodeValue(ctx, new expression.SliceSelector(null, null, last));
+        this.setNodeValue(ctx, new expression.SelectorExpression(null, null, last));
     }
 
 

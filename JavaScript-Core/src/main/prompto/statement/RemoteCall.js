@@ -44,7 +44,7 @@ export default class RemoteCall extends UnresolvedCall {
             writer.append("}").newLine();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const resultType = this.resolveAndCheck(context);
         context = context.newChildContext();
         if (this.resultName != null)
@@ -53,7 +53,7 @@ export default class RemoteCall extends UnresolvedCall {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const resultType = this.resolveAndCheck(context);
         const resultValue = super.interpret(context);
         context = context.newChildContext();

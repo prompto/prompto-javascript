@@ -10,7 +10,7 @@ export default class TimeType extends NativeType {
         super(new Identifier("TimeValue"));
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other)
             || (other == DateTimeType.instance);
     }
@@ -23,7 +23,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         if (other === PeriodType.instance) {
             return this; // ignore date section
         } else {
@@ -39,7 +39,7 @@ export default class TimeType extends NativeType {
         transpiler.append('Time');
     }
 
-    declareAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.declare(transpiler);
             right.declare(transpiler);
@@ -48,7 +48,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    transpileAdd(transpiler: Transpiler, other: Type, tryReverse: boolean, left: Expression, right: Expression): void {
+    transpileAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: Expression, right: Expression): void {
         if (other === PeriodType.instance) {
             left.transpile(transpiler);
             transpiler.append(".addPeriod(");
@@ -59,7 +59,7 @@ export default class TimeType extends NativeType {
         }
     }
 
-    checkSubtract(context: Context, other: Type): Type {
+    checkSubtract(context: Context, other: IType): IType {
         if (other === TimeType.instance) {
             return PeriodType.instance; // ignore date section
         } else if (other === PeriodType.instance) {

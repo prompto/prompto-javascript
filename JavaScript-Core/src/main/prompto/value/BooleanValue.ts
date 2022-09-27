@@ -41,19 +41,21 @@ export default class BooleanValue extends BaseValue<boolean> {
         return this.value;
     }
 
-    And(context: Context, value: IValue) {
+    And(context: Context, value: IValue): IValue {
         if(value instanceof BooleanValue) {
             return BooleanValue.ValueOf(this.value && value.value);
         } else {
             throw new SyntaxError("Illegal: Boolean and " + typeof(value));
+            return BooleanValue.FALSE;
         }
     }
 
-    Or(context: Context, value: IValue) {
+    Or(context: Context, value: IValue): IValue {
         if(value instanceof BooleanValue) {
             return BooleanValue.ValueOf(this.value || value.value);
         } else {
             throw new SyntaxError("Illegal: Boolean or " + typeof(value));
+            return BooleanValue.FALSE;
         }
     }
 

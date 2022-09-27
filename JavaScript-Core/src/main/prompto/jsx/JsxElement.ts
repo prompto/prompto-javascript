@@ -20,7 +20,7 @@ export default class JsxElement extends JsxElementBase {
         return this;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         super.check(context);
         if(!this.closing)
             context.problemListener.reportMissingClosingTag(this.id);

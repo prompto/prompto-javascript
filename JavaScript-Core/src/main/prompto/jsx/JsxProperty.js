@@ -10,7 +10,7 @@ export default class JsxProperty extends Section {
         this.suite = suite;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.value!=null)
             return this.value.check(context);
         else

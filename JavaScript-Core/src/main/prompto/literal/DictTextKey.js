@@ -19,11 +19,11 @@ export default class DictTextKey {
         return unescape(this.text);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         // nothing to do
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return new TextValue(this.stringValue());
     }
 

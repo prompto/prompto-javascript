@@ -2,6 +2,9 @@ import BaseType from './BaseType'
 import { Identifier } from '../grammar'
 import IType from "../../../main/prompto/type/IType";
 import {TypeFamily} from "../store";
+import {Section} from "../parser";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
 export default class TypeType extends BaseType {
 
@@ -26,9 +29,9 @@ export default class TypeType extends BaseType {
         return this.type.checkStaticMember(context, section, id);
     }
 
-    declareMember(transpiler, section, id) {
+    declareMember(transpiler, id) {
         this.type.declare(transpiler);
-        this.type.declareStaticMember(transpiler, section, id);
+        this.type.declareStaticMember(transpiler, id);
     }
 
     transpileMember(transpiler: Transpiler, id: Identifier): void {

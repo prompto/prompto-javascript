@@ -10,7 +10,7 @@ export default class JsxExpression extends IJsxExpression {
         this.expression = expression;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.expression ? this.expression.check(context) : VoidType.instance;
     }
 

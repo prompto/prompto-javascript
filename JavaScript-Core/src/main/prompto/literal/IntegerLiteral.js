@@ -12,7 +12,7 @@ export default class IntegerLiteral extends Literal {
         super(text, new IntegerValue(value || parse(text)));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return IntegerType.instance;
     }
 

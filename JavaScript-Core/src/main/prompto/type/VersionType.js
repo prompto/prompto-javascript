@@ -38,7 +38,7 @@ export default class VersionType extends NativeType {
         transpiler.append(")");
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         switch (id.name) {
             case "major":
             case "minor":

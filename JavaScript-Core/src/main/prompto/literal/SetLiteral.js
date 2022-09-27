@@ -14,7 +14,7 @@ export default class SetLiteral extends Literal {
         this.expressions = expressions;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.itemType==null) {
             this.itemType = inferExpressionsType(context, this.expressions);
             this.type = new SetType(this.itemType);
@@ -33,7 +33,7 @@ export default class SetLiteral extends Literal {
         transpiler.append("])");
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const self = this;
         this.check(context); // force computation of itemType
         const value = new SetValue(this.itemType);

@@ -11,11 +11,11 @@ export default class TypeLiteral extends Literal {
         super(type.toString(), type);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return new TypeType(this.value);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return new TypeValue(this.value);
     }
 

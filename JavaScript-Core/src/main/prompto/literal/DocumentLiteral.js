@@ -28,12 +28,12 @@ export default class DocumentLiteral extends Literal {
         transpiler.append(")");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.entries.check(context);
         return DocumentType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(this.entries.items.length>0) {
             this.check(context); /// force computation of itemType
             const doc = new Document();

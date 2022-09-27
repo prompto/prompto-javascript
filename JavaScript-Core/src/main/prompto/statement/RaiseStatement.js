@@ -25,7 +25,7 @@ export default class RaiseStatement extends SimpleStatement {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const type = this.expression.check(context);
         if(!new CategoryType(new Identifier("Error")).isAssignableFrom(context, type)) {
             throw new SyntaxError(type.name + " does not extend Error");
@@ -33,7 +33,7 @@ export default class RaiseStatement extends SimpleStatement {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         throw new UserError(this.expression);
     }
 

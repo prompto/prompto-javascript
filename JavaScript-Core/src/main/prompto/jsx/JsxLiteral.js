@@ -6,7 +6,7 @@ export default class JsxLiteral {
         this.text = text;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 

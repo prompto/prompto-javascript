@@ -23,6 +23,18 @@ export default abstract class BaseValue<T> implements IValue {
         this.mutable = mutable;
     }
 
+    isIterable(): boolean {
+        return false;
+    }
+
+    isSliceable(): boolean {
+        return false;
+    }
+
+    isResource(): boolean {
+        return false;
+    }
+
     getValue(): T {
         return this.value;
     }
@@ -31,14 +43,19 @@ export default abstract class BaseValue<T> implements IValue {
         return this == value;
     }
 
-    getMemberValue(context: Context, id: Identifier, autocreate?: boolean): IValue {
-        if("text" === id.name)
+    GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean): IValue {
+        if("text" === member.name)
             return new TextValue(this.toString());
-        else if("json" === id.name) {
+        else if("json" === member.name) {
             const node = this.toJsonNode();
             return new TextValue(JSON.stringify(node));
         } else
-            throw new SyntaxError("No member support for " + id.name + " in " + this.constructor.name);
+            throw new SyntaxError("No member support for " + member.name + " in " + this.constructor.name);
+    }
+
+
+    GetItemValue(context: Context, item: IValue, autoCreate?: boolean): IValue {
+        throw new SyntaxError("No item support for " + item.toString() + " in " + this.constructor.name);
     }
 
     abstract toJsonNode(): JsonNode;

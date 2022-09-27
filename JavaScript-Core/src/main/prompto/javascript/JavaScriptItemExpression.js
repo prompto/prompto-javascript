@@ -11,7 +11,7 @@ export default class JavaScriptItemExpression extends JavaScriptSelectorExpressi
         return this.parent.toString() + "[" + this.item.toString() + "]";
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const o = this.parent.interpret(context);
         if(o!=null) {
             return this.interpret_item(context, o);

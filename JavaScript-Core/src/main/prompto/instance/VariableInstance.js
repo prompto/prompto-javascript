@@ -28,7 +28,7 @@ export default class VariableInstance {
         return this.name;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const actual = context.getRegisteredValue(this.id);
         return actual.type;
     }
@@ -84,7 +84,7 @@ export default class VariableInstance {
         context.setValue(this.id, value);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return context.getValue(this.id);
     }
 

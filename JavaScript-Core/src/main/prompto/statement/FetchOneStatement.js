@@ -26,12 +26,12 @@ export default class FetchOneStatement extends FetchOneExpression {
         return false;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         super.check(context);
         return this.thenWith.check(context, this.type);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const record = super.interpret(context);
         return this.thenWith.interpret(context, record);
     }

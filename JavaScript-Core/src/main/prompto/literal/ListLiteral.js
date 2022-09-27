@@ -15,7 +15,7 @@ export default class ListLiteral extends Literal {
         this.expressions = expressions;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if(this.itemType==null) {
             this.itemType = inferExpressionsType(context, this.expressions);
             this.type = new ListType(this.itemType, this.mutable);
@@ -23,7 +23,7 @@ export default class ListLiteral extends Literal {
         return this.type;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         if(this.expressions.length) {
             const self = this;
             this.check(context); // force computation of itemType

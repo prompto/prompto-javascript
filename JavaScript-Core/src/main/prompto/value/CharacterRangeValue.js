@@ -1,4 +1,4 @@
-import RangeValue from './RangeValue.js'
+import RangeValue from '../../../main/prompto/value/RangeValue.ts'
 import { CharacterValue } from '../value'
 import { IndexOutOfRangeError } from '../error'
 import { CharacterType } from '../type'

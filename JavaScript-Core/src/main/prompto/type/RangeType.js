@@ -61,7 +61,7 @@ export default class RangeType extends ContainerType {
         return this.itemType;
     }
 
-    checkHasAllOrAny(context: Context, section: Section, other: Type): Type {
+    checkHasAllOrAny(context: Context, section: Section, other: IType): Type {
         return BooleanType.instance;
     }
 

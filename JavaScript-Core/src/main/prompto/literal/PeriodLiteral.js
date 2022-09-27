@@ -9,7 +9,7 @@ export default class PeriodLiteral extends Literal {
         super(text, new PeriodValue(Period.parse(text.substring(1,text.length-1))));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return PeriodType.instance;
     }
 

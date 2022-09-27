@@ -14,7 +14,7 @@ export default class DictIdentifierKey extends Section {
         return this.id.toString();
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const named = context.getRegisteredValue(this.id.toString());
         if (named === null) {
             context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
@@ -23,7 +23,7 @@ export default class DictIdentifierKey extends Section {
         }
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const value = new InstanceExpression(this.id).interpret(context);
         if(value instanceof TextValue)
             return value;

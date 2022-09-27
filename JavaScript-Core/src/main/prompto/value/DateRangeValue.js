@@ -1,4 +1,4 @@
-import RangeValue from "./RangeValue.js"
+import RangeValue from "./RangeValue.ts"
 import { DateType } from "../type"
 import { IndexOutOfRangeError } from "../error"
 import { DateValue } from "./index.ts"

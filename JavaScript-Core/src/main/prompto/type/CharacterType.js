@@ -22,7 +22,7 @@ export default class CharacterType extends NativeType {
             throw new InvalidDataError("Cannot convert " + value.toString() + " to CharacterValue");
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         if ("codePoint" === id.name) {
             return IntegerType.instance;
         } else {

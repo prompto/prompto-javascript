@@ -46,7 +46,7 @@ export default class ListType extends ContainerType {
         return new ListValue(this.itemType, values);
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other)
             || ((other instanceof ListType) && this.itemType.isAssignableFrom(context, other.itemType));
     }

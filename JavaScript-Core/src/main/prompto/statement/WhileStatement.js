@@ -44,7 +44,7 @@ export default class WhileStatement extends BaseStatement {
         return true;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const cond = this.condition.check(context);
         if(cond !== BooleanType.instance) {
             context.problemListener.reportError(this, "Expected a Boolean condition!");
@@ -53,7 +53,7 @@ export default class WhileStatement extends BaseStatement {
         return this.statements.check(child, null);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         while(this.interpretCondition(context)) {
             const child = context.newChildContext();
             const value = this.statements.interpret(child);

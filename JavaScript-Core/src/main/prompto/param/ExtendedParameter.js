@@ -42,7 +42,7 @@ export default class ExtendedParameter extends CategoryParameter {
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.type.checkExists(context);
         if(this.attributes!==null) {
             this.attributes.forEach(attr => {

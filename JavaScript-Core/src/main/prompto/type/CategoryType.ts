@@ -5,7 +5,7 @@ import {
     CategoryDeclaration, ConcreteCategoryDeclaration, SingletonCategoryDeclaration,
     EnumeratedNativeDeclaration, EnumeratedCategoryDeclaration, IDeclaration, IMethodDeclaration, AttributeDeclaration
 } from '../declaration'
-import {ExecutionError, InternalError, PromptoError} from '../error'
+import {InternalError, PromptoError} from '../error'
 import {
     UnresolvedIdentifier,
     ValueExpression,
@@ -66,8 +66,7 @@ export default class CategoryType extends BaseType {
         let type = this.anyfy();
         if(type instanceof NativeType)
             return type;
-        // @ts-ignore
-        const decl = context.getRegisteredDeclaration<IDeclaration>(IDeclaration, type.id);
+        const decl = context.getRegistered(type.id);
         if(!decl) {
             if(onError)
                 onError(type);
@@ -90,7 +89,7 @@ export default class CategoryType extends BaseType {
         writer.append(this.name);
     }
 
-    getSuperType(context: Context, section: Section): CategoryType | null {
+    getSuperType(context: Context, section: Section): CategoryType {
         const decl = this.getDeclaration(context);
         if(decl instanceof CategoryDeclaration) {
             const derived = decl.derivedFrom;
@@ -98,7 +97,7 @@ export default class CategoryType extends BaseType {
                 return new CategoryType(derived[0]);
         }
         context.problemListener.reportNoSuperType(section, this);
-        return null;
+        return VoidType.instance;
     }
 
     declare(transpiler: Transpiler): void {
@@ -154,12 +153,12 @@ export default class CategoryType extends BaseType {
         return decl as IDeclaration;
     }
 
-    checkMultiply(context: Context, other: IType, tryReverse: boolean): IType {
+    checkMultiply(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         const type = this.checkOperator(context, other, tryReverse, Operator.MULTIPLY);
         if(type!=null)
             return type;
         else
-            return super.checkMultiply(context, other, tryReverse);
+            return super.checkMultiply(context, section, other, tryReverse);
     }
 
     declareMultiply(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void {
@@ -234,12 +233,12 @@ export default class CategoryType extends BaseType {
         transpiler.append(")");
     }
 
-    checkModulo(context: Context, other: IType): IType {
+    checkModulo(context: Context, section: Section, other: IType): IType {
         const type = this.checkOperator(context, other, false, Operator.MODULO);
         if(type!=null)
             return type;
         else
-            return super.checkModulo(context, other);
+            return super.checkModulo(context, section, other);
     }
 
     declareModulo(transpiler: Transpiler, other: IType, left: IExpression, right: IExpression): void {
@@ -559,7 +558,7 @@ export default class CategoryType extends BaseType {
             throw new InternalError("Could not instantiate " + this.name);
     }
 
-    getSortedComparator(context: Context, key: IExpression, desc: boolean) {
+    getSortedComparator(context: Context, desc: boolean, key: IExpression): (o1: IValue, o2: IValue) => number {
         if(key instanceof ArrowExpression) {
             return key.getSortedComparator(context, this, desc);
         } else {

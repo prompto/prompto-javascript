@@ -18,13 +18,13 @@ export default class WithResourceStatement extends BaseStatement {
             return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         context = context.newResourceContext();
         this.resource.checkResource(context);
         return this.statements.check(context, null);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         context = context.newResourceContext();
         try {
             this.resource.interpret(context);

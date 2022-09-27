@@ -22,7 +22,7 @@ export default class DocumentType extends NativeType {
         return this;
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return super.isAssignableFrom(context, other)
             || other === AnyType.instance
             || (other instanceof CategoryType && "Any" === other.name);
@@ -35,7 +35,7 @@ export default class DocumentType extends NativeType {
             return super.isMoreSpecificThan(context, other);
     }
 
-    checkMember(context: Context, section: Section, id: Identifier): Type {
+    checkMember(context: Context, section: Section, id: Identifier): IType {
         switch(id.name) {
             case "count":
                 return IntegerType.instance;
@@ -51,7 +51,7 @@ export default class DocumentType extends NativeType {
         }
     }
 
-    checkAdd(context: Context, section: Section, other: Type, tryReverse: boolean): Type {
+    checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): Type {
         if(other instanceof DocumentType) {
             return this;
         } else {

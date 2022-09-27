@@ -9,7 +9,7 @@ export default class DateLiteral extends Literal {
         super(text, new DateValue(LocalDate.parse(text.substring(1,text.length-1))));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return DateType.instance;
     }
 

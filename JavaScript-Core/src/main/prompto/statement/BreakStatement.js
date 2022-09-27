@@ -16,11 +16,11 @@ export default class BreakStatement extends SimpleStatement {
         return (obj instanceof BreakStatement);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return BreakResult.instance;
     }
 

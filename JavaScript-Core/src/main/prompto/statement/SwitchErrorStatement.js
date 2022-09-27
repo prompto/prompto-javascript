@@ -65,7 +65,7 @@ export default class SwitchErrorStatement extends BaseSwitchStatement {
         return section;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         let result = null;
         try {
             result = this.statements.interpret(context);

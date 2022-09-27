@@ -11,7 +11,7 @@ export default class JavaScriptMemberExpression extends JavaScriptSelectorExpres
         return this.parent.toString() + "." + this.id.name;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const o = this.parent.interpret(context);
         if(o!=null) {
             return this.interpret_field(o);

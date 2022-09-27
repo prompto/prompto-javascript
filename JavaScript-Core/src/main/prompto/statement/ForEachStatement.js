@@ -29,7 +29,7 @@ export default class ForEachStatement extends BaseStatement {
             return null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const srcType = this.source.check(context);
         const elemType = srcType.checkIterator(context, this.source);
         return this.checkItemIterator(elemType, context);
@@ -45,7 +45,7 @@ export default class ForEachStatement extends BaseStatement {
         return this.statements.check(child, null);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const srcType = this.source.check(context);
         const elemType = srcType.checkIterator(context, this.source);
         return this.interpretItemIterator(elemType, context);

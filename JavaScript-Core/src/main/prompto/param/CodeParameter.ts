@@ -21,7 +21,7 @@ export default class CodeParameter extends BaseParameter {
         context.registerValue(this);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         // nothing to do
     }
 

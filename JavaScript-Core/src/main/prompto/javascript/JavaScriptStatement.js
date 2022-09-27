@@ -16,7 +16,7 @@ export default class JavaScriptStatement {
         return "" + (this.isReturn ? "return " : "") + this.expression.toString() + ";";
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.isReturn ? AnyType.instance : VoidType.instance;
     }
 

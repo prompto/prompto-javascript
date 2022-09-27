@@ -314,7 +314,7 @@ export default class MethodCall extends SimpleStatement {
         return (this.args || new ArgumentList()).makeArguments(context, declaration);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const finder = new MethodFinder(context, this);
         const declaration = finder.findBest(true);
         if(!declaration)

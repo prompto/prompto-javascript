@@ -1,14 +1,20 @@
 import EnumSymbol from './EnumSymbol'
 import { Dialect } from '../parser'
-import { TextValue } from '../value'
+import {IValue, TextValue} from '../value'
 import { SyntaxError } from '../error'
+import {Identifier} from "../grammar";
+import {IExpression} from "./index";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {EnumeratedNativeType, IType} from "../type";
 
-export default class NativeSymbol extends EnumSymbol {
+export default class NativeSymbol extends EnumSymbol<EnumeratedNativeType> {
 
-    constructor(id, expression) {
+    expression: IExpression;
+
+    constructor(id: Identifier, expression: IExpression) {
         super(id);
         this.expression = expression;
-        this.type = null;
     }
 
     toString() {
@@ -34,7 +40,7 @@ export default class NativeSymbol extends EnumSymbol {
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const actual = this.expression.check(context);
         if(!this.type.derivedFrom.isAssignableFrom(context, actual)) {
             throw new SyntaxError("Cannot assign " + actual.name + " to " + this.type.derivedFrom.name);
@@ -42,7 +48,7 @@ export default class NativeSymbol extends EnumSymbol {
         return this.type;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return this;
     }
 
@@ -54,19 +60,19 @@ export default class NativeSymbol extends EnumSymbol {
         transpiler.append(this.name);
     }
 
-    initialize(transpiler) {
+    initialize(transpiler: Transpiler): void {
         transpiler.append("var ").append(this.name).append(" = new ").append(this.type.name).append("('").append(this.name).append("', ");
         this.expression.transpile(transpiler);
         transpiler.append(");");
         transpiler.newLine();
     }
 
-    getMemberValue(context, id, autoCreate) {
-        if("name" === id.name)
+    GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean) {
+        if("name" === member.name)
             return new TextValue(this.name);
-        else if("value" === id.name)
+        else if("value" === member.name)
             return this.expression.interpret(context);
         else
-            return super.getMemberValue(context, id.name, autoCreate);
+            return super.GetMemberValue(context, member, autoCreate);
     }
 }

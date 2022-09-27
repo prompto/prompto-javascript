@@ -1,17 +1,24 @@
-import SelectorExpression from './SelectorExpression.ts'
+import SelectorBase from './SelectorBase'
 import { UnresolvedIdentifier, MemberSelector, MethodSelector } from '../expression'
 import { UnresolvedCall } from '../statement'
-import { AnyType } from '../type'
+import {AnyType, IType} from '../type'
 import { ProblemRaiser } from '../problem'
 import { SyntaxError } from '../error'
+import IExpression from "./IExpression";
+import {ArgumentList, Identifier} from "../grammar";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {IValue, NullValue} from "../value";
 
-export default class UnresolvedSelector extends SelectorExpression {
+export default class UnresolvedSelector extends SelectorBase {
 
-    constructor(parent, id) {
+    id: Identifier;
+    resolved?: SelectorBase;
+
+    constructor(parent: IExpression, id: Identifier) {
         super(parent);
         this.id = id;
         this.copySectionFrom(id);
-        this.resolved = null;
     }
 
     get name() {
@@ -32,31 +39,31 @@ export default class UnresolvedSelector extends SelectorExpression {
             this.resolved.toDialect(writer);
         else {
             if (this.parent)
-                this.parent.parenttoDialect(writer: CodeWriter): void;
+                this.parent.parentToDialect(writer);
             writer.append('.');
             writer.append(this.name);
         }
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.resolveAndCheck(context, false);
     }
 
-    checkMember(context) {
+    checkMember(context: Context) {
         return this.resolveAndCheck(context, false);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         this.resolveAndCheck(context, false);
-        return this.resolved.interpret(context);
+        return this.resolved ? this.resolved.interpret(context) : NullValue.instance;
     }
 
-    resolveAndCheck(context, forMember) {
+    resolveAndCheck(context: Context, forMember: boolean) {
         this.resolve(context, forMember);
         return this.resolved ? this.resolved.check(context) : AnyType.instance;
     }
 
-    resolve(context, forMember) {
+    resolve(context: Context, forMember: boolean) {
         if (!this.resolved)
             this.resolved = this.tryResolveMethod(context, null);
         if (!this.resolved)
@@ -66,25 +73,25 @@ export default class UnresolvedSelector extends SelectorExpression {
         return this.resolved;
     }
 
-    resolveMethod(context, assignments) {
+    resolveMethod(context: Context, assignments: ArgumentList | null) {
         if (!this.resolved)
             this.resolved = this.tryResolveMethod(context, assignments);
     }
 
-    tryResolveMember(context) {
+    tryResolveMember(context: Context) {
         context.pushProblemListener(new ProblemRaiser());
         try {
             let resolvedParent = this.parent;
             if(resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
-                resolvedParent = resolvedParent.resolved;
+                resolvedParent = resolvedParent.resolved || null;
             }
             const member = new MemberSelector(resolvedParent, this.id);
             member.check(context);
             return member;
         } catch (e) {
             if (e instanceof SyntaxError)
-                return null;
+                return undefined;
             else
                 throw e;
         } finally {
@@ -92,13 +99,13 @@ export default class UnresolvedSelector extends SelectorExpression {
         }
     }
 
-    tryResolveMethod(context, assignments) {
+    tryResolveMethod(context: Context, assignments: ArgumentList | null) {
         context.pushProblemListener(new ProblemRaiser());
         try {
             let resolvedParent = this.parent;
             if (resolvedParent instanceof UnresolvedIdentifier) {
                 resolvedParent.checkMember(context);
-                resolvedParent = resolvedParent.resolved;
+                resolvedParent = resolvedParent.resolved || null;
             }
             const method = new UnresolvedCall(new MethodSelector(resolvedParent, this.id), assignments);
             method.check(context);
@@ -114,15 +121,17 @@ export default class UnresolvedSelector extends SelectorExpression {
     }
 
     declare(transpiler: Transpiler): void {
-        if (this.resolved == null)
+        if (!this.resolved)
             this.resolve(transpiler.context, false);
-        this.resolved.declare(transpiler);
+        if (this.resolved)
+            this.resolved.declare(transpiler);
     }
 
     transpile(transpiler: Transpiler): void {
-        if (this.resolved == null)
+        if (!this.resolved)
             this.resolve(transpiler.context, false);
-        this.resolved.transpile(transpiler);
+        if (this.resolved)
+            this.resolved.transpile(transpiler);
     }
 }
 

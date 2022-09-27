@@ -1,13 +1,18 @@
-import BaseExpression from '../../../main/prompto/expression/BaseExpression.ts'
+import BaseExpression from './BaseExpression'
 import { UnresolvedIdentifier, UnresolvedSelector } from '../expression'
 import { Dialect } from '../parser'
-import { MethodType, CategoryType } from '../type'
-import { Instance, ClosureValue, NullValue } from '../value'
-import { MethodDeclarationMap, InstanceContext } from '../runtime'
+import {MethodType, CategoryType, IType, VoidType} from '../type'
+import {Instance, ClosureValue, NullValue, IValue} from '../value'
+import {MethodDeclarationMap, InstanceContext, Context, Transpiler} from '../runtime'
+import IExpression from "./IExpression";
+import {CodeWriter} from "../utils";
+import {IMethodDeclaration} from "../declaration";
 
 export default class MethodExpression extends BaseExpression {
 
-    constructor(expression) {
+    expression: IExpression;
+
+    constructor(expression: IExpression) {
         super();
         this.expression = expression;
     }
@@ -27,16 +32,17 @@ export default class MethodExpression extends BaseExpression {
             throw new Error("Unsupported!");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const decl = this.getDeclaration(context);
         if (decl != null) {
             return new MethodType(decl);
         } else {
             context.problemListener.reportUnknownMethod(this, this.expression.toString());
+            return VoidType.instance;
         }
     }
 
-    getDeclaration(context) {
+    getDeclaration(context: Context): IMethodDeclaration | null {
         let expression = this.expression;
         if(expression instanceof UnresolvedSelector) {
             const parent = expression.parent;
@@ -60,7 +66,7 @@ export default class MethodExpression extends BaseExpression {
             throw new Error("Unsupported!");
     }
 
-    interpret(context, asMethod) {
+    interpret(context: Context, asMethod?: boolean): IValue {
         let expression = this.expression;
         if(expression instanceof UnresolvedSelector) {
             const parent = expression.parent;
@@ -70,24 +76,25 @@ export default class MethodExpression extends BaseExpression {
                     expression = new UnresolvedIdentifier(expression.id);
                     context = context.newInstanceContext(value, null, true);
                 } else
-                    return NullValue.instance(); // TODO throw error
+                    return NullValue.instance; // TODO throw error
             }
         }
         if(expression instanceof UnresolvedIdentifier) {
             const id = expression.id;
             if(context.hasValue(id)) {
-                return context.getValue(id);
+                return context.readValue(id)!;
             } else {
                 const named = context.getRegistered(id);
                 if (named instanceof MethodDeclarationMap) {
                     const decl = named.getFirst();
-                    return new ClosureValue(context, new MethodType(decl))
+                    return new ClosureValue(context, new MethodType(decl!))
                 } else {
                     context.problemListener.reportUnknownMethod(id, id.name);
                 }
             }
         } else
             throw new Error("Unsupported!");
+        return NullValue.instance;
     }
 
     declare(transpiler: Transpiler): void {
@@ -105,10 +112,10 @@ export default class MethodExpression extends BaseExpression {
             }
         }
         if(expression instanceof UnresolvedIdentifier) {
-            const named = transpiler.context.getRegistered(expression.id);
-            const decl = named.getFirst();
+            const methods = transpiler.context.getRegisteredDeclaration<MethodDeclarationMap>(MethodDeclarationMap, expression.id);
+            const decl = methods!.getFirst()!;
             // don't declare closures
-            if(!decl.declarationStatement)
+            if(!decl.declarationOf)
                 decl.declare(transpiler);
         } else
             throw new Error("Unsupported!");
@@ -129,10 +136,10 @@ export default class MethodExpression extends BaseExpression {
             }
         }
         if(expression instanceof UnresolvedIdentifier) {
-            const id = this.expression.id;
+            const id = expression.id;
             const named = transpiler.context.getRegistered(id);
             if(named instanceof MethodDeclarationMap) {
-                const decl = named.getFirst();
+                const decl = named.getFirst()!;
                 const context = transpiler.context.contextForValue(id);
                 if (context instanceof InstanceContext) {
                     if(parent != null)

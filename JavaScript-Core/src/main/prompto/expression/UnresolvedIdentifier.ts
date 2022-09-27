@@ -1,21 +1,33 @@
 import BaseExpression from './BaseExpression'
-import { InstanceExpression, MethodSelector, ConstructorExpression, TypeExpression, SymbolExpression } from './index'
-import { VoidType, CategoryType, EnumeratedCategoryType, NativeType } from '../type'
+import {
+    InstanceExpression,
+    MethodSelector,
+    ConstructorExpression,
+    TypeExpression,
+    SymbolExpression,
+    IExpression, IPredicate
+} from './index'
+import {VoidType, CategoryType, EnumeratedCategoryType, NativeType, IType, MethodType} from '../type'
 import { ProblemRaiser } from '../problem'
 import { PromptoError } from '../error'
 import { MethodCall } from '../statement'
 import { EnumeratedCategoryDeclaration, EnumeratedNativeDeclaration, CategoryDeclaration } from '../declaration'
-import { Dialect } from '../parser'
+import {Dialect, Section} from '../parser'
 import {Identifier} from "../grammar";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {IValue, NullValue} from "../value";
+import {IQueryBuilder} from "../store";
 
-export default class UnresolvedIdentifier extends BaseExpression {
+export default class UnresolvedIdentifier extends BaseExpression implements IPredicate {
 
     id: Identifier;
+    resolved?: IExpression;
+
 
     constructor(id: Identifier) {
         super();
         this.id = id;
-        this.resolved = null;
     }
 
     get name() {
@@ -32,93 +44,96 @@ export default class UnresolvedIdentifier extends BaseExpression {
         } catch(e) {
             /* eslint no-empty: [ "off" ] */
         }
-        if(this.resolved!=null)
+        if(this.resolved)
             this.resolved.toDialect(writer);
         else
             writer.append(this.id.name);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.resolveAndCheck(context, false);
     }
 
-    checkReference(context) {
-        this.resolve(context);
-        return this.resolved.checkReference(context);
+    checkReference(context: Context): IType {
+        this.resolve(context, false, false);
+        return this.resolved ? this.resolved.checkReference(context) : VoidType.instance;
     }
 
-    checkAttribute(context) {
+    checkAttribute(context: Context) {
         const decl = context.findAttribute(this.name);
         return decl ? decl : super.checkAttribute(context);
     }
 
-    checkQuery(context) {
-        return this.check(context);
-    }
-
-    checkMember(context) {
+    checkMember(context: Context) {
         return this.resolveAndCheck(context, true);
     }
 
-    interpret(context: Context): Value {
-        if(this.resolved==null) {
+    interpret(context: Context): IValue {
+        if(!this.resolved) {
             this.resolveAndCheck(context, false);
         }
-        return this.resolved.interpret(context);
+        return this.resolved ? this.resolved.interpret(context) : NullValue.instance;
     }
 
-    interpretReference(context) {
-        if(this.resolved==null) {
+    interpretReference(context: Context): IValue {
+        if(!this.resolved) {
             this.resolveAndCheck(context, false);
         }
-        return this.resolved.interpretReference(context);
+        return this.resolved ? this.resolved.interpretReference(context) : NullValue.instance;
     }
 
-    interpretQuery(context, builder) {
-        if(this.resolved==null) {
+    checkQuery(context: Context) {
+        return this.check(context);
+    }
+
+    interpretQuery(context: Context, builder: IQueryBuilder) {
+        if(!this.resolved) {
             this.resolveAndCheck(context, false);
         }
-        this.resolved.interpretQuery(context, builder);
+        if(this.resolved?.isPredicate())
+            (this.resolved as IPredicate).interpretQuery(context, builder);
     }
 
-    declareQuery(transpiler) {
-        if(this.resolved==null) {
+    declareQuery(transpiler: Transpiler) {
+        if(!this.resolved) {
             this.resolveAndCheck(transpiler.context, false);
         }
-        this.resolved && this.resolved.declareQuery(transpiler);
+        if(this.resolved?.isPredicate())
+            (this.resolved as IPredicate).declareQuery(transpiler);
     }
 
-    transpileQuery(transpiler, builderName) {
-        if(this.resolved==null) {
+    transpileQuery(transpiler: Transpiler, builderName: string) {
+        if(!this.resolved) {
             this.resolveAndCheck(transpiler.context, false);
         }
-        this.resolved && this.resolved.transpileQuery(transpiler, builderName);
+        if(this.resolved?.isPredicate())
+            (this.resolved as IPredicate).transpileQuery(transpiler, builderName);
     }
 
-    resolveAndCheck(context, forMember) {
+    resolveAndCheck(context: Context, forMember: boolean) {
         this.resolve(context, forMember);
         return this.resolved ? this.resolved.check(context) : VoidType.instance;
     }
 
-    resolve(context, forMember, updateSelectorParent) {
+    resolve(context: Context, forMember?: boolean, updateSelectorParent?: boolean) {
         if(updateSelectorParent)
-            this.resolved = null;
-        if(this.resolved==null) {
+            delete this.resolved;
+        if(!this.resolved) {
             // ignore problems encountered during resolution
             context.pushProblemListener(new ProblemRaiser());
             try {
-                this.resolved = this.doResolve(context, forMember, updateSelectorParent);
+                this.resolved = this.doResolve(context, forMember || false, updateSelectorParent || false);
             } finally {
                 // restore listener
                 context.popProblemListener();
             }
         }
-        if(this.resolved==null)
+        if(!this.resolved)
             context.problemListener.reportUnknownIdentifier(this.id, this.name);
         return this.resolved;
     }
 
-    doResolve(context, forMember, updateSelectorParent) {
+    doResolve(context: Context, forMember: boolean, updateSelectorParent: boolean) {
         let resolved = this.resolveSymbol(context);
         if(resolved)
             return resolved;
@@ -129,15 +144,15 @@ export default class UnresolvedIdentifier extends BaseExpression {
         if(resolved)
             return resolved;
         resolved = this.resolveInstance(context);
-        if(resolved !== null)
+        if(resolved instanceof Section)
             resolved.copySectionFrom(this);
-        return resolved;
+        return resolved ? resolved : undefined;
     }
 
-    resolveTypeOrConstructor(context, forMember) {
+    resolveTypeOrConstructor(context: Context, forMember: boolean): IExpression | undefined {
         // is first char uppercase?
         if (this.id.name[0].toUpperCase() !== this.id.name[0])
-            return null;
+            return undefined;
         if (forMember) {
             return this.resolveType(context);
         } else {
@@ -145,53 +160,53 @@ export default class UnresolvedIdentifier extends BaseExpression {
         }
     }
 
-    resolveInstance(context) {
+    resolveInstance(context: Context): IExpression | undefined {
         try {
             const id = new InstanceExpression(this.id);
             id.check(context);
             return id;
         } catch(e) {
             if(e instanceof PromptoError) {
-                return null;
+                return undefined;
             } else {
                 throw e;
             }
         }
     }
 
-    resolveMethodCall(context, updateSelectorParent) {
+    resolveMethodCall(context: Context, updateSelectorParent: boolean): IExpression | undefined {
         if(this.id.dialect !== Dialect.E)
-            return null;
+            return undefined;
         try {
             const selector = new MethodSelector(null, this.id);
-            const call = new MethodCall(selector);
+            const call = new MethodCall(selector, null);
             call.check(context, updateSelectorParent);
-            return call;
+            return call as unknown as IExpression; // TODO cleanup
         } catch(e) {
             if(e instanceof PromptoError) {
-                return null;
+                return undefined;
             } else {
                 throw e;
             }
         }
     }
 
-    resolveConstructor(context) {
+    resolveConstructor(context: Context): IExpression | undefined {
         try {
             const method = new ConstructorExpression(new CategoryType(this.id), null, null);
             method.check(context);
             return method;
         } catch(e) {
             if(e instanceof PromptoError) {
-                return null;
+                return undefined;
             } else {
                 throw e;
             }
         }
     }
 
-    resolveType(context) {
-        const decl = context.getRegisteredDeclaration(this.id);
+    resolveType(context: Context): IExpression | undefined {
+        const decl = context.getRegistered(this.id);
         if(decl instanceof EnumeratedCategoryDeclaration) {
             return new TypeExpression(new EnumeratedCategoryType(this.id));
         } else if(decl instanceof CategoryDeclaration) {
@@ -199,38 +214,41 @@ export default class UnresolvedIdentifier extends BaseExpression {
         } else if(decl instanceof EnumeratedNativeDeclaration) {
             return new TypeExpression(decl.getType(context));
         } else {
-            const allTypes = NativeType.getAll();
+            const allTypes = NativeType.all!;
             for(let i=0;i<allTypes.length;i++) {
                 if (this.name === allTypes[i].name) {
                     return new TypeExpression(allTypes[i]);
                 }
             }
         }
-        return null;
+        return undefined;
     }
 
-    resolveSymbol(context) {
+    resolveSymbol(context: Context): IExpression | undefined {
         if(this.id.name === this.id.name.toUpperCase()) {
             return new SymbolExpression(this.id);
         } else {
-            return null;
+            return undefined;
         }
     }
 
     declare(transpiler: Transpiler): void {
         this.resolve(transpiler.context, false, true);
-        this.resolved.declare(transpiler);
+        if(this.resolved)
+            this.resolved.declare(transpiler);
     }
 
     transpile(transpiler: Transpiler): void {
         this.resolve(transpiler.context, false, true);
-        this.resolved.transpile(transpiler);
+        if(this.resolved)
+            this.resolved.transpile(transpiler);
     }
 
-    transpileReference(transpiler, method) {
-        if(this.resolved==null) {
+    transpileReference(transpiler: Transpiler, method: MethodType) {
+        if(!this.resolved) {
             this.resolveAndCheck(transpiler.context, false);
         }
-        return this.resolved.transpileReference(transpiler, method);
+        if(this.resolved)
+            this.resolved.transpileReference(transpiler, method);
     }
 }

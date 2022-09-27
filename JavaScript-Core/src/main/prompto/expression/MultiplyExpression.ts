@@ -1,8 +1,16 @@
-import BaseExpression from './BaseExpression.ts'
+import BaseExpression from './BaseExpression'
+import {IExpression} from "./index";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {IType} from "../type";
+import {IValue} from "../value";
 
 export default class MultiplyExpression extends BaseExpression {
 
-    constructor(left, right) {
+    left: IExpression;
+    right: IExpression;
+
+    constructor(left: IExpression, right: IExpression) {
         super();
         this.left = left;
         this.right = right;
@@ -18,13 +26,13 @@ export default class MultiplyExpression extends BaseExpression {
         this.right.toDialect(writer);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const lt = this.left.check(context);
         const rt = this.right.check(context);
-        return lt.checkMultiply(context,rt, true);
+        return lt.checkMultiply(context, this, rt, true);
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         const lval = this.left.interpret(context);
         const rval = this.right.interpret(context);
         return lval.Multiply(context, rval);

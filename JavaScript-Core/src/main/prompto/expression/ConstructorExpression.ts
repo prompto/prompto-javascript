@@ -20,10 +20,10 @@ export default class ConstructorExpression extends BaseExpression {
 
     type: CategoryType;
     copyFrom: IExpression | null;
-    args: ArgumentList;
+    args: ArgumentList | null;
     checked?: boolean;
 
-    constructor(type: CategoryType, copyFrom: IExpression | null, args: ArgumentList) {
+    constructor(type: CategoryType, copyFrom: IExpression | null, args: ArgumentList | null) {
         super();
         this.type = type;
         this.copyFrom = copyFrom;

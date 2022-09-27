@@ -1,7 +1,7 @@
 import Section from '../parser/Section'
 import {CodeWriter, IWritable} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {IType} from "../type";
+import {IType, MethodType} from "../type";
 import {IValue} from "../value";
 import {AttributeDeclaration, IMethodDeclaration} from "../declaration";
 import {IExpression} from "./index";
@@ -65,7 +65,7 @@ export default abstract class BaseExpression extends Section implements IExpress
         throw new Error("transpile not implemented by " + this.constructor.name);
     }
 
-    transpileReference(transpiler: Transpiler, method: IMethodDeclaration): void {
+    transpileReference(transpiler: Transpiler, method: MethodType): void {
         this.transpile(transpiler);
     }
 

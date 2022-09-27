@@ -1,15 +1,16 @@
-import MemberSelector from './MemberSelector.js'
-import { CategorySymbol } from './index.ts'
+import MemberSelector from './MemberSelector'
+import {CategorySymbol, IExpression, SuperExpression} from './index'
 import { Identifier } from '../grammar'
-import { CategoryType, TypeType } from '../type'
-import { NullValue, TypeValue, ConcreteInstance, NativeInstance } from '../value'
-import { SingletonCategoryDeclaration } from '../declaration'
+import {CategoryType, IType, TypeType} from '../type'
+import {NullValue, TypeValue, Instance} from '../value'
+import {IMethodDeclaration, SingletonCategoryDeclaration} from '../declaration'
 import { NullReferenceError } from '../error'
-import { SuperExpression } from './index.ts'
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
 
 export default class MethodSelector extends MemberSelector {
   
-    constructor(parent, id) {
+    constructor(parent: IExpression | null, id: Identifier) {
         super(parent, id);
     }
 
@@ -17,12 +18,12 @@ export default class MethodSelector extends MemberSelector {
         if(this.parent==null)
             writer.append(this.name);
         else
-            super.parentAndMembertoDialect(writer: CodeWriter): void;
+            super.parentAndMembertoDialect(writer);
     }
 
-    newFullSelector(counter) {
-        const name = this.id.name + "$" + counter;
-        return new MethodSelector(this.parent, new Identifier(name));
+    newFullSelector(counter: number): MethodSelector {
+        const name = this.id.name + "$" + String(counter);
+        return new MethodSelector(this.parent!, new Identifier(name));
     }
 
     transpile(transpiler: Transpiler): void {
@@ -40,16 +41,16 @@ export default class MethodSelector extends MemberSelector {
         }
     }
 
-    checkParentType(context, checkInstance) {
+    checkParentType(context: Context, checkInstance: boolean): IType {
         if(checkInstance)
-            return this.interpretParentInstance(context);
+            return this.checkSuperParent(context);
         else
             return this.checkParent(context);
     }
 
-    interpretParentInstance(context) {
-        const value = this.parent.interpret(context);
-        if(value === null || value === NullValue.instance)
+    checkSuperParent(context: Context): IType {
+        const value = this.parent!.interpret(context);
+        if(!value || value === NullValue.instance)
             throw new NullReferenceError();
         if(this.parent instanceof SuperExpression)
             return value.type.getSuperType(context, this);
@@ -57,7 +58,7 @@ export default class MethodSelector extends MemberSelector {
             return value.type;
     }
 
-    newLocalContext(context, declaration) {
+    newLocalContext(context: Context, declaration: IMethodDeclaration): Context {
         if(this.parent!=null) {
             return this.newInstanceContext(context);
         } else if(declaration.memberOf!=null) {
@@ -68,22 +69,22 @@ export default class MethodSelector extends MemberSelector {
     }
 
     // noinspection JSMethodCanBeStatic
-    newLocalInstanceContext(context, declaration) {
+    newLocalInstanceContext(context: Context, declaration: IMethodDeclaration): Context {
         let instance = context.getClosestInstanceContext();
-        if(instance!=null) {
-            const required = declaration.memberOf.getType(context);
+        if(instance) {
+            const required = declaration.memberOf!.getType(context);
             const actual = instance.instanceType;
             if (!required.isAssignableFrom(context, actual))
                 instance = null;
         }
-        if(instance==null) {
-            const declaring = declaration.memberOf.getType(context);
-            instance = context.newInstanceContext(declaring, false);
+        if(!instance) {
+            const declaring = declaration.memberOf!.getType(context);
+            instance = context.newInstanceContext(null, declaring, false);
         }
         return instance.newChildContext()
     }
 
-    newLocalCheckContext(context, declaration) {
+    newLocalCheckContext(context: Context, declaration: IMethodDeclaration): Context {
         if (this.parent != null) {
             return this.newInstanceCheckContext(context);
         } else if(declaration.memberOf!=null) {
@@ -93,11 +94,11 @@ export default class MethodSelector extends MemberSelector {
         }
     }
 
-    newInstanceCheckContext(context) {
-        let type = this.parent.check (context);
+    newInstanceCheckContext(context: Context): Context {
+        let type = this.parent!.check (context);
         // if calling singleton method, parent is the singleton type
         if(type instanceof TypeType) {
-            const decl = context.getRegisteredDeclaration(type.type.id);
+            const decl = context.getRegisteredCategoryDeclaration(type.type.id);
             if(decl instanceof SingletonCategoryDeclaration) {
                 type = decl.getType(context);
             }
@@ -109,8 +110,8 @@ export default class MethodSelector extends MemberSelector {
             return context.newChildContext();
     }
 
-    newInstanceContext(context) {
-        let value = this.parent.interpret(context);
+    newInstanceContext(context: Context): Context {
+        let value = this.parent!.interpret(context);
         if(value === null || value === NullValue.instance) {
             throw new NullReferenceError();
         }
@@ -128,7 +129,7 @@ export default class MethodSelector extends MemberSelector {
         }
         if(value instanceof TypeValue) {
             return context.newChildContext();
-        } else if(value instanceof ConcreteInstance || value instanceof NativeInstance) {
+        } else if(value instanceof Instance) {
             context = context.newInstanceContext(value, null);
             return context.newChildContext();
         } else {

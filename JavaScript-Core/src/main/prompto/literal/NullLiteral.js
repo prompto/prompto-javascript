@@ -4,11 +4,11 @@ import { NullValue } from '../value'
 
 export default class NullLiteral extends Literal {
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return NullType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         return NullValue.instance;
     }
 

@@ -19,7 +19,7 @@ export default class JsxFragment extends IJsxExpression {
         writer.append("</>");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         if (this.children != null)
             this.children.forEach(child => {
                 child.check(context);

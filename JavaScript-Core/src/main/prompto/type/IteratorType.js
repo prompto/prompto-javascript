@@ -14,7 +14,7 @@ export default class IteratorType extends IterableType {
         return new IteratorType(itemType);
     }
 
-    isAssignableFrom(context: Context, other: Type): boolean {
+    isAssignableFrom(context: Context, other: IType): boolean {
         return  super.isAssignableFrom(context, other)
             || ((other instanceof IteratorType) && this.itemType.isAssignableFrom(context, other.itemType));
     }

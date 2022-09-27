@@ -37,7 +37,7 @@ export default class UnresolvedCall extends BaseStatement {
         return this.callable.toString() + (this.args!=null ? this.args.toString() : "");
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return this.resolveAndCheck(context);
     }
 
@@ -46,7 +46,7 @@ export default class UnresolvedCall extends BaseStatement {
         return this.resolved ? this.resolved.check(context) : VoidType.instance;
     }
 
-    interpret(context: Context): Value {
+    interpret(context: Context): IValue {
         this.resolve(context);
         return this.resolved ? this.resolved.interpret(context) : null;
     }

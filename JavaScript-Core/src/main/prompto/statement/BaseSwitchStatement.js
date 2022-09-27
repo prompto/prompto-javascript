@@ -10,7 +10,7 @@ export default class BaseSwitchStatement extends BaseStatement {
         this.defaultCase = defaultCase || null;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         this.checkSwitchCasesType(context);
         return this.checkReturnType(context);
     }

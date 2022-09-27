@@ -30,7 +30,7 @@ export default class MethodParameter extends IParameter {
         context.registerValue(this);
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         const actual = context.getRegisteredDeclaration(this.name);
         if(actual==null) {
             throw new SyntaxError("Unknown method: \"" + this.name + "\"");

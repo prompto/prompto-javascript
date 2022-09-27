@@ -10,7 +10,7 @@ export default class VersionLiteral extends Literal {
         super(text, new VersionValue(version));
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return VersionType.instance;
     }
 

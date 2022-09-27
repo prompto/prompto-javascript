@@ -9,7 +9,7 @@ export default class JsxText extends IJsxExpression {
         this.text = text;
     }
 
-    check(context: Context): Type {
+    check(context: Context): IType {
         return TextType.instance;
     }
 

@@ -193,9 +193,9 @@ export default abstract class BaseType extends Section implements IType {
             throw new SyntaxError("Cannot transpile int divide " + this.name + " to " + other.name);
     }
 
-    checkModulo(context: Context, other: IType): IType {
+    checkModulo(context: Context, section: Section, other: IType): IType {
         if(other instanceof EnumeratedNativeType)
-            return this.checkModulo(context, other.derivedFrom);
+            return this.checkModulo(context, section, other.derivedFrom);
         else
             throw new SyntaxError("Cannot modulo " + this.name + " with " + other.name);
     }
@@ -214,11 +214,11 @@ export default abstract class BaseType extends Section implements IType {
             throw new SyntaxError("Cannot transpile modulo " + this.name + " to " + other.name);
     }
 
-    checkMultiply(context: Context, other: IType, tryReverse: boolean): IType {
+    checkMultiply(context: Context, section: Section, other: IType, tryReverse: boolean): IType {
         if(other instanceof EnumeratedNativeType)
-            return this.checkMultiply(context, other.derivedFrom, tryReverse);
+            return this.checkMultiply(context, section, other.derivedFrom, tryReverse);
         else if(tryReverse)
-            return other.checkMultiply(context, this, false);
+            return other.checkMultiply(context, section, this, false);
         else
             throw new SyntaxError("Cannot multiply " + this.name + " with " + other.name);
     }
@@ -389,7 +389,7 @@ export default abstract class BaseType extends Section implements IType {
         return VoidType.instance;
     }
 
-    declareMember(transpiler: Transpiler, section: Section, id: Identifier): void {
+    declareMember(transpiler: Transpiler, id: Identifier): void {
         switch(id.name) {
             case "text":
                 break;
@@ -398,7 +398,7 @@ export default abstract class BaseType extends Section implements IType {
                 transpiler.require(convertToJsonNode);
                 break;
             default:
-                transpiler.context.problemListener.reportUnknownAttribute(section, id.name);
+                throw new SyntaxError("Cannot declare member: " + id.name + " from " + this.name);
         }
     }
 
@@ -427,8 +427,8 @@ export default abstract class BaseType extends Section implements IType {
         throw new SyntaxError("Cannot transpile slice for " + this.name);
     }
 
-    checkIterator(context: Context, source: IExpression): IType {
-        context.problemListener.reportCannotIterate(this, source);
+    checkIterator(context: Context, section: Section, source: IExpression): IType {
+        context.problemListener.reportCannotIterate(section, source);
         return VoidType.instance;
     }
 
@@ -485,7 +485,11 @@ export default abstract class BaseType extends Section implements IType {
         throw new Error("Cannot declare sorted from " + this.name);
     }
 
-    getSortedComparator(context: Context, key: any, desc: boolean): (a: any, b: any) => number {
+    getSortedComparator(context: Context, desc: boolean, key: any): (a: any, b: any) => number {
+        throw new Error("Unsupported for type " + this.name);
+    }
+
+    transpileSortedComparator(transpiler: Transpiler, key: IExpression | undefined, descending: boolean): void {
         throw new Error("Unsupported for type " + this.name);
     }
 
@@ -504,5 +508,7 @@ export default abstract class BaseType extends Section implements IType {
     transpileJsxCode(transpiler: Transpiler, expression: IExpression): void {
         expression.transpile(transpiler);
     }
+
+
 }
 
