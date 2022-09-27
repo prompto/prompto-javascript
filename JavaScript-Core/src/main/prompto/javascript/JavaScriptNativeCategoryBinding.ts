@@ -1,4 +1,4 @@
-import NativeCategoryBinding from '../../../main/prompto/grammar/NativeCategoryBinding.js'
+import INativeCategoryBinding from '../../../main/prompto/grammar/INativeCategoryBinding.js'
 import {JavaScriptModule} from "./index";
 import {Transpiler} from "../runtime";
 import {CodeWriter} from "../utils";
@@ -11,7 +11,7 @@ if(global && !global.Event)
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     global.Event = () => {};
 
-export default class JavaScriptNativeCategoryBinding extends NativeCategoryBinding {
+export default class JavaScriptNativeCategoryBinding extends INativeCategoryBinding {
 
     identifier: string;
     module: JavaScriptModule | null;

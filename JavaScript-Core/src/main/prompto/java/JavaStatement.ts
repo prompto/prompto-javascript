@@ -1,6 +1,12 @@
+import JavaExpression from "./JavaExpression";
+import {CodeWriter} from "../utils";
+
 export default class JavaStatement {
 
-    constructor(expression, isReturn) {
+    expression: JavaExpression;
+    isReturn: boolean;
+
+    constructor(expression: JavaExpression, isReturn: boolean) {
         this.expression = expression;
         this.isReturn = isReturn || false;
     }

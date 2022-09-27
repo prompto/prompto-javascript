@@ -1,4 +1,4 @@
-import AnnotationProcessor from './AnnotationProcessor.js'
+import AnnotationProcessor from '../../../main/prompto/processor/AnnotationProcessor.ts'
 
 export default class PageWidgetOfProcessor extends AnnotationProcessor {
 

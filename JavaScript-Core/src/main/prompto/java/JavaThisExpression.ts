@@ -1,4 +1,5 @@
-import JavaExpression from './JavaExpression.js'
+import JavaExpression from './JavaExpression'
+import {CodeWriter} from "../utils";
 
 export default class JavaThisExpression extends JavaExpression {
 

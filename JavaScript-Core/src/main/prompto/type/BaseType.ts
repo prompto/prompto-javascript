@@ -509,6 +509,10 @@ export default abstract class BaseType extends Section implements IType {
         expression.transpile(transpiler);
     }
 
+    checkArrowExpression(ctx: Context, arrow: ArrowExpression): IType {
+        throw new Error("Unsupported for type " + this.name);
+    }
+
 
 }
 

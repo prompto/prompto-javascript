@@ -23,6 +23,7 @@ export default abstract class BaseValue<T> implements IValue {
         this.mutable = mutable;
     }
 
+
     isIterable(): boolean {
         return false;
     }
@@ -58,14 +59,22 @@ export default abstract class BaseValue<T> implements IValue {
         throw new SyntaxError("No item support for " + item.toString() + " in " + this.constructor.name);
     }
 
-    abstract toJsonNode(): JsonNode;
-    abstract toJsonStream(context: Context, values: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void;
+    toJsonNode(): JsonNode {
+        throw new SyntaxError("Should never get there!");
+    }
+
+    toJsonStream(context: Context, values: JsonParent, instanceId: never, fieldName: string, withType: boolean, binaries: Map<string, never> | null): void {
+        throw new SyntaxError("Should never get there!");
+    }
 
     toDocumentValue(context: Context): IValue {
         return this;
     }
 
-    abstract getStorableData(): any;
+    getStorableData(): any {
+        throw new SyntaxError("Should never get there!");
+    }
+
     collectStorables(storables: Set<IStorable>): void {
         // nothing to do
     }

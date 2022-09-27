@@ -1,20 +1,25 @@
-import JavaExpression from './JavaExpression.js'
+import JavaExpression from './JavaExpression'
+import {CodeWriter} from "../utils";
 
 export default class JavaIdentifierExpression extends JavaExpression {
 
-    constructor(parent, identifier, isChildClass) {
+    parent: JavaExpression | null;
+    identifier: string;
+    isChildClass: boolean;
+
+    constructor(parent: JavaExpression | null, identifier: string, isChildClass?: boolean) {
         super();
         this.parent = parent || null;
-        this.identifier = identifier || null;
+        this.identifier = identifier;
         this.isChildClass = isChildClass || false;
     }
 
-    parse(ids) {
-        let result = null;
+    parse(ids: string): JavaIdentifierExpression {
+        let result: JavaIdentifierExpression;
         ids.split("\\.").forEach(part => {
             result = new JavaIdentifierExpression(result, part);
         });
-        return result;
+        return result!;
     }
 
     toString() {

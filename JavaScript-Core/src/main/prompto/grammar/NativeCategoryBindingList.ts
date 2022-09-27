@@ -1,10 +1,10 @@
 import ObjectList from '../utils/ObjectList'
-import NativeCategoryBinding from "./NativeCategoryBinding";
+import INativeCategoryBinding from "../../../main/prompto/grammar/INativeCategoryBinding";
 import { IWritable, CodeWriter } from "../utils";
 
-export default class NativeCategoryBindingList extends ObjectList<NativeCategoryBinding> implements IWritable {
+export default class NativeCategoryBindingList extends ObjectList<INativeCategoryBinding> implements IWritable {
 
-    constructor(binding?: NativeCategoryBinding) {
+    constructor(binding?: INativeCategoryBinding) {
         super(undefined, binding);
     }
 

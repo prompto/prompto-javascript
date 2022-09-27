@@ -1,6 +1,10 @@
+import {CodeWriter} from "../utils";
+
 export default class JavaLiteral {
 
-    constructor(text) {
+    text: string;
+
+    constructor(text: string) {
         this.text = text;
     }
 

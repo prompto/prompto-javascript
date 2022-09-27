@@ -1,5 +1,5 @@
 import {NullValue, BooleanValue} from "../../main/prompto/value"
-import AnnotationProcessors from './processor/AnnotationProcessors.js'
+import AnnotationProcessors from '../../main/prompto/processor/AnnotationProcessors.ts'
 import JavaScriptClassType from "./javascript/JavaScriptClassType.js"
 import $DataStore from "../../main/prompto/store/DataStore.ts"
 

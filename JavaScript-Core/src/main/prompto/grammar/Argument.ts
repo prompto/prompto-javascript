@@ -1,7 +1,7 @@
 import Section from '../parser/Section'
 import {InstanceExpression, ArrowExpression, MemberSelector, IExpression} from '../expression'
 import {MethodType, CategoryType, VoidType, IType} from '../type'
-import { ContextualExpression } from '../value'
+import {ContextualExpression, Instance} from '../value'
 import { SyntaxError } from '../error'
 import {IParameter} from "../param";
 import {CodeWriter, equalObjects} from "../utils";
@@ -29,7 +29,7 @@ export default class Argument extends Section {
     }
 
     get expression(): IExpression {
-        return this._expression ? this._expression : new InstanceExpression(this.id);
+        return this._expression ? this._expression : new InstanceExpression(this.id!);
     }
 
     set expression(expression: IExpression) {
@@ -88,7 +88,7 @@ export default class Argument extends Section {
         const requiredType = parameter.getType(transpiler.context);
         const isArrow = requiredType instanceof MethodType && this._expression instanceof ArrowExpression;
         if(isArrow) {
-            requiredType.declareArrowExpression(transpiler, this._expression);
+            requiredType.declareArrowExpression(transpiler, this._expression as unknown as ArrowExpression);
             return true;
         } else
             return false;
@@ -111,7 +111,7 @@ export default class Argument extends Section {
             if (this.parameter === null) {
                 return this._expression.toString();
             } else {
-                return this.name + " = " + this._expression.toString();
+                return this.name! + " = " + this._expression.toString();
             }
         }
     }
@@ -148,8 +148,8 @@ export default class Argument extends Section {
     toSection() {
         if(this.parameter && this._expression) {
             const section = new Section();
-            section.copySectionFrom(this.parameter);
-            section.endLocation = this._expression.endLocation;
+            section.copySectionFrom(this.parameter as unknown as Section);
+            section.endLocation = (this._expression as unknown as Section).endLocation;
             return section;
         } else if(this._expression) {
             return this._expression;
@@ -159,7 +159,7 @@ export default class Argument extends Section {
     }
 
     findParameter(methodDeclaration: IMethodDeclaration): IParameter {
-        return methodDeclaration.parameters.find(this.parameter.name);
+        return methodDeclaration.parameters!.findByName(this.parameter!.name);
     }
 
     resolve(context: Context, methodDeclaration: IMethodDeclaration, checkInstance: boolean, allowDerived: boolean): IExpression {
@@ -170,7 +170,7 @@ export default class Argument extends Section {
     resolve_(context: Context, parameter: IParameter, checkInstance: boolean, allowDerived: boolean): IExpression {
         // since we support implicit members, it's time to resolve them
         const requiredType = parameter.getType(context);
-        const actualType = this.checkActualType(context, requiredType, checkInstance);
+        const actualType = this.checkActualType(context, requiredType, checkInstance)!;
         let assignable = requiredType.isAssignableFrom(context, actualType);
         // when in dispatch, allow derived
         if (!assignable && allowDerived)
@@ -186,21 +186,22 @@ export default class Argument extends Section {
     makeAssignment(context: Context, methodDeclaration: IMethodDeclaration): void {
         let argument = this.parameter;
         // when 1st argument, can be unnamed
-        if(argument===null) {
-            if(methodDeclaration.parameters.length === 0) {
+        if(!argument) {
+            if(methodDeclaration.parameters!.length === 0) {
                 throw new SyntaxError("Method has no argument");
             }
-            argument = methodDeclaration.parameters[0];
+            argument = methodDeclaration.parameters![0];
         } else {
-            argument = methodDeclaration.parameters.find(this.name);
+            argument = methodDeclaration.parameters!.findByName(this.name);
         }
-        if(argument==null) {
-            throw new SyntaxError("Method has no argument:" + this.name);
+        if(!argument) {
+            throw new SyntaxError("Method has no argument:" + this.name!);
         }
     }
 
 
     checkActualType(context: Context, requiredType: IType, checkInstance: boolean): IType | null {
+        const calling = context.getCallingContext()!;
         const expression = this.expression;
         let actualType: IType | null;
         const isArrow = Argument.isArrowExpression(expression);
@@ -210,13 +211,12 @@ export default class Argument extends Section {
             else
                 actualType = VoidType.instance;
         } else if(requiredType instanceof MethodType)
-            actualType = expression.checkReference(context.getCallingContext());
+            actualType = expression.checkReference(calling);
         else
-            actualType = expression.check(context.getCallingContext());
+            actualType = expression.check(calling);
         if(checkInstance && actualType instanceof CategoryType) {
-            const value = expression.interpret(context.getCallingContext());
-            if(value && value.getType)
-                actualType = value.getType();
+            const value = expression.interpret(calling);
+            actualType = (value as Instance<never>).getType();
         }
         return actualType;
     }
@@ -229,8 +229,8 @@ export default class Argument extends Section {
     }
 
     static checkArrowExpression(context: Context, requiredType: IType, expression: IExpression): IType {
-        context = expression instanceof ContextualExpression ? expression.calling : context.getCallingContext();
-        const arrow = expression instanceof ArrowExpression ? expression : expression.expression;
-        return requiredType.checkArrowExpression(context, arrow);
+        const ctx = expression instanceof ContextualExpression ? expression.calling : context.getCallingContext()!;
+        const arrow = (expression instanceof ContextualExpression ? expression.expression : expression) as unknown as ArrowExpression;
+        return requiredType.checkArrowExpression(ctx, arrow);
     }
 }

@@ -1,11 +1,13 @@
 import BaseValue from "./BaseValue";
-import {IType, VoidType} from "../type";
+import {IType, MethodType, VoidType} from "../type";
 import {IExpression} from "../expression";
 import {Context, Transpiler} from "../runtime";
 import IValue from "../../../main/prompto/value/IValue";
-import {IMethodDeclaration} from "../declaration";
+import {AttributeDeclaration} from "../declaration";
+import {Section} from "../parser";
+import {CodeWriter} from "../utils";
 
-export default class ContextualExpression extends BaseValue<any> {
+export default class ContextualExpression extends BaseValue<any> implements IExpression {
 
     calling: Context;
     expression: IExpression;
@@ -14,6 +16,14 @@ export default class ContextualExpression extends BaseValue<any> {
         super(VoidType.instance, null); // TODO check that this is not a problem
         this.calling = calling;
         this.expression = expression;
+    }
+
+    isPredicate(): boolean {
+        return false;
+    }
+
+    isAssertion(): boolean {
+        return false;
     }
 
     check(context: Context): IType {
@@ -38,7 +48,7 @@ export default class ContextualExpression extends BaseValue<any> {
         transpiler.flush();
     }
 
-    transpileReference(transpiler: Transpiler, method: IMethodDeclaration): void {
+    transpileReference(transpiler: Transpiler, method: MethodType): void {
         transpiler = transpiler.newChildTranspiler(this.calling);
         this.expression.transpileReference(transpiler, method);
         transpiler.flush();
@@ -46,6 +56,26 @@ export default class ContextualExpression extends BaseValue<any> {
 
     transpileParent(transpiler: Transpiler) {
         this.transpile(transpiler);
+    }
+
+    checkAttribute(context: Context): AttributeDeclaration | null {
+        return null;
+    }
+
+    declareParent(transpiler: Transpiler): void {
+        // nothing to do
+    }
+
+    locateSectionAtLine(line: number): Section | null {
+        return this.expression.locateSectionAtLine(line);
+    }
+
+    parentToDialect(writer: CodeWriter): void {
+        // nothing to do
+    }
+
+    toDialect(writer: CodeWriter): void {
+        // nothing to do
     }
 }
 

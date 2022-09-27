@@ -1,13 +1,14 @@
 import {CmpOp, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import Section from "../parser/Section";
-import {IExpression} from "../expression";
+import {ArrowExpression, IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {TypeFamily} from "../store";
 import {IValue} from "../value";
 import {JsonNode} from "../json";
 
 export default interface IType {
+
 
     id: Identifier;
     get name(): string;
@@ -18,7 +19,6 @@ export default interface IType {
     equals(other: IType): boolean;
     anyfy(): IType;
     resolve(context: Context, param?: any): IType;
-    isAssignableFrom(context: Context, other: IType): boolean;
     isMoreSpecificThan(context: Context, itemType: IType): boolean;
     get mutable():boolean;
     asMutable(context: Context, mutable: boolean): IType;
@@ -30,6 +30,9 @@ export default interface IType {
     checkExists(context: Context): void;
     declare(transpiler: Transpiler): void;
     transpile(transpiler: Transpiler): void;
+
+    checkAssignableFrom(context: Context, section: Section, other: IType): void;
+    isAssignableFrom(context: Context, other: IType): boolean;
 
     checkAdd(context: Context, section: Section, other: IType, tryReverse: boolean): IType;
     declareAdd(transpiler: Transpiler, other: IType, tryReverse: boolean, left: IExpression, right: IExpression): void;
@@ -106,4 +109,10 @@ export default interface IType {
     transpileSortedComparator(transpiler: Transpiler, key: IExpression | undefined, descending: boolean): void;
     declareSorted(transpiler: Transpiler, key: IExpression | undefined): void;
 
+
+    checkArrowExpression(ctx: Context, arrow: ArrowExpression): IType;
+
+    transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void;
+    transpileAssignMemberValue(transpiler: Transpiler, member: Identifier, expression: IExpression): void;
+    transpileAssignMember(transpiler: Transpiler, member: Identifier): void;
 }

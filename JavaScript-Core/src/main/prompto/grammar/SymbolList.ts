@@ -1,15 +1,15 @@
 import ObjectList from '../utils/ObjectList'
 import EnumSymbol from "../expression/EnumSymbol";
 import {Context} from "../runtime";
-import {Iterator} from "../intrinsic";
+import {IIterator} from "../value";
 
-export default abstract class SymbolList<T extends EnumSymbol> extends ObjectList<T> {
+export default abstract class SymbolList<T extends EnumSymbol<never>> extends ObjectList<T> {
 
     constructor(symbols?: T[], symbol?: T) {
         super(symbols, symbol);
     }
 
-    getIterator(context: Context): Iterator<T> {
+    getIterator(context: Context): IIterator<T> {
         return new SymbolListIterator<T>(this, context);
     }
 
@@ -19,7 +19,7 @@ export default abstract class SymbolList<T extends EnumSymbol> extends ObjectLis
     }
 }
 
-class SymbolListIterator<T extends EnumSymbol> implements Iterator<T> {
+class SymbolListIterator<T extends EnumSymbol<never>> implements IIterator<T> {
 
     symbols: SymbolList<T>;
     context: Context;
@@ -36,6 +36,7 @@ class SymbolListIterator<T extends EnumSymbol> implements Iterator<T> {
     }
 
     next(): T {
-        return this.symbols[this.idx++].interpret(this.context) as T;
+        const symbol = this.symbols[this.idx++];
+        return symbol.interpret(this.context) as unknown as T;
     }
 }

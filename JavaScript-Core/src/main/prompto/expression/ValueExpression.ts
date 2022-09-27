@@ -1,5 +1,5 @@
 import BaseValue from '../value/BaseValue'
-import {IValue} from "../value";
+import {IntegerValue, IValue} from "../value";
 import {IType} from "../type";
 import {IExpression} from "./index";
 import {Context} from "../runtime";
@@ -12,6 +12,9 @@ export default class ValueExpression extends BaseValue<IValue> implements IExpre
         super(type, value);
     }
 
+    isSliceable(): boolean {
+        return this.value.isSliceable();
+    }
 
     check(context: Context): IType {
         return this.type;
@@ -27,5 +30,9 @@ export default class ValueExpression extends BaseValue<IValue> implements IExpre
 
     toDialect(writer: CodeWriter) {
         writer.append(this.value.toString());
+    }
+
+    slice(first: IntegerValue | null, last: IntegerValue | null): ISliceable {
+        return (this.value as ISliceable).slice(first, last);
     }
 }

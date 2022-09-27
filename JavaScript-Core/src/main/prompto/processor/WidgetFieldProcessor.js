@@ -1,4 +1,4 @@
-import AnnotationProcessor from './AnnotationProcessor.js'
+import AnnotationProcessor from './AnnotationProcessor.ts'
 import { TextLiteral, TypeLiteral } from '../literal'
 import { TypeExpression } from '../expression'
 import { Identifier } from '../grammar'

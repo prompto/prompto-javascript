@@ -3,6 +3,9 @@ import { AnnotationProcessors } from '../processor'
 import Identifier from "./Identifier";
 import { DocEntryList } from "../literal";
 import {IExpression} from "../expression";
+import {CodeWriter} from "../utils";
+import {Context} from "../runtime";
+import {CategoryDeclaration} from "../declaration";
 
 export default class Annotation extends Section {
 
@@ -26,10 +29,10 @@ export default class Annotation extends Section {
             return null;
     }
 
-    getArgument(name) {
+    getArgument(name: string) {
         if(!this.entries || !this.entries.items)
             return null;
-        const entry = this.entries.items.filter(entry => name === entry.key && entry.key.toString())[0];
+        const entry = this.entries.items.filter(entry => name == entry.key.toString() )[0];
         if(entry)
             return entry.value;
         else
@@ -41,10 +44,8 @@ export default class Annotation extends Section {
         if(this.entries != null && this.entries.items.length > 0) {
             writer.append("(");
             this.entries.items.forEach(entry => {
-                if(entry.key) {
-                    writer.append(entry.key);
-                    writer.append(" = ");
-                }
+                writer.append(entry.key.toString());
+                writer.append(" = ");
                 entry.value.toDialect(writer);
                 writer.append(", ");
             }, this);
@@ -54,10 +55,10 @@ export default class Annotation extends Section {
         writer.newLine();
     }
 
-    processCategory(context, declaration) {
+    processCategory(context: Context, declaration: CategoryDeclaration) {
         const processor = AnnotationProcessors.forId(this.id);
         if(processor) {
-            processor.processCategory(this, context, declaration);
+            processor.processCategory(context, this, declaration);
         } else {
             context.problemListener.reportUnknownAnnotation(this, this.name);
         }

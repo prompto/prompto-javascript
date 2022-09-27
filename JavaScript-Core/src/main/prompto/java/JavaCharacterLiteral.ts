@@ -1,8 +1,8 @@
-import JavaLiteral from './JavaLiteral.js'
+import JavaLiteral from './JavaLiteral'
 
 export default class JavaCharacterLiteral extends JavaLiteral {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text);
     }
 }

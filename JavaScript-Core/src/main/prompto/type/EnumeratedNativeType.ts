@@ -7,13 +7,14 @@ import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import {Section} from "../parser";
 import IType from "./IType";
+import {TypeFamily} from "../store";
 
 export default class EnumeratedNativeType extends BaseType {
 
     derivedFrom: IType;
 
     constructor(id: Identifier, derivedFrom: IType) {
-        super(id);
+        super(id, TypeFamily.ENUMERATED);
         this.derivedFrom = derivedFrom;
     }
 

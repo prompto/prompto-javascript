@@ -1,6 +1,6 @@
-import NativeCategoryBinding from '../../../main/prompto/grammar/NativeCategoryBinding.ts'
+import INativeCategoryBinding from '../../../main/prompto/grammar/INativeCategoryBinding.ts'
 
-export default class PythonNativeCategoryBinding extends NativeCategoryBinding {
+export default class PythonNativeCategoryBinding extends INativeCategoryBinding {
 
     constructor(identifier, module) {
         super();

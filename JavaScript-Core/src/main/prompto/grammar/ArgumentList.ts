@@ -66,10 +66,10 @@ export default class ArgumentList extends ObjectList<Argument> {
     makeArguments(context: Context, declaration: IMethodDeclaration): ArgumentList {
         const local = new ArgumentList(this);
         const args = new ArgumentList();
-        for(let i=0; i<declaration.parameters.length; i++) {
-            const parameter = declaration.parameters[i];
+        for(let i=0; i<declaration.parameters!.length; i++) {
+            const parameter = declaration.parameters![i];
             let argument = null;
-            let index = local.findIndex(parameter.name);
+            let index = local.findIndexByName(parameter.name);
             if(index<0 && i==0 && this.length>0 && this[0].parameter==null)
                 index = 0;
             if(index>=0) {
@@ -77,7 +77,7 @@ export default class ArgumentList extends ObjectList<Argument> {
                 local.splice(index, 1);
             }
             if(argument==null) {
-                if (parameter.defaultExpression != null)
+                if (parameter.defaultExpression)
                     args.push(new Argument(parameter, parameter.defaultExpression));
                 else
                     throw new SyntaxError("Missing argument:" + parameter.name);
@@ -87,7 +87,7 @@ export default class ArgumentList extends ObjectList<Argument> {
             }
         }
         if(local.length > 0)
-            throw new SyntaxError("Method has no argument:" + local[0].name);
+            throw new SyntaxError("Method has no argument:" + local[0].name!);
         return args;
     }
 

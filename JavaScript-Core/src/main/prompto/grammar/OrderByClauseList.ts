@@ -1,10 +1,14 @@
-import ObjectList from '../utils/ObjectList.ts'
+import ObjectList from '../utils/ObjectList'
 import { Dialect } from '../parser'
+import {CodeWriter} from "../utils";
+import {OrderByClause} from "./index";
+import {Context, Transpiler} from "../runtime";
+import {IQueryBuilder} from "../store";
 
-export default class OrderByClauseList extends ObjectList {
+export default class OrderByClauseList extends ObjectList<OrderByClause> {
 
-    constructor(clause) {
-        super(null, clause);
+    constructor(clauses: OrderByClause[], clause: OrderByClause) {
+        super(clauses, clause);
    }
 
     toDialect(writer: CodeWriter): void {
@@ -20,13 +24,13 @@ export default class OrderByClauseList extends ObjectList {
             writer.append(" )");
     }
 
-    checkQuery(context) {
+    checkQuery(context: Context) {
         this.forEach(clause => {
             clause.checkQuery(context);
         });
     }
 
-    interpretQuery(context, query) {
+    interpretQuery(context: Context, query: IQueryBuilder) {
         this.forEach(clause => {
             clause.interpretQuery(context, query);
         });
@@ -38,9 +42,9 @@ export default class OrderByClauseList extends ObjectList {
         });
     }
 
-    transpileQuery(transpiler, builder) {
+    transpileQuery(transpiler: Transpiler, builderName: string) {
         this.forEach(clause => {
-            clause.transpileQuery(transpiler, builder);
+            clause.transpileQuery(transpiler, builderName);
         });
     }
 }

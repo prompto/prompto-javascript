@@ -1,4 +1,4 @@
-import AnnotationProcessor from './AnnotationProcessor.js'
+import AnnotationProcessor from './AnnotationProcessor.ts'
 import {PropertiesType, AnyType, TextType, TypeType, IntegerType} from '../type'
 import { TextLiteral, BooleanLiteral, DocumentLiteral, TypeLiteral, SetLiteral } from '../literal'
 import { InternalError } from '../error'

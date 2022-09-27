@@ -12,7 +12,9 @@ export default interface IValue {
 
     // use uppercase methods for direct prompto equivalents
     GetMemberValue(context: Context, member: Identifier, autoCreate?: boolean): IValue;
+    SetMemberValue(context: Context, member: Identifier, value: IValue): void;
     GetItemValue(context: Context, item: IValue, autoCreate?: boolean): IValue;
+    SetItemValue(context: Context, item: IValue, value: IValue): void;
     CompareTo(context: Context, other: IValue): number;
     Add(context: Context, other: IValue): IValue;
     Subtract(context: Context, other: IValue): IValue;
