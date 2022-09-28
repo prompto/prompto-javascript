@@ -1,20 +1,20 @@
-import { VoidType } from '../type'
+import {IType, VoidType} from '../type'
 import { ProblemCollector } from '../problem'
 import {AttributeParameter, MethodParameter, IParameter} from '../param'
-import {Context, MethodDeclarationMap} from '../runtime'
+import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
 import { AttributeDeclaration } from '../declaration'
 import {CodeWriter} from "../utils";
 import {Identifier} from "../grammar";
+import BaseParameter from "./BaseParameter";
+import {Dialect} from "../parser";
+import {IExpression} from "../expression";
 
-export default class UnresolvedParameter implements IParameter {
+export default class UnresolvedParameter extends BaseParameter {
 
-    id: Identifier;
-    mutable = false;
-    resolved: IParameter | null;
+    resolved?: IParameter;
 
     constructor(id: Identifier) {
-        this.id = id;
-        this.resolved = null;
+        super(id, false);
     }
 
     get name() {
@@ -27,7 +27,7 @@ export default class UnresolvedParameter implements IParameter {
 
     getTranspiledName(context: Context): string {
         this.resolveAndCheck(context);
-        return this.resolved.getTranspiledName(context);
+        return this.resolved!.getTranspiledName(context);
     }
 
     toDialect(writer: CodeWriter): void {
@@ -46,37 +46,37 @@ export default class UnresolvedParameter implements IParameter {
         return this.name;
     }
 
-    getSignature(dialect) {
+    getSignature(dialect: Dialect) {
         return this.id.name;
     }
 
-    getType(context) {
+    getType(context: Context) {
         this.resolveAndCheck(context);
-        return this.resolved.getType(context);
+        return this.resolved!.getType(context);
     }
 
     register(context: Context): void {
         this.resolveAndCheck(context);
-        if(this.resolved!=null)
+        if(this.resolved)
             this.resolved.register(context);
         if(this.defaultExpression!=null)
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }
 
-    checkValue(context, value) {
+    checkValue(context: Context, value: IExpression) {
         this.resolveAndCheck(context);
-        if(this.resolved!=null)
+        if(this.resolved)
             return this.resolved.checkValue(context, value);
         else
             return VoidType.instance;
     }
 
-    resolveAndCheck(context: Context): Type {
+    resolveAndCheck(context: Context): IType {
         this.resolve(context);
-        return this.resolved ? this.resolved.check(context) : null;
+        return this.resolved ? this.resolved.check(context) : VoidType.instance;
     }
 
-    resolve(context) {
+    resolve(context: Context) {
         if (this.resolved)
             return;
         // ignore problems during resolution
@@ -84,9 +84,9 @@ export default class UnresolvedParameter implements IParameter {
         try {
             context.problemListener = new ProblemCollector();
             // try out various solutions
-            const named = context.getRegisteredDeclaration(this.id);
+            const named = context.getRegistered(this.id);
             if (named instanceof AttributeDeclaration) {
-                this.resolved = new AttributeParameter(this.id);
+                this.resolved = new AttributeParameter(this.id, this.mutable);
             } else if (named instanceof MethodDeclarationMap) {
                 this.resolved = new MethodParameter(this.id);
             }
@@ -96,27 +96,37 @@ export default class UnresolvedParameter implements IParameter {
         }
         if(!this.resolved)
             context.problemListener.reportUnknownAttribute(this.id, this.name);
-         else
-            this.resolved.setMutable(this.mutable);
-    }
+     }
 
     declare(transpiler: Transpiler): void {
         this.resolveAndCheck(transpiler.context);
-        this.resolved.declare(transpiler);
+        this.resolved!.declare(transpiler);
     }
 
     transpile(transpiler: Transpiler): void {
         this.resolveAndCheck(transpiler.context);
-        this.resolved.transpile(transpiler);
+        this.resolved!.transpile(transpiler);
     }
 
-    transpileCall(transpiler, expression) {
+    transpileCall(transpiler: Transpiler, expression: IExpression) {
         this.resolveAndCheck(transpiler.context);
-        this.resolved.transpileCall(transpiler, expression);
+        this.resolved!.transpileCall(transpiler, expression);
     }
 
-    equals(other) {
-        return other === this || (other instanceof UnresolvedParameter && this.name === other.name);
+    equals(other: IParameter): boolean {
+        return other == this || (other instanceof UnresolvedParameter && this.name == other.name);
+    }
+
+    toEDialect(writer: CodeWriter): void {
+        writer.append(this.id.name);
+    }
+
+    toMDialect(writer: CodeWriter): void {
+        writer.append(this.id.name);
+    }
+
+    toODialect(writer: CodeWriter): void {
+        writer.append(this.id.name);
     }
 }
 

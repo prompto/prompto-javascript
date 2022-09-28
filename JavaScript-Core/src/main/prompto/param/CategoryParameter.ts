@@ -1,43 +1,43 @@
-import IParameter from './IParameter'
 import {MethodType, IType} from '../type'
-import { equalObjects } from '../utils'
+import {CodeWriter, equalObjects} from '../utils'
 import { SyntaxError } from '../error'
 import { ContextualExpression, ArrowValue } from '../value'
-import { ArrowExpression } from '../expression'
+import {ArrowExpression, IExpression} from '../expression'
+import BaseParameter from "./BaseParameter";
+import {Identifier} from "../grammar";
+import {Dialect} from "../parser";
+import {Context, MethodDeclarationMap, Transpiler} from "../runtime";
+import {IParameter} from "./index";
+import {AbstractMethodDeclaration} from "../declaration";
 
-export default class CategoryParameter extends IParameter {
+export default class CategoryParameter extends BaseParameter {
 
     type: IType;
+    resolved?: IType;
 
-    constructor(type, id, defaultExpression) {
-        super(id);
+    constructor(id: Identifier, mutable: boolean, type: IType, defaultExpression?: IExpression) {
+        super(id, mutable);
         this.type = type;
-        this.resolved = null;
-        this.defaultExpression = defaultExpression || null;
-    }
-
-    setMutable(mutable) {
-        this.type.mutable = mutable;
-        this.mutable = mutable;
+        this.defaultExpression = defaultExpression;
     }
 
     getProto() {
         return this.type.name;
     }
 
-    getSignature(dialect) {
+    getSignature(dialect: Dialect) {
         return this.type.name + " " + this.id.name;
     }
 
-    getTranspiledName(context) {
+    getTranspiledName(context: Context) {
         return this.type.getTranspiledName(context);
     }
 
-    equals(other) {
+    equals(other: IParameter): boolean {
         return other === this || (other instanceof CategoryParameter && equalObjects(this.type, other.type));
     }
 
-    checkValue(context, expression) {
+    checkValue(context: Context, expression: IExpression) {
         const isArrow = expression instanceof ContextualExpression && expression.expression instanceof ArrowExpression;
         if (isArrow)
             return this.checkArrowValue(context, expression);
@@ -45,20 +45,21 @@ export default class CategoryParameter extends IParameter {
             return this.checkSimpleValue(context, expression);
     }
 
-    checkArrowValue(context, expression) {
+    checkArrowValue(context: Context, expression: ContextualExpression) {
         const decl = this.getAbstractMethodDeclaration(context);
-        return new ArrowValue(decl, expression.calling, expression.expression); // TODO check
+        return new ArrowValue(decl!, expression.calling, expression.expression as unknown as ArrowExpression); // TODO check
     }
 
-    getAbstractMethodDeclaration(context) {
-        const methods = context.getRegisteredDeclaration(this.type.id);
-        if (methods !== null)
-            return methods.getAll().filter(decl => decl.isAbstract())[0] || null;
-        else
+    getAbstractMethodDeclaration(context: Context): AbstractMethodDeclaration | null {
+        const methods = context.getRegisteredDeclaration(MethodDeclarationMap, this.type.id);
+        if (methods) {
+            const filtered = methods.getAll().filter(decl => decl.isAbstract());
+            return filtered.length ? filtered[0] as unknown as AbstractMethodDeclaration : null;
+        } else
             return null;
     }
 
-    checkSimpleValue(context, expression) {
+    checkSimpleValue(context: Context, expression: IExpression) {
         this.resolve(context);
         if (this.resolved instanceof MethodType)
             return expression.interpretReference(context);
@@ -66,13 +67,13 @@ export default class CategoryParameter extends IParameter {
             return super.checkValue(context, expression);
     }
 
-    transpileCall(transpiler, expression) {
+    transpileCall(transpiler: Transpiler, expression: IExpression) {
         this.resolve(transpiler.context);
         if (!this.transpileArrowExpressionCall(transpiler, expression))
             super.transpileCall(transpiler, expression);
     }
 
-    transpileArrowExpressionCall(transpiler, expression) {
+    transpileArrowExpressionCall(transpiler: Transpiler, expression: IExpression) {
         if (this.resolved instanceof MethodType) {
             if (expression instanceof ContextualExpression)
                 expression = expression.expression;
@@ -91,12 +92,11 @@ export default class CategoryParameter extends IParameter {
             throw new SyntaxError("Duplicate argument: \"" + this.name + "\"");
         }
         this.resolve(context);
-        if (this.resolved === this.type)
-            context.registerValue(this);
+        if (this.resolved == this.type)
+            context.registerInstance(this, true);
         else {
-            const param = new CategoryParameter(this.resolved, this.id);
-            param.setMutable(this.mutable);
-            context.registerValue(param);
+            const param = new CategoryParameter(this.id, this.mutable, this.resolved!);
+            context.registerInstance(param, true);
         }
         if (this.defaultExpression != null)
             context.setValue(this.id, this.defaultExpression.interpret(context));
@@ -111,10 +111,10 @@ export default class CategoryParameter extends IParameter {
         return this.type;
     }
 
-    resolve(context) {
-        if (this.resolved == null) {
+    resolve(context: Context): IType {
+        if (!this.resolved)
             this.resolved = this.type.resolve(context, null);
-        }
+        return this.resolved;
     }
 
     declare(transpiler: Transpiler): void {
@@ -125,17 +125,16 @@ export default class CategoryParameter extends IParameter {
             this.type.declare(transpiler);
     }
 
-    getType(context) {
-        if (context) {
-            this.resolve(context);
-            return this.resolved;
-        } else
+    getType(context?: Context): IType {
+        if (context)
+            return this.resolve(context);
+        else
             return this.type;
     }
 
     toEDialect(writer: CodeWriter): void {
         const anonymous = "any" === this.type.name;
-        this.type.toDialect(writer, true);
+        this.type.toDialect(writer);
         if (anonymous) {
             writer.append(' ');
             writer.append(this.name);
@@ -147,7 +146,7 @@ export default class CategoryParameter extends IParameter {
     }
 
     toODialect(writer: CodeWriter): void {
-        this.type.toDialect(writer, true);
+        this.type.toDialect(writer);
         writer.append(' ');
         writer.append(this.name);
     }
@@ -155,7 +154,7 @@ export default class CategoryParameter extends IParameter {
     toMDialect(writer: CodeWriter): void {
         writer.append(this.name);
         writer.append(':');
-        this.type.toDialect(writer, true);
+        this.type.toDialect(writer);
     }
-};
+}
 

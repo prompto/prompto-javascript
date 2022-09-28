@@ -1,13 +1,18 @@
-import CategoryParameter from './CategoryParameter.ts'
+import CategoryParameter from './CategoryParameter'
 import { AttributeDeclaration, ConcreteCategoryDeclaration } from '../declaration'
-import { IdentifierList } from '../grammar'
+import {Identifier, IdentifierList} from '../grammar'
 import { SyntaxError } from '../error'
-import { equalObjects, equalArrays } from '../utils'
+import {equalObjects, equalArrays, CodeWriter} from '../utils'
+import {IType} from "../type";
+import {IParameter} from "./index";
+import {Context} from "../runtime";
 
 export default class ExtendedParameter extends CategoryParameter {
 
-    constructor(type, id, attributes) {
-        super(type, id);
+    attributes: IdentifierList;
+
+    constructor(id: Identifier, mutable: boolean, type: IType, attributes: IdentifierList) {
+        super(id, mutable, type);
         this.attributes = attributes;
     }
 
@@ -15,29 +20,15 @@ export default class ExtendedParameter extends CategoryParameter {
         return this.type.name + '(' + this.attributes.toString() + ')';
     }
 
-    equals(obj) {
-        if(obj===this) {
-            return true;
-        } 
-        if(obj===null || obj===undefined) {
-            return false;
-        }
-        if(!(obj instanceof ExtendedParameter)) {
-            return false;
-        }
-        return equalObjects(this.type, obj.type) &&
-            this.name===obj.name && 
-            equalArrays(this.attributes, obj.attributes);
+    equals(obj: IParameter): boolean {
+        return obj == this ||
+            (obj instanceof ExtendedParameter && equalObjects(this.type, obj.type) && this.name == obj.name &&  equalArrays(this.attributes, obj.attributes));
     }
 
     register(context: Context): void {
-        const actual = context.getRegisteredValue(this.id);
-        if(actual!==null) {
-            throw new SyntaxError("Duplicate argument: \"" + this.id.name + "\"");
-        }
-        const declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(this.type.id), null);
+        const declaration = new ConcreteCategoryDeclaration(this.id, this.attributes, new IdentifierList(null, this.type.id), null);
         context.registerDeclaration(declaration);
-        context.registerValue(this);
+        context.registerInstance(this, true);
         if(this.defaultExpression!=null)
             context.setValue(this.id, this.defaultExpression.interpret(context));
     }
@@ -45,17 +36,18 @@ export default class ExtendedParameter extends CategoryParameter {
     check(context: Context): IType {
         this.type.checkExists(context);
         if(this.attributes!==null) {
-            this.attributes.forEach(attr => {
-                const actual = context.getRegisteredDeclaration(attr);
-                if (!(actual instanceof AttributeDeclaration) && attr.name !== "text") {
-                    throw new SyntaxError("Unknown attribute: \"" + attr + "\"");
+            this.attributes.forEach(id => {
+                const actual = context.getRegisteredDeclaration(AttributeDeclaration, id);
+                if (!actual && id.name != "text") {
+                    throw new SyntaxError("Unknown attribute: \"" + id.name + "\"");
                 }
             });
         }
+        return this.type;
     }
 
-    getType(context) {
-        const decl = context.getRegisteredDeclaration(this.id);
+    getType(context: Context) {
+        const decl = context.getRegistered(this.id);
         return decl ? decl.getType(context) : this.type;
     }
 

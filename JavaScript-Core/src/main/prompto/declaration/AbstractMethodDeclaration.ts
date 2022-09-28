@@ -5,7 +5,6 @@ import {ParameterList} from "../param";
 import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
 import {CodeWriter} from "../utils";
-import {IDeclarationInfo} from "../runtime/Catalog";
 
 export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 
@@ -19,10 +18,6 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
 
     getType(context: Context): IType {
         return this.returnType!;
-    }
-
-    toDeclarationInfo(): IDeclarationInfo {
-        throw "Should never get there!";
     }
 
     interpret(context: Context): IValue {
@@ -44,7 +39,7 @@ export default class AbstractMethodDeclaration extends BaseMethodDeclaration {
         if(this.parameters!=null) {
             this.parameters.check(context);
         }
-        return this.returnType;
+        return this.returnType || VoidType.instance;
     }
 
     declare(transpiler: Transpiler): void {

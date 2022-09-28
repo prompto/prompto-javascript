@@ -1,12 +1,12 @@
 import Section from "../parser/Section";
 import { SyntaxError } from '../error';
-import {NullType, VoidType, BooleanType, TextType, EnumeratedNativeType} from './index';
+import {NullType, VoidType, BooleanType, TextType, EnumeratedNativeType, MethodType} from './index';
 import {CodeWriter, convertToJsonString, convertToJsonNode} from '../utils';
 import IType from "./IType";
 import {CmpOp, Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 import {IMethodDeclaration} from "../declaration";
-import {IExpression} from "../expression";
+import {ArrowExpression, IExpression} from "../expression";
 import {IValue} from "../value";
 import {TypeFamily} from "../store";
 import {JsonNode} from "../json";
@@ -85,14 +85,17 @@ export default abstract class BaseType extends Section implements IType {
     }
 
     abstract declare(transpiler: Transpiler): void;
-
     abstract transpile(transpiler: Transpiler): void;
 
-    transpileAssignMemberValue(transpiler: Transpiler, name: string, expression: IExpression): void {
+    transpileAssignMember(transpiler: Transpiler, member: Identifier) {
+        throw new SyntaxError("Cannot transpile assign member from " + this.name);
+    }
+
+    transpileAssignMemberValue(transpiler: Transpiler, member: Identifier, expression: IExpression): void {
         throw new SyntaxError("Cannot transpile assign member value from " + this.name);
     }
 
-    transpileAssignItemValue(transpiler: Transpiler, item: number, expression: IExpression): void {
+    transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void {
         throw new SyntaxError("Cannot transpile assign item value from " + this.name);
     }
 
@@ -445,11 +448,15 @@ export default abstract class BaseType extends Section implements IType {
             context.problemListener.reportIncompatibleTypes(section, this, other);
     }
 
-    checkRange(context: Context, other: IType): void {
-        throw new SyntaxError("Cannot create range of " + this.name + " and " + other.name);
+    checkRange(context: Context, section: Section, other: IType): IType {
+        throw new SyntaxError("Cannot check range of " + this.name + " and " + other.name);
     }
 
-    declareRange(context: Context, other: IType): void {
+    newRange(first: IValue, last: IValue): IValue {
+        throw new SyntaxError("Cannot create new range of " + this.name);
+    }
+
+    declareRange(transpiler: Transpiler, other: IType): void {
         throw new SyntaxError("Cannot declare range of " + this.name + " and " + other.name);
     }
 
@@ -509,7 +516,7 @@ export default abstract class BaseType extends Section implements IType {
         expression.transpile(transpiler);
     }
 
-    checkArrowExpression(ctx: Context, arrow: ArrowExpression): IType {
+    checkArrowExpression(ctx: Context, arrow: ArrowExpression): MethodType {
         throw new Error("Unsupported for type " + this.name);
     }
 

@@ -5,7 +5,6 @@ export default class MatchOp {
     static CONTAINS = new MatchOp("CONTAINS");
     static HAS = new MatchOp("HAS");
     static IN = new MatchOp("IN");
-    static CONTAINED = new MatchOp("CONTAINED");
     static GREATER = new MatchOp("GREATER");
     static LESSER = new MatchOp("LESSER");
 

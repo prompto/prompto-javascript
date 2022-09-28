@@ -1,5 +1,7 @@
 import ObjectList from '../utils/ObjectList'
 import { CodeParameter, IParameter} from './index'
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
 export default class ParameterList extends ObjectList<IParameter> {
 
@@ -11,25 +13,19 @@ export default class ParameterList extends ObjectList<IParameter> {
     }
 
     register(context: Context): void {
-        this.forEach(param => {
-            param.register(context);
-        });
+        this.forEach(param => param.register(context), this);
     }
 
-    check(context: Context): IType {
-        this.forEach(param => {
-            param.check(context);
-        });
+    check(context: Context): void {
+        this.forEach(param => param.check(context), this);
     }
 
     declare(transpiler: Transpiler): void {
-        this.forEach(param => {
-            param.declare(transpiler);
-        });
+        this.forEach(param => param.declare(transpiler), this);
     }
 
-    findByName(name) {
-        return this.filter(param => name === param.name)[0] || null;
+    findByName(name: string) {
+        return this.filter(param => name == param.name)[0] || null;
     }
 
     toDialect(writer: CodeWriter): void {

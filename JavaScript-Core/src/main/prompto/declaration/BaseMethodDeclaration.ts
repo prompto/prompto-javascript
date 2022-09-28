@@ -1,5 +1,5 @@
 import BaseDeclaration from './BaseDeclaration'
-import IMethodDeclaration from "../../../main/prompto/declaration/IMethodDeclaration";
+import IMethodDeclaration from "./IMethodDeclaration";
 import {ArgumentList, Argument, Identifier} from '../grammar'
 import {IParameter, ParameterList} from '../param'
 import { ProblemRaiser } from '../problem'
@@ -12,6 +12,7 @@ import {Dialect} from "../parser";
 import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
 import {IMethodInfo} from "../runtime/Catalog";
+import {DeclarationStatement} from "../statement";
 
 export default abstract class BaseMethodDeclaration extends BaseDeclaration implements IMethodDeclaration {
 
@@ -19,6 +20,7 @@ export default abstract class BaseMethodDeclaration extends BaseDeclaration impl
     returnType: IType | null;
     memberOf: CategoryDeclaration | null;
     closureOf: IDeclaration | null;
+    declarationOf: DeclarationStatement<IMethodDeclaration> | null;
 
     constructor(id: Identifier, parameters: ParameterList | null, returnType: IType | null) {
         super(id);

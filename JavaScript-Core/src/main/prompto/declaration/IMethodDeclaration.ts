@@ -17,12 +17,14 @@ export default interface IMethodDeclaration extends IDeclaration {
 
     isAbstract(): boolean;
     getProto(context?: Context): string;
-    locateSectionAtLine(line: number): Section | null;
-    registerParameters(context: Context): void;
-    transpileMethodType(transpiler: Transpiler): void;
-    interpret(context: Context): IValue | null;
-
-    checkChild(context: Context): IType;
-
     getTranspiledName(context: Context): string;
+
+    check(context: Context): IType;
+    checkChild(context: Context): IType;
+    interpret(context: Context): IValue | null;
+    registerParameters(context: Context): void;
+
+    transpileMethodType(transpiler: Transpiler): void;
+
+    locateSectionAtLine(line: number): Section | null;
 }

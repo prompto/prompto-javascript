@@ -13,19 +13,18 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
     mutable: boolean;
     defaultExpression?: IExpression;
 
-    constructor(id: Identifier) {
+    constructor(id: Identifier, mutable: boolean) {
         super(id);
-        this.mutable = false;
+        this.mutable = mutable;
     }
 
     abstract toEDialect(writer: CodeWriter): void;
     abstract toODialect(writer: CodeWriter): void;
     abstract toMDialect(writer: CodeWriter): void;
+    abstract register(context: Context): void;
+    abstract declare(transpiler: Transpiler): void;
     abstract check(context: Context): IType;
-
-    setMutable(mutable: boolean): void {
-        this.mutable = mutable;
-    }
+    abstract equals(other: IParameter): boolean;
 
     checkValue(context: Context, expression: IExpression): IValue {
         const value = expression.interpret(context);
@@ -48,7 +47,7 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
         }
     }
 
-    transpile(transpiler: Transpiler, expression: IExpression): void {
+    transpile(transpiler: Transpiler): void {
         transpiler.append(this.name);
     }
 
@@ -65,4 +64,5 @@ export default abstract class BaseParameter extends NamedInstance implements IWr
     abstract getSignature(dialect: Dialect): string;
     abstract getProto(context: Context): string;
     abstract getTranspiledName(context: Context): string;
+
 }

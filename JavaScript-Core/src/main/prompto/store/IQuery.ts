@@ -1,3 +1,3 @@
-export default interface IQuery {
+type IQuery = any;
 
-}
+export default IQuery;

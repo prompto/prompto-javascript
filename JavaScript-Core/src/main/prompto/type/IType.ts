@@ -6,6 +6,7 @@ import {CodeWriter} from "../utils";
 import {TypeFamily} from "../store";
 import {IValue} from "../value";
 import {JsonNode} from "../json";
+import MethodType from "./MethodType";
 
 export default interface IType {
 
@@ -109,7 +110,7 @@ export default interface IType {
     transpileRange(transpiler: Transpiler, lastType: IType, first: IExpression, last: IExpression): void;
     newRange(first: IValue, last: IValue): IValue;
 
-    checkArrowExpression(ctx: Context, arrow: ArrowExpression): IType;
+    checkArrowExpression(ctx: Context, arrow: ArrowExpression): MethodType;
 
     getSortedComparator(context: Context, descending: boolean, key?: IExpression | undefined): (v1: IValue, v2: IValue) => number;
     transpileSortedComparator(transpiler: Transpiler, key: IExpression | undefined, descending: boolean): void;
