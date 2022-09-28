@@ -1,9 +1,13 @@
-import {IQueryBuilder, IStored} from "./index";
+import {IQueryBuilder, IStored, IStorable} from "./index";
 import IQuery from "./IQuery";
+import IDbIdFactory from "./IDbIdFactory";
+import {Cursor, Document, List} from "../intrinsic";
+import IAuditMedata from "./IAuditMedata";
+import IAuditRecord from "./IAuditRecord";
 
 export default class Store {
   
-    nextSequenceValue(name) {
+    nextSequenceValue(name: string): number {
         throw new Error("Must override nextSequenceValue!");
     }
 
@@ -11,19 +15,19 @@ export default class Store {
         throw new Error("Must override newQueryBuilder!");
     }
 
-    newStorableDocument(categories, dbIdFactory) {
+    newStorableDocument(categories: string[], dbIdFactory: IDbIdFactory | null): void {
         throw new Error("Must override newStorableDocument!");
     }
 
-    deleteAndStore(add, del, meta) {
+    deleteAndStore(add: IStorable[] | null, del: any[] | null, meta: IAuditMedata | null): void {
         throw new Error("Must override deleteAndStore!");
     }
 
-    deleteAndStoreAsync(add, del, meta, andThen) {
+    deleteAndStoreAsync(add: IStorable[] | null, del: any[] | null, meta: IAuditMedata | null, andThen: () => void) {
         throw new Error("Must override deleteAndStoreAsync!");
     }
 
-    fetchUnique(dbId) {
+    fetchUnique(dbId: any): IStored | null {
         throw new Error("Must override fetchUnique!");
     }
 
@@ -31,67 +35,71 @@ export default class Store {
         throw new Error("Must override fetchOne!");
     }
 
-    fetchMany(query) {
+    fetchMany(query: IQuery): Cursor<IStored> {
         throw new Error("Must override fetchMany!");
     }
 
-    isAuditEnabled() {
+    fetchManyAsync(query: IQuery, andThen: (cursor: Cursor<IStored>) => void): void {
+        throw new Error("Must override fetchManyAsync!");
+    }
+
+    isAuditEnabled(): boolean {
         throw new Error("Must override isAuditEnabled!");
     }
 
-    newAuditMetadata() {
+    newAuditMetadata(): IAuditMedata {
         throw new Error("Must override newAuditMetadata!");
     }
 
-    fetchLatestAuditMetadataId(dbId) {
+    fetchLatestAuditMetadataId(dbId: any): IAuditMedata | null {
         throw new Error("Must override fetchLatestAuditMetadataId!");
     }
 
-    fetchAllAuditMetadataIds(dbId) {
+    fetchAllAuditMetadataIds(dbId: any): List<any> {
         throw new Error("Must override fetchAllAuditMetadataIds!");
     }
 
-    fetchAuditMetadata(dbId) {
+    fetchAuditMetadata(dbId: any): IAuditMedata | null {
         throw new Error("Must override fetchAuditMetadata!");
     }
 
-    fetchAuditMetadataAsDocument(dbId) {
+    fetchAuditMetadataAsDocument(dbId: any): Document<string, any> | null {
         throw new Error("Must override fetchAuditMetadataAsDocument!");
     }
 
-    fetchLatestAuditRecord(dbId) {
+    fetchLatestAuditRecord(dbId: any): IAuditRecord | null {
         throw new Error("Must override fetchLatestAuditRecord!");
     }
 
-    fetchLatestAuditRecordAsDocument(dbId) {
+    fetchLatestAuditRecordAsDocument(dbId: any): Document<string, any> | null {
         throw new Error("Must override fetchLatestAuditRecordAsDocument!");
     }
 
-    fetchAllAuditRecords(dbId) {
+    fetchAllAuditRecords(dbId: any): List<IAuditRecord> {
         throw new Error("Must override fetchAllAuditRecords!");
     }
 
-    fetchAllAuditRecordsAsDocuments(dbId) {
+    fetchAllAuditRecordsAsDocuments(dbId: any): List<Document<string, any>> {
         throw new Error("Must override fetchAllAuditRecordsAsDocuments!");
     }
 
-    fetchDbIdsAffectedByAuditMetadataId(dbId) {
+    fetchDbIdsAffectedByAuditMetadataId(dbId: any): List<any> {
         throw new Error("Must override fetchDbIdsAffectedByAuditMetadataId!");
     }
 
-    fetchAuditRecordsMatching(auditPredicates, instancePredicates){
+    fetchAuditRecordsMatching(auditPredicates: Map<string, any> | null, instancePredicates: Map<string, any> | null): List<IAuditRecord>{
         throw new Error("Must override fetchAuditRecordsMatching!");
     }
 
-    fetchAuditRecordsMatchingAsDocuments(auditPredicates, instancePredicates){
+    fetchAuditRecordsMatchingAsDocuments(auditPredicates: Map<string, any> | null, instancePredicates: Map<string, any> | null): List<Document<string, any>>{
         throw new Error("Must override fetchAuditRecordsMatchingAsDocuments!");
     }
 
-    deleteAuditRecord(dbId){
+    deleteAuditRecord(dbId: any): void {
         throw new Error("Must override deleteAuditRecord!");
     }
 
-    deleteAuditMetadata(dbId){
+    deleteAuditMetadata(dbId: any): void {
         throw new Error("Must override deleteAuditMetadata!");
     }
 }

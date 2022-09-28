@@ -3,5 +3,5 @@ import { MemStore } from '../memstore';
 
 export default class $DataStore {
 
-    static instance: Store = new MemStore();
+    static instance: MemStore = new MemStore();
 }

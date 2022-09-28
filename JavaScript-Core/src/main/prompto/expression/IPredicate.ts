@@ -7,5 +7,4 @@ export default interface IPredicate extends IExpression {
     interpretQuery(context: Context, builder: IQueryBuilder): void;
     declareQuery(transpiler: Transpiler): void;
     transpileQuery(transpiler: Transpiler, builderName: string): void;
-
 }

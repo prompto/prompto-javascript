@@ -1,5 +1,5 @@
 export default interface IStored {
-    dbId: never;
+    dbId: any;
     hasData(name: string): boolean;
     getData<T>(name: string): T;
 }

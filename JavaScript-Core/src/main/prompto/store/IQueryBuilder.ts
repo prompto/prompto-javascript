@@ -1,9 +1,9 @@
-import {MatchOp} from "./index";
+import {AttributeInfo, MatchOp} from "./index";
 import IQuery from "./IQuery";
 
 export default interface IQueryBuilder {
 
-    verify(fieldName: string, matchOp: MatchOp, value: any): IQueryBuilder;
+    verify(fieldInfo: AttributeInfo, matchOp: MatchOp, value: any): IQueryBuilder;
     and(): IQueryBuilder;
     or(): IQueryBuilder;
     not(): IQueryBuilder;
@@ -11,5 +11,5 @@ export default interface IQueryBuilder {
     first(value: any): IQueryBuilder;
     last(value: any): IQueryBuilder;
     project(projection: string[]): IQueryBuilder;
-    orderBy(field: string, descending: boolean): IQueryBuilder;
+    orderBy(fieldInfo: AttributeInfo, descending: boolean): IQueryBuilder;
 }
