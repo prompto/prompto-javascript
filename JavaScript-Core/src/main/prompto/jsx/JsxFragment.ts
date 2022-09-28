@@ -1,9 +1,15 @@
-import IJsxExpression from './IJsxExpression.ts'
-import { JsxType } from '../type'
+import {IType, JsxType} from '../type'
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import IJsxExpression from "./IJsxExpression";
+import {Section} from "../parser";
 
-export default class JsxFragment extends IJsxExpression {
+export default class JsxFragment extends Section implements IJsxExpression {
 
-    constructor(openingSuite) {
+    openingSuite: string;
+    children?: IJsxExpression[];
+
+    constructor(openingSuite: string) {
         super();
         this.openingSuite = openingSuite;
     }
@@ -12,26 +18,20 @@ export default class JsxFragment extends IJsxExpression {
         writer.append("<>");
         if(this.openingSuite!=null)
             writer.appendRaw(this.openingSuite);
-        if(this.children!=null)
-            this.children.forEach(child => {
-                child.toDialect(writer);
-            });
+        if(this.children)
+            this.children.forEach(child => child.toDialect(writer));
         writer.append("</>");
     }
 
     check(context: Context): IType {
         if (this.children != null)
-            this.children.forEach(child => {
-                child.check(context);
-            });
+            this.children.forEach(child => child.check(context), this);
         return JsxType.instance;
     }
 
     declare(transpiler: Transpiler): void {
         if (this.children != null)
-            this.children.forEach(child => {
-                child.declare(transpiler);
-            });
+            this.children.forEach(child => child.declare(transpiler), this);
     }
 
     transpile(transpiler: Transpiler): void {
@@ -40,9 +40,8 @@ export default class JsxFragment extends IJsxExpression {
             this.children.forEach(child => {
                 transpiler.append(", ");
                 child.transpile(transpiler);
-            });
+            }, this);
             transpiler.append(")");
         }
-        return false;
     }
 }

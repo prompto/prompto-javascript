@@ -14,6 +14,7 @@ import {IStored} from "../store";
 import {Section} from "../parser";
 import {CodeWriter} from "../utils";
 import ITranspilable from "../../../main/prompto/runtime/ITranspilable";
+import {PropertyMap} from "../property";
 
 export default abstract class CategoryDeclaration extends BaseDeclaration {
 
@@ -382,6 +383,9 @@ export default abstract class CategoryDeclaration extends BaseDeclaration {
     }
 
 
+    getProperties(context: Context): PropertyMap | null {
+        return null;
+    }
 }
 
 

@@ -1,6 +1,8 @@
-import { AlwaysValidator } from './index.ts'
+import { AlwaysValidator } from './index'
 
 export default class Property {
+
+    name: string | null;
 
     constructor() {
         this.name = null;

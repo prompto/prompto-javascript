@@ -1,9 +1,9 @@
 import { TextValue } from '../value'
-import IDocumentKey from "../../../main/prompto/literal/IDocumentKey";
+import IDocEntryKey from "./IDocEntryKey";
 import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
 
-export default class DocIdentifierKey implements IDocumentKey {
+export default class DocIdentifierKey implements IDocEntryKey {
 
     id: Identifier;
 

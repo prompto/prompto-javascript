@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "antlr4": "4.9.3",
-    "html-entities": "1.2.1",
+    "html-entities": "^2.3.3",
     "jszip-sync": "3.2.1-sync",
     "sync-request": "3.0.1"
   },

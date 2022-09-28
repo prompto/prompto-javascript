@@ -1,9 +1,18 @@
-import Section from '../parser/Section.ts'
-import { BooleanType, VoidType } from '../type'
+import Section from '../parser/Section'
+import {BooleanType, IType, MethodType, VoidType} from '../type'
+import {Identifier} from "../grammar";
+import {IValue} from "../value";
+import {Context, Transpiler} from "../runtime";
+import IJsxValue from "./IJsxValue";
+import {CodeWriter} from "../utils";
 
 export default class JsxProperty extends Section {
 
-    constructor(id, value, suite) {
+    id: Identifier;
+    value: IJsxValue;
+    suite: string | null;
+
+    constructor(id: Identifier, value: IJsxValue, suite: string | null) {
         super();
         this.id = id;
         this.value = value;
@@ -17,19 +26,19 @@ export default class JsxProperty extends Section {
             return BooleanType.instance; // a value-less property is treated as a boolean flag
     }
 
-    checkProto(context, proto) {
+    checkProto(context: Context, proto: MethodType) {
         if(this.value!=null)
             return this.value.checkProto(context, proto);
         else
             return VoidType.instance; // force failure
     }
 
-    declareProto(transpiler, proto) {
+    declareProto(transpiler: Transpiler, proto: MethodType) {
         if(this.value!=null)
             this.value.declareProto(transpiler, proto);
     }
 
-    transpileProto(transpiler, proto) {
+    transpileProto(transpiler: Transpiler, proto: MethodType) {
         if(this.value!=null)
             this.value.transpileProto(transpiler, proto);
     }

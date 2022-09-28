@@ -1,31 +1,34 @@
-import IJsxExpression from '../../../main/prompto/jsx/IJsxExpression'
-import { isCharacterUpperCase } from '../utils'
+import { CodeWriter, isCharacterUpperCase} from '../utils'
 import {JsxType, AnyType, IType} from '../type'
-import { CategoryDeclaration } from '../declaration'
-import { OCleverParser } from '../parser'
-import { TypeLiteral } from '../literal'
-import { WidgetPropertiesProcessor } from '../processor'
+import {OCleverParser, Section} from '../parser'
+import {TypeLiteral} from '../literal'
+import {WidgetPropertiesProcessor} from '../processor'
 import {Dialect} from "../parser";
 import {Identifier} from "../grammar";
 import {JsxProperty} from "./index";
-import {Context} from "../runtime";
+import {Context, Transpiler} from "../runtime";
+import {PropertyMap} from "../property";
+import BaseDeclaration from "../declaration/BaseDeclaration";
+import IJsxExpression from "./IJsxExpression";
 
-export default class JsxElementBase extends IJsxExpression {
-    
+export default abstract class JsxElementBase extends Section implements IJsxExpression {
+
     id: Identifier;
-    properties: JsxProperty[]
-    
+    properties: JsxProperty[];
+
     constructor(id: Identifier, properties: JsxProperty[]) {
         super();
         this.id = id;
         this.properties = properties;
     }
-    
+
+    abstract toDialect(writer: CodeWriter): void;
+
     get name() {
         return this.id.name;
     }
     
-    check(context: Context): IType { {
+    check(context: Context): IType {
         if(this.isHtmlTag())
             this.checkHtmlTag(context);
         else
@@ -37,109 +40,112 @@ export default class JsxElementBase extends IJsxExpression {
         return !isCharacterUpperCase(this.id.name[0]);
     }
 
-    checkHtmlTag(context) {
-        this.checkWidgetProperties(context, JsxElementBase.getHtmlPropertyMap(context, this.id.name));
+    checkHtmlTag(context: Context): void {
+        this.checkWidgetProperties(context, JsxElementBase.getHtmlPropertyMap(context, this.id.name)!);
     }
 
-    checkWidgetTag(context) {
+    checkWidgetTag(context: Context): void {
         this.checkConstructable(context);
-        this.checkWidgetProperties(context, this.getWidgetPropertyMap(context));
+        this.checkWidgetProperties(context, this.getWidgetPropertyMap(context)!);
     }
 
-    checkConstructable(context) {
-        const decl = context.getRegisteredDeclaration(this.id);
-        if (decl == null || !decl.isWidget(context))
+    checkConstructable(context: Context): void {
+        const decl = context.getRegisteredCategoryDeclaration(this.id);
+        if (!decl || !decl.isWidget(context))
             context.problemListener.reportUnknownWidget(this, this.id.name);
-        if(decl!=null)
-            decl.getAbstractMethods(context).forEach(method => context.problemListener.reportIllegalAbstractWidget(this, decl.name, method.getSignature(Dialect.O)));
+        if(decl)
+            decl.getAbstractMethods(context, this).forEach(method => context.problemListener.reportIllegalAbstractWidget(this, decl.name, method.getSignature(Dialect.O)));
     }
 
 
-    getPropertyMap(context) {
+    getPropertyMap(context: Context) {
         return this.isHtmlTag() ? JsxElementBase.getHtmlPropertyMap(context, this.id.name) : this.getWidgetPropertyMap(context);
     }
 
-    getWidgetPropertyMap(context) {
-        const decl = context.getRegisteredDeclaration(this.id);
-        if (decl == null) {
+    getWidgetPropertyMap(context: Context) {
+        const decl = context.getRegisteredCategoryDeclaration(this.id);
+        if (!decl) {
             context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
             return null;
-        } else if(decl instanceof CategoryDeclaration && decl.isWidget())
+        } else if(decl.isWidget(context))
             return decl.getProperties(context);
         else
             return null;
     }
 
-    static getHtmlPropertyMap(context, tagName) {
-        if(HTML_PROPERTIES_MAP==null) {
+    static getHtmlPropertyMap(context: Context, tagName?: string): PropertyMap | null {
+        if(HTML_PROPERTY_MAP==null) {
             const parser = new OCleverParser(HTML_PROPERTY_TYPES);
             const types = parser.parse_document_literal();
-            if(HTML_TEST_MODE) {
-                const any = new TypeLiteral(AnyType.instance);
-                types.entries.items.forEach(e => { e.value = any; });
+            if(types) {
+                if (HTML_TEST_MODE) {
+                    const any = new TypeLiteral(AnyType.instance);
+                    types.entries.items.forEach(e => {
+                        e.value = any;
+                    });
+                }
+                const processor = new WidgetPropertiesProcessor();
+                HTML_PROPERTY_MAP = processor.loadProperties(context, null, types);
             }
-            const processor = new WidgetPropertiesProcessor();
-            HTML_PROPERTIES_MAP = processor.loadProperties(null, context, types);
         }
-        return HTML_PROPERTIES_MAP; // TODO filter by html tag name
+        return HTML_PROPERTY_MAP; // TODO filter by html tag name
     }
 
-    checkWidgetProperties(context, propertyMap) {
-        const actualNames = new Set();
-        if(this.properties!==null)
-            this.properties.forEach( jsxprop => {
-                if(actualNames.has(jsxprop.id.name))
-                    context.problemListener.reportDuplicateProperty(jsxprop, jsxprop.id.name);
+    checkWidgetProperties(context: Context, propertyMap: PropertyMap) {
+        const actualNames = new Set<string>();
+        if(this.properties)
+            this.properties.forEach( prop => {
+                if(actualNames.has(prop.id.name))
+                    context.problemListener.reportDuplicateProperty(prop, prop.id.name);
                 else
-                    actualNames.add(jsxprop.id.name);
-                this.checkWidgetProperty(context, propertyMap, jsxprop);
+                    actualNames.add(prop.id.name);
+                this.checkWidgetProperty(context, propertyMap, prop);
             }, this);
         if(propertyMap!==null) {
-            Object.getOwnPropertyNames(propertyMap.entries).forEach(function(name) {
-                const prop = propertyMap.entries[name];
-                if(prop.isRequired() && !actualNames.has(name))
-                    context.problemListener.reportMissingProperty(this, name);
+            propertyMap.forEach((prop, key) => {
+                if(prop.isRequired() && !actualNames.has(key))
+                    context.problemListener.reportMissingProperty(this, key);
             }, this);
         }
     }
 
-    checkWidgetProperty(context, propertyMap, jsxProp) {
+    checkWidgetProperty(context: Context, propertyMap: PropertyMap, jsxProp: JsxProperty) {
         if(propertyMap) {
             const name = jsxProp.id.name;
             let property = propertyMap.get(name);
-            if(property==null && !this.isHtmlTag(context))
-                property = JsxElementBase.getHtmlPropertyMap(context).get(name);
-            if(property==null)
-                context.problemListener.reportUnknownProperty(jsxProp, name);
-            else
+            if(!property && !this.isHtmlTag())
+                property = JsxElementBase.getHtmlPropertyMap(context)!.get(name);
+            if(property)
                 property.validate(context, jsxProp)
+            else
+                context.problemListener.reportUnknownProperty(jsxProp, name);
         } else
             jsxProp.check(context);
     }
 
     declare(transpiler: Transpiler): void { 
         if (!this.isHtmlTag()) {
-            const decl = transpiler.context.getRegisteredDeclaration(this.id);
-            if(decl==null)
-                transpiler.context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
-            else
+            const decl = transpiler.context.getRegistered(this.id);
+            if(decl instanceof BaseDeclaration)
                 decl.declare(transpiler.newLocalTranspiler());
+            else
+                transpiler.context.problemListener.reportUnknownIdentifier(this.id, this.id.name);
         }
-        if(this.properties!=null) {
+        if(this.properties) {
             const propertyMap = this.getPropertyMap(transpiler.context);
-            this.properties.forEach(function (jsxprop) {
+            this.properties.forEach(jsxprop => {
                 // noinspection JSPotentiallyInvalidUsageOfClassThis
-                this.declareProperty(transpiler, propertyMap, jsxprop);
+                this.declareProperty(transpiler, propertyMap!, jsxprop);
             }, this);
         }
         this.declareChildren(transpiler);
     }
 
-    declareProperty(transpiler, propertyMap, jsxProp) {
+    declareProperty(transpiler: Transpiler, propertyMap: PropertyMap, jsxProp: JsxProperty) {
         const name = jsxProp.id.name;
         let property = propertyMap ? propertyMap.get(name) : null;
         if(!property && !this.isHtmlTag())
-            property = JsxElementBase.getHtmlPropertyMap(transpiler.context).get(name);
+            property = JsxElementBase.getHtmlPropertyMap(transpiler.context)!.get(name);
         if(property)
             property.declare(transpiler, jsxProp);
         else
@@ -147,7 +153,7 @@ export default class JsxElementBase extends IJsxExpression {
 
     }
 
-    declareChildren(transpiler) {
+    declareChildren(transpiler: Transpiler) {
         // nothing to do
     }
 
@@ -163,9 +169,9 @@ export default class JsxElementBase extends IJsxExpression {
         else {
             const propertyMap = this.getPropertyMap(transpiler.context);
             transpiler.append("{");
-            this.properties.forEach(function(jsxProp) {
+            this.properties.forEach(jsxProp => {
                 // noinspection JSPotentiallyInvalidUsageOfClassThis
-                this.transpileProperty(transpiler, propertyMap, jsxProp);
+                this.transpileProperty(transpiler, propertyMap!, jsxProp);
                 transpiler.append(", ");
             }, this);
             transpiler.trimLast(2).append("}");
@@ -174,11 +180,11 @@ export default class JsxElementBase extends IJsxExpression {
         transpiler.append(")");
     }
 
-    transpileProperty(transpiler, propertyMap, jsxProp) {
+    transpileProperty(transpiler: Transpiler, propertyMap: PropertyMap, jsxProp: JsxProperty) {
         const name = jsxProp.id.name;
         let property = propertyMap ? propertyMap.get(name) : null;
         if(!property && !this.isHtmlTag())
-            property = JsxElementBase.getHtmlPropertyMap(transpiler.context).get(name);
+            property = JsxElementBase.getHtmlPropertyMap(transpiler.context)!.get(name);
         if(property)
             property.transpile(transpiler, jsxProp);
         else
@@ -186,12 +192,12 @@ export default class JsxElementBase extends IJsxExpression {
 
     }
 
-    transpileChildren(transpiler) {
+    transpileChildren(transpiler: Transpiler) {
         // nothing to do
     }
 
-    static set_HTML_TEST_MODE(mode) {
-        HTML_PROPERTIES_MAP = null;
+    static set_HTML_TEST_MODE(mode: boolean) {
+        HTML_PROPERTY_MAP = null;
         HTML_TEST_MODE = mode;
     }
 
@@ -343,6 +349,6 @@ const HTML_PROPERTY_TYPES = `{
 }`; // TODO: 'key' and 'ref' are for React only
 
 
-let HTML_PROPERTIES_MAP = null;
+let HTML_PROPERTY_MAP: PropertyMap | null = null;
 let HTML_TEST_MODE = false;
 

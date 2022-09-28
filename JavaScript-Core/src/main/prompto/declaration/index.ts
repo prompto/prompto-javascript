@@ -1,5 +1,6 @@
 export {default as IDeclaration} from './IDeclaration';
 export {default as IMethodDeclaration} from './IMethodDeclaration';
+export {default as IWidgetDeclaration} from './IWidgetDeclaration';
 export {default as AttributeDeclaration} from './AttributeDeclaration';
 export {default as CategoryDeclaration} from './CategoryDeclaration';
 export {default as ConcreteCategoryDeclaration} from './ConcreteCategoryDeclaration';

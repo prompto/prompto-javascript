@@ -2,6 +2,7 @@ import antlr4 from 'antlr4';
 import OParser from './OParser.js'
 import { ONamingLexer, OPromptoBuilder } from "../parser"
 import { importFsIfNode } from '../utils'
+import {DocumentLiteral} from "../literal";
 const fs = importFsIfNode();
 
 function createInput(input) {
@@ -23,7 +24,7 @@ function createInput(input) {
 
 export default class OCleverParser extends OParser {
 
-	constructor(input, debug) {
+	constructor(input, debug?: boolean) {
 		super(createInput(input));
 		if(debug)
 			this._interp.debug = true;
@@ -41,7 +42,7 @@ export default class OCleverParser extends OParser {
 		return this.doParse(this.repl, true);
 	}
 
-	parse_document_literal() {
+	parse_document_literal(): DocumentLiteral | null {
 		return this.doParse(this.document_literal);
 	}
 

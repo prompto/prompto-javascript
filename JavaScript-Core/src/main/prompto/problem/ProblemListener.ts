@@ -205,12 +205,12 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
         this.reportError(section, "Cannot call abstract method: " + methodSignature);
     }
 
-    reportMissingClosingTag(section: Section, opening: JsxElement): void {
-        this.reportError(section, "Missing closing tag '&lt;/" + opening.name + ">");
+    reportMissingClosingTag(section: Section, opening: string): void {
+        this.reportError(section, "Missing closing tag '&lt;/" + opening + ">");
     }
 
-    reportInvalidClosingTag(section: Section, closing: JsxElement, opening: JsxElement): void {
-        this.reportError(section, "Invalid closing tag: </" + closing.name + ">, expected: </" + opening.name + ">");
+    reportInvalidClosingTag(section: Section, closing: string, opening: string): void {
+        this.reportError(section, "Invalid closing tag: </" + closing + ">, expected: </" + opening + ">");
     }
 
     // noinspection JSUnusedGlobalSymbols

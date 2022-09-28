@@ -2,10 +2,11 @@ import Section from '../parser/Section';
 import {IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
-import {IType} from "../type";
+import {IType, MethodType} from "../type";
 import {IValue} from "../value";
 import {Dialect} from "../parser";
 import {AttributeDeclaration, TestMethodDeclaration} from "../declaration";
+import {Identifier} from '../grammar';
 
 export default abstract class Literal<T extends IValue> extends Section implements IExpression {
 
@@ -16,6 +17,22 @@ export default abstract class Literal<T extends IValue> extends Section implemen
         super();
         this.text = text;
         this.value = value;
+    }
+
+    checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType {
+        throw new Error('Method not implemented.');
+    }
+    checkAssignMember(context: Context, section: Section, member: Identifier, valueType: IType): IType {
+        throw new Error('Method not implemented.');
+    }
+    interpretReference(context: Context): IValue {
+        throw new Error('Method not implemented.');
+    }
+    transpileReference(transpiler: Transpiler, method: MethodType): void {
+        throw new Error('Method not implemented.');
+    }
+    transpileAssignParent(transpiler: Transpiler): unknown {
+        throw new Error('Method not implemented.');
     }
 
     isPredicate(): boolean {

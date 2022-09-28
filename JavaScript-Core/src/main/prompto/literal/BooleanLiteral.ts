@@ -1,10 +1,11 @@
-import Literal from './Literal.ts'
+import Literal from './Literal'
 import { BooleanValue } from '../value'
-import { BooleanType } from '../type'
+import {BooleanType, IType} from '../type'
+import {Context, Transpiler} from "../runtime";
 
-export default class BooleanLiteral extends Literal {
+export default class BooleanLiteral extends Literal<BooleanValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text, BooleanValue.Parse(text));
     }
 

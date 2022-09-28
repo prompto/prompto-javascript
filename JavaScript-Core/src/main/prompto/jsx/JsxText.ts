@@ -1,11 +1,14 @@
-import IJsxExpression from '../../../main/prompto/jsx/IJsxExpression.ts'
-import { TextType } from '../type'
+import {IType, TextType} from '../type'
 import HtmlEntities from 'html-entities'
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
+import IJsxExpression from "./IJsxExpression";
 
-export default class JsxText extends IJsxExpression {
+export default class JsxText implements IJsxExpression {
 
-    constructor(text) {
-        super();
+    text: string;
+
+    constructor(text: string) {
         this.text = text;
     }
 
@@ -23,7 +26,7 @@ export default class JsxText extends IJsxExpression {
 
     transpile(transpiler: Transpiler): void {
         // convert html entities
-        const text = (new HtmlEntities.XmlEntities()).decode(this.text);
+        const text = HtmlEntities.decode(this.text, { level: "all" });
         transpiler.append(JSON.stringify(text));
     }
 }

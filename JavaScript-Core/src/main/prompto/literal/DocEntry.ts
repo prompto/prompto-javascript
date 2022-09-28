@@ -1,14 +1,14 @@
 import {CodeWriter} from "../utils";
 import {IExpression} from "../expression";
 import {Transpiler} from '../runtime';
-import IDocumentKey from "../../../main/prompto/literal/IDocumentKey";
+import IDocEntryKey from "./IDocEntryKey";
 
 export default class DocEntry {
 
-    key: IDocumentKey;
+    key: IDocEntryKey;
     value: IExpression;
 
-    constructor(key: IDocumentKey, value: IExpression) {
+    constructor(key: IDocEntryKey, value: IExpression) {
         this.key = key;
         this.value = value;
     }

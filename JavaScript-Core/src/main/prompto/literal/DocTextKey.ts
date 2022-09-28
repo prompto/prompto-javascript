@@ -1,5 +1,5 @@
 import { TextValue } from '../value'
-import IDocumentKey from "./IDocumentKey";
+import IDocEntryKey from "../../../main/prompto/literal/IDocEntryKey";
 import {Context, Transpiler} from "../runtime";
 
 /*jshint evil:true*/
@@ -7,7 +7,7 @@ function unescape(text: string) {
     return eval(text) as string;
 }
 
-export default class DocTextKey implements IDocumentKey {
+export default class DocTextKey implements IDocEntryKey {
 
     text: string;
 

@@ -1,8 +1,13 @@
-import { TextType, VoidType } from '../type'
+import {IType, MethodType, TextType, VoidType} from '../type'
+import IJsxValue from "./IJsxValue";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
-export default class JsxLiteral {
+export default class JsxLiteral implements IJsxValue {
 
-    constructor(text) {
+    text: string;
+
+    constructor(text: string) {
         this.text = text;
     }
 
@@ -10,7 +15,7 @@ export default class JsxLiteral {
         return TextType.instance;
     }
 
-    checkProto(context, proto) {
+    checkProto(context: Context, proto: MethodType) {
         return VoidType.instance;
     }
 
@@ -18,7 +23,7 @@ export default class JsxLiteral {
         return this.text;
     }
 
-    isLiteral(context) {
+    isLiteral(context: Context) {
         return true;
     }
 

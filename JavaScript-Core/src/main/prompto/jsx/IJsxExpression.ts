@@ -1,10 +1,12 @@
-import Section from '../parser/Section'
-import {JsxValue, IValue} from '../value'
-import {Context} from "../runtime";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
-export default class IJsxExpression extends Section {
+export default interface IJsxExpression {
 
-    interpret(context: Context): IValue {
-        return new JsxValue(this);
-    }
+    check(context: Context): void;
+    declare(transpiler: Transpiler): void;
+    transpile(transpiler: Transpiler): void;
+
+    toDialect(writer: CodeWriter): void;
+
 }

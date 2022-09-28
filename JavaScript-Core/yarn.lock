@@ -1307,10 +1307,10 @@
   dependencies:
     "function-bind" "^1.1.1"
 
-"html-entities@1.2.1":
-  "integrity" "sha1-DfKTUfByEWNRXfueVUPl9u7VFi8="
-  "resolved" "https://registry.npmjs.org/html-entities/-/html-entities-1.2.1.tgz"
-  "version" "1.2.1"
+"html-entities@^2.3.3":
+  "integrity" "sha512-DV5Ln36z34NNTDgnz0EWGBLZENelNAtkiFA4kyNOG2tDI6Mz1uSWiq1wAKdyjnJwyDiDO7Fa2SO1CTxPXL8VxA=="
+  "resolved" "https://registry.npmjs.org/html-entities/-/html-entities-2.3.3.tgz"
+  "version" "2.3.3"
 
 "http-basic@^2.5.1":
   "integrity" "sha1-jORHvbW2xXf4pj4/p4BW7Eu02/s="

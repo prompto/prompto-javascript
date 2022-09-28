@@ -1,10 +1,15 @@
-import IJsxExpression from './IJsxExpression.ts'
-import { JsxType } from '../type'
+import {IType, JsxType} from '../type'
+import {Context, Transpiler} from "../runtime";
+import {IExpression} from "../expression";
+import {CodeWriter} from "../utils";
+import IJsxExpression from "./IJsxExpression";
 
-export default class JsxCode extends IJsxExpression {
+export default class JsxCode implements IJsxExpression {
 
-    constructor(expression, suite) {
-        super();
+    expression: IExpression;
+    suite: string;
+
+    constructor(expression: IExpression, suite: string) {
         this.expression = expression;
         this.suite = suite;
     }

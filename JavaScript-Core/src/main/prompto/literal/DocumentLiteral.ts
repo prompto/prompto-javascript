@@ -1,14 +1,16 @@
-import Literal from '../../../main/prompto/literal/Literal.ts'
-import { DocEntryList } from './index.ts'
+import Literal from './Literal'
+import { DocEntryList } from './index'
 import { DocumentValue, DecimalValue, TextValue } from '../value'
 import { Document } from '../intrinsic'
 import { DocumentType, DecimalType, IntegerType, TextType, CharacterType } from '../type'
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
-export default class DocumentLiteral extends Literal {
+export default class DocumentLiteral extends Literal<DocumentValue> {
 
-    constructor(entries) {
+    entries: DocEntryList;
+
+    constructor(entries: DocEntryList | null) {
         super("{}", new DocumentValue(new Document()));
         this.entries = entries || new DocEntryList();
     }

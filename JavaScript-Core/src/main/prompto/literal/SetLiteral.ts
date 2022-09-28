@@ -1,11 +1,12 @@
-import Literal from '../../../main/prompto/literal/Literal.ts'
+import Literal from './Literal'
 import { ExpressionList } from '../expression'
-import { SetValue, DecimalValue, TextValue } from '../value'
-import { SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType } from '../type'
+import {SetValue, DecimalValue, TextValue} from '../value'
+import {SetType, IntegerType, DecimalType, MissingType, TextType, CharacterType, IType} from '../type'
 import { inferExpressionsType } from '../utils'
 import StrictSet from "../intrinsic/StrictSet.js"
+import {Context, Transpiler} from "../runtime";
 
-export default class SetLiteral extends Literal {
+export default class SetLiteral extends Literal<SetValue> {
 
     constructor(expressions) {
         expressions = expressions || new ExpressionList();
@@ -33,7 +34,7 @@ export default class SetLiteral extends Literal {
         transpiler.append("])");
     }
 
-    interpret(context: Context): IValue {
+    interpret(context: Context): SetValue {
         const self = this;
         this.check(context); // force computation of itemType
         const value = new SetValue(this.itemType);

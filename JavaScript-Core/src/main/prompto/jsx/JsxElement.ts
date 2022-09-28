@@ -1,21 +1,30 @@
-import JsxElementBase from '../../../main/prompto/jsx/JsxElementBase.js'
-import { JsxType } from '../type'
+import JsxElementBase from './JsxElementBase'
+import {IType, JsxType} from '../type'
+import {Identifier} from "../grammar";
+import {JsxClosing, JsxExpression, JsxProperty} from "./index";
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
+import IJsxExpression from "./IJsxExpression";
 
 export default class JsxElement extends JsxElementBase {
 
-    constructor(id, nameSuite, attributes, openingSuite) {
+    children?: IJsxExpression[];
+    closing?: JsxClosing;
+    nameSuite: string | null;
+    openingSuite: string | null;
+
+    constructor(id: Identifier, nameSuite: string | null, attributes: JsxProperty[], openingSuite: string | null) {
         super(id, attributes);
         this.nameSuite = nameSuite;
         this.openingSuite = openingSuite;
-        this.closing = null;
     }
 
-    setChildren(children) {
+    setChildren(children: JsxExpression[]) {
         this.children = children;
         return this;
     }
 
-    setClosing(closing) {
+    setClosing(closing: JsxClosing) {
         this.closing = closing;
         return this;
     }
@@ -23,40 +32,37 @@ export default class JsxElement extends JsxElementBase {
     check(context: Context): IType {
         super.check(context);
         if(!this.closing)
-            context.problemListener.reportMissingClosingTag(this.id);
+            context.problemListener.reportMissingClosingTag(this, this.id.name);
         else
             this.closing.check(context, this);
         if(this.children != null)
-            this.children.forEach(child => {
-                child.check(context);
-            }, this);
+            this.children.forEach(child => child.check(context), this);
         return JsxType.instance;
     }
 
     toDialect(writer: CodeWriter): void {
         writer.append("<").append(this.id.name);
-        if(this.nameSuite!=null)
+        if(this.nameSuite)
             writer.appendRaw(this.nameSuite);
         else if(this.properties.length > 0)
             writer.append(" ");
-        this.properties.forEach(attr => { attr.toDialect(writer); });
+        this.properties.forEach(attr => attr.toDialect(writer), this);
         writer.append(">");
-        if(this.openingSuite!=null)
+        if(this.openingSuite)
             writer.appendRaw(this.openingSuite);
-        if(this.children!=null)
-            this.children.forEach(child => { child.toDialect(writer); });
-        this.closing.toDialect(writer);
+        if(this.children)
+            this.children.forEach(child => child.toDialect(writer), this);
+        if(this.closing)
+            this.closing.toDialect(writer);
     }
 
-    declareChildren(transpiler) {
-        if (this.children != null)
-            this.children.forEach(child => {
-                child.declare(transpiler);
-            }, this);
+    declareChildren(transpiler: Transpiler) {
+        if (this.children)
+            this.children.forEach(child => child.declare(transpiler), this);
     }
 
-    transpileChildren(transpiler) {
-        if (this.children != null)
+    transpileChildren(transpiler: Transpiler) {
+        if (this.children)
             this.children.forEach(child => {
                 transpiler.append(", ");
                 child.transpile(transpiler);

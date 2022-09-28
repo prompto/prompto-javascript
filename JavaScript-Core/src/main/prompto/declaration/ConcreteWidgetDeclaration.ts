@@ -6,7 +6,7 @@ import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {JsxProperty} from "../jsx";
 
-export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration {
+export default class ConcreteWidgetDeclaration extends ConcreteCategoryDeclaration implements WidgetDeclaration {
 
     properties?: JsxProperty[] | null;
 

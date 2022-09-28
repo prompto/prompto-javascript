@@ -115,4 +115,6 @@ export default interface IType {
     transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void;
     transpileAssignMemberValue(transpiler: Transpiler, member: Identifier, expression: IExpression): void;
     transpileAssignMember(transpiler: Transpiler, member: Identifier): void;
+
+    transpileJsxCode(transpiler: Transpiler, expression: IExpression): void;
 }

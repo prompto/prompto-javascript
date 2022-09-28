@@ -1,12 +1,16 @@
-import IJsxExpression from './IJsxExpression.ts'
-import { ArrowExpression } from '../expression'
+import {ArrowExpression, IExpression} from '../expression'
 import { Literal } from '../literal'
-import { VoidType } from '../type'
+import {IType, MethodType, VoidType} from '../type'
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
+import IJsxExpression from "./IJsxExpression";
+import IJsxValue from "./IJsxValue";
 
-export default class JsxExpression extends IJsxExpression {
+export default class JsxExpression implements IJsxExpression, IJsxValue {
 
-    constructor(expression) {
-        super();
+    expression: IExpression;
+
+    constructor(expression: IExpression) {
         this.expression = expression;
     }
 
@@ -14,7 +18,7 @@ export default class JsxExpression extends IJsxExpression {
         return this.expression ? this.expression.check(context) : VoidType.instance;
     }
 
-    checkProto(context, proto) {
+    checkProto(context: Context, proto: MethodType) {
         if(this.expression instanceof ArrowExpression)
             return proto.checkArrowExpression(context, this.expression);
         else if(this.expression)
@@ -23,14 +27,14 @@ export default class JsxExpression extends IJsxExpression {
             return VoidType.instance;
     }
 
-    declareProto(transpiler, proto) {
+    declareProto(transpiler: Transpiler, proto: MethodType) {
         if(this.expression instanceof ArrowExpression)
             return proto.declareArrowExpression(transpiler, this.expression);
         else if(this.expression)
             return this.expression.declare(transpiler);
     }
 
-    transpileProto(transpiler, proto) {
+    transpileProto(transpiler: Transpiler, proto: MethodType) {
         if(this.expression instanceof ArrowExpression)
             return proto.transpileArrowExpression(transpiler, this.expression);
         else if(this.expression)
