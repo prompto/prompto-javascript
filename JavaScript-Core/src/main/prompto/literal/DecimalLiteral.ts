@@ -1,10 +1,11 @@
-import Literal from '../../../main/prompto/literal/Literal.ts'
-import { DecimalType } from '../type'
+import Literal from './Literal'
+import {DecimalType, IType} from '../type'
 import { DecimalValue } from '../value'
+import {Context, Transpiler} from "../runtime";
 
-export default class DecimalLiteral extends Literal {
+export default class DecimalLiteral extends Literal<DecimalValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text, DecimalValue.Parse(text));
     }
 

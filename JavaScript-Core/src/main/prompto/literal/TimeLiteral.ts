@@ -1,11 +1,12 @@
-import Literal from './Literal.ts'
-import { TimeType } from '../type'
+import Literal from './Literal'
+import {IType, TimeType} from '../type'
 import { TimeValue } from '../value'
 import { LocalTime } from '../intrinsic'
+import {Context, Transpiler} from "../runtime";
 
-export default class TimeLiteral extends Literal {
+export default class TimeLiteral extends Literal<TimeValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         const lt = LocalTime.parse(text.substring(1,text.length-1));
         super(text, new TimeValue(lt));
     }

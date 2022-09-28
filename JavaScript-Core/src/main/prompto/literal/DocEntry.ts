@@ -1,14 +1,14 @@
 import {CodeWriter} from "../utils";
 import {IExpression} from "../expression";
-import {Transpiler} from '../runtime';
-import IDocEntryKey from "./IDocEntryKey";
+import {Context, Transpiler} from '../runtime';
+import DocKey from "./DocKey";
 
 export default class DocEntry {
 
-    key: IDocEntryKey;
+    key: DocKey;
     value: IExpression;
 
-    constructor(key: IDocEntryKey, value: IExpression) {
+    constructor(key: DocKey, value: IExpression) {
         this.key = key;
         this.value = value;
     }
@@ -22,7 +22,7 @@ export default class DocEntry {
         this.value.toDialect(writer);
     }
 
-    check(context: CodeWriter): void {
+    check(context: Context): void {
         this.key.check(context);
         this.value.check(context);
     }

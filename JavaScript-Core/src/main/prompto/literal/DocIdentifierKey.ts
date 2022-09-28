@@ -1,13 +1,14 @@
 import { TextValue } from '../value'
-import IDocEntryKey from "./IDocEntryKey";
 import {Identifier} from "../grammar";
 import {Context, Transpiler} from "../runtime";
+import DocKey from "./DocKey";
 
-export default class DocIdentifierKey implements IDocEntryKey {
+export default class DocIdentifierKey extends DocKey {
 
     id: Identifier;
 
     constructor(id: Identifier) {
+        super();
         this.id = id;
    }
 

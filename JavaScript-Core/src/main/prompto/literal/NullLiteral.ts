@@ -1,8 +1,16 @@
-import Literal from "../../../main/prompto/literal/Literal.ts"
-import { NullType } from '../type'
-import { NullValue } from '../value'
+import Literal from "./Literal"
+import {IType, NullType} from '../type'
+import {IValue, NullValue} from '../value'
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
-export default class NullLiteral extends Literal {
+export default class NullLiteral extends Literal<NullValue> {
+
+    static instance = new NullLiteral();
+
+    private constructor() {
+        super("null", NullValue.instance);
+    }
 
     check(context: Context): IType {
         return NullType.instance;
@@ -37,4 +45,3 @@ export default class NullLiteral extends Literal {
     }
 }
 
-NullLiteral.instance = new NullLiteral();

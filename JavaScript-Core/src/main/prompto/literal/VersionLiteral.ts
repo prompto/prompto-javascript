@@ -1,11 +1,12 @@
-import Literal from '../../../main/prompto/literal/Literal.ts'
-import { VersionType } from '../type'
+import Literal from './Literal'
+import {IType, VersionType} from '../type'
 import { VersionValue } from '../value'
 import { Version } from '../intrinsic'
+import {Context, Transpiler} from "../runtime";
 
-export default class VersionLiteral extends Literal {
+export default class VersionLiteral extends Literal<VersionValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         const version = Version.parse(text.substring(1,text.length-1));
         super(text, new VersionValue(version));
     }

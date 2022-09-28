@@ -1,3 +1,3 @@
-export default class Document {
-
+export default class Document<k,V> {
+    $safe_setMember(name: K, value: V): void;
 }

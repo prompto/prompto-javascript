@@ -1,6 +1,14 @@
+import DictKey from "./DictKey";
+import {IExpression} from "../expression";
+import {CodeWriter} from "../utils";
+import {Transpiler} from "../runtime";
+
 export default class DictEntry {
-  
-    constructor(key, value) {
+
+    key: DictKey;
+    value: IExpression;
+
+    constructor(key: DictKey, value: IExpression) {
         this.key = key;
         this.value = value;
    }

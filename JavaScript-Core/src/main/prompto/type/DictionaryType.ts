@@ -175,7 +175,7 @@ export default class DictionaryType extends ContainerType {
                 transpiler.require(List);
                 break;
             case "json":
-                transpiler.require(convertToJson);
+                transpiler.require(convertToJsonString);
                 transpiler.require(convertToJsonNode);
                 transpiler.require(Document);
                 break;

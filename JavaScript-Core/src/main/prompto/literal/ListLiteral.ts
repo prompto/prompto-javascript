@@ -1,49 +1,48 @@
-import Literal from './Literal.ts'
-import { ListType, MissingType, CharacterType, TextType, DecimalType, IntegerType } from '../type'
-import { ListValue, TextValue, DecimalValue } from '../value'
+import Literal from './Literal'
+import {ListType, MissingType, TextType, DecimalType, IType} from '../type'
+import {ListValue, TextValue, DecimalValue, IValue, IntegerValue, CharacterValue} from '../value'
 import { List } from '../intrinsic'
 import { ExpressionList } from '../expression'
-import { inferExpressionsType } from '../utils'
+import {CodeWriter, inferExpressionsType} from '../utils'
+import {Context, Transpiler} from "../runtime";
 
-export default class ListLiteral extends Literal {
+export default class ListLiteral extends Literal<ListValue> {
 
-    constructor(mutable, expressions) {
+    mutable: boolean;
+    expressions: ExpressionList;
+    itemType?: IType;
+    type?: IType;
+
+    constructor(mutable: boolean, expressions: ExpressionList | null) {
         expressions = expressions || new ExpressionList();
-        super("[" + expressions.toString() + "]", new ListValue(MissingType.instance, null, null, mutable ));
-        this.itemType = null;
+        super("[" + expressions.toString() + "]", new ListValue(MissingType.instance, mutable));
         this.mutable = mutable;
         this.expressions = expressions;
     }
 
     check(context: Context): IType {
-        if(this.itemType==null) {
+        if(!this.itemType) {
             this.itemType = inferExpressionsType(context, this.expressions);
-            this.type = new ListType(this.itemType, this.mutable);
+            delete this.type;
         }
-        return this.type;
+        if(!this.type)
+            this.type = new ListType(this.itemType, this.mutable);
+        return this.type!;
     }
 
     interpret(context: Context): IValue {
         if(this.expressions.length) {
-            const self = this;
             this.check(context); // force computation of itemType
-            const list = new ListValue(this.itemType, null, null, this.mutable);
-            this.expressions.forEach(expression => {
-                let item = expression.interpret(context);
-                item = self.interpretPromotion(item);
-                list.add(item);
-            });
-            return list;
+            const items = this.expressions.map(expression => this.interpretPromotion(expression.interpret(context)), this);
+            return new ListValue(this.itemType!, this.mutable, items);
         } else
             return this.value;
     }
 
-    interpretPromotion(item) {
-        if (item == null)
-            return item;
-        if (DecimalType.instance === this.itemType && item.type === IntegerType.instance)
+    interpretPromotion(item: IValue) {
+        if (DecimalType.instance === this.itemType && item instanceof IntegerValue)
             return new DecimalValue(item.DecimalValue());
-        else if (TextType.instance === this.itemType && item.type === CharacterType.instance)
+        else if (TextType.instance === this.itemType && item instanceof CharacterValue)
             return new TextValue(item.value);
         else
             return item;
@@ -67,7 +66,7 @@ export default class ListLiteral extends Literal {
     }
 
     transpile(transpiler: Transpiler): void {
-        transpiler.append("new List(").append(this.mutable).append(", [");
+        transpiler.append("new List(").appendBoolean(this.mutable).append(", [");
         if(this.expressions!=null) {
             this.expressions.transpile(transpiler);
             transpiler.append('])');

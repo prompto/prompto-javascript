@@ -1,37 +1,38 @@
-import Literal from './Literal.ts'
-import { TypeType } from '../type'
-import { TypeValue } from '../value'
+import Literal from './Literal'
+import {IType, TypeType} from '../type'
+import {IValue, TypeValue} from '../value'
 import { Dialect } from '../parser'
-import { MethodDeclarationMap } from '../runtime'
+import {Context, MethodDeclarationMap, Transpiler} from '../runtime'
 import { Type } from '../intrinsic'
+import {CodeWriter} from "../utils";
 
-export default class TypeLiteral extends Literal {
+export default class TypeLiteral extends Literal<TypeValue> {
   
-    constructor(type) {
-        super(type.toString(), type);
+    constructor(type: IType) {
+        super(type.toString(), new TypeValue(type));
     }
 
     check(context: Context): IType {
-        return new TypeType(this.value);
+        return new TypeType(this.value.value);
     }
 
     interpret(context: Context): IValue {
-        return new TypeValue(this.value);
+        return this.value;
     }
 
     toDialect(writer: CodeWriter): void {
         if(writer.dialect===Dialect.E) {
-            const decl = writer.context.getRegisteredDeclaration(this.value.id);
+            const decl = writer.context.getRegistered(this.value.value.id);
             if(decl instanceof MethodDeclarationMap)
                 writer.append("Method: ");
             else
                 writer.append("Type: ");
         }
-        this.value.toDialect(writer);
+        this.value.value.toDialect(writer);
     }
 
-    parenttoDialect(writer: CodeWriter): void {
-        this.value.toDialect(writer);
+    parentToDialect(writer: CodeWriter): void {
+        this.value.value.toDialect(writer);
     }
 
     declare(transpiler: Transpiler): void {
@@ -40,16 +41,14 @@ export default class TypeLiteral extends Literal {
 
     transpile(transpiler: Transpiler): void {
         transpiler.append("new Type('").append(this.value.toString()).append("')");
-        return false;
     }
 
-    declareParent(transpiler) {
+    declareParent(transpiler: Transpiler) {
         this.value.declare(transpiler);
     }
 
-    transpileParent(transpiler) {
+    transpileParent(transpiler: Transpiler) {
         transpiler.append(this.value.toString());
-        return false;
     }
 }
 

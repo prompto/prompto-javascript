@@ -1,14 +1,15 @@
-import Literal from './Literal.ts'
-import { IntegerType } from '../type'
+import Literal from './Literal'
+import {IntegerType, IType} from '../type'
 import { IntegerValue } from '../value'
+import {Context, Transpiler} from "../runtime";
 
-function parse(value) {
+function parse(value: string) {
 	return parseInt(value);
 }
 
-export default class IntegerLiteral extends Literal {
+export default class IntegerLiteral extends Literal<IntegerValue> {
 
-    constructor(text, value) {
+    constructor(text: string, value?: number) {
         super(text, new IntegerValue(value || parse(text)));
     }
 

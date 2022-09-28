@@ -1,15 +1,14 @@
-import IValue from './IValue.ts'
+import BaseValue from "./BaseValue";
 import { IntegerValue, TextValue } from '../value'
 import { SyntaxError } from '../error'
 import { CharacterType } from '../type'
 import { removeAccents } from '../utils'
 
 
-export default class CharacterValue extends IValue {
+export default class CharacterValue extends BaseValue<string> {
 
-    constructor(value) {
-        super(CharacterType.instance);
-        this.value = value;
+    constructor(value: string) {
+        super(CharacterType.instance, value);
     }
 
     static isWhitespace(c) {

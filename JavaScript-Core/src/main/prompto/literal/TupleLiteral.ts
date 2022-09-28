@@ -1,14 +1,17 @@
-import Literal from '../../../main/prompto/literal/Literal.ts'
-import { TupleType } from '../type'
-import { TupleValue } from '../value'
+import Literal from './Literal'
+import {IType, TupleType} from '../type'
+import {IValue, TupleValue} from '../value'
 import { List, Tuple } from '../intrinsic'
 import { ExpressionList } from '../expression'
+import {Context, Transpiler} from "../runtime";
+import {CodeWriter} from "../utils";
 
-export default class TupleLiteral extends Literal {
+export default class TupleLiteral extends Literal<TupleValue> {
 
-    constructor(mutable, expressions) {
-        if(typeof(mutable)!=typeof(true))
-            throw "mutable!";
+    mutable: boolean;
+    expressions: ExpressionList;
+
+    constructor(mutable: boolean, expressions: ExpressionList | null) {
         expressions = expressions || new ExpressionList();
         super("(" + expressions.toString() + ")", new TupleValue());
         this.mutable = mutable;
@@ -26,20 +29,15 @@ export default class TupleLiteral extends Literal {
     }
 
     transpile(transpiler: Transpiler): void {
-        transpiler.append("new Tuple(").append(this.mutable).append(", [");
+        transpiler.append("new Tuple(").appendBoolean(this.mutable).append(", [");
         this.expressions.transpile(transpiler);
         transpiler.append("])");
     }
 
     interpret(context: Context): IValue {
         if(this.expressions.length>0) {
-            const tuple = new TupleValue();
-            this.expressions.forEach(expression => {
-                const item = expression.interpret(context);
-                tuple.add(item);
-            });
-            tuple.mutable = this.mutable;
-            return tuple;
+            const items = this.expressions.map(expression => expression.interpret(context), this);
+            return new TupleValue(this.mutable, items);
         } else
             return this.value;
     }

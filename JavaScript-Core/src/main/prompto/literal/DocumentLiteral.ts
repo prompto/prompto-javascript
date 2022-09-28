@@ -1,14 +1,17 @@
 import Literal from './Literal'
 import { DocEntryList } from './index'
-import { DocumentValue, DecimalValue, TextValue } from '../value'
+import {DocumentValue, DecimalValue, TextValue, IValue, IntegerValue, CharacterValue} from '../value'
 import { Document } from '../intrinsic'
-import { DocumentType, DecimalType, IntegerType, TextType, CharacterType } from '../type'
+import {DocumentType, DecimalType, TextType, IType} from '../type'
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
 
 // we can only compute keys by evaluating key expressions in context
 // so we need to keep the full entry list.
 export default class DocumentLiteral extends Literal<DocumentValue> {
 
     entries: DocEntryList;
+    itemType?: IType;
 
     constructor(entries: DocEntryList | null) {
         super("{}", new DocumentValue(new Document()));
@@ -36,26 +39,24 @@ export default class DocumentLiteral extends Literal<DocumentValue> {
     }
 
     interpret(context: Context): IValue {
-        if(this.entries.items.length>0) {
+        if(this.entries.length>0) {
             this.check(context); /// force computation of itemType
-            const doc = new Document();
-            this.entries.items.forEach(function(entry) {
+            const doc = new Document<TextValue, IValue>();
+            this.entries.forEach(entry => {
                 const key = entry.key.interpret(context);
                 let val = entry.value.interpret(context);
                 val = this.interpretPromotion(val);
-                doc[key] = val;
+                doc.$safe_setMember(key, val);
             }, this);
             return new DocumentValue(doc);
         } else
             return this.value;
     }
 
-    interpretPromotion(item) {
-        if (item == null)
-            return item;
-        if (DecimalType.instance == this.itemType && item.type == IntegerType.instance)
+    interpretPromotion(item: IValue): IValue {
+        if (DecimalType.instance == this.itemType && item instanceof IntegerValue)
             return new DecimalValue(item.DecimalValue());
-        else if (TextType.instance == this.itemType && item.type == CharacterType.instance)
+        else if (TextType.instance == this.itemType && item instanceof CharacterValue)
             return new TextValue(item.value);
         else
             return item;

@@ -1,8 +1,17 @@
-import { IntegerType } from '../type';
+import {IntegerType, IType} from '../type';
+import {IExpression} from "../expression";
+import {CodeWriter} from "../utils";
+import {Context, Transpiler} from "../runtime";
+import {IValue} from "../value";
+import {Section} from "../parser";
 
-export default class RangeLiteral {
+export default class RangeLiteral extends Section {
 
-    constructor(first, last) {
+    first: IExpression;
+    last: IExpression;
+
+    constructor(first: IExpression, last: IExpression) {
+        super();
         this.first = first;
         this.last = last;
     }
@@ -22,7 +31,7 @@ export default class RangeLiteral {
     check(context: Context): IType {
         const firstType = this.first.check(context);
         const lastType = this.last.check(context);
-        return firstType.checkRange(context,lastType);
+        return firstType.checkRange(context, this, lastType);
     }
 
     interpret(context: Context): IValue {
@@ -47,7 +56,8 @@ export default class RangeLiteral {
 
     transpile(transpiler: Transpiler): void {
         const firstType = this.first.check(transpiler.context);
-        return firstType.transpileRange(transpiler, this.first, this.last);
+        const lastType = this.last.check(transpiler.context);
+        return firstType.transpileRange(transpiler, lastType, this.first, this.last);
     }
 }
 

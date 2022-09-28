@@ -1,4 +1,5 @@
-import IntegerLiteral from './IntegerLiteral.js'
+import IntegerLiteral from './IntegerLiteral'
+import {Transpiler} from "../runtime";
 
 export default class MinIntegerLiteral extends IntegerLiteral {
 

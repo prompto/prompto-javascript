@@ -1,11 +1,12 @@
-import Literal from './Literal.ts'
-import { DateType } from '../type'
+import Literal from './Literal'
+import {DateType, IType} from '../type'
 import { DateValue } from '../value'
 import { LocalDate } from '../intrinsic'
+import {Context, Transpiler} from "../runtime";
 
-export default class DateLiteral extends Literal {
+export default class DateLiteral extends Literal<DateValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text, new DateValue(LocalDate.parse(text.substring(1,text.length-1))));
     }
 

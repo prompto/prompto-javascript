@@ -1,16 +1,17 @@
-import Literal from './Literal.ts'
-import { UUIDType } from '../type'
+import Literal from './Literal'
+import {IType, UUIDType} from '../type'
 import { UUIDValue } from '../value'
 import { UUID } from '../intrinsic'
+import {Context, Transpiler} from "../runtime";
 
 /*jshint evil:true*/
-function parse(text) {
-	return eval(text);
+function parse(text: string) {
+	return eval(text) as string;
 }
 
-export default class UUIDLiteral extends Literal {
+export default class UUIDLiteral extends Literal<UUIDValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text, new UUIDValue(parse(text)));
     }
 

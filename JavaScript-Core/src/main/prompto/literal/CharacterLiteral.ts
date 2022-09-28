@@ -1,15 +1,16 @@
-import Literal from './Literal.ts'
-import { CharacterType } from '../type'
+import Literal from './Literal'
+import {CharacterType, IType} from '../type'
 import { CharacterValue } from '../value'
+import {Context, Transpiler} from "../runtime";
 
 /*jshint evil:true*/
-function unescape(text) {
-	return eval(text);
+function unescape(text: string): string {
+	return eval(text) as string;
 }
 
-export default class CharacterLiteral extends Literal {
+export default class CharacterLiteral extends Literal<CharacterValue> {
 
-    constructor(text) {
+    constructor(text:string) {
         super(text, new CharacterValue(unescape(text)));
     }
 

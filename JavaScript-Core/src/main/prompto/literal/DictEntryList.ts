@@ -1,20 +1,21 @@
-export default class DictEntryList {
+import {DictEntry} from "./index";
+import ObjectList from "../utils/ObjectList";
+import {CodeWriter} from "../utils";
+import {Transpiler} from "../runtime";
 
-    constructor(entries, entry) {
-        this.items = entries || [];
-        entry = entry || null;
-        if(entry!==null) {
-            this.items.push(entry);
-        }
+export default class DictEntryList extends ObjectList<DictEntry> {
+
+    constructor(entries?: DictEntry[], entry?: DictEntry) {
+        super(entries, entry);
     }
 
     toDialect(writer: CodeWriter): void {
         writer.append('<');
-        if(this.items.length>0) {
-            this.items.forEach(item => {
+        if(this.length>0) {
+            this.forEach(item => {
                 item.toDialect(writer);
                 writer.append(", ");
-            });
+            }, this);
             writer.trimLast(2);
         } else
             writer.append(':');
@@ -22,15 +23,13 @@ export default class DictEntryList {
     }
 
     declare(transpiler: Transpiler): void {
-        this.items.forEach(item => {
-            item.declare(transpiler);
-        });
+        this.forEach(item => item.declare(transpiler), this);
      }
 
     transpile(transpiler: Transpiler): void {
         transpiler.append('{');
-        if(this.items.length>0) {
-            this.items.forEach(item => {
+        if(this.length>0) {
+            this.forEach(item => {
                 item.transpile(transpiler);
                 transpiler.append(",");
             });
@@ -40,10 +39,7 @@ export default class DictEntryList {
     }
 
     toString() {
-        return "<" + (this.items.length ? this.items.join(", ") : ':') + ">";
+        return "<" + (this.length ? this.join(", ") : ':') + ">";
     }
 
-    add(entry) {
-        this.items.push(entry);
-    }
 }

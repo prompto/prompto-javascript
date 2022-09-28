@@ -96,7 +96,6 @@ export default interface IType {
     declareItem(transpiler: Transpiler, itemType: IType, item: IExpression): void;
     transpileItem(transpiler: Transpiler, itemType: IType, item: IExpression): void;
 
-
     checkIterator(context: Context, section: Section, source: IExpression): IType;
     declareIterator(transpiler: Transpiler, id: Identifier, expression: IExpression): void;
     transpileIterator(transpiler: Transpiler, id: Identifier, expression: IExpression): void;
@@ -105,16 +104,21 @@ export default interface IType {
     declareSlice(transpiler: Transpiler, first: IExpression | null, last: IExpression | null): void;
     transpileSlice(transpiler: Transpiler, first: IExpression | null, last: IExpression | null): void;
 
+    checkRange(context: Context, section: Section, lastType: IType): IType;
+    declareRange(transpiler: Transpiler, lastType: IType): void;
+    transpileRange(transpiler: Transpiler, lastType: IType, first: IExpression, last: IExpression): void;
+    newRange(first: IValue, last: IValue): IValue;
+
+    checkArrowExpression(ctx: Context, arrow: ArrowExpression): IType;
+
     getSortedComparator(context: Context, descending: boolean, key?: IExpression | undefined): (v1: IValue, v2: IValue) => number;
     transpileSortedComparator(transpiler: Transpiler, key: IExpression | undefined, descending: boolean): void;
     declareSorted(transpiler: Transpiler, key: IExpression | undefined): void;
-
-
-    checkArrowExpression(ctx: Context, arrow: ArrowExpression): IType;
 
     transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void;
     transpileAssignMemberValue(transpiler: Transpiler, member: Identifier, expression: IExpression): void;
     transpileAssignMember(transpiler: Transpiler, member: Identifier): void;
 
     transpileJsxCode(transpiler: Transpiler, expression: IExpression): void;
+
 }

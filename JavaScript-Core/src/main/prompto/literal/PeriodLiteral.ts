@@ -1,11 +1,12 @@
-import Literal from './Literal.ts'
-import { PeriodType } from '../type'
+import Literal from './Literal'
+import {IType, PeriodType} from '../type'
 import { PeriodValue } from '../value'
 import { Period } from '../intrinsic'
+import {Context, Transpiler} from "../runtime";
 
-export default class PeriodLiteral extends Literal {
+export default class PeriodLiteral extends Literal<PeriodValue> {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text, new PeriodValue(Period.parse(text.substring(1,text.length-1))));
     }
 
