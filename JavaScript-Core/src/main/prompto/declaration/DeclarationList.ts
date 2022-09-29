@@ -1,17 +1,13 @@
-import ObjectList from '../../../main/prompto/utils/ObjectList.js'
+import ObjectList from '../utils/ObjectList'
 import { AttributeDeclaration, CategoryDeclaration, BaseMethodDeclaration, TestMethodDeclaration, EnumeratedNativeDeclaration } from '../declaration'
 import IDeclaration from "./IDeclaration";
-import {IDeclarationInfo} from "../runtime/Catalog";
+import {Context} from "../runtime";
+import {CodeWriter} from "../utils";
 
-export default class DeclarationList extends ObjectList<IDeclaration<IDeclarationInfo>> {
+export default class DeclarationList extends ObjectList<IDeclaration> {
 
-    constructor(items, item) {
-        items = items || [];
-        super(items);
-        item = item || null;
-        if(item!==null) {
-            this.add(item);
-        }
+    constructor(items?: IDeclaration[], item?: IDeclaration) {
+        super(items, item);
     }
 
     register(context: Context): void {
@@ -22,48 +18,31 @@ export default class DeclarationList extends ObjectList<IDeclaration<IDeclaratio
         this.registerTests(context);
     }
 
-    registerAttributes(context) {
-        this.forEach(decl => {
-            if(decl instanceof AttributeDeclaration)
-                decl.register(context);
-        });
+    registerAttributes(context: Context) {
+        this.filter(decl => decl instanceof AttributeDeclaration).map(decl => decl as AttributeDeclaration).forEach(decl => decl.register(context));
     }
 
-    registerCategories(context) {
-        this.forEach(decl => {
-            if(decl instanceof CategoryDeclaration)
-                decl.register(context);
-        });
+    registerCategories(context: Context) {
+        this.filter(decl => decl instanceof CategoryDeclaration).map(decl => decl as CategoryDeclaration).forEach(decl => decl.register(context));
     }
 
-    registerEnumerated(context) {
-        this.forEach(decl => {
-            if(decl instanceof EnumeratedNativeDeclaration)
-                decl.register(context);
-        });
+    registerEnumerated(context: Context) {
+        this.filter(decl => decl instanceof EnumeratedNativeDeclaration).map(decl => decl as EnumeratedNativeDeclaration).forEach(decl => decl.register(context));
     }
 
-    registerMethods(context) {
-        this.forEach(decl => {
-            if(decl instanceof BaseMethodDeclaration)
-                decl.register(context);
-        });
+    registerMethods(context: Context) {
+        this.filter(decl => decl instanceof BaseMethodDeclaration).map(decl => decl as unknown as BaseMethodDeclaration).forEach(decl => decl.register(context));
     }
 
-    registerTests(context) {
-        this.forEach(decl => {
-            if(decl instanceof TestMethodDeclaration)
-                decl.register(context);
-        });
+    registerTests(context: Context) {
+        this.filter(decl => decl instanceof TestMethodDeclaration).map(decl => decl as TestMethodDeclaration).forEach(decl => decl.register(context));
     }
 
     unregister(context: Context): void {
-        this.forEach(decl => {
-            decl.unregister(context);
-        });
+        this.forEach(decl => decl.unregister(context));
     }
 
-    check(context: Context): IType {
+    check(context: Context): void {
         this.forEach(decl => {
             if(decl instanceof BaseMethodDeclaration)
                 decl.check(context, true);
@@ -74,15 +53,10 @@ export default class DeclarationList extends ObjectList<IDeclaration<IDeclaratio
 
     toDialect(writer: CodeWriter): void {
         this.forEach(decl => {
-            if(decl.comments) {
-                decl.comments.forEach(cmt => {
-                    cmt.toDialect(writer);
-                });
-            }
+            if(decl.comments)
+                decl.comments.forEach(cmt => cmt.toDialect(writer));
             if(decl.annotations) {
-                decl.annotations.forEach(ann => {
-                    ann.toDialect(writer);
-                });
+                decl.annotations.forEach(ann => ann.toDialect(writer));
             }
             decl.toDialect(writer);
             writer.newLine();

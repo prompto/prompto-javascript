@@ -12,9 +12,9 @@ export default class SortedExpression extends BaseExpression {
 
     source: IExpression;
     descending: boolean;
-    key?: IExpression;
+    key: IExpression | null;
 
-    constructor(source: IExpression, descending: boolean, key?: IExpression) {
+    constructor(source: IExpression, descending: boolean, key: IExpression | null) {
         super();
         this.source = source;
         this.descending = descending;
@@ -35,7 +35,7 @@ export default class SortedExpression extends BaseExpression {
         if (this.descending)
             writer.append("descending ");
         this.source.toDialect(writer);
-        if (this.key != null) {
+        if (this.key) {
             const itemType = this.getItemType(writer.context);
             writer = this.contextualizeWriter(writer, itemType);
             writer.append(" with ");

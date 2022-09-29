@@ -1,7 +1,7 @@
 import ConcreteCategoryDeclaration from './ConcreteCategoryDeclaration'
 import {EnumeratedCategoryType, IType} from '../type'
 import { List } from '../intrinsic'
-import { Identifier, IdentifierList } from '../grammar'
+import {CategorySymbolList, Identifier, IdentifierList} from '../grammar'
 import {CategorySymbol} from "../expression";
 import {Context, Transpilable, Transpiler} from "../runtime";
 import {IEnumerationInfo} from "../runtime/Catalog";
@@ -9,9 +9,9 @@ import {CodeWriter} from "../utils";
 
 export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDeclaration {
 
-    symbols: CategorySymbol[];
+    symbols: CategorySymbolList;
 
-    constructor(id: Identifier, attrs: IdentifierList, derived: Identifier | null, symbols: CategorySymbol[]) {
+    constructor(id: Identifier, attrs: IdentifierList, derived: Identifier | null, symbols: CategorySymbolList | null) {
         const derivedList = derived ? new IdentifierList(null, derived) : null;
         super(id, attrs, derivedList, null);
         this.setSymbols(symbols);
@@ -51,8 +51,8 @@ export default class EnumeratedCategoryDeclaration extends ConcreteCategoryDecla
         return "name" === id.name || super.hasAttribute(context, id);
     }
 
-    setSymbols(symbols: CategorySymbol[]): void {
-        this.symbols = symbols || [];
+    setSymbols(symbols: CategorySymbolList | null): void {
+        this.symbols = symbols || new CategorySymbolList();
         const type = new EnumeratedCategoryType(this.id);
         this.symbols.forEach(symbol => {
             symbol.type = type;

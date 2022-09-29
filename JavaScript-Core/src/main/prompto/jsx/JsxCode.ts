@@ -7,9 +7,9 @@ import IJsxExpression from "./IJsxExpression";
 export default class JsxCode implements IJsxExpression {
 
     expression: IExpression;
-    suite: string;
+    suite: string | null;
 
-    constructor(expression: IExpression, suite: string) {
+    constructor(expression: IExpression, suite?: string | null) {
         this.expression = expression;
         this.suite = suite;
     }
@@ -23,7 +23,7 @@ export default class JsxCode implements IJsxExpression {
         writer.append("{");
         this.expression.toDialect(writer);
         writer.append("}");
-        if(this.suite!=null)
+        if(this.suite)
             writer.appendRaw(this.suite);
     }
 

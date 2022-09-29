@@ -112,9 +112,9 @@ export default interface IType {
 
     checkArrowExpression(ctx: Context, arrow: ArrowExpression): MethodType;
 
-    getSortedComparator(context: Context, descending: boolean, key?: IExpression | undefined): (v1: IValue, v2: IValue) => number;
-    transpileSortedComparator(transpiler: Transpiler, key: IExpression | undefined, descending: boolean): void;
-    declareSorted(transpiler: Transpiler, key: IExpression | undefined): void;
+    getSortedComparator(context: Context, descending: boolean, key: IExpression | null): (v1: IValue, v2: IValue) => number;
+    transpileSortedComparator(transpiler: Transpiler, key: IExpression | null, descending: boolean): void;
+    declareSorted(transpiler: Transpiler, key: IExpression | null): void;
 
     transpileAssignItemValue(transpiler: Transpiler, item: IExpression, expression: IExpression): void;
     transpileAssignMemberValue(transpiler: Transpiler, member: Identifier, expression: IExpression): void;

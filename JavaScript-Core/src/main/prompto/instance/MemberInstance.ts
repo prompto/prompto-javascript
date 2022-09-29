@@ -6,10 +6,12 @@ import {CodeWriter} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
 import {IType} from "../type";
+import IAssignableInstance from "./IAssignableInstance";
+import IAssignableSelector from "./IAssignableSelector";
 
-export default class MemberInstance extends Section {
+export default class MemberInstance extends Section implements IAssignableSelector {
 
-    parent: IExpression | null;
+    parent: IAssignableInstance | null;
     id: Identifier;
 
     constructor(id: Identifier) {
@@ -26,8 +28,8 @@ export default class MemberInstance extends Section {
         return this.parent!.toString() + "." + this.name;
     }
 
-    toDialect(writer: CodeWriter): void {
-        this.parent!.toDialect(writer);
+    toDialect(writer: CodeWriter, expression: IExpression): void {
+        this.parent!.toDialect(writer, expression);
         writer.append(".");
         writer.append(this.name);
     }

@@ -10,7 +10,7 @@ export default class SelectorBase extends BaseExpression {
 
     constructor(parent: IExpression | null) {
         super();
-        this.parent = parent || null;
+        this.parent = parent;
     }
 
     checkParent(context: Context): IType {

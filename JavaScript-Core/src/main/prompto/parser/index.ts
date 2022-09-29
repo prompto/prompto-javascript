@@ -23,4 +23,3 @@ export {default as MPromptoBuilder} from './MPromptoBuilder';
 export {default as MParserFactory} from './MParserFactory';
 export {default as Dialect} from './Dialect';
 export {default as IParserFactory} from './IParserFactory';
-export { getFullText } from './ParserUtils';

@@ -7,7 +7,7 @@ import {IQueryBuilder} from "../store";
 
 export default class OrderByClauseList extends ObjectList<OrderByClause> {
 
-    constructor(clauses: OrderByClause[], clause: OrderByClause) {
+    constructor(clauses?: OrderByClause[], clause?: OrderByClause) {
         super(clauses, clause);
    }
 

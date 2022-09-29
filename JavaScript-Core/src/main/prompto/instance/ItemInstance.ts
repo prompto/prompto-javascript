@@ -6,10 +6,12 @@ import {Context, Transpiler} from "../runtime";
 import {IValue} from "../value";
 import {Section} from "../parser";
 import {Identifier} from "../grammar";
+import IAssignableSelector from "./IAssignableSelector";
+import IAssignableInstance from "./IAssignableInstance";
 
-export default class ItemInstance extends Section {
+export default class ItemInstance extends Section implements IAssignableSelector {
 
-    parent: IExpression | null;
+    parent: IAssignableInstance | null;
     item: IExpression;
 
     constructor(item: IExpression) {
@@ -22,8 +24,8 @@ export default class ItemInstance extends Section {
         return this.parent!.toString() + "[" + this.item.toString() + "]";
     }
 
-    toDialect(writer: CodeWriter): void {
-        this.parent!.toDialect(writer);
+    toDialect(writer: CodeWriter, expression: IExpression): void {
+        this.parent!.toDialect(writer, expression);
         writer.append('[');
         this.item.toDialect(writer);
         writer.append(']');

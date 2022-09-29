@@ -20,5 +20,6 @@ export default interface IParameter extends INamed {
     getProto(context: Context): string;
     getTranspiledName(context: Context): string;
     toDialect(writer: CodeWriter): void;
+    setMutable(mutable: boolean): void;
 
 }

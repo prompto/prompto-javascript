@@ -5,8 +5,9 @@ import {CodeWriter} from "../utils";
 import {Section} from "../parser";
 import {IExpression} from "../expression";
 import {IValue} from "../value";
+import IAssignableInstance from "./IAssignableInstance";
 
-export default class VariableInstance extends Section {
+export default class VariableInstance extends Section implements IAssignableInstance {
 
     id: Identifier;
 

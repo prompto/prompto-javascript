@@ -10,7 +10,7 @@ export default class NativeWidgetDeclaration extends NativeCategoryDeclaration {
 
     properties?: JsxProperty[] | null;
 
-    constructor(id: Identifier, categoryBindings: NativeCategoryBindingList, methods: IMethodDeclaration[]) {
+    constructor(id: Identifier, categoryBindings: NativeCategoryBindingList, methods: IMethodDeclaration[] | null) {
         super(id, null, categoryBindings, null, methods);
     }
 

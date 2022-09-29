@@ -13,7 +13,7 @@ export default class SelectorExpression extends SelectorBase {
     first: IExpression | null;
     last: IExpression | null;
 
-    constructor(parent: IExpression, first: IExpression | null, last: IExpression | null) {
+    constructor(parent: IExpression | null, first: IExpression | null, last: IExpression | null) {
         super(parent);
         this.first = first || null;
         this.last = last || null;

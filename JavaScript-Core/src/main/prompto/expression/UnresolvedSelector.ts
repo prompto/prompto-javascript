@@ -15,7 +15,7 @@ export default class UnresolvedSelector extends SelectorBase {
     id: Identifier;
     resolved?: SelectorBase;
 
-    constructor(parent: IExpression, id: Identifier) {
+    constructor(parent: IExpression | undefined, id: Identifier) {
         super(parent);
         this.id = id;
         this.copySectionFrom(id);

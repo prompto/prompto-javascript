@@ -10,7 +10,7 @@ export default class ItemSelector extends SelectorBase {
 
     item: IExpression;
 
-    constructor(parent: IExpression, item: IExpression) {
+    constructor(parent: IExpression | undefined, item: IExpression) {
         super(parent);
         this.item = item;
     }

@@ -17,7 +17,7 @@ export default class MethodCall extends SimpleStatement {
 
     args: ArgumentList | null;
 
-    constructor(selector, args) {
+    constructor(selector: MethodSelector, args: ArgumentList | null) {
         super();
         this.selector = selector;
         this.args = args || null;

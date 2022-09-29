@@ -3,8 +3,9 @@ import {CodeWriter, IWritable} from "../utils";
 import {Context, Transpiler} from "../runtime";
 import {IType, MethodType} from "../type";
 import {IValue} from "../value";
-import {AttributeDeclaration, IMethodDeclaration} from "../declaration";
+import {AttributeDeclaration} from "../declaration";
 import {IExpression} from "./index";
+import {Identifier} from "../grammar";
 
 export default abstract class BaseExpression extends Section implements IExpression, IWritable {
 
@@ -44,12 +45,20 @@ export default abstract class BaseExpression extends Section implements IExpress
         return this.check(context);
     }
 
+    checkAssignItem(context: Context, section: Section, itemType: IType, valueType: IType): IType {
+        throw new Error("checkAssignItem not implemented by " + this.constructor.name);
+    }
+
+    checkAssignMember(context: Context, section: Section, member: Identifier, valueType: IType): IType {
+        throw new Error("checkAssignItem not implemented by " + this.constructor.name);
+    }
+
     checkAttribute(context: Context): AttributeDeclaration | null {
         context.problemListener.reportMissingAttribute(this, this.toString());
         return null;
     }
 
-    interpret(context: Context): IValue {
+   interpret(context: Context): IValue {
         throw new Error("interpret not implemented by " + this.constructor.name);
     }
 
@@ -76,5 +85,10 @@ export default abstract class BaseExpression extends Section implements IExpress
     transpileParent(transpiler: Transpiler): void {
         this.transpile(transpiler);
     }
+
+    transpileAssignParent(transpiler: Transpiler): void {
+        this.transpile(transpiler);
+    }
+
 
 }

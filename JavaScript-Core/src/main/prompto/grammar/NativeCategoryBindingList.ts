@@ -1,11 +1,11 @@
 import ObjectList from '../utils/ObjectList'
-import INativeCategoryBinding from "../../../main/prompto/grammar/INativeCategoryBinding";
+import INativeCategoryBinding from "./INativeCategoryBinding";
 import { IWritable, CodeWriter } from "../utils";
 
 export default class NativeCategoryBindingList extends ObjectList<INativeCategoryBinding> implements IWritable {
 
-    constructor(binding?: INativeCategoryBinding) {
-        super(undefined, binding);
+    constructor(bindings?: INativeCategoryBinding[], binding?: INativeCategoryBinding) {
+        super(bindings, binding);
     }
 
     toDialect(writer: CodeWriter): void {
@@ -15,7 +15,7 @@ export default class NativeCategoryBindingList extends ObjectList<INativeCategor
     toEDialect(writer: CodeWriter): void {
         writer.append("define category bindings as:").newLine().indent();
         this.forEach(binding => {
-            binding.toEDialect(writer);
+            binding.toDialect(writer);
             writer.newLine();
         });
         writer.dedent();
@@ -24,7 +24,7 @@ export default class NativeCategoryBindingList extends ObjectList<INativeCategor
     toMDialect(writer: CodeWriter): void {
         writer.append("def category bindings:").newLine().indent();
         this.forEach(binding => {
-            binding.toMDialect(writer);
+            binding.toDialect(writer);
             writer.newLine();
         });
         writer.dedent();
@@ -33,7 +33,7 @@ export default class NativeCategoryBindingList extends ObjectList<INativeCategor
     toODialect(writer: CodeWriter): void {
         writer.append("category bindings {").newLine().indent();
         this.forEach(binding => {
-            binding.toODialect(writer);
+            binding.toDialect(writer);
             writer.append(';').newLine();
         });
         writer.dedent().append("}");
