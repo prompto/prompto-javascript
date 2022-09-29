@@ -1,6 +1,10 @@
-export default class PythonLiteral {
+import {CodeWriter} from "../utils";
 
-    constructor(text) {
+export default abstract class PythonLiteral {
+
+    text: string;
+
+    constructor(text: string) {
         this.text = text;
     }
 

@@ -1,8 +1,8 @@
-import PythonLiteral from './PythonLiteral.js'
+import PythonLiteral from './PythonLiteral'
 
 export default class PythonIntegerLiteral extends PythonLiteral {
 
-    constructor(text) {
+    constructor(text: string) {
         super(text);
     }
 }

@@ -1,6 +1,14 @@
+import IPythonExpression from "./IPythonExpression";
+import {PythonModule} from "./index";
+import {CodeWriter} from "../utils";
+
 export default class PythonStatement {
 
-    constructor(expression, isReturn) {
+    expression: IPythonExpression;
+    isReturn: boolean;
+    module?: PythonModule;
+
+    constructor(expression: IPythonExpression, isReturn: boolean) {
         this.expression = expression;
         this.isReturn = isReturn;
         this.module = null;

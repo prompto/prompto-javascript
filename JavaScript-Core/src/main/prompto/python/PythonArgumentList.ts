@@ -1,10 +1,10 @@
 import ObjectList from '../utils/ObjectList'
-import PythonExpression from "./PythonExpression";
+import IPythonExpression from "./IPythonExpression";
 import {CodeWriter} from "../utils";
 
-export default class PythonArgumentList extends ObjectList<PythonExpression> {
+export default class PythonArgumentList extends ObjectList<IPythonExpression> {
 
-    constructor(args?: PythonExpression[], arg?: PythonExpression) {
+    constructor(args?: IPythonExpression[], arg?: IPythonExpression) {
         super(args, arg);
     }
 

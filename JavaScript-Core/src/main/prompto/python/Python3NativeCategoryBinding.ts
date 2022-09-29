@@ -1,17 +1,17 @@
-import PythonNativeCategoryBinding from './PythonNativeCategoryBinding.js'
+import PythonNativeCategoryBinding from './PythonNativeCategoryBinding'
+import {CodeWriter} from "../utils";
 
 export default class Python3NativeCategoryBinding extends PythonNativeCategoryBinding {
 
-    constructor(binding) {
+    constructor(binding: PythonNativeCategoryBinding) {
         super(binding.identifier, binding.module);
     }
 
     toDialect(writer: CodeWriter): void {
         writer.append("Python3: ");
-        writer.append(this.identifier);
-        if(this.module!=null)
-            this.module.toDialect(writer);
+        super.toDialect(writer);
     }
+
 }
 
 

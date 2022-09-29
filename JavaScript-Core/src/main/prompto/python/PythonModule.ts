@@ -1,6 +1,10 @@
+import {CodeWriter} from "../utils";
+
 export default class PythonModule {
 
-    constructor(ids) {
+    ids: string[];
+
+    constructor(ids: string[]) {
         this.ids = ids;
     }
 
