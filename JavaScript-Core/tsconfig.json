@@ -20,7 +20,7 @@
     ]
   },
   "include": [
-    "src/main/*.ts",
+    "**/*.ts",
     "globals.d.ts"
   ],
   "exclude": [

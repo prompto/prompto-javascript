@@ -1,10 +1,13 @@
-import PropertyValidator from './PropertyValidator.js';
-import {MethodType, AnyType } from '../type';
-import { MethodDeclarationMap } from '../runtime';
+import PropertyValidator from './PropertyValidator';
+import {MethodType, AnyType, IType} from '../type';
+import {Context, MethodDeclarationMap} from '../runtime';
+import {JsxProperty} from "../jsx";
 
 export default class TypeSetValidator extends PropertyValidator {
 
-    constructor(types) {
+    types: Set<IType>;
+
+    constructor(types: Set<IType>) {
         super();
         this.types = types;
     }
@@ -14,11 +17,11 @@ export default class TypeSetValidator extends PropertyValidator {
     }
 
     // noinspection JSUnusedLocalSymbols
-    getType(context) {
+    getType(context: Context) {
         return AnyType.instance;
     }
 
-    validate(context, jsxProp) {
+    validate(context: Context, jsxProp: JsxProperty) {
         const actual = jsxProp.check(context);
         if (Array.from(this.types).some(type => {
                 const local = type instanceof MethodType ? jsxProp.checkProto(context, type) : actual;
@@ -31,13 +34,11 @@ export default class TypeSetValidator extends PropertyValidator {
         }
     }
 
-    getMethodDeclarations(context) {
+    getMethodDeclarations(context: Context) {
         return Array.from(this.types)
             .filter(type => type instanceof MethodType)
-            .map(function(type) {
-                const decls = context.getRegisteredDeclaration(type.name);
-                return decls instanceof MethodDeclarationMap ? decls.getAll() : [];
-            })
-            .reduce((reduced, current) => reduced.concat(current), []);
+            .map(type => context.getRegistered(type.id))
+            .map(decl => decl instanceof MethodDeclarationMap ? decl.getAll() : [])
+            .flatMap(m => m);
     }
 }

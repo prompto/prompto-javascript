@@ -1,19 +1,23 @@
-import PropertyValidator from "./PropertyValidator.js";
+import PropertyValidator from "./PropertyValidator";
 import { AnyType } from "../type";
 import { ProblemCollector } from "../problem";
+import {Context} from "../runtime";
+import {JsxProperty} from "../jsx";
 
 export default class ValidatorSetValidator extends PropertyValidator {
 
-    constructor(validators) {
+    validators: PropertyValidator[];
+
+    constructor(validators: PropertyValidator[]) {
         super();
         this.validators = validators;
     }
 
-    getType(context) {
+    getType(context: Context) {
         return AnyType.instance;
     }
 
-    validate(context, jsxProp) {
+    validate(context: Context, jsxProp: JsxProperty) {
         let valid = false;
         context.pushProblemListener(new ProblemCollector());
         try {

@@ -6,6 +6,7 @@ import {IExpression} from "../expression";
 import {CodeWriter} from "../utils";
 import {Context} from "../runtime";
 import {CategoryDeclaration} from "../declaration";
+import {IValue} from "../value";
 
 export default class Annotation extends Section {
 
@@ -29,7 +30,7 @@ export default class Annotation extends Section {
             return null;
     }
 
-    getArgument(name: string) {
+    getArgument(name: string): IValue | null {
         if(!this.entries || !this.entries.items)
             return null;
         const entry = this.entries.items.filter(entry => name == entry.key.toString() )[0];

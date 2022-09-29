@@ -1,8 +1,13 @@
-import PropertyValidator from './PropertyValidator.js'
+import PropertyValidator from './PropertyValidator'
+import {IType} from "../type";
+import {Context} from "../runtime";
+import {JsxProperty} from "../jsx";
 
 export default class RequiredValidator extends PropertyValidator {
 
-    constructor(validator) {
+    validator: PropertyValidator;
+
+    constructor(validator: PropertyValidator) {
         super();
         this.validator = validator;
     }
@@ -23,11 +28,11 @@ export default class RequiredValidator extends PropertyValidator {
         return this.validator;
     }
 
-    getType(context) {
+    getType(context: Context): IType {
         return this.validator.getType(context);
     }
 
-    validate(context, jsxProp) {
+    validate(context: Context, jsxProp: JsxProperty) {
         return this.validator.validate(context, jsxProp);
     }
 }

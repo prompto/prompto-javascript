@@ -18,6 +18,7 @@ export default interface IMethodDeclaration extends IDeclaration {
     isAbstract(): boolean;
     getProto(context?: Context): string;
     getTranspiledName(context: Context): string;
+    asReference(): IMethodDeclaration;
 
     check(context: Context): IType;
     checkChild(context: Context): IType;
@@ -27,4 +28,5 @@ export default interface IMethodDeclaration extends IDeclaration {
     transpileMethodType(transpiler: Transpiler): void;
 
     locateSectionAtLine(line: number): Section | null;
+
 }

@@ -1,5 +1,5 @@
 import antlr4 from 'antlr4';
-import IProblem from "../../../main/prompto/problem/IProblem";
+import IProblem from "./IProblem";
 import {Section} from "../parser";
 import ProblemType from "./ProblemType";
 import AbstractParser from "../parser/AbstractParser";
@@ -7,15 +7,15 @@ import {Identifier} from "../grammar";
 import {MethodCall} from "../statement";
 import {IExpression} from "../expression";
 import {IType} from "../type";
-import {JsxElement} from "../jsx";
+import BaseType from "../type/BaseType";
+import {isASet} from "../utils";
 
 export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.Token> {
 
-    problems: IProblem[];
+    problems: IProblem[] = [];
 
     constructor() {
         super();
-        this.problems = [];
     }
 
     collectProblem(problem: IProblem): void {
@@ -165,8 +165,13 @@ export default class ProblemListener extends antlr4.error.ErrorListener<antlr4.T
         this.reportError(section, "Cannot cast " + actual.toString() + " to " + target.toString());
     }
 
-    reportIllegalAssignment(section: Section, expected: IType, actual: IType): void {
-        this.reportError(section, "Type " + actual.name + " is not compatible with " + expected.name);
+    reportIllegalAssignment(section: Section, expected: IType | Set<IType>, actual: IType): void {
+        if(expected instanceof BaseType)
+            this.reportError(section, "Type " + actual.name + " is not compatible with " + expected.name);
+        else if(isASet(expected)) {
+            const names = "[" + Array.from(expected as Set<IType>).map(t => t).join(', ') + "]";
+            this.reportError(section, "Type " + actual.name + " is not compatible with " + names);
+        }
     }
 
     reportIllegalAnnotation(section: Section, message: string): void {

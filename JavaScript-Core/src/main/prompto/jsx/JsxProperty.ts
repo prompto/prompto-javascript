@@ -26,7 +26,7 @@ export default class JsxProperty extends Section {
             return BooleanType.instance; // a value-less property is treated as a boolean flag
     }
 
-    checkProto(context: Context, proto: MethodType) {
+    checkProto(context: Context, proto: MethodType): IType {
         if(this.value!=null)
             return this.value.checkProto(context, proto);
         else

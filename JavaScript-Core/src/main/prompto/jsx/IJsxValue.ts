@@ -12,6 +12,7 @@ export default interface IJsxValue {
     declareProto(transpiler: Transpiler, proto: MethodType): void;
     transpileProto(transpiler: Transpiler, proto: MethodType): void;
 
+    isLiteral(): boolean;
     toDialect(writer: CodeWriter): void;
 
 }

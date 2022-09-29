@@ -1,6 +1,6 @@
-import {JsxProperty} from "../jsx";
 import ICategoryDeclaration from "./ICategoryDeclaration";
+import {PropertyMap} from "../property";
 
 export default interface IWidgetDeclaration extends ICategoryDeclaration {
-    properties: JsxProperty | null;
+    properties: PropertyMap | null;
 }

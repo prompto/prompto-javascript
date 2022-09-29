@@ -423,6 +423,11 @@
   "resolved" "https://registry.npmjs.org/@types/node/-/node-14.11.2.tgz"
   "version" "14.11.2"
 
+"@types/node@^18.7.23":
+  "integrity" "sha512-DWNcCHolDq0ZKGizjx2DZjR/PqsYwAcYUJmfMWqtVU2MBMG5Mo+xFZrhGId5r/O5HOuMPyQEcM6KUBp5lBZZBg=="
+  "resolved" "https://registry.npmjs.org/@types/node/-/node-18.7.23.tgz"
+  "version" "18.7.23"
+
 "@typescript-eslint/eslint-plugin@^5.37.0":
   "integrity" "sha512-Fde6W0IafXktz1UlnhGkrrmnnGpAo1kyX7dnyHHVrmwJOn72Oqm3eYtddrpOwwel2W8PAK9F3pIL5S+lfoM0og=="
   "resolved" "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-5.37.0.tgz"

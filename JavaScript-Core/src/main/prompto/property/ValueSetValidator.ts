@@ -1,9 +1,13 @@
-import PropertyValidator from './PropertyValidator.js'
+import PropertyValidator from './PropertyValidator'
 import { AnyType } from '../type'
+import {Context} from "../runtime";
+import {JsxProperty} from "../jsx";
 
 export default class ValueSetValidator extends PropertyValidator {
 
-    constructor(values) {
+    values: Set<string>;
+
+    constructor(values: Set<string>) {
         super();
         this.values = values;
     }
@@ -12,11 +16,11 @@ export default class ValueSetValidator extends PropertyValidator {
         return "<" + Array.from(this.values).join(", ") + ">";
     }
 
-    getType(context) {
+    getType(context: Context) {
         return AnyType.instance;
     }
 
-    validate(context, jsxProp) {
+    validate(context: Context, jsxProp: JsxProperty) {
         const value = jsxProp.value;
         if(value && value.isLiteral()) {
             let text = value.toString();

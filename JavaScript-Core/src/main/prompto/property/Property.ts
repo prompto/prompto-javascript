@@ -1,8 +1,12 @@
-import { AlwaysValidator } from './index'
+import {AlwaysValidator, PropertyValidator} from './index'
+import {Context, Transpiler} from "../runtime";
+import {JsxProperty} from "../jsx";
 
 export default class Property {
 
     name: string | null;
+    help: string | null;
+    _validator: PropertyValidator;
 
     constructor() {
         this.name = null;
@@ -14,22 +18,22 @@ export default class Property {
         return this._validator;
     }
 
-    set validator(validator) {
+    set validator(validator: PropertyValidator) {
         if(this._validator.isRequired())
             this._validator = validator.required();
         else
             this._validator = validator.optional();
     }
 
-    validate(context, jsxProperty) {
+    validate(context: Context, jsxProperty: JsxProperty) {
         this._validator.validate(context, jsxProperty);
     }
 
-    declare(transpiler, jsxProperty) {
+    declare(transpiler: Transpiler, jsxProperty: JsxProperty) {
         this._validator.declare(transpiler, jsxProperty);
     }
 
-    transpile(transpiler, jsxProperty) {
+    transpile(transpiler: Transpiler, jsxProperty: JsxProperty) {
         this._validator.transpile(transpiler, jsxProperty);
     }
 
@@ -37,7 +41,7 @@ export default class Property {
         return this._validator.isRequired();
     }
 
-    setRequired(set) {
+    setRequired(set: boolean) {
         this._validator = set ? this._validator.required() : this._validator.optional();
     }
 }

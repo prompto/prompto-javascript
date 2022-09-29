@@ -19,7 +19,7 @@ export default interface IType {
 
     equals(other: IType): boolean;
     anyfy(): IType;
-    resolve(context: Context, param?: any): IType;
+    resolve(context: Context, onError?: (type: IType) => void): IType;
     isMoreSpecificThan(context: Context, itemType: IType): boolean;
     get mutable():boolean;
     asMutable(context: Context, mutable: boolean): IType;

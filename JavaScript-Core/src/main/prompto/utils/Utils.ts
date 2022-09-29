@@ -207,6 +207,13 @@ export function isACharacter(o: any): boolean {
     return isAText(o) && (o as string).length===1;
 }
 
+export function isASet(o: any): boolean {
+    const proto = Object.getPrototypeOf(o) as object;
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    const ctor = proto["constructor" as keyof typeof proto] as Function;
+    return ctor && ctor.name == "Set";
+}
+
 export function isAMethod(o: any, params: any[], result: any): boolean {
     if(typeof o !== 'function')
         return false;
@@ -346,3 +353,18 @@ export function convertToJsonString(o: any): string {
     return JSON.stringify(node);
 }
 
+export function integerRange(start: number, end: number): number[] {
+    start = Math.floor(start);
+    end = Math.floor(end);
+
+    const diff = end - start;
+    if (diff === 0) {
+        return [start];
+    }
+
+    const keys = Array(Math.abs(diff) + 1).keys();
+    return Array.from(keys).map(x => {
+        const increment = end > start ? x : -x;
+        return start + increment;
+    });
+}
